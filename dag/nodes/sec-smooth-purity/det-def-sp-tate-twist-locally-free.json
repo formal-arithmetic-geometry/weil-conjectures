@@ -1,0 +1,69 @@
+{
+  "id": "det-def-sp-tate-twist-locally-free",
+  "kind": "statement",
+  "title": "Tate twists are well defined and locally free of rank one",
+  "statement": "Let $X$ be a scheme on which $\\ell$ is invertible, and let $\\mu_{\\ell^n,X}$ be the sheaf of\n$\\ell^n$th roots of unity [def-pur-roots-of-unity-sheaf], with transition maps\n$\\mu_{\\ell^{n+1},X}\\to\\mu_{\\ell^n,X}$, $u\\mapsto u^\\ell$.\n\n1. There is a pro-étale cover $\\widetilde X\\to X$ and a compatible system\n   $(\\zeta_n)_{n\\ge1}$, $\\zeta_n\\in\\mu_{\\ell^n,X}(\\widetilde X)$, $\\zeta_{n+1}^\\ell=\\zeta_n$,\n   such that each $\\zeta_n$ generates: $(\\mathbf Z/\\ell^n)_{\\widetilde X}\\to\\mu_{\\ell^n,\\widetilde X}$,\n   $a\\mapsto\\zeta_n^a$, is an isomorphism.\n2. For a finite ring $A$ with $\\ell^rA=0$ and $r'\\ge r$, the Kummer map\n   $\\mu_{\\ell^{r'},X}\\to\\mu_{\\ell^r,X}$, $u\\mapsto u^{\\ell^{r'-r}}$, induces an isomorphism\n   $\\mu_{\\ell^{r'},X}\\otimes_{\\mathbf Z/\\ell^{r'}}A_X\\cong\\mu_{\\ell^r,X}\\otimes_{\\mathbf Z/\\ell^r}A_X$;\n   so $A_X(1)$ is independent of $r$ up to canonical isomorphism.\n3. For $\\Lambda\\in\\{A,\\cO_E,E,\\Qlb\\}$ the sheaf $\\Lambda_X(1)$ is an invertible\n   $\\Lambda_X$-module: on $\\widetilde X$ it is isomorphic to $\\Lambda_{\\widetilde X}$. Hence\n   so are $\\Lambda_X(d)$ and $\\Lambda_X(-d)$ for $d\\ge0$, $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\cong\\Lambda_X$,\n   and $K\\mapsto K(d)$ is an autoequivalence of $D(X_{\\mathrm{proét}},\\Lambda)$ with inverse\n   $K\\mapsto K(-d)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
+    "place": "node det-def-sp-tate-twist-locally-free, order None"
+  },
+  "stmt_deps": [
+    "def-pur-roots-of-unity-sheaf"
+  ],
+  "proof": [
+    {
+      "text": "(1) The sheaf $\\mu_{\\ell^n,X}$ is represented by the finite étale $X$-group scheme\n$\\mu_{\\ell^n}=\\Spec\\cO_X[t]/(t^{\\ell^n}-1)$; it is étale because $\\ell$ is invertible.\nLet $P_n\\to X$ be the scheme of primitive $\\ell^n$th roots of unity, the closed and open\nsubscheme of $\\mu_{\\ell^n}$ where $t$ has exact order $\\ell^n$ in every fibre; it is finite\nétale and surjective over $X$ (over a field in which $\\ell$ is invertible, $t^{\\ell^n}-1$ is\nseparable and has primitive roots in a separable closure). The maps $t\\mapsto t^\\ell$ give\nfinite étale surjections $P_{n+1}\\to P_n$. Put $\\widetilde X=\\varprojlim_nP_n$, an affine\nmorphism limit of finite étale surjections; it is pro-étale and surjective, hence a\npro-étale cover. The coordinates give $\\zeta_n\\in\\mu_{\\ell^n}(\\widetilde X)$ with\n$\\zeta_{n+1}^\\ell=\\zeta_n$, each of exact order $\\ell^n$ in every fibre. The morphism of\nfinite étale $\\widetilde X$-schemes $\\coprod_{a\\in\\mathbf Z/\\ell^n}\\widetilde X\\to\\mu_{\\ell^n,\\widetilde X}$,\ngiven by $\\zeta_n^a$ on the $a$-th copy, is a bijection on geometric fibres (the\n$\\zeta_n^a$ are the $\\ell^n$ distinct roots of the separable polynomial $t^{\\ell^n}-1$), and\nboth sides have degree $\\ell^n$; a morphism of finite étale schemes that is bijective on\ngeometric fibres is an isomorphism. This is the isomorphism of (1).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "(2) This is [lem-pur-finite-kummer-level], applied with $\\ell^N$ the exponent; concretely,\non $\\widetilde X$ both sides are identified with $A_{\\widetilde X}$ via $\\zeta_{r'}$ and\n$\\zeta_r=\\zeta_{r'}^{\\ell^{r'-r}}$, and these identifications are compatible with the\nKummer map; since being an isomorphism is local, the map is an isomorphism on $X$.",
+      "uses": [
+        "lem-pur-finite-kummer-level"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "(3) For finite $A$: by (1), $A_{\\widetilde X}(1)=\\mu_{\\ell^r,\\widetilde X}\\otimes A_{\\widetilde X}\\cong A_{\\widetilde X}$.\nFor $\\cO_E$: the isomorphisms $(\\cO_E/\\ell^n)_{\\widetilde X}\\cong(\\cO_E/\\ell^n)_{\\widetilde X}(1)$,\n$a\\mapsto\\zeta_n\\otimes a$ are compatible with the transition maps because\n$\\zeta_{n+1}\\mapsto\\zeta_{n+1}^\\ell=\\zeta_n$. Passing to the limit and using\n$\\cO_{E,\\widetilde X}=\\varprojlim_n(\\cO_E/\\ell^n)_{\\widetilde X}$\n([det-prop-sfb-qlbar-colimit-x-integral-limit]; the systems $\\pi_E^n$ and $\\ell^n$ are\ncofinal) gives $\\cO_{E,\\widetilde X}(1)\\cong\\cO_{E,\\widetilde X}$, an isomorphism of\n$\\cO_{E,\\widetilde X}$-modules. Inverting $\\ell$\n([det-prop-sfb-qlbar-colimit-x-invert-ell]) and taking the colimit over $E$ give the same for\n$E$ and $\\Qlb$. The isomorphism $\\Lambda_X(1)|_{\\widetilde X}\\cong\\Lambda_{\\widetilde X}$\nshows that $\\Lambda_X(1)$ is invertible; tensor powers and duals of invertible modules are\ninvertible; the evaluation map $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\to\\Lambda_X$ is an\nisomorphism because it is so locally. Finally an invertible module is flat, so\n$K\\otimes^{\\mathbf L}\\Lambda_X(d)=K\\otimes\\Lambda_X(d)$ termwise, and\n$(K(d))(-d)\\cong K\\otimes\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\cong K$.",
+      "uses": [
+        "det-prop-sfb-qlbar-colimit-x-integral-limit",
+        "det-prop-sfb-qlbar-colimit-x-invert-ell"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The explicit construction of the twists for all coefficients at once, including the\nconvention $\\Lambda(m)$ for $m\\in\\mathbf Z$, is [def-coefficient-twists-detailed].",
+      "uses": [
+        "def-coefficient-twists-detailed"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pur-finite-kummer-level",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "def-coefficient-twists-detailed"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "lem-pur-finite-kummer-level",
+    "def-coefficient-twists-detailed",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

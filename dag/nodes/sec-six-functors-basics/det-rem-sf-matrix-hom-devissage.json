@@ -1,0 +1,84 @@
+{
+  "id": "det-rem-sf-matrix-hom-devissage",
+  "kind": "statement",
+  "title": "Internal Hom preserves finite Tor amplitude by dévissage",
+  "statement": "Let $k$ be a separably closed field, $\\ell\\ne\\operatorname{char}(k)$, $A$ a\nfinite commutative $\\ell$-primary ring, and $X$ a scheme of finite type over\n$k$. For $K,L\\in\\Dctf(X_{\\mathrm{ét}},A)$, the internal Hom\n$R\\mathcal Hom_A(K,L)$ lies in $\\Dctf(X_{\\mathrm{ét}},A)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "node det-rem-sf-matrix-hom-devissage, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0F4M"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "We use Noetherian induction on $X$: assume the statement for every proper\nclosed subscheme of $X$ (with reduced structure) and every pair of objects on\nit. The empty scheme is trivial.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 1: a good dense open.* By Stacks, Tag\n[0F4M](https://stacks.math.columbia.edu/tag/0F4M), $K$ is represented by a\nbounded complex $K^\\bullet$ of constructible flat $A$-module sheaves. Each of\nthe finitely many nonzero terms is finite locally constant on a dense open of\n$X$; let $j:U\\hookrightarrow X$ be the intersection of these opens and\n$i:Z\\hookrightarrow X$ its reduced closed complement, a proper closed subset\nwhen $X\\neq\\emptyset$. On $U$ each $K^q|_U$ is étale locally the constant sheaf\non a finite flat $A$-module; since $A$ is finite (hence Artinian), a finite flat\n$A$-module is projective. So $j^*K$ is étale locally a bounded complex $P$ of\nfinite projective $A$-modules.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 2: the open part.* For such $P$, [lem-sf-hom-finite-projective] applied\ntermwise (and the finiteness of the complex) shows that the canonical map\n$P^\\vee\\otimes^{\\mathbf L}_AN\\to R\\mathcal Hom_A(P,N)$ is an isomorphism for\nevery $N$, where $P^\\vee$ is the termwise dual, again a bounded complex of\nfinite projective modules. These local isomorphisms are the restrictions of the\nglobal canonical map\n$(j^*K)^\\vee\\otimes^{\\mathbf L}_Aj^*L\\to R\\mathcal Hom_A(j^*K,j^*L)$, which is\ntherefore an isomorphism. The complex $(j^*K)^\\vee$ is a bounded complex of\nconstructible flat sheaves, and tensoring a bounded flat constructible model of\n$j^*L$ in degrees $[a,b]$ with a flat bounded complex in degrees $[c,e]$ gives\none in degrees $[a+c,b+e]$; hence $R\\mathcal Hom_A(j^*K,j^*L)\\in\\Dctf(U,A)$.\nBy [lem-weil-stratum-ambient-hom] for $s=j$ (where $Rj_!=j_!$ and\n$Rj^!=j^*$),\n\n$$\nR\\mathcal Hom_A(j_!j^*K,L)\\simeq Rj_*R\\mathcal Hom_A(j^*K,j^*L),\n$$\n\nwhich lies in $\\Dctf(X,A)$ by [cor-fin-deligne-open-finite-coefficients]\n(constructibility) and [det-cor-sf-direct-image-ctf-open-tor] (Tor amplitude).",
+      "uses": [
+        "lem-sf-hom-finite-projective",
+        "lem-weil-stratum-ambient-hom",
+        "cor-fin-deligne-open-finite-coefficients",
+        "det-cor-sf-direct-image-ctf-open-tor"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: the closed part.* Let $i^!=R\\underline\\Gamma_Z$ be the right adjoint\nof $i_*$. The localization triangle\n$i_*i^!L\\to L\\to Rj_*j^*L\\to$ and Step 2's direct-image bound show\n$i_*i^!L\\in\\Dctf(X,A)$; since $i_*$ is exact and $i^*i_*=\\mathrm{id}$, and\n$i^*$ preserves bounded flat constructible models, $i^!L\\simeq i^*i_*i^!L$\nlies in $\\Dctf(Z,A)$. Likewise $i^*K\\in\\Dctf(Z,A)$. By\n[lem-weil-stratum-ambient-hom] for $s=i$,\n\n$$\nR\\mathcal Hom_A(i_*i^*K,L)\\simeq i_*R\\mathcal Hom_A(i^*K,i^!L),\n$$\n\nand $R\\mathcal Hom_A(i^*K,i^!L)\\in\\Dctf(Z,A)$ by the induction hypothesis\napplied to $Z$. As $i_*$ is exact and carries flat constructible models to flat\nconstructible models, the left side is in $\\Dctf(X,A)$.",
+      "uses": [
+        "lem-weil-stratum-ambient-hom"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: gluing.* Apply the exact functor $R\\mathcal Hom_A(-,L)$ to the\nlocalization triangle $j_!j^*K\\to K\\to i_*i^*K\\to$. This gives a distinguished\ntriangle\n\n$$\nR\\mathcal Hom_A(i_*i^*K,L)\\to R\\mathcal Hom_A(K,L)\\to R\\mathcal Hom_A(j_!j^*K,L)\\to\n$$\n\nwhose outer terms lie in $\\Dctf(X,A)$ by Steps 2 and 3. Since $\\Dctf(X,A)$ is a\ntriangulated subcategory ([def-weil-finite-tor-amplitude]), the middle term\ndoes too.",
+      "uses": [
+        "def-weil-finite-tor-amplitude"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sf-hom-finite-projective",
+    "lem-weil-stratum-ambient-hom",
+    "cor-fin-deligne-open-finite-coefficients",
+    "det-cor-sf-direct-image-ctf-open-tor",
+    "def-weil-finite-tor-amplitude"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-stratum-ambient-hom",
+    "lem-sf-hom-finite-projective",
+    "det-cor-sf-direct-image-ctf-open-tor",
+    "cor-fin-deligne-open-finite-coefficients"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

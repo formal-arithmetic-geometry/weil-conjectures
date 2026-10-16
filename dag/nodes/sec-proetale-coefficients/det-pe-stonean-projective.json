@@ -1,0 +1,56 @@
+{
+  "id": "det-pe-stonean-projective",
+  "kind": "statement",
+  "title": "Gleason: extremally disconnected equals projective",
+  "statement": "Let $S$ be a compact Hausdorff space. The following are equivalent.\n\n1. $S$ is extremally disconnected: for every open $U\\subset S$, the closure\n   $\\overline U$ is open.\n2. $S$ is projective for continuous surjections of compact Hausdorff spaces: for every\n   continuous surjection $p\\colon X\\to Y$ of compact Hausdorff spaces and every continuous\n   $f\\colon S\\to Y$ there is a continuous $g\\colon S\\to X$ with $p\\circ g=f$.\n3. Every continuous surjection $q\\colon P\\to S$ from a compact Hausdorff space $P$ has a\n   continuous section.\n\nMoreover an extremally disconnected compact Hausdorff space is totally disconnected, hence\nprofinite.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-projective.md",
+    "place": "node det-pe-stonean-projective, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*2 $\\Rightarrow$ 3.* Apply 2 to $p=q$ and $f=\\mathrm{id}_S$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*3 $\\Rightarrow$ 2.* Given $p$ and $f$, the fibre product\n$P=S\\times_YX=\\{(s,x):f(s)=p(x)\\}$ is closed in $S\\times X$, hence compact Hausdorff, and\nits projection $q\\colon P\\to S$ is surjective because $p$ is. A section $\\sigma$ of $q$\ngives $g=\\mathrm{pr}_X\\circ\\sigma$ with $p\\circ g=f\\circ q\\circ\\sigma=f$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*3 $\\Rightarrow$ 1.* Let $U\\subset S$ be open. The space\n$P=\\overline U\\sqcup(S\\setminus U)$ (disjoint union of two closed subspaces) is compact\nHausdorff and maps onto $S$ by the inclusions. Let $\\sigma$ be a section. A point of $U$\nhas its only preimage in the first summand, so $\\sigma(U)$ lies in the closed first summand,\nand by continuity so does $\\sigma(\\overline U)$. A point outside $\\overline U$ has its only\npreimage in the second summand. Hence $\\sigma^{-1}(\\text{first summand})=\\overline U$, which\nis open since the summand is clopen in $P$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*1 $\\Rightarrow$ 3.* Let $q\\colon P\\to S$ be a continuous surjection with $P$ compact\nHausdorff. Order the closed subsets $P'\\subset P$ with $q(P')=S$ by inclusion. A chain\n$(P_i)$ has lower bound $\\bigcap_iP_i$: for $s\\in S$ the sets $q^{-1}(s)\\cap P_i$ are\nnonempty, compact and totally ordered by inclusion, so their intersection is nonempty. By\nZorn's lemma there is a minimal such $P_0$; put $q_0=q|_{P_0}$. Minimality means that no\nproper closed subset of $P_0$ surjects onto $S$.\n\nFor open $V\\subset P_0$ put $V^*=S\\setminus q_0(P_0\\setminus V)$. It is open ($q_0$ is a\nclosed map, compact to Hausdorff), contained in $q_0(V)$ (every point of $S$ has a preimage\nin $P_0$, and points of $V^*$ have none outside $V$), and nonempty if $V\\neq\\emptyset$\n(otherwise the proper closed subset $P_0\\setminus V$ would surject).\n\nWe show $q_0$ is injective. Suppose $a\\neq b$ in $P_0$ with $q_0(a)=q_0(b)=s$. Choose\ndisjoint open neighbourhoods $A\\ni a$, $B\\ni b$ in $P_0$. Then $A^*\\cap B^*=\\emptyset$: a\npoint of both would have its whole (nonempty) fibre inside $A\\cap B=\\emptyset$. Moreover\n$s\\in\\overline{A^*}$: for an open neighbourhood $N$ of $s$, the set $V=q_0^{-1}(N)\\cap A$ is\na nonempty open set (it contains $a$), and $\\emptyset\\neq V^*\\subset q_0(V)\\cap A^*\\subset\nN\\cap A^*$. Similarly $s\\in\\overline{B^*}$. By 1, $\\overline{A^*}$ is open; it contains\n$s\\in\\overline{B^*}$, hence meets $B^*$. But $B^*$ is open and disjoint from $A^*$, so it is\ndisjoint from $\\overline{A^*}$, a contradiction.\n\nSo $q_0$ is a continuous bijection from a compact space to a Hausdorff space, hence a\nhomeomorphism, and $q_0^{-1}$ followed by the inclusion $P_0\\subset P$ is a section of $q$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Total disconnectedness.* Let $S$ satisfy 1 and $x\\neq y$. Choose disjoint open $U\\ni x$,\n$V\\ni y$. Then $\\overline U$ is clopen, contains $x$, and misses $y$ because the open set\n$V$ is disjoint from $U$, hence from $\\overline U$. So points are separated by clopen sets,\nand a compact Hausdorff space with this property is profinite.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-projective.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

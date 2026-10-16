@@ -1,0 +1,52 @@
+{
+  "id": "det-sp-representing-pair-gluing",
+  "kind": "statement",
+  "title": "Representing pairs glue along open covers",
+  "statement": "Let $f:X\\to Y$ be smooth, $\\Lambda_n=\\mathbf Z/\\ell^n\\mathbf Z$, $K\\in\\Dctf(Y,\\Lambda_n)$, and\n$X=U\\cup V$ an open cover with inclusions $j_U,j_V,j_{U\\cap V}$. For an open\n$W\\subset X$ write $f_W=f\\circ j_W$. Let $H\\in\\Dctf(X,\\Lambda_n)$ and\n$\\varepsilon:Rf_!H\\to K$, and for each $W\\in\\{U,V,U\\cap V\\}$ let\n\n$$\n\\varepsilon_W:Rf_{W!}(H|_W)=Rf_!\\,j_{W!}j_W^*H\\xrightarrow{\\ Rf_!(\\text{counit})\\ }Rf_!H\n\\xrightarrow{\\ \\varepsilon\\ }K .\n$$\n\nIf $(H|_W,\\varepsilon_W)$ is a representing pair for $K$ relative to $f_W$ for\n$W=U$, $V$ and $U\\cap V$, then $(H,\\varepsilon)$ is a representing pair for $K$\nrelative to $f$. In particular, if chart models with compatible counits are\ngiven on the members of a cover, the glued model is canonically isomorphic to\n$f^!K$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-representing-pair/det-sp-representing-pair-gluing.md",
+    "place": "node det-sp-representing-pair-gluing, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Let $M\\in\\Dctf(X,\\Lambda_n)$. The open-cover triangle (the Mayer–Vietoris\ntriangle of extensions by zero)\n\n$$\nj_{U\\cap V!}(M|_{U\\cap V})\\xrightarrow{(1,-1)}j_{U!}(M|_U)\\oplus j_{V!}(M|_V)\n\\xrightarrow{(1,1)}M\\longrightarrow\n$$\n\nis distinguished: it is the derived form of the exact sequence of sheaves\n$0\\to j_{U\\cap V!}F|_{U\\cap V}\\to j_{U!}F|_U\\oplus j_{V!}F|_V\\to F\\to0$, which\nis exact on stalks. All its terms lie in $\\Dctf(X,\\Lambda_n)$ (extension by zero\npreserves $\\Dctf$).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Apply the two cohomological functors $\\Hom(-,H)$ and $\\Hom(Rf_!(-),K)$ to this\ntriangle and its rotations. The natural transformation\n$\\Phi_M:\\Hom(M,H)\\to\\Hom(Rf_!M,K)$, $b\\mapsto\\varepsilon\\circ Rf_!(b)$, gives a\nmorphism between the resulting long exact sequences (it is natural in $M$ and\ncommutes with shifts, since $Rf_!$ is exact). For $W$ open, the adjunction\n$j_{W!}\\dashv j_W^*$ identifies $\\Hom(j_{W!}(M|_W),H)=\\Hom(M|_W,H|_W)$ and,\nusing $Rf_!j_{W!}=Rf_{W!}$,\n$\\Hom(Rf_!j_{W!}(M|_W),K)=\\Hom(Rf_{W!}(M|_W),K)$; under these\nidentifications $\\Phi_{j_{W!}(M|_W)}$ becomes $b'\\mapsto\\varepsilon_W\\circ Rf_{W!}(b')$,\nbecause the adjoint of $b'$ is $\\text{counit}\\circ j_{W!}(b')$. By hypothesis\nthese maps are bijections for $W=U,V,U\\cap V$ and all shifts of $M|_W$ (which\nlie in $\\Dctf(W,\\Lambda_n)$). In the morphism of long exact sequences, the map\nat $M$ is flanked by two bijections on each side (the terms for $U\\sqcup V$\nand $U\\cap V$ in adjacent degrees), so it is a bijection by the five lemma.\nHence $(H,\\varepsilon)$ is a representing pair. By\n[det-sp-representing-pair-uniqueness] it is then canonically isomorphic to\n$(f^!K,\\varepsilon_K)$ by the counit-preserving isomorphism.",
+      "uses": [
+        "det-sp-representing-pair-uniqueness"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-sp-representing-pair-uniqueness",
+    "det-sf-mate-open-restriction"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-representing-pair/det-sp-representing-pair-gluing.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-sp-representing-pair-uniqueness",
+    "det-sf-mate-open-restriction"
+  ],
+  "uses_not_cited": [
+    "det-sf-mate-open-restriction"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

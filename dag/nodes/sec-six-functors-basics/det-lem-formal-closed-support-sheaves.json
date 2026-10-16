@@ -1,0 +1,67 @@
+{
+  "id": "det-lem-formal-closed-support-sheaves",
+  "kind": "statement",
+  "title": "Sections with support: the sheaf-level adjunction",
+  "statement": "Let $\\Lambda$ be admissible, let $X$ be a standing scheme, and let\n$i\\colon Z\\hookrightarrow X$ be a closed immersion with open complement\n$j\\colon V\\hookrightarrow X$. Use $\\Lambda_Z=i^{-1}\\Lambda_X$ and\n$\\Lambda_V=j^{-1}\\Lambda_X$ as coefficient rings\n([sk-prop-sfb-cartesian-coefficients]). For\n$M\\in\\Mod(X_{\\mathrm{proét}},\\Lambda)$ put\n$\\underline\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$, where $M\\to j_*j^*M$ is the\nunit of $j^*\\dashv j_*$.\n\n1. $\\ker(M\\to j_*j^*M)=i_*\\underline\\Gamma_Z(M)$, naturally in $M$.\n2. $\\underline\\Gamma_Z\\colon\\Mod(X_{\\mathrm{proét}},\\Lambda)\\to\\Mod(Z_{\\mathrm{proét}},\\Lambda)$\n   is right adjoint to the exact functor\n   $i_*\\colon\\Mod(Z_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$;\n   in particular it is left exact and preserves limits.\n3. $\\underline\\Gamma_Z$ sends K-injective complexes to K-injective complexes,\n   and injective modules to injective modules.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-sheaves.md",
+    "place": "node det-lem-formal-closed-support-sheaves, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AA"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AH"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-prop-sfb-cartesian-coefficients"
+  ],
+  "proof": [
+    {
+      "text": "Since $X$ is Noetherian, $j$ is quasi-compact, and [sk-prop-sf-open-closed-triangle]\ngives: $i^*$ is exact and preserves limits; $i_*$ is exact and fully faithful,\nso $i^*i_*=\\mathrm{id}$ (Stacks, Tags 09AA, 09BM); $j^*$ and $j_!$ are exact;\nand every module $M$ sits in the exact sequence\n$0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$ (Stacks, Tag 09AH). Moreover $j^*j_*=\\mathrm{id}$,\nbecause $V_{\\mathrm{proét}}$ is the localization of $X_{\\mathrm{proét}}$ at $V$, so\n$j_*$ is fully faithful; and $j^*i_*=0$ since $Z\\times_XV=\\emptyset$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(1)* Put $N=\\ker(M\\to j_*j^*M)$. As $j^*$ is exact and $j^*$ of the unit is\nthe identity of $j^*M$ (triangle identity and $j^*j_*=\\mathrm{id}$), we get\n$j^*N=\\ker(\\mathrm{id}_{j^*M})=0$. The localization sequence for $N$ then reads\n$0\\to0\\to N\\to i_*i^*N\\to0$, so $N\\xrightarrow{\\sim}i_*i^*N=i_*\\underline\\Gamma_Z(M)$.\nNaturality is clear since all maps are natural in $M$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2)* Let $A$ be a $\\Lambda_Z$-module and $\\phi\\colon i_*A\\to M$. The composite\n$i_*A\\to M\\to j_*j^*M$ is adjoint to $j^*\\phi\\colon j^*i_*A=0\\to j^*M$, hence\nis zero. So $\\phi$ factors uniquely through\n$N=i_*\\underline\\Gamma_Z(M)$, and by full faithfulness of $i_*$ the factorization\nis $i_*$ of a unique morphism $\\psi\\colon A\\to\\underline\\Gamma_Z(M)$.\nConversely every $\\psi$ gives $\\phi$ as the composite\n$i_*A\\xrightarrow{i_*\\psi}i_*\\underline\\Gamma_Z(M)=N\\hookrightarrow M$. These\nconstructions are inverse and natural in $A$ and $M$, which proves\n$\\Hom_X(i_*A,M)=\\Hom_Z(A,\\underline\\Gamma_Z(M))$. A right adjoint preserves\nlimits, in particular kernels, so $\\underline\\Gamma_Z$ is left exact.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3)* The adjunction of (2) extends termwise to complexes and to homotopy\nclasses of maps: $\\Hom_{K(Z)}(C,\\underline\\Gamma_ZI)=\\Hom_{K(X)}(i_*C,I)$. If $C$ is\nacyclic, so is $i_*C$ because $i_*$ is exact; if $I$ is K-injective the right\nside vanishes, so $\\underline\\Gamma_ZI$ is K-injective. Similarly, for an injective\nmodule $I$ the functor $\\Hom_Z(-,\\underline\\Gamma_ZI)=\\Hom_X(i_*(-),I)$ is exact, so\n$\\underline\\Gamma_ZI$ is injective.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-sheaves.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-prop-sf-open-closed-triangle",
+    "sk-prop-sfb-cartesian-coefficients"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

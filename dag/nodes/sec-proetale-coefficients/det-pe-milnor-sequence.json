@@ -1,0 +1,47 @@
+{
+  "id": "det-pe-milnor-sequence",
+  "kind": "statement",
+  "title": "Cohomology of the sequential derived limit",
+  "statement": "Let $\\mathcal R$ be a sheaf of rings on $X_{\\mathrm{proét}}$, let\n$\\cdots\\to K_2\\xrightarrow{t_1}K_1\\xrightarrow{t_0}K_0$ be a tower of complexes of\n$\\mathcal R$-modules, $T\\colon\\prod_nK_n\\to\\prod_nK_n$, $T((k_n)_n)=(t_n(k_{n+1}))_n$, and\n$R\\varprojlim_nK_n:=\\operatorname{Cone}(1-T)[-1]$.\n\n1. For every $q$ there is a natural short exact sequence of sheaves\n\n   $$\n   0\\to\\coker\\Bigl(\\prod_nH^{q-1}(K_n)\\xrightarrow{1-T}\\prod_nH^{q-1}(K_n)\\Bigr)\n   \\to H^q\\bigl(R\\varprojlim_nK_n\\bigr)\\to\\varprojlim_nH^q(K_n)\\to0 .\n   $$\n\n2. For a tower of modules $(M_n)$ (complexes in degree $0$), $R^p\\varprojlim_nM_n:=\n   H^p(R\\varprojlim_nM_n)$ is $\\varprojlim_nM_n$ for $p=0$,\n   $\\coker(1-T)$ for $p=1$, and $0$ for $p\\notin\\{0,1\\}$.\n3. Consequently the sequence in 1 is the Milnor sequence\n   $0\\to R^1\\varprojlim_nH^{q-1}(K_n)\\to H^q(R\\varprojlim_nK_n)\\to\\varprojlim_nH^q(K_n)\\to0$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.md",
+    "place": "node det-pe-milnor-sequence, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "For a map of complexes $\\varphi\\colon A\\to B$, the triangle\n$\\operatorname{Cone}(\\varphi)[-1]\\to A\\xrightarrow{\\varphi}B\\to\\operatorname{Cone}(\\varphi)$\ngives the long exact sequence\n\n$$\n\\cdots\\to H^{q-1}(A)\\xrightarrow{H^{q-1}\\varphi}H^{q-1}(B)\\to\nH^q(\\operatorname{Cone}(\\varphi)[-1])\\to H^q(A)\\xrightarrow{H^q\\varphi}H^q(B)\\to\\cdots,\n$$\n\nhence the short exact sequence\n$0\\to\\coker H^{q-1}\\varphi\\to H^q(\\operatorname{Cone}(\\varphi)[-1])\\to\\ker H^q\\varphi\\to0$.\nApply this with $A=B=\\prod_nK_n$ and $\\varphi=1-T$. By [det-pe-products-derived],\n$H^q(\\prod_nK_n)=\\prod_nH^q(K_n)$, and under this identification $H^q(1-T)$ is $1-T$ for\nthe tower $(H^q(K_n))_n$. Its kernel consists of the families $(h_n)$ with\n$h_n=t_n(h_{n+1})$, i.e. it is $\\varprojlim_nH^q(K_n)$ (limits of sheaves being computed\nsectionwise). This proves 1.",
+      "uses": [
+        "det-pe-products-derived"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For 2, $\\prod_nM_n$ is concentrated in degree $0$, so $\\operatorname{Cone}(1-T)[-1]$ is the\ntwo-term complex $\\prod_nM_n\\xrightarrow{1-T}\\prod_nM_n$ in degrees $0$ and $1$. Its\n$H^0$ is $\\ker(1-T)=\\varprojlim_nM_n$, its $H^1$ is $\\coker(1-T)$, and all other\ncohomology vanishes. Statement 3 is 1 combined with 2 applied to the tower\n$(H^{q-1}(K_n))_n$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "det-pe-products-derived"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-pe-products-derived"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

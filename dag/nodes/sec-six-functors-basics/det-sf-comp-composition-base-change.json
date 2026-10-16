@@ -1,0 +1,66 @@
+{
+  "id": "det-sf-comp-composition-base-change",
+  "kind": "statement",
+  "title": "Base change for $Rf_!$ on the localizing category",
+  "statement": "Let $\\Lambda$ be admissible, let $f:X\\to Y$ be separated of finite type, let\n$v:Y'\\to Y$ be a morphism with $Y'$ qcqs, and form the cartesian square with\n$f':X'=X\\times_YY'\\to Y'$ and $u:X'\\to X$. For a compactification $f=p\\circ j$,\n$j:X\\to\\overline X$, let $f'=p'\\circ j'$ be its base change, with\n$v':\\overline X'=\\overline X\\times_YY'\\to\\overline X$. Then:\n\n1. there is a canonical isomorphism $v'^*j_!\\simeq j'_!u^*$ of functors\n$D(X_{\\mathrm{proét}},\\Lambda)\\to D(\\overline X'_{\\mathrm{proét}},\\Lambda)$;\n2. the composite\n$\\beta:v^*Rp_*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*v'^*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*j'_!u^*$\nof proper base change and (1) is an isomorphism of functors\n$\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$;\n3. $\\beta$ is compatible with the comparison isomorphisms between\ncompactifications of $f$ and of $f'$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.md",
+    "place": "node det-sf-comp-composition-base-change, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AH"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*(1)* Both $v'^*j_!$ and $j'_!u^*$ are left adjoint to the same functor\n$u_*j'^*\\simeq j^*v'_*$ (restriction to an open commutes with direct image, as\nin [det-sf-comp-coherence-single]); hence they are canonically isomorphic.\nConcretely, both restrict to $u^*$ on the open $X'\\subset\\overline X'$ and vanish\non its closed complement, which characterizes extensions by zero (Stacks, Tag\n09AH). Both functors are exact on sheaves, so the isomorphism passes to\nderived categories termwise.",
+      "uses": [
+        "det-sf-comp-coherence-single"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2)* The functor $v^*$ is exact, preserves direct sums and carries\n$\\Dctf(-,\\Lambda)$ into $\\Dctf(-,\\Lambda)$ (flat constructible models for finite\nrings, pulled-back local coefficient models otherwise), so it preserves\n$\\Loc(\\Dctf(-,\\Lambda))$; the same holds for $u^*$ and $v'^*$. For\n$K\\in\\Loc(\\Dctf(X,\\Lambda))$ we have $j_!K\\in\\Loc(\\Dctf(\\overline X,\\Lambda))$ by\n[det-sf-comp-coherence-single], so proper base change for $p$ along $v$ on\nthe localizing category ([sk-prop-proper-base-change-unbounded]) gives\n$v^*Rp_*j_!K\\simeq Rp'_*v'^*j_!K$, and (1) gives $Rp'_*v'^*j_!K\\simeq Rp'_*j'_!u^*K$.",
+      "uses": [
+        "det-sf-comp-coherence-single"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(3)* Let $h:Z'\\to Z$ be a refinement of dense compactifications of $f$, with\nbase change $h':Z'_{Y'}\\to Z_{Y'}$, a refinement of compactifications of $f'$\n(not necessarily dense; [det-sf-comp-coherence-cocycle] allows dense\nreplacement). The two composites $v^*Rp_*j_!K\\to Rp'_*Rh'_*j''_!u^*K$ obtained\nby first comparing compactifications and then base changing, or conversely,\nare both obtained by applying $Rp'_*$ to maps\n$v_Z^*j_!K\\to Rh'_*j''_!u^*K$ which restrict to the identity of $u^*K$ over the\nopen $X'$ (the refinement maps and the isomorphism (1) restrict to identities,\nand proper base change for $h$ is compatible with restriction to the open\n$X'$ on which $h'$ is the identity). By adjunction for the open immersion,\nsuch a map is unique, so the two composites agree; hence $\\beta$ is\nindependent of the compactification.",
+      "uses": [
+        "det-sf-comp-coherence-cocycle"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-sf-comp-coherence-single",
+    "det-sf-comp-coherence-cocycle"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-sf-comp-coherence-single",
+    "det-sf-comp-coherence-cocycle",
+    "sk-prop-proper-base-change-unbounded"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

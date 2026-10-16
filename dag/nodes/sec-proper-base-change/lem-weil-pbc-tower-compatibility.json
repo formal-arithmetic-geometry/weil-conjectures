@@ -1,247 +1,262 @@
 {
- "id": "lem-weil-pbc-tower-compatibility",
- "blueprint": {
-  "is": "lem-weil-pbc-tower-compatibility",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Compatibility with the coefficient tower",
- "statement": "The transition morphisms $P_{n+1}\\to P_n$ make each of the four corner\nfamilies an object\n$$\n A_\\bullet,B_\\bullet,C_\\bullet,D_\\bullet\n \\in D(\\operatorname{Tow}_{A}(Y'))\n$$\nafter restriction of scalars, and make $h,h',v,v'$ morphisms in this derived\ntower category. Evaluation at $n$ recovers the four displayed corners and\narrows. The rectangle equation commutes with every transition and with every\ncompatible endomorphism of $K$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-  "place": "node lem-weil-pbc-tower-compatibility, order 1345",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099N"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09C9"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09C2"
-   }
+  "id": "lem-weil-pbc-tower-compatibility",
+  "blueprint": {
+    "is": "lem-weil-pbc-tower-compatibility",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Compatibility with the coefficient tower",
+  "statement": "The transition morphisms $P_{n+1}\\to P_n$ make each of the four corner\nfamilies an object\n$$\n A_\\bullet,B_\\bullet,C_\\bullet,D_\\bullet\n \\in D(\\operatorname{Tow}_{A}(Y'))\n$$\nafter restriction of scalars, and make $h,h',v,v'$ morphisms in this derived\ntower category. Evaluation at $n$ recovers the four displayed corners and\narrows. The rectangle equation commutes with every transition and with every\ncompatible endomorphism of $K$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+    "place": "node lem-weil-pbc-tower-compatibility, order 1345",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099N"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09C9"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09C2"
+      }
+    ],
+    "note": [
+      "*Source note:* no Stacks Project entry states this tower-level datum. Stacks\ndescribes the completed pullback and its reductions for a single object\n(Lemma 61.20.2, [Tag 099N](https://stacks.math.columbia.edu/tag/099N)), the\nproper base-change isomorphism (Theorem 61.30.1, [Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)) and, for a constructible\n$K$, the structure of its reduction tower: Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) gives $K=\\Rlim K_n$ with\n$K_n=K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ of tor amplitude in a fixed\ninterval $[a,b]$, with constructible cohomology sheaves and of the form\n$K_n=\\epsilon^{-1}L_n$ for $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$. The\nderived-tower bookkeeping itself is the blueprint's (the derived inverse\nlimit and the bounded constructible tower), and no entry makes the four\ncorner families objects of the derived tower category; the blueprint adds\nthe transition data, the compatibility of the rectangle with every\ntransition and with compatible endomorphisms of $K$, and the identification\nof the $n$-th evaluations with the finite-level corners."
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-four-arrows",
+    "def-weil-pbc-adic-coefficient-datum"
   ],
-  "note": [
-   "*Source note:* no Stacks Project entry states this tower-level datum. Stacks\ndescribes the completed pullback and its reductions for a single object\n(Lemma 61.20.2, [Tag 099N](https://stacks.math.columbia.edu/tag/099N)), the\nproper base-change isomorphism (Theorem 61.30.1, [Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)) and, for a constructible\n$K$, the structure of its reduction tower: Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) gives $K=\\Rlim K_n$ with\n$K_n=K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ of tor amplitude in a fixed\ninterval $[a,b]$, with constructible cohomology sheaves and of the form\n$K_n=\\epsilon^{-1}L_n$ for $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$. The\nderived-tower bookkeeping itself is the blueprint's (the derived inverse\nlimit and the bounded constructible tower), and no entry makes the four\ncorner families objects of the derived tower category; the blueprint adds\nthe transition data, the compatibility of the rectangle with every\ntransition and with compatible endomorphisms of $K$, and the identification\nof the $n$-th evaluations with the finite-level corners."
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-four-corners",
-  "def-weil-pbc-four-arrows",
-  "def-weil-pbc-adic-coefficient-datum"
- ],
- "proof": [
-  {
-   "text": "Work after restriction to the coefficient sheaf $A_{Y'}$, retaining the $P_n$-linear identifications at evaluation. Write $M=Lg^*Rf_*K$, $E=Lg'^*K$, $N=Rf'_*E$ and $e=\\Ex^A_{\\square,K}:M\\to N$. Apply the functorial strict reduction construction of [def-weil-pbc-adic-coefficient-datum] on $Y'$ to $M$ and $N$: set $\\widetilde A_\\bullet=R(M)$ and $\\widetilde C_\\bullet=R(N)$, represented by $QM\\otimes_{A_{Y'}}(P_n)_{Y'}$ and $QN\\otimes_{A_{Y'}}(P_n)_{Y'}$ with chain transitions $1\\otimes q_n$. Their evaluations are $M\\otimes_A^LP_n$ and $N\\otimes_A^LP_n$. The canonical tensor/pullback identification used in [def-weil-pbc-four-arrows] identifies the former with $A_n$, and the latter is $C_n$ by [def-weil-pbc-four-corners]. This identification uses the same tensor associativity map for every coefficient: on representatives it reassociates the tensor factors, so replacing $P_{n+1}$ by $P_n$ on either side gives the same map. The transitions therefore become $a_{n+1,n}=Lg_n^*(1\\otimes q_n)$ and $c_{n+1,n}=1\\otimes q_n$, with the level-changing coefficients understood by restriction of scalars. Functorial reduction gives $\\widetilde v=R(e):\\widetilde A_\\bullet\\to\\widetilde C_\\bullet$, evaluating to $v_n$. The quotient identities give the strict transition cocycle, and functoriality gives $c_{n+1,n}v_{n+1}=v_na_{n+1,n}$. No claim that arbitrary diagrams in a derived category strictify is used.",
-   "uses": [
+  "proof": [
+    {
+      "text": "Work after restriction to the coefficient sheaf $A_{Y'}$, retaining the $P_n$-linear identifications at evaluation. Write $M=Lg^*Rf_*K$, $E=Lg'^*K$, $N=Rf'_*E$ and $e=\\Ex^A_{\\square,K}:M\\to N$. Apply the functorial strict reduction construction of [def-weil-pbc-adic-coefficient-datum] on $Y'$ to $M$ and $N$: set $\\widetilde A_\\bullet=R(M)$ and $\\widetilde C_\\bullet=R(N)$, represented by $QM\\otimes_{A_{Y'}}(P_n)_{Y'}$ and $QN\\otimes_{A_{Y'}}(P_n)_{Y'}$ with chain transitions $1\\otimes q_n$. Their evaluations are $M\\otimes_A^LP_n$ and $N\\otimes_A^LP_n$. The canonical tensor/pullback identification used in [def-weil-pbc-four-arrows] identifies the former with $A_n$, and the latter is $C_n$ by [def-weil-pbc-four-corners]. This identification uses the same tensor associativity map for every coefficient: on representatives it reassociates the tensor factors, so replacing $P_{n+1}$ by $P_n$ on either side gives the same map. The transitions therefore become $a_{n+1,n}=Lg_n^*(1\\otimes q_n)$ and $c_{n+1,n}=1\\otimes q_n$, with the level-changing coefficients understood by restriction of scalars. Functorial reduction gives $\\widetilde v=R(e):\\widetilde A_\\bullet\\to\\widetilde C_\\bullet$, evaluating to $v_n$. The quotient identities give the strict transition cocycle, and functoriality gives $c_{n+1,n}v_{n+1}=v_na_{n+1,n}$. No claim that arbitrary diagrams in a derived category strictify is used.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "def-weil-pbc-four-corners",
+        "def-weil-pbc-four-arrows",
+        "def-weil-pbc-ambient-ringed-exchange"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+        "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
+      }
+    },
+    {
+      "text": "Check the projection-formula comparisons with both the quotient and the object variable. For a coefficient map $q:P\\to P'$, transpose the two composites from $(Rf_*F)\\otimes^LP$ to $Rf_*(F\\otimes^LLf^*P')$ under $Lf^*\\dashv Rf_*$. By [def-weil-pbc-projection-formula-map], both transposes are $(\\varepsilon_F\\otimes1)\\circ(1\\otimes Lf^*q)=(1\\otimes Lf^*q)\\circ(\\varepsilon_F\\otimes1)$, where the equality is tensor bifunctoriality (the two factors act on different tensor slots). The adjunction bijection thus gives $Rf_*(1\\otimes Lf^*q)\\pi_{f,F,P}=\\pi_{f,F,P'}(1\\otimes q)$. For $u:F\\to F'$, the counit naturality identity $u\\varepsilon_F=\\varepsilon_{F'}Lf^*Rf_*u$ gives in exactly the same way $Rf_*(u\\otimes1)\\pi_{f,F,P}=\\pi_{f,F',P}(Rf_*u\\otimes1)$. Apply the first identity to $q_n$ for $(f,K)$ and $(f',E)$, and apply $Lg^*$ to the first square. With the tensor/pullback identifications of [def-weil-pbc-four-arrows], this yields $b_{n+1,n}h_{n+1}=h_na_{n+1,n}$ and $d_{n+1,n}h'_{n+1}=h'_nc_{n+1,n}$, where $b_{n+1,n}=Lg^*Rf_*(K_{n+1}\\to K_n)$ and $d_{n+1,n}=Rf'_*(E_{n+1}\\to E_n)$. Here $E_{n+1}\\to E_n$ is $Lg'^*$ of the quotient map of $K$, identified with $1\\otimes q_n$ through the functorial reduction identification of [def-weil-pbc-four-corners]. The second identity proves that these comparisons also intertwine the endomorphisms induced by any $\\phi:K\\to K$ and $Lg'^*\\phi$.",
+      "uses": [
+        "def-weil-pbc-projection-formula-map",
+        "def-weil-pbc-four-arrows",
+        "def-weil-pbc-four-corners"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+        "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
+      }
+    },
+    {
+      "text": "The arrows $h_n,h'_n$ are isomorphisms by [def-weil-pbc-four-arrows]; the applicable substantive input is the perfect projection formula [lemma-weil-pbc-perfect-projection-formula], since every $P_n$ is perfect in [def-weil-pbc-adic-coefficient-datum]. It applies to $E$ as well as $K$: it imposes no completeness assumption on the object variable. Realize $B_\\bullet$ by the same strict complex as $\\widetilde A_\\bullet$, but identify its $n$-th evaluation with the named corner $B_n$ through $h_n:A_n\\simeq B_n$. Realize $D_\\bullet$ by the same strict complex as $\\widetilde C_\\bullet$, identifying evaluation with $D_n$ through $h'_n:C_n\\simeq D_n$. Under these identifications their transitions are $h_na_{n+1,n}h_{n+1}^{-1}=b_{n+1,n}$ and $h'_nc_{n+1,n}(h'_{n+1})^{-1}=d_{n+1,n}$ by step 2. Thus these complexes realize precisely the required corner families and quotient transitions after restriction of scalars. Let $h:\\widetilde A_\\bullet\\to B_\\bullet$ and $h':\\widetilde C_\\bullet\\to D_\\bullet$ be the identity morphisms of the chosen representing complexes; their evaluations, read through the specified corner identifications, are $h_n,h'_n$. Transport of a realization through displayed evaluation isomorphisms is just relabeling the evaluated objects, not an assertion of an equivalence between $D(\\operatorname{Tow})$ and $\\operatorname{Tow}(D)$.",
+      "uses": [
+        "def-weil-pbc-four-arrows",
+        "lemma-weil-pbc-perfect-projection-formula",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+        "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
+      }
+    },
+    {
+      "text": "Define the remaining derived-tower arrow by $v'=h'\\widetilde v h^{-1}:B_\\bullet\\to D_\\bullet$. Its $n$-th evaluation, under the corner identifications, is $h'_nv_nh_n^{-1}$. The finite-level rectangle [lem-weil-pbc-finite-level-rectangle] says $v'_nh_n=h'_nv_n$, so this evaluation is exactly the prescribed finite-level exchange $v'_n$ of [def-weil-pbc-four-arrows], including its transported etale-origin witness. Associativity gives $v'h=h'\\widetilde v$ in $D(\\operatorname{Tow}_{A}(Y'))$ itself. Compatibility with each quotient is also explicit: $d_{n+1,n}v'_{n+1}=h'_nc_{n+1,n}v_{n+1}h_{n+1}^{-1}=h'_nv_na_{n+1,n}h_{n+1}^{-1}=v'_nb_{n+1,n}$. Combined with steps 1 and 2 this proves that all four evaluated arrows respect the original quotient transitions and that evaluation recovers the given rectangle. The equality in the derived tower category was constructed before evaluation; it is not inferred from equality of all evaluations.",
+      "uses": [
+        "lem-weil-pbc-finite-level-rectangle",
+        "def-weil-pbc-four-arrows"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+        "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
+      }
+    },
+    {
+      "text": "For a compatible endomorphism $\\phi:K\\to K$, put $m=Lg^*Rf_*\\phi$ and $z=Rf'_*Lg'^*\\phi$. The ambient exchange of [def-weil-pbc-ambient-ringed-exchange] is a transformation of functors, so its naturality gives $ze=em$. Functorial reduction of [def-weil-pbc-adic-coefficient-datum] therefore gives $R(z)\\widetilde v=\\widetilde vR(m)$ as an equality of derived-tower morphisms. Give $B_\\bullet,D_\\bullet$ the transported actions $hR(m)h^{-1}$ and $h'R(z)(h')^{-1}$. Their evaluations are respectively $Lg_n^*Rf_*\\phi_n$ and $Rf'_*Lg_n'^*\\phi_n$ by the object-naturality computation of step 2 and the functorial identifications in [def-weil-pbc-four-corners]. The actions on $\\widetilde A_\\bullet,\\widetilde C_\\bullet$ evaluate to the specified ambient actions. Conjugation now gives equivariance of $h,h'$ and $v'$, and the already proved equality $v'h=h'\\widetilde v$ is equivariant. Since all actions and arrows are morphisms of the exhibited strict-tower realizations, these identities commute with every transition. This verifies the endomorphism clause without any additional assumption on $\\phi$ beyond the given compatibility.",
+      "uses": [
+        "def-weil-pbc-ambient-ringed-exchange",
+        "def-weil-pbc-adic-coefficient-datum",
+        "def-weil-pbc-four-corners"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+        "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-adic-coefficient-datum",
     "def-weil-pbc-four-corners",
     "def-weil-pbc-four-arrows",
-    "def-weil-pbc-ambient-ringed-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-    "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
-   }
-  },
-  {
-   "text": "Check the projection-formula comparisons with both the quotient and the object variable. For a coefficient map $q:P\\to P'$, transpose the two composites from $(Rf_*F)\\otimes^LP$ to $Rf_*(F\\otimes^LLf^*P')$ under $Lf^*\\dashv Rf_*$. By [def-weil-pbc-projection-formula-map], both transposes are $(\\varepsilon_F\\otimes1)\\circ(1\\otimes Lf^*q)=(1\\otimes Lf^*q)\\circ(\\varepsilon_F\\otimes1)$, where the equality is tensor bifunctoriality (the two factors act on different tensor slots). The adjunction bijection thus gives $Rf_*(1\\otimes Lf^*q)\\pi_{f,F,P}=\\pi_{f,F,P'}(1\\otimes q)$. For $u:F\\to F'$, the counit naturality identity $u\\varepsilon_F=\\varepsilon_{F'}Lf^*Rf_*u$ gives in exactly the same way $Rf_*(u\\otimes1)\\pi_{f,F,P}=\\pi_{f,F',P}(Rf_*u\\otimes1)$. Apply the first identity to $q_n$ for $(f,K)$ and $(f',E)$, and apply $Lg^*$ to the first square. With the tensor/pullback identifications of [def-weil-pbc-four-arrows], this yields $b_{n+1,n}h_{n+1}=h_na_{n+1,n}$ and $d_{n+1,n}h'_{n+1}=h'_nc_{n+1,n}$, where $b_{n+1,n}=Lg^*Rf_*(K_{n+1}\\to K_n)$ and $d_{n+1,n}=Rf'_*(E_{n+1}\\to E_n)$. Here $E_{n+1}\\to E_n$ is $Lg'^*$ of the quotient map of $K$, identified with $1\\otimes q_n$ through the functorial reduction identification of [def-weil-pbc-four-corners]. The second identity proves that these comparisons also intertwine the endomorphisms induced by any $\\phi:K\\to K$ and $Lg'^*\\phi$.",
-   "uses": [
-    "def-weil-pbc-projection-formula-map",
-    "def-weil-pbc-four-arrows",
-    "def-weil-pbc-four-corners"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-    "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
-   }
-  },
-  {
-   "text": "The arrows $h_n,h'_n$ are isomorphisms by [def-weil-pbc-four-arrows]; the applicable substantive input is the perfect projection formula [lemma-weil-pbc-perfect-projection-formula], since every $P_n$ is perfect in [def-weil-pbc-adic-coefficient-datum]. It applies to $E$ as well as $K$: it imposes no completeness assumption on the object variable. Realize $B_\\bullet$ by the same strict complex as $\\widetilde A_\\bullet$, but identify its $n$-th evaluation with the named corner $B_n$ through $h_n:A_n\\simeq B_n$. Realize $D_\\bullet$ by the same strict complex as $\\widetilde C_\\bullet$, identifying evaluation with $D_n$ through $h'_n:C_n\\simeq D_n$. Under these identifications their transitions are $h_na_{n+1,n}h_{n+1}^{-1}=b_{n+1,n}$ and $h'_nc_{n+1,n}(h'_{n+1})^{-1}=d_{n+1,n}$ by step 2. Thus these complexes realize precisely the required corner families and quotient transitions after restriction of scalars. Let $h:\\widetilde A_\\bullet\\to B_\\bullet$ and $h':\\widetilde C_\\bullet\\to D_\\bullet$ be the identity morphisms of the chosen representing complexes; their evaluations, read through the specified corner identifications, are $h_n,h'_n$. Transport of a realization through displayed evaluation isomorphisms is just relabeling the evaluated objects, not an assertion of an equivalence between $D(\\operatorname{Tow})$ and $\\operatorname{Tow}(D)$.",
-   "uses": [
-    "def-weil-pbc-four-arrows",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-    "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
-   }
-  },
-  {
-   "text": "Define the remaining derived-tower arrow by $v'=h'\\widetilde v h^{-1}:B_\\bullet\\to D_\\bullet$. Its $n$-th evaluation, under the corner identifications, is $h'_nv_nh_n^{-1}$. The finite-level rectangle [lem-weil-pbc-finite-level-rectangle] says $v'_nh_n=h'_nv_n$, so this evaluation is exactly the prescribed finite-level exchange $v'_n$ of [def-weil-pbc-four-arrows], including its transported etale-origin witness. Associativity gives $v'h=h'\\widetilde v$ in $D(\\operatorname{Tow}_{A}(Y'))$ itself. Compatibility with each quotient is also explicit: $d_{n+1,n}v'_{n+1}=h'_nc_{n+1,n}v_{n+1}h_{n+1}^{-1}=h'_nv_na_{n+1,n}h_{n+1}^{-1}=v'_nb_{n+1,n}$. Combined with steps 1 and 2 this proves that all four evaluated arrows respect the original quotient transitions and that evaluation recovers the given rectangle. The equality in the derived tower category was constructed before evaluation; it is not inferred from equality of all evaluations.",
-   "uses": [
-    "lem-weil-pbc-finite-level-rectangle",
-    "def-weil-pbc-four-arrows"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-    "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
-   }
-  },
-  {
-   "text": "For a compatible endomorphism $\\phi:K\\to K$, put $m=Lg^*Rf_*\\phi$ and $z=Rf'_*Lg'^*\\phi$. The ambient exchange of [def-weil-pbc-ambient-ringed-exchange] is a transformation of functors, so its naturality gives $ze=em$. Functorial reduction of [def-weil-pbc-adic-coefficient-datum] therefore gives $R(z)\\widetilde v=\\widetilde vR(m)$ as an equality of derived-tower morphisms. Give $B_\\bullet,D_\\bullet$ the transported actions $hR(m)h^{-1}$ and $h'R(z)(h')^{-1}$. Their evaluations are respectively $Lg_n^*Rf_*\\phi_n$ and $Rf'_*Lg_n'^*\\phi_n$ by the object-naturality computation of step 2 and the functorial identifications in [def-weil-pbc-four-corners]. The actions on $\\widetilde A_\\bullet,\\widetilde C_\\bullet$ evaluate to the specified ambient actions. Conjugation now gives equivariance of $h,h'$ and $v'$, and the already proved equality $v'h=h'\\widetilde v$ is equivariant. Since all actions and arrows are morphisms of the exhibited strict-tower realizations, these identities commute with every transition. This verifies the endomorphism clause without any additional assumption on $\\phi$ beyond the given compatibility.",
-   "uses": [
     "def-weil-pbc-ambient-ringed-exchange",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-four-corners"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-    "place": "Proof: normalization, reduction compatibility and rectangle; explicit transported strict-complex realization"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-four-corners",
-  "def-weil-pbc-four-arrows",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-projection-formula-map",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "lem-weil-pbc-finite-level-rectangle"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
-  "place": "Proof, expanded by reduction towers and transport through horizontal isomorphisms; projection-formula naturality from Stacks Tag 0B56"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Functorial derived tensor reductions form a strict inverse tower and a commuting base change rectangle of morphisms in the derived category of towers",
-   "results": "Tor/Tor_map/Tor'_map_app and Functor.mapDerivedCategoryFactorsh_hom_app: derived functor naturality only, not the pro-etale coefficient-tower rectangle.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "tower|inverse.system",
-   "results": "No hits in Mathlib/Algebra/Homology/DerivedCategory.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Strict inverse systems of sheaf complexes with derived tensor coefficient reductions and natural base change morphisms",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A functorial inverse system of quotient coefficient derived tensors transports through natural projection formula isomorphisms to a commuting square in the derived category of inverse systems",
-   "results": "localCohomology.diagram/diagramComp, InverseSystem.globalEquiv_naturality, TensorProduct.directLimitLeft/Right_symm_of_tmul and ProjectiveResolution naturality: different objects or direct rather than inverse systems; no corner rectangle.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.DerivedCategory, CategoryTheory.Functor",
-   "results": "Loogle parser: unknown identifier CategoryTheory.DerivedCategory; zero hits. Corrected to DerivedCategory in subsequent query.",
-   "date": "2026-10-14",
-   "verdict": "invalid query; no conclusion drawn"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory",
-   "results": "DerivedCategory, its Q and singleFunctor and basic category/shift/triangulated instances; these define derived categories but do not construct the coefficient-tower rectangle.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "mapDerivedCategory|map.*naturality",
-   "results": "Functor.mapDerivedCategory (ExactFunctor.lean:36) and mapDerivedCategoryFactors (line 41), read lines 25-55: require exact additive functors and do not state this derived tensor/projection-formula tower construction. Other hits concern homology sequences and truncation naturality.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1345,
- "blueprint_uses": [
-  "def-weil-pbc-four-arrows",
-  "def-weil-pbc-four-corners",
-  "lem-weil-pbc-finite-level-rectangle"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-four-corners"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_notes": [
-  {
-   "label": "source_note",
-   "text": "*Source note:* no Stacks Project entry states this tower-level datum. Stacks\ndescribes the completed pullback and its reductions for a single object\n(Lemma 61.20.2, [Tag 099N](https://stacks.math.columbia.edu/tag/099N)), the\nproper base-change isomorphism (Theorem 61.30.1, [Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)) and, for a constructible\n$K$, the structure of its reduction tower: Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) gives $K=\\Rlim K_n$ with\n$K_n=K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ of tor amplitude in a fixed\ninterval $[a,b]$, with constructible cohomology sheaves and of the form\n$K_n=\\epsilon^{-1}L_n$ for $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$. The\nderived-tower bookkeeping itself is the blueprint's (the derived inverse\nlimit and the bounded constructible tower), and no entry makes the four\ncorner families objects of the derived tower category; the blueprint adds\nthe transition data, the compatibility of the rectangle with every\ntransition and with compatible endomorphisms of $K$, and the identification\nof the $n$-th evaluations with the finite-level corners.",
-   "where": "statement"
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-weil-pbc-tower-compatibility",
-  "worker": "stage1",
-  "summary": "Replaced the unsupported normalization-implies-strictness inference by two functorial strict reduction complexes and explicit transport through the horizontal projection-formula isomorphisms. Proved quotient and object naturality by transposing the counit formula, then used the finite-level rectangle to identify the transported fourth edge. Proved the rectangle and endomorphism identities in the derived tower category before evaluation. No new nodes or coefficient-category identifications.",
-  "blueprint": "The single proof paragraph: steps 1 and 3 construct strict realizations of the corner families; step 2 supplies reduction compatibility; step 4 identifies the finite-level exchange and proves the tower rectangle; step 5 supplies compatible-endomorphism naturality."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "NT-Codex-NI-d54c67236",
-  "group": "NI",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-d54c67236 (reviewer sub-agent of L); spot-checked: Read the full item, blueprint/unit route, cited nodes, Stacks sources, and delivery rules. Verified strict tower construction, coefficient category, base-change/projection-formula morphisms, finite-level rectangle, endomorphism naturality, hypotheses, edge cases, and duplicate candidates. Wrote review.md; no DAG repairs needed."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-1f3350d30",
-  "group": "Q44",
-  "result": "fix",
-  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedTowerCompatibility",
-  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowers_compatibility",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowerCorners",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH'",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV'",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowers_compatibility"
+    "def-weil-pbc-projection-formula-map",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "lem-weil-pbc-finite-level-rectangle"
   ],
-  "file": "lean/Sheaf/Paper/CompletedTowerCompatibility.lean",
-  "statement": "theorem AdicCoefficientDatum.fourTowers_compatibility [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) (n : ℕ) : (∃ α : ∀ i : Fin 4, (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).obj (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K i) ≅ (reductionDerivedRestrict Y' (d.projection Y' n)).obj (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n i), (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 1).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 3).hom = (α 2).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h'.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV sq K) ≫ (α 2).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV' sq K) ≫ (α 3).hom = (α 1).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v'.hom) ∧ (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ d.towerV' sq K = d.towerV sq K ≫ (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ∧ (∀ k : K ⟶ K, (d.towerPull g).map ((d.towerPush f).map ((completedReductionTower X d).map k)) ≫ d.towerV' sq K = d.towerV' sq K ≫ (d.towerPush f').map ((d.towerPull g').map ((completedReductionTower X d).map k)))",
-  "branch": "newtargets-dag",
-  "by": "Q44",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "Unstated existing prerequisite, supplied in the same delivery under the human instruction of 2026-10-16. The node has no usable lean record in the read-only checkout or published source. Its canonical objects and maps are constructed in this module, with no arbitrary replacement of canonical maps."
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-tower-compatibility.md",
+    "place": "Proof, expanded by reduction towers and transport through horizontal isomorphisms; projection-formula naturality from Stacks Tag 0B56"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Functorial derived tensor reductions form a strict inverse tower and a commuting base change rectangle of morphisms in the derived category of towers",
+      "results": "Tor/Tor_map/Tor'_map_app and Functor.mapDerivedCategoryFactorsh_hom_app: derived functor naturality only, not the pro-etale coefficient-tower rectangle.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "tower|inverse.system",
+      "results": "No hits in Mathlib/Algebra/Homology/DerivedCategory.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Strict inverse systems of sheaf complexes with derived tensor coefficient reductions and natural base change morphisms",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A functorial inverse system of quotient coefficient derived tensors transports through natural projection formula isomorphisms to a commuting square in the derived category of inverse systems",
+      "results": "localCohomology.diagram/diagramComp, InverseSystem.globalEquiv_naturality, TensorProduct.directLimitLeft/Right_symm_of_tmul and ProjectiveResolution naturality: different objects or direct rather than inverse systems; no corner rectangle.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.DerivedCategory, CategoryTheory.Functor",
+      "results": "Loogle parser: unknown identifier CategoryTheory.DerivedCategory; zero hits. Corrected to DerivedCategory in subsequent query.",
+      "date": "2026-10-14",
+      "verdict": "invalid query; no conclusion drawn"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory",
+      "results": "DerivedCategory, its Q and singleFunctor and basic category/shift/triangulated instances; these define derived categories but do not construct the coefficient-tower rectangle.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "mapDerivedCategory|map.*naturality",
+      "results": "Functor.mapDerivedCategory (ExactFunctor.lean:36) and mapDerivedCategoryFactors (line 41), read lines 25-55: require exact additive functors and do not state this derived tensor/projection-formula tower construction. Other hits concern homology sequences and truncation naturality.",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1345,
+  "blueprint_uses": [
+    "def-weil-pbc-four-arrows",
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-finite-level-rectangle"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-four-corners"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_notes": [
+    {
+      "label": "source_note",
+      "text": "*Source note:* no Stacks Project entry states this tower-level datum. Stacks\ndescribes the completed pullback and its reductions for a single object\n(Lemma 61.20.2, [Tag 099N](https://stacks.math.columbia.edu/tag/099N)), the\nproper base-change isomorphism (Theorem 61.30.1, [Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)) and, for a constructible\n$K$, the structure of its reduction tower: Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) gives $K=\\Rlim K_n$ with\n$K_n=K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ of tor amplitude in a fixed\ninterval $[a,b]$, with constructible cohomology sheaves and of the form\n$K_n=\\epsilon^{-1}L_n$ for $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$. The\nderived-tower bookkeeping itself is the blueprint's (the derived inverse\nlimit and the bounded constructible tower), and no entry makes the four\ncorner families objects of the derived tower category; the blueprint adds\nthe transition data, the compatibility of the rectangle with every\ntransition and with compatible endomorphisms of $K$, and the identification\nof the $n$-th evaluations with the finite-level corners.",
+      "where": "statement"
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-weil-pbc-tower-compatibility",
+    "worker": "stage1",
+    "summary": "Replaced the unsupported normalization-implies-strictness inference by two functorial strict reduction complexes and explicit transport through the horizontal projection-formula isomorphisms. Proved quotient and object naturality by transposing the counit formula, then used the finite-level rectangle to identify the transported fourth edge. Proved the rectangle and endomorphism identities in the derived tower category before evaluation. No new nodes or coefficient-category identifications.",
+    "blueprint": "The single proof paragraph: steps 1 and 3 construct strict realizations of the corner families; step 2 supplies reduction compatibility; step 4 identifies the finite-level exchange and proves the tower rectangle; step 5 supplies compatible-endomorphism naturality."
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "NT-Codex-NI-d54c67236",
+    "group": "NI",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-d54c67236 (reviewer sub-agent of L); spot-checked: Read the full item, blueprint/unit route, cited nodes, Stacks sources, and delivery rules. Verified strict tower construction, coefficient category, base-change/projection-formula morphisms, finite-level rectangle, endomorphism naturality, hypotheses, edge cases, and duplicate candidates. Wrote review.md; no DAG repairs needed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-1f3350d30",
+    "group": "Q44",
+    "result": "fix",
+    "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedTowerCompatibility",
+    "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowers_compatibility",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowerCorners",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerH'",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerV'",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourTowers_compatibility"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedTowerCompatibility.lean",
+    "statement": "theorem AdicCoefficientDatum.fourTowers_compatibility [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) (n : ℕ) : (∃ α : ∀ i : Fin 4, (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).obj (d.fourTowerCorners (f := f) (f' := f') (g := g) (g' := g') K i) ≅ (reductionDerivedRestrict Y' (d.projection Y' n)).obj (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n i), (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 1).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ (α 3).hom = (α 2).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).h'.hom ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV sq K) ≫ (α 2).hom = (α 0).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v ∧ (reductionTowerDerivedEvaluation Y' (reductionModuleRing Y' (d.completedRing Y')) n).map (d.towerV' sq K) ≫ (α 3).hom = (α 1).hom ≫ (reductionDerivedRestrict Y' (d.projection Y' n)).map (d.fourArrows sq K hK W n).v'.hom) ∧ (d.towerH (f := f) (f' := f') (g := g) (g' := g') K).hom ≫ d.towerV' sq K = d.towerV sq K ≫ (d.towerH' (f := f) (f' := f') (g := g) (g' := g') K).hom ∧ (∀ k : K ⟶ K, (d.towerPull g).map ((d.towerPush f).map ((completedReductionTower X d).map k)) ≫ d.towerV' sq K = d.towerV' sq K ≫ (d.towerPush f').map ((d.towerPull g').map ((completedReductionTower X d).map k)))",
+    "branch": "newtargets-dag",
+    "by": "Q44",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "Unstated existing prerequisite, supplied in the same delivery under the human instruction of 2026-10-16. The node has no usable lean record in the read-only checkout or published source. Its canonical objects and maps are constructed in this module, with no arbitrary replacement of canonical maps."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "The transition morphisms $P_{n+1}\\to P_n$ make each of the four corner\nfamilies an object\n$$\n A_\\bullet,B_\\bullet,C_\\bullet,D_\\bullet\n \\in D(\\operatorname{Tow}_{A}(Y'))\n$$\nafter restriction of scalars, and make $h,h',v,v'$ morphisms in this derived\ntower category. Evaluation at $n$ recovers the four displayed corners and\narrows. The rectangle equation commutes with every transition and with every\ncompatible endomorphism of $K$.",
+    "proof": [
+      {
+        "text": "The normalization isomorphisms of [def-weil-pbc-four-arrows] make the four\nfamilies strict towers, and the reduction compatibilities of the projection\nformula and of the finite-level exchange map make the four arrows tower\nmorphisms; the rectangle equation of [lem-weil-pbc-finite-level-rectangle]\nis then compatible with the transitions by construction.",
+        "uses": [
+          "def-weil-pbc-four-arrows",
+          "lem-weil-pbc-finite-level-rectangle"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

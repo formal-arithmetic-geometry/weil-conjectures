@@ -1,0 +1,75 @@
+{
+  "id": "sk-lem-finite-window",
+  "kind": "statement",
+  "title": "Reduction to finitely many degrees",
+  "statement": "Let $\\Lambda=E$ or $\\Qlb$. Let $C\\in\\Cons(X,\\Lambda)$, with $d_C$ as in\n[sk-lem-uniform-constructible-ext], $K\\in\\Dic(X,\\Lambda)$ ([sk-cor-ambient-ind-derived]) and\n$m\\in\\mathbf Z$. The truncation maps induce a natural isomorphism\n\n$$\n\\Hom(C,K[m])\\cong\\Hom\\bigl(C,(\\tau_{\\geq m-d_C}\\tau_{\\leq m}K)[m]\\bigr).\n$$\n\nBecause of the uniform bound $d_C$, maps out of a constructible sheaf $C$ into an unbounded complex see\nonly finitely many of its cohomology sheaves.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/_section.md",
+    "place": "node sk-lem-finite-window, order 1525"
+  },
+  "stmt_deps": [
+    "sk-lem-uniform-constructible-ext"
+  ],
+  "proof": [
+    {
+      "text": "Replacing $K$ by $K[m]$ we may assume $m=0$. The truncation $\\tau_{>0}K$ lies in $\\D^{\\geq1}$, so\n$\\Hom(C,\\tau_{>0}K[s])=0$ for $s=0,-1$, and the truncation triangle for $\\tau_{\\leq0}$ shows that\n$\\Hom(C,K)=\\Hom(C,\\tau_{\\leq0}K)$. It remains to remove the cohomology in degrees $\\leq-d_C-1$ from\n$K'=\\tau_{\\leq0}K$. By the triangle $\\tau_{\\leq-d_C-1}K'\\to K'\\to\\tau_{\\geq-d_C}K'\\to$, it suffices to\nshow the lower tail vanishing\n\n$$\n\\Hom(C,L)=0\\qquad\\text{for every }L\\in\\Dic(X,\\Lambda)\\text{ with }H^q(L)=0\\text{ for }q>-d_C-1,\n$$\n\napplied to $L=\\tau_{\\leq-d_C-1}K'$ and to $L=\\tau_{\\leq-d_C-1}K'[1]$ ([det-finite-window-reduction]).",
+      "uses": [
+        "det-finite-window-reduction"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "If $L$ is bounded, the lower tail vanishing follows from the finite filtration of $L$ by its cohomology\nsheaves: a layer $H^q(L)[-q]$ with $q\\leq-d_C-1$ contributes $\\Ext^{-q}(C,H^qL)$, which vanishes by\n[sk-cor-ind-heart-ii] since $-q>d_C$ ([det-finite-window-bounded]). For $L$ unbounded below we use that\nthe derived category is left complete.",
+      "uses": [
+        "det-finite-window-bounded"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The pro-étale site has a basis of weakly contractible objects ([sk-thm-pe-weakly-contractible-basis]),\nso [sk-prop-pe-products] shows that products of $\\Lambda_X$-modules are exact, products in\n$\\D(X_{\\mathrm{proét}},\\Lambda)$ are computed termwise, and\n\n$$\nL=R\\varprojlim_n\\tau_{\\geq-n}L\n$$\n\nfor every $L$ ([sk-prop-pe-left-complete]). Concretely, choose a complex $L^\\bullet$ representing $L$;\nthe limit is the derived inverse limit of the tower of good truncations $\\tau_{\\geq-n}L^\\bullet$ with\ntheir canonical transition maps. Since $\\Hom(C,-)$ takes products to products, the triangle defining\n$R\\varprojlim$ gives the Milnor exact sequence\n\n$$\n0\\longrightarrow\\varprojlim_n{}^1\\Hom(C,\\tau_{\\geq-n}L[-1])\\longrightarrow\\Hom(C,L)\n\\longrightarrow\\varprojlim_n\\Hom(C,\\tau_{\\geq-n}L)\\longrightarrow0.\n$$",
+      "uses": [
+        "sk-thm-pe-weakly-contractible-basis"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Each $\\tau_{\\geq-n}L$ is bounded with cohomology in degrees $\\leq-d_C-1$, so the right-hand term\nvanishes by the bounded case. For the left-hand term, the triangle\n\n$$\nH^{-n-1}(L)[n+1]\\longrightarrow\\tau_{\\geq-n-1}L\\longrightarrow\\tau_{\\geq-n}L\\longrightarrow H^{-n-1}(L)[n+2]\n$$\n\nshows that the transition map $\\Hom(C,\\tau_{\\geq-n-1}L[-1])\\to\\Hom(C,\\tau_{\\geq-n}L[-1])$ sits between\n$\\Ext^{n}(C,H^{-n-1}L)$ and $\\Ext^{n+1}(C,H^{-n-1}L)$. Both vanish for $n>d_C$ by [sk-cor-ind-heart-ii].\nSo the tower is eventually constant, and the $\\varprojlim^1$ of an eventually constant tower is zero: in\nthe description of $\\varprojlim^1$ as the cokernel of $1-\\mathrm{shift}$ on the product, one solves the\nequation successively along the constant tail and then along the finitely many earlier terms. This\nproves the lower tail vanishing, and hence the lemma ([det-finite-window-unbounded]).",
+      "uses": [
+        "det-finite-window-unbounded"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-finite-window-reduction",
+    "det-finite-window-bounded",
+    "sk-thm-pe-weakly-contractible-basis",
+    "det-finite-window-unbounded"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "in_cycle"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1525,
+  "blueprint_uses": [
+    "sk-cor-ind-heart-ii",
+    "sk-cor-ambient-ind-derived",
+    "sk-lem-uniform-constructible-ext"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

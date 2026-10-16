@@ -1,129 +1,135 @@
 {
- "id": "def-weil-derived-complete",
- "blueprint": {
-  "is": "def-weil-derived-complete",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Derived complete objects",
- "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\in\\mathbf Z_{\\geq1}$. Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed coefficient sheaf on the small pro-etale site $Y_{\\mathrm{proet}}$ and $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ the derived category of sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-completed-integral-coefficients], with its triangulated structure [def-weil-abstract-derived-category].\n\nFor $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ let\n\n$$\n K_n=\\operatorname{Res}_n\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr),\\qquad t_n:K_{n+1}\\to K_n,\\qquad c_n:K\\to K_n\\quad(t_n\\circ c_{n+1}=c_n)\n$$\n\nbe the reduction tower of $K$ with its maps from $K$ [def-weil-integral-reduction-tower]: here $K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D(Y_{\\mathrm{proet}},A_{E,n})$ is the derived reduction modulo $\\varpi_E^n$ [def-weil-integral-derived-reduction] and $\\operatorname{Res}_n:D(Y_{\\mathrm{proet}},A_{E,n})\\to D(Y_{\\mathrm{proet}},\\mathcal O_E)$ the derived restriction of scalars [def-weil-integral-derived-restriction-of-scalars], so that $(K_n,t_n)_{n\\geq1}$ is an inverse system in the single triangulated category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$. The countable product $\\prod_nK_n$ exists in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, represented by the termwise product of representatives, because countable products of sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules exist and are exact [lem-weil-proetale-countable-products-exact] and by [lem-weil-derived-limit-existence], clause 2. Let $c=(c_n)_n:K\\to\\prod_nK_n$ be the morphism with components $c_n$, and $1-s:\\prod_nK_n\\to\\prod_nK_n$ the transition endomorphism of the system $(K_n,t_n)$ [def-weil-derived-limit]; then $(1-s)\\circ c=0$, since its $n$-th component is $c_n-t_n\\circ c_{n+1}=0$.\n\nThe object $K$ is *derived complete* if there is a morphism $\\delta:\\prod_nK_n\\to K[1]$ such that\n\n$$\n K\\xrightarrow{\\ c\\ }\\prod_nK_n\\xrightarrow{\\ 1-s\\ }\\prod_nK_n\\xrightarrow{\\ \\delta\\ }K[1]\n$$\n\nis a distinguished triangle of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$; that is, if $K$ is a derived limit $R\\varprojlim_nK_n$ of its reduction tower [def-weil-derived-limit] through a Roos triangle whose first map is $c$. Equivalently: there are a derived limit $L$ of $(K_n,t_n)$, with Roos triangle $L\\xrightarrow{\\iota}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta_L}L[1]$, and an isomorphism $\\varphi:K\\to L$ with $\\iota\\circ\\varphi=c$. (Given such $\\varphi$, the triangle $(c,\\,1-s,\\,\\varphi[1]^{-1}\\circ\\delta_L)$ is isomorphic through $(\\varphi,\\mathrm{id},\\mathrm{id})$ to the Roos triangle of $L$, hence distinguished; conversely take $L=K$, $\\varphi=\\mathrm{id}$.)\n\nNo particular morphism $K\\to R\\varprojlim_nK_n$ is singled out by this definition: a derived limit is determined only up to a non-unique isomorphism, and a morphism $K\\to L$ lifting $c$ only up to a morphism factoring through $(\\prod_nK_n)[-1]\\to L$; the condition asks only that $c$ be the first map of some distinguished triangle completing $1-s$. This is the reading, in the triangulated category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, of the condition of Bhatt-Scholze, Definition 3.5.2, that the natural map $K\\to R\\varprojlim_n(K\\otimes^L_{\\widehat R}R/\\mathfrak m^n)$ be an isomorphism, for $R=\\mathcal O_E$, $\\mathfrak m=(\\varpi_E)$, $\\widehat R=\\widehat{\\mathcal O}_{E,Y}$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-complete.md",
-  "place": "node def-weil-derived-complete, order 1457",
-  "external": [
-   {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "p. 24, Definition 3.5.2 (K ∈ D(X,R^) is m-adically complete if the natural map K -> R lim(K ⊗^L_{R^} R/m^n) is an equivalence) and Proposition 3.5.1(1); p. 21, Definition 3.4.1 (derived I-completeness by T(K|_U,x)=0) and p. 22, Lemma 3.4.12 (equivalence of the two forms)"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 091S (More on Algebra, Definition 'derived-complete': derived completeness of K ∈ D(A) by T(K,f)=0, the module form of def-weil-point-derived-complete-module-complex)"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 091Z (the canonical map K -> R lim(K ⊗^L_A K_n^•) over the Koszul tower)"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-completed-integral-coefficients",
-  "def-weil-abstract-derived-category",
-  "def-weil-integral-reduction-tower",
-  "def-weil-integral-derived-reduction",
-  "def-weil-integral-derived-restriction-of-scalars",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "def-weil-derived-limit",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-integral-reduction-tower-well-defined"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'DerivedComplete\\|derivedComplete\\|derived complete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "id": "def-weil-derived-complete",
+  "blueprint": {
+    "is": "def-weil-derived-complete",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'homotopyLimit\\|HomotopyLimit\\|Rlim\\|derivedLim\\|Milnor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "only Geometry/Manifold/PoincareConjecture.lean (unrelated); no derived or homotopy limit in a triangulated category",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "definition",
+  "title": "Derived complete objects",
+  "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, a scheme $Y$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\in\\mathbf Z_{\\geq1}$. Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed coefficient sheaf on the small pro-etale site $Y_{\\mathrm{proet}}$ and $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ the derived category of sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-completed-integral-coefficients], with its triangulated structure [def-weil-abstract-derived-category].\n\nFor $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ let\n\n$$\n K_n=\\operatorname{Res}_n\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr),\\qquad t_n:K_{n+1}\\to K_n,\\qquad c_n:K\\to K_n\\quad(t_n\\circ c_{n+1}=c_n)\n$$\n\nbe the reduction tower of $K$ with its maps from $K$ [def-weil-integral-reduction-tower]: here $K\\otimes^L_{\\mathcal O_E}A_{E,n}\\in D(Y_{\\mathrm{proet}},A_{E,n})$ is the derived reduction modulo $\\varpi_E^n$ [def-weil-integral-derived-reduction] and $\\operatorname{Res}_n:D(Y_{\\mathrm{proet}},A_{E,n})\\to D(Y_{\\mathrm{proet}},\\mathcal O_E)$ the derived restriction of scalars [def-weil-integral-derived-restriction-of-scalars], so that $(K_n,t_n)_{n\\geq1}$ is an inverse system in the single triangulated category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$. The countable product $\\prod_nK_n$ exists in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, represented by the termwise product of representatives, because countable products of sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules exist and are exact [lem-weil-proetale-countable-products-exact] and by [lem-weil-derived-limit-existence], clause 2. Let $c=(c_n)_n:K\\to\\prod_nK_n$ be the morphism with components $c_n$, and $1-s:\\prod_nK_n\\to\\prod_nK_n$ the transition endomorphism of the system $(K_n,t_n)$ [def-weil-derived-limit]; then $(1-s)\\circ c=0$, since its $n$-th component is $c_n-t_n\\circ c_{n+1}=0$.\n\nThe object $K$ is *derived complete* if there is a morphism $\\delta:\\prod_nK_n\\to K[1]$ such that\n\n$$\n K\\xrightarrow{\\ c\\ }\\prod_nK_n\\xrightarrow{\\ 1-s\\ }\\prod_nK_n\\xrightarrow{\\ \\delta\\ }K[1]\n$$\n\nis a distinguished triangle of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$; that is, if $K$ is a derived limit $R\\varprojlim_nK_n$ of its reduction tower [def-weil-derived-limit] through a Roos triangle whose first map is $c$. Equivalently: there are a derived limit $L$ of $(K_n,t_n)$, with Roos triangle $L\\xrightarrow{\\iota}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta_L}L[1]$, and an isomorphism $\\varphi:K\\to L$ with $\\iota\\circ\\varphi=c$. (Given such $\\varphi$, the triangle $(c,\\,1-s,\\,\\varphi[1]^{-1}\\circ\\delta_L)$ is isomorphic through $(\\varphi,\\mathrm{id},\\mathrm{id})$ to the Roos triangle of $L$, hence distinguished; conversely take $L=K$, $\\varphi=\\mathrm{id}$.)\n\nNo particular morphism $K\\to R\\varprojlim_nK_n$ is singled out by this definition: a derived limit is determined only up to a non-unique isomorphism, and a morphism $K\\to L$ lifting $c$ only up to a morphism factoring through $(\\prod_nK_n)[-1]\\to L$; the condition asks only that $c$ be the first map of some distinguished triangle completing $1-s$. This is the reading, in the triangulated category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, of the condition of Bhatt-Scholze, Definition 3.5.2, that the natural map $K\\to R\\varprojlim_n(K\\otimes^L_{\\widehat R}R/\\mathfrak m^n)$ be an isomorphism, for $R=\\mathcal O_E$, $\\mathfrak m=(\\varpi_E)$, $\\widehat R=\\widehat{\\mathcal O}_{E,Y}$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-complete.md",
+    "place": "node def-weil-derived-complete, order 1457",
+    "external": [
+      {
+        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+        "place": "p. 24, Definition 3.5.2 (K ∈ D(X,R^) is m-adically complete if the natural map K -> R lim(K ⊗^L_{R^} R/m^n) is an equivalence) and Proposition 3.5.1(1); p. 21, Definition 3.4.1 (derived I-completeness by T(K|_U,x)=0) and p. 22, Lemma 3.4.12 (equivalence of the two forms)"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 091S (More on Algebra, Definition 'derived-complete': derived completeness of K ∈ D(A) by T(K,f)=0, the module form of def-weil-point-derived-complete-module-complex)"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 091Z (the canonical map K -> R lim(K ⊗^L_A K_n^•) over the Koszul tower)"
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsAdicComplete\\|AdicCompletion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/",
-   "results": "none; IsAdicComplete (RingTheory/AdicCompletion/Basic.lean) is classical I-adic completeness of a module over a ring, not derived completeness of a complex of sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1457,
- "blueprint_uses": [
-  "def-weil-completed-integral-coefficients",
-  "def-weil-derived-limit",
-  "def-weil-derived-tensor"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-derived-complete",
-  "worker": "stage1",
-  "summary": "Checked against Bhatt-Scholze §3.4-3.5 (pdftotext): the form 'K -> R lim(K ⊗^L A_{E,n}) is an isomorphism' is BS Definition 3.5.2 / Proposition 3.5.1(1) (p. 24), not Definition 3.4.1 (p. 21, the T(K,x)=0 form) and not Stacks 091S (also the T(K,f)=0 form, which is def-weil-point-derived-complete-module-complex); the source citations are corrected. The reductions are now the derived reductions of def-weil-integral-derived-reduction (derived tensor over the completed sheaf, landing in D(Y,A_{E,n})), carried into D(Y,O_E) by the new derived restriction of scalars node, instead of def-weil-derived-tensor (constant ring only). The tower (K_n,t_n) and the maps c_n:K->K_n are now built explicitly from a K-flat resolution in the new node def-weil-integral-reduction-tower, whose independence of the resolution is the new statement lem-weil-integral-reduction-tower-well-defined. 'The canonical map K -> R lim' is removed: with the Roos-triangle derived limit no such map is unique (a lift of c=(c_n) is determined only modulo Hom(K,∏K_n[-1]), and its uniqueness fails in general, since lim^1 Hom(K,K_n[-1]) need not vanish), so the definition now asks that c=(c_n):K->∏K_n be the first map of a distinguished triangle completing 1-s, equivalently that some isomorphism K≅L onto a derived limit lift c. Existence of ∏K_n in D(Y,O_E) is cited (lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence clause 2). Dropped stmt_deps def-weil-derived-tensor and lem-weil-restriction-of-scalars-exact (now used through the restriction node)."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-e515b6c3e",
-  "group": "Q42",
-  "result": "pass",
-  "note": "Wrote review.md. Checked all clauses, dependencies, sources, canonical constructions, universes, edge cases, records, and docstrings. All three immutable Lean files passed fresh scompile.py sandbox/library checks with exit 0 and no diagnostics. No defects found."
- },
- "lean": {
-  "module": "Sheaf.Paper.DerivedCompleteUnrestricted",
-  "declaration": "WeilConjectures.IsDerivedCompleteUnrestricted",
-  "declarations": [
-   "WeilConjectures.IsDerivedCompleteUnrestricted"
+  "stmt_deps": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-abstract-derived-category",
+    "def-weil-integral-reduction-tower",
+    "def-weil-integral-derived-reduction",
+    "def-weil-integral-derived-restriction-of-scalars",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-reduction-tower-well-defined"
   ],
-  "file": "lean/Sheaf/Paper/DerivedCompleteUnrestricted.lean",
-  "statement": "def IsDerivedCompleteUnrestricted (K : DerivedCategory (integralTowerModules.{t, u} l E Y)) : Prop",
-  "branch": "newtargets-dag",
-  "by": "Q42",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B): IsDerivedComplete retains an auxiliary FiniteFieldDatum D and l != D.p, while this item is over any scheme and any prime with no such datum. This module gives the exact same recorded predicate existentially over an irrelevant small datum; all coefficient and augmentation constructions ignore it. Such data always exist, using characteristic 2 or 3. It imports and reuses IsDerivedComplete, and imposes no condition on Y or l."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rln 'DerivedComplete\\|derivedComplete\\|derived complete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'homotopyLimit\\|HomotopyLimit\\|Rlim\\|derivedLim\\|Milnor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+      "results": "only Geometry/Manifold/PoincareConjecture.lean (unrelated); no derived or homotopy limit in a triangulated category",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsAdicComplete\\|AdicCompletion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/",
+      "results": "none; IsAdicComplete (RingTheory/AdicCompletion/Basic.lean) is classical I-adic completeness of a module over a ring, not derived completeness of a complex of sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1457,
+  "blueprint_uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-derived-limit",
+    "def-weil-derived-tensor"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-derived-complete",
+    "worker": "stage1",
+    "summary": "Checked against Bhatt-Scholze §3.4-3.5 (pdftotext): the form 'K -> R lim(K ⊗^L A_{E,n}) is an isomorphism' is BS Definition 3.5.2 / Proposition 3.5.1(1) (p. 24), not Definition 3.4.1 (p. 21, the T(K,x)=0 form) and not Stacks 091S (also the T(K,f)=0 form, which is def-weil-point-derived-complete-module-complex); the source citations are corrected. The reductions are now the derived reductions of def-weil-integral-derived-reduction (derived tensor over the completed sheaf, landing in D(Y,A_{E,n})), carried into D(Y,O_E) by the new derived restriction of scalars node, instead of def-weil-derived-tensor (constant ring only). The tower (K_n,t_n) and the maps c_n:K->K_n are now built explicitly from a K-flat resolution in the new node def-weil-integral-reduction-tower, whose independence of the resolution is the new statement lem-weil-integral-reduction-tower-well-defined. 'The canonical map K -> R lim' is removed: with the Roos-triangle derived limit no such map is unique (a lift of c=(c_n) is determined only modulo Hom(K,∏K_n[-1]), and its uniqueness fails in general, since lim^1 Hom(K,K_n[-1]) need not vanish), so the definition now asks that c=(c_n):K->∏K_n be the first map of a distinguished triangle completing 1-s, equivalently that some isomorphism K≅L onto a derived limit lift c. Existence of ∏K_n in D(Y,O_E) is cited (lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence clause 2). Dropped stmt_deps def-weil-derived-tensor and lem-weil-restriction-of-scalars-exact (now used through the restriction node)."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-e515b6c3e",
+    "group": "Q42",
+    "result": "pass",
+    "note": "Wrote review.md. Checked all clauses, dependencies, sources, canonical constructions, universes, edge cases, records, and docstrings. All three immutable Lean files passed fresh scompile.py sandbox/library checks with exit 0 and no diagnostics. No defects found."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.DerivedCompleteUnrestricted",
+    "declaration": "WeilConjectures.IsDerivedCompleteUnrestricted",
+    "declarations": [
+      "WeilConjectures.IsDerivedCompleteUnrestricted"
+    ],
+    "file": "lean/Sheaf/Paper/DerivedCompleteUnrestricted.lean",
+    "statement": "def IsDerivedCompleteUnrestricted (K : DerivedCategory (integralTowerModules.{t, u} l E Y)) : Prop",
+    "branch": "newtargets-dag",
+    "by": "Q42",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "§1(B): IsDerivedComplete retains an auxiliary FiniteFieldDatum D and l != D.p, while this item is over any scheme and any prime with no such datum. This module gives the exact same recorded predicate existentially over an irrelevant small datum; all coefficient and augmentation constructions ignore it. Such data always exist, using characteristic 2 or 3. It imports and reuses IsDerivedComplete, and imposes no condition on Y or l."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Use the completed integral coefficient sheaf\n[def-weil-completed-integral-coefficients] $\\widehat{\\mathcal O}_{E,Y}$, its\nreductions $(A_{E,n})_Y$, the derived category $D(Y_{\\mathrm{proet}},\\mathcal\nO_E)$, and the restriction of scalars $\\operatorname{Res}_n$ attached to\nthem, exact by [lem-weil-restriction-of-scalars-exact]. For a complex $K\\in\nD(Y_{\\mathrm{proet}},\\mathcal O_E)$ put\n\n$$\n K_n:=K\\otimes^L_{\\mathcal O_E}A_{E,n},\n$$\n\nthe derived tensor product [def-weil-derived-tensor] with the constant\n$(A_{E,n})_Y$-module. The reduction morphisms $A_{E,n+1}\\twoheadrightarrow\nA_{E,n}$ make $(K_n)_{n\\geq1}$ an inverse system in the single triangulated\ncategory $D(Y_{\\mathrm{proet}},\\mathcal O_E)$, with transition maps\n$\\operatorname{Res}_{n+1}K_{n+1}\\to\\operatorname{Res}_nK_n$. Write\n\n$$\n R\\varprojlim_n\\operatorname{Res}_nK_n\n$$\n\nfor the derived limit [def-weil-derived-limit] of this inverse system, formed\ninside the single triangulated category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$\nby its Roos triangle; no strict-tower model and no resolution of the system\nis chosen, and the transition maps above are already maps in\n$D(Y_{\\mathrm{proet}},\\mathcal O_E)$. The compatible maps $K\\to\n\\operatorname{Res}_nK_n$ induce a canonical map\n\n$$\n K\\longrightarrow R\\varprojlim_n\\operatorname{Res}_nK_n,\n$$\n\nand $K$ is *derived complete* if this canonical map is an isomorphism.\n\nThis is the coefficient-sheaf form of Definition 15.93.4 of the Stacks\nProject, Tag [091S](https://stacks.math.columbia.edu/tag/091S); derived\ncompleteness is equivalently described by a derived limit over the Koszul\ntower $K_\\bullet(A,f_1^n,\\dots,f_r^n)$ of the generators of the ideal (Stacks\nProject, Lemma 15.93.17, Tag [091Z](https://stacks.math.columbia.edu/tag/091Z)).",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

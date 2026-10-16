@@ -1,160 +1,221 @@
 {
- "id": "thm-trf-frobenius-local-term",
- "blueprint": {
-  "is": "thm-trf-frobenius-local-term",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Local term of the Frobenius correspondence",
- "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions,\n$A=A_{E,n}$, let $X_0$ be\nseparated of finite type\nover $k_0$, put $X=X_0\\times_{k_0}k$, and let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex.\nLet $u_m:L\\Phi^m{}^*K\\to K$ be the scheme-Frobenius map of\n[def-trf-iterated-weil-map], and consider the graph correspondence\n$c=(\\operatorname{id}_X,\\Phi^m)$ with $u_m$. For each\n$y\\in X_0(\\mathbf F_{q^m})$, viewed via\n[thm-trf-frobenius-fixed-points] as a closed-and-open component of\n$\\operatorname{Fix}(\\Phi^m)$, the local\nterm is\n\n$$\n\\operatorname{LT}_y(u_m)\n=\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr)\n$$\n\nin $A$, where $F_{y,m}$ is the\nlocal geometric Frobenius\noperator of [def-trf-frobenius-operators] and $K_{\\bar y}$ is the\nstalk complex. The degree-dependence of the right-hand side is\n[lem-trf-frobenius-degree-formula].\n\nMore generally, let $K\\in D^b_{ctf}(X,A)$ carry no Weil structure and\nlet $v:L\\Phi^{m*}K\\to K$ be an arbitrary, not necessarily invertible,\nmorphism, for instance the iterate $\\psi_m$ of a Frobenius coefficient\nmorphism $\\psi$ of [def-trf-frobenius-coefficient-morphism]. Then for\nthe graph correspondence $(\\operatorname{id}_X,\\Phi^m)$ with $v$\n\n$$\n\\operatorname{LT}_y(v)=\\operatorname{tr}_A\\bigl(v_{\\bar y}\\mid K_{\\bar y}\\bigr),\n$$\n\nwhere $v_{\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$\nis the stalk map at the fixed point $\\bar y$. The first formula is the\ncase $v=u_m$, whose stalk map at $\\bar y$ is $F_{y,m}$\n([def-trf-frobenius-operators]). The case needed for the trace formula\nis $X_0$ smooth of pure dimension one.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-frob/thm-trf-frobenius-local-term.md",
-  "place": "node thm-trf-frobenius-local-term, order 2356"
- },
- "stmt_deps": [
-  "def-trf-iterated-weil-map",
-  "thm-trf-frobenius-fixed-points",
-  "def-trf-frobenius-operators",
-  "lem-trf-frobenius-degree-formula",
-  "def-trf-frobenius-coefficient-morphism"
- ],
- "proof": [
-  {
-   "text": "The proof follows the curve pieces of [d-curve-pieces]. Fix\n$y\\in X_0(\\mathbf F_{q^m})$, put $x=y$, $\\Phi=\\Phi^m$, and let $v$ be\n$u_m$ or an arbitrary morphism $L\\Phi^*K\\to K$ as in the statement. All\nmorphisms below are separated and of finite type between separated\nfinite-type $k$-schemes, hence exceptionally admissible at the finite\nstage ([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]).",
-   "uses": [
-    "d-curve-pieces",
-    "thm-sf-preservation-class"
-   ],
-   "elementary": false
+  "id": "thm-trf-frobenius-local-term",
+  "blueprint": {
+    "is": "thm-trf-frobenius-local-term",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Step 0: the fixed point.* By [thm-trf-frobenius-fixed-points] the\nfixed scheme $\\operatorname{Fix}(\\Phi)$ is a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, one for each point of\n$X_0(\\mathbf F_{q^m})$. So it is proper over $s$ with finitely many\nopen-and-closed components, the geometric point $\\bar x$ is one of them,\na reduced point component, and $\\operatorname{LT}_{\\bar x}$ is the local\nterm of [def-trf-local-term] computed as in [lem-trf-local-term-point].",
-   "uses": [
+  "kind": "statement",
+  "title": "Local term of the Frobenius correspondence",
+  "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions,\n$A=A_{E,n}$, let $X_0$ be\nseparated of finite type\nover $k_0$, put $X=X_0\\times_{k_0}k$, and let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex.\nLet $u_m:L\\Phi^m{}^*K\\to K$ be the scheme-Frobenius map of\n[def-trf-iterated-weil-map], and consider the graph correspondence\n$c=(\\operatorname{id}_X,\\Phi^m)$ with $u_m$. For each\n$y\\in X_0(\\mathbf F_{q^m})$, viewed via\n[thm-trf-frobenius-fixed-points] as a closed-and-open component of\n$\\operatorname{Fix}(\\Phi^m)$, the local\nterm is\n\n$$\n\\operatorname{LT}_y(u_m)\n=\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr)\n$$\n\nin $A$, where $F_{y,m}$ is the\nlocal geometric Frobenius\noperator of [def-trf-frobenius-operators] and $K_{\\bar y}$ is the\nstalk complex. The degree-dependence of the right-hand side is\n[lem-trf-frobenius-degree-formula].\n\nMore generally, let $K\\in D^b_{ctf}(X,A)$ carry no Weil structure and\nlet $v:L\\Phi^{m*}K\\to K$ be an arbitrary, not necessarily invertible,\nmorphism, for instance the iterate $\\psi_m$ of a Frobenius coefficient\nmorphism $\\psi$ of [def-trf-frobenius-coefficient-morphism]. Then for\nthe graph correspondence $(\\operatorname{id}_X,\\Phi^m)$ with $v$\n\n$$\n\\operatorname{LT}_y(v)=\\operatorname{tr}_A\\bigl(v_{\\bar y}\\mid K_{\\bar y}\\bigr),\n$$\n\nwhere $v_{\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$\nis the stalk map at the fixed point $\\bar y$. The first formula is the\ncase $v=u_m$, whose stalk map at $\\bar y$ is $F_{y,m}$\n([def-trf-frobenius-operators]). The case needed for the trace formula\nis $X_0$ smooth of pure dimension one.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-frob/thm-trf-frobenius-local-term.md",
+    "place": "node thm-trf-frobenius-local-term, order 2356"
+  },
+  "stmt_deps": [
+    "def-trf-iterated-weil-map",
+    "thm-trf-frobenius-fixed-points",
+    "def-trf-frobenius-operators",
+    "lem-trf-frobenius-degree-formula",
+    "def-trf-frobenius-coefficient-morphism"
+  ],
+  "proof": [
+    {
+      "text": "The proof follows the curve pieces of [d-curve-pieces]. Fix\n$y\\in X_0(\\mathbf F_{q^m})$, put $x=y$, $\\Phi=\\Phi^m$, and let $v$ be\n$u_m$ or an arbitrary morphism $L\\Phi^*K\\to K$ as in the statement. All\nmorphisms below are separated and of finite type between separated\nfinite-type $k$-schemes, hence exceptionally admissible at the finite\nstage ([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]).",
+      "uses": [
+        "d-curve-pieces",
+        "thm-sf-preservation-class"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 0: the fixed point.* By [thm-trf-frobenius-fixed-points] the\nfixed scheme $\\operatorname{Fix}(\\Phi)$ is a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, one for each point of\n$X_0(\\mathbf F_{q^m})$. So it is proper over $s$ with finitely many\nopen-and-closed components, the geometric point $\\bar x$ is one of them,\na reduced point component, and $\\operatorname{LT}_{\\bar x}$ is the local\nterm of [def-trf-local-term] computed as in [lem-trf-local-term-point].",
+      "uses": [
+        "thm-trf-frobenius-fixed-points",
+        "def-trf-local-term",
+        "lem-trf-local-term-point"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 1: the pieces.* Let $i:\\{\\bar x\\}\\hookrightarrow X$,\n$j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$, and let\n$K^Z=Ri_*i^*K$, $K^U=j_!j^*K$ with the induced maps $u^Z,u^U$ of\n[d-curve-pieces] for the coefficient morphism $v$. By\n[prop-trf-trace-class-additivity], item (2),\n\n$$\n\\operatorname{LT}_{\\bar x}(v)=\\operatorname{LT}_{\\bar x}(u^Z)\n+\\operatorname{LT}_{\\bar x}(u^U).\n$$",
+      "uses": [
+        "d-curve-pieces",
+        "prop-trf-trace-class-additivity"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the open piece.* The stalk of the extension by zero at the\npoint $\\bar x\\notin U$ vanishes, $(K^U)_{\\bar x}=(j_!j^*K)_{\\bar x}=0$\n([def-weil-extension-by-zero]). The map\n$u^U:L\\Phi^*K^U\\to K^U$ is a Frobenius coefficient morphism for\n$\\Phi=\\Phi^m$ on $K^U$, and it is not required to be invertible.\nHence $\\operatorname{LT}_{\\bar x}(u^U)=0$ by the zero-stalk vanishing\nof [lem-trf-local-term-locality]: item (3) in the smooth-curve setting\nof [d-curve-pieces], and item (2) for general $X_0$, the graph of $\\Phi$\nbeing contracting at $\\bar x$ because\n$\\Phi^{\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}$\n(verified in the proof of item (3) there). This is the only step of the\nproof that is not formal: it rests on Varshavsky's\ncontracting-correspondence theorem, quoted in that lemma.",
+      "uses": [
+        "def-weil-extension-by-zero",
+        "lem-trf-local-term-locality",
+        "d-curve-pieces"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: the closed piece.* By [d-curve-pieces],\n$u^Z=[i,i]_!(v_{\\bar x})$ is the coefficient pushforward of\n[def-trf-coefficient-pushforward] along the proper pushforward diagram\n$(i,i)$ from the point correspondence\n$c_{\\mathrm{pt}}=(\\operatorname{id},\\operatorname{id})$ on\n$\\operatorname{Spec}k$, with coefficient $v_{\\bar x}$ on $K_{\\bar x}$, to\nthe graph $c=(\\operatorname{id}_X,\\Phi)$; the closed immersion $i$ is\nproper. The fixed scheme of $c_{\\mathrm{pt}}$ is $\\operatorname{Spec}k$,\nand the induced map of fixed schemes\n$h:\\operatorname{Spec}k\\to\\operatorname{Fix}(\\Phi)$ is the inclusion of\nthe component $\\bar x$. The proper pushforward compatibility\n[thm-trf-trace-proper-compatibility] gives\n\n$$\n\\operatorname{Tr}_c(u^Z)=h_*\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n$$\n\nwith $h_*$ the Borel–Moore pushforward of\n[def-trf-borel-moore-pushforward]. Since $h$ is an open-and-closed\nimmersion, $Lh^*Rh_*\\cong\\operatorname{id}$ and, by the triangle\nidentities, the unit $\\eta_h$ and the counit $\\varepsilon_h$ in the\ndefinition of $h_*$ restrict to identities along $h$. Hence\n$\\operatorname{Tr}_c(u^Z)|_{\\bar x}=\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})$\nand\n\n$$\n\\operatorname{LT}_{\\bar x}(u^Z)\n=\\int_{\\operatorname{Spec}k}\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n=\\operatorname{LT}_s(v_{\\bar x})\n=\\operatorname{tr}_A\\bigl(v_{\\bar x}\\mid K_{\\bar x}\\bigr)\n$$\n\nby the point normalization of [prop-trf-pairing-local-decomposition],\nthe stalk $K_{\\bar x}$ being perfect by [fix-lem-finite-tor-perfect].",
+      "uses": [
+        "d-curve-pieces",
+        "def-trf-coefficient-pushforward",
+        "thm-trf-trace-proper-compatibility",
+        "def-trf-borel-moore-pushforward",
+        "prop-trf-pairing-local-decomposition",
+        "fix-lem-finite-tor-perfect"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: conclusion.* Steps 1–3 give\n$\\operatorname{LT}_{\\bar x}(v)=\\operatorname{tr}_A(v_{\\bar x}\\mid K_{\\bar x})$.\nFor $v=u_m$ the stalk map $u_{m,\\bar x}$ is the local geometric\nFrobenius $F_{x,m}$ of [def-trf-frobenius-operators], as recorded in\n[d-curve-pieces], which proves the first formula. No step inverts $v$.",
+      "uses": [
+        "def-trf-frobenius-operators",
+        "d-curve-pieces"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "d-curve-pieces",
+    "thm-sf-preservation-class",
     "thm-trf-frobenius-fixed-points",
     "def-trf-local-term",
-    "lem-trf-local-term-point"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 1: the pieces.* Let $i:\\{\\bar x\\}\\hookrightarrow X$,\n$j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$, and let\n$K^Z=Ri_*i^*K$, $K^U=j_!j^*K$ with the induced maps $u^Z,u^U$ of\n[d-curve-pieces] for the coefficient morphism $v$. By\n[prop-trf-trace-class-additivity], item (2),\n\n$$\n\\operatorname{LT}_{\\bar x}(v)=\\operatorname{LT}_{\\bar x}(u^Z)\n+\\operatorname{LT}_{\\bar x}(u^U).\n$$",
-   "uses": [
-    "d-curve-pieces",
-    "prop-trf-trace-class-additivity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2: the open piece.* The stalk of the extension by zero at the\npoint $\\bar x\\notin U$ vanishes, $(K^U)_{\\bar x}=(j_!j^*K)_{\\bar x}=0$\n([def-weil-extension-by-zero]). The map\n$u^U:L\\Phi^*K^U\\to K^U$ is a Frobenius coefficient morphism for\n$\\Phi=\\Phi^m$ on $K^U$, and it is not required to be invertible.\nHence $\\operatorname{LT}_{\\bar x}(u^U)=0$ by the zero-stalk vanishing\nof [lem-trf-local-term-locality]: item (3) in the smooth-curve setting\nof [d-curve-pieces], and item (2) for general $X_0$, the graph of $\\Phi$\nbeing contracting at $\\bar x$ because\n$\\Phi^{\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}$\n(verified in the proof of item (3) there). This is the only step of the\nproof that is not formal: it rests on Varshavsky's\ncontracting-correspondence theorem, quoted in that lemma.",
-   "uses": [
+    "lem-trf-local-term-point",
+    "prop-trf-trace-class-additivity",
     "def-weil-extension-by-zero",
     "lem-trf-local-term-locality",
-    "d-curve-pieces"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3: the closed piece.* By [d-curve-pieces],\n$u^Z=[i,i]_!(v_{\\bar x})$ is the coefficient pushforward of\n[def-trf-coefficient-pushforward] along the proper pushforward diagram\n$(i,i)$ from the point correspondence\n$c_{\\mathrm{pt}}=(\\operatorname{id},\\operatorname{id})$ on\n$\\operatorname{Spec}k$, with coefficient $v_{\\bar x}$ on $K_{\\bar x}$, to\nthe graph $c=(\\operatorname{id}_X,\\Phi)$; the closed immersion $i$ is\nproper. The fixed scheme of $c_{\\mathrm{pt}}$ is $\\operatorname{Spec}k$,\nand the induced map of fixed schemes\n$h:\\operatorname{Spec}k\\to\\operatorname{Fix}(\\Phi)$ is the inclusion of\nthe component $\\bar x$. The proper pushforward compatibility\n[thm-trf-trace-proper-compatibility] gives\n\n$$\n\\operatorname{Tr}_c(u^Z)=h_*\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n$$\n\nwith $h_*$ the Borel–Moore pushforward of\n[def-trf-borel-moore-pushforward]. Since $h$ is an open-and-closed\nimmersion, $Lh^*Rh_*\\cong\\operatorname{id}$ and, by the triangle\nidentities, the unit $\\eta_h$ and the counit $\\varepsilon_h$ in the\ndefinition of $h_*$ restrict to identities along $h$. Hence\n$\\operatorname{Tr}_c(u^Z)|_{\\bar x}=\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})$\nand\n\n$$\n\\operatorname{LT}_{\\bar x}(u^Z)\n=\\int_{\\operatorname{Spec}k}\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n=\\operatorname{LT}_s(v_{\\bar x})\n=\\operatorname{tr}_A\\bigl(v_{\\bar x}\\mid K_{\\bar x}\\bigr)\n$$\n\nby the point normalization of [prop-trf-pairing-local-decomposition],\nthe stalk $K_{\\bar x}$ being perfect by [fix-lem-finite-tor-perfect].",
-   "uses": [
-    "d-curve-pieces",
     "def-trf-coefficient-pushforward",
     "thm-trf-trace-proper-compatibility",
     "def-trf-borel-moore-pushforward",
     "prop-trf-pairing-local-decomposition",
-    "fix-lem-finite-tor-perfect"
-   ],
-   "elementary": false
+    "fix-lem-finite-tor-perfect",
+    "def-trf-frobenius-operators"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-frob/thm-trf-frobenius-local-term.md",
+    "place": "## Proof"
   },
-  {
-   "text": "*Step 4: conclusion.* Steps 1–3 give\n$\\operatorname{LT}_{\\bar x}(v)=\\operatorname{tr}_A(v_{\\bar x}\\mid K_{\\bar x})$.\nFor $v=u_m$ the stalk map $u_{m,\\bar x}$ is the local geometric\nFrobenius $F_{x,m}$ of [def-trf-frobenius-operators], as recorded in\n[d-curve-pieces], which proves the first formula. No step inverts $v$.",
-   "uses": [
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "padded_uses",
+    "cites_remark"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2356,
+  "blueprint_uses": [
+    "d-curve-pieces",
+    "def-trf-borel-moore-pushforward",
+    "def-trf-coefficient-conventions",
+    "def-trf-coefficient-pushforward",
+    "def-trf-frobenius-coefficient-morphism",
     "def-trf-frobenius-operators",
-    "d-curve-pieces"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "d-curve-pieces",
-  "thm-sf-preservation-class",
-  "thm-trf-frobenius-fixed-points",
-  "def-trf-local-term",
-  "lem-trf-local-term-point",
-  "prop-trf-trace-class-additivity",
-  "def-weil-extension-by-zero",
-  "lem-trf-local-term-locality",
-  "def-trf-coefficient-pushforward",
-  "thm-trf-trace-proper-compatibility",
-  "def-trf-borel-moore-pushforward",
-  "prop-trf-pairing-local-decomposition",
-  "fix-lem-finite-tor-perfect",
-  "def-trf-frobenius-operators"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-frob/thm-trf-frobenius-local-term.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "padded_uses",
-  "cites_remark"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 2356,
- "blueprint_uses": [
-  "d-curve-pieces",
-  "def-trf-borel-moore-pushforward",
-  "def-trf-coefficient-conventions",
-  "def-trf-coefficient-pushforward",
-  "def-trf-frobenius-coefficient-morphism",
-  "def-trf-frobenius-operators",
-  "def-trf-iterated-weil-map",
-  "def-trf-local-term",
-  "def-weil-extension-by-zero",
-  "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties",
-  "fix-lem-finite-tor-perfect",
-  "lem-trf-frobenius-degree-formula",
-  "lem-trf-local-term-locality",
-  "lem-trf-local-term-point",
-  "prop-trf-pairing-local-decomposition",
-  "prop-trf-trace-class-additivity",
-  "rem-ptr-trf-admissibility-12",
-  "thm-sf-preservation-class",
-  "thm-trf-frobenius-fixed-points",
-  "thm-trf-trace-proper-compatibility"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.ProEtale.GeometricOperations.localTerm_traceClass_eq_trace",
-     "module": "WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve",
-     "lines": [
-      96,
-      118
-     ],
-     "kind": "theorem",
-     "sorry": true,
-     "partial": "`thm-trf-frobenius-local-term`, subsection"
+    "def-trf-iterated-weil-map",
+    "def-trf-local-term",
+    "def-weil-extension-by-zero",
+    "def-weil-finite-field-fiber",
+    "def-weil-scheme-morphism-properties",
+    "fix-lem-finite-tor-perfect",
+    "lem-trf-frobenius-degree-formula",
+    "lem-trf-local-term-locality",
+    "lem-trf-local-term-point",
+    "prop-trf-pairing-local-decomposition",
+    "prop-trf-trace-class-additivity",
+    "rem-ptr-trf-admissibility-12",
+    "thm-sf-preservation-class",
+    "thm-trf-frobenius-fixed-points",
+    "thm-trf-trace-proper-compatibility"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.ProEtale.GeometricOperations.localTerm_traceClass_eq_trace",
+          "module": "WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve",
+          "lines": [
+            96,
+            118
+          ],
+          "kind": "theorem",
+          "sorry": true,
+          "partial": "`thm-trf-frobenius-local-term`, subsection"
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-trace-formula",
+  "unit": "sk-p-frob",
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and the\ncoefficient conventions,\n$A=A_{E,n}$, let $X_0$ be\nseparated of finite type\nover $k_0$, put $X=X_0\\times_{k_0}k$, and let\n$(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex.\nLet $u_m:L\\Phi^m{}^*K\\to K$ be the scheme-Frobenius map of\n[def-trf-iterated-weil-map], and consider the graph correspondence\n$c=(\\operatorname{id}_X,\\Phi^m)$ with $u_m$. For each\n$y\\in X_0(\\mathbf F_{q^m})$, viewed via\n[thm-trf-frobenius-fixed-points] as a closed-and-open component of\n$\\operatorname{Fix}(\\Phi^m)$, the local\nterm is\n\n$$\n\\operatorname{LT}_y(u_m)\n=\n\\operatorname{tr}_A\\bigl(F_{y,m}\\mid K_{\\bar y}\\bigr)\n$$\n\nin $A$, where $F_{y,m}$ is the\nlocal geometric Frobenius\noperator of [def-trf-frobenius-operators] and $K_{\\bar y}$ is the\nstalk complex.\n\nMore generally, let $K\\in D^b_{ctf}(X,A)$ carry no Weil structure and\nlet $v:L\\Phi^{m*}K\\to K$ be an arbitrary, not necessarily invertible,\nmorphism, for instance the iterate $\\psi_m$ of a Frobenius coefficient\nmorphism $\\psi$ of [def-trf-frobenius-coefficient-morphism]. Then for\nthe graph correspondence $(\\operatorname{id}_X,\\Phi^m)$ with $v$\n\n$$\n\\operatorname{LT}_y(v)=\\operatorname{tr}_A\\bigl(v_{\\bar y}\\mid K_{\\bar y}\\bigr),\n$$\n\nwhere $v_{\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$\nis the stalk map at the fixed point $\\bar y$. The first formula is the\ncase $v=u_m$, whose stalk map at $\\bar y$ is $F_{y,m}$\n([def-trf-frobenius-operators]).",
+    "proof": [
+      {
+        "text": "The proof follows the curve pieces of [d-curve-pieces]. Fix\n$y\\in X_0(\\mathbf F_{q^m})$, put $x=y$, $\\Phi=\\Phi^m$, and let $v$ be\n$u_m$ or an arbitrary morphism $L\\Phi^*K\\to K$ as in the statement. All\nmorphisms below are separated and of finite type between separated\nfinite-type $k$-schemes, hence exceptionally admissible at the finite\nstage ([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]).",
+        "uses": [
+          "d-curve-pieces",
+          "thm-sf-preservation-class"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 0: the fixed point.* By [thm-trf-frobenius-fixed-points] the\nfixed scheme $\\operatorname{Fix}(\\Phi)$ is a finite disjoint union of\ncopies of $\\operatorname{Spec}k$, one for each point of\n$X_0(\\mathbf F_{q^m})$. So it is proper over $s$ with finitely many\nopen-and-closed components, the geometric point $\\bar x$ is one of them,\na reduced point component, and $\\operatorname{LT}_{\\bar x}$ is the local\nterm of [def-trf-local-term] computed as in [lem-trf-local-term-point].",
+        "uses": [
+          "thm-trf-frobenius-fixed-points",
+          "def-trf-local-term",
+          "lem-trf-local-term-point"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 1: the pieces.* Let $i:\\{\\bar x\\}\\hookrightarrow X$,\n$j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$, and let\n$K^Z=Ri_*i^*K$, $K^U=j_!j^*K$ with the induced maps $u^Z,u^U$ of\n[d-curve-pieces] for the coefficient morphism $v$. By\n[prop-trf-trace-class-additivity], item (2),\n\n$$\n\\operatorname{LT}_{\\bar x}(v)=\\operatorname{LT}_{\\bar x}(u^Z)\n+\\operatorname{LT}_{\\bar x}(u^U).\n$$",
+        "uses": [
+          "d-curve-pieces",
+          "prop-trf-trace-class-additivity"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 2: the open piece.* The stalk of the extension by zero at the\npoint $\\bar x\\notin U$ vanishes, $(K^U)_{\\bar x}=(j_!j^*K)_{\\bar x}=0$\n([def-weil-extension-by-zero]). The map\n$u^U:L\\Phi^*K^U\\to K^U$ is a Frobenius coefficient morphism for\n$\\Phi=\\Phi^m$ on $K^U$, and it is not required to be invertible.\nHence $\\operatorname{LT}_{\\bar x}(u^U)=0$ by the zero-stalk vanishing\nof [lem-trf-local-term-locality]: item (3) in the smooth-curve setting\nof [d-curve-pieces], and item (2) for general $X_0$, the graph of $\\Phi$\nbeing contracting at $\\bar x$ because\n$\\Phi^{\\cdot}(\\mathcal I_{\\bar x})\\mathcal O_X\\subset\\mathcal I_{\\bar x}^{\\,q^m}$\n(verified in the proof of item (3) there). This is the only step of the\nproof that is not formal: it rests on Varshavsky's\ncontracting-correspondence theorem, quoted in that lemma.",
+        "uses": [
+          "def-weil-extension-by-zero",
+          "lem-trf-local-term-locality",
+          "d-curve-pieces"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 3: the closed piece.* By [d-curve-pieces],\n$u^Z=[i,i]_!(v_{\\bar x})$ is the coefficient pushforward of\n[def-trf-coefficient-pushforward] along the proper pushforward diagram\n$(i,i)$ from the point correspondence\n$c_{\\mathrm{pt}}=(\\operatorname{id},\\operatorname{id})$ on\n$\\operatorname{Spec}k$, with coefficient $v_{\\bar x}$ on $K_{\\bar x}$, to\nthe graph $c=(\\operatorname{id}_X,\\Phi)$; the closed immersion $i$ is\nproper. The fixed scheme of $c_{\\mathrm{pt}}$ is $\\operatorname{Spec}k$,\nand the induced map of fixed schemes\n$h:\\operatorname{Spec}k\\to\\operatorname{Fix}(\\Phi)$ is the inclusion of\nthe component $\\bar x$. The proper pushforward compatibility\n[thm-trf-trace-proper-compatibility] gives\n\n$$\n\\operatorname{Tr}_c(u^Z)=h_*\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n$$\n\nwith $h_*$ the Borel–Moore pushforward of\n[def-trf-borel-moore-pushforward]. Since $h$ is an open-and-closed\nimmersion, $Lh^*Rh_*\\cong\\operatorname{id}$ and, by the triangle\nidentities, the unit $\\eta_h$ and the counit $\\varepsilon_h$ in the\ndefinition of $h_*$ restrict to identities along $h$. Hence\n$\\operatorname{Tr}_c(u^Z)|_{\\bar x}=\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})$\nand\n\n$$\n\\operatorname{LT}_{\\bar x}(u^Z)\n=\\int_{\\operatorname{Spec}k}\\operatorname{Tr}_{c_{\\mathrm{pt}}}(v_{\\bar x})\n=\\operatorname{LT}_s(v_{\\bar x})\n=\\operatorname{tr}_A\\bigl(v_{\\bar x}\\mid K_{\\bar x}\\bigr)\n$$\n\nby the point normalization of [prop-trf-pairing-local-decomposition],\nthe stalk $K_{\\bar x}$ being perfect by [fix-lem-finite-tor-perfect].",
+        "uses": [
+          "d-curve-pieces",
+          "def-trf-coefficient-pushforward",
+          "thm-trf-trace-proper-compatibility",
+          "def-trf-borel-moore-pushforward",
+          "prop-trf-pairing-local-decomposition",
+          "fix-lem-finite-tor-perfect"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 4: conclusion.* Steps 1–3 give\n$\\operatorname{LT}_{\\bar x}(v)=\\operatorname{tr}_A(v_{\\bar x}\\mid K_{\\bar x})$.\nFor $v=u_m$ the stalk map $u_{m,\\bar x}$ is the local geometric\nFrobenius $F_{x,m}$ of [def-trf-frobenius-operators], as recorded in\n[d-curve-pieces], which proves the first formula. No step inverts $v$.",
+        "uses": [
+          "def-trf-frobenius-operators",
+          "d-curve-pieces"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- },
- "chapter": "sec-trace-formula",
- "unit": "sk-p-frob"
 }

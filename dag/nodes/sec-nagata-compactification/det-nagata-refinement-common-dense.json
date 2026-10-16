@@ -1,0 +1,74 @@
+{
+  "id": "det-nagata-refinement-common-dense",
+  "kind": "statement",
+  "title": "The closure of the diagonal is a common dense refinement",
+  "statement": "Let $S$ be qcqs, let $f:X\\to S$ be separated of finite type, and let\n$c_k=(X\\xrightarrow{j_k}\\overline X_k\\xrightarrow{p_k}S)$, $k=1,2$, be\ncompactifications of $f$. Let $Z$ be the scheme-theoretic image of\n\n$$\n\\delta=(j_1,j_2):X\\longrightarrow P:=\\overline X_1\\times_S\\overline X_2 ,\n$$\n\nwith projections $q_k:Z\\to\\overline X_k$. Then $\\delta$ factors as a\nquasi-compact, scheme-theoretically dense open immersion $j:X\\to Z$ followed\nby the closed immersion $Z\\hookrightarrow P$; the structure map $Z\\to S$ is\nproper, so $c=(X\\xrightarrow{j}Z\\to S)$ is a dense compactification; and\neach $q_k$ is a refinement $c\\to c_k$ in the sense of\n[det-nagata-definition-refinement], i.e. $q_kj=j_k$ and\n$q_k^{-1}(j_k(X))=j(X)$.\n\nConsequently every finite nonempty family of compactifications of $f$ has a\ncommon dense refinement.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md",
+    "place": "node det-nagata-refinement-common-dense, order None"
+  },
+  "stmt_deps": [
+    "det-nagata-definition-refinement",
+    "def-nagata-dense-compactification"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1: $\\delta$ is a quasi-compact immersion.* Let\n$P^\\circ=\\mathrm{pr}_1^{-1}(j_1(X))=X\\times_S\\overline X_2$, an open of $P$.\nThe map $\\delta$ lands in $P^\\circ$, and as a map to\n$X\\times_S\\overline X_2$ it is the graph $\\Gamma=(\\mathrm{id}_X,j_2)$ of\n$j_2:X\\to\\overline X_2$. Since $\\overline X_2\\to S$ is proper, hence\nseparated, the graph $\\Gamma$ is a closed immersion (it is the base change\nof the diagonal of $\\overline X_2/S$ along $j_2\\times\\mathrm{id}$). The\nopen immersion $P^\\circ\\hookrightarrow P$ is the base change of $j_1$, which\nis quasi-compact ([lemma-nagata-open-immersion-qc-over-separated-target]:\n$p_1\\circ j_1=f$ is quasi-compact and $p_1$ is separated). Hence\n$\\delta=(P^\\circ\\hookrightarrow P)\\circ\\Gamma$ is a quasi-compact immersion.",
+      "uses": [
+        "lemma-nagata-open-immersion-qc-over-separated-target"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the closure.* $P$ is proper over $S$ (base change of $p_2$ along\n$p_1$, followed by $p_1$), hence quasi-separated. By\n[lemma-nagata-immersion-open-in-scheme-image], $\\delta$ factors through its\nscheme-theoretic image $Z$ as a quasi-compact open immersion $j:X\\to Z$\nwhich is scheme-theoretically dense. $Z$ is closed in $P$, so $Z\\to S$ is\nproper. Thus $c$ is a dense compactification, and $q_k\\circ j=\n\\mathrm{pr}_k\\circ\\delta=j_k$. Each $q_k$ is an $S$-morphism.",
+      "uses": [
+        "lemma-nagata-immersion-open-in-scheme-image"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: inverse image of $X$.* The scheme-theoretic image of a quasi-compact\nmorphism commutes with restriction to opens of the target\n([lemma-nagata-scheme-image-restrict-open]). Hence\n$Z\\cap P^\\circ$ is the scheme-theoretic image of\n$\\Gamma:X\\to P^\\circ$. Since $\\Gamma$ is a closed immersion, its\nscheme-theoretic image is $\\Gamma(X)$ itself. Therefore\n\n$$\nq_1^{-1}(j_1(X))=Z\\cap\\mathrm{pr}_1^{-1}(j_1(X))=Z\\cap P^\\circ=\\Gamma(X)=j(X).\n$$\n\nThe same argument with the roles of the factors exchanged gives\n$q_2^{-1}(j_2(X))=j(X)$. So $q_1,q_2$ are refinements $c\\to c_1$,\n$c\\to c_2$.",
+      "uses": [
+        "lemma-nagata-scheme-image-restrict-open"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: finite families.* For a family $c_1,\\ldots,c_n$ with $n\\geq1$,\nargue by induction: for $n=1$ apply the construction to $c_1,c_1$ (or take\nthe dense refinement of $c_1$ by schematic closure); given a common dense\nrefinement $c'$ of $c_1,\\ldots,c_{n-1}$, Steps 1–3 applied to $c',c_n$ give a\ndense $c$ with refinements $c\\to c'$ and $c\\to c_n$, and composing $c\\to c'$\nwith $c'\\to c_k$ gives refinements $c\\to c_k$, since refinements compose\n([det-nagata-definition-refinement]).",
+      "uses": [
+        "det-nagata-definition-refinement"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-scheme-image-restrict-open",
+    "det-nagata-definition-refinement"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-nagata-definition-refinement",
+    "def-nagata-dense-compactification"
+  ],
+  "uses_not_cited": [
+    "def-nagata-dense-compactification"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

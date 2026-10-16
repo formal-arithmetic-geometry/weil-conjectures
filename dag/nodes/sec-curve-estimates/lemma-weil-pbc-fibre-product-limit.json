@@ -1,182 +1,201 @@
 {
- "id": "lemma-weil-pbc-fibre-product-limit",
- "blueprint": {
-  "is": "lemma-weil-pbc-fibre-product-limit",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Base change commutes with the neighbourhood limit",
- "statement": "If $f:X\\to S$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions], then\n\n$$\n X\\times_SS_{(\\bar s)}\\xrightarrow{\\sim}\n \\varprojlim_{(V,\\bar v)}X\\times_SV.\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
-  "place": "node lemma-weil-pbc-fibre-product-limit, order 945"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-pc-fibre-product"
- ],
- "proof": [
-  {
-   "text": "Apply strictHenselization_properties from [def-weil-pbc-strict-henselization-limit] to obtain initiality of the small affine representative functor F, cofilteredness of its source J, and the limit property of strictHenselizationCone. Whisker that cone by opOp J. The natural isomorphism with components (Spec A).isoSpec.inv identifies the resulting spectrum-of-global-sections diagram with F followed by the neighbourhood scheme diagram; naturality is Scheme.isoSpec_inv_naturality. Postcompose the cone by this isomorphism, retaining its vertex and its prescribed affine legs. IsLimit.postcomposeHomEquiv transports the limit property.",
-   "uses": [
-    "def-weil-pbc-strict-henselization-limit"
-   ],
-   "elementary": false
+  "id": "lemma-weil-pbc-fibre-product-limit",
+  "blueprint": {
+    "is": "lemma-weil-pbc-fibre-product-limit",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "Cofilteredness makes J connected. Mathlib CostructuredArrow.CreatesConnected.raiseCone lifts the affine scheme cone to Over S with the same underlying scheme and the same underlying legs; isLimitRaiseCone makes it limiting in Over S. Extend this cone along the initial functor F using Functor.Initial.extendCone, the limit counterpart of [lem-weil-pbc-colimit-initial-full-subcategory]. Take p to be the structure map of its vertex and q its cone legs. Functor.Initial.extendCone_obj_π_app' applied to the identity of F(j) proves that the extended leg at F(j) equals the original affine leg, which is the required colimit-spectrum formula.",
-   "uses": [
+  "kind": "statement",
+  "title": "Base change commutes with the neighbourhood limit",
+  "statement": "If $f:X\\to S$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions], then\n\n$$\n X\\times_SS_{(\\bar s)}\\xrightarrow{\\sim}\n \\varprojlim_{(V,\\bar v)}X\\times_SV.\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
+    "place": "node lemma-weil-pbc-fibre-product-limit, order 945"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
     "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The fibre-product functor [def-pc-fibre-product] Over.pullback f is a right adjoint by Over.mapPullbackAdj and hence preserves limits. Over.forget X preserves connected limits, so the composite takes the raised affine cone to a limiting scheme cone. The unit isomorphism of Functor.Initial.conesEquiv identifies that cone with the restriction of the base-changed extended cone. Transport the limit property through this cone isomorphism and use Functor.Initial.isLimitWhiskerEquiv to obtain the desired full-neighbourhood limit. This is the categorical implementation of comparing the X-components along common refinements and invoking the pullback universal property; quasi-compactness and quasi-separatedness are unnecessary but their original hypotheses are retained.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-pc-fibre-product"
- ],
- "proof_origin": {
-  "by": "agent A2 stage 3",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
-  "place": "DAG universal-property proof, implemented using connected over-category limits and initial cone extension"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "base change of a scheme over a stage along a cofiltered limit of schemes with affine transition maps",
-   "results": "No single Mathlib declaration for the general base-change limit; project node lem-weil-pbc-scheme-over-limit records the source theorem and closed source declaration.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsLimit of pullback cone over affine transition inverse system of schemes",
-   "results": "Only affine-transition limit infrastructure and open-subscheme special cases; no general pullback/base-change theorem.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'baseChangeCone|isLimitBaseChange|pullback.*limit|limit.*pullback' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "No matching declaration in pinned Mathlib; the project source has AlgebraicGeometry.isLimitBaseChangeCone, already represented by lem-weil-pbc-scheme-over-limit.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 945,
- "blueprint_uses": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-strict-henselization-limit"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "For a quasi-compact and quasi-separated $f:X\\to S$,\n\n$$\nX\\times_SS_{(\\bar s)}\\cong\n\\varprojlim_{(V,\\bar v)}(X\\times_SV).\n$$",
-   "proof": "On affine charts $X_0=\\operatorname{Spec}B$ over\n$S_0=\\operatorname{Spec}A$, the left side has coordinate ring\n$B\\otimes_A\\varinjlim A_V$. Tensor product commutes with filtered colimits,\nso this is $\\varinjlim(B\\otimes_AA_V)$, the coordinate ring of the inverse\nlimit on the right. Quasi-compactness gives finitely many charts and\nquasi-separatedness gives quasi-compact pairwise intersections; the affine\nidentifications therefore glue.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+    "def-pc-fibre-product"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
-     "lines": [
-      279,
-      294
-     ],
-     "kind": "def",
-     "sorry": false
+      "text": "Apply strictHenselization_properties from [def-weil-pbc-strict-henselization-limit] to obtain initiality of the small affine representative functor F, cofilteredness of its source J, and the limit property of strictHenselizationCone. Whisker that cone by opOp J. The natural isomorphism with components (Spec A).isoSpec.inv identifies the resulting spectrum-of-global-sections diagram with F followed by the neighbourhood scheme diagram; naturality is Scheme.isoSpec_inv_naturality. Postcompose the cone by this isomorphism, retaining its vertex and its prescribed affine legs. IsLimit.postcomposeHomEquiv transports the limit property.",
+      "uses": [
+        "def-weil-pbc-strict-henselization-limit"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Cofilteredness makes J connected. Mathlib CostructuredArrow.CreatesConnected.raiseCone lifts the affine scheme cone to Over S with the same underlying scheme and the same underlying legs; isLimitRaiseCone makes it limiting in Over S. Extend this cone along the initial functor F using Functor.Initial.extendCone, the limit counterpart of [lem-weil-pbc-colimit-initial-full-subcategory]. Take p to be the structure map of its vertex and q its cone legs. Functor.Initial.extendCone_obj_π_app' applied to the identity of F(j) proves that the extended leg at F(j) equals the original affine leg, which is the required colimit-spectrum formula.",
+      "uses": [
+        "def-weil-pbc-strict-henselization-limit",
+        "lem-weil-pbc-colimit-initial-full-subcategory"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The fibre-product functor [def-pc-fibre-product] Over.pullback f is a right adjoint by Over.mapPullbackAdj and hence preserves limits. Over.forget X preserves connected limits, so the composite takes the raised affine cone to a limiting scheme cone. The unit isomorphism of Functor.Initial.conesEquiv identifies that cone with the restriction of the base-changed extended cone. Transport the limit property through this cone isomorphism and use Functor.Initial.isLimitWhiskerEquiv to obtain the desired full-neighbourhood limit. This is the categorical implementation of comparing the X-components along common refinements and invoking the pullback universal property; quasi-compactness and quasi-separatedness are unnecessary but their original hypotheses are retained.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-colimit-initial-full-subcategory"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lemma-weil-pbc-fibre-product-limit",
-  "worker": "fibre_limit",
-  "summary": "Repaired the returned split by replacing the unsupported directed-system comparison with a direct universal-property proof. The strict-henselization cone is limiting over affine representatives, all affine neighbourhoods, and then all pointed neighbourhoods. A compatible cone to the fibre products supplies one map to the strict henselization and, by cofilteredness, one map to X; fibre-product uniqueness completes the proof. Quasi-compactness and quasi-separatedness are unused.",
-  "blueprint": "Step 1 realizes the blueprint's affine-neighbourhood limit comparison using the existing strict-henselization definition and initial-subcategory theorem. Step 2 supplies the details of its final global fibre-product limit identification by the universal properties. The blueprint's chart-gluing sketch is unnecessary for this general categorical argument. Blueprint search found no same-as node.",
+  ],
+  "proof_deps": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-pc-fibre-product"
+  ],
+  "proof_origin": {
+    "by": "agent A2 stage 3",
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
+    "place": "DAG universal-property proof, implemented using connected over-category limits and initial cone extension"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "base change of a scheme over a stage along a cofiltered limit of schemes with affine transition maps",
+      "results": "No single Mathlib declaration for the general base-change limit; project node lem-weil-pbc-scheme-over-limit records the source theorem and closed source declaration.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsLimit of pullback cone over affine transition inverse system of schemes",
+      "results": "Only affine-transition limit infrastructure and open-subscheme special cases; no general pullback/base-change theorem.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'baseChangeCone|isLimitBaseChange|pullback.*limit|limit.*pullback' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "No matching declaration in pinned Mathlib; the project source has AlgebraicGeometry.isLimitBaseChangeCone, already represented by lem-weil-pbc-scheme-over-limit.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 945,
+  "blueprint_uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-strict-henselization-limit"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "For a quasi-compact and quasi-separated $f:X\\to S$,\n\n$$\nX\\times_SS_{(\\bar s)}\\cong\n\\varprojlim_{(V,\\bar v)}(X\\times_SV).\n$$",
+      "proof": "On affine charts $X_0=\\operatorname{Spec}B$ over\n$S_0=\\operatorname{Spec}A$, the left side has coordinate ring\n$B\\otimes_A\\varinjlim A_V$. Tensor product commutes with filtered colimits,\nso this is $\\varinjlim(B\\otimes_AA_V)$, the coordinate ring of the inverse\nlimit on the right. Quasi-compactness gives finitely many charts and\nquasi-separatedness gives quasi-compact pairwise intersections; the affine\nidentifications therefore glue.",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback",
+          "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization",
+          "lines": [
+            279,
+            294
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lemma-weil-pbc-fibre-product-limit",
+    "worker": "fibre_limit",
+    "summary": "Repaired the returned split by replacing the unsupported directed-system comparison with a direct universal-property proof. The strict-henselization cone is limiting over affine representatives, all affine neighbourhoods, and then all pointed neighbourhoods. A compatible cone to the fibre products supplies one map to the strict henselization and, by cofilteredness, one map to X; fibre-product uniqueness completes the proof. Quasi-compactness and quasi-separatedness are unused.",
+    "blueprint": "Step 1 realizes the blueprint's affine-neighbourhood limit comparison using the existing strict-henselization definition and initial-subcategory theorem. Step 2 supplies the details of its final global fibre-product limit identification by the universal properties. The blueprint's chart-gluing sketch is unnecessary for this general categorical argument. Blueprint search found no same-as node.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+        "why": "Its clauses (1) and (2) transfer the affine-representative scheme limit to all pointed etale neighbourhoods; no node in sk-prop-h2 states this generic category-theoretic result."
+      },
+      {
+        "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+        "why": "Cofilteredness supplies a common refinement to compare the X-components of any two cone maps; no node in sk-prop-h2 states it."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
-    "why": "Its clauses (1) and (2) transfer the affine-representative scheme limit to all pointed etale neighbourhoods; no node in sk-prop-h2 states this generic category-theoretic result."
-   },
-   {
-    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "why": "Cofilteredness supplies a common refinement to compare the X-components of any two cone maps; no node in sk-prop-h2 states it."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-fp3",
-  "group": "H1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fp3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the returns of 13:14 and 14:33 (R-fpl). Latest return: point 1 (C4/C2, unsupported directed-cofinality in step 2) repaired by the direct universal-property proof the return proposed: the directed reindexing and lem-weil-pbc-scheme-over-limit tool use are gone; point 2 (E2/B4, S_0 used twice, J_sbar smallness, proof_deps) is moot because step 1 with stage 0 is removed, and proof_deps is now the union of the steps' uses including def-pc-fibre-product. Statement unchanged (blueprint node lemma-weil-pbc-fibre-product-limit, order 945); stmt_deps adds def-weil-pbc-strict-henselization-limit and def-pc-fibre-product, which the statement uses. Step 1: def-weil-pbc-strict-henselization-limit gives S_(sbar)=Spec colim over J_sbar^op with J_sbar small; lem-weil-pbc-spec-small-colimit-limit makes the projections a limit cone over J_sbar in Schemes; transport along the essentially surjective full inclusion J_sbar into affine neighbourhoods plus clause (2) of lem-weil-pbc-colimit-initial-full-subcategory gives the limit over all affine neighbourhoods; lemma-weil-pbc-affine-neighbourhood-cofinal (affine subcategory initial) and lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered, (S,sbar) an object) are exactly the hypotheses of clause (1), applied in Sch^op, giving the limit over N_sbar; p_S is the structure map and p_V lie over S by cone compatibility. Step 2: checked by hand: V-components of a compatible cone form a cone (q(id x h)=hq), X-components are constant along morphisms (p(id x h)=p) hence equal for all V by common refinement, f a = v_S = p_S b from g_S, def-pc-fibre-product gives existence and uniqueness of T -> X x_S S_(sbar); uniqueness of the induced map checked via the step-1 limit and the component at S. Tool uses (both sk-thm-p1, generic black boxes, C8) accepted: lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. Small case: diagram reduced to (S,sbar) gives X x_S S = X. qcqs hypothesis unused, statement unchanged, no E7. Only the item's node and report changed, one commit, review section present; node unchanged on sheaf-dag since merge base 331bc5e29. No new nodes, no Mathlib leaves. 14:40-14:42 UTC."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit",
-  "declaration": "AlgebraicGeometry.fibre_product_neighbourhood_limit",
-  "statement": "theorem fibre_product_neighbourhood_limit {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : ∃ (p : Scheme.strictHenselizationScheme s ⟶ S) (q : (Functor.const (Scheme.pointSmallEtale s).fiber.Elements).obj (Over.mk p) ⟶ CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S), (∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (q.app ((Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j))).left = (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv) ∧ Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone { pt := Over.mk p, π := q }))",
-  "by": "R1",
-  "date": "2026-10-12",
-  "file": "lean/Sheaf/AlgebraicGeometry/FibreProductNeighbourhoodLimit.lean",
-  "branch": "sheaf-dag",
-  "existing": false,
-  "note": "Canonical full pointed-neighbourhood limit, encoded as IsLimit of the base-changed cone. The structure map and cone legs are uniquely specified by agreement with strictHenselizationCone on small affine representatives; no limit-existence hypotheses are added. Over.pullback uses the canonically symmetric V ×_S X order."
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-fp2",
-  "group": "R1",
-  "result": "pass"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
-  "result": "pass",
-  "landing": "20261012T042405-L-1813614",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-fp3",
+    "group": "H1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fp3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the returns of 13:14 and 14:33 (R-fpl). Latest return: point 1 (C4/C2, unsupported directed-cofinality in step 2) repaired by the direct universal-property proof the return proposed: the directed reindexing and lem-weil-pbc-scheme-over-limit tool use are gone; point 2 (E2/B4, S_0 used twice, J_sbar smallness, proof_deps) is moot because step 1 with stage 0 is removed, and proof_deps is now the union of the steps' uses including def-pc-fibre-product. Statement unchanged (blueprint node lemma-weil-pbc-fibre-product-limit, order 945); stmt_deps adds def-weil-pbc-strict-henselization-limit and def-pc-fibre-product, which the statement uses. Step 1: def-weil-pbc-strict-henselization-limit gives S_(sbar)=Spec colim over J_sbar^op with J_sbar small; lem-weil-pbc-spec-small-colimit-limit makes the projections a limit cone over J_sbar in Schemes; transport along the essentially surjective full inclusion J_sbar into affine neighbourhoods plus clause (2) of lem-weil-pbc-colimit-initial-full-subcategory gives the limit over all affine neighbourhoods; lemma-weil-pbc-affine-neighbourhood-cofinal (affine subcategory initial) and lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered, (S,sbar) an object) are exactly the hypotheses of clause (1), applied in Sch^op, giving the limit over N_sbar; p_S is the structure map and p_V lie over S by cone compatibility. Step 2: checked by hand: V-components of a compatible cone form a cone (q(id x h)=hq), X-components are constant along morphisms (p(id x h)=p) hence equal for all V by common refinement, f a = v_S = p_S b from g_S, def-pc-fibre-product gives existence and uniqueness of T -> X x_S S_(sbar); uniqueness of the induced map checked via the step-1 limit and the component at S. Tool uses (both sk-thm-p1, generic black boxes, C8) accepted: lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. Small case: diagram reduced to (S,sbar) gives X x_S S = X. qcqs hypothesis unused, statement unchanged, no E7. Only the item's node and report changed, one commit, review section present; node unchanged on sheaf-dag since merge base 331bc5e29. No new nodes, no Mathlib leaves. 14:40-14:42 UTC."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit",
+    "declaration": "AlgebraicGeometry.fibre_product_neighbourhood_limit",
+    "statement": "theorem fibre_product_neighbourhood_limit {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : ∃ (p : Scheme.strictHenselizationScheme s ⟶ S) (q : (Functor.const (Scheme.pointSmallEtale s).fiber.Elements).obj (Over.mk p) ⟶ CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S), (∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (q.app ((Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j))).left = (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv) ∧ Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone { pt := Over.mk p, π := q }))",
+    "by": "R1",
+    "date": "2026-10-12",
+    "file": "lean/Sheaf/AlgebraicGeometry/FibreProductNeighbourhoodLimit.lean",
+    "branch": "sheaf-dag",
+    "existing": false,
+    "note": "Canonical full pointed-neighbourhood limit, encoded as IsLimit of the base-changed cone. The structure map and cone legs are uniquely specified by agreement with strictHenselizationCone on small affine representatives; no limit-existence hypotheses are added. Over.pullback uses the canonically symmetric V ×_S X order."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-fp2",
+    "group": "R1",
+    "result": "pass"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T042405-L-1813614",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "If $f:X\\to S$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions], then\n\n$$\n X\\times_SS_{(\\bar s)}\\xrightarrow{\\sim}\n \\varprojlim_{(V,\\bar v)}X\\times_SV.\n$$",
+    "proof": [
+      {
+        "text": "On affine charts, tensor products commute with filtered colimits, and\nquasi-compactness gives finitely many charts while quasi-separatedness gives\nquasi-compact pairwise intersections; the affine identifications glue to the\ndisplayed identification of\n[def-weil-pbc-strict-henselization-limit].",
+        "uses": [
+          "def-weil-pbc-strict-henselization-limit"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "On affine charts $X_0=\\operatorname{Spec}B$ over\n$S_0=\\operatorname{Spec}A$, the left side has coordinate ring\n$B\\otimes_A\\varinjlim A_V$. Tensor product commutes with filtered colimits,\nso this is $\\varinjlim(B\\otimes_AA_V)$, the coordinate ring of the inverse\nlimit on the right. Quasi-compactness gives finitely many charts and\nquasi-separatedness gives quasi-compact pairwise intersections; the affine\nidentifications therefore glue.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

@@ -1,0 +1,68 @@
+{
+  "id": "sk-thm-vanishing",
+  "kind": "statement",
+  "title": "Vanishing in the universal curve test",
+  "statement": "Let $X\\to S$ be affine smooth of relative dimension one with $X$\naffine, $S=\\Spec A$ with $A$ a normal domain with algebraically closed\nfraction field $L$, $K/L$ an extension of algebraically closed fields\nwith $g$ the corresponding geometric generic point of $S$, $d$ an integer\ninvertible on $S$, $\\Lambda$ a commutative ring, and\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y=X\\times_S\\Spec K\\\\\nf\\downarrow & & \\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & \\Spec K.\n\\end{array}\n$$\n\nThen\n\n$$\nR^qh_*(\\Lambda/d\\Lambda)=0\\qquad(q\\ge1)\n$$\n\nfor the constant sheaf $\\Lambda/d\\Lambda$ on $Y_{\\Et}$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/_section.md",
+    "place": "node sk-thm-vanishing, order 1465"
+  },
+  "stmt_deps": [
+    "sk-def-smooth"
+  ],
+  "proof": [
+    {
+      "text": "*Reduction to $\\Z/d\\Z$.* The higher direct images of a sheaf of\n$\\Lambda$-modules are those of its underlying abelian sheaf. As an abelian\ngroup $\\Lambda/d\\Lambda$ has exponent dividing $d$, so it is a direct sum of\ncyclic groups $\\Z/d'\\Z$ with $d'\\mid d$, and the constant sheaf\n$\\Lambda/d\\Lambda$ is the corresponding direct sum of constant sheaves\n$\\Z/d'\\Z$. Since $h$ is affine (a base change of $f$), it is quasi-compact\nand quasi-separated, so $R^qh_*$ commutes with direct sums. Each $d'\\mid d$\nis invertible on $S$. It therefore suffices to prove $R^qh_*(\\Z/d\\Z)=0$ for\n$q\\ge1$ and every integer $d$ invertible on $S$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "$R^qh_*(\\Z/d\\Z)$ is the sheaf associated with\n$U\\mapsto H^q(U\\times_S\\Spec K,\\Z/d\\Z)$ on $X_{\\Et}$; we must kill\neach $\\xi$ in one of these groups on an étale cover of $U$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "- $q>1$: $U\\times_S\\Spec K$ is an affine smooth curve over\n$K$, and [sk-prop-cd-affine] gives the vanishing.\n- $q=1$: by [sk-prop-normal-form] replace $U$ by an étale\ncover with $U\\to V\\to S$, $U\\to V$ affine with geometrically connected fibres\nand a section $\\sigma$, $V\\to S$ étale ($f$ is smooth, so it has\ngeometrically reduced fibres, and $U\\to V$ is smooth because $U\\to S$ is\nsmooth and $V\\to S$ is étale); by\n[sk-prop-etale-normal], $V$ is an open\nof the normal $S$, so we may assume $X\\to S$ affine smooth, with\ngeometrically connected fibres and a section $\\sigma$, and\n$\\xi\\in H^1(Y,\\Z/d\\Z)$. By [sk-prop-ext-invariance] the pullback\nmap $H^1(X_L,\\Z/d\\Z)\\to H^1(Y,\\Z/d\\Z)$ is an isomorphism, so $\\xi$ comes from a class on\n$X_L$; by [sk-prop-input-torsors] this\nclass is a $\\Z/d\\Z$-torsor $P\\to X_L$, a finite étale cover with a\nfree transitive $\\Z/d\\Z$-action. It need not be connected ($X_L$ is\nconnected, and $P$ is connected only when the class corresponds to a\n*surjection* $\\pi_1(X_L)\\to\\Z/d\\Z$), so it need not be Galois;\nlet $P_0\\subseteq P$ be a connected component. Then $P_0\\to X_L$ is\na finite étale Galois cover whose group is the stabiliser\n$G\\subseteq\\Z/d\\Z$ of $P_0$ (the image of $\\pi_1(X_L)$), $|G|$\ndivides $d$, and $P$ is the torsor induced from the $G$-torsor\n$P_0$; in particular $P_0\\to X_L$ trivializes $P$ (the diagonal\nsection of $P_0\\times_{X_L}P_0$). Over the $L$-point $\\sigma(\\eta)$\nthe cover $P_0$ is split ($L$ algebraically closed), so $P_0$ has an\n$L$-point above $\\sigma(\\eta)$; by [sk-prop-input-spreading] $P_0$\n($G$ is a finite abelian group of order invertible on $S$, and $P_0$ is a\n$G$-torsor) spreads to a $G$-torsor $X'\\to X$ with $X'\\times_XX_L\\cong P_0$\n$G$-equivariantly; then $X'\\times_XY\\to Y$ is the pullback of\n$P_0\\to X_L$, over which $P$, hence $\\xi$, is trivial, so the class\nof $\\xi$ is killed in $H^1(X'\\times_XY,\\Z/d\\Z)$: $\\{X'\\to X\\}$ is\nthe required étale cover and the sheaf is zero.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-vanishing/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "long_proof_few_deps",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1465,
+  "blueprint_uses": [
+    "sk-def-smooth",
+    "sk-prop-cd-affine",
+    "sk-prop-etale-normal",
+    "sk-prop-ext-invariance"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-smooth"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

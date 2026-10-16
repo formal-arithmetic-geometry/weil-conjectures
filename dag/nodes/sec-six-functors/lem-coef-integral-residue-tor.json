@@ -1,221 +1,237 @@
 {
- "id": "lem-coef-integral-residue-tor",
- "blueprint": {
-  "is": "lem-coef-integral-residue-tor",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The residue reduction controls integral Tor amplitude",
- "statement": "Fix the global finite-field coefficient datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi=\\varpi_E$, and a scheme $X$ on which $\\ell$ is invertible. Put $A_n=R/(\\varpi^n)$ for $n\\geq1$ and $\\kappa=A_1$. Let $K\\in D^b_c(X,R)$ in the derived-complete integral sense of [def-weil-derived-complete-integral-detailed], and write $K_n=K\\otimes^L_{\\widehat R_X}(A_n)_X$ for its derived reduction [def-weil-integral-derived-reduction]. For integers $a\\leq b$, if $K_1$ has cohomology only in $[a,b]$, then every $K_n$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. Consequently\n$$D^b_c(X,R)=D^b_{ctf}(X,R)$$\nwith $D^b_{ctf}$ defined by the uniform finite-level Tor condition of [def-weil-finite-tor-amplitude]. This assertion does not equate constructibility with site-perfectness on the whole scheme.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
-  "place": "node lem-coef-integral-residue-tor, order 2133"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-integral-derived-reduction",
-  "def-weil-proetale-tor-amplitude",
-  "def-weil-finite-tor-amplitude"
- ],
- "proof": [
-  {
-   "text": "Choose a representative of $K$ and a K-flat resolution $P\\to K$ over the completed coefficient sheaf $\\widehat R_X$, using [lem-pc-kflat-resolution]. By [def-weil-integral-derived-reduction], $Q_n=P\\otimes_{\\widehat R_X}(A_n)_X$ represents $K_n$. The defining conditions of [def-weil-derived-complete-integral-detailed] give bounded constructibility of every $K_n$, in the intrinsic finite-torsion category on $X_{\\mathrm{proet}}$.",
-   "uses": [
+  "id": "lem-coef-integral-residue-tor",
+  "blueprint": {
+    "is": "lem-coef-integral-residue-tor",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "The residue reduction controls integral Tor amplitude",
+  "statement": "Fix the global finite-field coefficient datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi=\\varpi_E$, and a scheme $X$ on which $\\ell$ is invertible. Put $A_n=R/(\\varpi^n)$ for $n\\geq1$ and $\\kappa=A_1$. Let $K\\in D^b_c(X,R)$ in the derived-complete integral sense of [def-weil-derived-complete-integral-detailed], and write $K_n=K\\otimes^L_{\\widehat R_X}(A_n)_X$ for its derived reduction [def-weil-integral-derived-reduction]. For integers $a\\leq b$, if $K_1$ has cohomology only in $[a,b]$, then every $K_n$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. Consequently\n$$D^b_c(X,R)=D^b_{ctf}(X,R)$$\nwith $D^b_{ctf}$ defined by the uniform finite-level Tor condition of [def-weil-finite-tor-amplitude]. This assertion does not equate constructibility with site-perfectness on the whole scheme.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
+    "place": "node lem-coef-integral-residue-tor, order 2133"
+  },
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-integral-derived-reduction",
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-finite-tor-amplitude"
+  ],
+  "proof": [
+    {
+      "text": "Choose a representative of $K$ and a K-flat resolution $P\\to K$ over the completed coefficient sheaf $\\widehat R_X$, using [lem-pc-kflat-resolution]. By [def-weil-integral-derived-reduction], $Q_n=P\\otimes_{\\widehat R_X}(A_n)_X$ represents $K_n$. The defining conditions of [def-weil-derived-complete-integral-detailed] give bounded constructibility of every $K_n$, in the intrinsic finite-torsion category on $X_{\\mathrm{proet}}$.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "def-weil-integral-derived-reduction",
+        "def-weil-derived-complete-integral-detailed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; blueprint proof, second sentence"
+      }
+    },
+    {
+      "text": "The complex $Q_n$ is K-flat over $(A_n)_X$: for an acyclic $(A_n)_X$-complex $N$, its restriction to $\\widehat R_X$ is acyclic, since restriction does not change the underlying abelian sheaves, and $Q_n\\otimes_{(A_n)_X}N\\cong P\\otimes_{\\widehat R_X}N$ is acyclic by [def-pc-kflat-complex]. The balancing identification for the sheaf tensor product [def-pur-sheaf-tensor-product] is given sectionwise by $(x\\otimes c)\\otimes z\\mapsto x\\otimes cz$, with inverse $x\\otimes z\\mapsto(x\\otimes1)\\otimes z$; these maps respect balancing, restrictions and differentials and thus induce inverse maps on the sheafified total complexes. By the K-flat computation in [lem-pur-derived-change-of-rings], $K_n\\otimes^L_{(A_n)_X}\\kappa_X$ is therefore represented by $Q_n\\otimes_{(A_n)_X}\\kappa_X\\cong P\\otimes_{\\widehat R_X}\\kappa_X$, which represents $K_1$ by [def-weil-integral-derived-reduction]. Here the map $\\widehat R_X\\to\\kappa_X$ is the composite of the projection to $(A_n)_X$ with its residue quotient; equality with the level-one projection holds componentwise in the inverse limit defining $\\widehat R_X$.",
+      "uses": [
+        "def-pc-kflat-complex",
+        "def-pur-sheaf-tensor-product",
+        "lem-pur-derived-change-of-rings",
+        "def-weil-integral-derived-reduction"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YN, sites-cohomology-definition-K-flat; Tag 06YY, sites-cohomology-lemma-derived-base-change; explicit balancing computation realizing the blueprint proof first sentence"
+      }
+    },
+    {
+      "text": "For each $n\\geq1$, apply [lem-sf-proetale-residue-tor-test] to $A_n$, $X$ and $K_n$. Its hypotheses hold: $A_n$ is the prescribed finite DVR quotient, $\\ell$ is invertible on $X$, and $K_n$ is bounded constructible by step 1. Its residue tensor has cohomology only in $[a,b]$ by step 2 and the hypothesis on $K_1$. Hence $K_n$ has Tor amplitude in $[a,b]$, with this same interval for every $n$. This uses the pro-etale test, without identifying the coefficient category with the ordinary etale one.",
+      "uses": [
+        "lem-sf-proetale-residue-tor-test"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
+        "place": "Statement and Proof; replaces the etale-only test cited in the item blueprint proof"
+      }
+    },
+    {
+      "text": "For any $K\\in D^b_c(X,R)$, [def-weil-derived-complete-integral-detailed] supplies a finite interval $[r,s]$ containing the cohomology of all reductions, in particular $K_1$. Applying step 3 with $a=r$, $b=s$ gives one uniform Tor interval for all $K_n$, exactly the integral membership condition of [def-weil-finite-tor-amplitude]. Thus every such $K$ belongs to $D^b_{ctf}(X,R)$. Conversely, the latter is defined there as a full subcategory of $D^b_c(X,R)$. The two full subcategories have the same objects and therefore are equal.",
+      "uses": [
+        "def-weil-derived-complete-integral-detailed",
+        "def-weil-finite-tor-amplitude"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
+        "place": "Proof, final three sentences"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-pc-kflat-resolution",
     "def-weil-integral-derived-reduction",
-    "def-weil-derived-complete-integral-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; blueprint proof, second sentence"
-   }
-  },
-  {
-   "text": "The complex $Q_n$ is K-flat over $(A_n)_X$: for an acyclic $(A_n)_X$-complex $N$, its restriction to $\\widehat R_X$ is acyclic, since restriction does not change the underlying abelian sheaves, and $Q_n\\otimes_{(A_n)_X}N\\cong P\\otimes_{\\widehat R_X}N$ is acyclic by [def-pc-kflat-complex]. The balancing identification for the sheaf tensor product [def-pur-sheaf-tensor-product] is given sectionwise by $(x\\otimes c)\\otimes z\\mapsto x\\otimes cz$, with inverse $x\\otimes z\\mapsto(x\\otimes1)\\otimes z$; these maps respect balancing, restrictions and differentials and thus induce inverse maps on the sheafified total complexes. By the K-flat computation in [lem-pur-derived-change-of-rings], $K_n\\otimes^L_{(A_n)_X}\\kappa_X$ is therefore represented by $Q_n\\otimes_{(A_n)_X}\\kappa_X\\cong P\\otimes_{\\widehat R_X}\\kappa_X$, which represents $K_1$ by [def-weil-integral-derived-reduction]. Here the map $\\widehat R_X\\to\\kappa_X$ is the composite of the projection to $(A_n)_X$ with its residue quotient; equality with the level-one projection holds componentwise in the inverse limit defining $\\widehat R_X$.",
-   "uses": [
+    "def-weil-derived-complete-integral-detailed",
     "def-pc-kflat-complex",
     "def-pur-sheaf-tensor-product",
     "lem-pur-derived-change-of-rings",
-    "def-weil-integral-derived-reduction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YN, sites-cohomology-definition-K-flat; Tag 06YY, sites-cohomology-lemma-derived-base-change; explicit balancing computation realizing the blueprint proof first sentence"
-   }
-  },
-  {
-   "text": "For each $n\\geq1$, apply [lem-sf-proetale-residue-tor-test] to $A_n$, $X$ and $K_n$. Its hypotheses hold: $A_n$ is the prescribed finite DVR quotient, $\\ell$ is invertible on $X$, and $K_n$ is bounded constructible by step 1. Its residue tensor has cohomology only in $[a,b]$ by step 2 and the hypothesis on $K_1$. Hence $K_n$ has Tor amplitude in $[a,b]$, with this same interval for every $n$. This uses the pro-etale test, without identifying the coefficient category with the ordinary etale one.",
-   "uses": [
-    "lem-sf-proetale-residue-tor-test"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
-    "place": "Statement and Proof; replaces the etale-only test cited in the item blueprint proof"
-   }
-  },
-  {
-   "text": "For any $K\\in D^b_c(X,R)$, [def-weil-derived-complete-integral-detailed] supplies a finite interval $[r,s]$ containing the cohomology of all reductions, in particular $K_1$. Applying step 3 with $a=r$, $b=s$ gives one uniform Tor interval for all $K_n$, exactly the integral membership condition of [def-weil-finite-tor-amplitude]. Thus every such $K$ belongs to $D^b_{ctf}(X,R)$. Conversely, the latter is defined there as a full subcategory of $D^b_c(X,R)$. The two full subcategories have the same objects and therefore are equal.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-proetale-residue-tor-test",
     "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
-    "place": "Proof, final three sentences"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "def-weil-integral-derived-reduction",
-  "def-weil-derived-complete-integral-detailed",
-  "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-proetale-residue-tor-test",
-  "def-weil-finite-tor-amplitude"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
-  "place": "Proof, with explicit K-flat balancing computation and correction to the existing pro-etale residue test"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "For a derived complete constructible complex over a discrete valuation ring, bounds on residue field reduction give uniform Tor amplitude of all reductions modulo powers of the uniformizer",
-   "results": "8 hits: PreTilt.exists_smodEq_untiltAux, PreTilt.untiltAux_smodEq_untiltFun, instCommRingBDeRhamPlus, BDeRhamPlus, Algebra.instFiniteResidueFieldOfFormallyUnramified, PreTilt, BDeRham, isNilpotent_tensor_residueField_iff",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory, tensor",
-   "results": "0 hits: ; loogle: unknown identifier 'tensor'",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Tor amplitude of a constructible complex over an Artinian local ring is detected by derived tensor with its residue field",
-   "results": "unavailable: service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|residue.*[Tt]or|[Tt]or.*residue",
-   "results": "25 hits: Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/RingTheory/QuasiFinite/Polynomial.lean, Mathlib/Algebra/Vertex/VertexOperator.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A bounded complex over a local ring has finite Tor dimension if its derived reduction to the residue field is bounded",
-   "results": "8 hits: CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.projectiveDimension_ne_top_iff",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"tor\"",
-   "results": "12 hits: String.toRawSubstring, String.toRawSubstring', Functor, EStateM.dummyRestore, MonadFunctorT, monadFunctorRefl, MonadFunctor, Applicative.toFunctor",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  },
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|TorAmplitude|torDimension|tor_dimension",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2133,
- "blueprint_uses": [
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-finite-tor-amplitude",
-  "lem-exc-residue-tor-test"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-coef-integral-residue-tor",
-  "worker": "stage1",
-  "summary": "Made the coefficient rings, completed sheaf, finite reductions and Tor interval explicit; replaced the etale-only residue test by the existing pro-etale test, proved normalization on a K-flat model, and separated uniformity and full-subcategory equality. No new nodes.",
-  "blueprint": "Realizes the four inferences of the single blueprint proof paragraph: derived reduction associativity; bounded constructibility; the residue test; the uniform finite-Tor condition and reverse inclusion.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic K-flat resolution existence for any ringed site, needed for the explicit reduction model; this unit has no such existence statement."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic derived coefficient extension computed by K-flat models, needed to compute the iterated reduction; no such statement in this unit."
-   },
-   {
-    "node": "lem-sf-proetale-residue-tor-test",
-    "why": "Finite coefficient residue test on the actual pro-etale site; it supplies the same residue-test route as the blueprint, whose etale-only citation has the wrong domain."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-proetale-residue-tor-test"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NX-0097a176f",
-  "group": "NX",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0097a176f (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements and sources, and unit/chapter route. All four steps preserve the completed pro-etale coefficient category and prove the same uniform Tor interval. Checked residue detection, balancing, torsion edge cases, duplicates, cycles, and archived target boundaries. No new nodes or repairs. Concrete checks and accepted tool uses are recorded in review.md."
- },
- "lean": {
-  "module": "Sheaf.Paper.IntegralResidueTor",
-  "declaration": "WeilConjectures.integral_residue_tor",
-  "declarations": [
-   "WeilConjectures.integral_residue_tor"
   ],
-  "file": "lean/Sheaf/Paper/IntegralResidueTor.lean",
-  "statement": "theorem integral_residue_tor (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] : (∀ (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), sfIntegralConstructible l E X K → ∀ a b : ℤ, a ≤ b → (∀ i : ℤ, i ∈ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X 0).obj K) → a ≤ i ∧ i ≤ b) → ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b) ∧ sfIntegralConstructible l E X = finiteTorConstructibleIntegral l E X",
-  "branch": "newtargets-dag",
-  "by": "Q20",
-  "date": "2026-10-16",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-755029571",
-  "group": "Q20",
-  "result": "pass",
-  "note": "All statement, dependency, source, edge-case, docstring, and compilation checks passed; no fixes required."
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-integral-residue-tor.md",
+    "place": "Proof, with explicit K-flat balancing computation and correction to the existing pro-etale residue test"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "For a derived complete constructible complex over a discrete valuation ring, bounds on residue field reduction give uniform Tor amplitude of all reductions modulo powers of the uniformizer",
+      "results": "8 hits: PreTilt.exists_smodEq_untiltAux, PreTilt.untiltAux_smodEq_untiltFun, instCommRingBDeRhamPlus, BDeRhamPlus, Algebra.instFiniteResidueFieldOfFormallyUnramified, PreTilt, BDeRham, isNilpotent_tensor_residueField_iff",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory, tensor",
+      "results": "0 hits: ; loogle: unknown identifier 'tensor'",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Tor amplitude of a constructible complex over an Artinian local ring is detected by derived tensor with its residue field",
+      "results": "unavailable: service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|residue.*[Tt]or|[Tt]or.*residue",
+      "results": "25 hits: Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/RingTheory/QuasiFinite/Polynomial.lean, Mathlib/Algebra/Vertex/VertexOperator.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A bounded complex over a local ring has finite Tor dimension if its derived reduction to the residue field is bounded",
+      "results": "8 hits: CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.projectiveDimension_ne_top_iff",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"tor\"",
+      "results": "12 hits: String.toRawSubstring, String.toRawSubstring', Functor, EStateM.dummyRestore, MonadFunctorT, monadFunctorRefl, MonadFunctor, Applicative.toFunctor",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    },
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|TorAmplitude|torDimension|tor_dimension",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: returned names do not state the uniform pro-etale reduction Tor bound"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2133,
+  "blueprint_uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "lem-exc-residue-tor-test"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-biduality-general",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-coef-integral-residue-tor",
+    "worker": "stage1",
+    "summary": "Made the coefficient rings, completed sheaf, finite reductions and Tor interval explicit; replaced the etale-only residue test by the existing pro-etale test, proved normalization on a K-flat model, and separated uniformity and full-subcategory equality. No new nodes.",
+    "blueprint": "Realizes the four inferences of the single blueprint proof paragraph: derived reduction associativity; bounded constructibility; the residue test; the uniform finite-Tor condition and reverse inclusion.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic K-flat resolution existence for any ringed site, needed for the explicit reduction model; this unit has no such existence statement."
+      },
+      {
+        "node": "lem-pur-derived-change-of-rings",
+        "why": "Generic derived coefficient extension computed by K-flat models, needed to compute the iterated reduction; no such statement in this unit."
+      },
+      {
+        "node": "lem-sf-proetale-residue-tor-test",
+        "why": "Finite coefficient residue test on the actual pro-etale site; it supplies the same residue-test route as the blueprint, whose etale-only citation has the wrong domain."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-proetale-residue-tor-test"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NX-0097a176f",
+    "group": "NX",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0097a176f (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements and sources, and unit/chapter route. All four steps preserve the completed pro-etale coefficient category and prove the same uniform Tor interval. Checked residue detection, balancing, torsion edge cases, duplicates, cycles, and archived target boundaries. No new nodes or repairs. Concrete checks and accepted tool uses are recorded in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.IntegralResidueTor",
+    "declaration": "WeilConjectures.integral_residue_tor",
+    "declarations": [
+      "WeilConjectures.integral_residue_tor"
+    ],
+    "file": "lean/Sheaf/Paper/IntegralResidueTor.lean",
+    "statement": "theorem integral_residue_tor (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] : (∀ (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), sfIntegralConstructible l E X K → ∀ a b : ℤ, a ≤ b → (∀ i : ℤ, i ∈ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X 0).obj K) → a ≤ i ∧ i ≤ b) → ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b) ∧ sfIntegralConstructible l E X = finiteTorConstructibleIntegral l E X",
+    "branch": "newtargets-dag",
+    "by": "Q20",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-755029571",
+    "group": "Q20",
+    "result": "pass",
+    "note": "All statement, dependency, source, edge-case, docstring, and compilation checks passed; no fixes required."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $K\\in D^b_c(X,R)$ in the actual sense of\n[def-weil-derived-complete-integral-detailed]. If $K_1$ has\ncohomology in $[a,b]$, then every $K_n$ has Tor amplitude\nin $[a,b]$. Consequently\n\n$$\nD^b_c(X,R)=D^b_{ctf}(X,R)\n$$\n\nfor this DVR coefficient category. This does not equate\nconstructibility with site-perfectness on the whole scheme.",
+    "proof": [
+      {
+        "text": "Associativity of coefficient tensor product gives\n$K_n\\otimes^L_{A_n}\\kappa=K_1$.\nEach $K_n$ is bounded constructible by\n[def-weil-derived-complete-integral-detailed]. The residue Tor test\n[lem-exc-residue-tor-test], applied to the local Artinian\nring $A_n$, therefore gives the same Tor interval $[a,b]$\nat every $n$. This is precisely the integral condition in\n[def-weil-finite-tor-amplitude]. The reverse inclusion is\npart of that definition.",
+        "uses": [
+          "def-weil-derived-complete-integral-detailed",
+          "lem-exc-residue-tor-test",
+          "def-weil-finite-tor-amplitude"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

@@ -1,0 +1,80 @@
+{
+  "id": "det-sf-open-closed-pullback-limits",
+  "kind": "statement",
+  "title": "Closed inverse image preserves limits",
+  "statement": "Let $X$ be quasi-compact and quasi-separated, $i:Z\\hookrightarrow X$ a\nclosed immersion with quasi-compact open complement, and $B$ a sheaf of rings\non $X_{\\mathrm{proét}}$. Then:\n\n1. for every weakly contractible affine $V$ in the affine ind-étale basis of\n$Z_{\\mathrm{proét}}$ (over an affine open of $X$) and every $B$-module sheaf $F$,\nthe canonical map $F(v(V))\\to(i^*F)(V)$ is an isomorphism, where $v(V)$ is the\nhenselian lift of [def-exc-closed-site-lift];\n2. the functor $i^*$ from $B$-module sheaves on $X_{\\mathrm{proét}}$ to\n$i^*B$-module sheaves on $Z_{\\mathrm{proét}}$ is exact and preserves all small\nlimits and all small colimits.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-sf-open-closed-pullback-limits.md",
+    "place": "node det-sf-open-closed-pullback-limits, order None",
+    "external": [
+      {
+        "document": "Bhatt",
+        "place": "The weakly contractible affines form a basis of $Z_{\\mathrm{proét}}$ (Bhatt–Scholze, Proposition 4.2.8), and a morphism of sheaves that is bijective on the objects of a basis is an isomorphism."
+      },
+      {
+        "document": "Scholze",
+        "place": "The weakly contractible affines form a basis of $Z_{\\mathrm{proét}}$ (Bhatt–Scholze, Proposition 4.2.8), and a morphism of sheaves that is bijective on the objects of a basis is an isomorphism."
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-exc-closed-site-lift"
+  ],
+  "proof": [
+    {
+      "text": "*Reduction to abelian sheaves and to affine $X$.* The $i^*B$-module\nstructure of $i^*F$ is induced from the $B$-module structure of $F$, and\nlimits and colimits of module sheaves are computed on underlying abelian\nsheaves, so it suffices to treat abelian sheaves. Cover $X$ by finitely many\naffine opens $X_k$. Restriction to $X_k$ and to $Z_k=Z\\cap X_k$ commutes\nwith limits, colimits and with $i^*$ ([lem-exc-closed-localization]), and\nthe family of restrictions to the $Z_k$ is jointly conservative; so we may\nassume $X=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}A/I$.",
+      "uses": [
+        "lem-exc-closed-localization"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(1) Evaluation on weakly contractible objects.* By\n[lem-exc-closed-inverse-image-formula], $i^*F$ is the sheafification of the\npresheaf $P_F(V)=F(v(V))$ on the basis $\\mathcal B_Z$. Let $V$ be weakly\ncontractible. Every pro-étale covering family of $V$ can be refined to a\nsingle weakly étale surjection $V'\\to V$ (take a finite subfamily and its\ndisjoint union, $V$ being quasi-compact), and such a map has a section\nbecause $V$ is weakly contractible. For a covering with a section the\naugmented Čech complex of any presheaf is contractible (the section provides\nan extra degeneracy), so $\\check H^0(\\{V'\\to V\\},P)=P(V)$ for every presheaf\n$P$. Hence $P^+(V)=P(V)$ and $P^{++}(V)=P^+(V)=P(V)$ for $P=P_F$, i.e.\n$(i^*F)(V)=F(v(V))$, the map being the canonical one into the\nsheafification.",
+      "uses": [
+        "lem-exc-closed-inverse-image-formula"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2) Limits.* Let $(F_\\alpha)$ be a small diagram of sheaves on $X$ with limit\n$F=\\lim_\\alpha F_\\alpha$; limits of sheaves are computed sectionwise. For\nweakly contractible $V$ as in (1),\n\n$$\n(i^*F)(V)=F(v(V))=\\lim_\\alpha F_\\alpha(v(V))=\\lim_\\alpha(i^*F_\\alpha)(V)\n=\\bigl(\\lim_\\alpha i^*F_\\alpha\\bigr)(V),\n$$\n\nand the composite is the value at $V$ of the canonical comparison\n$i^*\\lim_\\alpha F_\\alpha\\to\\lim_\\alpha i^*F_\\alpha$ by naturality of (1). The\nweakly contractible affines form a basis of $Z_{\\mathrm{proét}}$\n(Bhatt–Scholze, Proposition 4.2.8), and a morphism of sheaves that is\nbijective on the objects of a basis is an isomorphism. So $i^*$ preserves\nlimits.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3) Colimits and exactness.* The functor $i^*$ is left adjoint to $i_*$\n([lem-exc-closed-site-adjunction] gives the adjunction on bases), so it\npreserves all small colimits. Preserving finite limits and finite colimits,\nit is exact.",
+      "uses": [
+        "lem-exc-closed-site-adjunction"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-exc-closed-localization",
+    "lem-exc-closed-inverse-image-formula",
+    "lem-exc-closed-site-adjunction"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-sf-open-closed-pullback-limits.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "def-exc-closed-site-lift",
+    "lem-exc-closed-site-adjunction",
+    "lem-exc-closed-inverse-image-formula",
+    "lem-exc-closed-localization"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

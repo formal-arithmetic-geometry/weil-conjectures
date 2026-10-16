@@ -1,278 +1,312 @@
 {
- "id": "sbc-thm-etale-local-normal-form",
- "blueprint": {
-  "is": "sbc-thm-etale-local-normal-form",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Etale-local normal form of a smooth morphism",
- "statement": "Let $g:Y'\\to Y$ be\nsmooth at $y'\\in Y'$. After\nreplacing $Y,Y'$ by affine neighbourhoods, there are $d\\geq0$ and an\netale morphism\n\n$$\ne:Y'\\longrightarrow\\mathbf A^d_Y\n$$\n\nsuch that $g$ is $e$ followed by the projection\n$p_d:\\mathbf A^d_Y\\to Y$ of [def-sbc-affine-space].\n(*Stacks Project, Morphisms, [Tag `054L`](https://stacks.math.columbia.edu/tag/054L) = Lemma\n29.37.21.*)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-thm-etale-local-normal-form.md",
-  "place": "node sbc-thm-etale-local-normal-form, order 1400",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 054L"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 00TN"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 00TA"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sbc-affine-space",
-  "def-sbc-smooth-morphisms",
-  "def-weil-etale-morphism",
-  "def-weil-affine-spectrum"
- ],
- "proof": [
-  {
-   "text": "Use the affine-local smoothness convention identified in [def-sbc-smooth-morphisms]. Here smooth at a point has exactly the meaning of Stacks 01V5, definition-smooth (1): there are affine opens $U_0\\subseteq Y'$ and $V\\subseteq Y$ with $y'\\in U_0$, $g(U_0)\\subseteq V$ and a smooth induced ring map $R\\to A_0$, where $R=\\mathcal O_Y(V)$ and $A_0=\\mathcal O_{Y'}(U_0)$ [def-weil-pbc-smooth-ring-map]. This definition is local at $y'$ and requires no finite-presentation assumption elsewhere on $Y'$. By [lem-weil-pbc-affine-open-spec-points], the point $y'$ corresponds to a prime $\\mathfrak q\\subset A_0$.",
-   "uses": [
+  "id": "sbc-thm-etale-local-normal-form",
+  "blueprint": {
+    "is": "sbc-thm-etale-local-normal-form",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Etale-local normal form of a smooth morphism",
+  "statement": "Let $g:Y'\\to Y$ be\nsmooth at $y'\\in Y'$. After\nreplacing $Y,Y'$ by affine neighbourhoods, there are $d\\geq0$ and an\netale morphism\n\n$$\ne:Y'\\longrightarrow\\mathbf A^d_Y\n$$\n\nsuch that $g$ is $e$ followed by the projection\n$p_d:\\mathbf A^d_Y\\to Y$ of [def-sbc-affine-space].\n(*Stacks Project, Morphisms, [Tag `054L`](https://stacks.math.columbia.edu/tag/054L) = Lemma\n29.37.21.*)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-thm-etale-local-normal-form.md",
+    "place": "node sbc-thm-etale-local-normal-form, order 1400",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 054L"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 00TN"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 00TA"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sbc-affine-space",
+    "def-sbc-smooth-morphisms",
+    "def-weil-etale-morphism",
+    "def-weil-affine-spectrum"
+  ],
+  "proof": [
+    {
+      "text": "Use the affine-local smoothness convention identified in [def-sbc-smooth-morphisms]. Here smooth at a point has exactly the meaning of Stacks 01V5, definition-smooth (1): there are affine opens $U_0\\subseteq Y'$ and $V\\subseteq Y$ with $y'\\in U_0$, $g(U_0)\\subseteq V$ and a smooth induced ring map $R\\to A_0$, where $R=\\mathcal O_Y(V)$ and $A_0=\\mathcal O_{Y'}(U_0)$ [def-weil-pbc-smooth-ring-map]. This definition is local at $y'$ and requires no finite-presentation assumption elsewhere on $Y'$. By [lem-weil-pbc-affine-open-spec-points], the point $y'$ corresponds to a prime $\\mathfrak q\\subset A_0$.",
+      "uses": [
+        "def-sbc-smooth-morphisms",
+        "def-weil-pbc-smooth-ring-map",
+        "lem-weil-pbc-affine-open-spec-points"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 01V5, definition-smooth; Tag 054L, lemma-smooth-etale-over-affine-space, initial affine reduction"
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-smooth-ring-map-locally-standard-smooth] to this smooth ring map and $\\mathfrak q$. Obtain $h\\in A_0\\setminus\\mathfrak q$ such that $(A_0)_h$ is a standard smooth $R$-algebra. By [lem-weil-pbc-affine-open-section-vanishing-prime], $U=D(h)\\subseteq U_0$ contains $y'$, is affine, and $A=\\mathcal O_{Y'}(U)$ is canonically $(A_0)_h$, with the restriction map as the localization map. Thus $g(U)\\subseteq V$. The induced map $R\\to A$ is $R\\to A_0\\to (A_0)_h\\cong A$, since restrictions of the structure sheaf compose; consequently this is an isomorphism of $R$-algebras, not just abstract rings.",
+      "uses": [
+        "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+        "lem-weil-pbc-affine-open-section-vanishing-prime"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 01V7, lemma-smooth-locally-standard-smooth, proof using Algebra Tag 00TA (lemma-smooth-syntomic); Schemes Tag 01I3 (lemma-standard-open-affine)"
+      }
+    },
+    {
+      "text": "Let $\\lambda:(A_0)_h\\xrightarrow{\\sim}A$ be the $R$-algebra isomorphism of Step 2. Compose the standard smooth presentation isomorphism to $(A_0)_h$ with $\\lambda$; its inverse is the original inverse composed with $\\lambda^{-1}$. If $u$ is the original image of the Jacobian determinant with inverse $v$, then $\\lambda(u)\\lambda(v)=\\lambda(uv)=1$, so its image in $A$ remains a unit. By [def-weil-pbc-standard-smooth-algebra], there are $n\\geq c\\geq0$, $F_1,\\ldots,F_c\\in R[x_1,\\ldots,x_n]$ and an $R$-algebra isomorphism $A\\cong R[x_1,\\ldots,x_n]/(F_1,\\ldots,F_c)$ under which $\\Delta=\\det(\\partial F_a/\\partial x_b)_{1\\leq a,b\\leq c}$ is a unit in $A$. The definition displays the transpose matrix, which has the same determinant. Set $d=n-c$ and $P=R[x_{c+1},\\ldots,x_n]$. The map $j:P\\to A$ sends coefficients to their original images and each remaining variable to its class in $A$.",
+      "uses": [
+        "def-weil-pbc-standard-smooth-algebra"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tag 00T6, definition-standard-smooth; Morphisms Tag 054L, presentation and choice of the last n-c coordinates"
+      }
+    },
+    {
+      "text": "There is an $R$-algebra isomorphism $P[x_1,\\ldots,x_c]\\cong R[x_1,\\ldots,x_n]$: it fixes $R$ and every variable; its inverse regards $x_{c+1},\\ldots,x_n$ as elements of the coefficient algebra $P$ and the first $c$ variables as polynomial variables over $P$. The two composites fix all generators, hence are identities. Passing to the ideals generated by the same $F_a$ gives a $P$-algebra presentation $A\\cong P[x_1,\\ldots,x_c]/(F_1,\\ldots,F_c)$ for the structure map $j$. For a monomial $r\\prod_{i=1}^n x_i^{k_i}$ and $b\\leq c$, differentiation on either side gives $k_b r x_b^{k_b-1}\\prod_{i\\ne b}x_i^{k_i}$ when $k_b>0$, and zero when $k_b=0$. The factors indexed by $i>c$ are coefficients in $P$. Additivity gives equality of the derivatives for every $F_a$, so its Jacobian matrix is the original matrix. Its determinant is the unit $\\Delta$ of Step 3. This is precisely a square Jacobian presentation [def-exc-jacobian-presentation].",
+      "uses": [
+        "def-exc-jacobian-presentation"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 054L, lemma-smooth-etale-over-affine-space, regrouping variables over R[x_{c+1},...,x_n]"
+      }
+    },
+    {
+      "text": "Apply the square-presentation-to-etale direction of [lem-exc-etale-jacobian-presentation] over $P$: $j:P\\to A$ is etale of finite presentation. Its hypotheses hold because Step 4 has exactly $c$ variables, $c$ relations and invertible determinant. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the induced morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}P$ is etale. Identify $U$ with $\\operatorname{Spec}A$ and $\\mathbf A^d_V$ with $\\operatorname{Spec}P$, using the affine-base clause of [def-sbc-affine-space] and relabelling the $d$ remaining variables. This gives the required etale morphism $e:U\\to\\mathbf A^d_V$.",
+      "uses": [
+        "lem-exc-etale-jacobian-presentation",
+        "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+        "def-sbc-affine-space"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 054L, conclusion that the regrouped ring map is etale; Tag 02GI, definition-etale, and Tag 02GJ, lemma-etale-characterize; Algebra Tag 00U9, lemma-etale-standard-smooth"
+      }
+    },
+    {
+      "text": "The projection $p_d:\\mathbf A^d_V\\to V$ is induced by the constant inclusion $i:R\\to P$ [def-sbc-affine-space]. For every $r\\in R$, $j(i(r))$ is the original image of $r$ in $A$, because the presentation and all isomorphisms used were $R$-linear. Hence $j\\circ i$ is exactly the ring map of the restriction $g|_U:U\\to V$. By the functoriality and uniqueness of spectrum morphisms [def-weil-affine-spectrum], and the identification of the induced ring map with the restricted original morphism [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $p_d\\circ e=g|_U$. The affine opens $U,V$ contain the designated points, and $d\\geq0$ since $n\\geq c$; replacing $Y',Y$ by these opens proves the statement.",
+      "uses": [
+        "def-sbc-affine-space",
+        "def-weil-affine-spectrum",
+        "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 054L, final factorization; Schemes affine functoriality"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-sbc-smooth-morphisms",
     "def-weil-pbc-smooth-ring-map",
-    "lem-weil-pbc-affine-open-spec-points"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01V5, definition-smooth; Tag 054L, lemma-smooth-etale-over-affine-space, initial affine reduction"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-smooth-ring-map-locally-standard-smooth] to this smooth ring map and $\\mathfrak q$. Obtain $h\\in A_0\\setminus\\mathfrak q$ such that $(A_0)_h$ is a standard smooth $R$-algebra. By [lem-weil-pbc-affine-open-section-vanishing-prime], $U=D(h)\\subseteq U_0$ contains $y'$, is affine, and $A=\\mathcal O_{Y'}(U)$ is canonically $(A_0)_h$, with the restriction map as the localization map. Thus $g(U)\\subseteq V$. The induced map $R\\to A$ is $R\\to A_0\\to (A_0)_h\\cong A$, since restrictions of the structure sheaf compose; consequently this is an isomorphism of $R$-algebras, not just abstract rings.",
-   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
     "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01V7, lemma-smooth-locally-standard-smooth, proof using Algebra Tag 00TA (lemma-smooth-syntomic); Schemes Tag 01I3 (lemma-standard-open-affine)"
-   }
-  },
-  {
-   "text": "Let $\\lambda:(A_0)_h\\xrightarrow{\\sim}A$ be the $R$-algebra isomorphism of Step 2. Compose the standard smooth presentation isomorphism to $(A_0)_h$ with $\\lambda$; its inverse is the original inverse composed with $\\lambda^{-1}$. If $u$ is the original image of the Jacobian determinant with inverse $v$, then $\\lambda(u)\\lambda(v)=\\lambda(uv)=1$, so its image in $A$ remains a unit. By [def-weil-pbc-standard-smooth-algebra], there are $n\\geq c\\geq0$, $F_1,\\ldots,F_c\\in R[x_1,\\ldots,x_n]$ and an $R$-algebra isomorphism $A\\cong R[x_1,\\ldots,x_n]/(F_1,\\ldots,F_c)$ under which $\\Delta=\\det(\\partial F_a/\\partial x_b)_{1\\leq a,b\\leq c}$ is a unit in $A$. The definition displays the transpose matrix, which has the same determinant. Set $d=n-c$ and $P=R[x_{c+1},\\ldots,x_n]$. The map $j:P\\to A$ sends coefficients to their original images and each remaining variable to its class in $A$.",
-   "uses": [
-    "def-weil-pbc-standard-smooth-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00T6, definition-standard-smooth; Morphisms Tag 054L, presentation and choice of the last n-c coordinates"
-   }
-  },
-  {
-   "text": "There is an $R$-algebra isomorphism $P[x_1,\\ldots,x_c]\\cong R[x_1,\\ldots,x_n]$: it fixes $R$ and every variable; its inverse regards $x_{c+1},\\ldots,x_n$ as elements of the coefficient algebra $P$ and the first $c$ variables as polynomial variables over $P$. The two composites fix all generators, hence are identities. Passing to the ideals generated by the same $F_a$ gives a $P$-algebra presentation $A\\cong P[x_1,\\ldots,x_c]/(F_1,\\ldots,F_c)$ for the structure map $j$. For a monomial $r\\prod_{i=1}^n x_i^{k_i}$ and $b\\leq c$, differentiation on either side gives $k_b r x_b^{k_b-1}\\prod_{i\\ne b}x_i^{k_i}$ when $k_b>0$, and zero when $k_b=0$. The factors indexed by $i>c$ are coefficients in $P$. Additivity gives equality of the derivatives for every $F_a$, so its Jacobian matrix is the original matrix. Its determinant is the unit $\\Delta$ of Step 3. This is precisely a square Jacobian presentation [def-exc-jacobian-presentation].",
-   "uses": [
-    "def-exc-jacobian-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 054L, lemma-smooth-etale-over-affine-space, regrouping variables over R[x_{c+1},...,x_n]"
-   }
-  },
-  {
-   "text": "Apply the square-presentation-to-etale direction of [lem-exc-etale-jacobian-presentation] over $P$: $j:P\\to A$ is etale of finite presentation. Its hypotheses hold because Step 4 has exactly $c$ variables, $c$ relations and invertible determinant. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the induced morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}P$ is etale. Identify $U$ with $\\operatorname{Spec}A$ and $\\mathbf A^d_V$ with $\\operatorname{Spec}P$, using the affine-base clause of [def-sbc-affine-space] and relabelling the $d$ remaining variables. This gives the required etale morphism $e:U\\to\\mathbf A^d_V$.",
-   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-exc-jacobian-presentation",
     "lem-exc-etale-jacobian-presentation",
     "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "def-sbc-affine-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 054L, conclusion that the regrouped ring map is etale; Tag 02GI, definition-etale, and Tag 02GJ, lemma-etale-characterize; Algebra Tag 00U9, lemma-etale-standard-smooth"
-   }
-  },
-  {
-   "text": "The projection $p_d:\\mathbf A^d_V\\to V$ is induced by the constant inclusion $i:R\\to P$ [def-sbc-affine-space]. For every $r\\in R$, $j(i(r))$ is the original image of $r$ in $A$, because the presentation and all isomorphisms used were $R$-linear. Hence $j\\circ i$ is exactly the ring map of the restriction $g|_U:U\\to V$. By the functoriality and uniqueness of spectrum morphisms [def-weil-affine-spectrum], and the identification of the induced ring map with the restricted original morphism [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $p_d\\circ e=g|_U$. The affine opens $U,V$ contain the designated points, and $d\\geq0$ since $n\\geq c$; replacing $Y',Y$ by these opens proves the statement.",
-   "uses": [
     "def-sbc-affine-space",
     "def-weil-affine-spectrum",
     "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 054L, final factorization; Schemes affine functoriality"
-   }
-  }
- ],
- "proof_deps": [
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "def-weil-pbc-standard-smooth-algebra",
-  "def-exc-jacobian-presentation",
-  "lem-exc-etale-jacobian-presentation",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "def-sbc-affine-space",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 054L (lemma-smooth-etale-over-affine-space), with its affine reduction expanded using Tags 01V5, 01V7 and Algebra 00TA"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "A morphism smooth at a point factors on affine neighborhoods as an etale morphism to affine space followed by projection",
-   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    "place": "Tag 054L (lemma-smooth-etale-over-affine-space), with its affine reduction expanded using Tags 01V5, 01V7 and Algebra 00TA"
   },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.AffineSpace",
-   "results": "1 hits: AlgebraicGeometry.AffineSpace.instSmoothOverSchemeInferInstanceOverClassOfFinite",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "A morphism smooth at a point factors on affine neighborhoods as an etale morphism to affine space followed by projection",
+      "results": "8 hits: AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.AffineSpace",
+      "results": "1 hits: AlgebraicGeometry.AffineSpace.instSmoothOverSchemeInferInstanceOverClassOfFinite",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "grep",
+      "query": "exists_etale_to_affineSpace|etale.*affineSpace|affineSpace.*etale",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "leansearch",
+      "query": "smooth morphism etale local factorization through affine space",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Standard smooth algebra has an etale map from a polynomial algebra in the remaining variables",
+      "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, StandardEtalePair.instEtaleRing, StandardEtalePresentation.toSubmersivePresentation, StandardEtalePresentation, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "grep",
+      "query": "exists_etale|etale_mvPolynomial|etale.*[Pp]olynomial",
+      "results": "3 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "grep",
+      "query": "exists_etale_mvPolynomial",
+      "results": "5 hits: Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"exists_etale\"",
+      "results": "10 hits: Algebra.exists_etale_of_isEtaleAt, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux",
+      "date": "2026-10-14",
+      "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1400,
+  "blueprint_uses": [
+    "def-exc-jacobian-presentation",
+    "def-sbc-affine-space",
+    "def-sbc-smooth-morphisms",
+    "lem-exc-etale-jacobian-presentation"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "exists_etale_to_affineSpace|etale.*affineSpace|affineSpace.*etale",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
+  "chapter": "sec-smooth-base-change",
+  "unit": "sk-prop-normal-form",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "sbc-thm-etale-local-normal-form",
+    "worker": "stage1",
+    "summary": "Checked 054L and expanded its affine reduction using the existing smooth-ring localization and principal-open nodes. Regrouped polynomial variables explicitly and used the existing square-Jacobian and affine etale comparison nodes. No new nodes; statement unchanged. Rejected attachment with a global LFP hypothesis.",
+    "blueprint": "Realizes the entire blueprint node proof: initial standard-smooth chart (steps 1-3), remaining-coordinate square presentation (step 4), etaleness and factorization (steps 5-6). This is the direct Jacobian form of the normal-form argument, as in 054L and the unit step 1 equivalent formulation.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+        "why": "Generic ring-local standard smooth chart theorem; the unit supplies the normal-form argument, not this commutative-algebra input."
+      },
+      {
+        "node": "lem-weil-pbc-affine-open-spec-points",
+        "why": "Generic identification of affine-open points with prime ideals."
+      },
+      {
+        "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+        "why": "Generic affine principal-open localization theorem preserving the point."
+      },
+      {
+        "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+        "why": "Generic ring/scheme comparison for etaleness."
+      },
+      {
+        "node": "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+        "why": "Generic identification of restricted affine morphisms with their section ring maps."
+      }
+    ]
   },
-  {
-   "tool": "leansearch",
-   "query": "smooth morphism etale local factorization through affine space",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Standard smooth algebra has an etale map from a polynomial algebra in the remaining variables",
-   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, StandardEtalePair.instEtaleRing, StandardEtalePresentation.toSubmersivePresentation, StandardEtalePresentation, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
-  },
-  {
-   "tool": "grep",
-   "query": "exists_etale|etale_mvPolynomial|etale.*[Pp]olynomial",
-   "results": "3 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
-  },
-  {
-   "tool": "grep",
-   "query": "exists_etale_mvPolynomial",
-   "results": "5 hits: Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"exists_etale\"",
-   "results": "10 hits: Algebra.exists_etale_of_isEtaleAt, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux",
-   "date": "2026-10-14",
-   "verdict": "no exact match: local standard-smooth or ring-level factorization substeps, not this scheme-level pointwise conclusion"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 1400,
- "blueprint_uses": [
-  "def-exc-jacobian-presentation",
-  "def-sbc-affine-space",
-  "def-sbc-smooth-morphisms",
-  "lem-exc-etale-jacobian-presentation"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-base-change",
- "unit": "sk-prop-normal-form",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "sbc-thm-etale-local-normal-form",
-  "worker": "stage1",
-  "summary": "Checked 054L and expanded its affine reduction using the existing smooth-ring localization and principal-open nodes. Regrouped polynomial variables explicitly and used the existing square-Jacobian and affine etale comparison nodes. No new nodes; statement unchanged. Rejected attachment with a global LFP hypothesis.",
-  "blueprint": "Realizes the entire blueprint node proof: initial standard-smooth chart (steps 1-3), remaining-coordinate square presentation (step 4), etaleness and factorization (steps 5-6). This is the direct Jacobian form of the normal-form argument, as in 054L and the unit step 1 equivalent formulation.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
-    "why": "Generic ring-local standard smooth chart theorem; the unit supplies the normal-form argument, not this commutative-algebra input."
-   },
-   {
-    "node": "lem-weil-pbc-affine-open-spec-points",
-    "why": "Generic identification of affine-open points with prime ideals."
-   },
-   {
-    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "why": "Generic affine principal-open localization theorem preserving the point."
-   },
-   {
-    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "why": "Generic ring/scheme comparison for etaleness."
-   },
-   {
-    "node": "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-    "why": "Generic identification of restricted affine morphisms with their section ring maps."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NP-e5b7b529c",
-  "group": "NP",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-e5b7b529c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All six steps establish the unchanged pointwise normal form; localization, Jacobian regrouping, étaleness and morphism equality check out. No new nodes, cycles or repairs. Accepted five declared generic tool uses; concrete checks and edge cases are recorded in review.md."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleLocalNormalForm",
-  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_exists_smooth_appLE",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalNormalForm.lean",
-  "statement": "theorem Scheme.Hom.exists_etale_to_affineSpace_of_exists_smooth_appLE {X Y : Scheme.{u}} (g : X ⟶ Y) (x : X) (hx : ∃ (U : Y.Opens) (_ : IsAffineOpen U) (V : X.Opens) (_ : IsAffineOpen V) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U), (g.appLE U V hVU).hom.Smooth) : ∃ (d : ℕ) (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V) (_ : g.base x ∈ U) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U) (e : V.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) U.toScheme), Etale e ∧ e ≫ (AffineSpace (ULift.{u} (Fin d)) U.toScheme ↘ U.toScheme) = g.resLE U V hVU",
-  "branch": "newtargets-dag",
-  "by": "NO",
-  "date": "2026-10-15",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-57fdbbc4c",
-  "group": "NO",
-  "result": "pass",
-  "note": "Exact node-to-Lean match; dependencies, source proof plan, edge cases, docstrings, report sections, and server-only scompile verified with no errors."
- }
+    "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NP-e5b7b529c",
+    "group": "NP",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-e5b7b529c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All six steps establish the unchanged pointwise normal form; localization, Jacobian regrouping, étaleness and morphism equality check out. No new nodes, cycles or repairs. Accepted five declared generic tool uses; concrete checks and edge cases are recorded in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.EtaleLocalNormalForm",
+    "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_exists_smooth_appLE",
+    "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalNormalForm.lean",
+    "statement": "theorem Scheme.Hom.exists_etale_to_affineSpace_of_exists_smooth_appLE {X Y : Scheme.{u}} (g : X ⟶ Y) (x : X) (hx : ∃ (U : Y.Opens) (_ : IsAffineOpen U) (V : X.Opens) (_ : IsAffineOpen V) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U), (g.appLE U V hVU).hom.Smooth) : ∃ (d : ℕ) (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V) (_ : g.base x ∈ U) (_ : x ∈ V) (hVU : V ≤ g ⁻¹ᵁ U) (e : V.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) U.toScheme), Etale e ∧ e ≫ (AffineSpace (ULift.{u} (Fin d)) U.toScheme ↘ U.toScheme) = g.resLE U V hVU",
+    "branch": "newtargets-dag",
+    "by": "NO",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-57fdbbc4c",
+    "group": "NO",
+    "result": "pass",
+    "note": "Exact node-to-Lean match; dependencies, source proof plan, edge cases, docstrings, report sections, and server-only scompile verified with no errors."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $g:Y'\\to Y$ be\nsmooth at $y'\\in Y'$. After\nreplacing $Y,Y'$ by affine neighbourhoods, there are $d\\geq0$ and an\netale morphism\n\n$$\ne:Y'\\longrightarrow\\mathbf A^d_Y\n$$\n\nsuch that $g$ is $e$ followed by the projection\n$p_d:\\mathbf A^d_Y\\to Y$ of [def-sbc-affine-space].",
+    "proof": [
+      {
+        "text": "Choose affine neighbourhoods $Y=\\operatorname{Spec}R$ and\n$Y'=\\operatorname{Spec}C$ of the specified points, small enough\nthat $g$ is smooth on the latter. We use the ordinary\ncommutative-algebra infinitesimal criterion: a finitely presented\nformally smooth algebra is smooth\n([Stacks, Tag 00TN](https://stacks.math.columbia.edu/tag/00TN)),\nand near any prime it has a presentation\n\n$$\nC=R[x_1,\\ldots,x_N]/(F_1,\\ldots,F_c),\\qquad\n\\det\\left(\\frac{\\partial F_a}{\\partial x_b}\\right)_{a,b\\leq c}\n\\in C^\\times.\n$$",
+        "uses": [],
+        "elementary": null
+      },
+      {
+        "text": "The latter is the standard-presentation lemma of commutative\nalgebra ([Tag 00TA](https://stacks.math.columbia.edu/tag/00TA)).\nIts algebraic mechanism is to choose a basis of the projective\nconormal module, then a nonzero minor of its split injection into\nthe free module of differentials. Localizing at that minor and\nusing Nakayama on the finitely generated relation ideal gives the\ndisplayed generators; a localization is incorporated by adjoining\none variable and its inverse relation. These operations replace\nthe source by an affine open containing the selected point.\nThis is an application of the ring lifting criterion to the local\nlifting condition in [def-sbc-smooth-morphisms].",
+        "uses": [
+          "def-sbc-smooth-morphisms"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Put $d=N-c$ and regard the last $d$ variables as base\ncoordinates: let $P=R[x_{c+1},\\ldots,x_N]$. The same presentation\nis now a $P$-algebra presentation with $c$ variables and $c$\nrelations, and its square Jacobian determinant is invertible.\nIt is exactly a presentation of [def-exc-jacobian-presentation].\nFor clarity, the lifting assertion for this new base can also be\nread directly from the equations. Given a square-zero ideal\n$J\\subset Q$, a $P$-algebra map $C\\to Q/J$ determines\narbitrary lifts $q_b$ of the first $c$ variables. Its errors\n$F_a(q)$ lie in $J$. A correction $v\\in J^c$ must satisfy\n\n$$\n(\\partial F_a/\\partial x_b)(q)\\,v_b=-F_a(q).\n$$",
+        "uses": [
+          "def-exc-jacobian-presentation"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "There is exactly one solution because the determinant is a unit:\nit is a unit modulo a nilpotent ideal and hence a unit in $Q$.\nTaylor expansion has no higher correction terms since $J^2=0$.\nThis constructs the unique lift fixing all the base coordinates.\nSuccessive square-zero quotients treat a general nilpotent ideal.\nConsequently [lem-exc-etale-jacobian-presentation] makes\n$\\operatorname{Spec}C\\to\\operatorname{Spec}P$ etale.\nBy [def-sbc-affine-space], $\\operatorname{Spec}P=\\mathbf A^d_Y$.\nThe composite with its projection is induced by the original\nring homomorphism $R\\to C$, and is therefore exactly $g$.\nThis constructs the required factorization.",
+        "uses": [
+          "lem-exc-etale-jacobian-presentation",
+          "def-sbc-affine-space"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

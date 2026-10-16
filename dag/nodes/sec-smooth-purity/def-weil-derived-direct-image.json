@@ -1,148 +1,154 @@
 {
- "id": "def-weil-derived-direct-image",
- "blueprint": {
-  "is": "def-weil-derived-direct-image",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Derived direct image",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $X,Y$ be schemes on which $\\ell$ is\ninvertible, and let $f:X\\to Y$ be a morphism\n[def-weil-scheme-morphism-properties]; write $f_n$ for this morphism at\ncoefficient level $A_{E,n}$. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with derived pullback and internal\nHom notation [def-weil-derived-pullback-tensor-hom] and derived tensor\nnotation [def-weil-derived-tensor], the functor\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$\n[def-weil-proetale-module-direct-image] is left exact\n[lem-weil-proetale-module-direct-image-left-exact]. At\nfinite level, choose a K-injective resolution [def-weil-pbc-kinjective-resolutions] and\ndefine its total right-derived functor\n[def-weil-pbc-proetale-operations] by\n\n$$\n Rf_{*,n}=R(f_n)_*:D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}).\n$$\n\nFor a derived-complete integral [def-weil-derived-complete-integral-detailed]\ncomplex $K\\in D^b_c(X,\\mathcal O_E)$, define\n\n$$\n Rf_*K=\n R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr).\n$$\n\nHere $D(-,\\mathcal O_E)$ and the restriction of scalars\n$\\operatorname{Res}_n$, applied termwise (it is exact\n[lem-weil-restriction-of-scalars-exact]), are those of the completed\ncoefficient sheaf [def-weil-completed-integral-coefficients], and\n$R\\varprojlim_n$ is the derived limit [def-weil-derived-limit] in\n$D(Y_{\\mathrm{proet}},\\mathcal O_E)$, which exists because countable products\nof pro-etale module sheaves are exact\n[lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence].\nThe tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$: the map\n$K\\otimes^L_{\\mathcal O_E}A_{E,n+1}\\to K\\otimes^L_{\\mathcal O_E}A_{E,n}$,\nfollowed by the identification of $R(f_{n+1})_*$ of an\n$A_{E,n}$-module complex with $R(f_n)_*$ of it\n[lem-weil-proetale-direct-image-restriction-of-scalars]. The\nfinite-reduction comparison is the natural map\n\n$$\n (Rf_*K)\\otimes^L_{\\mathcal O_E}A_{E,n}\n \\longrightarrow\n Rf_{*,n}\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr),\n$$\n\nadjoint [lem-weil-derived-scalar-extension-restriction-adjunction] to the\nprojection of $R\\varprojlim$ onto its $n$-th term;\n\nits being an isomorphism, and its compatibility with composition and scalar\nextension, are separate comparison assertions, not part of this definition of\nthe derived direct image. Here $A_{E,n}$ and finite-level constructibility\nare the finite-torsion coefficient data\n[def-weil-finite-torsion-constructibility], and $\\mathcal H^r$ is the\ncohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. For\n$\\Lambda=E$ use the rationalized category\n[def-weil-rationalization-karoubi]; for $\\Lambda=\\Qlb$ use the common-stage\ncategory [def-weil-algebraically-closed-coefficients].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
-  "place": "node def-weil-derived-direct-image, order 1468"
- },
- "stmt_deps": [
-  "def-weil-scheme-morphism-properties",
-  "def-weil-pbc-proetale-site",
-  "def-weil-proetale-module-direct-image",
-  "lem-weil-proetale-module-direct-image-left-exact",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-tensor",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-completed-integral-coefficients",
-  "lem-weil-restriction-of-scalars-exact",
-  "def-weil-derived-limit",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn 'def totalRightDerived\\|class HasRightDerivedFunctor\\|def rightDerivedFunctorPlus\\|def Functor.rightDerived ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/",
-   "results": "CategoryTheory/Functor/Derived/RightDerived.lean: `HasRightDerivedFunctor`, `Functor.totalRightDerived` (abstract total right derived functor between localized categories, existence assumed); Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean: `Functor.rightDerivedFunctorPlus` on `DerivedCategory.Plus` (bounded below, enough injectives); CategoryTheory/Abelian/RightDerived.lean: `Functor.rightDerived F n` on objects via injective resolutions",
-   "date": "2026-10-09",
-   "verdict": "generalization only: the abstract derived functor exists in Mathlib, but not its existence on unbounded derived categories of sheaves via K-injective resolutions, nor the direct image of sheaves on pro-etale sites"
+  "id": "def-weil-derived-direct-image",
+  "blueprint": {
+    "is": "def-weil-derived-direct-image",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'IsKInjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsGrothendieckAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
-   "results": "`CochainComplex.IsKInjective` (Algebra/Homology/HomotopyCategory/KInjective.lean, DerivedCategory/KInjective.lean: Hom into a K-injective complex in the derived category); no theorem that every complex in a Grothendieck abelian category has a K-injective resolution; `IsGrothendieckAbelian (Sheaf (ProEt.topology X) Ab)` instance in ElladicCohomology.lean",
-   "date": "2026-10-09",
-   "verdict": "no match for the unbounded K-injective derived direct image"
+  "kind": "definition",
+  "title": "Derived direct image",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $X,Y$ be schemes on which $\\ell$ is\ninvertible, and let $f:X\\to Y$ be a morphism\n[def-weil-scheme-morphism-properties]; write $f_n$ for this morphism at\ncoefficient level $A_{E,n}$. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with derived pullback and internal\nHom notation [def-weil-derived-pullback-tensor-hom] and derived tensor\nnotation [def-weil-derived-tensor], the functor\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$\n[def-weil-proetale-module-direct-image] is left exact\n[lem-weil-proetale-module-direct-image-left-exact]. At\nfinite level, choose a K-injective resolution [def-weil-pbc-kinjective-resolutions] and\ndefine its total right-derived functor\n[def-weil-pbc-proetale-operations] by\n\n$$\n Rf_{*,n}=R(f_n)_*:D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}).\n$$\n\nFor a derived-complete integral [def-weil-derived-complete-integral-detailed]\ncomplex $K\\in D^b_c(X,\\mathcal O_E)$, define\n\n$$\n Rf_*K=\n R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr).\n$$\n\nHere $D(-,\\mathcal O_E)$ and the restriction of scalars\n$\\operatorname{Res}_n$, applied termwise (it is exact\n[lem-weil-restriction-of-scalars-exact]), are those of the completed\ncoefficient sheaf [def-weil-completed-integral-coefficients], and\n$R\\varprojlim_n$ is the derived limit [def-weil-derived-limit] in\n$D(Y_{\\mathrm{proet}},\\mathcal O_E)$, which exists because countable products\nof pro-etale module sheaves are exact\n[lem-weil-proetale-countable-products-exact, lem-weil-derived-limit-existence].\nThe tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$: the map\n$K\\otimes^L_{\\mathcal O_E}A_{E,n+1}\\to K\\otimes^L_{\\mathcal O_E}A_{E,n}$,\nfollowed by the identification of $R(f_{n+1})_*$ of an\n$A_{E,n}$-module complex with $R(f_n)_*$ of it\n[lem-weil-proetale-direct-image-restriction-of-scalars]. The\nfinite-reduction comparison is the natural map\n\n$$\n (Rf_*K)\\otimes^L_{\\mathcal O_E}A_{E,n}\n \\longrightarrow\n Rf_{*,n}\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr),\n$$\n\nadjoint [lem-weil-derived-scalar-extension-restriction-adjunction] to the\nprojection of $R\\varprojlim$ onto its $n$-th term;\n\nits being an isomorphism, and its compatibility with composition and scalar\nextension, are separate comparison assertions, not part of this definition of\nthe derived direct image. Here $A_{E,n}$ and finite-level constructibility\nare the finite-torsion coefficient data\n[def-weil-finite-torsion-constructibility], and $\\mathcal H^r$ is the\ncohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. For\n$\\Lambda=E$ use the rationalized category\n[def-weil-rationalization-karoubi]; for $\\Lambda=\\Qlb$ use the common-stage\ncategory [def-weil-algebraically-closed-coefficients].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+    "place": "node def-weil-derived-direct-image, order 1468"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'def sheafPushforwardContinuous\\|def pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Continuous.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; grep -n '^def\\|^abbrev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-   "results": "`Functor.sheafPushforwardContinuous`, `SheafOfModules.pushforward` along continuous functors; small pro-etale site `Scheme.ProEt S`, `ProEt.topology S`; no base-change functor between small pro-etale sites",
-   "date": "2026-10-09",
-   "verdict": "no match (recorded in def-weil-proetale-module-direct-image)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'homotopyLimit\\|Rlim\\|derivedLimit\\|HasCountableProducts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match for the derived limit $R\\varprojlim$ (it is def-weil-derived-limit)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1468,
- "blueprint_uses": [
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-tensor",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-proetale-site",
-  "def-weil-rationalization-karoubi",
-  "def-weil-scheme-morphism-properties"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-derived-direct-image",
-  "worker": "stage1",
-  "summary": "Checked the statement against the master blueprint node (order 1468); slopmaster2 has no Lean for it (state none) and no separate blueprint file for this node. The mathematical content is unchanged; the statement now names every notion it is built from, by bracketed references added to its existing sentences: the underived direct image of pro-etale module sheaves (new node def-weil-proetale-module-direct-image) and its left exactness (new lem-weil-proetale-module-direct-image-left-exact); the K-injective resolutions (def-weil-pbc-kinjective-resolutions) and the finite-level derived direct image $R(f_n)_*$, which is $Ru_*$ of def-weil-pbc-proetale-operations with $u=f$ and coefficients $A_{E,n}$; $D(-,\\mathcal O_E)$ and $\\operatorname{Res}_n$ (def-weil-completed-integral-coefficients, being split by another worker) with the exactness that lets $\\operatorname{Res}_n$ act termwise on derived categories (lem-weil-restriction-of-scalars-exact); $R\\varprojlim$ as the Roos-triangle derived limit (def-weil-derived-limit), whose existence needs countable products in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ (lem-weil-derived-limit-existence part 2, with the exactness of countable products of pro-etale module sheaves, new lem-weil-proetale-countable-products-exact from Bhatt-Scholze 3.1.9, 3.2.3, 4.2.8); the tower maps, which need the identification of $R(f_{n+1})_*$ on $A_{E,n}$-complexes with $R(f_n)_*$ (new lem-weil-proetale-direct-image-restriction-of-scalars, Stacks 0D6E); and the finite-reduction comparison map, defined as the adjoint of the projection $R\\varprojlim\\to$ $n$-th term under $-\\otimes^L A_{E,n}\\dashv\\operatorname{Res}_n$ (new lem-weil-derived-scalar-extension-restriction-adjunction, Stacks 07A6). Kept the blueprint's dependencies (scheme morphisms, pro-etale site, derived pullback/tensor/Hom notation, derived tensor, $D^b_c(X,\\mathcal O_E)$, finite-torsion constructibility, cohomology sheaves, rationalized and common-stage categories). Mathlib has abstract total right derived functors, K-injective complexes, pushforward of sheaves along continuous functors and the small pro-etale site, but not the pro-etale base-change functor, unbounded K-injective resolutions of sheaves, or derived limits; searches recorded."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "lean": {
-  "module": "Sheaf.Paper.SfDerivedDirectImage",
-  "declaration": "WeilConjectures.SfIntegralDirectImage",
-  "declarations": [
-   "WeilConjectures.sfCompletedCoefficientMap_existsUnique",
-   "WeilConjectures.sfCompletedCoefficientMap",
-   "WeilConjectures.sfCompletedModuleDirectImage",
-   "WeilConjectures.sfCompletedModuleDirectImage_additive",
-   "WeilConjectures.sfCompletedHasKInjectiveResolutions",
-   "WeilConjectures.sfCompletedDerivedDirectImage",
-   "WeilConjectures.sfDirectImageRestrictionComparison_existsUnique",
-   "WeilConjectures.sfDirectImageRestrictionComparison",
-   "WeilConjectures.sfDerivedRestrictionComparison_existsUnique",
-   "WeilConjectures.sfDerivedRestrictionComparison",
-   "WeilConjectures.sfFiniteDerivedDirectImage",
-   "WeilConjectures.sfDirectImageTerm",
-   "WeilConjectures.sfDirectImageTransition",
-   "WeilConjectures.SfIntegralDirectImage",
-   "WeilConjectures.sfDirectImageReductionComparison"
+  "stmt_deps": [
+    "def-weil-scheme-morphism-properties",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-module-direct-image",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-tensor",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-restriction-of-scalars-exact",
+    "def-weil-derived-limit",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
   ],
-  "file": "lean/Sheaf/Paper/SfDerivedDirectImage.lean",
-  "statement": "structure SfIntegralDirectImage (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) [HasProduct (sfDirectImageTerm l E f K)]",
-  "branch": "newtargets-dag",
-  "by": "Q29",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B): The node has no Lean record; the current server has no Sheaf.Paper.DerivedDirectImage. Supply its finite-level derived image, the canonically normalized finite-image tower in completed modules, the Roos-triangle presentation of an integral image, and the actual scalar-adjoint projection comparison. The auxiliary completed pushforward specifies the transition comparison canonically; no arbitrary comparison is assumed."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-80772b1e6",
-  "group": "Q29",
-  "result": "pass",
-  "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rn 'def totalRightDerived\\|class HasRightDerivedFunctor\\|def rightDerivedFunctorPlus\\|def Functor.rightDerived ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/",
+      "results": "CategoryTheory/Functor/Derived/RightDerived.lean: `HasRightDerivedFunctor`, `Functor.totalRightDerived` (abstract total right derived functor between localized categories, existence assumed); Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean: `Functor.rightDerivedFunctorPlus` on `DerivedCategory.Plus` (bounded below, enough injectives); CategoryTheory/Abelian/RightDerived.lean: `Functor.rightDerived F n` on objects via injective resolutions",
+      "date": "2026-10-09",
+      "verdict": "generalization only: the abstract derived functor exists in Mathlib, but not its existence on unbounded derived categories of sheaves via K-injective resolutions, nor the direct image of sheaves on pro-etale sites"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'IsKInjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'IsGrothendieckAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+      "results": "`CochainComplex.IsKInjective` (Algebra/Homology/HomotopyCategory/KInjective.lean, DerivedCategory/KInjective.lean: Hom into a K-injective complex in the derived category); no theorem that every complex in a Grothendieck abelian category has a K-injective resolution; `IsGrothendieckAbelian (Sheaf (ProEt.topology X) Ab)` instance in ElladicCohomology.lean",
+      "date": "2026-10-09",
+      "verdict": "no match for the unbounded K-injective derived direct image"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'def sheafPushforwardContinuous\\|def pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Continuous.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; grep -n '^def\\|^abbrev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "results": "`Functor.sheafPushforwardContinuous`, `SheafOfModules.pushforward` along continuous functors; small pro-etale site `Scheme.ProEt S`, `ProEt.topology S`; no base-change functor between small pro-etale sites",
+      "date": "2026-10-09",
+      "verdict": "no match (recorded in def-weil-proetale-module-direct-image)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'homotopyLimit\\|Rlim\\|derivedLimit\\|HasCountableProducts' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match for the derived limit $R\\varprojlim$ (it is def-weil-derived-limit)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1468,
+  "blueprint_uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-tensor",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-proetale-site",
+    "def-weil-rationalization-karoubi",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-derived-direct-image",
+    "worker": "stage1",
+    "summary": "Checked the statement against the master blueprint node (order 1468); slopmaster2 has no Lean for it (state none) and no separate blueprint file for this node. The mathematical content is unchanged; the statement now names every notion it is built from, by bracketed references added to its existing sentences: the underived direct image of pro-etale module sheaves (new node def-weil-proetale-module-direct-image) and its left exactness (new lem-weil-proetale-module-direct-image-left-exact); the K-injective resolutions (def-weil-pbc-kinjective-resolutions) and the finite-level derived direct image $R(f_n)_*$, which is $Ru_*$ of def-weil-pbc-proetale-operations with $u=f$ and coefficients $A_{E,n}$; $D(-,\\mathcal O_E)$ and $\\operatorname{Res}_n$ (def-weil-completed-integral-coefficients, being split by another worker) with the exactness that lets $\\operatorname{Res}_n$ act termwise on derived categories (lem-weil-restriction-of-scalars-exact); $R\\varprojlim$ as the Roos-triangle derived limit (def-weil-derived-limit), whose existence needs countable products in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ (lem-weil-derived-limit-existence part 2, with the exactness of countable products of pro-etale module sheaves, new lem-weil-proetale-countable-products-exact from Bhatt-Scholze 3.1.9, 3.2.3, 4.2.8); the tower maps, which need the identification of $R(f_{n+1})_*$ on $A_{E,n}$-complexes with $R(f_n)_*$ (new lem-weil-proetale-direct-image-restriction-of-scalars, Stacks 0D6E); and the finite-reduction comparison map, defined as the adjoint of the projection $R\\varprojlim\\to$ $n$-th term under $-\\otimes^L A_{E,n}\\dashv\\operatorname{Res}_n$ (new lem-weil-derived-scalar-extension-restriction-adjunction, Stacks 07A6). Kept the blueprint's dependencies (scheme morphisms, pro-etale site, derived pullback/tensor/Hom notation, derived tensor, $D^b_c(X,\\mathcal O_E)$, finite-torsion constructibility, cohomology sheaves, rationalized and common-stage categories). Mathlib has abstract total right derived functors, K-injective complexes, pushforward of sheaves along continuous functors and the small pro-etale site, but not the pro-etale base-change functor, unbounded K-injective resolutions of sheaves, or derived limits; searches recorded."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "lean": {
+    "module": "Sheaf.Paper.SfDerivedDirectImage",
+    "declaration": "WeilConjectures.SfIntegralDirectImage",
+    "declarations": [
+      "WeilConjectures.sfCompletedCoefficientMap_existsUnique",
+      "WeilConjectures.sfCompletedCoefficientMap",
+      "WeilConjectures.sfCompletedModuleDirectImage",
+      "WeilConjectures.sfCompletedModuleDirectImage_additive",
+      "WeilConjectures.sfCompletedHasKInjectiveResolutions",
+      "WeilConjectures.sfCompletedDerivedDirectImage",
+      "WeilConjectures.sfDirectImageRestrictionComparison_existsUnique",
+      "WeilConjectures.sfDirectImageRestrictionComparison",
+      "WeilConjectures.sfDerivedRestrictionComparison_existsUnique",
+      "WeilConjectures.sfDerivedRestrictionComparison",
+      "WeilConjectures.sfFiniteDerivedDirectImage",
+      "WeilConjectures.sfDirectImageTerm",
+      "WeilConjectures.sfDirectImageTransition",
+      "WeilConjectures.SfIntegralDirectImage",
+      "WeilConjectures.sfDirectImageReductionComparison"
+    ],
+    "file": "lean/Sheaf/Paper/SfDerivedDirectImage.lean",
+    "statement": "structure SfIntegralDirectImage (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) [HasProduct (sfDirectImageTerm l E f K)]",
+    "branch": "newtargets-dag",
+    "by": "Q29",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "§1(B): The node has no Lean record; the current server has no Sheaf.Paper.DerivedDirectImage. Supply its finite-level derived image, the canonically normalized finite-image tower in completed modules, the Roos-triangle presentation of an integral image, and the actual scalar-adjoint projection comparison. The auxiliary completed pushforward specifies the transition comparison canonically; no arbitrary comparison is assumed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-80772b1e6",
+    "group": "Q29",
+    "result": "pass",
+    "note": "Wrote review.md. Audited all eleven statement dependencies, five modules, canonical constructions, source correspondence, universes, edge cases, report sections, and verbatim signatures. All five immutable modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $X,Y$ be schemes on which $\\ell$ is\ninvertible, and let $f:X\\to Y$ be a morphism\n[def-weil-scheme-morphism-properties]; write $f_n$ for this morphism at\ncoefficient level $A_{E,n}$. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with derived pullback and internal\nHom notation [def-weil-derived-pullback-tensor-hom] and derived tensor\nnotation [def-weil-derived-tensor], the functor\n$f_*:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(Y_{\\mathrm{proet}},A)$ is left exact. At\nfinite level, choose a K-injective resolution and define its total\nright-derived functor by\n\n$$\n Rf_{*,n}=R(f_n)_*:D(X_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow D(Y_{\\mathrm{proet}},A_{E,n}).\n$$\n\nFor a derived-complete integral [def-weil-derived-complete-integral-detailed]\ncomplex $K\\in D^b_c(X,\\mathcal O_E)$, define\n\n$$\n Rf_*K=\n R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}\n \\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr).\n$$\n\nThe tower maps are induced by $A_{E,n+1}\\twoheadrightarrow A_{E,n}$. The\nfinite-reduction comparison is the natural map\n\n$$\n (Rf_*K)\\otimes^L_{\\mathcal O_E}A_{E,n}\n \\longrightarrow\n Rf_{*,n}\\bigl(K\\otimes^L_{\\mathcal O_E}A_{E,n}\\bigr);\n$$\n\nHere $A_{E,n}$ and finite-level constructibility\nare the finite-torsion coefficient data\n[def-weil-finite-torsion-constructibility], and $\\mathcal H^r$ is the\ncohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. For\n$\\Lambda=E$ use the rationalized category\n[def-weil-rationalization-karoubi]; for $\\Lambda=\\Qlb$ use the common-stage\ncategory [def-weil-algebraically-closed-coefficients].",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

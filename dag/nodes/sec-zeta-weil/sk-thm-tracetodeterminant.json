@@ -1,0 +1,66 @@
+{
+  "id": "sk-thm-tracetodeterminant",
+  "kind": "statement",
+  "title": "Trace-to-determinant identity",
+  "statement": "Let $X_0/\\Fq$ be smooth, proper and geometrically connected of pure dimension\n$d$, and let $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})$ be the family of\n[sk-def-cohfamily]. Then\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\qquad\\text{in }\\Ql(T)\\cap\\Ql[[T]] .\n$$",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/_section.md",
+    "place": "node sk-thm-tracetodeterminant, order 3221"
+  },
+  "stmt_deps": [
+    "sk-def-cohfamily"
+  ],
+  "proof": [
+    {
+      "text": "By [sk-thm-trace-transport] (a) the point counts are alternating traces,\n$N_n=\\sum_i(-1)^{i}\\Tr(F_{i,\\ell}^{n}\\mid V_{i,\\ell})$. Substituting into the\nexponential definition of [sk-def-zeta] and exchanging the finite $i$-sum\nwith the power series,\n\n$$\n\\log Z(X_0,T)=\\sum_{n\\ge1}\\Bigl(\\sum_i(-1)^{i}\\Tr(F_{i,\\ell}^{n}\\mid\nV_{i,\\ell})\\Bigr)\\frac{T^{n}}{n}\n=\\sum_i(-1)^{i}\\sum_{n\\ge1}\\Tr(F_{i,\\ell}^{n})\\frac{T^{n}}{n}.\n$$",
+      "uses": [
+        "sk-thm-trace-transport",
+        "sk-def-zeta"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "By [sk-prop-logdet] the inner series is $-\\log P_{i,\\ell}(T)$, so\n$\\log Z=\\sum_i(-1)^{i+1}\\log P_{i,\\ell} =\\log\\prod_iP_{i,\\ell}^{(-1)^{i+1}}$. Exponentiating gives the identity; it\nlies in $\\Ql(T)$ because the right side is a finite product of rational\nfunctions with constant term $1$, and in $\\Ql[[T]]$ because the left side is.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-trace-transport",
+    "sk-def-zeta"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found",
+    "unreachable",
+    "in_cycle"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 3221,
+  "blueprint_uses": [
+    "sk-def-cohfamily",
+    "sk-def-zeta",
+    "sk-prop-logdet",
+    "sk-thm-trace-formula",
+    "sk-thm-trace-transport"
+  ],
+  "blueprint_lean": [
+    "TraceDatum.zeta_mul_prod_even_eq_prod_odd"
+  ],
+  "blueprint_lean_not_found": [
+    "TraceDatum.zeta_mul_prod_even_eq_prod_odd"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

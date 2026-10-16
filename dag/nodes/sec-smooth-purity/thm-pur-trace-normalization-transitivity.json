@@ -1,33 +1,49 @@
 {
- "id": "thm-pur-trace-normalization-transitivity",
- "blueprint": {
-  "is": "thm-pur-trace-normalization-transitivity",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Trace normalization and transitivity",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated\nmorphisms of relative dimensions $d$ and $e$, and let\n$K\\in D^b_{ctf}(Z,\\Lambda)$. The typed composite\n\n$$\n\\begin{array}{l}\nR(gf)_!L(gf)^*K(d+e)[2d+2e]\n\\xrightarrow{\\ \\alpha_{g,f}^{-1}\\ }\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\\\\\n\\hphantom{R(gf)_!L(gf)^*K(d+e)[2d+2e]}\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K\n\\end{array}\n$$\n\nwhere $\\alpha_{g,f}$ is the composition law of\n[thm-sf-comp-composition],\nequals $\\operatorname{Tr}^{\\mathrm{sm}}_{gf,K}$, after the pullback-composition\nand twist-additivity identifications; thus the $f$-trace, with the\n$(e)[2e]$ twist already present, is applied before the $g$-trace.\nOn every geometric fiber of a structural $f=p_d:\\mathbf A^d\\to\\Spec k$,\nthe smooth trace\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}:\nR\\Gamma_c(\\mathbf A^d,\\Lambda(d)[2d])\\longrightarrow\\Lambda\n$$\n\nis the product of the normalized affine-line traces of\n[thm-pur-affine-line-purity]: it sends the ordered fundamental class\nof $\\mathbf A^d$, the $d$-fold tensor of the affine-line classes, to\n$1\\in\\Lambda$. The smooth traces are compatible with arbitrary base\nchange of $Z$ and with the coefficient transports of\n[thm-pur-finite-reduction-of-purity],\n[thm-pur-adic-reconstruction], and\n[thm-pur-rational-and-qbar-purity].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-trace-normalization-transitivity.md",
-  "place": "node thm-pur-trace-normalization-transitivity, order 2028"
- },
- "stmt_deps": [
-  "def-pur-conventions",
-  "thm-sf-comp-composition",
-  "thm-pur-affine-line-purity",
-  "thm-pur-finite-reduction-of-purity",
-  "thm-pur-adic-reconstruction",
-  "thm-pur-rational-and-qbar-purity",
-  "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof": [
-  {
-   "text": "Step 1: the transitivity. Expanding the two composites with\n[def-pur-smooth-trace], the left-hand composite is\n\n$$\n\\begin{gathered}\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\n\\\\\n\\xrightarrow{\\ Rg_!Rf_!(\\gamma_{f,Lg^*K(e)[2e]})\\ }\nRg_!Rf_!Rf^!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K,\n\\end{gathered}\n$$\n\nwhere the first arrow is the $\\alpha_{g,f}^{-1}$-identification of the\nstatement (the pullback-composition and twist-additivity identifications,\nall canonical), and the trace $\\operatorname{Tr}_{f,Lg^*K(e)[2e]}$ is\nthe counit of $Rf_!\\dashv Rf^!$ evaluated on $Lg^*K(e)[2e]$. The\ntransposed form of the purity–composition coherence\n[thm-pur-composition-coherence] says that\n$Rf_!(\\gamma_{f,Lg^*K(e)[2e]})$ followed by the counit is the counit\nof $Rf_!\\dashv Rf^!$ applied to the object $Lf^*Lg^*K(d+e)[2d+2e]$\nthrough the composition isomorphism $c_{g,f}$ – it identifies\n$Rf_!Rf^!Lg^*K(e)[2e]$ with $Rf_!Lf^*Lg^*K(d+e)[2d+2e]$ – so the\ncomposite of the last three displayed arrows is exactly the\n$f$-trace $Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})$,\nwhich is what the statement's composite applies. The remaining\nidentification is the functoriality of the counits with respect to the\ncanonical identification $R(gf)_!\\cong Rg_!Rf_!$ (the $\\alpha_{g,f}$\nof [thm-sf-comp-composition]), the compatibility of the\nadjunction with composition being the transpose of the composition\nisomorphism of the $R^!$-side (the composition\nisomorphism of the $R_!$-side is the transpose of the one of the\n$R^!$-side, and the triangle identity of the adjunction\n$Rf_!\\dashv Rf^!$ is used once, in the form\n$\\operatorname{Tr}_f\\circ Rf_!(\\gamma_{f,K})=\\operatorname{Tr}_{f,K}$).\nHence the two composites agree, which is the transitivity.\nStep 2: the normalization on the geometric fiber. For\n$f=p_d:\\mathbf A^d\\to\\Spec k$, the smooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}$ is, by\n[def-pur-smooth-trace], $R\\Gamma_c(\\gamma_{p_d,\\Lambda})$ followed\nby the counit, and by the agreement\n[lem-pur-projection-purity-agreement] the purity map\n$\\gamma_{p_d,\\Lambda}$ is the affinity-space purity comparison, i.e. the affinity-space integration of\n[cor-pur-affine-space-purity]; by induction on $d$ with Step 1\n(the case $d+e$ with $e=1$: the $d$-fold trace is the iterate of\nthe one-fold trace), and with the case $d=1$ being\n[thm-pur-affine-line-purity] in adjoint form (the\naffine-line integration $\\int_p$ of the orientation sends the\nfundamental class of $\\mathbf A^1$ to $1$, by the normalization of\nthe orientation in [thm-pur-affine-line-orientation]), the trace\nof the ordered fundamental class, the $d$-fold tensor of the\naffine-line classes, is the product of the images, i.e.\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}\\bigl(\\underbrace{1\\otimes\\cdots\\otimes1}\\bigr)=1\\in\\Lambda;\n$$\n\nthe intermediate Koszul signs in the reassociations are $+1$ by\n[cor-pur-affine-space-purity] (the shift factors are of even\ndegree). Step 3: the base-change compatibility. The smooth trace is\ncompatible with the base change of $Z$ by the conjugation of\n[thm-pur-smooth-base-change-coherence] with the compact-support\nbase change of the adjunctions (the trace is the counit, the counit of\nthe pulled-back adjunction is the pullback of the counit under the\nbase-change maps: the base-change compatibility of the adjunction\n$Rf_!\\dashv Rf^!$). Step 4: the coefficient\ntransport. The compatibility with finite reduction is the transport\nof [thm-pur-finite-reduction-of-purity] (the trace is built from\nthe purity isomorphism and the counit, both reducing compatibly),\nand the adic and rational transports are the corresponding\nstatements of [thm-pur-adic-reconstruction] and\n[thm-pur-rational-and-qbar-purity], which transport the smooth\ntrace together with the purity isomorphism.",
-   "uses": [
+  "id": "thm-pur-trace-normalization-transitivity",
+  "blueprint": {
+    "is": "thm-pur-trace-normalization-transitivity",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Trace normalization and transitivity",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated\nmorphisms of relative dimensions $d$ and $e$, and let\n$K\\in D^b_{ctf}(Z,\\Lambda)$. The typed composite\n\n$$\n\\begin{array}{l}\nR(gf)_!L(gf)^*K(d+e)[2d+2e]\n\\xrightarrow{\\ \\alpha_{g,f}^{-1}\\ }\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\\\\\n\\hphantom{R(gf)_!L(gf)^*K(d+e)[2d+2e]}\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K\n\\end{array}\n$$\n\nwhere $\\alpha_{g,f}$ is the composition law of\n[thm-sf-comp-composition],\nequals $\\operatorname{Tr}^{\\mathrm{sm}}_{gf,K}$, after the pullback-composition\nand twist-additivity identifications; thus the $f$-trace, with the\n$(e)[2e]$ twist already present, is applied before the $g$-trace.\nOn every geometric fiber of a structural $f=p_d:\\mathbf A^d\\to\\Spec k$,\nthe smooth trace\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}:\nR\\Gamma_c(\\mathbf A^d,\\Lambda(d)[2d])\\longrightarrow\\Lambda\n$$\n\nis the product of the normalized affine-line traces of\n[thm-pur-affine-line-purity]: it sends the ordered fundamental class\nof $\\mathbf A^d$, the $d$-fold tensor of the affine-line classes, to\n$1\\in\\Lambda$. The smooth traces are compatible with arbitrary base\nchange of $Z$ and with the coefficient transports of\n[thm-pur-finite-reduction-of-purity],\n[thm-pur-adic-reconstruction], and\n[thm-pur-rational-and-qbar-purity].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-trace-normalization-transitivity.md",
+    "place": "node thm-pur-trace-normalization-transitivity, order 2028"
+  },
+  "stmt_deps": [
+    "def-pur-conventions",
+    "thm-sf-comp-composition",
+    "thm-pur-affine-line-purity",
+    "thm-pur-finite-reduction-of-purity",
+    "thm-pur-adic-reconstruction",
+    "thm-pur-rational-and-qbar-purity",
+    "def-coefficient-twists-detailed",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-proetale-site",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof": [
+    {
+      "text": "Step 1: the transitivity. Expanding the two composites with\n[def-pur-smooth-trace], the left-hand composite is\n\n$$\n\\begin{gathered}\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\n\\\\\n\\xrightarrow{\\ Rg_!Rf_!(\\gamma_{f,Lg^*K(e)[2e]})\\ }\nRg_!Rf_!Rf^!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K,\n\\end{gathered}\n$$\n\nwhere the first arrow is the $\\alpha_{g,f}^{-1}$-identification of the\nstatement (the pullback-composition and twist-additivity identifications,\nall canonical), and the trace $\\operatorname{Tr}_{f,Lg^*K(e)[2e]}$ is\nthe counit of $Rf_!\\dashv Rf^!$ evaluated on $Lg^*K(e)[2e]$. The\ntransposed form of the purity–composition coherence\n[thm-pur-composition-coherence] says that\n$Rf_!(\\gamma_{f,Lg^*K(e)[2e]})$ followed by the counit is the counit\nof $Rf_!\\dashv Rf^!$ applied to the object $Lf^*Lg^*K(d+e)[2d+2e]$\nthrough the composition isomorphism $c_{g,f}$ – it identifies\n$Rf_!Rf^!Lg^*K(e)[2e]$ with $Rf_!Lf^*Lg^*K(d+e)[2d+2e]$ – so the\ncomposite of the last three displayed arrows is exactly the\n$f$-trace $Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})$,\nwhich is what the statement's composite applies. The remaining\nidentification is the functoriality of the counits with respect to the\ncanonical identification $R(gf)_!\\cong Rg_!Rf_!$ (the $\\alpha_{g,f}$\nof [thm-sf-comp-composition]), the compatibility of the\nadjunction with composition being the transpose of the composition\nisomorphism of the $R^!$-side (the composition\nisomorphism of the $R_!$-side is the transpose of the one of the\n$R^!$-side, and the triangle identity of the adjunction\n$Rf_!\\dashv Rf^!$ is used once, in the form\n$\\operatorname{Tr}_f\\circ Rf_!(\\gamma_{f,K})=\\operatorname{Tr}_{f,K}$).\nHence the two composites agree, which is the transitivity.\nStep 2: the normalization on the geometric fiber. For\n$f=p_d:\\mathbf A^d\\to\\Spec k$, the smooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}$ is, by\n[def-pur-smooth-trace], $R\\Gamma_c(\\gamma_{p_d,\\Lambda})$ followed\nby the counit, and by the agreement\n[lem-pur-projection-purity-agreement] the purity map\n$\\gamma_{p_d,\\Lambda}$ is the affinity-space purity comparison, i.e. the affinity-space integration of\n[cor-pur-affine-space-purity]; by induction on $d$ with Step 1\n(the case $d+e$ with $e=1$: the $d$-fold trace is the iterate of\nthe one-fold trace), and with the case $d=1$ being\n[thm-pur-affine-line-purity] in adjoint form (the\naffine-line integration $\\int_p$ of the orientation sends the\nfundamental class of $\\mathbf A^1$ to $1$, by the normalization of\nthe orientation in [thm-pur-affine-line-orientation]), the trace\nof the ordered fundamental class, the $d$-fold tensor of the\naffine-line classes, is the product of the images, i.e.\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}\\bigl(\\underbrace{1\\otimes\\cdots\\otimes1}\\bigr)=1\\in\\Lambda;\n$$\n\nthe intermediate Koszul signs in the reassociations are $+1$ by\n[cor-pur-affine-space-purity] (the shift factors are of even\ndegree). Step 3: the base-change compatibility. The smooth trace is\ncompatible with the base change of $Z$ by the conjugation of\n[thm-pur-smooth-base-change-coherence] with the compact-support\nbase change of the adjunctions (the trace is the counit, the counit of\nthe pulled-back adjunction is the pullback of the counit under the\nbase-change maps: the base-change compatibility of the adjunction\n$Rf_!\\dashv Rf^!$). Step 4: the coefficient\ntransport. The compatibility with finite reduction is the transport\nof [thm-pur-finite-reduction-of-purity] (the trace is built from\nthe purity isomorphism and the counit, both reducing compatibly),\nand the adic and rational transports are the corresponding\nstatements of [thm-pur-adic-reconstruction] and\n[thm-pur-rational-and-qbar-purity], which transport the smooth\ntrace together with the purity isomorphism.",
+      "uses": [
+        "def-pur-smooth-trace",
+        "thm-pur-composition-coherence",
+        "thm-sf-comp-composition",
+        "lem-pur-projection-purity-agreement",
+        "cor-pur-affine-space-purity",
+        "thm-pur-affine-line-purity",
+        "thm-pur-affine-line-orientation",
+        "thm-pur-smooth-base-change-coherence",
+        "thm-pur-finite-reduction-of-purity",
+        "thm-pur-adic-reconstruction",
+        "thm-pur-rational-and-qbar-purity"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-pur-smooth-trace",
     "thm-pur-composition-coherence",
     "thm-sf-comp-composition",
@@ -39,72 +55,80 @@
     "thm-pur-finite-reduction-of-purity",
     "thm-pur-adic-reconstruction",
     "thm-pur-rational-and-qbar-purity"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pur-smooth-trace",
-  "thm-pur-composition-coherence",
-  "thm-sf-comp-composition",
-  "lem-pur-projection-purity-agreement",
-  "cor-pur-affine-space-purity",
-  "thm-pur-affine-line-purity",
-  "thm-pur-affine-line-orientation",
-  "thm-pur-smooth-base-change-coherence",
-  "thm-pur-finite-reduction-of-purity",
-  "thm-pur-adic-reconstruction",
-  "thm-pur-rational-and-qbar-purity"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-trace-normalization-transitivity.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 2028,
- "blueprint_uses": [
-  "cor-pur-affine-space-purity",
-  "def-coefficient-twists-detailed",
-  "def-pur-conventions",
-  "def-pur-smooth-trace",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties",
-  "lem-pur-projection-purity-agreement",
-  "thm-pur-adic-reconstruction",
-  "thm-pur-affine-line-orientation",
-  "thm-pur-affine-line-purity",
-  "thm-pur-composition-coherence",
-  "thm-pur-finite-reduction-of-purity",
-  "thm-pur-rational-and-qbar-purity",
-  "thm-pur-smooth-base-change-coherence",
-  "thm-sf-comp-composition"
- ],
- "uses_not_cited": [
-  "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-trace-normalization-transitivity.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2028,
+  "blueprint_uses": [
+    "cor-pur-affine-space-purity",
+    "def-coefficient-twists-detailed",
+    "def-pur-conventions",
+    "def-pur-smooth-trace",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-proetale-site",
+    "def-weil-scheme-morphism-properties",
+    "lem-pur-projection-purity-agreement",
+    "thm-pur-adic-reconstruction",
+    "thm-pur-affine-line-orientation",
+    "thm-pur-affine-line-purity",
+    "thm-pur-composition-coherence",
+    "thm-pur-finite-reduction-of-purity",
+    "thm-pur-rational-and-qbar-purity",
+    "thm-pur-smooth-base-change-coherence",
+    "thm-sf-comp-composition"
+  ],
+  "uses_not_cited": [
+    "def-coefficient-twists-detailed",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-proetale-site",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-thm-purity-transport",
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated\nmorphisms of relative dimensions $d$ and $e$, and let\n$K\\in D^b_{ctf}(Z,\\Lambda)$. The typed composite\n\n$$\n\\begin{array}{l}\nR(gf)_!L(gf)^*K(d+e)[2d+2e]\n\\xrightarrow{\\ \\alpha_{g,f}^{-1}\\ }\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\\\\\n\\hphantom{R(gf)_!L(gf)^*K(d+e)[2d+2e]}\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K\n\\end{array}\n$$\n\nwhere $\\alpha_{g,f}$ is the composition law of\n[thm-sf-comp-composition],\nequals $\\operatorname{Tr}^{\\mathrm{sm}}_{gf,K}$, after the pullback-composition\nand twist-additivity identifications; thus the $f$-trace, with the\n$(e)[2e]$ twist already present, is applied before the $g$-trace.\nOn every geometric fiber of a structural $f=p_d:\\mathbf A^d\\to\\Spec k$,\nthe smooth trace\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}:\nR\\Gamma_c(\\mathbf A^d,\\Lambda(d)[2d])\\longrightarrow\\Lambda\n$$\n\nis the product of the normalized affine-line traces of\n[thm-pur-affine-line-purity]: it sends the ordered fundamental class\nof $\\mathbf A^d$, the $d$-fold tensor of the affine-line classes, to\n$1\\in\\Lambda$. The smooth traces are compatible with arbitrary base\nchange of $Z$ and with the coefficient transports of\n[thm-pur-finite-reduction-of-purity],\n[thm-pur-adic-reconstruction], and\n[thm-pur-rational-and-qbar-purity].",
+    "proof": [
+      {
+        "text": "Step 1: the transitivity. Expanding the two composites with\n[def-pur-smooth-trace], the left-hand composite is\n\n$$\n\\begin{gathered}\nRg_!Rf_!Lf^*Lg^*K(d+e)[2d+2e]\n\\\\\n\\xrightarrow{\\ Rg_!Rf_!(\\gamma_{f,Lg^*K(e)[2e]})\\ }\nRg_!Rf_!Rf^!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ Rg_!(\\operatorname{Tr}_{f,Lg^*K(e)[2e]})\\ }\nRg_!Lg^*K(e)[2e]\n\\\\\n\\xrightarrow{\\ \\operatorname{Tr}^{\\mathrm{sm}}_{g,K}\\ }K,\n\\end{gathered}\n$$\n\nwhere the first arrow is the $\\alpha_{g,f}^{-1}$-identification of the\nstatement (the pullback-composition and twist-additivity identifications,\nall canonical), and the trace $\\operatorname{Tr}_{f,Lg^*K(e)[2e]}$ is\nthe counit of $Rf_!\\dashv Rf^!$ evaluated on $Lg^*K(e)[2e]$. The\ntransposed form of the purity–composition coherence\n[thm-pur-composition-coherence] says that\n$Rf_!(\\gamma_{f,Lg^*K(e)[2e]})$ followed by the counit is the counit\nof $Rf_!\\dashv Rf^!$ applied to the object $Lf^*Lg^*K(d+e)[2d+2e]$\nthrough the composition isomorphism $c_{g,f}$ – it identifies\n$Rf_!Rf^!Lg^*K(e)[2e]$ with $Rf_!Lf^*Lg^*K(d+e)[2d+2e]$ – so the\ncomposite of the last three displayed arrows is exactly the\n$f$-trace $Rg_!(\\operatorname{Tr}^{\\mathrm{sm}}_{f,Lg^*K(e)[2e]})$,\nwhich is what the statement's composite applies. The remaining\nidentification is the functoriality of the counits with respect to the\ncanonical identification $R(gf)_!\\cong Rg_!Rf_!$ (the $\\alpha_{g,f}$\nof [thm-sf-comp-composition]), the compatibility of the\nadjunction with composition being the transpose of the composition\nisomorphism of the $R^!$-side (the composition\nisomorphism of the $R_!$-side is the transpose of the one of the\n$R^!$-side, and the triangle identity of the adjunction\n$Rf_!\\dashv Rf^!$ is used once, in the form\n$\\operatorname{Tr}_f\\circ Rf_!(\\gamma_{f,K})=\\operatorname{Tr}_{f,K}$).\nHence the two composites agree, which is the transitivity.\nStep 2: the normalization on the geometric fiber. For\n$f=p_d:\\mathbf A^d\\to\\Spec k$, the smooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}$ is, by\n[def-pur-smooth-trace], $R\\Gamma_c(\\gamma_{p_d,\\Lambda})$ followed\nby the counit, and by the agreement\n[lem-pur-projection-purity-agreement] the purity map\n$\\gamma_{p_d,\\Lambda}$ is the affinity-space purity comparison, i.e. the affinity-space integration of\n[cor-pur-affine-space-purity]; by induction on $d$ with Step 1\n(the case $d+e$ with $e=1$: the $d$-fold trace is the iterate of\nthe one-fold trace), and with the case $d=1$ being\n[thm-pur-affine-line-purity] in adjoint form (the\naffine-line integration $\\int_p$ of the orientation sends the\nfundamental class of $\\mathbf A^1$ to $1$, by the normalization of\nthe orientation in [thm-pur-affine-line-orientation]), the trace\nof the ordered fundamental class, the $d$-fold tensor of the\naffine-line classes, is the product of the images, i.e.\n\n$$\n\\operatorname{Tr}^{\\mathrm{sm}}_{p_d,\\Lambda}\\bigl(\\underbrace{1\\otimes\\cdots\\otimes1}\\bigr)=1\\in\\Lambda;\n$$\n\nthe intermediate Koszul signs in the reassociations are $+1$ by\n[cor-pur-affine-space-purity] (the shift factors are of even\ndegree). Step 3: the base-change compatibility. The smooth trace is\ncompatible with the base change of $Z$ by the conjugation of\n[thm-pur-smooth-base-change-coherence] with the compact-support\nbase change of the adjunctions (the trace is the counit, the counit of\nthe pulled-back adjunction is the pullback of the counit under the\nbase-change maps: the base-change compatibility of the adjunction\n$Rf_!\\dashv Rf^!$). Step 4: the coefficient\ntransport. The compatibility with finite reduction is the transport\nof [thm-pur-finite-reduction-of-purity] (the trace is built from\nthe purity isomorphism and the counit, both reducing compatibly),\nand the adic and rational transports are the corresponding\nstatements of [thm-pur-adic-reconstruction] and\n[thm-pur-rational-and-qbar-purity], which transport the smooth\ntrace together with the purity isomorphism.",
+        "uses": [
+          "def-pur-smooth-trace",
+          "thm-pur-composition-coherence",
+          "thm-sf-comp-composition",
+          "lem-pur-projection-purity-agreement",
+          "cor-pur-affine-space-purity",
+          "thm-pur-affine-line-purity",
+          "thm-pur-affine-line-orientation",
+          "thm-pur-smooth-base-change-coherence",
+          "thm-pur-finite-reduction-of-purity",
+          "thm-pur-adic-reconstruction",
+          "thm-pur-rational-and-qbar-purity"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
 }

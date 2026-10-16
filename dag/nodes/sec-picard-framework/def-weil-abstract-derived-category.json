@@ -1,127 +1,133 @@
 {
- "id": "def-weil-abstract-derived-category",
- "blueprint": {
-  "is": "def-weil-abstract-derived-category",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Derived category of an abelian category",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. A cochain complex $K$ of $\\mathcal A$ consists of objects $K^r$, $r\\in\\mathbf Z$, and differentials $d^r:K^r\\to K^{r+1}$ satisfying $d^{r+1}d^r=0$; a morphism of complexes is a family of morphisms $f^r:K^r\\to L^r$ commuting with the differentials. Its $r$-th cohomology object is $H^r(K)=\\ker d^r/\\operatorname{im}d^{r-1}$, functorial in $K$. A quasi-isomorphism is a morphism of complexes $f$ such that $H^r(f)$ is an isomorphism for every $r$. The derived category $D(\\mathcal A)$ is the localization $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ of the category of cochain complexes at the quasi-isomorphisms (equivalently, of the homotopy category $K(\\mathcal A)$ at the images of the quasi-isomorphisms), with morphism sizes taken in the chosen universe [def-weil-size-convention]. Since every $H^r$ inverts quasi-isomorphisms it factors uniquely through $Q$, giving the cohomology functors $H^r:D(\\mathcal A)\\to\\mathcal A$ with $H^r\\circ Q\\cong H^r$. $D(\\mathcal A)$ is additive and carries the triangulated structure [def-weil-triangulated-category] induced from complexes: the shift is $(K[1])^r=K^{r+1}$ with differential $-d_K$, and a triangle of $D(\\mathcal A)$ is distinguished if it is isomorphic to the image under $Q$ of the cone triangle $K\\xrightarrow{f}L\\xrightarrow{i}C(f)\\xrightarrow{-p}K[1]$ of a morphism of complexes $f$, where $C(f)^r=L^r\\oplus K^{r+1}$ with differential $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$ and $i$, $p$ the inclusion and the projection. With these, $D(\\mathcal A)$ is a triangulated category and $Q$ commutes with the shifts. See [Stacks Project, Section 13.11](https://stacks.math.columbia.edu/tag/05RR), Definition 05RU.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/def-weil-abstract-derived-category.md",
-  "place": "node def-weil-abstract-derived-category, order 633",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 05RR (Section 13.11), Definition 05RU, Lemma 05RT"
-   },
-   {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 014Q (distinguished triangles of K(A)), Definition derived-definition-cone (the cone), Section 13.11 (lines after \\section{Derived categories})"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sp-abelian",
-  "def-weil-size-convention",
-  "def-weil-triangulated-category"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n 'def \\|instance\\|abbrev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
-   "results": "Basic.lean:74 `abbrev HasDerivedCategory := MorphismProperty.HasLocalization.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))`, :81 `HasDerivedCategory.standard : HasDerivedCategory.{max u v} C`, :87 `DerivedCategory C := HomologicalComplexUpToQuasiIso C (ComplexShape.up ℤ)` for `[Abelian C]`, :95 `Q : CochainComplex C ℤ ⥤ DerivedCategory C`, :98 `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))`, :109 `Qh` from `HomotopyCategory`, :132 `Qh.IsLocalization (HomotopyCategory.quasiIso ..)`, :140 Preadditive, :152 `HasShift (DerivedCategory C) ℤ`, :161 `Q.CommShift ℤ`, :169 `Pretriangulated (DerivedCategory C)`, :177 `IsTriangulated (DerivedCategory C)`, :198 `mem_distTriang_iff`: distinguished iff isomorphic to `Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f)`",
-   "date": "2026-10-09",
-   "verdict": "match: `DerivedCategory C` is the localization of `CochainComplex C ℤ` at quasi-isomorphisms, triangulated, with distinguished triangles the images of cone triangles"
+  "id": "def-weil-abstract-derived-category",
+  "blueprint": {
+    "is": "def-weil-abstract-derived-category",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean; grep -n 'def homology ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; grep -n 'class QuasiIso\\|def quasiIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/QuasiIso.lean; grep -n 'class IsLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean; grep -n 'def homologyFunctor\\|homologyFunctorFactors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
-   "results": "HomologicalComplex.lean:157 `CochainComplex`; ShortComplex/HomologicalComplex.lean:90 `HomologicalComplex.homology K i := (K.sc i).homology` (ker/im for an abelian category); QuasiIso.lean:139 `class QuasiIso`, :294 `HomologicalComplex.quasiIso`; Localization/Predicate.lean:52 `Functor.IsLocalization`; DerivedCategory/HomologySequence.lean:34 `DerivedCategory.homologyFunctor C n : DerivedCategory C ⥤ C`, :39 `homologyFunctorFactors : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n`",
-   "date": "2026-10-09",
-   "verdict": "match: every notion the statement is built from (cochain complexes, cohomology objects, quasi-isomorphisms, localization, the cohomology functors on D) exists in Mathlib for an arbitrary abelian category; no new node needed"
+  "kind": "definition",
+  "title": "Derived category of an abelian category",
+  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. A cochain complex $K$ of $\\mathcal A$ consists of objects $K^r$, $r\\in\\mathbf Z$, and differentials $d^r:K^r\\to K^{r+1}$ satisfying $d^{r+1}d^r=0$; a morphism of complexes is a family of morphisms $f^r:K^r\\to L^r$ commuting with the differentials. Its $r$-th cohomology object is $H^r(K)=\\ker d^r/\\operatorname{im}d^{r-1}$, functorial in $K$. A quasi-isomorphism is a morphism of complexes $f$ such that $H^r(f)$ is an isomorphism for every $r$. The derived category $D(\\mathcal A)$ is the localization $Q:\\mathrm{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ of the category of cochain complexes at the quasi-isomorphisms (equivalently, of the homotopy category $K(\\mathcal A)$ at the images of the quasi-isomorphisms), with morphism sizes taken in the chosen universe [def-weil-size-convention]. Since every $H^r$ inverts quasi-isomorphisms it factors uniquely through $Q$, giving the cohomology functors $H^r:D(\\mathcal A)\\to\\mathcal A$ with $H^r\\circ Q\\cong H^r$. $D(\\mathcal A)$ is additive and carries the triangulated structure [def-weil-triangulated-category] induced from complexes: the shift is $(K[1])^r=K^{r+1}$ with differential $-d_K$, and a triangle of $D(\\mathcal A)$ is distinguished if it is isomorphic to the image under $Q$ of the cone triangle $K\\xrightarrow{f}L\\xrightarrow{i}C(f)\\xrightarrow{-p}K[1]$ of a morphism of complexes $f$, where $C(f)^r=L^r\\oplus K^{r+1}$ with differential $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$ and $i$, $p$ the inclusion and the projection. With these, $D(\\mathcal A)$ is a triangulated category and $Q$ commutes with the shifts. See [Stacks Project, Section 13.11](https://stacks.math.columbia.edu/tag/05RR), Definition 05RU.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/def-weil-abstract-derived-category.md",
+    "place": "node def-weil-abstract-derived-category, order 633",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 05RR (Section 13.11), Definition 05RU, Lemma 05RT"
+      },
+      {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Definition 014Q (distinguished triangles of K(A)), Definition derived-definition-cone (the cone), Section 13.11 (lines after \\section{Derived categories})"
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'shiftFunctor_obj_d' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; grep -n 'def triangle' -B3 -A2 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; grep -n 'd_fst_v\\|d_snd_v' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
-   "results": "Shift.lean:144 `shiftFunctor_obj_d'`: the differential of K⟦n⟧ is `n.negOnePow • K.d` (for n = 1: -d, as Stacks); Pretriangulated.lean:54 `mappingCone.triangle φ := Triangle.mk φ (inr φ) (-fst φ shifted)`, i.e. the third map is minus the projection, as Stacks' (K, L, C(f), f, i, -p); MappingCone.lean:275/288 `d_fst_v` (-fst ≫ d_K) and `d_snd_v` (fst ≫ φ + snd ≫ d_L), the cone differential of Stacks Definition 'cone'",
-   "date": "2026-10-09",
-   "verdict": "match: shift, cone and the sign of the third map agree with Stacks Section 13.9-13.11"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived category localization of cochain complexes at quasi-isomorphisms",
-   "results": "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory, DerivedCategory.instIsIsoMapCochainComplexIntQ, isIso_Q_map_iff_quasiIso, DerivedCategory.Q (Algebra.Homology.DerivedCategory.Basic)",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived category of an abelian category as localization of cochain complexes at quasi-isomorphisms, triangulated",
-   "results": "HasDerivedCategory, DerivedCategory, HasDerivedCategory.standard, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
-  },
-  {
-   "tool": "grep",
-   "query": "sed -n 70,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; rg -n 'mem_distTriang_iff|IsTriangulated \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
-   "results": "HasDerivedCategory (74), HasDerivedCategory.standard (81), DerivedCategory C (87), Q (95), Q.IsLocalization (98), IsTriangulated (177), mem_distTriang_iff (198)",
-   "date": "2026-10-09",
-   "verdict": "confirmed"
-  }
- ],
- "mathlib_match": {
-  "declaration": "DerivedCategory",
-  "file": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
-  "how": "specializes in one line: for `[Abelian C]` and `[HasDerivedCategory.{w} C]` (universe of morphisms w; `HasDerivedCategory.standard` gives w = max u v), `DerivedCategory C` (line 87) with the localization functor `DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C` and `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))` (line 98); cohomology functors `DerivedCategory.homologyFunctor C n` with `homologyFunctorFactors` (HomologySequence.lean:34, :39); shift and triangles by the instances `HasShift (DerivedCategory C) ℤ`, `Q.CommShift ℤ`, `Pretriangulated`, `IsTriangulated` (Basic.lean:152-177), distinguished triangles characterized by `DerivedCategory.mem_distTriang_iff` (Basic.lean:198) Re-check 2026-10-09: types read; `DerivedCategory C : Type (max u v)` for `[Abelian C] [HasDerivedCategory.{w} C]`, with `Q` a localization at `HomologicalComplex.quasiIso C (ComplexShape.up ℤ)` (the node's quasi-isomorphisms of ℤ-indexed cochain complexes); the chosen universe w is the node's size convention."
- },
- "status": "mathlib",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 633,
- "blueprint_uses": [],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-abstract-derived-category",
-  "worker": "stage1",
-  "summary": "Compared with Stacks Section 13.11 (Definition 05RU, Lemma 05RT, Definitions 014Q and the cone in derived.tex) and with Mathlib's DerivedCategory. The node is a Mathlib leaf: DerivedCategory C for an abelian C is by construction the localization of CochainComplex C ℤ at quasi-isomorphisms (Q.IsLocalization), with homologyFunctor factoring the cohomology of complexes, and a localized shift and Pretriangulated/IsTriangulated structure whose distinguished triangles are the images of mapping-cone triangles; the shift sign (-d) and the cone triangle (f, i, -p) agree with Stacks. The statement was extended (not corrected) to state explicitly the cohomology functors on D(A), the shift and the triangulated structure of Stacks Definition 05RU, which the nodes citing this one (e.g. lem-sf-derived-ses-triangle, lem-sf-derived-truncation-triangle, lem-sf-exact-functor-derived-triangulated) use. stmt_deps: def-sp-abelian (abelian category), def-weil-size-convention (the chosen universe), def-weil-triangulated-category (triangulated category). Complexes, cohomology objects, quasi-isomorphisms and localization are in Mathlib for any abelian category, so no new node was created; the existing def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, def-pc-acyclic-complex-modules are their specializations to sheaves of modules and are not dependencies of this general node."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass; Mathlib leaf (DerivedCategory); the statement was extended with the cohomology functors, shift and distinguished triangles that its users need (Stacks 13.11)"
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence",
- "lean": {
-  "module": "Mathlib.Algebra.Homology.DerivedCategory.Basic",
-  "declaration": "DerivedCategory",
-  "declarations": [
-   "DerivedCategory",
-   "HasDerivedCategory"
+  "stmt_deps": [
+    "def-sp-abelian",
+    "def-weil-size-convention",
+    "def-weil-triangulated-category"
   ],
-  "statement": "def DerivedCategory : Type (max u v) := HomologicalComplexUpToQuasiIso C (ComplexShape.up ℤ); abbrev HasDerivedCategory := MorphismProperty.HasLocalization.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))",
-  "branch": "mathlib",
-  "by": "L",
-  "date": "2026-10-11",
-  "existing": true,
-  "note": "D(A) of an abelian category is `DerivedCategory C` under `[HasDerivedCategory.{w} C]`; D(R) of a ring is typed by this node, not def-pc-derived-category (mathlib_match; C1 a845e1592, R-pbf2). Lead note 2026-10-11 15:21 UTC: recorded by bookkeeping agent B-1521 of L; name and signature read in the pinned Mathlib of the slopmaster2 checkout (.lake/packages/mathlib)."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n 'def \\|instance\\|abbrev' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+      "results": "Basic.lean:74 `abbrev HasDerivedCategory := MorphismProperty.HasLocalization.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))`, :81 `HasDerivedCategory.standard : HasDerivedCategory.{max u v} C`, :87 `DerivedCategory C := HomologicalComplexUpToQuasiIso C (ComplexShape.up ℤ)` for `[Abelian C]`, :95 `Q : CochainComplex C ℤ ⥤ DerivedCategory C`, :98 `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))`, :109 `Qh` from `HomotopyCategory`, :132 `Qh.IsLocalization (HomotopyCategory.quasiIso ..)`, :140 Preadditive, :152 `HasShift (DerivedCategory C) ℤ`, :161 `Q.CommShift ℤ`, :169 `Pretriangulated (DerivedCategory C)`, :177 `IsTriangulated (DerivedCategory C)`, :198 `mem_distTriang_iff`: distinguished iff isomorphic to `Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f)`",
+      "date": "2026-10-09",
+      "verdict": "match: `DerivedCategory C` is the localization of `CochainComplex C ℤ` at quasi-isomorphisms, triangulated, with distinguished triangles the images of cone triangles"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean; grep -n 'def homology ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; grep -n 'class QuasiIso\\|def quasiIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/QuasiIso.lean; grep -n 'class IsLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean; grep -n 'def homologyFunctor\\|homologyFunctorFactors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+      "results": "HomologicalComplex.lean:157 `CochainComplex`; ShortComplex/HomologicalComplex.lean:90 `HomologicalComplex.homology K i := (K.sc i).homology` (ker/im for an abelian category); QuasiIso.lean:139 `class QuasiIso`, :294 `HomologicalComplex.quasiIso`; Localization/Predicate.lean:52 `Functor.IsLocalization`; DerivedCategory/HomologySequence.lean:34 `DerivedCategory.homologyFunctor C n : DerivedCategory C ⥤ C`, :39 `homologyFunctorFactors : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n`",
+      "date": "2026-10-09",
+      "verdict": "match: every notion the statement is built from (cochain complexes, cohomology objects, quasi-isomorphisms, localization, the cohomology functors on D) exists in Mathlib for an arbitrary abelian category; no new node needed"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'shiftFunctor_obj_d' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; grep -n 'def triangle' -B3 -A2 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; grep -n 'd_fst_v\\|d_snd_v' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+      "results": "Shift.lean:144 `shiftFunctor_obj_d'`: the differential of K⟦n⟧ is `n.negOnePow • K.d` (for n = 1: -d, as Stacks); Pretriangulated.lean:54 `mappingCone.triangle φ := Triangle.mk φ (inr φ) (-fst φ shifted)`, i.e. the third map is minus the projection, as Stacks' (K, L, C(f), f, i, -p); MappingCone.lean:275/288 `d_fst_v` (-fst ≫ d_K) and `d_snd_v` (fst ≫ φ + snd ≫ d_L), the cone differential of Stacks Definition 'cone'",
+      "date": "2026-10-09",
+      "verdict": "match: shift, cone and the sign of the third map agree with Stacks Section 13.9-13.11"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived category localization of cochain complexes at quasi-isomorphisms",
+      "results": "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory, DerivedCategory.instIsIsoMapCochainComplexIntQ, isIso_Q_map_iff_quasiIso, DerivedCategory.Q (Algebra.Homology.DerivedCategory.Basic)",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived category of an abelian category as localization of cochain complexes at quasi-isomorphisms, triangulated",
+      "results": "HasDerivedCategory, DerivedCategory, HasDerivedCategory.standard, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "grep",
+      "query": "sed -n 70,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; rg -n 'mem_distTriang_iff|IsTriangulated \\(DerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+      "results": "HasDerivedCategory (74), HasDerivedCategory.standard (81), DerivedCategory C (87), Q (95), Q.IsLocalization (98), IsTriangulated (177), mem_distTriang_iff (198)",
+      "date": "2026-10-09",
+      "verdict": "confirmed"
+    }
+  ],
+  "mathlib_match": {
+    "declaration": "DerivedCategory",
+    "file": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+    "how": "specializes in one line: for `[Abelian C]` and `[HasDerivedCategory.{w} C]` (universe of morphisms w; `HasDerivedCategory.standard` gives w = max u v), `DerivedCategory C` (line 87) with the localization functor `DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C` and `Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))` (line 98); cohomology functors `DerivedCategory.homologyFunctor C n` with `homologyFunctorFactors` (HomologySequence.lean:34, :39); shift and triangles by the instances `HasShift (DerivedCategory C) ℤ`, `Q.CommShift ℤ`, `Pretriangulated`, `IsTriangulated` (Basic.lean:152-177), distinguished triangles characterized by `DerivedCategory.mem_distTriang_iff` (Basic.lean:198) Re-check 2026-10-09: types read; `DerivedCategory C : Type (max u v)` for `[Abelian C] [HasDerivedCategory.{w} C]`, with `Q` a localization at `HomologicalComplex.quasiIso C (ComplexShape.up ℤ)` (the node's quasi-isomorphisms of ℤ-indexed cochain complexes); the chosen universe w is the node's size convention."
+  },
+  "status": "mathlib",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 633,
+  "blueprint_uses": [],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-abstract-derived-category",
+    "worker": "stage1",
+    "summary": "Compared with Stacks Section 13.11 (Definition 05RU, Lemma 05RT, Definitions 014Q and the cone in derived.tex) and with Mathlib's DerivedCategory. The node is a Mathlib leaf: DerivedCategory C for an abelian C is by construction the localization of CochainComplex C ℤ at quasi-isomorphisms (Q.IsLocalization), with homologyFunctor factoring the cohomology of complexes, and a localized shift and Pretriangulated/IsTriangulated structure whose distinguished triangles are the images of mapping-cone triangles; the shift sign (-d) and the cone triangle (f, i, -p) agree with Stacks. The statement was extended (not corrected) to state explicitly the cohomology functors on D(A), the shift and the triangulated structure of Stacks Definition 05RU, which the nodes citing this one (e.g. lem-sf-derived-ses-triangle, lem-sf-derived-truncation-triangle, lem-sf-exact-functor-derived-triangulated) use. stmt_deps: def-sp-abelian (abelian category), def-weil-size-convention (the chosen universe), def-weil-triangulated-category (triangulated category). Complexes, cohomology objects, quasi-isomorphisms and localization are in Mathlib for any abelian category, so no new node was created; the existing def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, def-pc-acyclic-complex-modules are their specializations to sheaves of modules and are not dependencies of this general node."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass; Mathlib leaf (DerivedCategory); the statement was extended with the cohomology functors, shift and distinguished triangles that its users need (Stacks 13.11)"
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "lean": {
+    "module": "Mathlib.Algebra.Homology.DerivedCategory.Basic",
+    "declaration": "DerivedCategory",
+    "declarations": [
+      "DerivedCategory",
+      "HasDerivedCategory"
+    ],
+    "statement": "def DerivedCategory : Type (max u v) := HomologicalComplexUpToQuasiIso C (ComplexShape.up ℤ); abbrev HasDerivedCategory := MorphismProperty.HasLocalization.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "D(A) of an abelian category is `DerivedCategory C` under `[HasDerivedCategory.{w} C]`; D(R) of a ring is typed by this node, not def-pc-derived-category (mathlib_match; C1 a845e1592, R-pbf2). Lead note 2026-10-11 15:21 UTC: recorded by bookkeeping agent B-1521 of L; name and signature read in the pinned Mathlib of the slopmaster2 checkout (.lake/packages/mathlib)."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For an abelian category $\\mathcal A$, a cochain complex consists of objects\n$K^r$, $r\\in\\mathbf Z$, and differentials $d^r:K^r\\to K^{r+1}$ satisfying\n$d^{r+1}d^r=0$. Its cohomology is $\\ker d^r/\\operatorname{im}d^{r-1}$. A\nquasi-isomorphism is a morphism of complexes inducing an isomorphism on every\ncohomology object. The derived category $D(\\mathcal A)$ is the localization\nof the category of cochain complexes at these quasi-isomorphisms, with\nmorphism sizes taken in the chosen universe.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

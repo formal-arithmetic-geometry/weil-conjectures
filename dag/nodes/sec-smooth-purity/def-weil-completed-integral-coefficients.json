@@ -1,116 +1,122 @@
 {
- "id": "def-weil-completed-integral-coefficients",
- "blueprint": {
-  "is": "def-weil-completed-integral-coefficients",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Completed integral coefficient sheaf",
- "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, and for $n\\in\\mathbf Z_{\\geq1}$ the finite coefficient\nrings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ with their reduction homomorphisms\n$A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension].\nFix a scheme $Y$ and use its small pro-etale site $Y_{\\mathrm{proet}}$\n[def-weil-pbc-proetale-site], on which $(A_{E,n})_Y$ is the constant sheaf of\nrings (the sheafification of the constant presheaf $U\\mapsto A_{E,n}$) and\n$\\Sh(Y_{\\mathrm{proet}},A_{E,n})$ is the abelian category of sheaves of\n$(A_{E,n})_Y$-modules. By functoriality of sheafification the reduction\nhomomorphisms induce morphisms of sheaves of rings\n$(A_{E,n+1})_Y\\to(A_{E,n})_Y$. The completed coefficient sheaf is\n\n$$\n \\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y,\n$$\n\nthe inverse limit of this system in the category of sheaves of rings\n[def-pur-sheaf-inverse-limit], with limit projections\n$\\pi_n:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,n})_Y$. Let\n$\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the abelian category of sheaves of\n$\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-sheaf-of-modules-category], and\nlet $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be its derived category, the\nlocalization of its cochain complexes at quasi-isomorphisms\n[def-weil-abstract-derived-category]; this notation does not mean modules over\nthe discrete constant sheaf $(\\mathcal O_E)_Y$. The cohomology sheaves\n$\\mathcal H^r(K)$ of a complex $K$ of $\\widehat{\\mathcal O}_{E,Y}$-modules are\nits cohomology objects $\\ker d^r/\\operatorname{im}d^{r-1}$ in the abelian\ncategory $\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$\n[def-weil-abstract-derived-category] (those of the standard $t$-structure).\nFor every $n$,\n\n$$\n \\operatorname{Res}_n:\n \\Sh(Y_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)\n$$\n\ndenotes the restriction of scalars along $\\pi_n$\n[def-pc-sheaf-restrict-scalars], which makes every sheaf of\n$(A_{E,n})_Y$-modules a sheaf of $\\widehat{\\mathcal O}_{E,Y}$-modules; its\nexactness is a separate statement.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-completed-integral-coefficients.md",
-  "place": "node def-weil-completed-integral-coefficients, order 1455"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-proetale-site",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-pc-sheaf-restrict-scalars"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "cat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
-   "results": "`Scheme.ProEt S` (Proetale.lean: objects all schemes weakly etale over S, topology `ProEt.topology S`); `Scheme.ellAdicSheaf X ℓ : Sheaf (ProEt.topology X) Ab` (ElladicCohomology.lean), the pushforward to the small site of `continuousMapPresheafAb ℤ_[ℓ]`, i.e. U ↦ C(U, ℤ_[ℓ]) as a sheaf of abelian groups (docstring cites Bhatt-Scholze Def. 6.8.1); `continuousMapPresheaf T`, `continuousMapPresheafAb A` (ConstantSheaf.lean:44, 102) for a topological space/abelian group, with the TODO 'When T is discrete, this is the constant sheaf associated to T' still open; no ring-valued (RingCat) version, no version for O_E, no comparison with an inverse limit of constant sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match. For E = Q_ℓ, ϖ = ℓ, `ellAdicSheaf` is the sheaf F_{Z_ℓ} of Bhatt-Scholze Lemma 4.2.12 / Def. 6.8.1, which is isomorphic to lim_n (Z/ℓ^n)_Y only by a theorem (BS Lemma 6.8.2(1), using BS Lemma 4.2.12 that F_T is the constant sheaf for T finite discrete, itself a TODO in Mathlib, and C(S, Z_ℓ) = lim C(S, Z/ℓ^n) for profinite S); moreover it is a sheaf of abelian groups, not of rings, so it cannot serve as the ring over which Sh(Y_proet, O_E) is the module category, and it covers only E = Q_ℓ. A Lean version of this node is `limit` of `n ↦ constantSheaf (ProEt.topology Y) RingCat (A_n)` (one line from the leaves); the comparison with ellAdicSheaf would be a separate statement"
+  "id": "def-weil-completed-integral-coefficients",
+  "blueprint": {
+    "is": "def-weil-completed-integral-coefficients",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'ellAdicSheaf\\|ProEt.topology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'continuousMapPresheafRing\\|RingCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
-   "results": "no `constantSheaf` in AlgebraicGeometry; `ellAdicSheaf`/`ProEt.topology` only in ElladicCohomology.lean and Proetale.lean; no RingCat-valued continuous-map sheaf",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "definition",
+  "title": "Completed integral coefficient sheaf",
+  "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, and for $n\\in\\mathbf Z_{\\geq1}$ the finite coefficient\nrings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ with their reduction homomorphisms\n$A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension].\nFix a scheme $Y$ and use its small pro-etale site $Y_{\\mathrm{proet}}$\n[def-weil-pbc-proetale-site], on which $(A_{E,n})_Y$ is the constant sheaf of\nrings (the sheafification of the constant presheaf $U\\mapsto A_{E,n}$) and\n$\\Sh(Y_{\\mathrm{proet}},A_{E,n})$ is the abelian category of sheaves of\n$(A_{E,n})_Y$-modules. By functoriality of sheafification the reduction\nhomomorphisms induce morphisms of sheaves of rings\n$(A_{E,n+1})_Y\\to(A_{E,n})_Y$. The completed coefficient sheaf is\n\n$$\n \\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y,\n$$\n\nthe inverse limit of this system in the category of sheaves of rings\n[def-pur-sheaf-inverse-limit], with limit projections\n$\\pi_n:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,n})_Y$. Let\n$\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the abelian category of sheaves of\n$\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-sheaf-of-modules-category], and\nlet $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be its derived category, the\nlocalization of its cochain complexes at quasi-isomorphisms\n[def-weil-abstract-derived-category]; this notation does not mean modules over\nthe discrete constant sheaf $(\\mathcal O_E)_Y$. The cohomology sheaves\n$\\mathcal H^r(K)$ of a complex $K$ of $\\widehat{\\mathcal O}_{E,Y}$-modules are\nits cohomology objects $\\ker d^r/\\operatorname{im}d^{r-1}$ in the abelian\ncategory $\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$\n[def-weil-abstract-derived-category] (those of the standard $t$-structure).\nFor every $n$,\n\n$$\n \\operatorname{Res}_n:\n \\Sh(Y_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)\n$$\n\ndenotes the restriction of scalars along $\\pi_n$\n[def-pc-sheaf-restrict-scalars], which makes every sheaf of\n$(A_{E,n})_Y$-modules a sheaf of $\\widehat{\\mathcal O}_{E,Y}$-modules; its\nexactness is a separate statement.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-completed-integral-coefficients.md",
+    "place": "node def-weil-completed-integral-coefficients, order 1455"
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'def constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; grep -n 'SheafOfModules\\|restrictScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
-   "results": "`constantSheaf J D : D ⥤ Sheaf J D` (CategoryTheory/Sites/ConstantSheaf.lean:66), limits in `Sheaf J D` (CategoryTheory/Sites/Limits.lean:153), `SheafOfModules` (Sheaf.lean:33), `SheafOfModules.restrictScalars` (ChangeOfRings.lean:36): the ingredients, recorded on the nodes they match",
-   "date": "2026-10-09",
-   "verdict": "no match for the node itself; ingredients are leaves (def-pur-sheaf-inverse-limit, def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1455,
- "blueprint_uses": [
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-derived-tensor",
-  "def-weil-finite-field-fiber",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-proetale-site"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-completed-integral-coefficients",
-  "worker": "stage1",
-  "summary": "Checked against the master blueprint text (slopmaster2 has the same definition in src/version/sketch/46_weil_structures_weights.tex lines 64-70) and against Bhatt-Scholze arXiv:1309.1198 §6.5 (R̂_X := lim R/m^n) and Def. 6.8.1/Lemma 6.8.2(1) (Ô_{E,X} = lim O_E/ϖ^n). Statement dependencies rewritten to name every notion used: the coefficient rings A_{E,n} and reductions now come from def-weil-l-adic-coefficient-extension (not from def-weil-finite-torsion-constructibility, which only repeated the notation); the inverse limit of sheaves of rings is def-pur-sheaf-inverse-limit; the module category is a new Mathlib leaf (def-weil-sheaf-of-modules-category = SheafOfModules) and restriction of scalars is the Mathlib leaf def-pc-sheaf-restrict-scalars (SheafOfModules.restrictScalars; the duplicate def-weil-sheaf-restriction-of-scalars created here is marked merged into it); the derived category and the cohomology sheaves of complexes of Ô-modules are def-weil-abstract-derived-category (def-weil-derived-cohomology-sheaves is stated only for constant-ring coefficients A_Y, so it does not cover Ô-modules and was dropped). def-weil-derived-tensor was dropped: the statement mentioned it but defines nothing with it. The unproved claim that π_n : Ô → (A_{E,n})_Y is a surjection was removed (the definition of Res_n works for any ring map; surjectivity holds by BS Prop. 4.2.8 + Prop. 3.2.3(1) + Def. 3.1.1 but is not needed here); the sentence on reduction maps between constant sheaves is now stated via functoriality of sheafification. Mathlib's Scheme.ellAdicSheaf is not a match (sheaf of abelian groups U ↦ C(U,ℤ_ℓ), only E = Q_ℓ, isomorphic to this node's sheaf only through BS Lemma 6.8.2(1))."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-129030f54",
-  "group": "Q19",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, all delivered Lean modules, docstrings, edge cases, and report sections; no substantive errors found. Wrote review.md. scompile reproduction was attempted; shared compiler queue delayed final confirmation, while the worker’s recorded per-file compiles were successful.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedIntegralCoefficientGerm",
-  "declaration": "WeilConjectures.integralConstantToCompletion",
-  "declarations": [
-   "WeilConjectures.integralConstantQuotientRingMap",
-   "WeilConjectures.integralConstantQuotientRingMap_compatibility",
-   "WeilConjectures.integralConstantCoefficientCone",
-   "WeilConjectures.integralConstantToCompletion",
-   "WeilConjectures.integralConstantStalkGerm",
-   "WeilConjectures.integralCoefficientModuleStalkFunctor",
-   "WeilConjectures.integralCoefficientModuleStalkFunctorAdditive"
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-proetale-site",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars"
   ],
-  "file": "lean/Sheaf/Paper/CompletedIntegralCoefficientGerm.lean",
-  "statement": "def integralConstantToCompletion : (integralConstantCoefficientCone l E Y).pt ⟶ completedIntegralCoefficientSheafUnrestricted l E Y",
-  "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B): the recorded inverse-limit completion and its quotient projections do not expose the canonical O_E scalar action on its geometric module stalk. Publicly imports that exact completion unchanged, constructs the cone of constant quotient maps and its limit lift, and applies the recorded neighbourhood colimit to its actual map. No completion identification, arbitrary map, or new coefficient sheaf is chosen."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "cat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Proetale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+      "results": "`Scheme.ProEt S` (Proetale.lean: objects all schemes weakly etale over S, topology `ProEt.topology S`); `Scheme.ellAdicSheaf X ℓ : Sheaf (ProEt.topology X) Ab` (ElladicCohomology.lean), the pushforward to the small site of `continuousMapPresheafAb ℤ_[ℓ]`, i.e. U ↦ C(U, ℤ_[ℓ]) as a sheaf of abelian groups (docstring cites Bhatt-Scholze Def. 6.8.1); `continuousMapPresheaf T`, `continuousMapPresheafAb A` (ConstantSheaf.lean:44, 102) for a topological space/abelian group, with the TODO 'When T is discrete, this is the constant sheaf associated to T' still open; no ring-valued (RingCat) version, no version for O_E, no comparison with an inverse limit of constant sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match. For E = Q_ℓ, ϖ = ℓ, `ellAdicSheaf` is the sheaf F_{Z_ℓ} of Bhatt-Scholze Lemma 4.2.12 / Def. 6.8.1, which is isomorphic to lim_n (Z/ℓ^n)_Y only by a theorem (BS Lemma 6.8.2(1), using BS Lemma 4.2.12 that F_T is the constant sheaf for T finite discrete, itself a TODO in Mathlib, and C(S, Z_ℓ) = lim C(S, Z/ℓ^n) for profinite S); moreover it is a sheaf of abelian groups, not of rings, so it cannot serve as the ring over which Sh(Y_proet, O_E) is the module category, and it covers only E = Q_ℓ. A Lean version of this node is `limit` of `n ↦ constantSheaf (ProEt.topology Y) RingCat (A_n)` (one line from the leaves); the comparison with ellAdicSheaf would be a separate statement"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'ellAdicSheaf\\|ProEt.topology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'continuousMapPresheafRing\\|RingCat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+      "results": "no `constantSheaf` in AlgebraicGeometry; `ellAdicSheaf`/`ProEt.topology` only in ElladicCohomology.lean and Proetale.lean; no RingCat-valued continuous-map sheaf",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'def constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; grep -n 'SheafOfModules\\|restrictScalars' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+      "results": "`constantSheaf J D : D ⥤ Sheaf J D` (CategoryTheory/Sites/ConstantSheaf.lean:66), limits in `Sheaf J D` (CategoryTheory/Sites/Limits.lean:153), `SheafOfModules` (Sheaf.lean:33), `SheafOfModules.restrictScalars` (ChangeOfRings.lean:36): the ingredients, recorded on the nodes they match",
+      "date": "2026-10-09",
+      "verdict": "no match for the node itself; ingredients are leaves (def-pur-sheaf-inverse-limit, def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1455,
+  "blueprint_uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-derived-tensor",
+    "def-weil-finite-field-fiber",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-proetale-site"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-completed-integral-coefficients",
+    "worker": "stage1",
+    "summary": "Checked against the master blueprint text (slopmaster2 has the same definition in src/version/sketch/46_weil_structures_weights.tex lines 64-70) and against Bhatt-Scholze arXiv:1309.1198 §6.5 (R̂_X := lim R/m^n) and Def. 6.8.1/Lemma 6.8.2(1) (Ô_{E,X} = lim O_E/ϖ^n). Statement dependencies rewritten to name every notion used: the coefficient rings A_{E,n} and reductions now come from def-weil-l-adic-coefficient-extension (not from def-weil-finite-torsion-constructibility, which only repeated the notation); the inverse limit of sheaves of rings is def-pur-sheaf-inverse-limit; the module category is a new Mathlib leaf (def-weil-sheaf-of-modules-category = SheafOfModules) and restriction of scalars is the Mathlib leaf def-pc-sheaf-restrict-scalars (SheafOfModules.restrictScalars; the duplicate def-weil-sheaf-restriction-of-scalars created here is marked merged into it); the derived category and the cohomology sheaves of complexes of Ô-modules are def-weil-abstract-derived-category (def-weil-derived-cohomology-sheaves is stated only for constant-ring coefficients A_Y, so it does not cover Ô-modules and was dropped). def-weil-derived-tensor was dropped: the statement mentioned it but defines nothing with it. The unproved claim that π_n : Ô → (A_{E,n})_Y is a surjection was removed (the definition of Res_n works for any ring map; surjectivity holds by BS Prop. 4.2.8 + Prop. 3.2.3(1) + Def. 3.1.1 but is not needed here); the sentence on reduction maps between constant sheaves is now stated via functoriality of sheafification. Mathlib's Scheme.ellAdicSheaf is not a match (sheaf of abelian groups U ↦ C(U,ℤ_ℓ), only E = Q_ℓ, isomorphic to this node's sheaf only through BS Lemma 6.8.2(1))."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-129030f54",
+    "group": "Q19",
+    "result": "pass",
+    "note": "Reviewed node, source, dependencies, all delivered Lean modules, docstrings, edge cases, and report sections; no substantive errors found. Wrote review.md. scompile reproduction was attempted; shared compiler queue delayed final confirmation, while the worker’s recorded per-file compiles were successful.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedIntegralCoefficientGerm",
+    "declaration": "WeilConjectures.integralConstantToCompletion",
+    "declarations": [
+      "WeilConjectures.integralConstantQuotientRingMap",
+      "WeilConjectures.integralConstantQuotientRingMap_compatibility",
+      "WeilConjectures.integralConstantCoefficientCone",
+      "WeilConjectures.integralConstantToCompletion",
+      "WeilConjectures.integralConstantStalkGerm",
+      "WeilConjectures.integralCoefficientModuleStalkFunctor",
+      "WeilConjectures.integralCoefficientModuleStalkFunctorAdditive"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedIntegralCoefficientGerm.lean",
+    "statement": "def integralConstantToCompletion : (integralConstantCoefficientCone l E Y).pt ⟶ completedIntegralCoefficientSheafUnrestricted l E Y",
+    "branch": "newtargets-dag",
+    "by": "Q19",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "§1(B): the recorded inverse-limit completion and its quotient projections do not expose the canonical O_E scalar action on its geometric module stalk. Publicly imports that exact completion unchanged, constructs the cone of constant quotient maps and its limit lift, and applies the recorded neighbourhood colimit to its actual map. No completion identification, arbitrary map, or new coefficient sheaf is chosen."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For the global finite-field datum [def-weil-finite-field-fiber], fix a prime\n$\\ell\\neq p$, a finite extension $E/\\Ql$, a scheme $Y$, and a uniformizer\n$\\varpi_E$ of the valuation ring $\\mathcal O_E$. For each $n\\in\\mathbf\nZ_{\\geq1}$, set $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ as in the finite-torsion\nconstructibility condition [def-weil-finite-torsion-constructibility], and\nuse the derived tensor product [def-weil-derived-tensor] on the small\npro-etale site [def-weil-pbc-proetale-site] of $Y$. The completed\ncoefficient sheaf is\n\n$$\n \\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y\n$$\n\nin the abelian category of sheaves of rings. Let\n$\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the category of modules over\n$\\widehat{\\mathcal O}_{E,Y}$, and let $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be\nits localization at quasi-isomorphisms; this notation does not mean modules\nover the discrete constant sheaf $(\\mathcal O_E)_Y$. Cohomology sheaves of\ncomplexes on $Y_{\\mathrm{proet}}$ are those of the standard $t$-structure on\nthis derived category, as in [def-weil-derived-cohomology-sheaves]. For every\n$n$ the surjection $\\widehat{\\mathcal\nO}_{E,Y}\\twoheadrightarrow(A_{E,n})_Y$ makes every $A_{E,n}$-module a module\nover $\\widehat{\\mathcal O}_{E,Y}$, and\n\n$$\n \\operatorname{Res}_n:\n \\Sh(Y_{\\mathrm{proet}},A_{E,n})\n \\longrightarrow\\Sh(Y_{\\mathrm{proet}},\\mathcal O_E)\n$$\n\ndenotes the resulting *restriction of scalars*. The reduction morphisms\n$A_{E,n+1}\\twoheadrightarrow A_{E,n}$ are the maps\n$(A_{E,n+1})_Y\\twoheadrightarrow(A_{E,n})_Y$ between constant sheaves.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

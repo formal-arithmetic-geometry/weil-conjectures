@@ -1,0 +1,84 @@
+{
+  "id": "det-thm-br-higher-vanishing",
+  "kind": "statement",
+  "title": "Vanishing of higher cohomology of $\\mathbf G_m$ on a smooth curve",
+  "statement": "Let $k$ be algebraically closed and let $C$ be a smooth separated curve of\nfinite type over $k$. Then\n\n$$\nH^q(C_{\\mathrm{ét}},\\mathbf G_m)=0\\qquad(q\\geq2).\n$$",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-br/det-thm-br-higher-vanishing.md",
+    "place": "node det-thm-br-higher-vanishing, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 03RM"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Reduction to an integral curve.* The noetherian scheme $C$ is the finite\ndisjoint union of its connected components, and étale cohomology of a finite\ndisjoint union is the product of the cohomologies of the pieces. A connected\nsmooth $k$-scheme is normal and connected, hence integral, of dimension zero\nor one. If it has dimension zero it is $\\operatorname{Spec}k$, whose étale\ncohomology vanishes in positive degrees for every abelian sheaf\n([lem-weil-pbc-zero-dimensional-cohomology]). So we may assume $C$ integral\nof dimension one, with generic point $\\eta:\\operatorname{Spec}K\\to C$,\n$K=k(C)$. It is regular, and its codimension-one points are its closed\npoints.",
+      "uses": [
+        "lem-weil-pbc-zero-dimensional-cohomology"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The divisor sequence.* By [lem-sc-divisor-sequence-general] there is an\nexact sequence of étale sheaves\n\n$$\n0\\longrightarrow\\mathbf G_m\\longrightarrow\\eta_*\\mathbf G_{m,\\eta}\n\\xrightarrow{\\ \\operatorname{div}\\ }D\\longrightarrow0,\\qquad\nD=\\bigoplus_{x\\in C\\text{ closed}}i_{x*}\\mathbf Z .\n$$",
+      "uses": [
+        "lem-sc-divisor-sequence-general"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 1: $H^q(C,D)=0$ for $q\\geq1$.* For a closed point $x$, the morphism\n$i_x:\\operatorname{Spec}k\\to C$ is a closed immersion, so $i_{x*}$ is exact\n(on geometric stalks it is the stalk on the point, or zero) and has the exact\nleft adjoint $i_x^{-1}$, hence preserves injectives. Thus\n$H^q(C,i_{x*}\\mathbf Z)=H^q(\\operatorname{Spec}k,\\mathbf Z)=0$ for $q\\geq1$\nby [lem-sc-point-z-cohomology]. Finite direct sums follow, and $D$ is the\nfiltered colimit of its finite partial sums; cohomology on the\nquasi-compact quasi-separated scheme $C$ commutes with filtered colimits of\nabelian sheaves ([lem-weil-pbc-cohomology-filtered-colimit]).\n\n*Step 2: $R^b\\eta_*\\mathbf G_{m,\\eta}=0$ for $b\\geq1$.* The morphism $\\eta$\nis quasi-compact and quasi-separated, so the stalk of $R^b\\eta_*$ at a\ngeometric point $\\bar x$ of $C$ is the cohomology of the base change of\n$\\eta$ to the strict henselization (Stacks, Étale Cohomology, stalks of\nhigher direct images; the formula holds for arbitrary abelian sheaves). If\n$\\bar x$ lies over a closed point $x$, the strict henselization\n$\\mathcal O^{\\mathrm{sh}}_{C,\\bar x}$ is a discrete valuation ring (étale\nlocalization preserves regularity and dimension,\n[lem-sc-regular-dim1-dvr]), and its generic fibre over $C$ is the spectrum\nof its fraction field $K^{\\mathrm{sh}}_x$. Hence\n\n$$\n(R^b\\eta_*\\mathbf G_{m,\\eta})_{\\bar x}\n=H^b(\\operatorname{Spec}K^{\\mathrm{sh}}_x,\\mathbf G_m)=0\\qquad(b\\geq1)\n$$\n\nby [det-thm-br-field-units], $K^{\\mathrm{sh}}_x$ being algebraic over $K$. If\n$\\bar x$ lies over $\\eta$, the strict henselization is a separable closure\nof $K$, and the stalk is $H^b(\\operatorname{Spec}K^{\\mathrm{sep}},\\mathbf G_m)=0$.\n\n*Step 3: $H^a(C,\\eta_*\\mathbf G_{m,\\eta})=0$ for $a\\geq1$.* The functor\n$\\eta_*$ has the exact left adjoint $\\eta^{-1}$, so it sends injectives to\ninjectives, and the Grothendieck spectral sequence ([thm-sp-grothendieck])\n$H^a(C,R^b\\eta_*\\mathbf G_{m,\\eta})\\Rightarrow\nH^{a+b}(\\operatorname{Spec}K,\\mathbf G_m)$ is concentrated in the row\n$b=0$ by Step 2. Hence\n$H^a(C,\\eta_*\\mathbf G_{m,\\eta})=H^a(\\operatorname{Spec}K,\\mathbf G_m)$,\nwhich vanishes for $a\\geq1$ by [det-thm-br-field-units] with $L=K$.",
+      "uses": [
+        "lem-sc-point-z-cohomology",
+        "lem-weil-pbc-cohomology-filtered-colimit",
+        "lem-sc-regular-dim1-dvr",
+        "det-thm-br-field-units",
+        "thm-sp-grothendieck"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Conclusion.* The long exact sequence of the divisor sequence contains\n\n$$\nH^{q-1}(C,D)\\longrightarrow H^q(C,\\mathbf G_m)\\longrightarrow\nH^q(C,\\eta_*\\mathbf G_{m,\\eta}).\n$$\n\nFor $q\\geq2$ the left term vanishes by Step 1 and the right term by Step 3,\nso $H^q(C_{\\mathrm{ét}},\\mathbf G_m)=0$. This is (Stacks, Tag 03RM).",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-sc-divisor-sequence-general",
+    "lem-sc-point-z-cohomology",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-sc-regular-dim1-dvr",
+    "det-thm-br-field-units",
+    "thm-sp-grothendieck"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-br/det-thm-br-higher-vanishing.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-thm-br-field-units",
+    "lem-sc-divisor-sequence-general",
+    "lem-sc-point-z-cohomology",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "thm-sp-grothendieck",
+    "lem-sc-regular-dim1-dvr"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

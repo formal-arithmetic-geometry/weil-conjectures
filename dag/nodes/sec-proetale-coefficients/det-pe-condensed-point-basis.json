@@ -1,0 +1,60 @@
+{
+  "id": "det-pe-condensed-point-basis",
+  "kind": "statement",
+  "title": "Affine ind-étale schemes over a separably closed field",
+  "statement": "Let $\\Omega$ be a separably closed field. For a profinite set $S$ let\n$LC(S,\\Omega)$ be the $\\Omega$-algebra of locally constant functions $S\\to\\Omega$\nand $\\Omega[S]=\\Spec LC(S,\\Omega)$.\n\n1. Every étale $\\Omega$-algebra of finite presentation is isomorphic to\n   $\\Omega^n=LC(\\{1,\\dots,n\\},\\Omega)$ for some $n\\geq0$.\n2. Every ind-étale $\\Omega$-algebra is isomorphic to $LC(S,\\Omega)$ for a\n   profinite set $S$, and every $LC(S,\\Omega)$ is ind-étale.\n3. For profinite $S,T$, the map\n   $\\operatorname{Cont}(T,S)\\to\\Hom_{\\Omega\\text{-alg}}(LC(S,\\Omega),LC(T,\\Omega))$,\n   $s\\mapsto(f\\mapsto f\\circ s)$, is bijective.\n\nHence $S\\mapsto\\Omega[S]$ is an equivalence from the category of profinite sets\nonto the category of affine ind-étale $\\Omega$-schemes. It is the functor\n$S\\mapsto X[S]$ of [def-sfb-profinite-test-objects] for $X=\\Spec\\Omega$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "node det-pe-condensed-point-basis, order None"
+  },
+  "stmt_deps": [
+    "def-sfb-profinite-test-objects"
+  ],
+  "proof": [
+    {
+      "text": "*(1).* An étale algebra over a field is a finite product of finite separable\nfield extensions; as $\\Omega$ is separably closed, each factor is $\\Omega$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Idempotents.* Since $\\Omega$ is a field, its only idempotents are $0,1$. Hence\nan $\\Omega$-algebra map $\\Omega^S\\to B$ from a finite product is the same as a\nfamily $(b_x)_{x\\in S}$ of orthogonal idempotents of $B$ with sum $1$. If\n$B=LC(T,\\Omega)$ with $T$ profinite, the idempotents are the characteristic\nfunctions of clopen subsets, so such families are the clopen partitions of $T$\nindexed by $S$, i.e. the continuous maps $T\\to S$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3).* Write $S=\\varprojlim_iS_i$ over its finite discrete quotients. Every\nlocally constant function on $S$ factors through some $S_i$, so\n$LC(S,\\Omega)=\\varinjlim_i\\Omega^{S_i}$. Therefore\n$\\Hom(LC(S,\\Omega),LC(T,\\Omega))=\\varprojlim_i\\Hom(\\Omega^{S_i},LC(T,\\Omega))\n=\\varprojlim_i\\operatorname{Cont}(T,S_i)=\\operatorname{Cont}(T,S)$, and tracing the\nidentifications shows that this is the map $s\\mapsto(f\\mapsto f\\circ s)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2).* By definition an ind-étale algebra is a filtered colimit of étale algebras\nof finite presentation ([def-weil-pbc-ind-etale-algebra]); by (1) and the\nidempotent description, it is a filtered colimit $\\varinjlim_i\\Omega^{S_i}$\nalong maps induced by maps of finite sets $S_j\\to S_i$. With\n$S=\\varprojlim_iS_i$, a profinite set, the colimit is $LC(S,\\Omega)$, because a\nlocally constant function on the compact space $S$ factors through some $S_i$,\nand two functions on $S_i$ agreeing on $S$ agree on the image of $S$ in some\n$S_j$. Conversely $LC(S,\\Omega)=\\varinjlim_i\\Omega^{S_i}$ is ind-étale.\n\nBy (2) the functor is essentially surjective onto affine ind-étale\n$\\Omega$-schemes, and by (3), using that $\\Spec$ is an anti-equivalence between\nalgebras and affine schemes, it is fully faithful. Finally\n$X[S]=\\Spec(LC(S,\\mathbf Z)\\otimes_{\\mathbf Z}\\Omega)$ and\n$LC(S,\\mathbf Z)\\otimes\\Omega=\\varinjlim_i\\mathbf Z^{S_i}\\otimes\\Omega=\n\\varinjlim_i\\Omega^{S_i}=LC(S,\\Omega)$, compatibly with the maps.",
+      "uses": [
+        "def-weil-pbc-ind-etale-algebra"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-ind-etale-algebra"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/sk-prop-pe-condensed-point-basis.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-sfb-profinite-test-objects"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

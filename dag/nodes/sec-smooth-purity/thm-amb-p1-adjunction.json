@@ -1,25 +1,115 @@
 {
- "id": "thm-amb-p1-adjunction",
- "blueprint": {
-  "is": "thm-amb-p1-adjunction",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The full projective-line adjunction",
- "statement": "Let $N\\geq1$ be an integer, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme on which $N$ is invertible. Put $P=\\mathbf P^1_S$ and let $q:P\\to S$ be the projection. On the whole ordinary unbounded derived categories of sheaves of $A$-modules on the small etale sites, the functor\n\n$$F=Rq_*:D(P_{\\mathrm{et}},A)\\longrightarrow D(S_{\\mathrm{et}},A)$$\n\nhas right adjoint\n\n$$G:D(S_{\\mathrm{et}},A)\\longrightarrow D(P_{\\mathrm{et}},A),\\qquad G(K)=q^{-1}K\\otimes_A^L A_P(1)[2].$$\n\nThe counit $FG\\to\\operatorname{id}$ is the natural transformation $\\epsilon$ of [def-amb-p1-trace]. The notation refers to the projective line, ordinary etale derived categories, and the Tate twist defined there.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-  "place": "node thm-amb-p1-adjunction, order 1573"
- },
- "stmt_deps": [
-  "def-amb-p1-trace",
-  "def-weil-pbc-derived-categories"
- ],
- "proof": [
-  {
-   "text": "Write $F=Rq_*$ and $G(K)=q^{-1}K\\otimes_A^LA_P(1)[2]$. For $M\\in D(P_{\\mathrm{et}},A)$, let $W=P\\times_SP$ with projections $p_1,p_2$ and diagonal $\\Delta$. The identity $p_2\\Delta=1_P$ and derived direct-image composition identify $M$ with $R(p_2)_*\\Delta_*M$. The projective-line properness statement and stability under base change make both $p_1$ and $p_2$ proper; since proper morphisms are separated, $\\Delta$ is a closed immersion, hence proper by the closed-immersion statement and composition stability. Proper morphisms are of finite type, and finite type over the Noetherian base makes $P$ and $W$ Noetherian, so the projection formula applies to $\\Delta$ and $p_2$. Thus it identifies $\\Delta_*M$ with $\\Delta_*A_P\\otimes_A^Lp_1^{-1}M$. Applying $R(p_2)_*$ to $\\delta\\otimes1_M$ and then using proper base change for the square defining $W$, together with the projection formula for $p_2$, gives a canonical natural map\n$$\\eta_M:M\\to R(p_2)_*p_1^{-1}M(1)[2]\\xrightarrow{\\sim}q^{-1}Rq_*M(1)[2]=GFM.$$\nThe coefficient ring $A$ is torsion because $NA=0$, so the cited torsion proper-base-change theorem applies on the whole unbounded category.",
-   "uses": [
+  "id": "thm-amb-p1-adjunction",
+  "blueprint": {
+    "is": "thm-amb-p1-adjunction",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "The full projective-line adjunction",
+  "statement": "Let $N\\geq1$ be an integer, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme on which $N$ is invertible. Put $P=\\mathbf P^1_S$ and let $q:P\\to S$ be the projection. On the whole ordinary unbounded derived categories of sheaves of $A$-modules on the small etale sites, the functor\n\n$$F=Rq_*:D(P_{\\mathrm{et}},A)\\longrightarrow D(S_{\\mathrm{et}},A)$$\n\nhas right adjoint\n\n$$G:D(S_{\\mathrm{et}},A)\\longrightarrow D(P_{\\mathrm{et}},A),\\qquad G(K)=q^{-1}K\\otimes_A^L A_P(1)[2].$$\n\nThe counit $FG\\to\\operatorname{id}$ is the natural transformation $\\epsilon$ of [def-amb-p1-trace]. The notation refers to the projective line, ordinary etale derived categories, and the Tate twist defined there.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+    "place": "node thm-amb-p1-adjunction, order 1573"
+  },
+  "stmt_deps": [
+    "def-amb-p1-trace",
+    "def-weil-pbc-derived-categories"
+  ],
+  "proof": [
+    {
+      "text": "Write $F=Rq_*$ and $G(K)=q^{-1}K\\otimes_A^LA_P(1)[2]$. For $M\\in D(P_{\\mathrm{et}},A)$, let $W=P\\times_SP$ with projections $p_1,p_2$ and diagonal $\\Delta$. The identity $p_2\\Delta=1_P$ and derived direct-image composition identify $M$ with $R(p_2)_*\\Delta_*M$. The projective-line properness statement and stability under base change make both $p_1$ and $p_2$ proper; since proper morphisms are separated, $\\Delta$ is a closed immersion, hence proper by the closed-immersion statement and composition stability. Proper morphisms are of finite type, and finite type over the Noetherian base makes $P$ and $W$ Noetherian, so the projection formula applies to $\\Delta$ and $p_2$. Thus it identifies $\\Delta_*M$ with $\\Delta_*A_P\\otimes_A^Lp_1^{-1}M$. Applying $R(p_2)_*$ to $\\delta\\otimes1_M$ and then using proper base change for the square defining $W$, together with the projection formula for $p_2$, gives a canonical natural map\n$$\\eta_M:M\\to R(p_2)_*p_1^{-1}M(1)[2]\\xrightarrow{\\sim}q^{-1}Rq_*M(1)[2]=GFM.$$\nThe coefficient ring $A$ is torsion because $NA=0$, so the cited torsion proper-base-change theorem applies on the whole unbounded category.",
+      "uses": [
+        "lem-weil-derived-direct-image-composition",
+        "lem-amb-p1-diagonal-integrals",
+        "lem-amb-proper-coproducts-projection",
+        "lem-kun-proper-base-change-torsion-ring",
+        "lemma-nagata-projective-space-base-change-proper",
+        "lem-kun-proper-stability",
+        "def-weil-proper-morphism",
+        "lem-weil-pbc-closed-immersion-proper",
+        "lem-weil-pbc-finite-type-over-noetherian"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, construction of the unit"
+      }
+    },
+    {
+      "text": "Take $\\epsilon$ to be the natural transformation defined in [def-amb-p1-trace]. Its components are the inverse of the canonical proper projection map followed by $1\\otimes t_q$ and the tensor-unit constraint, so they are natural in $K$ and have the required source $Rq_*G(K)$.",
+      "uses": [
+        "def-amb-p1-trace",
+        "lem-amb-proper-coproducts-projection"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, counit definition"
+      }
+    },
+    {
+      "text": "For the first triangle, expand $\\epsilon_{FM}\\circ F\\eta_M$ using the canonical proper-base-change exchange, the projection formula, and $R(qp_1)_*\\cong Rq_*Rp_{1*}$. The exchange/projection tensor coherence identifies this composite with\n$$Rq_*M\\longrightarrow Rq_*\\bigl(M\\otimes_A^LR(p_1)_*A_W(1)[2]\\bigr)\\xrightarrow{Rq_*(1_M\\otimes t_{p_1})}Rq_*M,$$\nwhere the first arrow is $Rq_*$ applied to $1_M\\otimes R(p_1)_*\\delta$. The decomposition $(1,h)$ and its compatibility with arbitrary base change identify $t_{p_1}$ with the pullback of $t_q$ along $q$ under this exchange.",
+      "uses": [
+        "lem-weil-derived-direct-image-composition",
+        "lem-amb-proper-coproducts-projection",
+        "lem-kun-proper-base-change-torsion-ring",
+        "lem-weil-pbc-ringed-exchange-tensor-coherence",
+        "thm-amb-p1-decomposition",
+        "def-amb-p1-trace"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, first triangle and canonical-mate interchange"
+      }
+    },
+    {
+      "text": "The resulting endomorphism is $Rq_*$ of $1_M$ tensored with $t_{p_1}\\circ R(p_1)_*\\delta$. The $a=1$ case of the diagonal-integral identity [lem-amb-p1-diagonal-integrals] makes this factor the identity, so $\\epsilon_{FM}\\circ F\\eta_M=1_{FM}$.",
+      "uses": [
+        "lem-amb-p1-diagonal-integrals"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, first triangle"
+      }
+    },
+    {
+      "text": "For the second triangle, substitute $M=GK$ into $\\eta$. Since $p_1^{-1}q^{-1}K=p_2^{-1}q^{-1}K$, the proper projection formula pulls this common coefficient outside $R(p_2)_*$. The canonical tensor/exchange comparisons identify $G\\epsilon_K$ with the same coefficient tensored with $t_{p_2}$, while $\\eta_{GK}$ contributes $R(p_2)_*\\delta$. All shifts moved past a homogeneous degree $i$ term are by $2$, so the Koszul factor is $(-1)^{2i}=1$.",
+      "uses": [
+        "lem-amb-proper-coproducts-projection",
+        "lem-weil-pbc-ringed-exchange-tensor-coherence",
+        "def-amb-p1-trace"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, second triangle and adjunction"
+      }
+    },
+    {
+      "text": "Thus $G\\epsilon_K\\circ\\eta_{GK}$ is\n$$1_{q^{-1}K\\otimes_A^LA_P(1)[2]}\\otimes\\bigl(t_{p_2}\\circ R(p_2)_*\\delta\\bigr),$$\nwhich is $1_{GK}$ by the $a=2$ case of [lem-amb-p1-diagonal-integrals].",
+      "uses": [
+        "lem-amb-p1-diagonal-integrals"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, second triangle"
+      }
+    },
+    {
+      "text": "The two triangle identities give the adjunction $F\\dashv G$ by the standard unit/counit Hom-bijection construction. The construction uses the canonical mate, projection, and exchange maps, so the resulting adjunction has exactly the counit $\\epsilon$ specified above.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+        "place": "Proof, conclusion"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-derived-direct-image-composition",
     "lem-amb-p1-diagonal-integrals",
     "lem-amb-proper-coproducts-projection",
@@ -28,228 +118,180 @@
     "lem-kun-proper-stability",
     "def-weil-proper-morphism",
     "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, construction of the unit"
-   }
-  },
-  {
-   "text": "Take $\\epsilon$ to be the natural transformation defined in [def-amb-p1-trace]. Its components are the inverse of the canonical proper projection map followed by $1\\otimes t_q$ and the tensor-unit constraint, so they are natural in $K$ and have the required source $Rq_*G(K)$.",
-   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
     "def-amb-p1-trace",
-    "lem-amb-proper-coproducts-projection"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "thm-amb-p1-decomposition"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, counit definition"
-   }
+    "place": "## Proof"
   },
-  {
-   "text": "For the first triangle, expand $\\epsilon_{FM}\\circ F\\eta_M$ using the canonical proper-base-change exchange, the projection formula, and $R(qp_1)_*\\cong Rq_*Rp_{1*}$. The exchange/projection tensor coherence identifies this composite with\n$$Rq_*M\\longrightarrow Rq_*\\bigl(M\\otimes_A^LR(p_1)_*A_W(1)[2]\\bigr)\\xrightarrow{Rq_*(1_M\\otimes t_{p_1})}Rq_*M,$$\nwhere the first arrow is $Rq_*$ applied to $1_M\\otimes R(p_1)_*\\delta$. The decomposition $(1,h)$ and its compatibility with arbitrary base change identify $t_{p_1}$ with the pullback of $t_q$ along $q$ under this exchange.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "adjunction for derived direct image of projective line with Tate twist shift two",
+      "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.PullbackConstruction.adjunction; no etale derived projective-line adjunction",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, ProjectiveLine, DerivedCategory",
+      "results": "0 hits; unknown identifier ProjectiveLine",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "projective.*(line|space)|Adjunction|Tate [Mathlib/AlgebraicGeometry]",
+      "results": "Mathlib projective-spectrum adjunctions and generic sheaf-module adjunctions; no etale derived projective-line Tate adjunction",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived etale projective line pushforward adjoint to inverse image tensor twist shifted by two",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1573,
+  "blueprint_uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "def-amb-p1-trace",
+    "def-coefficient-twists-detailed",
+    "def-sc-p1-standard",
+    "def-weil-pbc-derived-categories",
+    "lem-amb-p1-diagonal-integrals",
+    "lem-amb-proper-coproducts-projection",
     "lem-weil-derived-direct-image-composition",
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "thm-amb-p1-decomposition",
-    "def-amb-p1-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, first triangle and canonical-mate interchange"
-   }
+    "thm-amb-p1-decomposition"
+  ],
+  "uses_not_cited": [
+    "def-coefficient-twists-detailed",
+    "def-sc-p1-standard",
+    "def-weil-pbc-derived-categories"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "text": "The resulting endomorphism is $Rq_*$ of $1_M$ tensored with $t_{p_1}\\circ R(p_1)_*\\delta$. The $a=1$ case of the diagonal-integral identity [lem-amb-p1-diagonal-integrals] makes this factor the identity, so $\\epsilon_{FM}\\circ F\\eta_M=1_{FM}$.",
-   "uses": [
-    "lem-amb-p1-diagonal-integrals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, first triangle"
-   }
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "thm-amb-p1-adjunction",
+    "worker": "stage1",
+    "summary": "Corrected the imported shorthand statement by introducing N, A, S, P and q from def-amb-p1-trace, and split the diagonal-kernel proof into construction of the unit, counit, each triangle, and the adjunction conclusion. Reused the existing diagonal-integral, proper projection, proper base-change, direct-image composition, decomposition, and trace nodes; no new nodes were needed.",
+    "blueprint": "Realizes the proof paragraphs defining eta and epsilon, reducing each triangle to the corresponding diagonal integral, and concluding by the triangle criterion.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+        "why": "The unit of this item needs the generic compatibility of proper-base-change exchange with projection maps and tensor pullback; the compact-support CBC unit supplies no replacement for this categorical coherence."
+      },
+      {
+        "node": "lem-kun-proper-base-change-torsion-ring",
+        "why": "The diagonal-kernel construction and both triangle calculations use unbounded proper base-change exchanges for finite torsion coefficients; this generic proper-base-change tool is outside the CBC unit route."
+      },
+      {
+        "node": "lem-weil-derived-direct-image-composition",
+        "why": "The first triangle uses canonical composition of derived direct images for qp₁; this generic composition statement is outside the compact-support CBC unit route."
+      },
+      {
+        "node": "lem-kun-proper-stability",
+        "why": "The unit construction uses properness after base change for the two projective-line projections; this generic stability lemma is outside the compact-support CBC unit route."
+      }
+    ]
   },
-  {
-   "text": "For the second triangle, substitute $M=GK$ into $\\eta$. Since $p_1^{-1}q^{-1}K=p_2^{-1}q^{-1}K$, the proper projection formula pulls this common coefficient outside $R(p_2)_*$. The canonical tensor/exchange comparisons identify $G\\epsilon_K$ with the same coefficient tensored with $t_{p_2}$, while $\\eta_{GK}$ contributes $R(p_2)_*\\delta$. All shifts moved past a homogeneous degree $i$ term are by $2$, so the Koszul factor is $(-1)^{2i}=1$.",
-   "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "def-amb-p1-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, second triangle and adjunction"
-   }
-  },
-  {
-   "text": "Thus $G\\epsilon_K\\circ\\eta_{GK}$ is\n$$1_{q^{-1}K\\otimes_A^LA_P(1)[2]}\\otimes\\bigl(t_{p_2}\\circ R(p_2)_*\\delta\\bigr),$$\nwhich is $1_{GK}$ by the $a=2$ case of [lem-amb-p1-diagonal-integrals].",
-   "uses": [
-    "lem-amb-p1-diagonal-integrals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, second triangle"
-   }
-  },
-  {
-   "text": "The two triangle identities give the adjunction $F\\dashv G$ by the standard unit/counit Hom-bijection construction. The construction uses the canonical mate, projection, and exchange maps, so the resulting adjunction has exactly the counit $\\epsilon$ specified above.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, conclusion"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-derived-direct-image-composition",
-  "lem-amb-p1-diagonal-integrals",
-  "lem-amb-proper-coproducts-projection",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lemma-nagata-projective-space-base-change-proper",
-  "lem-kun-proper-stability",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-amb-p1-trace",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "thm-amb-p1-decomposition"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "adjunction for derived direct image of projective line with Tate twist shift two",
-   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.PullbackConstruction.adjunction; no etale derived projective-line adjunction",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, ProjectiveLine, DerivedCategory",
-   "results": "0 hits; unknown identifier ProjectiveLine",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "projective.*(line|space)|Adjunction|Tate [Mathlib/AlgebraicGeometry]",
-   "results": "Mathlib projective-spectrum adjunctions and generic sheaf-module adjunctions; no etale derived projective-line Tate adjunction",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived etale projective line pushforward adjoint to inverse image tensor twist shifted by two",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1573,
- "blueprint_uses": [
-  "cor-weil-pbc-geometric-fiber-finite",
-  "def-amb-p1-trace",
-  "def-coefficient-twists-detailed",
-  "def-sc-p1-standard",
-  "def-weil-pbc-derived-categories",
-  "lem-amb-p1-diagonal-integrals",
-  "lem-amb-proper-coproducts-projection",
-  "lem-weil-derived-direct-image-composition",
-  "thm-amb-p1-decomposition"
- ],
- "uses_not_cited": [
-  "def-coefficient-twists-detailed",
-  "def-sc-p1-standard",
-  "def-weil-pbc-derived-categories"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "thm-amb-p1-adjunction",
-  "worker": "stage1",
-  "summary": "Corrected the imported shorthand statement by introducing N, A, S, P and q from def-amb-p1-trace, and split the diagonal-kernel proof into construction of the unit, counit, each triangle, and the adjunction conclusion. Reused the existing diagonal-integral, proper projection, proper base-change, direct-image composition, decomposition, and trace nodes; no new nodes were needed.",
-  "blueprint": "Realizes the proof paragraphs defining eta and epsilon, reducing each triangle to the corresponding diagonal integral, and concluding by the triangle criterion.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "The unit of this item needs the generic compatibility of proper-base-change exchange with projection maps and tensor pullback; the compact-support CBC unit supplies no replacement for this categorical coherence."
-   },
-   {
-    "node": "lem-kun-proper-base-change-torsion-ring",
-    "why": "The diagonal-kernel construction and both triangle calculations use unbounded proper base-change exchanges for finite torsion coefficients; this generic proper-base-change tool is outside the CBC unit route."
-   },
-   {
-    "node": "lem-weil-derived-direct-image-composition",
-    "why": "The first triangle uses canonical composition of derived direct images for qp₁; this generic composition statement is outside the compact-support CBC unit route."
-   },
-   {
-    "node": "lem-kun-proper-stability",
-    "why": "The unit construction uses properness after base change for the two projective-line projections; this generic stability lemma is outside the compact-support CBC unit route."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-weil-derived-direct-image-composition",
-  "lem-kun-proper-stability"
- ],
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-NZ-80b61b724",
-  "group": "NZ",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-80b61b724 (reviewer sub-agent of L); spot-checked: Reviewed the corrected target, all seven proof steps, every cited node and source, chapter/unit route, unbounded torsion base change, coefficient category, base-change morphisms, edge cases, and duplicate candidates. No repair is needed; review.md records the checks."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-aec95236f",
-  "group": "NK",
-  "result": "pass",
-  "note": "Reviewed the immutable node, source, dependencies, declarations, edge cases, docstrings, and report; both Lean files passed separate scompile.py side-overlay compilation with no defects."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction",
-  "declaration": "AlgebraicGeometry.Etale.exists_projectiveLineFullAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineFullAdjunction.lean",
-  "statement": "theorem exists_projectiveLineFullAdjunction (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : ∃ adj : (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)) ⊣ ordinaryFiniteP1Right A N hA S, ∀ K : DerivedCategoryModule A S, adj.counit.app K = projectiveLineTraceEpsilon N hN A hA S hS K",
-  "branch": "newtargets-dag",
-  "by": "NK",
-  "date": "2026-10-16",
-  "existing": false
- }
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-derived-direct-image-composition",
+    "lem-kun-proper-stability"
+  ],
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-NZ-80b61b724",
+    "group": "NZ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-80b61b724 (reviewer sub-agent of L); spot-checked: Reviewed the corrected target, all seven proof steps, every cited node and source, chapter/unit route, unbounded torsion base change, coefficient category, base-change morphisms, edge cases, and duplicate candidates. No repair is needed; review.md records the checks."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-aec95236f",
+    "group": "NK",
+    "result": "pass",
+    "note": "Reviewed the immutable node, source, dependencies, declarations, edge cases, docstrings, and report; both Lean files passed separate scompile.py side-overlay compilation with no defects."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction",
+    "declaration": "AlgebraicGeometry.Etale.exists_projectiveLineFullAdjunction",
+    "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineFullAdjunction.lean",
+    "statement": "theorem exists_projectiveLineFullAdjunction (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : ∃ adj : (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)) ⊣ ordinaryFiniteP1Right A N hA S, ∀ K : DerivedCategoryModule A S, adj.counit.app K = projectiveLineTraceEpsilon N hN A hA S hS K",
+    "branch": "newtargets-dag",
+    "by": "NK",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "On the whole ordinary derived categories of etale $A$-modules,\n\n$$\nRq_*\\dashv q^*(1)[2]\n\\qquad(q:\\mathbf P^1_S\\to S).\n$$\n\nThe counit is $\\epsilon$ of [def-amb-p1-trace].",
+    "proof": [
+      {
+        "text": "Write $F=Rq_*$, $G=q^*(1)[2]$. Use the notation\nand the map $\\delta$ of\n[lem-amb-p1-diagonal-integrals]. For an arbitrary\ncomplex $M$ on $P$, define\n\n$$\n\\eta_M:M=R(p_2)_*\\Delta_*M\n\\xrightarrow{R(p_2)_*(\\delta\\otimes p_1^*M)}\nR(p_2)_*p_1^*M(1)[2]\n\\xrightarrow{\\sim} q^*Rq_*M(1)[2]=GFM.\n$$",
+        "uses": [
+          "lem-amb-p1-diagonal-integrals"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Here $\\Delta_*M\\cong\\Delta_*A\\otimes_A^Lp_1^*M$\nby the closed-immersion projection formula (or directly on\ngeometric stalks), and the last arrow is proper base change\n[cor-weil-pbc-geometric-fiber-finite], extended to\ncomplexes as in [lem-amb-proper-coproducts-projection].\nThus $\\eta$ is a natural transformation on all complexes.\nSet $\\epsilon$ equal to the natural transformation in\n[def-amb-p1-trace].",
+        "uses": [
+          "cor-weil-pbc-geometric-fiber-finite",
+          "lem-amb-proper-coproducts-projection",
+          "def-amb-p1-trace"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "We verify both triangles, keeping track of the coordinate\nintegrated in each. For the first triangle, the composite\n$\\epsilon_{FM}\\circ F\\eta_M$, after proper base change,\nthe projection formula and the composition\n$R(qp_1)_*\\cong Rq_*Rp_{1*}$ of\n[lem-weil-derived-direct-image-composition] (item (5)), is\n\n$$\n\\begin{split}\nRq_*M\n&=R(qp_1)_*\\Delta_*M\\\\\n&\\longrightarrow R(qp_1)_*p_1^*M(1)[2]\\\\\n&\\cong Rq_*\\bigl(M\\otimes_A^LR(p_1)_*A_W(1)[2]\\bigr)\\\\\n&\\xrightarrow{Rq_*(1_M\\otimes t_{p_1})}Rq_*M.\n\\end{split}\n$$\n\nBy the base-change compatibility of\n[thm-amb-p1-decomposition], $t_{p_1}$ is the\npullback of $t_q$ along $q:P\\to S$, under\nthe proper base-change identification for $p_1$.\nIndeed $\\eta$ first sums over the first coordinate,\nwhereas $\\epsilon_{FM}$ then integrates the second\ncoordinate. The equality $qp_1=qp_2$ and the\ncomposition isomorphism for derived direct images interchange\nthese two operations; the exchange map is obtained from the\nsame pullback counits on the Cartesian square. Naturality\nof the tensor projection map identifies the resulting first\narrow with $1_M\\otimes R(p_1)_*\\delta$.\nConsequently the whole composite is $Rq_*$ of $1_M$\ntensored with\n$t_{p_1}\\circ R(p_1)_*\\delta$. This is the identity\nby [lem-amb-p1-diagonal-integrals].",
+        "uses": [
+          "lem-weil-derived-direct-image-composition",
+          "thm-amb-p1-decomposition",
+          "lem-amb-p1-diagonal-integrals"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "For the other triangle, substitute $M=GK$ in $\\eta$.\nSince $p_1^*q^*K=p_2^*q^*K$, the projection formula\npulls this common coefficient out of $R(p_2)_*$.\nThe map $G\\epsilon_K$ integrates the first coordinate\nof $W$, and is therefore $t_{p_2}$ on the remaining\nkernel factor. Hence\n\n$$\nG\\epsilon_K\\circ\\eta_{GK}\n=1_{q^*K(1)[2]}\\otimes\n\\bigl(t_{p_2}\\circ R(p_2)_*\\delta\\bigr)\n=1_{GK}.\n$$",
+        "uses": [],
+        "elementary": null
+      },
+      {
+        "text": "The rearranged shifts are all even, so these rearrangements\nintroduce no Koszul sign. This proves the second triangle.\nIn these calculations the exchange and projection maps are\nthe canonical ones, not unspecified isomorphisms: their\ncompatibility is obtained by substituting their definitions\nfrom pullback counits before applying derived direct image.\nBoth expressions use the same counit once in each coordinate.\nThe two verified triangles prove the stated adjunction.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

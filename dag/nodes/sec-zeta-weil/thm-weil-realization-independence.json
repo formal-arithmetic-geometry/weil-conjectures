@@ -1,22 +1,91 @@
 {
- "id": "thm-weil-realization-independence",
- "blueprint": {
-  "is": "thm-weil-realization-independence",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Realization-independent integral factors",
- "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put\n$q=p^a$, $k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nLet\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, and\nput $X=X_0\\times_{k_0}k$. Fix an indeterminate $T$. For every prime\n$\\ell\\neq p$, let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper\ncohomological family. The reciprocal-root multiset is interpreted using the\nordinary and reciprocal-root\nconvention, and each $P_{i,\\ell}$ is the determinant factor in that\ncohomological family, explicitly\n\n$$\nP_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell}).\n$$\n\nLet $Z(X_0,T)$ be the\npoint-count zeta series, and write\n$Z(X_0,T)=A(T)/B(T)$ with $A,B\\in\\mathbf Z[T]$, $A(0)=B(0)=1$,\n$\\gcd(A,B)=1$ in $\\mathbf Q[T]$; this is a chosen presentation satisfying\nthe normalized integral-fraction\nconditions. Fix an algebraic closure $\\overline{\\mathbf Q}$. For each\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure\n$\\Qlb$ of $\\Ql$, set\n$\\overline{\\mathbf Q}^{(\\ell)} =\\{\\alpha\\in\\Qlb:\\alpha\\text{ is algebraic over }\\mathbf Q\\}$, the\nalgebraic closure of $\\mathbf Q$\ninside $\\Qlb$, and choose an isomorphism\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$.\nFor $C\\in\\{A,B\\}$, put\n$r_C=\\deg C$ and define its reciprocal polynomial by\n\n$$\nC^\\#(U)=U^{r_C}C(U^{-1}).\n$$\n\nFor each $0\\leq i\\leq2d$, form the multiset\nordinary roots $R_i$ of\n$A^\\#$ when $i$ is odd and of $B^\\#$ when $i$ is even whose elements\nare $q$-Weil numbers of weight $i$; the\nintrinsic weights and the Galois stability of these multisets are\nproved in *Intrinsic weights of the reciprocal roots* below. Put\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\\in\\mathbf Z[T].\n$$\n\nThese $Q_i$ are candidate normalized integral factors.\nFor every\nprime $\\ell\\neq p$, every ell-adic realization\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim}\\overline{\\mathbf Q}^{(\\ell)}$,\nand every $0\\leq i\\leq2d$, write\n$Q_i^{(\\ell,\\jmath_\\ell)}$ for the scalar extension of $Q_i$ along\n$\\jmath_\\ell$.\nThen scalar extension identifies the reciprocal-root multiset of $Q_i$ with\nthat of $P_{i,\\ell}$:\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T).\n$$\n\nHere $Q_i^{(\\ell,\\jmath_\\ell)}$ means coefficientwise extension along\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$, so the displayed equality is an equality in\nthe chosen algebraic closure of $\\Ql$ (with $P_{i,\\ell}$ viewed through\n$\\Ql\\subset\\Qlb$).\nConsequently, after these scalar identities are established, each $Q_i$ is\nthe normalized\nintegral Frobenius factor\nfor the common realization.\nThese scalar identities are independent of the chosen realization and\npreserve the normalization $Q_i(0)=1$. If\n$N_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm odd}}}P_{i,\\ell}(T)$ and\n$D_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm even}}}P_{i,\\ell}(T)$, the\nparity-product construction gives\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. No additional assertion\nabout Frobenius operators is made by this scalar comparison.\nThe scalar-extension notation is coefficientwise extension of integral\npolynomials.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/thm-weil-realization-independence.md",
-  "place": "node thm-weil-realization-independence, order 2909"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "*Step 1: the point counts are independent of $\\ell$.* The\nsetting is the smooth, proper, geometrically connected $X_0/k_0$ of\npure dimension $d$ of [def-weil-geometric-hypotheses], in the\ndatums of [def-weil-finite-field-fiber], and the\ninteger point counts $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ do not\ninvolve $\\ell$, by the point-count convention of\n[def-weil-point-counts-zeta]; hence the zeta series\n$Z(X_0,T)$ lies in $1+T\\mathbf Z[[T]]$, and by the closed-point\nproduct of [prop-euler-product] it is the Taylor series of the\nclosed-point product. For each $\\ell\\neq p$, the point-count trace\nformula of [cor-trf-point-counting] and the\n[lem-zl-log-det-identity] log-determinant identity yield the\n[thm-zl-lefschetz-weil-identity] trace-to-determinant identity\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\Ql[[T]],\n$$\n\nafter the scalar extension to the $\\Ql$-coefficients of\n[def-weil-smooth-proper-cohomological-family], with the root\nconvention of [def-weil-ordinary-reciprocal-roots]. Since the\nright-hand side is rational over $\\Ql$, its Taylor coefficients\nsatisfy a linear recurrence over $\\Ql$, and its\n[def-weil-hankel-matrix] has some finite rank $r$ over $\\Ql$.\nEvery finite minor of order $r+1$ has integer entries and\nvanishes in $\\Ql$, hence already in $\\mathbf Q$.\nThus its rank over $\\mathbf Q$ is at most $r$, and by the\nrationality criterion of\n[prop-weil-rationality-criterion] the series lies in\n$\\mathbf Q(T)$; the normalized reduced integral presentation of\n[def-weil-normalized-integral-fraction] is then the unique one\nsupplied by [prop-weil-zeta-normalized-presentation].",
-   "uses": [
+  "id": "thm-weil-realization-independence",
+  "blueprint": {
+    "is": "thm-weil-realization-independence",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Realization-independent integral factors",
+  "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put\n$q=p^a$, $k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nLet\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, and\nput $X=X_0\\times_{k_0}k$. Fix an indeterminate $T$. For every prime\n$\\ell\\neq p$, let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper\ncohomological family. The reciprocal-root multiset is interpreted using the\nordinary and reciprocal-root\nconvention, and each $P_{i,\\ell}$ is the determinant factor in that\ncohomological family, explicitly\n\n$$\nP_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell}).\n$$\n\nLet $Z(X_0,T)$ be the\npoint-count zeta series, and write\n$Z(X_0,T)=A(T)/B(T)$ with $A,B\\in\\mathbf Z[T]$, $A(0)=B(0)=1$,\n$\\gcd(A,B)=1$ in $\\mathbf Q[T]$; this is a chosen presentation satisfying\nthe normalized integral-fraction\nconditions. Fix an algebraic closure $\\overline{\\mathbf Q}$. For each\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure\n$\\Qlb$ of $\\Ql$, set\n$\\overline{\\mathbf Q}^{(\\ell)} =\\{\\alpha\\in\\Qlb:\\alpha\\text{ is algebraic over }\\mathbf Q\\}$, the\nalgebraic closure of $\\mathbf Q$\ninside $\\Qlb$, and choose an isomorphism\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$.\nFor $C\\in\\{A,B\\}$, put\n$r_C=\\deg C$ and define its reciprocal polynomial by\n\n$$\nC^\\#(U)=U^{r_C}C(U^{-1}).\n$$\n\nFor each $0\\leq i\\leq2d$, form the multiset\nordinary roots $R_i$ of\n$A^\\#$ when $i$ is odd and of $B^\\#$ when $i$ is even whose elements\nare $q$-Weil numbers of weight $i$; the\nintrinsic weights and the Galois stability of these multisets are\nproved in *Intrinsic weights of the reciprocal roots* below. Put\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\\in\\mathbf Z[T].\n$$\n\nThese $Q_i$ are candidate normalized integral factors.\nFor every\nprime $\\ell\\neq p$, every ell-adic realization\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim}\\overline{\\mathbf Q}^{(\\ell)}$,\nand every $0\\leq i\\leq2d$, write\n$Q_i^{(\\ell,\\jmath_\\ell)}$ for the scalar extension of $Q_i$ along\n$\\jmath_\\ell$.\nThen scalar extension identifies the reciprocal-root multiset of $Q_i$ with\nthat of $P_{i,\\ell}$:\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T).\n$$\n\nHere $Q_i^{(\\ell,\\jmath_\\ell)}$ means coefficientwise extension along\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$, so the displayed equality is an equality in\nthe chosen algebraic closure of $\\Ql$ (with $P_{i,\\ell}$ viewed through\n$\\Ql\\subset\\Qlb$).\nConsequently, after these scalar identities are established, each $Q_i$ is\nthe normalized\nintegral Frobenius factor\nfor the common realization.\nThese scalar identities are independent of the chosen realization and\npreserve the normalization $Q_i(0)=1$. If\n$N_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm odd}}}P_{i,\\ell}(T)$ and\n$D_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm even}}}P_{i,\\ell}(T)$, the\nparity-product construction gives\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. No additional assertion\nabout Frobenius operators is made by this scalar comparison.\nThe scalar-extension notation is coefficientwise extension of integral\npolynomials.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/thm-weil-realization-independence.md",
+    "place": "node thm-weil-realization-independence, order 2909"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 1: the point counts are independent of $\\ell$.* The\nsetting is the smooth, proper, geometrically connected $X_0/k_0$ of\npure dimension $d$ of [def-weil-geometric-hypotheses], in the\ndatums of [def-weil-finite-field-fiber], and the\ninteger point counts $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ do not\ninvolve $\\ell$, by the point-count convention of\n[def-weil-point-counts-zeta]; hence the zeta series\n$Z(X_0,T)$ lies in $1+T\\mathbf Z[[T]]$, and by the closed-point\nproduct of [prop-euler-product] it is the Taylor series of the\nclosed-point product. For each $\\ell\\neq p$, the point-count trace\nformula of [cor-trf-point-counting] and the\n[lem-zl-log-det-identity] log-determinant identity yield the\n[thm-zl-lefschetz-weil-identity] trace-to-determinant identity\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\Ql[[T]],\n$$\n\nafter the scalar extension to the $\\Ql$-coefficients of\n[def-weil-smooth-proper-cohomological-family], with the root\nconvention of [def-weil-ordinary-reciprocal-roots]. Since the\nright-hand side is rational over $\\Ql$, its Taylor coefficients\nsatisfy a linear recurrence over $\\Ql$, and its\n[def-weil-hankel-matrix] has some finite rank $r$ over $\\Ql$.\nEvery finite minor of order $r+1$ has integer entries and\nvanishes in $\\Ql$, hence already in $\\mathbf Q$.\nThus its rank over $\\mathbf Q$ is at most $r$, and by the\nrationality criterion of\n[prop-weil-rationality-criterion] the series lies in\n$\\mathbf Q(T)$; the normalized reduced integral presentation of\n[def-weil-normalized-integral-fraction] is then the unique one\nsupplied by [prop-weil-zeta-normalized-presentation].",
+      "uses": [
+        "def-weil-geometric-hypotheses",
+        "def-weil-finite-field-fiber",
+        "def-weil-point-counts-zeta",
+        "prop-euler-product",
+        "cor-trf-point-counting",
+        "lem-zl-log-det-identity",
+        "thm-zl-lefschetz-weil-identity",
+        "def-weil-smooth-proper-cohomological-family",
+        "def-weil-ordinary-reciprocal-roots",
+        "def-weil-hankel-matrix",
+        "prop-weil-rationality-criterion",
+        "def-weil-normalized-integral-fraction",
+        "prop-weil-zeta-normalized-presentation"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: weight separation.* By [prop-weil-reciprocal-roots-eigenvalues]\nthe reciprocal roots of $P_{i,\\ell}$ are the eigenvalues of\n$F_{i,\\ell}$, and [thm-weil-deligne-purity] gives\n$|\\iota(\\alpha)|=q^{i/2}$ for every such eigenvalue, for the fixed\nisomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ used there.\nThe hypotheses of [prop-weight-separation] therefore hold:\nevery reciprocal root of $P_{i,\\ell}$ satisfies\n$|\\iota(\\alpha)|=q^{i/2}$, and the trace-to-determinant identity of\nStep 1 holds. Concretely, the polynomials $P_{i,\\ell}$,\n$P_{j,\\ell}$ are coprime for $i\\neq j$, the parity products\n$N_\\ell,D_\\ell$ of [def-weil-parity-products]\nare coprime with constant coefficient $1$,\n$Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$, and the ordinary root multiset of\neach $P_{i,\\ell}$ is exactly the submultiset of roots of the\nappropriate parity product with the weight-$i$ absolute-value\ncondition.",
+      "uses": [
+        "prop-weil-reciprocal-roots-eigenvalues",
+        "thm-weil-deligne-purity",
+        "prop-weight-separation",
+        "def-weil-parity-products"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: the parity products are the normalized presentation.*\nBoth $A^{(\\ell)}/B^{(\\ell)}$ and $N_\\ell/D_\\ell$ are reduced\nfractions —$\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], $\\gcd(N_\\ell,D_\\ell)=1$\nby Step 2 —with constant coefficients $1$, and both equal the\nTaylor series $Z(X_0,T)$ in $\\Ql[[T]]$. Cross multiplication\nand coprimality over $\\Ql[T]$ show that the numerators and\ndenominators differ by the same scalar. Their constant terms\nare $1$, so that scalar is $1$. Consequently\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$ coefficientwise in\n$\\Ql$, after extension along the [def-weil-algebraic-closure-q]\nidentification $\\jmath_\\ell$ of [def-weil-finite-field-fiber]'s\ndatum. This is the parity-product clause.",
+      "uses": [
+        "def-weil-normalized-integral-fraction",
+        "def-weil-algebraic-closure-q",
+        "def-weil-finite-field-fiber"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: the weight strata and the stratum polynomials.* By\n*Intrinsic weights of the reciprocal roots* below, every root of $A^\\#$ or $B^\\#$ has a\nunique weight in $\\{0,\\ldots,2d\\}$, and the resulting root multisets\n$R_i$ are Galois-stable. Hence\n[prop-galois-weight-strata-integrality] and\n[prop-galois-weight-strata-identification] apply and return that the\nnormalized stratum polynomials\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\n$$\n\nlie in $\\mathbf Z[T]$ and that the reciprocal-root multiset of $Q_i$\nis the weight-$i$ submultiset of the roots of $A^\\#$\n($i$ odd) or of $B^\\#$ ($i$ even). This is the integrality clause\nfor the stratum polynomials.",
+      "uses": [
+        "prop-galois-weight-strata-integrality",
+        "prop-galois-weight-strata-identification"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 5: the scalar identities.* For fixed\n$\\ell\\neq p$ and $\\jmath_\\ell$, the scalar extension\n$Q_i^{(\\ell,\\jmath_\\ell)}$ is the product over the identified\nweight-$i$ submultiset of roots of $A^{(\\ell)\\#}=N_\\ell^\\#$\n($i$ odd) or of $B^{(\\ell)\\#}=D_\\ell^\\#$ ($i$ even), which by\nthe multiset identification of Step 2 is exactly the reciprocal-root\nmultiset of $P_{i,\\ell}$; both polynomials have constant\ncoefficient $1$, so\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T),\n$$\n\nthe identity of the interface statement. The independence of the\nidentity from the chosen realization and realization isomorphism is\nthe uniqueness in Step 4, and $Q_i(0)=1$ is the normalization\n$Q_i(0)=\\prod_{\\alpha\\in R_i}1=1$. With Step 3 this establishes\nthe assertion, and $Q_i$ is the integral Frobenius factor of\n[def-weil-integral-frobenius-factor]\nin degree $i$: its scalar extension along $\\jmath_\\ell$ is\n$P_{i,\\ell}$ for every $\\ell\\neq p$.",
+      "uses": [
+        "def-weil-integral-frobenius-factor"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "## Intrinsic weights of the reciprocal roots\n\nIn the situation of [thm-weil-realization-independence], every root of\n$A^\\#$ or $B^\\#$ has a unique weight in $\\{0,\\ldots,2d\\}$, and the\nresulting multisets $R_i$ of\nordinary roots that are\n$q$-Weil numbers of weight $i$ are stable\nunder $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Proof.*\nIn the situation of [thm-weil-realization-independence] the fraction\n$A^{(\\ell)}/B^{(\\ell)}$ and the parity products $N_\\ell/D_\\ell$ of\n[prop-weight-separation] both equal the series $Z(X_0,T)$ in\n$\\Ql[[T]]$; here $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], while $\\gcd(N_\\ell,D_\\ell)=1$\nand $N_\\ell(0)=D_\\ell(0)=1$ by [prop-weight-separation]. Cross\nmultiplication over $\\Ql[T]$ and coprimality therefore give\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. Hence every root of\n$A^\\#$ or $B^\\#$ maps under $\\jmath_\\ell$ to a root of $N_\\ell^\\#$\nor $D_\\ell^\\#$ in the [def-weil-ordinary-reciprocal-roots]\nconvention, that is, to a reciprocal root of exactly one of the factors\n$P_{i,\\ell}$ (distinct $P_{i,\\ell}$ being coprime by\n[prop-weight-separation]); the weight of that factor is a weight of\nthe root, because every root of $P_{i,\\ell}$ has absolute value\n$q^{i/2}$ by [prop-weight-purity-roots] and an arbitrary complex\nembedding of the number field generated by the root extends to an\nisomorphism of algebraic closures by [lem-embedding-extension]. For\nthe same reason the weight is independent of the chosen $\\ell$ and\nrealization, the $q$-Weil condition of [def-weil-numbers] being\nstable under $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$ and\nunder every embedding of its number field into $\\mathbf C$; the\nconditions of distinct weights are mutually exclusive because\n$q^{i/2}\\neq q^{j/2}$ for $i\\neq j$. Each root of $A^\\#$ or $B^\\#$\ntherefore has a unique weight in $\\{0,\\ldots,2d\\}$, and the multisets\n$R_i$ of [thm-weil-realization-independence] are stable under\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
+      "uses": [
+        "prop-weight-separation",
+        "def-weil-normalized-integral-fraction",
+        "def-weil-ordinary-reciprocal-roots",
+        "prop-weight-purity-roots",
+        "lem-embedding-extension",
+        "def-weil-numbers"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-weil-geometric-hypotheses",
     "def-weil-finite-field-fiber",
     "def-weil-point-counts-zeta",
@@ -29,142 +98,150 @@
     "def-weil-hankel-matrix",
     "prop-weil-rationality-criterion",
     "def-weil-normalized-integral-fraction",
-    "prop-weil-zeta-normalized-presentation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2: weight separation.* By [prop-weil-reciprocal-roots-eigenvalues]\nthe reciprocal roots of $P_{i,\\ell}$ are the eigenvalues of\n$F_{i,\\ell}$, and [thm-weil-deligne-purity] gives\n$|\\iota(\\alpha)|=q^{i/2}$ for every such eigenvalue, for the fixed\nisomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ used there.\nThe hypotheses of [prop-weight-separation] therefore hold:\nevery reciprocal root of $P_{i,\\ell}$ satisfies\n$|\\iota(\\alpha)|=q^{i/2}$, and the trace-to-determinant identity of\nStep 1 holds. Concretely, the polynomials $P_{i,\\ell}$,\n$P_{j,\\ell}$ are coprime for $i\\neq j$, the parity products\n$N_\\ell,D_\\ell$ of [def-weil-parity-products]\nare coprime with constant coefficient $1$,\n$Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$, and the ordinary root multiset of\neach $P_{i,\\ell}$ is exactly the submultiset of roots of the\nappropriate parity product with the weight-$i$ absolute-value\ncondition.",
-   "uses": [
+    "prop-weil-zeta-normalized-presentation",
     "prop-weil-reciprocal-roots-eigenvalues",
     "thm-weil-deligne-purity",
     "prop-weight-separation",
-    "def-weil-parity-products"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3: the parity products are the normalized presentation.*\nBoth $A^{(\\ell)}/B^{(\\ell)}$ and $N_\\ell/D_\\ell$ are reduced\nfractions —$\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], $\\gcd(N_\\ell,D_\\ell)=1$\nby Step 2 —with constant coefficients $1$, and both equal the\nTaylor series $Z(X_0,T)$ in $\\Ql[[T]]$. Cross multiplication\nand coprimality over $\\Ql[T]$ show that the numerators and\ndenominators differ by the same scalar. Their constant terms\nare $1$, so that scalar is $1$. Consequently\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$ coefficientwise in\n$\\Ql$, after extension along the [def-weil-algebraic-closure-q]\nidentification $\\jmath_\\ell$ of [def-weil-finite-field-fiber]'s\ndatum. This is the parity-product clause.",
-   "uses": [
-    "def-weil-normalized-integral-fraction",
+    "def-weil-parity-products",
     "def-weil-algebraic-closure-q",
-    "def-weil-finite-field-fiber"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4: the weight strata and the stratum polynomials.* By\n*Intrinsic weights of the reciprocal roots* below, every root of $A^\\#$ or $B^\\#$ has a\nunique weight in $\\{0,\\ldots,2d\\}$, and the resulting root multisets\n$R_i$ are Galois-stable. Hence\n[prop-galois-weight-strata-integrality] and\n[prop-galois-weight-strata-identification] apply and return that the\nnormalized stratum polynomials\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\n$$\n\nlie in $\\mathbf Z[T]$ and that the reciprocal-root multiset of $Q_i$\nis the weight-$i$ submultiset of the roots of $A^\\#$\n($i$ odd) or of $B^\\#$ ($i$ even). This is the integrality clause\nfor the stratum polynomials.",
-   "uses": [
     "prop-galois-weight-strata-integrality",
-    "prop-galois-weight-strata-identification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 5: the scalar identities.* For fixed\n$\\ell\\neq p$ and $\\jmath_\\ell$, the scalar extension\n$Q_i^{(\\ell,\\jmath_\\ell)}$ is the product over the identified\nweight-$i$ submultiset of roots of $A^{(\\ell)\\#}=N_\\ell^\\#$\n($i$ odd) or of $B^{(\\ell)\\#}=D_\\ell^\\#$ ($i$ even), which by\nthe multiset identification of Step 2 is exactly the reciprocal-root\nmultiset of $P_{i,\\ell}$; both polynomials have constant\ncoefficient $1$, so\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T),\n$$\n\nthe identity of the interface statement. The independence of the\nidentity from the chosen realization and realization isomorphism is\nthe uniqueness in Step 4, and $Q_i(0)=1$ is the normalization\n$Q_i(0)=\\prod_{\\alpha\\in R_i}1=1$. With Step 3 this establishes\nthe assertion, and $Q_i$ is the integral Frobenius factor of\n[def-weil-integral-frobenius-factor]\nin degree $i$: its scalar extension along $\\jmath_\\ell$ is\n$P_{i,\\ell}$ for every $\\ell\\neq p$.",
-   "uses": [
-    "def-weil-integral-frobenius-factor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "## Intrinsic weights of the reciprocal roots\n\nIn the situation of [thm-weil-realization-independence], every root of\n$A^\\#$ or $B^\\#$ has a unique weight in $\\{0,\\ldots,2d\\}$, and the\nresulting multisets $R_i$ of\nordinary roots that are\n$q$-Weil numbers of weight $i$ are stable\nunder $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Proof.*\nIn the situation of [thm-weil-realization-independence] the fraction\n$A^{(\\ell)}/B^{(\\ell)}$ and the parity products $N_\\ell/D_\\ell$ of\n[prop-weight-separation] both equal the series $Z(X_0,T)$ in\n$\\Ql[[T]]$; here $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], while $\\gcd(N_\\ell,D_\\ell)=1$\nand $N_\\ell(0)=D_\\ell(0)=1$ by [prop-weight-separation]. Cross\nmultiplication over $\\Ql[T]$ and coprimality therefore give\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. Hence every root of\n$A^\\#$ or $B^\\#$ maps under $\\jmath_\\ell$ to a root of $N_\\ell^\\#$\nor $D_\\ell^\\#$ in the [def-weil-ordinary-reciprocal-roots]\nconvention, that is, to a reciprocal root of exactly one of the factors\n$P_{i,\\ell}$ (distinct $P_{i,\\ell}$ being coprime by\n[prop-weight-separation]); the weight of that factor is a weight of\nthe root, because every root of $P_{i,\\ell}$ has absolute value\n$q^{i/2}$ by [prop-weight-purity-roots] and an arbitrary complex\nembedding of the number field generated by the root extends to an\nisomorphism of algebraic closures by [lem-embedding-extension]. For\nthe same reason the weight is independent of the chosen $\\ell$ and\nrealization, the $q$-Weil condition of [def-weil-numbers] being\nstable under $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$ and\nunder every embedding of its number field into $\\mathbf C$; the\nconditions of distinct weights are mutually exclusive because\n$q^{i/2}\\neq q^{j/2}$ for $i\\neq j$. Each root of $A^\\#$ or $B^\\#$\ntherefore has a unique weight in $\\{0,\\ldots,2d\\}$, and the multisets\n$R_i$ of [thm-weil-realization-independence] are stable under\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
-   "uses": [
-    "prop-weight-separation",
-    "def-weil-normalized-integral-fraction",
-    "def-weil-ordinary-reciprocal-roots",
+    "prop-galois-weight-strata-identification",
+    "def-weil-integral-frobenius-factor",
     "prop-weight-purity-roots",
     "lem-embedding-extension",
     "def-weil-numbers"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-geometric-hypotheses",
-  "def-weil-finite-field-fiber",
-  "def-weil-point-counts-zeta",
-  "prop-euler-product",
-  "cor-trf-point-counting",
-  "lem-zl-log-det-identity",
-  "thm-zl-lefschetz-weil-identity",
-  "def-weil-smooth-proper-cohomological-family",
-  "def-weil-ordinary-reciprocal-roots",
-  "def-weil-hankel-matrix",
-  "prop-weil-rationality-criterion",
-  "def-weil-normalized-integral-fraction",
-  "prop-weil-zeta-normalized-presentation",
-  "prop-weil-reciprocal-roots-eigenvalues",
-  "thm-weil-deligne-purity",
-  "prop-weight-separation",
-  "def-weil-parity-products",
-  "def-weil-algebraic-closure-q",
-  "prop-galois-weight-strata-integrality",
-  "prop-galois-weight-strata-identification",
-  "def-weil-integral-frobenius-factor",
-  "prop-weight-purity-roots",
-  "lem-embedding-extension",
-  "def-weil-numbers"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/thm-weil-realization-independence.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "embedded_statements",
-  "self_citation"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 2909,
- "blueprint_uses": [
-  "cor-trf-point-counting",
-  "def-weil-algebraic-closure-q",
-  "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-hankel-matrix",
-  "def-weil-integral-frobenius-factor",
-  "def-weil-normalized-integral-fraction",
-  "def-weil-numbers",
-  "def-weil-ordinary-reciprocal-roots",
-  "def-weil-parity-products",
-  "def-weil-point-counts-zeta",
-  "def-weil-smooth-proper-cohomological-family",
-  "lem-embedding-extension",
-  "lem-zl-log-det-identity",
-  "prop-euler-product",
-  "prop-galois-weight-strata-identification",
-  "prop-galois-weight-strata-integrality",
-  "prop-weight-purity-roots",
-  "prop-weight-separation",
-  "prop-weil-rationality-criterion",
-  "prop-weil-reciprocal-roots-eigenvalues",
-  "prop-weil-zeta-normalized-presentation",
-  "thm-weil-deligne-purity",
-  "thm-zl-lefschetz-weil-identity"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/thm-weil-realization-independence.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "embedded_statements",
+    "self_citation"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2909,
+  "blueprint_uses": [
+    "cor-trf-point-counting",
+    "def-weil-algebraic-closure-q",
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-hankel-matrix",
+    "def-weil-integral-frobenius-factor",
+    "def-weil-normalized-integral-fraction",
+    "def-weil-numbers",
+    "def-weil-ordinary-reciprocal-roots",
+    "def-weil-parity-products",
+    "def-weil-point-counts-zeta",
+    "def-weil-smooth-proper-cohomological-family",
+    "lem-embedding-extension",
+    "lem-zl-log-det-identity",
+    "prop-euler-product",
+    "prop-galois-weight-strata-identification",
+    "prop-galois-weight-strata-integrality",
+    "prop-weight-purity-roots",
+    "prop-weight-separation",
+    "prop-weil-rationality-criterion",
+    "prop-weil-reciprocal-roots-eigenvalues",
+    "prop-weil-zeta-normalized-presentation",
+    "thm-weil-deligne-purity",
+    "thm-zl-lefschetz-weil-identity"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-zeta-weil",
+  "unit": "sk-thm-intfactors",
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, put\n$q=p^a$, $k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nLet\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, and\nput $X=X_0\\times_{k_0}k$. Fix an indeterminate $T$. For every prime\n$\\ell\\neq p$, let\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the\nsmooth-proper\ncohomological family. The reciprocal-root multiset is interpreted using the\nordinary and reciprocal-root\nconvention, and each $P_{i,\\ell}$ is the determinant factor in that\ncohomological family, explicitly\n\n$$\nP_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell}).\n$$\n\nLet $Z(X_0,T)$ be the\npoint-count zeta series, and write\n$Z(X_0,T)=A(T)/B(T)$ with $A,B\\in\\mathbf Z[T]$, $A(0)=B(0)=1$,\n$\\gcd(A,B)=1$ in $\\mathbf Q[T]$; this is a chosen presentation satisfying\nthe normalized integral-fraction\nconditions. Fix an algebraic closure $\\overline{\\mathbf Q}$. For each\n$\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure\n$\\Qlb$ of $\\Ql$, set\n$\\overline{\\mathbf Q}^{(\\ell)} =\\{\\alpha\\in\\Qlb:\\alpha\\text{ is algebraic over }\\mathbf Q\\}$, the\nalgebraic closure of $\\mathbf Q$\ninside $\\Qlb$, and choose an isomorphism\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$.\nFor $C\\in\\{A,B\\}$, put\n$r_C=\\deg C$ and define its reciprocal polynomial by\n\n$$\nC^\\#(U)=U^{r_C}C(U^{-1}).\n$$\n\nFor each $0\\leq i\\leq2d$, form the multiset $R_i$ of those roots of\n$A^\\#$ when $i$ is odd and of $B^\\#$ when $i$ is even\nthat are $q$-Weil numbers of weight $i$. Put\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\\in\\mathbf Z[T].\n$$\n\nThese $Q_i$ are candidate normalized integral factors.\nFor every\nprime $\\ell\\neq p$, every ell-adic realization\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim}\\overline{\\mathbf Q}^{(\\ell)}$,\nand every $0\\leq i\\leq2d$, write\n$Q_i^{(\\ell,\\jmath_\\ell)}$ for the scalar extension of $Q_i$ along\n$\\jmath_\\ell$.\nThen scalar extension identifies the reciprocal-root multiset of $Q_i$ with\nthat of $P_{i,\\ell}$:\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T).\n$$\n\nHere $Q_i^{(\\ell,\\jmath_\\ell)}$ means coefficientwise extension along\n$\\jmath_\\ell:\\overline{\\mathbf Q}\\xrightarrow{\\sim} \\overline{\\mathbf Q}^{(\\ell)}$, so the displayed equality is an equality in\nthe chosen algebraic closure of $\\Ql$ (with $P_{i,\\ell}$ viewed through\n$\\Ql\\subset\\Qlb$).\nConsequently, after these scalar identities are established, each $Q_i$ is\nthe normalized\nintegral Frobenius factor\nfor the common realization.\nThese scalar identities are independent of the chosen realization and\npreserve the normalization $Q_i(0)=1$. If\n$N_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm odd}}}P_{i,\\ell}(T)$ and\n$D_\\ell(T)=\\prod_{\\substack{0\\leq i\\leq2d\\\\i\\ {\\rm even}}}P_{i,\\ell}(T)$, the\nparity-product construction gives\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$.\nThe scalar-extension notation is coefficientwise extension of integral\npolynomials.",
+    "proof": [
+      {
+        "text": "*Step 1: the point counts are independent of $\\ell$.* The\nsetting is the smooth, proper, geometrically connected $X_0/k_0$ of\npure dimension $d$ of [def-weil-geometric-hypotheses], in the\ndatums of [def-weil-finite-field-fiber], and the\ninteger point counts $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ do not\ninvolve $\\ell$, by the point-count convention of\n[def-weil-point-counts-zeta]; hence the zeta series\n$Z(X_0,T)$ lies in $1+T\\mathbf Z[[T]]$, and by the closed-point\nproduct of [prop-euler-product] it is the Taylor series of the\nclosed-point product. For each $\\ell\\neq p$, the point-count trace\nformula of [cor-trf-point-counting] and the\n[lem-zl-log-det-identity] log-determinant identity yield the\n[thm-zl-lefschetz-weil-identity] trace-to-determinant identity\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\Ql[[T]],\n$$\n\nafter the scalar extension to the $\\Ql$-coefficients of\n[def-weil-smooth-proper-cohomological-family], with the root\nconvention of [def-weil-ordinary-reciprocal-roots]. Since the\nright-hand side is rational over $\\Ql$, its Taylor coefficients\nsatisfy a linear recurrence over $\\Ql$, and its\n[def-weil-hankel-matrix] has some finite rank $r$ over $\\Ql$.\nEvery finite minor of order $r+1$ has integer entries and\nvanishes in $\\Ql$, hence already in $\\mathbf Q$.\nThus its rank over $\\mathbf Q$ is at most $r$, and by the\nrationality criterion of\n[prop-weil-rationality-criterion] the series lies in\n$\\mathbf Q(T)$; the normalized reduced integral presentation of\n[def-weil-normalized-integral-fraction] is then the unique one\nsupplied by [prop-weil-zeta-normalized-presentation].",
+        "uses": [
+          "def-weil-geometric-hypotheses",
+          "def-weil-finite-field-fiber",
+          "def-weil-point-counts-zeta",
+          "prop-euler-product",
+          "cor-trf-point-counting",
+          "lem-zl-log-det-identity",
+          "thm-zl-lefschetz-weil-identity",
+          "def-weil-smooth-proper-cohomological-family",
+          "def-weil-ordinary-reciprocal-roots",
+          "def-weil-hankel-matrix",
+          "prop-weil-rationality-criterion",
+          "def-weil-normalized-integral-fraction",
+          "prop-weil-zeta-normalized-presentation"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 2: weight separation.* By [prop-weil-reciprocal-roots-eigenvalues]\nthe reciprocal roots of $P_{i,\\ell}$ are the eigenvalues of\n$F_{i,\\ell}$, and [thm-weil-deligne-purity] gives\n$|\\iota(\\alpha)|=q^{i/2}$ for every such eigenvalue, for the fixed\nisomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ used there.\nThe hypotheses of [prop-weight-separation] therefore hold:\nevery reciprocal root of $P_{i,\\ell}$ satisfies\n$|\\iota(\\alpha)|=q^{i/2}$, and the trace-to-determinant identity of\nStep 1 holds. Concretely, the polynomials $P_{i,\\ell}$,\n$P_{j,\\ell}$ are coprime for $i\\neq j$, the parity products\n$N_\\ell,D_\\ell$ of [def-weil-parity-products]\nare coprime with constant coefficient $1$,\n$Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$, and the ordinary root multiset of\neach $P_{i,\\ell}$ is exactly the submultiset of roots of the\nappropriate parity product with the weight-$i$ absolute-value\ncondition.",
+        "uses": [
+          "prop-weil-reciprocal-roots-eigenvalues",
+          "thm-weil-deligne-purity",
+          "prop-weight-separation",
+          "def-weil-parity-products"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 3: the parity products are the normalized presentation.*\nBoth $A^{(\\ell)}/B^{(\\ell)}$ and $N_\\ell/D_\\ell$ are reduced\nfractions —$\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], $\\gcd(N_\\ell,D_\\ell)=1$\nby Step 2 —with constant coefficients $1$, and both equal the\nTaylor series $Z(X_0,T)$ in $\\Ql[[T]]$. Cross multiplication\nand coprimality over $\\Ql[T]$ show that the numerators and\ndenominators differ by the same scalar. Their constant terms\nare $1$, so that scalar is $1$. Consequently\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$ coefficientwise in\n$\\Ql$, after extension along the [def-weil-algebraic-closure-q]\nidentification $\\jmath_\\ell$ of [def-weil-finite-field-fiber]'s\ndatum. This is the parity-product clause.",
+        "uses": [
+          "def-weil-normalized-integral-fraction",
+          "def-weil-algebraic-closure-q",
+          "def-weil-finite-field-fiber"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 4: the weight strata and the stratum polynomials.* By\n*Intrinsic weights of the reciprocal roots* below, every root of $A^\\#$ or $B^\\#$ has a\nunique weight in $\\{0,\\ldots,2d\\}$, and the resulting root multisets\n$R_i$ are Galois-stable. Hence\n[prop-galois-weight-strata-integrality] and\n[prop-galois-weight-strata-identification] apply and return that the\nnormalized stratum polynomials\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T)\n$$\n\nlie in $\\mathbf Z[T]$ and that the reciprocal-root multiset of $Q_i$\nis the weight-$i$ submultiset of the roots of $A^\\#$\n($i$ odd) or of $B^\\#$ ($i$ even). This is the integrality clause\nfor the stratum polynomials.",
+        "uses": [
+          "prop-galois-weight-strata-integrality",
+          "prop-galois-weight-strata-identification"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 5: the scalar identities.* For fixed\n$\\ell\\neq p$ and $\\jmath_\\ell$, the scalar extension\n$Q_i^{(\\ell,\\jmath_\\ell)}$ is the product over the identified\nweight-$i$ submultiset of roots of $A^{(\\ell)\\#}=N_\\ell^\\#$\n($i$ odd) or of $B^{(\\ell)\\#}=D_\\ell^\\#$ ($i$ even), which by\nthe multiset identification of Step 2 is exactly the reciprocal-root\nmultiset of $P_{i,\\ell}$; both polynomials have constant\ncoefficient $1$, so\n\n$$\nQ_i^{(\\ell,\\jmath_\\ell)}(T)=P_{i,\\ell}(T),\n$$\n\nthe identity of the interface statement. The independence of the\nidentity from the chosen realization and realization isomorphism is\nthe uniqueness in Step 4, and $Q_i(0)=1$ is the normalization\n$Q_i(0)=\\prod_{\\alpha\\in R_i}1=1$. With Step 3 this establishes\nthe assertion, and $Q_i$ is the integral Frobenius factor of\n[def-weil-integral-frobenius-factor]\nin degree $i$: its scalar extension along $\\jmath_\\ell$ is\n$P_{i,\\ell}$ for every $\\ell\\neq p$.",
+        "uses": [
+          "def-weil-integral-frobenius-factor"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "**Intrinsic weights of the reciprocal roots.** In the situation of [thm-weil-realization-independence], every root of\n$A^\\#$ or $B^\\#$ has a unique weight in $\\{0,\\ldots,2d\\}$, and the\nresulting multisets $R_i$ of\nordinary roots that are\n$q$-Weil numbers of weight $i$ are stable\nunder $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
+        "uses": [],
+        "elementary": null
+      },
+      {
+        "text": "*Proof.*\nIn the situation of [thm-weil-realization-independence] the fraction\n$A^{(\\ell)}/B^{(\\ell)}$ and the parity products $N_\\ell/D_\\ell$ of\n[prop-weight-separation] both equal the series $Z(X_0,T)$ in\n$\\Ql[[T]]$; here $\\gcd(A,B)=1$ in $\\mathbf Q[T]$ by\n[def-weil-normalized-integral-fraction], while $\\gcd(N_\\ell,D_\\ell)=1$\nand $N_\\ell(0)=D_\\ell(0)=1$ by [prop-weight-separation]. Cross\nmultiplication over $\\Ql[T]$ and coprimality therefore give\n$A^{(\\ell)}=N_\\ell$ and $B^{(\\ell)}=D_\\ell$. Hence every root of\n$A^\\#$ or $B^\\#$ maps under $\\jmath_\\ell$ to a root of $N_\\ell^\\#$\nor $D_\\ell^\\#$ in the [def-weil-ordinary-reciprocal-roots]\nconvention, that is, to a reciprocal root of exactly one of the factors\n$P_{i,\\ell}$ (distinct $P_{i,\\ell}$ being coprime by\n[prop-weight-separation]); the weight of that factor is a weight of\nthe root, because every root of $P_{i,\\ell}$ has absolute value\n$q^{i/2}$ by [prop-weight-purity-roots] and an arbitrary complex\nembedding of the number field generated by the root extends to an\nisomorphism of algebraic closures by [lem-embedding-extension]. For\nthe same reason the weight is independent of the chosen $\\ell$ and\nrealization, the $q$-Weil condition of [def-weil-numbers] being\nstable under $\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$ and\nunder every embedding of its number field into $\\mathbf C$; the\nconditions of distinct weights are mutually exclusive because\n$q^{i/2}\\neq q^{j/2}$ for $i\\neq j$. Each root of $A^\\#$ or $B^\\#$\ntherefore has a unique weight in $\\{0,\\ldots,2d\\}$, and the multisets\n$R_i$ of [thm-weil-realization-independence] are stable under\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$.",
+        "uses": [
+          "prop-weight-separation",
+          "def-weil-normalized-integral-fraction",
+          "def-weil-ordinary-reciprocal-roots",
+          "prop-weight-purity-roots",
+          "lem-embedding-extension",
+          "def-weil-numbers"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- },
- "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
 }

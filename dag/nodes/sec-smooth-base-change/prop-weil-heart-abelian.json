@@ -1,197 +1,211 @@
 {
- "id": "prop-weil-heart-abelian",
- "blueprint": {
-  "is": "prop-weil-heart-abelian",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The heart is abelian",
- "statement": "For a t-structure $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ on a triangulated\ncategory, the heart $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ of\n[def-weil-t-structure] is abelian. Consequently every idempotent of the heart\nsplits: an idempotent $e:A\\to A$ of an abelian category splits as\n$A\\cong\\ker(e)\\oplus\\ker(\\operatorname{id}_A-e)$, with $e$ carried to the\nprojection onto the second summand.\n\n(*Source: BBD, Théorème 1.3.6 and Proposition 1.2.4. The supplementary-kernel assertion is also Stacks Tag 0H9Q, homology-lemma-idempotent-splitting, for any preadditive category in which the two kernels exist; Tag 09SH gives the equivalent Karoubian splitting criterion.*)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-heart-abelian.md",
-  "place": "node prop-weil-heart-abelian, order 1425",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09SH"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09SG"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-t-structure",
-  "def-sp-abelian"
- ],
- "proof": [
-  {
-   "text": "The ambient category is additive by [def-weil-triangulated-category]. Put $\\mathcal H=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ with its full subcategory structure. The zero object lies in it by [lem-sbc-tstructure-extension-closure]. For $X,Z\\in\\mathcal H$, the split triangle of [lem-sbc-biproduct-triangle-distinguished] and the two extension assertions of [lem-sbc-tstructure-extension-closure] put $X\\oplus Z$ in both bounds. Thus the ambient zero object and binary biproducts are in the full subcategory, where their universal properties restrict verbatim. Hence $\\mathcal H$ is additive and its inclusion is fully faithful and additive.",
-   "uses": [
+  "id": "prop-weil-heart-abelian",
+  "blueprint": {
+    "is": "prop-weil-heart-abelian",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "The heart is abelian",
+  "statement": "For a t-structure $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ on a triangulated\ncategory, the heart $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ of\n[def-weil-t-structure] is abelian. Consequently every idempotent of the heart\nsplits: an idempotent $e:A\\to A$ of an abelian category splits as\n$A\\cong\\ker(e)\\oplus\\ker(\\operatorname{id}_A-e)$, with $e$ carried to the\nprojection onto the second summand.\n\n(*Source: BBD, Théorème 1.3.6 and Proposition 1.2.4. The supplementary-kernel assertion is also Stacks Tag 0H9Q, homology-lemma-idempotent-splitting, for any preadditive category in which the two kernels exist; Tag 09SH gives the equivalent Karoubian splitting criterion.*)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-heart-abelian.md",
+    "place": "node prop-weil-heart-abelian, order 1425",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09SH"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09SG"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-t-structure",
+    "def-sp-abelian"
+  ],
+  "proof": [
+    {
+      "text": "The ambient category is additive by [def-weil-triangulated-category]. Put $\\mathcal H=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ with its full subcategory structure. The zero object lies in it by [lem-sbc-tstructure-extension-closure]. For $X,Z\\in\\mathcal H$, the split triangle of [lem-sbc-biproduct-triangle-distinguished] and the two extension assertions of [lem-sbc-tstructure-extension-closure] put $X\\oplus Z$ in both bounds. Thus the ambient zero object and binary biproducts are in the full subcategory, where their universal properties restrict verbatim. Hence $\\mathcal H$ is additive and its inclusion is fully faithful and additive.",
+      "uses": [
+        "def-weil-t-structure",
+        "lem-sbc-tstructure-extension-closure",
+        "lem-sbc-biproduct-triangle-distinguished",
+        "def-weil-triangulated-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+        "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
+      }
+    },
+    {
+      "text": "For $X,Y\\in\\mathcal H$ and $n<0$, $Y[n]\\in\\mathcal T^{\\ge -n}\\subseteq\\mathcal T^{\\ge1}$ by the shifted bounds. Indeed $B=Y[n+1]$ lies in $\\mathcal T^{\\ge0}$ by repeated use of the stability under $[-1]$, and $Y[n]=B[-1]$. The orthogonality axiom of [def-weil-t-structure] therefore gives $\\operatorname{Hom}(X,Y[n])=0$.",
+      "uses": [
+        "def-weil-t-structure"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+        "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
+      }
+    },
+    {
+      "text": "Given $f:X\\to Y$ in $\\mathcal H$, take any distinguished triangle $X\\xrightarrow{f}Y\\to S\\to X[1]$; such triangles exist by [def-weil-triangulated-category]. Its rotation has outer terms $Y$ and $X[1]$. Both are in $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so [lem-sbc-tstructure-extension-closure] gives $S$ in that intersection. Apply the decomposition axiom of [def-weil-t-structure] to $S[-1]$ and shift the resulting triangle by $[1]$ (the cut $-1,0$), obtaining a distinguished triangle $U\\to S\\to V\\to U[1]$ with $U\\in\\mathcal T^{\\le-1}$ and $V\\in\\mathcal T^{\\ge0}$. Its inverse rotation $V[-1]\\to U\\to S\\to V$ and [lem-sbc-tstructure-extension-closure] show $U\\in\\mathcal T^{\\ge-1}$, since $V[-1]\\in\\mathcal T^{\\ge1}\\subseteq\\mathcal T^{\\ge-1}$. Its rotation $S\\to V\\to U[1]\\to S[1]$ and the same lemma show $V\\in\\mathcal T^{\\le0}$, since $U[1]\\in\\mathcal T^{\\le-2}\\subseteq\\mathcal T^{\\le0}$. Thus $K=U[-1]$ and $Q=V$ are in the heart, and the second triangle is $K[1]\\to S\\to Q\\to K[2]$.",
+      "uses": [
+        "def-weil-t-structure",
+        "def-weil-triangulated-category",
+        "lem-sbc-tstructure-extension-closure"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+        "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
+      }
+    },
+    {
+      "text": "The inclusion of $\\mathcal H$ satisfies the additive, negative-Hom, and cone-decomposition hypotheses just verified. Applying [lem-sbc-abelian-subcategory-criterion] makes $\\mathcal H$ abelian [def-sp-abelian]. No boundedness, nondegeneracy, or idempotent completeness of $\\mathcal T$ has been assumed.",
+      "uses": [
+        "lem-sbc-abelian-subcategory-criterion",
+        "def-sp-abelian"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+        "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
+      }
+    },
+    {
+      "text": "In any abelian category [def-sp-abelian], let $e:A\\to A$ satisfy $e^2=e$ and set $g=1-e$. Let $i:K=\\ker e\\to A$ and $j:L=\\ker g\\to A$. Since $eg=ge=0$, the kernel universal properties give unique $p:A\\to K$ and $q:A\\to L$ with $ip=g$ and $jq=e$. Now $gi=i$ and $ej=j$, so monicity of the kernel maps gives $pi=1_K$ and $qj=1_L$. Likewise $pj=0$ and $qi=0$, by composing with $i,j$ and using $gj=ei=0$. Hence $(i,j):K\\oplus L\\to A$ and $(p,q):A\\to K\\oplus L$ are inverse: their composites are respectively $ip+jq=g+e=1_A$ and the diagonal matrix with entries $1_K,1_L$. Finally $ei=0$ and $ej=j$ identify $e$ with the projection onto the second summand. Apply this to the heart from step 4.",
+      "uses": [
+        "def-sp-abelian"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/homology.tex",
+        "place": "Tag 0H9Q, lemma-idempotent-splitting, kernel case; explicit kernel universal-property calculation"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-t-structure",
     "lem-sbc-tstructure-extension-closure",
     "lem-sbc-biproduct-triangle-distinguished",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
-   }
-  },
-  {
-   "text": "For $X,Y\\in\\mathcal H$ and $n<0$, $Y[n]\\in\\mathcal T^{\\ge -n}\\subseteq\\mathcal T^{\\ge1}$ by the shifted bounds. Indeed $B=Y[n+1]$ lies in $\\mathcal T^{\\ge0}$ by repeated use of the stability under $[-1]$, and $Y[n]=B[-1]$. The orthogonality axiom of [def-weil-t-structure] therefore gives $\\operatorname{Hom}(X,Y[n])=0$.",
-   "uses": [
-    "def-weil-t-structure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
-   }
-  },
-  {
-   "text": "Given $f:X\\to Y$ in $\\mathcal H$, take any distinguished triangle $X\\xrightarrow{f}Y\\to S\\to X[1]$; such triangles exist by [def-weil-triangulated-category]. Its rotation has outer terms $Y$ and $X[1]$. Both are in $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so [lem-sbc-tstructure-extension-closure] gives $S$ in that intersection. Apply the decomposition axiom of [def-weil-t-structure] to $S[-1]$ and shift the resulting triangle by $[1]$ (the cut $-1,0$), obtaining a distinguished triangle $U\\to S\\to V\\to U[1]$ with $U\\in\\mathcal T^{\\le-1}$ and $V\\in\\mathcal T^{\\ge0}$. Its inverse rotation $V[-1]\\to U\\to S\\to V$ and [lem-sbc-tstructure-extension-closure] show $U\\in\\mathcal T^{\\ge-1}$, since $V[-1]\\in\\mathcal T^{\\ge1}\\subseteq\\mathcal T^{\\ge-1}$. Its rotation $S\\to V\\to U[1]\\to S[1]$ and the same lemma show $V\\in\\mathcal T^{\\le0}$, since $U[1]\\in\\mathcal T^{\\le-2}\\subseteq\\mathcal T^{\\le0}$. Thus $K=U[-1]$ and $Q=V$ are in the heart, and the second triangle is $K[1]\\to S\\to Q\\to K[2]$.",
-   "uses": [
-    "def-weil-t-structure",
     "def-weil-triangulated-category",
-    "lem-sbc-tstructure-extension-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
-   }
-  },
-  {
-   "text": "The inclusion of $\\mathcal H$ satisfies the additive, negative-Hom, and cone-decomposition hypotheses just verified. Applying [lem-sbc-abelian-subcategory-criterion] makes $\\mathcal H$ abelian [def-sp-abelian]. No boundedness, nondegeneracy, or idempotent completeness of $\\mathcal T$ has been assumed.",
-   "uses": [
     "lem-sbc-abelian-subcategory-criterion",
     "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
     "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
-   }
   },
-  {
-   "text": "In any abelian category [def-sp-abelian], let $e:A\\to A$ satisfy $e^2=e$ and set $g=1-e$. Let $i:K=\\ker e\\to A$ and $j:L=\\ker g\\to A$. Since $eg=ge=0$, the kernel universal properties give unique $p:A\\to K$ and $q:A\\to L$ with $ip=g$ and $jq=e$. Now $gi=i$ and $ej=j$, so monicity of the kernel maps gives $pi=1_K$ and $qj=1_L$. Likewise $pj=0$ and $qi=0$, by composing with $i,j$ and using $gj=ei=0$. Hence $(i,j):K\\oplus L\\to A$ and $(p,q):A\\to K\\oplus L$ are inverse: their composites are respectively $ip+jq=g+e=1_A$ and the diagonal matrix with entries $1_K,1_L$. Finally $ei=0$ and $ej=j$ identify $e$ with the projection onto the second summand. Apply this to the heart from step 4.",
-   "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0H9Q, lemma-idempotent-splitting, kernel case; explicit kernel universal-property calculation"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "abelianHeart|kernel.*idempotent|idempotent.*kernel",
+      "results": "; Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
+      "date": "2026-10-14",
+      "verdict": "no match for every clause; general idempotent results only"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"abelian\", \"heart\"",
+      "results": "; ",
+      "date": "2026-10-14",
+      "verdict": "no match for every clause; general idempotent results only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The heart of a t-structure is abelian and an idempotent decomposes an object as the sum of the kernels of e and 1 minus e",
+      "results": "; CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.ge_one_le, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE",
+      "date": "2026-10-14",
+      "verdict": "no match for every clause; general idempotent results only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A t-structure heart is an abelian full subcategory of a triangulated category",
+      "results": "; CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+      "date": "2026-10-14",
+      "verdict": "no match for every clause; general idempotent results only"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1425,
+  "blueprint_uses": [
+    "def-weil-t-structure"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-base-change",
+  "unit": "sk-rem-rest",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "prop-weil-heart-abelian",
+    "worker": "stage1",
+    "summary": "Expanded BBD abelianity via the general abelian-subcategory criterion, checking additive heart, negative Hom vanishing, and cone admissibility. Wrote inverse maps for the supplementary kernels. Three generic Mathlib leaves; no clause of the item moved to a new node. Corrected the source note: Stacks 0H9Q does state the kernel decomposition.",
+    "blueprint": "Realizes the first sentence of the imported proof by BBD 1.2.4 and 1.3.6 (steps 1-4), and its supplementary-kernel assertion by explicit inverses (step 5). Whole-blueprint searches for heart is abelian, abelian subcategory, extension closed, closed under extensions, biproduct and split triangle found no reusable independent node.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NH-4d721bbc3",
+    "group": "NH",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4d721bbc3 (reviewer sub-agent of L); spot-checked: Read the item, all new nodes, cited DAG statements, BBD pp. 27–31, Stacks Tags 0H9Q and 05QT, Mathlib declarations, unit/chapter route, and delivery controls. Verified every hypothesis, shift, cone decomposition, coefficient/category condition, edge case, search record, and duplicate check. Review written to review.md; no repairs or tool_uses needed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-96970eaff",
+    "group": "NJ",
+    "result": "pass",
+    "note": "Reviewed immutable sources, dependencies, exact declarations, docstrings, universes, edge cases, and verbatim signature. Server-only compilation passed in 0.9 seconds. No delivery errors or fixes required; branch head unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.CategoryTheory.Triangulated.TStructure.HeartAbelianKernelSplitting",
+    "declaration": "CategoryTheory.Triangulated.TStructure.heart_abelian_and_idempotent_kernel_decomposition",
+    "file": "lean/Sheaf/CategoryTheory/Triangulated/TStructure/HeartAbelianKernelSplitting.lean",
+    "statement": "theorem heart_abelian_and_idempotent_kernel_decomposition {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] (t : TStructure C) : Nonempty (Abelian t.heart.FullSubcategory) ∧ ∀ (D : Type u') [Category.{v'} D] [Abelian D] (A : D) (e : A ⟶ A), e ≫ e = e → ∃ φ : A ≅ (kernel e ⊞ kernel (𝟙 A - e)), φ.inv = biprod.desc (kernel.ι e) (kernel.ι (𝟙 A - e)) ∧ φ.inv ≫ e ≫ φ.hom = biprod.snd ≫ biprod.inr",
+    "branch": "newtargets-dag",
+    "by": "NJ",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "The upstream abelianHeart and isIdempotentComplete_heart give the first clause and abstract splitting, but do not state the supplementary-kernel isomorphism with the specified projection. This theorem states all clauses together, reusing Mathlib heart, Abelian, kernel and biproduct."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For a t-structure $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ on a triangulated\ncategory, the heart $\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ of\n[def-weil-t-structure] is abelian. Consequently every idempotent of the heart\nsplits: an idempotent $e:A\\to A$ of an abelian category splits as\n$A\\cong\\ker(e)\\oplus\\ker(\\operatorname{id}_A-e)$, with $e$ carried to the\nprojection onto the second summand.",
+    "proof": [
+      {
+        "text": "For the heart defined in [def-weil-t-structure], the abelianity assertion is\nthe classical theorem of Beilinson, Bernstein and Deligne (Faisceaux\npervers, Théorème 1.3.6). Its only use below is that\nthe heart is idempotent complete: for an idempotent $e$ in an abelian\ncategory the kernels $\\ker(e)$ and $\\ker(\\operatorname{id}_A-e)$ are\nsupplementary subobjects of $A$, the map\n$\\ker(e)\\oplus\\ker(\\operatorname{id}_A-e)\\to A$ is an isomorphism\n($\\operatorname{id}_A=e+(\\operatorname{id}_A-e)$, and the two kernels have\nzero intersection), and under it $e$ becomes the projection onto the second\nsummand with the canonical maps of the split.",
+        "uses": [
+          "def-weil-t-structure"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- ],
- "proof_deps": [
-  "def-weil-t-structure",
-  "lem-sbc-tstructure-extension-closure",
-  "lem-sbc-biproduct-triangle-distinguished",
-  "def-weil-triangulated-category",
-  "lem-sbc-abelian-subcategory-criterion",
-  "def-sp-abelian"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-  "place": "Théorème 1.3.6, abelianity proof, p. 31; Proposition 1.2.4 and 1.3.4"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "abelianHeart|kernel.*idempotent|idempotent.*kernel",
-   "results": "; Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
-   "date": "2026-10-14",
-   "verdict": "no match for every clause; general idempotent results only"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"abelian\", \"heart\"",
-   "results": "; ",
-   "date": "2026-10-14",
-   "verdict": "no match for every clause; general idempotent results only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The heart of a t-structure is abelian and an idempotent decomposes an object as the sum of the kernels of e and 1 minus e",
-   "results": "; CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.ge_one_le, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE",
-   "date": "2026-10-14",
-   "verdict": "no match for every clause; general idempotent results only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A t-structure heart is an abelian full subcategory of a triangulated category",
-   "results": "; CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
-   "date": "2026-10-14",
-   "verdict": "no match for every clause; general idempotent results only"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1425,
- "blueprint_uses": [
-  "def-weil-t-structure"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "prop-weil-heart-abelian",
-  "worker": "stage1",
-  "summary": "Expanded BBD abelianity via the general abelian-subcategory criterion, checking additive heart, negative Hom vanishing, and cone admissibility. Wrote inverse maps for the supplementary kernels. Three generic Mathlib leaves; no clause of the item moved to a new node. Corrected the source note: Stacks 0H9Q does state the kernel decomposition.",
-  "blueprint": "Realizes the first sentence of the imported proof by BBD 1.2.4 and 1.3.6 (steps 1-4), and its supplementary-kernel assertion by explicit inverses (step 5). Whole-blueprint searches for heart is abelian, abelian subcategory, extension closed, closed under extensions, biproduct and split triangle found no reusable independent node.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NH-4d721bbc3",
-  "group": "NH",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4d721bbc3 (reviewer sub-agent of L); spot-checked: Read the item, all new nodes, cited DAG statements, BBD pp. 27–31, Stacks Tags 0H9Q and 05QT, Mathlib declarations, unit/chapter route, and delivery controls. Verified every hypothesis, shift, cone decomposition, coefficient/category condition, edge case, search record, and duplicate check. Review written to review.md; no repairs or tool_uses needed."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-96970eaff",
-  "group": "NJ",
-  "result": "pass",
-  "note": "Reviewed immutable sources, dependencies, exact declarations, docstrings, universes, edge cases, and verbatim signature. Server-only compilation passed in 0.9 seconds. No delivery errors or fixes required; branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.CategoryTheory.Triangulated.TStructure.HeartAbelianKernelSplitting",
-  "declaration": "CategoryTheory.Triangulated.TStructure.heart_abelian_and_idempotent_kernel_decomposition",
-  "file": "lean/Sheaf/CategoryTheory/Triangulated/TStructure/HeartAbelianKernelSplitting.lean",
-  "statement": "theorem heart_abelian_and_idempotent_kernel_decomposition {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] (t : TStructure C) : Nonempty (Abelian t.heart.FullSubcategory) ∧ ∀ (D : Type u') [Category.{v'} D] [Abelian D] (A : D) (e : A ⟶ A), e ≫ e = e → ∃ φ : A ≅ (kernel e ⊞ kernel (𝟙 A - e)), φ.inv = biprod.desc (kernel.ι e) (kernel.ι (𝟙 A - e)) ∧ φ.inv ≫ e ≫ φ.hom = biprod.snd ≫ biprod.inr",
-  "branch": "newtargets-dag",
-  "by": "NJ",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "The upstream abelianHeart and isIdempotentComplete_heart give the first clause and abstract splitting, but do not state the supplementary-kernel isomorphism with the specified projection. This theorem states all clauses together, reusing Mathlib heart, Abelian, kernel and biproduct."
- }
 }

@@ -1,0 +1,70 @@
+{
+  "id": "det-sf-open-closed-extension-zero-limits",
+  "kind": "statement",
+  "title": "Extension by zero preserves products and derived limits",
+  "statement": "In the situation of [sk-prop-sf-open-closed-triangle], let $j:U\\hookrightarrow X$\nbe a quasi-compact open immersion with closed complement $i:Z\\hookrightarrow X$\nand $B$ a sheaf of rings on $X_{\\mathrm{proét}}$. Then:\n\n1. for every $K\\in D(U_{\\mathrm{proét}},j^*B)$ there is a distinguished\ntriangle, functorial in $K$,\n$$\nj_!K\\longrightarrow Rj_*K\\longrightarrow i_*i^*Rj_*K\\longrightarrow j_!K[1];\n$$\n2. $j_!:D(U_{\\mathrm{proét}},j^*B)\\to D(X_{\\mathrm{proét}},B)$ preserves\nproducts and derived inverse limits $R\\varprojlim$ of sequences;\n3. on module sheaves, $j_!$ preserves products.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.md",
+    "place": "node det-sf-open-closed-extension-zero-limits, order None",
+    "external": [
+      {
+        "document": "Bhatt",
+        "place": "*(2) Products and derived limits.* The pro-étale topos is replete, so products of sheaves are exact (Bhatt–Scholze, Proposition 3.1.10); hence the product in $D(-_{\\mathrm{proét}})$ of a family of complexes is represented by the termwise product."
+      },
+      {
+        "document": "Scholze",
+        "place": "*(2) Products and derived limits.* The pro-étale topos is replete, so products of sheaves are exact (Bhatt–Scholze, Proposition 3.1.10); hence the product in $D(-_{\\mathrm{proét}})$ of a family of complexes is represented by the termwise product."
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*(1) The triangle.* Represent $K$ by a K-injective complex $J$ of\n$j^*B$-modules, so that $Rj_*K$ is represented by $j_*J$. Apply the short\nexact sequence of [det-sf-open-closed-sequence-ring-sheaf] termwise to\n$M=j_*J^q$. Since $j^*j_*=\\mathrm{id}$ for an open immersion, its first term\nis $j_!J^q$, so we obtain a termwise exact sequence of complexes\n\n$$\n0\\to j_!J\\to j_*J\\to i_*i^*j_*J\\to0 .\n$$\n\nAs $j_!$, $i^*$ and $i_*$ are exact\n([det-sf-open-closed-sequence-ring-sheaf], [det-sf-open-closed-pullback-limits]),\nthese complexes represent $j_!K$, $Rj_*K$ and $i_*i^*Rj_*K$, and a short exact\nsequence of complexes gives a distinguished triangle, functorial in $K$.",
+      "uses": [
+        "det-sf-open-closed-sequence-ring-sheaf",
+        "det-sf-open-closed-pullback-limits"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2) Products and derived limits.* The pro-étale topos is replete, so\nproducts of sheaves are exact (Bhatt–Scholze, Proposition 3.1.10); hence the\nproduct in $D(-_{\\mathrm{proét}})$ of a family of complexes is represented by the\ntermwise product. The functor $Rj_*$ is a right adjoint, so it preserves\nproducts. The functor $i_*$ is an exact right adjoint, so it preserves\ntermwise products of complexes, hence derived products. The functor $i^*$ is\nexact and preserves products of sheaves\n([det-sf-open-closed-pullback-limits]), so it preserves termwise products of\ncomplexes, hence derived products. Thus the second and third terms of the\ntriangle in (1) are product-preserving exact functors of $K$. Given a family\n$(K_\\alpha)$, the product of the triangles of (1) is distinguished (a product\nof distinguished triangles is distinguished when products are exact), and\nthe canonical maps from the triangle of $\\prod_\\alpha K_\\alpha$ to it form a\nmorphism of triangles which is an isomorphism on the second and third\nterms; by the five lemma for triangulated categories\n$j_!\\prod_\\alpha K_\\alpha\\to\\prod_\\alpha j_!K_\\alpha$ is an isomorphism. For a\nsequence $(K_n)$ the derived limit is the fibre\n$R\\varprojlim_nK_n=\\operatorname{fib}\\bigl(\\prod_nK_n\\xrightarrow{1-\\mathrm{sh}}\\prod_nK_n\\bigr)$;\nan exact functor preserving products and the shift-difference map preserves\nthis fibre, so $j_!R\\varprojlim_nK_n\\simeq R\\varprojlim_nj_!K_n$.",
+      "uses": [
+        "det-sf-open-closed-pullback-limits"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(3) Module sheaves.* Products of module sheaves are exact, so for module\nsheaves $M_\\alpha$ on $U$ placed in degree $0$ the derived product is the\nsheaf product. Since $j_!$ is exact, (2) applied to these complexes and\n$\\mathcal H^0$ give $j_!\\prod_\\alpha M_\\alpha\\simeq\\prod_\\alpha j_!M_\\alpha$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "det-sf-open-closed-pullback-limits"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-sf-open-closed-pullback-limits",
+    "det-sf-open-closed-sequence-ring-sheaf"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

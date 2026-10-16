@@ -1,0 +1,70 @@
+{
+  "id": "det-prop-scalar-six-pullback",
+  "kind": "statement",
+  "title": "Coefficient change commutes with inverse image and extension by zero",
+  "statement": "Let $\\Lambda\\to\\Lambda'$ be a map of condensed rings and write\n$K_{\\Lambda'}=\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}K$ ([sk-def-sfb-coefficient-change]).\n\n1. For a morphism $f\\colon X\\to Y$ and $K\\in\\D(Y_{\\mathrm{proét}},\\Lambda)$ there is a\n   natural isomorphism $(f^*K)_{\\Lambda'}\\simeq f^*(K_{\\Lambda'})$ in\n   $\\D(X_{\\mathrm{proét}},\\Lambda')$. For $g\\colon Y\\to W$ the isomorphism for $g\\circ f$ is\n   the composite of those for $f$ and $g$ under $(gf)^*=f^*g^*$.\n2. For a locally closed immersion $a\\colon S\\hookrightarrow X$ (in particular an open\n   immersion $j$ or a closed immersion $i$) and $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ there\n   is a natural isomorphism $(a_!M)_{\\Lambda'}\\simeq a_!(M_{\\Lambda'})$, compatible with\n   composition of immersions; for $a=i$ closed this reads\n   $(i_*M)_{\\Lambda'}\\simeq i_*(M_{\\Lambda'})$.\n3. For a composite $\\Lambda\\to\\Lambda'\\to\\Lambda''$ one has\n   $(K_{\\Lambda'})_{\\Lambda''}\\simeq K_{\\Lambda''}$, compatibly with the isomorphisms in (1) and (2).",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.md",
+    "place": "node det-prop-scalar-six-pullback, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 06YV"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-sfb-coefficient-change"
+  ],
+  "proof": [
+    {
+      "text": "*(1)* By [sk-prop-sfb-cartesian-coefficients], $f^{-1}\\Lambda_Y=\\Lambda_X$ and\n$f^{-1}\\Lambda'_Y=\\Lambda'_X$, compatibly with the coefficient change\n([sk-def-sfb-coefficient-change]); hence $f^*=f^{-1}$ is exact on module sheaves for\nboth rings and commutes with restriction of scalars. Represent $K$ by a K-flat\ncomplex $Q$ of $\\Lambda_Y$-modules. Then $f^{-1}Q$ is K-flat over $\\Lambda_X$\n(Stacks, Tag 06YV: inverse image preserves K-flat complexes, and here it needs no\nderiving), and inverse image of sheaves commutes with tensor products,\n$f^{-1}(\\Lambda'_Y\\otimes_{\\Lambda_Y}Q)=f^{-1}\\Lambda'_Y\\otimes_{f^{-1}\\Lambda_Y}f^{-1}Q=\\Lambda'_X\\otimes_{\\Lambda_X}f^{-1}Q$.\nThe left side represents $f^*(K_{\\Lambda'})$ and the right side $(f^*K)_{\\Lambda'}$; this is\nthe associativity of derived pullback for ringed topoi (Stacks, Tag 06YV). The\nidentification is termwise the canonical isomorphism of sheaves, so it is natural\nin $K$ and compatible with $(gf)^{-1}=f^{-1}g^{-1}$.",
+      "uses": [
+        "sk-prop-sfb-cartesian-coefficients",
+        "sk-def-sfb-coefficient-change"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2)* Apply [det-lem-int-tensor-projection] with $L=\\Lambda'_X$, viewed as a complex\nof $\\Lambda_X$-modules:\n$$\n(a_!M)_{\\Lambda'}=a_!M\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda'_X\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*\\Lambda'_X\\bigr)=a_!(M_{\\Lambda'}),\n$$\nsince $a^*\\Lambda'_X=\\Lambda'_S$. The isomorphism is $\\Lambda'_X$-linear because the\nprojection-formula map is linear in $L$. Alternatively, for $a=j$ open, both\nfunctors $K\\mapsto(j_!K)_{\\Lambda'}$ and $K\\mapsto j_!(K_{\\Lambda'})$ have the same right\nadjoint, namely $N\\mapsto j^*N$ regarded as a complex of $\\Lambda_U$-modules, because\nrestriction of scalars commutes with $j^*$; so they are canonically isomorphic.\nCompatibility with composition follows from the\ncorresponding compatibility of the projection formula.",
+      "uses": [
+        "det-lem-int-tensor-projection"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(3)* $\\Lambda''_X\\otimes^{\\mathbf L}_{\\Lambda'_X}(\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}K)\\simeq\\Lambda''_X\\otimes^{\\mathbf L}_{\\Lambda_X}K$\nby associativity of the derived tensor product, and $(\\Lambda\\to\\Lambda'')_X$ is the\ncomposite of the coefficient changes ([sk-def-sfb-coefficient-change]). The\nisomorphisms in (1), (2) are built from canonical isomorphisms of tensor products,\nso they are compatible with this one.",
+      "uses": [
+        "sk-def-sfb-coefficient-change"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-coefficient-change",
+    "det-lem-int-tensor-projection"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-def-sfb-coefficient-change",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-lem-int-tensor-projection"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

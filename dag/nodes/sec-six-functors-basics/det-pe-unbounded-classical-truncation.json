@@ -1,0 +1,51 @@
+{
+  "id": "det-pe-unbounded-classical-truncation",
+  "kind": "statement",
+  "title": "Fixed-degree truncation for pro-étale sections",
+  "statement": "Let $X$ be a scheme, $A$ a finite ring, $W$ an object of $X_{\\Proet}$ and $e\\geq0$\nan integer such that $H^q(W,H)=0$ for all $q>e$ and every classical $A$-module\nsheaf $H$ on $X_{\\Proet}$.\n\n1. If $L\\in D(X_{\\Proet},A)$ has classical cohomology sheaves and $H^q(L)=0$ for\n   $q>b$, then $H^mR\\Gamma(W,L)=0$ for $m>b+e+1$.\n2. If $K\\in D(X_{\\Proet},A)$ has classical cohomology sheaves and $m,N$ are\n   integers with $N<m-e-1$, then\n   $H^mR\\Gamma(W,K)\\to H^mR\\Gamma(W,\\tau_{\\geq N}K)$ is an isomorphism.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.md",
+    "place": "node det-pe-unbounded-classical-truncation, order None"
+  },
+  "stmt_deps": [
+    "sk-def-pe-classical-definition"
+  ],
+  "proof": [
+    {
+      "text": "*(1).* For $n\\geq0$ the complex $\\tau_{\\geq-n}L$ has finitely many nonzero\ncohomology sheaves, all classical, in degrees $[-n,b]$. For a single sheaf\n$H[-q]$ with $q\\leq b$, $H^mR\\Gamma(W,H[-q])=H^{m-q}(W,H)=0$ when $m>b+e$. By\ninduction on the number of nonzero cohomology sheaves, using the triangles of\nthe canonical truncations and the long exact sequences,\n$H^mR\\Gamma(W,\\tau_{\\geq-n}L)=0$ for $m>b+e$ and all $n$.\n\nBy left completeness of $D(X_{\\Proet},A)$ ([sk-prop-pe-left-complete]),\n$L\\simeq R\\varprojlim_n\\tau_{\\geq-n}L$. The functor $R\\Gamma(W,-)$ is a\ntriangulated functor preserving products, and the derived limit is the fibre of\na map between products, so\n$R\\Gamma(W,L)\\simeq R\\varprojlim_nR\\Gamma(W,\\tau_{\\geq-n}L)$. The Milnor sequence\n([sk-prop-pe-milnor])\n\n$$\n0\\to\\varprojlim\\nolimits^1_nH^{m-1}R\\Gamma(W,\\tau_{\\geq-n}L)\\to H^mR\\Gamma(W,L)\n\\to\\varprojlim_nH^mR\\Gamma(W,\\tau_{\\geq-n}L)\\to0\n$$\n\nshows $H^mR\\Gamma(W,L)=0$ as soon as $m-1>b+e$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2).* Apply (1) to $L=\\tau_{<N}K$, with $b=N-1$: its derived sections vanish in\ndegrees $>N+e$. In the long exact sequence of the triangle\n$\\tau_{<N}K\\to K\\to\\tau_{\\geq N}K\\to$, the terms $H^mR\\Gamma(W,\\tau_{<N}K)$ and\n$H^{m+1}R\\Gamma(W,\\tau_{<N}K)$ vanish because $m>N+e+1$. Hence the map is an\nisomorphism.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-truncation.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-prop-pe-left-complete",
+    "sk-prop-pe-milnor",
+    "sk-def-pe-classical-definition"
+  ],
+  "uses_not_cited": [
+    "sk-def-pe-classical-definition"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

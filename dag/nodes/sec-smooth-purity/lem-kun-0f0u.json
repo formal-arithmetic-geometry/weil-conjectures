@@ -1,221 +1,227 @@
 {
- "id": "lem-kun-0f0u",
- "blueprint": {
-  "is": "lem-kun-0f0u",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Strict henselization as a limit",
- "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and $x\\in X$\na point with $\\operatorname{trdeg}_K\\kappa(x)=a>0$; put\n$d=\\kundim_xX$ and $X'=\\Spec\\bigl(\\mathcal O^{\\mathrm{sh}}_{X,x}\\bigr)$,\nthe strict henselization of [def-weil-pbc-strict-henselization-limit].\nThen there is a separably closed field $L\\supseteq K$\n([def-kun-separably-closed]) and a presentation\n\n$$\nX'=\\varprojlim_iX_i\n$$\n\nof $X'$ as an inverse limit of affine schemes $X_i$ of finite type over\n$L$ with affine transition morphisms and\n$\\kundim X_i<\\kundim X$ for every $i$.\n(*Source:* the case of Stacks Project,\n[Tag `0F0U`](https://stacks.math.columbia.edu/tag/0F0U) that is\nused in this chapter, namely the presentation of the strict henselization as a\nlimit of smaller-dimensional finite type models. In the Stacks Project the\nproof uses Noether normalization, Algebra, Lemma 10.115.5,\n[Tag `00OZ`](https://stacks.math.columbia.edu/tag/00OZ)\n(available in this manuscript as thm:zl-relative-noether), a finite endomorphism of affine space putting the image of $x$ at the generic point of the\nlinear subspace, the description of the strict henselization as the filtered\ncolimit of the pointed etale neighbourhoods\n([def-weil-pbc-strict-henselization-limit]), and the dimension bound for\nan algebra which is quasi-finite over a polynomial ring.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f0u.md",
-  "place": "node lem-kun-0f0u, order 1762",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0F0U"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 00OZ"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-kun-separably-closed",
-  "def-kun-dimension",
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof": [
-  {
-   "text": "Choose a geometric point $\\bar x$ above $x$ for the strict henselization in the statement. The integer $a$ is finite by [lem-kun-finite-type-residue-trdeg]. Apply [lem-kun-strict-local-algebraic-residue-models] with $Y=X$ and $y=x$. It supplies an affine open neighbourhood $U$ of $x$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=a$, and a small cofiltered inverse system of nonempty affine schemes $X_i$ of finite type over $L$, with affine transition maps, whose limit over $U$ is $X'$. For each $i$, the map $f_i:X_i\\to U$ is a $K$-morphism and $\\kappa(v)/\\kappa(f_i(v))$ is algebraic for every $v\\in X_i$. No assertion that $f_i$ is of finite type over $K$ is needed.",
-   "uses": [
-    "lem-kun-finite-type-residue-trdeg",
-    "lem-kun-strict-local-algebraic-residue-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, etale-cohomology.tex",
-    "place": "Tag 0F0U, lemma-strictly-henselian, compatible etale-algebra models and the filtered-triples footnote; residue-field refinement as in the cited model node"
-   }
+  "id": "lem-kun-0f0u",
+  "blueprint": {
+    "is": "lem-kun-0f0u",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "Fix $i$ and a nonempty irreducible closed subset $C\\subseteq |X_i|$. By [lem-sc-scheme-sober] it has a generic point $\\eta$. Put $u=f_i(\\eta)$ and $D=\\overline{\\{u\\}}$ in $U$. This is nonempty and irreducible: two open sets meeting the closure of a point both contain that point, hence have nonempty intersection there. Apply [lem-sc-closed-irreducible-dimension-trdeg] to $(X_i,L,C,\\eta)$ and $(U,K,D,u)$. These give $\\dim C=\\operatorname{trdeg}_L\\kappa(\\eta)$ and $\\dim D=\\operatorname{trdeg}_K\\kappa(u)$. The $K$-morphism $f_i$ makes $K\\subseteq\\kappa(u)\\subseteq\\kappa(\\eta)$ a compatible field tower; step 1 says its last extension is algebraic. Applying [lem-kun-transcendence-degree-tower] first to that tower and then to $K\\subseteq L\\subseteq\\kappa(\\eta)$ gives\n$$\\dim C+a=\\operatorname{trdeg}_K\\kappa(\\eta)=\\operatorname{trdeg}_K\\kappa(u)=\\dim D\\leq\\kundim U\\leq\\kundim X.$$\nHere the inequalities follow directly from the chain definition [def-kun-dimension]: chains in the closed subspace $D$ are chains in $U$; taking closures in $X$ sends a strict chain of irreducible closed subsets of the open subspace $U$ to a strict chain in $X$, because intersecting each closure with $U$ recovers the original subset.",
-   "uses": [
-    "lem-sc-scheme-sober",
-    "lem-sc-closed-irreducible-dimension-trdeg",
-    "lem-kun-transcendence-degree-tower",
-    "def-kun-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, varieties.tex; Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean",
-    "place": "Tag 0B1C, item-dimension-irreducible-trdeg of lemma-dimension-locally-algebraic; trdeg_add_eq:546-550; an explicit alternative dimension calculation for the models of step 1"
-   }
+  "kind": "statement",
+  "title": "Strict henselization as a limit",
+  "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and $x\\in X$\na point with $\\operatorname{trdeg}_K\\kappa(x)=a>0$; put\n$d=\\kundim_xX$ and $X'=\\Spec\\bigl(\\mathcal O^{\\mathrm{sh}}_{X,x}\\bigr)$,\nthe strict henselization of [def-weil-pbc-strict-henselization-limit].\nThen there is a separably closed field $L\\supseteq K$\n([def-kun-separably-closed]) and a presentation\n\n$$\nX'=\\varprojlim_iX_i\n$$\n\nof $X'$ as an inverse limit of affine schemes $X_i$ of finite type over\n$L$ with affine transition morphisms and\n$\\kundim X_i<\\kundim X$ for every $i$.\n(*Source:* the case of Stacks Project,\n[Tag `0F0U`](https://stacks.math.columbia.edu/tag/0F0U) that is\nused in this chapter, namely the presentation of the strict henselization as a\nlimit of smaller-dimensional finite type models. In the Stacks Project the\nproof uses Noether normalization, Algebra, Lemma 10.115.5,\n[Tag `00OZ`](https://stacks.math.columbia.edu/tag/00OZ)\n(available in this manuscript as thm:zl-relative-noether), a finite endomorphism of affine space putting the image of $x$ at the generic point of the\nlinear subspace, the description of the strict henselization as the filtered\ncolimit of the pointed etale neighbourhoods\n([def-weil-pbc-strict-henselization-limit]), and the dimension bound for\nan algebra which is quasi-finite over a polynomial ring.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f0u.md",
+    "place": "node lem-kun-0f0u, order 1762",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0F0U"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 00OZ"
+      }
+    ]
   },
-  {
-   "text": "By [lem-kun-dimension-finite-type], $N=\\kundim X$ is finite; it is a nonnegative integer since $x\\in X$. For any chain $C_0\\subsetneq\\cdots\\subsetneq C_r$ of nonempty irreducible closed subsets in $X_i$, the same chain in $C_r$ gives $r\\leq\\dim C_r$ by [def-kun-dimension]. Step 2 gives $r+a\\leq N$. Since $X_i$ is nonempty, the length-zero chain obtained from the closure of any point first gives $a\\leq N$. Thus every chain has length at most $N-a$, and taking the supremum gives $\\kundim X_i\\leq N-a<N$, because $a>0$. Combining this bound for every $i$ with the field, affineness, transition maps, and inverse-limit identification of step 1 proves the statement.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-kun-separably-closed",
+    "def-kun-dimension",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "proof": [
+    {
+      "text": "Choose a geometric point $\\bar x$ above $x$ for the strict henselization in the statement. The integer $a$ is finite by [lem-kun-finite-type-residue-trdeg]. Apply [lem-kun-strict-local-algebraic-residue-models] with $Y=X$ and $y=x$. It supplies an affine open neighbourhood $U$ of $x$, a separably closed field extension $L/K$ with $\\operatorname{trdeg}_K L=a$, and a small cofiltered inverse system of nonempty affine schemes $X_i$ of finite type over $L$, with affine transition maps, whose limit over $U$ is $X'$. For each $i$, the map $f_i:X_i\\to U$ is a $K$-morphism and $\\kappa(v)/\\kappa(f_i(v))$ is algebraic for every $v\\in X_i$. No assertion that $f_i$ is of finite type over $K$ is needed.",
+      "uses": [
+        "lem-kun-finite-type-residue-trdeg",
+        "lem-kun-strict-local-algebraic-residue-models"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "Stacks Project, etale-cohomology.tex",
+        "place": "Tag 0F0U, lemma-strictly-henselian, compatible etale-algebra models and the filtered-triples footnote; residue-field refinement as in the cited model node"
+      }
+    },
+    {
+      "text": "Fix $i$ and a nonempty irreducible closed subset $C\\subseteq |X_i|$. By [lem-sc-scheme-sober] it has a generic point $\\eta$. Put $u=f_i(\\eta)$ and $D=\\overline{\\{u\\}}$ in $U$. This is nonempty and irreducible: two open sets meeting the closure of a point both contain that point, hence have nonempty intersection there. Apply [lem-sc-closed-irreducible-dimension-trdeg] to $(X_i,L,C,\\eta)$ and $(U,K,D,u)$. These give $\\dim C=\\operatorname{trdeg}_L\\kappa(\\eta)$ and $\\dim D=\\operatorname{trdeg}_K\\kappa(u)$. The $K$-morphism $f_i$ makes $K\\subseteq\\kappa(u)\\subseteq\\kappa(\\eta)$ a compatible field tower; step 1 says its last extension is algebraic. Applying [lem-kun-transcendence-degree-tower] first to that tower and then to $K\\subseteq L\\subseteq\\kappa(\\eta)$ gives\n$$\\dim C+a=\\operatorname{trdeg}_K\\kappa(\\eta)=\\operatorname{trdeg}_K\\kappa(u)=\\dim D\\leq\\kundim U\\leq\\kundim X.$$\nHere the inequalities follow directly from the chain definition [def-kun-dimension]: chains in the closed subspace $D$ are chains in $U$; taking closures in $X$ sends a strict chain of irreducible closed subsets of the open subspace $U$ to a strict chain in $X$, because intersecting each closure with $U$ recovers the original subset.",
+      "uses": [
+        "lem-sc-scheme-sober",
+        "lem-sc-closed-irreducible-dimension-trdeg",
+        "lem-kun-transcendence-degree-tower",
+        "def-kun-dimension"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "Stacks Project, varieties.tex; Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean",
+        "place": "Tag 0B1C, item-dimension-irreducible-trdeg of lemma-dimension-locally-algebraic; trdeg_add_eq:546-550; an explicit alternative dimension calculation for the models of step 1"
+      }
+    },
+    {
+      "text": "By [lem-kun-dimension-finite-type], $N=\\kundim X$ is finite; it is a nonnegative integer since $x\\in X$. For any chain $C_0\\subsetneq\\cdots\\subsetneq C_r$ of nonempty irreducible closed subsets in $X_i$, the same chain in $C_r$ gives $r\\leq\\dim C_r$ by [def-kun-dimension]. Step 2 gives $r+a\\leq N$. Since $X_i$ is nonempty, the length-zero chain obtained from the closure of any point first gives $a\\leq N$. Thus every chain has length at most $N-a$, and taking the supremum gives $\\kundim X_i\\leq N-a<N$, because $a>0$. Combining this bound for every $i$ with the field, affineness, transition maps, and inverse-limit identification of step 1 proves the statement.",
+      "uses": [
+        "lem-kun-dimension-finite-type",
+        "def-kun-dimension"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "Stacks Project, etale-cohomology.tex",
+        "place": "Tag 0F0U, lemma-strictly-henselian (2), passing from a dimension bound to the positive-transcendence-degree consequence; chain-supremum argument written out"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-kun-dimension",
     "lem-kun-dimension-finite-type",
-    "def-kun-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project, etale-cohomology.tex",
-    "place": "Tag 0F0U, lemma-strictly-henselian (2), passing from a dimension bound to the positive-transcendence-degree consequence; chain-supremum argument written out"
-   }
-  }
- ],
- "proof_deps": [
-  "def-kun-dimension",
-  "lem-kun-dimension-finite-type",
-  "lem-kun-finite-type-residue-trdeg",
-  "lem-kun-strict-local-algebraic-residue-models",
-  "lem-kun-transcendence-degree-tower",
-  "lem-sc-closed-irreducible-dimension-trdeg",
-  "lem-sc-scheme-sober"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, etale-cohomology.tex and varieties.tex; existing strict-local algebraic-residue model node",
-  "place": "Tag 0F0U, lemma-strictly-henselian, model construction and footnote; alternative dimension estimate from Tag 0B1C, item-dimension-irreducible-trdeg, and the transcendence-degree tower theorem"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "strict henselization as inverse limit finite type models of smaller dimension",
-   "results": "8 hits, all HenselianLocalRing or generic algebraic-geometry declarations; no strict-henselization dimension theorem",
-   "date": "2026-10-16",
-   "verdict": "no match"
+    "lem-kun-finite-type-residue-trdeg",
+    "lem-kun-strict-local-algebraic-residue-models",
+    "lem-kun-transcendence-degree-tower",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-scheme-sober"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "Stacks Project, etale-cohomology.tex and varieties.tex; existing strict-local algebraic-residue model node",
+    "place": "Tag 0F0U, lemma-strictly-henselian, model construction and footnote; alternative dimension estimate from Tag 0B1C, item-dimension-irreducible-trdeg, and the transcendence-degree tower theorem"
   },
-  {
-   "tool": "loogle",
-   "query": "Scheme strictHenselization dimension inverse limit finite type",
-   "results": "0 hits; Unknown identifier Scheme",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "strict.?henselization|dimension.*finite.?type|Noether normalization in WeilConjectures",
-   "results": "No matching declaration for this item in the project source",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "strict henselization finite type models smaller dimension",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Krull dimension of a finite type algebra over a field equals the transcendence degree of its fraction field",
-   "results": "8 hits; Algebra.IsAlgebraic.rank_fractionRing, Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, trdeg_lt_aleph0, Algebra.IsAlgebraic.rank_of_isFractionRing, Algebra.Transcendental.rank_eq_cardinalMk; no declaration states the strict-henselization presentation and strict dimension bound.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Algebra.trdeg",
-   "results": "12 hits; Algebra.trdeg, trdeg_subsingleton, AlgebraicIndependent.cardinalMk_le_trdeg, AlgebraicIndependent.lift_cardinalMk_le_trdeg, AlgEquiv.trdeg_eq, AlgEquiv.lift_trdeg_eq, trdeg_eq_zero_of_not_injective, trdeg_le_of_injective; no declaration states the strict-henselization presentation and strict dimension bound.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "ringKrullDim.*trdeg|trdeg.*ringKrullDim|strictHenselization|strictHenselisation",
-   "results": "0 hits; no hits; no declaration states the strict-henselization presentation and strict dimension bound.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "undischarged_input",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1762,
- "blueprint_uses": [
-  "def-kun-dimension",
-  "def-kun-separably-closed",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-strict-henselization-limit"
- ],
- "uses_not_cited": [
-  "def-kun-dimension",
-  "def-weil-pbc-scheme-conventions"
- ],
- "blueprint_proof_text": "This is the recorded classical input named in the statement, the case used here of Stacks Project, Tag [0F0U](https://stacks.math.columbia.edu/tag/0F0U): the strict henselization of a point of positive transcendence degree over the base field is an inverse limit of affine finite type models of strictly smaller dimension. In the Stacks Project the proof uses Noether normalization, Algebra, Lemma 10.115.5 ([Tag 00OZ](https://stacks.math.columbia.edu/tag/00OZ)), available in this manuscript as thm:zl-relative-noether, together with the description of the strict henselization as a filtered colimit of pointed etale neighbourhoods ([def-weil-pbc-strict-henselization-limit]). No separate proof is given.",
- "blueprint_proof_steps": [
-  {
-   "text": "This is the recorded classical input named in the statement, the case used here of Stacks Project, Tag [0F0U](https://stacks.math.columbia.edu/tag/0F0U): the strict henselization of a point of positive transcendence degree over the base field is an inverse limit of affine finite type models of strictly smaller dimension. In the Stacks Project the proof uses Noether normalization, Algebra, Lemma 10.115.5 ([Tag 00OZ](https://stacks.math.columbia.edu/tag/00OZ)), available in this manuscript as thm:zl-relative-noether, together with the description of the strict henselization as a filtered colimit of pointed etale neighbourhoods ([def-weil-pbc-strict-henselization-limit]). No separate proof is given.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "strict henselization as inverse limit finite type models of smaller dimension",
+      "results": "8 hits, all HenselianLocalRing or generic algebraic-geometry declarations; no strict-henselization dimension theorem",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Scheme strictHenselization dimension inverse limit finite type",
+      "results": "0 hits; Unknown identifier Scheme",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "strict.?henselization|dimension.*finite.?type|Noether normalization in WeilConjectures",
+      "results": "No matching declaration for this item in the project source",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "strict henselization finite type models smaller dimension",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Krull dimension of a finite type algebra over a field equals the transcendence degree of its fraction field",
+      "results": "8 hits; Algebra.IsAlgebraic.rank_fractionRing, Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, trdeg_lt_aleph0, Algebra.IsAlgebraic.rank_of_isFractionRing, Algebra.Transcendental.rank_eq_cardinalMk; no declaration states the strict-henselization presentation and strict dimension bound.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Algebra.trdeg",
+      "results": "12 hits; Algebra.trdeg, trdeg_subsingleton, AlgebraicIndependent.cardinalMk_le_trdeg, AlgebraicIndependent.lift_cardinalMk_le_trdeg, AlgEquiv.trdeg_eq, AlgEquiv.lift_trdeg_eq, trdeg_eq_zero_of_not_injective, trdeg_le_of_injective; no declaration states the strict-henselization presentation and strict dimension bound.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "ringKrullDim.*trdeg|trdeg.*ringKrullDim|strictHenselization|strictHenselisation",
+      "results": "0 hits; no hits; no declaration states the strict-henselization presentation and strict dimension bound.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "undischarged_input",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1762,
+  "blueprint_uses": [
+    "def-kun-dimension",
+    "def-kun-separably-closed",
+    "def-weil-pbc-scheme-conventions",
     "def-weil-pbc-strict-henselization-limit"
-   ],
-   "elementary": false
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "uses_not_cited": [
+    "def-kun-dimension",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "blueprint_proof_text": "This is the recorded classical input named in the statement, the case used here of Stacks Project, Tag [0F0U](https://stacks.math.columbia.edu/tag/0F0U): the strict henselization of a point of positive transcendence degree over the base field is an inverse limit of affine finite type models of strictly smaller dimension. In the Stacks Project the proof uses Noether normalization, Algebra, Lemma 10.115.5 ([Tag 00OZ](https://stacks.math.columbia.edu/tag/00OZ)), available in this manuscript as thm:zl-relative-noether, together with the description of the strict henselization as a filtered colimit of pointed etale neighbourhoods ([def-weil-pbc-strict-henselization-limit]). No separate proof is given.",
+  "blueprint_proof_steps": [
+    {
+      "text": "This is the recorded classical input named in the statement, the case used here of Stacks Project, Tag [0F0U](https://stacks.math.columbia.edu/tag/0F0U): the strict henselization of a point of positive transcendence degree over the base field is an inverse limit of affine finite type models of strictly smaller dimension. In the Stacks Project the proof uses Noether normalization, Algebra, Lemma 10.115.5 ([Tag 00OZ](https://stacks.math.columbia.edu/tag/00OZ)), available in this manuscript as thm:zl-relative-noether, together with the description of the strict henselization as a filtered colimit of pointed etale neighbourhoods ([def-weil-pbc-strict-henselization-limit]). No separate proof is given.",
+      "uses": [
+        "def-weil-pbc-strict-henselization-limit"
+      ],
+      "elementary": false
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "lem-kun-0f0u",
-  "worker": "N5 second reader",
-  "summary": "Reuse the existing strict-local algebraic-residue models, including trdeg_K L=a. Bound every irreducible closed subset by the residue-field transcendence-degree tower and take the chain supremum. Removed the unnecessary generic dimension-drop node and the unjustified finite-type/quasi-finite application. No new nodes or statement change.",
-  "blueprint": "Realizes the entire recorded Tag 0F0U input: step 1 supplies the compatible etale models via the existing model node; steps 2-3 give the required smaller-dimension consequence explicitly. The original blueprint gives no separate proof; the alternative estimate is agent-written and is below the fixed unit route.",
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-kunneth-ordinary",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "lem-kun-0f0u",
+    "worker": "N5 second reader",
+    "summary": "Reuse the existing strict-local algebraic-residue models, including trdeg_K L=a. Bound every irreducible closed subset by the residue-field transcendence-degree tower and take the chain supremum. Removed the unnecessary generic dimension-drop node and the unjustified finite-type/quasi-finite application. No new nodes or statement change.",
+    "blueprint": "Realizes the entire recorded Tag 0F0U input: step 1 supplies the compatible etale models via the existing model node; steps 2-3 give the required smaller-dimension consequence explicitly. The original blueprint gives no separate proof; the alternative estimate is agent-written and is below the fixed unit route.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-closed-irreducible-dimension-trdeg",
+        "why": "Generic dimension/transcendence-degree identity for an irreducible closed subset of a finite-type scheme. This is a tool from sk-prop-sf-cbc, not a replacement for any Kunneth-unit step; the unit has no irreducible-closed-subset formulation of this fact."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-closed-irreducible-dimension-trdeg",
-    "why": "Generic dimension/transcendence-degree identity for an irreducible closed subset of a finite-type scheme. This is a tool from sk-prop-sf-cbc, not a replacement for any Kunneth-unit step; the unit has no irreducible-closed-subset formulation of this fact."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sc-closed-irreducible-dimension-trdeg"
- ],
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-N5-3643058db",
-  "group": "N5",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-3643058db (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. All three proof steps check; no new nodes or dependency cycle. Accepted the closed-subset dimension theorem as a generic tool. Corrected one source-attribution error: 0F0U uses a finite endomorphism, not a linear coordinate change. Mathematical hypotheses and conclusion unchanged. Review and corrected JSON written.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationLimit",
-  "declaration": "AlgebraicGeometry.Scheme.exists_strictHenselization_limit_smaller_dimension",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationLimit.lean",
-  "statement": "theorem exists_strictHenselization_limit_smaller_dimension {K : Type u} [Field K] {X : Scheme.{u}} [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (hpos : 0 < @Algebra.trdeg K (X.residueField (s (IsLocalRing.closedPoint Ω))) _ _ (((X ↘ Spec (.of K)).residueFieldAlgebraMap (s (IsLocalRing.closedPoint Ω))).toAlgebra)) : ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L), ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Over (Spec (.of L))) (c : Cone (D ⋙ Over.forget (Spec (.of L)))), Nonempty (IsLimit c) ∧ Nonempty (strictHenselizationScheme s ≅ c.pt) ∧ (∀ i : I, IsAffine (D.obj i).left ∧ LocallyOfFiniteType (D.obj i).hom ∧ QuasiCompact (D.obj i).hom ∧ topologicalKrullDim (D.obj i).left < topologicalKrullDim X) ∧ (∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f).left)",
-  "branch": "newtargets-dag",
-  "by": "N7",
-  "date": "2026-10-16",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-95cdfb14b",
-  "group": "N7",
-  "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, source, docstrings, universes, and edge cases. Signature matches verbatim; per-file scompile passed both forms. No landing defect found."
- }
+    "lem-sc-closed-irreducible-dimension-trdeg"
+  ],
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-N5-3643058db",
+    "group": "N5",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-3643058db (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. All three proof steps check; no new nodes or dependency cycle. Accepted the closed-subset dimension theorem as a generic tool. Corrected one source-attribution error: 0F0U uses a finite endomorphism, not a linear coordinate change. Mathematical hypotheses and conclusion unchanged. Review and corrected JSON written.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.StrictHenselizationLimit",
+    "declaration": "AlgebraicGeometry.Scheme.exists_strictHenselization_limit_smaller_dimension",
+    "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationLimit.lean",
+    "statement": "theorem exists_strictHenselization_limit_smaller_dimension {K : Type u} [Field K] {X : Scheme.{u}} [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (hpos : 0 < @Algebra.trdeg K (X.residueField (s (IsLocalRing.closedPoint Ω))) _ _ (((X ↘ Spec (.of K)).residueFieldAlgebraMap (s (IsLocalRing.closedPoint Ω))).toAlgebra)) : ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L), ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I) (D : I ⥤ Over (Spec (.of L))) (c : Cone (D ⋙ Over.forget (Spec (.of L)))), Nonempty (IsLimit c) ∧ Nonempty (strictHenselizationScheme s ≅ c.pt) ∧ (∀ i : I, IsAffine (D.obj i).left ∧ LocallyOfFiniteType (D.obj i).hom ∧ QuasiCompact (D.obj i).hom ∧ topologicalKrullDim (D.obj i).left < topologicalKrullDim X) ∧ (∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f).left)",
+    "branch": "newtargets-dag",
+    "by": "N7",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-95cdfb14b",
+    "group": "N7",
+    "result": "pass",
+    "note": "Reviewed immutable statements, dependencies, source, docstrings, universes, and edge cases. Signature matches verbatim; per-file scompile passed both forms. No landing defect found."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and $x\\in X$\na point with $\\operatorname{trdeg}_K\\kappa(x)=a>0$; put\n$d=\\kundim_xX$ and $X'=\\Spec\\bigl(\\mathcal O^{\\mathrm{sh}}_{X,x}\\bigr)$,\nthe strict henselization of [def-weil-pbc-strict-henselization-limit].\nThen there is a separably closed field $L\\supseteq K$\n([def-kun-separably-closed]) and a presentation\n\n$$\nX'=\\varprojlim_iX_i\n$$\n\nof $X'$ as an inverse limit of affine schemes $X_i$ of finite type over\n$L$ with affine transition morphisms and\n$\\kundim X_i<\\kundim X$ for every $i$.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

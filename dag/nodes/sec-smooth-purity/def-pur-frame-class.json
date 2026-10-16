@@ -1,155 +1,161 @@
 {
- "id": "def-pur-frame-class",
- "blueprint": {
-  "is": "def-pur-frame-class",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "Class of a frame",
- "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $n\\geq1$, $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $\\Lambda=A$. Let $V\\to B$ be a smooth morphism of relative dimension $n$ [def-sbc-smooth-morphisms] of $k$-schemes, and let $i:Z\\hookrightarrow V$ be a closed immersion [def-weil-closed-immersion], of pure codimension $c\\geq0$, with $Z\\to B$ smooth. Here pure codimension means $\\dim\\mathcal O_{V,z}=\\dim\\mathcal O_{Z,z}+c$ for every $z\\in Z$, with Krull dimension the supremum of lengths of strict chains of prime ideals.\n\nA *frame at $Z$* consists of an etale morphism $e:U\\to V$ [def-weil-etale-morphism] and an ordered tuple $f_1,\\ldots,f_c\\in\\Gamma(U,\\mathcal O_U)$ generating the ideal sheaf of the closed subscheme $Z_U:=Z\\times_VU$ [def-pc-base-change]. Thus $Z_U$ is the closed subscheme locally defined by $(f_1,\\ldots,f_c)$. In the source, the expressions \"etale open\" and $Z\\cap U$ mean this etale neighbourhood and this fibre product; $e$ need not be an open immersion. For each $j$, put $D_j=V(f_j)\\hookrightarrow U$, the closed subscheme locally defined by the principal ideal $(f_j)$, and $W_j=U\\setminus D_j$, its complementary open subscheme [def-weil-open-immersion]. On $W_j$, $f_j$ is a unit: on each affine chart this is the element $f_j$ of the localization $R_{f_j}$, with inverse $1/f_j$.\n\nUse the small pro-etale site and its constant coefficient sheaves [def-weil-pbc-proetale-site], supported cohomology [def-pur-support-cohomology], the finite-level twists $A(r)$ of [def-coefficient-twists-detailed], and sheaf tensor products [def-pur-sheaf-tensor-product]. The following specifies the concrete Kummer class of any unit $u$ on a $k$-scheme $W$, including coefficient indices not divisible by the ramification index. Put $m=\\ell^n$ and $R=\\mathbf Z/m\\mathbf Z$; $m$ is invertible on $W$ and $mA=0$, since $\\ell\\in(\\varpi_E)$. Let $M_W=\\mathbf Z_\\ell(1)_W=\\varprojlim_r\\mu_{\\ell^r,W}$. By [lem-pur-twist-sheaf-locally-free](2), its projection induces $M_W/mM_W\\cong\\mu_{m,W}$. The twist definition and tensor associativity identify\n$$\n A(1)_W\n = (M_W\\otimes_{\\mathbf Z_\\ell}\\mathcal O_E)\\otimes_{\\mathcal O_E}A\n \\cong M_W\\otimes_{\\mathbf Z_\\ell}A\n \\cong (M_W/mM_W)\\otimes_R A\n \\cong\\mu_{m,W}\\otimes_R A.\n$$\nAll rings in these sheaf tensors mean their constant sheaves. The quotient $M_W/mM_W$ is also the tensor of $M_W$ with $R_W$ over the completed coefficient sheaf: both are the cokernel of multiplication by $m$ on $M_W$. Consequently clause (2) of the cited lemma applies to this quotient. Write $\\pi_n:M_W\\to\\mu_{m,W}$ for the inverse-limit projection and $\\theta_W:A(1)_W\\xrightarrow{\\sim}\\mu_{m,W}\\otimes_RA$ for this projection-induced identification, characterized by $\\theta_W(z\\otimes a)=\\pi_n(z)\\otimes a$ on local tensor generators. Define $\\sigma_W:\\mu_{m,W}\\to A(1)_W$ by $v\\mapsto\\theta_W^{-1}(v\\otimes1_A)$.\n\nOn $W_{\\mathrm{et}}$, use the exact Kummer sequence of [lem-amb-kummer-any-base] (Stacks Tag 03PL, etale-cohomology, lemma-kummer-sequence), with units sheaf $\\mathbf G_{m,W}$ as in [def-sc-gm-torsor]. Write $\\mu^{\\mathrm{et}}_{m,W}=\\ker([m]:\\mathbf G_{m,W}\\to\\mathbf G_{m,W})$. Its connecting map, in the right-derived-global-sections convention of [def-weil-pbc-sites-and-cohomology] and [lem-weil-pbc-right-derived-universal-delta-functor], is\n$$\n \\delta_W:\\Gamma(W,\\mathcal O_W)^\\times\n \\longrightarrow H^1(W_{\\mathrm{et}},\\mu^{\\mathrm{et}}_{m,W}).\n$$\nLet $\\nu_W:W_{\\mathrm{proet}}\\to W_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism]. On every etale $T\\to W$, the identical root formulas define a morphism $\\mu^{\\mathrm{et}}_{m,W}\\to\\nu_{W,*}\\mu_{m,W}$, where the pro-etale root sheaf is [def-pur-roots-of-unity-sheaf]. Denote its adjoint by $\\rho_W:\\nu_W^{-1}\\mu^{\\mathrm{et}}_{m,W}\\to\\mu_{m,W}$. Write $\\operatorname{comp}_W:H^1(W_{\\mathrm{et}},\\mu^{\\mathrm{et}}_{m,W})\\xrightarrow{\\sim}H^1(W_{\\mathrm{proet}},\\nu_W^{-1}\\mu^{\\mathrm{et}}_{m,W})$ for the canonical cohomology comparison of [lem-cbc-abelian-etale-proetale-cohomology-comparison]. Applying cohomology to the abelian-sheaf morphism $\\sigma_W\\circ\\rho_W$ then defines\n$$\n \\kappa_W(u)=H^1(\\sigma_W\\circ\\rho_W)\\bigl(\\operatorname{comp}_W(\\delta_W(u))\\bigr)\n \\in H^1(W_{\\mathrm{proet}},A(1)_W).\n$$\nThis is the Kummer-boundary prescription used in [def-pur-affine-line-datum], now specified for every $n\\geq1$; it extends coefficients on the roots sheaf, not on $\\mathbf G_m$ as an $R$-module.\n\nFor each $j$, take the boundary of the individual closed-open pair $(U,D_j)$ supplied by [thm-pur-with-support-exactness], with coefficient sheaf $A(1)_U$:\n$$\n \\partial_j:H^1((W_j)_{\\mathrm{proet}},A(1)_{W_j})\n \\longrightarrow H^2_{D_j}(U_{\\mathrm{proet}},A(1)_U),\n \\qquad \\alpha_j=\\partial_j\\kappa_{W_j}(f_j|_{W_j}).\n$$\nRestriction of the twist to $W_j$ is read through its defining roots and tensors. Define the *class of the frame* by the ordered, left-associated supported cup product of [def-pur-supported-cup]:\n$$\n \\operatorname{cl}(f)=\\alpha_1\\cup\\cdots\\cup\\alpha_c\n \\in H^{2c}_{Z_U}(U_{\\mathrm{proet}},A(c)_U).\n$$\nFor $c=0$, the ideal generated by the empty tuple is zero, so $Z_U=U$; the empty product means the unit $1\\in H^0_U(U,A)=H^0(U,A)$. For $c>0$, the scheme-theoretic intersection $D_1\\times_U\\cdots\\times_UD_c$ is $Z_U$: on an affine chart its ideal is the sum $(f_1)+\\cdots+(f_c)$. Each cup product adds the cohomological degrees and tensors the coefficient sheaves, so the resulting degree is $2c$ and the coefficient is $A(1)^{\\otimes_A c}=A(c)$. The line sheaves are locally free by [lem-pur-twist-sheaf-locally-free], so these tensors agree with the derived tensors used by the supported cup product [def-weil-derived-tensor]. No independence of the frame, existence of frames, or purity isomorphism is part of this definition.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-frame-class.md",
-  "place": "node def-pur-frame-class, order 1942"
- },
- "stmt_deps": [
-  "def-pur-conventions",
-  "def-sbc-smooth-morphisms",
-  "def-weil-closed-immersion",
-  "def-weil-etale-morphism",
-  "def-pc-base-change",
-  "def-weil-open-immersion",
-  "def-weil-pbc-proetale-site",
-  "def-pur-support-cohomology",
-  "def-coefficient-twists-detailed",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-twist-sheaf-locally-free",
-  "lem-amb-kummer-any-base",
-  "def-sc-gm-torsor",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-pur-roots-of-unity-sheaf",
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "def-pur-affine-line-datum",
-  "thm-pur-with-support-exactness",
-  "def-pur-supported-cup",
-  "def-weil-derived-tensor"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "frameClass|kummerBoundary|Kummer.*class|cupWithSupports",
-   "results": "FieldTheory/KummerExtension.lean:17,49: Kummer field extensions and a TODO about quadratic extensions; read the file header. No etale cohomology class or supported cup construction.",
-   "date": "2026-10-16",
-   "verdict": "no match"
+  "id": "def-pur-frame-class",
+  "blueprint": {
+    "is": "def-pur-frame-class",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "loogle",
-   "query": "Etale, cupProduct",
-   "results": "loogle: unknown identifier 'Etale'",
-   "date": "2026-10-16",
-   "verdict": "query rejected"
+  "kind": "definition",
+  "title": "Class of a frame",
+  "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $n\\geq1$, $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $\\Lambda=A$. Let $V\\to B$ be a smooth morphism of relative dimension $n$ [def-sbc-smooth-morphisms] of $k$-schemes, and let $i:Z\\hookrightarrow V$ be a closed immersion [def-weil-closed-immersion], of pure codimension $c\\geq0$, with $Z\\to B$ smooth. Here pure codimension means $\\dim\\mathcal O_{V,z}=\\dim\\mathcal O_{Z,z}+c$ for every $z\\in Z$, with Krull dimension the supremum of lengths of strict chains of prime ideals.\n\nA *frame at $Z$* consists of an etale morphism $e:U\\to V$ [def-weil-etale-morphism] and an ordered tuple $f_1,\\ldots,f_c\\in\\Gamma(U,\\mathcal O_U)$ generating the ideal sheaf of the closed subscheme $Z_U:=Z\\times_VU$ [def-pc-base-change]. Thus $Z_U$ is the closed subscheme locally defined by $(f_1,\\ldots,f_c)$. In the source, the expressions \"etale open\" and $Z\\cap U$ mean this etale neighbourhood and this fibre product; $e$ need not be an open immersion. For each $j$, put $D_j=V(f_j)\\hookrightarrow U$, the closed subscheme locally defined by the principal ideal $(f_j)$, and $W_j=U\\setminus D_j$, its complementary open subscheme [def-weil-open-immersion]. On $W_j$, $f_j$ is a unit: on each affine chart this is the element $f_j$ of the localization $R_{f_j}$, with inverse $1/f_j$.\n\nUse the small pro-etale site and its constant coefficient sheaves [def-weil-pbc-proetale-site], supported cohomology [def-pur-support-cohomology], the finite-level twists $A(r)$ of [def-coefficient-twists-detailed], and sheaf tensor products [def-pur-sheaf-tensor-product]. The following specifies the concrete Kummer class of any unit $u$ on a $k$-scheme $W$, including coefficient indices not divisible by the ramification index. Put $m=\\ell^n$ and $R=\\mathbf Z/m\\mathbf Z$; $m$ is invertible on $W$ and $mA=0$, since $\\ell\\in(\\varpi_E)$. Let $M_W=\\mathbf Z_\\ell(1)_W=\\varprojlim_r\\mu_{\\ell^r,W}$. By [lem-pur-twist-sheaf-locally-free](2), its projection induces $M_W/mM_W\\cong\\mu_{m,W}$. The twist definition and tensor associativity identify\n$$\n A(1)_W\n = (M_W\\otimes_{\\mathbf Z_\\ell}\\mathcal O_E)\\otimes_{\\mathcal O_E}A\n \\cong M_W\\otimes_{\\mathbf Z_\\ell}A\n \\cong (M_W/mM_W)\\otimes_R A\n \\cong\\mu_{m,W}\\otimes_R A.\n$$\nAll rings in these sheaf tensors mean their constant sheaves. The quotient $M_W/mM_W$ is also the tensor of $M_W$ with $R_W$ over the completed coefficient sheaf: both are the cokernel of multiplication by $m$ on $M_W$. Consequently clause (2) of the cited lemma applies to this quotient. Write $\\pi_n:M_W\\to\\mu_{m,W}$ for the inverse-limit projection and $\\theta_W:A(1)_W\\xrightarrow{\\sim}\\mu_{m,W}\\otimes_RA$ for this projection-induced identification, characterized by $\\theta_W(z\\otimes a)=\\pi_n(z)\\otimes a$ on local tensor generators. Define $\\sigma_W:\\mu_{m,W}\\to A(1)_W$ by $v\\mapsto\\theta_W^{-1}(v\\otimes1_A)$.\n\nOn $W_{\\mathrm{et}}$, use the exact Kummer sequence of [lem-amb-kummer-any-base] (Stacks Tag 03PL, etale-cohomology, lemma-kummer-sequence), with units sheaf $\\mathbf G_{m,W}$ as in [def-sc-gm-torsor]. Write $\\mu^{\\mathrm{et}}_{m,W}=\\ker([m]:\\mathbf G_{m,W}\\to\\mathbf G_{m,W})$. Its connecting map, in the right-derived-global-sections convention of [def-weil-pbc-sites-and-cohomology] and [lem-weil-pbc-right-derived-universal-delta-functor], is\n$$\n \\delta_W:\\Gamma(W,\\mathcal O_W)^\\times\n \\longrightarrow H^1(W_{\\mathrm{et}},\\mu^{\\mathrm{et}}_{m,W}).\n$$\nLet $\\nu_W:W_{\\mathrm{proet}}\\to W_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism]. On every etale $T\\to W$, the identical root formulas define a morphism $\\mu^{\\mathrm{et}}_{m,W}\\to\\nu_{W,*}\\mu_{m,W}$, where the pro-etale root sheaf is [def-pur-roots-of-unity-sheaf]. Denote its adjoint by $\\rho_W:\\nu_W^{-1}\\mu^{\\mathrm{et}}_{m,W}\\to\\mu_{m,W}$. Write $\\operatorname{comp}_W:H^1(W_{\\mathrm{et}},\\mu^{\\mathrm{et}}_{m,W})\\xrightarrow{\\sim}H^1(W_{\\mathrm{proet}},\\nu_W^{-1}\\mu^{\\mathrm{et}}_{m,W})$ for the canonical cohomology comparison of [lem-cbc-abelian-etale-proetale-cohomology-comparison]. Applying cohomology to the abelian-sheaf morphism $\\sigma_W\\circ\\rho_W$ then defines\n$$\n \\kappa_W(u)=H^1(\\sigma_W\\circ\\rho_W)\\bigl(\\operatorname{comp}_W(\\delta_W(u))\\bigr)\n \\in H^1(W_{\\mathrm{proet}},A(1)_W).\n$$\nThis is the Kummer-boundary prescription used in [def-pur-affine-line-datum], now specified for every $n\\geq1$; it extends coefficients on the roots sheaf, not on $\\mathbf G_m$ as an $R$-module.\n\nFor each $j$, take the boundary of the individual closed-open pair $(U,D_j)$ supplied by [thm-pur-with-support-exactness], with coefficient sheaf $A(1)_U$:\n$$\n \\partial_j:H^1((W_j)_{\\mathrm{proet}},A(1)_{W_j})\n \\longrightarrow H^2_{D_j}(U_{\\mathrm{proet}},A(1)_U),\n \\qquad \\alpha_j=\\partial_j\\kappa_{W_j}(f_j|_{W_j}).\n$$\nRestriction of the twist to $W_j$ is read through its defining roots and tensors. Define the *class of the frame* by the ordered, left-associated supported cup product of [def-pur-supported-cup]:\n$$\n \\operatorname{cl}(f)=\\alpha_1\\cup\\cdots\\cup\\alpha_c\n \\in H^{2c}_{Z_U}(U_{\\mathrm{proet}},A(c)_U).\n$$\nFor $c=0$, the ideal generated by the empty tuple is zero, so $Z_U=U$; the empty product means the unit $1\\in H^0_U(U,A)=H^0(U,A)$. For $c>0$, the scheme-theoretic intersection $D_1\\times_U\\cdots\\times_UD_c$ is $Z_U$: on an affine chart its ideal is the sum $(f_1)+\\cdots+(f_c)$. Each cup product adds the cohomological degrees and tensors the coefficient sheaves, so the resulting degree is $2c$ and the coefficient is $A(1)^{\\otimes_A c}=A(c)$. The line sheaves are locally free by [lem-pur-twist-sheaf-locally-free], so these tensors agree with the derived tensors used by the supported cup product [def-weil-derived-tensor]. No independence of the frame, existence of frames, or purity isomorphism is part of this definition.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-frame-class.md",
+    "place": "node def-pur-frame-class, order 1942"
   },
-  {
-   "tool": "leanfinder",
-   "query": "The class of an etale frame of a smooth closed subscheme is the cup product with supports of the Kummer boundaries of its defining functions.",
-   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.smoothLocus_eq_compl_support_inter and other etale/smooth locus lemmas, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x. These concern commutative-algebra smoothness loci, not the frame class.",
-   "date": "2026-10-16",
-   "verdict": "no match"
+  "stmt_deps": [
+    "def-pur-conventions",
+    "def-sbc-smooth-morphisms",
+    "def-weil-closed-immersion",
+    "def-weil-etale-morphism",
+    "def-pc-base-change",
+    "def-weil-open-immersion",
+    "def-weil-pbc-proetale-site",
+    "def-pur-support-cohomology",
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-amb-kummer-any-base",
+    "def-sc-gm-torsor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "def-pur-affine-line-datum",
+    "thm-pur-with-support-exactness",
+    "def-pur-supported-cup",
+    "def-weil-derived-tensor"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "frameClass|kummerBoundary|Kummer.*class|cupWithSupports",
+      "results": "FieldTheory/KummerExtension.lean:17,49: Kummer field extensions and a TODO about quadratic extensions; read the file header. No etale cohomology class or supported cup construction.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Etale, cupProduct",
+      "results": "loogle: unknown identifier 'Etale'",
+      "date": "2026-10-16",
+      "verdict": "query rejected"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The class of an etale frame of a smooth closed subscheme is the cup product with supports of the Kummer boundaries of its defining functions.",
+      "results": "Algebra.etaleLocus_eq_compl_support, Algebra.smoothLocus_eq_compl_support_inter and other etale/smooth locus lemmas, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x. These concern commutative-algebra smoothness loci, not the frame class.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Class of a frame of a closed immersion defined by the cup product of Kummer boundaries in cohomology with support.",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "cohomology.*support|support.*cohomology|kummer|cup.?product",
+      "results": "No hits in Mathlib/AlgebraicGeometry",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Define an element of local cohomology H with support in the common zero locus by multiplying boundary classes of units in the localization long exact sequence.",
+      "results": "localCohomology and its diagram/ofDiagram variants (Mathlib/Algebra/Homology/LocalCohomology); ModuleCat.Tilde and Module.support_quotient. Read LocalCohomology.lean: these are module local-cohomology functors, not etale Kummer boundaries or supported cups.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Etale",
+      "results": "AlgebraicGeometry.Etale and its composition/base-change/open-immersion instances; eq_smoothOfRelativeDimension_zero and iff_smoothOfRelativeDimension_zero. Read Morphisms/Etale.lean; these define etaleness only, not cohomological frame classes.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Étale cohomology fundamental cycle class of a regular embedding, defined as the product of connecting homomorphisms of invertible functions with Tate twist coefficients",
+      "results": "Eight hits: Algebra.etaleLocus_eq_compl_support, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.h1Cotangentι_apply, Algebra.H1Cotangent. These are algebraic etale loci and cotangent homology, not an etale-cohomology cycle or frame class.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "fundamentalClass|cycleClass|kummerClass|cohomologyWithSupports|boundary.*[Cc]up",
+      "results": "0 hits in the pinned Mathlib source.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1942,
+  "blueprint_uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-affine-line-datum",
+    "def-pur-conventions",
+    "def-pur-supported-cup",
+    "def-weil-derived-cohomology-sheaves",
+    "thm-pur-with-support-exactness"
+  ],
+  "uses_not_cited": [
+    "def-coefficient-twists-detailed",
+    "def-pur-supported-cup",
+    "def-weil-derived-cohomology-sheaves"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "leansearch",
-   "query": "Class of a frame of a closed immersion defined by the cup product of Kummer boundaries in cohomology with support.",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-a1-kummer",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "def-pur-frame-class",
+    "worker": "stage1",
+    "summary": "Audited the definition against the master blueprint, its unit, the individual support boundary, the supported cup and concrete Kummer construction. Reused existing definitions and the general twist reduction theorem; no new nodes. Made etale-neighbourhood pullback, arbitrary ramified coefficient index, individual supports, ordered product and c=0 explicit. The abstract Lean frameClass does not identify its supplied HasKummerClass with the concrete Kummer boundary, so it is not an exact attachment. Removed the unused cohomology-sheaf dependency.",
+    "blueprint": "def-pur-frame-class: first paragraph (frame and individual closed-open boundaries), displayed supported product, and final sentence (support intersection, degrees and twists). This is a definition with no proof steps; sk-prop-a1-kummer is unchanged and its key proposition is not this node."
   },
-  {
-   "tool": "grep",
-   "query": "cohomology.*support|support.*cohomology|kummer|cup.?product",
-   "results": "No hits in Mathlib/AlgebraicGeometry",
-   "date": "2026-10-16",
-   "verdict": "no match"
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-Codex-Q32-156259abd",
+    "group": "Q32",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-156259abd (reviewer sub-agent of L); spot-checked: Read all required stage/coordination/error, packet, report, unit, item, dependency statements, blueprint source, cited Stacks/Milne sources, and route. The frame definition is mathematically coherent, including the corrected arbitrary-index Kummer construction, coefficient category, base-change morphism, supports, ordered cup product, and c=0/empty/ramified edge cases. No new nodes, duplicates, circularity, or repairable faults; review.md records detailed checks and search results."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Define an element of local cohomology H with support in the common zero locus by multiplying boundary classes of units in the localization long exact sequence.",
-   "results": "localCohomology and its diagram/ofDiagram variants (Mathlib/Algebra/Homology/LocalCohomology); ModuleCat.Tilde and Module.support_quotient. Read LocalCohomology.lean: these are module local-cohomology functors, not etale Kummer boundaries or supported cups.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Etale",
-   "results": "AlgebraicGeometry.Etale and its composition/base-change/open-immersion instances; eq_smoothOfRelativeDimension_zero and iff_smoothOfRelativeDimension_zero. Read Morphisms/Etale.lean; these define etaleness only, not cohomological frame classes.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Étale cohomology fundamental cycle class of a regular embedding, defined as the product of connecting homomorphisms of invertible functions with Tate twist coefficients",
-   "results": "Eight hits: Algebra.etaleLocus_eq_compl_support, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.h1Cotangentι_apply, Algebra.H1Cotangent. These are algebraic etale loci and cotangent homology, not an etale-cohomology cycle or frame class.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "fundamentalClass|cycleClass|kummerClass|cohomologyWithSupports|boundary.*[Cc]up",
-   "results": "0 hits in the pinned Mathlib source.",
-   "date": "2026-10-16",
-   "verdict": "no match"
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $V\\to B$ be smooth of relative dimension $n$ and\nlet $Z\\hookrightarrow V$ be a closed subfamily of pure codimension $c$\nwith $Z\\to B$ smooth. A *frame at $Z$* is an etale open\n$U\\to V$ together with functions $f_1,\\dots,f_c\\in\\Gamma(U,\\mathcal O)$\ngenerating the ideal of $Z\\cap U$. Put $D_j=V(f_j)$; the function\n$f_j$ is a unit on $U\\setminus D_j$. Use the boundary for this\nindividual closed–open pair from [thm-pur-with-support-exactness]\nto define $\\alpha_j=\\partial_j\\kappa(f_j)\\in H^2_{D_j}(U,\\Lambda(1))$.\nThe *class of the frame* is their\nsupported cup product\n\n$$\n\\operatorname{cl}(f)\n\\;=\\;\\alpha_1\\cup\\cdots\\cup\\alpha_c\n\\;\\in\\;H^{2c}_{Z\\cap U}\\bigl(U,\\Lambda(c)\\bigr),\n$$\n\nwhere the Kummer classes are those of\n[def-pur-affine-line-datum].\n\nEach factor $\\alpha_j$ has degree two and twist one; their supports\nintersect in $Z\\cap U$, giving degree $2c$ and twist $c$.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1942,
- "blueprint_uses": [
-  "def-coefficient-twists-detailed",
-  "def-pur-affine-line-datum",
-  "def-pur-conventions",
-  "def-pur-supported-cup",
-  "def-weil-derived-cohomology-sheaves",
-  "thm-pur-with-support-exactness"
- ],
- "uses_not_cited": [
-  "def-coefficient-twists-detailed",
-  "def-pur-supported-cup",
-  "def-weil-derived-cohomology-sheaves"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "def-pur-frame-class",
-  "worker": "stage1",
-  "summary": "Audited the definition against the master blueprint, its unit, the individual support boundary, the supported cup and concrete Kummer construction. Reused existing definitions and the general twist reduction theorem; no new nodes. Made etale-neighbourhood pullback, arbitrary ramified coefficient index, individual supports, ordered product and c=0 explicit. The abstract Lean frameClass does not identify its supplied HasKummerClass with the concrete Kummer boundary, so it is not an exact attachment. Removed the unused cohomology-sheaf dependency.",
-  "blueprint": "def-pur-frame-class: first paragraph (frame and individual closed-open boundaries), displayed supported product, and final sentence (support intersection, degrees and twists). This is a definition with no proof steps; sk-prop-a1-kummer is unchanged and its key proposition is not this node."
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-Codex-Q32-156259abd",
-  "group": "Q32",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-156259abd (reviewer sub-agent of L); spot-checked: Read all required stage/coordination/error, packet, report, unit, item, dependency statements, blueprint source, cited Stacks/Milne sources, and route. The frame definition is mathematically coherent, including the corrected arbitrary-index Kummer construction, coefficient category, base-change morphism, supports, ordered cup product, and c=0/empty/ramified edge cases. No new nodes, duplicates, circularity, or repairable faults; review.md records detailed checks and search results."
- }
 }

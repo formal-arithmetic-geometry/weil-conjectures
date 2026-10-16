@@ -1,0 +1,134 @@
+{
+  "id": "sk-lem-uniform-constructible-ext",
+  "kind": "statement",
+  "title": "Uniform Ext bound",
+  "statement": "Let $\\Lambda=E$ or $\\Qlb$. For every $C\\in\\Cons(X,\\Lambda)$ there is an integer $d_C\\geq0$ such that\n\n$$\n\\Ext^q_{\\Lambda}(C,N)=0\n\\qquad\\text{for all }q>d_C\\text{ and all }N\\in\\Cons(X,\\Lambda),\n$$\n\nthe Ext groups being taken in $\\D(X_{\\mathrm{proét}},\\Lambda)$.\n\nFor $C=a_!L$, with $a$ factored as $S\\hookrightarrow Z\\hookrightarrow X$ and $j$ the open complement of\n$Z$, the proof gives $d_C=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$ (cohomological\ndimensions as in [sk-def-cd]). One of the two extra degrees comes from the cone defining\n$R\\underline\\Gamma_Z$, the other from a derived inverse limit over the reductions modulo $\\pi_E^n$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/_section.md",
+    "place": "node sk-lem-uniform-constructible-ext, order 1521",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0F10"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09BP"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09BM"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099Y"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AF"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09A6"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 08TB"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-cd"
+  ],
+  "proof": [
+    {
+      "text": "By the long exact Ext sequences, a bound that holds for every subquotient of a finite filtration of\nthe source holds for the source (take the maximum), and a bound that holds for every subquotient of a\nfinite filtration of the target holds for the target, with the same value. By part (3) of\n[sk-lem-coefficient-heart] we may therefore assume $C=a_!L$, with\n$a=i\\circ u\\colon S\\hookrightarrow Z\\hookrightarrow X$ as in [sk-lem-formal-closed-support] and $L$\nlisse, and it suffices to prove\n\n$$\n\\Ext^q(a_!L,b_!M)=0\\qquad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2)\n$$\n\nfor all locally closed $b\\colon T\\hookrightarrow X$ and lisse $M$ on $T$, where\n$j\\colon X\\setminus Z\\hookrightarrow X$ is the open complement of $Z$ ([det-uniform-constructible-ext-devissage]).\nBoth cohomological dimensions are finite by Stacks, Tag 0F10 and [sk-lem-base-field-cd], and the bound\ndepends only on $a$.",
+      "uses": [
+        "sk-lem-coefficient-heart",
+        "sk-lem-formal-closed-support",
+        "det-uniform-constructible-ext-devissage",
+        "sk-lem-base-field-cd"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Lattices.* Take first $\\Lambda=E$. After refining the stratifications ([sk-lem-stratified-lattice])\nand enlarging $E$, $L$ and $M$ contain lisse $\\mathcal O_E$-lattices $L_0$ and $M_0$. Enlarging $E$ is\nharmless: if $E'/E$ is finite, then $E'_X$ is finite free over $E_X$, so $\\Ext^q_{E'}$ of the extended\nsheaves is a finite direct sum of copies of $\\Ext^q_E$, and a bound over $E'$ gives the same bound over\n$E$. The functor $b_!$ is the composite of an extension by zero, which is exact and preserves limits\n(Stacks, Tag 09BP), and a closed direct image, which is exact (Stacks, Tag 09BM) and preserves limits as a\nright adjoint. Hence $b_!M_0$ is a $\\pi_E$-torsion free, derived complete sheaf, and its reductions are\n\n$$\nb_!M_0\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathcal O_{E,X}/\\pi_E^n=b_!(M_0/\\pi_E^n).\n$$\n\nThese are constructible torsion sheaves pulled back from $X_{\\mathrm{ét}}$: lisse torsion sheaves descend\n(Stacks, Tag 099Y), and extension by zero and closed direct image commute with this pullback\n(Stacks, Tags 09AF, 09A6).",
+      "uses": [
+        "sk-lem-stratified-lattice"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Torsion targets.* By Stacks, Tag 09A6, $Rj_*$ in $\\D(X_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n)$ of a sheaf\npulled back from the étale site is the pullback of its direct image in\n$\\D(X_{\\mathrm{ét}},\\mathcal O_E/\\pi_E^n)$, so $Rj_*j^*b_!(M_0/\\pi_E^n)$ has cohomology in degrees\n$0,\\dots,\\operatorname{cd}_\\ell(j)$. The fiber formula of part (1) of [sk-lem-formal-closed-support]\nthen gives\n\n$$\nR\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\in\\D^{[0,\\operatorname{cd}_\\ell(j)+1]}(Z_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n),\n$$\n\nwith cohomology sheaves that are torsion sheaves pulled back from the étale site, though not\nnecessarily constructible. Tensoring with the lisse $L_0^\\vee/\\pi_E^n$ and using the hypercohomology\nspectral sequence on $S$ gives the torsion stratum bound\n\n$$\nH^q R\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\bigr)=0\n\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1),\n$$\n\nfor every $n$, $b$ and $M_0$ ([det-uniform-constructible-ext-torsion]).",
+      "uses": [
+        "sk-lem-formal-closed-support",
+        "det-uniform-constructible-ext-torsion"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Integral targets.* Write $F=L_0^\\vee\\otimes u^*R\\underline\\Gamma_Z\\,b_!M_0$. By\n[sk-lem-formal-closed-support-ii] the functors forming $F$ commute with derived inverse limits of\nsequences; they also commute with reduction modulo $\\pi_E^n$, which is the cone of multiplication by\n$\\pi_E^n$. Since $b_!M_0$ is derived complete, so is $F$, and the reductions of $F$ are the complexes in\nthe torsion stratum bound. Derived global sections preserve products and cones, hence derived inverse\nlimits. Using part (2) of [sk-lem-formal-closed-support] with $\\mathcal O_E$ coefficients, that is, for\n$R\\operatorname{Hom}$ in $\\D(X_{\\mathrm{proét}},\\mathcal O_E)$,\n\n$$\nR\\operatorname{Hom}_X(a_!L_0,b_!M_0)=R\\Gamma(S,F)\n=R\\varprojlim_n R\\Gamma\\bigl(S,F\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\\bigr).\n$$\n\nA derived inverse limit of a sequence raises an upper bound on cohomology by at most one: it is the\nfiber of $1-\\mathrm{shift}$ on the product, and products of abelian groups are exact (this is the\nMilnor sequence, Stacks, Tag 08TB). Therefore\n\n$$\n\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)=0\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2)\n$$\n\n([det-uniform-constructible-ext-integral]).",
+      "uses": [
+        "sk-lem-formal-closed-support-ii",
+        "sk-lem-formal-closed-support",
+        "det-uniform-constructible-ext-integral"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Inverting $\\pi_E$.* We have $a_!L=a_!L_0[1/\\pi_E]$ and\n$b_!M=(b_!M_0)[1/\\pi_E]=\\varinjlim(b_!M_0\\xrightarrow{\\pi_E}b_!M_0\\xrightarrow{\\pi_E}\\cdots)$. The\nadjunction between extension and restriction of scalars gives\n\n$$\nR\\operatorname{Hom}_E\\bigl(a_!L,b_!M\\bigr)=R\\operatorname{Hom}_{\\mathcal O_E}\\bigl(a_!L_0,(b_!M_0)[1/\\pi_E]\\bigr),\n$$\n\nand by part (2) of [sk-lem-constructible-ext-continuity] the cohomology of the right side is the\ncolimit of the groups $\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)$. So the integral bound gives the bound for\n$E$.",
+      "uses": [
+        "sk-lem-constructible-ext-continuity"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The case $\\Lambda=\\Qlb$.* By [sk-thm-sfb-qlbar-two-colimit], $a_!L$ and $b_!M$ are extensions of\nscalars of sheaves defined over a common finite $E$. Since $\\overline{\\mathbf Q}_{\\ell,X}=\\varinjlim_{E'}E'_X$\nis flat over $E_X$, extension and restriction of scalars and [sk-lem-constructible-ext-continuity]\nidentify $\\Ext^q_{\\Qlb}(a_!L,b_!M)$ with the colimit of the corresponding groups over finite\nextensions $E'$ of $E$, which vanish in the same range ([det-uniform-constructible-ext-rational]).",
+      "uses": [
+        "sk-thm-sfb-qlbar-two-colimit",
+        "sk-lem-constructible-ext-continuity",
+        "det-uniform-constructible-ext-rational"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-lem-coefficient-heart",
+    "sk-lem-formal-closed-support",
+    "det-uniform-constructible-ext-devissage",
+    "sk-lem-base-field-cd",
+    "sk-lem-stratified-lattice",
+    "det-uniform-constructible-ext-torsion",
+    "sk-lem-formal-closed-support-ii",
+    "det-uniform-constructible-ext-integral",
+    "sk-lem-constructible-ext-continuity",
+    "sk-thm-sfb-qlbar-two-colimit",
+    "det-uniform-constructible-ext-rational"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "in_cycle"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1521,
+  "blueprint_uses": [
+    "sk-lem-coefficient-heart",
+    "sk-def-cd",
+    "sk-lem-formal-closed-support"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

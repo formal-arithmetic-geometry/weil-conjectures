@@ -1,230 +1,236 @@
 {
- "id": "prop-weil-pbc-koszul-reconstruction",
- "blueprint": {
-  "is": "prop-weil-pbc-koszul-reconstruction",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Koszul and quotient reconstruction",
- "statement": "Let $T,A,I=(a_1,\\ldots,a_r)$, $P_n=A/I^n$, $A_T=\\varprojlim_n(P_n)_T$ and $K\\in D(\\operatorname{Mod}(A_T))$ satisfy [def-weil-pbc-adic-coefficient-datum], and let $K_\\bullet$ be its strict derived quotient tower. In particular $A$ is commutative Noetherian, $A/I$ is additive torsion, and every $P_n$ is finite and perfect over $A$.\n\nUse the sheaf tensor complexes of [def-pc-tensor-complex-sheaves] to put\n$$Q_m=\\bigotimes_{j=1}^r[A_T\\xrightarrow{a_j^m}A_T]$$\nin cohomological degrees $[-r,0]$, with each transition having degree-minus-one component $a_j$ and degree-zero component $1$. The empty tensor for $r=0$ is $A_T[0]$. Compute derived tensors with a single K-flat representative as in [lem-weil-pbc-site-derived-tensor-descent]. Write $R\\varprojlim$ for the functorial total right derived inverse limit on strict towers of module complexes [lem-weil-pbc-ringed-strict-tower-homotopy-limit], and define\n$$K^{\\wedge}_{\\mathrm{Kos}}=R\\varprojlim_m(K\\otimes^L_{A_T}Q_m).$$\nIts completion unit $\\kappa_K:K\\to K^{\\wedge}_{\\mathrm{Kos}}$ is induced by the compatible degree-zero inclusions $A_T[0]\\to Q_m$. Likewise $\\operatorname{comp}_K:K\\to R\\varprojlim K_\\bullet$ is induced by the quotient maps. Call $K$ derived $I$-complete if $\\kappa_K$ is an isomorphism.\n\nThere is a functorial isomorphism\n$$c_K:K^{\\wedge}_{\\mathrm{Kos}}\\xrightarrow{\\sim}R\\varprojlim K_\\bullet$$\nwith $c_K\\circ\\kappa_K=\\operatorname{comp}_K$. Consequently every derived $I$-complete $K$ has an isomorphism $\\operatorname{comp}_K:K\\xrightarrow{\\sim}R\\varprojlim K_\\bullet$.\n",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
-  "place": "node prop-weil-pbc-koszul-reconstruction, order 1248",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 091N"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 091Z"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099M"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099L"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-weil-pbc-intrinsic-completion"
- ],
- "proof": [
-  {
-   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with the scheme T, Noetherian ring A and ideal I of [def-weil-pbc-adic-coefficient-datum]. Every P_n is finite, so its last clause identifies the constant sheaf $\\underline{A/I^n}$ with $(P_n)_T$ and the limit $B=\\varprojlim_n\\underline{A/I^n}$ with $A_T$. These identifications are canonical for the finite quotient maps; their projections are the maps $\\pi_n$ of the datum. Thus the quotient tower in the item is precisely the completed-coefficient finite-reduction tower, with no identification of the entire constant and completed module categories.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), including application to powers I^n; finite coefficient identification in the cited node"
-   }
+  "id": "prop-weil-pbc-koszul-reconstruction",
+  "blueprint": {
+    "is": "prop-weil-pbc-koszul-reconstruction",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "Apply the last paragraph of [lem-weil-pbc-constant-completion-equivalence] on the small pro-etale site of T, with $\\widehat A=A_T$, $\\mathcal O=\\widehat A$ and $N=K$. Step 1 verifies exactly its completed constant coefficient sheaf and finite quotient hypotheses. Its $Q_m(\\mathcal O)$ has the same differentials, transition multiplications and degree-zero units as the Koszul tower specified in the statement. Its functorial strict derived inverse limit is the one fixed here. That paragraph gives the canonical comparison between Koszul completion and the finite-reduction derived limit for every $K\\in D(A_T)$ and says it respects units. Hence it gives $c_K$ in the actual completed-coefficient category, with $c_K\\kappa_K=\\operatorname{comp}_K$. The comparisons are induced by the strict quotient augmentations, so maps of K-flat representatives commute with them levelwise and the functorial derived limit gives naturality in K. No equivalence between the entire derived categories is assumed, and no completeness of K is needed for this step.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul), Tag 099I (lemma-restriction-derived-complete-equivalence)"
-   }
-  },
-  {
-   "text": "If K is derived I-complete, its unit $\\kappa_K$ is invertible by the definition in the statement. Step 2 gives an invertible $c_K$ and the equality $\\operatorname{comp}_K=c_K\\kappa_K$. The inverse of $\\operatorname{comp}_K$ is $\\kappa_K^{-1}c_K^{-1}$: either composite reduces, by associativity and the two inverse identities, to the identity. This proves that the canonical quotient completion map itself is an isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
+  "kind": "statement",
+  "title": "Koszul and quotient reconstruction",
+  "statement": "Let $T,A,I=(a_1,\\ldots,a_r)$, $P_n=A/I^n$, $A_T=\\varprojlim_n(P_n)_T$ and $K\\in D(\\operatorname{Mod}(A_T))$ satisfy [def-weil-pbc-adic-coefficient-datum], and let $K_\\bullet$ be its strict derived quotient tower. In particular $A$ is commutative Noetherian, $A/I$ is additive torsion, and every $P_n$ is finite and perfect over $A$.\n\nUse the sheaf tensor complexes of [def-pc-tensor-complex-sheaves] to put\n$$Q_m=\\bigotimes_{j=1}^r[A_T\\xrightarrow{a_j^m}A_T]$$\nin cohomological degrees $[-r,0]$, with each transition having degree-minus-one component $a_j$ and degree-zero component $1$. The empty tensor for $r=0$ is $A_T[0]$. Compute derived tensors with a single K-flat representative as in [lem-weil-pbc-site-derived-tensor-descent]. Write $R\\varprojlim$ for the functorial total right derived inverse limit on strict towers of module complexes [lem-weil-pbc-ringed-strict-tower-homotopy-limit], and define\n$$K^{\\wedge}_{\\mathrm{Kos}}=R\\varprojlim_m(K\\otimes^L_{A_T}Q_m).$$\nIts completion unit $\\kappa_K:K\\to K^{\\wedge}_{\\mathrm{Kos}}$ is induced by the compatible degree-zero inclusions $A_T[0]\\to Q_m$. Likewise $\\operatorname{comp}_K:K\\to R\\varprojlim K_\\bullet$ is induced by the quotient maps. Call $K$ derived $I$-complete if $\\kappa_K$ is an isomorphism.\n\nThere is a functorial isomorphism\n$$c_K:K^{\\wedge}_{\\mathrm{Kos}}\\xrightarrow{\\sim}R\\varprojlim K_\\bullet$$\nwith $c_K\\circ\\kappa_K=\\operatorname{comp}_K$. Consequently every derived $I$-complete $K$ has an isomorphism $\\operatorname{comp}_K:K\\xrightarrow{\\sim}R\\varprojlim K_\\bullet$.\n",
+  "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
-    "place": "Displayed derived-complete consequence; explicit composition of inverses"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-completion-equivalence"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099M (lemma-naive-completion), with completed-coefficient comparison of Tags 099L, 093M, 099I and ringed Koszul formula Tag 0A0E, via existing DAG nodes"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "derived completion identifies Koszul completion with derived inverse limit of quotient tower",
-   "results": "8 hits, including AdicCompletion.ofAlgEquiv and localCohomology declarations; no derived Koszul quotient-tower theorem",
-   "date": "2026-10-14",
-   "verdict": "no match"
+    "place": "node prop-weil-pbc-koszul-reconstruction, order 1248",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 091N"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 091Z"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099M"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099L"
+      }
+    ]
   },
-  {
-   "tool": "loogle",
-   "query": "derived inverse limit Koszul completion",
-   "results": "0 hits; unknown identifier derived",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Koszul|koszul|homotopyLimit|homotopy_limit [Mathlib/Algebra Mathlib/CategoryTheory]",
-   "results": "0 relevant hits for the full construction; only unrelated Koszul/local cohomology material",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "derivedCompletion|derived_completion|koszul|homotopyLimit",
-   "results": "3 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Koszul\"",
-   "results": "0 hits: ; ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A complex of sheaves completed along an ideal is the homotopy limit of derived tensor products with quotient rings",
-   "results": "8 hits: AdicCompletion.ofTensorProduct, localCohomology.diagram, localCohomology, localCohomology.ofDiagram, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, Hausdorffification; ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "undischarged_input",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 1248,
- "blueprint_uses": [
-  "def-weil-pbc-adic-coefficient-datum"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "blueprint_proof_text": "This is the recorded classical input of the statement, the derived-completion\nformalism of Stacks Project, More on Algebra, Section 15.93 (Tag\n[091N](https://stacks.math.columbia.edu/tag/091N)): the Koszul-derived\ncompletion of a complex and the derived limit over its strict quotient tower\ncompute the same object, and both completion maps are the canonical ones. The\nblueprint uses the identification as the defining property of the adic\ncoefficient datum of [def-weil-pbc-adic-coefficient-datum] and gives no\nseparate proof.",
- "blueprint_proof_steps": [
-  {
-   "text": "This is the recorded classical input of the statement, the derived-completion\nformalism of Stacks Project, More on Algebra, Section 15.93 (Tag\n[091N](https://stacks.math.columbia.edu/tag/091N)): the Koszul-derived\ncompletion of a complex and the derived limit over its strict quotient tower\ncompute the same object, and both completion maps are the canonical ones. The\nblueprint uses the identification as the defining property of the adic\ncoefficient datum of [def-weil-pbc-adic-coefficient-datum] and gives no\nseparate proof.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "prop-weil-pbc-koszul-reconstruction",
-  "worker": "NE second reader",
-  "summary": "Replaced a conditional non-proof by the existing completed/constant scalar comparison and finite-coefficient identification. Preserved completed coefficients; specified previously unbound Koszul completion and strict derived-limit units without the circular intrinsic-completion dependency. No new nodes. Corrected the tensor-model citation: the completed sheaf A_T requires the generic ringed-site derived tensor node, not the constant-coefficient definition.",
-  "blueprint": "The sole classical-input paragraph is realized by steps 1 and 2 using the explicit completed-coefficient comparison qualified in the source; step 3 proves the displayed completeness consequence."
- },
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NE-e43068626",
-  "group": "NE",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-e43068626 (reviewer sub-agent of L); spot-checked: Found and repaired one coefficient-category citation mismatch: the item cited constant-sheaf def-weil-derived-tensor for tensors over completed A_T. Replaced it with the generic ringed-site lem-weil-pbc-site-derived-tensor-descent in fixes/dag/nodes/sec-proper-base-change/prop-weil-pbc-koszul-reconstruction.json. Full mathematical checks, sources, hypotheses, edge cases, duplicates, and route are recorded in review.md.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-8b549260c",
-  "group": "Q18",
-  "result": "pass",
-  "note": "Reviewed node, dependencies, source references, Lean declarations, edge cases, docstrings, and recorded scompile/preflight evidence; no substantive or mechanical errors found. Review recorded in review.md."
- },
- "lean": {
-  "module": "Sheaf.Paper.KoszulReconstruction",
-  "declaration": "AlgebraicGeometry.Scheme.koszulReconstruction",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.reconstructionTowers_grothendieck",
-   "AlgebraicGeometry.Scheme.reconstructionLimit",
-   "AlgebraicGeometry.Scheme.reconstructionLimit_additive",
-   "AlgebraicGeometry.Scheme.reconstructionRlim",
-   "AlgebraicGeometry.Scheme.reconstructionRlimComparison",
-   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionQuotientUnit",
-   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit",
-   "AlgebraicGeometry.Scheme.reconstructionReductionCounit",
-   "AlgebraicGeometry.Scheme.reconstructionReductionComplexCounit",
-   "AlgebraicGeometry.Scheme.reconstructionTowerCounit_isIso",
-   "AlgebraicGeometry.Scheme.reconstructionUnitOnKFlat",
-   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists",
-   "AlgebraicGeometry.Scheme.reconstructionCompletionUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap_comm",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_id",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_comp",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor_inverts",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedFunctor",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulUnit_naturality",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulComplexUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedUnit",
-   "AlgebraicGeometry.Scheme.reconstructionKoszulIntrinsicComparison",
-   "AlgebraicGeometry.Scheme.koszulReconstruction"
+  "stmt_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-intrinsic-completion"
   ],
-  "file": "lean/Sheaf/Paper/KoszulReconstruction.lean",
-  "statement": "theorem koszulReconstruction (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal) : ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅ completedAdicReduction T d ⋙ reconstructionRlim T d, (∀ K : DerivedCategory (CompletedAdicModules T d), (reconstructionKoszulDerivedUnit T d r a).app K ≫ c.hom.app K = (reconstructionCompletionUnit T d).app K) ∧ (∀ K : DerivedCategory (CompletedAdicModules T d), IsIso ((reconstructionKoszulDerivedUnit T d r a).app K) → IsIso ((reconstructionCompletionUnit T d).app K))",
-  "branch": "newtargets-dag",
-  "by": "Q18",
-  "date": "2026-10-15",
-  "existing": false
- }
+  "proof": [
+    {
+      "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with the scheme T, Noetherian ring A and ideal I of [def-weil-pbc-adic-coefficient-datum]. Every P_n is finite, so its last clause identifies the constant sheaf $\\underline{A/I^n}$ with $(P_n)_T$ and the limit $B=\\varprojlim_n\\underline{A/I^n}$ with $A_T$. These identifications are canonical for the finite quotient maps; their projections are the maps $\\pi_n$ of the datum. Thus the quotient tower in the item is precisely the completed-coefficient finite-reduction tower, with no identification of the entire constant and completed module categories.",
+      "uses": [
+        "lem-weil-pbc-completed-constant-sheaf-reduction",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 093M (lemma-completion-flat), including application to powers I^n; finite coefficient identification in the cited node"
+      }
+    },
+    {
+      "text": "Apply the last paragraph of [lem-weil-pbc-constant-completion-equivalence] on the small pro-etale site of T, with $\\widehat A=A_T$, $\\mathcal O=\\widehat A$ and $N=K$. Step 1 verifies exactly its completed constant coefficient sheaf and finite quotient hypotheses. Its $Q_m(\\mathcal O)$ has the same differentials, transition multiplications and degree-zero units as the Koszul tower specified in the statement. Its functorial strict derived inverse limit is the one fixed here. That paragraph gives the canonical comparison between Koszul completion and the finite-reduction derived limit for every $K\\in D(A_T)$ and says it respects units. Hence it gives $c_K$ in the actual completed-coefficient category, with $c_K\\kappa_K=\\operatorname{comp}_K$. The comparisons are induced by the strict quotient augmentations, so maps of K-flat representatives commute with them levelwise and the functorial derived limit gives naturality in K. No equivalence between the entire derived categories is assumed, and no completeness of K is needed for this step.",
+      "uses": [
+        "lem-weil-pbc-constant-completion-equivalence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul), Tag 099I (lemma-restriction-derived-complete-equivalence)"
+      }
+    },
+    {
+      "text": "If K is derived I-complete, its unit $\\kappa_K$ is invertible by the definition in the statement. Step 2 gives an invertible $c_K$ and the equality $\\operatorname{comp}_K=c_K\\kappa_K$. The inverse of $\\operatorname{comp}_K$ is $\\kappa_K^{-1}c_K^{-1}$: either composite reduces, by associativity and the two inverse identities, to the identity. This proves that the canonical quotient completion map itself is an isomorphism.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-koszul-reconstruction.md",
+        "place": "Displayed derived-complete consequence; explicit composition of inverses"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-completion-equivalence"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), with completed-coefficient comparison of Tags 099L, 093M, 099I and ringed Koszul formula Tag 0A0E, via existing DAG nodes"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "derived completion identifies Koszul completion with derived inverse limit of quotient tower",
+      "results": "8 hits, including AdicCompletion.ofAlgEquiv and localCohomology declarations; no derived Koszul quotient-tower theorem",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "derived inverse limit Koszul completion",
+      "results": "0 hits; unknown identifier derived",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "Koszul|koszul|homotopyLimit|homotopy_limit [Mathlib/Algebra Mathlib/CategoryTheory]",
+      "results": "0 relevant hits for the full construction; only unrelated Koszul/local cohomology material",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "derivedCompletion|derived_completion|koszul|homotopyLimit",
+      "results": "3 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Koszul\"",
+      "results": "0 hits: ; ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A complex of sheaves completed along an ideal is the homotopy limit of derived tensor products with quotient rings",
+      "results": "8 hits: AdicCompletion.ofTensorProduct, localCohomology.diagram, localCohomology, localCohomology.ofDiagram, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, Hausdorffification; ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary completion, local cohomology, or unrelated Koszul terminology; no completed-sheaf Koszul quotient reconstruction theorem"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "undischarged_input",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1248,
+  "blueprint_uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "blueprint_proof_text": "This is the recorded classical input of the statement, the derived-completion\nformalism of Stacks Project, More on Algebra, Section 15.93 (Tag\n[091N](https://stacks.math.columbia.edu/tag/091N)): the Koszul-derived\ncompletion of a complex and the derived limit over its strict quotient tower\ncompute the same object, and both completion maps are the canonical ones. The\nblueprint uses the identification as the defining property of the adic\ncoefficient datum of [def-weil-pbc-adic-coefficient-datum] and gives no\nseparate proof.",
+  "blueprint_proof_steps": [
+    {
+      "text": "This is the recorded classical input of the statement, the derived-completion\nformalism of Stacks Project, More on Algebra, Section 15.93 (Tag\n[091N](https://stacks.math.columbia.edu/tag/091N)): the Koszul-derived\ncompletion of a complex and the derived limit over its strict quotient tower\ncompute the same object, and both completion maps are the canonical ones. The\nblueprint uses the identification as the defining property of the adic\ncoefficient datum of [def-weil-pbc-adic-coefficient-datum] and gives no\nseparate proof.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "prop-weil-pbc-koszul-reconstruction",
+    "worker": "NE second reader",
+    "summary": "Replaced a conditional non-proof by the existing completed/constant scalar comparison and finite-coefficient identification. Preserved completed coefficients; specified previously unbound Koszul completion and strict derived-limit units without the circular intrinsic-completion dependency. No new nodes. Corrected the tensor-model citation: the completed sheaf A_T requires the generic ringed-site derived tensor node, not the constant-coefficient definition.",
+    "blueprint": "The sole classical-input paragraph is realized by steps 1 and 2 using the explicit completed-coefficient comparison qualified in the source; step 3 proves the displayed completeness consequence."
+  },
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NE-e43068626",
+    "group": "NE",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-e43068626 (reviewer sub-agent of L); spot-checked: Found and repaired one coefficient-category citation mismatch: the item cited constant-sheaf def-weil-derived-tensor for tensors over completed A_T. Replaced it with the generic ringed-site lem-weil-pbc-site-derived-tensor-descent in fixes/dag/nodes/sec-proper-base-change/prop-weil-pbc-koszul-reconstruction.json. Full mathematical checks, sources, hypotheses, edge cases, duplicates, and route are recorded in review.md.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-8b549260c",
+    "group": "Q18",
+    "result": "pass",
+    "note": "Reviewed node, dependencies, source references, Lean declarations, edge cases, docstrings, and recorded scompile/preflight evidence; no substantive or mechanical errors found. Review recorded in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.KoszulReconstruction",
+    "declaration": "AlgebraicGeometry.Scheme.koszulReconstruction",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.reconstructionTowers_grothendieck",
+      "AlgebraicGeometry.Scheme.reconstructionLimit",
+      "AlgebraicGeometry.Scheme.reconstructionLimit_additive",
+      "AlgebraicGeometry.Scheme.reconstructionRlim",
+      "AlgebraicGeometry.Scheme.reconstructionRlimComparison",
+      "AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists",
+      "AlgebraicGeometry.Scheme.reconstructionQuotientUnit",
+      "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists",
+      "AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit",
+      "AlgebraicGeometry.Scheme.reconstructionReductionCounit",
+      "AlgebraicGeometry.Scheme.reconstructionReductionComplexCounit",
+      "AlgebraicGeometry.Scheme.reconstructionTowerCounit_isIso",
+      "AlgebraicGeometry.Scheme.reconstructionUnitOnKFlat",
+      "AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists",
+      "AlgebraicGeometry.Scheme.reconstructionCompletionUnit",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulProductMap_comm",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_id",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulFiberMap_comp",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulFiberFunctor_inverts",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedFunctor",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulUnit_naturality",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulComplexUnit",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulDerivedUnit",
+      "AlgebraicGeometry.Scheme.reconstructionKoszulIntrinsicComparison",
+      "AlgebraicGeometry.Scheme.koszulReconstruction"
+    ],
+    "file": "lean/Sheaf/Paper/KoszulReconstruction.lean",
+    "statement": "theorem koszulReconstruction (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal) : ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅ completedAdicReduction T d ⋙ reconstructionRlim T d, (∀ K : DerivedCategory (CompletedAdicModules T d), (reconstructionKoszulDerivedUnit T d r a).app K ≫ c.hom.app K = (reconstructionCompletionUnit T d).app K) ∧ (∀ K : DerivedCategory (CompletedAdicModules T d), IsIso ((reconstructionKoszulDerivedUnit T d r a).app K) → IsIso ((reconstructionCompletionUnit T d).app K))",
+    "branch": "newtargets-dag",
+    "by": "Q18",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For the strict quotient tower $K_\\bullet$ of\n[def-weil-pbc-adic-coefficient-datum] there is a functorial isomorphism\n\n$$\n K^{\\wedge}_{\\mathrm{Kos}}\\xrightarrow{\\sim}\\Rlim K_\\bullet\n$$\n\ncarrying the Koszul completion map to the quotient-tower completion map\n$K\\to\\Rlim K_\\bullet$. Every derived $I$-complete object consequently\nsatisfies\n\n$$\n K\\xrightarrow{\\sim}\\Rlim K_\\bullet.\n$$",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

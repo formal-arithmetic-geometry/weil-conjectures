@@ -1,0 +1,92 @@
+{
+  "id": "sk-prop-picard-pic-split",
+  "kind": "statement",
+  "title": "Rigidification along a section",
+  "statement": "Let $f:C\\to S$ be a morphism of schemes. Suppose that $f$ has a section\n$\\sigma:S\\to C$ and that\n\n$$\n\\cO_T\\longrightarrow f_{T,*}\\cO_{C_T}\n\\quad\\text{is an isomorphism for every }T\\to S.\n\\qquad(\\ast)\n$$\n\nThen $\\operatorname{Pic}_{C/S}(T)$ is naturally the set of isomorphism\nclasses of pairs $(\\cL,\\alpha)$, with $\\cL$ invertible on $C_T$ and\n$\\alpha:\\sigma_T^*\\cL\\simeq\\cO_T$. Every such pair has only the identity\nautomorphism. There is a split exact sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(T)\n\\xrightarrow{\\ f_T^*\\ }\\operatorname{Pic}(C_T)\n\\longrightarrow\\operatorname{Pic}_{C/S}(T)\n\\longrightarrow0,\n$$\n\nwhose retraction is $\\sigma_T^*$. Normalization is given by\n\n$$\n\\cL\\longmapsto\\cL\\otimes f_T^*(\\sigma_T^*\\cL)^{-1}.\n$$\n\nIn particular $\\operatorname{Pic}(C_T)=\\operatorname{Pic}(T)\\oplus\\operatorname{Pic}_{C/S,\\sigma}(T)$,\nand $\\operatorname{Pic}_{C/S,\\sigma}\\to\\operatorname{Pic}_{C/S}$ is an\nisomorphism.\n\nFor a smooth proper geometrically connected curve $C$ over a field $k$,\none has $H^0(C,\\cO_C)=k$, and flat coherent base change gives $(\\ast)$\nfor $C\\to\\Spec k$, since every $k$-scheme is flat over $k$. If $C$ has a\n$k$-point $P$, the lemma applies with $\\sigma=P$ (Stacks Project,\nTag 0B9U).",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-picard-pic-split/_section.md",
+    "place": "node sk-prop-picard-pic-split, order 604",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9U"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9N"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-def-picard-pic"
+  ],
+  "proof": [
+    {
+      "text": "An automorphism of an invertible sheaf $\\cL$ on $C_T$ is multiplication\nby a global unit of $C_T$. Condition $(\\ast)$ identifies that unit with a\nunit $u$ on $T$; a rigidification $\\alpha$ forces $\\sigma_T^*(u)=u$ to be\n$1$. So a rigidified pair has only the identity automorphism.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Given matching rigidified classes on an fppf cover $\\{T_i\\to T\\}$, choose\nlocal isomorphisms on the overlaps and rescale them (by units of the base,\nusing $(\\ast)$) to preserve the rigidifications. Uniqueness of\nrigidified isomorphisms forces the cocycle condition, so effective descent\nfor invertible sheaves ([sk-thm-picard-descent]) glues the pairs. The\nrigidified functor is therefore an fppf sheaf ([sk-cor-picard-pic-sheaf]).",
+      "uses": [
+        "sk-thm-picard-descent"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Forgetting $\\alpha$ identifies isomorphism classes of rigidified pairs\nwith $\\operatorname{Pic}_{C/S,\\sigma}(T)=\\ker\\sigma_T^*$: every $\\cL$ with\n$\\sigma_T^*\\cL\\simeq\\cO_T$ admits some $\\alpha$, and two rigidifications of\nthe same $\\cL$ differ by a unit $v$ of $T$, which is absorbed by the\nautomorphism $f_T^*(v)$ of $\\cL$. Normalization\n$\\cL\\mapsto\\cL\\otimes f_T^*(\\sigma_T^*\\cL)^{-1}$ lands in\n$\\ker\\sigma_T^*$, kills exactly $f_T^*\\operatorname{Pic}(T)$ (injectivity\nof $f_T^*$ because $\\sigma_T^*f_T^*=\\mathrm{id}$), and so identifies the\npresheaf quotient $\\operatorname{Pic}(C_T)/f_T^*\\operatorname{Pic}(T)$\nwith $\\ker\\sigma_T^*$. Since the latter is already an fppf sheaf, the\nquotient presheaf is a sheaf and equals its sheafification\n$\\operatorname{Pic}_{C/S}(T)$. The identity $\\sigma_T^*f_T^*=\\mathrm{id}$\ngives the splitting\n$\\cL=f_T^*\\sigma_T^*\\cL\\otimes(\\cL\\otimes f_T^*\\sigma_T^*\\cL^{-1})$.\nThis is the argument of Stacks Project, Tag 0B9N.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-picard-descent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-picard-pic-split/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 604,
+  "blueprint_uses": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-def-picard-pic",
+    "sk-cor-picard-pic-sheaf"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.injective_pic_map_snd",
+    "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
+    "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
+    "AlgebraicGeometry.bijective_pic_split"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.injective_pic_map_snd",
+    "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
+    "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
+    "AlgebraicGeometry.bijective_pic_split"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-def-picard-pic"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

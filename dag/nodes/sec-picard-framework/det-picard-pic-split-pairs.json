@@ -1,0 +1,62 @@
+{
+  "id": "det-picard-pic-split-pairs",
+  "kind": "statement",
+  "title": "Rigidified pairs have no automorphisms and compute the Picard functor",
+  "statement": "Let $f:C\\to S$ be a morphism of schemes with a section $\\sigma$ such that\n$\\cO_T\\to f_{T,*}\\cO_{C_T}$ is an isomorphism for every $S$-scheme $T$.\nFor an $S$-scheme $T$, a *rigidified pair* on $C_T$ is a pair\n$(\\cL,\\alpha)$ with $\\cL$ an invertible $\\cO_{C_T}$-module and\n$\\alpha:\\sigma_T^*\\cL\\xrightarrow{\\sim}\\cO_T$; an isomorphism\n$(\\cL,\\alpha)\\to(\\cL',\\alpha')$ is an isomorphism $\\varphi:\\cL\\to\\cL'$\nwith $\\alpha'\\circ\\sigma_T^*\\varphi=\\alpha$. Then:\n\n1. every rigidified pair has only the identity automorphism, and\nbetween two isomorphic rigidified pairs there is exactly one\nisomorphism;\n1. the map $(\\cL,\\alpha)\\mapsto[\\cL]$ is a bijection from the set of\nisomorphism classes of rigidified pairs on $C_T$ onto\n$\\operatorname{Pic}_{C/S,\\sigma}(T)=\\ker\\bigl(\\sigma_T^*:\\operatorname{Pic}(C_T)\\to\\operatorname{Pic}(T)\\bigr)$,\nnatural in $T$ (pullback of pairs);\n1. composing with the isomorphism\n$\\operatorname{Pic}_{C/S,\\sigma}\\xrightarrow{\\sim}\\operatorname{Pic}_{C/S}$\nof [thm-pc-pic-split], $\\operatorname{Pic}_{C/S}(T)$ is naturally the set\nof isomorphism classes of rigidified pairs on $C_T$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-picard-pic-split/sk-prop-picard-pic-split-pairs.md",
+    "place": "node det-picard-pic-split-pairs, order None"
+  },
+  "stmt_deps": [
+    "thm-pc-pic-split",
+    "def-pc-pic-sigma-functor",
+    "def-pc-picard-functor"
+  ],
+  "proof": [
+    {
+      "text": "(1) An automorphism of the invertible module $\\cL$ is multiplication by a\nunit $w\\in\\Gamma(C_T,\\cO_{C_T})^\\times$ (locally $\\cL\\cong\\cO$, and\n$\\mathcal{E}nd(\\cL)=\\cO_{C_T}$). By hypothesis\n$\\Gamma(T,\\cO_T)\\to\\Gamma(C_T,\\cO_{C_T})$ is an isomorphism, so $w=f_T^*u$\nfor a unique unit $u$ of $T$. Then $\\sigma_T^*(w)=\\sigma_T^*f_T^*u=u$,\nsince $f\\circ\\sigma=\\mathrm{id}$. Compatibility with $\\alpha$ says\n$\\alpha\\circ(\\text{multiplication by }u)=\\alpha$, i.e. $u=1$, hence\n$w=1$. If $\\varphi,\\psi:(\\cL,\\alpha)\\to(\\cL',\\alpha')$ are two\nisomorphisms, $\\psi^{-1}\\varphi$ is an automorphism of $(\\cL,\\alpha)$,\nhence the identity, so $\\varphi=\\psi$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "(2) The map is well defined, since isomorphic pairs have isomorphic\nunderlying modules, and it lands in $\\ker\\sigma_T^*$ because $\\alpha$\ntrivializes $\\sigma_T^*\\cL$. *Surjective:* if $\\sigma_T^*\\cL\\cong\\cO_T$,\nchoose any such isomorphism $\\alpha$. *Injective:* let\n$\\varphi:\\cL\\xrightarrow{\\sim}\\cL'$ be an isomorphism of the underlying\nmodules of $(\\cL,\\alpha)$ and $(\\cL',\\alpha')$. The composite\n$\\alpha'\\circ\\sigma_T^*\\varphi\\circ\\alpha^{-1}$ is an automorphism of\n$\\cO_T$, i.e. multiplication by a unit $v$ of $T$. Then\n$\\varphi'=\\varphi\\circ(\\text{multiplication by }f_T^*v^{-1})$ satisfies\n$\\alpha'\\circ\\sigma_T^*\\varphi'=v^{-1}\\cdot\\alpha'\\circ\\sigma_T^*\\varphi=\\alpha$,\nso $(\\cL,\\alpha)\\cong(\\cL',\\alpha')$. Naturality: pullback along\n$T'\\to T$ commutes with $\\sigma^*$, so pulled-back pairs are pairs and\nthe map commutes with pullback.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "(3) By [thm-pc-pic-split], $\\operatorname{Pic}(C_T)=f_T^*\\operatorname{Pic}(T)\\oplus\\ker\\sigma_T^*$\nand $\\operatorname{Pic}_{C/S}$ is the fppf sheafification of the presheaf\n$K=\\ker\\sigma^*$, which is already an fppf sheaf; hence the canonical map\n$K(T)\\to\\operatorname{Pic}_{C/S}(T)$ is a bijection, natural in $T$.\nComposing with (2) gives the claim.",
+      "uses": [
+        "thm-pc-pic-split"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "thm-pc-pic-split"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-prop-picard-pic-split/sk-prop-picard-pic-split-pairs.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-pc-pic-split",
+    "def-pc-pic-sigma-functor",
+    "def-pc-picard-functor"
+  ],
+  "uses_not_cited": [
+    "def-pc-pic-sigma-functor",
+    "def-pc-picard-functor"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

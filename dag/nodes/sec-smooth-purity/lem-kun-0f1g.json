@@ -1,276 +1,305 @@
 {
- "id": "lem-kun-0f1g",
- "blueprint": {
-  "is": "lem-kun-0f1g",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Detection of objects supported at closed points",
- "statement": "Let $K$ be a separably closed\nfield and $X$ a scheme of finite type over $K$. Let\n$Q\\in D(X_{\\Et})$ and assume that $Q_{\\bar x}\\ne0$ only if $x$\nis a closed point of $X$. Then\n\n$$\nQ=0\\quad\\Longleftrightarrow\\quad H^i(X_{\\Et},Q)=0\\text{ for all }\ni .\n$$\n\n(*Source:* Stacks Project, Tag\n[0F1G](https://stacks.math.columbia.edu/tag/0F1G).)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1g.md",
-  "place": "node lem-kun-0f1g, order 1768",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0F1G"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-kun-separably-closed",
-  "def-kun-support",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-geometric-stalks",
-  "def-kun-rgamma-unbounded"
- ],
- "proof": [
-  {
-   "text": "If $Q=0$, use the zero complex and its zero K-injective resolution in [def-kun-rgamma-unbounded]. Its complex of global sections is zero, so $H^i(X_{\\Et},Q)=0$ for every integer $i$.",
-   "uses": [
+  "id": "lem-kun-0f1g",
+  "blueprint": {
+    "is": "lem-kun-0f1g",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Detection of objects supported at closed points",
+  "statement": "Let $K$ be a separably closed\nfield and $X$ a scheme of finite type over $K$. Let\n$Q\\in D(X_{\\Et})$ and assume that $Q_{\\bar x}\\ne0$ only if $x$\nis a closed point of $X$. Then\n\n$$\nQ=0\\quad\\Longleftrightarrow\\quad H^i(X_{\\Et},Q)=0\\text{ for all }\ni .\n$$\n\n(*Source:* Stacks Project, Tag\n[0F1G](https://stacks.math.columbia.edu/tag/0F1G).)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1g.md",
+    "place": "node lem-kun-0f1g, order 1768",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0F1G"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-kun-separably-closed",
+    "def-kun-support",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-geometric-stalks",
     "def-kun-rgamma-unbounded"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, first paragraph of proof"
-   }
-  },
-  {
-   "text": "For the converse suppose $H^i(X_{\\Et},Q)=0$ for every integer $i$, and put $F_q=\\mathcal H^q(Q)$. For a geometric point $\\bar x$ over a nonclosed point, the hypothesis gives $Q_{\\bar x}=0$, and [lem-kun-stalks-of-cohomology] gives $(F_q)_{\\bar x}=\\mathcal H^q(Q_{\\bar x})=0$. Thus every $F_q$ is supported at closed points, in the precise sense of [def-kun-support].",
-   "uses": [
+  ],
+  "proof": [
+    {
+      "text": "If $Q=0$, use the zero complex and its zero K-injective resolution in [def-kun-rgamma-unbounded]. Its complex of global sections is zero, so $H^i(X_{\\Et},Q)=0$ for every integer $i$.",
+      "uses": [
+        "def-kun-rgamma-unbounded"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, first paragraph of proof"
+      }
+    },
+    {
+      "text": "For the converse suppose $H^i(X_{\\Et},Q)=0$ for every integer $i$, and put $F_q=\\mathcal H^q(Q)$. For a geometric point $\\bar x$ over a nonclosed point, the hypothesis gives $Q_{\\bar x}=0$, and [lem-kun-stalks-of-cohomology] gives $(F_q)_{\\bar x}=\\mathcal H^q(Q_{\\bar x})=0$. Thus every $F_q$ is supported at closed points, in the precise sense of [def-kun-support].",
+      "uses": [
+        "lem-kun-stalks-of-cohomology",
+        "def-kun-support"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    },
+    {
+      "text": "Let $\\mathcal B$ be the objects $j:U\\to X$ of the small etale site whose source scheme $U$ is quasi-compact. By [lem-weil-pbc-affine-opens-basis], every object is covered by affine open subschemes; each is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Their inclusions and their composites with the given etale object are etale by [lem-weil-pbc-etale-composition-cancellation](1),(2), so they form a covering in [def-weil-pbc-etale-site]. Thus condition (1) of [lem-kun-0bkz] holds. Each $U\\in\\mathcal B$ is of finite type over $K$: by [lem-kun-etale-lfp], $j$ is locally of finite presentation and hence locally of finite type. Composing with $X\\to\\operatorname{Spec}K$ is locally of finite type, since a finitely generated algebra over a finitely generated algebra is finitely generated (adjoin both finite lists of generators). Since $U$ is quasi-compact, its map to the one-point scheme $\\operatorname{Spec}K$ is quasi-compact; [def-weil-finite-type-morphism] now gives finite type. In particular $X\\in\\mathcal B$ by the original finite-type hypothesis.",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "lem-weil-pbc-affine-opens-basis",
+        "lem-kun-0bkz",
+        "lem-kun-etale-lfp",
+        "def-weil-finite-type-morphism",
+        "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+        "lem-weil-pbc-etale-composition-cancellation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    },
+    {
+      "text": "Fix $j:U\\to X$ in $\\mathcal B$. By [lem-weil-pbc-etale-inverse-image-restriction] its sheaf restriction $F_q|_U$ is $j^{-1}F_q$. For a geometric point $\\bar u$ over $u\\in U$, [lem-kun-stalk-as-pullback] and [lem-weil-pbc-inverse-image-composition], applied to $j$ and $\\bar u$, identify $(F_q|_U)_{\\bar u}$ with $(F_q)_{j\\bar u}$. Consequently a nonzero stalk can occur only over a point $u$ whose image $x=j(u)$ is closed in $X$, by step 2. Choose affine neighbourhoods of $x$ and $u$ with the latter mapping into the former. The affine inclusions are etale by [lem-weil-pbc-etale-composition-cancellation](1); composing the source inclusion with $j$ and cancelling the target inclusion by clauses (2),(3) shows that the resulting affine morphism is etale. Thus [lem-weil-pbc-etale-algebra-residue-field-separable] gives that $\\kappa(u)/\\kappa(x)$ is finite separable. By [lem-kun-closed-point-field](a), $\\kappa(x)/K$ is finite, hence $\\kappa(u)/K$ is finite (multiply finite vector-space bases). Apply the same clause to the finite-type $K$-scheme $U$ from step 3: $u$ is closed in $U$. Therefore $F_q|_U$ is supported at closed points of $U$.",
+      "uses": [
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "lem-kun-stalk-as-pullback",
+        "lem-weil-pbc-inverse-image-composition",
+        "lem-weil-pbc-etale-algebra-residue-field-separable",
+        "lem-kun-closed-point-field",
+        "lem-weil-pbc-etale-composition-cancellation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    },
+    {
+      "text": "Apply [lem-kun-0f1f-vanish] to $U$ and $F_q|_U$ for every $U\\in\\mathcal B$ and every $q\\in\\mathbf Z$. The field is still the separably closed field $K$; finite type and closed-point support were checked in steps 3 and 4. This gives $H^p(U_{\\Et},F_q)=0$ for every $p>0$. Together with the covering property of step 3 this verifies both hypotheses of [lem-kun-0bkz] for the unbounded object $Q$. It follows that $H^q(X_{\\Et},Q)=H^0(X_{\\Et},F_q)$ for every $q$, since $X\\in\\mathcal B$. Here degree-zero sheaf cohomology is ordinary sections: in an injective resolution beginning in degree zero, the kernel of the first differential is the sheaf itself, and taking sections preserves that kernel because kernels of sheaves are computed objectwise. By the assumed vanishing, $\\Gamma(X_{\\Et},F_q)=0$ for every $q$. No lower bound on $Q$ has been imposed.",
+      "uses": [
+        "lem-kun-0f1f-vanish",
+        "lem-kun-0bkz"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    },
+    {
+      "text": "Apply [lem-kun-0f1f-gen] to $X$ and $F_q$, using step 2. Its conclusion says that the evaluation morphism in [def-kun-global-generated] is an epimorphism. By step 5 the only global section is the zero section, so every summand of this evaluation sends its generator to zero. The evaluation morphism is therefore the zero morphism. A zero epimorphism onto $F_q$ forces $\\mathrm{id}_{F_q}=0$ by cancellation, hence $F_q=0$. This works for each integer $q$.",
+      "uses": [
+        "lem-kun-0f1f-gen",
+        "def-kun-global-generated"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    },
+    {
+      "text": "Every cohomology sheaf $\\mathcal H^q(Q)=F_q$ vanishes by step 6. The zero-object criterion [lem-kun-d-zero-cohomology] therefore gives $Q=0$, proving the reverse implication and the equivalence.",
+      "uses": [
+        "lem-kun-d-zero-cohomology"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-kun-rgamma-unbounded",
     "lem-kun-stalks-of-cohomology",
-    "def-kun-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
-  },
-  {
-   "text": "Let $\\mathcal B$ be the objects $j:U\\to X$ of the small etale site whose source scheme $U$ is quasi-compact. By [lem-weil-pbc-affine-opens-basis], every object is covered by affine open subschemes; each is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Their inclusions and their composites with the given etale object are etale by [lem-weil-pbc-etale-composition-cancellation](1),(2), so they form a covering in [def-weil-pbc-etale-site]. Thus condition (1) of [lem-kun-0bkz] holds. Each $U\\in\\mathcal B$ is of finite type over $K$: by [lem-kun-etale-lfp], $j$ is locally of finite presentation and hence locally of finite type. Composing with $X\\to\\operatorname{Spec}K$ is locally of finite type, since a finitely generated algebra over a finitely generated algebra is finitely generated (adjoin both finite lists of generators). Since $U$ is quasi-compact, its map to the one-point scheme $\\operatorname{Spec}K$ is quasi-compact; [def-weil-finite-type-morphism] now gives finite type. In particular $X\\in\\mathcal B$ by the original finite-type hypothesis.",
-   "uses": [
+    "def-kun-support",
     "def-weil-pbc-etale-site",
     "lem-weil-pbc-affine-opens-basis",
     "lem-kun-0bkz",
     "lem-kun-etale-lfp",
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
-  },
-  {
-   "text": "Fix $j:U\\to X$ in $\\mathcal B$. By [lem-weil-pbc-etale-inverse-image-restriction] its sheaf restriction $F_q|_U$ is $j^{-1}F_q$. For a geometric point $\\bar u$ over $u\\in U$, [lem-kun-stalk-as-pullback] and [lem-weil-pbc-inverse-image-composition], applied to $j$ and $\\bar u$, identify $(F_q|_U)_{\\bar u}$ with $(F_q)_{j\\bar u}$. Consequently a nonzero stalk can occur only over a point $u$ whose image $x=j(u)$ is closed in $X$, by step 2. Choose affine neighbourhoods of $x$ and $u$ with the latter mapping into the former. The affine inclusions are etale by [lem-weil-pbc-etale-composition-cancellation](1); composing the source inclusion with $j$ and cancelling the target inclusion by clauses (2),(3) shows that the resulting affine morphism is etale. Thus [lem-weil-pbc-etale-algebra-residue-field-separable] gives that $\\kappa(u)/\\kappa(x)$ is finite separable. By [lem-kun-closed-point-field](a), $\\kappa(x)/K$ is finite, hence $\\kappa(u)/K$ is finite (multiply finite vector-space bases). Apply the same clause to the finite-type $K$-scheme $U$ from step 3: $u$ is closed in $U$. Therefore $F_q|_U$ is supported at closed points of $U$.",
-   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-kun-stalk-as-pullback",
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-etale-algebra-residue-field-separable",
     "lem-kun-closed-point-field",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-0f1f-vanish] to $U$ and $F_q|_U$ for every $U\\in\\mathcal B$ and every $q\\in\\mathbf Z$. The field is still the separably closed field $K$; finite type and closed-point support were checked in steps 3 and 4. This gives $H^p(U_{\\Et},F_q)=0$ for every $p>0$. Together with the covering property of step 3 this verifies both hypotheses of [lem-kun-0bkz] for the unbounded object $Q$. It follows that $H^q(X_{\\Et},Q)=H^0(X_{\\Et},F_q)$ for every $q$, since $X\\in\\mathcal B$. Here degree-zero sheaf cohomology is ordinary sections: in an injective resolution beginning in degree zero, the kernel of the first differential is the sheaf itself, and taking sections preserves that kernel because kernels of sheaves are computed objectwise. By the assumed vanishing, $\\Gamma(X_{\\Et},F_q)=0$ for every $q$. No lower bound on $Q$ has been imposed.",
-   "uses": [
     "lem-kun-0f1f-vanish",
-    "lem-kun-0bkz"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-0f1f-gen] to $X$ and $F_q$, using step 2. Its conclusion says that the evaluation morphism in [def-kun-global-generated] is an epimorphism. By step 5 the only global section is the zero section, so every summand of this evaluation sends its generator to zero. The evaluation morphism is therefore the zero morphism. A zero epimorphism onto $F_q$ forces $\\mathrm{id}_{F_q}=0$ by cancellation, hence $F_q=0$. This works for each integer $q$.",
-   "uses": [
     "lem-kun-0f1f-gen",
-    "def-kun-global-generated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
-  },
-  {
-   "text": "Every cohomology sheaf $\\mathcal H^q(Q)=F_q$ vanishes by step 6. The zero-object criterion [lem-kun-d-zero-cohomology] therefore gives $Q=0$, proving the reverse implication and the equivalence.",
-   "uses": [
+    "def-kun-global-generated",
     "lem-kun-d-zero-cohomology"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
-   }
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "closed.point|support.*closed|conservative",
+      "results": "0 hits; searched Mathlib/AlgebraicGeometry/Etale",
+      "date": "2026-10-15",
+      "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived global sections detect vanishing of etale complexes supported on closed points over a separably closed field",
+      "results": "Service unavailable: service unavailable: Internal Server Error",
+      "date": "2026-10-15",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For a finite type scheme over a separably closed field, an unbounded derived etale sheaf supported at closed points is zero if all its global hypercohomology groups vanish",
+      "results": "Hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_univ_iff",
+      "date": "2026-10-15",
+      "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
+    },
+    {
+      "tool": "loogle",
+      "query": "Sheaf, IsZero",
+      "results": "loogle: unknown identifier 'Sheaf'; 0 hits",
+      "date": "2026-10-15",
+      "verdict": "no usable match: query identifier rejected by Loogle"
+    },
+    {
+      "tool": "grep",
+      "query": "support|conservative|isZero",
+      "results": "Hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean; searched Mathlib/CategoryTheory/Sites",
+      "date": "2026-10-15",
+      "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Global sections is conservative on sheaves supported at closed points of a scheme over a separably closed field, including unbounded derived objects",
+      "results": "Hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+      "date": "2026-10-15",
+      "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.IsZero, DerivedCategory",
+      "results": "Hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.Plus.isZero_homology_of_isGE, DerivedCategory.Plus.isZero_homology_of_isLE",
+      "date": "2026-10-15",
+      "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An acyclic derived sections functor detects zero complexes when every cohomology sheaf is acyclic and generated by global sections",
+      "results": "Hits: CochainComplex.IsKInjective, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isKInjective_of_injective, CochainComplex.isKInjective_iff_rightOrthogonal, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, HomotopyCategory.mem_subcategoryAcyclic_iff",
+      "date": "2026-10-15",
+      "verdict": "no match: K-injective criteria, homotopy-category acyclicity, and vanishing of derived functors on injectives do not assert detection by global sections for the supported unbounded objects in this item"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1768,
+  "blueprint_uses": [
+    "def-kun-global-generated",
+    "def-kun-rgamma-unbounded",
+    "def-kun-separably-closed",
+    "def-kun-support",
+    "lem-kun-0bkz",
+    "lem-kun-0f1f-gen",
+    "lem-kun-0f1f-vanish",
+    "lem-kun-d-zero-cohomology",
+    "lem-kun-etale-lfp",
+    "lem-kun-minimal-cohomology",
+    "lem-kun-stalks-of-cohomology"
+  ],
+  "uses_not_cited": [
+    "def-kun-separably-closed",
+    "def-kun-support"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-kunneth-ordinary",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "lem-kun-0f1g",
+    "worker": "stage1",
+    "summary": "Checked Stacks 0F1G and its inputs 0F1F and 0BKZ against the imported proof. Kept the statement and used the general unbounded argument alone, with explicit affine covering, finite-type, restriction/stalk and residue-field support checks. Reused existing nodes only; no new lemmas or Mathlib leaves. No closed project declaration of the full statement was found.",
+    "blueprint": "Steps 1 and 2 realize the opening implication and stalk-support check; steps 3--5 expand the general-case paragraph of the blueprint proof, and steps 6--7 write out its concluding global-generation and cohomology-detection argument. The redundant bounded-below paragraph is bypassed at node level, without changing the unit route."
+  },
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-N8-1a9e18232",
+    "group": "N8",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-1a9e18232 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements and sources in full. All seven steps match Stacks 0F1G, 0F1F and unbounded comparison 0BKZ; hypotheses and abelian coefficients are preserved. Accepted two generic sheaf tool uses. No new nodes or repairs. review.md records edge cases, duplicate searches, and an inherited downstream cycle outside this split."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-43106b0b8",
+    "group": "Q07",
+    "result": "pass",
+    "note": "Wrote review.md. Checked source, all statement dependencies, exact Lean declarations, hypotheses, conclusions, universes, edge cases, docstrings, and report sections. Signature matches lean.statement verbatim; scompile.py reproduced clean compilation. No delivery faults found; branch and clones unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ClosedPointSupportDetection",
+    "declaration": "AlgebraicGeometry.Etale.isZero_iff_cohomology_of_support_closedPoints",
+    "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointSupportDetection.lean",
+    "statement": "theorem isZero_iff_cohomology_of_support_closedPoints {K : Type u} [Field K] [IsSepClosed K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hQ : X.etaleComplexSupport Q ⊆ closedPoints X) : IsZero Q ↔ ∀ i : ℤ, IsZero ((cohomology AddCommGrpCat.{u + 1} X i).obj Q)",
+    "branch": "newtargets-dag",
+    "by": "Q07",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $K$ be a separably closed\nfield and $X$ a scheme of finite type over $K$. Let\n$Q\\in D(X_{\\Et})$ and assume that $Q_{\\bar x}\\ne0$ only if $x$\nis a closed point of $X$. Then\n\n$$\nQ=0\\quad\\Longleftrightarrow\\quad H^i(X_{\\Et},Q)=0\\text{ for all }\ni .\n$$",
+    "proof": [
+      {
+        "text": "The implication from left to right is clear by functoriality of the\nderived global sections of [def-kun-rgamma-unbounded].\nConversely, assume first that $Q$ is bounded below; this case\nsuffices for almost all applications. If $Q\\ne0$, let $i$ be the\nsmallest integer with $\\mathcal H^i(Q)\\ne0$. Then\n$H^i(X_{\\Et},Q)=H^0(X_{\\Et},\\mathcal H^i(Q))$ by\n[lem-kun-minimal-cohomology]. By\n[lem-kun-stalks-of-cohomology] the support of\n$\\mathcal H^i(Q)$ is contained in the closed points of $X$, and\n$\\mathcal H^i(Q)\\ne0$; by [lem-kun-0f1f-gen] this sheaf is\nglobally generated, hence admits a nonzero global section: the\nevaluation map of [def-kun-global-generated] is an epimorphism\nonto the nonzero sheaf, so it has a nonzero section of $F$ in its\nimage. Thus\n$H^0(X_{\\Et},\\mathcal H^i(Q))\\ne0$, contradicting the vanishing of\n$H^i(X_{\\Et},Q)$. Hence $Q=0$.",
+        "uses": [
+          "def-kun-rgamma-unbounded",
+          "lem-kun-minimal-cohomology",
+          "lem-kun-stalks-of-cohomology",
+          "lem-kun-0f1f-gen",
+          "def-kun-global-generated"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "For the general case, let $\\mathcal B\\subset\\Ob(X_{\\Et})$ be the\nquasi-compact objects. Every object of $X_{\\Et}$ has a covering by\naffine (hence quasi-compact) objects, so $\\mathcal B$ is a basis\nsatisfying clause (1) of [lem-kun-0bkz]. An object\n$U\\in\\mathcal B$ is quasi-compact and etale over $X$; since an\netale morphism is locally of finite presentation\n([lem-kun-etale-lfp]), quasi-compactness implies that $U$ is of\nfinite type over $K$. If $u\\in U$ lies in the support of\n$\\mathcal H^q(Q)|_U$, its image $x\\in X$ lies in the support of\n$\\mathcal H^q(Q)$ and is closed. The residue extension\n$\\kappa(u)/\\kappa(x)$ is finite separable because $U\\to X$ is\netale; hence $\\kappa(u)$ is finite over $K$, so $u$ is a closed\npoint of the finite type $K$-scheme $U$. Thus\n[lem-kun-0f1f-vanish] applied to\n$\\mathcal H^q(Q)|_U$ gives $H^p(U_{\\Et},\\mathcal H^q(Q))=0$ for\nall $p>0$ and all $q$. Hence the hypotheses of\n[lem-kun-0bkz] are satisfied, and we conclude that\n$H^q(U_{\\Et},Q)=H^0(U_{\\Et},\\mathcal H^q(Q))$ for all\n$U\\in\\mathcal B$, in particular for $U=X$. If\n$H^i(X_{\\Et},Q)=0$ for all $i$, then\n$H^0(X_{\\Et},\\mathcal H^q(Q))=0$ for all $q$, so\n$\\mathcal H^q(Q)=0$ for all $q$ by the global-generation argument\nof the previous paragraph ([lem-kun-0f1f-gen], noting that the\nsupport of $\\mathcal H^q(Q)$ is contained in the closed points);\nby [lem-kun-d-zero-cohomology] this means $Q=0$.",
+        "uses": [
+          "lem-kun-0bkz",
+          "lem-kun-etale-lfp",
+          "lem-kun-0f1f-vanish",
+          "lem-kun-0f1f-gen",
+          "lem-kun-d-zero-cohomology"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- ],
- "proof_deps": [
-  "def-kun-rgamma-unbounded",
-  "lem-kun-stalks-of-cohomology",
-  "def-kun-support",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-kun-0bkz",
-  "lem-kun-etale-lfp",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-kun-stalk-as-pullback",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-kun-closed-point-field",
-  "lem-kun-0f1f-vanish",
-  "lem-kun-0f1f-gen",
-  "def-kun-global-generated",
-  "lem-kun-d-zero-cohomology"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F1G, lemma-vanishing-closed-points, proof (general case)"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "closed.point|support.*closed|conservative",
-   "results": "0 hits; searched Mathlib/AlgebraicGeometry/Etale",
-   "date": "2026-10-15",
-   "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived global sections detect vanishing of etale complexes supported on closed points over a separably closed field",
-   "results": "Service unavailable: service unavailable: Internal Server Error",
-   "date": "2026-10-15",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a finite type scheme over a separably closed field, an unbounded derived etale sheaf supported at closed points is zero if all its global hypercohomology groups vanish",
-   "results": "Hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_univ_iff",
-   "date": "2026-10-15",
-   "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
-  },
-  {
-   "tool": "loogle",
-   "query": "Sheaf, IsZero",
-   "results": "loogle: unknown identifier 'Sheaf'; 0 hits",
-   "date": "2026-10-15",
-   "verdict": "no usable match: query identifier rejected by Loogle"
-  },
-  {
-   "tool": "grep",
-   "query": "support|conservative|isZero",
-   "results": "Hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean; searched Mathlib/CategoryTheory/Sites",
-   "date": "2026-10-15",
-   "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Global sections is conservative on sheaves supported at closed points of a scheme over a separably closed field, including unbounded derived objects",
-   "results": "Hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
-   "date": "2026-10-15",
-   "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.IsZero, DerivedCategory",
-   "results": "Hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.Plus.isZero_homology_of_isGE, DerivedCategory.Plus.isZero_homology_of_isLE",
-   "date": "2026-10-15",
-   "verdict": "no match for the item: the hits do not state detection by global hypercohomology for arbitrary unbounded etale complexes supported at closed points"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An acyclic derived sections functor detects zero complexes when every cohomology sheaf is acyclic and generated by global sections",
-   "results": "Hits: CochainComplex.IsKInjective, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isKInjective_of_injective, CochainComplex.isKInjective_iff_rightOrthogonal, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, HomotopyCategory.mem_subcategoryAcyclic_iff",
-   "date": "2026-10-15",
-   "verdict": "no match: K-injective criteria, homotopy-category acyclicity, and vanishing of derived functors on injectives do not assert detection by global sections for the supported unbounded objects in this item"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1768,
- "blueprint_uses": [
-  "def-kun-global-generated",
-  "def-kun-rgamma-unbounded",
-  "def-kun-separably-closed",
-  "def-kun-support",
-  "lem-kun-0bkz",
-  "lem-kun-0f1f-gen",
-  "lem-kun-0f1f-vanish",
-  "lem-kun-d-zero-cohomology",
-  "lem-kun-etale-lfp",
-  "lem-kun-minimal-cohomology",
-  "lem-kun-stalks-of-cohomology"
- ],
- "uses_not_cited": [
-  "def-kun-separably-closed",
-  "def-kun-support"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "lem-kun-0f1g",
-  "worker": "stage1",
-  "summary": "Checked Stacks 0F1G and its inputs 0F1F and 0BKZ against the imported proof. Kept the statement and used the general unbounded argument alone, with explicit affine covering, finite-type, restriction/stalk and residue-field support checks. Reused existing nodes only; no new lemmas or Mathlib leaves. No closed project declaration of the full statement was found.",
-  "blueprint": "Steps 1 and 2 realize the opening implication and stalk-support check; steps 3--5 expand the general-case paragraph of the blueprint proof, and steps 6--7 write out its concluding global-generation and cohomology-detection argument. The redundant bounded-below paragraph is bypassed at node level, without changing the unit route."
- },
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-N8-1a9e18232",
-  "group": "N8",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-1a9e18232 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements and sources in full. All seven steps match Stacks 0F1G, 0F1F and unbounded comparison 0BKZ; hypotheses and abelian coefficients are preserved. Accepted two generic sheaf tool uses. No new nodes or repairs. review.md records edge cases, duplicate searches, and an inherited downstream cycle outside this split."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-43106b0b8",
-  "group": "Q07",
-  "result": "pass",
-  "note": "Wrote review.md. Checked source, all statement dependencies, exact Lean declarations, hypotheses, conclusions, universes, edge cases, docstrings, and report sections. Signature matches lean.statement verbatim; scompile.py reproduced clean compilation. No delivery faults found; branch and clones unchanged."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ClosedPointSupportDetection",
-  "declaration": "AlgebraicGeometry.Etale.isZero_iff_cohomology_of_support_closedPoints",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointSupportDetection.lean",
-  "statement": "theorem isZero_iff_cohomology_of_support_closedPoints {K : Type u} [Field K] [IsSepClosed K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hQ : X.etaleComplexSupport Q ⊆ closedPoints X) : IsZero Q ↔ ∀ i : ℤ, IsZero ((cohomology AddCommGrpCat.{u + 1} X i).obj Q)",
-  "branch": "newtargets-dag",
-  "by": "Q07",
-  "date": "2026-10-16",
-  "existing": false
- }
 }

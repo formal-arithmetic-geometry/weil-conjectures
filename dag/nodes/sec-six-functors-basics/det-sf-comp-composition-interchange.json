@@ -1,0 +1,63 @@
+{
+  "id": "det-sf-comp-composition-interchange",
+  "kind": "statement",
+  "title": "Interchanging proper direct image and extension by zero",
+  "statement": "Let $\\Lambda$ be admissible. Let $p:\\overline X\\to Y$ be proper, let\n$i:Y\\to\\overline Y$ be a quasi-compact open immersion, and let\n$\\overline X\\xrightarrow{j'}W\\xrightarrow{r}\\overline Y$ be a compactification of\n$i\\circ p$ with $\\overline X$ dense in $W$. Then:\n\n1. $r^{-1}(Y)=\\overline X$ (as open subschemes of $W$), and $r$ restricts to $p$\nover $Y$;\n2. for $A\\in D(\\overline X_{\\mathrm{proét}},\\Lambda)$ there is a unique map\n$\\iota_A:i_!Rp_*A\\to Rr_*j'_!A$ in $D(\\overline Y_{\\mathrm{proét}},\\Lambda)$ whose\nrestriction to $Y$ is the identity of $Rp_*A$;\n3. $\\iota_A$ is an isomorphism for every $A\\in\\Loc(\\Dctf(\\overline X,\\Lambda))$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.md",
+    "place": "node det-sf-comp-composition-interchange, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AH"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*(1)* The open immersion $j'$ factors through the open subscheme\n$r^{-1}(Y)\\subset W$ because $r j'=i p$ lands in $Y$. The induced\n$\\overline X\\to r^{-1}(Y)$ is a $Y$-morphism from the proper $Y$-scheme\n$\\overline X$ to the separated $Y$-scheme $r^{-1}(Y)$ (separated since $r$ is\nproper), hence proper, so its image is closed in $r^{-1}(Y)$. It is also open,\nand dense because $\\overline X$ is dense in $W$. An open, closed, dense subset\nof $r^{-1}(Y)$ is all of it; so $\\overline X=r^{-1}(Y)$ and $r|_{r^{-1}(Y)}=p$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2)* Restriction $i^*$ to the open $Y$ commutes with $Rr_*$ (it has the exact\nleft adjoint $i_!$, so preserves K-injectives), giving by (1)\n$i^*Rr_*j'_!A\\simeq Rp_*(j'^*j'_!A)\\simeq Rp_*A$. Under $i_!\\dashv i^*$, maps\n$i_!Rp_*A\\to Rr_*j'_!A$ correspond bijectively to maps\n$Rp_*A\\to i^*Rr_*j'_!A\\simeq Rp_*A$, the correspondence being restriction to\n$Y$; take $\\iota_A$ to correspond to the identity.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3)* Let $c:\\overline Y\\setminus Y\\to\\overline Y$ be the closed complement. For\n$A\\in\\Dctf(\\overline X,\\Lambda)$: over $Y$, $\\iota_A$ is the identity. Over the\ncomplement, $c^*i_!Rp_*A=0$, and by proper base change for $r$ along $c$\n([sk-prop-proper-base-change-unbounded]),\n$c^*Rr_*j'_!A\\simeq R(r_c)_*(j'_!A)|_{r^{-1}(\\overline Y\\setminus Y)}=0$, because\n$r^{-1}(\\overline Y\\setminus Y)=W\\setminus\\overline X$ by (1) and $j'_!A$ vanishes\nthere. The pair $(i^*,c^*)$ detects isomorphisms (open–closed exact sequence,\nStacks, Tag 09AH), so $\\iota_A$ is an isomorphism. Both $A\\mapsto i_!Rp_*A$ and\n$A\\mapsto Rr_*j'_!A$ are exact functors on $\\Loc(\\Dctf(\\overline X,\\Lambda))$\npreserving direct sums ([det-sf-comp-coherence-single]) and $\\iota$ is a natural\ntransformation of exact functors (by the uniqueness in (2), it commutes with\nshifts and with morphisms of $A$); by [det-sf-determination-localizing] it is an\nisomorphism on all of $\\Loc(\\Dctf(\\overline X,\\Lambda))$.",
+      "uses": [
+        "det-sf-comp-coherence-single",
+        "det-sf-determination-localizing"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-sf-comp-coherence-single",
+    "det-sf-determination-localizing"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-sf-comp-coherence-single",
+    "det-sf-determination-localizing",
+    "sk-prop-proper-base-change-unbounded"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

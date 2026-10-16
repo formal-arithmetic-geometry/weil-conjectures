@@ -1,0 +1,95 @@
+{
+  "id": "sk-thm-purity-transport",
+  "kind": "statement",
+  "title": "Smooth purity for all admissible coefficients",
+  "statement": "Let $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring and let $f:X\\to Y$ be smooth of pure relative dimension $d$. There is an\nisomorphism of functors $\\Dctf(Y,\\Lambda)\\to\\Dctf(X,\\Lambda)$, given at\n$K\\in\\Dctf(Y,\\Lambda)$ by a canonical isomorphism in $\\Dctf(X,\\Lambda)$\n\n$$\n\\gamma_{f,\\Lambda}(K):\\ f_\\Lambda^*K(d)[2d]\\xrightarrow{\\ \\sim\\ }f_\\Lambda^!K.\n$$\n\nHere $f^!_\\Lambda$ is the restriction of the right adjoint from\n[sk-prop-sf-existence]. The isomorphism is compatible with change of\ncoefficients, base change and composition, with the normalization given by\nintegration on the affine line.\n\nMoreover, $K\\mapsto f_\\Lambda^*K(d)[2d]$ is a right adjoint of\n$Rf_{!,\\Lambda}:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$, with counit normalized by\nintegration on the affine line, and $\\gamma_{f,\\Lambda}$ is the *unique*\nisomorphism of functors $f_\\Lambda^*(-)(d)[2d]\\xrightarrow{\\sim}f_\\Lambda^!$ on\n$\\Dctf(Y,\\Lambda)$ compatible with the counits of the two adjunctions.\n\nFor étale $f$ we have $d=0$, and the theorem says $f_\\Lambda^!\\simeq f_\\Lambda^*$\nfor every admissible $\\Lambda$. For a smooth curve $C$ with structure map\n$a:C\\to\\operatorname{Spec}k$ it gives\n$a_{\\Zl}^!\\mathbf Z_{\\ell,\\operatorname{Spec}k}\\simeq\\mathbf Z_{\\ell,C}(1)[2]$, a\nsingle sheaf in degree $-2$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "node sk-thm-purity-transport, order 1810"
+  },
+  "stmt_deps": [
+    "sk-prop-sf-existence"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (compatibility with the finite reductions).* For $m\\le n$\nwrite $\\mathrm{red}_{n,m}=(-)\\otimes^{L}_{A_{E,n}}A_{E,m}$. By\n[sk-thm-smooth-purity] the map $\\gamma_{f,K}$ is the composite of three\nconstituents: the canonical twist reassociation, the inverse of the\ndiagonal identification $\\omega_f\\cong\\Lambda_X(d)[2d]$ of\n[sk-thm-smooth-purity], and the tensor formula (G11) of [sk-prop-cohsm]. Each\nis compatible with $\\mathrm{red}_{n,m}$: the finite-level twist\n$A(1)=\\mu_{\\ell^N}\\otimes_{\\Z/\\ell^N}A$ of [sk-def-purity-conv] and the\nKummer boundary $\\kappa(t)$ that orients it ([sk-prop-a1]) reduce to\ntheir counterparts over $A_{E,m}$, and the exceptional adjunction\n$Rf_!\\dashv Rf^{!}$ is compatible with reduction of the coefficient ring.\nHence $\\mathrm{red}_{n,m}(\\gamma_{f,K})=\\gamma_{f,\\mathrm{red}_{n,m}K}$,\nand likewise for the orientations, the smooth traces and the composition\nand base-change squares of [sk-prop-cohsm] (G12).",
+      "uses": [
+        "sk-def-purity-conv"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2 (the adic stage).* Let\n$K\\in D^b_{ctf}(Y,\\mathcal O_E)$ be the normalized system $(K_n)_n$. By\nStep 1 the isomorphisms $\\gamma_{f,K_n}$ commute with the transition maps\nof the system, so they form a morphism of normalized systems, the common\nbounds and stratifications being those of $K$ with the same $d$-shift.\nThe uniform-tower reconstruction realizes that morphism as a single map\n$Lf^{*}K(d)[2d]\\to Rf^{!}K$ over $\\mathcal O_E$ whose reduction at every\nlevel $n$ is $\\gamma_{f,K_n}$; a map of towers that is an isomorphism at\nevery level is an isomorphism, so $\\gamma_{f,K}$ is one.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 3 (the $E$- and $\\overline{\\mathbf Q}_\\ell$-stages).* An\n$E$-object is presented by a lattice $K_{\\mathcal O_E}$ with\n$K_E=K_{\\mathcal O_E}\\otimes^{L}_{\\mathcal O_E}E$. Since\n$\\mathcal O_E\\to E$ is flat, $(-)\\otimes^{L}_{\\mathcal O_E}E$ is exact and\ncarries the isomorphism of Step 2 for the lattice to an isomorphism\n$\\gamma_{f,K_E}$, independently of the chosen lattice because two lattices\nagree after inverting $\\varpi$. A $\\overline{\\mathbf Q}_\\ell$-object is\nrepresented by an $E$-object for some finite $E/\\mathbf Q_\\ell$, the\nfinite-stage categories being idempotent complete, and $\\gamma$ transports\nalong $E\\hookrightarrow\\overline{\\mathbf Q}_\\ell$; the transport is well\ndefined because the purity isomorphisms are transitive in coefficient\nextensions and preserve idempotent summands.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 4 (the dualizing complex).* Apply Steps 1–3 to $f=a_X$ and\n$K=\\Lambda_{\\Spec k}$: the purity isomorphism reads\n$\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$, and the counit of\n$Ra_{X!}\\dashv Ra_X^{!}$ becomes the transported normalized integration\nmap. Only the finite stage is proved in this document; Steps 2–4 are\nsketches of Blueprint 14, where the reconstruction and transport lemmas\nare carried out in full.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 5 (identification with $f^!$ and uniqueness).* Both adjunctions live on\n$\\Dctf(X,\\Lambda)$ and $\\Dctf(Y,\\Lambda)$, and in both $Rf_!$ is the composite\n$R\\bar f_*\\circ j_!$ of ordinary derived functors on module sheaves for a\ncompactification $f=\\bar f\\circ j$, independent of the compactification. Finite\npurity ([sk-thm-smooth-purity]), the integral adjunction\n([sk-prop-sp-integral-adjunction]) and its rational extensions\n([sk-prop-sp-rational] and [sk-thm-sp-qbar]) show, in the respective\ncoefficient cases, that $K\\mapsto f_\\Lambda^*K(d)[2d]$ is right adjoint to\n$Rf_{!,\\Lambda}$. By [sk-prop-sf-existence] and [sk-thm-existence], the\nrestriction of $f^!$ is also right adjoint to $Rf_{!,\\Lambda}$ on $\\Dctf$.\n[sk-prop-sp-unique-adjoint] gives the unique counit-preserving isomorphism from\nthe explicit adjoint $K\\mapsto f_\\Lambda^*K(d)[2d]$ to $f_\\Lambda^!$.\n\nFor every admissible $\\Lambda$ the exceptional inverse image of a smooth\nmorphism is therefore the twisted and shifted inverse image, normalized by\nintegration on the affine line, and the smooth trace is the counit of\n$Rf_!\\dashv f^!$ in this form, compatible with base change, composition, change\nof coefficients and Frobenius.",
+      "uses": [
+        "sk-thm-sp-qbar",
+        "sk-prop-sf-existence",
+        "sk-thm-existence"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-def-purity-conv",
+    "sk-thm-sp-qbar",
+    "sk-prop-sf-existence",
+    "sk-thm-existence",
+    "sk-lem-sf-flat-model"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1810,
+  "blueprint_uses": [
+    "sk-def-purity-conv",
+    "sk-lem-sf-flat-model",
+    "sk-prop-a1",
+    "sk-prop-cohsm",
+    "sk-thm-smooth-purity",
+    "sk-prop-sf-existence",
+    "sk-thm-existence",
+    "sk-prop-sp-integral-adjunction",
+    "sk-prop-sp-rational",
+    "sk-thm-sp-qbar",
+    "sk-prop-sp-unique-adjoint"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-lem-sf-flat-model"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

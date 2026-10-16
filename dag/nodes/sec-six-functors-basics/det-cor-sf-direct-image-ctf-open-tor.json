@@ -1,0 +1,73 @@
+{
+  "id": "det-cor-sf-direct-image-ctf-open-tor",
+  "kind": "statement",
+  "title": "Scalar projection formula and the Tor bound for an open immersion",
+  "statement": "Let $k$ be a separably closed field, $\\ell\\ne\\operatorname{char}(k)$, $A$ a\nfinite commutative $\\ell$-primary ring, and $j:U\\hookrightarrow X$ an open\nimmersion of finite-type $k$-schemes. Let $d\\ge\\operatorname{cd}(j)$\n([def-kun-cd]; finite by [lem-kun-0f10]). Let\n$K\\in D(U_{\\mathrm{ét}},A)$ have Tor amplitude in $[a,b]$ in the sense of\n[def-weil-finite-tor-amplitude]: $\\mathcal H^r(K\\otimes^{\\mathbf L}_AN)=0$ for\n$r\\notin[a,b]$ and every $A$-module sheaf $N$ on $U_{\\mathrm{ét}}$. Then:\n\n1. for every $A$-module $M$, with constant sheaves $\\underline M_X$,\n   $\\underline M_U=j^*\\underline M_X$, the projection morphism\n\n   $$\n   (Rj_*K)\\otimes^{\\mathbf L}_A\\underline M_X\\longrightarrow\n   Rj_*\\bigl(K\\otimes^{\\mathbf L}_A\\underline M_U\\bigr)\n   $$\n\n   is an isomorphism in $D(X_{\\mathrm{ét}},A)$;\n2. $Rj_*K$ has Tor amplitude in $[a,b+d]$ on $X_{\\mathrm{ét}}$;\n3. $Rj_{\\mathrm{proét},*}\\nu_U^*K\\cong\\nu_X^*Rj_*K$ has Tor amplitude in\n   $[a,b+d]$ against every module sheaf on $X_{\\mathrm{proét}}$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/det-cor-sf-direct-image-ctf-open-tor.md",
+    "place": "node det-cor-sf-direct-image-ctf-open-tor, order None"
+  },
+  "stmt_deps": [
+    "def-kun-cd",
+    "lem-kun-0f10",
+    "def-weil-finite-tor-amplitude"
+  ],
+  "proof": [
+    {
+      "text": "Testing with $N=\\underline A_U$ shows that $K$ has cohomology in $[a,b]$; in\nparticular $K$ is bounded.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(1).* Let $C$ be a cone of the projection morphism. For an object\n$V\\to X$ of $X_{\\mathrm{ét}}$ and $n\\in\\mathbf Z$,\n$H^n(V,C)=\\Hom(\\underline A_V,C[n])$, and the cohomology sheaf\n$\\mathcal H^n(C)$ is the sheafification of $V\\mapsto H^n(V,C)$; so it suffices\nto show $R\\Gamma(V,C)=0$ for all quasi-compact étale $V\\to X$, i.e. that the\nprojection morphism induces an isomorphism on $R\\Gamma(V,-)$. Such $V$ and\n$V_U=V\\times_XU$ are of finite type over the separably closed field $k$, so\n$\\operatorname{cd}(V),\\operatorname{cd}(V_U)<\\infty$ by [lem-kun-0f10] (2).\nBy [lem-kun-0f12], applied on $V$ to $E=(Rj_*K)|_V$ and on $V_U$ to\n$E=K|_{V_U}$, with the constant complex $M$,\n\n$$\nR\\Gamma\\bigl(V,(Rj_*K)\\otimes^{\\mathbf L}_A\\underline M\\bigr)\n\\cong R\\Gamma(V,Rj_*K)\\otimes^{\\mathbf L}_AM\n\\cong R\\Gamma(V_U,K)\\otimes^{\\mathbf L}_AM\n\\cong R\\Gamma\\bigl(V_U,K\\otimes^{\\mathbf L}_A\\underline M\\bigr)\n\\cong R\\Gamma\\bigl(V,Rj_*(K\\otimes^{\\mathbf L}_A\\underline M)\\bigr),\n$$\n\nwhere the second and fourth isomorphisms are $R\\Gamma(V,Rj_*-)=R\\Gamma(V_U,-)$.\nAll maps are the canonical ones built from the same cup-product pairing, so\nthe composite is $R\\Gamma(V,-)$ of the projection morphism.",
+      "uses": [
+        "lem-kun-0f10",
+        "lem-kun-0f12"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2).* Fix an $A$-module $M$. The complex $K\\otimes^{\\mathbf L}_A\\underline M_U$\nhas cohomology in $[a,b]$ by hypothesis. Since $A$ is $\\ell$-primary, its\ncohomology sheaves are torsion, so $R^qj_*$ of each of them vanishes for $q>d$;\ninduction on the number of nonzero cohomology sheaves via truncation triangles\nputs $Rj_*(K\\otimes^{\\mathbf L}_A\\underline M_U)$ in degrees $[a,b+d]$. By\n(1), so is $(Rj_*K)\\otimes^{\\mathbf L}_A\\underline M_X$. Taking the stalk at a\ngeometric point $\\bar x$ (an exact, tensor-compatible functor),\n$(Rj_*K)_{\\bar x}\\otimes^{\\mathbf L}_AM$ has cohomology in $[a,b+d]$ for every\n$A$-module $M$, i.e. the complex of $A$-modules $(Rj_*K)_{\\bar x}$ has Tor\namplitude in $[a,b+d]$. For an arbitrary $A$-module sheaf $N$ on\n$X_{\\mathrm{ét}}$,\n$(Rj_*K\\otimes^{\\mathbf L}_AN)_{\\bar x}\\cong(Rj_*K)_{\\bar x}\\otimes^{\\mathbf L}_AN_{\\bar x}$\ntherefore has cohomology in $[a,b+d]$, and since geometric stalks are\nconservative, $Rj_*K\\otimes^{\\mathbf L}_AN$ has cohomology in $[a,b+d]$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3).* $K$ and $Rj_*K$ are bounded below and $j$ is quasi-compact and\nquasi-separated, so [prop-weil-pbc-comparison-direct-image] gives\n$\\nu_X^*Rj_*K\\cong Rj_{\\mathrm{proét},*}\\nu_U^*K$. By (2) and\n[lem-exc-comparison-tor-interval] (which pulls back a bounded flat model in\ndegrees $[a,b+d]$), $\\nu_X^*Rj_*K$ has Tor amplitude in $[a,b+d]$ against\nevery pro-étale module sheaf, classical or not.",
+      "uses": [
+        "prop-weil-pbc-comparison-direct-image",
+        "lem-exc-comparison-tor-interval"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-kun-0f10",
+    "lem-kun-0f12",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-exc-comparison-tor-interval"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/det-cor-sf-direct-image-ctf-open-tor.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "def-kun-cd",
+    "lem-kun-0f10",
+    "lem-kun-0f12",
+    "def-weil-finite-tor-amplitude",
+    "lem-exc-comparison-tor-interval",
+    "prop-weil-pbc-comparison-direct-image"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,463 +1,482 @@
 {
- "id": "prop-nagata-relative-proj-functoriality",
- "blueprint": {
-  "is": "prop-nagata-relative-proj-functoriality",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Restriction, base change, and functoriality of Proj",
- "statement": "Relative Proj has the following properties.\n\n1. Its restriction to an affine open $V$ is canonically\n$\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$, compatibly on iterated\nrestrictions.\n1. A degree-preserving equivalence of graded algebras inducing the\nchosen degree-zero base identification induces an isomorphism of Proj.\n1. A surjective degree-preserving morphism of graded algebras induces\na closed immersion in the opposite direction on Proj.\n1. If $g\\colon X'\\to X$ is flat, then coefficientwise pullback gives a\ncanonical base-change isomorphism\n$$\n\\operatorname{Proj}_{X'}(g^*\\mathcal A)\n\\cong X'\\times_X\\operatorname{Proj}_X(\\mathcal A).\n$$\n\nThe same base-change construction is required for an arbitrary morphism\n$X'\\to X$ when the universal blow-up lift is formed; that unrestricted\ncomparison is recorded as a separate conditional interface below.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-relative-proj-functoriality.md",
-  "place": "node prop-nagata-relative-proj-functoriality, order 44"
- },
- "stmt_deps": [
-  "def-nagata-relative-proj",
-  "def-weil-closed-immersion",
-  "def-weil-flat-morphism",
-  "def-pc-module-pullback",
-  "def-pc-fibre-product",
-  "def-nagata-graded-algebra-pullback-data"
- ],
- "proof": [
-  {
-   "text": "Write $P(\\mathcal A)=\\operatorname{Proj}_X(\\mathcal A)$, with the structural map specified in [def-nagata-relative-proj]. By [lemma-nagata-relative-proj-exists], its inverse image of every affine open $V\\subseteq X$ is canonically $\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$, and these identifications commute with further restriction and the structural maps. This is (1). In the remaining assertions work with quasi-coherent graded algebra sheaves on the specified base; their graded maps respect the base-algebra structures. Whenever two base affines overlap, compare their constructions on an affine refinement of the overlap, not by assuming their intersection affine.",
-   "uses": [
+  "id": "prop-nagata-relative-proj-functoriality",
+  "blueprint": {
+    "is": "prop-nagata-relative-proj-functoriality",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Restriction, base change, and functoriality of Proj",
+  "statement": "Relative Proj has the following properties.\n\n1. Its restriction to an affine open $V$ is canonically\n$\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$, compatibly on iterated\nrestrictions.\n1. A degree-preserving equivalence of graded algebras inducing the\nchosen degree-zero base identification induces an isomorphism of Proj.\n1. A surjective degree-preserving morphism of graded algebras induces\na closed immersion in the opposite direction on Proj.\n1. If $g\\colon X'\\to X$ is flat, then coefficientwise pullback gives a\ncanonical base-change isomorphism\n$$\n\\operatorname{Proj}_{X'}(g^*\\mathcal A)\n\\cong X'\\times_X\\operatorname{Proj}_X(\\mathcal A).\n$$\n\nThe same base-change construction is required for an arbitrary morphism\n$X'\\to X$ when the universal blow-up lift is formed; that unrestricted\ncomparison is recorded as a separate conditional interface below.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-relative-proj-functoriality.md",
+    "place": "node prop-nagata-relative-proj-functoriality, order 44"
+  },
+  "stmt_deps": [
     "def-nagata-relative-proj",
-    "lemma-nagata-relative-proj-exists",
-    "lem-weil-pbc-affine-opens-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01NQ (lemma-glue-relative-proj), 01NO (lemma-proj-inclusion), 01NP (lemma-transitive-proj)"
-   }
-  },
-  {
-   "text": "Here are the affine-section facts needed below, including the sheaf-surjection issue. On $V=\\operatorname{Spec}R$, [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies a quasi-coherent module $\\mathcal F$ with $\\widetilde{\\Gamma(V,\\mathcal F)}$, naturally, and tilde preserves small colimits. Each homogeneous component of a quasi-coherent graded algebra is quasi-coherent: the degree projection is an idempotent $e_n$ on its underlying module, and its image is the cokernel of $1-e_n$; naturality of the counit and preservation of this cokernel identify it with the tilde of the corresponding module cokernel. Applying preservation of the coproduct indexed by $\\mathbb N$ and then the unit isomorphism gives $\\Gamma(V,\\mathcal A)=\\bigoplus_n\\Gamma(V,\\mathcal A_n)$, with the multiplication of [def-weil-pbc-graded-sheaf-structures]. If $\\varphi:\\mathcal A\\to\\mathcal B$ is surjective as a graded sheaf map, its degree-$n$ map is surjective (take the degree-$n$ component of a local lift). Put $u_n=\\Gamma(V,\\varphi_n)$. The counit identifies $\\widetilde{u_n}$ with $\\varphi_n|_V$. Hence $\\widetilde{\\operatorname{coker}u_n}=\\operatorname{coker}(\\varphi_n|_V)=0$, by preservation of cokernels. The unit isomorphism then gives $\\operatorname{coker}u_n=0$. Thus the map on affine sections is surjective in each degree. No general exactness of sections on non-affine schemes is used.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-graded-sheaf-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01ID (lemma-colimit-quasi-coherent), 01I7 (lemma-compare-constructions)"
-   }
-  },
-  {
-   "text": "For (2), let $\\varphi:A\\xrightarrow{\\sim}B$ be the graded equivalence on an affine base, and $f\\in A_d$, $d>0$. The fraction convention of [def-nagata-homogeneous-localization-degree-zero] gives $a/f^m\\mapsto\\varphi(a)/\\varphi(f)^m$ on degree-zero chart rings. Applying $\\varphi$ to a relation $f^k(f^n a-f^m b)=0$ preserves that relation, so the formula is well defined and is a ring homomorphism. Applying $\\varphi^{-1}$ to fractions is its inverse. By spectrum functoriality in [def-weil-affine-spectrum], these ring isomorphisms give inverse scheme maps between the corresponding affine charts.",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MY (lemma-morphism-proj), fraction formula; Tag 01N0 (lemma-surjective-graded-rings-map-proj), specialization to an equivalence"
-   }
-  },
-  {
-   "text": "Use the standard-open identifications and covering of [prop-nagata-proj-standard-open]. For $f\\in A_d$, $g\\in A_e$ with $d,e>0$, [lem-weil-pbc-proj-basic-open-intersection] identifies the overlap inside the $f$ chart with $D(g^d/f^e)$. The chart homomorphism sends $g^d/f^e$ to $\\varphi(g)^d/\\varphi(f)^e$; after inverting these elements both chart formulas still send every fraction $a/t$ to $\\varphi(a)/\\varphi(t)$. They therefore agree under the transition equivalences of [lemma-nagata-proj-chart-ring-cocycle]. Glue the maps and, separately, the maps from $\\varphi^{-1}$ by [lem-weil-pbc-scheme-morphism-gluing]. Their composites restrict to identities on every chart, so uniqueness in that node makes the composites identities. On an affine refinement of any base overlap, restriction commutes with $\\varphi$ and $\\varphi^{-1}$, so the same fraction formulas agree with the restriction maps specified in [def-nagata-relative-proj]. Gluing once more over the base affines gives the asserted relative Proj isomorphism, respecting the chosen degree-zero base map.",
-   "uses": [
-    "prop-nagata-proj-standard-open",
-    "lem-weil-pbc-proj-basic-open-intersection",
-    "lemma-nagata-proj-chart-ring-cocycle",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "def-nagata-relative-proj",
-    "lem-weil-pbc-affine-opens-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01MY (lemma-morphism-proj), 01MZ (lemma-morphism-proj-transitive); scheme morphism gluing as in Tag 01LH (lemma-glue-schemes)"
-   }
-  },
-  {
-   "text": "For (3), fix an affine base and the resulting degreewise-surjective graded map $\\varphi:A\\to B$ from Step 2. Every homogeneous $b\\in B_n$ has a homogeneous lift $a\\in A_n$: alternatively take any lift in $A$ and then its degree-$n$ component. For $f\\in A_d$, $d>0$, the fraction map $A_{(f),0}\\to B_{(\\varphi(f)),0}$ of Step 3 is therefore surjective: lift the numerator of $b/\\varphi(f)^m$ in degree $md$. This is valid also for zero or nilpotent denominators; no cancellation is used. These elementary fraction arguments replace the two proposed localization lemmas.",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N0 (lemma-surjective-graded-rings-map-proj), proof of (2)"
-   }
-  },
-  {
-   "text": "The opens $D_+(\\varphi(f))$, for all positive-degree homogeneous $f\\in A$, cover $\\operatorname{Proj}(B)$: lift every positive-degree homogeneous element of $B$ by Step 5 and apply [prop-nagata-proj-standard-open]. Glue their maps into the target charts $D_+(f)$ using the same overlap fraction computation as Step 4, [lemma-nagata-proj-chart-ring-cocycle] and [lem-weil-pbc-scheme-morphism-gluing]. The inverse image of a target chart $D_+(g)$ is exactly $D_+(\\varphi(g))$: on a source chart at $\\varphi(f)$, with degrees $d=\\deg f$, $e=\\deg g$, the inverse image is the principal open of $\\varphi(g)^d/\\varphi(f)^e$, by [lem-weil-pbc-proj-basic-open-intersection] and the ring-map formula. Thus the restriction over every target standard affine is the spectrum of the surjection in Step 5, hence is a closed immersion by the affine criterion in [def-weil-closed-immersion]. This implies the global closed-immersion condition in that same definition directly: the image is closed because its intersection with each target chart is closed; the map is injective because two points with the same image lie over a common chart; the chart inverse homeomorphisms glue, and the structure-sheaf map is surjective locally, hence surjective as a sheaf map. Finally use [def-nagata-relative-proj] to identify affine base restrictions. The fraction formulas commute with restriction, so the maps glue over all base affines. The identical local closed-image, inverse-homeomorphism and sheaf-surjectivity argument then proves (3) for the relative schemes.",
-   "uses": [
-    "prop-nagata-proj-standard-open",
-    "lemma-nagata-proj-chart-ring-cocycle",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "lem-weil-pbc-proj-basic-open-intersection",
     "def-weil-closed-immersion",
+    "def-weil-flat-morphism",
+    "def-pc-module-pullback",
+    "def-pc-fibre-product",
+    "def-nagata-graded-algebra-pullback-data"
+  ],
+  "proof": [
+    {
+      "text": "Write $P(\\mathcal A)=\\operatorname{Proj}_X(\\mathcal A)$, with the structural map specified in [def-nagata-relative-proj]. By [lemma-nagata-relative-proj-exists], its inverse image of every affine open $V\\subseteq X$ is canonically $\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$, and these identifications commute with further restriction and the structural maps. This is (1). In the remaining assertions work with quasi-coherent graded algebra sheaves on the specified base; their graded maps respect the base-algebra structures. Whenever two base affines overlap, compare their constructions on an affine refinement of the overlap, not by assuming their intersection affine.",
+      "uses": [
+        "def-nagata-relative-proj",
+        "lemma-nagata-relative-proj-exists",
+        "lem-weil-pbc-affine-opens-basis"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tags 01NQ (lemma-glue-relative-proj), 01NO (lemma-proj-inclusion), 01NP (lemma-transitive-proj)"
+      }
+    },
+    {
+      "text": "Here are the affine-section facts needed below, including the sheaf-surjection issue. On $V=\\operatorname{Spec}R$, [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies a quasi-coherent module $\\mathcal F$ with $\\widetilde{\\Gamma(V,\\mathcal F)}$, naturally, and tilde preserves small colimits. Each homogeneous component of a quasi-coherent graded algebra is quasi-coherent: the degree projection is an idempotent $e_n$ on its underlying module, and its image is the cokernel of $1-e_n$; naturality of the counit and preservation of this cokernel identify it with the tilde of the corresponding module cokernel. Applying preservation of the coproduct indexed by $\\mathbb N$ and then the unit isomorphism gives $\\Gamma(V,\\mathcal A)=\\bigoplus_n\\Gamma(V,\\mathcal A_n)$, with the multiplication of [def-weil-pbc-graded-sheaf-structures]. If $\\varphi:\\mathcal A\\to\\mathcal B$ is surjective as a graded sheaf map, its degree-$n$ map is surjective (take the degree-$n$ component of a local lift). Put $u_n=\\Gamma(V,\\varphi_n)$. The counit identifies $\\widetilde{u_n}$ with $\\varphi_n|_V$. Hence $\\widetilde{\\operatorname{coker}u_n}=\\operatorname{coker}(\\varphi_n|_V)=0$, by preservation of cokernels. The unit isomorphism then gives $\\operatorname{coker}u_n=0$. Thus the map on affine sections is surjective in each degree. No general exactness of sections on non-affine schemes is used.",
+      "uses": [
+        "lem-weil-pbc-affine-tilde-gamma-adjunction",
+        "def-weil-pbc-graded-sheaf-structures"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01ID (lemma-colimit-quasi-coherent), 01I7 (lemma-compare-constructions)"
+      }
+    },
+    {
+      "text": "For (2), let $\\varphi:A\\xrightarrow{\\sim}B$ be the graded equivalence on an affine base, and $f\\in A_d$, $d>0$. The fraction convention of [def-nagata-homogeneous-localization-degree-zero] gives $a/f^m\\mapsto\\varphi(a)/\\varphi(f)^m$ on degree-zero chart rings. Applying $\\varphi$ to a relation $f^k(f^n a-f^m b)=0$ preserves that relation, so the formula is well defined and is a ring homomorphism. Applying $\\varphi^{-1}$ to fractions is its inverse. By spectrum functoriality in [def-weil-affine-spectrum], these ring isomorphisms give inverse scheme maps between the corresponding affine charts.",
+      "uses": [
+        "def-nagata-homogeneous-localization-degree-zero",
+        "def-weil-affine-spectrum"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01MY (lemma-morphism-proj), fraction formula; Tag 01N0 (lemma-surjective-graded-rings-map-proj), specialization to an equivalence"
+      }
+    },
+    {
+      "text": "Use the standard-open identifications and covering of [prop-nagata-proj-standard-open]. For $f\\in A_d$, $g\\in A_e$ with $d,e>0$, [lem-weil-pbc-proj-basic-open-intersection] identifies the overlap inside the $f$ chart with $D(g^d/f^e)$. The chart homomorphism sends $g^d/f^e$ to $\\varphi(g)^d/\\varphi(f)^e$; after inverting these elements both chart formulas still send every fraction $a/t$ to $\\varphi(a)/\\varphi(t)$. They therefore agree under the transition equivalences of [lemma-nagata-proj-chart-ring-cocycle]. Glue the maps and, separately, the maps from $\\varphi^{-1}$ by [lem-weil-pbc-scheme-morphism-gluing]. Their composites restrict to identities on every chart, so uniqueness in that node makes the composites identities. On an affine refinement of any base overlap, restriction commutes with $\\varphi$ and $\\varphi^{-1}$, so the same fraction formulas agree with the restriction maps specified in [def-nagata-relative-proj]. Gluing once more over the base affines gives the asserted relative Proj isomorphism, respecting the chosen degree-zero base map.",
+      "uses": [
+        "prop-nagata-proj-standard-open",
+        "lem-weil-pbc-proj-basic-open-intersection",
+        "lemma-nagata-proj-chart-ring-cocycle",
+        "lem-weil-pbc-scheme-morphism-gluing",
+        "def-nagata-relative-proj",
+        "lem-weil-pbc-affine-opens-basis"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tags 01MY (lemma-morphism-proj), 01MZ (lemma-morphism-proj-transitive); scheme morphism gluing as in Tag 01LH (lemma-glue-schemes)"
+      }
+    },
+    {
+      "text": "For (3), fix an affine base and the resulting degreewise-surjective graded map $\\varphi:A\\to B$ from Step 2. Every homogeneous $b\\in B_n$ has a homogeneous lift $a\\in A_n$: alternatively take any lift in $A$ and then its degree-$n$ component. For $f\\in A_d$, $d>0$, the fraction map $A_{(f),0}\\to B_{(\\varphi(f)),0}$ of Step 3 is therefore surjective: lift the numerator of $b/\\varphi(f)^m$ in degree $md$. This is valid also for zero or nilpotent denominators; no cancellation is used. These elementary fraction arguments replace the two proposed localization lemmas.",
+      "uses": [
+        "def-nagata-homogeneous-localization-degree-zero"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01N0 (lemma-surjective-graded-rings-map-proj), proof of (2)"
+      }
+    },
+    {
+      "text": "The opens $D_+(\\varphi(f))$, for all positive-degree homogeneous $f\\in A$, cover $\\operatorname{Proj}(B)$: lift every positive-degree homogeneous element of $B$ by Step 5 and apply [prop-nagata-proj-standard-open]. Glue their maps into the target charts $D_+(f)$ using the same overlap fraction computation as Step 4, [lemma-nagata-proj-chart-ring-cocycle] and [lem-weil-pbc-scheme-morphism-gluing]. The inverse image of a target chart $D_+(g)$ is exactly $D_+(\\varphi(g))$: on a source chart at $\\varphi(f)$, with degrees $d=\\deg f$, $e=\\deg g$, the inverse image is the principal open of $\\varphi(g)^d/\\varphi(f)^e$, by [lem-weil-pbc-proj-basic-open-intersection] and the ring-map formula. Thus the restriction over every target standard affine is the spectrum of the surjection in Step 5, hence is a closed immersion by the affine criterion in [def-weil-closed-immersion]. This implies the global closed-immersion condition in that same definition directly: the image is closed because its intersection with each target chart is closed; the map is injective because two points with the same image lie over a common chart; the chart inverse homeomorphisms glue, and the structure-sheaf map is surjective locally, hence surjective as a sheaf map. Finally use [def-nagata-relative-proj] to identify affine base restrictions. The fraction formulas commute with restriction, so the maps glue over all base affines. The identical local closed-image, inverse-homeomorphism and sheaf-surjectivity argument then proves (3) for the relative schemes.",
+      "uses": [
+        "prop-nagata-proj-standard-open",
+        "lemma-nagata-proj-chart-ring-cocycle",
+        "lem-weil-pbc-scheme-morphism-gluing",
+        "lem-weil-pbc-proj-basic-open-intersection",
+        "def-weil-closed-immersion",
+        "def-weil-affine-spectrum",
+        "def-nagata-relative-proj"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tags 01N0 (lemma-surjective-graded-rings-map-proj), 07ZI (lemma-surjective-graded-rings-map-relative-proj); closed-immersion locality argument expanded from Morphisms Tag 01QO (lemma-closed-immersion)"
+      }
+    },
+    {
+      "text": "For (4), let $g:X'\\to X$ be the given flat morphism and choose affine opens $V=\\operatorname{Spec}R\\subseteq X$, $W=\\operatorname{Spec}S\\subseteq g^{-1}V$. Put $A=\\Gamma(V,\\mathcal A)$ and $B=\\Gamma(W,g^*\\mathcal A)$. Each pulled-back component is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Componentwise, [lem-weil-pbc-module-pullback-affine-sections] gives the isomorphism $\\Gamma(V,\\mathcal A_n)\\otimes_R S\\to\\Gamma(W,g^*\\mathcal A_n)$, $a\\otimes s\\mapsto s\\,(g^*a)|_W$. Step 2 identifies sections of the underlying sheaf direct sums with the direct sums of these modules. The tensor direct-sum comparison is given by the mutually inverse maps induced by the inclusions and degree projections; each tensor involves finitely many homogeneous components. Swap factors by $s\\otimes a\\leftrightarrow a\\otimes s$ to obtain a graded $S$-algebra isomorphism $\\beta:S\\otimes_R A\\xrightarrow{\\sim}B$, $s\\otimes a\\mapsto s\\,(g^*a)|_W$. It is multiplicative and unital since pullback of the algebra structure in [def-weil-pbc-graded-sheaf-structures] gives $(s g^*a)(t g^*b)=st g^*(ab)$ and $g^*1=1$. Neither this comparison nor quasi-coherence requires flatness.",
+      "uses": [
+        "lem-weil-pbc-module-pullback-quasi-coherent",
+        "lem-weil-pbc-module-pullback-affine-sections",
+        "lem-weil-pbc-affine-tilde-gamma-adjunction",
+        "def-weil-pbc-graded-sheaf-structures"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Tag 01I9 (lemma-widetilde-pullback), Tag 01IB (lemma-equivalence-quasi-coherent); pullback quasi-coherence as in Tag 01LA (section-quasi-coherent)"
+      }
+    },
+    {
+      "text": "Apply [lem-nagata-affine-proj-scalar-extension] to $R\\to S$, $A$, $B$ and $\\beta$. Its cartesian square, with the specified degree-zero structural maps, gives a canonical isomorphism $\\operatorname{Proj}(B)\\xrightarrow{\\sim}W\\times_V\\operatorname{Proj}(A)$ by the uniqueness of an object with the fibre-product universal property [def-pc-fibre-product]. It also supplies the covering by the image denominators and the fraction formula for the map to $\\operatorname{Proj}(A)$. In the chart at $f\\in A_d$, the algebra isomorphism is exactly that of [lem-nagata-homogeneous-localization-scalar-extension], followed by $\\beta$: $s\\otimes(a/f^m)\\mapsto s\\,(g^*a)/(g^*f)^m$. With the tensor factors reversed this reads $(a/f^m)\\otimes s\\mapsto s\\,(g^*a)/(g^*f)^m$. This corrects the factor-order ambiguity in the imported formula. Under the restriction identifications of [def-nagata-relative-proj], the target is the restriction to $W$ of $T=X'\\times_X P(\\mathcal A)$: maps to either fibre product are precisely pairs with the same map to $V$, since $W\\to X$ factors through $V$. Thus we have inverse local isomorphisms between $P(g^*\\mathcal A)|_W$ and $T|_W$.",
+      "uses": [
+        "lem-nagata-affine-proj-scalar-extension",
+        "lem-nagata-homogeneous-localization-scalar-extension",
+        "def-pc-fibre-product",
+        "def-nagata-relative-proj"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tags 01N2 (lemma-base-change-map-proj), 01O3 (lemma-relative-proj-base-change), including the chart formula"
+      }
+    },
+    {
+      "text": "Compare the local maps of Step 8 on base overlaps. At a point of $W_1\\cap W_2$, choose an affine neighbourhood $V_0\\subseteq V_1\\cap V_2$ of its image and then an affine $W_0\\subseteq W_1\\cap W_2\\cap g^{-1}V_0$, using [lem-weil-pbc-affine-opens-basis]. The restriction maps of [def-nagata-relative-proj] are the coefficientwise localized maps. Each of the two maps to $P(\\mathcal A)$ on this refinement sends $a/f^m$ to $(g^*a)|_{W_0}/((g^*f)|_{W_0})^m$. On a further chart intersection, localizing the equality sends $u/v^k$ to the image of $u$ divided by the $k$th power of the image of $v$ in either order. Hence the maps agree on chart intersections under [lemma-nagata-proj-chart-ring-cocycle], not merely on generators before localization. They have the same structural map to $X'$, so the fibre-product universal property [def-pc-fibre-product] makes their maps to $T$ equal. Glue these maps by [lem-weil-pbc-scheme-morphism-gluing]. Their local inverses agree because each is inverse to the same isomorphism on the overlap; glue those inverses as well. Both composites are the identity on the open cover indexed by $W$, and uniqueness of gluing proves they are the global identities. This proves the canonical isomorphism in (4). The argument actually works without flatness, but the statement is left unchanged; the separate arbitrary-base-change interface is not used here.",
+      "uses": [
+        "lem-weil-pbc-affine-opens-basis",
+        "def-nagata-relative-proj",
+        "lemma-nagata-proj-chart-ring-cocycle",
+        "def-pc-fibre-product",
+        "lem-weil-pbc-scheme-morphism-gluing"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01O3 (lemma-relative-proj-base-change), omitted compatibility details expanded with Tags 01N2 (lemma-base-change-map-proj), 01NP (lemma-transitive-proj), 01LH (lemma-glue-schemes)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-nagata-relative-proj",
+    "def-pc-fibre-product",
     "def-weil-affine-spectrum",
-    "def-nagata-relative-proj"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N0 (lemma-surjective-graded-rings-map-proj), 07ZI (lemma-surjective-graded-rings-map-relative-proj); closed-immersion locality argument expanded from Morphisms Tag 01QO (lemma-closed-immersion)"
-   }
-  },
-  {
-   "text": "For (4), let $g:X'\\to X$ be the given flat morphism and choose affine opens $V=\\operatorname{Spec}R\\subseteq X$, $W=\\operatorname{Spec}S\\subseteq g^{-1}V$. Put $A=\\Gamma(V,\\mathcal A)$ and $B=\\Gamma(W,g^*\\mathcal A)$. Each pulled-back component is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Componentwise, [lem-weil-pbc-module-pullback-affine-sections] gives the isomorphism $\\Gamma(V,\\mathcal A_n)\\otimes_R S\\to\\Gamma(W,g^*\\mathcal A_n)$, $a\\otimes s\\mapsto s\\,(g^*a)|_W$. Step 2 identifies sections of the underlying sheaf direct sums with the direct sums of these modules. The tensor direct-sum comparison is given by the mutually inverse maps induced by the inclusions and degree projections; each tensor involves finitely many homogeneous components. Swap factors by $s\\otimes a\\leftrightarrow a\\otimes s$ to obtain a graded $S$-algebra isomorphism $\\beta:S\\otimes_R A\\xrightarrow{\\sim}B$, $s\\otimes a\\mapsto s\\,(g^*a)|_W$. It is multiplicative and unital since pullback of the algebra structure in [def-weil-pbc-graded-sheaf-structures] gives $(s g^*a)(t g^*b)=st g^*(ab)$ and $g^*1=1$. Neither this comparison nor quasi-coherence requires flatness.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-graded-sheaf-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01I9 (lemma-widetilde-pullback), Tag 01IB (lemma-equivalence-quasi-coherent); pullback quasi-coherence as in Tag 01LA (section-quasi-coherent)"
-   }
-  },
-  {
-   "text": "Apply [lem-nagata-affine-proj-scalar-extension] to $R\\to S$, $A$, $B$ and $\\beta$. Its cartesian square, with the specified degree-zero structural maps, gives a canonical isomorphism $\\operatorname{Proj}(B)\\xrightarrow{\\sim}W\\times_V\\operatorname{Proj}(A)$ by the uniqueness of an object with the fibre-product universal property [def-pc-fibre-product]. It also supplies the covering by the image denominators and the fraction formula for the map to $\\operatorname{Proj}(A)$. In the chart at $f\\in A_d$, the algebra isomorphism is exactly that of [lem-nagata-homogeneous-localization-scalar-extension], followed by $\\beta$: $s\\otimes(a/f^m)\\mapsto s\\,(g^*a)/(g^*f)^m$. With the tensor factors reversed this reads $(a/f^m)\\otimes s\\mapsto s\\,(g^*a)/(g^*f)^m$. This corrects the factor-order ambiguity in the imported formula. Under the restriction identifications of [def-nagata-relative-proj], the target is the restriction to $W$ of $T=X'\\times_X P(\\mathcal A)$: maps to either fibre product are precisely pairs with the same map to $V$, since $W\\to X$ factors through $V$. Thus we have inverse local isomorphisms between $P(g^*\\mathcal A)|_W$ and $T|_W$.",
-   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-graded-sheaf-structures",
     "lem-nagata-affine-proj-scalar-extension",
     "lem-nagata-homogeneous-localization-scalar-extension",
-    "def-pc-fibre-product",
-    "def-nagata-relative-proj"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N2 (lemma-base-change-map-proj), 01O3 (lemma-relative-proj-base-change), including the chart formula"
-   }
-  },
-  {
-   "text": "Compare the local maps of Step 8 on base overlaps. At a point of $W_1\\cap W_2$, choose an affine neighbourhood $V_0\\subseteq V_1\\cap V_2$ of its image and then an affine $W_0\\subseteq W_1\\cap W_2\\cap g^{-1}V_0$, using [lem-weil-pbc-affine-opens-basis]. The restriction maps of [def-nagata-relative-proj] are the coefficientwise localized maps. Each of the two maps to $P(\\mathcal A)$ on this refinement sends $a/f^m$ to $(g^*a)|_{W_0}/((g^*f)|_{W_0})^m$. On a further chart intersection, localizing the equality sends $u/v^k$ to the image of $u$ divided by the $k$th power of the image of $v$ in either order. Hence the maps agree on chart intersections under [lemma-nagata-proj-chart-ring-cocycle], not merely on generators before localization. They have the same structural map to $X'$, so the fibre-product universal property [def-pc-fibre-product] makes their maps to $T$ equal. Glue these maps by [lem-weil-pbc-scheme-morphism-gluing]. Their local inverses agree because each is inverse to the same isomorphism on the overlap; glue those inverses as well. Both composites are the identity on the open cover indexed by $W$, and uniqueness of gluing proves they are the global identities. This proves the canonical isomorphism in (4). The argument actually works without flatness, but the statement is left unchanged; the separate arbitrary-base-change interface is not used here.",
-   "uses": [
     "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lemma-nagata-proj-chart-ring-cocycle",
+    "lemma-nagata-relative-proj-exists",
+    "prop-nagata-proj-standard-open"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-relative-proj-functoriality.md",
+    "place": "Proof, both paragraphs; expanded against Stacks Tags 01MY, 01N0, 01N2, 01NQ, 01O3 and 07ZI"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "relative Proj of graded quasi coherent algebra sheaves restriction isomorphism surjection closed immersion base change",
+      "results": "Absolute Proj.fromOfGlobalSections, pullbackAwayιIso and their restriction/overlap lemmas; none constructs relative Proj of a sheaf of graded algebras.",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Proj",
+      "results": "Proj, affineOpenCover, basicOpenIsoSpec, awayι and toSpecZero: absolute graded-ring Proj/chart API, not all four relative assertions.",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "RelativeProj|relative.?[Pp]roj|baseChange|surjective",
+      "results": "15 hits: absolute Proj chart surjectivity and Proj properness proof using an affine Spec closed-immersion criterion; no relative sheaf-algebra functoriality theorem.",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "relative projective spectrum commutes with base change",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-15",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A morphism of sheaves of graded algebras induces a morphism of relative projective spectra; scalar extension commutes with projective spectrum",
+      "results": "Proj.awayι_toSpecZero, ProjectiveSpectrum.Proj.toSpec, pullbackAwayιIso transition lemmas and fromOfGlobalSections: ring-level chart statements only.",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "Proj|fromOfGlobalSections",
+      "results": "Functor.lean lines 9,12,19,31,33: absolute Proj functoriality. Read the source, which constructs comap from a graded ring map with irrelevant-ideal containment, not relative Proj from a sheaf.",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "bypassed"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 44,
+  "blueprint_uses": [
     "def-nagata-relative-proj",
     "lemma-nagata-proj-chart-ring-cocycle",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O3 (lemma-relative-proj-base-change), omitted compatibility details expanded with Tags 01N2 (lemma-base-change-map-proj), 01NP (lemma-transitive-proj), 01LH (lemma-glue-schemes)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-nagata-homogeneous-localization-degree-zero",
-  "def-nagata-relative-proj",
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-graded-sheaf-structures",
-  "lem-nagata-affine-proj-scalar-extension",
-  "lem-nagata-homogeneous-localization-scalar-extension",
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lemma-nagata-proj-chart-ring-cocycle",
-  "lemma-nagata-relative-proj-exists",
-  "prop-nagata-proj-standard-open"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/prop-nagata-relative-proj-functoriality.md",
-  "place": "Proof, both paragraphs; expanded against Stacks Tags 01MY, 01N0, 01N2, 01NQ, 01O3 and 07ZI"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "relative Proj of graded quasi coherent algebra sheaves restriction isomorphism surjection closed immersion base change",
-   "results": "Absolute Proj.fromOfGlobalSections, pullbackAwayιIso and their restriction/overlap lemmas; none constructs relative Proj of a sheaf of graded algebras.",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Proj",
-   "results": "Proj, affineOpenCover, basicOpenIsoSpec, awayι and toSpecZero: absolute graded-ring Proj/chart API, not all four relative assertions.",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "RelativeProj|relative.?[Pp]roj|baseChange|surjective",
-   "results": "15 hits: absolute Proj chart surjectivity and Proj properness proof using an affine Spec closed-immersion criterion; no relative sheaf-algebra functoriality theorem.",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "relative projective spectrum commutes with base change",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-15",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A morphism of sheaves of graded algebras induces a morphism of relative projective spectra; scalar extension commutes with projective spectrum",
-   "results": "Proj.awayι_toSpecZero, ProjectiveSpectrum.Proj.toSpec, pullbackAwayιIso transition lemmas and fromOfGlobalSections: ring-level chart statements only.",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Proj|fromOfGlobalSections",
-   "results": "Functor.lean lines 9,12,19,31,33: absolute Proj functoriality. Read the source, which constructs comap from a graded ring map with irrelevant-ideal containment, not relative Proj from a sheaf.",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "bypassed"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 44,
- "blueprint_uses": [
-  "def-nagata-relative-proj",
-  "lemma-nagata-proj-chart-ring-cocycle",
-  "lemma-nagata-relative-proj-exists"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "uses_not_cited": [
-  "def-nagata-relative-proj",
-  "lemma-nagata-proj-chart-ring-cocycle"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_notes": [
-  {
-   "label": "status",
-   "text": "**Status.** Bypassed by the formalized route: no separate relative-Proj\nprimitive was formalized. The blow-up is glued from the affine Proj charts\n(`AlgebraicGeometry.Proj.basicOpenIsoSpec`,\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`) with\n`AlgebraicGeometry.Scheme.Cover.RelativeGluingData`.",
-   "where": "statement"
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed_part",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChange",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Affine",
-     "lines": [
-      93,
-      116
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case"
-    },
-    {
-     "name": "AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChangeAlong",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Affine",
-     "lines": [
-      190,
-      199
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange",
-     "lines": [
-      153,
-      174
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange",
-     "lines": [
-      176,
-      180
-     ],
-     "kind": "def",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
-     "lines": [
-      77,
-      87
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 1;"
-    },
-    {
-     "name": "GradedRingHom.IsGradedBaseChange.isPushout_away",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.ChartBaseChange",
-     "lines": [
-      270,
-      279
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 4, chart identification"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
-     "lines": [
-      77,
-      85
-     ],
-     "kind": "def",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, items 2, 3"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
-     "lines": [
-      119,
-      136
-     ],
-     "kind": "def",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 2"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
-     "lines": [
-      147,
-      158
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 3"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackDataOfIsAffine",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine",
-     "lines": [
-      244,
-      251
-     ],
-     "kind": "def",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_pullbackOfIsAffine",
-     "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine",
-     "lines": [
-      253,
-      259
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-nagata-compactification",
- "unit": "sk-def-nagata-sketch-data",
- "split_report": {
-  "date": "2026-10-15",
-  "item": "prop-nagata-relative-proj-functoriality",
-  "worker": "stage1",
-  "summary": "Replaced the inherited five-step sketch and two unnecessary proposed localization nodes with explicit fraction arguments. Reused the existing relative construction/existence, affine tilde-section correspondence, pullback sections and scalar-extension nodes. Wrote inverse gluing, inverse-image chart and closed-immersion locality arguments, tensor symmetry and base-overlap compatibility. No statement change, new nodes, or Lean work.",
-  "blueprint": "First proof paragraph: Step 1 realizes affine restriction; Steps 2–4 realize graded equivalence and inverse gluing; Steps 2,5,6 realize graded surjection and the closed immersion. Both base-change paragraphs: Steps 7–9 realize the coefficientwise tensor comparison, existing affine scalar-extension calculation, and compatible gluing. The unit has no proof steps and this item is not its key definition.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "why": "Generic affine quasi-coherent module correspondence and colimit preservation, used to identify homogeneous affine sections and lift a graded sheaf surjection; no statement in this unit supplies these module facts."
-   },
-   {
-    "node": "lem-weil-pbc-module-pullback-affine-sections",
-    "why": "Generic tensor formula for affine sections of a pulled-back quasi-coherent module; applied coefficientwise, not a replacement of the Proj route."
-   },
-   {
-    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
-    "why": "Generic preservation of quasi-coherence by module pullback ensures the pulled-back graded algebra is an input to relative Proj."
-   },
-   {
-    "node": "lem-weil-pbc-proj-basic-open-intersection",
-    "why": "Generic identification of a Proj chart intersection with a principal affine open, used to prove the inverse-image chart equality; the cocycle node alone does not give this principal-open formula."
-   },
-   {
-    "node": "lem-weil-pbc-affine-opens-basis",
-    "why": "Generic affine refinement of base intersections; no assumption that intersections of affines are affine is made."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-affine-opens-basis"
- ],
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-NQ-4952f97a3",
-  "group": "NQ",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4952f97a3 (reviewer sub-agent of L); spot-checked: L full nine-step review: Stacks 01MY/01N0/01N2/01NQ/01O3/07ZI, homogeneous surjectivity, inverse gluing, local closed immersion, coefficient tensor and overlap compatibility; incoming finite-coordinate tool approved; no new nodes."
- },
- "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
-  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjMap",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap_relProjHom",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso_hom_relProjHom",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjComparison",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjι_relProjComparison",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_fst",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_snd"
+    "lemma-nagata-relative-proj-exists"
   ],
-  "statement": "theorem isClosedImmersion_relProjMap (hsurj : ∀ U, Function.Surjective (f.app U)) :\n    IsClosedImmersion (relProjMap f (irrelevantLE_of_surjective f hsurj))",
-  "branch": "slopmaster2",
-  "by": "NE",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "The four clauses are supplied jointly by existing upstream declarations, not by the primary theorem alone. Basic supplies canonical affine restriction with naturality; Functoriality supplies the contravariant canonical map, its over-base equation, the isomorphism induced by a graded algebra isomorphism, and closed immersion for affine-section surjections; BaseChange supplies the canonical comparison and its fibre-product isomorphism for PullbackData (in particular for flat g). The homogeneous components are quasi-coherent, so sheaf surjectivity is equivalent to surjectivity on affine sections as detailed in proof Step 2. The added pullback-data definition node records the BaseChange module. All sources were read through scompile.py --source because the older local checkout lacks these modules."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-7d70ae2ca",
-  "group": "NE",
-  "result": "pass",
-  "note": "Wrote review.md. Checked all clauses, dependencies, upstream definitions, source locations, records, docstrings and edge cases. Fresh scompile.py checks passed without warnings. No delivery errors or fixes needed; branch unchanged."
- }
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "uses_not_cited": [
+    "def-nagata-relative-proj",
+    "lemma-nagata-proj-chart-ring-cocycle"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_notes": [
+    {
+      "label": "status",
+      "text": "**Status.** Bypassed by the formalized route: no separate relative-Proj\nprimitive was formalized. The blow-up is glued from the affine Proj charts\n(`AlgebraicGeometry.Proj.basicOpenIsoSpec`,\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`) with\n`AlgebraicGeometry.Scheme.Cover.RelativeGluingData`.",
+      "where": "statement"
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed_part",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChange",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Affine",
+          "lines": [
+            93,
+            116
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case"
+        },
+        {
+          "name": "AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChangeAlong",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Affine",
+          "lines": [
+            190,
+            199
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange",
+          "lines": [
+            153,
+            174
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange",
+          "lines": [
+            176,
+            180
+          ],
+          "kind": "def",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+          "lines": [
+            77,
+            87
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 1;"
+        },
+        {
+          "name": "GradedRingHom.IsGradedBaseChange.isPushout_away",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.ChartBaseChange",
+          "lines": [
+            270,
+            279
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 4, chart identification"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
+          "lines": [
+            77,
+            85
+          ],
+          "kind": "def",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, items 2, 3"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
+          "lines": [
+            119,
+            136
+          ],
+          "kind": "def",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 2"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
+          "lines": [
+            147,
+            158
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 3"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackDataOfIsAffine",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine",
+          "lines": [
+            244,
+            251
+          ],
+          "kind": "def",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_pullbackOfIsAffine",
+          "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine",
+          "lines": [
+            253,
+            259
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`prop-nagata-relative-proj-functoriality`, item 4"
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-nagata-compactification",
+  "unit": "sk-def-nagata-sketch-data",
+  "split_report": {
+    "date": "2026-10-15",
+    "item": "prop-nagata-relative-proj-functoriality",
+    "worker": "stage1",
+    "summary": "Replaced the inherited five-step sketch and two unnecessary proposed localization nodes with explicit fraction arguments. Reused the existing relative construction/existence, affine tilde-section correspondence, pullback sections and scalar-extension nodes. Wrote inverse gluing, inverse-image chart and closed-immersion locality arguments, tensor symmetry and base-overlap compatibility. No statement change, new nodes, or Lean work.",
+    "blueprint": "First proof paragraph: Step 1 realizes affine restriction; Steps 2–4 realize graded equivalence and inverse gluing; Steps 2,5,6 realize graded surjection and the closed immersion. Both base-change paragraphs: Steps 7–9 realize the coefficientwise tensor comparison, existing affine scalar-extension calculation, and compatible gluing. The unit has no proof steps and this item is not its key definition.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+        "why": "Generic affine quasi-coherent module correspondence and colimit preservation, used to identify homogeneous affine sections and lift a graded sheaf surjection; no statement in this unit supplies these module facts."
+      },
+      {
+        "node": "lem-weil-pbc-module-pullback-affine-sections",
+        "why": "Generic tensor formula for affine sections of a pulled-back quasi-coherent module; applied coefficientwise, not a replacement of the Proj route."
+      },
+      {
+        "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+        "why": "Generic preservation of quasi-coherence by module pullback ensures the pulled-back graded algebra is an input to relative Proj."
+      },
+      {
+        "node": "lem-weil-pbc-proj-basic-open-intersection",
+        "why": "Generic identification of a Proj chart intersection with a principal affine open, used to prove the inverse-image chart equality; the cocycle node alone does not give this principal-open formula."
+      },
+      {
+        "node": "lem-weil-pbc-affine-opens-basis",
+        "why": "Generic affine refinement of base intersections; no assumption that intersections of affines are affine is made."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-affine-opens-basis"
+  ],
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-NQ-4952f97a3",
+    "group": "NQ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4952f97a3 (reviewer sub-agent of L); spot-checked: L full nine-step review: Stacks 01MY/01N0/01N2/01NQ/01O3/07ZI, homogeneous surjectivity, inverse gluing, local closed immersion, coefficient tensor and overlap compatibility; incoming finite-coordinate tool approved; no new nodes."
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality",
+    "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjι",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.isPullback_relProjFunctor_map",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjMap",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjMap_relProjHom",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIso_hom_relProjHom",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.isClosedImmersion_relProjMap",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjComparison",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjι_relProjComparison",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_fst",
+      "AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback_hom_snd"
+    ],
+    "statement": "theorem isClosedImmersion_relProjMap (hsurj : ∀ U, Function.Surjective (f.app U)) :\n    IsClosedImmersion (relProjMap f (irrelevantLE_of_surjective f hsurj))",
+    "branch": "slopmaster2",
+    "by": "NE",
+    "date": "2026-10-15",
+    "existing": true,
+    "note": "The four clauses are supplied jointly by existing upstream declarations, not by the primary theorem alone. Basic supplies canonical affine restriction with naturality; Functoriality supplies the contravariant canonical map, its over-base equation, the isomorphism induced by a graded algebra isomorphism, and closed immersion for affine-section surjections; BaseChange supplies the canonical comparison and its fibre-product isomorphism for PullbackData (in particular for flat g). The homogeneous components are quasi-coherent, so sheaf surjectivity is equivalent to surjectivity on affine sections as detailed in proof Step 2. The added pullback-data definition node records the BaseChange module. All sources were read through scompile.py --source because the older local checkout lacks these modules."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-7d70ae2ca",
+    "group": "NE",
+    "result": "pass",
+    "note": "Wrote review.md. Checked all clauses, dependencies, upstream definitions, source locations, records, docstrings and edge cases. Fresh scompile.py checks passed without warnings. No delivery errors or fixes needed; branch unchanged."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Relative Proj has the following properties.\n\n1. Its restriction to an affine open $V$ is canonically\n$\\operatorname{Proj}(\\Gamma(V,\\mathcal A))$, compatibly on iterated\nrestrictions.\n1. A degree-preserving equivalence of graded algebras inducing the\nchosen degree-zero base identification induces an isomorphism of Proj.\n1. A surjective degree-preserving morphism of graded algebras induces\na closed immersion in the opposite direction on Proj.\n1. If $g\\colon X'\\to X$ is flat, then coefficientwise pullback gives a\ncanonical base-change isomorphism\n$$\n\\operatorname{Proj}_{X'}(g^*\\mathcal A)\n\\cong X'\\times_X\\operatorname{Proj}_X(\\mathcal A).\n$$",
+    "proof": [
+      {
+        "text": "For (1), use the restriction isomorphism in\n[lemma-nagata-relative-proj-exists]; transitivity of coefficientwise\nlocalization gives the iterated-restriction equality. For (2), on an affine\nchart the graded equivalence carries each homogeneous denominator to a\nhomogeneous denominator and induces an isomorphism of the corresponding\ndegree-zero localizations, hence an isomorphism of standard affine opens.\nThese maps agree on overlaps by the localization cocycle and glue uniquely.\nFor (3), a surjection has surjective maps on every homogeneous localization;\nthe induced maps on degree-zero rings give closed immersions of all standard\naffine opens, which glue to the asserted closed immersion. Finally, for\n(4), on $V=\\operatorname{Spec}(A)\\subseteq X$, put\n$C=\\Gamma(V,\\mathcal A)$, and on\n$V'=\\operatorname{Spec}(B)\\subseteq X'$ over $V$, the chart at a\nhomogeneous $f$ is identified on both sides using\n\n$$\n(C_{(f),0})\\otimes_A B\n\\xrightarrow{\\sim}(B\\otimes_A C)_{(f\\otimes1),0},\n\\qquad (x/f^m)\\otimes b\\longmapsto (x\\otimes b)/(f\\otimes1)^m .\n$$",
+        "uses": [
+          "lemma-nagata-relative-proj-exists"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "To justify this without a hidden cancellation argument, identify the\ndegree-zero homogeneous localization with the filtered colimit\n$\\varinjlim_m C_{md}$ whose transition map is multiplication by $f$.\nTensor product commutes with this filtered colimit, giving the displayed\nisomorphism (in fact without using flatness). On pure fractions its inverse\nsends $(x\\otimes b)/(f\\otimes1)^m$ to $(x/f^m)\\otimes b$. It is compatible\nwith further localization, so the chart isomorphisms glue, and their\nstructural maps identify the glued schemes over $X$. This proves all four\nassertions.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

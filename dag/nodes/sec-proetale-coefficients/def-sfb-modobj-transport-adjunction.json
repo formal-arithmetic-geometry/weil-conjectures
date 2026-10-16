@@ -1,0 +1,59 @@
+{
+  "id": "def-sfb-modobj-transport-adjunction",
+  "kind": "definition",
+  "title": "Monoidal adjunctions lift to module objects",
+  "statement": "Let $F\\colon\\mathcal C\\rightleftarrows\\mathcal D\\colon G$ be a monoidal adjunction\n$F\\dashv G$. That is, $F$ is strong monoidal, $G$ is lax monoidal, and the lax structure\nof $G$ is the mate of the monoidal structure of $F$. Let $\\mathcal R$ be a monoid object\nof $\\mathcal C$. The unit $u_{\\mathcal R}\\colon\\mathcal R\\to GF\\mathcal R$ is a morphism of\nmonoid objects, for the structure on $GF\\mathcal R$ transported along $F$ and then $G$\n([def-sfb-modobj-transport]). There is an adjunction\n$$\n\\operatorname{mapMod}(F)\\dashv\\operatorname{Res}_{u_{\\mathcal R}}\\circ\\operatorname{mapMod}(G)\n\\colon\\Mod_{F\\mathcal R}(\\mathcal D)\\to\\Mod_{\\mathcal R}(\\mathcal C),\n$$\nwith $\\operatorname{Res}$ as in [def-sfb-modobj-restriction]. On morphisms it is the\nadjunction bijection of $F\\dashv G$: an $F\\mathcal R$-linear map $FM\\to N$ corresponds to an\n$\\mathcal R$-linear map $M\\to GN$, where $\\mathcal R$ acts on $GN$ through $u_{\\mathcal R}$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.md",
+    "place": "node def-sfb-modobj-transport-adjunction, order 1599"
+  },
+  "stmt_deps": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
+  ],
+  "proof": [
+    {
+      "text": "For a monoidal adjunction the unit $u\\colon\\mathrm{id}\\to GF$ is a monoidal natural\ntransformation, and the components of a monoidal natural transformation at a monoid object\nare morphisms of monoid objects.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Let $\\varphi\\colon FM\\to N$ correspond to $\\psi=G(\\varphi)u_M\\colon M\\to GN$. Write\n$\\delta=(\\mu^F)^{-1}$. Linearity of $\\varphi$ reads\n$\\varphi\\circ F(\\gamma_M)=\\gamma_N(F\\mathcal R\\otimes\\varphi)\\delta_{\\mathcal R,M}$. Since\n$u$ is monoidal, $G(\\delta_{\\mathcal R,M})u_{\\mathcal R\\otimes M}\n=\\mu^G_{F\\mathcal R,FM}(u_{\\mathcal R}\\otimes u_M)$. Hence, by naturality of $u$ and\n$\\mu^G$,\n$$\n\\psi\\gamma_M=G(\\varphi F\\gamma_M)u_{\\mathcal R\\otimes M}\n=G(\\gamma_N)\\mu^G_{F\\mathcal R,N}(u_{\\mathcal R}\\otimes\\psi).\n$$\nThe right side is the action of $\\mathcal R$ on $GN$ through $u_{\\mathcal R}$\n([def-sfb-modobj-restriction], [def-sfb-modobj-transport]), applied after\n$\\mathcal R\\otimes\\psi$. So $\\psi$ is $\\mathcal R$-linear. The converse is the same\ncomputation with the counit. Naturality of the bijection is inherited from $F\\dashv G$.",
+      "uses": [
+        "def-sfb-modobj-restriction",
+        "def-sfb-modobj-transport"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-transport"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1599,
+  "blueprint_uses": [
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-transport"
+  ],
+  "blueprint_lean": [
+    "CategoryTheory.Adjunction.mapModAdjunction"
+  ],
+  "blueprint_lean_not_found": [
+    "CategoryTheory.Adjunction.mapModAdjunction"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

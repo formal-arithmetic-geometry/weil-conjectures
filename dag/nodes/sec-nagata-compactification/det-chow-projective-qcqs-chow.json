@@ -1,0 +1,77 @@
+{
+  "id": "det-chow-projective-qcqs-chow",
+  "kind": "statement",
+  "title": "Chow's lemma over a qcqs base",
+  "statement": "Let $S$ be quasi-compact and quasi-separated and let $f:X\\to S$ be separated\nand of finite type. Then there are a finite set $N$, a scheme $\\widetilde X$,\na proper surjective morphism $\\pi:\\widetilde X\\to X$ and an immersion\n$i_S:\\widetilde X\\to\\mathbf P^N_S$ such that $q_S\\circ i_S=f\\circ\\pi$, where\n$q_S:\\mathbf P^N_S\\to S$ is the projection.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-chow-projective/det-chow-projective-qcqs-chow.md",
+    "place": "node det-chow-projective-qcqs-chow, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 1: envelope.* By [prop-nagata-finite-type-closed-in-fp] there is a\nclosed immersion $e:X\\hookrightarrow X_0$ over $S$ with $f_0:X_0\\to S$\nseparated and of finite presentation.",
+      "uses": [
+        "prop-nagata-finite-type-closed-in-fp"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: Noetherian model.* By [prop-nagata-noetherian-inverse-system],\n$S=\\varprojlim_\\lambda S_\\lambda$ for a cofiltered system of schemes of finite\ntype over $\\mathbf Z$ (hence Noetherian) with affine transition maps. By\n[lemma-nagata-separated-eventually] there are an index $\\lambda$ and a\nseparated morphism of finite presentation $f_\\lambda:X_\\lambda\\to S_\\lambda$\nwith $X_0\\cong X_\\lambda\\times_{S_\\lambda}S$ over $S$. Since $S_\\lambda$ is\nNoetherian, $f_\\lambda$ is separated of finite type over a Noetherian base.",
+      "uses": [
+        "prop-nagata-noetherian-inverse-system",
+        "lemma-nagata-separated-eventually"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: Noetherian Chow.* By [thm-chow-lemma] applied to $f_\\lambda$, there\nare a finite set $N$, a proper surjective\n$\\pi_\\lambda:\\widetilde X_\\lambda\\to X_\\lambda$ and an immersion\n$i_\\lambda:\\widetilde X_\\lambda\\to\\mathbf P^N_{S_\\lambda}$ with\n$q_{S_\\lambda}i_\\lambda=f_\\lambda\\pi_\\lambda$.",
+      "uses": [
+        "thm-chow-lemma"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: base change to $S$.* Put\n$\\widetilde X_0=\\widetilde X_\\lambda\\times_{S_\\lambda}S$. The base change\n$\\pi_0:\\widetilde X_0\\to X_\\lambda\\times_{S_\\lambda}S\\cong X_0$ of\n$\\pi_\\lambda$ is proper and surjective, these properties being stable under\nbase change. The base change $i_0:\\widetilde X_0\\to\n\\mathbf P^N_{S_\\lambda}\\times_{S_\\lambda}S=\\mathbf P^N_S$\n([def-nagata-projective-space-base-change]) of $i_\\lambda$ is an immersion,\nand $q_Si_0=f_0\\pi_0$.",
+      "uses": [
+        "def-nagata-projective-space-base-change"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 5: restriction to $X$.* Put $\\widetilde X=\\widetilde X_0\\times_{X_0}X$\nwith projections $\\pi:\\widetilde X\\to X$ and $e':\\widetilde X\\to\n\\widetilde X_0$. Then $\\pi$ is the base change of $\\pi_0$ along $e$, hence\nproper and surjective, and $e'$ is the base change of the closed immersion\n$e$, hence a closed immersion. The composite $i_S=i_0\\circ e'$ is a closed\nimmersion followed by an immersion, hence an immersion, and\n$q_Si_S=q_Si_0e'=f_0\\pi_0e'=f_0e\\pi=f\\pi$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "prop-nagata-finite-type-closed-in-fp",
+    "prop-nagata-noetherian-inverse-system",
+    "lemma-nagata-separated-eventually",
+    "thm-chow-lemma",
+    "def-nagata-projective-space-base-change"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-chow-projective/det-chow-projective-qcqs-chow.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-chow-lemma",
+    "prop-nagata-finite-type-closed-in-fp",
+    "prop-nagata-noetherian-inverse-system",
+    "lemma-nagata-separated-eventually"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

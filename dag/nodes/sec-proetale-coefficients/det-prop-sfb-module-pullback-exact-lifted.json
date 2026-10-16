@@ -1,0 +1,68 @@
+{
+  "id": "det-prop-sfb-module-pullback-exact-lifted",
+  "kind": "statement",
+  "title": "Lifts of exact functors to module objects are exact",
+  "statement": "Let $\\mathcal C$ and $\\mathcal D$ be abelian monoidal categories whose tensor products are additive in\neach variable. Let $\\mathcal R$ be a monoid object of $\\mathcal C$ and $\\mathcal S$ a monoid object of\n$\\mathcal D$ such that $\\mathcal R\\otimes-$ and $\\mathcal S\\otimes-$ are right exact, so that\n$\\Mod_{\\mathcal R}(\\mathcal C)$ and $\\Mod_{\\mathcal S}(\\mathcal D)$ are abelian\n([lem-sfb-modobj-abelian]); write $U_{\\mathcal R}$, $U_{\\mathcal S}$ for the forgetful functors. Let\n$F\\colon\\mathcal C\\to\\mathcal D$ be an additive exact functor and\n$G\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal D)$ a functor with\n$U_{\\mathcal S}\\circ G=F\\circ U_{\\mathcal R}$. Then $G$ is additive and exact; in particular it preserves\nfinite limits and finite colimits.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.md",
+    "place": "node det-prop-sfb-module-pullback-exact-lifted, order None"
+  },
+  "stmt_deps": [
+    "lem-sfb-modobj-abelian"
+  ],
+  "proof": [
+    {
+      "text": "**Additivity.** The abelian group structure on Hom-sets of module objects is that of the\nunderlying Hom-sets (sums of module maps are module maps because $\\otimes$ is additive), so the\nforgetful functors are additive. For module maps $a,b$,\n$U_{\\mathcal S}G(a+b)=F(U_{\\mathcal R}a+U_{\\mathcal R}b)=U_{\\mathcal S}(Ga+Gb)$, and $U_{\\mathcal S}$ is\nfaithful ([lem-sfb-modobj-forget-faithful]), so $G(a+b)=Ga+Gb$.",
+      "uses": [
+        "lem-sfb-modobj-forget-faithful"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "**$U_{\\mathcal S}$ reflects kernels.** Let $\\varphi\\colon M\\to N$ and $\\kappa\\colon K\\to M$ be morphisms\nof $\\mathcal S$-modules with $\\varphi\\kappa=0$ such that $U\\kappa$ is a kernel of $U\\varphi$ in\n$\\mathcal D$. If $\\psi\\colon P\\to M$ is a module map with $\\varphi\\psi=0$, there is a unique $u$ in\n$\\mathcal D$ with $\\kappa u=\\psi$. Then\n$\\kappa\\circ u\\gamma_P=\\psi\\gamma_P=\\gamma_M(\\mathcal S\\otimes\\psi)=\\gamma_M(\\mathcal S\\otimes\\kappa)(\\mathcal S\\otimes u)=\\kappa\\circ\\gamma_K(\\mathcal S\\otimes u)$,\nand $\\kappa$ is a monomorphism, so $u$ is a module map. Hence $\\kappa$ is a kernel of $\\varphi$ in\n$\\Mod_{\\mathcal S}(\\mathcal D)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**$U_{\\mathcal S}$ reflects cokernels.** Dually, let $\\pi\\colon N\\to Q$ with $\\pi\\varphi=0$ and $U\\pi$ a\ncokernel of $U\\varphi$. For a module map $\\psi\\colon N\\to P$ with $\\psi\\varphi=0$ write $\\psi=u\\pi$ in\n$\\mathcal D$. Then\n$u\\gamma_Q(\\mathcal S\\otimes\\pi)=u\\pi\\gamma_N=\\psi\\gamma_N=\\gamma_P(\\mathcal S\\otimes\\psi)=\\gamma_P(\\mathcal S\\otimes u)(\\mathcal S\\otimes\\pi)$.\nSince $\\mathcal S\\otimes-$ is right exact, it preserves epimorphisms, so $\\mathcal S\\otimes\\pi$ is an\nepimorphism and $u\\gamma_Q=\\gamma_P(\\mathcal S\\otimes u)$. Hence $\\pi$ is a cokernel in\n$\\Mod_{\\mathcal S}(\\mathcal D)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**Exactness of $G$.** Let $\\kappa$ be a kernel of $\\varphi$ in $\\Mod_{\\mathcal R}(\\mathcal C)$. By\n[lem-sfb-modobj-kernels], kernels in $\\Mod_{\\mathcal R}(\\mathcal C)$ are computed in $\\mathcal C$, so\n$U_{\\mathcal R}\\kappa$ is a kernel of $U_{\\mathcal R}\\varphi$ (any two kernels are isomorphic). As $F$ is\nexact, $U_{\\mathcal S}G\\kappa=FU_{\\mathcal R}\\kappa$ is a kernel of $U_{\\mathcal S}G\\varphi$, and by the\nreflection step $G\\kappa$ is a kernel of $G\\varphi$. The same argument with\n[lem-sfb-modobj-cokernels] shows that $G$ preserves cokernels. An additive functor between abelian\ncategories preserving kernels and cokernels is exact, and it preserves finite limits and finite\ncolimits, as these are built from finite biproducts and kernels, resp. cokernels.",
+      "uses": [
+        "lem-sfb-modobj-kernels",
+        "lem-sfb-modobj-cokernels"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-modobj-forget-faithful",
+    "lem-sfb-modobj-kernels",
+    "lem-sfb-modobj-cokernels"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-modobj-kernels",
+    "lem-sfb-modobj-cokernels",
+    "lem-sfb-modobj-forget-faithful"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "sk-thm-smooth-base-change",
+  "kind": "statement",
+  "title": "Smooth base change",
+  "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX & \\xleftarrow{\\;h\\;} & Y\\\\\nf\\downarrow & & \\downarrow e\\\\\nS & \\xleftarrow{\\;g\\;} & T\n\\end{array}\n$$\n\nbe Cartesian with $f$ smooth and $g$ quasi-compact\nquasi-separated, and let $\\Lambda$ be a commutative ring. Then for\nevery $q$ and every sheaf $\\mathcal F$ of $\\Lambda$-modules on $T_{\\Et}$\nall of whose geometric stalks are torsion of orders invertible on $S$\n(each element killed by a positive integer invertible on $S$),\n\n$$\nf^{-1}R^qg_*\\mathcal F\\ \\xrightarrow{\\ \\sim\\ }\\ R^qh_*e^{-1}\\mathcal F,\n$$\n\nthe map being the base-change map of [sk-def-bc].",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/_section.md",
+    "place": "node sk-thm-smooth-base-change, order 1471"
+  },
+  "stmt_deps": [
+    "sk-def-bc",
+    "sk-def-smooth"
+  ],
+  "proof": [
+    {
+      "text": "*Negative degrees*: both sides vanish for $q<0$.\n*Degree zero*: [sk-prop-deg0] (smooth is flat, of finite\npresentation, with geometrically reduced fibres).\n*Filtered torsion*: $\\mathcal F=\\varinjlim_n\\mathcal F[n]$\nover the integers $n$ invertible on $S$, where $\\mathcal F[n]$ is the\n$n$-torsion subsheaf; inverse images are left adjoints and\n$R^qg_*$, $R^qh_*$ commute with filtered colimits for qcqs $g,h$;\nso it suffices to handle sheaves annihilated by a single $n$\ninvertible on $S$. Such a sheaf is a sheaf of $\\Lambda/n\\Lambda$-modules, and\nthe higher direct images and the base-change map of a sheaf of\n$\\Lambda$-modules are those of its underlying abelian sheaf, hence also those\ncomputed for $\\Lambda/n\\Lambda$-modules. So it suffices to prove\n$\\mathrm{BC}(f,\\Lambda,q)$ for every $q\\ge0$ and every coefficient ring\n$\\Lambda$ in which some $n$ invertible on $S$ vanishes.\n*Reduction to relative dimension one*: the assertion is\nétale local on $X$ and $S$; the relative dimension of $f$ is locally\nconstant, so we may assume it constant, equal to $d$; by [sk-prop-normal-form] one may\nassume $X$ and $S$\naffine and $X\\to S$ factoring as an étale morphism to $\\Aaf^d_S$ followed by\nthe projection; writing $\\Aaf^d_S\\to \\Aaf^{d-1}_S\\to\\cdots\\to\\Aaf^1_S\\to S$\nand using the composition compatibility of the base-change map (and that\nétale morphisms satisfy base change trivially), it suffices to prove\nthe assertion for affine smooth $X\\to S$ of relative dimension one\nwith $X$ affine; $n$ remains invertible on each intermediate base.\n*Induction on $q$*: for such $f$, prove by strong induction on $q$ that\n$\\mathrm{BC}(f,\\Lambda,q)$ holds universally. For $q\\le0$ this is the\nnegative-degree and degree-zero cases applied to every base change of $f$\n(again smooth). For $q\\ge1$, with the statement known universally in all\ndegrees $<q$, [sk-lem-induction] gives $\\mathrm{BC}(f,\\Lambda,q)$\nuniversally. Specialising along the identity of $S$ gives\n$\\mathrm{BC}(f,\\Lambda,q)$, and running the filtered colimit back over $n$\nfinishes the proof.",
+      "uses": [
+        "sk-lem-induction"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-lem-induction"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-smooth-base-change/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1471,
+  "blueprint_uses": [
+    "sk-def-bc",
+    "sk-def-smooth",
+    "sk-prop-input-spreading",
+    "sk-prop-input-torsors"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-smooth"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

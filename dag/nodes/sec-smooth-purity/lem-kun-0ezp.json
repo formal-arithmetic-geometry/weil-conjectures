@@ -1,238 +1,268 @@
 {
- "id": "lem-kun-0ezp",
- "blueprint": {
-  "is": "lem-kun-0ezp",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Cohomology of a separably closed field vanishes in positive degrees",
- "statement": "Let $L$ be a\nseparably closed field and\n$X=\\Spec(L)$. Then every object of the small etale site of $X$ is a\ndisjoint union of copies of $X$, and for every abelian sheaf $F$ on\n$X_{\\Et}$,\n\n$$\nH^q(X_{\\Et},F)=0\\qquad(q>0).\n$$\n\nConsequently, for every morphism $f:X\\to Y$ of schemes, the higher\ndirect images of [def-weil-pbc-direct-image] vanish:\n$R^qf_*F=0$ for $q>0$.\n(*Source:* this is the case of Stacks Project, Tag\n[0EZP](https://stacks.math.columbia.edu/tag/0EZP) that is used in this\nchapter, namely the case of the spectrum of a separably closed field; the\ngeneral statement of that tag, for an integral normal scheme with separably\nclosed function field, is not needed here.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0ezp.md",
-  "place": "node lem-kun-0ezp, order 1761",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0EZP"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-kun-separably-closed",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-direct-image"
- ],
- "proof": [
-  {
-   "text": "Let $V\\to X$ be an object of the small etale site. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to this etale morphism and the unique point $x$ of $X$. Its fibre $V_x$ is canonically $V$, since $\\kappa(x)=L$ and $\\operatorname{Spec}\\kappa(x)\\to X$ is the identity. The cited statement gives the disjoint union of the open singleton subschemes $\\operatorname{Spec}\\kappa(v)$, with each $\\kappa(v)/L$ finite separable. By [def-kun-separably-closed] every such extension is trivial over $L$. Thus $V\\cong\\coprod_{v\\in|V|}X$ over $X$. No quasi-compactness or finiteness of the index set is assumed.",
-   "uses": [
+  "id": "lem-kun-0ezp",
+  "blueprint": {
+    "is": "lem-kun-0ezp",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Cohomology of a separably closed field vanishes in positive degrees",
+  "statement": "Let $L$ be a\nseparably closed field and\n$X=\\Spec(L)$. Then every object of the small etale site of $X$ is a\ndisjoint union of copies of $X$, and for every abelian sheaf $F$ on\n$X_{\\Et}$,\n\n$$\nH^q(X_{\\Et},F)=0\\qquad(q>0).\n$$\n\nConsequently, for every morphism $f:X\\to Y$ of schemes, the higher\ndirect images of [def-weil-pbc-direct-image] vanish:\n$R^qf_*F=0$ for $q>0$.\n(*Source:* this is the case of Stacks Project, Tag\n[0EZP](https://stacks.math.columbia.edu/tag/0EZP) that is used in this\nchapter, namely the case of the spectrum of a separably closed field; the\ngeneral statement of that tag, for an integral normal scheme with separably\nclosed function field, is not needed here.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0ezp.md",
+    "place": "node lem-kun-0ezp, order 1761",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0EZP"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-kun-separably-closed",
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "def-kun-separably-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GL, lemma-etale-over-field, (1) and (2)"
-   }
-  },
-  {
-   "text": "For an abelian sheaf $G$ on $X_{\\Et}$ and $V=\\coprod_{j\\in J}X$, apply the equalizer sheaf axiom of [def-weil-pbc-abelian-etale-sheaves] to the covering by the components. Distinct components have empty intersection, and each component intersects itself in itself. The empty covering of the empty scheme gives $G(\\varnothing)=0$. Consequently every tuple of sections on the components satisfies the matching condition, and restriction gives $G(V)\\cong\\prod_{j\\in J}G(X)$, naturally in $G$. This includes $J=\\varnothing$.",
-   "uses": [
     "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CN, lemma-abelian-abelian; sheaf axiom applied to the component covering"
-   }
-  },
-  {
-   "text": "Let $\\varphi:G\\to H$ be an epimorphism of abelian sheaves on $X_{\\Et}$ and $h\\in H(X)$. The local-surjectivity statement [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] supplies a jointly surjective covering $\\{V_a\\to X\\}$ and lifts of $h$ over the $V_a$. Some $V_a$ is nonempty. By step 1 it has a component $X\\to V_a$ whose composite with $V_a\\to X$ is the identity. Restricting the corresponding lift along this section gives a lift of $h$ in $G(X)$. Hence $\\varphi_X$ is surjective. For any $V=\\coprod_jX$, choose such a lift separately for each component of a given section in $H(V)$; step 2 glues them to a lift in $G(V)$. Thus $\\varphi_V$ is surjective for every object $V$, including the empty object.",
-   "uses": [
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CN, lemma-abelian-abelian (5); sites.tex Tag 00WM, definition-sheaves-injective-surjective (2)"
-   }
-  },
-  {
-   "text": "The global sections functor is evaluation at $X$ by [def-weil-pbc-global-sections-functor]. By [lem-weil-pbc-sheafification-exact] (1), kernels and finite limits of abelian sheaves are computed sectionwise; evaluation therefore preserves kernels and finite products and is additive. Step 3 shows it sends every epimorphism to a surjective homomorphism. In a short exact sequence $0\\to A\\to B\\to C\\to0$, the first map identifies $A$ with the kernel of $B\\to C$, so evaluation gives the kernel of the surjection $B(X)\\to C(X)$. The evaluated sequence is short exact. Therefore $\\Gamma(X,-)$ is exact.",
-   "uses": [
-    "def-weil-pbc-global-sections-functor",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian, exactness and vanishing argument specialized to a separably closed field"
-   }
-  },
-  {
-   "text": "Fix any scheme morphism $f:X\\to Y$. For every object $U\\to Y$ of $Y_{\\Et}$, [lem-weil-pbc-etale-base-change-finite-limits] (1) says $W=X\\times_YU\\to X$ is etale. By [def-weil-pbc-direct-image], $(f_*G)(U)=G(W)$ and $(f_*\\varphi)_U=\\varphi_W$. Step 3 makes this map surjective whenever $\\varphi$ is an epimorphism. Such objectwise surjectivity implies local surjectivity using the identity covering, hence $f_*\\varphi$ is an epimorphism by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] on $Y$. The sectionwise-kernel statement [lem-weil-pbc-sheafification-exact] (1) also makes $f_*$ preserve kernels and finite products: evaluating either side at $U$ gives the same kernel or product evaluated at $W$. Addition is sectionwise. For a short exact sequence $0\\to A\\to B\\to C\\to0$, the kernel preservation identifies $f_*A$ with the kernel of $f_*B\\to f_*C$, and the latter map is an epimorphism by the preceding lifting argument. Hence $0\\to f_*A\\to f_*B\\to f_*C\\to0$ is short exact, and $f_*$ is exact. This argument allows an arbitrary, even infinite, set of components of $W$ and requires no condition on $f$ or $Y$.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZP, lemma-Rf-star-zero-normal-with-alg-closed-function-field, field case; replace the associated-presheaf computation by exactness of the direct image"
-   }
-  },
-  {
-   "text": "Take a K-injective resolution $F[0]\\to I^\\bullet$. Since it is a quasi-isomorphism, $H^q(I^\\bullet)=0$ for $q>0$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] first to the exact functor $\\Gamma(X,-)$ of step 4 and then to the exact functor $f_*$ of step 5. It gives $H^q(\\Gamma(X,I^\\bullet))\\cong\\Gamma(X,H^q(I^\\bullet))=0$ and $H^q(f_*I^\\bullet)\\cong f_*H^q(I^\\bullet)=0$; both functors send the zero object to zero, by their section formulas. The first expression is $H^q(X_{\\Et},F)$ by [def-weil-pbc-etale-cohomology], and the second is $R^qf_*F$ by the K-injective computation of [def-weil-pbc-direct-image]. This proves both vanishing assertions for every abelian sheaf, without claiming that Tag 0EZP itself states them for arbitrary coefficients.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-pbc-etale-cohomology",
     "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor (5), with homology.tex Tag 010N, lemma-exact-functor"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "def-kun-separably-closed",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-  "def-weil-pbc-global-sections-functor",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-pbc-etale-cohomology"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0ezp.md",
-  "place": "Proof Steps 1-3, repaired using Stacks 02GL, 03CN, 03CO, 03QO and 015F; direct-image exactness supplies the field specialization of 0EZP for arbitrary abelian sheaves."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "IsSepClosed|separably.closed",
-   "results": "Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+  ],
+  "proof": [
+    {
+      "text": "Let $V\\to X$ be an object of the small etale site. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to this etale morphism and the unique point $x$ of $X$. Its fibre $V_x$ is canonically $V$, since $\\kappa(x)=L$ and $\\operatorname{Spec}\\kappa(x)\\to X$ is the identity. The cited statement gives the disjoint union of the open singleton subschemes $\\operatorname{Spec}\\kappa(v)$, with each $\\kappa(v)/L$ finite separable. By [def-kun-separably-closed] every such extension is trivial over $L$. Thus $V\\cong\\coprod_{v\\in|V|}X$ over $X$. No quasi-compactness or finiteness of the index set is assumed.",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "lem-weil-pbc-etale-fibre-discrete-separable-points",
+        "def-kun-separably-closed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 02GL, lemma-etale-over-field, (1) and (2)"
+      }
+    },
+    {
+      "text": "For an abelian sheaf $G$ on $X_{\\Et}$ and $V=\\coprod_{j\\in J}X$, apply the equalizer sheaf axiom of [def-weil-pbc-abelian-etale-sheaves] to the covering by the components. Distinct components have empty intersection, and each component intersects itself in itself. The empty covering of the empty scheme gives $G(\\varnothing)=0$. Consequently every tuple of sections on the components satisfies the matching condition, and restriction gives $G(V)\\cong\\prod_{j\\in J}G(X)$, naturally in $G$. This includes $J=\\varnothing$.",
+      "uses": [
+        "def-weil-pbc-abelian-etale-sheaves",
+        "def-weil-pbc-etale-site"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03CN, lemma-abelian-abelian; sheaf axiom applied to the component covering"
+      }
+    },
+    {
+      "text": "Let $\\varphi:G\\to H$ be an epimorphism of abelian sheaves on $X_{\\Et}$ and $h\\in H(X)$. The local-surjectivity statement [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] supplies a jointly surjective covering $\\{V_a\\to X\\}$ and lifts of $h$ over the $V_a$. Some $V_a$ is nonempty. By step 1 it has a component $X\\to V_a$ whose composite with $V_a\\to X$ is the identity. Restricting the corresponding lift along this section gives a lift of $h$ in $G(X)$. Hence $\\varphi_X$ is surjective. For any $V=\\coprod_jX$, choose such a lift separately for each component of a given section in $H(V)$; step 2 glues them to a lift in $G(V)$. Thus $\\varphi_V$ is surjective for every object $V$, including the empty object.",
+      "uses": [
+        "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+        "def-weil-pbc-etale-site"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03CN, lemma-abelian-abelian (5); sites.tex Tag 00WM, definition-sheaves-injective-surjective (2)"
+      }
+    },
+    {
+      "text": "The global sections functor is evaluation at $X$ by [def-weil-pbc-global-sections-functor]. By [lem-weil-pbc-sheafification-exact] (1), kernels and finite limits of abelian sheaves are computed sectionwise; evaluation therefore preserves kernels and finite products and is additive. Step 3 shows it sends every epimorphism to a surjective homomorphism. In a short exact sequence $0\\to A\\to B\\to C\\to0$, the first map identifies $A$ with the kernel of $B\\to C$, so evaluation gives the kernel of the surjection $B(X)\\to C(X)$. The evaluated sequence is short exact. Therefore $\\Gamma(X,-)$ is exact.",
+      "uses": [
+        "def-weil-pbc-global-sections-functor",
+        "lem-weil-pbc-sheafification-exact"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian, exactness and vanishing argument specialized to a separably closed field"
+      }
+    },
+    {
+      "text": "Fix any scheme morphism $f:X\\to Y$. For every object $U\\to Y$ of $Y_{\\Et}$, [lem-weil-pbc-etale-base-change-finite-limits] (1) says $W=X\\times_YU\\to X$ is etale. By [def-weil-pbc-direct-image], $(f_*G)(U)=G(W)$ and $(f_*\\varphi)_U=\\varphi_W$. Step 3 makes this map surjective whenever $\\varphi$ is an epimorphism. Such objectwise surjectivity implies local surjectivity using the identity covering, hence $f_*\\varphi$ is an epimorphism by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] on $Y$. The sectionwise-kernel statement [lem-weil-pbc-sheafification-exact] (1) also makes $f_*$ preserve kernels and finite products: evaluating either side at $U$ gives the same kernel or product evaluated at $W$. Addition is sectionwise. For a short exact sequence $0\\to A\\to B\\to C\\to0$, the kernel preservation identifies $f_*A$ with the kernel of $f_*B\\to f_*C$, and the latter map is an epimorphism by the preceding lifting argument. Hence $0\\to f_*A\\to f_*B\\to f_*C\\to0$ is short exact, and $f_*$ is exact. This argument allows an arbitrary, even infinite, set of components of $W$ and requires no condition on $f$ or $Y$.",
+      "uses": [
+        "lem-weil-pbc-etale-base-change-finite-limits",
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+        "lem-weil-pbc-sheafification-exact"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0EZP, lemma-Rf-star-zero-normal-with-alg-closed-function-field, field case; replace the associated-presheaf computation by exactness of the direct image"
+      }
+    },
+    {
+      "text": "Take a K-injective resolution $F[0]\\to I^\\bullet$. Since it is a quasi-isomorphism, $H^q(I^\\bullet)=0$ for $q>0$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] first to the exact functor $\\Gamma(X,-)$ of step 4 and then to the exact functor $f_*$ of step 5. It gives $H^q(\\Gamma(X,I^\\bullet))\\cong\\Gamma(X,H^q(I^\\bullet))=0$ and $H^q(f_*I^\\bullet)\\cong f_*H^q(I^\\bullet)=0$; both functors send the zero object to zero, by their section formulas. The first expression is $H^q(X_{\\Et},F)$ by [def-weil-pbc-etale-cohomology], and the second is $R^qf_*F$ by the K-injective computation of [def-weil-pbc-direct-image]. This proves both vanishing assertions for every abelian sheaf, without claiming that Tag 0EZP itself states them for arbitrary coefficients.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-complex-cohomology",
+        "def-weil-pbc-etale-cohomology",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 015F, lemma-right-derived-exact-functor (5), with homology.tex Tag 010N, lemma-exact-functor"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-kun-separably-closed",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-etale-cohomology"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0ezp.md",
+    "place": "Proof Steps 1-3, repaired using Stacks 02GL, 03CN, 03CO, 03QO and 015F; direct-image exactness supplies the field specialization of 0EZP for arbitrary abelian sheaves."
   },
-  {
-   "tool": "grep",
-   "query": "etale.*cohomology|cohomology.*etale|etale.*disjoint",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "IsSepClosed|separably.closed",
+      "results": "Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+    },
+    {
+      "tool": "grep",
+      "query": "etale.*cohomology|cohomology.*etale|etale.*disjoint",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Higher etale cohomology of the spectrum of a separably closed field is zero",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Etale cohomology of a separably closed field vanishes in positive degrees and higher direct images from its spectrum vanish",
+      "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.of_isSeparable, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.formallyEtale",
+      "date": "2026-10-14",
+      "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Etale, IsSepClosed",
+      "results": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_surjective, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_coe",
+      "date": "2026-10-14",
+      "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The global sections functor on etale abelian sheaves over a separably closed field is exact and its right derived functors are zero",
+      "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.H, Algebra.formallyEtale_iff, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.of_isSeparable_aux, instAbelianLightCondMod, Algebra.FormallyEtale.subsingleton_h1Cotangent",
+      "date": "2026-10-14",
+      "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1761,
+  "blueprint_uses": [
+    "def-kun-separably-closed",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "leansearch",
-   "query": "Higher etale cohomology of the spectrum of a separably closed field is zero",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-kunneth-ordinary",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-kun-0ezp",
+    "worker": "stage1",
+    "summary": "Replaced the unsupported disjoint-affine-pieces argument by the existing etale fibre decomposition. Wrote the cover-section and componentwise lift arguments, proved exactness of global sections and direct image, and used the existing exact-functor cohomology leaf on resolutions. No new nodes; all non-elementary tools reused. Statement unchanged, statement dependencies completed.",
+    "blueprint": "Imported Proof Step 1 is realized by split step 1; Proof Step 2 by split steps 2-4 and 6; Proof Step 3 by split steps 5-6.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+        "why": "The general etale-fibre decomposition of Stacks 02GL is used at the unique point of Spec L; this unit has no node giving that algebraic-geometric classification."
+      }
+    ]
   },
-  {
-   "tool": "leanfinder",
-   "query": "Etale cohomology of a separably closed field vanishes in positive degrees and higher direct images from its spectrum vanish",
-   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyEtale.of_isSeparable, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.formallyEtale",
-   "date": "2026-10-14",
-   "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Etale, IsSepClosed",
-   "results": "AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_surjective, AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_coe",
-   "date": "2026-10-14",
-   "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The global sections functor on etale abelian sheaves over a separably closed field is exact and its right derived functors are zero",
-   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.H, Algebra.formallyEtale_iff, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.of_isSeparable_aux, instAbelianLightCondMod, Algebra.FormallyEtale.subsingleton_h1Cotangent",
-   "date": "2026-10-14",
-   "verdict": "no match: none states the full etale scheme decomposition and both vanishing assertions"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1761,
- "blueprint_uses": [
-  "def-kun-separably-closed",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-kun-0ezp",
-  "worker": "stage1",
-  "summary": "Replaced the unsupported disjoint-affine-pieces argument by the existing etale fibre decomposition. Wrote the cover-section and componentwise lift arguments, proved exactness of global sections and direct image, and used the existing exact-functor cohomology leaf on resolutions. No new nodes; all non-elementary tools reused. Statement unchanged, statement dependencies completed.",
-  "blueprint": "Imported Proof Step 1 is realized by split step 1; Proof Step 2 by split steps 2-4 and 6; Proof Step 3 by split steps 5-6.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "why": "The general etale-fibre decomposition of Stacks 02GL is used at the unique point of Spec L; this unit has no node giving that algebraic-geometric classification."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NN-617b953c5",
-  "group": "NN",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-617b953c5 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, every cited statement, report, route, and cited source passages. Tag 0EZP’s constant-coefficient scope is distinguished correctly; the proof independently establishes arbitrary abelian-sheaf vanishing. Infinite and empty objects, imperfect separably closed fields, and arbitrary f pass. No new nodes, duplicates, or cycles. Accept the declared fibre-classification tool use. No fixes needed; detailed checks are in review.md."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-22855e76d",
-  "group": "NX",
-  "result": "fix",
-  "note": "Lean statement and node pass all clause, dependency, edge-case, and signature checks; server compile reproduced cleanly in 1.5 seconds. Complete replacement report in fixes/lem-kun-0ezp.report.md corrects two inaccurate claims that rightDerivedLowerStarPlus is absent or obsolete. Full findings recorded in review.md."
- },
- "lean": {
-  "module": "Sheaf.EtaleCohomology.SepClosedFieldVanishing",
-  "declaration": "AlgebraicGeometry.Etale.sepClosedField_etale_decomposition_and_vanishing",
-  "file": "lean/Sheaf/EtaleCohomology/SepClosedFieldVanishing.lean",
-  "statement": "theorem sepClosedField_etale_decomposition_and_vanishing (L : Type u) [Field L] [IsSepClosed L] : (∀ V : (Spec (.of L)).Etale, ∃ (I : Type u) (ι : I → (Spec (.of L) ⟶ V.left)), (∀ i : I, ι i ≫ V.hom = 𝟙 (Spec (.of L))) ∧ Nonempty (IsColimit (Cofan.mk V.left ι))) ∧ (∀ (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((cohomology AddCommGrpCat.{u + 1} (Spec (.of L)) q).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ∧ (∀ (Y : Scheme.{u}) (f : Spec (.of L) ⟶ Y) (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
-  "branch": "newtargets-dag",
-  "by": "NX",
-  "date": "2026-10-15",
-  "existing": false
- }
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NN-617b953c5",
+    "group": "NN",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-617b953c5 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, every cited statement, report, route, and cited source passages. Tag 0EZP’s constant-coefficient scope is distinguished correctly; the proof independently establishes arbitrary abelian-sheaf vanishing. Infinite and empty objects, imperfect separably closed fields, and arbitrary f pass. No new nodes, duplicates, or cycles. Accept the declared fibre-classification tool use. No fixes needed; detailed checks are in review.md."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-22855e76d",
+    "group": "NX",
+    "result": "fix",
+    "note": "Lean statement and node pass all clause, dependency, edge-case, and signature checks; server compile reproduced cleanly in 1.5 seconds. Complete replacement report in fixes/lem-kun-0ezp.report.md corrects two inaccurate claims that rightDerivedLowerStarPlus is absent or obsolete. Full findings recorded in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.EtaleCohomology.SepClosedFieldVanishing",
+    "declaration": "AlgebraicGeometry.Etale.sepClosedField_etale_decomposition_and_vanishing",
+    "file": "lean/Sheaf/EtaleCohomology/SepClosedFieldVanishing.lean",
+    "statement": "theorem sepClosedField_etale_decomposition_and_vanishing (L : Type u) [Field L] [IsSepClosed L] : (∀ V : (Spec (.of L)).Etale, ∃ (I : Type u) (ι : I → (Spec (.of L) ⟶ V.left)), (∀ i : I, ι i ≫ V.hom = 𝟙 (Spec (.of L))) ∧ Nonempty (IsColimit (Cofan.mk V.left ι))) ∧ (∀ (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((cohomology AddCommGrpCat.{u + 1} (Spec (.of L)) q).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ∧ (∀ (Y : Scheme.{u}) (f : Spec (.of L) ⟶ Y) (F : Sheaf (Spec (.of L)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), 0 < q → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
+    "branch": "newtargets-dag",
+    "by": "NX",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $L$ be a\nseparably closed field and\n$X=\\Spec(L)$. Then every object of the small etale site of $X$ is a\ndisjoint union of copies of $X$, and for every abelian sheaf $F$ on\n$X_{\\Et}$,\n\n$$\nH^q(X_{\\Et},F)=0\\qquad(q>0).\n$$\n\nConsequently, for every morphism $f:X\\to Y$ of schemes, the higher\ndirect images of [def-weil-pbc-direct-image] vanish:\n$R^qf_*F=0$ for $q>0$.",
+    "proof": [
+      {
+        "text": "*Step 1 (etale $L$-schemes).* An etale morphism is locally of finite\npresentation, so an etale $L$-scheme is a disjoint union of affine pieces\nwhich are etale and of finite presentation over $L$, hence etale and of\nfinite type. An etale finite type scheme over a field is finite over that\nfield, and a finite etale algebra over a field is a product of finite\nseparable field extensions; since $L$ is separably closed\n([def-kun-separably-closed]) each of those extensions is $L$ itself.\nHence every object of the small etale site of $X$,\n[def-weil-pbc-etale-site], is a disjoint\nunion of copies of $X$.",
+        "uses": [
+          "def-kun-separably-closed",
+          "def-weil-pbc-etale-site"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 2 (the global sections functor is exact).* By Step 1 every object\nof $X_{\\Et}$ is a coproduct of copies of the terminal object $X$, and for\na coproduct the sheaf axiom gives\n$F(\\coprod_jX)\\cong\\prod_jF(X)$ for a sheaf $F$ of\n[def-weil-pbc-etale-sheaves]. In particular every covering of $X$\ncontains a summand mapping isomorphically onto $X$, so a section of a\nquotient sheaf admits a lift over $X$: the global sections functor\n$\\Gamma(X_{\\Et},-)$ is evaluation at $X$, and the exactness of the\nsequence of sheaves gives exactness after evaluation. Hence\n$\\Gamma(X_{\\Et},-)$ is exact, and its derived functors of\n[def-weil-pbc-etale-cohomology] vanish in positive degrees.",
+        "uses": [
+          "def-weil-pbc-etale-sheaves",
+          "def-weil-pbc-etale-cohomology"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "*Step 3 (higher direct images).* Let $U\\to Y$ be etale. Then\n$X\\times_YU\\to X$ is etale (base change of an etale morphism), so it is a\ndisjoint union of copies of $X$ by Step 1, and\n\n$$\nH^q\\bigl((X\\times_YU)_{\\Et},F\\bigr)\n=\\prod\\nolimits_jH^q(X_{\\Et},F)=0\\qquad(q>0)\n$$\n\nby Step 2, cohomology of a disjoint union being the product of the\ncohomologies. Hence the presheaf $U\\mapsto H^q(X\\times_YU,F)$ vanishes for\n$q>0$, and therefore so does its sheafification, which is\n$R^qf_*F$ by [def-weil-pbc-direct-image].",
+        "uses": [
+          "def-weil-pbc-direct-image"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

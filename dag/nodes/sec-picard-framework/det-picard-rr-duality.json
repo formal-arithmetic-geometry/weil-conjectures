@@ -1,0 +1,77 @@
+{
+  "id": "det-picard-rr-duality",
+  "kind": "statement",
+  "title": "Duality, canonical degree and vanishing above $2g-2$ over any field",
+  "statement": "Let $C$ be a smooth projective geometrically connected curve over a\nfield $k$, $g=\\dim_kH^1(C,\\cO_C)$, $\\omega=\\omega_{C/k}=\\Omega^1_{C/k}$,\nand let $\\cL$ be an invertible sheaf on $C$. Then:\n\n1. $H^1(C,\\cL)^\\vee\\simeq H^0(C,\\omega\\otimes\\cL^{-1})$, via the trace\npairing;\n1. $h^0(C,\\omega)=g$, $h^1(C,\\omega)=1$, and $\\deg\\omega=2g-2$;\n1. if $\\deg\\cL>2g-2$, then $H^1(C,\\cL)=0$ and\n$h^0(C,\\cL)=\\deg\\cL+1-g$;\n1. for every field extension $K/k$, the base change $C_K$ is again a\nsmooth projective geometrically connected curve of genus $g$,\n$\\deg\\cL_K=\\deg\\cL$, $\\omega_{C_K/K}=\\omega_K$, and the isomorphism in\n(1) for $(C_K,\\cL_K)$ is the $K$-linear extension of the one for\n$(C,\\cL)$ under $H^i(C_K,-_K)=H^i(C,-)\\otimes_kK$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
+    "place": "node det-picard-rr-duality, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 0.* $C$ is geometrically connected and geometrically reduced\n(smooth), proper, so $H^0(C,\\cO_C)=k$ ([lem-pc-h0-geom-connected]), and\n$C$ is integral of pure dimension $1$. Coherent cohomology vanishes in\ndegrees $\\ge2$, so $\\chi=h^0-h^1$ and Riemann–Roch for line bundles\n(proved in the sketch proof) reads $\\chi(\\cL)=\\deg\\cL+1-g$.",
+      "uses": [
+        "lem-pc-h0-geom-connected"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(1).* Apply [sk-thm-picard-duality] with $n=1$, $q=1$ and the finite\nlocally free module $\\cF=\\cL$: the trace pairing\n$H^1(C,\\cL)\\otimes H^0(C,\\cL^\\vee\\otimes\\omega)\\to H^1(C,\\omega)\\to k$ is\nperfect, and $\\cL^\\vee=\\cL^{-1}$.",
+      "uses": [
+        "sk-thm-picard-duality"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2).* Take $\\cL=\\cO_C$ in (1): $h^0(\\omega)=h^1(\\cO_C)=g$. Take $q=0$:\n$h^1(\\omega)=h^0(\\cO_C)=1$. Hence $\\chi(\\omega)=g-1$, and Riemann–Roch\ngives $\\deg\\omega=\\chi(\\omega)-(1-g)=2g-2$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3).* The sheaf $\\cM=\\omega\\otimes\\cL^{-1}$ has degree\n$2g-2-\\deg\\cL<0$ (degree is additive under tensor product). If $s$ were a\nnonzero section of $\\cM$, then, $C$ being integral, $s$ is nonzero at the\ngeneric point and its zero scheme is an effective Cartier divisor\n$Z(s)=\\sum_xn_x\\,x$ with all $n_x\\ge0$ and $\\cM\\cong\\cO_C(Z(s))$; so\n$\\deg\\cM=\\sum_xn_x[\\kappa(x):k]\\ge0$, a contradiction. Thus\n$H^0(\\cM)=0$, so $H^1(C,\\cL)=0$ by (1), and\n$h^0(\\cL)=\\chi(\\cL)=\\deg\\cL+1-g$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(4).* Smoothness, projectivity and geometric connectedness are stable\nunder base change; the genus is preserved by\n[lem-pc-genus-base-change] (flat base change\n[lem-sc-flat-base-change-coherent] for $\\cO_C$), and the degree by\n[lem-pc-degree-base-change]. Kähler differentials commute with base\nchange, so $\\omega_{C_K/K}=\\omega_K$. Cup product and evaluation commute\nwith flat base change, and so does the trace $t_C$: on the residue\ndescription of [sk-thm-picard-duality], $H^1(C,\\omega)$ is a quotient of\n$\\bigoplus_x\\Omega^1_{k(C)/k}/\\omega_x$ and the residues are $k$-linear\nand compatible with extension of scalars, so $t_{C_K}=t_C\\otimes K$ on\n$H^1(C_K,\\omega_K)=H^1(C,\\omega)\\otimes_kK$ (both are $K$-linear maps on a\none-dimensional space which agree on the image of $H^1(C,\\omega)$).\nHence the pairing for $(C_K,\\cL_K)$ is the $K$-linear extension of the\npairing for $(C,\\cL)$, and so is the induced isomorphism.",
+      "uses": [
+        "lem-pc-genus-base-change",
+        "lem-sc-flat-base-change-coherent",
+        "lem-pc-degree-base-change",
+        "sk-thm-picard-duality"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-h0-geom-connected",
+    "sk-thm-picard-duality",
+    "lem-pc-genus-base-change",
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-degree-base-change"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/sk-thm-picard-rr-duality.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-thm-picard-duality",
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-degree-base-change",
+    "lem-pc-genus-base-change",
+    "lem-pc-h0-geom-connected"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

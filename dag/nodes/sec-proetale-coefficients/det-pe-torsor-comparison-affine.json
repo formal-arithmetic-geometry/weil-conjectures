@@ -1,0 +1,69 @@
+{
+  "id": "det-pe-torsor-comparison-affine",
+  "kind": "statement",
+  "title": "Torsors under a classical group over an affine base",
+  "statement": "Let $X$ be an affine scheme, $G_0$ a sheaf of groups on $X_{\\Et}$ and\n$G=\\nu_X^*G_0$. Let $T$ be a $G$-torsor on $X_{\\Proet}$, i.e. a sheaf of sets with\na left $G$-action such that $G\\times T\\to T\\times T$, $(g,t)\\mapsto(gt,t)$, is an\nisomorphism and $T\\to *$ is an epimorphism. Then there are an affine étale\nsurjection $U_i\\to X$, a $G_0$-torsor $T_0$ on $X_{\\Et}$ with $T_0(U_i)\\neq\\emptyset$,\nand an isomorphism of $G$-torsors $\\nu_X^*T_0\\cong T$. In particular $T$ is\nclassical and is trivialized by the étale covering $\\{U_i\\to X\\}$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.md",
+    "place": "node det-pe-torsor-comparison-affine, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 1: one affine trivializing cover.* Since $T\\to *$ is an epimorphism there\nis a pro-étale covering of $X$ on whose members $T$ has a section. By\n[sk-thm-pe-indetale-refinement] and [sk-prop-pe-affine-basis] each member is\ncovered by affine ind-étale objects, and since $X$ is affine, hence\nquasi-compact, finitely many of these, $W_1,\\dots,W_r$, are jointly surjective\nonto $X$ and each carries a section of $T$. Put $U=W_1\\sqcup\\dots\\sqcup W_r$. It\nis affine, ind-étale over $X$ (a finite product of ind-étale algebras is\nind-étale) and surjective onto $X$, and $T(U)=\\prod_bT(W_b)\\neq\\emptyset$. Write\n$U=\\varprojlim_iU_i$ with $U_i$ affine étale over $X$. Since $U\\to X$ is\nsurjective and factors through each $U_i$, every $U_i\\to X$ is an étale\nsurjection.",
+      "uses": [
+        "sk-thm-pe-indetale-refinement"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the cocycle.* Choose $s\\in T(U)$ and let $p_1,p_2\\colon U\\times_XU\\to U$\nand $p_{ab}\\colon U\\times_XU\\times_XU\\to U\\times_XU$ be the projections. As the\naction is simply transitive there is a unique $g\\in G(U\\times_XU)$ with\n$p_1^*s=g\\cdot p_2^*s$. Pulling back to the triple product and comparing the two\nexpressions of $p_1^*s$ in terms of $p_3^*s$ gives, by freeness of the action,\nthe cocycle identity $p_{13}^*g=p_{12}^*g\\cdot p_{23}^*g$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 3: descent to a finite stage.* The fibre products\n$U\\times_XU=\\varprojlim_iU_i\\times_XU_i$ and\n$U\\times_XU\\times_XU=\\varprojlim_iU_i\\times_XU_i\\times_XU_i$ are pro-étale affine\npresentations (the diagonal indices are cofinal). By the affine evaluation\nformula of [sk-prop-pe-comparison-morphism],\n\n$$\nG(U\\times_XU)=\\varinjlim_iG_0(U_i\\times_XU_i),\\qquad\nG(U\\times_XU\\times_XU)=\\varinjlim_iG_0(U_i\\times_XU_i\\times_XU_i),\n$$\n\ncompatibly with the projections and the group laws. So $g$ is the image of some\n$g_i\\in G_0(U_i\\times_XU_i)$. The two sides of the cocycle identity for $g_i$ have\nthe same image in the colimit, hence agree at some later stage $j\\geq i$; replacing\n$i$ by $j$ and $g_i$ by its pullback, $g_i$ is a Čech $1$-cocycle of $G_0$ for the\nétale covering $\\{U_i\\to X\\}$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 4: the étale torsor.* Étale sheaves satisfy descent along étale coverings,\nso gluing the trivial torsor $G_0|_{U_i}$ along the cocycle $g_i$ gives a\n$G_0$-torsor $T_0$ on $X_{\\Et}$ together with a section $s_0\\in T_0(U_i)$\nsatisfying $p_1^*s_0=g_i\\cdot p_2^*s_0$ on $U_i\\times_XU_i$ (the standard\ncorrespondence between torsors trivialized on a covering and Čech cocycles).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 5: comparison.* The functor $\\nu_X^*$ preserves finite limits and\nepimorphisms, so $\\nu_X^*T_0$ is a $G$-torsor. Let $s'\\in(\\nu_X^*T_0)(U)$ be the\npullback of $s_0$; then $p_1^*s'=g\\cdot p_2^*s'$, since $g$ is the image of $g_i$.\nThe $G|_U$-equivariant map $\\nu_X^*T_0|_U\\to T|_U$ of trivial torsors sending $s'$\nto $s$ is an isomorphism, and its two pullbacks to $U\\times_XU$ agree because\nboth $s'$ and $s$ satisfy the same relation with the same $g$. As $U\\to X$ is a\npro-étale covering, the isomorphism descends to an isomorphism of $G$-torsors\n$\\nu_X^*T_0\\cong T$. Finally $\\nu_X^*T_0$ is classical by\n[det-pe-classical-sheaves-image], and $T_0$, hence $T$, has a section over the\nétale covering $U_i\\to X$.",
+      "uses": [
+        "det-pe-classical-sheaves-image"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-pe-indetale-refinement",
+    "det-pe-classical-sheaves-image"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-prop-pe-comparison-morphism",
+    "sk-thm-pe-indetale-refinement",
+    "sk-prop-pe-affine-basis",
+    "det-pe-classical-sheaves-image"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

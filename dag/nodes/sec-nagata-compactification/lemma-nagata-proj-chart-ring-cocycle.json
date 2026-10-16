@@ -1,383 +1,395 @@
 {
- "id": "lemma-nagata-proj-chart-ring-cocycle",
- "blueprint": {
-  "is": "lemma-nagata-proj-chart-ring-cocycle",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Coherence of the standard Proj chart rings",
- "statement": "For positive-degree homogeneous $f,g,h$, localization induces canonical\nequivalences between the restrictions of $(R_{(f)})_0$ and\n$(R_{(g)})_0$ to the overlap indexed by $fg$. These equivalences are the\nidentity for $f=g$, are inverse under exchange of $f$ and $g$, and satisfy\nthe cocycle equality on the triple localization indexed by $fgh$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/lemma-nagata-proj-chart-ring-cocycle.md",
-  "place": "node lemma-nagata-proj-chart-ring-cocycle, order 9"
- },
- "stmt_deps": [
-  "def-nagata-homogeneous-localization-degree-zero"
- ],
- "proof": [
-  {
-   "text": "Write $R=\\bigoplus_{n\\ge0}R_n$, $f\\in R_d$, $g\\in R_e$, $h\\in R_k$ with $d,e,k>0$, and $A_f=R_{(f),0}$. Put $t_{fg}=g^d/f^e\\in A_f$ and $B_f^g=(A_f)_{t_{fg}}$. These are the restrictions on the overlap: the cited basic-open statement identifies it in the f chart as the principal open of $t_{fg}$. Apply the ring case $M=R$ of the graded restriction theorem, extending the grading of R by zero in negative degrees. Use the relation $fg=g\\cdot f$ (relation exponent 1, homogeneous multiplier g). Its ring restriction map $r_{f,fg}:A_f\\to A_{fg}$ sends $x/f^m$ to $xg^m/(fg)^m$. The theorem's localizing element is $(fg)^d/f^{d+e}=g^d/f^e=t_{fg}$: the equality is cancellation of the unit f in the ordinary localization at f, hence equality in its degree-zero subring. Clause (iii) therefore gives a ring isomorphism $E_f^g:B_f^g\\xrightarrow{\\sim}A_{fg}$ with $E_f^g(q/t_{fg}^n)=r_{f,fg}(q)r_{f,fg}(t_{fg})^{-n}$. Exchange f and g to obtain $E_g^f:B_g^f\\xrightarrow{\\sim}A_{fg}$, using the literal equality $gf=fg$. No assertion about a map $A_f\\to A_g$ before restricting is needed.",
-   "uses": [
+  "id": "lemma-nagata-proj-chart-ring-cocycle",
+  "blueprint": {
+    "is": "lemma-nagata-proj-chart-ring-cocycle",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Coherence of the standard Proj chart rings",
+  "statement": "For positive-degree homogeneous $f,g,h$, localization induces canonical\nequivalences between the restrictions of $(R_{(f)})_0$ and\n$(R_{(g)})_0$ to the overlap indexed by $fg$. These equivalences are the\nidentity for $f=g$, are inverse under exchange of $f$ and $g$, and satisfy\nthe cocycle equality on the triple localization indexed by $fgh$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/lemma-nagata-proj-chart-ring-cocycle.md",
+    "place": "node lemma-nagata-proj-chart-ring-cocycle, order 9"
+  },
+  "stmt_deps": [
+    "def-nagata-homogeneous-localization-degree-zero"
+  ],
+  "proof": [
+    {
+      "text": "Write $R=\\bigoplus_{n\\ge0}R_n$, $f\\in R_d$, $g\\in R_e$, $h\\in R_k$ with $d,e,k>0$, and $A_f=R_{(f),0}$. Put $t_{fg}=g^d/f^e\\in A_f$ and $B_f^g=(A_f)_{t_{fg}}$. These are the restrictions on the overlap: the cited basic-open statement identifies it in the f chart as the principal open of $t_{fg}$. Apply the ring case $M=R$ of the graded restriction theorem, extending the grading of R by zero in negative degrees. Use the relation $fg=g\\cdot f$ (relation exponent 1, homogeneous multiplier g). Its ring restriction map $r_{f,fg}:A_f\\to A_{fg}$ sends $x/f^m$ to $xg^m/(fg)^m$. The theorem's localizing element is $(fg)^d/f^{d+e}=g^d/f^e=t_{fg}$: the equality is cancellation of the unit f in the ordinary localization at f, hence equality in its degree-zero subring. Clause (iii) therefore gives a ring isomorphism $E_f^g:B_f^g\\xrightarrow{\\sim}A_{fg}$ with $E_f^g(q/t_{fg}^n)=r_{f,fg}(q)r_{f,fg}(t_{fg})^{-n}$. Exchange f and g to obtain $E_g^f:B_g^f\\xrightarrow{\\sim}A_{fg}$, using the literal equality $gf=fg$. No assertion about a map $A_f\\to A_g$ before restricting is needed.",
+      "uses": [
+        "def-nagata-homogeneous-localization-degree-zero",
+        "def-weil-ring-localization-away",
+        "lem-weil-pbc-proj-basic-open-intersection",
+        "lem-weil-pbc-graded-module-away-restriction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
+      }
+    },
+    {
+      "text": "Define the transition $\\alpha_{fg}=(E_g^f)^{-1}\\circ E_f^g:B_f^g\\xrightarrow{\\sim}B_g^f$. Both comparisons are induced by the same homogeneous fractions in $R_{fg}$, so this is the canonical localization-induced equivalence. In particular its characterization is $E_g^f\\alpha_{fg}=E_f^g$. When $f=g$, the two comparisons are the same map, and $\\alpha_{ff}=(E_f^f)^{-1}E_f^f=\\mathrm{id}$. Here $t_{ff}=f^d/f^d=1$, so restricting the self-overlap also canonically gives $A_f$. Under exchange, $\\alpha_{gf}=(E_f^g)^{-1}E_g^f=\\alpha_{fg}^{-1}$, by cancellation of inverse ring isomorphisms.",
+      "uses": [
+        "def-weil-ring-localization-away"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
+      }
+    },
+    {
+      "text": "For the triple overlap put $u_f=(gh)^d/f^{e+k}=t_{fg}t_{fh}$ and $T_f=(A_f)_{u_f}$, with cyclic definitions $T_g,T_h$. The ring case of clause (iii) for the relation $fgh=(gh)f$ supplies $E_f:T_f\\xrightarrow{\\sim}C$, where $C=A_{fgh}$; similarly obtain $E_g,E_h$. These are the triple restrictions: inverting a product of two elements is equivalent to inverting both. Explicitly if ab is a unit then $b(ab)^{-1}$ is an inverse of a and $a(ab)^{-1}$ is an inverse of b; conversely the product of two units is a unit. The universal property supplies the maps to and from successive localizations, and its uniqueness makes the composites identities. This verifies the iterated-restriction identification without assuming any of f,g,h are non-zero-divisors.",
+      "uses": [
+        "def-nagata-homogeneous-localization-degree-zero",
+        "def-weil-ring-localization-away",
+        "lem-weil-pbc-graded-module-away-restriction",
+        "lem-weil-pbc-localization-away-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
+      }
+    },
+    {
+      "text": "There is a canonical restriction $j_f^g:B_f^g\\to T_f$, sending $q/t_{fg}^n$ to $(q/1)(t_{fg}/1)^{-n}$; it exists since $t_{fg}/1$ is a unit by the product calculation. Likewise $j_g^f$. Let $r_{fg,fgh}:A_{fg}\\to C$ be the ring restriction for $fgh=h(fg)$. On a generator $q=x/f^m\\in A_f$, the composite restriction has value $xg^mh^m/(fgh)^m$, equal to the direct restriction $x(gh)^m/(fgh)^m$. Thus $r_{fg,fgh}r_{f,fg}=r_{f,fgh}$. The extension formulas of clause (iii), followed by uniqueness in the localization universal property, give $E_fj_f^g=r_{fg,fgh}E_f^g$; the same holds for g. Each equality is checked on all q/1; inverses of the localizing element then force equality on q/t^n. Consequently $\\beta_{fg}=E_g^{-1}E_f:T_f\\xrightarrow{\\sim}T_g$ satisfies $\\beta_{fg}j_f^g=j_g^f\\alpha_{fg}$. It is the restriction of $\\alpha_{fg}$: indeed it carries the image of $t_{fh}$ to a unit, because its product with the already invertible image of $t_{fg}$ is the unit $u_f$, and the iterated-localization uniqueness just proved makes this extension unique. Repeat for the pairs g,h and f,h.",
+      "uses": [
+        "def-nagata-homogeneous-localization-degree-zero",
+        "lem-weil-pbc-graded-module-away-restriction",
+        "lem-weil-pbc-localization-away-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
+      }
+    },
+    {
+      "text": "All triple transitions now have the common target C in their definitions. For $z\\in T_f$, compute $\\beta_{gh}(\\beta_{fg}(z))=E_h^{-1}(E_g(E_g^{-1}(E_f(z))))=E_h^{-1}(E_f(z))=\\beta_{fh}(z)$. Equality on every z proves $\\beta_{gh}\\circ\\beta_{fg}=\\beta_{fh}$. By the preceding commuting squares these are precisely the restrictions of the original double-overlap transitions, so this is the claimed cocycle on the localization indexed by fgh.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/constructions.tex",
+        "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-nagata-homogeneous-localization-degree-zero",
     "def-weil-ring-localization-away",
     "lem-weil-pbc-proj-basic-open-intersection",
-    "lem-weil-pbc-graded-module-away-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
-   }
-  },
-  {
-   "text": "Define the transition $\\alpha_{fg}=(E_g^f)^{-1}\\circ E_f^g:B_f^g\\xrightarrow{\\sim}B_g^f$. Both comparisons are induced by the same homogeneous fractions in $R_{fg}$, so this is the canonical localization-induced equivalence. In particular its characterization is $E_g^f\\alpha_{fg}=E_f^g$. When $f=g$, the two comparisons are the same map, and $\\alpha_{ff}=(E_f^f)^{-1}E_f^f=\\mathrm{id}$. Here $t_{ff}=f^d/f^d=1$, so restricting the self-overlap also canonically gives $A_f$. Under exchange, $\\alpha_{gf}=(E_f^g)^{-1}E_g^f=\\alpha_{fg}^{-1}$, by cancellation of inverse ring isomorphisms.",
-   "uses": [
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
-   }
-  },
-  {
-   "text": "For the triple overlap put $u_f=(gh)^d/f^{e+k}=t_{fg}t_{fh}$ and $T_f=(A_f)_{u_f}$, with cyclic definitions $T_g,T_h$. The ring case of clause (iii) for the relation $fgh=(gh)f$ supplies $E_f:T_f\\xrightarrow{\\sim}C$, where $C=A_{fgh}$; similarly obtain $E_g,E_h$. These are the triple restrictions: inverting a product of two elements is equivalent to inverting both. Explicitly if ab is a unit then $b(ab)^{-1}$ is an inverse of a and $a(ab)^{-1}$ is an inverse of b; conversely the product of two units is a unit. The universal property supplies the maps to and from successive localizations, and its uniqueness makes the composites identities. This verifies the iterated-restriction identification without assuming any of f,g,h are non-zero-divisors.",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-weil-ring-localization-away",
     "lem-weil-pbc-graded-module-away-restriction",
     "lem-weil-pbc-localization-away-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
-   }
-  },
-  {
-   "text": "There is a canonical restriction $j_f^g:B_f^g\\to T_f$, sending $q/t_{fg}^n$ to $(q/1)(t_{fg}/1)^{-n}$; it exists since $t_{fg}/1$ is a unit by the product calculation. Likewise $j_g^f$. Let $r_{fg,fgh}:A_{fg}\\to C$ be the ring restriction for $fgh=h(fg)$. On a generator $q=x/f^m\\in A_f$, the composite restriction has value $xg^mh^m/(fgh)^m$, equal to the direct restriction $x(gh)^m/(fgh)^m$. Thus $r_{fg,fgh}r_{f,fg}=r_{f,fgh}$. The extension formulas of clause (iii), followed by uniqueness in the localization universal property, give $E_fj_f^g=r_{fg,fgh}E_f^g$; the same holds for g. Each equality is checked on all q/1; inverses of the localizing element then force equality on q/t^n. Consequently $\\beta_{fg}=E_g^{-1}E_f:T_f\\xrightarrow{\\sim}T_g$ satisfies $\\beta_{fg}j_f^g=j_g^f\\alpha_{fg}$. It is the restriction of $\\alpha_{fg}$: indeed it carries the image of $t_{fh}$ to a unit, because its product with the already invertible image of $t_{fg}$ is the unit $u_f$, and the iterated-localization uniqueness just proved makes this extension unique. Repeat for the pairs g,h and f,h.",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-localization-away-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
-   }
-  },
-  {
-   "text": "All triple transitions now have the common target C in their definitions. For $z\\in T_f$, compute $\\beta_{gh}(\\beta_{fg}(z))=E_h^{-1}(E_g(E_g^{-1}(E_f(z))))=E_h^{-1}(E_f(z))=\\beta_{fh}(z)$. Equality on every z proves $\\beta_{gh}\\circ\\beta_{fg}=\\beta_{fh}$. By the preceding commuting squares these are precisely the restrictions of the original double-overlap transitions, so this is the claimed cocycle on the localization indexed by fgh.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01M4, label lemma-standard-open, (1)(c),(d),(e); apply to f and fg, then fg and fgh"
-   }
-  }
- ],
- "proof_deps": [
-  "def-nagata-homogeneous-localization-degree-zero",
-  "def-weil-ring-localization-away",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-graded-module-away-restriction",
-  "lem-weil-pbc-localization-away-universal-property"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01M4 (lemma-standard-open), (1)(c)-(e): explicit transition and triple coherence argument along the imported blueprint proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "awayMap|isLocalization.*[Mm]ul|[Cc]ocycle",
-   "results": {
-    "hits": [
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean"
-    ],
-    "count": 5,
-    "digest": "e21716d03b941067"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "leansearch",
-   "query": "homogeneous localizations chart overlap ring equivalences cocycle",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The degree zero homogeneous localization at a product fg is the localization of the degree zero localization at f at g to the degree f divided by f to the degree g",
-   "results": {
-    "hits": [
-     "HomogeneousLocalization.Away.isLocalization_mul",
-     "HomogeneousLocalization.NumDenSameDeg.embedding",
-     "HomogeneousLocalization.Away.mk",
-     "HomogeneousLocalization.mk",
-     "HomogeneousLocalization.awayMapAux_mk",
-     "HomogeneousLocalization.awayMap_mk",
-     "HomogeneousLocalization.Away.isLocalizationElem",
-     "HomogeneousLocalization.mk_mul"
-    ],
-    "count": 8,
-    "digest": "341b563b3f1276ca"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "loogle",
-   "query": "HomogeneousLocalization.awayMap",
-   "results": {
-    "hits": [
-     "HomogeneousLocalization.awayMap",
-     "HomogeneousLocalization.Away.isLocalization_mul",
-     "HomogeneousLocalization.val_awayMap_eq_aux",
-     "HomogeneousLocalization.awayMap_mk",
-     "HomogeneousLocalization.awayMapₐ_apply",
-     "HomogeneousLocalization.val_awayMap_mk",
-     "HomogeneousLocalization.awayMap_fromZeroRingHom",
-     "HomogeneousLocalization.val_awayMap"
-    ],
-    "count": 12,
-    "digest": "d0807a7fcabfdbde"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "canonical transition isomorphisms on standard Proj chart overlaps satisfy identity inverse and triple cocycle for homogeneous elements of different positive degrees",
-   "results": {
-    "hits": [
-     "AlgebraicGeometry.Proj.basicOpenIsoAway_hom",
-     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
-     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
-     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
-     "AlgebraicGeometry.Proj.awayMap_awayToSection",
-     "AlgebraicGeometry.projIsoSpecTopComponent",
-     "AlgebraicGeometry.projIsoSpec",
-     "AlgebraicGeometry.Proj.awayι_toSpecZero_assoc"
-    ],
-    "count": 8,
-    "digest": "08e03102151def55"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "grep",
-   "query": "^theorem Away.isLocalization_mul|^abbrev Away.isLocalizationElem|^lemma awayMap_mk|^def awayMap :",
-   "results": {
-    "hits": [
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
-     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean"
-    ],
-    "count": 4,
-    "digest": "9ebd148d25b23df8"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "leansearch",
-   "query": "The degree zero localization at fg is the localization of the degree zero ring at f away from g^d/f^e",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "HomogeneousLocalization.Away.isLocalization_mul",
-   "results": {
-    "hits": [
-     "HomogeneousLocalization.Away.isLocalization_mul"
-    ],
-    "count": 1,
-    "digest": "83934a3a54d1895f"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "HomogeneousLocalization.Away.isLocalization_mul canonical ring homomorphism a over f power n maps to a times g power n over fg power n and localizes at g power d over f power e",
-   "results": {
-    "hits": [
-     "HomogeneousLocalization.Away.isLocalization_mul",
-     "HomogeneousLocalization.awayMapAux_mk",
-     "HomogeneousLocalization.awayMap_mk",
-     "HomogeneousLocalization.mk_mul",
-     "HomogeneousLocalization.instMul",
-     "HomogeneousLocalization.val_mul",
-     "HomogeneousLocalization.NumDenSameDeg.embedding",
-     "HomogeneousLocalization.NumDenSameDeg.instMul"
-    ],
-    "count": 8,
-    "digest": "773f5088e1529667"
-   },
-   "date": "2026-10-14",
-   "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "bypassed"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 9,
- "blueprint_uses": [
-  "def-nagata-homogeneous-localization-degree-zero"
- ],
- "uses_not_cited": [
-  "def-nagata-homogeneous-localization-degree-zero"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_notes": [
-  {
-   "label": "status",
-   "text": "**Status.** Bypassed by the formalized route: no separate relative-Proj\nprimitive was formalized. The blow-up is glued from the affine Proj charts\n(`AlgebraicGeometry.Proj.basicOpenIsoSpec`,\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`) with\n`AlgebraicGeometry.Scheme.Cover.RelativeGluingData`.",
-   "where": "statement"
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      497,
-      501
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      503,
-      507
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      509,
-      513
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv_self",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      515,
-      519
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv_symm",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      521,
-      526
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
-     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-     "lines": [
-      535,
-      551
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-nagata-compactification",
- "unit": "sk-def-nagata-sketch-data",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lemma-nagata-proj-chart-ring-cocycle",
-  "worker": "stage1",
-  "summary": "Made the overlap restrictions explicit, reused the general graded-module-away restriction theorem in its ring case, and proved identity, inverse, and triple cocycle by comparisons with a common homogeneous localization. No new nodes: the prospective product-localization fact is already a special case of an existing node.",
-  "blueprint": "Proof paragraph: canonical maps f,g to fg (step 1), identity and inverse (step 2), canonical maps to fgh and equality of composites (steps 3-5).",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-graded-module-away-restriction",
-    "why": "Generic graded ring localization and its comparison formula, specialized to M=R and product relations; the Nagata sketch definition unit contains no such algebraic tool."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-graded-module-away-restriction"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NK-134750b7f",
-  "group": "NK",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-134750b7f (reviewer sub-agent of L); spot-checked: Read the item, unit, DAG guidance, delivery records, exact blueprint source, Stacks Tag 01M4 proof, and every cited node. Verified all five proof steps, ring coefficient category, restriction/base-change maps, degree bookkeeping, universal-property uses, identity/inverse/cocycle laws, Mathlib searches, duplicate absence, route/tool use, and edge cases including zero/nilpotent rings and unequal degrees. Review written to review.md."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-d2cbfece4",
-  "group": "NW",
-  "result": "pass",
-  "note": "Wrote review.md. All clauses, dependencies, edge cases, universes, and report sections checked; signature matches verbatim. Six declarations passed clean server checks. No delivery errors or fixes required."
- },
- "lean": {
-  "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
-  "declaration": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
-  "declarations": [
-   "HomogeneousLocalization.Away.overlapEquiv",
-   "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
-   "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
-   "HomogeneousLocalization.Away.overlapEquiv_self",
-   "HomogeneousLocalization.Away.overlapEquiv_symm",
-   "HomogeneousLocalization.Away.overlapEquiv_cocycle"
   ],
-  "statement": "theorem Away.overlapEquiv_cocycle {d e e' : ι} {f g h z : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)\n    (hh : h ∈ 𝒜 e') (hz : z = f * g * h) :\n    (awayMap 𝒜 hh (hz.trans (by ring) : z = g * f * h)).comp\n        (Away.overlapEquiv 𝒜 f g).toRingHom = awayMap 𝒜 hh hz ∧\n      (awayMap 𝒜 hf (hz.trans (by ring) : z = h * g * f)).comp\n        (Away.overlapEquiv 𝒜 g h).toRingHom =\n          awayMap 𝒜 hf (hz.trans (by ring) : z = g * h * f) ∧\n      (awayMap 𝒜 hg (hz.trans (by ring) : z = h * f * g)).comp\n        (Away.overlapEquiv 𝒜 f h).toRingHom =\n          awayMap 𝒜 hg (hz.trans (by ring) : z = f * h * g)",
-  "branch": "slopmaster2",
-  "by": "NW",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "Existing published chart-coherence family, read using scompile.py --source (the local slopmaster2 checkout predates it). The overlap rings are represented by Away at fg and gf; Mathlib Away.isLocalization_mul identifies these with the two restricted chart rings. overlapEquiv and the two awayMap compatibility lemmas supply the canonical equivalence; self and symm supply identity and inverse; overlapEquiv_cocycle identifies all three further restrictions with the common Away ring at fgh. Specialize the general grading to ℕ and the homogeneous degrees to positive ones."
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (lemma-standard-open), (1)(c)-(e): explicit transition and triple coherence argument along the imported blueprint proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "awayMap|isLocalization.*[Mm]ul|[Cc]ocycle",
+      "results": {
+        "hits": [
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean"
+        ],
+        "count": 5,
+        "digest": "e21716d03b941067"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "leansearch",
+      "query": "homogeneous localizations chart overlap ring equivalences cocycle",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The degree zero homogeneous localization at a product fg is the localization of the degree zero localization at f at g to the degree f divided by f to the degree g",
+      "results": {
+        "hits": [
+          "HomogeneousLocalization.Away.isLocalization_mul",
+          "HomogeneousLocalization.NumDenSameDeg.embedding",
+          "HomogeneousLocalization.Away.mk",
+          "HomogeneousLocalization.mk",
+          "HomogeneousLocalization.awayMapAux_mk",
+          "HomogeneousLocalization.awayMap_mk",
+          "HomogeneousLocalization.Away.isLocalizationElem",
+          "HomogeneousLocalization.mk_mul"
+        ],
+        "count": 8,
+        "digest": "341b563b3f1276ca"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "loogle",
+      "query": "HomogeneousLocalization.awayMap",
+      "results": {
+        "hits": [
+          "HomogeneousLocalization.awayMap",
+          "HomogeneousLocalization.Away.isLocalization_mul",
+          "HomogeneousLocalization.val_awayMap_eq_aux",
+          "HomogeneousLocalization.awayMap_mk",
+          "HomogeneousLocalization.awayMapₐ_apply",
+          "HomogeneousLocalization.val_awayMap_mk",
+          "HomogeneousLocalization.awayMap_fromZeroRingHom",
+          "HomogeneousLocalization.val_awayMap"
+        ],
+        "count": 12,
+        "digest": "d0807a7fcabfdbde"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "canonical transition isomorphisms on standard Proj chart overlaps satisfy identity inverse and triple cocycle for homogeneous elements of different positive degrees",
+      "results": {
+        "hits": [
+          "AlgebraicGeometry.Proj.basicOpenIsoAway_hom",
+          "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+          "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+          "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+          "AlgebraicGeometry.Proj.awayMap_awayToSection",
+          "AlgebraicGeometry.projIsoSpecTopComponent",
+          "AlgebraicGeometry.projIsoSpec",
+          "AlgebraicGeometry.Proj.awayι_toSpecZero_assoc"
+        ],
+        "count": 8,
+        "digest": "08e03102151def55"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "grep",
+      "query": "^theorem Away.isLocalization_mul|^abbrev Away.isLocalizationElem|^lemma awayMap_mk|^def awayMap :",
+      "results": {
+        "hits": [
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+          "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean"
+        ],
+        "count": 4,
+        "digest": "9ebd148d25b23df8"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "leansearch",
+      "query": "The degree zero localization at fg is the localization of the degree zero ring at f away from g^d/f^e",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "HomogeneousLocalization.Away.isLocalization_mul",
+      "results": {
+        "hits": [
+          "HomogeneousLocalization.Away.isLocalization_mul"
+        ],
+        "count": 1,
+        "digest": "83934a3a54d1895f"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "HomogeneousLocalization.Away.isLocalization_mul canonical ring homomorphism a over f power n maps to a times g power n over fg power n and localizes at g power d over f power e",
+      "results": {
+        "hits": [
+          "HomogeneousLocalization.Away.isLocalization_mul",
+          "HomogeneousLocalization.awayMapAux_mk",
+          "HomogeneousLocalization.awayMap_mk",
+          "HomogeneousLocalization.mk_mul",
+          "HomogeneousLocalization.instMul",
+          "HomogeneousLocalization.val_mul",
+          "HomogeneousLocalization.NumDenSameDeg.embedding",
+          "HomogeneousLocalization.NumDenSameDeg.instMul"
+        ],
+        "count": 8,
+        "digest": "773f5088e1529667"
+      },
+      "date": "2026-10-14",
+      "verdict": "No exact match for all coherence clauses; product-localization and awayMap formula candidates read at HomogeneousLocalization.lean:825,867,881,887. Reused existing DAG theorem instead of creating a leaf."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "bypassed"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 9,
+  "blueprint_uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+  ],
+  "uses_not_cited": [
+    "def-nagata-homogeneous-localization-degree-zero"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_notes": [
+    {
+      "label": "status",
+      "text": "**Status.** Bypassed by the formalized route: no separate relative-Proj\nprimitive was formalized. The blow-up is glued from the affine Proj charts\n(`AlgebraicGeometry.Proj.basicOpenIsoSpec`,\n`AlgebraicGeometry.Proj.iSup_basicOpen_eq_top`) with\n`AlgebraicGeometry.Scheme.Cover.RelativeGluingData`.",
+      "where": "statement"
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            497,
+            501
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            503,
+            507
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            509,
+            513
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv_self",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            515,
+            519
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv_symm",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            521,
+            526
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
+          "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+          "lines": [
+            535,
+            551
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-nagata-compactification",
+  "unit": "sk-def-nagata-sketch-data",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lemma-nagata-proj-chart-ring-cocycle",
+    "worker": "stage1",
+    "summary": "Made the overlap restrictions explicit, reused the general graded-module-away restriction theorem in its ring case, and proved identity, inverse, and triple cocycle by comparisons with a common homogeneous localization. No new nodes: the prospective product-localization fact is already a special case of an existing node.",
+    "blueprint": "Proof paragraph: canonical maps f,g to fg (step 1), identity and inverse (step 2), canonical maps to fgh and equality of composites (steps 3-5).",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-graded-module-away-restriction",
+        "why": "Generic graded ring localization and its comparison formula, specialized to M=R and product relations; the Nagata sketch definition unit contains no such algebraic tool."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NK-134750b7f",
+    "group": "NK",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-134750b7f (reviewer sub-agent of L); spot-checked: Read the item, unit, DAG guidance, delivery records, exact blueprint source, Stacks Tag 01M4 proof, and every cited node. Verified all five proof steps, ring coefficient category, restriction/base-change maps, degree bookkeeping, universal-property uses, identity/inverse/cocycle laws, Mathlib searches, duplicate absence, route/tool use, and edge cases including zero/nilpotent rings and unequal degrees. Review written to review.md."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-d2cbfece4",
+    "group": "NW",
+    "result": "pass",
+    "note": "Wrote review.md. All clauses, dependencies, edge cases, universes, and report sections checked; signature matches verbatim. Six declarations passed clean server checks. No delivery errors or fixes required."
+  },
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+    "declaration": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
+    "declarations": [
+      "HomogeneousLocalization.Away.overlapEquiv",
+      "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
+      "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
+      "HomogeneousLocalization.Away.overlapEquiv_self",
+      "HomogeneousLocalization.Away.overlapEquiv_symm",
+      "HomogeneousLocalization.Away.overlapEquiv_cocycle"
+    ],
+    "statement": "theorem Away.overlapEquiv_cocycle {d e e' : ι} {f g h z : A} (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 e)\n    (hh : h ∈ 𝒜 e') (hz : z = f * g * h) :\n    (awayMap 𝒜 hh (hz.trans (by ring) : z = g * f * h)).comp\n        (Away.overlapEquiv 𝒜 f g).toRingHom = awayMap 𝒜 hh hz ∧\n      (awayMap 𝒜 hf (hz.trans (by ring) : z = h * g * f)).comp\n        (Away.overlapEquiv 𝒜 g h).toRingHom =\n          awayMap 𝒜 hf (hz.trans (by ring) : z = g * h * f) ∧\n      (awayMap 𝒜 hg (hz.trans (by ring) : z = h * f * g)).comp\n        (Away.overlapEquiv 𝒜 f h).toRingHom =\n          awayMap 𝒜 hg (hz.trans (by ring) : z = f * h * g)",
+    "branch": "slopmaster2",
+    "by": "NW",
+    "date": "2026-10-15",
+    "existing": true,
+    "note": "Existing published chart-coherence family, read using scompile.py --source (the local slopmaster2 checkout predates it). The overlap rings are represented by Away at fg and gf; Mathlib Away.isLocalization_mul identifies these with the two restricted chart rings. overlapEquiv and the two awayMap compatibility lemmas supply the canonical equivalence; self and symm supply identity and inverse; overlapEquiv_cocycle identifies all three further restrictions with the common Away ring at fgh. Specialize the general grading to ℕ and the homogeneous degrees to positive ones."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For positive-degree homogeneous $f,g,h$, localization induces canonical\nequivalences between the restrictions of $(R_{(f)})_0$ and\n$(R_{(g)})_0$ to the overlap indexed by $fg$. These equivalences are the\nidentity for $f=g$, are inverse under exchange of $f$ and $g$, and satisfy\nthe cocycle equality on the triple localization indexed by $fgh$.",
+    "proof": [
+      {
+        "text": "Use the canonical maps between the homogeneous localizations at $f$, $g$,\nand $fg$. On a representative $x/f^m$ each map sends the fraction to its\nimage in the localization at $fg$; the localization relation proves\nindependence of representatives. The identity, inverse, and triple\ncocycle equations follow because both sides are the same map into the\nlocalization at $fgh$. These are the compatibilities used by the verified\ndeclarations `Proj.basicOpenIsoSpec` and\n`Proj.affineOpenCover`.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

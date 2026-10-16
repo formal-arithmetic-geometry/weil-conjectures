@@ -1,254 +1,272 @@
 {
- "id": "prop-weil-pbc-direct-image-limits",
- "blueprint": {
-  "is": "prop-weil-pbc-direct-image-limits",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Direct image, derived limits, and completeness",
- "statement": "Levelwise direct image on tower categories has a total right derived functor\n\n$$\n Rf_*^{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(X))\n \\longrightarrow D(\\operatorname{Tow}_{A}(Y)),\n$$\n\nwith $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nFor every $M_\\bullet$ the canonical map\n\n$$\n Rf_*\\Rlim M_\\bullet\n \\xrightarrow{\\sim}\n \\Rlim\\bigl(Rf_*^{\\operatorname{Tow}}M_\\bullet\\bigr)\n$$\n\nis an isomorphism. Under the two canonical Roos triangles associated with the\nderived inverse-limit [def-weil-pbc-derived-inverse-limit] construction, it\nis induced by the canonical isomorphisms\n\n$$\n Rf_*R\\!\\prod_nM_n\\xrightarrow{\\sim}\n R\\!\\prod_nRf_*M_n\n$$\n\nand their commutation with $(1-s)$. If $K\\in D(X_{\\Proet},A)$ is derived\n$I$-complete, then $Rf_*K$ is derived $I$-complete. For every $n\\geq1$, the\nprojection-formula morphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\\longrightarrow Rf_*(K\\otimes_A^LP_n)\n$$\n\nis a functorial isomorphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\n \\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n,\n$$\n\nand these isomorphisms commute with $P_{n+1}\\to P_n$. Under them, the\ncompletion map for $Rf_*K$ is the composite\n\n$$\n Rf_*K\\xrightarrow{\\sim}Rf_*\\Rlim K_\\bullet\n \\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet.\n$$\n\nThe commutation $Rf_*\\Rlim\\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}$\nand the completeness of $Rf_*K$ for derived complete $K$ are clauses (1), (3)\nand (4) of Stacks Project, Lemma (Tag\n[099N](https://stacks.math.columbia.edu/tag/099N), Section 61.20, Tag\n[099L](https://stacks.math.columbia.edu/tag/099L)): the Stacks entry assumes\na Noetherian ring $\\Lambda$, an ideal $I\\subset\\Lambda$ and a morphism of\ntopoi, and states that $Rf_*$ sends $D_{comp}$ into $D_{comp}$ and that\n$Rf_*K=\\Rlim Rf_*(K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$; the form used\nhere is its tower-level refinement over $T_{\\Proet}$, and the finite-level\nprojection-formula isomorphisms coming from\n[lemma-weil-pbc-perfect-projection-formula] are not part of the Stacks\nstatement.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-  "place": "node prop-weil-pbc-direct-image-limits, order 1276",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099N"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099L"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-derived-inverse-limit",
-  "lemma-weil-pbc-perfect-projection-formula"
- ],
- "proof": [
-  {
-   "text": "By [def-weil-pbc-adic-coefficient-datum], $\\operatorname{Tow}_A(X)$ is Grothendieck abelian. Apply [lem-weil-pbc-kinjective-functorial-existence] in this category to obtain a functorial tower resolution $M_\\bullet\\to J_\\bullet$. The additive levelwise direct image induces an exact functor $K(\\operatorname{Tow}_A(X))\\to D(\\operatorname{Tow}_A(Y))$: it commutes with shifts and with the finite direct sums and matrices defining cones in [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-kinjective-total-derived] to this functor. This constructs $Rf_*^{\\operatorname{Tow}}$, represented on $M_\\bullet$ by $f_*J_\\bullet$.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, first sentence: total derived functor"
-   }
+  "id": "prop-weil-pbc-direct-image-limits",
+  "blueprint": {
+    "is": "prop-weil-pbc-direct-image-limits",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For $n\\geq1$, define $L_n(V)_m=V$ for $1\\leq m\\leq n$ and $L_n(V)_m=0$ for $m>n$, with identity transitions below $n$. A tower map $L_n(V)\\to J_\\bullet$ is uniquely specified by its component $V\\to J_n$, the lower components being its composites with the transitions. Thus $L_n\\dashv\\operatorname{ev}_n$, and $L_n$ is exact because exactness is levelwise [def-weil-pbc-adic-coefficient-datum]. For an acyclic complex $V$, $\\operatorname{Hom}^\\bullet(V,J_n)=\\operatorname{Hom}^\\bullet(L_nV,J_\\bullet)$ is acyclic; hence $J_n$ is K-injective [lem-weil-pbc-kinjective-hom-derived]. Evaluation also preserves the resolution quasi-isomorphism, so $\\operatorname{ev}_n(f_*J_\\bullet)=f_*J_n$ represents $Rf_*M_n$ by [lem-weil-pbc-kinjective-total-derived]. These identifications commute with every tower transition because all the maps are evaluations of the same strict tower resolution.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": true,
-   "source": {
+  "kind": "statement",
+  "title": "Direct image, derived limits, and completeness",
+  "statement": "Levelwise direct image on tower categories has a total right derived functor\n\n$$\n Rf_*^{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(X))\n \\longrightarrow D(\\operatorname{Tow}_{A}(Y)),\n$$\n\nwith $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nFor every $M_\\bullet$ the canonical map\n\n$$\n Rf_*\\Rlim M_\\bullet\n \\xrightarrow{\\sim}\n \\Rlim\\bigl(Rf_*^{\\operatorname{Tow}}M_\\bullet\\bigr)\n$$\n\nis an isomorphism. Under the two canonical Roos triangles associated with the\nderived inverse-limit [def-weil-pbc-derived-inverse-limit] construction, it\nis induced by the canonical isomorphisms\n\n$$\n Rf_*R\\!\\prod_nM_n\\xrightarrow{\\sim}\n R\\!\\prod_nRf_*M_n\n$$\n\nand their commutation with $(1-s)$. If $K\\in D(X_{\\Proet},A)$ is derived\n$I$-complete, then $Rf_*K$ is derived $I$-complete. For every $n\\geq1$, the\nprojection-formula morphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\\longrightarrow Rf_*(K\\otimes_A^LP_n)\n$$\n\nis a functorial isomorphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\n \\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n,\n$$\n\nand these isomorphisms commute with $P_{n+1}\\to P_n$. Under them, the\ncompletion map for $Rf_*K$ is the composite\n\n$$\n Rf_*K\\xrightarrow{\\sim}Rf_*\\Rlim K_\\bullet\n \\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet.\n$$\n\nThe commutation $Rf_*\\Rlim\\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}$\nand the completeness of $Rf_*K$ for derived complete $K$ are clauses (1), (3)\nand (4) of Stacks Project, Lemma (Tag\n[099N](https://stacks.math.columbia.edu/tag/099N), Section 61.20, Tag\n[099L](https://stacks.math.columbia.edu/tag/099L)): the Stacks entry assumes\na Noetherian ring $\\Lambda$, an ideal $I\\subset\\Lambda$ and a morphism of\ntopoi, and states that $Rf_*$ sends $D_{comp}$ into $D_{comp}$ and that\n$Rf_*K=\\Rlim Rf_*(K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$; the form used\nhere is its tower-level refinement over $T_{\\Proet}$, and the finite-level\nprojection-formula isomorphisms coming from\n[lemma-weil-pbc-perfect-projection-formula] are not part of the Stacks\nstatement.",
+  "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, first sentence: exact evaluation and its comparison"
-   }
+    "place": "node prop-weil-pbc-direct-image-limits, order 1276",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099N"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099L"
+      }
+    ]
   },
-  {
-   "text": "For $H\\in D(Y_{\\Proet},A)$, the adjunction of [def-weil-pbc-proetale-operations] and the product universal property of [def-weil-pbc-derived-inverse-limit] give\n$\\operatorname{Hom}(H,Rf_*R\\!\\prod_nM_n)=\\operatorname{Hom}(Lf^*H,R\\!\\prod_nM_n)=\\prod_n\\operatorname{Hom}(Lf^*H,M_n)=\\prod_n\\operatorname{Hom}(H,Rf_*M_n)$.\nConsequently $Rf_*R\\!\\prod_nM_n$ is the product of the $Rf_*M_n$, and the map with components $Rf_*p_n$ is the canonical natural product isomorphism $\\alpha$. This proves the product clause without a new lemma.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-derived-inverse-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, product-preservation parenthesis"
-   }
-  },
-  {
-   "text": "Write $t_{n+1,n}:M_{n+1}\\to M_n$ for the transitions and $p_n$ for the product projections. The shift satisfies $p_ns=t_{n+1,n}p_{n+1}$ [prop-weil-pbc-roos-triangle]. On the image product the shift $s'$ satisfies $p'_ns'=Rf_*(t_{n+1,n})p'_{n+1}$. Since $p'_n\\alpha=Rf_*p_n$, both $s'\\alpha$ and $\\alpha Rf_*s$ have $n$th component $Rf_*(t_{n+1,n}p_{n+1})$. The product universal property therefore gives $s'\\alpha=\\alpha Rf_*s$, and additivity gives the same equality for $1-s$.",
-   "uses": [
-    "prop-weil-pbc-roos-triangle",
+  "stmt_deps": [
     "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, commutation with (1-s)"
-   }
-  },
-  {
-   "text": "The comparison in the previous steps induces the canonical comparison of the two Roos cones [prop-weil-pbc-roos-triangle], hence the displayed inverse-limit map. To verify its invertibility and its canonical model, use the tower resolution $J_\\bullet$ from step 1. The products are represented by $\\prod_nJ_n$ [prop-weil-pbc-derived-product-representation]. This product is K-injective: its Hom complex from an acyclic complex is the product of the acyclic Hom complexes into the $J_n$, and products of abelian groups preserve exactness componentwise. The shifted cone of $1-s$ is also K-injective, since its Hom complex is the shifted cone of a map between these acyclic complexes (the cone has the degreewise split short exact sequence with the target and the shifted source). The coefficient inverse image in [def-weil-pbc-proetale-operations] is exact, because its coefficient map is an isomorphism, while [def-weil-proetale-inverse-image] supplies a morphism of sites and [def-weil-pbc-sites-and-cohomology], clause (3), gives exact inverse image on underlying abelian sheaves. Kernels and cokernels of module sheaves are those of their underlying abelian sheaves [def-weil-sheaf-of-modules-category], so this is also exact on modules. Its levelwise extension is exact as well. By the Hom adjunction, $f_*$ and its levelwise extension therefore send K-injective complexes to K-injective complexes. Thus $f_*J_\\bullet$ is a K-injective tower representing $Rf_*^{\\operatorname{Tow}}M_\\bullet$, and its product represents the target product. At the complex level the comparison is the ordinary right-adjoint isomorphism $f_*\\prod_nJ_n\\cong\\prod_nf_*J_n$; its components are the product projections, so it is exactly $\\alpha$ of step 3. The functor $f_*$ commutes with the finite direct sums and matrices in the cone formula [def-weil-abstract-derived-category]. The equality of step 4 therefore gives an actual isomorphism of shifted cone complexes. By [lem-weil-pbc-kinjective-total-derived] these complexes compute the source and target of $Rf_*\\Rlim M_\\bullet\\to\\Rlim Rf_*^{\\operatorname{Tow}}M_\\bullet$. This proves the canonical isomorphism and its compatibility with the Roos triangles.",
-   "uses": [
-    "prop-weil-pbc-roos-triangle",
-    "prop-weil-pbc-derived-product-representation",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, comparison of the two Roos triangles; explicit K-injective cone model"
-   }
-  },
-  {
-   "text": "For each perfect $P_n$ of [def-weil-pbc-adic-coefficient-datum], [lemma-weil-pbc-perfect-projection-formula] gives $\\pi_n:(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*K_n$. In [def-weil-pbc-projection-formula-map] this map is adjoint to the counit tensored with $Lf^*P_n$. Tensoring that same counit with the quotient map $P_{n+1}\\to P_n$ gives the commutative square for $\\pi_{n+1}$ and $\\pi_n$; tensoring it with $A\\to P_n$ also gives compatibility with the reduction maps from $Rf_*K$. Consequently these are isomorphisms of the reduction tower together with its maps from $Rf_*K$. By [prop-weil-pbc-koszul-reconstruction], derived complete $K$ has its completion isomorphism $K\\to\\Rlim K_\\bullet$. Apply $Rf_*$ and then step 5. The resulting isomorphism $Rf_*K\\to\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet$, identified by the $\\pi_n$, is the quotient-tower completion map of $Rf_*K$, because all its components are the reduction maps just checked. The functorial identification of the quotient and Koszul completion maps in [prop-weil-pbc-koszul-reconstruction] and the definition [def-weil-pbc-intrinsic-completion] now show that $Rf_*K$ is derived $I$-complete. This also proves precisely the completion composite in the statement.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "def-weil-pbc-projection-formula-map",
-    "prop-weil-pbc-koszul-reconstruction",
-    "def-weil-pbc-intrinsic-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-    "place": "Proof, final sentence: projection formula, coefficient compatibility, completion"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-projection-formula-map",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-derived-product-representation",
-  "prop-weil-pbc-koszul-reconstruction",
-  "prop-weil-pbc-roos-triangle"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "direct image right derived functor commutes with derived inverse limits and preserves derived completeness",
-   "results": "CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure; no theorem for this pro-etale statement",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits, DerivedCategory, right derived functor, inverse limit",
-   "results": "unknown identifier CategoryTheory.Limits; no hit",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rightDerivedFunctor|derived.*limit|Grothendieck.*abelian in Mathlib",
-   "results": "no matching declarations",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1276,
- "blueprint_uses": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
-  "def-weil-pbc-projection-formula-map",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-roos-triangle"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "prop-weil-pbc-direct-image-limits",
-  "worker": "stage1",
-  "summary": "Second reading removed two clause/elementary nodes, added the generic Stacks 070K K-injective derived-functor theorem, and wrote exact evaluation, product preservation, shift compatibility, the cone model, and completion compatibility explicitly. The item statement is unchanged.",
-  "blueprint": "Steps 1–2 realize the first proof sentence; steps 3–5 realize the Roos/product/shift comparison sentence; step 6 realizes the final projection-formula and completion sentence."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "NT-Codex-NF-6e237a730",
-  "group": "NF",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-6e237a730 (reviewer sub-agent of L); spot-checked: Read all required guidance, packet, report, item, new node, cited statements, blueprint sources, Stacks locations, unit, and chapter route. Verified hypotheses, coefficient/base-change data, Roos/product/cone arguments, projection-formula compatibility, edge cases, searches, duplicates, and repairs. Wrote review.md; no fixes or dropped nodes required."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-1f3350d30",
-  "group": "Q44",
-  "result": "fix",
-  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedDirectImageLimits",
-  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePush",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePush_additive",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModuleAdjunction",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPush",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerAdjunction",
-   "AlgebraicGeometry.Scheme.completedTowerEvaluation_kinjective",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.IsTowerPushEvaluation",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation_existsUnique",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageProductComparison",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlim_roos",
-   "AlgebraicGeometry.Scheme.completedOrdinaryReductionPullbackInv",
-   "AlgebraicGeometry.Scheme.completedOrdinaryReductionPullbackInv_isIso",
-   "AlgebraicGeometry.Scheme.completedReductionLevelPullbackIso",
-   "AlgebraicGeometry.Scheme.completedReductionLevelPullbackIso_transition",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryPullbackIso",
-   "AlgebraicGeometry.Scheme.IsCompletedReductionPullbackComparison",
-   "AlgebraicGeometry.Scheme.completedReductionPullbackIso_existsUnique",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.reductionTowerPullbackIso",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection_isIso",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushReductionEvaluation",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection_properties",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.push_complete"
+    "lemma-weil-pbc-perfect-projection-formula"
   ],
-  "file": "lean/Sheaf/Paper/CompletedDirectImageLimits.lean",
-  "statement": "def AdicCoefficientDatum.directImageRlimIso : completedRlim U (d.completedRing U) ⋙ d.push f ≅ d.towerPush f ⋙ completedRlim V (d.completedRing V)",
-  "branch": "newtargets-dag",
-  "by": "Q44",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "Section 1(B): the current CompletedTowerDirectImage exports the actual completed-coefficient direct images and their derived comparisons, but not the strict normalized tower adjunction and reduction/pullback mate used by completed exchange. Supply that equivalent normalized ringed-adjunction interface, including the evaluation equation on K-injectives, the constant/pullback conjugate limit comparison, strict projection and its quotient/completion-unit compatibility. Reuse the existing coefficient objects and universal derived pairs."
- }
+  "proof": [
+    {
+      "text": "By [def-weil-pbc-adic-coefficient-datum], $\\operatorname{Tow}_A(X)$ is Grothendieck abelian. Apply [lem-weil-pbc-kinjective-functorial-existence] in this category to obtain a functorial tower resolution $M_\\bullet\\to J_\\bullet$. The additive levelwise direct image induces an exact functor $K(\\operatorname{Tow}_A(X))\\to D(\\operatorname{Tow}_A(Y))$: it commutes with shifts and with the finite direct sums and matrices defining cones in [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-kinjective-total-derived] to this functor. This constructs $Rf_*^{\\operatorname{Tow}}$, represented on $M_\\bullet$ by $f_*J_\\bullet$.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "lem-weil-pbc-kinjective-functorial-existence",
+        "def-weil-abstract-derived-category",
+        "lem-weil-pbc-kinjective-total-derived"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, first sentence: total derived functor"
+      }
+    },
+    {
+      "text": "For $n\\geq1$, define $L_n(V)_m=V$ for $1\\leq m\\leq n$ and $L_n(V)_m=0$ for $m>n$, with identity transitions below $n$. A tower map $L_n(V)\\to J_\\bullet$ is uniquely specified by its component $V\\to J_n$, the lower components being its composites with the transitions. Thus $L_n\\dashv\\operatorname{ev}_n$, and $L_n$ is exact because exactness is levelwise [def-weil-pbc-adic-coefficient-datum]. For an acyclic complex $V$, $\\operatorname{Hom}^\\bullet(V,J_n)=\\operatorname{Hom}^\\bullet(L_nV,J_\\bullet)$ is acyclic; hence $J_n$ is K-injective [lem-weil-pbc-kinjective-hom-derived]. Evaluation also preserves the resolution quasi-isomorphism, so $\\operatorname{ev}_n(f_*J_\\bullet)=f_*J_n$ represents $Rf_*M_n$ by [lem-weil-pbc-kinjective-total-derived]. These identifications commute with every tower transition because all the maps are evaluations of the same strict tower resolution.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "lem-weil-pbc-kinjective-hom-derived",
+        "lem-weil-pbc-kinjective-total-derived"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, first sentence: exact evaluation and its comparison"
+      }
+    },
+    {
+      "text": "For $H\\in D(Y_{\\Proet},A)$, the adjunction of [def-weil-pbc-proetale-operations] and the product universal property of [def-weil-pbc-derived-inverse-limit] give\n$\\operatorname{Hom}(H,Rf_*R\\!\\prod_nM_n)=\\operatorname{Hom}(Lf^*H,R\\!\\prod_nM_n)=\\prod_n\\operatorname{Hom}(Lf^*H,M_n)=\\prod_n\\operatorname{Hom}(H,Rf_*M_n)$.\nConsequently $Rf_*R\\!\\prod_nM_n$ is the product of the $Rf_*M_n$, and the map with components $Rf_*p_n$ is the canonical natural product isomorphism $\\alpha$. This proves the product clause without a new lemma.",
+      "uses": [
+        "def-weil-pbc-proetale-operations",
+        "def-weil-pbc-derived-inverse-limit"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, product-preservation parenthesis"
+      }
+    },
+    {
+      "text": "Write $t_{n+1,n}:M_{n+1}\\to M_n$ for the transitions and $p_n$ for the product projections. The shift satisfies $p_ns=t_{n+1,n}p_{n+1}$ [prop-weil-pbc-roos-triangle]. On the image product the shift $s'$ satisfies $p'_ns'=Rf_*(t_{n+1,n})p'_{n+1}$. Since $p'_n\\alpha=Rf_*p_n$, both $s'\\alpha$ and $\\alpha Rf_*s$ have $n$th component $Rf_*(t_{n+1,n}p_{n+1})$. The product universal property therefore gives $s'\\alpha=\\alpha Rf_*s$, and additivity gives the same equality for $1-s$.",
+      "uses": [
+        "prop-weil-pbc-roos-triangle",
+        "def-weil-pbc-derived-inverse-limit",
+        "def-weil-pbc-proetale-operations"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, commutation with (1-s)"
+      }
+    },
+    {
+      "text": "The comparison in the previous steps induces the canonical comparison of the two Roos cones [prop-weil-pbc-roos-triangle], hence the displayed inverse-limit map. To verify its invertibility and its canonical model, use the tower resolution $J_\\bullet$ from step 1. The products are represented by $\\prod_nJ_n$ [prop-weil-pbc-derived-product-representation]. This product is K-injective: its Hom complex from an acyclic complex is the product of the acyclic Hom complexes into the $J_n$, and products of abelian groups preserve exactness componentwise. The shifted cone of $1-s$ is also K-injective, since its Hom complex is the shifted cone of a map between these acyclic complexes (the cone has the degreewise split short exact sequence with the target and the shifted source). The coefficient inverse image in [def-weil-pbc-proetale-operations] is exact, because its coefficient map is an isomorphism, while [def-weil-proetale-inverse-image] supplies a morphism of sites and [def-weil-pbc-sites-and-cohomology], clause (3), gives exact inverse image on underlying abelian sheaves. Kernels and cokernels of module sheaves are those of their underlying abelian sheaves [def-weil-sheaf-of-modules-category], so this is also exact on modules. Its levelwise extension is exact as well. By the Hom adjunction, $f_*$ and its levelwise extension therefore send K-injective complexes to K-injective complexes. Thus $f_*J_\\bullet$ is a K-injective tower representing $Rf_*^{\\operatorname{Tow}}M_\\bullet$, and its product represents the target product. At the complex level the comparison is the ordinary right-adjoint isomorphism $f_*\\prod_nJ_n\\cong\\prod_nf_*J_n$; its components are the product projections, so it is exactly $\\alpha$ of step 3. The functor $f_*$ commutes with the finite direct sums and matrices in the cone formula [def-weil-abstract-derived-category]. The equality of step 4 therefore gives an actual isomorphism of shifted cone complexes. By [lem-weil-pbc-kinjective-total-derived] these complexes compute the source and target of $Rf_*\\Rlim M_\\bullet\\to\\Rlim Rf_*^{\\operatorname{Tow}}M_\\bullet$. This proves the canonical isomorphism and its compatibility with the Roos triangles.",
+      "uses": [
+        "prop-weil-pbc-roos-triangle",
+        "prop-weil-pbc-derived-product-representation",
+        "def-weil-pbc-proetale-operations",
+        "def-weil-abstract-derived-category",
+        "lem-weil-pbc-kinjective-total-derived",
+        "def-weil-proetale-inverse-image",
+        "def-weil-pbc-sites-and-cohomology",
+        "def-weil-sheaf-of-modules-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, comparison of the two Roos triangles; explicit K-injective cone model"
+      }
+    },
+    {
+      "text": "For each perfect $P_n$ of [def-weil-pbc-adic-coefficient-datum], [lemma-weil-pbc-perfect-projection-formula] gives $\\pi_n:(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*K_n$. In [def-weil-pbc-projection-formula-map] this map is adjoint to the counit tensored with $Lf^*P_n$. Tensoring that same counit with the quotient map $P_{n+1}\\to P_n$ gives the commutative square for $\\pi_{n+1}$ and $\\pi_n$; tensoring it with $A\\to P_n$ also gives compatibility with the reduction maps from $Rf_*K$. Consequently these are isomorphisms of the reduction tower together with its maps from $Rf_*K$. By [prop-weil-pbc-koszul-reconstruction], derived complete $K$ has its completion isomorphism $K\\to\\Rlim K_\\bullet$. Apply $Rf_*$ and then step 5. The resulting isomorphism $Rf_*K\\to\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet$, identified by the $\\pi_n$, is the quotient-tower completion map of $Rf_*K$, because all its components are the reduction maps just checked. The functorial identification of the quotient and Koszul completion maps in [prop-weil-pbc-koszul-reconstruction] and the definition [def-weil-pbc-intrinsic-completion] now show that $Rf_*K$ is derived $I$-complete. This also proves precisely the completion composite in the statement.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "lemma-weil-pbc-perfect-projection-formula",
+        "def-weil-pbc-projection-formula-map",
+        "prop-weil-pbc-koszul-reconstruction",
+        "def-weil-pbc-intrinsic-completion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+        "place": "Proof, final sentence: projection formula, coefficient compatibility, completion"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-projection-formula-map",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-proetale-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "prop-weil-pbc-derived-product-representation",
+    "prop-weil-pbc-koszul-reconstruction",
+    "prop-weil-pbc-roos-triangle"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "direct image right derived functor commutes with derived inverse limits and preserves derived completeness",
+      "results": "CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure; no theorem for this pro-etale statement",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits, DerivedCategory, right derived functor, inverse limit",
+      "results": "unknown identifier CategoryTheory.Limits; no hit",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rightDerivedFunctor|derived.*limit|Grothendieck.*abelian in Mathlib",
+      "results": "no matching declarations",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1276,
+  "blueprint_uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-pbc-projection-formula-map",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "prop-weil-pbc-roos-triangle"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "prop-weil-pbc-direct-image-limits",
+    "worker": "stage1",
+    "summary": "Second reading removed two clause/elementary nodes, added the generic Stacks 070K K-injective derived-functor theorem, and wrote exact evaluation, product preservation, shift compatibility, the cone model, and completion compatibility explicitly. The item statement is unchanged.",
+    "blueprint": "Steps 1–2 realize the first proof sentence; steps 3–5 realize the Roos/product/shift comparison sentence; step 6 realizes the final projection-formula and completion sentence."
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "NT-Codex-NF-6e237a730",
+    "group": "NF",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-6e237a730 (reviewer sub-agent of L); spot-checked: Read all required guidance, packet, report, item, new node, cited statements, blueprint sources, Stacks locations, unit, and chapter route. Verified hypotheses, coefficient/base-change data, Roos/product/cone arguments, projection-formula compatibility, edge cases, searches, duplicates, and repairs. Wrote review.md; no fixes or dropped nodes required."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-1f3350d30",
+    "group": "Q44",
+    "result": "fix",
+    "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedDirectImageLimits",
+    "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePush",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePush_additive",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModuleAdjunction",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPush",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerAdjunction",
+      "AlgebraicGeometry.Scheme.completedTowerEvaluation_kinjective",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.IsTowerPushEvaluation",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation_existsUnique",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageProductComparison",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlim_roos",
+      "AlgebraicGeometry.Scheme.completedOrdinaryReductionPullbackInv",
+      "AlgebraicGeometry.Scheme.completedOrdinaryReductionPullbackInv_isIso",
+      "AlgebraicGeometry.Scheme.completedReductionLevelPullbackIso",
+      "AlgebraicGeometry.Scheme.completedReductionLevelPullbackIso_transition",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryPullbackIso",
+      "AlgebraicGeometry.Scheme.IsCompletedReductionPullbackComparison",
+      "AlgebraicGeometry.Scheme.completedReductionPullbackIso_existsUnique",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.reductionTowerPullbackIso",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection_isIso",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushReductionEvaluation",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerProjection_properties",
+      "AlgebraicGeometry.Scheme.AdicCoefficientDatum.push_complete"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedDirectImageLimits.lean",
+    "statement": "def AdicCoefficientDatum.directImageRlimIso : completedRlim U (d.completedRing U) ⋙ d.push f ≅ d.towerPush f ⋙ completedRlim V (d.completedRing V)",
+    "branch": "newtargets-dag",
+    "by": "Q44",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "Section 1(B): the current CompletedTowerDirectImage exports the actual completed-coefficient direct images and their derived comparisons, but not the strict normalized tower adjunction and reduction/pullback mate used by completed exchange. Supply that equivalent normalized ringed-adjunction interface, including the evaluation equation on K-injectives, the constant/pullback conjugate limit comparison, strict projection and its quotient/completion-unit compatibility. Reuse the existing coefficient objects and universal derived pairs."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Levelwise direct image on tower categories has a total right derived functor\n\n$$\n Rf_*^{\\operatorname{Tow}}:\n D(\\operatorname{Tow}_{A}(X))\n \\longrightarrow D(\\operatorname{Tow}_{A}(Y)),\n$$\n\nwith $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nFor every $M_\\bullet$ the canonical map\n\n$$\n Rf_*\\Rlim M_\\bullet\n \\xrightarrow{\\sim}\n \\Rlim\\bigl(Rf_*^{\\operatorname{Tow}}M_\\bullet\\bigr)\n$$\n\nis an isomorphism. Under the two canonical Roos triangles associated with the\nderived inverse-limit [def-weil-pbc-derived-inverse-limit] construction, it\nis induced by the canonical isomorphisms\n\n$$\n Rf_*R\\!\\prod_nM_n\\xrightarrow{\\sim}\n R\\!\\prod_nRf_*M_n\n$$\n\nand their commutation with $(1-s)$. If $K\\in D(X_{\\Proet},A)$ is derived\n$I$-complete, then $Rf_*K$ is derived $I$-complete. For every $n\\geq1$, the\nprojection-formula morphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\\longrightarrow Rf_*(K\\otimes_A^LP_n)\n$$\n\nis a functorial isomorphism\n\n$$\n (Rf_*K)\\otimes_A^LP_n\n \\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n,\n$$\n\nand these isomorphisms commute with $P_{n+1}\\to P_n$. Under them, the\ncompletion map for $Rf_*K$ is the composite\n\n$$\n Rf_*K\\xrightarrow{\\sim}Rf_*\\Rlim K_\\bullet\n \\xrightarrow{\\sim}\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet.\n$$",
+    "proof": [
+      {
+        "text": "The tower category of [def-weil-pbc-adic-coefficient-datum] is Grothendieck\nabelian with exact evaluation functors, so levelwise K-injective resolutions\n(also with respect to the K-injective presentation of\n[def-weil-pbc-derived-inverse-limit]) give the total right derived functor\n$Rf_*^{\\operatorname{Tow}}$ with\n$\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\nApplying $Rf_*$ to the canonical Roos triangle of\n[prop-weil-pbc-roos-triangle] for $M_\\bullet$ and comparing with the Roos\ntriangle for $Rf_*^{\\operatorname{Tow}}M_\\bullet$, using that the derived\nproducts commute with $Rf_*$ (they are the products of the levelwise\nK-injective resolutions and direct image is a right adjoint, hence\nproduct-preserving) and with $(1-s)$, identifies the two triangles and gives\nthe displayed isomorphism $Rf_*\\Rlim M_\\bullet\\xrightarrow{\\sim}\n\\Rlim(Rf_*^{\\operatorname{Tow}}M_\\bullet)$. If $K$ is derived $I$-complete\nthen, applied to the tower $K_\\bullet$, this shows $Rf_*K\\xrightarrow{\\sim}\n\\Rlim Rf_*^{\\operatorname{Tow}}K_\\bullet$, so $Rf_*K$ is derived\n$I$-complete; [lemma-weil-pbc-perfect-projection-formula] supplies the\nprojection-formula isomorphisms\n$(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*(K\\otimes_A^LP_n)=Rf_*K_n$ of\n[def-weil-pbc-projection-formula-map], commuting with $P_{n+1}\\to P_n$ by the\nnormalization data of [def-weil-pbc-adic-coefficient-datum]; under them the\ncompletion map for $Rf_*K$ is the displayed composite.",
+        "uses": [
+          "def-weil-pbc-adic-coefficient-datum",
+          "def-weil-pbc-derived-inverse-limit",
+          "prop-weil-pbc-roos-triangle",
+          "lemma-weil-pbc-perfect-projection-formula",
+          "def-weil-pbc-projection-formula-map"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

@@ -1,0 +1,64 @@
+{
+  "id": "det-pbc-torsion-stalk-proetale-point",
+  "kind": "statement",
+  "title": "Sections at a pro-étale geometric point",
+  "statement": "Let $\\Omega$ be an algebraically closed field, $P=\\operatorname{Spec}\\Omega$,\nand $\\Lambda$ a commutative ring.\n\n1. The functor $\\Gamma(P_{\\mathrm{proét}},-)$ on sheaves of $\\Lambda$-modules\n   is exact; hence $R\\Gamma(P_{\\mathrm{proét}},M)$ is computed termwise for\n   $M\\in D^+(P_{\\mathrm{proét}},\\Lambda)$.\n2. For $L\\in D^+(P_{\\Et},\\Lambda)$ the complex $L$ is (up to the equivalence\n   between sheaves on $P_{\\Et}$ and $\\Lambda$-modules given by global\n   sections) a complex of $\\Lambda$-modules $L(P)$, and\n   $\\Gamma(P_{\\mathrm{proét}},\\nu_P^*L)\\simeq L(P)$ canonically.\n3. Let $f:X\\to Y$ be proper, $\\bar y:P\\to Y$ a geometric point,\n   $a:X_{\\bar y}\\to P$ and $i:X_{\\bar y}\\to X$ the projections, and\n   $K=\\nu_X^*K_{\\mathrm{ét}}$ with $K_{\\mathrm{ét}}\\in D^+(X_{\\Et},\\Lambda)$\n   having torsion cohomology. Then there are canonical isomorphisms\n\n   $$\n   (Rf_*K_{\\mathrm{ét}})_{\\bar y}\\simeq\\Gamma(P_{\\mathrm{proét}},\\bar y^*Rf_*K)\n   \\simeq R\\Gamma(X_{\\bar y,\\mathrm{proét}},i^*K),\n   $$\n\n   and the composite agrees with the étale fibre isomorphism\n   $(Rf_*K_{\\mathrm{ét}})_{\\bar y}\\simeq R\\Gamma(X_{\\bar y,\\Et},i^{-1}K_{\\mathrm{ét}})$\n   followed by the comparison $R\\Gamma(X_{\\bar y,\\Et},-)\\to\n   R\\Gamma(X_{\\bar y,\\mathrm{proét}},\\nu^*-)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.md",
+    "place": "node det-pbc-torsion-stalk-proetale-point, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*(1)* A weakly étale $\\Omega$-algebra is ind-étale, hence a filtered colimit\nof finite products of copies of $\\Omega$; so every affine object of\n$P_{\\mathrm{proét}}$ is $\\operatorname{Spec}C(S,\\Omega)$ for a profinite set\n$S$ ($C(S,\\Omega)$ the locally constant functions). Since $P$ is\nquasi-compact, every pro-étale covering of $P$ is refined by a covering with a\nsingle affine member $\\operatorname{Spec}C(S,\\Omega)\\to P$ (a finite disjoint\nunion of affine members), with $S\\neq\\emptyset$, and such a map has a\nsection (choose a point of $S$). Hence an epimorphism of sheaves\n$M\\to N$ is surjective on sections over $P$: a section of $N$ over $P$ lifts\nafter such a covering, and pulling back along the section gives a lift over\n$P$. So $\\Gamma(P,-)$ is exact, and $R\\Gamma(P,-)$ is computed termwise on\nbounded below complexes.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2)* Every étale $\\Omega$-scheme is a disjoint union of copies of $P$, so\n$\\Gamma(P_{\\Et},-)$ is an equivalence from sheaves on $P_{\\Et}$ to sets (and\nto $\\Lambda$-modules for module sheaves), with exact inverse\n$N\\mapsto\\underline N$. The pullback $\\nu_P^*\\underline N$ is the\npro-étale sheaf associated with the presheaf\n$\\operatorname{Spec}C(S,\\Omega)\\mapsto\\varinjlim N$ over étale maps, that is\n$S\\mapsto C(S,N)$ (locally constant functions), whose value on $P$ is $N$. As\n$\\nu_P^*$ and $\\Gamma(P_{\\mathrm{proét}},-)$ are both exact, the\nidentification extends termwise to complexes.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3)* The geometric stalk $(Rf_*K_{\\mathrm{ét}})_{\\bar y}$ is by definition\n$\\Gamma(P_{\\Et},\\bar y^{-1}Rf_*K_{\\mathrm{ét}})$. By the comparison\nisomorphisms $\\bar y^*\\nu_Y^*\\simeq\\nu_P^*\\bar y^{-1}$ and\n$\\nu_Y^*Rf_*K_{\\mathrm{ét}}\\simeq Rf_*\\nu_X^*K_{\\mathrm{ét}}=Rf_*K$\n([prop-weil-pbc-comparison-direct-image], $f$ being qcqs), and by (2), it is\n$\\Gamma(P_{\\mathrm{proét}},\\bar y^*Rf_*K)$. By proper base change for the\nsquare with $g=\\bar y$, transported to the pro-étale site as in\n[lem-weil-pbc-transport-identifies-exchange], $\\bar y^*Rf_*K\\simeq\nRa_*i^*K$. Applying the exact functor $\\Gamma(P_{\\mathrm{proét}},-)$ of (1)\nand composing derived global sections,\n$\\Gamma(P_{\\mathrm{proét}},Ra_*i^*K)=R\\Gamma(P_{\\mathrm{proét}},Ra_*i^*K)\n=R\\Gamma(X_{\\bar y,\\mathrm{proét}},i^*K)$. The agreement with the étale\nfibre isomorphism (for finite $\\Lambda$ this is\n[cor-weil-pbc-geometric-fiber-finite]) holds because every identification\nused is induced by the comparison morphisms $\\nu$, which are compatible with\nunits and counits.",
+      "uses": [
+        "prop-weil-pbc-comparison-direct-image",
+        "lem-weil-pbc-transport-identifies-exchange",
+        "cor-weil-pbc-geometric-fiber-finite"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "thm-weil-pbc-site-comparison"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-weil-pbc-site-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "cor-weil-pbc-geometric-fiber-finite"
+  ],
+  "uses_not_cited": [
+    "thm-weil-pbc-site-comparison"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,75 @@
+{
+  "id": "det-prop-scalar-six-tensor-hom",
+  "kind": "statement",
+  "title": "Coefficient comparison for tensor product and internal Hom",
+  "statement": "Let $\\Lambda\\to\\Lambda'$ be a listed coefficient map and $X$ a standing scheme.\n\n1. For $K,M\\in\\D(X_{\\mathrm{proét}},\\Lambda)$ there is a natural isomorphism\n   $(K\\otimes^{\\mathbf L}_{\\Lambda_X}M)_{\\Lambda'}\\simeq K_{\\Lambda'}\\otimes^{\\mathbf L}_{\\Lambda'_X}M_{\\Lambda'}$, making\n   extension of scalars a symmetric monoidal functor.\n2. For $K,M\\in\\Dctf(X,\\Lambda)$ the map\n   $$\n   v_{K,M}\\colon\\bigl(R\\mathcal Hom_{\\Lambda_X}(K,M)\\bigr)_{\\Lambda'}\\longrightarrow R\\mathcal Hom_{\\Lambda'_X}(K_{\\Lambda'},M_{\\Lambda'}),\n   $$\n   transpose under $-\\otimes^{\\mathbf L}K_{\\Lambda'}\\dashv R\\mathcal Hom(K_{\\Lambda'},-)$ of\n   $(R\\mathcal Hom(K,M))_{\\Lambda'}\\otimes^{\\mathbf L}K_{\\Lambda'}\\simeq(R\\mathcal Hom(K,M)\\otimes^{\\mathbf L}K)_{\\Lambda'}\\xrightarrow{(\\mathrm{ev})_{\\Lambda'}}M_{\\Lambda'}$,\n   is an isomorphism in $\\Dctf(X,\\Lambda')$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-tensor-hom.md",
+    "place": "node det-prop-scalar-six-tensor-hom, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*(1)* By associativity and commutativity of the derived tensor product,\n$$\n\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}(K\\otimes^{\\mathbf L}_{\\Lambda_X}M)\\simeq(\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}K)\\otimes^{\\mathbf L}_{\\Lambda'_X}(\\Lambda'_X\\otimes^{\\mathbf L}_{\\Lambda_X}M),\n$$\ncomputed on K-flat resolutions; these isomorphisms are the canonical ones, so they\nsatisfy the coherence conditions of a symmetric monoidal functor, with\n$(\\Lambda_X)_{\\Lambda'}=\\Lambda'_X$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2) Reduction.* Both sides of $v_{K,M}$ lie in $\\Dctf(X,\\Lambda')$ by\n[sk-thm-sf-ctf-stability] and [det-prop-scalar-six-ctf]. Both are exact functors of $K$\n(contravariant) and $v$ is natural, so the class of $K$ for which $v_{K,M}$ is an\nisomorphism for all $M$ is closed under shifts, cones and direct summands. By\n[det-prop-scalar-six-ctf] (1) it suffices to take $K=a_!P$, with\n$a\\colon S\\hookrightarrow X$ locally closed and $P$ locally perfect on $S$.",
+      "uses": [
+        "det-prop-scalar-six-ctf"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The generator.* $P$ is dualizable with dual $P^\\vee=R\\mathcal Hom_S(P,\\Lambda_S)$, locally the\ndual complex of finite projective modules, so $R\\mathcal Hom_S(P,N)\\simeq P^\\vee\\otimes^{\\mathbf L}N$.\nFor $T\\in\\Loc(\\Dctf(X,\\Lambda))$, the tensor–Hom adjunction, the projection formula\n$a_!P\\otimes^{\\mathbf L}T\\simeq a_!(P\\otimes^{\\mathbf L}a^*T)$ ([det-lem-int-tensor-projection]) and\n$Ra_!=a_!\\dashv a^!$ ([sk-thm-existence]) give natural bijections\n$$\n\\Hom(T,R\\mathcal Hom(a_!P,M))=\\Hom(a_!(P\\otimes^{\\mathbf L}a^*T),M)=\\Hom(a^*T,R\\mathcal Hom(P,a^!M))=\\Hom(T,Ra_*(P^\\vee\\otimes^{\\mathbf L}a^!M)).\n$$\nBoth $R\\mathcal Hom(a_!P,M)$ and $Ra_*(P^\\vee\\otimes^{\\mathbf L}a^!M)$ lie in $\\Dctf(X,\\Lambda)$\n([sk-thm-sf-ctf-stability]), so by Yoneda in $\\Loc(\\Dctf(X,\\Lambda))$\n$$\nR\\mathcal Hom_X(a_!P,M)\\simeq Ra_*\\bigl(P^\\vee\\otimes^{\\mathbf L}a^!M\\bigr),\n$$\nand likewise over $\\Lambda'$ for $a_!(P_{\\Lambda'})\\simeq(a_!P)_{\\Lambda'}$\n([det-prop-scalar-six-pullback] (2)) and $M_{\\Lambda'}$. Extension of scalars commutes with\neach ingredient on the right: with $Ra_*=i_*Ru_*$ by [det-prop-scalar-six-direct-image];\nwith $a^!$ by [det-prop-scalar-six-exceptional]; with the dual, since\n$(P^\\vee)_{\\Lambda'}\\simeq(P_{\\Lambda'})^\\vee$ for locally perfect $P$ (for $P=\\Lambda_S^m$ both are\n$\\Lambda'^m_S$, and the map is compatible with summands, shifts, cones and\nrestriction); and with tensor products by (1). Composing these gives an\nisomorphism $(R\\mathcal Hom(a_!P,M))_{\\Lambda'}\\simeq R\\mathcal Hom(a_!P_{\\Lambda'},M_{\\Lambda'})$.",
+      "uses": [
+        "det-lem-int-tensor-projection",
+        "sk-thm-existence",
+        "det-prop-scalar-six-pullback",
+        "det-prop-scalar-six-direct-image",
+        "det-prop-scalar-six-exceptional"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*It is $v_{a_!P,M}$.* Every map used is defined from evaluation pairings, units and\ncounits, and the comparison maps are compatible with them\n([det-prop-scalar-six-direct-image] (2), the definition of $\\beta$ in\n[det-prop-scalar-six-exceptional]). Hence the transpose of the composite isomorphism\nunder $-\\otimes^{\\mathbf L}a_!P_{\\Lambda'}\\dashv R\\mathcal Hom(a_!P_{\\Lambda'},-)$ is the extension of scalars\nof the evaluation $R\\mathcal Hom(a_!P,M)\\otimes^{\\mathbf L}a_!P\\to M$, which is also the transpose of\n$v_{a_!P,M}$. So the composite is $v_{a_!P,M}$, which is therefore an isomorphism.\nFinite cones and summands give the result for every $K\\in\\Dctf(X,\\Lambda)$.",
+      "uses": [
+        "det-prop-scalar-six-direct-image",
+        "det-prop-scalar-six-exceptional"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-prop-scalar-six-ctf",
+    "det-lem-int-tensor-projection",
+    "sk-thm-existence",
+    "det-prop-scalar-six-pullback",
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-exceptional"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-tensor-hom.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-prop-scalar-six-ctf",
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-exceptional",
+    "sk-thm-sf-ctf-stability"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

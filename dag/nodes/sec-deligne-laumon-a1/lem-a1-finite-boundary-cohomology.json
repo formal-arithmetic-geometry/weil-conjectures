@@ -1,112 +1,126 @@
 {
- "id": "lem-a1-finite-boundary-cohomology",
- "blueprint": {
-  "is": "lem-a1-finite-boundary-cohomology",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Cohomology of a finite boundary",
- "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nconstructible Weil sheaf whose stalks have weights at most $w$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
-  "place": "node lem-a1-finite-boundary-cohomology, order 2725"
- },
- "stmt_deps": [
-  "def-weil-punctual-weights"
- ],
- "proof": [
-  {
-   "text": "For r < 0, unfold compact support as exact extension by zero followed by the right derived functor of pushforward along the chosen proper compactification. The exact functor sends a degree-zero sheaf to a degree-zero sheaf; Functor.isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE give zero negative homology. WeilComplex.isZero_homologySheaf_obj_iff transfers this to the Weil cohomology sheaf. Global sections, forgetting adic coefficients, and coefficient restriction preserve zero objects; ModuleCat.subsingleton_of_isZero gives the required carrier subsingleton.",
-   "uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-ordinary-compact-cohomology"
-   ],
-   "elementary": false
+  "id": "lem-a1-finite-boundary-cohomology",
+  "blueprint": {
+    "is": "lem-a1-finite-boundary-cohomology",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "In the remaining case 0 < r, apply [lem-a1-finite-boundary-cohomology-positive] to obtain a zero Weil cohomology sheaf, then the same global-sections argument. The parent declaration is unchanged; this is a decomposition with a proved negative-degree branch and an open geometric upper-bound branch.",
-   "uses": [
-    "lem-a1-finite-boundary-cohomology-positive",
-    "def-weil-ordinary-compact-cohomology"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-compact-support-direct-image-detailed",
-  "def-weil-ordinary-compact-cohomology",
-  "lem-a1-finite-boundary-cohomology-positive"
- ],
- "proof_origin": {
-  "by": "F3 stage 3",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
-  "place": "Stage-3 reduction by sign of the cohomological degree"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2725,
- "blueprint_uses": [
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
- ],
- "uses_not_cited": [
-  "def-weil-punctual-weights"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
-   ]
+  "kind": "statement",
+  "title": "Cohomology of a finite boundary",
+  "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nconstructible Weil sheaf whose stalks have weights at most $w$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
+    "place": "node lem-a1-finite-boundary-cohomology, order 2725"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
-     "module": "WeilConjectures.WeilSheaf.Cohomology",
-     "lines": [
-      119,
-      128
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [
-    "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
-   ],
-   "open": []
-  }
- },
- "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-i-dl-a1-local",
- "lean": {
-  "module": "WeilConjectures.WeilSheaf.Cohomology",
-  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
-  "branch": "slopmaster2",
-  "line": 119,
-  "declarations": [
-   "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+  "stmt_deps": [
+    "def-weil-punctual-weights"
   ],
-  "sorry_free": false,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
- },
- "reviewed_proof": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
-  "result": "pass",
-  "landing": "20261015T182204-L-785636",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "For r < 0, unfold compact support as exact extension by zero followed by the right derived functor of pushforward along the chosen proper compactification. The exact functor sends a degree-zero sheaf to a degree-zero sheaf; Functor.isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE give zero negative homology. WeilComplex.isZero_homologySheaf_obj_iff transfers this to the Weil cohomology sheaf. Global sections, forgetting adic coefficients, and coefficient restriction preserve zero objects; ModuleCat.subsingleton_of_isZero gives the required carrier subsingleton.",
+      "uses": [
+        "def-compact-support-direct-image-detailed",
+        "def-weil-ordinary-compact-cohomology"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "In the remaining case 0 < r, apply [lem-a1-finite-boundary-cohomology-positive] to obtain a zero Weil cohomology sheaf, then the same global-sections argument. The parent declaration is unchanged; this is a decomposition with a proved negative-degree branch and an open geometric upper-bound branch.",
+      "uses": [
+        "lem-a1-finite-boundary-cohomology-positive",
+        "def-weil-ordinary-compact-cohomology"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-compact-support-direct-image-detailed",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-a1-finite-boundary-cohomology-positive"
+  ],
+  "proof_origin": {
+    "by": "F3 stage 3",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/lem-a1-finite-boundary-cohomology.md",
+    "place": "Stage-3 reduction by sign of the cohomological degree"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2725,
+  "blueprint_uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-punctual-weights"
+  ],
+  "uses_not_cited": [
+    "def-weil-punctual-weights"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
+          "module": "WeilConjectures.WeilSheaf.Cohomology",
+          "lines": [
+            119,
+            128
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.LAdicWeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+      ],
+      "open": []
+    }
+  },
+  "chapter": "sec-deligne-laumon-a1",
+  "unit": "sk-i-dl-a1-local",
+  "lean": {
+    "module": "WeilConjectures.WeilSheaf.Cohomology",
+    "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite",
+    "branch": "slopmaster2",
+    "line": 119,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "F3",
+    "result": "pass",
+    "landing": "20261015T182204-L-785636",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $Z_0$ be finite over $k_0$ and let $\\mathcal G$ be a\nWeil sheaf on $Z_0$. Then\n$H_c^r(Z,\\mathcal G)=0$ for $r\\neq0$.",
+    "proof": [
+      {
+        "text": "After geometric base change a finite scheme is a finite discrete space:\nits cohomology is concentrated in degree zero, and the higher\ncompact-support groups of [def-weil-ordinary-compact-cohomology]\nvanish since the scheme is zero-dimensional.",
+        "uses": [
+          "def-weil-ordinary-compact-cohomology"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

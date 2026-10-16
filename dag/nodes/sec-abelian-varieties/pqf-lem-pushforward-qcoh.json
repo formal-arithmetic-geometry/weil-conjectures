@@ -1,177 +1,211 @@
 {
- "id": "pqf-lem-pushforward-qcoh",
- "blueprint": {
-  "is": "pqf-lem-pushforward-qcoh",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Pushforward of quasi-coherent modules",
- "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of\nschemes. Then $f_*$ transforms quasi-coherent $\\mathcal O_X$-modules\ninto quasi-coherent $\\mathcal O_S$-modules.\n(*Stacks Project, Schemes, Lemma 26.24.1, Tag\n[01LC](https://stacks.math.columbia.edu/tag/01LC).*)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-pushforward-qcoh.md",
-  "place": "node pqf-lem-pushforward-qcoh, order 542",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 01LC"
-   }
-  ]
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Apply the existing principal-open quasi-coherence criterion to f_*F. Fix an affine open W of S and a section a of O_S on W. By quasi-compactness of f, V=f^{-1}W is quasi-compact. By quasi-separatedness of f and affineness of W, V is quasi-separated. In Lean these two statements are f.isCompact_preimage hW.isCompact and f.isQuasiSeparated_preimage hW.isQuasiSeparated. Also f^{-1}D_W(a)=D_V(f.app W a), by f.preimage_basicOpen.",
-   "uses": [
-    "pqf-lem-qcoh-principal-open-criterion",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": true
+  "id": "pqf-lem-pushforward-qcoh",
+  "blueprint": {
+    "is": "pqf-lem-pushforward-qcoh",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For a section s of f_*F on D_W(a), identify it with a section of F on D_V(f.app W a). Apply the qcqs-open section-extension theorem to obtain n and t on V whose restriction is (f.app W a)^n times s. Naturality of the scheme structure map identifies the restricted scalar with the pullback of a|D_W(a); the scalar action in pushforward is restriction of scalars. Thus t is the extension required by the first condition of the criterion.",
-   "uses": [
-    "pqf-lem-qcoh-qcqs-section-power-extension"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Pushforward of quasi-coherent modules",
+  "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of\nschemes. Then $f_*$ transforms quasi-coherent $\\mathcal O_X$-modules\ninto quasi-coherent $\\mathcal O_S$-modules.\n(*Stacks Project, Schemes, Lemma 26.24.1, Tag\n[01LC](https://stacks.math.columbia.edu/tag/01LC).*)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-pushforward-qcoh.md",
+    "place": "node pqf-lem-pushforward-qcoh, order 542",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 01LC"
+      }
+    ]
   },
-  {
-   "text": "For a section t of f_*F on W vanishing on D_W(a), identify it with a section on V vanishing on D_V(f.app W a). The compact-open power-torsion theorem gives (f.app W a)^n t=0. By the scalar action of pushforward this is a^n t=0, the second condition of the criterion. The existing criterion now gives quasi-coherence of f_*F.",
-   "uses": [
-    "pqf-lem-qcoh-compact-section-power-torsion",
-    "pqf-lem-qcoh-principal-open-criterion"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "pqf-lem-qcoh-principal-open-criterion",
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-qcoh-qcqs-section-power-extension",
-  "pqf-lem-qcoh-compact-section-power-torsion"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tag 01LC; WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
-  "place": "elementwise finite affine localization and principal-open criterion, fully realized in Lean by A2"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "pushforward of a quasi coherent module along a quasi compact quasi separated morphism of schemes is quasi coherent",
-   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; no qcqs quasi-coherence theorem",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsQuasiCompact, QuasiSeparated, IsQuasicoherent, pushforward",
-   "results": "unknown identifier IsQuasiCompact; 0 hits",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "isQuasicoherent_pushforward|pushforward.*quasi.?coherent in AlgebraicGeometry",
-   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567,587 (affine morphism only)",
-   "date": "2026-10-11",
-   "verdict": "generalization: affine case only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "quasi compact quasi separated morphism pushforward quasi coherent sheaf",
-   "results": "service unavailable (Internal Server Error)",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "isQuasicoherent|IsQuasicoherent with pushforward|QuasiSeparated in Mathlib/AlgebraicGeometry (slopmaster2 mathlib)",
-   "results": "only Tilde.lean:567 (affine TODO), Tilde.lean:587 (open immersion restrict); no qcqs pushforward instance",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 542,
- "blueprint_uses": [
-  "def-weil-pbc-scheme-conventions",
-  "pqf-def-coherent",
-  "pqf-lem-associated-sections-localize"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre",
-     "lines": [
-      119,
-      146
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Apply the existing principal-open quasi-coherence criterion to f_*F. Fix an affine open W of S and a section a of O_S on W. By quasi-compactness of f, V=f^{-1}W is quasi-compact. By quasi-separatedness of f and affineness of W, V is quasi-separated. In Lean these two statements are f.isCompact_preimage hW.isCompact and f.isQuasiSeparated_preimage hW.isQuasiSeparated. Also f^{-1}D_W(a)=D_V(f.app W a), by f.preimage_basicOpen.",
+      "uses": [
+        "pqf-lem-qcoh-principal-open-criterion",
+        "def-weil-pbc-scheme-conventions"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "For a section s of f_*F on D_W(a), identify it with a section of F on D_V(f.app W a). Apply the qcqs-open section-extension theorem to obtain n and t on V whose restriction is (f.app W a)^n times s. Naturality of the scheme structure map identifies the restricted scalar with the pullback of a|D_W(a); the scalar action in pushforward is restriction of scalars. Thus t is the extension required by the first condition of the criterion.",
+      "uses": [
+        "pqf-lem-qcoh-qcqs-section-power-extension"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For a section t of f_*F on W vanishing on D_W(a), identify it with a section on V vanishing on D_V(f.app W a). The compact-open power-torsion theorem gives (f.app W a)^n t=0. By the scalar action of pushforward this is a^n t=0, the second condition of the criterion. The existing criterion now gives quasi-coherence of f_*F.",
+      "uses": [
+        "pqf-lem-qcoh-compact-section-power-torsion",
+        "pqf-lem-qcoh-principal-open-criterion"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "pqf-lem-qcoh-principal-open-criterion",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-lem-qcoh-qcqs-section-power-extension",
+    "pqf-lem-qcoh-compact-section-power-torsion"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "Stacks Project, Tag 01LC; WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+    "place": "elementwise finite affine localization and principal-open criterion, fully realized in Lean by A2"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "pushforward of a quasi coherent module along a quasi compact quasi separated morphism of schemes is quasi coherent",
+      "results": "AlgebraicGeometry.Scheme.Modules.pushforward; no qcqs quasi-coherence theorem",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsQuasiCompact, QuasiSeparated, IsQuasicoherent, pushforward",
+      "results": "unknown identifier IsQuasiCompact; 0 hits",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "isQuasicoherent_pushforward|pushforward.*quasi.?coherent in AlgebraicGeometry",
+      "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567,587 (affine morphism only)",
+      "date": "2026-10-11",
+      "verdict": "generalization: affine case only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "quasi compact quasi separated morphism pushforward quasi coherent sheaf",
+      "results": "service unavailable (Internal Server Error)",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "isQuasicoherent|IsQuasicoherent with pushforward|QuasiSeparated in Mathlib/AlgebraicGeometry (slopmaster2 mathlib)",
+      "results": "only Tilde.lean:567 (affine TODO), Tilde.lean:587 (open immersion restrict); no qcqs pushforward instance",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 542,
+  "blueprint_uses": [
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-coherent",
+    "pqf-lem-associated-sections-localize"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre",
+          "lines": [
+            119,
+            146
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-pqf-finite",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "pqf-lem-pushforward-qcoh",
+    "worker": "stage1",
+    "summary": "Checked the qcqs pushforward statement against Stacks Tag 01LC. The proof is affine-local: choose finite affine covers, use the sheaf equalizer of sections, localize that equalizer on principal opens, and identify the resulting sheaf with an associated module sheaf. Reused the existing quasi-separated affine-intersection Mathlib leaf; no new nodes were needed.",
+    "blueprint": "Realizes the imported proof paragraphs: finite affine cover and quasi-compact overlaps; sheaf equalizer; localization of sections; principal-open basis criterion for quasi-coherence.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-ppq2046",
+    "group": "C1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppq2046 (reviewer sub-agent of L); spot-checked: Mathlib grep: no qcqs pushforward qcoh (only affine TODO Tilde.lean:567, open-immersion instance :587), so split kept, not a leaf. FIX more, RETURN less: (1) C4: Step 1 cited lem-weil-pbc-quasi-separated-affine-cover-criterion (absolute qs of X) while the argument is the relative diagonal of f; dropped the citation and tool use, wrote the diagonal argument with U_i x_{S0} U_j = Spec(B_i tensor_A B_j). (2) C1: Step 1 chose W_ijk with F|_W tilde without justification; now W_ijk are principal opens D(g) of U_i inside U_i cap U_j with N_ijk=(M_i)_g, sections via pqf-lem-associated-sections-localize. Steps 2-4 checked against Tag 01LC route.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated",
+    "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentPushforwardQcqs.lean",
+    "statement": "theorem isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsQuasicoherent] : ((pushforward f).obj F).IsQuasicoherent",
+    "branch": "sheaf-dag",
+    "by": "C1",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "C1",
+    "result": "pass",
+    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T053917-L-2628469",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of\nschemes. Then $f_*$ transforms quasi-coherent $\\mathcal O_X$-modules\ninto quasi-coherent $\\mathcal O_S$-modules.",
+    "proof": [
+      {
+        "text": "Work over an affine open $S_0=\\operatorname{Spec}A\\subset S$ and put\n$X_0=f^{-1}(S_0)$. By quasi-compactness in\n[def-weil-pbc-scheme-conventions], choose finitely many affine\nopens $U_i=\\operatorname{Spec}B_i$ covering $X_0$, small enough that\n$\\mathcal F|_{U_i}=\\widetilde{M_i}$ as in\n[pqf-def-coherent]. For each pair $i,j$, the intersection\n$U_i\\cap U_j$ is quasi-compact: it is the inverse image of the affine\n$U_i\\times_{S_0}U_j$ under the quasi-compact diagonal of $f$.\nChoose a finite affine cover $W_{ijk}=\\operatorname{Spec}C_{ijk}$\nof this intersection, again with\n$\\mathcal F|_{W_{ijk}}=\\widetilde{N_{ijk}}$.",
+        "uses": [
+          "def-weil-pbc-scheme-conventions",
+          "pqf-def-coherent"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "The sheaf gluing axiom gives an exact sequence at its first two terms\n\n$$\n0\\longrightarrow\\Gamma(X_0,\\mathcal F)\n\\longrightarrow\\prod_i M_i\n\\xrightarrow{\\delta}\\prod_{i,j,k}N_{ijk},\n$$\n\nwhere $\\delta$ is the difference of the two restrictions.\nIndeed, a tuple of sections on the $U_i$ glues precisely when its\nrestrictions agree on every member $W_{ijk}$ covering every overlap.",
+        "uses": [],
+        "elementary": null
+      },
+      {
+        "text": "For $a\\in A$, pull these two finite covers back to $D(a)$. The same\ngluing axiom computes $\\Gamma(f^{-1}(D(a)),\\mathcal F)$ as the kernel\nof the resulting restriction-difference map. By\n[pqf-lem-associated-sections-localize], its two terms and its\nmap are obtained from the displayed sequence by $-\\otimes_AA_a$.\nLocalization is exact and commutes with finite products, hence\n\n$$\n\\Gamma(f^{-1}(D(a)),\\mathcal F)\n\\cong\\Gamma(X_0,\\mathcal F)\\otimes_AA_a.\n$$",
+        "uses": [
+          "pqf-lem-associated-sections-localize"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "These isomorphisms commute with further principal localization,\nsince every map used is restriction of sections. Thus on the basis\nof principal opens of $S_0$, the sheaf $f_*\\mathcal F$ agrees with\n$\\widetilde{\\Gamma(X_0,\\mathcal F)}$. It is quasi-coherent on $S_0$\nby [pqf-def-coherent]; varying $S_0$ proves the assertion.",
+        "uses": [
+          "pqf-def-coherent"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "pqf-lem-pushforward-qcoh",
-  "worker": "stage1",
-  "summary": "Checked the qcqs pushforward statement against Stacks Tag 01LC. The proof is affine-local: choose finite affine covers, use the sheaf equalizer of sections, localize that equalizer on principal opens, and identify the resulting sheaf with an associated module sheaf. Reused the existing quasi-separated affine-intersection Mathlib leaf; no new nodes were needed.",
-  "blueprint": "Realizes the imported proof paragraphs: finite affine cover and quasi-compact overlaps; sheaf equalizer; localization of sections; principal-open basis criterion for quasi-coherence.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-ppq2046",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppq2046 (reviewer sub-agent of L); spot-checked: Mathlib grep: no qcqs pushforward qcoh (only affine TODO Tilde.lean:567, open-immersion instance :587), so split kept, not a leaf. FIX more, RETURN less: (1) C4: Step 1 cited lem-weil-pbc-quasi-separated-affine-cover-criterion (absolute qs of X) while the argument is the relative diagonal of f; dropped the citation and tool use, wrote the diagonal argument with U_i x_{S0} U_j = Spec(B_i tensor_A B_j). (2) C1: Step 1 chose W_ijk with F|_W tilde without justification; now W_ijk are principal opens D(g) of U_i inside U_i cap U_j with N_ijk=(M_i)_g, sections via pqf-lem-associated-sections-localize. Steps 2-4 checked against Tag 01LC route.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated",
-  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentPushforwardQcqs.lean",
-  "statement": "theorem isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsQuasicoherent] : ((pushforward f).obj F).IsQuasicoherent",
-  "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "C1",
-  "result": "pass",
-  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
-  "result": "pass",
-  "landing": "20261012T053917-L-2628469",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

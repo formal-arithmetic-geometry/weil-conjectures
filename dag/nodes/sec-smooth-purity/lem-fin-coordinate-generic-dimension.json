@@ -1,256 +1,275 @@
 {
- "id": "lem-fin-coordinate-generic-dimension",
- "blueprint": {
-  "is": "lem-fin-coordinate-generic-dimension",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Coordinate projections lower generic dimension",
- "statement": "Let $S$ be integral with function field $K$, let\n$Y\\hookrightarrow\\mathbf A^m_S$ be a closed immersion, and let\n$X\\subset Y$ be open. If $\\dim X_K\\leq n$, then for every\ncoordinate $t_r:X\\to\\mathbf A^1_S$, the fiber over the generic\npoint of $\\mathbf A^1_S$ has dimension at most $n-1$.\nAn empty fiber is assigned dimension $-\\infty$.\nThe notation refers to scheme conventions.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
-  "place": "node lem-fin-coordinate-generic-dimension, order 1633"
- },
- "stmt_deps": [
-  "def-pc-integral-scheme",
-  "def-sc-function-field",
-  "def-nagata-relative-affine-space",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-pc-scheme-fibre",
-  "def-pc-fibre-product",
-  "def-kun-dimension"
- ],
- "proof": [
-  {
-   "text": "Write $\\eta$ for the generic point of $S$ and $\\xi$ for that of $\\mathbf A^1_S$. Existence and uniqueness of $\\eta$ follow from scheme sobriety and integrality. On any nonempty affine open $\\operatorname{Spec}R\\subset S$, the ring $R$ is a domain and the integral function-field affine-fraction lemma identifies $K=\\operatorname{Frac}R$. The affine-space charts $\\operatorname{Spec}R[T]$ are integral and overlap nontrivially: two nonempty base charts meet, and their affine-line inverse images meet. Their generic points therefore agree on overlaps, giving the generic point $\\xi$ of $\\mathbf A^1_S$. Applying the affine-fraction lemma to this integral scheme gives its generic residue field $\\operatorname{Frac}(R[T])=K(T)$. Indeed $R[T]$ embeds into $K(T)$, and every rational function over $K$ is a quotient of polynomials over $R$ after multiplying numerator and denominator by the product of their finitely many coefficient denominators. Thus the fiber in question is $F=X_K\\times_{\\mathbf A^1_K}\\operatorname{Spec}K(T)$: the two iterated fiber products represent the same pairs of compatible morphisms, giving their canonical isomorphism by the universal property. Here $T$ acts by the specified coordinate $t_r$, not by an independently chosen function. This reduction does not require $S$ to be Noetherian.",
-   "uses": [
+  "id": "lem-fin-coordinate-generic-dimension",
+  "blueprint": {
+    "is": "lem-fin-coordinate-generic-dimension",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Coordinate projections lower generic dimension",
+  "statement": "Let $S$ be integral with function field $K$, let\n$Y\\hookrightarrow\\mathbf A^m_S$ be a closed immersion, and let\n$X\\subset Y$ be open. If $\\dim X_K\\leq n$, then for every\ncoordinate $t_r:X\\to\\mathbf A^1_S$, the fiber over the generic\npoint of $\\mathbf A^1_S$ has dimension at most $n-1$.\nAn empty fiber is assigned dimension $-\\infty$.\nThe notation refers to scheme conventions.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
+    "place": "node lem-fin-coordinate-generic-dimension, order 1633"
+  },
+  "stmt_deps": [
+    "def-pc-integral-scheme",
+    "def-sc-function-field",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-kun-dimension"
+  ],
+  "proof": [
+    {
+      "text": "Write $\\eta$ for the generic point of $S$ and $\\xi$ for that of $\\mathbf A^1_S$. Existence and uniqueness of $\\eta$ follow from scheme sobriety and integrality. On any nonempty affine open $\\operatorname{Spec}R\\subset S$, the ring $R$ is a domain and the integral function-field affine-fraction lemma identifies $K=\\operatorname{Frac}R$. The affine-space charts $\\operatorname{Spec}R[T]$ are integral and overlap nontrivially: two nonempty base charts meet, and their affine-line inverse images meet. Their generic points therefore agree on overlaps, giving the generic point $\\xi$ of $\\mathbf A^1_S$. Applying the affine-fraction lemma to this integral scheme gives its generic residue field $\\operatorname{Frac}(R[T])=K(T)$. Indeed $R[T]$ embeds into $K(T)$, and every rational function over $K$ is a quotient of polynomials over $R$ after multiplying numerator and denominator by the product of their finitely many coefficient denominators. Thus the fiber in question is $F=X_K\\times_{\\mathbf A^1_K}\\operatorname{Spec}K(T)$: the two iterated fiber products represent the same pairs of compatible morphisms, giving their canonical isomorphism by the universal property. Here $T$ acts by the specified coordinate $t_r$, not by an independently chosen function. This reduction does not require $S$ to be Noetherian.",
+      "uses": [
+        "def-pc-integral-scheme",
+        "def-sc-function-field",
+        "def-nagata-relative-affine-space",
+        "def-pc-scheme-fibre",
+        "def-pc-fibre-product",
+        "lem-sc-scheme-sober",
+        "lem-sc-integral-function-field-affine-fraction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
+        "place": "Proof, generic-fiber reduction; expanded using scheme fiber and affine-space definitions; Stacks 01IS (lemma-scheme-sober), 01RV (lemma-integral-scheme-rational-functions), 01HV (lemma-spec-sheaves)"
+      }
+    },
+    {
+      "text": "The map $X\\to\\mathbf A^m_S$ is a composite of immersions, hence an immersion. Base change gives an immersion $X_K\\to\\mathbf A^m_K$, which is locally of finite type. The projection $\\mathbf A^m_K\\to\\operatorname{Spec}K$ is locally of finite type directly from the polynomial chart: its ring is generated by its $m$ coordinates. Composition therefore makes $X_K$ locally of finite type over $K$. For every affine open $U=\\operatorname{Spec}C\\subset X_K$, the affine-pairs lemma gives that $C$ is a finitely generated $K$-algebra. In particular $U$ is of finite type over $K$ (its one affine chart is a finite cover).",
+      "uses": [
+        "lem-weil-pbc-proper-fp-permanence",
+        "lem-weil-pbc-immersion-base-change-lft",
+        "def-nagata-relative-affine-space",
+        "def-weil-finite-type-morphism",
+        "lem-weil-pbc-lft-affine-pairs"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tags 01T5, 01T3, 01T2: immersions, composition, affine-pairs characterization"
+      }
+    },
+    {
+      "text": "On such a $U$, write $t\\in C$ for the coordinate. Apply the affine tensor base-change theorem with a singleton family to $\\operatorname{Spec}C\\to\\operatorname{Spec}K[T]$. Its generic fiber is $\\operatorname{Spec}D$, where $D=C\\otimes_{K[T]}K(T)$. The fiber-ring localization theorem at the zero prime of $K[T]$ identifies $D$ with $W^{-1}C$, where $W=\\{h(t):0\\ne h\\in K[T]\\}$. The same generators of $C$ over $K$ generate $D$ over $K(T)$: a fraction $c/h(t)$ is the image of $c$ times the scalar $1/h(T)$. Thus $D$ is a finite type $K(T)$-algebra, even when it is zero. Apply the open-fibre-product lemma with base $\\mathbf A^1_K$, open $U\\subset X_K$, and the whole second factor $\\operatorname{Spec}K(T)$. It identifies $U\\times_{\\mathbf A^1_K}\\operatorname{Spec}K(T)=\\operatorname{Spec}D$ with the open subscheme of $F$ given by the inverse image of $U$ under $F\\to X_K$. These inverse images cover $F$ because the affine opens $U$ cover $X_K$.",
+      "uses": [
+        "lem-sbc-finite-affine-tensor-base-change",
+        "lem-weil-pbc-fibre-ring-localization-quotient",
+        "def-weil-pbc-finite-type-algebra",
+        "lem-weil-pbc-open-fibre-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Tags 01I4 and 01JR (affine fiber products and open restriction); Algebra Tag 00E6 (fundamental diagram)"
+      }
+    },
+    {
+      "text": "Let $Q$ be any prime of $D=W^{-1}C$ and let $p$ be its inverse image in $C$. The localization prime/residue-field theorem says that $p$ is prime, avoids $W$, and identifies $E=\\kappa_C(p)$ with $\\kappa_D(Q)$ compatibly with $C$ and hence with $K$. Avoiding $W$ means every nonzero $h\\in K[T]$ has $h(t)\\ne0$ in $E$; so $K[T]\\to E$ is injective and extends to $K(T)\\to E$. For the irreducible closed subset $V(p)\\subset U$, its generic point is $p$, and the closed-subset dimension theorem gives $\\operatorname{trdeg}_K E=\\dim V(p)\\le\\dim X_K\\le n$. The middle inequality follows directly from chains: a closed chain in $V(p)$ is a closed chain in $U$, and taking closures in $X_K$ preserves strictness because intersecting those closures with the open $U$ recovers the original closed subsets.",
+      "uses": [
+        "lem-weil-pbc-localization-prime-residue-field-iso",
+        "lem-sc-closed-irreducible-dimension-trdeg",
+        "def-kun-dimension",
+        "def-weil-affine-spectrum"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Tag 00E3 (localization primes); Varieties Tags 0A21(6), 0B1C (irreducible closed dimension)"
+      }
+    },
+    {
+      "text": "Apply the transcendence-degree tower formula to $K\\subset K(T)\\subset E$. The singleton $\\{T\\}$ is algebraically independent over $K$, and generates $K(T)$ as a field, so it is a transcendence basis and $\\operatorname{trdeg}_K K(T)=1$. Hence $\\operatorname{trdeg}_K E=\\operatorname{trdeg}_{K(T)}E+1$. The left side is a finite integer at most $n$ by step 4, so $\\operatorname{trdeg}_{K(T)}E\\le n-1$. Apply the closed-subset dimension theorem again, now to the finite type $K(T)$-scheme $\\operatorname{Spec}D$ and $V(Q)$; the residue-field isomorphism in step 4 respects $K(T)$, since it respects $t$ and inverses of every $h(t)$. It follows that $\\dim V(Q)\\le n-1$. If $n=0$, the equality with a summand $1$ shows that no such prime $Q$ exists, and this affine fiber is empty.",
+      "uses": [
+        "lem-sbc-transcendence-degree-tower",
+        "def-kun-transcendence-degree",
+        "lem-sc-closed-irreducible-dimension-trdeg"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/fields.tex",
+        "place": "Tag 030H, lemma-transcendence-degree-tower; Varieties Tag 0B1C"
+      }
+    },
+    {
+      "text": "Every finite strict chain of irreducible closed subsets of $\\operatorname{Spec}D$ is contained in its largest member $V(Q)$: these members have generic points, and the largest member corresponds to a prime $Q$. Step 5 bounds its dimension, hence bounds the length of the chain by $n-1$. To pass from the affine cover to $F$, take any finite strict chain $Z_0\\subsetneq\\cdots\\subsetneq Z_l$ of irreducible closed subsets of $F$ and choose one affine fiber chart containing the generic point of $Z_0$. That open contains the generic point of every $Z_i$, because opens are stable under generalization. Intersecting with the chart gives nonempty irreducible closed subsets, still strictly nested: their closures in $F$ recover $Z_i$. Therefore $l\\le n-1$. Taking the supremum of chain lengths proves $\\dim F\\le n-1$; if there are no points, use the stipulated dimension $-\\infty$. The proof uses prime ideals and topological chains throughout, so makes no reducedness assumption and is unaffected by nilpotents.",
+      "uses": [
+        "lem-sc-scheme-sober",
+        "def-weil-affine-spectrum",
+        "def-kun-dimension"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
+        "place": "Proof, final paragraph: dimension of the generic fiber and components; expanded by finite chains"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-pc-integral-scheme",
     "def-sc-function-field",
     "def-nagata-relative-affine-space",
     "def-pc-scheme-fibre",
     "def-pc-fibre-product",
     "lem-sc-scheme-sober",
-    "lem-sc-integral-function-field-affine-fraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
-    "place": "Proof, generic-fiber reduction; expanded using scheme fiber and affine-space definitions; Stacks 01IS (lemma-scheme-sober), 01RV (lemma-integral-scheme-rational-functions), 01HV (lemma-spec-sheaves)"
-   }
-  },
-  {
-   "text": "The map $X\\to\\mathbf A^m_S$ is a composite of immersions, hence an immersion. Base change gives an immersion $X_K\\to\\mathbf A^m_K$, which is locally of finite type. The projection $\\mathbf A^m_K\\to\\operatorname{Spec}K$ is locally of finite type directly from the polynomial chart: its ring is generated by its $m$ coordinates. Composition therefore makes $X_K$ locally of finite type over $K$. For every affine open $U=\\operatorname{Spec}C\\subset X_K$, the affine-pairs lemma gives that $C$ is a finitely generated $K$-algebra. In particular $U$ is of finite type over $K$ (its one affine chart is a finite cover).",
-   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-immersion-base-change-lft",
-    "def-nagata-relative-affine-space",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-lft-affine-pairs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T5, 01T3, 01T2: immersions, composition, affine-pairs characterization"
-   }
-  },
-  {
-   "text": "On such a $U$, write $t\\in C$ for the coordinate. Apply the affine tensor base-change theorem with a singleton family to $\\operatorname{Spec}C\\to\\operatorname{Spec}K[T]$. Its generic fiber is $\\operatorname{Spec}D$, where $D=C\\otimes_{K[T]}K(T)$. The fiber-ring localization theorem at the zero prime of $K[T]$ identifies $D$ with $W^{-1}C$, where $W=\\{h(t):0\\ne h\\in K[T]\\}$. The same generators of $C$ over $K$ generate $D$ over $K(T)$: a fraction $c/h(t)$ is the image of $c$ times the scalar $1/h(T)$. Thus $D$ is a finite type $K(T)$-algebra, even when it is zero. Apply the open-fibre-product lemma with base $\\mathbf A^1_K$, open $U\\subset X_K$, and the whole second factor $\\operatorname{Spec}K(T)$. It identifies $U\\times_{\\mathbf A^1_K}\\operatorname{Spec}K(T)=\\operatorname{Spec}D$ with the open subscheme of $F$ given by the inverse image of $U$ under $F\\to X_K$. These inverse images cover $F$ because the affine opens $U$ cover $X_K$.",
-   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
     "lem-sbc-finite-affine-tensor-base-change",
     "lem-weil-pbc-fibre-ring-localization-quotient",
     "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-open-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I4 and 01JR (affine fiber products and open restriction); Algebra Tag 00E6 (fundamental diagram)"
-   }
-  },
-  {
-   "text": "Let $Q$ be any prime of $D=W^{-1}C$ and let $p$ be its inverse image in $C$. The localization prime/residue-field theorem says that $p$ is prime, avoids $W$, and identifies $E=\\kappa_C(p)$ with $\\kappa_D(Q)$ compatibly with $C$ and hence with $K$. Avoiding $W$ means every nonzero $h\\in K[T]$ has $h(t)\\ne0$ in $E$; so $K[T]\\to E$ is injective and extends to $K(T)\\to E$. For the irreducible closed subset $V(p)\\subset U$, its generic point is $p$, and the closed-subset dimension theorem gives $\\operatorname{trdeg}_K E=\\dim V(p)\\le\\dim X_K\\le n$. The middle inequality follows directly from chains: a closed chain in $V(p)$ is a closed chain in $U$, and taking closures in $X_K$ preserves strictness because intersecting those closures with the open $U$ recovers the original closed subsets.",
-   "uses": [
+    "lem-weil-pbc-open-fibre-product",
     "lem-weil-pbc-localization-prime-residue-field-iso",
     "lem-sc-closed-irreducible-dimension-trdeg",
     "def-kun-dimension",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E3 (localization primes); Varieties Tags 0A21(6), 0B1C (irreducible closed dimension)"
-   }
-  },
-  {
-   "text": "Apply the transcendence-degree tower formula to $K\\subset K(T)\\subset E$. The singleton $\\{T\\}$ is algebraically independent over $K$, and generates $K(T)$ as a field, so it is a transcendence basis and $\\operatorname{trdeg}_K K(T)=1$. Hence $\\operatorname{trdeg}_K E=\\operatorname{trdeg}_{K(T)}E+1$. The left side is a finite integer at most $n$ by step 4, so $\\operatorname{trdeg}_{K(T)}E\\le n-1$. Apply the closed-subset dimension theorem again, now to the finite type $K(T)$-scheme $\\operatorname{Spec}D$ and $V(Q)$; the residue-field isomorphism in step 4 respects $K(T)$, since it respects $t$ and inverses of every $h(t)$. It follows that $\\dim V(Q)\\le n-1$. If $n=0$, the equality with a summand $1$ shows that no such prime $Q$ exists, and this affine fiber is empty.",
-   "uses": [
-    "lem-sbc-transcendence-degree-tower",
-    "def-kun-transcendence-degree",
-    "lem-sc-closed-irreducible-dimension-trdeg"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 030H, lemma-transcendence-degree-tower; Varieties Tag 0B1C"
-   }
-  },
-  {
-   "text": "Every finite strict chain of irreducible closed subsets of $\\operatorname{Spec}D$ is contained in its largest member $V(Q)$: these members have generic points, and the largest member corresponds to a prime $Q$. Step 5 bounds its dimension, hence bounds the length of the chain by $n-1$. To pass from the affine cover to $F$, take any finite strict chain $Z_0\\subsetneq\\cdots\\subsetneq Z_l$ of irreducible closed subsets of $F$ and choose one affine fiber chart containing the generic point of $Z_0$. That open contains the generic point of every $Z_i$, because opens are stable under generalization. Intersecting with the chart gives nonempty irreducible closed subsets, still strictly nested: their closures in $F$ recover $Z_i$. Therefore $l\\le n-1$. Taking the supremum of chain lengths proves $\\dim F\\le n-1$; if there are no points, use the stipulated dimension $-\\infty$. The proof uses prime ideals and topological chains throughout, so makes no reducedness assumption and is unaffected by nilpotents.",
-   "uses": [
-    "lem-sc-scheme-sober",
     "def-weil-affine-spectrum",
-    "def-kun-dimension"
-   ],
-   "elementary": true,
-   "source": {
+    "lem-sbc-transcendence-degree-tower",
+    "def-kun-transcendence-degree"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
-    "place": "Proof, final paragraph: dimension of the generic fiber and components; expanded by finite chains"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-integral-scheme",
-  "def-sc-function-field",
-  "def-nagata-relative-affine-space",
-  "def-pc-scheme-fibre",
-  "def-pc-fibre-product",
-  "lem-sc-scheme-sober",
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-lft-affine-pairs",
-  "lem-sbc-finite-affine-tensor-base-change",
-  "lem-weil-pbc-fibre-ring-localization-quotient",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-sc-closed-irreducible-dimension-trdeg",
-  "def-kun-dimension",
-  "def-weil-affine-spectrum",
-  "lem-sbc-transcendence-degree-tower",
-  "def-kun-transcendence-degree"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coordinate-generic-dimension.md",
-  "place": "Proof, expanded with Stacks 00E3, 00E6, 030H, 0B1C and affine finite-type reductions"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "The generic fiber of a coordinate projection of a finite type scheme over a field to the affine line has dimension at most the source dimension minus one",
-   "results": "Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.pointsPi, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, AlgebraicGeometry.instIsPreimmersionFiberι, Projectivization.card_of_finrank, AlgebraicGeometry.Scheme.Hom.range_fiberι, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    "place": "Proof, expanded with Stacks 00E3, 00E6, 030H, 0B1C and affine finite-type reductions"
   },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme, ringKrullDim",
-   "results": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "The generic fiber of a coordinate projection of a finite type scheme over a field to the affine line has dimension at most the source dimension minus one",
+      "results": "Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.pointsPi, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, AlgebraicGeometry.instIsPreimmersionFiberι, Projectivization.card_of_finrank, AlgebraicGeometry.Scheme.Hom.range_fiberι, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme, ringKrullDim",
+      "results": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    },
+    {
+      "tool": "grep",
+      "query": "generic.*[dD]im|[dD]im.*generic",
+      "results": "No hits",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    },
+    {
+      "tool": "leansearch",
+      "query": "dimension of generic fiber of morphism to affine line drops by one",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Krull dimension of a finitely generated algebra localized over the rational function field is at most its dimension minus one",
+      "results": "Algebra.Presentation.localizationAway_dimension_zero, Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Ring.DimensionLEOne.localization, Ring.KrullDimLE.of_isLocalization, MvRatFunc.rank_eq_max_lift",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    },
+    {
+      "tool": "grep",
+      "query": "trdeg.*[dD]im|[dD]im.*trdeg",
+      "results": "No hits",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1633,
+  "blueprint_uses": [
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "generic.*[dD]im|[dD]im.*generic",
-   "results": "No hits",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-fin-coordinate-generic-dimension",
+    "worker": "stage1",
+    "summary": "Expanded the coordinate dimension proof in six steps using existing generic algebra and dimension tools. Proved local finite type without a Noetherian assumption on S, exposed the rational-function localization and residue-field structures, and bounded finite chains instead of silently invoking a components maximum. No statement correction or new nodes.",
+    "blueprint": "Steps 1–3 realize the generic-fiber convention and coordinate reduction; steps 4–5 realize the transcendence-degree calculation; step 6 realizes the final dimension assertion including empty and nonreduced fibers.",
+    "tool_uses": [
+      {
+        "node": "lem-sbc-finite-affine-tensor-base-change",
+        "why": "Requested generic tool: singleton affine tensor pullback calculation in step 3; the unit has no affine pullback algebra calculation. Approval belongs to the maintainer."
+      },
+      {
+        "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+        "why": "Requested generic tool: prime correspondence and compatible residue fields for coordinate localization in step 4; the unit has no localization comparison. Approval belongs to the maintainer."
+      }
+    ]
   },
-  {
-   "tool": "leansearch",
-   "query": "dimension of generic fiber of morphism to affine line drops by one",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Krull dimension of a finitely generated algebra localized over the rational function field is at most its dimension minus one",
-   "results": "Algebra.Presentation.localizationAway_dimension_zero, Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial, Algebra.IsAlgebraic.rank_fractionRing_polynomial, Ring.DimensionLEOne.localization, Ring.KrullDimLE.of_isLocalization, MvRatFunc.rank_eq_max_lift",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
-  },
-  {
-   "tool": "grep",
-   "query": "trdeg.*[dD]im|[dD]im.*trdeg",
-   "results": "No hits",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the coordinate generic-fiber dimension bound"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1633,
- "blueprint_uses": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-fin-coordinate-generic-dimension",
-  "worker": "stage1",
-  "summary": "Expanded the coordinate dimension proof in six steps using existing generic algebra and dimension tools. Proved local finite type without a Noetherian assumption on S, exposed the rational-function localization and residue-field structures, and bounded finite chains instead of silently invoking a components maximum. No statement correction or new nodes.",
-  "blueprint": "Steps 1–3 realize the generic-fiber convention and coordinate reduction; steps 4–5 realize the transcendence-degree calculation; step 6 realizes the final dimension assertion including empty and nonreduced fibers.",
   "tool_uses": [
-   {
-    "node": "lem-sbc-finite-affine-tensor-base-change",
-    "why": "Requested generic tool: singleton affine tensor pullback calculation in step 3; the unit has no affine pullback algebra calculation. Approval belongs to the maintainer."
-   },
-   {
-    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
-    "why": "Requested generic tool: prime correspondence and compatible residue fields for coordinate localization in step 4; the unit has no localization comparison. Approval belongs to the maintainer."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sbc-finite-affine-tensor-base-change",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NW-eea0f207a",
-  "group": "NW",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-eea0f207a (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, master blueprint and unit/chapter route, and cited source passages. All six steps hold, including non-Noetherian bases, empty fibers and nilpotents. Accepted both requested generic tool uses; no repairs needed. Detailed checks recorded in review.md."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CoordinateGenericDimension",
-  "declaration": "AlgebraicGeometry.coordinate_generic_fiber_dimension_lt",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoordinateGenericDimension.lean",
-  "statement": "theorem coordinate_generic_fiber_dimension_lt (S : Scheme.{u}) [IsIntegral S] {m n : ℕ} {X Y : Scheme.{u}} (i : Y ⟶ AffineSpace (ULift.{u} (Fin m)) S) [IsClosedImmersion i] (j : X ⟶ Y) [IsOpenImmersion j] (hdim : topologicalKrullDim ((j ≫ i ≫ (AffineSpace (ULift.{u} (Fin m)) S ↘ S)).fiber (genericPoint S)) ≤ (n : WithBot ℕ∞)) (r : Fin m) : topologicalKrullDim ((j ≫ i ≫ AffineSpace.reindex (fun _ : ULift.{u} (Fin 1) ↦ (ULift.up r : ULift.{u} (Fin m))) S).fiber (genericPoint (AffineSpace (ULift.{u} (Fin 1)) S))) < (n : WithBot ℕ∞)",
-  "branch": "newtargets-dag",
-  "by": "NA",
-  "date": "2026-10-15",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-f21b1c053",
-  "group": "NA",
-  "result": "pass",
-  "note": "Reviewed immutable statements, all eight dependencies, source passages, exact Lean declarations, docstrings, edge cases, and records. Signature matches verbatim; per-file scompile reproduction passed without diagnostics. No findings. Full review recorded in review.md."
- }
+    "lem-sbc-finite-affine-tensor-base-change",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NW-eea0f207a",
+    "group": "NW",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-eea0f207a (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, master blueprint and unit/chapter route, and cited source passages. All six steps hold, including non-Noetherian bases, empty fibers and nilpotents. Accepted both requested generic tool uses; no repairs needed. Detailed checks recorded in review.md."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.CoordinateGenericDimension",
+    "declaration": "AlgebraicGeometry.coordinate_generic_fiber_dimension_lt",
+    "file": "lean/Sheaf/AlgebraicGeometry/CoordinateGenericDimension.lean",
+    "statement": "theorem coordinate_generic_fiber_dimension_lt (S : Scheme.{u}) [IsIntegral S] {m n : ℕ} {X Y : Scheme.{u}} (i : Y ⟶ AffineSpace (ULift.{u} (Fin m)) S) [IsClosedImmersion i] (j : X ⟶ Y) [IsOpenImmersion j] (hdim : topologicalKrullDim ((j ≫ i ≫ (AffineSpace (ULift.{u} (Fin m)) S ↘ S)).fiber (genericPoint S)) ≤ (n : WithBot ℕ∞)) (r : Fin m) : topologicalKrullDim ((j ≫ i ≫ AffineSpace.reindex (fun _ : ULift.{u} (Fin 1) ↦ (ULift.up r : ULift.{u} (Fin m))) S).fiber (genericPoint (AffineSpace (ULift.{u} (Fin 1)) S))) < (n : WithBot ℕ∞)",
+    "branch": "newtargets-dag",
+    "by": "NA",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-f21b1c053",
+    "group": "NA",
+    "result": "pass",
+    "note": "Reviewed immutable statements, all eight dependencies, source passages, exact Lean declarations, docstrings, edge cases, and records. Signature matches verbatim; per-file scompile reproduction passed without diagnostics. No findings. Full review recorded in review.md."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $S$ be integral with function field $K$, let\n$Y\\hookrightarrow\\mathbf A^m_S$ be a closed immersion, and let\n$X\\subset Y$ be open. If $\\dim X_K\\leq n$, then for every\ncoordinate $t_r:X\\to\\mathbf A^1_S$, the fiber over the generic\npoint of $\\mathbf A^1_S$ has dimension at most $n-1$.\nAn empty fiber is assigned dimension $-\\infty$.",
+    "proof": [
+      {
+        "text": "Use the generic-fiber convention of\n[def-weil-pbc-scheme-conventions]. A component of $X_K$\non which $t_r$ is algebraic over $K$ does not dominate\n$\\mathbf A^1_K$, so it contributes no generic fiber.\nOn each remaining irreducible component with function field $E$,\n$t_r$ is transcendental over $K$. The elementary dimension\nformula for a finitely generated field extension gives\n\n$$\n\\operatorname{trdeg}_{K(t_r)}E\n=\\operatorname{trdeg}_K E-1\\leq n-1.\n$$",
+        "uses": [
+          "def-weil-pbc-scheme-conventions"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "This is the dimension of its generic fiber. Taking the maximum\nover the finitely many components gives the assertion. Nilpotents\ndo not change these dimensions.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

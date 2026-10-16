@@ -1,126 +1,132 @@
 {
- "id": "def-weil-pbc-projection-compactification",
- "blueprint": {
-  "is": "def-weil-pbc-projection-compactification",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Chosen compactification and compact-support image",
- "statement": "Let $f:X\\to Y$ admit a chosen compactification\n\n$$\nX\\xrightarrow{j}\\overline X\\xrightarrow{p}Y,\n\\qquad f=pj,\n$$\n\nwith $j$ a quasi-compact open immersion and $p$ proper. For this datum set\n\n$$\nRf_!^{(j,p)}E:=Rp_*j_!E.\n$$\n\nFor proper $f$, its identity compactification is $(j,p)=(1_X,f)$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-projection-compactification.md",
-  "place": "node def-weil-pbc-projection-compactification, order 1268"
- },
- "stmt_deps": [
-  "def-nagata-compactification"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1268,
- "blueprint_uses": [
-  "def-nagata-compactification"
- ],
- "lean": {
-  "module": "Sheaf.Paper.ProjectionCompactification",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleOpenRestriction_isRightAdjoint",
-   "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension",
-   "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_exact",
-   "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_additive",
-   "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_limits",
-   "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_colimits",
-   "AlgebraicGeometry.Scheme.proEtaleRingDerivedOpenExtension",
-   "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage"
-  ],
-  "statement": "def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y}\n    (d : Compactification f) [QuasiCompact d.i]\n    (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ)\n    (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) :\n    DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY)",
-  "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "The recorded etale fixed-coefficient functor cannot express arbitrary sheaves of commutative pro-etale rings. Reuse the reviewed Q09 representing left adjoint to actual open restriction, exact termwise derived extension, and its Rp_* composite. Its adjoint universal property determines the extension up to the unique compatible isomorphism. Published unchanged since preparation: scompile.py --source confirmed the current server source on 2026-10-16 (only its printed final newline differs). Reuse this exact existing module on newtargets-dag; no source is redelivered."
- },
- "blueprint_lean": [
-  "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification"
- ],
- "uses_not_cited": [
-  "def-nagata-compactification"
- ],
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification",
-     "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriek",
-     "lines": [
-      74,
-      86
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      19,
-      25
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  "id": "def-weil-pbc-projection-compactification",
+  "blueprint": {
+    "is": "def-weil-pbc-projection-compactification",
+    "from": null,
+    "same_as": null
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification",
-     "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriek",
-     "lines": [
-      87,
-      99
-     ],
-     "kind": "def",
-     "sorry": false
+  "kind": "definition",
+  "title": "Chosen compactification and compact-support image",
+  "statement": "Let $f:X\\to Y$ admit a chosen compactification\n\n$$\nX\\xrightarrow{j}\\overline X\\xrightarrow{p}Y,\n\\qquad f=pj,\n$$\n\nwith $j$ a quasi-compact open immersion and $p$ proper. For this datum set\n\n$$\nRf_!^{(j,p)}E:=Rp_*j_!E.\n$$\n\nFor proper $f$, its identity compactification is $(j,p)=(1_X,f)$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-projection-compactification.md",
+    "place": "node def-weil-pbc-projection-compactification, order 1268"
+  },
+  "stmt_deps": [
+    "def-nagata-compactification"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1268,
+  "blueprint_uses": [
+    "def-nagata-compactification"
+  ],
+  "lean": {
+    "module": "Sheaf.Paper.ProjectionCompactification",
+    "declaration": "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.proEtaleOpenRestriction_isRightAdjoint",
+      "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension",
+      "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_exact",
+      "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_additive",
+      "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_limits",
+      "AlgebraicGeometry.Scheme.proEtaleRingOpenExtension_colimits",
+      "AlgebraicGeometry.Scheme.proEtaleRingDerivedOpenExtension",
+      "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage"
+    ],
+    "statement": "def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y}\n    (d : Compactification f) [QuasiCompact d.i]\n    (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1})\n    (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ)\n    (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) :\n    DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY)",
+    "branch": "newtargets-dag",
+    "by": "Q19",
+    "date": "2026-10-16",
+    "existing": true,
+    "note": "The recorded etale fixed-coefficient functor cannot express arbitrary sheaves of commutative pro-etale rings. Reuse the reviewed Q09 representing left adjoint to actual open restriction, exact termwise derived extension, and its Rp_* composite. Its adjoint universal property determines the extension up to the unique compatible isomorphism. Published unchanged since preparation: scompile.py --source confirmed the current server source on 2026-10-16 (only its printed final newline differs). Reuse this exact existing module on newtargets-dag; no source is redelivered."
+  },
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification"
+  ],
+  "uses_not_cited": [
+    "def-nagata-compactification"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification",
+          "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriek",
+          "lines": [
+            74,
+            86
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            19,
+            25
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification",
+          "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriek",
+          "lines": [
+            87,
+            99
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-c674583d0",
+    "group": "Q19",
+    "result": "pass",
+    "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $f:X\\to Y$ admit a chosen compactification\n\n$$\nX\\xrightarrow{j}\\overline X\\xrightarrow{p}Y,\n\\qquad f=pj,\n$$\n\nwith $j$ an open immersion and $p$ proper. For this datum and $E$ in the\nderived category of sheaves on $X_{\\Et}$ set\n\n$$\nRf_!^{(j,p)}E:=Rp_*j_!E,\n$$\n\nwhere $j_!$ (extension by zero) is exact and so is applied termwise.\n\nFor proper $f$, its identity compactification is $(j,p)=(1_X,f)$.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-c674583d0",
-  "group": "Q19",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
- }
 }

@@ -1,0 +1,91 @@
+{
+  "id": "sk-prop-sfb-cartesian-coefficients",
+  "kind": "statement",
+  "title": "Inverse image of the coefficient sheaves",
+  "statement": "Because all coefficient sheaves are pulled back from the point, they are compatible with\ninverse image. The same holds for their Tate twists ([sk-def-sp-tate-twist]), and a finite\nextension of coefficient fields gives a finite free extension of coefficient sheaves.\n\nLet $f\\colon X\\to Y$ be a morphism of schemes.\n\n1. For every admissible $\\Lambda$, the canonical map\n   $$\n   f^{-1}\\Lambda_Y\\longrightarrow\\Lambda_X\n   $$\n   is an isomorphism of sheaves of rings on $X_{\\mathrm{proét}}$ (this is the map $\\alpha_f$\n   of [sk-def-sfb-coefficient-morphisms]). The same holds for its Tate twists, including the\n   twists of a finite ring $A$.\n2. If $E\\subset F$ is a finite extension, then $\\cO_{F,X}$ is a finite free\n   $\\cO_{E,X}$-module and $F_X$ is a finite free $E_X$-module.\n\nBy (1), the pullback $f^*\\colon\\Mod(Y_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$\nof modules over these sheaves is the exact functor $f^{-1}$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
+    "place": "node sk-prop-sfb-cartesian-coefficients, order 747"
+  },
+  "stmt_deps": [
+    "sk-def-sp-tate-twist",
+    "sk-def-sfb-coefficient-morphisms"
+  ],
+  "proof": [
+    {
+      "text": "(1) For every condensed ring $\\Lambda$, the identity $p_Y\\circ f=p_X$ gives\n$$\nf^{-1}\\Lambda_Y=f^{-1}p_Y^*\\Lambda\\simeq p_X^*\\Lambda=\\Lambda_X,\n$$\nwhich gives the assertion uniformly, including finite $A$. This is [lem-sfb-alpha-iso]:\n$\\alpha_f$ is a component of the natural isomorphism of [sk-def-sfb-pullback-from-point-comp].\nIts compatibility with identities and composition, in the adjoint form $\\eta_f$, is\n[lem-sfb-eta-id] and [lem-sfb-eta-comp].",
+      "uses": [
+        "lem-sfb-alpha-iso",
+        "sk-def-sfb-pullback-from-point-comp",
+        "lem-sfb-eta-id",
+        "lem-sfb-eta-comp"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The torsion twists $\\mu_{\\ell^n}$ are represented by finite étale group schemes, which commute\nwith base change. Their inverse limit is represented by the inverse limit of these schemes,\nso its inverse image is represented by the base change (\\stacks{09A5}). This gives the\nassertion for $\\cO_E(1)$. For a finite $A$ killed by $\\ell^n$, its twist is obtained by\nextending scalars from $\\mathbf Z/\\ell^n\\mathbf Z$ in the finite-level twist, so inverse image\ncommutes with it as well. Inverting $\\ell$, extending scalars, and taking tensor powers and\nduals gives the other twists. Details: [det-prop-sfb-cartesian-coefficients-twists].",
+      "uses": [
+        "det-prop-sfb-cartesian-coefficients-twists"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "(2) An $\\cO_E$-basis of $\\cO_F$ is an isomorphism of topological $\\cO_E$-modules\n$\\cO_F\\cong\\cO_E^{[F:E]}$, hence of condensed modules\n$\\underline{\\cO_F}\\cong\\underline{\\cO_E}^{[F:E]}$. Pull it back along $p_X$, and invert $\\ell$\nfor the fields. Details: [det-prop-sfb-cartesian-coefficients-finite-free] and, for the\nfields, [lem-sfb-subfield-flat].",
+      "uses": [
+        "det-prop-sfb-cartesian-coefficients-finite-free",
+        "lem-sfb-subfield-flat"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-pullback-from-point-comp",
+    "lem-sfb-eta-id",
+    "lem-sfb-eta-comp",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "lem-sfb-subfield-flat",
+    "sk-prop-sfb-qlbar-colimit-x"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "lean_not_found",
+    "in_cycle"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 747,
+  "blueprint_uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-def-sp-tate-twist"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-prop-sfb-qlbar-colimit-x"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

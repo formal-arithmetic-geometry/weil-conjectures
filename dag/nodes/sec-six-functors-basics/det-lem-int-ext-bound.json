@@ -1,0 +1,84 @@
+{
+  "id": "det-lem-int-ext-bound",
+  "kind": "statement",
+  "title": "Uniform vanishing of Ext between integral constructible sheaves",
+  "statement": "Let $a=i\\circ u:S\\hookrightarrow X$ and $L$ be as in\n[det-lem-int-ext-formula], and let $j$ be the open immersion complementary to\n$i$. Then\n\n$$\n\\Ext^q_X(a_!L,N)=0\\qquad\\text{for }q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3\n\\text{ and all }N\\in\\Cons(X,\\mathcal O_E).\n$$\n\nConsequently every $C\\in\\Cons(X,\\mathcal O_E)$ has an integer $d_C$ with\n$\\Ext^q(C,N)=0$ for $q>d_C$ and all $N\\in\\Cons(X,\\mathcal O_E)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-bound.md",
+    "place": "node det-lem-int-ext-bound, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099Q"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09AA"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 08TB"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "det-lem-int-ext-formula"
+  ],
+  "proof": [
+    {
+      "text": "Write $N_n=N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n$. By the length one\nresolution of $\\mathcal O_E/\\pi_E^n$, $N_n$ is the cone of $\\pi_E^n$ on $N$, a\nconstructible torsion complex in degrees $[-1,0]$, and\n$N\\simeq R\\varprojlim_nN_n$ by derived completeness (Stacks, Tag 099Q). The\ncohomological dimensions $\\operatorname{cd}_\\ell(j)$ and\n$\\operatorname{cd}_\\ell(S)$ of [sk-def-cd] are finite and depend only on $j$\nand $S$. Apply the formula of [det-lem-int-ext-formula](2) to $N_n$:",
+      "uses": [
+        "sk-def-cd",
+        "det-lem-int-ext-formula"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "- $R\\underline\\Gamma_ZN_n$ is $i^*$ of the fibre of $N_n\\to Rj_*j^*N_n$;\n  since $Rj_*$ of a torsion complex in degrees $[-1,0]$ has cohomology in\n  degrees $\\le\\operatorname{cd}_\\ell(j)$, the fibre has cohomology in degrees\n  $\\le\\operatorname{cd}_\\ell(j)+1$;\n- tensoring with $L^\\vee$, of Tor amplitude $[0,1]$, raises the upper bound\n  by at most one, and $u^*$ is exact;\n- $R\\Gamma(S,-)$ raises it by at most $\\operatorname{cd}_\\ell(S)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "So $R\\operatorname{Hom}_X(a_!L,N_n)$ has cohomology in degrees\n$\\le\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. All functors\ninvolved ($R\\underline\\Gamma_Z$, i.e. $Rj_*$, $j^*$ and closed inverse image\n(Stacks, Tag 09AA), open restriction, derived sections, and tensoring with the\ndualizable $L^\\vee$) commute with derived inverse limits, so\n$R\\operatorname{Hom}_X(a_!L,N)\\simeq R\\varprojlim_nR\\operatorname{Hom}_X(a_!L,N_n)$.\nThe derived limit of a countable tower raises the upper bound by at most one\n(Milnor sequence, Stacks, Tag 08TB); this applies because the complexes and\ntransition maps can be taken in the abelian category of inverse systems\nbefore deriving. Hence the vanishing for\n$q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3$; the bound depends only\non $a$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "For general $C\\in\\Cons(X,\\mathcal O_E)$, filter $C$ as in\n[det-lem-int-ext-formula](1) by finitely many pieces $a_!L$ in degree $0$.\nThe long exact Ext sequences show that $d_C$, the maximum of the bounds of\nthe pieces, works.",
+      "uses": [
+        "det-lem-int-ext-formula"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-def-cd",
+    "det-lem-int-ext-formula",
+    "sk-lem-int-integral-heart"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-bound.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-lem-int-ext-formula",
+    "sk-def-cd",
+    "sk-lem-int-integral-heart"
+  ],
+  "uses_not_cited": [
+    "sk-lem-int-integral-heart"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

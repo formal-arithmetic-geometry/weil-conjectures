@@ -1,0 +1,66 @@
+{
+  "id": "det-picard-main-degree",
+  "kind": "statement",
+  "title": "Degree decomposition of the Picard scheme of a geometric curve",
+  "statement": "Let $k$ be algebraically closed, $C/k$ a smooth proper connected curve of\ngenus $g$, $P\\in C(k)$, and let $\\underline{\\operatorname{Pic}}_{C/k}$ be\nthe group scheme representing $\\operatorname{Pic}_{C/k}$\n([thm-pc-picard-representable]), with universal $P$-rigidified invertible\nsheaf $\\cL$ on $C\\times\\underline{\\operatorname{Pic}}_{C/k}$. For a point\n$t$ with residue field $\\kappa(t)$ put\n$\\delta(t)=\\deg\\cL_t:=\\chi(C_{\\kappa(t)},\\cL_t)-(1-g)$. Then:\n\n1. $\\delta$ is locally constant on $\\underline{\\operatorname{Pic}}_{C/k}$;\nhence\n$\\underline{\\operatorname{Pic}}_{C/k}=\\coprod_{d\\in\\Z}\\underline{\\operatorname{Pic}}^d_{C/k}$\nwith $\\underline{\\operatorname{Pic}}^d_{C/k}=\\delta^{-1}(d)$ open and closed;\n1. $\\underline{\\operatorname{Pic}}^d_{C/k}$ represents the subfunctor\n$\\operatorname{Pic}^d_{C/k}$ of classes all of whose fibres have degree\n$d$, and its $k$-points are the invertible sheaves of degree $d$ on $C$;\n1. $\\underline{\\operatorname{Pic}}^0_{C/k}$ is an open and closed subgroup\nscheme, and tensoring with $\\cO_C(dP)$ is an isomorphism of schemes\n$\\underline{\\operatorname{Pic}}^0_{C/k}\\xrightarrow{\\sim}\\underline{\\operatorname{Pic}}^d_{C/k}$\nwith inverse given by tensoring with $\\cO_C(-dP)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "node det-picard-main-degree, order None"
+  },
+  "stmt_deps": [
+    "thm-pc-picard-representable"
+  ],
+  "proof": [
+    {
+      "text": "(1) The projection $\\pi:C\\times\\underline{\\operatorname{Pic}}_{C/k}\\to\\underline{\\operatorname{Pic}}_{C/k}$\nis proper, flat and of finite presentation, and $\\cL$ is invertible,\nhence flat over the base. By [sk-thm-picard-coherence] (a), every point\nhas an affine neighbourhood $U$ on which $R\\pi_*\\cL$ is represented by a\nbounded complex $K^\\bullet$ of finite free modules whose formation\ncommutes with base change; so for $t\\in U$,\n$\\chi(\\cL_t)=\\sum_q(-1)^q\\dim_{\\kappa(t)}H^q(K^\\bullet\\otimes\\kappa(t))=\\sum_q(-1)^q\\operatorname{rk}K^q$,\nwhich does not depend on $t\\in U$ (the Euler characteristic of a finite\ncomplex of vector spaces equals the alternating sum of the dimensions of\nits terms). Hence $\\chi(\\cL_t)$, and with it $\\delta$, is locally\nconstant, and the fibres $\\delta^{-1}(d)$ are open, hence also closed\n(their complement is a union of open sets). By Riemann–Roch\n([lem-sc-riemann-roch], applied over an algebraic closure of\n$\\kappa(t)$, using [lem-pc-degree-base-change]) $\\delta(t)$ is the\ndivisor degree of $\\cL_t$.",
+      "uses": [
+        "sk-thm-picard-coherence",
+        "lem-sc-riemann-roch",
+        "lem-pc-degree-base-change"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "(2) A morphism $h:T\\to\\underline{\\operatorname{Pic}}_{C/k}$ classifies\n$(\\mathrm{id}\\times h)^*\\cL$, whose fibre at $s\\in T$ is\n$\\cL_{h(s)}\\otimes_{\\kappa(h(s))}\\kappa(s)$, of the same Euler\ncharacteristic (flat base change). So $h$ factors through the open and\nclosed subscheme $\\delta^{-1}(d)$ iff all fibres of the classified sheaf\nhave degree $d$. For $T=\\Spec k$ this identifies the $k$-points with\n$\\operatorname{Pic}(C)$ in degree $d$ (rigidification is automatic since\n$\\operatorname{Pic}(\\Spec k)=0$).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "(3) Degree is additive under tensor product of invertible sheaves on a\ncurve over a field ([lem-pc-degree-base-change]); the dual has the\nopposite degree. Hence $\\operatorname{Pic}^0_{C/k}$ is a subgroup functor,\nrepresented by the open and closed subscheme\n$\\underline{\\operatorname{Pic}}^0_{C/k}$, which is therefore a subgroup\nscheme ([rem-pc-group-structure]). The class of $\\cO_C(dP)$ (rigidified\nalong $P$) is a $k$-point of degree $d$, and multiplication by it is an\nautomorphism of the group scheme $\\underline{\\operatorname{Pic}}_{C/k}$\nwith inverse multiplication by $\\cO_C(-dP)$; by additivity it carries\n$\\delta^{-1}(0)$ onto $\\delta^{-1}(d)$.",
+      "uses": [
+        "lem-pc-degree-base-change",
+        "rem-pc-group-structure"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-picard-coherence",
+    "lem-sc-riemann-roch",
+    "lem-pc-degree-base-change",
+    "rem-pc-group-structure"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-pc-picard-representable",
+    "rem-pc-group-structure",
+    "sk-thm-picard-coherence",
+    "lem-sc-riemann-roch",
+    "lem-pc-degree-base-change"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

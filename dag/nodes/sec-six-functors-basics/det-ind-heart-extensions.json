@@ -1,0 +1,64 @@
+{
+  "id": "det-ind-heart-extensions",
+  "kind": "statement",
+  "title": "Ind-constructible sheaves are closed under extensions",
+  "statement": "Let $\\Lambda=E$ or $\\Qlb$ and let $0\\to N\\to M\\to B\\to0$ be exact in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ with\n$N,B\\in\\IndCons(X,\\Lambda)$. Then $M\\in\\IndCons(X,\\Lambda)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.md",
+    "place": "node det-ind-heart-extensions, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Write $N=\\varinjlim_\\beta D_\\beta$ and $B=\\varinjlim_\\alpha C_\\alpha$ as filtered colimits of\nconstructible sheaves.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Pullback to $C_\\alpha$.* Let $M_\\alpha=M\\times_BC_\\alpha$; it is an extension\n$0\\to N\\to M_\\alpha\\to C_\\alpha\\to0$, with class $e_\\alpha\\in\\Ext^1_\\Lambda(C_\\alpha,N)$. By\n[sk-lem-constructible-ext-continuity] (degree $1$, targets in degree $0$),\n\n$$\n\\Ext^1_\\Lambda(C_\\alpha,N)=\\varinjlim_\\beta\\Ext^1_\\Lambda(C_\\alpha,D_\\beta),\n$$\n\nso $e_\\alpha$ is the pushout along $D_\\beta\\to N$ of an extension\n$0\\to D_\\beta\\to M_{\\alpha\\beta}\\to C_\\alpha\\to0$ for some $\\beta$. For $\\beta'\\geq\\beta$ let\n$M_{\\alpha\\beta'}$ be its pushout along $D_\\beta\\to D_{\\beta'}$. Each $M_{\\alpha\\beta'}$ is an extension\nof constructible sheaves, hence constructible (part (1) of [sk-lem-coefficient-heart]).",
+      "uses": [
+        "sk-lem-constructible-ext-continuity",
+        "sk-lem-coefficient-heart"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Colimit over $\\beta'$.* Pushouts commute with colimits, so\n$\\varinjlim_{\\beta'}M_{\\alpha\\beta'}$ is the pushout of $M_{\\alpha\\beta}$ along $D_\\beta\\to N$, which\nrepresents $e_\\alpha$, i.e. is isomorphic to $M_\\alpha$ as an extension. Thus\n$M_\\alpha\\in\\IndCons(X,\\Lambda)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Colimit over $\\alpha$.* Filtered colimits are exact, so\n$\\varinjlim_\\alpha M_\\alpha=M\\times_B\\varinjlim_\\alpha C_\\alpha=M\\times_BB=M$. By\n[det-ind-heart-filtered-colimits], $M\\in\\IndCons(X,\\Lambda)$.",
+      "uses": [
+        "det-ind-heart-filtered-colimits"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-lem-constructible-ext-continuity",
+    "sk-lem-coefficient-heart",
+    "det-ind-heart-filtered-colimits"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-extensions.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-ind-heart-filtered-colimits",
+    "sk-lem-constructible-ext-continuity",
+    "sk-lem-coefficient-heart"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

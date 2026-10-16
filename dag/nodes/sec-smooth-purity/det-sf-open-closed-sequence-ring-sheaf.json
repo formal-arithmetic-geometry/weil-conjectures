@@ -1,0 +1,90 @@
+{
+  "id": "det-sf-open-closed-sequence-ring-sheaf",
+  "kind": "statement",
+  "title": "The open–closed sequence for module sheaves over a sheaf of rings",
+  "statement": "Let $X$ be quasi-compact and quasi-separated, $j:U\\hookrightarrow X$ a\nquasi-compact open immersion with closed complement $i:Z\\hookrightarrow X$,\nand $B$ a sheaf of rings on $X_{\\mathrm{proét}}$, with coefficient rings $j^*B$\non $U$ and $i^*B$ on $Z$. Then:\n\n1. $j^*$ and $j_!$ are exact, $j_!\\dashv j^*$, and the unit\n$N\\to j^*j_!N$ is an isomorphism;\n2. $i_*$ is exact, the counit $i^*i_*G\\to G$ is an isomorphism (so $i_*$ is\nfully faithful), and $j^*i_*=0$;\n3. for every $B$-module sheaf $M$ the sequence\n$0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$, formed by the counit of $j_!\\dashv j^*$\nand the unit of $i^*\\dashv i_*$, is exact;\n4. for a morphism $g:X'\\to X$ with $X'$ qcqs and base changes\n$j':U'\\to X'$, $i':Z'\\to X'$, $g_U:U'\\to U$, $g_Z:Z'\\to Z$, there are\ncanonical isomorphisms $g^*j_!\\simeq j'_!g_U^*$, $g^*i_*\\simeq i'_*g_Z^*$, and\n$g^*$ carries the sequence of (3) for $M$ to the sequence of (3) for $g^*M$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.md",
+    "place": "node det-sf-open-closed-sequence-ring-sheaf, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "All functors involved send a module over the relevant sheaf of rings to a\nmodule over its inverse or direct image, and on underlying abelian sheaves\nthey are the functors of abelian sheaves; exactness, the unit and counit\nmaps and the vanishing statements can therefore be checked on underlying\nabelian sheaves. The proofs of the finite-coefficient lemmas cited below\nnever use the coefficients: they only manipulate sections on the affine\nind-étale bases, so they apply verbatim to abelian sheaves.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(1)* $j^*$ is restriction to the open $U_{\\mathrm{proét}}=X_{\\mathrm{proét}}/U$,\nwhich is exact. $j_!$ is the sheafification of extension by zero; it is left\nadjoint to $j^*$ ([lem-weil-extension-by-zero-adjunction]), exact\n([lem-weil-extension-by-zero-exact]), and its unit is an isomorphism\n([lem-exc-proetale-open-unit]): for $W\\to X$ factoring through $U$ the\npresheaf extension by zero already has value $N(W)$.",
+      "uses": [
+        "lem-weil-extension-by-zero-adjunction",
+        "lem-weil-extension-by-zero-exact",
+        "lem-exc-proetale-open-unit"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2)* Exactness of $i_*$ is [lem-exc-proetale-closed-exact]: a section of\n$i_*H$ on a basis object $W$ is a section of $H$ on $Z_W=W\\times_XZ$; it lifts\nto $G$ on a finite affine ind-étale covering of $Z_W$, which extends, by the\nhenselian lifts of [lem-exc-closed-cover-extension], to a covering of $W$\nwhose remaining members lie over $U$, where the section is zero. This uses\nthat $W\\setminus Z_W$ is quasi-compact, i.e. that $j$ is quasi-compact. The\ncounit $i^*i_*G\\to G$ is an isomorphism by\n[lem-exc-proetale-closed-fully-faithful]; evaluating on a weakly\ncontractible $V$ with (1) of [det-sf-open-closed-pullback-limits] gives\n$(i^*i_*G)(V)=G(v(V)\\times_XZ)=G(V)$. Finally $j^*i_*G=0$ because for $W$\nover $U$ the fibre product $W\\times_XZ$ is empty and $G(\\emptyset)=0$.",
+      "uses": [
+        "lem-exc-proetale-closed-exact",
+        "lem-exc-closed-cover-extension",
+        "lem-exc-proetale-closed-fully-faithful",
+        "det-sf-open-closed-pullback-limits"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(3)* The composite $j_!j^*M\\to M\\to i_*i^*M$ is zero, since by adjunction it\ncorresponds to a map $j^*M\\to j^*i_*i^*M=0$. The pair $(j^*,i^*)$ is\njointly conservative on abelian sheaves: if $j^*F=0$ and $i^*F=0$, a section\n$s\\in F(W)$ on a basis object becomes zero on a covering of $Z_W$ by henselian\nlifts and is zero on the open members over $U$, so $s=0$ by the sheaf axiom\n([lem-exc-open-closed-detection]). Since $j^*$ and $i^*$ are\nexact, the sequence is exact as soon as its images under $j^*$ and $i^*$ are.\nUnder $j^*$ it becomes $0\\to j^*M\\xrightarrow{\\sim}j^*M\\to0\\to0$ by (1),(2)\nand the triangle identity for $j_!\\dashv j^*$. Under $i^*$ its first term is\n$i^*j_!j^*M=0$ (sections of $j_!N$ on a henselian lift $v(V)$ vanish, because\n$v(V)$ does not factor through $U$ unless $V=\\emptyset$, and these values\ncompute $i^*$ by [det-sf-open-closed-pullback-limits]), and the map\n$i^*M\\to i^*i_*i^*M$ is inverse to the counit isomorphism of (2) by the\ntriangle identity. So both restricted sequences are exact.",
+      "uses": [
+        "lem-exc-open-closed-detection",
+        "det-sf-open-closed-pullback-limits"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(4)* For $g:X'\\to X$, both $g^*j_!$ and $j'_!g_U^*$ are left adjoint to\n$g_{U*}j'^*=j^*g_*$, so they agree canonically. For the closed part,\n$g^*i_*G\\to i'_*g_Z^*G$ is the base-change map; it is an isomorphism after\n$j'^*$ (both sides vanish by (2)) and after $i'^*$, where both sides become\n$g_Z^*G$ by the counit isomorphism of (2) and\n[lem-exc-closed-localization]; by joint conservativity it is an isomorphism.\nThe functor $g^*$ is exact and commutes with the counit and unit maps of (3)\nunder these identifications, so it carries the sequence for $M$ to that for\n$g^*M$.",
+      "uses": [
+        "lem-exc-closed-localization"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-exc-proetale-open-unit",
+    "lem-exc-proetale-closed-exact",
+    "lem-exc-closed-cover-extension",
+    "lem-exc-proetale-closed-fully-faithful",
+    "det-sf-open-closed-pullback-limits",
+    "lem-exc-open-closed-detection",
+    "lem-exc-closed-localization"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-sequence-ring-sheaf.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "lem-exc-proetale-closed-exact",
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-exc-proetale-open-unit",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-exc-closed-localization",
+    "lem-exc-closed-cover-extension",
+    "det-sf-open-closed-pullback-limits"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

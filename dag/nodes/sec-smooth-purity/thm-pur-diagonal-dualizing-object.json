@@ -228,5 +228,39 @@
     "group": "NR",
     "result": "pass",
     "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-3dbebe76e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Verified all four steps, canonical composite, coefficient conventions, rank-zero cases, route, reuse candidates and absence of a dependency cycle. Accepted both declared tool uses. No fixes needed; review.md records checks and upstream limitations. No target-category comparison is certified by this internal split."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth,\nseparated, of pure\nrelative dimension $d$. Then there is a canonical isomorphism\n\n$$\n\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d].\n$$",
+    "proof": [
+      {
+        "text": "The final restriction of the Tate line uses [def-coefficient-twists-detailed], with tensor identifications as in [def-weil-derived-tensor].\nStep 1: the section invariant of the diagonal. Apply\n[thm-pur-dnc-invariance] to the smooth map\n$p_1:W\\to X$ of [lem-pur-diagonal-base-change] and its closed\nsection $\\Delta$. By [lem-pur-diagonal-regular-immersion] its\nnormal bundle is canonically $N_\\Delta\\cong T_{X/Y}$, a vector\nbundle of rank $d$, so\n\n$$\nC(p_1,\\Delta)\\;\\cong\\;C(\\pi_T:T_{X/Y}\\to X,\\,0_T).\n$$",
+        "uses": [
+          "def-coefficient-twists-detailed",
+          "def-weil-derived-tensor",
+          "thm-pur-dnc-invariance",
+          "lem-pur-diagonal-base-change",
+          "lem-pur-diagonal-regular-immersion"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Step 2: the two sides. The left side is $\\omega_f$ by\n[lem-pur-diagonal-base-change]. For the right side,\n[cor-pur-vector-bundle-purity] applied to $\\pi_T$ gives\n\n$$\n\\omega_{\\pi_T}=R\\pi_T^!\\Lambda_X\\;\\cong\\;\\Lambda_{T_{X/Y}}(d)[2d],\n$$\n\nand pulling back by the zero section $0_T$ gives\n\n$$\nC(\\pi_T,0_T)=0_T^*\\omega_{\\pi_T}\n\\;\\cong\\;0_T^*\\Lambda_{T_{X/Y}}(d)[2d]\n\\;\\cong\\;\\Lambda_X(d)[2d].\n$$",
+        "uses": [
+          "lem-pur-diagonal-base-change",
+          "cor-pur-vector-bundle-purity"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Combining the two steps proves the assertion. The identification is\ncanonical (every displayed step is canonical, by the uniqueness clause\nof [thm-pur-dnc-invariance]); compatibility with base change\nfollows from the base-change compatibility of the diagonal, of\n[thm-pur-dnc-invariance], and of\n[cor-pur-vector-bundle-purity] (the normal bundle of the diagonal\nof the base change is the base change of the normal bundle).",
+        "uses": [
+          "thm-pur-dnc-invariance",
+          "cor-pur-vector-bundle-purity"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
 }

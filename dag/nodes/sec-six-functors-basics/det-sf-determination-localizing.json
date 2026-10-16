@@ -1,0 +1,70 @@
+{
+  "id": "det-sf-determination-localizing",
+  "kind": "statement",
+  "title": "Invertibility propagates to the localizing closure",
+  "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories with arbitrary direct\nsums, let $\\mathcal S\\subset\\mathcal T$ be a class of objects, and let\n$\\Loc(\\mathcal S)$ be the smallest full triangulated subcategory of\n$\\mathcal T$ containing $\\mathcal S$ and closed under arbitrary direct sums.\nLet $F_1,F_2:\\mathcal T\\to\\mathcal T'$ (or $\\Loc(\\mathcal S)\\to\\mathcal T'$)\nbe exact functors preserving direct sums and $\\eta:F_1\\to F_2$ a natural\ntransformation of exact functors, i.e. compatible with the shift\nisomorphisms. Then the full subcategory\n\n$$\n\\mathcal C_\\eta=\\{K\\ :\\ \\eta_K\\text{ is an isomorphism}\\}\n$$\n\nis a triangulated subcategory closed under arbitrary direct sums (and under\ndirect summands). Consequently, if $\\mathcal S\\subset\\mathcal C_\\eta$, then\n$\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
+    "place": "node det-sf-determination-localizing, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Shifts.* Since $\\eta$ is a natural transformation of exact functors,\n$\\eta_{K[1]}$ corresponds to $\\eta_K[1]$ under the shift isomorphisms\n$F_a(K[1])\\simeq F_a(K)[1]$, so $K\\in\\mathcal C_\\eta$ if and only if\n$K[1]\\in\\mathcal C_\\eta$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Cones.* Let $K\\to L\\to M\\to K[1]$ be distinguished with\n$K,L\\in\\mathcal C_\\eta$. Applying $F_1$ and $F_2$ gives two distinguished\ntriangles, and $\\eta$ gives a morphism between them (exactness of $\\eta$\nmeans the square involving the connecting maps commutes). Two of its three\ncomponents are isomorphisms, so the third is, by\n[lem-sf-triangle-two-out-of-three] (the five lemma for the long exact\n$\\operatorname{Hom}(T,-)$-sequences and Yoneda). Hence $M\\in\\mathcal C_\\eta$;\ntogether with shifts, $\\mathcal C_\\eta$ is a triangulated subcategory.",
+      "uses": [
+        "lem-sf-triangle-two-out-of-three"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Direct sums.* Let $(K_\\alpha)$ be a family in $\\mathcal C_\\eta$ with sum\n$K=\\bigoplus_\\alpha K_\\alpha$. Since $F_1$ and $F_2$ preserve direct sums,\nthe canonical maps $c_a:\\bigoplus_\\alpha F_a(K_\\alpha)\\to F_a(K)$ are\nisomorphisms, and naturality of $\\eta$ with respect to the inclusions\n$K_\\alpha\\to K$ gives $\\eta_K\\circ c_1=c_2\\circ\\bigoplus_\\alpha\\eta_{K_\\alpha}$.\nThe sum of isomorphisms is an isomorphism, so $\\eta_K$ is one.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Summands.* If $K\\oplus K'\\in\\mathcal C_\\eta$, then by additivity\n$\\eta_{K\\oplus K'}=\\eta_K\\oplus\\eta_{K'}$, and the inverse composed with the\ninclusion and projection of $K$ inverts $\\eta_K$\n([lem-sf-generating-class-determination]).",
+      "uses": [
+        "lem-sf-generating-class-determination"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Conclusion.* $\\mathcal C_\\eta$ is a triangulated subcategory closed under\ndirect sums containing $\\mathcal S$; $\\Loc(\\mathcal S)$ is the smallest such\nsubcategory, so $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$. Taking\n$\\mathcal S=\\Dctf(X,\\Lambda)$ and $\\mathcal T=\\Loc(\\Dctf(X,\\Lambda))$ gives\n[sk-lem-sf-determination].",
+      "uses": [
+        "sk-lem-sf-determination"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sf-triangle-two-out-of-three",
+    "lem-sf-generating-class-determination",
+    "sk-lem-sf-determination"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "lem-sf-triangle-two-out-of-three",
+    "lem-sf-generating-class-determination"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

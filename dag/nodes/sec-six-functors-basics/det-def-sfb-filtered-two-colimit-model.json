@@ -1,0 +1,50 @@
+{
+  "id": "det-def-sfb-filtered-two-colimit-model",
+  "kind": "definition",
+  "title": "The category $\\mathcal C_\\infty$ of a directed pseudofunctor and its comparison functor",
+  "statement": "Let $I$ be a directed preordered set and $(T_{ij},\\Phi_i,\\theta_{ij})$ a cocone of categories with\nvertex $\\mathcal D$ ([det-def-sfb-filtered-two-colimit-cocone]). Assume it is *coherent*: there\nare natural isomorphisms $\\tau_{ijk}\\colon T_{jk}\\circ T_{ij}\\xrightarrow{\\sim}T_{ik}$ for\n$i\\le j\\le k$ such that\n\n- (normalization) $T_{ii}=\\mathrm{Id}$, $\\theta_{ii}=\\mathrm{id}$, and $\\tau_{iij}$, $\\tau_{ijj}$ are identities;\n- (cocycle) for $i\\le j\\le k\\le l$, $\\tau_{ikl}\\circ T_{kl}(\\tau_{ijk})=\\tau_{ijl}\\circ(\\tau_{jkl})_{T_{ij}}$ as maps $T_{kl}T_{jk}T_{ij}\\to T_{il}$;\n- (compatibility) for $i\\le j\\le k$, $\\theta_{ik}=\\theta_{ij}\\circ(\\theta_{jk})_{T_{ij}}\\circ\\Phi_k(\\tau_{ijk})^{-1}$ as maps $\\Phi_kT_{ik}\\to\\Phi_i$.\n\nDefine the category $\\mathcal C_\\infty$:\n\n- objects are pairs $(i,x)$ with $i\\in I$ and $x\\in\\mathcal C_i$;\n- for objects $(i,x)$, $(j,y)$ and $k\\ge i,j$ put $H_k:=\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)$, and\n  for $k\\le k'$ let $t_{kk'}\\colon H_k\\to H_{k'}$ be\n  $t_{kk'}(g):=\\tau_{jkk',y}\\circ T_{kk'}(g)\\circ\\tau_{ikk',x}^{-1}$. Then\n  $$\n  \\Hom_{\\mathcal C_\\infty}\\bigl((i,x),(j,y)\\bigr):=\\colim_{k\\ge i,j}H_k ,\n  $$\n  a filtered colimit of sets; write $[k,g]$ for the class of $g\\in H_k$;\n- the composite of $[k,g]\\colon(i,x)\\to(j,y)$ and $[k',h]\\colon(j,y)\\to(l,z)$ is\n  $[m,\\,t_{k'm}(h)\\circ t_{km}(g)]$ for any $m\\ge k,k'$, and the identity of $(i,x)$ is $[i,\\mathrm{id}_x]$.\n\nThe *comparison functor* $\\Phi\\colon\\mathcal C_\\infty\\to\\mathcal D$ is\n$\\Phi(i,x):=\\Phi_i(x)$ and $\\Phi([k,g]):=\\theta_{jk,y}\\circ\\Phi_k(g)\\circ\\theta_{ik,x}^{-1}$.\nThese are well defined, $\\mathcal C_\\infty$ is a category and $\\Phi$ is a functor.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "node det-def-sfb-filtered-two-colimit-model, order None"
+  },
+  "stmt_deps": [
+    "det-def-sfb-filtered-two-colimit-cocone"
+  ],
+  "proof": [
+    {
+      "text": "**The colimit is filtered.** The set $\\{k\\in I:k\\ge i,j\\}$ is nonempty and directed because $I$ is\ndirected. By normalization $t_{kk}=\\mathrm{id}$, and for $k\\le k'\\le k''$,\n$$\nt_{k'k''}t_{kk'}(g)=\\tau_{jk'k''}T_{k'k''}(\\tau_{jkk'})\\,T_{k'k''}T_{kk'}(g)\\,T_{k'k''}(\\tau_{ikk'})^{-1}\\tau_{ik'k''}^{-1}\n=\\tau_{jkk''}\\,T_{kk''}(g)\\,\\tau_{ikk''}^{-1}=t_{kk''}(g),\n$$\nusing the cocycle identity at $x$ (indices $i\\le k\\le k'\\le k''$) and at $y$ (indices\n$j\\le k\\le k'\\le k''$), and naturality of $\\tau_{kk'k''}\\colon T_{k'k''}T_{kk'}\\Rightarrow T_{kk''}$. So $(H_k,t_{kk'})$ is a functor on a\ndirected set, and $[k,g]=[k',g']$ if and only if $t_{km}(g)=t_{k'm}(g')$ for some $m\\ge k,k'$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**Composition.** Each $t_{mm'}$ preserves composition and identities, being conjugation of the\nfunctor $T_{mm'}$ by isomorphisms. Hence $[m,t_{k'm}(h)t_{km}(g)]$ does not change when $m$ is\nreplaced by $m'\\ge m$, so any two choices of $m$ give the same class (pass to a common upper bound).\nReplacing $g$ by $t_{kn}(g)$ or $h$ by $t_{k'n}(h)$ does not change the result either, by\n$t_{nm}t_{kn}=t_{km}$; so composition is well defined. Associativity and unitality follow by computing\nall composites at one common stage $m$, where they are associativity and unitality in\n$\\mathcal C_m$, and $t_{im}(\\mathrm{id}_x)=\\mathrm{id}$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**The comparison functor.** For $k\\le k'$, compatibility gives\n$\\theta_{ik',x}^{-1}=\\Phi_{k'}(\\tau_{ikk',x})\\circ\\theta_{kk',T_{ik}x}^{-1}\\circ\\theta_{ik,x}^{-1}$, and\nsimilarly for $y$. Therefore\n$$\n\\theta_{jk',y}\\Phi_{k'}(t_{kk'}g)\\theta_{ik',x}^{-1}\n=\\theta_{jk,y}\\,\\theta_{kk',T_{jk}y}\\,\\Phi_{k'}T_{kk'}(g)\\,\\theta_{kk',T_{ik}x}^{-1}\\,\\theta_{ik,x}^{-1}\n=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1},\n$$\nby naturality of $\\theta_{kk'}\\colon\\Phi_{k'}T_{kk'}\\Rightarrow\\Phi_k$. So $\\Phi$ is well defined on\nclasses. It sends $[i,\\mathrm{id}_x]$ to $\\theta_{ii}\\Phi_i(\\mathrm{id})\\theta_{ii}^{-1}=\\mathrm{id}$, and,\ncomputing a composite at a common stage $m$,\n$\\Phi([m,h_m])\\Phi([m,g_m])=\\theta_{lm,z}\\Phi_m(h_m)\\theta_{jm,y}^{-1}\\theta_{jm,y}\\Phi_m(g_m)\\theta_{im,x}^{-1}=\\Phi([m,h_mg_m])$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-def-sfb-filtered-two-colimit-cocone"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

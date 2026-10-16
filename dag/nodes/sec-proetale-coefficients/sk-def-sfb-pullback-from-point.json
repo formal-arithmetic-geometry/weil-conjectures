@@ -1,0 +1,132 @@
+{
+  "id": "sk-def-sfb-pullback-from-point",
+  "kind": "definition",
+  "title": "Pulling back from the point",
+  "statement": "Let $*_{\\mathrm{proét}}$ be the pro-étale site of a point: profinite sets with\nthe coherent topology ([sk-def-sfb-condensed-ring]). For a scheme $X$ let\n$X_{\\mathrm{proét}}$ be its small pro-étale site ([def-weil-pbc-proetale-site]),\nand let $\\pi_X\\colon X\\to\\Spec\\Z$ be the structure morphism. Since $\\Spec\\Z$ is\nterminal, $\\pi_Y\\circ f=\\pi_X$ for every morphism $f\\colon X\\to Y$.\n\n1. **Profinite sets as pro-étale schemes.** For a profinite set $S$, let\n   $LC(S,\\Z)$ be the ring of locally constant functions $S\\to\\Z$. If $S_i$ runs\n   over the finite quotients of $S$, then\n   $$\n   \\Spec LC(S,\\Z)=\\lim_i\\coprod_{S_i}\\Spec\\Z .\n   $$\n   The morphism $\\Spec LC(S,\\Z)\\to\\Spec\\Z$ is weakly étale. Precomposition\n   makes $S\\mapsto\\Spec LC(S,\\Z)$ a functor\n   $$\n   u\\colon *_{\\mathrm{proét}}\\longrightarrow(\\Spec\\Z)_{\\mathrm{proét}} .\n   $$\n   It preserves finite limits, it sends finite jointly surjective families to\n   pro-étale coverings, and it is continuous.\n\n2. **Test objects.** For a scheme $X$ and a profinite set $S$, put\n   $$\n   X[S]:=\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}X=\\lim_i\\coprod_{S_i}X .\n   $$\n   The functor $u_X\\colon *_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$,\n   $S\\mapsto X[S]$, is $u$ followed by base change along $\\pi_X$.\n\n3. **Inverse image from the point.** Let\n   $p_*\\colon\\Sh((\\Spec\\Z)_{\\mathrm{proét}},\\Ab)\\to\\Sh(*_{\\mathrm{proét}},\\Ab)$,\n   $(p_*G)(S)=G(\\Spec LC(S,\\Z))$, be restriction along $u$. Define\n   $$\n   p^*:=\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}\\colon\n   \\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh((\\Spec\\Z)_{\\mathrm{proét}},\\Ab).\n   $$\n   Then $p^*$ is left adjoint to $p_*$. For the tensor products of\n   [sk-def-sfb-sheaf-tensor], $p^*$ is strong monoidal and braided.\n\n4. **Inverse image to $X$.** Define\n   $$\n   p_X^*:=\\pi_X^*\\circ p^*\\colon\n   \\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh(X_{\\mathrm{proét}},\\Ab),\n   $$\n   where $\\pi_X^*$ is the pullback of [sk-def-sfb-finite-pushforward-pullback]\n   for $\\mathcal A=\\Ab$. It is strong monoidal and braided. It is a left\n   adjoint, with right adjoint $G\\mapsto\\bigl(S\\mapsto G(X[S])\\bigr)$; so\n   $p_X^*$ is the inverse image along $u_X$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
+    "place": "node sk-def-sfb-pullback-from-point, order 854"
+  },
+  "stmt_deps": [
+    "sk-def-sfb-condensed-ring",
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-sheaf-tensor"
+  ],
+  "proof": [
+    {
+      "text": "Part 1 combines four children. [lem-sfb-lc-weakly-etale] shows that\n$\\Spec LC(S,\\Z)\\to\\Spec\\Z$ is weakly étale. [def-sfb-profinite-to-proetale]\nconstructs the functor $u$. [lem-sfb-profinite-to-proetale-finite-limits] and\n[lem-sfb-profinite-to-proetale-cover-preserving] give the exactness and\ncovering properties, and continuity follows by\n[lem-sfb-profinite-to-proetale-continuous].",
+      "uses": [
+        "lem-sfb-lc-weakly-etale",
+        "def-sfb-profinite-to-proetale",
+        "lem-sfb-profinite-to-proetale-finite-limits",
+        "lem-sfb-profinite-to-proetale-cover-preserving",
+        "lem-sfb-profinite-to-proetale-continuous"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Part 2 is [def-sfb-profinite-test-objects].",
+      "uses": [
+        "def-sfb-profinite-test-objects"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For part 3, $p_*$ is [def-sfb-point-lower-star]. The left Kan extension exists\nby [lem-sfb-point-lan-exists], so $p^*$ is defined\n([def-sfb-point-upper-star]), and the adjunction is [def-sfb-point-adjunction].\nSince $p_*$ is lax monoidal, $p^*$ is oplax monoidal. Its oplax structure maps\nare invertible by [lem-sfb-point-upper-star-unit] and\n[lem-sfb-point-upper-star-tensor], so $p^*$ is strong monoidal. It is braided\nby [lem-sfb-point-upper-star-braided].",
+      "uses": [
+        "def-sfb-point-lower-star",
+        "lem-sfb-point-lan-exists",
+        "def-sfb-point-upper-star",
+        "def-sfb-point-adjunction",
+        "lem-sfb-point-upper-star-unit",
+        "lem-sfb-point-upper-star-tensor",
+        "lem-sfb-point-upper-star-braided"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Part 4 is [def-sfb-upper-star-from-point] together with\n[lem-sfb-upper-star-from-point-left-adjoint]. It remains to identify the right\nadjoint. The right adjoint of $p_X^*=\\pi_X^*\\circ p^*$ is $p_*\\circ\\pi_{X*}$.\nOn sections over $S$,\n$$\n(p_*\\pi_{X*}G)(S)=(\\pi_{X*}G)(\\Spec LC(S,\\Z))\n=G\\bigl(\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}X\\bigr)=G(X[S]),\n$$\nbecause $\\pi_{X*}$ is restriction along base change\n([sk-def-sfb-finite-pushforward-pullback]).",
+      "uses": [
+        "def-sfb-upper-star-from-point",
+        "lem-sfb-upper-star-from-point-left-adjoint"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-lc-weakly-etale",
+    "def-sfb-profinite-to-proetale",
+    "lem-sfb-profinite-to-proetale-finite-limits",
+    "lem-sfb-profinite-to-proetale-cover-preserving",
+    "lem-sfb-profinite-to-proetale-continuous",
+    "def-sfb-profinite-test-objects",
+    "def-sfb-point-lower-star",
+    "lem-sfb-point-lan-exists",
+    "def-sfb-point-upper-star",
+    "def-sfb-point-adjunction",
+    "lem-sfb-point-upper-star-unit",
+    "lem-sfb-point-upper-star-tensor",
+    "lem-sfb-point-upper-star-braided",
+    "def-sfb-upper-star-from-point",
+    "lem-sfb-upper-star-from-point-left-adjoint"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "lean_not_found"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 854,
+  "blueprint_uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-finite-pushforward-pullback"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
+    "AlgebraicGeometry.ProEtale.profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.isContinuous_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.profiniteToProEtOf",
+    "AlgebraicGeometry.ProEtale.pointLowerStar",
+    "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.pointUpperStar",
+    "AlgebraicGeometry.ProEtale.pointUpperStarLowerStarAdjunction",
+    "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+    "AlgebraicGeometry.ProEtale.isLeftAdjoint_upperStarFromPoint"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
+    "AlgebraicGeometry.ProEtale.profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.isContinuous_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.profiniteToProEtOf",
+    "AlgebraicGeometry.ProEtale.pointLowerStar",
+    "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+    "AlgebraicGeometry.ProEtale.pointUpperStar",
+    "AlgebraicGeometry.ProEtale.pointUpperStarLowerStarAdjunction",
+    "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+    "AlgebraicGeometry.ProEtale.isLeftAdjoint_upperStarFromPoint"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

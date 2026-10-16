@@ -1,374 +1,380 @@
 {
- "id": "def-exchange-projection",
- "blueprint": {
-  "is": "def-exchange-projection",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "Exchange and projection transformations",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is invertible, let $X,Y,Y'$ be finite-type $S$-schemes, and let $f:X\\to Y$ and $g:Y'\\to Y$ be separated finite-type $S$-morphisms [def-weil-scheme-morphism-properties]. Form the Cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y.\n\\end{array}\n$$\n\n**Finite coefficients.** Work first with $\\Lambda=A$ in the ambient unbounded derived categories $D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], for the schemes $T$ occurring below, using the sites and derived categories of [def-weil-pbc-proetale-site] and the tensor product of [def-weil-derived-tensor]. The pullbacks, direct images, and adjunctions $Lu^*\\dashv Ru_*$ are those of [def-weil-pbc-proetale-operations], agreeing with the finite operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]; write $\\eta_u$ and $\\varepsilon_u$ for their units and counits. For constant coefficients $Lu^*=u^{-1}$. Throughout the finite-level formulas let $K\\in D(X_{\\mathrm{proet}},A)$ and $L\\in D(Y_{\\mathrm{proet}},A)$ be arbitrary. Let\n$$\n\\theta:Lf'^*Lg^*\\xrightarrow{\\sim}Lg'^*Lf^*\n$$\nbe the composite of the pullback-composition isomorphisms [lem-weil-pbc-proetale-derived-pullback-composition] and $gf'=fg'$. Define the direct-image exchange transformation to be the ambient ringed exchange of [def-weil-pbc-ambient-ringed-exchange], namely\n$$\n\\begin{aligned}\n\\operatorname{Ex}_{*,K}:Lg^*Rf_*K\n&\\xrightarrow{\\eta_{f'}}Rf'_*Lf'^*Lg^*Rf_*K\\\\\n&\\xrightarrow{Rf'_*(\\theta_{Rf_*K})}Rf'_*Lg'^*Lf^*Rf_*K\n\\xrightarrow{Rf'_*Lg'^*(\\varepsilon_{f,K})}Rf'_*Lg'^*K.\n\\end{aligned}\n$$\nEquivalently, this is the mate [def-weil-pbc-adjunction-mate] whose transpose under $Lf'^*\\dashv Rf'_*$ is $Lg'^*(\\varepsilon_{f,K})\\circ\\theta_{Rf_*K}$.\n\n**Chosen compactification.** Choose a compactification $c=(j,p)$, $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, with $p j=f$ [def-weil-compactifications-refinements]. Let $\\overline X'=\\overline X\\times_Y Y'$, with $p':\\overline X'\\to Y'$ and $\\bar g':\\overline X'\\to\\overline X$, and let $j':X'\\hookrightarrow\\overline X'$ be the base change of $j$. Extension by zero [def-weil-extension-by-zero] is applied termwise using its exactness [lem-cbc-proetale-extension-zero]. Write\n$$\n Rf_!^c=Rp_*j_!,\\qquad Rf'_!^{c'}=Rp'_*j'_!,\\qquad c'=(j',p').\n$$\nThese formulas define the compactification-relative composite functors on the ambient finite-coefficient categories; in the field-base setting they are the candidates of [def-compact-support-direct-image-detailed]. Let\n$$\n \\beta_K:L\\bar g'^*j_!K\\xrightarrow{\\sim}j'_!Lg'^*K\n$$\nbe the canonical pro-etale open-immersion base-change isomorphism [lem-cbc-proetale-extension-zero-base-change], applied to the upper open-immersion square. Define\n$$\n \\operatorname{Ex}_!^c(K):Lg^*Rf_!^cK\n \\xrightarrow{\\operatorname{Ex}_{*,p}(j_!K)}Rp'_*L\\bar g'^*j_!K\n \\xrightarrow{Rp'_*(\\beta_K)}Rp'_*j'_!Lg'^*K\n =Rf'_!^{c'}Lg'^*K.\n$$\n\n**Projection transformation.** All finite-level tensor products are the derived sheaf tensor products [def-weil-derived-tensor]. For a morphism $u:V\\to W$ and $F,G\\in D(W_{\\mathrm{proet}},A)$, let $\\mu_{u;F,G}:Lu^*(F\\otimes_A^L G)\\xrightarrow{\\sim}Lu^*F\\otimes_A^L Lu^*G$ be the ambient derived tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For $M\\in D(V_{\\mathrm{proet}},A)$ and $N\\in D(W_{\\mathrm{proet}},A)$, define the typed map\n$$\na_{u,M,N}:Lu^*(Ru_*M\\otimes_A^L N)\\xrightarrow{\\mu_{u;Ru_*M,N}}Lu^*Ru_*M\\otimes_A^L Lu^*N\\xrightarrow{\\varepsilon_{u,M}\\otimes1}M\\otimes_A^L Lu^*N,\\qquad\n\\pi_{u;M,N}=Ru_*(a_{u,M,N})\\circ\\eta_{u,Ru_*M\\otimes_A^L N}.\n$$\nThus $\\pi_{u;M,N}:Ru_*M\\otimes_A^L N\\to Ru_*(M\\otimes_A^L Lu^*N)$ is the counit-defined natural projection map of [lem-weil-pbc-ringed-projection-mate-exact]. Let\n$$\n \\gamma_{K,L}:j_!K\\otimes_A^L Lp^*L\n \\xrightarrow{\\sim}j_!(K\\otimes_A^L Lj^*Lp^*L)\n \\xrightarrow{\\sim}j_!(K\\otimes_A^L Lf^*L)\n$$\nbe the open-immersion projection isomorphism [lem-cbc-extension-zero-projection-formula] followed by $Lj^*Lp^*\\cong Lf^*$. Define\n$$\n \\operatorname{PF}_{f,K,L}^c:\n Rf_!^cK\\otimes_A^L L\n \\xrightarrow{\\pi_{p;j_!K,L}}Rp_*(j_!K\\otimes_A^L Lp^*L)\n \\xrightarrow{Rp_*(\\gamma_{K,L})}Rf_!^c(K\\otimes_A^L Lf^*L).\n$$\nIn particular this applies to $K\\in D^b_c(X,A)$ [def-weil-finite-torsion-constructibility] and $L\\in D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude]. The maps are composites of the specified natural transformations; no assertion of invertibility of $\\operatorname{Ex}_*$, $\\operatorname{Ex}_!^c$, or $\\operatorname{PF}^c$ is included.\n\n**Other coefficient stages and domains.** For $\\Lambda=\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$, the same formulas define transformations relative to the following supplied data: categories and operation functors of [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image, def-weil-integral-rational-qbar-compact-support], on full domains closed under all the displayed composites; adjunctions $Lu^*\\dashv Ru_*$ on those domains; natural pullback-composition and tensor-pullback isomorphisms of the displayed types; and natural open-immersion isomorphisms $\\beta$ and $\\gamma$ of the displayed types. Supply also the identifications of the chosen-compactification functors with $Rp_*j_!$ on these domains. At the integral stage, for every integer $m\\geq1$ supply finite-reduction identifications with the operations at $A_{E,m}$, compatible with the transition maps $A_{E,m+1}\\to A_{E,m}$, carrying the units, counits and comparisons to their finite-level counterparts. At the rational stage, these maps are the rationalizations of integral maps. For algebraically closed coefficients, choose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ and an embedding of $E$ into it; the maps are represented over a common finite coefficient field, with supplied scalar-extension comparisons intertwining the units, counits and comparisons. Require these scalar-extension comparisons to be identities for identity field extensions and to satisfy the composition cocycle for towers of finite coefficient fields, using the transition functors and composition identifications of [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. Thus the component over a common finite field is taken as its morphism class in the displayed common-stage category; further scalar extension gives the same class. There is no reduction functor from rational coefficients to $A_{E,n}$. Here integral pullback and tensor mean completed derived pullback and completed tensor, and the integral categories are [def-weil-derived-complete-integral-detailed]; rational and algebraically closed categories are [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. With these supplied data replace $A$ by $\\Lambda$ in the three composites above, for $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$ in their domains. This is a definition from the supplied operation and comparison data, not an assertion that those data exist on all bounded constructible categories over an arbitrary $S$.\n\nThe superscript $c$ records a choice. On the etale-origin field-base domain, [prop-compactification-coherence-detailed] compares the underlying functors. Dropping $c$ from the transformations additionally requires that those comparisons intertwine the displayed composites. That compatibility, and the existence and preservation assertions needed for higher coefficients, are separate theorems, not defining properties or consequences asserted here.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-exchange-projection.md",
-  "place": "node def-exchange-projection, order 1487"
- },
- "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-direct-image",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-compactifications-refinements",
-  "def-weil-extension-by-zero",
-  "lem-cbc-proetale-extension-zero",
-  "def-compact-support-direct-image-detailed",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-cbc-extension-zero-projection-formula",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "prop-compactification-coherence-detailed",
-  "def-weil-pbc-proetale-site",
-  "def-weil-derived-tensor"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "projectionFormula|projectionMap|lowerShriek|extensionByZero",
-   "results": "0 hits: ",
-   "date": "2026-10-15",
-   "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+  "id": "def-exchange-projection",
+  "blueprint": {
+    "is": "def-exchange-projection",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"projection\"",
-   "results": "0 hits: ",
-   "date": "2026-10-15",
-   "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exchange and projection natural transformations for derived pullback direct image and compactly supported direct image of proetale coefficient sheaves",
-   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit",
-   "date": "2026-10-15",
-   "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived exchange map and compact support projection transformation for sheaves on proetale schemes with adic coefficients",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-15",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "mateEquiv|projection",
-   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
-   "date": "2026-10-15",
-   "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The mate of a commutative pullback square and the projection map of a monoidal left adjoint to a direct image functor",
-   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc",
-   "date": "2026-10-15",
-   "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
-  },
-  {
-   "tool": "grep",
-   "query": "projectionFormula|projectionMap|lowerShriek|extensionByZero",
-   "results": "0 hits: ",
-   "date": "2026-10-15",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived base change natural transformation obtained from adjunction unit counit and tensor projection formula for a strong monoidal functor",
-   "results": "8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
-   "date": "2026-10-15",
-   "verdict": "no whole-item match: generic adjunction and Cartesian-monoidal constructions do not supply the derived pro-etale operations, compactification comparisons, or completed coefficient passages"
-  },
-  {
-   "tool": "grep",
-   "query": "conjugateEquiv|leftAdjoint.*Monoidal|projection.*[Ff]ormula",
-   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
-   "date": "2026-10-15",
-   "verdict": "no whole-item match: generic adjunction and Cartesian-monoidal constructions do not supply the derived pro-etale operations, compactification comparisons, or completed coefficient passages"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1487,
- "blueprint_uses": [
-  "def-compact-support-direct-image-detailed",
-  "def-weil-compactifications-refinements",
-  "def-weil-constructible-intervals",
-  "def-weil-derived-direct-image",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-extension-by-zero",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-scheme-morphism-properties",
-  "prop-compactification-coherence-detailed"
- ],
- "uses_not_cited": [
-  "def-weil-extension-by-zero",
-  "prop-compactification-coherence-detailed"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "def-exchange-projection",
-  "worker": "stage1",
-  "summary": "Expanded the finite-level exchange mate, chosen-compactification exchange and counit-defined projection into explicit composites, reusing existing general ringed-topos and pro-etale open-immersion nodes. Corrected omitted higher-coefficient domain/comparison data and the unsupported attribution of map coherence to functor-only compactification coherence; the statement correction, verbatim old statement and complete direct-citer audit are recorded in split_report.statement_change and report.md. Distinguished integral finite reduction, rationalization and common-field scalar extension. Clarified the domains of tensor-pullback and projection separately. No new nodes or Mathlib leaves. Second reading explicitly quantified the ambient finite-level inputs, required transition-compatible reductions at every integral level, and required identity/composition coherence of supplied common-field scalar-extension comparisons.",
-  "blueprint": "Realizes the direct-image exchange paragraph, the compactification/open-immersion exchange paragraph, and the final two projection paragraphs of def-exchange-projection; records necessary domain and coherence repairs. This definition has no proof section. The ambient-typing unit has no proof steps, and this node is not its key definition.",
-  "statement_change": {
-   "date": "2026-10-16",
-   "by": "NG stage 1",
-   "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let every morphism\nbelow be an $S$-morphism. Let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$, where\nthe finite-level coefficient category is the finite-torsion constructible\ncategory [def-weil-finite-torsion-constructibility]; the latter coefficient\ncategories are obtained by derived completion, rationalization, and the\ncommon-stage construction. Use the derived pullback, tensor, and\ninternal-Hom operations [def-weil-derived-pullback-tensor-hom], the derived\ndirect image [def-weil-derived-direct-image], and the compact-support direct\nimage [def-compact-support-direct-image-detailed]. The finite-Tor and\ninterval conditions are the finite-Tor\n[def-weil-finite-tor-amplitude] and constructible-interval\n[def-weil-constructible-intervals] conditions. Let $f:X\\to Y$ be separated\nand of finite type, let $Y'$ be a finite-type $S$-scheme and let $g:Y'\\to Y$\nbe separated and of finite type, and set $X'=X\\times_Y Y'$, with projections\n$g':X'\\to X$ and $f':X'\\to Y'$. Consider the resulting Cartesian square\n\n$$\n\\begin{array}{ccc}\n X' & \\xrightarrow{g'} & X\\\\\n f'\\downarrow && \\downarrow f\\\\\n Y' & \\xrightarrow{g} & Y\n\\end{array}\n$$\n\nThe direct-image exchange transformation\n\n$$\n \\operatorname{Ex}_*:\\;Lg^*Rf_*\\longrightarrow Rf'_*Lg'^*\n$$\n\nis adjoint to the composite\n\n$$\n Lf'^*Lg^*Rf_*\\xrightarrow{\\sim}Lg'^*Lf^*Rf_*\n \\longrightarrow Lg'^*,\n$$\n\nwhose second arrow is the counit of $Lf^*\\dashv Rf_*$. If $f=\\bar f\\circ j$\nis a compactification [def-weil-compactifications-refinements], the\ncompact-support exchange map\n\n$$\n \\operatorname{Ex}_!:\\;Lg^*Rf_!\\longrightarrow Rf'_!Lg'^*\n$$\n\nis represented by $\\operatorname{Ex}_*$ for $\\bar f$, followed by the\ncanonical identification $L\\bar g'^*j_!\\cong j'_!Lg'^*$, where $\\bar f':\\bar\nX'\\to Y'$ and $\\bar g':\\bar X'\\to\\bar X$ are the base changes of $\\bar f$,\nand $j':X'\\hookrightarrow\\bar X'$ is the base change of $j$; the independence\nof this map from the compactification is the compactification-coherence\nproposition.\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, the projection\ntransformation is\n\n$$\n \\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L L\n \\longrightarrow Rf_!(K\\otimes^L Lf^*L).\n$$\n\nFor this compactification it is the direct-image projection transformation\nfor $\\bar f$, followed by $j_!K\\otimes^LL\\bar f^*L\\cong j_!(K\\otimes^LLf^*L)$.\nThese are natural transformations with the displayed sources and targets.",
-   "what": "STATEMENT-DISPUTED: the imported arbitrary-base statement does not specify domains for higher-coefficient composites and attributes exchange-map independence to a proposition comparing only functors. For S the infinite disjoint union of Spec(k) and f the disjoint union of P^r_k -> Spec(k), f is proper of finite type over S, but the constant finite sheaf has nonzero R^(2r)f_* at the r-th point, so Rf_* is not globally bounded. Use the ambient unbounded categories at finite coefficients and supplied operation/adjunction/comparison data at other stages, as the ambient-typing and typed-exchange units intend. Retain chosen compactifications until an intertwining theorem is available. Also type the tensor-pullback comparison on two target-site objects and distinguish integral finite reduction from rationalization and common-field scalar extension. Second reading: all finite-level objects are explicitly quantified; integral reduction data range over every positive level and respect tower transitions; scalar-extension comparisons obey identity and composition coherence so the common-field formula defines a morphism class.",
-   "source": {
+  "kind": "definition",
+  "title": "Exchange and projection transformations",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is invertible, let $X,Y,Y'$ be finite-type $S$-schemes, and let $f:X\\to Y$ and $g:Y'\\to Y$ be separated finite-type $S$-morphisms [def-weil-scheme-morphism-properties]. Form the Cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y.\n\\end{array}\n$$\n\n**Finite coefficients.** Work first with $\\Lambda=A$ in the ambient unbounded derived categories $D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], for the schemes $T$ occurring below, using the sites and derived categories of [def-weil-pbc-proetale-site] and the tensor product of [def-weil-derived-tensor]. The pullbacks, direct images, and adjunctions $Lu^*\\dashv Ru_*$ are those of [def-weil-pbc-proetale-operations], agreeing with the finite operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]; write $\\eta_u$ and $\\varepsilon_u$ for their units and counits. For constant coefficients $Lu^*=u^{-1}$. Throughout the finite-level formulas let $K\\in D(X_{\\mathrm{proet}},A)$ and $L\\in D(Y_{\\mathrm{proet}},A)$ be arbitrary. Let\n$$\n\\theta:Lf'^*Lg^*\\xrightarrow{\\sim}Lg'^*Lf^*\n$$\nbe the composite of the pullback-composition isomorphisms [lem-weil-pbc-proetale-derived-pullback-composition] and $gf'=fg'$. Define the direct-image exchange transformation to be the ambient ringed exchange of [def-weil-pbc-ambient-ringed-exchange], namely\n$$\n\\begin{aligned}\n\\operatorname{Ex}_{*,K}:Lg^*Rf_*K\n&\\xrightarrow{\\eta_{f'}}Rf'_*Lf'^*Lg^*Rf_*K\\\\\n&\\xrightarrow{Rf'_*(\\theta_{Rf_*K})}Rf'_*Lg'^*Lf^*Rf_*K\n\\xrightarrow{Rf'_*Lg'^*(\\varepsilon_{f,K})}Rf'_*Lg'^*K.\n\\end{aligned}\n$$\nEquivalently, this is the mate [def-weil-pbc-adjunction-mate] whose transpose under $Lf'^*\\dashv Rf'_*$ is $Lg'^*(\\varepsilon_{f,K})\\circ\\theta_{Rf_*K}$.\n\n**Chosen compactification.** Choose a compactification $c=(j,p)$, $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$, with $p j=f$ [def-weil-compactifications-refinements]. Let $\\overline X'=\\overline X\\times_Y Y'$, with $p':\\overline X'\\to Y'$ and $\\bar g':\\overline X'\\to\\overline X$, and let $j':X'\\hookrightarrow\\overline X'$ be the base change of $j$. Extension by zero [def-weil-extension-by-zero] is applied termwise using its exactness [lem-cbc-proetale-extension-zero]. Write\n$$\n Rf_!^c=Rp_*j_!,\\qquad Rf'_!^{c'}=Rp'_*j'_!,\\qquad c'=(j',p').\n$$\nThese formulas define the compactification-relative composite functors on the ambient finite-coefficient categories; in the field-base setting they are the candidates of [def-compact-support-direct-image-detailed]. Let\n$$\n \\beta_K:L\\bar g'^*j_!K\\xrightarrow{\\sim}j'_!Lg'^*K\n$$\nbe the canonical pro-etale open-immersion base-change isomorphism [lem-cbc-proetale-extension-zero-base-change], applied to the upper open-immersion square. Define\n$$\n \\operatorname{Ex}_!^c(K):Lg^*Rf_!^cK\n \\xrightarrow{\\operatorname{Ex}_{*,p}(j_!K)}Rp'_*L\\bar g'^*j_!K\n \\xrightarrow{Rp'_*(\\beta_K)}Rp'_*j'_!Lg'^*K\n =Rf'_!^{c'}Lg'^*K.\n$$\n\n**Projection transformation.** All finite-level tensor products are the derived sheaf tensor products [def-weil-derived-tensor]. For a morphism $u:V\\to W$ and $F,G\\in D(W_{\\mathrm{proet}},A)$, let $\\mu_{u;F,G}:Lu^*(F\\otimes_A^L G)\\xrightarrow{\\sim}Lu^*F\\otimes_A^L Lu^*G$ be the ambient derived tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For $M\\in D(V_{\\mathrm{proet}},A)$ and $N\\in D(W_{\\mathrm{proet}},A)$, define the typed map\n$$\na_{u,M,N}:Lu^*(Ru_*M\\otimes_A^L N)\\xrightarrow{\\mu_{u;Ru_*M,N}}Lu^*Ru_*M\\otimes_A^L Lu^*N\\xrightarrow{\\varepsilon_{u,M}\\otimes1}M\\otimes_A^L Lu^*N,\\qquad\n\\pi_{u;M,N}=Ru_*(a_{u,M,N})\\circ\\eta_{u,Ru_*M\\otimes_A^L N}.\n$$\nThus $\\pi_{u;M,N}:Ru_*M\\otimes_A^L N\\to Ru_*(M\\otimes_A^L Lu^*N)$ is the counit-defined natural projection map of [lem-weil-pbc-ringed-projection-mate-exact]. Let\n$$\n \\gamma_{K,L}:j_!K\\otimes_A^L Lp^*L\n \\xrightarrow{\\sim}j_!(K\\otimes_A^L Lj^*Lp^*L)\n \\xrightarrow{\\sim}j_!(K\\otimes_A^L Lf^*L)\n$$\nbe the open-immersion projection isomorphism [lem-cbc-extension-zero-projection-formula] followed by $Lj^*Lp^*\\cong Lf^*$. Define\n$$\n \\operatorname{PF}_{f,K,L}^c:\n Rf_!^cK\\otimes_A^L L\n \\xrightarrow{\\pi_{p;j_!K,L}}Rp_*(j_!K\\otimes_A^L Lp^*L)\n \\xrightarrow{Rp_*(\\gamma_{K,L})}Rf_!^c(K\\otimes_A^L Lf^*L).\n$$\nIn particular this applies to $K\\in D^b_c(X,A)$ [def-weil-finite-torsion-constructibility] and $L\\in D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude]. The maps are composites of the specified natural transformations; no assertion of invertibility of $\\operatorname{Ex}_*$, $\\operatorname{Ex}_!^c$, or $\\operatorname{PF}^c$ is included.\n\n**Other coefficient stages and domains.** For $\\Lambda=\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$, the same formulas define transformations relative to the following supplied data: categories and operation functors of [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image, def-weil-integral-rational-qbar-compact-support], on full domains closed under all the displayed composites; adjunctions $Lu^*\\dashv Ru_*$ on those domains; natural pullback-composition and tensor-pullback isomorphisms of the displayed types; and natural open-immersion isomorphisms $\\beta$ and $\\gamma$ of the displayed types. Supply also the identifications of the chosen-compactification functors with $Rp_*j_!$ on these domains. At the integral stage, for every integer $m\\geq1$ supply finite-reduction identifications with the operations at $A_{E,m}$, compatible with the transition maps $A_{E,m+1}\\to A_{E,m}$, carrying the units, counits and comparisons to their finite-level counterparts. At the rational stage, these maps are the rationalizations of integral maps. For algebraically closed coefficients, choose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ and an embedding of $E$ into it; the maps are represented over a common finite coefficient field, with supplied scalar-extension comparisons intertwining the units, counits and comparisons. Require these scalar-extension comparisons to be identities for identity field extensions and to satisfy the composition cocycle for towers of finite coefficient fields, using the transition functors and composition identifications of [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. Thus the component over a common finite field is taken as its morphism class in the displayed common-stage category; further scalar extension gives the same class. There is no reduction functor from rational coefficients to $A_{E,n}$. Here integral pullback and tensor mean completed derived pullback and completed tensor, and the integral categories are [def-weil-derived-complete-integral-detailed]; rational and algebraically closed categories are [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. With these supplied data replace $A$ by $\\Lambda$ in the three composites above, for $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$ in their domains. This is a definition from the supplied operation and comparison data, not an assertion that those data exist on all bounded constructible categories over an arbitrary $S$.\n\nThe superscript $c$ records a choice. On the etale-origin field-base domain, [prop-compactification-coherence-detailed] compares the underlying functors. Dropping $c$ from the transformations additionally requires that those comparisons intertwine the displayed composites. That compatibility, and the existence and preservation assertions needed for higher coefficients, are separate theorems, not defining properties or consequences asserted here.",
+  "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-exchange-projection.md",
     "place": "node def-exchange-projection, order 1487"
-   },
-   "old_stmt_deps": [
+  },
+  "stmt_deps": [
+    "def-weil-l-adic-coefficient-extension",
     "def-weil-scheme-morphism-properties",
-    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-proetale-operations",
     "def-weil-derived-pullback-tensor-hom",
     "def-weil-derived-direct-image",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-constructible-intervals",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-adjunction-mate",
     "def-weil-compactifications-refinements",
     "def-weil-extension-by-zero",
-    "prop-compactification-coherence-detailed"
-   ],
-   "citers": [
-    {
-     "id": "def-fix-six-functor-datum",
-     "holds": true,
-     "note": "Clause 3 names the same maps as part of supplied operation data; its last paragraph explicitly reserves preservation for separate theorems. Compactification comparisons remain additional datum."
-    },
-    {
-     "id": "def-pur-affine-line-purity-comparison",
-     "holds": false,
-     "note": "The displayed inverse projection arrow cannot be obtained from this definition of a map. It needs the finite projection-formula theorem and the standard compactification; the formula for that compactification is unchanged."
-    },
-    {
-     "id": "def-pur-co-smoothness",
-     "holds": true,
-     "note": "The mate defining theta uses the same projection morphism, with exceptional adjunction and the operations supplied by the purity conventions. Its isomorphy is a defining condition of cohomological smoothness, not inferred here."
-    },
-    {
-     "id": "def-pur-compact-support-transport",
-     "holds": false,
-     "note": "The displayed composite is unchanged for a chosen compactification. A compactification-independent higher-coefficient transport still requires the operation/comparison data and the theorem intertwining exchanges with refinement comparisons."
-    },
-    {
-     "id": "def-pur-conventions",
-     "holds": true,
-     "note": "This convention names the operation and transformation data and explicitly reserves higher-coefficient transports for the transport section; the corrected formulas keep those names and directions."
-    },
-    {
-     "id": "def-sf-pf",
-     "holds": true,
-     "note": "The projection map is unchanged in the supplied six-functor datum. Isomorphy is axiom A3 and is separately attributed to the listed projection-formula theorems."
-    },
-    {
-     "id": "def-trf-coefficient-pushforward",
-     "holds": true,
-     "note": "Its ordinary gamma is exactly the unit/pullback-composition/counit recipe. The text uses Ex_* only to identify gamma in the Cartesian case; the exceptional half uses separately supplied composition and adjunction laws."
-    },
-    {
-     "id": "def-trf-weil-shriek-pushforward",
-     "holds": true,
-     "note": "For a fixed finite-level compactification the first arrow is precisely Ex_!^c. Invertibility is separately attributed to prop-functor-package, and coherence to fix-lem-exchanges, rather than obtained from this definition."
-    },
-    {
-     "id": "def-weil-frobenius-square-exchange",
-     "holds": false,
-     "note": "The finite-level formulas agree exactly. Its unqualified higher-coefficient inverse-limit construction does not itself supply the reduction/adjunction comparisons required to identify that construction with the corrected higher-coefficient mate."
-    },
-    {
-     "id": "fix-lem-exchanges",
-     "holds": false,
-     "note": "The definition still gives the construction in steps 1 and 2. Step 5 infers intertwining of exchange maps from functor-only compactification coherence; that extra equation is explicitly not in the corrected definition and needs its own theorem."
-    },
-    {
-     "id": "fix-prop-adjunctions",
-     "holds": false,
-     "note": "The ordinary Ex_* transpose remains the displayed counit composite. Step 4 also calls Ex_! a mate of pullback compatibility as though it were ordinary exchange; exceptional adjunction compatibility is a further theorem, not the definition of Ex_!^c."
-    },
-    {
-     "id": "fix-prop-projection-formula",
-     "holds": true,
-     "note": "Its proof separately invokes finite projection, reduction, adic/field transport and prop-sf-pf-coherence. Those are precisely the additional theorems needed to give the same chosen map its isomorphy and independence."
-    },
-    {
-     "id": "lem-fix-compact-support-coefficient-change",
-     "holds": true,
-     "note": "Step 1 compares transposes by applying the same counit to the first tensor factor. That is the unchanged defining formula for pi and PF^c at finite coefficients; its coefficient-comparison assertion remains a separate lemma."
-    },
-    {
-     "id": "lem-fix-weil-operations",
-     "holds": true,
-     "note": "Step 3 uses only that the projection map is composed of the tensor comparison and counit. Its domains are explicitly those on which underlying operations preserve constructibility, and exchange pasting is cited separately."
-    },
-    {
-     "id": "lem-pur-coprojection",
-     "holds": false,
-     "note": "The proof calls the projection formula of this definition an identification of Hom sets. An inverse to PF is not part of this definition; a projection-formula isomorphism theorem must be cited."
-    },
-    {
-     "id": "lem-pur-smb-extraordinary",
-     "holds": true,
-     "note": "The current proof does not use the item to prove coherence or invertibility: it cites ordinary smooth base change, actual-adjoint comparison and finite-level transport. Its retained dependency does not change the actual mate recipe."
-    },
-    {
-     "id": "lem-trf-trace-map-exchange",
-     "holds": false,
-     "note": "Its projection counit formula is unchanged, but step 2 also invokes exchange for the diagonal square q Delta_X = Delta_Y f, which is generally only commutative: its Cartesian pullback is X times_Y X, not X unless f is a monomorphism. That use needs the general commutative-square mate recipe, rather than this item restricted to Cartesian squares."
-    },
-    {
-     "id": "lem-trf-trace-source-exchange",
-     "holds": true,
-     "note": "Step 5 uses the counit description of projection and ordinary exchange maps. Those formulas are unchanged; projection isomorphy is separately cited from fix-prop-projection-formula."
-    },
-    {
-     "id": "lem-trf-weil-shriek-iterates",
-     "holds": true,
-     "note": "Step 2 uses Ex_* for a finite proper map through its identity compactification, exactly the specialization Ex_!^c=Ex_* in this definition. Pasting, proper base change and composition are separately cited."
-    },
-    {
-     "id": "lem-trf-weil-shriek-operator-fibres",
-     "holds": true,
-     "note": "The finite exchange recipe is unchanged. The proof separately cites fix-lem-exchanges for composition compatibility and the mate unit-compatibility lemma; those obligations are not discharged by the definition."
-    },
-    {
-     "id": "lem-weil-finite-compact-projection-formula",
-     "holds": false,
-     "note": "Step 1 is on the etale site, whereas this item constructs the pro-etale map. The etale map must come from def-kun-projection-formula-map and be related to the pro-etale realization by an actual comparison theorem; the definition alone does not identify them."
-    },
-    {
-     "id": "prop-pod-cup-product-coherence",
-     "holds": true,
-     "note": "The proof uses the unchanged natural projection composite. Associativity and units are attributed to fix-prop-adjunctions and fix-prop-projection-formula, and proper coincidence is separately cited."
-    },
-    {
-     "id": "prop-trf-graph-frobenius-operator",
-     "holds": false,
-     "note": "Step 3 attributes adjunction compatibility and coherence partly to this definition. Only the fixed-compactification composite is defined here; the invoked identification of Frobenius transports needs the separate exchange-composition and refinement theorem."
-    },
-    {
-     "id": "prop-trf-trace-additivity-open-closed",
-     "holds": false,
-     "note": "Step 6 applies exchange to a non-Cartesian closed square and claims its adjoint and isomorphy from geometric-stalk calculations. This item supplies the recipe in its stated Cartesian setting; the general commutative-square version and those additional assertions need their own cited statements."
-    },
-    {
-     "id": "prop-weil-operations",
-     "holds": true,
-     "note": "It uses the same exchange/projection names on explicitly restricted preservation domains; its proof cites lem-fix-weil-operations and separate geometric equivariance results, not an unconditional higher-coefficient existence assertion here."
-    },
-    {
-     "id": "thm-pod-identification-of-the-comparison",
-     "holds": true,
-     "note": "Step 2 uses this item only to specify the projection morphism and cites fix-prop-projection-formula for its invertibility. Perfect point complexes lie in the separately stated finite-Tor domains."
-    },
-    {
-     "id": "thm-pur-affine-line-purity",
-     "holds": false,
-     "note": "Step 3 uses the compactification formula on ordinary etale complexes K_0 and Da_!T_X. The corrected definition gives the same ordered formula on the pro-etale site, but does not identify ordinary etale and pro-etale projection morphisms. Cite the ordinary etale projection definition and the comparison identifying its realized map when this identification is used. Invertibility is separately cited there; it is not supplied by this definition."
-    },
-    {
-     "id": "thm-pur-finite-reduction-of-purity",
-     "holds": true,
-     "note": "Step 2 uses the finite pro-etale projection transformation defined here. Its invertibility is separately supplied by lem-weil-finite-compact-projection-formula, and preservation under reduction by lem-fix-operation-reduction and lem-coef-finite-exceptional. The chosen-compactification counit/tensor recipe is unchanged; this use needs no unconditional higher-coefficient existence or refinement assertion from the definition."
-    },
-    {
-     "id": "thm-sf-dual-base-change",
-     "holds": true,
-     "note": "Step 1 names this exchange and separately obtains its invertibility from axiom A2 and the compact-support base-change theorems, then takes right adjoints. No invertibility is inferred from the definition."
-    },
-    {
-     "id": "thm-trf-finite-coefficient-map",
-     "holds": false,
-     "note": "Step 1 labels the projection transformation for the constant B-module an isomorphism using this definition alone. It needs a coefficient-change or projection-formula theorem with a checked Tor domain; the definition supplies only the morphism."
-    },
-    {
-     "id": "thm-trf-fixed-point-base-change",
-     "holds": true,
-     "note": "Step 2 names the same fixed-square exchange and separately cites prop-functor-package item 4 for its invertibility and def-trf-admissibility for the exceptional-adjoint compatibility."
-    }
-   ]
-  }
- },
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-NG-9e369aa02",
-  "group": "NG",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-9e369aa02 (reviewer sub-agent of L); spot-checked: Read the full definition, all 26 dependencies, blueprint route, cited sources, and exact master target morphisms/categories. Finite composites type-check; higher-coefficient comparisons remain explicit prerequisites. Repaired the stale citer audit to match all 31 current direct citers. Review and corrected whole-node JSON are written under the review directory; no targets changed.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.ExchangeProjection",
-  "declaration": "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteExchangeProjection",
-   "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
-   "CategoryTheory.compactificationExchangeFromData",
-   "CategoryTheory.compactificationProjectionFromData",
-   "CategoryTheory.ExchangeProjectionStage",
-   "CategoryTheory.ExchangeProjectionStage.exchange",
-   "CategoryTheory.ExchangeProjectionStage.compactExchange",
-   "CategoryTheory.ExchangeProjectionStage.projection",
-   "CategoryTheory.exchangeProjectionCoefficientRepresentative",
-   "CategoryTheory.ExchangeProjectionComparisonPreserves",
-   "CategoryTheory.ExchangeProjectionAdjunctionComparison",
-   "CategoryTheory.ExchangeProjectionScalarCocycle"
+    "lem-cbc-proetale-extension-zero",
+    "def-compact-support-direct-image-detailed",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-cbc-extension-zero-projection-formula",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "prop-compactification-coherence-detailed",
+    "def-weil-pbc-proetale-site",
+    "def-weil-derived-tensor"
   ],
-  "file": "lean/Sheaf/Paper/ExchangeProjection.lean",
-  "statement": "def coefficientExtensionExchangeProjection (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (S : Scheme.{u}) [∀ s : S, Invertible (l : S.residueField s)] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [X.Over S] [Y.Over S] [Y'.Over S] [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] [LocallyOfFiniteType (Y' ↘ S)] [QuasiCompact (Y' ↘ S)] [f.IsOver S] [g.IsOver S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (sq : IsPullback g' f' f g) (c : Compactification f)",
-  "branch": "newtargets-dag",
-  "by": "NG",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "Finite coefficients use the existing standard fixed-scalar ModuleCat-sheaf presentation of constant coefficient modules and the existing canonical derived maps, rather than a second definition of tensor, pullback, direct image, extension by zero, or the three finite maps. The higher-stage definition is parametric in the supplied closed domains, adjunctions and natural comparison isomorphisms exactly as the node requests; the auxiliary comparison predicates state unit/counit transport, preservation of structural comparisons, and identity/tower normalization. No existence, invertibility or compactification-independence assertion is added."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-760802677",
-  "group": "NG",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, edge cases, docstrings, report sections, and per-file scompile evidence; no substantive or mechanical findings."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "projectionFormula|projectionMap|lowerShriek|extensionByZero",
+      "results": "0 hits: ",
+      "date": "2026-10-15",
+      "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, \"projection\"",
+      "results": "0 hits: ",
+      "date": "2026-10-15",
+      "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exchange and projection natural transformations for derived pullback direct image and compactly supported direct image of proetale coefficient sheaves",
+      "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit",
+      "date": "2026-10-15",
+      "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived exchange map and compact support projection transformation for sheaves on proetale schemes with adic coefficients",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-15",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "mateEquiv|projection",
+      "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "date": "2026-10-15",
+      "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The mate of a commutative pullback square and the projection map of a monoidal left adjoint to a direct image functor",
+      "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev, CategoryTheory.ExponentiableMorphism.coev_def, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc",
+      "date": "2026-10-15",
+      "verdict": "no match for the combined pro-etale exchange and compactification-relative projection construction; generic adjunction and underived sheaf pullback results only"
+    },
+    {
+      "tool": "grep",
+      "query": "projectionFormula|projectionMap|lowerShriek|extensionByZero",
+      "results": "0 hits: ",
+      "date": "2026-10-15",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived base change natural transformation obtained from adjunction unit counit and tensor projection formula for a strong monoidal functor",
+      "results": "8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+      "date": "2026-10-15",
+      "verdict": "no whole-item match: generic adjunction and Cartesian-monoidal constructions do not supply the derived pro-etale operations, compactification comparisons, or completed coefficient passages"
+    },
+    {
+      "tool": "grep",
+      "query": "conjugateEquiv|leftAdjoint.*Monoidal|projection.*[Ff]ormula",
+      "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "date": "2026-10-15",
+      "verdict": "no whole-item match: generic adjunction and Cartesian-monoidal constructions do not supply the derived pro-etale operations, compactification comparisons, or completed coefficient passages"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1487,
+  "blueprint_uses": [
+    "def-compact-support-direct-image-detailed",
+    "def-weil-compactifications-refinements",
+    "def-weil-constructible-intervals",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-extension-by-zero",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-scheme-morphism-properties",
+    "prop-compactification-coherence-detailed"
+  ],
+  "uses_not_cited": [
+    "def-weil-extension-by-zero",
+    "prop-compactification-coherence-detailed"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "def-exchange-projection",
+    "worker": "stage1",
+    "summary": "Expanded the finite-level exchange mate, chosen-compactification exchange and counit-defined projection into explicit composites, reusing existing general ringed-topos and pro-etale open-immersion nodes. Corrected omitted higher-coefficient domain/comparison data and the unsupported attribution of map coherence to functor-only compactification coherence; the statement correction, verbatim old statement and complete direct-citer audit are recorded in split_report.statement_change and report.md. Distinguished integral finite reduction, rationalization and common-field scalar extension. Clarified the domains of tensor-pullback and projection separately. No new nodes or Mathlib leaves. Second reading explicitly quantified the ambient finite-level inputs, required transition-compatible reductions at every integral level, and required identity/composition coherence of supplied common-field scalar-extension comparisons.",
+    "blueprint": "Realizes the direct-image exchange paragraph, the compactification/open-immersion exchange paragraph, and the final two projection paragraphs of def-exchange-projection; records necessary domain and coherence repairs. This definition has no proof section. The ambient-typing unit has no proof steps, and this node is not its key definition.",
+    "statement_change": {
+      "date": "2026-10-16",
+      "by": "NG stage 1",
+      "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let every morphism\nbelow be an $S$-morphism. Let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$, where\nthe finite-level coefficient category is the finite-torsion constructible\ncategory [def-weil-finite-torsion-constructibility]; the latter coefficient\ncategories are obtained by derived completion, rationalization, and the\ncommon-stage construction. Use the derived pullback, tensor, and\ninternal-Hom operations [def-weil-derived-pullback-tensor-hom], the derived\ndirect image [def-weil-derived-direct-image], and the compact-support direct\nimage [def-compact-support-direct-image-detailed]. The finite-Tor and\ninterval conditions are the finite-Tor\n[def-weil-finite-tor-amplitude] and constructible-interval\n[def-weil-constructible-intervals] conditions. Let $f:X\\to Y$ be separated\nand of finite type, let $Y'$ be a finite-type $S$-scheme and let $g:Y'\\to Y$\nbe separated and of finite type, and set $X'=X\\times_Y Y'$, with projections\n$g':X'\\to X$ and $f':X'\\to Y'$. Consider the resulting Cartesian square\n\n$$\n\\begin{array}{ccc}\n X' & \\xrightarrow{g'} & X\\\\\n f'\\downarrow && \\downarrow f\\\\\n Y' & \\xrightarrow{g} & Y\n\\end{array}\n$$\n\nThe direct-image exchange transformation\n\n$$\n \\operatorname{Ex}_*:\\;Lg^*Rf_*\\longrightarrow Rf'_*Lg'^*\n$$\n\nis adjoint to the composite\n\n$$\n Lf'^*Lg^*Rf_*\\xrightarrow{\\sim}Lg'^*Lf^*Rf_*\n \\longrightarrow Lg'^*,\n$$\n\nwhose second arrow is the counit of $Lf^*\\dashv Rf_*$. If $f=\\bar f\\circ j$\nis a compactification [def-weil-compactifications-refinements], the\ncompact-support exchange map\n\n$$\n \\operatorname{Ex}_!:\\;Lg^*Rf_!\\longrightarrow Rf'_!Lg'^*\n$$\n\nis represented by $\\operatorname{Ex}_*$ for $\\bar f$, followed by the\ncanonical identification $L\\bar g'^*j_!\\cong j'_!Lg'^*$, where $\\bar f':\\bar\nX'\\to Y'$ and $\\bar g':\\bar X'\\to\\bar X$ are the base changes of $\\bar f$,\nand $j':X'\\hookrightarrow\\bar X'$ is the base change of $j$; the independence\nof this map from the compactification is the compactification-coherence\nproposition.\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, the projection\ntransformation is\n\n$$\n \\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L L\n \\longrightarrow Rf_!(K\\otimes^L Lf^*L).\n$$\n\nFor this compactification it is the direct-image projection transformation\nfor $\\bar f$, followed by $j_!K\\otimes^LL\\bar f^*L\\cong j_!(K\\otimes^LLf^*L)$.\nThese are natural transformations with the displayed sources and targets.",
+      "what": "STATEMENT-DISPUTED: the imported arbitrary-base statement does not specify domains for higher-coefficient composites and attributes exchange-map independence to a proposition comparing only functors. For S the infinite disjoint union of Spec(k) and f the disjoint union of P^r_k -> Spec(k), f is proper of finite type over S, but the constant finite sheaf has nonzero R^(2r)f_* at the r-th point, so Rf_* is not globally bounded. Use the ambient unbounded categories at finite coefficients and supplied operation/adjunction/comparison data at other stages, as the ambient-typing and typed-exchange units intend. Retain chosen compactifications until an intertwining theorem is available. Also type the tensor-pullback comparison on two target-site objects and distinguish integral finite reduction from rationalization and common-field scalar extension. Second reading: all finite-level objects are explicitly quantified; integral reduction data range over every positive level and respect tower transitions; scalar-extension comparisons obey identity and composition coherence so the common-field formula defines a morphism class.",
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-exchange-projection.md",
+        "place": "node def-exchange-projection, order 1487"
+      },
+      "old_stmt_deps": [
+        "def-weil-scheme-morphism-properties",
+        "def-weil-finite-torsion-constructibility",
+        "def-weil-derived-pullback-tensor-hom",
+        "def-weil-derived-direct-image",
+        "def-compact-support-direct-image-detailed",
+        "def-weil-finite-tor-amplitude",
+        "def-weil-constructible-intervals",
+        "def-weil-compactifications-refinements",
+        "def-weil-extension-by-zero",
+        "prop-compactification-coherence-detailed"
+      ],
+      "citers": [
+        {
+          "id": "def-fix-six-functor-datum",
+          "holds": true,
+          "note": "Clause 3 names the same maps as part of supplied operation data; its last paragraph explicitly reserves preservation for separate theorems. Compactification comparisons remain additional datum."
+        },
+        {
+          "id": "def-pur-affine-line-purity-comparison",
+          "holds": false,
+          "note": "The displayed inverse projection arrow cannot be obtained from this definition of a map. It needs the finite projection-formula theorem and the standard compactification; the formula for that compactification is unchanged."
+        },
+        {
+          "id": "def-pur-co-smoothness",
+          "holds": true,
+          "note": "The mate defining theta uses the same projection morphism, with exceptional adjunction and the operations supplied by the purity conventions. Its isomorphy is a defining condition of cohomological smoothness, not inferred here."
+        },
+        {
+          "id": "def-pur-compact-support-transport",
+          "holds": false,
+          "note": "The displayed composite is unchanged for a chosen compactification. A compactification-independent higher-coefficient transport still requires the operation/comparison data and the theorem intertwining exchanges with refinement comparisons."
+        },
+        {
+          "id": "def-pur-conventions",
+          "holds": true,
+          "note": "This convention names the operation and transformation data and explicitly reserves higher-coefficient transports for the transport section; the corrected formulas keep those names and directions."
+        },
+        {
+          "id": "def-sf-pf",
+          "holds": true,
+          "note": "The projection map is unchanged in the supplied six-functor datum. Isomorphy is axiom A3 and is separately attributed to the listed projection-formula theorems."
+        },
+        {
+          "id": "def-trf-coefficient-pushforward",
+          "holds": true,
+          "note": "Its ordinary gamma is exactly the unit/pullback-composition/counit recipe. The text uses Ex_* only to identify gamma in the Cartesian case; the exceptional half uses separately supplied composition and adjunction laws."
+        },
+        {
+          "id": "def-trf-weil-shriek-pushforward",
+          "holds": true,
+          "note": "For a fixed finite-level compactification the first arrow is precisely Ex_!^c. Invertibility is separately attributed to prop-functor-package, and coherence to fix-lem-exchanges, rather than obtained from this definition."
+        },
+        {
+          "id": "def-weil-frobenius-square-exchange",
+          "holds": false,
+          "note": "The finite-level formulas agree exactly. Its unqualified higher-coefficient inverse-limit construction does not itself supply the reduction/adjunction comparisons required to identify that construction with the corrected higher-coefficient mate."
+        },
+        {
+          "id": "fix-lem-exchanges",
+          "holds": false,
+          "note": "The definition still gives the construction in steps 1 and 2. Step 5 infers intertwining of exchange maps from functor-only compactification coherence; that extra equation is explicitly not in the corrected definition and needs its own theorem."
+        },
+        {
+          "id": "fix-prop-adjunctions",
+          "holds": false,
+          "note": "The ordinary Ex_* transpose remains the displayed counit composite. Step 4 also calls Ex_! a mate of pullback compatibility as though it were ordinary exchange; exceptional adjunction compatibility is a further theorem, not the definition of Ex_!^c."
+        },
+        {
+          "id": "fix-prop-projection-formula",
+          "holds": true,
+          "note": "Its proof separately invokes finite projection, reduction, adic/field transport and prop-sf-pf-coherence. Those are precisely the additional theorems needed to give the same chosen map its isomorphy and independence."
+        },
+        {
+          "id": "lem-fix-compact-support-coefficient-change",
+          "holds": true,
+          "note": "Step 1 compares transposes by applying the same counit to the first tensor factor. That is the unchanged defining formula for pi and PF^c at finite coefficients; its coefficient-comparison assertion remains a separate lemma."
+        },
+        {
+          "id": "lem-fix-weil-operations",
+          "holds": true,
+          "note": "Step 3 uses only that the projection map is composed of the tensor comparison and counit. Its domains are explicitly those on which underlying operations preserve constructibility, and exchange pasting is cited separately."
+        },
+        {
+          "id": "lem-pur-coprojection",
+          "holds": false,
+          "note": "The proof calls the projection formula of this definition an identification of Hom sets. An inverse to PF is not part of this definition; a projection-formula isomorphism theorem must be cited."
+        },
+        {
+          "id": "lem-pur-smb-extraordinary",
+          "holds": true,
+          "note": "The current proof does not use the item to prove coherence or invertibility: it cites ordinary smooth base change, actual-adjoint comparison and finite-level transport. Its retained dependency does not change the actual mate recipe."
+        },
+        {
+          "id": "lem-trf-trace-map-exchange",
+          "holds": false,
+          "note": "Its projection counit formula is unchanged, but step 2 also invokes exchange for the diagonal square q Delta_X = Delta_Y f, which is generally only commutative: its Cartesian pullback is X times_Y X, not X unless f is a monomorphism. That use needs the general commutative-square mate recipe, rather than this item restricted to Cartesian squares."
+        },
+        {
+          "id": "lem-trf-trace-source-exchange",
+          "holds": true,
+          "note": "Step 5 uses the counit description of projection and ordinary exchange maps. Those formulas are unchanged; projection isomorphy is separately cited from fix-prop-projection-formula."
+        },
+        {
+          "id": "lem-trf-weil-shriek-iterates",
+          "holds": true,
+          "note": "Step 2 uses Ex_* for a finite proper map through its identity compactification, exactly the specialization Ex_!^c=Ex_* in this definition. Pasting, proper base change and composition are separately cited."
+        },
+        {
+          "id": "lem-trf-weil-shriek-operator-fibres",
+          "holds": true,
+          "note": "The finite exchange recipe is unchanged. The proof separately cites fix-lem-exchanges for composition compatibility and the mate unit-compatibility lemma; those obligations are not discharged by the definition."
+        },
+        {
+          "id": "lem-weil-finite-compact-projection-formula",
+          "holds": false,
+          "note": "Step 1 is on the etale site, whereas this item constructs the pro-etale map. The etale map must come from def-kun-projection-formula-map and be related to the pro-etale realization by an actual comparison theorem; the definition alone does not identify them."
+        },
+        {
+          "id": "prop-pod-cup-product-coherence",
+          "holds": true,
+          "note": "The proof uses the unchanged natural projection composite. Associativity and units are attributed to fix-prop-adjunctions and fix-prop-projection-formula, and proper coincidence is separately cited."
+        },
+        {
+          "id": "prop-trf-graph-frobenius-operator",
+          "holds": false,
+          "note": "Step 3 attributes adjunction compatibility and coherence partly to this definition. Only the fixed-compactification composite is defined here; the invoked identification of Frobenius transports needs the separate exchange-composition and refinement theorem."
+        },
+        {
+          "id": "prop-trf-trace-additivity-open-closed",
+          "holds": false,
+          "note": "Step 6 applies exchange to a non-Cartesian closed square and claims its adjoint and isomorphy from geometric-stalk calculations. This item supplies the recipe in its stated Cartesian setting; the general commutative-square version and those additional assertions need their own cited statements."
+        },
+        {
+          "id": "prop-weil-operations",
+          "holds": true,
+          "note": "It uses the same exchange/projection names on explicitly restricted preservation domains; its proof cites lem-fix-weil-operations and separate geometric equivariance results, not an unconditional higher-coefficient existence assertion here."
+        },
+        {
+          "id": "thm-pod-identification-of-the-comparison",
+          "holds": true,
+          "note": "Step 2 uses this item only to specify the projection morphism and cites fix-prop-projection-formula for its invertibility. Perfect point complexes lie in the separately stated finite-Tor domains."
+        },
+        {
+          "id": "thm-pur-affine-line-purity",
+          "holds": false,
+          "note": "Step 3 uses the compactification formula on ordinary etale complexes K_0 and Da_!T_X. The corrected definition gives the same ordered formula on the pro-etale site, but does not identify ordinary etale and pro-etale projection morphisms. Cite the ordinary etale projection definition and the comparison identifying its realized map when this identification is used. Invertibility is separately cited there; it is not supplied by this definition."
+        },
+        {
+          "id": "thm-pur-finite-reduction-of-purity",
+          "holds": true,
+          "note": "Step 2 uses the finite pro-etale projection transformation defined here. Its invertibility is separately supplied by lem-weil-finite-compact-projection-formula, and preservation under reduction by lem-fix-operation-reduction and lem-coef-finite-exceptional. The chosen-compactification counit/tensor recipe is unchanged; this use needs no unconditional higher-coefficient existence or refinement assertion from the definition."
+        },
+        {
+          "id": "thm-sf-dual-base-change",
+          "holds": true,
+          "note": "Step 1 names this exchange and separately obtains its invertibility from axiom A2 and the compact-support base-change theorems, then takes right adjoints. No invertibility is inferred from the definition."
+        },
+        {
+          "id": "thm-trf-finite-coefficient-map",
+          "holds": false,
+          "note": "Step 1 labels the projection transformation for the constant B-module an isomorphism using this definition alone. It needs a coefficient-change or projection-formula theorem with a checked Tor domain; the definition supplies only the morphism."
+        },
+        {
+          "id": "thm-trf-fixed-point-base-change",
+          "holds": true,
+          "note": "Step 2 names the same fixed-square exchange and separately cites prop-functor-package item 4 for its invertibility and def-trf-admissibility for the exceptional-adjoint compatibility."
+        }
+      ]
+    }
+  },
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-NG-9e369aa02",
+    "group": "NG",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-9e369aa02 (reviewer sub-agent of L); spot-checked: Read the full definition, all 26 dependencies, blueprint route, cited sources, and exact master target morphisms/categories. Finite composites type-check; higher-coefficient comparisons remain explicit prerequisites. Repaired the stale citer audit to match all 31 current direct citers. Review and corrected whole-node JSON are written under the review directory; no targets changed.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.ExchangeProjection",
+    "declaration": "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.finiteExchangeProjection",
+      "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
+      "CategoryTheory.compactificationExchangeFromData",
+      "CategoryTheory.compactificationProjectionFromData",
+      "CategoryTheory.ExchangeProjectionStage",
+      "CategoryTheory.ExchangeProjectionStage.exchange",
+      "CategoryTheory.ExchangeProjectionStage.compactExchange",
+      "CategoryTheory.ExchangeProjectionStage.projection",
+      "CategoryTheory.exchangeProjectionCoefficientRepresentative",
+      "CategoryTheory.ExchangeProjectionComparisonPreserves",
+      "CategoryTheory.ExchangeProjectionAdjunctionComparison",
+      "CategoryTheory.ExchangeProjectionScalarCocycle"
+    ],
+    "file": "lean/Sheaf/Paper/ExchangeProjection.lean",
+    "statement": "def coefficientExtensionExchangeProjection (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (S : Scheme.{u}) [∀ s : S, Invertible (l : S.residueField s)] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [X.Over S] [Y.Over S] [Y'.Over S] [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] [LocallyOfFiniteType (Y' ↘ S)] [QuasiCompact (Y' ↘ S)] [f.IsOver S] [g.IsOver S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (sq : IsPullback g' f' f g) (c : Compactification f)",
+    "branch": "newtargets-dag",
+    "by": "NG",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "Finite coefficients use the existing standard fixed-scalar ModuleCat-sheaf presentation of constant coefficient modules and the existing canonical derived maps, rather than a second definition of tensor, pullback, direct image, extension by zero, or the three finite maps. The higher-stage definition is parametric in the supplied closed domains, adjunctions and natural comparison isomorphisms exactly as the node requests; the auxiliary comparison predicates state unit/counit transport, preservation of structural comparisons, and identity/tower normalization. No existence, invertibility or compactification-independence assertion is added."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-760802677",
+    "group": "NG",
+    "result": "pass",
+    "note": "Reviewed node, source, dependencies, declarations, edge cases, docstrings, report sections, and per-file scompile evidence; no substantive or mechanical findings."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let every morphism\nbelow be an $S$-morphism. Let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$, where\nthe finite-level coefficient category is the finite-torsion constructible\ncategory [def-weil-finite-torsion-constructibility]; the latter coefficient\ncategories are obtained by derived completion, rationalization, and the\ncommon-stage construction. Use the derived pullback, tensor, and\ninternal-Hom operations [def-weil-derived-pullback-tensor-hom], the derived\ndirect image [def-weil-derived-direct-image], and the compact-support direct\nimage [def-compact-support-direct-image-detailed]. The finite-Tor and\ninterval conditions are the finite-Tor\n[def-weil-finite-tor-amplitude] and constructible-interval\n[def-weil-constructible-intervals] conditions. Let $f:X\\to Y$ be separated\nand of finite type, let $Y'$ be a finite-type $S$-scheme and let $g:Y'\\to Y$\nbe separated and of finite type, and set $X'=X\\times_Y Y'$, with projections\n$g':X'\\to X$ and $f':X'\\to Y'$. Consider the resulting Cartesian square\n\n$$\n\\begin{array}{ccc}\n X' & \\xrightarrow{g'} & X\\\\\n f'\\downarrow && \\downarrow f\\\\\n Y' & \\xrightarrow{g} & Y\n\\end{array}\n$$\n\nThe direct-image exchange transformation\n\n$$\n \\operatorname{Ex}_*:\\;Lg^*Rf_*\\longrightarrow Rf'_*Lg'^*\n$$\n\nis adjoint to the composite\n\n$$\n Lf'^*Lg^*Rf_*\\xrightarrow{\\sim}Lg'^*Lf^*Rf_*\n \\longrightarrow Lg'^*,\n$$\n\nwhose second arrow is the counit of $Lf^*\\dashv Rf_*$. If $f=\\bar f\\circ j$\nis a compactification [def-weil-compactifications-refinements], the\ncompact-support exchange map\n\n$$\n \\operatorname{Ex}_!:\\;Lg^*Rf_!\\longrightarrow Rf'_!Lg'^*\n$$\n\nis represented by $\\operatorname{Ex}_*$ for $\\bar f$, followed by the\ncanonical identification $L\\bar g'^*j_!\\cong j'_!Lg'^*$, where $\\bar f':\\bar\nX'\\to Y'$ and $\\bar g':\\bar X'\\to\\bar X$ are the base changes of $\\bar f$,\nand $j':X'\\hookrightarrow\\bar X'$ is the base change of $j$; this map is\nindependent of the compactification by [prop-compactification-coherence-detailed].\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, the projection\ntransformation is\n\n$$\n \\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L L\n \\longrightarrow Rf_!(K\\otimes^L Lf^*L).\n$$\n\nFor this compactification it is the direct-image projection transformation\nfor $\\bar f$, followed by $j_!K\\otimes^LL\\bar f^*L\\cong j_!(K\\otimes^LLf^*L)$.\nThese are natural transformations with the displayed sources and targets.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

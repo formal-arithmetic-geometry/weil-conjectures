@@ -1,0 +1,70 @@
+{
+  "id": "sk-lem-stratified-lattice",
+  "kind": "statement",
+  "title": "Lattices after a finite stratification",
+  "statement": "Statements with coefficients $\\cO_E/\\pi_E^n$ reach $E$-coefficients only through integral\nlattices. A lisse $E_X$-module need not have a lattice on all of $X$, but it has one on each\nstratum of a finite stratification, and for dévissage arguments this suffices. A global\nlattice can fail to exist when $X$ is not normal. Let $X$ be a projective line with $0$ and\n$\\infty$ glued to a node, and let $Y\\to X$ be the infinite chain of projective lines covering\nit, an étale $\\mathbf Z$-torsor. Descending $E_Y$ along $Y\\to X$, with the generator of\n$\\mathbf Z$ acting by multiplication by $\\ell$, gives a lisse $E_X$-module $L$ of rank one.\nSince $Y$ is connected, a lattice in $L|_Y\\cong E_Y$ is a constant lattice $\\pi_E^m\\cO_E$, and\nno such lattice is stable under multiplication by $\\ell$; so $L$ has no lattice on $X$. On the\nopen stratum $X\\smallsetminus\\{\\text{node}\\}\\cong\\mathbf G_m$ the torsor is trivial and $L$ is\nconstant.\n\nLet $X$ be a standing scheme and $L$ a lisse $E_X$-module. There is a finite stratification\nof $X$ by locally closed subschemes $S$ such that each $L|_S$ contains a lisse\n$\\cO_{E,S}$-submodule $L_0$ with $L_0[1/\\ell]=L|_S$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
+    "place": "node sk-lem-stratified-lattice, order 1517"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "The idea is to find a lattice after an étale surjective base change and then push it down by\nthe trace. The first step uses that the lattices in $E^r$ form a discrete set on which\n$\\GL_r(E)$ acts continuously, so that the sheaf of lattices in $L$ is an étale $X$-scheme.\nThe second step needs the base change to be finite étale, which holds on the strata of a\nfinite stratification.\n\nThe rank of $L$ is a locally constant function on $|X|$: on a trivializing covering the\nsubsets of constant rank are open and closed and saturated, and they descend by fpqc descent\nof open subsets, so we may assume that $L$ has constant rank $r$. Details:\n[det-lem-stratified-lattice-rank].",
+      "uses": [
+        "det-lem-stratified-lattice-rank"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The sheaf of lattices is an étale $X$-scheme.* Consider the sheaf on $X_{\\mathrm{proét}}$\nwhose sections over $U$ are the lisse $\\cO_{E,U}$-submodules $M\\subset L|_U$ with\n$M[1/\\ell]=L|_U$. We show that it is represented by a separated surjective étale $X$-scheme.\nOn an affine pro-étale object $V$ where $L$ is free of rank $r$, this sheaf is the constant\nsheaf on the set $\\GL_r(E)/\\GL_r(\\cO_E)$ of lattices in $E^r$. This set is discrete because\n$\\GL_r(\\cO_E)$ is an open subgroup of $\\GL_r(E)$. A change of basis on $V\\times_XV$ is a\ncontinuous function to $\\GL_r(E)$, and since the stabilizer of a lattice is open, its action\non each fixed lattice is locally constant. Hence the induced map from the disjoint union of\ncopies of $V\\times_XV$ indexed by the lattices in $E^r$ to itself is a morphism of schemes:\non each component, the preimages of the target components are open and closed and form a\ndisjoint open cover. The cocycle of the transition matrices therefore gives a descent datum\nof schemes for these disjoint unions of copies of $V$.\n\nFor affine $V=\\Spec B$, the disjoint union of copies of $V$ indexed by a set $I$ is\nquasi-affine: it is the union, inside $\\Spec\\prod_IB$, of the principal open subsets defined\nby the coordinate idempotents. Descent of quasi-affine schemes along fpqc coverings is\neffective by \\stacks{0APK}. Taking a finite affine trivializing covering of each affine open\nof $X$ and gluing, we obtain a scheme representing the sheaf of lattices. It is separated and\nétale over $X$ by \\stacks{02KU} and \\stacks{02VN}, and it is surjective because every free\nmodule has a lattice. The universal lattice exists on it by descent of module sheaves.\nDetails: [det-lem-stratified-lattice-scheme].",
+      "uses": [
+        "det-lem-stratified-lattice-scheme"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Pushing down by the trace.* Choose finitely many quasi-compact affine opens of this scheme\nwhose images cover $X$, and let $p\\colon V\\to X$ be their disjoint union. Then $p$ is\nquasi-compact, separated, surjective and étale, and the universal lattice gives a lattice\n$M_0\\subset p^*L$. By \\stacks{07RY} and \\stacks{07RZ}, $X$ has a finite stratification by\nlocally closed subschemes over each of which $p$ is finite étale and surjective. On such a\nstratum $S$ let $\\Tr\\colon p_*p^*L\\to L$, a morphism in $\\Mod(S_{\\mathrm{proét}},E)$, be the\ntrace of the finite étale map $p$ over $S$, and define $L_0\\subset L|_S$ as the image of the\ncomposite\n$$\np_*M_0\\longrightarrow p_*p^*L\\xrightarrow{\\ \\Tr\\ }L .\n$$\nTo see that $L_0$ is a lisse lattice, split the finite étale cover locally on $S$ into $d$\ncopies of $S$. Then $p_*M_0$ is a direct sum of $d$ lattices $M_1,\\dots,M_d$ in $L$, the trace\nis their sum, and $L_0=M_1+\\cdots+M_d$. Trivialize $L$ further pro-étale locally. Each $M_k$ is\nthen a locally constant function to the discrete set of lattices in $E^r$, so after a common\nrefinement all $M_k$ are constant lattices $\\Lambda_k\\subset E^r$. Then $L_0$ is the constant\nsheaf attached to $\\Lambda_1+\\cdots+\\Lambda_d$, which is a finite free $\\cO_E$-lattice\nspanning $E^r$. Hence $L_0$ is lisse and $L_0[1/\\ell]=L|_S$. Details:\n[det-lem-stratified-lattice-trace].",
+      "uses": [
+        "det-lem-stratified-lattice-trace"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-lem-stratified-lattice-rank",
+    "det-lem-stratified-lattice-scheme",
+    "det-lem-stratified-lattice-trace",
+    "sk-lem-coefficient-heart",
+    "sk-prop-sfb-qlbar-colimit-x"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "long_proof_few_deps",
+    "in_cycle"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1517,
+  "blueprint_uses": [
+    "sk-lem-coefficient-heart",
+    "sk-prop-sfb-qlbar-colimit-x"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-lem-coefficient-heart",
+    "sk-prop-sfb-qlbar-colimit-x"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

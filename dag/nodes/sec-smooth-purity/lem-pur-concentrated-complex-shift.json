@@ -264,5 +264,23 @@
     "date": "2026-10-16",
     "existing": false,
     "note": "Second reading: clauses have independent hypotheses; the canonical truncation isomorphism is characterized uniquely by identity on H^r using the standard single-degree and shift comparisons. The constant derived pullback specializes the published exact module pullback with its canonical invertible coefficient map, reusing finiteCoefficientCommRingMap_isIso rather than restating it."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "In the purity conventions of [def-pur-conventions],\nlet $T$ be a separated\nfinite-type $k$-scheme, let $K\\in D^b_{ctf}(T,\\Lambda)$ and let\n$r\\in\\mathbf Z$.\n\n1. *concentration in one degree.* If the\n[def-weil-derived-cohomology-sheaves] cohomology sheaves\n$\\mathcal H^i(K)$ vanish for every $i\\neq r$, then the\ntruncation triangles induce a canonical isomorphism\n$$\nK\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal H^r(K)[-r].\n$$\n1. *local constancy detected on an etale cover.* Let\n$u:U\\to T$ be a surjective\netale morphism and suppose\nthat $Lu^*K\\cong\\underline L[-r]$ for a\nlocally constant\n$\\Lambda$-sheaf $\\underline L$ with finite stalks on $U$.\nThen $\\mathcal H^i(K)=0$ for every $i\\neq r$, and\n$\\mathcal H^r(K)$ is locally constant with finite stalks on\n$T$.",
+    "proof": [
+      {
+        "text": "Step 1: the truncation triangles. By\n[def-weil-derived-cohomology-sheaves] the sheaves\n$\\mathcal H^i(K)$ are the cohomology sheaves for the standard\nt-structure, and for every $a\\in\\mathbf Z$ there are exact triangles\n$\\tau_{\\leq a-1}K\\to\\tau_{\\leq a}K\\to\\mathcal H^a(K)[-a]\\to$ and\n$\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$. A complex all of whose\ncohomology sheaves vanish is zero in the derived category of\n[def-weil-pbc-proetale-site], that category being the\nlocalization at the quasi-isomorphisms. If therefore\n$\\mathcal H^i(K)=0$ for every $i\\neq r$, then\n$\\tau_{\\geq r+1}K\\simeq0$ and $\\tau_{\\leq r-1}K\\simeq0$, and the two\ntriangles exhibit $K$ and $\\mathcal H^r(K)[-r]$ as models of one\nand the same object; this is (1).\nStep 2: an etale cover. Pullback of sheaves is exact, so the derived\npullback $Lu^*$ commutes with cohomology sheaves, and etale\nmorphisms are weakly etale, hence covering families in the sense of\n[def-weil-pbc-proetale-site] (an etale morphism is flat with\nflat diagonal, which is the description of weakly etale in\n[def-weil-scheme-morphism-properties]); the description of etale\nmorphisms is that of [def-sbc-smooth-morphisms]. Since $u$ is a\nmember of a pro-etale covering family, inverse image along $u$\nreflects vanishing of a sheaf, by clause (1) of\n[lem-cbc-proetale-stalk-conservative]; as $Lu^*K\\cong \\underline L[-r]$ has cohomology only in degree $r$, the sheaves\n$u^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lu^*K)$ vanish for $i\\neq r$,\nand therefore so do the sheaves $\\mathcal H^i(K)$. For the remaining\ndegree, $u^*\\mathcal H^r(K)\\cong\\underline L$ is constant along the\ncovering $u$, so $\\mathcal H^r(K)$ is locally constant in the sense\nrecalled in [def-weil-scheme-morphism-properties]; the stalks of a\nconstructible object may be computed at geometric points, by part (3) of\n[lem-cbc-proetale-stalk-conservative], and they are the stalks of\n$\\underline L$ there, hence finite. This is (2).",
+        "uses": [
+          "def-weil-derived-cohomology-sheaves",
+          "def-weil-pbc-proetale-site",
+          "def-weil-scheme-morphism-properties",
+          "def-sbc-smooth-morphisms",
+          "lem-cbc-proetale-stalk-conservative"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
 }

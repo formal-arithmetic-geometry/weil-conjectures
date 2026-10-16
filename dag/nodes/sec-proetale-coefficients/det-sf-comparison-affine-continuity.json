@@ -1,0 +1,71 @@
+{
+  "id": "det-sf-comparison-affine-continuity",
+  "kind": "statement",
+  "title": "Pro-étale cohomology of a pro-étale affine",
+  "statement": "Let $X$ be a scheme, $\\Lambda$ a ring, $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$, and let\n$U=\\varprojlim_{i\\in I}U_i$ be a pro-étale affine over $X$, the limit being\ncofiltered with affine transition maps and each $U_i$ affine and étale over\n$X$. Write $K_i=K|_{U_i}\\in D^+((U_i)_{\\mathrm{ét}},\\Lambda)$ and $K_U$ for the\ninverse image of $K$ on $U_{\\mathrm{ét}}$. Then for every $n\\in\\mathbf Z$ the\ncanonical maps\n\n$$\n\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},K_i)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{ét}},K_U)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\n$$\n\nare isomorphisms; equivalently\n$R\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K_i)$\nas a filtered derived colimit.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.md",
+    "place": "node det-sf-comparison-affine-continuity, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 03Q6"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 1: restriction to $U$.* The pro-étale site of $U$ is the localization\n$X_{\\mathrm{proét}}/U$, and restriction to a localized site commutes with the\ncomparison morphisms: $(\\nu_X^*K)|_U=\\nu_U^*(K_U)$, where $K_U$ is the\ninverse image of $K$ along the (weakly étale) morphism $U\\to X$ on small\nétale sites. Both sides are computed termwise on a bounded-below complex\nrepresenting $K$, since $\\nu^*$ and restriction are exact on sheaves.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 2: global sections on $U$.* Apply the global-sections comparison\n[lem-weil-pbc-comparison-global-cohomology] (which is the global-sections\nform of the unit isomorphism [thm-weil-pbc-site-comparison]) on the scheme\n$U$: the derived unit $K_U\\to R\\nu_{U,*}\\nu_U^*K_U$ is an isomorphism, and\napplying $R\\Gamma(U_{\\mathrm{ét}},-)$ gives\n$R\\Gamma(U_{\\mathrm{ét}},K_U)\\simeq R\\Gamma(U_{\\mathrm{proét}},\\nu_U^*K_U)$, because\n$R\\Gamma(U_{\\mathrm{ét}},-)\\circ R\\nu_{U,*}=R\\Gamma(U_{\\mathrm{proét}},-)$ (composition\nof derived right adjoints; $\\nu_{U,*}$ preserves injectives since its left\nadjoint $\\nu_U^*$ is exact). The argument of\n[thm-weil-pbc-site-comparison] uses only the acyclicity of pulled-back\ninjectives, which holds for every coefficient ring.",
+      "uses": [
+        "lem-weil-pbc-comparison-global-cohomology",
+        "thm-weil-pbc-site-comparison"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: continuity.* $U$ is the limit of the qcqs schemes $U_i$ along\naffine transition maps, and $K_U$ is the inverse image of $K_{i_0}$ for any\n$i_0$. For a sheaf $F$ on $(U_{i_0})_{\\mathrm{ét}}$ the restriction maps induce\n$\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},F|_{U_i})\\simeq H^n(U_{\\mathrm{ét}},F|_U)$\n(Stacks, Tag 03Q6). For a bounded-below complex this is\n[lem-weil-pbc-derived-cohomology-continuity]: in the hypercohomology spectral\nsequence $E_2^{p,q}=H^p(-,\\mathcal H^q)$ only finitely many terms contribute\nto each total degree because $K$ is bounded below, filtered colimits are\nexact, and so the sheaf case propagates to complexes by the five lemma\napplied to the truncation triangles\n$\\tau^{\\le m}K\\to K\\to\\tau^{>m}K$.",
+      "uses": [
+        "lem-weil-pbc-derived-cohomology-continuity"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: conclusion.* Composing Steps 1–3 gives the two displayed\nisomorphisms, natural in $K$. Since filtered colimits of complexes of\n$\\Lambda$-modules are exact, the filtered colimit of the complexes\n$R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$ represents the derived colimit and has the\ncolimit of the cohomology groups as its cohomology, which is the derived form.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-derived-cohomology-continuity"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-derived-cohomology-continuity"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

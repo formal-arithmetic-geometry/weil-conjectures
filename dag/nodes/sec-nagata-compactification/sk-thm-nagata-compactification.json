@@ -1,0 +1,72 @@
+{
+  "id": "sk-thm-nagata-compactification",
+  "kind": "statement",
+  "title": "Nagata compactification",
+  "statement": "Let $S$ be quasi-compact and quasi-separated. Every separated morphism\n$f:X\\to S$ of finite type has a dense compactification\n([sk-def-nagata-sketch-data]).",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-nagata-compactification/_section.md",
+    "place": "node sk-thm-nagata-compactification, order 3"
+  },
+  "stmt_deps": [
+    "sk-def-nagata-sketch-data"
+  ],
+  "proof": [
+    {
+      "text": "*Noetherian base.* If $S$ is Noetherian, apply\n[sk-lem-nagata-sketch-affine-cover] to obtain a finite affine cover\n$X=U_1\\cup\\cdots\\cup U_m$ with dense total intersection, each $U_r\\to S$\nbeing compactifiable, and induct on the unions $U_1\\cup\\cdots\\cup U_r$.\nAt each step the overlap of $U_1\\cup\\cdots\\cup U_r$ with $U_{r+1}$ contains\nthe dense total intersection. [sk-thm-nagata-sketch-two-open] gives a\ncompactification of the next union. The last union is $X$\n([sk-thm-nagata-sketch-noetherian]).",
+      "uses": [
+        "sk-lem-nagata-sketch-affine-cover",
+        "sk-thm-nagata-sketch-noetherian"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Finite presentation over a qcqs base.* For a general qcqs $S$, first\nsuppose $X\\to S$ is separated and of finite presentation. Absolute\nNoetherian approximation gives\n\n$$\nS=\\varprojlim_i S_i\n$$\n\nwith $S_i$ Noetherian and affine transition maps (Stacks 01ZA;\n[sk-prop-nagata-sketch-approximation]). Finite-presentation descent gives\na model $X_i\\to S_i$, and at a later stage it is separated (Stacks 01ZM,\n01ZQ; [sk-prop-nagata-sketch-fp-models]). Compactify that model by the\nNoetherian result and base change its compactification to $S$. Open\nimmersions and proper morphisms are stable under base change. Taking the\nschematic closure of $X$ then ensures density\n([sk-lem-nagata-sketch-closure], [sk-cor-nagata-sketch-fp]).",
+      "uses": [
+        "sk-lem-nagata-sketch-closure"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Finite type.* Finally let $X\\to S$ be only separated of finite type. The\nfinite-presentation envelope theorem (Stacks 01ZJ;\n[sk-prop-nagata-sketch-envelope]) provides a closed immersion\n$X\\hookrightarrow X_0$ with $X_0\\to S$ separated of finite presentation.\nCompactify $X_0$ by the case already proved, and take the schematic closure\nof $X$ in that compactification. Restricted to the open $X_0$, this closure\nis exactly the closed subscheme $X$. Thus $X$ is open and schematically\ndense in the closure, which is proper over $S$.\n\nBoth approximation results rest on an elementary affine fact: a finitely\npresented algebra, its morphisms, and finitely many gluing identities\ninvolve finitely many coefficients and equations, and so are defined at a\nfinite stage. The envelope step is needed because in a finite-type algebra\n$R[x_1,\\ldots,x_n]/I$ the ideal $I$ need not be finitely generated.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-lem-nagata-sketch-affine-cover",
+    "sk-thm-nagata-sketch-noetherian",
+    "sk-lem-nagata-sketch-closure"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-thm-nagata-compactification/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 3,
+  "blueprint_uses": [
+    "sk-lem-nagata-sketch-closure",
+    "sk-def-nagata-sketch-data"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.NagataCompactification"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.NagataCompactification"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

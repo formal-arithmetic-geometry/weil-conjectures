@@ -1,247 +1,265 @@
 {
- "id": "lem-amb-proper-coproducts",
- "blueprint": {
-  "is": "lem-amb-proper-coproducts",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Proper direct image preserves arbitrary coproducts",
- "statement": "Let $A$ be a finite commutative ring, and let $r:V\\to T$ be a proper morphism [def-weil-proper-morphism] of finite type between Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]). On the ordinary unbounded derived categories $D(V_{\\Et},A)$ and $D(T_{\\Et},A)$ [def-weil-pbc-derived-categories], the total right derived direct image $Rr_*$ preserves arbitrary set-indexed coproducts. Its bounded-below restriction is the derived direct image of [def-weil-pbc-direct-image].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md",
-  "place": "node lem-amb-proper-coproducts, order 1562"
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image"
- ],
- "proof": [
-  {
-   "text": "Apply [pqf-lem-proper-basic] to $r$: it is quasi-compact, quasi-separated and of finite type. The base $T$ is quasi-compact by the Noetherian hypothesis in the statement. Apply [lem-fin-finite-type-fibre-dimension-bound] to $r$ to obtain an integer $e\\geq0$ bounding the dimensions of every scheme-theoretic fibre $V_t$; empty fibres are allowed. No absolute dimension bound on either Noetherian scheme is used.",
-   "uses": [
-    "pqf-lem-proper-basic",
-    "lem-fin-finite-type-fibre-dimension-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0A3V, lemma-morphism-finite-type-bounded-dimension; properness consequences from Tag 01W1"
-   }
+  "id": "lem-amb-proper-coproducts",
+  "blueprint": {
+    "is": "lem-amb-proper-coproducts",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "There are integers $0\\leq i<j$ with $i1_A=j1_A$, since $A$ is finite. Put $N=j-i>0$. Then $N1_A=0$, so for every module sheaf $M$ and every section $s$, $Ns=(N1_A)s=0$. Put $F=U_VM$. In [def-weil-pbc-torsion-etale-sheaf], $F[N]=F$. Write $j_n:F[n]\\to\\varinjlim_mF[m]$ for the colimit maps and $c_F$ for the canonical map to $F$. Then $c_Fj_N=\\mathrm{id}_F$. For every $n$, put $l=\\operatorname{lcm}(n,N)$. We have $F[l]=F$, the transition $F[N]\\to F[l]$ is the identity, and the transition $F[n]\\to F[l]$ is its inclusion into $F$. Cocone compatibility therefore gives $j_Nc_Fj_n=j_l(F[n]\\hookrightarrow F[l])=j_n$. The colimit universal property gives $j_Nc_F=\\mathrm{id}$, proving that $F$ is torsion by the cited definition. Apply [lem-kun-proper-torsion-cd-bound] to $r$, $e$ and $U_VM$. It gives $R^ar_*U_VM=0$ for $a>2e$. By [lem-sbc-higher-direct-image-forget-comparison], this is the underlying abelian sheaf of $R^ar_*M$. A module sheaf whose underlying abelian sheaf is zero has zero sections on every site object, hence is zero. Thus $R^ar_*M=0$ for every $A$-module sheaf $M$ and every $a>2e$.",
-   "uses": [
-    "def-weil-pbc-torsion-etale-sheaf",
-    "lem-kun-proper-torsion-cd-bound",
-    "lem-sbc-higher-direct-image-forget-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095U (lemma-cohomological-dimension-proper); coefficient comparison: sites-cohomology.tex Tags 03FD and 072W"
-   }
+  "kind": "statement",
+  "title": "Proper direct image preserves arbitrary coproducts",
+  "statement": "Let $A$ be a finite commutative ring, and let $r:V\\to T$ be a proper morphism [def-weil-proper-morphism] of finite type between Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]). On the ordinary unbounded derived categories $D(V_{\\Et},A)$ and $D(T_{\\Et},A)$ [def-weil-pbc-derived-categories], the total right derived direct image $Rr_*$ preserves arbitrary set-indexed coproducts. Its bounded-below restriction is the derived direct image of [def-weil-pbc-direct-image].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md",
+    "place": "node lem-amb-proper-coproducts, order 1562"
   },
-  {
-   "text": "Apply [lem-exc-direct-image-coproducts] with $u=r$, the given finite ring $A$, and $c=2e$. Step 1 verifies quasi-compactness and quasi-separatedness, and Step 2 gives its vanishing hypothesis for every module sheaf, without constructibility or an invertibility restriction. Its conclusion states that $Rr_*$ preserves arbitrary coproducts on the unbounded ordinary derived categories, exactly the assertion. The finite acyclic-resolution argument is carried by that existing lemma; no bounded-below spectral-sequence convergence is being assumed for an unbounded input. For the final bounded-below compatibility clause, apply [src-right-derived-functor-plus-compatibility] to the additive direct image between the abelian categories of constant A-module sheaves. The enough-injectives and K-injective resolution structures are those used in [def-weil-pbc-direct-image]. The resulting natural isomorphism identifies the bounded-below right derived functor, followed by its inclusion, with the restriction of the total right derived functor.",
-   "uses": [
-    "lem-exc-direct-image-coproducts",
-    "src-right-derived-functor-plus-compatibility",
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-derived-categories",
     "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof": [
+    {
+      "text": "Apply [pqf-lem-proper-basic] to $r$: it is quasi-compact, quasi-separated and of finite type. The base $T$ is quasi-compact by the Noetherian hypothesis in the statement. Apply [lem-fin-finite-type-fibre-dimension-bound] to $r$ to obtain an integer $e\\geq0$ bounding the dimensions of every scheme-theoretic fibre $V_t$; empty fibres are allowed. No absolute dimension bound on either Noetherian scheme is used.",
+      "uses": [
+        "pqf-lem-proper-basic",
+        "lem-fin-finite-type-fibre-dimension-bound"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 0A3V, lemma-morphism-finite-type-bounded-dimension; properness consequences from Tag 01W1"
+      }
+    },
+    {
+      "text": "There are integers $0\\leq i<j$ with $i1_A=j1_A$, since $A$ is finite. Put $N=j-i>0$. Then $N1_A=0$, so for every module sheaf $M$ and every section $s$, $Ns=(N1_A)s=0$. Put $F=U_VM$. In [def-weil-pbc-torsion-etale-sheaf], $F[N]=F$. Write $j_n:F[n]\\to\\varinjlim_mF[m]$ for the colimit maps and $c_F$ for the canonical map to $F$. Then $c_Fj_N=\\mathrm{id}_F$. For every $n$, put $l=\\operatorname{lcm}(n,N)$. We have $F[l]=F$, the transition $F[N]\\to F[l]$ is the identity, and the transition $F[n]\\to F[l]$ is its inclusion into $F$. Cocone compatibility therefore gives $j_Nc_Fj_n=j_l(F[n]\\hookrightarrow F[l])=j_n$. The colimit universal property gives $j_Nc_F=\\mathrm{id}$, proving that $F$ is torsion by the cited definition. Apply [lem-kun-proper-torsion-cd-bound] to $r$, $e$ and $U_VM$. It gives $R^ar_*U_VM=0$ for $a>2e$. By [lem-sbc-higher-direct-image-forget-comparison], this is the underlying abelian sheaf of $R^ar_*M$. A module sheaf whose underlying abelian sheaf is zero has zero sections on every site object, hence is zero. Thus $R^ar_*M=0$ for every $A$-module sheaf $M$ and every $a>2e$.",
+      "uses": [
+        "def-weil-pbc-torsion-etale-sheaf",
+        "lem-kun-proper-torsion-cd-bound",
+        "lem-sbc-higher-direct-image-forget-comparison"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 095U (lemma-cohomological-dimension-proper); coefficient comparison: sites-cohomology.tex Tags 03FD and 072W"
+      }
+    },
+    {
+      "text": "Apply [lem-exc-direct-image-coproducts] with $u=r$, the given finite ring $A$, and $c=2e$. Step 1 verifies quasi-compactness and quasi-separatedness, and Step 2 gives its vanishing hypothesis for every module sheaf, without constructibility or an invertibility restriction. Its conclusion states that $Rr_*$ preserves arbitrary coproducts on the unbounded ordinary derived categories, exactly the assertion. The finite acyclic-resolution argument is carried by that existing lemma; no bounded-below spectral-sequence convergence is being assumed for an unbounded input. For the final bounded-below compatibility clause, apply [src-right-derived-functor-plus-compatibility] to the additive direct image between the abelian categories of constant A-module sheaves. The enough-injectives and K-injective resolution structures are those used in [def-weil-pbc-direct-image]. The resulting natural isomorphism identifies the bounded-below right derived functor, followed by its inclusion, with the restriction of the total right derived functor.",
+      "uses": [
+        "lem-exc-direct-image-coproducts",
+        "src-right-derived-functor-plus-compatibility",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, together with the ordinary derived-category definitions; rightDerivedFunctorPlusCompatibility in WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "lem-exc-direct-image-coproducts",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "pqf-lem-proper-basic",
+    "src-right-derived-functor-plus-compatibility"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums, together with the ordinary derived-category definitions; rightDerivedFunctorPlusCompatibility in WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "lem-exc-direct-image-coproducts",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "pqf-lem-proper-basic",
-  "src-right-derived-functor-plus-compatibility"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Blueprint proof paragraph, with Stacks 0A3V and 095U and the general finite-ring lemma lem-exc-direct-image-coproducts (whose Zn analogue is Stacks 0F11)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "proper derived direct image preserves arbitrary coproducts on etale module sheaves",
-   "results": "{\"t\": \"2026-10-14T10:06:21Z\", \"tool\": \"leanfinder\", \"query\": \"proper derived direct image preserves arbitrary coproducts on etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"instHasColimitsCondensedMod\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.mapFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits\"], \"digest\": \"055d9dfc93676f34\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
+    "place": "Blueprint proof paragraph, with Stacks 0A3V and 095U and the general finite-ring lemma lem-exc-direct-image-coproducts (whose Zn analogue is Stacks 0F11)"
   },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory rightDerivedFunctor preserves coproducts, PreservesCoproducts",
-   "results": "{\"t\": \"2026-10-14T10:06:22Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory rightDerivedFunctor preserves coproducts, PreservesCoproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `rightDerivedFunctor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "proper derived direct image preserves arbitrary coproducts on etale module sheaves",
+      "results": "{\"t\": \"2026-10-14T10:06:21Z\", \"tool\": \"leanfinder\", \"query\": \"proper derived direct image preserves arbitrary coproducts on etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"instHasColimitsCondensedMod\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.mapFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits\"], \"digest\": \"055d9dfc93676f34\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory rightDerivedFunctor preserves coproducts, PreservesCoproducts",
+      "results": "{\"t\": \"2026-10-14T10:06:22Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory rightDerivedFunctor preserves coproducts, PreservesCoproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `rightDerivedFunctor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "preserves.*coproduct|rightDerived.*coproduct",
+      "results": "{\"t\": \"2026-10-14T10:06:22Z\", \"tool\": \"grep\", \"query\": \"preserves.*coproduct|rightDerived.*coproduct\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leansearch",
+      "query": "proper derived pushforward of finite coefficient etale sheaves commutes with arbitrary direct sums",
+      "results": "{\"t\": \"2026-10-14T10:06:48Z\", \"tool\": \"leansearch\", \"query\": \"proper derived pushforward of finite coefficient etale sheaves commutes with arbitrary direct sums\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite cohomological dimension right derived functor commutes with infinite direct sums",
+      "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"leanfinder\", \"query\": \"finite cohomological dimension right derived functor commutes with infinite direct sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\"], \"digest\": \"372a8e24a0b8d988\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerived\", \"colimit\"",
+      "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"], \"digest\": \"aa6c0b895e37ecff\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rightDerived.*coproduct|coproduct.*rightDerived|finite.*cohomological",
+      "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*coproduct|coproduct.*rightDerived|finite.*cohomological\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "(derived|pushforward|directImage).*(PreservesColimits|direct.sum)|(cohomologicalDimension|cohomological dimension)",
+      "results": "{\"t\": \"2026-10-14T10:19:58Z\", \"tool\": \"grep\", \"query\": \"(derived|pushforward|directImage).*(PreservesColimits|direct.sum)|(cohomologicalDimension|cohomological dimension)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerived\", \"PreservesColimitsOfShape\"",
+      "results": "{\"t\": \"2026-10-14T10:19:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"PreservesColimitsOfShape\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A right derived pushforward on sheaves with bounded cohomological dimension preserves all small coproducts",
+      "results": "{\"t\": \"2026-10-14T10:19:59Z\", \"tool\": \"leanfinder\", \"query\": \"A right derived pushforward on sheaves with bounded cohomological dimension preserves all small coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\", \"CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits\", \"CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\"], \"digest\": \"2ff2236c0783a0d0\"}",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1562,
+  "blueprint_uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image",
+    "def-weil-scheme-morphism-properties",
+    "lem-exc-direct-image-coproducts",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "thm-sc-finite-type-torsion-cd"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "preserves.*coproduct|rightDerived.*coproduct",
-   "results": "{\"t\": \"2026-10-14T10:06:22Z\", \"tool\": \"grep\", \"query\": \"preserves.*coproduct|rightDerived.*coproduct\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-amb-proper-coproducts",
+    "worker": "stage1",
+    "summary": "Corrected the imported statement by introducing the finite commutative coefficient ring A, required by the finite-coefficient derived-category argument. The proof has three steps: properness and finite type give quasi-compactness, quasi-separatedness and a uniform fibre bound; finite A makes every A-module sheaf torsion and the proper torsion cohomological-dimension lemma gives the required vanishing; the existing finite-cd derived coproduct lemma applies on the unbounded ordinary categories. No new nodes were needed.",
+    "blueprint": "Realizes the sole proof paragraph: choose a common fibre bound, establish vanishing of higher direct images, then apply the finite acyclic-resolution/hypercohomology coproduct argument.",
+    "tool_uses": [
+      {
+        "node": "pqf-lem-proper-basic",
+        "why": "Properness supplies qcqs hypotheses for the derived coproduct criterion; the compact-support unit has no replacement for this generic morphism fact."
+      },
+      {
+        "node": "lem-fin-finite-type-fibre-dimension-bound",
+        "why": "Uniform fibre bound for finite type over a qc base; this supplies the chosen e in the imported proof."
+      },
+      {
+        "node": "lem-kun-proper-torsion-cd-bound",
+        "why": "Generic proper torsion vanishing theorem, carrying the same stalk and finite-type cd reduction used in the imported proof."
+      },
+      {
+        "node": "lem-sbc-higher-direct-image-forget-comparison",
+        "why": "Generic coefficient-forgetting comparison needed to apply abelian torsion vanishing to A-module higher direct images."
+      },
+      {
+        "node": "src-right-derived-functor-plus-compatibility",
+        "why": "Generic compatibility of unbounded and bounded-below right derived functors proves the final clause; this does not replace the finite-cd coproduct route."
+      }
+    ]
   },
-  {
-   "tool": "leansearch",
-   "query": "proper derived pushforward of finite coefficient etale sheaves commutes with arbitrary direct sums",
-   "results": "{\"t\": \"2026-10-14T10:06:48Z\", \"tool\": \"leansearch\", \"query\": \"proper derived pushforward of finite coefficient etale sheaves commutes with arbitrary direct sums\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "finite cohomological dimension right derived functor commutes with infinite direct sums",
-   "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"leanfinder\", \"query\": \"finite cohomological dimension right derived functor commutes with infinite direct sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\"], \"digest\": \"372a8e24a0b8d988\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"], \"digest\": \"aa6c0b895e37ecff\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rightDerived.*coproduct|coproduct.*rightDerived|finite.*cohomological",
-   "results": "{\"t\": \"2026-10-14T10:06:49Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*coproduct|coproduct.*rightDerived|finite.*cohomological\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "(derived|pushforward|directImage).*(PreservesColimits|direct.sum)|(cohomologicalDimension|cohomological dimension)",
-   "results": "{\"t\": \"2026-10-14T10:19:58Z\", \"tool\": \"grep\", \"query\": \"(derived|pushforward|directImage).*(PreservesColimits|direct.sum)|(cohomologicalDimension|cohomological dimension)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerived\", \"PreservesColimitsOfShape\"",
-   "results": "{\"t\": \"2026-10-14T10:19:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"PreservesColimitsOfShape\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A right derived pushforward on sheaves with bounded cohomological dimension preserves all small coproducts",
-   "results": "{\"t\": \"2026-10-14T10:19:59Z\", \"tool\": \"leanfinder\", \"query\": \"A right derived pushforward on sheaves with bounded cohomological dimension preserves all small coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\", \"CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits\", \"CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.ab5ofSize\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\"], \"digest\": \"2ff2236c0783a0d0\"}",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1562,
- "blueprint_uses": [
-  "cor-weil-pbc-geometric-fiber-finite",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "def-weil-scheme-morphism-properties",
-  "lem-exc-direct-image-coproducts",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "thm-sc-finite-type-torsion-cd"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-amb-proper-coproducts",
-  "worker": "stage1",
-  "summary": "Corrected the imported statement by introducing the finite commutative coefficient ring A, required by the finite-coefficient derived-category argument. The proof has three steps: properness and finite type give quasi-compactness, quasi-separatedness and a uniform fibre bound; finite A makes every A-module sheaf torsion and the proper torsion cohomological-dimension lemma gives the required vanishing; the existing finite-cd derived coproduct lemma applies on the unbounded ordinary categories. No new nodes were needed.",
-  "blueprint": "Realizes the sole proof paragraph: choose a common fibre bound, establish vanishing of higher direct images, then apply the finite acyclic-resolution/hypercohomology coproduct argument.",
   "tool_uses": [
-   {
-    "node": "pqf-lem-proper-basic",
-    "why": "Properness supplies qcqs hypotheses for the derived coproduct criterion; the compact-support unit has no replacement for this generic morphism fact."
-   },
-   {
-    "node": "lem-fin-finite-type-fibre-dimension-bound",
-    "why": "Uniform fibre bound for finite type over a qc base; this supplies the chosen e in the imported proof."
-   },
-   {
-    "node": "lem-kun-proper-torsion-cd-bound",
-    "why": "Generic proper torsion vanishing theorem, carrying the same stalk and finite-type cd reduction used in the imported proof."
-   },
-   {
-    "node": "lem-sbc-higher-direct-image-forget-comparison",
-    "why": "Generic coefficient-forgetting comparison needed to apply abelian torsion vanishing to A-module higher direct images."
-   },
-   {
-    "node": "src-right-derived-functor-plus-compatibility",
-    "why": "Generic compatibility of unbounded and bounded-below right derived functors proves the final clause; this does not replace the finite-cd coproduct route."
-   }
-  ]
- },
- "tool_uses": [
-  "pqf-lem-proper-basic",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-sbc-higher-direct-image-forget-comparison",
-  "src-right-derived-functor-plus-compatibility"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NF-b9c1e4b88",
-  "group": "NF",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-b9c1e4b88 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, and source passages. Repaired one C1 fault: the bounded-below compatibility clause lacked a citation to the existing derived-functor compatibility theorem. Corrected JSON and review.md are written. No new nodes, circularity, false steps, or target weakening found; the finite étale coefficient setting remains distinct from condensed pro-étale coefficients.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-e5e924fc9",
-  "group": "NF",
-  "result": "pass",
-  "note": "Wrote review.md. Verified immutable files, all statement dependencies, exact signature, source passages, universes, edge cases and maintainer gates. Server-only compilation passed in 2.9 seconds without diagnostics. No delivery errors or fixes; repositories unchanged."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts",
-  "declaration": "AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts",
-  "statement": "theorem proper_rightDerivedLowerStar_preservesCoproducts\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V T : Scheme.{u}} (r : V ⟶ T) [IsProper r]\n    [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] :\n    (∀ I : Type w, PreservesColimitsOfShape (Discrete I)\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) r)) ∧\n    Nonempty\n      (rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) r ⋙\n          _root_.DerivedCategory.Plus.ι ≅\n        _root_.DerivedCategory.Plus.ι ⋙ rightDerivedLowerStar (ModuleCat.{u + 1} A) r)",
-  "branch": "newtargets-dag",
-  "by": "NF",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "Existing project theorem landed by NP (ledger 2026-10-15 06:44 UTC), independently read against this node. Its independent index universe w covers arbitrary set-indexed coproducts and its second conjunct is the bounded-below natural comparison. Reuse the landed declaration rather than overwrite it."
- }
+    "pqf-lem-proper-basic",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "src-right-derived-functor-plus-compatibility"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NF-b9c1e4b88",
+    "group": "NF",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-b9c1e4b88 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, and source passages. Repaired one C1 fault: the bounded-below compatibility clause lacked a citation to the existing derived-functor compatibility theorem. Corrected JSON and review.md are written. No new nodes, circularity, false steps, or target weakening found; the finite étale coefficient setting remains distinct from condensed pro-étale coefficients.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-e5e924fc9",
+    "group": "NF",
+    "result": "pass",
+    "note": "Wrote review.md. Verified immutable files, all statement dependencies, exact signature, source passages, universes, edge cases and maintainer gates. Server-only compilation passed in 2.9 seconds without diagnostics. No delivery errors or fixes; repositories unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts",
+    "declaration": "AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts",
+    "statement": "theorem proper_rightDerivedLowerStar_preservesCoproducts\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V T : Scheme.{u}} (r : V ⟶ T) [IsProper r]\n    [IsLocallyNoetherian V] [CompactSpace V] [IsLocallyNoetherian T] [CompactSpace T] :\n    (∀ I : Type w, PreservesColimitsOfShape (Discrete I)\n      (rightDerivedLowerStar (ModuleCat.{u + 1} A) r)) ∧\n    Nonempty\n      (rightDerivedLowerStarPlus (ModuleCat.{u + 1} A) r ⋙\n          _root_.DerivedCategory.Plus.ι ≅\n        _root_.DerivedCategory.Plus.ι ⋙ rightDerivedLowerStar (ModuleCat.{u + 1} A) r)",
+    "branch": "newtargets-dag",
+    "by": "NF",
+    "date": "2026-10-15",
+    "existing": true,
+    "note": "Existing project theorem landed by NP (ledger 2026-10-15 06:44 UTC), independently read against this node. Its independent index universe w covers arbitrary set-indexed coproducts and its second conjunct is the bounded-below natural comparison. Reuse the landed declaration rather than overwrite it."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $r:V\\to T$ be a proper\nmorphism of finite type between Noetherian schemes. On the\nordinary derived categories\nof etale $A$-module sheaves, $Rr_*$ preserves arbitrary coproducts.",
+    "proof": [
+      {
+        "text": "Choose a common finite bound $e$ for the dimensions of the\ngeometric fibres of the finite-type morphism $r$.\nThe stalk formula of [cor-weil-pbc-geometric-fiber-finite]\nand the bound [thm-sc-finite-type-torsion-cd] give\n$R^a r_*F=0$ for $a>2e$, for every sheaf $F$.\nThe functors $R^a r_*$ commute with filtered colimits: on each\ngeometric fibre this is\n[lem-weil-pbc-cohomology-filtered-colimit], and\n[lemma-weil-pbc-geometric-stalk-conservative] detects the comparison.\nThey therefore commute with direct sums, a direct sum being the\nfiltered colimit of its finite subsums. The finite acyclic-resolution argument of\n[lem-exc-direct-image-coproducts] applies on the unbounded\nordinary category. Its hypercohomology spectral\nsequence has only the columns $0,\\ldots,2e$. For each total\ndegree it thus uses a finite interval of cohomology sheaves of the\ninput. Applying this spectral sequence to the coproduct comparison\nproves the assertion, including for unbounded complexes. It\nalso extends the geometric-fibre formula to unbounded complexes by\nthe same finite-interval argument.",
+        "uses": [
+          "cor-weil-pbc-geometric-fiber-finite",
+          "thm-sc-finite-type-torsion-cd",
+          "lem-weil-pbc-cohomology-filtered-colimit",
+          "lemma-weil-pbc-geometric-stalk-conservative",
+          "lem-exc-direct-image-coproducts"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

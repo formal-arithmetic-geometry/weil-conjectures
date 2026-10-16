@@ -1,0 +1,79 @@
+{
+  "id": "det-curve-normalization-constant-sheaf",
+  "kind": "statement",
+  "title": "The normalization sequence of a constant sheaf",
+  "statement": "Let $k$ be algebraically closed, $C$ a reduced separated scheme of finite\ntype over $k$ of dimension at most one, with irreducible components\n$C_1,\\dots,C_m$, and let $a:C^{\\mathrm{nor}}=\\coprod_iC_i^{\\nu}\\to C$ be the\ndisjoint union of the normalizations of the components. Let $M$ be a finite\nabelian group and $\\eta:\\underline M_C\\to a_*a^{-1}\\underline M_C\n=a_*\\underline M_{C^{\\mathrm{nor}}}$ the unit. Then:\n\n1. $a$ is finite and surjective, $C^{\\mathrm{nor}}$ is a finite disjoint\n   union of smooth connected curves and copies of $\\operatorname{Spec}k$, and\n   there is a finite set $Z$ of closed points of $C$ such that $a$ is an\n   isomorphism over $C\\setminus Z$;\n2. at a geometric point $\\bar x$ of $C$ with $b=b(\\bar x)\\geq1$ geometric\n   points of $C^{\\mathrm{nor}}$ above it, $\\eta_{\\bar x}$ is the diagonal\n   $M\\to M^b$; hence $\\eta$ is injective, and its cokernel $Q$ is supported\n   on $Z$ with $Q_{\\bar x}=M^b/\\Delta M$;\n3. the exact sequence $0\\to\\underline M_C\\to a_*\\underline M_{C^{\\mathrm{nor}}}\\to Q\\to0$\n   gives isomorphisms $H^q(C,\\underline M)\\cong H^q(C^{\\mathrm{nor}},\\underline M)$\n   for $q\\geq2$ and an exact sequence\n   $0\\to H^0(C,\\underline M)\\to H^0(C^{\\mathrm{nor}},\\underline M)\\to\n   \\bigoplus_{z\\in Z}Q_{\\bar z}\\to H^1(C,\\underline M)\\to\n   H^1(C^{\\mathrm{nor}},\\underline M)\\to0$;\n4. for an extension $k\\subseteq k'$ of algebraically closed fields,\n   $a_{k'}:C^{\\mathrm{nor}}_{k'}\\to C_{k'}$ is the normalization of the\n   reduced curve $C_{k'}$, and the sequence of 3 for $C_{k'}$ is the pullback\n   of the one for $C$, with the same cokernel stalks.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-normalization/det-curve-normalization-constant-sheaf.md",
+    "place": "node det-curve-normalization-constant-sheaf, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Part 1.* For a one-dimensional component $C_i$, the normalization\n$C_i^{\\nu}\\to C_i$ is finite, surjective and birational, and $C_i^{\\nu}$ is\nsmooth over the perfect field $k$ ([lem-sc-normalization-properties]); a\nzero-dimensional component is a reduced point, i.e. $\\operatorname{Spec}k$,\nand is its own normalization. Hence $a$ is finite and surjective. The set of\nnormal points of $C$ not lying on two components is open and dense in each\ncomponent, and $a$ is an isomorphism over it\n([lem-sc-normalization-properties](b)); its complement $Z$ is a proper closed\nsubset of each one-dimensional component and contains no isolated point, so\nit is a finite set of closed points.",
+      "uses": [
+        "lem-sc-normalization-properties"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Part 2.* By the finite stalk formula ([lemma-weil-pbc-finite-stalk-formula])\n$(a_*\\underline M)_{\\bar x}=\\prod_{\\bar y\\mapsto\\bar x}M=M^b$, the product\nover the $b$ geometric points of the fibre, and the unit sends $m$ to\n$(m,\\dots,m)$, the germ of the pulled-back constant section. Surjectivity of\n$a$ gives $b\\geq1$, so the diagonal is injective, and injectivity on all\ngeometric stalks gives injectivity of $\\eta$\n([lemma-weil-pbc-geometric-stalk-conservative]). Over $C\\setminus Z$ we have\n$b=1$ and $\\eta_{\\bar x}$ is the identity, so $Q$ is supported on $Z$ with\nthe stated stalks.",
+      "uses": [
+        "lemma-weil-pbc-finite-stalk-formula",
+        "lemma-weil-pbc-geometric-stalk-conservative"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Part 3.* The direct image $a_*$ is exact\n([lemma-weil-pbc-finite-direct-image-exact]), so the Leray spectral sequence\ndegenerates and $H^q(C,a_*\\underline M)=H^q(C^{\\mathrm{nor}},\\underline M)$.\nBy [det-curve-finite-support-acyclic], $H^q(C,Q)=0$ for $q>0$ and\n$H^0(C,Q)=\\bigoplus_{z\\in Z}Q_{\\bar z}$. The long exact sequence of\n$0\\to\\underline M\\to a_*\\underline M\\to Q\\to0$ gives the claims.",
+      "uses": [
+        "lemma-weil-pbc-finite-direct-image-exact",
+        "det-curve-finite-support-acyclic"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Part 4.* By base change, $C^{\\mathrm{nor}}_{k'}$ is a finite disjoint union\nof smooth curves and points ([lem-sc-base-change-curve]), hence normal, and\n$a_{k'}$ is finite; it is an isomorphism over the dense open\n$(C\\setminus Z)_{k'}$, hence birational. $C_{k'}$ is reduced because $C$ is\nreduced and $k$ is perfect. A finite birational morphism from a normal scheme\nis the normalization, so $a_{k'}$ is the normalization of $C_{k'}$. The\nfinite base change isomorphism ([lemma-weil-pbc-finite-exchange]) identifies\n$\\pi^{-1}a_*\\underline M$ with $a_{k'*}\\underline M$ for\n$\\pi:C_{k'}\\to C$, compatibly with the units, and the geometric fibres of\n$a_{k'}$ over $z\\otimes k'$ are those of $a$ over $z$. So the pullback of the\nsequence for $C$ is the sequence for $C_{k'}$, with the same cokernel stalks\n$M^b/\\Delta M$, and [det-curve-finite-support-acyclic] identifies the\ncohomology of the cokernels.",
+      "uses": [
+        "lem-sc-base-change-curve",
+        "lemma-weil-pbc-finite-exchange",
+        "det-curve-finite-support-acyclic"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-normalization-properties",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "det-curve-finite-support-acyclic",
+    "lem-sc-base-change-curve",
+    "lemma-weil-pbc-finite-exchange"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-normalization/det-curve-normalization-constant-sheaf.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "lem-sc-normalization-properties",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "det-curve-finite-support-acyclic",
+    "lem-sc-base-change-curve"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

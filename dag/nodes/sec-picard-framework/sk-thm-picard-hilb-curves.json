@@ -1,0 +1,103 @@
+{
+  "id": "sk-thm-picard-hilb-curves",
+  "kind": "statement",
+  "title": "Hilbert schemes of points on a smooth curve",
+  "statement": "Let $C/k$ be a smooth projective geometrically connected curve. For\n$d\\geq0$, let $H_d=\\Hilb^d_{C/k}$ be the functor of closed subschemes\n$D\\subset C_T$ which are finite locally free of rank $d$ over $T$.\n\nThe functor $H_d$ is represented by a smooth projective geometrically\nintegral $k$-scheme of dimension $d$, with $H_0=\\Spec k$. Its objects are\nprecisely the relative effective Cartier divisors which are finite\nlocally free of degree $d$. It has a universal divisor\n$D_d\\subset C\\times_kH_d$ and an associated invertible sheaf\n$\\cO(D_d)$.\n\n*Complements* (proved in this sketch). For a field extension $k'/k$ the\n$k'$-points of $H_d$ are the effective Cartier divisors of degree $d$ on\n$C_{k'}$, and $\\cO(D_d)|_{C\\times\\{[D]\\}}\\cong\\cO_C(D)$; there is an\naddition morphism $H_{d_1}\\times_kH_{d_2}\\to H_{d_1+d_2}$, given on\npoints by $(D_1,D_2)\\mapsto D_1+D_2$ (product of the ideal sheaves),\nfinite locally free of degree $\\binom{d_1+d_2}{d_1}$; in particular the\niterated addition $C^d\\to H_d$ is finite locally free and surjective.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/_section.md",
+    "place": "node sk-thm-picard-hilb-curves, order 607",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9A"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-the-hilbert-functor--definition-1"
+  ],
+  "proof": [
+    {
+      "text": "*Representability.* This is Grothendieck's theorem that the Hilbert\nfunctor of a projective scheme with fixed Hilbert polynomial is\nrepresented by a projective scheme ([sk-thm-picard-hilb-general]),\napplied with constant polynomial $d$; Stacks Project, Tags 0B9A and 0B9I\ngive the construction for curves. (Its hypothesis that finitely many\npoints of $C$ lie in an affine open follows from [sk-thm-picard-rr]\n(G)+(H): an effective divisor $D_0$ through the points has positive\ndegree, so $\\cO_C(D_0)$ is ample and $C\\setminus\\operatorname{Supp}D_0$ is\naffine.) $H_0=\\Spec k$, since the only closed subscheme finite locally\nfree of rank $0$ is empty.",
+      "uses": [
+        "sk-thm-picard-hilb-general",
+        "sk-thm-picard-rr"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Objects are Cartier divisors.* On a smooth fibre, local rings at closed\npoints are discrete valuation rings, so a zero-dimensional closed\nsubscheme is an effective Cartier divisor. The flatness criterion for\nCartier divisors ($C_T\\to T$ flat, $D$ flat over $T$ and Cartier on\nfibres) gives the relative assertion. Conversely a relative effective\nCartier divisor finite over $T$ is flat and finitely presented, hence\nfinite locally free. The universal closed subscheme $D_d$ is therefore a\nrelative effective Cartier divisor, with invertible sheaf $\\cO(D_d)$, and\nby the Yoneda lemma the point classified by $h:T\\to H_d$ is its pullback.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Smoothness.* At a divisor $D$ over a field, the Hilbert tangent space is\n$\\Hom(\\mathcal I_D,\\cO_D)$, of dimension $d$ ($\\mathcal I_D$ invertible,\n$\\cO_D$ of length $d$), and the obstruction group\n$\\Ext^1(\\mathcal I_D,\\cO_D)=H^1(C,\\mathcal I_D^{-1}\\otimes\\cO_D)$ vanishes\nbecause $\\mathcal I_D$ is invertible and $D$ is finite. Hence $H_d$ is\nsmooth of dimension $d$. (The detailed nodes give an alternative route:\nthe addition morphism $H_d\\times_kC\\to H_{d+1}$ is finite locally free\nof degree $d+1$, hence faithfully flat, so smoothness descends by\ninduction on $d$, starting from $H_1\\cong C$.)",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Geometric integrality.* The addition map $C^d\\to H_d$ is surjective on\ngeometric points: an effective divisor over an algebraically closed\nfield is a sum of points with multiplicities. The image of the\ngeometrically integral $C^d$ is therefore geometrically irreducible, and\n$H_d$, being smooth, is geometrically reduced; so $H_d$ is geometrically\nintegral. Properness follows from projectivity (or as the image of the\nproper $C^d$).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Complements.* The $k'$-points are, by the Cartier criterion, the\neffective Cartier divisors of degree $d$ on $C_{k'}$, and the fibre of\n$\\cO(D_d)$ over $[D]$ is $\\cO_C(D)$ by pullback of the universal\ndivisor. The addition morphism multiplies ideal sheaves of relative\neffective Cartier divisors; its finiteness and local freeness of degree\n$\\binom{d_1+d_2}{d_1}$ are the detailed node `lem-pc-hilb-addition`.",
+      "uses": [
+        "lem-pc-hilb-addition"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-picard-hilb-general",
+    "sk-thm-picard-rr",
+    "lem-pc-hilb-addition"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "backtick_citation",
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "long_proof_few_deps",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 607,
+  "blueprint_uses": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-the-hilbert-functor--definition-1",
+    "sk-thm-picard-hilb-general"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.hilbertPresheaf_curve_representable",
+    "AlgebraicGeometry.hilbertPresheaf_curve_points",
+    "AlgebraicGeometry.hilbertPresheaf_curve_add"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.hilbertPresheaf_curve_representable",
+    "AlgebraicGeometry.hilbertPresheaf_curve_points",
+    "AlgebraicGeometry.hilbertPresheaf_curve_add"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-the-hilbert-functor--definition-1"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,69 @@
+{
+  "id": "det-lem-formal-closed-support-derived",
+  "kind": "statement",
+  "title": "Sections with support: derived adjunction and fiber formula",
+  "statement": "In the situation of [det-lem-formal-closed-support-sheaves], let\n$R\\underline\\Gamma_Z\\colon\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(Z_{\\mathrm{proét}},\\Lambda)$ be the\nright derived functor of $\\underline\\Gamma_Z$, computed on K-injective\ncomplexes.\n\n1. $R\\underline\\Gamma_Z$ is right adjoint to\n   $i_*\\colon\\D(Z_{\\mathrm{proét}},\\Lambda)\\to\\D(X_{\\mathrm{proét}},\\Lambda)$, and for\n   $A\\in\\D(Z_{\\mathrm{proét}},\\Lambda)$, $K\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\n   $$\n   R\\operatorname{Hom}_X(i_*A,K)\\simeq R\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK).\n   $$\n2. For an injective $\\Lambda_X$-module $I$, the unit $I\\to j_*j^*I$ is surjective.\n3. There is a distinguished triangle, natural in $K$,\n   $$\n   i_*R\\underline\\Gamma_ZK\\longrightarrow K\\longrightarrow Rj_*j^*K\\longrightarrow i_*R\\underline\\Gamma_ZK[1]\n   $$\n   in $\\D(X_{\\mathrm{proét}},\\Lambda)$, whose second arrow is the unit of $j^*\\dashv Rj_*$.\n   Consequently\n   $$\n   R\\underline\\Gamma_ZK\\simeq i^*\\fib\\bigl(K\\longrightarrow Rj_*j^*K\\bigr)\\quad\\text{in }\\D(Z_{\\mathrm{proét}},\\Lambda).\n   $$",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
+    "place": "node det-lem-formal-closed-support-derived, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 079P"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "det-lem-formal-closed-support-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "K-injective resolutions with injective terms exist in\n$\\Mod(X_{\\mathrm{proét}},\\Lambda)$, a Grothendieck abelian category (Stacks, Tag 079P).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(1)* Represent $K$ by a K-injective complex $I^\\bullet$. Then\n$R\\underline\\Gamma_ZK=\\underline\\Gamma_ZI^\\bullet$, which is K-injective by\n[det-lem-formal-closed-support-sheaves] (3). Since $i_*$ is exact it needs no\nderiving, and for a complex $A$ on $Z$\n$$\n\\Hom_{\\D(X)}(i_*A,K)=\\Hom_{K(X)}(i_*A,I^\\bullet)=\\Hom_{K(Z)}(A,\\underline\\Gamma_ZI^\\bullet)=\\Hom_{\\D(Z)}(A,R\\underline\\Gamma_ZK),\n$$\nthe middle equality being the termwise adjunction of\n[det-lem-formal-closed-support-sheaves] (2). The same identity holds for the\nHom complexes (which compute $R\\operatorname{Hom}$ because $I^\\bullet$ and\n$\\underline\\Gamma_ZI^\\bullet$ are K-injective), giving the $R\\operatorname{Hom}$\nform.",
+      "uses": [
+        "det-lem-formal-closed-support-sheaves"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2)* The map $j_!j^*I\\to j_*j^*I$ (adjoint to the identity of $j^*I$, using\n$j^*j_!=\\mathrm{id}$) is a monomorphism: it is the identity after $j^*$, and\n$i^*j_!=0$, so its kernel $\\kappa$ satisfies $j^*\\kappa=0$ and\n$i^*\\kappa\\subset i^*j_!j^*I=0$, whence $\\kappa=0$ by the localization\nsequence. By injectivity of $I$, the inclusion $j_!j^*I\\hookrightarrow I$ (the\ncounit) extends to $s\\colon j_*j^*I\\to I$. Let $\\eta\\colon I\\to j_*j^*I$ be the\nunit and $e=\\eta\\circ s$. Then $j^*e=\\mathrm{id}$, since after $j^*$ all of\n$j_!j^*I\\to I\\to j_*j^*I$ and $j_!j^*I\\to j_*j^*I$ become the identity of\n$j^*I$. As $j_*$ is fully faithful, $e=j_*j^*e=\\mathrm{id}$. So $\\eta$ has a\nsection and is surjective.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(3)* Represent $K$ by a K-injective complex $I^\\bullet$ with injective terms.\nThe functor $j^*$ has the exact left adjoint $j_!$, so $j^*I^\\bullet$ is\nK-injective and $Rj_*j^*K=j_*j^*I^\\bullet$. By\n[det-lem-formal-closed-support-sheaves] (1) and (2) above, the sequences\n$$\n0\\to i_*\\underline\\Gamma_Z(I^n)\\to I^n\\to j_*j^*I^n\\to0\n$$\nare exact for every $n$ and form a short exact sequence of complexes. A short\nexact sequence of complexes gives a distinguished triangle in the derived\ncategory; its first term is $i_*\\underline\\Gamma_ZI^\\bullet=i_*R\\underline\\Gamma_ZK$,\nand its second arrow represents the unit $K\\to Rj_*j^*K$. Morphisms of $K$\nlift to morphisms of K-injective resolutions, unique up to homotopy, so the\ntriangle is natural. Hence $i_*R\\underline\\Gamma_ZK\\simeq\\fib(K\\to Rj_*j^*K)$;\napplying the exact functor $i^*$ and $i^*i_*=\\mathrm{id}$\n([sk-prop-sf-open-closed-triangle]) gives the fiber formula.",
+      "uses": [
+        "det-lem-formal-closed-support-sheaves"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "det-lem-formal-closed-support-sheaves"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/det-lem-formal-closed-support-derived.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-lem-formal-closed-support-sheaves",
+    "sk-prop-sf-open-closed-triangle"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,68 @@
+{
+  "id": "det-lem-int-tensor-product",
+  "kind": "statement",
+  "title": "The integral tensor product preserves $\\Dbc(-,\\mathcal O_E)$",
+  "statement": "Let $X$ be a standing scheme and $K,L\\in\\Dbc(X,\\mathcal O_E)$. Then the derived\ntensor product $K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}L\\in\\D(X_{\\mathrm{proét}},\\mathcal O_E)$, formed\nwithout any completion, lies in $\\Dbc(X,\\mathcal O_E)$.\n\nMoreover, if $M\\in\\D(S_{\\mathrm{proét}},\\mathcal O_E)$ is pro-étale locally of the form\n$P\\otimes_{\\mathcal O_E}\\mathcal O_{E,S}$ with $P$ a bounded complex of finite free\n$\\mathcal O_E$-modules, then $M$ is dualizable in $\\D(S_{\\mathrm{proét}},\\mathcal O_E)$, and\n$M\\otimes^{\\mathbf L}-$ preserves products, derived inverse limits and derived\ncomplete objects.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
+    "place": "node det-lem-int-tensor-product, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Dualizability of a local model.* Let $M$ be as in the second paragraph, with a\npro-étale cover $\\{W_k\\to S\\}$ and $M|_{W_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$. Put\n$M^\\vee=R\\mathcal Hom(M,\\mathcal O_{E,S})$. On $W_k$ it is\n$P_k^\\vee\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$ with $P_k^\\vee=\\Hom_{\\mathcal O_E}(P_k,\\mathcal O_E)$, and the\nevaluation $M^\\vee\\otimes^{\\mathbf L}M\\to\\mathcal O_{E,S}$ and the canonical map\n$M\\otimes^{\\mathbf L}N\\to R\\mathcal Hom(M^\\vee,N)$ are, on $W_k$, the corresponding maps for\nthe bounded complex of finite free modules $P_k$, which are isomorphisms\n(respectively satisfy the triangle identities) because they do so for\n$P=\\mathcal O_E$ and are compatible with finite sums and cones. A morphism in the\nderived category is an isomorphism if it is so on a cover, and the triangle\nidentities are equalities of morphisms that can be checked after the\nisomorphisms just established. So $M$ is dualizable with dual $M^\\vee$, and\n$M\\otimes^{\\mathbf L}-\\simeq R\\mathcal Hom(M^\\vee,-)$ is a right adjoint (of\n$M^\\vee\\otimes^{\\mathbf L}-$) as well as a left adjoint (of $R\\mathcal Hom(M,-)$). Being a\nright adjoint, it preserves products; being exact, it preserves\n$R\\varprojlim$ of sequences, which is the fibre of a map between products. It\nalso commutes with reduction modulo $\\pi_E^n$ by associativity of the derived\ntensor product. Hence, if $N$ is derived complete, applying $M\\otimes^{\\mathbf L}-$ to\nthe isomorphism $N\\simeq R\\varprojlim_nN\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ shows that\n$M\\otimes^{\\mathbf L}N$ is derived complete ([sk-def-pe-derived-completion]).",
+      "uses": [
+        "sk-def-pe-derived-completion"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Reduction to a stratum.* Fix $L\\in\\Dbc(X,\\mathcal O_E)$. The functor\n$K\\mapsto K\\otimes^{\\mathbf L}L$ is exact and $\\Dbc(X,\\mathcal O_E)$ is triangulated\n([sk-lem-int-integral-heart]), so the class of $K$ with\n$K\\otimes^{\\mathbf L}L\\in\\Dbc(X,\\mathcal O_E)$ is closed under extensions. By\n[det-lem-int-tensor-shriek] (2) it suffices to treat $K=a_!M$ with\n$a\\colon S\\hookrightarrow X$ a stratum and $M$ a local model as above. By\n[det-lem-int-tensor-projection],\n$$\na_!M\\otimes^{\\mathbf L}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}a^*L\\bigr),\n$$\nand by [det-lem-int-tensor-shriek] (1) it suffices to show\n$M\\otimes^{\\mathbf L}a^*L\\in\\Dbc(S,\\mathcal O_E)$.",
+      "uses": [
+        "sk-lem-int-integral-heart",
+        "det-lem-int-tensor-shriek",
+        "det-lem-int-tensor-projection"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The stratum.* By [det-lem-int-tensor-pullback], $N:=a^*L\\in\\Dbc(S,\\mathcal O_E)$; in\nparticular $N$ is derived complete, so $M\\otimes^{\\mathbf L}N$ is derived complete by\nthe first paragraph. Its reduction is, by associativity,\n$$\n(M\\otimes^{\\mathbf L}N)\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E\\simeq(M/\\pi_E)\\otimes^{\\mathbf L}_{\\mathbf F_{E,S}}(N/\\pi_E),\n\\qquad \\mathbf F_E=\\mathcal O_E/\\pi_E .\n$$\nBoth factors lie in $\\Dbc(S,\\mathbf F_E)$ (by [sk-prop-integral-criterion] for $N$,\nand for $M$ because it is locally a bounded complex of finite free modules on\nthe single stratum $S$). It remains to see that $\\Dbc(S,\\mathbf F_E)$ is closed\nunder $\\otimes^{\\mathbf L}$. Every $\\mathbf F_{E,S}$-module is flat: the tensor product\nover the constant sheaf of the field $\\mathbf F_E$ is the sheafification of the\nsectionwise tensor product over $\\mathbf F_E$, which is exact. So\n$\\otimes^{\\mathbf L}=\\otimes$ is exact in each variable, and by the truncation\ntriangles (both factors are bounded) it suffices to show that $F\\otimes G$ is\nconstructible for constructible sheaves $F$, $G$\n([sk-def-sfb-constructible]). Choose a common refinement of their\nstratifications and, on each stratum, a common refinement of the covers\ncarrying finite constant local models $F\\simeq\\mathbf F_E^r$, $G\\simeq\\mathbf F_E^s$\n(finitely presented modules over a field are free); then\n$F\\otimes G\\simeq\\mathbf F_E^{rs}$ there. Hence $F\\otimes G$ is constructible, the\nreduction of $M\\otimes^{\\mathbf L}N$ is bounded constructible, and\n$M\\otimes^{\\mathbf L}N\\in\\Dbc(S,\\mathcal O_E)$ by [sk-prop-integral-criterion].",
+      "uses": [
+        "det-lem-int-tensor-pullback",
+        "sk-def-sfb-constructible"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-def-pe-derived-completion",
+    "sk-lem-int-integral-heart",
+    "det-lem-int-tensor-shriek",
+    "det-lem-int-tensor-projection",
+    "det-lem-int-tensor-pullback",
+    "sk-def-sfb-constructible"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-lem-int-tensor-shriek",
+    "det-lem-int-tensor-pullback",
+    "det-lem-int-tensor-projection",
+    "sk-prop-integral-criterion"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

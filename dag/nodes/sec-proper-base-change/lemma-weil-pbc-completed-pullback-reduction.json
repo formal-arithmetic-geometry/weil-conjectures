@@ -1,390 +1,411 @@
 {
- "id": "lemma-weil-pbc-completed-pullback-reduction",
- "blueprint": {
-  "is": "lemma-weil-pbc-completed-pullback-reduction",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Reduction commutes with completed pullback",
- "statement": "Let $g:T'\\to T$ be a morphism of schemes and use the Noetherian adic datum $A,I,P_n=A/I^n$, coefficient sheaves $A_W=\\varprojlim_n(P_n)_W$ for $W=T,T'$, and reduction tower of [def-weil-pbc-adic-coefficient-datum]. Let $K\\in D(\\operatorname{Mod}(T_{\\Proet},A_T))$ be derived $I$-complete in the sense of [def-weil-pbc-intrinsic-completion], and put $K_n=K\\otimes^L_{A_T}(P_n)_T$. Let $L=Lg^*_{\\mathrm{comp}}K\\in D(\\operatorname{Mod}(T'_{\\Proet},A_{T'}))$ be the completed pullback of [def-weil-pbc-completed-pullback], and write $g_n^*$ for finite-coefficient module pullback as there.\n\nThen $L$ is derived $I$-complete, and for every $n\\geq1$ the projection of its defining derived limit to $Lg_n^*K_n$ induces a functorial isomorphism in $D(\\operatorname{Mod}(T'_{\\Proet},(P_n)_{T'}))$,\n$$\\alpha_n:L\\otimes^L_{A_{T'}}(P_n)_{T'}\\xrightarrow{\\sim}Lg_n^*K_n.$$\nThese isomorphisms commute with the quotient transition maps. For $b\\geq a\\geq1$ they also commute with normalization: extending $\\alpha_b$ from $(P_b)_{T'}$ to $(P_a)_{T'}$ and then using the normalization of the pulled-back reduction tower gives $\\alpha_a$ after the canonical scalar-extension associativity identification. For $c\\geq b\\geq a$ these normalizations satisfy the quotient cocycle, and for equal indices the unit identity. All tensor products in the display are over the indicated sheaves of rings; no identification with an ordinary module derived category is asserted.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
-  "place": "node lemma-weil-pbc-completed-pullback-reduction, order 1262",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099N"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-completed-pullback"
- ],
- "proof": [
-  {
-   "text": "Write $\\underline A_W$ for the constant coefficient ring on $W_{\\Proet}$, and $\\operatorname{Res}_W$ for restriction from $A_W$ to $\\underline A_W$. Set $N=Lg^*_{\\underline A}\\operatorname{Res}_T K$, in the constant-coefficient derived category on $T'$. By [def-weil-pbc-completed-pullback] and [lem-weil-pbc-constant-completion-equivalence], restriction of the defining pulled-back strict tower identifies it with the strict reduction tower $N_n=N\\otimes^L_{\\underline A_{T'}}\\underline{P_n}_{T'}$, and identifies its derived limit $\\operatorname{Res}_{T'}L$ with $\\widehat N=R\\lim_nN_n$, respecting the completion unit $\\eta:N\\to\\widehat N$ and all finite projections. The finite comparison is the canonical one to $Lg_n^*K_n$. These are comparisons of strict towers and their derived limits, not an exchange of pullback with an infinite limit. The coefficient hypotheses of [def-weil-pbc-complete-coefficient-datum] hold here: take $\\Lambda=A$ on $T'$, with the same ideal and perfect quotients as in [def-weil-pbc-adic-coefficient-datum].",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-complete-coefficient-datum",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case, clause (5), and Tag 099M, lemma-naive-completion; coefficient comparison as in the completed-pullback definition"
-   }
+  "id": "lemma-weil-pbc-completed-pullback-reduction",
+  "blueprint": {
+    "is": "lemma-weil-pbc-completed-pullback-reduction",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-koszul-completion-reflector] on the small site $T'_{\\Proet}$ with $\\mathcal O=\\underline A_{T'}$ and the finite generators of $I$. Its Koszul derived limit is locally derived $I$-complete for any input $N$; no completeness of ordinary pullback is needed. By [lem-weil-pbc-constant-completion-equivalence], this Koszul limit is $\\widehat N$, with the same unit. That node identifies restriction of the completed-coefficient quotient limit with this constant-coefficient limit and identifies Koszul completeness with local completeness. Therefore $L$ is derived $I$-complete in precisely the intrinsic sense of [def-weil-pbc-intrinsic-completion]. More explicitly, apply the same reflector with $\\mathcal O=A_{T'}$ to $L$. Restriction identifies its Koszul unit with the Koszul unit of $\\operatorname{Res}_{T'}L=\\widehat N$: termwise tensor with the finite free Koszul factors commutes with restriction, and the derived-limit comparison is the one in [lem-weil-pbc-constant-completion-equivalence]. The latter unit is an isomorphism by the constant-coefficient reflector. Restriction is exact and does not change underlying abelian sheaves, so a cone becomes acyclic under restriction only if it was already acyclic. It therefore reflects isomorphisms, and the Koszul unit of $L$ is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-intrinsic-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B and 0A0E, lemma-derived-completion and lemma-derived-completion-koszul; proetale.tex Tag 099M"
-   }
-  },
-  {
-   "text": "Put $R=\\underline A_{T'}$ and $S_a=\\underline{P_a}_{T'}$. The coefficient datum gives a bounded finite-projective $A$-complex representing $P_a$; taking constant sheaves gives a global strict-perfect package [def-weil-pbc-strict-perfect-coefficient-package]. Realize strict towers as modules on the site $\\mathcal C\\times\\mathbf N_{\\geq1}$, with arrows $(U,n)\\to(V,m)$ for $n\\leq m$ induced by arrows $U\\to V$, and coverings at a fixed index induced by coverings of $\\mathcal C=T'_{\\Proet}$. A sheaf there is exactly an inverse sequence of sheaves on $\\mathcal C$. Give it the ring sheaf $\\Delta R$. The projection defines a ringed-topos morphism $h$ with $h^{-1}=\\Delta$, $h_*=\\lim$, and identity coefficient map. Thus its total derived direct image is the strict $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], while $Lh^*F=\\Delta F$ since constant towers are exact. Apply [lemma-weil-pbc-projection-formula-totalization] to this $h$, the Koszul tower of $N$, and the global package $F$ representing $S_a$, using the arrows of [def-weil-pbc-projection-formula-arrows]. It gives the canonical isomorphism $(R\\lim X_m)\\otimes_R^L F\\to R\\lim(X_m\\otimes_R^L F)$. The ordinary representative specified in that definition is $x\\otimes f\\mapsto(x_m\\otimes f)_m$ on a tower K-injective resolution. Evaluation at $m$ therefore gives projection tensored with $1_F$. Likewise, for a strict compatible family $M\\to X_m$, its composite sends $z\\otimes f$ to the family of the images of $z$ tensored with $f$. These equalities of chain maps prove compatibility with evaluation and with the map induced from a constant tower, including the Koszul unit. The unit-preserving Koszul/quotient comparison of [lem-weil-pbc-constant-completion-equivalence] identifies its left side with $\\widehat N\\otimes_R^L S_a$ and its reduced unit with $r_a=\\eta\\otimes^L1$. Thus it remains to compute $R\\lim_m(N\\otimes_R^L Q_m(R)\\otimes_R^L S_a)$ and this reduced unit. Use one K-flat representative $C$ of $N$ [lem-pc-kflat-resolution]. Since $Q_m(R)$ is bounded finite free, the tensor is represented by $C\\otimes_R(Q_m(R)\\otimes_R S_a)$. For $m\\geq a$, every $a_j^m$ vanishes in $P_a$, so the Koszul differential is zero. Its degree-zero summand gives the constant tower $C\\otimes_R S_a$, and its negative-degree summands, indexed by nonempty subsets $J$ of the generators, have transition $m+a\\to m$ equal to multiplication by $\\prod_{j\\in J}a_j^a=0$. This is an equality of chain maps, even though $C$ is unbounded. The reduced unit is the inclusion into the degree-zero summand. The cone tower of that inclusion has zero transitions over a gap of $a$ on the tail. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit] its derived limit is zero, hence the inclusion induces an isomorphism on derived limits. Discarding the finitely many indices $m<a$ has no effect: extend the tail constantly at its first term to the earlier indices and map that tower into the original one by the original transitions; its cone tower is eventually zero, so the same theorem gives an isomorphism on derived limits. The constant tower has derived limit $C\\otimes_R S_a$: in the product triangle, the map from the product to $(C\\otimes_R S_a)\\oplus\\prod_n^D(C\\otimes_R S_a)$ with components first projection and $1-s$ is an isomorphism. Its inverse sends $(z,(y_n))$ to $(z,z-y_1,z-y_1-y_2,\\ldots)$; each component uses only a finite sum. Under this isomorphism $1-s$ is the second projection, whose split triangle has first term $C\\otimes_R S_a$ embedded diagonally. This also identifies its canonical unit as the identity. It follows that $r_a:N_a\\to\\widehat N\\otimes_R^L S_a$ is an isomorphism. Using the canonical derived adjunction of [def-weil-pbc-projection-formula-arrows] for the identity underlying topos with ring map $R\\to S_a$ (direct image is exact restriction of scalars), define $\\beta_a$ to be the scalar-extension adjoint of the level-$a$ projection $\\widehat N\\to\\operatorname{Res}N_a$. Step 4 will identify it with $r_a^{-1}$. The finite-reduction and evaluation comparisons of [lem-weil-pbc-constant-completion-equivalence] and [def-weil-pbc-completed-pullback] then identify $\\beta_a$ with the asserted projection-induced $\\alpha_a$. No theorem about an arbitrary tower recovering its levels is used.",
-   "uses": [
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-pbc-completed-pullback",
-    "lemma-weil-pbc-projection-formula-totalization",
-    "def-weil-pbc-projection-formula-arrows"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-    "place": "Proof, Koszul reduction and pro-zero negative-degree calculation, with explicit quotient-tower hypotheses from step 1; tensor/limit exchange specializes order 1267 (lemma-weil-pbc-projection-formula-totalization) to the tower site of Stacks Tag 0940 (section-derived-limits), using Tag 0944 (lemma-projection-formula)."
-   }
-  },
-  {
-   "text": "In constant coefficients put $r_a=\\eta\\otimes^L1:N_a\\to\\widehat N\\otimes^L\\underline{P_a}_{T'}$ and denote the projection-induced map of step 3 by $\\beta_a$. Then $\\beta_a r_a=1_{N_a}$: write $p_a:\\widehat N\\to\\operatorname{Res}N_a$ for the projection and $u_a:N\\to\\operatorname{Res}N_a$ for the quotient unit. The projection-induced map $\\beta_a$ is the scalar-extension adjoint of $p_a$, and $p_a\\eta=u_a$. Consequently $\\beta_a(\\eta\\otimes^L1)$ is the scalar-extension adjoint of $u_a$, namely $1_{N_a}$, by the unit identity of the canonical derived adjunction of [def-weil-pbc-projection-formula-arrows], applied to the identity underlying topos with ring map $R\\to S_a$; its direct image is exact restriction of scalars and its derived pullback is extension of scalars. On a K-flat model its composite sends $x\\otimes s$ to $(x\\otimes1)s=x\\otimes s$. The unit/projection compatibility needed here is in [lem-weil-pbc-constant-completion-equivalence]. Since $r_a$ is an isomorphism by step 3, this identity proves $\\beta_a=r_a^{-1}$ and hence proves that $\\beta_a$ and its completed-coefficient counterpart $\\alpha_a$ are isomorphisms. Thus these isomorphisms and their inverses are natural in $K$: the finite comparisons and unit are natural, and inversion preserves a natural commuting square.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-complete-coefficient-datum",
-    "def-weil-pbc-projection-formula-arrows"
-   ],
-   "elementary": true,
-   "source": {
+  "kind": "statement",
+  "title": "Reduction commutes with completed pullback",
+  "statement": "Let $g:T'\\to T$ be a morphism of schemes and use the Noetherian adic datum $A,I,P_n=A/I^n$, coefficient sheaves $A_W=\\varprojlim_n(P_n)_W$ for $W=T,T'$, and reduction tower of [def-weil-pbc-adic-coefficient-datum]. Let $K\\in D(\\operatorname{Mod}(T_{\\Proet},A_T))$ be derived $I$-complete in the sense of [def-weil-pbc-intrinsic-completion], and put $K_n=K\\otimes^L_{A_T}(P_n)_T$. Let $L=Lg^*_{\\mathrm{comp}}K\\in D(\\operatorname{Mod}(T'_{\\Proet},A_{T'}))$ be the completed pullback of [def-weil-pbc-completed-pullback], and write $g_n^*$ for finite-coefficient module pullback as there.\n\nThen $L$ is derived $I$-complete, and for every $n\\geq1$ the projection of its defining derived limit to $Lg_n^*K_n$ induces a functorial isomorphism in $D(\\operatorname{Mod}(T'_{\\Proet},(P_n)_{T'}))$,\n$$\\alpha_n:L\\otimes^L_{A_{T'}}(P_n)_{T'}\\xrightarrow{\\sim}Lg_n^*K_n.$$\nThese isomorphisms commute with the quotient transition maps. For $b\\geq a\\geq1$ they also commute with normalization: extending $\\alpha_b$ from $(P_b)_{T'}$ to $(P_a)_{T'}$ and then using the normalization of the pulled-back reduction tower gives $\\alpha_a$ after the canonical scalar-extension associativity identification. For $c\\geq b\\geq a$ these normalizations satisfy the quotient cocycle, and for equal indices the unit identity. All tensor products in the display are over the indicated sheaves of rings; no identification with an ordinary module derived category is asserted.",
+  "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
-    "place": "Detailed form, functoriality; the projection-induced reduction map is the inverse of the reduced completion unit"
-   }
+    "place": "node lemma-weil-pbc-completed-pullback-reduction, order 1262",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099N"
+      }
+    ]
   },
-  {
-   "text": "For $b\\geq a$, naturality of tensoring the single map $\\eta$ with the quotient $P_b\\to P_a$ gives $\\widehat q_{b,a}r_b=r_aq_{b,a}$. Substituting $r_j=\\beta_j^{-1}$ and composing with the inverses gives $q_{b,a}\\beta_b=\\beta_a\\widehat q_{b,a}$, proving transition compatibility. For normalization, write $\\theta^N_{b,a}$ and $\\theta^{\\widehat N}_{b,a}$ for the scalar-extension associativity maps of [def-weil-pbc-complete-coefficient-datum]. Its naturality gives $\\theta^{\\widehat N}_{b,a}(r_b\\otimes^L1)=r_a\\theta^N_{b,a}$. Cancel the isomorphisms $r_a$ and $r_b\\otimes^L1$ to obtain $\\theta^N_{b,a}(\\beta_b\\otimes^L1)=\\beta_a\\theta^{\\widehat N}_{b,a}$. The normalization cocycle and unit law are those of the same coefficient-datum node: both three-level composites send $((x\\otimes t)\\otimes s)\\otimes v$ to $x\\otimes q_{c,a}(t)q_{b,a}(s)v$. Finally the natural finite comparisons in [lem-weil-pbc-constant-completion-equivalence] identify these equations with the equations for $\\alpha$ and the pulled-back tower; the completed-pullback definition identifies that tower including its transitions. This proves all stated compatibilities.",
-   "uses": [
-    "def-weil-pbc-complete-coefficient-datum",
-    "lem-weil-pbc-constant-completion-equivalence",
+  "stmt_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-intrinsic-completion",
     "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
-    "place": "Detailed form, last clause “compatible with the transition maps and normalization cocycles”, explicit cancellation and balanced tensor calculation"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-complete-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-projection-formula-arrows",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lemma-weil-pbc-projection-formula-totalization"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
-  "place": "Both Proof paragraphs; explicit Koszul-tail reduction calculation from order 1260 Proof, repaired to use actual quotient towers, plus Stacks Tags 099M, 099N, 0944 and 0940."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "derived complete completed pullback finite reduction functorial isomorphism",
-   "results": "CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.PreservesPullback.iso_hom, CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.PreservesPullback.iso, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory tensor pullback inverse limit",
-   "results": "0 hits; loogle: Unknown identifier `tensor`",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "derived.*pullback.*tensor|Rlim.*tensor",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived completion pullback reduction tower",
-   "results": "0 hits; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived inverse limit tensor finite quotient",
-   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.HasLimit RInf",
-   "results": "0 hits; loogle: Unknown identifier `RInf`",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "R\\s*lim|inverse limit",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived complete completed pullback finite reduction functorial isomorphism",
-   "results": "CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.PreservesPullback.iso_hom, CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.PreservesPullback.iso, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory tensor pullback inverse limit",
-   "results": "0 hits; loogle: Unknown identifier `tensor`",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "derived.*pullback.*tensor|Rlim.*tensor",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived completion pullback reduction tower",
-   "results": "0 hits; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "adic completion tensor derived inverse limit finite quotient",
-   "results": "AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.HasLimit inverse limit",
-   "results": "0 hits; loogle: Unknown identifier `inverse`",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "inverse limit|AdicCompletion",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived adic completion of pullback of sheaves of modules commutes with reduction modulo powers of an ideal",
-   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AdicCompletion.map_val_apply, AdicCompletion.map_of, AdicCompletion.module, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, IsAdicComplete.of_comp_lift, AdicCompletion.map",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "derivedCompletion|completedPullback|derived.*complet|complet.*derived",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived completed pullback reduces to pullback of the quotient coefficient complex",
-   "results": "0 hits; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"AdicCompletion\"",
-   "results": "AdicCompletion, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.instAdd, AdicCompletion.instAddCommGroup, AdicCompletion.instNeg, AdicCompletion.instSub, AdicCompletion.instZero",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For any complex of sheaves its derived completion has the same derived tensor with each quotient ring as the original complex",
-   "results": "CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_map_app, Rep.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
-  },
-  {
-   "tool": "grep",
-   "query": "completion.*[Rr]eduction|[Dd]erived.*[Cc]ompletion|completed[Pp]ullback",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived completion reflector preserves tensor products with perfect quotient modules",
-   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_naturality",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsAdicComplete\"",
-   "results": "IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1262,
- "blueprint_uses": [
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-weil-pbc-finite-reduction-reconstruction",
-  "lemma-weil-pbc-adic-completion-reduction"
- ],
- "uses_not_cited": [
-  "lemma-weil-pbc-adic-completion-reduction"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "For every $n$,\n\n$$\n(Lg^*_{\\mathrm{comp}}K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow{\\sim}Lg^*K_n.\n$$",
-   "proof": "Derived pullback commutes with derived tensor, so its defining tower is the\nreduction tower of $Lg^*K$. Apply finite reduction of adic completion to\nthis object. Its level $n$ is\n$Lg^*K\\otimes^L_\\Lambda P_n\\simeq Lg^*(K\\otimes^L_\\Lambda P_n)=Lg^*K_n$.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lemma-weil-pbc-completed-pullback-reduction",
-  "worker": "stage1",
-  "summary": "Expand finite reduction by the explicit Koszul-tail calculation and identify the projection-adjoint as the inverse of the reduced unit. Reuse the existing general ringed-topos projection-formula totalization at the tower topos; no new tensor/limit lemma is needed. Cite the canonical derived adjunction explicitly. The malformed arbitrary-tower completion-reduction node is not used; the statement is unchanged.",
-  "blueprint": "First Proof finite-reduction sentence is expanded in steps 3–4 by the order-1260 Koszul calculation on actual quotient towers. Tensor/limit exchange uses the existing order-1267 totalization theorem at the tower topos. Steps 1–2 give completeness and coefficient comparisons; step 5 proves the Detailed form transition, normalization, cocycle and unit clauses.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "A K-flat representative with flat terms computes the explicit reduced Koszul tower; the unit does not provide the general resolution-existence theorem."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-kflat-resolution"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NG-3aee9af86",
-  "group": "NG",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-3aee9af86 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Replaced the duplicate tensor/limit node with the existing general projection-formula totalization theorem and added the explicit derived-adjunction citation. Koszul reduction, projection-map identification, coefficient categories and normalization checks pass. Statement unchanged; review.md and corrected item JSON written.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedPullbackReduction",
-  "declaration": "AlgebraicGeometry.Scheme.completedPullback_reduction",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.completedPullbackFunctor",
-   "AlgebraicGeometry.Scheme.completedReductionModelPushforward_isRightAdjoint",
-   "AlgebraicGeometry.Scheme.completedReductionInverseImageGenerator",
-   "AlgebraicGeometry.Scheme.completedReductionRestrictionFactors",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteModules",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteDerived",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteTarget",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteTensor",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteGenerator",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinarySource_preservesZero",
-   "AlgebraicGeometry.Scheme.completedReductionLimitProjection",
-   "AlgebraicGeometry.Scheme.completedReductionQuotientAssoc",
-   "AlgebraicGeometry.Scheme.completedPullbackSourceNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionSectionEquation",
-   "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryComparisonNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison",
-   "AlgebraicGeometry.Scheme.completedReductionPulledModelMap",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteModelMap",
-   "AlgebraicGeometry.Scheme.HasCompletedReductionFiniteEvaluationNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists",
-   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation",
-   "AlgebraicGeometry.Scheme.completedPullbackReductionArrow",
-   "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryTransitionNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition",
-   "AlgebraicGeometry.Scheme.HasCompletedReductionTargetTransitionNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists",
-   "AlgebraicGeometry.Scheme.completedReductionTargetTransition",
-   "AlgebraicGeometry.Scheme.completedReductionTargetNormalization",
-   "AlgebraicGeometry.Scheme.completedReductionOrdinaryRestrictionUnit_exists",
-   "AlgebraicGeometry.Scheme.completedReductionRestrictionUnit",
-   "AlgebraicGeometry.Scheme.completedReductionUnit",
-   "AlgebraicGeometry.Scheme.completedPullback_reduction"
   ],
-  "file": "lean/Sheaf/Paper/CompletedPullbackReduction.lean",
-  "statement": "theorem completedPullback_reduction (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal) (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (C : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (e : DerivedCategory.Q.obj C ≅ K) (_hK : IsDerivedCompleteIntrinsic Y d r f hf K C e) : (∀ (P : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (eP : DerivedCategory.Q.obj P ≅ completedPullbackObject g d K), IsDerivedCompleteIntrinsic X d r f hf (completedPullbackObject g d K) P eP) ∧ (∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)) ∧ (∀ (K' : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (C' : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (e' : DerivedCategory.Q.obj C' ≅ K') (_hK' : IsDerivedCompleteIntrinsic Y d r f hf K' C' e') (v : K ⟶ K') (n : ℕ), (reductionDerivedChange X (completedReductionProjection X d n)).map ((completedPullbackFunctor g d).map v) ≫ completedPullbackReductionArrow g d K' n = completedPullbackReductionArrow g d K n ≫ (completedReductionFiniteTarget g d n).map v) ∧ (∀ (a b : ℕ) (h : a ≤ b), IsIso (completedReductionTargetNormalization g d K a b h) ∧ ((pbcDerivedScalarAdjunction (reductionCoefficientMap X d b a h)).homEquiv _ _ ((completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom)) ≫ (pbcDerivedRestrict (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K a) = completedPullbackReductionArrow g d K b ≫ (completedReductionTargetTransition g d a b h).app K) ∧ (∀ (a b : ℕ) (h : a ≤ b), (reductionDerivedChange X (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K b) ≫ completedReductionTargetNormalization g d K a b h = (completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom ≫ completedPullbackReductionArrow g d K a) ∧ (∀ (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c), (reductionDerivedChange X (reductionCoefficientMap X d b a hab)).map (completedReductionTargetNormalization g d K b c hbc) ≫ completedReductionTargetNormalization g d K a b hab = (completedReductionQuotientAssoc d X a b c hab hbc ((completedReductionFiniteTarget g d c).obj K)).hom ≫ completedReductionTargetNormalization g d K a c (hab.trans hbc)) ∧ ∀ a : ℕ, completedReductionTargetNormalization g d K a a (le_refl a) = completedReductionUnit d X a ((completedReductionFiniteTarget g d a).obj K)",
-  "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-16",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-aaf8a361c",
-  "group": "N2",
-  "result": "pass",
-  "note": "Checked immutable statement, dependencies, sources, canonical constructions, all conclusion clauses, edge cases, universes, docstrings and records. Per-file scompile reproduction passed without diagnostics. No delivery errors found; no repository or branch head changed."
- }
+  "proof": [
+    {
+      "text": "Write $\\underline A_W$ for the constant coefficient ring on $W_{\\Proet}$, and $\\operatorname{Res}_W$ for restriction from $A_W$ to $\\underline A_W$. Set $N=Lg^*_{\\underline A}\\operatorname{Res}_T K$, in the constant-coefficient derived category on $T'$. By [def-weil-pbc-completed-pullback] and [lem-weil-pbc-constant-completion-equivalence], restriction of the defining pulled-back strict tower identifies it with the strict reduction tower $N_n=N\\otimes^L_{\\underline A_{T'}}\\underline{P_n}_{T'}$, and identifies its derived limit $\\operatorname{Res}_{T'}L$ with $\\widehat N=R\\lim_nN_n$, respecting the completion unit $\\eta:N\\to\\widehat N$ and all finite projections. The finite comparison is the canonical one to $Lg_n^*K_n$. These are comparisons of strict towers and their derived limits, not an exchange of pullback with an infinite limit. The coefficient hypotheses of [def-weil-pbc-complete-coefficient-datum] hold here: take $\\Lambda=A$ on $T'$, with the same ideal and perfect quotients as in [def-weil-pbc-adic-coefficient-datum].",
+      "uses": [
+        "def-weil-pbc-completed-pullback",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "def-weil-pbc-complete-coefficient-datum",
+        "def-weil-pbc-adic-coefficient-datum"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 099N, lemma-pushforward-Noetherian-case, clause (5), and Tag 099M, lemma-naive-completion; coefficient comparison as in the completed-pullback definition"
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-ringed-koszul-completion-reflector] on the small site $T'_{\\Proet}$ with $\\mathcal O=\\underline A_{T'}$ and the finite generators of $I$. Its Koszul derived limit is locally derived $I$-complete for any input $N$; no completeness of ordinary pullback is needed. By [lem-weil-pbc-constant-completion-equivalence], this Koszul limit is $\\widehat N$, with the same unit. That node identifies restriction of the completed-coefficient quotient limit with this constant-coefficient limit and identifies Koszul completeness with local completeness. Therefore $L$ is derived $I$-complete in precisely the intrinsic sense of [def-weil-pbc-intrinsic-completion]. More explicitly, apply the same reflector with $\\mathcal O=A_{T'}$ to $L$. Restriction identifies its Koszul unit with the Koszul unit of $\\operatorname{Res}_{T'}L=\\widehat N$: termwise tensor with the finite free Koszul factors commutes with restriction, and the derived-limit comparison is the one in [lem-weil-pbc-constant-completion-equivalence]. The latter unit is an isomorphism by the constant-coefficient reflector. Restriction is exact and does not change underlying abelian sheaves, so a cone becomes acyclic under restriction only if it was already acyclic. It therefore reflects isomorphisms, and the Koszul unit of $L$ is an isomorphism.",
+      "uses": [
+        "lem-weil-pbc-ringed-koszul-completion-reflector",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "def-weil-pbc-intrinsic-completion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebraization.tex",
+        "place": "Tags 099B and 0A0E, lemma-derived-completion and lemma-derived-completion-koszul; proetale.tex Tag 099M"
+      }
+    },
+    {
+      "text": "Put $R=\\underline A_{T'}$ and $S_a=\\underline{P_a}_{T'}$. The coefficient datum gives a bounded finite-projective $A$-complex representing $P_a$; taking constant sheaves gives a global strict-perfect package [def-weil-pbc-strict-perfect-coefficient-package]. Realize strict towers as modules on the site $\\mathcal C\\times\\mathbf N_{\\geq1}$, with arrows $(U,n)\\to(V,m)$ for $n\\leq m$ induced by arrows $U\\to V$, and coverings at a fixed index induced by coverings of $\\mathcal C=T'_{\\Proet}$. A sheaf there is exactly an inverse sequence of sheaves on $\\mathcal C$. Give it the ring sheaf $\\Delta R$. The projection defines a ringed-topos morphism $h$ with $h^{-1}=\\Delta$, $h_*=\\lim$, and identity coefficient map. Thus its total derived direct image is the strict $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], while $Lh^*F=\\Delta F$ since constant towers are exact. Apply [lemma-weil-pbc-projection-formula-totalization] to this $h$, the Koszul tower of $N$, and the global package $F$ representing $S_a$, using the arrows of [def-weil-pbc-projection-formula-arrows]. It gives the canonical isomorphism $(R\\lim X_m)\\otimes_R^L F\\to R\\lim(X_m\\otimes_R^L F)$. The ordinary representative specified in that definition is $x\\otimes f\\mapsto(x_m\\otimes f)_m$ on a tower K-injective resolution. Evaluation at $m$ therefore gives projection tensored with $1_F$. Likewise, for a strict compatible family $M\\to X_m$, its composite sends $z\\otimes f$ to the family of the images of $z$ tensored with $f$. These equalities of chain maps prove compatibility with evaluation and with the map induced from a constant tower, including the Koszul unit. The unit-preserving Koszul/quotient comparison of [lem-weil-pbc-constant-completion-equivalence] identifies its left side with $\\widehat N\\otimes_R^L S_a$ and its reduced unit with $r_a=\\eta\\otimes^L1$. Thus it remains to compute $R\\lim_m(N\\otimes_R^L Q_m(R)\\otimes_R^L S_a)$ and this reduced unit. Use one K-flat representative $C$ of $N$ [lem-pc-kflat-resolution]. Since $Q_m(R)$ is bounded finite free, the tensor is represented by $C\\otimes_R(Q_m(R)\\otimes_R S_a)$. For $m\\geq a$, every $a_j^m$ vanishes in $P_a$, so the Koszul differential is zero. Its degree-zero summand gives the constant tower $C\\otimes_R S_a$, and its negative-degree summands, indexed by nonempty subsets $J$ of the generators, have transition $m+a\\to m$ equal to multiplication by $\\prod_{j\\in J}a_j^a=0$. This is an equality of chain maps, even though $C$ is unbounded. The reduced unit is the inclusion into the degree-zero summand. The cone tower of that inclusion has zero transitions over a gap of $a$ on the tail. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit] its derived limit is zero, hence the inclusion induces an isomorphism on derived limits. Discarding the finitely many indices $m<a$ has no effect: extend the tail constantly at its first term to the earlier indices and map that tower into the original one by the original transitions; its cone tower is eventually zero, so the same theorem gives an isomorphism on derived limits. The constant tower has derived limit $C\\otimes_R S_a$: in the product triangle, the map from the product to $(C\\otimes_R S_a)\\oplus\\prod_n^D(C\\otimes_R S_a)$ with components first projection and $1-s$ is an isomorphism. Its inverse sends $(z,(y_n))$ to $(z,z-y_1,z-y_1-y_2,\\ldots)$; each component uses only a finite sum. Under this isomorphism $1-s$ is the second projection, whose split triangle has first term $C\\otimes_R S_a$ embedded diagonally. This also identifies its canonical unit as the identity. It follows that $r_a:N_a\\to\\widehat N\\otimes_R^L S_a$ is an isomorphism. Using the canonical derived adjunction of [def-weil-pbc-projection-formula-arrows] for the identity underlying topos with ring map $R\\to S_a$ (direct image is exact restriction of scalars), define $\\beta_a$ to be the scalar-extension adjoint of the level-$a$ projection $\\widehat N\\to\\operatorname{Res}N_a$. Step 4 will identify it with $r_a^{-1}$. The finite-reduction and evaluation comparisons of [lem-weil-pbc-constant-completion-equivalence] and [def-weil-pbc-completed-pullback] then identify $\\beta_a$ with the asserted projection-induced $\\alpha_a$. No theorem about an arbitrary tower recovering its levels is used.",
+      "uses": [
+        "def-weil-pbc-strict-perfect-coefficient-package",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+        "def-weil-pbc-completed-pullback",
+        "lemma-weil-pbc-projection-formula-totalization",
+        "def-weil-pbc-projection-formula-arrows"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+        "place": "Proof, Koszul reduction and pro-zero negative-degree calculation, with explicit quotient-tower hypotheses from step 1; tensor/limit exchange specializes order 1267 (lemma-weil-pbc-projection-formula-totalization) to the tower site of Stacks Tag 0940 (section-derived-limits), using Tag 0944 (lemma-projection-formula)."
+      }
+    },
+    {
+      "text": "In constant coefficients put $r_a=\\eta\\otimes^L1:N_a\\to\\widehat N\\otimes^L\\underline{P_a}_{T'}$ and denote the projection-induced map of step 3 by $\\beta_a$. Then $\\beta_a r_a=1_{N_a}$: write $p_a:\\widehat N\\to\\operatorname{Res}N_a$ for the projection and $u_a:N\\to\\operatorname{Res}N_a$ for the quotient unit. The projection-induced map $\\beta_a$ is the scalar-extension adjoint of $p_a$, and $p_a\\eta=u_a$. Consequently $\\beta_a(\\eta\\otimes^L1)$ is the scalar-extension adjoint of $u_a$, namely $1_{N_a}$, by the unit identity of the canonical derived adjunction of [def-weil-pbc-projection-formula-arrows], applied to the identity underlying topos with ring map $R\\to S_a$; its direct image is exact restriction of scalars and its derived pullback is extension of scalars. On a K-flat model its composite sends $x\\otimes s$ to $(x\\otimes1)s=x\\otimes s$. The unit/projection compatibility needed here is in [lem-weil-pbc-constant-completion-equivalence]. Since $r_a$ is an isomorphism by step 3, this identity proves $\\beta_a=r_a^{-1}$ and hence proves that $\\beta_a$ and its completed-coefficient counterpart $\\alpha_a$ are isomorphisms. Thus these isomorphisms and their inverses are natural in $K$: the finite comparisons and unit are natural, and inversion preserves a natural commuting square.",
+      "uses": [
+        "lem-weil-pbc-constant-completion-equivalence",
+        "def-weil-pbc-complete-coefficient-datum",
+        "def-weil-pbc-projection-formula-arrows"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
+        "place": "Detailed form, functoriality; the projection-induced reduction map is the inverse of the reduced completion unit"
+      }
+    },
+    {
+      "text": "For $b\\geq a$, naturality of tensoring the single map $\\eta$ with the quotient $P_b\\to P_a$ gives $\\widehat q_{b,a}r_b=r_aq_{b,a}$. Substituting $r_j=\\beta_j^{-1}$ and composing with the inverses gives $q_{b,a}\\beta_b=\\beta_a\\widehat q_{b,a}$, proving transition compatibility. For normalization, write $\\theta^N_{b,a}$ and $\\theta^{\\widehat N}_{b,a}$ for the scalar-extension associativity maps of [def-weil-pbc-complete-coefficient-datum]. Its naturality gives $\\theta^{\\widehat N}_{b,a}(r_b\\otimes^L1)=r_a\\theta^N_{b,a}$. Cancel the isomorphisms $r_a$ and $r_b\\otimes^L1$ to obtain $\\theta^N_{b,a}(\\beta_b\\otimes^L1)=\\beta_a\\theta^{\\widehat N}_{b,a}$. The normalization cocycle and unit law are those of the same coefficient-datum node: both three-level composites send $((x\\otimes t)\\otimes s)\\otimes v$ to $x\\otimes q_{c,a}(t)q_{b,a}(s)v$. Finally the natural finite comparisons in [lem-weil-pbc-constant-completion-equivalence] identify these equations with the equations for $\\alpha$ and the pulled-back tower; the completed-pullback definition identifies that tower including its transitions. This proves all stated compatibilities.",
+      "uses": [
+        "def-weil-pbc-complete-coefficient-datum",
+        "lem-weil-pbc-constant-completion-equivalence",
+        "def-weil-pbc-completed-pullback"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
+        "place": "Detailed form, last clause “compatible with the transition maps and normalization cocycles”, explicit cancellation and balanced tensor calculation"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lemma-weil-pbc-projection-formula-totalization"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-pullback-reduction.md",
+    "place": "Both Proof paragraphs; explicit Koszul-tail reduction calculation from order 1260 Proof, repaired to use actual quotient towers, plus Stacks Tags 099M, 099N, 0944 and 0940."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "derived complete completed pullback finite reduction functorial isomorphism",
+      "results": "CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.PreservesPullback.iso_hom, CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.PreservesPullback.iso, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory tensor pullback inverse limit",
+      "results": "0 hits; loogle: Unknown identifier `tensor`",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "derived.*pullback.*tensor|Rlim.*tensor",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived completion pullback reduction tower",
+      "results": "0 hits; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived inverse limit tensor finite quotient",
+      "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.HasLimit RInf",
+      "results": "0 hits; loogle: Unknown identifier `RInf`",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "R\\s*lim|inverse limit",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived complete completed pullback finite reduction functorial isomorphism",
+      "results": "CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Limits.PreservesPullback.iso_hom, CategoryTheory.Functor.relativelyRepresentable.toPullbackTerminal, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.PreservesPullback.iso, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory tensor pullback inverse limit",
+      "results": "0 hits; loogle: Unknown identifier `tensor`",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "derived.*pullback.*tensor|Rlim.*tensor",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived completion pullback reduction tower",
+      "results": "0 hits; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "adic completion tensor derived inverse limit finite quotient",
+      "results": "AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Limits.HasLimit inverse limit",
+      "results": "0 hits; loogle: Unknown identifier `inverse`",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "inverse limit|AdicCompletion",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived adic completion of pullback of sheaves of modules commutes with reduction modulo powers of an ideal",
+      "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AdicCompletion.map_val_apply, AdicCompletion.map_of, AdicCompletion.module, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, IsAdicComplete.of_comp_lift, AdicCompletion.map",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "derivedCompletion|completedPullback|derived.*complet|complet.*derived",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived completed pullback reduces to pullback of the quotient coefficient complex",
+      "results": "0 hits; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"AdicCompletion\"",
+      "results": "AdicCompletion, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.instAdd, AdicCompletion.instAddCommGroup, AdicCompletion.instNeg, AdicCompletion.instSub, AdicCompletion.instZero",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For any complex of sheaves its derived completion has the same derived tensor with each quotient ring as the original complex",
+      "results": "CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_map_app, Rep.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic module completion, underived sheaf pullback and Tor degree functors do not state derived completed pullback with all finite reductions and coherence"
+    },
+    {
+      "tool": "grep",
+      "query": "completion.*[Rr]eduction|[Dd]erived.*[Cc]ompletion|completed[Pp]ullback",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived completion reflector preserves tensor products with perfect quotient modules",
+      "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_naturality",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"IsAdicComplete\"",
+      "results": "IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary adic completeness and tensor products of modules do not state derived completion or completed sheaf pullback"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1262,
+  "blueprint_uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-finite-reduction-reconstruction",
+    "lemma-weil-pbc-adic-completion-reduction"
+  ],
+  "uses_not_cited": [
+    "lemma-weil-pbc-adic-completion-reduction"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "For every $n$,\n\n$$\n(Lg^*_{\\mathrm{comp}}K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow{\\sim}Lg^*K_n.\n$$",
+      "proof": "Derived pullback commutes with derived tensor, so its defining tower is the\nreduction tower of $Lg^*K$. Apply finite reduction of adic completion to\nthis object. Its level $n$ is\n$Lg^*K\\otimes^L_\\Lambda P_n\\simeq Lg^*(K\\otimes^L_\\Lambda P_n)=Lg^*K_n$.",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lemma-weil-pbc-completed-pullback-reduction",
+    "worker": "stage1",
+    "summary": "Expand finite reduction by the explicit Koszul-tail calculation and identify the projection-adjoint as the inverse of the reduced unit. Reuse the existing general ringed-topos projection-formula totalization at the tower topos; no new tensor/limit lemma is needed. Cite the canonical derived adjunction explicitly. The malformed arbitrary-tower completion-reduction node is not used; the statement is unchanged.",
+    "blueprint": "First Proof finite-reduction sentence is expanded in steps 3–4 by the order-1260 Koszul calculation on actual quotient towers. Tensor/limit exchange uses the existing order-1267 totalization theorem at the tower topos. Steps 1–2 give completeness and coefficient comparisons; step 5 proves the Detailed form transition, normalization, cocycle and unit clauses.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "A K-flat representative with flat terms computes the explicit reduced Koszul tower; the unit does not provide the general resolution-existence theorem."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pc-kflat-resolution"
+  ],
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NG-3aee9af86",
+    "group": "NG",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-3aee9af86 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Replaced the duplicate tensor/limit node with the existing general projection-formula totalization theorem and added the explicit derived-adjunction citation. Koszul reduction, projection-map identification, coefficient categories and normalization checks pass. Statement unchanged; review.md and corrected item JSON written.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedPullbackReduction",
+    "declaration": "AlgebraicGeometry.Scheme.completedPullback_reduction",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.completedPullbackFunctor",
+      "AlgebraicGeometry.Scheme.completedReductionModelPushforward_isRightAdjoint",
+      "AlgebraicGeometry.Scheme.completedReductionInverseImageGenerator",
+      "AlgebraicGeometry.Scheme.completedReductionRestrictionFactors",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteModules",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteDerived",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteTarget",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteTensor",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteGenerator",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinarySource_preservesZero",
+      "AlgebraicGeometry.Scheme.completedReductionLimitProjection",
+      "AlgebraicGeometry.Scheme.completedReductionQuotientAssoc",
+      "AlgebraicGeometry.Scheme.completedPullbackSourceNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionSectionEquation",
+      "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryComparisonNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison",
+      "AlgebraicGeometry.Scheme.completedReductionPulledModelMap",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteModelMap",
+      "AlgebraicGeometry.Scheme.HasCompletedReductionFiniteEvaluationNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists",
+      "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation",
+      "AlgebraicGeometry.Scheme.completedPullbackReductionArrow",
+      "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryTransitionNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition",
+      "AlgebraicGeometry.Scheme.HasCompletedReductionTargetTransitionNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists",
+      "AlgebraicGeometry.Scheme.completedReductionTargetTransition",
+      "AlgebraicGeometry.Scheme.completedReductionTargetNormalization",
+      "AlgebraicGeometry.Scheme.completedReductionOrdinaryRestrictionUnit_exists",
+      "AlgebraicGeometry.Scheme.completedReductionRestrictionUnit",
+      "AlgebraicGeometry.Scheme.completedReductionUnit",
+      "AlgebraicGeometry.Scheme.completedPullback_reduction"
+    ],
+    "file": "lean/Sheaf/Paper/CompletedPullbackReduction.lean",
+    "statement": "theorem completedPullback_reduction (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal) (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (C : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (e : DerivedCategory.Q.obj C ≅ K) (_hK : IsDerivedCompleteIntrinsic Y d r f hf K C e) : (∀ (P : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (eP : DerivedCategory.Q.obj P ≅ completedPullbackObject g d K), IsDerivedCompleteIntrinsic X d r f hf (completedPullbackObject g d K) P eP) ∧ (∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)) ∧ (∀ (K' : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (C' : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (e' : DerivedCategory.Q.obj C' ≅ K') (_hK' : IsDerivedCompleteIntrinsic Y d r f hf K' C' e') (v : K ⟶ K') (n : ℕ), (reductionDerivedChange X (completedReductionProjection X d n)).map ((completedPullbackFunctor g d).map v) ≫ completedPullbackReductionArrow g d K' n = completedPullbackReductionArrow g d K n ≫ (completedReductionFiniteTarget g d n).map v) ∧ (∀ (a b : ℕ) (h : a ≤ b), IsIso (completedReductionTargetNormalization g d K a b h) ∧ ((pbcDerivedScalarAdjunction (reductionCoefficientMap X d b a h)).homEquiv _ _ ((completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom)) ≫ (pbcDerivedRestrict (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K a) = completedPullbackReductionArrow g d K b ≫ (completedReductionTargetTransition g d a b h).app K) ∧ (∀ (a b : ℕ) (h : a ≤ b), (reductionDerivedChange X (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K b) ≫ completedReductionTargetNormalization g d K a b h = (completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom ≫ completedPullbackReductionArrow g d K a) ∧ (∀ (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c), (reductionDerivedChange X (reductionCoefficientMap X d b a hab)).map (completedReductionTargetNormalization g d K b c hbc) ≫ completedReductionTargetNormalization g d K a b hab = (completedReductionQuotientAssoc d X a b c hab hbc ((completedReductionFiniteTarget g d c).obj K)).hom ≫ completedReductionTargetNormalization g d K a c (hab.trans hbc)) ∧ ∀ a : ℕ, completedReductionTargetNormalization g d K a a (le_refl a) = completedReductionUnit d X a ((completedReductionFiniteTarget g d a).obj K)",
+    "branch": "newtargets-dag",
+    "by": "N2",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-aaf8a361c",
+    "group": "N2",
+    "result": "pass",
+    "note": "Checked immutable statement, dependencies, sources, canonical constructions, all conclusion clauses, edge cases, universes, docstrings and records. Per-file scompile reproduction passed without diagnostics. No delivery errors found; no repository or branch head changed."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "The object $Lg^*_{\\mathrm{comp}}K$ of\n[def-weil-pbc-completed-pullback] is derived $I$-complete, and for\nevery $n$ there is a functorial isomorphism\n\n$$\n (Lg^*_{\\mathrm{comp}}K)\\otimes_A^LP_n\n \\xrightarrow{\\sim}Lg_n^*K_n,\n$$\n\ncompatible with the transition maps and normalization cocycles.",
+    "proof": [
+      {
+        "text": "Completeness follows from the reconstruction of\n[def-weil-pbc-intrinsic-completion] applied to the tower defining\n[def-weil-pbc-completed-pullback]. Tensoring the defining derived\nlimit with $P_n$ and using the finite reduction of\n[lem-weil-pbc-finite-reduction-reconstruction] gives the displayed\nisomorphism, with the stated compatibilities inherited from the tower\nstructure.",
+        "uses": [
+          "def-weil-pbc-intrinsic-completion",
+          "def-weil-pbc-completed-pullback",
+          "lem-weil-pbc-finite-reduction-reconstruction"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Derived pullback commutes with derived tensor, so its defining tower is the\nreduction tower of $Lg^*K$. Apply finite reduction of adic completion to\nthis object. Its level $n$ is\n$Lg^*K\\otimes^L_\\Lambda P_n\\simeq Lg^*(K\\otimes^L_\\Lambda P_n)=Lg^*K_n$.",
+        "uses": [],
+        "elementary": null
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

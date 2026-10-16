@@ -1,323 +1,346 @@
 {
- "id": "lem-sf-hom-comparison-finite-free",
- "blueprint": {
-  "is": "lem-sf-hom-comparison-finite-free",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The internal-Hom comparison for a bounded free model",
- "statement": "Fix the global finite-field datum of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension], and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $T$ be a scheme on which $\\ell$ is invertible. On the small etale site $T_{\\mathrm{et}}$ take the constant coefficient ring sheaf $A_{T,\\mathrm{et}}$ and its module sheaves [def-weil-pbc-etale-sheaves]. Let $P'$ be a bounded cochain complex whose terms are finite free $A_{T,\\mathrm{et}}$-modules, meaning isomorphic to finite direct sums of $A_{T,\\mathrm{et}}$, and let $N$ be a bounded cochain complex of $A_{T,\\mathrm{et}}$-modules with constructible cohomology [def-weil-pbc-constructible-complexes].\n\nLet $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism], with the constant coefficient identification and exact module pullback $\\nu_T^*$ of [lem-sf-comparison-pullback-exact]. Use derived internal Hom on each of these ringed sites [def-pur-derived-internal-hom]. The canonical evaluation comparison\n$$\n\\nu_T^*R\\mathcal Hom_A(P',N)\\longrightarrow R\\mathcal Hom_A(\\nu_T^*P',\\nu_T^*N)\n$$\nis an isomorphism. Here the comparison is the one induced by pulling back evaluation: under the canonical bounded finite-free Hom-complex models [lem-weil-pbc-ringed-site-bounded-free-rhom-model], it is induced by the termwise maps $\\nu_T^*\\mathcal Hom_A(P'^i,N^j)\\to\\mathcal Hom_A(\\nu_T^*P'^i,\\nu_T^*N^j)$ obtained by currying the pullback of $\\mathcal Hom_A(P'^i,N^j)\\otimes_A P'^i\\to N^j$ [lem-pc-sheaf-modules-tensor-closed, lem-weil-pbc-ringed-topoi-module-pullback-tensor]. The second variable requires no etale finite-Tor hypothesis. Use the size convention of [def-weil-size-convention], so that the two coefficient sites are small in the universe used for module sheaves.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
-  "place": "node lem-sf-hom-comparison-finite-free, order 2083"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-sf-comparison-pullback-exact",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-weil-size-convention",
-  "def-sf-evaluation-hom-site-comparison"
- ],
- "proof": [
-  {
-   "text": "Write $F=\\nu_T^*$, $R=A_{T,\\mathrm{et}}$ and $S=A_{T,\\mathrm{proet}}$. The exact comparison-pullback lemma identifies $F(R)$ with $S$ and says that $F$ is additive and exact and sends quasi-isomorphisms to quasi-isomorphisms. Thus its action on the derived category is computed termwise. An additive functor preserves a finite biproduct: apply it to the equations $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i\\pi_i=1$. In particular $F(R^{\\oplus r})\\cong S^{\\oplus r}$, including $r=0$. The complexes $FP'$ and $FN$ have the same termwise support bounds as $P'$ and $N$, since $F(0)=0$.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R (section-comparison); sites-modules.tex Tag 04JC (lemma-flat-pullback-exact); blueprint proof, comparison pullback sentence"
-   }
+  "id": "lem-sf-hom-comparison-finite-free",
+  "blueprint": {
+    "is": "lem-sf-hom-comparison-finite-free",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For a finite-free term $M=R^{\\oplus r}$ and any module sheaf $B$, evaluation on the basis gives $\\mathcal Hom_R(M,B)\\cong B^{\\oplus r}$: on each slice a linear map is uniquely specified by the images of the $r$ basis sections, and restriction restricts those images. This proves the module identity used in the blueprint for arbitrary $B$, without applying the finite-Tor-only statement of lem-sf-hom-finite-projective. Curry the pulled-back evaluation using the module tensor comparison and tensor-Hom adjunction. The resulting $c_{M,B}:F\\mathcal Hom_R(M,B)\\to\\mathcal Hom_S(FM,FB)$ is, in these coordinates and the identifications of step 1, the identity on $(FB)^{\\oplus r}$: evaluation of $(b_1,\\ldots,b_r)$ on the $i$th basis vector is $b_i$ on both sides. Thus $c_{M,B}$ is an isomorphism. These maps commute with postcomposition and precomposition: after evaluation the two postcomposition composites send $(h,x)$ to $v(h(x))$, and the two precomposition composites send $(h,x)$ to $h(u(x))$. The natural tensor comparison and injectivity of currying identify the respective maps. This argument works for all maps of the finite-free terms, including matrices of nonconstant sections. For a term $M$ given only with an isomorphism $e:R^{\\oplus r}\\xrightarrow{\\sim}M$, precomposition with $e$ and with $Fe$ conjugates $c_{M,B}$ to $c_{R^{\\oplus r},B}$ by the precomposition identity just proved. Hence the conclusion holds for the actual terms of $P'$ and is independent of their chosen bases.",
-   "uses": [
+  "kind": "statement",
+  "title": "The internal-Hom comparison for a bounded free model",
+  "statement": "Fix the global finite-field datum of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension], and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $T$ be a scheme on which $\\ell$ is invertible. On the small etale site $T_{\\mathrm{et}}$ take the constant coefficient ring sheaf $A_{T,\\mathrm{et}}$ and its module sheaves [def-weil-pbc-etale-sheaves]. Let $P'$ be a bounded cochain complex whose terms are finite free $A_{T,\\mathrm{et}}$-modules, meaning isomorphic to finite direct sums of $A_{T,\\mathrm{et}}$, and let $N$ be a bounded cochain complex of $A_{T,\\mathrm{et}}$-modules with constructible cohomology [def-weil-pbc-constructible-complexes].\n\nLet $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism], with the constant coefficient identification and exact module pullback $\\nu_T^*$ of [lem-sf-comparison-pullback-exact]. Use derived internal Hom on each of these ringed sites [def-pur-derived-internal-hom]. The canonical evaluation comparison\n$$\n\\nu_T^*R\\mathcal Hom_A(P',N)\\longrightarrow R\\mathcal Hom_A(\\nu_T^*P',\\nu_T^*N)\n$$\nis an isomorphism. Here the comparison is the one induced by pulling back evaluation: under the canonical bounded finite-free Hom-complex models [lem-weil-pbc-ringed-site-bounded-free-rhom-model], it is induced by the termwise maps $\\nu_T^*\\mathcal Hom_A(P'^i,N^j)\\to\\mathcal Hom_A(\\nu_T^*P'^i,\\nu_T^*N^j)$ obtained by currying the pullback of $\\mathcal Hom_A(P'^i,N^j)\\otimes_A P'^i\\to N^j$ [lem-pc-sheaf-modules-tensor-closed, lem-weil-pbc-ringed-topoi-module-pullback-tensor]. The second variable requires no etale finite-Tor hypothesis. Use the size convention of [def-weil-size-convention], so that the two coefficient sites are small in the universe used for module sheaves.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
+    "place": "node lem-sf-hom-comparison-finite-free, order 2083"
+  },
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sf-comparison-pullback-exact",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-weil-size-convention",
+    "def-sf-evaluation-hom-site-comparison"
+  ],
+  "proof": [
+    {
+      "text": "Write $F=\\nu_T^*$, $R=A_{T,\\mathrm{et}}$ and $S=A_{T,\\mathrm{proet}}$. The exact comparison-pullback lemma identifies $F(R)$ with $S$ and says that $F$ is additive and exact and sends quasi-isomorphisms to quasi-isomorphisms. Thus its action on the derived category is computed termwise. An additive functor preserves a finite biproduct: apply it to the equations $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i\\pi_i=1$. In particular $F(R^{\\oplus r})\\cong S^{\\oplus r}$, including $r=0$. The complexes $FP'$ and $FN$ have the same termwise support bounds as $P'$ and $N$, since $F(0)=0$.",
+      "uses": [
+        "lem-sf-comparison-pullback-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 099R (section-comparison); sites-modules.tex Tag 04JC (lemma-flat-pullback-exact); blueprint proof, comparison pullback sentence"
+      }
+    },
+    {
+      "text": "For a finite-free term $M=R^{\\oplus r}$ and any module sheaf $B$, evaluation on the basis gives $\\mathcal Hom_R(M,B)\\cong B^{\\oplus r}$: on each slice a linear map is uniquely specified by the images of the $r$ basis sections, and restriction restricts those images. This proves the module identity used in the blueprint for arbitrary $B$, without applying the finite-Tor-only statement of lem-sf-hom-finite-projective. Curry the pulled-back evaluation using the module tensor comparison and tensor-Hom adjunction. The resulting $c_{M,B}:F\\mathcal Hom_R(M,B)\\to\\mathcal Hom_S(FM,FB)$ is, in these coordinates and the identifications of step 1, the identity on $(FB)^{\\oplus r}$: evaluation of $(b_1,\\ldots,b_r)$ on the $i$th basis vector is $b_i$ on both sides. Thus $c_{M,B}$ is an isomorphism. These maps commute with postcomposition and precomposition: after evaluation the two postcomposition composites send $(h,x)$ to $v(h(x))$, and the two precomposition composites send $(h,x)$ to $h(u(x))$. The natural tensor comparison and injectivity of currying identify the respective maps. This argument works for all maps of the finite-free terms, including matrices of nonconstant sections. For a term $M$ given only with an isomorphism $e:R^{\\oplus r}\\xrightarrow{\\sim}M$, precomposition with $e$ and with $Fe$ conjugates $c_{M,B}$ to $c_{R^{\\oplus r},B}$ by the precomposition identity just proved. Hence the conclusion holds for the actual terms of $P'$ and is independent of their chosen bases.",
+      "uses": [
+        "def-pur-sheaf-hom",
+        "lem-pc-sheaf-modules-tensor-closed",
+        "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 04TT (section-internal-hom), Tag 03EO (lemma-internal-hom-adjoint-tensor), Tag 03EL (lemma-tensor-product-pullback); blueprint termwise finite-free identity"
+      }
+    },
+    {
+      "text": "Choose $u\\leq v$ with $P'^i=0$ outside $[u,v]$. For the Hom complex $H=\\mathcal Hom^\\bullet_R(P',N)$, its degree $m$ product has only these finitely many potentially nonzero factors, so $H^m=\\bigoplus_{i=u}^v\\mathcal Hom_R(P'^i,N^{i+m})$. Its differential is $(dh)^i=d_Nh^i-(-1)^m h^{i+1}d_{P'}$. Apply $F$ and its finite-biproduct comparison from step 1; the direct sum of the isomorphisms $c_{P'^i,N^{i+m}}$ of step 2 gives $C^m:(FH)^m\\xrightarrow{\\sim}\\mathcal Hom^m_S(FP',FN)$. The two differential terms commute separately by the postcomposition and precomposition equations of step 2; additivity of $F$ preserves subtraction and $(-1)^m$. Hence $C$ is a chain isomorphism. This is the finite total-complex calculation in the blueprint: if $D=\\mathcal Hom_R^\\bullet(P',R[0])$, its degree $r$ term is $(P'^{-r})^\\vee$, with $d_D\\phi=(-1)^{r+1}\\phi d_{P'}$; the corresponding map $D^r\\otimes N^s\\to H^{r+s}$ sends $\\phi\\otimes n$ to the map $x\\mapsto(-1)^{rs}\\phi(x)n$ on $P'^{-r}$ and to zero on other terms. The postcomposition signs agree because $r+r(s+1)=rs$ modulo $2$, and the precomposition signs agree because $(r+1)s+r+1=rs+r+s+1$. Thus the dual uses degree $-r$, correcting the un-reversed dual index in the blueprint.",
+      "uses": [
+        "def-pur-hom-complex",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0A8X (section-hom-complexes); tensor convention: Tag 06YL (section-flat); blueprint first paragraph, total-complex signs"
+      }
+    },
+    {
+      "text": "Use the small skeletons in the common size convention. Apply the bounded-free derived-Hom-model lemma on $(T_{\\mathrm{et}},R)$ to $(P',N)$: $P'$ is bounded above, $N$ bounded below, and a finite-free term is a summand of itself via the identity maps. It gives the canonical isomorphism $QH\\cong R\\mathcal Hom_R(QP',QN)$. Apply the same lemma on $(T_{\\mathrm{proet}},S)$ to $(FP',FN)$, whose bounds and finite-free terms were checked in step 1. Since $F$ sends quasi-isomorphisms to quasi-isomorphisms, the first canonical model pulls back to $Q(FH)$. Localizing the chain isomorphism $C$ of step 3 and composing these canonical model isomorphisms therefore gives an isomorphism between the two objects in the statement. Neither application asks for flatness, projectivity, or finite Tor amplitude of $N$ or $FN$.",
+      "uses": [
+        "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+        "lem-sf-comparison-pullback-exact",
+        "def-weil-size-convention"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), applied on both sites"
+      }
+    },
+    {
+      "text": "Put $H_S=\\mathcal Hom_S^\\bullet(FP',FN)$ and write $a_R:Q_RH\\xrightarrow{\\sim}R\\mathcal Hom_R(Q_RP',Q_RN)$ and $a_S:Q_SH_S\\xrightarrow{\\sim}R\\mathcal Hom_S(Q_SFP',Q_SFN)$ for the canonical models of step 4. Let $F_D$ be the functor on derived categories induced by $F$, and identify $F_DQ_R$ with $Q_SF$ as in step 1. The concrete Hom-model specification of the comparison in the statement is the composite $a_S\\circ Q_S(C)\\circ(F_Da_R)^{-1}$. To check its evaluation description, on each tensor summand $H^m\\otimes_R P'^i$ evaluation is projection to $\\mathcal Hom_R(P'^i,N^{i+m})$ followed by module evaluation, with value $h^i(x)$. The defining currying equation of step 2 says that evaluation following $C^m$ on $FP'^i$ equals $F$ of this evaluation, after the module tensor comparison. Equality on these summands gives equality of the total evaluation maps. Evaluation is a chain map because $(dh)(x)+(-1)^m h(dx)=d_N(h(x))$, with the two precomposition terms cancelling by step 3. Under the K-injective description of derived internal Hom, postcomposition with the specified resolution map $\\eta_N:N\\to I(N)$ respects this identity term by term: $(\\eta_N\\circ h^i)(x)=\\eta_N(h^i(x))$; the identical equation applies to the resolution of $FN$. Thus the representative evaluations are compatible with the canonical model identifications, and the displayed composite is the specified evaluation comparison. Each of its three factors is invertible by steps 3 and 4.",
+      "uses": [
+        "def-pur-hom-complex",
+        "def-pc-tensor-complex-sheaves",
+        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "lem-pc-sheaf-modules-tensor-closed",
+        "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+        "def-pur-derived-internal-hom"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 08J7 (section-internal-hom), 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); blueprint last paragraph, evaluation agreement"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sf-comparison-pullback-exact",
     "def-pur-sheaf-hom",
     "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04TT (section-internal-hom), Tag 03EO (lemma-internal-hom-adjoint-tensor), Tag 03EL (lemma-tensor-product-pullback); blueprint termwise finite-free identity"
-   }
-  },
-  {
-   "text": "Choose $u\\leq v$ with $P'^i=0$ outside $[u,v]$. For the Hom complex $H=\\mathcal Hom^\\bullet_R(P',N)$, its degree $m$ product has only these finitely many potentially nonzero factors, so $H^m=\\bigoplus_{i=u}^v\\mathcal Hom_R(P'^i,N^{i+m})$. Its differential is $(dh)^i=d_Nh^i-(-1)^m h^{i+1}d_{P'}$. Apply $F$ and its finite-biproduct comparison from step 1; the direct sum of the isomorphisms $c_{P'^i,N^{i+m}}$ of step 2 gives $C^m:(FH)^m\\xrightarrow{\\sim}\\mathcal Hom^m_S(FP',FN)$. The two differential terms commute separately by the postcomposition and precomposition equations of step 2; additivity of $F$ preserves subtraction and $(-1)^m$. Hence $C$ is a chain isomorphism. This is the finite total-complex calculation in the blueprint: if $D=\\mathcal Hom_R^\\bullet(P',R[0])$, its degree $r$ term is $(P'^{-r})^\\vee$, with $d_D\\phi=(-1)^{r+1}\\phi d_{P'}$; the corresponding map $D^r\\otimes N^s\\to H^{r+s}$ sends $\\phi\\otimes n$ to the map $x\\mapsto(-1)^{rs}\\phi(x)n$ on $P'^{-r}$ and to zero on other terms. The postcomposition signs agree because $r+r(s+1)=rs$ modulo $2$, and the precomposition signs agree because $(r+1)s+r+1=rs+r+s+1$. Thus the dual uses degree $-r$, correcting the un-reversed dual index in the blueprint.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes); tensor convention: Tag 06YL (section-flat); blueprint first paragraph, total-complex signs"
-   }
-  },
-  {
-   "text": "Use the small skeletons in the common size convention. Apply the bounded-free derived-Hom-model lemma on $(T_{\\mathrm{et}},R)$ to $(P',N)$: $P'$ is bounded above, $N$ bounded below, and a finite-free term is a summand of itself via the identity maps. It gives the canonical isomorphism $QH\\cong R\\mathcal Hom_R(QP',QN)$. Apply the same lemma on $(T_{\\mathrm{proet}},S)$ to $(FP',FN)$, whose bounds and finite-free terms were checked in step 1. Since $F$ sends quasi-isomorphisms to quasi-isomorphisms, the first canonical model pulls back to $Q(FH)$. Localizing the chain isomorphism $C$ of step 3 and composing these canonical model isomorphisms therefore gives an isomorphism between the two objects in the statement. Neither application asks for flatness, projectivity, or finite Tor amplitude of $N$ or $FN$.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-size-convention"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), applied on both sites"
-   }
-  },
-  {
-   "text": "Put $H_S=\\mathcal Hom_S^\\bullet(FP',FN)$ and write $a_R:Q_RH\\xrightarrow{\\sim}R\\mathcal Hom_R(Q_RP',Q_RN)$ and $a_S:Q_SH_S\\xrightarrow{\\sim}R\\mathcal Hom_S(Q_SFP',Q_SFN)$ for the canonical models of step 4. Let $F_D$ be the functor on derived categories induced by $F$, and identify $F_DQ_R$ with $Q_SF$ as in step 1. The concrete Hom-model specification of the comparison in the statement is the composite $a_S\\circ Q_S(C)\\circ(F_Da_R)^{-1}$. To check its evaluation description, on each tensor summand $H^m\\otimes_R P'^i$ evaluation is projection to $\\mathcal Hom_R(P'^i,N^{i+m})$ followed by module evaluation, with value $h^i(x)$. The defining currying equation of step 2 says that evaluation following $C^m$ on $FP'^i$ equals $F$ of this evaluation, after the module tensor comparison. Equality on these summands gives equality of the total evaluation maps. Evaluation is a chain map because $(dh)(x)+(-1)^m h(dx)=d_N(h(x))$, with the two precomposition terms cancelling by step 3. Under the K-injective description of derived internal Hom, postcomposition with the specified resolution map $\\eta_N:N\\to I(N)$ respects this identity term by term: $(\\eta_N\\circ h^i)(x)=\\eta_N(h^i(x))$; the identical equation applies to the resolution of $FN$. Thus the representative evaluations are compatible with the canonical model identifications, and the displayed composite is the specified evaluation comparison. Each of its three factors is invertible by steps 3 and 4.",
-   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
     "def-pur-hom-complex",
     "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pc-sheaf-modules-tensor-closed",
     "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J7 (section-internal-hom), 08JI (lemma-Rhom-complex-of-direct-summands-finite-free); blueprint last paragraph, evaluation agreement"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sf-comparison-pullback-exact",
-  "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "def-pur-derived-internal-hom",
-  "def-weil-size-convention"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
-  "place": "Proof: finite-free coordinate identity and signed finite totalization, comparison pullback, and evaluation identification; derived models supplied by Stacks Tag 08JI"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "pullback comparison preserves internal Hom from a bounded complex of finite free modules",
-   "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, PresheafOfModules.pullbackObjIsDefined_free_yoneda, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullback",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    "def-pur-derived-internal-hom",
+    "def-weil-size-convention"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
+    "place": "Proof: finite-free coordinate identity and signed finite totalization, comparison pullback, and evaluation identification; derived models supplied by Stacks Tag 08JI"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.DerivedCategory, tensor, internalHom, finite free",
-   "results": "0 hits; none; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
-   "date": "2026-10-16",
-   "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "pullback comparison preserves internal Hom from a bounded complex of finite free modules",
+      "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, PresheafOfModules.pullbackObjIsDefined_free_yoneda, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullback",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.DerivedCategory, tensor, internalHom, finite free",
+      "results": "0 hits; none; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+      "date": "2026-10-16",
+      "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
+    },
+    {
+      "tool": "grep",
+      "query": "derivedHom|internalHom|finite free",
+      "results": "0 hits; none",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "leansearch",
+      "query": "bounded finite free complex tensor internal Hom derived category",
+      "results": "0 hits; none; service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "bounded finite free complex tensor internal Hom derived category",
+      "results": "8 hits; CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.isZero_Tor_succ_of_projective, Ext, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex, tensorObj, finite free",
+      "results": "0 hits; none; loogle: unknown identifier 'tensorObj'",
+      "date": "2026-10-16",
+      "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
+    },
+    {
+      "tool": "grep",
+      "query": "KFlat|kflat|derivedHom",
+      "results": "0 hits; none",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "leansearch",
+      "query": "finite free module internal Hom tensor evaluation naturality",
+      "results": "0 hits; none; service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "bounded complex finite free sheaf modules ordinary Hom equals dual tensor complex",
+      "results": "8 hits; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeMap, LightCondensed.ihomPoints, SheafOfModules.map_ιFree_mapFree_hom",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex, Hom, tensor, IsIso",
+      "results": "0 hits; none; loogle: unknown identifier 'Hom'",
+      "date": "2026-10-16",
+      "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
+    },
+    {
+      "tool": "grep",
+      "query": "KInjective|KFlat|derivedHom|internalHom|homComplex",
+      "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+      "date": "2026-10-16",
+      "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+    },
+    {
+      "tool": "leansearch",
+      "query": "bounded finite free sheaf complex internal Hom tensor dual chain isomorphism",
+      "results": "0 hits; none; service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"SheafOfModules\", \"pullback\"",
+      "results": "12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+      "date": "2026-10-16",
+      "verdict": "no match: underived presheaf pullback or external HomComplex infrastructure, without the derived internal sheaf Hom comparison"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"CochainComplex\", \"HomComplex\"",
+      "results": "12 hits; CochainComplex.HomComplex.Triplet, CochainComplex.HomComplex.Triplet.p, CochainComplex.HomComplex.Triplet.q, CochainComplex.HomComplex.Triplet.mk, CochainComplex.HomComplex.Triplet.hpq, CochainComplex.HomComplex.Cochain.diff, CochainComplex.HomComplex.Cocycle.diff, CochainComplex.HomComplex.Cochain",
+      "date": "2026-10-16",
+      "verdict": "no match: underived presheaf pullback or external HomComplex infrastructure, without the derived internal sheaf Hom comparison"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"SheafOfModules\", \"ihom\"",
+      "results": "0 hits; ",
+      "date": "2026-10-16",
+      "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
+    },
+    {
+      "tool": "grep",
+      "query": "pullback.*[Ii]hom|[Ii]hom.*pullback|[Hh]om.*[Cc]omparison",
+      "results": "25 hits; Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean",
+      "date": "2026-10-16",
+      "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "inverse image functor commutes with internal Hom of perfect complexes of sheaves",
+      "results": "8 hits; LightCondensed.ihomPoints_symm_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_apply, SheafOfModules.pushforwardNatIso_inv, LightCondensed.ihom_map_val_app, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app",
+      "date": "2026-10-16",
+      "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2083,
+  "blueprint_uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-tensor",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-site-perfect-complex",
+    "lem-sf-hom-finite-projective"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "derivedHom|internalHom|finite free",
-   "results": "0 hits; none",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-rf-shriek-preservation",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "lem-sf-hom-comparison-finite-free",
+    "worker": "stage1",
+    "summary": "Reused the existing arbitrary-ringed-site bounded-free Hom model (08JI), exact site-comparison pullback and module tensor comparison. No new nodes. Wrote the finite-free coordinate isomorphism, signed total-complex compatibility and evaluation identification explicitly. Corrected the ill-typed proetale-only site-perfect reference on an etale complex, replaced the nonexistent comparison-map definition by its evaluation/representative description, and made the coefficient data explicit. No hypothesis or conclusion changed mathematically; N has no finite-Tor hypothesis.",
+    "blueprint": "Proof first paragraph: finite-free Hom/dual-tensor coordinate identity, signed total-complex calculation, and exact monoidal comparison pullback, using 08JI for the derived computation. Proof second paragraph: explicit agreement on evaluation summands. The unit statement and its steps are unchanged.",
+    "tool_uses": [
+      {
+        "node": "lem-sf-comparison-pullback-exact",
+        "why": "Exactness and constant-coefficient identification for the specific comparison morphism; the unit does not supply this abelian-category tool."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+        "why": "Generic 08JI calculation on arbitrary ringed sites, used for both bounded free models, rather than a finite-Tor restriction of the second variable."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "why": "Generic 03EL underived tensor comparison needed to pull back evaluation; it does not replace any geometric step of the unit."
+      },
+      {
+        "node": "lem-pc-sheaf-modules-tensor-closed",
+        "why": "Generic 03EO module currying, used to define and compare the evaluation-induced module maps; no geometric theorem of another unit is substituted."
+      }
+    ]
   },
-  {
-   "tool": "leansearch",
-   "query": "bounded finite free complex tensor internal Hom derived category",
-   "results": "0 hits; none; service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "bounded finite free complex tensor internal Hom derived category",
-   "results": "8 hits; CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.isZero_Tor_succ_of_projective, Ext, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
-  },
-  {
-   "tool": "loogle",
-   "query": "HomologicalComplex, tensorObj, finite free",
-   "results": "0 hits; none; loogle: unknown identifier 'tensorObj'",
-   "date": "2026-10-16",
-   "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
-  },
-  {
-   "tool": "grep",
-   "query": "KFlat|kflat|derivedHom",
-   "results": "0 hits; none",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
-  },
-  {
-   "tool": "leansearch",
-   "query": "finite free module internal Hom tensor evaluation naturality",
-   "results": "0 hits; none; service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "bounded complex finite free sheaf modules ordinary Hom equals dual tensor complex",
-   "results": "8 hits; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeMap, LightCondensed.ihomPoints, SheafOfModules.map_ιFree_mapFree_hom",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
-  },
-  {
-   "tool": "loogle",
-   "query": "HomologicalComplex, Hom, tensor, IsIso",
-   "results": "0 hits; none; loogle: unknown identifier 'Hom'",
-   "date": "2026-10-16",
-   "verdict": "invalid query: Loogle rejected an unknown identifier; this is not evidence of absence. Valid quoted-name queries are recorded separately."
-  },
-  {
-   "tool": "grep",
-   "query": "KInjective|KFlat|derivedHom|internalHom|homComplex",
-   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
-   "date": "2026-10-16",
-   "verdict": "no match: underived sheaf free/pullback maps, external HomComplex and Tor of modules do not state the derived internal-Hom comparison between these two coefficient sites"
-  },
-  {
-   "tool": "leansearch",
-   "query": "bounded finite free sheaf complex internal Hom tensor dual chain isomorphism",
-   "results": "0 hits; none; service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SheafOfModules\", \"pullback\"",
-   "results": "12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
-   "date": "2026-10-16",
-   "verdict": "no match: underived presheaf pullback or external HomComplex infrastructure, without the derived internal sheaf Hom comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"CochainComplex\", \"HomComplex\"",
-   "results": "12 hits; CochainComplex.HomComplex.Triplet, CochainComplex.HomComplex.Triplet.p, CochainComplex.HomComplex.Triplet.q, CochainComplex.HomComplex.Triplet.mk, CochainComplex.HomComplex.Triplet.hpq, CochainComplex.HomComplex.Cochain.diff, CochainComplex.HomComplex.Cocycle.diff, CochainComplex.HomComplex.Cochain",
-   "date": "2026-10-16",
-   "verdict": "no match: underived presheaf pullback or external HomComplex infrastructure, without the derived internal sheaf Hom comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SheafOfModules\", \"ihom\"",
-   "results": "0 hits; ",
-   "date": "2026-10-16",
-   "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
-  },
-  {
-   "tool": "grep",
-   "query": "pullback.*[Ii]hom|[Ii]hom.*pullback|[Hh]om.*[Cc]omparison",
-   "results": "25 hits; Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Category/CompHausLike/SigmaComparison.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean",
-   "date": "2026-10-16",
-   "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "inverse image functor commutes with internal Hom of perfect complexes of sheaves",
-   "results": "8 hits; LightCondensed.ihomPoints_symm_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_apply, SheafOfModules.pushforwardNatIso_inv, LightCondensed.ihom_map_val_app, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app",
-   "date": "2026-10-16",
-   "verdict": "no exact match: hits concern underived sheaf pullback, light condensed modules, or unrelated comparison maps; none states this bounded-free derived internal sheaf Hom comparison"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2083,
- "blueprint_uses": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-site-perfect-complex",
-  "lem-sf-hom-finite-projective"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "lem-sf-hom-comparison-finite-free",
-  "worker": "stage1",
-  "summary": "Reused the existing arbitrary-ringed-site bounded-free Hom model (08JI), exact site-comparison pullback and module tensor comparison. No new nodes. Wrote the finite-free coordinate isomorphism, signed total-complex compatibility and evaluation identification explicitly. Corrected the ill-typed proetale-only site-perfect reference on an etale complex, replaced the nonexistent comparison-map definition by its evaluation/representative description, and made the coefficient data explicit. No hypothesis or conclusion changed mathematically; N has no finite-Tor hypothesis.",
-  "blueprint": "Proof first paragraph: finite-free Hom/dual-tensor coordinate identity, signed total-complex calculation, and exact monoidal comparison pullback, using 08JI for the derived computation. Proof second paragraph: explicit agreement on evaluation summands. The unit statement and its steps are unchanged.",
   "tool_uses": [
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Exactness and constant-coefficient identification for the specific comparison morphism; the unit does not supply this abelian-category tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "why": "Generic 08JI calculation on arbitrary ringed sites, used for both bounded free models, rather than a finite-Tor restriction of the second variable."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic 03EL underived tensor comparison needed to pull back evaluation; it does not replace any geometric step of the unit."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic 03EO module currying, used to define and compare the evaluation-induced module maps; no geometric theorem of another unit is substituted."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
- "reviewed": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-Codex-N8-14b451d93",
-  "group": "N8",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-14b451d93 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, exact master blueprint and Stacks sources in full. Verified all five steps, canonical evaluation comparison, coefficient sites, bounds, signs, nonflat edge cases, route and four tool uses. No new nodes, duplicate, missing dependency or cycle found. Written review.md; no fixes needed."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-332f7d2f6",
-  "group": "Q27",
-  "result": "pass",
-  "note": "Recorded review.md. Canonical evaluation map, hypotheses, dependencies, universes and edge cases agree with the node. All three immutable modules compile; signatures match exactly. No delivery faults found. Confirmed the separately reported deliver2.py substring-check bug.; reverted the delivery's change of existing node(s) lem-sf-comparison-pullback-exact (--revert-nodes; kept as on newtargets-dag)"
- },
- "lean": {
-  "module": "Sheaf.Paper.FiniteFreeHomComparison",
-  "declaration": "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison",
-  "file": "lean/Sheaf/Paper/FiniteFreeHomComparison.lean",
-  "statement": "theorem isIso_finiteFreeHomComparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (T : Scheme.{u}) (_hinv : IsUnit (l : T.presheaf.obj (op ⊤))) (P N : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ℤ) (_hP : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) (_hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ ∐ fun _ : Fin r ↦ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj (ModuleCat.of (Padic.coefficientExtensionRing l E n) (Padic.coefficientExtensionRing l E n)))) (_hN : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (N.X i)) (_hc : Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) T (_root_.DerivedCategory.Q.obj N)) : IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) T (_root_.DerivedCategory.Q.obj P) (_root_.DerivedCategory.Q.obj N))",
-  "branch": "newtargets-dag",
-  "by": "Q27",
-  "date": "2026-10-16",
-  "existing": false,
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteFreeHomComparison_coefficientFinite",
-   "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison"
-  ]
- }
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pc-sheaf-modules-tensor-closed"
+  ],
+  "reviewed": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-Codex-N8-14b451d93",
+    "group": "N8",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-14b451d93 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, exact master blueprint and Stacks sources in full. Verified all five steps, canonical evaluation comparison, coefficient sites, bounds, signs, nonflat edge cases, route and four tool uses. No new nodes, duplicate, missing dependency or cycle found. Written review.md; no fixes needed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-332f7d2f6",
+    "group": "Q27",
+    "result": "pass",
+    "note": "Recorded review.md. Canonical evaluation map, hypotheses, dependencies, universes and edge cases agree with the node. All three immutable modules compile; signatures match exactly. No delivery faults found. Confirmed the separately reported deliver2.py substring-check bug.; reverted the delivery's change of existing node(s) lem-sf-comparison-pullback-exact (--revert-nodes; kept as on newtargets-dag)"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.FiniteFreeHomComparison",
+    "declaration": "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison",
+    "file": "lean/Sheaf/Paper/FiniteFreeHomComparison.lean",
+    "statement": "theorem isIso_finiteFreeHomComparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (T : Scheme.{u}) (_hinv : IsUnit (l : T.presheaf.obj (op ⊤))) (P N : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ℤ) (_hP : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) (_hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ ∐ fun _ : Fin r ↦ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj (ModuleCat.of (Padic.coefficientExtensionRing l E n) (Padic.coefficientExtensionRing l E n)))) (_hN : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (N.X i)) (_hc : Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) T (_root_.DerivedCategory.Q.obj N)) : IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) T (_root_.DerivedCategory.Q.obj P) (_root_.DerivedCategory.Q.obj N))",
+    "branch": "newtargets-dag",
+    "by": "Q27",
+    "date": "2026-10-16",
+    "existing": false,
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.finiteFreeHomComparison_coefficientFinite",
+      "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison"
+    ]
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$, and let $T$ be a scheme on which $\\ell$ is\ninvertible. Let $P'$ be a bounded complex of finite free\n$A_{T,\\Et}$-modules, so that $P'$ is\nsite-perfect in the sense of\n[def-weil-site-perfect-complex], and let $N$ be a bounded complex of\n$A$-module sheaves with constructible cohomology on the small étale site\nof $T$, in the sense of\n[def-weil-pbc-constructible-complexes]. For the comparison morphism\n$\\nu_T:T_{\\Proet}\\to T_{\\Et}$ of\n[def-weil-pbc-site-comparison-morphism] the comparison map of\n[def-weil-derived-pullback-tensor-hom],\n\n$$\n\\nu_T^*R\\mathcal H om_A(P',N)\\longrightarrow\nR\\mathcal H om_A(\\nu_T^*P',\\nu_T^*N),\n$$\n\nis an isomorphism.",
+    "proof": [
+      {
+        "text": "Write $P'^\\vee=R\\mathcal H om_A(P',A_T)$, so that\n$P'^{\\vee,i}=\\mathcal H om_A(P'^i,A_T)$ is again finite free. For a\nbounded complex $P'$ of finite free modules the termwise identity\n$\\mathcal H om_A(P'^i,N^j)\\cong(P'^i)^\\vee\\otimes_AN^j$ of\n[lem-sf-hom-finite-projective], with the total-complex signs, is a\ncomputation of finite free modules and uses nothing about $N$ beyond its\nbeing a complex of modules; it gives\n\n$$\nP'^\\vee\\otimes_A^LN\\cong R\\mathcal H om_A(P',N),\n$$\n\nthe finite free modules being flat, so that the derived tensor product of\n[def-weil-derived-tensor] is computed by the ordinary tensor complex.\nThe comparison pullback $\\nu_T^*$ is exact, is monoidal and carries finite\nfree modules to finite free modules by\n[def-weil-derived-pullback-tensor-hom]; hence\n$\\nu_T^*(P'^\\vee)\\cong(\\nu_T^*P')^\\vee$ termwise, and the same computation\non the pro-étale side, applied to the bounded complex $\\nu_T^*P'$ of\nfinite free modules and to $\\nu_T^*N$, gives\n\n$$\nR\\mathcal H om_A(\\nu_T^*P',\\nu_T^*N)\n\\cong(\\nu_T^*P')^\\vee\\otimes_A^L\\nu_T^*N\n\\cong\\nu_T^*\\bigl(P'^\\vee\\otimes_A^LN\\bigr)\n\\cong\\nu_T^*R\\mathcal H om_A(P',N).\n$$",
+        "uses": [
+          "lem-sf-hom-finite-projective",
+          "def-weil-derived-tensor",
+          "def-weil-derived-pullback-tensor-hom"
+        ],
+        "elementary": false
+      },
+      {
+        "text": "Both the comparison map and this composite are induced by the evaluation of\n[lem-sf-hom-finite-projective] and its pullback, so they agree, and the\ncomparison is an isomorphism.",
+        "uses": [
+          "lem-sf-hom-finite-projective"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

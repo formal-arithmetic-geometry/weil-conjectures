@@ -1,146 +1,512 @@
 {
- "id": "lem-amb-etale-adjoint-locality",
- "blueprint": {
-  "is": "lem-amb-etale-adjoint-locality",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Etale localization of the ambient adjoint",
- "statement": "Let $A$ be a commutative ring. Use the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of constant-ring module sheaves [def-weil-pbc-derived-categories]. For a separated etale morphism $u:U\\to X$ of finite type [def-weil-etale-morphism, def-weil-scheme-morphism-properties], etale sum extension $u_!$ [def-weil-pbc-etale-sum-extension] is exact on sheaves, and its termwise derived functor is left adjoint to $u^*$ on these whole derived categories. For the compact-support assertion assume in addition that $A$ is finite. If $f:X\\to S$ and $fu:U\\to S$ are compactifiable morphisms between Noetherian schemes [def-asd-compactifiable, def-amb-etale-compact-support], and $f^\\times,(fu)^\\times$ denote their ordinary etale compact-support right adjoints [thm-amb-etale-exceptional-adjoint], then for every $K\\in D(S_{\\mathrm{et}},A)$ there is a canonical natural isomorphism\n$$u^*f^\\times K\\cong(fu)^\\times K.$$\nThe notation refers only to ordinary etale compact supports.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-  "place": "node lem-amb-etale-adjoint-locality, order 1566"
- },
- "stmt_deps": [
-  "def-amb-etale-compact-support",
-  "def-asd-compactifiable",
-  "def-weil-pbc-derived-categories",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-etale-morphism",
-  "def-weil-pbc-etale-sum-extension",
-  "thm-amb-etale-exceptional-adjoint",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-amb-etale-compact-comparisons"
- ],
- "proof": [
-  {
-   "text": "Identify $U_{\\mathrm{et}}$ with the localized site $X_{\\mathrm{et}}/U$: an object on either side is an etale $V\\to X$ with a lift $V\\to U$, and the morphisms and covering families are the same. Composition and etale base change are supplied by [lem-weil-pbc-etale-localization-functor-adjoint]. For the converse, the graph of a lift $V\\to U$ is a section of the etale projection, separated by [lem-weil-pbc-separated-base-change], $V\\times_XU\\to V$, so is an open immersion by [lem-weil-pbc-etale-section-clopen-immersion]. Its composite with the etale projection $V\\times_XU\\to U$ is etale. Thus the sites have exactly the same objects, arrows and jointly surjective covers. Apply [lem-pur-site-restriction-module-adjunction-exact] to the constant sheaf of rings $A_X$. Its restriction is $A_U$, its extension is precisely the direct-sum sheafification of [def-weil-pbc-etale-sum-extension], and its restriction is $u^*$: the sectionwise identification of inverse image with restriction is [lem-weil-pbc-etale-inverse-image-restriction], For each $a\\in A$, multiplication by $a$ is an endomorphism of the underlying abelian sheaf; naturality of that node's isomorphism $\\rho_G$ for this endomorphism gives $\\rho_G\\circ u^{-1}(a)=a\\circ\\rho_G$. A section of the constant ring sheaf is locally represented by an element of $A$; the preceding equality on such a cover and the sheaf axiom therefore show that $\\rho_G$ is $A_X$-linear, and the identification holds for constant-ring module sheaves. Consequently $u_!$ and $u^*$ are exact and $u_!\\dashv u^*$ on module sheaves.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-pur-site-restriction-module-adjunction-exact",
+  "id": "lem-amb-etale-adjoint-locality",
+  "blueprint": {
+    "is": "lem-amb-etale-adjoint-locality",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Etale localization of the ambient adjoint",
+  "statement": "Let $A$ be a commutative ring. Use the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of constant-ring module sheaves [def-weil-pbc-derived-categories]. For a separated etale morphism $u:U\\to X$ of finite type [def-weil-etale-morphism, def-weil-scheme-morphism-properties], etale sum extension $u_!$ [def-weil-pbc-etale-sum-extension] is exact on sheaves, and its termwise derived functor is left adjoint to $u^*$ on these whole derived categories. For the compact-support assertion assume in addition that $A$ is finite. If $f:X\\to S$ and $fu:U\\to S$ are compactifiable morphisms between Noetherian schemes [def-asd-compactifiable, def-amb-etale-compact-support], and $f^\\times,(fu)^\\times$ denote their ordinary etale compact-support right adjoints [thm-amb-etale-exceptional-adjoint], then for every $K\\in D(S_{\\mathrm{et}},A)$ there is a canonical natural isomorphism\n$$u^*f^\\times K\\cong(fu)^\\times K.$$\nThe notation refers only to ordinary etale compact supports.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+    "place": "node lem-amb-etale-adjoint-locality, order 1566"
+  },
+  "stmt_deps": [
+    "def-amb-etale-compact-support",
+    "def-asd-compactifiable",
+    "def-weil-pbc-derived-categories",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-etale-morphism",
     "def-weil-pbc-etale-sum-extension",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-etale-compact-comparisons"
+  ],
+  "proof": [
+    {
+      "text": "Identify $U_{\\mathrm{et}}$ with the localized site $X_{\\mathrm{et}}/U$: an object on either side is an etale $V\\to X$ with a lift $V\\to U$, and the morphisms and covering families are the same. Composition and etale base change are supplied by [lem-weil-pbc-etale-localization-functor-adjoint]. For the converse, the graph of a lift $V\\to U$ is a section of the etale projection, separated by [lem-weil-pbc-separated-base-change], $V\\times_XU\\to V$, so is an open immersion by [lem-weil-pbc-etale-section-clopen-immersion]. Its composite with the etale projection $V\\times_XU\\to U$ is etale. Thus the sites have exactly the same objects, arrows and jointly surjective covers. Apply [lem-pur-site-restriction-module-adjunction-exact] to the constant sheaf of rings $A_X$. Its restriction is $A_U$, its extension is precisely the direct-sum sheafification of [def-weil-pbc-etale-sum-extension], and its restriction is $u^*$: the sectionwise identification of inverse image with restriction is [lem-weil-pbc-etale-inverse-image-restriction], For each $a\\in A$, multiplication by $a$ is an endomorphism of the underlying abelian sheaf; naturality of that node's isomorphism $\\rho_G$ for this endomorphism gives $\\rho_G\\circ u^{-1}(a)=a\\circ\\rho_G$. A section of the constant ring sheaf is locally represented by an element of $A$; the preceding equality on such a cover and the sheaf axiom therefore show that $\\rho_G$ is $A_X$-linear, and the identification holds for constant-ring module sheaves. Consequently $u_!$ and $u^*$ are exact and $u_!\\dashv u^*$ on module sheaves.",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "lem-pur-site-restriction-module-adjunction-exact",
+        "def-weil-pbc-etale-sum-extension",
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "lem-weil-pbc-etale-localization-functor-adjoint",
+        "lem-weil-pbc-etale-section-clopen-immersion",
+        "lem-weil-pbc-separated-base-change"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 03S3, definition-extension-zero; Tag 03DJ (sites-modules-lemma-extension-by-zero-exact)"
+      }
+    },
+    {
+      "text": "The preceding exact functors induce termwise functors on unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. The sheaf adjunction gives a complex adjunction: its transpose commutes with differentials by naturality, and the units and counits are chain maps. Descend these natural transformations using [lem-weil-pbc-localization-universal-property]. The two triangle identities hold after precomposition with localization, since they hold degreewise; clause (3) of that node makes them hold on the derived categories. Hence the descended functors are adjoint, without any boundedness condition.",
+      "uses": [
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Proof, first paragraph: both functors exact, adjunction descends termwise"
+      }
+    },
+    {
+      "text": "For the compact-support comparison work between the Noetherian schemes in the second assertion. On affine charts the etale ring-map result [lem-weil-pbc-etale-ring-map-quasi-finite] says that $u$ is quasi-finite; this is local on the affine charts in the definition. Since $u$ is separated and finite type and $X$ is quasi-compact by the Noetherian hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], [thm-pqf-zmt-factorization] supplies $u=pj$ with $j:U\\hookrightarrow T$ open and $p:T\\to X$ finite. The finite map is proper by [lem-weil-pbc-finite-proper], so this really is a compactification. Its finite-type source $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Construct the comparison on the defining presheaf. For a lift $a:V\\to U$ over $X$, its graph in $U\\times_XV$ is open by [lem-weil-pbc-etale-section-clopen-immersion]; since $U\\times_XV$ is open in $T\\times_XV$ by [lem-weil-pbc-open-immersion-base-change], the graph is open there too. Both projections to $V$ are separated by [lem-weil-pbc-separated-base-change]. The graph is a section of the separated $T\\times_XV\\to V$, so is closed there by [lem-weil-pbc-section-separated-closed-immersion]. Extend a section of $F(V,a)$ by zero on this open-and-closed graph. For a test morphism $b:V'\\to V$, the inverse image of the graph of $a$ is exactly the graph of $ab$: on this component the section restricts to $s|_{V'}$, and on its open complement zero restricts to zero. These two restrictions cover $T\\times_XV'$, so the sheaf axiom proves equality with the section constructed from $ab$. This also commutes with a morphism $F\\to F'$, component by component. Summing gives a natural presheaf map into $(p_*j_!F)(V)$, hence a sheaf map $u_!F\\to p_*j_!F$. By [lem-amb-etale-sum-stalks], [lemma-weil-pbc-finite-stalk-formula], and [lem-weil-pbc-extension-by-zero-stalks], the stalk map sends a generator represented by $(V,\\bar v,a,s)$ to the tuple with germ $[s]$ at $a\\bar v$ and zero at every other point of $T_{\\bar x}$. Indeed the graph has exactly the point $a\\bar v$ in that fibre, and its complement carries the zero section. Thus this map is the identity on the finite sum $\\bigoplus_{\\bar z\\in U_{\\bar x}}F_{\\bar z}$; the boundary summands are zero. The finite-stalk formula is $A$-linear since the maps are evaluations of sections. Forgetting $A$ reflects isomorphisms, so [lemma-weil-pbc-geometric-stalk-conservative] proves $u_!\\cong p_*j_!$.",
+      "uses": [
+        "lem-weil-pbc-etale-ring-map-quasi-finite",
+        "thm-pqf-zmt-factorization",
+        "def-weil-pbc-etale-sum-extension",
+        "lem-amb-etale-sum-stalks",
+        "lemma-weil-pbc-finite-stalk-formula",
+        "lem-weil-pbc-extension-by-zero-stalks",
+        "lemma-weil-pbc-geometric-stalk-conservative",
+        "lem-weil-pbc-etale-section-clopen-immersion",
+        "lem-weil-pbc-section-separated-closed-immersion",
+        "lem-weil-pbc-etale-localization-functor-adjoint",
+        "lem-weil-pbc-finite-proper",
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "lem-weil-pbc-separated-base-change",
+        "lem-weil-pbc-open-immersion-base-change",
+        "lem-weil-pbc-locally-noetherian-quasi-separated"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tags 03S5 (proposition-describe-jshriek), 03QP (proposition-finite-higher-direct-image-zero); literature/stacks-project/more-morphisms.tex Tag 05K0"
+      }
+    },
+    {
+      "text": "Finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]; forgetting the constant $A$-action detects exactness. Thus [lem-weil-pbc-exact-functor-derived-functor] identifies its unbounded total derived functor with termwise descent. Descend step 3's natural sheaf isomorphism by [lem-weil-pbc-localization-universal-property]. We obtain $Du_!\\cong Rp_*Dj_!$, the fixed-compactification candidate of [def-amb-etale-compact-support]. This step makes no use of compactification independence or composition on unbounded objects.",
+      "uses": [
+        "lemma-weil-pbc-finite-direct-image-exact",
+        "lem-weil-pbc-exact-functor-derived-functor",
+        "lem-weil-pbc-localization-universal-property",
+        "def-amb-etale-compact-support"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Repair of Proof, second paragraph: unbounded comparison"
+      }
+    },
+    {
+      "text": "Construct the comparison maps before asserting their invertibility. For every scheme map $h$, exact module inverse image is left adjoint to module direct image by [prop-weil-pbc-inverse-image-modules-exact]. Direct image carries K-injectives to K-injectives: for an acyclic complex $C$, the complex adjunction identifies maps $C\\to h_*I$ up to homotopy with maps $h^*C\\to I$, which vanish since $h^*C$ is acyclic. The bijection of [lem-weil-pbc-kinjective-hom-derived], applied after K-injective resolution as in [def-amb-etale-compact-support], therefore gives $h^*\\dashv Rh_*$ on unbounded categories. Open restriction $a^*$ also preserves K-injectives: its exact left adjoint $Da_!$ is step 2 for the open immersion $a$. In an open Cartesian square with proper $p:T\\to B$, open $a:V\\to B$, pullback open $b:T_V\\to T$, and $p_V:T_V\\to V$, the sheaf identity $a^*p_*=p_{V*}b^*$ follows directly by evaluating on an etale test object of $V$ [def-weil-pbc-direct-image]. Applying it to a K-injective complex gives an unbounded natural isomorphism $a^*Rp_*\\cong Rp_{V*}b^*$: $b^*I$ is K-injective by the preceding argument. Consequently define, for every unbounded $N$, the proper/open map\n$$\\beta_N:Da_!Rp_{V*}N\\longrightarrow Rp_*Db_!N$$\nas the $Da_!\\dashv a^*$ transpose of the inverse open-restriction isomorphism $Rp_{V*}N\\cong a^*Rp_*Db_!N$; here $b^*Db_!N=N$, since extension by zero restricts back to its original sheaf, degreewise [lem-weil-pbc-extension-by-zero-stalks]. For a proper refinement $q:T_1\\to T_2$ of open immersions $j_i:Z\\hookrightarrow T_i$, the same open restriction identifies $j_2^*Rq_*Dj_{1!}M$ with $M$. Indeed $Z$ is an open-and-closed section of $T_1\\times_{T_2}Z\\to Z$ by [lem-weil-pbc-open-section-clopen], so pushforward of its extension by zero is the identity on this component and zero on its complementary component. The clopen decomposition [lem-weil-pbc-etale-sheaf-clopen-product] identifies the module category with the product of its two module categories (the actions and morphisms are componentwise). Extension on the section is both adjoints to restriction, so carries K-injectives to K-injectives by the complex Hom argument already given. Pushforward then computes the identity on this component and zero on the other, also on unbounded derived categories. Define $\\alpha_M:Dj_{2!}M\\to Rq_*Dj_{1!}M$ as the transpose of this identification. These formulas are natural transformations on the unbounded categories, not arbitrary extensions of transformations from $D^+$. For composable scheme maps $h$ and $g$, take a K-injective representative $I$. The preceding preservation result means $h_*I$ is K-injective, so $Rg_*Rh_*QI=Q(g_*h_*I)=Q((gh)_*I)=R(gh)_*QI$. The middle equality is the canonical identification of iterated fibre products in the sectionwise direct-image definition. Maps are represented by homotopy classes between K-injectives, and both composites send such a class to the same $g_*h_*$ class. This proves naturality and associativity of ordinary unbounded direct-image composition, for any coefficient ring and without an invertible-prime assumption.",
+      "uses": [
+        "prop-weil-pbc-inverse-image-modules-exact",
+        "lem-weil-pbc-kinjective-hom-derived",
+        "def-amb-etale-compact-support",
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-extension-by-zero-stalks",
+        "lem-weil-pbc-open-section-clopen",
+        "lem-weil-pbc-proper-base-change",
+        "lem-weil-pbc-open-immersion-base-change",
+        "lem-weil-pbc-etale-sheaf-clopen-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Repair of Proof, second paragraph: unbounded comparison"
+      }
+    },
+    {
+      "text": "The unbounded comparison maps in step 5 are defined by the same units, counits and open-restriction identities as the bounded-below maps. Their coherence does not require detecting equality by telescopes. For two successive refinements $q,r$, restrict the composite $Rr_*\\alpha_q\\circ\\alpha_r$ along the final open immersion. Open restriction turns each $\\alpha$ into the identity of $M$, so the restricted composite is the identity as well. The $Dj_!\\dashv j^*$ bijection now implies that this composite equals $\\alpha_{rq}$ after the associative ordinary direct-image identification proved in step 5. This is equality of adjoint transposes; restriction need not be faithful on arbitrary morphisms. For composable compactifiable maps, construct nested compactifications explicitly. For $Z\\xrightarrow{h}Y\\xrightarrow{g}S$, compactify $g$ as $Y\\xrightarrow{v}\\overline Y\\to S$ and compactify $vh$ as $Z\\xrightarrow{a}\\overline Z\\xrightarrow{p}\\overline Y$ by [thm-nagata-compactification]. Every open piece of a Noetherian scheme is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; applying this to intersections with affine opens shows that $v$ is quasi-compact. Thus $v$ is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The composite $vh$ is finite type: on affine charts finite lists of algebra generators concatenate, and finite covers of the preimages concatenate [def-weil-finite-type-morphism]. It is separated: the diagonal factors through $Z\\times_Y Z$ as the closed diagonal of $h$, followed by the closed base change of the diagonal of $v$; for an open immersion the diagonal is an isomorphism [def-weil-proper-morphism, lem-weil-pbc-separated-base-change]. Hence $vh$ has the hypotheses for Nagata; $\\overline Y$ is quasi-compact and quasi-separated. Thus the cited existence assertion applies. The resulting proper source $\\overline Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Put $V=\\overline Z\\times_{\\overline Y}Y$ with open $b:V\\to\\overline Z$ and proper $p_Y:V\\to Y$. Then $Z\\hookrightarrow V\\to Y$ compactifies $h$, and the composite compactification of $gh$ is $Z\\xrightarrow{a}\\overline Z\\to S$. Apply $\\beta$ to the extension by zero from $Z$ to $V$, and then apply the proper direct image from $\\overline Y$ to $S$. The proper/open map $\\beta$ of step 5, open-extension composition [lem-cbc-extension-zero-composition], and ordinary direct-image composition proved in step 5, give a natural map $c:Rf_!Du_!\\to R(fu)_!$ for the nested compactifications after step 4. Invertibility will be proved in step 7. For three factors, the two proper/open composites are transposes under the composite open-extension adjunction of the same open-restriction identity: on a test object inside the smallest open both are evaluation on the same iterated fibre product. The counit of the composite adjunction is $\\varepsilon^a\\circ Da_!(\\varepsilon^b)$; substituting it makes the two transposes equal by naturality of $\\varepsilon^a$ and the triangle identities. Associativity of proper direct image and open extension then gives associativity of composition. After invertibility is established in step 7, comparing with different nested compactifications through a common proper refinement [lem-cbc-compactifiable-cofiltered] is independent of the refinement by the preceding identity for $\\alpha$. These equations establish coherence of the constructed maps; after step 7 establishes invertibility they give coherent unbounded composition.",
+      "uses": [
+        "thm-nagata-compactification",
+        "lem-cbc-extension-zero-composition",
+        "lem-cbc-compactifiable-cofiltered",
+        "lem-weil-pbc-proper-base-change",
+        "lem-weil-pbc-open-immersion-base-change",
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+        "lem-weil-pbc-qc-open-immersion-finite-type",
+        "def-weil-finite-type-morphism",
+        "def-weil-proper-morphism",
+        "lem-weil-pbc-separated-base-change"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Repair of Proof, second paragraph: unbounded comparison"
+      }
+    },
+    {
+      "text": "For the second assertion $A$ is now a finite commutative ring. Only now use [lem-amb-etale-compact-comparisons], and only on bounded-below input over this finite ring: its proper-refinement and usual-composition assertions give invertibility in that range. The maps here have the prescribed identity transpose over the source, and the proper/open transpose defining usual composition, so these are the comparisons named in that statement. Extend invertibility, not existence, by an explicit telescope. All the functors on the two sides are exact: termwise open extension is triangulated by [lem-sf-exact-functor-derived-triangulated] and total direct image is triangulated by [lem-pc-right-derived-functor-triangulated]. They preserve coproducts: open extension is a left adjoint by step 2, and proper direct image preserves them as follows. For each proper map $r:V\\to T$ in the construction, $T$ is Noetherian and hence quasi-compact. Apply [lem-fin-finite-type-fibre-dimension-bound] to choose $d\\geq0$ bounding its ordinary fibre dimensions. Every $A$-module sheaf is killed by a positive integer: the order of the additive element $1\\in A$ kills the unit and hence every section (for the zero ring use the integer 1). Its underlying abelian sheaf is therefore torsion. [lem-kun-proper-torsion-cd-bound] gives abelian higher-direct-image vanishing above $2d$. The isomorphism $b_r$ and the cohomology/forgetting assertion in [lem-kun-unbounded-abelian-exchange-comparison], applied to a sheaf in degree zero (choose identity maps to complete a Cartesian square), transfer that bound to module higher direct images. Forgetting is conservative, so vanishing of their underlying abelian sheaves is vanishing in modules. Properness implies quasi-compactness and separatedness, hence quasi-separatedness by [def-weil-proper-morphism]. Thus all hypotheses, including the finite-ring hypothesis and a bound valid for EVERY module sheaf, of [lem-exc-direct-image-coproducts] hold. It gives unbounded coproduct preservation for $Rr_*$. No arbitrary-ring version of proper-coproducts is used. Proper base change and finite-type-over-Noetherian give proper maps between Noetherian schemes in each diagram [lem-weil-pbc-proper-base-change, lem-weil-pbc-finite-type-over-noetherian]; all open pieces are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. For a representing complex $L$, put $L_n=\\sigma_{\\ge -n}L$ using [def-kun-truncations]. These are bounded below, their inclusions are chain maps, and their degreewise colimit is exactly $L$: in degree $i$ the system is eventually constant at $L^i$ with identity transitions. By [lem-kun-complex-colimit-hocolim], $QL$ is the homotopy colimit of $QL_n$. By [lem-kun-functor-preserves-hocolim], both sides of $\\alpha$ and $c$ preserve this telescope. The units and counits used in step 5 commute with shifts because they are the classes of degreewise maps on the K-injective models, with the same signs on both sides. Hence the resulting comparisons commute with shifts. Naturality and [lem-weil-pbc-commshift-nattrans-triangle-morphism] supply a morphism between their telescope triangles. On each of the two coproduct vertices it is the coproduct of the isomorphisms on $QL_n$, hence an isomorphism. In the long exact cohomology ladder [lem-weil-pbc-derived-cohomology-ladder], the four maps surrounding $H^i$ of the third vertex are isomorphisms. Evaluate the ladder at any geometric stalk; stalks are exact by [prop-weil-pbc-geometric-stalks-exact] after forgetting the module action, and isomorphisms of the cohomology sheaves are detected by [lemma-weil-pbc-geometric-stalk-conservative]. In this ladder of modules, write the five terms as $P\\to Q\\to H\\to R\\to S$. For surjectivity, given $h$ in the lower $H$, lift its image in the lower $R$ uniquely to $r$ in the upper $R$. Its image in the upper $S$ is zero, since the fifth vertical map is injective and the lower sequence is exact. Thus $r$ is the image of an upper $h_0$ by exactness. The difference between $h$ and the image of $h_0$ has zero connecting image, so comes from the lower $Q$. Lift that element along the second vertical isomorphism and add its image to $h_0$. For injectivity, an element killed in the lower third vertex has zero connecting image by injectivity of the fourth map, hence comes from the upper second vertex; its lower lift comes from the lower first vertex, which lifts along the first map, and injectivity of the second map then forces the element to be zero. Hence the already constructed comparison at $QL$ induces an isomorphism on every $H^i$, and is an isomorphism in the derived category. Thus the fixed-compactification refinement and composition maps are invertible for all unbounded complexes of modules over the finite ring $A$. In particular step 4's finite candidate identifies with $Ru_!$. This argument uses stupid tails of a representing complex, not $\\tau_{\\le n}L$ (which need not be bounded below), and does not claim that stupid truncation itself descends to the derived category.",
+      "uses": [
+        "lem-amb-etale-compact-comparisons",
+        "lem-sf-exact-functor-derived-triangulated",
+        "lem-pc-right-derived-functor-triangulated",
+        "lem-weil-pbc-proper-base-change",
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "def-kun-truncations",
+        "lem-kun-complex-colimit-hocolim",
+        "lem-kun-functor-preserves-hocolim",
+        "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+        "lem-weil-pbc-derived-cohomology-ladder",
+        "lem-fin-finite-type-fibre-dimension-bound",
+        "lem-kun-proper-torsion-cd-bound",
+        "lem-kun-unbounded-abelian-exchange-comparison",
+        "def-weil-proper-morphism",
+        "lem-exc-direct-image-coproducts",
+        "lemma-weil-pbc-geometric-stalk-conservative",
+        "prop-weil-pbc-geometric-stalks-exact",
+        "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Repair of Proof, second paragraph: unbounded comparison; finite-ring correction via Stacks 0A3V, 095U, 0D6J and lem-exc-direct-image-coproducts"
+      }
+    },
+    {
+      "text": "Continue with the finite ring $A$ of the second assertion. For $M\\in D(U_{\\mathrm{et}},A)$, the derived adjunction of step 2 and the ambient adjunctions of [thm-amb-etale-exceptional-adjoint] give natural bijections\n$$\\operatorname{Hom}_U(M,u^*f^\\times K)\\cong\\operatorname{Hom}_X(Du_!M,f^\\times K)\\cong\\operatorname{Hom}_S(Rf_!Du_!M,K)\\cong\\operatorname{Hom}_S(R(fu)_!M,K)\\cong\\operatorname{Hom}_U(M,(fu)^\\times K).$$\nThe middle comparison is the unbounded composition constructed in steps 4–7. Define the map $u^*f^\\times K\\to(fu)^\\times K$ as the image of the identity under these bijections and define its inverse using the inverse bijections on the other identity. Naturality in $M$ says each composite is the corresponding identity; naturality in $K$ gives the natural isomorphism. Write $L=u^*f^\\times K$ and $c_M:Rf_!Du_!M\\xrightarrow{\\sim}R(fu)_!M$ for step 7. The transpose of this isomorphism is explicitly\n$$R(fu)_!L\\xrightarrow{c_L^{-1}}Rf_!Du_!L\\xrightarrow{Rf_!(\\varepsilon^u_{f^\\times K})}Rf_!f^\\times K\\xrightarrow{\\varepsilon^f_K}K.$$\nThis specifies the counit normalization; the unit is its adjoint transpose and the triangle identities follow from those of the two adjunctions. For a further separated finite-type etale $v:W\\to U$ with $fuv$ compactifiable, the composite sum-extension adjunction has counit $\\varepsilon^u\\circ Du_!(\\varepsilon^v)$. Here $Du_!Dv_!$ and $D(uv)_!$ are canonically identified as left adjoints to $v^*u^*=(uv)^*$: send the unit of either adjunction through the other Hom bijection to define the comparison, and do the same in reverse; the triangle identities make their composites identities. This identification has the stated composite counit. The coherence proved by adjoint transposes in step 6 identifies $c_{f,uv}$ with $c_{fu,v}\\circ(c_{f,u}Dv_!)$ after the canonical association of the composite functors. Hence the direct and the iterated Hom bijections both send a map to its composite with these same two counits and $\\varepsilon^f$. They agree on every $M$, so their identity constructions give the same localization isomorphism.",
+      "uses": [
+        "thm-amb-etale-exceptional-adjoint"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+        "place": "Proof, second paragraph: Hom calculation and Yoneda"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-amb-etale-compact-support",
+    "def-kun-truncations",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-proper-morphism",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-etale-sum-stalks",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-cbc-extension-zero-composition",
+    "lem-exc-direct-image-coproducts",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-complex-colimit-hocolim",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-localization-functor-adjoint",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-section-clopen",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-separated-base-change",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "thm-amb-etale-exceptional-adjoint",
+    "thm-nagata-compactification",
+    "thm-pqf-zmt-factorization"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
+    "place": "Proof, both paragraphs, expanded by the cited Stacks slice and finite-compactification arguments"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Exact extension by zero along an etale morphism is left adjoint to inverse image on unbounded derived categories and localizes the right adjoint of compact support",
+      "results": "; CategoryTheory.Adjunction.derived, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, DerivedCategory",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "grep",
+      "query": "etaleLowerShriek|mapDerivedCategory.*Adjunction|localizedAdjunction",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "leansearch",
+      "query": "etale extension by zero exact adjunction derived category",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For a separated quasi finite morphism of noetherian schemes, direct image with proper support is exact and equals finite pushforward of extension by zero in a finite compactification",
+      "results": "; AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"lowerShriek\"",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "grep",
+      "query": "properSupport|proper.support|quasiFinite.*[Ss]hriek|[Ss]hriek.*quasiFinite",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
+    },
+    {
+      "tool": "leansearch",
+      "query": "direct image proper support quasi finite morphism exact",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1566,
+  "blueprint_uses": [
+    "def-amb-etale-compact-support",
+    "def-asd-compactifiable",
+    "def-weil-pbc-derived-categories",
+    "def-weil-scheme-morphism-properties",
+    "lem-amb-etale-compact-comparisons",
+    "thm-amb-etale-exceptional-adjoint"
+  ],
+  "uses_not_cited": [
+    "def-amb-etale-compact-support",
+    "def-asd-compactifiable",
+    "def-weil-pbc-derived-categories",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-amb-etale-adjoint-locality",
+    "worker": "stage1",
+    "summary": "Repair E7/E1: preserved the arbitrary-ring exact sum-extension adjunction, but explicitly corrected the compact-support locality clause to finite commutative rings, as required by the unit coefficient scope and the actual comparison source. Replaced the arbitrary-ring proper-coproduct invocation with a derivation from uniform fibre bounds, torsion vanishing, module/abelian derived comparison and the finite-ring unbounded coproduct theorem. Retained the map construction, telescope and representing Hom calculation. No target changes and no new nodes in this repair.",
+    "blueprint": "Steps 1–2 realize Proof paragraph 1 (exact sheaf adjunction and termwise descent); steps 3–4 supply its identification of sum extension with the finite compactification candidate; steps 5–7 repair the unbounded composition invocation in Proof paragraph 2; step 8 realizes its Hom calculation, Yoneda, and compatibility with counits and further etale localization.",
+    "tool_uses": [
+      {
+        "node": "lem-pur-site-restriction-module-adjunction-exact",
+        "why": "Generic Restriction and extension by zero for modules on a localized site supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-etale-inverse-image-restriction",
+        "why": "Generic Inverse image along an etale morphism is restriction supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-etale-localization-functor-adjoint",
+        "why": "Generic Composition with an etale morphism is left adjoint to base change on small etale sites supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-etale-section-clopen-immersion",
+        "why": "Generic A section of a separated etale morphism is an open and closed immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-separated-base-change",
+        "why": "Generic Separated morphisms are stable under base change (Stacks 01KU (3)) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-factorization",
+        "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-localization-universal-property",
+        "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+        "why": "Generic An etale ring map is quasi-finite at every prime (Stacks 00U5) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "thm-pqf-zmt-factorization",
+        "why": "Generic Zariski's main theorem: the quasi-finite factorization supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lemma-weil-pbc-finite-stalk-formula",
+        "why": "Generic Geometric stalk formula for finite direct image supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-extension-by-zero-stalks",
+        "why": "Generic Geometric stalks of extension by zero along an open immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lemma-weil-pbc-geometric-stalk-conservative",
+        "why": "Generic Conservativity of geometric stalks supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-section-separated-closed-immersion",
+        "why": "Generic A section of a separated morphism is a closed immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-finite-proper",
+        "why": "Generic Finite morphisms are proper supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-finite-type-over-noetherian",
+        "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-open-immersion-base-change",
+        "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+        "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lemma-weil-pbc-finite-direct-image-exact",
+        "why": "Generic Exactness of finite direct image supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-functor",
+        "why": "Generic The functor induced by an exact functor is its own right and left derived functor supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "prop-weil-pbc-inverse-image-modules-exact",
+        "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-kinjective-hom-derived",
+        "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-open-section-clopen",
+        "why": "Generic An open section is also closed supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-proper-base-change",
+        "why": "Generic Properness is stable under base change supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+        "why": "Generic Abelian etale sheaves on a finite clopen coproduct decompose componentwise supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "thm-nagata-compactification",
+        "why": "Generic Nagata compactification, [stacks-project] supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-sf-exact-functor-derived-triangulated",
+        "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-pc-right-derived-functor-triangulated",
+        "why": "Generic The unbounded right derived functor is triangulated supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-kun-complex-colimit-hocolim",
+        "why": "Generic Sequential colimits represent homotopy colimits supplies the stated unbounded comparison repair; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-kun-functor-preserves-hocolim",
+        "why": "Generic Exact coproduct-preserving functors preserve telescopes supplies the stated unbounded comparison repair; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+        "why": "Generic A shift-compatible natural transformation gives morphisms of the image triangles supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-weil-pbc-derived-cohomology-ladder",
+        "why": "Generic A morphism of distinguished triangles gives a morphism of the long exact cohomology sequences supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
+      },
+      {
+        "node": "lem-fin-finite-type-fibre-dimension-bound",
+        "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
+      },
+      {
+        "node": "lem-kun-proper-torsion-cd-bound",
+        "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
+      },
+      {
+        "node": "lem-kun-unbounded-abelian-exchange-comparison",
+        "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
+      },
+      {
+        "node": "def-weil-proper-morphism",
+        "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
+      },
+      {
+        "node": "lem-exc-direct-image-coproducts",
+        "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
+      },
+      {
+        "node": "prop-weil-pbc-geometric-stalks-exact",
+        "why": "Exact geometric stalks allow the telescope cohomology ladder to be checked in abelian groups; this is a general tool, absent from the unit compactification route."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-etale-localization-functor-adjoint",
     "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-separated-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S3, definition-extension-zero; Tag 03DJ (sites-modules-lemma-extension-by-zero-exact)"
-   }
-  },
-  {
-   "text": "The preceding exact functors induce termwise functors on unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. The sheaf adjunction gives a complex adjunction: its transpose commutes with differentials by naturality, and the units and counits are chain maps. Descend these natural transformations using [lem-weil-pbc-localization-universal-property]. The two triangle identities hold after precomposition with localization, since they hold degreewise; clause (3) of that node makes them hold on the derived categories. Hence the descended functors are adjoint, without any boundedness condition.",
-   "uses": [
+    "lem-weil-pbc-separated-base-change",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Proof, first paragraph: both functors exact, adjunction descends termwise"
-   }
-  },
-  {
-   "text": "For the compact-support comparison work between the Noetherian schemes in the second assertion. On affine charts the etale ring-map result [lem-weil-pbc-etale-ring-map-quasi-finite] says that $u$ is quasi-finite; this is local on the affine charts in the definition. Since $u$ is separated and finite type and $X$ is quasi-compact by the Noetherian hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], [thm-pqf-zmt-factorization] supplies $u=pj$ with $j:U\\hookrightarrow T$ open and $p:T\\to X$ finite. The finite map is proper by [lem-weil-pbc-finite-proper], so this really is a compactification. Its finite-type source $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Construct the comparison on the defining presheaf. For a lift $a:V\\to U$ over $X$, its graph in $U\\times_XV$ is open by [lem-weil-pbc-etale-section-clopen-immersion]; since $U\\times_XV$ is open in $T\\times_XV$ by [lem-weil-pbc-open-immersion-base-change], the graph is open there too. Both projections to $V$ are separated by [lem-weil-pbc-separated-base-change]. The graph is a section of the separated $T\\times_XV\\to V$, so is closed there by [lem-weil-pbc-section-separated-closed-immersion]. Extend a section of $F(V,a)$ by zero on this open-and-closed graph. For a test morphism $b:V'\\to V$, the inverse image of the graph of $a$ is exactly the graph of $ab$: on this component the section restricts to $s|_{V'}$, and on its open complement zero restricts to zero. These two restrictions cover $T\\times_XV'$, so the sheaf axiom proves equality with the section constructed from $ab$. This also commutes with a morphism $F\\to F'$, component by component. Summing gives a natural presheaf map into $(p_*j_!F)(V)$, hence a sheaf map $u_!F\\to p_*j_!F$. By [lem-amb-etale-sum-stalks], [lemma-weil-pbc-finite-stalk-formula], and [lem-weil-pbc-extension-by-zero-stalks], the stalk map sends a generator represented by $(V,\\bar v,a,s)$ to the tuple with germ $[s]$ at $a\\bar v$ and zero at every other point of $T_{\\bar x}$. Indeed the graph has exactly the point $a\\bar v$ in that fibre, and its complement carries the zero section. Thus this map is the identity on the finite sum $\\bigoplus_{\\bar z\\in U_{\\bar x}}F_{\\bar z}$; the boundary summands are zero. The finite-stalk formula is $A$-linear since the maps are evaluations of sections. Forgetting $A$ reflects isomorphisms, so [lemma-weil-pbc-geometric-stalk-conservative] proves $u_!\\cong p_*j_!$.",
-   "uses": [
+    "lem-weil-pbc-localization-universal-property",
     "lem-weil-pbc-etale-ring-map-quasi-finite",
     "thm-pqf-zmt-factorization",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-amb-etale-sum-stalks",
     "lemma-weil-pbc-finite-stalk-formula",
     "lem-weil-pbc-extension-by-zero-stalks",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-etale-section-clopen-immersion",
     "lem-weil-pbc-section-separated-closed-immersion",
-    "lem-weil-pbc-etale-localization-functor-adjoint",
     "lem-weil-pbc-finite-proper",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-separated-base-change",
     "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-locally-noetherian-quasi-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S5 (proposition-describe-jshriek), 03QP (proposition-finite-higher-direct-image-zero); literature/stacks-project/more-morphisms.tex Tag 05K0"
-   }
-  },
-  {
-   "text": "Finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]; forgetting the constant $A$-action detects exactness. Thus [lem-weil-pbc-exact-functor-derived-functor] identifies its unbounded total derived functor with termwise descent. Descend step 3's natural sheaf isomorphism by [lem-weil-pbc-localization-universal-property]. We obtain $Du_!\\cong Rp_*Dj_!$, the fixed-compactification candidate of [def-amb-etale-compact-support]. This step makes no use of compactification independence or composition on unbounded objects.",
-   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lemma-weil-pbc-finite-direct-image-exact",
     "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-localization-universal-property",
-    "def-amb-etale-compact-support"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Repair of Proof, second paragraph: unbounded comparison"
-   }
-  },
-  {
-   "text": "Construct the comparison maps before asserting their invertibility. For every scheme map $h$, exact module inverse image is left adjoint to module direct image by [prop-weil-pbc-inverse-image-modules-exact]. Direct image carries K-injectives to K-injectives: for an acyclic complex $C$, the complex adjunction identifies maps $C\\to h_*I$ up to homotopy with maps $h^*C\\to I$, which vanish since $h^*C$ is acyclic. The bijection of [lem-weil-pbc-kinjective-hom-derived], applied after K-injective resolution as in [def-amb-etale-compact-support], therefore gives $h^*\\dashv Rh_*$ on unbounded categories. Open restriction $a^*$ also preserves K-injectives: its exact left adjoint $Da_!$ is step 2 for the open immersion $a$. In an open Cartesian square with proper $p:T\\to B$, open $a:V\\to B$, pullback open $b:T_V\\to T$, and $p_V:T_V\\to V$, the sheaf identity $a^*p_*=p_{V*}b^*$ follows directly by evaluating on an etale test object of $V$ [def-weil-pbc-direct-image]. Applying it to a K-injective complex gives an unbounded natural isomorphism $a^*Rp_*\\cong Rp_{V*}b^*$: $b^*I$ is K-injective by the preceding argument. Consequently define, for every unbounded $N$, the proper/open map\n$$\\beta_N:Da_!Rp_{V*}N\\longrightarrow Rp_*Db_!N$$\nas the $Da_!\\dashv a^*$ transpose of the inverse open-restriction isomorphism $Rp_{V*}N\\cong a^*Rp_*Db_!N$; here $b^*Db_!N=N$, since extension by zero restricts back to its original sheaf, degreewise [lem-weil-pbc-extension-by-zero-stalks]. For a proper refinement $q:T_1\\to T_2$ of open immersions $j_i:Z\\hookrightarrow T_i$, the same open restriction identifies $j_2^*Rq_*Dj_{1!}M$ with $M$. Indeed $Z$ is an open-and-closed section of $T_1\\times_{T_2}Z\\to Z$ by [lem-weil-pbc-open-section-clopen], so pushforward of its extension by zero is the identity on this component and zero on its complementary component. The clopen decomposition [lem-weil-pbc-etale-sheaf-clopen-product] identifies the module category with the product of its two module categories (the actions and morphisms are componentwise). Extension on the section is both adjoints to restriction, so carries K-injectives to K-injectives by the complex Hom argument already given. Pushforward then computes the identity on this component and zero on the other, also on unbounded derived categories. Define $\\alpha_M:Dj_{2!}M\\to Rq_*Dj_{1!}M$ as the transpose of this identification. These formulas are natural transformations on the unbounded categories, not arbitrary extensions of transformations from $D^+$. For composable scheme maps $h$ and $g$, take a K-injective representative $I$. The preceding preservation result means $h_*I$ is K-injective, so $Rg_*Rh_*QI=Q(g_*h_*I)=Q((gh)_*I)=R(gh)_*QI$. The middle equality is the canonical identification of iterated fibre products in the sectionwise direct-image definition. Maps are represented by homotopy classes between K-injectives, and both composites send such a class to the same $g_*h_*$ class. This proves naturality and associativity of ordinary unbounded direct-image composition, for any coefficient ring and without an invertible-prime assumption.",
-   "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-kinjective-hom-derived",
-    "def-amb-etale-compact-support",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-extension-by-zero-stalks",
     "lem-weil-pbc-open-section-clopen",
     "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-etale-sheaf-clopen-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Repair of Proof, second paragraph: unbounded comparison"
-   }
-  },
-  {
-   "text": "The unbounded comparison maps in step 5 are defined by the same units, counits and open-restriction identities as the bounded-below maps. Their coherence does not require detecting equality by telescopes. For two successive refinements $q,r$, restrict the composite $Rr_*\\alpha_q\\circ\\alpha_r$ along the final open immersion. Open restriction turns each $\\alpha$ into the identity of $M$, so the restricted composite is the identity as well. The $Dj_!\\dashv j^*$ bijection now implies that this composite equals $\\alpha_{rq}$ after the associative ordinary direct-image identification proved in step 5. This is equality of adjoint transposes; restriction need not be faithful on arbitrary morphisms. For composable compactifiable maps, construct nested compactifications explicitly. For $Z\\xrightarrow{h}Y\\xrightarrow{g}S$, compactify $g$ as $Y\\xrightarrow{v}\\overline Y\\to S$ and compactify $vh$ as $Z\\xrightarrow{a}\\overline Z\\xrightarrow{p}\\overline Y$ by [thm-nagata-compactification]. Every open piece of a Noetherian scheme is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; applying this to intersections with affine opens shows that $v$ is quasi-compact. Thus $v$ is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The composite $vh$ is finite type: on affine charts finite lists of algebra generators concatenate, and finite covers of the preimages concatenate [def-weil-finite-type-morphism]. It is separated: the diagonal factors through $Z\\times_Y Z$ as the closed diagonal of $h$, followed by the closed base change of the diagonal of $v$; for an open immersion the diagonal is an isomorphism [def-weil-proper-morphism, lem-weil-pbc-separated-base-change]. Hence $vh$ has the hypotheses for Nagata; $\\overline Y$ is quasi-compact and quasi-separated. Thus the cited existence assertion applies. The resulting proper source $\\overline Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Put $V=\\overline Z\\times_{\\overline Y}Y$ with open $b:V\\to\\overline Z$ and proper $p_Y:V\\to Y$. Then $Z\\hookrightarrow V\\to Y$ compactifies $h$, and the composite compactification of $gh$ is $Z\\xrightarrow{a}\\overline Z\\to S$. Apply $\\beta$ to the extension by zero from $Z$ to $V$, and then apply the proper direct image from $\\overline Y$ to $S$. The proper/open map $\\beta$ of step 5, open-extension composition [lem-cbc-extension-zero-composition], and ordinary direct-image composition proved in step 5, give a natural map $c:Rf_!Du_!\\to R(fu)_!$ for the nested compactifications after step 4. Invertibility will be proved in step 7. For three factors, the two proper/open composites are transposes under the composite open-extension adjunction of the same open-restriction identity: on a test object inside the smallest open both are evaluation on the same iterated fibre product. The counit of the composite adjunction is $\\varepsilon^a\\circ Da_!(\\varepsilon^b)$; substituting it makes the two transposes equal by naturality of $\\varepsilon^a$ and the triangle identities. Associativity of proper direct image and open extension then gives associativity of composition. After invertibility is established in step 7, comparing with different nested compactifications through a common proper refinement [lem-cbc-compactifiable-cofiltered] is independent of the refinement by the preceding identity for $\\alpha$. These equations establish coherence of the constructed maps; after step 7 establishes invertibility they give coherent unbounded composition.",
-   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product",
     "thm-nagata-compactification",
-    "lem-cbc-extension-zero-composition",
-    "lem-cbc-compactifiable-cofiltered",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-separated-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Repair of Proof, second paragraph: unbounded comparison"
-   }
-  },
-  {
-   "text": "For the second assertion $A$ is now a finite commutative ring. Only now use [lem-amb-etale-compact-comparisons], and only on bounded-below input over this finite ring: its proper-refinement and usual-composition assertions give invertibility in that range. The maps here have the prescribed identity transpose over the source, and the proper/open transpose defining usual composition, so these are the comparisons named in that statement. Extend invertibility, not existence, by an explicit telescope. All the functors on the two sides are exact: termwise open extension is triangulated by [lem-sf-exact-functor-derived-triangulated] and total direct image is triangulated by [lem-pc-right-derived-functor-triangulated]. They preserve coproducts: open extension is a left adjoint by step 2, and proper direct image preserves them as follows. For each proper map $r:V\\to T$ in the construction, $T$ is Noetherian and hence quasi-compact. Apply [lem-fin-finite-type-fibre-dimension-bound] to choose $d\\geq0$ bounding its ordinary fibre dimensions. Every $A$-module sheaf is killed by a positive integer: the order of the additive element $1\\in A$ kills the unit and hence every section (for the zero ring use the integer 1). Its underlying abelian sheaf is therefore torsion. [lem-kun-proper-torsion-cd-bound] gives abelian higher-direct-image vanishing above $2d$. The isomorphism $b_r$ and the cohomology/forgetting assertion in [lem-kun-unbounded-abelian-exchange-comparison], applied to a sheaf in degree zero (choose identity maps to complete a Cartesian square), transfer that bound to module higher direct images. Forgetting is conservative, so vanishing of their underlying abelian sheaves is vanishing in modules. Properness implies quasi-compactness and separatedness, hence quasi-separatedness by [def-weil-proper-morphism]. Thus all hypotheses, including the finite-ring hypothesis and a bound valid for EVERY module sheaf, of [lem-exc-direct-image-coproducts] hold. It gives unbounded coproduct preservation for $Rr_*$. No arbitrary-ring version of proper-coproducts is used. Proper base change and finite-type-over-Noetherian give proper maps between Noetherian schemes in each diagram [lem-weil-pbc-proper-base-change, lem-weil-pbc-finite-type-over-noetherian]; all open pieces are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. For a representing complex $L$, put $L_n=\\sigma_{\\ge -n}L$ using [def-kun-truncations]. These are bounded below, their inclusions are chain maps, and their degreewise colimit is exactly $L$: in degree $i$ the system is eventually constant at $L^i$ with identity transitions. By [lem-kun-complex-colimit-hocolim], $QL$ is the homotopy colimit of $QL_n$. By [lem-kun-functor-preserves-hocolim], both sides of $\\alpha$ and $c$ preserve this telescope. The units and counits used in step 5 commute with shifts because they are the classes of degreewise maps on the K-injective models, with the same signs on both sides. Hence the resulting comparisons commute with shifts. Naturality and [lem-weil-pbc-commshift-nattrans-triangle-morphism] supply a morphism between their telescope triangles. On each of the two coproduct vertices it is the coproduct of the isomorphisms on $QL_n$, hence an isomorphism. In the long exact cohomology ladder [lem-weil-pbc-derived-cohomology-ladder], the four maps surrounding $H^i$ of the third vertex are isomorphisms. Evaluate the ladder at any geometric stalk; stalks are exact by [prop-weil-pbc-geometric-stalks-exact] after forgetting the module action, and isomorphisms of the cohomology sheaves are detected by [lemma-weil-pbc-geometric-stalk-conservative]. In this ladder of modules, write the five terms as $P\\to Q\\to H\\to R\\to S$. For surjectivity, given $h$ in the lower $H$, lift its image in the lower $R$ uniquely to $r$ in the upper $R$. Its image in the upper $S$ is zero, since the fifth vertical map is injective and the lower sequence is exact. Thus $r$ is the image of an upper $h_0$ by exactness. The difference between $h$ and the image of $h_0$ has zero connecting image, so comes from the lower $Q$. Lift that element along the second vertical isomorphism and add its image to $h_0$. For injectivity, an element killed in the lower third vertex has zero connecting image by injectivity of the fourth map, hence comes from the upper second vertex; its lower lift comes from the lower first vertex, which lifts along the first map, and injectivity of the second map then forces the element to be zero. Hence the already constructed comparison at $QL$ induces an isomorphism on every $H^i$, and is an isomorphism in the derived category. Thus the fixed-compactification refinement and composition maps are invertible for all unbounded complexes of modules over the finite ring $A$. In particular step 4's finite candidate identifies with $Ru_!$. This argument uses stupid tails of a representing complex, not $\\tau_{\\le n}L$ (which need not be bounded below), and does not claim that stupid truncation itself descends to the derived category.",
-   "uses": [
-    "lem-amb-etale-compact-comparisons",
     "lem-sf-exact-functor-derived-triangulated",
     "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-kun-truncations",
     "lem-kun-complex-colimit-hocolim",
     "lem-kun-functor-preserves-hocolim",
     "lem-weil-pbc-commshift-nattrans-triangle-morphism",
@@ -150,406 +516,60 @@
     "lem-kun-unbounded-abelian-exchange-comparison",
     "def-weil-proper-morphism",
     "lem-exc-direct-image-coproducts",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Repair of Proof, second paragraph: unbounded comparison; finite-ring correction via Stacks 0A3V, 095U, 0D6J and lem-exc-direct-image-coproducts"
-   }
-  },
-  {
-   "text": "Continue with the finite ring $A$ of the second assertion. For $M\\in D(U_{\\mathrm{et}},A)$, the derived adjunction of step 2 and the ambient adjunctions of [thm-amb-etale-exceptional-adjoint] give natural bijections\n$$\\operatorname{Hom}_U(M,u^*f^\\times K)\\cong\\operatorname{Hom}_X(Du_!M,f^\\times K)\\cong\\operatorname{Hom}_S(Rf_!Du_!M,K)\\cong\\operatorname{Hom}_S(R(fu)_!M,K)\\cong\\operatorname{Hom}_U(M,(fu)^\\times K).$$\nThe middle comparison is the unbounded composition constructed in steps 4–7. Define the map $u^*f^\\times K\\to(fu)^\\times K$ as the image of the identity under these bijections and define its inverse using the inverse bijections on the other identity. Naturality in $M$ says each composite is the corresponding identity; naturality in $K$ gives the natural isomorphism. Write $L=u^*f^\\times K$ and $c_M:Rf_!Du_!M\\xrightarrow{\\sim}R(fu)_!M$ for step 7. The transpose of this isomorphism is explicitly\n$$R(fu)_!L\\xrightarrow{c_L^{-1}}Rf_!Du_!L\\xrightarrow{Rf_!(\\varepsilon^u_{f^\\times K})}Rf_!f^\\times K\\xrightarrow{\\varepsilon^f_K}K.$$\nThis specifies the counit normalization; the unit is its adjoint transpose and the triangle identities follow from those of the two adjunctions. For a further separated finite-type etale $v:W\\to U$ with $fuv$ compactifiable, the composite sum-extension adjunction has counit $\\varepsilon^u\\circ Du_!(\\varepsilon^v)$. Here $Du_!Dv_!$ and $D(uv)_!$ are canonically identified as left adjoints to $v^*u^*=(uv)^*$: send the unit of either adjunction through the other Hom bijection to define the comparison, and do the same in reverse; the triangle identities make their composites identities. This identification has the stated composite counit. The coherence proved by adjoint transposes in step 6 identifies $c_{f,uv}$ with $c_{fu,v}\\circ(c_{f,u}Dv_!)$ after the canonical association of the composite functors. Hence the direct and the iterated Hom bijections both send a map to its composite with these same two counits and $\\varepsilon^f$. They agree on every $M$, so their identity constructions give the same localization isomorphism.",
-   "uses": [
-    "thm-amb-etale-exceptional-adjoint"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-    "place": "Proof, second paragraph: Hom calculation and Yoneda"
-   }
-  }
- ],
- "proof_deps": [
-  "def-amb-etale-compact-support",
-  "def-kun-truncations",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-proper-morphism",
-  "lem-amb-etale-compact-comparisons",
-  "lem-amb-etale-sum-stalks",
-  "lem-cbc-compactifiable-cofiltered",
-  "lem-cbc-extension-zero-composition",
-  "lem-exc-direct-image-coproducts",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-complex-colimit-hocolim",
-  "lem-kun-functor-preserves-hocolim",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-localization-functor-adjoint",
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-open-section-clopen",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-separated-base-change",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-amb-etale-exceptional-adjoint",
-  "thm-nagata-compactification",
-  "thm-pqf-zmt-factorization"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md",
-  "place": "Proof, both paragraphs, expanded by the cited Stacks slice and finite-compactification arguments"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Exact extension by zero along an etale morphism is left adjoint to inverse image on unbounded derived categories and localizes the right adjoint of compact support",
-   "results": "; CategoryTheory.Adjunction.derived, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, DerivedCategory",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "grep",
-   "query": "etaleLowerShriek|mapDerivedCategory.*Adjunction|localizedAdjunction",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "leansearch",
-   "query": "etale extension by zero exact adjunction derived category",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a separated quasi finite morphism of noetherian schemes, direct image with proper support is exact and equals finite pushforward of extension by zero in a finite compactification",
-   "results": "; AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"lowerShriek\"",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "grep",
-   "query": "properSupport|proper.support|quasiFinite.*[Ss]hriek|[Ss]hriek.*quasiFinite",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the etale geometric-stalk formula or compact-support locality"
-  },
-  {
-   "tool": "leansearch",
-   "query": "direct image proper support quasi finite morphism exact",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1566,
- "blueprint_uses": [
-  "def-amb-etale-compact-support",
-  "def-asd-compactifiable",
-  "def-weil-pbc-derived-categories",
-  "def-weil-scheme-morphism-properties",
-  "lem-amb-etale-compact-comparisons",
-  "thm-amb-etale-exceptional-adjoint"
- ],
- "uses_not_cited": [
-  "def-amb-etale-compact-support",
-  "def-asd-compactifiable",
-  "def-weil-pbc-derived-categories",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-amb-etale-adjoint-locality",
-  "worker": "stage1",
-  "summary": "Repair E7/E1: preserved the arbitrary-ring exact sum-extension adjunction, but explicitly corrected the compact-support locality clause to finite commutative rings, as required by the unit coefficient scope and the actual comparison source. Replaced the arbitrary-ring proper-coproduct invocation with a derivation from uniform fibre bounds, torsion vanishing, module/abelian derived comparison and the finite-ring unbounded coproduct theorem. Retained the map construction, telescope and representing Hom calculation. No target changes and no new nodes in this repair.",
-  "blueprint": "Steps 1–2 realize Proof paragraph 1 (exact sheaf adjunction and termwise descent); steps 3–4 supply its identification of sum extension with the finite compactification candidate; steps 5–7 repair the unbounded composition invocation in Proof paragraph 2; step 8 realizes its Hom calculation, Yoneda, and compatibility with counits and further etale localization.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic Restriction and extension by zero for modules on a localized site supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Generic Inverse image along an etale morphism is restriction supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-localization-functor-adjoint",
-    "why": "Generic Composition with an etale morphism is left adjoint to base change on small etale sites supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-section-clopen-immersion",
-    "why": "Generic A section of a separated etale morphism is an open and closed immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-separated-base-change",
-    "why": "Generic Separated morphisms are stable under base change (Stacks 01KU (3)) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
-    "why": "Generic An etale ring map is quasi-finite at every prime (Stacks 00U5) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "thm-pqf-zmt-factorization",
-    "why": "Generic Zariski's main theorem: the quasi-finite factorization supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-stalk-formula",
-    "why": "Generic Geometric stalk formula for finite direct image supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-stalks",
-    "why": "Generic Geometric stalks of extension by zero along an open immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic Conservativity of geometric stalks supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-section-separated-closed-immersion",
-    "why": "Generic A section of a separated morphism is a closed immersion supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-proper",
-    "why": "Generic Finite morphisms are proper supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-open-immersion-base-change",
-    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Generic Exactness of finite direct image supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-exact-functor-derived-functor",
-    "why": "Generic The functor induced by an exact functor is its own right and left derived functor supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
-    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-open-section-clopen",
-    "why": "Generic An open section is also closed supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-proper-base-change",
-    "why": "Generic Properness is stable under base change supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
-    "why": "Generic Abelian etale sheaves on a finite clopen coproduct decompose componentwise supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "thm-nagata-compactification",
-    "why": "Generic Nagata compactification, [stacks-project] supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-pc-right-derived-functor-triangulated",
-    "why": "Generic The unbounded right derived functor is triangulated supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-kun-complex-colimit-hocolim",
-    "why": "Generic Sequential colimits represent homotopy colimits supplies the stated unbounded comparison repair; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-kun-functor-preserves-hocolim",
-    "why": "Generic Exact coproduct-preserving functors preserve telescopes supplies the stated unbounded comparison repair; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-    "why": "Generic A shift-compatible natural transformation gives morphisms of the image triangles supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-weil-pbc-derived-cohomology-ladder",
-    "why": "Generic A morphism of distinguished triangles gives a morphism of the long exact cohomology sequences supplies the stated site, derived-category, or scheme permanence tool; this unit has no corresponding lemma. This supports its sum-extension, compactification-composition, and Hom route."
-   },
-   {
-    "node": "lem-fin-finite-type-fibre-dimension-bound",
-    "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
-   },
-   {
-    "node": "lem-kun-proper-torsion-cd-bound",
-    "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
-   },
-   {
-    "node": "lem-kun-unbounded-abelian-exchange-comparison",
-    "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
-   },
-   {
-    "node": "def-weil-proper-morphism",
-    "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
-   },
-   {
-    "node": "lem-exc-direct-image-coproducts",
-    "why": "Generic tool supplying the fibre bound, torsion vanishing, coefficient-forgetting comparison or properness hypotheses needed to apply the finite-ring unbounded coproduct theorem; it does not replace the unit compactification route."
-   },
-   {
-    "node": "prop-weil-pbc-geometric-stalks-exact",
-    "why": "Exact geometric stalks allow the telescope cohomology ladder to be checked in abelian groups; this is a general tool, absent from the unit compactification route."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-localization-functor-adjoint",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-separated-base-change",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
-  "thm-pqf-zmt-factorization",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-open-section-clopen",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "thm-nagata-compactification",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-kun-complex-colimit-hocolim",
-  "lem-kun-functor-preserves-hocolim",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "def-weil-proper-morphism",
-  "lem-exc-direct-image-coproducts",
-  "prop-weil-pbc-geometric-stalks-exact"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NX-56ccf4dfb",
-  "group": "NX",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-56ccf4dfb (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired missing Noetherian-open/finite-type citations in steps 6–7 and completed the new stalk node’s provenance fields. Stacks 03S5/0710 support the germ formula; 0A3V, 095U and 0D6J justify the finite-ring unbounded argument. No target weakened. Corrected JSON files and concrete checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality",
-  "declaration": "AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso",
-  "declarations": [
-   "AlgebraicGeometry.Etale.derivedEtaleLowerShriekUpperStarAdjunction",
-   "AlgebraicGeometry.Etale.etaleAmbientLeftComparison",
-   "AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso",
-   "AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek",
-   "AlgebraicGeometry.Etale.isLeftAdjoint_etaleLowerShriek"
+    "prop-weil-pbc-geometric-stalks-exact"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAmbientAdjointLocality.lean",
-  "statement": "theorem existsUnique_etaleAmbientAdjointLocalityIso (A : Type (u + 1)) [CommRing A] [Finite A] {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S) [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] [IsNoetherian U] [IsNoetherian X] [IsNoetherian S] (c : Compactification f) (d : Compactification (u ≫ f)) (F : DerivedCategoryModule A S ⥤ DerivedCategoryModule A X) (G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A U) (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F) (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G) : ∃! e : F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G, ∀ (N : EtaleCompactSupportNormalization A) (K : DerivedCategoryModule A S), (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map (e.hom.app K) ≫ adjG.counit.app K = (etaleAmbientLeftComparison A N u f c d).inv.app ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((derivedEtaleLowerShriekUpperStarAdjunction A u).counit.app (F.obj K)) ≫ adjF.counit.app K",
-  "branch": "newtargets-dag",
-  "by": "NE",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "Sheaf exactness reuses the upstream finite-limit-preservation instance and left-adjoint structure (hence finite-colimit preservation). The degreewise unbounded adjunction is constructed from the existing sheaf adjunction. etaleAmbientLeftComparison constructs the specified left comparison from graph normalization, compatible-compactification composition and common-refinement comparison, without any data choice from a mere Nonempty isomorphism. The theorem uniquely characterizes the natural locality isomorphism by its counit transpose, for arbitrary compactifications and adjunctions, simultaneously for every graph-normalized comparison family (whose existence is recorded on lem-asd-etale-compact-support-normalization)."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-170422ffc",
-  "group": "NE",
-  "result": "pass",
-  "note": "Checked statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py passed; branch unchanged."
- }
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NX-56ccf4dfb",
+    "group": "NX",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-56ccf4dfb (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired missing Noetherian-open/finite-type citations in steps 6–7 and completed the new stalk node’s provenance fields. Stacks 03S5/0710 support the germ formula; 0A3V, 095U and 0D6J justify the finite-ring unbounded argument. No target weakened. Corrected JSON files and concrete checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality",
+    "declaration": "AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso",
+    "declarations": [
+      "AlgebraicGeometry.Etale.derivedEtaleLowerShriekUpperStarAdjunction",
+      "AlgebraicGeometry.Etale.etaleAmbientLeftComparison",
+      "AlgebraicGeometry.Etale.existsUnique_etaleAmbientAdjointLocalityIso",
+      "AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek",
+      "AlgebraicGeometry.Etale.isLeftAdjoint_etaleLowerShriek"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/EtaleAmbientAdjointLocality.lean",
+    "statement": "theorem existsUnique_etaleAmbientAdjointLocalityIso (A : Type (u + 1)) [CommRing A] [Finite A] {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S) [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] [IsNoetherian U] [IsNoetherian X] [IsNoetherian S] (c : Compactification f) (d : Compactification (u ≫ f)) (F : DerivedCategoryModule A S ⥤ DerivedCategoryModule A X) (G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A U) (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F) (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G) : ∃! e : F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G, ∀ (N : EtaleCompactSupportNormalization A) (K : DerivedCategoryModule A S), (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map (e.hom.app K) ≫ adjG.counit.app K = (etaleAmbientLeftComparison A N u f c d).inv.app ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((derivedEtaleLowerShriekUpperStarAdjunction A u).counit.app (F.obj K)) ≫ adjF.counit.app K",
+    "branch": "newtargets-dag",
+    "by": "NE",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "Sheaf exactness reuses the upstream finite-limit-preservation instance and left-adjoint structure (hence finite-colimit preservation). The degreewise unbounded adjunction is constructed from the existing sheaf adjunction. etaleAmbientLeftComparison constructs the specified left comparison from graph normalization, compatible-compactification composition and common-refinement comparison, without any data choice from a mere Nonempty isomorphism. The theorem uniquely characterizes the natural locality isomorphism by its counit transpose, for arbitrary compactifications and adjunctions, simultaneously for every graph-normalized comparison family (whose existence is recorded on lem-asd-etale-compact-support-normalization)."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-170422ffc",
+    "group": "NE",
+    "result": "pass",
+    "note": "Checked statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py passed; branch unchanged."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "For a separated etale morphism $u:U\\to X$ of finite type,\n$u_!$ is exact and is left adjoint to $u^*$ on the whole\nordinary derived categories. If $f$ and $fu$ are\ncompactifiable, there is a canonical isomorphism\n\n$$\nu^*f^\\times K\\cong(fu)^\\times K.\n$$",
+    "proof": [
+      {
+        "text": "An etale morphism is a local homeomorphism of etale topoi.\nFor an etale test object $V\\to X$, the sheaf $u_!F$\nconsists of sections on $U\\times_XV$ with support proper\nover $V$; after an etale covering which separates any finite\nset of support points, this is the direct sum of the sections on\nthe corresponding sheets. This description is independent of\nthe covering by sheaf descent. It gives\n$(u_!F)_{\\bar x}=\\bigoplus_{\\bar z\\in U_{\\bar x}}F_{\\bar z}$,\nso $u_!$ is exact. Maps from these sums to $G$ are\nprecisely maps $F\\to u^*G$, first on separated sheets and\nthen by sheaf descent. Thus $u_!\\dashv u^*$ already on\nsheaves. Both functors are exact, so the adjunction descends\ntermwise to ordinary derived categories.",
+        "uses": [],
+        "elementary": null
+      },
+      {
+        "text": "For any complex $M$ on $U$, use the ambient adjunction\nof [thm-amb-etale-exceptional-adjoint] and the composition\nof compact supports in [lem-amb-etale-compact-comparisons]:\n\n$$\n\\begin{split}\n\\operatorname{Hom}_U(M,u^*f^\\times K)\n&\\cong\\operatorname{Hom}_X(u_!M,f^\\times K)\\\\\n&\\cong\\operatorname{Hom}_S(Rf_!u_!M,K)\\\\\n&\\cong\\operatorname{Hom}_S(R(fu)_!M,K).\n\\end{split}\n$$\n\nYoneda gives the displayed isomorphism and its compatibility\nwith units, counits, and further etale localization.",
+        "uses": [
+          "thm-amb-etale-exceptional-adjoint",
+          "lem-amb-etale-compact-comparisons"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

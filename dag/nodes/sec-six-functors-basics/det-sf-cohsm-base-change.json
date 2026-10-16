@@ -1,0 +1,70 @@
+{
+  "id": "det-sf-cohsm-base-change",
+  "kind": "statement",
+  "title": "Base change for the exceptional inverse image of a smooth morphism",
+  "statement": "Let $\\Lambda$ be a finite $\\ell$-primary ring and $f:X\\to S$ separated, smooth\nof finite type and of pure relative dimension $d$, between schemes of finite\ntype over $k$. Let $g:S'\\to S$ be a morphism of finite type,\n$X'=X\\times_SS'$, with projections $f':X'\\to S'$ and $g':X'\\to X$. For\n$N\\in D(S_{\\mathrm{ét}},\\Lambda)$ let\n\n$$\n\\beta_N:g'^*f^!N\\longrightarrow f'^!g^*N\n$$\n\nbe the transpose under $Rf'_!\\dashv f'^!$ of\n$Rf'_!g'^*f^!N\\xrightarrow{\\sim}g^*Rf_!f^!N\\xrightarrow{g^*\\epsilon_N}g^*N$ (inverse\nof compact-support base change, then the pulled-back counit). Then:\n\n1. $\\beta_N$ is an isomorphism for every $N$; in particular\n$\\beta_\\Lambda:g'^*\\omega_f\\xrightarrow{\\sim}\\omega_{f'}$;\n2. for every $N$ the square formed by $g'^*$ of the tensor map\n$f^*N\\otimes^{\\mathbf L}\\omega_f\\to f^!N$, the tensor map for $f'$ at $g^*N$,\n$\\beta_N$ and $1\\otimes\\beta_\\Lambda$ (via $g'^*f^*N=f'^*g^*N$) commutes.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/det-sf-cohsm-base-change.md",
+    "place": "node det-sf-cohsm-base-change, order None",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0F7L"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 1: the three elementary cases.* (a) For $p:\\mathbf P^1_S\\to S$ with the\nadjunction $Rp_*\\dashv p^*(1)[2]$ of [sk-prop-geo-p1-adjunction], the unit\n(built from the cycle class of the diagonal and proper base change) and the\ncounit (the trace and the projection formula) are compatible with base change\n$g$. Hence the transpose of the composite in the statement, for this $p$, is\nthe canonical identification $g'^*p^*N(1)[2]=p'^*g^*N(1)[2]$; so $\\beta_N$ is an\nisomorphism. (b) For an open immersion $j$, $j^!=j^*$ with counit the counit\nof $j_!\\dashv j^*$, extension by zero commutes with base change, and $\\beta_N$\nis the identification $g'^*j^*=j'^*g^*$. Combining (a) and (b) with\n$\\mathbf A^1=\\mathbf P^1\\setminus\\infty$ and iterating over coordinates gives the\ncase of $a:\\mathbf A^d_S\\to S$, where $a^!=a^*(d)[2d]$ and $\\beta_N$ is the\nordinary identification. (c) For a separated étale $e$, $e^!=e^*$ with counit\nthe sum over the geometric sheets of $e_!$; both commute with base change, and\n$\\beta_N$ is again the ordinary inverse-image identification.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 2: composition.* For composable $h_1,h_2$, the counit of\n$R(h_2h_1)_!\\dashv(h_2h_1)^!$ is the composite of the counits under the\ncomposition isomorphism, and base change for $R(-)_!$ is compatible with\ncomposition (Stacks, Tag 0F7L). Substituting into the definition, $\\beta$ for\n$h_2h_1$ is the composite of $h_1^*$-shifted $\\beta$ for $h_2$ and $\\beta$ for\n$h_1$, under the composition isomorphisms; so if the $\\beta$'s of $h_1$ and\n$h_2$ are isomorphisms, so is that of $h_2h_1$ (compare\n[lem-pur-co-smooth-composition]). The same holds for restriction to opens\nof the source: for $u:U\\hookrightarrow X$ open, $u'^*\\beta^f_N$ corresponds to\n$\\beta^{fu}_N$ under $u^*f^!\\simeq(fu)^!$.",
+      "uses": [
+        "lem-pur-co-smooth-composition"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: charts.* Cover $X$ by opens $U$ with $f|_U=v\\circ a\\circ e$ as in the\nlocal structure of smooth morphisms ($v:V\\to S$ open, $a:\\mathbf A^d_V\\to V$,\n$e:U\\to\\mathbf A^d_V$ separated étale). By Steps 1–2, the restriction of\n$\\beta_N$ to $U'=U\\times_XX'$ is the composite of the isomorphisms of the\nthree elementary cases, hence an isomorphism. The $U'$ cover $X'$, and\nisomorphisms are detected on an open covering, so $\\beta_N$ is an\nisomorphism. For $N=\\Lambda_S$ this is $g'^*\\omega_f\\simeq\\omega_{f'}$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 4: compatibility with the tensor maps.* The tensor map is the transpose\nof $(1\\otimes\\epsilon_\\Lambda)\\circ\\mathrm{PF}$, with $\\mathrm{PF}$ the projection\nformula ([thm-asd-smooth-tensor]). The compact-support base-change isomorphism\nis compatible with the projection formula and $g^*$ commutes with\n$\\otimes^{\\mathbf L}$; so applying $g^*$ to this composite and transposing gives,\non one side, $\\beta_N\\circ g'^*(\\text{tensor map})$ and, on the other,\n(tensor map for $f'$)$\\circ(1\\otimes\\beta_\\Lambda)$; uniqueness of transposes\ngives the commutativity of the square.",
+      "uses": [
+        "thm-asd-smooth-tensor"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pur-co-smooth-composition",
+    "thm-asd-smooth-tensor"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/det-sf-cohsm-base-change.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "long_proof_few_deps",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-asd-smooth-tensor",
+    "lem-pur-co-smooth-composition",
+    "sk-prop-geo-p1-adjunction"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

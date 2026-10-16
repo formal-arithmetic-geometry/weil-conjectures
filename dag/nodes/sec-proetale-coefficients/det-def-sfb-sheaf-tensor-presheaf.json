@@ -1,0 +1,51 @@
+{
+  "id": "det-def-sfb-sheaf-tensor-presheaf",
+  "kind": "definition",
+  "title": "Objectwise tensor product and internal hom of presheaves",
+  "statement": "Let $\\mathcal A$ be a Grothendieck abelian category with a closed symmetric monoidal structure\n$(\\otimes,\\mathbf 1)$, additive in each variable, with internal hom $\\underline{\\Hom}_{\\mathcal A}$,\nso that $\\Hom_{\\mathcal A}(A\\otimes B,C)\\cong\\Hom_{\\mathcal A}(B,\\underline{\\Hom}_{\\mathcal A}(A,C))$.\nLet $C$ be a site whose underlying category is essentially small. Write $\\mathrm{PSh}(C,\\mathcal A)$\nfor the category of functors $C^{\\mathrm{op}}\\to\\mathcal A$.\n\n1. The *objectwise tensor product* of presheaves $F,G$ is $(F\\otimes_pG)(U):=F(U)\\otimes G(U)$,\n   with restriction maps $F(u)\\otimes G(u)$, and its unit is the constant presheaf\n   $\\underline{\\mathbf 1}$. The associator, unitors and symmetry are those of $\\mathcal A$, applied\n   at each $U$.\n2. The *internal hom* of presheaves $F,G$ is the presheaf\n   $$\n   [F,G](U):=\\int_{(V\\to U)\\in C/U}\\underline{\\Hom}_{\\mathcal A}\\bigl(F(V),G(V)\\bigr),\n   $$\n   the end over the slice category $C/U$; a morphism $U'\\to U$ acts by restricting along the\n   functor $C/U'\\to C/U$.\n\nThen $(\\mathrm{PSh}(C,\\mathcal A),\\otimes_p,\\underline{\\mathbf 1})$ is a closed symmetric monoidal\ncategory: for every object $A$ of $\\mathcal A$ and every $U$,\n$$\n\\Hom_{\\mathcal A}\\bigl(A,[F,G](U)\\bigr)\\cong\\Bigl\\{\\text{families }\\bigl(\\varphi_{v}\\colon F(V)\\otimes A\\to G(V)\\bigr)_{(v\\colon V\\to U)\\in C/U}\\text{ natural in }(V,v)\\Bigr\\},\n$$\nand $\\Hom(F\\otimes_pH,G)\\cong\\Hom(H,[F,G])$ naturally in $F,G,H$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "node det-def-sfb-sheaf-tensor-presheaf, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "**Monoidal structure.** The associator, unitors and symmetry are defined objectwise; they are\nnatural in $U$ because those of $\\mathcal A$ are natural, and the pentagon, triangle and hexagon\nidentities hold because they hold at each $U$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**Existence of the end.** Since $C$ is essentially small, so is $C/U$, and the end is the\nequalizer of two maps between products over a set of objects, respectively of arrows, of $C/U$.\nA Grothendieck abelian category has all small limits, so the end exists. Functoriality in $U$ is\ninduced by composition $C/U'\\to C/U$, $(V\\to U')\\mapsto(V\\to U'\\to U)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**Hom formula.** By the universal property of the end and the tensor–hom adjunction of\n$\\mathcal A$, a map $A\\to[F,G](U)$ is a family of maps\n$A\\to\\underline{\\Hom}_{\\mathcal A}(F(V),G(V))$, i.e. maps $F(V)\\otimes A\\to G(V)$, indexed by\n$(V\\to U)$ and satisfying the wedge condition, which is naturality in $(V,v)$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "**Closedness.** A morphism $\\psi\\colon H\\to[F,G]$ is a family of maps $\\psi_U\\colon H(U)\\to[F,G](U)$\nnatural in $U$. By the Hom formula with $A=H(U)$, $\\psi_U$ is a natural family\n$\\varphi^U_v\\colon F(V)\\otimes H(U)\\to G(V)$ indexed by $(v\\colon V\\to U)\\in C/U$. Naturality of\n$\\psi$ along $u\\colon U'\\to U$ says $\\varphi^{U'}_{v'}\\circ(F(V)\\otimes H(u))=\\varphi^U_{u\\circ v'}$\nfor all $v'\\colon V\\to U'$. Taking $U'=V$, $u=v$, $v'=\\mathrm{id}_V$ gives\n$$\n\\varphi^U_v=\\chi_V\\circ\\bigl(F(V)\\otimes H(v)\\bigr),\\qquad \\chi_V:=\\varphi^V_{\\mathrm{id}_V}\\colon F(V)\\otimes H(V)\\to G(V).\n$$\nNaturality of $\\varphi^U$ in $(V,v)$ then says exactly that $\\chi$ is natural in $V$, i.e. a\nmorphism $\\chi\\colon F\\otimes_pH\\to G$. Conversely, a morphism $\\chi$ defines $\\varphi^U_v$ by the\ndisplayed formula, natural in $(V,v)$ and in $U$. The two constructions are inverse, and natural\nin $F,G,H$. So $\\Hom(F\\otimes_pH,G)\\cong\\Hom(H,[F,G])$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": null,
+  "blueprint_uses": [],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

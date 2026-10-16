@@ -1,0 +1,67 @@
+{
+  "id": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "kind": "statement",
+  "title": "$\\mathcal O_{E,X}$ is the limit of its finite levels",
+  "statement": "Let $E/\\mathbf Q_\\ell$ be finite with ring of integers $\\cO_E$ and uniformizer $\\pi_E$, and\nlet $X$ be a scheme. For $n\\ge1$ let $(\\cO_E/\\pi_E^n)_X$ be the constant sheaf of rings on\n$X_{\\mathrm{proét}}$ with value the finite ring $\\cO_E/\\pi_E^n$, and let\n$(\\cO_E/\\pi_E^{n+1})_X\\to(\\cO_E/\\pi_E^n)_X$ be the reduction maps.\n\n1. For a finite set $T$, the constant sheaf $T_X$ is represented by the $X$-scheme\n   $\\coprod_TX$. For the profinite set $\\cO_E=\\varprojlim_n\\cO_E/\\pi_E^n$ the pro-étale\n   $X$-scheme\n   $$\n   X[\\cO_E]=\\varprojlim_n\\coprod_{\\cO_E/\\pi_E^n}X\n   $$\n   of [sk-def-sfb-pullback-from-point] represents $\\varprojlim_n(\\cO_E/\\pi_E^n)_X$ (limit\n   of sheaves of sets).\n2. The underlying sheaf of sets of $\\cO_{E,X}=p_X^*\\underline{\\cO_E}$ is represented by\n   $X[\\cO_E]$.\n3. Consequently there is a canonical isomorphism of sheaves of rings\n   $\\cO_{E,X}\\cong\\varprojlim_n(\\cO_E/\\pi_E^n)_X$, the limit being taken in sheaves of rings\n   (equivalently, in sheaves of sets, with the induced ring structure).",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "node det-prop-sfb-qlbar-colimit-x-integral-limit, order None"
+  },
+  "stmt_deps": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1: finite constant sheaves.* For $U\\in X_{\\mathrm{proét}}$, a morphism of $X$-schemes\n$U\\to\\coprod_TX$ is the same as a decomposition of $U$ into open and closed pieces\n$U_t$, $t\\in T$, that is, a locally constant function $|U|\\to T$. The sheaf of locally\nconstant functions to $T$ is the constant sheaf $T_X$ (the pro-étale site is\nsubcanonical, and a locally constant function is the sheafification of a constant one).\nSo $\\coprod_TX$ represents $T_X$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 2: limits of representables.* The transition maps $\\cO_E/\\pi_E^{n+1}\\to\\cO_E/\\pi_E^n$\ninduce affine morphisms $\\coprod_{\\cO_E/\\pi_E^{n+1}}X\\to\\coprod_{\\cO_E/\\pi_E^n}X$, each\nfinite étale, so the inverse limit $X[\\cO_E]$ exists as a scheme pro-étale over $X$. For\nevery $U$ we have $\\Hom_X(U,\\varprojlim_nY_n)=\\varprojlim_n\\Hom_X(U,Y_n)$ by the universal\nproperty of the limit. Hence the sheaf represented by $X[\\cO_E]$ is\n$\\varprojlim_nh_{Y_n}$ with $Y_n=\\coprod_{\\cO_E/\\pi_E^n}X$, which is\n$\\varprojlim_n(\\cO_E/\\pi_E^n)_X$ by Step 1. This proves (1).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 3: the pullback of a representable condensed set.* The condensed set underlying\n$\\underline{\\cO_E}$ is $S\\mapsto C(S,\\cO_E)=\\Hom_{\\mathrm{cont}}(S,\\cO_E)$, i.e. it is\nrepresented by the profinite set $\\cO_E$ in $*_{\\mathrm{proét}}$. By\n[sk-def-sfb-pullback-from-point], $p_X^*$ is the inverse image along the continuous,\nfinite-limit preserving functor $u_X\\colon S\\mapsto X[S]$. Such an inverse image sends the\nsheaf represented by $S$ to the sheafification of the presheaf represented by $u_X(S)$,\nand since $X_{\\mathrm{proét}}$ is subcanonical this is the sheaf represented by\n$X[S]$. With $S=\\cO_E$ this is (2). (The inverse image on abelian sheaves and on sheaves of\nsets are compatible with the forgetful functors, since both are left exact inverse images\nof the same morphism of topoi.)",
+      "uses": [
+        "sk-def-sfb-pullback-from-point"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: ring structures.* The ring operations of $\\underline{\\cO_E}$ are given by the\ncontinuous maps $+,\\cdot\\colon\\cO_E\\times\\cO_E\\to\\cO_E$ and the constants $0,1$. Since $u_X$\npreserves finite products, $p_X^*$ transports them to the maps of representing schemes\n$X[\\cO_E]\\times_XX[\\cO_E]=X[\\cO_E\\times\\cO_E]\\to X[\\cO_E]$ induced by these maps. On the\nother side, the ring operations of $\\varprojlim_n(\\cO_E/\\pi_E^n)_X$ are the limits of the\nring operations of the finite rings $\\cO_E/\\pi_E^n$, which are the maps of the\n$\\coprod_{\\cO_E/\\pi_E^n}X$ induced by the operations of $\\cO_E/\\pi_E^n$. Since the\noperations of $\\cO_E$ are the limits of those of $\\cO_E/\\pi_E^n$, the two sets of\noperations correspond under the identifications of Steps 2 and 3 by the Yoneda lemma. This\nproves (3).\n\nThe proof does not claim that $p_X^*$ commutes with inverse limits: in general it does not.\nThe point is that $\\underline{\\cO_E}$ is representable and $u_X$ commutes with the relevant\ncofiltered limit of profinite sets.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-def-sfb-pullback-from-point"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+  ],
+  "uses_not_cited": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

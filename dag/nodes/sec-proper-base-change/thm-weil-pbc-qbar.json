@@ -1,219 +1,236 @@
 {
- "id": "thm-weil-pbc-qbar",
- "blueprint": {
-  "is": "thm-weil-pbc-qbar",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Qbar-l proper base change",
- "statement": "Let $f:X\\to Y$ be proper, let $g:Y'\\to Y$ be arbitrary, and let\n$K\\in\\Dbc(X,\\Qlb)$. The descended exchange transformation of\n[prop-weil-pbc-descent-functors] is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',\\Qlb).\n$$\nIf $K$ is represented by a pair $(E,K_E)$ with $K_E\\in\\Dbc(X,E)$, this map\nis represented after a finite overfield $M$ by the $M$-coefficient exchange\nisomorphism of [thm-weil-pbc-finite-extension] applied to $T_{M/E}K_E$. The\nresult is independent of $E$, $M$, and the representative.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-  "place": "node thm-weil-pbc-qbar, order 1359",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09C9"
-   }
-  ],
-  "note": [
-   "*Source note:* at each finite stage this is Stacks Project, Pro-etale\nCohomology, Theorem 61.30.1 ([Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)), applied with\n$\\Lambda=\\mathcal O_E$: a proper base-change isomorphism for a derived\ncomplete $K$ whose reductions are bounded below and of etale origin. What\nthe blueprint adds is the statement on the $\\Qlb$ coefficient category\n$\\Dbc(Y',\\Qlb)$, obtained by descent from the finite-stage isomorphisms\nalong the scalar extensions $T_{F/E}$, together with the independence of the\nstage and of the representative."
-  ]
- },
- "stmt_deps": [
-  "prop-weil-pbc-descent-functors",
-  "thm-weil-pbc-finite-extension",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-finite-stage-pair-category",
-  "prop-weil-pbc-scalar-extension",
-  "def-weil-pbc-cartesian-square"
- ],
- "proof": [
-  {
-   "text": "Write $A_E=Lg_E^*Rf_{*,E}$ and $B_E=Rf\\prime_{*,E}Lg\\prime_E^*$ and let $c_E:A_E\\to B_E$ be the finite-stage exchange transformation. By [prop-weil-pbc-scalar-extension], its scalar extension, after the specified comparison isomorphisms, is $c_M$ for $E\\subset M$. Thus [prop-weil-pbc-descent-functors] descends this family to $c:A\\to B$ on $\\Dbc(-,\\Qlb)=\\mathcal P_{-}$ of [def-weil-pbc-qbar-category]. At $(E,K_E)$ its component is represented at $E$ by $c_E(K_E)$; at $M\\supset E$ it is represented by $c_M(T_{M/E}K_E)$ with the same comparison isomorphisms.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
+  "id": "thm-weil-pbc-qbar",
+  "blueprint": {
+    "is": "thm-weil-pbc-qbar",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Qbar-l proper base change",
+  "statement": "Let $f:X\\to Y$ be proper, let $g:Y'\\to Y$ be arbitrary, and let\n$K\\in\\Dbc(X,\\Qlb)$. The descended exchange transformation of\n[prop-weil-pbc-descent-functors] is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',\\Qlb).\n$$\nIf $K$ is represented by a pair $(E,K_E)$ with $K_E\\in\\Dbc(X,E)$, this map\nis represented after a finite overfield $M$ by the $M$-coefficient exchange\nisomorphism of [thm-weil-pbc-finite-extension] applied to $T_{M/E}K_E$. The\nresult is independent of $E$, $M$, and the representative.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
+    "place": "node thm-weil-pbc-qbar, order 1359",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09C9"
+      }
+    ],
+    "note": [
+      "*Source note:* at each finite stage this is Stacks Project, Pro-etale\nCohomology, Theorem 61.30.1 ([Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)), applied with\n$\\Lambda=\\mathcal O_E$: a proper base-change isomorphism for a derived\ncomplete $K$ whose reductions are bounded below and of etale origin. What\nthe blueprint adds is the statement on the $\\Qlb$ coefficient category\n$\\Dbc(Y',\\Qlb)$, obtained by descent from the finite-stage isomorphisms\nalong the scalar extensions $T_{F/E}$, together with the independence of the\nstage and of the representative."
+    ]
+  },
+  "stmt_deps": [
     "prop-weil-pbc-descent-functors",
-    "def-weil-pbc-qbar-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 1"
-   }
-  },
-  {
-   "text": "By [thm-weil-pbc-finite-extension], $c_E(K_E)$ has an inverse $d_E$ because $f$ is proper and the square is cartesian; there is no extra restriction on $g$. Regard $d_E$ as a morphism class at stage $E$. By [def-weil-pbc-finite-stage-pair-category], identities and composites of these classes are computed at $E$. Hence $[E,d_E]\\circ[E,c_E(K_E)]=[E,\\mathrm{id}]$ and $[E,c_E(K_E)]\\circ[E,d_E]=[E,\\mathrm{id}]$. These equations give an inverse to the descended component. The common-stage equality criterion of [prop-weil-pbc-common-stage-calculus] gives the same equations if the component is written at a larger stage.",
-   "uses": [
     "thm-weil-pbc-finite-extension",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-qbar-category",
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-common-stage-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 2"
-   }
-  },
-  {
-   "text": "For two overfields $M,N\\supset E$, choose a common finite overfield $P$. The scalar compatibility in [prop-weil-pbc-scalar-extension] identifies both transported exchange maps with $c_P(T_{P/E}K_E)$; the equivalence relation of [def-weil-pbc-finite-stage-pair-category] therefore identifies their classes. If another pair $(F,L_F)$ represents $K$ through an isomorphism $h:(E,K_E)\\to(F,L_F)$, naturality of the descended transformation in [prop-weil-pbc-descent-functors] gives $B(h)\\circ c_{(E,K_E)}=c_{(F,L_F)}\\circ A(h)$. Since functors carry an inverse of $h$ to an inverse, this is precisely equality of the two maps after identifying their source and target with $A(K),B(K)$. Changing the morphism representative of $h$ leaves these classes unchanged by the same pair-category equivalence relation. This proves independence of $E$, the common stage, and the representative, without asserting that two different pairs are literally equal.",
-   "uses": [
     "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-cartesian-square"
+  ],
+  "proof": [
+    {
+      "text": "Write $A_E=Lg_E^*Rf_{*,E}$ and $B_E=Rf\\prime_{*,E}Lg\\prime_E^*$ and let $c_E:A_E\\to B_E$ be the finite-stage exchange transformation. By [prop-weil-pbc-scalar-extension], its scalar extension, after the specified comparison isomorphisms, is $c_M$ for $E\\subset M$. Thus [prop-weil-pbc-descent-functors] descends this family to $c:A\\to B$ on $\\Dbc(-,\\Qlb)=\\mathcal P_{-}$ of [def-weil-pbc-qbar-category]. At $(E,K_E)$ its component is represented at $E$ by $c_E(K_E)$; at $M\\supset E$ it is represented by $c_M(T_{M/E}K_E)$ with the same comparison isomorphisms.",
+      "uses": [
+        "prop-weil-pbc-scalar-extension",
+        "prop-weil-pbc-descent-functors",
+        "def-weil-pbc-qbar-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
+        "place": "## Proof, 1"
+      }
+    },
+    {
+      "text": "By [thm-weil-pbc-finite-extension], $c_E(K_E)$ has an inverse $d_E$ because $f$ is proper and the square is cartesian; there is no extra restriction on $g$. Regard $d_E$ as a morphism class at stage $E$. By [def-weil-pbc-finite-stage-pair-category], identities and composites of these classes are computed at $E$. Hence $[E,d_E]\\circ[E,c_E(K_E)]=[E,\\mathrm{id}]$ and $[E,c_E(K_E)]\\circ[E,d_E]=[E,\\mathrm{id}]$. These equations give an inverse to the descended component. The common-stage equality criterion of [prop-weil-pbc-common-stage-calculus] gives the same equations if the component is written at a larger stage.",
+      "uses": [
+        "thm-weil-pbc-finite-extension",
+        "def-weil-pbc-finite-stage-pair-category",
+        "prop-weil-pbc-common-stage-calculus"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
+        "place": "## Proof, 2"
+      }
+    },
+    {
+      "text": "For two overfields $M,N\\supset E$, choose a common finite overfield $P$. The scalar compatibility in [prop-weil-pbc-scalar-extension] identifies both transported exchange maps with $c_P(T_{P/E}K_E)$; the equivalence relation of [def-weil-pbc-finite-stage-pair-category] therefore identifies their classes. If another pair $(F,L_F)$ represents $K$ through an isomorphism $h:(E,K_E)\\to(F,L_F)$, naturality of the descended transformation in [prop-weil-pbc-descent-functors] gives $B(h)\\circ c_{(E,K_E)}=c_{(F,L_F)}\\circ A(h)$. Since functors carry an inverse of $h$ to an inverse, this is precisely equality of the two maps after identifying their source and target with $A(K),B(K)$. Changing the morphism representative of $h$ leaves these classes unchanged by the same pair-category equivalence relation. This proves independence of $E$, the common stage, and the representative, without asserting that two different pairs are literally equal.",
+      "uses": [
+        "prop-weil-pbc-scalar-extension",
+        "def-weil-pbc-finite-stage-pair-category",
+        "prop-weil-pbc-descent-functors"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
+        "place": "## Proof, 3"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-descent-functors"
-   ],
-   "elementary": true,
-   "source": {
+    "def-weil-pbc-qbar-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "prop-weil-pbc-descent-functors",
+    "prop-weil-pbc-scalar-extension",
+    "thm-weil-pbc-finite-extension"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 3"
-   }
+    "place": "## Proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "proper base change isomorphism in Qbar coefficient derived category",
+      "results": "Rep.standardComplex.quasiIso_forget₂_εToSingle₀, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory IsIso natural transformation",
+      "results": "loogle: Unknown identifier `CategoryTheory`",
+      "date": "2026-10-14",
+      "verdict": "invalid query (unknown identifier); inconclusive"
+    },
+    {
+      "tool": "grep",
+      "query": "proper.*base.*change|IsIso.*exchange",
+      "results": "subdirectory SixFunctors; no hits",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "leansearch",
+      "query": "proper base change exchange isomorphism for algebraically closed Q_l bar coefficients",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "descent of isomorphism from finite stage category to colimit category",
+      "results": "CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit', CategoryTheory.Limits.IsColimit.isIso_colimMap_ι, CategoryTheory.Limits.Cocone.isColimit_iff_isIso_colimMap_ι, CategoryTheory.Limits.ColimitPresentation.ofIso_ι, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f, CategoryTheory.Limits.IsColimit.hom_isIso, CategoryTheory.MorphismProperty.IsStableUnderColimitsOfShape.isomorphisms",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "loogle",
+      "query": "Functor IsIso",
+      "results": "loogle: Unknown identifier `IsIso`",
+      "date": "2026-10-14",
+      "verdict": "invalid query (unknown identifier); inconclusive"
+    },
+    {
+      "tool": "grep",
+      "query": "IsIso|isIso",
+      "results": "subdirectory Mathlib/CategoryTheory; no hits",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "grep",
+      "query": "proper.*base.*change|IsIso.*exchange",
+      "results": "Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/Descent.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+      "results": "no hits",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "proper base change for derived constructible sheaves with algebraic closure of l-adic rational coefficients",
+      "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondMod.ofSheafLightProfinite, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, AlgebraicGeometry.Scheme.Hom.isConstructible_image, CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    },
+    {
+      "tool": "grep",
+      "query": "exchange|proper base change",
+      "results": "subdirectory AlgebraicGeometry; no hits",
+      "date": "2026-10-14",
+      "verdict": "no match for the stated Qbar constructible-category theorem"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1359,
+  "blueprint_uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-scheme-conventions",
+    "prop-weil-pbc-descent-functors",
+    "thm-weil-pbc-finite-extension"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_notes": [
+    {
+      "label": "source_note",
+      "text": "*Source note:* at each finite stage this is Stacks Project, Pro-etale\nCohomology, Theorem 61.30.1 ([Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)), applied with\n$\\Lambda=\\mathcal O_E$: a proper base-change isomorphism for a derived\ncomplete $K$ whose reductions are bounded below and of etale origin. What\nthe blueprint adds is the statement on the $\\Qlb$ coefficient category\n$\\Dbc(Y',\\Qlb)$, obtained by descent from the finite-stage isomorphisms\nalong the scalar extensions $T_{F/E}$, together with the independence of the\nstage and of the representative.",
+      "where": "statement"
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "thm-weil-pbc-qbar",
+    "worker": "stage1",
+    "summary": "Expanded finite-stage descent with explicit inverse equations and naturality for changes of pair representative. Corrected the blueprint proof's unsupported attribution of representative independence to the finite-extension statement; scalar compatibility and descent supply it. No new nodes.",
+    "blueprint": "Realizes the proof paragraph in thm-weil-pbc-qbar.md under ## Proof."
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "NT-Codex-NC-c2a60c455",
+    "group": "NC",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-c2a60c455 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and sources, and unit/chapter route in full. Scalar compatibility, inverse equations, and naturality justify all three steps; small cases pass. No new nodes or repairs. review.md records checks and the outstanding comparison with the exact upstream condensed-coefficient target, which this split does not claim to establish."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $f:X\\to Y$ be proper, let $g:Y'\\to Y$ be arbitrary, and let\n$K\\in\\Dbc(X,\\Qlb)$. The descended exchange transformation of\n[prop-weil-pbc-descent-functors] is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',\\Qlb).\n$$\nIf $K$ is represented by a pair $(E,K_E)$ with $K_E\\in\\Dbc(X,E)$, this map\nis represented after a finite overfield $M$ by the $M$-coefficient exchange\nisomorphism of [thm-weil-pbc-finite-extension] applied to $T_{M/E}K_E$. The\nresult is independent of $E$, $M$, and the representative.",
+    "proof": [
+      {
+        "text": "The scalar-compatible family of finite-extension exchange maps descends to a\nnatural transformation by [prop-weil-pbc-descent-functors]; at every finite\nstage it is an isomorphism by [thm-weil-pbc-finite-extension], and the\ndescent formula preserves this property through the common-stage colimit of\n[def-weil-pbc-qbar-category]. Independence of the representatives is the\nindependence statement of [thm-weil-pbc-finite-extension] together with the\nequivalence relation of [def-weil-pbc-finite-stage-pair-category].",
+        "uses": [
+          "prop-weil-pbc-descent-functors",
+          "thm-weil-pbc-finite-extension",
+          "def-weil-pbc-qbar-category",
+          "def-weil-pbc-finite-stage-pair-category"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
   }
- ],
- "proof_deps": [
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-qbar-category",
-  "prop-weil-pbc-common-stage-calculus",
-  "prop-weil-pbc-descent-functors",
-  "prop-weil-pbc-scalar-extension",
-  "thm-weil-pbc-finite-extension"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "proper base change isomorphism in Qbar coefficient derived category",
-   "results": "Rep.standardComplex.quasiIso_forget₂_εToSingle₀, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory IsIso natural transformation",
-   "results": "loogle: Unknown identifier `CategoryTheory`",
-   "date": "2026-10-14",
-   "verdict": "invalid query (unknown identifier); inconclusive"
-  },
-  {
-   "tool": "grep",
-   "query": "proper.*base.*change|IsIso.*exchange",
-   "results": "subdirectory SixFunctors; no hits",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "leansearch",
-   "query": "proper base change exchange isomorphism for algebraically closed Q_l bar coefficients",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "descent of isomorphism from finite stage category to colimit category",
-   "results": "CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit', CategoryTheory.Limits.IsColimit.isIso_colimMap_ι, CategoryTheory.Limits.Cocone.isColimit_iff_isIso_colimMap_ι, CategoryTheory.Limits.ColimitPresentation.ofIso_ι, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f, CategoryTheory.Limits.IsColimit.hom_isIso, CategoryTheory.MorphismProperty.IsStableUnderColimitsOfShape.isomorphisms",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "Functor IsIso",
-   "results": "loogle: Unknown identifier `IsIso`",
-   "date": "2026-10-14",
-   "verdict": "invalid query (unknown identifier); inconclusive"
-  },
-  {
-   "tool": "grep",
-   "query": "IsIso|isIso",
-   "results": "subdirectory Mathlib/CategoryTheory; no hits",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "grep",
-   "query": "proper.*base.*change|IsIso.*exchange",
-   "results": "Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/Bicategory/Span/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/Descent.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
-   "results": "no hits",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "proper base change for derived constructible sheaves with algebraic closure of l-adic rational coefficients",
-   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondMod.ofSheafLightProfinite, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, AlgebraicGeometry.Scheme.Hom.isConstructible_image, CondensedMod.ofSheafProfinite, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  },
-  {
-   "tool": "grep",
-   "query": "exchange|proper base change",
-   "results": "subdirectory AlgebraicGeometry; no hits",
-   "date": "2026-10-14",
-   "verdict": "no match for the stated Qbar constructible-category theorem"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1359,
- "blueprint_uses": [
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions",
-  "prop-weil-pbc-descent-functors",
-  "thm-weil-pbc-finite-extension"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_notes": [
-  {
-   "label": "source_note",
-   "text": "*Source note:* at each finite stage this is Stacks Project, Pro-etale\nCohomology, Theorem 61.30.1 ([Tag\n09C9](https://stacks.math.columbia.edu/tag/09C9)), applied with\n$\\Lambda=\\mathcal O_E$: a proper base-change isomorphism for a derived\ncomplete $K$ whose reductions are bounded below and of etale origin. What\nthe blueprint adds is the statement on the $\\Qlb$ coefficient category\n$\\Dbc(Y',\\Qlb)$, obtained by descent from the finite-stage isomorphisms\nalong the scalar extensions $T_{F/E}$, together with the independence of the\nstage and of the representative.",
-   "where": "statement"
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "thm-weil-pbc-qbar",
-  "worker": "stage1",
-  "summary": "Expanded finite-stage descent with explicit inverse equations and naturality for changes of pair representative. Corrected the blueprint proof's unsupported attribution of representative independence to the finite-extension statement; scalar compatibility and descent supply it. No new nodes.",
-  "blueprint": "Realizes the proof paragraph in thm-weil-pbc-qbar.md under ## Proof."
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "NT-Codex-NC-c2a60c455",
-  "group": "NC",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-c2a60c455 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and sources, and unit/chapter route in full. Scalar compatibility, inverse equations, and naturality justify all three steps; small cases pass. No new nodes or repairs. review.md records checks and the outstanding comparison with the exact upstream condensed-coefficient target, which this split does not claim to establish."
- }
 }

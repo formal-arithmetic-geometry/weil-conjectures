@@ -1,0 +1,105 @@
+{
+  "id": "sk-thm-iff",
+  "kind": "statement",
+  "title": "PBC and injective acyclicity",
+  "statement": "Let $f:X\\to Y$ be proper. The following are equivalent:\n\n1. $\\mathrm{PBC}(f)$ [sk-def-pbc] holds for bounded below complexes with\n   torsion cohomology sheaves.\n2. For every torsion abelian sheaf $F$ and every base change as in\n   [sk-def-exchange], the maps of abelian sheaves on $Y'_{\\Et}$ induced by the\n   derived exchange on cohomology sheaves\n\n   $$\n   g^{-1}R^qf_*F\\longrightarrow R^qf'_*g'^{-1}F\n   $$\n\n   are isomorphisms for all $q\\geq0$.\n3. $\\mathrm{IA}_r(f)$ [sk-def-ia] holds for every prime $r$.\n\nFor a commutative ring $\\Lambda$ annihilated by a positive integer, the\ncorresponding fixed-coefficient statement is\n$\\mathrm{PBC}_\\Lambda(f)\\Longleftrightarrow\\mathrm{IA}_\\Lambda(f)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-iff/_section.md",
+    "place": "node sk-thm-iff, order 1051",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09Z1"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-pbc",
+    "sk-def-exchange",
+    "sk-def-ia",
+    "sk-def-conv"
+  ],
+  "proof": [
+    {
+      "text": "*Filtered colimits.* The passage from sheaves killed by an integer to all\ntorsion sheaves uses continuity of étale cohomology. If $u:T\\to S$ is\nquasi-compact and quasi-separated, then\n\n$$\n\\varinjlim_iR^qu_*F_i\\xrightarrow{\\ \\sim\\ }R^qu_*\\bigl(\\varinjlim_iF_i\\bigr)\n\\qquad(q\\geq0)\n$$\n\nfor every filtered system of abelian étale sheaves, and the same holds after\nany base change of $u$ (Stacks Project, Tag 09Z1). It suffices to check this\non affine étale $V\\to S$. There $R^qu_*F$ is the sheafification of\n$V\\mapsto H^q(T\\times_SV,F|)$, and the schemes $T\\times_SV$ are quasi-compact\nand quasi-separated, so their cohomology commutes with filtered colimits by\nthe usual argument with finite covers and finite hypercovers: in degree $q$,\na class and a witness that it dies involve only a finite $(q+1)$-skeleton, so\nthe cocycle and the finitely many equalities come from a single index.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(1) implies (2)* by placing $F$ in degree zero.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*(2) implies (3).* If (2) holds and $I$ is injective among\n$\\mathbf Z/r\\mathbf Z$-module sheaves, then $Rf_*I=f_*I$ in\n$D^+(Y_{\\Et},\\mathbf Z/r\\mathbf Z)$. Compatibility with underlying abelian\ncohomology, explained in [sk-def-pbc-conventions], gives the same equality of\nunderlying derived direct images. Applying (2) to $I$ makes $Rf'_*g'^{-1}I$\nisomorphic in $D^+(Y'_{\\Et},\\mathbf Z)$ to the degree-zero complex\n$g^{-1}f_*I$. This proves (3).",
+      "uses": [
+        "sk-def-pbc-conventions"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(3) implies (2).* Assume (3). We first prove (2) for sheaves killed by a\nprime $r$. Choose an injective resolution $F\\to I^\\bullet$ among\n$\\mathbf Z/r\\mathbf Z$-module sheaves. Exactness of $g'^{-1}$ makes\n$g'^{-1}I^\\bullet$ a resolution of $g'^{-1}F$, and (3) makes its terms\n$f'_*$-acyclic. [sk-thm-acyclicity] therefore identifies\n$f'_*g'^{-1}I^\\bullet$ with $Rf'_*g'^{-1}F$. The complex $g^{-1}f_*I^\\bullet$\ncomputes $g^{-1}Rf_*F$ because inverse image is exact.\n[sk-prop-pbc-degree-zero] gives an isomorphism\n\n$$\ng^{-1}f_*I^m\\xrightarrow{\\ \\sim\\ }f'_*g'^{-1}I^m\n$$\n\nof sheaves of $\\mathbf Z/r\\mathbf Z$-modules on $Y'_{\\Et}$ in each degree.\nNaturality makes these into an isomorphism of complexes. The resolution\nformula of [sk-def-exchange] identifies that isomorphism with the derived\nexchange map $\\Ex_{\\square,F}$ in $D^+(Y'_{\\Et},\\mathbf Z/r\\mathbf Z)$, and\nhence, forgetting the module structure, in $D^+(Y'_{\\Et},\\mathbf Z)$. This\nproves all degrees of (2) for prime-torsion sheaves.\n\nNext suppose $nF=0$. Induct on the number of prime factors of $n$, counted\nwith multiplicity. The case $n=1$ is trivial. Choose a prime $r\\mid n$ and\nuse\n\n$$\n0\\longrightarrow F[r]\\longrightarrow F\\xrightarrow{\\ r\\ }rF\\longrightarrow0.\n$$\n\nThe kernel is killed by $r$, and the image $rF$ is killed by $n/r$. Applying\nthe two functors\n$g^{-1}Rf_*,\\ Rf'_*g'^{-1}:D^+(X_{\\Et},\\mathbf Z)\\to D^+(Y'_{\\Et},\\mathbf Z)$\ngives a morphism of distinguished triangles in $D^+(Y'_{\\Et},\\mathbf Z)$\nwhose outer exchange maps are isomorphisms by the preceding case and\ninduction. The middle exchange is an isomorphism, by the long exact\ncohomology sequences and the five lemma. Thus (2) holds for all sheaves\nkilled by an integer.\n\nFor a general torsion sheaf, write $F=\\varinjlim_nF[n]$ as in [sk-def-pbc].\nInverse images commute with colimits, and both $f$ and $f'$ are\nquasi-compact and quasi-separated. The filtered-colimit isomorphism above\nidentifies the exchange map in degree $q$ for $F$ with the filtered colimit\nof those for $F[n]$. Hence it is an isomorphism. This proves (2).",
+      "uses": [
+        "sk-thm-acyclicity",
+        "sk-def-exchange",
+        "sk-def-pbc"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*(2) implies (1).* Let $K\\in D^+(X_{\\Et},\\mathbf Z)$ have torsion\ncohomology. If $K$ is bounded, induction on its cohomological length using\nthe canonical truncation triangles and (2) proves that its exchange map is an\nisomorphism. In general fix a degree $m$ and choose $N\\geq m$. The complex\n$\\tau_{\\leq N}K$ is bounded and has the desired comparison. Both functors\n$g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ send $D^{\\geq N+1}(X_{\\Et},\\mathbf Z)$ into\n$D^{\\geq N+1}(Y'_{\\Et},\\mathbf Z)$, since inverse images are exact and\nderived direct images are left $t$-exact. Applying them to\n\n$$\n\\tau_{\\leq N}K\\longrightarrow K\\longrightarrow\\tau_{\\geq N+1}K\n\\xrightarrow{+1}\n$$\n\nshows that comparison for $K$ in degree $m$ is the comparison for\n$\\tau_{\\leq N}K$. It is an isomorphism. Since $m$ was arbitrary, (1)\nfollows; no bound on the cohomological dimension of $f$ enters.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Fixed coefficients.* For the fixed ring $\\Lambda$ annihilated by an\ninteger, every module sheaf is torsion. The same injective-resolution\nargument proves the sheaf assertion directly from $\\mathrm{IA}_\\Lambda(f)$,\nand the same truncation argument proves it for $D^+$. The reverse\nimplication follows by applying exchange to an injective $\\Lambda$-module\nsheaf.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-def-pbc-conventions",
+    "sk-thm-acyclicity",
+    "sk-def-exchange",
+    "sk-def-pbc"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-iff/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1051,
+  "blueprint_uses": [
+    "sk-def-conv",
+    "sk-def-exchange",
+    "sk-def-ia",
+    "sk-def-pbc",
+    "sk-thm-acyclicity",
+    "sk-def-pbc-conventions",
+    "sk-prop-pbc-degree-zero"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-conv"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "det-def-sfb-ring-object-transport",
+  "kind": "statement",
+  "title": "Strong monoidal functors preserve ring objects",
+  "statement": "Let $F\\colon\\mathcal C\\to\\mathcal D$ be a lax monoidal functor between monoidal categories, with\nstructure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$, natural in $X,Y$, and\n$\\varepsilon^F\\colon\\mathbf 1\\to F\\mathbf 1$, satisfying the usual associativity and unit\ncoherences. (A strong monoidal functor is the case where these are isomorphisms.) For a ring object\n$(R,\\mu,\\eta)$ of $\\mathcal C$ ([det-def-sfb-ring-object-monoid]) put\n$$\n\\mu_{FR}:=F(\\mu)\\circ\\mu^F_{R,R}\\colon FR\\otimes FR\\to FR,\\qquad \\eta_{FR}:=F(\\eta)\\circ\\varepsilon^F\\colon\\mathbf 1\\to FR .\n$$\nThen:\n\n1. $(FR,\\mu_{FR},\\eta_{FR})$ is a ring object of $\\mathcal D$, and for a morphism $f$ of ring\n   objects, $Ff$ is a morphism of ring objects; this defines a functor\n   $\\mathrm{Mon}(F)\\colon\\mathrm{Mon}(\\mathcal C)\\to\\mathrm{Mon}(\\mathcal D)$ over $F$;\n2. if $\\mathcal C,\\mathcal D$ are braided and $F$ is braided, i.e.\n   $F(\\beta_{X,Y})\\circ\\mu^F_{X,Y}=\\mu^F_{Y,X}\\circ\\beta_{FX,FY}$, then $FR$ is commutative whenever\n   $R$ is;\n3. a monoidal natural transformation $\\tau\\colon F\\Rightarrow F'$ between lax monoidal functors has\n   components $\\tau_R\\colon FR\\to F'R$ that are morphisms of ring objects; in particular a monoidal\n   natural isomorphism gives isomorphic ring objects.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.md",
+    "place": "node det-def-sfb-ring-object-transport, order None"
+  },
+  "stmt_deps": [
+    "det-def-sfb-ring-object-monoid"
+  ],
+  "proof": [
+    {
+      "text": "1. *Associativity.* Using naturality of $\\mu^F$, then the associativity coherence of $F$, then the\n   associativity of $\\mu$,\n   $$\n   \\begin{aligned}\n   \\mu_{FR}(\\mu_{FR}\\otimes FR)&=F\\mu\\circ\\mu^F_{R,R}\\circ(F\\mu\\otimes FR)\\circ(\\mu^F_{R,R}\\otimes FR)\n   =F\\mu\\circ F(\\mu\\otimes R)\\circ\\mu^F_{R\\otimes R,R}\\circ(\\mu^F_{R,R}\\otimes FR)\\\\\n   &=F\\mu\\circ F(\\mu\\otimes R)\\circ F(\\alpha^{-1}_{R,R,R})\\circ\\mu^F_{R,R\\otimes R}\\circ(FR\\otimes\\mu^F_{R,R})\\circ\\alpha_{FR,FR,FR}\\\\\n   &=F\\mu\\circ F(R\\otimes\\mu)\\circ\\mu^F_{R,R\\otimes R}\\circ(FR\\otimes\\mu^F_{R,R})\\circ\\alpha_{FR,FR,FR}\n   =\\mu_{FR}(FR\\otimes\\mu_{FR})\\alpha_{FR,FR,FR}.\n   \\end{aligned}\n   $$\n   *Units.* By naturality of $\\mu^F$, the left unit coherence of $F$ and the left unit law of $R$,\n   $\\mu_{FR}(\\eta_{FR}\\otimes FR)=F\\mu\\circ F(\\eta\\otimes R)\\circ\\mu^F_{\\mathbf 1,R}\\circ(\\varepsilon^F\\otimes FR)\n   =F\\mu\\circ F(\\eta\\otimes R)\\circ F(\\lambda_R^{-1})\\circ\\lambda_{FR}=F(\\lambda_R)F(\\lambda_R^{-1})\\lambda_{FR}=\\lambda_{FR}$;\n   the right unit law is symmetric. *Morphisms.* If $f\\colon R\\to R'$ is a morphism of ring\n   objects, then $Ff\\circ\\mu_{FR}=F(f\\mu)\\mu^F_{R,R}=F(\\mu'(f\\otimes f))\\mu^F_{R,R}=F\\mu'\\circ\\mu^F_{R',R'}\\circ(Ff\\otimes Ff)$\n   by naturality of $\\mu^F$, and $Ff\\circ\\eta_{FR}=F(f\\eta)\\varepsilon^F=\\eta_{FR'}$. Functoriality\n   is that of $F$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "2. $\\mu_{FR}\\beta_{FR,FR}=F\\mu\\circ\\mu^F_{R,R}\\circ\\beta_{FR,FR}=F\\mu\\circ F(\\beta_{R,R})\\circ\\mu^F_{R,R}=F(\\mu\\beta_{R,R})\\mu^F_{R,R}=\\mu_{FR}$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "3. Monoidality of $\\tau$ means $\\tau_{X\\otimes Y}\\circ\\mu^F_{X,Y}=\\mu^{F'}_{X,Y}\\circ(\\tau_X\\otimes\\tau_Y)$ and\n   $\\tau_{\\mathbf 1}\\varepsilon^F=\\varepsilon^{F'}$. Then\n   $\\tau_R\\mu_{FR}=\\tau_RF\\mu\\,\\mu^F_{R,R}=F'\\mu\\,\\tau_{R\\otimes R}\\mu^F_{R,R}=F'\\mu\\,\\mu^{F'}_{R,R}(\\tau_R\\otimes\\tau_R)=\\mu_{F'R}(\\tau_R\\otimes\\tau_R)$\n   and $\\tau_R\\eta_{FR}=F'\\eta\\,\\tau_{\\mathbf 1}\\varepsilon^F=\\eta_{F'R}$, by naturality of $\\tau$. If\n   $\\tau_R$ is invertible, its inverse is then also a morphism of ring objects.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-def-sfb-ring-object-monoid"
+  ],
+  "proof_split_by": "list",
+  "blueprint_snapshot": "main-20261015"
+}

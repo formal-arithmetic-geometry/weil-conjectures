@@ -1,0 +1,100 @@
+{
+  "id": "sk-prop-sf-rf-shriek-preservation",
+  "kind": "statement",
+  "title": "$f^!$ with finite coefficients",
+  "statement": "Let $A$ be a finite commutative $\\ell$-primary ring. For every separated\nfinite-type morphism $f:X\\to Y$, the right adjoint\n$f^!\\colon\\Loc(\\Dctf(Y,A))\\to\\Loc(\\Dctf(X,A))$ of [sk-prop-sf-existence]\nsatisfies\n\n$$\nf^!\\bigl(\\Dctf(Y,A)\\bigr)\\subseteq\\Dctf(X,A).\n$$\n\nConsequently its adjunction restricts to\n\n$$\nRf_!:\\Dctf(X,A)\\ \\rightleftarrows\\ \\Dctf(Y,A):f^!.\n$$\n\nFor smooth $f$ of pure relative dimension $d$, the functor\n$f^!\\colon\\Dctf(Y,A)\\to\\Dctf(X,A)$ is locally on $X$ isomorphic to\n$f^*(-)(d)[2d]$. (The canonical global isomorphism for smooth $f$ is\nconstructed in the smooth-purity chapter.)",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
+    "place": "node sk-prop-sf-rf-shriek-preservation, order 1556"
+  },
+  "stmt_deps": [
+    "sk-prop-sf-existence",
+    "sk-def-sf-admissible",
+    "sk-def-sf-operations",
+    "sk-def-sf-setting"
+  ],
+  "proof": [
+    {
+      "text": "Locally on $X$ and $Y$, $f$ is a closed immersion followed by the projection\nfrom an affine space, so we treat these two cases and then glue.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Let $i:Z\\hookrightarrow X$ be a closed immersion with open complement\n$j:U\\hookrightarrow X$, and let $R\\underline\\Gamma_Z$ be as in\n[sk-lem-formal-closed-support], so that for $K\\in\\Dctf(X,A)$ there is a\ntriangle in $D(X_{\\mathrm{proét}},A)$\n\n$$\ni_*R\\underline\\Gamma_ZK\\longrightarrow K\\longrightarrow Rj_*j^*K\n      \\longrightarrow i_*R\\underline\\Gamma_ZK[1].\n$$",
+      "uses": [
+        "sk-lem-formal-closed-support"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "By [sk-cor-sf-direct-image-ctf] the two right-hand terms lie in $\\Dctf$, hence\nso does $R\\underline\\Gamma_ZK$; explicitly, a Tor interval $[a,b]$ for $K$\ngives the interval $[a,b+\\operatorname{cd}_\\ell(j)+1]$ for\n$R\\underline\\Gamma_ZK$. Since\n$R\\underline\\Gamma_Z\\colon D(X_{\\mathrm{proét}},A)\\to D(Z_{\\mathrm{proét}},A)$\nis right adjoint to $i_*$ ([sk-lem-formal-closed-support] (1)) and\n$\\Loc(\\Dctf(-,A))$ is a full subcategory of $D((-)_{\\mathrm{proét}},A)$,\nuniqueness of right adjoints identifies $R\\underline\\Gamma_ZK$ with $i^!K$ in\n$\\Loc(\\Dctf(Z,A))$.",
+      "uses": [
+        "sk-lem-formal-closed-support"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For the projection $a:\\mathbf A^d_Y\\to Y$, the projective-line adjunction\n$Rq_*\\dashv q^*(1)[2]$ of [sk-prop-geo-p1-adjunction] and\n[sk-lem-geo-affine-local] give $a^!=a^*(d)[2d]$ as functors\n$\\Loc(\\Dctf(Y,A))\\to\\Loc(\\Dctf(\\mathbf A^d_Y,A))$. This functor preserves\n$\\Dctf$, because pullback preserves a bounded constructible flat model and the\nTate twist is locally free of rank one. More generally, [sk-prop-cohsm] proves\nthe same for smooth morphisms, whose dualizing complexes are locally an\ninvertible sheaf shifted by $2d$.",
+      "uses": [
+        "sk-lem-geo-affine-local"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Finally, after restricting to affine opens in $X$ and $Y$, a finite-type\nmorphism factors as a closed immersion into an affine space over $Y$ followed\nby its projection. Composition and open locality of the adjunction identify the\nrestriction of $f^!K$ with the composite of the two functors just considered,\nso $f^!K$ is bounded constructible of finite Tor amplitude locally on $X$. A\nfinite affine cover of the quasi-compact scheme $X$ gives one cohomological\ninterval and one Tor interval valid everywhere. Since $Rf_!$ preserves $\\Dctf$\nby [sk-prop-ctf-finite-proper], both sides of the adjunction lie in $\\Dctf$, and\nits Hom bijections restrict.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-lem-formal-closed-support",
+    "sk-lem-geo-affine-local"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "lean_not_found",
+    "in_cycle"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1556,
+  "blueprint_uses": [
+    "sk-def-sf-admissible",
+    "sk-def-sf-operations",
+    "sk-def-sf-setting",
+    "sk-lem-sf-mate",
+    "sk-prop-sf-existence"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension",
+    "AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion",
+    "AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension",
+    "AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-sf-admissible",
+    "sk-def-sf-operations",
+    "sk-def-sf-setting"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

@@ -1,0 +1,80 @@
+{
+  "id": "sk-thm-picard-twist",
+  "kind": "statement",
+  "title": "Translating into the chart",
+  "statement": "Let $C/k$ be a smooth projective geometrically connected curve, and\nsuppose that $k$ is algebraically closed. For every field extension $K/k$\nand every invertible sheaf $\\cL$ on $C_K$, there is an invertible sheaf\n$\\cM_0$ on $C$ such that\n\n$$\nh^0(C_K,\\cL\\otimes\\cM_{0,K})=1,\n\\qquad H^1(C_K,\\cL\\otimes\\cM_{0,K})=0.\n$$\n\n(The same holds, with the same proof, for $k$ separably closed and $C$ a\nconnected smooth proper curve over $k$: the only input about $k$ is that\n$C(k)$ is infinite, [sk-prop-picard-dense-points].)",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-twist/_section.md",
+    "place": "node sk-thm-picard-twist, order 609",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9Y"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic"
+  ],
+  "proof": [
+    {
+      "text": "Choose an ample $\\cM$ on $C$ ($C$ is projective). For $r\\gg0$, Serre\nvanishing ([sk-thm-picard-serre-b]) and Riemann–Roch\n([sk-thm-picard-rr], valid on $C_K$ since $H^0(C_K,\\cO_{C_K})=K$ by flat\nbase change) make $\\cF=\\cL\\otimes\\cM_K^{\\otimes r}$ have zero $H^1$ and a\npositive-dimensional space of sections:\n$h^0(\\cF)=\\chi(\\cF)=\\deg\\cL+r\\deg\\cM+1-g\\to\\infty$.",
+      "uses": [
+        "sk-thm-picard-serre-b",
+        "sk-thm-picard-rr"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Whenever $h^0(\\cF)$ is larger than $1$, choose a nonzero section $s$ and\na point $x\\in C(k)$ where $s$ is nonzero. Such a point exists: $s$ has a\nfinite zero divisor on $C_K$, while $C(k)$ is infinite\n([sk-prop-picard-dense-points]) and its distinct points remain distinct\non $C_K$. The sequence\n\n$$\n0\\longrightarrow\\cF(-x_K)\\longrightarrow\\cF\\longrightarrow\\cF|_{x_K}\\longrightarrow0\n$$\n\nshows that subtraction of $x_K$ lowers $h^0$ by exactly $1$ and preserves\n$H^1=0$: in the long exact sequence, $h^0(\\cF|_{x_K})=1$, the map\n$H^0(\\cF)\\to H^0(\\cF|_{x_K})$ is onto because $s(x_K)\\ne0$, and\n$H^1(\\cF(-x_K))\\to H^1(\\cF)=0$ is injective, its kernel being the\ncokernel of that onto map. Continue until $h^0=1$. All subtracted points\ncome from $k$, so the resulting twist has the form\n$\\cM_0=\\cM^{\\otimes r}(-x_1-\\cdots-x_s)$ on $C$, with\n$\\cM_{0,K}=\\cM_K^{\\otimes r}(-x_{1,K}-\\cdots-x_{s,K})$. Normalization\nalong a rational point $P$ does not change the fibre cohomology\ndimensions (it tensors with the pullback of a line bundle on the\nbase field, which is trivial). This is the twist argument of Stacks\nProject, Tag 0B9Y.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "sk-thm-picard-serre-b",
+    "sk-thm-picard-rr",
+    "sk-thm-picard-serre-a"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-twist/_section.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 609,
+  "blueprint_uses": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-thm-picard-serre-a",
+    "sk-thm-picard-rr",
+    "sk-prop-picard-dense-points"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Scheme.exists_isInvertible_twist"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Scheme.exists_isInvertible_twist"
+  ],
+  "blueprint_tags": [
+    "sketch"
+  ],
+  "uses_not_cited": [
+    "sk-def-av-jacobian",
+    "sk-def-av-pic",
+    "sk-thm-picard-serre-a"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015"
+}

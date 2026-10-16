@@ -1,281 +1,287 @@
 {
- "id": "lem-kun-inverse-image-monoidal",
- "blueprint": {
-  "is": "lem-kun-inverse-image-monoidal",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Monoidality of the derived inverse image",
- "statement": "Let $u:U\\to V$ be a morphism of schemes and $\\Lambda$ a commutative\nring. For $K,L\\in D(V_{\\Et},\\Lambda)$ the canonical comparison\nmorphism\n\n$$\nu^{-1}K\\kunotimes{\\Lambda}u^{-1}L\\longrightarrow\nu^{-1}\\bigl(K\\kunotimes{\\Lambda}L\\bigr)\n$$\n\nof [def-kun-derived-tensor] associated with the\ninverse image $u^{-1}$ is an\nisomorphism, bifunctorial in $K$ and $L$.\n(*Source:* Stacks Project, Lemma 21.18.4,\n[Tag `07A4`](https://stacks.math.columbia.edu/tag/07A4),\nfor the morphism of ringed topoi induced by $u$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-inverse-image-monoidal.md",
-  "place": "node lem-kun-inverse-image-monoidal, order 1734",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 07A4"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-kun-derived-tensor",
-  "def-weil-pbc-inverse-image"
- ],
- "proof": [
-  {
-   "text": "Apply [lem-weil-pbc-sets-etale-inverse-image-exact] to $u:U\\to V$. This gives the geometric inverse-image/direct-image adjunction on the small etale sites, with finite-limit-preserving inverse image, as required by the ringed-topos theorem. Choose small representatives of these essentially small sites in a universe larger than the scheme universe, and a still larger universe for module sheaves. Put $R=\\Lambda_V$ and $S=\\Lambda_U$. The underlying constant sheaf of a set $A$ is the coproduct of $A$ copies of the terminal sheaf: sheafification of the corresponding coproduct of terminal presheaves gives exactly the constant-sheaf definition. A left adjoint preserves this coproduct, and finite-limit preservation preserves the terminal object. Thus $u^{-1}\\Lambda_V\\cong\\Lambda_U$. This identification respects addition, multiplication, zero and one: on each constant label it is the identity on $\\Lambda$, and on pairs of labels the finite-product comparison gives the same operations. Equip the induced geometric morphism with this ring isomorphism. Its module pullback $u^*M=S\\otimes_{u^{-1}R}u^{-1}M$ identifies naturally with $u^{-1}M$, by $a\\otimes m\\mapsto am$, inverse $m\\mapsto1\\otimes m$. This is the coefficient inverse image of [def-weil-pbc-inverse-image].",
-   "uses": [
+  "id": "lem-kun-inverse-image-monoidal",
+  "blueprint": {
+    "is": "lem-kun-inverse-image-monoidal",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Monoidality of the derived inverse image",
+  "statement": "Let $u:U\\to V$ be a morphism of schemes and $\\Lambda$ a commutative\nring. For $K,L\\in D(V_{\\Et},\\Lambda)$ the canonical comparison\nmorphism\n\n$$\nu^{-1}K\\kunotimes{\\Lambda}u^{-1}L\\longrightarrow\nu^{-1}\\bigl(K\\kunotimes{\\Lambda}L\\bigr)\n$$\n\nof [def-kun-derived-tensor] associated with the\ninverse image $u^{-1}$ is an\nisomorphism, bifunctorial in $K$ and $L$.\n(*Source:* Stacks Project, Lemma 21.18.4,\n[Tag `07A4`](https://stacks.math.columbia.edu/tag/07A4),\nfor the morphism of ringed topoi induced by $u$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-inverse-image-monoidal.md",
+    "place": "node lem-kun-inverse-image-monoidal, order 1734",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 07A4"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-kun-derived-tensor",
+    "def-weil-pbc-inverse-image"
+  ],
+  "proof": [
+    {
+      "text": "Apply [lem-weil-pbc-sets-etale-inverse-image-exact] to $u:U\\to V$. This gives the geometric inverse-image/direct-image adjunction on the small etale sites, with finite-limit-preserving inverse image, as required by the ringed-topos theorem. Choose small representatives of these essentially small sites in a universe larger than the scheme universe, and a still larger universe for module sheaves. Put $R=\\Lambda_V$ and $S=\\Lambda_U$. The underlying constant sheaf of a set $A$ is the coproduct of $A$ copies of the terminal sheaf: sheafification of the corresponding coproduct of terminal presheaves gives exactly the constant-sheaf definition. A left adjoint preserves this coproduct, and finite-limit preservation preserves the terminal object. Thus $u^{-1}\\Lambda_V\\cong\\Lambda_U$. This identification respects addition, multiplication, zero and one: on each constant label it is the identity on $\\Lambda$, and on pairs of labels the finite-product comparison gives the same operations. Equip the induced geometric morphism with this ring isomorphism. Its module pullback $u^*M=S\\otimes_{u^{-1}R}u^{-1}M$ identifies naturally with $u^{-1}M$, by $a\\otimes m\\mapsto am$, inverse $m\\mapsto1\\otimes m$. This is the coefficient inverse image of [def-weil-pbc-inverse-image].",
+      "uses": [
+        "lem-weil-pbc-sets-etale-inverse-image-exact",
+        "def-kun-constant-sheaf",
+        "def-weil-pbc-inverse-image",
+        "lem-weil-pbc-ringed-topoi-module-adjunction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tags 03Q0 (definition-inverse-image), 03Q1 (lemma-stalk-pullback); coefficient specialization of Tag 03D7"
+      }
+    },
+    {
+      "text": "By [lem-weil-pbc-site-pullback-abelian-exact], $u^{-1}$ preserves kernels and cokernels of abelian sheaves. Kernels and cokernels of module sheaves have these underlying abelian kernels and cokernels, with the induced scalar actions, by [def-weil-sheaf-of-modules-category]. Hence the identified module functor $u^*=u^{-1}$ is exact. Applying it termwise gives $H^n(u^{-1}A^\\bullet)\\cong u^{-1}H^n(A^\\bullet)$, since cohomology is a kernel modulo an image and images are kernels of cokernels. It therefore preserves every quasi-isomorphism, without a bound on $A^\\bullet$. Take a K-flat resolution $p:P\\to A$ with flat terms using [lem-pc-kflat-resolution]. The natural comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] identifies $Lu^*(Q_RA)$ with $Q_S(u^*P)$. The map $u^*p$ is a quasi-isomorphism by exactness, so its localization gives $Lu^*(Q_RA)\\cong Q_S(u^{-1}A)$. To check naturality on all complexes rather than only chosen resolutions, use the canonical natural transformation $\\epsilon:Lu^*Q_R\\to Q_Su^*$ supplied by the same node. Its naturality for $p$ gives $\\epsilon_A=Q_S(u^*p)\\circ\\epsilon_P\\circ Lu^*(Q_Rp)^{-1}$. All three factors are isomorphisms, so every $\\epsilon_A$ is an isomorphism. Both functors invert quasi-isomorphisms, so this natural isomorphism descends through the derived-category localization; hence $Lu^*$ identifies naturally with the termwise derived inverse image $u^{-1}$.",
+      "uses": [
+        "lem-weil-pbc-site-pullback-abelian-exact",
+        "def-weil-sheaf-of-modules-category",
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-ringed-topoi-derived-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 04JC (lemma-flat-pullback-exact); Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change)"
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] with $(R,S)=(\\Lambda_V,\\Lambda_U)$ and the ring isomorphism from step 1. Its hypotheses are the geometric morphism and small ringed sites established there; it applies to the unbounded categories and to arbitrary $K,L$. Replace $Lu^*$ by the identification in step 2. The tensor products here are the K-flat total tensor products of [def-kun-derived-tensor], so this yields a canonical bifunctorial isomorphism $u^{-1}(K\\otimes_\\Lambda^{\\mathbf L}L)\\xrightarrow{\\sim}u^{-1}K\\otimes_\\Lambda^{\\mathbf L}u^{-1}L$. Its inverse has the direction displayed in the item.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "def-kun-derived-tensor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, label lemma-pullback-tensor-product, specialized to constant coefficient ring sheaves"
+      }
+    },
+    {
+      "text": "To identify this inverse with the stated canonical comparison, take K-flat flat-term representatives $P,Q$ of $K,L$. The ringed-topos tensor theorem ensures their pullbacks are K-flat with flat terms and that these total tensors compute both sides. The canonical module comparison sends the tensor of inverse-image local generators $m,n$ to the inverse-image generator $m\\otimes n$. Explicitly, under the tensor-formula pullback it is $(a\\otimes m)\\otimes(b\\otimes n)\\mapsto ab\\otimes(m\\otimes n)$; the balanced relations over $R$ and $S$ make this bilinear rule well-defined, and sheafification gives the corresponding sheaf morphism. By [lem-weil-pbc-ringed-topoi-module-pullback-tensor], in bidegree $(p,q)$ this canonical comparison is the inverse of $u^*(P^p\\otimes_RQ^q)\\xrightarrow{\\sim}u^*P^p\\otimes_Su^*Q^q$. The module adjunction makes $u^*$ a left adjoint, so it preserves the direct sums in totalization. Naturality of the degreewise maps makes them commute with both $d_P\\otimes1$ and $1\\otimes d_Q$; additivity preserves the factor $(-1)^p$. Consequently their direct sum is an isomorphism of total complexes in exactly the displayed direction. This is the comparison used in the proof of Tag 07A4, not an arbitrary isomorphism between its objects. The uniqueness of extension from K-flat flat-term models in [lem-weil-pbc-site-derived-tensor-descent] identifies it on all derived objects. It is simultaneously natural in both arguments; equivalently naturality of the isomorphism in step 3 gives naturality of its inverse by composing the naturality square with inverse components.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "lem-weil-pbc-ringed-topoi-module-adjunction",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, proof, last displayed total-complex comparison; Tag 03EL (lemma-tensor-product-pullback); Tag 06YU (definition-derived-tor)"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-sets-etale-inverse-image-exact",
     "def-kun-constant-sheaf",
     "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03Q0 (definition-inverse-image), 03Q1 (lemma-stalk-pullback); coefficient specialization of Tag 03D7"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-site-pullback-abelian-exact], $u^{-1}$ preserves kernels and cokernels of abelian sheaves. Kernels and cokernels of module sheaves have these underlying abelian kernels and cokernels, with the induced scalar actions, by [def-weil-sheaf-of-modules-category]. Hence the identified module functor $u^*=u^{-1}$ is exact. Applying it termwise gives $H^n(u^{-1}A^\\bullet)\\cong u^{-1}H^n(A^\\bullet)$, since cohomology is a kernel modulo an image and images are kernels of cokernels. It therefore preserves every quasi-isomorphism, without a bound on $A^\\bullet$. Take a K-flat resolution $p:P\\to A$ with flat terms using [lem-pc-kflat-resolution]. The natural comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] identifies $Lu^*(Q_RA)$ with $Q_S(u^*P)$. The map $u^*p$ is a quasi-isomorphism by exactness, so its localization gives $Lu^*(Q_RA)\\cong Q_S(u^{-1}A)$. To check naturality on all complexes rather than only chosen resolutions, use the canonical natural transformation $\\epsilon:Lu^*Q_R\\to Q_Su^*$ supplied by the same node. Its naturality for $p$ gives $\\epsilon_A=Q_S(u^*p)\\circ\\epsilon_P\\circ Lu^*(Q_Rp)^{-1}$. All three factors are isomorphisms, so every $\\epsilon_A$ is an isomorphism. Both functors invert quasi-isomorphisms, so this natural isomorphism descends through the derived-category localization; hence $Lu^*$ identifies naturally with the termwise derived inverse image $u^{-1}$.",
-   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "lem-weil-pbc-site-pullback-abelian-exact",
     "def-weil-sheaf-of-modules-category",
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC (lemma-flat-pullback-exact); Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] with $(R,S)=(\\Lambda_V,\\Lambda_U)$ and the ring isomorphism from step 1. Its hypotheses are the geometric morphism and small ringed sites established there; it applies to the unbounded categories and to arbitrary $K,L$. Replace $Lu^*$ by the identification in step 2. The tensor products here are the K-flat total tensor products of [def-kun-derived-tensor], so this yields a canonical bifunctorial isomorphism $u^{-1}(K\\otimes_\\Lambda^{\\mathbf L}L)\\xrightarrow{\\sim}u^{-1}K\\otimes_\\Lambda^{\\mathbf L}u^{-1}L$. Its inverse has the direction displayed in the item.",
-   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-kun-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent"
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, specialized to constant coefficient ring sheaves"
-   }
+    "place": "Tag 07A4, lemma-pullback-tensor-product, with exact constant-coefficient specialization via Tag 03Q1"
   },
-  {
-   "text": "To identify this inverse with the stated canonical comparison, take K-flat flat-term representatives $P,Q$ of $K,L$. The ringed-topos tensor theorem ensures their pullbacks are K-flat with flat terms and that these total tensors compute both sides. The canonical module comparison sends the tensor of inverse-image local generators $m,n$ to the inverse-image generator $m\\otimes n$. Explicitly, under the tensor-formula pullback it is $(a\\otimes m)\\otimes(b\\otimes n)\\mapsto ab\\otimes(m\\otimes n)$; the balanced relations over $R$ and $S$ make this bilinear rule well-defined, and sheafification gives the corresponding sheaf morphism. By [lem-weil-pbc-ringed-topoi-module-pullback-tensor], in bidegree $(p,q)$ this canonical comparison is the inverse of $u^*(P^p\\otimes_RQ^q)\\xrightarrow{\\sim}u^*P^p\\otimes_Su^*Q^q$. The module adjunction makes $u^*$ a left adjoint, so it preserves the direct sums in totalization. Naturality of the degreewise maps makes them commute with both $d_P\\otimes1$ and $1\\otimes d_Q$; additivity preserves the factor $(-1)^p$. Consequently their direct sum is an isomorphism of total complexes in exactly the displayed direction. This is the comparison used in the proof of Tag 07A4, not an arbitrary isomorphism between its objects. The uniqueness of extension from K-flat flat-term models in [lem-weil-pbc-site-derived-tensor-descent] identifies it on all derived objects. It is simultaneously natural in both arguments; equivalently naturality of the isomorphism in step 3 gives naturality of its inverse by composing the naturality square with inverse components.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "KFlat|derivedTensor|tensorDerived",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived inverse image of sheaves is monoidal for the derived tensor product",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"derived\", \"tensor\"",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Inverse image of etale sheaves of modules over a constant commutative ring commutes with unbounded derived tensor product",
+      "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalLightCondSetLightCondModFree; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.FormallyEtale.instTensorProduct; LightCondensed.instMonoidalCategoryLightCondMod",
+      "date": "2026-10-14",
+      "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "An exact pullback functor on module sheaves induces a strong monoidal functor on unbounded derived categories",
+      "results": "CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Functor.mapDerivedCategory",
+      "date": "2026-10-14",
+      "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "grep",
+      "query": "mapDerivedCategory|Monoidal.*derived|derived.*Monoidal",
+      "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Monoidal\", \"DerivedCategory\"",
+      "results": "[]",
+      "date": "2026-10-14",
+      "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Strong monoidal structure on the derived functor induced by an exact functor between categories of sheaves of modules",
+      "results": "CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.GrothendieckTopology.W.transport_isMonoidal; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+      "date": "2026-10-14",
+      "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "undischarged_input",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1734,
+  "blueprint_uses": [
+    "def-kun-derived-tensor",
+    "def-weil-pbc-inverse-image"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-inverse-image"
+  ],
+  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Lemma 21.18.4 ([Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)), for the morphism of ringed topoi induced by the morphism of schemes: the inverse image is monoidal for the derived tensor product. No separate proof is given.",
+  "blueprint_proof_steps": [
+    {
+      "text": "This is the recorded classical input named in the statement, Stacks Project, Lemma 21.18.4 ([Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)), for the morphism of ringed topoi induced by the morphism of schemes: the inverse image is monoidal for the derived tensor product. No separate proof is given.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-kunneth-ordinary",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-kun-inverse-image-monoidal",
+    "worker": "stage1",
+    "summary": "Reused the existing arbitrary-ringed-topos tensor theorem and its existing supporting interfaces. Proved the constant coefficient specialization, exact derived inverse-image identification, and checked the canonical comparison direction and bifunctoriality on K-flat models. No new nodes and no statement change.",
+    "blueprint": "Realizes the sole blueprint proof paragraph invoking Tag 07A4 for the ringed topoi induced by a scheme morphism; expands its constant-coefficient identification and canonical comparison.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-site-pullback-abelian-exact",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, proof, last displayed total-complex comparison; Tag 03EL (lemma-tensor-product-pullback); Tag 06YU (definition-derived-tor)"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-sets-etale-inverse-image-exact",
-  "def-kun-constant-sheaf",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-kun-derived-tensor",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, lemma-pullback-tensor-product, with exact constant-coefficient specialization via Tag 03Q1"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "KFlat|derivedTensor|tensorDerived",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived inverse image of sheaves is monoidal for the derived tensor product",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"derived\", \"tensor\"",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Inverse image of etale sheaves of modules over a constant commutative ring commutes with unbounded derived tensor product",
-   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalLightCondSetLightCondModFree; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.FormallyEtale.instTensorProduct; LightCondensed.instMonoidalCategoryLightCondMod",
-   "date": "2026-10-14",
-   "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An exact pullback functor on module sheaves induces a strong monoidal functor on unbounded derived categories",
-   "results": "CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Functor.mapDerivedCategory",
-   "date": "2026-10-14",
-   "verdict": "no match: underived sheaf monoidality, formally etale differential tensors, exact-functor derived maps and degreewise Tor do not state the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "grep",
-   "query": "mapDerivedCategory|Monoidal.*derived|derived.*Monoidal",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Monoidal\", \"DerivedCategory\"",
-   "results": "[]",
-   "date": "2026-10-14",
-   "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Strong monoidal structure on the derived functor induced by an exact functor between categories of sheaves of modules",
-   "results": "CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.GrothendieckTopology.W.transport_isMonoidal; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
-   "date": "2026-10-14",
-   "verdict": "no match: exact-functor derived-category maps and underived sheaf monoidal structures do not give the unbounded derived tensor comparison"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "undischarged_input",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1734,
- "blueprint_uses": [
-  "def-kun-derived-tensor",
-  "def-weil-pbc-inverse-image"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-inverse-image"
- ],
- "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Lemma 21.18.4 ([Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)), for the morphism of ringed topoi induced by the morphism of schemes: the inverse image is monoidal for the derived tensor product. No separate proof is given.",
- "blueprint_proof_steps": [
-  {
-   "text": "This is the recorded classical input named in the statement, Stacks Project, Lemma 21.18.4 ([Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)), for the morphism of ringed topoi induced by the morphism of schemes: the inverse image is monoidal for the derived tensor product. No separate proof is given.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-kun-inverse-image-monoidal",
-  "worker": "stage1",
-  "summary": "Reused the existing arbitrary-ringed-topos tensor theorem and its existing supporting interfaces. Proved the constant coefficient specialization, exact derived inverse-image identification, and checked the canonical comparison direction and bifunctoriality on K-flat models. No new nodes and no statement change.",
-  "blueprint": "Realizes the sole blueprint proof paragraph invoking Tag 07A4 for the ringed topoi induced by a scheme morphism; expands its constant-coefficient identification and canonical comparison.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-site-pullback-abelian-exact",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic site/ringed-topos or K-flat tool for the Tag 07A4 specialization; the unit has no independent theorem supplying this interface."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-sets-etale-inverse-image-exact",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent"
- ],
- "reviewed": {
-  "date": "2026-10-14",
-  "by": "L",
-  "reviewer": "NT-Codex-NA-0745d9473",
-  "group": "NA",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-0745d9473 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements in full. Stacks 07A4, 06YY, 03EL and exactness sources support all four steps, including constant coefficients, unbounded complexes and the precise canonical comparison direction. Edge cases and dependency traversal passed; no new nodes or fixes. Accepted eight generic tool uses; concrete checks recorded in review.md."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-1b3b919b1",
-  "group": "NZ",
-  "result": "pass",
-  "note": "Checked immutable records, sources, exact declarations, dependencies, canonical comparison, universes and edge cases. scompile.py specialization passed without warnings. No repository changes."
- },
- "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison",
-  "declaration": "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso",
-  "declarations": [
-   "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso",
-   "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison",
-   "AlgebraicGeometry.Etale.isIso_leftDerivedUpperStarTensorComparison",
-   "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso",
-   "AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory"
   ],
-  "statement": "noncomputable def leftDerivedUpperStarTensorNatIso :\n    leftDerivedUpperStarDerivedTensor A g ≅ derivedTensorLeftDerivedUpperStar A g",
-  "branch": "slopmaster2",
-  "by": "NZ",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and g to u : U ⟶ V of Scheme.{u}. Import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat for upperStarPreservesFlat_moduleCat; no mathematical flatness assumption is added. The inverse natural isomorphism has the displayed direction u⁻¹K ⊗ᴸ u⁻¹L → u⁻¹(K ⊗ᴸ L). The identification leftDerivedUpperStarIsoMapDerivedCategory identifies L(upperStar A g) with the exact termwise inverse image. The comparison is canonical: leftDerivedUpperStarTensorComparison is defined by deriving the ordinary oplax tensor comparison, and leftDerivedUpperStarTensorNatIso_hom identifies this morphism with the hom of the recorded natural isomorphism. Its inverse is the derived ordinary lax tensor comparison, not an arbitrary chosen isomorphism. Naturality is in both variables because this is an isomorphism in the iterated functor category. The derived tensor is exactly the declaration recorded by def-kun-derived-tensor; the sheaf inverse image is exactly def-weil-pbc-inverse-image."
- }
+  "reviewed": {
+    "date": "2026-10-14",
+    "by": "L",
+    "reviewer": "NT-Codex-NA-0745d9473",
+    "group": "NA",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-0745d9473 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements in full. Stacks 07A4, 06YY, 03EL and exactness sources support all four steps, including constant coefficients, unbounded complexes and the precise canonical comparison direction. Edge cases and dependency traversal passed; no new nodes or fixes. Accepted eight generic tool uses; concrete checks recorded in review.md."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-1b3b919b1",
+    "group": "NZ",
+    "result": "pass",
+    "note": "Checked immutable records, sources, exact declarations, dependencies, canonical comparison, universes and edge cases. scompile.py specialization passed without warnings. No repository changes."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison",
+    "declaration": "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso",
+    "declarations": [
+      "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso",
+      "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison",
+      "AlgebraicGeometry.Etale.isIso_leftDerivedUpperStarTensorComparison",
+      "AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso",
+      "AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory"
+    ],
+    "statement": "noncomputable def leftDerivedUpperStarTensorNatIso :\n    leftDerivedUpperStarDerivedTensor A g ≅ derivedTensorLeftDerivedUpperStar A g",
+    "branch": "slopmaster2",
+    "by": "NZ",
+    "date": "2026-10-15",
+    "existing": true,
+    "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and g to u : U ⟶ V of Scheme.{u}. Import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat for upperStarPreservesFlat_moduleCat; no mathematical flatness assumption is added. The inverse natural isomorphism has the displayed direction u⁻¹K ⊗ᴸ u⁻¹L → u⁻¹(K ⊗ᴸ L). The identification leftDerivedUpperStarIsoMapDerivedCategory identifies L(upperStar A g) with the exact termwise inverse image. The comparison is canonical: leftDerivedUpperStarTensorComparison is defined by deriving the ordinary oplax tensor comparison, and leftDerivedUpperStarTensorNatIso_hom identifies this morphism with the hom of the recorded natural isomorphism. Its inverse is the derived ordinary lax tensor comparison, not an arbitrary chosen isomorphism. Naturality is in both variables because this is an isomorphism in the iterated functor category. The derived tensor is exactly the declaration recorded by def-kun-derived-tensor; the sheaf inverse image is exactly def-weil-pbc-inverse-image."
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Let $u:U\\to V$ be a morphism of schemes and $\\Lambda$ a commutative\nring. For $K,L\\in D(V_{\\Et},\\Lambda)$ the canonical comparison\nmorphism\n\n$$\nu^{-1}K\\kunotimes{\\Lambda}u^{-1}L\\longrightarrow\nu^{-1}\\bigl(K\\kunotimes{\\Lambda}L\\bigr)\n$$\n\nof [def-kun-derived-tensor] associated with the\ninverse image $u^{-1}$ is an\nisomorphism, bifunctorial in $K$ and $L$.",
+    "proof": [],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

@@ -1,0 +1,61 @@
+{
+  "id": "det-properbasechange-modules",
+  "kind": "statement",
+  "title": "Étale proper base change for module coefficients",
+  "statement": "Let $\\Lambda$ be a commutative ring, let $f:X\\to Y$ be proper, let\n$g:Y'\\to Y$ be arbitrary, and let $f',g'$ be the base changes as in\n[def-weil-pbc-derived-exchange]. Write\n$\\mathrm{For}:D^+(T_{\\Et},\\Lambda)\\to D^+(T_{\\Et},\\mathbf Z)$ for the\nforgetful functor. For every $K\\in D^+(X_{\\Et},\\Lambda)$ there is a\ncanonical identification\n\n$$\n\\mathrm{For}\\bigl(\\Ex^{\\Lambda}_{\\square,K}\\bigr)=\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}\n$$\n\nunder the isomorphisms $\\mathrm{For}\\,g^{-1}=g^{-1}\\mathrm{For}$,\n$\\mathrm{For}\\,Rf_*\\cong Rf_*\\mathrm{For}$ (and likewise for $f',g'$) of\n[det-pbc-conventions-module-cohomology]. Consequently, if the cohomology\nsheaves of $\\mathrm{For}K$ are torsion, then\n$\\Ex^{\\Lambda}_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an isomorphism in\n$D^+(Y'_{\\Et},\\Lambda)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.md",
+    "place": "node det-properbasechange-modules, order None"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-derived-exchange",
+    "det-pbc-conventions-module-cohomology"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1: the identification.* Choose a bounded below complex $I^\\bullet$ of\ninjective $\\Lambda$-module sheaves with $K\\simeq I^\\bullet$, and a\nquasi-isomorphism $g'^{-1}I^\\bullet\\to J^\\bullet$ into a bounded below complex\nof injective $\\Lambda$-module sheaves on $X'$. By the resolution formula\n[lemma-weil-pbc-derived-exchange-replacement], $\\Ex^\\Lambda_{\\square,K}$ is\nrepresented by\n\n$$\ng^{-1}f_*I^\\bullet\\xrightarrow{\\ \\Ex^0_{\\square,I^\\bullet}\\ }\nf'_*g'^{-1}I^\\bullet\\longrightarrow f'_*J^\\bullet .\n$$\n\nThe underived exchange map is defined by the unit, the square isomorphism and\nthe counit of the adjunctions $u^{-1}\\dashv u_*$; these are the same maps of\nunderlying abelian sheaves whether one regards the sheaves as module sheaves\nor as abelian sheaves, because inverse and direct image of module sheaves are\ncomputed on underlying abelian sheaves. Hence\n$\\mathrm{For}(\\Ex^0_{\\square,I^m})=\\Ex^0_{\\square,\\mathrm{For}I^m}$ in every\ndegree. By parts (1) and (3) of [det-pbc-conventions-module-cohomology], the terms of\n$\\mathrm{For}I^\\bullet$ are $f_*$-acyclic and those of $\\mathrm{For}J^\\bullet$\nare $f'_*$-acyclic, so by the complex form of\n[lemma-weil-pbc-leray-acyclicity] the complexes $f_*\\mathrm{For}I^\\bullet$ and\n$f'_*\\mathrm{For}J^\\bullet$ compute $Rf_*\\mathrm{For}K$ and\n$Rf'_*g'^{-1}\\mathrm{For}K$. Now choose a quasi-isomorphism\n$\\mathrm{For}I^\\bullet\\to I'^\\bullet$ into a bounded below complex of\ninjective abelian sheaves and an injective replacement\n$g'^{-1}I'^\\bullet\\to J'^\\bullet$ together with a map\n$\\mathrm{For}J^\\bullet\\to J'^\\bullet$ compatible with\n$g'^{-1}\\mathrm{For}I^\\bullet\\to g'^{-1}I'^\\bullet$ (it exists and is unique\nup to homotopy because $J'^\\bullet$ is a bounded below complex of injectives\nand $g'^{-1}\\mathrm{For}I^\\bullet\\to\\mathrm{For}J^\\bullet$ is a\nquasi-isomorphism). Naturality of $\\Ex^0$ in the sheaf gives a commutative\ndiagram of complexes\n\n$$\n\\begin{array}{ccccc}\ng^{-1}f_*\\mathrm{For}I^\\bullet & \\to & f'_*g'^{-1}\\mathrm{For}I^\\bullet & \\to & f'_*\\mathrm{For}J^\\bullet\\\\\n\\downarrow & & \\downarrow & & \\downarrow\\\\\ng^{-1}f_*I'^\\bullet & \\to & f'_*g'^{-1}I'^\\bullet & \\to & f'_*J'^\\bullet\n\\end{array}\n$$\n\nwhose vertical outer arrows are quasi-isomorphisms (both rows' end terms\ncompute the same derived functors, by acyclicity). The bottom row represents\n$\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ by\n[lemma-weil-pbc-derived-exchange-replacement], and the top row is\n$\\mathrm{For}$ of the representative of $\\Ex^\\Lambda_{\\square,K}$. This\nproves the identification.",
+      "uses": [
+        "lemma-weil-pbc-derived-exchange-replacement",
+        "det-pbc-conventions-module-cohomology",
+        "lemma-weil-pbc-leray-acyclicity"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the consequence.* If $\\mathrm{For}K$ has torsion cohomology sheaves,\n$\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ is an isomorphism by\n[thm-weil-pbc-bounded-below]. By Step 1, $\\mathrm{For}$ of\n$\\Ex^\\Lambda_{\\square,K}$ is an isomorphism. The forgetful functor is exact\nand conservative on sheaves, so it reflects quasi-isomorphisms of complexes,\nand $\\Ex^\\Lambda_{\\square,K}$ is an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$.",
+      "uses": [
+        "thm-weil-pbc-bounded-below"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "det-pbc-conventions-module-cohomology",
+    "lemma-weil-pbc-leray-acyclicity",
+    "thm-weil-pbc-bounded-below"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "thm-weil-pbc-bounded-below",
+    "det-pbc-conventions-module-cohomology",
+    "def-weil-pbc-derived-exchange",
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "lemma-weil-pbc-leray-acyclicity"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

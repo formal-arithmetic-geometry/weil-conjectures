@@ -1,0 +1,101 @@
+{
+  "id": "thm-sfb-extend-scalars-localization",
+  "kind": "statement",
+  "title": "Extension of scalars to $E$ is a localization on bounded constructible complexes",
+  "statement": "Let $X$ be a scheme whose underlying topological space is Noetherian. Then the functor\n$E\\otimes^{\\mathrm L}_{\\cO_E}-\\colon D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)\\to\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)$ of [def-sfb-bounded-constructible-extend-scalars]\nis a localization functor with respect to the class $W_{\\ell^{\\mathbf N}}$\n[sk-def-sfb-rationalization]. This is the class of morphisms of the triangulated\n$\\mathbf Z$-linear category $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)$\n[sk-def-sfb-bounded-constructible] whose mapping cone is killed by some power $\\ell^n$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.md",
+    "place": "node thm-sfb-extend-scalars-localization, order 1650",
+    "external": [
+      {
+        "document": "Bhatt",
+        "place": "There $\\Hom(K,-)$ is computed by pro-étale cohomology on a quasi-compact quasi-separated scheme (a topologically Noetherian scheme is such), which commutes with filtered colimits (Bhatt–Scholze, §6.8)."
+      },
+      {
+        "document": "Scholze",
+        "place": "There $\\Hom(K,-)$ is computed by pro-étale cohomology on a quasi-compact quasi-separated scheme (a topologically Noetherian scheme is such), which commutes with filtered colimits (Bhatt–Scholze, §6.8)."
+      },
+      {
+        "document": "Bhatt",
+        "place": "This is the existence of $\\cO_E$-lattices: scale a local presentation by a power of $\\ell$ to make it integral, and glue over the finitely many strata and a finite subcover (Bhatt–Scholze, §6.8)."
+      },
+      {
+        "document": "Scholze",
+        "place": "This is the existence of $\\cO_E$-lattices: scale a local presentation by a power of $\\ell$ to make it integral, and glue over the finitely many strata and a finite subcover (Bhatt–Scholze, §6.8)."
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sfb-bounded-constructible-extend-scalars",
+    "sk-def-sfb-rationalization",
+    "sk-def-sfb-bounded-constructible"
+  ],
+  "proof": [
+    {
+      "text": "Write $F=E\\otimes^{\\mathrm L}_{\\cO_E}-$, $\\mathcal T=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)$\nand $\\mathcal T'=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)$. By the proof of\n[lem-sfb-extend-scalars-bounded-constructible], $F$ is induced by the exact functor\n$E_X\\otimes_{\\cO_{E,X}}-$ with $E_X=\\colim(\\cO_{E,X}\\xrightarrow{\\ell}\\cO_{E,X}\\to\\cdots)$.\nSo $F$ is triangulated.",
+      "uses": [
+        "lem-sfb-extend-scalars-bounded-constructible"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*$F$ inverts $W_{\\ell^{\\mathbf N}}$.* If $\\ell^n\\cdot\\mathrm{id}_Z=0$, then\n$\\ell^n\\cdot\\mathrm{id}_{F(Z)}=0$. But $\\ell$ acts invertibly on $E_X$-modules, so\n$F(Z)=0$. A morphism with $\\ell$-power-torsion cone is therefore sent to a morphism with\nzero cone, i.e. to an isomorphism. So $F$ factors through\n$\\bar F\\colon\\mathcal T[\\ell^{-1}]\\to\\mathcal T'$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Morphisms of the rationalization.* For $s\\colon L\\to L'$ in $W_{\\ell^{\\mathbf N}}$ with\ncone $C$ killed by $\\ell^n$, the composite $L'\\to C$ of $\\ell^n\\cdot\\mathrm{id}_{L'}$ is\nzero. So $\\ell^n\\cdot\\mathrm{id}_{L'}=s\\circ t$ for some $t\\colon L'\\to L$. Then\n$s\\circ(t\\circ s-\\ell^n)=0$, so $t\\circ s-\\ell^n$ factors through $C[-1]$ and is killed by\n$\\ell^n$, which gives $(\\ell^nt)\\circ s=\\ell^{2n}$. Hence the multiplications by $\\ell^n$\nare cofinal in $W_{\\ell^{\\mathbf N}}$, and\n$$\n\\Hom_{\\mathcal T[\\ell^{-1}]}(K,L)=\\colim\\bigl(\\Hom_{\\mathcal T}(K,L)\\xrightarrow{\\ell}\\Hom_{\\mathcal T}(K,L)\\xrightarrow{\\ell}\\cdots\\bigr)=\\Hom_{\\mathcal T}(K,L)[\\ell^{-1}].\n$$",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Full faithfulness of $\\bar F$.* By the adjunction\n$F\\dashv D(\\operatorname{Res}_\\varphi)$ [sk-def-sfb-derived-extension-of-scalars],\n$\\Hom_{\\mathcal T'}(F(K),F(L))=\\Hom(K,E_X\\otimes_{\\cO_{E,X}}L)$, and\n$E_X\\otimes_{\\cO_{E,X}}L$ is the sequential homotopy colimit of $L\\xrightarrow{\\ell}L\\to\\cdots$.\nSo full faithfulness amounts to the commutation\n$$\n\\colim_\\ell\\Hom(K,L)\\xrightarrow{\\ \\sim\\ }\\Hom(K,\\colim_\\ell L)\n$$\nfor bounded constructible $K,L$. By dévissage along the canonical truncations and the\ncommon stratification of the proof of [sk-def-sfb-bounded-constructible], one reduces to\n$K$ a single locally finitely presented module on a stratum. There $\\Hom(K,-)$ is\ncomputed by pro-étale cohomology on a quasi-compact quasi-separated scheme (a\ntopologically Noetherian scheme is such), which commutes with filtered colimits\n(Bhatt–Scholze, §6.8).",
+      "uses": [
+        "sk-def-sfb-derived-extension-of-scalars",
+        "sk-def-sfb-bounded-constructible"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Essential surjectivity.* The essential image of the fully faithful triangulated functor\n$\\bar F$ is closed under extensions and shifts. Every object of $\\mathcal T'$ is an\niterated extension of shifts of its constructible cohomology sheaves. So it suffices that\nevery constructible $E_X$-module is $E_X\\otimes N$ for a bounded constructible\n$\\cO_{E,X}$-complex $N$. This is the existence of $\\cO_E$-lattices: scale a local\npresentation by a power of $\\ell$ to make it integral, and glue over the finitely many\nstrata and a finite subcover (Bhatt–Scholze, §6.8).\n\nSo $\\bar F$ is an equivalence, i.e. $F$ is a localization at $W_{\\ell^{\\mathbf N}}$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-extend-scalars-bounded-constructible",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "sk-def-sfb-bounded-constructible"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "proof_cites_literature",
+    "long_proof_few_deps",
+    "lean_not_found",
+    "unreachable"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1650,
+  "blueprint_uses": [
+    "def-sfb-bounded-constructible-extend-scalars",
+    "sk-def-sfb-rationalization",
+    "sk-def-sfb-bounded-constructible"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}

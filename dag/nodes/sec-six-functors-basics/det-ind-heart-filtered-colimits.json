@@ -1,0 +1,59 @@
+{
+  "id": "det-ind-heart-filtered-colimits",
+  "kind": "statement",
+  "title": "Ind-constructible sheaves are closed under filtered colimits and sums",
+  "statement": "Let $\\Lambda=E$ or $\\Qlb$. If $(B_\\lambda)_{\\lambda\\in I}$ is a filtered diagram in $\\IndCons(X,\\Lambda)$,\nthen its colimit $B$ in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ lies in $\\IndCons(X,\\Lambda)$. Arbitrary direct sums\nof objects of $\\IndCons(X,\\Lambda)$ lie in $\\IndCons(X,\\Lambda)$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
+    "place": "node det-ind-heart-filtered-colimits, order None"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Let $\\mathcal K$ be the category of pairs $(\\lambda,c\\colon C\\to B_\\lambda)$ with $C$ constructible; a\nmorphism $(\\lambda,c)\\to(\\mu,c')$ is an arrow $\\lambda\\to\\mu$ in $I$ and a map $C\\to C'$ with\n$c'\\circ(C\\to C')=(B_\\lambda\\to B_\\mu)\\circ c$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*$\\mathcal K$ is filtered.* Given finitely many objects and arrows, first move all indices to a common\nupper bound $\\mu\\in I$ (possible since $I$ is filtered), composing the maps $c$ with the transition maps\ninto $B_\\mu$; then the finitely many objects lie in $J(B_\\mu)$, which is filtered\n([det-ind-heart-canonical-presentation]), so they admit a cocone there (direct sums and cokernels in\n$\\Cons(X,\\Lambda)$). If two parallel arrows in $\\mathcal K$ differ in the $I$-component, equalize those\nfirst in $I$.",
+      "uses": [
+        "det-ind-heart-canonical-presentation"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Colimit.* Computing the colimit of $(\\lambda,c)\\mapsto C$ first over $c$ for fixed $\\lambda$ and then\nover $\\lambda$ gives\n\n$$\n\\varinjlim_{\\mathcal K}C=\\varinjlim_\\lambda\\varinjlim_{J(B_\\lambda)}C=\\varinjlim_\\lambda B_\\lambda=B,\n$$\n\nusing [det-ind-heart-canonical-presentation]. So $B$ is a filtered colimit of constructible sheaves.",
+      "uses": [
+        "det-ind-heart-canonical-presentation"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Direct sums.* $\\bigoplus_{s\\in S}B_s$ is the filtered colimit over finite subsets $T\\subset S$ of\n$\\bigoplus_{s\\in T}B_s$. A finite direct sum of filtered colimits $\\varinjlim_{\\alpha}C^{(s)}_{\\alpha}$ is\nthe filtered colimit over the product of the index categories of the finite direct sums\n$\\bigoplus_{s\\in T}C^{(s)}_{\\alpha_s}$, which are constructible. So finite sums lie in\n$\\IndCons(X,\\Lambda)$, and arbitrary ones by the first part.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "det-ind-heart-canonical-presentation"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "det-ind-heart-canonical-presentation"
+  ],
+  "proof_split_by": "labels",
+  "blueprint_snapshot": "main-20261015"
+}
