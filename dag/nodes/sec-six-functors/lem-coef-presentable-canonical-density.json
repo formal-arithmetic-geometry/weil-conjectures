@@ -1,0 +1,157 @@
+{
+ "id": "lem-coef-presentable-canonical-density",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the coherent finite-coefficient mapping-complex adjunction: ordinary density of presentable objects used in the small model-category presentation input; Dugger Remark 2.5 and Proposition 4.7(i), before restricting to cofibrant objects.",
+   "via": [
+    "lem-coef-combinatorial-cofibrant-density",
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical filtered density of ordinary presentable objects",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$; small means $\\mathcal U$-small. Let $\\lambda\\in\\mathcal U$ be an infinite regular cardinal and let $\\mathcal A$ be a locally small ordinary category in $\\mathcal U'$ with all small colimits [def-weil-pbc-category-colimit]. A category is $\\lambda$-filtered if every diagram with fewer than $\\lambda$ morphisms has a cocone; an object $a$ is $\\lambda$-presentable if $\\operatorname{Hom}_{\\mathcal A}(a,-)$ preserves small $\\lambda$-filtered colimits. Suppose $\\mathcal A$ is locally $\\lambda$-presentable, meaning that every object is a small $\\lambda$-filtered colimit of objects from a fixed small family of $\\lambda$-presentable objects. Let $\\mathcal P_\\lambda\\subseteq\\mathcal A$ be the full subcategory of all $\\lambda$-presentable objects. Then $\\mathcal P_\\lambda$ is essentially small (equivalent to a small category). For every $X\\in\\mathcal A$, the comma category $(\\mathcal P_\\lambda\\downarrow X)$, whose objects are maps $u:a\\to X$ with $a\\in\\mathcal P_\\lambda$ and whose arrows $t:a\\to a'$ satisfy $u't=u$, is $\\lambda$-filtered. The canonical cocone with components $u$ on the value diagram $(a,u)\\mapsto a$ is colimiting; equivalently, its canonical comparison from the colimit to $X$ is an isomorphism. Colimits over an essentially small category mean colimits after passage to a small equivalent category.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Remark 2.5, printed p. 181, and the ordinary-density input to Proposition 4.7(i), printed p. 188. The fixed-cardinal locally lambda-presentable formulation is stated in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73; essential smallness is in CardinalFilteredPresentation.lean:174-178. No Stacks tag states this locally presentable category theorem. Dugger read online 2026-10-17; not archived in literature/."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsDense|IsCardinalFiltered|EssentiallySmall",
+   "results": "{\"t\": \"2026-10-16T20:04:57Z\", \"tool\": \"grep\", \"query\": \"IsDense|IsCardinalFiltered|EssentiallySmall\", \"sub\": \"CategoryTheory/Presentable/Dense.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"34\", \"36\", \"45\", \"46\", \"49\"], \"digest\": \"92aed4876471ce04\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.Functor.IsDense",
+   "results": "{\"t\": \"2026-10-16T20:04:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.Functor.IsDense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.Comma.isCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\"], \"digest\": \"8d98d283501bd9fa\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentable objects are a dense subcategory and canonical comma categories are cardinal filtered",
+   "results": "{\"t\": \"2026-10-16T20:04:58Z\", \"tool\": \"leansearch\", \"query\": \"Presentable objects are a dense subcategory and canonical comma categories are cardinal filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Comma.isFiltered_of_final\", \"CategoryTheory.Functor.isDenseAt\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\"], \"digest\": \"0a295d059b8dd5f4\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of lambda presentable objects in a locally lambda presentable category is dense and its comma categories are lambda filtered",
+   "results": "{\"t\": \"2026-10-16T20:04:59Z\", \"tool\": \"leanfinder\", \"query\": \"The full subcategory of lambda presentable objects in a locally lambda presentable category is dense and its comma categories are lambda filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.instIsCardinalPresentableObjIsCardinalPresentable\"], \"digest\": \"5247ba7d8f2cda18\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "grep",
+   "query": "instance|EssentiallySmall|IsDense|CostructuredArrow",
+   "results": "{\"t\": \"2026-10-16T20:05:11Z\", \"tool\": \"grep\", \"query\": \"instance|EssentiallySmall|IsDense|CostructuredArrow\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"4b843fe39be1f690\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasCardinalFilteredGenerator, CategoryTheory.ObjectProperty.EssentiallySmall",
+   "results": "{\"t\": \"2026-10-16T20:05:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.HasCardinalFilteredGenerator, CategoryTheory.ObjectProperty.EssentiallySmall\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.hasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_generator\", \"CategoryTheory.HasCardinalFilteredGenerator.mk\"], \"digest\": \"bb924adc4c739f73\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.IsCardinalFiltered",
+   "results": "{\"t\": \"2026-10-16T20:05:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.IsCardinalFiltered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"Cardinal.SharplyLT.tfae\", \"Cardinal.SharplyLT.exists_retract_of_isCardinalPresentable\", \"CategoryTheory.exists_colimitsOfShape_splitMonomorphisms_of_isCardinalPure\"], \"digest\": \"5215e414fc7045ef\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cardinal accessible category the category of presentable objects over any object is cardinal filtered and its canonical cocone is colimiting",
+   "results": "{\"t\": \"2026-10-16T20:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"In a cardinal accessible category the category of presentable objects over any object is cardinal filtered and its canonical cocone is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\"], \"digest\": \"2bdb8da4e524ab82\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDense where|IsCardinalFiltered \\(CostructuredArrow",
+   "results": "{\"t\": \"2026-10-16T20:05:47Z\", \"tool\": \"grep\", \"query\": \"IsDense where|IsCardinalFiltered \\\\(CostructuredArrow\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"0257c23bac1ca017\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\(C : Type u\\)|EssentiallySmall.*isCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T20:05:47Z\", \"tool\": \"grep\", \"query\": \"instance \\\\(C : Type u\\\\)|EssentiallySmall.*isCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"142\", \"174\", \"176\"], \"digest\": \"5d9da42749ea9375\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the dense inclusion and cardinal-filtered comma-category instances in Mathlib/CategoryTheory/Presentable/Dense.lean:60-73, and the essentially-small instance in CardinalFilteredPresentation.lean:174-178, give the three assertions. Read both files and the meaning of IsDense in Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. The local-presentability-to-accessibility instance is LocallyPresentable.lean:53. The initial grep targeted at a single file printed line numbers as file fields; later directory greps provide the correct paths and lines."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalLocallyPresentable C κ.*IsCardinalAccessibleCategory",
+   "results": "{\"t\": \"2026-10-16T20:15:39Z\", \"tool\": \"grep\", \"query\": \"IsCardinalLocallyPresentable C κ.*IsCardinalAccessibleCategory\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\"], \"digest\": \"d88216a46a23384a\"}",
+   "date": "2026-10-17",
+   "verdict": "match: directory grep confirms the local-presentability-to-accessibility instance is Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:53; corrected the earlier off-by-one reference in mathlib_match.how."
+  },
+  {
+   "tool": "grep",
+   "query": "^instance \\[IsCardinalAccessibleCategory|^    \\(isCardinalPresentable C κ\\).ι.IsDense|^    IsCardinalFiltered \\(CostructuredArrow \\(isCardinalPresentable C κ\\).ι X\\)",
+   "results": "{\"t\": \"2026-10-16T20:16:48Z\", \"tool\": \"grep\", \"query\": \"^instance \\\\[IsCardinalAccessibleCategory|^    \\\\(isCardinalPresentable C κ\\\\).ι.IsDense|^    IsCardinalFiltered \\\\(CostructuredArrow \\\\(isCardinalPresentable C κ\\\\).ι X\\\\)\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"c260e524d0f6e6c0\"}",
+   "date": "2026-10-17",
+   "verdict": "match: confirms the dense inclusion instance starts at Dense.lean:60 and the cardinal-filtered comma instance at Dense.lean:68. The separate numeric mathlib_match.line field is 60; the other clause files and lines remain in how."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CostructuredArrow from cardinal presentable objects is cardinal filtered and the inclusion is dense in an accessible category",
+   "results": "{\"t\": \"2026-10-16T20:25:43Z\", \"tool\": \"leanfinder\", \"query\": \"CostructuredArrow from cardinal presentable objects is cardinal filtered and the inclusion is dense in an accessible category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.ObjectProperty.isCardinalFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"6e63a19eb7d3aaed\"}",
+   "date": "2026-10-17",
+   "verdict": "match: independent second reading confirms the dense inclusion at Dense.lean:60-66, filtered comma instance at Dense.lean:68-73, and essential-smallness instance at CardinalFilteredPresentation.lean:174-178. LocallyPresentable.lean:53 supplies accessibility."
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall_isPresentable|isCardinalFilteredGenerator_isCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T20:26:23Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall_isPresentable|isCardinalFilteredGenerator_isCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"71ccd548a5e41dfa\"}",
+   "date": "2026-10-17",
+   "verdict": "match: independent second reading confirms the dense inclusion at Dense.lean:60-66, filtered comma instance at Dense.lean:68-73, and essential-smallness instance at CardinalFilteredPresentation.lean:174-178. LocallyPresentable.lean:53 supplies accessibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T20:26:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\"], \"digest\": \"6922328ed35af445\"}",
+   "date": "2026-10-17",
+   "verdict": "match: independent second reading confirms the dense inclusion at Dense.lean:60-66, filtered comma instance at Dense.lean:68-73, and essential-smallness instance at CardinalFilteredPresentation.lean:174-178. LocallyPresentable.lean:53 supplies accessibility."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι, CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι, CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator",
+  "file": "Mathlib/CategoryTheory/Presentable/Dense.lean",
+  "how": "specializes in one line: infer the three instances for a locally lambda-presentable category. Dense inclusion is Dense.lean:60-66; cardinal-filteredness of CostructuredArrow is Dense.lean:68-73; essential smallness is Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean:174-178. The extra instance CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable is Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:53. IsDense means that the displayed canonical cocone is colimiting, by Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean:47-55 and DenseAt.lean:46-61. No model structure or homotopy-density assertion is part of this leaf.",
+  "line": 60
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-combinatorial-cofibrant-density",
+  "date": "2026-10-17",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

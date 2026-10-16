@@ -27,9 +27,141 @@
   "def-coef-complete-algebroid",
   "lem-coef-cocomplete-monoidal-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal K=\\{\\mathcal U\\text{-small simplicial shapes}\\}$ and $\\mathcal K'=\\{\\mathcal U'\\text{-small simplicial shapes}\\}$. Enlarge $\\mathcal U'$ to contain $T=V\\otimes_{\\mathrm{coc},\\mathcal U}W$, as permitted in the statement. Each of $V,W,T$ is then small in $\\mathcal U'$, including its mapping spaces. The collection of all $\\mathcal U$-small shapes, functors from them to one of these three categories, and their chosen colimit cocones is a set in $\\mathcal U'$: its simplices are subsets and maps of sets in $\\mathcal U'$, and the shapes range over the set $\\mathcal U\\in\\mathcal U'$. Choose one colimit cocone for each diagram. Thus the relations below form $\\mathcal U'$-small sets. No assertion of local $\\mathcal U$-smallness is involved.",
+   "uses": [
+    "lem-coef-cocomplete-monoidal-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9, universe choice before Corollary 9.1"
+   }
+  },
+  {
+   "text": "For $C=V,W$, let $R_C$ be the set of chosen $\\mathcal U$-small colimit cocones from step 1. Apply relative free cocompletion with small meaning $\\mathcal U'$-small, and put $\\widehat C=P_{R_C}(C)$. Since $C,R_C$ are $\\mathcal U'$-small, the theorem realizes this as the presentable localization of $P_{\\mathcal U'}(C)$ at $s_p:\\operatorname{colim}yp\\to y(\\operatorname{colim}p)$. Its map $j_C=Ly$ sends $R_C$ to colimit cocones, hence preserves all $\\mathcal U$-small colimits. For $c\\in C$ the mapping-space criterion gives\n$$\\operatorname{Map}_{P(C)}(y(\\operatorname{colim}p),y(c))\\simeq\\operatorname{Map}_C(\\operatorname{colim}p,c)\\simeq\\lim_k\\operatorname{Map}_C(p(k),c)\\simeq\\operatorname{Map}_{P(C)}(\\operatorname{colim}yp,y(c)).$$\nThus each representable is local. The reflector unit on a local object is an equivalence, so full inclusion of local objects and full faithfulness of Yoneda give $\\operatorname{Map}_{\\widehat C}(Ly(c),Ly(d))\\simeq\\operatorname{Map}_{P(C)}(y(c),y(d))\\simeq\\operatorname{Map}_C(c,d)$. Hence $j_C$ is fully faithful. Write $S_C=\\{s_p:p\\in R_C\\}$ for the set of presheaf arrows, distinct from the cocone set $R_C$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, with K all enlarged-universe small shapes and R all original-universe colimit cocones"
+   }
+  },
+  {
+   "text": "Let $m:C\\times C\\to C$ denote tensor. For $c,d\\in C$ and $H\\in P(C)$, the defining Kan-extension adjunction and Yoneda evaluation in each variable give\n$$\\operatorname{Map}_{P(C)}(y(c)\\otimes_{\\mathrm{Day}}y(d),H)\\simeq\\operatorname{Map}_{P(C\\times C)}(y(c)\\boxtimes y(d),(m^{\\mathrm{op}})^*H)\\simeq H(c\\otimes d)\\simeq\\operatorname{Map}_{P(C)}(y(c\\otimes d),H).$$\nHere $y(c)\\boxtimes y(d)$ is representable at $(c,d)$, since the mapping space in a product is the product of the two mapping spaces. Thus the Day tensor of these two representables is $y(c\\otimes d)$. This calculation only identifies the binary Day tensor of representables. The coherent structure is supplied by the monoidal Yoneda theorem, applied to the $\\mathcal U'$-small monoidal $C$ with $\\mathcal U'$-small-space-valued presheaves formed in $\\mathcal U''$: Day convolution makes $P(C)$ presentably monoidal relative to $\\mathcal U'$, and $y$ has a fully faithful strong monoidal enhancement $y^\\otimes:C^\\otimes\\to P(C)^\\otimes$ with coherent equivalences $y(c)\\otimes y(d)\\simeq y(c\\otimes d)$ and $y(\\mathbf 1_C)\\simeq\\mathbf 1_{P(C)}$. Day convolution preserves colimits separately by the cited localization-model theorem. Tensoring $s_p$ with $y(c)$ on the left consequently identifies it with the relation for $c\\otimes p$; on the right it is the relation for $p\\otimes c$. These cocones are colimiting because the tensor of $C$ preserves the original small colimits separately. Their comparison arrows are inverted by $S_C$-localization, even if the chosen representatives of their colimit cocones differ, since colimit cocones with the same diagram are coherently equivalent. For an arbitrary presheaf $F\\simeq\\operatorname{colim}_e y(c_e)$, either tensor of $s_p$ with $F$ is the corresponding colimit of these local-equivalence arrows. Mapping it into an $S_C$-local $M$ gives a limit of equivalences of spaces, hence an equivalence by the mapping-space colimit criterion. This proves monoidal compatibility of the arrow set $S_C$, in the current definition's precise sense. The monoidal-localization clause of the model theorem now makes $\\widehat C=P^{S_C}(C)$ presentably monoidal with strong reflector. Composing this reflector with strong Yoneda gives the required strong $j_V,j_W$.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-monoidal-yoneda-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9, strong monoidal vertical maps; Day convolution and monoidal localizations as in Sections 4 and 8"
+   }
+  },
+  {
+   "text": "Let $R$ in $V\\times W$ consist of a cocone from $R_V$ with an arbitrary fixed object of $W$, or a cocone from $R_W$ with an arbitrary fixed object of $V$. Put $H=P_R(V\\times W)$, using $\\mathcal U'$-small colimits for this relative free cocompletion, and denote its generator by $q$. Let $R_T$ consist of all chosen $\\mathcal U$-small colimit cocones in $T$, and put $E=P_{R_T}(T)$, again completing under $\\mathcal U'$-small colimits. These are small-data completions by step 1. The generator $e:T\\to E$ preserves $\\mathcal U$-small colimits. For $t\\in T$, the formula $\\operatorname{Map}_T(\\operatorname{colim}p,t)\\simeq\\lim_k\\operatorname{Map}_T(p(k),t)$ makes $y(t)$ local for every relation of $R_T$. Consequently $e=Ly$ has mapping spaces $\\operatorname{Map}_E(e(t),e(t'))\\simeq\\operatorname{Map}_{P(T)}(y(t),y(t'))\\simeq\\operatorname{Map}_T(t,t')$, so is fully faithful. For every $\\mathcal U'$-cocomplete $Z$, relative completion and the smaller-universe tensor universal property give\n$$\\operatorname{Fun}_{\\mathrm{colim},\\mathcal U'}(E,Z)\\simeq\\operatorname{Fun}_{\\mathrm{colim},\\mathcal U}(T,Z)\\simeq\\operatorname{Fun}_{\\mathrm{sep\\ colim},\\mathcal U}(V\\times W,Z)\\simeq\\operatorname{Fun}_{R}(V\\times W,Z)\\simeq\\operatorname{Fun}_{\\mathrm{colim},\\mathcal U'}(H,Z).$$\nHere the middle equality holds because $R$ prescribes precisely the original colimits separately in each variable. Explicitly, $q$ factors through a $\\mathcal U$-cocontinuous $T\\to H$, which extends to $E\\to H$; $e\\mu$ sends $R$ to colimits and extends to $H\\to E$. Each composite restricts to the identity on its generators, so full faithfulness of the displayed restriction equivalences identifies these composites with the identities, including the coherent compatibility data. We obtain $E\\simeq H$, taking $e\\mu$ to $q$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and the n=1 universal-property comparison underlying Proposition 5.3.6.11; explicit comparison written here"
+   }
+  },
+  {
+   "text": "Put $S=\\widehat V\\otimes_{\\mathrm{coc},\\mathcal U'}\\widehat W$. Apply the finite-variable clause of relative free cocompletion at $\\mathcal U'$ to $(V,R_V),(W,R_W)$. For every $\\mathcal U'$-cocomplete $Z$, it gives, together with the larger-universe tensor property,\n$$\\operatorname{Fun}_{\\mathrm{colim},\\mathcal U'}(S,Z)\\simeq\\operatorname{Fun}_{\\mathrm{sep\\ colim},\\mathcal U'}(\\widehat V\\times\\widehat W,Z)\\simeq\\operatorname{Fun}_R(V\\times W,Z)\\simeq\\operatorname{Fun}_{\\mathrm{colim},\\mathcal U'}(H,Z).$$\nThe functor $b=\\widehat\\mu(j_V\\times j_W)$ sends each member of $R$ to a colimit, since $j_V,j_W$ preserve the original small colimits and $\\widehat\\mu$ preserves enlarged colimits separately. It therefore extends to $h:H\\to S$ preserving enlarged colimits. Conversely the finite-variable equivalence extends $q$ to a separately enlarged-cocontinuous $\\widehat V\\times\\widehat W\\to H$, which factors through an enlarged-cocontinuous $S\\to H$. The two composites restrict to the identities on $V\\times W$; full faithfulness in the displayed chain identifies them with the identities and identifies all restriction compatibilities. Thus $h$ is an equivalence with $hq\\simeq b$. Define $j_{VW}$ as $T\\xrightarrow{e}E\\simeq H\\xrightarrow{h}S$. It is fully faithful and preserves $\\mathcal U$-small colimits; the generator comparisons give $j_{VW}\\mu\\simeq\\widehat\\mu(j_V\\times j_W)$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-cocomplete-monoidal-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.11, finite-variable restriction equivalence, applied to all enlarged-universe small colimits; comparison maps and inverse identities written here"
+   }
+  },
+  {
+   "text": "Put $S=\\widehat V\\otimes_{\\mathrm{coc},\\mathcal U'}\\widehat W$ and $b=\\widehat\\mu(j_V\\times j_W)$. The functor $b$ is strong monoidal, as a composite of strong monoidal functors, and preserves $\\mathcal U$-small colimits separately. The monoidal clause of the cocomplete-tensor theorem, applied to $V,W,S$ with small meaning $\\mathcal U$-small, gives a strong monoidal colimit-preserving factor $k:T\\to S$ and a coherent monoidal equivalence $k\\mu\\simeq b$. Step 5 gives a colimit-preserving $j_{VW}:T\\to S$ with $j_{VW}\\mu\\simeq b$. Since restriction along $\\mu$ is an equivalence of infinity categories of these functors, it lifts the resulting equivalence $j_{VW}\\mu\\simeq k\\mu$ to a coherent natural equivalence $\\alpha:j_{VW}\\simeq k$, compatible with the specified restriction. Define the tensor comparison for $j_{VW}$ as the composite $j_{VW}(t)\\otimes j_{VW}(t')\\xrightarrow{\\alpha_t\\otimes\\alpha_{t'}}k(t)\\otimes k(t')\\simeq k(t\\otimes t')\\xrightarrow{\\alpha_{t\\otimes t'}^{-1}}j_{VW}(t\\otimes t')$; define its unit comparison by $\\mathbf1_S\\simeq k(\\mathbf1_T)\\xrightarrow{\\alpha_{\\mathbf1_T}^{-1}}j_{VW}(\\mathbf1_T)$. The associativity, unit and higher coherence homotopies are those of $k$, composed with $\\alpha$ and its inverse; their compatibility follows from the coherent inverse identities of $\\alpha$. This makes $j_{VW}$ strong monoidal and makes the square with $\\mu$ and $\\widehat\\mu$ a coherent monoidal square.",
+   "uses": [
+    "lem-coef-cocomplete-monoidal-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9 strong monoidal comparison; Higher Algebra Proposition 4.8.1.3 and Remark 4.8.1.8 (coherent cocomplete-tensor universal property)"
+   }
+  },
+  {
+   "text": "For each of the three embeddings $j:C\\to\\widehat C$, postcomposition gives a fully faithful functor $j_*:\\operatorname{Algd}_{\\mathcal U}(C)\\to\\operatorname{Algd}_{\\mathcal U}(\\widehat C)$. To check this, replace $C$ by its full monoidal essential image. For fixed object spaces $X,Y$ and fixed map $f:X\\to Y$, an algebra transformation $jA\\to f^*jB$ is exactly a transformation $A\\to f^*B$: all its operation maps and higher coherence simplices lie between objects of the full monoidal subcategory, so the two spaces of such data coincide. The space of possible maps $f$ is unchanged. This proves full faithfulness on the entire algebroid mapping space, not merely on homotopy classes. The cocontinuous-change-of-enrichment theorem, applied with small meaning $\\mathcal U$-small, gives existence of colimits and preservation of all $\\mathcal U$-small colimits by these three $j_*$, including the empty colimit.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-cocontinuous-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9 induced vertical algebroid functors; composition of operadic algebras and cocontinuous change of enrichment"
+   }
+  },
+  {
+   "text": "It remains to enlarge object spaces. For a presentably monoidal $E$ in $\\mathcal U'$, its terminal object $1_E$ exists. For every space $X$ the algebroid $I_E(X)$ with object space $X$ and every mapping object $1_E$ exists: every operation to $1_E$ and every coherence has a contractible space of choices. The definition of algebroid morphisms gives $\\operatorname{Map}(A,I_E(X))\\simeq\\operatorname{Map}(\\operatorname{Ob}A,X)$. For a diagram $A:K\\to\\operatorname{Algd}_{\\mathcal U'}(E)$, its colimit $L$ exists by cocontinuous change of enrichment, applied at $\\mathcal U'$. For every $X\\in\\mathcal S_{\\mathcal U'}$, the preceding natural equivalence and the colimit universal property give\n$$\\operatorname{Map}(\\operatorname{Ob}L,X)\\simeq\\operatorname{Map}(L,I_E(X))\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}(A_k,I_E(X))\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}(\\operatorname{Ob}A_k,X).$$\nThese equivalences take the maps of the object-space cocone to its restriction maps. Thus the cocone $\\operatorname{Ob}A\\to\\operatorname{Ob}L$ is colimiting by the mapping-space criterion; this proves that $\\operatorname{Ob}$ preserves colimits. For a $\\mathcal U$-small diagram whose object spaces are $\\mathcal U$-small, the enlarged colimit has object space $\\operatorname{colim}X_k$, still essentially $\\mathcal U$-small by universe absoluteness of space colimits. Thus the full subcategory on these object spaces is closed under such colimits. It is precisely $\\operatorname{Algd}_{\\mathcal U}(E)$, since all the operadic algebra and mapping-space data are unchanged. Its fully faithful inclusion into $\\operatorname{Algd}_{\\mathcal U'}(E)$ therefore preserves these colimits. Apply this to $E=\\widehat V,\\widehat W,\\widehat V\\otimes\\widehat W$, which are all presentably monoidal. Composing with step 7 proves all three assertions about $J_V,J_W,J_{VW}$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-algebroid-cocontinuous-base-change",
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9 change of object-space universe; explicit terminal-mapping-object adjunction; HTT 4.2.4 homotopy colimits of spaces"
+   }
+  },
+  {
+   "text": "Finally the external product is natural under change of enrichment, has object space $X\\times Y$, and its operation maps are the pairs of operation maps of $A,B$. The coherent monoidal square $j_{VW}\\mu\\simeq\\widehat\\mu(j_V\\times j_W)$ from steps 5–6 therefore gives the displayed equivalence of algebroids by postcomposition. On mapping objects both sides are identified by $j_{VW}\\mu(A(x,x'),B(y,y'))\\simeq\\widehat\\mu(j_VA(x,x'),j_WB(y,y'))$; the monoidal square identifies the units, composition and all higher coherences. Since $X\\times Y$ is still $\\mathcal U$-small, enlarging its universe does not alter this identification. All presheaf, localized, tensor and algebroid categories constructed above fit in $\\mathcal U''$ after the permitted size choices.",
+   "uses": [
+    "lem-coef-algebroid-external-product",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9 commutative algebroid square; Corollary 3.2 and functoriality of external product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocomplete-monoidal-tensor",
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-space-yoneda-density",
+  "lem-coef-algebroid-segal-localization-model",
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-cocontinuous-base-change",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-algebroid-external-product",
+  "lem-coef-monoidal-yoneda-embedding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Section 9 preceding Corollary 9.1, with the free-completion construction and transitivity from HTT 5.3.6.2 and 5.3.6.11; detailed universe argument supplied here"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +218,45 @@
    "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful universe enlargement of cocomplete monoidal infinity categories by localization of presheaves preserving small colimits and algebroid tensor products",
+   "results": "{\"t\": \"2026-10-16T18:18:38Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful universe enlargement of cocomplete monoidal infinity categories by localization of presheaves preserving small colimits and algebroid tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CondensedMod.LocallyConstant.fullyFaithfulFunctor\", \"CategoryTheory.Ind.inclusion.fullyFaithful\", \"LightCondMod.LocallyConstant.fullyFaithfulFunctor\", \"instFullLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.LocalizedMonoidal\"], \"digest\": \"ce858731951a5eb5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Day-convolution fullyFaithulι is an assumed structure field, ordinary Ind Yoneda does not state the required infinity-categorical universe/tensor/algebroid comparison, and ordinary enrichment does not provide coherent operadic algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yoneda\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-16T18:18:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"yoneda\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.instLaxMonoidalObjOppositeFunctorTypeCoyonedaOpTensorUnit\"], \"digest\": \"40c70d2038bf109f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Day-convolution fullyFaithulι is an assumed structure field, ordinary Ind Yoneda does not state the required infinity-categorical universe/tensor/algebroid comparison, and ordinary enrichment does not provide coherent operadic algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "Algd|cocompleteTensor|universe.*enlarg|colimit.*relation",
+   "results": "{\"t\": \"2026-10-16T18:18:49Z\", \"tool\": \"grep\", \"query\": \"Algd|cocompleteTensor|universe.*enlarg|colimit.*relation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EffectiveEpi/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Types/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Types/Filtered.lean\"], \"digest\": \"0b3433b8e5559723\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Day-convolution fullyFaithulι is an assumed structure field, ordinary Ind Yoneda does not state the required infinity-categorical universe/tensor/algebroid comparison, and ordinary enrichment does not provide coherent operadic algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful enlargement of cocomplete infinity categories via continuous presheaves",
+   "results": "{\"t\": \"2026-10-16T18:18:50Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful enlargement of cocomplete infinity categories via continuous presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.inclusion.fullyFaithful\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.fullyFaithfulSheafToPresheaf\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Coyoneda.coyoneda_full\", \"CategoryTheory.GrothendieckTopology.yonedaFullyFaithful\", \"CategoryTheory.Coyoneda.fullyFaithful\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift\"], \"digest\": \"ba70aa2200e739c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Day-convolution fullyFaithulι is an assumed structure field, ordinary Ind Yoneda does not state the required infinity-categorical universe/tensor/algebroid comparison, and ordinary enrichment does not provide coherent operadic algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal Yoneda embedding into larger universe continuous space valued presheaves and induced fully faithful enriched algebra functor",
+   "results": "{\"t\": \"2026-10-16T18:19:33Z\", \"tool\": \"leanfinder\", \"query\": \"Monoidal Yoneda embedding into larger universe continuous space valued presheaves and induced fully faithful enriched algebra functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.eCoyoneda\", \"CategoryTheory.enrichedNatTransYoneda\", \"CategoryTheory.yonedaMonFullyFaithful\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.yonedaMon\", \"CategoryTheory.instFullMonFunctorOppositeMonCatYonedaMon\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\", \"CategoryTheory.eHomFunctor\"], \"digest\": \"fc0fa21447e0364b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Day-convolution fullyFaithulι is an assumed structure field, ordinary Ind Yoneda does not state the required infinity-categorical universe/tensor/algebroid comparison, and ordinary enrichment does not provide coherent operadic algebras."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-bilinear-colimits",
@@ -97,5 +264,21 @@
   "group": "Q05"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-universe-embeddings",
+  "worker": "stage1",
+  "summary": "Construct localized Yoneda embeddings and prove their full faithfulness by locality of representables. Compare relative free completions by explicit restriction equivalences, then apply the finite-variable universal property to identify the enlarged tensor. Use the monoidal tensor universal property for coherence and handle object-space enlargement by the terminal-mapping-object adjunction. Current second reading removes all three proposed new helpers: existing relative free cocompletion supplies the needed completion properties, and existing small-space colimit universe invariance supplies step 8. Nine steps, zero new nodes, zero Mathlib leaves; no statement change.",
+  "blueprint": "Realizes the finite-coefficient mapping-complex adjunction foundation in paragraph 2 of prop-coef-integral-exceptional-adjoint, specifically the Haugseng Section 9 universe-enlargement reduction cited in the inherited ancestry. The current blueprint leaves this foundational construction implicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-64657ad97",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-64657ad97 (reviewer sub-agent of L); spot-checked: The final delivery is the item only, with zero new nodes. The report's top section listing three new nodes is stale history from an earlier round; none of those files exists in the snapshot. I read the item's statement and all nine steps, the full statements of all 11 cited nodes, the unit record, and Haugseng arXiv:2311.13362v1 Section 9 before Corollary 9.1 (HTML). The source's localized large-presheaf embeddings, the fully faithful square, the strong monoidal vertical maps and the induced algebroid diagram match the statement hypothesis by hypothesis: U-small colimits, separately cocontinuous tensors, no local smallness assumed. Nothing is weakened. Steps 1-2: the size argument is correct; representables are local by the colimit criterion of yoneda-presheaf-limits, which gives full faithfulness. Step 3: the Day representable calculation and the check of S_C compatibility on both sides plus density are correct. Steps 4-5: both relative-completion chains use the R_T and rectangular R correctly, and the inverse pairs are built explicitly. Step 6: the strong monoidal structure is transported along alpha:j_VW~k. Step 7: full faithfulness from fullness of the essential image; the base-change hypotheses hold, and the empty diagram is included. Step 8: the chaotic algebroid I_E(X) gives Ob as a left adjoint, and spaces-small-colimits-universe gives closure under these colimits. Step 9: external-product functoriality. I checked empty shapes, empty object spaces and the unit. There is no cycle (closure of 349 nodes) and all citations are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. One fault (E5/C1): step 3 claimed coherent strong monoidal Yoneda from 'the same evaluation natural in lists and substitution maps', a hand-wave. The existing node lem-coef-monoidal-yoneda-embedding states exactly this, for a U'-small monoidal C with presheaves formed in U''. I cited it in step 3 and in proof_deps; fixed file at fixes/dag/nodes/sec-six-functors/lem-coef-algebroid-universe-embeddings.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.7 and its proof, printed p. 187, stated with the three explicit sufficient cardinal hypotheses used in that proof",
+   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.7 and its proof, printed p. 188, stated with the three explicit sufficient cardinal hypotheses used in that proof",
    "via": [
     "lem-coef-dugger-homotopically-surjective-map",
     "lem-coef-combinatorial-presheaf-presentation",
@@ -30,9 +30,76 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-hocolim-reindexing-zigzags"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-presentable-canonical-density] to the underlying category of $\\mathcal M$ at the given $\\lambda$. Choose a small full category $B$ of representatives of all $\\lambda$-presentable objects, taking its cofibrant representatives to be exactly the already specified $C$. Such a choice is possible because cofibrancy is invariant under isomorphism: the initial map is transported by that isomorphism, and cofibrations are a lifting class. Set $I=(B\\downarrow X)$ and $J=(C\\downarrow X)$, and put $U(b,u)=b$. Both categories are small: their object sets are small unions of the small sets $\\operatorname{Hom}(b,X)$, and their arrow sets are subsets of the corresponding small Hom sets of $B$. The inclusion of $B$ into the full category of all presentable objects induces an equivalence of comma categories, with inverse obtained by replacing each domain by its chosen representative and conjugating arrows. Under this equivalence a cocone is exactly the same family of maps after those isomorphisms; cocone factorization and uniqueness, and the existence of cocones on diagrams of size less than $\\lambda$, therefore transfer in both directions. The cited leaf gives that $I$ is $\\lambda$-filtered and that the actual canonical map $\\operatorname{colim}_I U\\to X$ is an isomorphism.",
+   "uses": [
+    "lem-coef-presentable-canonical-density",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Remark 2.5 and Proposition 4.7(i), printed pp. 181, 188; representative and smallness details made explicit."
+   }
+  },
+  {
+   "text": "Let $p_I:Q_IU\\to U$ be a projective cofibrant replacement as in [lem-coef-hocolim-reindexing-zigzags]. Choose it by the functorial factorization of the initial diagram map as a projective cofibration followed by a projective trivial fibration. Thus $p_I$ is an objectwise trivial fibration, in particular an objectwise weak equivalence. Since $I$ is small and $\\lambda$-filtered by Step 1, the assumed preservation of objectwise weak equivalences by $\\lambda$-filtered colimits applies to this particular transformation. Hence $\\operatorname{colim}_I p_I$ is a weak equivalence. Composing it with the canonical isomorphism $\\operatorname{colim}_I U\\to X$ proves that the canonical augmentation $a_I:\\operatorname{hocolim}_I U=\\operatorname{colim}_I Q_IU\\to X$ is a weak equivalence. This is a direct application of the stated filtered-colimit hypothesis to the definition of homotopy colimit.",
+   "uses": [
+    "lem-coef-hocolim-reindexing-zigzags",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proof of Proposition 4.7(i), printed p. 188: compare the projective replacement colimit with the ordinary canonical colimit."
+   }
+  },
+  {
+   "text": "Fix the functorial cofibrant replacement $q:Q\\to\\mathrm{id}_{\\mathcal M}$ in the hypothesis. Use the fixed representative isomorphisms to regard $Q$ on $B$ as a functor $\\bar Q:B\\to C$: if $\\theta_b:\\bar Qb\\xrightarrow{\\sim}Qb$ is the chosen isomorphism, set $\\bar Q(t)=\\theta_{b'}^{-1}Q(t)\\theta_b$ and $\\bar q_b=q_b\\theta_b$. Thus $\\bar q$ is natural and each component is a weak equivalence. The restriction lands in $C$ because $Qb$ is both cofibrant and $\\lambda$-presentable, exactly by the two replacement hypotheses. Let $g:J\\to I$ be inclusion and define $f:I\\to J$ by $f(b,u)=(\\bar Qb,u\\bar q_b)$ and $f(t)=\\bar Q(t)$. The identity $u'\\bar q_{b'}\\bar Q(t)=u't\\bar q_b=u\\bar q_b$ checks the required comma relation. The maps $\\bar q_b$ give a natural transformation $gf\\to\\mathrm{id}_I$; restricting them to $c\\in C$ gives $fg\\to\\mathrm{id}_J$, since both endpoints then belong to the full subcategory $C$. After $U$ and $Ug$, respectively, all components of these transformations are the weak equivalences $\\bar q_b$ and $\\bar q_c$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proof of Proposition 4.7(ii), printed p. 188: the replacement functor, the two comma functors and their natural transformations, with representative transport formulas."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-hocolim-reindexing-zigzags] to $g:J\\to I$, $f:I\\to J$, and $U:I\\to\\mathcal M$. Step 1 verifies smallness, and Step 3 supplies both required natural-transformation zigzags and verifies their weak-equivalence conditions on the actual value diagrams, not merely on indexing nerves. Its conclusion gives that the canonical reindexing map $g_*:\\operatorname{hocolim}_J Ug\\to\\operatorname{hocolim}_I U$ is an isomorphism in the homotopy category, and that an actual comparison representing it is a weak equivalence. Here $Ug=V_X$ exactly.",
+   "uses": [
+    "lem-coef-hocolim-reindexing-zigzags"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proof of Proposition 4.7(ii), printed p. 188, application of Proposition A.4 and Remark A.5, printed pp. 199-200."
+   }
+  },
+  {
+   "text": "Check compatibility with the augmentation using an actual comparison. Write $p_J:Q_J(Ug)\\to Ug$ for a projective cofibrant replacement. The pullback $g^*p_I:g^*Q_IU\\to Ug$ is an objectwise trivial fibration, hence a projective trivial fibration by the objectwise definitions of projective fibrations and weak equivalences in [lem-coef-hocolim-reindexing-zigzags]. Lift $p_J$ against this map using projective cofibrancy of $Q_J(Ug)$ and the model lifting axiom of [lem-coef-reedy-model-structure], to obtain $\\ell:Q_J(Ug)\\to g^*Q_IU$ with $g^*p_I\\ell=p_J$. Taking its colimit and then the ordinary reindexing map gives a representative $k:\\operatorname{colim}_J Q_J(Ug)\\to\\operatorname{colim}_I Q_IU$ of $g_*$. On every component $(c,u)$, its composite with $a_I$ is $u(p_J)_{(c,u)}$ by this lifting equality, so the colimit universal property gives the strict equality $a_Ik=a_J$, the canonical augmentation of the item. Step 4 makes $k$ a weak equivalence, Step 2 makes $a_I$ one, and two-out-of-three makes $a_J$ one. No step required that $X$ be fibrant.",
+   "uses": [
+    "lem-coef-hocolim-reindexing-zigzags",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Conclusion of Proposition 4.7(ii), printed p. 188; the commuting augmentation triangle is checked using projective replacements and a lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-presentable-canonical-density",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Proposition 4.7(i)-(ii), printed p. 188, expanded using Remark 2.5 and Proposition A.4 / Remark A.5, printed pp. 181, 199-200. Source read online but not archived in literature/. The fixed-cardinal density input is the Mathlib leaf; the augmentation triangle is written out with a projective lift."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +135,38 @@
    "results": "{\"t\": \"2026-10-16T18:32:36Z\", \"tool\": \"leansearch\", \"query\": \"Every object of a combinatorial model category is the homotopy colimit of all maps from sufficiently presentable cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.cofibrantObjects\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\", \"HomotopicalAlgebra.CofibrantObject.mk\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\"], \"digest\": \"f97d0b4c4526cea6\"}",
    "date": "2026-10-17",
    "verdict": "No match. CofibrantObject.HoCat.exists_resolution (ModelCategory/CofibrantObjectHomotopy.lean:127-133) supplies one cofibrant resolution; neither that statement nor the cofibrant-object definitions assert homotopy density of a small full subcategory."
+  },
+  {
+   "tool": "grep",
+   "query": "homotop.*dens|cofibrant.*presentab|presentab.*cofibrant",
+   "results": "{\"t\": \"2026-10-16T20:04:57Z\", \"tool\": \"grep\", \"query\": \"homotop.*dens|cofibrant.*presentab|presentab.*cofibrant\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return individual cofibrant replacements, cofibrant-object definitions and homotopy classes; read CofibrantObject.HoCat.exists_resolution in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-133. It only supplies one replacement, not the homotopy colimit over all presentable cofibrant objects. Loogle found no ModelCategory/colimit hit and the topology grep found no homotopy-density statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every object of a combinatorial model category is a homotopy colimit of presentable cofibrant objects over it",
+   "results": "{\"t\": \"2026-10-16T20:04:58Z\", \"tool\": \"leansearch\", \"query\": \"Every object of a combinatorial model category is a homotopy colimit of presentable cofibrant objects over it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.cofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.mk\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects\", \"HomotopicalAlgebra.ModelCategory.cm5b\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\"], \"digest\": \"2b26f1ac2e186995\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return individual cofibrant replacements, cofibrant-object definitions and homotopy classes; read CofibrantObject.HoCat.exists_resolution in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-133. It only supplies one replacement, not the homotopy colimit over all presentable cofibrant objects. Loogle found no ModelCategory/colimit hit and the topology grep found no homotopy-density statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every object of a combinatorial model category is a homotopy colimit of presentable cofibrant objects over it",
+   "results": "{\"t\": \"2026-10-16T20:05:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every object of a combinatorial model category is a homotopy colimit of presentable cofibrant objects over it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.cofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\"], \"digest\": \"5d93b5986e7a8ac3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return individual cofibrant replacements, cofibrant-object definitions and homotopy classes; read CofibrantObject.HoCat.exists_resolution in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-133. It only supplies one replacement, not the homotopy colimit over all presentable cofibrant objects. Loogle found no ModelCategory/colimit hit and the topology grep found no homotopy-density statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy density of small cofibrant generators in a combinatorial model category with filtered weak equivalences",
+   "results": "{\"t\": \"2026-10-16T20:05:18Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy density of small cofibrant generators in a combinatorial model category with filtered weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution_map\", \"HomotopicalAlgebra.IsCofibrant\"], \"digest\": \"c793a4417eed29e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return individual cofibrant replacements, cofibrant-object definitions and homotopy classes; read CofibrantObject.HoCat.exists_resolution in Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-133. It only supplies one replacement, not the homotopy colimit over all presentable cofibrant objects. Loogle found no ModelCategory/colimit hit and the topology grep found no homotopy-density statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dugger-homotopically-surjective-map",
@@ -79,5 +174,20 @@
   "group": "Q01"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-combinatorial-cofibrant-density",
+  "worker": "stage1",
+  "summary": "Expanded Dugger Proposition 4.7 into ordinary filtered density, the filtered replacement-colimit computation, explicit replacement comma functors, the existing diagramwise reindexing theorem and a strict augmentation triangle. Added one ordinary-category Mathlib leaf for essential smallness, density and cardinal-filteredness. The statement and its three sufficient cardinal hypotheses are unchanged; no fibrancy, enrichment or properness is used. Searched project Lean and all blueprint/DAG statements; no attachment or duplicate was found.",
+  "blueprint": "Realizes the small model-category presentation input to proof paragraph 2 of prop-coef-integral-exceptional-adjoint (the coherent finite-coefficient mapping-complex adjunction), through the inherited Dugger/presheaf/localization chain; Steps 1-2 realize Dugger 4.7(i), Steps 3-5 realize 4.7(ii)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-5acae2352",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-5acae2352 (reviewer sub-agent of L); spot-checked: The mathematics is correct, the statement is unchanged and nothing is weakened. I read the item, all five steps and the new Mathlib leaf in full against Dugger, Adv. Math. 164 (2001). Dugger is not in literature/, so I fetched the PDF and read Remark 2.5, Proposition 2.3(iii), Proposition 4.7 with its proof, Proposition A.4 with its proof and Remark A.5. The item's three fixed-cardinal hypotheses are exactly the three properties Dugger obtains for large enough lambda. Steps match Dugger 4.7(i) and (ii): I checked Step 3's comma relation u'q_{b'}Q(t)theta_b=u t q_b theta_b and both natural transformations by hand. Step 4 meets every hypothesis of lem-coef-hocolim-reindexing-zigzags, which matches Dugger A.4 with g:J->I. Step 5's lift gives a_I k=a_J exactly; that k represents g_* is the standard lift representative, the most the cited node's 'canonical comparison' allows. No fibrancy of X is used. Small cases checked: Set with the trivial model structure at aleph_0 (including X empty) and simplicial sets with the Kan-Quillen model structure. Leaf lem-coef-presentable-canonical-density is an exact clause-by-clause match. Checked declarations and lines: Dense.lean:60-61 (IsDense) and 68-73 (IsCardinalFiltered CostructuredArrow), CardinalFilteredPresentation.lean:174-178 (EssentiallySmall) and LocallyPresentable.lean:53. rg over dag/nodes found no duplicate. The leaf adds no homotopy content, so it does not restate the item. Route: the item's unit sk-prop-sf-biduality-general plus the Mathlib leaf. No SGA, no cycle, no tool_uses. One fault, fixed in fixes/dag/nodes/sec-six-functors/ (both node files): every Dugger page citation was one page too low. Corrected per the printed headers: Remark 2.5 p.181, Proposition 4.7 and proof p.188, A.4 p.199, its proof and A.5 p.200. Applied in the item's source, proof_origin, blueprint.from.place and all five step sources, and in the leaf's source.place. Nothing else changed.; 2 file(s) fixed by the reviewer"
+ }
 }

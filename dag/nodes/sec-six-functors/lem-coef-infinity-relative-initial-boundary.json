@@ -28,9 +28,95 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the specified vertex $x$ and first prove the final-vertex assertion. Use the join slice of [lem-coef-infinity-slice-right-fibration] to set $E=\\mathcal X_{/x}$ and $T=\\mathcal X\\times_{\\mathcal Y}\\mathcal Y_{/p(x)}$. Define $q:E\\to T$ by $\\sigma\\mapsto(\\sigma|_{\\Delta^m},p\\sigma)$ in degree $m$, viewing $\\sigma$ as a map $\\Delta^{m+1}=\\Delta^m\\star\\Delta^0\\to\\mathcal X$ whose last vertex is $x$. The pullback equation is precisely restriction of $p\\sigma$ to the initial face spanned by $0,\\ldots,m$. For each vertex $z\\in\\mathcal X$, take the degreewise fibers over the projection $T\\to\\mathcal X$. The slice statement identifies the resulting map exactly with\n$$q_z:\\operatorname{Map}_{\\mathcal X}(z,x)\\longrightarrow\\operatorname{Map}_{\\mathcal Y}(p(z),p(x)).$$\nBoth these mapping simplicial sets are Kan complexes. These are the right-pinched spaces of [def-cbc-enhanced-diagrams-cones], so no change of mapping-space model is being made.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17 and the opposite dual, expanded slice construction; Proposition 7.1.5.16(2); Proposition 4.3.6.1 (018F) and Construction 4.6.5.1 (01KX)."
+   }
+  },
+  {
+   "text": "The map $q$ is a right fibration in the horn-lifting sense of [def-coef-infinity-fibrations]. Indeed, a lifting problem for $\\Lambda_i^m\\subseteq\\Delta^m$, with $m\\geq1$ and $0<i\\leq m$, unpacks by the slice formula of [lem-coef-infinity-slice-right-fibration] into a lifting problem for $p$ on\n$$D=(\\Lambda_i^m\\star\\Delta^0)\\cup_{\\Lambda_i^m}\\Delta^m\\subseteq\\Delta^m\\star\\Delta^0=\\Delta^{m+1}.$$\nHere $\\Delta^m$ is the face opposite the last vertex and the new last vertex has prescribed value $x$. The faces of $D$ are the face $\\Delta^m$ opposite the last vertex and the cones on the faces of $\\Delta^m$ other than its $i$th face. Thus $D=\\Lambda_i^{m+1}$. The inequality $0<i<m+1$ makes this horn inner, so the assumed inner fibration $p$ gives the required filler. Its restriction to the last vertex remains $x$, hence it is exactly a filler for the original square of $q$. This also covers $m=1,i=1$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 4.3.6.9 (01C0), right-slice case with K the point; explicit inner-horn calculation underlying Corollary 7.1.5.17."
+   }
+  },
+  {
+   "text": "The map $q_z$ in step 1 is the pullback of $q$ along the inclusion $\\{z\\}\\times_{\\mathcal Y}\\mathcal Y_{/p(x)}\\to T$. Right-horn lifting is preserved under this pullback: solve a projected lifting problem for $q$ and pair its filler with the prescribed map into the pullback base; the pullback equation holds because the filler projects to that prescribed map. Therefore $q_z$ is a right fibration. Its base $\\operatorname{Map}_{\\mathcal Y}(p(z),p(x))$ is Kan by step 1. Apply [lem-cbc-right-fibration-space-fiber] to conclude that $q_z$ lifts every horn, so it is a Kan fibration. We use only the Kan-fibration clause of that node, not its additional homotopy-fiber assertion.",
+   "uses": [
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Proposition 7.1.5.16(2), fiberwise comparison expanded using Corollary 4.4.3.8 (01NV)."
+   }
+  },
+  {
+   "text": "Suppose $x$ is $p$-final. Then every $q_z$ is a weak homotopy equivalence by the definition in the item. Since it is a Kan fibration, [lem-cbc-kan-fibration-fiber-criterion] says that each of its vertex fibers is a contractible Kan complex. Every vertex of $T$ is a pair $(z,\\alpha)$ with $\\alpha:p(z)\\to p(x)$, and the fiber of $q$ at this pair is degreewise exactly the fiber of $q_z$ at $\\alpha$. Thus all vertex fibers of the right fibration $q$ are contractible. Apply [lem-coef-right-fibration-contractible-fibers] to obtain that $q$ is a trivial Kan fibration.\nConversely, suppose $q$ is a trivial Kan fibration in the sense of [def-weil-pbc-trivial-kan-fibration]. Every boundary lifting problem for its pullback $q_z$ projects to one for $q$; pair the resulting filler with the prescribed map into the pullback base. This proves boundary lifting for $q_z$ in every dimension, including dimension zero. By step 3 it is a Kan fibration, so [lem-cbc-kan-fibration-fiber-criterion] makes it a weak homotopy equivalence. This holds for every $z$, which is precisely $p$-finality. Hence $x$ is $p$-final if and only if $q$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-right-fibration-contractible-fibers",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17, equivalence (1) and (2), opposite dual; replacement of the categorical-equivalence intermediate by the explicit fiber argument of Propositions 3.3.7.6 (00ZP) and 4.4.2.14 (01NU)."
+   }
+  },
+  {
+   "text": "Unpack boundary lifting for $q$ using [def-weil-pbc-trivial-kan-fibration] and the slice formula of [lem-coef-infinity-slice-right-fibration]. A square $\\partial\\Delta^m\\to E$ over $\\Delta^m\\to T$ consists of a prescribed map $c:\\Delta^m\\to\\mathcal X$, a map $d:\\Delta^{m+1}\\to\\mathcal Y$ with $d(m+1)=p(x)$ and $d|_{\\Delta^m}=pc$, and a compatible map $(\\partial\\Delta^m)\\star\\Delta^0\\to\\mathcal X$ with last vertex $x$ over the corresponding restriction of $d$. The last vertex is fixed at $x$ by the definition of the slices. When $m=0$, the upper map $\\partial\\Delta^0\\to E$ is empty, but the cone on its empty domain is the single fixed vertex $x$. Glue the two maps into $\\mathcal X$ on\n$$(\\partial\\Delta^m\\star\\Delta^0)\\cup_{\\partial\\Delta^m}\\Delta^m=\\partial\\Delta^{m+1}.$$\nThis equality follows face by face: the face opposite the last vertex is $\\Delta^m$ and all other faces are cones on its proper faces. A filler for the square of $q$ is consequently exactly a filler of this boundary over $d$, with both required simplicial equalities. Conversely, any positive-dimensional boundary square for $p$ whose last vertex is $x$ decomposes into these data by restricting to the face opposite the last vertex and to the union of all remaining faces. Thus the correspondence works in both directions. At $m=0$ it identifies surjectivity of $q_0$ with the $n=1$ boundary lifting condition for $p$, fixing the two endpoints. As $n=m+1$, all $m\\geq0$ for $q$ are exactly all $n>0$ for $p$. Combining this with step 4 proves the final-vertex assertion, without any dimension-zero condition for $p$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17, equivalence (2) and (3), opposite dual; degreewise join/slice adjunction with the dimension-zero slice case included."
+   }
+  },
+  {
+   "text": "Pass to opposites to obtain the initial-vertex assertion. Explicitly, for a simplicial set $C$ define $C^{\\mathrm{op}}$ by replacing an operator $\\alpha:[a]\\to[b]$ with $j\\mapsto b-\\alpha(a-j)$. Reversal is involutive, carries $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, and preserves whole boundaries. Thus $\\mathcal X^{\\mathrm{op}},\\mathcal Y^{\\mathrm{op}}$ are quasicategories and $p^{\\mathrm{op}}$ is an inner fibration; a boundary with first vertex $x$ becomes one with last vertex $x$, preserving its restriction and projection equations.\nFor the mapping-space condition use [lem-coef-infinity-pinch-comparison]. With its Kan arrow mapping spaces $U$, reversal gives a simplicial isomorphism\n$$U_{C^{\\mathrm{op}}}(a,b)\\cong U_C(b,a)^{\\mathrm{op}}.$$\nTo check this isomorphism in degree $m$, represent a simplex of $U_{C^{\\mathrm{op}}}(a,b)$ by its prism $f:\\Delta^1\\times\\Delta^m\\to C^{\\mathrm{op}}$. Apply the opposite operation to $f$ and precompose with the vertex-reversal identifications $\\Delta^1\\cong(\\Delta^1)^{\\mathrm{op}}$ and $\\Delta^m\\cong(\\Delta^m)^{\\mathrm{op}}$. The resulting prism into $C$ has endpoints $b,a$. For $\\alpha:[r]\\to[m]$, restriction of this prism uses the reversed operator $j\\mapsto m-\\alpha(r-j)$; these are exactly the operators of $U_C(b,a)^{\\mathrm{op}}$. Reversing twice returns $f$, and applying a simplicial functor commutes with every operation, proving both the isomorphism and its naturality. For any simplicial set $Z$, barycentric reversal $(t_0,\\ldots,t_n)\\mapsto(t_n,\\ldots,t_0)$ defines a natural homeomorphism $|Z^{\\mathrm{op}}|\\cong|Z|$: the relation for $\\alpha$ on one side is the relation for its reversed operator on the other. Combine these homeomorphisms with the natural right-pinch homotopy equivalences\n$$\\operatorname{Map}_{C^{\\mathrm{op}}}(a,b)\\longrightarrow U_{C^{\\mathrm{op}}}(a,b),\\qquad\n\\operatorname{Map}_C(b,a)\\longrightarrow U_C(b,a).$$\nNaturality under $p$ identifies, up to these equivalences on source and target, the incoming mapping-space maps of $p^{\\mathrm{op}}$ at $x$ with the outgoing mapping-space maps of $p$ at $x$. By the weak homotopy equivalence convention of [def-cbc-enhanced-diagrams-cones], one family consists of weak homotopy equivalences if and only if the other does (check components and each based homotopy group through this commuting comparison). Therefore $p$-initiality is equivalent to $p^{\\mathrm{op}}$-finality. Apply steps 1-5 to $p^{\\mathrm{op}}$ and reverse the resulting fillers. This proves both implications of the initial-vertex assertion with exactly the original hypotheses.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Opposite dual of Corollary 7.1.5.17; natural mapping-space model comparison from Proposition 4.6.5.10 (01L5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-right-fibration-contractible-fibers",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02WS",
+  "place": "Expanded right-slice/fiber proof of Corollary 7.1.5.17 and its opposite dual, using online sources not archived in literature/. No new theorem input is required beyond existing DAG nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +173,59 @@
    "results": "{\"t\": \"2026-10-16T19:41:19Z\", \"tool\": \"grep\", \"query\": \"IsInitial|IsTerminal|[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Jj]oin\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"b983ec3da1948eef\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. The returned SSet initial objects are initial objects of the ordinary category of simplicial sets, the horn fillers give only the defining quasicategory lifting condition, and the cocone declarations concern ordinary categories. None states this relative mapping-space or coherent join assertion. Read Quasicategory/InnerFibration.lean:29-117, SimplicialSet/Subcomplex.lean:137, and CategoryTheory/Limits/ConeCategory.lean:345-355."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?initial|initial.*boundary|boundary.*initial",
+   "results": "{\"t\": \"2026-10-16T20:18:57Z\", \"tool\": \"grep\", \"query\": \"relative.?initial|initial.*boundary|boundary.*initial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures read. SSet.InnerFibration and the inner-horn fillers give the definition only; I and J are boundary/horn families for Kan fibrations, not the relative initial-object equivalence. IsInitialBot and simplex-index initiality concern ordinary categorical initiality. Read pinned InnerFibration.lean:29-117 and SimplicialSet/CategoryWithFibrations.lean:36-112. Two semantic phrasings gave no statement of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative initial objects of quasicategories and lifting simplex boundaries",
+   "results": "{\"t\": \"2026-10-16T20:18:57Z\", \"tool\": \"leansearch\", \"query\": \"Relative initial objects of quasicategories and lifting simplex boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.Truncated.initial_inclusion\", \"SSet.Quasicategory\", \"AugmentedSimplexCategory.instHasInitial\", \"SSet.Quasicategory.mk\", \"SSet.Subcomplex.isInitialBot\", \"SSet.modelCategoryQuillen.I\", \"AugmentedSimplexCategory.inclusion\", \"SSet.RelativeMorphism\"], \"digest\": \"03fb9da0393eef90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures read. SSet.InnerFibration and the inner-horn fillers give the definition only; I and J are boundary/horn families for Kan fibrations, not the relative initial-object equivalence. IsInitialBot and simplex-index initiality concern ordinary categorical initiality. Read pinned InnerFibration.lean:29-117 and SimplicialSet/CategoryWithFibrations.lean:36-112. Two semantic phrasings gave no statement of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.InnerFibration\"",
+   "results": "{\"t\": \"2026-10-16T20:18:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.InnerFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.innerFibrations\", \"SSet.InnerFibration\", \"SSet.InnerFibration.mem\", \"SSet.InnerFibration.mk\", \"SSet.innerFibration_iff\", \"SSet.innerFibration_pullbackObjObjπ\"], \"digest\": \"37e8f7f7dadf7fd7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures read. SSet.InnerFibration and the inner-horn fillers give the definition only; I and J are boundary/horn families for Kan fibrations, not the relative initial-object equivalence. IsInitialBot and simplex-index initiality concern ordinary categorical initiality. Read pinned InnerFibration.lean:29-117 and SimplicialSet/CategoryWithFibrations.lean:36-112. Two semantic phrasings gave no statement of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration of quasicategories has a relative initial object if and only if every positive dimensional simplex boundary with that initial vertex lifts",
+   "results": "{\"t\": \"2026-10-16T20:19:05Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration of quasicategories has a relative initial object if and only if every positive dimensional simplex boundary with that initial vertex lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.horn₃₂.exists_desc\"], \"digest\": \"9fcb402cac604f7c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures read. SSet.InnerFibration and the inner-horn fillers give the definition only; I and J are boundary/horn families for Kan fibrations, not the relative initial-object equivalence. IsInitialBot and simplex-index initiality concern ordinary categorical initiality. Read pinned InnerFibration.lean:29-117 and SimplicialSet/CategoryWithFibrations.lean:36-112. Two semantic phrasings gave no statement of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vertex x is initial relative to p when all outgoing mapping space maps are weak equivalences, equivalently it lifts every boundary with first vertex x",
+   "results": "{\"t\": \"2026-10-16T20:19:19Z\", \"tool\": \"leanfinder\", \"query\": \"A vertex x is initial relative to p when all outgoing mapping space maps are weak equivalences, equivalently it lifts every boundary with first vertex x\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.isInitialBot\", \"SSet.modelCategoryQuillen.J\", \"SimplexCategory.Truncated.initial_incl\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SimplexCategory.Truncated.initial_inclusion\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"f35f12d94d533e0e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual returned signatures read. SSet.InnerFibration and the inner-horn fillers give the definition only; I and J are boundary/horn families for Kan fibrations, not the relative initial-object equivalence. IsInitialBot and simplex-index initiality concern ordinary categorical initiality. Read pinned InnerFibration.lean:29-117 and SimplicialSet/CategoryWithFibrations.lean:36-112. Two semantic phrasings gave no statement of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "Under|Over|[Rr]elative|[Ii]nitial|[Tt]erminal",
+   "results": "{\"t\": \"2026-10-16T20:34:36Z\", \"tool\": \"grep\", \"query\": \"Under|Over|[Rr]elative|[Ii]nitial|[Tt]erminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"bf6f4d5efd8acdf0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader search using undercategory and ordinary initial-object vocabulary. Returned signatures concern initial functors of ordinary categories or the initial simplicial set; the grep found only comments, base-change instances and quasicategory/inner-fibration definitions. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-117. None gives the relative mapping-space or positive-dimensional boundary criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a quasicategory is initial relative to a functor when its undercategory projection is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T20:34:39Z\", \"tool\": \"leanfinder\", \"query\": \"An object of a quasicategory is initial relative to a functor when its undercategory projection is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial\", \"CategoryTheory.Functor.Initial.lift\", \"SSet.Subcomplex.isInitialBot\", \"CategoryTheory.CostructuredArrow.initial_pre\", \"SimplexCategory.Truncated.initial_inclusion\", \"CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow\", \"SimplexCategory.Truncated.initial_incl\", \"CategoryTheory.Functor.Initial.homToLift\"], \"digest\": \"d1fee1eb5ddbd3b8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader search using undercategory and ordinary initial-object vocabulary. Returned signatures concern initial functors of ordinary categories or the initial simplicial set; the grep found only comments, base-change instances and quasicategory/inner-fibration definitions. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-117. None gives the relative mapping-space or positive-dimensional boundary criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-parameter-cone-extension",
@@ -98,5 +233,39 @@
   "group": "Q40"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-initial-boundary",
+  "worker": "stage1",
+  "summary": "Kept the exact statement; proved the final criterion by the relative right slice, direct inner-horn lifting, Kan mapping-space fibers, and existing fibration criteria; identified all positive-dimensional boundary lifts including n=1; obtained initiality by explicit opposite and natural pinch comparisons. No new nodes, no attachments, no Lean writing or compilation.",
+  "blueprint": "Historical ancestry through lem-coef-infinity-parameter-cone-extension: supplies its relative-initial/final boundary test in steps 2-5 and 8-9. The ancestor prop-coef-integral-exceptional-adjoint has no separate paragraph for this generic infrastructure; its current main-20261015 proof paragraph 2 concerns the coefficient adjunction. The six steps expand the local universal-cone infrastructure without altering that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Its first clause upgrades a right fibration over the Kan mapping-space base to a Kan fibration; no same-unit node gives this upgrade."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "For the mapping-space Kan fibrations, identifies weak equivalence, boundary lifting, and contractible vertex fibers; this is a generic simplicial homotopy tool, not a replacement of the coefficient unit route."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Supplies the fixed quasicategory, right-pinched mapping-space, arrow mapping and weak equivalence conventions; this is the inherited definition dependency."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-1504f2c44",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-1504f2c44 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item is unchanged and there are no new nodes. The statement is Kerodon 02WS (1)<=>(3) with 02WR mapping-space initiality, written with the right-pinched Map of def-cbc-enhanced-diagrams-cones. Hypotheses are an inner fibration between quasicategories, both lifting equations are exact, and only n>0 is required. Step 1: the slice node's fibre over {x} is exactly the right-pinched Map, so q_z is Map_X(z,x)->Map_Y(pz,px) between Kan complexes. Step 2 (elementary, justified): D=Lambda_i^{m+1} face by face, and the horn is inner since 0<i<=m<m+1; checked m=i=1, where Lambda_1^1={1} gives Lambda_1^2. Step 3: pullback stability of right lifting plus a Kan base meets exactly the hypotheses of lem-cbc-right-fibration-space-fiber; only its first clause is used. Step 4: lem-cbc-kan-fibration-fiber-criterion applied to q_z, then lem-coef-right-fibration-contractible-fibers (no hypothesis on the base T); for the converse, pullback stability including n=0 surjectivity; the boundary conventions of the leaf and the criterion agree. Step 5 (elementary, justified): (bdry Delta^m * Delta^0) union Delta^m = bdry Delta^{m+1}; m=0 matches the n=1 problem for p. Step 6: right-pinched Map in X^op is the left-pinched space in X, compared through U_{C^op}(a,b) = U_C(b,a)^op, |Z^op| = |Z| and the naturality clause of lem-coef-infinity-pinch-comparison; verified. Small cases: identity map, Y a point, discrete nerves, empty mapping spaces. No added hypothesis. rg found no duplicate: cartesian-initial-boundary-lift is a fibrewise variant, relative-cone-initial-corner is a consumer. The dependency closure has 99 nodes and no cycle. No SGA source. Accepted tool_uses: lem-cbc-right-fibration-space-fiber and lem-cbc-kan-fibration-fiber-criterion, both generic simplicial-homotopy black boxes; the existing contractible-fibers node already records the same criterion as a tool. The def-cbc entry needs no tool use but is harmless. Kerodon is online only and WANTED is recorded. Not a target node, so the base-change and coefficient-category check does not apply. No fixes."
+ }
 }
