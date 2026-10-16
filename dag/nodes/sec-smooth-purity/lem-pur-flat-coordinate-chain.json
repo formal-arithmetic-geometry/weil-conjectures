@@ -294,5 +294,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-2f224b185 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, SGA XVIII 2.5–2.6 and Stacks sources in full. Verified all seven steps, edge cases, duplicate candidates and the acyclic 138-node closure. Accepted the CM algebra tool uses; no mathematical repairs needed. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6f969faf9",
+  "group": "NM",
+  "result": "pass",
+  "note": "Wrote review.md. Audited the immutable source, all statement dependencies, clauses, edge cases, universes, docstrings and report sections. Signature matches verbatim; per-file compilation reproduced cleanly. No delivery errors or fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatCoordinateChain",
+  "declaration": "AlgebraicGeometry.exists_flat_coordinate_chain",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatCoordinateChain.lean",
+  "statement": "theorem exists_flat_coordinate_chain {k : Type u} [Field k] [IsAlgClosed k] (d : ℕ) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [IsSeparated (X ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] (hpure : X.IsPureDimension d) (hCM : ∀ y : X, (IsLocalRing.depth (R := X.presheaf.stalk y) (X.presheaf.stalk y) : WithBot ℕ∞) = ringKrullDim (X.presheaf.stalk y)) (f g : X ⟶ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k))) [f.IsOver (Spec (CommRingCat.of k))] [g.IsOver (Spec (CommRingCat.of k))] (hf : f.IsQuasiFinite) (hg : g.IsQuasiFinite) [Flat f] [Flat g] (x : X) (hx : x ∈ closedPoints X) : ∃ (U : X.Opens) (_hxU : x ∈ U) (r : ℕ) (w : Fin (r + 1) → (U.toScheme ⟶ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k)))), (∀ j, w j ≫ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k)) ↘ Spec (CommRingCat.of k) = U.ι ≫ X ↘ Spec (CommRingCat.of k)) ∧ (∀ j, (w j).IsQuasiFinite ∧ Flat (w j)) ∧ w 0 = U.ι ≫ f ∧ w (Fin.last r) = U.ι ≫ g ∧ (∀ j : Fin r, Set.Subsingleton {i : ULift.{u} (Fin d) | (w j.castSucc).appTop (AffineSpace.coord (Spec (CommRingCat.of k)) i) ≠ (w j.succ).appTop (AffineSpace.coord (Spec (CommRingCat.of k)) i)}) ∧ (d = 0 → r = 0)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
