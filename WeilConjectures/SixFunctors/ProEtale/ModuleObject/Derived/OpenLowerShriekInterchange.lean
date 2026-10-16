@@ -25,10 +25,10 @@ v          v
 X  --j---> Z
 ```
 with `j` and `i'` open immersions, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*`
-(`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`) is an
+(`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`) is an
 isomorphism when `p'` is proper, for the coefficient rings `E̲` of a finite extension `E` of
 `ℚ_ℓ` and `ℚ̲̄_ℓ`
-(`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`
+(`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`
 and `..._padicAlgCl`). This is part (3) of the blueprint lemma
 `det-sf-comp-composition-interchange`.
 
@@ -253,22 +253,22 @@ variable {X Z X' Z' : Over (Spec (.of k))}
 /-- **Interchanging proper direct image and extension by zero**, for any coefficient ring `Λ`
 satisfying proper base change for the two cartesian squares involved: the square itself, and
 the base change of `p'` along the closed complement of `j`. -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_of_isIso
+theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso
     (sq : IsPullback p i' j p')
     (h₁ : IsIso (boundedConstructibleBaseChange Λ ℓ sq.flip.toCommSq))
     (h₂ : IsIso (boundedConstructibleBaseChange Λ ℓ
       (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)).toCommSq)) :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq) := by
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq) := by
   have : QuasiCompact (j.left ≫ Z.hom) := by
     rw [Over.w j]
     infer_instance
   have : QuasiCompact j.left := QuasiCompact.of_comp j.left Z.hom
   have hK (K : Dᵇc(X'.left)⟦Λ⟧) :
-      IsIso ((boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq).app K) := by
+      IsIso ((boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq).app K) := by
     refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl Λ ℓ
       (overClosedComplement j) j (isCompl_range_overClosedComplement j) _ ?_ ?_
     · -- Over the open `X`, by the mate calculus and proper base change.
-      rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq_exchangeRight]
+      rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchangeRight]
       have : IsIso ((Adjunction.exchangeRight
           (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
           (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)
@@ -281,7 +281,7 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_of_i
         (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p')
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i') _ _
-        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv Λ ℓ sq) K
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv Λ ℓ sq) K
     · -- Over the closed complement both sides vanish.
       have hS : IsZero ((boundedConstructibleUpperStar Λ ℓ (overClosedComplement j)).obj
           ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj
@@ -323,11 +323,11 @@ complement `Z ∖ X` the stalks of `Rp'_*(i'_! K)` are, by proper base change, t
 the fibres of `p'` over `Z ∖ X`, which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`,
 hence vanish. (In the blueprint the square is cartesian by part (1), from the density of `X'`
 in `Z'`.) -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
     (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
       (Profinite.continuousMapRingObj E) ℓ sq) :=
-  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_of_isIso _ ℓ sq
+  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
     (isIso_boundedConstructibleBaseChange_of_isProper ℓ E sq.flip)
     (isIso_boundedConstructibleBaseChange_of_isProper ℓ E
       (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)))
@@ -336,11 +336,11 @@ omit [MonObj Λ] [IsCommMonObj Λ] in
 /-- **Interchanging proper direct image and extension by zero** for bounded constructible
 `ℚ̄_ℓ`-sheaves (blueprint `det-sf-comp-composition-interchange`, part (3)): the exchange morphism
 `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
-theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
+theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl
     (sq : IsPullback p i' j p') :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
       (Profinite.padicAlgClRingObj ℓ) ℓ sq) :=
-  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_of_isIso _ ℓ sq
+  isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso _ ℓ sq
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq.flip)
     (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
       (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)))
