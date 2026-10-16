@@ -274,5 +274,36 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-d9b49e8f7 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source locations, and the unit/chapter route. All seven steps check: the specified exchange action, trace base change, scalar reduction and connected-fibre argument are valid, including edge cases. No new nodes or repairs. Accepted five infrastructure tool uses; no target-category comparison was assumed. Inherited dependency cycles are recorded separately in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance",
+  "declaration": "AlgebraicGeometry.Etale.affineSpaceLinearTraceInvariance",
+  "declarations": [
+   "AlgebraicGeometry.affineTraceLinearMap",
+   "AlgebraicGeometry.Etale.affineLinearPullbackId",
+   "AlgebraicGeometry.Etale.affineLinearBaseCoefficient",
+   "AlgebraicGeometry.Etale.affineLinearLineDescent",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientDescentStep",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientDescent",
+   "AlgebraicGeometry.Etale.affineLinearCoefficientPullback",
+   "AlgebraicGeometry.Etale.affineLinearCompactComparison",
+   "AlgebraicGeometry.Etale.affineLinearTraceAction",
+   "AlgebraicGeometry.Etale.affineSpaceLinearTraceInvariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpaceLinearTraceInvariance.lean",
+  "statement": "theorem affineSpaceLinearTraceInvariance (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))), OrdinaryFiniteP1Datum A N hA t T hT) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) : ∃ sq : IsPullback (affineTraceLinearMap S d g) (affineTraceProjection S d) (affineTraceProjection S d) (𝟙 S), affineLinearTraceAction N hN A hA t S hS d (affineTraceLinearMap S d g) sq ≫ affineTraceCounit A N hA t D S hS d = affineTraceCounit A N hA t D S hS d",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing affineTraceTower and affineTraceCounit. The action is the concrete linear polynomial map, actual Cartesian compact-support exchange, and canonical Tate comparison constructed from normalized shifted-line descent. The existing D+ tower comparison transports the action to the actual counit source. The existential square certifies the specified map is Cartesian; it is not an additional hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29fc8ea14",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed all seven dependencies, source passages, exact declarations, canonical action, hypotheses, universes and edge cases. Statement field matches verbatim; immutable module compiles cleanly through scompile.py. No findings. Review recorded in review.md; branch unchanged."
  }
 }
