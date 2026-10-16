@@ -1,0 +1,128 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-chart-flat",
+   "place": "the equation-count and local comparison steps of Tag 07CP",
+   "via": []
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; partial-chart equation count and final local comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a polynomial ring by m equations is flat at a prime where the fibre dimension is n minus m",
+   "results": "Algebra.Smooth.flat; Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension; generic smoothness results, no equation-count theorem for this prepared chart.",
+   "date": "2026-10-17",
+   "verdict": "Use the existing project equation-count and partial-chart fibre-dimension declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.of_linearEquiv",
+   "results": "Module.Flat.of_linearEquiv, Mathlib.RingTheory.Flat.Basic: transfers flatness across a linear equivalence.",
+   "date": "2026-10-17",
+   "verdict": "Used for the explicit equivalence of localized chart algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "rg partial_chart_flat|partial_chart_fibre_dimension|finiteChartEquiv lean/Sheaf/RingTheory",
+   "results": "PopescuLiftPartialChart contains the proved fibre-dimension theorem and an inactive, commented-out partial_chart_flat proof. No active duplicate.",
+   "date": "2026-10-17",
+   "verdict": "Restore the equation-count argument in the new helper module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial quotient by m equations has a flat local ring when its fibre dimension equals the number of variables minus m",
+   "results": "Module.Flat.of_forall_isTrivialRelation; Module.flat_of_isLocalized_maximal; RingHom.Flat.localRingHom; Polynomial.fiberEquivQuotient and generic localization criteria.",
+   "date": "2026-10-17",
+   "verdict": "No exact equation-count result returned; use the existing project equation-count theorem."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftChartFlat",
+  "date": "2026-10-17",
+  "group": "R4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-popescu-lift-chart-partial-flat-repair",
+ "kind": "statement",
+ "title": "Flatness of a prepared partial chart local ring",
+ "statement": "Let R be a Noetherian commutative ring, let Cbar be a commutative R-algebra with a compatible R/(pi^2)-algebra structure, and let pi be in R. Let d be prepared Popescu lifting data [lem-weil-pbc-popescu-lift-preparation]. For k in Fin d.r, form the explicit partial chart D_k and its map to the full lifting algebra D as in [lem-weil-pbc-popescu-lift-partial-chart-dimension]. If q is a prime of D containing the image of pi and avoiding the image of a_k, let q_k be its inverse image in D_k. Then (D_k)_{q_k} is a flat R-module. The local ring and flatness are as in [def-weil-pbc-localization-at-prime] and [def-weil-pbc-flat-ring-map].",
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "lem-weil-pbc-popescu-lift-partial-chart-dimension",
+  "lem-weil-pbc-equation-count-fibre-dimension-flat",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Define the finite-chart prime using finiteChartEquiv. Apply partial_chart_fibre_dimension and exists_flat_away_of_fibre_dimension_eq to obtain flatness of the finite-chart localization. Transport it across the explicit localization algebra equivalence induced by finiteChartEquiv.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-partial-chart-dimension",
+    "lem-weil-pbc-equation-count-fibre-dimension-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-popescu-lift-partial-chart-dimension",
+  "lem-weil-pbc-equation-count-fibre-dimension-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CP equation-count argument"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftChartPartialFlat",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftChartPartialFlat.lean",
+  "declaration": "Algebra.PopescuLiftPresentation.partial_chart_flat_repair",
+  "statement": "theorem partial_chart_flat_repair {R : Type a} {Cbar : Type c}\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsNoetherianRing R]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (k : Fin d.r) (q : PrimeSpectrum d.liftingAlgebra)\n    (hπ : algebraMap R d.liftingAlgebra π ∈ q.asIdeal)\n    (hk : ULift.up (Ideal.Quotient.mk d.definingIdeal\n      (d.includeX (d.a k))) ∉ q.asIdeal) :\n    Module.Flat R (d.chartLocal k q)",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "R4",
+  "date": "2026-10-17"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261016T221623-L-1618484",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261016T221623-L-1618484",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

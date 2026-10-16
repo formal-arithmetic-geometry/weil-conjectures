@@ -15649,3 +15649,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.FormalComparisonFlatTransportSquare (stage 3; reviewer PASS; first push; landing 20261016T221622-L-1618176 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.AffineQCohTorAmplitudeDetection (stage 3; reviewer PASS; first push; landing 20261016T221622-L-1618279 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/R3/Sheaf.Paper.FiniteDiscreteCoefficientSections (stage 3; reviewer PASS; first push; landing 20261016T221623-L-1618381 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/R4/Sheaf.RingTheory.PopescuLiftChartFlat (stage 3; reviewer PASS; first push; landing 20261016T221623-L-1618484 (interface); batch 20261016T221550; modules 3; new nodes 2)

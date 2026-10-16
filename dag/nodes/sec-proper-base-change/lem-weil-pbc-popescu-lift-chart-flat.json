@@ -15,108 +15,46 @@
  ],
  "proof": [
   {
-   "text": "The private polynomial_value helper compares two R-algebra homomorphisms out of the original-variable polynomial algebra. MvPolynomial.algHom_ext extends hc to all polynomials. In the inverse-image prime qD of the special-fibre prime, pi belongs to qD and the image of a_k avoids it.",
-   "uses": [
-    "lem-weil-pbc-popescu-lift-preparation",
-    "def-weil-pbc-localization-at-prime"
-   ],
+   "text": "The private polynomial_value helper extends the generator equations hc to all reduced polynomials by MvPolynomial algebra-hom extensionality. In the inverse-image prime qD, pi is in qD and the chosen chart coefficient avoids qD.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+    "place": "Stacks Project, Tag 07CP (lemma-lifting)"
    }
   },
   {
-   "text": "Construct the partial chart and its explicit m-equation presentation in n+m variables. Apply partial_chart_fibre_dimension. The proved partial_chart_flat helper applies exists_flat_away_of_fibre_dimension_eq, uses (n+m)-m=n, and transports Module.Flat along the explicit equivalence of localizations induced by finiteChartEquiv.",
+   "text": "Apply partial_chart_flat_repair to the pulled-back prime qD. Its equation-count and fibre-dimension argument gives flatness of the partial chart local ring.",
    "uses": [
-    "lem-weil-pbc-popescu-lift-partial-chart-dimension",
-    "lem-weil-pbc-equation-count-fibre-dimension-flat",
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-popescu-lift-chart-partial-flat-repair"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+    "place": "Stacks Project, Tag 07CP equation-count argument"
    }
   },
   {
-   "text": "Apply annihilator_element_flat_base_change to the algebra map R to T twice, at pi and pi^2. Rewrite map_pow and the hypothesis hAnnR to obtain Ann_T(pi)=Ann_T(pi^2).",
+   "text": "Apply chart_maps_flat_of_partial using the base annihilator equality to transport flatness through the local comparison and obtain the canonical localized map in the target statement.",
    "uses": [
-    "lem-weil-pbc-annihilator-element-flat-base-change",
-    "def-weil-pbc-flat-ring-map"
+    "lem-weil-pbc-popescu-lift-chart-maps-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-   }
-  },
-  {
-   "text": "The proved equation_key_identity and invertibility of a_k kill every u_l in T. Applying the same identity with chart kprime gives pi*p_kprime,l=0. All these identities are compiled Lean proofs, not additional holes.",
-   "uses": [
-    "lem-weil-pbc-popescu-lift-preparation",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-   }
-  },
-  {
-   "text": "Use chart_relations_pi_divisible to write p_kprime,l=pi*y. Its pi-torsion gives pi^2*y=0. Equality of annihilators gives pi*y=0. Thus all full defining equations vanish in T. Ideal.span_le expresses vanishing on the full defining ideal.",
-   "uses": [
-    "lem-weil-pbc-popescu-lift-chart-relations",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-   }
-  },
-  {
-   "text": "The explicit chartMap is surjective by quotient surjectivity and ULift. A private proved lemma localRingHom_bijective_of_kernel_vanishes proves injectivity after localization using numerator and denominator lifts, the fraction zero criterion and vanishing of the kernel in T; surjectivity follows by lifting both numerator and denominator. Apply it to chartMap after proving its kernel vanishes by quotient induction. This yields chart_comparison_bijective.",
-   "uses": [
-    "lem-weil-pbc-popescu-lift-chart-relations",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
-   }
-  },
-  {
-   "text": "Promote the bijective localRingHom to an R-algebra equivalence, proving scalar compatibility with localRingHom_to_map and chartMap.commutes. Transport Module.Flat R T along its inverse linear equivalence. Give the target local ring the algebra structure from the canonical localRingHom R_p to D_qD and prove its R scalar tower. Module.flat_iff_of_isLocalization then gives exactly the unchanged target conclusion.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-flat-over-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+    "place": "Stacks Project, Tag 07CP final local comparison and annihilator argument"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-annihilator-element-flat-base-change",
-  "lem-weil-pbc-equation-count-fibre-dimension-flat",
-  "lem-weil-pbc-flat-over-localization",
-  "lem-weil-pbc-popescu-lift-chart-relations",
-  "lem-weil-pbc-popescu-lift-partial-chart-dimension",
-  "lem-weil-pbc-popescu-lift-preparation"
+  "lem-weil-pbc-popescu-lift-chart-partial-flat-repair",
+  "lem-weil-pbc-popescu-lift-chart-maps-flat"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent.",
-  "note": "M3 formal reduction: explicit partial chart, fibre dimension, equation count, key identities, divisibility, annihilator base change, local comparison and localization of the base."
+  "note": "Stage-3 reduction: polynomial evaluation, equation-count partial-chart flatness, then annihilator-based local comparison."
  },
  "mathlib_searches": [
   {
@@ -217,12 +155,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261012T232142-L-1993271",
+  "landing": "20261016T221623-L-1618484",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
