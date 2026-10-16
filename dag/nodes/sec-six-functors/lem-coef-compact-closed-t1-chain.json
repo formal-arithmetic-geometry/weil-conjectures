@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction and the displayed derived inverse-limit calculation, through the inherited cosimplicial-frame ancestry: Proposition 2.4.2, printed pp. 49-50: compact topological spaces are finite relative to closed T1 inclusions. Read the PDF online and in the sandbox; no Stacks tag states this topological assertion.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction and inverse-limit calculation: inherited cosimplicial-frame/model-category input, via the recorded ancestry; compact-source smallness in lem-coef-topological-serre-model step 2 is Hovey Proposition 2.4.2.",
    "via": [
     "lem-coef-topological-serre-model",
     "lem-coef-kan-quillen-right-proper",
@@ -28,9 +28,81 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify stages with their images in the set-theoretic union and put $X_\\lambda=X$. Fix $\\alpha<\\lambda$ and a closed subset $F\\subseteq X_\\alpha$. Induct on $\\beta\\geq\\alpha$: $F$ is closed in $X_\\alpha$; a successor closed embedding carries it to a closed set; at a limit $\\beta$, its inverse images in stages $\\gamma\\geq\\alpha$ are closed by induction and in stages $\\gamma<\\alpha$ are closed by continuity into $X_\\alpha$, so the final topology makes $F$ closed in $X_\\beta$. This includes $\\beta=\\lambda$. In particular $X_\\alpha\\hookrightarrow X_\\beta$ is a closed embedding: it is continuous and injective, and every closed subset of its source remains closed in its target, which gives precisely the subspace topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.1 and Proposition 2.4.2, printed p. 49: explicit closed-subset induction establishing embeddings into each later stage."
+   }
+  },
+  {
+   "text": "Every point $x\\in X\\setminus X_0$ has a least stage $\\delta$ of occurrence. This stage is a successor $\\eta+1$: it is not zero, and at a nonzero limit the underlying colimit is the union of the earlier stages. The successor closed $T_1$ condition makes $\\{x\\}$ closed in $X_{\\eta+1}$; step 1 makes it closed in every later stage including $X$. Thus each selected point outside $X_0$ below has a closed singleton, even though points of $X_0$ need not be closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.2, printed pp. 49-50: relative T1 property, expanded using the least stage of occurrence."
+   }
+  },
+  {
+   "text": "Let $f:A\\to X$ be continuous and suppose its image is contained in no stage. Starting with $\\alpha_0=0$, choose $x_n\\in f(A)\\setminus X_{\\alpha_{n-1}}$ and a stage $\\alpha_n$ containing it, for $n\\geq1$. Necessarily $\\alpha_n>\\alpha_{n-1}$, and the points are distinct. Put $\\mu=\\sup_{n\\geq0}\\alpha_n\\leq\\lambda$ and $S=\\{x_n:n\\geq1\\}$. The strict increase shows that $\\mu$ is a nonzero limit, all $\\alpha_n<\\mu$, and the stages $\\alpha_n$ are cofinal below $\\mu$. Use $X_\\mu$ when $\\mu<\\lambda$ and $X_\\lambda=X$ when $\\mu=\\lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.2, printed p. 50: sequence of points and its supremum ordinal."
+   }
+  },
+  {
+   "text": "Fix $T\\subseteq S$ and $\\beta<\\mu$. Choose $n$ with $\\beta\\leq\\alpha_n$. For $m>n$, $x_m\\notin X_{\\alpha_{m-1}}\\supseteq X_\\beta$, so $T\\cap X_\\beta\\subseteq\\{x_1,\\ldots,x_n\\}$. This intersection is a finite union of closed singletons by step 2, hence closed. The final topology at $\\mu$ makes $T$ closed in $X_\\mu$; step 1 makes it closed in $X$ when $\\mu<\\lambda$. Therefore every subset $T$ of $S$, including $S$ and $S\\setminus\\{x_n\\}$, is closed in $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.2, printed p. 50: every subset of the sequence is closed in the supremum stage; closedness in the full union made explicit."
+   }
+  },
+  {
+   "text": "The opens $V_0=X\\setminus S$ and $V_n=X\\setminus(S\\setminus\\{x_n\\})$ for $n\\geq1$ cover $X$: $V_0$ covers its complement of $S$, and $x_n\\in V_n$. Their inverse images under $f$ form an open cover of $A$. Compactness supplies a finite subcover. But $V_0$ meets none of $S$, and each $V_n$ meets $S$ only in $x_n$, so this finite family misses some $x_m\\in S\\subseteq f(A)$. Any preimage of that point is uncovered, a contradiction. Hence $f(A)\\subseteq X_\\alpha$ for some $\\alpha<\\lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.2, printed p. 50: compactness contradiction, written directly as an open cover of the original compact source."
+   }
+  },
+  {
+   "text": "Choose $\\alpha$ from step 5 and define $g:A\\to X_\\alpha$ as the unique set map lifting $f$. For an open $U\\subseteq X_\\alpha$, step 1 gives an open $V\\subseteq X$ with $U=V\\cap X_\\alpha$; thus $g^{-1}(U)=f^{-1}(V)$ is open. Hence $g$ is continuous and the factorization holds, including $A=\\varnothing$ (which already factors through $X_0$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.1 and Proposition 2.4.2, printed p. 49: a set factorization through an embedded stage is continuous."
+   }
+  },
+  {
+   "text": "The compatible postcomposition maps define the canonical map of [def-weil-pbc-category-colimit]. Explicitly the set colimit is the disjoint union of $\\operatorname{Cont}(A,X_\\alpha)$ modulo identifying a map with its postcomposition to a later stage: compatible families descend uniquely through this quotient, verifying the stated universal property. Step 6 proves surjectivity. If maps at stages $\\alpha$ and $\\beta$ induce the same map to $X$, take $\\gamma=\\max(\\alpha,\\beta)<\\lambda$. Their postcomposites into $X_\\gamma$ agree pointwise since $X_\\gamma\\to X$ is injective, so they represent the same quotient element. This proves injectivity and the equivalent bijection.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 2.4, printed p. 49 (colimits of sets with final topology), and Proposition 2.4.2: explicit quotient and bijection argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Proposition 2.4.2, printed pp. 49-50, read online; explicit elementary expansion of the closed-subset induction and compactness contradiction. The PDF is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +124,87 @@
    "results": "{\"t\": \"2026-10-16T17:17:05Z\", \"tool\": \"grep\", \"query\": \"closed.*T1|compact.*small.*inclusion|finite.*relative.*closed|weakHomotopyEquiv.*(sphere|ContinuousMap)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/SymbolicDynamics/Basic.lean\", \"Mathlib/Dynamics/SymbolicDynamics/Basic.lean\", \"Mathlib/Dynamics/SymbolicDynamics/Basic.lean\", \"Mathlib/Topology/Algebra/AffineSubspace.lean\", \"Mathlib/Topology/Sets/Closeds.lean\", \"Mathlib/Topology/Sets/Closeds.lean\", \"Mathlib/Topology/Sets/Closeds.lean\", \"Mathlib/Topology/Algebra/Semigroup.lean\"], \"digest\": \"ff2712c50dd1aa63\"}",
    "date": "2026-10-16",
    "verdict": "no match: the semantic hits concern compact exhaustions and Kuratowski embeddings; the grep hits concern T1 separation and closed sets, not Hom commuting with continuous ordinal unions of closed T1 inclusions. Loogle returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact space maps into a bounded stage of any transfinite sequence of closed T1 embeddings",
+   "results": "{\"t\": \"2026-10-16T17:58:02Z\", \"tool\": \"leanfinder\", \"query\": \"A compact space maps into a bounded stage of any transfinite sequence of closed T1 embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NonemptyCompacts.kuratowskiEmbedding\", \"CompactExhaustion.find\", \"CompactExhaustion.isCompact'\", \"CompactExhaustion.toFun\", \"CompactExhaustion\", \"CompactExhaustion.mem_find\", \"CompactExhaustion.exists_mem\", \"CompactExhaustion.isCompact\"], \"digest\": \"7122509bd2414019\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSpace colimit",
+   "results": "{\"t\": \"2026-10-16T17:58:02Z\", \"tool\": \"loogle\", \"query\": \"CompactSpace colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `colimit`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported unknown identifier colimit; this is not evidence of absence. The quoted-identifier rerun succeeded with zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*T1|compact.*finite.*inclusion|discrete.*compact",
+   "results": "{\"t\": \"2026-10-16T17:58:02Z\", \"tool\": \"grep\", \"query\": \"closed.*T1|compact.*finite.*inclusion|discrete.*compact\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/DiscreteSubset.lean\", \"Mathlib/Topology/DiscreteSubset.lean\", \"Mathlib/Topology/DiscreteSubset.lean\", \"Mathlib/Topology/DiscreteSubset.lean\", \"Mathlib/Topology/DiscreteSubset.lean\", \"Mathlib/Topology/Algebra/AffineSubspace.lean\", \"Mathlib/Topology/ExtremallyDisconnected.lean\"], \"digest\": \"11e1a6bfec7bcb91\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps from compact spaces into ordinal colimits of closed embeddings factor through a finite stage",
+   "results": "{\"t\": \"2026-10-16T18:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous maps from compact spaces into ordinal colimits of closed embeddings factor through a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.continuous_CC'₁\", \"Profinite.NobelingProof.continuous_CC'₀\", \"CompactT2.ExtremallyDisconnected.projective\", \"CompactT2.Projective\", \"ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.GoodProducts.range_equiv_factorization\", \"ContinuousMap.exists_lift_sigma\"], \"digest\": \"ac3972aee14b69fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompactSpace\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:00:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompactSpace\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "grep",
+   "query": "transfinite|ordinal|IsClosedEmbedding",
+   "results": "{\"t\": \"2026-10-16T18:00:32Z\", \"tool\": \"grep\", \"query\": \"transfinite|ordinal|IsClosedEmbedding\", \"sub\": \"Topology/Category/TopCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact spaces are finite relative to continuous transfinite chains of closed T1 inclusions",
+   "results": "{\"t\": \"2026-10-16T18:00:33Z\", \"tool\": \"leansearch\", \"query\": \"Compact spaces are finite relative to continuous transfinite chains of closed T1 inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactSpace\", \"isCompact_iff_finite_subfamily_closed\", \"TopologicalSpace.Closeds.instCompactSpace\", \"isCompact_iff_finite\", \"TopologicalSpace.noetherianSpace_TFAE\", \"Finite.compactSpace\", \"EMetric.NonemptyCompacts.continuous_toCloseds\", \"isCompact_iff_compactSpace\"], \"digest\": \"72c296507086e2d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern compact exhaustions, general compactness/discrete-space facts or unrelated ordinal constructions; no compact-source factorization for continuous closed T1 chains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact source factor through stage closed embeddings ordinal colimit",
+   "results": "{\"t\": \"2026-10-16T18:08:32Z\", \"tool\": \"leanfinder\", \"query\": \"compact source factor through stage closed embeddings ordinal colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.GoodProducts.range_equiv_factorization\", \"Profinite.Nobeling.isClosedEmbedding\", \"Profinite.NobelingProof.coe_πs'\", \"Profinite.NobelingProof.πs'_apply_apply\", \"Profinite.NobelingProof.GoodProducts.smaller\", \"IsCompactOpenCovered.of_comp\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLift\"], \"digest\": \"70eaa08fec5eec6d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern profinite Nobeling projections, general closed embeddings, compact-open covers or abstract lifting properties; none states compact-source factorization through an ordinal chain of closed T1 inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSpace factor through stage closed embedding",
+   "results": "{\"t\": \"2026-10-16T18:08:32Z\", \"tool\": \"loogle\", \"query\": \"CompactSpace factor through stage closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `factor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: Unknown identifier `factor`; not evidence of absence; rerun using quoted identifiers."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(colimit|directLimit)|IsClosedEmbedding|IsCompact.*finite",
+   "results": "{\"t\": \"2026-10-16T18:23:57Z\", \"tool\": \"grep\", \"query\": \"compact.*(colimit|directLimit)|IsClosedEmbedding|IsCompact.*finite\", \"sub\": \"Topology/Category\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/Profinite/Product.lean\", \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"Mathlib/Topology/Category/Stonean/Limits.lean\", \"Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean\", \"Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean\", \"Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean\", \"Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean\", \"Mathlib/Topology/Category/LightProfinite/Injective.lean\"], \"digest\": \"9a9fc044eb4818ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern profinite Nobeling projections, general closed embeddings, compact-open covers or abstract lifting properties; none states compact-source factorization through an ordinal chain of closed T1 inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompact\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:23:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompact\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern profinite Nobeling projections, general closed embeddings, compact-open covers or abstract lifting properties; none states compact-source factorization through an ordinal chain of closed T1 inclusions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-topological-serre-model",
@@ -63,5 +212,21 @@
   "date": "2026-10-17"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-closed-t1-chain",
+  "worker": "stage1",
+  "summary": "Seven explicit elementary steps prove persistence of closed subsets, closedness of newly added points, the cofinal countable sequence construction, closedness of every subset of that sequence in its supremum stage and then in X, the direct open-cover contradiction on A, continuous factorization, and injectivity of the Hom-colimit map. No new nodes or unproved topological black boxes are used. Statement unchanged; both mu<lambda and mu=lambda and non-Hausdorff X_0 are handled.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint paragraph 2, displayed derived adjunction calculation, through the inherited ancestry to compact-source smallness used in lem-coef-topological-serre-model step 2. The blueprint contains no separate closed T1 chain theorem: searches for closed T1, closed discrete, transfinite, closed inclusion and compact source found none. The item supplies Hovey Proposition 2.4.2 as the existing unit route requires.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-feae1a9e8",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-feae1a9e8 (reviewer sub-agent of L); spot-checked: I read the whole item, the cited def-weil-pbc-category-colimit and the parent's steps 2 and 3. I checked the item against Hovey, Model Categories, pp. 49-50: Section 2.4 on colimits in Top, Lemma 2.4.1, the definition of closed T1 inclusion and Proposition 2.4.2 with its proof, plus Def. 2.1.4 for 'finite relative to'. Hovey is not under literature/. The worker filed a WANTED line and marked the proof as written by an agent (proof_origin.by=agent). I read the online PDF and extracted text only to /tmp. The statement agrees with Hovey clause by clause, is unchanged from the base and is not weakened. Hovey's printed 'not in Y\\f(X)' is a typo, which Lemma 2.4.5's proof confirms, and the item uses the corrected meaning. The source's final 'discrete in a compact space' step is incomplete; steps 4-5 fix it by proving every subset of S closed in X and giving an explicit open cover of A. All 7 steps are correct and elementary. Step 7 uses only the universal property and canonical map of the colimit definition, which is a Mathlib leaf. I tested the empty source, a non-T1 X_0, lambda=omega, an internal supremum mu<lambda for uncountable-cofinality lambda, and mu=lambda. Hovey's Sierpinski example shows the T1 hypothesis is needed. A DAG search found no duplicate; the only other hits are unrelated 'finite relative Tor dimension' nodes. Mathlib's TopCat limits have no match, and the 14 recorded searches are adequate. The proof cites no statement from another unit, so no tool_uses are needed and there is no cycle. No fixes were made; the details are in review.md."
+ }
 }

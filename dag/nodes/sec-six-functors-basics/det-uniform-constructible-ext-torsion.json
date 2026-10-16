@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-uniform-constructible-ext-torsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The torsion stratum bound",
- "statement": "Let $a=i\\circ u\\colon S\\hookrightarrow Z\\hookrightarrow X$ with $i$ closed, $u$ open, and let\n$j\\colon X\\setminus Z\\hookrightarrow X$ be the open complement of $Z$. Let $L_0$ be a lisse\n$\\mathcal O_{E,S}$-module (finite free locally), $b\\colon T\\hookrightarrow X$ locally closed and $M_0$ a\nlisse $\\mathcal O_{E,T}$-lattice. Then for every $n\\geq1$:\n\n1. $R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)$ lies in\n   $\\D^{[0,\\operatorname{cd}_\\ell(j)+1]}(Z_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n)$, with cohomology sheaves\n   pulled back from $Z_{\\mathrm{ét}}$;\n2. $H^qR\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\bigr)=0$ for\n   $q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes and scheme morphisms below are in the separated finite-type $k$-scheme setting of [sk-def-sfb-dc-setting]. Fix a finite extension $E/\\mathbf Q_\\ell$, its ring of integers $\\mathcal O_E$, and a uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Put $\\mathcal O_{E,Y}=p_Y^*\\underline{\\mathcal O_E}$ on $Y_{\\mathrm{proét}}$ [sk-def-sfb-pulled-back-coefficients]. A lisse lattice means a module sheaf locally isomorphic to $\\mathcal O_{E,Y}^{\\oplus r}$ for a finite $r\\ge0$ in the pro-étale topology. For a lattice $L_0$ on $Y$, its dual is $L_0^\\vee=\\mathcal Hom_{\\mathcal O_{E,Y}}(L_0,\\mathcal O_{E,Y})$. For a locally closed immersion $b:T\\hookrightarrow X$, write $b=k_b\\circ v_b$ with $v_b:T\\hookrightarrow B$ open and $k_b:B\\hookrightarrow X$ closed, and use $b_!=k_{b,*}v_{b,!}$, the closed direct image after open extension by zero [def-sfb-module-lower-star, def-sfb-module-open-lower-shriek]. Cohomological dimensions have the extended nonnegative-integer convention of [sk-def-cd]; if an upper endpoint is $+\\infty$, its cohomological upper bound imposes no condition.\n\nLet $a=i\\circ u\\colon S\\hookrightarrow Z\\hookrightarrow X$ with $i$ closed, $u$ open, and let\n$j\\colon X\\setminus Z\\hookrightarrow X$ be the open complement of $Z$. Let $L_0$ be a lisse\n$\\mathcal O_{E,S}$-module (finite free locally), $b\\colon T\\hookrightarrow X$ locally closed and $M_0$ a\nlisse $\\mathcal O_{E,T}$-lattice. Then for every $n\\geq1$:\n\n1. $R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)$ lies in\n   $\\D^{[0,\\operatorname{cd}_\\ell(j)+1]}(Z_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n)$, with cohomology sheaves\n   pulled back from $Z_{\\mathrm{ét}}$;\n2. $H^qR\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\bigr)=0$ for\n   $q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.md",
   "place": "node det-uniform-constructible-ext-torsion, order None",
@@ -26,44 +26,146 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-cd",
+  "sk-lem-formal-closed-support",
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek"
+ ],
  "proof": [
   {
-   "text": "Put $N=b_!(M_0/\\pi_E^n)$. It is a torsion sheaf pulled back from $X_{\\mathrm{ét}}$: the lisse torsion\nsheaf $M_0/\\pi_E^n$ descends to $T_{\\mathrm{ét}}$ (Stacks, Tag 099Y), and extension by zero and closed\ndirect image commute with the pullback from the étale site (Stacks, Tags 09AF, 09A6).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(1) $j^*N$ is again pulled back from the étale site, and by Stacks, Tag 09A6 the pro-étale $Rj_*j^*N$ is\nthe pullback of the étale $Rj_*$ of the corresponding étale sheaf. By definition of\n$\\operatorname{cd}_\\ell(j)$ ([sk-def-cd]), $R^qj_*$ vanishes on classical $\\ell$-power torsion sheaves\nfor $q>\\operatorname{cd}_\\ell(j)$, so $Rj_*j^*N\\in\\D^{[0,\\operatorname{cd}_\\ell(j)]}$ with classical\ncohomology sheaves. By part (1) of [sk-lem-formal-closed-support],\n\n$$\nR\\underline\\Gamma_ZN=i^*\\fib(N\\to Rj_*j^*N).\n$$",
+   "text": "Fix $n\\ge1$ and put $A=\\mathcal O_E/\\pi_E^n$. The coefficient definition [def-weil-l-adic-coefficient-extension] makes $A$ a finite ring. Since $|\\ell|_E<1$, the same definition gives $\\ell\\in(\\pi_E)$ and hence $\\ell^n A=0$. Clause (1) of [det-prop-integral-criterion-constant-coefficients] identifies $\\mathcal O_{E,Y}/\\pi_E^n$ with the constant ring sheaf $A_Y$. On a cover trivializing a lattice, its reduction is therefore $A_Y^{\\oplus r}$; the dual lattice has the dual free basis, so its reduction has the same property. The standing schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since the spectrum of a field is Noetherian. In particular, the open subschemes $S$ of $Z$ and $V=X\\setminus Z$ of $X$ are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], their underlying spaces satisfy the descending chain condition on closed subsets. An open cover with no finite subcover would produce a strictly increasing sequence of finite unions of its members, contradicting that condition on their complements. These schemes are qcqs: their quasi-compactness is part of Noetherianity, and intersections of affine opens are quasi-compact because a Noetherian topological space has all opens quasi-compact. For $j:V\\hookrightarrow X$, the inverse image of an affine open is such an open and is quasi-compact; its diagonal is an isomorphism, so $j$ is qcqs. The closed immersion $k_b$ is affine, by the affine quotient description in [def-weil-closed-immersion], and is qcqs for the same reason applied to its affine inverse images and its isomorphism diagonal. Use the small-site convention of [def-weil-size-convention]. For each such ringed site, [lem-pur-ringed-site-grothendieck-abelian] makes its module-sheaf category Grothendieck abelian, hence it has enough injectives by [lem-sp-grothendieck-enough-injectives]. We also fix how these bounds are read on underlying abelian sheaves, as required by [sk-def-cd]. Write $U_Y$ for forgetting the $A_Y$-action. This is the direct image for the identity topos with ring map $\\mathbf Z_Y\\to A_Y$, and is exact because kernels and cokernels are computed on underlying abelian sheaves [def-weil-sheaf-of-modules-category]. The two factorizations of the ringed morphism $(V,A_V)\\to(X,\\mathbf Z_X)$, and separately the factorization $(S,A_S)\\to(S,\\mathbf Z_S)\\to(*,\\mathbf Z)$, give by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]\n$$U_XRj_{*,A}\\cong Rj_{*,\\mathbf Z}U_V,\\qquad R\\Gamma_{A}(S,-)\\cong R\\Gamma_{\\mathbf Z}(S,U_S-).$$\nHere $R\\Gamma_A$ takes values in abelian groups, and $RU_Y=U_Y$ by exactness. Thus the derived direct-image and section bounds in the coefficient category are exactly the underlying abelian bounds in the cd definition.",
    "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "det-prop-integral-criterion-constant-coefficients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
     "sk-def-cd",
-    "sk-lem-formal-closed-support"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Opening paragraph: finite reductions and the qcqs hypotheses required by the two site comparisons"
+   }
   },
   {
-   "text": "The fiber of a map from a sheaf in degree $0$ to an object of $\\D^{[0,c]}$ lies in $\\D^{[0,c+1]}$ (long\nexact sequence), and $i^*$ is exact and preserves the classical (étale-pulled-back) sheaves. This proves\n(1); the cohomology sheaves need not be constructible.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $F_n=M_0/\\pi_E^n$. Step 1 shows that $F_n$ is locally constant with finite $A$-module stalks. Apply [lem-sf-proetale-locally-constant-origin] on $T$ to obtain a lisse etale sheaf $F_n^{\\mathrm{et}}$ with $\\nu_T^*F_n^{\\mathrm{et}}\\cong F_n$. Use the factorization $b=k_bv_b$ in the statement. By [lem-cbc-proetale-extension-zero-comparison], $v_{b,!}F_n\\cong\\nu_B^*v_{b,!}^{\\mathrm{et}}F_n^{\\mathrm{et}}$. Apply [sk-thm-pe-direct-image-comparison] to the qcqs map $k_b$ and take degree-zero cohomology. Inverse image for comparison is exact by [det-pe-classical-sheaves-modules], and $H^0Rk_{b,*}$ on a sheaf is ordinary $k_{b,*}$ by [lem-sp-derived-well-defined] (the module categories have enough injectives by step 1), so\n$$N:=b_!F_n=k_{b,*}v_{b,!}F_n\\cong\\nu_X^*\\bigl(k_{b,*}^{\\mathrm{et}}v_{b,!}^{\\mathrm{et}}F_n^{\\mathrm{et}}\\bigr).$$\nThus $N$ is a classical sheaf of $A$-modules.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "sk-thm-pe-direct-image-comparison",
+    "det-pe-classical-sheaves-modules",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Opening paragraph: descent of the lisse reduction, open extension and closed direct image"
+   }
   },
   {
-   "text": "(2) Put $G=(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_ZN$. Since $L_0^\\vee/\\pi_E^n$ is locally free\nover $\\mathcal O_E/\\pi_E^n$, tensoring is exact, so by (1) $G\\in\\D^{[0,\\operatorname{cd}_\\ell(j)+1]}(S)$,\nwith cohomology sheaves $\\mathcal H^v(G)$ that are classical $\\ell$-power torsion sheaves. The\nhypercohomology spectral sequence\n\n$$\nE_2^{p,v}=H^p(S,\\mathcal H^v(G))\\Longrightarrow H^{p+v}R\\Gamma(S,G)\n$$\n\nconverges since $G$ is bounded. By definition of $\\operatorname{cd}_\\ell(S)$, $E_2^{p,v}=0$ for\n$p>\\operatorname{cd}_\\ell(S)$, and $E_2^{p,v}=0$ unless $0\\leq v\\leq\\operatorname{cd}_\\ell(j)+1$. Hence\nthe abutment vanishes in degrees $>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $N=\\nu_X^*N^{\\mathrm{et}}$ using step 2. The inverse-image square in [sk-thm-pe-direct-image-comparison] gives $j^*N=\\nu_V^*j_{\\mathrm{et}}^*N^{\\mathrm{et}}$. Since $j$ is qcqs by step 1, the same theorem gives\n$$B_j:=Rj_*j^*N\\cong\\nu_X^*Rj_{\\mathrm{et},*}j_{\\mathrm{et}}^*N^{\\mathrm{et}}.$$\nConsequently its cohomology sheaves are classical. It has no negative cohomology: using enough injectives from step 1, embed $j^*N$ in an injective $I^0$, then successively embed each cokernel in $I^1,I^2,\\ldots$. This gives an injective resolution in nonnegative degrees, and [lem-weil-pbc-right-derived-plus-injective](2) computes $B_j$ by applying $j_*$ to that resolution. By [sk-def-cd], applied to the classical $\\ell$-power torsion sheaf $j^*N$, $H^r(B_j)=0$ for $r>c:=\\operatorname{cd}_\\ell(j)$. The coefficient $A$ is admissible and $X$ is a standing scheme, so the hypotheses of [sk-lem-formal-closed-support](1) hold and give\n$$R\\underline\\Gamma_ZN=i^*C,\\qquad C=\\operatorname{fib}(N\\longrightarrow B_j).$$",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "sk-def-cd",
+    "sk-lem-formal-closed-support",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Paragraph (1): restriction, comparison for Rj_*, cohomological dimension, and the support fiber formula"
+   }
+  },
+  {
+   "text": "The long exact sequence of $C\\to N\\to B_j\\to C[1]$ from [lem-sf-derived-homology-long-exact] gives $H^r(C)=0$ for $r<0$,\n$$H^0(C)=\\ker(N\\to H^0B_j),\\quad H^1(C)=\\operatorname{coker}(N\\to H^0B_j),\\quad H^r(C)\\cong H^{r-1}(B_j)\\ (r\\ge2).$$\nEvery displayed sheaf is classical: [det-pe-classical-sheaves-modules] says comparison is exact and fully faithful, so the map between classical sheaves lifts to an etale map, whose kernel and cokernel pull back to these two sheaves. For finite $c$, the formulas give vanishing above $c+1$; for $c=+\\infty$ only the proved lower bound is required. By [det-pe-topos-functoriality-inverse-image], $i^*$ is exact, and the inverse-image square of [sk-thm-pe-direct-image-comparison] identifies $i^*\\nu_X^*$ with $\\nu_Z^*i_{\\mathrm{et}}^*$. Thus applying $i^*$ preserves the bounds and etale origin, proving assertion (1).",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "det-pe-classical-sheaves-modules",
+    "det-pe-topos-functoriality-inverse-image",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Paragraph (1): explicit long exact sequence and preservation of etale origin"
+   }
+  },
+  {
+   "text": "Put $P_n=L_0^\\vee/\\pi_E^n$ and $G=P_n\\otimes_Au^*R\\underline\\Gamma_ZN$. By step 1, $P_n$ is finite locally free over $A_S$. The tensor clause of [sk-lem-formal-closed-support-ii] computes this functor by ordinary termwise tensor; locally it is a finite direct sum, hence exact. Exactness of $u^*$ [det-pe-topos-functoriality-inverse-image] gives\n$$H^v(G)=P_n\\otimes_Au^*H^v(R\\underline\\Gamma_ZN),$$\nzero outside $[0,c+1]$ when $c$ is finite. The inverse-image square in [sk-thm-pe-direct-image-comparison] makes the second tensor factor classical. Also $P_n=\\nu_S^*P_n^{\\mathrm{et}}$ by [lem-sf-proetale-locally-constant-origin]. To check tensor descent, trivialize the locally constant $P_n^{\\mathrm{et}}$ on an etale cover, with value a finite $A$-module $Q$. This module has a finite presentation $A^r\\to A^s\\to Q\\to0$ since $A$ is finite. For a classical sheaf $\\nu_S^*H$, $Q\\otimes_A\\nu_S^*H$ is the cokernel of the corresponding matrix map $(\\nu_S^*H)^r\\to(\\nu_S^*H)^s$ by [def-pur-sheaf-tensor-product]. Exact comparison [det-pe-classical-sheaves-modules] identifies this with the pullback of $Q\\otimes_A H$. These identifications send each pure tensor to the same pure tensor, so agree on overlaps and glue to $P_n\\otimes_A\\nu_S^*H\\cong\\nu_S^*(P_n^{\\mathrm{et}}\\otimes_AH)$. Every $H^v(G)$ is therefore classical and is killed by $\\ell^n$.",
+   "uses": [
+    "sk-lem-formal-closed-support-ii",
+    "det-pe-topos-functoriality-inverse-image",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-sf-proetale-locally-constant-origin",
+    "def-pur-sheaf-tensor-product",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Paragraph (2): exact finite-free tensor and classical cohomology"
+   }
+  },
+  {
+   "text": "Let $d=\\operatorname{cd}_\\ell(S)$. If $c$ or $d$ is $+\\infty$, no integer $q$ exceeds $c+d+1$, so assertion (2) is vacuous. Otherwise step 5 puts $G$ in the finite interval $[0,c+1]$. Use the small-site universe convention of [def-weil-size-convention]. By [lem-pur-ringed-site-grothendieck-abelian], the category of $A_S$-module sheaves is Grothendieck abelian; the target category of abelian groups is the same construction on the punctual site with ring $\\mathbf Z$. Global sections is additive and left exact, since evaluation preserves kernels. Apply [thm-sp-truncation-e2] to this global-sections functor and a bounded-below representative of $G$, with lower bound $0$. Its page and convergence clauses give\n$$E_2^{p,v}=H^p(S,H^v(G))\\Longrightarrow H^{p+v}R\\Gamma(S,G),$$\nwith a finite exhaustive separated filtration in each total degree. By [sk-def-cd] and step 5, $E_2^{p,v}=0$ for $p>d$, and it is zero unless $0\\le v\\le c+1$. For a total degree $q>c+d+1$, either $v>c+1$ or $p=q-v>d$, so every $E_2$ term on that diagonal is zero. Every subsequent term and hence every $E_\\infty$ term on the diagonal is zero. All graded pieces of the finite abutment filtration vanish, so $H^qR\\Gamma(S,G)=0$, proving assertion (2).",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "thm-sp-truncation-e2",
+    "sk-def-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+    "place": "Paragraph (2): the hypercohomology spectral sequence, its finite filtration, and total-degree vanishing"
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-closed-immersion",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-topos-functoriality-inverse-image",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "sk-def-cd",
-  "sk-lem-formal-closed-support"
+  "sk-lem-formal-closed-support",
+  "sk-lem-formal-closed-support-ii",
+  "sk-thm-pe-direct-image-comparison",
+  "thm-sp-truncation-e2"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.proof.md",
+  "place": "Opening descent paragraph; paragraphs (1) and (2), with the standing hypotheses and exact comparison arguments made explicit"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -78,5 +180,104 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-uniform-constructible-ext"
+ "unit": "sk-lem-uniform-constructible-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-uniform-constructible-ext-torsion",
+  "worker": "stage1",
+  "summary": "Second reading repaired the missing standing data, separate factorization of b, classical kernel/cokernel and tensor arguments, the hypercohomology citation, and infinite-dimension cases. Six explicit steps use existing DAG statements; no new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 expands the standing scheme/coefficient conventions needed in the source proof. Step 2 realizes its opening descent paragraph. Steps 3–4 realize paragraph (1), from the direct-image comparison through the support fiber and explicit long exact sequence. Steps 5–6 realize paragraph (2), including tensor descent and finite-filtration convergence.",
+  "tool_uses": [
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Its first clause identifies finite reductions of the pulled-back integral coefficient ring with the constant finite coefficient ring; this is a coefficient interface, not a substitute for the stratum argument."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Finite lisse comparison is the exact Tag 099Y descent input named by this unit source."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "This is the Tag 09AF open-extension comparison explicitly used by the source."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "This is the Tag 09A6 comparison used for the closed factor of b and j, with the same theorem also supplying the inverse-image square."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Exact full faithfulness supplies precisely the classical kernel/cokernel and finite-presentation tensor descent arguments; exact scheme inverse image alone does not."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Exact inverse image along i and u is the general sheaf functoriality required by the source."
+   },
+   {
+    "node": "sk-lem-formal-closed-support-ii",
+    "why": "Its finite-free tensor clause supplies the exact termwise tensor on the stratum."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Supplies the category hypothesis of the generic hypercohomology theorem on the small ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks Noetherianity from the standing finite-type-over-a-field hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Checks the qcqs open-complement and stratum hypotheses needed by direct-image comparison and cohomological dimension."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "This generic truncation hypercohomology theorem, unlike the previously cited sheaf-level Grothendieck/Leray theorem, states exactly the spectral sequence and finite filtration used in the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Supplies the topological Noetherian condition used to check quasi-compactness of affine-open intersections and the complement j."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Provides enough injectives for the module categories used to compute the right derived direct images."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Its R^0 identification justifies taking degree zero in the derived closed-direct-image comparison."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Its computation clause on bounded-below injective resolutions supplies the nonnegative bound for Rj_* of a sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Applied to coefficient forgetting (an exact identity-topos direct image for Z to A) and to j or global sections. It identifies the module-derived groups with the underlying abelian groups to which the cohomological-dimension definition applies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "det-pe-classical-sheaves-modules",
+  "det-pe-topos-functoriality-inverse-image",
+  "sk-lem-formal-closed-support-ii",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-derived-well-defined",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-b8eca7fa0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-b8eca7fa0 (reviewer sub-agent of L); spot-checked: I read the item, the unit record, the blueprint torsion statement and proof (main-20261015), and the statement of every cited node. I compared Stacks 099Y, 09AF and 09A6 (proetale.tex lines 4121, 5076 and 4696) with lem-sf-proetale-locally-constant-origin, lem-cbc-proetale-extension-zero-comparison and sk-thm-pe-direct-image-comparison. Delivery shape is correct: one commit, no new nodes, proof_deps equals the union of the step uses, every cited id exists and is unmerged. A dependency search from all 31 deps (6180 nodes reached) never returns to the item, so there is no cycle, and no SGA source is cited. Statement: both blueprint conclusions are kept verbatim. The added preamble is exactly the standing setting of sk-def-sfb-dc-setting plus the coefficient, lattice, b_! and cd conventions. It adds no hypothesis and weakens nothing, and sk-def-cd needs the qcqs setting for cd to be defined at all. Coefficient category: integral-criterion clause (1), with its stmt_dep qlbar-colimit-x-integral-limit (3), identifies O_{E,X}/pi^n with the constant ring A. That matches the discrete-Lambda comparison theorems and the admissible-Lambda condition of formal-closed-support. Step checks: step 1 checks qcqs, enough injectives and the forgetful identification needed because sk-def-cd is stated for abelian sheaves. Step 2 takes H^0 of the closed direct-image comparison via R^0 v = v. Step 3 bounds Rj_*j^*N in [0,c] (cd definition plus injective resolution) and applies the fiber formula of formal-closed-support (1). Step 4 writes out the long exact sequence, with classical kernels and cokernels from the exact, fully faithful nu^*. Step 5 gets exactness of the tensor from the -ii clause and proves classicality by finite presentation. Step 6 uses thm-sp-truncation-e2 (E_2 page, finite filtration, abutment) for the diagonal vanishing; the +infinity cases are vacuous. Small cases checked: the point with j empty; A^1 with Z the origin, giving Lambda(-1)[-2] in degrees [0,2]; empty Z; rank-zero lattices; n=1. I accepted all 16 declared tool uses: they are generic black boxes or exactly the Stacks inputs the source names. No fixes written."
+ }
 }

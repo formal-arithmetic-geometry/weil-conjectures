@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-uniform-constructible-ext-integral",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The integral stratum bound",
@@ -31,45 +31,144 @@
  ],
  "proof": [
   {
-   "text": "*Completeness of the target.* $b=i_T\\circ j_T$ with $j_T$ a quasi-compact open immersion into a closed\nsubscheme. Extension by zero is exact and preserves limits (Stacks, Tag 09BP), and closed direct image\nis exact (Stacks, Tag 09BM) and preserves limits as a right adjoint. Since $M_0$ is derived\n$\\pi_E$-complete and $\\pi_E$-torsion free, so is $b_!M_0$, and\n$b_!M_0\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n=b_!(M_0/\\pi_E^n)$; thus\n$b_!M_0=R\\varprojlim_nb_!(M_0/\\pi_E^n)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the standing scheme and coefficient setting of the unit, and write $R_Y=\\mathcal O_{E,Y}$ and $A_{n,Y}=(\\mathcal O_E/\\pi_E^n)_Y$ for every scheme $Y$, with $n\\geq1$. Put $Q=a_!L_0$, $N=b_!M_0$, and $\\overline N_n=b_!(M_0/\\pi_E^n)$ in $D(X_{\\mathrm{proét}},A_n)$. In the integral category let $N_n=\\operatorname{Res}_{R_X\\to A_{n,X}}\\overline N_n$. Clause (4) of [sk-lem-integral-models], applied separately to $a,L_0$ and to $b,M_0$, identifies $Q\\otimes^{\\mathrm L}_{R_X}A_{n,X}$ with $a_!(L_0/\\pi_E^n)$ and the underlying integral reduction of $N$ with $N_n$. Clauses (2) and (4) also make $N$ derived complete. Hence [sk-def-pe-derived-completion] gives $N\\simeq R\\varprojlim_{n\\geq1}N_n$, with the canonical quotient transitions. All occurrences of a finite-coefficient object in the integral category here and below mean termwise restriction of scalars.",
+   "uses": [
+    "sk-lem-integral-models",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices, derived reductions of the extensions by zero; Integral targets, derived completeness of the target"
+   }
   },
   {
-   "text": "*Completeness of $F$.* Put $F=L_0^\\vee\\otimes u^*R\\underline\\Gamma_Z\\,b_!M_0$. By\n[sk-lem-formal-closed-support-ii], each functor in this composite commutes with derived inverse limits\nof sequences. Each also commutes with reduction modulo $\\pi_E^n$, the cone of multiplication by\n$\\pi_E^n$, being exact and $\\mathcal O_E$-linear. Hence\n\n$$\nF=R\\varprojlim_nF_n,\\qquad F_n=F\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\n=(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n).\n$$",
+   "text": "In the integral coefficient category define $T(K)=L_0^\\vee\\otimes_{R_S}u^*R\\underline\\Gamma_ZK$, $F=T(N)$ and $F_n=T(N_n)$. The dual $L_0^\\vee$ is finite locally free: on a trivialization of $L_0$ it is the dual finite free module, and the inverse transpose transition matrices glue these local duals. By [sk-lem-formal-closed-support-ii], both $u^*R\\underline\\Gamma_Z$ and tensoring with this dual carry sequential derived-limit triangles to the corresponding triangles of their image sequences. Apply these two assertions successively to Step 1 to obtain $F\\simeq R\\varprojlim_nF_n$ in $D(S_{\\mathrm{proét}},R_S)$. This defines $F_n$ using integral support; no change-of-coefficient assertion about derived support is being presumed.",
    "uses": [
     "sk-lem-formal-closed-support-ii"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets, applying the limit-preserving closed-support and finite locally free tensor functors"
+   }
   },
   {
-   "text": "*Global sections.* $R\\Gamma(S,-)$ is a right adjoint, so it preserves products, and it is exact, so it\npreserves derived inverse limits of sequences. By part (2) of [sk-lem-formal-closed-support] (with\n$\\Lambda=\\mathcal O_E$),\n\n$$\nR\\operatorname{Hom}_X(a_!L_0,b_!M_0)=R\\Gamma(S,F)=R\\varprojlim_nR\\Gamma(S,F_n).\n$$",
+   "text": "Clause (2) of [sk-lem-formal-closed-support] with $\\Lambda=\\mathcal O_E$ gives $R\\operatorname{Hom}_{R_X}(Q,N)\\simeq R\\Gamma(S,F)$ and $R\\operatorname{Hom}_{R_X}(Q,N_n)\\simeq R\\Gamma(S,F_n)$. Set $B_n=R\\Gamma(S,F_n)$, forgetting the coefficient action so that $B_n\\in D(\\operatorname{Ab})$. Apply [lem-kun-site-rgamma-derived-limit] to the ringed site $(S_{\\mathrm{proét}},R_S)$, its terminal object $S$, and the tower of Step 2; choose a universe in which this site is small and reindex $n=m+1$ to use $m\\geq0$. It gives $R\\Gamma(S,F)\\simeq R\\varprojlim_nB_n$ in $D(\\operatorname{Ab})$. The underlying complexes compute the same cohomology groups. Thus $\\Ext^q_{R_X}(Q,N)=H^q(R\\varprojlim_nB_n)$ and $H^q(B_n)=\\operatorname{Hom}_{D(R_X)}(Q,N_n[q])$, by the definitions of derived Hom and Ext.",
    "uses": [
-    "sk-lem-formal-closed-support"
+    "sk-lem-formal-closed-support",
+    "lem-kun-site-rgamma-derived-limit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets, support-Hom formula and commuting derived global sections with the derived limit; Stacks Tag 0D6K, label lemma-RGamma-commutes-with-Rlim"
+   }
   },
   {
-   "text": "*The bound.* Put $c=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$. By\n[det-uniform-constructible-ext-torsion], $H^qR\\Gamma(S,F_n)=0$ for $q>c$. The Milnor sequence\n\n$$\n0\\to\\varprojlim^1_nH^{q-1}R\\Gamma(S,F_n)\\to H^qR\\varprojlim_nR\\Gamma(S,F_n)\\to\\varprojlim_nH^qR\\Gamma(S,F_n)\\to0\n$$\n\n(the derived limit is the fiber of $1-\\mathrm{shift}$ on a product, and products of abelian groups are\nexact; Stacks, Tag 08TB) shows that $H^q$ of the limit vanishes as soon as $q>c$ and $q-1>c$, i.e. for\n$q>c+1$. This is the claim.",
+   "text": "For each $n$, apply the derived extension/termwise restriction adjunction stated in [sk-def-sfb-coefficient-change] to the quotient morphism of condensed rings $\\underline{\\mathcal O_E}\\to\\mathcal O_E/\\pi_E^n$. Together with the source reduction from [sk-lem-integral-models], this gives, for every integer $q$,\n$$H^q(B_n)=\\operatorname{Hom}_{D(R_X)}(Q,\\operatorname{Res}\\overline N_n[q])\\cong\\operatorname{Hom}_{D(A_{n,X})}(Q\\otimes^{\\mathrm L}_{R_X}A_{n,X},\\overline N_n[q])=\\Ext^q_{A_{n,X}}\\bigl(a_!(L_0/\\pi_E^n),b_!(M_0/\\pi_E^n)\\bigr).$$\nThe adjunction is for arbitrary coefficient morphisms; in particular it requires no flatness of $R_X\\to A_{n,X}$. It compares groups in the two different module categories rather than identifying those categories.",
    "uses": [
+    "sk-def-sfb-coefficient-change",
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets, comparison with the torsion reductions, expanded via the coefficient-change adjunction; coefficient-change section, displayed derived extension and its adjunction"
+   }
+  },
+  {
+   "text": "Use clause (2) of [sk-lem-formal-closed-support] over the admissible finite ring $A_n=\\mathcal O_E/\\pi_E^n$ to express the last group of Step 4 as\n$$H^qR\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes_{A_{n,S}}u^*R\\underline\\Gamma_{Z,A_n}\\,b_!(M_0/\\pi_E^n)\\bigr).$$\nIndeed $(L_0/\\pi_E^n)^\\vee=L_0^\\vee/\\pi_E^n$: in a local finite basis both evaluation pairings are the dot product over $A_n$, and their inverse transpose transition matrices agree, so these identifications glue. The ring $A_n$ is finite and killed by a power of $\\ell$, and the reduced source is finite locally free, as required by the support formula. Clause (2) of [det-uniform-constructible-ext-torsion] now gives $H^q(B_n)=0$ for $q>c$, uniformly in $n$, where $c=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$. In particular the torsion bound is applied in its own coefficient category.",
+   "uses": [
+    "sk-lem-formal-closed-support",
     "det-uniform-constructible-ext-torsion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets, the assertion that the reductions have the torsion stratum bound; Torsion targets, last display"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-limit-milnor-sequence] to the tower $B_n$ in $D(\\operatorname{Ab})$ from Step 3. It gives\n$$0\\longrightarrow R^1\\varprojlim_nH^{q-1}(B_n)\\longrightarrow H^q(R\\varprojlim_nB_n)\\longrightarrow\\varprojlim_nH^q(B_n)\\longrightarrow0.$$\nFor $q>c+1$, both $q>c$ and $q-1>c$, so Step 5 makes each of the two towers in the end terms the zero tower. Their limit and first derived limit are zero (the zero object has the zero injective resolution), hence the middle group is zero by exactness. Step 3 identifies that group with $\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)$. Since $c+1=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$, this is precisely the claimed bound. No surjectivity or Mittag-Leffler assumption on the cohomology towers is used. If a cohomological dimension is infinite the claimed range is empty, so only the finite-bound case needs this computation.",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets, final Milnor argument; Stacks Tag 07KY, label lemma-break-long-exact-sequence"
+   }
   }
  ],
  "proof_deps": [
+  "sk-lem-integral-models",
+  "sk-def-pe-derived-completion",
   "sk-lem-formal-closed-support-ii",
   "sk-lem-formal-closed-support",
-  "det-uniform-constructible-ext-torsion"
+  "lem-kun-site-rgamma-derived-limit",
+  "sk-def-sfb-coefficient-change",
+  "det-uniform-constructible-ext-torsion",
+  "lem-pc-derived-limit-milnor-sequence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-integral.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Lattices and Integral targets; the finite-coefficient comparison is expanded using the existing coefficient-change adjunction, and the final derived-sections and Milnor steps use Stacks 0D6K and 07KY."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral Ext vanishing bound over O_E from torsion reductions and derived inverse limits",
+   "results": "isZero_Ext_succ_of_projective; CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; CategoryTheory.Abelian.Ext.covariant_sequence_exact₃; Submodule.exists_isInternal_prime_power_torsion; CategoryTheory.Abelian.Ext.covariant_sequence_exact₁; AdicCompletion.map_exact; CategoryTheory.hasProjectiveDimensionLT_iff; These hits do not give the integral stratum Ext bound; the generic dimension definitions and ordinary limits do not specialize to it in one line.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, DerivedCategory, Rlim, cohomology",
+   "results": "No hits.; loogle: unknown identifier 'Rlim'; Invalid initial query/directory; corrected by subsequent searches, so this is not evidence of absence.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "uniform.*constructible|Rlim|Milnor",
+   "results": "No hits.; Invalid initial query/directory; corrected by subsequent searches, so this is not evidence of absence. Searched subdirectory Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext vanishing for integral l-adic constructible sheaves via reduction modulo pi and derived limits",
+   "results": "AlgebraicGeometry.Scheme.Modules.instHasLimits; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfShape; instHasLimitsCondensedMod; instHasLimitsOfShapeCondensed; PadicInt.limNthHom; PadicInt.instIsAdicCompleteMaximalIdeal; AdicCompletion; These hits do not give the integral stratum Ext bound; the generic dimension definitions and ordinary limits do not specialize to it in one line.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|Rlim|uniform.*constructible",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Local.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Broad ordinary category-theoretic limit/property hits, no integral constructible Ext bound.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"vanish\"",
+   "results": "No hits.; These hits do not give the integral stratum Ext bound; the generic dimension definitions and ordinary limits do not specialize to it in one line.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological dimension bound for Ext between extensions by zero of finite free integral adic local systems using inverse limits of torsion sheaves",
+   "results": "localCohomology.diagram; CategoryTheory.HasInjectiveDimensionLE; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.injectiveDimension; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasInjectiveDimensionLT.mk'; CategoryTheory.HasInjectiveDimensionLT; CategoryTheory.hasProjectiveDimensionLT_iff; These hits do not give the integral stratum Ext bound; the generic dimension definitions and ordinary limits do not specialize to it in one line.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -86,5 +185,44 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-uniform-constructible-ext"
+ "unit": "sk-lem-uniform-constructible-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-uniform-constructible-ext-integral",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded target completeness, application of the support/tensor functors, derived sections, the finite-coefficient Ext comparison and the Milnor degree calculation. Reused existing statements throughout, including the ringed-site derived-sections theorem instead of creating a duplicate. No new nodes or Mathlib leaves. Distinguished integral support of restricted finite targets from finite-coefficient support and compared their global cohomology by the derived coefficient adjunction.",
+  "blueprint": "Steps 1 and 2 realize Lattices and the first three sentences of Integral targets in the parent unit proof; Step 3 realizes its displayed derived Hom/global sections/limit comparison; Steps 4 and 5 spell out the reduction-to-torsion comparison through the existing coefficient adjunction; Step 6 realizes the final Milnor upper-bound argument. This preserves the inverse-limit route of the current main-20261015 blueprint.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Its lattice generator clause and completeness criterion give the already-constructed extensions by zero and their derived reductions; the integral paragraph needs exactly these lattice facts."
+   },
+   {
+    "node": "sk-lem-formal-closed-support-ii",
+    "why": "Its statement that u^*RΓ_Z and tensoring with a finite locally free module carry sequential Roos triangles to Roos triangles gives F ≃ Rlim F_n in Step 2; the blueprint node and step 4 of the unit text cite it by name, but the unit record's uses list omits its unit, so the route check needs the declaration."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Generic ringed-site derived sections preserve sequential derived limits, the exact global-sections step used by the unit; the unit has no separate statement of this general tool."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Generic Milnor sequence in D(Ab), the target category after global sections; the pro-etale sheaf Milnor statement alone has the wrong category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-integral-models",
+  "sk-lem-formal-closed-support-ii",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N3-a93ee379a",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-a93ee379a (reviewer sub-agent of L); spot-checked: I read the whole item, its unit, the blueprint statement and proof (integral, torsion, _section) and the statement of every cited node. The statement is the blueprint's verbatim; Ext is in D(X_proet, R_X = p_X^*O_E), the same coefficient ring as in all cited nodes. Step 1: sk-lem-integral-models (4), applied to (a,L_0) and (b,M_0), gives the reductions; clause (2) gives derived completeness, so N = Rlim N_n by sk-def-pe-derived-completion. The words 'canonical transitions' are only identified object by object, but this is harmless because the Milnor step needs only that each H^q(B_n) vanishes. Step 2: sk-lem-formal-closed-support-ii with Lambda = O_E gives F = Rlim F_n in the integral category. Step 3: sk-lem-formal-closed-support (2) plus lem-kun-site-rgamma-derived-limit (Stacks 0D6K) gives RHom(Q,N) = Rlim B_n in D(Ab). Step 4: the coefficient-change adjunction (derived extension left adjoint to Res) for O_E -> O_E/pi^n needs no flatness and does not identify the categories; it avoids the blueprint's tacit identification of integral and A_n-coefficient RGamma_Z. Step 5: support formula (2) over the admissible A_n, then torsion clause (2) in its own category, gives H^q(B_n)=0 for q>c. Step 6: the Milnor sequence in D(Ab) (07KY/08TB) gives vanishing for q>c+1, which is exactly the claimed +2. Edge cases checked: Spec of an algebraically closed field (bound q>2, true), empty strata, n=1, infinite cohomological dimension. There are no new nodes and no cycle. det-lem-int-ext-bound (+3 bound, all N) and det-pe-milnor-sequence (sheaf version) are not duplicates. Accepted tool_uses: sk-lem-integral-models, lem-kun-site-rgamma-derived-limit, lem-pc-derived-limit-milnor-sequence. Fix: sk-lem-formal-closed-support-ii is cited off-route without a declaration, although the blueprint node and unit step 4 cite it themselves; I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/det-uniform-constructible-ext-integral.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ }
 }

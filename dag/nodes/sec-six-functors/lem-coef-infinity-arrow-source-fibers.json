@@ -28,9 +28,98 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\operatorname{Fun}(\\Delta^1,\\mathcal C)$. By [lem-cbc-enhanced-functor-cone-calculus], $A$ and its full subcategory $\\mathcal A_P$ are quasicategories. Apply [lem-coef-infinity-isofibration-exponentiation] to $\\{0\\}\\hookrightarrow\\Delta^1$: $\\operatorname{ev}_0:A\\to\\mathcal C$ is an isofibration, in particular an inner fibration. Given an inner horn over $\\mathcal C$ in $\\mathcal A_P$, fill it in $A$; the horn contains every vertex, so the filler lies in the full subcategory. Thus $p$ is an inner fibration. Given an equivalence $e:p(f)\\to U'$ with $f\\in\\mathcal A_P$, lift it to an equivalence $f\\to f'$ in $A$. Repleteness implies $f'\\in P$, and fullness places the lift in $\\mathcal A_P$. Its inverse and inverse-triangle witnesses also have vertices in $P$, so it remains an equivalence in that subcategory. This proves that $p$ is an isofibration as well.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3 (restriction is an isofibration); full-subcategory horn and equivalence lifting argument."
+   }
+  },
+  {
+   "text": "Fix $f:U\\to V$ in $P$ and $u:U\\to U'$. Choose a coherent pushout square with other edges $v:V\\to V'$ and $f':U'\\to V'$, where $V'=V\\amalg_U U'$. It gives an edge $s:f\\to f'$ of the coherent arrow category over $u$; pushout stability puts $f'$ in $P$, so fullness puts $s$ in $\\mathcal A_P$. We will use the natural mapping-space form of this pushout:\n$$\\operatorname{Map}_{\\mathcal C}(V',Z)\\simeq\\operatorname{Map}_{\\mathcal C}(V,Z)\\mathop{\\times}^{h}_{\\operatorname{Map}_{\\mathcal C}(U,Z)}\\operatorname{Map}_{\\mathcal C}(U',Z).$$\nHere is its justification from the cited statements rather than an extra pushout lemma. Let $K$ be two copies of $\\Delta^1$ joined at their source, carrying the span $V\\leftarrow U\\to U'$. The dual colimit criterion of [lem-cbc-enhanced-functor-cone-calculus] identifies the left side with the space of transformations from that span to the constant $Z$ diagram. Apply [lem-coef-infinity-mapping-excision] to the gluing $\\Delta^1\\amalg_{\\Delta^0}\\Delta^1$ (the gluing inclusion is degreewise injective). By [lem-coef-infinity-arrow-morphism-square], the transformation space on the first edge is $\\operatorname{Map}(V,Z)$, since its formula has a homotopy pullback along the identity of $\\operatorname{Map}(U,Z)$; on the second edge it is $\\operatorname{Map}(U',Z)$. The overlap is $\\operatorname{Map}(U,Z)$ and the restriction maps are precomposition with $f,u$. Excision therefore gives the displayed equivalence, naturally in $Z$ and with these restriction maps.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, proof, first paragraph, printed p. 491; expanded source-evaluation argument."
+   }
+  },
+  {
+   "text": "For any test arrow $h:T\\to Z$ in $P$, write $M_f=\\operatorname{Map}_{\\mathcal A_P}(f,h)$ and $M_{f'}=\\operatorname{Map}_{\\mathcal A_P}(f',h)$. Fullness identifies these with the corresponding arrow-category mapping spaces: every simplex defining a map between these fixed endpoints already has its vertices in $P$. By [lem-coef-infinity-arrow-morphism-square],\n$$M_f\\simeq\\operatorname{Map}(U,T)\\mathop{\\times}^{h}_{\\operatorname{Map}(U,Z)}\\operatorname{Map}(V,Z),\\qquad M_{f'}\\simeq\\operatorname{Map}(U',T)\\mathop{\\times}^{h}_{\\operatorname{Map}(U',Z)}\\operatorname{Map}(V',Z).$$\nSubstitute the natural equivalence of Step 2 into the second formula, using [lem-coef-kan-homotopy-pullback-invariance] (with the other two corners unchanged); the restriction maps are those fixed in Step 2. A point of this space is a map $a':U'\\to T$, a map $b:V\\to Z$, and a homotopy $ha'u\\simeq bf$, with all higher compatibilities: the intermediate datum $c:U'\\to Z$ and homotopy $c\\simeq ha'$ may be eliminated, since the space of a variable endpoint together with a path to a fixed endpoint is contractible. Path concatenation implements this elimination, and shortening the path from its variable endpoint gives the inverse homotopy, at all simplicial homotopy levels. The same description results from $\\operatorname{Map}(U',T)\\times^h_{\\operatorname{Map}(U,T)}M_f$, by eliminating the intermediate map $a:U\\to T$ together with its path to $a'u$. Consequently the canonical map\n$$M_{f'}\\longrightarrow\\operatorname{Map}(U',T)\\mathop{\\times}^{h}_{\\operatorname{Map}(U,T)}M_f$$\nis an equivalence. The naturality and precomposition compatibility in the cited arrow-mapping formula identify this map with the one induced by $s$; hence the square of mapping spaces for $s$ over $u$ is a homotopy pullback for every $h$. This is the mapping-space condition required by [lem-coef-infinity-cocartesian-mapping-criterion].",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, proof, first paragraph, printed p. 491; expanded source-evaluation argument."
+   }
+  },
+  {
+   "text": "Step 1 gives the inner fibration hypothesis of [lem-coef-infinity-cocartesian-mapping-criterion], and Step 3 verifies its homotopy pullback square for every test object of $\\mathcal A_P$. That criterion makes each pushout edge $s$ of Step 2 a $p$-cocartesian edge in the horn-lifting sense. Such an edge exists for every $f\\in\\mathcal A_P$ and every $u:p(f)\\to U'$, by Step 2 and pushout stability. The definition in [def-coef-infinity-fibrations] now says that $p$ is a cocartesian fibration, with the asserted pushout lifts.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, opposite dual, and Definition 2.4.2.1, opposite dual."
+   }
+  },
+  {
+   "text": "For a vertex $X$ take $E=\\mathcal A_P$, $B=\\mathcal C$, $T=\\Delta^0$ and $g$ the functor with value $X$ in [lem-coef-infinity-isofibration-pullback-limit]. Step 1 proved its isofibration hypothesis; all three categories lie in the fixed universe, while their category of categories lies in the larger one. Its conclusion identifies $\\{X\\}\\times_{\\mathcal C}\\mathcal A_P$ with the required pullback in $\\mathrm{Cat}_\\infty$. This uses an isofibration between quasicategories, with no Kan-fibration or presentability assumption.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/033R",
+    "place": "Corollary 4.5.3.28 and Proposition 4.5.3.15, specialized to T a point."
+   }
+  },
+  {
+   "text": "An $n$-simplex of $\\{X\\}\\times_{\\mathcal C}\\mathcal A_P$ is a map $\\Delta^1\\times\\Delta^n\\to\\mathcal C$ whose source restriction is the constant $X$ simplex and whose vertex arrows belong to $P$. The coherent coslice in the statement consists of exactly the same maps without the last condition. By the full-subcategory definition of [def-cbc-enhanced-diagrams-cones], imposing that vertex condition makes the fiber its full subcategory on $P$. At degree one the source side is the degenerate edge at $X$ and the square supplies the homotopy for the triangle; in all degrees the maps on $\\Delta^1\\times\\Delta^n$ retain its coherent compatibilities. This proves the final identification without replacing the fiber by a category of triangles commuting only in the homotopy category.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, proof, first paragraph, printed p. 491; expanded source-evaluation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-excision",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-isofibration-pullback-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of Lemma 5.5.5.14, first paragraph, with online Kerodon 4.5.3.28 for categorical pullbacks; references read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +176,45 @@
    "results": "{\"t\": \"2026-10-16T17:14:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Semantic hits have ordinary Category instances and Hom-set universal properties. Quasicategory grep hits are copyright text, underlying-category descriptions, and the inner-fibration definition (InnerFibration.lean:61-67); none states this coherent theorem. Loogle returned zero hits for the paired quasicategory/colimit query."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|[Ii]sofibration|homotopy.*pullback",
+   "results": "{\"t\": \"2026-10-16T17:58:19Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian|[Ii]sofibration|homotopy.*pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-16T17:58:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Source evaluation on arrows in an infinity category with pushouts has cocartesian transport given by pushouts",
+   "results": "{\"t\": \"2026-10-16T17:58:20Z\", \"tool\": \"leansearch\", \"query\": \"Source evaluation on arrows in an infinity category with pushouts has cocartesian transport given by pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.ε_app\", \"CategoryTheory.Limits.pushoutAssocIsPushout\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.SmallObject.functor_map\", \"CategoryTheory.CosimplicialObject.cechConerve_map\", \"CategoryTheory.Limits.pushoutPushoutRightIsPushout\", \"CategoryTheory.Functor.IsCocartesian.recOn\", \"CategoryTheory.SmallObject.functor\"], \"digest\": \"474764a1eb03735c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a pushout stable replete class of arrows in a quasicategory source evaluation is a cocartesian fibration and its strict fibers compute homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-16T17:58:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a pushout stable replete class of arrows in a quasicategory source evaluation is a cocartesian fibration and its strict fibers compute homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"566306161566bb2f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cobase change transports fixed domain arrows coherently and pushout closed arrow properties form an opfibration of infinity categories",
+   "results": "{\"t\": \"2026-10-16T17:59:04Z\", \"tool\": \"leanfinder\", \"query\": \"Cobase change transports fixed domain arrows coherently and pushout closed arrow properties form an opfibration of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.propArrow\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangeFunctorFunctorCategoryOfHasPushouts\", \"CategoryTheory.OrthogonalReflection.step\", \"CategoryTheory.OrthogonalReflection.D₂.condition\", \"CategoryTheory.OrthogonalReflection.fromStep\", \"CategoryTheory.OrthogonalReflection.toStep\", \"CategoryTheory.MorphismProperty.rlp_pushouts\", \"CategoryTheory.MorphismProperty.transfiniteCompositions_pushouts_coproducts_le_llp_rlp\"], \"digest\": \"f51a9ae9a96904d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-coslice-presentability",
@@ -98,5 +222,29 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-arrow-source-fibers",
+  "worker": "stage1",
+  "summary": "Expanded the pushout-stable arrow argument into six steps. Reused existing coherent arrow mapping, excision, cone and evaluation-isofibration nodes. Created the generic horn/mapping-space criterion and the generic isofibration pullback theorem; both are statement-only and searched in Mathlib with logged queries. No statement correction or Lean attachment.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure through lem-coef-presentable-infinity-adjoints. The fiber-diagram argument in HTT Lemma 5.5.5.14, first paragraph, printed p. 491. Steps 1-4 supply the coherent source-evaluation fibration; Step 5 supplies its homotopy fiber square; Step 6 identifies the restricted coslice.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone calculus, including its dual colimit criterion, is used to test the pushout by mapping spaces; the biduality unit does not state this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-1b3403bc7",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1b3403bc7 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps, both new nodes and every cited statement in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, the cone calculus, isofibration-exponentiation, mapping-excision, arrow-morphism-square, kan-homotopy-pullback-invariance. Also read the parent's use (coslice-presentability step 2) and the unit record. The item agrees with HTT 5.5.5.14 first paragraph hypothesis by hypothesis (pushouts, pushout-stable, replete, fat coslice) and is not weakened. Step 1: ev0 is an isofibration via exponentiation along {0}->Delta1; inner horns contain all vertices; repleteness puts the lifted equivalence target in P. Step 2: the dual cone criterion plus excision on Delta1 glued to Delta1 along Delta0 plus the arrow formula with identity target give Map(V',Z) as the homotopy pullback. Step 3: traced the elimination, which gives {a', b, ha'u~bf} on both sides. Minor point: pullback-invariance assumes strictly commuting squares; choosing the composite b'f' as the restriction map makes them commute, which fits the coherent-homotopy conventions of the cited nodes. No node needed. Step 4: criterion plus definition apply. Step 5: E=A_P, B=C, T=Delta0. Step 6: elementary and correct. New cocartesian-mapping-criterion node: true, the dual of HTT 2.4.4.3 with the horn definition of Remark 2.4.1.4; tested with p=id and p:E->pt. New isofibration-pullback-limit node: true. I checked Kerodon 033R (Cor 4.5.3.28) and 033C (Prop 4.5.3.15) online; the node quantifies over quasicategories, a consequence of Kerodon's simplicial-set version. Tested on the identity, empty T and the groupoid counterexample. No duplicates: pointwise-cocartesian-transport, cocartesian-straightening, isofibration-base-change, accessible-pullback, functor-pushout, right-fibration-fibers and the sec-smooth-purity cbc nodes all state other things. No blueprint same_as. The cone-calculus tool_use (unit sk-prop-sf-cbc, not cited by the biduality unit) is accepted as a generic black box. No SGA. No changes made. The report mentions a citations.json file that was not delivered; this is cosmetic only."
+ }
 }

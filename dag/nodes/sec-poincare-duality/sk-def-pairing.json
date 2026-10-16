@@ -3,25 +3,116 @@
  "blueprint": {
   "is": "sk-def-pairing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sf-pairing"
+  ]
  },
  "kind": "definition",
  "title": "The derived pairing, and perfectness of a pairing",
- "statement": "In the setting of [sk-def-pairing-data], for $K$ perfect over\n$\\Lambda_X$ the *derived Poincaré pairing* is the composite\n\n$$\n\\begin{aligned}\n\\beta_K:\\ \\RGammac(X,K)\\otimes^L_\\Lambda\\RGamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\n&\\xrightarrow{\\ \\smile_c\\ }\n\\RGammac\\bigl(X,K\\otimes^L K^\\vee(d)\\bigr)[2d]\\\\\n&\\xrightarrow{\\ \\RGammac(\\ev_K(d))[2d]\\ }\n\\RGammac\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\n\\xrightarrow{\\ \\Trsm_{a_X,\\Lambda}\\ }\\Lambda,\n\\end{aligned}\n$$\n\nthat is, $\\beta_K=\\Trsm_{a_X,\\Lambda}\\circ\\RGammac(\\ev_K(d))[2d]\\circ\\smile_c$.\nThe evaluation arrow lands in $\\RGammac(X,\\Lambda_X(d))[2d]$, whose\ncohomology is not concentrated in degree $0$ (for $X=\\mathbf P^1_k$,\n$d=1$, $K=\\Lambda_X$ it lives in degrees $-2$ and $0$); the\nnormalized smooth trace of [sk-def-pairing-data] selects the top-degree\nsummand and fixes the normalization.\n\nA morphism $b:C\\otimes^L_\\Lambda D\\to\\Lambda$ of perfect point complexes\nis *perfect* if its tensor–internal-Hom adjoint $D\\to C^\\vee$ is an\nisomorphism.",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, and the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber]: $q=p^a$, $k_0=\\mathbf F_q$ and its algebraic closure $k=\\overline{\\mathbf F}_q$. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, a finite extension $E/\\mathbf Q_\\ell$ inside it, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, with the finite, derived-complete integral, rationalized and common-finite-stage coefficient categories, respectively, of [sk-def-sf-setting]. As in the fixed setting [sk-def-set], let $X_0/k_0$ be smooth [def-sbc-smooth-morphisms], separated [def-weil-proper-morphism] of finite type [def-weil-finite-type-morphism] and geometrically connected [def-pc-geometrically-irreducible] of pure dimension $d\\geq0$ [def-weil-pure-dimension], put $X=X_0\\times_{k_0}k$ (base change [def-pc-base-change]), $s=\\operatorname{Spec}k$, and let $a_X:X\\to s$ be its structure morphism. Properness of $X_0$ and an ambient exceptional-adjoint admissibility datum are not assumed.\n\nUse the bounded constructible finite-Tor category $D^b_{ctf}(X,\\Lambda)$ on the small pro-étale site and the six operations of [sk-def-ops], with the constructible exceptional adjunction $Ra_{X!}\\dashv Ra_X^!$. Write $\\Lambda_X$ for the coefficient unit, $\\RGammac(X,-)=\\operatorname{Fib}_s Ra_{X!}$ and $\\RGamma(X,-)=\\operatorname{Fib}_s Ra_{X*}$. Tate twists are $M(d)=M\\otimes^L_{\\Lambda_X}\\Lambda_X(d)$ as in [def-coefficient-twists-detailed]; at the integral stage the coefficient unit and tensor product are completed, and at the two field stages they are the prescribed scalar extensions. Use the mixed-support cup product $\\smile_c$ and normalized smooth trace $\\Trsm_{a_X,\\Lambda}$ of [sk-def-pairing-data], the latter being the exceptional counit read through the canonical smooth orientation $\\Lambda_X(d)[2d]\\cong Ra_X^!\\Lambda$.\n\nLet $K\\in D^b_{ctf}(X,\\Lambda)$ be perfect over $\\Lambda_X$ in the dualizable sense of [sk-def-perfect]. Put $K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$. The evaluation $\\operatorname{ev}_K:K\\otimes^L_{\\Lambda_X}K^\\vee\\to\\Lambda_X$ is the tensor–internal-Hom transpose of $\\operatorname{id}_{K^\\vee}$; its twist $\\operatorname{ev}_K(d)$ is the composite\n$$\nK\\otimes^L_{\\Lambda_X}(K^\\vee\\otimes^L_{\\Lambda_X}\\Lambda_X(d))\n\\cong (K\\otimes^L_{\\Lambda_X}K^\\vee)\\otimes^L_{\\Lambda_X}\\Lambda_X(d)\n\\xrightarrow{\\operatorname{ev}_K\\otimes1}\\Lambda_X\\otimes^L_{\\Lambda_X}\\Lambda_X(d)\n\\cong\\Lambda_X(d).\n$$\nThe *derived Poincaré pairing* is the composite\n\n$$\n\\begin{aligned}\n\\beta_K:\\ \\RGammac(X,K)\\otimes^L_\\Lambda\\RGamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\n&\\xrightarrow{\\ \\smile_c\\ }\n\\RGammac\\bigl(X,K\\otimes^L K^\\vee(d)\\bigr)[2d]\\\\\n&\\xrightarrow{\\ \\RGammac(\\ev_K(d))[2d]\\ }\n\\RGammac\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\n\\xrightarrow{\\ \\Trsm_{a_X,\\Lambda}\\ }\\Lambda,\n\\end{aligned}\n$$\n\nthat is, $\\beta_K=\\Trsm_{a_X,\\Lambda}\\circ\\RGammac(\\ev_K(d))[2d]\\circ\\smile_c$.\nThe evaluation arrow lands in $\\RGammac(X,\\Lambda_X(d))[2d]$, whose\ncohomology need not be concentrated in degree $0$ (for $X=\\mathbf P^1_k$,\n$d=1$, $K=\\Lambda_X$ it lives in degrees $-2$ and $0$); the\nnormalized smooth trace of [sk-def-pairing-data] is the specified map to $\\Lambda$, inducing the normalized trace on $H_c^{2d}(X,\\Lambda_X(d))$; no decomposition of that complex is part of the definition.\n\nFor perfect point complexes $C,D$ in the sense of [sk-def-perfect], put $C^\\vee=R\\operatorname{Hom}_\\Lambda(C,\\Lambda)$. A morphism $b:C\\otimes^L_\\Lambda D\\to\\Lambda$ \nis *perfect* if its tensor–internal-Hom adjoint $D\\to C^\\vee$ is an\nisomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-pairing/_section.md",
   "place": "node sk-def-pairing, order 2762"
  },
  "stmt_deps": [
   "sk-def-pairing-data",
-  "sk-def-perfect"
+  "sk-def-perfect",
+  "sk-def-sf-setting",
+  "sk-def-ops",
+  "def-coefficient-twists-detailed",
+  "sk-def-set",
+  "def-weil-finite-field-fiber",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pure-dimension",
+  "def-pc-base-change"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "poincarePairing|IsPerfectPairing|mixedSupportCupProduct",
+   "results": "0 hits: ; subdirectory argument Mathlib",
+   "date": "2026-10-17",
+   "verdict": "invalid subdirectory: argument was prefixed with Mathlib even though msearch already appends to Mathlib/; no absence conclusion; superseded by unscoped and correctly scoped grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Poincare pairing is composite of compactly supported cup product, evaluation and trace",
+   "results": "8 hits: topDualPairing_apply; LinearMap.IsPerfPair.dualEval; LinearMap.toContPerfPair_apply; RootPairing.root'In_corootSpanMem_eq_pairingIn; RootPairing.root_coroot'_eq_pairing; RootPairing.toPerfPair_comp_root; LinearMap.toPerfPair_apply; LinearMap.IsPerfPair.compl₁₂",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "loogle",
+   "query": "poincarePairing, IsPerfectPairing, MonoidalClosed.IsPerfectPairing",
+   "results": "0 hits: ; loogle: unknown identifier 'poincarePairing'",
+   "date": "2026-10-17",
+   "verdict": "query rejected (unknown identifier); not evidence of absence; superseded by successful quoted-name Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Poincare pairing composite mixed support cup product evaluation smooth trace and perfect pairing adjoint isomorphism",
+   "results": "8 hits: RootPairing.RootFormIn; RootPairing.PolarizationIn; RootPairing.toLinearMap_apply_PolarizationIn; SchwartzMap.integral_bilinear_laplacian_right_eq_left; RootPairing.PolarizationIn_eq; exteriorPower.pairingDual_apply_apply_eq_one; RootPairing.RootForm; RootPairing.RootPositiveForm.pairingIn_mul_eq_pairingIn_mul_swap",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed\\.IsPerfectPairing|derivedTensor.*poincare",
+   "results": "0 hits: ; subdirectory argument Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "invalid subdirectory: argument was prefixed with Mathlib even though msearch already appends to Mathlib/; no absence conclusion; superseded by unscoped and correctly scoped grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a morphism in a monoidal closed category is a perfect pairing when its curry is an isomorphism",
+   "results": "8 hits: CategoryTheory.internalizeHom; CategoryTheory.MonoidalClosed.homEquiv_apply_eq; CategoryTheory.CartesianClosed.curry; CategoryTheory.MonoidalClosed.curry'; CategoryTheory.MonoidalClosed.curry; CategoryTheory.MonoidalClosed.curry_eq_iff; CategoryTheory.MonoidalClosed.curryHomEquiv'; CategoryTheory.CartesianClosed.homEquiv_apply_eq",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.IsPerfectPairing, curry, derivedTensor",
+   "results": "0 hits: ; loogle: unknown identifier 'MonoidalClosed.IsPerfectPairing'",
+   "date": "2026-10-17",
+   "verdict": "query rejected (unknown identifier); not evidence of absence; superseded by successful quoted-name Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical Poincare pairing from compact support pushforward tensor ordinary pushforward twisted dual and trace",
+   "results": "8 hits: FGModuleCat.exactPairing; FGModuleCat.FGModuleCatEvaluation; FGModuleCat.FGModuleCatCoevaluation; LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.coev_ev; map_dualTensorHom; comp_dualTensorHom; TensorPower.pairingDual",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "grep",
+   "query": "def curry|homEquiv_apply_eq|IsPerfectPairing",
+   "results": "9 hits: Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; subdirectory argument CategoryTheory/Monoidal/Closed",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "grep",
+   "query": "poincarePairing|IsPerfectPairing|mixedSupportCupProduct|coefficientEvaluation",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"curry\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry'; CategoryTheory.MonoidalClosed.uncurry'; CategoryTheory.MonoidalClosed.uncurry'_curry'; CategoryTheory.MonoidalClosed.curryHomEquiv'; CategoryTheory.MonoidalClosed.curry; CategoryTheory.MonoidalClosed.uncurry; CategoryTheory.MonoidalClosed.curry'_id; CategoryTheory.MonoidalClosed.curry_injective",
+   "date": "2026-10-17",
+   "verdict": "No complete match. Generic currying, exact pairings of finite modules, and underived linear pairings do not construct the four-stage pro-etale Poincare pairing."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -52,5 +143,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-pairing"
+ "unit": "sk-def-pairing",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-pairing",
+  "worker": "stage1",
+  "summary": "Split the definition through five existing constituent definitions; no new nodes or Mathlib leaves. Expanded the inherited finite-field, scheme and four-stage coefficient setting to repair B2, and wrote the evaluation and its twisted associator/evaluation/unitor composite explicitly. Preserved the three-arrow pairing and perfectness-by-adjoint criterion. Clarified the illustrative cohomology warning as “need not”, rather than the literally false universal “is not”, and avoided assuming a canonical splitting when describing the trace. The etale Lean constructions cover only part of the pro-etale four-stage item, so no exact attachment. Authentic Mathlib queries are copied from searches.jsonl, with rejected queries and invalid initial grep scopes explicitly marked.",
+  "blueprint": "Realizes the entire current main-20261015 sk-def-pairing definition: mixed-support cup product followed by shifted twisted evaluation and normalized smooth trace, and the final perfect-pairing predicate. The unit has no proof steps. Expanded the inherited data through its existing pairing-data -> ops -> fixed-setting/coefficient chain and made the twisted evaluation composite explicit; no new proof route or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-b588814fe",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b588814fe (reviewer sub-agent of L); spot-checked: Checked the item against the current main-20261015 blueprint section sk-def-pairing (order 2762) and the current sk-def-pairing-data, sk-def-ops, sk-def-set and sk-def-perfect sections. The written-out setting matches sk-def-set: no properness and no admissibility; pure dimension d is equivalent to smooth of relative dimension d. The category is pro-etale D^b_ctf with the constructible exceptional adjunction, as in sk-def-ops. The twists, including the completed integral unit, follow def-coefficient-twists-detailed. The evaluation is the transpose of id_{K^vee}, and ev_K(d) is associator, then ev tensor 1, then left unitor; this agrees with slopmaster2 twistedEvaluation. The three-arrow composite is the source's; the [2d] shift moves through tensor and R Gamma_c by the canonical isomorphisms. Perfectness takes the adjoint D -> C^vee, in the right direction. The disputed wording is justified: 'is not concentrated' is false for X_0=Spec F_q, d=0, so 'need not be' is correct, and P^1 gives degrees -2 and 0. 'Selects the top-degree summand' became 'induces the normalized trace on H_c^{2d}'; these agree because the complex sits in degrees <=0, and nothing is weakened. All five dependencies say what the item takes from them. The unit has no proof steps, so citations are empty, there are no tool_uses, and there is no cycle (DFS). def-sf-pairing is correctly in same_as. The slopmaster2 Pairing.lean has [Finite Lambda] and an etale, non-normalized orientation, so no attachment is correct. Edge cases checked: K=0, C=D=0, the zero pairing on Lambda (not perfect), d=0. One B3 fault, repaired: the written-out setting used smooth, separated, finite type, geometrically connected, pure dimension, base change and the finite-field datum without citations. The fix file adds def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism, def-pc-geometrically-irreducible, def-weil-pure-dimension, def-pc-base-change, def-weil-finite-field-fiber and sk-def-set to the statement and to stmt_deps, with no mathematical change; it is at fixes/dag/nodes/sec-poincare-duality/sk-def-pairing.json.; 1 file(s) fixed by the reviewer"
+ }
 }

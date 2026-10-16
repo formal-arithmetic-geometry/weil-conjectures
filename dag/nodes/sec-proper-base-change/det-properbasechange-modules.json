@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-properbasechange-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Étale proper base change for module coefficients",
@@ -18,26 +18,33 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: the identification.* Choose a bounded below complex $I^\\bullet$ of\ninjective $\\Lambda$-module sheaves with $K\\simeq I^\\bullet$, and a\nquasi-isomorphism $g'^{-1}I^\\bullet\\to J^\\bullet$ into a bounded below complex\nof injective $\\Lambda$-module sheaves on $X'$. By the resolution formula\n[lemma-weil-pbc-derived-exchange-replacement], $\\Ex^\\Lambda_{\\square,K}$ is\nrepresented by\n\n$$\ng^{-1}f_*I^\\bullet\\xrightarrow{\\ \\Ex^0_{\\square,I^\\bullet}\\ }\nf'_*g'^{-1}I^\\bullet\\longrightarrow f'_*J^\\bullet .\n$$\n\nThe underived exchange map is defined by the unit, the square isomorphism and\nthe counit of the adjunctions $u^{-1}\\dashv u_*$; these are the same maps of\nunderlying abelian sheaves whether one regards the sheaves as module sheaves\nor as abelian sheaves, because inverse and direct image of module sheaves are\ncomputed on underlying abelian sheaves. Hence\n$\\mathrm{For}(\\Ex^0_{\\square,I^m})=\\Ex^0_{\\square,\\mathrm{For}I^m}$ in every\ndegree. By parts (1) and (3) of [det-pbc-conventions-module-cohomology], the terms of\n$\\mathrm{For}I^\\bullet$ are $f_*$-acyclic and those of $\\mathrm{For}J^\\bullet$\nare $f'_*$-acyclic, so by the complex form of\n[lemma-weil-pbc-leray-acyclicity] the complexes $f_*\\mathrm{For}I^\\bullet$ and\n$f'_*\\mathrm{For}J^\\bullet$ compute $Rf_*\\mathrm{For}K$ and\n$Rf'_*g'^{-1}\\mathrm{For}K$. Now choose a quasi-isomorphism\n$\\mathrm{For}I^\\bullet\\to I'^\\bullet$ into a bounded below complex of\ninjective abelian sheaves and an injective replacement\n$g'^{-1}I'^\\bullet\\to J'^\\bullet$ together with a map\n$\\mathrm{For}J^\\bullet\\to J'^\\bullet$ compatible with\n$g'^{-1}\\mathrm{For}I^\\bullet\\to g'^{-1}I'^\\bullet$ (it exists and is unique\nup to homotopy because $J'^\\bullet$ is a bounded below complex of injectives\nand $g'^{-1}\\mathrm{For}I^\\bullet\\to\\mathrm{For}J^\\bullet$ is a\nquasi-isomorphism). Naturality of $\\Ex^0$ in the sheaf gives a commutative\ndiagram of complexes\n\n$$\n\\begin{array}{ccccc}\ng^{-1}f_*\\mathrm{For}I^\\bullet & \\to & f'_*g'^{-1}\\mathrm{For}I^\\bullet & \\to & f'_*\\mathrm{For}J^\\bullet\\\\\n\\downarrow & & \\downarrow & & \\downarrow\\\\\ng^{-1}f_*I'^\\bullet & \\to & f'_*g'^{-1}I'^\\bullet & \\to & f'_*J'^\\bullet\n\\end{array}\n$$\n\nwhose vertical outer arrows are quasi-isomorphisms (both rows' end terms\ncompute the same derived functors, by acyclicity). The bottom row represents\n$\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ by\n[lemma-weil-pbc-derived-exchange-replacement], and the top row is\n$\\mathrm{For}$ of the representative of $\\Ex^\\Lambda_{\\square,K}$. This\nproves the identification.",
+   "text": "Step 1 (compatibility after forgetting coefficients). Apply [lem-weil-pbc-exchange-forget-coefficients] to the given Cartesian square and $K\\in D^+(X_{\\Et},\\Lambda)$; here $D^+(T_{\\Et},\\mathbf Z)$ is the bounded below derived category of abelian sheaves, $\\Mod(T_{\\Et},\\mathbf Z)=\\Ab(T_{\\Et})$, and $\\Ex^\\Lambda_{\\square,K}$ is the derived exchange morphism formed with the $\\Lambda$-linear adjunctions, as in clause (3) of that lemma. Its clause (1) gives the inverse-image identifications $\\mathrm{For}\\circ u^{-1}=u^{-1}\\circ\\mathrm{For}$ for $u\\in\\{f,f',g,g'\\}$ named in the item. Its clause (2) gives, for $u\\in\\{f,f'\\}$, the comparison $\\mathrm{For}(Ru_*K)\\xrightarrow{\\sim}Ru_*(\\mathrm{For}K)$; this is the canonical isomorphism of clause (3) of [det-pbc-conventions-module-cohomology] named in the item: choosing a bounded below complex $I^\\bullet$ of injective $\\Lambda$-module sheaves with $K\\simeq I^\\bullet$, both maps are $\\mathrm{For}(Ru_*K)=u_*\\mathrm{For}I^\\bullet\\to Ru_*(\\mathrm{For}I^\\bullet)=Ru_*(\\mathrm{For}K)$, the map from the underived to the derived direct image (Stacks Lemma 0D6J (3)), and it is an isomorphism because the terms $\\mathrm{For}I^m$ are $u_*$-acyclic by clause (1) of [det-pbc-conventions-module-cohomology]. Under these comparisons, clause (3) of [lem-weil-pbc-exchange-forget-coefficients] identifies $\\mathrm{For}(\\Ex^\\Lambda_{\\square,K})$ with $\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$, which is the claimed identification. The lemma requires neither properness nor torsion, so it applies to every $K$ here.",
    "uses": [
-    "lemma-weil-pbc-derived-exchange-replacement",
-    "det-pbc-conventions-module-cohomology",
-    "lemma-weil-pbc-leray-acyclicity"
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "det-pbc-conventions-module-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0D6J (lemma-modules-abelian-unbounded), part (3), and Remark 07A7 (remark-base-change); compatibility is the statement of the cited existing node"
+   }
   },
   {
-   "text": "*Step 2: the consequence.* If $\\mathrm{For}K$ has torsion cohomology sheaves,\n$\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ is an isomorphism by\n[thm-weil-pbc-bounded-below]. By Step 1, $\\mathrm{For}$ of\n$\\Ex^\\Lambda_{\\square,K}$ is an isomorphism. The forgetful functor is exact\nand conservative on sheaves, so it reflects quasi-isomorphisms of complexes,\nand $\\Ex^\\Lambda_{\\square,K}$ is an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$.",
+   "text": "Step 2 (torsion consequence). Suppose that the cohomology sheaves of $\\mathrm{For}K$ are torsion. Exactness of $\\mathrm{For}$ and its cohomology comparison, stated in [lem-weil-pbc-exchange-forget-coefficients], ensure that $\\mathrm{For}K$ is bounded below. The square is Cartesian and $f$ is proper, so [thm-weil-pbc-bounded-below] applied to $\\mathrm{For}K$ makes $\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ an isomorphism. The final equivalence in [lem-weil-pbc-exchange-forget-coefficients] then gives that $\\Ex^\\Lambda_{\\square,K}$ is an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$.",
    "uses": [
-    "thm-weil-pbc-bounded-below"
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.proof.md",
+    "place": "Proof, Step 2"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-derived-exchange-replacement",
+  "lem-weil-pbc-exchange-forget-coefficients",
   "det-pbc-conventions-module-cohomology",
-  "lemma-weil-pbc-leray-acyclicity",
   "thm-weil-pbc-bounded-below"
  ],
  "proof_origin": {
@@ -45,9 +52,87 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor module sheaf derived exchange equals abelian exchange under canonical comparisons",
+   "results": "SheafOfModules.toSheafCompSheafToPresheafIso; PresheafOfModules.sheafificationCompForgetCompToPresheaf; instAbelianCondensedMod; SheafOfModules.instAbelian; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-17",
+   "verdict": "no exact match; only underlying-sheaf and derived-category infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedBaseChangeMapPlus, ModuleCat, forget",
+   "results": "none; unknown identifier derivedBaseChangeMapPlus",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no search conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMapPlus|baseChange.*forget|module.*exchange [Mathlib/WeilConjectures/SixFunctors]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change for bounded below torsion complexes of sheaves of modules over a commutative ring",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4CondensedMod; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; Condensed.instAB4StarCondensedMod; CondensedMod.ofSheafCompHaus; SheafOfModules.pushforward; Condensed.instAB5CondensedMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, SheafOfModules, derivedBaseChange",
+   "results": "none; unknown identifier derivedBaseChange",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; no search conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_baseChange_of_isProper|derivedBaseChangeMapPlus [WeilConjectures/SixFunctors]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "forgetting module sheaves to abelian sheaves identifies the proper base change exchange morphism and reflects isomorphisms",
+   "results": "SheafOfModules.toSheaf; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf; AlgebraicGeometry.Scheme.Modules.toPresheaf; SheafOfModules.forget; SheafOfModules.toSheaf_obj_val; AlgebraicGeometry.Scheme.Modules.toPresheaf_obj",
+   "date": "2026-10-17",
+   "verdict": "no exact match; only forgetful functor and reflection infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*derivedBaseChangeMapPlus|derivedBaseChangeMapPlus.*forget [Mathlib]",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper base change module coefficients forget",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor reflects isomorphisms derived category module sheaves",
+   "results": "SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget; LightProfinite.forget_reflectsIsomorphisms; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace; ModuleCat.instReflectsIsomorphismsForget; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; CategoryTheory.instReflectsIsomorphismsSheafFunctorOppositeSheafToPresheaf",
+   "date": "2026-10-17",
+   "verdict": "generic underived reflection infrastructure only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.reflects_iso derived category sheaf modules",
+   "results": "loogle: Unknown constant `Functor.reflects_iso`",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown constant; no search conclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -64,5 +149,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-properbasechange-modules",
+  "worker": "stage1",
+  "summary": "The target is not stated by a finished declaration in the Lean source. The coefficient-forgetting identification and reflection of isomorphisms are already exactly supplied by lem-weil-pbc-exchange-forget-coefficients; the torsion consequence follows by applying thm-weil-pbc-bounded-below to the underlying abelian complex and then its equivalence clause. No new nodes were needed.",
+  "blueprint": "The two steps realize the two paragraphs of the blueprint proof of det-properbasechange-modules: identification and consequence."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-023679e1c",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-023679e1c (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 blueprint statement and proof (the statement matches the blueprint text exactly), every cited node in full, and Stacks 0D6J(3), 07A7 and 0DDE. There are no new nodes. The item is not an nt-target; it is reached through det-ctf-finite-proper-tor, which applies its torsion consequence. Step 1: lem-weil-pbc-exchange-forget-coefficients is in the same unit and has no properness or torsion hypothesis; its clauses (1)-(3) supply the inverse-image identifications, the direct-image comparison and the exchange equality For(Ex^Λ)=Ex_{For K}. Coefficient categories are compared explicitly through For: D^+(T,Z) is abelian sheaves, and Ex is the mate of def-weil-pbc-derived-exchange, Λ-linear on the module side. Step 2: For K is in D^+ and its cohomology is For of the cohomology, so with the item's torsion hypothesis, the Cartesian square and proper f, all hypotheses of thm-weil-pbc-bounded-below hold; the lemma's final iff gives the conclusion. Neither the lemma nor the theorem depends on the item, so there is no cycle. Duplicate search found only special cases or other settings (cor-weil-pbc-geometric-fiber-finite, lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change, lem-weil-pbc-coefficient-exchange-from-comparisons). Edge cases checked: Λ=0, Z, Z/n, Q, Z_ℓ; K=0; the identity square. Fault repaired (C4/E5): the item states the identification under the isomorphisms of det-pbc-conventions-module-cohomology, but Step 1 never related that node's comparison to the lemma's. That node has no inverse-image clause, and its clause (3) only says 'a canonical isomorphism'. The fixed Step 1 shows that both direct-image comparisons are the 0D6J(3) map u_*For I -> Ru_*For I, invertible by conventions clause (1) acyclicity, and that the inverse-image identifications are the lemma's clause (1). It now cites det-pbc-conventions-module-cohomology, and proof_deps were updated. I accept that citation as a tool use from unit sk-def-pbc-conventions: the item's own statement and the blueprint proof already cite it. The statement, Step 2, searches and split_report are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }
