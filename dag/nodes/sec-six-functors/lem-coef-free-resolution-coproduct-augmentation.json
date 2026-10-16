@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-nagata-category",
   "def-weil-pbc-simplicial-set",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-free-category-comonad"
  ],
  "proof": [
   {
@@ -159,5 +160,31 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-e7d1544bd (reviewer sub-agent of L); spot-checked: I read the item, all six cited nodes and the citing parent in full, and the Dwyer–Kan source, which I fetched from the node's URL and read through its text layer. The places checked are §1.4(iii)-(v) on p.269, §§2.4-2.6 on p.270, and Proposition 2.7(iii) and its proof on p.271. The statement is unchanged. It faithfully specializes DK 2.7(iii) to a constant A and has no missing freeness hypothesis. Step 1: I checked the naturality of the comonad, the case where a generator maps to an identity, the counit and comultiplication identities, and coassociativity. Step 2: gamma is natural, and the step meets every equation and index range of the extra-degeneracy Mathlib leaf; the cylinder node turns the simplicial homotopy into a weak equivalence. Step 3: the rewriting system terminates and its critical pairs resolve, so normal forms are unique, including factors with inverses. Step 4: W_l and B_l are simplicial subsets, B_l lands in W_{l-1}, and since B_l->P_l is injective the set pushout equals W_l in every degree. Step 5: the coordinatewise extra degeneracies preserve the identity loci, and empty or A-only summands are fine; no contraction on reduced words is claimed, which is correct. Step 6: the base case W_0 holds and the gluing hypotheses (monomorphism, three weak equivalences, the directed set N) are met. The delivery creates no new nodes. There is no cycle, and all proof dependencies are in the item's unit, so no tool_uses are needed. The nearby nodes dk-cofibrant-localization-comparison, free-product-nerve-gluing and free-factor-hammock-comparison are not duplicates. Four Mathlib searches are recorded. DK is not archived, so the WANTED line in the report stands. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-172bdc2bd",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Clause-by-clause match of free_resolution_coproduct_augmentation against the node and DK 2.4-2.6/2.7(iii): reused dkFreeComonad/dkFreePower/dkFreeObject/dkFreeAugmentation (FreeRefl deletes identity letters), face/degeneracy formulas F^i eps F^(n+1-i) and F^i delta F^(n-i) with Mathlib index shift, degreewise IsPushout over Discrete O, augmentation fixed on both factors, mapping SSets and augmentation fixed by Equiv/HEq; the presentation is determined up to unique iso, so the existential is equivalent to the universal and not hollow; conclusion uses the recorded SSet.Enhanced.IsWeakHomotopyEquivalence. No extra hypotheses or universe restriction; edge cases (empty O, empty hom sets, n=0, discrete or non-free factors) covered. lean.statement verbatim; item diff only adds the lean record and stmt_dep def-coef-free-category-comonad (existing:true binding, no duplicate, avoids a cycle via the downstream DK theorem). stage2_delivery check_new_node, check_existing, check_record and check_report all return []. nt_compile.py per-file compile rc=0 with no diagnostics (tool error reporting confirmed on an injected-error copy). Only sorry is the item proof; docstrings carry source and blueprint tags; possible future proof-import cycle documented per rule 7."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeResolutionCoproductAugmentation",
+  "declaration": "CategoryTheory.free_resolution_coproduct_augmentation",
+  "declarations": [
+   "CategoryTheory.fixedObjectDiscreteInclusion",
+   "CategoryTheory.fixedObjectCategoryCoproduct",
+   "CategoryTheory.fixedObjectCoproductObject",
+   "CategoryTheory.FreeResolutionCoproductPresentation",
+   "CategoryTheory.free_resolution_coproduct_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeResolutionCoproductAugmentation.lean",
+  "statement": "theorem free_resolution_coproduct_augmentation (O : Type u) (A C : Category.{u} O) : ∃ R : FreeResolutionCoproductPresentation O A C, ∀ x y : O, SSet.Enhanced.IsWeakHomotopyEquivalence (R.mappingAugmentation x y)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The existential presentation specifies the construction asserted by the node, including the exact free powers and operators, degreewise coproduct universal properties, unchanged object sets, and both restrictions of the canonical augmentation. No arbitrary-map or freeness hypothesis is added. Reuses the existing auxiliary free-comonad definitions without using the downstream localization theorem."
  }
 }
