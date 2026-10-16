@@ -3,47 +3,170 @@
  "blueprint": {
   "is": "sk-lem-sp-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient comparison",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$, and let $A\\to B$ be a\nmap of finite commutative rings, each killed by a power of $\\ell$; subscripts\n$B$ denote extension of coefficients as in [sk-def-sp-scalar-extension]. For\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ and $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$ there are\nisomorphisms, natural in $M$ and $K$,\n\n$$\n\\begin{aligned}\nb(M)&:(Rf_{!,A}M)_B\\xrightarrow{\\ \\sim\\ } Rf_{!,B}(M_B)\n&&\\text{in }\\Dctf(Y_{\\mathrm{proét}},B),\\\\\nc_{A,B}(K)&:(f_A^!K)_B\\xrightarrow{\\ \\sim\\ }f_B^!(K_B)\n&&\\text{in }\\Dctf(X_{\\mathrm{proét}},B).\n\\end{aligned}\n$$\n\nThe map $c_{A,B}(K)$ is determined by the counit identity\n\n$$\n\\varepsilon_B(K_B)\\circ Rf_{!,B}\\bigl(c_{A,B}(K)\\bigr)\n=(\\varepsilon_A(K))_B\\circ b(f_A^!K)^{-1},\n$$\n\nwhere $\\varepsilon_A:Rf_{!,A}f_A^!\\to\\mathrm{id}$, a natural transformation of\nendofunctors of $\\Dctf(Y_{\\mathrm{proét}},A)$, and $\\varepsilon_B$ are the\ncounits of [sk-lem-sp-finite-existence].",
+ "statement": "Work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $p>0$, $\\ell\\ne p$ is prime, and $X,Y$ are separated finite-type $k$-schemes. Let $f:X\\to Y$ be a smooth $k$-morphism of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], and let $A\\to B$ be a map of finite commutative rings, each annihilated by a power of $\\ell$.\nFor $T=X,Y$ and $R=A,B$, write $\\Dctf(T_{\\mathrm{proét}},R)$ for bounded complexes of $R_T$-module sheaves with constructible cohomology and finite Tor amplitude [def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Subscripts $B$ denote derived extension of coefficients [sk-def-sp-scalar-extension]. Use the compact-support functors and their constructible right adjoints $Rf_{!,R}\\dashv f_R^!$, whose adjunctions on these categories are supplied by [sk-prop-sf-rf-shriek-preservation].\n\nFor $M\\in\\Dctf(X_{\\mathrm{proét}},A)$ and $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$ there are isomorphisms, natural in $M$ and $K$,\n$$\n\\begin{aligned}\nb(M)&:(Rf_{!,A}M)_B\\xrightarrow{\\ \\sim\\ } Rf_{!,B}(M_B)\n&&\\text{in }\\Dctf(Y_{\\mathrm{proét}},B),\\\\\nc_{A,B}(K)&:(f_A^!K)_B\\xrightarrow{\\ \\sim\\ }f_B^!(K_B)\n&&\\text{in }\\Dctf(X_{\\mathrm{proét}},B).\n\\end{aligned}\n$$\nHere $b$ is the canonical comparison obtained by commuting extension of coefficients past extension by zero and proper direct image in one compactification. The map $c_{A,B}(K)$ is uniquely determined by\n$$\n\\varepsilon_B(K_B)\\circ Rf_{!,B}\\bigl(c_{A,B}(K)\\bigr)\n=(\\varepsilon_A(K))_B\\circ b(f_A^!K)^{-1},\n$$\nwhere $\\varepsilon_R:Rf_{!,R}f_R^!\\to\\mathrm{id}$ is the counit of the indicated adjunction for $R=A,B$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
   "place": "node sk-lem-sp-reduction, order 1820"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
   "sk-def-sp-scalar-extension",
-  "sk-lem-sp-finite-existence"
+  "sk-prop-sf-rf-shriek-preservation"
  ],
  "proof": [
   {
-   "text": "For $b$, use one compactification $f=\\bar f\\circ j$ for both rings. Extension\nby zero commutes with $-\\otimes^{\\mathbf L}_AB$. For $R\\bar f_*$, take a\nbounded-above resolution of $B$ whose terms are finite free $A$-modules; it\nmay be infinite to the left. Represent $M$ by the bounded flat constructible\nmodel of [sk-lem-sf-flat-model]. The comparison is an isomorphism on each\nfree term, and the cohomological bound $\\operatorname{cd}_\\ell(\\bar f)$ gives a\nfinite window in every total degree. As in the scalar projection argument of\n[sk-prop-scalar-six], this applies to every $B$, whatever its\nprojective dimension over $A$. Associativity gives compatibility with a second\nmap $B\\to C$.",
+   "text": "Write $T_X=(-)_B$ and $T_Y=(-)_B$ on the two sites, and $F_R=Rf_{!,R}$, $G_R=f_R^!$ for $R=A,B$. By [det-sp-scalar-extension-functor], $T_X,T_Y$ are functors preserving $\\Dctf$, even when $B$ has infinite projective dimension over $A$. By [sk-prop-sf-rf-shriek-preservation], $G_AK$ and $G_B(K_B)$ lie in the stated constructible finite-Tor categories and $F_R\\dashv G_R$ restricts to these categories. Thus all the objects and adjunction transposes below have the required domains.",
    "uses": [
-    "sk-lem-sf-flat-model"
+    "det-sp-scalar-extension-functor",
+    "sk-prop-sf-rf-shriek-preservation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+    "place": "Proof, domain checks before paragraphs 1–2"
+   }
   },
   {
-   "text": "Define $c_{A,B}(K)$ as the transpose of the right side of the counit identity.\nWhether it is an isomorphism is local, so we may check it on the coordinate\ncharts $f|_U=p_d\\circ e$ of [sk-lem-sp-finite-existence]. There the counit is\nbuilt from summation over the geometric fibres of $e$, the Kummer class of\n$\\mathcal O_{\\mathbf P^1}(1)$, the diagonal class and the splitting of\n$Rq_*$ of the constant sheaf on $\\mathbf P^1$ into two free summands of rank\none, each of which commutes with extension of coefficients (for the projective\nline this is the coefficient compatibility in [sk-prop-geo-p1-adjunction]).\nHence on a chart $c_{A,B}(K)$ is the transpose of the canonical isomorphism\n$(e^*p_d^*K(d)[2d])_B\\simeq e^*p_d^*(K_B)(d)[2d]$.",
+   "text": "Use the chosen compactification $c_f=(X\\xrightarrow{j}\\bar X\\xrightarrow{\\bar f}Y)$ supplied by [sk-def-sfb-dc-setting], with $j$ open and $\\bar f$ proper. This is the compactification already used to define $F_A$ and $F_B$; it depends on $f$, not the coefficient ring. Apply [det-sp-reduction-direct-image] to this compactification and $M$. Its displayed comparison gives $b(M):T_YF_AM\\xrightarrow{\\sim}F_BT_XM$, natural in $M$ and in $\\Dctf(Y,B)$. Its explicit absence of a flatness or finite-projective-dimension assumption applies to the arbitrary map $A\\to B$ here. This reuses the existing node for the resolution-and-finite-window argument of the blueprint's first paragraph.",
    "uses": [
-    "sk-lem-sp-finite-existence"
+    "sk-def-sfb-dc-setting",
+    "det-sp-reduction-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+    "place": "Proof paragraph 1; existing detail sk-lem-sp-reduction-direct-image.md, displayed comparison and no-flatness clause"
+   }
+  },
+  {
+   "text": "For $K$ form $\\tau_K=T_Y(\\varepsilon_A(K))\\circ b(G_AK)^{-1}:F_BT_XG_AK\\to T_YK$. The bijection $\\operatorname{Hom}(F_BN,L)\\cong\\operatorname{Hom}(N,G_BL)$ furnished by the adjunction in [sk-prop-sf-rf-shriek-preservation], with $N=T_XG_AK$ and $L=T_YK$, defines a unique $c_K:T_XG_AK\\to G_BT_YK$. The inverse of this bijection sends $h$ to $\\varepsilon_B(L)\\circ F_B(h)$, so its defining equality is precisely the required counit identity. Thus uniqueness is uniqueness of the transpose; it does not assert that mates of arbitrary isomorphisms are isomorphisms.",
+   "uses": [
+    "sk-prop-sf-rf-shriek-preservation",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+    "place": "Proof paragraph 2, first sentence; detail sk-lem-sp-reduction-exceptional.proof.md, Existence, uniqueness, naturality"
+   }
+  },
+  {
+   "text": "For $u:K\\to L$, expand $\\tau$ from Step 3. Naturality of $\\varepsilon_A$ and of $b$ in [det-sp-reduction-direct-image] gives\n$$\n\\begin{aligned}\nT_Y(u)\\circ\\tau_K\n&=T_Y(u\\circ\\varepsilon_A(K))\\circ b(G_AK)^{-1}\\\\\n&=T_Y(\\varepsilon_A(L))\\circ T_YF_AG_A(u)\\circ b(G_AK)^{-1}\\\\\n&=T_Y(\\varepsilon_A(L))\\circ b(G_AL)^{-1}\\circ F_BT_XG_A(u)\\\\\n&=\\tau_L\\circ F_BT_XG_A(u).\n\\end{aligned}\n$$\nUnder the adjunction of [sk-prop-sf-rf-shriek-preservation], the inverse transpose of $G_BT_Y(u)\\circ c_K$ is\n$$\n\\varepsilon_B(T_YL)\\circ F_B(G_BT_Y(u)\\circ c_K)\n=T_Y(u)\\circ\\varepsilon_B(T_YK)\\circ F_B(c_K)\n=T_Y(u)\\circ\\tau_K,\n$$\nusing naturality of $\\varepsilon_B$. The inverse transpose of $c_L\\circ T_XG_A(u)$ is\n$$\n\\varepsilon_B(T_YL)\\circ F_B(c_L\\circ T_XG_A(u))\n=\\tau_L\\circ F_BT_XG_A(u).\n$$\nThe preceding equality and injectivity of the adjunction bijection prove $G_BT_Y(u)\\circ c_K=c_L\\circ T_XG_A(u)$, the naturality of $c$.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+    "place": "Proof paragraph 2, naturality of the transpose; detail sk-lem-sp-reduction-exceptional.proof.md, Existence, uniqueness, naturality"
+   }
+  },
+  {
+   "text": "Finally apply the existing [det-sp-reduction-exceptional] with this smooth $f$, the finite $\\ell$-primary rings $A,B$, and $K$. Its morphism is defined as the transpose of the identical map $T_Y(\\varepsilon_A(K))\\circ b(G_AK)^{-1}$, using the same compact-support comparison. Uniqueness in Step 3 therefore identifies that morphism with $c_K$. The cited node states that this morphism is an isomorphism (and identifies it on coordinate charts with $(e^*p_d^*K(d)[2d])_B\\simeq e^*p_d^*(K_B)(d)[2d]$). Consequently the $c_K$ constructed here is an isomorphism in $\\Dctf(X,B)$. This is the existing chart-comparison lemma, not an inference that invertible $b$ alone implies invertible $c$.",
+   "uses": [
+    "det-sp-reduction-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
+    "place": "Proof paragraph 2, chart comparison; existing detail sk-lem-sp-reduction-exceptional.md, isomorphism and chart clauses"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-sf-flat-model",
-  "sk-lem-sp-finite-existence"
+  "det-sp-scalar-extension-functor",
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-def-sfb-dc-setting",
+  "det-sp-reduction-direct-image",
+  "det-sp-reduction-exceptional"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/_section.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1–2, using their existing direct-image and exceptional detailed nodes; explicit transpose and naturality calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite ring coefficients commutes with compactly supported pushforward and smooth exceptional inverse image on constructible complexes",
+   "results": "8 hits: SheafOfModules.pushforwardComp_inv_app_val_app, ContDiffMapSupportedIn.postcompLM, PresheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforward_id_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|change.of.coefficients|extension.of.scalars",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image and proper support pushforward commute with derived extension of finite ring coefficients",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp, RingHom.Smooth, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardComp_inv_app_val_app, Algebra.Extension.formallySmooth_iff_split_injection",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; retried with CategoryTheory.Adjunction.homEquiv"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product change of ring commutes with extraordinary pullback for a smooth scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinary|compactSupport|proper.*baseChange|extensionOfScalars",
+   "results": "25 hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-16",
+   "verdict": "no match: results do not state the two geometric derived finite-coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|exceptional.*pullback|pushforward.*[Cc]oefficient|[Cc]oefficient.*pushforward",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no extraordinary pullback or shriek coefficient-comparison declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-16",
+   "verdict": "formal adjunction naturality only; the few-line calculation remains elementary, so no new node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings for derived sheaves on schemes, tensoring finite coefficients commutes with shriek direct image and smooth right adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: underived structure-sheaf pullback/pushforward adjunctions, not the geometric derived shriek comparisons"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -61,5 +184,34 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-sp-reduction",
+  "worker": "stage1",
+  "summary": "Reused the existing detailed direct-image and exceptional coefficient-comparison nodes; no new nodes. Made the adjunction transpose, its typing, uniqueness and naturality explicit. Corrected the counit reference, since sk-lem-sp-finite-existence only states the Z/ell^n case, and made the standing scheme hypotheses and general finite-ring Dctf meaning explicit. No flatness hypothesis on B was introduced. Second reading uses the setting's fixed compactification and expands both inverse transposes in the naturality calculation.",
+  "blueprint": "Steps 1–2 realize proof paragraph 1 through det-sp-reduction-direct-image; Steps 3–5 realize proof paragraph 2 through the transpose calculation and det-sp-reduction-exceptional. The existing details remain separate unsplit DAG items; no purity or SGA trace route is substituted.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Supplies constructible adjunctions for arbitrary finite ell-primary rings; the local Z/ell^n existence node is too narrow."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Supplies the coefficient functors and preservation of Dctf for arbitrary finite-ring maps, for typing both comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-sp-scalar-extension-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-85d5ddaac",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-85d5ddaac (reviewer sub-agent of L); spot-checked: Reviewed all required instructions, item, blueprint sources, cited node statements, external definition locations, route metadata, edge cases, searches, and split report. The corrected arbitrary finite-ring adjunction, fixed compactification, explicit transpose/naturality calculation, and reuse of existing comparison nodes are sound. Review written to review.md; no repairs needed."
+ }
 }
