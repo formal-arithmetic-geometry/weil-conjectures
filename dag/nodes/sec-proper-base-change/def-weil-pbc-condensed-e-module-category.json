@@ -36,13 +36,23 @@
    "text": "Verification of the derived-pullback computation in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar: the coefficient map condensedPullbackHom is an isomorphism (isIso_condensedPullbackHom). Extension along it is naturally isomorphic to restriction along its inverse (Mod.extendScalarsIsoComapInv), so is exact. The functor mapMod(f^*) is also exact. The composition isomorphism for left derived exact functors (Functor.leftDerivedFunctorCompIso), followed by Functor.leftDerivedFunctorIsoMapDerivedCategory on the first factor and whiskering by the derived second factor, gives L(f^*) ≅ D(mapMod(f^*)) ⋙ L(Ext). The full pullback preserves all quasi-isomorphisms by preservesHomology_upperStar, which directly supplies PreservesKFlatQuasiIso. Thus this construction needs no theorem that mapMod(f^*) preserves arbitrary K-flat complexes; that unused auxiliary instance is retired. All categories, functors, adjunction statements and restricted exchange definitions remain as specified.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "E4: present boundedConstructibleBaseChange as squareExchange of the same bounded adjunctions and the same pullback-square comparison. The proved theorem boundedConstructibleBaseChange_eq_unit_square_counit identifies this presentation with the formerly defining unit-insertion, square-transport and counit-contraction composite as a natural transformation. Thus its components, categories, functors and the meaning of every target are unchanged.",
+   "uses": [
+    "def-weil-pbc-adjunction-square-exchange"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-square-exchange"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/UpperLowerStar/Defs.lean",
-  "place": "Exact section (preservesFiniteLimits_upperStar and preservesHomology_upperStar), together with ModuleObjects/MapMod.lean change of scalars along an isomorphism and DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean exact-functor comparison and composition."
+  "place": "Exact section (preservesFiniteLimits_upperStar and preservesHomology_upperStar), together with ModuleObjects/MapMod.lean change of scalars along an isomorphism and DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean exact-functor comparison and composition.",
+  "note": "Preserves the previous exact derived-pullback verification. E4 adds the proved equality between the adjunct presentation and the specified restricted exchange; no mathematical definition changes."
  },
  "mathlib_searches": [
   {
@@ -514,13 +524,13 @@
   "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-5d727",
-  "group": "F3",
+  "reviewer": "X-1b63d",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261015T161024-L-260015",
+  "landing": "20261016T040743-L-2515722",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean with the packet diff, node proof metadata, and declared pruning; the module and all three direct importers compile cleanly, and axiom checks show only standard axioms plus inherited sorryAx."
+  "note": "independent Codex review: Lean theorem and existing signatures matched the DAG and baseline; exchange equality preserves the original definition; delivered modules and all 13 direct importers compile; axioms checked."
  }
 }

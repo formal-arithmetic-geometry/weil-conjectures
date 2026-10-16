@@ -6,8 +6,6 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralComparisons
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-import Sheaf.Paper.ContinuousIntegralScalarExact
 
 /-! # Coherence of integral localization and the specified exchange map -/
 
@@ -19,6 +17,46 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+private lemma coefficient_counit
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {E₁ : A ⥤ B} {Res₁ : B ⥤ A} (adj₁ : E₁ ⊣ Res₁)
+    {E₂ : A' ⥤ B'} {Res₂ : B' ⥤ A'} (adj₂ : E₂ ⊣ Res₂)
+    {U₁ : A' ⥤ A} {L₁ : A ⥤ A'} (adjR : U₁ ⊣ L₁)
+    {U₂ : B' ⥤ B} {L₂ : B ⥤ B'} (adjS : U₂ ⊣ L₂)
+    (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (M : A) :
+    U₂.map ((Adjunction.pushHomOfComapIso adj₁ adj₂ e).app M) ≫
+      adjS.counit.app (E₁.obj M) =
+    (Adjunction.pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv.app (L₁.obj M) ≫
+      E₁.map (adjR.counit.app M) := by
+  have hm := iterated_mateEquiv_conjugateEquiv_symm adjR adjS adj₂ adj₁
+    (TwoSquare.mk _ _ _ _ e.inv)
+  have hc := mateEquiv_counit_symm adjR adjS
+    (TwoSquare.mk _ _ _ _ (Adjunction.pushHomOfComapIso adj₁ adj₂ e)) M
+  rw [show (mateEquiv adjR adjS).symm
+      (TwoSquare.mk _ _ _ _ (Adjunction.pushHomOfComapIso adj₁ adj₂ e)) =
+    TwoSquare.mk _ _ _ _
+      (Adjunction.pullIsoOfComapIso adj₁ adj₂ adjR adjS e).inv from hm] at hc
+  exact hc
+
+private lemma source_normal_form
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (a : L ⊣ R) (b : L' ⊣ R') (G : C ⥤ C') (H : D ⥤ D')
+    (θ : G ⋙ L' ≅ L ⋙ H) (β : R ⋙ G ⟶ H ⋙ R')
+    (N : D) (M : C) (A : C') (s : A ⟶ G.obj M) (δ : M ⟶ R.obj N)
+    (Q : D) (q : L.obj M ⟶ Q) (r : Q ⟶ N)
+    (hb : L'.map (β.app N) ≫ b.counit.app (H.obj N) =
+      θ.hom.app (R.obj N) ≫ H.map (a.counit.app N))
+    (hc : L.map δ ≫ a.counit.app N = q ≫ r) :
+    (b.homEquiv A (H.obj N)).symm ((s ≫ G.map δ) ≫ β.app N) =
+      L'.map s ≫ θ.hom.app M ≫ H.map q ≫ H.map r := by
+  rw [Adjunction.homEquiv_naturality_left_symm, Adjunction.homEquiv_counit, hb]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := θ.hom.naturality δ
+  simp only [Functor.comp_map, Functor.comp_obj] at hn
+  rw [reassoc_of% hn]
+  rw [← H.map_comp, hc, H.map_comp]
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -40,6 +78,66 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+
+private lemma baseChange_adjunct
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq g' f' f g) (N : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
+    (boundedConstructibleUpperStar Λ ℓ k f').map
+        ((boundedConstructibleBaseChange Λ ℓ k sq).app N) ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f').counit.app
+        ((boundedConstructibleUpperStar Λ ℓ k g').obj N) =
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq).hom.app
+        ((boundedConstructibleLowerStar Λ ℓ k f).obj N) ≫
+      (boundedConstructibleUpperStar Λ ℓ k g').map
+        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app N) := by
+  exact boundedConstructibleBaseChange_adjunct Λ ℓ k sq N
+
+private lemma bounded_counit_hom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app K).hom =
+      (derivedUpperStarLowerStarAdjunction Λ f).counit.app K.obj := by
+  change (ProEtale.boundedConstructible (condensedRingObj Λ X)).ι.map
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app K) = _
+  rw [boundedConstructibleUpperStarLowerStarAdjunction,
+    Adjunction.map_restrictFullyFaithful_counit_app]
+  dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
+    ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj]
+  simp [boundedConstructibleUpperStarCompatibility,
+    boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.symm, Iso.refl, NatTrans.id_app]
+
+private lemma integral_push_counit (K : integralConstructible ℓ E X) :
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).map
+        (integralConstructiblePushHom ℓ E k f K) ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction
+        (Profinite.continuousMapRingObj E) ℓ k f).counit.app
+          ((integralScalarConstructible ℓ E X).obj K) =
+    (integralConstructiblePullIso ℓ E k f
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv ≫
+      (integralScalarConstructible ℓ E X).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction
+          (integralCoeff ℓ E) ℓ k f).counit.app K) := by
+  let : IsCommMonObj (condensedRingObj (integralCoeff ℓ E) X) :=
+    ProEtale.isCommMonObj_condensedRingObj _ X
+  let : IsCommMonObj (condensedRingObj (integralCoeff ℓ E) Y) :=
+    ProEtale.isCommMonObj_condensedRingObj _ Y
+  apply ObjectProperty.hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  rw [bounded_counit_hom (ℓ := ℓ) (k := k) (f := f)]
+  simp only [integralScalarConstructible, integralConstructiblePushHom,
+    integralConstructiblePullIso, boundedConstructibleUpperStar,
+    ObjectProperty.lift_map, ObjectProperty.homMk_hom, ObjectProperty.isoMk_inv,
+    Functor.comp_map, Functor.comp_obj, ObjectProperty.ι_map, ObjectProperty.ι_obj]
+  rw [bounded_counit_hom (ℓ := ℓ) (k := k) (f := f)]
+  exact coefficient_counit
+    (Mod.derivedExtendMapDerivedCategoryAdjunction
+      (coefficientMap (integralScalarMap ℓ E) X))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction
+      (coefficientMap (integralScalarMap ℓ E) Y))
+    (derivedUpperStarLowerStarAdjunction (integralCoeff ℓ E) f)
+    (derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) f)
+    (derivedComapLowerStarIso (integralScalarMap ℓ E) f) K.obj
 
 /-- Normal form for the source side after the bounded f′ adjunction.
 Source: Bhatt--Scholze, Remark 6.8.15; ChangeOfCoefficients.lean derived comparisons
@@ -73,6 +171,32 @@ theorem integralConstructible_exchange_source_adjunct
         ((integralScalarConstructible ℓ E X).map
           ((boundedConstructibleUpperStarLowerStarAdjunction
             (integralCoeff ℓ E) ℓ k f).counit.app K)) := by
-  sorry
+  simpa only [integralConstructibleSourceHom] using source_normal_form
+    (boundedConstructibleUpperStarLowerStarAdjunction
+      (Profinite.continuousMapRingObj E) ℓ k f)
+    (boundedConstructibleUpperStarLowerStarAdjunction
+      (Profinite.continuousMapRingObj E) ℓ k f')
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g)
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g')
+    (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ k sq)
+    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq)
+    ((integralScalarConstructible ℓ E X).obj K)
+    ((integralScalarConstructible ℓ E Y).obj
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K))
+    ((integralScalarConstructible ℓ E Y').obj
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g).obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)))
+    (integralConstructiblePullHom ℓ E k g
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K))
+    (integralConstructiblePushHom ℓ E k f K)
+    ((integralScalarConstructible ℓ E X).obj
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k f).obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)))
+    (integralConstructiblePullIso ℓ E k f
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv
+    ((integralScalarConstructible ℓ E X).map
+      ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ k f).counit.app K))
+    (baseChange_adjunct ℓ k f g f' g' (Profinite.continuousMapRingObj E) sq _)
+    (integral_push_counit ℓ E k f K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

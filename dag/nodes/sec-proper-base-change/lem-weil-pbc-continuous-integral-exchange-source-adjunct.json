@@ -13,12 +13,13 @@
  ],
  "proof": [
   {
-   "text": "Apply the bounded f′ adjunction to the source composite. Expand functoriality, then replace the exchange adjunct by square transport followed by the f counit. Naturality of the square comparison moves the f push comparison past it. The iterated mate/conjugation identity identifies pullback of that push comparison followed by the E counit with the inverse pull comparison followed by scalar extension of the integral counit. These substitutions give exactly the displayed composite.",
+   "text": "Use the generic source_normal_form calculation: apply inverse-adjunction naturality to the source comparison, substitute the exchange adjunct, move the coefficient push comparison through the square isomorphism by naturality, and substitute the coefficient/counit identity. The latter follows from iterated_mateEquiv_conjugateEquiv_symm and mateEquiv_counit_symm. To pass to bounded constructible objects, use the fully faithful inclusion, map_restrictFullyFaithful_counit_app and the identity compatibility isomorphisms. All these auxiliary calculations are proved in Lean. The exchange adjunct is exposed by squareExchange, which is proved equal to the original unit-square-counit transformation.",
    "uses": [
     "def-weil-pbc-continuous-integral-comparisons",
     "def-weil-pbc-adjunction-mate",
     "lem-weil-pbc-continuous-integral-scalar-exact",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-adjunction-square-exchange"
    ],
    "elementary": false
   }
@@ -27,13 +28,14 @@
   "def-weil-pbc-continuous-integral-comparisons",
   "def-weil-pbc-adjunction-mate",
   "lem-weil-pbc-continuous-integral-scalar-exact",
-  "def-weil-pbc-condensed-e-module-category"
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-adjunction-square-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Remark 6.8.15, compatibility with adjunctions and base change; actual ChangeOfCoefficients and derived pullback composition constructions",
-  "note": "A3: isolated pure pull coherence, a strict part of the original exchange argument."
+  "place": "Remark 6.8.15; Mathlib iterated mate/conjugation and restricted adjunction counit formulas",
+  "note": "E4: complete proof, with a definitionally convenient exchange presentation proved equal to the specified composite. No new sorry."
  },
  "mathlib_searches": [
   {
@@ -106,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-14632",
-  "group": "A3",
+  "reviewer": "X-1b63d",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261016T015245-L-720904",
+  "landing": "20261016T040743-L-2515722",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures and adjunct normal forms match all three DAG nodes; delivered modules and direct importer ContinuousIntegralExchangeSquare compile; axioms are permitted plus expected sorryAx."
+  "note": "independent Codex review: Lean theorem and existing signatures matched the DAG and baseline; exchange equality preserves the original definition; delivered modules and all 13 direct importers compile; axioms checked."
  }
 }

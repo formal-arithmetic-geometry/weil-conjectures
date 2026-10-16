@@ -1,0 +1,124 @@
+{
+ "id": "def-weil-pbc-adjunction-square-exchange",
+ "kind": "definition",
+ "title": "Exchange transformations presented by their adjuncts",
+ "statement": "Let C, D, C′, D′ be categories, a : L ⊣ R and b : L′ ⊣ R′ adjunctions, G : C → C′ and H : D → D′ functors, and θ : G ⋙ L′ ≅ L ⋙ H a natural isomorphism. Using the adjunction hom equivalence of [def-weil-pbc-adjunction-mate], define squareExchange(a,b,G,H,θ) : R ⋙ G → H ⋙ R′ with component at N equal to b.homEquiv(θ(RN) followed by H(a.counit(N))). This is natural in N. Its inverse adjunct is θ(RN) followed by H(a.counit(N)), and it is equal as a natural transformation to unit insertion, squareTransport of θ, and counit contraction, with the canonical functor associators and unitors. This fixes the same exchange transformation by a presentation that exposes its adjoint without expanding the three composite steps.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change; formal adjunction calculation as in Mathlib/CategoryTheory/Adjunction/Basic.lean and Mates.lean"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "For h : N → M, apply the inverse b hom equivalence to the desired naturality equation. Naturality of that equivalence turns the equation into L′G(Rh) followed by θ(RM) and Hε(M), equal to θ(RN) followed by Hε(N) and Hh. Move Rh through θ by naturality; combine the H maps and apply naturality of the a counit. This proves naturality and constructs the displayed natural transformation without any choice.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct identity is the inverse-law of b.homEquiv. For equality with the original three-step exchange, use componentwise extensionality and injectivity of the inverse b hom equivalence. Expand the unit insertion, squareTransport and counit contraction at a component. Counit naturality moves the two R′ maps past the b counit; the b triangle identity cancels the inserted unit and counit. Both adjuncts are θ(RN) followed by Hε(N), so the transformations agree. The code proves this for arbitrary categories, including identity adjunctions and empty categories.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; Mathlib adjunction naturality and triangle identities",
+  "note": "E4: completely proved generic presentation and equality with the specified construction; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exchange natural transformation obtained by adjunction hom equivalence equals unit square counit composite",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.unit_comp_map_eq_iff, and related unit/counit hom-equivalence formulas (8 hits).",
+   "verdict": "Mathlib supplies the adjunction identities. The square exchange presentation and equality with the specified composite are proved here from them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_counit",
+   "verdict": "The same formal counit identity exists for mateEquiv; a direct adjunct presentation avoids costly conversion of the concrete restricted exchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate of extension of scalars comparison is compatible with pullback pushforward adjunction counit",
+   "date": "2026-10-16",
+   "results": "Generic adjunction and mate infrastructure; no specialized bounded constructible formula.",
+   "verdict": "Use the generic adjunction infrastructure; no new geometric input."
+  },
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv_conjugateEquiv|pullIsoOfComapIso",
+   "date": "2026-10-16",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates.iterated_mateEquiv_conjugateEquiv_symm and WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+   "verdict": "These give the coefficient bridge; the new constructor is only a computational presentation of exchange."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-integral-exchange-source-adjunct",
+   "place": "Exchange adjunct step, implemented by a canonical adjoint presentation equal to the original construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AdjunctionSquareExchange",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionSquareExchange.lean",
+  "declaration": "CategoryTheory.Adjunction.squareExchange",
+  "statement": "def squareExchange : R ⋙ G ⟶ H ⋙ R'",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Adjunction.squareExchange_naturality",
+   "CategoryTheory.Adjunction.squareExchange",
+   "CategoryTheory.Adjunction.squareExchange_adjunct",
+   "CategoryTheory.Adjunction.squareExchange_map_counit",
+   "CategoryTheory.Adjunction.squareExchange_eq_unit_square_counit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1b63d",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T040743-L-2515722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-1b63d",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T040743-L-2515722",
+  "kind": "interface",
+  "note": "independent Codex review: Lean theorem and existing signatures matched the DAG and baseline; exchange equality preserves the original definition; delivered modules and all 13 direct importers compile; axioms checked."
+ }
+}

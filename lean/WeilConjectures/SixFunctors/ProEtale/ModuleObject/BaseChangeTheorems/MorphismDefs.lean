@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Sheaf.CategoryTheory.AdjunctionSquareExchange
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
@@ -150,9 +151,78 @@ proper; no such hypothesis is built into the definition. -/
 noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g ⟶
       boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f' :=
-  boundedConstructibleBaseChangeUnitStep Λ ℓ k f g f' ≫
-    (boundedConstructibleBaseChangeSquareStep Λ ℓ k sq).hom ≫
-      boundedConstructibleBaseChangeCounitStep Λ ℓ k f f' g'
+  Adjunction.squareExchange
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f')
+    (boundedConstructibleUpperStar Λ ℓ k g)
+    (boundedConstructibleUpperStar Λ ℓ k g')
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq)
+
+variable {f g f' g'} in
+/-- The adjunct presentation is the specified unit--square--counit exchange map. -/
+theorem boundedConstructibleBaseChange_eq_unit_square_counit (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange Λ ℓ k sq =
+      boundedConstructibleBaseChangeUnitStep Λ ℓ k f g f' ≫
+        (boundedConstructibleBaseChangeSquareStep Λ ℓ k sq).hom ≫
+          boundedConstructibleBaseChangeCounitStep Λ ℓ k f f' g' :=
+  Adjunction.squareExchange_eq_unit_square_counit
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f')
+    (boundedConstructibleUpperStar Λ ℓ k g)
+    (boundedConstructibleUpperStar Λ ℓ k g')
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq)
+
+variable {f g f' g'} in
+/-- The restricted exchange is the canonical adjunct presentation. -/
+theorem boundedConstructibleBaseChange_eq_squareExchange (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange Λ ℓ k sq =
+      Adjunction.squareExchange
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f)
+        (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f')
+        (boundedConstructibleUpperStar Λ ℓ k g)
+        (boundedConstructibleUpperStar Λ ℓ k g')
+        (boundedConstructiblePullbackSquareComparison Λ ℓ k sq) := by
+  refine (boundedConstructibleBaseChange_eq_unit_square_counit Λ ℓ k sq).trans ?_
+  exact (Adjunction.squareExchange_eq_unit_square_counit
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f')
+    (boundedConstructibleUpperStar Λ ℓ k g)
+    (boundedConstructibleUpperStar Λ ℓ k g')
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq)).symm
+
+-- Match the restricted functors without expanding their derived implementations.
+attribute [local irreducible] boundedConstructibleUpperStar boundedConstructibleLowerStar
+  boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
+
+variable {f g f' g'} in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
+/-- The adjunct of restricted exchange is the pullback-square comparison and f counit. -/
+theorem boundedConstructibleBaseChange_adjunct (sq : CommSq g' f' f g)
+    (N : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
+    (boundedConstructibleUpperStar Λ ℓ k f').map
+        ((boundedConstructibleBaseChange Λ ℓ k sq).app N) ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f').counit.app
+        ((boundedConstructibleUpperStar Λ ℓ k g').obj N) =
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq).hom.app
+        ((boundedConstructibleLowerStar Λ ℓ k f).obj N) ≫
+      (boundedConstructibleUpperStar Λ ℓ k g').map
+        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app N) := by
+  rw [boundedConstructibleBaseChange_eq_squareExchange]
+  exact Adjunction.squareExchange_map_counit
+    (C := ProEtale.BoundedConstructible (condensedRingObj Λ Y))
+    (D := ProEtale.BoundedConstructible (condensedRingObj Λ X))
+    (C' := ProEtale.BoundedConstructible (condensedRingObj Λ Y'))
+    (D' := ProEtale.BoundedConstructible (condensedRingObj Λ X'))
+    (L := boundedConstructibleUpperStar Λ ℓ k f)
+    (R := boundedConstructibleLowerStar Λ ℓ k f)
+    (L' := boundedConstructibleUpperStar Λ ℓ k f')
+    (R' := boundedConstructibleLowerStar Λ ℓ k f')
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f')
+    (boundedConstructibleUpperStar Λ ℓ k g)
+    (boundedConstructibleUpperStar Λ ℓ k g')
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq) N
 
 end BaseChange
 
