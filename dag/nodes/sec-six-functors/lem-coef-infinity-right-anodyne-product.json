@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-infinity-right-anodyne"
  ],
  "proof": [
   {
@@ -242,5 +243,24 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-d21a3afca (reviewer sub-agent of L); spot-checked: Read the full packet, item, new nodes, cited DAG statements, unit/chapter route, worker report, and Kerodon sources 0153, 00TH, 00TG, and 0077. Verified every proof step, hypotheses, edge cases, dependencies, searches, duplicate checks, and route constraints. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightAnodyneProduct",
+  "declaration": "SSet.rightAnodyneExtensions_pushoutProduct",
+  "file": "lean/Sheaf/CategoryTheory/RightAnodyneProduct.lean",
+  "statement": "theorem rightAnodyneExtensions_pushoutProduct {A B K L : SSet.{u}} (i : A ⟶ B) (k : K ⟶ L) [Mono i] [Mono k] (hi : rightAnodyneExtensions i) : rightAnodyneExtensions (Functor.PushoutObjObj.ofHasPushout (curriedTensor SSet) i k).ι",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the already landed right-anodyne definition, added to stmt_deps. The canonical map is Mathlib’s chosen pushout-product map. No other DAG node is restated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5d2bedbf2",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Verified node statement and dependencies, source correspondence, canonical pushout product, right-anodyne definition, docstrings, edge cases, searches, report sections, and explicit-universe signature. Reproduced scompile.py successfully for the immutable module; no fixes needed."
  }
 }
