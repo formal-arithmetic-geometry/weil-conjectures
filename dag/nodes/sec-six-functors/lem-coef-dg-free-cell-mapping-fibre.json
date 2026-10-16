@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: use the reduction of integral compact supports in [lem-coef-integral-compact-support] and derived coefficient adjunction to compute the three displayed derived Hom objects. This supplies the generic dg-quotient mapping-complex infrastructure through the recorded intervening nodes.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: derived coefficient adjunction for the three displayed derived Hom objects; via the recorded dg quotient infrastructure, the free contracting-cell case of the mapping-space universal property.",
    "via": [
     "lem-coef-dg-quotient-hom-cone",
     "lem-coef-dg-module-projective-resolution",
@@ -17,7 +17,7 @@
  },
  "kind": "statement",
  "title": "Mapping-space fibres of a free dg-cell attachment",
- "statement": "Use the small dg categories, cofibrant objects and localization at quasi-equivalences of [lem-coef-dgcat-model-structure], and derived mapping spaces as in [lem-coef-cosimplicial-frame-mapping]. Let $\\mathcal B$ be cofibrant and let $I$ be a small set. For each $i\\in I$, choose objects $s_i,t_i\\in\\mathcal B$, an integer $n_i$, and a closed element $z_i\\in\\mathcal B(s_i,t_i)^{n_i+1}$. Form $\\mathcal B[e_i]$ by freely adjoining arrows $e_i:s_i\\to t_i$ of degree $n_i$ with $d(e_i)=z_i$, using the word construction of [lem-coef-dgcat-free-cell-calculus], with no additional relations. Then $\\mathcal B\\to\\mathcal B[e_i]$ is a cofibration and $\\mathcal B[e_i]$ is cofibrant. For any small dg category $\\mathcal E$ and strict dg functor $F:\\mathcal B\\to\\mathcal E$, the homotopy fibre over $F$ of\n$$\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B[e_i],\\mathcal E)\\longrightarrow\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B,\\mathcal E)$$\nis naturally equivalent to\n$$\\prod_{i\\in I}\\operatorname{Path}_{0,F(z_i)}\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}\\bigl(\\mathbf Z[-n_i-1],\\mathcal E(Fs_i,Ft_i)\\bigr).$$\nHere $\\mathbf D(\\mathbf Z)$ is the enhanced localization of cochains at quasi-isomorphisms, with cochain convention as in [def-weil-abstract-derived-category], and $\\mathbf Z[m]$ has $\\mathbf Z$ in degree $-m$, and $\\operatorname{Path}_{a,b}(S)$ is the homotopy fibre of the endpoint map $S^{\\Delta^1}\\to S\\times S$ over $(a,b)$; a closed degree-$n_i+1$ element gives the indicated point. The product of an empty family is a point. The comparison is natural under dg functors and under homotopy coherent variation of $F$.",
+ "statement": "Use the small dg categories, cofibrant objects and localization at quasi-equivalences of [lem-coef-dgcat-model-structure], and derived mapping spaces as in [lem-coef-cosimplicial-frame-mapping]. Work over $\\mathbf Z$. Let $\\mathcal B$ be cofibrant and let $I$ be a small set. For each $i\\in I$, choose objects $s_i,t_i\\in\\mathcal B$, an integer $n_i$, and a closed element $z_i\\in\\mathcal B(s_i,t_i)^{n_i+1}$. Form $\\mathcal B[e_i]$ by freely adjoining arrows $e_i:s_i\\to t_i$ of degree $n_i$ with $d(e_i)=z_i$, using the word construction of [lem-coef-dgcat-free-cell-calculus], with no additional relations. Then $\\mathcal B\\to\\mathcal B[e_i]$ is a cofibration and $\\mathcal B[e_i]$ is cofibrant. For any small dg category $\\mathcal E$ and strict dg functor $F:\\mathcal B\\to\\mathcal E$, the homotopy fibre over $F$ of\n$$\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B[e_i],\\mathcal E)\\longrightarrow\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B,\\mathcal E)$$\nis naturally equivalent to\n$$\\prod_{i\\in I}\\operatorname{Path}_{0,F(z_i)}\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}\\bigl(\\mathbf Z[-n_i-1],\\mathcal E(Fs_i,Ft_i)\\bigr).$$\nHere $\\mathbf D(\\mathbf Z)$ is the enhanced localization of cochains at quasi-isomorphisms supplied by [lem-coef-projective-chains-monoidal-model], with cochain convention as in [def-weil-abstract-derived-category], and $\\mathbf Z[m]$ has $\\mathbf Z$ in degree $-m$, and $\\operatorname{Path}_{a,b}(S)$ is the homotopy fibre of the endpoint map $S^{\\Delta^1}\\to S\\times S$ over $(a,b)$; a closed degree-$n_i+1$ element gives the indicated point. The product of an empty family is a point. The comparison is natural under dg functors and under homotopy coherent variation of $F$.",
  "source": {
   "document": "https://arxiv.org/pdf/math/0210114",
   "place": "Drinfeld §§13.4-13.6 (free dg attachments and lifting); homotopy-fibre refinement via cosimplicial frames. Supports prop-coef-integral-exceptional-adjoint proof paragraph 2, through the recorded ancestry: computation of the free contracting-cell mapping spaces."
@@ -26,11 +26,118 @@
   "lem-coef-dgcat-model-structure",
   "lem-coef-cosimplicial-frame-mapping",
   "lem-coef-dgcat-free-cell-calculus",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-coef-projective-chains-monoidal-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $j:\\mathcal B\\to\\mathcal B[e_i]$. Prove directly that $j$ has the left lifting property against every trivial fibration $p:\\mathcal C\\to\\mathcal D$ in the dg-category model. In a square with top map $a:\\mathcal B\\to\\mathcal C$ and bottom map $b:\\mathcal B[e_i]\\to\\mathcal D$, the old objects are already lifted by $a$. For each $i$, the map of complexes $p:\\mathcal C(as_i,at_i)\\to\\mathcal D(bs_i,bt_i)$ is a degreewise surjective quasi-isomorphism by [lem-coef-dgcat-model-structure]. Let $S^{n_i+1}=\\mathbf Z[-n_i-1]$, and let $D^{n_i}$ be the free two-term complex with basis $u$ in degree $n_i$, $v$ in degree $n_i+1$, and $du=v$. The square from $S^{n_i+1}\\hookrightarrow D^{n_i}$ to this map of complexes sends $v$ on top to $a(z_i)$, and $u,v$ on bottom to $b(e_i),b(z_i)$. The square commutes and both maps are chain maps because $dz_i=0$ and $de_i=z_i$. The projective cochain model [lem-coef-projective-cochain-monoidal-model] makes the left side a generating cofibration and the right side a trivial fibration, so it has a filler. Its value $h_i$ on $u$ satisfies $dh_i=a(z_i)$ and $p(h_i)=b(e_i)$. Choose these independently over the small set $I$. The free word construction [lem-coef-dgcat-free-cell-calculus] extends $a,e_i\\mapsto h_i$ uniquely to the required dg functor: send each word to the composed images, and the Leibniz rule verifies its differential. Thus $j$ is a cofibration. Since $\\mathcal B$ is cofibrant, its composite initial map with $j$ is a cofibration (compose lifts), and $\\mathcal B[e_i]$ is cofibrant.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0210114",
+    "place": "Drinfeld §§13.4 and 13.6; explicit relative lifting argument, using Hovey Theorem 2.3.11 with cochain indexing"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cosimplicial-frame-mapping] to the opposite of the dg-category model. All dg categories are fibrant by [lem-coef-dgcat-model-structure], so $\\mathcal E$ is cofibrant in that opposite model. It gives a simplicial diagram $\\mathcal E_\\bullet$ in dg categories with a coaugmentation $\\operatorname{const}\\mathcal E\\to\\mathcal E_\\bullet$, $\\mathcal E_0=\\mathcal E$, which is objectwise a quasi-equivalence, and with fibrations $\\mathcal E_k\\to M_k\\mathcal E_\\bullet$. These are exactly the duals of its stated frame conditions. They may be chosen functorially, with degree zero fixed, by the Reedy extension and functorial factorization assertions of [lem-coef-reedy-model-structure]. Opposite localization is the opposite of localization: reversing a diagram reverses precisely its weak-equivalence arrows, so the two universal properties agree, including mapping spaces. Consequently, for each cofibrant dg category $\\mathcal A$, the Kan complex $H_{\\mathcal A}=\\operatorname{Hom}_{\\mathrm{dgcat}}(\\mathcal A,\\mathcal E_\\bullet)$ computes $\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal A,\\mathcal E)$. Apply this to $\\mathcal A=\\mathcal B[e_i],\\mathcal B$. In the opposite model the reversed map $j^{\\mathrm{op}}:\\mathcal B[e_i]\\to\\mathcal B$ is a fibration between fibrant objects. The fibration assertion of the frame node therefore makes restriction $H_{\\mathcal B[e_i]}\\to H_{\\mathcal B}$ a Kan fibration, and its natural mapping-space comparison identifies it with the restriction in the statement. The vertex $F$ corresponds to the given strict functor. The strict fibre over its constant simplicial point thus computes the required homotopy fibre.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 5.2.7, Theorem 5.2.8, Corollary 5.4.4 and Proposition 5.4.7, applied in the opposite model category"
+   }
+  },
+  {
+   "text": "Write $c_k:\\mathcal E\\to\\mathcal E_k$ for the coaugmentation. For $i\\in I$ put $K_{i,k}=\\mathcal E_k(c_kFs_i,c_kFt_i)$. These complexes form a simplicial complex $K_{i,\\bullet}$, with $K_{i,0}=\\mathcal E(Fs_i,Ft_i)$ and a coaugmentation from this constant complex. It is objectwise a quasi-isomorphism by the quasi-equivalence condition in [lem-coef-dgcat-model-structure]. It is Reedy fibrant for the projective cochain model. Indeed a matching object of dg categories has objects the compatible tuples of matching objects, and between two such tuples its morphisms are the compatible tuples of morphisms, with componentwise differential and composition: this description satisfies the limit universal property directly. At the tuples supplied by $c_\\bullet Fs_i,c_\\bullet Ft_i$, its Hom complex is therefore $M_kK_{i,\\bullet}$. The matching fibration of Step 2 induces the degreewise surjection $K_{i,k}\\to M_kK_{i,\\bullet}$, by the fibration criterion of [lem-coef-dgcat-model-structure]; that is a projective-complex fibration by [lem-coef-projective-cochain-monoidal-model]. For $k=0$ the matching complex is zero. Thus $K_{i,\\bullet}$ is a simplicial frame on $K_{i,0}$, equivalently a cosimplicial frame in the opposite complex model, by [lem-coef-reedy-model-structure] and the frame definition of [lem-coef-cosimplicial-frame-mapping]. No flatness of $K_{i,0}$ or of the target dg category has been used.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.5, Definition 5.2.7 and Corollary 5.4.4; matching-Hom calculation from the universal property of dg-category limits"
+   }
+  },
+  {
+   "text": "For each $i$ define simplicial sets $X_i=\\operatorname{Hom}_{\\operatorname{Ch}(\\mathbf Z)}(S^{n_i+1},K_{i,\\bullet})$ and $Y_i=\\operatorname{Hom}_{\\operatorname{Ch}(\\mathbf Z)}(D^{n_i},K_{i,\\bullet})$, with $p_i:Y_i\\to X_i$ given by restriction. Both source complexes are cofibrant. For the sphere, its Hom complex into an acyclic complex is a shift of that complex and hence acyclic; for the disk this Hom complex is contractible, using the degree-$(-1)$ contraction taking $v$ to $u$. Their terms are free, so the dg-projective criterion of [lem-coef-projective-cochain-monoidal-model] applies. Its sphere-to-disk map is a generating cofibration. Apply [lem-coef-cosimplicial-frame-mapping] in the opposite complex model to the frame of Step 3. It says that $X_i,Y_i$ are Kan and $p_i$ is a Kan fibration, naturally presenting restriction on derived mapping spaces. By [lem-coef-projective-chains-monoidal-model], that localization is $\\mathbf D_\\infty(\\mathbf Z)$. Hence $X_i$ represents $\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}(\\mathbf Z[-n_i-1],\\mathcal E(Fs_i,Ft_i))$. Also $Y_i$ is contractible: $D^{n_i}$ is acyclic (its only nonzero differential is the identity), so it is equivalent to zero in this localization; the zero complex has the constant one-point function complex $\\operatorname{Hom}(0,K_{i,\\bullet})$. The zero map supplies a distinguished point $0\\in Y_i$, whose image in $X_i$ is zero.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.3.11 and Definition 2.3.3 (cochain spheres/disks); Corollary 5.4.4 and Proposition 5.4.7 (function complexes)"
+   }
+  },
+  {
+   "text": "The degree-$k$ part of the strict fibre of Step 2 consists exactly of extensions of $c_kF$ to $\\mathcal B[e_i]$. By [lem-coef-dgcat-free-cell-calculus], such an extension is the independent choice of $h_i\\in K_{i,k}^{n_i}$ with $dh_i=c_kF(z_i)$: a choice defines the images of all words, and conversely every extension restricts to these images. Let $x_i\\in X_i$ be the constant simplicial point represented by $F(z_i)$. A map $D^{n_i}\\to K_{i,k}$ has image $h_i$ on $u$ and $dh_i$ on $v$. Therefore the same choices give, degree by degree and compatibly with faces and degeneracies, an isomorphism of simplicial sets between that strict fibre and $\\prod_{i\\in I}(Y_i\\times_{X_i}\\{x_i\\})$. Each factor is a homotopy fibre because $p_i$ is a Kan fibration, by [lem-coef-kan-quillen-right-proper]. Products of any small family of Kan fibrations are Kan fibrations: a horn lifting problem is a family of horn problems, and their chosen fillers give the product filler. Thus the product here also computes the product of the homotopy fibres, without restricting $I$ to be finite.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0210114",
+    "place": "Drinfeld §13.4 free extension; explicit degreewise identification, with the Kan pullback rule from the cited node"
+   }
+  },
+  {
+   "text": "For completeness identify the last homotopy fibre with the stated endpoint-path space, keeping its zero point. The pushout-product statement [lem-coef-sset-anodyne-pushout-product], by the product/exponential adjunction, implies that for a monomorphism $A\\hookrightarrow B$ and a Kan complex $X$, the map $X^B\\to X^A$ is a Kan fibration: transpose a horn lifting problem to the pushout-product of $A\\hookrightarrow B$ with that horn; horns are anodyne by the lifting definition in [lem-coef-kan-quillen-right-proper]. Take $A=\\partial\\Delta^1$, $B=\\Delta^1$, so the endpoint map $X^{\\Delta^1}\\to X\\times X$ is a fibration. Take also the vertex inclusion $\\{0\\}\\hookrightarrow\\Delta^1$; its fibre $P_0X$ under start evaluation consists of paths starting at zero. It is contractible: precomposition with the order-preserving map $\\min:[1]\\times[1]\\to[1]$ gives a simplicial homotopy from the constant path to the identity on $P_0X$, fixing the start. Its endpoint projection $P_0X\\to X$ is a fibration, being a pullback of the two-endpoint fibration. Thus $\\{0\\}\\to P_0X\\to X$ is a weak equivalence followed by a fibration. Apply this with $X=X_i$. The weak equivalence $\\{0\\}\\to Y_i$ and the fibration $p_i$ give another such replacement of the same zero map $\\{0\\}\\to X_i$. The replacement-independence assertion in [lem-coef-kan-quillen-right-proper] identifies their pullbacks over $x_i$. The second is precisely $\\operatorname{Path}_{0,x_i}(X_i)$, since the endpoint map is already a Kan fibration. Combining Steps 2 and 5 gives the required product of endpoint-path spaces. These equivalences can be multiplied over every small $I$: products of Kan complexes compute products of spaces, since paths, based homotopies and their homotopy groups are componentwise. If any factor is empty both products are empty; otherwise choosing basepoints gives $\\pi_m(\\prod Z_i)=\\prod\\pi_m(Z_i)$, also for $\\pi_0$. The empty family gives a point, as required.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Theorems 3.3.1-3.3.2 (exponential fibrations and pushout products); the path contraction and replacement argument are written explicitly, using the cited Kan-model statement."
+   }
+  },
+  {
+   "text": "Finally retain the family over the whole Kan base $H_{\\mathcal B}$ in Step 2. A $k$-simplex $\\sigma:\\mathcal B\\to\\mathcal E_k$ pulls the extension fibration back to $\\Delta^k$. Over a simplex $\\alpha:[r]\\to[k]$ of $\\Delta^k$, its extensions are the same word assignments as in Step 5, now in the complexes $\\mathcal E_r(\\sigma_\\alpha s_i,\\sigma_\\alpha t_i)$ with cocycles $\\sigma_\\alpha(z_i)$; restriction along an operator applies that dg functor to every assigned $h_i$. This gives exactly the displayed fibre construction over every simplex, including every face and degeneracy, not merely its sets of vertices. The maps between the target degrees are quasi-equivalences (coaugmentation and two-out-of-three), hence induce quasi-isomorphisms on all these Hom complexes by [lem-coef-dgcat-model-structure]. Thus these assignments present the coherent family of derived Hom spaces and cocycles over $H_{\\mathcal B}$. The natural frame comparison [lem-coef-cosimplicial-frame-mapping] identifies this base and its extension fibration with the localized mapping spaces. Step 6 is the natural replacement-independent homotopy-pullback equivalence, by [lem-coef-kan-quillen-right-proper], so its fibre equivalences respect this family. This proves homotopy coherent variation in $F$. Functorial Reedy choices from [lem-coef-reedy-model-structure] also show naturality under a dg functor on the target: apply it to each word image, the cocycle, the sphere/disk maps and their zero maps. Maps of attaching data act by their restrictions on the same formula. After the natural frame comparison these are the stated natural maps, independent of the auxiliary resolution.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.8 and Proposition 5.4.7; simplicial naturality of word restriction and naturality of homotopy pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-dgcat-free-cell-calculus",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0210114",
+  "place": "Drinfeld §§13.4-13.6 supply free arrows and lifting; the homotopy-fibre refinement is the explicit simplicial-resolution argument here using Hovey §§5.2-5.4. Both sources read online and requested for archiving."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,15 +187,73 @@
    "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy fibre of restriction after freely adjoining arrows with prescribed differential to a differential graded category",
+   "results": "{\"t\": \"2026-10-16T16:33:46Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy fibre of restriction after freely adjoining arrows with prescribed differential to a differential graded category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.homotopyCofiber.inlX\", \"HomologicalComplex.homotopyCofiber.X\", \"HomologicalComplex.homotopyCofiber.fstX\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"HomologicalComplex.homotopyCofiber.desc\", \"HomologicalComplex.homotopyCofiber.inrX\", \"HomologicalComplex.homotopyCofiber.inr\", \"HomologicalComplex.homotopyCofiber\"], \"digest\": \"f917218a43839aa1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the first search returns ordinary HomologicalComplex.homotopyCofiber constructions; the second returns Dold-Kan projection homotopies and K-injective/projective nullhomotopies. Read HomotopyCofiber.lean:12-38, DoldKan/HomotopyEquivalence.lean:35-92 and HomotopyCategory/HomComplexSingle.lean:35-92. None states a dg-category free-extension mapping-space fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T16:33:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations combine enriched categories and homotopy in this query."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.?categor|DGCategory|free.?cell.*mapping|mapping.*free.?cell",
+   "results": "{\"t\": \"2026-10-16T16:33:47Z\", \"tool\": \"grep\", \"query\": \"dg.?categor|DGCategory|free.?cell.*mapping|mapping.*free.?cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in the pinned Mathlib source for dg categories or free-cell mapping-space calculations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free attachment of a differential graded arrow computes paths from zero to a cocycle in a derived mapping space",
+   "results": "{\"t\": \"2026-10-16T16:33:48Z\", \"tool\": \"leansearch\", \"query\": \"Free attachment of a differential graded arrow computes paths from zero to a cocycle in a derived mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.HomComplex.Cocycle.homOf\", \"CochainComplex.HomComplex.Cocycle.toSingleMk\", \"CochainComplex.HomComplex.δ_comp_zero_cocycle\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk\", \"CochainComplex.HomComplex.Cocycle.ofHom\", \"CochainComplex.ConnectData.mk\", \"CochainComplex.augment_d_zero_one\"], \"digest\": \"4bd989669f6515af\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: mappingCone.fst and HomComplex.Cocycle.fromSingleMk/toSingleMk encode ordinary complex maps and cocycles, not mapping spaces of dg categories; inspected HomotopyCategory/HomComplexSingle.lean:35-92 and HomotopyCofiber.lean:12-38."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial resolutions compute the space of nullhomotopies of a cocycle by restriction from a contractible disk to its sphere boundary",
+   "results": "{\"t\": \"2026-10-16T16:34:54Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial resolutions compute the space of nullhomotopies of a cocycle by restriction from a contractible disk to its sphere boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"AlgebraicTopology.DoldKan.Hσ\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPToId\"], \"digest\": \"1053510ca50b8b7f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the first search returns ordinary HomologicalComplex.homotopyCofiber constructions; the second returns Dold-Kan projection homotopies and K-injective/projective nullhomotopies. Read HomotopyCofiber.lean:12-38, DoldKan/HomotopyEquivalence.lean:35-92 and HomotopyCategory/HomComplexSingle.lean:35-92. None states a dg-category free-extension mapping-space fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSingleMk|toSingleMk|def homOf",
+   "results": "{\"t\": \"2026-10-16T16:40:34Z\", \"tool\": \"grep\", \"query\": \"fromSingleMk|toSingleMk|def homOf\", \"sub\": \"Algebra/Homology/HomotopyCategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\"], \"digest\": \"5e4514f68a3e2bd3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source-location check of the semantic-search hits. HomComplexSingle.fromSingleMk constructs ordinary cochains/cocycles from a single complex, and HomComplex.Cocycle.homOf constructs an ordinary chain map, not a dg-category mapping-space fibre."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quotient-hom-cone",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-free-cell-mapping-fibre",
+  "worker": "stage1",
+  "summary": "Proved cofibration by relative sphere/disk lifting, computed restriction on a common target simplicial resolution, verified the fixed-object Hom complexes are simplicial frames, and identified free-arrow fibres with paths through contractible disk mapping spaces. No new nodes. Normalized malformed TeX/newline escapes and explicitly cited the existing enhanced complex localization; no mathematical hypothesis or conclusion changed. The assigned file was present in the newer live-DAG mirror, absent from the stale shared snapshot.",
+  "blueprint": "The mapping-complex coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, via the existing recorded quotient/projective-resolution ancestry. The n=-1, z=identity specialization supplies contracting-cell mapping spaces without changing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-1567c52f0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-1567c52f0 (reviewer sub-agent of L); spot-checked: I read all of the item, the cited node statements, the parent's use of the item (n=-1, z=1_A), the base version of the item, and the blueprint ancestor prop-coef-integral-exceptional-adjoint paragraph 2 (main-20261015). Drinfeld and Hovey are not in literature/: the worker filed WANTED lines and set proof_origin by=agent, so I checked the steps against the cited node statements only. This is not a target node, so there is no base-change morphism to compare. The coefficient category is D(Z), the R=Z case of D_inf(R) in lem-coef-projective-chains-monoidal-model, now cited explicitly. The only statement changes are 'Work over Z' and that citation; no hypothesis or conclusion changed. Step 1: the sphere/disk lifting square against surjective quasi-isomorphisms is correct (D^n has degrees n,n+1), the free extension is the free-cell universal property (a pushout along coproducts of T(S)->T(D) for a family, loops included), and B[e_i] is cofibrant. Step 2: the frame in the opposite dgcat model is used with the right variance; j^op is a fibration between fibrant objects, so restriction is a Kan fibration and the strict fibre is the homotopy fibre. Step 3: the matching Hom of a dgcat limit is M_k of the Hom complexes, the dgcat fibration criterion gives degreewise surjectivity, c_0=id and M_0=0, so the Hom complexes form a frame with no flatness used. Step 4: Z[-n-1]=S^{n+1}, both complexes are cofibrant, the fibration Y_i->X_i holds and Y_i is contractible. Step 5 (marked elementary): the fibre is the product of fibres of Y_i over x_i, with the infinite-product Kan argument; I accept the mark. Step 6: the endpoint fibration follows from the anodyne pushout-product leaf, P_0X is contractible via min, and replacement independence gives Path_{0,F(z_i)}. Step 7: naturality and coherent variation are argued over every simplex with functorial Reedy frames; the item's statement of this clause is loose, but nothing is missing mathematically. Edge cases checked: I empty; one loop with z=0 gives Map(Z[-n],K); n=-1, z=1 gives a fibre that is nonempty only for acyclic K and then contractible; a nonzero class [Fz_i] gives an empty fibre. No new nodes. All proof dependencies are in unit sk-prop-sf-biduality-general or are definitions/Mathlib leaves, so there are no tool uses. No SGA. The DAG has no duplicate (equivalence-cell and semi-free module nodes are different statements). Searches cover all three kinds and no field was deleted. No fixes."
+ }
 }
