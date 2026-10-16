@@ -15631,3 +15631,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/J2/Sheaf.RingTheory.LciConormalFreeRankCodimension (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616058 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616160 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J4/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616260 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/K1/Sheaf.CategoryTheory.ExactFunctorHalfPlane (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616409 (proof); batch 20261016T221550; modules 1; new nodes 0)

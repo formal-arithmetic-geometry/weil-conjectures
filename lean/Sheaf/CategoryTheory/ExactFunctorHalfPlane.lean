@@ -63,7 +63,34 @@ private theorem stable_limits (X : BigradedExactCouple C 0) (a : ℤ)
     (hr : (r : ℤ) + 2 > max (q - a + 1) p) :
     X.cycleBoundaryTower.Z r p q = L.Z p q ∧
       X.cycleBoundaryTower.B r p q = L.B p q := by
-  sorry
+  let T := X.cycleBoundaryTower
+  have hs (t : ℕ) (ht : r ≤ t) :
+      T.Z (t + 1) p q = T.Z t p q ∧ T.B (t + 1) p q = T.B t p q := by
+    apply tower_stationary X T
+    · exact (page_zero X _ _ (hE _ _ (Or.inr (by omega))) t).eq_zero_of_tgt _
+    · exact (page_zero X _ _ (hE _ _ (Or.inl (by omega))) t).eq_zero_of_src _
+  have htail (t : ℕ) (ht : r ≤ t) :
+      T.Z t p q = T.Z r p q ∧ T.B t p q = T.B r p q := by
+    induction t, ht using Nat.le_induction with
+    | base => exact ⟨rfl, rfl⟩
+    | succ t ht ih => exact ⟨(hs t ht).1.trans ih.1, (hs t ht).2.trans ih.2⟩
+  constructor
+  · apply le_antisymm
+    · apply (L.Z_glb p q).2
+      rintro _ ⟨t, rfl⟩
+      by_cases ht : r ≤ t
+      · exact le_of_eq (htail t ht).1.symm
+      · exact antitone_nat_of_succ_le (f := fun s ↦ T.Z s p q)
+          (fun s ↦ T.Z_decreasing s p q) (by omega)
+    · exact (L.Z_glb p q).1 ⟨r, rfl⟩
+  · apply le_antisymm
+    · exact (L.B_lub p q).1 ⟨r, rfl⟩
+    · apply (L.B_lub p q).2
+      rintro _ ⟨t, rfl⟩
+      by_cases ht : r ≤ t
+      · exact le_of_eq (htail t ht).2
+      · exact monotone_nat_of_le_succ (f := fun s ↦ T.B s p q)
+          (fun s ↦ T.B_increasing s p q) (by omega)
 private theorem stable_iso (X : BigradedExactCouple C 0) (a : ℤ)
     (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q))
     (L : LimitSubobjects X) (r : ℕ) (p q : ℤ)
@@ -74,7 +101,29 @@ private theorem stable_iso (X : BigradedExactCouple C 0) (a : ℤ)
       eqToHom (congrArg (fun S : Subobject (X.E p q) ↦ (S : C)) hZ) ≫
         cokernel.π (Subobject.ofLE (L.B p q) (L.Z p q)
           (limitBoundary_le_cycle X L p q)) := by
-  sorry
+  obtain ⟨hZ, hB⟩ := stable_limits X a hE L r p q hr
+  have := X.cycleBoundaryTower.projection_epi r p q
+  have hle : L.Z p q ≤ X.cycleBoundaryTower.Z r p q := le_of_eq hZ.symm
+  obtain ⟨e, he⟩ := stabilized_quotient_comparison
+    (L.B p q) (L.Z p q)
+    (X.cycleBoundaryTower.B r p q) (X.cycleBoundaryTower.Z r p q)
+    hB.symm hZ.symm (limitBoundary_le_cycle X L p q)
+    (X.cycleBoundaryTower.B_le_Z r p q) hle
+    (X.cycleBoundaryTower.projection r p q)
+    (X.cycleBoundaryTower.projection_kernel r p q)
+  refine ⟨hZ, e.symm, ?_⟩
+  apply (cancel_mono e.hom).mp
+  simp only [Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [he, ← Category.assoc]
+  have ht : eqToHom (congrArg (fun S : Subobject (X.E p q) ↦ (S : C)) hZ) ≫
+      Subobject.ofLE _ _ hle = 𝟙 _ := by
+    have aux (S T : Subobject (X.E p q)) (h : S = T) (hle : T ≤ S) :
+        eqToHom (congrArg (fun U : Subobject (X.E p q) ↦ (U : C)) h) ≫
+          Subobject.ofLE T S hle = 𝟙 _ := by
+      subst T
+      simp
+    exact aux _ _ hZ hle
+  rw [ht, Category.id_comp]
 private theorem finiteG_stable (X : BigradedExactCouple C 0)
     (L : LimitSubobjects X) (r : ℕ) (p q : ℤ)
     (hZ : X.cycleBoundaryTower.Z r p q = L.Z p q)
@@ -170,7 +219,105 @@ private theorem largePage_witness (X : BigradedExactCouple C 0) (a : ℤ)
       ((X.imageFiltration (p + q) (A (p + q))).antitone_step (by omega))) ≫ ψ.hom =
       t.hom ≫ (X.pageCouple r).g (p - r) (q + r) ≫
         eqToHom (by congr 1 <;> omega) := by
-  sorry
+  classical
+  let n := p + q
+  let u := p - (r : ℤ)
+  let v := q + (r : ℤ)
+  let F := X.imageFiltration n (A n)
+  let Y := X.pageCouple r
+  let c : X.D u v ⟶ (A n).obj :=
+    eqToHom (by congr 1; dsimp [n, u, v]; omega) ≫ (A n).ι u
+  have : IsIso ((A n).ι u) :=
+    cocone_iso_nonpositive X hE n (A n) (hA n) (hA0 n) u (by dsimp [u]; omega)
+  have : IsIso c := by dsimp [c]; infer_instance
+  let lambda : (A n).obj ≅ X.D u v := (asIso c).symm
+  obtain ⟨hmono, himage⟩ := prescribed_inclusion_images X inc hinc0 hinc
+  have hmap {S T U : C} (f : S ⟶ T) (m : T ⟶ U) [Mono m] :
+      (Subobject.map m).obj (imageSubobject f) = imageSubobject (f ≫ m) := by
+    rw [Subobject.map_obj_eq_mk]
+    have : StrongEpi (factorThruImageSubobject f) := strongEpi_of_epi _
+    symm
+    simpa only [imageSubobject_arrow_comp_assoc] using
+      Subobject.imageSubobject_eq_mk (factorThruImageSubobject f)
+        ((imageSubobject f).arrow ≫ m)
+  have hstep (s : ℕ) : (Subobject.map c).obj (imageSubobject (inc s u v)) =
+      F.step (u + s) := by
+    rw [himage, hmap]
+    have hc := incomingAlphaIter_cocone X n (A n) s u v
+      (by dsimp [u, v, n]; omega)
+    change imageSubobject (X.incomingAlphaIter s u v ≫ c) = _
+    have hh : X.incomingAlphaIter s u v ≫ c =
+        eqToHom (by congr 1; dsimp [u, v, n]; omega) ≫
+          (A n).ι (u + s) := hc
+    simp only [hh, imageSubobject_iso_comp]
+    rfl
+  have : Mono (inc r u v) := hmono r u v
+  have : Mono (inc (r + 1) u v) := hmono (r + 1) u v
+  have him : Subobject.mk (inc r u v ≫ c) = F.step p := by
+    rw [← imageSubobject_mono, ← hmap, hstep]
+    congr 1
+    dsimp [u]
+    omega
+  let t : (F.step p : C) ≅ Y.D u v :=
+    Subobject.isoOfMkEqMk (F.step p).arrow (inc r u v ≫ c)
+      ((Subobject.mk_arrow _).trans him.symm)
+  have ht : t.hom ≫ inc r u v = (F.step p).arrow ≫ lambda.hom := by
+    apply (cancel_mono c).mp
+    simp [t, lambda, Category.assoc]
+  let k := Subobject.ofLE (F.step (p + 1)) (F.step p) (F.antitone_step (by omega))
+  have hkinc : (k ≫ t.hom) ≫ inc r u v = (F.step (p + 1)).arrow ≫ lambda.hom := by
+    rw [Category.assoc, ht, ← Category.assoc]
+    dsimp [k]
+    rw [Subobject.ofLE_arrow]
+  have himnext : imageSubobject (inc (r + 1) u v) =
+      Subobject.mk ((F.step (p + 1)).arrow ≫ lambda.hom) := by
+    apply Subobject.map_obj_injective c
+    rw [hstep, Subobject.map_mk]
+    simp only [Category.assoc, lambda, Iso.symm_hom, asIso_inv,
+      IsIso.inv_hom_id, Category.comp_id, Subobject.mk_arrow]
+    congr 1
+    dsimp [u]
+    omega
+  have : Mono (Y.derivedDInclusion u v) := by
+    dsimp [derivedDInclusion]
+    infer_instance
+  have hk : Subobject.mk (k ≫ t.hom) = kernelSubobject (Y.g u v) := by
+    apply Subobject.map_obj_injective (inc r u v)
+    rw [← derivedDInclusion_kernel Y u v, imageSubobject_mono]
+    simp only [Subobject.map_mk, hkinc]
+    rw [← himnext]
+    change imageSubobject (inc (r + 1) u v) =
+      Subobject.mk ((X.pageCouple r).derivedDInclusion u v ≫ inc r u v)
+    simp only [← hinc, imageSubobject_mono]
+  have hnext : IsZero (Y.D ((u + r) + 2) ((v - r) - 1)) :=
+    pageD_zero X a hD r _ _ (by dsimp [u, v]; omega)
+  have hf : Y.f (u + r) (v - r) = 0 := hnext.eq_zero_of_tgt _
+  have : Epi (Y.g u v) := by
+    have himg : imageSubobject (Y.g u v) = ⊤ := by
+      rw [Y.exact_f, hf, kernelSubobject_zero]
+    have : IsIso (imageSubobject (Y.g u v)).arrow :=
+      (Subobject.isIso_arrow_iff_eq_top _).mpr himg
+    rw [← imageSubobject_arrow_comp (Y.g u v)]
+    infer_instance
+  let z : Y.E (u + r) (v - r) ⟶ Y.E p q :=
+    eqToHom (by congr 1 <;> dsimp [u, v] <;> omega)
+  let π := t.hom ≫ Y.g u v ≫ z
+  have : Epi π := by dsimp [π, z]; infer_instance
+  have hker : kernelSubobject π = Subobject.mk k := by
+    have hπ : π = (t.hom ≫ Y.g u v) ≫ z := by simp only [π, Category.assoc]
+    simp only [hπ, kernelSubobject_comp_mono]
+    apply Subobject.map_obj_injective t.hom
+    have hmapker : (Subobject.map t.hom).obj (kernelSubobject (t.hom ≫ Y.g u v)) =
+        kernelSubobject (Y.g u v) := by
+      conv_lhs => rw [← Subobject.mk_arrow (kernelSubobject (t.hom ≫ Y.g u v))]
+      rw [Subobject.map_mk, ← Subobject.mk_arrow (kernelSubobject (Y.g u v))]
+      exact Subobject.mk_eq_mk_of_comm _ _ (kernelSubobjectIsoComp t.hom (Y.g u v))
+        (kernelSubobjectIsoComp_hom_arrow t.hom (Y.g u v))
+    rw [hmapker, Subobject.map_mk]
+    exact hk.symm
+  obtain ⟨ψ, hψ⟩ := quotient_comparison (F.step (p + 1)) (F.step p)
+    (F.antitone_step (by omega)) π hker
+  exact ⟨lambda, t, ψ, rfl, ht, hψ⟩
 
 /-- The limiting and explicit large-page comparisons are natural once finite-page
 and image-filtration comparisons are fixed.
