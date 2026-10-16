@@ -26,7 +26,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-proetale-operations",
   "def-weil-extension-by-zero",
-  "lem-weil-extension-by-zero-adjunction"
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-proetale-inverse-image",
+  "lem-exc-proetale-open-unit"
  ],
  "proof": [
   {
@@ -426,5 +428,32 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-18df10250 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, cited statements, source passages, and unit/chapter route. All twelve steps support the unchanged arbitrary-open, arbitrary pro-etale module-sheaf comparison, with the specified adjunction transpose. No cycles, duplicates, or new nodes found. Corrected source locations, including exact sheafification tag 03EI instead of 03CO; replacement JSON and detailed checks are in fixes/ and review.md. Accepted all thirteen declared tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison",
+  "declaration": "AlgebraicGeometry.Scheme.sfProperOpenSheafComparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfProperOpenDirectImageCoordinates",
+   "AlgebraicGeometry.Scheme.sfProperOpenFixedRestrictionIso",
+   "AlgebraicGeometry.Scheme.sfProperOpenRestrictionIso",
+   "AlgebraicGeometry.Scheme.sfProperOpenUnitIso",
+   "AlgebraicGeometry.Scheme.sfProperOpenLambda",
+   "AlgebraicGeometry.Scheme.sfProperOpenSheafComparison",
+   "AlgebraicGeometry.Scheme.sfProperOpenSheafComparison_isIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleProperOpenSheafComparison.lean",
+  "statement": "theorem sfProperOpenSheafComparison_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p] (i : W ⟶ T) [IsOpenImmersion i] : IsIso (sfProperOpenSheafComparison A (pullback.snd p i) (pullback.fst p i) i p (IsPullback.of_hasPullback p i).flip)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-31d557b03",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Statement and canonical helpers match the node; dependencies, universes, edge cases, docstrings, report sections, and side-overlay compilation verified with no findings."
  }
 }
