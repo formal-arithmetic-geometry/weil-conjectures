@@ -33,9 +33,180 @@
   "lem-coef-cocartesian-straightening",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\Delta^{\\mathrm{op}}$ and take the strict diagram $D:[1]\\to\\mathsf{sSet}$ with $D(0)=\\mathcal C$, $D(1)=\\mathcal D$, and transition $u$. Define $\\mathcal M=R_{[1]}(D)$ by [lem-cbc-strict-presentation-transport-representation]. This is small and $q:\\mathcal M\\to\\Delta^1$ is the cocartesian fibration classified by $u$, with the specified endpoint fibers and cocartesian edges $e_c:c\\to uc$. The structure maps give $\\pi:\\mathcal M\\to S\\times\\Delta^1$. Verify directly that it is an inner fibration. Over a constant interval simplex this is the inner-horn property of the corresponding endpoint projection. For a mixed simplex $\\sigma:[n]\\to[1]$, let $Z=\\sigma^{-1}(0)$, an initial nonempty proper face. The subset formula identifies its lift with a simplex $a:\\Delta^Z\\to\\mathcal C$ and a simplex $b:\\Delta^n\\to\\mathcal D$ satisfying $b|_Z=ua$, both over the specified simplex of $S$. Given an inner horn $\\Lambda_i^n$, the entire face $Z$ lies in its last face (which is present since $i<n$), so $a$ is already specified. The target-fiber components on the horn, using $u$ on all-zero faces, form a compatible $\\Lambda_i^n\\to\\mathcal D$. Fill this horn over $S$ using the endpoint inner fibration $\\mathcal D\\to S$. The filler still restricts to $ua$ on $Z$, hence gives the required lift to $\\mathcal M$. Finally $S\\times\\Delta^1$ has only identity equivalences, which lift by identities. Thus $\\pi$ is a categorical fibration as required by [def-coef-operadic-correspondence], with the Joyal convention of [lem-coef-joyal-quasicategory-characterizations].",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2, construction of the mapping-cylinder correspondence; explicit relative-nerve model from HTT 3.2.5"
+   }
+  },
+  {
+   "text": "For the relative nerve over $[1]$, apply $D(\\sigma(\\max J)\\to1)$ to the subset simplex $t_J$ of a simplex over $\\sigma$. The resulting compatible simplices in $\\mathcal D$ determine a functor $r:\\mathcal M\\to\\mathcal D$ over $S$, with $r|_{\\mathcal C}=u$, $r|_{\\mathcal D}=1$ and $r(e_c)=1_{uc}$. The cocartesian mapping-space criterion for $q$ gives\n$$\\operatorname{Map}_{\\mathcal D}(uc,d)=\\operatorname{Map}_{\\mathcal M}(uc,d)\\xrightarrow{\\ e_c^*\\ }\\operatorname{Map}_{\\mathcal M}(c,d)$$\nas an equivalence, since both relevant spaces of arrows $0\\to1$ and $1\\to1$ in $\\Delta^1$ are points. The map induced by $r$ is its inverse. This construction is coherent in $c,d$ and lies over the mapping set of $S$, since every $e_c$ lies over an identity of $S$. Maps in the reverse direction, from the target to the source fiber, form the empty space. Restricting the subset formula to objects over $[0]$ gives $R_{[1]}(\\mathcal C_{[0]}\\to\\mathcal D_{[0]})$. The same relative-nerve theorem identifies its interval transport with $u_{[0]}$, an equivalence by hypothesis. Thus the correspondence is constant over $[0]$ with its two zero-fibers spaces.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions A.3.1-A.3.2 and Remark A.4.2, zero-fiber and mixed-morphism checks"
+   }
+  },
+  {
+   "text": "Check the remaining family axiom using the dual constant-source test of [lem-coef-infinity-relative-cone-constant-test]. Choose the inert incidence cone of an object $x$ in either endpoint fiber, with boundary shape $K$. Its inert edges exist within that fiber. For a test object $z$, the test square compares $\\operatorname{Map}_{\\mathcal M}(z,x)$ with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal M)}(\\Delta_Kz,f)$ and their images under $\\pi$, where $f$ is the incidence boundary. If $z$ and $x$ have the same interval coordinate, these are the endpoint operad's relative Segal-limit test square. That square is a homotopy pullback by the incidence-diagram axiom (iii) of [lem-coef-operadic-algebra-presentability], read as follows. The shape $K=N(I_r)$ is one-dimensional: every nonidentity arrow of $I_r$ goes from an edge object over $[1]$ to a vertex object over $[0]$, so no two nonidentity arrows compose. Hence $\\operatorname{Fun}(K,-)$ is the strict pullback of the vertex and edge functor categories over the endpoint evaluations; these evaluations are isofibrations and their fixed-endpoint arrow-space maps are Kan fibrations by [lem-coef-infinity-isofibration-exponentiation], so by [lem-coef-kan-pullback-path-comparison] and [lem-coef-infinity-pinch-comparison] the mapping space $\\operatorname{Map}_{\\operatorname{Fun}(K,-)}(\\Delta_Kz,f)$ is the homotopy limit over $I_r$ of the mapping spaces into the $f_\\alpha$. The base mapping spaces in $\\Delta^{\\mathrm{op}}$ are discrete sets, so the square is a homotopy pullback exactly when, over each base arrow $\\phi$, the induced map of homotopy fibers $\\operatorname{Map}^{\\phi}(z,x)\\to\\lim_{\\alpha\\in I_r}\\operatorname{Map}^{\\alpha\\phi}(z,x_\\alpha)$ is an equivalence, which is axiom (iii). If $z\\in\\mathcal C$ and $x\\in\\mathcal D$, use Step 2 on the apex mapping space. For the boundary mapping space apply [lem-coef-infinity-pointwise-cocartesian-transport] to $q:\\mathcal M\\to\\Delta^1$ and $K$: the constant transformation $\\Delta_K e_z$ is cocartesian because each component is $e_z$. Its mapping-space fiber formula identifies maps $\\Delta_Kz\\to f$ over the unique constant transformation $0\\to1$ with maps $\\Delta_Kuz\\to f$ in $\\operatorname{Fun}(K,\\mathcal D)$. Thus the entire coherent incidence square, including its base map, is the target endpoint's relative Segal-limit square, which is a homotopy pullback. If $z\\in\\mathcal D$ and $x\\in\\mathcal C$, both source-to-apex and source-to-incidence mapping spaces in the interval base are empty, as are their total-space counterparts. The test square is therefore a homotopy pullback of empty spaces. These are all cases; the incidence shape is nonempty also at $[0]$, where it is the single vertex. The constant-source criterion proves the relative $\\pi$-limit assertion, so $\\mathcal M$ is a correspondence in the exact sense of [def-coef-operadic-correspondence].",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.3.1(2), relative Segal cones; mapping-space verification for the cylinder"
+   }
+  },
+  {
+   "text": "Fix a target color $d$. Apply $r$ to arrows ending at $d$ and restrict to arrows over active base maps. This gives a functor between the two active slices in the statement, over the same source projection. Form the active subcategories $\\mathcal M_{\\mathrm{act}}$ and $\\mathcal D_{\\mathrm{act}}$ by pulling back over the nerve of the ordinary category of active maps. They are quasicategories: the operad projections are inner fibrations, and restriction is a base pullback. Apply [lem-coef-infinity-arrow-target-right-fibration] to these quasicategories and $d$; [lem-coef-infinity-slice-arrow-equivalence] identifies these right fibrations with their ordinary slices. Pull back their source projections to $\\mathcal C_{\\mathrm{act}}$. These are precisely the two relative active slices in the statement. Explicitly, if $\\alpha',\\alpha'g$ are active arrows ending at $[1]$, then $g$ is active, since their opposite maps send the two endpoints to endpoints. Thus the source projection really factors through $\\mathcal C_{\\mathrm{act}}$. On the fiber at $c$ our functor is precisely $r:\\operatorname{Map}_{\\mathcal M}(c,d)_{\\mathrm{act}}\\to\\operatorname{Map}_{\\mathcal D}(uc,d)_{\\mathrm{act}}$, an equivalence by Step 2; activity selects the same union of components of the discrete base mapping set. The right-fibration version of [lem-coef-space-valued-straightening], obtained by opposites, identifies this with a componentwise equivalence of space-valued functors. Componentwise equivalences are equivalences by [lem-cbc-enhanced-functor-cone-calculus]. This proves the claimed slice equivalence, including source projections and all higher simplices.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-space-valued-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-operadic-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.1, relative active slice; Remark A.4.2, cylinder identification"
+   }
+  },
+  {
+   "text": "Let $P=(\\mathcal C\\times\\Delta^1)\\amalg_{\\mathcal C\\times\\{1\\}}\\mathcal D$, with its map to $S$. In degree $k$, its simplices are a simplex of $\\mathcal C$ and a base simplex $\\alpha:[k]\\to[1]$ with $\\alpha(0)=0$, or a simplex of $\\mathcal D$ over the constant base simplex $1$. When an operator removes all initial $0$-vertices it applies $u$. Thus $P=G_{[1]}(D)$ of [def-cbc-enhanced-cartesian-fibration]. The map $i_D:P\\to\\mathcal M$ of [lem-cbc-strict-presentation-transport-representation] is identity on both vertex fibers and carries marked transition edges to the $e_c$. Apply the cocartesian opposite of [lem-cbc-cartesian-mapping-simplex-comparison] with $n=1$, $K=\\Delta^1$, and $E$ consisting only of degenerate base edges. Its source marking is precisely $P^\\flat$; its target marking is precisely $\\mathcal M^\\natural$, since Step 1's relative-nerve theorem identifies the cocartesian edges over identities with equivalences in the endpoint fibers, and every equivalence in $\\mathcal M$ lies in an endpoint fiber. Hence $i_D:P^\\flat\\to\\mathcal M^\\natural$ is an absolute marked weak equivalence. Here is the full, unmarked functor-category consequence, without forgetting arbitrary markings. For any quasicategory $Z$ put $W_M=\\operatorname{Fun}(\\mathcal M,Z)$ and $W_P=\\operatorname{Fun}(P,Z)$. Testing the marked weak equivalence against $Z^\\natural$, using [lem-coef-marked-point-cartesian-model], gives a weak equivalence $W_M^\\simeq\\to W_P^\\simeq$: the markings on $\\mathcal M$ are equivalences, which every functor preserves, and those on $P$ are degenerate. Repeat the same test with the quasicategory $\\operatorname{Arr}(Z)$; currying identifies the resulting map with $\\operatorname{Arr}(W_M)^\\simeq\\to\\operatorname{Arr}(W_P)^\\simeq$. These maps commute strictly with joint endpoint evaluation to $W_M^\\simeq\\times W_M^\\simeq$ and $W_P^\\simeq\\times W_P^\\simeq$. Both endpoint maps are Kan fibrations: they are the sharp mapping-object restriction along $(\\partial\\Delta^1)^\\flat\\hookrightarrow(\\Delta^1)^\\flat$ into $W_M^\\natural$ or $W_P^\\natural$, by [lem-coef-marked-anodyne-lifting-calculus]. Their strict fibers at $(F,G)$ are exactly $U_{W_M}(F,G)$ or $U_{W_P}(Fi_D,Gi_D)$; transformations with constant endpoints have equivalence components, so taking the core adds no restriction to these fibers. [lem-coef-kan-pullback-path-comparison] and [lem-coef-kan-homotopy-pullback-invariance] give weak equivalences of these fibers. By [lem-coef-infinity-pinch-comparison], restriction is therefore fully faithful on the right-pinched mapping spaces as well. The first core weak equivalence gives essential surjectivity, so [lem-coef-infinity-full-essential-image] gives an equivalence $W_M\\to W_P$. The quasicategory and pointwise equivalence facts here are [lem-cbc-enhanced-functor-cone-calculus]. In particular $i_D$ is a categorical equivalence by [lem-coef-joyal-functor-equivalence-test]. Finally a map $P\\times\\Delta^k\\to Z$ is exactly a map from $\\mathcal D\\times\\Delta^k$, a map from $\\mathcal C\\times\\Delta^1\\times\\Delta^k$, and equality on $\\mathcal C\\times\\{1\\}\\times\\Delta^k$. This is the claimed coherent transformation description in every parameter degree.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-cbc-cartesian-mapping-simplex-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2; HTT Definition 3.2.2.6 and Proposition 3.2.2.7(2) for the cylinder comparison"
+   }
+  },
+  {
+   "text": "The equivalence of Step 5 also holds for functors over $S$ with target $p:\\mathcal V^\\otimes\\to S$. Let $s_P:P\\to S$ and $s_M:\\mathcal M\\to S$ be the structure maps, with $s_P=s_Mi_D$. Applying [lem-coef-joyal-functor-equivalence-test] to $i_D$ with target $S$ gives a coherent equivalence $\\operatorname{Fun}(\\mathcal M,S)\\to\\operatorname{Fun}(P,S)$. Every equivalence edge in either base functor category is an identity: its vertex components are identities since $S$ is an ordinary nerve with no nonidentity isomorphisms; the naturality squares force equality on edges, and a simplex in an ordinary nerve is uniquely determined by its successive edges. The pointwise equivalence test and induced mapping-space equivalences used here are [lem-cbc-enhanced-functor-cone-calculus]. Given $h:P\\to\\mathcal V^\\otimes$ over $s_P$, Step 5 supplies $K:\\mathcal M\\to\\mathcal V^\\otimes$ and an equivalence $Ki_D\\simeq h$. Its base is an equivalence $(pK)i_D\\simeq s_P$. Full faithfulness of base restriction lifts it up to homotopy to an equivalence $pK\\simeq s_M$. Since base equivalences are identities, $pK=s_M$ exactly, and the original equivalence $Ki_D\\simeq h$ is over $s_P$. This proves essential surjectivity on strict fibers. For full faithfulness, $p$ is an inner fibration lifting the only equivalences of $S$, so it is an isofibration. [lem-coef-infinity-isofibration-exponentiation] makes both functor projections to their base functor categories isofibrations, and their fixed-endpoint arrow-space maps Kan fibrations. By [lem-coef-infinity-pinch-comparison] and [lem-coef-kan-pullback-path-comparison], the strict relative mapping spaces therefore compute the homotopy fibers over the identity base transformations. Step 5 gives equivalences on total mapping spaces and the base restriction gives equivalences on base mapping spaces. [lem-coef-kan-homotopy-pullback-invariance] now gives equivalences on the relative mapping spaces. Full faithfulness and essential surjectivity yield the relative coherent equivalence by [lem-coef-infinity-full-essential-image].",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2, comparison over the operadic base; agent verification of the strict-fiber convention"
+   }
+  },
+  {
+   "text": "Restrict Step 6 to the full subcategories on inert-preserving functors. All the fiberwise inert edges of $\\mathcal M$ are in one of the two endpoint fibers. Therefore a functor $H:\\mathcal M\\to\\mathcal V^\\otimes$ belongs to $\\mathcal E_{\\mathcal M}(\\mathcal V)$ if and only if its restrictions $X,F$ are algebras. Under the degreewise description of maps from $P$ in Step 5, its transition is a transformation over $S$ from $X$ to $Fu$, hence a morphism $\\eta:X\\to u^*F$ in the full algebra functor category $\\mathcal A$. The inert-preservation condition is invariant under equivalence of diagrams: conjugating an edge by equivalences replaces the cocartesian mapping-space test square of Step 2 by an equivalent square. Hence the relative equivalence of Step 6 restricts to these full subcategories in both directions. This proves exactly the displayed simplicial pullback description. Both endpoint restrictions are the literal restrictions of the same maps on products with $\\Delta^k$, so the comparison commutes with them. The pullback is a quasicategory: $\\operatorname{Arr}(\\mathcal A)\\to\\mathcal A\\times\\mathcal A$ is an isofibration by the exponential corner map for $\\partial\\Delta^1\\subseteq\\Delta^1$, and its base pullback along $(1,u^*):\\mathcal A\\times\\mathcal B\\to\\mathcal A\\times\\mathcal A$ fills inner horns. Full subcategories are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. No condition on colimits or on $\\eta$ has entered this restriction.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2; algebra-category comparison, independent of the free-algebra property"
+   }
+  },
+  {
+   "text": "Compute the mapping spaces of that pullback. Fixed-endpoint arrow spaces $U$ commute with degreewise pullbacks, so its $U$ mapping space is the strict pullback of $U_{\\mathcal A}(X,Y)\\times U_{\\mathcal B}(F,B)$ and $U_{\\operatorname{Arr}(\\mathcal A)}(\\eta,\\theta)$ over $U_{\\mathcal A}(X,Y)\\times U_{\\mathcal A}(u^*F,u^*B)$. The second map is a Kan fibration by [lem-coef-infinity-isofibration-exponentiation] applied to the joint endpoint isofibration from Step 7. Thus [lem-coef-kan-pullback-path-comparison] replaces this strict pullback by its homotopy pullback. Use the natural pinch equivalences and [lem-coef-infinity-arrow-morphism-square] with $d_0=X$, $d_1=u^*F$, $e_0=Y$, $e_1=u^*B$, $u=\\eta$, $v=\\theta$. Its compatibility with the joint endpoint projection says that the data are precisely $a:X\\to Y$, $b:F\\to B$, and a path from $\\theta a$ to $(u^*b)\\eta$ in $\\operatorname{Map}_{\\mathcal A}(X,u^*B)$, with all higher simplices. This is the path-space homotopy pullback displayed in the item. The natural pinch equivalences and homotopy-pullback invariance justify the replacements. The equivalence from Step 7 induces equivalences on all mapping spaces by [lem-cbc-enhanced-functor-cone-calculus], so the same formula holds for $\\mathcal E_{\\mathcal M}(\\mathcal V)$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Coherent mapping-space calculation; Kerodon Theorem 8.3.7.1 (06BZ) via the existing arrow-morphism-square statement"
+   }
+  },
+  {
+   "text": "Finally track the cocones. The arrow in $\\mathcal M$ corresponding to an active $\\alpha:uc\\to d$ in $\\mathcal D$ is the composite $c\\xrightarrow{e_c}uc\\xrightarrow{\\alpha}d$. Applying $H$ gives $X(c)\\xrightarrow{\\eta_c}F(uc)\\xrightarrow{F(\\alpha)}F(d)$. On an arbitrary simplex of the active slice the same assertion is restriction of the single functor $H$ to its evaluation prism, so the composition triangles and all higher compatibilities coincide. This proves that the slice identification respects the induced cocones as well as the source projections. Every operation in Steps 5-8 is restriction, evaluation, or composition of functor simplices; these operations commute with substitution of parameter simplices. The arrow-square and pinch comparisons are natural by their cited statements. The identifications are therefore natural in all algebra and morphism parameters, as claimed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.1 and Remark A.4.2, explicit induced active cocone and parameter naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-operadic-correspondence",
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-cocartesian-straightening",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-space-valued-straightening",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-cbc-cartesian-mapping-simplex-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-joyal-functor-equivalence-test",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-arrow-morphism-square",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-operadic-algebra-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Remark A.4.2 and Definitions A.3.1-A.3.3; explicit relative-nerve, family-Segal and comma mapping-space arguments, using HTT 3.2.2 and 3.2.5 and Kerodon 06BZ through named nodes. Sources read online, archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -92,10 +263,45 @@
    "results": "{\"t\": \"2026-10-16T20:32:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; displayed types are ordinary category constructions, strict Segal simplicial sets, or ordinary simplicial horn/relative-morphism constructions. None states an infinity-operadic family, operadic Kan-extension prism theorem, or operadic collage comparison. The grep operad hits are bibliography; its other hits state that Kan complexes are quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Grothendieck construction of a functor between infinity categories is its mapping cylinder and functors out classify coherent natural transformations",
+   "results": "{\"t\": \"2026-10-16T21:23:06Z\", \"tool\": \"leanfinder\", \"query\": \"The Grothendieck construction of a functor between infinity categories is its mapping cylinder and functors out classify coherent natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.map\", \"CategoryTheory.Grothendieck.preInv\", \"CategoryTheory.Grothendieck.ιCompFunctorFrom\", \"CategoryTheory.Pseudofunctor.Grothendieck.map\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.ι\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.map\", \"CategoryTheory.Grothendieck.ιNatTrans\", \"CategoryTheory.Grothendieck.mapWhiskerRightAsSmallFunctor\"], \"digest\": \"c47a19ecd113d7ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary Grothendieck categories, ordinary nerves and strict Segal nerves, Kan-Quillen fibrations, and model-category cylinder objects do not state the quasicategorical relative-nerve or mapping-simplex theorem. Source reads: Mathlib/CategoryTheory/Grothendieck.lean:65-100, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:30-95, AlgebraicTopology/Quasicategory/Nerve.lean, and AlgebraicTopology/ModelCategory/Cylinder.lean:40-70. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in a comma infinity category are homotopy pullbacks of mapping spaces of its endpoint categories",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in a comma infinity category are homotopy pullbacks of mapping spaces of its endpoint categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"HomotopicalAlgebra.FibrantObject.homMk\", \"CategoryTheory.PreOneHypercover.exists_nonempty_homotopy\", \"HomotopicalAlgebra.PathObject.trans\"], \"digest\": \"0bc60bcea0a0f3b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary Grothendieck categories, ordinary nerves and strict Segal nerves, Kan-Quillen fibrations, and model-category cylinder objects do not state the quasicategorical relative-nerve or mapping-simplex theorem. Source reads: Mathlib/CategoryTheory/Grothendieck.lean:65-100, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:30-95, AlgebraicTopology/Quasicategory/Nerve.lean, and AlgebraicTopology/ModelCategory/Cylinder.lean:40-70. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebras on the mapping cylinder of an infinity operad map form the coherent comma infinity category",
+   "results": "{\"t\": \"2026-10-16T21:23:06Z\", \"tool\": \"leansearch\", \"query\": \"Algebras on the mapping cylinder of an infinity operad map form the coherent comma infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.noConfusionType\", \"CategoryTheory.Monad.Algebra.ctorIdx\", \"HomotopicalAlgebra.Cylinder\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₀\", \"CategoryTheory.algebraToUnder_obj\", \"HomotopicalAlgebra.Cylinder.trans_π\", \"CategoryTheory.Monad.Algebra\"], \"digest\": \"c44ff221a158b319\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary Grothendieck categories, ordinary nerves and strict Segal nerves, Kan-Quillen fibrations, and model-category cylinder objects do not state the quasicategorical relative-nerve or mapping-simplex theorem. Source reads: Mathlib/CategoryTheory/Grothendieck.lean:65-100, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:30-95, AlgebraicTopology/Quasicategory/Nerve.lean, and AlgebraicTopology/ModelCategory/Cylinder.lean:40-70. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-16T21:23:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary Grothendieck categories, ordinary nerves and strict Segal nerves, Kan-Quillen fibrations, and model-category cylinder objects do not state the quasicategorical relative-nerve or mapping-simplex theorem. Source reads: Mathlib/CategoryTheory/Grothendieck.lean:65-100, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:30-95, AlgebraicTopology/Quasicategory/Nerve.lean, and AlgebraicTopology/ModelCategory/Cylinder.lean:40-70. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeNerve|[Rr]elative.[Nn]erve|[Mm]apping[Ss]implex|[Mm]apping.[Ss]implex",
+   "results": "{\"t\": \"2026-10-16T21:27:28Z\", \"tool\": \"grep\", \"query\": \"relativeNerve|[Rr]elative.[Nn]erve|[Mm]apping[Ss]implex|[Mm]apping.[Ss]implex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures. Ordinary Grothendieck categories, ordinary nerves and strict Segal nerves, Kan-Quillen fibrations, and model-category cylinder objects do not state the quasicategorical relative-nerve or mapping-simplex theorem. Source reads: Mathlib/CategoryTheory/Grothendieck.lean:65-100, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:30-95, AlgebraicTopology/Quasicategory/Nerve.lean, and AlgebraicTopology/ModelCategory/Cylinder.lean:40-70. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-free-cocone-characterization",
@@ -113,5 +319,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-collage-comparison",
+  "worker": "stage1",
+  "summary": "Nine-step proof with statement unchanged and no new nodes after second reading. The interval relative-nerve fibration is proved by a direct mixed inner-horn filler. The coherent Segal check cites the existing constant-source test and pointwise cocartesian theorem. The existing marked mapping-simplex comparison, with only degenerate base edges marked, gives an absolute marked equivalence; tests against Z and Arr(Z), followed by mapping-fiber comparison, give the full functor-category equivalence. The strict over-base proof uses the existing Joyal functor-category test and the absence of nonidentity base equivalences. Active slices, algebra conditions, comma mapping spaces and naturality are explicit. No Mathlib leaf or project attachment.",
+  "blueprint": "The historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, needs coherent coefficient adjunction diagrams before R lim. Through the recorded free-algebra/rectification ancestry, this item supplies only the cylinder comparison in Remark A.4.2 used by lem-coef-operadic-free-cocone-characterization. The current main-20261015 proof still contains that derived coefficient-adjunction calculation. This is below the unit route; no chapter, unit, target or coefficient category has changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-strict-presentation-transport-representation",
+    "why": "Its explicit relative nerve, endpoint fibers, cocartesian transport and map from the strict mapping simplex supply a general quasicategory model for the interval. No statement in this coefficient unit provides that construction."
+   },
+   {
+    "node": "def-cbc-enhanced-cartesian-fibration",
+    "why": "Only the explicit strict Grothendieck/mapping-simplex construction is used as a definition to identify the simplicial pushout."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only general closure of full functor subcategories and componentwise equivalence detection are used, not a geometric compactification argument."
+   },
+   {
+    "node": "lem-cbc-cartesian-mapping-simplex-comparison",
+    "why": "Only its general mapping-simplex comparison with n=1, full base simplex, and degenerate base edges marked is used. This yields an absolute marked equivalence with equivalence-only target marking; the full unmarked functor comparison is proved in Step 5. No geometric route of the other unit is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-strict-presentation-transport-representation",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-cartesian-mapping-simplex-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-daece133a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-daece133a (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and I read all nine steps, but two small faults needed repair; the corrected item is in fixes/dag/nodes/sec-six-functors/lem-coef-operadic-collage-comparison.json. The delivery is the item alone: the report's file list is stale and still names two new nodes, which the second reading removed and which are absent from the snapshot. Statement unchanged. No cycle: none of the 517 transitive dependencies reaches the item. proof_deps equals the union of step uses. The blueprint ancestry is kept. Sources: Gepner–Haugseng A.3.1–A.3.3 and A.4.1, plus the cylinder Remark A.4.2; they are not in literature/, are listed as WANTED, and proof_origin is agent. Checks by step: (1) the relative nerve over [1] is pairs (a,b) with b|_Z = u a; the initial block Z lies in the d_n face, which is in the horn since i<n, so the target horn fills over S; the base has only identity equivalences. (2) Mapping spaces into the target fibre are strict; cocartesian e_c^* with point base spaces is inverted by r; the hypotheses on u_[0] and the zero fibres are used here. (3) All endpoint cases checked; the empty reverse case needs a nonempty incidence shape, which holds even at [0]. (4) The active subcategories are quasicategories, the slices compare fibrewise by r, and straightening gives the equivalence. (5) P = G_[1](D) checked degreewise; mapping-simplex comparison with n=1 and degenerate marking gives P^flat to M^natural; tests against Z and Arr(Z), Kan fibre comparison, full-essential-image and the Joyal test give a categorical equivalence. (6) Base functor categories over Delta-op have only identity equivalences. (7) The full subcategory restriction gives exactly the comma pullback with eta: X to u^*F. (8) The arrow-square orientation runs from theta a to (u^*b) eta. (9) The cocone arrow is F(alpha) eta_c. Small cases checked: u = id, empty operads (C empty forces D empty), r = 0, terminal V. Fix 1 (C1/C3, Step 3): the same-endpoint case assumed the relative-cone form of the Segal condition, but operad axiom (iii) of lem-coef-operadic-algebra-presentability is a mapping-space limit over I_n and no node bridged the two. Added the bridge (I_n is one-dimensional, so Fun(K,-) is a pullback along isofibrations and its mapping spaces are the homotopy limit; discrete base) and cited presentability, isofibration-exponentiation, kan-pullback-path-comparison and pinch-comparison; same unit, no cycle. Fix 2 (C1, Step 8): the transfer along the Step 7 equivalence needs mapping-space invariance from lem-cbc-enhanced-functor-cone-calculus; added to the text and uses. Accepted tool_uses, generic quasicategory tools (the unit does not cite sk-prop-sf-cbc): lem-cbc-strict-presentation-transport-representation, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-cartesian-mapping-simplex-comparison, and def-cbc-enhanced-cartesian-fibration (a definition, harmless).; 1 file(s) fixed by the reviewer"
  }
 }

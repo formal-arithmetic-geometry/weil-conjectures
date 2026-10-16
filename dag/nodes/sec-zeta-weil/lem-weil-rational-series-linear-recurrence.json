@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "prop-weil-rationality-criterion",
-   "place": "step 4 of its split (source: Ch. II, §27, proof of Lemma 27.9, p. 157: Bourbaki, Algèbre IV.5, Exercise 3(a), direction '$f\\in k(t)$ implies a recurrence', stated without proof)",
+   "place": "Proof, final paragraph ('Finally suppose (1) holds. Write $Q=1+b_1T+\\cdots+b_dT^d$, first taking $d\\geq1$. The coefficient identity $QC=P$, in degrees $N>\\deg P$ and $N\\geq d$, gives (3) with $a_{d-j}=b_j$ and sufficiently large $m$. If $Q=1$, ... take $d=1,a_0=0$'), identical in the current main-20261015 prop-weil-rationality-criterion.proof.md and the archived master prop-weil-rationality-criterion.md; this item is that direction (1) implies (3) with the precise vanishing threshold m.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Linear recurrence from a rational power series",
@@ -24,9 +24,67 @@
   "def-weil-polynomial-coefficient",
   "def-weil-eventual-linear-recurrence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $b_0=Q(0)=1$, the polynomial $Q$ is nonzero. By the definition of polynomial degree in [def-weil-polynomial-ring] and [def-weil-polynomial-coefficient], $d=\\max(\\deg Q,1)$ is an integer with $d\\geq1$ and $b_j=0$ whenever $j>d$: otherwise $j$ would exceed the largest index with a nonzero coefficient.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-coefficient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "Proof, final paragraph, direction (1) implies (3); elementary coefficient calculation supplied by the worker (Milne LEC, p. 157, quotes Bourbaki IV.5 Exercise 3(a) without proof)"
+   }
+  },
+  {
+   "text": "Fix an arbitrary integer $n\\geq m$ and put $N=n+d$. Then $N\\geq d$ and $N\\geq m+d$, so $[T^N]P=0$ by the given hypothesis. The coefficient-preserving polynomial inclusion [def-weil-polynomial-as-power-series] and the Cauchy product formula in [def-weil-formal-power-series], applied to $QC=P$, give $0=[T^N]P=\\sum_{j=0}^{N}b_jc_{N-j}$. The terms with $j>d$ vanish by Step 1. Since $b_0=1$, this is $c_{n+d}+\\sum_{j=1}^{d}b_jc_{n+d-j}=0$.",
+   "uses": [
+    "def-weil-polynomial-as-power-series",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "Proof, final paragraph, direction (1) implies (3); elementary coefficient calculation supplied by the worker (Milne LEC, p. 157, quotes Bourbaki IV.5 Exercise 3(a) without proof)"
+   }
+  },
+  {
+   "text": "The substitution $i=d-j$ is a bijection from $1\\leq j\\leq d$ to $0\\leq i\\leq d-1$. Its summand is $b_jc_{n+d-j}=b_{d-i}c_{n+i}=a_ic_{n+i}$, by the given definition of $a_i$. Reordering the finite sum in Step 2 therefore gives $c_{n+d}+\\sum_{i=0}^{d-1}a_ic_{n+i}=0$. As $n\\geq m$ was arbitrary and $d\\geq1$, this is precisely the recurrence of [def-weil-eventual-linear-recurrence].",
+   "uses": [
+    "def-weil-eventual-linear-recurrence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "Proof, final paragraph, direction (1) implies (3); elementary coefficient calculation supplied by the worker (Milne LEC, p. 157, quotes Bourbaki IV.5 Exercise 3(a) without proof)"
+   }
+  },
+  {
+   "text": "The suggested index choices and the constant-denominator case require no exclusions. If $P\\ne0$, the definition of degree [def-weil-polynomial-coefficient] makes $[T^N]P=0$ for $N>\\deg P$, so $m=\\deg P+1$ has the required vanishing; if $P=0$, every coefficient is zero and $m=0$ works. If $Q=1$, its coefficients in [def-weil-polynomial-ring] are $b_0=1$ and $b_j=0$ for $j\\geq1$; thus $d=1$, $a_0=b_1=0$, and Step 3 reads $c_{n+1}=0$ for every $n\\geq m$, including $P=0,m=0$.",
+   "uses": [
+    "def-weil-polynomial-coefficient",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "Proof, final paragraph, direction (1) implies (3); elementary coefficient calculation supplied by the worker (Milne LEC, p. 157, quotes Bourbaki IV.5 Exercise 3(a) without proof)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-formal-power-series",
+  "def-weil-eventual-linear-recurrence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+  "place": "Proof, final paragraph: coefficient comparison of QC=P and reindexing a_{d-j}=b_j for (1) implies (3), including the case Q=1 (same text in the archived master prop-weil-rationality-criterion.md). Milne LEC p. 157 quotes Bourbaki, Algèbre IV.5 Exercise 3(a) without proof; the blueprint is agent-written, and the four coefficient steps are written out by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +99,80 @@
    "results": "Mathlib/Algebra/LinearRecurrence.lean: structure LinearRecurrence (order, coeffs : Fin order → R) (:53), IsSolution u := ∀ n, u (n + order) = ∑ i, coeffs i * u (n + i) (:70), mkSol, solSpace (:117), solSpace_rank : Module.rank R E.solSpace = E.order (:198), charPoly (:209), geom_sol_iff_root_charPoly (:229); used elsewhere only in NumberTheory/Real/GoldenRatio.lean (fibRec). The file imports no PowerSeries and mentions none.",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series times a polynomial with constant coefficient one equals a polynomial, so its coefficients satisfy an eventual linear recurrence",
+   "results": "8 hits: PowerSeries.coeff_X_mul_largeSchroderSeriesSeries_sq, coeff_X_mul_largeSchroderSeries, Polynomial.existsUnique_hilbertPoly, coeff_mul_invOneSubPow_eq_hilbertPoly_eval, PowerSeries.coeff_inv_aux, largeSchroderSeries_eq_one_add_X_mul_largeSchroderSeries_add_X_mul_largeSchroderSeries_sq, coeff_largeSchroderSeries, coeff_mul_prod_one_sub_of_lt_order; special series and convolution ingredients only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.coeff_mul, Polynomial.coeff",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "recurr|rational|coeff_mul",
+   "results": "RingTheory/PowerSeries: 25 hits, principally PowerSeries.coeff_mul (Basic.lean:249), coeff_mul_C (:257), truncation and order coefficient lemmas; none states a recurrence from a polynomial fraction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficients of a rational formal power series satisfy a linear recurrence eventually",
+   "results": "8 hits: LinearRecurrence.IsSolution, LinearRecurrence.coeffs, instInhabitedLinearRecurrence, Complex.hasFPowerSeriesOnBall_ofScalars_mul_add_zero, PowerSeries.coeff, LinearRecurrence, PowerSeries.coeff_def, LinearRecurrence.mkSol; recurrence definitions and a special analytic function only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient of a product of a polynomial and a power series is a finite convolution sum over the coefficients of the polynomial",
+   "results": "8 hits: PowerSeries.coeff_mul_X_pow, coeff_mul_X_pow', coeff_prod, coeff_X_pow_mul', coeff_X_pow_mul, coeff_mul (Mathlib/RingTheory/PowerSeries/Basic), MvPowerSeries.coeff_prod, Polynomial.coeff_mul; convolution formulas only.",
+   "date": "2026-10-17",
+   "verdict": "no match: ingredients, not the rational-series recurrence statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.coeff_mul",
+   "results": "PowerSeries.coeff_mul, Mathlib.RingTheory.PowerSeries.Basic: coefficient of a product is the antidiagonal convolution sum.",
+   "date": "2026-10-17",
+   "verdict": "no match: the Cauchy-product ingredient is already stated by def-weil-formal-power-series"
+  },
+  {
+   "tool": "grep",
+   "query": "LinearRecurrence|IsSolution|rational|Rational",
+   "results": "RingTheory/PowerSeries: 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem coeff_mul|theorem coeff_coe|lemma coeff_coe",
+   "results": "RingTheory/PowerSeries/Basic.lean: 5 hits, at lines 92 (coeff_coeToMvPowerSeries), 249 (coeff_mul), 257 (coeff_mul_C), 351 (coeff_mul_X_pow), 403 (coeff_mul_X_pow'). The wrapper parsed the file-specific grep output with the line number in its file field; these are the displayed source lines.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial denominator times generating function equals numerator implies coefficient convolution is zero above numerator degree",
+   "results": "8 hits: Polynomial.coeff_eq_zero_of_degree_lt, coeff_eq_zero_of_natDegree_lt, ite_le_natDegree_coeff, coeff_natDegree_eq_zero_of_degree_lt, X_pow_dvd_iff, coeff_natDegree_succ_eq_zero, degree_le_iff_coeff_zero, degree_lt_iff_coeff_zero; polynomial-degree ingredients only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coeff_eq_zero_of_natDegree_lt|theorem coeff_mul \\(",
+   "results": "Algebra/Polynomial/Degree/Operations.lean: 5 hits, theorem coeff_eq_zero_of_natDegree_lt at line 85 and uses at 99,100,108,115. The wrapper parsed file-specific output with line numbers in its file field.",
+   "date": "2026-10-17",
+   "verdict": "no match: degree/coefficient ingredient only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +192,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-criterion"
+ "unit": "sk-prop-criterion",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-rational-series-linear-recurrence",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and its arbitrary vanishing threshold m; supplied four elementary steps: bound the denominator support, compare coefficients of QC=P, reindex j=d-i, and check the proposed index choices and Q=1. Existing definition leaves state every ingredient, so no new nodes are needed. Read Milne LEC p. 157 and the archived/current blueprint. The project theorem PowerSeries.sum_coeff_mul_coeff_eq_zero has the stronger explicit premise A.natDegree<n and does not literally state this item with its prescribed order, coefficients and arbitrary vanishing threshold; no exact attachment found. Repeated semantic, Loogle and grep searches found ingredients only.",
+  "blueprint": "Realizes the final paragraph, direction (1) implies (3) (including the case Q=1), of the proof of prop-weil-rationality-criterion in main-20261015 (prop-weil-rationality-criterion.proof.md; same text as the archived master); at unit level it carries the clause '(1)=>(3): clear the denominator Q=1+a_{d-1}T+...+a_0T^d; the coefficients of QC=P vanish beyond deg P' of sk-prop-criterion.proof.md, without changing the shift-span route of the current unit statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-c48819991",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-c48819991 (reviewer sub-agent of L); spot-checked: The mathematics is correct. I read the item, its four steps and the six cited definition statements in full: def-weil-field, -formal-power-series, -polynomial-ring, -polynomial-as-power-series, -polynomial-coefficient and -eventual-linear-recurrence. Step 1: b_0=1 makes Q nonzero, so b_j=0 for j>d by the definition of degree. Step 2: N=n+d>=m+d gives [T^N]P=0, the Cauchy product truncates at d, and b_0=1 isolates c_{n+d}. Step 3: the reindexing i=d-j gives a_i=b_{d-i}, exactly the recurrence of def-weil-eventual-linear-recurrence. Step 4: the m=deg P+1, P=0 and Q=1 (a_0=0) cases are correct. Sources checked: Milne LEC p.157 (proof of Lemma 27.9, which quotes Bourbaki IV.5 Ex.3(a) without proof) and the final paragraph of the blueprint proof, which also matches the unit's (1)=>(3) step Q=1+a_{d-1}T+...+a_0T^d. My own script passed 9000 random cases over Q, F2, F3 and F5, including Q=1, P=0, Q with zero inner coefficients, and the least admissible m. There are no new nodes. Neighbours checked against the item: lem-weil-linear-recurrence-denominator is the converse; finite-shift-span and the two shift-span lemmas are different implications; none is a duplicate. The parent's step 4 cites the item with matching d, m and a_i. slopmaster2 PowerSeries.sum_coeff_mul_coeff_eq_zero (ShiftSpan.lean ~l.180) needs the stronger premise A.natDegree<n and does not state the item, so it is not an exact attachment. No tool_uses, no cycle. Fix (B9 metadata): blueprint.from.place, proof_origin and split_report.blueprint said that main-20261015 has no proof of prop-weil-rationality-criterion. It does: main-20261015/.../prop-weil-rationality-criterion.proof.md has the same final paragraph. I re-pointed proof_origin and the step sources to that file and rewrote from.place and split_report.blueprint. The statement, steps, uses and deps are unchanged. Corrected file: fixes/dag/nodes/sec-zeta-weil/lem-weil-rational-series-linear-recurrence.json.; 1 file(s) fixed by the reviewer"
+ }
 }
