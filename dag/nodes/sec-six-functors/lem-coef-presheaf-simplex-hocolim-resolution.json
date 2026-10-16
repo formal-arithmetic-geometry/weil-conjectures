@@ -1,0 +1,71 @@
+{
+ "id": "lem-coef-presheaf-simplex-hocolim-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient derived mapping-complex adjunction: canonical small model-category presentation input. The intermediate representable-simplex resolution used in Dugger Combinatorial Model Categories Proposition 4.2, via Universal Homotopy Theories Proposition 2.9.",
+   "via": [
+    "lem-coef-cosimplicial-presheaf-counit",
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical representable-simplex homotopy-colimit resolution of a simplicial presheaf",
+ "statement": "Use the universes of [def-coef-complete-algebroid], simplicial sets and the simplex category of [def-weil-pbc-simplicial-set], the projective model structure of [lem-coef-simplicial-presheaf-projective-model], and homotopy colimits of [lem-coef-hocolim-reindexing-zigzags]. Write $\\Delta^n_r=\\operatorname{Hom}_\\Delta([r],[n])$ for the standard simplex, with operators given by precomposition; for $\\alpha:[n]\\to[m]$, $\\Delta^\\alpha:\\Delta^n\\to\\Delta^m$ is postcomposition by $\\alpha$. Let $D$ be a small ordinary category and $F:D^{\\mathrm{op}}\\to\\mathsf{sSet}$ a simplicial presheaf. Put $h_d(e)=\\operatorname{Hom}_D(e,d)$, regarded as a discrete simplicial set. Define $E_F$ to have objects $(d,[n],\\sigma)$, with $\\sigma\\in F(d)_n$. An arrow $(d,[n],\\sigma)\\to(e,[m],\\tau)$ is a pair $a:d\\to e$, $\\alpha:[n]\\to[m]$ such that $F(a)_n(F(e)(\\alpha)(\\tau))=\\sigma$. Let $B_F:E_F\\to\\mathsf U(D)$ take this object to $h_d\\times\\Delta^n$ and this arrow to $h_a\\times\\Delta^\\alpha$. Its evaluation cocone to $F$ has component at $(d,[n],\\sigma)$ corresponding by Yoneda to $\\sigma$. For every projectively cofibrant replacement $P B_F\\to B_F$ in the diagram category $\\mathsf U(D)^{E_F}$, the colimit $H_F=\\operatorname{colim}_{E_F}P B_F$ is projectively cofibrant in $\\mathsf U(D)$ and the induced evaluation augmentation $H_F\\to F$ is an objectwise weak homotopy equivalence. No fibrancy of $F$ or nonemptiness of $D$ is assumed.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+  "place": "Proposition 2.9, printed p. 152, with its proof in Section 9.1, printed pp. 170-171. No Stacks tag states this homotopical presheaf resolution."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-hocolim-reindexing-zigzags"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every simplicial presheaf is the homotopy colimit of representable simplices, giving a projective cofibrant approximation",
+   "results": "{\"t\": \"2026-10-16T20:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every simplicial presheaf is the homotopy colimit of representable simplices, giving a projective cofibrant approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.hasColimits\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.sk\"], \"digest\": \"a3f63207d9883df6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coend\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-16T20:29:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"coend\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?colimit|[Cc]ofibrant.*[Pp]resheaf|[Pp]resheaf.*[Cc]ofibrant|[Yy]oneda.*[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-16T20:29:51Z\", \"tool\": \"grep\", \"query\": \"homotopy.?colimit|[Cc]ofibrant.*[Pp]resheaf|[Pp]resheaf.*[Cc]ofibrant|[Yy]oneda.*[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read NerveAdjunction.lean:393-419 (ordinary nerve/homotopy-category adjunction) and SingularSet.lean:88-96 (ordinary geometric-realization left Kan extension). Neither asserts a projective cofibrant homotopy-colimit resolution of simplicial presheaves. The other hits concern ordinary colimits, skeletal truncation, or abelian projective resolutions. Loogle and grep returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cosimplicial-presheaf-counit",
+  "date": "2026-10-17",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
