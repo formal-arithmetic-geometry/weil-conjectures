@@ -30,9 +30,125 @@
   "lem-coef-relative-marked-anodyne-calculus",
   "lem-coef-marked-anodyne-lifting-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathsf M_S$ denote only the ordinary category of marked objects over $S$, without a model structure. Its small colimits are degreewise colimits with an edge marked when represented by a marked edge, and its limits have the coordinatewise marking. These constructions satisfy the universal properties directly. Every object is the filtered union of its finite simplicial subsets with the induced marking and base map. There is a small set of isomorphism representatives of these finite objects: their finite simplex data and the labels in the small set $S$ form a set. Maps from a finite object are specified by finitely many simplices, finitely many face relations and finitely many marking requirements. The elementwise description of filtered colimits shows that these data lift to a common stage and that equality is witnessed at a later stage. Thus each finite object is finitely presentable and $\\mathsf M_S$ is locally finitely presentable. The same proof at a point gives this for $\\mathsf M_*$; it includes empty objects. Define the small set $J_S$ as in the finite relative lifting-recognition statement; every domain and codomain is finite, including the quotient detector $A$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-coef-finite-relative-lifting-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1); explicit degreewise local finite presentability check"
+   }
+  },
+  {
+   "text": "Here is an actual functorial construction. Start with $U_0=U$. For each $n$, attach a copy of $B$ for every $j:A\\to B$ in $J_S$ and every marked map $a:A\\to U_n$ over $S$, by the pushout of $\\coprod_{(j,a)}A\\to\\coprod_{(j,a)}B$ along the maps $a$. Put $T_S(U)=\\operatorname{colim}_{n<\\omega}U_n$. A map $U\\to V$ sends the cell $(j,a)$ to the cell $(j,fa)$ at the next stage; iteration defines the functor and its natural inclusion $\\eta$. Finiteness of each domain implies that $\\operatorname{Hom}_{/S}(A,-)$ preserves filtered colimits by Step 1. Hence the two coproduct functors indexing the attaching pushout preserve filtered colimits, as does that pushout. Induction gives this for every $U\\mapsto U_n$. Interchanging the two colimits gives preservation for $T_S$. No choice of individual fillers is used. Every lifting problem from a finite domain into $T_S(U)$ factors through some $U_n$ and has its attached solution at $U_{n+1}$. Thus $T_S(U)\\to S^\\sharp$ has RLP against $J_S$. All the indexed coproducts and the countable union are small in the input universe.",
+   "uses": [
+    "lem-coef-finite-relative-lifting-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), explicit sequential form of the finite-domain small-object construction"
+   }
+  },
+  {
+   "text": "Apply finite relative lifting recognition to the RLP just obtained. It identifies $T_S(U)$ with $Q_U^\\natural$, where $Q_U\\to S$ is a cartesian fibration, and proves that its marking is the natural marking, not just a chosen collection of Cartesian lifts. This is where the constant-vertex detector is needed in addition to the three horn/composition types. No hypothesis on the base other than smallness has entered.",
+   "uses": [
+    "lem-coef-finite-relative-lifting-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), recognition of j_X and its marking"
+   }
+  },
+  {
+   "text": "Fix any cartesian test object $Z^\\natural\\to S$. Restriction on relative sharp maps for each generator of types (i), (ii), (iii) is a trivial Kan fibration by the relative marked-anodyne calculus. For a detector at $s$, both mapping objects identify degree by degree with the absolute sharp mapping objects into $(Z_s)^\\natural$: the parameter simplex also has constant base value. The fiber is a quasicategory, and its natural marking is the equivalence marking, by base change to a point and the relative lifting criterion. The detector restriction is an isomorphism by the marked-anodyne lifting-calculus statement. Mapping the attaching pushout into $Z^\\natural$ therefore gives a pullback of a product of trivial Kan fibrations. This is again a trivial Kan fibration: solve each boundary-lifting problem in every factor and then impose the pullback coordinate. The restriction from the sequential union to $U$ is the inverse limit of these restrictions and is a trivial Kan fibration as well: starting from a boundary-lifting problem over $U_0$, extend it successively over $U_1,U_2,\\ldots$, keeping the preceding choice at each stage; the compatible extensions give the required simplex in the inverse limit. The boundary-RLP characterization of trivial Kan fibrations makes this a weak homotopy equivalence. Hence every $\\eta_U$ lies in $W_S$.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), mapping tests for i_X; Lemma 3.1.3.6"
+   }
+  },
+  {
+   "text": "The mapping-test class $W_S$ contains isomorphisms and satisfies two-out-of-three, because restriction reverses composition and weak homotopy equivalences do so. For $f:U\\to V$, naturality gives $T_S(f)\\eta_U=\\eta_Vf$. By Step 4 and two-out-of-three, $f\\in W_S$ if and only if $T_S(f)\\in W_S$. The source and target of the latter map are naturally marked cartesian fibrations by Step 3. The assumed fiber criterion, applied exactly here, therefore gives\n$$f\\in W_S\\quad\\Longleftrightarrow\\quad (Q_U)_s\\to(Q_V)_s\\text{ is a quasicategory equivalence for every }s\\in S_0.$$\nThe criterion is an input; the model structure under construction is not used to prove it.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), use of Proposition 3.1.3.5 as the stated hypothesis"
+   }
+  },
+  {
+   "text": "Let $W_*$ be the absolute mapping-test class in the absolute marked-saturation statement. For a marked map $g:C^\\natural\\to D^\\natural$ of naturally marked quasicategories, $g\\in W_*$ exactly when $g$ has a functor inverse up to coherent natural equivalences. Indeed, the mapping test with target $C$ is surjective on $\\pi_0$, giving $r:D\\to C$ and a path $rg\\simeq1_C$. The test with target $D$ is injective on $\\pi_0$; since $(gr)g\\simeq g$, it gives $gr\\simeq1_D$. Relative sharp maps over a point are the Kan cores of the corresponding functor quasicategories, so these paths are precisely coherent natural equivalences; finite paths can be concatenated and reversed in that Kan complex. Conversely a functor inverse with these homotopies gives homotopy-inverse precomposition maps into every test target, hence weak homotopy equivalences. This is exactly the definition of a functor equivalence, and also covers empty quasicategories.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-saturation-perfect-equivalences",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5 over a point, (1) iff (2), written out"
+   }
+  },
+  {
+   "text": "Define an ordinary functor $F:\\mathsf M_S\\to\\mathsf M_*$ by\n$$F(U)=\\coprod_{s\\in S_0}(Q_U)_s^\\natural,$$\nwith the coproduct's induced marking. The displayed coproduct is itself a naturally marked quasicategory: every inner horn has connected vertices and so lies in one summand, where it has a filler; edges and their inverse witnesses likewise stay in a summand. A map of such coproducts that preserves the index is a functor equivalence if and only if each indexed map is. In one direction take the coproduct of the inverses and their homotopies. In the other, an inverse $r$ and its homotopy $gr\\simeq1$ force $r$ to preserve each label, since a homotopy edge cannot change a summand; its restrictions and the restricted second homotopy supply inverses in each summand. Steps 5 and 6 thus show $W_S=F^{-1}(W_*)$. Moreover $F$ preserves filtered colimits: $T_S$ does, taking the vertex fiber is a degreewise pullback over the fixed set $S_n$ and commutes with filtered colimits of sets, the induced markings obey the same rule, and the fixed small coproduct commutes with colimits. This argument includes $S=\\varnothing$, when $F$ is the constant empty object and there is only one marked object over $S$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), assembling the vertex tests; degreewise coproduct variant of the test functor"
+   }
+  },
+  {
+   "text": "The absolute marked point model is combinatorial, so the weak-equivalence accessibility theorem says that its mapping-test class $W_*$ is a replete accessible subcategory of $\\mathsf M_*^{[1]}$. Step 1 gives the locally presentable source and target categories required by accessible arrow inverse image, and Step 7 gives a filtered-colimit-preserving functor $F$ between them. That inverse-image theorem yields that $W_S=F^{-1}(W_*)$ is generated under $\\kappa$-filtered colimits in the arrow category by a fixed small set of its arrows for some infinite regular $\\kappa$ in the input universe. These are in particular filtered colimits. Separately the absolute marked-saturation statement says $W_*$ is closed under all filtered colimits. Since $F$ preserves them, the same holds for $W_S$. Combine this closure and small generation with the isomorphism and two-out-of-three assertions of Step 5. They are exactly the four defining clauses of perfectness. This uses only the absolute model structure, not a relative model structure over $S$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-model-weak-equivalences-accessible",
+    "lem-coef-accessible-arrow-inverse-image",
+    "lem-coef-marked-saturation-perfect-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.14, via Corollary A.2.6.7 and Definition A.2.6.12; Proposition 3.1.3.7(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-finite-relative-lifting-recognition",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-saturation-perfect-equivalences",
+  "lem-coef-model-weak-equivalences-accessible",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Online Proposition 3.1.3.7(1), printed pp.158-159; expanded sequential construction and coproduct fiber test; Appendix A.2.6.7, A.2.6.12-14. Not archived in literature/; WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +191,52 @@
    "results": "{\"t\": \"2026-10-16T20:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"Small object argument with finite domains preserves filtered colimits and accessible weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.MorphismProperty.smallObjectκ_isRegular\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.SmallObject.locallySmall\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.hasColimitsOfShape_discrete\"], \"digest\": \"60f02f392c8d66f4\"}",
    "date": "2026-10-16",
    "verdict": "No match: SmallObject/IsCardinalForSmallObjectArgument.lean:113 preservesColimit restates the domain smallness hypothesis along a cell chain, not preservation of filtered colimits by this saturation functor or perfectness of its mapping-test equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian equivalences of marked simplicial sets over any simplicial base are a perfect class and admit filtered-colimit-preserving finite saturation",
+   "results": "{\"t\": \"2026-10-16T20:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian equivalences of marked simplicial sets over any simplicial base are a perfect class and admit filtered-colimit-preserving finite saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instBalanced\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.QCat\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"c672a1001de8e3df\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-16T20:46:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence_inverse\", \"SSet.opEquivalence_counitIso\", \"SSet.opEquivalence_unitIso\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.equivalence\", \"SSet.Truncated.FundamentalGroupoid.equivalenceFreeGroupoid\", \"SSet.Truncated.instIsEquivalenceFundamentalGroupoidMapFundamentalGroupoidOfIsIsoOfNatNat\"], \"digest\": \"14f64800d0a906a4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
+  },
+  {
+   "tool": "grep",
+   "query": "CartesianEquivalence|marked.?saturation|perfect.{0,25}class",
+   "results": "{\"t\": \"2026-10-16T20:46:20Z\", \"tool\": \"grep\", \"query\": \"CartesianEquivalence|marked.?saturation|perfect.{0,25}class\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian fibrant replacement of marked simplicial sets over a base preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-16T20:46:21Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian fibrant replacement of marked simplicial sets over a base preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.Limits.PreservesFilteredColimitsOfSize.mk\"], \"digest\": \"c18ad4ad9fd39771\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial finite cell completion of marked simplicial sets over a base is finitary and detects weak equivalences on the vertex fibers",
+   "results": "{\"t\": \"2026-10-16T20:47:54Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial finite cell completion of marked simplicial sets over a base is finitary and detects weak equivalences on the vertex fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\"], \"digest\": \"1fb5e61cdecfe46a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
+  },
+  {
+   "tool": "grep",
+   "query": "marked|perfect",
+   "results": "{\"t\": \"2026-10-16T20:47:55Z\", \"tool\": \"grep\", \"query\": \"marked|perfect\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finite SSet presentability and unmarked Kan horn classes supply only ingredients; no relative marked saturation or perfectness theorem is stated. SSet.opEquivalence is the opposite involution."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-relative-cartesian-model",
@@ -86,5 +244,39 @@
   "group": "Q112"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-cartesian-equivalence-saturation",
+  "worker": "stage1",
+  "summary": "Constructed sequential relative saturation explicitly, checked constant-vertex detector mapping restrictions and natural markings, and deduced perfectness using the existing absolute class and accessible arrow inverse image. One new statement-only finite lifting-recognition node; no statement change and no relative model assumption.",
+  "blueprint": "Realizes the relative simplicial foundations of paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction), through the recorded marked-relative-cartesian-model ancestry; expands HTT 3.1.3.7(1).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Finite simplex data and relations factor through a filtered stage; a set-theoretic tool, not a replacement of the coefficient-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Taking a vertex fiber over fixed S commutes degreewise with filtered colimits; no coefficient-unit node supplies the finite-limit calculation."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Definitions of quasicategory, coherent equivalence, core and functor equivalence used for the absolute and coproduct tests."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-926967ed2",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-926967ed2 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-finite-relative-lifting-recognition and every cited statement in full. The item statement is unchanged and matches HTT 3.1.3.7(1), with the fiber criterion (3.1.3.5) as an explicit hypothesis. Its parent marked-relative-cartesian-model supplies that criterion in its steps 3-4. HTT is not in literature/ (WANTED), so I checked the HTT places from my own knowledge; remark 3.1.1.10 is unconfirmed. All 8 steps are correct. S1: marked objects over S are locally finitely presentable by the elementwise filtered-colimit leaf. S2: a functorial omega-stage attachment that preserves filtered colimits and has RLP against J_S. S3: (a)=>(b) of the new node. S4: generators (i)-(iii) restrict to trivial fibrations by the relative calculus. The detector, with constant base, is an absolute map into the fiber Z_s, whose induced marking is the equivalence marking (pullback clause plus the absolute criterion), so its restriction is an isomorphism. Then a pullback of a product of trivial fibrations and the limit of a tower. S5: two-out-of-three and naturality, elementary. S6: the two mapping tests give a functor inverse, with Map^sharp(C,D) = Fun(C,D) core. S7: a coproduct inverse cannot cross summands, empty summands handled; the fiber commutes with filtered colimits. S8: the point model is combinatorial, so its weak equivalences are accessible; inverse image under F, plus filtered closure from the absolute perfect node. The new node is true in both directions. (a)=>(b) uses (ii) as the horn criterion, the fiber marking via the absolute finite criterion, and comparison with a marked lift plus (iii). I tested it on S empty, a point, Delta^1 and empty fibers. Its form is self-contained, statement-only, searched and has blueprint ancestry. It is strictly smaller than the item and not a restatement. Duplicate check: lem-coef-finite-marked-fibrancy-criterion is its case S = point, which the report missed. The new node is a strict generalization, so both are needed. There is no other duplicate and no cycle (transitive check). Route stays in sk-prop-sf-biduality-general. The declared tool_uses (two Mathlib filtered-colimit leaves and def-cbc-enhanced-diagrams-cones) are not route statements, so they are not strictly needed; I accept them as harmless. Not a target node, so no base-change morphism or coefficient category check applies. No SGA. No fixes."
+ }
 }
