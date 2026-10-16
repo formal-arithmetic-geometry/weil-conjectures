@@ -3,56 +3,153 @@
  "blueprint": {
   "is": "lem-exc-proetale-closed-support",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pro-etale closed support before constructible restriction",
- "statement": "Let $T$ be Noetherian, let $i:Z\\hookrightarrow T$ be a\nclosed immersion, and\nlet $j$ be its open complement. For a finite ring $A$, the\ndirect image $i_*$ on\nthe pro-etale sites has a\nright adjoint on the ambient ordinary derived categories, given by\nthe right derived functor of\n$i^!_0$.\nNo constructibility is assumed of the\nvalues of this right adjoint; it exists on the whole ambient\ncategories.",
+ "statement": "Let $T$ be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]), let $i:Z\\hookrightarrow T$ be a closed immersion [def-weil-closed-immersion], and let $j:U\\hookrightarrow T$ be its open complement [def-weil-open-immersion]. Let $A$ be a finite commutative ring. Use the constant coefficient sheaves and small pro-etale sites with the size conventions of [def-weil-pbc-proetale-site], the categories of module sheaves [def-weil-sheaf-of-modules-category], and their ordinary unbounded derived categories [def-weil-abstract-derived-category]. The direct-image functor $i_*$ [def-weil-proetale-module-direct-image], applied termwise to complexes, has a right adjoint. This right adjoint is the total right derived functor $Ri^!_0$ of the sheaf functor $i^!_0N=i^*\\ker(N\\to j_*j^*N)$ [def-exc-proetale-sections-with-support], where $i^*,j^*$ are the module inverse images [def-weil-proetale-inverse-image]. No constructibility or boundedness is imposed on objects or on the values of $Ri^!_0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
   "place": "node lem-exc-proetale-closed-support, order 1859"
  },
  "stmt_deps": [
-  "def-weil-derived-direct-image",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-module-direct-image",
+  "def-exc-proetale-sections-with-support",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
-   "text": "Use the exact fully faithful closed direct image and its identification\nwith module sheaves supported on $Z$, now proved in\n[lem-exc-proetale-closed-exact], [lem-exc-proetale-closed-fully-faithful], [lem-exc-proetale-closed-essential-image].\nThese results concern all module sheaves. Their hypotheses\nhold here: in a Noetherian scheme every open subset is\nquasi-compact, and this remains true on each affine open, so\nthe complementary open immersion is quasi-compact.\nWrite $i^!=i^!_0$ for the sheaf functor of\n[def-exc-proetale-sections-with-support].\nThe kernel restricts to zero on $U$, hence lies in the image of\n$i_*$. Every map $i_*M\\to N$ has image in this kernel, because\n$j^*i_*M=0$. Full faithfulness of $i_*$ gives\n$\\operatorname{Hom}(i_*M,N)=\\operatorname{Hom}(M,i^!N)$.",
+   "text": "By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U\\cap V$ is quasi-compact for each affine open $V\\subset T$, so $j$ is quasi-compact. The canonical structure maps $i^{-1}A_T\\to A_Z$ and $j^{-1}A_T\\to A_U$ are isomorphisms by [prop-weil-pbc-proetale-constant-exact], whose coefficient convention explicitly supplies these maps; hence the ringed coefficient hypotheses of the essential-image theorem hold. Thus [lem-exc-proetale-closed-exact], [lem-exc-proetale-closed-fully-faithful], and [lem-exc-proetale-closed-essential-image] give exactness and full faithfulness of $i_*$, and identify its essential image with the sheaves killed by $j^*$. We make explicit the open-restriction calculation used below. Under the localized-site identification of [lem-weil-proetale-weakly-etale-localization], $j^*$ is restriction: in the inverse-image formula of [def-weil-proetale-inverse-image], for $W\\to U$ the indexing category has initial object $W\\to T$ with the identity $W\\cong W\\times_TU$, so its opposite has a terminal object and the presheaf inverse image is $N(W)$; this is already a sheaf, with the restricted constant-ring action. By [def-weil-proetale-module-direct-image], $(j^*j_*G)(W)=G(W\\times_TU)=G(W)$, and the counit is this identity. Consequently $j^*$ of the unit $N\\to j_*j^*N$ is an isomorphism, inverse to that counit by the adjunction triangle identity. Since $j^*$ preserves kernels by [prop-weil-pbc-proetale-constant-exact], the sheaf $\\Gamma_ZN=\\ker(N\\to j_*j^*N)$ has $j^*\\Gamma_ZN=0$.",
    "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-exc-proetale-closed-exact",
     "lem-exc-proetale-closed-fully-faithful",
     "lem-exc-proetale-closed-essential-image",
-    "def-exc-proetale-sections-with-support"
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-module-direct-image",
+    "prop-weil-pbc-proetale-constant-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
+    "place": "Proof, first paragraph"
+   }
   },
   {
-   "text": "Choose a K-injective complex $I$ with injective terms resolving\n$K$, by [prop-weil-pbc-kinjective-resolutions-exist].\nSince $i_*$ and the $j_!$ of [prop-exc-open-adjoint] are\nexact, the adjunction shows that $i^!I$ and $j^*I$ are\nK-injective, so the right derived functor of the sheaf-level $i^!$\nexists and is computed on such resolutions.\nComplex-level adjunction then gives $i_*\\dashv Ri^!$ on the\nambient categories. If a Brown right adjoint to $Ri_*=i_*$ has\nalso been chosen, uniqueness of right adjoints identifies it with\nthis functor, including the counit.",
+   "text": "For a sheaf $M$ on $Z$, [lem-exc-proetale-closed-essential-image] gives $j^*i_*M=0$; for $\\Gamma_ZN$ of Step 1 it gives the natural isomorphism $\\Gamma_ZN\\to i_*i^*\\Gamma_ZN$. If $f:i_*M\\to N$, naturality of the open unit $\\eta$ gives $\\eta_N f=j_*j^*(f)\\eta_{i_*M}=0$, because $j^*i_*M=0$. The kernel property therefore gives a unique factorization through $\\Gamma_ZN$. Composing with its displayed isomorphism and using [lem-exc-proetale-closed-fully-faithful] gives the natural bijection $\\operatorname{Hom}_T(i_*M,N)\\cong\\operatorname{Hom}_T(i_*M,\\Gamma_ZN)\\cong\\operatorname{Hom}_Z(M,i^*\\Gamma_ZN)=\\operatorname{Hom}_Z(M,i^!_0N)$, with the last equality from [def-exc-proetale-sections-with-support]. Thus $i_*\\dashv i^!_0$ on the whole sheaf categories. These functors are additive: $i_*$ is additive by its sectionwise definition [def-weil-proetale-module-direct-image], and its right adjoint preserves zero and finite products, hence biproducts and their diagonal/codiagonal formula for addition.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "prop-exc-open-adjoint"
+    "lem-exc-proetale-closed-essential-image",
+    "lem-exc-proetale-closed-fully-faithful",
+    "def-exc-proetale-sections-with-support",
+    "def-weil-proetale-module-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
+    "place": "Proof, first paragraph"
+   }
+  },
+  {
+   "text": "Use the small skeletons in [def-weil-pbc-proetale-site]. The constant coefficient sheaf is a sheaf of commutative rings, so [prop-pur-kinjective-resolutions-exist] supplies K-injective resolutions on $T$ and $Z$ for arbitrary unbounded complexes. In [lem-weil-pbc-right-adjoint-preserves-kinjective] take $\\mathcal A=\\operatorname{Sh}(T_{\\mathrm{proet}},A)$, $\\mathcal B=\\operatorname{Sh}(Z_{\\mathrm{proet}},A)$, $v=i_*$ and $u=i^!_0$. Step 2 gives $v\\dashv u$ and Step 1 gives exactness of $v$, so $i^!_0$ sends K-injective complexes on $T$ to K-injective complexes on $Z$. To apply [lem-weil-pbc-kinjective-total-derived], take $F=Q_Z\\circ (i^!_0)^K:K(T)\\to D(Z)$, where $Q_Z$ is localization and the superscript $K$ means termwise application on the homotopy category. This is an exact functor of triangulated categories: additivity preserves the chain-homotopy equation, shifts and the biproduct differential matrix defining each cone in [def-weil-abstract-derived-category]. The cited total-derived theorem constructs $Ri^!_0$ and identifies $Ri^!_0N$ with $Q_Z(i^!_0I)$ whenever $N\\to I$ is a K-injective resolution on $T$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
+    "place": "Proof, second paragraph; Stacks Tags 079P, 08BJ, 070K, 070Y, 070I"
+   }
+  },
+  {
+   "text": "Exactness of $i_*$ and [lem-sf-exact-functor-derived-triangulated] give its functor on $D(Z)\\to D(T)$ by termwise application (also computing $Ri_*$). Let $K$ be any complex on $Z$, let $N$ be any complex on $T$, and choose a K-injective resolution $N\\to I$. Step 3 makes $i^!_0I$ K-injective and identifies it with $Ri^!_0N$ in $D(Z)$. The homotopy adjunction [lem-weil-pbc-termwise-adjunction-homotopy] and the two K-injective Hom comparisons [lem-weil-pbc-kinjective-hom-derived] give\n$$\\operatorname{Hom}_{D(T)}(i_*K,N)\\cong\\operatorname{Hom}_{K(T)}(i_*K,I)\\cong\\operatorname{Hom}_{K(Z)}(K,i^!_0I)\\cong\\operatorname{Hom}_{D(Z)}(K,Ri^!_0N).$$\nThe resolution can be chosen functorially by [prop-pur-kinjective-resolutions-exist]; every displayed comparison is natural in $K$ and $N$. These bijections therefore exhibit $i_*\\dashv Ri^!_0$ on the whole unbounded derived categories. No bound or constructibility assumption was used.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
+    "place": "Proof, second paragraph; Stacks Tags 079P, 08BJ, 070K, 070Y, 070I"
+   }
   }
  ],
  "proof_deps": [
+  "def-exc-proetale-sections-with-support",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "lem-exc-proetale-closed-essential-image",
   "lem-exc-proetale-closed-exact",
   "lem-exc-proetale-closed-fully-faithful",
-  "lem-exc-proetale-closed-essential-image",
-  "def-exc-proetale-sections-with-support",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "prop-exc-open-adjoint"
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-proetale-closed-support.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of closed immersion direct image on unbounded derived categories of pro-etale module sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf or localization adjunctions do not construct this closed pro-etale support adjunction or its derived functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf or localization adjunctions do not construct this closed pro-etale support adjunction or its derived functor"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived|KInjective",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:12,50,95,117, read its localization and absolute-derived hypotheses",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf or localization adjunctions do not construct this closed pro-etale support adjunction or its derived functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoint to the closed immersion pushforward of pro-etale module sheaves on unbounded derived categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive left adjoint between abelian categories induces an adjunction on unbounded derived categories with the right derived right adjoint",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Adjunction.derived requires the derived/absolute-derived hypotheses; it does not supply the geometric sheaf adjunction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -87,5 +184,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-proetale-closed-support",
+  "worker": "stage1",
+  "summary": "Second reading repaired the adjunction direction and the domain of the test complex, supplied the open-restriction/kernel calculation and exactness citations, specified the triangulated functor to which total derivation applies, and made the coefficient-domain correction explicit in the report. Four steps, no new nodes. Returned-delivery repair: refreshed current-DAG citation interfaces, made the coefficient-identification hypotheses explicit, supplied per-step source places, and repaired stale report numbering and section headings; retained four proof steps and no new nodes.",
+  "blueprint": [
+   "proof first paragraph: quasi-compact complement and exact fully faithful closed direct image; explicit restriction calculation showing the support kernel vanishes on U",
+   "proof first paragraph: natural kernel factorization and sheaf-level support adjunction",
+   "proof second paragraph: K-injective existence, preservation by the right adjoint of exact i_*, and total derived construction",
+   "proof second paragraph: natural unbounded derived Hom bijections; no constructibility assumption"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Step 1 takes the closed pro-etale counit isomorphism and Step 2 its full-faithfulness Hom bijection. This is the closed-immersion interface explicitly required by the item source; the unit route supplies no other pro-etale sheaf-level version."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Step 1 takes the canonical constant-ring identifications and exact module inverse image. This is a generic coefficient/site tool, not the proper-base-change theorem of its filing unit; no statement in the item unit supplies these interfaces."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Step 3 applies the generic enough-K-injectives total-derived theorem to Q_Z composed with the termwise support functor. It supplies the unbounded construction, without replacing any geometric or comparison step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Step 4 uses the generic additive homotopy-category adjunction. The item unit has no replacement for this complex-level homological-algebra tool; the proof does not use its bounded-below clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-proetale-closed-fully-faithful",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-1af22210b",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-1af22210b (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, sources, and unit/chapter route. All four proof steps pass, including coefficient compatibility, relative quasi-compactness, and unbounded K-injective adjunction. Repaired one C8 metadata omission by recording four accepted tool uses; mathematics unchanged. Checks and source locations are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
