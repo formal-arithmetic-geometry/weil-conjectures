@@ -25,7 +25,10 @@
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-pc-module-kflat-complex",
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-kun-finite-filtered-module-homotopy",
+  "lem-kun-filtered-tensor-graded-comparison",
+  "lem-sp-finite-filtration-induction"
  ],
  "proof": [
   {
@@ -320,5 +323,30 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-9fa5c4cdb (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Stacks 0H7X, 0BYH, 06Y3, filtered fractions, long exact sequences, and roof comparisons. All eight steps and both new nodes hold, including edge cases. Checked duplicates, target coefficient categories and morphism directions; accepted four generic tool uses. No repairs needed. Detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteFilteredKFlatReplacement",
+  "declaration": "CochainComplex.finiteFiltered_kFlat_replacement",
+  "declarations": [
+   "CochainComplex.GoodFiniteFilteredModuleHomotopy",
+   "CochainComplex.goodFiniteFilteredModuleInclusion",
+   "CochainComplex.goodFiniteFilteredModuleQuasiIso",
+   "CochainComplex.finiteFiltered_kFlat_replacement"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFilteredKFlatReplacement.lean",
+  "statement": "theorem finiteFiltered_kFlat_replacement : (∀ (K : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (a b : ℤ), a < b → K.filtration.step a = ⊤ → K.filtration.step b = ⊥ → ∃ (P : FilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) (f : P ⟶ K), HasKunnethFiltration P ∧ P.filtration.step a = ⊤ ∧ P.filtration.step b = ⊥ ∧ QuasiIso f.hom ∧ (∀ i : ℤ, QuasiIso (FilteredObject.restrictionSteps f i)) ∧ (∀ i : ℤ, QuasiIso (FilteredObject.gradedMapSteps f i)) ∧ (∀ n : ℤ, Module.Free R (P.obj.X n)) ∧ (∀ i n : ℤ, Module.Free R ((P.filtration.step i : CochainComplex (ModuleCat.{u} R) ℤ).X n)) ∧ (∀ i n : ℤ, Module.Free R ((P.filtration.gradedPiece i).X n))) ∧ (∃ E : (goodFiniteFilteredModuleQuasiIso R).Localization ≌ (finiteFilteredModuleQuasiIso R).Localization, Nonempty ((goodFiniteFilteredModuleQuasiIso R).Q ⋙ E.functor ≅ goodFiniteFilteredModuleInclusion R ⋙ (finiteFilteredModuleQuasiIso R).Q)) ∧ (∀ (A B : GoodFiniteFilteredModuleHomotopy R) (φ : (goodFiniteFilteredModuleQuasiIso R).Q.obj A ⟶ (goodFiniteFilteredModuleQuasiIso R).Q.obj B), ∃ (T : GoodFiniteFilteredModuleHomotopy R) (s : T ⟶ A) (t : T ⟶ B) (hs : goodFiniteFilteredModuleQuasiIso R s), φ = Localization.Construction.wInv s hs ≫ (goodFiniteFilteredModuleQuasiIso R).Q.map t) ∧ (∀ (A B T₁ T₂ : GoodFiniteFilteredModuleHomotopy R) (s₁ : T₁ ⟶ A) (s₂ : T₂ ⟶ A) (t₁ : T₁ ⟶ B) (t₂ : T₂ ⟶ B) (hs₁ : goodFiniteFilteredModuleQuasiIso R s₁) (hs₂ : goodFiniteFilteredModuleQuasiIso R s₂), Localization.Construction.wInv s₁ hs₁ ≫ (goodFiniteFilteredModuleQuasiIso R).Q.map t₁ = Localization.Construction.wInv s₂ hs₂ ≫ (goodFiniteFilteredModuleQuasiIso R).Q.map t₂ ↔ ∃ (T : GoodFiniteFilteredModuleHomotopy R) (r₁ : T ⟶ T₁) (r₂ : T ⟶ T₂), r₁ ≫ s₁ = r₂ ≫ s₂ ∧ goodFiniteFilteredModuleQuasiIso R (r₁ ≫ s₁) ∧ r₁ ≫ t₁ = r₂ ≫ t₂)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses HasKunnethFiltration for goodness. The equivalence is tied to inclusion by its localization square; roof representation and the common-refinement equality criterion are included explicitly. No resolution is chosen functorially."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f87d9dc8b",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statements, definitions, dependencies, docstrings, source alignment, edge cases, and localization clauses checked; both delivered modules compile successfully via scompile.py."
  }
 }
