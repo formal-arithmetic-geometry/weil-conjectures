@@ -291,10 +291,10 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-3db0236f2",
-  "group": "Q29",
+  "reviewer": "NT-stage2-Codex-37322fd57",
+  "group": "Q22",
   "result": "pass",
-  "note": "Reviewed the immutable node, all five dependencies, source/module declarations, edge cases, docstrings, and report sections. scompile.py verified the delivered Lean module locally and against the library view with no errors; no fixes required."
+  "note": "Reviewed node/source, all seven dependencies, ordinary-etale declarations, universes, edge cases, docstrings, canonical pairing map, and report sections; compile and dry-run evidence are clean with no defects."
  },
  "lean": {
   "module": "Sheaf.Paper.DualityPairing",
@@ -304,13 +304,16 @@
    "CategoryTheory.DualityPairingCompatibility",
    "AlgebraicGeometry.Etale.AmbientDualityPairing",
    "AlgebraicGeometry.ProEtale.AmbientDualityPairing",
-   "AlgebraicGeometry.Etale.ambient_duality_pairing"
+   "AlgebraicGeometry.Etale.ambient_duality_pairing",
+   "AlgebraicGeometry.Etale.AmbientDualityPairing.bidualityMap",
+   "AlgebraicGeometry.ProEtale.AmbientDualityPairing.bidualityMap"
   ],
-  "file": "lean/Sheaf/Paper/DualityPairing.lean",
   "statement": "theorem ambient_duality_pairing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y (dualizingComplex (ModuleCat.{u + 1} Λ) aY) ∧ ∀ W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)), ProEtale.AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y W",
   "branch": "newtargets-dag",
-  "by": "Q29",
+  "by": "Q22",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "file": "lean/Sheaf/Paper/DualityPairing.lean",
+  "note": "§1(B): the current published Q29 module specifies normalized evaluation and transpose existentially but exposes no callable canonical bidualityMap. Retain the entire published module, including its pro-etale derivedTensor/derivedHom interface, and add the two canonical bidualityMap projections. Descended Koszul symmetry and tensor-Hom adjunction determine these projected arrows uniquely; no arbitrary map or extra hypothesis is supplied."
  }
 }

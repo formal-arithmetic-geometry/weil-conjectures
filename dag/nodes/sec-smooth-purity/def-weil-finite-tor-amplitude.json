@@ -85,28 +85,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.FiniteTorAmplitude",
-  "declaration": "WeilConjectures.finiteTorConstructible",
+  "module": "Sheaf.Paper.FiniteTorAmplitudeSites",
+  "declaration": "WeilConjectures.finiteTorConstructibleEtale",
   "declarations": [
-   "WeilConjectures.finiteTorConstructible",
-   "WeilConjectures.finiteTorConstructibleCategory",
-   "WeilConjectures.finiteTorConstructibleIntegral",
-   "WeilConjectures.finiteTorConstructibleIntegralCategory",
-   "WeilConjectures.finiteTorFieldCoefficientCategory"
+   "WeilConjectures.finiteTorConstructibleEtale"
   ],
-  "statement": "def finiteTorConstructible\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)\n    (Y : AlgebraicGeometry.Scheme.{u}) :\n    ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
+  "statement": "def finiteTorConstructibleEtale (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
   "branch": "newtargets-dag",
-  "by": "Q11",
+  "by": "Q22",
   "date": "2026-10-16",
-  "existing": true,
-  "note": "§1(B): The current record is the fixed-scalar, etale-origin presentation, incompatible with the recorded intrinsic constructibility and extension-by-zero interfaces used here. Reuse the already published intrinsic predicate finiteTorConstructible, exactly their intersection with the recorded finite Tor amplitude. Its module also retains all original integral and field aliases. No new Tor condition, definition or equality of site universes is introduced."
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FiniteTorAmplitudeSites.lean",
+  "note": "§1(B): the recorded intrinsic pro-etale, integral and field-stage declarations in Sheaf.Paper.FiniteTorAmplitude do not give the ordinary-etale finite-level predicate required here. This module adds finiteTorConstructibleEtale using the recorded isBoundedConstructible and hasTorAmplitudeIn on ordinary-etale ModuleCat-valued sheaves. Those original higher-stage declarations remain unchanged in their owning module; importing that unused module here collides with the published pairing through the legacy and FiniteCoefficient pro-etale UpperLowerStar notation declarations. No alternative pro-etale definition is introduced. The coefficient finiteness module is publicly imported, and its positive-level Finite instance has an explicit type."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e5e8665f4",
-  "group": "Q11",
+  "reviewer": "NT-stage2-Codex-37322fd57",
+  "group": "Q22",
   "result": "pass",
-  "note": "Wrote review.md. Checked the immutable statement, all nine dependencies, sources, constructions, docstrings, universes, edge cases and verbatim signature. Per-file scompile.py passed both views without diagnostics. No repairs required; branch unchanged."
+  "note": "Reviewed node/source, all seven dependencies, ordinary-etale declarations, universes, edge cases, docstrings, canonical pairing map, and report sections; compile and dry-run evidence are clean with no defects."
  }
 }

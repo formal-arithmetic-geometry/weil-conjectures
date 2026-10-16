@@ -18,7 +18,8 @@
   "def-weil-proper-morphism",
   "def-weil-pbc-constructible-complexes",
   "lem-weil-duality-pairing",
-  "lem-sf-etale-flat-model"
+  "lem-sf-etale-flat-model",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
@@ -673,5 +674,27 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-2a6fae00c (reviewer sub-agent of L); spot-checked: Read all 16 steps, both new nodes, cited statements, sources and unit/chapter route. Checked arbitrary-field induction, canonical generic exchange, coefficient category, signed evaluation and edge cases; no mathematical defect found. Added required provenance/audit fields to both new-node JSON files under fixes/. Statements unchanged; detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleGeometricBiduality",
+  "declaration": "WeilConjectures.finite_stage_etale_geometric_biduality",
+  "declarations": [
+   "WeilConjectures.FiniteEtaleGeometricBiduality",
+   "WeilConjectures.finite_stage_etale_geometric_biduality"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleGeometricBiduality.lean",
+  "statement": "theorem finite_stage_etale_geometric_biduality (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) (aX : X ⟶ Spec (.of D.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] : FiniteEtaleGeometricBiduality l E n hn X aX",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-37322fd57",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Reviewed node/source, all seven dependencies, ordinary-etale declarations, universes, edge cases, docstrings, canonical pairing map, and report sections; compile and dry-run evidence are clean with no defects."
  }
 }
