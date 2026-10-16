@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
 public import Mathlib.Algebra.Category.ModuleCat.Basic
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.InternalModuleAbEquivalence
 
 /-! # Evaluation of condensed-field modules over one geometric point
 

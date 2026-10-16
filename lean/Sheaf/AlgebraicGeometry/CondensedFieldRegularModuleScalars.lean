@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldEvaluationFunctors
 public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
+import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Transport of regular-module scalars to a geometric point
 

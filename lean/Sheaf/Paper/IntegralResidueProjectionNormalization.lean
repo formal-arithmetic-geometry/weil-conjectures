@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralResidueComparisonInterface
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+import Sheaf.Paper.ContinuousIntegralCoefficients
 
 /-! # Projection normalization of integral residue comparisons
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.IntegralMatrixAnalyticData
 public import Mathlib.LinearAlgebra.Matrix.Rank
 import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ContinuousCoefficientRealizations
 
 /-! # The geometric input to analytic integral matrix charts -/
 
