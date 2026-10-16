@@ -6,10 +6,9 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Module.Equiv.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteModuleCompatibleTuples
 
 /-! The compatible-tuples construction for module-sheaf gluing.
 Source: Stacks Project, Sites, Tag 04TR (blueprint: lem-weil-pbc-site-module-sheaf-gluing-aux).
@@ -36,7 +35,7 @@ theorem exists_moduleSheaf_of_cover_with_maps
     (hcover : Presieve.ofArrows (fun i ↦ (Uᵢ i).left) (fun i ↦ (Uᵢ i).hom) ∈ J U)
     (A : Sheaf (J.toGrothendieck.over U) RingCat.{uR})
     (hcomm : ∀ (W : (Over U)ᵒᵖ) (r s : A.obj.obj W), r * s = s * r)
-    (Fᵢ : ∀ i : I, ringedSiteModules.{v, uR, vC, max uC vC}
+    (Fᵢ : ∀ i : I, ringedSiteModules.{max uC vC w v, uR, vC, max uC vC}
       (A.over (Uᵢ i)))
     (φ : ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j),
       (Fᵢ i).val.obj (op (Over.mk (T := Over U) a)) ≃ₗ[A.obj.obj (op W)]
@@ -52,7 +51,7 @@ theorem exists_moduleSheaf_of_cover_with_maps
     (hcocycle : ∀ (i j k : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (c : W ⟶ Uᵢ k)
       (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))),
       φ i k W a c x = φ j k W b c (φ i j W a b x)) :
-    ∃ F : ringedSiteModules.{v, uR, vC, max uC vC} A,
+    ∃ F : ringedSiteModules.{max uC vC w v, uR, vC, max uC vC} A,
       ∃ e : ∀ i : I, F.over (Uᵢ i) ⟶ Fᵢ i,
       ∃ e_inv : ∀ i : I, Fᵢ i ⟶ F.over (Uᵢ i),
         (∀ i, e_inv i ≫ e i = 𝟙 _) ∧
@@ -61,6 +60,24 @@ theorem exists_moduleSheaf_of_cover_with_maps
           (x : F.val.obj (op W)),
           φ i j W a b ((e i).val.app (op (Over.mk (T := Over U) a)) x) =
             (e j).val.app (op (Over.mk (T := Over U) b)) x := by
-  sorry
+  have _ := hcover
+  have _ := hcomm
+  let G : ModuleGlueData.{max uC vC, vC, uR, w, v} A Uᵢ :=
+    { localSheaf := Fᵢ
+      transition := fun i j W a b ↦ (φ i j W a b).toAddEquiv
+      transition_smul := fun i j W a b r x ↦ (φ i j W a b).map_smul r x
+      naturality := hnatural
+      cocycle := hcocycle }
+  let hs := G.presheaf_isSheaf
+  refine ⟨G.sheaf hs, (fun i ↦ (G.overIso hs i).hom),
+    (fun i ↦ (G.overIso hs i).inv), ?_, ?_, ?_⟩
+  · intro i
+    exact (G.overIso hs i).inv_hom_id
+  · intro i
+    exact (G.overIso hs i).hom_inv_id
+  · intro i j W a b x
+    change G.transition i j W a b (G.evaluate i (Over.mk a) x) =
+      G.evaluate j (Over.mk b) x
+    exact x.2.2 i j W (𝟙 W) a b
 
 end SheafOfModules

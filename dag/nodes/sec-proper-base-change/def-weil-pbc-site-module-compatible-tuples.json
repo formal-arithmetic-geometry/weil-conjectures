@@ -1,0 +1,116 @@
+{
+ "id": "def-weil-pbc-site-module-compatible-tuples",
+ "kind": "definition",
+ "title": "All-test-object compatible tuples of local module sections",
+ "statement": "Let D be a category with Grothendieck topology K, let A be a sheaf of rings, and let U_i be a family of objects. On the localizations [def-pur-localized-ringed-site], let F_i be sheaves of A|U_i-modules [def-weil-sheaf-of-modules-category]. Gluing data consist of sectionwise additive transition equivalences for each pair W → U_i, W → U_j, linear over A(W), natural under every T → W, and satisfying the triple cocycle. For V, define the A(V)-module of tuples x_(i,W,f,a) in F_i(W → U_i), indexed by every span f:W → V, a:W → U_i, satisfying restriction and transition compatibility. Scalar multiplication uses A(f), and restriction along V′ → V precomposes f. Evaluation at the identity span over a local object and extension using transitions define mutually inverse linear maps, natural in that local object. These define a module presheaf and natural local identifications whenever the presheaf is a sheaf. All section types lie in a universe closed under the object, arrow and family-index universes.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, Lemma sites-lemma-glue-sheaves; compatible-tuples construction, with componentwise module operations."
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible local sections of sheaves of modules glue to a sheaf on a ringed site",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules on slice sites glue along a covering with linear cocycle transition equivalences",
+   "results": "No effective module-sheaf descent construction found. Existing results concern sheaf gluing or quasicoherent presentations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presieve.IsSheafFor",
+   "results": "No direct compatible-tuple module construction found.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_moduleSheaf|isSheaf.*over|isSheaf_of.*cover|compatible.*tuple, in Mathlib, WeilConjectures and Sheaf",
+   "results": "The parent SiteModuleSheafGluing applies this auxiliary. Mathlib has type-valued sheaf gluing and abstract descent-data APIs, but no instantiated gluing of module sheaves on localizations. Presieve.IsSheafFor.amalgamate and local separatedness suffice for the coordinate construction.",
+   "date": "2026-10-16",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteModuleSheafGluingAux",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-module-sheaf-gluing",
+   "place": "Compatible-tuples construction and local graph inverse verification, expanded from the auxiliary proof.",
+   "via": [
+    "lem-weil-pbc-site-module-sheaf-gluing-aux",
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteModuleCompatibleTuples",
+  "file": "lean/Sheaf/CategoryTheory/SiteModuleCompatibleTuples.lean",
+  "declaration": "SheafOfModules.ModuleGlueData",
+  "statement": "structure ModuleGlueData {D : Type uD} [Category.{vD} D]\n    {K : GrothendieckTopology D} (A : Sheaf K RingCat.{uR})\n    {I : Type w} (U : I → D)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16",
+  "declarations": [
+   "SheafOfModules.ModuleGlueData",
+   "SheafOfModules.ModuleGlueData.tuples",
+   "SheafOfModules.ModuleGlueData.presheaf",
+   "SheafOfModules.ModuleGlueData.evaluate",
+   "SheafOfModules.ModuleGlueData.extend",
+   "SheafOfModules.ModuleGlueData.componentEquiv",
+   "SheafOfModules.ModuleGlueData.sheaf",
+   "SheafOfModules.ModuleGlueData.overIso"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c2e1f",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T054833-L-155587",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c2e1f",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T054833-L-155587",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, and report match the corrected theorem; all modules and the forced importer compile, original parent fails with the recorded universe error, and axiom checks are permitted."
+ }
+}

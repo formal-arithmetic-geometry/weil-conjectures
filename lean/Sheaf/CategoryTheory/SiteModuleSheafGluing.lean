@@ -94,7 +94,8 @@ theorem exists_moduleSheaf_of_cover
           φ i j W a b ((e i).hom.val.app (op (Over.mk (T := Over U) a)) x) =
             (e j).hom.val.app (op (Over.mk (T := Over U) b)) x  := by
   obtain ⟨F, e, e_inv, heinv, he, hcompat⟩ :=
-    exists_moduleSheaf_of_cover_with_maps J U I Uᵢ hcover A hcomm Fᵢ φ hnatural hcocycle
+    exists_moduleSheaf_of_cover_with_maps.{uC, vC, uR, w, v}
+      J U I Uᵢ hcover A hcomm Fᵢ φ hnatural hcocycle
   let eIso : ∀ i : I, F.over (Uᵢ i) ≅ Fᵢ i := fun i =>
     { hom := e i, inv := e_inv i, hom_inv_id := he i, inv_hom_id := heinv i }
   refine ⟨F, eIso, ?_⟩

@@ -2,31 +2,43 @@
  "id": "lem-weil-pbc-site-module-sheaf-gluing-aux",
  "kind": "statement",
  "title": "Compatible-tuples construction for module-sheaf gluing",
- "statement": "Under the hypotheses of lem-weil-pbc-site-module-sheaf-gluing, the compatible-tuples construction produces a module sheaf F, local module morphisms e and inverse morphisms e_inv, with e_inv i ≫ e i = 𝟙 and e i ≫ e_inv i = 𝟙, and the required overlap compatibility.",
+ "statement": "Under the hypotheses of lem-weil-pbc-site-module-sheaf-gluing, the compatible-tuples construction produces a module sheaf F, local module morphisms e and inverse morphisms e_inv, with e_inv i ≫ e i = 𝟙 and e i ≫ e_inv i = 𝟙, and the required overlap compatibility. The local and glued module-section universe is max(uC,vC,w,v), as in the parent gluing theorem, so it is closed under the indexing products.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Tag 04TR, construction of the glued sheaf from compatible tuples and verification of local graph inverses."
  },
  "proof": [
   {
-   "text": "For each object over U define sections as compatible tuples; give restrictions and module operations componentwise. Glue each component along a covering to prove the tuple presheaf is a sheaf. Define e by graph evaluation and e_inv by transition maps; naturality and the cocycle prove both inverse equations and overlap compatibility.",
+   "text": "Package the given local sheaves, additive transition equivalences, linearity, naturality and cocycle as ModuleGlueData, and use its explicitly constructed all-test-object compatible-tuples module presheaf.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-site-module-compatible-tuples"
    ],
    "elementary": false
+  },
+  {
+   "text": "The coordinatewise gluing theorem proves this presheaf is a sheaf. Its evaluation and transition-extension linear equivalences give natural local module-sheaf isomorphisms. Take their hom and inv for e and e_inv; the categorical inverse equations follow from those isomorphisms.",
+   "uses": [
+    "def-weil-pbc-site-module-compatible-tuples",
+    "lem-weil-pbc-site-module-compatible-tuples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The requested overlap equation is precisely the transition-compatibility equation of a tuple at the identity test span.",
+   "uses": [
+    "def-weil-pbc-site-module-compatible-tuples"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-pur-localized-ringed-site",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-pbc-site-module-compatible-tuples",
+  "lem-weil-pbc-site-module-compatible-tuples"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 04TR"
+  "place": "Tag 04TR, Lemma sites-lemma-glue-sheaves; compatible-tuples construction, with componentwise module operations."
  },
  "mathlib_searches": [
   {
@@ -85,9 +97,9 @@
   "module": "Sheaf.CategoryTheory.SiteModuleSheafGluingAux",
   "file": "lean/Sheaf/CategoryTheory/SiteModuleSheafGluingAux.lean",
   "declaration": "SheafOfModules.exists_moduleSheaf_of_cover_with_maps",
-  "statement": "theorem exists_moduleSheaf_of_cover_with_maps {C : Type uC} [Category.{vC} C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (U : C) (I : Type w) (Uᵢ : I → Over U) (hcover : Presieve.ofArrows (fun i ↦ (Uᵢ i).left) (fun i ↦ (Uᵢ i).hom) ∈ J U) (A : Sheaf (J.toGrothendieck.over U) RingCat.{uR}) (hcomm : ∀ (W : (Over U)ᵒᵖ) (r s : A.obj.obj W), r * s = s * r) (Fᵢ : ∀ i : I, ringedSiteModules.{v, uR, vC, max uC vC} (A.over (Uᵢ i))) (φ : ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j), (Fᵢ i).val.obj (op (Over.mk (T := Over U) a)) ≃ₗ[A.obj.obj (op W)] (Fᵢ j).val.obj (op (Over.mk (T := Over U) b))) (hnatural : ∀ (i j : I) (W V : Over U) (k : V ⟶ W) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))), φ i j V (k ≫ a) (k ≫ b) ((Fᵢ i).val.map (Over.homMk (U := Over.mk (T := Over U) (k ≫ a)) (V := Over.mk (T := Over U) a) k rfl).op x) = (Fᵢ j).val.map (Over.homMk (U := Over.mk (T := Over U) (k ≫ b)) (V := Over.mk (T := Over U) b) k rfl).op (φ i j W a b x)) (hcocycle : ∀ (i j k : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (c : W ⟶ Uᵢ k) (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))), φ i k W a c x = φ j k W b c (φ i j W a b x)) : ∃ F : ringedSiteModules.{v, uR, vC, max uC vC} A, ∃ e : ∀ i : I, F.over (Uᵢ i) ⟶ Fᵢ i, ∃ e_inv : ∀ i : I, Fᵢ i ⟶ F.over (Uᵢ i), (∀ i, e_inv i ≫ e i = 𝟙 _) ∧ (∀ i, e i ≫ e_inv i = 𝟙 _) ∧ ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (x : F.val.obj (op W)), φ i j W a b ((e i).val.app (op (Over.mk (T := Over U) a)) x) = (e j).val.app (op (Over.mk (T := Over U) b)) x",
+  "statement": "theorem exists_moduleSheaf_of_cover_with_maps\n    {C : Type uC} [Category.{vC} C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (U : C) (I : Type w) (Uᵢ : I → Over U)\n    (hcover : Presieve.ofArrows (fun i ↦ (Uᵢ i).left) (fun i ↦ (Uᵢ i).hom) ∈ J U)\n    (A : Sheaf (J.toGrothendieck.over U) RingCat.{uR})\n    (hcomm : ∀ (W : (Over U)ᵒᵖ) (r s : A.obj.obj W), r * s = s * r)\n    (Fᵢ : ∀ i : I, ringedSiteModules.{max uC vC w v, uR, vC, max uC vC}\n      (A.over (Uᵢ i)))\n    (φ : ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j),\n      (Fᵢ i).val.obj (op (Over.mk (T := Over U) a)) ≃ₗ[A.obj.obj (op W)]\n        (Fᵢ j).val.obj (op (Over.mk (T := Over U) b)))\n    (hnatural : ∀ (i j : I) (W V : Over U) (k : V ⟶ W)\n      (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))),\n      φ i j V (k ≫ a) (k ≫ b) ((Fᵢ i).val.map\n        (Over.homMk (U := Over.mk (T := Over U) (k ≫ a))\n          (V := Over.mk (T := Over U) a) k rfl).op x) =\n        (Fᵢ j).val.map\n          (Over.homMk (U := Over.mk (T := Over U) (k ≫ b)) (V := Over.mk (T := Over U) b) k rfl).op\n            (φ i j W a b x))\n    (hcocycle : ∀ (i j k : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j) (c : W ⟶ Uᵢ k)\n      (x : (Fᵢ i).val.obj (op (Over.mk (T := Over U) a))),\n      φ i k W a c x = φ j k W b c (φ i j W a b x)) :\n    ∃ F : ringedSiteModules.{max uC vC w v, uR, vC, max uC vC} A,\n      ∃ e : ∀ i : I, F.over (Uᵢ i) ⟶ Fᵢ i,\n      ∃ e_inv : ∀ i : I, Fᵢ i ⟶ F.over (Uᵢ i),\n        (∀ i, e_inv i ≫ e i = 𝟙 _) ∧\n        (∀ i, e i ≫ e_inv i = 𝟙 _) ∧\n        ∀ (i j : I) (W : Over U) (a : W ⟶ Uᵢ i) (b : W ⟶ Uᵢ j)\n          (x : F.val.obj (op W)),\n          φ i j W a b ((e i).val.app (op (Over.mk (T := Over U) a)) x) =\n            (e j).val.app (op (Over.mk (T := Over U) b)) x",
   "branch": "sheaf-dag",
-  "by": "C2",
+  "by": "D4",
   "date": "2026-10-16"
  },
  "stmt_deps": [
@@ -106,13 +118,46 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-c2e1f",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261015T190716-L-966099",
+  "landing": "20261016T054833-L-155587",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, and report match the corrected theorem; all modules and the forced importer compile, original parent fails with the recorded universe error, and axiom checks are permitted."
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "D4 stage 2",
+  "old_statement": "Under the hypotheses of lem-weil-pbc-site-module-sheaf-gluing, the compatible-tuples construction produces a module sheaf F, local module morphisms e and inverse morphisms e_inv, with e_inv i ≫ e i = 𝟙 and e i ≫ e_inv i = 𝟙, and the required overlap compatibility.",
+  "what": "The old auxiliary allowed arbitrary independent module universe v even when the cover and the site were larger. Its compatible-tuple products need not be v-small. A cover of a large discrete space by its singleton opens with local F₂-module sheaves can force a global section set larger than that universe. The parent already uses max(uC,vC,w,v). Match that existing size convention in both the local and glued modules, preserving all term hypotheses and the full conclusion. This is a size correction to an auxiliary, not a change to any Challenge target.",
+  "source": {
+   "document": "literature/stacks-project/sites.tex",
+   "place": "Tag 04TR, Lemma sites-lemma-glue-sheaves; compatible-tuples construction, with componentwise module operations."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-site-module-sheaf-gluing",
+    "holds": true,
+    "note": "The parent already uses max(uC,vC,w,v) for both local and glued sections. Its statement is unchanged; the call now gives the auxiliary universe arguments explicitly."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For each object over U define sections as compatible tuples; give restrictions and module operations componentwise. Glue each component along a covering to prove the tuple presheaf is a sheaf. Define e by graph evaluation and e_inv by transition maps; naturality and the cocycle prove both inverse equations and overlap compatibility.",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "def-pur-localized-ringed-site",
+     "def-weil-sheaf-of-modules-category"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-sites-and-cohomology",
+   "def-pur-localized-ringed-site",
+   "def-weil-sheaf-of-modules-category"
+  ]
  }
 }
