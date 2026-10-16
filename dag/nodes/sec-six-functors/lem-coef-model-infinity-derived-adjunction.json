@@ -31,9 +31,74 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a cofibration $i$ in $\\mathcal M$ and a trivial fibration $p$ in $\\mathcal N$, a lifting square from $i$ to $Up$ is adjoint to a lifting square from $Li$ to $p$; its lift exists since $Li$ is a cofibration. For a trivial cofibration $i$ and a fibration $p$, $Li$ is trivial and the lift again exists. Thus $U$ preserves trivial fibrations and fibrations. The left-adjoint clause of [lem-coef-cosimplicial-frame-mapping] gives preservation of weak equivalences between cofibrant objects by $L$. In the opposite model categories cofibrations are the original fibrations, and $U^{\\mathrm{op}}\\dashv L^{\\mathrm{op}}$ is left Quillen by the lifting calculation just made; applying that clause gives preservation of weak equivalences between fibrant objects by $U$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, pp. 385-386; lifting and opposite-category specialization to an ordinary Quillen pair."
+   }
+  },
+  {
+   "text": "Choose functorial replacements $e:Q\\to\\operatorname{id}_{\\mathcal M}$ and $t:\\operatorname{id}_{\\mathcal N}\\to T$. For $f:X\\to X'$ in $W$, the equation $e_{X'}Qf=fe_X$ and two-out-of-three show $Qf\\in W$; its endpoints are cofibrant, so Step 1 shows $q_{\\mathcal N}LQ$ inverts $W$. The equation $Tf\\,t_Y=t_{Y'}f$ proves that $T$ preserves weak equivalences, so $q_{\\mathcal M}UT$ also inverts them. The universal property of homotopy coherent localization therefore gives functors $A=\\mathbf LL$ and $B=\\mathbf RU$ with $Aq_{\\mathcal M}\\simeq q_{\\mathcal N}LQ$ and $Bq_{\\mathcal N}\\simeq q_{\\mathcal M}UT$. This universal property is an equivalence onto the full infinity subcategory of functors inverting weak equivalences, so it also descends natural transformations and their homotopies between these functors. For another cofibrant replacement $Q'$, the natural weak equivalences $QQ'\\xrightarrow{eQ'}Q'$ and $QQ'\\xrightarrow{Qe'}Q$ have cofibrant endpoints; applying $qL$ gives a comparison equivalence. For another fibrant replacement $T'$, the arrows $T\\xrightarrow{Tt'}TT'\\xleftarrow{tT'}T'$ are weak equivalences between fibrant objects; applying $qU$ gives the comparison. All the displayed diagrams are natural, and localization preserves their compositions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Paragraph 7.5.25, pp. 383-384, and its opposite-category version; the replacement descent is written out using the localization universal property."
+   }
+  },
+  {
+   "text": "For $X\\in\\mathcal M$ and $Y\\in\\mathcal N$, $QX$ is cofibrant, $TY$ is fibrant, and $UTY$ is fibrant because $U$ preserves fibrations and the terminal object. Choose a cosimplicial frame $P^\\bullet$ on $QX$. By [lem-coef-cosimplicial-frame-mapping], $LP^\\bullet$ is a frame on $LQX$, and $H(LP^\\bullet,TY)$ and $H(P^\\bullet,UTY)$ represent $\\operatorname{Map}(AqX,qY)$ and $\\operatorname{Map}(qX,BqY)$ respectively, using $qQX\\simeq qX$ and $qTY\\simeq qY$. The adjunction bijections $\\operatorname{Hom}_{\\mathcal N}(LP^n,TY)\\cong\\operatorname{Hom}_{\\mathcal M}(P^n,UTY)$ commute with every cosimplicial operator, since they are natural in $P^n$. They give an isomorphism of these simplicial sets. The cited node asserts naturality of the mapping-space models in the homotopy theory of both inputs and compatibility with the localized left Quillen functor. Consequently this is a coherent natural equivalence $\\Phi_{x,y}:\\operatorname{Map}(Ax,y)\\simeq\\operatorname{Map}(x,By)$ for all $x,y$, not merely a bijection of components. Every localized object is represented by such replacements, as that node states.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, pp. 385-386; mapping-space realization as in Hinich, Dwyer-Kan localization revisited, Proposition 1.5.1, pp. 14-15, cosimplicial-resolution diagram (25)."
+   }
+  },
+  {
+   "text": "Write $\\Psi=\\Phi^{-1}$. Define $\\bar\\eta_x=\\Phi_{x,Ax}(1_{Ax})$ and $\\bar\\varepsilon_y=\\Psi_{By,y}(1_{By})$. Coherent naturality of $\\Phi$ makes these coherent natural transformations. For $x=qX$, represent $1_{Ax}$ by the fibrant replacement $LQX\\xrightarrow{t_{LQX}}T(LQX)$. Its ordinary adjoint is $QX\\xrightarrow{\\eta_{QX}}ULQX\\xrightarrow{U(t_{LQX})}UT(LQX)$, so the derived unit is $qX\\xleftarrow{\\sim}qQX\\to qULQX\\to qUT(LQX)$. For $y=qY$, represent $1_{By}$ by the cofibrant replacement $QUTY\\xrightarrow{e_{UTY}}UTY$. Its ordinary adjunct is $LQUTY\\xrightarrow{L(e_{UTY})}LUTY\\xrightarrow{\\varepsilon_{TY}}TY$. Thus the derived counit is $qLQUTY\\to qLUTY\\to qTY\\xleftarrow{\\sim}qY$, with the last equivalence inverted. The two outside functors of each zigzag invert weak equivalences by Step 2, so the localization universal property descends the zigzags, including their naturality homotopies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, pp. 385-386; unit and counit, evaluated on the framed mapping-space equivalence."
+   }
+  },
+  {
+   "text": "Naturality of $\\Phi$ in $y$ gives $\\Phi_{x,y}(f)=B(f)\\bar\\eta_x$, and naturality of $\\Psi$ in $x$ gives $\\Psi_{x,y}(g)=\\bar\\varepsilon_y A(g)$. Evaluate $\\Psi\\Phi\\simeq\\operatorname{id}$ at $1_{Ax}$ to obtain $\\bar\\varepsilon_{Ax}A(\\bar\\eta_x)\\simeq1_{Ax}$. Evaluate $\\Phi\\Psi\\simeq\\operatorname{id}$ at $1_{By}$ to obtain $B(\\bar\\varepsilon_y)\\bar\\eta_{By}\\simeq1_{By}$. These are natural homotopies because $\\Phi$ and $\\Psi$ are inverse natural equivalences. Thus the mapping-space adjunction of Step 3 has exactly the unit and counit of Step 4 and satisfies both triangle identities; no claim that arbitrary replacement arrows remain equivalences after $L$ or $U$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, p. 386; both triangles written using the inverse natural mapping-space equivalences."
+   }
+  },
+  {
+   "text": "If $L$ preserves every weak equivalence, the natural transformation $q_{\\mathcal N}L(e):q_{\\mathcal N}LQ\\to q_{\\mathcal N}L$ is objectwise an equivalence. Both functors invert weak equivalences, so its descent identifies $A$ with the directly localized $L$. If $U$ preserves every weak equivalence, $q_{\\mathcal M}U(t):q_{\\mathcal M}U\\to q_{\\mathcal M}UT$ is objectwise an equivalence between functors inverting weak equivalences, and its descent identifies the directly localized $U$ with $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.5.24 and paragraph 7.5.25, pp. 382-384; direct-localization comparison from replacement arrows."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cosimplicial-frame-mapping"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 7.5.30 and paragraph 7.5.25, pp. 383-386; Hinich, Dwyer-Kan localization revisited, Proposition 1.5.1, pp. 14-15."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,12 +151,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-finite-reedy-localization",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-model-infinity-derived-adjunction",
+  "worker": "stage1",
+  "summary": "Six proof steps: adjoint lifting and Ken Brown preservation; explicit descent of the replacement composites; the framed mapping-space adjunction; its actual unit and counit; both triangle homotopies; and both directly localized cases. The replacement argument is elementary from the stated localization universal property, so no new node is needed.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the ordinary model adjunction is derived by replacements and supplies the displayed derived Hom adjunction. The only non-elementary input is the existing cosimplicial-frame mapping-space theorem. No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-238253656",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-238253656 (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited frame node, unit/chapter route, master exceptional-adjoint target, and Cisinski/Hinich sources. Verified hypotheses, replacement directions, mapping-space coherence, unit/counit and triangles, direct-localization cases, edge cases, duplication, Mathlib searches, and coefficient/base-change route. No new nodes survive and no repairs are needed."
+ }
 }
