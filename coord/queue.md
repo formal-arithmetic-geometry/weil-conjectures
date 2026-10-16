@@ -1,6 +1,6 @@
 # Work queue
 
-57 items; claim with `tools/claim.py next <group> [--stage N]`.
+58 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (57)
+## Stage 3: modules to prove (58)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -28,6 +28,7 @@
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 5 | proof |
 | `Sheaf.Paper.IntegralScalarContractive` | 5 | 1 | proof |
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 16 | proof |
+| `Sheaf.Paper.StrictHenselizationPointEvaluation` | 6 | 1 | proof |
 | `Sheaf.Paper.StrictHenselizationPointEvaluationImage` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
