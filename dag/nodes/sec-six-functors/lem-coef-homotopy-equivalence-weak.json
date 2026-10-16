@@ -92,5 +92,24 @@
   "group": "NY"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-642edaa51",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (NatTrans homotopy |NF|~|NG|, ReflTransGen zigzags with either orientation incl. zero links, P.comp Q = QP, both composite homotopies, IsWeakHomotopyEquivalence via def-cbc/def-coef conventions); dependency module lem-coef-homotopy-equivalence-weak matches Hatcher node and is admitted via proof-prerequisite closure; no hollow defs, sorry-only, docstrings ok. Finding (H3 universe): item fixed Category.{u,u}, so the stated citer lem-coef-homotopy-fractions-square-criterion cannot apply it to zigzag categories Diagram W w x y : Type (max u v) with Category.{v} (verified: test file fails against delivered module with NatTrans universe mismatch, compiles against fix). Fix: fixes/lean/Sheaf/CategoryTheory/NerveNaturalHomotopyEquivalence.lean generalizes to [Category.{v} A] [Category.{v} B], uses Mathlib nerve/nerveMap and IsWeakHomotopyEquivalence (nerveMap P) as def-coef does, and lists node proof steps 1-5 in the docstring; mathematics unchanged. nt_compile.py: delivered and fixed modules clean. Minor report inaccuracy (created.item claim, 'standard convention') noted only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopyEquivalenceWeak",
+  "declaration": "SSet.Enhanced.homotopy_equivalence_weak",
+  "file": "lean/Sheaf/CategoryTheory/HomotopyEquivalenceWeak.lean",
+  "statement": "theorem homotopy_equivalence_weak {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y] (f : C(X, Y)) (g : C(Y, X)) (H : (g.comp f).Homotopy (ContinuousMap.id X)) (K : (f.comp g).Homotopy (ContinuousMap.id Y)) : Function.Bijective (componentsMap f) ∧ ∀ (n : ℕ), 1 ≤ n → ∀ (x : X), Function.Bijective (homotopyGroupMap f n x)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The split dependency had no Lean declaration. This module states its exact Hatcher homotopy-equivalence implication using the project homotopy-group maps and component map; it is imported by the item as a proof dependency."
+ }
 }

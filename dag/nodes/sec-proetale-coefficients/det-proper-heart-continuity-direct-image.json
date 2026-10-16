@@ -189,5 +189,25 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-d95e9754c (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is the blueprint text verbatim, with only conventions made explicit: arbitrary ring sheaf A, Mod(A) to Mod(p_*A), R^q=H^q(Rp_*(M[0])), q in Z. No hypothesis was added and the coefficient category is the same as the reviewed same-unit det-pe-bounded-continuity-direct-image (arbitrary R). Step 1 applies that theorem with K_i=M_i[0], a=0. Its R^q f_* is H^q(Rf_*K), through lem-pe-bounded-complex-direct-image-presheaf, which is consistent. Colimits exist and their underlying abelian sheaves agree by lem-weil-pbc-module-sheaves-colimits-forgetful (2)/(3), and the linearity argument is fine. Step 2 is correct: K-injective resolutions from lem-sc-bounded-below-injective-resolution, finite sums of K-injectives are K-injective, block-diagonal cohomology, p_*=G∘u preserves finite biproducts, and the map is canonical by naturality of the def-sfb-right-derived-functor unit. Steps 3-4 (direct sum as the filtered colimit over finite subsets including the empty set, then canonical assembly) are elementary and correct. No cycle: a transitive walk over the cited nodes' dependencies does not reach the item. No duplicate: the étale analogues and det-proper-heart-continuity-cohomology differ in site or assertion, so same_as=[] stands. The route keeps to unit sk-cor-pe-bounded-continuity, whose statement prescribes the finite-subsum reduction. Stacks 015A/05TH/013P (derived.tex) and 03DA/03DB (sites-modules.tex) were checked at their labels. Small cases checked: p=id, empty family, zero ring, q<0. I accept the tool uses lem-weil-pbc-module-sheaves-colimits-forgetful, det-pe-topos-functoriality-inverse-image (both already accepted on the same-unit bounded node) and lem-sc-bounded-below-injective-resolution (generic black box). No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76a625eaf",
+  "group": "Q21",
+  "result": "fix",
+  "note": "Statement correct: node = blueprint verbatim (Complement allows arbitrary ring sheaf A); Lean has only [QuasiCompact p] [QuasiSeparated p], A : Sheaf (ProEt.topology X) RingCat.{u+1}, all q : ℤ, functor singleFunctor 0 ⋙ DerivedCategory.Q ⋙ ringHigherDirectImage p A q = H^q(Rp_*(M[0])) valued in Mod(p_*A) (pushforward along proEtaleBaseChange, recorded right derived functor), filtered clause IsIso colimit.post for all small filtered I : Type (u+1), direct-sum clause PreservesColimitsOfShape (Discrete J) incl. empty J; universes as same-unit boundedContinuityDirectImage, no auto-bound; lean.statement verbatim; item changed only in lean, the 10 dep nodes identical to base; no duplicate (reuses published composite), no hollow def, sorry only, docstrings with source/blueprint/4 proof steps; report has Worker report and Second reading by Q21. Finding H9: missing non-public import of proof-dep module Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage (det-pe-topos-functoriality-inverse-image), required by brief-stage2 line 104 and not reachable transitively; fixes/ProperHeartContinuityDirectImage.lean adds only that import. nt_compile.py: delivered and fixed files rc 0, no errors or warnings, no import cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHeartContinuityDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.properHeartContinuityDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHeartContinuityDirectImage.lean",
+  "statement": "theorem properHeartContinuityDirectImage {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p] (A : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}) : ∀ (q : ℤ), (∀ {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (M : I ⥤ SheafOfModules.{u + 1} A), IsIso (colimit.post M (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0 ⋙ DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q))) ∧ ∀ (J : Type (u + 1)), PreservesColimitsOfShape (Discrete J) (CochainComplex.singleFunctor (SheafOfModules.{u + 1} A) 0 ⋙ DerivedCategory.Q ⋙ Scheme.ProEt.ringHigherDirectImage p A q)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading uses the published module-valued ringHigherDirectImage, so both comparisons are in Mod(p_*A), with M placed in degree zero before localization and derivation; no node statement correction.",
+  "fixed_by": "NT-stage2-cc-76a625eaf"
  }
 }

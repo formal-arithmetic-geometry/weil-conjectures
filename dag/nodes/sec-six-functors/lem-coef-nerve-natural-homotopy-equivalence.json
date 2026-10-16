@@ -151,5 +151,28 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-9f3117fff (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-homotopy-equivalence-weak, the cited nodes def-cbc-enhanced-diagrams-cones, lem-cbc-quotient-cylinder-continuity and def-coef-zigzag-homotopy-calculus, the parent's citing step and the unit record. Compared with the side-tree base, the item's statement, stmt_deps, source, created and unit are unchanged. Sources checked: the scanned Dwyer–Kan p.29 says, after Prop 8.2, 'Proofs ... (ii) any natural transformation between functors induces a homotopy between their nerves'. Hatcher §4.1 p.342 says homotopy equivalences induce isomorphisms on all π_n 'even if basepoints are not required to be stationary'. Step 1: I checked the A×[1] functor's composition cases against naturality. Step 2: I recomputed the prism. The weights are nonnegative and sum to one, the R_i cover, and at the overlap t=S_i both sides give the same simplex by naturality. Step 3: I recomputed the face case (zero-width slab) and the degeneracy case (merged weights give S_j−t and t−S_{j+1}). The endpoints are |NF| at t=0 and |NG| at t=1. The Mathlib leaf IsQuotientMap.continuous_lift_prod_left (CompactOpen.lean:584-598) only needs a quotient map and a locally compact interval. Steps 4-5 are correct and match the def-coef weak-equivalence definition exactly. The new node is statement-only, self-contained, true, and not a restated clause; I tested it on the empty, point and disconnected cases. I searched the DAG with rg and read eight candidates; none is a duplicate. Mathlib has no induced map on π_n, so the node is correctly unsplit. The route is fine: def-cbc is a definition and the quotient-cylinder node a Mathlib leaf, so no tool_uses are needed and no SGA is cited. One minor point, not changed: the item's old statement takes geometric realization from def-coef, which does not define it; def-cbc, which the proof cites, does. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-642edaa51",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (NatTrans homotopy |NF|~|NG|, ReflTransGen zigzags with either orientation incl. zero links, P.comp Q = QP, both composite homotopies, IsWeakHomotopyEquivalence via def-cbc/def-coef conventions); dependency module lem-coef-homotopy-equivalence-weak matches Hatcher node and is admitted via proof-prerequisite closure; no hollow defs, sorry-only, docstrings ok. Finding (H3 universe): item fixed Category.{u,u}, so the stated citer lem-coef-homotopy-fractions-square-criterion cannot apply it to zigzag categories Diagram W w x y : Type (max u v) with Category.{v} (verified: test file fails against delivered module with NatTrans universe mismatch, compiles against fix). Fix: fixes/lean/Sheaf/CategoryTheory/NerveNaturalHomotopyEquivalence.lean generalizes to [Category.{v} A] [Category.{v} B], uses Mathlib nerve/nerveMap and IsWeakHomotopyEquivalence (nerveMap P) as def-coef does, and lists node proof steps 1-5 in the docstring; mathematics unchanged. nt_compile.py: delivered and fixed modules clean. Minor report inaccuracy (created.item claim, 'standard convention') noted only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NerveNaturalHomotopyEquivalence",
+  "declaration": "CategoryTheory.nerve_natTrans_homotopy_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/NerveNaturalHomotopyEquivalence.lean",
+  "statement": "theorem nerve_natTrans_homotopy_equivalence {A B : Type u} [Category.{v} A] [Category.{v} B] {F G : A ⥤ B} (η : NatTrans F G) : Nonempty ((nerveRealizationMap F).Homotopy (nerveRealizationMap G)) ∧ (∀ (P : A ⥤ B) (Q : B ⥤ A), Relation.ReflTransGen (fun X Y : A ⥤ A => Nonempty (NatTrans X Y) ∨ Nonempty (NatTrans Y X)) (P.comp Q) (𝟭 A) → Relation.ReflTransGen (fun X Y : B ⥤ B => Nonempty (NatTrans X Y) ∨ Nonempty (NatTrans Y X)) (Q.comp P) (𝟭 B) → Nonempty ((ContinuousMap.comp (nerveRealizationMap Q) (nerveRealizationMap P)).Homotopy (ContinuousMap.id _)) ∧ Nonempty ((ContinuousMap.comp (nerveRealizationMap P) (nerveRealizationMap Q)).Homotopy (ContinuousMap.id _)) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (nerveMap P))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.nerveRealizationMap",
+   "CategoryTheory.nerve_natTrans_homotopy_equivalence"
+  ],
+  "fixed_by": "NT-stage2-cc-642edaa51"
  }
 }

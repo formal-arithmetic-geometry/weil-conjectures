@@ -218,5 +218,41 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-d162e434c (reviewer sub-agent of L); spot-checked: Read all required documents, the item, both new nodes, cited statements, route, blueprint ancestor, and Dwyer–Kan source locations. Verified every proof step, hypothesis, Bergner cofibrancy argument, hammock comparison, diagonal map, naturality, edge cases, duplicate searches, and Mathlib searches. Wrote review.md; no repairs or tool_uses required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c71e0139",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Read the node, the coherent-nerve dependency and its BergnerModelData/SCat declarations, the reused hammock definitions, the report (it has both a Worker report and a Second reading by Q99) and the whole 451-line module. The only node change is the lean field; lean.statement matches the signature exactly; all 15 declarations exist. All 15 statement clauses match. The free comonad is ReflQuiv.adj.toComonad; face/degeneracy indices are right; localization is Mathlib Localization/Q of the strict image of F^{n+1}W; the cofibrancy claims hold in the recorded Bergner structure; the middle term is the diagonal of degreewise hammocks; the left/right maps, both weak-equivalence claims, both triangles and naturality are pinned by formulas. Every map in the Nonempty package is pinned by formulas; no field is false or vacuous. Edge cases covered: empty category, degree 0, W only identities or all arrows, empty hammocks, functors collapsing nonidentity arrows. Gates OK: no hollow definitions, docstrings and 7-step proof present, only the theorem is sorry, private imports match stated proof deps or recorded Mathlib matches, lines within 100 characters. nt_compile.py --json with the local side overlay is clean (9.8 s). Not blocking: the module imports definitions from the downstream hammock node's module, and the omitted future cyclic import is documented; Cat.{u,u} follows the recorded SCat universe."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DkCofibrantLocalizationComparison",
+  "declaration": "CategoryTheory.dk_cofibrant_localization_comparison",
+  "declarations": [
+   "CategoryTheory.dkFreeComonad",
+   "CategoryTheory.dkFreePower",
+   "CategoryTheory.dkFreeObject",
+   "CategoryTheory.dkFreeAugmentation",
+   "CategoryTheory.DkEnrichedPresentation",
+   "CategoryTheory.DkFreeResolution",
+   "CategoryTheory.dkResolutionMarked",
+   "CategoryTheory.dkHammockRowProduct",
+   "CategoryTheory.DkGridImage",
+   "CategoryTheory.DkDiagonalHammock",
+   "CategoryTheory.dkHammockCategory",
+   "CategoryTheory.DkLocalizationComparison",
+   "CategoryTheory.DkSpanNaturality",
+   "CategoryTheory.DkCofibrantLocalizationComparisonStatement",
+   "CategoryTheory.dk_cofibrant_localization_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DkCofibrantLocalizationComparison.lean",
+  "statement": "theorem dk_cofibrant_localization_comparison : Nonempty DkCofibrantLocalizationComparisonStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded Bergner interface and the already landed reduced-hammock definitions. The free comonad is Mathlib ReflQuiv.adj.toComonad. Characterized presentations retain all degree, face, degeneracy, augmentation, inversion, grid and row-product formulas; the final existence statement includes strict functoriality of the whole span. Only the theorem is postponed."
  }
 }
