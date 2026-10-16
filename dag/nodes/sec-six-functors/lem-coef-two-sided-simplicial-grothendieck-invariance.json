@@ -30,7 +30,9 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
   "def-coef-zigzag-homotopy-calculus",
-  "lem-coef-bisimplicial-diagonal-equivalence"
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "def-coef-simplicial-hammock-pair",
+  "lem-coef-thomason-grothendieck-comparison"
  ],
  "proof": [
   {
@@ -243,5 +245,47 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-923fea4e1 (reviewer sub-agent of L); spot-checked: I read in full the item's statement and six steps, the new node lem-coef-ordinary-two-sided-bar-comparison, every cited statement (coherent-nerve, zigzag-calculus, bisimplicial-diagonal, Kan-Quillen, simplicial-set) and the citer fixed-hammock, which uses the item exactly as stated. Item statement: the variances, the morphism shape (h,u,v), composition and the operator t were checked against the transfunctor naturality and identity/composition laws; it is true and has no missing hypothesis. Step 1: coproducts of weak equivalences via realization; f×1_K from the diagonal lemma on ∐_{K_q}f; f×g by factoring and composing (model structure). Step 2: d_0/d_k endpoint equations are transfunctor naturality; the T'→T equations are exactly the α:F'⇒FH condition. Elementary, as marked. Step 3: (V_t,F_t,G_t) is a morphism of the new node's type, so the strict naturality makes every zigzag arrow bisimplicial; the diagonal lemma's main clause then applies, and the two diagonals are T_{rrrr} and 𝖭(F⊗G). Step 4: with O constant, T_{r,r,k,r} is a coproduct over O^{k+1} of 𝖭F(z_k)×∏V(z_{a-1},z_a)×𝖭G(z_0). Step 5: factorwise hypotheses plus the exchanged-direction diagonal clause. Step 6: two-of-three through each commuting square f_B a'=a f_A, and the end map is identified by the new node's naturality clause. New node: true, since E=Th_{Gr F}(G∘p) models the two-sided bar hocolim and the zigzag pieces are functors on the category of triples. Tested on terminal C, terminal fibers, empty C and C=[1] with F(0)=[1]. Not a duplicate of the Thomason, aspherical, BK or special-resolution nodes, and not a restatement of an item clause. B1–B9 hold, blueprint via = [item]+the item's via, all citations are in the unit, there are no tool_uses and no cycle. Limitation: Dwyer–Kan has no local copy and network access is blocked, so I could not open the cited pages. The delivery is marked by:agent with a WANTED line, and I checked the mathematics independently. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.TwoSidedSimplicialGrothendieckInvariance",
+  "declaration": "CategoryTheory.TwoSidedSimplicialGrothendieck.two_sided_simplicial_grothendieck_invariance",
+  "declarations": [
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.Covariant",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.Contravariant",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.projection",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.Total",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.oplaxMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.totalMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.covariant_fiber_laws",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.contravariant_fiber_laws",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.covariantFiber",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.contravariantFiber",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.diagonalNerve",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.diagonalNerveMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.total_diagram_laws",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.totalDiagram",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.CovariantMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.ContravariantMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.covariantFiberMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.contravariantFiberMap",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.total_comparison_naturality",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.totalComparison",
+   "CategoryTheory.TwoSidedSimplicialGrothendieck.two_sided_simplicial_grothendieck_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/TwoSidedSimplicialGrothendieckInvariance.lean",
+  "statement": "theorem two_sided_simplicial_grothendieck_invariance {O : Type u} {A B : SCat.{u}} (objectA : O ≃ A) (objectB : O ≃ B) (H : A ⟶ B) (fixes : ∀ z : O, H.obj (objectA z) = objectB z) (F' : Contravariant.{u, v} A) (F : Contravariant.{u, v} B) (G' : Covariant.{u, v} A) (G : Covariant.{u, v} B) (α : ContravariantMap H F' F) (β : CovariantMap H G' G) (hH : ∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (H.map x y)) (hα : ∀ x : A, SSet.Enhanced.IsWeakHomotopyEquivalence (diagonalNerveMap (contravariantFiberMap α x))) (hβ : ∀ x : A, SSet.Enhanced.IsWeakHomotopyEquivalence (diagonalNerveMap (covariantFiberMap β x))) : SSet.Enhanced.IsWeakHomotopyEquivalence (diagonalNerveMap (totalComparison H α β))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The transfunctors, fiber diagrams, iterated ordinary Grothendieck construction and its canonical map are explicit data. The four named construction-law theorems state the simplicial-diagram and naturality laws already specified by this node, with source and proof docstrings; no object is chosen from an existence theorem. Fiber categories lie in max u v, allowing the fixed larger universe. Second reading reuses SSet.Thomason.Gr, grMap and grPre for the existing oplax construction rather than repeating its definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5478f0c80",
+  "group": "N8",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and DK Def 9.1/10.1-10.2, Prop 10.4-10.5: the object set O with the equivalences and fixes, transfunctors with strict laws (HEq shown satisfiable via an operator-identity Functor.ext probe), the transformations' commutes conditions, the Total triple construction reusing Thomason.Gr/grMap/grPre with the node's arrows and composition, the canonical totalComparison, hypotheses on enriched hom maps and diagonal fiber nerves only, and a conclusion on the canonical map. Universes max u v with v free; empty O, empty fibers and n=0 are covered. No hollow defs; 5 sorrys (4 named law theorems + main); docstrings and the six proof steps are present; statement verbatim; stmt_deps gain only landed nodes, no cycle, no citers. nt_compile clean (1.8 s, only sorry warnings). No findings."
  }
 }
