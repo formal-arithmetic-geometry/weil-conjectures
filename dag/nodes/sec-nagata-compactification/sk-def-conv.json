@@ -131,5 +131,35 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-a0baf7394 (reviewer sub-agent of L); spot-checked: I read the whole item (a definition with no proof steps, unit steps [], no new nodes) against main-20261015 sk-def-conv/_section.md and the master copy, and read all 13 cited definition nodes, all Mathlib leaves and none merged. Stacks checks: schemes 01IO(5): an immersion is a closed immersion followed by an open one. morphisms 01W1, 04XU, 01WH(2): finite is affine plus finite on affine opens, and the sheaf form is in def-weil-finite-integral-morphism via 01PB. 02GV: étale; the unramified node is LFT plus open diagonal. 01RZ and 01HW: surjective, affine. Small cases: Spec 0, empty to Spec k (fails only surjectivity), Spec k[t] to Spec k (affine but not finite), a countable disjoint union of Spec k over Spec k (étale, not quasi-compact). Overlapping bundles (def-weil-pbc-scheme-conventions, def-pc-morphism-conventions, def-weil-scheme-morphism-properties) are broader, so same_as [] stands. The unit's realized.statement went from the bundle plus components to [sk-def-conv]; correct for the unit's own node, route unchanged. One fault, C1 (an uncited claim inside a definition): the proper clause says locally of finite type and called this proper as in def-weil-proper-morphism, which says of finite type. The two agree only by Stacks 04XU (universally closed implies quasi-compact), which was not cited. Fixed: the clause now cites the existing Mathlib leaf lem-weil-pbc-universally-closed-quasi-compact; it is added to stmt_deps (no cycle: its deps do not reach sk-def-conv); split_report.summary notes the change. No target weakened, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-971069dea",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Delivery 971069dea464 adds only an existing:true Mathlib lean record (primary AlgebraicGeometry.IsProper, Mathlib.AlgebraicGeometry.Morphisms.Proper, statement verbatim with Proper.lean:42, 10 listed declarations all exported by that module) and a report with real Worker report and Second reading by NJ sections. Source _section.md (order 119) and node agree. All six clauses were checked by compiled probes (lcompile.py, exit 0, no warnings; nt_compile.py refuses files outside the side lean tree): IsProper implies QuasiCompact (04XU leaf); IsFinite iff IsAffineHom plus finite_app; isImmersion_iff_exists closed then open with no qc condition; Surjective iff Function.Surjective; Etale iff LFP, Flat and (LFT with open-immersion diagonal), matching the three deps; IsAffine iff X isomorphic to Spec A. All 14 stmt_deps records match. Multi-declaration existing format has stage-2 precedent (sk-def-pe-morphisms). The note does not overclaim. Edge cases and universes fine. No hollow defs, no proofs, no extra hypotheses, no build or live write. No findings."
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.Proper",
+  "declaration": "AlgebraicGeometry.IsProper",
+  "declarations": [
+   "AlgebraicGeometry.IsProper",
+   "AlgebraicGeometry.IsSeparated",
+   "AlgebraicGeometry.UniversallyClosed",
+   "AlgebraicGeometry.LocallyOfFiniteType",
+   "AlgebraicGeometry.QuasiCompact",
+   "AlgebraicGeometry.IsFinite",
+   "AlgebraicGeometry.IsIntegralHom",
+   "AlgebraicGeometry.IsAffineHom",
+   "AlgebraicGeometry.IsClosedImmersion",
+   "AlgebraicGeometry.IsOpenImmersion"
+  ],
+  "statement": "class IsProper : Prop extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f where",
+  "branch": "mathlib",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "This node fixes no new Lean notion: its six clauses are a bundle of existing scheme and morphism conventions. The primary existing declaration is AlgebraicGeometry.IsProper; the declarations list records the existing interfaces available from its public Mathlib import (IsSeparated, UniversallyClosed, LocallyOfFiniteType, QuasiCompact, IsFinite, IsIntegralHom, IsAffineHom, IsClosedImmersion, IsOpenImmersion). The remaining clauses are supplied by the named statement dependencies: IsImmersion, Surjective, Etale, LocallyOfFinitePresentation, Flat, LocallyOfFiniteType, pullback.diagonal, Scheme, Scheme.Hom, Spec and IsAffine. The universally-closed-to-quasi-compact instance is the bridge for the proper locally-finite-type wording. No module is introduced and no notion is duplicated; the named statement dependencies remain the authoritative clause records."
  }
 }

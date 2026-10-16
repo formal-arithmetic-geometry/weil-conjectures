@@ -24,7 +24,8 @@
   "place": "Kerodon Proposition 7.3.4.7 (02ZW), with target base the point, together with Proposition 7.3.4.3 (02ZP). Apply to the nerve of the Grothendieck projection; its chosen cocartesian lifts are (f,identity), and its relative join with N(I) is the nerve of the displayed collage. Both pages read online; not archived in literature/. These are Kerodon identifiers, not Stacks tags."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -273,5 +274,38 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-fiber-cocone-simplex-extension, all four cited statements, the parent finite-poset-kan-extension Steps 0-1 that use the item, the unit record, and Kerodon 02ZR online. Item statement: verified true independently. p is a split opfibration and U(i) -> K_{/i} has a left adjoint, so it is final; the left Kan extension along K in P gives the extension, with the 1_i fibre cocones colimiting. The strict-fibre wording handles I with nontrivial endomorphisms; empty base and empty fibres also checked. Step 1: by opposites, the join-cone-calculus base change with R=Delta^0 at (x,Q_i) gives c_i with c_i restricted to N(U(i)) equal to Q_i exactly; initiality transfers through the cbc cocone quasicategory. Step 2 is elementary gluing of fibres. Step 3: checked degreewise via Eilenberg-Zilber that X_sigma minus B_sigma injects onto S_n minus S_{n-1} and that B_sigma is the full preimage, so the pushout holds even when sigma repeats vertices. Step 4: [n] x_I P equals P_{U sigma} on objects, fibre arrows, mixed arrows and the second copy; B_sigma equals B_V; since n>=1 every vertex fibre lies in the boundary and carries c_{sigma(r)}. Step 5 is the exhaustive union. New node: exactly 02ZR with C=Delta^n, C_0 = boundary of Delta^n (n>=1), U: E -> Delta^0; the relative join equals the collage nerve and condition (*) follows from the vertex hypothesis. n=1 checked by hand via finality of B in K_V plus initiality of c_0. It is a real local lemma, not a restatement (D1/D2 fine), and B1-B7 hold. Duplicates: lem-coef-infinity-relative-kan-existence (7.3.5.5) was not listed in the report, but it is a global theorem with hypotheses on K_c and no prescribed boundary, so it is not a duplicate. parameter-cone-extension (constant family), grothendieck-limits-colimits (needs colimit-preserving transports) and the parent (circular) are also not duplicates. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) as a generic cone-calculus black box. No cycle, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86af3cbc2",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node, the Lean module, the report (both sections present), the EnhancedDiagramsCones cocone/comma definitions and FinalIndexColimit.coconeHomotopy. The statement matches the node clause by clause: Collage homs and mixed composition are exact; the hypothesis is the strict-fiber colimit via Grothendieck.ι; the conclusion gives an exact restriction to Q, then for each i an apex equation, IsColimiting, and equality of the whole coconeHomotopy with the prism of the 1_i mixed arrows. The prism direction matches coconeCategory (time 0 = diagram, time 1 = constant apex). Edge cases (empty I, empty fibers, endomorphisms) are covered; no extra assumptions; universe u per the dependency convention. Helpers have real data, the theorem's only proof is sorry, all docstrings are present, no duplicate in Mathlib or the project. The node differs only in lean and in the stmt_deps addition of the passed, acyclic lem-coef-infinity-final-index-colimit. lean.statement is verbatim. nt_compile --json is clean (2.2 s, exit 0). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiberColimitCollage",
+  "declaration": "CategoryTheory.fiber_colimit_collage",
+  "declarations": [
+   "CategoryTheory.Collage",
+   "CategoryTheory.CollageHom",
+   "CategoryTheory.instCategoryCollage",
+   "CategoryTheory.collageProjection",
+   "CategoryTheory.collageLeft",
+   "CategoryTheory.collageRight",
+   "CategoryTheory.collageFiber",
+   "CategoryTheory.collageFiberMap",
+   "CategoryTheory.collageFiberCocone",
+   "CategoryTheory.collageFiberPrismFunctor",
+   "CategoryTheory.collageFiberPrism",
+   "CategoryTheory.fiber_colimit_collage"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiberColimitCollage.lean",
+  "statement": "theorem fiber_colimit_collage {I : Type u} [Category.{u} I] (U : I ⥤ Cat.{u, u}) {E : SSet.{u}} [E.Quasicategory] (Q : nerve (Grothendieck U) ⟶ E) (hcolim : ∀ i : I, ∃ t : (SSet.Enhanced.coconeCategory (nerveMap (Grothendieck.ι U i) ≫ Q)).obj (Opposite.op (SimplexCategory.mk 0)), SSet.Enhanced.IsColimiting (nerveMap (Grothendieck.ι U i) ≫ Q) t) : ∃ Qbar : nerve (Collage I U) ⟶ E, nerveMap collageLeft ≫ Qbar = Q ∧ ∀ i : I, ∃ c : (SSet.Enhanced.coconeCategory (collageFiberMap U i ≫ Qbar)).obj (Opposite.op (SimplexCategory.mk 0)), c.1.1 = Qbar.app (Opposite.op (SimplexCategory.mk 0)) (ComposableArrows.mk₀ (Sum.inr i)) ∧ SSet.Enhanced.IsColimiting (collageFiberMap U i ≫ Qbar) c ∧ SSet.Enhanced.coconeHomotopy (collageFiberMap U i ≫ Qbar) c = collageFiberPrism U i ≫ Qbar",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The full induced coherent cocone is specified by equality of its prism map in every degree, with its apex specified separately also for empty fibers. All collage and canonical-prism helpers have real construction data and belong to this node. The added landed statement dependency supplies only the existing coconeHomotopy projection."
  }
 }

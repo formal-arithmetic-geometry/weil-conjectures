@@ -246,5 +246,37 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-08b365bf7 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited node statement in full (realization-finite-limits, def-cbc-enhanced-diagrams-cones, serre-homotopy-exact-sequence, small-object-cell-factorization, def-weil-pbc-category-colimit, def-weil-pbc-quasi-compact-scheme), plus the parent kan-quillen-right-proper, the unit and the chapter. Hovey §2.4 is not archived in literature/ and network access is blocked, so I could not open it at the cited places. proof_origin is agent and WANTED is recorded; every statement and step was instead checked mathematically. The item statement is unchanged; no hypothesis is added and the edge cases S^{-1}=∅ and D^0 are present. Steps 1-9 are correct. Step 2: pushouts of closed T1 inclusions are closed T1, and compact-chain with λ=ω supplies exactly the ℵ_0 smallness hypothesis of the small-object node. Step 3: the pushout deformation is continuous via both currying clauses, and the limit-stage compactness induction is set up. Step 4: J⊆I-cell, and the π_0/π_n lifts use S^0→D^1 and the reduced cylinder. Step 5: the right-properness chase uses only the stated exact-sequence and orbit clauses, and kification is harmless. Step 6: I verified the explicit box homeomorphism formulas, including that they agree on the common edge. Step 7: P→Y^{D^n} is the pullback of p^{S^{n-1}} along the Serre restriction, Q∈W∩F, so Q is surjective. Step 8: the retract argument is sound. Step 9: the restriction to k-spaces works because colimits of k-spaces are topological colimits and 𝒦 is a full subcategory. The new nodes are true and independent, not restatements: compact-chain is Hovey 2.4.2 (proof checked via a closed-discrete-subset argument, tested on A=∅ and non-Hausdorff X_0); sphere-mapping holds for arbitrary spaces by the exponential law and compression (tested r=-1, r=0); the currying leaf was checked at CompactOpen.lean lines 430/435/458/466. rg over the whole DAG found no duplicates, there is no cycle, the route stays in-unit and no tool_uses are needed. FIX 1 (B6): the currying mathlib_match.how gave curry_apply at 436-438; corrected to 435-436. FIX 2 (E5): step 7 claimed 'homotopy equivalence, so p^{D^n}∈W by step 1', which step 1 does not give and the homotopy is not based; I wrote the argument out explicitly (ec=1, track t↦H_t(h), free homotopy with change of basepoint, then 2-of-3 on e_Y p^{D^n}=p e_X). Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f04bb444",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Checked every clause of the node against the Lean. The category is the dependency's CompactlyGenerated.{u,u}. W uses the dependency's componentsMap and homotopyGroupMap (path components; every degree r>=1 at every source basepoint). F = J.rlp with J the maps x↦(x,0) from TopCat.disk n into disk n × unitInterval. C = (F⊓W).llp. I = ofHoms of Mathlib's diskBoundaryInclusion, with I.rlp = F⊓W. The theorem asserts retract closure and two-out-of-three for W, both IsWeakFactorizationSystem and HasFunctorialFactorization conjuncts, J ≤ C⊓W, and closure of C⊓W under cobase change, u-small coproducts, u-small transfinite composition and retracts. Edge cases checked: n=0 (empty S^-1), empty spaces, degree 1, empty coproduct. The single universe u is the dependency's size convention. No added hypotheses, no hollow definitions, only one sorry, docstrings carry source place and blueprint tag, lean.statement is verbatim, statement unchanged, no duplicate notion found. nt_compile.py per-file compile against the local overlay: rc=0, no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TopologicalSerreModel",
+  "declaration": "CompactlyGenerated.Serre.topological_serre_model",
+  "declarations": [
+   "CompactlyGenerated.Serre.disk_compactlyGenerated",
+   "CompactlyGenerated.Serre.diskBoundary_compactlyGenerated",
+   "CompactlyGenerated.Serre.diskCylinder_compactlyGenerated",
+   "CompactlyGenerated.Serre.boundaryInclusion",
+   "CompactlyGenerated.Serre.cylinderBottom",
+   "CompactlyGenerated.Serre.I",
+   "CompactlyGenerated.Serre.J",
+   "CompactlyGenerated.Serre.W",
+   "CompactlyGenerated.Serre.F",
+   "CompactlyGenerated.Serre.C",
+   "CompactlyGenerated.Serre.topological_serre_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/TopologicalSerreModel.lean",
+  "statement": "theorem topological_serre_model : W.{u}.IsStableUnderRetracts ∧ W.{u}.HasTwoOutOfThreeProperty ∧ IsWeakFactorizationSystem C.{u} (F.{u} ⊓ W.{u}) ∧ IsWeakFactorizationSystem (C.{u} ⊓ W.{u}) F.{u} ∧ HasFunctorialFactorization C.{u} (F.{u} ⊓ W.{u}) ∧ HasFunctorialFactorization (C.{u} ⊓ W.{u}) F.{u} ∧ I.{u}.rlp = F.{u} ⊓ W.{u} ∧ J.{u} ≤ C.{u} ⊓ W.{u} ∧ (C.{u} ⊓ W.{u}).IsStableUnderCobaseChange ∧ IsStableUnderCoproducts.{u} (C.{u} ⊓ W.{u}) ∧ IsStableUnderTransfiniteComposition.{u} (C.{u} ⊓ W.{u}) ∧ (C.{u} ⊓ W.{u}).IsStableUnderRetracts",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "States the explicit functorial model axioms as in the node, using the exact dependency k-space category and component/group maps. I.rlp identifies the generating cofibrations; F is definitionally J.rlp. All helpers are canonical generator maps and classes of this model structure, with actual data; the sole postponed theorem is the item itself."
  }
 }
