@@ -243,5 +243,34 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-1e9c90198 (reviewer sub-agent of L); spot-checked: Read the item JSON in full, both cited nodes (def-weil-pbc-category-colimit and lem-coef-lifting-class-closure, both Mathlib leaves), the parent lem-coef-reedy-model-structure steps 4-6, the unit record and the main-20261015 ancestor proof. Statement: the only change from the side-DAG base is that the construction of the relative latching map is spelled out. Hypotheses and conclusion are the same and nothing is weakened. It is exactly what Reedy steps 4-6 need: an infinite slice D_j, L = C or C∩W, a cocomplete category. Small cases checked by hand: empty K, discrete K (agrees with Mathlib colimitsOfShape_discrete_le_llp_rlp, LiftingProperty.lean:141), a single arrow (colim f is lambda_1 composed with the pushout of f_0), two parallel arrows (latching object A_0 coproduct A_0), and unbounded degree. Steps 1-6 recomputed: the colimit map F; the induction invariant with an empty base; ell_k by the latching universal property; the identity ell_k L_kf = u_k s^A_k; the pushout map q_k; the square tested on both coprojections; the filler from the defining diagonal property; restrictions giving h_k f_k = u_k and h_k B(alpha) = h_j; the four kinds of arrow in K_{<n+1}; N-recursion with choice; descent through the colimit with both triangles; the empty case. No step uses a cited node's proof and there are no new nodes. Route: both citations are Mathlib-leaf notions, so no tool_uses are needed. Duplicates checked: lem-coef-direct-wfs-extension (finite K, functorial WFS; its colimit clause is a special case of the item), lem-coef-transfinite-left-lifting and lem-coef-model-cofibrant-colimit-comparison; none states this. Blueprint grep finds no latching/Reedy node, so same_as = [] is right. Mathlib has latching only as definitions in AlgebraicTopology/Reedy/Basic.lean, so the item is not a leaf; searches of all three kinds are recorded. Hovey is not in literature/ or on this machine, so the place numbers Prop 5.1.4/Cor 5.1.5 could not be checked against the page; the report records WANTED and proof_origin is agent, and the proof stands on the cited statements alone. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallDirectColimitLifting",
+  "declaration": "CategoryTheory.smallDirectColimitLifting",
+  "declarations": [
+   "CategoryTheory.directLatchingCategory",
+   "CategoryTheory.directLatchingDiagram",
+   "CategoryTheory.directLatchingObject",
+   "CategoryTheory.directLatchingMap",
+   "CategoryTheory.directLatchingMapOfNat",
+   "CategoryTheory.directRelativeLatchingCompatibility",
+   "CategoryTheory.directRelativeLatchingMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallDirectColimitLifting.lean",
+  "statement": "theorem smallDirectColimitLifting {K : Type w} [SmallCategory K] {B : Type u} [Category.{v} B] [HasColimitsOfSize.{w, w} B] (T : MorphismProperty B) (e : K → ℕ) (hdeg : (∀ {i j : K} (f : i ⟶ j), i ≠ j → e i < e j) ∧ (∀ {i : K} (f : i ⟶ i), f ≠ 𝟙 i → False)) {A C : K ⥤ B} (f : A ⟶ C) (h : ∀ k : K, T.llp (directRelativeLatchingMap f k)) : T.llp (colimMap f)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "directRelativeLatchingCompatibility is the named sorry well-definedness theorem of directRelativeLatchingMap (coord/brief-stage2.md §2); it is node proof step 3 (f_k s^A_k = s^B_k L_k f) and is recorded here so stage 3 proves it with the item.",
+  "fixed_by": "NT-stage2-cc-ae093cecb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae093cecb",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: HasColimitsOfSize.{w,w} B with K : Type w SmallCategory; T.llp; hdeg proved equivalent to strict increase along nonidentity arrows (compiled probe); latching category = CostructuredArrow (𝟭 K) k minus mk (𝟙 k); canonical colimit.desc/colimMap/pushout.desc maps; hypothesis ∀ k, T.llp (relative latching map); conclusion T.llp (colimMap f). Edge cases checked: empty K, empty latching category, discrete K, parallel arrows, unbounded/infinite degrees. No extra hypotheses, universes bound, lean.statement verbatim. No hollow defs; the sorry'd well-definedness theorem was proved true in a probe. nt_compile: delivered, probe and fixed module all rc 0. Fixes: (1) lean-record.json adds directRelativeLatchingCompatibility to lean.declarations; (2) complete replacement SmallDirectColimitLifting.lean adds source places to the helper docstrings, a Main definitions/statements list and a proof sketch for the compatibility theorem, signatures unchanged."
  }
 }
