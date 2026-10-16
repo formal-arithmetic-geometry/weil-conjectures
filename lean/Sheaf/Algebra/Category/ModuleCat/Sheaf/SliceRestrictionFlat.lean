@@ -7,11 +7,10 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.LeftExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.CategoryTheory.RingedSliceExtensionExactness
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlatLimits
 
 /-!
 # Flatness under restriction to a slice site
@@ -24,7 +23,7 @@ Source: Stacks Project, Modules on Sites, Tag 0E8J, Lemma `lemma-restriction-fla
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace SheafOfModules
 
@@ -49,7 +48,20 @@ theorem isFlat_over
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}
     (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
-    (U : C) (hF : IsFlat F) : IsFlat (R := R.over U) (F.over U) := by
-  sorry
+    (U : C) (hF : IsFlat F) : IsFlat (R := R.over U) (F.over U)  := by
+  let _ := SheafOfModules.monoidalCategory R
+  let _ : MonoidalCategory (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) :=
+    SheafOfModules.monoidalCategory (R.over U)
+  let _ : SymmetricCategory (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) :=
+    SheafOfModules.symmetricCategory (R.over U)
+  refine (exactFunctor_iff _).2 ⟨?_, ?_⟩
+  · exact isFlat_over_preservesFiniteLimits F U hF
+      (SheafOfModules.monoidalCategory (R.over U)) rfl
+  · obtain ⟨_, ⟨closed⟩, _⟩ := SheafOfModules.tensorClosed (R.over U)
+    let _ : MonoidalClosed (SheafOfModules.{u}
+        ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) := closed
+    exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _)
 
 end SheafOfModules

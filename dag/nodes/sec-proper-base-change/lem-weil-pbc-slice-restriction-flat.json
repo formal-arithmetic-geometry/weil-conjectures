@@ -25,60 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Take an arbitrary exact three-term complex $\\mathcal G_1\\to\\mathcal G_2\\to\\mathcal G_3$ of $\\mathcal O_U$-modules. Write $j_{U!}$ for the sheafified direct-sum extension of the cited exactness lemma. Its forward implication gives an exact complex $j_{U!}\\mathcal G_1\\to j_{U!}\\mathcal G_2\\to j_{U!}\\mathcal G_3$ of $\\mathcal O$-modules.",
+   "text": "Tensoring by the restricted flat sheaf preserves finite limits by the slice finite-limit lemma.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-exactness"
+    "lem-weil-pbc-slice-restriction-flat-finite-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8J (lemma-restriction-flat)."
-   }
+   "elementary": false
   },
   {
-   "text": "Flatness of $\\mathcal F$ means precisely that the functor $\\mathcal H\\mapsto\\mathcal H\\otimes_{\\mathcal O}\\mathcal F$ is exact. Apply that hypothesis to the complex in step 1: $(j_{U!}\\mathcal G_1)\\otimes\\mathcal F\\to(j_{U!}\\mathcal G_2)\\otimes\\mathcal F\\to(j_{U!}\\mathcal G_3)\\otimes\\mathcal F$ is exact.",
+   "text": "The closed monoidal structure makes tensorLeft a left adjoint. Symmetry identifies tensorRight with tensorLeft, so tensorRight preserves finite colimits.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine finite-limit and finite-colimit preservation using exactFunctor_iff. By the definition of flatness, the restricted sheaf is flat.",
    "uses": [
     "def-pc-flat-sheaf-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8J (lemma-restriction-flat)."
-   }
-  },
-  {
-   "text": "For $i=1,2,3$ use the natural isomorphism $j_{U!}(\\mathcal G_i\\otimes_{\\mathcal O_U}\\mathcal F|_U)\\cong(j_{U!}\\mathcal G_i)\\otimes_{\\mathcal O}\\mathcal F$. Naturality in $\\mathcal G_i$ identifies each arrow induced by $a:\\mathcal G_i\\to\\mathcal G_{i+1}$: the isomorphism at $i+1$ composed with $j_{U!}(a\\otimes1)$ equals $(j_{U!}a\\otimes1)$ composed with the isomorphism at $i$. Thus the complex in step 2 is isomorphic to the extension by zero of the tensor complex on the slice, and the latter extended complex is exact.",
-   "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8J (lemma-restriction-flat)."
-   }
-  },
-  {
-   "text": "Apply the reverse implication of the exactness lemma to conclude that $\\mathcal G_1\\otimes_{\\mathcal O_U}\\mathcal F|_U\\to\\mathcal G_2\\otimes_{\\mathcal O_U}\\mathcal F|_U\\to\\mathcal G_3\\otimes_{\\mathcal O_U}\\mathcal F|_U$ is exact. The original complex was arbitrary, including those with a zero end term, so tensoring with $\\mathcal F|_U$ is exact. By the definition of flatness on $(\\mathcal C/U,\\mathcal O_U)$ this is the conclusion.",
-   "uses": [
-    "lem-weil-pbc-ringed-slice-extension-exactness",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8J (lemma-restriction-flat)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-slice-extension-exactness",
+  "lem-weil-pbc-slice-restriction-flat-finite-limits",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-ringed-slice-extension-tensor"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "Q3 stage 3",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0E8J (lemma-restriction-flat)."
+  "place": "Tag 0E8J (lemma-restriction-flat), finite-limit reduction and closed-tensor colimit argument"
  },
  "mathlib_searches": [
   {
@@ -205,5 +181,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-f26e0",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261016T054838-L-158061",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG/report against packet and sheaf-dag; all modules and three direct importers compile cleanly."
  }
 }

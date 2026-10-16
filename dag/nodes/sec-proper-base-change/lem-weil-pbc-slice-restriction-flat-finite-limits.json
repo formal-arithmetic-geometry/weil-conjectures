@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-slice-restriction-flat-finite-limits",
+ "kind": "statement",
+ "title": "Finite limits after restricting a flat sheaf to a slice",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, let $U$ be an object, and let $\\mathcal F$ be flat. Then the tensor functor $\\mathcal G \\mapsto \\mathcal G \\otimes_{\\mathcal O_U} \\mathcal F|_U$ preserves finite limits on the slice site.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8J (lemma-restriction-flat), Steps 1--4, finite-limit component"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Given a finite-limit diagram of modules on the slice, apply the sheafified direct-sum extension by zero. The extension exactness equivalence identifies its finite-limit cone with the extension of the original cone.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the extended diagram with the flat sheaf on the original site, so its finite limits are preserved. The natural extension-by-zero tensor comparison identifies this tensor diagram with the extension of the restricted tensor diagram.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the reverse implication of the extension exactness equivalence, or equivalently its cone reflection, to reflect the finite-limit comparison back to the slice. This is precisely preservation of finite limits by tensoring with the restriction.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-exactness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-slice-extension-exactness",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8J (lemma-restriction-flat), finite-limit component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite limits of tensoring a flat sheaf after restriction to a slice site",
+   "results": "No exact theorem returned.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PreservesFiniteLimits tensorRight restricted sheaf slice",
+   "results": "Only ordinary module flatness and unrelated geometric restriction results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*tensorRight.*over",
+   "results": "No existing arbitrary ringed-site slice theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat",
+  "date": "2026-10-16",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-slice-restriction-flat",
+   "place": "Finite-limit component of the restriction-flat proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlatLimits",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SliceRestrictionFlatLimits.lean",
+  "declaration": "SheafOfModules.isFlat_over_preservesFiniteLimits",
+  "statement": "theorem isFlat_over_preservesFiniteLimits {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}} (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : C) (hF : IsFlat F) (m : MonoidalCategory (SheafOfModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U)))) (hm : m = SheafOfModules.monoidalCategory (R.over U)) : @PreservesFiniteLimits _ inferInstance _ inferInstance (@tensorRight _ _ m (F.over U))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-f26e0",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261016T054838-L-158061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-f26e0",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261016T054838-L-158061",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG/report against packet and sheaf-dag; all modules and three direct importers compile cleanly."
+ }
+}
