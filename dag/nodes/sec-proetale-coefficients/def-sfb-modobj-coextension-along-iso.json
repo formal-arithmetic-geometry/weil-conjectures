@@ -3,40 +3,147 @@
  "blueprint": {
   "is": "def-sfb-modobj-coextension-along-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coextension along an isomorphism is restriction along the inverse",
- "statement": "In the situation of [def-sfb-modobj-restriction-equivalence], there is a natural\nisomorphism\n$$\n\\operatorname{Coext}_\\varphi\\cong\\operatorname{Res}_{\\varphi^{-1}}\n$$\nof functors $\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.",
+ "statement": "In the situation of [def-sfb-modobj-restriction-equivalence], there is a natural\nisomorphism\n$$\n\\operatorname{Coext}_\\varphi\\cong\\operatorname{Res}_{\\varphi^{-1}}\n$$\nwhere $\\operatorname{Coext}_\\varphi$ is the coextension functor of\n[def-sfb-modobj-coextension]. This is an isomorphism of functors $\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension-along-iso.md",
   "place": "node def-sfb-modobj-coextension-along-iso, order 1595"
  },
  "stmt_deps": [
-  "def-sfb-modobj-restriction-equivalence"
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-modobj-coextension"
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Res}_{\\varphi^{-1}}$ is a quasi-inverse of $\\operatorname{Res}_\\varphi$\n([def-sfb-modobj-restriction-equivalence]), so it is right adjoint to\n$\\operatorname{Res}_\\varphi$. So is $\\operatorname{Coext}_\\varphi$, by\n[def-sfb-modobj-restrict-coextend-adjunction]. Right adjoints are unique up to a unique\nnatural isomorphism compatible with the adjunctions.",
+   "text": "Put $\\mathcal A=\\Mod_{\\mathcal S}(\\mathcal C)$, $\\mathcal B=\\Mod_{\\mathcal R}(\\mathcal C)$, $F=\\operatorname{Res}_\\varphi:\\mathcal A\\to\\mathcal B$, and $H=\\operatorname{Res}_{\\varphi^{-1}}:\\mathcal B\\to\\mathcal A$. By [def-sfb-modobj-restriction-equivalence], $F$ is an equivalence with this specified quasi-inverse $H$. Apply [lem-weil-pbc-quasi-inverse-adjoint] to these two functors and their quasi-inverse isomorphisms to obtain an adjunction $b:F\\dashv H$. Write $\\varepsilon^H:FH\\to\\mathrm{id}_{\\mathcal B}$ for its counit. The lemma allows adjustment of the equivalence unit to satisfy the triangle identities; we do not assume that arbitrary quasi-inverse isomorphisms already satisfy them.",
    "uses": [
     "def-sfb-modobj-restriction-equivalence",
+    "lem-weil-pbc-quasi-inverse-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "clause 5 (invertible morphism), coextension comparison; categorical details in the cited nodes"
+   }
+  },
+  {
+   "text": "Let $G=\\operatorname{Coext}_\\varphi:\\mathcal B\\to\\mathcal A$. The standing hypotheses include that $\\mathcal C$ is closed with equalizers, and $\\varphi$ is a morphism of monoid objects. Hence [def-sfb-modobj-restrict-coextend-adjunction] supplies an adjunction $a:F\\dashv G$ whose counit $\\varepsilon^G:FG\\to\\mathrm{id}_{\\mathcal B}$ is evaluation at the unit of $\\mathcal S$. Thus $G$ and $H$ are right adjoints of the very same functor $F$, with the same source and target categories.",
+   "uses": [
     "def-sfb-modobj-restrict-coextend-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "clause 5 (invertible morphism), coextension comparison; categorical details in the cited nodes"
+   }
+  },
+  {
+   "text": "Apply [det-sp-unique-right-adjoint] with the functor $F$ and the adjunctions $a$ and $b$. Explicitly, for $N\\in\\mathcal B$ define $\\gamma_N:GN\\to HN$ as the $b$-transpose of $\\varepsilon^G_N:FGN\\to N$, and define $\\delta_N:HN\\to GN$ as the $a$-transpose of $\\varepsilon^H_N:FHN\\to N$. The cited statement gives naturality of these families and $\\delta_N\\circ\\gamma_N=\\mathrm{id}_{GN}$, $\\gamma_N\\circ\\delta_N=\\mathrm{id}_{HN}$. Therefore the family $\\gamma_N$ defines the required natural isomorphism $\\operatorname{Coext}_\\varphi\\cong\\operatorname{Res}_{\\varphi^{-1}}$. Its orientation is fixed by $\\varepsilon^H_N\\circ F(\\gamma_N)=\\varepsilon^G_N$.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "clause 5 (invertible morphism), coextension comparison; categorical details in the cited nodes"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-modobj-restriction-equivalence",
-  "def-sfb-modobj-restrict-coextend-adjunction"
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "def-sfb-modobj-restrict-coextend-adjunction",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension-along-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+  "place": "clause 5; expands the imported uniqueness-of-right-adjoints proof using existing DAG statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coextendScalars|rightAdjointUniq|def toAdjunction",
+   "results": "Hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coextension of scalars along an isomorphism is restriction of scalars along its inverse",
+   "results": "Hits: RingCat.moduleCatRestrictScalarsPseudofunctor, LinearEquiv.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.coextendScalars, LinearEquiv.extendScalarsOfSurjective_symm, AlgEquiv.coe_restrictScalars_symm, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.CoextendScalars.obj'",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ring modules and representation categories do not cover arbitrary module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coextension of scalars along an isomorphism of monoid objects in a closed monoidal category is naturally isomorphic to restriction of scalars along its inverse",
+   "results": "Hits: Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquivComm_symm_hom, Rep.MonoidalClosed.linearHomEquiv, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, Rep.MonoidalClosed.linearHomEquiv_symm_hom, Rep.homEquiv, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, Rep.coindIso_hom_hom_hom",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ring modules and representation categories do not cover arbitrary module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|comapEquivalenceOfIsIso|coextendScalarsIsoComapInv",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ring modules and representation categories do not cover arbitrary module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories gives an adjunction with its inverse functor",
+   "results": "Hits: CategoryTheory.Functor.adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.isLeftAdjoint_inverse, CategoryTheory.Equivalence.isRightAdjoint_inverse, CategoryTheory.Functor.inv, CategoryTheory.Equivalence.symmEquivInverse_obj_inverse, CategoryTheory.Functor.isLeftAdjoint_of_isEquivalence, CategoryTheory.Adjunction.toEquivalence_inverse",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.toAdjunction",
+   "results": "Hits: CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.refl_toAdjunction, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Equivalence.toAdjunction_unit, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left, CategoryTheory.WithInitial.isColimitEquiv_apply_desc_right, CategoryTheory.WithInitial.isColimitEquiv_symm_apply_desc",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of categories induces an adjunction between its functor and inverse",
+   "results": "Hits: CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Functor.adjunction, CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right, CategoryTheory.Equivalence.mk, CategoryTheory.Equivalence.isLeftAdjoint_functor, CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left, CategoryTheory.Equivalence.isLeftAdjoint_inverse, CategoryTheory.Adjunction.toEquivalence",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint of an equivalence of categories is naturally isomorphic to the inverse equivalence",
+   "results": "Hits: CategoryTheory.Functor.adjunction, CategoryTheory.Equivalence.isRightAdjoint_inverse, CategoryTheory.Equivalence.isRightAdjoint_functor, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Functor.isRightAdjoint_of_isEquivalence, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Equivalence.counitIso",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an equivalence functor has a right adjoint, that adjoint is isomorphic to its inverse functor",
+   "results": "Hits: CategoryTheory.Functor.adjunction, CategoryTheory.Equivalence.isRightAdjoint_functor, CategoryTheory.Equivalence.isRightAdjoint_inverse, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Functor.isRightAdjoint_of_isEquivalence, CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left, CategoryTheory.Adjunction.adjunctionOfEquivRight, CategoryTheory.Adjunction.toEquivalence_inverse",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|coextendScalarsIso|coextend.*Iso",
+   "results": "Hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-16",
+   "verdict": "related generic categorical tools; not the module-object comparison itself"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +161,29 @@
   "CategoryTheory.Mod.coextendScalarsIsoComapInv"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-coextension-along-iso",
+  "worker": "stage1",
+  "summary": "Checked the main-20261015 unit clause 5, the imported categorical proof, and the upstream master construction. No exact slopmaster2 attachment exists. Made the coextension definition an explicit statement dependency; expanded the argument into the quasi-inverse adjunction, the restriction/coextension adjunction, and the explicit counit-compatible natural isomorphism. Reused the existing generic adjunction nodes; created no new nodes.",
+  "blueprint": "Realizes the coextension comparison in sk-def-sfb-change-of-scalars clause 5 and all three inferences of the imported proof of def-sfb-modobj-coextension-along-iso: quasi-inverse implies right adjoint, coextension is right adjoint, uniqueness compares them.",
+  "tool_uses": [
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic uniqueness of right adjoints supplies naturality and inverse components; it is a categorical tool, preserving the unit clause-5 proof rather than replacing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-bd0f2552b",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-bd0f2552b (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, and reference construction. All three steps preserve the hypotheses, coefficient categories, and comparison direction. Small cases and DAG duplicate/cycle checks passed. Accepted det-sp-unique-right-adjoint as a generic categorical tool. No repairs needed; full findings are in review.md."
+ }
 }
