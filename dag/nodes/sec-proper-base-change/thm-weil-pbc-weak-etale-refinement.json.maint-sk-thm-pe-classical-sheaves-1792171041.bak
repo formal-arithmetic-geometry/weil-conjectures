@@ -1,0 +1,177 @@
+{
+ "id": "thm-weil-pbc-weak-etale-refinement",
+ "blueprint": {
+  "is": "thm-weil-pbc-weak-etale-refinement",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ind-etale refinement of a weakly etale map",
+ "statement": "For the construction of [def-weil-pbc-weak-etale-refinement], the map $B\\to\nB'$ is faithfully flat and ind-etale, and $A\\to B'$ is ind-etale.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-weak-etale-refinement.md",
+  "place": "node thm-weil-pbc-weak-etale-refinement, order 1232",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 097Z"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-weak-etale-refinement",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For C, J, D₀ and B′ of def-weil-pbc-weak-etale-refinement, use the ind-etaleness, w-locality, strictly henselian maximal local rings, and closed-point surjectivity of the strict cover. Its w-locality gives V(J) = closedPoints(Spec C). Mathlib weak-etale tensor base change gives C → C ⊗[A] B. Transport through Algebra.TensorProduct.commRight A C B: the isomorphism is etale by bijectivity, hence weakly etale, and Mathlib composition gives weak etaleness of C → D₀ for its specified right algebra structure. This uses the proved base-change and composition forms of lem-weil-pbc-ind-etale-stability, not its open bundled declaration. The already proved source-library theorem Algebra.WeaklyEtale.isAlgebraic_residueField_of_liesOver gives algebraic residue field extensions (the field calculation of lem-weil-pbc-weakly-etale-field-separable). Apply the already proved zeroLocus_map_algebraMap_subset_closedPoints: over a maximal ideal, an algebraic domain in the residue field is a field. Thus T = V(JD₀) consists of closed points. Apply retained-localization properties to T.",
+   "uses": [
+    "def-weil-pbc-weak-etale-refinement",
+    "lem-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weakly-etale-field-separable",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert any principal ind-Zariski presentation into an ind-etale presentation, using Mathlib Algebra.Etale.of_isLocalizationAway, finite-product etaleness, and Algebra.Etale.of_equiv at each stage. Hence D₀ → B′ is ind-etale. Base change of A → C makes B → D₀ ind-etale; source-library RingHom.IndEtale.comp gives ind-etaleness of B → B′ and hence flatness. The composite C → B′ is weakly etale by base change and composition.",
+   "uses": [
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a maximal ideal n of B′, use surjectivity of the retained closed-point homeomorphism to write n = h(x). Its compatibility with the prime-pair equivalence says e(n) = (x,x), so n contracts to x in D₀. Since x lies in V(JD₀), its contraction to C lies in V(J), hence is maximal. Apply the already proved Algebra.WeaklyEtale.bijectiveOnStalks: every prime lies below a maximal ideal; the strictly henselian local isomorphism theorem identifies stalks there, and further localization identifies the remaining stalks. Now lem-weil-pbc-local-rings-ind-zariski makes C → B′ principal ind-Zariski, hence ind-etale by the stagewise conversion in the previous step. Compose with A → C. The tensor balancing identity identifies this composite with A → B → B′.",
+   "uses": [
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-strict-w-cover",
+    "thm-weil-pbc-weak-etale-strict-local",
+    "lem-weil-pbc-local-rings-ind-zariski"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjection from closed points of Spec C onto Spec A factors through Spec(C/J), giving a surjection Spec(C/J) → Spec A by the quotient-spectrum correspondence. Base change preserves spectrum surjectivity; use its affine source-library form PrimeSpectrum.comap_surjective_tensorProduct_left to choose Q₀ in Spec(B ⊗[A] (C/J)) over each prime q of B. Contract Q₀ along the explicit tensor quotient map to Q in Spec D₀. The tensor map kills the image of J, so Q is in T; it still lies over q. The retained prime equivalence supplies P = e⁻¹(Q,Q), whose contraction is Q. Thus Spec B′ → Spec B is surjective. Combine this with flatness from the second step by RingHom.FaithfullyFlat.iff_flat_and_comap_surjective.",
+   "uses": [
+    "lem-weil-pbc-strict-w-cover",
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-weak-etale-refinement",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-local-rings-ind-zariski",
+  "lem-weil-pbc-retained-localization",
+  "lem-weil-pbc-strict-w-cover",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-weakly-etale-field-separable",
+  "thm-weil-pbc-weak-etale-strict-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 097Z and 097A; lean/WeilConjectures/RingTheory/ProEtale/WeaklyEtaleIndEtale.lean",
+  "place": "Adaptation of the proof of Algebra.WeaklyEtale.exists_indEtale to the specified principal retained localization; written by G1, 2026-10-15. Uses the source-library residue-field and tensor-spectrum helpers without replacing the specified refinement. Second reading by G1 replaced the open bundled stability application with Mathlib weak-etale tensor base change and isomorphism transport; all stability facts now use proved Mathlib or upstream APIs."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1232,
+ "blueprint_uses": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-weak-etale-refinement",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-local-rings-ind-zariski",
+  "lem-weil-pbc-retained-localization",
+  "lem-weil-pbc-strict-w-cover",
+  "lem-weil-pbc-weak-etale-field",
+  "thm-weil-pbc-weak-etale-strict-local"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-weak-etale-refinement",
+  "worker": "stage1",
+  "summary": "Audited the three blueprint proof paragraphs against all cited DAG statements. Added the existing Mathlib leaf for the non-elementary flat-plus-surjective-spectrum criterion, and made the weak-etale base-change and retained-localization transitions explicit; the existing faithful-flat base-change leaf remains cited for the tensor map. No statement correction or new node is needed.",
+  "blueprint": "Realizes the three proof paragraphs of blueprint node thm-weil-pbc-weak-etale-refinement: construction and retained-localization properties; local-ring identification and ind-Zariski conclusion; base-change composition and faithful-flat covering argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Generic ring-theoretic faithful-flat base-change criterion for the tensor map; the proper-base-change unit has no replacement node."
+   },
+   {
+    "node": "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "why": "Generic ring criterion converting flatness plus surjective prime spectrum into faithful flatness; the proper-base-change unit has no replacement node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-922eddcdd",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-922eddcdd (reviewer sub-agent of L); spot-checked: The statement and three-step route are mathematically correct and match blueprint 1232 / Stacks 097Z. The delivery omitted the existing non-elementary leaf lem-weil-pbc-flat-surjective-spectrum-faithfully-flat when deriving faithful flatness from flatness plus surjective Spec in step 3. I repaired the item JSON, added that citation, recorded both generic Mathlib tool uses, and made the weak-etale base-change transitions explicit. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-84d547979",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, canonical construction, dependencies, sources, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed cleanly. No faults or fixes; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeakEtaleRefinementProperties",
+  "declaration": "PrincipalWLocalization.WeakEtaleRefinement.properties",
+  "file": "lean/Sheaf/RingTheory/WeakEtaleRefinementProperties.lean",
+  "statement": "theorem properties (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (hweak : Algebra.WeaklyEtale A B) : (algebraMap B (algebra A B hweak)).FaithfullyFlat ∧ (algebraMap B (algebra A B hweak)).IndEtale ∧ ((algebraMap B (algebra A B hweak)).comp (algebraMap A B)).IndEtale",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-88e85",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261015T154212-L-164807",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proof with its unchanged Lean signature, DAG statement and dependencies; verified public import exposure and compiled the sole direct importer against the delivery."
+ }
+}
