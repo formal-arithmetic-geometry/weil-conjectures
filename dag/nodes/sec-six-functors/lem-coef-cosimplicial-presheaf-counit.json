@@ -1,0 +1,90 @@
+{
+ "id": "lem-coef-cosimplicial-presheaf-counit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.2 and Corollary 4.4, printed pp. 184-185; the coend Quillen pair is Dugger, Universal Homotopy Theories, Proposition 3.4 and Section 9.5, printed pp. 155, 171-172",
+   "via": [
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cosimplicial coend adjunction and its canonical homotopy-colimit counit",
+ "statement": "Use the universes of [def-coef-complete-algebroid] and the complete, cocomplete model-category, weak-equivalence, cofibrant-object and Reedy terminology of [lem-coef-reedy-model-structure]. A cosimplicial resolution means a Reedy cofibrant functor $A^\\bullet:\\Delta\\to\\mathcal M$ whose structure maps are weak equivalences. Its canonical augmentation to $\\operatorname{const}(A^0)$ is induced by the unique maps $[n]\\to[0]$. Use homotopy colimits of [lem-coef-hocolim-reindexing-zigzags], computed by the colimit of a projectively cofibrant replacement. Let $\\mathcal M$ be combinatorial, $D$ small, and $A:D\\to\\mathcal M^\\Delta$ a functor with cosimplicial-resolution values. Give $\\mathsf U(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathsf{sSet})$ the projective model structure of [lem-coef-simplicial-presheaf-projective-model]. There is a Quillen adjunction $L_A:\\mathsf U(D)\\rightleftarrows\\mathcal M:R_A$ with\n$$(R_AX)(d)_n=\\operatorname{Hom}_{\\mathcal M}(A_d^n,X),\\qquad L_AF=\\int^{d\\in D}\\int^{[n]\\in\\Delta} A_d^n\\cdot F(d)_n.$$\nHere $Z\\cdot S=\\coprod_{s\\in S}Z$, and each coend is the coproduct of the indicated terms modulo the relations induced by the arrows of the indexing category. The counit is induced by evaluation $A_d^n\\to X$. For a fibrant $X$ and every projective cofibrant replacement $q:Q R_AX\\to R_AX$, the arrow $\\varepsilon_X L_Aq:L_AQ R_AX\\to X$ is isomorphic in the slice $\\operatorname{Ho}(\\mathcal M)/X$ to the canonical arrow $\\operatorname{hocolim}_{K_X}T_X\\to X$. Here $K_X$ has objects $(d,[n],u:A_d^n\\to X)$, arrows $(a,\\alpha)$ satisfying $u'A_e(\\alpha)A_a^n=u$, and $T_X(d,[n],u)=A_d^n$. In particular, for every such $q$ the counit composite is a weak equivalence exactly when this canonical homotopy-colimit augmentation is a weak equivalence. No density or generation assumption on $A$ is made.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Proposition 4.2 and Corollary 4.4, printed pp. 184-185; the coend Quillen pair is Dugger, Universal Homotopy Theories, Proposition 3.4 and Section 9.5, printed pp. 155, 171-172. No Stacks tag states this realization formula. Sources read online 2026-10-17, not archived in literature/.",
+  "external": [
+   {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-univ.pdf",
+    "place": "Proposition 3.4 and Section 9.5; read online 2026-10-17."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagram of cosimplicial resolutions induces a Quillen adjunction from simplicial presheaves and computes its derived counit by a canonical homotopy colimit",
+   "results": "{\"t\": \"2026-10-16T18:32:59Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram of cosimplicial resolutions induces a Quillen adjunction from simplicial presheaves and computes its derived counit by a canonical homotopy colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.cechConerveAdjunction\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.SimplicialObject.Truncated.cosk_reflective\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\"], \"digest\": \"ff9e50ad20573330\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Functor/Derived/Adjunction.lean:44-164 constructs a derived adjunction given derived functors and comparison data. It neither constructs the frame coend Quillen pair nor computes its counit using the comma homotopy colimit; the CechConerve and coskeleton adjunctions have different source and target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"derived_counit\"",
+   "results": "{\"t\": \"2026-10-16T18:32:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"derived_counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_counit\"], \"digest\": \"e208e68c4b04c522\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Functor/Derived/Adjunction.lean:44-164 constructs a derived adjunction given derived functors and comparison data. It neither constructs the frame coend Quillen pair nor computes its counit using the comma homotopy colimit; the CechConerve and coskeleton adjunctions have different source and target."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial|derived_counit|Quillen",
+   "results": "{\"t\": \"2026-10-16T18:32:48Z\", \"tool\": \"grep\", \"query\": \"cosimplicial|derived_counit|Quillen\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"9852c718a1632cbe\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Functor/Derived/Adjunction.lean:44-164 constructs a derived adjunction given derived functors and comparison data. It neither constructs the frame coend Quillen pair nor computes its counit using the comma homotopy colimit; the CechConerve and coskeleton adjunctions have different source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coend realization of simplicial presheaves against frames has right adjoint Hom of cosimplicial frames and derived evaluation counit",
+   "results": "{\"t\": \"2026-10-16T18:32:59Z\", \"tool\": \"leanfinder\", \"query\": \"The coend realization of simplicial presheaves against frames has right adjoint Hom of cosimplicial frames and derived evaluation counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.cechConerveAdjunction\", \"CategoryTheory.evaluationAdjunctionRight\", \"sSetTopAdj\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.evaluationIsRightAdjoint\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"01b8bf426a185aa0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Functor/Derived/Adjunction.lean:44-164 constructs a derived adjunction given derived functors and comparison data. It neither constructs the frame coend Quillen pair nor computes its counit using the comma homotopy colimit; the CechConerve and coskeleton adjunctions have different source and target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A diagram of cosimplicial resolutions induces a Quillen adjunction from simplicial presheaves and computes its derived counit by a canonical homotopy colimit",
+   "results": "{\"t\": \"2026-10-16T18:32:58Z\", \"tool\": \"leansearch\", \"query\": \"A diagram of cosimplicial resolutions induces a Quillen adjunction from simplicial presheaves and computes its derived counit by a canonical homotopy colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.instHasColimits\", \"sSetTopAdj\", \"CategoryTheory.CosimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"CategoryTheory.CosimplicialObject.instHasLimitsOfShape\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\"], \"digest\": \"49ddd70a29885208\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Functor/Derived/Adjunction.lean:44-164 constructs a derived adjunction given derived functors and comparison data. It neither constructs the frame coend Quillen pair nor computes its counit using the comma homotopy colimit; the CechConerve and coskeleton adjunctions have different source and target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dugger-homotopically-surjective-map",
+  "date": "2026-10-17",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

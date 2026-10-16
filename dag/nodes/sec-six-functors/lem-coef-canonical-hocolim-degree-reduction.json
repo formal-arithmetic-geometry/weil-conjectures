@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-canonical-hocolim-degree-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Proposition 4.6 and its proof in Section 8, especially Proposition 8.2 and Lemma 8.1, printed pp. 186, 193-196",
+   "via": [
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degree-zero reduction of canonical homotopy colimits",
+ "statement": "Use the universes of [def-coef-complete-algebroid] and the complete, cocomplete model-category, weak-equivalence, cofibrant-object and Reedy terminology of [lem-coef-reedy-model-structure]. A cosimplicial resolution means a Reedy cofibrant functor $A^\\bullet:\\Delta\\to\\mathcal M$ whose structure maps are weak equivalences. Its canonical augmentation to $\\operatorname{const}(A^0)$ is induced by the unique maps $[n]\\to[0]$. Use homotopy colimits of [lem-coef-hocolim-reindexing-zigzags], computed by the colimit of a projectively cofibrant replacement. Let $\\mathcal M$ be combinatorial, $D$ a small ordinary category, and $A:D\\to\\mathcal M^\\Delta$ a functor whose values are cosimplicial resolutions. Put $\\gamma(d)=A_d^0$ and fix $X\\in\\mathcal M$. For $n\\geq0$, define $I_n$ to have objects $(d,u:A_d^n\\to X)$ and arrows $a:d\\to e$ satisfying $u'A_a^n=u$. Its value diagram $V_n:I_n\\to\\mathcal M$ sends $(d,u)$ to $A_d^0$, not to $A_d^n$. The collapse $[n]\\to[0]$ gives $i_n:I_0\\to I_n$, with $V_ni_n=V_0$. Let $K$ have objects $(d,[n],u:A_d^n\\to X)$ and arrows $(a,\\alpha):(d,[n],u)\\to(e,[m],u')$ with $a:d\\to e$, $\\alpha:[n]\\to[m]$ and $u'A_e(\\alpha)A_a^n=u$. Its value diagram is $T(d,[n],u)=A_d^n$. Degree-zero inclusion $i:I_0\\to K$ induces a comparison of homotopy colimits. If $(i_n)_*:\\operatorname{hocolim}_{I_0}V_0\\to\\operatorname{hocolim}_{I_n}V_n$ is an isomorphism in the homotopy category for every $n\\geq0$, then\n$$i_*:\\operatorname{hocolim}_{I_0}V_0\\longrightarrow\\operatorname{hocolim}_K T$$\nis an isomorphism there, represented by a weak-equivalence comparison of homotopy colimits. All comparisons respect the augmentation maps to $X$. No fibrancy assumption on $X$ is required.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Proposition 4.6 and its proof in Section 8, especially Proposition 8.2 and Lemma 8.1, printed pp. 186, 193-196. No Stacks tag states this canonical-homotopy-colimit result. Sources read online 2026-10-17, not archived in literature/."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-hocolim-reindexing-zigzags"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A canonical homotopy colimit over cosimplicial generators is computed by degree zero if every cosimplicial degree comparison is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T18:32:57Z\", \"tool\": \"leanfinder\", \"query\": \"A canonical homotopy colimit over cosimplicial generators is computed by degree zero if every cosimplicial degree comparison is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\", \"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\"], \"digest\": \"5a0fd978f6be4eb0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SimplicialObject/Basic.lean:560-567 gives ordinary colimits of cosimplicial objects, while the Split and SubcomplexColimits hits concern ordinary coproduct/colimit cocones. None compares canonical comma homotopy colimits with the degree-zero construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:32:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"CosimplicialObject\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimitsOfShape\"], \"digest\": \"c8147047892374a3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SimplicialObject/Basic.lean:560-567 gives ordinary colimits of cosimplicial objects, while the Split and SubcomplexColimits hits concern ordinary coproduct/colimit cocones. None compares canonical comma homotopy colimits with the degree-zero construction."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*colimit|colimit.*cosimplicial|canonical.*hocolim",
+   "results": "{\"t\": \"2026-10-16T18:32:46Z\", \"tool\": \"grep\", \"query\": \"cosimplicial.*colimit|colimit.*cosimplicial|canonical.*hocolim\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"0b8d710943862dfb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SimplicialObject/Basic.lean:560-567 gives ordinary colimits of cosimplicial objects, while the Split and SubcomplexColimits hits concern ordinary coproduct/colimit cocones. None compares canonical comma homotopy colimits with the degree-zero construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dugger canonical homotopy colimits over C times the simplex category reduce to the naive comma category colimit",
+   "results": "{\"t\": \"2026-10-16T18:32:58Z\", \"tool\": \"leanfinder\", \"query\": \"Dugger canonical homotopy colimits over C times the simplex category reduce to the naive comma category colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SimplicialObject.Splitting.isColimit'\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"DeltaGenerated.hasColimits\"], \"digest\": \"16e7602b90044bd5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SimplicialObject/Basic.lean:560-567 gives ordinary colimits of cosimplicial objects, while the Split and SubcomplexColimits hits concern ordinary coproduct/colimit cocones. None compares canonical comma homotopy colimits with the degree-zero construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical homotopy colimit over cosimplicial generators is computed by degree zero if every cosimplicial degree comparison is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T18:32:48Z\", \"tool\": \"leansearch\", \"query\": \"A canonical homotopy colimit over cosimplicial generators is computed by degree zero if every cosimplicial degree comparison is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.ShortComplex.π_isoOpcyclesOfIsColimit_hom\", \"CategoryTheory.CosimplicialObject.instHasLimits\", \"CategoryTheory.ShortComplex.HomologyData.canonical\", \"HomologicalComplex.isColimitOfEval\", \"CategoryTheory.ShortComplex.π_isoOpcyclesOfIsColimit_hom_assoc\"], \"digest\": \"91008fd57f8f5ca0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SimplicialObject/Basic.lean:560-567 gives ordinary colimits of cosimplicial objects, while the Split and SubcomplexColimits hits concern ordinary coproduct/colimit cocones. None compares canonical comma homotopy colimits with the degree-zero construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dugger-homotopically-surjective-map",
+  "date": "2026-10-17",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-resolution-interval-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the small model-category presentation input to the finite-coefficient mapping-complex adjunction; Dugger Appendix A.1 and proof of Lemma 6.4, printed pp. 191, 197; Hovey, Model Categories, Propositions 5.4.1, 5.4.3 and Corollary 5.4.4, printed pp. 129-131. Presentability follows from the finite nondegenerate-simplex decomposition of Delta^1 times Delta^m",
+   "via": [
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Interval tensors preserve cosimplicial resolutions and presentable terms",
+ "statement": "Use the universes of [def-coef-complete-algebroid] and the complete, cocomplete model-category, weak-equivalence, cofibrant-object and Reedy terminology of [lem-coef-reedy-model-structure]. A cosimplicial resolution means a Reedy cofibrant functor $A^\\bullet:\\Delta\\to\\mathcal M$ whose structure maps are weak equivalences. Its canonical augmentation to $\\operatorname{const}(A^0)$ is induced by the unique maps $[n]\\to[0]$. For a simplicial set $K$ of [def-weil-pbc-simplicial-set], define $A^\\bullet\\otimes_\\Delta K=\\int^{[r]\\in\\Delta}A^r\\cdot K_r$, with copower $Z\\cdot S=\\coprod_{s\\in S}Z$, and define the cosimplicial tensor by\n$$(A^\\bullet\\otimes K)^m=A^\\bullet\\otimes_\\Delta(K\\times\\Delta^m).$$\nThe coend is the coproduct modulo the relations from simplex operators, and $\\Delta^m$ is the representable standard simplex. These constructions are functorial in $A,K$. If $A^\\bullet$ is a cosimplicial resolution, then $A^\\bullet\\otimes\\Delta^1$ is a cosimplicial resolution, and the two endpoint inclusions induce natural objectwise weak equivalences $e_0,e_1:A^\\bullet\\to A^\\bullet\\otimes\\Delta^1$, using $A^\\bullet\\otimes\\Delta^0\\cong A^\\bullet$. If $\\lambda$ is an infinite regular cardinal and all terms of $A^\\bullet$ are $\\lambda$-presentable (their Hom functors preserve $\\lambda$-filtered colimits), the same holds for the terms of $A^\\bullet\\otimes\\Delta^1$. No simplicial enrichment of $\\mathcal M$ is assumed.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Appendix A.1 and proof of Lemma 6.4, printed pp. 191, 197; Hovey, Model Categories, Propositions 5.4.1, 5.4.3 and Corollary 5.4.4, printed pp. 129-131. Presentability follows from the finite nondegenerate-simplex decomposition of Delta^1 times Delta^m. No Stacks tag states this cosimplicial-frame fact. Sources read online 2026-10-17, not archived in literature/.",
+  "external": [
+   {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Propositions 5.4.1, 5.4.3 and Corollary 5.4.4; read online 2026-10-17."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-reedy-model-structure",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a cosimplicial resolution with the simplicial interval preserves resolutions and both endpoint maps are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a cosimplicial resolution with the simplicial interval preserves resolutions and both endpoint maps are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"SSet.prodStdSimplex.isoNerve\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans_app\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans\", \"AugmentedSimplexCategory.tensorObjOf\"], \"digest\": \"1358c295cc2a17ad\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The finite-product and prodStdSimplex hits concern simplicial sets alone; CechNerve.lean:194-214 constructs a specific ordinary cosimplicial object. Neither proves that coend interval tensors preserve Reedy cofibrant homogeneous cosimplicial objects in an arbitrary model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cosimplicial frame tensor finite simplicial sets preserves presentable terms and gives a cylinder object",
+   "results": "{\"t\": \"2026-10-16T18:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"A cosimplicial frame tensor finite simplicial sets preserves presentable terms and gives a cylinder object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.prodStdSimplex.instFiniteTensorObjObjSimplexCategoryStdSimplexMk\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"SSet.instFiniteTensorObj\", \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfIsVeryGood\", \"AugmentedSimplexCategory.tensorObjOf\", \"CategoryTheory.cechNerveTerminalFrom\", \"SSet.prodStdSimplex.isoNerve\"], \"digest\": \"0a4fb6d71d4fe0c1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The finite-product and prodStdSimplex hits concern simplicial sets alone; CechNerve.lean:194-214 constructs a specific ordinary cosimplicial object. Neither proves that coend interval tensors preserve Reedy cofibrant homogeneous cosimplicial objects in an arbitrary model category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T18:32:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"CosimplicialObject\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The finite-product and prodStdSimplex hits concern simplicial sets alone; CechNerve.lean:194-214 constructs a specific ordinary cosimplicial object. Neither proves that coend interval tensors preserve Reedy cofibrant homogeneous cosimplicial objects in an arbitrary model category."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial|cosimplicialFrame|cosimplicialResolution",
+   "results": "{\"t\": \"2026-10-16T18:32:54Z\", \"tool\": \"grep\", \"query\": \"cosimplicial|cosimplicialFrame|cosimplicialResolution\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\"], \"digest\": \"27970d156b4526d3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The finite-product and prodStdSimplex hits concern simplicial sets alone; CechNerve.lean:194-214 constructs a specific ordinary cosimplicial object. Neither proves that coend interval tensors preserve Reedy cofibrant homogeneous cosimplicial objects in an arbitrary model category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a cosimplicial resolution with the simplicial interval preserves resolutions and both endpoint maps are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:32:55Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a cosimplicial resolution with the simplicial interval preserves resolutions and both endpoint maps are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.toTop₀\", \"SimplexCategory.toTopMap\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"SimplexCategory.toTopObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\", \"CategoryTheory.CosimplicialObject.instCategory\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.cosimplicialSimplicialEquiv\"], \"digest\": \"5ad9dba3d7e6c011\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The finite-product and prodStdSimplex hits concern simplicial sets alone; CechNerve.lean:194-214 constructs a specific ordinary cosimplicial object. Neither proves that coend interval tensors preserve Reedy cofibrant homogeneous cosimplicial objects in an arbitrary model category."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|cosimplicial.*[Ff]ram|cosimplicial.*[Rr]esol|combinatorial",
+   "results": "{\"t\": \"2026-10-16T18:38:16Z\", \"tool\": \"grep\", \"query\": \"Reedy|cosimplicial.*[Ff]ram|cosimplicial.*[Rr]esol|combinatorial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\"], \"digest\": \"6c63684f4c390d54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: AlgebraicTopology/Reedy/Basic.lean:14-24 explicitly leaves construction of Reedy model structures as a TODO; lines 38-55 only define a Reedy structure on an indexing category. Other hits use combinatorial to describe simplicial homotopies, not combinatorial model categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dugger-homotopically-surjective-map",
+  "date": "2026-10-17",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

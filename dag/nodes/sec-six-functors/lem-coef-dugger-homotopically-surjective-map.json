@@ -28,9 +28,104 @@
   "def-coef-complete-algebroid",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $\\lambda,B,C,E,R,\\eta,Q$ from the bounded-resolution theorem. Its conclusions supply all three hypotheses of the cofibrant-density theorem: local $\\lambda$-presentability, preservation of weak equivalences by $\\lambda$-filtered colimits, and a cofibrant replacement preserving $\\lambda$-presentable objects. Let $D\\subset E$ consist of the cosimplicial resolutions and let $\\gamma:D\\to\\mathcal M$ be evaluation at zero. The category $D$ is small by the cited theorem (equivalently, after choosing $B$, a cosimplicial object is countably many choices of objects and arrows from small sets). Its inclusion $A:D\\to\\mathcal M^\\Delta$ supplies cosimplicial resolutions with $A_d^0=\\gamma(d)$. Small representative choices throughout are fixed as in that theorem; equalities using these choices mean the specified natural identifications.",
+   "uses": [
+    "lem-coef-combinatorial-bounded-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Section 6.2 and the construction of R in Lemma 6.3, printed pp. 189-190."
+   }
+  },
+  {
+   "text": "Give $\\mathsf U(D)$ the projective model structure from the cited existing node; this has the required objectwise weak equivalences and fibrations. Apply the cosimplicial-presheaf counit theorem to the resolution-valued functor $A$. It constructs an ordinary adjunction $L_A\\dashv R_A$, with $(R_AX)(d)_n=\\operatorname{Hom}(A_d^n,X)$ and left adjoint the indicated coend, and proves that it is Quillen. Set $L_0=L_A$ and $R_0=R_A$. No simplicial structure on $\\mathcal M$ is used.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-cosimplicial-presheaf-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Sections 4 and 6.2, printed pp. 183-184, 189; Universal Homotopy Theories, Proposition 3.4 and Section 9.5, pp. 155, 171-172."
+   }
+  },
+  {
+   "text": "Fix any $X\\in\\mathcal M$. Put $I=(C\\downarrow X)$ and $J=(\\gamma\\downarrow X)$, with value diagrams $V(c,u)=c$ and $Vf(A,u)=A^0$, respectively. Evaluation gives $f:J\\to I$. Define $r:I\\to J$ by $r(c,u)=(R\\operatorname{const}c,u)$; its degree-zero map is $u$ since $R$ fixes degree zero. Thus $fr=\\mathrm{id}_I$. Define $H:J\\to J$ by $H(A,u)=(RA,u)$. These are functors into $D$ by the bounded-resolution theorem. The transformations $\\eta_A:RA\\to A$ and $R(A\\to\\operatorname{const}A^0):RA\\to R\\operatorname{const}A^0$ give $H\\to\\mathrm{id}_J$ and $H\\to rf$, over $X$. The second map uses the canonical cosimplicial augmentation; at degree zero both transformations are identities. Hence every component becomes an identity under the degree-zero value diagram. The reindexing-zigzag theorem, with $g=f$ and inverse functor $r$, therefore proves that $f_*:\\operatorname{hocolim}_J A^0\\to\\operatorname{hocolim}_I c$ is an isomorphism in the homotopy category. The construction uses the value diagram, not just an equivalence between indexing nerves.",
+   "uses": [
+    "lem-coef-combinatorial-bounded-resolutions",
+    "lem-coef-hocolim-reindexing-zigzags"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Lemma 6.3 and Proposition A.4 / Remark A.5, printed pp. 189-190, 198-199."
+   }
+  },
+  {
+   "text": "The cofibrant-density theorem applies to $C$ with the cardinal and replacement from Step 1. It gives the weak-equivalence augmentation $a:\\operatorname{hocolim}_{(C\\downarrow X)}c\\to X$. The comparison $f_*$ of Step 3 respects augmentations: its cocone component at $(A,u)$ is the same map $u:A^0\\to X$ as the component after evaluation at zero. Thus the naive resolution augmentation $b:\\operatorname{hocolim}_{(\\gamma\\downarrow X)}A^0\\to X$ equals $af_*$ in the homotopy category. The density and reindexing theorems consequently make $b$ a weak equivalence.",
+   "uses": [
+    "lem-coef-combinatorial-cofibrant-density",
+    "lem-coef-hocolim-reindexing-zigzags"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 4.7(ii) and the left-hand triangle in the general proof of Proposition 3.3, printed pp. 187, 191."
+   }
+  },
+  {
+   "text": "For every $n\\geq0$ form $I_n=(A^n\\downarrow X)$ with value $A^0$, as in the degree-reduction theorem. The collapse $p:[n]\\to[0]$ gives $i_n:I_0\\to I_n$, $(A,u)\\mapsto(A,uA(p))$. The last vertex $v:[0]\\to[n]$ gives $j_n:I_n\\to I_0$, $(A,u)\\mapsto(A,uA(v))$. Since $pv=1$, $j_ni_n=\\mathrm{id}_{I_0}$. The monotone function $[n]\\times[1]\\to[n]$ given by $(k,0)\\mapsto k$ and $(k,1)\\mapsto n$ induces a simplicial map $h:\\Delta^n\\times\\Delta^1\\to\\Delta^n$ from the identity to $vp$. Its monotonicity follows because every $k\\leq n$, including when the second coordinate increases. Compose $h$ with the symmetry $\\Delta^1\\times\\Delta^n\\cong\\Delta^n\\times\\Delta^1$. The identification $A\\otimes_\\Delta\\Delta^n\\cong A^n$ sends the summand $A^r$ indexed by $\\alpha:[r]\\to[n]$ by $A(\\alpha)$; its inverse is the coprojection indexed by $1_{[n]}$, and the coend relations show that the two composites are identities. Applying the interval-tensor coend with this identification gives a natural map $t_A:(A\\otimes\\Delta^1)^n\\to A^n$ whose endpoint composites are $1_{A^n}$ and $A(vp)$. Define $H_n:I_n\\to I_n$ by $(A,u)\\mapsto(A\\otimes\\Delta^1,ut_A)$. The interval-tensor theorem ensures that $A\\otimes\\Delta^1$ is still a resolution with $\\lambda$-presentable terms, hence is an object of $D$ after the fixed representative transport. Its endpoint maps give natural transformations $\\mathrm{id}_{I_n}\\to H_n$ and $i_nj_n\\to H_n$: the required equalities over $X$ are respectively $ut_Ae_0=u$ and $ut_Ae_1=uA(vp)$. On the value diagram $A^0$, both transformations are weak equivalences by the objectwise endpoint clause of the interval theorem. The other composite $j_ni_n$ is the identity, so the reindexing-zigzag theorem applies to $g=i_n$, inverse functor $j_n$. It proves that $(i_n)_*:\\operatorname{hocolim}_{I_0}A^0\\to\\operatorname{hocolim}_{I_n}A^0$ is an isomorphism for every $n$. For $n=0$, both functors are identities and the same formulas apply.",
+   "uses": [
+    "lem-coef-resolution-interval-tensor",
+    "lem-coef-hocolim-reindexing-zigzags",
+    "lem-coef-canonical-hocolim-degree-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Lemma 6.4 and Appendix A.1, printed pp. 190-191, 197; explicit last-vertex contraction supplies the detail left to the reader."
+   }
+  },
+  {
+   "text": "Apply the degree-reduction theorem to $A:D\\to\\mathcal M^\\Delta$. Its hypothesis for every $n$ is exactly Step 5; $D$ is small and its values are Reedy cofibrant and homotopically constant by Step 1. We obtain an isomorphism $i_*:\\operatorname{hocolim}_{I_0}A^0\\to\\operatorname{hocolim}_{K_X}T_X$ in the homotopy category, where $K_X$ records all pairs $(A,[n])$ mapping by $A^n\\to X$ and $T_X$ takes the value $A^n$. The theorem includes augmentation compatibility, so if $c_X:\\operatorname{hocolim}_{K_X}T_X\\to X$ is the canonical augmentation, $c_Xi_*=b$. The actual homotopy-colimit comparison representing $i_*$ is a weak equivalence by the degree-reduction theorem. Since $b$ is a weak equivalence by Step 4 and $c_Xi_*=b$, two-out-of-three shows that $c_X$ is a weak equivalence. In this argument the degree-$n$ diagram has value $A^0$ and the total diagram has value $A^n$; they are not identified.",
+   "uses": [
+    "lem-coef-canonical-hocolim-degree-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 4.6 and the general proof of Proposition 3.3, printed pp. 186, 191."
+   }
+  },
+  {
+   "text": "Now assume $X$ fibrant and let $q:QR_0X\\to R_0X$ be any projective cofibrant replacement. The cosimplicial-presheaf counit theorem applies to this specific $q$ and identifies the arrow $\\varepsilon_XL_0q$ with $c_X$ in the slice $\\operatorname{Ho}(\\mathcal M)/X$. Its final clause says exactly that the former is a weak equivalence when the latter is. Step 6 gives that condition. Thus the required counit composite is a weak equivalence for every fibrant $X$ and every such $q$, which is the definition of homotopical surjectivity in the item. Together with the smallness of $D$ and the Quillen adjunction in Step 2 this proves the whole statement.",
+   "uses": [
+    "lem-coef-cosimplicial-presheaf-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Definition 3.1, Proposition 4.2, Corollary 4.4 and conclusion of Section 6, printed pp. 181, 184-185, 191."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-canonical-hocolim-degree-reduction",
+  "lem-coef-combinatorial-bounded-resolutions",
+  "lem-coef-combinatorial-cofibrant-density",
+  "lem-coef-cosimplicial-presheaf-counit",
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-resolution-interval-tensor",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+  "place": "Detailed reconstruction of the general-case proof of Proposition 3.3, Section 6, checked against Sections 4, 6, 7, 8 and Appendix A online. Source PDFs are not archived in literature/; see WANTED entries in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -101,6 +196,41 @@
    "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"grep\", \"query\": \"Quillen|counit|homotopically\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"04b4cd280af4664c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned declarations concern the ordinary nerve/homotopy-category adjunction, truncation/coskeleton adjunctions, or localizations and derived functors already given as input. None constructs a homotopically surjective small presheaf source or a set presenting a given homotopically surjective Quillen adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every combinatorial model category has a homotopically surjective Quillen adjunction from small simplicial presheaves",
+   "results": "{\"t\": \"2026-10-16T18:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"Every combinatorial model category has a homotopically surjective Quillen adjunction from small simplicial presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialObject.coskAdj\", \"SSet.coskAdj\", \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"7b9ef08b108d3be9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The nerve/homotopy-category and coskeleton adjunctions do not construct presheaf generators for an arbitrary combinatorial model category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-16T18:32:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The nerve/homotopy-category and coskeleton adjunctions do not construct presheaf generators for an arbitrary combinatorial model category."
+  },
+  {
+   "tool": "grep",
+   "query": "Dugger|homotopically.?surjective|cosimplicial.*presheaf",
+   "results": "{\"t\": \"2026-10-16T18:32:22Z\", \"tool\": \"grep\", \"query\": \"Dugger|homotopically.?surjective|cosimplicial.*presheaf\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The nerve/homotopy-category and coskeleton adjunctions do not construct presheaf generators for an arbitrary combinatorial model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a Quillen left adjoint from simplicial presheaves whose derived counit is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T18:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a Quillen left adjoint from simplicial presheaves whose derived counit is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.nerveAdjunction\", \"SSet.coskAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"CategoryTheory.SimplicialObject.Truncated.coskAdj.reflective\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"97cd892e1431a5b2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The nerve/homotopy-category and coskeleton adjunctions do not construct presheaf generators for an arbitrary combinatorial model category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every combinatorial model category has a homotopically surjective Quillen adjunction from small simplicial presheaves",
+   "results": "{\"t\": \"2026-10-16T18:32:23Z\", \"tool\": \"leansearch\", \"query\": \"Every combinatorial model category has a homotopically surjective Quillen adjunction from small simplicial presheaves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
   }
  ],
  "mathlib_match": null,
@@ -112,5 +242,20 @@
   "date": "2026-10-16",
   "group": "Q13"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dugger-homotopically-surjective-map",
+  "worker": "stage1",
+  "summary": "Seven steps construct the bounded cosimplicial-resolution source, prove degree-zero evaluation invariance and every degree comparison by explicit indexing functors, apply conditional homotopy density and canonical degree reduction, then identify the actual counit for every replacement. Six new statement-only intermediate nodes; no new Mathlib leaf. Target statement unchanged. Source typos corrected and finite interval tensor size/closure recorded explicitly.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2: the small combinatorial model presentation input to the finite-coefficient mapping-complex adjunction before R lim. Inherits sk-prop-sf-biduality-general without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-6887ef962",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-6887ef962 (reviewer sub-agent of L); spot-checked: I read the item and all six new statement-only nodes in full and checked them myself; I could not check them against the printed sources. The Dugger and Hovey PDFs are not in literature/ and network access is blocked here. The delivery records them as WANTED with proof_origin=agent, and the parent cites the same online source. So I checked the mathematics independently, from Dugger's Def 3.1 / Prop 3.3, §4, §6 (Lemmas 6.3, 6.4), §7, §8 and App. A as I know them, but I could not confirm page numbers or the two Lemma 6.3 typos, which change no statement. The item statement is unchanged: M only combinatorial, D small, projective U(D), every fibrant X and every q. Step 1: the bounded-resolution conclusions give exactly the three density hypotheses and a small D. Step 2: I checked the coend adjunction variance and that it is Quillen for frames. Step 3: fr = id strictly; eta and R(A -> const A^0) lie over X ((R phi)^0 = phi^0 follows from naturality and eta^0 = 1); components are identities under A^0. Step 4: b = a f_* (both augmentations come from the same cocone). Step 5: j_n i_n = id since pv = 1; h(k,0) = k, h(k,1) = n is monotone; t_A e_0 = 1 and t_A e_1 = A(vp); the over-X equalities and degree-0 weak equivalences hold. Step 6: degree reduction plus 2-out-of-3. Step 7: counit identification. Nodes: reindexing-zigzags proved directly via left and right inverses; degree-reduction checked via K as the Grothendieck construction of Delta^op -> Cat with cartesian-constant values (dual Thomason) and homotopically constant realization; counit via K_X being the category of elements of R_A X; interval tensor via latching A(x)(Delta^1 x boundary), A(x)- left Quillen, and finite nondegenerate simplices; density via the lambda-filtered comma category; bounded resolutions via inductive Reedy replacement with degree 0 fixed. Small cases tested: M terminal, sSet, n = 0, D empty, X initial, nonfibrant X before Step 7. No duplicates: rg over dag/nodes for hocolim, cosimplicial resolution, presentable and Dugger, and I read 12 candidates. No cycle, uses match proof_deps, no SGA, no off-unit tool_uses. No changes."
+ }
 }
