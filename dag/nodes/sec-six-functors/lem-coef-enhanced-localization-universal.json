@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Universal enriched localization on functor categories",
- "statement": "Fix universes large enough that the categories and diagram shapes in this statement are small. Let $\\mathcal V=\\mathbf D(\\mathbf Z)$ be the symmetric monoidal enhanced localization of unbounded cochain complexes of abelian groups at quasi-isomorphisms, with derived tensor; complexes and quasi-isomorphisms have the convention of [def-weil-abstract-derived-category]. A $\\mathcal V$-enriched infinity category has mapping objects in $\\mathcal V$, associative composition and identity maps with all their coherent homotopies. A relative enriched category is such a category $\\mathcal C$ together with a collection $W$ of underlying degree-zero morphisms. An enriched localization is an enriched functor $q:\\mathcal C\\to\\mathcal C[W^{-1}]$ inverting $W$ that is universal in the following sense.\n\nSuch localizations exist, and for every $\\mathcal V$-enriched infinity category $\\mathcal E$, restriction along $q$ gives an equivalence of enhanced functor categories\n$$q^*:\\operatorname{Fun}_{\\mathcal V}(\\mathcal C[W^{-1}],\\mathcal E)\\simeq\\operatorname{Fun}_{\\mathcal V,W}(\\mathcal C,\\mathcal E),$$\nwhere the right side is the full enhanced subcategory on functors sending $W$ to equivalences. In particular restriction is fully faithful on mapping objects, hence on transformations and every higher homotopy between them. The assertion also applies to relative differential graded categories, using their derived enrichment, and to opposites. An enriched functor of relative enriched categories preserving the distinguished maps induces an enriched functor of these localizations; enriched natural transformations of such functors and specified coherent diagrams of transformations induce the corresponding transformations and diagrams. A relative functor whose localized functor is an equivalence can be inverted for all these restrictions.\n\nFor finitely many relative enriched categories $(\\mathcal C_i,W_i)$ and an enriched functor $H$ in their variables, the same assertion applies to multivariable functors which send $W_i$ to equivalences separately in each variable, with other inputs fixed. Restriction along the localizations is an equivalence of these enhanced categories of multivariable functors. These equivalences are compatible with substitution of functors, composition and identity transformations, and passage to any small homotopy coherent diagram of the specified functors and transformations. The extension space over a fixed functor or specified diagram, including its specified restriction, is contractible; a transformation is an equivalence precisely when all its components are equivalences.",
+ "statement": "Fix universes large enough that the categories and diagram shapes in this statement are small. Let $\\mathcal V=\\mathbf D(\\mathbf Z)$ be the symmetric monoidal enhanced localization of unbounded cochain complexes of abelian groups at quasi-isomorphisms, with derived tensor; complexes and quasi-isomorphisms have the convention of [def-weil-abstract-derived-category]. A $\\mathcal V$-enriched infinity category has mapping objects in $\\mathcal V$, associative composition and identity maps with all their coherent homotopies. Its underlying infinity category $U\\mathcal C$ has mapping spaces $\\operatorname{Map}_{\\mathcal V}(\\mathbf 1,\\mathcal C(x,y))$. A relative enriched category is such a category $\\mathcal C$ together with a collection $W$ of morphisms in $U\\mathcal C$. An enriched localization is an enriched functor $q:\\mathcal C\\to\\mathcal C[W^{-1}]$ inverting $W$ that is universal in the following sense.\n\nSuch localizations exist, and for every $\\mathcal V$-enriched infinity category $\\mathcal E$, restriction along $q$ gives an equivalence of enhanced functor categories\n$$q^*:\\operatorname{Fun}_{\\mathcal V}(\\mathcal C[W^{-1}],\\mathcal E)\\simeq\\operatorname{Fun}_{\\mathcal V,W}(\\mathcal C,\\mathcal E),$$\nwhere the right side is the full enhanced subcategory on functors sending $W$ to equivalences. In particular restriction is fully faithful on mapping objects, hence on transformations and every higher homotopy between them. The assertion also applies to relative differential graded categories, using their derived enrichment, and to opposites. An enriched functor of relative enriched categories preserving the distinguished maps induces an enriched functor of these localizations; enriched natural transformations of such functors and specified coherent diagrams of transformations induce the corresponding transformations and diagrams. A relative functor whose localized functor is an equivalence can be inverted for all these restrictions.\n\nFor finitely many relative enriched categories $(\\mathcal C_i,W_i)$ and an enriched functor $H$ in their variables, the same assertion applies to multivariable functors which send $W_i$ to equivalences separately in each variable, with other inputs fixed. Restriction along the localizations is an equivalence of these enhanced categories of multivariable functors. These equivalences are compatible with substitution of functors, composition and identity transformations, and passage to any small homotopy coherent diagram of the specified functors and transformations. The extension space over a fixed functor or specified diagram, including its specified restriction, is contractible; a transformation is an equivalence precisely when all its components are equivalences.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
   "place": "Proof paragraph 2, the coherent derived coefficient-adjunction diagram before taking the derived inverse limit: universal localization of relative enriched categories and their functor categories, an additional agent-formulated foundation absent from this blueprint.",
@@ -29,9 +29,106 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-coef-enriched-category-tensor-calculus] with $\\mathcal V=\\mathbf D(\\mathbf Z)$ and enlarge universes once for all the categories, the collection $W$, and the diagrams under consideration. Let $A=[1]_{\\mathcal V}$ be the freely enriched category on $0\\to1$, and let $J=I_{\\mathcal V}$, where $I$ is the groupoid on two objects with exactly one morphism between each ordered pair. The evident $s:A\\to J$ sends its generating arrow to an equivalence. The free-enrichment adjunction identifies a choice of $w$ with a map $A\\to\\mathcal C$. Form the homotopy pushout in $\\operatorname{Cat}_{\\mathcal V}$\n$$\\mathcal L=\\mathcal C\\coprod^{h}_{\\coprod_{w\\in W}A}\\coprod_{w\\in W}J.$$\nIt exists by the small-colimit assertion of the cited node. Define $q:\\mathcal C\\to\\mathcal L$ to be its coprojection. Each $q(w)$ is an equivalence, since it agrees up to the specified pushout homotopy with the image of the invertible generating arrow in its $J$-summand. This defines an actual object, not a choice from an unproved mere existence statement.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction of inverse-adjoining cells for the enriched adjunction foundation of blueprint proof paragraph 2."
+   }
+  },
+  {
+   "text": "First compute the single cell. By [lem-coef-enriched-category-tensor-calculus], $\\operatorname{Fun}_{\\mathcal V}(A,\\mathcal E)=\\mathcal E^{[1]}$ is the enriched arrow category and $\\operatorname{Fun}_{\\mathcal V}(J,\\mathcal E)=\\mathcal E^I$. Let $\\mathcal B\\subset\\mathcal E^{[1]}$ be the full enriched subcategory on equivalence arrows. Evaluation at 0 on $\\mathcal B$ has constant diagrams as inverse: the maps from the constant diagram at the source to an arrow $f$ have components $(1,f)$ and form a coherent natural transformation. Both components are equivalences, so the transformation is an equivalence by the cited component criterion. On $\\mathcal E^I$, evaluation at 0 likewise has constant diagrams as inverse, now using the unique isomorphisms $0\\to i$ of $I$. Restriction along $s$ commutes with these evaluations and constants. Consequently\n$$s^*:\\operatorname{Fun}_{\\mathcal V}(J,\\mathcal E)\\simeq\\mathcal B\\hookrightarrow\\operatorname{Fun}_{\\mathcal V}(A,\\mathcal E)$$\nis an equivalence onto that full enriched subcategory. This calculation includes mapping objects: the two explicit inverse transformations are in the enriched functor categories, not just their homotopy categories.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent calculation of the walking equivalence by evaluation and constant diagrams; cotensor and component assertions are the cited structural theorem."
+   }
+  },
+  {
+   "text": "Write $[\\mathcal X,\\mathcal E]=\\operatorname{Fun}_{\\mathcal V}(\\mathcal X,\\mathcal E)$. Tensoring the pushout of step 1 with any $\\mathcal T$ preserves that pushout by [lem-coef-enriched-category-tensor-calculus]. Apply its closed adjunction and the pushout mapping-space universal property. For every $\\mathcal T$ this gives\n$$\\operatorname{Map}(\\mathcal T,[\\mathcal L,\\mathcal E])\\simeq\\operatorname{Map}\\!\\left(\\mathcal T,[\\mathcal C,\\mathcal E]\\times^h_{\\prod_W[A,\\mathcal E]}\\prod_W[J,\\mathcal E]\\right).$$\nThese are the same natural mapping functors on $\\operatorname{Cat}_{\\mathcal V}$, hence the indicated objects are equivalent, with comparison induced by restriction. The limit/full-inclusion assertion of the cited node and step 2 identify the right-hand pullback as the full enriched subcategory of $[\\mathcal C,\\mathcal E]$ whose evaluation on every $w$ is an equivalence arrow. Thus $q^*$ is exactly the equivalence asserted in the item. In particular its maps on every mapping object are equivalences in $\\mathbf D(\\mathbf Z)$, so they retain transformations and all their higher homotopies; no inference from degree-zero full faithfulness is used.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent enriched pushout/internal-Hom calculation; corrected tensor-colimit theorem is Haugseng Corollaries 9.3-9.4 and Remark 9.5."
+   }
+  },
+  {
+   "text": "A homotopy fiber of an equivalence of spaces is contractible. Applying this to the object space of the equivalence $q^*$ of step 3 shows that extensions of a fixed $W$-inverting functor, together with a specified restriction equivalence, form a contractible space. The same conclusion holds with prescribed transformations and higher homotopies: for a small shape $K$, apply the cotensor identity of [lem-coef-enriched-category-tensor-calculus] to step 3. Cotensoring an equivalence has the cotensored inverse, so it is an equivalence on coherent $K$-diagrams; the full subcategory on the right consists of diagrams of $W$-inverting functors. Its fiber over the specified diagram is contractible. Boundary conditions are kept by taking the corresponding homotopy fibers of these diagram equivalences. This is a statement about diagrams supplied with their coherence data, not about lifting diagrams given only in a homotopy category.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent passage from the enriched restriction equivalence to extension spaces and arbitrary specified coherent diagrams."
+   }
+  },
+  {
+   "text": "For $F:(\\mathcal C,W)\\to(\\mathcal D,V)$ preserving distinguished maps, $q_{\\mathcal D}F$ inverts $W$. Step 3 extends it to $\\overline F:\\mathcal L_{\\mathcal C}\\to\\mathcal L_{\\mathcal D}$ with specified restriction. A coherent transformation $\\alpha:F\\to G$ becomes $q_{\\mathcal D}\\alpha$ between those restrictions; full faithfulness in step 3 extends it, and step 4 extends its specified coherent diagrams. For composable $F,G$, both $\\overline G\\,\\overline F$ and $\\overline{GF}$ restrict, using their specified comparisons, to $q\\,GF$. They therefore have a contractibly specified comparison. For every composable string all its parenthesizations restrict to that same composite; step 4 applied with the full simplex and its faces gives the comparisons with their compatible higher homotopies. Identities are treated by their identity restrictions. Thus the induced construction respects coherent composition, rather than merely choosing unrelated isomorphic functors. If $\\overline F$ is an equivalence, its inverse and its unit/counit equivalences induce inverse equivalences under every precomposition restriction; the homotopies of their compositions are precisely the whiskered unit and counit.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction of relative functoriality, transformations and inverse restrictions from steps 3-4."
+   }
+  },
+  {
+   "text": "For opposites, the involution of [lem-coef-enriched-category-tensor-calculus] preserves the pushout of step 1: its inverse is itself, so its mapping-space universal property is transported in both directions. Both $[1]^{\\mathrm{op}}$ and $I^{\\mathrm{op}}$ identify with $[1]$ and $I$ after interchanging endpoints. Consequently $q^{\\mathrm{op}}$ is the same inverse-adjoining construction for $(\\mathcal C^{\\mathrm{op}},W^{\\mathrm{op}})$, and steps 2-5 apply. For a relative dg category use [lem-coef-dg-enrichment-rectification] to take its derived $\\mathbf D(\\mathbf Z)$ enrichment. Each distinguished closed degree-zero arrow has exactly the underlying arrow prescribed by that node. Steps 1-5 then give the localization and its coherent derived enriched functor categories. This uses quasi-equivalence presentations; it neither passes to Morita localization nor replaces derived transformations by strict dg natural transformations.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent opposite-category argument and the dg specialization via Haugseng rectification, Theorem 5.8 and unbounded-chain Example 5.11."
+   }
+  },
+  {
+   "text": "For two variables use the currying equivalence of [lem-coef-enriched-category-tensor-calculus] to regard $H$ as a functor $\\mathcal C_1\\to[\\mathcal C_2,\\mathcal E]$. A map of $W_1$ is sent to a transformation which is an equivalence precisely when its components at all inputs of $\\mathcal C_2$ are equivalences. Step 3 therefore extends in the first variable. For a distinguished $w_2$, its map between the two evaluation functors on $\\mathcal L_1$ restricts along $q_1$ to $H(-,w_2)$, which is an equivalence by hypothesis and the component criterion. Since step 3 is an equivalence of enriched functor categories it reflects equivalences, so that extended transformation is still an equivalence at every input of $\\mathcal L_1$. Curry in the other order and extend the second variable by step 3. The same argument applies to all transformations and mapping objects: at each stage the restriction equivalence identifies exactly the full subcategories on functors inverting the remaining distinguished maps. Induct on the number of variables. The base cases are zero variables (the identity on $\\mathcal E$) and one variable (step 3); the induction step is the preceding single-variable extension with the other variables as parameters. This proves the claimed multivariable equivalence, not just existence of an extension for each fixed tuple.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent induction in the number of enriched variables, with pointwise detection ensuring that later weak equivalences remain inverted."
+   }
+  },
+  {
+   "text": "The restrictions in step 7 are actual precomposition functors. Before extension, substitution of enriched functors, composition of transformations and identity transformations commute with these restrictions, by the coherent composition and currying of [lem-coef-enriched-category-tensor-calculus]. For any specified substitution diagram, including its composed operations, the candidate extended composites thus restrict to that very diagram. Apply step 4 to the multivariable equivalence of step 7: its contractible fiber supplies the comparison with the extension of the original composite, and the same argument with all faces of a coherent diagram supplies their higher compatibility. This assertion concerns substitutions whose composites meet the stated separate-inversion condition; no extension is asserted for data failing that condition. Cotensoring the equivalence by any small diagram shape gives the asserted diagram equivalence and contractible extension space with specified restriction. Finally the component criterion of the cited node, applied to these enriched functor categories, says exactly that a transformation is an equivalence if and only if all its components are equivalences.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent verification of substitution, composition, identities and full diagram compatibility; coherent enriched data are retained throughout."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-dg-enrichment-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: agent-written inverse-adjoining pushout and enriched internal-Hom calculation. Generic enriched-category tensor calculus and dg rectification are isolated as statement-only foundations; the external papers were read online and are WANTED for archival."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -88,15 +185,65 @@
    "date": "2026-10-16",
    "results": "1 hits: Mathlib/AlgebraicTopology/SimplicialNerve.lean",
    "verdict": "no match: Localization/Predicate.lean:216-239 and Construction.lean:367 give equivalences of ordinary functor categories. Predicate.lean:326-343 lifts ordinary natural transformations. SimplicialNerve.lean:14-38 defines a nerve, without enriched derived localization or higher functor-category universality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal enriched localization of a relative infinity category and equivalence of functor categories",
+   "results": "{\"t\": \"2026-10-16T08:25:36Z\", \"tool\": \"leanfinder\", \"query\": \"Universal enriched localization of a relative infinity category and equivalence of functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.Localization.Construction.whiskeringLeftEquivalence\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"HomRel.FactorsThroughLocalization.isLocalizedEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'\"], \"digest\": \"b31cd4a91b981b1c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Localization/Predicate.lean:216-239,326-343 is ordinary functor-category localization, while Enriched/FunctorCategory.lean uses ordinary ends. QCat StrictBicategory.lean retains homotopy categories of simplicial mapping objects only. None states D(Z)-enriched localization or the equivalence on derived mapping objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization, Functor",
+   "results": "{\"t\": \"2026-10-16T08:26:01Z\", \"tool\": \"loogle\", \"query\": \"Localization, Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Localization/Predicate.lean:216-239,326-343 is ordinary functor-category localization, while Enriched/FunctorCategory.lean uses ordinary ends. QCat StrictBicategory.lean retains homotopy categories of simplicial mapping objects only. None states D(Z)-enriched localization or the equivalence on derived mapping objects."
+  },
+  {
+   "tool": "grep",
+   "query": "Localization|enriched|InfinityCategory",
+   "results": "{\"t\": \"2026-10-16T08:25:37Z\", \"tool\": \"grep\", \"query\": \"Localization|enriched|InfinityCategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\"], \"digest\": \"596e892526ce42d9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Localization/Predicate.lean:216-239,326-343 is ordinary functor-category localization, while Enriched/FunctorCategory.lean uses ordinary ends. QCat StrictBicategory.lean retains homotopy categories of simplicial mapping objects only. None states D(Z)-enriched localization or the equivalence on derived mapping objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal enriched localization and restriction equivalence of functor infinity categories",
+   "results": "{\"t\": \"2026-10-16T08:25:37Z\", \"tool\": \"leansearch\", \"query\": \"Universal enriched localization and restriction equivalence of functor infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Functor.IsLocalization.isEquivalence\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.lift\", \"CategoryTheory.Localization.lift\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_source\"], \"digest\": \"e931945b6c0f7e68\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Localization/Predicate.lean:216-239,326-343 is ordinary functor-category localization, while Enriched/FunctorCategory.lean uses ordinary ends. QCat StrictBicategory.lean retains homotopy categories of simplicial mapping objects only. None states D(Z)-enriched localization or the equivalence on derived mapping objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construction of homotopy coherent enriched localization of a relative infinity category",
+   "results": "{\"t\": \"2026-10-16T08:25:59Z\", \"tool\": \"leanfinder\", \"query\": \"Construction of homotopy coherent enriched localization of a relative infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.Truncated.HomotopyCategory.lift\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"c1d1ae0feab9db73\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Localization/Predicate.lean:216-239,326-343 is ordinary functor-category localization, while Enriched/FunctorCategory.lean uses ordinary ends. QCat StrictBicategory.lean retains homotopy categories of simplicial mapping objects only. None states D(Z)-enriched localization or the equivalence on derived mapping objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-derived-quillen-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-enhanced-localization-universal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed localization by a homotopy pushout of freely enriched walking arrows into walking isomorphisms. Computed the single inversion cell, then calculated the whole restriction as a full enriched pullback. Derived coherent diagrams, relative functoriality, opposites, dg interpretation, and multivariable universality by currying and explicit induction. Two generic, statement-only structural foundations remain; no new node simply restates a localization clause. Checked original blueprint paragraph 2 and Keller 4.4, and used the later Haugseng correction of the old tensor-colimit argument. All source and search limitations are in report.md.",
+  "blueprint": "Supports the enhanced finite derived coefficient-adjunction calculation in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, before R lim. That blueprint paragraph supplies no proof of enriched localization, so the displayed pushout and its functor-category calculation are agent-written infrastructure for precisely that paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-d8d06994e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-d8d06994e (reviewer sub-agent of L); spot-checked: Read all mathematics and cited source passages; verified all eight steps, both new foundations, edge cases, dependency acyclicity, duplicate candidates, unit route, and exact master target coefficients and base-change direction. No repairs or accepted tool_uses. Detailed checks are in review.md."
+ }
 }
