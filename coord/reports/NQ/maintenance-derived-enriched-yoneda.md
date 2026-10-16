@@ -19,8 +19,8 @@ backups. No Lean file, compiler setting, tool, brief or retry limit is changed.
 
 Normal synchronization retired the premature NQ claim at 2026-10-16 17:06:44
 server time, before a manual release was needed. This is queue eligibility,
-not giving up because of the failure count. The existing prerequisite delivery
-branch is preserved. The target can become stage-2 eligible again when reached
+not giving up because of the failure count. Maintenance does not alter
+prerequisite deliveries. The target can become stage-2 eligible again when reached
 from an active target route, after both prerequisite interfaces are stated and
 their own statement dependencies are grounded.
 
@@ -45,3 +45,9 @@ declarations in memory only. No mathematical construction or theorem is
 supplied by maintenance. No Lean compilation is needed for JSON-only edits.
 Full operational evidence and final commit ids are in the launcher's
 `maint/NQ-lem-coef-derived-enriched-yoneda-1792141173/REPORT.md`.
+
+The same normal sync archived N0's stage-1 quasi-functor delivery at
+`refs/superseded/N0/lem-coef-dg-quasifunctor-invariance/2525463718028a4fca381dc9cf619ebf3e3d56cd`
+in the side repository when it left active target reach. Its commit is retained;
+reuse that reviewed-work candidate through normal review/queue procedures if
+the route reopens. It has not supplied a Lean interface yet.
