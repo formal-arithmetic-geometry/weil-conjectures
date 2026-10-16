@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wcb-split-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Faithfully flat weakly étale algebras over a w-contractible ring split",
@@ -12,30 +12,108 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-split-cover.md",
   "place": "node det-pe-wcb-split-cover, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-pe-wlocal-strict-contractible",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
  "proof": [
   {
-   "text": "By [thm-weil-pbc-weak-etale-refinement] there is a faithfully flat ind-étale $E\\to E'$ with\n$D\\to E'$ ind-étale. The composite $D\\to E\\to E'$ is faithfully flat, as a composite of\nfaithfully flat maps. By [det-pe-wc-rings-retraction] there is a $D$-algebra retraction\n$\\rho\\colon E'\\to D$. Then $E\\to E'\\xrightarrow{\\rho}D$ is a $D$-algebra map.",
+   "text": "Apply [thm-weil-pbc-weak-etale-refinement] to $A=D$ and $B=E$. The weakly étale hypothesis is exactly that required by [def-weil-pbc-weak-etale-refinement]. Its constructed ring $E'$ has its specified $E$-algebra map $E\\to E'$, which is faithfully flat and ind-étale, and the composite $D\\to E'$ is ind-étale.",
    "uses": [
     "thm-weil-pbc-weak-etale-refinement",
+    "def-weil-pbc-weak-etale-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-split-cover.proof.md",
+    "place": "proof paragraph, first sentence"
+   }
+  },
+  {
+   "text": "To check faithful flatness of $D\\to E'$, let $C$ be any three-term complex of $D$-modules with composite zero. By [def-weil-pbc-faithfully-flat-ring-map], exactness of $C$ is equivalent to exactness of $E\\otimes_D C$, and this is equivalent to exactness of $E'\\otimes_E(E\\otimes_D C)$, since both given maps are faithfully flat. The natural isomorphisms of [lem-weil-pbc-module-tensor-cancel-base-change], with $R=D$, $S=E$, $M=E'$, identify the latter complex, including its differentials, with $E'\\otimes_D C$. Explicitly, write $a,b$ for the differentials of the twice-tensored complex and $a',b'$ for those of $E'\\otimes_D C$, and write $c_i$ for the isomorphism in degree $i$. Naturality gives $c_2a=a'c_1$ and $c_3b=b'c_2$. Since the $c_i$ are bijective, $c_2(\\operatorname{im}a)=\\operatorname{im}a'$ and $c_2(\\ker b)=\\ker b'$, so either complex is exact if and only if the other is. The same definition therefore says that $D\\to E'$ is faithfully flat.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-module-tensor-cancel-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HC, lemma-composition-flat, proof; tensor identification in Tag 00D2, lemma-tensor-with-bimodule"
+   }
+  },
+  {
+   "text": "Apply [det-pe-wc-rings-retraction] to the w-contractible ring $D$ and the faithfully flat ind-étale $D$-algebra $E'$. It gives a $D$-algebra retraction $\\rho:E'\\to D$ whose composite with $D\\to E'$ is $\\operatorname{id}_D$.",
+   "uses": [
     "det-pe-wc-rings-retraction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-split-cover.proof.md",
+    "place": "proof paragraph, third sentence"
+   }
+  },
+  {
+   "text": "The composite $E\\to E'\\xrightarrow{\\rho}D$ is a $D$-algebra map. It induces $\\operatorname{Spec}D\\to\\operatorname{Spec}E$, and the retraction identity makes this map a section of $\\operatorname{Spec}E\\to\\operatorname{Spec}D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-split-cover.proof.md",
+    "place": "proof paragraph, final sentence"
+   }
   }
  ],
  "proof_deps": [
   "thm-weil-pbc-weak-etale-refinement",
-  "det-pe-wc-rings-retraction",
-  "lem-weil-pbc-ind-etale-stability"
+  "def-weil-pbc-weak-etale-refinement",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-module-tensor-cancel-base-change",
+  "det-pe-wc-rings-retraction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-split-cover.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every faithfully flat weakly etale algebra over a w-contractible commutative ring admits an algebra retraction",
+   "results": "Algebra.Etale.exists_subalgebra_fg, Algebra.Etale, Algebra.FormallyEtale.comp_bijective, Algebra.FormallyEtale.instFormallySmooth, RingHom.Etale.toAlgebra, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallySmooth, Algebra.FormallyEtale",
+   "date": "2026-10-16",
+   "verdict": "no match: returned general étale/flatness statements do not assert a weakly étale retraction over a w-contractible ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FaithfullyFlat, Algebra.WeaklyEtale",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: returned general étale/flatness statements do not assert a weakly étale retraction over a w-contractible ring"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWContractible|WContractible|exists_retraction",
+   "results": "0 hits (Mathlib/RingTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: no w-contractible ring or retraction declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly etale faithfully flat ring map out of a w-contractible ring has a section",
+   "results": "RingHom.Etale, RingHom.Etale.propertyIsLocal, RingHom.FormallyEtale, RingHom.FaithfullyFlat.flat, Algebra.Etale.formallyEtale, RingHom.Etale.ofLocalizationSpan, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: returned general étale/flatness statements do not assert a weakly étale retraction over a w-contractible ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective w-contractible rings split faithfully flat weakly etale extensions",
+   "results": "Algebra.Etale, RingHom.Etale, Algebra.Etale.exists_subalgebra_fg, RingHom.FormallyEtale, RingHom.Etale.toAlgebra, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.formallyEtale, Algebra.FormallySmooth.iff_subsingleton_and_projective",
+   "date": "2026-10-16",
+   "verdict": "no match: returned general étale/flatness statements do not assert a weakly étale retraction over a w-contractible ring"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -51,5 +129,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-weakly-contractible-basis"
+ "unit": "sk-thm-pe-weakly-contractible-basis",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-wcb-split-cover",
+  "worker": "stage1",
+  "summary": "Repaired the returned unit/chapter landing failure by removing the unnecessary new composition leaf. Faithful-flat composition is now proved directly in an elementary step from the existing exactness definition and natural tensor-cancellation leaf. Reread all current cited statements, restored the current item chapter/unit stamp, made statement notion dependencies explicit, and refreshed item searches. The original refinement–retraction route and statement are unchanged.",
+  "blueprint": "Step 1 realizes the first sentence of det-pe-wcb-split-cover.proof.md; step 2 proves its faithful-flat composite assertion from the existing exactness criterion and natural tensor cancellation; steps 3–4 realize its retraction and composition sentences. No new node or unit record is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-b79f97a96",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-b79f97a96 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all five cited statements, the blueprint item and its companion proof, the unit proof, and Stacks 00HC (algebra.tex:8672), 00D2 (algebra.tex:1881) and 097Z (proetale.tex:1585). The statement matches main-20261015 word for word and is not weakened. There are 0 new nodes. Step 1: A=D and B=E meet the refinement definition's only hypothesis (B weakly étale), and the theorem's statement supplies E→E' faithfully flat and ind-étale and D→E' ind-étale. Step 2: faithful flatness of the composite follows from applying the exactness definition twice plus the natural isomorphism of lem-weil-pbc-module-tensor-cancel-base-change (R=D, S=E, M=E'). This is the Stacks 00HC proof and is genuinely elementary. lem-weil-pbc-flat-ring-map-comp gives only flatness. Step 3: the hypotheses of det-pe-wc-rings-retraction (w-contractible, faithfully flat, ind-étale) come from the item and steps 1–2; only its final retraction clause is used. Step 4 is a plain composition. proof_deps is the union of the uses. Both citations outside the unit appear in the blueprint node's own uses, so no tool_uses is needed and none is accepted. Edge cases checked: D=0, E=D, and k^n over a separably closed field (n≥1 splits; n=0 is excluded by faithful flatness). For the maintainer: the existing node lem-weil-pbc-wcontractible-geometric-criterion (sec-proper-base-change, not a blueprint node) states the same theorem, and its live Sheaf Lean file RingTheory/WContractibleGeometricCriterion.lean contains no sorry. Please record the equivalence (merge or attach) so that proof is reused. This is not a fault of this split: it adds nothing new, keeps the unit's route (C7), and same_as=[] is correct because no blueprint node states the item. B10 does not apply (slopmaster2 has only the ind-étale case, WContractible.lean:717). No fixes written."
+ }
 }
