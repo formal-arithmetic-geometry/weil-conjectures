@@ -264,5 +264,27 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-c29432360 (reviewer sub-agent of L); spot-checked: Read the full item, report, six cited statements and source passages. All 13 steps follow Stacks 00LN(1); both inductions, canonical map and edge cases check out. No duplicates, missing dependencies or cycles found. Accepted the associated-graded structure theorem as a generic tool use. No repairs needed; detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceGradedPolynomial",
+  "declaration": "Ideal.regularSequence_gradedPolynomial",
+  "declarations": [
+   "Ideal.regularSequenceGradedPolynomialMap",
+   "Ideal.regularSequence_gradedPolynomial"
+  ],
+  "file": "lean/Sheaf/RingTheory/RegularSequenceGradedPolynomial.lean",
+  "statement": "theorem regularSequence_gradedPolynomial {R : Type u} [CommRing R] {c : ℕ} (f : Fin c → R) (hf : RingTheory.Sequence.IsRegular R (List.ofFn f)) : Function.Bijective (regularSequenceGradedPolynomialMap f) ∧ (∀ (n : ℕ) (p : MvPolynomial (Fin c) (R ⧸ Ideal.span (Set.range f))), p.IsHomogeneous n ↔ ∃ x : associatedGradedPiece (Ideal.span (Set.range f)) n, regularSequenceGradedPolynomialMap f p = DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n x) ∧ (∀ (n : ℕ) (a : {α : Fin c →₀ ℕ // α.sum (fun _ k ↦ k) = n} →₀ R), ∃ x : (Ideal.span (Set.range f) ^ n : Ideal R), x.val = a.sum (fun α r ↦ r * α.val.prod (fun j k ↦ f j ^ k)) ∧ regularSequenceGradedPolynomialMap f (a.sum (fun α r ↦ MvPolynomial.monomial α.val (Ideal.Quotient.mk (Ideal.span (Set.range f)) r))) = DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n (Submodule.Quotient.mk x)) ∧ (∀ (n : ℕ) (x : associatedGradedPiece (Ideal.span (Set.range f)) n), ∃! a : {α : Fin c →₀ ℕ // α.sum (fun _ k ↦ k) = n} →₀ (R ⧸ Ideal.span (Set.range f)), a.sum (fun α b ↦ b • regularSequenceGradedPolynomialMap f (MvPolynomial.monomial α.val 1)) = DirectSum.of (associatedGradedPiece (Ideal.span (Set.range f))) n x)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8e2609bf3",
+  "group": "NP",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean declarations, edge cases, documentation, duplicate searches, and scompile.py output; no substantive or mechanical issues found."
  }
 }
