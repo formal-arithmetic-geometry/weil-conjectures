@@ -1,333 +1,451 @@
 {
-  "id": "prop-weil-pbc-scalar-extension",
-  "blueprint": {
-    "is": "prop-weil-pbc-scalar-extension",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Compatibility with finite scalar extension",
-  "statement": "Let $\\ell$ be prime, let $E\\subset E'$ be finite extensions of $\\mathbf Q_\\ell$, and let $T$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. Use the completed integral coefficient categories and their raw rationalizations $\\Dbc(T,E)$ of [def-weil-pbc-rational-category], with no Karoubi envelope. Derived scalar extension means integral change of completed coefficient rings followed by scalar localization. Then it defines an exact functor\n$$T_{E'/E}=E'\\otimes_E^L-:\\Dbc(T,E)\\longrightarrow\\Dbc(T,E').$$\nChoose $T_{E/E}=\\operatorname{id}$ literally. For $E\\subset E'\\subset E''$, balancing of derived tensor specifies an exact natural isomorphism\n$$a_{E'',E',E}:T_{E''/E'}T_{E'/E}\\xrightarrow{\\sim}T_{E''/E}.$$\nThe associators satisfy the unit equations and the pentagon for four nested fields. There are canonical natural shift comparisons\n$$\\sigma_{E'/E,K}:T_{E'/E}(K[1])\\xrightarrow{\\sim}(T_{E'/E}K)[1]$$\ncommuting with these associators.\n\nWrite $C_{E'/E,T}(K)=K\\otimes^L_{\\widehat{\\mathcal O}_{E,T}}\\widehat{\\mathcal O}_{E',T}$ for the integral ambient scalar-extension functor; its constructible restriction and rationalization is $T_{E'/E,T}$. For morphisms $f:X\\to Y$ and $g:Y'\\to Y$ between schemes satisfying the same scheme hypotheses, there are coherent comparisons on ambient derived-complete integral categories\n$$C_{E'/E,Y}Rf_{*,\\mathcal O_E}\\xrightarrow{\\sim}Rf_{*,\\mathcal O_{E'}}C_{E'/E,X},\\qquad\nC_{E'/E,Y'}Lg^*_{\\mathrm{comp},\\mathcal O_E}\\xrightarrow{\\sim}Lg^*_{\\mathrm{comp},\\mathcal O_{E'}}C_{E'/E,Y}.$$\nTheir restrictions and rationalizations are comparisons on $\\Dbc$ whenever the displayed operations preserve those constructible categories; no preservation assertion for arbitrary $f$ is implicit. Here ordinary direct image is the ringed-topos derived direct image, and completed pullback is [def-weil-pbc-completed-pullback]. For a cartesian square $(f,f',g,g')$ whose four schemes satisfy the stated hypotheses, the exchange is the canonical ambient ringed-topos mate of [def-weil-pbc-ambient-ringed-exchange], followed by derived completion and the direct-image/completion comparison, and then rationalization. Under the displayed comparisons, scalar extension of this $E$-exchange is this $E'$-exchange. The comparisons respect identity morphisms, composition, successive coefficient extensions and shifts.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "node prop-weil-pbc-scalar-extension, order 1307",
-    "external": [
-      {
-        "document": "Milne",
-        "place": "*Source:* the coherent scalar-extension package for finite coefficient fields, i.e. the coefficient-extension formalism of derived complete torsion coefficients: the exactness is the flatness of a finite field extension, and the associators, shift comparisons and the direct-image and pullback compatibilities are the standard derived-tensor-associativity and projection-formula identifications of th"
-      },
-      {
-        "document": "Milne",
-        "place": "This is the recorded input of the statement, the coherent scalar-extension package of the adic formalism (Milne, *Lectures on Étale Cohomology*, Section 19; no Stacks Project tag is recorded for it)."
-      }
-    ],
-    "note": [
-      "*Source:* the coherent scalar-extension package for finite coefficient\nfields, i.e. the coefficient-extension formalism of derived complete torsion\ncoefficients: the exactness is the flatness of a finite field extension, and\nthe associators, shift comparisons and the direct-image and pullback\ncompatibilities are the standard derived-tensor-associativity and\nprojection-formula identifications of the formalism, as in Milne, *Lectures\non Etale Cohomology*, Section 19 (finiteness theorems; sheaves of\n$\\mathbf Z_\\ell$-modules); no Stacks Project tag is recorded for this\npackage."
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-rational-category",
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-proetale-operations"
+ "id": "prop-weil-pbc-scalar-extension",
+ "blueprint": {
+  "is": "prop-weil-pbc-scalar-extension",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compatibility with finite scalar extension",
+ "statement": "Let $\\ell$ be prime, let $E\\subset E'$ be finite extensions of $\\mathbf Q_\\ell$, and let $T$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. Use the completed integral coefficient categories and their raw rationalizations $\\Dbc(T,E)$ of [def-weil-pbc-rational-category], with no Karoubi envelope. Derived scalar extension means integral change of completed coefficient rings followed by scalar localization. Then it defines an exact functor\n$$T_{E'/E}=E'\\otimes_E^L-:\\Dbc(T,E)\\longrightarrow\\Dbc(T,E').$$\nChoose $T_{E/E}=\\operatorname{id}$ literally. For $E\\subset E'\\subset E''$, balancing of derived tensor specifies an exact natural isomorphism\n$$a_{E'',E',E}:T_{E''/E'}T_{E'/E}\\xrightarrow{\\sim}T_{E''/E}.$$\nThe associators satisfy the unit equations and the pentagon for four nested fields. There are canonical natural shift comparisons\n$$\\sigma_{E'/E,K}:T_{E'/E}(K[1])\\xrightarrow{\\sim}(T_{E'/E}K)[1]$$\ncommuting with these associators.\n\nWrite $C_{E'/E,T}(K)=K\\otimes^L_{\\widehat{\\mathcal O}_{E,T}}\\widehat{\\mathcal O}_{E',T}$ for the integral ambient scalar-extension functor; its constructible restriction and rationalization is $T_{E'/E,T}$. For morphisms $f:X\\to Y$ and $g:Y'\\to Y$ between schemes satisfying the same scheme hypotheses, there are coherent comparisons on ambient derived-complete integral categories\n$$C_{E'/E,Y}Rf_{*,\\mathcal O_E}\\xrightarrow{\\sim}Rf_{*,\\mathcal O_{E'}}C_{E'/E,X},\\qquad\nC_{E'/E,Y'}Lg^*_{\\mathrm{comp},\\mathcal O_E}\\xrightarrow{\\sim}Lg^*_{\\mathrm{comp},\\mathcal O_{E'}}C_{E'/E,Y}.$$\nTheir restrictions and rationalizations are comparisons on $\\Dbc$ whenever the displayed operations preserve those constructible categories; no preservation assertion for arbitrary $f$ is implicit. Here ordinary direct image is the ringed-topos derived direct image, and completed pullback is [def-weil-pbc-completed-pullback]. For a cartesian square $(f,f',g,g')$ whose four schemes satisfy the stated hypotheses, the exchange is the canonical ambient ringed-topos mate of [def-weil-pbc-ambient-ringed-exchange], followed by derived completion and the direct-image/completion comparison, and then rationalization. Under the displayed comparisons, scalar extension of this $E$-exchange is this $E'$-exchange. The comparisons respect identity morphisms, composition, successive coefficient extensions and shifts.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "node prop-weil-pbc-scalar-extension, order 1307",
+  "external": [
+   {
+    "document": "Milne",
+    "place": "*Source:* the coherent scalar-extension package for finite coefficient fields, i.e. the coefficient-extension formalism of derived complete torsion coefficients: the exactness is the flatness of a finite field extension, and the associators, shift comparisons and the direct-image and pullback compatibilities are the standard derived-tensor-associativity and projection-formula identifications of th"
+   },
+   {
+    "document": "Milne",
+    "place": "This is the recorded input of the statement, the coherent scalar-extension package of the adic formalism (Milne, *Lectures on Étale Cohomology*, Section 19; no Stacks Project tag is recorded for it)."
+   }
   ],
-  "proof": [
-    {
-      "text": "Put $A=\\mathcal O_E$, $B=\\mathcal O_{E'}$, $t=\\varpi_E$, $v=\\varpi_{E'}$, $R_T=\\widehat A_T$, $S_T=\\widehat B_T$. By [lem-weil-finite-free-completed-scalar-comparison], $S_T$ is a finite free $R_T$-module and, for derived $t$-complete $K$, $K\\otimes^L_{R_T}S_T$ is derived $v$-complete and is canonically the completed integral scalar extension. The local-completeness and intrinsic Koszul-completeness conventions agree by [lem-weil-pbc-constant-completion-equivalence]. Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $K\\in\\Dbc(T,\\mathcal O_E)$: on a finite stratification it has local models $R_T\\otimes_A^LP$ with $P$ bounded finite projective over $A$. For each stratum inclusion and each pro-etale localization, the completed coefficient sheaves restrict to the corresponding coefficient sheaves: for the scheme inclusion use [lem-weil-pbc-profinite-coefficient-inverse-image], and for a slice localization restriction commutes with the defining limits. Tensoring a model with $S_T$ gives $S_T\\otimes_B^L(B\\otimes_A P)$. Each term of $B\\otimes_A P$ is finite projective, since a splitting $P^i\\oplus Q^i=A^{r_i}$ remains a splitting after tensoring. The same finite stratification and local termwise bounds therefore give condition (ii) of that characterization over $B$. Its implication (ii) to (i) supplies all the uniform tower and compatible etale-witness requirements of the PBC category. This proves membership without identifying the PBC category with a different coefficient formalism.",
-      "uses": [
-        "lem-weil-finite-free-completed-scalar-comparison",
-        "lem-weil-pbc-constant-completion-equivalence",
-        "lem-weil-pbc-integral-stratified-perfect-characterization",
-        "lem-weil-pbc-profinite-coefficient-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "093M, lemma-completion-flat; local-model argument written by the worker using the cited characterization"
-      }
-    },
-    {
-      "text": "The ordinary ring-sheaf change of rings $K\\mapsto K\\otimes^L_{R_T}S_T$ is exact by [lem-pur-derived-change-of-rings]. By [lem-weil-pbc-uniform-complete-triangulated] the source and target PBC integral categories have exactly the inherited triangles. Step 1 shows that the exact ambient functor restricts to them. On integral morphisms its $A$-linearity is the identity $(af)\\otimes1=a(f\\otimes1)$ on tensor representatives. Define the rational functor on morphisms by $f/t^n\\mapsto F(f)/t^n$. This is well-defined under the balancing and localization relations in [def-weil-linear-scalar-localization]. The image of $t$ is invertible in the target rational category: by [lem-weil-l-adic-extension-integers-dvr], the nonzero nonunit $t\\in B$ is $uv^e$ for a unit $u$ and $e\\geq1$. Localization at $t$ and at $v$ gives the same morphism modules because $v^{-1}=uv^{e-1}t^{-1}$ and $t^{-1}=u^{-1}v^{-e}$. By [lem-weil-linear-scalar-localization-triangulated], every rational distinguished triangle is isomorphic to a localized integral triangle; its image is consequently distinguished. This proves exactness of the displayed functor on the raw rationalizations.",
-      "uses": [
-        "lem-pur-derived-change-of-rings",
-        "lem-weil-pbc-uniform-complete-triangulated",
-        "def-weil-linear-scalar-localization",
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-weil-linear-scalar-localization-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-        "place": "exactness clause; explicit scalar-localization argument written by the worker"
-      }
-    },
-    {
-      "text": "For three nested coefficient rings $R\\to S\\to U$, choose a K-flat resolution $P$ with flat terms by [lem-pc-kflat-resolution]. Such representatives compute derived change of rings by [lem-pur-derived-change-of-rings]; $P\\otimes_R S$ is again K-flat with flat terms by [lem-pur-kflat-change-of-rings]. Define the associator by $((p\\otimes s)\\otimes u)\\mapsto p\\otimes su$, with inverse $p\\otimes u\\mapsto(p\\otimes1)\\otimes u$. These maps respect balancing, restrictions and differentials. They are mutually inverse and commute with every chain map of representatives. They hence descend through the derived localizations, and through scalar localization by the formula of step 2. Comparison with completed scalar extension is the natural comparison of step 1; choose these balanced maps as the specified associators for that realization. Replace the identity-extension functor by the literal identity via multiplication $p\\otimes r\\mapsto rp$. When any two adjacent fields coincide define the associator through this unit identification.",
-      "uses": [
-        "lem-pur-derived-change-of-rings",
-        "lem-pur-kflat-change-of-rings",
-        "lem-weil-finite-free-completed-scalar-comparison",
-        "lem-pc-kflat-resolution"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-        "place": "specified associator and literal identity clauses; balancing calculation written by the worker"
-      }
-    },
-    {
-      "text": "For four coefficient rings $R\\to S\\to U\\to V$, every route around the associativity pentagon sends $(((p\\otimes s)\\otimes u)\\otimes v)$ to $p\\otimes(suv)$. Associativity of ring multiplication makes the results equal; the universal balancing relations give equality of sheaf maps and then of complex maps. With an identity extension, multiplication by $1$ gives the two unit equations. Use the shift comparison which is the identity on $P^{q+1}\\otimes_RS$: both differentials are $-d_P\\otimes1$. Thus the associator is the same multiplication map in both shifted complexes, proving shift compatibility. Tensoring the cone $Q^q\\oplus P^{q+1}$ gives the cone of the tensor map, with the same differential matrix, so these comparisons are comparisons of exact functors. Equalities of these maps persist in the two localizations of step 2.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-        "place": "unit, pentagon and shift clauses; explicit chain-level calculation written by the worker"
-      }
-    },
-    {
-      "text": "For any scheme morphism $f$, [lem-weil-pbc-profinite-coefficient-inverse-image] identifies $f^{-1}R_Y=R_X$ and $f^{-1}S_Y=S_X$, naturally in the finite coefficient quotients and their ring maps. Define the direct-image comparison by the projection mate with coefficient object $S_Y$. By [lemma-weil-pbc-perfect-projection-formula] it is an isomorphism after restricting to $R_Y$-modules, because $S_Y$ is finite free by step 1. This is the required $S_Y$-module arrow, not just an arbitrary restricted isomorphism: its adjunct is the counit on $K$ tensored with $1_{S_X}$, so multiplication by any section of $S_Y$ commutes with it. To identify the target direct image after restricting scalars, use the module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] for the identity topos with ring map $R_X\\to S_X$. If $J$ is K-injective over $S_X$, maps from an acyclic $R_X$-complex $C$ to its restriction identify with maps from $C\\otimes_{R_X}S_X$ to $J$. The latter complex is acyclic since $S_X$ is finite free. Such maps are null-homotopic by [def-pur-kinjective-complex]. Thus restriction preserves K-injectives in this case, and the underived equality $f_*\\operatorname{Res}J=\\operatorname{Res}f_*J$ computes the derived equality. Restriction detects quasi-isomorphisms, as the underlying abelian sheaves are unchanged. The projection mate is consequently an isomorphism in the $S_Y$-derived category itself. If $K$ is derived complete, [prop-weil-pbc-direct-image-limits] makes $Rf_*K$ derived complete, for either coefficient ring. Together with step 1 this puts both endpoints in the claimed ambient derived-complete categories.",
-      "uses": [
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "lemma-weil-pbc-perfect-projection-formula",
-        "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "def-pur-kinjective-complex",
-        "prop-weil-pbc-direct-image-limits"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944, lemma-projection-formula, finite-free case; coefficient-action and K-injective checks written by the worker"
-      }
-    },
-    {
-      "text": "Ordinary pullback commutes with coefficient extension by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the coefficient inverse-image identifications of step 5. Now complete this comparison. The completed pullback of [def-weil-pbc-completed-pullback] is ordinary pullback followed by its canonical completion unit. Finite-free tensor commutes with the Koszul completion construction: a basis of $S_{T'}$ over $R_{T'}$ identifies it with a finite sum, finite sums commute with products, and the matrix $1-s$ in the strict-tower Roos triangle commutes with that finite sum. The canonical map, defined before choosing the basis, is therefore an isomorphism and respects the completion units. The Roos realization is [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Completion with respect to $t$ and $v$ in $S_{T'}$ is the same reflector: $t=uv^e$ implies $S[1/t]=S[1/v]$ with the same localization map from $S$. The extended Cech complexes for these single generators are consequently the identical augmented complex $[S\\to S[1/v]]$. By [lem-weil-pbc-extended-cech-completion-model], derived Hom from this augmented complex realizes both completion reflectors and their units. By [lem-weil-pbc-ringed-koszul-completion-reflector], the Koszul completion constructions are also these reflectors, so their canonical isomorphism is uniquely fixed by the units. This gives the claimed completed-pullback comparison without claiming that ordinary pullback of an arbitrary complete object is complete.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "def-weil-pbc-completed-pullback",
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-        "lem-weil-pbc-ringed-koszul-completion-reflector",
-        "lem-weil-pbc-extended-cech-completion-model"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "099N, lemma-pushforward-Noetherian-case (2),(5); finite-free completion comparison written by the worker"
-      }
-    },
-    {
-      "text": "The comparisons just constructed are coherent. For coefficient towers, take successively tensor-product bases of the finite-free extensions. The projection comparison of step 5, after restriction of scalars, is the direct sum of identity maps $Rf_*K\\to Rf_*K$ indexed by a basis. This follows from its counit-tensor definition and the tensor-unit case of [lem-weil-pbc-ringed-projection-mate-exact]. Iterating two comparisons or using their associator in step 3 gives the same identities indexed by pairs of basis elements. Changing a basis conjugates both routes by the same scalar matrix, so the resulting equality is independent of the bases. For composed scheme morphisms the counit of the composite adjunction is the composite of the two counits; tensoring these with $1$ gives the same direct sums of identities. For pullback these equations are the balanced formula of step 3 on the canonical compositions of inverse images. For completed pullback they persist because the completion isomorphisms in step 6 are uniquely fixed by the completion units. The same equations with a single basis element $1$ give identity coherence. Shift coherence follows from the counit-tensor shift equation in [lem-weil-pbc-ringed-projection-mate-exact] and the explicit shift formula in step 4.",
-      "uses": [
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944, lemma-projection-formula, tensor-unit case; coherence calculation written by the worker"
-      }
-    },
-    {
-      "text": "Set $Q=S_Y$ in [lem-weil-pbc-ringed-exchange-tensor-coherence]. Its two equal composites say exactly that tensoring the ambient $R$-exchange and then using the direct-image and pullback comparisons gives the ambient exchange after coefficient extension. The $S$-actions are those of step 5: the exchange is the mate of the same inverse-image commutation square, with counits transported by scalar extension, so the equality is an equality of $S$-module arrows. For the completed exchange, apply the completion functor to this equality and use step 6. The canonical identification of completed $Rf'_*Lg'^*K$ with $Rf'_*Lg'^*_{\\mathrm{comp}}K$ is computed by $R\\lim$ of the projection-formula maps for finite reductions, followed by the direct-image/derived-limit isomorphism of [prop-weil-pbc-direct-image-limits]. For coefficient change, compute completion on both sides with the image of $t$. Use the Koszul towers $[R\\xrightarrow{t^n}R]$ and $[S\\xrightarrow{t^n}S]$: tensoring the first with $S$ gives the second, including transition maps (multiplication by $t$ in degree $-1$, identity in degree zero) and units. These are bounded finite-free coefficient complexes, so the projection arrows and their exchange square apply to them. Their derived limits compute completion by step 6. The $t$-completion of $S$ is identified with its $v$-completion by the unit-compatible reflector comparison of that step; no equality of $t^n$- and $v^n$-reductions is used. By [lemma-weil-pbc-projection-formula-base-change-naturality], the ambient equality commutes with each of these specified projection maps. To obtain an equality of tower arrows, apply the same ringed projection/exchange coherence on the diagram sites of [lem-weil-pbc-diagram-site-realization], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. On each product site use the completed ring sheaf constant in the $J$ direction, exactly as in that realization statement; the quotient coefficient towers are module objects over this ring sheaf through its quotient maps. Thus no assertion about a varying ring sheaf is required. These sites are small; their module categories are exactly the strict diagram categories, by its additive exact equivalence. Thus the projection mate and exchange mate calculation holds for the actual diagram arrows, not merely at their evaluations. The derived strict-tower limit is an actual functor by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so applying it preserves this equality; no faithfulness of levelwise derived evaluations is used. This is compatibility with the completion of the specified ambient mate, including its prescribed direct-image/completion comparison, rather than compatibility with some isomorphism between its endpoints. Finally all arrows restrict when the operations preserve the integral constructible categories, and rationalization extends those specified transformations by [prop-weil-pbc-rational-transport]. The denominator formula of step 2 shows that the integral equality remains the same equality for every rational morphism. This proves the last assertion.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "prop-weil-pbc-direct-image-limits",
-        "lemma-weil-pbc-projection-formula-base-change-naturality",
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-        "prop-weil-pbc-rational-transport",
-        "lem-weil-pbc-diagram-site-realization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0E48, remark-compatible-with-diagram, with omitted verification supplied by the cited ringed-exchange lemma; 099N, proetale lemma-pushforward-Noetherian-case"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pur-kinjective-complex",
-    "def-weil-linear-scalar-localization",
-    "def-weil-pbc-completed-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
+  "note": [
+   "*Source:* the coherent scalar-extension package for finite coefficient\nfields, i.e. the coefficient-extension formalism of derived complete torsion\ncoefficients: the exactness is the flatness of a finite field extension, and\nthe associators, shift comparisons and the direct-image and pullback\ncompatibilities are the standard derived-tensor-associativity and\nprojection-formula identifications of the formalism, as in Milne, *Lectures\non Etale Cohomology*, Section 19 (finiteness theorems; sheaves of\n$\\mathbf Z_\\ell$-modules); no Stacks Project tag is recorded for this\npackage."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "prop-weil-pbc-integral-tstructure",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$, $B=\\mathcal O_{E'}$, $t=\\varpi_E$, $v=\\varpi_{E'}$, $R_T=\\widehat A_T$, $S_T=\\widehat B_T$. By [lem-weil-finite-free-completed-scalar-comparison], $S_T$ is a finite free $R_T$-module and, for derived $t$-complete $K$, $K\\otimes^L_{R_T}S_T$ is derived $v$-complete and is canonically the completed integral scalar extension. The local-completeness and intrinsic Koszul-completeness conventions agree by [lem-weil-pbc-constant-completion-equivalence]. Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $K\\in\\Dbc(T,\\mathcal O_E)$: on a finite stratification it has local models $R_T\\otimes_A^LP$ with $P$ bounded finite projective over $A$. For each stratum inclusion and each pro-etale localization, the completed coefficient sheaves restrict to the corresponding coefficient sheaves: for the scheme inclusion use [lem-weil-pbc-profinite-coefficient-inverse-image], and for a slice localization restriction commutes with the defining limits. Tensoring a model with $S_T$ gives $S_T\\otimes_B^L(B\\otimes_A P)$. Each term of $B\\otimes_A P$ is finite projective, since a splitting $P^i\\oplus Q^i=A^{r_i}$ remains a splitting after tensoring. The same finite stratification and local termwise bounds therefore give condition (ii) of that characterization over $B$. Its implication (ii) to (i) supplies all the uniform tower and compatible etale-witness requirements of the PBC category. This proves membership without identifying the PBC category with a different coefficient formalism.",
+   "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-linear-scalar-localization-triangulated",
     "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-extended-cech-completion-model",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-uniform-complete-triangulated",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "prop-weil-pbc-direct-image-limits",
-    "prop-weil-pbc-rational-transport"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
-    "place": "Blueprint scalar-extension input; proof supplied from the cited Stacks formalism, not asserted to be Milne Section 19"
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "093M, lemma-completion-flat; local-model argument written by the worker using the cited characterization"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
-      "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
-      "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "scalarExtension|changeOfRings|ChangeOfRings",
-      "results": "0 hits in Mathlib/CategoryTheory",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived scalar extension for constructible adic sheaves and coherent base change",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite free change of coefficients derived category of sheaves projection formula",
-      "results": "8 hits: SheafOfModules.mapFree and mapGenerators, freeHomEquiv and map_ιFree identities, all underived free sheaf constructions in Algebra/Category/ModuleCat/Sheaf/Free or Quasicoherent. None gives the coherent derived-complete constructible package.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "extension of scalars sheaves modules derived functor tensor associativity",
-      "results": "8 hits; ModuleCat.extendScalars_assoc and extendScalarsComp, and free-sheaf comparison identities. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1026. These are ordinary module functors, not the derived-complete constructible sheaf package.",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite flat extension of coefficient rings commutes with derived sheaf pushforward and completion",
-      "date": "2026-10-14",
-      "results": "8 hits. Read AdicCompletion.ofTensorProductEquivOfFiniteNoetherian at Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:328-331, ModuleCat.extendScalarsComp and extendScalars_assoc at ChangeOfRings.lean:984-1026, and SheafOfModules.mapFree at Sheaf/Free.lean:184-185. These concern ordinary modules, classical completion or underived free sheaves, not the derived-complete constructible coefficient package.",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "extendScalarsComp|ofTensorProductEquivOfFiniteNoetherian|mapFree",
-      "date": "2026-10-14",
-      "results": "25 hits. Read AdicCompletion.ofTensorProductEquivOfFiniteNoetherian at Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:328-331, ModuleCat.extendScalarsComp and extendScalars_assoc at ChangeOfRings.lean:984-1026, and SheafOfModules.mapFree at Sheaf/Free.lean:184-185. These concern ordinary modules, classical completion or underived free sheaves, not the derived-complete constructible coefficient package.",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1307,
-  "blueprint_uses": [
-    "def-weil-pbc-rational-category"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "blueprint_proof_text": "This is the recorded input of the statement, the coherent scalar-extension\npackage of the adic formalism (Milne, *Lectures on Étale Cohomology*,\nSection 19; no Stacks Project tag is recorded for it). Its two elementary\ningredients are named in the statement itself: exactness is the flatness of\na finite field extension, and the associators, unit equations and pentagon\nare the coherence of the derived tensor product, transported along the exact\nfunctor $E'\\otimes_E^-$. The blueprint uses the package as the definition of\nthe coefficient extension between the $E$- and $E'$-stages of\n[def-weil-pbc-rational-category]; no separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded input of the statement, the coherent scalar-extension\npackage of the adic formalism (Milne, *Lectures on Étale Cohomology*,\nSection 19; no Stacks Project tag is recorded for it). Its two elementary\ningredients are named in the statement itself: exactness is the flatness of\na finite field extension, and the associators, unit equations and pentagon\nare the coherence of the derived tensor product, transported along the exact\nfunctor $E'\\otimes_E^-$. The blueprint uses the package as the definition of\nthe coefficient extension between the $E$- and $E'$-stages of\n[def-weil-pbc-rational-category]; no separate proof is given.",
-      "uses": [
-        "def-weil-pbc-rational-category"
-      ],
-      "elementary": false
-    }
-  ],
-  "blueprint_notes": [
-    {
-      "label": "source",
-      "text": "*Source:* the coherent scalar-extension package for finite coefficient\nfields, i.e. the coefficient-extension formalism of derived complete torsion\ncoefficients: the exactness is the flatness of a finite field extension, and\nthe associators, shift comparisons and the direct-image and pullback\ncompatibilities are the standard derived-tensor-associativity and\nprojection-formula identifications of the formalism, as in Milne, *Lectures\non Etale Cohomology*, Section 19 (finiteness theorems; sheaves of\n$\\mathbf Z_\\ell$-modules); no Stacks Project tag is recorded for this\npackage.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "prop-weil-pbc-scalar-extension",
-    "worker": "stage1",
-    "summary": "Corrected the missing scheme and coefficient hypotheses and made the domains of direct-image comparisons explicit. Expanded the recorded input into a proof using finite-free completed coefficients, the existing stratified-perfect characterization of precisely the PBC integral category, balancing on K-flat representatives, raw localization, the perfect projection mate and its exchange coherence. No new nodes or coefficient-category identifications are introduced. Milne Section 19 does not provide the claimed full coherent derived package.",
-    "blueprint": "Exactness input; associators and literal identity; unit, pentagon and shift equations; projection-formula direct-image and pullback comparisons; compatibility of the actual exchange mate.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-finite-free-completed-scalar-comparison",
-        "why": "Steps 1 and 3 use finite freeness of the completed coefficient sheaf and its canonical comparison with completed scalar extension. The torsion proper-base-change unit does not construct change of completed coefficient rings."
-      },
-      {
-        "node": "lem-pur-derived-change-of-rings",
-        "why": "Steps 2 and 3 use exact unbounded derived ring-sheaf change of rings and its computation on K-flat resolutions. This is generic ringed-site algebra, not a replacement of the unit's torsion proper-base-change proof."
-      },
-      {
-        "node": "lem-pur-kflat-change-of-rings",
-        "why": "Step 3 uses preservation of K-flatness and termwise flatness under ring-sheaf change of rings to compute successive extensions on one representative. The proper-base-change unit does not supply this resolving-class theorem."
-      },
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Step 2 uses the valuation-ring factorization t = u v^e in the larger coefficient field to compare scalar localizations under ramification. The torsion proper-base-change unit does not prove the coefficient valuation-ring structure."
-      },
-      {
-        "node": "lem-weil-linear-scalar-localization-triangulated",
-        "why": "Step 2 uses the characterization of rational distinguished triangles as localized integral triangles. This general linear triangulated-category construction is not furnished by the proper-base-change unit's three torsion steps."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
+  {
+   "text": "The ordinary ring-sheaf change of rings $K\\mapsto K\\otimes^L_{R_T}S_T$ is exact by [lem-pur-derived-change-of-rings]. By [lem-weil-pbc-uniform-complete-triangulated] the source and target PBC integral categories have exactly the inherited triangles. Step 1 shows that the exact ambient functor restricts to them. On integral morphisms its $A$-linearity is the identity $(af)\\otimes1=a(f\\otimes1)$ on tensor representatives. Define the rational functor on morphisms by $f/t^n\\mapsto F(f)/t^n$. This is well-defined under the balancing and localization relations in [def-weil-linear-scalar-localization]. The image of $t$ is invertible in the target rational category: by [lem-weil-l-adic-extension-integers-dvr], the nonzero nonunit $t\\in B$ is $uv^e$ for a unit $u$ and $e\\geq1$. Localization at $t$ and at $v$ gives the same morphism modules because $v^{-1}=uv^{e-1}t^{-1}$ and $t^{-1}=u^{-1}v^{-e}$. By [lem-weil-linear-scalar-localization-triangulated], every rational distinguished triangle is isomorphic to a localized integral triangle; its image is consequently distinguished. This proves exactness of the displayed functor on the raw rationalizations.",
+   "uses": [
     "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-weil-linear-scalar-localization",
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-linear-scalar-localization-triangulated"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-ND-25d2cb205",
-    "group": "ND",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-25d2cb205 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations; checked all eight steps, ramification, coherence, exchange orientation, duplicates and cycles. Accepted five proposed generic tool uses. No repairs needed. This certifies the stated scalar-extension package, not a comparison with the upstream condensed target categories. Detailed checks are in review.md."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "exactness clause; explicit scalar-localization argument written by the worker"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a finite extension $E\\subset E'$, derived scalar extension is an exact\nfunctor\n$$\n T_{E'/E}=E'\\otimes_E^L-:\n \\Dbc(T,E)\\longrightarrow\\Dbc(T,E').\n$$\nChoose $T_{E/E}=\\operatorname{id}$ literally. For $E\\subset E'\\subset E''$,\nderived tensor associativity gives a specified exact natural isomorphism\n$$\n a_{E'',E',E}:T_{E''/E'}T_{E'/E}\n \\xrightarrow{\\sim}T_{E''/E}.\n$$\nThese associators satisfy the unit equations and the pentagon for four\nnested fields. Exactness supplies natural shift comparisons\n$$\n \\sigma_{E'/E,K}:T_{E'/E}(K[1])\n \\xrightarrow{\\sim}(T_{E'/E}K)[1]\n$$\nwhich commute with the associators.\n\nThere are coherent natural isomorphisms\n$$\n E'\\otimes_E^LRf_{*,E}K\\xrightarrow{\\sim}\n Rf_{*,E'}(E'\\otimes_E^LK)\n$$\nand analogous isomorphisms for pullback. Under these isomorphisms, scalar\nextension of the $E$-exchange map is the $E'$-exchange map.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For three nested coefficient rings $R\\to S\\to U$, choose a K-flat resolution $P$ with flat terms by [lem-pc-kflat-resolution]. Such representatives compute derived change of rings by [lem-pur-derived-change-of-rings]; $P\\otimes_R S$ is again K-flat with flat terms by [lem-pur-kflat-change-of-rings]. Define the associator by $((p\\otimes s)\\otimes u)\\mapsto p\\otimes su$, with inverse $p\\otimes u\\mapsto(p\\otimes1)\\otimes u$. These maps respect balancing, restrictions and differentials. They are mutually inverse and commute with every chain map of representatives. They hence descend through the derived localizations, and through scalar localization by the formula of step 2. Comparison with completed scalar extension is the natural comparison of step 1; choose these balanced maps as the specified associators for that realization. Replace the identity-extension functor by the literal identity via multiplication $p\\otimes r\\mapsto rp$. When any two adjacent fields coincide define the associator through this unit identification.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "specified associator and literal identity clauses; balancing calculation written by the worker"
+   }
+  },
+  {
+   "text": "For four coefficient rings $R\\to S\\to U\\to V$, every route around the associativity pentagon sends $(((p\\otimes s)\\otimes u)\\otimes v)$ to $p\\otimes(suv)$. Associativity of ring multiplication makes the results equal; the universal balancing relations give equality of sheaf maps and then of complex maps. With an identity extension, multiplication by $1$ gives the two unit equations. Use the shift comparison which is the identity on $P^{q+1}\\otimes_RS$: both differentials are $-d_P\\otimes1$. Thus the associator is the same multiplication map in both shifted complexes, proving shift compatibility. Tensoring the cone $Q^q\\oplus P^{q+1}$ gives the cone of the tensor map, with the same differential matrix, so these comparisons are comparisons of exact functors. Equalities of these maps persist in the two localizations of step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "unit, pentagon and shift clauses; explicit chain-level calculation written by the worker"
+   }
+  },
+  {
+   "text": "For any scheme morphism $f$, [lem-weil-pbc-profinite-coefficient-inverse-image] identifies $f^{-1}R_Y=R_X$ and $f^{-1}S_Y=S_X$, naturally in the finite coefficient quotients and their ring maps. Define the direct-image comparison by the projection mate with coefficient object $S_Y$. By [lemma-weil-pbc-perfect-projection-formula] it is an isomorphism after restricting to $R_Y$-modules, because $S_Y$ is finite free by step 1. This is the required $S_Y$-module arrow, not just an arbitrary restricted isomorphism: its adjunct is the counit on $K$ tensored with $1_{S_X}$, so multiplication by any section of $S_Y$ commutes with it. To identify the target direct image after restricting scalars, use the module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] for the identity topos with ring map $R_X\\to S_X$. If $J$ is K-injective over $S_X$, maps from an acyclic $R_X$-complex $C$ to its restriction identify with maps from $C\\otimes_{R_X}S_X$ to $J$. The latter complex is acyclic since $S_X$ is finite free. Such maps are null-homotopic by [def-pur-kinjective-complex]. Thus restriction preserves K-injectives in this case, and the underived equality $f_*\\operatorname{Res}J=\\operatorname{Res}f_*J$ computes the derived equality. Restriction detects quasi-isomorphisms, as the underlying abelian sheaves are unchanged. The projection mate is consequently an isomorphism in the $S_Y$-derived category itself. If $K$ is derived complete, [prop-weil-pbc-direct-image-limits] makes $Rf_*K$ derived complete, for either coefficient ring. Together with step 1 this puts both endpoints in the claimed ambient derived-complete categories.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pur-kinjective-complex",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944, lemma-projection-formula, finite-free case; coefficient-action and K-injective checks written by the worker"
+   }
+  },
+  {
+   "text": "Ordinary pullback commutes with coefficient extension by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the coefficient inverse-image identifications of step 5. Now complete this comparison. The completed pullback of [def-weil-pbc-completed-pullback] is ordinary pullback followed by its canonical completion unit. Finite-free tensor commutes with the Koszul completion construction: a basis of $S_{T'}$ over $R_{T'}$ identifies it with a finite sum, finite sums commute with products, and the matrix $1-s$ in the strict-tower Roos triangle commutes with that finite sum. The canonical map, defined before choosing the basis, is therefore an isomorphism and respects the completion units. The Roos realization is [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Completion with respect to $t$ and $v$ in $S_{T'}$ is the same reflector: $t=uv^e$ implies $S[1/t]=S[1/v]$ with the same localization map from $S$. The extended Cech complexes for these single generators are consequently the identical augmented complex $[S\\to S[1/v]]$. By [lem-weil-pbc-extended-cech-completion-model], derived Hom from this augmented complex realizes both completion reflectors and their units. By [lem-weil-pbc-ringed-koszul-completion-reflector], the Koszul completion constructions are also these reflectors, so their canonical isomorphism is uniquely fixed by the units. This gives the claimed completed-pullback comparison without claiming that ordinary pullback of an arbitrary complete object is complete.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-extended-cech-completion-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099N, lemma-pushforward-Noetherian-case (2),(5); finite-free completion comparison written by the worker"
+   }
+  },
+  {
+   "text": "The comparisons just constructed are coherent. For coefficient towers, take successively tensor-product bases of the finite-free extensions. The projection comparison of step 5, after restriction of scalars, is the direct sum of identity maps $Rf_*K\\to Rf_*K$ indexed by a basis. This follows from its counit-tensor definition and the tensor-unit case of [lem-weil-pbc-ringed-projection-mate-exact]. Iterating two comparisons or using their associator in step 3 gives the same identities indexed by pairs of basis elements. Changing a basis conjugates both routes by the same scalar matrix, so the resulting equality is independent of the bases. For composed scheme morphisms the counit of the composite adjunction is the composite of the two counits; tensoring these with $1$ gives the same direct sums of identities. For pullback these equations are the balanced formula of step 3 on the canonical compositions of inverse images. For completed pullback they persist because the completion isomorphisms in step 6 are uniquely fixed by the completion units. The same equations with a single basis element $1$ give identity coherence. Shift coherence follows from the counit-tensor shift equation in [lem-weil-pbc-ringed-projection-mate-exact] and the explicit shift formula in step 4.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944, lemma-projection-formula, tensor-unit case; coherence calculation written by the worker"
+   }
+  },
+  {
+   "text": "Set $Q=S_Y$ in [lem-weil-pbc-ringed-exchange-tensor-coherence]. Its two equal composites say exactly that tensoring the ambient $R$-exchange and then using the direct-image and pullback comparisons gives the ambient exchange after coefficient extension. The $S$-actions are those of step 5: the exchange is the mate of the same inverse-image commutation square, with counits transported by scalar extension, so the equality is an equality of $S$-module arrows. For the completed exchange, apply the completion functor to this equality and use step 6. The canonical identification of completed $Rf'_*Lg'^*K$ with $Rf'_*Lg'^*_{\\mathrm{comp}}K$ is computed by $R\\lim$ of the projection-formula maps for finite reductions, followed by the direct-image/derived-limit isomorphism of [prop-weil-pbc-direct-image-limits]. For coefficient change, compute completion on both sides with the image of $t$. Use the Koszul towers $[R\\xrightarrow{t^n}R]$ and $[S\\xrightarrow{t^n}S]$: tensoring the first with $S$ gives the second, including transition maps (multiplication by $t$ in degree $-1$, identity in degree zero) and units. These are bounded finite-free coefficient complexes, so the projection arrows and their exchange square apply to them. Their derived limits compute completion by step 6. The $t$-completion of $S$ is identified with its $v$-completion by the unit-compatible reflector comparison of that step; no equality of $t^n$- and $v^n$-reductions is used. By [lemma-weil-pbc-projection-formula-base-change-naturality], the ambient equality commutes with each of these specified projection maps. To obtain an equality of tower arrows, apply the same ringed projection/exchange coherence on the diagram sites of [lem-weil-pbc-diagram-site-realization], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. On each product site use the completed ring sheaf constant in the $J$ direction, exactly as in that realization statement; the quotient coefficient towers are module objects over this ring sheaf through its quotient maps. Thus no assertion about a varying ring sheaf is required. These sites are small; their module categories are exactly the strict diagram categories, by its additive exact equivalence. Thus the projection mate and exchange mate calculation holds for the actual diagram arrows, not merely at their evaluations. The derived strict-tower limit is an actual functor by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so applying it preserves this equality; no faithfulness of levelwise derived evaluations is used. This is compatibility with the completion of the specified ambient mate, including its prescribed direct-image/completion comparison, rather than compatibility with some isomorphism between its endpoints. Finally all arrows restrict when the operations preserve the integral constructible categories, and rationalization extends those specified transformations by [prop-weil-pbc-rational-transport]. The denominator formula of step 2 shows that the integral equality remains the same equality for every rational morphism. This proves the last assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "prop-weil-pbc-direct-image-limits",
+    "lemma-weil-pbc-projection-formula-base-change-naturality",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0E48, remark-compatible-with-diagram, with omitted verification supplied by the cited ringed-exchange lemma; 099N, proetale lemma-pushforward-Noetherian-case"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-kinjective-complex",
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-completed-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Blueprint scalar-extension input; proof supplied from the cited Stacks formalism, not asserted to be Milne Section 19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free change of coefficients derived category of sheaves projection formula",
+   "results": "8 hits: SheafOfModules.mapFree and mapGenerators, freeHomEquiv and map_ιFree identities, all underived free sheaf constructions in Algebra/Category/ModuleCat/Sheaf/Free or Quasicoherent. None gives the coherent derived-complete constructible package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars sheaves modules derived functor tensor associativity",
+   "results": "8 hits; ModuleCat.extendScalars_assoc and extendScalarsComp, and free-sheaf comparison identities. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1026. These are ordinary module functors, not the derived-complete constructible sheaf package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite flat extension of coefficient rings commutes with derived sheaf pushforward and completion",
+   "date": "2026-10-14",
+   "results": "8 hits. Read AdicCompletion.ofTensorProductEquivOfFiniteNoetherian at Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:328-331, ModuleCat.extendScalarsComp and extendScalars_assoc at ChangeOfRings.lean:984-1026, and SheafOfModules.mapFree at Sheaf/Free.lean:184-185. These concern ordinary modules, classical completion or underived free sheaves, not the derived-complete constructible coefficient package.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|ofTensorProductEquivOfFiniteNoetherian|mapFree",
+   "date": "2026-10-14",
+   "results": "25 hits. Read AdicCompletion.ofTensorProductEquivOfFiniteNoetherian at Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:328-331, ModuleCat.extendScalarsComp and extendScalars_assoc at ChangeOfRings.lean:984-1026, and SheafOfModules.mapFree at Sheaf/Free.lean:184-185. These concern ordinary modules, classical completion or underived free sheaves, not the derived-complete constructible coefficient package.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1307,
+ "blueprint_uses": [
+  "def-weil-pbc-rational-category"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "blueprint_proof_text": "This is the recorded input of the statement, the coherent scalar-extension\npackage of the adic formalism (Milne, *Lectures on Étale Cohomology*,\nSection 19; no Stacks Project tag is recorded for it). Its two elementary\ningredients are named in the statement itself: exactness is the flatness of\na finite field extension, and the associators, unit equations and pentagon\nare the coherence of the derived tensor product, transported along the exact\nfunctor $E'\\otimes_E^-$. The blueprint uses the package as the definition of\nthe coefficient extension between the $E$- and $E'$-stages of\n[def-weil-pbc-rational-category]; no separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded input of the statement, the coherent scalar-extension\npackage of the adic formalism (Milne, *Lectures on Étale Cohomology*,\nSection 19; no Stacks Project tag is recorded for it). Its two elementary\ningredients are named in the statement itself: exactness is the flatness of\na finite field extension, and the associators, unit equations and pentagon\nare the coherence of the derived tensor product, transported along the exact\nfunctor $E'\\otimes_E^-$. The blueprint uses the package as the definition of\nthe coefficient extension between the $E$- and $E'$-stages of\n[def-weil-pbc-rational-category]; no separate proof is given.",
+   "uses": [
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "blueprint_notes": [
+  {
+   "label": "source",
+   "text": "*Source:* the coherent scalar-extension package for finite coefficient\nfields, i.e. the coefficient-extension formalism of derived complete torsion\ncoefficients: the exactness is the flatness of a finite field extension, and\nthe associators, shift comparisons and the direct-image and pullback\ncompatibilities are the standard derived-tensor-associativity and\nprojection-formula identifications of the formalism, as in Milne, *Lectures\non Etale Cohomology*, Section 19 (finiteness theorems; sheaves of\n$\\mathbf Z_\\ell$-modules); no Stacks Project tag is recorded for this\npackage.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-scalar-extension",
+  "worker": "stage1",
+  "summary": "Corrected the missing scheme and coefficient hypotheses and made the domains of direct-image comparisons explicit. Expanded the recorded input into a proof using finite-free completed coefficients, the existing stratified-perfect characterization of precisely the PBC integral category, balancing on K-flat representatives, raw localization, the perfect projection mate and its exchange coherence. No new nodes or coefficient-category identifications are introduced. Milne Section 19 does not provide the claimed full coherent derived package.",
+  "blueprint": "Exactness input; associators and literal identity; unit, pentagon and shift equations; projection-formula direct-image and pullback comparisons; compatibility of the actual exchange mate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Steps 1 and 3 use finite freeness of the completed coefficient sheaf and its canonical comparison with completed scalar extension. The torsion proper-base-change unit does not construct change of completed coefficient rings."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Steps 2 and 3 use exact unbounded derived ring-sheaf change of rings and its computation on K-flat resolutions. This is generic ringed-site algebra, not a replacement of the unit's torsion proper-base-change proof."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Step 3 uses preservation of K-flatness and termwise flatness under ring-sheaf change of rings to compute successive extensions on one representative. The proper-base-change unit does not supply this resolving-class theorem."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Step 2 uses the valuation-ring factorization t = u v^e in the larger coefficient field to compare scalar localizations under ramification. The torsion proper-base-change unit does not prove the coefficient valuation-ring structure."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Step 2 uses the characterization of rational distinguished triangles as localized integral triangles. This general linear triangulated-category construction is not furnished by the proper-base-change unit's three torsion steps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-25d2cb205",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-25d2cb205 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations; checked all eight steps, ramification, coherence, exchange orientation, duplicates and cycles. Accepted five proposed generic tool uses. No repairs needed. This certifies the stated scalar-extension package, not a comparison with the upstream condensed target categories. Detailed checks are in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a finite extension $E\\subset E'$, derived scalar extension is an exact\nfunctor\n$$\n T_{E'/E}=E'\\otimes_E^L-:\n \\Dbc(T,E)\\longrightarrow\\Dbc(T,E').\n$$\nChoose $T_{E/E}=\\operatorname{id}$ literally. For $E\\subset E'\\subset E''$,\nderived tensor associativity gives a specified exact natural isomorphism\n$$\n a_{E'',E',E}:T_{E''/E'}T_{E'/E}\n \\xrightarrow{\\sim}T_{E''/E}.\n$$\nThese associators satisfy the unit equations and the pentagon for four\nnested fields. Exactness supplies natural shift comparisons\n$$\n \\sigma_{E'/E,K}:T_{E'/E}(K[1])\n \\xrightarrow{\\sim}(T_{E'/E}K)[1]\n$$\nwhich commute with the associators.\n\nThere are coherent natural isomorphisms\n$$\n E'\\otimes_E^LRf_{*,E}K\\xrightarrow{\\sim}\n Rf_{*,E'}(E'\\otimes_E^LK)\n$$\nand analogous isomorphisms for pullback. Under these isomorphisms, scalar\nextension of the $E$-exchange map is the $E'$-exchange map.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarExtension",
+  "declaration": "AlgebraicGeometry.Scheme.pbcCoherentScalarExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcScalarRationalZero",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalHasShift",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalShiftAdditive",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalLocalizationShift",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalPretriangulated",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalIsTriangulated",
+   "AlgebraicGeometry.Scheme.pbcScalarIntegralIsoClosure",
+   "AlgebraicGeometry.Scheme.pbcScalarRationalLinear",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap_quotient_kernel",
+   "AlgebraicGeometry.Scheme.pbcScalarQuotientMap",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_exists",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor_preserves",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegralTensor",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_laws",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarExtension",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_comp",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarComp_naturality",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarComp",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarCompComponent",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarComp_naturality",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarComp",
+   "AlgebraicGeometry.Scheme.pbcScalarRestrictId_exists",
+   "AlgebraicGeometry.Scheme.pbcScalarRestrictId",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_id",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientUnit",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarUnitComponent",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarUnit_naturality",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarUnit",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarShift",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarInclusionIso",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift",
+   "AlgebraicGeometry.Scheme.pbcScalarLocalization_naturality",
+   "AlgebraicGeometry.Scheme.pbcScalarLocalizationIso",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarShift",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarExact",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarAdditive",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarTriangulated",
+   "AlgebraicGeometry.Scheme.pbcCoefficientStage",
+   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion",
+   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion_id",
+   "AlgebraicGeometry.Scheme.pbcSubfieldInclusion_comp",
+   "AlgebraicGeometry.Scheme.pbcStageRaw",
+   "AlgebraicGeometry.Scheme.pbcStageTransition",
+   "AlgebraicGeometry.Scheme.pbcStageNormalization",
+   "AlgebraicGeometry.Scheme.pbcStageAssociator",
+   "AlgebraicGeometry.Scheme.pbcStageAssociator_laws",
+   "AlgebraicGeometry.Scheme.pbcStageTransitionShift",
+   "AlgebraicGeometry.Scheme.pbcStageExact",
+   "AlgebraicGeometry.Scheme.pbcStageAssociatorShift",
+   "AlgebraicGeometry.Scheme.pbcScalarPreservesComplete",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientStructureSquare",
+   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPullIso",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImageMap_isIso",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImageIso",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletionIso",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPullIso",
+   "AlgebraicGeometry.Scheme.pbcScalarExchangeLeft",
+   "AlgebraicGeometry.Scheme.pbcScalarExchangeRight",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedExchange_rational",
+   "AlgebraicGeometry.Scheme.pbcScalarOperations_shift",
+   "AlgebraicGeometry.Scheme.pbcScalarOperations_identity",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_identity",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_comp",
+   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_comp",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_comp",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_coefficients",
+   "AlgebraicGeometry.Scheme.pbcScalarOrdinaryPull_coefficients",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_coefficients",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletion_coefficients",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linear",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_additive",
+   "AlgebraicGeometry.Scheme.pbcConditionalIntegral_linearInstance",
+   "AlgebraicGeometry.Scheme.pbcConditionalRational",
+   "AlgebraicGeometry.Scheme.pbcActualOperations_linear",
+   "AlgebraicGeometry.Scheme.pbcActualPush_additive",
+   "AlgebraicGeometry.Scheme.pbcActualPush_linear",
+   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_additive",
+   "AlgebraicGeometry.Scheme.pbcActualCompletedPull_linear",
+   "AlgebraicGeometry.Scheme.pbcScalarDirectImage_rational",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational",
+   "AlgebraicGeometry.Scheme.pbcCoherentScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/PbcScalarExtension.lean",
+  "statement": "theorem pbcCoherentScalarExtension {E F G H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (h' : F ≤ G) (h'' : G ≤ H) : (pbcStageTransition l Ω T h).Additive ∧ (pbcStageTransition l Ω T h).IsTriangulated ∧ (pbcStageTransition l Ω T (le_refl E) = 𝟭 _) ∧ HEq (pbcStageAssociator l Ω T (le_refl E) h) (Functor.leftUnitor (pbcStageTransition l Ω T h)) ∧ HEq (pbcStageAssociator l Ω T h (le_refl F)) (Functor.rightUnitor (pbcStageTransition l Ω T h)) ∧ (∀ K : pbcCoefficientStage l Ω T E, (pbcStageTransition l Ω T h'').map ((pbcStageAssociator l Ω T h h').hom.app K) ≫ (pbcStageAssociator l Ω T (h.trans h') h'').hom.app K = (pbcStageAssociator l Ω T h' h'').hom.app ((pbcStageTransition l Ω T h).obj K) ≫ (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K) ∧ NatTrans.CommShift (pbcStageAssociator l Ω T h h').hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reconstruction after immutable return b9138306191c. The category, functor, exact structure and all comparison equations are actual, with raw tensor-Hom rationalization. The coherent package is stated by the primary theorem and its listed companion declarations. Second reading reuses PbcUniformCompleteTriangulated and PbcRationalTransport without replacing their records; only data adapters exposing the existing canonical structures through Fact hypotheses are in this owning module. The paper-specific module is under Sheaf.Paper. Repair of d72b12bcae52: nine constructed comparison isomorphisms are irreducible, and the completed exchange equality reuses its two already-defined exact routes; no mathematical statement or construction changes. Six rational triangulation adapters directly project the identical published witness, zeta-expanding their former local let aliases to avoid the traced repeated existential-motive conversion. Repair of returned d72b12bcae52: comparison definitions are irreducible, the exchange equality uses its unchanged named routes, and triangulation adapters directly project the same witness to avoid repeated unfolding; mathematical signatures and canonical maps are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a9569c0d9",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Full statement, dependencies, source, declarations, edge cases, docstrings, canonical constructions, and compiler evidence checked; no fixes required."
+ }
 }
