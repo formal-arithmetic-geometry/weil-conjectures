@@ -662,6 +662,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.TracePairing
 public import WeilConjectures.AlgebraicGeometry.Curve.TraceSections
 public import WeilConjectures.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions
 public import WeilConjectures.AlgebraicGeometry.Curve.UniversalHomeomorphismAssertions
+public import WeilConjectures.AlgebraicGeometry.CurveRegularCover
 public import WeilConjectures.AlgebraicGeometry.CyclicModuleConstantReflection
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
@@ -1170,6 +1171,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
+public import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtensionIso
 public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismAddCommGrpStalk
 public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismCategoryEquivalence
 public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismSetStalk
@@ -2544,6 +2546,7 @@ public import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltration
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction
 public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk
+public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalkFinite
 public import WeilConjectures.ConstructibleSheaf.LowerStarSpecialization
 public import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 public import WeilConjectures.ConstructibleSheaf.Monoidal
@@ -4129,6 +4132,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.UnitMono
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Finite.Counit
