@@ -265,5 +265,37 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-fde72cd29 (reviewer sub-agent of L); spot-checked: I read the whole delivery and HTT, which I fetched read-only into /tmp and deleted after: Def 3.1.1.1, Rem 3.1.1.3, Prop 3.1.1.6 with proof (pp.149-150), Cor 3.1.1.7 with proof (p.150), Prop 2.4.1.7. Statement: the four generators and the weakly saturated closure match Def 3.1.1.1. The map matches Cor 3.1.1.7, since (Λ²₂)^♯⊔(Δ²)^♭ marks exactly [0,2] and [1,2]. Cartesian, not coanodyne, convention. Unchanged. Steps: 1 (countable Kan generators, elementary) is correct. 2: the small-object hypotheses hold (countable domains, cf(ω₁)>ω, monic chain maps), and generators (i)/(ii) give an inner fibration, marked edges cartesian and n=1 marked lifts; Z is a quasicategory. 3: on σ^op, u=g^op, v=f^op, w=h^op, which fits exactly the cancellation clause of lem-coef-infinity-cocartesian-composition-initiality, so f is cartesian. 4: an allowed type-(ii) horn over s₀[0,1], then cancellation on τ^op gives a cartesian; the fiber is a quasicategory and the converse of lem-cbc-equivalence-outer-horn-filling makes a an equivalence. 5: generator (iv) on the core marks a, and generator (iii) marks f; this is HTT 3.1.1.6(B) verbatim. 6: the arrow retract is correct. No new nodes; no cycle (traversal of every cited node); no duplicate. Nodes that would close a cycle (point/relative model, relative anodyne calculus, coanodyne) are correctly not cited. Tool use lem-cbc-equivalence-outer-horn-filling is accepted: no in-unit outer-horn criterion. FIX (C7): step 5 took core-Kan from off-unit lem-cbc-enhanced-functor-cone-calculus while in-unit lem-coef-infinity-core-kan-fibration (no path to item) gives it, and the tool_use claim that the unit had no such node was false. Step 5 now applies that node to the isofibration F→Δ⁰, written out. proof_deps recomputed and that tool_use entry removed; nothing else changed. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-marked-triangle-cancellation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-401cc326d",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Statement matches node and HTT Def 3.1.1.1/Cor 3.1.1.7 clause by clause: iso/pushout/transfinite.{u}/retract closure as intersection, generators (i) inner flat horns, (ii) final horns n+1>=1 with [n,n+1] marked via restriction along the real inclusion, (iii) degeneracies plus image of Λ²₁ edges, (iv) all small Kan K; conclusion hornMarkedSimplex 2 2 -> sharp Δ[2] marks exactly 02,12 to all. Edge cases, universes, docstrings, sorry-only, record verbatim all OK; delivered file compiles clean. Defect (H4/H9): base already has landed MarkedAnodyneLiftingCalculus (lem-coef-marked-anodyne-lifting-calculus, a citer of this item) defining SSet.Marked.markedAnodyne. Importing both modules fails ('environment already contains SSet.Marked.markedAnodyne'), reproduced with nt_compile. The landed one can't be reused (cycle). FIX: renamed to markedAnodyneClass with docstring note; proof-plan docstring names nodes per step; lean-record.json (declarations/statement/note) and report.md with Reviewer fix section. Fixed module and both-import test compile clean; check_lean_text/check_record/check_report find no faults."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedTriangleCancellation",
+  "declaration": "SSet.Marked.marked_triangle_cancellation",
+  "declarations": [
+   "SSet.Marked.withEdges",
+   "SSet.Marked.restrictMarking",
+   "SSet.Marked.restrictMarkingInclusion",
+   "SSet.Marked.fullMarkingMap",
+   "SSet.Marked.hornMarkedSimplex",
+   "SSet.Marked.finalEdgeMarkedSimplex",
+   "SSet.Marked.finalMarkedHornInclusion",
+   "SSet.Marked.ContainsMarkedAnodyneGenerators",
+   "SSet.Marked.markedAnodyneClass",
+   "SSet.Marked.marked_triangle_cancellation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedTriangleCancellation.lean",
+  "statement": "theorem marked_triangle_cancellation : markedAnodyneClass (fullMarkingMap (hornMarkedSimplex.{u} 2 2))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The existing SSet.Marked category and flat/sharp markings are reused. Helper definitions spell out the four generator families and their weakly saturated closure, all introduced explicitly in this node; the triangle source is the union-of-markings model of the displayed pushout. Only the final theorem is postponed. Reviewer fix: the class is named markedAnodyneClass, because SSet.Marked.markedAnodyne is already the landed name of the same class in lem-coef-marked-anodyne-lifting-calculus, a citer of this item whose module cannot be imported here; the two definitions are bridged at stage 3.",
+  "fixed_by": "NT-stage2-cc-401cc326d"
  }
 }
