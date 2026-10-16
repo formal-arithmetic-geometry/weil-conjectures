@@ -239,5 +239,23 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-07769651e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. I checked it against Kerodon 3.1.2.12 (tag 00TH), read online since no archival copy exists. The X(0) = Δ^1×∂Δ^n ∪ {1}×Δ^n form, the right horns Λ_{q+1}^{m+1}, the σ_q vertex formulas and X_{q+1} = X_q ∪ im σ_q all match, and ∂Δ^0 = ∅ is the right convention for m = 0. Both cited statements say what the steps take from them: def-cbc-enhanced-diagrams-cones gives monotone-map simplices, the horn as maps omitting a vertex other than i, and degreewise products; def-weil-pbc-category-colimit gives the unique-factorization colimit. I checked each step. Step 1: σ_q is injective and its image is exactly the chains inside V_q. Step 2: each X_q is a simplicial subset, and the boundary is the set of chains whose second coordinates omit a value. Step 3: coverage via the largest second coordinate among first-coordinate-0 vertices, or q = 0 if there are none. Step 4: faces j<q, j>q+1 and j=q (both q=0 and q>0) land in X_q. Step 5: the horn preimage is exact even for degenerate simplices, which closes the source's 'inspection' step. Step 6: the pushout holds by direct simplicial gluing. All steps are honestly elementary, and none restates a clause of the item. Edge cases m=0, q=0 and q=m are correct, and the item matches its use in the parent lem-coef-infinity-right-anodyne-product. My own enumeration for m≤4 and r≤m+3 confirmed injectivity, the exact horn preimage and coverage. The DAG has no duplicate: prism/shuffle/00TH hits are unrelated, so same_as [] is correct. The live Mathlib's ProdStdSimplexOne only enumerates top nondegenerate simplices, and UnionProd/PushoutProduct prove Kan-anodyne results, so there is no leaf. The delivery has no SGA citation, no off-unit statement and no tool_uses. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-294862b4f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Node matches Kerodon 3.1.2.12 (00TH) exactly (first stage = boundary part plus endpoint {1}, horns Λ^{m+1}_{q+1}, σ_q vertex formula, X_{q+1}=X_q∪im σ_q). Lean SSet.exists_right_prism_boundary_filtration renders every clause: universe u arbitrary, m:ℕ, Monotone chain Fin(m+2)→Subcomplex, X0 = ofSimplex(vertex 1).prod ⊤ ⊔ ⊤.prod (boundary m) (boundary_zero gives ∂Δ⁰=∅), last stage ⊤, σ pinned on all vertices, IsPushout with horn (m+1) q.succ in correct orientation, both vertical maps constrained as restrictions, union clause via Subcomplex.range. Edge cases m=0, q=0, q=m correct; brute force for m≤4, r≤m+2 confirmed injectivity, exact horn preimage and coverage. Deps (EnhancedDiagramsCones import; IsPushout as the colimit instance) fine; node diff is the lean record only; statement verbatim; one sorry, no defs, docstrings carry source/blueprint and the six steps; report has both sections. nt_compile --json reproduced a clean compile (1.3 s, rc 0). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightPrismBoundary",
+  "declaration": "SSet.exists_right_prism_boundary_filtration",
+  "file": "lean/Sheaf/CategoryTheory/RightPrismBoundary.lean",
+  "statement": "theorem exists_right_prism_boundary_filtration (m : ℕ) : ∃ (X : Fin (m + 2) → (Δ[1] ⊗ Δ[m] : SSet.{u}).Subcomplex) (hX : Monotone X), X 0 = (Subcomplex.ofSimplex (stdSimplex.obj₀Equiv.symm 1)).prod ⊤ ⊔ (⊤ : (Δ[1] : SSet.{u}).Subcomplex).prod (boundary m) ∧ X (Fin.last (m + 1)) = ⊤ ∧ ∀ q : Fin (m + 1), ∃ σ : (Δ[m + 1] : SSet.{u}) ⟶ Δ[1] ⊗ Δ[m], (∀ j : Fin (m + 2), ((stdSimplex.obj₀Equiv (σ.app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm j)).1).val, (stdSimplex.obj₀Equiv (σ.app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm j)).2).val) = if j.val ≤ q.val then (0, j.val) else (1, j.val - 1)) ∧ X q.succ = X q.castSucc ⊔ Subcomplex.range σ ∧ ∃ (a : (horn (m + 1) q.succ).toSSet ⟶ (X q.castSucc).toSSet) (b : (Δ[m + 1] : SSet.{u}) ⟶ (X q.succ).toSSet), IsPushout (horn (m + 1) q.succ).ι a b (Subcomplex.homOfLE (hX (Fin.castSucc_le_succ q))) ∧ b ≫ (X q.succ).ι = σ ∧ a ≫ (X q.castSucc).ι = (horn (m + 1) q.succ).ι ≫ σ",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
