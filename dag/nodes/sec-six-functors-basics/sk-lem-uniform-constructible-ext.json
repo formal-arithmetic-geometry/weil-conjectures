@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-uniform-constructible-ext",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniform Ext bound",
@@ -43,73 +43,159 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-cd"
+  "sk-def-cd",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pc-ext",
+  "sk-def-sf-setting",
+  "sk-lem-coefficient-heart",
+  "sk-lem-formal-closed-support",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
-   "text": "By the long exact Ext sequences, a bound that holds for every subquotient of a finite filtration of\nthe source holds for the source (take the maximum), and a bound that holds for every subquotient of a\nfinite filtration of the target holds for the target, with the same value. By part (3) of\n[sk-lem-coefficient-heart] we may therefore assume $C=a_!L$, with\n$a=i\\circ u\\colon S\\hookrightarrow Z\\hookrightarrow X$ as in [sk-lem-formal-closed-support] and $L$\nlisse, and it suffices to prove\n\n$$\n\\Ext^q(a_!L,b_!M)=0\\qquad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2)\n$$\n\nfor all locally closed $b\\colon T\\hookrightarrow X$ and lisse $M$ on $T$, where\n$j\\colon X\\setminus Z\\hookrightarrow X$ is the open complement of $Z$ ([det-uniform-constructible-ext-devissage]).\nBoth cohomological dimensions are finite by Stacks, Tag 0F10 and [sk-lem-base-field-cd], and the bound\ndepends only on $a$.",
+   "text": "Use the global finite-field datum and the coefficient-stage list of [sk-def-sf-setting], with $X$ separated and of finite type over that finite field or its algebraic closure. Only these standing data are used here; the finite-stage étale conventions in that definition are not an identification of the rational pro-étale coefficient categories. This is a standing scheme in the precise sense of [sk-def-sfb-dc-setting], since the field has characteristic $p\\ne\\ell$. For a locally closed $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$, with $i$ closed and $u$ open, let $j:X\\setminus Z\\hookrightarrow X$ and put $c_a=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. The base field has finite $\\ell$-cohomological dimension by [sk-lem-base-field-cd]. Finiteness for $S$ and $j$ follows from the finite-type bound in [sk-def-cd] (Stacks Tag 0F10). Thus $\\max(0,c_a)$ is a finite nonnegative integer. Empty strata can be omitted.",
+   "uses": [
+    "sk-lem-base-field-cd",
+    "sk-def-cd",
+    "sk-def-sf-setting",
+    "sk-def-sfb-dc-setting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening paragraph: finiteness of the two cohomological dimensions"
+   }
+  },
+  {
+   "text": "Fix such an $a$ and a lisse $\\Lambda_S$-module $L$. Apply [det-uniform-constructible-ext-rational] with these $a,L$ and an arbitrary locally closed $b:T\\hookrightarrow X$ and lisse $\\Lambda_T$-module $M$. Its displayed conclusion is $\\Ext^q_\\Lambda(a_!L,b_!M)=0$ for $q>c_a$, for both $\\Lambda=E$ and $\\Qlb$. Use the uniform assertion in that statement: $c_a$ does not depend on $b$ or $M$. The finite stratifications in that lemma are the preparation for its stratum calculation; the formula there is written for these $a_!L,b_!M$. In particular this use does not assume a global integral lattice in an arbitrary lisse rational sheaf. The integral inputs identify the two extra degrees in the stated estimate: [det-uniform-constructible-ext-torsion](2) has cutoff $\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$, and [det-uniform-constructible-ext-integral] has cutoff $c_a$. Here $X$ is a standing scheme by Step 1, $\\Lambda=E$ or $\\Qlb$ is admissible, and $i:Z\\hookrightarrow X$ is closed with open complement $j$, so the hypotheses of [sk-lem-formal-closed-support] hold. Its support fiber formula in part (1) and the limit compatibility in [sk-lem-formal-closed-support-ii] are the support and inverse-limit constructions occurring in this calculation; the torsion and integral estimates are taken from their statements, not reconstructed from unstated completeness assertions.",
+   "uses": [
+    "det-uniform-constructible-ext-rational",
+    "det-uniform-constructible-ext-torsion",
+    "det-uniform-constructible-ext-integral",
+    "sk-lem-formal-closed-support",
+    "sk-lem-formal-closed-support-ii"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices; Torsion targets; Integral targets; Inverting pi_E; The case Lambda=Qlb (the existing rational stratum lemma packages the last two passages)"
+   }
+  },
+  {
+   "text": "Keep $a,L$ fixed and let $N$ be any constructible target. By [sk-lem-coefficient-heart](1,3), choose a finite filtration $0=N_0\\subset\\cdots\\subset N_r=N$ by sheaves, with $G_t=N_t/N_{t-1}=b_{t,!}M_t$ and all inclusions and quotient maps exact in the ambient module category. Induct on $t$ on the assertion that $\\Ext^q_\\Lambda(a_!L,N_t)=0$ for every $q>\\max(0,c_a)$. For $t=0$ this is additivity of Ext, as defined in [def-pc-ext]. At the induction step [lem-sc-abelian-ext-covariant-exact], in the abelian category of all $\\Lambda_X$-module sheaves, gives the exact segment $\\Ext^q(a_!L,N_{t-1})\\to\\Ext^q(a_!L,N_t)\\to\\Ext^q(a_!L,G_t)$. Both end groups vanish, the first by induction and the second by Step 2, so the middle group is zero. Thus the same bound works for all $N$, independently of the length and strata of its filtration. These are Ext groups in the ambient derived category, by [def-pc-ext], not Ext groups formed in the constructible heart.",
    "uses": [
     "sk-lem-coefficient-heart",
-    "sk-lem-formal-closed-support",
-    "sk-lem-base-field-cd"
+    "lem-sc-abelian-ext-covariant-exact",
+    "def-pc-ext"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening paragraph: finite filtration of the target and its common bound"
+   }
   },
   {
-   "text": "*Lattices.* Take first $\\Lambda=E$. After refining the stratifications ([sk-lem-stratified-lattice])\nand enlarging $E$, $L$ and $M$ contain lisse $\\mathcal O_E$-lattices $L_0$ and $M_0$. Enlarging $E$ is\nharmless: if $E'/E$ is finite, then $E'_X$ is finite free over $E_X$, so $\\Ext^q_{E'}$ of the extended\nsheaves is a finite direct sum of copies of $\\Ext^q_E$, and a bound over $E'$ gives the same bound over\n$E$. The functor $b_!$ is the composite of an extension by zero, which is exact and preserves limits\n(Stacks, Tag 09BP), and a closed direct image, which is exact (Stacks, Tag 09BM) and preserves limits as a\nright adjoint. Hence $b_!M_0$ is a $\\pi_E$-torsion free, derived complete sheaf, and its reductions are\n\n$$\nb_!M_0\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathcal O_{E,X}/\\pi_E^n=b_!(M_0/\\pi_E^n).\n$$\n\nThese are constructible torsion sheaves pulled back from $X_{\\mathrm{ét}}$: lisse torsion sheaves descend\n(Stacks, Tag 099Y), and extension by zero and closed direct image commute with this pullback\n(Stacks, Tags 09AF, 09A6).",
+   "text": "Now take $C\\in\\Cons(X,\\Lambda)$ and fix once and for all a filtration $0=C_0\\subset\\cdots\\subset C_m=C$ from [sk-lem-coefficient-heart](3), with $C_s/C_{s-1}=a_{s,!}L_s$. Set $d_C=\\max(\\{0\\}\\cup\\{\\max(0,c_{a_s}):1\\le s\\le m\\})$. This is finite by Step 1, depends on the chosen filtration of $C$ alone, and is nonnegative. For every constructible $N$ and $q>d_C$, induct on $s$. The base $C_0=0$ has zero Ext by additivity [def-pc-ext]. For the short exact sequence $0\\to C_{s-1}\\to C_s\\to a_{s,!}L_s\\to0$, [lem-coef-ext-contravariant-six-term] gives $\\Ext^q(a_{s,!}L_s,N)\\to\\Ext^q(C_s,N)\\to\\Ext^q(C_{s-1},N)$. Step 3 and the induction hypothesis kill the end groups, hence $\\Ext^q(C_s,N)=0$. At $s=m$ this proves the claim, simultaneously for every $N$. For $C=0$ the empty filtration gives $d_C=0$. If $C=a_!L$, omit this last source filtration and apply Step 3 directly: its cutoff is the stated $c_a$ (with a nonnegative bound chosen if the source is zero).",
    "uses": [
-    "sk-lem-stratified-lattice"
+    "sk-lem-coefficient-heart",
+    "lem-coef-ext-contravariant-six-term",
+    "def-pc-ext"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Torsion targets.* By Stacks, Tag 09A6, $Rj_*$ in $\\D(X_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n)$ of a sheaf\npulled back from the étale site is the pullback of its direct image in\n$\\D(X_{\\mathrm{ét}},\\mathcal O_E/\\pi_E^n)$, so $Rj_*j^*b_!(M_0/\\pi_E^n)$ has cohomology in degrees\n$0,\\dots,\\operatorname{cd}_\\ell(j)$. The fiber formula of part (1) of [sk-lem-formal-closed-support]\nthen gives\n\n$$\nR\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\in\\D^{[0,\\operatorname{cd}_\\ell(j)+1]}(Z_{\\mathrm{proét}},\\mathcal O_E/\\pi_E^n),\n$$\n\nwith cohomology sheaves that are torsion sheaves pulled back from the étale site, though not\nnecessarily constructible. Tensoring with the lisse $L_0^\\vee/\\pi_E^n$ and using the hypercohomology\nspectral sequence on $S$ gives the torsion stratum bound\n\n$$\nH^q R\\Gamma\\bigl(S,(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n)\\bigr)=0\n\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1),\n$$\n\nfor every $n$, $b$ and $M_0$ ([det-uniform-constructible-ext-torsion]).",
-   "uses": [
-    "sk-lem-formal-closed-support"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Integral targets.* Write $F=L_0^\\vee\\otimes u^*R\\underline\\Gamma_Z\\,b_!M_0$. By\n[sk-lem-formal-closed-support-ii] the functors forming $F$ commute with derived inverse limits of\nsequences; they also commute with reduction modulo $\\pi_E^n$, which is the cone of multiplication by\n$\\pi_E^n$. Since $b_!M_0$ is derived complete, so is $F$, and the reductions of $F$ are the complexes in\nthe torsion stratum bound. Derived global sections preserve products and cones, hence derived inverse\nlimits. Using part (2) of [sk-lem-formal-closed-support] with $\\mathcal O_E$ coefficients, that is, for\n$R\\operatorname{Hom}$ in $\\D(X_{\\mathrm{proét}},\\mathcal O_E)$,\n\n$$\nR\\operatorname{Hom}_X(a_!L_0,b_!M_0)=R\\Gamma(S,F)\n=R\\varprojlim_n R\\Gamma\\bigl(S,F\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\\bigr).\n$$\n\nA derived inverse limit of a sequence raises an upper bound on cohomology by at most one: it is the\nfiber of $1-\\mathrm{shift}$ on the product, and products of abelian groups are exact (this is the\nMilnor sequence, Stacks, Tag 08TB). Therefore\n\n$$\n\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)=0\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2)\n$$\n\n([det-uniform-constructible-ext-integral]).",
-   "uses": [
-    "sk-lem-formal-closed-support-ii",
-    "sk-lem-formal-closed-support"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Inverting $\\pi_E$.* We have $a_!L=a_!L_0[1/\\pi_E]$ and\n$b_!M=(b_!M_0)[1/\\pi_E]=\\varinjlim(b_!M_0\\xrightarrow{\\pi_E}b_!M_0\\xrightarrow{\\pi_E}\\cdots)$. The\nadjunction between extension and restriction of scalars gives\n\n$$\nR\\operatorname{Hom}_E\\bigl(a_!L,b_!M\\bigr)=R\\operatorname{Hom}_{\\mathcal O_E}\\bigl(a_!L_0,(b_!M_0)[1/\\pi_E]\\bigr),\n$$\n\nand by part (2) of [sk-lem-constructible-ext-continuity] the cohomology of the right side is the\ncolimit of the groups $\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)$. So the integral bound gives the bound for\n$E$.",
-   "uses": [
-    "sk-lem-constructible-ext-continuity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The case $\\Lambda=\\Qlb$.* By [sk-thm-sfb-qlbar-two-colimit], $a_!L$ and $b_!M$ are extensions of\nscalars of sheaves defined over a common finite $E$. Since $\\overline{\\mathbf Q}_{\\ell,X}=\\varinjlim_{E'}E'_X$\nis flat over $E_X$, extension and restriction of scalars and [sk-lem-constructible-ext-continuity]\nidentify $\\Ext^q_{\\Qlb}(a_!L,b_!M)$ with the colimit of the corresponding groups over finite\nextensions $E'$ of $E$, which vanish in the same range ([det-uniform-constructible-ext-rational]).",
-   "uses": [
-    "sk-thm-sfb-qlbar-two-colimit",
-    "sk-lem-constructible-ext-continuity"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening paragraph: finite filtration of the source, maximum of the finitely many bounds; statement: the single-stratum bound"
+   }
   }
  ],
  "proof_deps": [
+  "def-pc-ext",
+  "det-uniform-constructible-ext-integral",
+  "det-uniform-constructible-ext-rational",
+  "det-uniform-constructible-ext-torsion",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-sc-abelian-ext-covariant-exact",
+  "sk-def-cd",
+  "sk-def-sf-setting",
+  "sk-def-sfb-dc-setting",
+  "sk-lem-base-field-cd",
   "sk-lem-coefficient-heart",
   "sk-lem-formal-closed-support",
-  "sk-lem-base-field-cd",
-  "sk-lem-stratified-lattice",
-  "sk-lem-formal-closed-support-ii",
-  "sk-lem-constructible-ext-continuity",
-  "sk-thm-sfb-qlbar-two-colimit"
+  "sk-lem-formal-closed-support-ii"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "opening filtration argument; stratum calculation via the existing detail statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasProjectiveDimensionLT|HasInjectiveDimensionLT",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean; Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean; subdirectory of Mathlib/: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not prove a uniform Ext bound for constructible pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible l-adic sheaves have finite projective dimension against constructible sheaves",
+   "results": "CategoryTheory.projectiveDimension; CategoryTheory.projectiveDimension_ne_top_iff; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.HasProjectiveDimensionLE; CategoryTheory.HasProjectiveDimensionLT; SheafOfModules.Finite.hasFiniteLimits; CategoryTheory.HasProjectiveDimensionLT.casesOn; CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not prove a uniform Ext bound for constructible pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLT",
+   "results": "CategoryTheory.HasProjectiveDimensionLT; CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective; CategoryTheory.instHasProjectiveDimensionLTSucc; CategoryTheory.instProjectiveOfHasProjectiveDimensionLTOfNatNat; CategoryTheory.isZero_of_hasProjectiveDimensionLT_zero; CategoryTheory.Limits.IsZero.hasProjectiveDimensionLT_zero; CategoryTheory.hasProjectiveDimensionLT_zero_iff_isZero; CategoryTheory.projective_iff_hasProjectiveDimensionLT_one",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not prove a uniform Ext bound for constructible pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform vanishing of higher Ext groups from a constructible sheaf on the pro etale site",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.HasInjectiveDimensionLT.mk'; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.hasProjectiveDimensionLT_iff; CategoryTheory.HasInjectiveDimensionLT.subsingleton'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not prove a uniform Ext bound for constructible pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Ext|Ext.*constructible|uniform.*Ext",
+   "results": "0 hits; subdirectory of Mathlib/: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension of constructible l-adic local systems and extension by zero on schemes",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; HomologicalComplex.instIsStrictlySupportedExtend; Condensed.lanSheafProfinite; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.IsGE; DerivedCategory.isGE_iff; SheafOfModules.IsFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not prove a uniform Ext bound for constructible pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every constructible rational sheaf has an upper bound on Ext degrees against all constructible targets",
+   "results": "8 hits: CategoryTheory.HasExt.standard; CategoryTheory.HasExt; CategoryTheory.IsGrothendieckAbelian.hasExt; CategoryTheory.hasExt_iff_small_ext; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.HasProjectiveDimensionLT.subsingleton; CategoryTheory.HasInjectiveDimensionLE; CategoryTheory.HasInjectiveDimensionLT.subsingleton. These give generic smallness or vanishing conditional on a dimension bound, not the geometric bound.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|pro.etale",
+   "results": "0 hits in Mathlib/CategoryTheory/Abelian/Projective; the generic projective-dimension API does not state this geometric theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform upper degree bound for ambient derived Hom from constructible local systems to all constructible sheaves",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondensed; Condensed.lanSheafProfinite; LightCondSet; topCatToSheafCompHausLike; CategoryTheory.Sheaf.isConstant_of_forget; CompHausLike.LocallyConstant.functor; LightCondensed.lanLightCondSet",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern condensed sheaves and locally constant functors, and none gives a geometric uniform Ext bound for constructible source sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -135,5 +221,29 @@
   "det-uniform-constructible-ext-torsion"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-uniform-constructible-ext"
+ "unit": "sk-lem-uniform-constructible-ext",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-uniform-constructible-ext",
+  "worker": "stage1",
+  "summary": "Reused the existing rational stratum estimate, with the torsion/integral statements identifying the cutoffs, and wrote both finite-filtration inductions with their exact-sequence citations. Removed unsupported reconstruction of global lattices/completeness and unnecessary Milnor and coefficient-colimit citations. Preserved every imported metadata field and the statement; no new nodes. Second reading added the missing statement dependencies for the standing coefficient datum, locally closed extension by zero, and closed support, and made the standing datum an explicit Step 1 citation. Repair of the returned delivery: revalidated every cited statement on the current DAG, exposed the standing-scheme definition in Step 1 and statement dependencies, and verified the new standing-scheme hypothesis of sk-lem-formal-closed-support explicitly in Step 2; refreshed all verbatim citations. Retry revalidated the newer sk-def-sf-setting statement from the refreshed live DAG mirror, refreshed its quotation, and clarified that Step 1 uses only its global datum and coefficient list, without identifying finite étale and rational pro-étale categories. Packaging-return repair: included the now-existing unit record in the delivery with only realized/realized_by populated, so the maintainer can review and fix its realization within the delivery scope. Re-read all direct cited statements and verified all 15 retained quotations against the current shared DAG and live mirror; the four mathematical proof steps and statement are unchanged.",
+  "blueprint": "Step 1 realizes finiteness in the opening paragraph. Step 2 uses the existing torsion, integral and rational detail statements realizing Lattices, Torsion targets, Integral targets, Inverting pi_E and The case Lambda=Qlb. Steps 3 and 4 realize the target and source filtration reductions of the opening paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-ext-covariant-exact",
+    "why": "The target-filtration induction needs its Ext exact segment in an arbitrary abelian category; this is a generic exact-sequence tool, not an alternate coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-ext-covariant-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-fccd5cb49",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-fccd5cb49 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit, chapter route, cited DAG statements, blueprint proof, and Stacks sources. The four proof steps are mathematically sound, hypotheses and coefficient categories match, edge cases check out, no new nodes or duplicates exist, and the unit realization repair is within scope. Review written to review.md."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-finite-derived-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived adjunction $Lg^*\\dashv Rg_*$",
@@ -19,20 +19,153 @@
  ],
  "proof": [
   {
-   "text": "This is the general derived adjunction for an adjoint pair whose left adjoint is\nleft derivable and right adjoint right derivable. The unit is\n$K\\to g_*g^*K$ on a K-flat representative followed by $g_*$ of a K-injective resolution of\n$g^*K$; the counit is dual. The required absoluteness conditions hold because the\ncomparison maps of the derived functors are isomorphisms on K-flat, respectively\nK-injective, complexes, and the triangle identities follow from those of $g^*\\dashv g_*$.",
+   "text": "Put $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ and $\\mathcal D=\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$. Use the small skeletons and common larger universe of [def-weil-pbc-proetale-site]; only its site and size convention are used, not its specialization to ring-module coefficients. The coefficient category has exactly the closed symmetric monoidal, Grothendieck abelian and additive-tensor hypotheses of [lem-weil-pbc-sheaf-tensor-closed]. Clause (1) of that node makes both $\\mathcal C$ and $\\mathcal D$ Grothendieck abelian. Hence [lem-sfb-grothendieck-k-injective] gives K-injective resolutions of every unbounded complex in either category.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.proof.md",
+    "place": "Proof: general derived adjunction, specialized to the exact pullback"
+   }
+  },
+  {
+   "text": "Write $F=g^*:\\mathcal C\\to\\mathcal D$ and $G=g_*:\\mathcal D\\to\\mathcal C$. Their adjunction, with unit $\\eta$ and counit $\\varepsilon$, is [def-sfb-finite-upper-lower-star-adjunction], and $F$ is exact by [lem-sfb-finite-upper-star-exact]. Both functors are additive: $F$ is exact; $G$, being a right adjoint, preserves zero objects and binary products by the adjunction's Hom bijections. In an additive category these are biproducts. Under the resulting product identification, $G$ preserves projections and zero maps, hence also injections (characterized by their composites with the projections), diagonals and codiagonals. The formula $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$ proves additivity. Apply [lem-weil-pbc-termwise-adjunction-homotopy] to get a natural bijection $\\Hom_{K(\\mathcal D)}(FM,I)\\cong\\Hom_{K(\\mathcal C)}(M,GI)$, with forward map $[f]\\mapsto[G(f)\\circ\\eta_M]$ and inverse $[a]\\mapsto[\\varepsilon_I\\circ F(a)]$.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-sfb-finite-upper-star-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.proof.md",
+    "place": "Proof: general derived adjunction, specialized to the exact pullback"
+   }
+  },
+  {
+   "text": "Let $Q_{\\mathcal C},Q_{\\mathcal D}$ denote localization to the unbounded derived categories. By [def-sfb-finite-derived-pullback-iso] the K-flat total left derived functor in the statement has a natural isomorphism $c:LF\\xrightarrow{\\sim}D(F)$, where $D(F)(Q_{\\mathcal C}M)=Q_{\\mathcal D}(FM)$. In particular this step uses the existence and comparison asserted by that node, rather than assuming that a K-flat complex is K-projective. The Right derived functors clause of [sk-def-sfb-derived-categories], applied to the additive $G$ and the K-injective resolutions in step 1, constructs $RG$ and computes $RG(Q_{\\mathcal D}N)$ by $Q_{\\mathcal C}(GI)$ for a K-injective resolution $N\\to I$. These are precisely the two total derived functors required in the statement.",
+   "uses": [
+    "def-sfb-finite-derived-pullback-iso",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.proof.md",
+    "place": "Proof: general derived adjunction, specialized to the exact pullback"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with its $\\mathcal A=\\mathcal D$, $\\mathcal B=\\mathcal C$, $u=G$ and $v=F$. The adjunction, additivity and exactness required there were checked in step 2. Consequently $GI$ is K-injective whenever $I$ is K-injective. Thus $I$ represents $L$ on $Z$, and $GI$ represents $RG L$ on $Y$, both by K-injective complexes.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "For $K=Q_{\\mathcal C}M$ and $L=Q_{\\mathcal D}N$, choose a K-injective resolution $N\\to I$. The comparison $c$ of step 3 and localization of this resolution identify the following groups:\n$$\n\\begin{aligned}\n\\Hom_{D(\\mathcal D)}(LFK,L)\n&\\cong\\Hom_{D(\\mathcal D)}(Q_{\\mathcal D}FM,Q_{\\mathcal D}I)\\\\\n&\\cong\\Hom_{K(\\mathcal D)}(FM,I)\\\\\n&\\cong\\Hom_{K(\\mathcal C)}(M,GI)\\\\\n&\\cong\\Hom_{D(\\mathcal C)}(K,RG L).\n\\end{aligned}\n$$\nThe second and fourth bijections are [lem-weil-pbc-kinjective-hom-derived], applied to $I$ and to $GI$ from step 4; the middle bijection is [lem-weil-pbc-termwise-adjunction-homotopy]. Here the first bijection sends $h:LFK\\to L$ to $Q(N\\to I)\\circ h\\circ c_K^{-1}$. Naturality for complexes follows from naturality of the localization maps and the termwise adjunction. It extends to all derived morphisms in $K$: $D(F)$ sends inverted quasi-isomorphisms to isomorphisms, and an equality expressing naturality for an invertible arrow also expresses naturality for its inverse. For the second variable, a derived map between K-injective representatives has a unique homotopy class representative by the same Hom-computation lemma; applying $G$ to it is the resolution computation of $RG$ and respects the middle bijection. Any two K-injective representatives of $L$ are connected by the unique homotopy class representing the identity of $L$; this is a homotopy equivalence, again by that lemma. The displayed bijection is therefore independent of the representative and natural in both derived variables. Denote it by $\\Phi_{K,L}$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, and Tag 08BJ, lemma-adjoint-preserve-K-injectives: the Hom adjunction used in its proof; comparison with the blueprint proof"
+   }
+  },
+  {
+   "text": "Define the derived unit by $\\eta^d_K=\\Phi_{K,LFK}(\\mathrm{id}_{LFK})$ and the derived counit by $\\varepsilon^d_L=\\Phi^{-1}_{RG L,L}(\\mathrm{id}_{RG L})$. Naturality gives $\\Phi(h)=RG(h)\\circ\\eta^d_K$ and $\\Phi^{-1}(a)=\\varepsilon^d_L\\circ LF(a)$. Substituting $h=\\varepsilon^d_L$ gives $RG(\\varepsilon^d_L)\\circ\\eta^d_{RG L}=\\mathrm{id}_{RG L}$; substituting $a=\\eta^d_K$ gives $\\varepsilon^d_{LFK}\\circ LF(\\eta^d_K)=\\mathrm{id}_{LFK}$. These are the two triangle identities, so the data define $LF\\dashv RG$. They are induced by the original adjunction: on a K-flat representative $P$ and a K-injective resolution $FP\\to I$, the unit is represented by $P\\xrightarrow{\\eta_P}GFP\\to GI$; on a K-injective $I$ and a K-flat resolution $S\\to GI$, the counit is represented by $FS\\to FGI\\xrightarrow{\\varepsilon_I}I$. These follow directly from the two middle formulas in step 2 and the comparisons in step 3. Define the adjunction of the item to be this construction; its functors retain the K-flat and K-injective computations specified in the statement.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.proof.md",
+    "place": "Proof: general derived adjunction, specialized to the exact pullback"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-sfb-finite-derived-pullback-iso",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-derived-functors/def-sfb-finite-derived-adjunction.proof.md",
+  "place": "Proof, exact-left-adjoint specialization, with the Hom construction expanded using Stacks Tags 08BJ and 070I"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|derived.*adjunction|adjunction.*derived",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; logged digest fc7eac6f7c9e6fcd",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full pro-etale item; abstract adjunction or underived sheaf adjunction only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, Functor.IsLeftDerivedFunctor",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.IsLeftDerivedFunctor'; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; no conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact left adjoint and its right adjoint induce adjoint functors on unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.ofIsRightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint, CategoryTheory.Adjunction.IsTriangulated, CategoryTheory.Functor.rightAdjoint, CategoryTheory.Adjunction.Quadruple.mk; logged digest 2e4443d018d169b8",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full pro-etale item; abstract adjunction or underived sheaf adjunction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of additive functors induces an adjunction of total left and right derived functors",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit; logged digest baeb4407f79f6175",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full pro-etale item; abstract adjunction or underived sheaf adjunction only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"derived\"",
+   "results": "12 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc; logged digest a7a66fb08cde5216",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full pro-etale item; abstract adjunction or underived sheaf adjunction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image is left adjoint to derived direct image on the unbounded derived categories of sheaves with Grothendieck abelian coefficients",
+   "results": "8 hits: SheafOfModules.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward; logged digest 22be05b01a588d80",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the full pro-etale item; abstract adjunction or underived sheaf adjunction only"
+  },
+  {
+   "tool": "grep",
+   "query": "def derived|def derivedAdjunction|derivedUpperStarLowerStarAdjunction",
+   "results": "10 hits: Mathlib/Topology/DerivedSet.lean, Mathlib/GroupTheory/Solvable.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Lie/Solvable.lean; logged digest 19d2ed610cab621b",
+   "date": "2026-10-16",
+   "verdict": "second reader: abstract derived-adjunction API only; read Derived/Adjunction.lean:37-46,144-150; it requires localization and absolute-derived composition inputs, not an exact leaf for the geometric construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between an exact additive functor and its right adjoint descends to the derived categories using K-injective replacements",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedη, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit; logged digest c19acbdc77daee0d",
+   "date": "2026-10-16",
+   "verdict": "second reader: abstract derived-adjunction API only; read Derived/Adjunction.lean:37-46,144-150; it requires localization and absolute-derived composition inputs, not an exact leaf for the geometric construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -54,5 +187,49 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-finite-derived-functors"
+ "unit": "sk-def-sfb-finite-derived-functors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-finite-derived-adjunction",
+  "worker": "stage1",
+  "summary": "Unchanged statement; six steps construct the induced adjunction from the exact sheaf pullback using existing category, resolution, homotopy-adjunction and K-injective Hom-computation nodes. No new nodes. The stored sorry map prevents an attachment despite the two-line existing Lean definition. All proof citations were checked against statements and quoted in citations.json.",
+  "blueprint": "Realizes the single proof paragraph: underlying adjunction and derivability (steps 1-3), verification of the Hom comparison using exactness (steps 4-5), induced unit, counit and triangle identities (step 6). This is the exact-left-adjoint case of the general derived-adjunction construction invoked there, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Only the small-site size convention, to apply the generic sheaf-category theorem without restricting the coefficient category to modules."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Clause (1) supplies the Grothendieck property of general A-valued sheaves, absent from the statement of the local derived-category node."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise additive adjunction and its explicit Hom formulas; used to spell out the unit route through derived adjunctions."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint theorem, Stacks 08BJ; verifies the exact-case derived Hom comparison without a new specialization node."
+   }
+  ]
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Adjunction.derived",
+  "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "how": "Lines 144-150: abstract localization-based derived adjunction. Requires the two absolute-derived composition hypotheses; it does not supply pro-etale sheaf category structures, the original adjunction, or K-flat/K-injective derivability. Read the full hypotheses at lines 37-46 and 144-150."
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-b04d8a6fb",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-b04d8a6fb (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all ten cited node statements, blueprint proof, Stacks Tags 08BJ and 070I, Mathlib candidate, hypotheses, Hom directions, K-injective preservation, triangle identities, edge cases, duplicates, cycles, and coefficient/base-change scope. No new nodes or repairs are needed; review written to review.md."
+ }
 }

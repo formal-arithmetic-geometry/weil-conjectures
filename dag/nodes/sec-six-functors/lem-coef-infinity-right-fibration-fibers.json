@@ -28,9 +28,77 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $r:X\\to B$ equal to either $p$ or $q$, form $X_b=\\{b\\}\\times_B X$ degree by degree. Every right-horn lifting square for $X_b\\to\\Delta^0$ gives a lifting square for $r$ with bottom simplex the constant simplex at $b$. Its filler still maps to that constant simplex and therefore lies in $X_b$. Thus $X_b\\to\\Delta^0$ is a right fibration. In particular $X_b$ is a quasicategory, since its right-horn fillers include all the inner-horn fillers in [def-cbc-enhanced-diagrams-cones]. This argument is valid even when $X_b$ is empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/019E",
+    "place": "Corollary 4.4.2.3: base change of right-horn lifting, written out."
+   }
+  },
+  {
+   "text": "For any edge $u$ of $X_b$ and any $n\\geq2$, every final horn $\\Lambda_n^n\\to X_b$ whose edge $[n-1,n]$ is $u$ extends by the right-horn lifting property of step 1. The converse assertion of [lem-cbc-equivalence-outer-horn-filling] therefore makes $u$ an equivalence in $X_b$. Now consider any horn $\\sigma_0:\\Lambda_i^n\\to X_b$. For $i>0$ use step 1. For $i=0,n=1$, fill the specified vertex with its degenerate identity edge. For $i=0,n\\geq2$, its initial edge $[0,1]$ is an equivalence by the preceding argument, and the first assertion of [lem-cbc-equivalence-outer-horn-filling] extends $\\sigma_0$ exactly. These cases cover every horn in the Kan definition of [def-cbc-enhanced-diagrams-cones]. Both fibers are therefore Kan, including empty fibers, for which no such positive-dimensional horn map exists.",
+   "uses": [
+    "lem-cbc-equivalence-outer-horn-filling",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019F",
+    "place": "Theorem 4.4.2.6: use (3) implies (1) for each fiber edge and (1) implies (2) for the remaining initial horns; the dimension-one filler is explicit. This proves 019E."
+   }
+  },
+  {
+   "text": "The given right-horn hypotheses include all inner horns. We verify the outgoing equivalence-lifting convention of [lem-coef-infinity-isofibration-exponentiation]. For $r:X\\to B$ equal to $p$ or $q$, a vertex $x$, and an equivalence $v:r(x)\\to b$, choose an inverse $w:b\\to r(x)$ and its inverse-triangle with edges $01=v$, $12=w$, $02=\\operatorname{id}_{r(x)}$, as in [def-cbc-enhanced-diagrams-cones]. Lift $w$ against $\\Lambda_1^1=\\{1\\}\\hookrightarrow\\Delta^1$ with prescribed target $x$, giving $\\bar w:y\\to x$. Lift that triangle against $\\Lambda_2^2\\hookrightarrow\\Delta^2$ with prescribed edges $12=\\bar w$ and $02=\\operatorname{id}_x$; their shared vertex and base edges agree, so the lift supplies $\\bar v:x\\to y$ with $r(\\bar v)=v$ exactly. To check that $\\bar v$ is an equivalence, take any final horn $\\tau:\\Lambda_n^n\\to X$, $n\\geq2$, whose final edge is $\\bar v$. Its image in $B$ has final edge $v$, so the final-horn assertion of [lem-cbc-equivalence-outer-horn-filling] extends $r\\tau$ to a base simplex. The right-fibration property of $r$ lifts this base simplex extending $\\tau$. The converse assertion of the same cited node now makes $\\bar v$ an equivalence. Thus $p$ and $q$ are isofibrations in exactly the required convention.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EW",
+    "place": "Example 4.4.1.11, with outgoing lifting written by right horns in dimensions one and two; the reflection argument uses 019F (1) implies (3) in the base and (3) implies (1) upstairs."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-isofibration-base-change] with $\\mathcal A=E$, $\\mathcal B=F$, $\\mathcal S=B$, $v=h$, $\\mathcal R=\\Delta^0$, and the base map selecting $b$. The point is a quasicategory because every simplex and horn map into it is unique. Step 3 verifies both isofibrations in the cited convention, the given equality $qh=p$ is strict commutativity, and $h$ is a functor equivalence by hypothesis. The two degreewise pullbacks in its conclusion are exactly $E_b,F_b$, and the induced map is the specified $h_b$. It follows that $h_b$ is an equivalence of quasicategories, including when its fibers are empty.",
+   "uses": [
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34, as stated by the existing base-change node, with the base-change quasicategory a point."
+   }
+  },
+  {
+   "text": "Unwind the functor-equivalence definition in [def-cbc-enhanced-diagrams-cones] for $h_b$. It gives a simplicial quasi-inverse $g:F_b\\to E_b$ and equivalence edges from $gh_b$ to $\\operatorname{id}_{E_b}$ in $\\operatorname{Fun}(E_b,E_b)$ and from $h_bg$ to $\\operatorname{id}_{F_b}$ in $\\operatorname{Fun}(F_b,F_b)$; if either edge has the opposite orientation, take its inverse edge, supplied by the definition of an equivalence edge. The degree-one formula for the internal functor simplicial set identifies these edges with maps $E_b\\times\\Delta^1\\to E_b$ and $F_b\\times\\Delta^1\\to F_b$ with precisely the required endpoints. Hence $g$ and these homotopies exhibit $h_b$ as a simplicial homotopy equivalence. Step 2 already established its Kan source and target.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DT",
+    "place": "Remark 4.5.1.4; elementary unfolding of the project quasi-inverse and internal-functor conventions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction, through the inherited coherent-diagram ancestry. Auxiliary argument uses Kerodon 019F, 01EW, 03PM and 01DT; sources read online, no local Kerodon archive."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,12 +165,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-pinch-comparison",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-right-fibration-fibers",
+  "worker": "stage1",
+  "summary": "Five-step proof with no new nodes. Derive invertibility of fiber edges from the final-horn characterization and fill the remaining initial horns using the existing outer-horn theorem. Construct outgoing equivalence lifts using right horns in dimensions one and two; prove their invertibility with the same final-horn characterization. Apply the existing isofibration base-change theorem at a point and extract simplicial homotopies by definition. Removed duplicate auxiliary fiber-square and outer-horn nodes and folded elementary conservativity into the proof. Statement unchanged.",
+  "blueprint": "Inherited ancestry: proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction, and its finite-shape enhancement. The five steps supply the right-fibration fiber theorem used by the pinch-comparison infrastructure; no route at chapter or unit level is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q47-8a2b99b00",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-8a2b99b00 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, blueprint route, and cited sources. All five steps check out; strict fibers, horn orientations, empty cases, and canonical induced map are correct. Eight-node dependency closure is acyclic. No new nodes or repairs. Accepted tool use: lem-cbc-equivalence-outer-horn-filling. Full findings written to review.md."
+ }
 }

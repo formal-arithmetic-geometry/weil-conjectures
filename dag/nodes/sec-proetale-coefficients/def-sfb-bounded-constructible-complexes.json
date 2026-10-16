@@ -3,26 +3,129 @@
  "blueprint": {
   "is": "def-sfb-bounded-constructible-complexes",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Bounded constructible complexes",
- "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive, let $X$ be a scheme, and let $\\mathcal R$ be a commutative ring\nobject of $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$. A complex\n$K\\in D(\\Mod_{\\mathcal R})$ [sk-def-sfb-derived-categories] is *bounded constructible* if\nit is bounded for the canonical t-structure and every cohomology sheaf $H^n(K)$,\n$n\\in\\mathbf Z$, is constructible [sk-def-sfb-constructible]. The *bounded constructible\nderived category* $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ is the full\nsubcategory of $D(\\Mod_{\\mathcal R})$ on the bounded constructible complexes.",
+ "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor product is additive, let $X$ be a scheme with small pro-etale site $X_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site], and give $\\mathcal S=\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ the sheaf tensor product of [sk-def-sfb-sheaf-tensor]. Let $\\mathcal R$ be a commutative ring object of $\\mathcal S$ [sk-def-sfb-ring-object], and write $\\Mod_{\\mathcal R}=\\Mod_{\\mathcal R}(\\mathcal S)$ for its category of left module objects [sk-def-sfb-module-objects]. Use the ordinary unbounded derived category $D(\\Mod_{\\mathcal R})$ [def-weil-abstract-derived-category], with the unbounded convention of [sk-def-sfb-derived-categories].\n\nIn this definition, constructibility of an $\\mathcal R$-module $M$ means precisely the general ring-object predicate [def-sfb-constructible-module]: there is a finite stratification by immersions $g_a:X_a\\to X$ such that $\\operatorname{mapMod}(g_a^*)(M)$ is locally finitely presented over $g_a^*\\mathcal R$ on each stratum. This specifies the predicate for arbitrary $\\mathcal A$ and $\\mathcal R$.\n\nA complex $K\\in D(\\Mod_{\\mathcal R})$ is *bounded constructible* if it is bounded for the canonical t-structure, meaning that there exist integers $a\\leq b$ such that $H^n(K)=0$ whenever $n<a$ or $b<n$, and every cohomology module object $H^n(K)$, $n\\in\\mathbf Z$, is constructible in the specified sense. The *bounded constructible derived category* $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ is the full subcategory of $D(\\Mod_{\\mathcal R})$ on these objects; its morphisms are exactly the ambient derived-category morphisms. No derived completeness condition is imposed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/def-sfb-bounded-constructible-complexes.md",
   "place": "node def-sfb-bounded-constructible-complexes, order 1642"
  },
  "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
   "sk-def-sfb-derived-categories",
-  "sk-def-sfb-constructible",
-  "def-weil-abstract-derived-category"
+  "def-sfb-constructible-module"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complexes as full subcategory of derived category of module sheaves",
+   "results": "{\"t\": \"2026-10-16T13:42:06Z\", \"tool\": \"leanfinder\", \"query\": \"bounded constructible complexes as full subcategory of derived category of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod\", \"HasDerivedCategory.standard\", \"HasDerivedCategory\", \"DerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsGE\"], \"digest\": \"d4bdee30722d5fa2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructible, ObjectProperty, IsConstructible",
+   "results": "{\"t\": \"2026-10-16T13:42:07Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.boundedConstructible, ObjectProperty, IsConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.boundedConstructible'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|BoundedConstructible|IsConstructible",
+   "results": "{\"t\": \"2026-10-16T13:42:07Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|BoundedConstructible|IsConstructible\", \"sub\": \"Mathlib/Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of derived category on bounded complexes with constructible cohomology",
+   "results": "{\"t\": \"2026-10-16T13:42:20Z\", \"tool\": \"leanfinder\", \"query\": \"full subcategory of derived category on bounded complexes with constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"DerivedCategory\", \"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"8d010454ed7d1a61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "boundedConstructible, IsConstructible",
+   "results": "{\"t\": \"2026-10-16T13:42:21Z\", \"tool\": \"loogle\", \"query\": \"boundedConstructible, IsConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'boundedConstructible'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|BoundedConstructible|constructible",
+   "results": "{\"t\": \"2026-10-16T13:42:21Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|BoundedConstructible|constructible\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible complexes of sheaves of modules on a pro-etale site",
+   "results": "{\"t\": \"2026-10-16T13:42:50Z\", \"tool\": \"leansearch\", \"query\": \"bounded constructible complexes of sheaves of modules on a pro-etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mk\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.hasLimit\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.hasLimitsOfShape\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"LightCondensed\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"632b10eba1ec0765\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "full subcategory on bounded complexes with constructible cohomology",
+   "results": "{\"t\": \"2026-10-16T13:42:50Z\", \"tool\": \"leansearch\", \"query\": \"full subcategory on bounded complexes with constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.FullSubcategory.mk\", \"CategoryTheory.ObjectProperty.FullSubcategory.noConfusion\", \"CategoryTheory.ObjectProperty.FullSubcategory.ctorIdx\", \"CategoryTheory.ObjectProperty.FullSubcategory.noConfusionType\", \"CategoryTheory.locallySmall_fullSubcategory\", \"CategoryTheory.ObjectProperty.FullSubcategory\", \"CategoryTheory.ObjectProperty.FullSubcategory.category\", \"DerivedCategory.IsLE\"], \"digest\": \"5934250969443c13\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|BoundedConstructible|IsConstructible|IsLocallyFinitelyPresented",
+   "results": "{\"t\": \"2026-10-16T15:34:32Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|BoundedConstructible|IsConstructible|IsLocallyFinitelyPresented\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-16T15:34:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full subcategory of bounded complexes of internal module sheaves with locally finitely presented restrictions of cohomology to a finite stratification",
+   "results": "{\"t\": \"2026-10-16T15:34:32Z\", \"tool\": \"leansearch\", \"query\": \"Full subcategory of bounded complexes of internal module sheaves with locally finitely presented restrictions of cohomology to a finite stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.FullSubcategory.ctorIdx\", \"CategoryTheory.locallySmall_fullSubcategory\", \"CategoryTheory.ObjectProperty.FullSubcategory.category\", \"HomologicalComplex.locallySmall\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.ObjectProperty.FullSubcategory.noConfusionType\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"CategoryTheory.ObjectProperty.FullSubcategory\"], \"digest\": \"0b9b9cc3c0fa687f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complexes of internal modules over a ring object with cohomology locally finitely presented on strata of a finite stratification of a scheme",
+   "results": "{\"t\": \"2026-10-16T15:34:42Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded complexes of internal modules over a ring object with cohomology locally finitely presented on strata of a finite stratification of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"digest\": \"35286ee3d0fb7de3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: generic derived-category/full-subcategory machinery, condensed modules, or ordinary ring-sheaf finite presentation does not define bounded constructibility for arbitrary internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFinitePresentation|def isFinitePresentation|class IsFiniteType|def IsFinite",
+   "results": "{\"t\": \"2026-10-16T16:08:12Z\", \"tool\": \"grep\", \"query\": \"class IsFinitePresentation|def isFinitePresentation|class IsFiniteType|def IsFinite\", \"sub\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "inconclusive file-scope search: returned zero hits; Quasicoherent.lean:197-275 was read as the ordinary-ring-sheaf candidate identified by prior semantic receipts, not a match for the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "object property bounded derived category whose homology satisfies a predicate on module objects",
+   "results": "{\"t\": \"2026-10-16T16:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"object property bounded derived category whose homology satisfies a predicate on module objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.IsGE\", \"HasDerivedCategory\", \"DerivedCategory.TStructure.t\", \"DerivedCategory\", \"HasDerivedCategory.standard\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"0fdc3e3a02140b0d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: the eight hits define the derived category or its canonical t-structure and bounds, but none defines constructibility of internal module objects on finite scheme strata"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -48,5 +151,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-bounded-constructible"
+ "unit": "sk-def-sfb-bounded-constructible",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-bounded-constructible-complexes",
+  "worker": "stage1",
+  "summary": "Repaired the returned definition after rereading the complete maintainer review. STATEMENT-DISPUTED: the imported arbitrary-ring-object statement cited a constructibility predicate defined only for pulled-back condensed rings, with scalar finite constant local models. Resolved the ambiguity in favour of the general locally-finitely-presented-on-a-finite-stratification predicate of def-sfb-constructible-module, as used explicitly by the matching upstream master boundedConstructible and IsConstructible definitions. Expanded the ambient sheaf, ring and module objects and unbounded derived-category conventions with existing definition nodes. No coefficient restriction, equivalence with scalar local models, completion hypothesis, new node or theorem proof is asserted. Retained the actual historical Mathlib searches and empty proof/citations.",
+  "blueprint": "Realizes the complete boundedness, all-integer constructible cohomology and full-subcategory clauses of def-sfb-bounded-constructible-complexes (order 1642) in sk-def-sfb-bounded-constructible. Corrects its ill-typed sk-def-sfb-constructible reference by explicitly selecting the general definition at def-sfb-constructible-module (order 1640); upstream master ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean:62-65 imports Def.lean and uses exactly IsConstructible R, whose definition at Def.lean:87-90 is finite stratification plus arbitrary local finite presentation. The enclosing unit cohomology-iff and triangulatedness nodes are not proved here; its realized fields belong to its own split."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q47-a36d5a45a",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-a36d5a45a (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependencies and cited sources. Master definitions confirm general stratified internal-module constructibility, bounded cohomology and ambient morphisms. Checked edge cases, duplicates, target coefficients and base-change orientation; dependency closure has no cycles or missing nodes. No new nodes or proof steps. Wrote review.md; no repairs needed."
+ }
 }

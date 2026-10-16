@@ -3,43 +3,210 @@
  "blueprint": {
   "is": "det-prop-int-brown-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence of the integral exceptional inverse image",
- "statement": "For $f:X\\to Y$ separated of finite type, the functor\n$Rf_!:\\Loc(\\Dbc(X,\\mathcal O_E))\\to\\Loc(\\Dbc(Y,\\mathcal O_E))$ of\n[det-prop-int-brown-construction] has an exact right adjoint $f^!$, unique up\nto unique isomorphism; it is the right adjoint of [sk-prop-sf-existence] for\n$\\Lambda=\\mathcal O_E$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$. Let $X,Y$ be separated schemes of finite type over $k$, and $f:X\\to Y$ a separated finite-type $k$-morphism, as in [sk-def-sfb-dc-setting]. Regard $\\mathcal O_E$ with its $\\ell$-adic topology as a condensed coefficient ring, use the module-object pro-étale coefficient categories and bounded constructible subcategories $\\Dbc$ of [sk-def-sfb-constructible], and use the localizing closures of [sk-def-localizing-closure], with their ordinary ambient coproducts.\n\nThe functor\n$$\nRf_!:\\Loc(\\Dbc(X,\\mathcal O_E))\\longrightarrow\\Loc(\\Dbc(Y,\\mathcal O_E))\n$$\nof [det-prop-int-brown-construction], given at the chosen compactification $f=p\\circ j$ by the restriction of $Rp_*D(j_!)$ with the module-object convention of [sk-def-sfb-module-derived-lower-shriek], has an exact right adjoint\n$$\nf^!:\\Loc(\\Dbc(Y,\\mathcal O_E))\\longrightarrow\\Loc(\\Dbc(X,\\mathcal O_E)),\\qquad\n\\Hom(Rf_!M,N)\\simeq\\Hom(M,f^!N),\n$$\nnaturally for every $M\\in\\Loc(\\Dbc(X,\\mathcal O_E))$ and $N\\in\\Loc(\\Dbc(Y,\\mathcal O_E))$. This adjoint is unique up to a unique natural isomorphism compatible with the counits (equivalently, with the adjunctions). Under the equalities $\\Dctf(-,\\mathcal O_E)=\\Dbc(-,\\mathcal O_E)$ of [det-def-localizing-closure-ctf-equals-bc], it is the right adjoint of [sk-prop-sf-existence] for $\\Lambda=\\mathcal O_E$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-adjoint.md",
   "place": "node det-prop-int-brown-adjoint, order None"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
   "det-prop-int-brown-construction",
-  "sk-prop-sf-existence"
+  "sk-def-sfb-module-derived-lower-shriek",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-prop-sf-existence",
+  "def-weil-triangulated-category",
+  "sk-def-nagata-sketch-data"
  ],
  "proof": [
   {
-   "text": "The category $\\Loc(\\Dbc(X,\\mathcal O_E))$ is a triangulated category with\narbitrary direct sums (the ordinary ones in $D(X_{\\mathrm{proét}},\\mathcal O_E)$),\ngenerated as a localizing subcategory by $\\Dbc(X,\\mathcal O_E)$, whose objects\nare compact there by [sk-prop-int-compactness]; the isomorphism classes of\n$\\Dbc(X,\\mathcal O_E)$ form a set, since $\\Cons(X,\\mathcal O_E)$ is essentially\nsmall ([sk-lem-int-integral-heart]). So it is compactly generated, and\nBrown representability applies: an exact functor out of it preserving direct\nsums has a right adjoint. $Rf_!$ is such a functor by\n[det-prop-int-brown-construction]. Its right adjoint $f^!$ is exact (a right\nadjoint of an exact functor between triangulated categories is exact), and\nit is unique up to unique isomorphism compatible with the counits. This is\nexactly the construction of [sk-prop-sf-existence] specialised to\n$\\Lambda=\\mathcal O_E$.",
+   "text": "For $Z=X,Y$, let $a_Z:Z\\to\\operatorname{Spec}k$ be its structure morphism. The base is affine, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Finite type of $a_Z$ includes quasi-compactness by [def-weil-finite-type-morphism], and separatedness of $a_Z$ gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Applying clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to $a_Z$ shows that $Z$ is quasi-compact and quasi-separated. This verifies the scheme hypothesis needed for the integral category equality in the next step.",
    "uses": [
-    "sk-lem-int-integral-heart",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown.proof.md",
+    "place": "First sentence, the qcqs hypotheses for the equality Dctf=Dbc, expanded using the cited scheme lemmas."
+   }
+  },
+  {
+   "text": "Apply [det-def-localizing-closure-ctf-equals-bc](2) to $Z=X,Y$ and $\\Lambda=\\mathcal O_E$. It gives equal full subcategories $\\Dctf(Z,\\mathcal O_E)=\\Dbc(Z,\\mathcal O_E)$ and equal localizing closures. Thus, writing $\\mathcal C_Z=\\Loc(\\Dbc(Z,\\mathcal O_E))$, the categories in the present statement are exactly those in the $\\Lambda=\\mathcal O_E$ instance of the general existence theorem. The equality takes place inside the same module-object derived category and preserves the ambient morphisms and coproducts; it does not identify discrete constant integral coefficients with condensed integral coefficients.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+    "place": "Part (2), equalities of the full subcategories and localizing closures; the equality used by sk-prop-int-brown.proof.md."
+   }
+  },
+  {
+   "text": "Use the chosen compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y)$ of [sk-def-sfb-dc-setting], inside the separated finite-type $k$-scheme setting. By [sk-def-nagata-sketch-data], $j$ is a quasi-compact open immersion and $p$ is proper, as required by the general existence theorem. The functor of [det-prop-int-brown-construction] is the restriction of $Rp_*j_!$ to $\\mathcal C_X\\to\\mathcal C_Y$. Here $j_!$ on complexes means precisely the levelwise functor $D(j_!)$ of [sk-def-sfb-module-derived-lower-shriek], since extension by zero of module objects is exact. Consequently, on the equal full subcategories from step 2, this functor is the restriction of the very same ambient composite $Rp_*D(j_!)$ at the very same compactification that occurs in [sk-prop-sf-existence]. Equality includes both the object and morphism actions. In particular we are not taking the total right derived functor of the underived composite $p_*j_!$.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
     "det-prop-int-brown-construction",
+    "sk-def-sfb-module-derived-lower-shriek",
+    "sk-prop-sf-existence",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown.proof.md",
+    "place": "First sentence, identification of the integral compactification functor with the general construction; module convention from sk-def-sfb-module-derived-lower-shriek."
+   }
+  },
+  {
+   "text": "Now specialize [sk-prop-sf-existence] to $\\Lambda=\\mathcal O_E$, the given finite extension $E/\\mathbf Q_\\ell$, and the given $f$. Its coefficient is admissible, its field has characteristic different from $\\ell$, and its source, target and morphism satisfy exactly the separated finite-type hypotheses written in our statement. Steps 2 and 3 identify its two categories and its left adjoint with $\\mathcal C_X,\\mathcal C_Y$ and our $Rf_!$. Its conclusion therefore supplies an exact functor $G:\\mathcal C_Y\\to\\mathcal C_X$ and natural bijections $\\Hom_{\\mathcal C_Y}(Rf_!M,N)\\simeq\\Hom_{\\mathcal C_X}(M,GN)$ for every $M,N$. Define $f^!=G$ with this adjunction. Exactness is part of the cited theorem, including its adjunction-induced shift structure; it is not inferred merely from the existence of a right adjoint. This is the general Brown construction at the integral coefficient stage, as required by the unit proof.",
+   "uses": [
     "sk-prop-sf-existence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown.proof.md",
+    "place": "First sentence: this is the case Lambda=O_E of sk-prop-sf-existence; the general theorem packages Brown representability (Stacks 0A8F/0A8G) and exactness (Stacks 0A8D)."
+   }
+  },
+  {
+   "text": "Let $J:\\mathcal C_Y\\to\\mathcal C_X$ be any other right adjoint of this same $Rf_!$, with counit $\\varepsilon^J$, and let $\\varepsilon^G$ be the counit chosen in step 4. Apply [det-sp-unique-right-adjoint] to $F=Rf_!$. It gives a natural isomorphism $\\gamma:G\\xrightarrow{\\sim}J$, whose component is the $J$-transpose of $\\varepsilon^G_N$, and whose inverse is the $G$-transpose of $\\varepsilon^J_N$. It satisfies $\\varepsilon^J_N\\circ Rf_!(\\gamma_N)=\\varepsilon^G_N$, and is the only family satisfying these equations. This proves precisely the counit-compatible uniqueness in the corrected statement. Since $G$ was chosen to be the integral instance of the general adjoint, the asserted identification with [sk-prop-sf-existence] is this choice itself; for any alternative choice it is the same unique counit-compatible isomorphism.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-adjoint.proof.md",
+    "place": "Last two sentences, uniqueness compatible with the counits and identification with the integral case of sk-prop-sf-existence."
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-int-integral-heart",
+  "def-weil-finite-type-morphism",
+  "det-def-localizing-closure-ctf-equals-bc",
   "det-prop-int-brown-construction",
+  "det-sp-unique-right-adjoint",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sk-def-localizing-closure",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-lower-shriek",
   "sk-prop-sf-existence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-adjoint.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown.proof.md",
+  "place": "The unit proof, first sentence: specialize sk-prop-sf-existence at O_E using Dctf=Dbc; expand the category/functor identifications and the counit normalization from sk-prop-int-brown-adjoint.proof.md."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability right adjoint exact functor compactly generated integral constructible derived category",
+   "results": "{\"t\": \"2026-10-16T15:42:40Z\", \"tool\": \"leanfinder\", \"query\": \"Brown representability right adjoint exact functor compactly generated integral constructible derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.compactlyGeneratedAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CondensedSet.LocallyConstant.adjunction\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\", \"LightCondSet.LocallyConstant.adjunction\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\"], \"digest\": \"1fefca35186a347f\"}",
+   "date": "2026-10-16",
+   "verdict": "no complete match: hits do not assert the existence and identification of the integral compact-support right adjoint on the specified localizing categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, compactly generated, right adjoint",
+   "results": "{\"t\": \"2026-10-16T15:42:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, compactly generated, right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `compactly`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier in query; no absence conclusion from this query. Corrected name-pattern search is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|Adjunction|compactly generated",
+   "results": "{\"t\": \"2026-10-16T15:42:41Z\", \"tool\": \"grep\", \"query\": \"Brown|Adjunction|compactly generated\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: the wrapper prefixes Mathlib already; these zero hits are not evidence of absence. Corrected searches are recorded below.",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral bounded constructible complexes have finite Tor amplitude Dctf equals Dbc",
+   "results": "{\"t\": \"2026-10-16T15:44:37Z\", \"tool\": \"leanfinder\", \"query\": \"integral bounded constructible complexes have finite Tor amplitude Dctf equals Dbc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"24a59c60fd989690\"}",
+   "date": "2026-10-16",
+   "verdict": "no complete match: hits do not assert the existence and identification of the integral compact-support right adjoint on the specified localizing categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "constructibleFiniteTor boundedConstructible",
+   "results": "{\"t\": \"2026-10-16T15:44:38Z\", \"tool\": \"loogle\", \"query\": \"constructibleFiniteTor boundedConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `constructibleFiniteTor`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier in query; no absence conclusion from this query. Corrected name-pattern search is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|boundedConstructibleIntegral",
+   "results": "{\"t\": \"2026-10-16T15:44:38Z\", \"tool\": \"grep\", \"query\": \"constructibleFiniteTor|boundedConstructibleIntegral\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: the wrapper prefixes Mathlib already; these zero hits are not evidence of absence. Corrected searches are recorded below.",
+   "subdirectory": "Mathlib/"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown representability for the integral exceptional inverse image: right adjoint to compactly supported direct image on Loc of bounded constructible O_E complexes",
+   "results": "{\"t\": \"2026-10-16T15:45:12Z\", \"tool\": \"leansearch\", \"query\": \"Brown representability for the integral exceptional inverse image: right adjoint to compactly supported direct image on Loc of bounded constructible O_E complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightAdjointObjIsDefined_iff\", \"CategoryTheory.Functor.rightAdjointObjIsDefined\", \"CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.isRightAdjoint_of_leftAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_limit\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_of_adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.Adjunction.representableBy\"], \"digest\": \"a7be97510cc59c18\"}",
+   "date": "2026-10-16",
+   "verdict": "no complete match: hits do not assert the existence and identification of the integral compact-support right adjoint on the specified localizing categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint to compactly supported direct image on localizing category of bounded constructible integral coefficient complexes",
+   "results": "{\"t\": \"2026-10-16T15:45:13Z\", \"tool\": \"leanfinder\", \"query\": \"right adjoint to compactly supported direct image on localizing category of bounded constructible integral coefficient complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"LightCondMod.LocallyConstant.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondSet.LocallyConstant.adjunction\", \"PresheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"cf2120639991c491\"}",
+   "date": "2026-10-16",
+   "verdict": "no complete match: hits do not assert the existence and identification of the integral compact-support right adjoint on the specified localizing categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction right adjoint exact triangulated",
+   "results": "{\"t\": \"2026-10-16T15:45:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction right adjoint exact triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `right`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier in query; no absence conclusion from this query. Corrected name-pattern search is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint|Brown|Adjunction",
+   "results": "{\"t\": \"2026-10-16T15:45:14Z\", \"tool\": \"grep\", \"query\": \"rightAdjoint|Brown|Adjunction\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: the wrapper prefixes Mathlib already; these zero hits are not evidence of absence. Corrected searches are recorded below.",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|compactly generated|constructibleFiniteTor|boundedConstructibleIntegral",
+   "results": "{\"t\": \"2026-10-16T15:50:15Z\", \"tool\": \"grep\", \"query\": \"Brown|compactly generated|constructibleFiniteTor|boundedConstructibleIntegral\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\"], \"digest\": \"85a4cb38687e36e9\"}",
+   "date": "2026-10-16",
+   "verdict": "no complete match: hits do not assert the existence and identification of the integral compact-support right adjoint on the specified localizing categories.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-16T15:50:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.CommShift, CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk\"], \"digest\": \"c285622625fbc6a6\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: right-adjoint exactness is already represented by lem-sf-triangulated-right-adjoint; this does not construct the integral exceptional adjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_rightAdjoint|rightAdjointUniq|commShift_of_leftAdjoint",
+   "results": "{\"t\": \"2026-10-16T15:50:16Z\", \"tool\": \"grep\", \"query\": \"isTriangulated_rightAdjoint|rightAdjointUniq|commShift_of_leftAdjoint\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"582d551d33b2bcc0\"}",
+   "date": "2026-10-16",
+   "verdict": "partial matches only: exactness and uniqueness already have DAG Mathlib leaves. No complete match for the integral geometric existence statement.",
+   "subdirectory": "CategoryTheory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -55,5 +222,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-int-brown"
+ "unit": "sk-prop-int-brown",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-int-brown-adjoint",
+  "worker": "stage1",
+  "summary": "Expanded the standing scheme and coefficient hypotheses and corrected unqualified unique isomorphism to counit-compatible uniqueness, as in the source proof. Followed the unit specialization route: checked qcqs, cited the existing integral Dctf=Dbc theorem, identified the same module-object compactification functor, applied the existing general existence theorem, and normalized uniqueness by the existing categorical Mathlib leaf. No new nodes, no Lean attachment, no compilation.",
+  "blueprint": "Steps 1-4 realize the unit proof sentence specializing sk-prop-sf-existence at O_E; step 5 realizes the last two sentences of sk-prop-int-brown-adjoint.proof.md. The imported standalone proof repeats the general Brown argument; this split reuses its existing general theorem as the unit explicitly instructs.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "The category equality is explicitly required by this unit proof; this existing general coefficient lemma verifies it, without replacing the unit specialization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-ctf-equals-bc"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-db4b753df",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-db4b753df (reviewer sub-agent of L); spot-checked: Full mathematical review completed. Step 3 is incorrectly marked elementary despite requiring several nontrivial cited identifications; corrected whole-node JSON is in fixes/dag/nodes/sec-six-functors-basics/det-prop-int-brown-adjoint.json. No statement or citation changes were needed.; 1 file(s) fixed by the reviewer"
+ }
 }

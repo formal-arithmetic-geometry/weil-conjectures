@@ -3,51 +3,227 @@
  "blueprint": {
   "is": "det-ind-heart-full-faithfulness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible sheaves are finitely presented; full faithfulness",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$.\n\n1. For $C\\in\\Cons(X,\\Lambda)$ the functor $\\Hom_{\\Lambda}(C,-)$ on $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ commutes\n   with filtered colimits; i.e. $C$ is finitely presented.\n2. The functor $\\Phi\\colon\\operatorname{Ind}(\\Cons(X,\\Lambda))\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$,\n   $\\text{“}\\varinjlim\\text{”}_\\alpha C_\\alpha\\mapsto\\varinjlim_\\alpha C_\\alpha$, is fully faithful, and its\n   essential image is by definition $\\IndCons(X,\\Lambda)$.",
+ "statement": "Use the universe and small-site convention of [def-weil-size-convention]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$ be the condensed coefficient ring of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], with $\\Lambda_X=p_X^*\\Lambda$ as in [sk-def-sfb-pulled-back-coefficients]. Put $\\mathcal M=\\operatorname{Mod}_{\\Lambda_X}$, the category of internal module objects in abelian sheaves on the small pro-etale site, as in [sk-def-sfb-module-objects], and let $\\mathcal C=\\operatorname{Cons}(X,\\Lambda)\\subset\\mathcal M$ be the full subcategory of constructible sheaves of [sk-def-sfb-constructible].\n\nHere $\\operatorname{Ind}(\\mathcal C)$ denotes the ordinary ind-category: its objects are small filtered diagrams $C:I\\to\\mathcal C$, written $\\text{“}\\varinjlim_i\\text{”}C_i$, and\n$$\\operatorname{Hom}_{\\operatorname{Ind}(\\mathcal C)}(\\text{“}\\varinjlim_i\\text{”}C_i,\\text{“}\\varinjlim_j\\text{”}D_j)=\\varprojlim_{i\\in I^{\\mathrm{op}}}\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(C_i,D_j),$$\nwith identity and composition induced by identities and composition in $\\mathcal C$. Filtered diagrams and their colimits have the meaning of [def-weil-pbc-category-colimit]. The use of a small skeleton of $\\mathcal C$ gives the same category up to equivalence.\n\n1. Every $C\\in\\mathcal C$ is finitely presented as an object of $\\mathcal M$: for every small filtered diagram $(M_j)$ in $\\mathcal M$, the canonical map\n$$\\varinjlim_j\\operatorname{Hom}_{\\mathcal M}(C,M_j)\\longrightarrow\\operatorname{Hom}_{\\mathcal M}(C,\\varinjlim_jM_j)$$\nis bijective.\n2. Sending a formal diagram $\\text{“}\\varinjlim_i\\text{”}C_i$ to its actual colimit $\\varinjlim_i C_i$ in $\\mathcal M$, and sending a represented morphism $C_i\\to D_j$ to its composite with $D_j\\to\\varinjlim_jD_j$, defines a fully faithful functor $\\Phi:\\operatorname{Ind}(\\mathcal C)\\to\\mathcal M$. Its essential image is the full replete subcategory of objects isomorphic to small filtered colimits of constructible sheaves; this subcategory is denoted $\\operatorname{IndCons}(X,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.md",
   "place": "node det-ind-heart-full-faithfulness, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "(1) A filtered colimit of sheaves in degree $0$ is a filtered diagram of complexes vanishing below\ndegree $0$. Part (1) of [sk-lem-constructible-ext-continuity] with $q=0$ gives\n$\\varinjlim_i\\Hom(C,K_i)\\cong\\Hom(C,\\varinjlim_iK_i)$; for sheaves concentrated in degree $0$ these are\nHoms in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$.",
+   "text": "The size convention makes the site small in the chosen enlarged universe. The sheaf tensor structure applies to abelian sheaves on precisely this small pro-etale site and supplies strong monoidal sheafification. For a presheaf map $u:F\\to G$ with $a(u)$ invertible and any presheaf $P$, its natural tensor comparison identifies $a(u\\otimes_p1_P)$ with $a(u)\\otimes1_{aP}$, which is invertible. Thus tensoring a sheafification equivalence with a presheaf remains a sheafification equivalence, so the hypotheses of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] hold. Apply that equivalence to the commutative ring object $\\Lambda_X$: internal modules are equivalent to sectionwise modules over its section-ring sheaf. By [lem-pur-ringed-site-grothendieck-abelian] the latter category is abelian and has all small colimits. The equivalence is additive because it preserves the section maps identically; kernels, cokernels and the coimage-to-image isomorphism therefore give an abelian structure on $\\mathcal M$. A cocone transported through the equivalence is universal because the Hom bijections identify its factorizations with those of the original universal cocone, giving all small colimits in $\\mathcal M$. In particular every diagram appearing below has its actual colimit in the same size convention. By [det-lem-coefficient-heart-small], $\\mathcal C$ has a set of isomorphism classes. Choosing representatives and taking their full subcategory gives a small skeleton; the original full category is locally small because its arrows are sheaf morphisms on the small site.",
    "uses": [
-    "sk-lem-constructible-ext-continuity"
+    "def-weil-size-convention",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "det-lem-coefficient-heart-small"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Stacks 03DA, lemma-abelian (abelian module category), and 03DB, lemma-limits-colimits (all colimits); blueprint unit sk-prop-ind-heart, step 1 (small skeleton)"
+   }
   },
   {
-   "text": "(2) In $\\operatorname{Ind}(\\Cons(X,\\Lambda))$, by definition,\n\n$$\n\\Hom\\bigl(\\text{“}\\varinjlim\\text{”}_\\alpha C_\\alpha,\\text{“}\\varinjlim\\text{”}_\\beta D_\\beta\\bigr)\n=\\varprojlim_\\alpha\\varinjlim_\\beta\\Hom_{\\Cons}(C_\\alpha,D_\\beta).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Let $C$ be constructible and $M:J\\to\\mathcal M$ a small filtered diagram. Regard $C$ and every $M_j$ as complexes concentrated in degree zero. They satisfy the common termwise lower bound $b=0$, and their termwise colimit is $(\\varinjlim_jM_j)[0]$. The constructible-sheaf clause of [sk-lem-constructible-ext-continuity], with $q=0$, identifies the colimit of the derived Hom groups with the derived Hom into this termwise colimit. Apply [lem-weil-pbc-derived-single-fully-faithful] to the abelian category $\\mathcal M$: its degree-zero derived Hom is ordinary module Hom. These identifications carry the cocone maps to the ordinary cocone maps, because the bijection sends $f$ to its single-complex map. Hence the displayed canonical map in assertion 1 is bijective, naturally in $C$ and the diagram. Both coefficient choices and the Noetherian hypothesis are exactly those of the cited continuity statement; no completeness or derived-colimit assertion is used.",
+   "uses": [
+    "sk-lem-constructible-ext-continuity",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+    "place": "paragraph 1; degree-zero identification: Stacks 06XS, lemma-negative-exts, part (2)"
+   }
   },
   {
-   "text": "On the other side, a colimit in the first variable turns into a limit, and by (1)\n\n$$\n\\Hom_\\Lambda(\\varinjlim_\\alpha C_\\alpha,\\varinjlim_\\beta D_\\beta)\n=\\varprojlim_\\alpha\\Hom_\\Lambda(C_\\alpha,\\varinjlim_\\beta D_\\beta)\n=\\varprojlim_\\alpha\\varinjlim_\\beta\\Hom_\\Lambda(C_\\alpha,D_\\beta).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Take small filtered diagrams $C:I\\to\\mathcal C$ and $D:J\\to\\mathcal C$, and put $A=\\varinjlim_iC_i$, $B=\\varinjlim_jD_j$, with cocone legs $c_i,d_j$. For each $i$, send the class of $f:C_i\\to D_j$ to $d_jf:C_i\\to B$. This is well-defined on the colimit of Hom sets: transition maps give equal composites by the cocone identity. For a filtered diagram of abelian groups, its set colimit carries the group operations by moving any finite list of representatives to a common stage and performing the operations there; equality is eventual equality at a common stage. Changing representatives or the chosen common stage gives the same result after a further transition: filteredness equalizes the finitely many parallel arrows involved. The group axioms hold after moving the finitely many entries of each axiom to one stage. A compatible family of group homomorphisms induces a group homomorphism on these representatives, and conversely restriction to each stage recovers that family; this proves the abelian-group colimit universal property. Thus the group-colimit comparison of step 2 is the same underlying-set comparison here. It is a bijection by step 2, since $\\mathcal C$ is a full subcategory of $\\mathcal M$ by [sk-def-sfb-constructible]. For a transition $t:C_i\\to C_{i'}$ and a representative $f:C_{i'}\\to D_j$, the two comparison maps commute with precomposition since $d_j(f t)=(d_jf)t$. Taking compatible families therefore gives a bijection between the ind Hom set in the statement and the set of compatible maps $(h_i:C_i\\to B)$. The colimit universal property [def-weil-pbc-category-colimit] bijects that latter set with $\\operatorname{Hom}_{\\mathcal M}(A,B)$: send $h$ to $(hc_i)_i$, and send a compatible family to its unique factorization through $A$. These are inverse by uniqueness. Thus the Hom comparison is a bijection; this derives the contravariant colimit-to-limit formula directly, without an interchange of limits and colimits.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks 05PW, remark-ind-category (Hom formula); Stacks 002F, definition-colimit (universal property); blueprint proof paragraphs 2-3"
+   }
   },
   {
-   "text": "Since $\\Cons(X,\\Lambda)$ is a full subcategory, $\\Hom_\\Lambda(C_\\alpha,D_\\beta)=\\Hom_{\\Cons}(C_\\alpha,D_\\beta)$,\nand the map induced by $\\Phi$ is the identity of these limits-of-colimits. Hence $\\Phi$ is fully\nfaithful.",
+   "text": "Define $\\Phi$ on objects by the chosen actual colimits and on each Hom set by the map constructed in step 3. This is exactly the claimed realization map. It preserves identities: at every $C_i$, the class represented by $1_{C_i}$ maps to $c_i$, so its induced endomorphism of $A$ is $1_A$. For composition, let $f:C\\to D$ and $g:D\\to T$ be ind morphisms. For each $i$, choose a representative $f_i:C_i\\to D_j$ of its component, and a representative $g_j:D_j\\to T_k$ of the $j$-component of $g$. Their composite represents the $i$-component of $gf$, by the ind-category composition in the statement. If $e_k:T_k\\to\\varinjlim_kT_k$ is a cocone leg, then $\\Phi(gf)c_i=e_kg_jf_i=\\Phi(g)d_jf_i=\\Phi(g)\\Phi(f)c_i$. Universal uniqueness in [def-weil-pbc-category-colimit] yields $\\Phi(gf)=\\Phi(g)\\Phi(f)$. Step 3 already makes the construction independent of all representative choices, including for general filtered categories with parallel arrows. Consequently $\\Phi$ is a functor, and the bijection on every Hom set in step 3 proves it is fully faithful.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+    "place": "paragraph 4, expanded verification of the realization functor"
+   }
+  },
+  {
+   "text": "Every image object $\\Phi(C)$ is an actual small filtered colimit of constructible sheaves, by its object definition. Conversely every such colimit is the image of the same diagram regarded as an ind-object. Closing these objects under isomorphism gives exactly the essential image. Since $\\Phi$ is fully faithful, its image up to isomorphism is a full replete subcategory of $\\mathcal M$, which is precisely the subcategory called $\\operatorname{IndCons}(X,\\Lambda)$ in the statement. This is a definition of the image, not a claim that filtered colimits preserve constructibility.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+    "place": "statement clause 2 (essential image)"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-constructible-ext-continuity"
+  "def-weil-size-convention",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-lem-coefficient-heart-small",
+  "sk-lem-constructible-ext-continuity",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-full-faithfulness.proof.md",
+  "place": "paragraphs 1-4, with the universal-property and functoriality verifications written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaves finitely presented full faithfulness Ind category",
+   "results": "CategoryTheory.PresheafIsFinite; SheafOfModules.isFinitePresentation; CategoryTheory.presheafIsGeneratedBy_of_isFinite; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; LightCondMod.LocallyConstant.fullyFaithfulFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.FilteredColimit, CategoryTheory.Ind",
+   "results": "; loogle: unknown identifier 'CategoryTheory.Limits.FilteredColimit'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid Loogle identifier; no absence conclusion; superseded by second Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "Ind|finitely.presented|filtered.*colimit",
+   "results": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean; Mathlib/CategoryTheory/DinatTrans.lean; Mathlib/CategoryTheory/FintypeCat.lean; Mathlib/CategoryTheory/FintypeCat.lean; Mathlib/CategoryTheory/Skeletal.lean; Mathlib/CategoryTheory/Skeletal.lean; Mathlib/CategoryTheory/Skeletal.lean; Mathlib/CategoryTheory/Skeletal.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf Hom commutes with filtered colimits and Ind category realization fully faithful",
+   "results": "CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Limits.isIndObject_colimit; CategoryTheory.instPreservesLimitsOfShapeFunctorIndLimOfFinCategoryOfHasLimitsOfShape; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered; HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Ind.lim",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful embedding of finitely presentable objects extends to a fully faithful realization of the ind completion by filtered colimits",
+   "results": "CategoryTheory.Ind.yoneda.fullyFaithful; CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι; CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι; CategoryTheory.instFullIndYoneda; CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι; CategoryTheory.Ind.presentation; CategoryTheory.instFullIndFunctorOppositeTypeInclusion",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"fullyFaithful\"",
+   "results": "CategoryTheory.fullyFaithfulInducedFunctor; CategoryTheory.Ind.yoneda.fullyFaithful; CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithfulι",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|indConstructible|proetale.*(present|colimit)|constructible.*(present|colimit)",
+   "results": "Mathlib/Lean/Environment.lean; Mathlib/Lean/Environment.lean; Mathlib/Lean/Environment.lean; Mathlib/Lean/Environment.lean; Mathlib/Lean/Environment.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any abelian category the degree zero embedding into its derived category is fully faithful and Ext zero is Hom",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.Abelian.Ext.homEquiv₀; DerivedCategory.instFullSingleFunctor; CategoryTheory.Abelian.Ext.mk₀_bijective; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.HasExt.standard; CategoryTheory.Abelian.extFunctorObj_obj_coe",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.addEquiv₀\"",
+   "results": "CategoryTheory.Abelian.Ext.addEquiv₀; CategoryTheory.Abelian.Ext.addEquiv₀_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "grep",
+   "query": "addEquiv₀|homEquiv₀|fullyFaithfulSingleFunctor",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In any abelian category Ext in degree zero is naturally additively isomorphic to Hom",
+   "results": "CategoryTheory.Abelian.Ext.addEquiv₀; CategoryTheory.Abelian.Ext.mk₀_addEquiv₀_apply; CategoryTheory.Abelian.Ext.homEquiv₀; CategoryTheory.Abelian.Ext.mk₀; CategoryTheory.Abelian.Ext.linearEquiv₀; CategoryTheory.Abelian.Ext; CategoryTheory.Abelian.Ext.mk₀_homEquiv₀_apply; CategoryTheory.Abelian.Ext.mk₀_linearEquiv₀_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "grep",
+   "query": "Ind\\.inclusion|Ind\\.yoneda|Ind.*(extend|realiz)|realiz.*Ind",
+   "results": "Mathlib/CategoryTheory/Limits/Indization/IndObject.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The filtered colimit realization of an ind category into a cocomplete category is fully faithful if its objects are finitely presentable",
+   "results": "CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.Limits.isIndObject_colimit; CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.instPreservesLimitsOfShapeFunctorIndLimOfFinCategoryOfHasLimitsOfShape; CategoryTheory.Limits.fullyFaithful_reflectsColimits; CategoryTheory.Limits.IndObjectPresentation.ofCocone; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under; CategoryTheory.Limits.IndObjectPresentation.mk",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic ind/presheaf, finite-presentation or derived-embedding results only; read candidates and reused existing DAG nodes for the general tools"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|def inclusion|def yoneda",
+   "subdirectory": "CategoryTheory/Limits/Indization/Category.lean",
+   "results": "5 hits returned with file-field values 97, 98, 113, 114, 190 (single-file output gives line numbers here). Read Category.lean lines 90-114: Ind.inclusion.fullyFaithful embeds into presheaves and Ind.yoneda.fullyFaithful embeds C into Ind C.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: neither theorem establishes finite presentation of the condensed constructible sheaves or the actual-colimit realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical functor from ind completion to a category with filtered colimits is full and faithful when the original objects are finitely presentable",
+   "results": "CategoryTheory.Ind.inclusion.fullyFaithful; CategoryTheory.Ind.yoneda.fullyFaithful; CategoryTheory.instFullIndYoneda; CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι; CategoryTheory.instFullIndFunctorOppositeTypeInclusion; CategoryTheory.Ind.yoneda; CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι; CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι",
+   "date": "2026-10-16",
+   "verdict": "Second reading: generic Ind embeddings only; checked Indization/Category.lean lines 86-115. No theorem states the constructible-module finite-presentation clause or this realization into module objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"lim\"",
+   "results": "Option.elimM_bind; Lean.MetavarContext.MkBinding.elimMVarDeps; Lean.Meta.ElimEmptyInductive.M; Lean.Meta.ElimEmptyInductive.instMonadBacktrackSavedStateM; Lean.Meta.ElimEmptyInductive.elim; Lean.Meta.CustomEliminator.induction; _private.Lean.Elab.Tactic.Induction.0.Lean.Elab.Tactic.ElimTargetInfo.expr; _private.Lean.Elab.Tactic.Induction.0.Lean.Elab.Tactic.ElimTargetInfo.view",
+   "date": "2026-10-16",
+   "verdict": "Second reading: source inspection of Indization/Category.lean lines 86-115 identifies the inclusion into presheaves and the Yoneda embedding only; neither is realization into internal coefficient modules or proves constructible finite presentation. No whole-item match. The Loogle substring query returned unrelated Lean declarations, not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|Faithful|Full|IsFinitelyPresentable",
+   "results": "Mathlib/CategoryTheory/Limits/Indization/IndObject.lean; Mathlib/CategoryTheory/Limits/Indization/LocallySmall.lean; Mathlib/CategoryTheory/Limits/Indization/LocallySmall.lean; Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean; Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean; Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean; Mathlib/CategoryTheory/Limits/Indization/Category.lean",
+   "date": "2026-10-16",
+   "verdict": "Second reading: generic Ind embeddings only; checked Indization/Category.lean lines 86-115. No theorem states the constructible-module finite-presentation clause or this realization into module objects."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -60,5 +236,49 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ind-heart"
+ "unit": "sk-prop-ind-heart",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ind-heart-full-faithfulness",
+  "worker": "stage1",
+  "summary": "Made the implicit Noetherian scheme hypothesis and condensed coefficient/module conventions explicit; without quasi-compactness a countable disjoint union gives a counterexample, recorded in report.md. Followed the blueprint q=0 Ext-continuity route, supplied the exact generic derived-single embedding and module-colimit facts, and wrote out the universal Hom bijection, functoriality and essential image. Reused existing nodes; no new nodes or Lean attachments.",
+  "blueprint": "Paragraph 1 -> step 2; paragraphs 2-3 -> step 3; paragraph 4 -> step 4; statement image clause -> step 5. Step 1 supplies size and ambient-category prerequisites of these same steps. No alternate mathematical route.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-sheaf-tensor-structure",
+    "why": "Strong monoidal abelian sheafification on the small pro-etale site verifies the internal/sectionwise equivalence hypothesis; the ind-heart unit does not construct sheaf tensor."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Converts the stated internal-module convention to sectionwise modules without changing sheaves; the unit has no such comparison."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Supplies abelianness and small colimits on the small ringed site, needed before taking actual colimits; not a replacement for Ext continuity."
+   },
+   {
+    "node": "det-lem-coefficient-heart-small",
+    "why": "Gives exactly the small skeleton prerequisite already used by unit step 1, with the same Noetherian hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Identifies degree-zero derived Hom with ordinary Hom for the actual abelian coefficient category; the unit does not prove this general derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-lem-coefficient-heart-small",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-198ed3b29",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-198ed3b29 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, report, cited DAG statements, blueprint route, Stacks sources 002F/05PW/03DA/03DB/06XS, coefficient definitions, and all five proof steps. The Noetherian correction is necessary and documented with a valid disjoint-union counterexample. Edge cases, filtered categories with parallel arrows, colimit Hom comparison, functoriality, and essential image all check. No new nodes or repairs are needed."
+ }
 }
