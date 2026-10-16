@@ -24,7 +24,7 @@ degrees.
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.Scheme.isLocalSite_smallEtaleTopology_of_isSepClosed`: the small étale
+- `AlgebraicGeometry.Scheme.isLocalSite_smallEtaleTopology_of_isSepClosed_derived`: the small étale
   site of `Spec K` is a local site.
 - `AlgebraicGeometry.Scheme.globalSectionsUnitIsoOfIsSepClosed`: `Γ(Spec K, Λ) ≅ Λ`.
 - `AlgebraicGeometry.Etale.cohomology_singleFunctor_of_isSepClosed`: `H^0(Spec K, F) ≅ Γ(F)`
@@ -72,7 +72,7 @@ variable (K : Type u) [Field K] [IsSepClosed K]
 /-- Over a separably closed field `K`, the small étale site of `Spec K` is a local site: every
 covering sieve of its terminal object contains the identity
 (`AlgebraicGeometry.Scheme.id_mem_of_mem_smallEtaleTopology_of_isSepClosed`). -/
-instance isLocalSite_smallEtaleTopology_of_isSepClosed :
+instance isLocalSite_smallEtaleTopology_of_isSepClosed_derived :
     (Spec (.of K)).smallEtaleTopology.IsLocalSite where
   eq_top_of_mem S hS := by
     let e : etalePoint K ≅ ⊤_ _ := isTerminalEtalePoint.uniqueUpToIso terminalIsTerminal

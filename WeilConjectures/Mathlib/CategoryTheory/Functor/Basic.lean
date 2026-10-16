@@ -53,6 +53,9 @@ variable (G : C ⥤ C)
 lemma iterate_zero : G.iterate 0 = 𝟭 C :=
   rfl
 
+lemma iterate_succ (n : ℕ) : G.iterate (n + 1) = G.iterate n ⋙ G :=
+  rfl
+
 lemma iterate_succ' (n : ℕ) : G.iterate (n + 1) = G.iterate n ⋙ G :=
   rfl
 
@@ -60,7 +63,7 @@ lemma iterate_succ' (n : ℕ) : G.iterate (n + 1) = G.iterate n ⋙ G :=
 lemma iterate_one : G.iterate 1 = G :=
   rfl
 
-lemma iterate_succ (n : ℕ) : G.iterate (n + 1) = G ⋙ G.iterate n := by
+lemma iterate_succ_left (n : ℕ) : G.iterate (n + 1) = G ⋙ G.iterate n := by
   induction n with
   | zero => rfl
   | succ n ih =>

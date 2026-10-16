@@ -1,0 +1,155 @@
+/-
+Copyright (c) 2026 Nailin Guan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Nailin Guan
+-/
+module
+
+public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
+public import WeilConjectures.SmoothPurity.Defs
+
+/-!
+
+# Poincaré duality for `ℚ̄_ℓ`-coefficients on the pro-étale site
+
+Let `ℓ` be a prime, `k` a field of characteristic `≠ ℓ` and `p : X ⟶ S` a smooth morphism of
+pure relative dimension `d` of separated `k`-schemes of finite type. Smooth purity
+(`ProEtale.CondensedRing.smoothPurityIso`) provides the chosen isomorphism
+`pur_p : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]`, and this file defines from it, through the abstract
+constructions of `WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierExchange`:
+
+* the **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S`, the composite of `Rp_!(pur_p⁻¹)` and the
+  counit of `Rp_! ⊣ Rp^!`;
+* the **Poincaré duality morphism** `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)`, the
+  composite of `Rp_*(pur_p⁻¹)`, the identification `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)` and
+  the Verdier exchange morphism `Φ_{p,ℚ̄_ℓ,X,ℚ̄_ℓ,S}`;
+* the **compact-support cup product**
+  `cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`, from the derived exceptional
+  projection morphism and the counit of `Lp^* ⊣ Rp_*`.
+
+All three share the normalization of `pur_p`: the transpose of `PD_p` is exactly `Tr_p ∘ cup_c`
+(`ProEtale.CondensedRing.uncurry_poincareMap`), and `PD_p` is an isomorphism by Verdier
+duality (`ProEtale.CondensedRing.isIso_poincareMap`), which is **Poincaré duality** in the
+form `𝔻_S(Rp_! ℚ̄_ℓ,X) ≅ Rp_* ℚ̄_ℓ,X(d)[2d]`.
+
+All objects live in the bounded constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`, which are
+monoidal closed subcategories of the ambient derived categories
+(`ProEtale.CondensedRing.isMonoidal_boundedConstructible` and
+`ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible`). As in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`, `X` and `S` are
+objects of `Over (Spec (.of k))` and `p` a morphism of `Over (Spec (.of k))`.
+
+## Not treated here
+
+* The passage from the derived statement to the perfect pairing
+  `H^i_c(X, ℚ̄_ℓ) × H^{2d-i}(X, ℚ̄_ℓ(d)) ⟶ ℚ̄_ℓ` on cohomology groups over `S = Spec k̄`, which
+  requires the perfectness of `Rp_! ℚ̄_ℓ,X` and the comparison of `RΓ(S, RHom(-, ℚ̄_ℓ,S))` with the
+  linear dual.
+* The Frobenius equivariance, which belongs to the Weil sheaf formalism.
+* The compatibility with the compactly supported base change isomorphism and with the
+  compactification and composition comparisons, which are commutativity conditions on the maps
+  defined here, to be stated once those comparisons are available.
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory MonoidalClosed
+
+open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+variable {X S : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom]
+  [QuasiCompact S.hom] [IsSeparated S.hom]
+  (p : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d p.left]
+
+/-! ### Smooth purity on bounded constructible complexes -/
+
+include p in
+omit [SmoothOfRelativeDimension d p.left] in
+/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[2d]` is bounded constructible when `X` is smooth of pure
+relative dimension `d` over some `S`: by smooth purity (`smoothPurityIso`) it is isomorphic to
+`Rp^! ℚ̄_ℓ,S`, which is bounded constructible. -/
+lemma boundedConstructible_shift_tateTwistDerived :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
+      ((shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d)) :=
+  (boundedConstructible _).prop_of_iso (smoothPurityIso ℓ p d)
+    ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _)).property
+
+include p in
+omit [SmoothOfRelativeDimension d p.left] in
+/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[2d]` of a smooth `p : X ⟶ S` of pure relative dimension
+`d`, as a bounded constructible complex. -/
+noncomputable def boundedConstructibleTateTwist : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+  ⟨(shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d),
+    boundedConstructible_shift_tateTwistDerived ℓ p d⟩
+
+/-- The chosen purity isomorphism `pur_p : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]` of
+`ProEtale.CondensedRing.smoothPurityIso`, as an isomorphism in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`: its preimage
+under the fully faithful inclusion `Dᵇc ⥤ D`. No new choice is made: this is the same
+isomorphism, and it is the only normalization entering the trace and Poincaré duality below. -/
+noncomputable def boundedConstructibleSmoothPurityIso :
+    (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ≅
+      boundedConstructibleTateTwist ℓ p d :=
+  (ObjectProperty.fullyFaithfulι _).preimageIso (smoothPurityIso ℓ p d)
+
+/-- The **trace** `Tr_p : Rp_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of a smooth morphism `p : X ⟶ S` of pure
+relative dimension `d`: `Rp_!(pur_p⁻¹)` followed by the counit of `Rp_! ⊣ Rp^!`. -/
+noncomputable def trace :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+      (boundedConstructibleTateTwist ℓ p d) ⟶ 𝟙_ _ :=
+  Verdier.trace (boundedConstructibleUpperShriekAdjunction _ ℓ p)
+    (boundedConstructibleSmoothPurityIso ℓ p d)
+
+/-- The **Poincaré duality morphism**
+`PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)`: `Rp_*(pur_p⁻¹)`, the identification
+`Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)`, and the Verdier exchange morphism. -/
+noncomputable def poincareMap :
+    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+        (boundedConstructibleTateTwist ℓ p d) ⟶
+      (ihom ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+        (𝟙_ _))).obj (𝟙_ _) :=
+  Verdier.poincareMap (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ p)
+    (boundedConstructibleExceptionalProjection _ ℓ p)
+    (boundedConstructibleSmoothPurityIso ℓ p d)
+
+/-- The **compact-support cup product**
+`cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`: the derived exceptional
+projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor. -/
+noncomputable def cupProduct :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj (𝟙_ _) ⊗
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+          (boundedConstructibleTateTwist ℓ p d) ⟶
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+        (boundedConstructibleTateTwist ℓ p d) :=
+  Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (boundedConstructibleExceptionalProjection _ ℓ p)
+
+omit [SmoothOfRelativeDimension d p.left] in
+/-- **Poincaré duality is the trace–cup pairing**: the transpose
+`Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of the Poincaré duality morphism is the cup product
+followed by the trace. -/
+theorem uncurry_poincareMap :
+    uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
+  Verdier.uncurry_poincareMap _ _ _ _
+
+omit [SmoothOfRelativeDimension d p.left] in
+/-- **Poincaré duality**: the Poincaré duality morphism
+`PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
+theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by
+  have := isIso_verdierExchange ℓ p (𝟙_ _) (𝟙_ _)
+  unfold poincareMap Verdier.poincareMap
+  exact inferInstanceAs (IsIso (_ ≫ verdierExchange ℓ p (𝟙_ _) (𝟙_ _)))
+
+end AlgebraicGeometry.ProEtale.CondensedRing

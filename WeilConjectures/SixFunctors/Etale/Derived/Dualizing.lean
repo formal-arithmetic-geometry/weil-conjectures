@@ -28,18 +28,15 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 - `AlgebraicGeometry.Etale.verdierDualEvaluation`, `AlgebraicGeometry.Etale.verdierDualDoubleDual`
   (`lem-weil-duality-pairing`): the evaluation pairing `K ⊗ᴸ 𝔻_X K ⟶ ω_X` and the double-dual
   morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, its transpose.
-- `AlgebraicGeometry.Etale.verdierDualEquivalence` (`sk-prop-sf-biduality-general`): the
-  anti-equivalence `𝔻_X : Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app` (`sk-prop-sf-biduality-general`):
-  general Verdier biduality, `δ_K` is an isomorphism on `Dctf(X, Λ)`; hence
-  `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`.
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`,
-  `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual` (`lem-weil-verdier-preservation-strata`):
-  `𝔻_X` carries `Dctf(X, Λ)` into itself, sending the Tor interval `[a, b]` to
-  `[-b - 2d, -a]` when `dim X ≤ d`.
+- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual_of_isInvertible`: biduality for
+  an invertible dualizing complex.
+
+General Verdier biduality on `Dctf(X, Λ)` (`sk-prop-sf-biduality-general`) and the preservation
+of `Dctf(X, Λ)` by `𝔻_X` (`lem-weil-verdier-preservation-strata`) are proved in
+`WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality`.
 
 ## Implementation notes
 
@@ -48,13 +45,13 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 `Ra_!` is a left adjoint (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` for
 torsion coefficients).
 
-The two theorems are stated in the setting of the blueprint's `sk-prop-sf-biduality-general`
-and of `sk-def-sf-setting`: `X` is a separated scheme of finite type over a field `k`, and the
-coefficients are a finite ring `Λ` whose exponent is invertible on `k`. Both hypotheses are
-needed. Over a singular base biduality fails already for `a = 𝟙`: on a nodal curve, with
-`K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so `𝔻_X 𝔻_X K` has rank nine.
-For `p`-torsion coefficients in characteristic `p` the Verdier dual of `j_! Λ` is `Rj_* Λ`,
-which is not constructible (Artin–Schreier). At a finite stage every object of `Dctf` is
+The biduality theorems are stated in the setting of the blueprint's
+`sk-prop-sf-biduality-general` and of `sk-def-sf-setting`: `X` is a separated scheme of finite
+type over a field `k`, and the coefficients are a finite ring `Λ` whose exponent is invertible on
+`k`. Both hypotheses are needed. Over a singular base biduality fails already for `a = 𝟙`: on a
+nodal curve, with `K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so `𝔻_X 𝔻_X K` has
+rank nine. For `p`-torsion coefficients in characteristic `p` the Verdier dual of `j_! Λ` is
+`Rj_* Λ`, which is not constructible (Artin–Schreier). At a finite stage every object of `Dctf` is
 locally perfect, so no quasi-Frobenius hypothesis on `Λ` is needed.
 
 The statements are for torsion coefficients, finitely generated objects of `A` being finite
@@ -147,98 +144,6 @@ theorem nonempty_iso_verdierDual_verdierDual_of_isInvertible
     Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) := by
   obtain ⟨e⟩ := nonempty_iso_ihom_obj_ihom_obj_of_isInvertible hK hω
   exact ⟨e.symm⟩
-
-section Field
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
-  [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
-  [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
-
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Constructible preservation before
-biduality (first half; the subsection `sk-prop-sf-rf-shriek-preservation`).
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, Λ)` into
-itself. The Tor-amplitude bound of the same blueprint lemma is
-`AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`. This is the preservation half of the
-general Verdier biduality `sk-prop-sf-biduality-general`, whose blueprint proof cites it. -/
-theorem constructibleFiniteTor_verdierDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
-(`AlgebraicGeometry.Etale.verdierDualDoubleDual`) is an isomorphism for every `K` in
-`Dctf(X, Λ)`. Over an algebraically closed field this is the finite-stage étale biduality
-`thm-weil-etale-geometric-biduality`. -/
-theorem isIso_verdierDualDoubleDual_app
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the Verdier dual is a contravariant anti-equivalence of
-`Dctf(X, Λ)`: the double-dual morphism `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K`
-of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
-theorem nonempty_iso_verdierDual_verdierDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) a).obj
-      (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)))) :=
-  have := isIso_verdierDualDoubleDual_app Λ a hK
-  ⟨asIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)⟩
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` restricts to a
-contravariant anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`, with quasi-inverse `𝔻_X` itself:
-`𝔻_X` preserves `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`) and
-the unit and the counit are the double-dual isomorphisms `δ_K : K ≅ 𝔻_X 𝔻_X K`
-(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
-noncomputable def verdierDualEquivalence :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ≌
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).liftDualEquivalence
-    (verdierDual (ModuleCat.{u + 1} Λ) a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
-    (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a)
-    (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
-
-end Field
-
-section Preservation
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
-  [HasInvertibleExponent Λ (Spec (.of k))]
-
-open _root_.AlgebraicGeometry.Etale.DerivedCategory
-
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
-
-Let `X` be separated of finite type over `k`, `ω_X = Ra_X^! Λ` and `𝔻_X = RHom(-, ω_X)`. Then
-`𝔻_X` carries `Dctf(X, Λ)` into itself, and more precisely, if `dim X ≤ d` and `K ∈ Dctf(X, Λ)`
-has Tor amplitude in `[a, b]`, then `𝔻_X K` has Tor amplitude in `[-b - 2d, -a]`. The bound is
-independent of the exponent of `Λ`. The first half is
-`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
-theorem torAmplitudeIn_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
-    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-      ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
-  sorry
-
-end Preservation
 
 end Etale
 

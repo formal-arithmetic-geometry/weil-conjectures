@@ -472,14 +472,37 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
   [SmoothOfRelativeDimension 1 f]
 
 include f in
-/-- The ideal sheaf of an effective divisor on a smooth curve is invertible. -/
+/-- The ideal sheaf of an effective divisor on a smooth curve is invertible: every effective
+divisor is an effective Cartier divisor.
+
+(blueprint: `lem-sc-point-cartier`, `rem-ptr-sc-divisor-2`,
+`rem-ptr-sc-effective-cartier-divisor-1`) -/
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
-  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul hE'
+  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul_effectiveCartier hE'
   | single P n =>
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
+
+include f in
+/-- **Effective divisors are effective Cartier divisors.** On a smooth curve, for every finite
+set `s` of closed points and multiplicities `n`, the ideal sheaf `∏_{P ∈ s} 𝓘_P^{n_P}` of the
+effective divisor `∑_{P ∈ s} n_P [P]` is invertible: each `𝓘_P` is invertible
+(`isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`), and products of invertible
+ideal sheaves are invertible.
+
+(blueprint: `lem-sc-point-cartier`) -/
+lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
+    (n : closedPoints C → ℕ) :
+    (∏ P ∈ s, IdealSheafData.vanishingIdeal ⟨{P.1}, P.2⟩ ^ n P).IsInvertible := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => exact IdealSheafData.isInvertible_top
+  | insert P s hP ih =>
+    rw [Finset.prod_insert hP]
+    exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _)
+      |>.mul_effectiveCartier ih
 
 variable [IsIntegral C] [IsLocallyNoetherian C]
 
@@ -609,7 +632,7 @@ generator `a` of `I`. -/
 theorem IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul {I J : X.IdealSheafData}
     (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J)) = J := by
-  have hIJ := hI.mul hJ
+  have hIJ := hI.mul_effectiveCartier hJ
   have := hI.isInvertible_toModules
   have := hIJ.isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
@@ -637,7 +660,7 @@ theorem IdealSheafData.IsInvertible.nonempty_toModules_iso_dual_tensorObj_mul
     {I J : X.IdealSheafData} (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Nonempty (I.toModules ≅ J.toModulesᵛ ⊗ (I * J).toModules) := by
   have := hI.isInvertible_toModules
-  have := (hI.mul hJ).isInvertible_toModules
+  have := (hI.mul_effectiveCartier hJ).isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible (I * J).toModules
   have h := IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul hI hJ
@@ -849,7 +872,13 @@ include f in
 /-- **Every effective Cartier divisor on a smooth curve is a sum of closed points.** An
 invertible ideal sheaf `I` on a smooth integral curve is the ideal sheaf `𝒪_C(-E)` of the
 effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators of `I` and of
-`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. -/
+`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. Here
+`𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` has order `n_P` at the closed point `P`
+(`AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`), i.e. its stalk at `P` is `(t_P^{n_P})`
+for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere.
+
+(blueprint: `lem-sc-cartier-divisor-points`, `rem-ptr-sc-divisor-2`,
+`rem-ptr-sc-effective-cartier-divisor-1`) -/
 theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
     (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
   have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=

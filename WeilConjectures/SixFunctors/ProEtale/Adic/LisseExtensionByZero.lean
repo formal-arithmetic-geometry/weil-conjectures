@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.LocalVanishing
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.LocalVanishing
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.LocalVanishing
 
 /-!
 # Global sections of the extension by zero of a lisse sheaf

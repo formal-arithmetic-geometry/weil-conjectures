@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
@@ -55,12 +56,6 @@ cosimplicial abelian group `TopCat.Presheaf.cechCosimplicialObject`.
 universe u v
 
 open CategoryTheory Limits TopologicalSpace Opposite
-
-/-- A finite sum of morphisms of abelian groups is computed pointwise. -/
-lemma AddCommGrpCat.sum_apply {M N : AddCommGrpCat.{u}} {ι : Type*} (f : ι → (M ⟶ N))
-    (s : Finset ι) (x : M) : (∑ i ∈ s, f i) x = ∑ i ∈ s, f i x := by
-  rw [← AddMonoidHom.finsetSum_apply]
-  exact congr($(map_sum AddCommGrpCat.homAddEquiv f s) x)
 
 namespace TopCat.Presheaf
 
