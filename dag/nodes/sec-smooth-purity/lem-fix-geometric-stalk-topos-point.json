@@ -26,9 +26,139 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-proetale-geometric-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal N$ be the category of pointed neighbourhoods, with arrows $h:(V,v)\\to(U,u)$ satisfying $h\\circ v=u$, and put $I=\\mathcal N^{\\mathrm{op}}$. The stalk diagram sends $h^{\\mathrm{op}}$ to $\\mathcal F(h):\\mathcal F(U)\\to\\mathcal F(V)$, not in the reverse direction. In the etale case $\\mathcal N$ is cofiltered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; the identity neighbourhood, fibre-product common refinements and equalizing refinements in its statement can all be formed within the chosen universe and replaced by isomorphic representatives of the site skeleton. In the pro-etale case [def-weil-proetale-geometric-stalk] explicitly asserts that the opposite index category is filtered. Thus $I$ is filtered in both cases. It is small in $\\mathcal V$: the site's objects form a $\\mathcal V$-set, each lift set $L(U)$ and each set of pointed morphisms is a $\\mathcal V$-set, and their set-indexed unions are $\\mathcal V$-sets, by [def-weil-size-convention]. Explicitly, if $e:U^\\circ\\xrightarrow{\\sim}U$ is the chosen representative isomorphism, use the lift $u^\\circ=e^{-1}\\circ u$. A pointed arrow $h:V\\to U$ becomes $h^\\circ=e_U^{-1}\\circ h\\circ e_V$, and $h^\\circ v^\\circ=e_U^{-1}hv=e_U^{-1}u=u^\\circ$. Thus representatives give the required pointed objects and arrows, including equalizing arrows. The colimit in the statement is precisely the stalk of [def-weil-pbc-geometric-stalks] or [def-weil-proetale-geometric-stalk]. Write $\\iota_{U,u}:\\mathcal F(U)\\to S(\\mathcal F)$ for its coprojections. For every pointed arrow $h$ the cocone identity is $\\iota_{V,v}\\mathcal F(h)=\\iota_{U,u}$. A sheaf map $\\alpha:\\mathcal F\\to\\mathcal G$ induces $S(\\alpha)$ by $S(\\alpha)\\iota^{\\mathcal F}_{U,u}=\\iota^{\\mathcal G}_{U,u}\\alpha_U$; naturality of $\\alpha$ makes this a cocone, and uniqueness in [def-weil-pbc-category-colimit] gives the identity and composition laws, so $S$ is a functor.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-size-convention",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6B, lemma-cofinal-etale; compare etale-cohomology.tex Tag 03PQ, lemma-cofinal-etale; explicit size and functoriality argument"
+   }
+  },
+  {
+   "text": "For a covering $\\{U_i\\xrightarrow{f_i}U\\}$ in the small etale site and a lift $u\\in L(U)$, the arrows $f_i$ are etale and jointly surjective by [def-weil-pbc-etale-site]. Apply [lem-weil-pbc-etale-cover-geometric-point-lift] to this family and to the geometric point $u:\\operatorname{Spec}\\Omega\\to U$. Its field is algebraically closed, as required by [def-weil-geometric-point]. We obtain an index $i$ and $u_i:\\operatorname{Spec}\\Omega\\to U_i$ with $f_i\\circ u_i=u$, using the very same field $\\Omega$. Hence $\\coprod_i L(U_i)\\to L(U)$ is surjective in the etale case.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PR, lemma-geometric-lift-to-cover; Tag 04FM, lemma-stalk-gives-point"
+   }
+  },
+  {
+   "text": "For a covering $\\{U_i\\xrightarrow{f_i}U\\}$ in the pro-etale site and $u\\in L(U)$, the family is fpqc and all $f_i$ are weakly etale by [def-weil-pbc-proetale-site]. Base change along $u$ and set $Z_i=\\operatorname{Spec}\\Omega\\times_U U_i$. The projections $Z_i\\to\\operatorname{Spec}\\Omega$ form an fpqc covering by [lem-galois-fpqc-covering-base-change], so some $Z_i$ has a point $z$, by the joint-surjectivity consequence explicitly included in [def-weil-pbc-fpqc-covering]. Its projection is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Choose an affine open neighbourhood $W=\\operatorname{Spec}B$ of $z$; schemes are locally affine [def-pc-scheme]. Apply the forward implication of [lem-weil-pbc-weakly-etale-source-locality] to the affine-open covering of $Z_i$. Thus $W\\to\\operatorname{Spec}\\Omega$ is weakly etale, equivalently $B/\\Omega$ is weakly etale by [def-weil-pbc-ind-etale-algebra]. By [lem-weil-pbc-weak-etale-field], its residue field $\\kappa(z)/\\Omega$ is separable algebraic. Since $\\Omega$ is algebraically closed [def-weil-geometric-point], it is separably closed (every nonconstant separable polynomial has a root). Apply [lem-weil-pbc-separable-extension-embeds-separably-closed] with base field $k=\\Omega$, extension $M=\\kappa(z)$, and target field $\\Omega$ with its identity $\\Omega$-algebra structure. It gives an $\\Omega$-algebra map $\\kappa(z)\\to\\Omega$. By [def-weil-residue-field], $\\kappa(z)=\\mathcal O_{W,z}/\\mathfrak m_z$ with its induced $\\Omega$-algebra structure. Compose the germ map $B=\\Gamma(W,\\mathcal O_W)\\to\\mathcal O_{W,z}$ with the quotient and the chosen $\\Omega$-algebra map to obtain $B\\to\\kappa(z)\\to\\Omega$. Applying [def-weil-affine-spectrum] gives a section $\\operatorname{Spec}\\Omega\\to W\\to Z_i$ of the projection to $\\operatorname{Spec}\\Omega$. Composing with $Z_i\\to U_i$ gives $u_i$; the fibre-product equation of [def-pc-fibre-product] gives $f_i\\circ u_i=u$, not merely equality of underlying points. Thus $\\coprod_i L(U_i)\\to L(U)$ is also surjective in the pro-etale case. All these constructions are in the chosen universes. If $e:U_i^\\circ\\xrightarrow{\\sim}U_i$ is a representative isomorphism, take $u_i^\\circ=e^{-1}\\circ u_i$ and $f_i^\\circ=f_i\\circ e$. Then $f_i^\\circ u_i^\\circ=f_iee^{-1}u_i=f_iu_i=u$, so the lift equation also holds for the representative.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-pc-scheme",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-weak-etale-field",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6C, lemma-geometric-lift-to-cover; more-algebra.tex Tag 092Q, lemma-absolutely-flat-over-field; topologies.tex Tag 022D(3), lemma-fpqc"
+   }
+  },
+  {
+   "text": "For a covering $\\{U_i\\to U\\}$ in the etale site, the overlaps $U_i\\times_U U_j$ are scheme fibre products by [def-weil-pbc-etale-site]. In the pro-etale case form the scheme fibre product $Q=U_i\\times_U U_j$ using [def-pc-fibre-product]. Its projection to $U_j$ is weakly etale, being the base change of the covering arrow $U_i\\to U$, and its composite with $U_j\\to Y$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Thus $Q\\to Y$ is an object by [def-weil-pbc-proetale-site]; the site has all $Y$-morphisms, so the scheme universal property is also its site universal property. This identifies the overlaps in the sheaf condition with these scheme fibre products. Two lifts $u_i\\in L(U_i)$ and $u_j\\in L(U_j)$ with the same image in $L(U)$ give a unique lift to $U_i\\times_U U_j$, by [def-pc-fibre-product]. Let $a_i:L(U_i)\\to T$ be a matching family for the proposed presheaf $p_*T$. For $u\\in L(U)$ choose a lift $u_i$ using steps 2 and 3 and put $a(u)=a_i(u_i)$. Any two choices give a lift to the overlap, where the matching condition says the two values agree. Thus $a$ is well-defined, restricts to each $a_i$, and is unique since every $u$ lifts. This is exactly the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology], proving that $p_*T$ is a sheaf. If $L(U)$ is empty, its function set is a singleton and the same argument applies. Restrictions are precomposition with $L(V)\\to L(U)$; their functoriality follows from associativity of composition. A map $T\\to T'$ acts by postcomposition on all these function sets, commuting with restrictions and with composition of maps of sets. Hence $p_*$ is a functor $\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8, lemma-point-pushforward-sheaf (1); explicit matching-family argument"
+   }
+  },
+  {
+   "text": "For a map $a:S(\\mathcal F)\\to T$, define $b^a_U:\\mathcal F(U)\\to(p_*T)(U)$ by $b^a_U(s)(u)=a(\\iota_{U,u}(s))$. For $h:V\\to U$ and $v\\in L(V)$ the pointed arrow $(V,v)\\to(U,hv)$ yields $\\iota_{V,v}(\\mathcal F(h)s)=\\iota_{U,hv}(s)$, by the cocone identity in [def-weil-pbc-category-colimit]. Consequently $b^a_V(\\mathcal F(h)s)(v)=b^a_U(s)(hv)$, precisely naturality of $b^a$ with the stated restriction maps. Thus $b^a$ is a morphism of sheaves, since sheaf morphisms are natural transformations [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8, lemma-point-pushforward-sheaf (2); explicit forward adjunction map"
+   }
+  },
+  {
+   "text": "Conversely, for a sheaf map $b:\\mathcal F\\to p_*T$, define $c_{U,u}:\\mathcal F(U)\\to T$ by $c_{U,u}(s)=b_U(s)(u)$. Naturality gives $c_{V,v}\\mathcal F(h)=c_{U,u}$ for every pointed arrow $h:(V,v)\\to(U,u)$. The universal property [def-weil-pbc-category-colimit] therefore gives a unique map $a^b:S(\\mathcal F)\\to T$ with $a^b\\iota_{U,u}=c_{U,u}$. Starting with $a$, the construction $a^{b^a}$ agrees with $a$ after every $\\iota_{U,u}$, so equals $a$ by uniqueness. Starting with $b$, one has $b^{a^b}_U(s)(u)=b_U(s)(u)$ for every $U,s,u$, so recovers $b$. For $\\alpha:\\mathcal F'\\to\\mathcal F$, the equality $S(\\alpha)\\iota^{\\mathcal F'}_{U,u}=\\iota^{\\mathcal F}_{U,u}\\alpha_U$ from step 1 gives $b^{a\\circ S(\\alpha)}=b^a\\circ\\alpha$. For $t:T\\to T'$ the formula gives $b^{t\\circ a}=(p_*t)\\circ b^a$. Thus the inverse bijections are natural in both variables, proving $S\\dashv p_*$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8, lemma-point-pushforward-sheaf (2); explicit inverse and naturality"
+   }
+  },
+  {
+   "text": "Let $J$ be a finite category and $j\\mapsto\\mathcal F_j$ a diagram of sheaves of sets on $\\mathcal C$. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], its limit $\\mathcal H$ is the sheaf $\\mathcal H(U)=\\varprojlim_j\\mathcal F_j(U)$ with the sectionwise projections. Use the same small filtered category $I$ from step 1 for every $j$. The restrictions and the diagram's natural transformations define the functor $M:I\\times J\\to\\mathbf{Set}$ with $M((U,u),j)=\\mathcal F_j(U)$. By [lem-weil-pbc-filtered-colimits-commute-finite-limits] its canonical comparison is a bijection, yielding\n$$S(\\mathcal H)=\\varinjlim_{(U,u)\\in I}\\varprojlim_{j\\in J}\\mathcal F_j(U)\\ \\xrightarrow{\\ \\sim\\ }\\ \\varprojlim_{j\\in J}\\varinjlim_{(U,u)\\in I}\\mathcal F_j(U)=\\varprojlim_{j\\in J}S(\\mathcal F_j).$$\nIt is the comparison induced by the limit projections, by its stated construction from projections and coprojections. This includes the empty $J$ (the terminal object), as well as finite products and equalizers, so $S$ preserves finite limits. Together with the adjunction from steps 5 and 6, this is an adjunction with finite-limit-preserving left adjoint, hence a morphism of topoi $p:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$ and its inverse image is the specified stalk functor $S$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf; categories.tex Tag 002W, lemma-directed-commutes; compare etale-cohomology.tex Tag 04FM and proetale.tex Tag 0991"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-size-convention",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-weil-geometric-point",
+  "def-weil-pbc-proetale-site",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-pc-scheme",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0991, section-points, and Tag 0F6C, lemma-geometric-lift-to-cover; etale-cohomology.tex Tag 04FM, lemma-stalk-gives-point; sites.tex Tag 00Y8, lemma-point-pushforward-sheaf. Source TeX independently obtained in the sandbox; explicit gluing and adjunction formulas expand these proofs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -120,15 +250,123 @@
    "results": "11 hits in AlgebraicGeometry/Sites: Etale.lean:97 geometricFiber, Proetale.lean definitions of proetalePrecoverage and its topology, and ElladicCohomology.lean coefficient constructions. Read Etale.lean:93-118, Proetale.lean:45-140 and Point/Skyscraper.lean:187-235. The geometricFiber point is for the big etale topology; the skyscraper adjunction requires an already supplied point. No declaration states the combined small-etale/pro-etale assertion. An initial invocation mistakenly repeated Mathlib/ in the subdirectory and gave zero hits; this corrected invocation supplies the actual source search.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointSmallEtale|proetale.*point|point.*proetale|jointly_surjective",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; directory Mathlib/AlgebraicGeometry/; read AlgebraicGeometry/Sites/EtalePoint.lean:52-102 (pointSmallEtale at line 64): this constructs the small-etale point only, not the pro-etale point.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a geometric point of a scheme defines a point functor on the small etale and pro-etale sites via lifts and jointly surjective covers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFullEtaleOverForget; none gives the full small-etale AND small-pro-etale assertion by one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric point gives a point of the small etale or proetale topos",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point, AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": "3 hits: AlgebraicGeometry.Scheme.pointSmallEtale, AlgebraicGeometry.Scheme.isConservative_pointSmallEtale, AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_pointSmallEtale'; none gives the full small-etale AND small-pro-etale assertion by one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jointly_surjective|isCofiltered|smallEtaleTopology|proetaleTopology",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; directory Mathlib/CategoryTheory/Sites; read CategoryTheory/Sites/Point/Basic.lean:53-110 and Point/Skyscraper.lean:176-239 (isSheaf_skyscraperPresheaf at line 187 and skyscraperSheafAdjunction at line 222): they assume a site point; the pro-etale geometric lift construction is still required.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the lift functor from a geometric point preserves terminal objects and fibre products and sends covering families to jointly surjective families",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget, CategoryTheory.GrothendieckTopology.Point.instCategory, CategoryTheory.GrothendieckTopology.instIsCocontinuousOverForgetOver, CategoryTheory.Functor.IsLocallyFaithful, CategoryTheory.GrothendieckTopology.pullback, CategoryTheory.GrothendieckTopology.over_map_coverPreserving, CategoryTheory.GrothendieckTopology.Point.isCofiltered; none gives the full small-etale AND small-pro-etale assertion by one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Point.fiber, jointly_surjective, finite limits",
+   "results": "loogle: unknown identifier 'Point.fiber'; not used as evidence of absence",
+   "date": "2026-10-16",
+   "verdict": "query error"
+  },
+  {
+   "tool": "leansearch",
+   "query": "site point criterion fibre products covers geometric point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsCofiltered|skyscraperSheafAdjunction|pointSmallEtale|ProEtale.*[Pp]oint|[Pp]oint.*ProEtale",
+   "results": "25 hits; top declarations/files: Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean.  Read Point/Basic.lean:53-110, Point/Skyscraper.lean:176-239 and AlgebraicGeometry/Sites/EtalePoint.lean:52-102: generic results assume a site point; the scheme constructor covers the small etale site. No combined small pro-etale statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor to sets defines a point of a Grothendieck topology when its category of elements is cofiltered and covering sieves are jointly surjective",
+   "results": "8 hits; top declarations/files: CategoryTheory.GrothendieckTopology.Point.isCofiltered; CategoryTheory.GrothendieckTopology.Point.mk.inj; CategoryTheory.GrothendieckTopology.Point; CategoryTheory.GrothendieckTopology.Point.jointly_surjective; CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective; CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective₂; CategoryTheory.Functor.IsCoverDense; CategoryTheory.Functor.LocallyCoverDense.  Read Point/Basic.lean:53-110, Point/Skyscraper.lean:176-239 and AlgebraicGeometry/Sites/EtalePoint.lean:52-102: generic results assume a site point; the scheme constructor covers the small etale site. No combined small pro-etale statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.skyscraperSheafAdjunction",
+   "results": "5 hits; top declarations/files: CategoryTheory.GrothendieckTopology.Point.skyscraperSheafAdjunction; CategoryTheory.GrothendieckTopology.Point.skyscraperSheafAdjunction_homEquiv_apply_hom; CategoryTheory.GrothendieckTopology.Point.skyscraperSheafAdjunction_homEquiv_symm_apply; CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app; CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app.  Read Point/Basic.lean:53-110, Point/Skyscraper.lean:176-239 and AlgebraicGeometry/Sites/EtalePoint.lean:52-102: generic results assume a site point; the scheme constructor covers the small etale site. No combined small pro-etale statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric fibre functor on the weakly etale site is a left exact left adjoint to the sheaf of functions on lifts of a geometric point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "fix-lem-finite-tor-perfect",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-trace-perfectness"
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-fix-geometric-stalk-topos-point",
+  "worker": "stage1",
+  "summary": "Kept the statement; supplied a seven-step proof on both small sites. Used the existing filtered-neighbourhood, cover-lifting, weakly-etale field, and set-limit statements; wrote out sheaf gluing and both adjunction maps. No new nodes, no Lean changes, no claim of conservativity. Checked cited statements and recorded verbatim citations. Independent second reading checked the source TeX and every cited statement; corrected two source labels, cited residue fields for the affine evaluation map, and expanded the representative-isomorphism equations. No statement change or new node.",
+  "blueprint": "Realizes the first paragraph of fix-lem-finite-tor-perfect: geometric stalk is the inverse image of a topos point, as required to use general derived pullback. The unit sk-prop-sf-trace-perfectness has no prescribed proof steps; its realized key node remains unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Step 3 uses only its residue-field conclusion for a weakly etale algebra over the field Omega, to construct a lift through a pro-etale covering. This is a generic algebraic tool absent from this unit, not an alternative route to the unit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q15-b7a7720f5",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-b7a7720f5 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all seven steps and 23 cited statements; checked Stacks source passages, same-field lifting, adjunction direction, finite limits, edge cases, duplicates and unit route. No new nodes, circularity or coefficient-category substitution found. Accepted weakly-etale-field tool use. Detailed checks written to review.md; no repairs needed."
+ }
 }
