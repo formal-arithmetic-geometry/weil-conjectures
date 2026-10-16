@@ -1,0 +1,43 @@
+## What changed
+
+Proved `Padic.lattice_stabilizer_isOpen` with its signature unchanged. Three proved private helpers implement openness of a spanning integral submodule, a Nakayama congruence criterion for equality of images, and openness from finite generator congruences. The actual chosen integer ring and maximal ideal are recovered from `Padic.extension_integers_dvr`, the theorem already defining these coefficient constructions.
+
+The proof chooses an E-basis contained in a spanning submodule, rather than an integral lattice basis. Small coordinates give an open neighborhood of zero inside that submodule. A nonzero element of the maximal ideal shows that its product with the lattice still spans, hence is open. For a stabilizing automorphism g, requiring f(x)-g(x) in that product for a finite set of lattice generators defines an open neighborhood. Nakayama makes the inclusion f(Lambda) into Lambda an equality. This uses continuity of evaluation at fixed points in the specified compact-open topology; it needs no continuity theorem for inversion of automorphisms.
+
+Only private proof imports `Mathlib.RingTheory.Nakayama` and `Mathlib.Topology.Algebra.OpenSubgroup` are added. All original public imports remain. The node proof, proof dependencies, and proof origin now record the implemented route. No definitions, public signatures, or target statements change.
+
+## Proved and sorry left
+
+Closed 1 original hole: `Padic.lattice_stabilizer_isOpen` (node `lem-pod-lattice-stabilizer-open`). Added 0 holes; split off 0 statements. No sorry remains in the delivered module. The proof continues to depend on the library's named coefficient integer-ring theorem and its existing dependencies; those are not new holes or claims of this delivery.
+
+The private helpers `spanning_isOpen`, `image_eq_of_congr`, and `stabilizer_open_of_ideal` are fully proved. The algebraic helper works for arbitrary linear maps over any commutative ring and uses the existing Mathlib Nakayama theorem directly.
+
+Checked edge cases in the argument: the zero vector space gives an empty basis and an open neighborhood equal to the entire space; a zero lattice in that space is permitted; empty finite generating sets cause no failure. No positive-rank assumption is introduced. A nonzero maximal-ideal element is chosen only inside the theorem proof, from the existing nonzero-ideal conclusion, and is used solely for a span argument.
+
+## No longer needed
+
+No import is removed. The existing private import `Sheaf.NumberTheory.Padics.CoefficientExtensionFinite` is retained because the delivery checker identifies it as a protected unit-route import. Its finiteness theorem `Padic.finite_coefficientExtensionRing` is not used in the proof. The old proof-dependency entry `def-weil-l-adic-coefficient-extension` is replaced by the property theorem node `lem-weil-l-adic-extension-integers-dvr`; the coefficient constructions remain unchanged statement dependencies and their unit realization remains imported.
+
+Removed proof dependency `lem-sc-dvr-fg-torsionfree-free` (`Module.free_of_finite_type_torsion_free'`, Mathlib's PID freeness theorem). Integral freeness, the integral-basis rank comparison, matrix identification, determinant-unit calculation, and adjugate formula are unnecessary for this proof. No module is withdrawn; the protected finite-coefficient module remains imported. Pruning here is the removal of the DVR-freeness proof dependency and the associated matrix argument, not a claim that a Lean module becomes globally unreachable.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The original DAG described a valid matrix route, but the direct Nakayama criterion avoids its integral-basis and inverse-matrix work. The existing declaration docstring retains that original route; the updated node and this report describe the actual implemented proof. There are no unit-level realized nodes for this lattice lemma in `sk-lem-finite`. The checker nevertheless protects the coefficient datum module through another unit realization, so its existing import is retained and no unit or chapter route is changed.
+
+The source citation's page number is inaccurate: in the downloaded Stanford L19 notes, Proposition 1.1.9 and its second bullet occur on printed page 3, not page 2. The assertion itself agrees with the theorem. Existing statement and source fields were left unchanged, and the proof-origin field gives the corrected location.
+
+Real searches were made with `msearch.py` using Lean Finder, Loogle, LeanSearch, and grep; they are recorded in `searches.jsonl`. Lean Finder found only the discrete-action stabilizer theorem, which does not apply directly. Loogle and LeanSearch found `Submodule.le_of_le_smul_of_le_jacobson_bot`, which the proof uses. Searches of the project modules found no existing proof of this lattice result. There are no new nodes, split statements, or interface changes.
+
+## Second reading by F3
+
+1. **Unchanged interface — pass.** Diffed the only delivered Lean module against the shared repository. The existing declaration `Padic.lattice_stabilizer_isOpen`, including its universe parameters, hypotheses, spectral-norm instance and induced compact-open topology, has a byte-for-byte identical signature. All existing public imports and definitions are unchanged; only fully proved private helpers, their private proof imports, and the theorem proof are added. No change record or forced adaptation is needed.
+
+2. **Proof and axioms — pass.** Compiled the delivery with `lcompile.py --all` (exit 0, no warnings). Independently compiled a scratch copy with `#print axioms` for the public theorem and all three private helpers. Each uses exactly `propext`, `Classical.choice`, and `Quot.sound`; none uses `sorryAx`. Scanned the delivered source: no `sorry`, axiom, unsafe/opaque declaration, implemented-by or extern escape, or data definition. Checked the coefficient witness extraction against `extension_integers_dvr`: the integer ring and ideal are determined by their exact membership conditions. The nonzero element of the ideal and basis are chosen inside proofs only and introduce no arbitrary data definition.
+
+3. **Split statements and small cases — pass.** There are no split-off statements or new holes. Read the three private helper proofs in full: a spanning integral submodule contains a finite-coordinate ball, Nakayama turns congruence into equality of images, and finite-generator congruences define open neighborhoods. The general algebraic helper needs no injectivity. Zero-dimensional spaces, the zero lattice in that space, empty basis/generator sets, and the zero ideal in the purely algebraic helper all satisfy the argument. Additional Lean Finder and Loogle searches used the alternative queries “linear maps congruent modulo the maximal ideal” and `IsOpen, Submodule`; project and Mathlib searches found no replacement of the whole proof. The local-ring quotient-image lemma is another formulation of the already used Nakayama step, with no shorter overall route.
+
+4. **Route and pruning — pass.** Reviewed the proof from the open theorem downward and the original dependency modules. It uses the existing DVR property theorem and Mathlib Nakayama directly; neither integral freeness nor matrix inversion is needed. Both old proof-dependency entries are accounted for under `No longer needed`: the coefficient-definition entry is replaced by its property theorem while the DVR-freeness leaf is dropped. No Lean module is claimed pruned. `sk-lem-finite.realized` has no lattice-lemma realization; the coefficient datum is realized in `sk-def-sf-setting`, and its protected existing finite-coefficient import is retained. Added proof-only imports are plain `import`; statement imports stay public. No unit or chapter route changes.
+
+5. **DAG agreement — pass after metadata repair.** The four updated proof steps match the actual private helpers and their final application. Their sole named non-elementary dependency is `lem-weil-l-adic-extension-integers-dvr`, and their union agrees with `proof_deps`. Mathlib Nakayama is named explicitly in the proof text. The proof origin accurately describes the new route. Checked the local Lecture 19 PDF: Proposition 1.1.9 is on printed page 3. No new node is required. Restored the unrelated `lean_audit` field from the repository, so the delivered node changes only `proof`, `proof_deps`, and `proof_origin`.
+
+Second-reading changes: restored the node's unrelated audit metadata, made pruning of the old coefficient-definition proof-dependency entry explicit, and appended this review. The Lean proof needed no repair. Closed 1 original hole (`Padic.lattice_stabilizer_isOpen`), added 0 holes, split off 0 statements.

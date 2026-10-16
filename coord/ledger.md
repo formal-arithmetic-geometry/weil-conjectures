@@ -15383,3 +15383,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:37 L: returned deliver/C1/Sheaf.Paper.ContinuousConstructibleIntegralGluing (reviewer RETURN: (reviewer X-a6080, head a60809c63) 6: In dag/nodes/sec-proper-base-change/lem-weil-pbc-continuous-constructible-integral)
 - 04:44 L: returned deliver/B3/Sheaf.Paper.IntegralConstructibleSheafHom (reviewer RETURN: (the landing tools, head 85220d198) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 04:44 L: returned deliver/G1/Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing (reviewer RETURN: (the landing tools, head 261144107) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 04:44 L: merged deliver/F3/Sheaf.NumberTheory.Padics.LatticeStabilizerOpen (stage 3; reviewer PASS; first push; landing 20261016T044440-L-3296196 (proof); batch 20261016T044437; modules 1; new nodes 0)
