@@ -201,22 +201,34 @@
   ]
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-10535a7ff",
-  "group": "Q14",
+  "reviewer": "NT-stage2-Codex-64d90957e",
+  "group": "NP",
   "result": "pass",
-  "note": "Reviewed immutable snapshot, dependencies, source declarations, report sections, edge cases, and exact theorem signature; scompile.py side-overlay compilation passed without errors.",
-  "statement_corrected": true
+  "note": "Wrote review.md. Checked immutable modules, dependency records, sources, canonical maps, hypotheses, universes, edge cases, docstrings, and verbatim signatures. Three-file scompile.py reproduction passed without diagnostics. No corrections required."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekBaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper",
-  "statement": "theorem isIso_derivedBaseChangeMap_app_of_isProper [Finite Λ] [IsProper f]\n    (sq : IsPullback g' f' f g)\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :\n    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)",
-  "branch": "slopmaster2",
-  "by": "Q14",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "Exact existing declaration, read in the published side-project WeilConjectures framework and confirmed with scompile.py --source. Not present in the older slopmaster2 checkout. plusEtaleOrigin unfolds to a bounded-below etale complex L and Nonempty (D(nu^*).obj L ≅ K), so every supplied etale-origin witness supplies its hypothesis. The conclusion is the component at K of the fixed unit-square-counit mate, whose definition has no witness argument; hence replacing the witness, in particular by an isomorphic witness, leaves the map unchanged. Sheaf (...)(ModuleCat Λ) is the fixed-ring presentation of constant-coefficient module sheaves. This attachment records a statement match, not a sorry-free axiom audit. The branch label slopmaster2 follows the preflight convention for all WeilConjectures modules; availability is from the published side overlay, not the older local slopmaster2 checkout. Second reading: the source-based statement_change makes the commutative unital coefficient convention explicit, matching the section binder [CommRing Λ]; the general finite-ring convention of the witness dependency does not silently narrow this item. See the complete five-citer audit in statement_change and the report."
+  "module": "Sheaf.Paper.FiniteLevelRingedProEtaleBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.finiteConstantRingedExchange_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteOriginRestriction",
+   "AlgebraicGeometry.Scheme.finiteOriginRestriction_additive",
+   "AlgebraicGeometry.Scheme.finiteOriginRestriction_exact",
+   "AlgebraicGeometry.Scheme.finiteOriginRestriction_limits",
+   "AlgebraicGeometry.Scheme.finiteOriginRestriction_colimits",
+   "AlgebraicGeometry.Scheme.finiteOriginTransport",
+   "AlgebraicGeometry.Scheme.finiteConstantCoefficientIso",
+   "AlgebraicGeometry.Scheme.finiteConstantCoefficients_comm",
+   "AlgebraicGeometry.Scheme.finiteConstantRingedExchange",
+   "AlgebraicGeometry.Scheme.finiteConstantRingedExchange_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteLevelRingedProEtaleBaseChange.lean",
+  "statement": "theorem finiteConstantRingedExchange_isIso [IsProper f] (sq : ChosenCartesianSquare g' f' f g) (W : ProEtale.FiniteCoefficientDerivedCategoryPlus X Λ) (w : ProEtale.EtaleOriginWitness X Λ W) : IsIso ((finiteConstantRingedExchange Λ sq).app ((finiteOriginTransport Λ X).obj W.obj))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): importing the recorded legacy LowerShriekBaseChange theorem alongside the recorded small-site operations fails with a duplicate UpperLowerStar.Defs notation declaration. This module states the same finite commutative-coefficient proper-base-change theorem for the very same canonical adjunction mate, in the ring-sheaf presentation needed by the caller. The normalized constants-to-functions coefficient isomorphism transports the recorded EtaleOriginWitness and its bounded-below object; no origin hypothesis is dropped, no adic datum is assumed, and the map has no witness argument. The theorem proof is postponed as required in stage 2. Reused verbatim from delivered NG/def-weil-pbc-four-arrows; its prerequisite is supplied here because no corresponding module is yet published. The recorded interface cannot expose the new canonical finite-level construction until this module is present."
  }
 }

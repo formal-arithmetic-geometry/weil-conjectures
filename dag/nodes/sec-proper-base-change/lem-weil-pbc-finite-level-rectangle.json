@@ -131,5 +131,26 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9bc9c8007 (reviewer sub-agent of L); spot-checked: The rectangle and Stacks 0E48 specialization are mathematically correct. The submitted proof omitted the adic-datum citation establishing P_n perfect and did not explicitly identify the witness-transported v'_n with the canonical ringed-topos exchange used by naturality. Corrected DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-level-rectangle.json; review.md records source checks, edge cases, and duplicate analysis.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-64d90957e",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable modules, dependency records, sources, canonical maps, hypotheses, universes, edge cases, docstrings, and verbatim signatures. Three-file scompile.py reproduction passed without diagnostics. No corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteLevelRectangle",
+  "declaration": "AlgebraicGeometry.Scheme.properBaseChangeFiniteLevelRectangle",
+  "file": "lean/Sheaf/Paper/FiniteLevelRectangle.lean",
+  "statement": "theorem properBaseChangeFiniteLevelRectangle (sq : ChosenCartesianSquare g' f' f g) [IsProper f] (d : ProEtaleAdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : fourCornerDerived X (adicDatumRing X d)) (C : CochainComplex (proEtaleRingModules X (adicDatumRing X d)) ℤ) (eC : DerivedCategory.Q.obj C ≅ K) (hK : IsCompletedIntrinsicallyDerivedComplete X d r a ha C eC) (W : ∀ n : ℕ, ProEtale.FiniteCoefficientDerivedCategoryPlus X (fourArrowQuotient d n)) (w : ∀ n : ℕ, ProEtale.EtaleOriginWitness X (fourArrowQuotient d n) (W n)) (e : ∀ n : ℕ, (fourArrowOriginTransport X d n).obj (W n).obj ≅ (adicDatumReduction X d n).obj K) (n : ℕ) : (properBaseChangeFourArrows sq d r a ha K C eC hK W w e n).1.hom ≫ (properBaseChangeFourArrows sq d r a ha K C eC hK W w e n).2.2.2.hom = (properBaseChangeFourArrows sq d r a ha K C eC hK W w e n).2.2.1 ≫ (properBaseChangeFourArrows sq d r a ha K C eC hK W w e n).2.1.hom",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.properBaseChangeFiniteLevelRectangle"
+  ]
  }
 }
