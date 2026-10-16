@@ -52,6 +52,36 @@ def sheafHOneLimit : Type (u + 1) :=
   {x : ∀ n : ℕ, Sheaf.H (constantZModPow Y l n) 1 //
     ∀ n, Sheaf.H.map (constantZModPowReduction Y l n) 1 (x (n + 1)) = x n}
 
+/-- The compatible families of classes form a subgroup of the product of the groups
+`H¹(Y_ét, ℤ/ℓⁿ)`, as the transition maps are additive. -/
+def sheafHOneLimitAddSubgroup : AddSubgroup (∀ n : ℕ, Sheaf.H (constantZModPow Y l n) 1) where
+  carrier := {x | ∀ n, Sheaf.H.map (constantZModPowReduction Y l n) 1 (x (n + 1)) = x n}
+  add_mem' {x y} hx hy n := by
+    rw [Pi.add_apply, map_add, hx n, hy n, Pi.add_apply]
+  zero_mem' n := map_zero _
+  neg_mem' {x} hx n := by
+    rw [Pi.neg_apply, map_neg, hx n, Pi.neg_apply]
+
+/-- The group structure on `lim_n H¹(Y_ét, ℤ/ℓⁿ)`, as a subgroup of the product. -/
+noncomputable instance : AddCommGroup (sheafHOneLimit Y l) :=
+  inferInstanceAs (AddCommGroup (sheafHOneLimitAddSubgroup Y l))
+
+omit [Fact l.Prime] in
+@[simp]
+lemma sheafHOneLimit.coe_add (x y : sheafHOneLimit Y l) (n : ℕ) : (x + y).1 n = x.1 n + y.1 n :=
+  rfl
+
+omit [Fact l.Prime] in
+@[simp]
+lemma sheafHOneLimit.coe_zero (n : ℕ) : (0 : sheafHOneLimit Y l).1 n = 0 :=
+  rfl
+
+/-- `x ↦ x n`, the projection `lim_n H¹(Y_ét, ℤ/ℓⁿ) → H¹(Y_ét, ℤ/ℓⁿ)` as a group homomorphism. -/
+def sheafHOneLimit.proj (n : ℕ) : sheafHOneLimit Y l →+ Sheaf.H (constantZModPow Y l n) 1 where
+  toFun x := x.1 n
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
 /-- Continuous homomorphisms to `ZMod k` and to `ULift (ZMod k)`. -/
 noncomputable def continuousMonoidHomULiftEquiv (G : Type u) [Group G] [TopologicalSpace G]
     (k : ℕ) :
@@ -121,6 +151,41 @@ lemma sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv
       g).toAdd.down = _
   rw [Equiv.apply_symm_apply]
   exact PadicInt.continuousMonoidHomEquiv_apply_coe b n g
+
+/-- The bijection `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)` sends products of characters
+to sums of classes: at each level this is the additivity of
+`H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(π₁(Y, s), ℤ/ℓⁿ)`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_add`). -/
+lemma continuousMonoidHomPadicEquiv_mul (b b' : G →ₜ* Multiplicative ℤ_[l]) :
+    continuousMonoidHomPadicEquiv l s G (b * b') =
+      continuousMonoidHomPadicEquiv l s G b + continuousMonoidHomPadicEquiv l s G b' := by
+  refine Subtype.ext (funext fun n ↦ (sheafHEquivContinuousMonoidHom _ s G).injective ?_)
+  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective (ULift.ext _ _ ?_)
+  have h₁ := sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv l s G b n g
+  have h₂ := sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv l s G b' n g
+  have hadd := congrArg (fun χ ↦ (χ g).toAdd.down) (sheafHEquivContinuousMonoidHom_add _ s G
+    ((continuousMonoidHomPadicEquiv l s G b).1 n) ((continuousMonoidHomPadicEquiv l s G b').1 n))
+  simp only [ContinuousMonoidHom.mul_apply, toAdd_mul, ULift.add_down, h₁, h₂] at hadd
+  refine (sheafHEquivContinuousMonoidHom_continuousMonoidHomPadicEquiv l s G (b * b') n g).trans ?_
+  rw [ContinuousMonoidHom.mul_apply, toAdd_mul, map_add]
+  exact hadd.symm
+
+/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+finite-level classes.
+
+The group isomorphism `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃+ lim_n H¹(Y_ét, ℤ/ℓⁿ)` underlying the
+bijection `AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`; it is
+equivariant for the Frobenius
+(`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv_comp`). -/
+noncomputable def continuousMonoidHomPadicAddEquiv :
+    Additive (G →ₜ* Multiplicative ℤ_[l]) ≃+ sheafHOneLimit Y l where
+  toEquiv := Additive.toMul.trans (continuousMonoidHomPadicEquiv l s G)
+  map_add' b b' := continuousMonoidHomPadicEquiv_mul l s G b.toMul b'.toMul
+
+@[simp]
+lemma continuousMonoidHomPadicAddEquiv_apply (b : Additive (G →ₜ* Multiplicative ℤ_[l])) :
+    continuousMonoidHomPadicAddEquiv l s G b = continuousMonoidHomPadicEquiv l s G b.toMul :=
+  rfl
 
 variable {l}
 
