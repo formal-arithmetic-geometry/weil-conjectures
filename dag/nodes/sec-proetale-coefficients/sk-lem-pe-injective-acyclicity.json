@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-pe-injective-acyclicity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Acyclicity of pulled-back injectives",
- "statement": "If $I$ is an injective sheaf of $\\Lambda$-modules on $X_{\\Et}$, then\n\n$$\nR^q\\nu_{X,*}\\nu_X^*I=0\\qquad(q>0),\n$$\n\nwhere $\\nu_{X,*}\\colon\\Mod(X_{\\Proet},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ is the\ndirect image of the comparison morphism.",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a discrete commutative ring. Use the small sites $X_{\\Et}$ and $X_{\\Proet}$ and the comparison geometric morphism $\\nu_X:X_{\\Proet}\\to X_{\\Et}$. Let $\\Lambda_{X,\\Et}$ be the constant sheaf of rings and put $\\Lambda_X=\\nu_X^{-1}\\Lambda_{X,\\Et}$. Here $\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Proet},\\Lambda)$ mean sheaves of modules over these ring sheaves. The module inverse image $\\nu_X^*$ applies the abelian inverse image to the module and its scalar action, and $\\nu_{X,*}$ is the corresponding direct image. Right derived functors are computed by injective module resolutions.\n\nIf $I$ is an injective sheaf of $\\Lambda$-modules on $X_{\\Et}$, then\n$$\nR^q\\nu_{X,*}\\nu_X^*I=0\\qquad(q>0).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/_section.md",
   "place": "node sk-lem-pe-injective-acyclicity, order 727",
@@ -18,41 +18,161 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
  "proof": [
   {
-   "text": "It suffices to show that positive cohomology vanishes on affine étale objects\n([det-pe-injective-acyclicity-reduction]). The restriction of $I$ to such an\nobject is injective, since restriction has an exact left adjoint, extension by\nzero. On an affine base we use the basis of ind-étale affines: by the\ncompatible refinement of [sk-thm-pe-indetale-refinement], the Čech-acyclicity\ncriterion for a basis ([lem-weil-pbc-cech-criterion]) may be applied to finite\naffine coverings by ind-étale maps.",
+   "text": "Use [def-weil-size-convention] to put the chosen small sites, their ring and module values, and covering index sets in one common universe. On $X$ and on each affine etale $W\\to X$, both etale and pro-etale coefficient-module categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and have enough injectives by [lem-sp-grothendieck-enough-injectives]. Thus the injective-resolution computations and the ringed-site evaluation comparison used below apply with exactly their smallness and enough-injectives hypotheses.",
    "uses": [
-    "det-pe-injective-acyclicity-reduction",
-    "sk-thm-pe-indetale-refinement",
-    "lem-weil-pbc-cech-criterion"
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), final sentence, and 079H (theorem-injective-embedding-grothendieck)"
+   }
   },
   {
-   "text": "Write each covering map as an inverse limit of affine étale maps over the\nobject being covered. By the affine evaluation formula of\n[sk-prop-pe-comparison-morphism], the Čech complex of the covering is the\nfiltered colimit of the Čech complexes of these étale approximations. Each\nfinitely presented approximation descends to a common étale stage over the\nbase, is a covering after increasing that stage, and its nerve descends by\ntaking fibre products. Since $I$ is injective, each augmented Čech complex at a\nfinite stage has no positive cohomology. Filtered colimits are exact, so the\nsame holds for the pro-étale covering, and the criterion gives the required\nvanishing ([lem-weil-pbc-comparison-injective-acyclicity]; the identification\nof derived evaluation with cohomology on the slice is\n[lem-weil-pbc-proetale-restriction-injectives]). This is the argument of\nStacks Project, Tag 099U; for module sheaves one uses free $\\Lambda$-module\nsheaves in the augmented resolution.",
+   "text": "Fix $q>0$ and put $M=\\nu_X^*I$. Part (1) of [det-pe-injective-acyclicity-reduction] says that $R^q\\nu_{X,*}M$ is the sheafification of $W\\mapsto H^q(W_{\\Proet},M|_W)$ on affine etale objects. It therefore suffices to prove that each of these module cohomology groups is zero. For such $W$, use only the first two assertions of part (2) of that node: $M|_W\\cong\\nu_W^*(I|_W)$ and $I_W:=I|_W$ is injective on $W_{\\Et}$. We do not take its vanishing assertion or its final consequence as an input.",
    "uses": [
-    "lem-weil-pbc-comparison-injective-acyclicity",
-    "lem-weil-pbc-proetale-restriction-injectives"
+    "det-pe-injective-acyclicity-reduction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W (lemma-higher-direct-images); proetale.tex Tag 099V (lemma-relative-comparison), first paragraph"
+   }
+  },
+  {
+   "text": "Let $F_W=(I_W)_{ab}$ be the underlying abelian sheaf on $W_{\\Et}$. Evaluation at the terminal object $W$ is additive and left exact: addition is sectionwise and kernels are sectionwise by [def-weil-sheaf-of-modules-category]. Since $I_W$ is injective, [lem-weil-pbc-derived-functor-injective-vanishing] gives $R^q\\Gamma_{\\mathrm{Mod}}(W,-)(I_W)=0$. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on $W_{\\Et}$ with ring sheaf $\\Lambda_{W,\\Et}$, object $W$, and module $I_W$. Its hypotheses were checked in step 1, and it identifies this zero group with $H^q(W_{\\Et},F_W)$. This argument uses acyclicity of the underlying abelian sheaf, rather than assuming it is injective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), objectwise equality"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-abelian-etale-proetale-cohomology-comparison] to the scheme $W$ and the abelian sheaf $F_W$. It gives $H^q(W_{\\Proet},\\nu_W^{-1}F_W)\\cong H^q(W_{\\Et},F_W)=0$. By the definition of module inverse image in the statement, the underlying abelian sheaf of $\\nu_W^*I_W$ is exactly $\\nu_W^{-1}F_W$: applying inverse image to the scalar action changes no underlying abelian object. Now apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] on $W_{\\Proet}$ to its terminal object and the module $\\nu_W^*I_W$ over $\\Lambda_W$. The same hypotheses from step 1 apply. Hence $H^q(W_{\\Proet},\\nu_W^*I_W)=0$ in the module category. Neither comparison requires finite coefficients, torsion, constructibility, or affineness beyond the chosen affine test objects.",
+   "uses": [
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W (lemma-compare-cohomology), part (1), via Tags 099V and 099U; module agreement is sites-cohomology.tex Tag 03FD"
+   }
+  },
+  {
+   "text": "The isomorphism of step 2 and the vanishing of step 4 give $H^q(W_{\\Proet},M|_W)=0$ for every affine etale $W\\to X$. The concluding implication of part (1) of [det-pe-injective-acyclicity-reduction] therefore gives $R^q\\nu_{X,*}M=0$. Since $q>0$ was arbitrary, this proves the assertion.",
+   "uses": [
+    "det-pe-injective-acyclicity-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W (lemma-higher-direct-images); proetale.tex Tag 099V (lemma-relative-comparison), first paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
   "det-pe-injective-acyclicity-reduction",
-  "sk-thm-pe-indetale-refinement",
-  "lem-weil-pbc-cech-criterion",
-  "lem-weil-pbc-comparison-injective-acyclicity",
-  "lem-weil-pbc-proetale-restriction-injectives"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099V (lemma-relative-comparison), first paragraph, using the existing comparison Tag 099W (lemma-compare-cohomology) and the module/abelian agreement Tag 03FD; the dependency proof of 099W follows 099U"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|comparisonUpperStar|comparisonLowerStar",
+   "results": "10 hits in AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean; read Proetale.lean: site definitions and topology, no comparison acyclicity theorem. Search subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Injective",
+   "results": "0 hits; Loogle reported unknown identifier 'Sheaf'; this pattern was rejected, not evidence of absence.",
+   "date": "2026-10-16",
+   "verdict": "unavailable pattern: unknown identifier"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The higher direct images of the etale to pro-etale comparison pullback of an injective module sheaf vanish",
+   "results": "8 hits: Scheme.Modules.restrictStalkNatIso, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, sheafificationCompPullback, pullbackObjFreeIso, restrictFunctorIsoPullback, Module.ulift_injective_of_injective, pullbackObjUnitToUnit, and CochainComplex.cm5b.instIsStrictlyGEI. These concern module pullbacks, open-immersion stalks or injective module lifts; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of an injective etale sheaf of modules is acyclic for the direct image from the pro-etale site to the etale site",
+   "results": "8 hits on local injectivity of presheaves/module sheafification and the definitions Scheme.smallEtaleTopology and Scheme.etaleTopology; no derived comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|[Aa]cyclic|[Ii]njective",
+   "results": "6 hits, all elementary injectivity of maps in ConstantSheaf.lean, Representability.lean and SmallAffineZariski.lean; no higher comparison theorem. Search subdirectory: AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived direct image for the etale proetale comparison is zero on inverse images of injective sheaves",
+   "results": "8 hits including Functor.isZero_rightDerived_obj_injective_succ and instIsIsoAppToRightDerivedZeroOfInjective, plus local injectivity results. The derived-functor vanishing theorem applies to an injective input, not an inverse image whose injectivity is not asserted. Read RightDerived.lean:110-120 for its resolution computation; no full match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an etale sheaf agrees with the cohomology of its inverse image on the proetale site",
+   "results": "8 hits: Scheme.Etale.forget; Sheaf.cohomologyPresheaf; Scheme.smallEtaleTopology; Scheme.etaleTopology; Sheaf.cohomologyPresheafFunctor; Sheaf.H; Algebra.Etale.formallyEtale; IsEtale.of_comp. Their returned statements give definitions or etale properties, not a cohomology comparison or comparison acyclicity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|Proetale",
+   "results": "10 hits in AlgebraicGeometry/Sites: Proetale.lean and ElladicCohomology.lean. Read Proetale.lean in full: topology/site definitions and elementary properties, no derived comparison acyclicity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -68,5 +188,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-pe-injective-acyclicity",
+  "worker": "stage1",
+  "summary": "Preserved arbitrary discrete commutative coefficients and made the ambient objects and module pullback explicit. Reduced to affine etale test objects using only the reduction node's sheafification and localization assertions; obtained module cohomology vanishing from general ringed-site module/abelian evaluation agreement and the existing abelian etale/pro-etale comparison. Checked all cited statements, universes, coefficient hypotheses, absence of an attachment, and dependency cycles. No new nodes.",
+  "blueprint": "Realizes the first paragraph's affine reduction and restriction of injectives in steps 1-2, and the vanishing conclusion of the second paragraph in steps 3-5. Its two Cech/filtered-colimit passages are reused through the existing split abelian comparison lem-cbc-abelian-etale-proetale-cohomology-comparison (Stacks 099W), whose 099U dependencies carry exactly the ind-etale/Cech argument. The coefficient bridge is 03FD, valid for arbitrary ring sheaves. The imported finite-coefficient module lemma is not applied beyond its stated scope."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-4b03817d3",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-4b03817d3 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, all cited DAG statements, Stacks sources 099U/099V/099W/072W/03FD/079Q/079H, and the recorded searches. The arbitrary-ring module argument is mathematically sound, hypotheses and base-change action are checked, edge cases pass, no new nodes or duplicates exist, and dependency traversal is acyclic. Review written to review.md."
+ }
 }
