@@ -237,5 +237,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-5777c098e (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route. Added the missing étale-origin vanishing-detection citation and argument in step 2; completed new-node metadata. Corrected JSON files and review.md are written. No target or coefficient comparison is weakened or assumed. Inherited amplitude and DAG defects are documented.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleCompleteBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.constructibleComplete_properBaseChange",
+  "file": "lean/Sheaf/Paper/ConstructibleCompleteBaseChange.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "statement": "theorem constructibleComplete_properBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) [IsProper f] [IsProper f'] (N : ℕ) (_hN : 0 < N) (_hAnn : (N : Padic.coefficientExtensionRing l E 1) = 0) (_hNX : IsUnit (N : Γ(X, ⊤))) (_hNY : IsUnit (N : Γ(Y, ⊤))) (_hNX' : IsUnit (N : Γ(X', ⊤))) (_hNY' : IsUnit (N : Γ(Y', ⊤))) (e : ℕ) (_hFibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ObjectProperty.IsTriangulated (IsPbcBoundedConstructibleComplete X l E) ∧ ObjectProperty.IsTriangulated (IsPbcBoundedConstructibleComplete Y' l E) ∧ ∀ [ObjectProperty.IsTriangulated (IsPbcBoundedConstructibleComplete X l E)] [ObjectProperty.IsTriangulated (IsPbcBoundedConstructibleComplete Y' l E)], ∃ (hF : ∀ K : ObjectProperty.FullSubcategory (IsPbcBoundedConstructibleComplete X l E), IsPbcBoundedConstructibleComplete Y' l E ((constructibleCompleteSource f g (pbcPadicCoefficientDatum l E)).obj K.obj)) (hG : ∀ K : ObjectProperty.FullSubcategory (IsPbcBoundedConstructibleComplete X l E), IsPbcBoundedConstructibleComplete Y' l E ((constructibleCompleteTarget g' f' (pbcPadicCoefficientDatum l E)).obj K.obj)), ∃ (_sF : (ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteSource f g (pbcPadicCoefficientDatum l E)) hF).CommShift ℤ) (_sG : (ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteTarget g' f' (pbcPadicCoefficientDatum l E)) hG).CommShift ℤ), @Functor.IsTriangulated _ _ _ _ _ _ (ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteSource f g (pbcPadicCoefficientDatum l E)) hF) _sF _ _ _ _ _ _ _ _ ∧ @Functor.IsTriangulated _ _ _ _ _ _ (ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteTarget g' f' (pbcPadicCoefficientDatum l E)) hG) _sG _ _ _ _ _ _ _ _ ∧ ∃ η : ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteSource f g (pbcPadicCoefficientDatum l E)) hF ≅ ObjectProperty.lift (IsPbcBoundedConstructibleComplete Y' l E) (ObjectProperty.ι (IsPbcBoundedConstructibleComplete X l E) ⋙ constructibleCompleteTarget g' f' (pbcPadicCoefficientDatum l E)) hG, @NatTrans.CommShift _ _ _ _ _ _ η.hom ℤ _ _ _ _sF _sG ∧ ∀ K : ObjectProperty.FullSubcategory (IsPbcBoundedConstructibleComplete X l E), (η.hom.app K).hom = constructibleCompleteExchangeComponent sq (pbcPadicCoefficientDatum l E) K.obj",
+  "by": "NX",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constructibleCompleteSource",
+   "AlgebraicGeometry.Scheme.constructibleCompleteTarget",
+   "AlgebraicGeometry.Scheme.constructibleCompleteExchangeComponent",
+   "AlgebraicGeometry.Scheme.constructibleComplete_properBaseChange"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b918b1f16",
+  "group": "NX",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source statements, all dependencies, hypotheses, conclusions, canonical components, universes, edge cases, docstrings, records and report sections. Both immutable Lean modules compiled cleanly through scompile.py. No fixes required; repository and branch unchanged."
  }
 }
