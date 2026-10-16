@@ -27,57 +27,32 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\Lambda_X$, the constant sheaf of rings. Apply [prop-weil-pbc-proetale-constant-ring-map] to $i$ and $j$: its commutative-coefficient clause says that the particular structure maps $c^i_\\Lambda:i^{-1}\\Lambda_X\\to\\Lambda_Z$ and $c^j_\\Lambda:j^{-1}\\Lambda_X\\to\\Lambda_U$ of [def-weil-proetale-inverse-image] are isomorphisms, preserving constant sections. Thus coefficients in the ringed sequence can be identified with the specified constant coefficients, using these maps rather than an arbitrary ring isomorphism. No qcqs assumption on $X$, constructibility of $\\mathcal F$, or geometric-stalk detection is involved. In the current definition, $c^f_\\Lambda=\\varepsilon_{f,\\Lambda_{\\mathrm{dom}(f)}}\\circ f^{-1}(\\rho^f_\\Lambda)$, with $\\rho^f_\\Lambda$ the sheaf map extending constant sections; this is precisely the adjoint map named by the comparison theorem.",
+   "text": "Use the existing module-valued closed-counit theorem [lem-exc-proetale-closed-fully-faithful], namely AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_counit from WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion. No new affine, mate, continuity, or localization theorem is stated or proved here.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-proetale-inverse-image"
+    "lem-exc-proetale-closed-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf; proetale.tex Tag 09A5, section-morphism; existing constant-ring comparison with its canonical-map clause"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-proetale-ringed-open-closed] with the ring sheaf $A=\\Lambda_X$ and the $A$-module $M=\\mathcal F$. Its short-exact-sequence clause gives $0\\to j_!j^{-1}\\mathcal F\\to\\mathcal F\\to i_*i^{-1}\\mathcal F\\to0$ with the counit and unit maps, where the coefficients on $U,Z$ are $j^{-1}A,i^{-1}A$. Its hypotheses are exactly the closed immersion, its complementary open immersion, and quasi-compactness of $j$ already assumed here. The extra qcqs hypothesis in its last sentence belongs only to its filtered-colimit assertion, which is not used.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; the already-reviewed ringed version states this clause for arbitrary ring sheaves"
-   }
+   "text": "In the same existing source-library module, isZero_upperStar_lowerStar_of_disjoint shows that open restriction of closed direct image vanishes. The range-complement hypothesis supplies its disjointness hypothesis. By the two adjunctions, closed restriction of extension by zero also vanishes, and the counit-unit composite is zero. The existing isIso_of_isIso_upperStar_of_isCompl from that module gives joint detection for the complementary restrictions; package it as JointlyReflectIsomorphisms for their pair functor. This reuses the already proved section-detection argument without copying it.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Identify the functors and the actual arrows. For $f=i,j$, write $c=c^f_\\Lambda$. Under step 1 the module pullback of [def-weil-proetale-inverse-image] has the canonical isomorphism $f^{-1}\\mathcal F\\otimes_{f^{-1}\\Lambda_X}\\Lambda_{\\mathrm{dom}(f)}\\to f^{-1}\\mathcal F$, $m\\otimes b\\mapsto c^{-1}(b)m$, with inverse $m\\mapsto m\\otimes1$. These formulas commute with restrictions and hence define inverse sheaf maps. Direct image is the same sectionwise sheaf, with scalar action through $\\rho^f_{\\Lambda,V}:\\Lambda_X(V)\\to\\Lambda_{\\mathrm{dom}(f)}(u_f(V))$ as specified in the current definition, so this identification also identifies $i_*i^*\\mathcal F$ with the last term of step 2. The definition [def-weil-extension-by-zero] sheafifies exactly the extension-by-zero presheaf specified in the ringed node: the value is the restricted module on an object factoring through $U$, and zero otherwise. Thus the first term is $j_!j^*\\mathcal F$. The counit on this presheaf sends the section over an object factoring through $U$ to that same section of $\\mathcal F$; it is zero on the other presheaf values. Write $q_f:f^{-1}\\mathcal F\\to f^*\\mathcal F$ for $m\\mapsto m\\otimes1$ and $\\theta_f:f^*\\mathcal F\\to f^{-1}\\mathcal F$ for the displayed inverse. The module adjunction unit is $f_*(q_f)\\circ\\eta_{f,\\mathcal F}$, so $f_*(\\theta_f)$ carries it to $\\eta_{f,\\mathcal F}$ because $\\theta_f q_f=\\mathrm{id}$. The module adjunction counit on a sheaf $G$ is given locally by $m\\otimes b\\mapsto b\\,\\varepsilon_{f,G}(m)$; after $\\theta_f$ it is the underlying counit. The scalar compatibility follows from $c^f_\\Lambda=\\varepsilon_f\\circ f^{-1}(\\rho^f_\\Lambda)$, so these formulas use the specified structure maps. For $j$, the restriction identification over $U$ makes the extension-by-zero counit the section map just described. Consequently the two term identifications carry the arrows of step 2 to precisely the counit and unit in the statement. Since the middle identification is the identity and the outer identifications are invertible, monomorphisms, epimorphisms, and image-equals-kernel are preserved: composing with these inverses identifies the kernels and images as subobjects. Epimorphism here is in the sheaf category; no sectionwise surjectivity is asserted. This is the required short exact sequence.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-extension-by-zero",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AE, definition-extension-zero, and Tag 09AH, lemma-ses-associated-to-open, first sentence of proof; elementary coefficient and arrow identification"
-   }
+   "text": "Apply JointlyReflectIsomorphisms.shortExact_iff to the short complex with the specified counit and unit. Closed restriction has zero first term and invertible second arrow, by the closed counit and the left triangle identity. Open restriction has invertible first arrow and zero third term, by full faithfulness of extension by zero and the right triangle identity. ShortComplex.exact_iff_mono and exact_iff_epi prove exactness of these two restrictions. Thus the original complex is short exact; project its monomorphism, epimorphism and composable-arrows exactness fields.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-extension-by-zero",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-exact-sequence",
-  "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-exc-proetale-closed-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "E2",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AH, lemma-ses-associated-to-open: specialization of the existing reviewed ringed theorem, with explicit canonical constant-coefficient identifications"
+  "place": "Tag 09AH; reuse of the existing module-valued closed-counit, disjoint-support and joint-conservativity API, followed by exact restriction and triangle identities. Repair of returned duplicate private lemmas."
  },
  "mathlib_searches": [
   {
@@ -199,10 +174,10 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence",
   "declaration": "AlgebraicGeometry.ProEtale.exact_openClosedSequence",
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenClosedSequence.lean",
-  "statement": "theorem exact_openClosedSequence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Mono ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F) ∧ Epi ((Scheme.proEtaleSheafAdjunction i (ModuleCat.{u + 1} Λ)).unit.app F) ∧ (ComposableArrows.mk₂ ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F) ((Scheme.proEtaleSheafAdjunction i (ModuleCat.{u + 1} Λ)).unit.app F)).Exact",
-  "branch": "newtargets-dag",
-  "by": "NX",
-  "date": "2026-10-15",
+  "statement": "theorem exact_openClosedSequence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]\n    (hU : Set.range j = (Set.range i)ᶜ)\n    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :\n    Mono ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F) ∧\n      Epi ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F) ∧\n      (ComposableArrows.mk₂\n        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F)\n        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F)).Exact",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16",
   "existing": false
  },
  "reviewed_lean": {
@@ -212,5 +187,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, canonical arrows, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py with the local side overlay. No fixes needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T115357-L-2682075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

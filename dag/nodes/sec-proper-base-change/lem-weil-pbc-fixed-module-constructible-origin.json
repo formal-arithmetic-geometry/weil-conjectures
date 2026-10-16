@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-fixed-module-constructible-origin",
+ "kind": "statement",
+ "title": "Fixed-module constructible sheaves have etale origin",
+ "statement": "For any finite commutative ring $\\Lambda$ and scheme X, a fixed-module-valued pro-etale sheaf F is constructible in the source-library sense (a finite global scheme stratification whose restrictions admit finite constant models) if and only if F is isomorphic to $\\nu$_X^*G for a constructible fixed-module-valued etale sheaf G. This is the exact existing declaration in WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf, distinct from the separately attached ringed-coefficient equivalence on the parent node. The notions are [def-weil-pbc-etale-constructible-sheaf], [def-weil-proetale-constructible-sheaf] and [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y and 09AK; fixed-module coefficients and finite global stratifications"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given stratification and use [lem-weil-pbc-comparison-stratified-counit]. Set G=ν_*F and take the counit isomorphism ν^*G≅F.",
+   "uses": [
+    "lem-weil-pbc-comparison-stratified-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain that same stratification. Comparison pullback compatibility [lem-weil-pbc-comparison-pullback] identifies comparison of every stratum restriction of G with the corresponding restriction of F. Transport its finite models through this isomorphism and apply [lem-weil-pbc-comparison-finite-local-constancy-reflection]. The same partition witnesses constructibility of G.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reverse direction uses the existing proved isConstructible_comparisonUpperStar_obj and invariance under isomorphism: comparison preserves the finite constant models on the same finite stratification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-stratified-counit",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y and 09AK; fixed-module coefficients and finite global stratifications; completed Lean proof by E2, 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible proetale sheaf of finite modules descends to an etale sheaf",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyConstantSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*counit|counit.*essImage",
+   "results": "13 hits: Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant etale module sheaves descend along fpqc covering families",
+   "results": "8 hits: CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.lanLightCondSet, CompHausLike.LocallyConstantModule.functor_obj_val, Condensed.lanSheafProfinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, SheafOfModules.QuasicoherentData.rec, SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.mk",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheafIso|fromOverFunctorElementsEquivalence|isIso_counit_app_iff_mem_essImage",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "openClosedShortComplex|essImage.*[Ss]tratif|[Ss]tratif.*essImage",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberConstantSheafIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stratification\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf with finite constant models on a cover has finite geometric stalks",
+   "results": "8 hits: SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The essential image of etale to proetale comparison is closed under finite constructible stratifications",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, AlgebraicGeometry.Scheme.Etale, instEssSurjLightDiagram'LightDiagramToLightFunctor, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-16",
+   "verdict": "No direct geometric comparison theorem; generic adjunction and point-over-site results reused where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+   "place": "Fixed-coefficient proof of the source-library declaration audited on this node",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ConstructibleSheaf.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj",
+  "statement": "theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj [Finite Λ]\n    {T : Scheme.{u}} {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :\n    IsConstructible Λ F ↔\n      ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧\n        Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T115357-L-2682075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T115357-L-2682075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
