@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-cartesian-colimit-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-coefficient adjunction before derived inverse limit; derived enrichment and the discrete-object reduction via Gepner–Haugseng Theorem 5.3.17. Supporting Lemma 5.3.15; middle of the proof of Lemma 5.3.15: the two classifying diagrams have colimits given by Cartesian-edge localizations",
+   "via": [
+    "lem-coef-localization-kan-cartesian-fibration",
+    "lem-coef-localization-cartesian-pullback",
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Colimit of a category-valued diagram by inversion of Cartesian transport",
+ "statement": "Use the universes, quasicategories, coherent functor categories, equivalences and mapping spaces of [def-cbc-enhanced-diagrams-cones], Cartesian fibrations and Cartesian edges of [def-coef-infinity-fibrations], and the classifying equivalence supplied by the opposite of [lem-coef-cocartesian-straightening]. Fix a universe $\\mathcal U$ in which all indexing categories and total categories below are small, and a containing universe for $\\operatorname{Cat}_{\\infty,\\mathcal U}$, the infinity category of $\\mathcal U$-small quasicategories. Its small colimits and internal functor categories are those of [lem-coef-infinity-functor-pushout]. Let $B$ be a small quasicategory, $F:B^{\\mathrm{op}}\\to\\operatorname{Cat}_{\\infty,\\mathcal U}$ a coherent functor, and $p:E\\to B$ a Cartesian fibration classified by $F$. Set $C_F=\\operatorname{colim}_{B^{\\mathrm{op}}}F$. There is a canonical functor $\\ell_p:E\\to C_F$ whose restriction to each fiber is the corresponding leg of the colimit cocone. For every infinity category $T$ in a sufficiently large universe, restriction gives an equivalence\n$$\\ell_p^*:\\operatorname{Fun}(C_F,T)\\simeq\\operatorname{Fun}_{\\mathrm{Cart}(p)}(E,T),$$\nwhere the right side is the full subcategory of functors carrying every $p$-Cartesian edge to an equivalence; the assertion includes all mapping spaces and noninvertible natural transformations. For every functor $u:A\\to B$ between small quasicategories, put $p_u:E_u=A\\times_BE\\to A$, with projection $r:E_u\\to E$. Under classification $p_u$ corresponds to $F\\circ u^{\\mathrm{op}}$. The canonical colimit comparison $c_u:C_{F\\circ u^{\\mathrm{op}}}\\to C_F$ satisfies the natural equivalence\n$$c_u\\ell_{p_u}\\simeq\\ell_p r.$$\nNo colimits in the fibers of $p$ are assumed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.3.4, especially Corollary 3.3.4.3 and its proof via Lemma 3.3.4.1 and Proposition 3.3.4.2; interpretation as localization used in Gepner–Haugseng, 1312.3178v4, proof of Lemma 5.3.15 Read online 2026-10-17; not archived in literature/. No Stacks tag states this infinity-categorical theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-functor-pushout"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Grothendieck|IsLocalization",
+   "results": "{\"t\": \"2026-10-16T21:25:39Z\", \"tool\": \"grep\", \"query\": \"Grothendieck|IsLocalization\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\"], \"digest\": \"bbc5225032ec08d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localize a Cartesian fibration at Cartesian edges to compute colimit of classifying infinity category diagram",
+   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"leansearch\", \"query\": \"Localize a Cartesian fibration at Cartesian edges to compute colimit of classifying infinity category diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.mk\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\"], \"digest\": \"aacb854980a2686b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\"], \"digest\": \"a279e0222c24a4b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of a diagram of infinity categories is the localization of its Cartesian Grothendieck construction at Cartesian morphisms",
+   "results": "{\"t\": \"2026-10-16T21:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of a diagram of infinity categories is the localization of its Cartesian Grothendieck construction at Cartesian morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.fiberwiseColimit_obj\"], \"digest\": \"ce08006091f07e45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy colimit of categories computed by inverting coCartesian transport arrows in their total infinity category",
+   "results": "{\"t\": \"2026-10-16T21:25:59Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy colimit of categories computed by inverting coCartesian transport arrows in their total infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\"], \"digest\": \"1a6bd576d6b4f899\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitCoconeOfFiberwiseCocone|hasColimitsOfShape_grothendieck|fiberwiseColimit",
+   "results": "{\"t\": \"2026-10-16T21:25:59Z\", \"tool\": \"grep\", \"query\": \"isColimitCoconeOfFiberwiseCocone|hasColimitsOfShape_grothendieck|fiberwiseColimit\", \"sub\": \"CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"55\", \"95\", \"107\", \"108\", \"111\"], \"digest\": \"5ddb1124b85b91af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Limits/Shapes/Grothendieck.lean:35-60,175-198 and FiberedCategory/Grothendieck.lean:28-70. The hits compute ordinary colimits of a functor on an ordinary Grothendieck category or construct ordinary Cartesian lifts. They do not identify a Cat-infinity colimit with localization of a quasicategorical total category. The second semantic phrasing returned homotopy-category and ordinary Kan-extension results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of the Grothendieck construction at transport morphisms computes the colimit of a functor valued in infinity categories",
+   "results": "{\"t\": \"2026-10-16T21:50:10Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of the Grothendieck construction at transport morphisms computes the colimit of a functor valued in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_ι_comp\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grotendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\"], \"digest\": \"cd3b375be52e6430\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "localization|colimit",
+   "results": "{\"t\": \"2026-10-16T21:50:37Z\", \"tool\": \"grep\", \"query\": \"localization|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T21:50:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\"], \"digest\": \"8ecc599d4e57ab3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader search. LeanFinder results are ordinary Grothendieck colimits; read Limits/Shapes/Grothendieck.lean:35-60, where C, H and fibers are ordinary categories. Loogle returns only sheafification as an ordinary localization. The grep over AlgebraicTopology/Quasicategory has zero hits. None states the Cartesian-edge localization theorem for infinity categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-localization-kan-cartesian-fibration",
+  "date": "2026-10-17",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

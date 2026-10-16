@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-monoidal-block-projection-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "General monoidal-Yoneda tool for the object-space-fibration sublemma in the inherited enriched-localization chain for proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent active operations and inert projections, before presheaf extension.",
+   "via": [
+    "lem-coef-monoidal-yoneda-embedding",
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Planar operation coherence with specified projection pullbacks",
+ "statement": "Use quasicategories, coherent functors, transformations, and mapping spaces of [def-cbc-enhanced-diagrams-cones], and the nonsymmetric monoidal convention of [def-coef-monoidal-infinity-category], and the infinity category $\\operatorname{Cat}_\\infty$ of infinity categories together with cocartesian straightening and unstraightening over $N(\\Delta^{\\mathrm{op}})$ of [lem-coef-cocartesian-straightening], in fixed universes with an auxiliary universe for categories of categories. A unital planar operation system on an infinity category $A$ consists of functors $t_r:A^r\\to A$ for $r\\geq0$, with $A^0=*$ and $t_1\\simeq\\mathrm{id}_A$, and homotopy coherent substitution equivalences\n$$t_k(t_{r_1},\\ldots,t_{r_k})\\simeq t_{r_1+\\cdots+r_k}.$$\nHere the inputs to the $t_{r_i}$ are consecutive disjoint lists, and the coherences mean all equivalences and higher compatibility simplices indexed by finite planar rooted trees, contractions of inner edges, grafting, and insertion or removal of unary identity vertices. Nullary vertices are allowed and specify the unit; an $r$-input tree uses each of its $r$ ordered external inputs exactly once. Every coherence for an $r$-input tree is a transformation, or higher simplex of transformations, between functors $A^r\\to A$, before any unused external variables are added. Compatibility with grafting is included as part of these data.\n\nMonoidal infinity categories with underlying category $A$ can be encoded, up to equivalence over $N(\\Delta^{\\mathrm{op}})$, by such unital planar operation systems. Their classifying diagrams admit the following coherent normal form. The fiber at $[n]$ is $A^n$. For $\\alpha:[n]\\to[m]$ in $\\Delta^{\\mathrm{op}}$, put $a=\\alpha^{\\mathrm{op}}:[m]\\to[n]$; the $i$th output of its transport is $t_{a(i)-a(i-1)}$ on the consecutive input list $a(i-1)+1,\\ldots,a(i)$, pulled back along that coordinate projection. For any chain of base arrows and a chosen final output, retain just the rooted planar tree of intermediate operations feeding that output. The entire substitution comparison and each of its higher compatibilities is the pullback of the corresponding coherence of this tree along the projection onto its ordered external input list. This is specified projection-pullback data, compatible with all faces, degeneracies, and further block substitutions, not merely a claim that the two endpoint functors happen to factor through a projection. It includes an empty external list, with domain $*$.\n\nConversely a unital planar operation system gives a coherent normal-form diagram $N(\\Delta^{\\mathrm{op}})\\to\\operatorname{Cat}_\\infty$ by these formulas. Under cocartesian unstraightening it is a monoidal infinity category in the stated convention. A functor $f:A\\to B$, with coherent equivalences $f t_r\\simeq u_r f^r$ compatible with the entire planar substitution system, induces a coherent transformation of these diagrams with component $f^n$, hence a functor of their unstraightenings preserving all cocartesian edges. No limits or colimits of $A$ or $B$ are assumed. No full-faithfulness assertion about precomposition along a coordinate projection is made.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Sections 2.4.1-2.4.2 (cartesian structures and monoid objects: a map in the cartesian structure over a map of finite index sets is the tuple of its components on the preimage blocks, which is the projection-pullback form stated here) and sections 4.1.2-4.1.3: Construction 4.1.2.9 (Cut), Proposition 4.1.2.11, Theorem 4.1.3.14 and Proposition 4.1.3.19; planar active-operation/inert-projection normal form, here formulated explicitly with all projection-pullback coherence data by the agent. The source is not archived in literature; WANTED in report.md. No Stacks tag states this infinity-categorical coherence result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-straightening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonsymmetric monoidal infinity category can be encoded by coherent planar trees and block substitutions whose outputs and all homotopies depend only on the selected interval of inputs",
+   "results": "{\"t\": \"2026-10-16T21:27:45Z\", \"tool\": \"leanfinder\", \"query\": \"A nonsymmetric monoidal infinity category can be encoded by coherent planar trees and block substitutions whose outputs and all homotopies depend only on the selected interval of inputs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AugmentedSimplexCategory.instMonoidalCategory\", \"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"CategoryTheory.Nerve.strictSegal\", \"AugmentedSimplexCategory.tensorObj\", \"AugmentedSimplexCategory.tensorObjOf\", \"CategoryTheory.FreeMonoidalCategory\", \"CategoryTheory.FreeMonoidalCategory.normalizeObj\", \"AugmentedSimplexCategory.tensorHom\"], \"digest\": \"5d978126a18319d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative infinity operad unital planar tree coherence is equivalent to a monoidal cocartesian fibration over the opposite simplex category",
+   "results": "{\"t\": \"2026-10-16T21:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"Associative infinity operad unital planar tree coherence is equivalent to a monoidal cocartesian fibration over the opposite simplex category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.SimplicialCategory.assoc\", \"SSet.associator_hom_app_apply\", \"AugmentedSimplexCategory.associator\", \"SSet.associator_inv_app_apply\", \"SSet.ι₀_comp_assoc\", \"SSet.ι₁_comp_assoc\", \"AugmentedSimplexCategory.inr_comp_inl_comp_associator_assoc\", \"AugmentedSimplexCategory.inl_comp_inl_comp_associator_assoc\"], \"digest\": \"dd6331ba45458ead\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-16T21:27:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  },
+  {
+   "tool": "grep",
+   "query": "associahed|planar.*tree|nonsymmetric.*operad|block.*coheren",
+   "results": "{\"t\": \"2026-10-16T21:27:50Z\", \"tool\": \"grep\", \"query\": \"associahed|planar.*tree|nonsymmetric.*operad|block.*coheren\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent nonsymmetric monoidal structures are encoded by planar trees with grafting contraction and unit coherences",
+   "results": "{\"t\": \"2026-10-16T21:27:51Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent nonsymmetric monoidal structures are encoded by planar trees with grafting contraction and unit coherences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategoryStruct\", \"Mathlib.Tactic.Monoidal.tacticMonoidal_coherence\", \"CategoryTheory.Mon_\", \"Mathlib.Tactic.Coherence.tacticMonoidal_coherence\", \"CategoryTheory.MonoidalCategory\", \"CategoryTheory.MonoidalCategoryStruct.noConfusionType\", \"CategoryTheory.MonoidalCategory.casesOn\", \"CategoryTheory.MonoidalCategory.recOn\"], \"digest\": \"261295baebae718d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source-read hits are ordinary MonoidalCategoryStruct/MonoidalCategory and free ordinary monoidal coherence (Mathlib/CategoryTheory/Monoidal/Category.lean:80-100; Free/Coherence.lean:10-30), the ordinal-sum monoidal category (AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:12-27), or simplicial-set associators. None states equivalence of homotopy coherent planar operation systems with monoidal infinity fibrations, or the specified projection-pullback compatibility simplices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-monoidal-yoneda-embedding",
+  "date": "2026-10-17",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

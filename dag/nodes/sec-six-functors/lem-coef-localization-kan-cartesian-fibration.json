@@ -29,9 +29,102 @@
   "def-coef-infinity-fibrations",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First factor $W\\to\\Delta^0$ in the universe-relative functorial Kan model structure of [lem-coef-kan-quillen-right-proper] as a trivial cofibration $W\\to\\kappa W$ followed by a Kan fibration $\\kappa W\\to\\Delta^0$. This supplies the groupoid completion in the same universe. Work in a universe containing $W,\\kappa W,\\mathcal F$ and the chosen target; use a further universe for categories of diagrams. Thus the smallness hypotheses of classification and colimit theorems do not impose an extra bound on $\\mathcal F$. For a quasicategory $\\mathcal D$ and vertices $x,y$, [lem-coef-infinity-pinch-comparison] gives natural homotopy equivalences $\\operatorname{Map}_{\\mathcal D}(x,y)\\simeq U_{\\mathcal D}(x,y)$ and $\\operatorname{Map}_{\\mathcal D^{\\mathrm{op}}}(y,x)\\simeq U_{\\mathcal D^{\\mathrm{op}}}(y,x)$; the latter arrow space is $U_{\\mathcal D}(x,y)^{\\mathrm{op}}$ by the isomorphism $\\Delta^1\\cong(\\Delta^1)^{\\mathrm{op}}$, and reversing barycentric coordinates (step 2) identifies its realization with that of $U_{\\mathcal D}(x,y)$. These identifications are natural in simplicial functors, so mapping-space squares in $\\mathcal F^{\\mathrm{op}}$ over $(\\kappa W)^{\\mathrm{op}}$ are the opposite squares of $\\mathcal F$ over $\\kappa W$. Hence the opposite of [lem-coef-infinity-cocartesian-mapping-criterion] identifies the mapping-pullback Cartesian condition in the statement with the horn condition of [def-coef-infinity-fibrations]. Applying [lem-coef-cocartesian-straightening] to opposites classifies $\\pi$ by $F:(\\kappa W)^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$. Explicitly apply cocartesian straightening to $\\mathcal F^{\\mathrm{op}}\\to(\\kappa W)^{\\mathrm{op}}$ and then take the opposite of each value and transport. Its base-change clause classifies $\\pi'$ by $F\\circ\\eta^{\\mathrm{op}}$. The base-change clause of [lem-coef-cocartesian-straightening], applied to opposites, also identifies the simplicial pullback with the infinity-categorical pullback. By [lem-coef-relative-marked-anodyne-calculus] this pullback is Cartesian and its Cartesian edges are precisely those mapping to $\\pi$-Cartesian edges.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pinch-comparison",
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: classifying functors of the fibration and its pullback; Theorem 3.2.0.1 and Remark 2.4.1.12; supporting Higher Topos Theory results as specified"
+   }
+  },
+  {
+   "text": "The simplicial opposite reverses the barycentric coordinates of every geometric simplex; these reversals identify the realizations of a simplicial set and its opposite and commute with realization of maps. Consequently $u=\\eta^{\\mathrm{op}}:A=W^{\\mathrm{op}}\\to K=(\\kappa W)^{\\mathrm{op}}$ is a weak homotopy equivalence and $K$ is Kan. For $k\\in K$, apply [lem-coef-space-path-fibration-replacement] to $\\{k\\}\\to K$: the source-fixed path space $P_k=\\{k\\}\\times_{K,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,K)$ has a Kan fibration $\\operatorname{ev}_1:P_k\\to K$ and the constant-path inclusion $\\Delta^0\\to P_k$ is a weak homotopy equivalence. Right properness in [lem-coef-kan-quillen-right-proper] now gives a weak homotopy equivalence $P_k\\times_K A\\to P_k$, as the pullback of $u$ along that Kan fibration. Thus $P_k\\times_K A$ is weakly contractible. This is exactly the arrow-comma model $(k\\downarrow u)$ in [lem-coef-infinity-cofinality-space-test], whose implication (3) to (1) says restriction takes every colimiting cocone to a colimiting cocone. Apply it to $F:K\\to\\operatorname{Cat}_\\infty$ in the enlarged universe; $\\operatorname{Cat}_\\infty$ has small colimits by [lem-coef-infinity-functor-pushout], so $F$ and $Fu$ have colimit cocones, and the colimit cocone of $F$ restricts to a colimit cocone on $Fu$. Hence the canonical comparison $c:\\operatorname{colim}_{W^{\\mathrm{op}}}(F\\circ\\eta^{\\mathrm{op}})\\to\\operatorname{colim}_{(\\kappa W)^{\\mathrm{op}}}F$ is an equivalence. The comma-contractibility calculation is a direct application of the two cited path-space/model-structure statements and needs no new cofinality node.",
+   "uses": [
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-infinity-functor-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: cofinality and equality of colimits; Corollary 4.1.2.6, Theorem 4.1.3.1 and Proposition 4.1.1.8; supporting Higher Topos Theory results as specified"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cartesian-colimit-localization] to $\\pi$ and $\\pi'$. Write $L=\\operatorname{colim}F$ and $L'=\\operatorname{colim}(F\\circ\\eta^{\\mathrm{op}})$. It supplies $\\ell:\\mathcal F\\to L$ and $\\ell':\\mathcal F'\\to L'$ localizing at the respective Cartesian edges, with the whole functor-category universal properties. If $r:\\mathcal F'\\to\\mathcal F$ is the projection, the natural comparison is $c\\ell'\\simeq\\ell r$. This fixes the actual projection in the localization comparison; it is stronger than an unrelated equivalence between two abstract colimit objects.",
+   "uses": [
+    "lem-coef-cartesian-colimit-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: colimit of each classifying diagram is its Cartesian-edge localization; Corollary 3.3.4.3; supporting Higher Topos Theory results as specified"
+   }
+  },
+  {
+   "text": "Use the associative and unital mapping-space composition classes and their equivalence-edge characterization from [lem-coef-infinity-mapping-composition]. For an edge $a:x\\to y$ of $\\mathcal F$, postcomposition by $\\pi(a)$ has postcomposition by an inverse edge as a homotopy inverse on every base mapping space, because $\\kappa W$ is Kan: the two outer horns in dimension two give left and right homotopy inverses of any edge. If $a$ is Cartesian, its defining homotopy-pullback square therefore makes $\\operatorname{Map}_{\\mathcal F}(z,x)\\to\\operatorname{Map}_{\\mathcal F}(z,y)$ an equivalence for every $z$. Taking $z=y$ produces $b:y\\to x$ with $ab\\simeq1_y$; taking $z=x$ and using injectivity on components then gives $ba\\simeq1_x$. Thus $a$ is an equivalence. Conversely if $a$ is an equivalence, both horizontal maps of this square are equivalences, so the square is a homotopy pullback. Hence $\\mathrm{Cart}(\\pi)=\\operatorname{Eq}(\\mathcal F)$. The localization $\\ell$ of step 3 is an equivalence: every functor already inverts equivalences. More explicitly its universal property with target $\\mathcal F$ gives $h:L\\to\\mathcal F$ with $h\\ell\\simeq1$; full faithfulness of restriction with target $L$ gives $\\ell h\\simeq1$ after precomposing by $\\ell$. The inverse criterion here is the homotopy-category definition of equivalence in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: Cartesian edges over a Kan base are exactly equivalences; the mapping-space proof of Proposition 2.4.1.5; supporting Higher Topos Theory results as specified"
+   }
+  },
+  {
+   "text": "By the base-change edge assertion of [lem-coef-relative-marked-anodyne-calculus], an edge $a'$ of $\\mathcal F'$ is $\\pi'$-Cartesian exactly when $r(a')$ is $\\pi$-Cartesian. Step 4 identifies the latter condition with $r(a')$ being an equivalence in $\\mathcal F$. Thus the system inverted by $\\ell'$ in step 3 is exactly the system requested in the statement, with no extra requirement that the image edge in $W$ be an equivalence.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: last sentence, identification of edges in the pullback; Remark 2.4.1.12 and Remark 2.4.2.13; supporting Higher Topos Theory results as specified"
+   }
+  },
+  {
+   "text": "For every target $\\mathcal T$, precomposition along the equivalences $c:L'\\to L$ of step 2 and $\\ell:\\mathcal F\\to L$ of step 4 gives equivalences of functor infinity categories. The natural equivalence $c\\ell'\\simeq\\ell r$ of step 3 identifies their composites with restriction $r^*$. The universal property of $\\ell'$ therefore identifies $r^*$ with the full subcategory of functors on $\\mathcal F'$ inverting the system in step 5. Since the universal property in [lem-coef-cartesian-colimit-localization] is for whole functor categories, this includes noninvertible transformations and every mapping space, as required.",
+   "uses": [
+    "lem-coef-cartesian-colimit-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.15, proof: assemble the localization universal property; supporting Higher Topos Theory results as specified"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pinch-comparison",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-cartesian-colimit-localization",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Lemma 5.3.15, proof read online, with mapping-space details and explicit naturality of the colimit comparison; archive WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -179,10 +272,45 @@
    "results": "{\"t\": \"2026-10-16T20:53:21Z\", \"tool\": \"leanfinder\", \"query\": \"A fibered quasicategory over the classifying space of W is recovered by inverting the Cartesian arrows in its restriction to W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.canonical\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"CategoryTheory.Nerve.quasicategory\", \"HasFibers.fiber_factorization\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift\", \"HasFibers.inducedMap\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\"], \"digest\": \"d0382cd9118bba7e\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading inspected the actual hits and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:39-61, CategoryTheory/FiberedCategory/Grothendieck.lean:35-83, and AlgebraicTopology/Quasicategory/Nerve.lean:29-33. Exponentiability is an assumption for ordinary categorical slices; the ordinary Grothendieck construction and the fact that ordinary nerves are quasicategories do not assert either infinity-categorical localization or preservation of arbitrary coherent pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian fibration over groupoid completion is localization of its pullback",
+   "results": "{\"t\": \"2026-10-16T21:23:11Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian fibration over groupoid completion is localization of its pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.groupoidOfElements\"], \"digest\": \"1188c18d0df7fdec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroupoidOfCategory.lean:43-80,146-157, Localization/Predicate.lean:43-59, FiberedCategory/Grothendieck.lean:28-70. All candidate types concern ordinary categories. Neither ordinary groupoid localization nor ordinary Cartesian lifts supply the higher functor-category universal property for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FreeGroupoid\", \"IsLocalization\"",
+   "results": "{\"t\": \"2026-10-16T21:23:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FreeGroupoid\\\", \\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\"], \"digest\": \"f49b9b36b7b94acc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroupoidOfCategory.lean:43-80,146-157, Localization/Predicate.lean:43-59, FiberedCategory/Grothendieck.lean:28-70. All candidate types concern ordinary categories. Neither ordinary groupoid localization nor ordinary Cartesian lifts supply the higher functor-category universal property for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "CartesianFibration|groupoid.completion|cartesian.fibration",
+   "results": "{\"t\": \"2026-10-16T21:23:11Z\", \"tool\": \"grep\", \"query\": \"CartesianFibration|groupoid.completion|cartesian.fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroupoidOfCategory.lean:43-80,146-157, Localization/Predicate.lean:43-59, FiberedCategory/Grothendieck.lean:28-70. All candidate types concern ordinary categories. Neither ordinary groupoid localization nor ordinary Cartesian lifts supply the higher functor-category universal property for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of infinity category by Cartesian edges of a fibration over a space",
+   "results": "{\"t\": \"2026-10-16T21:23:12Z\", \"tool\": \"leansearch\", \"query\": \"Localization of infinity category by Cartesian edges of a fibration over a space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.MorphismProperty.Localization\", \"CategoryTheory.MorphismProperty.HasLocalization.hD\", \"CategoryTheory.Localization.groupoid\", \"CategoryTheory.MorphismProperty.HasLocalization.D\", \"HasFibers.inducedMap\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization\"], \"digest\": \"a512aaa2525bb898\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroupoidOfCategory.lean:43-80,146-157, Localization/Predicate.lean:43-59, FiberedCategory/Grothendieck.lean:28-70. All candidate types concern ordinary categories. Neither ordinary groupoid localization nor ordinary Cartesian lifts supply the higher functor-category universal property for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Groupoidification of an infinity category and universal localization after pullback of a locally constant family of categories",
+   "results": "{\"t\": \"2026-10-16T21:25:58Z\", \"tool\": \"leanfinder\", \"query\": \"Groupoidification of an infinity category and universal localization after pullback of a locally constant family of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeGroupoid.strictUniversalPropertyFixedTarget\", \"CategoryTheory.FreeGroupoid.liftNatIso\", \"CategoryTheory.Grpd.free\", \"CategoryTheory.FreeGroupoid.lift\", \"CategoryTheory.FreeGroupoid.functorEquiv\", \"CategoryTheory.FreeGroupoid.functorEquiv_apply\", \"CategoryTheory.FreeGroupoid.map\", \"CategoryTheory.groupoidOfElements\"], \"digest\": \"d5d1920f076bc160\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FreeGroupoidOfCategory.lean:43-80,146-157, Localization/Predicate.lean:43-59, FiberedCategory/Grothendieck.lean:28-70. All candidate types concern ordinary categories. Neither ordinary groupoid localization nor ordinary Cartesian lifts supply the higher functor-category universal property for arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-localization-cartesian-pullback",
@@ -190,5 +318,21 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localization-kan-cartesian-fibration",
+  "worker": "stage1",
+  "summary": "Followed the classifying-diagram/cofinal-colimit proof of Gepner–Haugseng Lemma 5.3.15. Reused straightening, base-change, mapping composition and path-space/right-properness inputs. Comma contractibility is proved directly and finality uses the existing arrow-comma criterion. Added only the general Cartesian-edge colimit formula as a statement-only node. Preserved the statement, the actual projection and the full functor-category conclusion. Second reading removed the redundant cofinality node; no project Lean attachment or Mathlib match.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-coefficient adjunction before derived inverse limit; derived enrichment and the discrete-object reduction via Gepner–Haugseng Theorem 5.3.17. Supporting Lemma 5.3.15: first classification sentence, cofinality sentence, two colimit localizations, and the final identification of inverted arrows. This is below the fixed unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-51ce77523",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-51ce77523 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-cartesian-colimit-localization, the statements of all cited nodes, the parent, and the unit record. Sources checked: Gepner–Haugseng 1312.3178v4, text extracted from the PDF (Def 5.3.11, Lemma 5.3.15 and its full proof, Prop 5.3.16), and HTT pp. 217–219 (Lemma 3.3.4.1, Prop 3.3.4.2, Cor 3.3.4.3). The item statement matches GH 5.3.15 hypothesis by hypothesis and is unchanged; nothing is weakened. Step checks: (1) straightening applied to opposites, its base-change clause, and the marked-calculus edge clause give what the step says; (2) path-space replacement plus right properness gives the comma (k↓u) exactly as defined in cofinality-space-test (3), which implies finality; (3) the new node supplies ℓ, ℓ' and cℓ'≃ℓr with the actual projection; (4) over a Kan base, Cartesian edges are exactly the equivalences, shown with explicit inverses via mapping-composition; (5) the edges of π' are those mapping to equivalences in F; (6) the functor-category equivalences compose to r^*. The new node is true (HTT 3.3.4.3 in Cartesian-equivalence form gives the universal property; naturality via 3.3.4.1). Small cases pass: empty base, point, Δ^1 giving F(0) (variance check), constant fiber. rg over the whole DAG found no duplicate (grothendieck-limits-colimits, fibre-localization, section-colimits, marked saturation, parent pullback all differ). It is not a restatement of the item. B1–B9 hold. The route stays in unit sk-prop-sf-biduality-general; no tool_uses are needed; no SGA. Removing the cofinality node at second reading was correct. Repairs in fixes/dag/nodes/sec-six-functors/lem-coef-localization-kan-cartesian-fibration.json: step 1 now cites lem-coef-infinity-pinch-comparison for comparing mapping spaces of opposites (right-pinched mapping spaces are not self-dual); step 2 now cites lem-coef-infinity-functor-pushout for the existence of colimits in Cat∞; proof_deps recomputed. The graph stays acyclic.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -31,9 +31,109 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $J=\\varnothing$, both products are terminal simplicial sets and the displayed map is the identity. Restriction along an identity is the identity on every functor category, so the required localization property holds. For arbitrary $J$, put $\\mathcal A=\\prod_j\\mathcal A_j$ and define $C,W$ coordinatewise. Its initial object is $(0_j)$. Composition, isomorphisms, retracts and two-out-of-three are checked in each coordinate. Choose the stated factorization in every coordinate to factor an arrow of $\\mathcal A$. For a pushout along $(c_j)\\in C$, take the pushouts in every $\\mathcal A_j$: giving a map from their tuple is exactly giving compatible maps in each coordinate, so this is a pushout. Its new leg lies in $C$, and in $C\\cap W$ if the old leg does, by the hypotheses. Thus $\\mathcal A$ has the same all-cofibrant Brown axioms. These simultaneous choices use ordinary choice on the small indexing set, not a functorial factorization or coproducts within any $\\mathcal A_j$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1, first assertion, dualized"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-brown-fibrant-localization-pullbacks] to $\\mathcal A^{op}$ with fibrations $C^{op}$ and weak equivalences $W^{op}$, and likewise to each $\\mathcal A_j^{op}$. Its terminal, pullback and weak-equivalence/fibration factorization assumptions are exactly the opposites of the axioms just verified. Taking opposites gives a localization $q:N\\mathcal A\\to L$ with finite coherent colimits, carrying $0$ and cofibration pushouts to initial objects and pushouts. It gives the same assertions for the given $q_j:N\\mathcal A_j\\to L_j$: two entire-functor-category localizations are equivalent by factoring each through the other and using full faithfulness to identify the composites with the identities. Taking opposites respects localization because $\\operatorname{Fun}(U^{op},V)\\cong\\operatorname{Fun}(U,V^{op})^{op}$, and this identification also takes the full subcategories inverting the specified arrows to each other. Equivalences preserve these cones because the induced maps on mapping spaces are equivalences by [lem-cbc-enhanced-functor-cone-calculus]; apply the mapping-space characterization of a limiting cone and its dual to the quasi-inverse.",
+   "uses": [
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 and Corollary 7.5.20, dualized; Definition 7.1.2 for uniqueness and opposites"
+   }
+  },
+  {
+   "text": "Set $\\mathcal P=\\prod_j L_j$. It is a quasicategory by choosing each inner-horn filler coordinatewise. Internal homs, right-pinched mapping spaces and the comma cocone construction in [def-cbc-enhanced-diagrams-cones] commute with this product by their displayed degreewise formulas. For a finite coherent diagram into $\\mathcal P$, choose a colimiting cocone in each $L_j$. Its tuple is colimiting: the mapping space from this tuple cocone to any cocone is the product of the corresponding contractible Kan mapping spaces. To check contractibility of this possibly infinite product, each map from a factor to the point is a trivial Kan fibration, hence lifts every boundary inclusion by [lem-coef-kan-quillen-right-proper]; choose these fillers coordinatewise. The product therefore also lifts all boundary inclusions, including dimension zero, and is a trivial Kan fibration to the point. Kan properties of the cocone mapping spaces are supplied by [lem-cbc-enhanced-functor-cone-calculus]. This proves that $\\mathcal P$ has finite coherent colimits and that the product of the initial objects or cofibration pushout cocones in step 2 is again an initial object or pushout cocone.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1, exactness of the product of localization functors; elementary coordinatewise cone calculation"
+   }
+  },
+  {
+   "text": "The functor $T=\\prod_jq_j:N\\mathcal A\\to\\mathcal P$ inverts $W$, since inverses and their two triangle simplices can be chosen coordinatewise. Its localization factorization is $F:L\\to\\mathcal P$ with a specified coherent equivalence $Fq\\simeq T$. Steps 2 and 3 show that $T$ preserves the initial object and every pushout along $C$. All the hypotheses of [lem-coef-brown-right-exact-extension] now hold for $\\mathcal A,L,\\mathcal P,T$, so $F$ preserves finite coherent colimits.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-brown-right-exact-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1 and Proposition 7.5.6 (last assertion), dualized"
+   }
+  },
+  {
+   "text": "We prove $F$ conservative without assuming any $W_j$ saturated. By essential surjectivity and left fractions in [lem-coef-brown-left-fractions] for $\\mathcal A$, it suffices to consider $\\alpha=[q(s)]^{-1}[q(f)]$ from $qX$ to $qY$, where $f:X\\to Z$ and $s:Y\\to Z$ lies in $C\\cap W$. If $F(\\alpha)$ is invertible, every $q_j(f_j)$ is invertible. The localized-retraction clause of that same node gives $k_j:Z_j\\to U_j$ in $C_j$ with $k_jf_j\\in W_j$. Then $q_j(k_j)$ is invertible, so a second application gives $l_j:U_j\\to V_j$ in $C_j$ with $l_jk_j\\in W_j$. Assemble $k,l$ in $\\mathcal A$. The maps $q(kf)$ and $q(lk)$ are invertible, since their strict maps belong to $W$. In $hL$, $q(k)$ has right inverse $q(f)q(kf)^{-1}$ and left inverse $q(lk)^{-1}q(l)$; these inverses coincide by multiplying their defining equations. Thus $q(k)$ and then $q(f)$ are invertible. So is $\\alpha$. An edge of a quasicategory is an equivalence exactly when its homotopy-category class is invertible: choose an edge representing the inverse class, represent the two composite equalities by paths to the identity in the Kan mapping spaces, and use inner-horn fillers to insert these homotopies into the composition triangles, obtaining the two inverse-triangle witnesses of the definition. This proves conservativity for every edge, after conjugating its endpoints by equivalences to objects in $q\\mathcal A$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-brown-left-fractions",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1, conservativity argument using the dual of Corollary 7.5.19 and left fractions"
+   }
+  },
+  {
+   "text": "We verify left App 2 for $F$. First take an arrow $\\psi:T(X)\\to y$ in $\\mathcal P$. For each $j$, essential surjectivity in [lem-coef-brown-left-fractions] supplies an equivalence $a_j:y_j\\to q_jY_j$. Represent $[a_j\\psi_j]$ as $[q_j(s_j)]^{-1}[q_j(f_j)]$ with $f_j:X_j\\to Z_j$ and $s_j:Y_j\\to Z_j$ in $C_j\\cap W_j$. Put $Z=(Z_j)$, $f=(f_j)$ and $e_j=q_j(s_j)a_j$. Each $e_j$ is an equivalence and $[q_j(f_j)]=[e_j\\psi_j]$. These equalities assemble into an equality in $h\\mathcal P$: in each coordinate Kan mapping space, compose and reverse a finite edge path using horn fillers to obtain one edge between the two representatives, and take the tuple of those edges. No common bound on the lengths of the original coordinate edge paths is required. Consequently $T(f)$ equals $e\\psi$ there for $e=(e_j):y\\to T(Z)$. For an arbitrary $x\\in L$, choose an equivalence $a:x\\to qX$ using the same node. Write $\\theta:Fq\\simeq T$ for the specified coherent equivalence and set $b=\\theta_X F(a):F(x)\\to T(X)$. Given $\\psi:F(x)\\to y$, apply the construction to $\\psi b^{-1}$, obtaining $f:X\\to Z$ and an equivalence $e_T:y\\to T(Z)$ with $[T(f)]=[e_T\\psi b^{-1}]$. Set $u=q(f)a$ and $e=\\theta_Z^{-1}e_T:y\\to F(qZ)$. Naturality of $\\theta$ gives, in $h\\mathcal P$, $[F(u)]=[\\theta_Z^{-1}T(f)\\theta_XF(a)]=[\\theta_Z^{-1}e_T\\psi b^{-1}b]=[e\\psi]$. Thus the approximation property holds for all objects and arrows, with the comparison components and their directions specified.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-brown-left-fractions",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1, App 2 argument; Example 7.6.4 and Definition 7.6.1, dualized"
+   }
+  },
+  {
+   "text": "The source $L$ and target $\\mathcal P$ have finite coherent colimits by steps 2 and 3; $F$ preserves them by step 4, is conservative by step 5 and satisfies left App 2 by step 6. Hence [lem-coef-finite-colimit-approximation] makes $F$ an equivalence of quasicategories. For any quasicategory $\\mathcal D$, precomposition with $F$ is an equivalence $\\operatorname{Fun}(\\mathcal P,\\mathcal D)\\simeq\\operatorname{Fun}(L,\\mathcal D)$: precomposition with a coherent quasi-inverse supplies its inverse and the unit and counit. Composing with $q^*$ identifies this entire functor category with the full subcategory of $\\operatorname{Fun}(N\\mathcal A,\\mathcal D)$ inverting $W$. Under $Fq\\simeq T$, this composite is precisely restriction along $\\prod_jq_j$. Finally $N\\mathcal A=\\prod_jN\\mathcal A_j$ degreewise because a functor $[n]\\to\\prod_j\\mathcal A_j$ is exactly a tuple of such functors. This is the claimed localization with its specified restriction functor.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-finite-colimit-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.7.1, last sentence; Theorem 7.6.10 and Definition 7.1.2, dualized"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-brown-fibrant-localization-pullbacks",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-brown-right-exact-extension",
+  "lem-coef-brown-left-fractions",
+  "lem-coef-finite-colimit-approximation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Dualized argument of Proposition 7.7.1, with the conservativity calculation and coordinate cone argument expanded explicitly. Source read online; no copy is archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +177,46 @@
    "results": "{\"t\": \"2026-10-16T20:38:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category of cofibrant objects, the localization of a product or a finite direct functor category is the corresponding infinity functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\"], \"digest\": \"330f20e2dc02c624\"}",
    "date": "2026-10-16",
    "verdict": "No match on second reading: CofibrantObject.factorsThroughLocalization at ModelCategory/CofibrantObjectHomotopy.lean:104-112 and localizerMorphism in DerivabilityStructureCofibrant.lean are ordinary model-category localization assertions; neither states an arbitrary-product nor a coherent finite direct diagram comparison for Brown categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary products of Brown cofibration categories commute with infinity categorical localization",
+   "results": "{\"t\": \"2026-10-16T21:25:44Z\", \"tool\": \"leanfinder\", \"query\": \"Arbitrary products of Brown cofibration categories commute with infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"f202c243271aa097\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Mathlib/CategoryTheory/Localization/Pi.lean:31-35 assumes Finite J and ordinary category localization; CofibrantObjectHomotopy.lean:104-125 assumes a model category and ordinary homotopy-category localization. Neither gives arbitrary-product entire-coherent-functor-category localization under Brown axioms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"pi\"",
+   "results": "{\"t\": \"2026-10-16T21:25:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"pi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.epi\", \"IsLocalization.tensorProductEquivOfMapIncludeRight\", \"IsLocalization.tensorProductEquivOfMapIncludeRight_tmul\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\"], \"digest\": \"12fbfeeec9e15667\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Mathlib/CategoryTheory/Localization/Pi.lean:31-35 assumes Finite J and ordinary category localization; CofibrantObjectHomotopy.lean:104-125 assumes a model category and ordinary homotopy-category localization. Neither gives arbitrary-product entire-coherent-functor-category localization under Brown axioms."
+  },
+  {
+   "tool": "grep",
+   "query": "locali[sz].*pi|pi.*locali[sz]|product.*locali[sz]",
+   "results": "{\"t\": \"2026-10-16T21:25:43Z\", \"tool\": \"grep\", \"query\": \"locali[sz].*pi|pi.*locali[sz]|product.*locali[sz]\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Prod.lean\", \"Mathlib/CategoryTheory/Localization/Prod.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/Pi.lean\", \"Mathlib/CategoryTheory/Localization/Pi.lean\", \"Mathlib/CategoryTheory/Localization/Pi.lean\"], \"digest\": \"518c92a0d5071622\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Mathlib/CategoryTheory/Localization/Pi.lean:31-35 assumes Finite J and ordinary category localization; CofibrantObjectHomotopy.lean:104-125 assumes a model category and ordinary homotopy-category localization. Neither gives arbitrary-product entire-coherent-functor-category localization under Brown axioms.",
+   "sub": "CategoryTheory/Localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical localization at coordinatewise weak equivalences commutes with arbitrary products of Brown categories",
+   "results": "{\"t\": \"2026-10-16T21:25:44Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical localization at coordinatewise weak equivalences commutes with arbitrary products of Brown categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Localization.preservesProductsOfShape\", \"CategoryTheory.Localization.preservesFiniteProducts\", \"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\"], \"digest\": \"220b64459f0692e2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Mathlib/CategoryTheory/Localization/Pi.lean:31-35 assumes Finite J and ordinary category localization; CofibrantObjectHomotopy.lean:104-125 assumes a model category and ordinary homotopy-category localization. Neither gives arbitrary-product entire-coherent-functor-category localization under Brown axioms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product of infinity localizations of cofibrant Brown categories is localization of their product, for an infinite small indexing set",
+   "results": "{\"t\": \"2026-10-16T21:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"Product of infinity localizations of cofibrant Brown categories is localization of their product, for an infinite small indexing set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization'\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac\"], \"digest\": \"2ebe452f73ef7353\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: Mathlib/CategoryTheory/Localization/Pi.lean:31-35 assumes Finite J and ordinary category localization; CofibrantObjectHomotopy.lean:104-125 assumes a model category and ordinary homotopy-category localization. Neither gives arbitrary-product entire-coherent-functor-category localization under Brown axioms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-cofibration-localization",
@@ -88,5 +224,20 @@
   "group": "Q79"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-localization-products",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split Proposition 7.7.1 by its dual Brown-category route. Three new statement-only foundations: homotopy left fractions and localized retractions, right exact extension, and finite-colimit approximation. Checked coordinate Brown axioms, opposite localization, finite-colimit cones including infinite products of contractible Kan spaces, conservativity without saturation, left App 2 on all localized objects, and the entire functor-category conclusion. No model structures or internal infinite coproducts are added. Reused existing Brown pullback, cone calculus and Kan-Quillen nodes; ran all search kinds and second semantic formulations. Second reading supplies missing citation records and explicit naturality equations for the comparison Fq ≃ T; the generic cone-calculus tool is requested in the report for maintainer recording.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 and its displayed derived Hom/inverse-limit calculation. The current main-20261015 proof is in sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2. This products foundation serves the existing coherent diagram realization ancestry and does not change the inherited unit or chapter binding."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-577c64b42",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-577c64b42 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 3 new nodes and every cited statement in full: def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-brown-fibrant-localization-pullbacks, lem-coef-kan-quillen-right-proper. The item statement is unchanged and true. It is the dual of Cisinski Proposition 7.7.1 for all-cofibrant Brown categories and arbitrary small J; retract closure is an extra assumption, not a weakening. Step 2 dualizes the fibrant-pullback node clause by clause: initial object and cofibrant objects, pushouts of C and of C∩W, C-then-W factorization, so the localization has finite colimits. Step 3: in a product of contractible Kan complexes each factor maps to the point by a trivial fibration, so boundary fillers (n=0 included, from the Kan-Quillen node) chosen coordinatewise make the infinite product contractible. Step 5 re-derived: from k f and l k in W, q(k) has both a left and a right inverse, so conservativity holds without assuming W saturated. Step 6 re-derived: with b=θ_X F(a) and e=θ_Z^{-1} e_T, naturality gives F(u)=eψ, and π0 of a product of Kan complexes is the product of the π0. Step 7 is correct: (Fq)^* is naturally equivalent to T^*. The new nodes are true: the retraction criterion in left-fractions comes from Brown cylinder homotopy plus refactoring tf=wc; the extension clause in right-exact-extension follows because initial objects and pushouts generate finite colimits; finite-colimit-approximation is the dual of Theorem 7.6.10 in Waldhausen's orientation. Small cases (W = isomorphisms, C = all maps; J empty; a terminal source category) behave as stated. None of the new nodes is a duplicate or a restated clause. lem-coef-trivial-fibration-fraction-model overlaps only the fraction clause, under different hypotheses; this is noted in review.md. No cycle (transitive closure checked). No SGA source is cited. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic Kan/cone mapping-space calculus that no node of the unit states; the parent node already has the same tool use. No fixes were written. Caveat: the Cisinski book is not archived and network access is blocked here, so I could not read it at the cited pages; I checked every step myself, and the proof is correctly marked as agent-written with the book listed as WANTED."
+ }
 }

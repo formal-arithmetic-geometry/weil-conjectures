@@ -27,9 +27,109 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-relative-colimit-completion] with its small universe equal to $\\mathcal U'$ and with no prescribed cocones. Its explicit localization model has no maps to invert, so it is exactly $P=\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathcal S_{\\mathcal U'})$, with $j$ the Yoneda functor. It is presentable relative to $\\mathcal U'$. For every finite $r$, its finite-variable assertion gives an equivalence between separately $\\mathcal U'$-colimit-preserving functors $P^r\\to P$ and functors $\\mathcal C^r\\to P$, including their coherent transformations and higher simplices; for $r=0$ both sides are $P$. The presheaf categories are formed in $\\mathcal U''$; for the classifying category $\\operatorname{Cat}_\\infty$ in step 2 one may use an additional ambient universe containing them. This changes none of the colimit shapes, which remain $\\mathcal U'$-small. In particular this use requires no colimits or preservation hypothesis on $\\mathcal C$.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example 5.3.6.4 and Proposition 5.3.6.11; agent expansion of the empty-relation case."
+   }
+  },
+  {
+   "text": "Write $m_r:\\mathcal C^r\\to\\mathcal C$ for the operations in a unital planar operation system encoding the given monoidal category, supplied by [lem-coef-monoidal-block-projection-coherence]. Use this normal form, including its specified pullbacks of reduced-input coherences, rather than arbitrary transformations between block functors on $\\mathcal C^n$. Extend $jm_r$ by step 1 to a separately cocontinuous $M_r:P^r\\to P$ with $M_rj^r\\simeq jm_r$, taking $M_0=j(\\mathbf1_{\\mathcal C})$ and $M_1=\\mathrm{id}_P$. We first construct planar substitution data before adding any discarded inputs. For an $r$-input planar tree $T$, let $M_T:P^r\\to P$ be the composite of its vertex operations $M_k$. It preserves colimits in every one of its $r$ variables: each external variable enters exactly one subtree at each successive vertex, and each vertex operation preserves colimits in that slot with the other arguments fixed. Nullary subtrees give fixed arguments and introduce no extra variable. Its restriction to $\\mathcal C^r$ is coherently equivalent to $j m_T$, by the vertex comparisons. For every tree contraction or grafting, the original planar system gives the comparison between these restricted functors and all compatibility simplices. The full equivalence in [lem-coef-infinity-relative-colimit-completion], applied to the $r$ reduced variables, lifts them to the full subcategory of separately cocontinuous functors $P^r\\to P$. In detail an equivalence of functor categories induces equivalences on their transformation spaces, so the homotopy fiber over each specified comparison and its already specified boundary data is contractible; one may lift entire coherent tree diagrams, not just their vertices. Grafting still has disjoint lists of variables, so both the grafted lifts and the lifts for the grafted tree belong to this same separately cocontinuous category. Their restrictions are the original grafting comparison, and the same equivalence lifts its coherent compatibilities. This constructs a unital planar operation system on $P$ and compatible coherent comparisons $M_rj^r\\simeq jm_r$. For $r=0$ the restriction is the identity equivalence of $P$, so nullary compatibility is included without requiring a constant functor on $P$ to preserve empty colimits.\n\nOnly now form the block transports on $P^n$: for $\\alpha:[n]\\to[m]$ with opposite $a:[m]\\to[n]$, the $i$th output is $M_{a(i)-a(i-1)}$ pulled back along the projection to inputs $a(i-1)+1,\\ldots,a(i)$. Pull back the already constructed reduced-tree comparisons and higher simplices along exactly the projections specified in [lem-coef-monoidal-block-projection-coherence]. Its converse gives a coherent classifying diagram and a coherent transformation from the original normal-form diagram with components $j^n$. We never lift an arbitrary transformation on $\\mathcal C^n$ involving unused variables. By [lem-coef-cocartesian-straightening] the diagrams unstraighten to $P^\\otimes$ and a cocartesian-edge-preserving $j^\\otimes$; transporting across the equivalence from the original $\\mathcal C^\\otimes$ to its normal form gives the asserted enhancement on that original source. Inert transports are coordinate projections and the fiber at $[0]$ is terminal. For the relative inert-limit condition of [def-coef-monoidal-infinity-category], the object case of [lem-coef-infinity-pointwise-cocartesian-transport] identifies the mapping space over any base arrow into a tuple in $P^m$ with the product of its component mapping spaces; the component maps are composition with its inert coordinate projections. For $m=0$ this is the point. Thus this is a monoidal structure. Its tensor $M_2$ preserves small colimits separately and its unit is $j(\\mathbf1_{\\mathcal C})$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent construction using the planar projection normal form of lem-coef-monoidal-block-projection-coherence and full finite-variable completion; HA sections 4.1.2-4.1.3 and 4.8.1.3-10. Restriction is applied only before adding unused variables."
+   }
+  },
+  {
+   "text": "We identify this tensor with the stated Day convolution, including its universal transformation. For $c,d\\in\\mathcal C$, the map of presheaves on $\\mathcal C\\times\\mathcal C$ with components $(u:x\\to c,v:y\\to d)\\mapsto u\\otimes v$ gives $j(c)\\boxtimes j(d)\\to j(c\\otimes d)\\circ(\\otimes_{\\mathcal C})^{\\mathrm{op}}$. The mapping spaces in a product are products by the right-pinched definition, so $j(c)\\boxtimes j(d)$ is the representable at $(c,d)$. By [lem-coef-space-yoneda-density], applying its evaluation assertion to $\\mathcal C\\times\\mathcal C$, and also to $\\mathcal C$, composition with this transformation induces, for every $H\\in P$, an equivalence\n$$\\operatorname{Map}_P(j(c\\otimes d),H)\\simeq H(c\\otimes d)\\simeq\\operatorname{Map}_{P(\\mathcal C\\times\\mathcal C)}(j(c)\\boxtimes j(d),H\\circ(\\otimes_{\\mathcal C})^{\\mathrm{op}}).$$\nThe comparison is evaluation at the two identity arrows and is coherent in $c,d,H$. Here is a separate elementary deduction of the needed product-colimit fact, avoiding any monoidal-presheaf theorem. Applying [lem-coef-infinity-relative-colimit-completion] to the terminal category with no relations gives $\\mathcal S=P(*)$ and its small colimits. The point-base case of [lem-coef-space-transport-classification] identifies mapping spaces of spaces with the Kan function complex. Rearranging the factors of $T\\times X\\times Y\\times\\Delta^q$ gives, in every simplicial degree, the natural equivalence $\\operatorname{Map}(X\\times Y,Z)\\simeq\\operatorname{Map}(Y,\\operatorname{Fun}(X,Z))$. By [lem-coef-parametric-universal-arrows] it has the same coherent-diagram formula. If $L$ is a colimit of $Y_b$, that formula and the mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] identify $\\operatorname{Map}(X\\times L,Z)$ with the space of cocones from $b\\mapsto X\\times Y_b$ to $Z$, via the actual legs $\\mathrm{id}_X\\times\\lambda_b$. Hence cartesian product of spaces preserves small colimits in either variable, including the empty diagram. Functor colimits are objectwise by [lem-coef-infinity-yoneda-presheaf-limits]. Thus both $(F,G)\\mapsto F\\boxtimes G$ and $(F,G)\\mapsto M_2(F,G)\\circ(\\otimes_{\\mathcal C})^{\\mathrm{op}}$ are separately cocontinuous functors to the cocomplete presheaf category $P(\\mathcal C\\times\\mathcal C)$. Full faithfulness in [lem-coef-infinity-relative-colimit-completion], applied with this target, extends the displayed transformation on representables to a coherent natural transformation $\\eta_{F,G}:F\\boxtimes G\\to M_2(F,G)\\circ(\\otimes_{\\mathcal C})^{\\mathrm{op}}$, with its specified restriction, uniquely up to contractible choice. Now write $F\\simeq\\operatorname{colim}_{e\\in E}j(c_e)$ and $G\\simeq\\operatorname{colim}_{f\\in J}j(d_f)$ using the small coherent density diagrams in [lem-coef-space-yoneda-density]. Use the separate product preservation just proved and objectwise presheaf colimits from [lem-coef-infinity-yoneda-presheaf-limits]. Consequently $F\\boxtimes G$ is the iterated colimit of the external products of these representables. Similarly step 2 expresses $M_2(F,G)$ as the iterated colimit of $j(c_e\\otimes d_f)$. Mapping either iterated colimit into its indicated target gives the same iterated limit $\\lim_{e\\in E^{\\mathrm{op}}}\\lim_{f\\in J^{\\mathrm{op}}}H(c_e\\otimes d_f)$, by the mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits]. These limits exist in spaces. The displayed canonical comparison therefore remains an equivalence for all $F,G$. This comparison is composition with $\\eta_{F,G}$, and the resulting equivalence of mapping spaces is natural in $F,G,H$; density presentations only test this canonical comparison and are not choices entering it. This is exactly the left Kan extension universal property in the item. For an arbitrary positive arity $r$, replace the pair $(c,d)$ by $(c_1,\\ldots,c_r)$ and the external product by the $r$-fold external product. That product of representables represents the tuple, evaluation gives $H(m_r(c_1,\\ldots,c_r))$, and the $r$ successive density colimits give the corresponding $r$ successive limits of these spaces. This proves the Kan universal property for $M_r$, with its comparison obtained by tensoring the $r$ input arrows. For $r=0$, the external product is the point presheaf on the terminal category; its extension along the functor selecting $\\mathbf1_{\\mathcal C}$ is $j(\\mathbf1_{\\mathcal C})$, since both mapping spaces are $H(\\mathbf1_{\\mathcal C})$ by evaluation. For each planar tree with $r$ ordered external inputs, the canonical Kan comparison restricts to the original comparison on those $r$ representable inputs. All iterated tensors and external-product functors involved preserve colimits in all of these $r$ inputs. Thus the full finite-variable restriction equivalence in [lem-coef-infinity-relative-colimit-completion] identifies the reduced-tree comparisons and higher homotopies with those constructed in step 2. When $r=0$ use its empty-variable equivalence. To pass from these active operations to a base arrow or chain of base arrows with unused inputs, pull these identified coherences back along the specified projections of [lem-coef-monoidal-block-projection-coherence]. This pullback step uses the normal-form structure, and makes no full-faithfulness claim about restriction on the larger product containing unused inputs. Consequently the arity operations, units, substitution equivalences, and coherences of the structure in step 2 have precisely the Day Kan-extension description. Thus $P^\\otimes$ is the specified Day monoidal structure. By steps 1-2 it is presentably monoidal, and $j^\\otimes$ has the claimed coherent tensor and unit equivalences.",
+   "uses": [
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-space-transport-classification",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Remark 4.8.1.13 and Example 2.2.6.17; agent Kan-adjunction/density proof. Products of spaces preserve colimits by the displayed exponential adjunction. Coherences are compared on reduced planar trees before the specified projection pullbacks."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-yoneda-presheaf-limits], $j$ is fully faithful. Hence so is $j^n:\\mathcal C^n\\to P^n$ for every $n$: the right-pinched mapping simplicial set of a product is degreewise the product of the component mapping simplicial sets, and for $n=0$ it is a point. For objects $x$ over $[n]$, $y$ over $[m]$ and a base arrow $\\alpha:[n]\\to[m]$, the $K=\\Delta^0$ case of [lem-coef-infinity-pointwise-cocartesian-transport] identifies the homotopy fiber of the total mapping space over $\\alpha$ with $\\operatorname{Map}_{\\mathcal C^\\otimes_{[m]}}(\\alpha_!x,y)$, and gives the same formula in $P^\\otimes$. Since $j^\\otimes$ preserves cocartesian edges, these formulas identify its map on these fibers with the fully faithful fiber map $j^m$, using $j^m(\\alpha_!x)\\simeq\\alpha_!j^n(x)$. The mapping space of the base is the discrete set $\\operatorname{Hom}_{\\Delta^{\\mathrm{op}}}([n],[m])$. Apply [lem-coef-spaces-homotopy-fiber-detection] over the identity of this base space: equivalence on every homotopy fiber proves equivalence of the total mapping spaces. Thus $j^\\otimes$ is fully faithful as a functor of total infinity categories, not just on its fiber over $[1]$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Proposition 2.4.4.2 and cocartesian mapping-space criterion; agent expansion to total mapping spaces."
+   }
+  },
+  {
+   "text": "Factor $j^\\otimes$ through its full replete essential image $R\\subseteq P^\\otimes$. By step 4 and [lem-coef-infinity-full-essential-image], the functor $\\mathcal C^\\otimes\\to R$ has a coherent quasi-inverse with coherent unit and counit equivalences. These data are over $\\Delta^{\\mathrm{op}}$. To justify that point for the specified, rather than varying, base diagram, note that the only equivalences in $N(\\Delta^{\\mathrm{op}})$ are identity arrows. Project the counit to this nerve: its components must be identities, so the projected functors agree on vertices. For each edge the two triangular faces of the projected transformation give an ordinary commutative square whose vertical arrows are identities; hence its horizontal arrows agree. Every simplex of an ordinary nerve is determined by its consecutive edges, so the projected transformation is the constant transformation of a single projected functor on all simplices. Thus the inverse commutes with projection and the counit is over its identity; the same argument applies to the unit. For any fixed $a:K\\to\\Delta^{\\mathrm{op}}$, postcomposing these inverse data gives an equivalence $\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(K,\\mathcal C^\\otimes)\\simeq\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(K,R)$. The inclusion of the latter into $\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(K,P^\\otimes)$ is a full subcategory inclusion: an $n$-simplex is a map $K\\times\\Delta^n\\to P^\\otimes$ over $a$, and it factors through $R$ precisely when all its vertices take values in $R$, by the explicit full-subcategory definition in [def-cbc-enhanced-diagrams-cones]. The projection $R\\to\\Delta^{\\mathrm{op}}$ is also a cocartesian fibration. Inner horn fillers stay in $R$ because it is full. A cocartesian lift in $P^\\otimes$ from an object equivalent to $j^\\otimes(x)$ ends at an object equivalent to $j^\\otimes(\\alpha_!x)$, so the endpoint belongs to $R$; its mapping-space pullback square remains a pullback after restricting the test objects to $R$. Thus these relative functor categories are quasicategories: they are fibers of the cocartesian exponentiation maps in [lem-coef-infinity-pointwise-cocartesian-transport], and the subcategory in question is full. Its mapping simplicial sets agree degreewise with those of the ambient relative functor category. A functor equivalence induces equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. Composing the equivalence with this full inclusion proves the required full faithfulness over the fixed base map $a$.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent proof of fully faithful postcomposition on coherent diagrams over the fixed base; uses the full essential-image model and cocartesian exponentiation."
+   }
+  },
+  {
+   "text": "Let $I$ be the specified inert-labelled edges. Step 2 shows that postcomposition with $j^\\otimes$ carries a functor taking these edges to cocartesian edges to another such functor. Both restrictions in the item are full subcategories on their specified objects: no condition is imposed on transformations. Therefore the mapping spaces between any two retained objects are unchanged, and the equivalences proved in step 5 restrict to these mapping spaces. Finally, every comparison in steps 5-6 is induced by postcomposition with the single functor $j^\\otimes$; for a simplicial map $u:L\\to K$ the equality $(j^\\otimes F)u=j^\\otimes(Fu)$ holds in every simplicial degree. This proves naturality under precomposition, with base map $au$ and the pulled-back specified edge condition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Agent proof: restriction to full subcategories and degreewise associativity of precomposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-space-transport-classification",
+  "lem-coef-space-yoneda-density",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "General infinity-categorical tool in the inherited enrichment-localization chain for paragraph 2 of the ancestral proof; reconstruction following online Higher Algebra 4.8.1.3-13 and Higher Topos Theory 5.3.6. No local archive of these two books; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +179,61 @@
    "results": "{\"t\": \"2026-10-16T19:44:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory C with tensor product, representable space valued functors form a full monoidal subcategory of presheaves under Day convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByLeft\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'_homEquiv\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByRight\", \"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\"], \"digest\": \"e14edf1f6b5bc1c1\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader query. Read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:61-89 and 1066-1073 and DayConvolution/DayFunctor.lean:20-27,40-48. These use ordinary Category and MonoidalCategory instances; fullyFaithulι is an assumed structure field, not existence of an infinity-categorical Yoneda enhancement. Ordinary monoidality of Yoneda is explicitly a TODO. None supplies this infinity-category statement or its mapping-space-level diagram assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "DayConvolution|monoidalYoneda|yoneda.*[Mm]onoidal|[Mm]onoidal.*yoneda",
+   "results": "{\"t\": \"2026-10-16T20:25:07Z\", \"tool\": \"grep\", \"query\": \"DayConvolution|monoidalYoneda|yoneda.*[Mm]onoidal|[Mm]onoidal.*yoneda\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\"], \"digest\": \"b22113746b9bf459\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:10-27,40-48; these require ordinary Category and MonoidalCategory instances. The latter lists ordinary monoidality of Yoneda as a TODO. Cartesian/Mon.lean:14-19 concerns Yoneda of ordinary monoid objects. These do not state the quasicategorical theorem or its coherent relative-diagram assertion.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful strong monoidal Yoneda embedding of an infinity category into presheaves with Day convolution",
+   "results": "{\"t\": \"2026-10-16T20:25:07Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful strong monoidal Yoneda embedding of an infinity category into presheaves with Day convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.yonedaGrpFullyFaithful\", \"CategoryTheory.yonedaMonFullyFaithful\", \"CategoryTheory.Yoneda.yoneda_full\", \"CategoryTheory.yonedaMon\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.yonedaMonObj\"], \"digest\": \"62fa7a76f73fa6a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:10-27,40-48; these require ordinary Category and MonoidalCategory instances. The latter lists ordinary monoidality of Yoneda as a TODO. Cartesian/Mon.lean:14-19 concerns Yoneda of ordinary monoid objects. These do not state the quasicategorical theorem or its coherent relative-diagram assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DayConvolution\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T20:25:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"DayConvolution\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:10-27,40-48; these require ordinary Category and MonoidalCategory instances. The latter lists ordinary monoidality of Yoneda as a TODO. Cartesian/Mon.lean:14-19 concerns Yoneda of ordinary monoid objects. These do not state the quasicategorical theorem or its coherent relative-diagram assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal quasicategory has a fully faithful strong monoidal Yoneda embedding into space valued presheaves with Day convolution",
+   "results": "{\"t\": \"2026-10-16T20:25:10Z\", \"tool\": \"leanfinder\", \"query\": \"A monoidal quasicategory has a fully faithful strong monoidal Yoneda embedding into space valued presheaves with Day convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaMonFullyFaithful\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.lawfulDayConvolutionMonoidalCategoryStructOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.faithful_ι\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions\", \"CategoryTheory.instFullMonFunctorOppositeMonCatYonedaMon\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\"], \"digest\": \"ea117593185a7951\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:10-27,40-48; these require ordinary Category and MonoidalCategory instances. The latter lists ordinary monoidality of Yoneda as a TODO. Cartesian/Mon.lean:14-19 concerns Yoneda of ordinary monoid objects. These do not state the quasicategorical theorem or its coherent relative-diagram assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable space valued presheaves on a monoidal infinity category are closed under Day convolution and operadic Yoneda is a full embedding",
+   "results": "{\"t\": \"2026-10-16T20:25:49Z\", \"tool\": \"leanfinder\", \"query\": \"Representable space valued presheaves on a monoidal infinity category are closed under Day convolution and operadic Yoneda is a full embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.faithful_ι\", \"CategoryTheory.essImage_yonedaMon\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'_homEquiv\", \"CategoryTheory.MonoidalCategory.lawfulDayConvolutionMonoidalCategoryStructOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'\"], \"digest\": \"0861d782416fafa3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:10-27,40-48; these require ordinary Category and MonoidalCategory instances. The latter lists ordinary monoidality of Yoneda as a TODO. Cartesian/Mon.lean:14-19 concerns Yoneda of ordinary monoid objects. These do not state the quasicategorical theorem or its coherent relative-diagram assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory the free cocompletion has a tensor extending representables and Yoneda is monoidal and fully faithful",
+   "results": "{\"t\": \"2026-10-16T20:40:00Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory the free cocompletion has a tensor extending representables and Yoneda is monoidal and fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.Truncated.hoFunctor.monoidal\", \"SSet.QCat.bicategory\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\"], \"digest\": \"80d2a51444dc3fb0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the actual hits are CategoryTheory.Nerve.quasicategory, ordinary nerve full faithfulness, the monoidal homotopy-category functor, and SSet.QCat bicategory structures. Read Quasicategory/StrictBicategory.lean:14-32,48-72: these are homotopy-category-enriched ordinary structures, not a monoidal presheaf cocompletion theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|quasi.category|DayConvolution|fullyFaithful",
+   "results": "{\"t\": \"2026-10-16T20:40:36Z\", \"tool\": \"grep\", \"query\": \"quasicategory|quasi.category|DayConvolution|fullyFaithful\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: independent grep in AlgebraicTopology/Quasicategory returned horn-filling, nerve and strict-bicategory foundations. Read StrictBicategory.lean:14-32,48-72, and separately DayConvolution.lean:61-78 and DayConvolution/DayFunctor.lean:20-27,43-48: ordinary Day functors have Category/MonoidalCategory hypotheses, and monoidality of ordinary Yoneda is listed as a TODO. None is the coherent monoidal infinity-Yoneda statement.",
+   "subdirectory": "AlgebraicTopology/Quasicategory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-object-space-fibration",
@@ -90,5 +241,29 @@
   "group": "NS"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-monoidal-yoneda-embedding",
+  "worker": "stage1",
+  "summary": "Repair of the returned coherence gap: added one strictly smaller statement-only planar-operation/projection-normal-form lemma; lift all comparisons in the separately cocontinuous categories on their reduced inputs, then pull back along its specified projections. Corrected the final coherence clause of step 3 likewise. Removed the Segal-localization-model dependency entirely and derived product cocontinuity in spaces from the exponential mapping-space adjunction. Statement unchanged; no Lean or compiler work.",
+  "blueprint": "Serves paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent finite-coefficient derived adjunction before derived inverse limit, through the existing algebroid-object-space-fibration and enriched-localization ancestry. This split expands its general monoidal-Yoneda tool; the chapter and unit route and the inherited blueprint ancestry are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only the generic fact that functor equivalences induce mapping-space equivalences is used in step 5; the unit supplies no replacement for coherent functor-category calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-fa62ff489",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-fa62ff489 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-monoidal-block-projection-coherence, all 13 proof_deps and 2 stmt_deps, and the 11 duplicate candidates. The return's E5/D5 point is repaired. Steps 2 and 3 now lift comparisons only on reduced inputs, where every functor is separately cocontinuous, using the finite-variable equivalence of the colimit-completion lemma. They then pull back along the specified projection data of the new node. The finite-set-groupoid counterexample is excluded, and no fullness claim is made after unused inputs are adjoined. Checked: Segal/inert condition via the K=Δ^0 fiber formula plus composition of transports; X×− cocontinuity via the Kan function complex adjunction and the parametric-universal-arrows diagram formula (removing the segal-localization node is confirmed); Day Kan property via density colimits giving lim lim H(c_e⊗d_f), including r=0; step 4 fiber detection with v=id over the discrete base; step 5 inverse strictly over Δ^op. The new node is true (HA 4.1.2–4.1.3 with the Cat_∞^× cartesian structure of HA 2.4.1–2.4.2). It was tested on a noncommutative monoid, nullary blocks and empty A. It is strictly smaller than the item, statement-only, with 3 kinds of search, and it is not a duplicate. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus. FIX (B3): the new node's statement used Cat_∞ and cocartesian unstraightening without a citation; added [lem-coef-cocartesian-straightening] to the statement and stmt_deps, and added HA sections 2.4.1–2.4.2 to source.place (section-level references from my reading; HA is not archived).; 1 file(s) fixed by the reviewer"
+ }
 }

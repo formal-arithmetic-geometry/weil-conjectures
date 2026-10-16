@@ -29,9 +29,109 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any $\\mathcal U'$-small simplicial set $A$, put $P_A=\\operatorname{Map}^{\\sharp}(A^{\\flat},C^{\\natural})$. In the notation of [lem-coef-marked-anodyne-lifting-calculus], $\\operatorname{Map}^{\\flat}(A^{\\flat},C^{\\natural})=\\operatorname{Fun}(A,C)$: the product $A^{\\flat}\\times(\\Delta^q)^{\\flat}$ marks only degenerate edges, so every underlying simplicial map preserves its markings. The cited lemma therefore says that $P_A$ is Kan and is the core of $\\operatorname{Fun}(A,C)$, and that $P_B\\to P_A$ is a Kan fibration for every simplicial subset $A\\subseteq B$. We use Kan fibration in its horn-lifting meaning, including the one-dimensional horns. From the displayed definition of the marked mapping object, an edge of $P_B$ is exactly a map $B\\times\\Delta^1\\to C$ whose vertex tracks are equivalences. Indeed, the marked edges of $B^{\\flat}\\times(\\Delta^1)^{\\sharp}$ are precisely the edges constant in the $B$ coordinate. Thus the strict fiber $F_b=P_{\\Delta^n}\\times_{P_{\\partial\\Delta^n}}\\{b\\}$ has as vertices the extensions of $b$ and as edges the relative homotopies in the statement. This fiber is Kan: lift a horn against $P_{\\Delta^n}\\to P_{\\partial\\Delta^n}$ with constant base simplex $b$. In a Kan complex the existence of an edge is an equivalence relation on vertices: degenerate edges give reflexivity; filling a $2$-horn with a given edge and the identity at its source gives an inverse edge; filling the inner $2$-horn of two successive edges gives their composite. Hence relative boundary homotopy is an equivalence relation on the set $C_n$, with distinct boundaries in distinct classes. This includes $n=0$, when the boundary is empty.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.3.3, terminology before Definition 2.3.3.1 and first paragraph of the proof of Proposition 2.3.3.8; mapping-space lifting is the point case of Propositions 3.1.1.6 and 3.1.2.3 and Remark 3.1.3.1."
+   }
+  },
+  {
+   "text": "Each relative-boundary homotopy class contains at most one degenerate simplex. Here is the simplicial-identity argument, rather than an appeal to an unstated combinatorial lemma. A degenerate simplex can be written $s_i a$: factor its non-injective ordinal operator as a basic surjection followed by another operator, using [def-weil-pbc-simplicial-set]. Suppose $u=s_i a$ and $v=s_j b$ have the same boundary. If $i=j$, then $u=s_i d_i u=s_i d_i v=v$. After swapping the two simplices assume $i<j$. Their $i$th faces give $a=d_i v=s_{j-1}d_i b$, so $u=s_i s_{j-1}d_i b=s_j s_i d_i b$. Their $j$th faces now give $s_i d_i b=d_j u=d_j v=b$, and therefore $u=s_j b=v$. All identities follow by composing the ordinal injections and surjections in the definition of a simplicial set; there are no degenerate $0$-simplices.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof, second paragraph (uniqueness of a degenerate representative)."
+   }
+  },
+  {
+   "text": "For every $n$, choose a set $Y_n\\subseteq C_n$ containing exactly one representative of every relative-boundary homotopy class, using the degenerate representative whenever the class has one. Step 2 makes this prescription consistent, so $Y_n$ contains every degenerate $n$-simplex. Define $M_0=Y_0$ and, recursively, $M_n=\\{\\sigma\\in Y_n: d_j\\sigma\\in M_{n-1}\\text{ for all }j\\}$ for $n>0$. These sets are closed under faces by definition. They are closed under degeneracies by induction on the dimension: $s_i\\sigma$ lies in $Y_{n+1}$, its two faces $d_i,d_{i+1}$ are $\\sigma$, and every other face is a degeneracy of a face of $\\sigma$, already in $M$ by induction. Thus they define a simplicial subset $M\\subseteq C$. Whenever $\\sigma$ has boundary in $M$, its representative in $Y_n$ has exactly the same boundary and therefore belongs to $M_n$. All choices are over $\\mathcal U'$-small sets, and $M$ is $\\mathcal U'$-small. No local-smallness or presentability hypothesis has been used.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof, choice of Y(n) and recursive definition of X prime."
+   }
+  },
+  {
+   "text": "We prove that $M$ fills inner horns. Given $s:\\Lambda_i^n\\to M$ with $0<i<n$, first fill its composite into $C$ by a simplex $u:\\Delta^n\\to C$, using the quasicategory hypothesis [def-cbc-enhanced-diagrams-cones]. The missing face $a=d_i u$ has boundary in $M$, since each of its proper faces is already a face of the horn. By step 3 its chosen representative $a_0$ belongs to $M$, and step 1 supplies a relative-boundary homotopy $a\\to a_0$. Glue that homotopy on the missing face to the constant homotopy on the horn; on intersections they agree because the first homotopy fixes its boundary. This gives an edge $\\gamma$ in $P_{\\partial\\Delta^n}$, with initial vertex $u|_{\\partial\\Delta^n}$ and final vertex a boundary entirely in $M$. Lift $\\gamma$, with initial vertex $u$, against the Kan fibration $P_{\\Delta^n}\\to P_{\\partial\\Delta^n}$ of [lem-coef-marked-anodyne-lifting-calculus], using a one-dimensional horn. Its final vertex $u'$ has that boundary. The representative of $u'$ relative to its boundary belongs to $M$ by step 3 and extends the original horn $s$. This proves the quasicategory condition for $M$. If two simplices of $M$ are homotopic relative to their boundary in $M$, inclusion into $C$ preserves equivalence edges, since their inverse-triangle witnesses remain witnesses in $C$. They therefore lie in the same relative-boundary class in $C$, and both belong to $Y_n$, so they are equal. Thus $M$ is minimal, including in degree zero.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof of (1), printed p.104; Proposition 2.4.1.8 there is implemented by the cited marked mapping-space restriction fibration."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to $M\\hookrightarrow C$. Write the resulting relative skeletal filtration as $Z_0=M\\subseteq Z_1\\subseteq\\cdots$, with union $C$, where $Z_n\\to Z_{n+1}$ attaches all the nondegenerate $n$-simplices of $C$ outside $M$ along their boundaries. We construct compatible maps $h_n:Z_n\\times\\Delta^1\\to C$. The induction conditions are: the initial endpoint is the inclusion of $Z_n$ into $C$; the final endpoint takes values in $M$; the restriction to $M\\times\\Delta^1$ is the projection followed by inclusion; and every vertex track is an equivalence. The base $h_0$ is precisely this projection on $M$. The cited filtration applies to an arbitrary simplicial subset, so it does not require $M$ to be full or $C$ to be locally small.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof of (2) and (3), end of printed p.104 and p.105. The dimensionwise version of the exhaustion is Kerodon Proposition 1.5.5.14 (Tag 0077), proof of (b)."
+   }
+  },
+  {
+   "text": "Suppose $h_n$ is constructed. For an attaching simplex $\\tau:\\Delta^n\\to C$, restrict $h_n$ along its attaching boundary to obtain an edge $\\gamma$ of $P_{\\partial\\Delta^n}$ starting at $\\tau|_{\\partial\\Delta^n}$. By [lem-coef-marked-anodyne-lifting-calculus], lift it along $P_{\\Delta^n}\\to P_{\\partial\\Delta^n}$ starting at $\\tau$, producing an edge $e:\\tau\\to\\tau'$ with boundary $\\gamma$. The final boundary lies in $M$, by induction. Step 3 gives a representative $\\tau''\\in M_n$ of $\\tau'$ and step 1 gives an edge $f:\\tau'\\to\\tau''$ in the strict fiber over that final boundary. To obtain one homotopy with the prescribed original boundary, rather than a concatenation on a subdivided interval, form the inner $2$-horn in $P_{\\Delta^n}$ with consecutive edges $e,f$. Its restriction has edges $\\gamma$ and the identity of the final boundary. The degeneracy $s_1\\gamma$ in $P_{\\partial\\Delta^n}$ is a $2$-simplex with exactly these edges. Lift this $2$-simplex with its specified inner horn using the same Kan fibration. The edge $[0,2]$ of the lift is an edge $g:\\tau\\to\\tau''$ restricting exactly to $\\gamma$. As a map $\\Delta^n\\times\\Delta^1\\to C$, it fixes the already prescribed boundary, has final image in $M$, and has equivalence vertex tracks. This works also for $n=0$: the boundary and $\\gamma$ are empty and the fiber is $P_{\\Delta^0}$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof, p.105: first prism h prime, normalization h double prime, and the displayed inner two-horn diagram H."
+   }
+  },
+  {
+   "text": "Choose such a lift for each attaching $n$-simplex. The resulting maps agree with $h_n$ on every attaching boundary, so they glue to $h_{n+1}$ along the pushout supplied by [lem-coef-infinity-monomorphism-boundary-cells]. Explicitly, in simplicial degree $q$ the product with $\\Delta^1$ takes each gluing set to its product with the fixed set $(\\Delta^1)_q$; a function on that product is specified by compatible functions on the pieces, for each element of $(\\Delta^1)_q$. Thus the boundary agreement proves gluing, and commutation with the simplicial operators follows from commutation on each piece. All induction conditions hold on each piece, hence globally. Taking the union in each simplicial degree gives a simplicial map $h:C\\times\\Delta^1\\to C$ with initial endpoint $\\mathrm{id}_C$, final endpoint $\\bar r$ taking values in $M$, constant on $M$, and all vertex tracks equivalences. This is a countable induction on dimension with set-indexed choices at each stage; there is no large indexing category or unproved preservation-of-colimits assertion.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, proof of (2) and (3), pp.104-105; gluing expanded degreewise from the relative skeletal pushouts."
+   }
+  },
+  {
+   "text": "Factor $\\bar r$ degreewise through the simplicial subset $M$ to obtain a simplicial map $r:C\\to M$. Since $h$ is constant on $M$, its final endpoint restricts to the inclusion there, so $ri=\\mathrm{id}_M$ and $ir=\\bar r$. By [lem-coef-marked-anodyne-lifting-calculus], $P_C$ is the core of $\\operatorname{Fun}(C,C)$. The vertex-track condition says exactly that $h$ is an edge of $P_C$, so it is a coherent natural equivalence $\\mathrm{id}_C\\simeq ir$. Together with $ri=\\mathrm{id}_M$, this is the definition of inverse functor equivalences in [def-cbc-enhanced-diagrams-cones]. All required equalities on $M$ are strict. If $C$ is empty, every $Y_n,M_n,Z_n$ is empty and the same construction gives the unique maps and unique homotopy; none of the choices demanded an object of $C$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8, final paragraph specialized to S a point; Definition 2.3.3.1 and the homotopy convention immediately preceding it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-marked-anodyne-lifting-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of HTT Proposition 2.3.3.8 for C to a point, read online at printed pp.101-105 (PDF pp.118-122); the marked mapping-space lifting lemma supplies its prism extensions, and the existing relative skeletal Mathlib leaf supplies the exhaustion. Agent-expanded since HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +181,73 @@
    "results": "{\"t\": \"2026-10-16T20:38:37Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal fibrant objects in the Joyal model structure: any infinity category has a minimal categorical deformation retract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.fibrantObjects\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.IsFibrant\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.bifibrantObjects\"], \"digest\": \"eca50ac8eda7b5af\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader query. Read ModelCategory/Bifibrant.lean:93-109: fibrantObjects, FibrantObject and mk_surjective only repackage an already fibrant object with its instance; they do not construct a minimal retract. Quasicategory/Basic.lean:39-50 is horn filling, and StrictBicategory.lean:51 defines QCat. The Quillen model instances use all horns, not the Joyal minimal-model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal|retract|deformation",
+   "results": "{\"t\": \"2026-10-16T21:23:15Z\", \"tool\": \"grep\", \"query\": \"minimal|retract|deformation\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A minimal quasicategory is a deformation retract of any quasicategory",
+   "results": "{\"t\": \"2026-10-16T21:23:15Z\", \"tool\": \"leansearch\", \"query\": \"A minimal quasicategory is a deformation retract of any quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.Quasicategory.mk\", \"SSet.QCat\", \"quasiIso_of_retractArrow\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Quasicategory.recOn\", \"SSet.Quasicategory.rec\", \"quasiIsoAt_of_retract\"], \"digest\": \"fa143e71a4ff90ac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasicategory admits a minimal simplicial subset and a deformation retraction onto it fixed on that subset",
+   "results": "{\"t\": \"2026-10-16T21:23:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every quasicategory admits a minimal simplicial subset and a deformation retraction onto it fixed on that subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"41f9dcdcd4789074\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"minimal\"",
+   "results": "{\"t\": \"2026-10-16T21:23:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"minimal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*(quasi|fibr|simplic)|deformation.*retract|relative.*homotop",
+   "results": "{\"t\": \"2026-10-16T21:23:50Z\", \"tool\": \"grep\", \"query\": \"minimal.*(quasi|fibr|simplic)|deformation.*retract|relative.*homotop\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\"], \"digest\": \"7d5ad63024374ef6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose one representative in every relative boundary homotopy class of simplices of a quasicategory to construct its minimal model",
+   "results": "{\"t\": \"2026-10-16T21:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"Choose one representative in every relative boundary homotopy class of simplices of a quasicategory to construct its minimal model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex\"], \"digest\": \"d3d619d1de55ce49\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Basic.lean:39-70 only supplies inner-horn filling; InnerFibration.lean:64-66 is retract stability of inner fibrations, not existence of minimal retracts. ModelCategoryQuillen.I/J are generators for the Kan model structure. RelativeMorphism.lean:86-115 defines relative homotopies and their quotient, with no equivalence-vertex condition or minimal-model existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal|deformation|strong.*retract",
+   "results": "{\"t\": \"2026-10-16T21:38:00Z\", \"tool\": \"grep\", \"query\": \"minimal|deformation|strong.*retract\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match (independent second reading). Read CategoryWithFibrations.lean:36-47,68-100: I/J and the fibrations instances describe boundary/horn generating families and lifting properties, with no minimal subobject or strong deformation retract. Read ModelCategory/Bifibrant.lean:96-109: FibrantObject.mk_surjective repackages a fibrant object and supplies no minimal replacement. Loogle and the simplicial-set source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial set fibrant for the Joyal model structure has a strong deformation retract containing exactly one simplex in each boundary-preserving homotopy class",
+   "results": "{\"t\": \"2026-10-16T21:38:01Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial set fibrant for the Joyal model structure has a strong deformation retract containing exactly one simplex in each boundary-preserving homotopy class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"a00cae03587dbbc9\"}",
+   "date": "2026-10-16",
+   "verdict": "No match (independent second reading). Read CategoryWithFibrations.lean:36-47,68-100: I/J and the fibrations instances describe boundary/horn generating families and lifting properties, with no minimal subobject or strong deformation retract. Read ModelCategory/Bifibrant.lean:96-109: FibrantObject.mk_surjective repackages a fibrant object and supplies no minimal replacement. Loogle and the simplicial-set source grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Retract",
+   "results": "{\"t\": \"2026-10-16T21:38:01Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Retract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match (independent second reading). Read CategoryWithFibrations.lean:36-47,68-100: I/J and the fibrations instances describe boundary/horn generating families and lifting properties, with no minimal subobject or strong deformation retract. Read ModelCategory/Bifibrant.lean:96-109: FibrantObject.mk_surjective repackages a fibrant object and supplies no minimal replacement. Loogle and the simplicial-set source grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-small-full-subcategory",
@@ -92,5 +255,21 @@
   "group": "Q36"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-minimal-retract",
+  "worker": "stage1",
+  "summary": "Split with no new nodes. Read HTT Definition 2.3.3.1 and the entire proof of Proposition 2.3.3.8 online. Retained the exact statement, including degree-zero minimality, relative constancy, arbitrary larger-universe small quasicategories and the empty case. Reused the marked-anodyne mapping-space calculus and the relative skeletal boundary-cell Mathlib leaf. Expanded degenerate-simplex uniqueness, selection and degeneracy closure, inner-horn normalization, strict-boundary composition of the two prism homotopies, and degreewise gluing. Ran six fresh logged Mathlib searches and read the hits; no minimal-retract theorem was found. Independent second reading clarified the definitional identification of the minimally marked mapping object with Fun(A,C), expanded its citation quote, and ran three further logged searches; the statement and remaining seven steps are retained.",
+  "blueprint": "Foundational minimal-model input for the reflected small full subcategory, in the retained ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2: the displayed finite-coefficient mapping-complex adjunction before its derived inverse limit. The current main-20261015 proof has the same displayed calculation, now under sk-thm-sf-package; historical blueprint ancestry and maintainer-owned unit were preserved. Steps 1-4 realize HTT minimal-subset construction; steps 5-8 realize its relative deformation retraction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-b0443a21b",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-b0443a21b (reviewer sub-agent of L); spot-checked: I read the whole split: all 8 steps, the statement, and every cited statement (marked-anodyne lifting calculus, the boundary-cell Mathlib leaf checked against Skeleton.lean:425-446, def-weil-pbc-simplicial-set, def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category). There are no new nodes. The statement is true: it is HTT 2.3.3.8 with S a point. It also gives its only user, lem-coef-infinity-small-full-subcategory, the degree-0 and degenerate-track minimality its steps 4-5 need. HTT is not in literature/, so I could not check it at pp.101-105. I re-derived every step independently instead. Step 1: Map^flat(A^flat,C^natural)=Fun(A,C), the edges of P_B are prisms whose vertex tracks are equivalences, and the strict fibre is Kan. Step 2: I checked the simplicial identities in both cases i=j and i<j. Step 3: closure under degeneracies is a correct induction. Step 4: the missing face's boundary lies in M, the glued homotopy is legitimate, the Lambda^1_0 lift works, and minimality transfers through the inclusion. Steps 5-7: the relative skeletal induction is set up correctly, the faces of s_1 gamma are gamma, id, gamma, and gluing is degreewise. Step 8: the result is a core edge of Fun(C,C) with ri=id strictly. Small cases tested: empty C, discrete C, N[1], the indiscrete groupoid on two objects, and BG. The rg duplicate search found only lem-coef-kan-minimal-factorization, which concerns Kan fibrations, so it is not a duplicate. proof_deps equals the union of uses, there is no cycle, the route stays in unit sk-prop-sf-biduality-general, no tool_uses are needed, and no SGA is cited. proof_origin is honestly marked agent, with WANTED lines for HTT and Kerodon. No changes made."
+ }
 }

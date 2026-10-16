@@ -6,6 +6,7 @@
    "node": "prop-coef-integral-exceptional-adjoint",
    "place": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation: small filtered-colimit generation of the unmarked equivalence class used to recognize the marked model foundation.",
    "via": [
+    "lem-coef-marked-saturation-perfect-equivalences",
     "lem-coef-marked-point-cartesian-model",
     "lem-coef-infinity-functor-pushout",
     "lem-coef-hammock-infinity-localization",
@@ -31,9 +32,139 @@
   "def-weil-size-convention",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the input universe. Write $\\mathcal S=\\mathrm{sSet}$ and $\\mathcal A=\\mathrm{sCat}$. The simplicial-set definition identifies $\\mathcal S$ with $\\operatorname{Fun}(\\Delta^{\\mathrm{op}},\\mathrm{Set})$, so [lem-coef-presheaf-local-presentability] makes $\\mathcal S$ locally presentable. By [lem-coef-simplicial-interval-lifting], $\\mathcal A$ is complete and locally presentable, and its families $I,J$ are small sets of maps. Apply the presheaf result also with indexing category $[1]^{\\mathrm{op}}$ and target $\\mathcal S$ or $\\mathcal A$ to see that both arrow categories are locally presentable. The required pullbacks exist in $\\mathcal S$ degreewise, and in $\\mathcal A$ by completeness. Colimits of arrows are computed on endpoints: a cocone of squares is exactly two endpoint cocones whose induced maps commute, by the colimit universal property.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-presheaf-local-presentability",
+    "lem-coef-simplicial-interval-lifting",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "Let $W$ be the Dwyer--Kan equivalences, in the convention of [lem-coef-simplicial-interval-cell-stability]. Every map in the weakly saturated closure of $J$ belongs to $W$. Indeed $J$ lies in $J\\text{-cof}={}^{\\square}(J\\text{-inj})$ directly from the definition of $J\\text{-inj}$. An isomorphism $i:X\\to Y$ has the left lifting property against every map: in a square with top map $u:X\\to A$, the diagonal is $ui^{-1}$. The lifting-class closure and transfinite left-lifting statements then show that $J\\text{-cof}$ is closed under pushouts, transfinite compositions and arrow retracts. Thus the weakly saturated closure of $J$ is contained in $J\\text{-cof}$. The interval-lifting statement makes every member of $J\\text{-cof}$ a retract of a relative $J\\text{-cell}$ map, and the cell-stability statement puts all such cell maps and their retracts in $W$.",
+   "uses": [
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "A functor $p:A\\to B$ lies in $I\\text{-inj}$ exactly when it is surjective on objects and each map $A(a,a')\\to B(pa,pa')$ is a trivial Kan fibration. To check this directly, lifting against $\\varnothing\\to\\{0\\}$ is surjectivity on objects. A square against $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ fixes two source objects $a,a'$ and is precisely a boundary-lifting problem for the displayed mapping-set map, also when $a=a'$. The Kan--Quillen statement identifies lifting against all boundaries, including $n=0$, with trivial Kan fibrations. Consequently every $I\\text{-inj}$ functor is in $W$: its local maps are weak homotopy equivalences, hence give bijections on components and full faithfulness of $\\pi_0p$, while object surjectivity gives essential surjectivity. A fully faithful essentially surjective ordinary functor is an equivalence: choose an object preimage up to isomorphism, and define its inverse on morphisms using the fully faithful Hom bijections.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "For $p\\in J\\text{-inj}$ one has $p\\in W$ if and only if $p\\in I\\text{-inj}$. The reverse implication is step 3. In the forward direction, the interval-lifting criterion makes each local map a Kan fibration; the assumption $p\\in W$ makes it also a weak homotopy equivalence, hence a trivial fibration in the Kan--Quillen model structure. For any object $b\\in B$, essential surjectivity supplies $a\\in A$ and an isomorphism $pa\\simeq b$ in $\\pi_0B$. Represent that isomorphism by a vertex of $B(pa,b)$. The equivalence-lifting clause for $J\\text{-inj}$ then supplies $a'$ with $pa'=b$. Thus $p$ is surjective on objects and step 3 applies. No local fibrancy assumption on $A$ or $B$ was used.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-small-object-factorization] to the locally presentable category $\\mathcal A$ and the small generating set $J$. Choose its functorial factorization $f=p_f i_f$, and define $R:\\mathcal A^{[1]}\\to\\mathcal A^{[1]}$ by $R(f)=p_f:E(f)\\to\\operatorname{target}(f)$. Functoriality of the factorization supplies its maps of squares. There is an infinite regular $\\kappa$ for which $E$ preserves small $\\kappa$-filtered colimits; since the target projection preserves all colimits and arrow colimits are computed on endpoints, $R$ preserves those colimits too. Step 2 gives $i_f\\in W$; moreover $p_f\\in J\\text{-inj}$. By two-out-of-three for $W$ and step 4, $f\\in W$ holds exactly when $R(f)\\in I\\text{-inj}$.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak C:\\mathcal S\\to\\mathcal A$ be the rigidification explicitly defined in [lem-coef-rigidification-equivalence-detection]. It preserves small colimits, as can be checked without a model-localization theorem. Define a simplicial set $N_A$ by $(N_A)_n=\\operatorname{Hom}_{\\mathcal A}(\\mathfrak C[\\Delta^n],A)$ with operators given by precomposition. A map from the defining simplex colimit to $A$ is a family of enriched functors $g_x:\\mathfrak C[\\Delta^n]\\to A$, one for each $x\\in S_n$, satisfying $g_{S(\\alpha)x}=g_x\\mathfrak C[\\Delta(\\alpha)]$ for every $\\alpha:[m]\\to[n]$. These are exactly the equations for the assignments $x\\mapsto g_x$ to be a simplicial map $S\\to N_A$. Conversely, such a simplicial map gives that compatible family and hence a unique enriched functor from the colimit. These constructions are inverse and commute with precomposition in $S$ and postcomposition in $A$, giving natural bijections $\\operatorname{Hom}_{\\mathcal A}(\\mathfrak C[S],A)=\\operatorname{Hom}_{\\mathcal S}(S,N_A)$. For any small diagram $S_d$ with colimit $S$, maps $S\\to N_A$ are compatible families $S_d\\to N_A$; under the bijections these are exactly cocones of maps $\\mathfrak C[S_d]\\to A$. This proves the colimit universal property for $\\mathfrak C[S]$. Hence the induced arrow functor $\\mathfrak C^{[1]}$ preserves small colimits on both endpoints. The same rigidification criterion gives $u\\in E$ exactly when $\\mathfrak C[u]\\in W$.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "By [lem-coef-small-right-lifting-accessibility], the full subcategory $\\mathcal V\\subseteq\\mathcal A^{[1]}$ on $I\\text{-inj}$ is replete and accessible: step 1 verified local presentability of $\\mathcal A$ and smallness of $I$, which are all the hypotheses of that lemma. Form $H=R\\circ\\mathfrak C^{[1]}:\\mathcal S^{[1]}\\to\\mathcal A^{[1]}$. Steps 5 and 6 show that it preserves small $\\kappa$-filtered colimits. By steps 5 and 6, $H(u)\\in\\mathcal V$ if and only if $u\\in E$.",
+   "uses": [
+    "lem-coef-small-right-lifting-accessibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-full-inverse-image] to $H$ and $\\mathcal V$. Both its ambient categories are locally presentable by step 1, $H$ preserves sufficiently filtered colimits by step 7, and $\\mathcal V$ is replete accessible by step 7. Its conclusion says that the full subcategory on $E=H^{-1}\\mathcal V$ is accessible as a subcategory of the simplicial arrow category. In particular there exist an infinite regular cardinal $\\lambda$ in the input universe and a small set of arrows $E_0\\subseteq E$ generating it under small $\\lambda$-filtered colimits computed in that arrow category. This application uses the arbitrary-functor version of the inverse-image theorem, since $H$ need not be induced by an endpoint functor.",
+   "uses": [
+    "lem-coef-accessible-full-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  },
+  {
+   "text": "For each $u\\in E$, choose the small $\\lambda$-filtered diagram of generators supplied by step 8. Every finite diagram has fewer than $\\lambda$ morphisms, so its index category is filtered in the sense of the statement, including nonemptiness from the empty diagram. Thus this is already a small filtered presentation of $u$. If a presentation uses arrows only isomorphic to the chosen generators, choose isomorphisms $\\alpha_d:D(d)\\xrightarrow{\\sim}e_d\\in E_0$ and replace its transition square $D(a)$ by $\\alpha_{d'}D(a)\\alpha_d^{-1}$. The identity and composition equations follow by cancellation, and the $\\alpha_d$ give an isomorphism of diagrams, hence of their colimits by the universal property. This yields precisely the asserted isomorphism in the arrow category. The argument does not require closure of $E$ under every filtered colimit or that the generators have finite endpoints.",
+   "uses": [
+    "lem-coef-accessible-full-inverse-image",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent derivation from the cited DAG statements; motivated by HTT Theorem 2.2.5.1, proof (1), and Corollary A.2.6.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-accessible-full-inverse-image",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-rigidification-equivalence-detection",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-small-right-lifting-accessibility",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Independent derivation from existing DAG lemmas: small lifting-class accessibility and accessible factorization, followed by rigidification; motivated by Theorem 2.2.5.1 proof (1). HTT is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +221,94 @@
    "results": "{\"t\": \"2026-10-16T20:25:06Z\", \"tool\": \"leansearch\", \"query\": \"The subcategory of Joyal weak equivalences is generated by a set of arrows using filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.Limits.Types.FilteredColimit.rel_eq_eqvGen_colimitTypeRel\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.isStableUnderColimitsOfShape\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_equivalence\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\"], \"digest\": \"2471d68f06825de1\"}",
    "date": "2026-10-17",
    "verdict": "no match: the Joyal-trick declarations are general model-category lifting implications; the simplicial-set hits use the Kan-Quillen model structure, and the general filtered-colimit declarations do not establish small generation of categorical equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical equivalences of simplicial sets are generated under filtered colimits by a small set",
+   "results": "{\"t\": \"2026-10-16T21:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical equivalences of simplicial sets are generated under filtered colimits by a small set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.hasColimits\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.Truncated.largeCategory\", \"SSet.largeCategory\", \"SSet.Truncated.hasColimits\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.QCat\"], \"digest\": \"466a3625e026e5a4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"categoricalEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T21:24:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"categoricalEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "CategoricalEquivalence|categoricalEquivalence|Joyal",
+   "results": "{\"t\": \"2026-10-16T21:24:39Z\", \"tool\": \"grep\", \"query\": \"CategoricalEquivalence|categoricalEquivalence|Joyal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The class of Joyal weak equivalences is an accessible subcategory of simplicial set arrows",
+   "results": "{\"t\": \"2026-10-16T21:24:40Z\", \"tool\": \"leansearch\", \"query\": \"The class of Joyal weak equivalences is an accessible subcategory of simplicial set arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.WeakEquivalence\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\"], \"digest\": \"28ca5234988294d9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joyal weak equivalences form a small generated accessible class in the arrow category",
+   "results": "{\"t\": \"2026-10-16T21:25:16Z\", \"tool\": \"leanfinder\", \"query\": \"Joyal weak equivalences form a small generated accessible class in the arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"add47afb625b3d08\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasCardinalFilteredGenerator\"",
+   "results": "{\"t\": \"2026-10-16T21:25:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasCardinalFilteredGenerator\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerator.toLocallySmall\", \"CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.hasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_generator\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_small_generator\", \"CategoryTheory.HasCardinalFilteredGenerator.mk\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\"], \"digest\": \"c70597edc410275a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.*[Ee]quivalence|Joyal|[Dd]wyer",
+   "results": "{\"t\": \"2026-10-16T21:25:17Z\", \"tool\": \"grep\", \"query\": \"categorical.*[Ee]quivalence|Joyal|[Dd]wyer\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/Skeletal.lean\", \"Mathlib/CategoryTheory/Preadditive/Mat.lean\", \"Mathlib/CategoryTheory/Subobject/Types.lean\", \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\"], \"digest\": \"a3fbd80a7ea8ec2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical equivalences are filtered colimits of a set of small simplicial arrows",
+   "results": "{\"t\": \"2026-10-16T21:25:17Z\", \"tool\": \"leansearch\", \"query\": \"Categorical equivalences are filtered colimits of a set of small simplicial arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.hasColimitsOfShape_of_equivalence\", \"CategoryTheory.Limits.hasColimitsOfShape_of_equivalence\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.IsFiltered.of_equivalence\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.HasColimit.isoOfEquivalence\", \"CategoryTheory.IsCardinalFiltered.of_equivalence\", \"CategoryTheory.Limits.Types.FilteredColimit.rel_eq_eqvGen_colimitTypeRel\"], \"digest\": \"fd7233317fd57048\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kan--Quillen simplicial sets, generic model-category lifting, or abstract cardinal-filtered generators; none establishes accessibility or small generation for Joyal categorical equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalences.*[Aa]ccessib|[Aa]ccessib.*weakEquivalences|categoricalEquiv|CategoricalEquiv",
+   "results": "{\"t\": \"2026-10-16T21:38:17Z\", \"tool\": \"grep\", \"query\": \"weakEquivalences.*[Aa]ccessib|[Aa]ccessib.*weakEquivalences|categoricalEquiv|CategoricalEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no source hit for weak-equivalence accessibility or categorical-equivalence declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a combinatorial model category weak equivalences constitute an accessible and accessibly embedded full subcategory of the arrow category",
+   "results": "{\"t\": \"2026-10-16T21:38:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a combinatorial model category weak equivalences constitute an accessible and accessibly embedded full subcategory of the arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instCategoryWithWeakEquivalencesFullSubcategory\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyFullSubcategoryWeakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceHomFullSubcategory\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.instIsMultiplicativeFullSubcategoryWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\"], \"digest\": \"7165767bef72b5f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply categories with weak equivalences and inherited model-category structures, not accessibility of their equivalence subcategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessible\"",
+   "results": "{\"t\": \"2026-10-16T21:38:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalAccessible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.instIsCardinalAccessibleId\", \"CategoryTheory.Functor.instIsCardinalAccessibleOfPreservesColimitsOfSize\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.instIsCardinalAccessibleObjConst\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\"], \"digest\": \"36377be05d921016\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: these are accessible-functor definitions and preservation instances, with no Joyal-equivalence accessibility instance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak equivalences in a combinatorial model category are generated by a small set under sufficiently filtered colimits of morphisms",
+   "results": "{\"t\": \"2026-10-16T21:39:18Z\", \"tool\": \"leansearch\", \"query\": \"Weak equivalences in a combinatorial model category are generated by a small set under sufficiently filtered colimits of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\"], \"digest\": \"9e501eb236091536\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic weak-equivalence definitions and closure of local morphism properties do not assert accessibility of the Joyal equivalences."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-saturation-perfect-equivalences",
@@ -101,5 +316,20 @@
   "group": "Q49"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-categorical-equivalences-small-generation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved small generation using existing interval lifting/cell stability, accessible small-object factorization, small right-lifting accessibility and arbitrary accessible inverse images. Wrote the identification of the inverse image and the change from sufficiently filtered to filtered explicitly. No new nodes; avoided the cyclic generic model-category localization prerequisites. Repeated logged Mathlib searches and found no Joyal-equivalence instance. Second reading made the isomorphism-lifting and simplex-family bijection explicit, verified all 22 citation quotations, and added four independent Mathlib searches.",
+  "blueprint": "Realizes the foundational small-generation input to the integral exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction/inverse-limit calculation, through marked-point cartesian recognition. This is below the fixed unit route; the existing blueprint.from chain is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-03d42d3b9",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-03d42d3b9 (reviewer sub-agent of L); spot-checked: I read the item, its nine steps and the full statement of all 15 cited nodes, plus the proofs of accessible-full-inverse-image and small-right-lifting-accessibility (to confirm that 'generated' means each object is one λ-filtered colimit, as step 9 needs), the parent marked-saturation-perfect-equivalences and the unit sk-prop-sf-biduality-general. The statement is true and unchanged; it is the 'generated' clause of HTT A.2.6.12(4) for the Joyal structure. HTT is not in literature/, so I could not read it locally; the WANTED line is recorded and the route matches HTT Thm 2.2.5.1(1). The steps check out. Step 2: weakly saturated closure of J ⊆ J-cof ⊆ retracts of J-cell ⊆ W, using closure, transfinite lifting and cell stability. Step 3: I-inj means surjective on objects and locally a trivial fibration, including n=0 and a=a'; so I-inj ⊆ W. Step 4: J-inj ∩ W ⊆ I-inj, by the equivalence-vertex lifting clause. Step 5: the accessible J-factorization gives f ∈ W ⇔ R(f) ∈ I-inj, with R preserving κ-filtered colimits. Step 6: ℭ is left adjoint to N_A (elementary) and detects categorical equivalences. Steps 7–8: I^□ is accessible, and the arbitrary-functor inverse image gives accessibility of E. Step 9: an infinite λ makes λ-filtered diagrams filtered, and values are conjugated to lie in E_0. Small cases checked: id_∅, ∅→Δ^0, an empty target, n=0. proof_deps equals the union of uses; no cycle (204 nodes reachable, none is the item); the avoided model-weak-equivalences-accessible node is confirmed cyclic. All cited statements are in the item's unit, so no tool_uses are needed. No SGA, no new nodes, no duplicate in the DAG. Fix: blueprint.from.via lacked the creator lem-coef-marked-saturation-perfect-equivalences at the front; I added it in fixes/dag/nodes/sec-six-functors/lem-coef-categorical-equivalences-small-generation.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ }
 }

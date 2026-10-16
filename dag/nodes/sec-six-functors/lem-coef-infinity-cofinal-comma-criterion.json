@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction in the mapping-complex calculation before taking the derived inverse limit; via accessible-infinity-pullback: cofinal restriction of the compact-source indexing diagrams",
+   "place": "Historical master snapshot proof paragraph 2, derived coefficient adjunction in the mapping-complex calculation before taking the derived inverse limit; via accessible-infinity-pullback: cofinal restriction of the compact-source indexing diagrams",
    "via": [
     "lem-coef-accessible-infinity-pullback",
     "lem-coef-algebroid-presentability",
@@ -29,8 +29,104 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Choose a universe $\\mathcal W$ containing $I,J,\\mathcal E$ and all the mapping spaces used below, and form its space category in a further universe. Put $v=u^{\\mathrm{op}}:I^{\\mathrm{op}}\\to J^{\\mathrm{op}}$. The opposite operation gives quasicategories and identifies $(v\\downarrow j)$ with the opposite of the arrow-comma model $I_{j/}$. This can be read simplex by simplex: $(i,\\alpha:u^{\\mathrm{op}}i\\to j)$ corresponds to $(i,\\alpha^{\\mathrm{op}}:j\\to u i)$, with every triangle and higher simplex reversed. To justify the pullback model, apply the isofibration-exponentiation theorem to $J\\to *$ and $\\partial\\Delta^1\\hookrightarrow\\Delta^1$: the endpoint map $\\operatorname{Fun}(\\Delta^1,J)\\to J\\times J$ is an isofibration. Pulling back along $k\\mapsto(j,k)$ gives the source-fixed arrow projection $J_{j/}\\to J$. Isofibrations are preserved by these pullbacks: an inner-horn lifting problem, or a specified-source equivalence lifting problem, projects to one upstairs, and its lift pairs with the prescribed base simplex or equivalence. The isofibration-pullback-limit theorem therefore identifies the strict simplicial pullback $I\\times_J J_{j/}$ with the infinity-categorical pullback in the hypothesis. Opposite reversal identifies its opposite degree by degree with the child's displayed arrow-comma model $(v\\downarrow j)$. Reversal preserves weak contractibility: on realizations the map reverses the order of barycentric coordinates on each simplex, respecting face and degeneracy relations. Hence every $(v\\downarrow j)$ is weakly contractible. No filteredness hypothesis is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1; comma orientation and passage to opposites; online source, not archived in literature/; expanded argument by NP; categorical pullback justification: Kerodon Corollary 4.5.3.28 (033R), via the cited isofibration-pullback-limit node"
+   }
+  },
+  {
+   "text": "Apply pointwise space-valued left Kan extension to $v$ and $\\Delta_{I^{\\mathrm{op}}}*$. Denote the result by $L$, its unit by $\\eta$, and let $e:L\\to\\Delta_{J^{\\mathrm{op}}}*$ be the mate of the identity of $\\Delta_{I^{\\mathrm{op}}}*$. Its component $e_j$ is the canonical map from the colimit of the constant point indexed by $(v\\downarrow j)$ to the point. Spaces have all the required small colimits. The weakly-contractible constant-diagram assertion of lem-coef-infinity-coslice-colimit-formula, applied with $\\mathcal C=\\mathcal S_{\\mathcal W}$ and $X=*$, says exactly that each $e_j$ is an equivalence. The pointwise criterion for equivalences in a coherent functor category now makes $e$ an equivalence.",
+   "uses": [
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 4.3.2-4.3.3 and Proposition 4.3.3.7; pointwise calculation of the mate; online source, not archived in literature/; expanded argument by NP"
+   }
+  },
+  {
+   "text": "For any $F:J^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal W}$, precomposition with $e$ and the Kan-extension adjunction give equivalences\n$$\\operatorname{Map}(\\Delta_{J^{\\mathrm{op}}}*,F)\\xrightarrow{e^*}\\operatorname{Map}(L,F)\\xrightarrow{\\sim}\\operatorname{Map}(\\Delta_{I^{\\mathrm{op}}}*,Fv).$$\nBy the adjunction formula, the composite map sends $\\alpha:\\Delta_{J^{\\mathrm{op}}}*\\to F$ to $(\\alpha v)(ev)\\eta$. The mate correspondence supplies a coherent homotopy $(ev)\\eta\\simeq\\operatorname{id}$, because $e$ is the mate of that identity. Postcomposition by $\\alpha v$ gives a homotopy to $\\alpha v$, natural in $\\alpha$ and all its higher simplices. Thus the composite map is homotopic to restriction itself, so restriction is an equivalence of spaces. Under the dual transport classification of right fibrations, the constant point is represented by $J\\xrightarrow{1}J$. For every right fibration $q:X\\to J$, the displayed mapping spaces are therefore the spaces of sections $\\operatorname{Fun}_{/J}(J,X)$ and $\\operatorname{Fun}_{/J}(I,X)$, respectively. Compatibility of transport with pullback and composition identifies their comparison with the actual section restriction.",
+   "uses": [
+    "lem-coef-infinity-space-valued-pointwise-lan",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 4.1.1.1, with Proposition 4.3.3.7; computation of the actual restriction map; online source, not archived in literature/; expanded argument by NP"
+   }
+  },
+  {
+   "text": "For $T\\in\\mathcal E$, the source map $Q_T=\\operatorname{Fun}(\\Delta^1,\\mathcal E)\\times_{\\operatorname{ev}_1,\\mathcal E}\\{T\\}\\to\\mathcal E$ is a right fibration. Pull back along $H$; right horn lifting is preserved by pullback, because a lifting square in the pullback is exactly a lifting square upstairs with its prescribed base. Apply step 3 to this right fibration over $J$. By currying simplicial maps, its section space is exactly the arrow mapping space $U_{\\operatorname{Fun}(J,\\mathcal E)}(H,\\Delta_J T)$, and the analogous space over $I$ is $U_{\\operatorname{Fun}(I,\\mathcal E)}(Hu,\\Delta_I T)$. The natural right-pinch inclusions identify these with the specified right-pinched mapping spaces. Their naturality makes a commuting square with section restriction, so two-out-of-three gives precisely the mapping-space restriction asserted in the item.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.7; section interpretation of cocone spaces and mapping-model comparison; online source, not archived in literature/; expanded argument by NP"
+   }
+  },
+  {
+   "text": "The cocone projections $\\mathcal E_{H/}\\to\\mathcal E$ and $\\mathcal E_{Hu/}\\to\\mathcal E$ are left fibrations. Indeed the source-fixed arrow projection in $D=\\operatorname{Fun}(J,\\mathcal E)$ is the opposite of the target-fixed right fibration for $D^{\\mathrm{op}}$; reversing the horn index converts right lifting to left lifting. Pull it back along $\\Delta_J:\\mathcal E\\to D$ to obtain exactly the cocone category in the definition; do the same for $I$. Restriction is a map of these left fibrations over the identity of $\\mathcal E$. Their fibers at $T$ are the arrow mapping spaces in step 4, so its fiber maps are equivalences. Under transport classification this map is a transformation between the classifying space-valued functors whose components are those fiber maps. The componentwise criterion makes it an equivalence. Full faithfulness of transport then supplies an inverse over $\\mathcal E$ with the inverse homotopies; forgetting the base gives the claimed equivalence of cocone quasicategories. The base stays the identity, so the vertex is unchanged.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 4.1.1.7-4.1.1.8; passage from fiber equivalences to cocone-category equivalence; online source, not archived in literature/; expanded argument by NP"
+   }
+  },
+  {
+   "text": "Let $\\lambda:H\\to\\Delta_J L_0$ be any given cocone. For each $T$, the colimit criterion tests whether $\\operatorname{Map}_{\\mathcal E}(L_0,T)\\to\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal E)}(H,\\Delta_J T)$, $a\\mapsto\\Delta_J(a)\\lambda$, is an equivalence. The criterion for the restricted cocone has the same source and the target with $I$ in place of $J$. Restriction composes the first test map to the second, and its target comparison is an equivalence by step 4. Two-out-of-three proves both implications for this particular cocone. Naturality in $H$ is precomposition by a coherent transformation, and naturality in $T$ is postcomposition by its constant transformation. These operations commute with restriction as simplicial maps. For a coherent functor $P:\\mathcal E\\to\\mathcal E'$, the equation $P(\\lambda|_I)=(P\\lambda)|_I$ holds on every simplex; the pinch comparisons are natural under $P$, so the claimed compatibility with coherent postcomposition also holds. All colimits introduced in the proof were in spaces; none in $\\mathcal E$ was assumed.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.8; colimit criterion and functoriality; online source, not archived in literature/; expanded argument by NP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +148,80 @@
    "results": "{\"t\": \"2026-10-16T20:39:45Z\", \"tool\": \"grep\", \"query\": \"cofinal|final|filtered|coslice|TheoremA\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match. The returned category-theory declarations require ordinary Category instances and concern set-valued Hom functors or ordinary comma categories. The quasicategory hits supply inner-horn fillers only. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, CategoryTheory/Limits/Final.lean:89-106 and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-211; no declaration states this coherent quasicategory assertion. The logged quasicategory source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen theorem A for quasicategories cofinal restriction equivalence of cocone categories",
+   "results": "{\"t\": \"2026-10-16T21:22:54Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen theorem A for quasicategories cofinal restriction equivalence of cocone categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.Final.coconesEquiv_functor\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.Functor.Final.extendCocone\"], \"digest\": \"030b452d3f87d8f2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-16T21:22:55Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|final|[Qq]uillen [AlgebraicTopology/Quasicategory]",
+   "results": "{\"t\": \"2026-10-16T21:22:55Z\", \"tool\": \"grep\", \"query\": \"cofinal|final|[Qq]uillen\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"6c7512fffd7aa14a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contractible undercategories of an infinity functor imply equivalence of cocone spaces",
+   "results": "{\"t\": \"2026-10-16T21:22:56Z\", \"tool\": \"leansearch\", \"query\": \"Contractible undercategories of an infinity functor imply equivalence of cocone spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Functor.CoconeTypes.mk.inj\", \"CategoryTheory.Under.liftCocone\", \"CategoryTheory.Limits.Cocone.isColimitEquivIsInitial\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.WithInitial.coconeEquiv\", \"CategoryTheory.WithInitial.isColimitEquiv_symm_apply_desc\"], \"digest\": \"356f50e642926177\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy final functors contractible comma quasicategories Joyal cofinal maps",
+   "results": "{\"t\": \"2026-10-16T21:23:35Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy final functors contractible comma quasicategories Joyal cofinal maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.final_pre\", \"CategoryTheory.Comma.map_final\", \"CategoryTheory.Grothendieck.final_map\", \"CategoryTheory.Limits.WalkingParallelPair.inclusionWalkingReflexivePair_final\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.final_fromFinalModel\", \"SSet.Truncated.HomotopyCategory.isTerminal\"], \"digest\": \"b4920598e041c11d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ofinal|[Ff]inal|[Uu]ndercategory [AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-16T21:23:35Z\", \"tool\": \"grep\", \"query\": \"[Cc]ofinal|[Ff]inal|[Uu]ndercategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"d967b5093af51a3b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-103, Mathlib/CategoryTheory/Limits/Final.lean:89-106 and Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:248-256. The final-functor and pointwise Kan-extension hits concern ordinary Category instances, set-valued Hom and ordinary comma categories. The simplicial-object hits concern ordinary functors on the simplex category, not coherent diagrams between quasicategories. None gives the stated equivalence of coherent mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets homotopy coherent left Kan extension along arbitrary functors into Kan complexes",
+   "results": "{\"t\": \"2026-10-16T21:39:20Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets homotopy coherent left Kan extension along arbitrary functors into Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"cf4bd6fc7c8868e3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:184-236: these are ordinary right Kan extensions of the Type-valued simplex presheaf restricted to the truncated simplex category. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:28-63 and Pointwise.lean:240-256: ordinary Category instances and ordinary transformation sets are required. Quasicategory/Basic.lean:34-103 supplies inner horn fillers, with no coherent pointwise Kan-extension adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "leftKan|left_kan|KanExtension|[Cc]ofinal [AlgebraicTopology/Quasicategory]",
+   "results": "{\"t\": \"2026-10-16T21:39:43Z\", \"tool\": \"grep\", \"query\": \"leftKan|left_kan|KanExtension|[Cc]ofinal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:184-236: these are ordinary right Kan extensions of the Type-valued simplex presheaf restricted to the truncated simplex category. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:28-63 and Pointwise.lean:240-256: ordinary Category instances and ordinary transformation sets are required. Quasicategory/Basic.lean:34-103 supplies inner horn fillers, with no coherent pointwise Kan-extension adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanExtension\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-16T21:39:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanExtension\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\"], \"digest\": \"1e9c425a9789d991\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:184-236: these are ordinary right Kan extensions of the Type-valued simplex presheaf restricted to the truncated simplex category. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:28-63 and Pointwise.lean:240-256: ordinary Category instances and ordinary transformation sets are required. Quasicategory/Basic.lean:34-103 supplies inner horn fillers, with no coherent pointwise Kan-extension adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left adjoint to restriction on homotopy coherent space valued diagrams of quasicategories",
+   "results": "{\"t\": \"2026-10-16T21:41:22Z\", \"tool\": \"leansearch\", \"query\": \"Left adjoint to restriction on homotopy coherent space valued diagrams of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.lanAdjunction\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\"], \"digest\": \"59e016df55af0a04\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:184-236: these are ordinary right Kan extensions of the Type-valued simplex presheaf restricted to the truncated simplex category. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:28-63 and Pointwise.lean:240-256: ordinary Category instances and ordinary transformation sets are required. Quasicategory/Basic.lean:34-103 supplies inner horn fillers, with no coherent pointwise Kan-extension adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-filtered-cofinal-pullback",
@@ -63,5 +229,34 @@
   "group": "Q58"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Theorem 4.1.3.1 and Propositions 4.1.1.7-4.1.1.8; expanded space-valued Kan-extension proof using Sections 4.3.2-4.3.3. Source read online, not archived in literature/."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cofinal-comma-criterion",
+  "worker": "stage1",
+  "summary": "Kept every clause and gave six steps: opposite comma contractibility, pointwise extension of the constant point, identification of its adjunction comparison with actual section restriction, cocone mapping spaces, cocone categories over the same vertex base, and the test for a given colimiting cocone. Added one general space-valued pointwise left Kan-extension theorem; reused the constant-diagram, transport, pinch and cone-calculus interfaces. Second reading supplies the isofibration justification for the comma pullback model and makes the coherent mate homotopy explicit.",
+  "blueprint": "Retains the historical prop-coef-integral-exceptional-adjoint ancestry and its paragraph-2 derived-Hom adjunction calculation (the displayed calculation in the historical master snapshot; main-20261015 retains the statement but omits that proof). Supplies the coherent cofinal restriction of compact-source indexing diagrams used by lem-coef-accessible-infinity-pullback through the existing created-node chain; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor-equivalence and cocone colimit criteria; the biduality unit has no replacement for this coherent-diagram infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NP-3873d1a40",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-3873d1a40 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-coef-infinity-space-valued-pointwise-lan and the full statements of all 12 cited nodes. The item statement matches HTT Thm 4.1.3.1 and Props 4.1.1.7-4.1.1.8 with the correct orientation: objects (i, j->u(i)), arbitrary small quasicategories, nothing filtered, no colimits assumed in E. Small cases all check out: J empty, I empty with J nonempty, {1} vs {0} in Delta^1, and two points mapping to a point. Step 1: isofibration-exponentiation and the pullback argument make J_{j/}->J an isofibration, isofibration-pullback-limit gives the homotopy pullback, and Fun(Delta^1,J^op)=Fun(Delta^1,J)^op with endpoints swapped gives (v|j)=(I_{j/})^op. Step 2: coslice-colimit-formula's weakly-contractible clause in S_W (cocomplete by spaces-small-colimits-universe), plus the componentwise criterion, makes e an equivalence. Step 3: since e is the mate of id, (ev)eta ~ id, so restriction is an equivalence; transport (constant functor, pullback compatibility) turns this into restriction of sections. Step 4: arrow-target-right-fibration pulled back along H; by currying, sections are U_{Fun(J,E)}(H,Delta T); pinch-comparison transfers to Map. Step 5: the cocone categories are left fibrations pulled back along Delta_J; fiberwise equivalence plus transport gives an equivalence over E with the vertex fixed. Step 6: dual colimit test of cone-calculus and two-out-of-three, elementary. proof_deps equals the union of uses; no missing or merged ids; no cycle (the 311-node closure excludes the item). The new node is true (HTT 4.3.2.13/4.3.2.15, 4.3.3.2/4.3.3.7) with the comma oriented correctly for left Kan extensions, statement-only and self-contained, with all three search kinds recorded. It is a general Kan-extension theorem, not a clause of the item. No duplicate: I checked kan-mapping-restriction, relative-kan-existence, finite-poset-kan-extension, fiber-colimit-collage, coherent-diagram-coyoneda, sfb-pointwise-kan-colimit and cofinality-space-test (which is weaker). Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) as generic infrastructure; all other statements cited are in the unit sk-prop-sf-biduality-general. The parent filtered-cofinal-pullback uses exactly the item's hypothesis and conclusions. No SGA. Not a target, so there is no base-change morphism or coefficient category to check. Caveats: HTT and Kerodon are not archived (WANTED filed; proof_origin=agent), and the citations.json the report mentions is not in the branch. No changes."
+ }
 }

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; Propositions 5.3.5.10 and 5.5.1.9, as applied in the proof of Lemma 5.5.4.14, printed pp. 480-481 and 478.",
+   "place": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction: auxiliary presentable-category infrastructure reached through the retained finite-adjunction-realization, enrichment, presentable-adjoint and saturated-arrow ancestry. The Ind argument is a supporting HTT lemma, not text explicitly in that blueprint paragraph.",
    "via": [
     "lem-coef-small-saturated-arrow-accessibility",
     "lem-coef-small-saturated-coslice-presentability",
@@ -29,9 +29,92 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Essential smallness means there is a small $\\mathcal C$ with an equivalence $q:\\mathcal C\\simeq\\mathcal E_0$. Fix its coherent inverse $r$. Compose $q$ with the full inclusion to obtain $i:\\mathcal C\\to\\mathcal E$. For a $\\kappa$-small diagram $a:K\\to\\mathcal C$, take the ambient colimit of $ia$. Its apex $z$ lies in $\\mathcal E_0$ by closure; fullness makes the same cocone colimiting in $\\mathcal E_0$: its mapping-space test is simply the ambient test restricted to targets in $\\mathcal E_0$. Apply $r$ to this cocone. The inverse equivalences identify its mapping-space test with that for $a$, so it is colimiting in $\\mathcal C$ and $i$ preserves it. Thus $\\mathcal C$ admits all $\\kappa$-small colimits and $i$ preserves them. Its image objects are $\\kappa$-compact by hypothesis.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Setup of the application in Lemma 5.5.4.14, p. 480; equivalence and full-subcategory mapping-space argument written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-ind-kappa-presentability] to this small $\\mathcal C$. The category $\\mathcal A=\\operatorname{Ind}_\\kappa(\\mathcal C)$ is $\\kappa$-accessible and presentable, and every object has a small $\\kappa$-filtered presentation by Yoneda objects. The functor $j:\\mathcal C\\to\\mathcal A$ is fully faithful and preserves $\\kappa$-small colimits.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.3.5.3-5, 5.3.5.14 and Theorem 5.5.1.1(4)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-ind-kappa-extension] to $i:\\mathcal C\\to\\mathcal E$. The target is presentable, so has small filtered colimits and is locally small. Step 1 checked full faithfulness, compactness and preservation of $\\kappa$-small colimits. It gives a fully faithful extension $F:\\mathcal A\\to\\mathcal E$ preserving all small colimits and satisfying $Fj\\simeq i$. Its essential image is exactly $\\mathcal E_1$: the forward inclusion follows by applying $F$ to the presentations of step 2; conversely a presentation $b:I\\to\\mathcal E_0$ lifts coherently to $rb:I\\to\\mathcal C$, and $F(\\operatorname{colim}_I jrb)\\simeq\\operatorname{colim}_I b$ by preservation and $qr\\simeq1$. Repleteness supplies objects equivalent to these colimits.",
+   "uses": [
+    "lem-coef-ind-kappa-extension",
+    "lem-coef-ind-kappa-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.3.5.10-11 and 5.5.1.9; the essential-image identification is written out."
+   }
+  },
+  {
+   "text": "By the equivalence-onto-essential-image clause of [lem-coef-ind-kappa-extension] and step 3, $F$ factors as an equivalence $Q:\\mathcal A\\simeq\\mathcal E_1$ followed by its full inclusion $J$ into $\\mathcal E$. For any small diagram $a:K\\to\\mathcal E_1$, use a coherent inverse of $Q$ to obtain $\\widetilde a:K\\to\\mathcal A$. The cocone with apex $Q(\\operatorname{colim}_K\\widetilde a)$ is colimiting internally, because applying the inverse equivalence identifies its cocone universal property with the one in $\\mathcal A$. Its image in $\\mathcal E$ is the $F$-image of that colimit cocone, so is colimiting by step 3. Thus $\\mathcal E_1$ admits all small colimits, is closed under ambient small colimits and $J$ preserves them, including the empty colimit. Local smallness follows by fullness. In particular its filtered colimits are ambient; the mapping spaces out of any $x\\in\\mathcal E_0$ are also ambient, so ambient $\\kappa$-compactness gives internal $\\kappa$-compactness. The essentially small $\\mathcal E_0$ generates $\\mathcal E_1$ under such colimits by definition. These are exactly the clauses of $\\kappa$-accessibility.",
+   "uses": [
+    "lem-coef-ind-kappa-extension",
+    "lem-coef-ind-kappa-presentability",
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.11(2); compact-hull argument of Lemma 5.5.4.14, p. 480, with explicit colimit tests."
+   }
+  },
+  {
+   "text": "For a defining presentation $b:I\\to\\mathcal E_0$ of any $x\\in\\mathcal E_1$, apply [lem-coef-infinity-cofinal-kappa-poset] to the small $\\kappa$-filtered quasicategory $I$. Its cofinal map $u:N(A)\\to I$ has $A$ small and $\\kappa$-filtered, and restriction of the ambient colimit cocone gives $x\\simeq\\operatorname{colim}_{N(A)}bu$, as required.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.1.18, p. 386; existing DAG node reused."
+   }
+  },
+  {
+   "text": "For $x\\in\\mathcal E_0$, the one-object category $\\Delta^0$ is a small $\\kappa$-filtered index: every diagram into it has its unique extension to a cocone. The constant one-object diagram with value $x$ has colimit $x$, since its cocone test is the identity on each mapping space. Hence $x\\in\\mathcal E_1$. Closure under the empty colimit already follows from step 4; no empty filtered indexing category is used.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Constant one-object presentation; Definitions 5.3.1.7 and 5.4.2.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-ind-kappa-extension",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-cofinal-kappa-poset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Online HTT Propositions 5.3.5.10-11, 5.3.5.14, 5.5.1.9 and Theorem 5.5.1.1; compact-hull application in Lemma 5.5.4.14. Not archived; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -92,5 +175,21 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-ind-colimit-extension",
+  "worker": "stage1",
+  "summary": "Replaced the inherited false presheaf-inclusion colimit claim and disguised compact-hull restatement by Ind construction and universal-extension lemmas. Proved the small-model closure and essential-image arguments explicitly, reused the existing cofinal-poset node, refreshed literal citations and logged searches, and added missing chapter/unit metadata to new nodes. The item statement is unchanged.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction: auxiliary presentable-category infrastructure reached through the retained finite-adjunction-realization, enrichment, presentable-adjoint and saturated-arrow ancestry. The Ind argument is a supporting HTT lemma, not text explicitly in that blueprint paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N8-ad8711eeb",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-ad8711eeb (reviewer sub-agent of L); spot-checked: I read the full contract, the packet, the report, all three nodes and every cited statement (def-coef-presentable-infinity-category, def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, lem-coef-infinity-cofinal-kappa-poset). I checked the sources in a local 2017 HTT printing: Def 5.3.5.1, Props 5.3.5.3/5.3.5.5, Cor 5.3.5.4, Props 5.3.5.10/11/14, Def 5.4.2.1 and Prop 5.4.2.2, Prop 5.5.1.9 with its proof, and Lemma 5.5.4.14 on p. 480. The item statement is unchanged and correct: it is the compact-hull argument of HTT 5.5.4.14, and it covers the empty colimit. Step 1, the small-model transfer, is genuinely elementary. Step 3 meets every hypothesis of the extension child and proves both essential-image inclusions. Step 4 lifts diagrams through a coherent inverse and transfers internal compactness and accessibility clause by clause. Step 5 meets the cofinal-poset node's hypotheses. Step 6 is the Delta^0 presentation and uses no empty filtered index. The presentability child matches HTT 5.3.5.3/4/5/14 and 5.5.1.1(4); the worker's correction is right (for C = Delta^0, the inclusion of Ind into P(C) does not preserve the initial object). The extension child matches HTT 5.3.5.10/11. I verified its cocontinuity clause independently, without the idempotent completeness that HTT's proof of 5.5.1.9 assumes: the right adjoint d -> Map(f(-),d) lands in Ind by Cor 5.3.5.4(3). The parent lem-coef-small-saturated-arrow-accessibility, step 2, uses exactly what the item gives. I searched the DAG for duplicates (presheaf-ind-criterion, presheaf-presentability, presheaf-free-cocompletion, intermediate-presheaf-kan, bounded-colimit-presentation, compact-small-colimits, the ordinary Ind nodes) and found none. Neither child restates a clause of the item. Every citation is in the unit or is a definition; tool_uses is empty and I accepted none; no SGA source is used. FIX (B3): the extension child used local smallness, compactness, presentability and fully faithful functors while citing only the presentability statement node. I added def-coef-presentable-infinity-category and def-cbc-enhanced-diagrams-cones to its opening sentence and stmt_deps, without changing the mathematics, in fixes/dag/nodes/sec-six-functors/lem-coef-ind-kappa-extension.json.; 1 file(s) fixed by the reviewer"
+ }
 }

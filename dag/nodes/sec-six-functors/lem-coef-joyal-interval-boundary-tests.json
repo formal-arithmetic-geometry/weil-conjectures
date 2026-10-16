@@ -11,9 +11,179 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $e_\\varepsilon:\\Delta^0\\hookrightarrow J$ for the endpoints. The passage $\\Delta^1\\hookrightarrow J$ is a composite of two horn pushouts: attach $\\Lambda_0^2\\hookrightarrow\\Delta^2$ with vertices $(0,1,0)$ and already specified edges $[0,1]=a$, $[0,2]=\\mathrm{id}_0$; its missing edge is $b$. Then attach $\\Lambda_2^2\\hookrightarrow\\Delta^2$ with vertices $(1,0,1)$ and already specified edges $[1,2]=a$, $[0,2]=\\mathrm{id}_1$; its missing edge is $c$. These pushouts add exactly the missing edge and the stated triangle, since all vertices already lie in the horns; their degreewise universal properties are the free boundary-attachment universal properties in the statement. Each endpoint into $\\Delta^1$ is a one-dimensional horn inclusion. Thus both $e_\\varepsilon$ are Kan anodyne by three successive horn attachments. This argument allows the specified degenerate long edges and does not identify $b$ with $c$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 3.3.1 and Definition 3.3.3; direct horn-pushout description of the same finite free construction."
+   }
+  },
+  {
+   "text": "For any quasicategory $D$, a map $J\\to D$ factors through $D^\\simeq$. Indeed its images satisfy $[b][a]=1$ and $[a][c]=1$ in $hD$, hence $[b]=[c]$ and $[a]$ is invertible with inverse $[b]$. The triangle-calculus statement [lem-coef-homotopy-category-triangle-calculus] realizes both inverse equations by triangles with that same inverse edge. It makes the images of $a,b,c$ equivalences; every other edge of $J$ is degenerate. Every simplex therefore has all its image edges equivalences, which is exactly factorization through the core. Conversely, isomorphic vertices of $hD$ are joined by a map $J\\to D$: represent the isomorphism and its inverse by edges using that same node, realize the two inverse equations by its triangles, and apply the free construction of $J$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 3.3.1, and Section 1.6, Lemma 1.6.2 and Theorem 1.6.6; elementary left/right inverse calculation in the edge-and-triangle category."
+   }
+  },
+  {
+   "text": "Let $i:A\\hookrightarrow B$ be any small simplicial monomorphism and $Q$ any quasicategory. The statement [lem-coef-infinity-isofibration-exponentiation] supplies the isofibration $q:\\operatorname{Fun}(B,Q)\\to\\operatorname{Fun}(A,Q)$ between quasicategories. Its induced map of cores is a Kan fibration by [lem-coef-infinity-core-kan-fibration]. A map $(A\\times J)\\cup(B\\times\\{\\varepsilon\\})\\to Q$ transposes to a square with $e_\\varepsilon$ on the left, $q$ on the right, and a chosen vertex upstairs. Step 2 makes the entire bottom $J$-map land in the core; the chosen upper vertex is also an object of the upper core. Step 1 and the all-horn lifting of the map of cores give a lift. To justify use of the saturated Kan-anodyne class, extension against a fixed right map is preserved by pushout (restrict and glue), transfinite composition (choose compatible lifts at successors and take colimits at limits), retract (compose with its section and retraction), and isomorphism (use the inverse). Thus $Q\\to *$ lifts $e_\\varepsilon\\square i$ for every monomorphism $i$, including $i:\\varnothing\\to\\Delta^0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The interval endpoint extension argument, proved from the existing exponentiation and core statements; compare the fibrant-object argument of Sections 3.5-3.6."
+   }
+  },
+  {
+   "text": "For monomorphisms $i:U\\hookrightarrow V$, define $\\mathcal T$ by requiring $Q^V\\to Q^U$ to be a trivial Kan fibration for every quasicategory $Q$ in the input universe. The notation $Q^K$ means $\\operatorname{Fun}(K,Q)$. A boundary lifting problem for this map transposes to extension of $i\\square(\\partial\\Delta^m\\hookrightarrow\\Delta^m)$ into $Q$. Hence every inner horn belongs to $\\mathcal T$: it is inner anodyne by the lifting definition of [lem-coef-inner-anodyne-pushout-product], that node makes its pushout product with a boundary inner anodyne, and $Q\\to *$ is an inner fibration. Also $e_\\varepsilon\\square i\\in\\mathcal T$ for every monomorphism $i$, since its boundary problem is, after exchanging factors, extension across $e_\\varepsilon\\square(i\\square\\partial\\Delta^m)$; the second factor is a monomorphism degreewise and step 3 gives the extension. Dimension $m=0$ is included, giving vertex surjectivity as required by [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.2.4 and the transposed boundary-lifting calculation; compare Example 2.4.13 and the proof of the Joyal model construction."
+   }
+  },
+  {
+   "text": "The class $\\mathcal T$ is weakly saturated and is closed under pushout product with any monomorphism. For saturation, the boundary condition in step 4 says exactly that $i$ lifts on the left against each $Q^{\\Delta^m}\\to Q^{\\partial\\Delta^m}$. Each fixed left lifting class is closed under the four saturation operations, by the explicit extension-and-gluing argument of step 3 with the sides exchanged; monomorphisms have these closure properties degreewise. For the product assertion, let $i\\in\\mathcal T$ and let $j$ be a monomorphism. A boundary problem for the exponential associated to $i\\square j$ transposes to a problem for $Q^V\\to Q^U$ against $j\\square(\\partial\\Delta^m\\hookrightarrow\\Delta^m)$. The latter is degreewise injective: its domain is the union of the two indicated subsets of the product. The trivial Kan fibration $Q^V\\to Q^U$ lifts this map by [lem-weil-pbc-trivial-kan-lifts-monomorphisms]. This proves the assertion, including the empty boundary.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Elementary lifting-class saturation and product adjunction; Stacks Simplicial Lemma 08NM, label lemma-trivial-kan, for lifting monomorphisms."
+   }
+  },
+  {
+   "text": "Put $\\delta:\\Delta^0\\amalg\\Delta^0\\hookrightarrow J$ and let $S_0$ be the small set of all inner horns and all $e_\\varepsilon\\square(\\partial\\Delta^n\\hookrightarrow\\Delta^n)$. Recursively set $S_{r+1}=\\{\\delta\\square a:a\\in S_r\\}$, and let $\\mathrm{An}$ be the weakly saturated closure of $\\bigcup_{r\\geq0}S_r$. These are small sets in the input universe, made from countably many finite simplicial constructions. Steps 4-5 imply $\\mathrm{An}\\subseteq\\mathcal T$. We check both interval axioms of [lem-coef-presheaf-cylinder-model-recognition]. By [lem-coef-infinity-monomorphism-boundary-cells], every monomorphism is a countable composite of pushouts of coproducts of boundaries. Thus $e_\\varepsilon\\square j\\in\\mathrm{An}$ for every monomorphism $j$. Here pushout product carries these attachments to attachments: for a chain $K_\\alpha\\subseteq L$ and $v:U\\hookrightarrow V$, filter its pushout-product target by $(V\\times K_\\alpha)\\cup(U\\times L)$; each successor is a pushout of $v\\square(K_\\alpha\\hookrightarrow K_{\\alpha+1})$, and limit stages are unions. For a pushout along a possibly noninjective attaching map, degreewise the new complement is unchanged, so the same pushout formula holds. Coproduct attachments can also be well-ordered and made as successive pushouts of the individual summands. The identical argument with $v=\\delta$, together with the defining inclusions $\\delta\\square S_r\\subseteq S_{r+1}$, gives $\\delta\\square a\\in\\mathrm{An}$ for all $a\\in\\mathrm{An}$; retracts are preserved because pushout product is functorial on maps of arrows. Both axioms are now verified.",
+   "uses": [
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.4.13, formulas (2.4.13.1)-(2.4.13.3); explicit verification of the two interval axioms."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-presheaf-cylinder-model-recognition] to presheaves on the small simplex category, $I=J$ and the class $\\mathrm{An}$ of step 6. The endpoint union is a monomorphism, since its images are the distinct constant simplices at 0 and 1. Its naive fibrant objects are exactly the quasicategories. One direction follows because $\\mathrm{An}$ contains every inner horn. Conversely, for a quasicategory $Q$ and $a:U\\hookrightarrow V$ in $\\mathrm{An}\\subseteq\\mathcal T$, the vertex-surjectivity part of [def-weil-pbc-trivial-kan-fibration] extends every map $U\\to Q$ to $V$. The recognition theorem therefore supplies a model structure with monomorphism cofibrations, quasicategories as fibrant objects, weak equivalences $W_J$ tested by bijections of finite-chain $J$-homotopy classes into these objects, and every member of $\\mathrm{An}$ a trivial cofibration. All its factorizations stay in the input universe.",
+   "uses": [
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 2.4.19 and Proposition 2.4.25; the necessary fibrancy identification is established here rather than assumed from the name of the model structure."
+   }
+  },
+  {
+   "text": "We identify this $W_J$ with the categorical equivalences of [lem-coef-joyal-model-structure]. For any quasicategory $Q$, its exponential $Q^K$ is a quasicategory by [lem-coef-infinity-isofibration-exponentiation]. Step 2 applied to $Q^K$, followed by currying, says that $[K,Q]_J$ is exactly the set of isomorphism classes of objects of $h(Q^K)$. A categorical equivalence therefore belongs to $W_J$. Conversely, suppose $u:A\\to B$ belongs to $W_J$, fix $Q$, and set $D=Q^B$, $E=Q^A$, $p=u^*:D\\to E$. For every small $K$, currying identifies $[K,D]_J\\to[K,E]_J$ with $[B,Q^K]_J\\to[A,Q^K]_J$, so this map is bijective. At $K=E$ choose $s:E\\to D$ with $ps\\sim_J1_E$. At $K=D$, injectivity gives $sp\\sim_J1_D$, since $p(sp)=(ps)p\\sim_Jp$. Every actual $J$-homotopy $H:K\\times J\\to K'$ induces a natural isomorphism of the corresponding functors on edge-and-triangle categories: the edges along $a$ give its components; the two triangles subdividing $[0,1]\\times[0,1]$ give the naturality equation for each edge of $K$; the two specified triangles of $J$ give a left and a right inverse to each component. Relations imposed by triangles of $K$ are respected because $H$ is simplicial. Thus finite chains yield natural isomorphisms $h(ps)\\cong1$ and $h(sp)\\cong1$, and $hp$ is an equivalence of ordinary categories. This is exactly the testing condition in the existing Joyal node. The same-universe tests suffice for larger quasicategories too, by the following explicit finite-data argument. Any small family of simplices in a larger quasicategory $Q$ lies in a small subquasicategory $Q_0$: close its simplicial image under one chosen filler for every inner horn, repeat countably, and take the union; finite horns appear at finite stages, so the union fills all inner horns and remains small. Degree sets can be relabelled by small bijective copies. To prove essential surjectivity for a larger test $Q$, put a given map $A\\to Q$ in such a $Q_0$ and use essential surjectivity for $Q_0$. For fullness put the two diagrams $B\\to Q$ and a finite word of edges of $Q^A$ representing the desired morphism in one $Q_0$, then use fullness there. For faithfulness put two finite edge words in $Q^B$ and the finitely many identity and triangle relations witnessing equality of their restrictions into a common $Q_0$, then apply faithfulness there. All this data is small because its domains are small products of $A$ or $B$ with finite simplices. This proves the larger-universe testing condition without citing another node's proof.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Direct Yoneda calculation in the category modulo J-homotopy, as in Proposition 2.4.15 and Theorem 3.6.8; no use of Joyal fibration characterizations."
+   }
+  },
+  {
+   "text": "The two model structures have the same cofibrations and weak equivalences by steps 7-8, so their fibrations also agree: both are precisely the right lifting class of the monomorphisms in that common weak-equivalence class. In particular every $s_{\\varepsilon,n}=e_\\varepsilon\\square(\\partial\\Delta^n\\hookrightarrow\\Delta^n)$ is in $S_0\\subseteq\\mathrm{An}$ and hence is a Joyal trivial cofibration. Its source pushout is exactly the degreewise union in the statement, since the two subobjects intersect in $\\partial\\Delta^n\\times\\{\\varepsilon\\}$. This includes $n=0$, when it is the endpoint itself. Consequently every Joyal fibration lifts the inner horns and all these maps, by [lem-coef-joyal-model-structure].",
+   "uses": [
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 3.3.7 and Theorem 2.4.19; comparison of the explicitly described weak factorization classes."
+   }
+  },
+  {
+   "text": "Now let $p:X\\to Y$ lift all inner horns and all $s_{\\varepsilon,n}$. Boundary-cell attachments and the filtration from step 6 imply that $p$ lifts $e_\\varepsilon\\square j$ for every monomorphism $j$: these maps are built from its assumed cylinder tests by pushouts, compositions and retracts, and left lifting against the fixed $p$ is weakly saturated. Each element of $S_r$ is an $r$-fold pushout product with $\\delta$ of an element of $S_0$. For an inner horn this iterated product is inner anodyne by repeated application of [lem-coef-inner-anodyne-pushout-product], since $\\delta$ is a monomorphism; it lifts against $p$ because $p$ is an inner fibration. For a cylinder generator, associativity and permutation of degreewise product factors rewrite it as $e_\\varepsilon\\square j$, where $j$ is the iterated pushout product of $\\delta$ with a boundary and is again a monomorphism. Therefore $p$ lifts every $S_r$, and hence all $\\mathrm{An}$. This proves naive fibrancy of $p$ without asserting that all inner-anodyne maps were defined by cellular saturation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.4.13 and Corollary 3.2.4; expansion of recursive generators and direct lifting argument."
+   }
+  },
+  {
+   "text": "We need the following short consequence of existing statements. If $k:K\\hookrightarrow Z$ is a monomorphism in $W_J$ and $Z$ is naive fibrant, factor $k=qt$ by [lem-coef-accessible-small-object-factorization], applied to the small generating set $\\bigcup_r S_r$ in the locally presentable presheaf category supplied by [lem-coef-presheaf-local-finite-presentability]. Then $t\\in\\mathrm{An}$ and $q$ lifts the generating set, hence all of $\\mathrm{An}$ by the pushout, transfinite and retract lifting argument in step 3. Step 7 and two-out-of-three give $q\\in W_J$. Its codomain $Z$ is naive fibrant, so [lem-coef-presheaf-naive-fibration-whitehead] gives lifting of $q$ against every monomorphism. Applied to the square with top $t$, left $k$, right $q$ and bottom $1_Z$, this gives $d:Z\\to\\operatorname{cod}(t)$ with $dk=t$ and $qd=1_Z$. The arrow maps $(1_K,d):k\\to t$ and $(1_K,q):t\\to k$ have composite $1_k$; thus $k$ is a retract of $t$ and belongs to $\\mathrm{An}$. All interval hypotheses of the Whitehead statement were verified in step 6, and all factorizations are in the input universe.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-presheaf-local-finite-presentability",
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-presheaf-naive-fibration-whitehead"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 2.4.29, printed p.61, with Remark 2.4.22: the factorization, two-out-of-three, Whitehead and explicit arrow-retract argument."
+   }
+  },
+  {
+   "text": "Assume now that $X$ and $Y$ are quasicategories in the fixed input universe. To prove that the naive fibration $p$ of step 10 is a Joyal fibration, take any Joyal trivial cofibration $i:A\\hookrightarrow B$ and any square from $i$ to $p$. Use the factorization in [lem-coef-presheaf-cylinder-model-recognition] to replace $B$ by a fibrant object $R B$ through a trivial cofibration $j:B\\hookrightarrow R B$. By step 11, $j$ belongs to $\\mathrm{An}$, since its codomain is naive fibrant; so does $ji$, since it is a monomorphism and a weak equivalence with that same fibrant codomain. The map $B\\to Y$ in the square extends across $j$ because $Y$ is naive fibrant by step 7. Step 10 then lifts the resulting square with left side $ji$ and right side $p$. Restrict its diagonal $R B\\to X$ along $j$ to obtain the required diagonal $B\\to X$ for the original square. Thus $p$ lifts every Joyal trivial cofibration, which is exactly a Joyal fibration by [lem-coef-joyal-model-structure]. This establishes the converse and completes all clauses.",
+   "uses": [
+    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 2.4.29 and the first implication in Proposition 2.4.30; full extension-and-restriction argument giving the fibrant-object clause of Theorem 2.4.19."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-inner-anodyne-pushout-product",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-coef-presheaf-cylinder-model-recognition",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-presheaf-local-finite-presentability",
+  "lem-coef-presheaf-naive-fibration-whitehead"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Construction 3.3.1, Definition 3.3.3, Example 2.4.13, Theorem 2.4.19 and Corollary 2.4.29; explicit supporting core/exponential and Yoneda calculations. Online source read, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +219,38 @@
    "results": "{\"t\": \"2026-10-16T20:24:35Z\", \"tool\": \"grep\", \"query\": \"categoricalAnodyne|categoricalEquivalence|modelCategoryJoyal|boundary.*[Ii]nterval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Instances/Real.lean\"], \"digest\": \"f5c18b9e56f45491\"}",
    "date": "2026-10-17",
    "verdict": "no match: fresh second-reader semantic search returns Quillen generating horns and boundaries, not Joyal interval tests; fresh whole-Mathlib grep returns only the unrelated real-manifold interval. Read CategoryWithFibrations.lean:38-103, where the generators and fibrations are Quillen all-horn ones."
+  },
+  {
+   "tool": "grep",
+   "query": "categoricalAnodyne|modelCategoryJoyal|naiveFibr|Cisinski",
+   "results": "{\"t\": \"2026-10-16T21:24:46Z\", \"tool\": \"grep\", \"query\": \"categoricalAnodyne|modelCategoryJoyal|naiveFibr|Cisinski\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are Quillen all-horn fibrations, the definition of quasicategories, or abstract cylinder objects. The whole-Mathlib grep found no categoricalAnodyne, modelCategoryJoyal, naiveFibr or Cisinski declaration. Read CategoryWithFibrations.lean:38-103 and ModelCategory/Cylinder.lean; these do not state finite free-inverse Joyal boundary tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite simplicial interval freely adjoining a left and right inverse to an edge gives categorical anodyne boundary cylinders",
+   "results": "{\"t\": \"2026-10-16T21:24:46Z\", \"tool\": \"leansearch\", \"query\": \"The finite simplicial interval freely adjoining a left and right inverse to an edge gives categorical anodyne boundary cylinders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Precylinder.ctorIdx\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"HomotopicalAlgebra.Precylinder.i₁\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Cylinder.symm\", \"SSet.boundary\", \"HomotopicalAlgebra.Cylinder.symm_i₁\"], \"digest\": \"122c02727bd1544e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are Quillen all-horn fibrations, the definition of quasicategories, or abstract cylinder objects. The whole-Mathlib grep found no categoricalAnodyne, modelCategoryJoyal, naiveFibr or Cisinski declaration. Read CategoryWithFibrations.lean:38-103 and ModelCategory/Cylinder.lean; these do not state finite free-inverse Joyal boundary tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joyal fibrations between quasicategories are detected by inner horns and boundary pushout products with endpoints of the finite free inverse interval",
+   "results": "{\"t\": \"2026-10-16T21:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"Joyal fibrations between quasicategories are detected by inner horns and boundary pushout products with endpoints of the finite free inverse interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.IsStrictSegal\"], \"digest\": \"4439593be86c0a4b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are Quillen all-horn fibrations, the definition of quasicategories, or abstract cylinder objects. The whole-Mathlib grep found no categoricalAnodyne, modelCategoryJoyal, naiveFibr or Cisinski declaration. Read CategoryWithFibrations.lean:38-103 and ModelCategory/Cylinder.lean; these do not state finite free-inverse Joyal boundary tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical anodyne maps generated by inner horn inclusions and boundary cylinders of a finite contractible interval detect fibrations of infinity categories",
+   "results": "{\"t\": \"2026-10-16T21:26:01Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical anodyne maps generated by inner horn inclusions and boundary cylinders of a finite contractible interval detect fibrations of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"d88e95549cb5943c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits are Quillen all-horn fibrations, the definition of quasicategories, or abstract cylinder objects. The whole-Mathlib grep found no categoricalAnodyne, modelCategoryJoyal, naiveFibr or Cisinski declaration. Read CategoryWithFibrations.lean:38-103 and ModelCategory/Cylinder.lean; these do not state finite free-inverse Joyal boundary tests."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-quasicategory-characterizations",
@@ -79,5 +277,21 @@
   "same_as": []
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-interval-boundary-tests",
+  "worker": "stage1",
+  "summary": "Kept the finite free-inverse interval and every statement clause. Verified endpoint horn attachments, recursive interval axioms, fibrancy, the weak-equivalence comparison and both directions of the fibration test. Second reading replaced the proposed generic supporting node by an explicit factorization/Whitehead/retract step using existing nodes. No new nodes or Mathlib leaves; no parent fibration characterization is used.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. Legitimate ordinary pullback of the cone comparison over a varying joint endpoint base. Identification of Joyal fibrations and weak equivalences between quasicategories, used to factor the graph of the comparison. At this identification, interval boundary tests replace an uncited appeal to the fibration clause; they do not identify equivalence-edge lifting by themselves.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-274fe5866",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-274fe5866 (reviewer sub-agent of L); spot-checked: I read all twelve steps in full against the statements of all 13 cited nodes and the parent lem-coef-joyal-quasicategory-characterizations. The item statement is byte-identical to the live base. There are no new nodes: the proposed lem-coef-presheaf-fibrant-target-anodyne was folded into step 11, correctly. proof_deps equals the union of the step uses, and a 58-node dependency closure contains no cycle. Every cited statement that is neither a definition nor a Mathlib leaf is in unit sk-prop-sf-biduality-general, so tool_uses is empty and none are needed; no tool_uses accepted. Checks: (1) the horn attachments are correct: Λ^2_0 with vertices (0,1,0) is missing b, Λ^2_2 with vertices (1,0,1) is missing c, and the endpoints into Δ^1 are Λ^1_0 and Λ^1_1. (2) The triangle calculus gives [b][a]=1 and [a][c]=1, and its 2-simplices give equivalence edges, so J-maps factor through the core; the converse direction also holds. (3) The exponentiation isofibration Fun(B,Q)→Fun(A,Q) and the Kan-fibration core map give the endpoint extension. (4–5) T contains the inner horns and e□i, gives vertex surjectivity at m=0, is saturated, and is closed under □ with monomorphisms through the 08NM leaf. (6–7) Both interval axioms hold and the recognition hypotheses are discharged; naive fibrant objects are exactly the quasicategories. (8) [K,Q]_J is the set of isomorphism classes of h(Q^K); the Yoneda argument with s works; J-homotopies give natural isomorphisms; the small-subquasicategory argument handles larger universes. (9) The two model structures have the same fibrations, and s_{ε,n}=e_ε□∂_n. (10) p lifts all of An. (11) The factorization, two-out-of-three, Whitehead and arrow-retract argument is correct. (12) The extend-and-restrict lift is correct and needs only Y fibrant. Small cases checked: n=0, empty quasicategories, A=∅, b≠c. Cisinski CatLR is not archived; it is recorded as WANTED with proof_origin agent, as in sibling nodes. No SGA source is used. No fixes written."
+ }
 }
