@@ -23,10 +23,21 @@
     "def-pc-derived-category",
     "def-pc-two-open-comparison-diagram",
     "def-pc-perfect-overlap-stage-equivalence",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-sc-derived-open-restriction-iso-descent"
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Store the fixed functors and beta maps directly. Construct each gamma as the explicit nested-site comparison, and use its proved forward coherence API. The uniqueness API identifies these maps with the former localization lifts. All existing functor, beta, kappa and site component statements remain unchanged.",
+   "uses": [
+    "def-pc-perfect-overlap-nested-site-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the existing restricted-composite local isomorphism construction behind no_expose. Its equation API is proved by reflexivity, so callers need not expand its geometric equality transport.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -35,14 +46,15 @@
   "def-pc-two-open-comparison-diagram",
   "def-pc-perfect-overlap-stage-equivalence",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-open-restriction-iso-descent"
+  "def-pc-perfect-overlap-nested-site-gamma"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "C1",
+  "agent": "D2",
   "date": "2026-10-16",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Restriction and fixed pullback composition, also Tag 0D5S."
+  "place": "Construct the nested-site comparisons explicitly and prove their forward restriction coherence by square normalization.",
+  "note": "Definition repair: fixed functor and gamma projections no longer reduce the localization lift. The maps agree with the former construction, as proved by perfectOverlapNestedSiteGamma_eq."
  },
  "mathlib_searches": [
   {
@@ -124,7 +136,8 @@
    "AlgebraicGeometry.transportDataOfComposite_kappaU_hom_app",
    "AlgebraicGeometry.transportDataOfComposite_siteU",
    "AlgebraicGeometry.transportDataOfComposite_siteV",
-   "AlgebraicGeometry.perfectOverlapRestrictedComposite"
+   "AlgebraicGeometry.perfectOverlapRestrictedComposite",
+   "AlgebraicGeometry.perfectOverlapCompositeLocalIso_eq"
   ]
  },
  "lean_audit": {
@@ -148,11 +161,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-d87d9",
-  "group": "C1",
+  "reviewer": "X-fe9bc",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261016T020324-L-853953",
+  "landing": "20261016T095751-L-2157367",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five delivered Lean modules with their DAG records and proof plans; existing signature unchanged, earlier citation repairs present, all modules and sole direct importer compile cleanly, axioms match the two documented residual holes."
+  "note": "independent Codex review: Matched all seven delivered Lean modules with their five DAG records and three change records; verified unchanged signatures, comparison preservation, adaptations, required importers, and permitted axioms."
  }
 }

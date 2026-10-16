@@ -14,54 +14,44 @@
  ],
  "proof": [
   {
-   "text": "For a nested open square, cancel the larger open immersion to identify the restricted composites. Replace exact restriction by the pinned inclusion-pullback comparisons. Three applications of fixed pullback-composition associativity and the normalization of the inclusion comparison give compatibility of the restricted square with further exact open restriction. Use the existing compositionTo and compositionTo_triangle from PerfectHomComparisonTriangle for named composites; no duplicate composition comparison is needed.",
+   "text": "The comparison constructor stores the explicit nested-site gamma. Its inverse component followed by the site overlap map is the inverse-site image of the fixed nested-square inverse, by perfectOverlapNestedSiteGamma_inv_comp. The constructor preserves the old localization lift by the proved equality API. Apply this component equation at the U and V local pullback objects.",
    "uses": [
-    "lem-pc-perfect-overlap-nested-pullback-square",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-perfect-overlap-stage-equivalence",
-    "lem-pc-perfect-hom-comparison-triangle"
+    "def-pc-perfect-overlap-nested-site-gamma",
+    "def-pc-perfect-overlap-composite-transport-api"
    ],
    "elementary": false
   },
   {
-   "text": "Use the diagram coherence, the component of perfectOverlapRestrictionBeta and the site-return overlap triangle to identify gamma inverse followed by the open-site overlap comparison on globally restricted objects. Restriction is a localization and essentially surjective; naturality along a preimage isomorphism extends this identity to every open object.",
-   "uses": [
-    "def-pc-two-open-comparison-diagram",
-    "lem-pc-derived-open-restriction-is-localization",
-    "def-pc-perfect-overlap-composite-transport-api",
-    "def-pc-perfect-overlap-core-comparisons-api"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Substitute the prescribed theta. Apply the U or V canonical site triangle, then naturality of the site overlap comparison to move the local composition map past gamma. Naturality of the site counit leaves exactly the four constructed factors of the branch stage map. Apply its Boolean branch formula.",
+   "text": "For each branch, apply the corresponding canonical site triangle to the prescribed theta. Extract kappa as the inverse-site image of the fixed local composition comparison. Naturality of the overlap comparison moves kappa across gamma, then naturality of the site counit produces exactly the four stage-map factors.",
    "uses": [
     "lem-pc-perfect-overlap-canonical-site-triangle",
-    "def-pc-perfect-overlap-composite-stage-map",
-    "def-pc-perfect-overlap-composite-transport-api"
+    "def-pc-perfect-overlap-composite-transport-api",
+    "def-pc-perfect-overlap-stage-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic mapped-three-factor identity normalizes the map of the gluing isomorphism without simplifying the full dependent goal. Compose the equalities with the Boolean stage-map branch formula. Both branches are fully proved in the parent, with no branch modules or residual holes. Unfold only the stage-map constructor explicitly before the final definitional comparison.",
+   "uses": [
+    "def-pc-perfect-overlap-composite-stage-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-overlap-nested-pullback-square",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-perfect-overlap-stage-equivalence",
-  "lem-pc-perfect-hom-comparison-triangle",
-  "def-pc-two-open-comparison-diagram",
-  "lem-pc-derived-open-restriction-is-localization",
+  "def-pc-perfect-overlap-nested-site-gamma",
   "def-pc-perfect-overlap-composite-transport-api",
-  "def-pc-perfect-overlap-core-comparisons-api",
   "lem-pc-perfect-overlap-canonical-site-triangle",
+  "def-pc-perfect-overlap-stage-equivalence",
   "def-pc-perfect-overlap-composite-stage-map"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "C1",
+  "agent": "D2",
   "date": "2026-10-16",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Restriction and fixed pullback composition, also Tag 0D5S.",
-  "note": "Second reading C1: reuse the existing named-composite triangle API."
+  "place": "Nested restriction and fixed derived pullback composition (Tag 0D5S); explicit comparison constructor repair.",
+  "note": "Returned relabelling removed. The two clauses are proved by the existing canonical triangle and naturality APIs. The expensive localization-preimage gamma data is replaced by an explicit composite, with a fully proved agreement theorem. The stage-map branch constructor is explicitly unfolded only at the final equality."
  },
  "mathlib_searches": [
   {
@@ -154,11 +144,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-d87d9",
-  "group": "C1",
+  "reviewer": "X-fe9bc",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261016T020324-L-853953",
+  "landing": "20261016T095751-L-2157367",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five delivered Lean modules with their DAG records and proof plans; existing signature unchanged, earlier citation repairs present, all modules and sole direct importer compile cleanly, axioms match the two documented residual holes."
+  "note": "independent Codex review: Matched all seven delivered Lean modules with their five DAG records and three change records; verified unchanged signatures, comparison preservation, adaptations, required importers, and permitted axioms."
  }
 }

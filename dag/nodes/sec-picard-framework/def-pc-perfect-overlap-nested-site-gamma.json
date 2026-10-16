@@ -1,0 +1,155 @@
+{
+ "id": "def-pc-perfect-overlap-nested-site-gamma",
+ "kind": "definition",
+ "title": "Explicit nested site comparison and its coherence API",
+ "statement": "For a nested restricted square as in lem-pc-perfect-overlap-nested-pullback-normalization, construct gamma from the associator, the site overlap isomorphism, the inverse-site image of the fixed nested pullback square ξ, and the terminal associator. Its inverse component followed by the site overlap map is exactly the inverse-site image of ξ inverse. Any gamma with the prescribed beta/return coherence on globally restricted objects equals this constructed gamma. Thus replacing the localization-preimage comparison by this formula preserves the existing data. The constructed comparison satisfies the original beta/return coherence directly, without a localization preimage.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Nested open restriction, together with the fixed derived pullback composition associativity in Tag 0D5S."
+ },
+ "stmt_deps": [
+  "lem-pc-perfect-overlap-nested-pullback-square",
+  "def-pc-perfect-overlap-core-comparisons-api"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing beta component-to-pinned-square theorems from CoreComparisons (relocated unchanged from OpenSquareCube), then the inverse return triangle and naturality to reduce the on-image equation to nested-square normalization. No private copy of any open-square theorem is introduced.",
+   "uses": [
+    "lem-pc-perfect-overlap-nested-pullback-normalization",
+    "def-pc-perfect-overlap-core-comparisons-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Faithfulness of precomposition with the open-restriction localization extends this equality of natural transformations to all open objects.",
+   "uses": [
+    "lem-pc-derived-open-restriction-is-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct gamma as the explicit whiskered composite. Its inverse formula follows by cancelling associators and the overlap comparison. Compare that formula to the preceding identity and cancel the invertible overlap component to prove uniqueness.",
+   "uses": [
+    "lem-pc-perfect-overlap-nested-pullback-square",
+    "def-pc-perfect-overlap-core-comparisons-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the on-image normalization to the explicit inverse component, then cancel gamma inverse and the beta and restriction isomorphisms to obtain the original forward coherence. This proof constructs no localization lift.",
+   "uses": [
+    "lem-pc-perfect-overlap-nested-pullback-normalization",
+    "def-pc-perfect-overlap-core-comparisons-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-overlap-nested-pullback-normalization",
+  "def-pc-perfect-overlap-core-comparisons-api",
+  "lem-pc-derived-open-restriction-is-localization",
+  "lem-pc-perfect-overlap-nested-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D2",
+  "date": "2026-10-16",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Explicit nested-square normalization and site comparison; definition repair of the localization-lift constructor.",
+  "note": "Return repaired by removing four duplicate private theorems and importing the single shared existing component API through CoreComparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherence natural isomorphism open restriction composition of pullback nested square",
+   "results": "8 hits: AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, TopCat.Presheaf.pullbackObjObjOfImageOpen",
+   "date": "2026-10-16",
+   "verdict": "Generic restriction, naturality and whiskering tools; no fixed derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "Generic restriction, naturality and whiskering tools; no fixed derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "openPullbackRestrictionIso|NestedPullbackSquare|isoWhiskerLeft_trans",
+   "results": "2 hits: Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean",
+   "date": "2026-10-16",
+   "verdict": "Generic restriction, naturality and whiskering tools; no fixed derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and coherence of nested open restriction and derived pullback composition",
+   "results": "8 hits: CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, TopCat.Presheaf.map_restrict, CategoryTheory.Over.pullbackComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app, CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp_hom_app_snd_app",
+   "date": "2026-10-16",
+   "verdict": "Generic pullback and presheaf naturality APIs; no theorem for the fixed derived nested-square or site comparison used here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: the component equation relating prescribed overlap transport to the cartesian base-change comparison, within the core realization construction.",
+   "via": [
+    "lem-pc-perfect-overlap-composite-site-component",
+    "lem-pc-perfect-overlap-composite-object-pin",
+    "lem-pc-perfect-overlap-object-realization-core-of-data",
+    "lem-pc-perfect-overlap-object-realization-core-data",
+    "lem-pc-perfect-overlap-object-realization",
+    "lem-pc-perfect-overlap-hom-presentation",
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapNestedSiteCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapNestedSiteCompatibility.lean",
+  "declaration": "AlgebraicGeometry.perfectOverlapNestedSiteGamma",
+  "declarations": [
+   "AlgebraicGeometry.perfectOverlapNestedSiteGamma",
+   "AlgebraicGeometry.perfectOverlapNestedSiteGamma_inv_comp",
+   "AlgebraicGeometry.perfectOverlapNestedSiteGamma_coherence",
+   "AlgebraicGeometry.perfectOverlapNestedSiteGamma_eq"
+  ],
+  "statement": "def perfectOverlapNestedSiteGamma\n    {X Y : Scheme.{u}} (g : X ⟶ Y) {W U : Y.Opens} {T P : X.Opens}\n    (iY : W ⟶ U) (iX : T ⟶ P)\n    (hP : P ≤ g ⁻¹ᵁ U) (hT : T ≤ g ⁻¹ᵁ W) :\n    (derivedPullback (g.resLE U P hP) ⋙ (overlapSiteInverse P).mapDerivedCategory) ⋙\n        (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) iX).mapDerivedCategory ≅\n      (schemeOpenOverlapRestriction Y iY).mapDerivedCategory ⋙\n        (derivedPullback (g.resLE W T hT) ⋙ (overlapSiteInverse T).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fe9bc",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T095751-L-2157367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fe9bc",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T095751-L-2157367",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all seven delivered Lean modules with their five DAG records and three change records; verified unchanged signatures, comparison preservation, adaptations, required importers, and permitted axioms."
+ }
+}

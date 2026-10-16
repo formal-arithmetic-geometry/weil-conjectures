@@ -5,17 +5,16 @@ Authors: SHEAF group W4
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.PerfectOverlapNestedSiteCompatibility
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreBase
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
 public import Sheaf.AlgebraicGeometry.PerfectOverlapSiteCancellationAbstract
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -35,6 +34,13 @@ universe u w v h v' h'
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
+  Scheme.Modules.instCategory
+attribute [local instance_reducible] TopologicalSpace.Opens.map OrderHomClass.toOrderHom
+  TopCat.Hom.frameHom
+attribute [local irreducible] derivedPullback perfectHomComposition
+  openSiteReturnIso
+
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
 
@@ -52,43 +58,29 @@ variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
 /-- Construct a simultaneous diagram from restricted pullbacks and site equivalences.
-Open restriction is a localization, so its fully faithful precomposition functor lifts
-both overlap comparisons and their coherence from the global restriction diagram. -/
+The nested pullback square and the site overlap equivalence construct both overlap
+comparisons explicitly. Their coherence follows by normalizing that square on
+globally restricted objects. Faithful localization identifies these comparisons
+with those of the former localization-lift construction. -/
 noncomputable def schemeComparisonFromRestrictions
     {X Y : Scheme.{u}} (g : X ⟶ Y) (U V : Y.Opens) (P Q : X.Opens)
     (hP : P ≤ g ⁻¹ᵁ U) (hQ : Q ≤ g ⁻¹ᵁ V) :
     SchemeTwoOpenComparisonDiagram X Y g U V P Q := by
-  let S (W : X.Opens) := (overlapSiteInverse W).mapDerivedCategory
-  let H (W : Y.Opens) (T : X.Opens) (hT : T ≤ g ⁻¹ᵁ W) :=
-    derivedPullback (g.resLE W T hT) ⋙ S T
-  let HU := H U P hP
-  let HV := H V Q hQ
-  let HW := H (U ⊓ V) (P ⊓ Q) (by
-    intro x hx
-    exact ⟨hP hx.1, hQ hx.2⟩)
-  let β (W : Y.Opens) (T : X.Opens) (hT : T ≤ g ⁻¹ᵁ W) :
-      derivedPullback g ⋙
-          (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) T).mapDerivedCategory ≅
-        (schemeOpenRestriction Y W).mapDerivedCategory ⋙ H W T hT :=
-    perfectOverlapRestrictionBeta g W T hT
-  let TU := (schemeOpenRestriction Y U).mapDerivedCategory
-  let TV := (schemeOpenRestriction Y V).mapDerivedCategory
-  let T := DerivedCategory (SheafOfModules.{u}
-    ((moduleRings X.toRingedSpace).over (P ⊓ Q)))
-  have : TU.IsLocalization ((MorphismProperty.isomorphisms _).inverseImage TU) :=
-    schemeDerivedOpenRestriction_isLocalization Y U
-  have : TV.IsLocalization ((MorphismProperty.isomorphisms _).inverseImage TV) :=
-    schemeDerivedOpenRestriction_isLocalization Y V
-  have := Localization.full_whiskeringLeft TU
-    ((MorphismProperty.isomorphisms _).inverseImage TU) T
-  have := Localization.faithful_whiskeringLeft TU
-    ((MorphismProperty.isomorphisms _).inverseImage TU) T
-  have := Localization.full_whiskeringLeft TV
-    ((MorphismProperty.isomorphisms _).inverseImage TV) T
-  have := Localization.faithful_whiskeringLeft TV
-    ((MorphismProperty.isomorphisms _).inverseImage TV) T
-  refine ⟨comparisonFromRestrictions (derivedPullback g) TU TV _ _ _ _ _ _ _ _ _ _ _ _
-    HU HV HW (β U P hP) (β V Q hQ) (β (U ⊓ V) (P ⊓ Q) _)⟩
+  let hW : P ⊓ Q ≤ g ⁻¹ᵁ (U ⊓ V) := fun _ hx ↦ ⟨hP hx.1, hQ hx.2⟩
+  exact ⟨{
+    HU := derivedPullback (g.resLE U P hP) ⋙ (overlapSiteInverse P).mapDerivedCategory
+    HV := derivedPullback (g.resLE V Q hQ) ⋙ (overlapSiteInverse Q).mapDerivedCategory
+    HW := derivedPullback (g.resLE (U ⊓ V) (P ⊓ Q) hW) ⋙
+      (overlapSiteInverse (P ⊓ Q)).mapDerivedCategory
+    βU := perfectOverlapRestrictionBeta g U P hP
+    βV := perfectOverlapRestrictionBeta g V Q hQ
+    βW := perfectOverlapRestrictionBeta g (U ⊓ V) (P ⊓ Q) hW
+    γU := perfectOverlapNestedSiteGamma g (homOfLE inf_le_left) (homOfLE inf_le_left) hP hW
+    γV := perfectOverlapNestedSiteGamma g (homOfLE inf_le_right) (homOfLE inf_le_right) hQ hW
+    coherenceU := perfectOverlapNestedSiteGamma_coherence g
+      (homOfLE inf_le_left) (homOfLE inf_le_left) hP hW
+    coherenceV := perfectOverlapNestedSiteGamma_coherence g
+      (homOfLE inf_le_right) (homOfLE inf_le_right) hQ hW }⟩
 
 /-- The first local comparison field is the fixed restriction/pullback map.
 This is the first projection of the comparison diagram constructor. -/
@@ -142,7 +134,7 @@ theorem schemeComparisonFromRestrictions_HW
 /-- The fixed pullback-composition comparison on a restricted two-step map.
 The named definition keeps the geometric equality and its derived transport
 outside the larger two-open transport record. -/
-noncomputable def perfectOverlapCompositeLocalIso
+@[no_expose] noncomputable def perfectOverlapCompositeLocalIso
     {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
     (hgf : g ≫ f = gf) (W : Y₀.Opens) :
     let hP : gf ⁻¹ᵁ W ≤ g ⁻¹ᵁ (f ⁻¹ᵁ W) := by
@@ -157,6 +149,26 @@ noncomputable def perfectOverlapCompositeLocalIso
     rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
   exact perfectHomComposition _ _ ≪≫
     eqToIso (congrArg (fun a ↦ derivedPullback a) hcomp)
+
+set_option linter.unusedSectionVars false in
+/-- The fixed local composite comparison has the prescribed composition formula.
+Source: Stacks Project, Tag 0D5S. This is its defining composite, with the
+restricted geometric equality kept as a proof rather than expanded by users.
+(blueprint: def-pc-perfect-overlap-composite-transport-api). -/
+theorem perfectOverlapCompositeLocalIso_eq
+    {X Y Y₀ : Scheme.{u}} (f : Y ⟶ Y₀) (g : X ⟶ Y) (gf : X ⟶ Y₀)
+    (hgf : g ≫ f = gf) (W : Y₀.Opens) :
+    let hP : gf ⁻¹ᵁ W ≤ g ⁻¹ᵁ (f ⁻¹ᵁ W) := by
+      rw [← Scheme.Hom.comp_preimage, hgf]
+    let hcomp : g.resLE (f ⁻¹ᵁ W) (gf ⁻¹ᵁ W) hP ≫ (f ∣_ W) = gf ∣_ W := by
+      apply (cancel_mono W.ι).1
+      simp only [Category.assoc, morphismRestrict_ι]
+      rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+    perfectOverlapCompositeLocalIso f g gf hgf W =
+      perfectHomComposition _ _ ≪≫
+    eqToIso (congrArg (fun a ↦ derivedPullback a) hcomp) := by
+  intro hP hcomp
+  rfl
 
 /-- Construct the transport data for two composable scheme maps.
 The restricted composites agree after their open inclusions; pullback composition gives
@@ -304,6 +316,7 @@ theorem transportDataOfComposite_siteV
       openSiteReturnIso X (gf ⁻¹ᵁ V) := by
   rfl
 
+set_option linter.unusedSectionVars false in
 /-- Restricting the two-step map to an open gives the restriction of its
 composite. This is the geometric equation used to define the transport
 isomorphism and the corresponding open-pullback cube. -/

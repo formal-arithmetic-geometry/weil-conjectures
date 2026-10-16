@@ -39,9 +39,11 @@ theorem perfectOverlapCompositeLocalIso_eq_compositionTo
     perfectOverlapCompositeLocalIso f gk g hgf U =
       compositionTo j (f ∣_ U) (g ∣_ U) hj := by
   intro hP j hj
-  unfold perfectOverlapCompositeLocalIso compositionTo
+  rw [perfectOverlapCompositeLocalIso_eq f gk g hgf U]
+  unfold compositionTo
   rfl
 
+set_option linter.unusedSectionVars false in
 /-- A pinned square comparison is the forward fixed comparison for one path
 followed by the inverse comparison for the other. Source: Stacks Project,
 Tag 0D5S. Expand both definitions and use the component equation of the
@@ -55,7 +57,7 @@ theorem singleComplexOpenSquareComparison_app_eq_compositionTo
         (compositionTo g' f (g' ≫ f) rfl).inv.app M := by
   simp only [singleComplexOpenSquareComparison, compositionTo,
     NatTrans.comp_app, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
-    eqToIso.inv, eqToHom_app, eqToHom_refl, NatTrans.id_app,
+    eqToIso.inv, eqToHom_app, eqToHom_refl,
     Category.id_comp, Category.assoc, singleComplexOpenPinnedComposition,
     perfectHomComposition]
 

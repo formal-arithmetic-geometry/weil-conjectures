@@ -25,6 +25,14 @@
     "lem-sc-derived-open-restriction-iso-descent"
    ],
    "elementary": false
+  },
+  {
+   "text": "The existing open-square component API is relocated unchanged from PerfectOverlapOpenSquareCube into the comparison module, so the constructor and downstream cube can share it without a cycle. Expand the named open-pullback comparison and pinned square to identify inverse components, take inverses for forward components, then substitute those equalities into the two existing beta component formulas.",
+   "uses": [
+    "def-pc-t2-open-pullback-square-iso",
+    "def-pc-t2-open-pinned-composition"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -32,14 +40,17 @@
   "def-pc-two-open-comparison-diagram",
   "def-pc-perfect-overlap-stage-equivalence",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-open-restriction-iso-descent"
+  "lem-sc-derived-open-restriction-iso-descent",
+  "def-pc-t2-open-pullback-square-iso",
+  "def-pc-t2-open-pinned-composition"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "C1",
+  "agent": "D2",
   "date": "2026-10-16",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Restriction and fixed pullback composition, also Tag 0D5S."
+  "place": "Restriction and fixed pullback composition, also Tag 0D5S.",
+  "note": "Duplicate-proof repair: relocate the four existing open-square component theorems without changing their names, signatures or proofs; NestedSiteCompatibility now uses this shared API."
  },
  "mathlib_searches": [
   {
@@ -127,7 +138,11 @@
    "AlgebraicGeometry.openPullbackRestrictionIso",
    "AlgebraicGeometry.perfectOverlapRestrictionBeta",
    "AlgebraicGeometry.perfectOverlapRestrictionBeta_hom_app",
-   "AlgebraicGeometry.perfectOverlapRestrictionBeta_inv_app"
+   "AlgebraicGeometry.perfectOverlapRestrictionBeta_inv_app",
+   "AlgebraicGeometry.openPullbackRestrictionIso_inv_app_eq_square",
+   "AlgebraicGeometry.openPullbackRestrictionIso_hom_app_eq_square_inv",
+   "AlgebraicGeometry.perfectOverlapRestrictionBeta_hom_app_square",
+   "AlgebraicGeometry.perfectOverlapRestrictionBeta_inv_app_square"
   ]
  },
  "lean_audit": {
@@ -151,11 +166,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-d87d9",
-  "group": "C1",
+  "reviewer": "X-fe9bc",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261016T020324-L-853953",
+  "landing": "20261016T095751-L-2157367",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five delivered Lean modules with their DAG records and proof plans; existing signature unchanged, earlier citation repairs present, all modules and sole direct importer compile cleanly, axioms match the two documented residual holes."
+  "note": "independent Codex review: Matched all seven delivered Lean modules with their five DAG records and three change records; verified unchanged signatures, comparison preservation, adaptations, required importers, and permitted axioms."
  }
 }
