@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Hovey, Model Categories, Theorem 2.3.11 and Proposition 4.2.13; chain/cochain reindexing; source copy WANTED if this URL is unavailable",
+   "place": "Proof paragraph 2, the derived coefficient adjunction in the first and last lines of the displayed derived inverse-limit calculation: projective cochain-complex infrastructure for the mapping complexes.",
    "via": [
     "lem-coef-enriched-category-tensor-calculus",
     "lem-coef-enhanced-localization-universal",
@@ -17,18 +17,186 @@
  },
  "kind": "statement",
  "title": "Projective monoidal model for unbounded module complexes",
- "statement": "Let $R$ be a commutative ring. Use the cochain and quasi-isomorphism conventions of [def-weil-abstract-derived-category]. The category of all unbounded cochain complexes of $R$-modules has a combinatorial model structure in the sense of [lem-coef-combinatorial-localization-presentability]. Its weak equivalences are the quasi-isomorphisms and its fibrations are the termwise surjections. Its cofibrations are the termwise split injections with dg-projective cokernel, where acyclic means zero cohomology in every degree, and a dg-projective complex has projective terms and its Hom complex into every acyclic complex is acyclic. It is closed symmetric monoidal for the direct-sum total tensor with Koszul signs and the product total Hom complex, its unit $R[0]$ is cofibrant, and its pushout product satisfies the condition of [lem-coef-combinatorial-localization-presentability]. For $n\\in\\mathbf Z$, let $S^n$ be $R$ in degree $n$ and zero elsewhere, and let $D^n$ have $R$ in degrees $n,n+1$, differential $d^n=1$, and zero elsewhere. Generating cofibrations are $S^{n+1}\\hookrightarrow D^n$ (identity in degree $n+1$), and generating trivial cofibrations are $0\\to D^n$, for all integers $n$.",
+ "statement": "Let $R$ be a commutative ring. Use the cochain and quasi-isomorphism conventions of [def-weil-abstract-derived-category]. The category of all unbounded cochain complexes of $R$-modules has a combinatorial model structure in the sense of [lem-coef-combinatorial-localization-presentability]. Its weak equivalences are the quasi-isomorphisms and its fibrations are the termwise surjections. A map of complexes is a termwise split injection when each degree map has an $R$-linear retraction (equivalently, each target degree is the direct sum of the source degree and a complement). Its cofibrations are the termwise split injections with dg-projective cokernel, where acyclic means zero cohomology in every degree, and a dg-projective complex has projective terms and its Hom complex into every acyclic complex is acyclic. It is closed symmetric monoidal for the direct-sum total tensor with Koszul signs and the product total Hom complex, its unit $R[0]$ is cofibrant, and its pushout product satisfies the condition of [lem-coef-combinatorial-localization-presentability]. For $n\\in\\mathbf Z$, let $S^n$ be $R$ in degree $n$ and zero elsewhere, and let $D^n$ have $R$ in degrees $n,n+1$, differential $d^n=1$, and zero elsewhere. Generating cofibrations are $S^{n+1}\\hookrightarrow D^n$ (identity in degree $n+1$), and generating trivial cofibrations are $0\\to D^n$, for all integers $n$.",
  "source": {
   "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
   "place": "Hovey, Model Categories, Theorem 2.3.11, Definition 2.3.3, Propositions 2.3.4 and 2.3.9, Lemma 2.3.6, Remark 2.3.7 and Proposition 4.2.13 (printed pp. 41-44 and 111-112); cochain reindexing. Read online; archive WANTED. No Stacks tag states the monoidal model assertion."
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "lem-coef-combinatorial-localization-presentability"
+  "lem-coef-combinatorial-localization-presentability",
+  "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $R\\text{-}\\mathrm{Mod}$ is Grothendieck in the definition [def-sp-grothendieck-abelian]: kernels and cokernels are the module kernels and quotients, coproducts are direct sums, and other colimits are quotients of direct sums by the relations of the diagram. The free module $R$ is a generator: $\\operatorname{Hom}_R(R,M)=M$ by evaluation at $1$, so maps out of $R$ distinguish any two unequal module maps; a module is also the image of the free module on its elements. Filtered colimits are exact: a representative in the kernel has zero image at some later stage, where exactness supplies a preimage; equality of two representatives also holds at some later stage. These element arguments work for every ring, including the zero ring.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Definition 2.3.1; explicit verification of the module input"
+   }
+  },
+  {
+   "text": "By [lem-coef-complexes-grothendieck] applied to the category in Step 1, $\\mathrm{Ch}(R)$ is Grothendieck in the same universe. Apply [lem-coef-grothendieck-locally-presentable] to obtain local presentability, with its stated small generating set and regular cardinal. Module products are cartesian products with coordinatewise operations, and equalizers are submodules of elements on which the two maps agree; these give all small module limits. All small limits and colimits of complexes are then computed degreewise: the induced differential exists by the universal property, and its square is zero because this holds on every component of the diagram. Thus this is a complete and cocomplete locally presentable category. There is no boundedness restriction on the complexes or their limits.",
+   "uses": [
+    "lem-coef-complexes-grothendieck",
+    "lem-coef-grothendieck-locally-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Definition 2.3.1 and Lemma 2.3.2; local presentability supplied by the two cited general results"
+   }
+  },
+  {
+   "text": "Put $W=\\{f:H^r(f)\\text{ is invertible for every }r\\}$, using [def-weil-abstract-derived-category]. This class is retract-closed and satisfies two-out-of-three because every $H^r$ is a functor and isomorphisms have these properties. Let $I=\\{S^{n+1}\\hookrightarrow D^n:n\\in\\mathbf Z\\}$ and $J=\\{0\\to D^n:n\\in\\mathbf Z\\}$, with the spheres and disks in the statement. A map $D^n\\to X$ is determined by an arbitrary element of $X^n$, its next component being the differential of that element. Consequently $F=J^{\\square}$ consists exactly of termwise surjections. A square against the map in $I$ indexed by $n$ is a pair $y\\in Y^n$, $x\\in X^{n+1}$ with $dx=0$ and $px=dy$; its filler is $z\\in X^n$ with $pz=y$ and $dz=x$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Definition 2.3.3 and Proposition 2.3.4, with chain degree reindexed by n to -n"
+   }
+  },
+  {
+   "text": "The pair calculation of Step 3 gives $I^{\\square}=F\\cap W$. Indeed, if $p$ lifts these pairs, pairs $(y,0)$ lift cycles, and then arbitrary $y$ lifts by first lifting the cycle $dy$ and then its compatible pair. A cycle $x$ with $px=dy$ is a boundary by the filler for $(y,x)$, proving injectivity on cohomology; cycle lifting proves surjectivity on cohomology. Conversely let $p$ be termwise surjective and a quasi-isomorphism. By [lem-weil-pbc-complex-ses-homology-long-exact] applied to $0\\to K\\to X\\xrightarrow pY\\to0$, its kernel $K$ is acyclic. For a compatible pair choose $w$ with $pw=y$; then $dw-x$ is a cycle in $K^{n+1}$, hence equals $dv$ for some $v\\in K^n$. The element $z=w-v$ is the filler. The same cited exact sequence also shows that a termwise surjection is a quasi-isomorphism if its kernel is acyclic.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 2.3.5; the kernel criterion is Stacks Tag 0117, homology-lemma-long-exact-sequence-cochain"
+   }
+  },
+  {
+   "text": "Define $C={}^{\\square}(I^{\\square})$ and $C_0={}^{\\square}(J^{\\square})$. Both $I$ and $J$ are small sets, indexed by the integers in the fixed universe. Apply [lem-coef-presentable-small-object-factorization] to each, using Step 2, to choose functorial $(C,I^{\\square})$ and $(C_0,J^{\\square})$ factorizations. These are weak factorization systems: each generator belongs to the indicated left class, so a map lifting against that entire left class belongs to the original right class, while the converse follows from the definition of the left class. We will also use [lem-coef-presentable-cellular-factorization], for these same two sets, to factor maps with a cellular left map. If a map in the left class is so factored $f=pj$, its lift against $p$ makes $f$ an arrow retract of $j$: the square with top $j$, bottom the identity, left $f$ and right $p$ supplies the retraction. Only existence of these cellular factorizations is used, not functoriality of the cellular choice.",
+   "uses": [
+    "lem-coef-presentable-small-object-factorization",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, small object argument as used before Theorem 2.3.11; Hovey Theorem 2.1.14"
+   }
+  },
+  {
+   "text": "Every relative $J$-cell map is the inclusion $A\\to A\\oplus\\bigoplus_tD^{n_t}$, since the domain of every $J$-generator is zero. The direct sum of disks is contractible, by the maps that send each upper-degree disk generator to its lower-degree generator and vanish on the latter. Hence the inclusion is a quasi-isomorphism. Every $J$-generator lifts against termwise surjections, so the same is true of coproducts, pushouts and transfinite composites of them: extend a lift at a successor stage and use the colimit mediator at a limit. It also lifts against $I^{\\square}\\subseteq J^{\\square}$. By the retract description of Step 5 and retract closure [lem-coef-lifting-class-closure], it follows that $C_0\\subseteq C\\cap W$.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 2.3.10; explicit disk contraction and transfinite lift"
+   }
+  },
+  {
+   "text": "Conversely, for $f\\in C\\cap W$, use its functorial $J$-factorization $f=pi$ from Step 5. We have $i\\in C_0\\subseteq W$ by Step 6 and $p\\in J^{\\square}=F$, so two-out-of-three gives $p\\in F\\cap W=I^{\\square}$. Lifting $f$ against $p$ makes $f$ an arrow retract of $i$, and [lem-coef-lifting-class-closure] gives $f\\in C_0$. Thus $C_0=C\\cap W$. Together with Steps 2--5 this proves all model axioms: the two weak factorization systems are $(C,F\\cap W)$ and $(C\\cap W,F)$, their factorizations are functorial, and $W$ has the required closure properties. They are generated by the displayed sets $I,J$; local presentability proves combinatoriality in the meaning specified in [lem-coef-combinatorial-localization-presentability]. This uses only the meaning of model category there, not its localization conclusion.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-combinatorial-localization-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Theorem 2.3.11; explicit retract recognition argument"
+   }
+  },
+  {
+   "text": "Use the lifting and free-summand characterizations of projectivity in [def-weil-pbc-projective-module]. A cofibrant complex $Q$ has projective terms. For a module surjection $M\\to N$, the induced map of disks $D^{n-1}(M)\\to D^{n-1}(N)$ is a termwise surjective quasi-isomorphism, since both disks are contractible. A map $Q\\to D^{n-1}(N)$ is determined by an arbitrary module map $Q^n\\to N$, with the degree $n-1$ component forced to be its composite with $d_Q$. The cofibrant lift supplies $Q^n\\to M$, proving projectivity. To see that every map $Q\\to N$ to an acyclic complex is null-homotopic, set $E(N)^n=N^{n-1}\\oplus N^n$ with $d(a,b)=(-da+b,db)$. The projection $(a,b)\\mapsto b$ is a surjective quasi-isomorphism to $N$, and $h(a,b)=(0,a)$ satisfies $dh+hd=1$ on $E(N)$. A lift of $Q\\to N$ through this projection is therefore null-homotopic. Apply this to every shift of an acyclic $N$ to conclude that the Hom complex has zero cohomology in every degree. Here the Hom differential is $\\delta u=d_Nu-(-1)^{|u|}u d_Q$, so a degree-$r$ cycle is a chain map to $N[r]$, whose differential is $(-1)^r d_N$. If $v$ is its null-homotopy, the identity $u=(-1)^r d_Nv+v d_Q$ is exactly $u=\\delta((-1)^r v)$. Thus every Hom cycle is a boundary, with the shift signs accounted for. Thus every cofibrant complex is dg-projective.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Lemma 2.3.6 and Lemma 2.3.8; shifted null-homotopy calculation"
+   }
+  },
+  {
+   "text": "Conversely, suppose $Q$ has projective terms and $\\operatorname{Hom}^\\bullet(Q,K)$ is acyclic for every acyclic $K$. For a surjective quasi-isomorphism $p:X\\to Y$, Step 4 gives its acyclic kernel $K$. Given a chain map $g:Q\\to Y$, projectivity in each degree supplies a graded lift $a:Q\\to X$. Its defect $\\delta a=d_Xa-a d_Q$ lies in $\\operatorname{Hom}^1(Q,K)$ and is a cycle because $\\delta^2=0$. Choose $b\\in\\operatorname{Hom}^0(Q,K)$ with $\\delta b=\\delta a$. Then $a-b$ is the chain-map lift. Hence $0\\to Q$ lies in $C$, proving that cofibrant means exactly dg-projective. This argument uses no induction on degrees.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Lemmas 2.3.6 and 2.3.8; elementary Hom-defect calculation completing the unbounded converse"
+   }
+  },
+  {
+   "text": "A relative $I$-cell map is a termwise split injection: each cell adds a free generator in degree $n$ with prescribed differential in the preceding object, and its upper-degree generator is identified with that prescribed differential. At a limit the underlying graded module is the original module plus the direct sum of all the generators added so far. By Step 5 every member $i:A\\to B$ of $C$ is a retract of such a map, hence is also termwise split injective: if $i$ is an arrow retract of $j$ with inclusion maps $a,b$ and retraction maps $r,s$, and $t$ splits $j$ in a degree, then $rtb$ splits $i$ there, since $rtbi=rtja=ra=1$. Its cokernel $Q$ is cofibrant because $0\\to Q$ is the pushout of $i$ along $A\\to0$, using pushout closure [lem-coef-lifting-class-closure]. Step 8 makes $Q$ dg-projective. Conversely suppose $i$ is a termwise split injection with dg-projective cokernel $Q$. For a square against a surjective quasi-isomorphism $p:X\\to Y$, extend its top map to a graded map $a:B\\to X$ lifting its bottom map: a graded splitting $B=A\\oplus Q$ reduces the additional choices to lifting maps from the projective $Q^n$. The defect $\\delta a$ vanishes on $A$ and has image in $K=\\ker p$, so is a degree-one cycle in $\\operatorname{Hom}^\\bullet(Q,K)$. Subtract a degree-zero primitive as in Step 9. The corrected map fills the square, proving $i\\in C$. This proves exactly the claimed cofibration class, including termwise splitting rather than splitting as complexes.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-lifting-class-closure",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 2.3.9; cellular splitting and the relative Hom-defect calculation"
+   }
+  },
+  {
+   "text": "For complexes $P,Q$ set $(P\\otimes Q)^n=\\bigoplus_{a+b=n}P^a\\otimes_RQ^b$, with $d(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy$, and set $\\underline{\\operatorname{Hom}}(P,Q)^r=\\prod_a\\operatorname{Hom}_R(P^a,Q^{a+r})$ with $\\delta u=d_Qu-(-1)^ru d_P$. The cross terms cancel in the square of each differential. Currying $f(x\\otimes y)$ as the function $x\\mapsto(y\\mapsto f(x\\otimes y))$ identifies $\\underline{\\operatorname{Hom}}(P\\otimes Q,N)$ with $\\underline{\\operatorname{Hom}}(P,\\underline{\\operatorname{Hom}}(Q,N))$ as complexes: both differentials evaluate to $d_N f(x,y)-(-1)^r f(dx,y)-(-1)^{r+a}f(x,dy)$ for $|x|=a$ and $|f|=r$. Degree-zero cycles give the ordinary tensor-Hom adjunction. The associator and unit maps are the module ones, the unit is $R[0]$, and symmetry sends $x\\otimes y$ to $(-1)^{ab}y\\otimes x$. The pentagon and unit identities are the identical reassociation of pure tensors; the hexagon is $(-1)^{a(b+c)}=(-1)^{ab}(-1)^{ac}$, and the square of symmetry is $1$. Pure tensors span each direct-sum term, so these checks give the closed symmetric monoidal structure on all unbounded complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 4.2.13, tensor, product Hom, adjunction and coherence calculations"
+   }
+  },
+  {
+   "text": "If $P,Q$ are dg-projective then so is $P\\otimes Q$. Its terms are projective: each tensor of two projective modules is a direct summand of a free module, by tensoring their splittings as summands of free modules; the tensor of free modules on bases $I,J$ is free on $I\\times J$, with basis $e_i\\otimes e_j$; direct sums of these splittings exhibit the whole term as a summand of a free module. For an acyclic $N$, dg-projectivity of $Q$ makes $\\underline{\\operatorname{Hom}}(Q,N)$ acyclic, and dg-projectivity of $P$ together with the currying isomorphism of Step 11 makes $\\underline{\\operatorname{Hom}}(P\\otimes Q,N)$ acyclic. If an acyclic complex $P$ is dg-projective then $\\operatorname{Hom}^\\bullet(P,P)$ is acyclic, so $1_P=\\delta h=dh+hd$ for a degree $-1$ map $h$; thus $P$ is contractible. If $P$ is contractible, $h\\otimes1$ contracts $P\\otimes Q$: the two terms involving $d_Q$ cancel. If instead $Q$ is contractible, use symmetry and the same calculation. These are direct consequences of the Hom differential and the tensor signs, not a bounded-complex assertion.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 4.2.13; direct dg-projective tensor argument in place of the generator-extension shortcut"
+   }
+  },
+  {
+   "text": "For cofibrations $i:A\\to B$ and $j:A'\\to B'$ let their dg-projective cokernels be $P,Q$. Graded splittings $B=A\\oplus P$ and $B'=A'\\oplus Q$ identify the pushout-product source with the three graded summands $A\\otimes A'$, $P\\otimes A'$ and $A\\otimes Q$ of $B\\otimes B'$; the remaining summand is $P\\otimes Q$. Consequently the pushout product is termwise split injective, and its cokernel as a complex is the total tensor $P\\otimes Q$ with its actual differential. Step 12 and Step 10 make it a cofibration. If $i$ is also a quasi-isomorphism, [lem-weil-pbc-complex-ses-homology-long-exact] applied to $0\\to A\\to B\\to P\\to0$ shows $P$ acyclic. Step 12 then makes $P\\otimes Q$ contractible, and the same cited exact sequence for the pushout product proves it a quasi-isomorphism. The case where $j$ is trivial uses $Q$ instead. Finally $R[0]$ is dg-projective: its term $R$ is free, and $\\underline{\\operatorname{Hom}}(R[0],N)=N$ for every $N$. Thus the unit is cofibrant, and the pushout-product and unit conditions required by the item hold. The identity of this cofibrant unit is itself a cofibrant replacement, so the unit axiom adds no further condition.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived coefficient adjunction infrastructure. Agent argument, checked against Hovey, Model Categories, Proposition 4.2.13; split-summand pushout product, with Stacks Tag 0117 for its quasi-isomorphism criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-coef-complexes-grothendieck",
+  "lem-coef-grothendieck-locally-presentable",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-coef-presentable-small-object-factorization",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-combinatorial-localization-presentability",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: derived coefficient adjunction; complete projective-complex foundation checked against Hovey sections 2.1, 2.3 and Proposition 4.2.13, online but not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,15 +239,79 @@
    "results": "{\"t\": \"2026-10-16T12:28:57Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded chain complexes of modules admit cofibrantly generated projective model structure with monoidal pushout product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"ModuleCat.projectiveResolution\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\"], \"digest\": \"36b682cd31adf0f0\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*model|dg.?projective|model.*complex",
+   "results": "{\"t\": \"2026-10-16T13:32:34Z\", \"tool\": \"grep\", \"query\": \"projective.*model|dg.?projective|model.*complex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"aa638fe755250ceb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-16T13:32:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded cochain complexes of modules admit the cofibrantly generated projective symmetric monoidal model structure",
+   "results": "{\"t\": \"2026-10-16T13:32:36Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded cochain complexes of modules admit the cofibrantly generated projective symmetric monoidal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.isKProjective_of_iso\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_iff_of_iso\"], \"digest\": \"73051288a7d5efa3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofibrations of complexes are degreewise split monomorphisms with dg projective cokernel and tensor has the pushout product axiom",
+   "results": "{\"t\": \"2026-10-16T13:32:55Z\", \"tool\": \"leansearch\", \"query\": \"Cofibrations of complexes are degreewise split monomorphisms with dg projective cokernel and tensor has the pushout product axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cofibration\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.CategoryWithCofibrations.cofibrations\", \"CategoryTheory.ShortComplex.Splitting.splitMono_f\", \"HomotopicalAlgebra.cofibrations\", \"HomotopicalAlgebra.IsCofibrant\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.CategoryWithCofibrations.noConfusionType\"], \"digest\": \"6aadb7f17a395b4e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen projective model category of chain complexes with surjective fibrations and homology equivalences",
+   "results": "{\"t\": \"2026-10-16T13:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen projective model category of chain complexes with surjective fibrations and homology equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CategoryTheory.projectiveResolutions\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.mk.inj\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.IsKProjective.Qh_map_bijective\"], \"digest\": \"cdc7c446af2cb0a0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKProjective|modelCategoryQuillen",
+   "results": "{\"t\": \"2026-10-16T13:34:08Z\", \"tool\": \"grep\", \"query\": \"IsKProjective|modelCategoryQuillen\", \"sub\": \"Algebra/Homology/ModelCategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\"], \"digest\": \"a66427a9e3c924b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "{\"t\": \"2026-10-16T13:34:09Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.IsKProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\"], \"digest\": \"4bd9a96110ba1924\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read KProjective.lean:35-44 and its bounded-above isKProjective_of_projective theorem, and ModelCategory/Injective.lean:17-28. The hits define K-projectivity, ordinary resolutions, lifting classes or the bounded-below injective model; none constructs the unbounded projective monoidal model structure. The second semantic phrasing returned the same K-projective API."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-projective-cochain-monoidal-model",
+  "worker": "stage1",
+  "summary": "Q65 preserves the statement and supplies the projective model structure by the existing small-object tools, explicit lifting/retract arguments, unbounded dg-projective characterizations, and a direct tensor-Hom proof of the pushout-product axiom. No new nodes and no hypothesis changes. Hovey was read online; no SGA route is used.",
+  "blueprint": "Realizes the projective-complex input in the ancestor proof paragraph 2, derived coefficient adjunction before R lim; the current main-20261015 paragraph has the same calculation. Historical ancestry and unit binding retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q65-482cdbecd",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q65-482cdbecd (reviewer sub-agent of L); spot-checked: Read all thirteen steps and every cited dependency statement; checked Hovey §§2.1, 2.3 and Proposition 4.2.13, Stacks 0117/05CE/05CF, blueprint routes, and archived target declarations. Unbounded dg-projectivity, signs, cofibrations and pushout products check out. No cycles, duplicate additions or repairs. Detailed checks are in review.md."
+ }
 }

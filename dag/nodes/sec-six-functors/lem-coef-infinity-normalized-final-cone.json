@@ -27,81 +27,169 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=J_{/t}$ and let $q:E\\to J$ be restriction to the base in the join-slice construction of [lem-coef-infinity-slice-right-fibration]. The hypotheses are exactly that $J$ is a quasicategory and $t$ a vertex. That node supplies a quasicategory $E$, a right fibration $q$, and identifies its fiber $E_j$ with the right-pinched $\\operatorname{Map}_J(j,t)$ as a Kan complex. In coordinates this fiber consists of $\\Delta^{n+1}=\\Delta^n\\star\\Delta^0\\to J$ constant at $j$ on the whole initial face and with last vertex $t$, exactly the mapping-space convention in the item. The vertex $e\\in E_0$ given by the degenerate edge $\\operatorname{id}_t$ lies over $t$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Proof, first sentence: the slice projection; Construction 4.6.5.1 (01KX) for its fibers."
+   }
+  },
+  {
+   "text": "Assume every $\\operatorname{Map}_J(j,t)$ is weakly contractible. The fiber identifications of Step 1 show that every vertex fiber of $q$ is a weakly contractible Kan complex. Its right-fibration property therefore satisfies all hypotheses of [lem-coef-right-fibration-contractible-fibers], which makes $q$ a trivial Kan fibration, including surjectivity on vertices. No global weak equivalence of $q$ or Kan property of $J$ has been assumed.",
+   "uses": [
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Proof, forward implication; expands Corollary 4.7.3.12 via the general criterion of 01NU."
+   }
+  },
+  {
+   "text": "The inclusion $i:\\{t\\}\\hookrightarrow J$ is injective in every degree: the constant simplex at $t$ is a singleton subset in each degree. Let $a:\\{t\\}\\to E$ be constant at the vertex $e=\\operatorname{id}_t$, and let the bottom map be $\\operatorname{id}_J:J\\to J$. Since $q(e)=t$, the square $qa=\\operatorname{id}_J\\,i$ commutes strictly. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to this square and Step 2. It supplies a simplicial section $G:J\\to E$ with $qG=\\operatorname{id}_J$ and $G(t)=e$, both as literal simplicial equalities, not merely up to homotopy.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Proof, forward implication: extend the prescribed identity vertex to a section; Stacks Tag 08NM is the existing generic lifting tool."
+   }
+  },
+  {
+   "text": "Unwind the join slice of [lem-coef-infinity-slice-right-fibration]. For a simplex $\\sigma\\in J_u$, write $g_\\sigma=G(\\sigma):\\Delta^{u+1}\\to J$. Its initial face is $\\sigma$, its last vertex is $t$, and $g_{\\sigma\\beta}=g_\\sigma\\circ\\Delta(\\beta\\star\\operatorname{id}_{[0]})$ for every monotone $\\beta:[k]\\to[u]$, since $G$ is simplicial. Define $F$ to be the identity on the base and constant at $t$ on the cone-point simplices. On a mixed $r$-simplex $(\\sigma,*)$, with $\\sigma\\in J_u$, $v\\geq0$, and $r=u+v+1$, define $F_r(\\sigma,*)=g_\\sigma\\circ\\Delta(\\rho_{u,v})$, where $\\rho_{u,v}:[r]\\to[u+1]$ fixes $0,\\ldots,u$ and sends every remaining index to $u+1$. To check an operator $\\alpha:[m]\\to[r]$, if its image meets both blocks, its initial block has $k+1$ indices and determines $\\beta:[k]\\to[u]$; then $\\rho_{u,v}\\alpha=(\\beta\\star\\operatorname{id}_{[0]})\\rho_{k,m-k-1}$, and the displayed simplicial identity for $g$ gives compatibility. If its image lies entirely in the initial block, compatibility is the base equation $g_\\sigma|_{\\Delta^u}=\\sigma$; if entirely in the final block, it is the last-vertex equation $g_\\sigma(u+1)=t$. These cases cover every face and degeneracy, so $F$ is simplicial. Its edge at $t$ is $g_t=G(t)=e$, the degenerate edge. Conversely, a normalized $F$ defines $G(\\sigma)=F\\circ(\\sigma\\star\\operatorname{id}_{\\Delta^0})$; precomposition with $\\beta\\star\\operatorname{id}$ proves simpliciality, and the base and edge conditions give $qG=\\operatorname{id}_J$ and $G(t)=e$. Restriction to base, cone-point, and mixed simplices with the maps $\\rho_{u,v}$ shows that these constructions are inverse.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Join/slice defining universal property; this is the explicit translation of the section in (1), also used in 02J5."
+   }
+  },
+  {
+   "text": "Now assume the normalized $F$ exists, and take its section $G$ from Step 4. The degenerate edge $\\operatorname{id}_t$ is an equivalence (it is its own inverse, with degenerate triangle witnesses), so [lem-coef-infinity-slice-equivalence-final] makes $e$ a final object of $E$. In particular $B_j=\\operatorname{Map}_E(G(j),e)$ is a weakly contractible Kan complex for every $j$. Postcomposition of right-pinched mapping simplices with the simplicial maps $G$ and $q$ gives maps $s_j:A_j=\\operatorname{Map}_J(j,t)\\to B_j$ and $r_j:B_j\\to A_j$. Their endpoint conditions use $G(t)=e$, $qG(j)=j$, and $q(e)=t$. On every $n$-simplex the composite $r_js_j$ is postcomposition with $qG=\\operatorname{id}_J$, so it is the identity map of simplicial sets. Thus $A_j$ is a retract of $B_j$.",
+   "uses": [
+    "lem-coef-infinity-slice-equivalence-final",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Proof, reverse implication: the displayed two mapping-space maps and finality of the slice identity, using 02J2."
+   }
+  },
+  {
+   "text": "For completeness the retract in Step 5 preserves the weak-contractibility meaning fixed in [def-cbc-enhanced-diagrams-cones]. Since $B_j$ is nonempty, $r_j$ makes $A_j$ nonempty; its component set is a retract of the singleton component set of $B_j$, hence a singleton. At any base point $a$ of $|A_j|$, the maps on homotopy groups induced by $s_j$ and $r_j$, based at $|s_j|(a)$ on $|B_j|$, compose to the identity. Each $\\pi_n(|A_j|,a)$ for $n\\geq1$ is consequently a retract of the trivial group $\\pi_n(|B_j|,|s_j|(a))$, hence is trivial. Therefore $A_j\\to\\Delta^0$ is a weak homotopy equivalence. This holds for every $j$, proving the reverse implication and the stated equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02J4",
+    "place": "Proof, last two sentences: write out the elementary retract-of-a-contractible-space argument on components and based homotopy groups."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-coef-infinity-slice-equivalence-final",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Expansion of paragraph 2, derived coefficient adjunction and stable-enhancement infrastructure, following online Kerodon 02J4. Kerodon is not archived locally, so marked agent per the brief; WANTED archival sources are recorded in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a quasicategory C and vertex t all mapping spaces Map(x,t) are contractible if and only if the identity extends to a normalized cone C star point to C",
-   "results": "{\"t\": \"2026-10-16T12:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory C and vertex t all mapping spaces Map(x,t) are contractible if and only if the identity extends to a normalized cone C star point to C\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Quasicategory.hornFilling\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.IsStrictSegal\", \"SSet.quasicategory_of_filler\"], \"digest\": \"618cad1783385a11\"}",
+   "query": "A section of the quasicategory slice projection normalized to the identity at t characterizes a final vertex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegalCore.spineToSimplex_zero\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) (p : X.Path 0), SSet.StrictSegalCore.spineToSimplex h p = p.vertex 0\", \"doc\": \"For a strict Segal set $X$ and a 0-dimensional path $p$ in $X$, the canonical 0-simplex obtained by converting the spine data equals the single vertex of $p$, i.e., $\\\\text{spineToSimplex}(p) = p_0$ wh\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄,\\n  0 < i →\\n    i < Fin.last n →\\n      ∀ (σ₀ : (SSet.horn n i).toSSet ⟶ S), ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"For any element $x$ in the 1-simplices of the 2-truncated simplicial set $X$, applying the lifting map $f_2$ after the opposite of the degeneracy map $\\\\sigma_2$ at level 0 is equivalent to applying th\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (f₁ :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := _proof_12✝ }) →\\n      Y.o\", \"doc\": \"For any 1-simplex $x$ in the source simplicial set $X$, applying the degeneracy map $\\\\sigma_2$ (in the opposite category) followed by the lifting map $f_2$ yields the same result as first applying the\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    (n : ℕ) →\\n      (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.quasicategory_iff_of_isTerminal (Quasicategory/InnerFibration.lean:83-87, read) concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory.hornFilling (Quasicategory/Basic.lean:45-52, read) supplies inner-horn fillers only. Limits.coconeOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:385-391, read) and Over.mkIdTerminal (CategoryTheory/Comma/Over/Basic.lean:306-307, read) are ordinary-category constructions, without quasicategorical mapping spaces or the normalized coherent cone."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
   },
   {
    "tool": "loogle",
-   "query": "\"Quasicategory\", \"IsTerminal\"",
-   "results": "{\"t\": \"2026-10-16T12:49:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsTerminal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"ba7f1aea610bc2ed\"}",
+   "query": "\"SSet.Quasicategory\", \"IsTerminal\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SSet.quasicategory_iff_of_isTerminal\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.InnerFibration\", \"type\": \" {X Y : SSet} (p : X ⟶ Y) (hY : CategoryTheory.Limits.IsTerminal Y) : X.Quasicategory ↔ SSet.InnerFibration p\", \"doc\": \"[Kerodon Tag 01BB](https://kerodon.net/tag/01BB)\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.quasicategory_iff_of_isTerminal (Quasicategory/InnerFibration.lean:83-87, read) concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory.hornFilling (Quasicategory/Basic.lean:45-52, read) supplies inner-horn fillers only. Limits.coconeOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:385-391, read) and Over.mkIdTerminal (CategoryTheory/Comma/Over/Basic.lean:306-307, read) are ordinary-category constructions, without quasicategorical mapping spaces or the normalized coherent cone."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
   },
   {
    "tool": "grep",
-   "query": "normalized.?cone|right.?anodyne|cone.*[Ii]s[Tt]erminal|[Ff]inal.*pinch",
-   "results": "{\"t\": \"2026-10-16T12:49:16Z\", \"tool\": \"grep\", \"query\": \"normalized.?cone|right.?anodyne|cone.*[Ii]s[Tt]erminal|[Ff]inal.*pinch\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Quasicategory|quasicategory_iff_of_isTerminal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"8\", \"line\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"text\": \"\"}\n  {\"file\": \"76\", \"line\": \"lemma quasicategory_iff_innerFibration (X \", \"text\": \" SSet.{u}) :\"}\n  {\"file\": \"77\", \"line\": \"    Quasicategory X ↔ InnerFibration (terminal.from X) \", \"text\": \"= by\"}\n  {\"file\": \"78\", \"line\": \"  rw [quasicategory_iff_hasLiftingProperty.{u} _ terminalIsTerminal, innerFibration_iff]\", \"text\": \"\"}\n  {\"file\": \"83\", \"line\": \"lemma quasicategory_iff_of_isTerminal\", \"text\": \"\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.quasicategory_iff_of_isTerminal (Quasicategory/InnerFibration.lean:83-87, read) concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory.hornFilling (Quasicategory/Basic.lean:45-52, read) supplies inner-horn fillers only. Limits.coconeOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:385-391, read) and Over.mkIdTerminal (CategoryTheory/Comma/Over/Basic.lean:306-307, read) are ordinary-category constructions, without quasicategorical mapping spaces or the normalized coherent cone."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?pinched|normalized.?cone|Map_J.*weakly contractible",
+   "results": "{\"t\": \"2026-10-16T13:44:54Z\", \"tool\": \"grep\", \"query\": \"right.?pinched|normalized.?cone|Map_J.*weakly contractible\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
   },
   {
    "tool": "leansearch",
-   "query": "terminal object of infinity category admits identity cocone normalized at identity",
-   "results": "{\"t\": \"2026-10-16T12:49:17Z\", \"tool\": \"leansearch\", \"query\": \"terminal object of infinity category admits identity cocone normalized at identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsInitial.to\", \"CategoryTheory.WithTerminal.id\", \"CategoryTheory.Limits.terminalIsTerminal\", \"CategoryTheory.Limits.coconeOfDiagramTerminal\", \"CategoryTheory.instInhabitedWithTerminal.default\", \"CategoryTheory.Over.mkIdTerminal\", \"CategoryTheory.Limits.IsInitial.uniqueUpToIso\", \"CategoryTheory.Limits.InitialMonoClass.casesOn\"], \"digest\": \"c8a419a8f4b0a3d7\"}",
+   "query": "identity extends to normalized cone in a quasicategory iff mapping spaces to the vertex are weakly contractible",
+   "results": "{\"t\": \"2026-10-16T13:44:54Z\", \"tool\": \"leansearch\", \"query\": \"identity extends to normalized cone in a quasicategory iff mapping spaces to the vertex are weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocones.extendId_hom_hom\", \"CategoryTheory.Limits.Cones.extendId_hom_hom\", \"CategoryTheory.Limits.Cones.extendId_inv_hom\", \"CategoryTheory.Limits.Cocones.extendId_inv_hom\", \"CategoryTheory.Limits.Cones.postcomposeId_hom_app_hom\", \"CategoryTheory.Limits.Cones.extendId\", \"CategoryTheory.Limits.Cone.mapConeToUnder_hom_hom\", \"CategoryTheory.Limits.Cocones.extendId\"], \"digest\": \"038bf240da386803\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.quasicategory_iff_of_isTerminal (Quasicategory/InnerFibration.lean:83-87, read) concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory.hornFilling (Quasicategory/Basic.lean:45-52, read) supplies inner-horn fillers only. Limits.coconeOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:385-391, read) and Over.mkIdTerminal (CategoryTheory/Comma/Over/Basic.lean:306-307, read) are ordinary-category constructions, without quasicategorical mapping spaces or the normalized coherent cone."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A terminal vertex is equivalent to a section of the slice category projection which takes it to its identity",
-   "results": "{\"t\": \"2026-10-16T12:49:22Z\", \"tool\": \"leanfinder\", \"query\": \"A terminal vertex is equivalent to a section of the slice category projection which takes it to its identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.mkIdTerminal\", \"CategoryTheory.MorphismProperty.Over.mkIdTerminal\", \"CategoryTheory.Over.over_hasTerminal\", \"CategoryTheory.Limits.Concrete.terminalEquiv\", \"CategoryTheory.Over.instHasTerminal\", \"CategoryTheory.WithTerminal.id\", \"CategoryTheory.subterminalsEquivMonoOverTerminal_functor_obj_obj\", \"CategoryTheory.Limits.IsTerminal.from_self\"], \"digest\": \"5b72a49e273a51c1\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: SSet.quasicategory_iff_of_isTerminal (Quasicategory/InnerFibration.lean:83-87, read) concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory.hornFilling (Quasicategory/Basic.lean:45-52, read) supplies inner-horn fillers only. Limits.coconeOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:385-391, read) and Over.mkIdTerminal (CategoryTheory/Comma/Over/Basic.lean:306-307, read) are ordinary-category constructions, without quasicategorical mapping spaces or the normalized coherent cone."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A section of the overcategory projection at the identity morphism characterizes final objects of a quasicategory",
-   "results": "{\"t\": \"2026-10-16T12:23:01Z\", \"tool\": \"leanfinder\", \"query\": \"A section of the overcategory projection at the identity morphism characterizes final objects of a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.stdSimplex.isTerminalObj\\u2080\", \"CategoryTheory.Over.mkIdTerminal\", \"CategoryTheory.MorphismProperty.Over.mkIdTerminal\", \"SSet.Subcomplex.isInitialBot\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.Over.over_right\", \"CategoryTheory.Functor.final_fromPUnit_of_isTerminal\"], \"digest\": \"3668983430e37e5d\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
-  },
-  {
-   "tool": "grep",
-   "query": "cone|join|final|terminal",
-   "results": "{\"t\": \"2026-10-16T12:23:20Z\", \"tool\": \"grep\", \"query\": \"cone|join|final|terminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"5b96a086ca62d79f\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
   },
   {
    "tool": "loogle",
-   "query": "\"horn\", \"Mono\"",
-   "results": "{\"t\": \"2026-10-16T12:23:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"horn\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.innerHornInclusions_le_monomorphisms\"], \"digest\": \"32d28d1195a52919\"}",
+   "query": "Quasicategory, right-pinched mapping space, normalized cone, weakly contractible",
+   "results": "{\"t\": \"2026-10-16T13:44:54Z\", \"tool\": \"loogle\", \"query\": \"Quasicategory, right-pinched mapping space, normalized cone, weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Quasicategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
+   "verdict": "invalid query: Loogle returned unknown identifier 'Quasicategory'; this query supplies no absence evidence. The valid quoted-identifier Loogle query and independent semantic and source searches are recorded separately."
   },
   {
    "tool": "leanfinder",
-   "query": "An identity endofunctor on an infinity category extends to a cone with apex a chosen object and degenerate apex edge precisely for a final object",
-   "results": "{\"t\": \"2026-10-16T12:56:04Z\", \"tool\": \"leanfinder\", \"query\": \"An identity endofunctor on an infinity category extends to a cone with apex a chosen object and degenerate apex edge precisely for a final object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.extendId\", \"CategoryTheory.idLiftsCone\", \"CategoryTheory.inhabitedLiftableCone\", \"CategoryTheory.Limits.coneOfDiagramTerminal\", \"CategoryTheory.Limits.inhabitedCone\", \"CategoryTheory.Functor.final_fromPUnit_of_isTerminal\", \"CategoryTheory.Limits.Cones.extendId_hom_hom\", \"CategoryTheory.Functor.Initial.extendCone\"], \"digest\": \"d27463a6a77e8863\"}",
+   "query": "A simplicial map from the right cone J star point to a quasicategory restricting to the identity and degenerate at t is equivalent to weak contractibility of every right-pinched mapping space Map(j,t)",
+   "results": "{\"t\": \"2026-10-16T13:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map from the right cone J star point to a quasicategory restricting to the identity and degenerate at t is equivalent to weak contractibility of every right-pinched mapping space Map(j,t)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.I\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.KanComplex\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"9a599fcecc83e42c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Cones.extendId (CategoryTheory/Limits/Cones.lean:361-362), coneOfDiagramTerminal (Limits/Shapes/IsTerminal.lean:365-372), and final_fromPUnit_of_isTerminal (Limits/Final.lean:931-936), read in the pinned local Mathlib, concern ordinary categories. None states a normalized identity cone on a quasicategory."
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:83-98: quasicategory_iff_of_isTerminal concerns a terminal simplicial SET as codomain, not a terminal vertex. Quasicategory/Basic.lean:39-52 only gives inner horn fillers. CategoryTheory/Limits/Cones.lean:361-362 and Comma/Over/Basic.lean:305-307 are ordinary category constructions; none states the normalized quasicategorical identity cone criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-terminal-anodyne",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-normalized-final-cone",
+  "worker": "stage1",
+  "summary": "Kept the full normalized-cone equivalence, including the strict degenerate t-edge. Wrote the slice/fiber, relative-section lift, explicit join translation, mapping-space retract and homotopy-group arguments. Added three generic statement-only foundations, searched Mathlib in all four ways and with second semantic formulations. Used the existing boundary-lifting Mathlib leaf. No exact Lean attachment exists; no statement dispute or hypothesis change. Input node was in the authoritative live mirror but absent from the shared side snapshot. Second reading expanded every operator case of the join translation and corrected an invalid-query verdict; item and child statements remain unchanged.",
+  "blueprint": "Realizes the final-vertex normalized-cone foundation under paragraph 2 of prop-coef-integral-exceptional-adjoint, inherited through lem-coef-infinity-terminal-anodyne and final-index finite-shape enhancement. This is below-unit generic infrastructure; it does not replace a unit step.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic definitions of quasicategories, right-pinched mapping spaces and weak homotopy equivalence; no six-functor unit definition supplies these notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-4aa5c9701",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-4aa5c9701 (reviewer sub-agent of L); spot-checked: Mathematics checked against Kerodon 02J4, 018F, 01NU, 02J2 and mapping-space references; all six steps and three new statements accepted. Repaired incomplete creation/audit metadata in three corrected JSON files under fixes/. No statements changed or nodes dropped. Full checks, edge cases, route assessment and accepted tool use are recorded in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }

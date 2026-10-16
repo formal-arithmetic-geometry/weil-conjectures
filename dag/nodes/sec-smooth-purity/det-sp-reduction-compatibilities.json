@@ -3,53 +3,234 @@
  "blueprint": {
   "is": "det-sp-reduction-compatibilities",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient comparisons: units, composition and purity",
- "statement": "In the situation of [det-sp-reduction-exceptional]:\n\n1. *Units.* For $M\\in\\Dctf(X_{\\mathrm{proét}},A)$, in $\\Dctf(X_{\\mathrm{proét}},B)$,\n   $$\n   f_B^!\\bigl(b(M)\\bigr)\\circ c_{A,B}(Rf_{!,A}M)\\circ (\\eta_A(M))_B=\\eta_B(M_B).\n   $$\n2. *Composition.* For $A\\to B\\to C$, the composite\n   $(f_A^!K)_C\\simeq((f_A^!K)_B)_C\\xrightarrow{c_{A,B}(K)_C}(f_B^!K_B)_C\n   \\xrightarrow{c_{B,C}(K_B)}f_C^!((K_B)_C)\\simeq f_C^!K_C$\n   equals $c_{A,C}(K)$.\n3. *Purity.* For $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$, in $\\Dctf(X_{\\mathrm{proét}},B)$,\n   $$\n   c_{A,B}(K)\\circ (\\gamma_{f,A}(K))_B=\\gamma_{f,B}(K_B),\n   $$\n   the sources being identified by $(f_A^*K(d)[2d])_B\\simeq f_B^*(K_B)(d)[2d]$.",
+ "statement": "Work in the standing scheme setting of the smooth-purity chapter: $k$ is the algebraic closure in the global finite-field datum [def-weil-finite-field-fiber], $\\ell\\ne\\operatorname{char}(k)$, $X,Y$ are separated finite-type $k$-schemes, and $f:X\\to Y$ is a smooth separated $k$-morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Let $A\\to B$ (and, in clause 2, $B\\to C$) be unital maps of finite commutative rings killed by powers of $\\ell$. Use the ordinary, uncompleted constant-coefficient pro-etale module derived categories [def-weil-pbc-proetale-modules]; $\\Dctf(T,R)$ denotes their bounded objects with intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf] and finite Tor amplitude [def-weil-proetale-tor-amplitude], meaning that some interval $[a,b]$ contains the cohomology of $K\\otimes_R^{\\mathbf L}N$ for every degree-zero $R_T$-module sheaf $N$.\n\nUse the scalar-extension functors and associators of [det-sp-scalar-extension-functor], the compact-support comparison $b_{A,B}(M):(Rf_{!,A}M)_B\\xrightarrow{\\sim}Rf_{!,B}(M_B)$ of [det-sp-reduction-direct-image], pinned as follows: for a compactification $f=pj$, take the coefficient exchange for $Rp_*$ (the adjunction mate of the coefficient/pullback balancing isomorphism), followed by the canonical coefficient identification for $j_!$, and the counit-characterized comparison $c_{A,B}(K):(f_A^!K)_B\\xrightarrow{\\sim}f_B^!(K_B)$ of [det-sp-reduction-exceptional]. Write $b=b_{A,B}$, and write $\\eta_R,\\varepsilon_R$ for the unit and counit of $Rf_{!,R}\\dashv f_R^!$. The purity maps $\\gamma_{f,R}$ use the diagonal/DNC orientation specified over general finite rings by [det-sp-finite-general-ring].\n\n1. *Units.* For $M\\in\\Dctf(X_{\\mathrm{proét}},A)$, in $\\Dctf(X_{\\mathrm{proét}},B)$,\n   $$\n   f_B^!\\bigl(b(M)\\bigr)\\circ c_{A,B}(Rf_{!,A}M)\\circ (\\eta_A(M))_B=\\eta_B(M_B).\n   $$\n2. *Composition.* For $A\\to B\\to C$ and $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$, the composite\n   $(f_A^!K)_C\\simeq((f_A^!K)_B)_C\\xrightarrow{c_{A,B}(K)_C}(f_B^!K_B)_C\n   \\xrightarrow{c_{B,C}(K_B)}f_C^!((K_B)_C)\\simeq f_C^!K_C$\n   equals $c_{A,C}(K)$.\n3. *Purity.* For $K\\in\\Dctf(Y_{\\mathrm{proét}},A)$, in $\\Dctf(X_{\\mathrm{proét}},B)$,\n   $$\n   c_{A,B}(K)\\circ (\\gamma_{f,A}(K))_B=\\gamma_{f,B}(K_B),\n   $$\n   the sources being identified by $(f_A^*K(d)[2d])_B\\simeq f_B^*(K_B)(d)[2d]$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.md",
   "place": "node det-sp-reduction-compatibilities, order None"
  },
  "stmt_deps": [
-  "det-sp-reduction-exceptional"
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-modules",
+  "det-sp-scalar-extension-functor",
+  "det-sp-reduction-direct-image",
+  "det-sp-reduction-exceptional",
+  "det-sp-finite-general-ring",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "(1) Both sides are morphisms $M_B\\to f_B^!Rf_{!,B}(M_B)$; compare their\ntransposes under $Rf_{!,B}\\dashv f_B^!$. The transpose of $\\eta_B(M_B)$ is\n$\\mathrm{id}$. The transpose of the left side is\n$\\varepsilon_B(Rf_{!,B}M_B)\\circ Rf_{!,B}f_B^!(b(M))\\circ Rf_{!,B}(c_{A,B}(Rf_{!,A}M))\\circ Rf_{!,B}((\\eta_A M)_B)$;\nby naturality of $\\varepsilon_B$ this is\n$b(M)\\circ\\varepsilon_B((Rf_{!,A}M)_B)\\circ Rf_{!,B}(c_{A,B}(Rf_{!,A}M))\\circ Rf_{!,B}((\\eta_AM)_B)$.\nBy the defining identity of $c_{A,B}$ and naturality of $b$ this equals\n$b(M)\\circ(\\varepsilon_A(Rf_{!,A}M))_B\\circ b(f_A^!Rf_{!,A}M)^{-1}\\circ Rf_{!,B}((\\eta_AM)_B)\n=b(M)\\circ\\bigl(\\varepsilon_A(Rf_{!,A}M)\\circ Rf_{!,A}(\\eta_AM)\\bigr)_B\\circ b(M)^{-1}$,\nwhich is $\\mathrm{id}$ by the triangle identity over $A$.",
-   "uses": [],
-   "elementary": null
+   "text": "Set $P_R=Rf_{!,R}$, $G_R=f_R^!$, $T^W_{A,B}=-\\otimes^{\\mathbf L}_{A_W}B_W$ for $W=X,Y$, and $\\omega_R=G_RR_Y$. The comparisons $b:T^YP_A\\to P_BT^X$ and $c:T^XG_A\\to G_BT^Y$ have the direction in the statement. Scalar extension preserves the finite-Tor constructible domains and the shifted Tate line by [det-sp-scalar-extension-functor]. Its monoidal identification $T(U\\otimes_A^{\\mathbf L}V)\\cong TU\\otimes_B^{\\mathbf L}TV$ follows by applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with structure-ring map $A_W\\to B_W$. The pullback identification $T^Xf_A^*K\\cong f_B^*T^YK$ is the balancing map for the two compositions of module pullbacks: $(f^{-1}K\\otimes_A A_X)\\otimes_A B_X\\cong f^{-1}K\\otimes_A B_X$. On flat K-flat representatives it multiplies the nested scalars; both triple composites multiply the same three scalars. These identifications are natural and respect tensor symmetry and shifts; balancing preserves degrees, and the tensor symmetry on a pair of degrees $r,s$ uses the same sign $(-1)^{rs}$ on either side. We use these fixed identifications below, including the natural associators $(U_B)_C\\cong U_C$; no flatness of $B/A$ is used. The current direct-image comparison phrases bounded constructibility intrinsically. The equivalence of [lem-weil-pbc-finite-ring-constructible-derived-origin] identifies bounded constructible etale-origin objects with exactly those bounded intrinsically constructible pro-etale objects, for every finite commutative ring here. The finite-Tor condition is the same test against degree-zero module sheaves on the same pro-etale category. Thus all inputs used below satisfy the revised direct-image comparison's hypotheses, without identifying a condensed coefficient category with the ordinary one.",
+   "uses": [
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Conventions preceding clauses (1)-(3); tensor and pullback identifications made explicit"
+   }
   },
   {
-   "text": "(2) Compute transposes under $Rf_{!,C}\\dashv f_C^!$. Applying the defining\nidentity for $c_{B,C}$ and then (the scalar extension to $C$ of) the identity\nfor $c_{A,B}$, the transpose of the composite is\n$(\\varepsilon_A(K))_C\\circ$ (the composite of $b$ for $A\\to B$ extended to $C$\nand $b$ for $B\\to C$)$^{-1}$, modulo associativity isomorphisms. By the\ncocycle property of $b$ ([det-sp-reduction-direct-image]) this is\n$(\\varepsilon_A(K))_C\\circ b_{A,C}^{-1}$, the transpose of $c_{A,C}(K)$. Hence the\ntwo maps are equal.",
+   "text": "For clause 1 let $L=P_AM$. Transpose its left side under $P_B\\dashv G_B$. Naturality of $\\varepsilon_B$ first moves $G_B(b_M)$ to the outside. The defining equation for $c_L$ in [det-sp-reduction-exceptional] then gives the transpose\n$$b_M\\circ(\\varepsilon_A(L))_B\\circ b_{G_AL}^{-1}\\circ P_B((\\eta_A(M))_B).$$\nNaturality of $b$ at $\\eta_A(M):M\\to G_AP_AM$ rewrites the last two factors as $(P_A\\eta_A(M))_B\\circ b_M^{-1}$. Thus this transpose is\n$$b_M\\circ\\bigl(\\varepsilon_A(P_AM)\\circ P_A\\eta_A(M)\\bigr)_B\\circ b_M^{-1}=1_{P_BM_B},$$\nby the triangle identity of the $A$-adjunction. This is the transpose of $\\eta_B(M_B)$, so injectivity of the adjunction Hom bijection proves clause 1. The only identities used besides the cited counit equation and naturality of $b$ are the naturality and triangle axioms of the displayed adjunctions.",
    "uses": [
+    "det-sp-reduction-exceptional",
     "det-sp-reduction-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (1), full unit transpose calculation"
+   }
   },
   {
-   "text": "(3) $\\gamma_{f,A}(K)$ is the tensor map\n$f_A^*K\\otimes^{\\mathbf L}\\omega_{f,A}\\to f_A^!K$ (the transpose of the\nprojection formula followed by the counit) composed with the inverse of the\norientation $\\omega_{f,A}\\simeq A_X(d)[2d]$. *Tensor map:* its transpose is\nbuilt from the projection formula and $\\varepsilon_A$; the projection formula\ncommutes with extension of scalars (both are associativity and counit maps,\ncompatible with $b$), and $\\varepsilon$ is compatible by the defining identity\nof $c_{A,B}$; so the tensor maps over $A$ and $B$ correspond under $c_{A,B}$.\n*Orientation:* the orientation of [thm-pur-diagonal-dualizing-object] comes\nfrom deformation to the normal bundle, whose geometry does not depend on\ncoefficients; its rank-one sheaves are locally free, so their derived\nextensions are ordinary ones even when $A\\to B$ is not flat. On the\ndeformation family the comparisons at $t=1$ are the chart comparisons of\n[det-sp-reduction-exceptional], so the scalar-extended comparison over $A$ and\nthe comparison over $B$ agree at $t=1$; by the uniqueness in the deformation\nlemma (a comparison of rank-one locally constant sheaves normalized at $t=1$\nis unique) they agree at $t=0$. Combining, $c_{A,B}(K)\\circ(\\gamma_{f,A}(K))_B=\\gamma_{f,B}(K_B)$.",
+   "text": "For clause 2 put $q=c_{B,C}(K_B)\\circ(c_{A,B}(K))_C$, inserting the source and target associators of Step 1. Its transpose under $P_C\\dashv G_C$ is\n$$\\begin{aligned}\n\\varepsilon_C(K_C)P_C(q)\n&=(\\varepsilon_B(K_B))_C\\,b_{B,C}(G_BK_B)^{-1}\\,P_C((c_{A,B}(K))_C)\\\\\n&=\\bigl(\\varepsilon_B(K_B)P_B(c_{A,B}(K))\\bigr)_C\\,b_{B,C}((G_AK)_B)^{-1}\\\\\n&=(\\varepsilon_A(K))_C\\,(b_{A,B}(G_AK)^{-1})_C\\,b_{B,C}((G_AK)_B)^{-1}\\\\\n&=(\\varepsilon_A(K))_C\\,b_{A,C}(G_AK)^{-1}.\n\\end{aligned}$$\nThe first and third equalities are the defining counit equations for $c_{B,C}$ and $c_{A,B}$. The second is naturality of $b_{B,C}$ at $c_{A,B}(K)$. The last is exactly the coefficient cocycle in [det-sp-reduction-direct-image]; naturality of the scalar associator puts its two factors in the indicated order. This last expression is the transpose of $c_{A,C}(K)$. Equality of transposes proves clause 2, for every input $K$ in its stated domain.",
    "uses": [
-    "thm-pur-diagonal-dualizing-object",
-    "det-sp-reduction-exceptional"
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image",
+    "det-sp-scalar-extension-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (2), expanded naturality and inverse-cocycle calculation"
+   }
+  },
+  {
+   "text": "We first justify the projection compatibility used in the tensor-map part of clause 3. Fix one compactification $f=pj$ used by $b$ in [det-sp-reduction-direct-image]. For its proper part use [lem-weil-pbc-ringed-exchange-tensor-coherence] on the following square of ringed topoi: the horizontal scheme maps are $p$ over $A$ and $p$ over $B$, and the two vertical morphisms are identity topoi equipped with the maps $A_Y\\to B_Y$ and $A_{\\bar X}\\to B_{\\bar X}$. The ringed square commutes because inverse image sends the constant coefficient map to the same coefficient map on $\\bar X$. Its vertical derived pullbacks are precisely $T^Y,T^{\\bar X}$; its exchange is the counit-defined proper coefficient comparison used to construct $b$. The cited theorem requires a commutative ringed square, not a cartesian square, and has no flatness assumption. It therefore identifies the two routes through the proper projection map and coefficient exchange. The open part is the canonical projection isomorphism of [lem-cbc-extension-zero-projection-formula]. Its compatibility with coefficient change can be checked on flat K-flat representatives: both orders use the balanced map that extends a section by zero, tensors its coefficient with the other factor, and multiplies the two $B$-scalars. On $U$ the maps are the identical balancing map; on the complement their source and target are zero. Thus this is an equality of the underived natural module maps in each bidegree and hence of their total-complex maps, not detection of equality of arbitrary derived maps on an open cover. Pasting the proper and open squares gives\n$$b_{M\\otimes_A^{\\mathbf L}f_A^*K}\\circ(\\operatorname{PF}_{A;M,K})_B\n=\\operatorname{PF}_{B;M_B,K_B}\\circ(b_M\\otimes_B^{\\mathbf L}1_{K_B}),$$\nunder the monoidal and pullback identifications of Step 1. Here $\\operatorname{PF}_R$ is the canonical proper projection followed by the open projection for this compactification. This is valid in particular for $M=\\omega_A$; all $b$ components in this instance are on finite-Tor constructible inputs.",
+   "uses": [
+    "det-sp-reduction-direct-image",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Tensor map: projection formula commutes with coefficients; proper part is Stacks Tag 0E48 (remark-compatible-with-diagram), open part Tag 0GL1 (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "The projection maps used next are invertible on the required domain for every finite coefficient ring $R$ in the statement. The object $K$ has bounded intrinsically constructible cohomology by its stated $\\Dctf$ hypothesis, while [det-sp-finite-general-ring] identifies $\\omega_R$ with the shifted Tate line $R_X(d)[2d]$, which is bounded intrinsically constructible and finite-Tor by its locally free rank-one description. Hence [lem-weil-pbc-finite-ring-constructible-derived-origin] supplies bounded etale-origin witnesses for both objects. For every scheme in a finite-type compactification $f=pj$, [det-ctf-finite-comparison-whole] identifies the whole etale derived category with its finite-Tor constructible localizing closure. Thus [det-ctf-finite-comparison-localizing] applies to all etale witness complexes and their tensors, extensions by zero and direct images: it identifies $\\nu^*Rp_{\\mathrm{et},*}$ with $Rp_{\\mathrm{proet},*}\\nu^*$ and commutes with $j_!$ and pullback. These are the canonical adjunction comparisons, as in its source. The tensor identifications are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; the comparison square for geometric pullback is [lem-weil-pbc-comparison-pullback]. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square with horizontal maps $p$ on the etale and pro-etale sites and vertical comparison morphisms $\\nu$. It says that the canonical projection maps correspond under these identifications, not merely that their source and target objects are isomorphic. The etale proper projection map is an isomorphism for any finite commutative $R$ and arbitrary unbounded witness complexes by [lem-etale-proper-projection-formula-finite] (Stacks Tag 0F0G). Its pro-etale counterpart on these witnesses is therefore an isomorphism too. Composing with the open projection isomorphism of [lem-cbc-extension-zero-projection-formula] proves invertibility of the compact-support projection map at $(\\omega_R,K)$. All schemes used here are separated finite type over $k$, hence in the standing range of the two comparison nodes. This argument requires neither a DVR presentation of $R$ nor a projection theorem for arbitrary nonclassical pro-etale complexes.\n\nLet $U_R(K)=f_R^*K\\otimes_R^{\\mathbf L}\\omega_R$. Write $h_{R,K}:U_R(K)\\to G_RK$ for the canonical tensor map occurring in [det-sp-finite-general-ring]. Explicitly its transpose is\n$$t_{R,K}:P_RU_R(K)\\xrightarrow{P_R(\\sigma)}P_R(\\omega_R\\otimes_R^{\\mathbf L}f_R^*K)\\xrightarrow{\\operatorname{PF}_{R;\\omega_R,K}^{-1}}P_R\\omega_R\\otimes_R^{\\mathbf L}K\\xrightarrow{\\varepsilon_R(R_Y)\\otimes1}K.$$\nThe final coefficient-unit isomorphism is understood. This gives the precise meaning of the canonical tensor map, with the same symmetry convention at both coefficient rings.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-ctf-finite-comparison-whole",
+    "det-ctf-finite-comparison-localizing",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Tensor map: projection inverses for arbitrary finite rings via the current finite comparison unit and Stacks Tag 0F0G; explicit counit transpose"
+   }
+  },
+  {
+   "text": "Let $\\delta=c_{A,B}(A_Y): (\\omega_A)_B\\xrightarrow{\\sim}\\omega_B$, identifying $(A_Y)_B=B_Y$. Let $\\rho_K:(U_A(K))_B\\to U_B(K_B)$ be the monoidal/pullback identification of Step 1 followed by $1\\otimes\\delta$. Step 4, now inverted, and naturality of the projection map in its first variable identify the projection portion of $t_{B,K_B}P_B(\\rho_K)$ with the scalar extension of the projection portion of $t_{A,K}$, followed by $b_{U_A(K)}^{-1}$. The remaining counit portion is exactly\n$$\\varepsilon_B(B_Y)P_B(\\delta)=(\\varepsilon_A(A_Y))_B\\,b_{\\omega_A}^{-1}$$\nfrom [det-sp-reduction-exceptional]. Consequently\n$$t_{B,K_B}P_B(\\rho_K)=(t_{A,K})_B\\,b_{U_A(K)}^{-1}.$$\nFor completeness, the transpose of $c_{A,B}(K)(h_{A,K})_B$ is, by the same defining identity and naturality of $b$ at $h_{A,K}$,\n$$\\begin{aligned}\n\\varepsilon_B(K_B)P_B(c_{A,B}(K))P_B((h_{A,K})_B)\n&=(\\varepsilon_A(K))_B\\,b_{G_AK}^{-1}\\,P_B((h_{A,K})_B)\\\\\n&=(\\varepsilon_A(K)P_A(h_{A,K}))_B\\,b_{U_A(K)}^{-1}\\\\\n&=(t_{A,K})_B\\,b_{U_A(K)}^{-1}.\n\\end{aligned}$$\nThe transpose of $h_{B,K_B}\\rho_K$ is the same by the preceding equation. Injectivity of transposition proves\n$$c_{A,B}(K)(h_{A,K})_B=h_{B,K_B}\\rho_K.$$\nThis establishes coefficient compatibility of the tensor maps before choosing an orientation.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Tensor map: counit compatibility and equality of explicit transposes"
+   }
+  },
+  {
+   "text": "To compare orientations for this particular $A\\to B$, choose a single $n\\geq1$ with $\\ell^nA=\\ell^nB=0$, and put $R=\\mathbf Z/\\ell^n$. The unital ring map $A\\to B$ makes $R\\to A\\to B$ a chain. Let $o_R:R_X(d)[2d]\\to\\omega_R$ be the inverse of the prime-power diagonal/DNC orientation. Clauses 1 and 2 of [det-sp-finite-general-ring] say that the inverse diagonal/DNC orientations over $A,B$ are\n$$o_A=c_{R,A}(R_Y)(o_R)_A,\\qquad o_B=c_{R,B}(R_Y)(o_R)_B.$$\nAll source twists are identified by the free-rank-one clause of [det-sp-scalar-extension-functor], valid even for a nonflat coefficient map. Clause 2 of the present item, already proved in Step 3, applied to $R\\to A\\to B$ at $R_Y$, gives the explicit equality\n$$\\delta\\,(o_A)_B\n=c_{A,B}(A_Y)(c_{R,A}(R_Y))_B(o_R)_B\n=c_{R,B}(R_Y)(o_R)_B=o_B.$$\nWe use the stated common-origin formula and its agreement with the diagonal construction; we do not assume that arbitrary isomorphisms of derived objects glue or that an unspecified DNC comparison is uniquely determined by a fibre. We also do not use the exponent-independence clause of the general-ring node: one common exponent was fixed throughout.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Orientation: explicit common-prime-power construction; current blueprint sk-thm-smooth-purity-general-ring clauses (1)-(2)"
+   }
+  },
+  {
+   "text": "By the displayed construction in [det-sp-finite-general-ring], $\\gamma_{f,A}(K)=h_{A,K}\\circ(1\\otimes o_A)$ after the canonical twist reassociation, and similarly over $B$. Substitute the tensor-map equality of Step 6 and then $\\delta(o_A)_B=o_B$ from Step 7. Functoriality of tensor gives\n$$\\begin{aligned}\nc_{A,B}(K)(\\gamma_{f,A}(K))_B\n&=h_{B,K_B}\\rho_K(1\\otimes o_A)_B\\\\\n&=h_{B,K_B}(1\\otimes o_B)=\\gamma_{f,B}(K_B).\n\\end{aligned}$$\nThe source identification is precisely $(f_A^*K(d)[2d])_B\\cong f_B^*(K_B)(d)[2d]$ from Step 1. This proves clause 3. Together with Steps 2 and 3 it proves all three assertions.",
+   "uses": [
+    "det-sp-finite-general-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+    "place": "Proof (3), Combining tensor and orientation comparisons"
+   }
   }
  ],
  "proof_deps": [
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "det-sp-reduction-exceptional",
   "det-sp-reduction-direct-image",
-  "thm-pur-diagonal-dualizing-object",
-  "det-sp-reduction-exceptional"
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-projection-formula",
+  "det-sp-finite-general-ring",
+  "det-ctf-finite-comparison-whole",
+  "det-ctf-finite-comparison-localizing",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-etale-proper-projection-formula-finite"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Proof (1)-(3), projection square expanded using Stacks Tags 0E48, 07A4 and 0GL1, invertibility via Tag 0F0G and finite-ring etale/pro-etale comparison; orientation via the current blueprint common-prime-power formula"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|upperShriek|exceptionalInverseImage|TateTwist",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficients preserves units, composition and smooth purity in constructible derived categories of sheaves",
+   "results": "8 hit(s): Algebra.Smooth.baseChange, CochainComplex.HomComplex.Cochain.units_smul_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unitHomEquiv_comp_apply, smoothSheafCommRing.coeFun, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app, SheafOfModules.unit, CategoryTheory.constantCommuteCompose",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change commutes with adjunction units, composes for exceptional pullback, and preserves the smooth purity orientation on etale sheaves",
+   "results": "8 hit(s): SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*scalar|scalar.*projection",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"tensor\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support projection transformation commutes with derived coefficient change without flatness hypotheses",
+   "results": "8 hit(s): HasCompactSupport.deriv, HasCompactSupport.comp_homeomorph, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.fderiv, CompactlySupportedContinuousMap.instSMulCommClass, Algebra.PreSubmersivePresentation.ofHasCoeffs_map, ContDiffMapSupportedIn.coe_smul, TestFunction.coe_ofSupportedIn",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical proper pushforward projection formula is compatible with derived extension of coefficients along any homomorphism of finite commutative rings",
+   "results": "8 hit(s): PresheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, PrimeSpectrum.BasicConstructibleSetData.map_g, PresheafOfModules.pushforwardCompToPresheaf, AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(base.change|coefficien)|coefficien.*projection|derived.*projection",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image coefficient comparison preserves the unit of compact support adjunction and the diagonal smooth purity map",
+   "results": "8 hit(s): SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk, LightCondensed.ihomPoints_symm_comp, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor base change intertwines the projection maps Rf pushforward M tensor N to Rf pushforward of M tensor f pullback N",
+   "results": "8 hit(s): IsBaseChange.tensorEquiv, isBaseChange_tensorProduct_map, PresheafOfModules.Monoidal.tensorObjMap, LinearMap.rTensor_baseChange, PresheafOfModules.Monoidal.tensorObj_map_tmul, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, Algebra.IsPushout.cancelBaseChange_tmul",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not give the three finite-coefficient smooth-purity comparison identities"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -65,5 +246,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sp-reduction"
+ "unit": "sk-lem-sp-reduction",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-reduction-compatibilities",
+  "worker": "stage1",
+  "summary": "Expanded the unit and coefficient-composition transposes, proved projection compatibility by the existing arbitrary ringed-topos tensor/exchange square and open tensor calculation, and compared diagonal orientations using a single prime-power coefficient origin and the already proved coefficient cocycle. No new nodes. Made the standing scheme domains and meanings of b, c, eta and gamma explicit; retained all three mathematical clauses and arbitrary nonflat finite-ring coefficient maps. Checked exact cited statements, current blueprint and Stacks sources, arbitrary finite-ring etale comparison and projection domains and edge cases. The current imported node has no chapter/unit metadata; this metadata gap is reported without editing maintainer fields.",
+  "blueprint": "Proof (1) -> step 2; Proof (2) -> step 3; Proof (3), tensor paragraph -> steps 1 and 4-6; orientation paragraph -> step 7 using the existing general-ring common-origin statement, retaining its diagonal/DNC normalization; final combining sentence -> step 8. The sk-lem-sp-reduction unit constructs the same b and counit-defined c, with its sk-lem-sp-finite-existence and scalar-extension interfaces.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived pullback tensor comparison for the identity-topos coefficient maps and geometric inverse image; it supplies no purity theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic projection/exchange compatibility applied to a ringed coefficient square with identity underlying topoi, required by the tensor paragraph; not a replacement for diagonal/DNC purity."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Open part of the same canonical compactification projection comparison; the coefficient-compatibility balancing calculation is written out."
+   },
+   {
+    "node": "det-ctf-finite-comparison-whole",
+    "why": "Ensures all etale witness complexes used in the proper projection calculation belong to the localizing domain of comparison, for every finite admissible ring."
+   },
+   {
+    "node": "det-ctf-finite-comparison-localizing",
+    "why": "Identifies direct images, pullbacks and extension by zero on the classical image for every finite admissible ring; used only to transport the canonical etale projection isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Gives the commuting comparison/geometric-pullback square to which the generic tensor/exchange theorem applies."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite",
+    "why": "Proper etale projection isomorphism for every finite commutative ring, without the narrower DVR-stage restriction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Identifies bounded etale-origin and intrinsic finite-ring pro-etale constructibility, so that the current direct-image comparison applies on exactly the ordinary coefficient domain used here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-projection-formula",
+  "det-ctf-finite-comparison-whole",
+  "det-ctf-finite-comparison-localizing",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-3c48723ba",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-3c48723ba (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, current blueprint route, and source passages. All eight mathematical steps check out. Repaired Step 5’s omitted finite-ring constructible-origin lemma in its uses list. Corrected JSON is under fixes/; detailed source, edge-case, target-category, and tool-use checks are in review.md. No target changes or new nodes.; 1 file(s) fixed by the reviewer"
+ }
 }

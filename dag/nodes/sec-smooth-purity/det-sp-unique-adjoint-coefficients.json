@@ -3,34 +3,208 @@
  "blueprint": {
   "is": "det-sp-unique-adjoint-coefficients",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Right adjoints inherit the coefficient comparisons",
- "statement": "Let $\\Lambda\\to\\Lambda'$ be a coefficient extension (subscripts denoting\nextension of scalars), with an isomorphism\n$b(M):(Rf_{!,\\Lambda}M)_{\\Lambda'}\\xrightarrow{\\sim}Rf_{!,\\Lambda'}(M_{\\Lambda'})$\nnatural in $M$. Let $J$ be a right adjoint of $Rf_{!,\\Lambda}$ (counit\n$\\varepsilon^J$) and $J'$ a right adjoint of $Rf_{!,\\Lambda'}$ (counit\n$\\varepsilon^{J'}$). Define $c_J(K):(JK)_{\\Lambda'}\\to J'(K_{\\Lambda'})$ in\n$\\Dctf(X,\\Lambda')$ as the $J'$-transpose of\n$(\\varepsilon^J(K))_{\\Lambda'}\\circ b(JK)^{-1}$, and let $c_f$ be the map defined\nin this way for $f^!_\\Lambda$ and $f^!_{\\Lambda'}$. Let\n$\\gamma:f^!_\\Lambda\\xrightarrow{\\sim}J$ and $\\gamma':f^!_{\\Lambda'}\\xrightarrow{\\sim}J'$ be\nthe isomorphisms of [det-sp-unique-right-adjoint]. Then\n\n$$\nc_J(K)=\\gamma'(K_{\\Lambda'})\\circ c_f(K)\\circ(\\gamma(K)^{-1})_{\\Lambda'},\n$$\n\nso $c_J$ is an isomorphism whenever $c_f$ is, and $c_J$ satisfies the\ncomposition identity for $\\Lambda\\to\\Lambda'\\to\\Lambda''$ whenever $c_f$ does.",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism [def-pc-scheme] and $\\Lambda\\to\\Lambda'$ a coefficient extension. Use the coefficient categories $\\Dctf(T,\\Lambda)$ of [def-sf-categories]. Assume extension of scalars supplies functors $T^X:\\Dctf(X,\\Lambda)\\to\\Dctf(X,\\Lambda')$ and $T^Y:\\Dctf(Y,\\Lambda)\\to\\Dctf(Y,\\Lambda')$; subscripts $(-)_{\\Lambda'}$ denote these functors on objects and morphisms. Let $F=Rf_{!,\\Lambda}$ and $F'=Rf_{!,\\Lambda'}$ be the given compact-support functors between the respective $X$- and $Y$-categories. Fix right adjoints $G=f^!_\\Lambda$ and $G'=f^!_{\\Lambda'}$ with counits $\\varepsilon_f$ and $\\varepsilon'_f$. Suppose\n$$b(M):T^Y(FM)\\xrightarrow{\\sim}F'(T^XM)$$\nis natural in $M$. Let $J$ and $J'$ be any other right adjoints of $F$ and $F'$, with counits $\\varepsilon^J$ and $\\varepsilon^{J'}$. For $K\\in\\Dctf(Y,\\Lambda)$, define $c_J(K):T^X(JK)\\to J'(T^YK)$ as the $J'$-transpose of\n$$T^Y(\\varepsilon^J_K)\\circ b(JK)^{-1}:F'(T^X(JK))\\to T^YK,$$\nwhere transposition under $F'\\dashv J'$ sends $h:A\\to J'B$ to $\\varepsilon^{J'}_B\\circ F'(h)$ [lem-weil-pbc-adjunct-counit-identity]. Define $c_f(K):T^X(GK)\\to G'(T^YK)$ by the same rule for $G,G'$. Let $\\gamma:G\\xrightarrow{\\sim}J$ and $\\gamma':G'\\xrightarrow{\\sim}J'$ be the counit-compatible isomorphisms of [det-sp-unique-right-adjoint]. Then\n$$c_J(K)=\\gamma'_{T^YK}\\circ c_f(K)\\circ T^X(\\gamma_K^{-1}).$$\nConsequently $c_J(K)$ is an isomorphism whenever $c_f(K)$ is. The maps $c_J,c_f$ are natural in $K$ [def-weil-pbc-adjunction-mate].\n\nFor a chain $\\Lambda_0\\to\\Lambda_1\\to\\Lambda_2$, make the same choices $F_i\\dashv G_i=f^!_{\\Lambda_i}$, $F_i\\dashv J_i$ at each stage, with coefficient functors $T^X_{ij},T^Y_{ij}$ and comparisons $b_{ij}$ for $ij=01,12,02$. Use the same $J_1$ and $G_1$ in both adjacent comparisons. Let $a^X:T^X_{12}T^X_{01}\\xrightarrow{\\sim}T^X_{02}$ and $a^Y:T^Y_{12}T^Y_{01}\\xrightarrow{\\sim}T^Y_{02}$ be the specified natural identifications of successive scalar extensions. If $c_f$ obeys the composition identity\n$$G_2(a^Y_K)\\circ c_{f,12}(T^Y_{01}K)\\circ T^X_{12}(c_{f,01}(K))=c_{f,02}(K)\\circ a^X_{G_0K},$$\nthen $c_J$ obeys the identical equation with $G_i,c_{f,ij}$ replaced by $J_i,c_{J,ij}$. With the identifications suppressed, this is the composition identity for $\\Lambda\\to\\Lambda'\\to\\Lambda''$ in the source.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.md",
   "place": "node det-sp-unique-adjoint-coefficients, order None"
  },
  "stmt_deps": [
-  "det-sp-unique-right-adjoint"
+  "def-pc-scheme",
+  "def-sf-categories",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof": [
   {
-   "text": "Compare $J'$-transposes, i.e. compose with $Rf_{!,\\Lambda'}$ and then\n$\\varepsilon^{J'}(K_{\\Lambda'})$. For the right-hand side, the counit\ncompatibility of $\\gamma'$ gives\n$\\varepsilon^{J'}\\circ Rf_{!,\\Lambda'}(\\gamma')=\\varepsilon_{f,\\Lambda'}$, the\ndefinition of $c_f$ gives\n$\\varepsilon_{f,\\Lambda'}(K_{\\Lambda'})\\circ Rf_{!,\\Lambda'}(c_f(K))=(\\varepsilon_{f,\\Lambda}(K))_{\\Lambda'}\\circ b(f^!_\\Lambda K)^{-1}$,\nnaturality of $b$ moves $Rf_{!,\\Lambda'}((\\gamma^{-1})_{\\Lambda'})$ to\n$(Rf_{!,\\Lambda}\\gamma^{-1})_{\\Lambda'}$, and the counit compatibility of $\\gamma$\ngives $\\varepsilon_{f,\\Lambda}(K)\\circ Rf_{!,\\Lambda}(\\gamma(K)^{-1})=\\varepsilon^J(K)$.\nSo the transpose of the right-hand side is\n$(\\varepsilon^J(K))_{\\Lambda'}\\circ b(JK)^{-1}$, which is by definition the\ntranspose of $c_J(K)$; hence the two sides are equal. As $\\gamma,\\gamma'$ are\nisomorphisms, $c_J$ is an isomorphism iff $c_f$ is. For a chain\n$\\Lambda\\to\\Lambda'\\to\\Lambda''$, conjugating the composition identity for $c_f$\nby the $\\gamma$'s gives that for $c_J$, the middle factors $\\gamma'$ and\n$\\gamma'^{-1}$ cancelling.",
+   "text": "Write $\\varepsilon_f$ for the counit of $F\\dashv G$ and $\\varepsilon'_f$ for that of $F'\\dashv G'$. Applying [det-sp-unique-right-adjoint] to $(F,G,J)$ and $(F',G',J')$ gives natural isomorphisms with\n$$\\varepsilon^J_K\\circ F(\\gamma_K)=\\varepsilon_{f,K},\\qquad \\varepsilon^{J'}_B\\circ F'(\\gamma'_B)=\\varepsilon'_{f,B}.$$\nPrecompose the first equality with $F(\\gamma_K^{-1})$ and use $F(\\gamma_K\\circ\\gamma_K^{-1})=\\mathrm{id}$ to obtain $\\varepsilon_{f,K}\\circ F(\\gamma_K^{-1})=\\varepsilon^J_K$.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Counit compatibility of gamma and gamma prime; first and fourth identities in the source proof"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-adjunction-mate] with $L_1=F$, $L_2=F'$, the vertical functors $T^X,T^Y$, and $\\alpha=b^{-1}:F'T^X\\to T^YF$. Its mate for right adjoints $J,J'$ is $c_J$, and its mate for $G,G'$ is $c_f$: the transpose formula in that node is precisely the definition in the statement. Thus both are natural transformations. Applying [lem-weil-pbc-adjunct-counit-identity] to these objectwise transposes gives\n$$\\varepsilon^{J'}_{T^YK}\\circ F'(c_J(K))=T^Y(\\varepsilon^J_K)\\circ b(JK)^{-1},$$\n$$\\varepsilon'_{f,T^YK}\\circ F'(c_f(K))=T^Y(\\varepsilon_{f,K})\\circ b(GK)^{-1}.$$\nAll objects are in the supplied coefficient categories and each transpose is under the supplied target-stage adjunction.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Definition of c_f and c_J; comparison of J-prime transposes"
+   }
+  },
+  {
+   "text": "Put $t=\\gamma_K^{-1}:JK\\to GK$. Naturality of the given $b$ says $F'(T^Xt)\\circ b(JK)=b(GK)\\circ T^Y(Ft)$. Precompose by $b(JK)^{-1}$ and postcompose by $b(GK)^{-1}$; this gives the correctly typed equality\n$$b(GK)^{-1}\\circ F'(T^Xt)=T^Y(Ft)\\circ b(JK)^{-1}.$$\nOnly the inverse equations for the assumed isomorphisms $b(JK)$ and $b(GK)$ are used.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Naturality of b moves the extended gamma inverse across the compact-support comparison"
+   }
+  },
+  {
+   "text": "Set $q_K=\\gamma'_{T^YK}\\circ c_f(K)\\circ T^X(\\gamma_K^{-1})$. Functoriality of $F'$, Steps 1 and 2, and then Step 3 give\n$$\\begin{aligned}\n\\varepsilon^{J'}_{T^YK}\\circ F'(q_K)\n&=\\varepsilon'_{f,T^YK}\\circ F'(c_f(K))\\circ F'(T^X(\\gamma_K^{-1}))\\\\\n&=T^Y(\\varepsilon_{f,K})\\circ b(GK)^{-1}\\circ F'(T^X(\\gamma_K^{-1}))\\\\\n&=T^Y(\\varepsilon_{f,K}\\circ F(\\gamma_K^{-1}))\\circ b(JK)^{-1}\\\\\n&=T^Y(\\varepsilon^J_K)\\circ b(JK)^{-1}.\n\\end{aligned}$$\nThe last equality is the inverse counit identity of Step 1. It is the transpose of $c_J(K)$ by Step 2. Explicitly, [lem-weil-pbc-adjunct-counit-identity] says that an arrow $h:T^X(JK)\\to J'(T^YK)$ with this transpose must equal $J'(T^Y(\\varepsilon^J_K)\\circ b(JK)^{-1})\\circ\\eta^{J'}_{T^X(JK)}$. Both $q_K$ and $c_J(K)$ equal that arrow. Hence $q_K=c_J(K)$.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Equality of the two J-prime transposes and hence equality of the comparison maps"
+   }
+  },
+  {
+   "text": "If $c_f(K)$ has inverse $d_K$, then $\\gamma'_{T^YK}$ and $T^X(\\gamma_K^{-1})$ have inverses $(\\gamma'_{T^YK})^{-1}$ and $T^X(\\gamma_K)$, respectively. Step 4 therefore supplies an inverse of $c_J(K)$, namely\n$$T^X(\\gamma_K)\\circ d_K\\circ(\\gamma'_{T^YK})^{-1}.$$\nComposing in either order cancels each adjacent inverse pair; the inverse pair after $T^X$ cancels because a functor preserves composition and identities. This proves the isomorphism implication without asserting that a mate of every isomorphism is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "As gamma and gamma prime are isomorphisms, invertibility transfers"
+   }
+  },
+  {
+   "text": "For the chain in the statement, write $\\gamma_i:G_i\\to J_i$ for [det-sp-unique-right-adjoint]. Substitute Step 4 for $c_{J,12}$ and $c_{J,01}$ in the left side of the desired composition identity. The factors $T^X_{12}(\\gamma_{1,T^Y_{01}K}^{-1})$ and $T^X_{12}(\\gamma_{1,T^Y_{01}K})$ are adjacent and cancel. Naturality of $\\gamma_2$ at the arrow $a^Y_K:T^Y_{12}T^Y_{01}K\\to T^Y_{02}K$ says\n$$J_2(a^Y_K)\\circ\\gamma_{2,T^Y_{12}T^Y_{01}K}=\\gamma_{2,T^Y_{02}K}\\circ G_2(a^Y_K).$$\nThe left side of the desired identity is consequently\n$$\\gamma_{2,T^Y_{02}K}\\circ G_2(a^Y_K)\\circ c_{f,12}(T^Y_{01}K)\\circ T^X_{12}(c_{f,01}(K))\\circ T^X_{12}T^X_{01}(\\gamma_{0,K}^{-1}).$$",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Conjugating the composition identity: the middle gamma-prime factors cancel"
+   }
+  },
+  {
+   "text": "Apply the assumed composition identity for $c_f$ to the middle three factors of Step 6. This gives\n$$\\gamma_{2,T^Y_{02}K}\\circ c_{f,02}(K)\\circ a^X_{G_0K}\\circ T^X_{12}T^X_{01}(\\gamma_{0,K}^{-1}).$$\nNaturality of the supplied $a^X$ at $\\gamma_{0,K}^{-1}:J_0K\\to G_0K$ gives\n$$a^X_{G_0K}\\circ T^X_{12}T^X_{01}(\\gamma_{0,K}^{-1})=T^X_{02}(\\gamma_{0,K}^{-1})\\circ a^X_{J_0K}.$$\nUse Step 4 for $02$ to identify the resulting first three factors as $c_{J,02}(K)$. The result is $c_{J,02}(K)\\circ a^X_{J_0K}$, the required right side. When the associators are identities the same calculation is literal cancellation; no coherence or composition of $b$ beyond the assumed identity for $c_f$ has been presumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+    "place": "Conclusion of the source composition argument, with scalar-extension associators made explicit"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-coefficients.proof.md",
+  "place": "Entire proof, expanded into explicit counit and composition calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugate|rightAdjointUniq",
+   "results": "20 hits including Mathlib/CategoryTheory/Adjunction/Unique.lean:102 rightAdjointUniq; Mates.lean:84 mateEquiv and :123 mateEquiv_counit; CompositionIso and Opposites give related conjugation constructions.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing right adjoints by their unique counit compatible isomorphisms conjugates coefficient extension comparison maps and preserves composition",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, rightAdjointUniq_trans_app_assoc, rightAdjointUniq, rightAdjointUniq_inv_app, unit_rightAdjointUniq_hom_app_assoc, rightAdjointUniq_trans, rightAdjointUniq_trans_app, unit_rightAdjointUniq_hom_app.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv and its counit/unit lemmas, conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp, mateEquiv_vcomp, mateEquiv_hcomp, iterated_mateEquiv_conjugateEquiv and its symm, mateEquiv_apply.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a natural isomorphism between left adjoints is conjugated by the counit-compatible isomorphisms between their right adjoints when the adjunctions are changed",
+   "results": "MateEquiv_counit, mateEquiv_apply, mateEquiv_counit_symm, conjugateEquiv_mateEquiv_vcomp, Bicategory.conjugateEquiv_apply, Adjunction.conjugateEquiv_leftAdjointCompIso_inv, iterated_mateEquiv_conjugateEquiv, conjugateEquiv_counit.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "change|rightAdjointUniq|mateEquiv.*(comp|conj)|homEquiv.*(injective|counit)",
+   "results": "25 hits including Basic.lean:182 homEquiv_counit and uses of homEquiv injectivity in PartialAdjoint, Additive, Lifting and Parametrized adjunction files. Source inspection read Basic.lean:301 eq_unit_comp_map_iff, Unique.lean:102-138, Mates.lean:84-129 and :486-522.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates in a commutative square under changing the adjunction data by an isomorphism of right adjoint functors",
+   "results": "CategoryTheory.mateEquiv_square, mateEquiv_apply, mateEquiv; Bicategory.mateEquiv_square; conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp; Bicategory.toNatTrans_mateEquiv; mateEquiv_vcomp.",
+   "date": "2026-10-16",
+   "verdict": "related generic API, not a one-line statement of all three clauses; reused existing categorical leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_conjugateEquiv_vcomp|conjugateEquiv_mateEquiv_vcomp",
+   "results": "Two hits: Mathlib/CategoryTheory/Adjunction/Mates.lean:486 mateEquiv_conjugateEquiv_vcomp and :505 conjugateEquiv_mateEquiv_vcomp. Their full statements and proofs were read at lines 475-522.",
+   "date": "2026-10-16",
+   "verdict": "related matches; separate target/source adjunction-change lemmas, not a single declaration of all item clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "^definition|^structure",
+   "results": "Seven hits: Quadruple.lean:45 Adjunction.Quadruple; Basic.lean:108 Adjunction, :335 CoreHomEquivUnitCounit, :351 CoreHomEquiv, :385 CoreUnitCounit; Parametrized.lean:54 ParametrizedAdjunction; Triple.lean:56 Adjunction.Triple.",
+   "date": "2026-10-16",
+   "verdict": "source-location search; the structures define the generic adjunction datum, not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing both right adjoints in a Beck Chevalley mate square gives conjugation by the canonical right adjoint isomorphisms, compatible with vertical pasting.",
+   "results": "8 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm.",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: related mate/conjugation and counit APIs; the inspected declarations do not individually state the coefficient-chain identity and all other clauses. Retain the explicit split using existing categorical Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(whisker|conjugate)|conjugateEquiv.*mateEquiv|rightAdjointUniq_hom_app_counit",
+   "results": "6 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean.",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: related mate/conjugation and counit APIs; the inspected declarations do not individually state the coefficient-chain identity and all other clauses. Retain the explicit split using existing categorical Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the mates correspondence when replacing chosen right adjoint functors by their canonical natural isomorphisms.",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.Bicategory.toNatTrans_mateEquiv, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.Bicategory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: related generic mate APIs; inspected Basic.lean:160-182,301-303, Unique.lean:102-140 and Mates.lean:84-129,464-522. No single declaration covers the conjugation, conditional invertibility and coefficient-chain identity together; preserve the explicit proof with existing Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(rightAdjointUniq|conjugate)|rightAdjointUniq.*mate|conjugateEquiv.*vcomp",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean.",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: related generic mate APIs; inspected Basic.lean:160-182,301-303, Unique.lean:102-140 and Mates.lean:84-129,464-522. No single declaration covers the conjugation, conditional invertibility and coefficient-chain identity together; preserve the explicit proof with existing Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|rightAdjointUniq_hom_counit|mateEquiv_conjugateEquiv",
+   "results": "19 hits; recorded first results: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent final reading: related lifting, adjoint-composition and mate-pasting APIs. Read Unique.lean:102-140, Mates.lean:84-129,464-522 and Basic.lean:160-182,301-303. These do not state the whole conditional change-of-adjoint and coefficient-chain assertion in one declaration; retain the seven-step proof with existing categorical leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformation is independent of the choice of right adjunction data up to the unique isomorphism and is compatible with pasting",
+   "results": "8 hits; recorded first results: CategoryTheory.LiftRightAdjoint.otherMap, CategoryTheory.LiftLeftAdjoint.otherMap, CategoryTheory.Adjunction.leftAdjointCompNatTrans, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc",
+   "date": "2026-10-16",
+   "verdict": "Independent final reading: related lifting, adjoint-composition and mate-pasting APIs. Read Unique.lean:102-140, Mates.lean:84-129,464-522 and Basic.lean:160-182,301-303. These do not state the whole conditional change-of-adjoint and coefficient-chain assertion in one declaration; retain the seven-step proof with existing categorical leaves."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -43,5 +217,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-unique-adjoint"
+ "unit": "sk-prop-sp-unique-adjoint",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-unique-adjoint-coefficients",
+  "worker": "stage1",
+  "summary": "Expanded the formal adjunction proof into seven steps, citing existing mate and transpose Mathlib leaves and the blueprint uniqueness node. Made the given functors and adjunction data explicit, and spelled out the chain identity with scalar-extension associators. No new nodes; no assumption that arbitrary mates of isomorphisms are invertible.",
+  "blueprint": "Steps 1-4 realize the source proof through compare J-prime transposes; Step 5 realizes the isomorphism sentence; Steps 6-7 realize the composition sentence including the previously implicit associator naturality.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "The existing Mathlib mate leaf supplies naturality and the precise transpose description for the coefficient square; this is generic category theory, not a replacement of the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunct-counit-identity",
+    "why": "The existing Mathlib leaf supplies the objectwise counit-transpose formula and its uniqueness; no separate proof of adjunction calculus is needed in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-4bbff5644",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-4bbff5644 (reviewer sub-agent of L); spot-checked: Read the complete item, report, blueprint sources, unit/chapter route, and all cited nodes. Verified all seven proof steps, coefficient-category and base-change directions, associator handling, Mathlib-backed dependencies, duplicate search, and small cases. No new nodes or repairs; no accepted tool_uses."
+ }
 }

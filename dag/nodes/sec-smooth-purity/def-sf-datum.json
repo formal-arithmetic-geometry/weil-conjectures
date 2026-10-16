@@ -1,67 +1,162 @@
 {
-  "id": "def-sf-datum",
-  "blueprint": {
-    "is": "def-sf-datum",
-    "from": null,
-    "same_as": null
+ "id": "def-sf-datum",
+ "blueprint": {
+  "is": "def-sf-datum",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Six-functor datum, axiomatized",
+ "statement": "Fix the global finite-field datum\n$(p,a,q,k_0,k)$ [def-weil-finite-field-fiber] with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a\nfinite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. A *six-functor\ndatum* is the datum of the\noperation datum of [def-fix-six-functor-datum] —\nthe categories $D^b_{ctf}(X,\\Lambda)$ [def-weil-finite-tor-amplitude], the functors $Lf^*,Rf_*,Rf_!, Rf^!$, $-\\otimes^L_\\Lambda-$, $R\\mathcal H om_\\Lambda(-,-)$, the\nexchange and projection\ntransformations, the compact-support\ndirect image $Rf_!=R\\bar f_*j_!$ for a compactification, and the\nexceptional inverse image\n— subject to the following axioms. The coefficient categories, completed integral operations, rationalization, common-stage scalar extension, and dualizing objects are those specified in [def-fix-six-functor-datum]. Schemes and morphisms have its finite-type $k$-scheme setting; each axiom is imposed on the displayed finite-Tor domains, for all composable separated finite-type morphisms. The words separated and proper have the meanings of [def-weil-proper-morphism], and smooth has the meaning of [def-sbc-smooth-morphisms]. In (A2) the Cartesian square [def-weil-pbc-cartesian-square] is\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y.\n\\end{array}\n$$\n\n1. **(A1)** $Lf^*\\dashv Rf_*$ and $Rf_!\\dashv Rf^!$, with the\npasted units and counits for composites;\n1. **(A2)** base change: $Lg^*Rf_!\\cong Rf'_!Lg'^*$ for every\nCartesian square, and $Lg^*Rf_*\\cong Rf'_*Lg'^*$ for proper $f$ or smooth\n$g$;\n1. **(A3)** the supplied projection transformation of [def-exchange-projection], of type\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_\\Lambda L\\longrightarrow\nRf_!(K\\otimes^L_\\Lambda Lf^*L),\n$$\nis an isomorphism for $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$;\n1. **(A4)** the composition law $R(g\\circ f)_!\\cong Rg_!Rf_!$\nwith its pentagon, and $Rf_!\\cong Rf_*$ for proper $f$;\n1. **(A5)** compatibility of all of the above with finite\nreduction, scalar extension, and the pro-étale realization, using the coefficient comparison data of [def-exchange-projection] at the stages where those comparisons are defined (finite reduction at finite and integral coefficients, and rationalization and common-stage scalar extension at field coefficients);\n1. **(A6)** the dualizing functor\n$D_X=R\\mathcal H om_X(-,\\omega_X)$ is a contravariant exact anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$, exact in the sense of [def-weil-triangulated-category] on the opposite triangulated category, with $K\\to D_XD_XK$ an isomorphism (Verdier\nbiduality).\n\nThis is an axiomatized framework: a formal consequence may use only the clauses explicitly invoked in its proof. These clauses are required structure and properties, not assertions proved by this definition. For the concrete coefficient system, each clause needs its own verification on the stated domain. The references [thm-weil-six-operations] and [def-sf-pf] are forward pointers to the concrete package and its notation, respectively; they are not prerequisites for this definition.\n",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-sf-datum.md",
+  "place": "node def-sf-datum, order 1498"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-fix-six-functor-datum",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-cartesian-square",
+  "def-exchange-projection",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A six functor formalism on constructible derived categories with adjunctions base change projection formula coefficient compatibility and Verdier biduality",
+   "results": "Eight generic derived-functor and derived-adjunction hits, including CategoryTheory.Functor.mapDerivedCategory and CategoryTheory.Adjunction.derived; none defines a scheme-indexed six-operation datum or axioms A1–A6.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Six-functor datum, axiomatized",
-  "statement": "Fix the global finite-field datum\n$(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a\nfinite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ as in\ndef:weil-derived-complete-integral,\ndef:weil-rationalization-karoubi,\ndef:weil-algebraically-closed-coefficients. A *six-functor\ndatum* is the datum of the\nsix-functor datum of [thm-weil-six-operations] —\nthe categories $D^b_{ctf}(X,\\Lambda)$, the functors $Lf^*,Rf_*,Rf_!, Rf^!$, $-\\otimes^L_\\Lambda-$, $R\\mathcal H om_\\Lambda(-,-)$, the\nexchange and projection\ntransformations, the compact-support\ndirect image $Rf_!=R\\bar f_*j_!$ for a compactification, and the\nexceptional inverse image\n— subject to the following axioms, for all composable separated\nfinite-type morphisms and all $K,L$ in the stated finite-Tor domains:\n\n1. ****(A1)**** $Lf^*\\dashv Rf_*$ and $Rf_!\\dashv Rf^!$, with the\npasted units and counits for composites;\n1. ****(A2)**** base change: $Lg^*Rf_!\\cong Rf'_!Lg'^*$ for every\nCartesian square, and $Lg^*Rf_*\\cong Rf'_*Lg'^*$ for proper $f$ or smooth\n$g$;\n1. ****(A3)**** the projection transformation is an isomorphism\n([def-sf-pf]);\n1. ****(A4)**** the composition law $R(g\\circ f)_!\\cong Rg_!Rf_!$\nwith its pentagon, and $Rf_!\\cong Rf_*$ for proper $f$;\n1. ****(A5)**** compatibility of all of the above with finite\nreduction, scalar extension, and the pro-étale realization;\n1. ****(A6)**** the dualizing functor\n$D_X=R\\mathcal H om_X(-,\\omega_X)$ is a contravariant exact anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$ with $K\\to D_XD_XK$ an isomorphism (Verdier\nbiduality).\n\nThis is an axiomatized framework: a formal consequence may use only\nthe clauses explicitly invoked in its proof. For the concrete coefficient\nsystem each clause needs its own verification on the stated domain; the\ndefinition itself does not discharge those verification obligations.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-sf-datum.md",
-    "place": "node def-sf-datum, order 1498"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "Twelve monoidal-adjunction hits, including leftAdjointOplaxMonoidal, rightAdjointLaxMonoidal and Adjunction.IsMonoidal; none assembles geometric six operations, exchange maps and biduality.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "stmt_deps": [],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1498,
-  "blueprint_uses": [],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "SixFunctor|six.functor|Verdier|six.operation",
+   "results": "21 displayed hits in Mathlib/CategoryTheory, including Adjunction/Mates.lean:40–41 discussing the six-operation motivation and Verdier localization/thesis references; no six-functor datum or Verdier duality definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "pointers": [
-    {
-      "to": "thm-weil-six-operations",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: names the concrete instance of the abstract datum; the definition lists its own axioms",
-      "date": "2026-10-09"
-    },
-    {
-      "to": "def-sf-pf",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: axiom (A3) is about the projection transformation of the datum itself; [def-sf-pf] is the concrete one",
-      "date": "2026-10-09"
-    }
-  ],
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-operations",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\n$(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a\nfinite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. A *six-functor\ndatum* is the datum of the\nsix-functor datum of [thm-weil-six-operations] —\nthe categories $D^b_{ctf}(X,\\Lambda)$, the functors $Lf^*,Rf_*,Rf_!, Rf^!$, $-\\otimes^L_\\Lambda-$, $R\\mathcal H om_\\Lambda(-,-)$, the\nexchange and projection\ntransformations, the compact-support\ndirect image $Rf_!=R\\bar f_*j_!$ for a compactification, and the\nexceptional inverse image\n— subject to the following axioms, for all composable separated\nfinite-type morphisms and all $K,L$ in the stated finite-Tor domains:\n\n1. **(A1)** $Lf^*\\dashv Rf_*$ and $Rf_!\\dashv Rf^!$, with the\npasted units and counits for composites;\n1. **(A2)** base change: $Lg^*Rf_!\\cong Rf'_!Lg'^*$ for every\nCartesian square, and $Lg^*Rf_*\\cong Rf'_*Lg'^*$ for proper $f$ or smooth\n$g$;\n1. **(A3)** the projection transformation is an isomorphism\n([def-sf-pf]);\n1. **(A4)** the composition law $R(g\\circ f)_!\\cong Rg_!Rf_!$\nwith its pentagon, and $Rf_!\\cong Rf_*$ for proper $f$;\n1. **(A5)** compatibility of all of the above with finite\nreduction, scalar extension, and the pro-étale realization;\n1. **(A6)** the dualizing functor\n$D_X=R\\mathcal H om_X(-,\\omega_X)$ is a contravariant exact anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$ with $K\\to D_XD_XK$ an isomorphism (Verdier\nbiduality).",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "six operations constructible derived categories Verdier duality datum",
+   "results": "Eight hits on generic derived categories and CategoryTheory.Adjunction.Quadruple constructors. Read Quadruple.lean:43–50: it bundles three successive adjunctions, not the two pairs, six geometric operations and coherence/duality axioms here.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck six operations package f star f shriek tensor internal Hom Verdier duality with base change and projection formula",
+   "results": "Eight hits on SheafOfModules pushforward/pullback adjunctions and composition, presheaf adjunctions, and exponentiable morphisms. Read Sheaf/PullbackContinuous.lean:49–61: this is an underived module-sheaf adjunction, not the constructible six-operation structure.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Adjunction, DerivedCategory",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "six.?functor|six.?operations|exceptional.?pullback|upper.?shriek",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck formalism of six operations for sheaves with exceptional inverse image and Verdier dualizing complexes",
+   "results": "Eight hits on underived sheaf pullback/pushforward adjunctions and functors. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49–61: pullbackPushforwardAdjunction concerns module sheaves and has no exceptional inverse image, constructible categories, or axioms A2–A6. No match for the complete definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*six|six.*formalism|Verdier.*dual|dualizing.*complex",
+   "results": "One hit in all Mathlib: Mathlib/CategoryTheory/Adjunction/Mates.lean:40. Read lines 30–42: the six-operation yoga appears only as motivation for mates, and is expressly not spelled out in Mathlib. No definition match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1498,
+ "blueprint_uses": [],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "pointers": [
+  {
+   "to": "thm-weil-six-operations",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: names the concrete instance of the abstract datum; the definition lists its own axioms",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "def-sf-pf",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: axiom (A3) is about the projection transformation of the datum itself; [def-sf-pf] is the concrete one",
+   "date": "2026-10-09"
+  }
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\n$(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a\nfinite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and\nuniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. A *six-functor\ndatum* is the datum of the\nsix-functor datum of [thm-weil-six-operations] —\nthe categories $D^b_{ctf}(X,\\Lambda)$, the functors $Lf^*,Rf_*,Rf_!, Rf^!$, $-\\otimes^L_\\Lambda-$, $R\\mathcal H om_\\Lambda(-,-)$, the\nexchange and projection\ntransformations, the compact-support\ndirect image $Rf_!=R\\bar f_*j_!$ for a compactification, and the\nexceptional inverse image\n— subject to the following axioms, for all composable separated\nfinite-type morphisms and all $K,L$ in the stated finite-Tor domains:\n\n1. **(A1)** $Lf^*\\dashv Rf_*$ and $Rf_!\\dashv Rf^!$, with the\npasted units and counits for composites;\n1. **(A2)** base change: $Lg^*Rf_!\\cong Rf'_!Lg'^*$ for every\nCartesian square, and $Lg^*Rf_*\\cong Rf'_*Lg'^*$ for proper $f$ or smooth\n$g$;\n1. **(A3)** the projection transformation is an isomorphism\n([def-sf-pf]);\n1. **(A4)** the composition law $R(g\\circ f)_!\\cong Rg_!Rf_!$\nwith its pentagon, and $Rf_!\\cong Rf_*$ for proper $f$;\n1. **(A5)** compatibility of all of the above with finite\nreduction, scalar extension, and the pro-étale realization;\n1. **(A6)** the dualizing functor\n$D_X=R\\mathcal H om_X(-,\\omega_X)$ is a contravariant exact anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$ with $K\\to D_XD_XK$ an isomorphism (Verdier\nbiduality).",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sf-datum",
+  "worker": "stage1",
+  "summary": "One-level definition split: reused the existing operation datum, finite-field and finite-Tor conventions, morphism properties, Cartesian-square convention, exchange/projection data and exact-functor convention. Preserved axioms A1–A6 of the current main-20261015 blueprint; made domains, square orientation, the projection map and the stage-specific meaning of coefficient compatibility explicit. This assembles an axiomatic structure and proves no concrete verification theorem. No new nodes or Mathlib leaves; no exact project or Mathlib attachment found.",
+  "blueprint": "Current main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-sf-datum.md, opening operation data and clauses (A1)–(A6), order 1857. As a definition it has no proof steps. The existing sk-def-sf-operations unit supplies the ambient operations and distinguishes the constructible exceptional inverse image from the optional ambient right adjoint. The imported source/chapter/unit metadata and all blueprint_update fields are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-e46e6093c",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-e46e6093c (reviewer sub-agent of L); spot-checked: Reviewed the complete item, current blueprint source, all eight cited nodes and source locations, unit/chapter route, searches, edge cases, and delivery rules. The definition preserves A1–A6 with correct domains, base-change orientation, projection map, coefficient stages, and dualizing object; no duplicate or new node faults found. Review written to review.md."
+ }
 }

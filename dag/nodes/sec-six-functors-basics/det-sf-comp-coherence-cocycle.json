@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-sf-comp-coherence-cocycle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Independence of the compactification and the cocycle condition",
@@ -12,51 +12,170 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
   "place": "node det-sf-comp-coherence-cocycle, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-nagata-compactification",
+  "def-nagata-dense-compactification",
+  "det-nagata-definition-refinement",
+  "sk-def-localizing-closure",
+  "def-sfb-module-derived-lower-shriek-compactification",
+  "det-sf-comp-coherence-refinement",
+  "det-sf-comp-composition-interchange"
+ ],
  "proof": [
   {
-   "text": "*Dense replacement.* Replacing $Z_a$ by the scheme-theoretic closure\n$\\overline{j_a(X)}$ does not change $Rp_{a*}j_{a!}$\n([sk-lem-nagata-density-normalization]): the closed immersion\n$\\iota:\\overline{j_a(X)}\\to Z_a$ is itself a refinement, and $e_\\iota$ is an\nisomorphism by [det-sf-comp-coherence-refinement]. Composing with these\nisomorphisms we may assume all compactifications dense.",
+   "text": "Put $F_c=Rp_*j_!$. The candidate is the composite on the ordinary unbounded derived categories of module objects, as in [def-sfb-module-derived-lower-shriek-compactification]. Restrict its source to the indicated localizing category and retain the ambient target $D(\\Mod_{\\Lambda_Y})$; preservation of the target localizing category is not required for this comparison theorem. Throughout use the canonical comparison $R(ph)_*\\simeq Rp_*Rh_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the pro-etale ringed topoi with the pulled-back coefficient sheaves. These are the module pushforwards of [sk-def-sfb-module-pushforward-pullback]. Their inverse images are exact by [sk-prop-sfb-cartesian-coefficients], so their direct images preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Consequently all the comparisons for a string of proper maps can be computed on the same K-injective complex: both parenthesizations identify with the successive underived direct images of that complex. The underived comparison is the sheaf composition comparison of [def-sfb-module-lower-star-comp]; at a site object its two triple composites both use the canonical identification with the same iterated fibre product. Thus these derived comparisons have the identity and associativity normalizations. No completed or common-stage coefficient category is substituted for the ordinary module-object category.",
    "uses": [
-    "sk-lem-nagata-density-normalization",
+    "def-sfb-module-derived-lower-shriek-compactification",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-module-lower-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Refinement isomorphisms: derived direct-image identifications; Stacks Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Let $h:c'\\to c$ be a refinement with $c'$ scheme-theoretically dense; $c$ need not be dense. Apply [det-sf-comp-composition-interchange] with its proper map $p=\\operatorname{id}_X$, its open immersion $i=j:X\\hookrightarrow Z$, and its dense compactification $(j':X\\hookrightarrow Z',r=h)$ of $j\\circ\\operatorname{id}_X$. All its hypotheses hold: $j$ is quasi-compact by the definition of compactification, $h$ is proper and $hj'=j$, and $j'$ is dense. Clauses (2) and (3), using $R\\operatorname{id}_*\\simeq\\operatorname{id}$, give $e_h:j_!K\\xrightarrow{\\sim}Rh_*j'_!K$ for every $K\\in\\Loc(\\Dctf(X,\\Lambda))$, uniquely characterized by restriction to $\\operatorname{id}_K$. These maps are natural in $K$: the exact open adjunction of [sk-def-sfb-module-lower-shriek] induces the derived adjunction by the exact-functor and derived-adjunction clauses of [sk-def-sfb-derived-categories]; $e_h$ is the adjoint of the natural restriction identification with $K$. In particular, when both compactifications are dense this is exactly the map of [det-sf-comp-coherence-refinement], by its clause (1). This establishes the comparison with arbitrary $c$ directly; the Noetherian closure-normalization lemma is not used.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-derived-categories",
     "det-sf-comp-coherence-refinement"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Dense replacement and Refinement isomorphisms; replace the unsupported Noetherian reduction by the identity-proper-map specialization of det-sf-comp-composition-interchange"
+   }
   },
   {
-   "text": "*Refinement isomorphisms.* For a refinement $h:Z'\\to Z$ over $Y$ between\ndense compactifications put\n$\\rho_h=Rp_*(e_h):Rp_*j_!\\xrightarrow{\\sim}Rp_*Rh_*j'_!=R(ph)_*j'_!$, an\nisomorphism $Rf_!^{c}\\to Rf_!^{c'}$ by [det-sf-comp-coherence-refinement] (2).\nBy (3) of that lemma, $\\rho_{\\mathrm{id}}=\\mathrm{id}$ and\n$\\rho_{hk}=\\rho_k\\circ\\rho_h$ for successive refinements.",
+   "text": "We record explicitly the restriction normalization used in composing these maps. Suppose $h^{-1}(j(X))=j'(X)$ and $h|_X=\\operatorname{id}_X$. For a sheaf $M$ on $Z'$, restriction of $h_*M$ to an object $V\\to X$ is $M(V\\times_ZZ')=M(V)$ on the copy of $X$ in $Z'$: this is the base-change formula of [def-sfb-finite-lower-star], lifted with the same coefficient action by [def-sfb-module-lower-star]. Hence $j^*h_*=j'^*$, with its canonical identification. For a K-injective resolution $I$ of a complex on $Z'$, $j'^*I$ is K-injective because $j'^*$ is right adjoint to the exact $j'_!$ of [sk-def-sfb-module-lower-shriek], by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Exact restriction therefore gives $j^*Rh_*\\simeq j'^*$ on the ordinary unbounded derived categories. Applying the same calculation to successive maps restricts each to the identity on $X$, so these restriction identifications commute with the derived composition comparison of Step 1.",
    "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Refinement isomorphisms and Independence: restriction of composites to X"
+   }
+  },
+  {
+   "text": "For $h:c'\\to c$ with $c'$ dense define $\\rho_h:F_c\\to F_{c'}$ by applying $Rp_*$ to $e_h$ and then the inverse of the composition comparison of Step 1. It is a natural isomorphism. If $k:c''\\to c'$ is a further refinement with $c''$ dense, the two maps $e_{hk}$ and $Rh_*(e_k)\\circ e_h$ from $j_!K$ to $R(hk)_*j''_!K$ restrict to $\\operatorname{id}_K$, by Step 3. Clause (2) of [det-sf-comp-composition-interchange], applied with $p=\\operatorname{id}_X$, $i=j$, $r=hk$, makes them equal. Applying $Rp_*$, naturality of the composition comparison and its associativity from Step 1 give $\\rho_{hk}=\\rho_k\\circ\\rho_h$. For a dense $c$, the same uniqueness identifies $e_{\\operatorname{id}}$ with the identity, hence $\\rho_{\\operatorname{id}}=\\operatorname{id}$; this is also clause (3) of [det-sf-comp-coherence-refinement]. Only the source and intermediate compactifications were required to be dense.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
     "det-sf-comp-coherence-refinement"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Refinement isomorphisms: identity and transitivity, including a nondense final target"
+   }
   },
   {
-   "text": "*Definition.* Given $c_1,c_2$, choose a common dense refinement $c$ with\n$h_a:Z\\to Z_a$, $h_a^{-1}(X)=X$ ([sk-prop-nagata-sketch-comp-category]) and put\n$\\phi_{c_2,c_1}=\\rho_{h_2}^{-1}\\circ\\rho_{h_1}$.",
-   "uses": [],
-   "elementary": null
+   "text": "For $c_1,c_2$, choose a common scheme-theoretically dense refinement $d$ with maps $h_a:d\\to c_a$ using [det-nagata-refinement-common-dense], and put $\\phi_{c_2,c_1}=\\rho_{h_2}^{-1}\\circ\\rho_{h_1}:F_{c_1}\\xrightarrow{\\sim}F_{c_2}$. This has the correct source and target because $\\rho_{h_a}:F_{c_a}\\to F_d$. The cited geometric lemma gives proper maps and the inverse-image-of-$X$ property even when the $c_a$ are not dense. The refinements compose with the boundary property by [det-nagata-definition-refinement].",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-nagata-definition-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Definition"
+   }
   },
   {
-   "text": "*Independence.* Let $c'$ with $h'_a:Z'\\to Z_a$ be another common dense\nrefinement. Choose a common dense refinement $c''$ of $c$ and $c'$, with\n$k:Z''\\to Z$ and $k':Z''\\to Z'$. The composites $h_a\\circ k$ and $h'_a\\circ k'$\nare both refinements $Z''\\to Z_a$; they restrict to the identity on the dense\nopen $X$ and $Z_a$ is separated over $Y$, so they are equal. By\ntransitivity, $\\rho_{h_ak}=\\rho_k\\rho_{h_a}$ and\n$\\rho_{h'_ak'}=\\rho_{k'}\\rho_{h'_a}$, and therefore\n\n$$\n\\rho_{h_2}^{-1}\\rho_{h_1}=\\rho_{h_2}^{-1}\\rho_k^{-1}\\rho_k\\rho_{h_1}\n=\\rho_{h_2k}^{-1}\\rho_{h_1k}\n=\\rho_{h'_2k'}^{-1}\\rho_{h'_1k'}\n=\\rho_{h'_2}^{-1}\\rho_{h'_1}.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Let $(d',h'_1,h'_2)$ be another such common dense refinement. Apply [det-nagata-refinement-common-dense] to $d,d'$ to get a dense $d''$ with maps $k:d''\\to d$, $k':d''\\to d'$. For each $a$, $h_ak$ and $h'_ak'$ are $Y$-morphisms $d''\\to c_a$ restricting to the given $j_a$ on $X$. They are equal by clause (3) of [det-nagata-refinement-morphisms], whose hypothesis is scheme-theoretic density of the source $d''$, not mere topological density and not density of $c_a$. Step 4 now gives, as natural transformations,\n$$\\rho_{h_2}^{-1}\\rho_{h_1}\n=(\\rho_k\\rho_{h_2})^{-1}(\\rho_k\\rho_{h_1})\n=\\rho_{h_2k}^{-1}\\rho_{h_1k}\n=\\rho_{h'_2k'}^{-1}\\rho_{h'_1k'}\n=(\\rho_{k'}\\rho_{h'_2})^{-1}(\\rho_{k'}\\rho_{h'_1})\n=\\rho_{h'_2}^{-1}\\rho_{h'_1}.$$\nEach equality after Step 4 is associativity and cancellation of an isomorphism with its inverse. Thus the comparison is independent of the common dense refinement, including its projection maps.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-nagata-refinement-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Independence"
+   }
   },
   {
-   "text": "*Cocycle.* For three compactifications choose one common dense refinement\n$c$ of all three, with maps $h_1,h_2,h_3$. Then, by independence,\n$\\phi_{c_3,c_2}\\phi_{c_2,c_1}=\\rho_{h_3}^{-1}\\rho_{h_2}\\rho_{h_2}^{-1}\\rho_{h_1}\n=\\rho_{h_3}^{-1}\\rho_{h_1}=\\phi_{c_3,c_1}$, and $\\phi_{c,c}=\\mathrm{id}$ by taking\n$c$ itself as common refinement.",
-   "uses": [],
-   "elementary": null
+   "text": "For $c_1,c_2,c_3$ choose one common dense refinement with maps $h_1,h_2,h_3$ by the finite-family conclusion of [det-nagata-refinement-common-dense]. Independence lets us use it in all three comparisons. Therefore\n$$\\phi_{c_3,c_2}\\circ\\phi_{c_2,c_1}\n=(\\rho_{h_3}^{-1}\\rho_{h_2})(\\rho_{h_2}^{-1}\\rho_{h_1})\n=\\rho_{h_3}^{-1}\\rho_{h_1}=\\phi_{c_3,c_1}.$$\nFor $\\phi_{c,c}$ take any common dense refinement $d\\to c,c$; the two projections agree by [det-nagata-refinement-morphisms] (3), or choose the same projection twice. The definition gives $\\rho_h^{-1}\\rho_h=\\operatorname{id}_{F_c}$. This also proves the identity for a nondense $c$; taking $c$ itself as a dense refinement would not be valid then. The formulas are equalities of natural transformations, so establish every claimed clause on the stated localizing category.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-nagata-refinement-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
+    "place": "Proof, Cocycle and identity normalization"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-nagata-density-normalization",
-  "det-sf-comp-coherence-refinement"
+  "def-sfb-module-derived-lower-shriek-compactification",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-module-lower-star-comp",
+  "det-sf-comp-composition-interchange",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "det-sf-comp-coherence-refinement",
+  "def-sfb-finite-lower-star",
+  "def-sfb-module-lower-star",
+  "det-nagata-refinement-common-dense",
+  "det-nagata-definition-refinement",
+  "det-nagata-refinement-morphisms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.md",
-  "place": "## Proof"
+  "place": "Proof: common dense refinements and cancellation, with direct comparison to nondense targets by det-sf-comp-composition-interchange at p=id_X; composition normalized by Stacks Tag 0D6E"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactification|shriekIso",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical cancellation or topological compact-support results do not state the pro-etale compactification comparison on the localizing module-object category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived direct image is independent of compactification and the comparison isomorphisms satisfy the cocycle condition",
+   "results": "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, CompactlySupportedContinuousMap.compLinearMap, CompHausLike.LocallyConstant.presheaf_ext, CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CompHausLike.LocallyConstant.incl_comap, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, TopCat.toSheafCompHausLike_val_map",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical cancellation or topological compact-support results do not state the pro-etale compactification comparison on the localizing module-object category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans, CategoryTheory.Iso.symm",
+   "results": "CategoryTheory.Iso.self_symm_id, CategoryTheory.Iso.symm_self_id, CategoryTheory.Iso.self_symm_id_assoc, CategoryTheory.Iso.symm_self_id_assoc, CategoryTheory.Iso.trans_symm, CategoryTheory.Functor.isoWhiskerLeft_twice, CategoryTheory.Functor.isoWhiskerRight_twice, CategoryTheory.Functor.isoWhiskerLeft_right",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical cancellation or topological compact-support results do not state the pro-etale compactification comparison on the localizing module-object category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image with compact support is independent of the choice of compactification",
+   "results": "HasCompactSupport.iteratedFDeriv, HasCompactSupport.deriv, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.comp_homeomorph, CompactlySupportedContinuousMap.recOn, HasCompactSupport.mono, HasCompactSupport.isCompact, ContDiffMapSupportedIn.support_subset",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical cancellation or topological compact-support results do not state the pro-etale compactification comparison on the localizing module-object category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor sending compactification refinements to isomorphisms gives canonical choice independent isomorphisms between compact support functors",
+   "results": "compactumToCompHaus.isoOfTopologicalSpace, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.isIsoSigmaComparison, CompHausLike.sigmaComparison_eq_comp_isos, CompHausLike.LocallyConstant.unitIso, CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported, compactumToCompHausCompForget, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: general categorical cancellation or topological compact-support results do not state the pro-etale compactification comparison on the localizing module-object category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -71,5 +190,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-sf-comp-coherence"
+ "unit": "sk-prop-sf-comp-coherence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sf-comp-coherence-cocycle",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient categories. Replaced an inapplicable Noetherian closure normalization and an application of a dense-target refinement theorem to nondense targets by the existing proper/open interchange theorem at p=id_X. Filled statement dependencies, naturality, unbounded composition/open-restriction normalization, all missing common-refinement and schematic-uniqueness citations, and explicit independence/cocycle cancellations. No new nodes. The stored unit record is the older finite-etale-origin unit in sec-smooth-purity, whereas this main-20261015 item belongs to the localizing-category unit text in sec-six-functors-basics; reported the metadata mismatch without changing maintainer-owned fields.",
+  "blueprint": "Steps 1-4 realize Dense replacement and Refinement isomorphisms, repairing the non-Noetherian/nondense gap using the existing interchange tool. Step 5 realizes Definition, Step 6 Independence, and Step 7 Cocycle, including identity for nondense compactifications."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-494e26fe1",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-494e26fe1 (reviewer sub-agent of L); spot-checked: Read the item, route, current blueprint proofs, every cited DAG statement/source, and all edge cases. The seven steps are mathematically supported, including the p=id_X proper/open-interchange repair for nondense and non-Noetherian targets; coefficient categories and base-change maps are correct. No new nodes were delivered. The copied unit record is stale (old sec-smooth-purity metadata) and requires separate maintainer metadata repair."
+ }
 }
