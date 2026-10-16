@@ -15578,3 +15578,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: returned deliver/A3/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (reviewer RETURN: (the landing tools, head ec7ac871b) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictHenselizationStructura)
 - 22:15 L: returned deliver/B3/Sheaf.Paper.ProEtalePointComponentsMaps (reviewer RETURN: (the landing tools, head 4b8c79995) the delivery did not land: lean/Sheaf/Paper/ProEtalePointComponentsMaps.lean changed)
 - 22:15 L: returned deliver/B4/Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh (reviewer RETURN: (the landing tools, head fd66ae443) the delivery did not land: lean/Sheaf/AlgebraicGeometry/DerivedDirectImageBoundedBel)
+- 22:15 L: returned deliver/E2/Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility (reviewer RETURN: (the landing tools, head bf23e2427) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictHenselizationCompatibi)
