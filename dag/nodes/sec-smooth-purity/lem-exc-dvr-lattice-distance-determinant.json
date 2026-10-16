@@ -247,5 +247,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrLatticeDistanceDeterminant",
+  "declaration": "IsDiscreteValuationRing.lattice_distance_determinant",
+  "file": "lean/Sheaf/RingTheory/DvrLatticeDistanceDeterminant.lean",
+  "statement": "theorem lattice_distance_determinant (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type v) [Field K] [Algebra R K] [IsFractionRing R K] (V : Type w) [AddCommGroup V] [Module K V] [Module R V] [IsScalarTower R K V] [FiniteDimensional K V] (M : Submodule R V) [Module.Finite R M] (hspan : Submodule.span K (M : Set V) = ⊤) (g : V ≃ₗ[K] V) : Module.length R (M ⧸ (M.map (g.toLinearMap.restrictScalars R)).comap M.subtype) ≠ ⊤ ∧ Module.length R (M.map (g.toLinearMap.restrictScalars R) ⧸ M.comap (M.map (g.toLinearMap.restrictScalars R)).subtype) ≠ ⊤ ∧ ((Module.length R (M ⧸ (M.map (g.toLinearMap.restrictScalars R)).comap M.subtype)).toNat : ℤ) - ((Module.length R (M.map (g.toLinearMap.restrictScalars R) ⧸ M.comap (M.map (g.toLinearMap.restrictScalars R)).subtype)).toNat : ℤ) = WithZero.log (Ring.ordFrac R (LinearMap.det g.toLinearMap))",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b89bf12b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Node record differs from side clone only by the lean field; lean.statement is the file signature verbatim. All clauses match: DVR R, fraction field K, FiniteDimensional V with IsScalarTower R K V, Module.Finite M with full K-span, g : V ≃ₗ[K] V, H as comap in each of M and g(M), both lengths ≠ ⊤, signed ℤ difference ℓ(M/H)−ℓ(gM/H) = WithZero.log(Ring.ordFrac R (det g)) (normalization checked in Mathlib OrderOfVanishing/Noetherian.lean: ordFrac_irreducible = exp 1, units = 1), matching Stacks 02MG/02MI sign. Edge cases V=0, g=t, g=t^-1, M-preserving g, diag(t^2,t^-3) all correct. No extra assumptions; universes u,v,w independent. One theorem with sorry, no definitions; source and blueprint docstrings present; nine-step proof in docstring; report has Worker report and Second reading by Q112. nt_compile.py --json: clean, rc=0 (control mutation shows diagnostics are surfaced). No duplicate declaration found. Only a stale remark in the worker report, superseded by the second reading."
  }
 }
