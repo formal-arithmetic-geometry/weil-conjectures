@@ -3,48 +3,172 @@
  "blueprint": {
   "is": "det-pe-wcb-clopen-partition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coverings of a w-contractible affine are refined by clopen partitions",
- "statement": "Let $U=\\operatorname{Spec}D$ with $D$ w-contractible be an object of $X_{\\mathrm{proét}}$,\nand let $\\{U_i\\to U\\}_{i\\in I}$ be a covering in $X_{\\mathrm{proét}}$. There are a finite\npartition $U=U'_1\\sqcup\\dots\\sqcup U'_m$ into clopen subschemes, indices $i_1,\\dots,i_m$,\nand $U$-morphisms $g_k\\colon U'_k\\to U_{i_k}$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Let $U=\\operatorname{Spec}D$ [def-weil-affine-spectrum] with $D$ w-contractible [det-pe-wlocal-strict-contractible] be an object of $X_{\\mathrm{proét}}$ [sk-def-pe-site], and let $\\{U_i\\to U\\}_{i\\in I}$ be a covering in this site. There are a finite partition $U=U'_1\\sqcup\\dots\\sqcup U'_m$ into clopen subschemes (open subschemes [def-weil-open-immersion] whose underlying subsets are closed), indices $i_1,\\dots,i_m$, and $U$-morphisms $g_k\\colon U'_k\\to U_{i_k}$. The empty partition is allowed when $U$ is empty.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-clopen-partition.md",
   "place": "node det-pe-wcb-clopen-partition, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "det-pe-wlocal-strict-contractible",
+  "sk-def-pe-site",
+  "def-weil-open-immersion"
+ ],
  "proof": [
   {
-   "text": "Apply the covering condition of [def-weil-pbc-proetale-covering] to the affine open\n$W=U$: there are finitely many indices $i_1,\\dots,i_m$ and affine opens $V_k\\subset\nU_{i_k}$ whose images cover $U$. Put $V=V_1\\sqcup\\dots\\sqcup V_m$, an affine scheme. The\nmap $V\\to U$ is weakly étale (each $U_{i_k}\\to U$ is weakly étale by\n[lem-trf-weakly-etale-between-objects], and open immersions are weakly étale by\n[det-pe-morphisms-etale-comparison]) and surjective. So $V=\\operatorname{Spec}E$ with\n$D\\to E$ faithfully flat (flat and surjective on spectra) and weakly étale.",
+   "text": "If $U=\\varnothing$, the empty partition, with no indices or maps to choose, proves the assertion. Assume henceforth that $U$ is nonempty. By [sk-def-pe-site], the given covering in $X_{\\mathrm{proét}}$ is an fpqc/pro-etale covering, so applying its finite affine refinement condition (equivalently [def-weil-pbc-proetale-covering]) to the affine open $W=U$ gives finitely many indices $i_1,\\ldots,i_r$ and affine open subschemes $V_k\\subset U_{i_k}$ whose images cover $U$. Here the fibre product $U_i\\times_U U$ appearing in [sk-def-pe-site] is identified with $U_i$ by its first projection, whose inverse is the pair $(\\operatorname{id}_{U_i},f_i)$, where $f_i:U_i\\to U$ is the given covering arrow; hence its affine opens are affine opens of $U_i$. The same covering definition says that every arrow $U_i\\to U$ is weakly étale. There is no assumption that the original index set $I$ is finite, and repeated selected indices are harmless.",
    "uses": [
-    "def-weil-pbc-proetale-covering",
-    "lem-trf-weakly-etale-between-objects",
-    "det-pe-morphisms-etale-comparison"
+    "sk-def-pe-site",
+    "def-weil-pbc-proetale-covering"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+   }
   },
   {
-   "text": "By [det-pe-wcb-split-cover] there is a section $s\\colon U\\to V$ over $U$. The $V_k$ are\nclopen in $V$, so $U'_k:=s^{-1}(V_k)$ are clopen in $U$ and partition it. Discarding empty\nones, $g_k\\colon U'_k\\xrightarrow{s}V_k\\subset U_{i_k}$ is a $U$-morphism, since $s$ is a\nsection over $U$.",
+   "text": "By [lem-weil-pbc-scheme-coproduct-family] form $V=\\coprod_{k=1}^r V_k$ with its open-and-closed, pairwise disjoint components and the unique map $p:V\\to U$ restricting to the given $V_k\\to U$. By clause (4) of [lem-weil-pbc-affine-morphism-permanence], this finite disjoint union of affine schemes is affine, so write $V=\\operatorname{Spec}E$. The map $p$ is surjective: every point of $U$ is in the image of one of the $V_k\\to U$, and each of these maps factors through $p$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+   }
+  },
+  {
+   "text": "Each inclusion $V_k\\hookrightarrow U_{i_k}$ is étale by [lem-weil-pbc-open-immersion-etale], hence weakly étale by clause (1) of [det-pe-morphisms-etale-comparison]. Its composite $V_k\\to U$ is weakly étale by composition stability in [sk-lem-pe-weakly-etale-stability]. The components $V_k$ form a Zariski open cover of $V$, so source locality in the same stability statement implies that $p:V\\to U$ is weakly étale. Apply clause (4) of [det-pe-morphisms-etale-comparison] to these entire affine charts: the ring map $D\\to E$ and its multiplication $E\\otimes_D E\\to E$ are flat. Thus $D\\to E$ is weakly étale in the ring sense and is flat. Since $p$ is surjective, [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $D\\to E$ faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "det-pe-morphisms-etale-comparison",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+   }
+  },
+  {
+   "text": "The ring $D$ is w-contractible by hypothesis, and step 3 verifies both faithful flatness and weak étaleness of $D\\to E$. Apply [det-pe-wcb-split-cover] to obtain a section $s:U\\to V$ satisfying $p\\circ s=\\operatorname{id}_U$.",
    "uses": [
     "det-pe-wcb-split-cover"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+   }
+  },
+  {
+   "text": "For each component set $U'_k=s^{-1}(V_k)$ with its open subscheme structure. Continuity of $s$ and closedness of $V_k$ make $U'_k$ closed as well as open. Because the component subsets are pairwise disjoint with union $V$, their inverse images are pairwise disjoint with union $U$. On $U'_k$ the map on spaces of $s$ lands in $V_k$, and restricting its structure-sheaf map to these open subschemes gives $s_k:U'_k\\to V_k$; the maps on stalks are those of $s$, so they remain local. Thus $s_k$ is a scheme morphism; define $g_k$ as $s_k$ followed by $V_k\\hookrightarrow U_{i_k}$. Its composite with $U_{i_k}\\to U$ is $(p\\circ s)|_{U'_k}$, the inclusion $U'_k\\hookrightarrow U$, so it is a $U$-morphism. Discard the empty inverse images and reindex the remaining finite family. This gives exactly the asserted partition and maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, proof of (1) implies (2), expanded as in the current blueprint proof"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-pe-site",
   "def-weil-pbc-proetale-covering",
-  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-open-immersion-etale",
   "det-pe-morphisms-etale-comparison",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
   "det-pe-wcb-split-cover"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-clopen-partition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-clopen-partition.proof.md",
+  "place": "Both proof paragraphs, checked against Stacks Tag 098F (lemma-w-contractible-proetale-cover), forward direction; supporting facts expanded into explicit cited steps."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen.*partition|w.contractible|WeaklyEtale",
+   "results": "WeaklyEtale.lean:44 defines weak etaleness; :60 etale implies weakly etale; :68-92 give composition, base change and Zariski locality. Sites/Proetale.lean:52-69 defines the covering/topology. None supplies the w-contractible splitting and maps from clopen pieces. Searched subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.WeaklyEtale, AlgebraicGeometry.Scheme.Hom",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every pro-etale cover of an affine scheme with a w-contractible ring has a finite disjoint clopen refinement with lifts to the cover",
+   "results": "Eight hits: affine covers and transition-limit affine refinements, including Scheme.OpenCover.affineRefinement (Cover/Open.lean:156). These refine Zariski open covers and do not split weakly etale covers over w-contractible rings.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proetale covering of a weakly contractible affine scheme admits sections on a finite clopen partition",
+   "results": "Eight hits: etale topology, affine/open covers, and TopologicalSpace.IsOpenCover.exists_finite_clopen_cover (Topology/Separation/DisjointCover.lean:39). The latter assumes a compact Hausdorff totally disconnected space and produces subset refinements, not morphisms lifting the original scheme cover.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|w.contractible|weakly.contractible|clopen",
+   "results": "No hits in AlgebraicGeometry/Sites. Searched subdirectory: AlgebraicGeometry/Sites.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_clopen_partition_of_clopen_cover|exists_finite_clopen_cover",
+   "results": "Three source hits in Profinite.lean and DisjointCover.lean. Read DisjointCover.lean:35-74: finite (disjoint) clopen refinements of topological open covers, not the asserted scheme-morphism refinement. Searched subdirectory: Topology/Separation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cover by weakly etale schemes over Spec R for a w-contractible ring R can be refined by finitely many open and closed subschemes with R-morphisms to covering members",
+   "results": "Eight hits: affine-transition-limit constructions, Scheme.exists_isOpenCover_and_isAffine, etaleTopology and affineCover; no w-contractible-cover splitting statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|w.contractible|weakly.contractible",
+   "results": "No hits in RingTheory. Searched subdirectory: RingTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proetale cover of the spectrum of a w-contractible ring admits a finite clopen partition with a lift from each piece to a covering member",
+   "results": "Eight hits: ExistsHomHomCompEqCompAux.hii′, 𝒰D₀, 𝒰D, exists_index and i′ (AffineTransitionLimit); Scheme.Cover.ulift (Cover/MorphismProperty); Scheme.etalePretopology and Scheme.smallEtalePretopology (Sites/Etale). These construct covers or transition indices and topologies; none gives w-contractible splitting or the required lifts.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|w.contractible|weakly.contractible|clopen.*partition",
+   "results": "No hits. Searched subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +182,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-weakly-contractible-basis"
+ "unit": "sk-thm-pe-weakly-contractible-basis",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wcb-clopen-partition",
+  "worker": "stage1",
+  "summary": "Completed the prior split audit: added statement-definition dependencies and explicit empty-partition convention; cited existing Mathlib leaves for finite affine coproducts, coproduct components, open immersions being etale and flat-surjective-spectrum maps being faithfully flat. Explicitly used source locality and the affine ring criterion of weak etaleness. Expanded the section and restricted-map calculation. No new nodes and no substantive change to the statement. Repeated logged Mathlib searches with correct source subdirectories.",
+  "blueprint": "Steps 1-3 realize the first paragraph of det-pe-wcb-clopen-partition.proof.md (finite affine refinement and faithfully flat weakly etale coproduct); steps 4-5 realize its second paragraph (section and inverse-image clopen partition). This carries the clopen-refinement sentence of the first paragraph of sk-thm-pe-weakly-contractible-basis.proof.md.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic composition and Zariski source-locality tool needed to check the affine refinement map; it does not replace the unit split-cover route."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic etale-to-weakly-etale and affine ring criterion used to verify the input of the unit split-cover lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-pe-weakly-etale-stability",
+  "det-pe-morphisms-etale-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-8dbd79783",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-8dbd79783 (reviewer sub-agent of L); spot-checked: Reviewed item, all five proof steps, cited node statements, blueprint/unit route, and Stacks Tag 098F. Hypotheses, affine base-change identification, weak-etale and faithful-flat arguments, section construction, clopen partition, edge cases, searches, and tool uses check out. No repairs required; review written to review.md."
+ }
 }

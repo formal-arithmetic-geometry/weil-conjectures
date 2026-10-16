@@ -1,0 +1,93 @@
+{
+ "id": "lem-coef-dgcat-free-cell-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Free dg-category presentations, finite presentability and word filtrations used to construct the quasi-equivalence model and local cofibrancy, in the finite mapping-complex adjunction of proof paragraph 2.",
+   "via": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free dg-category presentations and arrow-word filtrations",
+ "statement": "Fix universes as in [def-weil-size-convention] and a commutative ring $R$ in the small universe $\\mathcal U$. A cochain complex of $R$-modules is a $\\mathbf Z$-graded module with a differential $d$ of degree $1$ satisfying $d^2=0$. An $R$-linear dg category has a $\\mathcal U$-small object set, cochain complexes of $R$-modules as morphisms, associative unital compositions, and the signed Leibniz rule $d(ba)=d(b)a+(-1)^{|b|}b\\,d(a)$; dg functors preserve this data. The category $\\operatorname{dgcat}_R$ of these categories and dg functors has $\\mathcal U$-small Hom sets, all $\\mathcal U$-small limits and colimits, and is locally finitely presentable: a $\\mathcal U$-small set of finitely presentable objects generates it under filtered colimits. Here filtered means that every finite diagram admits a cocone, and finitely presentable means that the object's Hom functor preserves filtered colimits. Finite dg presentations (finitely many objects and homogeneous arrows, with differentials specified by finite words, and finitely many relations compatible with the differential) are finitely presentable. Filtered colimits have the filtered colimit object set and, for any pair of objects represented at a common stage, the filtered colimit morphism complex over later stages.\n\nLet $\\mathbf1_R$ be the one-object dg category with endomorphisms $R$ in degree zero. For a complex $V$ let $T(V)$ have objects $0,1$, endomorphisms $R$, morphisms $T(V)(1,0)=0$, and $T(V)(0,1)=V$. Dg functors $T(V)\\to\\mathcal C$ are naturally pairs of objects $s,t$ of $\\mathcal C$ and chain maps $V\\to\\mathcal C(s,t)$. In particular all $T(V)$ for finitely presented complexes $V$ are finitely presentable. Adjoining freely a homogeneous arrow $e:s\\to t$ of degree $n$ to $\\mathcal C$, with $d(e)=a$ for a prescribed closed $a\\in\\mathcal C(s,t)^{n+1}$, leaves its object set unchanged. Its morphism complex from $x$ to $y$ has an exhaustive increasing filtration $F_m$ by the number of occurrences of $e$. Its $F_0$ is $\\mathcal C(x,y)$, all filtration inclusions split as graded $R$-modules, and for $m\\geq1$ its quotient is\n$$F_m/F_{m-1}\\cong\\mathcal C(t,y)\\otimes_R Re\\otimes_R\\bigl(\\mathcal C(t,s)\\otimes_R Re\\bigr)^{\\otimes_R(m-1)}\\otimes_R\\mathcal C(x,s),$$\nwhere $Re$ is $R$ in degree $n$ with zero differential. The differential on words is the Leibniz differential and the terms involving $d(e)=a$ lower word length. If instead a whole complex $V$ of arrows $s\\to t$ is freely adjoined with its own differential, the morphism complex is the direct sum of the length-zero summand $\\mathcal C(x,y)$ and these same word terms with $Re$ replaced by $V$, with the tensor differential on each summand. These descriptions and filtrations are natural in the attaching data.",
+ "source": {
+  "document": "https://arxiv.org/pdf/0710.4303",
+  "place": "Chapter 1, section 1.3.1, generators and Lemma 1.10 word construction and smallness, printed pp. 28-30. Finite-presentation/filtered-colimit formulation and arbitrary arrow-degree generalization by the agent. Read online; not locally archived. No corresponding Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded categories admit filtered colimits and adjoining a graded arrow has a word length filtration",
+   "results": "{\"t\": \"2026-10-16T13:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded categories admit filtered colimits and adjoining a graded arrow has a word length filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.categoryFree\", \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.GradedObject.isColimitCofanMapObj\", \"HomologicalComplex.instHasColimit\", \"HomologicalComplex.instHasColimitsOfShape\", \"HomologicalComplex.instHasFiniteColimits\", \"HomologicalComplex.ab5OfSize\"], \"digest\": \"0f4d278f4601bca2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"HomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-16T13:09:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"HomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|free.*dg|word.*filtration.*categor",
+   "results": "{\"t\": \"2026-10-16T13:09:20Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|free.*dg|word.*filtration.*categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Reduce.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"Mathlib/GroupTheory/FreeGroup/Basic.lean\"], \"digest\": \"23610da5a9a18e5b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented differential graded categories and free arrow pushouts",
+   "results": "{\"t\": \"2026-10-16T13:09:20Z\", \"tool\": \"leansearch\", \"query\": \"Finitely presented differential graded categories and free arrow pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.hasPushouts\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Under.pushoutComp\", \"CategoryTheory.Cat.free\", \"CategoryTheory.DifferentialObject.categoryOfDifferentialObjects\", \"CategoryTheory.DifferentialObject\", \"CategoryTheory.DifferentialObject.concreteCategoryOfDifferentialObjects\", \"CategoryTheory.Limits.HasPushouts\"], \"digest\": \"0cfbcc6e312ae461\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categories enriched in chain complexes form a locally finitely presentable category free category monad",
+   "results": "{\"t\": \"2026-10-16T13:09:29Z\", \"tool\": \"leanfinder\", \"query\": \"Categories enriched in chain complexes form a locally finitely presentable category free category monad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatEnrichedOrdinary\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.CatEnrichedOrdinary.instEnrichedOrdinaryCategoryCat\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.CatEnrichedOrdinary.instEnrichedCategoryCat\", \"CategoryTheory.categoryForgetEnrichment\", \"CategoryTheory.EnrichedCat\"], \"digest\": \"52f5c2a43497720e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval",
+   "results": "{\"t\": \"2026-10-16T13:10:17Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat and IsLocallyFinitelyPresentable define generic notions, not free dg-category constructions or a finite-presentation theorem for dgcat. Read Enriched/EnrichedCat.lean:1-100 and Enriched/Basic.lean:430-510; word-filtration grep hits free-group material, not dg categories. The focused dg-category grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-dgcat-model-structure",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

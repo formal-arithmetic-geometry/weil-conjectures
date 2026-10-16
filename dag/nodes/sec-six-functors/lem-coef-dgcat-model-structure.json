@@ -24,9 +24,162 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set R=Z. Use the free two-object construction T, one-object category 1_R, spheres S^n, disks D^n and coherent interval K_R of the cited nodes. Take I={empty->1_R} union {T(S^{n+1})->T(D^n)} and J={1_R->K_R} union {T(0)->T(D^n)}, with n in Z. The cited free-cell statement makes dgcat_R complete, cocomplete and locally finitely presentable, with small Hom sets. These are small sets of maps; all their domains have finite dg presentations, hence preserve filtered colimits, including omega-chains. Work throughout with the fixed small universe. Write W for quasi-equivalences, F=J-inj, C=LLP(I-inj) and Acof=LLP(J-inj). In the cited complex model, the two generating sets determine the two right lifting classes by the definition of a cofibrantly generated weak factorization system. Its cofibration criterion implies that a complex is cofibrant exactly when it is dg-projective (apply the criterion to its map from zero).",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-equivalence-cell-calculus",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Section 1.3.1, displayed I,J and smallness after Lemma 1.10; free-presentation smallness made explicit by the agent."
+   }
+  },
+  {
+   "text": "W is retract closed: apply cohomology to retract diagrams of each morphism complex, and transport an object and its witnessing H^0-isomorphism through the object retractions. For composable F0:A->B and G0:B->D, two-out-of-three for local quasi-isomorphisms follows by taking every cohomological degree; if a pair of B-objects is missing from F0, replace it by isomorphic images, using essential surjectivity of H^0(F0). Composition with the representing invertible H^0 classes is an isomorphism on all H^n Hom groups (inverse classes give inverse actions), so this replacement preserves the assertion. For essential surjectivity the two direct cases compose isomorphisms; in the remaining case use full faithfulness of H^0(G0) to lift an isomorphism G0(F0(a))->G0(b) to F0(a)->b. This proves all three cases directly from the definition of W.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Definition 2.1, elementary verification of quasi-equivalence axioms."
+   }
+  },
+  {
+   "text": "The T-adjunction and the boundary lifting test for complexes identify I-inj exactly with maps surjective on objects and locally degreewise surjective quasi-isomorphisms. The disk generators in J detect local degreewise surjectivity. For such a surjection p, the interval realization (a) shows that RLP against 1_R->K_R implies lifting H^0-isomorphisms with prescribed source. Conversely, given a bottom interval, first lift its H^0 class using the assumed isofibration. Choose a closed representative u0 upstairs. Its image differs from the prescribed closed bottom arrow v by d(h). Lift h in degree -1 using local surjectivity and replace u0 by u0-d(h_lift); now p(u0)=v strictly and its H^0 class is unchanged. Part (c) of the interval lemma lifts all remaining interval data. Thus F is exactly the stated class of fibrations. Finally I-inj=F intersect W: in one direction object surjectivity and the local H^0 isomorphisms lift every isomorphism to a chosen object preimage; in the other direction essential surjectivity followed by the isofibration gives exact object preimages, and local quasi-isomorphisms are already part of W.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-equivalence-cell-calculus",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemmas 1.11, 1.12 and Proposition 1.13; the H^0 versus strict representative adjustment is written explicitly."
+   }
+  },
+  {
+   "text": "Every pushout of a disk generator T(0)->T(D^n) is a quasi-equivalence. In the free-word description the length-zero term is the old Hom complex, and every positive-length term contains a D^n factor. Its standard degree -1 contraction, inserted with the tensor Koszul sign, contracts that word term, without a flatness assumption on the other factors. The direct sum of these contractions contracts the quotient; objects are unchanged. A pushout of 1_R->K_R is locally a quasi-isomorphism and its sole new object is H^0-isomorphic to its attaching object by part (b). Consequently every relative J-cell map lies in W. Indeed well-order any coproduct of attachments and attach successively. At a limit stage an element, a cycle, a bounding element or a finite equation in a filtered colimit is represented at some common stage; this proves that cohomology commutes with these filtered module colimits. Old-object Hom quasi-isomorphisms therefore persist at limits. Each object appears at a successor stage and is connected by an H^0-isomorphism to the previous stage; transfinite induction gives essential surjectivity from the starting category.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dgcat-equivalence-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Lemma 1.10, disk word decomposition and K pushout; filtered-colimit and essential-surjectivity arguments expanded by the agent."
+   }
+  },
+  {
+   "text": "Apply the functorial small-object factorization node to I and J with lambda=omega. Its Hom-preservation and colimit hypotheses were checked in step 1. It gives functorial factorizations with left maps C and Acof and right maps I-inj and F respectively. These are weak factorization systems: for example a map with RLP against C is a retract of its I-inj factor, by lifting against its C factor; right lifting classes are retract closed by composing fillers with retractions. The dual retract argument identifies each left class. Apply the cellular factorization node separately when a cellular left factor is needed; it supplies transfinite relative I-cell or J-cell factors. We do not infer cellularity of the particular functorial factorization from the first node.",
+   "uses": [
+    "lem-coef-cardinal-small-object-factorization",
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Small object criterion preceding Lemma 1.10; general factorization infrastructure reused from existing nodes."
+   }
+  },
+  {
+   "text": "Acof is contained in C because I-inj is contained in F. Factor any Acof map by a relative J-cell map followed by F using the cellular factorization. Its LLP makes it a retract of that cell map, so step 4 and retract closure imply Acof is contained in W. Conversely, factor i in C intersect W as a relative J-cell map j followed by p in F. Step 4 and two-out-of-three give p in W, hence p in I-inj by step 3. The LLP of i makes i a retract of j, and j has LLP against F by successively choosing fillers and taking their limit. Thus i belongs to Acof. We obtain Acof=C intersect W. Together with steps 2, 3 and 5 this gives exactly the two required functorial weak factorization systems and the cofibrantly generated model structure.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Recognition criterion and Lemmas 1.10-1.12; retract and lifting argument spelled out rather than imported as a new model-existence lemma."
+   }
+  },
+  {
+   "text": "The terminal dg category has one object and the zero endomorphism complex; its identity is zero. Every map to it is degreewise surjective on Homs and lifts its unique H^0-isomorphism by the identity of the specified source. The condition is vacuous for an empty source. Hence all objects are fibrant by step 3. The description of trivial fibrations there identifies a cofibrant object with precisely the initial-map LLP in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 2, all objects fibrant and Proposition 2.3(1)."
+   }
+  },
+  {
+   "text": "Construct the object-preserving replacement explicitly. For A let D(Ob A) have its objects, endomorphisms R and zero off-diagonal Homs. It is cofibrant, being the coproduct of copies of empty->1_R. Factor D(Ob A)->A by iteratively attaching, at each natural-number stage, one boundary cell T(S^{n+1})->T(D^n) for EVERY commutative square into the current map, and take the omega-colimit. A boundary square into the result factors through a finite stage because both boundary and disk have finite presentations; equality of the requisite composites holds at a further finite stage. The square is then filled at the next stage. Thus the resulting q:QA->A is locally a surjective quasi-isomorphism by the complex lifting test. No boundary cell changes objects, so q is the identity on object sets and is a trivial fibration by step 3. Its source is cofibrant, since successive relative I-cell maps have LLP by successive fillers, with colimits at limits. A dg functor A->B maps every indexed square to its composite square for B; induction and colimits give the replacement functor, preserving identities and composition and making q natural.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Proposition 2.3(2), fixed-object cell version of the small object construction, detailed by the agent."
+   }
+  },
+  {
+   "text": "For a cofibrant dg category A, factor empty->A by an I-cell map followed by I-inj using the cellular factorization. The LLP makes A a retract of the resulting cellular category. In the cited complex model, cofibrant means dg-projective, by applying its cokernel criterion to 0->P. Cofibrations, as a left lifting class, are closed under coproducts, pushouts and retracts by composing fillers with the relevant universal maps; they are closed under transfinite compositions by choosing compatible fillers successively and using the colimit universal property at limits. Shifts preserve cofibrancy since they preserve surjective quasi-isomorphisms and have inverse shifts. R[0] is cofibrant by the cited model theorem; so all shifts of R are cofibrant. Tensor products of cofibrant complexes are cofibrant by applying its pushout-product axiom to their two initial maps. Every Hom complex of an I-cell dg category is now projectively cofibrant, by transfinite induction. Adding an object contributes endomorphisms R and zero other new Homs. For a boundary-arrow attachment the free-cell word-length filtration has degreewise split inclusions and positive quotients given by tensor products of old cofibrant Homs and a shift of R. These quotients are cofibrant by the tensor observation. The cited split-injection/cokernel criterion makes each filtration inclusion a cofibration, and closure under countable composition makes the old-to-new Hom map a cofibration. At limit stages the Hom maps are composites of these cofibrations, so the same transfinite closure proves cofibrancy. Coproduct attachments can be well-ordered into single attachments. Finally a dg-category retraction induces a retraction on each Hom complex, proving the assertion for A.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Proposition 2.3(3), sketch of proof, expanded using the free-arrow filtration and projective-complex cell criterion."
+   }
+  },
+  {
+   "text": "The cited complex model is locally presentable and has generating cofibrations b_n:S^{n+1}->D^n. Apply the existing cellular factorization to 0->P in this category. If P is cofibrant, its lifting property makes P a retract of a relative b_n-cell complex E. Each boundary-cell attachment to a complex is a degreewise split injection with cokernel a shift of R; a coproduct attachment has cokernel a direct sum of such shifts. For an acyclic complex N, tensor this cellular filtration with N. Its inclusions remain degreewise split injections, its successive quotients are direct sums of shifts of N, and these are acyclic. A cycle in a successor extension maps to a boundary in the quotient; subtract a lifted boundary to put it in the old subcomplex, where it is a boundary by induction. At a limit every cycle and its finite differential equation occur at some stage, so exactness persists under the filtered union. Thus E tensor N is acyclic, as is its retract P tensor N. For a quasi-isomorphism v, its mapping cone is acyclic; the tensor of P with that cone is canonically the cone of P tensor v, with the usual shift signs. Hence P tensor v is a quasi-isomorphism. Apply this with P=A(x,y), cofibrant by step 9.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Proposition 2.3(3), projective cofibrancy implies homotopical flatness."
+   }
+  },
+  {
+   "text": "For cofibrant A choose a cosimplicial frame using the existing frame-mapping theorem, now applicable to the complete and cocomplete model category constructed above. Every B is fibrant by step 7. Its Kan mapping complex has degree-zero simplices exactly strict dg functors A->B, and computes the localization mapping space. Each edge is a map from A^1; the degree-one latching map is A coproduct A->A^1, a cofibration, and its augmentation to A is a weak equivalence, hence this is a cylinder. Components are the equivalence relation generated by these edges. Conversely endpoints of any cylinder map have the same localized morphism: the two inclusions become equal inverses to the same weak-equivalence contraction. Thus the components are exactly strict functors modulo the equivalence relation generated by all cylinder homotopies.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 2, model localization and Proposition 2.3; generic cosimplicial-frame mapping theorem reused."
+   }
+  },
+  {
+   "text": "For U contained in V, use the same I and J in both universes. A U-small relative I-cell construction is the same construction in V: the explicit free-word pushouts and object/complex filtered colimits agree. By the cellular factorization and retract argument of step 9, every U-cofibrant category or U-cofibration is a retract of a U-relative I-cell map, so remains cofibrant or a cofibration in V. W and fibrancy are intrinsic. For two U-small categories take the U-small QA from step 8 and a U-small cosimplicial frame on it. It is still a frame in V: finite latching colimits are unchanged, latching cofibrations remain cofibrations by the preceding retract argument, and augmentation maps remain W. Its simplicial sets of dg functors to B are literally unchanged, since source and target are U-small and a functor is the same object/chain-map data in either universe. The frame theorem therefore identifies the same mapping-space model in both localizations. Taking components also identifies the localized morphism sets. This proves both universe assertions for the original small categories.",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 2, paragraph on universe independence and Proposition 2.3; comparison via a common small frame written by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-free-cell-calculus",
+  "lem-coef-dgcat-equivalence-cell-calculus",
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-cardinal-small-object-factorization",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-cosimplicial-frame-mapping"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0408337",
+  "place": "Section 2, Definition 2.1 and Proposition 2.3; expanded using Tabuada 0710.4303 section 1.3.1 and Hovey projective-complex cells. Sources read online, absent from local archive."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +236,45 @@
    "results": "{\"t\": \"2026-10-16T11:47:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedFunctor.id_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.EnrichedFunctor.comp\"], \"digest\": \"3c8be03114ad3634\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. ModelCategory and CofibrantObjectHomotopy assume a model structure; EnrichedFunctor and enrichedNatTransYoneda concern ordinary enriched categories. Read CofibrantObjectHomotopy.lean:60-95, Enriched/Basic.lean:465-510, and Enriched/FunctorCategory.lean:14-100. None constructs the quasi-equivalence model structure, classifies dg mapping spaces by bimodules, or classifies derived dg-module diagrams. The broader Dwyer/dg-category grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofibrantly generated model structure on small dg categories with quasi-equivalences",
+   "results": "{\"t\": \"2026-10-16T12:58:28Z\", \"tool\": \"leanfinder\", \"query\": \"cofibrantly generated model structure on small dg categories with quasi-equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"f2b28c80ef4303be\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no project dg-category model construction found; generic ModelCategory and derived-category localizations presuppose other categories/model structures. Focused dg-category grep has zero hits; inspected EnrichedCat, CofibrantObjectHomotopy and the bounded-below injective model candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "DGCat ModelCategory quasi-equivalence",
+   "results": "{\"t\": \"2026-10-16T12:58:29Z\", \"tool\": \"loogle\", \"query\": \"DGCat ModelCategory quasi-equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `DGCat`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no project dg-category model construction found; generic ModelCategory and derived-category localizations presuppose other categories/model structures. Focused dg-category grep has zero hits; inspected EnrichedCat, CofibrantObjectHomotopy and the bounded-below injective model candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "small dg categories cofibrant replacement mapping complexes flat",
+   "results": "{\"t\": \"2026-10-16T12:58:29Z\", \"tool\": \"leansearch\", \"query\": \"small dg categories cofibrant replacement mapping complexes flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac\"], \"digest\": \"2f2c100ad28ed2cc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no project dg-category model construction found; generic ModelCategory and derived-category localizations presuppose other categories/model structures. Focused dg-category grep has zero hits; inspected EnrichedCat, CofibrantObjectHomotopy and the bounded-below injective model candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval",
+   "results": "{\"t\": \"2026-10-16T13:10:17Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|quasi.?equivalence|Kontsevich|dg.?interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no project dg-category model construction found; generic ModelCategory and derived-category localizations presuppose other categories/model structures. Focused dg-category grep has zero hits; inspected EnrichedCat, CofibrantObjectHomotopy and the bounded-below injective model candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi equivalence model categories enriched over cochain complexes Tabuada small object argument",
+   "results": "{\"t\": \"2026-10-16T13:10:21Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi equivalence model categories enriched over cochain complexes Tabuada small object argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.Qh\", \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh\", \"instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\"], \"digest\": \"6583da3ee48bf099\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no project dg-category model construction found; generic ModelCategory and derived-category localizations presuppose other categories/model structures. Focused dg-category grep has zero hits; inspected EnrichedCat, CofibrantObjectHomotopy and the bounded-below injective model candidates."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-quasifunctor-invariance",
   "by": "worker",
@@ -102,5 +290,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dgcat-model-structure",
+  "worker": "stage1",
+  "summary": "Constructed the quasi-equivalence model by explicit I and J cells, then object-preserving replacements, local cofibrancy, tensor flatness, cylinder homotopy and universe comparison. Maintainer review reuses the existing projective cochain monoidal model instead of creating a duplicate; closure and tensor-flatness deductions are written in steps 9-10. Two new statement-only children supply free dg words and the coherent equivalence cell.",
+  "blueprint": "The finite mapping-complex adjunction before total inverse limit in prop-coef-integral-exceptional-adjoint proof paragraph 2, via the recorded dg quasifunctor/enriched Yoneda chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-0da4a0285",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-0da4a0285 (reviewer sub-agent of L); spot-checked: Read all mathematics against Tabuada, Toën, Hovey and cited inputs. Reused the existing projective cochain model, supplied closure and tensor-flatness arguments, and completed two new-node records. Statements unchanged; corrected dependencies are acyclic. Full checks in review.md; corrected JSON under fixes/dag/nodes/sec-six-functors/.; 3 file(s) fixed by the reviewer"
  }
 }
