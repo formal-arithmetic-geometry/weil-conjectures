@@ -13,17 +13,16 @@
  },
  "proof": [
   {
-   "text": "The coherent kernel L of a has quasi-coherent ideal-power product H. Its inclusion into L is mono, so Noetherian coherence stability for quasi-coherent submodules proves H coherent. The t=0 power is the unit sheaf.",
+   "text": "The coherent kernel L of a has quasi-coherent ideal-power product H. Use the proved idealData_quasicoherent, powers_qc and product_qc helpers of the recursive-power comparison module, valid also at t=0. The product inclusion into L is mono, so Noetherian coherence stability for quasi-coherent submodules proves H coherent.",
    "uses": [
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-pc-ideal-data-recursive-power-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On each affine U, formalCompletion_affine_sections supplies the quotient isomorphisms and the completion isomorphism. Compose the latter with preservesLimitIso for evaluation to identify the section-system limit with AdicCompletion. Naturality is proved by checking all limit projections, choosing a lift of each quotient class and cancelling the canonical quotient projections. Mathlib AdicCompletion.map_injective then makes the completed section map of any mono into a coherent module injective. F has finite affine sections by the finite-type criterion and restriction of finite local generators.",
+   "text": "On each affine U, formalCompletion_affine_sections supplies the quotient isomorphisms and the completion isomorphism. Compose the latter with preservesLimitIso for evaluation to identify the section-system limit with AdicCompletion. Naturality is proved by checking all limit projections, choosing a lift of each quotient class and cancelling the canonical quotient projections. Mathlib AdicCompletion.map_injective then makes the completed section map of any mono into a coherent module injective. The proved finite_sections_of_finiteType helper of the affine finite-type criterion module supplies finite affine sections of F.",
    "uses": [
     "lem-weil-pbc-formal-completion-affine-sections",
     "lem-weil-pbc-completion-exact-finite-modules",
@@ -33,14 +32,14 @@
    "elementary": false
   },
   {
-   "text": "Construct the canonical map from sections into their quotient-system limit by the quotient projections. Its naturality and kernel.condition show that each section of L maps into the kernel of the limit map for a. The affine product range identifies H(U) with K(U)^t times L(U). The hypothesis kills the limit image of every generating scalar multiple; additive induction kills all product sections. Apply injectivity of the completed inclusion H to F from the preceding step to conclude that each section of H has zero canonical completion image. This needs only injectivity of completion on inclusions, not a completed-kernel equality or tensor-product flatness.",
+   "text": "Construct the canonical map from sections into their quotient-system limit by the quotient projections. Its naturality and kernel.condition show that each section of L maps into the kernel of the limit map for a. The proved multiplication_range and powers_range helpers in the recursive-power comparison module identify H(U) with K(U)^t times L(U), with a separate identity-range calculation for t=0. The hypothesis kills the limit image of every generating scalar multiple; additive induction kills all product sections. Apply injectivity of the completed inclusion H to F from the preceding step to conclude that each section of H has zero canonical completion image. This needs only injectivity of completion on inclusions, not a completed-kernel equality or tensor-product flatness.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-pc-ideal-data-recursive-power-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Project the zero canonical completion image to level n to make every affine section quotient projection zero. The affine quotient comparison makes this projection surjective, hence every affine quotient section module is zero. For each open W cover W by affine opens contained in W and apply sheaf separatedness to any section and zero. Thus the identity of each positive quotient is zero, proving IsZero. This also covers empty schemes, the unit completion ideal and t=0; no faithfulness is used.",
+   "text": "Project the zero canonical completion image to level n to make every affine section quotient projection zero. The affine quotient comparison makes this projection surjective, hence every affine quotient section module is zero. Apply Scheme.Modules.isZero_of_forall_affineOpens, which proves global vanishing by separatedness on the affine basis. This covers empty schemes, the unit completion ideal and t=0; no faithfulness is used.",
    "uses": [
     "lem-weil-pbc-formal-completion-affine-sections"
    ],
@@ -49,20 +48,19 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-completion-exact-finite-modules",
   "lem-weil-pbc-formal-completion-affine-sections",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-pc-ideal-data-recursive-power-comparison",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R4",
-  "date": "2026-10-13",
+  "group": "S4",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB.",
-  "note": "Implemented the affine calculation using the existing quotient-limit comparison and Mathlib completion injectivity; no tensor flatness or formal affine equivalence needed."
+  "note": "Completed the existing four-step route in Lean: coherence by the locally Noetherian closure theorem; annihilation of the canonical completion images by affine product induction; injectivity for the completed inclusion into F; quotient surjectivity and vanishing on the affine basis. No new statements or holes. The generic affine product/power helpers are imported from the existing recursive-power comparison module, since the original helper modules have become upstream re-export wrappers. This is a generic tool use, not a replacement of a unit step."
  },
  "mathlib_searches": [
   {
@@ -138,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T111919-L-3061700",
+  "landing": "20261016T221625-L-1618851",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

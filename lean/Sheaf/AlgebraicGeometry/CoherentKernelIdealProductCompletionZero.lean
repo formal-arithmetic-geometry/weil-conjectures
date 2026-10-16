@@ -2,14 +2,13 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import all Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import all Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections
 import Mathlib.RingTheory.AdicCompletion.Exactness
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Vanishing of the completion of a coherent kernel's ideal product
 
@@ -207,6 +206,114 @@ theorem coherentKernel_idealProduct_completion_zero
     ∀ n : ℕ, IsZero (formalModuleQuotient I (n + 1)
       (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
         (kernel a.hom))) := by
-  sorry
+  classical
+  have hF := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X F.obj).mp F.property
+  have : F.obj.IsQuasicoherent := hF.1
+  have : F.obj.IsFiniteType := hF.2
+  let L := kernel a.hom
+  let P := (Scheme.idealSheafPower K.toModulesι t).2
+  let H := Scheme.idealModuleProduct P L
+  let i : H ⟶ L := Scheme.idealModuleProductι P L
+  let j : H ⟶ F.obj := i ≫ kernel.ι a.hom
+  have hL : RingedSpace.IsCoherent X.toRingedSpace L :=
+    ((Scheme.Modules.isCoherent_kernel_cokernel_biprod_and_submodule X).1
+      F.obj G.obj F.property G.property).1 a.hom |>.1
+  have : L.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X L).mp hL).1
+  have := Scheme.Modules.idealData_quasicoherent K
+  have := Scheme.Modules.powers_qc K.toModulesι t
+  have : H.IsQuasicoherent := Scheme.Modules.product_qc P L
+  have : Mono i := by dsimp [i, Scheme.idealModuleProductι]; infer_instance
+  have : Mono j := by dsimp [j]; infer_instance
+  have hH : RingedSpace.IsCoherent X.toRingedSpace H :=
+    ((Scheme.Modules.isCoherent_kernel_cokernel_biprod_and_submodule X).2
+      L H i hL inferInstance inferInstance).1
+  refine ⟨hH, ?_⟩
+  have hzero (U : X.affineOpens) (x : Γ(H, U.1)) :
+      completionSectionsUnit I H U x = 0 := by
+    let E := SheafOfModules.evaluation X.ringCatSheaf (op U.1)
+    have : Module.Finite Γ(X, U.1) Γ(F.obj, U.1) :=
+      Scheme.Modules.finite_sections_of_finiteType F.obj U.2
+    have hk (y : Γ(L, U.1)) :
+        completionSectionsUnit I F.obj U ((E.map (kernel.ι a.hom)) y) ∈
+          LinearMap.ker (lim.map (Functor.whiskerRight
+            ((completion X I).map a).hom E)).hom := by
+      change (lim.map (Functor.whiskerRight (formalCompletionMap I a.hom) E))
+        (completionSectionsUnit I F.obj U ((E.map (kernel.ι a.hom)) y)) = 0
+      have hn := ConcreteCategory.congr_hom
+        (completionSectionsUnit_naturality I a.hom U) ((E.map (kernel.ι a.hom)) y)
+      change (lim.map (Functor.whiskerRight (formalCompletionMap I a.hom) E))
+        (completionSectionsUnit I F.obj U ((E.map (kernel.ι a.hom)) y)) =
+          completionSectionsUnit I G.obj U
+            ((E.map a.hom) ((E.map (kernel.ι a.hom)) y)) at hn
+      rw [hn]
+      have he : (E.map a.hom) ((E.map (kernel.ι a.hom)) y) = 0 := by
+        have hc : E.map (kernel.ι a.hom) ≫ E.map a.hom = 0 := by
+          rw [← E.map_comp, kernel.condition, E.map_zero]
+        have hh := ConcreteCategory.congr_hom hc y
+        change (E.map a.hom) ((E.map (kernel.ι a.hom)) y) = 0 at hh
+        exact hh
+      rw [he, map_zero]
+    have hr : i.app U.1 x ∈ K.ideal U ^ t •
+        (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)) := by
+      have hh := Scheme.Modules.multiplication_range P L U
+      have hp : (LinearMap.range (P.val.app (op U.1)).hom : Ideal Γ(X, U.1)) =
+          K.ideal U ^ t := by
+        cases t with
+        | zero =>
+          change LinearMap.range (LinearMap.id : Γ(X, U.1) →ₗ[Γ(X, U.1)] Γ(X, U.1)) =
+            K.ideal U ^ 0
+          simp
+        | succ t => exact Scheme.Modules.powers_range K U (t + 1) (Nat.succ_pos t)
+      dsimp only at hh
+      rw [hp] at hh
+      exact (Set.ext_iff.mp hh _).mp ⟨x, rfl⟩
+    have hz : ∀ y ∈ K.ideal U ^ t • (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)),
+        completionSectionsUnit I F.obj U ((E.map (kernel.ι a.hom)) y) = 0 := by
+      intro y hy
+      refine Submodule.smul_induction_on hy (fun r hr y _ ↦ ?_) (fun y z hy hz ↦ ?_)
+      · change completionSectionsUnit I F.obj U
+          ((E.map (kernel.ι a.hom)).hom (r • y)) = 0
+        rw [map_smul, map_smul]
+        exact congrArg Subtype.val (Module.mem_annihilator.mp (h U hr) ⟨_, hk y⟩)
+      · change completionSectionsUnit I F.obj U
+          ((E.map (kernel.ι a.hom)).hom (y + z)) = 0
+        rw [map_add, map_add, hy, hz, add_zero]
+    apply (completionSections_map_injective I j U)
+    rw [map_zero]
+    have hn := ConcreteCategory.congr_hom (completionSectionsUnit_naturality I j U) x
+    change (lim.map (Functor.whiskerRight (formalCompletionMap I j) E))
+      (completionSectionsUnit I H U x) =
+        completionSectionsUnit I F.obj U ((E.map j) x) at hn
+    rw [hn]
+    exact hz (i.app U.1 x) hr
+  intro n
+  apply Scheme.Modules.isZero_of_forall_affineOpens
+  intro U
+  let E := SheafOfModules.evaluation X.ringCatSheaf (op U.1)
+  obtain ⟨q, _, hq, _⟩ := completionSections_dictionary I H U
+  have hz (x : Γ(H, U.1)) : (E.map (formalModuleQuotientπ I (n + 1) H)) x = 0 := by
+    have hh := ConcreteCategory.congr_hom (completionSectionsUnit_π I H U (op n)) x
+    change (limit.π (formalCompletionSystem I H ⋙ E) (op n))
+      (completionSectionsUnit I H U x) = _ at hh
+    rw [hzero, map_zero] at hh
+    exact hh.symm
+  have hs : Function.Surjective (E.map (formalModuleQuotientπ I (n + 1) H)) := by
+    intro y
+    obtain ⟨z, hz⟩ := (q n).toLinearEquiv.surjective y
+    obtain ⟨x, hx⟩ := (I.ideal U ^ (n + 1) •
+      (⊤ : Submodule Γ(X, U.1) Γ(H, U.1))).mkQ_surjective z
+    refine ⟨x, ?_⟩
+    have hh := ConcreteCategory.congr_hom (hq n) x
+    change (q n).hom ((I.ideal U ^ (n + 1) •
+      (⊤ : Submodule Γ(X, U.1) Γ(H, U.1))).mkQ x) =
+        (E.map (formalModuleQuotientπ I (n + 1) H)) x at hh
+    rw [← hh, hx]
+    exact hz
+  exact ⟨fun x y ↦ by
+    obtain ⟨x, rfl⟩ := hs x
+    obtain ⟨y, rfl⟩ := hs y
+    rw [hz, hz]⟩
 
 end AlgebraicGeometry
