@@ -6,6 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # Point-unit pasting at terminal evaluation
 
