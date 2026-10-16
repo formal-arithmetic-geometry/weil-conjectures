@@ -266,5 +266,23 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-02ff2f3ad (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, both new nodes, the parent quillen-section-rectification Step 1, def-weil-pbc-category-colimit and the blueprint ancestor prop-coef-integral-exceptional-adjoint paragraph 2. I checked them against Ching-Riehl arXiv:1403.5303v2 (jhu.edu gave 403, so I used the arXiv PDF through pdftotext): Def 1.1 on p.2; the Appendix A opening and the sentence giving the dual to AR 2.78 on p.9; Thm A.2 (AR 2.47); the Makkai-Pare 5.1.6 PIE paragraph; Def A.3 on p.10; the three stages of the proof of Prop A.1 and Rem A.4 on pp.10-11. The item statement is true and not weakened (AR 2.78 plus small products), and the parent's colimit-preserving T_0 meets its hypotheses. Ins(T,1) is the correct dual of Ins(1,c). I recomputed every naturality chain in Steps 4-5 (for alpha.eta_p vs 1_p, and alpha.T alpha vs alpha.mu_q, both of type T^2q=>q). I also recomputed the cone, both algebra laws, the mediator and the empty diagram in Steps 6-8; no limit preservation by T is used. The composite-accessibility argument in Step 5 is sound. pie-closure is true (MP 5.1.6, AR 2.67): its weaker definition of accessible functor is equivalent to AR's via sharply larger cardinals, and small products are PIE-limits even though Def A.3 shows only the binary product. completeness-characterization is exactly Thm A.2. Small cases checked: empty products and empty factors, Ins(1,1), the empty equifier, the terminal and empty categories, the identity monad. Both new nodes are statement-only, self-contained, single-escaped, with correct blueprint from/via and all three search kinds. Neither restates a clause of the item. A Mathlib Presentable grep found no leaf. A DAG scan for inserter/equifier/accessible/locally presentable/AR 2.47/2.78 found no duplicate; I read the nearest dozen candidates in full. All citations are in the same unit, so no tool_uses. FIX: the item's split_report.blueprint said 'Steps 3-7' after the renumbering to 9 steps; I corrected it to Steps 3-9 in fixes/dag/nodes/sec-six-functors/lem-coef-accessible-monad-presentability.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4feacd1f",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read the node, the stmt_dep def-weil-pbc-category-colimit, the report (real Worker report and Second reading by Q101 sections), the module, and the Mathlib definitions of IsLocallyPresentable/IsCardinalLocallyPresentable/HasCardinalFilteredGenerator, the pi category, Monad.Algebra and Presentable/Adjunction. Statement matches the node clause by clause: U-small S; categories with U-small Homs and a free object universe u; product local presentability; Monad T; hT = some regular kappa in Cardinal.{w} with preservation of all small kappa-filtered colimits; algebra category locally presentable with all small limits and colimits; no common-cardinal claim. True by Adamek-Rosicky 2.78 plus small products. Edge cases checked: empty or singleton S, identity monad, kappa = aleph0, empty shapes, C s = Type w. Gates pass: no definitions, sorry only, source and blueprint docstrings with all nine proof steps, lean.statement verbatim once, HasLimits import, no line over 100 characters. H4 searches found no existing theorem. nt_compile --json: clean in 1.3 s with no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleMonadPresentability",
+  "file": "lean/Sheaf/CategoryTheory/AccessibleMonadPresentability.lean",
+  "declaration": "CategoryTheory.accessibleMonadPresentability",
+  "statement": "theorem accessibleMonadPresentability (S : Type w) (C : S → Type u) [∀ s, Category.{w} (C s)] [∀ s, IsLocallyPresentable.{w} (C s)] (T : Monad (∀ s, C s)) (hT : ∃ (κ : Cardinal.{w}), ∃ (_ : Fact κ.IsRegular), ∀ (J : Type w) [Category.{w, w} J] [IsCardinalFiltered J κ], PreservesColimitsOfShape J T.toFunctor) : IsLocallyPresentable.{w} (∀ s, C s) ∧ IsLocallyPresentable.{w} T.Algebra ∧ HasLimitsOfSize.{w, w} T.Algebra ∧ HasColimitsOfSize.{w, w} T.Algebra",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
