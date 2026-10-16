@@ -24,9 +24,71 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i:A_i\\to B_i$ in $I$, apply [lem-coef-object-presentability-rank] to $A_i$ in the given locally presentable category. Choose an infinite regular $\\tau_i\\in\\mathcal U$ such that $\\operatorname{Hom}(A_i,-)$ preserves all $\\mathcal U$-small $\\tau_i$-filtered colimits. The ranks may vary with $i$; no single rank is asserted at this point.",
+   "uses": [
+    "lem-coef-object-presentability-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, step 1: objectwise presentability, Mathlib Presentable/LocallyPresentable.lean:93-101."
+   }
+  },
+  {
+   "text": "For each $i\\in I$ take the set $T_i$ of ordinals below the initial ordinal of cardinality $\\tau_i$; its cardinality is $\\tau_i$ and it belongs to $\\mathcal U$. Apply [lem-coef-small-family-regular-bound] to the coproduct $T=\\coprod_{i\\in I}T_i$ indexed by the given small set $I$. Obtain an infinite regular $\\lambda\\in\\mathcal U$ with $|T|<\\lambda$. For each $i$, the map $x\\mapsto(i,x)$ injects $T_i$ into $T$, hence $\\tau_i=|T_i|\\leq |T|<\\lambda$. The same application works when $I$ is empty, because then $T$ is empty.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, step 2: common bound from Mathlib SetTheory/Cardinal/HasCardinalLT.lean:201-206 applied to the disjoint union; the injection of each fibre is explicit."
+   }
+  },
+  {
+   "text": "The ordinal category $\\lambda$ is $\\tau_i$-filtered for each $i$. Indeed, a diagram with fewer than $\\tau_i$ morphisms has fewer than $\\tau_i$ objects, since each object contributes its identity. Its object images are ordinals $\\alpha<\\lambda$. Each such ordinal has cardinality less than $\\lambda$; their union has cardinality less than $\\lambda$ by regularity, since there are fewer than $\\tau_i<\\lambda$ of them. Their supremum is therefore an ordinal $\\beta<\\lambda$ and is an upper bound, so the unique arrows to $\\beta$ form the desired cocone. For the empty diagram choose $0<\\lambda$. By the preservation property obtained in step 1, $\\operatorname{Hom}(A_i,-)$ preserves the colimit of every $\\lambda$-indexed diagram. Thus this holds for every generating domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, step 3: regular-union argument and the definition of filteredness and presentability."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cardinal-small-object-factorization] using the regular cardinal $\\lambda$ and the preservation established in step 3. Its Hom-smallness, smallness of $I$, and existence of all small colimits are exactly hypotheses of this item. All ordinal index categories used here are $\\mathcal U$-small because $\\lambda\\in\\mathcal U$; coproducts over lifting squares are also small, since for fixed $i$ the pairs of maps are a subset of $\\operatorname{Hom}(A_i,X)\\times\\operatorname{Hom}(B_i,Y)$, and $I$ is small. Obtain $Z$, $i_f$ and $p_f$ with $p_f i_f=f$, $i_f\\in L$ and $p_f\\in R$.",
+   "uses": [
+    "lem-coef-cardinal-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, step 4: Mathlib SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,460-473."
+   }
+  },
+  {
+   "text": "For a commutative square $(a,b):f\\to g$, put $m(a,b)=Z(a,b)$. The two naturality equations in [lem-coef-cardinal-small-object-factorization] give $m(a,b)i_f=i_g a$ and $p_g m(a,b)=b p_f$. The identity and composition laws of its functor $Z$ give the required laws for $m$. This is precisely the functoriality in the item.",
+   "uses": [
+    "lem-coef-cardinal-small-object-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, step 5: unpack functorial factorization, Mathlib MorphismProperty/Factorization.lean, FunctorialFactorizationData."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-cardinal-small-object-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: generic small object infrastructure below lem-coef-sheaf-flat-model; the blueprint gives no small-object proof. Written from the displayed Mathlib interfaces and the regular-union argument; Hovey Theorem 2.1.14 and Adamek-Rosicky are WANTED, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,12 +134,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-small-cotorsion-model-recognition",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-presentable-small-object-factorization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. No exact project proof was found. Factored the argument through three Mathlib leaves: every object is presentable, a small family has a regular cardinal bound, and uniform ordinal-chain smallness yields functorial small object factorizations. Wrote the common-cardinal and filtered-ordinal argument explicitly, checked all universes and the empty generating set. No Lean written or compiled.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 before derived inverse limit: infrastructure through the inherited flat-model and small-cotorsion-recognition ancestry; generic smallness tool, no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-85155244c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-85155244c (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, report, unit/chapter route, and cited sources in full. Verified same-universe presentability ranks, the common regular bound, ordinal filteredness, and every small-object class field and functoriality equation. Small cases, duplicate searches, and dependency checks found no fault. Exact master coefficient categories and base-change directions were checked; no comparison theorem is inferred from the seeded route. Review written to review.md; no repairs or tool_uses required."
+ }
 }
