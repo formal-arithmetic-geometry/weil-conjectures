@@ -29,9 +29,157 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-combinatorial-localization-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the small $\\mathbf Z$-dg category $\\mathcal E$ with objects those of $\\mathcal C$ and $\\mathcal E(c,d)=\\bigoplus_{\\mathcal C(d,c)}\\Lambda[0]$, composition induced by composition in $\\mathcal C$ and multiplication in $\\Lambda$. A dg functor $\\mathcal E\\to\\operatorname{Ch}(\\mathbf Z)$ is exactly a presheaf of complexes of $\\Lambda$-modules: the endomorphism $\\lambda\\,1_c$ supplies scalar multiplication, and the basis arrows supply the contravariant restriction maps. This identifies its ordinary category with $\\mathsf M$. Apply the enriched projective-diagram theorem with $\\mathcal N=\\operatorname{Ch}(\\mathbf Z)$, for which that theorem explicitly verifies every hypothesis, including tensor-cell acyclicity. It gives a locally presentable cofibrantly generated projective model, objectwise quasi-isomorphisms and degreewise surjections, the stated lifting characterization of cofibrations, and functorial factorizations. Write $R_c(T)=\\Lambda[\\mathcal C(T,c)]$. Its generating cofibrations are $R_c\\otimes(S^{n+1}\\mathbf Z\\to D^n\\mathbf Z)$ and its generating trivial cofibrations are $0\\to R_c\\otimes D^n\\mathbf Z$. These are small sets since $\\mathcal C$ is small and $n\\in\\mathbf Z$. Notice that $\\Lambda$ need not be projective over $\\mathbf Z$: only the unrestricted diagram-model existence part of the cited theorem is used, not its conditional evaluation-preserves-cofibrations clause.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 2.3, Corollary 3.1, Definition 3.2 and Fact 3.3; agent specialization through the free Lambda-linear dg category"
+   }
+  },
+  {
+   "text": "Every projective cofibration is a degreewise split monomorphism of presheaves. Indeed factor it by the cellular small-object theorem using the generating cofibrations of step 1. Its right factor is a trivial fibration, so the lifting property makes the original cofibration an arrow retract of the cellular left factor. In each degree a pushout of a coproduct of generating maps adds a direct sum of the presheaves $R_c$ to the source. At a limit ordinal the resulting degree is the source plus the direct sum of all complements added earlier; hence the transfinite composite is split injective in that degree. A retract of a split injection is split injective, by composing the splitting with the retract maps. This proves the claim without any assertion that evaluation preserves cofibrations over $\\mathbf Z$.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Fact 3.11; cellular proof of the degreewise split-injection part"
+   }
+  },
+  {
+   "text": "The projective model is left proper. Given a pushout of a quasi-isomorphism $X\\to Y$ along a cofibration $X\\hookrightarrow X'$, step 2 gives degreewise short exact rows $0\\to X\\to X'\\to Q\\to0$ and $0\\to Y\\to Y\\amalg_X X'\\to Q\\to0$. Evaluate at any object of $\\mathcal C$, apply the long exact cohomology sequences, their cited naturality for the displayed morphism of short exact sequences, and the five lemma: the maps on the outside terms are the given cohomology isomorphisms and the identity of $H^*(Q)$, so $X'\\to Y\\amalg_X X'$ is a quasi-isomorphism objectwise. Every object is fibrant since $K\\to0$ is degreewise surjective. The functors $[r]$ and $[-r]$ preserve degreewise surjections and quasi-isomorphisms ($H^n(K[r])=H^{n+r}(K)$), and preserve cofibrations by the following lifting calculation. Given a square from $i[r]$ to an objectwise surjective quasi-isomorphism $p$, apply $[-r]$ to obtain a square from $i$ to $p[-r]$. The latter is again an objectwise surjective quasi-isomorphism, so the cofibration $i$ gives a lift; applying $[r]$ gives a lift in the original square. Replacing $r$ by $-r$ proves the assertion for the inverse shift, hence the projective shift assertion.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Corollary 3.1 and Fact 3.11; long exact sequences: Stacks Tag 0117 (homology-lemma-long-exact-sequence-cochain); five lemma: Tag 05QB (homology-lemma-five-lemma)"
+   }
+  },
+  {
+   "text": "For the model of step 1 choose cofibrant replacements and cosimplicial frames. The frame-mapping theorem identifies their homotopy function complexes naturally with mapping spaces in the coherent localization at $W_{\\mathrm{obj}}$. This is precisely $\\mathbf D(\\mathcal P)$ with the enhancement in the statement; no passage to only $H^0$ or to ordinary Hom-set orthogonality is being made.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Lemma 3.16 and the general cosimplicial-frame comparison; no simplicial enrichment is assumed"
+   }
+  },
+  {
+   "text": "Let $\\mathcal A$ be the category of sieve sheaves of $\\Lambda$-modules. The sieve-sheafification theorem provides an exact left adjoint $a:\\mathcal P\\to\\mathcal A$, identifying sheaves with modules over the associated constant sheaf of rings. Thus $aH^n(K)=H^n(aK)$, since an exact functor preserves kernels, images and cokernels. The sieve-module-sheaf theorem makes $\\mathcal A$ Grothendieck, hence locally presentable. The small-product theorem makes $\\mathcal A^{\\mathbf Z}$ locally presentable. In $\\mathcal P$ filtered colimits and exactness are objectwise; filtered colimits of $\\Lambda$-modules are exact by the module Grothendieck theorem. Apply such a colimit to $0\\to Z^nK\\to K^n\\to B^{n+1}K\\to0$ and $0\\to B^nK\\to Z^nK\\to H^nK\\to0$. Exactness makes $\\operatorname{colim}B^{n+1}K\\to\\operatorname{colim}K^{n+1}$ injective, so the first sequence identifies $\\operatorname{colim}Z^nK$ with the kernel of the differential on $\\operatorname{colim}K$. The first sequence in degree $n-1$ identifies $\\operatorname{colim}B^nK$ with its degree-$n$ boundaries. The second sequence therefore identifies $H^n(\\operatorname{colim}K)$ with $\\operatorname{colim}H^nK$. Since $a$ is a left adjoint, the functor $H:\\mathsf M\\to\\mathcal A^{\\mathbf Z}$, $K\\mapsto(aH^nK)_n$, preserves filtered colimits. All assertions here use covering sieves, not fibre products in the site or subcanonicity.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "lem-cbc-sieve-module-sheaves-grothendieck",
+    "lem-coef-grothendieck-locally-presentable",
+    "lem-coef-accessible-monad-presentability",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definition 5.6 and Remark 5.8; agent accessibility argument using exact sheafification and AB5; Stacks Tag 00DB (algebra-lemma-directed-colimit-exact) for coefficient modules"
+   }
+  },
+  {
+   "text": "The class $W_J$ is an accessible full subcategory of the arrow category of $\\mathsf M$. Put $\\mathcal D=\\mathcal A^{\\mathbf Z}$. Apply the ordinary presheaf local-presentability theorem with indexing category $[1]^{\\mathrm{op}}$ and coefficient category $\\mathcal D$: the latter is locally presentable by step 5 and has pullbacks computed degree by degree because $\\mathcal A$ is abelian. Its conclusion makes the arrow category $\\mathcal D^{[1]}$ locally presentable. The full subcategory $\\operatorname{Iso}(\\mathcal D)\\subseteq\\mathcal D^{[1]}$ is equivalent to $\\mathcal D$ by source and $D\\mapsto1_D$: every isomorphism $f:D\\to E$ is isomorphic as an arrow to $1_D$. Its inclusion preserves all colimits, computed at the two endpoints; in particular a small family generating $\\mathcal D$ under sufficiently filtered colimits supplies such a family of identity arrows generating $\\operatorname{Iso}(\\mathcal D)$, and it is closed under these colimits. Apply accessible arrow inverse image to the filtered-colimit-preserving $H$ of step 5. Its inverse image of $\\operatorname{Iso}(\\mathcal D)$ is exactly $W_J$, by the definition of $H$.",
+   "uses": [
+    "lem-coef-ordinary-presheaf-local-presentability",
+    "lem-coef-accessible-arrow-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Remark 5.8, existence input independent of the hypercover generation theorem; agent Smith-recognition route"
+   }
+  },
+  {
+   "text": "Write $C$ for the projective cofibrations. The class $C\\cap W_J$ is weakly saturated. For a cofibration $i:K\\hookrightarrow L$, step 2 and exact sheafification give a short exact sequence of complexes $0\\to aK\\to aL\\to a\\operatorname{coker}(i)\\to0$. Its long exact sequence says $i\\in W_J$ if and only if $a\\operatorname{coker}(i)$ is acyclic. Any pushout of $i$ is again a cofibration and monomorphism with the same cokernel, so it remains in $W_J$. For a transfinite composite of such maps, use induction on the ordinal: successor stages compose isomorphisms under $H$, and at a nonzero limit use preservation of filtered colimits by $H$ from step 5. Hence each map from the initial stage remains in $W_J$. Cofibrations are closed under these operations by their lifting characterization: for a transfinite composite construct the lift successively and take the compatible lift at limits. Retracts and identities stay in $C\\cap W_J$ by lifting and by the functor $H$. Similarly $W_J$ has two-out-of-three and is retract closed, since isomorphisms do. Finally $W_{\\mathrm{obj}}\\subseteq W_J$, so every projective trivial fibration lies in $W_J$.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definition 5.6 and Remark 5.8; exact-sequence argument using Stacks Tag 0117 (homology-lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "Apply Smith recognition to the underlying complete locally presentable category $\\mathsf M$, $C$ and $W_J$. The class $C$ is the weakly saturated closure of the small generating cofibrations in step 1: the small-object factorization and retract argument of step 2 give one containment, and the lifting argument in step 7 gives the other. Step 6 verifies accessibility, and step 7 verifies weak saturation of $C\\cap W_J$, two-out-of-three and inclusion $C^{\\square}\\subseteq W_J$. The result is a combinatorial model structure $\\mathsf M_J$ with exactly these cofibrations and weak equivalences. Since a projective trivial cofibration belongs to $C\\cap W_J$, the identity from the projective model to $\\mathsf M_J$ is left Quillen. No description of local fibrant objects, hypercover tests or hypercover generation enters this construction.",
+   "uses": [
+    "lem-coef-smith-model-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Remark 5.8 and Theorem 5.7(1)-(2), existence part only; agent recognition proof avoiding Theorem 5.11"
+   }
+  },
+  {
+   "text": "Apply general set Bousfield localization to the left proper combinatorial model obtained in steps 1-3 and to $S=B$. Its unchanged cofibrations, mapping-space definition of local fibrant objects and weak equivalences, left Quillen identity, functorial factorizations and fibrant replacement are exactly the assertions about $\\mathsf M_B$. The homotopy function complexes here are those of the original model, identified in step 4. This use does not require $B$ to consist of cofibrations or have cofibrant endpoints.",
+   "uses": [
+    "lem-cbc-general-bousfield-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definition 5.9 and paragraph before Lemma 5.12; general existence theorem of Barwick 4.7"
+   }
+  },
+  {
+   "text": "Assume $B$ is invariant under every shift up to objectwise quasi-isomorphism of arrows. In $\\mathbf D(\\mathcal P)$, the inverse equivalences $[r]$ and $[-r]$ give $\\operatorname{Map}^h(b,Z[r])\\simeq\\operatorname{Map}^h(b[-r],Z)$. Replacing an arrow by a zigzag of commuting squares with objectwise quasi-isomorphism vertical components preserves this test, since those components become equivalences. The assumption on $B$ therefore makes its local objects invariant under $[r]$ and $[-r]$. For $f\\in W_B$ and local $Z$, the same formula gives $\\operatorname{Map}^h(f[r],Z)\\simeq\\operatorname{Map}^h(f,Z[-r])$, an equivalence. Thus both shifts preserve $W_B$. They already preserve the unchanged cofibrations by step 3, proving the localized shift assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Definition 5.9 and the shift argument in the proof of Theorem 5.7; explicit mapping-space calculation"
+   }
+  },
+  {
+   "text": "Suppose $B\\subseteq W_J$. For the left Quillen identity $F:\\mathsf M\\to\\mathsf M_J$ of step 8, compute $LF(b)$ by projective cofibrant replacement. The replacement maps lie in $W_{\\mathrm{obj}}\\subseteq W_J$, so two-out-of-three shows that the replaced arrow $Qb$ belongs to $W_J$ and its image in the homotopy category of $\\mathsf M_J$ is invertible. The universal property of general set Bousfield localization now gives the left Quillen identity $\\mathsf M_B\\to\\mathsf M_J$. To get inclusion on all weak equivalences, rather than only those between cofibrant objects, factor any $f\\in W_B$ in $\\mathsf M_B$ as a cofibration $i$ followed by a trivial fibration $p$. Two-out-of-three makes $i$ a trivial cofibration, hence its image in $\\mathsf M_J$ is trivial. The trivial fibrations in both localized models and the original model are exactly $C^{\\square}$, because their cofibrations agree; thus $p\\in W_{\\mathrm{obj}}\\subseteq W_J$. Consequently $f=pi\\in W_J$, as required.",
+   "uses": [
+    "lem-cbc-general-bousfield-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Set-localization universal property (Barwick Definition 4.2 and Theorem 4.7), used in Choudhury--Gallauer before Lemma 5.12"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-projective-diagram-model",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-five-lemma",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-cbc-sieve-module-sheafification",
+  "lem-cbc-sieve-module-sheaves-grothendieck",
+  "lem-coef-grothendieck-locally-presentable",
+  "lem-coef-accessible-monad-presentability",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-coef-ordinary-presheaf-local-presentability",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-smith-model-recognition",
+  "lem-cbc-general-bousfield-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1511.02828",
+  "place": "Corollary 3.1 and Theorem 5.7(1)-(2), Remark 5.8, Definition 5.9, paragraph before Lemma 5.12; agent Smith-recognition proof of the independent cohomology-sheaf-model existence input. Paper read online but not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +215,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (Z : C)\\n  [inst_1 : CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_2 : CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₂]\\n  [inst_3 :\", \"doc\": \"In a category $\\\\mathcal{C}$ with sufficient colimits, for a morphism property $W$ and an object $Z$, the successor object $\\\\text{succ}(W,Z)$ constructed in the orthogonal reflection process is local w\"}\n  {\"name\": \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [F.Full] [F.Faithful],\\n  G.IsLocalization (CategoryTheory.ObjectProperty.isLocal fun x => \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adjunction $G \\\\dashv F$, if $F$ is fully faithful, the\"}\n  {\"name\": \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (Z : C)\\n  [inst_1 : CategoryTheory.Limits.HasPushouts C]\\n  [inst_2 : ∀ (Z : C), CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_3 : ∀ (Z : C), CategoryTheory.Limit\", \"doc\": \"The reflection object constructed via transfinite iteration of the successor structure $\\\\Phi$, indexed by the ordinal corresponding to cardinal $\\\\kappa$, satisfies the local property with respect to t\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.LeftHomotopyRel.FactorsThroughLocalization (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"In a category equipped with weak equivalences, any two morphisms that are left homotopic become equal in the localization of the category at the weak equivalences. This means their images coincide in \"}\n  {\"name\": \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {W : CategoryTheory.MorphismProperty C} (Z : C)\\n  [inst_1 : CategoryTheory.Limits.HasPushouts C]\\n  [inst_2 : ∀ (Z : C), CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_3 : ∀ (Z : C), CategoryTheory.Limit\", \"doc\": \"The reflection object constructed via transfinite iteration indexed by the cardinal $\\\\kappa$ is local with respect to the morphism property $W$, meaning that for every $W$-morphism $f : X \\\\to Y$, the \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the cochain model hits are the bounded-below injective model CochainComplex.Plus, not unbounded projective presheaves or the cohomology-sheaf local model. Read CategoryTheory/Localization/Bousfield.lean:13-57: its orthogonality uses ordinary Hom-set bijections, not homotopy function complexes or localized model factorizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded complexes of module presheaves have the projective model structure and the local model structure detected by all sheafified cohomology groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsKProjective\", \"doc\": \"The cochain complex constructed from a projective resolution in an abelian category satisfies the K-projective property, meaning it is acyclic and has lifting properties with respect to quasi-isomorph\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.ProjectiveResolution X) (n : ℤ),\\n  CategoryTheory.Projective (R.cochainComplex.X n)\", \"doc\": \"For every integer $ n $, the object $ X_n $ in the cochain complex constructed from the projective resolution $ R $ is projective. This cochain complex extends the chain complex of $ R $ by embedding \"}\n  {\"name\": \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ),\\n  K.IsKProjective ↔\\n    (HomotopyCategory.subcategoryAcyclic C).leftOrthogonal ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)\", \"doc\": \"A cochain complex $ K $ in an abelian category is K-projective if and only if it is left orthogonal to the full subcategory of acyclic complexes in the homotopy category, meaning every morphism from $\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsGE 0\", \"doc\": \"The cochain complex constructed from a projective resolution via the embedding of natural number indices into integers is supported in non-negative degrees. Specifically, for any projective resolution\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CochainComplex.isKProjective_of_op\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K : CochainComplex C ℤ},\\n  ((CochainComplex.opEquivalence C).functor.obj (Opposite.op K)).IsKInjective → K.IsKProjective\", \"doc\": \"If the opposite of a cochain complex $ K $ in an abelian category $ \\\\mathcal{C} $ is K-injective in $ \\\\mathcal{C}^\\\\text{op} $, then $ K $ is K-projective in $ \\\\mathcal{C} $.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: K-projective resolutions and ordinary derived localizations do not supply a model structure on unbounded presheaf complexes. The model-category hits in Algebra/Homology/ModelCategory/Injective.lean:39-58 concern bounded-below Plus complexes with injective fibrations. Bousfield.lean:13-57 and Abelian/SerreClass/Bousfield.lean:13-24 concern Hom-set orthogonality, not homotopy function complexes or new model factorizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"CochainComplex\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5a\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) [CategoryTheory.EnoughInjectives C] (n : ℤ) [K.IsStrictlyGE n] : ∃ L i, ∃ (_ : QuasiIso i) (_ : ∀ (n : ℤ), CategoryTheory.Injective (L.X n)), L.IsStrictlyGE n\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5a\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) [CategoryTheory.EnoughInjectives C] (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁ := by lia) [K.IsStrictlyGE n₁] : ∃ L i, ∃ (_ : CategoryTheory.Mono i) (_ : QuasiIso i) (_ : ∀ (n : ℤ), CategoryTheory.Injective \", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5a\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} (f : K ⟶ L) [CategoryTheory.EnoughInjectives C] (n : ℤ) [K.IsStrictlyGE (n + 1)] [L.IsStrictlyGE n] : ∃ K', ∃ (_ : K'.IsStrictlyGE n), ∃ ι π, CategoryTheory.Mono ι ∧ QuasiIso ι ∧ CochainCompl\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5a\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} (f : K ⟶ L) [CategoryTheory.EnoughInjectives C] (n : ℤ) [K.IsStrictlyGE n] [L.IsStrictlyGE n] [CategoryTheory.Mono f] : ∃ K', ∃ (_ : K'.IsStrictlyGE n), ∃ ι π, CategoryTheory.Mono ι ∧ QuasiIs\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : HomotopicalAlgebra.CategoryWithCofibrations (CochainComplex.Plus C)\", \"doc\": \"The cofibrations in the category `CochainComplex.Plus C` of bounded\\nbelow cochain complexes are monomorphisms. \"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : HomotopicalAlgebra.CategoryWithFibrations (CochainComplex.Plus C)\", \"doc\": \"The fibrations in the category `CochainComplex.Plus C` of bounded\\nbelow cochain complexes are the morphisms that are degreewise epi with\\nan injective kernel. \"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : HomotopicalAlgebra.CategoryWithWeakEquivalences (CochainComplex.Plus C)\", \"doc\": \"The weak equivalences in the category `CochainComplex.Plus C` of bounded\\nbelow cochain complexes are quasi-isomorphisms. \"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] [CategoryTheory.EnoughInjectives C] : HomotopicalAlgebra.ModelCategory (CochainComplex.Plus C)\", \"doc\": \"The Quillen model category structure on the category `CochainComplex.Plus C`\\nof bounded below cochain complexes in an abelian category `C` with enough injectives. \"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instHasTwoOutOfThreePropertyWeakEquivalences\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : (HomotopicalAlgebra.weakEquivalences (CochainComplex.Plus C)).HasTwoOutOfThreeProperty\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : (HomotopicalAlgebra.cofibrations (CochainComplex.Plus C)).IsStableUnderRetracts\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instIsStableUnderRetractsFibrations\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : (HomotopicalAlgebra.fibrations (CochainComplex.Plus C)).IsStableUnderRetracts\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.modelCategoryQuillen.instIsStableUnderRetractsWeakEquivalences\", \"module\": \"Mathlib.Algebra.Homology.ModelCategory.Injective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{u_2, u_1} C] [CategoryTheory.Abelian C] : (HomotopicalAlgebra.weakEquivalences (CochainComplex.Plus C)).IsStableUnderRetracts\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: K-projective resolutions and ordinary derived localizations do not supply a model structure on unbounded presheaf complexes. The model-category hits in Algebra/Homology/ModelCategory/Injective.lean:39-58 concern bounded-below Plus complexes with injective fibrations. Bousfield.lean:13-57 and Abelian/SerreClass/Bousfield.lean:13-24 concern Hom-set orthogonality, not homotopy function complexes or new model factorizations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ousfield|[Ll]ocal.*[Mm]odel|[Mm]odel.*[Pp]resheaf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"line\": \"27\", \"text\": \"to define only local instances of `ModelCategory`, or to set these instances on type synonyms.\"}\n  {\"file\": \"Mathlib/Condensed/Light/Small.lean\", \"line\": \"52\", \"text\": \"    (equivSmallModel LightProfinite.{u}).op.congrLeft.inverse ⋙ presheafToSheaf _ _ ⋙\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"line\": \"19\", \"text\": \"(In the file `Mathlib/CategoryTheory/Localization/Bousfield.lean`, it is shown that this is\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"line\": \"44\", \"text\": \"(See the file `Mathlib/CategoryTheory/Localization/Bousfield.lean` for the \\\"dual\\\" construction\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"line\": \"57\", \"text\": \"(See the file `Mathlib/CategoryTheory/Localization/Bousfield.lean` for the \\\"dual\\\" construction\"}\n  {\"file\": \"Mathlib/ModelTheory/Algebra/Field/Basic.lean\", \"line\": \"132\", \"text\": \"attribute [local instance] fieldOfModelField\"}\n  {\"file\": \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"line\": \"114\", \"text\": \"    LocallySmall.{w'} (SmallModel.{w} C) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"line\": \"115\", \"text\": \"  (locallySmall_congr (equivSmallModel.{w} C)).1 inferInstance\"}\n  {\"file\": \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"line\": \"128\", \"text\": \"  (locallySmall_congr (equivSmallModel C)).mpr (CategoryTheory.locallySmall_self _)\"}\n  {\"file\": \"Mathlib/ModelTheory/Algebra/Ring/Basic.lean\", \"line\": \"38\", \"text\": \"you must add local instances with definitions like `ModelTheory.Field.fieldOfModelField K` and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Opposite.lean\", \"line\": \"59\", \"text\": \"  IsLocalization.of_equivalence_target W.Q.op W.op L.op (Localization.equivalenceFromModel L W).op\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Opposite.lean\", \"line\": \"60\", \"text\": \"    (NatIso.op (Localization.qCompEquivalenceFromModelFunctorIso L W).symm)\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Bousfield\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Localization.BousfieldTransfiniteComposition\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"349\", \"text\": \"compositions of morphisms in `LeftBousfield.W W.isLocal`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"13\", \"text\": \"# Bousfield localization\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"20\", \"text\": \"(This construction is part of the left Bousfield localization\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"32\", \"text\": \"* https://ncatlab.org/nlab/show/left+Bousfield+localization+of+model+categories\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"46\", \"text\": \"/-! ### Left Bousfield localization -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"line\": \"55\", \"text\": \"is the left Bousfield localization of model categories.) -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Bousfield\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Bousfield\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield.lean\", \"line\": \"12\", \"text\": \"# Bousfield localizations with respect to Serre classes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield.lean\", \"line\": \"21\", \"text\": \"(We also translate this in terms of a left Bousfield localization.)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"line\": \"16\", \"text\": \"A smooth manifold is a topological space `M` locally modelled on a Euclidean space (or a Euclidean\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: K-projective resolutions and ordinary derived localizations do not supply a model structure on unbounded presheaf complexes. The model-category hits in Algebra/Homology/ModelCategory/Injective.lean:39-58 concern bounded-below Plus complexes with injective fibrations. Bousfield.lean:13-57 and Abelian/SerreClass/Bousfield.lean:13-24 concern Hom-set orthogonality, not homotopy function complexes or new model factorizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Model structure on unbounded presheaf cochain complexes localized at sheaf cohomology isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": CochainComplex C ℤ ⥤ DerivedCategory C\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": (HomotopyCategory.quotient C c ⋙ Qh).IsLocalization (HomologicalComplex.quasiIso C c)\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category and the functor $ Q_h $ to the derived category forms a localization at quasi-isomorphisms. This e\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [(HomologicalComplex.quasiIso C c).HasLocalizati\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"ComplexShape.quotient_isLocalization\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": (HomotopyCategory.quotient C c).IsLocalization (HomologicalComplex.homotopyEquivalences _ _)\", \"doc\": \"The canonical quotient functor from the category of chain complexes in a preadditive category $ C $ with shape $ c $ to its homotopy category is a localization with respect to homotopy equivalences.\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplex C c ⥤ HomologicalComplexUpToQuasiIso C c\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The functor $ Q_h $ from the homotopy category of integer-indexed chain complexes to the derived category is a localization with respect to quasi-isomorphisms. This means $ Q_h $ universally inverts q\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: K-projective resolutions and ordinary derived localizations do not supply a model structure on unbounded presheaf complexes. The model-category hits in Algebra/Homology/ModelCategory/Injective.lean:39-58 concern bounded-below Plus complexes with injective fibrations. Bousfield.lean:13-57 and Abelian/SerreClass/Bousfield.lean:13-24 concern Hom-set orthogonality, not homotopy function complexes or new model factorizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaf equivalences and projective unbounded module presheaf model categories with all objects fibrant and integer shift Quillen equivalences",
+   "results": "[leanfinder] OK 8 hit(s); log top hits: [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.isKProjective_iff_of_iso\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned K-projective, HomComplex and shift invariance lemmas do not assert the unbounded projective or sheaf-local model structures."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hypercover-localization-generation",
@@ -78,5 +261,84 @@
   "group": "Q126"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-dg-presheaf-model-localizations",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the projective model from the existing dg-diagram theorem, checked left properness through split monomorphisms, and proved the independent cohomology-sheaf model via accessibility and Smith recognition. Added one nonsimplicial general Bousfield theorem; proved shifts and inclusion in W_J explicitly. Checked source, arbitrary sieve sites and non-Z-flat coefficient rings; no hypercover-generation conclusion was used.",
+  "blueprint": "Current main-20261015 proof opening 'Choose a compactification c=(j,p)': supporting arbitrary-site enhanced-descent foundation, through the inherited bounded-below hypersheaf/model-localization chain. Steps 1-4 give the projective base model; steps 5-8 its independent sheaf-cohomology localization; steps 9-11 set localization, shifts and comparison. The compactification route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-enriched-projective-diagram-model",
+    "why": "Transfers the model on Ch(Z) to modules over the free Lambda-linear small dg category; generic diagram theorem, not a compact-support base-change route replacement."
+   },
+   {
+    "node": "lem-coef-presentable-cellular-factorization",
+    "why": "Gives a cellular factorization used to prove cofibrations are split degreewise monomorphisms; no node of this unit supplies the general small-object theorem."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic long exact cohomology sequences prove left properness and stability of local trivial cofibrations."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Generic abelian five lemma used after the two short exact pushout sequences; the unit has no separate five-lemma theorem."
+   },
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Identifies homotopy function complexes with coherent localized mapping spaces without assuming a simplicial enrichment."
+   },
+   {
+    "node": "lem-coef-grothendieck-locally-presentable",
+    "why": "Converts Grothendieck sieve sheaves to the locally presentable coefficient category needed for accessibility."
+   },
+   {
+    "node": "lem-coef-accessible-monad-presentability",
+    "why": "Only its small-product clause is used for the category of all cohomology sheaves indexed by Z."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Only exact filtered colimits of modules is used, objectwise, in the accessibility and transfinite arguments."
+   },
+   {
+    "node": "lem-coef-ordinary-presheaf-local-presentability",
+    "why": "Makes the arrow category of a locally presentable abelian coefficient category locally presentable."
+   },
+   {
+    "node": "lem-coef-accessible-arrow-inverse-image",
+    "why": "Pulls the accessible class of isomorphisms back along all sheafified cohomology groups."
+   },
+   {
+    "node": "lem-coef-smith-model-recognition",
+    "why": "General model recognition proves existence of the sheaf-cohomology model without hypercover generation."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "Provides the commutative long exact cohomology ladder required for the five-lemma proof of left properness; exact-sequence existence alone does not assert naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-enriched-projective-diagram-model",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-grothendieck-locally-presentable",
+  "lem-coef-accessible-monad-presentability",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-coef-ordinary-presheaf-local-presentability",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-smith-model-recognition",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-c2eb18e27",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-c2eb18e27 (reviewer sub-agent of L); spot-checked: Read the item, all 11 steps, every cited node's statement, and the new node in full. Sources were fetched read-only to /tmp. Choudhury-Gallauer arXiv 1511.02828: Cor 3.1, Def 3.2, Fact 3.3, Fact 3.11, Def 5.6, Thm 5.7 and its proof, Rem 5.8, Def 5.9, the paragraph before Lem 5.12. Barwick: Def 4.2, Thm 4.7 and its proof, pp. 42-44. The statement is preserved and matches the source hypothesis by hypothesis; no target is weakened. Step 1: the free Lambda-linear dg category gives exactly the Lambda-module presheaf complexes, and the generators match Fact 3.3; the evaluation clause, which needs cofibrant Hom complexes over Z, is correctly avoided. Step 2: cellular retract argument gives degreewise split monos (Fact 3.11). Step 3: left properness via the long exact sequence ladder and the five lemma; shift lifting transport is correct. Step 4: frame mapping needs no simplicial enrichment. Steps 5-6: exact sheafification and AB5 make H preserve filtered colimits; W_J = H^{-1}(Iso), which is accessible. Step 7: C cap W_J is weakly saturated, using i in W_J iff a(coker i) is acyclic. Step 8: Smith hypotheses (i)-(v) each matched; this replaces the citation of Ayoub in Rem 5.8 and avoids Thm 5.11, so there is no cycle. Steps 9 and 11: the new node is exactly Barwick 4.7 plus the Def 4.2.1 universal property; W_B in W_J follows from factoring through C^square in W_obj. Step 10: elementary shift calculation. New node: B1-B7 pass; the DAG scan for left proper/Bousfield finds only simplicial or existence-assuming variants, so it is not a duplicate and not a restatement of an item clause. All ids exist and none is merged; the transitive check finds no cycle; no SGA is cited. Small cases checked: empty site, Lambda=0, terminal site, empty-sieve topology, Lambda=Z/2, B empty. The declared tool_uses are accepted. No fixes were made."
+ }
 }

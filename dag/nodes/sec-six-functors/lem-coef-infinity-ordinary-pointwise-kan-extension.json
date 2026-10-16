@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-infinity-ordinary-pointwise-kan-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent-diagram foundations for its rectification comparison; pointwise left kan extensions of coherent ordinary-indexed diagrams.",
+   "via": [
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointwise left Kan extensions of coherent ordinary-indexed diagrams",
+ "statement": "Use universes, nerves, quasicategories, coherent functor categories, transformations, mapping spaces and colimits of [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal U$ be a universe, $u:A\\to J$ a functor between $\\mathcal U$-small ordinary categories, and $\\mathcal B$ a quasicategory admitting all $\\mathcal U$-small colimits. The quasicategory $\\mathcal B$ may lie in a larger universe and need not have $\\mathcal U$-small mapping spaces. Precomposition $u^*:\\operatorname{Fun}(N(J),\\mathcal B)\\to\\operatorname{Fun}(N(A),\\mathcal B)$ has a left adjoint $u_!$, meaning a coherent functor and unit inducing natural equivalences of whole mapping spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(J),\\mathcal B)}(u_!F,G)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(A),\\mathcal B)}(F,u^*G).$$\nFor $j\\in J$, define $(u\\downarrow j)$ to have objects $(a,\\alpha:u(a)\\to j)$ and morphisms $r:(a,\\alpha)\\to(a',\\alpha')$ with $\\alpha=\\alpha' u(r)$. There are coherent natural equivalences\n$$(u_!F)(j)\\simeq\\operatorname{colim}_{(a,\\alpha)\\in N(u\\downarrow j)}F(a).$$\nThe structure maps in $j$ are induced by postcomposition of $\\alpha$, and the unit at $a$ is the colimit leg indexed by $(a,1_{u(a)})$. These formulas and the adjunction hold with arbitrary coherent simplicial parameters in any containing universe: postcomposition by $u_!$ is left adjoint to postcomposition by $u^*$ on the corresponding parameter functor categories, compatibly with evaluation and restriction of parameters. For a natural transformation $\\theta:u\\to v$ between ordinary functors $A\\to J$, the maps $(v\\downarrow j)\\to(u\\downarrow j)$, $(a,\\alpha)\\mapsto(a,\\alpha\\theta_a)$, give a transformation $v_!\\to u_!$. Its adjoint mate is $u^*\\to v^*$ induced by $\\theta$, and these transformations are coherent under identities, composition and higher simplices of $N\\operatorname{Fun}(A,J)$.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 6.4.9, printed p. 298, applied to the opposite target; Theorem 6.1.22, printed pp. 273-274, for parameters. Enlarge to a universe containing B before applying the local-smallness hypothesis of Proposition 6.4.9; only the displayed U-small comma colimits are required, not all colimits in the enlarged universe. The comma maps in the last clause give the adjoint mates of restriction transformations. Read online, July 30 2026 revision; archival copy WANTED. No Stacks tag states this quasicategorical theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left Kan extension along any functor between small ordinary indexing categories exists in a cocomplete quasicategory and is computed on comma categories",
+   "results": "{\"t\": \"2026-10-16T21:24:49Z\", \"tool\": \"leanfinder\", \"query\": \"Left Kan extension along any functor between small ordinary indexing categories exists in a cocomplete quasicategory and is computed on comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"CategoryTheory.Functor.instIsLeftKanExtensionObjLanAppLanUnit\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Functor.instHasLeftKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"92cb2eeb2b447e5f\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103. The returned pointwiseLeftKanExtension, leftKanExtensionObjIsoColimit and lanAdjunction are for ordinary categories with Hom sets, not coherent diagrams into a quasicategory. StrictSegal search hits concern ordinary nerves. The grep restricted to AlgebraicTopology/Quasicategory returned zero hits. No declaration has the stated coherent mapping-space adjunction and arbitrary higher parameters."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise left Kan extension adjunction of coherent diagrams with comma category colimit formula",
+   "results": "{\"t\": \"2026-10-16T21:24:50Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise left Kan extension adjunction of coherent diagrams with comma category colimit formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\", \"CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc\", \"CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension.congr_simp\"], \"digest\": \"72827639f9f8ea65\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103. The returned pointwiseLeftKanExtension, leftKanExtensionObjIsoColimit and lanAdjunction are for ordinary categories with Hom sets, not coherent diagrams into a quasicategory. StrictSegal search hits concern ordinary nerves. The grep restricted to AlgebraicTopology/Quasicategory returned zero hits. No declaration has the stated coherent mapping-space adjunction and arbitrary higher parameters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T21:24:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasLeftKanExtension\", \"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.isLeftKanExtensionId\", \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.leftKanExtensionUnit\", \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\"], \"digest\": \"f1f77bc0e11f1150\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103. The returned pointwiseLeftKanExtension, leftKanExtensionObjIsoColimit and lanAdjunction are for ordinary categories with Hom sets, not coherent diagrams into a quasicategory. StrictSegal search hits concern ordinary nerves. The grep restricted to AlgebraicTopology/Quasicategory returned zero hits. No declaration has the stated coherent mapping-space adjunction and arbitrary higher parameters."
+  },
+  {
+   "tool": "grep",
+   "query": "leftKanExtension|LeftKanExtension",
+   "results": "{\"t\": \"2026-10-16T21:24:51Z\", \"tool\": \"grep\", \"query\": \"leftKanExtension|LeftKanExtension\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103. The returned pointwiseLeftKanExtension, leftKanExtensionObjIsoColimit and lanAdjunction are for ordinary categories with Hom sets, not coherent diagrams into a quasicategory. StrictSegal search hits concern ordinary nerves. The grep restricted to AlgebraicTopology/Quasicategory returned zero hits. No declaration has the stated coherent mapping-space adjunction and arbitrary higher parameters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise left Kan extension along ordinary functors in infinity categories computed by comma category colimits",
+   "results": "{\"t\": \"2026-10-16T21:40:22Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise left Kan extension along ordinary functors in infinity categories computed by comma category colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\", \"CategoryTheory.Functor.instIsLeftKanExtensionPointwiseLeftKanExtensionPointwiseLeftKanExtensionUnit\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.isLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.instHasLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\"], \"digest\": \"089fdf2f0fa799b1\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103: pointwiseLeftKanExtension and leftKanExtensionObjIsoColimit assume ordinary Category instances and ordinary Hom sets. The second phrasing returned the same ordinary pointwise Kan-extension API or ordinary colimit adjunctions. The Quasicategory grep returned no hits. This is not a one-line specialization to coherent diagrams in arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pointwiseLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T21:40:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"pointwiseLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.instIsClosedUnderIsomorphismsIsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt\"], \"digest\": \"559c032502761542\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103: pointwiseLeftKanExtension and leftKanExtensionObjIsoColimit assume ordinary Category instances and ordinary Hom sets. The second phrasing returned the same ordinary pointwise Kan-extension API or ordinary colimit adjunctions. The Quasicategory grep returned no hits. This is not a one-line specialization to coherent diagrams in arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction on coherent diagram categories admits left adjoint computed by comma colimits",
+   "results": "{\"t\": \"2026-10-16T21:40:22Z\", \"tool\": \"leansearch\", \"query\": \"Restriction on coherent diagram categories admits left adjoint computed by comma colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Comma.hasColimitsOfSize\", \"CategoryTheory.Comma.hasColimit\", \"CategoryTheory.isLeftAdjoint_iff_hasTerminal_costructuredArrow\", \"CategoryTheory.Comma.preservesColimitsOfShape_fst\", \"CategoryTheory.Comma.hasColimitsOfShape\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\"], \"digest\": \"62f5c3f51a9de10c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63 and Adjunction.lean:33-103: pointwiseLeftKanExtension and leftKanExtensionObjIsoColimit assume ordinary Category instances and ordinary Hom sets. The second phrasing returned the same ordinary pointwise Kan-extension API or ordinary colimit adjunctions. The Quasicategory grep returned no hits. This is not a one-line specialization to coherent diagrams in arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to restriction of simplicial diagrams in a quasicategory with comma indexed colimits",
+   "results": "{\"t\": \"2026-10-16T21:54:10Z\", \"tool\": \"leanfinder\", \"query\": \"Left adjoint to restriction of simplicial diagrams in a quasicategory with comma indexed colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"f768e04c8e61d802\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Pointwise.lean:39-63 and Adjunction.lean:37-84 use ordinary Category instances; Subdivision.lean:35-75 constructs ordinary Kan extension in the category of simplicial sets, not coherent Kan extension in an arbitrary quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanExtension\"",
+   "results": "{\"t\": \"2026-10-16T21:54:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasLeftKanExtension\", \"CategoryTheory.Functor.HasRightKanExtension\", \"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.isLeftKanExtensionId\", \"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\"], \"digest\": \"ee8f435ee671fb7c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Pointwise.lean:39-63 and Adjunction.lean:37-84 use ordinary Category instances; Subdivision.lean:35-75 constructs ordinary Kan extension in the category of simplicial sets, not coherent Kan extension in an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "edgewise|twisted|KanExtension",
+   "results": "{\"t\": \"2026-10-16T21:54:08Z\", \"tool\": \"grep\", \"query\": \"edgewise|twisted|KanExtension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"cc269d18b6e7a65b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Pointwise.lean:39-63 and Adjunction.lean:37-84 use ordinary Category instances; Subdivision.lean:35-75 constructs ordinary Kan extension in the category of simplicial sets, not coherent Kan extension in an arbitrary quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity category admitting colimits restriction along nerves has a pointwise left Kan extension",
+   "results": "{\"t\": \"2026-10-16T21:55:38Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category admitting colimits restriction along nerves has a pointwise left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.instIsLeftKanExtensionPointwiseLeftKanExtensionPointwiseLeftKanExtensionUnit\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtension\"], \"digest\": \"19577f39942be8f5\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Pointwise.lean:39-63 and Adjunction.lean:37-84 use ordinary Category instances; Subdivision.lean:35-75 constructs ordinary Kan extension in the category of simplicial sets, not coherent Kan extension in an arbitrary quasicategory."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-diagram-coyoneda",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

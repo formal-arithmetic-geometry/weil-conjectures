@@ -19,19 +19,119 @@
  },
  "kind": "statement",
  "title": "Marked model structures for ordinary and generalized nonsymmetric operads",
- "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid]. Use the ordinary and generalized nonsymmetric infinity operads of [lem-coef-operadic-algebra-presentability]. Use model categories, weak equivalences, cofibrations, fibrations, and Quillen adjunctions as in [lem-coef-model-infinity-derived-adjunction]. A marked simplicial set is a simplicial set with a collection of marked edges containing every degenerate edge. Let $I$ be the inert arrows of $\\Delta^{\\mathrm{op}}$, opposite to inclusions of consecutive subintervals. On marked simplicial sets over $(\\Delta^{\\mathrm{op}},I)$ there are ordinary and generalized operadic model structures. Both have monomorphisms as cofibrations, hence every object is cofibrant; their fibrant objects are respectively ordinary and generalized nonsymmetric infinity operads with precisely their inert cocartesian arrows marked. Their associated infinity categories are the corresponding infinity categories of operads and inert-preserving functors. The identity adjunction from the generalized structure to the ordinary structure is left Quillen. Both structures are enriched, tensored, and cotensored over the categorical model structure on marked simplicial sets; the identity adjunction respects this enrichment. Here categorical weak equivalence means equivalence of the represented infinity categories. For a cofibration $i:A\\to B$ and a fibrant target $P$, enriched restriction $\\underline{\\operatorname{Hom}}(B,P)\\to\\underline{\\operatorname{Hom}}(A,P)$ is a fibration and is a categorical weak equivalence if $i$ is a trivial cofibration. For generalized fibrant operads $M,P$ (including an ordinary fibrant target $P$), the represented enriched Hom infinity category is the full infinity category $\\operatorname{Alg}_M(P)$ of inert-preserving functors and coherent transformations, rather than merely its core.",
+ "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid]. Use ordinary nonsymmetric infinity operads from [lem-coef-nonsymmetric-operads-presentability]. Here a generalized nonsymmetric infinity operad is an inner fibration $q:M\\to N(\\Delta^{\\mathrm{op}})$ admitting cocartesian lifts of all inert arrows and satisfying the following incidence conditions. Let $D_n$ be the finite category of inert maps $\\alpha:[n]\\to[i]$, $i\\in\\{0,1\\}$, with arrows the inert factorizations between their targets. The fiber comparison $M_{[n]}\\to\\lim_{\\alpha\\in D_n}M_{[i]}$ is an equivalence; and for every $x\\in M_{[m]}$, $y\\in M_{[n]}$, base arrow $\\phi:[m]\\to[n]$ and chosen cocartesian projection diagram $y\\to y_\\alpha$, the comparison $\\operatorname{Map}^{\\phi}_M(x,y)\\to\\lim_{\\alpha\\in D_n}\\operatorname{Map}^{\\alpha\\phi}_M(x,y_\\alpha)$ is an equivalence. Mapping superscripts denote fibers over the indicated base arrows. No condition that $M_{[0]}$ is a space is imposed; when $n=0$, $D_0$ is the one-object identity category. Use model categories, weak equivalences, cofibrations, fibrations, and Quillen adjunctions as in [lem-coef-model-infinity-derived-adjunction]. A marked simplicial set is a simplicial set with a collection of marked edges containing every degenerate edge. Let $I$ be the inert arrows of $\\Delta^{\\mathrm{op}}$, opposite to inclusions of consecutive subintervals. On marked simplicial sets over $(\\Delta^{\\mathrm{op}},I)$ there are ordinary and generalized operadic model structures. Both have monomorphisms as cofibrations, hence every object is cofibrant; their fibrant objects are respectively ordinary and generalized nonsymmetric infinity operads with precisely their inert cocartesian arrows marked. Their associated infinity categories are the corresponding infinity categories of operads and inert-preserving functors. The identity adjunction from the generalized structure to the ordinary structure is left Quillen. Both structures are enriched, tensored, and cotensored over the categorical model structure on marked simplicial sets; the identity adjunction respects this enrichment. Here categorical weak equivalence means equivalence of the represented infinity categories. For a cofibration $i:A\\to B$ and a fibrant target $P$, enriched restriction $\\underline{\\operatorname{Hom}}(B,P)\\to\\underline{\\operatorname{Hom}}(A,P)$ is a fibration and is a categorical weak equivalence if $i$ is a trivial cofibration. For generalized fibrant operads $M,P$ (including an ordinary fibrant target $P$), the represented enriched Hom infinity category is the full infinity category $\\operatorname{Alg}_M(P)$ of inert-preserving functors and coherent transformations, rather than merely its core.",
  "source": {
   "document": "https://arxiv.org/html/1312.3178",
   "place": "Theorem 3.2.5; Corollary 3.2.6; Definition 3.2.9; Remark 3.2.12; Proposition 3.2.13. The enriched model axiom is included, not only the ordinary mapping-space adjunction. Read online; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-operadic-algebra-presentability",
-  "lem-coef-model-infinity-derived-adjunction"
+  "lem-coef-nonsymmetric-operads-presentability",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the two cone families explicitly. Let $E_n$ be the discrete set of the $n$ inert projections $\\rho_i:[n]\\to[1]$, $1\\leq i\\leq n$, and let $p_n:E_n^{\\triangleleft}\\to N(\\Delta^{\\mathrm{op}})$ have apex $[n]$ and legs $\\rho_i$. Let $D_n$ be the finite ordinary category whose objects are inert maps $[n]\\to[0]$ or $[n]\\to[1]$ and whose arrows are inert factorizations; its nonidentity arrows connect an edge of the interval to its two endpoints. Use the cone $d_n:N(D_n)^{\\triangleleft}\\to N(\\Delta^{\\mathrm{op}})$ that remembers these maps. Every leg and every arrow of both diagrams is inert, so these are categorical patterns with the same marked base $(N(\\Delta^{\\mathrm{op}}),I)$ by [def-coef-categorical-pattern-fibrancy]. For $p_n$, condition (iii) in that definition is exactly $O_{[n]}\\simeq O_{[1]}^n$; condition (iv), on the fiber over each base arrow $\\phi:[m]\\to[n]$, is exactly $\\operatorname{Map}^{\\phi}_O(x,y)\\simeq\\prod_i\\operatorname{Map}^{\\rho_i\\phi}_O(x,y_i)$. For $d_n$, the corresponding two conditions are the incidence-diagram limits over the edges and vertices of $[n]$, namely the iterated fiber-product Segal condition and its mapping-space counterpart. The ordinary conditions are exactly those of [lem-coef-nonsymmetric-operads-presentability]; the generalized conditions are the incidence definition in the statement above. The base mapping spaces are discrete sets of arrows, so the relative pullback condition can be read one arrow at a time. Include $n=0$: $E_0$ is empty, whereas $D_0$ has its single identity object. Thus the ordinary pattern imposes the terminal $[0]$-fiber and the empty-product mapping condition; the generalized pattern imposes no extra constraint at $[0]$.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-nonsymmetric-operads-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Examples 3.2.4(1),(3); Definitions 3.1.3 and 3.1.13; Remark 3.1.4"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-categorical-pattern-model-calculus] separately to these two patterns. They give model structures on the identical category of marked simplicial sets over $(N(\\Delta^{\\mathrm{op}}),I)$. By step 1 and the theorem's fibrant-object assertion, the fibrant objects are precisely the ordinary, respectively generalized, operads marked exactly by their inert cocartesian edges. The theorem gives the same monomorphism cofibrations in both structures. The initial map from the empty marked simplicial set to any object is injective on every degree, so every object is cofibrant.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem 3.2.5, Corollary 3.2.6, Definition 3.2.9"
+   }
+  },
+  {
+   "text": "An ordinary fibrant operad is generalized fibrant with the same markings. Indeed its $[0]$-fiber is terminal up to equivalence, and all mapping spaces to a fixed object in that fiber over any fixed base arrow are contractible by the ordinary $n=0$ mapping condition. In the incidence diagram $D_n$, vertex factors are therefore terminal and vertex mapping-space factors are contractible. Its limit is the product of its $n$ edge factors: giving a cone is giving those $n$ factors, since each endpoint compatibility has a contractible space of choices. Hence the ordinary product Segal equivalence and product mapping-space equivalences give exactly the two generalized incidence-diagram equivalences of step 1. For $n=0$ the incidence comparison is an identity. This checks inclusion of the fibrant test objects without assuming that a generalized operad has terminal $[0]$-fiber.",
+   "uses": [
+    "lem-coef-nonsymmetric-operads-presentability",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.1.3, 3.1.13; Examples 3.2.4; inclusion used in Proposition 3.2.13"
+   }
+  },
+  {
+   "text": "If $i$ is a trivial cofibration in the generalized model, the mapping-space test in [lem-coef-categorical-pattern-model-calculus] makes $\\operatorname{Map}^{\\sharp}(i,Z)$ a weak homotopy equivalence for every generalized fibrant $Z$, and in particular, by step 3, for every ordinary fibrant $Z$. The same test for the ordinary pattern says that $i$ is an ordinary weak equivalence. It is also an ordinary cofibration since both structures use monomorphisms. Thus the identity preserves cofibrations and trivial cofibrations, which is the left Quillen criterion of [lem-coef-model-infinity-derived-adjunction]. Its ordinary right adjoint is also the identity. The two enrichments, tensors and cotensors in the pattern-model theorem use only the marked base and not the cone family, so the identity adjunction is marked enriched as well.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.2.13; Higher Algebra Definition B.2.1 and Remark B.2.6"
+   }
+  },
+  {
+   "text": "Use the marked enriched model axiom of [lem-coef-categorical-pattern-model-calculus] with $r:P\\to *_{\\bar C}$, the fibrant object's terminal map. The two internal Homs into the terminal slice object are terminal marked simplicial sets. The resulting map is precisely $\\mathcal H_C(B,P)\\to\\mathcal H_C(A,P)$; it is a fibration in the point categorical model, trivial if $i:A\\to B$ is trivial. This applies separately to both structures. The external product $A\\times L\\to C$, with base map the projection through $A$, is the tensor by a marked simplicial set $L$; the marked Hom adjunction gives the cotensors as specified in the same theorem. By [lem-coef-marked-saturation-perfect-equivalences], weak equivalences in this point model are precisely categorical equivalences after categorical fibrant replacement, which explains the categorical weak-equivalence terminology in the statement.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-saturation-perfect-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 3.2.12; Higher Algebra Remark B.2.5 with trivial second pattern"
+   }
+  },
+  {
+   "text": "For generalized fibrant $M,P$, put $A=\\varnothing$, $B=M$ in step 5: the marked Hom $\\mathcal H_C(M,P)$ is fibrant in the point categorical model. By [lem-coef-marked-point-cartesian-model] it therefore has underlying quasicategory and marks exactly its equivalences. Its underlying $n$-simplices, by [lem-coef-categorical-pattern-model-calculus], are maps $M\\times(\\Delta^n)^\\flat\\to P$ over the base. A marked edge of this product is precisely a marked edge of $M$ with constant $\\Delta^n$ coordinate; preserving these edges says exactly that every vertex functor $M\\to P$ preserves inert edges. By the definition of full subcategory in [def-cbc-enhanced-diagrams-cones], this underlying simplicial set is therefore the full subcategory of $\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(M,P)$ on inert-preserving functors, namely $\\operatorname{Alg}_M(P)$, with all its transformations and higher simplices. This argument uses the generalized model even when $P$ is ordinary, justified by step 3. The sharp mapping simplicial set is its core, since an $n$-simplex in it requires all parameter edges to be marked, and those are now exactly the equivalences.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 3.2.12, final sentence; Definition 3.1.17"
+   }
+  },
+  {
+   "text": "Finally [lem-coef-simplicial-model-nerve-localization] identifies the localization of each simplicial model category with the coherent nerve of its cofibrant fibrant simplicial subcategory. All objects are cofibrant by step 2. The simplicial mapping objects are exactly the sharp mapping Kan complexes from [lem-coef-categorical-pattern-model-calculus]; by step 6 these are the cores of the full algebra categories (and the same argument applies in the ordinary model). Thus the represented infinity categories have ordinary or generalized operads as objects and inert-preserving functors as morphisms, with the expected coherent equivalences as higher mapping data. The internal-Hom compositions are composition of the underlying functors and transformations, so these identifications preserve composition.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 3.2.7 and 3.2.9; Remark 3.2.12"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-nonsymmetric-operads-presentability",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-saturation-perfect-equivalences",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-model-nerve-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Section 3.2: Examples 3.2.4, Theorem 3.2.5, Corollary 3.2.6, Definitions 3.2.7 and 3.2.9, Remark 3.2.12, Proposition 3.2.13. Online sources are not archived in literature/; the explicit specialization and mapping-space argument are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +181,45 @@
    "results": "{\"t\": \"2026-10-16T20:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"Marked categorical model structures on nonsymmetric operads are enriched over marked simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Augmented\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet\", \"SSet.largeCategory\"], \"digest\": \"97268f9c78be75ba\"}",
    "date": "2026-10-17",
    "verdict": "no match: QCat enrichment and simplicial-category instances do not construct the two marked operadic model structures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary and generalized nonsymmetric infinity operads admit marked simplicial model structures enriched over marked categorical simplicial sets",
+   "results": "{\"t\": \"2026-10-16T21:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary and generalized nonsymmetric infinity operads admit marked simplicial model structures enriched over marked categorical simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"SSet.Augmented\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"1304ec68ecb91d79\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked Kan-Quillen simplicial sets, ordinary fibered categories, nerves or strict Segal sets, not categorical patterns or their marked enriched model structures. Source inspection: CategoryWithFibrations.lean:65-79; StrictBicategory.lean:48-55; StrictSegal.lean:41-56."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|categorical.pattern|MarkedSimplicial",
+   "results": "{\"t\": \"2026-10-16T21:24:11Z\", \"tool\": \"grep\", \"query\": \"operadic|categorical.pattern|MarkedSimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked Kan-Quillen simplicial sets, ordinary fibered categories, nerves or strict Segal sets, not categorical patterns or their marked enriched model structures. Source inspection: CategoryWithFibrations.lean:65-79; StrictBicategory.lean:48-55; StrictSegal.lean:41-56."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked categorical model structures for nonsymmetric operads with monomorphism cofibrations and enriched Quillen identity functor",
+   "results": "{\"t\": \"2026-10-16T21:24:11Z\", \"tool\": \"leansearch\", \"query\": \"Marked categorical model structures for nonsymmetric operads with monomorphism cofibrations and enriched Quillen identity functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.ctorIdx\", \"HomotopicalAlgebra.CategoryWithCofibrations.recOn\"], \"digest\": \"36ca71c5eee1f71f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked Kan-Quillen simplicial sets, ordinary fibered categories, nerves or strict Segal sets, not categorical patterns or their marked enriched model structures. Source inspection: CategoryWithFibrations.lean:65-79; StrictBicategory.lean:48-55; StrictSegal.lean:41-56."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, HomotopicalAlgebra.ModelCategory",
+   "results": "{\"t\": \"2026-10-16T21:24:12Z\", \"tool\": \"loogle\", \"query\": \"SSet, HomotopicalAlgebra.ModelCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked Kan-Quillen simplicial sets, ordinary fibered categories, nerves or strict Segal sets, not categorical patterns or their marked enriched model structures. Source inspection: CategoryWithFibrations.lean:65-79; StrictBicategory.lean:48-55; StrictSegal.lean:41-56."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonsymmetric operad fibrations and their categorical marked enriched mapping objects from a localization of marked simplicial sets over Delta opposite",
+   "results": "{\"t\": \"2026-10-16T21:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"Nonsymmetric operad fibrations and their categorical marked enriched mapping objects from a localization of marked simplicial sets over Delta opposite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"HomotopicalAlgebra.FibrantObject.ι\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.cosk\"], \"digest\": \"18e9c71fc385b74f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked Kan-Quillen simplicial sets, ordinary fibered categories, nerves or strict Segal sets, not categorical patterns or their marked enriched model structures. Source inspection: CategoryWithFibrations.lean:65-79; StrictBicategory.lean:48-55; StrictSegal.lean:41-56."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -92,5 +227,20 @@
   "group": "Q46"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-operadic-model-structures",
+  "worker": "stage1",
+  "summary": "Constructed the ordinary edge-projection and generalized edge-vertex incidence patterns, specialized the generic enriched pattern-model theorem, verified ordinary-to-generalized fibrancy (including arity zero), proved the Quillen direction by fibrant mapping tests, and identified the full algebra Hom before its core. Two statement-only machinery nodes; reused point categorical models and simplicial localization. No Lean attachment; generalized-operad convention correction recorded below. Citation-refresh review found that the upstream algebra-presentability node now restricts its generalized notion to Kan zero-fibers. Corrected this item to state the unrestricted source notion explicitly; the constant generalized operad N([1]) times N(Delta opposite) is the counterexample to importing that restriction. Ordinary operad conventions are taken from the existing nonsymmetric-operads-presentability node instead.",
+  "blueprint": "The ancestry records prop-coef-integral-exceptional-adjoint proof paragraph 2, finite mapping-complex adjunction before R lim. This split supplies the marked ordinary/generalized operad models used by the existing many-object operad accessibility and enriched realization chain, following Gepner-Haugseng section 3.2, without changing the integral-adjunction route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-07b64c776",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-07b64c776 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes, every cited statement, the citer lem-coef-many-object-operad-accessibility, and the item's pre-split statement from an older read-only snapshot. The cited sources (Gepner-Haugseng arXiv:1312.3178 section 3.2, Higher Algebra appendix B) are not in literature/ and the guard blocks network access, so I checked them from my knowledge of HA B.0.19/B.0.20 and GH Examples 3.2.4 and by direct argument. The HA number for the marked-enrichment/product remark (B.2.5 vs possibly B.2.9) is unverified offline, but the content holds either way. STATEMENT-DISPUTED repair: needed and correct. The constant example N([1]) x N(Delta^op) satisfies the incidence conditions because each D_n has contractible nerve, yet its zero fiber is not Kan. So the Kan-zero-fiber convention now in lem-coef-operadic-algebra-presentability would make the fibrant-object clause false. The repaired unrestricted definition matches GH 3.1.13. The citer only uses Kan-zero-fiber operads, a full subcategory, so it is unaffected. Steps: (1) E_n/D_n cones are all inert and fully scaled; the q-limit condition reads arrow by arrow because Map_C is discrete; n=0 and n=1 checked. (2) HA B.0.20 clauses. (3) Contractible O_[0] and vertex mapping factors reduce the zigzag limit to the product. (4) The Map^sharp test depends only on the base, so ordinary fibrant objects inside generalized fibrant ones give left Quillen. (5) With r: P -> terminal, Hom into the terminal is terminal and gives the restriction fibration; the saturation node's class W is the point model's W. (6) A = empty gives H(M,P) fibrant; the flat parameter tests vertex functors only, giving the full Alg_M(P), and the sharp parameter gives the core. (7) Localization uses the bifibrant mapping Kan complexes; inner fibrations to N(Delta^op) are isofibrations. New nodes: the definition is the fully scaled HA B.0.19 (q-cocartesian edges are equivalent to HA's version via HTT 2.4.2.8) and was tested on point/no-cone, point/empty-cone and arities 0 and 1. The model-calculus node is HA B.0.20 plus the Map^sharp test plus the product with the trivial point pattern, strictly more general than the item; both are statement-only. An rg search over dag/nodes found no duplicates; lem-coef-marked-relative-cartesian-model is a dual special case. Route stays in sk-prop-sf-biduality-general, with def-cbc-enhanced-diagrams-cones used only as a definition. No tool_uses, no SGA, not a target. No fixes written."
+ }
 }

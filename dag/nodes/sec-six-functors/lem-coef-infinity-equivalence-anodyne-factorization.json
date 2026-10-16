@@ -31,9 +31,98 @@
   "def-coef-infinity-right-anodyne",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-small-object-cell-factorization] in the category of small simplicial sets to the countable family $I=\\{\\Lambda_j^d\\hookrightarrow\\Delta^d\\mid d\\geq1,\\ 0<j\\leq d\\}$, with $\\kappa=\\aleph_0$. Here are its smallness checks. Hom sets are small sets of compatible degreewise functions. Small colimits exist: in each degree take the disjoint union of the diagram's sets modulo the relations imposed by its arrows; every simplicial operator descends to this quotient, and the resulting compatible maps satisfy the colimit universal property of [def-weil-pbc-category-colimit]. Each horn is the union of finitely many representable faces. A map from it to a sequential colimit of degreewise injections is specified by the images of those finitely many faces, subject to finitely many overlap equations: choose a common stage for their images and then a later common stage for the equations. The same finite argument detects equality of two such maps. Successor pushouts of coproducts of the horn inclusions are degreewise injective: a set pushout along an injection adds the complement without identifying distinct old elements. This verifies the required preservation of these chain colimits. The cited factorization therefore supplies small maps $L\\xrightarrow{i}N\\xrightarrow{r}M$ with $ri=e$, $i$ an $I$-cell map and $r$ lifting every member of $I$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/014Z",
+    "place": "Proposition 4.2.4.7 (014Z), whose displayed construction attaches left horns; apply its simplicial-opposite right-handed dual through the existing general small-object leaf after the explicit finite-domain and degreewise-colimit checks."
+   }
+  },
+  {
+   "text": "By [def-coef-infinity-right-anodyne], the $I$-cell map $i$ is right anodyne. To include coproducts using exactly that definition, well-order the small indexing set of a coproduct of horns and attach its simplices one at a time; the colimit has the coproduct pushout universal property. This is a small transfinite composition of pushouts of right horns. Each pushout is degreewise injective by the set calculation in step 1; a continuous ordinal chain of injections has injective maps into its colimit, since equality of two old elements in the quotient is already witnessed at a common stage. Thus $i$ is degreewise injective. The lifting property of $r$ is exactly the right-fibration definition of [def-coef-infinity-fibrations]. Moreover $N$ is a quasicategory: project any inner horn to $M$, fill it there, and lift that simplex against $r$, since every inner horn is among its right horns. This uses the quasicategory definition of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-coef-infinity-right-anodyne",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/014Z",
+    "place": "Proposition 4.2.4.7 (014Z) and Variant 4.2.4.2; after simplicial opposite, these supply the right-horn closure, while this step records the closure and degreewise-injectivity checks for the explicit cellular factorization."
+   }
+  },
+  {
+   "text": "For $a:K\\to M$ write $\\Gamma_a=\\{h:K\\times\\Delta^n\\to N\\mid rh=a\\operatorname{pr}_K\\}$ in degree $n$, as in [lem-coef-infinity-equivalence-section-restriction]. Apply that node to the given equivalence $e:L\\to M$ and to $r:N\\to M$: restriction $e^*:\\Gamma_{\\mathrm{id}_M}\\to\\Gamma_e$ is a simplicial homotopy equivalence between Kan complexes. The factor $i$ is a vertex of $\\Gamma_e$ because $ri=e$. Let $c$ be a homotopy inverse, and put $s=c(i)$. Then $s:M\\to N$ satisfies $rs=\\mathrm{id}_M$ exactly. Evaluating the homotopy $e^*c\\simeq\\mathrm{id}_{\\Gamma_e}$ at $i$ gives an edge $P$ in $\\Gamma_e$ with endpoints $se$ and $i$. Thus $P$ is a homotopy $L\\times\\Delta^1\\to N$ whose projection to $M$ is constantly $e$.",
+   "uses": [
+    "lem-coef-infinity-equivalence-section-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NC",
+    "place": "Corollary 7.2.1.13 (02NC) and Definition 7.2.1.1, specialized to r and the vertex i; compare the displayed left-handed section argument in Corollary 7.2.1.14 (02ND), then take its right-handed dual."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-fibration-exponentiation] to $r$ and the right anodyne inclusion $i$. Its trivial Kan fibration has source $\\operatorname{Fun}(N,N)$ and target $\\operatorname{Fun}(N,M)\\times_{\\operatorname{Fun}(L,M)}\\operatorname{Fun}(L,N)$. Give its target the edge $(r\\operatorname{pr}_N,P)$, with the $\\operatorname{Fun}(N,M)$ component constant at $r$. It lies in the displayed pullback because $rP=e\\operatorname{pr}_L=ri\\operatorname{pr}_L$. Prescribe the two boundary vertices in the source to be $sr$ and $\\mathrm{id}_N$, in the endpoint order of $P$. Their restrictions to $L$ are $sri=se$ and $i$, and their composites with $r$ are both $r$ since $rs=\\mathrm{id}_M$. The dimension-one boundary lift from [def-weil-pbc-trivial-kan-fibration] now gives $H:N\\times\\Delta^1\\to N$ with endpoints $sr,\\mathrm{id}_N$ and $rH=r\\operatorname{pr}_N$ exactly.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4 (0154), whose statement includes the right-handed assertion, with the prescribed boundary of a 1-simplex; this expands the strict section homotopy in the displayed left-handed proof of Corollary 7.2.1.14 (02ND) after dualization."
+   }
+  },
+  {
+   "text": "For every vertex $m\\in M$, put $N_m=\\{m\\}\\times_M N$. Apply the Kan-fiber clause of [lem-coef-infinity-right-fibration-fibers] with $E=F=N$, $B=M$, and both right fibrations equal to $r$; all three objects are quasicategories by hypothesis and step 2. Thus $N_m$ is Kan. The exact equations $rs=\\mathrm{id}_M$ and $rH=r\\operatorname{pr}_N$ ensure that $s(m)$ is a vertex of $N_m$ and that $H$ restricts to a homotopy on $N_m$ between its identity and the constant map at $s(m)$. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to $u:N_m\\to\\Delta^0$ and $v:\\Delta^0\\to N_m$ selecting $s(m)$: one inverse homotopy is this restriction of $H$, and the other is the constant homotopy on $\\Delta^0$. It follows that $N_m$ is weakly contractible. This also verifies nonemptiness at every vertex of the base rather than assuming it.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ND",
+    "place": "Corollary 7.2.1.14 (02ND), whose displayed proof contracts each strict fiber in the left-handed case; apply the right-handed dual, and obtain weak contractibility via the existing realization homotopy-invariance node."
+   }
+  },
+  {
+   "text": "The map $r$ is a right fibration by step 2, and all its strict vertex fibers are weakly contractible Kan complexes by step 5. Therefore [lem-coef-right-fibration-contractible-fibers] makes $r$ a trivial Kan fibration in the full boundary-lifting sense, including dimension zero. Together with the exact equality $ri=e$, the right-anodyne degreewise injection $i$, and the small quasicategory $N$ already constructed, these are all the required conclusions.",
+   "uses": [
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NU",
+    "place": "Proposition 4.4.2.14 (01NU), (3) implies (1); its statement explicitly includes the right-handed case and completes the right-handed dual proof of Corollary 7.2.1.15 (02NE)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-small-object-cell-factorization",
+  "def-coef-infinity-right-anodyne",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-equivalence-section-restriction",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-right-fibration-contractible-fibers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02NE",
+  "place": "Expanded right-handed dual proof of Corollary 7.2.1.15 (02NE), whose displayed statement is left-handed, using the simplicial-opposite construction of Proposition 4.2.4.7 (014Z), the section-contraction proof of Corollary 7.2.1.14 (02ND), and Corollary 7.2.1.13 (02NC). Online sources read; no archived Kerodon source in literature/, so marked agent and archives WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +179,66 @@
    "results": "{\"t\": \"2026-10-16T20:52:21Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|IsRelativeColimit|RelativeLimit|homotopyPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Loogle and the source grep returned zero hits. LeanFinder returned ordinary Van Kampen/universal colimits or the all-horn Quillen generators, primitive Quasicategory and KanComplex definitions, and model-category lifting lemmas. Their returned types do not assert relative mapping-space universality or a right-anodyne factorization of an indexing equivalence. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|right.?fibration|cofinal",
+   "results": "{\"t\": \"2026-10-16T21:24:18Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|right.?fibration|cofinal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|right.?cofinal|section.*homotopy",
+   "results": "{\"t\": \"2026-10-16T21:24:18Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|right.?cofinal|section.*homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"dd567e8917826220\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor an equivalence of infinity categories into a right anodyne inclusion and a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T21:24:19Z\", \"tool\": \"leansearch\", \"query\": \"Factor an equivalence of infinity categories into a right anodyne inclusion and a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm5b\", \"HomotopicalAlgebra.FibrantBrownFactorization.toMapFactorizationData\", \"HomotopicalAlgebra.instHasFactorizationOppositeCofibrationsTrivialFibrationsOfTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk\", \"HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'\"], \"digest\": \"f8ff3e8828b6bb38\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"section\"",
+   "results": "{\"t\": \"2026-10-16T21:24:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex₁.intersectionNondeg\"], \"digest\": \"c1cbce38b1212a2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical equivalences admit factorizations by right horn cell attachments and boundary lifting maps",
+   "results": "{\"t\": \"2026-10-16T21:25:47Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical equivalences admit factorizations by right horn cell attachments and boundary lifting maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.Quasicategory.hornFilling\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.horn₃₂.exists_desc\"], \"digest\": \"c0ea23e50e8c3728\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?cofinal|right.?anodyne|right.?fibration",
+   "results": "{\"t\": \"2026-10-16T21:25:47Z\", \"tool\": \"grep\", \"query\": \"right.?cofinal|right.?anodyne|right.?fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"anodyne\"",
+   "results": "{\"t\": \"2026-10-16T21:24:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor equivalence of quasicategories factors as a right anodyne monomorphism followed by a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T21:24:19Z\", \"tool\": \"leanfinder\", \"query\": \"A functor equivalence of quasicategories factors as a right anodyne monomorphism followed by a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.coskAdj\", \"SSet.cosk\"], \"digest\": \"c53ae7030925c652\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:60-109, CategoryWithFibrations.lean:35-103 and ModelCategory/Basic.lean:44-72. The anodyne and fibration declarations use ALL horns, while cm5a/cm5b assume an abstract model structure. They do not give the one-sided factorization asserted here. The second phrasing and full-source right-anodyne/right-fibration/cofinal grep also found no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-cone-equivalence",
@@ -101,5 +246,29 @@
   "group": "Q64"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-anodyne-factorization",
+  "worker": "stage1",
+  "summary": "Preserved the statement, explicitly checked right-horn small-object hypotheses, constructed a strict section and a strict homotopy over M using equivalence restriction and right-anodyne exponentiation, and contracted each Kan fiber before invoking the existing trivial-fibration criterion. One new statement-only section-space lemma; existing non-elementary inputs reused. No Lean attachment or Mathlib leaf found.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient adjunction. The intervening relative-cone-equivalence clause (2) needs this strict-boundary indexing factorization. Steps 1-2 realize its right-anodyne replacement; steps 3-6 supply the trivial Kan factor with exact composite. The current main-20261015 proof paragraph 2 retains the derived mapping-complex adjunction; this is a local simplicial tool below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Converts the explicit simplicial contraction of each strict fiber into the realization-based weak contractibility required by the existing fiber criterion; this is generic homotopy invariance and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-5146a1dc7",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-5146a1dc7 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 11 cited node statements and the creator's citing step in full. The item statement is kept (Kerodon 02NE right-handed with 02NC, exact ri=e, degreewise-injective right-anodyne i, trivial Kan fibration r including n=0, small quasicategory N). It is true and not weakened, and the creator relative-cone-equivalence uses exactly these clauses. Steps: S1: the small-object leaf's hypotheses hold for the countable right-horn set with κ=ℵ0, since horns are finite. S2: right-anodyne closure and injectivity are elementary from the definitions, and N is a quasicategory because inner horns are right horns. S3: the new node with A=L, B=M, q=r gives s with rs=id and an edge P over e from se to i. S4: exponentiation with E=N, S=M, i; rP=e·pr=ri·pr; ρ(sr)=(r,se) and ρ(id)=(r,i), so the n=1 boundary lift gives H with rH=r·pr. S5: the Kan clause of right-fibration-fibers holds with E=F=N; H restricts to a contraction of N_m onto s(m), so N_m is weakly contractible and nonempty by lem-cbc-simplicial-homotopy-equivalence-weak. S6: the contractible-fibers criterion applies. Handedness 0<i≤n is consistent across all cited definitions. New node lem-coef-infinity-equivalence-section-restriction: true (equivalences are right cofinal; Kan by the fiber of the right fibration Fun(K,E)→Fun(K,B)). Tested on the identity, base Δ⁰, empty fibrations and a non-injective groupoid equivalence. It is self-contained with no proof sketch and its notions are cited. It is not a clause of the parent and not a duplicate of the cofinal-colimit-restriction, cofinality-space-test, cofinal-comma-criterion, anodyne-cocones or right-fibration-morphism-space nodes. No blueprint node is the same (same_as=[]). The dependency closure (97 nodes) is acyclic. Accepted tool_use: lem-cbc-simplicial-homotopy-equivalence-weak, from unit sk-prop-sf-cbc, used for generic realization homotopy invariance. No SGA, no target, coefficient category or base-change morphism involved. Kerodon is not archived, so I checked the mathematics independently. No fixes."
+ }
 }

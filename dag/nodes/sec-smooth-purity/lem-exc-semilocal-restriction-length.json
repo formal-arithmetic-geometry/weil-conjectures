@@ -28,9 +28,102 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-length-module-simple-filtration] with $R=B$ to obtain a finite filtration $0=M_0\\subsetneq\\cdots\\subsetneq M_r=M$ with simple factors $Q_j=M_j/M_{j-1}$ for $1\\le j\\le r$. If $r=0$, every sum over factors below is empty. We will compute both sides of the desired equality from this one filtration; no decomposition of $B$ or Noetherian hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M0 (lemma-pushdown-module), first sentence of proof; Tag 00J3 (lemma-simple-pieces), part (2)."
+   }
+  },
+  {
+   "text": "For each simple $Q_j$ [def-weil-pbc-simple-module], choose $0\\ne x_j\\in Q_j$. The nonzero submodule $Bx_j$ is all of $Q_j$, so with $\\mathfrak q_j=\\{b\\in B:bx_j=0\\}$ the map $B/\\mathfrak q_j\\to Q_j$, $\\bar b\\mapsto bx_j$, is a well-defined bijective $B$-linear map. The ideal $\\mathfrak q_j$ is proper; if $b\\notin\\mathfrak q_j$, simplicity gives $B(bx_j)=Q_j$, hence some $c\\in B$ satisfies $cbx_j=x_j$ and $cb-1\\in\\mathfrak q_j$. Thus every nonzero class in $B/\\mathfrak q_j$ is invertible, so this quotient is a field and $\\mathfrak q_j$ is maximal, belonging to $X$. This proves directly the simple-factor identification used in the source.",
+   "uses": [
+    "def-weil-pbc-simple-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J2 (lemma-characterize-length-1), proof of (1) implies (3); Tag 02M0, second sentence of proof."
+   }
+  },
+  {
+   "text": "For $\\mathfrak q\\in X$ put $L_{\\mathfrak q}=B/\\mathfrak q$. Since $\\mathfrak q$ contracts to $\\mathfrak m$, its $A$-action factors through $k=A/\\mathfrak m$. Choose a $k$-basis $e_1,\\ldots,e_{f_{\\mathfrak q}}$ of $L_{\\mathfrak q}$, using its assumed finite dimension [def-weil-vector-space-dimension], and set $V_i=\\operatorname{span}_k(e_1,\\ldots,e_i)$. These are $A$-submodules, and the coefficient of $e_i$ gives an $A$-linear isomorphism $V_i/V_{i-1}\\cong k$. The $A$-module $k$ has length one: if an $A$-submodule contains $0\\ne u\\in k$, then for any $v\\in k$ a lift in $A$ of $v/u$ multiplies $u$ to $v$, so that submodule is all of $k$. Thus its submodule lattice has exactly $0$ and $k$, and the definition of length [def-weil-pbc-module-length] gives length one. The zero module has length zero by the same definition.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IY (lemma-dimension-is-length), finite-dimensional case, with Tag 00IX (lemma-length-independent), proof; basis-flag expansion of the residue-field calculation in Tag 02M0."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-length-additive-short-exact] to $0\\to V_{i-1}\\to V_i\\to k\\to0$ in the flag of step 3. Starting from $V_0=0$, induction gives $\\mathrm{length}_A(V_i)=i$, and hence $\\mathrm{length}_A(L_{\\mathfrak q})=f_{\\mathfrak q}<\\infty$. The $B$-linear isomorphism in step 2 is also $A$-linear and carries submodule chains bijectively, so $\\mathrm{length}_A(Q_j)=f_{\\mathfrak q_j}$. Each sequence $0\\to M_{j-1}\\to M_j\\to Q_j\\to0$ remains short exact after restricting to $A$, since the underlying maps, their kernels and their images are unchanged. Repeated application of the cited additivity theorem, starting from $M_0=0$, gives $\\mathrm{length}_A(M)=\\sum_{j=1}^{r}f_{\\mathfrak q_j}<\\infty$. This proves the finiteness clause without presupposing finite $A$-length.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M0 (lemma-pushdown-module), final two sentences of proof; Tag 00IV (lemma-length-additive)."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in X$. Compute the localization of a simple factor using the fractions in [def-weil-pbc-module-localization] and the ring fractions in [def-weil-pbc-localization-at-prime]. If $\\mathfrak q_j\\ne\\mathfrak q$, choose $a\\in\\mathfrak q_j\\setminus\\mathfrak q$ (distinct maximal ideals cannot contain one another). This $a$ annihilates $Q_j$ but is inverted at $\\mathfrak q$, so every fraction in $(Q_j)_{\\mathfrak q}$ is zero by the fraction equality criterion. If $\\mathfrak q_j=\\mathfrak q$, step 2 identifies $Q_j$ with $L_{\\mathfrak q}$; the maps $z/s\\mapsto\\bar s^{-1}z$ and $z\\mapsto z/1$ are inverse $B_{\\mathfrak q}$-linear maps $(L_{\\mathfrak q})_{\\mathfrak q}\\cong L_{\\mathfrak q}$. They are well-defined by the fraction equality criterion, since every denominator has nonzero, hence invertible, image in the field $L_{\\mathfrak q}$. The action map $B_{\\mathfrak q}\\to L_{\\mathfrak q}$ is surjective, already on fractions $b/1$. Consequently any nonzero $B_{\\mathfrak q}$-submodule of $L_{\\mathfrak q}$ contains every element (multiply a nonzero element $u$ by a lift of $v/u$). Its length is therefore one, while the zero factor has length zero, by [def-weil-pbc-module-length]. Thus $\\mathrm{length}_{B_{\\mathfrak q}}((Q_j)_{\\mathfrak q})$ is $1$ if $\\mathfrak q_j=\\mathfrak q$ and $0$ otherwise.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J3 (lemma-simple-pieces), part (4), last displayed formula and omitted reader calculation in its proof, expanded here."
+   }
+  },
+  {
+   "text": "Localize each short exact sequence $0\\to M_{j-1}\\to M_j\\to Q_j\\to0$ at the multiplicative subset $B\\setminus\\mathfrak q$. Apply [lem-weil-pbc-localization-module-exact] to its three consecutive pairs (including the zero endpoints); localization of zero is zero by fractions. This yields $0\\to(M_{j-1})_{\\mathfrak q}\\to(M_j)_{\\mathfrak q}\\to(Q_j)_{\\mathfrak q}\\to0$. The maps are $B_{\\mathfrak q}$-linear by their fraction formulas, so [lem-weil-pbc-length-additive-short-exact] applies over $B_{\\mathfrak q}$. Using step 5 and induction on $j$ gives $\\mathrm{length}_{B_{\\mathfrak q}}(M_{\\mathfrak q})=\\sum_{j=1}^{r}\\mathbf 1_{\\mathfrak q_j=\\mathfrak q}=\\#\\{j:1\\le j\\le r,\\ \\mathfrak q_j=\\mathfrak q\\}$. In particular these local lengths are finite. The localized filtration need not be strict; length additivity applies to these short exact sequences even when a factor is zero.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J3 (lemma-simple-pieces), proof of part (4); Tag 00CS (proposition-localization-exact); Tag 00IV (lemma-length-additive)."
+   }
+  },
+  {
+   "text": "Every $\\mathfrak q_j$ lies in the finite set $X$, so partitioning the finite set of indices $1,\\ldots,r$ by $\\mathfrak q_j$ gives $\\sum_{j=1}^{r}f_{\\mathfrak q_j}=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\#\\{j:\\mathfrak q_j=\\mathfrak q\\}$. Substitute the expressions from steps 4 and 6 to obtain the asserted weighted localization formula. For $M=0$ the empty filtration gives zero on both sides. If $B$ is the zero ring, any unital $B$-module is zero and $X$ is empty, giving the same equality; the argument therefore does not require an unstated nonzero-ring hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M0 (lemma-pushdown-module), conclusion from additivity and Tag 00J3 (4); finite regrouping and zero cases written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "def-weil-pbc-simple-module",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M0 (lemma-pushdown-module), proof, with its cited Tags 00J3, 00J2, 00IY, 00IX and 00IV; explicit basis flags and localized simple-factor calculations fill out the source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -110,10 +203,119 @@
    "results": "{\"t\": \"2026-10-16T21:24:24Z\", \"tool\": \"grep\", \"query\": \"length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean\", \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\"], \"digest\": \"b95842049980ddc9\"}",
    "date": "2026-10-17",
    "verdict": "no match: second reader read LocalRing/Length.lean:25-73; IsLocalRing.length_restrictScalars at lines 54-55 requires B local. Composition-series length and ramification/inertia results do not give the stated localization sum for an arbitrary finite-length module over a semilocal ring. No one-line specialization yields this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a semilocal algebra over a local ring the restriction of scalars length of a finite length module is the sum of localized lengths weighted by residue field degrees",
+   "results": "{\"t\": \"2026-10-16T21:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a semilocal algebra over a local ring the restriction of scalars length of a finite length module is the sum of localized lengths weighted by residue field degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_quotient_map\", \"Module.rankAtStalk_eq\", \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Ideal.finrank_quotient_map\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Module.rankAtStalk\"], \"digest\": \"44292dc5dcf83664\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocalRing.length_restrictScalars (Mathlib/RingTheory/LocalRing/Length.lean:54, source read 25-72) requires B local. Product length additivity presupposes a product decomposition; ramification degree formulas require Dedekind hypotheses. These do not give the stated arbitrary semilocal finite-length-module formula as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"length\", \"restrictScalars\"",
+   "results": "{\"t\": \"2026-10-16T21:39:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"length\\\", \\\"restrictScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Submodule.length_le_length_restrictScalars\", \"IsLocalRing.length_restrictScalars\", \"CovBy.length_restrictScalars\"], \"digest\": \"b91a2d9400f30dfe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocalRing.length_restrictScalars (Mathlib/RingTheory/LocalRing/Length.lean:54, source read 25-72) requires B local. Product length additivity presupposes a product decomposition; ramification degree formulas require Dedekind hypotheses. These do not give the stated arbitrary semilocal finite-length-module formula as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "length_restrictScalars|length.*localiz|length.*sum|sum.*length",
+   "results": "{\"t\": \"2026-10-16T21:39:39Z\", \"tool\": \"grep\", \"query\": \"length_restrictScalars|length.*localiz|length.*sum|sum.*length\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\"], \"digest\": \"fead97a8e2614729\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocalRing.length_restrictScalars (Mathlib/RingTheory/LocalRing/Length.lean:54, source read 25-72) requires B local. Product length additivity presupposes a product decomposition; ramification degree formulas require Dedekind hypotheses. These do not give the stated arbitrary semilocal finite-length-module formula as a one-line specialization.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Length of a module over a semilocal ring is a sum of lengths at maximal ideals with residue degrees",
+   "results": "{\"t\": \"2026-10-16T21:39:55Z\", \"tool\": \"leanfinder\", \"query\": \"Length of a module over a semilocal ring is a sum of lengths at maximal ideals with residue degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\"], \"digest\": \"961e531507f73e8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocalRing.length_restrictScalars (Mathlib/RingTheory/LocalRing/Length.lean:54, source read 25-72) requires B local. Product length additivity presupposes a product decomposition; ramification degree formulas require Dedekind hypotheses. These do not give the stated arbitrary semilocal finite-length-module formula as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The length under restriction to a local base is the sum of the lengths at maximal ideals weighted by residue field dimensions",
+   "results": "{\"t\": \"2026-10-16T21:39:55Z\", \"tool\": \"leansearch\", \"query\": \"The length under restriction to a local base is the sum of the lengths at maximal ideals weighted by residue field dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_eq_add_of_exact\", \"IsLocalization.cardinalMk_le\", \"Ideal.sum_ramification_inertia\", \"Module.length_pi_of_fintype\", \"IsLocalization.lift_cardinalMk_le\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Module.length_prod\"], \"digest\": \"3b3e15f83754580c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: IsLocalRing.length_restrictScalars (Mathlib/RingTheory/LocalRing/Length.lean:54, source read 25-72) requires B local. Product length additivity presupposes a product decomposition; ramification degree formulas require Dedekind hypotheses. These do not give the stated arbitrary semilocal finite-length-module formula as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The length of a module annihilated by a maximal ideal equals its dimension as a vector space over the residue field",
+   "results": "{\"t\": \"2026-10-16T21:40:14Z\", \"tool\": \"leanfinder\", \"query\": \"The length of a module annihilated by a maximal ideal equals its dimension as a vector space over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.length_eq_finrank\"], \"digest\": \"f1ea4699778913df\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient only: Module.length_eq_finrank states length equals dimension over a division ring, not the weighted semilocal formula. Step 3 constructs the residue-field basis flag and step 4 uses the existing additivity node, so no new dimension-length node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every simple module over a commutative ring is isomorphic to the quotient by a maximal ideal",
+   "results": "{\"t\": \"2026-10-16T21:40:14Z\", \"tool\": \"leanfinder\", \"query\": \"Every simple module over a commutative ring is isomorphic to the quotient by a maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isSimpleModule_iff_quot_maximal\", \"IsSemisimpleRing.exists_linearEquiv_ideal_of_isSimpleModule\", \"instIsSimpleModuleSubtypeMemSubmoduleValSetSetOfNonemptyLinearEquivId\", \"IsIsotypicOfType\", \"IsSimpleRing.isIsotypic\", \"IsIsotypicOfType.of_isSimpleModule\", \"simple_iff_isSimpleModule'\", \"simple_iff_isSimpleModule\"], \"digest\": \"aaef12a1e20fbda8\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient match, not a match for the item: isSimpleModule_iff_quot_maximal (Mathlib/RingTheory/SimpleModule/Basic.lean:165) classifies simple modules. The short cyclic-vector and annihilator argument is instead written in step 2; no separate elementary node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"length\", \"finrank\"",
+   "results": "{\"t\": \"2026-10-16T21:40:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"length\\\", \\\"finrank\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.length_eq_finrank\"], \"digest\": \"2fbb1b56c0433aae\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient only: Module.length_eq_finrank states length equals dimension over a division ring, not the weighted semilocal formula. Step 3 constructs the residue-field basis flag and step 4 uses the existing additivity node, so no new dimension-length node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "length_eq|length.*[Ss]calar|isSimpleModule_iff_quot_maximal",
+   "results": "{\"t\": \"2026-10-16T21:40:15Z\", \"tool\": \"grep\", \"query\": \"length_eq|length.*[Ss]calar|isSimpleModule_iff_quot_maximal\", \"sub\": \"RingTheory/Length.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"39\", \"43\", \"49\", \"54\"], \"digest\": \"05212af9190a904c\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient match, not a match for the item: isSimpleModule_iff_quot_maximal (Mathlib/RingTheory/SimpleModule/Basic.lean:165) classifies simple modules. The short cyclic-vector and annihilator argument is instead written in step 2; no separate elementary node is created.",
+   "subdirectory": "RingTheory/Length.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "isSimpleModule_iff_quot_maximal",
+   "results": "{\"t\": \"2026-10-16T21:40:15Z\", \"tool\": \"loogle\", \"query\": \"isSimpleModule_iff_quot_maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"isSimpleModule_iff_quot_maximal\"], \"digest\": \"d96ccf3d76d79125\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient match, not a match for the item: isSimpleModule_iff_quot_maximal (Mathlib/RingTheory/SimpleModule/Basic.lean:165) classifies simple modules. The short cyclic-vector and annihilator argument is instead written in step 2; no separate elementary node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "isSimpleModule_iff_quot_maximal",
+   "results": "{\"t\": \"2026-10-16T21:40:15Z\", \"tool\": \"grep\", \"query\": \"isSimpleModule_iff_quot_maximal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"Mathlib/RingTheory/SimpleRing/DivisionRing.lean\"], \"digest\": \"8d157aabb843337a\"}",
+   "date": "2026-10-17",
+   "verdict": "ingredient match, not a match for the item: isSimpleModule_iff_quot_maximal (Mathlib/RingTheory/SimpleModule/Basic.lean:165) classifies simple modules. The short cyclic-vector and annihilator argument is instead written in step 2; no separate elementary node is created.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(AtPrime|IsLocalization|residue|inertia)|sum.*length",
+   "results": "{\"t\": \"2026-10-16T22:21:33Z\", \"tool\": \"grep\", \"query\": \"length.*(AtPrime|IsLocalization|residue|inertia)|sum.*length\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\"], \"digest\": \"146a2ffbd0893783\"}",
+   "date": "2026-10-16",
+   "verdict": "No match for the item. Source read: Mathlib/RingTheory/LocalRing/Length.lean:25-73 assumes both A and B local; Mathlib/RingTheory/Length.lean:215-229 supplies product length only after a product is given. Neither states the semilocal localization sum.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"length\", \"sum\"",
+   "results": "{\"t\": \"2026-10-16T22:21:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"length\\\", \\\"sum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"String.lengthAssumingAscii\", \"String.lengthAssumingAscii_eq\", \"List.min_le_sum_div_length_nat\", \"List.min_mul_length_le_sum_nat\", \"List.sum_div_length_le_max_nat\", \"List.sum_le_max_mul_length_nat\", \"List.le_sum_div_length_of_min?_eq_some_nat\", \"List.mul_length_le_sum_of_min?_eq_some_nat\"], \"digest\": \"b92bba86dd7cc568\"}",
+   "date": "2026-10-16",
+   "verdict": "Broad query returned only string/list/array lengths in its first twelve hits; inconclusive for module length, so repeated with Module.length."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, \"sum\"",
+   "results": "{\"t\": \"2026-10-16T22:21:47Z\", \"tool\": \"loogle\", \"query\": \"Module.length, \\\"sum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No hits; the companion source grep and source reads are needed for the absence judgment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition length of a module restricted along a ring homomorphism with local domain and semilocal codomain equals a residue degree weighted sum over maximal ideals",
+   "results": "{\"t\": \"2026-10-16T22:21:53Z\", \"tool\": \"leanfinder\", \"query\": \"Composition length of a module restricted along a ring homomorphism with local domain and semilocal codomain equals a residue degree weighted sum over maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.finrank_quotient_map\", \"Ideal.inertiaDeg_algebraMap\", \"Ideal.inertiaDeg_le_finrank\", \"Ideal.rank_pow_quot_aux\", \"Ideal.inertiaDeg\", \"Ideal.inertiaDeg_algebra_tower\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.rank_prime_pow_ramificationIdx\"], \"digest\": \"2ba4a460c385a277\"}",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: the returned ramification formulas assume Dedekind domains and concern quotient ranks or inertia degrees, rather than arbitrary finite-length B-modules. The existing explicit filtration proof is needed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-dvr-norm-valuation-sum",
@@ -121,5 +323,29 @@
   "group": "ND"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-semilocal-restriction-length",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks Tag 02M0 and wrote its simple-factor proof in seven steps. Reused existing filtration, localization-exactness and length-additivity nodes. Expanded simple-module cyclicity, residue-field basis flags and localization of simple factors directly, rather than adding elementary or duplicate nodes. Checked zero-module and zero-ring cases. No new nodes.",
+  "blueprint": "Realizes the first paragraph of lem-exc-dvr-galois.proof.md, the sentence deriving equality of degree and ramification index from finite-free integral-closure length modulo a uniformizer, through the existing norm/order and semilocal length descendants. Current main-20261015 text read; the present node supplies the residue-degree-weighted simple-factor calculation in Stacks 02M0.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "Generic existence of a simple filtration for a finite-length module; the affine-line Kummer unit does not supply a module-filtration theorem. This tool implements the filtration used in Stacks 02M0 along the inherited DVR ramification calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-length-module-simple-filtration"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-c853ee4fd",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c853ee4fd (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no changes; the review is in review.md. Shape (A): one commit touching only the item and its report, no new nodes, unit record untouched (the item is not the key node of sk-prop-a1-kummer). Statement: matches Stacks algebra.tex Tag 02M0 (lemma-pushdown-module, l.12603) hypothesis by hypothesis. Semi-local is written as 'X finite', 'lies over' as 'contracts to m', and kappa(m_i) as B/q; finiteness of length over A is kept. Nothing is added, dropped or weakened. Step 1: uses the simple-filtration node (00J3), whose statement covers a commutative R and the empty filtration. It is off-route (unit sk-thm-p1, not cited by sk-prop-a1-kummer) but declared in split_report.tool_uses; I accept it as a generic tool. It cites only definitions, so there is no cycle. Step 2: the cyclic-vector argument shows the annihilator is maximal and lies in X; elementary and correct. Step 3: m acts as zero on B/q, the basis flag has quotients isomorphic to k, and k has A-length 1 because A maps onto k; correct. Step 4: the additivity leaf (00IV, lengths in N plus infinity) applies before finiteness is known and gives length_A(M) as the sum of f_{q_j}. Step 5: for distinct maximal ideals an element of q_j outside q kills the factor and becomes invertible, so the localized factor is 0; at q_j=q the maps z/s to s^-1 z and z to z/1 are inverse to each other, and the local length is 1. Step 6: 00CS is applied to all three adjacent pairs, so the localized sequence is short exact and the local length counts the factors with q_j=q. Step 7: finite regrouping. proof_deps equals the union of the step uses. Small cases: Z_(p) under Z_(p)[i] for p=5, 3 and 2 (split, inert, ramified), M=0 and B=0; the formula holds in each. Duplicates: rg for 02M0, pushdown-module and semi-?local over dag/nodes finds no other node stating this. The parent lem-exc-dvr-norm-valuation-sum step 3 uses exactly this statement. No SGA is cited; this is not a target node, so the base-change and coefficient checks do not apply."
+ }
 }

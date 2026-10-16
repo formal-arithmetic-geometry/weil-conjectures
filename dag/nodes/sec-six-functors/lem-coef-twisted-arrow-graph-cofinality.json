@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-twisted-arrow-graph-cofinality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent-diagram foundations for its rectification comparison; twisted-arrow graph comparison is coinitial.",
+   "via": [
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Twisted-arrow graph comparison is coinitial",
+ "statement": "Use quasicategories, nerves, mapping spaces, coherent functor categories and colimits of [def-cbc-enhanced-diagrams-cones], the twisted-arrow construction $\\operatorname{Tw}$ and its projection $\\lambda$ of [lem-coef-twisted-arrow-left-fibration], and classification of left fibrations by space-valued coherent functors of [lem-coef-space-valued-straightening]. Let $f:\\mathcal A\\to\\mathcal B$ be a functor of quasicategories in a common sufficiently large universe $\\mathcal V$. Define the simplicial pullback\n$$W_f=(\\mathcal B^{\\mathrm{op}}\\times\\mathcal A)\\times_{\\mathcal B^{\\mathrm{op}}\\times\\mathcal B}\\operatorname{Tw}(\\mathcal B),$$\nusing $1\\times f$ on the first factor and $\\lambda$ on the second. Its projection to $\\mathcal B^{\\mathrm{op}}\\times\\mathcal A$ is the left fibration classified by the coherent mapping-space functor $(x,a)\\mapsto\\operatorname{Map}_{\\mathcal B}(x,f(a))$, with the latter formed in the infinity category of $\\mathcal V$-small spaces, in a larger ambient universe. The simplicial map\n$$\\kappa_f:\\operatorname{Tw}(\\mathcal A)\\longrightarrow W_f$$\nis induced by $(f^{\\mathrm{op}}\\times1)\\lambda$ and $\\operatorname{Tw}(f)$; at an arrow $a\\to a'$ it is the triple $(f(a),a',f(a\\to a'))$. Its opposite $\\kappa_f^{\\mathrm{op}}$ is final: in every containing target universe, for every quasicategory $\\mathcal E$, diagram $p:W_f^{\\mathrm{op}}\\to\\mathcal E$ and $e\\in\\mathcal E$, restriction induces an equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(W_f^{\\mathrm{op}},\\mathcal E)}(p,\\Delta e)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(\\operatorname{Tw}(\\mathcal A)^{\\mathrm{op}},\\mathcal E)}(p\\kappa_f^{\\mathrm{op}},\\Delta e).$$\nThus any specified cocone on $p$ is colimiting if and only if its restriction is colimiting, with the same vertex. The pullback, classification and graph map are natural in commutative squares of functors $f$. In particular, if $\\mathcal A$ is $\\mathcal U$-small for a smaller universe $\\mathcal U$, the domain $\\operatorname{Tw}(\\mathcal A)^{\\mathrm{op}}$ is $\\mathcal U$-small, even if $\\mathcal B$ is not.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 5.6.9, its second canonical map (5.6.8.2), printed pp. 241-242; the mapping-space classifier is Section 5.6, Propositions 5.6.2, 5.6.5 and Remark 5.6.15, printed pp. 238-244. Definition 4.4.13, printed p. 160, calls a map cofinal when its opposite is final. The cocone-space formulation is Theorem 6.4.5, printed pp. 296-297. This variance convention is essential. Read online, July 30 2026 revision; archival copy WANTED. No Stacks tag states this quasicategorical theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-space-valued-straightening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The twisted arrow functor of a quasicategory maps coinitially to the pullback of the twisted arrow left fibration along the graph of any functor",
+   "results": "{\"t\": \"2026-10-16T21:26:16Z\", \"tool\": \"leanfinder\", \"query\": \"The twisted arrow functor of a quasicategory maps coinitially to the pullback of the twisted arrow left fibration along the graph of any functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.initial_pre\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.TwoSquare.instFinalCostructuredArrowObjCostructuredArrowRightwardsOfGuitartExact\", \"CategoryTheory.TwoSquare.CostructuredArrowDownwards.mk_surjective\", \"CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow\", \"CategoryTheory.Grothendieck.final_pre\"], \"digest\": \"853771e906a98934\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic results concern ordinary CostructuredArrow.initial_pre, Functor.final_op_of_initial, and ordinary CategoryOfElements.fromStructuredArrow, not the twisted-arrow left fibration of a quasicategory. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and CategoryOfElements.lean (ordinary Category instances and functors). The Loogle conjunction returned zero hits; the CategoryTheory source grep returned zero twisted-arrow hits. No declaration states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor induces a final map from the opposite twisted arrow category to the category of elements of its mapping presheaf",
+   "results": "{\"t\": \"2026-10-16T21:26:17Z\", \"tool\": \"leansearch\", \"query\": \"A functor induces a final map from the opposite twisted arrow category to the category of elements of its mapping presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CategoryOfElements.fromCostructuredArrow\", \"CategoryTheory.CategoryOfElements.fromStructuredArrow\", \"CategoryTheory.CategoryOfElements.costructuredArrowYonedaEquivalence_functor\", \"CategoryTheory.Functor.final_op_of_initial\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"CategoryTheory.CategoryOfElements.fromStructuredArrow_map\", \"CategoryTheory.CategoryOfElements.fromCostructuredArrow_obj_mk\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObj\"], \"digest\": \"2f3b8c433c014bf2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic results concern ordinary CostructuredArrow.initial_pre, Functor.final_op_of_initial, and ordinary CategoryOfElements.fromStructuredArrow, not the twisted-arrow left fibration of a quasicategory. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and CategoryOfElements.lean (ordinary Category instances and functors). The Loogle conjunction returned zero hits; the CategoryTheory source grep returned zero twisted-arrow hits. No declaration states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TwistedArrow\", \"Final\"",
+   "results": "{\"t\": \"2026-10-16T21:26:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"TwistedArrow\\\", \\\"Final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic results concern ordinary CostructuredArrow.initial_pre, Functor.final_op_of_initial, and ordinary CategoryOfElements.fromStructuredArrow, not the twisted-arrow left fibration of a quasicategory. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and CategoryOfElements.lean (ordinary Category instances and functors). The Loogle conjunction returned zero hits; the CategoryTheory source grep returned zero twisted-arrow hits. No declaration states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedArrow|twistedArrow",
+   "results": "{\"t\": \"2026-10-16T21:26:17Z\", \"tool\": \"grep\", \"query\": \"TwistedArrow|twistedArrow\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic results concern ordinary CostructuredArrow.initial_pre, Functor.final_op_of_initial, and ordinary CategoryOfElements.fromStructuredArrow, not the twisted-arrow left fibration of a quasicategory. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and CategoryOfElements.lean (ordinary Category instances and functors). The Loogle conjunction returned zero hits; the CategoryTheory source grep returned zero twisted-arrow hits. No declaration states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted arrow graph comparison is coinitial for every functor of infinity categories",
+   "results": "{\"t\": \"2026-10-16T21:40:22Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted arrow graph comparison is coinitial for every functor of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.initial_pre\", \"CategoryTheory.CostructuredArrow.initial_map₂_id\", \"CategoryTheory.CostructuredArrow.initial_post\", \"CategoryTheory.Functor.initial_of_isCofiltered_costructuredArrow\", \"CategoryTheory.Functor.initial_iff_isCofiltered_costructuredArrow\", \"CategoryTheory.CostructuredArrow.initial_proj_of_isCofiltered\", \"CategoryTheory.Functor.Initial.exists_eq\", \"CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow\"], \"digest\": \"cc2ee9f178cc7b61\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits CostructuredArrow.initial_pre and CategoryOfElements.fromCostructuredArrow are ordinary-category results. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and Elements.lean:43-85, where all objects are ordinary Category instances and functors into Type. The second mapping-presheaf phrasing still returned ordinary categories of elements, not a quasicategorical twisted-arrow left fibration. Loogle and AlgebraicTopology grep found no twisted-arrow declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TwistedArrow\"",
+   "results": "{\"t\": \"2026-10-16T21:40:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"TwistedArrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits CostructuredArrow.initial_pre and CategoryOfElements.fromCostructuredArrow are ordinary-category results. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and Elements.lean:43-85, where all objects are ordinary Category instances and functors into Type. The second mapping-presheaf phrasing still returned ordinary categories of elements, not a quasicategorical twisted-arrow left fibration. Loogle and AlgebraicTopology grep found no twisted-arrow declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*arrow|twisted.*diagonal",
+   "results": "{\"t\": \"2026-10-16T21:40:21Z\", \"tool\": \"grep\", \"query\": \"twist.*arrow|twisted.*diagonal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits CostructuredArrow.initial_pre and CategoryOfElements.fromCostructuredArrow are ordinary-category results. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and Elements.lean:43-85, where all objects are ordinary Category instances and functors into Type. The second mapping-presheaf phrasing still returned ordinary categories of elements, not a quasicategorical twisted-arrow left fibration. Loogle and AlgebraicTopology grep found no twisted-arrow declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The opposite twisted arrow category maps finally to the mapping presheaf category of elements along a functor",
+   "results": "{\"t\": \"2026-10-16T21:40:22Z\", \"tool\": \"leansearch\", \"query\": \"The opposite twisted arrow category maps finally to the mapping presheaf category of elements along a functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CategoryOfElements.fromCostructuredArrow\", \"CategoryTheory.CostructuredArrow.toStructuredArrow_obj\", \"CategoryTheory.Arrow.opEquiv\", \"Quiver.Hom.unmop\", \"CategoryTheory.Functor.op\", \"CategoryTheory.CategoryOfElements.toCostructuredArrow\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"MulOpposite\"], \"digest\": \"d07b18ca0cf10f07\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits CostructuredArrow.initial_pre and CategoryOfElements.fromCostructuredArrow are ordinary-category results. Read Mathlib/CategoryTheory/Limits/Final.lean:130-157 and Elements.lean:43-85, where all objects are ordinary Category instances and functors into Type. The second mapping-presheaf phrasing still returned ordinary categories of elements, not a quasicategorical twisted-arrow left fibration. Loogle and AlgebraicTopology grep found no twisted-arrow declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Initial functor from edgewise subdivision to the Grothendieck construction of a mapping space bifunctor",
+   "results": "{\"t\": \"2026-10-16T21:54:12Z\", \"tool\": \"leanfinder\", \"query\": \"Initial functor from edgewise subdivision to the Grothendieck construction of a mapping space bifunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.mapBifunctorObjSingle₀ObjIsInitial\", \"CategoryTheory.GradedObject.mapBifunctorObjObjSingle₀IsInitial\", \"SimplexCategory.Truncated.initial_inclusion\", \"SimplexCategory.Truncated.initial_incl\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.WithInitial.prelaxfunctor\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"276b8af68f9f61b3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Elements.lean:42-82 defines categories of elements of ordinary Type-valued functors. The semantic results concern ordinary graded objects, nerves and truncated-simplex inclusions; the grep hits in Subdivision.lean:35-75 concern subdivision via ordinary Kan extension. None states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "edgewise|twisted|KanExtension",
+   "results": "{\"t\": \"2026-10-16T21:54:08Z\", \"tool\": \"grep\", \"query\": \"edgewise|twisted|KanExtension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"cc269d18b6e7a65b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Elements.lean:42-82 defines categories of elements of ordinary Type-valued functors. The semantic results concern ordinary graded objects, nerves and truncated-simplex inclusions; the grep hits in Subdivision.lean:35-75 concern subdivision via ordinary Kan extension. None states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"Initial\"",
+   "results": "{\"t\": \"2026-10-16T21:55:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"Initial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.initiallySmall\", \"CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instInitiallySmallElementsFiberOfIsCofiltered\", \"CategoryTheory.GrothendieckTopology.Point.ofIsCofiltered.instInitialElementsFiberFunctorOfIsCofiltered\"], \"digest\": \"e559bf67887b0fa0\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Elements.lean:42-82 defines categories of elements of ordinary Type-valued functors. The semantic results concern ordinary graded objects, nerves and truncated-simplex inclusions; the grep hits in Subdivision.lean:35-75 concern subdivision via ordinary Kan extension. None states the graph comparison for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any functor of quasicategories the edgewise subdivision maps initially to the category of elements of the Hom classifier",
+   "results": "{\"t\": \"2026-10-16T21:55:38Z\", \"tool\": \"leansearch\", \"query\": \"For any functor of quasicategories the edgewise subdivision maps initially to the category of elements of the Hom classifier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.categoryOfElements\", \"CategoryTheory.Functor.elementsFunctor\", \"CategoryTheory.Functor.elementsFunctor_obj\", \"CategoryTheory.CategoryOfElements.π\", \"SSet.Truncated.mapHomotopyCategory_homMk\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.Functor.elementsFunctor_map\", \"CategoryTheory.CategoryOfElements.instLocallySmallElements\"], \"digest\": \"3d3518472c500932\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Second-reader search: Elements.lean:42-82 defines categories of elements of ordinary Type-valued functors. The semantic results concern ordinary graded objects, nerves and truncated-simplex inclusions; the grep hits in Subdivision.lean:35-75 concern subdivision via ordinary Kan extension. None states the graph comparison for arbitrary quasicategories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-diagram-coyoneda",
+  "date": "2026-10-17",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

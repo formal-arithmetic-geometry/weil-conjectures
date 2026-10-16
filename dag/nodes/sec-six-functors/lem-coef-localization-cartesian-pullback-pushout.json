@@ -28,9 +28,130 @@
   "def-coef-complete-algebroid",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First compare the two conventions for Cartesian edges. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to $p^{\\mathrm{op}}:E^{\\mathrm{op}}\\to D^{\\mathrm{op}}$: order reversal exchanges $\\Lambda_0^n$ with $\\Lambda_n^n$ and the edge $\\{0,1\\}$ with $\\{n-1,n\\}$. On mapping spaces the arrow model of [lem-coef-infinity-pinch-comparison] gives $U_{E^{\\mathrm{op}}}(x,z)=U_E(z,x)^{\\mathrm{op}}$. Reversal of barycentric coordinates gives $|K^{\\mathrm{op}}|\\cong|K|$: the opposite of an operator $\\alpha:[m]\\to[n]$ is $i\\mapsto n-\\alpha(m-i)$, so the quotient identifications of [def-cbc-enhanced-diagrams-cones] agree under reversal. This comparison is natural in $K$. Reversing a triangle exchanges its edges $01,12$ and retains its long edge $02$; the triangle formula for composition in [lem-coef-infinity-mapping-composition] therefore identifies opposite precomposition with the postcomposition square in the statement. The natural pinch equivalences then identify the two mapping-space tests, including their homotopies. Hence the assumed lifts are precisely final-horn Cartesian lifts. For any base map $T\\to D$, an inner-horn or Cartesian final-horn problem for $T\\times_D E\\to T$ projects to a problem for $p$; pair its filler with the prescribed simplex in $T$. Given an edge $t'\\to t$ and an object $(t,e)$, choose a Cartesian lift $e'\\to e$ of its image in $D$ and pair it with $t'\\to t$. The preceding final-horn argument makes this pair Cartesian. Thus every degreewise base change remains a Cartesian fibration, even for a nonfibrant base.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.4.1, Cartesian/coCartesian duality; mapping-space characterization, expressed by the cited DAG criterion."
+   }
+  },
+  {
+   "text": "Let $q:N(\\mathsf{sSet}_{\\mathrm J})\\to\\mathcal L$ be coherent localization at categorical equivalences. The Joyal model structure exists by [lem-coef-joyal-model-structure]. The Quillen equivalence $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ and its identification with $\\mathrm{Cat}_\\infty$ in [lem-coef-coherent-nerve-comparison], with the derived-adjunction construction of [lem-coef-model-infinity-derived-adjunction], identify $\\mathcal L$ with $\\mathrm{Cat}_\\infty$. A quasicategory represents itself under this identification. We will use [lem-coef-cocomplete-cofibration-localization] for this model. Its hypotheses follow directly from the Joyal weak factorization systems: all objects are cofibrant because $\\varnothing\\to K$ is degreewise injective; factorization is given; pushouts and coproducts of cofibrations or trivial cofibrations have the same lifting property against the corresponding right class, since a compatible family of lifting problems is solved on each summand, or on the added pushout piece. All small limits and colimits of simplicial sets are formed degreewise in sets; their simplicial operators are induced by the universal property. Monomorphisms contain isomorphisms and are composition closed. Categorical equivalences contain isomorphisms directly from their functor-category test, and are composition closed by two-out-of-three; they have the stated retract closure. Thus the initial object, factorization, coproduct and cofibration-pushout hypotheses are all satisfied. In particular $q$ carries every strict pushout along a simplicial monomorphism to a coherent pushout in $\\mathrm{Cat}_\\infty$. No combinatoriality or simplicial-model assertion about the Joyal structure is needed for this application.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-cocomplete-cofibration-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1; Section 4.2.4; agent application of the all-cofibrant cofibration-localization theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-diagram-model-rectification] to the finite ordinary square category $[1]\\times[1]$ and the Joyal model. It supplies a strictly commuting square of simplicial sets whose image under $q$ is coherently equivalent to the given square, including the entire cocone. Functorial fibrant replacement, applied at all four vertices and arrows, makes its vertices quasicategories without changing its coherent equivalence class. Denote this square by $A_0\\to B_0$, $A_0\\to C_0$, $B_0,C_0\\to D_0$. Its apex is accompanied by an equivalence $d:D_0\\to D$ and compatibility homotopies for the square; equivalences of coherent diagrams are pointwise by [lem-cbc-enhanced-functor-cone-calculus]. Form $E_0=D_0\\times_D E$ degreewise; step 1 shows $p_0:E_0\\to D_0$ is Cartesian. We record once how a degreewise pullback of a Cartesian fibration is compared with the pullback in $\\mathrm{Cat}_\\infty$; it is used here and in step 7. Let $Z\\to S$ be a Cartesian fibration of quasicategories and $K\\to S$ any small simplicial map. By [lem-coef-marked-relative-cartesian-model] the degreewise square $K\\times_S Z$ is a Joyal homotopy pullback: its comparison with the pullback of a fibrant replacement of the cospan is a categorical equivalence. Take that replacement explicitly with the factorizations of [lem-coef-joyal-model-structure]: factor $K\\to S$ as a trivial cofibration $K\\to K'$ followed by a fibration $K'\\to S$, and $Z\\to S$ as a trivial cofibration $Z\\to Z'$ followed by a fibration $Z'\\to S$. Since $S$ is a quasicategory, so are $K'$ and $Z'$ (a fibration over a fibrant object has fibrant source). By (1) of [lem-coef-joyal-quasicategory-characterizations], the Joyal fibration $Z'\\to S$ between quasicategories is an isofibration, so by [lem-coef-infinity-isofibration-pullback-limit] the degreewise square $K'\\times_S Z'$ is a pullback square in $\\mathrm{Cat}_\\infty$. Under the identification of step 2 the weak equivalences $K\\to K'$, $Z\\to Z'$ and $K\\times_S Z\\to K'\\times_S Z'$ become equivalences, compatibly with the projections, so $q(K\\times_S Z)$ with its two projections is the pullback $qK\\times_{qS}qZ$. Applied with $S=D$, $Z=E$, $K=D_0$, this shows that $E_0$ with its projections is the infinity-categorical pullback $D_0\\times_D E$; here $d$ is a categorical equivalence by (2) of [lem-coef-joyal-quasicategory-characterizations], being an equivalence of quasicategories. Thus it suffices to prove the result for this strict square and $p_0$: the given coherent equivalence of squares and $d$ identify their pulled-back diagrams, with all maps, by the universal property of pullback.",
+   "uses": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-joyal-model-structure",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.2.4, strict/coherent diagram comparison; Corollary 3.3.1.4 for the pullback along d."
+   }
+  },
+  {
+   "text": "Factor $A_0\\to B_0$ as a monomorphism $A_0\\hookrightarrow B_1$ followed by a Joyal trivial fibration $B_1\\to B_0$, and do the same for $A_0\\to C_0$ with middle object $C_1$. Give the middle objects their maps to $D_0$ by composition; the square therefore still commutes strictly over $D_0$. These factorizations are provided by [lem-coef-joyal-model-structure]. The span $B_1\\leftarrow A_0\\to C_1$ is equivalent after $q$ to the preceding span, since both comparison maps are weak equivalences. Put $P=B_1\\amalg_{A_0}C_1$ in simplicial sets. By step 2 and [lem-coef-cocomplete-cofibration-localization], $qP$ with this cocone is a pushout. The induced map $u:P\\to D_0$ has image an equivalence: both its source cocone and its target cocone are pushouts of this same span. The contractibility of initial objects in the cocone category, supplied by [lem-cbc-enhanced-functor-cone-calculus], applies to this specified comparison. Finally $u$ is a categorical equivalence by [lem-coef-model-localization-detects-weak-equivalences]. Here is the ordinary-localization check. For an ordinary category $H$, a simplicial map $K\\to N(H)$ assigns objects to vertices and arrows to edges, takes degenerate edges to identities, and imposes exactly the composition relations of the $2$-simplices. Higher simplices of $N(H)$ are uniquely determined by these data. Thus such maps are exactly functors $hK\\to H$, with $hK$ defined in [lem-coef-joyal-model-structure]. The same description for $K\\times\\Delta^n$ identifies $\\operatorname{Fun}(K,N(H))$ with the nerve of the ordinary functor category $\\operatorname{Fun}(hK,H)$: the mixed $2$-simplices express the naturality squares. Applying the coherent localization property of $q$ with target $N(H)$ therefore says that restriction from $h\\mathcal L$ identifies ordinary functors out of it with functors from $\\mathsf{sSet}_{\\mathrm J}$ that invert the weak equivalences, including their natural transformations. This is the ordinary localization universal property. Hence that node applies to the image of $u$ in $h\\mathcal L$. We have not assumed that $B_1,C_1$ or $P$ is a quasicategory.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.2.4, homotopy pushout represented by cofibrant span; comparison with its colimiting cocone."
+   }
+  },
+  {
+   "text": "For $K=A_0,B_1,C_1,P$, write $K_E=K\\times_{D_0}E_0$ degreewise. There is a canonical isomorphism of simplicial sets over $E_0$,\n$$(B_1)_E\\amalg_{(A_0)_E}(C_1)_E\\ \\cong\\ P_E.$$\nHere is its inverse degree by degree. An $n$-simplex on the right is a pair $([t],e)$ with $[t]$ a class in $(B_1)_n\\amalg_{(A_0)_n}(C_1)_n$ and the images of $t,e$ equal in $(D_0)_n$. Choose a representative $t$ in either summand and send the pair to the class of $(t,e)$. A generating relation identifying the two images of $a\\in(A_0)_n$ identifies exactly the two images of $(a,e)$; its image in $D_0$ is unchanged. Thus the result is independent of the representative. It is inverse to the displayed comparison and commutes with every simplicial operator. The two pulled-back legs are monomorphisms: equality of pairs implies equality of their first coordinates, and the original legs are injective. This is a set-theoretic calculation; it imposes no fibrancy requirement on any of these four simplicial sets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent degreewise pushout/pullback calculation in simplicial sets; the ordinary calculation used with Proposition 3.3.1.3."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocomplete-cofibration-localization] to the monomorphism pushout of step 5. It follows that $qP_E$ is the pushout of $q(B_1)_E\\leftarrow q(A_0)_E\\to q(C_1)_E$. We now identify its apex. The family of relative marked model structures of [lem-coef-marked-relative-cartesian-model] supplies every structural hypothesis in [lem-coef-cartesian-base-equivalence-invariance]: monomorphism cofibrations, Cartesian weak equivalences, the stated fibrant objects and fiberwise criterion, sharp simplicial enrichment and tensor, and the base-change Quillen adjunctions. The tensor convention also follows explicitly from its sharp mapping formula: a map $U\\times K^\\sharp\\to V$ over the base is exactly a compatible family of maps $U\\times(\\Delta^n)^\\sharp\\to V$, one for each simplex $\\Delta^n\\to K$. This is the tensor adjunction, so the tensor is $U\\times K^\\sharp$ as required. Apply part (1) of that node to the Cartesian fibration $p_0:E_0\\to D_0$ and the categorical equivalence $u:P\\to D_0$ from step 4. It gives that $P_E\\to E_0$ is a categorical equivalence. In particular this invocation allows $P$ to be an arbitrary simplicial set. Replacing the pushout apex by $E_0$ using this equivalence shows that the cocone with maps induced from $B_1,C_1\\to D_0$ is a pushout in $\\mathrm{Cat}_\\infty$.",
+   "uses": [
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cartesian-base-equivalence-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.3, with the relative marked model structure establishing its hypotheses."
+   }
+  },
+  {
+   "text": "It remains to compare this cocone with the one in the question. For every small simplicial set $K\\to D_0$, the comparison written in step 3, applied to the Cartesian fibration $p_0:E_0\\to D_0$ of quasicategories (the homotopy-pullback clause of [lem-coef-marked-relative-cartesian-model], the explicit fibrant replacement of the cospan by the factorizations of [lem-coef-joyal-model-structure], (1) of [lem-coef-joyal-quasicategory-characterizations] and [lem-coef-infinity-isofibration-pullback-limit]), shows that $q(K_E)$ computes $qK\\times_{qD_0}qE_0$, with its canonical projections. No quasicategory hypothesis on $K$ is needed for this. Apply this to $A_0,B_1,C_1$. The equivalences $qB_1\\simeq B_0$ and $qC_1\\simeq C_0$ over $D_0$ from step 4 identify the three vertices and arrows of the span in step 6 with the intrinsic pullback span for $A_0,B_0,C_0$. Thus this intrinsic pullback cocone with apex $E_0$ is a pushout. Finally apply the coherent equivalence of squares and the pullback comparison of step 3 to identify it with the displayed cocone $A\\times_D E\\to B\\times_D E$, $A\\times_D E\\to C\\times_D E$, with apex $E$. A coherent equivalence of cocones preserves the property of being initial in the cocone category, or equivalently its mapping-space universal property, by [lem-cbc-enhanced-functor-cone-calculus]. This proves the required pushout with exactly its specified maps. All replacements, finite shapes and degreewise constructions stay in the fixed universe, and the localization may be taken in the larger universe stipulated in the statement.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.1.4; Section 4.2.4; invariance of the colimiting cocone under coherent equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cartesian-base-equivalence-invariance",
+  "lem-coef-cocomplete-cofibration-localization",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-small-diagram-model-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent argument from the existing DAG model and rectification results, following the consequence of HTT Proposition 3.3.1.3, Corollary 3.3.1.4 and Section 4.2.4. HTT read online; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -199,10 +320,73 @@
    "results": "{\"t\": \"2026-10-16T20:53:23Z\", \"tool\": \"leanfinder\", \"query\": \"An exponentiable functor of quasicategories given by a Cartesian fibration has a colimit preserving inverse image functor between slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"CategoryTheory.ExponentiableMorphism.pushforward\", \"CategoryTheory.ExponentiableMorphism.pushforwardUncurry\", \"CategoryTheory.ExponentiableMorphism.ev\", \"CategoryTheory.ExponentiableMorphism.pushforwardCurry\", \"CategoryTheory.ExponentiableMorphism.OverMkHom\", \"CategoryTheory.ExponentiableMorphism.coev\", \"CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc\"], \"digest\": \"8d3330c13139ca73\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading inspected the actual hits and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:39-61, CategoryTheory/FiberedCategory/Grothendieck.lean:35-83, and AlgebraicTopology/Quasicategory/Nerve.lean:29-33. Exponentiability is an assumption for ordinary categorical slices; the ordinary Grothendieck construction and the fact that ordinary nerves are quasicategories do not assert either infinity-categorical localization or preservation of arbitrary coherent pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change along a Cartesian fibration preserves homotopy pushouts of quasicategories",
+   "results": "{\"t\": \"2026-10-16T21:23:18Z\", \"tool\": \"leanfinder\", \"query\": \"Base change along a Cartesian fibration preserves homotopy pushouts of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.BicartSq.isPushout\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.PushoutObjObj.ofHasPushout\", \"CategoryTheory.Functor.PushoutObjObj.isPushout\", \"CategoryTheory.Limits.hasPushouts_symmetry_of_hasPushoutsAlong\"], \"digest\": \"4f46d99b598a9668\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFibered\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T21:23:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFibered\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "grep",
+   "query": "(cartesian|fibered).*(pushout|colimit)|(pushout|colimit).*(cartesian|fibered)",
+   "results": "{\"t\": \"2026-10-16T21:23:18Z\", \"tool\": \"grep\", \"query\": \"(cartesian|fibered).*(pushout|colimit)|(pushout|colimit).*(cartesian|fibered)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/BicartesianSq.lean\"], \"digest\": \"029f4c99acef8aa6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian fibrations are exponentiable and base change preserves colimits",
+   "results": "{\"t\": \"2026-10-16T21:23:19Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian fibrations are exponentiable and base change preserves colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.noConfusionType\", \"CategoryTheory.IsExponentiable\", \"CategoryTheory.ExponentiableMorphism.noConfusion\", \"CategoryTheory.ExponentiableMorphism.mk\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.ExponentiableMorphism.isExponentiable\", \"CategoryTheory.instIsCartesianCompOfIsFibered\"], \"digest\": \"5c7997bb63999333\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback functor on simplicial sets over a quasicategory preserves categorical equivalences along Cartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T21:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback functor on simplicial sets over a quasicategory preserves categorical equivalences along Cartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv\", \"SSet.finite_of_isPullback\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"HasFibers.mkPullback\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"c557e3f2580a01a0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFibered|ExponentiableMorphism",
+   "results": "{\"t\": \"2026-10-16T21:23:51Z\", \"tool\": \"grep\", \"query\": \"IsFibered|ExponentiableMorphism\", \"sub\": \"CategoryTheory/LocallyCartesianClosed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\"], \"digest\": \"ec6fe18c8c23b78a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. SSet subcomplex bicartesian squares and finite pullbacks are ordinary simplicial-set constructions; model-category base-change instances concern (trivial) fibrations, not homotopy-colimit preservation; IsFibered and ExponentiableMorphism are ordinary-category notions. Read Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:84-100 and Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean:35-61. None states Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Ff]ibration|[Cc]artesian[Ff]ibration|[Ee]xponentiable",
+   "results": "{\"t\": \"2026-10-16T21:54:17Z\", \"tool\": \"grep\", \"query\": \"flat.*[Ff]ibration|[Cc]artesian[Ff]ibration|[Ee]xponentiable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean\"], \"digest\": \"fd0e2d84055ee9bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reader inspected ExponentiableMorphism.lean:39-61 (ordinary slice adjunction is an assumption), ModelCategory/Instances.lean:110-150 (stability of fibrations), and Limits/Shapes/Grothendieck.lean:12-95 (ordinary fiberwise colimits). No returned declaration asserts flat/Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsExponentiable\"",
+   "results": "{\"t\": \"2026-10-16T21:54:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsExponentiable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.IsExponentiable\", \"CategoryTheory.ExponentiableMorphism.isExponentiable\"], \"digest\": \"57d911fc8f773819\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reader inspected ExponentiableMorphism.lean:39-61 (ordinary slice adjunction is an assumption), ModelCategory/Instances.lean:110-150 (stability of fibrations), and Limits/Shapes/Grothendieck.lean:12-95 (ordinary fiberwise colimits). No returned declaration asserts flat/Cartesian quasicategorical base change preserves coherent pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change functor of a flat categorical fibration preserves homotopy colimits in slices of quasicategories",
+   "results": "{\"t\": \"2026-10-16T21:54:20Z\", \"tool\": \"leanfinder\", \"query\": \"Base change functor of a flat categorical fibration preserves homotopy colimits in slices of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.lan_flat_of_flat\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CommRingCat.Under.preservesFiniteLimits_of_flat\", \"CategoryTheory.Limits.fiberwiseColimit_map\", \"CategoryTheory.Limits.fiberwiseColim\", \"CategoryTheory.compatiblePreservingOfFlat\"], \"digest\": \"395909faedb96a22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reader inspected ExponentiableMorphism.lean:39-61 (ordinary slice adjunction is an assumption), ModelCategory/Instances.lean:110-150 (stability of fibrations), and Limits/Shapes/Grothendieck.lean:12-95 (ordinary fiberwise colimits). No returned declaration asserts flat/Cartesian quasicategorical base change preserves coherent pushouts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-localization-cartesian-pullback",
@@ -210,5 +394,29 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localization-cartesian-pullback-pushout",
+  "worker": "stage1",
+  "summary": "Kept the statement. Seven steps establish the horn convention, Joyal localization presentation, strict rectification, a monomorphism-span pushout comparison, degreewise base-change pushout calculation, arbitrary-simplicial-set categorical-equivalence comparison, and identification of the original coherent cocone. Reused existing nodes throughout; no new node or Mathlib leaf. No attachment exists in the project Lean source. Second reading repaired TeX, expanded opposite mapping-space/composition comparison and lift existence, checked all cofibration-localization hypotheses, and wrote the ordinary-localization universal-property argument explicitly; no new nodes.",
+  "blueprint": "Realizes the localization-pushout base-change ingredient in Gepner–Haugseng Proposition 5.3.16, used in the derived-enrichment realization supporting paragraph 2 of prop-coef-integral-exceptional-adjoint (the derived coefficient-adjunction before R lim). No change to the unit route or the coefficient categories.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise equivalence and initial-cocone calculus used to compare rectified diagrams and the specified pushout comparison; this unit has no separate replacement for these universal cone facts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-c40a7081c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-c40a7081c (reviewer sub-agent of L); spot-checked: I read the item, its parent's step 2 (the only user) and the full statement of every cited node. HTT is not archived, so the proof is correctly marked by:agent and HTT is WANTED. The statement is true and not weakened, and it matches the parent's use. Small cases checked: D=pt reduces to product preserving pushouts; p=id; E empty; A empty gives coproducts. No duplicate found in the DAG or the blueprint, Mathlib has no quasicategorical Cartesian fibrations, no SGA is cited, and no coefficient category changes. Step 1: the cocartesian mapping criterion applied to p^op, the pinch comparison and the mapping-composition formula give the horn convention, and horn lifting is stable under base change. Step 2: every hypothesis of cocomplete-cofibration-localization holds for the Joyal structure, and the Quillen equivalence identifies the localization with Cat_inf. Step 4: u:P->D0 is an equivalence by the detection node; the ordinary-localization argument holds. Step 5: genuinely elementary. Step 6: every structural hypothesis of the conditional cartesian-base-equivalence-invariance node matches lem-coef-marked-relative-cartesian-model, including the U x K^sharp tensor and the fiber criterion, and part (1) applies with the non-quasicategory P. Fault found (C1/C4) and repaired: steps 3 and 7 went from 'degreewise pullback of a Cartesian fibration is a Joyal homotopy pullback' to 'it is the pullback in Cat_inf' with nothing cited. Step 3 now writes out the comparison: Joyal fibrant replacement of the cospan, Joyal fibration between quasicategories = isofibration by (1) of lem-coef-joyal-quasicategory-characterizations, isofibration pullback = Cat_inf pullback by lem-coef-infinity-isofibration-pullback-limit, and d is a categorical equivalence by (2). Step 7 now refers to that comparison. Both new citations are in the same unit and split, and neither reaches the item. proof_deps was recomputed. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus as the generic cone and equivalence calculus. The corrected item is under fixes/dag/nodes/sec-six-functors/, and review.md has the full checks.; 1 file(s) fixed by the reviewer"
+ }
 }

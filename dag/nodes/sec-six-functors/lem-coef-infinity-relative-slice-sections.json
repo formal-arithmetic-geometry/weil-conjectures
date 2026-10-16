@@ -31,9 +31,152 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_D=\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\times_{\\operatorname{ev}_0,\\mathcal C}D$, with target projection $q:A_D\\to\\mathcal C$. It is the full subcategory of the arrow quasicategory on arrows with source in $D$. Target evaluation is an inner fibration by the restriction/isofibration theorem with $\\{1\\}\\subset\\Delta^1$. Its restriction to $A_D$ is still an inner fibration: in any inner-horn problem all source vertices of a filler already belong to $D$, so fullness retains the filler. Given $a:d\\to x$ and $u:x\\to y$, fill the composition horn to obtain $b:d\\to y$ and its composition triangle. This triangle, together with the degenerate triangle at $d$, is a square, hence an edge $s:a\\to b$ of $A_D$ over $u$ whose source component is $1_d$. To verify cocartesianness, fix $c:z\\to t$ in $A_D$ and write $P=\\operatorname{Map}_{\\mathcal C}(d,z)$, $Q=\\operatorname{Map}_{\\mathcal C}(d,t)$. The arrow-morphism formula identifies $\\operatorname{Map}_{A_D}(b,c)$ with $P\\times_Q^h\\operatorname{Map}_{\\mathcal C}(y,t)$ and $\\operatorname{Map}_{A_D}(a,c)$ with $P\\times_Q^h\\operatorname{Map}_{\\mathcal C}(x,t)$. The maps to $Q$ are composition with $c$ and with $b$, respectively with $a$; the chosen triangle identifies the latter after precomposition by $u$. Thus the mapping square for $s$ is the base-change square of these two pullbacks (a point on either iterated pullback is the same triple and its compatibility path). It is a homotopy pullback. The cocartesian mapping criterion makes $s$ horn-cocartesian. This constructs all required lifts and proves that $q$ is a cocartesian fibration.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent reconstruction of the cocartesian dual of Corollary 2.4.7.12, using the mapping criterion of Proposition 2.4.4.3 (dual)."
+   }
+  },
+  {
+   "text": "The specified $E_D$ is exactly $K\\times_{p,\\mathcal C,q}A_D$: both conditions say that the target diagram is $p$ and every source vertex is in $D$. Pull back the inner-horn fillers and the horn-cocartesian lifts of step 1 along $p$. A horn problem over $K$ supplies its entire base simplex in advance; apply the filler in $A_D$ and pair it with that base simplex. The same argument applies to each defining outer-horn problem for a cocartesian edge, so its pullback remains cocartesian. This works for an arbitrary simplicial set $K$, without assuming it a quasicategory. The fiber over $v$ is $D\\times_{\\mathcal C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\times_{\\operatorname{ev}_1,\\mathcal C}\\{p(v)\\}$, namely the arrow model of $D_{/p(v)}$. The lifts just constructed send $d\\to p(v)$ to its composite $d\\to p(v)\\to p(w)$, with the composition homotopies supplied by the composition-spine theorem; these are the stated transport functors.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Base change of the cocartesian dual of Corollary 2.4.7.12; relative-slice construction used in Proposition 5.4.4.3."
+   }
+  },
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Fun}(K,\\mathcal C)$ and $\\mathcal B=\\operatorname{Fun}(K,D)$. An $n$-simplex of the section simplicial set is a map $K\\times\\Delta^n\\to E_D$ whose projection is $K\\times\\Delta^n\\to K$. By the pullback definition and the exponential formula, this is precisely a map $d:K\\times\\Delta^n\\to D$ and a map $H:K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ restricting to $d$ at $0$ and to $p\\operatorname{pr}_K$ at $1$. Permuting the factors identifies these with the $n$-simplices of $T=\\mathcal B\\times_{\\mathcal A,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,\\mathcal A)\\times_{\\operatorname{ev}_1,\\mathcal A}\\{p\\}$. This is a simplicial isomorphism: both faces and degeneracies are precomposition on $\\Delta^n$. The arrow-target right-fibration theorem, applied to $\\mathcal A$ and $p$, makes $T\\to\\mathcal B$ a right fibration by pullback. Since $\\mathcal B$ is a quasicategory, its total space is a quasicategory (fill the base inner horn, then lift it). This proves the asserted coherent comma equivalence, including every higher simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-arrow-target-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "The section/comma identification in the relative-slice argument of Proposition 5.4.4.3; explicit exponential calculation, with Corollary 2.4.7.12 specialized to a fixed target."
+   }
+  },
+  {
+   "text": "Suppose $D$ essentially small. Choose a small quasicategory $D_0$ and an equivalence $e:D_0\\to D$ with quasi-inverse. Applying $\\operatorname{Fun}(K,-)$ to the two functors and their inverse equivalences gives inverse functors between $\\operatorname{Fun}(K,D_0)$ and $\\mathcal B$. The whiskered equivalences are equivalences by the componentwise equivalence criterion. The former simplicial set is small: in degree $n$ its simplices are maps between the two small simplicial sets $K\\times\\Delta^n$ and $D_0$. Hence $\\mathcal B$ is essentially small. In particular its diagrams $e d_0$, for vertices $d_0\\in\\operatorname{Fun}(K,D_0)$, form a small family of representatives up to equivalence.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Essential smallness of Fun(K,C^tau) in the proof of Proposition 5.4.4.3; expanded with a small model, without any compactness assumption."
+   }
+  },
+  {
+   "text": "The local-smallness theorem for small functor shapes makes $\\mathcal A$ and $\\mathcal B$ locally small. Space-valued transport identifies the fiber of $T\\to\\mathcal B$ at $d$ with $\\operatorname{Map}_{\\mathcal A}(d,p)$, with precomposition as transport. For $(d,\\alpha),(e,\\beta)\\in T$, the right-fibration morphism theorem therefore gives $\\operatorname{Map}_T((d,\\alpha),(e,\\beta))\\simeq\\operatorname{hofib}_{\\alpha}(\\operatorname{Map}_{\\mathcal B}(d,e)\\xrightarrow{h\\mapsto\\beta h}\\operatorname{Map}_{\\mathcal A}(d,p))$. This is essentially small: replace its two mapping spaces by small Kan models and use homotopy-pullback invariance; the path-space pullback of small models is small. Thus $T$ is locally small. For each representative $e d_0$ of step 4 choose a small Kan model of $\\operatorname{Map}_{\\mathcal A}(e d_0,p)$ and, for each of its vertices, a corresponding transformation. These choices form a small set of objects of $T$. Every $(d,\\alpha)$ is equivalent to one of them: choose an equivalence $h:e d_0\\to d$, form $\\alpha h$, and choose a vertex in its component in the small mapping-space model. The square with components $h,1_p$ and its inverse square from $h^{-1},1_p$ exhibit an equivalence of pairs; the inverse witnesses are the whiskered inverse witnesses for $h$. A path from the chosen transformation to $\\alpha h$ is an equivalence within the Kan fiber. Consequently the small family covers all objects of $T$ up to equivalence. Apply the small-full-subcategory theorem to this locally small $T$ and this family: its replete full span is all of $T$, proving essential smallness of the section category.",
+   "uses": [
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-small-full-subcategory",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent size argument for the section category, using small mapping spaces and small representatives; compare the essential-smallness observation in Proposition 5.4.4.3. No compactness or filteredness is needed."
+   }
+  },
+  {
+   "text": "Fix $x\\in\\mathcal C$ and model $\\mathcal C_{/x}$ by the target-fixed arrow category. Its source projection is the right fibration classifying $\\operatorname{Map}_{\\mathcal C}(-,x)$. For $a:A\\to x$ and $b:B\\to x$, the right-fibration morphism formula gives $\\operatorname{Map}_{\\mathcal C_{/x}}(a,b)\\simeq\\operatorname{hofib}_{a}(\\operatorname{Map}_{\\mathcal C}(A,B)\\xrightarrow{b\\circ-}\\operatorname{Map}_{\\mathcal C}(A,x))$. By exactly the degreewise exponential calculation of step 3, for every small simplicial set $J$ the category $\\operatorname{Fun}(J,\\mathcal C_{/x})$ is the target-fixed arrow category $\\operatorname{Fun}(J,\\mathcal C)_{/\\Delta_Jx}$. Applying the same right-fibration formula in that quasicategory gives the corresponding formula for coherent transformations of $J$-diagrams over $x$, naturally in both diagrams. In particular it retains the homotopies imposing equality of their composites with the structure maps to $x$.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-right-fibration-morphism-space",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Mapping-space computation underlying Proposition 1.2.13.8, with the fixed-target arrow model; no assumption that C has all colimits."
+   }
+  },
+  {
+   "text": "Let $q:J\\to\\mathcal C_{/x}$ have source diagram $a:J\\to\\mathcal C$, and let $\\lambda:a\\to\\Delta_J L$ be any colimiting source cocone. We first construct a lift of this cocone. Use the join/fat-cone comparison to represent it by a colimiting diagram on $J^{\\triangleright}$, with boundary fixed. Apply the parameter-cone-extension theorem with $B=\\Delta^1$, $P=\\partial\\Delta^1$, and shape $J$. On $B\\times J$ prescribe $q$, regarded as the transformation $a\\to\\Delta_Jx$. At vertex $0$ prescribe the source colimit cocone with apex $L$; at vertex $1$ prescribe the constant identity cocone with apex $x$. These prescriptions agree on $P\\times J$. The only nondegenerate simplex of $B$ outside $P$ is the edge $0\\to1$, whose initial vertex has precisely the colimit cocone $\\lambda$. The theorem therefore extends them over $B\\times J^{\\triangleright}$, fixing the indicated union. It supplies an arrow $t:L\\to x$ and a coherent cocone $q\\to\\Delta_Jt$ in $\\mathcal C_{/x}$ with the prescribed source cocone. The join comparison transfers this construction back to the coherent-cocone model. This invocation requires only the colimit of $a$; the constant diagram at $x$ need not have a colimit equal to $x$.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-parameter-cone-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Explicit extension version of the existence argument in Proposition 1.2.13.8; parameter-cone extension with P containing both vertices and the source endpoint colimiting."
+   }
+  },
+  {
+   "text": "For every test arrow $b:B\\to x$, compare the morphism formula of step 6 for $t$ with its diagram version for transformations $q\\to\\Delta_J b$. The two relevant maps are $\\operatorname{Map}_{\\mathcal C}(L,B)\\to\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C)}(a,\\Delta_J B)$ and $\\operatorname{Map}_{\\mathcal C}(L,x)\\to\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C)}(a,\\Delta_J x)$, each given by composition with $\\lambda$. Both are equivalences by the dual cone criterion, since $\\lambda$ is colimiting. They commute with postcomposition by $b$, and the lifted cocone identifies the image of $t$ with the transformation $a\\to\\Delta_Jx$ defining $q$. Homotopy-pullback invariance therefore identifies the homotopy fiber at $t$ of the first postcomposition map with the homotopy fiber at that transformation of the second. By step 6, this is exactly the equivalence $\\operatorname{Map}_{\\mathcal C_{/x}}(t,b)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C_{/x})}(q,\\Delta_J b)$ induced by our cocone. The dual cone criterion in $\\mathcal C_{/x}$ proves it colimiting. This argument works for every lift of a source colimit cocone. Conversely, since $a$ has a colimit, step 7 constructs one such colimiting lift; every other colimit of $q$ is equivalent to it, with its cocone, by contractibility of the space of colimiting cocones. Applying the source functor preserves this equivalence and the colimit property of its source cocone. Hence precisely the cocones with colimiting source are colimiting, under the stated existence hypothesis. This proves creation (up to its canonical contractible choice), preservation and detection for the colimits in question.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-cbc-right-fibration-morphism-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent mapping-space proof of the creation and characterization assertions of Proposition 1.2.13.8, using coherent natural-transformation fibers rather than a claim about Hom sets."
+   }
+  },
+  {
+   "text": "Finally let the specified diagram shapes have colimits in $\\mathcal C$ and let $D$ be closed under them. For any such diagram in $D_{/x}$ the source diagram lies in $D$, so its colimit $L$ in $\\mathcal C$ lies in $D$. The lift constructed above is consequently an object of $D_{/x}$. This category is full in $\\mathcal C_{/x}$, so the same equivalence on mapping spaces holds for every test object of $D_{/x}$ and makes this a colimit there. Any other colimit cocone in $D_{/x}$ is equivalent to it and therefore has the same source colimit property. For $f:x\\to y$, postcomposition takes the colimit apex $t:L\\to x$ to $ft:L\\to y$ and leaves its source cocone unchanged. The characterization just proved for $D_{/y}$ makes the resulting cocone colimiting. Thus all the specified colimits are computed on sources and preserved by postcomposition. For the empty shape this says that an initial source $0\\in D$ gives the initial arrow $0\\to x$; the argument has used no nonemptiness of a shape.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Full-subcategory restriction and postcomposition consequence of Proposition 1.2.13.8; elementary conclusion from steps 6-8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-functor-spine-tower-mapping-descent",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-parameter-cone-extension",
+  "lem-coef-infinity-small-full-subcategory",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Foundational relative-slice tool in the retained blueprint.from ancestry; argument reconstructed using the existing DAG interfaces, with HTT checked online."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -76,10 +219,52 @@
    "results": "{\"t\": \"2026-10-16T20:34:32Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction overcategory sections cocartesian infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\"], \"digest\": \"2e8fd3b880e36f3d\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. Returned ordinary CategoryTheory declarations require Category instances with Hom sets; StrictSegal declarations give strict simplex/path bijections. Neither covers the stated quasicategorical mapping-space theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent slices of a quasicategory form a cocartesian fibration and its sections are natural transformations",
+   "results": "{\"t\": \"2026-10-16T21:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent slices of a quasicategory form a cocartesian fibration and its sections are natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.Functor.IsCocartesian.map\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.liftOfStrictSegal\"], \"digest\": \"e442dbbb6497efda\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:24:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Over\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit.toOver\", \"CategoryTheory.Limits.colimit.toOver_pt\", \"CategoryTheory.Limits.colimit.toOver_ι_app\", \"CategoryTheory.Over.instHasColimits\", \"CategoryTheory.Over.instHasFiniteColimits\", \"CategoryTheory.Over.createsColimitsOfSize\", \"CategoryTheory.Over.instHasColimitsOfShape\", \"CategoryTheory.Over.preservesColimitsOfSize_map\"], \"digest\": \"7569b24bfb2e88cd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|relative.*slice|overcategor",
+   "results": "{\"t\": \"2026-10-16T21:24:48Z\", \"tool\": \"grep\", \"query\": \"cocartesian|relative.*slice|overcategor\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits in infinity overcategories are computed on sources and postcomposition preserves them",
+   "results": "{\"t\": \"2026-10-16T21:24:49Z\", \"tool\": \"leansearch\", \"query\": \"Colimits in infinity overcategories are computed on sources and postcomposition preserves them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.underPost\", \"CategoryTheory.Limits.PreservesColimitsOfShape.underPost\", \"CategoryTheory.Limits.PreservesColimitsOfSize.underPost\", \"CategoryTheory.Limits.PreservesFiniteColimits.underPost\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.colimit.map_post\", \"CategoryTheory.Limits.colimit.post_desc\", \"CategoryTheory.Adjunction.colim_preservesColimits\"], \"digest\": \"269a7894e1a33f28\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory over an object creates colimits and coherent comma sections of a small diagram are essentially small",
+   "results": "{\"t\": \"2026-10-16T21:24:50Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory over an object creates colimits and coherent comma sections of a small diagram are essentially small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.Limits.ColimitPresentation.instLocallySmallTotal\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.QCat.bicategory\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.StrictSegal.isPointwiseRightKanExtension\"], \"digest\": \"1f90105215efd2f5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "createsColimitsOfSize|preservesColimitsOfSize_map|hasColimit_of_hasColimit_comp_forget",
+   "results": "{\"t\": \"2026-10-16T21:26:07Z\", \"tool\": \"grep\", \"query\": \"createsColimitsOfSize|preservesColimitsOfSize_map|hasColimit_of_hasColimit_comp_forget\", \"sub\": \"CategoryTheory/Limits/Over.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"39\", \"54\", \"55\", \"71\", \"72\"], \"digest\": \"1fdca49a64c2cd15\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Over.lean:39-55,71-76 and FiberedCategory/Cocartesian.lean:46-74; these use ordinary Category instances and set-valued Hom. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-73 is the category/bicategory of quasicategories, not the requested coherent slice fibration or its section and colimit theorem. The semantic second phrasing returned SSet colimits, ordinary colimit presentations and StrictSegal facts, also insufficient. The Quasicategory grep returned no hits. No exact match or one-line specialization for arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-diagram-presentations",
@@ -87,5 +272,44 @@
   "group": "NV"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-slice-sections",
+  "worker": "stage1",
+  "summary": "Split all clauses using existing quasicategorical mapping-space, right-fibration, small-full-span and parameter-cone-extension statements. Constructed cocartesian lifts rather than creating a node for that clause; identified all section simplices explicitly; proved size through a small covering family, and slice colimits through a relative cone extension and homotopy fibers of natural-transformation spaces. No new nodes and no change to the statement. No closed project declaration matches.",
+  "blueprint": "Retains prop-coef-integral-exceptional-adjoint paragraph-2 ancestry via the accessible diagram presentation tool chain. Supplies the relative-slice construction and section size/colimit infrastructure used by the HTT Proposition 5.4.4.3 route of lem-coef-accessible-diagram-presentations. Whole-blueprint searches for slice, cocartesian, small functor and overcategories found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "General quasicategorical tool: Enhanced diagrams, spaces and homotopy coherent cones. It supplies foundational mapping-space or cone calculus, not a replacement route for the coefficient unit."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General quasicategorical tool: Basic calculus of coherent functors and cones. It supplies foundational mapping-space or cone calculus, not a replacement route for the coefficient unit."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "General quasicategorical tool: Mapping spaces and transport in a right fibration. It supplies foundational mapping-space or cone calculus, not a replacement route for the coefficient unit."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "General quasicategorical tool: Coherent composition from multiarrow spaces. It supplies foundational mapping-space or cone calculus, not a replacement route for the coefficient unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-078a555f0",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-078a555f0 (reviewer sub-agent of L); spot-checked: I read the item, all 3 stmt_deps, all 16 proof_deps statements, def-coef-infinity-relative-cone, the unit and the citer's steps 4-7. There are no new nodes, no cycle (closure of 322 nodes) and proof_deps equals the union of the step uses. HTT is not archived under literature; the report records it as WANTED and the proof is marked agent-written. I checked the cited places (Cor. 2.4.7.11 and the dual of 2.4.7.12: target evaluation is cocartesian by postcomposition; Prop. 1.2.13.8, which only needs the source colimit; Prop. 5.4.4.3) from knowledge of HTT, not from the PDF. Step 1: I recomputed the mapping square from the arrow-morphism formula and pasting; it is a homotopy pullback, and the criterion is an iff. Step 2: base change of the horn lifts works for any K. Step 3: I checked the simplicial isomorphism degree by degree; T->B is a pulled-back target right fibration. Step 4: small model plus whiskered equivalences. Step 5: local smallness from the general clause of the spine-tower node, the fiber formula, a small covering family, then the small-full-subcategory node. Step 7: parameter-cone-extension hypotheses hold with B=Δ¹, P=∂Δ¹; every simplex outside P, including the degenerate ones, has σ(0)=0, where the cocone is the colimit; the boundary agrees. Steps 8-9: dual cone criterion, uniqueness of colimits, closure and repleteness of D; the empty shape is covered. Steps 5 and 8 are terse where they strictify squares for homotopy-pullback invariance; this is standard and not a gap. Small cases checked: K empty, D empty, ordinary arrow, empty shape, two-point shape. Duplicate search over dag/nodes found nothing that states the item (arrow-source-fibers is the dual, pushout-based statement). Four off-unit sk-prop-sf-cbc generic quasicategory tools are declared in tool_uses and accepted. No SGA source is used. No changes."
+ }
 }

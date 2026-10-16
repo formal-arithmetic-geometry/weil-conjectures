@@ -26,9 +26,108 @@
  "stmt_deps": [
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $\\mathcal M$-algebra $B$. Apply [lem-coef-operadic-free-cocone-characterization] with $\\mathcal C=\\mathcal M$, $\\mathcal D=\\mathcal N$ and $X=B$. Its hypotheses hold: an operad map preserves inert arrows, $u$ is an equivalence on the two space zero-fibers, both operads are small, and $\\mathcal V$ is presentably monoidal. The cited existence clause gives an $\\mathcal N$-algebra $D_B$ and $\\eta_B:B\\to u^*D_B$ whose active-slice cocones are operadically colimiting. Its universal-property clause then gives, naturally for every $\\mathcal N$-algebra $C$, the equivalence $\\operatorname{Map}(D_B,C)\\simeq\\operatorname{Map}(B,u^*C)$ induced by composition with $\\eta_B$. Thus the covariant mapping-space functor $C\\mapsto\\operatorname{Map}(B,u^*C)$ is represented by $D_B$. The dual clause of [lem-coef-infinity-pointwise-adjoint-criterion], applied to $i=u^*$, assembles these representing objects into the coherent functor $u_!$, with the universal maps $\\eta_B$ as unit and the asserted mapping-space bifunctor equivalence. This proves the first clause including higher naturality. The free-cocone theorem includes empty tuples, and no nonempty-color or nonempty-slice assumption was introduced.",
+   "uses": [
+    "lem-coef-operadic-free-cocone-characterization",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition A.4.1, Propositions A.4.3–A.4.4 and Corollary A.4.5, with Theorem A.4.6; coherent assembly by the pointwise adjoint criterion (HTT Proposition 5.2.4.2 and its dual)."
+   }
+  },
+  {
+   "text": "For the nongeneralized operad $\\mathcal O$, the Segal identifications of [lem-coef-operadic-algebra-presentability] give $\\mathcal O_{[n]}\\simeq\\mathcal O_{[1]}^n$ and $\\mathcal O_{[0]}\\simeq *$. First check that its inert part is again an operad, so its inclusion is eligible for step 1. Form $\\mathcal O_{\\mathrm{triv}}=\\mathcal O\\times_{\\Delta^{\\mathrm{op}}}\\Delta^{\\mathrm{op}}_{\\mathrm{inert}}$, viewed over $\\Delta^{\\mathrm{op}}$. Inner horns fill in this subcategory: all their edges, including the composite edge of a two-dimensional inner horn, lie over inert arrows, since inert arrows are closed under composition. The inert lifts and all the fibers are unchanged. By [lem-coef-infinity-cocartesian-mapping-criterion], their cocartesian mapping-space condition restricts to this subcategory: if $\\rho$ is inert, $\\psi\\rho$ is inert exactly when $\\psi$ is inert, so the omitted noninert mapping fibers on both sides are empty. The Segal product condition over an inert $\\phi$ is unchanged; over a noninert $\\phi:[m]\\to[n]$ its left side is empty and at least one $\\rho_i\\phi$ is noninert, since all increments of $\\phi^{\\mathrm{op}}$ are one exactly when $\\phi$ is inert. Thus its right side is empty as well. For $n=0$ every map $[m]\\to[0]$ is inert and the unchanged empty-product axiom applies. Hence the operad axioms in [lem-coef-operadic-algebra-presentability] hold, and the inclusion preserves inert lifts and is the identity over $[0]$. Both $\\mathcal O$ and $\\mathcal O_{\\mathrm{triv}}$ are moreover generalized nonsymmetric infinity operads in the sense of [lem-coef-operadic-algebra-presentability], as step 1 requires. Axiom (i) is the same. For (ii), $\\mathcal O_{[0]}$ is a contractible Kan complex (shown below), so the iterated homotopy fiber product $\\mathcal O_{[1]}\\times_{\\mathcal O_{[0]}}\\cdots\\times_{\\mathcal O_{[0]}}\\mathcal O_{[1]}$ is equivalent to $\\mathcal O_{[1]}^n$ compatibly with the Segal map. For (iii), the objects of $I_n$ over $[0]$ are the $n+1$ vertex maps, and for each of them the target $C_\\alpha$ lies in $\\mathcal O_{[0]}$, so the $n=0$ case of the mapping-space axiom makes every $\\operatorname{Map}^{\\alpha\\phi}(X,C_\\alpha)$ contractible. The limit over the zigzag $I_n$, whose $[0]$-terms are contractible, is the iterated homotopy fiber product over points, that is, $\\prod_i\\operatorname{Map}^{\\rho_i\\phi}(X,C_i)$; so (iii) is the product axiom already checked. For $n=0$, $I_0$ is the single object $\\mathrm{id}_{[0]}$ and (iii) is the empty-product axiom. To check explicitly the space hypothesis of step 1, the equivalence $\\mathcal O_{[0]}\\simeq *$ makes every edge of $\\mathcal O_{[0]}$ an equivalence: a quasi-inverse and its natural equivalence with the identity identify that edge with an identity up to equivalences of its endpoints. Thus $\\mathcal O_{[0]}$ equals its core. Apply [lem-coef-infinity-core-kan-fibration] to its projection to the point, which is an isofibration since it is inner and identity equivalences lift degenerately. Its core, and hence the unchanged zero-fiber of both operads, is a Kan complex.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 3.4.1; verification of the inert suboperad axioms."
+   }
+  },
+  {
+   "text": "Write $C=\\mathcal O_{\\mathrm{triv}}$, $A=\\mathcal O_{[1]}$, and $s:C\\to\\Delta^{\\mathrm{op}}$. The inclusion $A\\subset C$ is full, since the only inert endomorphism of $[1]$ is the identity. For $x\\in C_{[n]}$, choose inert lifts $\\alpha_i:x\\to c_i$ over $\\rho_i$. Its local coslice $J_x=A\\times_C C_{x/}$ decomposes as the disjoint union of the categories of arrows over $\\rho_i$, $1\\leq i\\leq n$: every inert map $[n]\\to[1]$ is one of these, and every simplex of $A$ projects to the identity of $[1]$, so the index cannot change along a simplex. Regard $C\\to\\Delta^{\\mathrm{op}}_{\\mathrm{inert}}$ as an inner fibration. Each component is precisely the lift category $L(x,\\rho_i)$ of [lem-coef-infinity-cocartesian-composition-initiality]; that node makes $\\alpha_i$ initial in it, including all higher triangles. Therefore [lem-coef-relative-limit-initial-components] applies to the inclusion $\\{\\alpha_1,\\ldots,\\alpha_n\\}\\to J_x$. Now fix any $h:A\\to\\mathcal V$. For $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$, the local boundary is $h$ after target projection, and the prescribed base cone is $sl_x$. Over the selected initial objects its values are $h(c_i)$ and its base edges are $\\rho_i$. The Segal equivalence in [def-coef-monoidal-infinity-category] gives a tuple $v_x\\in\\mathcal V^\\otimes_{[n]}$ with these components; choosing the fiber equivalences and the cocartesian projections gives a cone with exactly these targets and base edges. Its relative-limit clause makes this a $p$-limit cone. Here and below, the relative-limit clause of [def-coef-monoidal-infinity-category] is stated by mapping spaces from single objects $D$ over each base arrow $\\phi$. By [lem-coef-infinity-relative-cone-constant-test] (its limit dual) this is the same as being a $p$-limit diagram in the sense of [def-coef-infinity-relative-cone] for the cone on the discrete set of projections: for discrete $K=I_{\\mathrm{disc}}$, $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal V^\\otimes)}(\\Delta_KD,f)$ is the product of the $\\operatorname{Map}(D,f_i)$. The lower row of the test square lies in the discrete mapping sets of $\\Delta^{\\mathrm{op}}$, so the square is a homotopy pullback exactly when its fiber maps over every $\\phi$ are equivalences. That fiberwise condition is the displayed product condition. The case $n=0$ is the empty cone. (If the chosen targets are merely equivalent, compose the projections with those fiber equivalences; the dual of clause (1) of [lem-coef-infinity-relative-cone-equivalence] preserves the relative-limit condition.) The initial-components theorem supplies a local $p$-limit lift on the entire $J_x$. For $n=0$, $J_x$ is empty and the monoidal empty-product clause supplies its required relative limit over $[0]$. The map $p$ is an isofibration: it is inner by its monoidal fibration hypothesis, and every equivalence in $N(\\Delta^{\\mathrm{op}})$ is an identity, lifted to an equivalence by a degenerate edge. The right-hand clause of [lem-coef-infinity-relative-kan-existence], with this full inclusion and these local lifts, gives an exact extension $H:C\\to\\mathcal V^\\otimes$ of $h$, over $s$, right Kan extended relative to $p$. Thus every color diagram satisfies the existence hypothesis of [lem-coef-relative-right-kan-restriction].",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-relative-limit-initial-components",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-relative-right-kan-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.4.5, made explicit by local relative right Kan extension; Kerodon 02XT and HTT 4.3.2.13, opposite dual."
+   }
+  },
+  {
+   "text": "We identify the full subcategory of relative right Kan extensions in step 3 with $\\operatorname{Alg}_C(\\mathcal V)$. If $H$ preserves inert edges, its cone on the $\\alpha_i$ consists of $p$-cocartesian projections; [def-coef-monoidal-infinity-category] says that this is a relative $p$-limit cone, in the diagram sense by [lem-coef-infinity-relative-cone-constant-test] exactly as in step 3. The same translation applies to the monoidal tuple cone used below. The particular-cone clause of [lem-coef-relative-limit-initial-components] makes the full cone $Hl_x$ a $p$-limit. Conversely, suppose $H$ is relatively right Kan extended. The same clause says that the cone $H(x)\\to H(c_i)$ is a $p$-limit. Compare it to the monoidal tuple with components $H(c_i)$ and its cocartesian projections. The relative universal property in [def-coef-infinity-relative-cone] supplies comparison maps over the identity of $[n]$ fixing the targets and their cone data in both directions. Their composites equal the identities up to coherent homotopy, since that same mapping-space universal property makes the space of comparisons over fixed identity data contractible. Hence the comparison of apices is an equivalence in the fiber, and every $H(\\alpha_i)$ is $p$-cocartesian by the mapping criterion of [lem-coef-infinity-cocartesian-mapping-criterion]. This holds for every chosen inert lift to a color; a different lift over the same $\\rho_i$ differs by an equivalence of targets, by [lem-coef-infinity-cocartesian-composition-initiality], so its image is cocartesian as well. To check an arbitrary inert edge $a:x\\to y$ over $\\rho:[n]\\to[m]$, compose with the color projections $b_j:y\\to d_j$. Each $b_ja$ is a cocartesian lift of the corresponding selected color projection from $x$, by the composition clause of that node, so $H(b_ja)$ and $H(b_j)$ are cocartesian. Choose a $p$-cocartesian lift $H(x)\\to z$ over $\\rho$. The object case of [lem-coef-infinity-pointwise-cocartesian-transport] factors $H(a)$ through a map $t:z\\to H(y)$ in the fiber over $[m]$, with its coherent triangle. Write $v:H(x)\\to z$ for the chosen lift and choose cocartesian projections $\\delta_j:z\\to z_j$. Their composites $\\delta_jv$ are cocartesian over $\\rho_j\\rho$. The object transport formula factors $H(b_j)t:z\\to H(d_j)$ through $\\delta_j$ as a fiber map $\\theta_j:z_j\\to H(d_j)$, with its coherent triangle. Composing with $v$ identifies $\\theta_j\\delta_jv$ with $H(b_ja)$. Both $\\delta_jv$ and $H(b_ja)$ are cocartesian lifts from $H(x)$ over the same map $\\rho_j\\rho$, so both are initial in $L(H(x),\\rho_j\\rho)$ by [lem-coef-infinity-cocartesian-composition-initiality]. Its comparison clause makes $\\theta_j$ an equivalence of targets. Under the Segal identifications determined by $\\delta_j$ and $H(b_j)$, these $\\theta_j$ are precisely the components of $t$. The Segal equivalence $\\mathcal V^\\otimes_{[m]}\\simeq\\mathcal V^m$ then makes $t$ an equivalence. Thus $H(a)$ is cocartesian, by the mapping criterion, as required. For $m=0$ this is the empty tuple and every map in its point fiber is an equivalence. The two full subcategories therefore coincide, on all transformations as well as objects. Apply [lem-coef-relative-right-kan-restriction]: restriction from this algebra category to color functors is a trivial Kan fibration, hence fully faithful and essentially surjective with its complete coherent simplicial data. The degree-one target fiber is $\\mathcal V$, so this is the asserted equivalence. It is natural in $\\mathcal O$: restriction to colors commutes with precomposition by every operad map, and these are the actual restriction functors on both sides. An empty color category gives only degree zero and the same empty-cone argument applies.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-relative-cone-constant-test",
+    "lem-coef-relative-limit-initial-components",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-relative-right-kan-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 3.4.5; HTT Proposition 4.3.2.15 and Remark 4.3.2.18, with the inert-preservation check written out."
+   }
+  },
+  {
+   "text": "Use the Cartesian algebra fibration of [lem-coef-operadic-algebra-presentability]; the trivial-algebra fibration is its pullback along $\\mathcal O\\mapsto\\mathcal O_{\\mathrm{triv}}$. For $g:\\mathcal O\\to\\mathcal P$, associativity of precomposition gives $g_{\\mathrm{triv}}^*\\tau_{\\mathcal P}^*=\\tau_{\\mathcal O}^*g^*$ coherently. A Cartesian lift is restriction followed by the identity transformation, so this equality shows that $R=\\tau^*$ preserves Cartesian edges. Step 2 makes each $\\tau_{\\mathcal O}$ eligible for step 1, yielding fiber left adjoints $L_{\\mathcal O}$. Apply the existing [lem-coef-cocartesian-relative-right-adjoint] to $R^{\\mathrm{op}}$ over $(\\operatorname{Opd}^{\\mathrm{ns}}_\\infty)^{\\mathrm{op}}$. Its hypotheses hold: order reversal interchanges $\\Lambda_n^n$ with $\\Lambda_0^n$, and reverses the distinguished last edge to the first edge, so the Cartesian fibrations and Cartesian-preserving $R$ become cocartesian fibrations and a cocartesian-preserving functor by [def-coef-infinity-fibrations]. The natural opposite mapping-space equivalences in clause (4) of [lem-coef-infinity-relative-cone-equivalence] turn each $L_{\\mathcal O}\\dashv R_{\\mathcal O}$ into $R_{\\mathcal O}^{\\mathrm{op}}\\dashv L_{\\mathcal O}^{\\mathrm{op}}$. The cited cocartesian theorem produces a right adjoint to $R^{\\mathrm{op}}$ over the opposite base, whose opposite is the desired $L\\dashv R$ with unit over the identity of the original base. Its equivalence of mapping spaces over base mapping spaces reverses to the required relative equivalence, including higher simplices. Concretely, the Cartesian mapping-space property of [lem-coef-infinity-grothendieck-limits-colimits] gives, for $g:\\mathcal O\\to\\mathcal P$, the chain $\\operatorname{Map}_{/g}(\\tau_{\\mathcal O,!}B,C)\\simeq\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal O}}(\\tau_{\\mathcal O,!}B,g^*C)\\simeq\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal O_{\\mathrm{triv}}}}(B,\\tau_{\\mathcal O}^*g^*C)\\simeq\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal O_{\\mathrm{triv}}}}(B,g_{\\mathrm{triv}}^*\\tau_{\\mathcal P}^*C)\\simeq\\operatorname{Map}_{/g}(B,\\tau_{\\mathcal P}^*C)$. These are the unit-induced equivalences in the relative adjunction, natural in $g$ and its higher simplices. No preservation of Cartesian edges by $L$ is required.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-grothendieck-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma 3.6.7 proof; Higher Algebra Proposition 7.3.2.6, using the existing cocartesian opposite dual."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-free-cocone-characterization",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-operadic-algebra-presentability",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-relative-limit-initial-components",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-relative-right-kan-restriction",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-grothendieck-limits-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "A.4.3-A.4.6, 3.4.5 and 3.6.7; explicit relative right Kan extension argument and opposite-dual relative assembly. Sources read online; archival copies WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,12 +173,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-presentability",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-free-extension",
+  "worker": "stage1",
+  "summary": "Repaired both maintainer findings. Replaced the unsupported componentwise inert extension by local relative right Kan existence, a general coherent restriction theorem, and a precise initial-component relative-limit reduction. Identified relative Kan extensions with inert-preserving functors in both directions. Dropped the duplicate relative Cartesian-adjunction node and cited the existing cocartesian-relative-right-adjoint through opposites, with horn and mapping-space checks. Statement unchanged; two general statement-only nodes, no Mathlib leaves.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, paragraph 2: finite coefficient mapping-complex adjunction before R lim, through the inherited operadic algebra foundation. Step 1 supplies operadic free extension, steps 2-4 classify trivial algebras coherently, step 5 supplies the relative free adjunction. This is below the fixed unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-4e51c7129",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-4e51c7129 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. All citations are in unit sk-prop-sf-biduality-general, there is no cycle, and no SGA source is used. Sources checked: Kerodon 02XT, read online, matches lem-coef-relative-limit-initial-components exactly (inner fibration, left cofinal e, exact boundary and base). Gepner–Haugseng Definition 3.4.1 and Proposition 3.4.5, read online, give Alg_{O_triv} ≃ Fun(O_[1],V) as stated. HTT 4.3.2.15 with 4.3.2.18 gives lem-coef-relative-right-kan-restriction (isofibration, fixed s, existence assumption). Both new nodes are true, statement-only general tools, smaller than the item and not duplicates; I compared them with relative-cone-equivalence(2), kan-mapping-restriction, finite-poset-kan-extension, relative-kan-existence, cofinal-comma-criterion and others. Edge cases tested: I empty, a single [1] component, A=C, A empty. Steps 1, 4 and 5 are correct, including the theta_j comparison for arbitrary inert edges and the opposite-dual use of cocartesian-relative-right-adjoint. Two repairs are in fixes/dag/nodes/sec-six-functors/lem-coef-operadic-free-extension.json. (1) C1/C4 in steps 3–4: the monoidal definition's per-phi object-wise relative-limit condition was identified with def-coef-infinity-relative-cone p-limit diagrams without citation. The fix cites the existing lem-coef-infinity-relative-cone-constant-test and writes out the discrete-index and discrete-base fiber reduction. (2) Step 2: step 1 needs generalized operads, but the check that ordinary O and O_triv satisfy generalized axioms (ii) and (iii) was not written. It is now written as an elementary check: O_[0] is contractible and the I_n zigzag limit reduces to the product. proof_deps was recomputed. Statement and stmt_deps are unchanged, no nodes are dropped, and no tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ }
 }

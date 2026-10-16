@@ -19,9 +19,49 @@
  "stmt_deps": [
   "def-weil-spectral-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P=\\pi_0(T)$ and let $q:T\\to P$ send a point to its connected component. It is surjective, and the quotient topology means that $W\\subseteq P$ is open exactly when $q^{-1}(W)$ is open. By [def-weil-spectral-space], $T$ is quasi-compact. For any open cover $(W_i)$ of $P$, the inverse images $q^{-1}(W_i)$ cover $T$. Choose finitely many covering inverse images; surjectivity of $q$ shows that the corresponding $W_i$ cover $P$. Thus $P$ is quasi-compact.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0, via Tag 0900, lemma-pi0-profinite, first sentence of proof; finite-subcover argument expanded"
+   }
+  },
+  {
+   "text": "Let $a\\ne b$ in $P$, and choose representatives $x,y\\in T$. Their connected components differ, so $y$ is not in the component of $x$. By [def-weil-spectral-space], $T$ is quasi-compact, has a basis of quasi-compact open subsets, and intersections of two quasi-compact opens are quasi-compact. Thus all three hypotheses of [lem-weil-pbc-quasicompact-components-clopen-intersection] hold. Its intersection formula therefore gives a clopen subset $U\\subseteq T$ with $x\\in U$ and $y\\notin U$. Every connected component meeting $U$ lies in $U$: otherwise its intersections with $U$ and $T\\setminus U$ would be nonempty disjoint relatively open sets covering that connected component, contrary to connectedness. Consequently $U$ is saturated for $q$, so $q^{-1}(q(U))=U$ and $q^{-1}(P\\setminus q(U))=T\\setminus U$. By the quotient topology, $q(U)$ and its complement are open. They contain $a$ and $b$ respectively and are disjoint. Thus $P$ is Hausdorff; in fact distinct points are separated by complementary clopen subsets.",
+   "uses": [
+    "def-weil-spectral-space",
+    "lem-weil-pbc-quasicompact-components-clopen-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0, using Tag 005F, lemma-connected-component-intersection, and the clopen-separation argument of Tag 0900, lemma-pi0-profinite"
+   }
+  },
+  {
+   "text": "If a connected subset $A\\subseteq P$ contained distinct points $a,b$, the complementary clopen sets separating them in step 2 would intersect $A$ in two nonempty disjoint relatively open subsets covering $A$, a contradiction. Every connected subset therefore has at most one point, so $P$ is totally disconnected. Together with steps 1 and 2, $P$ is quasi-compact, Hausdorff and totally disconnected, which is precisely a compact Hausdorff totally disconnected, or profinite, space.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906, lemma-spectral-pi0, and Tag 0900, lemma-pi0-profinite; total disconnectedness derived directly from the clopen separation just proved"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0906, lemma-spectral-pi0; Tag 005F, lemma-connected-component-intersection; Tag 0900, lemma-pi0-profinite, with quotient and separation details expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -120,10 +160,66 @@
    "results": "Returned hits: Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Basic.lean.",
    "date": "2026-10-16",
    "verdict": "No exact Mathlib match. ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness do not provide the spectral Hausdorff clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a spectral topological space the quotient by connected components is compact Hausdorff and totally disconnected",
+   "results": "{\"t\": \"2026-10-16T21:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a spectral topological space the quotient by connected components is compact Hausdorff and totally disconnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHaus.toProfinite_obj'\", \"CompHaus.toProfiniteObj\", \"instTotallyDisconnectedSpaceCarrierToTopTrueObjProfiniteCompHausProfiniteToCompHaus\", \"Profinite.instHasPropTotallyDisconnectedSpaceCarrier\", \"ConnectedComponents.t2\", \"LightCondSet.LocallyConstant.instHasPropAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySubtypeToTop\", \"LightProfinite.instTotallyDisconnectedSpaceCarrierToTopAndSecondCountableTopology\", \"SpectralSpace.toCompactSpace\"], \"digest\": \"6fd601138dcd4678\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness are only constituent clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "ConnectedComponents, T2Space",
+   "results": "{\"t\": \"2026-10-16T21:35:53Z\", \"tool\": \"loogle\", \"query\": \"ConnectedComponents, T2Space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ConnectedComponents.t2\"], \"digest\": \"84c6330f06ca7ebf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness are only constituent clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents.*(totallyDisconnectedSpace|t2)|instCompactSpaceConnectedComponents",
+   "results": "{\"t\": \"2026-10-16T21:35:53Z\", \"tool\": \"grep\", \"query\": \"ConnectedComponents.*(totallyDisconnectedSpace|t2)|instCompactSpaceConnectedComponents\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/Profinite/Basic.lean\", \"Mathlib/Topology/Category/Profinite/Basic.lean\", \"Mathlib/Topology/Connected/TotallyDisconnected.lean\", \"Mathlib/Topology/Separation/Hausdorff.lean\", \"Mathlib/Topology/Separation/Regular.lean\"], \"digest\": \"18cce3335dfc44b6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness are only constituent clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a compact quasi-separated space with a basis of compact open subsets by its connected components is Hausdorff",
+   "results": "{\"t\": \"2026-10-16T21:36:07Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of a compact quasi-separated space with a basis of compact open subsets by its connected components is Hausdorff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents.t2\", \"T2Quotient.instT2Space\", \"instCompactSpaceConnectedComponents\", \"ConnectedComponents.instTopologicalSpace\", \"t2Space_of_properlyDiscontinuousSMul_of_t2Space\", \"CompHaus.toProfinite_obj'\", \"t2Space_iff_of_isOpenQuotientMap\", \"CompHaus.toProfiniteObj\"], \"digest\": \"a60e6245c6f79a3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness are only constituent clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a spectral space by connected components is profinite",
+   "results": "{\"t\": \"2026-10-16T21:36:07Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of a spectral space by connected components is profinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHaus.toProfiniteObj\", \"CompHaus.toProfinite_obj'\", \"ConnectedComponents\", \"Profinite\", \"ConnectedComponents.isQuotientMap_coe\", \"ConnectedComponents.instTopologicalSpace\", \"ConnectedComponents.mk\", \"ConnectedComponents.totallyDisconnectedSpace\"], \"digest\": \"df642e5183aedf75\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: ConnectedComponents.t2 requires a Hausdorff source; compactness and total disconnectedness are only constituent clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected-component quotient of a compact space with a basis of compact opens and compact intersections is a Stone space",
+   "results": "{\"t\": \"2026-10-16T22:21:31Z\", \"tool\": \"leanfinder\", \"query\": \"The connected-component quotient of a compact space with a basis of compact opens and compact intersections is a Stone space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHaus.toStonean\", \"Stonean\", \"CompHaus.presentation\", \"instCompactSpaceConnectedComponents\", \"Stonean.stoneCechObj\", \"CompHaus.toProfinite_obj'\", \"Stonean.instEffectivelyEnoughCompHausToCompHaus\", \"Stonean.of\"], \"digest\": \"8166300123f80df0\"}",
+   "date": "2026-10-16",
+   "verdict": "No whole-item match: the returned compactness theorem supplies one clause, CompHaus requires a Hausdorff source, and Stonean concerns extremal disconnectedness. Loogle and the spectral-directory source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|connectedComponent",
+   "results": "{\"t\": \"2026-10-16T22:22:05Z\", \"tool\": \"grep\", \"query\": \"ConnectedComponents|connectedComponent\", \"sub\": \"Topology/Spectral\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No whole-item match: the returned compactness theorem supplies one clause, CompHaus requires a Hausdorff source, and Stonean concerns extremal disconnectedness. Loogle and the spectral-directory source grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "ConnectedComponents, TotallySeparatedSpace",
+   "results": "{\"t\": \"2026-10-16T22:22:05Z\", \"tool\": \"loogle\", \"query\": \"ConnectedComponents, TotallySeparatedSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No whole-item match: the returned compactness theorem supplies one clause, CompHaus requires a Hausdorff source, and Stonean concerns extremal disconnectedness. Loogle and the spectral-directory source grep returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-pe-wlocal",
@@ -160,5 +256,29 @@
    ],
    "note": "Exact total-disconnectedness clause for any source space; declaration body read. Together these three declarations cover the entire node; attach rather than queue a proof split."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-spectral-components-profinite",
+  "worker": "stage1",
+  "summary": "Retained the complete spectral-space profiniteness statement. The rejected Mathlib candidate supplies only total disconnectedness. Reused the existing general clopen-intersection node for the substantive spectral step, and wrote out compactness of the quotient, saturation of clopens, Hausdorff separation and total disconnectedness. No new nodes or Mathlib leaves; no Lean or compiler work.",
+  "blueprint": "Realizes sk-def-pe-wlocal, second paragraph, sentence: The space of connected components of a spectral space is profinite. Its defining paragraph and other explanatory claims are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "why": "Generic Tag 005F topology theorem gives the component/clopen-intersection formula under exactly the compactness, quasi-separatedness and compact-open-basis hypotheses of spectrality. This is the Tag 0906 source route; no theorem in sk-def-pe-wlocal supplies this background fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasicompact-components-clopen-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-dbaa1fefb",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-dbaa1fefb (reviewer sub-agent of L); spot-checked: I read the item in full and checked it against Stacks topology.tex: Tag 0906 (lemma-spectral-pi0) and its proof's two inputs, Tag 005F (lemma-connected-component-intersection) and Tag 0900 (lemma-pi0-profinite); the tag numbers match tags/tags. The statement is unchanged and matches the source exactly: any spectral T, pi_0 with the quotient topology, and the conclusion compact, Hausdorff and totally disconnected. The delivery has no new nodes and touches no target, so no base-change morphism or coefficient category is involved, and nothing cites SGA. Step 1 (the quotient is quasi-compact, via a finite subcover and surjectivity) is elementary and correct. Step 2: the three hypotheses of lem-weil-pbc-quasicompact-components-clopen-intersection (quasi-compact, a basis of quasi-compact opens, quasi-compact intersections) are clauses of def-weil-spectral-space. Its formula (a component is the intersection of the clopens containing the point) gives a clopen U that contains x and not y. The saturation argument then gives the open sets q(U) and its complement in P. This is the Tag 0900 argument applied to a pair of points, and it uses nothing the cited statement does not say. Step 3 (total disconnectedness from that clopen separation) is elementary and correct. Edge cases I tested: the empty space; Spec of a DVR (connected and not Hausdorff, quotient a point); a finite discrete space; Spec of an infinite product of fields. I found no duplicate in the DAG: det-pe-wlocal-components, lem-weil-pbc-profinite-component-ring-pullback, lem-weil-pbc-w-local-partition and the w-local homeomorphism node all assume w-locality or that the closed points form a closed set. There is no cycle: the dependency closure of the two cited nodes does not reach the item. Accepted tool_use: lem-weil-pbc-quasicompact-components-clopen-intersection (unit sk-thm-properbasechange, already reviewed as a pass), a generic Tag 005F topology lemma. The unit sk-def-pe-wlocal has no steps and cites no units, so no unit route is replaced. proof_deps equals the union of the step uses; the blueprint fields and the split_report blueprint entry are present. I made no fixes. review.md is written."
+ }
 }
