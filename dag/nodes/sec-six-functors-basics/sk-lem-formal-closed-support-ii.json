@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-formal-closed-support-ii",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed support, truncation and derived limits",
- "statement": "In the situation of [sk-lem-formal-closed-support] ($\\Lambda$ admissible, $i\\colon Z\\hookrightarrow X$ a closed\nimmersion with open complement $j\\colon V\\hookrightarrow X$, and $u\\colon S\\hookrightarrow Z$ an open\nimmersion), the functors\n\n$$\nR\\underline\\Gamma_Z\\colon \\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(Z_{\\mathrm{proét}},\\Lambda),\n\\qquad\nu^*R\\underline\\Gamma_Z\\colon \\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(S_{\\mathrm{proét}},\\Lambda)\n$$\n\nare left $t$-exact and commute with derived inverse limits of sequences. So does tensoring with a\nfinite locally free sheaf, as a functor $\\D(S_{\\mathrm{proét}},\\Lambda)\\to\\D(S_{\\mathrm{proét}},\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. Let $\\Lambda$ be admissible, meaning one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, where $A$ is a finite commutative ring killed by a power of $\\ell$, $E/\\mathbf Q_\\ell$ is a finite subextension of $\\overline{\\mathbf Q}_\\ell$, and $\\mathcal O_E$ is its ring of integers. View $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E$ as their associated condensed rings, with the discrete topology on $A$ and the $\\ell$-adic topologies on the others [sk-def-sfb-condensed-ring]. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, use instead the condensed ring whose sections on a profinite set $P$ are the continuous maps $P\\to\\overline{\\mathbf Q}_\\ell$ with image contained in some single finite subextension of $\\mathbf Q_\\ell$ [sk-def-sfb-qlbar-condensed]. Put $\\Lambda_T=p_T^*\\Lambda$ for a scheme $T$ [def-pc-scheme, sk-def-sfb-pulled-back-coefficients]. Write $D(T_{\\mathrm{proét}},\\Lambda)=D(\\operatorname{Mod}(\\Lambda_T))$ for the unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with its standard t-structure [def-sbc-standard-tstructure-derived-category]. Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] with open complement $j:V\\hookrightarrow X$, and let $u:S\\hookrightarrow Z$ be an open immersion [def-weil-open-immersion]. Use the coefficient-compatible inverse images $i^*,j^*,u^*$ and direct image $j_*$ [def-sfb-module-upper-star, def-sfb-module-upper-lower-adjunction]. Use the kernel construction of [sk-lem-formal-closed-support], written explicitly as the additive left exact sheaf functor\n$$\\underline\\Gamma_Z(M)=i^*\\ker(M\\longrightarrow j_*j^*M),$$\nwhere the map is the unit of $j^*\\dashv j_*$, and write $R\\underline\\Gamma_Z$ for its total right derived functor [def-sfb-right-derived-functor]. Then\n$$R\\underline\\Gamma_Z:D(X_{\\mathrm{proét}},\\Lambda)\\longrightarrow D(Z_{\\mathrm{proét}},\\Lambda),\\qquad u^*R\\underline\\Gamma_Z:D(X_{\\mathrm{proét}},\\Lambda)\\longrightarrow D(S_{\\mathrm{proét}},\\Lambda)$$\nare left t-exact (they carry $D^{\\geq0}$ into $D^{\\geq0}$) and commute with derived inverse limits of sequences [def-weil-derived-limit]. The same two conclusions hold for tensoring with a finite locally free $\\Lambda_S$-module sheaf $L$: locally on the pro-étale site $L$ is isomorphic to $\\Lambda_S^{\\oplus r}$ for a finite integer $r\\geq0$, and the functor is $L[0]\\otimes_{\\Lambda_S}^{\\mathrm L}-$, equivalently the functor induced by ordinary termwise tensor [def-pur-sheaf-tensor-product, def-sfb-derived-tensor-modules]. Commutation with a sequential derived limit means that applying the functor to its Roos triangle yields a Roos triangle for the image sequence.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/_section.md",
   "place": "node sk-lem-formal-closed-support-ii, order 1520",
@@ -19,24 +19,257 @@
   ]
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-right-derived-functor",
+  "def-weil-derived-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-derived-tensor-modules",
   "sk-lem-formal-closed-support"
  ],
  "proof": [
   {
-   "text": "$R\\underline\\Gamma_Z$ is left $t$-exact because it is right adjoint to the exact functor $i_*$\n([det-formal-closed-support-ii-left-exact]). A derived inverse limit of a sequence is the fiber of\n$1-\\mathrm{shift}$ on a product, so it suffices that the functors preserve products and fibers. This\nholds for $j^*$ and $u^*$ (open restriction is exact and preserves limits), for $i^*$ (Stacks, Tag 09AA),\nfor $Rj_*$ (a right adjoint), hence for $R\\underline\\Gamma_Z=i^*\\fib(\\mathrm{id}\\to Rj_*j^*)$.\nTensoring with a finite locally free sheaf $L$ is exact and is right adjoint to tensoring with\n$L^\\vee$, so it preserves products ([det-formal-closed-support-ii-limits]). The lemma is used below\nwith $\\Lambda=\\mathcal O_E$.",
-   "uses": [],
-   "elementary": false
+   "text": "The coefficient identification $f^{-1}\\Lambda_Y\\cong\\Lambda_X$ and the resulting equality of module pullback with exact inverse image are supplied by [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the closed immersion $i$ and the open immersions $j,u$: these inverse images are exact and preserve small limits of module sheaves, in particular countable products. By [def-sfb-module-upper-lower-adjunction], $j_*$ is right adjoint to $j^*$; thus [lem-weil-pbc-right-adjoint-preserves-limits] shows that it too preserves these limits. Consequently $G=\\underline\\Gamma_Z=i^*\\ker(\\mathrm{id}\\to j_*j^*)$ is additive, left exact, and preserves countable products. Indeed a compatible tuple in the kernel of the product map is precisely a tuple in its component kernels; the same finite-limit computation gives left exactness. This uses no exactness assertion about $i_*$.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA, lemma-closed-immersion (1); open slice restriction and the module adjunction; kernel computation"
+   }
+  },
+  {
+   "text": "By [lem-pur-ringed-site-grothendieck-abelian] the module-sheaf categories on the fixed small pro-étale models are Grothendieck abelian. Apply [lem-pur-kinjective-degreewise-existence] to a module placed in degree zero: its degree-zero component is a monomorphism into an injective module, so these categories have enough injectives. If $K\\in D^{\\geq0}(X_{\\mathrm{proét}},\\Lambda)$, [def-sbc-standard-tstructure-derived-category] supplies a representative vanishing below zero. By [lem-weil-pbc-complex-injective-resolution-mono] with lower bound zero, it has an injective resolution $I^\\bullet$ vanishing below zero. This is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. The definition [def-sfb-right-derived-functor] computes $RG(K)$ by $G(I^\\bullet)$, which still vanishes in negative degrees. This proves left t-exactness of $R\\underline\\Gamma_Z$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (3); Tag 070J, lemma-bounded-below-injectives-K-injective; Injectives Tag 079P"
+   }
+  },
+  {
+   "text": "For a countable family $(K_n)$ choose K-injective representatives $I_n$ using [prop-pur-kinjective-resolutions-exist]. The termwise product $I=\\prod_n I_n$ is K-injective and represents $\\prod_nK_n$ by [lem-pc-ringed-space-product-kinjective]. Thus [def-sfb-right-derived-functor] and step 1 give\n$$R\\underline\\Gamma_Z(\\prod_nK_n)=G(\\prod_n I_n)\\cong\\prod_n G(I_n).$$\nThe last complex represents $\\prod_nR\\underline\\Gamma_Z(K_n)$ by [det-pe-products-derived], applied on $Z$. All maps are the maps induced by product projections, so this is the product comparison itself. This proves preservation of derived countable products without assuming that a product of arbitrary underived objects already computes their derived product.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-sfb-right-derived-functor",
+    "det-pe-products-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, lemma-product-K-injective; Tag 07KC, lemma-products; Injectives Tag 079P"
+   }
+  },
+  {
+   "text": "By step 1, $u^*$ is an exact functor of module sheaves preserving countable products. Its induced functor is termwise and triangulated by [lem-sf-exact-functor-derived-triangulated]. Exactness gives $H^q(u^*C)=u^*H^q(C)$, by applying $u^*$ to the kernel, image and cokernel defining cohomology. Hence it preserves $D^{\\geq0}$. By [det-pe-products-derived], termwise computation of products on both $Z$ and $S$ shows that $u^*$ preserves derived countable products. With steps 2 and 3 this gives left t-exactness and product preservation for $u^*R\\underline\\Gamma_Z$.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-sf-exact-functor-derived-triangulated",
+    "det-pe-products-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products, applied to the exact open restriction; proetale.tex Tag 09AA and open slice restriction"
+   }
+  },
+  {
+   "text": "The functor $T_L=L\\otimes_{\\Lambda_S}-$ preserves finite limits by [lem-weil-pbc-condensed-finite-free-tensor-exact], since the local finite-free hypothesis here is precisely its covering hypothesis. It is also a left adjoint by [lem-pc-sheaf-modules-tensor-closed], so [lem-weil-pbc-right-adjoint-preserves-limits], applied to the opposite adjunction, gives preservation of finite colimits. Thus $T_L$ is exact. By [lem-sf-exact-functor-derived-triangulated] its termwise functor on complexes is triangulated. For any complex $C$, exactness identifies $T_L(\\ker d_C^q)$ with $\\ker(T_Ld_C^q)$ and $T_L(\\operatorname{im}d_C^{q-1})$ with $\\operatorname{im}(T_Ld_C^{q-1})$. Applying $T_L$ to the quotient of these subobjects gives $H^q(T_LC)\\cong T_LH^q(C)$. In particular $T_L$ takes acyclic complexes to acyclic complexes and preserves quasi-isomorphisms. For acyclic $C$, symmetry identifies $\\operatorname{Tot}(C\\otimes L[0])$ with $T_LC$, which is acyclic. Thus $L[0]$ is K-flat by [def-pc-kflat-complex], and its terms are flat (tensor with $L$ is exact, and all other terms are zero). By [lem-weil-pbc-site-derived-tensor-descent], choose for $C$ a quasi-isomorphic K-flat complex $P$ with flat terms. That node identifies $L[0]\\otimes^{\\mathrm L}C$ with $L\\otimes P$; exactness of $T_L$ identifies the latter in the derived category with $L\\otimes C$. The representative comparisons are natural and compatible with inversion of quasi-isomorphisms by that same cited statement. Hence the derived tensor is the termwise functor, and the cohomology identity proves t-exactness, in particular left t-exactness.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/sk-lem-formal-closed-support-ii-limits.md",
+    "place": "finite locally free tensor clause; exactness from the existing finite-limit theorem and the tensor-Hom adjunction"
+   }
+  },
+  {
+   "text": "For any family of module sheaves $(M_n)$ the canonical map\n$$L\\otimes\\prod_nM_n\\longrightarrow\\prod_n(L\\otimes M_n)$$\nis an isomorphism. To check it, restrict to every member $U$ of one cover trivializing $L$. Restriction to the localized site is the evaluation formula of [def-pur-localized-ringed-site]; products restrict to products, since their sections and scalar actions are coordinatewise. Tensor restricts to tensor: the presheaf tensor formula and the sheafification in [def-pur-sheaf-tensor-product] use on an object over $U$ exactly the same covering families in the slice as in the original site. Where $L|_U\\cong\\Lambda_U^{\\oplus r}$, the displayed map is the coordinate-reindexing isomorphism $(\\prod_nM_n|_U)^{\\oplus r}\\cong\\prod_n(M_n|_U)^{\\oplus r}$ for finite $r$. These local inverses agree on overlaps, since each is inverse to the restriction of the same comparison; the sheaf gluing axiom therefore gives a global inverse. This is a local finite-coordinate calculation, including $r=0$, not a claim that local freeness implies global freeness.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/sk-lem-formal-closed-support-ii-limits.md",
+    "place": "tensor product clause; elementary local finite-free product calculation"
+   }
+  },
+  {
+   "text": "Apply [det-pe-products-derived] on $S$ to representatives of a countable family of derived objects. By step 5, tensor with $L$ is its exact termwise functor, and by step 6 it commutes with the products in each degree. It follows that $L[0]\\otimes^{\\mathrm L}-$ preserves countable products in $D(S_{\\mathrm{proét}},\\Lambda)$. The functor $R\\underline\\Gamma_Z$ is triangulated by [lem-pc-right-derived-functor-triangulated], applied to the additive sheaf functor $G$; its source and target have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Step 4 and step 5 give the same triangulated property for $u^*R\\underline\\Gamma_Z$ and tensor with $L$.",
+   "uses": [
+    "det-pe-products-derived",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products; right derived functors and distinguished triangles"
+   }
+  },
+  {
+   "text": "Let $F$ be any of the three functors in the statement, and let $(K_n,t_n:K_{n+1}\\to K_n)$ be any sequence in its source. Write its derived-limit triangle, in the sense of [def-weil-derived-limit], as\n$$H\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow H[1],\\qquad P=\\prod_nK_n,\\qquad \\mathrm{pr}_ns=t_n\\mathrm{pr}_{n+1}.$$\nThe products exist by [det-pe-products-derived], and a derived limit exists by [lem-weil-derived-limit-existence] (1). The preceding steps show that $F$ is additive and triangulated and that the canonical comparison $\\phi:F(P)\\xrightarrow{\\sim}\\prod_nF(K_n)$ is invertible. For every $n$,\n$$\\mathrm{pr}'_n\\phi F(s)=F(\\mathrm{pr}_ns)=F(t_n)F(\\mathrm{pr}_{n+1})=F(t_n)\\mathrm{pr}'_{n+1}\\phi.$$\nThe product universal property gives $\\phi F(s)=s'\\phi$ and hence $\\phi F(1-s)=(1-s')\\phi$. Apply $F$ to the distinguished triangle and use $\\phi$ on its two product vertices. The result is exactly a Roos triangle for the image sequence, so $F(H)$ is its derived limit. This proves the required commutation. No uniqueness or canonical choice of comparison between arbitrary triangulated-category cones is asserted.",
+   "uses": [
+    "def-weil-derived-limit",
+    "det-pe-products-derived",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit and the following TR1 existence paragraph; explicit transition-map computation"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sfb-right-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective",
+  "det-pe-products-derived",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-weil-derived-limit",
+  "lem-weil-derived-limit-existence"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/_section.md",
-  "place": "## Proof"
+  "place": "Statement and imported proof, audited using Stacks Tags 09AA, 013K, 070J, 079P, 0BK6, 07KC and 08TC; direct K-injective proof avoids the unsupported exactness assertion for arbitrary closed pushforward."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedUpperShriek|sectionsWithSupport|ProEtale",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor of sections with closed support preserves sequential homotopy limits and is left t exact",
+   "results": "Hits: CategoryTheory.Functor.rightDerived, CategoryTheory.exactFunctor, CategoryTheory.rightExactFunctor, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.totalRightDerived, CategoryTheory.term_⥤ᵣ_, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.HasRightDerivedFunctor.mk",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint, CategoryTheory.Limits.PreservesLimits",
+   "results": "Hits: TopCat.Sheaf.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections with closed support on pro etale sheaves are left t exact and commute with derived inverse limits; tensor with a finite locally free sheaf preserves derived limits",
+   "results": "Hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "grep",
+   "query": "isLeftTExact.*[Aa]dj|[Aa]dj.*isLeftTExact|isLE.*iff.*[Hh]om|isGE.*iff.*[Hh]om",
+   "results": "Hits: Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftTExact\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to a right t exact functor between categories with t structures is left t exact",
+   "results": "Hits: CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*support|closed.*immersion|derived.*[Ll]imit",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete pro-étale closed-support statement; general categorical ingredients or unrelated matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors between derived categories preserving countable products preserve homotopy inverse limits of towers",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-16",
+   "verdict": "No match for the item or the sequential-limit assertion: the returned declarations construct the derived functor of an exact functor, or map distinguished triangles; none supplies closed support, left t-exactness and tower-limit preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor of abelian categories preserving countable products has a left t exact derived functor preserving inverse limits of towers",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.preservesFiniteLimits_tfae, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, CategoryTheory.LeftExactFunctor, CategoryTheory.leftExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "The eight hits concern exact functors and their termwise derived functors, Ext maps, or finite-limit preservation; none states product preservation for an unbounded right derived functor, left t-exactness, or the closed-support/tower assertion. No complete Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesCountableProducts|preservesCountableProducts|homotopyLimit|homotopyInverseLimit",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No hits in the prescribed Mathlib grep. No complete Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive total right derived functor preserves countable products when its sheaf functor preserves products and target products are exact, hence preserves homotopy limits of towers",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Localization.preservesProductsOfShape, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "No declaration states the complete item: exact-functor derived constructions and ordinary nth derived functors do not supply support, left t-exactness and tower limits; Localization.preservesProductsOfShape assumes a finite indexing type."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -59,5 +292,94 @@
   "det-formal-closed-support-ii-limits"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-formal-closed-support-ii"
+ "unit": "sk-lem-formal-closed-support-ii",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-formal-closed-support-ii",
+  "worker": "stage1",
+  "summary": "Expanded the definition of the support functor to remove the circular dependency through the constructibility preamble of sk-lem-formal-closed-support. Proved left t-exactness on bounded-below injective representatives, product preservation on K-injective products, the local finite-free tensor comparison, and the explicit Roos transition calculation. Reused existing generic nodes throughout; no new nodes. No hypotheses were added. The optional adjunction to termwise closed pushforward is not needed, so quasi-compactness of the open complement is not required. Repair of returned head 76df629bd6: refreshed the sandbox chapter/unit binding from current main and included the existing unit record with only realized and realized_by updated, so landing requires no out-of-delivery unit fix. Current main has repaired the former dependency cycle below sk-lem-formal-closed-support; restored that statement dependency for its support-kernel construction, preserving the unit route while retaining the explicit eight-step proof. Second reading corrects the algebraic-closure coefficient to the finite-subextension-valued condensed ring of sk-def-sfb-qlbar-condensed; the eight proof steps apply to that actual ring unchanged.",
+  "blueprint": "Realizes the complete main-20261015 statement and unit proof: support-kernel construction from sk-lem-formal-closed-support, exact restriction and products in steps 1–4, finite locally free tensor in steps 5–7, and the fiber-of-one-minus-shift reduction in step 8. The support dependency is restored after checking that its current-main closure no longer returns to this item. The proof computes the right derived kernel functor directly rather than using exactness of arbitrary closed pushforward.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Step 1 needs exact inverse image and small-limit preservation for module sheaves along closed and open immersions, including the coefficient-ring isomorphism. The unit gives the restriction/product route but no module-sheaf version of this geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Steps 1 and 5 use the general adjunction theorem for limits, respectively for j_* and, in opposite categories, the tensor left adjoint. The unit invokes right-adjoint preservation without stating this categorical input."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Step 2 needs the Grothendieck property of module sheaves on a small ringed site to apply the injective-resolution existence theorem; the unit has no statement of this general ringed-site fact."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Step 2 extracts enough injectives from the termwise monic K-injective resolution in a Grothendieck category. The unit supplies no injective-existence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Step 2 needs an injective resolution preserving the explicit lower bound zero to prove left t-exactness. The unit has no such bounded-resolution theorem; this implements its left-exact derived-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Step 2 uses bounded-below injectives as K-injective representatives for the unbounded right derived functor. The unit has no statement of this generic homological-algebra criterion."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Steps 3 and 7 need K-injective resolutions for arbitrary unbounded complexes of coefficient module sheaves. This ringed-site theorem is not supplied by the unit and does not replace its product/Roos argument."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Step 3 needs the derived-product representation by products of K-injective complexes in an abelian category. The unit supplies the pro-etale product input but no general K-injective-product theorem."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Steps 4 and 5 pass exact open restriction and finite locally free tensor termwise to triangulated derived functors. The unit has no statement of this generic exact-functor construction."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "why": "Step 5 uses finite-limit preservation for tensor with an internal module trivialized by a pro-etale cover, over the actual coefficient ring sheaf. The unit asserts tensor exactness but has no separate general local-freeness input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Step 5 needs the ordinary tensor-Hom adjunction on module sheaves over a commutative ringed site to deduce finite-colimit preservation. The unit gives no statement of this generic sheaf adjunction."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Step 7 needs triangulated exactness of the unbounded right derived additive support functor. The unit uses fibers but supplies no general right-derived triangulated theorem."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Step 8 uses only clause (1), existence of a Roos triangle when the countable product exists. The unit invokes sequential derived limits without stating this general triangulated-category existence fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Step 5 identifies the exact termwise tensor with the derived tensor on the actual ringed site via K-flat representatives with flat terms. The unit states tensor exactness but supplies no resolution/descent comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-c711603e3",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-c711603e3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, delivery errors A–F, all eight proof steps, every cited node statement, and the cited Stacks/blueprint sources. Verified coefficient base change, finite-subextension Q̄ℓ convention, exactness/product arguments, K-injective resolutions, finite-locally-free tensor, Roos transition calculation, edge cases, duplicate searches, and absence of SGA use. Review written to review.md; no repair required."
+ }
 }

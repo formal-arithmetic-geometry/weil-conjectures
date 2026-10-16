@@ -26,9 +26,117 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D=\\operatorname{Fun}(K,\\mathcal E)$. In degree $r$, a simplex of $T_K$ is the collapsed initial face, or a pair $(k,\\epsilon)$ with $k\\in K_r$ and a monotone $\\epsilon:[r]\\to[1]$ not constantly zero. Map it to the join simplex with its initial $\\epsilon=0$ vertices at the new apex and its final $\\epsilon=1$ vertices given by the corresponding restriction of $k$. Constant-zero simplices map to the apex, so the map descends through the quotient. Restriction of an ordered list either shortens one block or removes it, and repeating a vertex repeats it within its block. Thus the formula respects all faces and degeneracies and defines the natural map $c:T_K\\to\\Delta^0\\star K$ with identity restrictions on the apex and $K$.\n\nProduct with $\\Delta^r$ preserves this pushout degreewise: product of sets with a fixed set preserves the disjoint union and its identifying equivalence relation. Consequently a map $T_K\\times\\Delta^r\\to\\mathcal E$ is exactly an apex simplex $x:\\Delta^r\\to\\mathcal E$ and a map $K\\times\\Delta^1\\times\\Delta^r\\to\\mathcal E$ whose initial end is $\\Delta_Kx$. Exponential adjunction, which here just rearranges the three product factors, identifies the latter with an $r$-simplex of $\\operatorname{Fun}(\\Delta^1,D)$. These identifications respect all operators, giving an actual isomorphism $\\operatorname{Fun}(T_K,\\mathcal E)=\\mathcal T_K$. Its joint projection is $(x,\\operatorname{ev}_1\\lambda)$, so precomposition with $c$ commutes strictly with the joint apex-and-boundary projection.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction 4.2.1 and Proposition 4.2.2, specialized to a point on the left; explicit degreewise check"
+   }
+  },
+  {
+   "text": "First take $K=\\Delta^n$. Before quotienting, $c$ is the nerve of the monotone map $[n]\\times[1]\\to[n+1]$ sending $(y,0)$ to $0$ and $(y,1)$ to $y+1$. The monotone section sends $0$ to $(0,0)$ and $j>0$ to $(j-1,1)$; compose its nerve with the quotient to obtain $s:\\Delta^{n+1}\\to T_{\\Delta^n}$. Then $cs=1$. On $[n]\\times[1]$ put $p(y,0)=(0,0)$ and $p(y,1)=(y,1)$. This map is monotone, equals the section composed with the preceding collapse, and satisfies $p\\leq1$ pointwise. The natural transformation $p\\Rightarrow1$ is a simplicial map from the prism times $\\Delta^1$ to the prism. On its bottom face it remains in the bottom face, so it descends to a transformation $sc\\Rightarrow1$ on $T_{\\Delta^n}$. At the collapsed apex its component is degenerate, and at every upper vertex its component is the identity.\n\nFor every $H:T_{\\Delta^n}\\to\\mathcal E$, precomposition gives $Hsc\\to H$ with identity vertex components. By [lem-cbc-enhanced-functor-cone-calculus] it is an equivalence in $\\operatorname{Fun}(T_{\\Delta^n},\\mathcal E)$. These transformations are natural in $H$, and applying the same componentwise criterion in this functor quasicategory makes them a coherent natural equivalence of endofunctors. Hence $c^*$ and $s^*$ are quasi-inverses, with the other composite exactly the identity. For $K=\\varnothing$, both cones are $\\Delta^0$ and $c$ is the identity.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.2.3, standard-simplex section and transformation calculation, with the left factor a point"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cellular-natural-equivalence] to $P(K)=T_K$, $Q(K)=\\Delta^0\\star K$, and the collapse $c_K$. Both preserve monomorphisms: in each degree their simplex sets are a single apex together with finitely many summands obtained from the degreewise simplex sets of $K$ (for the join, the summands are the $K_j$ with $j\\leq r$), and an injection acts injectively on every summand. The same formulas show that they preserve connected colimits. Indeed connected colimits of the constant singleton are a singleton, while the other summands commute with colimits degreewise; the join summands use only finitely many degrees in each degree. Step 2 verifies the criterion for every standard simplex and for the empty simplicial set. Thus $c_K$ is a categorical equivalence for every small $K$, meaning precisely that $c_K^*$ is a functor equivalence for every quasicategory $\\mathcal E$. Combining with step 1 proves the first displayed comparison.",
+   "uses": [
+    "lem-coef-infinity-cellular-natural-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Proposition 4.2.3: cellular extension from standard simplices, with its hypotheses checked degreewise"
+   }
+  },
+  {
+   "text": "Put $S=\\mathcal E\\times D$, and denote the two joint projections by $p:\\operatorname{Fun}(K^{\\triangleleft},\\mathcal E)\\to S$ and $q:\\mathcal T_K\\to S$. For $p$, restrict along the simplicial subset $\\Delta^0\\amalg K\\hookrightarrow\\Delta^0\\star K$. It is a monomorphism, including when $K$ is empty, and the restricted functor category is $S$. Hence $p$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation]. The endpoint map $\\operatorname{Arr}(D)\\to D\\times D$ is also an isofibration, by restriction along $\\partial\\Delta^1\\hookrightarrow\\Delta^1$. The map $q$ is its ordinary pullback along $(x,F)\\mapsto(\\Delta_Kx,F)$. A horn lifting problem, or an equivalence-edge lifting problem, for this pullback is exactly the same problem for the endpoint map with the $S$-coordinate prescribed; its lift keeps that prescribed coordinate. Thus $q$ is an isofibration. Products of quasicategories fill inner horns coordinatewise, and the total space of either pullback is a quasicategory by lifting an inner horn after filling its image in the base.\n\nStep 1 gives $qc_K^*=p$ strictly, and step 3 gives that $c_K^*$ is an equivalence. All hypotheses of [lem-coef-infinity-isofibration-base-change] therefore hold with the common base $S$. It proves the asserted ordinary pullback equivalence for every $h:R\\to S$. Fixing one or both endpoints means choosing respectively $R=\\mathcal E\\times\\{F\\}$, $\\{x\\}\\times D$, or $\\{(x,F)\\}$ with their inclusion maps. These are quasicategories, so each claimed specialization follows.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Corollary 4.5.3.34 applied over the joint endpoint base, using the restriction isofibrations"
+   }
+  },
+  {
+   "text": "For any small family of comparisons, take products of the source categories, target categories and joint bases. Horn fillers and equivalence lifts for the product projections are obtained by choosing the lifts in each coordinate; hence these projections are again isofibrations. Choose a quasi-inverse for each comparison of step 3. Their product is a quasi-inverse to the product comparison, since the two inverse-equation transformations and their inverses and triangle witnesses are formed coordinatewise. For an empty family every product is the one-point quasicategory and the comparison is its identity. The product comparison commutes strictly with its product joint projection by step 1. Applying [lem-coef-infinity-isofibration-base-change] over that product base gives the full small-product base-change assertion, with no finiteness assumption.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03PM",
+    "place": "Product construction of the hypotheses for the same common-base pullback theorem"
+   }
+  },
+  {
+   "text": "We compute the mapping space in $\\mathcal T_K$. Let $X=(x,F,\\lambda)$ and $Y=(y,G,\\mu)$, viewed in the strict pullback $S\\times_{D\\times D}\\operatorname{Arr}(D)$. Write $U$ for the unpinched morphism spaces defined in [lem-coef-infinity-pinch-comparison]. Their defining maps are rectangular prisms with both ends fixed. A prism into a simplicial pullback is exactly a pair of prisms into its factors with identical projections. Hence there is a strict equality\n$$U_{\\mathcal T_K}(X,Y)=\\bigl(U_{\\mathcal E}(x,y)\\times U_D(F,G)\\bigr)\\times_{U_D(\\Delta_Kx,\\Delta_Ky)\\times U_D(F,G)}U_{\\operatorname{Arr}(D)}(\\lambda,\\mu).$$\nThe first map sends $(a,b)$ to $(\\Delta_Ka,b)$; the second is the joint endpoint map. By the morphism-space clause of [lem-coef-infinity-isofibration-exponentiation], applied to the endpoint isofibration established in step 4, the second map is a Kan fibration. All these spaces are Kan complexes by [lem-coef-infinity-pinch-comparison], and the unpinched definition gives the displayed products degreewise. The homotopy-pullback characterization in [lem-coef-kan-quillen-right-proper] therefore permits this strict pullback to represent the homotopy pullback. The natural pinch equivalences then replace every $U$ by the prescribed right-pinched $\\operatorname{Map}$ without changing the homotopy pullback. Its projection to $\\operatorname{Map}_D(F,G)$ remains the actual boundary restriction, by naturality of the pinch maps.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01P8",
+    "place": "Proposition 4.6.1.22 for the joint endpoint morphism fibration; degreewise pullback and existing pinch comparison"
+   }
+  },
+  {
+   "text": "Set $L=\\operatorname{Map}_{\\mathcal E}(x,y)$, $M=\\operatorname{Map}_D(F,G)$, $P=\\operatorname{Map}_D(\\Delta_Kx,\\Delta_Ky)$ and $Z=\\operatorname{Map}_D(\\Delta_Kx,G)$. The interval-arrow theorem [lem-coef-infinity-arrow-morphism-square] identifies $\\operatorname{Map}_{\\operatorname{Arr}(D)}(\\lambda,\\mu)$, over $P\\times M$, with $P\\times_Z^h M$, whose paths run from $\\mu p$ to $b\\lambda$. Pulling this description back along $(a,b)\\mapsto(\\Delta_Ka,b)$ in step 6 yields triples $(a,b,\\gamma)$ with $\\gamma:\\mu\\Delta_Ka\\simeq b\\lambda$. Here is the elimination of the homotopy-pullback data: before elimination, one also chooses $p\\in P$, $b'\\in M$, paths $\\Delta_Ka\\simeq p$ and $b\\simeq b'$, and a path $\\mu p\\simeq b'\\lambda$. Postcompose the first path with $\\mu$, concatenate with the middle compatibility path, and concatenate with the inverse of the second path postcomposed with $\\lambda$. This gives $\\mu\\Delta_Ka\\simeq b\\lambda$. Conversely choose $p=\\Delta_Ka$, $b'=b$ and both auxiliary paths constant. The space of an endpoint together with a path from a prescribed starting point is contracted by shortening that path to its starting point; applying this contraction to both auxiliary paths gives the inverse-equation homotopies on the full spaces, including their higher simplices. Thus no passage to components is involved. Reverse the remaining path to obtain the orientation $b\\lambda\\simeq\\mu\\Delta_Ka$ used in the statement. We obtain\n$$\\operatorname{Map}_{\\mathcal T_K}(X,Y)\\simeq M\\times_Z^h L,$$\nwith exactly the two maps and the boundary projection claimed.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Theorem 8.3.7.1 in the identity-functor case; explicit path-space substitution into the joint-endpoint pullback"
+   }
+  },
+  {
+   "text": "The equivalence $c_K^*$ of step 3 induces equivalences on mapping spaces by [lem-cbc-enhanced-functor-cone-calculus]. Its joint projection is the one fixed in step 1, so step 7 also computes the join-cone mapping spaces with their boundary restriction. The collapse construction commutes with every map of shapes $K'\\to K$, because splitting an interval simplex and restricting its final block commute with applying that shape map, and it commutes with functors $\\mathcal E\\to\\mathcal E'$ by postcomposition. The simplex sections in step 2 serve only to prove that this already specified natural comparison is an equivalence; no natural choice of those sections is asserted. The strict prism pullback, the pinch maps, and the endpoint-projected arrow equivalence in steps 6 and 7 are natural in the objects and ambient functors. Path concatenation, inversion and contraction used in step 7 are the corresponding operations on path spaces and preserve the displayed endpoint maps up to their coherent homotopies. These facts prove all the asserted naturality, including the projection to the varying boundary diagrams.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Naturality and endpoint compatibility of the mapping formula, and naturality of the specified join comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cellular-natural-equivalence",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Explicit simplex/cellular proof following Proposition 4.2.3, with joint isofibration and interval-arrow calculations checked against online Kerodon 01F1, 01P8, 03PM and 06BZ; sources are not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -246,10 +354,45 @@
    "results": "{\"t\": \"2026-10-16T13:26:47Z\", \"tool\": \"grep\", \"query\": \"laxLimit|[Cc]omma|[Jj]oin|[Cc]one\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: Loogle and the focused Quasicategory grep return zero hits. LeanFinder returns homotopy-category Hom, representatives and homotopies, mkNatTrans in an ordinary homotopy category, and the bicategory of quasicategories. Read TwoTruncated.lean:206-242,276-297, HomotopyCat.lean:377-405, and StrictBicategory.lean:14-32,49-70; these retain homotopy classes rather than the required Kan mapping spaces and do not state the join comparison or relative comma formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left join cone in a quasicategory is equivalent to coherent natural transformations from a constant diagram, with varying boundary mapping spaces",
+   "results": "{\"t\": \"2026-10-16T14:23:12Z\", \"tool\": \"leanfinder\", \"query\": \"A left join cone in a quasicategory is equivalent to coherent natural transformations from a constant diagram, with varying boundary mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"CategoryTheory.Limits.Cone.fromCostructuredArrow\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\"], \"digest\": \"54b23c81a640d558\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hornFilling and horn desc constructors fill simplicial horns; Comma.isEquivalenceMap, mapLeftIso and cone equivalences concern ordinary categories; Cech-nerve and wide-pullback hits have ordinary categorical hypotheses. Read Quasicategory/Basic.lean:35-80, StrictBicategory.lean:14-70, and CategoryTheory/Comma/Basic.lean:66-110. None states the join comparison, relative equivalence, or Kan mapping-space formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"cone\"",
+   "results": "{\"t\": \"2026-10-16T14:23:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hornFilling and horn desc constructors fill simplicial horns; Comma.isEquivalenceMap, mapLeftIso and cone equivalences concern ordinary categories; Cech-nerve and wide-pullback hits have ordinary categorical hypotheses. Read Quasicategory/Basic.lean:35-80, StrictBicategory.lean:14-70, and CategoryTheory/Comma/Basic.lean:66-110. None states the join comparison, relative equivalence, or Kan mapping-space formula."
+  },
+  {
+   "tool": "grep",
+   "query": "fatJoin|fatCone|comma|mappingSpace|isofibration",
+   "results": "{\"t\": \"2026-10-16T14:23:13Z\", \"tool\": \"grep\", \"query\": \"fatJoin|fatCone|comma|mappingSpace|isofibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hornFilling and horn desc constructors fill simplicial horns; Comma.isEquivalenceMap, mapLeftIso and cone equivalences concern ordinary categories; Cech-nerve and wide-pullback hits have ordinary categorical hypotheses. Read Quasicategory/Basic.lean:35-80, StrictBicategory.lean:14-70, and CategoryTheory/Comma/Basic.lean:66-110. None states the join comparison, relative equivalence, or Kan mapping-space formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasicategory left cones and coherent comma categories have equivalent functor categories",
+   "results": "{\"t\": \"2026-10-16T14:23:13Z\", \"tool\": \"leansearch\", \"query\": \"Quasicategory left cones and coherent comma categories have equivalent functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.isEquivalenceMap\", \"CategoryTheory.Comma.mapLeftIso\", \"CategoryTheory.Comma.mapLeftIso_functor_map_left\", \"CategoryTheory.Comma.toIdPUnitEquiv\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Equivalence.congrLeftFunctor\", \"CategoryTheory.Limits.Cones.functorialityEquivalence_functor\", \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorEquivalence\"], \"digest\": \"8559b913d555384e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hornFilling and horn desc constructors fill simplicial horns; Comma.isEquivalenceMap, mapLeftIso and cone equivalences concern ordinary categories; Cech-nerve and wide-pullback hits have ordinary categorical hypotheses. Read Quasicategory/Basic.lean:35-80, StrictBicategory.lean:14-70, and CategoryTheory/Comma/Basic.lean:66-110. None states the join comparison, relative equivalence, or Kan mapping-space formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in an infinity category of cones are homotopy pullbacks over maps from a constant diagram",
+   "results": "{\"t\": \"2026-10-16T14:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in an infinity category of cones are homotopy pullbacks over maps from a constant diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map\", \"FundamentalGroupoidFunctor.coneDiscreteComp_obj_mapCone\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"CategoryTheory.Arrow.mapCechNerve\", \"CategoryTheory.Limits.WidePullbackShape.mkCone\", \"CategoryTheory.Limits.Cone.ofPullbackCone\", \"CategoryTheory.Limits.PullbackCone.combine\"], \"digest\": \"06db158cca92512a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hornFilling and horn desc constructors fill simplicial horns; Comma.isEquivalenceMap, mapLeftIso and cone equivalences concern ordinary categories; Cech-nerve and wide-pullback hits have ordinary categorical hypotheses. Read Quasicategory/Basic.lean:35-80, StrictBicategory.lean:14-70, and CategoryTheory/Comma/Basic.lean:66-110. None states the join comparison, relative equivalence, or Kan mapping-space formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-source-gluing",
   "by": "worker",
@@ -265,5 +408,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-join-cone-calculus",
+  "worker": "stage1",
+  "summary": "Proved the comparison on standard simplices by an explicit section and identity-component homotopy, extended it by a general cellular criterion, checked both joint projections are isofibrations before ordinary base change, and derived the varying-boundary mapping formula from a strict prism pullback and the interval-arrow calculation. Reused the existing pinch, Kan pullback and enhanced functor-category nodes. Four smaller statement-only foundations were searched; no statement or maintainer field was changed.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: coherent enhancement of the displayed mapping-limit calculation through the existing finite-Reedy/source-gluing ancestry. This split supplies the join-cone identification, ordinary relative comparison, and mapping-space step of that foundation; it does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General quasicategory functor closure, componentwise equivalences and preservation of mapping spaces under equivalence; the item unit has no statement giving these generic foundations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-83a820379",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-83a820379 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, four new nodes, cited statements, chapter/unit route, sources, edge cases, dependencies, and delivery requirements. No mathematical or structural fault found; review.md records the checks and accepted tool use."
  }
 }
