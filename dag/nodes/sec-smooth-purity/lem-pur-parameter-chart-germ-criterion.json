@@ -35,9 +35,164 @@
   "pqf-def-quasifinite",
   "def-weil-flat-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on an affine neighbourhood of $x$ contained in $V$ without changing any coordinate section except by restriction. Explicitly, the finite-type hypothesis supplies an affine neighbourhood $W_0=\\operatorname{Spec}B_0$ with $B_0$ a finitely generated $k$-algebra. The basic-open basis gives $h\\in B_0$ with $x\\in D(h)\\subseteq W_0\\cap V$. The principal-open assertion gives an affine scheme $W=D(h)=\\operatorname{Spec}B$, $B=(B_0)_h$. If $b_1,\\ldots,b_r$ generate $B_0$ over $k$, their images together with $h^{-1}$ generate $B$; hence $B$ is finite type over $k$. Write $\\mathfrak q$ for the maximal ideal of $B$ corresponding to the closed point $x$, and $b_i=f_i|_W$ (the index $i$ now ranges from $1$ to $d$). The affine-stalk theorem identifies $R=B_{\\mathfrak q}$ compatibly with these germs. Put $P=k[T_1,\\ldots,T_d]$ and $\\varphi:P\\to B$, $T_i\\mapsto b_i$. The $k$-algebra generators of $B$ also generate it over $P$, so $\\varphi$ is finite type. Apply the pointwise affine-pair criterion, using the same pair $W,\\operatorname{Spec}P$ around every point of $W$, to conclude that $f|_W$ is locally of finite type. Finally $B$ is Noetherian by the finite-type-over-a-field theorem.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-sbc-affine-space",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E0 (lemma-Zariski-topology), 00E4 (lemma-standard-open), 00FN (lemma-Noetherian-permanence); Schemes 01I3, 01HS, 01HV; Morphisms 01T2. Explicit generator argument for restrictions."
+   }
+  },
+  {
+   "text": "The inverse image of $\\mathfrak q$ in $P$ is $\\mathfrak n=(T_1-a_1,\\ldots,T_d-a_d)$: reduction modulo $\\mathfrak q$ is evaluation at $a=(a_i)$ in $k$. Indeed $Q(T)-Q(a)$ is in that ideal, by changing one variable at a time and using $T_i^r-a_i^r=(T_i-a_i)\\sum_{j=0}^{r-1}T_i^{r-1-j}a_i^j$. Thus $P/\\mathfrak n=k$ and $\\mathfrak n$ is maximal. Set $A=P_{\\mathfrak n}$. Polynomial regularity makes $P$ Noetherian and $A$ a Noetherian regular local ring, and the maximal-localization dimension theorem gives $\\dim A=d$. The affine-stalk identification makes the prescribed map at $x$ precisely the local map $\\psi:A\\to R=B_{\\mathfrak q}$, $T_i-a_i\\mapsto t_i$. Its closed-fibre ideal is $\\mathfrak nR=I=(t_1,\\ldots,t_d)R\\subseteq\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring), 00OP (lemma-dim-affine-space), Schemes 01HV; evaluation kernel calculation."
+   }
+  },
+  {
+   "text": "Let $J=(b_1-a_1,\\ldots,b_d-a_d)B$. The affine fibre over $a$ has ring $F=B\\otimes_P k\\cong B/J$. To see the latter identification explicitly, $b\\otimes c\\mapsto cb\\bmod J$ is balanced because $T_i$ acts on $k$ as $a_i$; its inverse sends $b\\bmod J$ to $b\\otimes1$. The point over $x$ corresponds to $\\overline{\\mathfrak q}=\\mathfrak q/J$, a maximal ideal with residue field $k$. Localizing the quotient gives $C=F_{\\overline{\\mathfrak q}}\\cong B_{\\mathfrak q}/JB_{\\mathfrak q}=R/I$. In particular $C$ is nonzero, since $I\\subseteq\\mathfrak m$ and $R/I$ surjects onto $R/\\mathfrak m=k$. Notice that $F$ is finite type over $k$, since the images of generators of $B$ generate $B/J$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); Schemes Tag 01JQ affine fibre product formula (lemma-fibre-product-affines), and explicit balanced maps for the evaluation quotient."
+   }
+  },
+  {
+   "text": "For this proper ideal $I$ of the local ring $R$, one has $\\sqrt I=\\mathfrak m$ if and only if $\\dim(R/I)=0$. Primes of $R/I$ correspond, by inverse image and quotient, to primes of $R$ containing $I$: primality in either direction follows from the equation $uv\\bmod I=(u\\bmod I)(v\\bmod I)$. Every such prime lies in $\\mathfrak m$. If $\\sqrt I=\\mathfrak m$, each such prime contains $\\mathfrak m$, so it is $\\mathfrak m$, and $R/I$ has one prime and dimension zero. Conversely dimension zero precludes a strict chain from a prime over $I$ to $\\mathfrak m$, so the latter is the only prime over $I$. The radical-intersection formula then gives $\\sqrt I=\\mathfrak m$. This also proves the quotient-ring reformulation in the statement, under its stipulated equality $\\dim R=d$.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), radical-intersection formula; Tag 00KE (definition-Krull)."
+   }
+  },
+  {
+   "text": "The ring quasi-finiteness/zero-fibre-dimension equivalence applies to the finite-type map $P\\to B$ at $\\mathfrak q$. Its fibre is the finite-type $k$-algebra $F$ of step 3 and its indicated prime $\\overline{\\mathfrak q}$ is maximal. Therefore the closed-point dimension theorem identifies $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F$ with $\\dim F_{\\overline{\\mathfrak q}}=\\dim C$. The equivalence says exactly that $P\\to B$ is quasi-finite at $\\mathfrak q$ if and only if $\\dim C=0$. By the affine-pair definition of scheme quasi-finiteness, and its independence of the affine pair furnished by the isolated-fibre/affine-pairs theorem, this is equivalent to $f|_W$ being quasi-finite at $x$. For the converse use of that theorem, a morphism quasi-finite at $x$ has $x$ isolated in its fibre, so the theorem applies to the particular affine pair $W,\\mathbf A^d_k$. Thus this equivalence works for the prescribed $W$ and the prescribed representatives.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "lem-weil-pbc-closed-point-dimension-local-ring",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0), Tag 01TH (lemma-quasi-finite-at-point-characterize), Tag 01TD (definition-quasi-finite); Algebra 00OU (lemma-dimension-closed-point-finite-type-field)."
+   }
+  },
+  {
+   "text": "Assume (i). Intersect its neighbourhood with $W$; the local ring and local map at $x$ do not change, and the open singleton in the fibre of this intersection is open in the fibre of $W$, since the intersection is open in $W$. Step 5 gives $\\dim C=0$, hence step 4 gives $\\sqrt I=\\mathfrak m$. Flatness at $x$ says that $\\psi:A\\to R$ is flat. Both local rings are Noetherian, so apply the flat height/dimension formula to $A\\to R$ at their maximal ideals. Localizing a local ring at its maximal ideal changes nothing, and the formula is $\\dim R=\\dim A+\\dim(R/\\mathfrak nR)=d+0=d$. This proves both assertions in (ii).",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total); Morphisms 01U3 (definition-flat)."
+   }
+  },
+  {
+   "text": "Assume (ii). By steps 3 and 4 the closed fibre of $\\psi:A\\to R$ is nonzero of dimension zero, and by step 2 $\\dim A=d$. Consequently $\\dim R=\\dim A+\\dim(R/\\mathfrak nR)$. The source $A$ is regular Noetherian local; the target $R$ is Noetherian local and Cohen–Macaulay by hypothesis; and $\\psi$ is local. These are exactly the three hypotheses of miracle flatness, which gives flatness of $A\\to R$. The quasi-finiteness at $x$ also follows from step 5.",
+   "uses": [
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R4 (lemma-CM-over-regular-flat), applied to the local map already constructed."
+   }
+  },
+  {
+   "text": "The flat-over-localization equivalence applied to $P\\to A=P_{\\mathfrak n}$ turns flatness of the $A$-module $R=B_{\\mathfrak q}$ into flatness over $P$. Apply the Noetherian flat-locus neighbourhood theorem to $P\\to B$, $M=B$ and $\\mathfrak q$: $P$ is Noetherian by step 2, $B$ is a finite-type $P$-algebra by step 1, and $B$ is generated by $1$ as a $B$-module. Obtain $g\\notin\\mathfrak q$ such that $B_{\\mathfrak q'}$ is flat over $P$ whenever $g\\notin\\mathfrak q'$. For each such $\\mathfrak q'$ with $\\mathfrak p'=\\varphi^{-1}(\\mathfrak q')$, the same flat-over-localization equivalence identifies this with flatness over $P_{\\mathfrak p'}$. The affine-stalk theorem and the definition of flatness therefore show that $f$ is flat at every point of $D(g)\\subseteq W$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), part (2); 00RC (theorem-openness-flatness), Noetherian case; Schemes 01HV."
+   }
+  },
+  {
+   "text": "The quasi-finite-points-open theorem applied to $f|_W$ supplies an open $Q\\subseteq W$ containing $x$ on which the morphism is locally quasi-finite. Choose a basic open $D(v)$ of $W$ with $x\\in D(v)\\subseteq Q\\cap D(g)$. The principal-open theorem makes $U=D(v)$ affine. Its local maps are unchanged from those of $W$, hence it is flat by step 8. For each $y\\in U\\subseteq Q$, the morphism $f|_W$ is quasi-finite at $y$ by the definition of $Q$, and it is locally of finite type by step 1. Apply the quasi-finite-at-point-isolated theorem to $f|_W$ at $y$: the singleton of $y$ is open in its $W$-fibre. Its intersection with $U$ is the same singleton and is open in the $U$-fibre. Thus every point of $U$ is isolated in its fibre. Finally $B_v$ is generated over $P$ by the finite generating set of $B$ together with $v^{-1}$, so the pointwise affine-pair criterion, with this same pair around every point, makes $U\\to\\operatorname{Spec}P$ locally of finite type. Also $B_v$ is finite type over $k$, so the finite-type affine Noetherian theorem gives the descending chain condition on closed subsets of $U$. Every open of $U$ is quasi-compact: if an open cover had no finite subcover, successively adding a member not already covered would give a strictly increasing infinite chain of open finite unions, contradicting that descending chain condition on complements. The inverse image of each affine target open is an open of $U$, hence quasi-compact. Thus the morphism is quasi-compact and locally of finite type, hence of finite type. By the definition, finite type together with isolated fibre points is quasi-finite. This proves (i) with $U$ affine. Every coordinate throughout is the restriction of the original $f_i$, so all original germs and coordinate values are preserved. If $d=0$, $P=A=k$, $I=0$, and the same argument uses the empty tuple; it says precisely that $R$ has dimension zero. No step assumes $d>0$, reducedness, or a separable chart.",
+   "uses": [
+    "lem-sc-quasi-finite-points-open",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms 01TI (lemma-quasi-finite-points-open), 01TD (definition-quasi-finite); Schemes 01I3 (lemma-standard-open-affine), 01HS (lemma-standard-open); Algebra 00E0 (lemma-Zariski-topology)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sbc-affine-space",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-sc-quasi-finite-points-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+  "place": "XVIII Lemma 2.6, printed p. 552, first proof paragraph. Expansion of the germ/parameter identification using the Stacks lemmas recorded step by step; the SGA paragraph asserts the identification without its commutative algebra proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,15 +257,188 @@
    "date": "2026-10-16",
    "digest": "bd5f7dfdbe6b8a10",
    "verdict": "no match: the eight hits concern localization or locality of flatness, and flat local maps being faithfully flat; none gives miracle flatness or the parameter/chart equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed tuple of functions on a Cohen Macaulay scheme defines a flat quasi finite affine space chart near a closed point if and only if its centered germs form a system of parameters",
+   "results": "{\"t\": \"2026-10-16T07:36:02Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed tuple of functions on a Cohen Macaulay scheme defines a flat quasi finite affine space chart near a closed point if and only if its centered germs form a system of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.IsSmoothAt\"], \"digest\": \"f48824685e2352d1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned definitions, smooth-chart existence, regular-sequence dimension formulas and localization flatness statements do not characterize prescribed parameter tuples as flat quasi-finite charts"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|miracle.?flat|system.?of.?parameters|parameter.?ideal",
+   "results": "{\"t\": \"2026-10-16T07:36:10Z\", \"tool\": \"grep\", \"query\": \"Cohen.?Macaulay|miracle.?flat|system.?of.?parameters|parameter.?ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned definitions, smooth-chart existence, regular-sequence dimension formulas and localization flatness statements do not characterize prescribed parameter tuples as flat quasi-finite charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tuple in a Cohen Macaulay local ring is a system of parameters if and only if the corresponding affine space map is flat and quasi finite near the point",
+   "results": "{\"t\": \"2026-10-16T07:36:10Z\", \"tool\": \"leansearch\", \"query\": \"A tuple in a Cohen Macaulay local ring is a system of parameters if and only if the corresponding affine space map is flat and quasi finite near the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.casesOn\", \"Module.Flat.tfae_equational_criterion\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\"], \"digest\": \"740856b51260cd26\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned definitions, smooth-chart existence, regular-sequence dimension formulas and localization flatness statements do not characterize prescribed parameter tuples as flat quasi-finite charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFiniteAt\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-16T07:36:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiFiniteAt\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned definitions, smooth-chart existence, regular-sequence dimension formulas and localization flatness statements do not characterize prescribed parameter tuples as flat quasi-finite charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local homomorphism of Noetherian local rings has additive dimensions of base and closed fibre; miracle flatness gives the converse over a regular local base",
+   "results": "{\"t\": \"2026-10-16T07:36:12Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local homomorphism of Noetherian local rings has additive dimensions of base and closed fibre; miracle flatness gives the converse over a regular local base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"RingHom.Flat.localRingHom\"], \"digest\": \"1f8a84f2a08d8ee5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned definitions, smooth-chart existence, regular-sequence dimension formulas and localization flatness statements do not characterize prescribed parameter tuples as flat quasi-finite charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local map from a regular local ring to a Cohen Macaulay local ring with maximal ideal primary coordinate images is flat when the dimensions agree",
+   "results": "{\"t\": \"2026-10-16T07:47:18Z\", \"tool\": \"leanfinder\", \"query\": \"A local map from a regular local ring to a Cohen Macaulay local ring with maximal ideal primary coordinate images is flat when the dimensions agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.localRingHom\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"Algebra.Smooth.flat\"], \"digest\": \"2f9c2f288ebdd33e\"}",
+   "date": "2026-10-16",
+   "digest": "2f9c2f288ebdd33e",
+   "verdict": "no match: no returned declaration states the prescribed-coordinate parameter/chart criterion; semantic hits give localization of flat maps or smoothness implying flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCohenMacaulay|IsSystemOfParameters|parameterIdeal|miracleFlat",
+   "results": "{\"t\": \"2026-10-16T07:47:27Z\", \"tool\": \"grep\", \"query\": \"IsCohenMacaulay|IsSystemOfParameters|parameterIdeal|miracleFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: no returned declaration states the prescribed-coordinate parameter/chart criterion; semantic hits give localization of flat maps or smoothness implying flatness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-16T07:47:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: no returned declaration states the prescribed-coordinate parameter/chart criterion; semantic hits give localization of flat maps or smoothness implying flatness"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-flat-coordinate-chain",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-parameter-chart-germ-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the SGA XVIII 2.6 local germ identification into affine models, the evaluation fibre quotient, the radical/dimension equivalence, quasi-finiteness at the closed point, both flatness implications, and a simultaneous affine shrinking. No statement change and no new nodes; all algebraic tools already exist in the DAG. Tested empty tuples, nonreduced Artinian schemes, constant maps on positive-dimensional schemes, and inseparable coordinate maps.",
+  "blueprint": "Seed-target refinement of sk-thm-purity-transport Step 1 via lem-pur-flat-coordinate-chain: SGA XVIII 2.6 first proof paragraph, identifying flat quasi-finite germs with systems of parameters. The seed chain has no imported blueprint ancestor; blueprint.from.node remains null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-miracle-flatness",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "Generic affine-scheme or commutative-algebra tool used only for its stated conclusion in the step citing it; the purity-transport unit does not supply this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-pointwise-criterion",
+    "why": "The pointwise affine-pair criterion turns the finite-type polynomial coordinate ring map into a locally finite type scheme morphism; this generic scheme tool does not replace any purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-lft-pointwise-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-97686c411",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-97686c411 (reviewer sub-agent of L); spot-checked: Read the complete item, all 35 cited statements, report, route and cited source passages. All nine steps check out, including closed-fibre dimension, miracle flatness and affine shrinking. No new nodes, duplicates, cycles or target weakening found. Accepted all 19 declared generic tool uses. Detailed review written to review.md; no repairs needed."
+ }
 }
