@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-torsor-comparison-affine",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Torsors under a classical group over an affine base",
@@ -12,50 +12,198 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.md",
   "place": "node det-pe-torsor-comparison-affine, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-definition-continuity-map"
+ ],
  "proof": [
   {
-   "text": "*Step 1: one affine trivializing cover.* Since $T\\to *$ is an epimorphism there\nis a pro-étale covering of $X$ on whose members $T$ has a section. By\n[sk-thm-pe-indetale-refinement] and [sk-prop-pe-affine-basis] each member is\ncovered by affine ind-étale objects, and since $X$ is affine, hence\nquasi-compact, finitely many of these, $W_1,\\dots,W_r$, are jointly surjective\nonto $X$ and each carries a section of $T$. Put $U=W_1\\sqcup\\dots\\sqcup W_r$. It\nis affine, ind-étale over $X$ (a finite product of ind-étale algebras is\nind-étale) and surjective onto $X$, and $T(U)=\\prod_bT(W_b)\\neq\\emptyset$. Write\n$U=\\varprojlim_iU_i$ with $U_i$ affine étale over $X$. Since $U\\to X$ is\nsurjective and factors through each $U_i$, every $U_i\\to X$ is an étale\nsurjection.",
+   "text": "Write $X=\\operatorname{Spec}R$. Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to $T\\to *$ over $X$ to obtain a covering with local sections. The finite-affine refinement in [sk-def-pe-site] gives finitely many affine opens $W_b=\\operatorname{Spec}B_b$ in its members which cover $X$ and retain those sections. Put $W=\\coprod_bW_b=\\operatorname{Spec}(\\prod_bB_b)$ by [lem-weil-pbc-finite-affine-coproduct-spectrum]. Its summands are disjoint open subschemes by [lem-weil-pbc-scheme-coproduct-family], so [lem-weil-pbc-weakly-etale-source-locality] makes $W\\to X$ weakly étale. It is surjective, and its affine source makes it a pro-étale singleton covering by the covering condition in [sk-def-pe-site]. The sheaf equalizer axiom applied to the disjoint open covering of $W$ glues the chosen sections to $s_W\\in T(W)$: intersections of different summands are empty and a sheaf takes the empty scheme to a singleton. This finite refinement uses the fpqc topology condition, not a claim that arbitrary weakly étale images are open.",
    "uses": [
-    "sk-thm-pe-indetale-refinement"
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "sk-def-pe-site",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-weakly-etale-source-locality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, lemma-compare-cohomology-nonabelian, affine reduction; Tag 098D, lemma-proetale-affine. Finite disjoint-union step expanded."
+   }
   },
   {
-   "text": "*Step 2: the cocycle.* Choose $s\\in T(U)$ and let $p_1,p_2\\colon U\\times_XU\\to U$\nand $p_{ab}\\colon U\\times_XU\\times_XU\\to U\\times_XU$ be the projections. As the\naction is simply transitive there is a unique $g\\in G(U\\times_XU)$ with\n$p_1^*s=g\\cdot p_2^*s$. Pulling back to the triple product and comparing the two\nexpressions of $p_1^*s$ in terms of $p_3^*s$ gives, by freeness of the action,\nthe cocycle identity $p_{13}^*g=p_{12}^*g\\cdot p_{23}^*g$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [sk-thm-pe-indetale-refinement] to $R\\to B=\\prod_bB_b$. It gives a faithfully flat ind-étale $B\\to B'$ such that $R\\to B'$ is ind-étale. Set $U=\\operatorname{Spec}B'$ and pull $s_W$ back to $s\\in T(U)$. The affine morphism $U\\to W$ is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum] and weakly étale by [lem-weil-pbc-ind-etale-stability]; hence $U\\to X$ is a singleton covering by [sk-def-pe-site]. By [def-weil-pbc-ind-etale-algebra], choose a small nonempty cofiltered presentation $U=\\varprojlim_iU_i$ by affine étale finitely presented $X$-schemes, with affine transitions. Every $U_i\\to X$ is surjective, because the surjection $U\\to X$ factors through it; it is therefore a singleton étale covering. This obtains one ind-étale trivializing affine without assuming closure under finite products of ind-étale algebras.",
+   "uses": [
+    "sk-thm-pe-indetale-refinement",
+    "lem-weil-pbc-ind-etale-stability",
+    "sk-def-pe-site",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, choice of U and its presentation; Tag 097Z, proposition-weakly-etale."
+   }
   },
   {
-   "text": "*Step 3: descent to a finite stage.* The fibre products\n$U\\times_XU=\\varprojlim_iU_i\\times_XU_i$ and\n$U\\times_XU\\times_XU=\\varprojlim_iU_i\\times_XU_i\\times_XU_i$ are pro-étale affine\npresentations (the diagonal indices are cofinal). By the affine evaluation\nformula of [sk-prop-pe-comparison-morphism],\n\n$$\nG(U\\times_XU)=\\varinjlim_iG_0(U_i\\times_XU_i),\\qquad\nG(U\\times_XU\\times_XU)=\\varinjlim_iG_0(U_i\\times_XU_i\\times_XU_i),\n$$\n\ncompatibly with the projections and the group laws. So $g$ is the image of some\n$g_i\\in G_0(U_i\\times_XU_i)$. The two sides of the cocycle identity for $g_i$ have\nthe same image in the colimit, hence agree at some later stage $j\\geq i$; replacing\n$i$ by $j$ and $g_i$ by its pullback, $g_i$ is a Čech $1$-cocycle of $G_0$ for the\nétale covering $\\{U_i\\to X\\}$.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $p_1,p_2:U\\times_XU\\to U$ be the projections. By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], evaluation of the torsor isomorphism $G\\times T\\xrightarrow{\\sim}T\\times T$ gives a bijection on sections. Thus there is a unique $g\\in G(U\\times_XU)$ with $s_1=g\\cdot s_2$. On $U^3_X$, the equalities $s_1=g_{12}s_2=g_{12}g_{23}s_3$ and $s_1=g_{13}s_3$ imply $g_{13}=g_{12}g_{23}$ by this uniqueness. This is the left-action convention used below; no commutativity of $G$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, transition element and cocycle; blueprint affine proof Step 2 (left-action convention)."
+   }
   },
   {
-   "text": "*Step 4: the étale torsor.* Étale sheaves satisfy descent along étale coverings,\nso gluing the trivial torsor $G_0|_{U_i}$ along the cocycle $g_i$ gives a\n$G_0$-torsor $T_0$ on $X_{\\Et}$ together with a section $s_0\\in T_0(U_i)$\nsatisfying $p_1^*s_0=g_i\\cdot p_2^*s_0$ on $U_i\\times_XU_i$ (the standard\ncorrespondence between torsors trivialized on a covering and Čech cocycles).",
-   "uses": [],
-   "elementary": null
+   "text": "For $n=2,3$ there is a canonical limit $U^n_X=\\varprojlim_i(U_i)^n_X$. Indeed a compatible map from any test scheme to the right-hand diagram is exactly $n$ compatible maps to the $U_i$ with the same map to $X$, hence exactly $n$ maps to $U$ over $X$. The stages are affine by repeated [lem-weil-pbc-fibre-product-affine-spectra], and étale by [lem-weil-pbc-etale-base-change-finite-limits]. For finite presentation, if $U_i=\\operatorname{Spec}A_i$ and $A_i=R[\\mathbf t]/(\\mathbf f)$ with finite tuples, its $n$-fold tensor power is $R[\\mathbf t_1,\\ldots,\\mathbf t_n]/(\\mathbf f(\\mathbf t_1),\\ldots,\\mathbf f(\\mathbf t_n))$, again finitely presented. Their limits are affine ind-étale over $X$ by [lem-weil-pbc-ind-etale-stability]. Thus the set-sheaf clause of [lem-weil-pbc-comparison-sections] applies, giving $G(U^n_X)=\\varinjlim_iG_0((U_i)^n_X)$. Naturality of that formula gives compatibility with every projection and with multiplication (apply it to the group operations as sheaf maps). These are affine finite-presentation presentations over the affine $X$, exactly as required by that node.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099S, lemma-limit-pullback; Tag 099X, the two displayed colimit formulas."
+   }
   },
   {
-   "text": "*Step 5: comparison.* The functor $\\nu_X^*$ preserves finite limits and\nepimorphisms, so $\\nu_X^*T_0$ is a $G$-torsor. Let $s'\\in(\\nu_X^*T_0)(U)$ be the\npullback of $s_0$; then $p_1^*s'=g\\cdot p_2^*s'$, since $g$ is the image of $g_i$.\nThe $G|_U$-equivariant map $\\nu_X^*T_0|_U\\to T|_U$ of trivial torsors sending $s'$\nto $s$ is an isomorphism, and its two pullbacks to $U\\times_XU$ agree because\nboth $s'$ and $s$ satisfy the same relation with the same $g$. As $U\\to X$ is a\npro-étale covering, the isomorphism descends to an isomorphism of $G$-torsors\n$\\nu_X^*T_0\\cong T$. Finally $\\nu_X^*T_0$ is classical by\n[det-pe-classical-sheaves-image], and $T_0$, hence $T$, has a section over the\nétale covering $U_i\\to X$.",
+   "text": "By clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise], represent $g$ by some $g_i\\in G_0(U_i\\times_XU_i)$. The images of $g_{i,13}$ and $g_{i,12}g_{i,23}$ agree in the triple-product colimit. Clause (3) of the same node gives one later transition on which they are equal. Replace $i$ by that stage and put $V=U_i$ and $c=g_i$. Then $c_{13}=c_{12}c_{23}$. Pullback along the triple diagonal gives $c_{11}=c_{11}^2$, hence diagonal restriction $c=1$; the map $(x,y)\\mapsto(x,y,x)$ gives $c_{12}c_{21}=1$. These identities include the repeated-index and inverse conditions for a descent datum.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, descending g and its cocycle identity to one stage; the normalization identities are written out."
+   }
+  },
+  {
+   "text": "On $V\\times_XV$ define an isomorphism of local sheaves $\\phi_{12}:G_0|_{V,1}\\to G_0|_{V,2}$ by $h\\mapsto h c_{12}$. Its inverse is right multiplication by $c_{12}^{-1}$. The cocycle gives $\\phi_{23}\\phi_{12}(h)=h c_{12}c_{23}=h c_{13}=\\phi_{13}(h)$. Apply [lem-pe-set-sheaf-cover-descent] to the singleton covering $V\\to X$ and this datum to obtain a set sheaf $T_0$ with local coordinate $e:T_0|_V\\xrightarrow{\\sim}G_0|_V$. Form the product sheaves sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Left multiplication commutes with the transition $h\\mapsto h c_{12}$; the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] therefore glues the local action maps to a $G_0$-action. Associativity and the unit law hold after the covering and hence globally, by uniqueness in the sheaf axiom. Let $s_0=e^{-1}(1)\\in T_0(V)$. On overlaps the coordinate relation is $h_2=h_1c_{12}$, so $s_{0,1}=c_{12}s_{0,2}$. Locally $G_0\\times T_0\\to T_0\\times T_0$ has inverse $(a,b)\\mapsto(ab^{-1},b)$ in these coordinates; these inverses agree on overlaps because $(a c)(b c)^{-1}=a b^{-1}$ and the second coordinate changes from $b$ to $b c$, so they glue by the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] and are inverse globally. Also every object has a covering by its base change to $V$, where $s_0$ supplies a section. Hence $T_0\\to *$ is epic by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], and $T_0$ is a $G_0$-torsor with a section over the affine étale surjection $V$.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, final paragraph: omitted cocycle-to-torsor construction; filled using sites.tex Tags 04TR and 04TQ."
+   }
+  },
+  {
+   "text": "Put $F=\\nu_X^*T_0$, with the pulled-back action of $G=\\nu_X^*G_0$; finite-limit preservation from [def-weil-pbc-site-comparison-morphism] supplies the product identifications for this action. The adjunction unit, evaluated at $V$, pulls $s_0$ to a section $s'_0\\in F(V)$, and then to $s'\\in F(U)$. The identity $s_{0,1}=c s_{0,2}$ pulls back to $s'_1=g s'_2$. We verify explicitly that $h\\mapsto h s'$ is an isomorphism $G|_U\\to F|_U$. It suffices by [lem-weil-pbc-ind-etale-basis] to evaluate on affine ind-étale $X$-objects $Z\\to U$. Both $Z$ and $V$ are ind-étale over $X$, so [lem-weil-pbc-ind-etale-stability] makes $Z\\to V$ ind-étale. Present $Z=\\varprojlim_a Z_a$ with $Z_a$ affine étale of finite presentation over $V$, using [def-weil-pbc-ind-etale-algebra]. These are also affine étale of finite presentation over $X$ by composition [lem-weil-pbc-etale-composition-cancellation]. Finite presentation under this composition follows directly from presentations: if $V=\\operatorname{Spec}(R[\\mathbf t]/(\\mathbf f))$ and $Z_a=\\operatorname{Spec}((R[\\mathbf t]/(\\mathbf f))[\\mathbf y]/(\\mathbf q))$, choose polynomial lifts $\\widetilde{\\mathbf q}$ and obtain the finite presentation $R[\\mathbf t,\\mathbf y]/(\\mathbf f,\\widetilde{\\mathbf q})$. The local coordinate $e$ gives natural bijections $T_0(Z_a)\\cong G_0(Z_a)$ carrying $s_0|_{Z_a}$ to $1$. Applying [lem-weil-pbc-comparison-sections] to this presentation identifies $F(Z)\\cong G(Z)$, with inverse $h\\mapsto h s'|_Z$. Naturality makes these local inverses compatible under restrictions. Thus this is a local isomorphism of $G$-sheaves, without an unsupported assertion that inverse image commutes with localization.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Blueprint affine proof Step 5; Tag 099S applied on affine presentations over V; the localization compatibility is proved on the affine basis."
+   }
+  },
+  {
+   "text": "The torsor axiom makes $G|_U\\to T|_U$, $h\\mapsto hs$, an isomorphism. Combine it with the preceding local isomorphism to obtain $\\alpha_U:F|_U\\xrightarrow{\\sim}T|_U$, sending $s'$ to $s$. On $U\\times_XU$, an element with coordinate $h$ relative to $s'_1$ has coordinate $hg$ relative to $s'_2$. The two proposed images are $h s_1$ and $(hg)s_2$, equal because $s_1=g s_2$. Thus the two pullbacks of $\\alpha_U$ agree on all local sections; the same holds for their inverses. Apply the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] to the covering $U\\to X$ to glue both maps. Their composites restrict to identities, so uniqueness of gluing makes them inverse globally. Equivariance is an equality of maps and is checked over the covering. We obtain an isomorphism of $G$-sheaves $\\nu_X^*T_0\\cong T$, and therefore an isomorphism of $G$-torsors.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099X, final paragraph: pullback torsor is isomorphic by construction; overlap and inverse-map calculations expanded (Sites Tag 04TQ)."
+   }
+  },
+  {
+   "text": "Condition (1) of [det-pe-classical-sheaves-image] holds for $T$ with witness $T_0$, so its equivalent condition (2) proves that $T$ is classical. The section $s'_0\\in F(V)$ maps to a section of $T(V)$ under the global comparison isomorphism. Since $V\\to X$ is an affine étale surjection, it is the claimed étale trivializing covering; the torsor axiom identifies a torsor with its group after a chosen section. This proves every clause, including $T_0(V)\\ne\\varnothing$.",
    "uses": [
     "det-pe-classical-sheaves-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.proof.md",
+    "place": "Blueprint affine proof Step 5, last sentence; classical essential-image criterion."
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-site",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-weakly-etale-source-locality",
   "sk-thm-pe-indetale-refinement",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-pe-set-sheaf-cover-descent",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
   "det-pe-classical-sheaves-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-affine.proof.md",
+  "place": "Steps 1–5, expanded using Stacks Tags 099X, 098D, 097Z, 099S, 04TR and 04TQ; left-action convention as in the blueprint."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every torsor under the pullback of an etale group sheaf on the proetale site of an affine scheme descends to an etale torsor",
+   "results": "Hits: AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned etale-site definitions and generic sheaf lemmas do not state descent of arbitrary classical-group pro-etale torsors"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|cocycle",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/Representability.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned etale-site definitions and generic sheaf lemmas do not state descent of arbitrary classical-group pro-etale torsors"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"torsor\"",
+   "results": "Hits: . ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned etale-site definitions and generic sheaf lemmas do not state descent of arbitrary classical-group pro-etale torsors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proetale torsors under classical sheaves of groups descend to the etale site",
+   "results": "Hits: CategoryTheory.Presheaf.IsSheaf, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned etale-site definitions and generic sheaf lemmas do not state descent of arbitrary classical-group pro-etale torsors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsor for a discrete sheaf of groups on the pro etale topology admits an etale trivialization by descending its transition function along an affine inverse limit",
+   "results": "Hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etalePretopology, StandardEtalePair.homEquiv_symm_apply. ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned etale-site definitions and generic sheaf lemmas do not state descent of arbitrary classical-group pro-etale torsors"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -72,5 +220,54 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-pe-torsor-comparison"
+ "unit": "sk-lem-pe-torsor-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-torsor-comparison-affine",
+  "worker": "stage1",
+  "summary": "Kept the statement and repaired the proof: finite affine refinement uses the fpqc covering condition, followed by one ind-etale refinement of the weakly etale affine union. Replaced missing blueprint references by existing affine basis and section-formula nodes. Expanded cocycle descent, noncommutative right-coordinate gluing, pullback trivialization on the affine basis, and agreement of local comparison maps. One new statement-only generic set-sheaf descent lemma; no Lean attachment or Mathlib leaf. Second reading made finite-presentation and local-inverse compatibility calculations explicit; cross-unit tool uses are reported for maintainer registration.",
+  "blueprint": "Steps 1–2 realize blueprint Step 1; step 3 its Step 2; steps 4–5 its Step 3; step 6 its Step 4; steps 7–9 its Step 5. The unit cocycle route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic tool: Stability and diagonal of an ind-etale algebra. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   },
+   {
+    "node": "def-weil-pbc-ind-etale-algebra",
+    "why": "Generic tool: Ind-etale and ind-Zariski algebras. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-sections",
+    "why": "Generic tool: Sections of the comparison inverse image. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Generic tool: The comparison morphism of sites. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Generic tool: The ind-etale subsite is a basis. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   },
+   {
+    "node": "det-pe-classical-sheaves-image",
+    "why": "Generic tool: The essential image of the comparison inverse image. Its statement supplies exactly the fact cited in the displayed steps; this preserves the unit’s affine refinement, finite-stage cocycle, and torsor-gluing route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-comparison-sections",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ind-etale-basis",
+  "det-pe-classical-sheaves-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-3e5a3e67a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3e5a3e67a (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements/sources. Verified all nine steps, set-sheaf descent, noncommutative cocycle conventions, empty cases, and duplicate candidates. No missing dependencies or cycles; accepted tool uses recorded in review.md. No repairs needed."
+ }
 }
