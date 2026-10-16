@@ -29,9 +29,91 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Postcomposition with $f$ and $g$ gives well-defined functions $F_0:\\pi_0(X)\\to\\pi_0(Y)$ and $G_0:\\pi_0(Y)\\to\\pi_0(X)$: a path between two points is sent to a path between their images. For each $z\\in X$, $t\\mapsto H(z,t)$ is a path from $g(f(z))$ to $z$, so $G_0F_0([z])=[z]$. Likewise $t\\mapsto K(w,t)$ gives $F_0G_0([w])=[w]$ for every $w\\in Y$. Thus $F_0$ is a bijection with inverse $G_0$. This argument is valid also for empty spaces: if one space is empty then the existence of both $f$ and $g$ forces the other to be empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 340, path-component convention; agent expansion of the inverse-on-components argument"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and $n\\geq1$. Put $A=\\pi_n(X,x)$, $B=\\pi_n(Y,f(x))$, $C=\\pi_n(X,g(f(x)))$, and $D=\\pi_n(Y,f(g(f(x))))$. Let $a:A\\to B$, $b:B\\to C$, and $c:C\\to D$ be postcomposition by $f$, $g$, and $f$, respectively, at these specified basepoints. These are well-defined homomorphisms: composing a relative-boundary homotopy with the continuous map gives a relative-boundary homotopy, and postcomposition commutes pointwise with the two pieces of concatenation in the first coordinate. Direct composition of representatives gives $ba=(gf)_{*,x}$, $cb=(fg)_{*,f(x)}$, and the identity map of a space induces the identity group homomorphism.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 342, functoriality of homotopy groups; agent expansion of the representative calculation"
+   }
+  },
+  {
+   "text": "Notation for steps 3–6: $D=[0,1]^n$, $c=(\\tfrac12,\\ldots,\\tfrac12)$ and $r(u)=2\\max_i|u_i-\\tfrac12|$, so $0\\leq r\\leq1$ and $r(u)=1$ exactly on $\\partial D$. A function on $D$ or on $[0,1]\\times D$ that is continuous on each of two closed sets covering it is continuous: the inverse image of a closed set is the union of two sets closed in closed subsets. For a space $T$, a path $\\gamma:[0,1]\\to T$ from $t_0$ to $t_1$ and a representative $a:(D,\\partial D)\\to(T,t_1)$, define $\\beta_\\gamma a$ by $a(c+2(u-c))$ on $r(u)\\leq\\tfrac12$ and by $\\gamma(2-2r(u))$ on $r(u)\\geq\\tfrac12$. On the first region $c+2(u-c)\\in D$; on the seam $r=\\tfrac12$ this point lies on $\\partial D$, so both formulas give $t_1=\\gamma(1)$; hence $\\beta_\\gamma a$ is continuous, and on $\\partial D$ it equals $\\gamma(0)=t_0$. Replacing $a$ by a homotopy $a_s$ relative to $\\partial D$ in the inner formula gives a homotopy relative to $\\partial D$ of the results. Thus $\\beta_\\gamma:\\pi_n(T,t_1)\\to\\pi_n(T,t_0)$ is a well-defined function.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 341, change-of-basepoint map; agent expansion with explicit shell formula"
+   }
+  },
+  {
+   "text": "Collar identity. Let $F:[0,1]\\times D\\to T$ be continuous with $F(t,u)=\\gamma(t)$ for all $u\\in\\partial D$. Put $\\lambda(t)=1-t/2\\in[\\tfrac12,1]$, and define $B(t,u)=F(t,c+(u-c)/\\lambda(t))$ on $r(u)\\leq\\lambda(t)$ and $B(t,u)=\\gamma(2-2r(u))$ on $r(u)\\geq\\lambda(t)$. Both regions are closed and cover $[0,1]\\times D$. On the first region $r(c+(u-c)/\\lambda(t))=r(u)/\\lambda(t)\\leq1$, so the point lies in $D$; on the second $0\\leq2-2r(u)\\leq t\\leq1$. On the seam $r(u)=\\lambda(t)$ the rescaled point lies on $\\partial D$ and $2-2r(u)=t$, so both formulas give $\\gamma(t)$. By step 3's pasting rule $B$ is continuous. For $u\\in\\partial D$, $B(t,u)=\\gamma(0)$ (when $t=0$ use $F(0,u)=\\gamma(0)$). At $t=0$, $\\lambda=1$ and $B(0,-)=F(0,-)$; at $t=1$, $\\lambda=\\tfrac12$ and $B(1,-)=\\beta_\\gamma(F(1,-))$, where $F(1,-)$ is based at $\\gamma(1)$. Hence $[F(0,-)]=\\beta_\\gamma[F(1,-)]$ in $\\pi_n(T,\\gamma(0))$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed pp. 341–342, homotopies with moving basepoint; agent expansion with explicit collar homotopy"
+   }
+  },
+  {
+   "text": "$\\beta_\\gamma$ is a bijection with inverse $\\beta_{\\overline\\gamma}$, $\\overline\\gamma(s)=\\gamma(1-s)$. For $a:(D,\\partial D)\\to(T,t_1)$ put $\\mu(s)=(1+s)/2$ and define $A(s,u)=a(c+(u-c)/\\mu(s))$ on $r(u)\\leq\\mu(s)$ and $A(s,u)=\\gamma(s+2-2r(u))$ on $r(u)\\geq\\mu(s)$. On the second region $s\\leq s+2-2r(u)\\leq1$; on the seam the rescaled point lies on $\\partial D$ and the path argument is $1$, so both formulas give $t_1$. Thus $A$ is continuous, $A(s,u)=\\gamma(s)$ for $u\\in\\partial D$, $A(0,-)=\\beta_\\gamma a$ and $A(1,-)=a$. Apply step 4 to $F(t,u)=A(1-t,u)$, whose boundary path is $\\overline\\gamma$ (from $t_1$ to $t_0$): $[a]=\\beta_{\\overline\\gamma}\\beta_\\gamma[a]$. The same argument with $\\overline\\gamma$ in place of $\\gamma$ gives $[b]=\\beta_\\gamma\\beta_{\\overline\\gamma}[b]$ for every $[b]\\in\\pi_n(T,t_0)$. No multiplicativity of $\\beta_\\gamma$ is used below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 341, invertibility of change-of-basepoint maps; agent expansion with explicit sweep homotopy"
+   }
+  },
+  {
+   "text": "Set $\\alpha(t)=H(x,t)$, a path in $X$ from $g(f(x))$ to $x$. For a representative $a:(D,\\partial D)\\to(X,x)$ the map $F(t,u)=H(a(u),t)$ is continuous on $[0,1]\\times D$, with $F(t,u)=\\alpha(t)$ on $\\partial D$, $F(0,-)=g\\circ f\\circ a$ and $F(1,-)=a$. Step 4 gives $[g\\circ f\\circ a]=\\beta_\\alpha[a]$, so with step 2, $ba=(gf)_{*,x}=\\beta_\\alpha:A\\to C$. Likewise $\\delta(t)=K(f(x),t)$ is a path in $Y$ from $f(g(f(x)))$ to $f(x)$, and $F(t,u)=K(w(u),t)$ for $w:(D,\\partial D)\\to(Y,f(x))$ gives $cb=(fg)_{*,f(x)}=\\beta_\\delta:B\\to D$. By step 5 both are bijections, and by step 2 they are homomorphisms; the moving basepoints are retained, and neither composite is treated as an identity map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, printed p. 342, nonstationary-basepoint homotopy invariance, and Exercise 4.1.2, printed p. 358; agent application of steps 3–5"
+   }
+  },
+  {
+   "text": "Since $ba$ is injective, $a$ is injective. Since $cb$ is injective, $b$ is injective. For any $v\\in B$, surjectivity of $ba:A\\to C$ gives $u\\in A$ with $ba(u)=b(v)$, and injectivity of $b$ implies $a(u)=v$. Hence $a$ is surjective and therefore bijective. Its inverse preserves multiplication: if $a(u)=v$ and $a(u')=v'$, then $a(uu')=vv'$, and uniqueness of preimages gives $a^{-1}(vv')=a^{-1}(v)a^{-1}(v')$. Thus the postcomposition homomorphism $a=f_*$ is a group isomorphism for every $x$ and $n\\geq1$. The reasoning uses no commutativity, connectedness, or stationary-basepoint assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Section 4.1, paragraph before Proposition 4.1, printed p. 342, and Exercise 4.1.2, printed p. 358; agent algebraic cancellation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+  "place": "Section 4.1, printed pp. 340–342 and Exercise 4.1.2, printed p. 358; read online. Agent proof with the shell, collar and sweep homotopies written out (no citation of the change-of-basepoint node, which would close a cycle); archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +163,80 @@
    "results": "{\"t\": \"2026-10-16T17:05:05Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|homotopyEquiv|bijective|[Ee]quiv\", \"sub\": \"Topology/Homotopy/HomotopyGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"18\", \"22\", \"23\", \"199\"], \"digest\": \"41e8ac57e903b200\"}",
    "date": "2026-10-16",
    "verdict": "no match: Equiv.lean:43-53 defines homotopy inverse data only. InducedMaps.lean:85-91 gives an equivalence of fundamental groupoids, hence concerns dimension one. HomotopyGroup.lean:438-471 defines all higher groups and a loop-space comparison, but none of these declarations proves that the map f induces isomorphisms in every positive dimension. The model-category WeakEquivalence class has no specified topological weak-equivalence meaning."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyEquiv|[Ww]eakHomotopy|changeBase|basepoint",
+   "results": "{\"t\": \"2026-10-16T18:31:06Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|[Ww]eakHomotopy|changeBase|basepoint\", \"sub\": \"Topology/Homotopy\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Equiv.lean\", \"Mathlib/Topology/Homotopy/Equiv.lean\", \"Mathlib/Topology/Homotopy/Equiv.lean\"], \"digest\": \"a48bb552ce4208ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Topology/Homotopy/Equiv.lean:43–53 (inverse homotopy data only), HomotopyGroup.lean:438–471 (cube groups and loop-space comparison), and AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean:85–91 (fundamental groupoids only). These do not prove the all-degree moving-basepoint theorem or the specified induced map isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy inverse continuous maps induce isomorphisms of all homotopy groups even if the homotopies move the basepoint",
+   "results": "{\"t\": \"2026-10-16T18:31:06Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy inverse continuous maps induce isomorphisms of all homotopy groups even if the homotopies move the basepoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv.Simps.symm_apply\", \"ContinuousMap.HomotopyEquiv.invFun\", \"ContinuousMap.HomotopyEquiv.symm\", \"ContinuousMap.term_≃ₕ_\", \"ContinuousMap.HomotopyEquiv.right_inv\", \"ContinuousMap.HomotopyEquiv.left_inv\", \"ContinuousMap.HomotopyEquiv.mk\", \"Path.Homotopic.Quotient.map\"], \"digest\": \"4ac330caf2947e70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Topology/Homotopy/Equiv.lean:43–53 (inverse homotopy data only), HomotopyGroup.lean:438–471 (cube groups and loop-space comparison), and AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean:85–91 (fundamental groupoids only). These do not prove the all-degree moving-basepoint theorem or the specified induced map isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.HomotopyEquiv, HomotopyGroup",
+   "results": "{\"t\": \"2026-10-16T18:31:06Z\", \"tool\": \"loogle\", \"query\": \"ContinuousMap.HomotopyEquiv, HomotopyGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valid Loogle query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A topological homotopy equivalence induces a bijection on path components and isomorphisms on every higher homotopy group at every basepoint",
+   "results": "{\"t\": \"2026-10-16T18:31:17Z\", \"tool\": \"leanfinder\", \"query\": \"A topological homotopy equivalence induces a bijection on path components and isomorphisms on every higher homotopy group at every basepoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\", \"FundamentalGroupoidFunctor.instIsIsoFunctorFundamentalGroupoidHomotopicMapsNatIso\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace\", \"homotopyGroupEquivFundamentalGroup\", \"Homeomorph.toHomotopyEquiv\", \"HomotopyGroup.pi0EquivZerothHomotopy\", \"Homeomorph.coe_toHomotopyEquiv\", \"HomotopyGroup.pi1EquivFundamentalGroup\"], \"digest\": \"5773efa1749aaf2f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Topology/Homotopy/Equiv.lean:43–53 (inverse homotopy data only), HomotopyGroup.lean:438–471 (cube groups and loop-space comparison), and AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean:85–91 (fundamental groupoids only). These do not prove the all-degree moving-basepoint theorem or the specified induced map isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyGroup.*[Ee]quiv|[Ee]quiv.*homotopyGroup|map|[Hh]omotopi",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"grep\", \"query\": \"homotopyGroup.*[Ee]quiv|[Ee]quiv.*homotopyGroup|map|[Hh]omotopi\", \"sub\": \"Topology/Homotopy/HomotopyGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"127\", \"144\", \"203\", \"204\"], \"digest\": \"b5899861935f80c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Topology/Homotopy/Equiv.lean:43–53 (inverse homotopy data only), HomotopyGroup.lean:438–471 (cube groups and loop-space comparison), and AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean:85–91 (fundamental groupoids only). These do not prove the all-degree moving-basepoint theorem or the specified induced map isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic unbased continuous maps induce the same higher homotopy group maps after change of basepoint, so maps with homotopy inverses are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopic unbased continuous maps induce the same higher homotopy group maps after change of basepoint, so maps with homotopy inverses are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.Homotopy.heq_path_of_eq_image\", \"FundamentalGroupoidFunctor.instIsIsoFunctorFundamentalGroupoidHomotopicMapsNatIso\", \"FundamentalGroupoidFunctor.homotopicMapsNatIso\", \"homotopyGroupEquivFundamentalGroup\", \"ContinuousMap.Homotopy.evalAt_eq\", \"ContinuousMap.Homotopy.apply_one_path\", \"ContinuousMap.Homotopy.apply_zero_path\", \"FundamentalGroupoid.fromPath_eq_iff_homotopic\"], \"digest\": \"16ebb0c4cfe3e7a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Topology/Homotopy/Equiv.lean:43–53 (inverse homotopy data only), HomotopyGroup.lean:438–471 (cube groups and loop-space comparison), and AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean:85–91 (fundamental groupoids only). These do not prove the all-degree moving-basepoint theorem or the specified induced map isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyEquiv|bijective|map",
+   "results": "{\"t\": \"2026-10-16T18:47:10Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|bijective|map\", \"sub\": \"Topology/Homotopy/HomotopyGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"127\", \"144\", \"203\", \"204\", \"209\"], \"digest\": \"62e75a3790eaf24d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read HomotopyGroup.lean:127,144,203–209 and 438–471; the hits concern generalized loop data and loop-space comparisons, with no induced-map homotopy-equivalence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy equivalences preserve homotopy groups via the maps induced by composition with continuous maps, in every degree",
+   "results": "{\"t\": \"2026-10-16T18:47:14Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy equivalences preserve homotopy groups via the maps induced by composition with continuous maps, in every degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.Homotopy.apply_one_path\", \"ContinuousMap.Homotopy.apply_zero_path\", \"ContinuousMap.HomotopyEquiv.trans\", \"ContinuousMap.HomotopyEquiv.trans_apply\", \"CategoryTheory.Functor.mapHomotopyEquiv\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\", \"FundamentalGroupoidFunctor.instIsIsoFunctorFundamentalGroupoidHomotopicMapsNatIso\", \"FundamentalGroupoidFunctor.homotopicMapsNatIso\"], \"digest\": \"35416bc9eb175250\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FundamentalGroupoid/InducedMaps.lean:65–91 and Topology/Homotopy/Equiv.lean:43–53; the returned maps concern the fundamental groupoid, composition of homotopy equivalences, simply connectedness, or homological complexes, rather than the all-degree induced-map statement."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyEquiv|[Bb]ijective|[Ww]eak[Ee]quiv",
+   "results": "{\"t\": \"2026-10-16T19:43:51Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|[Bb]ijective|[Ww]eak[Ee]quiv\", \"sub\": \"Topology/Homotopy\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Path.lean\", \"Mathlib/Topology/Homotopy/Path.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Contractible.lean\", \"Mathlib/Topology/Homotopy/Basic.lean\"], \"digest\": \"b4fb53119530e66d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Equiv.lean:43–53, Contractible.lean:79–84, TopCat/ZerothHomotopy.lean:81–99, and HomotopyGroup.lean:438–471. The hits define homotopy equivalence, preserve contractibility, or compare path-component models; none gives the all-degree induced-map assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy equivalence gives equivalences of all generalized loop homotopy groups",
+   "results": "{\"t\": \"2026-10-16T19:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy equivalence gives equivalences of all generalized loop homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GenLoop.homotopicTo\", \"GenLoop.homotopicFrom\", \"homotopyGroupEquivFundamentalGroup\", \"HomotopyGroup.symmAt_indep\", \"HomotopyGroup.transAt_indep\", \"GenLoop.Homotopic\", \"GenLoop.loopHomeo\", \"GenLoop.loopHomeo_apply\"], \"digest\": \"ad21322ae8400228\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected HomotopyGroup.lean:312–319, 347–389 and 438–455. GenLoop.homotopicTo, homotopicFrom and loopHomeo compare loop models inside a fixed based space; homotopyGroupEquivFundamentalGroup identifies its quotient. None asserts invariance under unbased homotopy equivalences or identifies the prescribed postcomposition map as an isomorphism."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-nerve-natural-homotopy-equivalence",
@@ -111,5 +263,20 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The split dependency had no Lean declaration. This module states its exact Hatcher homotopy-equivalence implication using the project homotopy-group maps and component map; it is imported by the item as a proof dependency."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-homotopy-equivalence-weak",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved the path-component assertion directly; for positive degrees wrote out the change-of-basepoint shell map, the collar identity for homotopies with moving basepoint and the inverse sweep (steps 3–6), then the explicit injectivity/surjectivity cancellation. lem-coef-homotopy-groups-basepoint-change is not cited: its closure reaches this item through lem-coef-kan-quillen-right-proper. No new nodes. Maintainer review Q29 (2026-10-17) replaced the earlier sketched step 3 by steps 3–6.",
+  "blueprint": "Realizes the final topological homotopy-equivalence-to-weak-equivalence conversion in the existing ancestry through lem-coef-nerve-natural-homotopy-equivalence. It supports paragraph 2 of prop-coef-integral-exceptional-adjoint (the derived Hom / derived limit computation), whose current main-20261015 proof remains the same reduction/adjunction route. Steps 1–7 supply path components, functorial based maps, the change-of-basepoint map and its inverse, the moving-basepoint composite identities, and cancellation."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-699a8ee1d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-699a8ee1d (reviewer sub-agent of L); spot-checked: Statement correct and unchanged. Checked on empty, one-point, discrete and disconnected spaces, and on n=1 with a nonconstant basepoint loop where beta acts by conjugation. Steps 1, 2 and 4 are correct and elementary; they rely only on the path-component and cubical pi_n conventions of def-cbc-enhanced-diagrams-cones, whose statement I read. Step 3 was faulty (E5/E4): 'beta_alpha(f∘u)' is ill-typed, 'evaluating the endpoint of H identifies g∘f∘u with u' is false, 'gamma(s)=H(s,x)' swaps H's arguments, and the moving-basepoint homotopy and the inverse of beta were only sketched. The conclusion ba=beta_alpha, cb=beta_delta is true. I confirmed the cycle that blocks citing the reviewed generalization lem-coef-homotopy-groups-basepoint-change: it runs basepoint-change -> kan-quillen-right-proper -> topological-serre-model -> sphere-mapping-weak-equivalence -> this item. FIX: replaced step 3 by four explicit elementary steps: pasting rule and shell map; collar identity with lambda=1-t/2; sweep with mu=(1+s)/2 giving the inverse beta_{gamma-bar}; and F(t,u)=H(a(u),t) giving ba=beta_alpha and likewise cb=beta_delta. I checked every seam, boundary and endpoint. Also corrected stale metadata that said the uncited basepoint-change node was 'reused'/'existing' (step source place, proof_origin.place, split_report summary and blueprint). proof_deps unchanged and acyclic. No new nodes, no tool_uses, no SGA. Not a target node. Hatcher §4.1 is not in literature/ (WANTED) and could not be opened; mathematics checked from the definitions, proof_origin=agent.; 1 file(s) fixed by the reviewer"
  }
 }
