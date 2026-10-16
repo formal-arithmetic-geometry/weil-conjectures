@@ -18,14 +18,15 @@
  },
  "kind": "definition",
  "title": "Accessible and presentable infinity categories",
- "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$; small means $\\mathcal U$-small and all quasicategories below fit in $\\mathcal U'$. Use simplicial sets and nondegenerate simplices from [def-weil-pbc-simplicial-set], and spaces, quasicategories, equivalences, mapping spaces, coherent diagrams, cocones and colimits from [def-cbc-enhanced-diagrams-cones]. For an infinite regular cardinal $\\kappa\\in\\mathcal U$, a simplicial set is $\\kappa$-small if its set of nondegenerate simplices has cardinality less than $\\kappa$. A quasicategory $I$ is $\\kappa$-filtered if every coherent diagram $K\\to I$ for a $\\kappa$-small simplicial set $K$ admits a cocone; $K=\\varnothing$ is included. A quasicategory $\\mathcal C$ is locally small if each mapping space is equivalent to a small space. It admits small $\\kappa$-filtered colimits if all diagrams indexed by small $\\kappa$-filtered quasicategories have colimits.\n\nWhen these colimits exist, an object $c\\in\\mathcal C$ is $\\kappa$-compact if the functor $\\operatorname{Map}_{\\mathcal C}(c,-)$ to spaces preserves them: for every such diagram $F:I\\to\\mathcal C$, the canonical map $\\operatorname{colim}_{i\\in I}\\operatorname{Map}_{\\mathcal C}(c,F(i))\\to\\operatorname{Map}_{\\mathcal C}(c,\\operatorname{colim}_I F)$ is an equivalence of spaces. The category $\\mathcal C$ is $\\kappa$-accessible if it is locally small, admits small $\\kappa$-filtered colimits and has an essentially small full subcategory of $\\kappa$-compact objects such that every object of $\\mathcal C$ is a colimit of a small $\\kappa$-filtered diagram taking values in that subcategory. Essentially small means equivalent to a small quasicategory. Accessible means $\\kappa$-accessible for some infinite regular $\\kappa\\in\\mathcal U$. Presentable means accessible and admitting colimits of all diagrams indexed by small simplicial sets. A coherent functor preserves a class of colimits if it sends every colimiting cocone in that class to a colimiting cocone.",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$; small means $\\mathcal U$-small and the quasicategories $\\mathcal C$ and indexing quasicategories below fit in $\\mathcal U'$. Use simplicial sets and nondegenerate simplices from [def-weil-pbc-simplicial-set], space categories $\\mathcal S_{\\mathcal W}$ and the covariant corepresented mapping-space functors from [def-coef-infinity-category-of-spaces], and quasicategories, equivalences, coherent diagrams, cocones and colimits from [def-cbc-enhanced-diagrams-cones]. For an infinite regular cardinal $\\kappa\\in\\mathcal U$, a simplicial set is $\\kappa$-small if its set of nondegenerate simplices has cardinality less than $\\kappa$. A quasicategory $I$ is $\\kappa$-filtered if every coherent diagram $K\\to I$ for a $\\kappa$-small simplicial set $K$ admits a cocone; $K=\\varnothing$ is included. A quasicategory $\\mathcal C$ is locally small if each mapping space is equivalent to a small space. It admits small $\\kappa$-filtered colimits if all diagrams indexed by small $\\kappa$-filtered quasicategories have colimits.\n\nWhen these colimits exist, an object $c\\in\\mathcal C$ is $\\kappa$-compact if the covariant corepresented coherent functor $\\operatorname{Map}_{\\mathcal C}(c,-):\\mathcal C\\to\\mathcal S_{\\mathcal U\\prime}$ preserves every small $\\kappa$-filtered colimiting cocone: for every such diagram $F:I\\to\\mathcal C$ and every colimiting cocone $\\lambda:F\\to\\Delta_I L$, the image cocone with components $\\operatorname{Map}_{\\mathcal C}(c,F(i))\\to\\operatorname{Map}_{\\mathcal C}(c,L)$ is colimiting in the infinity category of $\\mathcal U\\prime$-small spaces $\\mathcal S_{\\mathcal U\\prime}$ (formed in a further ambient universe). The category $\\mathcal C$ is $\\kappa$-accessible if it is locally small, admits small $\\kappa$-filtered colimits and has an essentially small full subcategory of $\\kappa$-compact objects such that every object of $\\mathcal C$ is a colimit of a small $\\kappa$-filtered diagram taking values in that subcategory. Essentially small means equivalent to a small quasicategory. Accessible means $\\kappa$-accessible for some infinite regular $\\kappa\\in\\mathcal U$. Presentable means accessible and admitting colimits of all diagrams indexed by small simplicial sets. A coherent functor preserves a class of colimits if it sends every colimiting cocone in that class to a colimiting cocone.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Definition 5.3.1.7 (filtered infinity categories), Definition 5.3.4.5 (compact objects), Proposition 5.4.1.7 (local smallness), Proposition 5.4.2.2(2)-(3) (used as the accessibility convention), Definition 5.5.0.1 (presentable). Read online; not archived in literature/. No Stacks tag defines this infinity-categorical notion."
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [],
  "proof_deps": [],
@@ -79,15 +80,115 @@
    "results": "{\"t\": \"2026-10-16T15:15:14Z\", \"tool\": \"leanfinder\", \"query\": \"Compact generation of a quasicategory under filtered colimits of spaces characterizes accessibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.exists_colimitsOfShape\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\"], \"digest\": \"64222c2c39b4bd9f\"}",
    "date": "2026-10-16",
    "verdict": "No match. CategoryTheory.IsCardinalAccessibleCategory and IsAccessibleCategory in Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:50,87 are predicates on ordinary categories. The simplicial-set finite-presentability instance concerns an object of the ordinary category SSet; none supplies mapping-space compactness and filtered infinity-colimits in a quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory.*accessible|accessible.*quasicategory|presentable.*QCat|compact.*mappingSpace",
+   "results": "{\"t\": \"2026-10-16T18:43:08Z\", \"tool\": \"grep\", \"query\": \"quasicategory.*accessible|accessible.*quasicategory|presentable.*QCat|compact.*mappingSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presentable infinity category is an accessible quasicategory admitting all small colimits",
+   "results": "{\"t\": \"2026-10-16T18:43:08Z\", \"tool\": \"leansearch\", \"query\": \"A presentable infinity category is an accessible quasicategory admitting all small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Types.instIsPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_coyoneda_obj\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\"], \"digest\": \"4d5253b861a798b8\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsAccessibleCategory, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-16T18:43:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsAccessibleCategory, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessible quasicategory generated by compact objects under filtered colimits of mapping spaces",
+   "results": "{\"t\": \"2026-10-16T18:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"Accessible quasicategory generated by compact objects under filtered colimits of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\"], \"digest\": \"f95b62891299c472\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsAccessibleCategory|class IsCardinalAccessibleCategory|class IsPresentable|def QCat",
+   "results": "{\"t\": \"2026-10-16T18:43:26Z\", \"tool\": \"grep\", \"query\": \"class IsAccessibleCategory|class IsCardinalAccessibleCategory|class IsPresentable|def QCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\"], \"digest\": \"7d4caf3bdb0e260b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kappa compact object of a quasicategory whose covariant mapping space functor preserves filtered infinity colimits",
+   "results": "{\"t\": \"2026-10-16T18:43:27Z\", \"tool\": \"leanfinder\", \"query\": \"Kappa compact object of a quasicategory whose covariant mapping space functor preserves filtered infinity colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.modelCategoryQuillen.J\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Finite\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.I\", \"SSet.IsStrictSegal\"], \"digest\": \"b7dc54d9de70a04e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-103: accessibility and local presentability there apply to ordinary Category instances. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:20-73: SSet.QCat is the ordinary category (with enrichment/bicategory) of quasicategories, not a presentability predicate on a quasicategory. Read Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:28-60: its finite-presentability instances concern simplicial sets as objects of the ordinary presheaf category. None gives the mapping-space/filtered-infinity-colimit definition here."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAccessibleCategory|IsCardinalAccessibleCategory|[Qq]uasicategory.*[Cc]ompact",
+   "results": "{\"t\": \"2026-10-16T19:20:40Z\", \"tool\": \"grep\", \"query\": \"IsAccessibleCategory|IsCardinalAccessibleCategory|[Qq]uasicategory.*[Cc]ompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\"], \"digest\": \"8409b0c71d76d934\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second-reader search: IsCardinalAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:50) and IsAccessibleCategory (:87) require an ordinary Category instance; their generators use set-valued Hom. SSet.QCat (Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:51) is the ordinary category of quasicategories. None defines accessibility or compactness of an individual quasicategory through mapping spaces and infinity-colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessibleCategory\"",
+   "results": "{\"t\": \"2026-10-16T19:20:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalAccessibleCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\"], \"digest\": \"36a872e8625a8e25\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second-reader search: IsCardinalAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:50) and IsAccessibleCategory (:87) require an ordinary Category instance; their generators use set-valued Hom. SSet.QCat (Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:51) is the ordinary category of quasicategories. None defines accessibility or compactness of an individual quasicategory through mapping spaces and infinity-colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory is accessible when generated under kappa filtered homotopy colimits by a small set of compact objects",
+   "results": "{\"t\": \"2026-10-16T19:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory is accessible when generated under kappa filtered homotopy colimits by a small set of compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.IsLocallyPresentable\"], \"digest\": \"305dab5b7d2b16e8\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Independent second-reader search: IsCardinalAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:50) and IsAccessibleCategory (:87) require an ordinary Category instance; their generators use set-valued Hom. SSet.QCat (Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:51) is the ordinary category of quasicategories. None defines accessibility or compactness of an individual quasicategory through mapping spaces and infinity-colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presentable quasicategory is accessible and has all small colimits, with compactness defined by corepresented functors to spaces",
+   "results": "{\"t\": \"2026-10-16T20:07:27Z\", \"tool\": \"leanfinder\", \"query\": \"A presentable quasicategory is accessible and has all small colimits, with compactness defined by corepresented functors to spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\"], \"digest\": \"8e224125e43124d6\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary-category accessibility/local presentability in Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35–103 and finite presentability in the ordinary category of simplicial sets do not define mapping-space compactness or accessibility of an individual quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsAccessibleCategory, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:07:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsAccessibleCategory, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary-category accessibility/local presentability in Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35–103 and finite presentability in the ordinary category of simplicial sets do not define mapping-space compactness or accessibility of an individual quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "presentable.*[Qq]uasicategory|accessible.*[Qq]uasicategory|compact.*mappingSpace",
+   "results": "{\"t\": \"2026-10-16T20:07:25Z\", \"tool\": \"grep\", \"query\": \"presentable.*[Qq]uasicategory|accessible.*[Qq]uasicategory|compact.*mappingSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary-category accessibility/local presentability in Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35–103 and finite presentability in the ordinary category of simplicial sets do not define mapping-space compactness or accessibility of an individual quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-coef-complete-algebroid",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-coef-presentable-infinity-category",
+  "worker": "stage1",
+  "summary": "Repaired B3/C4 by adding one statement-only definition of the space categories S_W and the coherent corepresented functor using the explicit HTT §5.1.3 rigidification/Sing-realization construction. Compactness is now preservation of colimiting cocones in S_Uprime, the space universe containing all mapping spaces, as in HTT Definition 5.3.4.5. Retained filteredness, local smallness, compact-generation accessibility and presentability clauses. A proposed theorem dependency on the broad coherent-nerve comparison was removed after the server detected a cycle; only the definition infrastructure is used, with the construction spelled out inline. Second reading makes the compactly generated product convention, enriched composition map, and monotone-map operators of rigidification explicit, in accordance with HTT §§1.1.1,1.1.4,1.1.5.",
+  "blueprint": "Realizes the presentability notion required by the enriched tensor-calculus prerequisites of prop-coef-integral-exceptional-adjoint, proof paragraph 2, through the retained blueprint.from chain. The added child realizes the space-valued corepresentable construction used in the compactness clause.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-db87972bc",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-db87972bc (reviewer sub-agent of L); spot-checked: Read both nodes in full, every statement dependency (def-weil-pbc-simplicial-set, def-cbc-enhanced-diagrams-cones, def-coef-coherent-nerve-infrastructure), the parent def-coef-complete-algebroid, the unit record and six of the 26 users. HTT is not archived and the review guard blocks network access, so the HTT places were checked from knowledge of HTT, not from the PDF. Item: kappa-filtered (5.3.1.7, K empty included; the fat-cocone and join versions are equivalent for existence) and kappa-small by nondegenerate simplices. Compactness (5.3.4.5) is tested in S_{U'}; HTT uses the larger space category, and S_{U'} to S_{U''} preserves the colimits tested, so the universe change matches HTT and weakens nothing. For locally small C it agrees with the old reading, so the users keep their meaning. Accessibility (5.4.2.2 convention) is equivalent to the Ind_kappa definition; presentable follows 5.5.0.1. The item has no proof steps, so citations=[] is exact. New node def-coef-infinity-category-of-spaces matches HTT: S_W=N_hc(Kan_W) (1.2.16.1), the rigidification (1.1.5.1/1.1.5.3/1.1.5.5), and h_c=N_hc(H_c) composed with the unit eta, with H_c(x)=Sing|C[C](c,x)| (opening of 5.1.3). It is well-defined: rho is a homeomorphism in compactly generated spaces, Sing preserves products, values are Kan and W-small. Small cases checked: C[Delta^0], C[Delta^1] and C[Delta^2]; h_c on Delta^0 and Delta^1; for the item, the empty quasicategory (accessible, not presentable), Delta^0 (presentable), the poset omega+1 (infinity not compact, presentable) and the discrete two-object category (not presentable). Acyclic: the full stmt/proof closure computed over the snapshot contains neither node. No duplicates: no def node for spaces, anima, Kan or corepresentables in the DAG, and no blueprint node on presentability; nearby nodes are theorems. Mathlib verdict confirmed (SimplicialNerve.lean:14-36 lists the quasicategory of anima as future work). Blueprint fields are correct, tool_uses=[], no target and no SGA. Missing lean_audit is common across this project (1187 of 1551 recent nodes) and not a fault. No changes."
+ }
 }

@@ -1,0 +1,117 @@
+{
+ "id": "def-coef-infinity-category-of-spaces",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, where the finite-coefficient mapping-complex adjunction uses the infinity category of spaces and the covariant mapping-space functor; this node makes those notions explicit for the compactness clause of def-coef-presentable-infinity-category.",
+   "via": [
+    "def-coef-presentable-infinity-category",
+    "def-coef-complete-algebroid",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The infinity category of spaces and coherent corepresented functors",
+ "statement": "For each universe $\\mathcal W$, use simplicial sets from [def-weil-pbc-simplicial-set], Kan complexes, geometric realization, right-pinched mapping spaces and internal functor simplicial sets from [def-cbc-enhanced-diagrams-cones], and the simplicial-category and coherent-nerve conventions of [def-coef-coherent-nerve-infrastructure]. Work in an ambient universe containing $\\mathcal W$. A simplicial category has objects, simplicial sets of morphisms, identity vertices, and associative unital simplicial composition maps. Let $\\mathbf{Kan}_{\\mathcal W}$ be the simplicial category of $\\mathcal W$-small Kan complexes, with morphism simplicial set $\\operatorname{Fun}(S,T)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(S\\times\\Delta^n,T)$ and composition induced by evaluation and composition of simplicial maps. Define $\\mathcal S_{\\mathcal W}=N_{\\mathrm{hc}}(\\mathbf{Kan}_{\\mathcal W})$, the infinity category of $\\mathcal W$-small spaces. This is the coherent nerve, retaining homotopies between maps, rather than the ordinary nerve of the underlying category.\n\nHere is an explicit model for the covariant corepresented coherent functor. Let $\\mathcal C$ be a $\\mathcal W$-small quasicategory, $c$ a vertex, and $A=\\mathfrak C[\\mathcal C]$. For clarity the rigidification has the objects of $\\mathcal C$ and is the colimit, over its simplices $\\Delta^n\\to\\mathcal C$, of the simplicial categories $\\mathfrak C[\\Delta^n]$; these have objects $0,\\ldots,n$, morphism simplicial sets $N(P_{i,j})$ for $i\\leq j$, where $P_{i,j}$ is the inclusion poset of subsets of $\\{i,\\ldots,j\\}$ containing both endpoints, and empty morphism sets for $i>j$. Composition is union of subsets. A monotone map $f:[m]\\to[n]$ induces the enriched functor sending $i$ to $f(i)$ and a subset $B$ to its image $f(B)$; these functors specify the simplex diagram used in the colimit. The coherent nerve has $n$-simplices the enriched functors $\\mathfrak C[\\Delta^n]\\to A$, with simplicial operators given by restriction. For a topological space $X$, $\\operatorname{Sing}(X)_n$ consists of continuous maps $|\\Delta^n|\\to X$, with operators given by precomposition. In this construction topological products are compactly generated products: for a topological space $T$, its k-ification $kT$ has the subsets $V$ such that $a^{-1}(V)$ is open for every continuous map $a:Q\\to T$ from a compact Hausdorff space $Q$ as its open sets, and $X\\times_kY=k(X\\times Y)$. Realization is the quotient realization already defined in [def-cbc-enhanced-diagrams-cones], regarded as a compactly generated space. For simplicial sets $B,D$, let $\\rho_{B,D}:|B\\times D|\\to |B|\\times_k|D|$ be the natural product comparison induced by the two projections. Form the simplicial category $A^{\\mathrm{top}}$ with the same objects and morphism sets $\\operatorname{Sing}|A(x,y)|$. Its composition is $\\operatorname{Sing}$ of the continuous map $|A(y,z)|\\times_k|A(x,y)|\\xrightarrow{\\rho^{-1}}|A(y,z)\\times A(x,y)|\\xrightarrow{|\\circ|}|A(x,z)|$, using the product identification for $\\operatorname{Sing}$. The identity is the singular vertex at the realization of the identity vertex of $A$. The natural unit maps give an enriched functor $A\\to A^{\\mathrm{top}}$. Fixing $c$ defines an enriched functor $H_c:A\\to\\mathbf{Kan}_{\\mathcal W}$ with $H_c(x)=\\operatorname{Sing}|A(c,x)|$: on an enriched morphism, its action is postcomposition in $A^{\\mathrm{top}}$, after the unit map $A(x,y)\\to\\operatorname{Sing}|A(x,y)|$. Define\n$$h_c:\\mathcal C\\xrightarrow{\\eta}N_{\\mathrm{hc}}A\\xrightarrow{N_{\\mathrm{hc}}H_c}\\mathcal S_{\\mathcal W},$$\nwhere $\\eta$ is the rigidification/coherent-nerve adjunction unit (on each simplex it is its defining enriched functor into the simplex colimit). This is the coherent functor corepresented by $c$, written $\\operatorname{Map}_{\\mathcal C}(c,-)$; its values model the right-pinched mapping spaces, and its postcomposition maps and higher coherences are those of the displayed enriched construction. For a coherent cocone $\\lambda:F\\to\\Delta_I L$ with $F:I\\to\\mathcal C$, its image under $h_c$ is the cocone $h_cF\\to\\Delta_Ih_c(L)$ obtained by composing $\\lambda:I\\times\\Delta^1\\to\\mathcal C$ with $h_c$. Preservation of that colimit means precisely that this image cocone is colimiting in $\\mathcal S_{\\mathcal W}$, in the sense of [def-cbc-enhanced-diagrams-cones].",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Definition 1.2.16.1 and Remarks 1.2.16.2–1.2.16.4 (space category, including size variants); §5.1.3 opening construction, printed pp. 319–320 (rigidification followed by Sing of geometric realization of enriched Hom, restricted to a fixed first object); Definitions 1.1.5.1, 1.1.5.5 and adjunction in §2.2.1 for rigidification and coherent nerve. Read online; not archived in literature/. No Stacks tag defines this infinity-categorical construction. Definition 1.1.1.6 and Remark 1.1.1.7, and §1.1.4, printed pp. 18–19, specify compactly generated topological products and the product-preserving realization/Sing convention; Definition 1.1.5.3 specifies the monotone-map action on rigidification simplices."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of spaces is the coherent nerve of Kan complexes and corepresented functors use rigidification and singular realization",
+   "results": "{\"t\": \"2026-10-16T20:05:14Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of spaces is the coherent nerve of Kan complexes and corepresented functors use rigidification and singular realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.cosk\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.SimplicialNerve\", \"SSet.toTop\", \"TopCat.toSSet\"], \"digest\": \"9d209d5d88a8793c\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T20:05:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|def sHom|instSimplicialCategorySSet",
+   "results": "{\"t\": \"2026-10-16T20:05:15Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|def sHom|instSimplicialCategorySSet\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent covariant functor from a quasicategory to Kan spaces is constructed by rigidification and Sing realization of enriched Hom",
+   "results": "{\"t\": \"2026-10-16T20:05:27Z\", \"tool\": \"leansearch\", \"query\": \"A coherent covariant functor from a quasicategory to Kan spaces is constructed by rigidification and Sing realization of enriched Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.mapHomotopyCategory\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"SSet.hoFunctor.unitHomEquiv\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"SSet.QCat.bicategory\"], \"digest\": \"b1c8e614fbe3c497\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space-valued covariant mapping functor of a quasicategory is the nerve adjoint of enriched postcomposition on a fibrant rigidification",
+   "results": "{\"t\": \"2026-10-16T20:05:40Z\", \"tool\": \"leanfinder\", \"query\": \"The space-valued covariant mapping functor of a quasicategory is the nerve adjoint of enriched postcomposition on a fibrant rigidification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveFunctor\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveMap\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\"], \"digest\": \"cb9b8d0e49ed5ab2\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, SSet.KanComplex",
+   "results": "{\"t\": \"2026-10-16T20:05:41Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, SSet.KanComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"0b562f163c10e67e\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "grep",
+   "query": "corepresent|rigidification|[Cc]ategory.*[Oo]f.*[Ss]paces",
+   "results": "{\"t\": \"2026-10-16T20:05:44Z\", \"tool\": \"grep\", \"query\": \"corepresent|rigidification|[Cc]ategory.*[Oo]f.*[Ss]paces\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14–36,193–210: CategoryTheory.SimplicialNerve implements the generic coherent nerve, but defining the quasicategory of anima as the nerve of Kan complexes is explicitly listed as future work. Quasicategory/Basic.lean:54 only says an individual Kan complex is a quasicategory. Neither this nor the ordinary nerve/homotopy-category adjunction constructs the coherent space-valued corepresented functor. No one-line specialization supplies this node."
+  },
+  {
+   "tool": "grep",
+   "query": "anima|corepresent|Sing.*[Rr]eali|[Rr]eali.*Sing",
+   "results": "{\"t\": \"2026-10-16T20:19:02Z\", \"tool\": \"grep\", \"query\": \"anima|corepresent|Sing.*[Rr]eali|[Rr]eali.*Sing\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\"], \"digest\": \"6736034150c45a22\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Independent second reading: SimplicialNerve.lean:14–36,193–210 defines the general nerve and lists the quasicategory of anima as future work. SingularSet.lean:45–79 supplies realization/Sing only; SimplicialCategory.sHomFunctor is an ordinary functor on an already enriched category. SSet.KanComplex and its internal-Hom instance concern individual simplicial sets. None supplies the space category together with the coherent corepresented functor for a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanComplex\"",
+   "results": "{\"t\": \"2026-10-16T20:19:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.instKanComplexOp\", \"SSet.horn.IsCompatible.liftOfKanComplex\", \"SSet.horn.IsCompatible.δ_liftOfKanComplex\", \"SSet.horn.IsCompatible.exists_lift_of_kanComplex\", \"SSet.KanComplex.iff\", \"SSet.horn.IsCompatible.δ_liftOfKanComplex_assoc\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"89b6802f3742f9d7\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Independent second reading: SimplicialNerve.lean:14–36,193–210 defines the general nerve and lists the quasicategory of anima as future work. SingularSet.lean:45–79 supplies realization/Sing only; SimplicialCategory.sHomFunctor is an ordinary functor on an already enriched category. SSet.KanComplex and its internal-Hom instance concern individual simplicial sets. None supplies the space category together with the coherent corepresented functor for a quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial enrichment of fibrant simplicial sets and singular realization of their hom objects defines a space valued functor",
+   "results": "{\"t\": \"2026-10-16T20:19:12Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial enrichment of fibrant simplicial sets and singular realization of their hom objects defines a space valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SSet.hoFunctor\", \"SimplexCategory.toTop\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"TopCat.toSSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.uliftFunctor\"], \"digest\": \"0581f71b4088a72d\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Independent second reading: SimplicialNerve.lean:14–36,193–210 defines the general nerve and lists the quasicategory of anima as future work. SingularSet.lean:45–79 supplies realization/Sing only; SimplicialCategory.sHomFunctor is an ordinary functor on an already enriched category. SSet.KanComplex and its internal-Hom instance concern individual simplicial sets. None supplies the space category together with the coherent corepresented functor for a quasicategory."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-coef-presentable-infinity-category",
+  "date": "2026-10-17",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
