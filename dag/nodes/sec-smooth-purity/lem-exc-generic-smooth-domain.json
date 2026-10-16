@@ -26,9 +26,118 @@
   "def-weil-pbc-separable-field-extension",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\varphi:R\\to S$ for the given map and $f:X=\\operatorname{Spec}S\\to Y=\\operatorname{Spec}R$ for its spectrum morphism [def-weil-affine-spectrum]. The domain-spectrum statement [lem-weil-pbc-spec-domain-stalks-function-field] makes $Y$ integral. Apply [lem-weil-pbc-lft-pointwise-criterion] using the whole affine pair $X,Y$ and the given finite type ring map: $f$ is locally of finite type. It is also quasi-compact, as follows explicitly. Any affine open $V\\subseteq Y$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Write $Y\\setminus V=V(I)$; the opens $D(a)$ for $a\\in I$ cover $V$, since a prime outside $V(I)$ omits some $a\\in I$. Choose a finite subcover. The inverse image of each $D(a)$ is $D(\\varphi(a))$, since the spectrum map contracts prime ideals. By [lem-weil-pbc-affine-open-section-vanishing-prime] these inverse images are affine, hence quasi-compact by the same affine quasi-compactness statement. Their finite union is quasi-compact. Thus the hypotheses of generic local finite presentation hold.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T1, 01T2 (finite type on affine charts); preparation for Tag 052A. Quasi-compactness expanded using basic opens."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-flat-finite-presentation-lfp] to $f$. It gives a nonempty open $U\\subseteq Y$ such that $f^{-1}(U)\\to U$ is locally of finite presentation. Choose $\\mathfrak p\\in U$ and write $Y\\setminus U=V(J)$. Some $a\\in J$ is absent from $\\mathfrak p$, hence $a\\ne0$ and $\\mathfrak p\\in D(a)\\subseteq U$: any prime omitting $a$ cannot contain $J$. Put $b=\\varphi(a)$. Injectivity gives $b\\ne0$, and $f^{-1}(D(a))=D(b)$.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A (proposition-generic-flatness), finite-presentation conclusion; the affine case is supplied by algebra.tex Tag 051T. This realizes the generic-finite-presentation reduction in Tag 07ND."
+   }
+  },
+  {
+   "text": "The basic-open statement [lem-weil-pbc-affine-open-section-vanishing-prime] identifies $D(a)$ and $D(b)$ with affine schemes having section rings $R_a$ and $S_b$, respectively, and identifies the induced ring map with the localization of $\\varphi$. They are affine opens in $U$ and $f^{-1}(U)$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to this affine pair for $f^{-1}(U)\\to U$: $R_a\\to S_b$ is of finite presentation. The map $R\\to R_a$ has the explicit finite presentation $R[T]/(aT-1)\\cong R_a$, sending $T$ to $1/a$; its inverse sends $r/a^n$ to $rT^n$ in the quotient. To check well-definedness, a fraction equality gives $a^k(a^m r-a^n s)=0$ for some $k\\ge0$; multiplying this equality by $T^{k+m+n}$ in the quotient gives $rT^n=sT^m$. These maps preserve sums and products, and their composites fix $R$, $T$, and $1/a$, so are identities. This is a finite presentation by [def-weil-pbc-finitely-presented-algebra]. Composition in [lem-weil-pbc-finite-presentation-base-change-composition] now gives that $R\\to S_b$ is of finite presentation. Thus the first hypothesis of the local smooth-fibre criterion is available with the nonzero element $b\\in S$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ (lemma-locally-finite-presentation-characterize), implication (1) to (2); algebra.tex Tags 00F3, 00F4. Explicit presentation for the base localization."
+   }
+  },
+  {
+   "text": "Form $C=K\\otimes_R S$. By [lem-weil-pbc-generic-fibre-localization-domain-irreducible], applied using injectivity of $\\varphi$, $C$ is a domain and is the localization of $S$ at the images of $R\\setminus\\{0\\}$. The map $C\\to L$ sends $\\lambda\\otimes s$ to $\\lambda s$; in localization coordinates it sends $s/\\varphi(r)$ to the same fraction in $L$, so is injective. Every element $s/t\\in L$, with $s,t\\in S$ and $t\\ne0$, is the quotient of the images in $C$ of $s$ and $t$, so $L$ is also the fraction field of $C$. If $s_1,\\ldots,s_n$ generate $S$ over $R$, their images generate $C$ over $K$, since every fraction $s/\\varphi(r)$ is a polynomial in those images with coefficients in $K$. Hence $C$ is a finite type $K$-algebra. These identifications retain the given embedding $K\\to L$ and its separability hypothesis.",
+   "uses": [
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND (lemma-smooth-at-generic-point), second paragraph: passage to the generic fibre. Fraction-field and finite-generation identifications written out."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-at-generic-point-over-field] with ground field $K$, finite type domain algebra $C$, and fraction field $L$. Step 4 verified the domain, finite type and fraction-field hypotheses, and $L/K$ is separable by assumption. Therefore $K\\to C$ is smooth at its zero prime.",
+   "uses": [
+    "lem-weil-pbc-smooth-at-generic-point-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND, field-base case; equivalently Tag 00TV (lemma-separable-smooth) at the zero prime of the generic fibre."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q=(0)\\subset S$. Its contraction is $\\mathfrak p=(0)\\subset R$ by injectivity. In [def-weil-pbc-localization-at-prime], localization at zero in a domain inverts every nonzero element, so $R_{\\mathfrak p}=\\kappa(\\mathfrak p)=K$ and $S_{\\mathfrak q}=\\kappa(\\mathfrak q)=L$, compatibly with the induced local map. The map $K\\to L$ is flat by [lem-weil-pbc-module-over-field-flat]. The fibre $F=S\\otimes_R\\kappa(\\mathfrak p)=S\\otimes_R K$ identifies with $C$ by $s\\otimes\\lambda\\mapsto\\lambda\\otimes s$, with inverse $\\lambda\\otimes s\\mapsto s\\otimes\\lambda$. The tensor balancing relations make both maps well defined, and multiplication of pure tensors shows that they are inverse $K$-algebra maps. Under this identification the map $F\\to\\kappa(\\mathfrak q)=L$, $s\\otimes\\lambda\\mapsto s\\lambda$, is exactly the injection of step 4, so its kernel, the corresponding prime $\\mathfrak Q$, is zero. Apply [lem-weil-pbc-flat-smooth-fibre-smooth-at-prime] to $R\\to S$ at $\\mathfrak q$: step 3 supplies $b\\notin\\mathfrak q$ with $S_b$ finitely presented over $R$, the local map is the flat field map just checked, and step 5 gives smoothness of the fibre at $\\mathfrak Q$. Its conclusion is that $R\\to S$ is smooth at $(0)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TF (lemma-flat-fibre-smooth), with p=q=(0). This is the local fibre version of the reduction in Tag 07ND, whose comment explicitly permits 00TF in place of 00TG."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-singular-ideal], smoothness at $\\mathfrak q=(0)$ means that there is $g\\in S\\setminus(0)$ with $R\\to S_g$ smooth. The condition $g\\notin(0)$ is exactly $g\\ne0$, so this is the required nonzero principal localization.",
+   "uses": [
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TB (definition-smooth-at-prime), unpacked at the zero prime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sbc-generic-flat-finite-presentation-lfp",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-smooth-at-generic-point-over-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "def-weil-pbc-singular-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expansion of the reverse implication of Tag 07ND, read online at https://stacks.math.columbia.edu/tag/07ND; generic-finite-presentation reduction via the existing 051T/052A scheme tool, and the local fibre criterion 00TF. Local literature files are absent on this machine; see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +187,66 @@
    "results": "{\"t\": \"2026-10-16T03:00:06Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra over a domain whose generic fibre has separably generated function field has a nonzero localization that is smooth over the domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.Smooth.of_isLocalization_Away\", \"Algebra.IsStandardSmooth.localization_away\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\"], \"digest\": \"78ed6497fc3aea1a\"}",
    "date": "2026-10-16",
    "verdict": "no match: the hits localize a map already assumed smooth at a prime, or prove smoothness of a localization map itself. They do not infer generic smoothness from a separable function-field extension over a domain."
+  },
+  {
+   "tool": "grep",
+   "query": "generic|IsFractionRing|IsSeparablyGenerated|[Ss]eparable",
+   "results": "{\"t\": \"2026-10-16T03:19:09Z\", \"tool\": \"grep\", \"query\": \"generic|IsFractionRing|IsSeparablyGenerated|[Ss]eparable\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\"], \"digest\": \"f51a0d7af4f3a215\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Smooth/Field.lean:44-51, Smooth/Locus.lean:150-157. The hits assume smoothness or finite presentation already, or concern only separably generated field extensions. None proves the domain-base generic-smoothness statement or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type inclusion of domains with separable function field extension is smooth at the zero prime",
+   "results": "{\"t\": \"2026-10-16T03:19:10Z\", \"tool\": \"leansearch\", \"query\": \"A finite type inclusion of domains with separable function field extension is smooth at the zero prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.smoothLocus\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"differentIdeal_ne_bot\", \"Algebra.instIsStandardSmoothOfRelativeDimensionOfNatNatOfSubsingleton\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\"], \"digest\": \"fdeafa7738819977\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Smooth/Field.lean:44-51, Smooth/Locus.lean:150-157. The hits assume smoothness or finite presentation already, or concern only separably generated field extensions. None proves the domain-base generic-smoothness statement or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective finite type homomorphism of integral domains with separable extension of fraction fields is smooth on some nonzero principal localization of the target",
+   "results": "{\"t\": \"2026-10-16T03:19:10Z\", \"tool\": \"leanfinder\", \"query\": \"An injective finite type homomorphism of integral domains with separable extension of fraction fields is smooth on some nonzero principal localization of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"RingHom.Smooth.ofLocalizationSpanTarget\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"RingHom.Smooth.holdsForLocalizationAway\"], \"digest\": \"a3757c17ca862c56\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Smooth/Field.lean:44-51, Smooth/Locus.lean:150-157. The hits assume smoothness or finite presentation already, or concern only separably generated field extensions. None proves the domain-base generic-smoothness statement or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, IsFractionRing",
+   "results": "{\"t\": \"2026-10-16T03:19:10Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSmoothAt, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant finite type morphism of integral affine schemes is smooth at its generic point if the function field extension is separable",
+   "results": "{\"t\": \"2026-10-16T03:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant finite type morphism of integral affine schemes is smooth at its generic point if the function field extension is separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"2e3fc533aec01184\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types and Smooth/Field.lean:44-51, Smooth/Locus.lean:150-157. The hits assume smoothness or finite presentation already, or concern only separably generated field extensions. None proves the domain-base generic-smoothness statement or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFractionRing|IsSeparablyGenerated|of_algebraicIndependent_of_isSeparable|exists_notMem_smooth",
+   "results": "{\"t\": \"2026-10-16T03:29:43Z\", \"tool\": \"grep\", \"query\": \"IsFractionRing|IsSeparablyGenerated|of_algebraicIndependent_of_isSeparable|exists_notMem_smooth\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/Locus.lean\"], \"digest\": \"656204b394ab1caa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Smooth/Field.lean:44-51 and Smooth/Locus.lean:150-157. Formal smoothness of a separably generated field extension and existence of a smooth principal neighborhood under finite presentation are ingredients, not this domain-base statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated algebra B over an integral domain A with injective structure map, separability of Frac B over Frac A implies the zero ideal belongs to the smooth locus",
+   "results": "{\"t\": \"2026-10-16T03:29:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated algebra B over an integral domain A with injective structure map, separability of Frac B over Frac A implies the zero ideal belongs to the smooth locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.IsSmoothAt\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.smoothLocus_eq_univ\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"Algebra.Smooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\"], \"digest\": \"0587fd534f2c075e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned smooth-locus definitions and principal-localization theorems assume pointwise smoothness or finite presentation; no hit derives it from the fraction-field hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-16T03:29:44Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSmoothAt, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.of_formallySmooth_fiber\"], \"digest\": \"ff44a7d6e3839b43\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Algebra.IsSmoothAt.of_formallySmooth_fiber requires finite presentation, flatness over the entire base and formal smoothness of the entire fibre. The item assumes only finite type and separable fraction fields."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-j0-separable-finite-type-ascent",
   "by": "worker",
@@ -97,5 +262,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-generic-smooth-domain",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Expanded generic finite presentation using the existing scheme theorem and its affine section criterion, the generic fibre and its unchanged fraction field, the existing field-base smoothness theorem, and the flat local smooth-fibre criterion at zero. Reused every input: no new nodes. Checked exact cited statements, absence of project attachments, Mathlib search hits, edge cases, and dependency cycles. Marked the proof agent-written because the local literature checkout is missing, while reading the Stacks tags online.",
+  "blueprint": "Realizes the field-excellence input in the second paragraph of thm-exc-curve-open-dimension-general, through the existing J-2 and J-0 ascent descendants. It proves the generic-smoothness input used by lem-exc-j0-separable-finite-type-ascent, below the unit level, following the reverse implication of Stacks 07ND.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation-lfp",
+    "why": "Generic finite-presentation reduction for the affine domain map; the existing stronger scheme tool replaces creating a duplicate 00FG node. It supplies only finite presentation, not generic smoothness; no node of the present unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "why": "The field-base case supplies smoothness of the generic fibre after the explicit localization and fraction-field identifications. It is the field argument of 07ND, not the domain-base conclusion being proved."
+   },
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "Generic local smoothness criterion 00TF converts finite presentation near zero, the flat field map of local rings, and generic-fibre smoothness into smoothness at zero. This is the local form of the reduction used in 07ND."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-generic-flat-finite-presentation-lfp",
+  "lem-weil-pbc-smooth-at-generic-point-over-field",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-789673430",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-789673430 (reviewer sub-agent of L); spot-checked: Read all seven steps, cited statements, sources, and unit/chapter route. Checked 07ND, generic finite presentation via 051T/052A, and every hypothesis of 00TF, including the generic-fibre map and zero prime. Edge cases and duplicate searches found no fault; 452 dependencies contain no return path. Accept all three declared tool uses. No new nodes or corrections. Full findings in review.md."
  }
 }
