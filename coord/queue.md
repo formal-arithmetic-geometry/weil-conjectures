@@ -23,10 +23,9 @@
 | `Sheaf.Paper.IntegralConstructibleKernels` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 6 | 1 | proof |
@@ -36,6 +35,7 @@
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound` | 8 | 1 | proof |
