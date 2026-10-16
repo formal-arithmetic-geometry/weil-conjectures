@@ -3,68 +3,384 @@
  "blueprint": {
   "is": "thm-coef-finite-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "General constructible internal Hom and finite coefficient change",
- "statement": "For $K,M\\in D^b_{ctf}(X,A)$, the evaluation-defined map\n\n$$\nv_{K,M}:R\\mathcal Hom_A(K,M)\\otimes_A^LB\n\\xrightarrow{\\sim}R\\mathcal Hom_B(K_B,M_B)\n$$\n\nis an isomorphism. It respects evaluation, tensor–Hom adjunction,\ncomposition of internal-Hom morphisms, and successive coefficient\nchanges. The statement holds on both finite coefficient sites.",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$, with $q$ a power of $p$, a prime $\\ell\\neq p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and integers $n\\geq m\\geq1$. Let $X$ be a separated finite-type $k$-scheme, put $A=A_{E,n}=\\mathcal O_E/(\\varpi_E^n)$ and $B=A_{E,m}$, and use the quotient homomorphism $A\\to B$. Work on either small site $X_{\\mathrm{et}}$ or $X_{\\mathrm{proet}}$, with constant coefficient ring sheaves. Here $D^b_{ctf}(X,A)$ means bounded constructible cohomology and finite Tor amplitude over $A$: there is a finite interval outside which $K\\otimes_A^L F$ has zero cohomology for every sheaf $F$ of $A$-modules in degree zero. Write $T_B=T\\otimes_A^L B$ for derived coefficient change, and $H_A(K,M)=R\\mathcal Hom_A(K,M)$ for derived internal Hom.\n\nFor every $K,M\\in D^b_{ctf}(X,A)$, the map\n$$\nv^{A,B}_{K,M}:H_A(K,M)\\otimes_A^L B\\longrightarrow H_B(K_B,M_B)\n$$\nis an isomorphism in $D^b_{ctf}(X,B)$. It is the unique transpose of coefficient change of the evaluation $H_A(K,M)\\otimes_A^L K\\to M$, under the canonical tensor comparison. It is natural in both variables and respects evaluation, tensor–Hom adjunction, and composition of internal-Hom morphisms. For $1\\leq r\\leq m$ and $C=A_{E,r}$ it satisfies\n$$\nv^{A,C}_{K,M}=v^{B,C}_{K_B,M_B}\\circ\\bigl(v^{A,B}_{K,M}\\otimes_B^L C\\bigr),\n$$\nusing the canonical identifications of successive derived scalar extensions. These assertions hold for both finite coefficient sites, with their canonical site-comparison maps.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
   "place": "node thm-coef-finite-hom, order 2141"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "lem-pur-derived-change-of-rings"
+ ],
  "proof": [
   {
-   "text": "Define $v_{K,M}$ by tensoring evaluation\n$R\\mathcal Hom_A(K,M)\\otimes_A^LK\\to M$ with $B$,\nreassociating, and transposing over $B$.\nFinite-Tor constructible preservation of its source and target\nis [cor-weil-finite-constructible-hom].",
+   "text": "Every finite-type $k$-scheme used here is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $\\operatorname{Spec}k$ is Noetherian (the only ideals of the field are zero and the whole ring). First work on the small etale site. Put $F_{A,B}(T)=T\\otimes_A^L B$. By [lem-pur-derived-change-of-rings] this is an exact functor on the ambient derived categories, even when $B$ is not flat over $A$. For $T\\in D^b_{ctf}(X,A)$, choose a bounded flat constructible model $P$ by the etale constructible variant of [lem-sf-flat-model]. The bounded flat complex is K-flat by [lem-kun-kflat-criteria], and [lem-pur-kflat-change-of-rings] shows that $P\\otimes_A B$ is a K-flat complex of flat $B$-sheaves representing $F_{A,B}T$. Each of its finitely many terms is constructible: on a partition trivializing $P^i$ with finite module value $V$, its tensor is constant with value $V\\otimes_A B$, which is finite since both rings and $V$ are finite. Thus [lem-sf-flat-model], now over $B$, gives $T_B\\in D^b_{ctf}(X,B)$ with the same Tor interval. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity of the underlying topos with ring map $A\\to B$ to obtain the canonical tensor comparison. On K-flat models it reassociates pure tensors, so it preserves tensor associativity. For later use, the same theorem for a morphism of small etale topoi with constant coefficients takes bounded flat models to bounded flat models in the same degrees. Inverse image is exact by [def-kun-projection-formula-map], and preserves constructibility: pull back a finite locally closed partition and its finite locally constant trivializations. Thus etale pullback preserves bounded constructibility and the Tor interval. Its compatibility with coefficient change is the termwise reassociation of these same tensor models.",
    "uses": [
-    "cor-weil-finite-constructible-hom"
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-flat-model",
+    "lem-kun-kflat-criteria",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 1: domains and coefficient tensor; expanded agent argument (original document unavailable on this machine)"
+   }
   },
   {
-   "text": "Choose a finite stratification on which the cohomology of $K$\nis finite locally constant. Its restrictions $P=s^*K$ are\nsite-perfect, by the finite-free-resolution truncation argument\nof [lem-weil-bounded-finite-tor-perfect] and the notion in\n[def-weil-site-perfect-complex]. The localization triangles\nof [def-weil-open-closed-recollement] reduce the assertion\nin the first argument to $K=Rs_!P$. On this generator\n[lem-weil-stratum-ambient-hom] identifies the left side\nbefore coefficient change with\n\n$$\nRs_{*,A}R\\mathcal Hom_A(P,Rs_A^!M).\n$$",
+   "text": "The tensor–Hom adjunction used throughout is obtained as follows. Choose flat K-flat representatives for $T,K$ and a K-injective representative $I$ for $M$. By [lem-pur-hom-kflat-into-kinjective], $\\mathcal Hom^\\bullet(K,I)$ is K-injective. The total tensor of the two K-flat representatives is K-flat: tensoring it with an acyclic complex is the iterated tensor, first acyclic by K-flatness of $K$ and then by K-flatness of $T$. The functorial complex isomorphism [lem-sc-derived-hom-tensor-total] identifies $\\mathcal Hom^\\bullet(T,\\mathcal Hom^\\bullet(K,I))$ with $\\mathcal Hom^\\bullet(\\operatorname{Tot}(T\\otimes K),I)$. Taking zeroth global cohomology and applying [lem-pur-rhom-global-sections] gives the natural bijection $\\operatorname{Hom}(T,H_A(K,M))=\\operatorname{Hom}(T\\otimes_A^L K,M)$, with the usual evaluation and transpose. For $H=H_A(K,M)$ define $v_{K,M}^{A,B}$ as the transpose of $F_{A,B}H\\otimes_B^L K_B\\cong F_{A,B}(H\\otimes_A^L K)\\xrightarrow{F_{A,B}(\\mathrm{ev}_A)}M_B$, using the tensor comparison established in step 1. Choose a nonnegative integer $d_X$ bounding $\\dim X$ by [lem-kun-dimension-finite-type], taking $d_X=0$ when $X$ is empty. Apply [cor-weil-finite-constructible-hom] over $A$ and over $B$, and step 1, to see that both the source and the target lie in $D^b_{ctf}(X,B)$. This also defines the same comparison for all ambient pairs, without a finiteness assertion on their internal Hom.",
    "uses": [
-    "lem-weil-bounded-finite-tor-perfect",
-    "def-weil-site-perfect-complex",
-    "def-weil-open-closed-recollement",
-    "lem-weil-stratum-ambient-hom"
+    "lem-kun-dimension-finite-type",
+    "cor-weil-finite-constructible-hom",
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-rhom-global-sections"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 1: evaluation-defined map; expanded agent argument (original document unavailable on this machine)"
+   }
   },
   {
-   "text": "The inner complex is finite-Tor constructible: the closed\nexceptional inverse images in $s^!$ have that property by\n[lem-coef-finite-closed-shriek], and internal Hom from a\nsite-perfect complex is its finite-projective dual tensor the\nsecond argument. Move coefficient change through $Rs_*$\nby [lem-coef-finite-direct-image], through $Rs^!$ by\n[lem-coef-finite-closed-shriek], and through internal Hom\nfrom $P$ by its finite-projective model. The result is\n\n$$\nRs_{*,B}R\\mathcal Hom_B(P_B,Rs_B^!M_B)\n=R\\mathcal Hom_B(Rs_{!,B}P_B,M_B).\n$$",
+   "text": "Fix $M$. Consider the full class $\\mathcal C_M$ of $K\\in D^b_{ctf}(X,A)$ for which this particular $v_{K,M}^{A,B}$ is invertible. Internal Hom is contravariantly exact by [lem-sf-hom-triangulated]; coefficient change is exact by [lem-pur-derived-change-of-rings]. The evaluation transpose commutes with shifts and cone triangles: on the Hom/tensor complex models of step 2 its components are the evaluation chain maps, with the usual shifted differentials, so the squares with the shifted connecting map commute as well. Thus the comparisons form a morphism of the resulting distinguished triangles. The two-out-of-three assertion [lem-sf-triangle-morphism-iso] makes $\\mathcal C_M$ closed under triangles and shifts. It contains zero, and is closed under summands: naturality at a splitting makes the comparison block diagonal, and the corresponding diagonal blocks of its inverse invert the two blocks.\n\nHere is the generation argument on the etale site itself. Let $\\mathcal G_X$ be the thick subcategory generated by $Rg_*j_!L$, where $s=g\\circ j:S\\hookrightarrow X$, $j:S\\hookrightarrow\\overline S$ is open, $g:\\overline S\\hookrightarrow X$ is closed, and $L$ is finite lisse with flat stalks. These are in $D^b_{ctf}$: their constructibility follows from their finite lisse strata, and the etale open tensor formula proved in step 8 and [lem-amb-proper-coproducts-projection], together with exact $j_!$ and exact closed pushforward in [lem-cbc-open-closed-recollement], show Tor interval $[0,0]$ by tensoring against an arbitrary degree-zero ambient module sheaf. For any $K\\in D^b_{ctf}(X,A)$, [lem-sf-flat-model] gives a bounded complex of flat constructible sheaves $P$. Its finite stupid-truncation triangles reduce $K\\in\\mathcal G_X$ to its terms $F=P^q$.\n\nInduct on the finite dimension of the ambient scheme to show that every such $F$ lies in $\\mathcal G_X$, with the empty scheme as base case. By [fin2-lem-lisse-dense-open] there is an open $j_U:U\\hookrightarrow X$ on which $F|_U$ is lisse and whose closed complement $i:Z\\hookrightarrow X$ has smaller dimension. Both restrictions have Tor interval $[0,0]$ and remain constructible by the etale pullback argument of step 1; they are degree-zero sheaves since constant-coefficient inverse image is exact. Apply [lem-cbc-open-closed-recollement] to obtain $j_{U!}F|_U\\to F\\to i_*i^*F\\to$. The first term is a generator. The induction hypothesis expresses $i^*F$ through flat-lisse locally closed generators on $Z$. Exact $i_*$ carries those triangles and summands to triangles and summands on $X$, and carries a generator $Rg'_*j'_!L$ to $R(ig')_*j'_!L$: the closed pushforwards are exact and compose by their sectionwise definition, and the closure of the stratum in $X$ lies in $Z$. Thus $i_*i^*F\\in\\mathcal G_X$, whence $F\\in\\mathcal G_X$. This proves the required etale generation directly on the chosen site. It suffices to prove invertibility for $K=Rg_*j_!L=Rs_!L$.",
    "uses": [
-    "lem-coef-finite-closed-shriek",
-    "lem-coef-finite-direct-image"
+    "lem-sf-hom-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-triangle-morphism-iso",
+    "lem-sf-flat-model",
+    "lem-amb-proper-coproducts-projection",
+    "lem-cbc-open-closed-recollement",
+    "fin2-lem-lisse-dense-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 2: localization reduction; expanded agent argument (original document unavailable on this machine)"
+   }
   },
   {
-   "text": "Extension by zero commutes with coefficient tensor, so this is\nthe required target. Every comparison used is defined by the\nsame evaluations and adjunction counits; transposing identifies\ntheir composite with $v_{K,M}$. Exactness in the first\nargument now proves it for $K$. The comparison maps respect\nevaluation by their definition; associativity of tensor product\nand uniqueness of its transpose give the successive-quotient\nand composition identities. Finally\n[lem-weil-finite-duality-site-comparison] transports the\nspecified internal-Hom comparison to the pro-etale site.",
+   "text": "The generator sheaf $L$ is site-perfect, not merely stalkwise perfect. Indeed lisseness supplies an actual etale covering on which $L$ is constant with finite $A$-module value $V$. Its flat stalks say that $V[0]$ has Tor interval $[0,0]$. The finite local ring $A$ is Noetherian (its set of ideals is finite), so [lem-weil-bounded-finite-tor-perfect] applied to $V[0]$ gives a finite projective module in degree zero, free because $A$ is local. Pulling this model back as a constant sheaf on that covering is the required site-perfect model. In particular $L$ is bounded constructible of Tor interval $[0,0]$. The etale finite-free calculation in step 6 will therefore apply to $L$.",
    "uses": [
+    "lem-weil-bounded-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 2: site-perfect stratum; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Set $N=Rs_A^!M$. To check its domain, factor $s=g\\circ j$ with $g:\\overline S\\hookrightarrow X$ closed and $j:S\\hookrightarrow\\overline S$ open, so $Rs_A^!=j^*Rg_A^!$. Choose a nonnegative integer $d\\geq\\dim X$, possible by [lem-kun-dimension-finite-type], taking $d=0$ if $X$ is empty. The complement of $g$ is quasi-compact since $X$ is Noetherian. The field $k=\\overline{\\mathbf F}_q$ is separably closed, $A=A_{E,n}$ is a finite ring annihilated by a power of $\\ell\\neq p$, and the ambient scheme is the finite-type scheme $X$ of dimension at most $d$. Thus the general quasi-compact-open clause of the current [thm-pur-open-complement-unconditional] supplies both vanishing above $2d$ for all sheaves and constructibility of all higher direct images of constructible sheaves. No affine-chart specialization or nonemptiness of a chart is used. Thus [prop-exc-closed-tor] applies with $c=2d$: if $M$ has Tor interval $[a,b]$, $Rg_A^!M$ is bounded constructible with Tor interval $[a,b+2d+1]$. Its open pullback remains finite-Tor constructible by the etale pullback argument of step 1. Consequently $N\\in D^b_{ctf}(S,A)$. This preservation is not a conclusion of the coefficient-comparison lemma.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "thm-pur-open-complement-unconditional",
+    "prop-exc-closed-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 3: closed exceptional preservation; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Put $Q=H_A(L,N)$. The stratum $S$ is a separated finite-type $k$-scheme. Choose a nonnegative dimension bound $d_S$ by [lem-kun-dimension-finite-type], with $d_S=0$ for the empty stratum. Apply [cor-weil-finite-constructible-hom] on $S$, with the same finite coefficient ring $A$, to the two finite-Tor constructible arguments just obtained; it gives $Q\\in D^b_{ctf}(S,A)$. Here is the required etale coefficient comparison directly. Internal Hom restricts to every etale covering object by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. On the cover of step 4 write $L=A^{r}[0]$ and choose a bounded flat model $P$ for $N$ using [lem-sf-flat-model]. The ringed-site Hom model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] identifies $H_A(L,N)$ with $P^{\\oplus r}$, and the $B$-coefficient Hom with $(P\\otimes_A B)^{\\oplus r}$. The evaluation-defined comparison is the identity between these models, including for $r=0$. Its cone therefore restricts to zero on a cover; equivalently its cohomology has zero geometric stalks, so [lemma-weil-pbc-geometric-stalk-conservative] makes it an isomorphism globally. We have the isomorphism $Q_B\\xrightarrow{v_{L,N}^{A,B}}H_B(L_B,N_B)$, preserving evaluation. Only this local finite-free calculation, not the theorem being proved for arbitrary $K$, is used here.",
+   "uses": [
+    "cor-weil-finite-constructible-hom",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-sf-flat-model",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 3: inner internal Hom; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Use the canonical etale internal adjunction [prop-asd-internal-adjunction] for $s=g\\circ j$, a compactifiable locally closed immersion between Noetherian schemes. In the factorization of step 5, $Rs_!=Rg_*j_!$ since $g$ is closed and hence proper. The formula $Rs_!=Rg_*j_!$ is the chosen-compactification definition [def-amb-etale-compact-support]. The sheaf adjunction $j_!\\dashv j^*$ is [lem-weil-pbc-extension-by-zero-adjunction], and $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact]; $j^*$ is exact inverse image as specified in [def-kun-projection-formula-map]. Apply their unit and counit degreewise to complexes. Their triangle identities still hold degreewise, and both functors preserve quasi-isomorphisms, so these transformations descend and satisfy the triangle identities on derived categories. Thus $j_!\\dashv j^*$ also there. Together with the closed exceptional adjunction used in step 5, the right adjoint of $Rg_*j_!$ is $j^*Rg_A^!$: explicitly,\n$$\\operatorname{Hom}(Rg_*j_!P,M)\\cong\\operatorname{Hom}(j_!P,Rg_A^!M)\\cong\\operatorname{Hom}(P,j^*Rg_A^!M).$$\nThus the right adjoint $s^\\times$ in that theorem identifies canonically with the $Rs_A^!$ of step 5, including its counit. We obtain the following composite of isomorphisms:\n$$\n\\begin{aligned}\nF_{A,B}H_A(Rs_{!,A}L,M)&\\cong F_{A,B}Rs_{*,A}Q\\\\\n&\\xrightarrow{c_{s,Q}}Rs_{*,B}(Q_B)\\\\\n&\\xrightarrow{Rs_*v_{L,N}}Rs_{*,B}H_B(L_B,N_B)\\\\\n&\\xrightarrow{Rs_*H_B(1,b_{s,M})}Rs_{*,B}H_B(L_B,Rs_B^!M_B)\\\\\n&\\cong H_B(Rs_{!,B}L_B,M_B).\n\\end{aligned}\n$$\nHere $c_{s,Q}$ is [lem-coef-finite-direct-image], with its finite-Tor hypothesis checked in step 6. We construct the required $b_{s,M}$ on the etale site, without using the pro-etale closed-shriek statement.\n\nFirst construct it for the closed factor $g:\\overline S\\hookrightarrow X$. Put $N_g=Rg_A^!M$ and let $t:V=X\\setminus\\overline S\\hookrightarrow X$ be the complementary open. The exceptional adjunction exists on the etale ambient categories by [lem-exc-closed-ambient]. The etale closed-support triangle [lem-exc-closed-support-triangle] is\n$$g_*N_g\\xrightarrow{\\epsilon_{g,A}}M\\xrightarrow{\\eta_t}Rt_*t^*M\\longrightarrow g_*N_g[1].$$\nIts analogue over $B$ applies to $M_B$. Step 5 gives the finite-Tor constructibility of $N_g$, and the etale pullback argument of step 1 gives it for $t^*M$. Thus [lem-coef-finite-direct-image] gives both $c_{g,N_g}$ and $c_{t,t^*M}$ as isomorphisms. After the pullback/coefficient identification, the latter satisfies $c_{t,t^*M}\\circ F_X(\\eta_{t,M})=\\eta_{t,M_B}$: transpose under $t^*\\dashv Rt_*$, use its defining counit transpose, and both transposes are $1_{t^*M_B}$ by the adjunction triangle identity. Apply the exact $F_X$ to the displayed support triangle and compare it to the support triangle for $M_B$. The maps on the middle and right terms are the identity and $c_{t,t^*M}$. Rotate once and apply (TR3) of [def-weil-triangulated-category] to complete these maps to a morphism of triangles. By [lem-sf-triangle-morphism-iso] its remaining map is an isomorphism. Under $c_{g,N_g}$ it is a map\n$$\\delta:g_*((N_g)_B)\\xrightarrow{\\sim}g_*Rg_B^!M_B,\\qquad\n\\epsilon_{g,B}\\circ\\delta=F_X(\\epsilon_{g,A})\\circ c_{g,N_g}^{-1}.$$\n\nFor completeness the needed full faithfulness is on the etale derived categories as well. [lem-kun-04ca] gives full faithfulness and $g^*g_*\\cong1$ for abelian sheaves. A module action consists of scalar endomorphisms satisfying the ring relations, so full faithfulness uniquely transports these endomorphisms and their relations; the same assertions hold for constant-$B$ module sheaves. Both functors are exact, by [lem-cbc-open-closed-recollement] for $g_*$ and [def-kun-projection-formula-map] for $g^*$. Their degreewise adjunction and counit descend through quasi-isomorphisms, with $g^*g_*\\cong1$. Hence $g_*$ is fully faithful on the derived categories, and conservative since $g^*g_*\\cong1$. Let $b_{g,M}$ be the transpose under $g_*\\dashv Rg_B^!$ of $F_X(\\epsilon_{g,A})c_{g,N_g}^{-1}$. The adjunction and full faithfulness say that composition with $\\epsilon_{g,B}$ bijects maps $g_*P\\to g_*Rg_B^!M_B$ with maps $g_*P\\to M_B$. Therefore $g_*b_{g,M}=\\delta$, independently of the chosen triangle completion. Conservativity makes $b_{g,M}$ invertible. This definition also gives its naturality and exceptional-counit equality directly.\n\nSet $b_{s,M}=j^*b_{g,M}$ after the canonical pullback/coefficient identification, so its source is $(j^*N_g)_B$ and its target is $j^*Rg_B^!M_B=Rs_B^!M_B$. It is invertible. The counit of $g_*j_!\\dashv j^*Rg^!$ is $\\epsilon_g\\circ g_*(\\epsilon_j)$; use the equality just proved for $g$ together with the following explicit open comparison. the independent open tensor calculation at the start of step 8, with $T=B$, gives $Fj_!P\\cong j_!F P$ on flat models. Under this comparison the counit $j_!j^*T\\to T$ commutes with coefficient change, since its defining section maps are identities on objects factoring through the open, and zero on the other summands, by [lem-weil-pbc-extension-by-zero-adjunction]. For the closed factor use $c_{g,j_!P}$ of [lem-coef-finite-direct-image]; $j_!P$ is finite-Tor constructible by the bounded flat model and the open tensor calculation. Composing these two maps defines the compact-support coefficient comparison for the chosen $s=g j$. Its naturality and compatibility with the closed ordinary counit follow from the stated transpose characterization of $c_g$. These comparisons and the composite-adjunction formula give\n$$\\epsilon_{s,B}\\circ Rs_{!,B}(b_{s,M})=F_X(\\epsilon_{s,A})$$\nunder the compact-support coefficient comparison. Both $s$ and its source are separated of finite type. Finally this explicitly constructed compact-support comparison identifies $F_{A,B}(Rs_{!,A}L)$ with $Rs_{!,B}L_B$.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-coef-finite-direct-image",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-kun-projection-formula-map",
+    "lem-exc-closed-ambient",
+    "lem-exc-closed-support-triangle",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-kun-04ca",
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 3 and paragraph 4 opening: generator comparison; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "We must identify the isomorphism of step 7 with $v_{Rs_!L,M}^{A,B}$. First establish the open tensor formula on the etale site. The open adjunction [lem-weil-pbc-extension-by-zero-adjunction] gives the natural map $j_!(P\\otimes_A j^*T)\\to j_!P\\otimes_A T$, whose restriction to $U$ is the identity. By [lem-weil-pbc-extension-by-zero-stalks] and [lem-pod-etale-stalk-tensor-scalar], its geometric stalks are the identity tensor map on $U$ and $0\\to0$ off $U$, so [lemma-weil-pbc-geometric-stalk-conservative] makes it an isomorphism. In particular $j_!$ preserves flatness, since this formula, exact $j^*$ and exact $j_!$ preserve injections after tensoring with a flat $P$; exactness is [def-kun-projection-formula-map] and [lem-weil-pbc-extension-by-zero-exact]. It also preserves K-flatness: for an acyclic complex $T$, $j^*T$ is acyclic and the same termwise tensor formula identifies $j_!P\\otimes T$ with the acyclic $j_!(P\\otimes j^*T)$. Thus applying this termwise formula to flat K-flat models gives the canonical etale derived open projection isomorphism. All its tensor and coefficient identifications restrict to the identity on $U$ and to zero off $U$; equality of such maps follows from the open adjunction. The inverse projection isomorphism for $s_!$ is obtained by composing this open projection isomorphism with the canonical proper projection isomorphism [lem-amb-proper-coproducts-projection] for the closed immersion $g$; its hypotheses hold since $g$ is proper of finite type between the Noetherian schemes of step 1. The first arrow in the following pairing is this projection isomorphism followed by the $s^*\\dashv Rs_*$ counit. The canonical internal adjunction [prop-asd-internal-adjunction] is the transpose of the pairing $Rs_*H_A(L,N)\\otimes_A^L Rs_!L\\to Rs_!(H_A(L,N)\\otimes_A^L L)\\xrightarrow{Rs_!\\mathrm{ev}}Rs_!N\\xrightarrow{\\epsilon_s}M$. Transpose the composite of step 7 and evaluate it on $Rs_{!,B}L_B$. Write $\\alpha_A:s^*Rs_{*,A}Q\\to Q$ for the ordinary adjunction counit, and put $F_X=F_{A,B}$ on $X$ and $F_S=F_{A,B}$ on $S$. The projection morphism is defined as the transpose of the ordinary counit tensored with the identity in [def-kun-projection-formula-map]. For the coefficient object $B$, this is the canonical coefficient projection $c_{s,Q}$ of [lem-coef-finite-direct-image], with $B$ acting on the $B$ factor on both sides. Its defining transpose therefore gives\n$$\\alpha_B\\circ s^*c_{s,Q}=F_S(\\alpha_A)$$\nafter $s^*F_X\\cong F_Ss^*$. This is the equality needed for the first arrow of the pairing; the projection isomorphisms commute with coefficient change because their adjoints are these counits, and the tensor and pullback identifications of step 1 and the compact-support comparison of step 7 preserve those counits. Next, the finite-free Hom comparison of step 6 carries the middle evaluation to its coefficient change; and the etale construction in step 7 identifies $\\epsilon_{s,B}\\circ Rs_{!,B}(b_{s,M})$ with the coefficient change of $\\epsilon_{s,A}$ under the compact-support comparison. Substituting these three equalities leaves exactly $F_{A,B}$ of the displayed pairing, with only the canonical reassociations of tensor established in step 1. Its transpose is the map of step 2. Thus $v$ itself, rather than just some isomorphism between its endpoints, is invertible on every generator.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-coef-finite-direct-image",
+    "lem-amb-proper-coproducts-projection",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: identify the specified transpose; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Step 8 puts every flat-lisse locally closed generator of the etale construction in step 3 in $\\mathcal C_M$. Its triangle and summand closure, applied first through the dimension induction for each flat constructible sheaf and then through the finite stupid-truncation triangles of a flat constructible model, gives $\\mathcal C_M=D^b_{ctf}(X,A)$. Since $M$ was any finite-Tor constructible complex, the specified comparison is an isomorphism for every pair in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: exactness in first argument; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "The evaluation identity is, by construction, $\\mathrm{ev}_B\\circ(v_{K,M}^{A,B}\\otimes1)=F_{A,B}(\\mathrm{ev}_A)$ after the tensor comparison. For a morphism $u:T\\otimes_A^L K\\to M$ with transpose $u^\\sharp:T\\to H_A(K,M)$, uncurrying $v_{K,M}^{A,B}\\circ F_{A,B}(u^\\sharp)$ gives $F_{A,B}(u)$, by this identity and naturality. Uniqueness in tensor–Hom adjunction proves preservation of transposes. For $f:K'\\to K$, compare $v_{K',M}F_{A,B}(H_A(f,1))$ and $H_B(f_B,1)v_{K,M}$. Their transposes, with source $F_{A,B}H_A(K,M)\\otimes_B^L K'_B$, are both $F_{A,B}(\\mathrm{ev}_{K,M}\\circ(1\\otimes f))$. For $g:M\\to M'$, compare $v_{K,M'}F_{A,B}(H_A(1,g))$ and $H_B(1,g_B)v_{K,M}$. Their transposes are both $F_{A,B}(g\\circ\\mathrm{ev}_{K,M})$. Uniqueness of transpose gives both naturality equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: evaluation and tensor–Hom adjunction; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Write $\\mu_A:H_A(M,N)\\otimes_A^L H_A(K,M)\\to H_A(K,N)$ for internal-Hom composition, characterized by evaluating first at $K$ and then at $M$. To compare $v_{K,N}F_{A,B}(\\mu_A)$ with $\\mu_B(v_{M,N}\\otimes v_{K,M})$, tensor both maps with $K_B$ and evaluate at $N_B$. By the evaluation identity of step 10, both composites are $F_{A,B}$ of the successive evaluations $H_A(M,N)\\otimes H_A(K,M)\\otimes K\\to H_A(M,N)\\otimes M\\to N$. Tensor associativity and uniqueness of transpose give the composition identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: composition identity; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Let $C=A_{E,r}$ with $1\\leq r\\leq m$. Compare the direct coefficient map $v^{A,C}_{K,M}$ with $v^{B,C}_{K_B,M_B}\\circ F_{B,C}(v^{A,B}_{K,M})$. After tensoring with $K_C$ and evaluating, the first map yields $F_{A,C}(\\mathrm{ev}_A)$; the second yields $F_{B,C}F_{A,B}(\\mathrm{ev}_A)$ by applying step 10 twice. These agree under the associative identification $(T\\otimes_A^L B)\\otimes_B^L C\\cong T\\otimes_A^L C$. The K-flat tensor identifications in step 1 give precisely these identifications: both send a pure tensor $(t\\otimes b)\\otimes c$ to $t\\otimes bc$. Uniqueness of transpose proves the displayed quotient cocycle. For $m=n$, both $v^{A,A}_{K,M}$ and the identity of $H_A(K,M)$ have transpose $\\mathrm{ev}_A$, since $F_{A,A}$ and its tensor comparison are the identity under the unit scalar-extension identifications. Uniqueness of transpose gives $v^{A,A}_{K,M}=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: successive coefficient changes; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "For passage to the pro-etale site, $\\nu_X^*$ is an exact module inverse image by [prop-weil-pbc-site-comparison-finite-level] and comes from the geometric morphism of [def-weil-pbc-site-comparison-morphism]. The ringed-topos tensor-pullback theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies its natural derived tensor comparison. Flat sheaves remain flat by [lem-exc-constant-inverse-image-flat]. Thus the flat models in [lem-sf-flat-model] are pulled back to flat models. Termwise, inverse image identifies the constant $B$ sheaf with the constant $B$ sheaf and takes $P^i\\otimes_A B$ to $(\\nu_X^*P^i)\\otimes_A B$ by the tensor comparison; the $B$ action in both expressions is on that same factor. Consequently $\\nu_X^*(T\\otimes_A^L B)\\cong(\\nu_X^*T)\\otimes_A^L B$ as $B$-complexes, not merely after forgetting the $B$ action. On the tensor total complexes all these maps rebracket the same pure tensors, so their identifications agree with tensor associativity. This checks the coefficient and tensor identifications required for site transport.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: coefficient tensor and site passage; expanded agent argument (original document unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Every bounded constructible pro-etale pair is $\\nu_X^*K',\\nu_X^*M'$ for bounded constructible etale complexes by [lem-sf-proetale-constructible-origin]. If the original pair has finite Tor amplitude, clause (ii) of [lem-sf-comparison-tor-amplitude] says that $K',M'$ do also. Apply [lem-weil-finite-duality-site-comparison] over $A$ to $K',M'$ and over $B$ to $K'_B,M'_B$; its hypotheses hold by step 1. Its current statement applies at the same finite stages $A_{E,n}$ and $A_{E,m}$ and supplies the canonical evaluation-defined comparison for these finite-Tor first and bounded constructible second variables. These identify the two internal Homs with their pro-etale realizations and identify their evaluations. No dualizing-object or ambient pro-etale exceptional-adjoint assertion is needed here. Together with step 13, they identify the pro-etale $v$ with $\\nu_X^*$ of the already proved etale $v$, since both transpose the same changed evaluation. It is therefore invertible. For clarity, write $U=\\nu_X^*$, $H_\\tau$ for the internal Hom on site $\\tau$, and $F_\\tau$ for coefficient change there. If $\\beta_A:UH_{\\mathrm{et},A}(K',M')\\xrightarrow{\\sim}H_{\\mathrm{proet},A}(UK',UM')$ and $\\beta_B$ is the analogous map over $B$, then, after $UF_{\\mathrm{et}}\\cong F_{\\mathrm{proet}}U$, the equality just proved is\n$$v_{\\mathrm{proet}}=\\beta_B\\circ U(v_{\\mathrm{et}})\\circ F_{\\mathrm{proet}}(\\beta_A^{-1}).$$\nThe evaluation identities for $\\beta_A,\\beta_B$ turn $U(\\mathrm{ev}_B\\circ(v_{\\mathrm{et}}\\otimes1))=U(F_{\\mathrm{et}}\\mathrm{ev}_A)$ into $\\mathrm{ev}_{\\mathrm{proet},B}\\circ(v_{\\mathrm{proet}}\\otimes1)=F_{\\mathrm{proet}}\\mathrm{ev}_{\\mathrm{proet},A}$. Hence a changed transpose uncurries to the changed original morphism, exactly as in step 10. Internal-Hom composition is characterized by two successive evaluations; the evaluation identities for $\\beta$ identify $U(\\mu_{\\mathrm{et}})$ with $\\mu_{\\mathrm{proet}}$, so applying $U$ to the equation of step 11 gives the pro-etale composition equation. For $A\\to B\\to C$, substitute the displayed conjugation formula into $v^{B,C}_{\\mathrm{proet}}F_{\\mathrm{proet},B,C}(v^{A,B}_{\\mathrm{proet}})$: the middle $F_{B,C}(\\beta_B^{-1})F_{B,C}(\\beta_B)$ cancels, and step 13 identifies the remaining successive tensors. Step 12 then gives $\\beta_C U(v^{A,C}_{\\mathrm{et}})F_{A,C}(\\beta_A^{-1})=v^{A,C}_{\\mathrm{proet}}$. Naturality follows by conjugating the two equations of step 10 by the natural $\\beta$ maps. This proves every compatibility on the second site.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
     "lem-weil-finite-duality-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "original paragraph 4: pro-etale internal Hom and all compatibilities; expanded agent argument (original document unavailable on this machine)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-flat-model",
+  "lem-kun-kflat-criteria",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-kun-projection-formula-map",
+  "lem-kun-dimension-finite-type",
   "cor-weil-finite-constructible-hom",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-rhom-global-sections",
+  "lem-sf-hom-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-amb-proper-coproducts-projection",
+  "lem-cbc-open-closed-recollement",
+  "fin2-lem-lisse-dense-open",
   "lem-weil-bounded-finite-tor-perfect",
-  "def-weil-site-perfect-complex",
-  "def-weil-open-closed-recollement",
-  "lem-weil-stratum-ambient-hom",
-  "lem-coef-finite-closed-shriek",
+  "thm-pur-open-complement-unconditional",
+  "prop-exc-closed-tor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-asd-internal-adjunction",
   "lem-coef-finite-direct-image",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "def-weil-triangulated-category",
+  "lem-kun-04ca",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
   "lem-weil-finite-duality-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-  "place": "## Proof"
+  "place": "Imported four proof paragraphs, expanded using the cited DAG statements; the blueprint file is WANTED, not present locally."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible finite Tor amplitude etale sheaves commutes with derived change of finite coefficient rings",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.ihomPoints_symm_comp; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; read Mathlib/Condensed/Light/Monoidal.lean: these are underived monoidal/closed structures on light condensed sheaves, not derived coefficient comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"tensor\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|internalHom.*[Cc]hange|[Cc]hange.*internalHom",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom constructible sheaves change coefficients finite Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars is a closed monoidal functor for derived constructible etale sheaves with finite Tor dimension",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; instMonoidalClosedLightCondSet; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalCategoryLightCondMod; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; read Mathlib/Condensed/Light/Monoidal.lean: these are underived monoidal/closed structures on light condensed sheaves, not derived coefficient comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"map\"",
+   "results": "AddActionSemiHomClass.map_vaddₛₗ; MulActionSemiHomClass.map_smulₛₗ; SemilinearMapClass.distribMulActionSemiHomClass; SemilinearMapClass.toMulActionSemiHomClass; NonUnitalAlgHomClass.instSemilinearMapClassOfNonUnitalAlgSemiHomClassOfClassRingHom; CategoryTheory.MonoidalClosed.curry'_ihom_map; CategoryTheory.MonoidalClosed.uncurry_ihom_map; CategoryTheory.MonoidalClosed.pre_comm_ihom_map; hits concern generic currying, ihom functor maps, module Hom or unrelated semilinear maps, not change of coefficients for constructible derived sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|extendScalars|baseChange",
+   "results": "No hits in Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"Functor\"",
+   "results": "12 hits: generic internal-Hom adjunction and functor-category structures, and CategoryTheory.MonoidalClosedFunctor with comparison_iso. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean lines 42–96: its hypotheses are CartesianMonoidalCategory and preservation of products, not the tensor monoidal derived module categories here; no exact match or one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|scalarExtension.*[Hh]om|[Hh]om.*scalarExtension|internalHom.*[Bb]ase[Cc]hange",
+   "results": "No hits in Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"isIso\"",
+   "results": "One hit: CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom. Read Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean lines 203–217: this concerns a reflective full faithful right adjoint with monoidal left adjoint, not derived scalar extension for a nonflat quotient; no exact match or one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "((derived|scalar|coeff).*[Hh]om|[Hh]om.*(derived|scalar|coeff))",
+   "results": "Three hits in Mathlib/CategoryTheory/Monoidal/Mod.lean at lines 387, 409, 445. Read lines 379–397: scalarRestriction_hom states that a B-linear map is A-linear after restricting scalars. It asserts no derived internal-Hom comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"comparison\"",
+   "results": "One hit: CategoryTheory.MonoidalClosedFunctor.comparison_iso. Read Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean lines 42-96: CartesianMonoidalCategory and product-preserving functors, not derived tensor module categories or constructible coefficient change.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "((change|extend|extension).*Scalar.*[Hh]om|[Hh]om.*(change|extend|extension).*Scalar|derived.*baseChange)",
+   "results": "25 returned hits, including Lie derived-series base change, extendScalarsHomOfSurjective and ModuleCat change-of-rings infrastructure. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean lines 17-47: ordinary module scalar extension and adjunction, not this derived constructible internal-Hom theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"tensorObj\"",
+   "results": "0 hits returned by msearch.py in the current second reading.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(internal.?[Hh]om|ihom)|(internal.?[Hh]om|ihom).*derived",
+   "results": "0 hits returned by msearch.py in the current second reading.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -93,5 +409,194 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-coef-finite-hom",
+  "worker": "stage1",
+  "summary": "Made the finite quotient and geometric context explicit; replaced the recollement-definition citation by existing flat-lisse thick generation, checked closed exceptional finite-Tor preservation separately, identified the comparison by its evaluation transpose, and expanded all coherence and pro-etale transport arguments. No new nodes. Source files absent locally are listed WANTED in report.md. Repair of the refused landing: revalidated the revised open-complement and constructible-Hom statements against the current DAG, made their nonnegative dimension bounds and coefficient/geometric hypotheses explicit in steps 2, 5 and 6, and refreshed the verbatim citation excerpts. Second reading expanded the K-flat tensor check, the ordinary-counit identity in the generator pairing, and both naturality equations; no new nodes or statement change. Replaced the stale ambient-stratum citation by the canonical internal-adjunction theorem already cited, explicitly identifying the composite right adjoint, and refreshed the ring-perfect excerpt. Fresh second reading adds explicit compact-support and exact open-adjunction citations, cites the projection-map definition, and writes the identity and pro-etale coherence calculations in full. Final independent reading replaces the generation theorem with an explicit etale dimension induction and stupid-truncation construction, avoiding its pro-etale coefficient conventions; no new nodes. It also proves the etale open tensor formula explicitly from stalks, instead of citing its pro-etale counterpart. Current second reading removes the pro-etale-only closed-shriek citation from the etale proof. Step 7 now derives its etale coefficient comparison and exceptional-counit equality from the support triangle, direct-image coefficient comparison, and full faithfulness of closed pushforward; step 8 uses this explicit calculation. Maintainer correction: removed the remaining pro-etale pullback and operation-reduction citations from the etale proof. Step 1 specializes generic ringed-topos tensor pullback, step 6 gives the local finite-free Hom calculation, and step 7 constructs compact-support reduction for the chosen factorization from open extension by zero and closed direct-image coefficient change.",
+  "blueprint": "Original paragraph 1: steps 1–2. Paragraph 2: steps 3–4 and the canonical stratum formula in step 7. Paragraph 3: steps 5–7. Paragraph 4: steps 8–14. The explicit etale flat-model/dimension-induction construction implements the same finite-stratification/open–closed argument. The unit has no numbered steps, and this item is not its biduality key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exact ambient scalar extension computed by K-flat complexes; needed before the finite-Tor argument, and not asserted by this unit."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "A bounded flat constructible etale model, used to check coefficient-change domains; this unit does not supply resolution theory."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Bounded flat complexes are K-flat, allowing the chosen model to compute derived scalar extension."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Flat K-flat models remain flat and K-flat after coefficient change; used for the finite-Tor domain check."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimensionality supplies a uniform dimension bound for the open-complement preservation theorem."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Contravariant exactness of internal Hom supplies the thick-closure reduction, rather than a new proof route."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Two-out-of-three for triangle comparisons makes the comparison-isomorphism locus thick."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Canonical internal adjunction fixes the evaluation normalization of the existing stratum-Hom isomorphism."
+   },
+   {
+    "node": "thm-pur-open-complement-unconditional",
+    "why": "Its two explicit open-complement conclusions verify the hypotheses of closed exceptional finite-Tor preservation."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Preservation of bounded constructibility and finite Tor amplitude by closed exceptional restriction, needed before applying coefficient direct image."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exactness of the site inverse image permits bounded flat model transport."
+   },
+   {
+    "node": "lem-exc-constant-inverse-image-flat",
+    "why": "Flat etale sheaves pull back to flat pro-etale sheaves, so the transported complexes compute derived tensor."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Essential surjectivity from etale bounded constructible complexes is required for arbitrary pro-etale pairs, not merely pairs already chosen from the etale site."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies Noetherian hypotheses of the flat constructible model, compactifiable internal adjunction and closed exceptional preservation theorems."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Canonical projection isomorphism for the closed (proper) factor of a locally closed stratum constructs the same pairing."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat K-flat representatives for arbitrary complexes used to derive the tensor–Hom adjunction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of the K-injective replacement of the second variable in the tensor–Hom adjunction argument."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "K-injectivity of Hom from a K-flat complex is needed to derive the ambient tensor–Hom adjunction, which is not just a definition."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Functorial Hom-complex/tensor-complex adjunction derives the evaluation and transpose used by the comparison."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Identifies zeroth global cohomology of derived internal Hom with actual derived-category morphisms, needed to obtain the adjunction bijection."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The etale sheaf adjunction is applied termwise and descended using exactness, to justify the composite right adjoint on the stratum."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness allows extension by zero and its adjunction transformations to descend to derived categories in the stratum calculation."
+   },
+   {
+    "node": "fin2-lem-lisse-dense-open",
+    "why": "The etale dense lisse open with strictly smaller-dimensional complement supplies the dimension induction on flat constructible sheaves; the generator theorem has pro-etale conventions."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Its explicit etale distinguished triangle and exact closed pushforward implement the stratum induction on flat constructible sheaves without assuming a pro-etale generation statement on the etale site."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Its etale stalk tensor identity verifies the open tensor map used to construct the stratum pairing; the old open tensor citation has pro-etale conventions."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects invertibility of the ordinary open tensor map, which is the identity on the open and zero elsewhere."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Gives the explicit etale stalks used to verify the open tensor map before deriving it with K-flat models."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "The etale closed exceptional adjunction defines the transpose used in the independently constructed coefficient comparison."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Its etale triangle compares the closed exceptional output after coefficient change using the open-complement direct-image comparison."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "TR3 completes the middle/right comparison of support triangles; uniqueness by adjunction identifies the completion with the canonical exceptional transpose."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Closed pushforward is fully faithful with inverse-image left inverse; transporting scalar endomorphisms and descending the exact adjunction gives the derived module version used to identify and detect the exceptional comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Ringed-topos derived tensor and flat-model pullback on the etale site, including coefficient extension; avoids applying the pro-etale preservation theorem on the etale site."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Restriction of derived internal Hom to etale covering objects permits the finite-free calculation on the actual lisse cover."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "The generic ringed-site finite-free Hom model proves the local etale coefficient comparison, without invoking a pro-etale operation-reduction clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-flat-model",
+  "lem-kun-kflat-criteria",
+  "lem-pur-kflat-change-of-rings",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-hom-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "prop-asd-internal-adjunction",
+  "thm-pur-open-complement-unconditional",
+  "prop-exc-closed-tor",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "fin2-lem-lisse-dense-open",
+  "lem-cbc-open-closed-recollement",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "def-weil-triangulated-category",
+  "lem-kun-04ca",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-37ddd8872",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-37ddd8872 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and available source passages in full. Repaired two C4/E1 site mismatches using existing ringed-site results and explicit étale calculations. Statement unchanged; no new nodes or dependency cycles. Whole corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }
