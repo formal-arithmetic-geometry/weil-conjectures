@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-integral-localization-counit",
+ "kind": "statement",
+ "title": "Integral localization has invertible counit on rational modules",
+ "statement": "Let ℓ be prime, E a normed extension of Q_ℓ, and X a scheme. For the integral-to-rational coefficient morphism of [def-weil-pbc-continuous-integral-coefficients], the extension/restriction adjunction counit Ext(Res(P))→P is invertible for every rational module P on X.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For any scalar telescope whose source and colimit vertex have invertible ℓ, construct the inverse to its zeroth leg using the cocone of inverse powers of ℓ. Colimit extensionality and determination by the zeroth leg prove the inverse identities.",
+   "uses": [
+    "lem-weil-pbc-integral-localization-legs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this to the localization-unit telescope of Res(P). Its zeroth leg is the adjunction unit and ℓ is invertible on the restricted rational source and target. The right triangle identity makes the restricted counit invertible. Faithfulness of restriction reflects mono and epi, hence invertibility in the abelian module category.",
+   "uses": [
+    "lem-weil-pbc-integral-module-telescope"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-localization-legs",
+  "lem-weil-pbc-integral-module-telescope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits and localization of sheaves of modules under quasi compact quasi separated pushforward",
+   "date": "2026-10-16",
+   "results": "Eight hits, including ModuleCat filtered-colimit constructions and Sheaf.hasFilteredColimitsOfSize; no continuous-coefficient pushforward localization theorem.",
+   "verdict": "Use the existing project continuity theorem and explicit telescope colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in locally free p-adic sheaves descend along finite etale surjective covers",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily unrelated period-ring and completed coefficient declarations; no finite-etale lattice descent or continuous-coefficient localization theorem.",
+   "verdict": "No matching Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit.*lowerStar|imagePullback|IsLattice.inf|counit.*IsIso",
+   "date": "2026-10-16",
+   "results": "Generic adjunction counit and Submodule.IsLattice.inf declarations were found; no condensed-module qcqs telescope comparison or lattice descent construction.",
+   "verdict": "Use the generic category APIs and the existing project coefficient telescope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, integral localization has invertible counit on rational modules.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralLocalizationCounit",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralLocalizationCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarCounit_isIso",
+  "statement": "theorem integralScalarCounit_isIso (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)) :\n    IsIso ((Mod.extendRestrictAdjunction\n      (coefficientMap (integralScalarMap ℓ E) X)).counit.app P)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralLocalization_zero_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarCounit_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-continuous-lattice-intersection-local-model",
+ "kind": "statement",
+ "title": "Integral finite matrix models of the canonical intersection",
+ "statement": "Under the finite-etale, local-freeness and rationalization hypotheses of [lem-weil-pbc-continuous-lattice-intersection-rational-model], the explicit intersection N of [def-weil-pbc-continuous-lattice-intersection] admits a pro-etale covering on each member of which its normalized pullback is the kernel of an integral finite matrix with epi rationalization.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-lattice-intersection",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the rational kernel model on compact members of a pro-etale covering.",
+   "uses": [
+    "lem-weil-pbc-continuous-lattice-intersection-rational-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralFiniteFree_kernel_model to each rational epi matrix. Compose its kernel isomorphism with the supplied local intersection model; rational epimorphy is retained by the integral numerator construction.",
+   "uses": [
+    "lem-weil-pbc-continuous-finite-free-kernel-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-lattice-intersection-rational-model",
+  "lem-weil-pbc-continuous-finite-free-kernel-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clearing denominators of continuous finite free sheaf module morphisms over a compact scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits; ordinary sheaf free-Hom and localization denominator results but no finite-etale internal-module intersection model.",
+   "verdict": "No direct match; use a rational kernel model, then the proved denominator and kernel lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in locally free p-adic sheaves descend along finite etale surjective covers",
+   "date": "2026-10-16",
+   "results": "Eight unrelated period-ring and completed coefficient hits; no finite-etale descent theorem in this internal coefficient category.",
+   "verdict": "The finite-sheet geometry remains a named strictly intermediate obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Pp]ushforward|[Pp]ushforward.*finite|[Ii]ntersection.*lattice",
+   "date": "2026-10-16",
+   "results": "Mathlib has ordinary Submodule.IsLattice.inf. Repository searches find the adic finite-etale lisse pushforward and the geometric finite-etale splitting theorem; no internal condensed-module kernel model.",
+   "verdict": "Use the existing geometric splitting and weakly-etale base-change APIs, not an adic/continuous coefficient identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, integral finite matrix models of the canonical intersection.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeIntersectionLocalModel",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeIntersectionLocalModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLatticeIntersection_localModel",
+  "statement": "theorem continuousLatticeIntersection_localModel\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P))\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) U))\n    (hM : ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n        (condensedRingObj (integralCoeff ℓ E) U))\n        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M))\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      let R := condensedRingObj (integralCoeff ℓ E) (C.X s)\n      let T := (ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod\n          (condensedRingObj (integralCoeff ℓ E) X) ⋙\n        Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s)))\n      ∃ (n m : ℕ) (f : Mod.finiteFree R n ⟶ Mod.finiteFree R m),\n        Epi ((Mod.extendScalars\n          (coefficientMap (integralScalarMap ℓ E) (C.X s))).map f) ∧\n        Nonempty (T.obj (latticeIntersection (integralScalarMap ℓ E) X P p M e) ≅\n          kernel f)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

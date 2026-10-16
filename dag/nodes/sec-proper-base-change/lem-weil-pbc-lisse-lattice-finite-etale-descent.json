@@ -33,120 +33,39 @@
  ],
  "proof": [
   {
-   "text": "For the internal continuous-coefficient Lean attachment, first apply the proved internal abelian sheaf-module equivalence and the canonical continuous coefficient realizations. The given finite-extension norm is the unique extension of the p-adic norm, so its closed unit ball is the valuation ring in the statement. Identify the reconstructed section-ring sheaves and compare finite free modules, their local trivializations, ordinary scalar extension and the etale-slice pullbacks. The generic equivalence and continuous realizations are already proved; these specific compatibilities are part of this remaining descent obligation. Perform the following sum-of-sheet-lattices construction in the sectionwise encoding and transfer its result back to internal modules.",
+   "text": "Construct N as the actual image-pullback of the pushed integral embedding along the restricted rational adjunction unit. This uses no local descent choices and no integral/section-module conversion.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-l-adic-extension-absolute-value"
+    "def-weil-pbc-continuous-lattice-intersection"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an etale covering family $(u_a:U_a\\to X)_a$ splitting $p$, by [lem-weil-pbc-finite-etale-etale-local-split], so that $Y\\times_XU_a=\\coprod_{j\\in J_a}U_a$. Surjectivity of $p$ implies $J_a\\ne\\varnothing$ whenever $U_a$ is nonempty; discard empty members. This is also a covering of the pro-etale site: the continuous etale inclusion of [def-weil-pbc-site-comparison-morphism] sends etale coverings to pro-etale coverings. Use the slice identification in [lem-weil-pbc-proetale-restriction-injectives] for $p$ and the $u_a$. The inverse-image formula of [def-weil-proetale-inverse-image] agrees with slice restriction here: on an object $V\\to W$, a representative section on $Z\\to X$ with a map $V\\to W\\times_X Z$ restricts along $V\\to Z$ to a section on the underlying $X$-object $V$. Conversely a section on $V$ represents an inverse-image section using $Z=V$ and the graph $V\\to W\\times_X V$. Restriction identifies these two constructions in the colimit, and the result is already a sheaf on the slice. These mutually inverse maps commute with module operations. In these slices the restrictions of $A_X$ and $E_X$ are exactly $A_{U_a}$ and $E_{U_a}$, since both formulas on an object $V$ remain $C(|V|,A)$ and $C(|V|,E)$. This verifies the completed, continuous coefficients directly; the constant-coefficient clauses of the slice lemma are not being applied to $A_X$ or $E_X$. The same applies to each sheet over $U_a$.",
+   "text": "The qcqs rationalization theorem proves that the canonical Ext(N)→P is invertible. Finite p is qcqs; the theorem does not use local freeness.",
    "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-continuous-lattice-intersection-rationalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Tag 04HN, lemma-finite-etale-etale-local; slice identification from the cited pro-etale restriction node"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the specified rationalization isomorphism to map $M$ to $p^{-1}L$ by $m\\mapsto1\\otimes m$. This is injective: on a cover trivializing $M$ the map is the coordinatewise inclusion $A_V^r\\hookrightarrow E_V^r$, which is injective on every object by the inclusion of continuous $A$-valued functions into continuous $E$-valued functions; injectivity is local by the sheaf equalizer condition. Restricting to the sheets in step 1 gives $A_{U_a}$-submodule sheaves $M_{a,j}\\subset L|_{U_a}$, each locally free of finite rank and each rationalizing to $L|_{U_a}$. Define $N_a\\subset L|_{U_a}$ as follows: a section belongs to $N_a$ if, on a covering, it is a sum of sections from the finitely many $M_{a,j}$. This local condition is preserved by restriction, addition and multiplication by $A$-sections. Matching sections glue in $L$, and the glued section satisfies the condition by composing coverings. Thus $N_a$ is an $A_{U_a}$-module sheaf, the sheaf sum of the sheet lattices.",
+   "text": "Use the integral local matrix model of N. Its matrices have epi rationalization, so the proved matrix-pivot induction gives locally finite free kernels. Undo coefficient normalization and compose the covers. Package the explicitly constructed N with this covering and its canonical rationalization isomorphism.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-continuous-lattice-intersection-local-model",
+    "lem-weil-pbc-integral-matrix-kernel-locally-free"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, first paragraph: finite-etale descent; explicit sum-of-sheet-lattices construction"
-   }
-  },
-  {
-   "text": "Refine coverings by fibre products and composition to trivialize $L|_{U_a}$ and all the finitely many $M_{a,j}$ simultaneously, using the covering axioms of [def-weil-pbc-sites-and-cohomology]. Discard empty members of this refinement. On a nonempty member $T$, write $L|_T=E_T^n$. The rationalization of each $M_{a,j}|_T$ is an isomorphism to $E_T^n$. A map between free module sheaves is determined by the images of the global coordinate sections: on every object its matrix entries are the restrictions of those images, by linearity. Applying this to the map and its inverse, in the chosen free bases it is a matrix $g_j\\in\\operatorname{GL}_n(E_T(T))$: the ranks agree by evaluating the inverse matrices at any point of $T$. Its entries and the entries of its inverse are continuous functions on $|T|$. Consequently the embedded module is $g_j A_T^n$. For $t\\in|T|$, let $W_t$ be the open neighbourhood on which every entry of every $g_j(t)^{-1}g_j(s)-I$ belongs to $\\mathfrak m_E$. It is open because the entries are continuous and $\\mathfrak m_E=\\{z:|z|_E<1\\}$ is open. Such a matrix $I+B$, with entries of $B$ in $\\mathfrak m_E$, is invertible over $A$: its determinant is $1$ modulo $\\mathfrak m_E$, hence a unit, and the adjugate formula supplies an inverse over $A$. This unit criterion follows from [lem-weil-l-adic-extension-integers-dvr]. The pointwise inverse entries are continuous (the same adjugate formula), so on every object over $W_t$ this is an invertible matrix over its continuous-function ring $A$. Therefore $g_j A_T^n|_{W_t}=g_j(t)A_{W_t}^n$ as submodule sheaves, not merely as pointwise subsets. The opens $(W_t)_{t\\in|T|}$ cover $T$, since $t\\in W_t$. By [lem-weil-pbc-open-immersion-etale] they form a jointly surjective etale family, hence an etale covering by [def-weil-pbc-etale-site]; [def-weil-pbc-site-comparison-morphism] makes this a pro-etale covering of $T$. Composing with the preceding refinements gives the required covering of $U_a$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, first paragraph: finite-etale descent; explicit sum-of-sheet-lattices construction"
-   }
-  },
-  {
-   "text": "Fix $t$ and put $\\Lambda_t=\\sum_{j\\in J_a}g_j(t)A^n\\subset E^n$. It is finitely generated, torsion-free, and spans $E^n$, since $J_a$ is nonempty. The DVR assertion of [lem-weil-l-adic-extension-integers-dvr] and [lem-sc-dvr-fg-torsionfree-free] make it finite free. Its $A$-basis is an $E$-basis of $E^n$: an $E$-linear relation can be multiplied by a common denominator in $A$ to contradict $A$-linear independence, and spanning gives the converse. Write this basis as the columns of $h_t\\in\\operatorname{GL}_n(E)$. On $W_t$, step 3 identifies $N_a$ with $h_t A_{W_t}^n$. To check this equality on sheaves, every column of every $g_j(t)$ has constant $A$-coordinates in $h_t$, giving one inclusion. Conversely each column of $h_t$ is a sum of columns from the $g_j(t)$ with constant $A$-coefficients, giving the other inclusion after multiplication by arbitrary continuous $A$-valued functions. These formulas hold on every object over $W_t$. Hence $N_a$ is pro-etale locally free of rank $n$, and its inclusion into $L|_{U_a}$ rationalizes to an isomorphism, since after tensoring with $E_{W_t}$ the matrix $h_t$ is invertible.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sc-dvr-fg-torsionfree-free",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, first paragraph: finite-etale descent; explicit sum-of-sheet-lattices construction"
-   }
-  },
-  {
-   "text": "On $U_a\\times_XU_b$, the two splittings enumerate the same finite set of sheets. Refine this overlap by the open-and-closed pieces where the enumerations differ by a fixed permutation: an isomorphism between two finite disjoint unions of the base has this description, since the inverse images of its open-and-closed summands partition each source copy. On each such piece the $M_{a,j}$ and the $M_{b,k}$ with matching sheets are identical embedded submodules of $L$, because both are restrictions of the same $M\\to p^{-1}L$. Finite sums are invariant under a permutation, so $N_a$ and $N_b$ agree there. Equality of submodule sheaves is local by the sheaf condition, hence they agree on the whole overlap. The resulting transition isomorphisms are the identity inside $L$, including when $a=b$, and satisfy the cocycle on every triple overlap. Apply [lem-weil-pbc-site-module-sheaf-gluing] to the pro-etale covering $(U_a\\to X)_a$ with coefficient ring sheaf $A_X$. It supplies an $A_X$-module sheaf $M_0$ restricting to these $N_a$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-module-sheaf-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, lemma-glue-sheaves; permutation-invariant sum gives the cocycle"
-   }
-  },
-  {
-   "text": "The inclusions $N_a\\hookrightarrow L|_{U_a}$ agree on overlaps. For a section of $M_0$ on an object $V$, apply the local inclusions on $V\\times_XU_a$ and glue their images by the sheaf condition of $L$. Uniqueness makes this natural in $V$ and $A_X$-linear, giving $M_0\\to L$. The bilinear rule $(e,m)\\mapsto e m$ gives a global map $E_X\\otimes_{A_X}M_0\\to L$ by the sheaf tensor definition. Slice restriction commutes with this tensor: the presheaf tensor uses identical section modules on an object of the slice, and sheafification uses identical coverings of that object. Thus its restriction to $U_a$ is the rationalization isomorphism of step 4. Its local inverses agree on overlaps by uniqueness of inverses and glue sectionwise, so the global map is an isomorphism. The trivializing covers in step 4, composed with $(U_a\\to X)_a$, witness that $M_0$ is pro-etale locally free of finite rank. Rank zero uses the zero lattice and empty matrices; the empty scheme uses the zero module. No connectedness, normality, reducedness or restriction on the cover degree was used. The construction has replaced the specified lattice by a sum and does not assert its descent unchanged.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, first paragraph: finite-etale descent; explicit sum-of-sheet-lattices construction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-site-module-sheaf-gluing"
+  "def-weil-pbc-continuous-lattice-intersection",
+  "lem-weil-pbc-continuous-lattice-intersection-rationalization",
+  "lem-weil-pbc-continuous-lattice-intersection-local-model",
+  "lem-weil-pbc-integral-matrix-kernel-locally-free"
  ],
  "proof_origin": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
+  "place": "Lemma 6.8.13, first paragraph; finite-etale descent of an integral structure",
   "by": "agent",
-  "note": "C4 realizes this existing finite-etale descent node in internal modules over the continuous coefficients. The old Lean attachment names an absent file. The mathematical statement and detailed finite-sum-of-sheet-lattices argument are retained; an initial coefficient/module conversion step records the compatibilities required by the internal attachment. No descent datum or degree prime to ell is imposed."
+  "note": "E2 replaces the unformalized section-module sum-and-gluing route by an actual internal-module image-pullback construction. Rationalization, continuous finite-matrix denominators, the integral kernel conversion and local-freeness pivot induction are proved. The only new hole is continuousLatticeIntersection_splitData: finite-sheet coordinates for the three objects and two canonical maps on compact covering members. The image-pullback split model is proved from these coordinates. This is a decomposition, net zero direct holes, not a completed axiom-free proof. The source itself argues by the fundamental group; the intersection is an agent variant."
  },
  "mathlib_searches": [
   {
@@ -298,11 +217,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-21055",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261016T064222-L-582225",
+  "landing": "20261016T084037-L-1660191",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-kernel-locally-free",
+ "kind": "statement",
+ "title": "Integral matrix kernel with locally free rational cokernel",
+ "statement": "For a prime ℓ and normed E/Q_ℓ with coefficients [def-weil-pbc-continuous-integral-coefficients], a map a:A→B of finite free integral module objects on a scheme X has pro-etale locally finite free kernel whenever Ext(coker(a)) is pro-etale locally finite free. In particular this holds for any standard finite matrix whose rationalization is epi. Local finite freeness means a pro-etale covering on each member of which the pulled module is Mod.IsFree, allowing rank zero.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the source rank using integralMatrix_pivot_cover. On a zero piece the kernel is the finite free source. For a nonzero piece, the monic pivot identifies the kernel with the smaller Schur-complement kernel. Scalar extension inverts the pivot, so the smaller matrix has the same locally free rational cokernel. Apply the induction hypothesis at the strictly smaller source rank.",
+   "uses": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the local freeness through the kernel isomorphisms, undo coefficient normalization, and bind the trivializing covers. The required isomorphism, pullback-composition, and coefficient-restriction lemmas are reused through proof-only import all of CondensedConstructibleSerre.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When the rationalized matrix is epi, exact scalar extension identifies its rational cokernel with zero. The zero module is finite free of rank zero, so the preceding theorem applies.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-matrix-pivot-cover",
+  "lem-weil-pbc-integral-constructible-kernels",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-continuous-integral-scalar-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clearing denominators of continuous finite free sheaf module morphisms over a compact scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits, including IsLocalizedModule.commonDenom and SheafOfModules.freeHomEquiv_symm_comp. They concern localized ordinary modules or sectionwise sheaf modules, not the internal Mod scalar-extension functor.",
+   "verdict": "Use the project continuous-function realization and explicit finite-biproduct matrix calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of a matrix over continuous functions into a valuation ring is locally finite free if its rational cokernel is locally finite free",
+   "date": "2026-10-16",
+   "results": "Eight hits, including ordinary Module.FinitePresentation localization and finite-generation lemmas. None proves this internal-module matrix kernel statement.",
+   "verdict": "Strengthen the conclusion of the existing pivot induction without adding a pivot hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelCompMono|regularExtensionIso|comp_nsmul|mapBiproduct",
+   "date": "2026-10-16",
+   "results": "25 Mathlib hits, including CategoryTheory/Limits/Shapes/Kernels.lean kernelCompMono, CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean mapBiproduct, and Preadditive/Basic.lean comp_nsmul. No internal continuous-coefficient matrix denominator or local-freeness theorem.",
+   "verdict": "Use these generic building blocks; no direct matching Mathlib theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, integral matrix kernel with locally free rational cokernel.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixKernelLocallyFree",
+  "file": "lean/Sheaf/Paper/IntegralMatrixKernelLocallyFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixKernel_locallyFree",
+  "statement": "theorem integralMatrixKernel_locallyFree (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (A B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X)) (a : A ⟶ B)\n    (hA : Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) A)\n    (hB : Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) B)\n    (hLF : ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj\n          (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj\n          ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n            (cokernel a)))) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (integralCoeff ℓ E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj (kernel a))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixKernel_locallyFree",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrixKernel_locallyFree_of_rational_epi"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-continuous-lattice-intersection-rationalization",
+ "kind": "statement",
+ "title": "The canonical intersection recovers the rational module",
+ "statement": "With prime ℓ, normed E/Q_ℓ and coefficients [def-weil-pbc-continuous-integral-coefficients], let p:U→X be qcqs, P a rational module on X, M an integral module on U and e:Ext(M)≅p^*P. The canonical rationalization Ext(N)→P of N defined in [def-weil-pbc-continuous-lattice-intersection] is invertible. No local-freeness, surjectivity or finite-etale hypothesis is required for this rationalization assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-lattice-intersection"
+ ],
+ "proof": [
+  {
+   "text": "The mate counit formula identifies extension of the pushed integral embedding followed by the rational counit with the pushforward comparison followed by p_*e. Both factors are invertible by qcqs localization and the localization counit theorem.",
+   "uses": [
+    "def-weil-pbc-continuous-lattice-intersection",
+    "lem-weil-pbc-integral-underived-push-comparison",
+    "lem-weil-pbc-integral-localization-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact scalar extension maps the image inclusion to a mono, and invertibility of the original pushed map after extension makes this mono epi. Mapped pullbacks then make extension of the canonical intersection inclusion invertible. Compose with the rational counit to obtain the claimed rationalization isomorphism.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-continuous-lattice-intersection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-lattice-intersection",
+  "lem-weil-pbc-integral-underived-push-comparison",
+  "lem-weil-pbc-integral-localization-counit",
+  "lem-weil-pbc-continuous-integral-scalar-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits and localization of sheaves of modules under quasi compact quasi separated pushforward",
+   "date": "2026-10-16",
+   "results": "Eight hits, including ModuleCat filtered-colimit constructions and Sheaf.hasFilteredColimitsOfSize; no continuous-coefficient pushforward localization theorem.",
+   "verdict": "Use the existing project continuity theorem and explicit telescope colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in locally free p-adic sheaves descend along finite etale surjective covers",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily unrelated period-ring and completed coefficient declarations; no finite-etale lattice descent or continuous-coefficient localization theorem.",
+   "verdict": "No matching Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit.*lowerStar|imagePullback|IsLattice.inf|counit.*IsIso",
+   "date": "2026-10-16",
+   "results": "Generic adjunction counit and Submodule.IsLattice.inf declarations were found; no condensed-module qcqs telescope comparison or lattice descent construction.",
+   "verdict": "Use the generic category APIs and the existing project coefficient telescope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, the canonical intersection recovers the rational module.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeIntersectionRationalization",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeIntersectionRationalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLatticeIntersectionRationalization_isIso",
+  "statement": "theorem continuousLatticeIntersectionRationalization_isIso\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    {U : Scheme.{u}} (p : U ⟶ X) [QuasiCompact p] [QuasiSeparated p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) U))\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    IsIso (latticeIntersectionRationalization (integralScalarMap ℓ E) X P p M e)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

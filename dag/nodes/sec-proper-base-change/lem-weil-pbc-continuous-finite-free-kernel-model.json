@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-continuous-finite-free-kernel-model",
+ "kind": "statement",
+ "title": "Integral kernel model of a surjective rational matrix",
+ "statement": "Let F be scalar extension from continuous integral coefficients to E and G its right adjoint, for [def-weil-pbc-continuous-integral-coefficients]. If X is compact and f:F(O_X^n)→F(O_X^m) is epi, then the kernel of its integral adjoint O_X^n→G(F(O_X^m)) is isomorphic to kernel(g) for an integral matrix g:O_X^n→O_X^m such that F(g) is epi.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient inclusion is monic by the explicit continuous-function realization. For the regular module, the extension unit followed by the restricted regular-extension isomorphism is that inclusion. On a finite free module, naturality with every coordinate projection therefore proves monicity of the unit.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Clear the denominators of f, obtaining F(g)=ℓ^k f. Powers of ℓ are invertible on rational modules, as follows from module_nsmul_isIso and induction; consequently F(g) remains epi.",
+   "uses": [
+    "lem-weil-pbc-continuous-finite-free-denominators",
+    "lem-weil-pbc-integral-module-telescope"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the unit identifies g followed by the target unit with ℓ^k times the adjoint of f. Postcomposition by either the monic unit or the invertible rational scalar does not change a kernel, by Mathlib kernelCompMono. Transport along this equality to obtain the displayed isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-regular-extension-comparison",
+  "lem-weil-pbc-continuous-finite-free-denominators",
+  "lem-weil-pbc-integral-module-telescope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clearing denominators of continuous finite free sheaf module morphisms over a compact scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits, including IsLocalizedModule.commonDenom and SheafOfModules.freeHomEquiv_symm_comp. They concern localized ordinary modules or sectionwise sheaf modules, not the internal Mod scalar-extension functor.",
+   "verdict": "Use the project continuous-function realization and explicit finite-biproduct matrix calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization unit is injective on finite free modules and scalar multiplication by an invertible element preserves a kernel",
+   "date": "2026-10-16",
+   "results": "Eight hits, including LinearMap.ker_localizedMap_eq_localized′_ker and IsLocalizedModule.map_injective. These use ordinary localized modules, not the current internal module category.",
+   "verdict": "Prove unit monicity from the coefficient inclusion and use Mathlib kernelCompMono."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelCompMono|regularExtensionIso|comp_nsmul|mapBiproduct",
+   "date": "2026-10-16",
+   "results": "25 Mathlib hits, including CategoryTheory/Limits/Shapes/Kernels.lean kernelCompMono, CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean mapBiproduct, and Preadditive/Basic.lean comp_nsmul. No internal continuous-coefficient matrix denominator or local-freeness theorem.",
+   "verdict": "Use these generic building blocks; no direct matching Mathlib theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, integral kernel model of a surjective rational matrix.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteFreeKernelModel",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteFreeKernelModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteFree_kernel_model",
+  "statement": "theorem integralFiniteFree_kernel_model (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u}) [CompactSpace X] (n m : ℕ)\n    (f : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n        (Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n) ⟶\n      (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n        (Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) m)) [Epi f] :\n    ∃ g : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n        Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) m,\n      Epi ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).map g) ∧\n      Nonempty (kernel ((Mod.extendRestrictAdjunction\n        (coefficientMap (integralScalarMap ℓ E) X)).homEquiv _ _ f) ≅ kernel g)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteFree_unit_mono",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralFiniteFree_kernel_model"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

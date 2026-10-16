@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-integral-underived-push-comparison",
+ "kind": "statement",
+ "title": "Integral localization commutes with ordinary qcqs pushforward",
+ "statement": "For a prime ℓ, normed extension E/Q_ℓ, qcqs f:X→Y and any integral module M on X, the specified coefficient-change/pushforward mate Ext_Y(f_*M)→f_*(Ext_X M) is invertible, with coefficients as in [def-weil-pbc-continuous-integral-coefficients].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), degree-zero filtered continuity and scalar localization; agent categorical consequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Present both restricted extensions by their module localization-unit telescopes. Reindex the scalar telescope to match pushforward. Ordinary qcqs continuity preserves this filtered colimit (lift the natural-number index universe before applying the stated continuity theorem).",
+   "uses": [
+    "lem-weil-pbc-integral-module-telescope",
+    "lem-weil-pbc-condensed-underived-pushforward-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the specified mate and compose with the restriction/pushforward comparison. Reuse the already proved generic mate_unit_comap and localization_comparison_zero helpers of ContinuousIntegralPushComparison. They identify the zeroth telescope leg with the pushed unit; invertibility of ℓ identifies every leg. Uniqueness of colimits makes the composite invertible. Cancel the comparison isomorphism and reflect isomorphisms through faithful restriction.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-push-comparison",
+    "lem-weil-pbc-integral-localization-legs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-module-telescope",
+  "lem-weil-pbc-condensed-underived-pushforward-continuity",
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "lem-weil-pbc-integral-localization-legs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), degree-zero filtered continuity and scalar localization; agent categorical consequence",
+  "note": "Agent categorical degree-zero and telescope consequence of Hemo--Richarz--Scholbach filtered continuity. The relevant continuity theorem is imported from the project; the adjunction and colimit comparison is proved here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits and localization of sheaves of modules under quasi compact quasi separated pushforward",
+   "date": "2026-10-16",
+   "results": "Eight hits, including ModuleCat filtered-colimit constructions and Sheaf.hasFilteredColimitsOfSize; no continuous-coefficient pushforward localization theorem.",
+   "verdict": "Use the existing project continuity theorem and explicit telescope colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in locally free p-adic sheaves descend along finite etale surjective covers",
+   "date": "2026-10-16",
+   "results": "Eight hits, primarily unrelated period-ring and completed coefficient declarations; no finite-etale lattice descent or continuous-coefficient localization theorem.",
+   "verdict": "No matching Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit.*lowerStar|imagePullback|IsLattice.inf|counit.*IsIso",
+   "date": "2026-10-16",
+   "results": "Generic adjunction counit and Submodule.IsLattice.inf declarations were found; no condensed-module qcqs telescope comparison or lattice descent construction.",
+   "verdict": "Use the generic category APIs and the existing project coefficient telescope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-etale descent, integral localization commutes with ordinary qcqs pushforward.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralUnderivedPushComparison",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralUnderivedPushComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralScalarUnderivedPushHom_isIso",
+  "statement": "theorem integralScalarUnderivedPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X)) :\n    IsIso ((pushHom (integralScalarMap ℓ E) f).app M)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

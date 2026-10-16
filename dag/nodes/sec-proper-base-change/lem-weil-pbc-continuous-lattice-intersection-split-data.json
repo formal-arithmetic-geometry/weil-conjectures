@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-continuous-lattice-intersection-split-data",
+ "kind": "statement",
+ "title": "Finite-sheet coordinates for the two canonical adjunction maps",
+ "statement": "Let ℓ be prime, E a normed extension of Q_ℓ, and p:U→X finite etale surjective. Given a pro-etale locally finite free rational P, a pro-etale locally finite free integral M and e:Ext(M)≅p^*P, there is a pro-etale cover with compact members and, on each member, finite ranks r,n,m, a mono rational map i:F(O^r)→F(O^n) with cokernel isomorphic to F(O^m), and three integral-module coordinate isomorphisms eA,eB,eD. They identify the normalized restrictions of Res(P), p_*M and Res(p_*p^*P) with G(F(O^r)), O^n and G(F(O^n)), respectively. The first identifies the restricted rational adjunction unit with G(i), and the second identifies the restricted pushed lattice embedding with the localization unit O^n→G(F(O^n)). Here F⊣G is the coefficient extension/restriction adjunction of [def-weil-pbc-continuous-integral-coefficients] and both canonical maps are those of [def-weil-pbc-continuous-lattice-intersection]. No intersection, kernel, local freeness of an intersection or descent conclusion is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-lattice-intersection",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Split p over an etale covering; the finite sheet set is nonempty on every nonempty member. Refine the supplied P and sheet-M trivializations simultaneously using finitely many fiber products of pro-etale covers. Refine by affine opens and compose the covers to obtain compact members.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a member let D be the direct sum of the free integral sheet modules, of total rank n. Pushforward from the disjoint union is their finite product, hence the same sum. Each rationalized sheet is P by e. Choose the supplied rational basis of P of rank r. The rational unit is the diagonal i:F(O^r)→F(D). Projecting to a chosen sheet and applying its rationalization isomorphism splits i. Subtracting this coordinate from the others identifies coker(i) with a finite direct sum of copies of P, of rank m. No equality between the sheet ranks needs to be proved.",
+   "uses": [
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Weakly-etale abelian base change (ProEtale.baseChangeMap and isIso_baseChangeMap_of_isPullback) and its internal-module lift identify the restrictions of the two direct images with the finite products. Use profinitePointModuleForgetPullbackIso and the unit/composition coherence of ProfinitePointPullback for the underlying module maps. The integral sheet bases give eB, the rational basis of P gives eA, and the rationalization e together with the coefficient/pushforward mate gives eD. Naturality of the adjunction unit gives eA.hom≫G(i)=T(unitP)≫eD.hom. Sheetwise the integral embedding is m↦e(1⊗m), so the same mate/unit compatibility gives eB.hom≫η=T(pushedEmbedding)≫eD.hom. Normalize raw pulled coefficients by condensedPullbackHom. Empty members are omitted; one sheet gives zero complementary rank. To lift base change, insert the unit for the pulled finite cover, apply the inverse-image square comparison and contract the original counit. Forgetting via profinitePointModuleForgetPullbackIso identifies the unit and composition terms with the abelian ones; the triangle identities identify the counits. The abelian weakly-etale base-change theorem and reflection by module forgetful functors make this module map invertible. Restriction to the disjoint clopen sheets is linear by naturality of the action, and the sheaf condition is the finite product universal property. Module forgetful functors create these products.",
+   "uses": [
+    "def-weil-pbc-continuous-lattice-intersection",
+    "lem-weil-pbc-integral-underived-push-comparison",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-weil-pbc-continuous-lattice-intersection",
+  "lem-weil-pbc-integral-underived-push-comparison",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient localization and Lemma 6.8.13, first paragraph; agent intersection/matrix variant",
+  "note": "Explicit internal-module construction/proof for finite-etale lattice descent. The source uses a fundamental-group argument; the categorical intersection and matrix presentation are an agent variant, not a quotation of its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clearing denominators of continuous finite free sheaf module morphisms over a compact scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits; ordinary sheaf free-Hom and localization denominator results but no finite-etale internal-module intersection model.",
+   "verdict": "No direct match; use a rational kernel model, then the proved denominator and kernel lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in locally free p-adic sheaves descend along finite etale surjective covers",
+   "date": "2026-10-16",
+   "results": "Eight unrelated period-ring and completed coefficient hits; no finite-etale descent theorem in this internal coefficient category.",
+   "verdict": "The finite-sheet geometry remains a named strictly intermediate obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Pp]ushforward|[Pp]ushforward.*finite|[Ii]ntersection.*lattice",
+   "date": "2026-10-16",
+   "results": "Mathlib has ordinary Submodule.IsLattice.inf. Repository searches find the adic finite-etale lisse pushforward and the geometric finite-etale splitting theorem; no internal condensed-module kernel model.",
+   "verdict": "Use the existing geometric splitting and weakly-etale base-change APIs, not an adic/continuous coefficient identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a finite disjoint union pushforward is a finite product of locally free modules",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.mapFree, pullbackObjFreeIso and related free-generator identities; Condensed.finFree; Profinite.NobelingProof.Nobeling_aux.",
+   "verdict": "Second reader: these give free-module or inverse-image infrastructure, not the finite-cover pushforward coordinates or the two map equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"coproduct\"",
+   "date": "2026-10-16",
+   "results": "Twelve PresheafOfModules freeYonedaCoproduct presentation declarations.",
+   "verdict": "Second reader: free Yoneda presentations are unrelated to the finite disjoint-union pushforward comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Mm]od|[Mm]od.*baseChange|lowerStar.*[Pp]roduct",
+   "date": "2026-10-16",
+   "results": "Mathlib: scalar base-change and trace results. Local lean/: ProEtale.BaseChange.WeaklyEtale, Adic.BaseChange, Paper.DirectImageSplitCoverProduct and Paper.ProfinitePointPullback.",
+   "verdict": "Second reader: abelian weakly-etale base change is available; Adic.BaseChange is for constant adic coefficients, DirectImageSplitCoverProduct for etale ModuleCat sheaves. Their existing proofs do not directly supply the internal condensed-module coordinate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-sheet coordinates of the two adjunction maps.",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeIntersectionSplitData",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeIntersectionSplitData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLatticeIntersection_splitData",
+  "statement": "theorem continuousLatticeIntersection_splitData\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P))\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) U))\n    (hM : ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n        (condensedRingObj (integralCoeff ℓ E) U))\n        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M))\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      CompactSpace (C.X s) ∧\n      let R := condensedRingObj (integralCoeff ℓ E) (C.X s)\n      let T := (ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod\n          (condensedRingObj (integralCoeff ℓ E) X) ⋙\n        Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) (C.f s)))\n      let F := Mod.extendScalars\n        (coefficientMap (integralScalarMap ℓ E) (C.X s))\n      let G := Mod.comap (D := Sheaf (Scheme.ProEt.topology (C.X s)) Ab.{u + 1})\n        (coefficientMap (integralScalarMap ℓ E) (C.X s))\n      let adj := Mod.extendRestrictAdjunction\n        (coefficientMap (integralScalarMap ℓ E) (C.X s))\n      ∃ (r n m : ℕ) (i : F.obj (Mod.finiteFree R r) ⟶ F.obj (Mod.finiteFree R n)),\n        Mono i ∧ Nonempty (cokernel i ≅ F.obj (Mod.finiteFree R m)) ∧\n        ∃ (eA : T.obj ((Mod.comap (coefficientMap (integralScalarMap ℓ E) X)).obj P) ≅\n              G.obj (F.obj (Mod.finiteFree R r)))\n          (eB : T.obj ((lowerStar (integralCoeff ℓ E) p).obj M) ≅ Mod.finiteFree R n)\n          (eD : T.obj ((Mod.comap (coefficientMap (integralScalarMap ℓ E) X)).obj\n              ((lowerStar (Profinite.continuousMapRingObj E) p).obj\n                ((upperStar (Profinite.continuousMapRingObj E) p).obj P))) ≅\n              G.obj (F.obj (Mod.finiteFree R n))),\n          eA.hom ≫ G.map i =\n            T.map (latticeIntersectionUnit (integralScalarMap ℓ E) X P p) ≫ eD.hom ∧\n          eB.hom ≫ adj.unit.app (Mod.finiteFree R n) =\n            T.map (latticePushedEmbedding (integralScalarMap ℓ E) X P p M e) ≫ eD.hom",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T084037-L-1660191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
