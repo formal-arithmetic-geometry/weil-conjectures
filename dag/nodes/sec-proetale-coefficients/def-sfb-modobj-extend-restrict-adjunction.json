@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-extend-restrict-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension of scalars is left adjoint to restriction",
@@ -18,34 +18,184 @@
  ],
  "proof": [
   {
-   "text": "Write $p\\colon\\mathcal S\\otimes M\\to\\mathcal S\\otimes_{\\mathcal R}M$ for the projection\n([def-sfb-modobj-extension]). Up to unitors, the coequalizer relation gives\n$$\nu_M\\gamma_M=p(\\mathcal S\\otimes\\gamma_M)(\\eta_{\\mathcal S}\\otimes\\mathcal R\\otimes M)\n=p\\bigl(\\mu_{\\mathcal S}(\\eta_{\\mathcal S}\\otimes\\varphi)\\otimes M\\bigr)=p(\\varphi\\otimes M).\n$$\nThe restricted action of $\\mathcal R$ on $\\mathcal S\\otimes_{\\mathcal R}M$, applied after\n$\\mathcal R\\otimes u_M$, gives\n$p(\\mu_{\\mathcal S}\\otimes M)(\\varphi\\otimes\\eta_{\\mathcal S}\\otimes M)=p(\\varphi\\otimes M)$\nas well. So $u_M$ is $\\mathcal R$-linear.",
+   "text": "Use the hypotheses and construction of [def-sfb-modobj-extension]. Put $Q_M=\\mathcal S\\otimes_{\\mathcal R}M$, and write $p_M:\\mathcal S\\otimes M\\to Q_M$ for the coequalizer of $a_M=(\\mu_{\\mathcal S}(\\mathcal S\\otimes\\varphi))\\otimes M$ and $b_M=(\\mathcal S\\otimes\\gamma_M)\\alpha_{\\mathcal S,\\mathcal R,M}$. Write $\\delta_M:\\mathcal S\\otimes Q_M\\to Q_M$ for its action. Unpacking \"acting on the first factor\" in that node gives $\\delta_M(\\mathcal S\\otimes p_M)=p_M m_M$, where $m_M=(\\mu_{\\mathcal S}\\otimes M)\\alpha^{-1}_{\\mathcal S,\\mathcal S,M}$. The universal property in [def-weil-pbc-category-colimit], applied to the finite parallel-pair diagram (Stacks Tags 002A, 002F), gives both descent and cancellation: if $vp_M=wp_M$, both $v,w$ factor the same cocone and uniqueness gives $v=w$. Since $\\mathcal S\\otimes-$ preserves colimits by hypothesis, $\\mathcal S\\otimes p_M$ is a coequalizer of the image parallel pair and has the same cancellation property. In subsequent displayed composites, the canonical associators and unitors are suppressed; inserting them uses their naturality and the tensor interchange law.",
    "uses": [
-    "def-sfb-modobj-extension"
+    "def-sfb-modobj-extension",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraphs 1–2: the projection and its coequalizer universal property; Stacks Categories, definition-coequalizers (002A), definition-colimit (002F)"
+   }
   },
   {
-   "text": "Conversely, let $f\\colon M\\to\\operatorname{Res}_\\varphi N$ be $\\mathcal R$-linear. Then\n$\\gamma_N(\\mathcal S\\otimes f)\\colon\\mathcal S\\otimes M\\to N$ coequalizes the two parallel\nmaps, because $f$ is linear for the action through $\\varphi$ and $\\gamma_N$ is associative.\nIt therefore descends to a map $\\mathcal S\\otimes_{\\mathcal R}M\\to N$, which is\n$\\mathcal S$-linear. The two constructions are mutually inverse:\n- by the unit law, $\\gamma_N(\\mathcal S\\otimes f)(\\eta_{\\mathcal S}\\otimes M)=f$;\n- an $\\mathcal S$-linear $g$ is determined by $gp$, and by $\\mathcal S$-linearity\n  $gp=\\gamma_N(\\mathcal S\\otimes gu_M)$.",
-   "uses": [],
-   "elementary": null
+   "text": "The module laws and the meaning of a linear map are those of [sk-def-sfb-module-objects]. Let $i_M=(\\eta_{\\mathcal S}\\otimes M)\\lambda_M^{-1}$, so $u_M=p_M i_M$. Precompose $p_Mb_M=p_Ma_M$ with insertion of $\\eta_{\\mathcal S}$ before $\\mathcal R\\otimes M$. The left unit law of $\\mathcal S$ gives\n$$u_M\\gamma_M=p_M(\\mathcal S\\otimes\\gamma_M)(\\eta_{\\mathcal S}\\otimes\\mathcal R\\otimes M)=p_M(\\mu_{\\mathcal S}(\\eta_{\\mathcal S}\\otimes\\varphi)\\otimes M)=p_M(\\varphi\\otimes M).$$\nOn the other hand the action identity of step 1 and the right unit law give\n$$\\delta_M(\\varphi\\otimes Q_M)(\\mathcal R\\otimes u_M)=p_M(\\mu_{\\mathcal S}\\otimes M)(\\varphi\\otimes\\eta_{\\mathcal S}\\otimes M)=p_M(\\varphi\\otimes M).$$\nThe restricted action is $\\delta_M(\\varphi\\otimes Q_M)$ by [def-sfb-modobj-restriction]. These two equations are precisely its required $\\mathcal R$-linearity equation for $u_M$.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 1: the two computations proving linearity of the unit"
+   }
   },
   {
-   "text": "Naturality in $M$ and $N$ is immediate.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix an $\\mathcal S$-module $N$ and an $\\mathcal R$-linear $f:M\\to\\operatorname{Res}_\\varphi N$. By [def-sfb-modobj-restriction] and [sk-def-sfb-module-objects], $f\\gamma_M=\\gamma_N(\\varphi\\otimes N)(\\mathcal R\\otimes f)$. Define $h_f=\\gamma_N(\\mathcal S\\otimes f):\\mathcal S\\otimes M\\to N$. Substituting this equation and then the associativity law for the action on $N$ gives\n$$h_f b_M=\\gamma_N(\\mathcal S\\otimes(f\\gamma_M))\\alpha=\\gamma_N(\\mu_{\\mathcal S}\\otimes N)(\\mathcal S\\otimes\\varphi\\otimes f)=h_f a_M.$$\nThus $h_f$ coequalizes exactly the pair defining $Q_M$ in [def-sfb-modobj-extension]; this is a calculation of morphisms in $\\mathcal C$, requiring no elementwise description of $M$ or $N$.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 2, first two sentences: the balancing calculation"
+   }
+  },
+  {
+   "text": "By the coequalizer universal property [def-weil-pbc-category-colimit] (Stacks Tags 002A, 002F), step 3 gives a unique underlying morphism $\\bar f:Q_M\\to N$ with $\\bar f p_M=h_f$. It is $\\mathcal S$-linear: using the action of [def-sfb-modobj-extension] and the associativity law of [sk-def-sfb-module-objects],\n$$\\bar f\\delta_M(\\mathcal S\\otimes p_M)=h_f m_M=\\gamma_N(\\mathcal S\\otimes h_f)=\\gamma_N(\\mathcal S\\otimes\\bar f)(\\mathcal S\\otimes p_M).$$\nFor the middle equality, both sides are $\\gamma_N(\\mu_{\\mathcal S}\\otimes N)(\\mathcal S\\otimes\\mathcal S\\otimes f)$ after reassociation. Cancel $\\mathcal S\\otimes p_M$ using the uniqueness argument of step 1. The resulting equation $\\bar f\\delta_M=\\gamma_N(\\mathcal S\\otimes\\bar f)$ is exactly linearity.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 2: descent and the asserted S-linearity, expanded"
+   }
+  },
+  {
+   "text": "For an $\\mathcal S$-linear $g:Q_M\\to N$, define $\\Phi_{M,N}(g)=\\operatorname{Res}_\\varphi(g)u_M$; restriction preserves linearity by [def-sfb-modobj-restriction], and the composite is linear by the morphism definition [sk-def-sfb-module-objects] and step 2. Define $\\Psi_{M,N}(f)=\\bar f$ by step 4. Then\n$$\\Phi_{M,N}(\\Psi_{M,N}(f))=\\bar f u_M=h_f i_M=\\gamma_N(\\eta_{\\mathcal S}\\otimes N)\\lambda_N^{-1} f=f,$$\nwhere tensor interchange and naturality of $\\lambda$ give the penultimate expression and the unit law on $N$ gives the last equality.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 2, first inverse identity (the unit law)"
+   }
+  },
+  {
+   "text": "The first-factor action of [def-sfb-modobj-extension] satisfies\n$$\\delta_M(\\mathcal S\\otimes u_M)=p_M(\\mu_{\\mathcal S}\\otimes M)(\\mathcal S\\otimes\\eta_{\\mathcal S}\\otimes M)=p_M$$\nby the right unit law. Hence for an $\\mathcal S$-linear $g$, using its linearity equation from [sk-def-sfb-module-objects],\n$$h_{\\Phi(g)}=\\gamma_N(\\mathcal S\\otimes(g u_M))=g\\delta_M(\\mathcal S\\otimes u_M)=g p_M.$$\nBoth $\\Psi(\\Phi(g))$ and $g$ therefore descend the same map $h_{\\Phi(g)}$. Uniqueness in [def-weil-pbc-category-colimit] gives $\\Psi(\\Phi(g))=g$. Together with step 5 this proves that the stated $\\Phi$ is a bijection.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 2, second inverse identity and uniqueness from the projection"
+   }
+  },
+  {
+   "text": "For an $\\mathcal R$-linear $a:M'\\to M$, the map construction in [def-sfb-modobj-extension] gives $(\\operatorname{Ext}_\\varphi a)p_{M'}=p_M(\\mathcal S\\otimes a)$. Composing with $i_{M'}$ and using tensor interchange and naturality of $\\lambda$ gives $(\\operatorname{Ext}_\\varphi a)u_{M'}=u_M a$. Consequently\n$$\\Phi_{M',N}(g\\circ\\operatorname{Ext}_\\varphi a)=\\Phi_{M,N}(g)\\circ a.$$\nFor an $\\mathcal S$-linear $b:N\\to N'$, restriction is the identity on underlying morphisms and is a functor by [def-sfb-modobj-restriction], so associativity of composition gives\n$$\\Phi_{M,N'}(b\\circ g)=\\operatorname{Res}_\\varphi(b)\\circ\\Phi_{M,N}(g).$$\nThese are the two naturality equations, with all source and target module structures fixed.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 3: naturality in M and N, expanded into its two equations"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] with $F=\\operatorname{Ext}_\\varphi$, $G=\\operatorname{Res}_\\varphi$, and hom-set bijections $\\Phi_{M,N}$ from steps 5–6. Step 7 verifies both of its naturality hypotheses. This constructs $\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$ with exactly the hom bijection in the statement. Its unit is $\\Phi_{M,Q_M}(\\mathrm{id}_{Q_M})=u_M$, so it is the adjunction with the specified unit, rather than merely an unspecified adjunction between the same functors.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+    "place": "Paragraph 3 and the adjunction conclusion; Stacks Categories, definition-adjoint (0037) and following paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-extension"
+  "def-sfb-modobj-extension",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.proof.md",
+  "place": "All three paragraphs, with the coequalizer descent, linearity, inverse and naturality calculations written out; generic category facts from Stacks Categories Tags 002A, 002F, 0037."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendRestrictAdjunction|extensionRestrictionAdjunction|extendScalars|restrictScalars",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extension-restriction adjunction for arbitrary internal module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars between categories of module objects is left adjoint to restriction of scalars",
+   "results": "ModuleCat.extendRestrictScalarsAdj, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extension-restriction adjunction for arbitrary internal module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extension-restriction adjunction for arbitrary internal module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for module objects over monoid objects in a monoidal category is left adjoint to restriction of scalars",
+   "results": "ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, Rep.instIsLeftAdjointActionModuleCatRes, ModuleCat.RestrictionCoextensionAdj.unit'_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extension-restriction adjunction for arbitrary internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj|extendRestrictAdjunction|comap|extension",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mod.lean:351,397,401,403,412: scalar restriction and comap only; source read at 350–414.",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction exists, but no internal extension-restriction adjunction is supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For monoid objects R and S in a braided monoidal category, the coequalizer S tensor over R M represents R-linear maps into an S-module",
+   "results": "ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, ModuleCat.instMonoidalLinear, ModuleCat.monoidalCategory, ModuleCat.MonoidalCategory.tensorObj, ModuleCat.MonoidalCategory.tensorObj_def, ModuleCat.instMonoidalPreadditive, ModuleCat.MonoidalCategory.tensorObj_carrier, ModuleCat.instMonoidalFree",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state extension-restriction adjunction for arbitrary internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "def extendRestrictScalarsAdj|def extendRestrictAdjunction",
+   "results": "ModuleCat.extendRestrictScalarsAdj, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:885; source read at 880–908.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary modules over commutative rings, not arbitrary internal module objects in the given monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint of change of monoids on categories of internal left modules, constructed using a balanced tensor product coequalizer",
+   "results": "Rep.instIsLeftAdjointActionModuleCatRes, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.instIsLeftAdjointExtendScalars, CommRingCat.instIsLeftAdjointCommMonCatUnderMonoidAlgebra, Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.mapMon, CommRingCat.monoidAlgebraAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: representation restriction, the Grothendieck tensor embedding, ordinary ModuleCat extension, and mapMon do not state extension-restriction for arbitrary internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct.*[Aa]dj|[Aa]dj.*tensorProduct|extend.*[Aa]dj|[Aa]dj.*extend",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the three hits are Types.tensorProductAdjunction and its instances at Mathlib/CategoryTheory/Monoidal/Closed/Types.lean:38,44,47, for the cartesian closed category of types"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -63,5 +213,34 @@
   "CategoryTheory.Mod.extendRestrictAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-extend-restrict-adjunction",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 statement and companion proof, the change-of-scalars unit route, all five cited node statements, the finished source for attachment and Mathlib candidates. Kept the statement and hypotheses exactly; expanded the balancing, descent and tensor-coequalizer cancellation, both inverse identities and both naturality equations. Reused the existing general colimit and adjunction Mathlib leaves; created no nodes.",
+  "blueprint": "Paragraph 1 is steps 1–2; paragraph 2 is steps 3–6; paragraph 3 and its adjunction conclusion are steps 7–8. These realize part 2 of sk-def-sfb-change-of-scalars without using the umbrella unit circularly.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Universal property of the finite parallel-pair colimit; the change-of-scalars unit constructs the particular quotient but does not replace the general definition of colimit."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "General construction of an adjunction from natural Hom bijections after those bijections have been constructed along the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-b2e025c3f",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-b2e025c3f (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes, blueprint proof, Stacks sources, route, searches, edge cases, and archived target declarations. The coequalizer descent, linearity, inverse, naturality, and adjunction steps are correct with exact hypotheses; no duplicate, cycle, route violation, or repair is present. Review written to review.md."
+ }
 }
