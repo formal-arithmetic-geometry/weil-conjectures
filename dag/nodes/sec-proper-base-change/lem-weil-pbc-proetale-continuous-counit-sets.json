@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-proetale-continuous-counit-sets",
+ "kind": "statement",
+ "title": "Affine continuity makes the set comparison counit invertible",
+ "statement": "For a scheme X and a pro-etale sheaf of sets F [def-weil-pbc-proetale-site], suppose F sends every affine ind-etale presentation by affine etale X-schemes [lem-weil-pbc-ind-etale-basis] to a colimit of section sets. Then the counit ν_X^*ν_{X,*}F→F [def-weil-pbc-site-comparison-morphism] is invertible.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, continuity criterion."
+ },
+ "proof": [
+  {
+   "text": "The invertible comparison unit makes ν_X^* fully faithful. The triangle identities imply that the counit is invertible on each etale stage.",
+   "uses": [
+    "lem-weil-pbc-proetale-comparison-unit-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present an affine ind-etale object by a small cofiltered diagram of affine etale objects. The hypothesis sends its section cone for F to a colimit; classical continuity does so for ν_X^*ν_{X,*}F.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-proetale-classical-continuity-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A natural transformation invertible on the stages is invertible at these colimits. Naturality identifies that induced map with the counit. Dense affine restriction detects its invertibility.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-proetale-classical-continuity-sets",
+  "lem-weil-pbc-proetale-comparison-unit-sets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, continuity criterion.",
+  "note": "Lean proof by E4 from the cited argument and the specified categorical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors preserving relative cofiltered limits is an isomorphism if it is an isomorphism on the presenting objects",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map; CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.isIso_post; CategoryTheory.Functor.IsEventuallyConstantTo.isoMap; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap; CategoryTheory.instIsIsoPost",
+   "date": "2026-10-16",
+   "verdict": "Only generic adjunction and eventual-constant results. Prove the affine-basis colimit criterion directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesRelativeFilteredColimits\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "Only generic adjunction and eventual-constant results. Prove the affine-basis colimit criterion directly."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesRelativeFilteredColimits|isIso_counit_app_iff_mem_essImage",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "Only generic adjunction and eventual-constant results. Prove the affine-basis colimit criterion directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pro etale sheaf continuous on affine etale presentations has invertible comparison counit",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_inv_app_val_app; CategoryTheory.Sheaf.adjunction_counit_app_val; CategoryTheory.sheafificationAdjunction_counit_app_val; CategoryTheory.Equivalence.sheafCongrPreregular_counitIso_inv_app_val_app; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.plusPlusAdjunction_counit_app_val",
+   "date": "2026-10-16",
+   "verdict": "The hits describe general sheaf counits and dense subsites; none supplies the pro-etale affine-continuity criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+   "place": "Lemmas 5.1.1–5.1.2, continuity criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleComparisonCounitSets_isIso_of_continuous",
+  "statement": "theorem proEtaleComparisonCounitSets_isIso_of_continuous (X : Scheme.{u})\n    (F : Sheaf (ProEt.topology X) (Type (u + 1)))\n    (hF : Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)\n      ((AffineProEt.toProEt X).op ⋙ F.obj)) :\n    IsIso ((proEtaleSiteComparison X).counit.app F)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded proof routes, unchanged existing interfaces, clean compilation and permitted axioms."
+ }
+}

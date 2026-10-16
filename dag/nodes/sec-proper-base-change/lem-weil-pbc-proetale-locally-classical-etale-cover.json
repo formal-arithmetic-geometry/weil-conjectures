@@ -30,79 +30,41 @@
  ],
  "proof": [
   {
-   "text": "First establish the continuity criterion on an affine open $X=\\operatorname{Spec}A$. For an affine ind-etale basis object $U=\\varprojlim_i U_i$, the set-valued clause of [lem-weil-pbc-comparison-sections] identifies $(\\nu_X^*\\nu_{X,*}F)(U)$ with $\\varinjlim_i F(U_i)$, and identifies its counit with the restriction map to $F(U)$. Thus the counit is an isomorphism if these restriction maps are bijections: [lem-weil-pbc-ind-etale-basis] detects isomorphisms on this basis. Conversely a classical sheaf has these bijections by the same section formula. Evaluating the formula on a constant presentation of an affine etale object gives $G\\cong\\nu_{X,*}\\nu_X^*G$ for every etale sheaf of sets $G$. Hence classicality is equivalent to the counit being an isomorphism. These tests are Zariski local on $X$: localization identifies restriction to an open subscheme with evaluation on its objects [lem-weil-proetale-weakly-etale-localization, clause (1)]; on an open $V\\subseteq X$, direct image is the same restriction $W\\mapsto F(W)$ on etale $W\\to V$, and the inverse-image colimit and its sheafification are computed on objects over $V$. Consequently the restricted global counit is the counit for $V$, and isomorphisms on an open cover glue uniquely by the sheaf axiom.",
+   "text": "Apply affine continuity for locally classical sheaves, then the comparison counit criterion. Its inverse exhibits F as ν_X^*ν_{X,*}F.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-sections",
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-proetale-weakly-etale-localization"
+    "lem-weil-pbc-proetale-locally-classical-continuity",
+    "lem-weil-pbc-proetale-continuous-counit-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 5.1.1 and 5.1.2"
-   }
+   "elementary": false
   },
   {
-   "text": "Work over an affine open $X=\\operatorname{Spec}A$. Refine the given covering by affine ind-etale basis objects and take a finite covering subfamily $Y_a=\\operatorname{Spec}B_a$ using [lem-weil-pbc-ind-etale-basis]. For the refinement map $h:Y_a\\to U_j$, pull back the given classical presentation. By [lem-weil-pbc-comparison-pullback], $h_{\\mathrm{proet}}^{-1}\\nu_{U_j}^*G_j\\cong\\nu_{Y_a}^*h_{\\mathrm{et}}^{-1}G_j$, so $F|_{Y_a}$ is classical. Restriction to a pro-etale object is its scheme inverse image: both evaluate on an object over that scheme by forgetting its structure map to the object, by the site identification in clause (1) of [lem-weil-proetale-weakly-etale-localization]. For an ind-etale $A$-algebra $C=\\varinjlim_j C_j$ with $C_j$ etale of finite presentation, write $F(D)$ for $F(\\operatorname{Spec}D)$. The sheaf axiom for the base-changed cover gives\n$$F(C)=\\operatorname{Eq}\\left(\\prod_a F(C\\otimes_A B_a)\\rightrightarrows\\prod_{a,b}F(C\\otimes_A B_a\\otimes_A B_b)\\right),$$\nand gives the identical equalizer with $C_j$ in place of $C$. By [lem-weil-pbc-ind-etale-stability], the displayed tensor-product presentations are ind-etale over $B_a$, with the finite-stage terms etale of finite presentation by base change. Classicality on $Y_a$ and the set-valued section formula give $F(C\\otimes_A B_a)=\\varinjlim_jF(C_j\\otimes_A B_a)$. They also give $F(C\\otimes_A B_a\\otimes_A B_b)=\\varinjlim_jF(C_j\\otimes_A B_a\\otimes_A B_b)$: write $B_b=\\varinjlim_k B_{b,k}$ with etale finite-presentation terms; the formula over $B_a$ expresses the left side as the colimit over $(j,k)$ of the values on $C_j\\otimes_A B_a\\otimes_A B_{b,k}$, whereas taking the colimit in $k$ first gives the right side. These bijections are restriction maps, so they commute with both equalizer arrows. Filtered colimits of sets commute with these finite products and equalizers: represent finitely many coordinates at one common index, and move to a later common index to witness the finitely many required equalities; the same argument proves injectivity. Taking the filtered colimit of the equalizers for $C_j$ therefore gives $\\varinjlim_j F(C_j)\\cong F(C)$. Step 1 proves classicality over each affine open, hence over $X$.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-comparison-sections",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ind-etale-stability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.1.4, equalizer diagram and proof"
-   }
-  },
-  {
-   "text": "For a set $S$, the constant sheaf on either site is the coproduct of $S$ copies of the terminal sheaf: the constant presheaf is that coproduct before sheafification, and sheafification preserves coproducts. The left adjoint $\\nu^*$ preserves coproducts, and as the inverse image of a geometric morphism it preserves the terminal object. It therefore takes the constant etale sheaf associated with $S$ to the constant pro-etale sheaf associated with $S$. Apply this on each member of the cover trivializing a locally constant $F$, and then apply step 2.",
+   "text": "The etale and pro-etale constant-sheaf functors are left adjoint to evaluation at the identity object, and restriction along toProEt preserves that terminal evaluation. Uniqueness of left adjoints gives ν_X^* constant_et ≅ constant_proet. Transport the local trivializations and apply the first step.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-site-comparison-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 5.1.3; Proposition 6.8.4(6)"
-   }
+   "elementary": false
   },
   {
-   "text": "By step 2 write $F\\cong\\nu_X^*G$. Over each affine open $V\\subseteq X$, refine the cover on which sections are given by affine ind-etale basis objects $U_a=\\varprojlim_i U_{a,i}$ over $V$; pull the given sections back to $U_a$. The set-valued section formula gives $F(U_a)=\\varinjlim_i (G|_V)(U_{a,i})$. Thus each chosen section is represented by an element of $(G|_V)(U_{a,i(a)})$ at some index $i(a)$. Its image under the comparison unit is a section of $F$ over $U_{a,i(a)}$. These etale maps $U_{a,i(a)}\\to V\\to X$ jointly cover $X$: every point of $V$ lies in the image of some $U_a$, and the map $U_a\\to V$ factors through the selected stage $U_{a,i(a)}$. The definition of the etale topology therefore makes all selected stages, over all affine opens $V$, the required etale covering family. For empty $X$ use the empty family; no nonempty index set or nonempty constant value set was assumed.",
+   "text": "Write F≅ν_X^*G. Local sections make ν_X^*G→ν_X^*1 an epimorphism by the locally-surjective criterion. The invertible comparison unit makes ν_X^* faithful, so it reflects this epimorphism. Therefore G→1 is locally surjective on the etale site. The family of all pairs (etale object, section of G) covers; the comparison unit and the chosen isomorphism provide sections of F on this family.",
    "uses": [
-    "lem-weil-pbc-comparison-sections",
-    "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-proetale-comparison-unit-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), last sentence; Lemma 5.1.1"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-proetale-site",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-proetale-comparison-unit-sets",
+  "lem-weil-pbc-proetale-continuous-counit-sets",
+  "lem-weil-pbc-proetale-locally-classical-continuity"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E4",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 5.1.1–5.1.4 and Proposition 6.8.4(6)"
+  "place": "Lemmas 5.1.1–5.1.4; constant sheaves by adjunction uniqueness, and the final section descent by reflection of epimorphisms."
  },
  "mathlib_searches": [
   {
@@ -247,5 +209,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The theorem renders all three conclusions. Supporting declarations spell out the classical/local notions introduced in this same node and their canonical slice restriction, reusing upstream localization, Mathlib constant sheaves and the recorded comparison inverse image. No statement correction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded proof routes, unchanged existing interfaces, clean compilation and permitted axioms."
  }
 }

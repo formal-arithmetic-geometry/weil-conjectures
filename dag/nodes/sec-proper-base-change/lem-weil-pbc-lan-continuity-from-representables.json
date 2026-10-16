@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-lan-continuity-from-representables",
+ "kind": "statement",
+ "title": "Kan-extension continuity detected on representables",
+ "statement": "Let C,D be locally u-small categories of objects in Type (u+1), B:C→D, and G:Cᵒᵖ→Type (u+1). Let K:J→Dᵒᵖ have a colimit cocone c, where J is u-small [def-weil-pbc-category-colimit]. If every lifted representable Hom_D(-,B(Y)) preserves this colimit, then the left Kan extension Lan_(Bᵒᵖ)(G) preserves it.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Categorical density and commutation of colimits applied to the finite-presentation argument of Lemma 5.1.1."
+ },
+ "proof": [
+  {
+   "text": "The canonical comparison from the colimit of evaluations to evaluation at c.pt is natural in the presheaf. Both sides preserve presheaf colimits, since evaluation and restriction are pointwise and colimits commute.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Kan extension of a lifted representable is the lifted representable of its image. The assumed preservation therefore makes the comparison invertible on every representable.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Express G as its canonical colimit of lifted representables. Kan extension is a left adjoint. The natural comparison is invertible on this colimit, and its invertibility is precisely preservation of K.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Categorical density and commutation of colimits applied to the finite-presentation argument of Lemma 5.1.1.",
+  "note": "Lean proof by E4 from the cited argument and the specified categorical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left Kan extension of a set-valued presheaf preserves a colimit if each representable in the image preserves that colimit",
+   "results": "8 hits: CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension; CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits; CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension; CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension; CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff; CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff; CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-16",
+   "verdict": "Related Mathlib density and Kan-extension API is used, but no fixed-colimit criterion is stated there."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimit\", \"lan\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "Related Mathlib density and Kan-extension API is used, but no fixed-colimit criterion is stated there."
+  },
+  {
+   "tool": "grep",
+   "query": "lan.*preservesColimit|preservesColimit.*lan|leftKanExtension.*PreservesColimit",
+   "results": "6 hits: Mathlib/CategoryTheory/Limits/Constructions/BinaryProducts.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+   "date": "2026-10-16",
+   "verdict": "Related Mathlib density and Kan-extension API is used, but no fixed-colimit criterion is stated there."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left Kan extension preserves a colimit when the representables defining it preserve that colimit",
+   "results": "8 hits: CategoryTheory.Functor.preservesPointwiseLeftKanExtensionAtOfPreservesColimit; CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits; CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension; CategoryTheory.Functor.lanCompColimIso; CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension; CategoryTheory.Functor.pointwiseLeftKanExtension; CategoryTheory.Functor.PreservesPointwiseLeftKanExtensionAt.mk'; CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv_assoc",
+   "date": "2026-10-16",
+   "verdict": "Related Kan-extension and colimit API is used in the proof; no returned declaration gives the required fixed-colimit criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+   "place": "Categorical density and commutation of colimits applied to the finite-presentation argument of Lemma 5.1.1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LanContinuityFromRepresentables",
+  "file": "lean/Sheaf/CategoryTheory/LanContinuityFromRepresentables.lean",
+  "declaration": "CategoryTheory.lan_preserves_colimit_of_representables",
+  "statement": "theorem lan_preserves_colimit_of_representables\n    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]\n    (B : C ⥤ D) (G : Cᵒᵖ ⥤ Type (u + 1))\n    {J : Type u} [SmallCategory J] (K : J ⥤ Dᵒᵖ) (c : Cocone K) (hc : IsColimit c)\n    (h : ∀ Y, PreservesColimit K (uliftYoneda.{u + 1}.obj (B.obj Y))) :\n    PreservesColimit K (B.op.lan.obj G)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded proof routes, unchanged existing interfaces, clean compilation and permitted axioms."
+ }
+}

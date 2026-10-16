@@ -13,6 +13,8 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 
+import Sheaf.CategoryTheory.LanContinuityFromRepresentables
+
 /-!
 # Sections of the etale to pro-etale comparison inverse image
 
@@ -779,3 +781,197 @@ theorem proEtaleComparisonSectionsSets {X : Scheme.{u}} [IsAffine X]
   exact (Category.assoc _ _ _).trans (setsSectionsIso_leg U (D.obj i) (π.app i) F)
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
+(blueprint: lem-weil-pbc-proetale-comparison-unit-sets).
+
+Proof: Restrict the unit to the dense affine etale subsite. At every affine etale
+object the Kan-extension unit is invertible because the inclusion is fully faithful,
+and the sheafification map is invertible by the affine section formula. Their
+composite is the comparison unit. Restriction to the dense subsite and inclusion
+of sheaves into presheaves both reflect isomorphisms. -/
+theorem proEtaleComparisonUnitSets_isIso (X : Scheme.{u}) :
+    IsIso (proEtaleSiteComparison X).unit := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro F
+  let R := (AffineEtale.Spec X).sheafPushforwardContinuous (Type (u + 1))
+    (AffineEtale.topology X) X.smallEtaleTopology
+  suffices IsIso ((R ⋙ sheafToPresheaf _ (Type (u + 1))).map
+      ((proEtaleSiteComparison X).unit.app F)) from
+    isIso_of_reflects_iso _ (R ⋙ sheafToPresheaf _ (Type (u + 1)))
+  change IsIso ((AffineEtale.Spec X).op.whiskerLeft
+    ((proEtaleSiteComparison X).unit.app F).hom)
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro U
+  have : IsAffine ((AffineEtale.Spec X).obj U.unop).left := by
+    change IsAffine (Spec U.unop.left.unop)
+    infer_instance
+  exact setComparisonUnit_isIso X F ((AffineEtale.Spec X).obj U.unop)
+
+private theorem isIso_app_of_colimits {C J : Type*} [Category* C] [Category* J]
+    {P Q : Cᵒᵖ ⥤ Type (u + 1)} (a : P ⟶ Q) {K : J ⥤ C} (c : Cone K)
+    (hP : IsColimit (P.mapCocone c.op)) (hQ : IsColimit (Q.mapCocone c.op))
+    [∀ i, IsIso (a.app (op (K.obj i)))] : IsIso (a.app (op c.pt)) := by
+  let e : K.op ⋙ P ≅ K.op ⋙ Q := NatIso.ofComponents
+    (fun i ↦ asIso (a.app (op (K.obj i.unop))))
+    (fun f ↦ a.naturality (K.map f.unop).op)
+  let h := (IsColimit.precomposeHomEquiv e (Q.mapCocone c.op)).2 hQ
+  have heq : a.app (op c.pt) = (hP.coconePointUniqueUpToIso h).hom := by
+    apply hP.hom_ext
+    intro i
+    change P.map (c.π.app i.unop).op ≫ a.app (op c.pt) = _
+    simp only [IsColimit.comp_coconePointUniqueUpToIso_hom]
+    exact a.naturality (c.π.app i.unop).op
+  rw [heq]
+  infer_instance
+
+private theorem setLanAffineContinuous (X : Scheme.{u})
+    (G : X.Etaleᵒᵖ ⥤ Type (u + 1)) :
+    PreservesFilteredColimitsOfSize.{u, u}
+      ((AffineProEt.toProEt X).op ⋙ (toProEt X).op.lan.obj G) := by
+  constructor
+  intro J _ _
+  constructor
+  intro K
+  constructor
+  intro c hc
+  let K' := K.leftOp ⋙ AffineProEt.toProEt X
+  let c' := (AffineProEt.toProEt X).mapCone (coneLeftOpOfCocone c)
+  have hc' : IsLimit c' := isLimitOfPreserves _ (isLimitConeLeftOpOfCocone K hc)
+  have hcOver : IsLimit ((ProEt.forget X).mapCone c') :=
+    isLimitOfReflects (CategoryTheory.Over.forget X)
+      (((AffineProEt.isLimitMapConeToSchemeOfIsLimit
+        (coneLeftOpOfCocone c) (isLimitConeLeftOpOfCocone K hc)).ofIsoLimit
+        (Functor.mapConeMapCone (coneLeftOpOfCocone c)).symm).ofIsoLimit
+          (Functor.mapConeMapCone c').symm)
+  have hpres (Y : X.Etale) :
+      PreservesColimit K'.op (uliftYoneda.{u + 1}.obj ((toProEt X).obj Y)) := by
+    have h₁ : ∀ {i j : Jᵒᵖ} (f : i ⟶ j),
+        IsAffineHom (((K' ⋙ ProEt.forget X).map f).left) := fun f ↦
+      inferInstanceAs (IsAffineHom ((K.leftOp.map f).left))
+    have h₂ : ∀ i : Jᵒᵖ, CompactSpace (((K' ⋙ ProEt.forget X).obj i).left) := fun i ↦
+      inferInstanceAs (CompactSpace ((K.leftOp.obj i).left))
+    have h₃ : ∀ i : Jᵒᵖ, QuasiSeparatedSpace (((K' ⋙ ProEt.forget X).obj i).left) := fun i ↦
+      inferInstanceAs (QuasiSeparatedSpace ((K.leftOp.obj i).left))
+    have h₄ : LocallyOfFinitePresentation ((ProEt.forget X).obj ((toProEt X).obj Y)).hom :=
+      inferInstanceAs (LocallyOfFinitePresentation Y.hom)
+    have := Scheme.preservesColimit_yoneda (K' ⋙ ProEt.forget X)
+      ((ProEt.forget X).obj ((toProEt X).obj Y))
+    have hyon : IsColimit
+        ((yoneda.obj ((ProEt.forget X).obj ((toProEt X).obj Y))).mapCocone
+          ((ProEt.forget X).mapCone c').op) := isColimitOfPreserves _ hcOver.op
+    have hy : IsColimit ((yoneda.obj ((toProEt X).obj Y)).mapCocone c'.op) :=
+      IsColimit.mapCoconeEquiv (ProEt.forgetOpCompYonedaIso ((toProEt X).obj Y))
+        (by exact hyon)
+    have : PreservesColimit K'.op (yoneda.obj ((toProEt X).obj Y)) :=
+      preservesColimit_of_preserves_colimit_cocone hc'.op hy
+    change PreservesColimit K'.op (yoneda.obj ((toProEt X).obj Y) ⋙ uliftFunctor.{u + 1})
+    infer_instance
+  have := lan_preserves_colimit_of_representables (toProEt X) G K'.op c'.op hc'.op hpres
+  have hL := isColimitOfPreserves ((toProEt X).op.lan.obj G) hc'.op
+  exact ⟨by exact hL.whiskerEquivalence (opOpEquivalence J).symm⟩
+
+/-- The inverse image of an etale sheaf is continuous on affine ind-etale limits.
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2, with the same finite-presentation
+argument for arbitrary affine ind-etale stages.
+(blueprint: lem-weil-pbc-proetale-classical-continuity-sets).
+
+Proof: Before sheafification the inverse image is a Kan extension. An etale
+scheme is locally of finite presentation, so maps to it from a cofiltered limit
+of affine schemes factor through a stage, with equality also detected at a
+stage. Thus the representables defining the Kan extension preserve the given
+filtered colimit. The density theorem and commutation of colimits imply that
+the Kan extension does too. The affine section formula identifies this Kan
+extension with its sheafification on every affine ind-etale stage and on the
+limit; naturality identifies all restriction maps. -/
+theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
+    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    PreservesFilteredColimitsOfSize.{u, u}
+      ((AffineProEt.toProEt X).op ⋙
+        ((Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
+          (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj G).obj) := by
+  have := setLanAffineContinuous X G.obj
+  constructor
+  intro J _ _
+  constructor
+  intro K
+  constructor
+  intro c hc
+  let K' := K.leftOp ⋙ AffineProEt.toProEt X
+  let c' := (AffineProEt.toProEt X).mapCone (coneLeftOpOfCocone c)
+  have hc' : IsLimit c' :=
+    isLimitOfPreserves _ (isLimitConeLeftOpOfCocone K hc)
+  have hL : IsColimit (((toProEt X).op.lan.obj G.obj).mapCocone c'.op) := by
+    have h := isColimitOfPreserves
+      ((AffineProEt.toProEt X).op ⋙ (toProEt X).op.lan.obj G.obj)
+        (isLimitConeLeftOpOfCocone K hc).op
+    exact h
+  have hStages (j : Jᵒᵖᵒᵖ) : IsIso
+      ((toSheafify (ProEt.topology X) ((toProEt X).op.lan.obj G.obj)).app (op (K'.obj j.unop))) :=
+    setIsIsoToSheafify G _ (K.leftOp.obj j.unop).prop
+  have hPoint : IsIso
+      ((toSheafify (ProEt.topology X) ((toProEt X).op.lan.obj G.obj)).app (op c'.pt)) :=
+    setIsIsoToSheafify G _ c.pt.unop.prop
+  have h := @ProEtale.isColimitMapCoconeOfNatTrans _ _ _ _ _ _ _ _
+    (toSheafify (ProEt.topology X) ((toProEt X).op.lan.obj G.obj)) _ c'.op
+      hStages hPoint hL
+  exact ⟨by exact h.whiskerEquivalence (opOpEquivalence J).symm⟩
+
+/-- The comparison counit is invertible for a sheaf continuous on affine ind-etale
+presentations.
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
+(blueprint: lem-weil-pbc-proetale-continuous-counit-sets).
+
+Proof: Test on the dense affine ind-etale subsite. Present each basis object by
+an etale cofiltered diagram. Both the sheaf and its comparison inverse image carry
+this limit to a colimit. On finite stages the counit is inverse to the comparison
+unit, hence is invertible. The unique map between the two colimits is therefore
+invertible, and its naturality identifies it with the counit at the limit object. -/
+theorem proEtaleComparisonCounitSets_isIso_of_continuous (X : Scheme.{u})
+    (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+    (hF : Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)
+      ((AffineProEt.toProEt X).op ⋙ F.obj)) :
+    IsIso ((proEtaleSiteComparison X).counit.app F) := by
+  have hu := proEtaleComparisonUnitSets_isIso X
+  let L := Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
+    (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)
+  have : L.Full := (proEtaleSiteComparison X).full_L_of_isSplitEpi_unit_app
+  have : L.Faithful := (proEtaleSiteComparison X).faithful_L_of_mono_unit_app
+  let a := ((proEtaleSiteComparison X).counit.app F).hom
+  let R := (AffineProEt.toProEt X).sheafPushforwardContinuous (Type (u + 1))
+    (AffineProEt.topology X) (ProEt.topology X)
+  suffices IsIso ((R ⋙ sheafToPresheaf _ (Type (u + 1))).map
+      ((proEtaleSiteComparison X).counit.app F)) from
+    isIso_of_reflects_iso _ (R ⋙ sheafToPresheaf _ (Type (u + 1)))
+  change IsIso ((AffineProEt.toProEt X).op.whiskerLeft a)
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro U
+  obtain ⟨J, _, _, ⟨p⟩⟩ := U.unop.exists_relativeLimitPresentation
+  let c := (AffineProEt.toProEt X).mapCone p.cone
+  let K := p.diag ⋙ AffineEtale.Spec X
+  let e : p.diag ⋙ AffineEtale.toAffineProEt X ⋙ AffineProEt.toProEt X ≅
+      K ⋙ toProEt X := Functor.isoWhiskerLeft p.diag
+        (AffineEtale.toAffineProEtCompToProEtIso X)
+  let c' : Cone (K ⋙ toProEt X) := (Cone.postcompose e.hom).obj c
+  have hcont := proEtaleComparisonSets_continuous X
+    (((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+      X.smallEtaleTopology (ProEt.topology X)).obj F)
+  have hP := isColimitOfPreserves
+    ((AffineProEt.toProEt X).op ⋙
+      (L.obj (((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).obj F)).obj) p.isLimit.op
+  obtain ⟨hQ⟩ := hF.nonempty_isColimit p.cone p.isLimit
+  have hr : IsIso (((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+      X.smallEtaleTopology (ProEt.topology X)).map
+        ((proEtaleSiteComparison X).counit.app F)) := inferInstance
+  have ha (j : J) : IsIso (a.app (op ((K ⋙ toProEt X).obj j))) := by
+    exact NatIso.isIso_app_of_isIso
+      ((((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).map
+          ((proEtaleSiteComparison X).counit.app F)).hom) (op (K.obj j))
+  exact isIso_app_of_colimits a c' (by exact hP) (by exact hQ)
+
+end AlgebraicGeometry.Scheme

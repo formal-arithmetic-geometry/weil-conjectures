@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-proetale-classical-continuity-sets",
+ "kind": "statement",
+ "title": "Classical sheaves are continuous on all affine ind-etale limits",
+ "statement": "For a scheme X [def-pc-scheme] and an etale sheaf of sets G, the restriction of ν_X^*G [def-weil-pbc-site-comparison-morphism] to the opposite affine ind-etale site [lem-weil-pbc-ind-etale-basis] preserves every u-small filtered colimit, including those whose stages are merely ind-etale.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, finite-presentation argument for the section formula."
+ },
+ "proof": [
+  {
+   "text": "Maps to an etale X-scheme commute with a cofiltered limit of affine ind-etale X-schemes: the target is locally of finite presentation and the source schemes are affine. Apply the Scheme.preservesColimit_yoneda theorem to their limit in Over X.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the representable criterion to the set-valued left Kan extension along Etale X→ProEt X.",
+   "uses": [
+    "lem-weil-pbc-lan-continuity-from-representables"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each affine ind-etale stage and at the limit the section formula identifies this Kan extension with its sheafification. Naturality transports the colimit cocone, with its actual restriction legs, to ν_X^*G.",
+   "uses": [
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-lan-continuity-from-representables"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, finite-presentation argument for the section formula.",
+  "note": "Lean proof by E4 from the cited argument and the specified categorical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors preserving relative cofiltered limits is an isomorphism if it is an isomorphism on the presenting objects",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map; CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.isIso_post; CategoryTheory.Functor.IsEventuallyConstantTo.isoMap; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap; CategoryTheory.instIsIsoPost",
+   "date": "2026-10-16",
+   "verdict": "No comparison continuity theorem in Mathlib. Use its finite-presentation Yoneda theorem and the existing affine sheafification proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesRelativeFilteredColimits\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No comparison continuity theorem in Mathlib. Use its finite-presentation Yoneda theorem and the existing affine sheafification proof."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesRelativeFilteredColimits|isIso_counit_app_iff_mem_essImage",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "No comparison continuity theorem in Mathlib. Use its finite-presentation Yoneda theorem and the existing affine sheafification proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pro etale inverse image of an etale sheaf of sets preserves filtered colimits of affine schemes",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage; AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ; AlgebraicGeometry.instPreservesColimitOverSchemeTopMorphismPropertyOverForget; AlgebraicGeometry.preservesColimit_Γ; CategoryTheory.isSheaf_pointwiseColimit",
+   "date": "2026-10-16",
+   "verdict": "The returned declarations concern general sheaf colimits, Zariski localization, or global sections; none is this affine pro-etale continuity theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+   "place": "Lemmas 5.1.1–5.1.2, finite-presentation argument for the section formula.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleComparisonSets_continuous",
+  "statement": "theorem proEtaleComparisonSets_continuous (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    PreservesFilteredColimitsOfSize.{u, u}\n      ((AffineProEt.toProEt X).op ⋙\n        ((Functor.sheafPullbackConstruction.sheafPullback (toProEt X)\n          (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj G).obj)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded proof routes, unchanged existing interfaces, clean compilation and permitted axioms."
+ }
+}

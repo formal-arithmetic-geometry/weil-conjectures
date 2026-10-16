@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-proetale-comparison-unit-sets",
+ "kind": "statement",
+ "title": "The unit of the comparison for sheaves of sets is invertible",
+ "statement": "For a scheme X and its small-site comparison ν [def-weil-pbc-site-comparison-morphism], the unit G→ν_*ν^*G is an isomorphism for every etale sheaf of Type (u+1)-valued sets; equivalently the unit natural transformation is invertible.",
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, full faithfulness."
+ },
+ "proof": [
+  {
+   "text": "Restrict the comparison unit to the dense affine etale subsite. Its component at an affine etale scheme is the Kan-extension unit followed by the sheafification map, both invertible by the affine section formula.",
+   "uses": [
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Dense restriction and the inclusion of sheaves into presheaves reflect isomorphisms. Hence each unit component, and then the unit natural transformation, is invertible.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1–5.1.2, full faithfulness.",
+  "note": "Lean proof by E4 from the cited argument and the specified categorical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors preserving relative cofiltered limits is an isomorphism if it is an isomorphism on the presenting objects",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map; CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.isIso_post; CategoryTheory.Functor.IsEventuallyConstantTo.isoMap; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap; CategoryTheory.instIsIsoPost",
+   "date": "2026-10-16",
+   "verdict": "No pro-etale theorem in Mathlib. Use dense-subsite reflection and the existing set-valued affine section proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesRelativeFilteredColimits\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No pro-etale theorem in Mathlib. Use dense-subsite reflection and the existing set-valued affine section proof."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesRelativeFilteredColimits|isIso_counit_app_iff_mem_essImage",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "No pro-etale theorem in Mathlib. Use dense-subsite reflection and the existing set-valued affine section proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit from an etale sheaf of sets to restriction of its pro etale inverse image is an isomorphism",
+   "results": "8 hits: CategoryTheory.isIso_toSheafify; CategoryTheory.Equivalence.sheafCongr_unitIso; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; CategoryTheory.Equivalence.sheafCongr.unitIso_inv_app_val_app; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Equivalence.sheafCongr.unitIso_hom_app_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app; CategoryTheory.sheafBotEquivalence_unitIso",
+   "date": "2026-10-16",
+   "verdict": "The hits concern sheafification and other site equivalences, not this pro-etale comparison unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+   "place": "Lemmas 5.1.1–5.1.2, full faithfulness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleComparisonUnitSets_isIso",
+  "statement": "theorem proEtaleComparisonUnitSets_isIso (X : Scheme.{u}) :\n    IsIso (proEtaleSiteComparison X).unit",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3d1c1",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T054834-L-156595",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements, recorded proof routes, unchanged existing interfaces, clean compilation and permitted axioms."
+ }
+}

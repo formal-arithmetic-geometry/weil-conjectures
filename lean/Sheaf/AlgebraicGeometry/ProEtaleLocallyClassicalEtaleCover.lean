@@ -7,13 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.CategoryTheory.Sites.CoversTop.Basic
-import Sheaf.RingTheory.IndPrincipalZariski
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalContinuity
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
 # Locally classical pro-etale sheaves and etale-local sections
@@ -30,7 +26,7 @@ maps with `U.hom`. Covering families use the actual small-site topologies.
 
 universe u
 
-open CategoryTheory Opposite
+open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
@@ -76,6 +72,110 @@ def IsProEtaleLocallyConstant (X : Scheme.{u})
       (((proEtaleSetRestriction X (U i)).obj F) ≅
           (constantSheaf (ProEt.topology (U i).left) (Type (u + 1))).obj S)
 
+private noncomputable def etaleIdentityTerminal (X : Scheme.{u}) :
+    IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
+  IsTerminal.ofUniqueHom
+    (fun U ↦ MorphismProperty.Over.homMk U.hom (Category.comp_id _))
+    (fun U f ↦ MorphismProperty.Over.Hom.ext (by
+      change f.left = U.hom
+      have hw : f.left ≫ 𝟙 X = U.hom := MorphismProperty.Over.w f
+      exact (Category.comp_id _).symm.trans hw))
+
+private noncomputable def proEtaleIdentityTerminal (X : Scheme.{u}) :
+    IsTerminal ((toProEt X).obj (Scheme.Etale.mk (𝟙 X))) :=
+  IsTerminal.ofUniqueHom
+    (fun U ↦ MorphismProperty.Over.homMk U.hom (Category.comp_id _))
+    (fun U f ↦ MorphismProperty.Over.Hom.ext (by
+      change f.left = U.hom
+      have hw : f.left ≫ 𝟙 X = U.hom := MorphismProperty.Over.w f
+      exact (Category.comp_id _).symm.trans hw))
+
+private noncomputable def comparisonConstantIso (X : Scheme.{u}) :
+    constantSheaf X.smallEtaleTopology (Type (u + 1)) ⋙
+      Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
+        (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X) ≅
+      constantSheaf (ProEt.topology X) (Type (u + 1)) :=
+  (((constantSheafAdj X.smallEtaleTopology (Type (u + 1))
+      (etaleIdentityTerminal X)).comp (proEtaleSiteComparison X)).ofNatIsoRight
+      (NatIso.ofComponents (fun _ ↦ Iso.refl _))).leftAdjointUniq
+    (constantSheafAdj (ProEt.topology X) (Type (u + 1)) (proEtaleIdentityTerminal X))
+
+private theorem locallyConstant_locallyClassical (X : Scheme.{u})
+    (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+    (h : IsProEtaleLocallyConstant X F) : IsProEtaleLocallyClassical X F := by
+  obtain ⟨I, U, hU, hF⟩ := h
+  refine ⟨I, U, hU, fun i ↦ ?_⟩
+  obtain ⟨S, ⟨e⟩⟩ := hF i
+  exact ⟨(constantSheaf (U i).left.smallEtaleTopology (Type (u + 1))).obj S,
+    ⟨e ≪≫ ((comparisonConstantIso (U i).left).app S).symm⟩⟩
+
+private theorem epi_of_cover_sections
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    {F H : Sheaf J (Type (u + 1))} (q : F ⟶ H) (hH : IsTerminal H)
+    {I : Type (u + 1)} {U : I → C} (hU : J.CoversTop U)
+    (hF : ∀ i, Nonempty (F.obj.obj (op (U i)))) : Epi q := by
+  have : Presheaf.IsLocallySurjective J q.hom :=
+    Presheaf.isLocallySurjective_of_coversTop hU q.hom (by
+      intro V i a t
+      have : Unique (H.obj.obj (op V)) := Types.isTerminalEquivUnique _
+        (hH.isTerminalObj ((sheafToPresheaf J _) ⋙
+          (CategoryTheory.evaluation Cᵒᵖ (Type (u + 1))).obj (op V)))
+      obtain ⟨s⟩ := hF i
+      exact ⟨F.obj.map a.op s, Subsingleton.elim _ _⟩)
+  have : Sheaf.IsLocallySurjective q := this
+  infer_instance
+
+private theorem etale_cover_sections_of_classical (X : Scheme.{u})
+    (F : Sheaf (ProEt.topology X) (Type (u + 1)))
+    (hF : IsProEtaleClassical X F)
+    (hsec : ∃ (I : Type (u + 1)) (U : I → X.ProEt),
+      (ProEt.topology X).CoversTop U ∧ ∀ i, Nonempty (F.obj.obj (op (U i)))) :
+    ∃ (I : Type (u + 1)) (Y : I → X.Etale),
+      X.smallEtaleTopology.CoversTop Y ∧
+        ∀ i, Nonempty (F.obj.obj (op ((toProEt X).obj (Y i)))) := by
+  obtain ⟨G, ⟨e⟩⟩ := hF
+  obtain ⟨I, U, hU, hs⟩ := hsec
+  let L := Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
+    (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)
+  have hu := proEtaleComparisonUnitSets_isIso X
+  have : L.Faithful := (proEtaleSiteComparison X).faithful_L_of_mono_unit_app
+  let T := Sheaf.terminal X.smallEtaleTopology (Types.isTerminalPUnit :
+    IsTerminal PUnit.{u + 2})
+  let hT := Sheaf.isTerminalTerminal X.smallEtaleTopology Types.isTerminalPUnit
+  let q : G ⟶ T := hT.from G
+  have : PreservesFiniteLimits (constantSheaf X.smallEtaleTopology (Type (u + 1))) := by
+    unfold constantSheaf
+    infer_instance
+  have : PreservesFiniteLimits (constantSheaf (ProEt.topology X) (Type (u + 1))) := by
+    unfold constantSheaf
+    infer_instance
+  have hCE : IsTerminal
+      ((constantSheaf X.smallEtaleTopology (Type (u + 1))).obj PUnit.{u + 2}) :=
+    Types.isTerminalPUnit.isTerminalObj _
+  have hCP : IsTerminal
+      ((constantSheaf (ProEt.topology X) (Type (u + 1))).obj PUnit.{u + 2}) :=
+    Types.isTerminalPUnit.isTerminalObj _
+  have hLT : IsTerminal (L.obj T) := hCP.ofIso
+    (L.mapIso (hT.uniqueUpToIso hCE) ≪≫ (comparisonConstantIso X).app PUnit).symm
+  have hep : Epi (L.map q) := epi_of_cover_sections (ProEt.topology X) (L.map q) hLT hU
+    (fun i ↦ (hs i).map (e.hom.hom.app (op (U i))))
+  have : Epi q := ⟨fun a b hab ↦ by
+    apply L.map_injective
+    apply (cancel_epi (L.map q)).mp
+    simpa only [← L.map_comp] using congrArg L.map hab⟩
+  have hlocal : Presheaf.IsLocallySurjective X.smallEtaleTopology q.hom :=
+    (Sheaf.isLocallySurjective_iff_epi q).mpr inferInstance
+  refine ⟨(Σ W : X.Etale, G.obj.obj (op W)), Sigma.fst, ?_, ?_⟩
+  · intro W
+    apply X.smallEtaleTopology.superset_covering _
+      (Presheaf.imageSieve_mem X.smallEtaleTopology q.hom
+        (show T.obj.obj (op W) from PUnit.unit))
+    rintro V f ⟨s, _⟩
+    exact ⟨⟨V, s⟩, ⟨𝟙 V⟩⟩
+  · intro i
+    exact ⟨e.inv.hom.app (op ((toProEt X).obj i.1))
+      (((proEtaleSiteComparison X).unit.app G).hom.app (op i.1) i.2)⟩
+
 /-- Local classicality implies classicality, including for locally constant sheaves.
 Local inhabitedness of such a sheaf can be witnessed by an etale cover. There is no
 compatibility condition on the local sections, nor a nonemptiness condition on the
@@ -84,33 +184,24 @@ index sets or the constant value sets.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4 and Proposition 6.8.4(6)
 (blueprint: lem-weil-pbc-proetale-locally-classical-etale-cover).
 
-Proof plan:
-1. Over an affine open, `lem-weil-pbc-comparison-sections` identifies the comparison
-   counit on an affine ind-etale presentation with the restriction map from the colimit
-   of the finite-stage sections. The basis in `lem-weil-pbc-ind-etale-basis` detects
-   isomorphisms. The same formula on constant etale presentations makes the unit an
-   isomorphism. Thus this continuity criterion is equivalent to classicality. These
-   tests are Zariski local by `lem-weil-proetale-weakly-etale-localization`.
-2. Refine the local classicality cover by finitely many affine ind-etale basis objects
-   over each affine open. Use `lem-weil-pbc-comparison-pullback` to retain classicality.
-   Write the sheaf equalizers for an ind-etale algebra C and its etale finite stages C_j.
-   The tensor presentations are ind-etale by `lem-weil-pbc-ind-etale-stability`.
-   Classicality on each cover member identifies the middle terms with filtered colimits.
-   For the double intersections, present the second cover algebra by its etale stages
-   and interchange the two filtered colimits. All identifications are restriction maps.
-   Filtered colimits of sets commute with finite products and equalizers: finitely many
-   representatives and equalities can be moved to a common later stage. The equalizers
-   therefore give colim_j F(C_j) = F(C). Step 1 proves classicality locally, hence globally.
-3. A constant sheaf is a coproduct of copies of the terminal sheaf. The inverse image
-   preserves coproducts and the terminal object, so it takes constant etale sheaves to
-   constant pro-etale sheaves. Local constancy therefore implies local classicality;
-   apply step 2.
-4. Write a locally classical F as the inverse image of G. Over each affine open refine
-   a cover with sections by affine ind-etale basis objects. Each section is represented
-   at an etale finite stage by the section formula. The comparison unit takes it to a
-   section of F at that stage. The selected stages cover because each original basis
-   object factors through its selected stage. Take these etale stages over all affine
-   opens. On the empty scheme use the empty covering family. -/
+Proof:
+1. The affine section formula makes the comparison unit invertible. Continuity on
+   affine ind-etale presentations makes the counit invertible, by testing it on the
+   dense affine subsite and comparing the section colimits. Local classicality
+   gives this continuity by the finite-cover equalizer argument isolated in
+   `proEtale_locallyClassical_continuity`. The inverse counit presents F as classical.
+2. Compose the constant-sheaf adjunction on the etale site with the comparison
+   adjunction. Its right adjoint is evaluation at the identity pro-etale object.
+   Uniqueness of left adjoints identifies the two constant-sheaf constructions.
+   Transport each local trivialization and apply the first conclusion.
+3. Write F as the inverse image of G. The given local sections make the map from
+   this inverse image to the inverse image of the terminal etale sheaf an epi.
+   The latter object is terminal by the constant-sheaf comparison. Full faithfulness
+   makes comparison faithful, hence reflects epimorphisms. Thus G maps epimorphically
+   to the terminal etale sheaf. Epimorphisms of sheaves of sets are locally surjective;
+   the family of all etale objects equipped with a section of G therefore covers.
+   The comparison unit transports these sections to F. This argument also handles
+   empty schemes, empty covering families, and empty constant value sets. -/
 theorem proEtale_locallyClassical_etaleCover (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (u + 1))) :
     (IsProEtaleLocallyClassical X F → IsProEtaleClassical X F) ∧
@@ -122,6 +213,16 @@ theorem proEtale_locallyClassical_etaleCover (X : Scheme.{u})
       ∃ (I : Type (u + 1)) (Y : I → X.Etale),
         X.smallEtaleTopology.CoversTop Y ∧
           ∀ i : I, Nonempty (F.obj.obj (op ((toProEt X).obj (Y i))))) := by
-  sorry
+  have hclass : IsProEtaleLocallyClassical X F → IsProEtaleClassical X F := by
+    rintro ⟨I, U, hU, hF⟩
+    have hcont := proEtale_locallyClassical_continuity X F I U hU hF
+    have := proEtaleComparisonCounitSets_isIso_of_continuous X F hcont
+    exact ⟨_, ⟨(asIso ((proEtaleSiteComparison X).counit.app F)).symm⟩⟩
+  refine ⟨hclass, ?_, ?_⟩
+  · intro h
+    have hlocal := locallyConstant_locallyClassical X F h
+    exact ⟨hlocal, hclass hlocal⟩
+  · intro h hsec
+    exact etale_cover_sections_of_classical X F (hclass h) hsec
 
 end AlgebraicGeometry.Scheme
