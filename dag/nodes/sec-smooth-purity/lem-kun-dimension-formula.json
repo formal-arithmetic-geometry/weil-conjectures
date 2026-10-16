@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Write f:X→Spec K for the structure morphism. Finite type includes locally finite type; its defining affine cover over the affine base Spec K supplies an affine open U containing x. Put R=O_X(U). Apply the affine-pairs characterization of locally finite type to U and V=Spec K: R is a finite type K-algebra. The canonical affine identification U≅Spec R sends x to a prime p of R. No separatedness, reducedness or irreducibility hypothesis is used.",
+   "text": "Choose an affine open U containing x using exists_isAffineOpen_mem_and_subset, put R = Γ(X,U), and equip R with the K-algebra structure φ = (f.appLE ⊤ U).hom composed with ΓSpecIso.inv. The affine-pairs criterion Scheme.Hom.finiteType_appLE and the surjectivity of ΓSpecIso.inv make this a finite type K-algebra. Let p = hU.primeIdealOf ⟨x,hx⟩; hU.isoSpec sends x to p. No reducedness or irreducibility hypothesis is needed.",
    "uses": [
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-lft-affine-pairs",
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "The local dimension is unchanged on the open neighbourhood U, so dim_x X=dim_x U. The canonical homeomorphism U≅Spec R identifies open neighbourhoods and their irreducible closed chains bijectively, hence identifies their dimensions and their minima: dim_x X=dim_p(Spec R).",
+   "text": "The affine homeomorphism hU.isoSpec.hom.homeomorph preserves local topological dimension: preimages of open neighbourhoods and their induced embeddings give one inequality between the defining infima; the inverse homeomorphism gives the reverse. IsOpen.topologicalKrullDimAt_eq identifies the dimension at ⟨x,hx⟩ in U with the dimension at x in X. Thus dim_p Spec R = dim_x X.",
    "uses": [
     "lem-weil-pbc-dimension-at-point-open-subspace",
     "lem-weil-pbc-affine-open-spec-points"
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "Apply the finite type algebra formula with k=K, S=R and the prime p: dim_p(Spec R)=dim(R_p)+trdeg_K κ(p). Its hypotheses hold by step 1; the statement allows arbitrary finite type algebras, so it applies also when R is reducible or nonreduced.",
+   "text": "Apply AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg to the finite type K-algebra R and the prime p.asIdeal. It supplies natural numbers d and r with dim(R_p)=d, trdeg_K κ(p)=r, and dim_p Spec R=d+r.",
    "uses": [
     "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
    ],
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "The affine-open stalk localization gives R_p≅O_{X,x}, by r/s↦r_x s_x^{-1}. This map is K-linear: for a∈K it sends (a·1)/1 to the germ of the constant section a, which is the structure map K→O_{X,x}. A ring isomorphism sends units to units, hence sends the unique maximal ideal of one local ring onto that of the other. Quotienting therefore gives a K-isomorphism κ(p)≅κ(x). Prime ideal chains correspond under the ring isomorphism, so dim(R_p)=dim O_{X,x}; algebraically independent subsets correspond under the K-isomorphism, so the transcendence degrees agree. Substituting both equalities and step 2 into step 3 proves precisely the asserted formula.",
+   "text": "Use hU.isLocalization_stalk and IsLocalization.algEquiv to construct the R-algebra isomorphism e:R_p≃O_(X,x). IsLocalRing.ResidueField.mapEquiv gives an isomorphism er:κ(p)≃κ(x). Naturality of residues, Scheme.Hom.germ_stalkMap, and germ_res identify the canonical map K→κ(x) with ΓSpecIso.inv followed by f.appLE ⊤ U, the germ, and the residue. Since e commutes with R, er therefore commutes with K; AlgEquiv.ofRingEquiv makes this explicit. ringKrullDim_eq_of_ringEquiv and ek.trdeg_eq transport the two invariants. Cardinal.toENat converts the finite cardinal r to the natural r, and Nat.cast_add finishes the unchanged formula.",
    "uses": [
     "lem-weil-pbc-affine-open-stalk-localization",
     "def-weil-residue-field",
@@ -90,9 +90,9 @@
   "def-kun-transcendence-degree"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDimensionFormula.lean",
+  "place": "B4 second reading: actual affine reduction following Stacks Tags 02FX and 00P1; all invariant transports are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -207,5 +207,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T003158-L-3926538",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

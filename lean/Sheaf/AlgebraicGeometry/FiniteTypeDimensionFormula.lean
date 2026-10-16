@@ -60,6 +60,73 @@ theorem topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg
     [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (x : X) :
     topologicalKrullDimAt x = ringKrullDim (X.presheaf.stalk x) +
       (Cardinal.toENat (@Algebra.trdeg K (X.residueField x) _ _
-        ((X ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra) : WithBot ℕ∞) := sorry
+        ((X ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra) : WithBot ℕ∞) := by
+  classical
+  let f := X ↘ Spec (.of K)
+  obtain ⟨U, hU, hx, _⟩ := exists_isAffineOpen_mem_and_subset
+    (show x ∈ (⊤ : X.Opens) from trivial)
+  let R := Γ(X, U)
+  let φ : K →+* R := (f.appLE ⊤ U (by simp)).hom.comp
+    (Scheme.ΓSpecIso (.of K)).inv.hom
+  let : Algebra K R := φ.toAlgebra
+  have : Algebra.FiniteType K R :=
+    (f.finiteType_appLE (isAffineOpen_top _) hU (by simp)).comp
+      (RingHom.FiniteType.of_surjective _
+        (Scheme.ΓSpecIso (.of K)).symm.commRingCatIsoToRingEquiv.surjective)
+  let p := hU.primeIdealOf ⟨x, hx⟩
+  let : Algebra R (X.presheaf.stalk x) :=
+    TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x, hx⟩
+  have : IsLocalization.AtPrime (X.presheaf.stalk x) p.asIdeal :=
+    hU.isLocalization_stalk ⟨x, hx⟩
+  let e := IsLocalization.algEquiv p.asIdeal.primeCompl
+    (Localization.AtPrime p.asIdeal) (X.presheaf.stalk x)
+  let er : p.asIdeal.ResidueField ≃+* X.residueField x :=
+    IsLocalRing.ResidueField.mapEquiv e.toRingEquiv
+  let : Algebra K (X.residueField x) := (f.residueFieldAlgebraMap x).toAlgebra
+  have hcanonical : CommRingCat.ofHom (f.residueFieldAlgebraMap x) =
+      (Scheme.ΓSpecIso (.of K)).inv ≫ f.appLE ⊤ U (by simp) ≫
+        X.presheaf.germ U x hx ≫ X.residue x := by
+    change CommRingCat.ofHom (algebraMap (CommRingCat.of K)
+        (f.base x).asIdeal.ResidueField) ≫
+      (Scheme.Spec.residueFieldIso (.of K) (f.base x)).inv ≫ f.residueFieldMap x = _
+    rw [Scheme.Spec.algebraMap_residueFieldIso_inv_assoc, Scheme.residue_residueFieldMap,
+      Scheme.Hom.germ_stalkMap_assoc]
+    simp only [Scheme.Hom.appLE, Category.assoc, TopCat.Presheaf.germ_res_assoc]
+  let ek : p.asIdeal.ResidueField ≃ₐ[K] X.residueField x :=
+    AlgEquiv.ofRingEquiv (f := er) fun c ↦ by
+      rw [IsScalarTower.algebraMap_apply K R p.asIdeal.ResidueField,
+        IsScalarTower.algebraMap_apply R (Localization.AtPrime p.asIdeal),
+        IsLocalRing.ResidueField.algebraMap_eq]
+      change IsLocalRing.residue _ (e (algebraMap R _ (algebraMap K R c))) = _
+      rw [e.commutes]
+      exact (ConcreteCategory.congr_hom hcanonical c).symm
+  obtain ⟨d, r, hd, hr, ht⟩ := topologicalKrullDimAt_eq_ringKrullDim_add_trdeg
+    (k := K) p.asIdeal
+  have hdim : ringKrullDim (X.presheaf.stalk x) = (d : WithBot ℕ∞) :=
+    (ringKrullDim_eq_of_ringEquiv e.toRingEquiv).symm.trans hd
+  have htrdeg : Cardinal.toENat (Algebra.trdeg K (X.residueField x)) = (r : ℕ∞) := by
+    rw [← ek.trdeg_eq, hr]
+    simp
+  have htop : topologicalKrullDimAt (p : Spec (.of R)) = topologicalKrullDimAt x := by
+    have hle {A B : Type u} [TopologicalSpace A] [TopologicalSpace B]
+        (e : A ≃ₜ B) (a : A) : topologicalKrullDimAt a ≤ topologicalKrullDimAt (e a) := by
+      refine le_iInf₂ fun V ha ↦ ?_
+      let W : TopologicalSpace.Opens A := ⟨e ⁻¹' V, V.isOpen.preimage e.continuous⟩
+      refine (iInf₂_le W ha).trans ?_
+      refine Topology.IsInducing.topologicalKrullDim_le
+        (f := fun q : W ↦ (⟨e q.1, q.2⟩ : V))
+        (.of_comp (g := Subtype.val) (by fun_prop) ?_ ?_)
+      · exact continuous_subtype_val
+      · exact e.isInducing.comp Topology.IsInducing.subtypeVal
+    let e : U ≃ₜ Spec (.of R) := hU.isoSpec.hom.homeomorph
+    have he : topologicalKrullDimAt (⟨x, hx⟩ : U) =
+        topologicalKrullDimAt (p : Spec (.of R)) :=
+      le_antisymm (hle e ⟨x, hx⟩) (by
+        have h := hle e.symm (e ⟨x, hx⟩)
+        rw [e.symm_apply_apply] at h
+        exact h)
+    exact he.symm.trans (U.isOpen.topologicalKrullDimAt_eq hx)
+  rw [← htop, hdim, htrdeg]
+  simpa [Nat.cast_add] using ht
 
 end AlgebraicGeometry

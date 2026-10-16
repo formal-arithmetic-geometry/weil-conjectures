@@ -15309,3 +15309,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: returned deliver/C4/Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound (reviewer RETURN: (the landing tools, head 3942087a9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:31 L: returned deliver/E4/Sheaf.Paper.FiniteHypercoverDescentParts (reviewer RETURN: (the landing tools, head b02a3cf9c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 00:31 L: merged deliver/A2/Sheaf.Paper.ContinuousConstructibleIntegralModel (stage 3; reviewer PASS; first push; landing 20261016T003157-L-3926386 (interface); batch 20261016T003156; modules 3; new nodes 2)
+- 00:31 L: merged deliver/B4/Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula (stage 3; reviewer PASS; first push; landing 20261016T003158-L-3926538 (proof); batch 20261016T003156; modules 1; new nodes 0)
