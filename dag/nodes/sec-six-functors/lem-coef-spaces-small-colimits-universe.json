@@ -29,9 +29,101 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathsf{Kan}_{\\mathcal W}$ be the simplicial category of $\\mathcal W$-small Kan complexes, so that $\\mathcal S_{\\mathcal W}=N_{\\mathrm{hc}}\\mathsf{Kan}_{\\mathcal W}$. The inclusion on objects and simplicial maps is an enriched functor: for small $X,Y$, its mapping complex in either universe has exactly the simplicial maps $X\\times\\Delta^n\\to Y$ in degree $n$, with the same operators and composition. Applying the coherent nerve gives $\\iota$. By [lem-coef-coherent-nerve-comparison] these complexes naturally represent the two infinity-categorical mapping spaces and the comparison respects enriched functors. Thus $\\iota$ is fully faithful. In fact its coherent nerve is a full simplicial subset: an $n$-simplex is an enriched functor from $\\mathfrak C[\\Delta^n]$, and when its objects are small all its mapping data already lie in $\\mathsf{Kan}_{\\mathcal U}$. Everything is formed in a further auxiliary universe; this does not change these mapping complexes.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5 (coherent nerve); Theorem 2.2.0.1 (mapping-space comparison)."
+   }
+  },
+  {
+   "text": "Check classification across universes by its actual construction, for any $\\mathcal U$-small simplicial set $A$; no quasicategory hypothesis on $A$ is needed. Use the normalized classification by enriched evaluation and derived unstraightening specified in [lem-coef-universal-left-fibration-identity], with the right-fibration version given by [lem-coef-simplicial-right-fibration-presentation]. By [lem-coef-enriched-diagram-rectification], take a projectively cofibrant-fibrant strict diagram $P:\\mathfrak C[A]^{\\mathrm{op}}\\to\\mathsf{sSet}_{\\mathcal U}$ presenting $F:A^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal U}$ (use $\\mathfrak C[A^{\\mathrm{op}}]\\cong\\mathfrak C[A]^{\\mathrm{op}}$). Unstraightening has simplices over $\\sigma:\\Delta^n\\to A$ equal to enriched natural maps $T_\\sigma\\to P$, where $T_\\sigma$ is the cone-pushout diagram in the presentation node. Both $T_\\sigma$ and $P$ are small. A natural map here is a family of functions between the same sets satisfying the same action equations; enlarging the universe adds no such functions. The cone pushout is likewise unchanged: its morphisms are finite composable words in the input morphisms modulo the relations identifying the common subcategory, degree by degree. Hence $U_A(P)$, its projection, its simplex operators, and its action on strict diagram maps are the same in both universes. Objectwise Kan fibrancy also persists, since each horn-filler problem is a problem between the same finite simplicial sets and $P(a)$. If a projective cofibrant replacement $P'\\to P$ is needed in the larger universe, it is an objectwise weak equivalence between objectwise Kan diagrams. The presentation node makes $U_A(P')\\to U_A(P)$ an equivalence of right fibrations. Enriched evaluation presents $P$ there by precisely $\\iota F$, since its values, action maps and evaluation simplices have not changed; the replacement evaluates to a vertexwise equivalence and hence to a coherent equivalence by [lem-cbc-enhanced-functor-cone-calculus]. Thus the same $U_A(P)$ classifies $\\iota F$. By [lem-coef-space-transport-classification], an arbitrary representative $E\\to A$ of $F$ is equivalent over $A$ to $U_A(P)$. The inverse over-map and its two simplicial homotopies remain the same maps in the larger universe, so $E$ also classifies $\\iota F$. All comparisons come from the same enriched evaluation, unstraightening and over-map compositions; inserting a parameter simplex gives the same comparison for every higher simplex. They therefore commute with the mapping-space identifications for two small representatives, not merely with their vertex fibers. For the covariant case, rectify a diagram $p:A\\to\\mathcal S_{\\mathcal U}$ by a projectively cofibrant-fibrant $Q:\\mathfrak C[A]\\to\\mathsf{sSet}_{\\mathcal U}$. Its normalized classifying left fibration is $U^{\\mathrm{cov}}_A Q=(U_{A^{\\mathrm{op}}}Q)^{\\mathrm{op}}$. The cone and natural-map formulas just checked, now on the base $A^{\\mathrm{op}}$, give the same $U_{A^{\\mathrm{op}}}Q$ in both universes. Taking opposite simplicial sets changes only the indices of face and degeneracy maps, so the resulting left fibration is unchanged too. In the larger universe, a projective cofibrant-fibrant replacement $Q\\prime\\to Q$ evaluates to a vertexwise equivalence with $\\iota p$; the covariant preservation-of-objectwise-equivalences clause of the presentation node identifies its unstraightening with this unchanged left fibration. By the normalization in the universal-left-fibration node it therefore classifies $\\iota p$. For an arbitrary small representative, the over-maps and homotopies witnessing its equivalence to this model remain over-maps and homotopies in the larger universe. The mapping comparison is the right-derived comparison induced by enriched evaluation and unstraightening, followed by composition with these equivalences. Each small parameterized over-map $E\\times\\Delta^n\\to E\\prime$ is the same family of functions in both universes, and both precomposition and postcomposition are the same functions. Consequently the comparisons commute on mapping spaces, including the comparisons with constant products $A\\times X$. In particular they take the transformation represented by a small over-map $E\\to A\\times X$ to the transformation represented by that very over-map in the larger universe. This verifies the cocone compatibility used below without asserting that taking opposites is a simplicial enriched functor.",
+   "uses": [
+    "lem-coef-universal-left-fibration-identity",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 2.2.1-2.2.3: cone-pushout straightening, its right adjoint and Theorem 2.2.1.2; Proposition 4.2.4.4: enriched-evaluation rectification. The explicit size comparison is supplied here."
+   }
+  },
+  {
+   "text": "Let $K$ be a $\\mathcal U$-small simplicial set and $p:K\\to\\mathcal S_{\\mathcal U}$ a coherent diagram. By [lem-coef-space-transport-classification], choose a $\\mathcal U$-small left fibration $q:E\\to K$ classifying $p$. Put $L=\\operatorname{Ex}^{\\infty}E$ and let $j:E\\to L$ be its unit. By [lem-coef-ex-infinity-finite-products], $L$ is Kan and $j$ is a weak homotopy equivalence. It is small: each $\\operatorname{Ex}$ degree is a set of maps from a finite subdivision simplex into the preceding small simplicial set, and the sequential colimit is a quotient of a countable union of small sets. The over-map $(q,j):E\\to K\\times L$, together with the constant-functor and mapping-space clauses of transport classification, gives a coherent cocone $\\alpha:p\\to\\Delta_K L$. This defines the actual cocone rather than only choosing an apex.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.4.6 (the total left fibration models the colimit), with its cocone constructed using the classification of Section 2.2.1; Kan replacement is the cited explicit Ex-infinity construction."
+   }
+  },
+  {
+   "text": "For a small Kan test space $Y$, the preceding cocone induces the composite\n$$\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(L,Y)\\simeq\\operatorname{Fun}(L,Y)\\xrightarrow{j^*}\\operatorname{Fun}(E,Y)\\cong\\operatorname{Fun}_{/K}(E,K\\times Y)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal S_{\\mathcal U})}(p,\\Delta_KY).$$\nThe first equivalence is [lem-coef-coherent-nerve-comparison]. The second arrow is an equivalence by [lem-cbc-kan-mapping-homotopy-invariance], applied to the weak homotopy equivalence $j$; this node explicitly allows a non-Kan $E$. The middle isomorphism sends $h$ to $(q,h)$, including on every parameter simplex. The final equivalence is the mapping-space and constant-functor clauses of [lem-coef-space-transport-classification]. Its compatibility with composition identifies this whole composite with precomposition by $\\alpha$: a map $f:L\\to Y$ goes to $(q,fj)$, the composite of $(q,j)$ with $1_K\\times f$. Therefore the dual cone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\alpha$ is colimiting. If $K$ is empty, so is $E$ and its Ex-infinity replacement, and all the displayed mapping spaces are terminal. This proves existence also for the empty diagram.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.4.3 (cocone mapping-space criterion); Corollary 3.3.4.6 (total-space description), with the comparison map written out."
+   }
+  },
+  {
+   "text": "Now let $Y$ be any $\\mathcal U'$-small Kan complex, with no $\\mathcal U$-smallness restriction. Step 2 says the unchanged $q:E\\to K$ classifies $\\iota p$, and $(q,j)$ represents $\\iota\\alpha$, compatibly with mapping spaces and constant products. The construction $\\operatorname{Ex}^{\\infty}E$ is unchanged in the larger universe: in each degree its stages are the same sets of maps from subdivision simplices, and its sequential colimit is the same quotient of their disjoint union. Thus $j$ is also the Ex-infinity unit computed in $\\mathcal U'$, and [lem-coef-ex-infinity-finite-products] says there that $j$ is a weak homotopy equivalence. We have the chain\n$$\\operatorname{Map}_{\\mathcal S_{\\mathcal U'}}(\\iota L,Y)\\simeq\\operatorname{Fun}(L,Y)\\xrightarrow{j^*}\\operatorname{Fun}(E,Y)\\cong\\operatorname{Fun}_{/K}(E,K\\times Y)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal S_{\\mathcal U'})}(\\iota p,\\Delta_KY).$$\nThe first comparison is [lem-coef-coherent-nerve-comparison]. The arrow $j^*$ is an equivalence by [lem-cbc-kan-mapping-homotopy-invariance], whose hypotheses allow arbitrary simplicial $E$ and this larger Kan target $Y$. The middle isomorphism sends a parameterized map $h:E\\times\\Delta^n\\to Y$ to $(q\\circ\\operatorname{pr}_E,h)$. The last equivalence is [lem-coef-space-transport-classification] in $\\mathcal U'$. On a parameterized map $f:L\\times\\Delta^n\\to Y$ the composite is the over-map $(q\\circ\\operatorname{pr}_E,f\\circ(j\\times\\operatorname{id}_{\\Delta^n}))$. Compatibility of classification with composition therefore identifies it with precomposition by $\\iota\\alpha$. The dual criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\iota\\alpha$ is a colimit cocone, since this induced map is an equivalence for every larger test space $Y$.",
+   "uses": [
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.4.3 and the total-space construction of Corollary 3.3.4.6, now tested against larger Kan complexes; universe comparison from step 2."
+   }
+  },
+  {
+   "text": "Finally take any colimit cocone $\\lambda:p\\to\\Delta_K L_0$ in the statement. By the dual initial-object and cocone criteria of [lem-cbc-enhanced-functor-cone-calculus], $\\alpha$ and $\\lambda$ are initial objects of the same cocone quasicategory. There are maps of cocones in both directions; each composite is homotopic to the corresponding identity because its mapping space out of an initial object is contractible. Their apex maps give an equivalence $e:L\\simeq L_0$ with the specified homotopy $e\\alpha\\simeq\\lambda$. Applying $\\iota$ preserves these inverse maps and homotopies. For every larger test $Y$, precomposition by $\\iota e$ identifies the universal-arrow map for $\\iota\\lambda$ with the universal-arrow map for $\\iota\\alpha$ of step 5. The former is consequently an equivalence, so $\\iota\\lambda$ is colimiting by the same criterion. This proves preservation for the given cocone, not only for the chosen model.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.4.3; uniqueness of initial objects in the cocone category. This last step is the written-out inverse-and-homotopy argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-space-transport-classification",
+  "lem-coef-universal-left-fibration-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Sections 2.2.1-2.2.3, Proposition 4.2.4.4, Lemma 4.2.4.3, Corollaries 3.3.4.6 and 4.2.4.8; online source read, explicit universe comparison and total-space mapping proof supplied by Q10."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -130,10 +222,115 @@
    "results": "none (zero hits)",
    "date": "2026-10-17",
    "verdict": "no match: maintainer reader's search for the added right-fibration universe-compatibility clause; Mathlib has no left or right fibrations or straightening, so neither that clause nor the node is in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*colimit|homotopyColimit|ulift.*colimit",
+   "results": "{\"t\": \"2026-10-16T20:05:30Z\", \"tool\": \"grep\", \"query\": \"homotopy.*colimit|homotopyColimit|ulift.*colimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, colimit",
+   "results": "{\"t\": \"2026-10-16T20:05:31Z\", \"tool\": \"loogle\", \"query\": \"SSet, colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'colimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query was rejected by Loogle (unknown identifier colimit); rerun with quoted substrings succeeded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small spaces admits all small colimits and inclusion into spaces of a larger universe preserves them",
+   "results": "{\"t\": \"2026-10-16T20:05:39Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of small spaces admits all small colimits and inclusion into spaces of a larger universe preserves them\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.topCat_hasColimitsOfSize\", \"TopCat.forget_preservesColimitsOfSize\", \"SSet.hasColimits\", \"TopCat.topCat_hasColimitsOfShape\", \"CategoryTheory.Limits.Types.hasColimitsOfShape\", \"TopCat.topCat_hasColimits\", \"TopCat.forget_preservesColimits\", \"CategoryTheory.Limits.Types.hasColimit\"], \"digest\": \"57f990ea63379d0d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|RightFibration|LeftFibration|rightFibration|leftFibration",
+   "results": "{\"t\": \"2026-10-16T20:07:07Z\", \"tool\": \"grep\", \"query\": \"straighten|unstraighten|RightFibration|LeftFibration|rightFibration|leftFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small coherent diagrams of Kan spaces have homotopy colimits preserved by universe enlargement",
+   "results": "{\"t\": \"2026-10-16T20:07:07Z\", \"tool\": \"leansearch\", \"query\": \"Small coherent diagrams of Kan spaces have homotopy colimits preserved by universe enlargement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.instPreservesColimitsOfSizeUliftFunctor\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Limits.hasColimitsOfSizeOfUnivLE\", \"CategoryTheory.Limits.preservesColimitsOfSize_of_univLE\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.preservesColimitsOfSize_shrink\", \"CategoryTheory.Limits.Types.instPreservesLimitsOfSizeUliftFunctor\"], \"digest\": \"1292368a4b084bfb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:07:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.instPreservesColimitsOfShapeToSSetFunctorOfIsFilteredOrEmpty\", \"SSet.relativeCellComplexOfMono_attachCells_isColimit₂\", \"SSet.relativeCellComplexOfMono_attachCells_isColimit₁\", \"SSet.relativeCellComplexOfMono_isColimit\", \"SSet.finite_of_isColimit\"], \"digest\": \"01a745f501b1d3b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Straightening of small right fibrations commutes with change of universe and homotopy colimits of spaces",
+   "results": "{\"t\": \"2026-10-16T20:07:08Z\", \"tool\": \"leanfinder\", \"query\": \"Straightening of small right fibrations commutes with change of universe and homotopy colimits of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\"], \"digest\": \"251d7c930083f3df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "grep",
+   "query": "instPreservesColimitsOfSizeUliftFunctor|instance|theorem",
+   "results": "{\"t\": \"2026-10-16T20:10:13Z\", \"tool\": \"grep\", \"query\": \"instPreservesColimitsOfSizeUliftFunctor|instance|theorem\", \"sub\": \"CategoryTheory/Limits/Preserves/Ulift.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"45\", \"58\", \"67\", \"79\"], \"digest\": \"7682b8af01cda563\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "grep",
+   "query": "uliftFunctor|hasColimits",
+   "results": "{\"t\": \"2026-10-16T20:10:14Z\", \"tool\": \"grep\", \"query\": \"uliftFunctor|hasColimits\", \"sub\": \"AlgebraicTopology/SimplicialSet/Basic.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"73\", \"74\", \"88\", \"89\"], \"digest\": \"d00fcab90989de67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit",
+   "results": "{\"t\": \"2026-10-16T20:10:14Z\", \"tool\": \"grep\", \"query\": \"isColimit\", \"sub\": \"AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"53\", \"54\", \"60\", \"61\", \"69\"], \"digest\": \"18f3accf6983b6f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. TopCat, Type and SSet colimits and the Type ulift-preservation instance concern ordinary categories; SubcomplexColimits.lean:53-69 is an ordinary multicofork. SimplicialSet/Basic.lean:73-74 only defines degreewise ulift; Limits/Preserves/Ulift.lean:67 is ordinary Type colimit preservation. No hit asserts coherent homotopy colimits, one-sided straightening or the universe comparison here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocompleteness of the quasicategory of infinity groupoids with universe embeddings preserving colimits",
+   "results": "{\"t\": \"2026-10-16T20:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"Cocompleteness of the quasicategory of infinity groupoids with universe embeddings preserving colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"DeltaGenerated.hasColimits\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.Cat.instHasColimits\", \"SSet.hasLimits\", \"SSet.QCat\", \"SSet.largeCategory\", \"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"42a8f4ca26bdb768\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; read the returned SSet.uliftFunctor at SimplicialSet/Basic.lean:73-74, which is degreewise universe lifting, and Quasicategory/Basic.lean:38-65, which defines inner-horn filling. The returned HasColimits instances are ordinary categorical colimits, and Kan-implies-quasicategory is not cocompleteness of the quasicategory of spaces. The corrected AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory.*colimit|homotopy.*colimit|unstraighten",
+   "results": "{\"t\": \"2026-10-16T20:22:54Z\", \"tool\": \"grep\", \"query\": \"quasicategory.*colimit|homotopy.*colimit|unstraighten\", \"sub\": \"--sub\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: incorrect positional subdirectory --sub; the zero hits do not establish absence. Reran against AlgebraicTopology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"ulift\"",
+   "results": "{\"t\": \"2026-10-16T20:23:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"ulift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.uliftFunctor\", \"SSet.Truncated.uliftFunctor\"], \"digest\": \"fa95222606966e07\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; read the returned SSet.uliftFunctor at SimplicialSet/Basic.lean:73-74, which is degreewise universe lifting, and Quasicategory/Basic.lean:38-65, which defines inner-horn filling. The returned HasColimits instances are ordinary categorical colimits, and Kan-implies-quasicategory is not cocompleteness of the quasicategory of spaces. The corrected AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasicategory of Kan complexes has colimits for every small simplicial indexing shape",
+   "results": "{\"t\": \"2026-10-16T20:23:55Z\", \"tool\": \"leansearch\", \"query\": \"The quasicategory of Kan complexes has colimits for every small simplicial indexing shape\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"SSet.Quasicategory\", \"CategoryTheory.Limits.HasColimitsOfSize.recOn\", \"CategoryTheory.Limits.HasColimitsOfSize\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.Limits.hasColimitsOfShapeOfHasColimitsOfSize\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\"], \"digest\": \"4e138ea4f45fd4b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; read the returned SSet.uliftFunctor at SimplicialSet/Basic.lean:73-74, which is degreewise universe lifting, and Quasicategory/Basic.lean:38-65, which defines inner-horn filling. The returned HasColimits instances are ordinary categorical colimits, and Kan-implies-quasicategory is not cocompleteness of the quasicategory of spaces. The corrected AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory.*colimit|homotopy.*colimit|unstraighten",
+   "results": "{\"t\": \"2026-10-16T20:24:23Z\", \"tool\": \"grep\", \"query\": \"quasicategory.*colimit|homotopy.*colimit|unstraighten\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; read the returned SSet.uliftFunctor at SimplicialSet/Basic.lean:73-74, which is degreewise universe lifting, and Quasicategory/Basic.lean:38-65, which defines inner-horn filling. The returned HasColimits instances are ordinary categorical colimits, and Kan-implies-quasicategory is not cocompleteness of the quasicategory of spaces. The corrected AlgebraicTopology grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-presheaf-free-cocompletion",
@@ -141,5 +338,34 @@
   "group": "Q08"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spaces-small-colimits-universe",
+  "worker": "stage1",
+  "summary": "Proved all clauses without adding nodes: coherent full faithfulness by unchanged enriched mapping sets; universe compatibility via the actual unstraightening formulas and replacement comparison; small colimits by Ex-infinity of a classifying left fibration, including the cocone and larger-test-space universal property; arbitrary cocones by initial-object uniqueness. Searched source Lean and Mathlib, checked every cited statement and the empty shape; statement unchanged. Second reader expanded the covariant comparison and larger-universe universal-property calculation; re-applied the Ex-infinity theorem in the larger universe.",
+  "blueprint": "Realizes the foundational space-valued cocompletion used in paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction before the derived inverse limit, through the existing enriched enhancement chain. The ancestor has no separate space-colimit step; this is a node-level foundational argument below that unit, preserving its route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone universal-arrow criterion, vertexwise equivalence test and uniqueness of initial objects; the unit has no replacement for this simplicial foundation."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Generic mapping-complex invariance for a weak equivalence of arbitrary simplicial sets and a Kan target in a containing universe; needed for E to Ex-infinity E, and no node of this unit states that general test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-b8660a18d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-b8660a18d (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statements of all 10 cited nodes, plus the parent free-cocompletion (steps 0, 2 and 6 use the item). The statement is unchanged from the live unsplit copy; only the proof-related fields changed. There are no new nodes and no cycle (238-node walk). Statement: small colimits in S_U (HTT Cor 4.2.4.8 applied to the Kan model structure), coherent full faithfulness of the universe inclusion, preservation of small colimit cocones, and universe compatibility of right-fibration classification. All are true; checked on these cases: K empty (empty E and Ex^inf), point, discrete K, constant point over N(G) giving BG, right fibrations over Delta^0 and Delta^1, empty fibers. Step 1 uses coherent-nerve-comparison for locally Kan Kan_U and Kan_U' with an identical mapping complex. Step 2 checks the unstraightening cone formula, objectwise equivalences, the covariant opposite construction, rectification with u the isomorphism C[A^op]=C[A]^op, the normalization in universal-left-fibration-identity, and transport equivalence of representatives; size invariance is argued correctly and replacement is handled. Steps 3-5 cover small Kan Ex^inf E, the actual cocone (q,j), the j^* equivalence via kan-mapping-homotopy-invariance (no Kan condition on E, larger universe allowed) and the transport mapping and constant clauses. I read the constant-functor correspondence as natural in the value, so Delta_K f corresponds to 1 x f, and accept that. Step 6 (marked elementary) uses uniqueness of initial cocones from cone-calculus; the label is justified. Two tool_uses (lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-mapping-homotopy-invariance) are generic sk-prop-sf-cbc tools with precedent in this unit; I accept them. The Mathlib searches cover all three kinds, and the verdict is no match. HTT is not archived; the places I checked against my knowledge of HTT match (Thm 4.2.4.1, Lemma 4.2.4.3, Cor 3.3.4.6, Cor 4.2.4.8), and proof_origin is agent. No SGA source is used. The unsplit lem-coef-simplicial-model-coherent-diagrams overlaps clause 1 only and is not a duplicate. No changes."
+ }
 }
