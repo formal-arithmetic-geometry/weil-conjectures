@@ -17,8 +17,8 @@
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks` | 9 | 1 | proof |
-| `Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFieldCoefficientSquare` | 10 | 1 | proof |
+| `Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
