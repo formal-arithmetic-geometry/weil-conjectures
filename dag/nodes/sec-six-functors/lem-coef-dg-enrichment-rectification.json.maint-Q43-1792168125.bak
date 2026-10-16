@@ -1,0 +1,200 @@
+{
+ "id": "lem-coef-dg-enrichment-rectification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, coherent finite coefficient adjunction before R lim: interpretation of relative dg categories in the derived enrichment used by the construction.",
+   "via": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Dg categories present derived-chain-enriched infinity categories",
+ "statement": "Let $\\mathrm{dgCat}_{\\mathbf Z}$ be the category of small differential graded categories over $\\mathbf Z$. Such a category $\\mathcal A$ has a set of objects, cochain complexes $\\mathcal A(x,y)$ of abelian groups, chain-map compositions $\\mathcal A(y,z)\\otimes\\mathcal A(x,y)\\to\\mathcal A(x,z)$ which are associative, and closed degree-zero identities which are units. Cochains and quasi-isomorphisms use [def-weil-abstract-derived-category]. A quasi-equivalence is a dg functor inducing quasi-isomorphisms on all mapping complexes and an essentially surjective functor on $H^0$, whose morphisms are $H^0\\mathcal A(x,y)$. Let $\\mathbf D(\\mathbf Z)$ denote the enhanced localization of complexes at quasi-isomorphisms with derived tensor. Derived enrichment induces an equivalence of infinity categories\n$$\\mathrm{dgCat}_{\\mathbf Z}[\\mathrm{quasi\\!\\!\\;equivalences}^{-1}]_\\infty\\simeq\\operatorname{Cat}_{\\mathbf D(\\mathbf Z)}.$$\nHere $\\operatorname{Cat}_{\\mathbf D(\\mathbf Z)}$ consists of categories with mapping objects in $\\mathbf D(\\mathbf Z)$ and coherently associative unital composition; equivalences are fully faithful and essentially surjective enriched functors. Derived enrichment sends $\\mathcal A(x,y)$ to its class in $\\mathbf D(\\mathbf Z)$ and a closed degree-zero arrow to its underlying arrow; the homotopy category of its underlying infinity category has morphisms $H^0\\mathcal A(x,y)$. This construction is functorial in dg functors. The displayed localization is the homotopy coherent localization at quasi-equivalences, not localization at Morita equivalences, and does not identify ordinary homotopy-category natural transformations with coherent enriched transformations.",
+ "source": {
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Haugseng, Rectification of enriched infinity-categories, Theorem 5.8 and the unbounded-chain-complex Example 5.11 (following Example 5.10); introduction Theorem 1.1. Take the commutative base ring Z. Read online; not archived. No Stacks tag states this rectification theorem."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-coef-projective-chains-monoidal-model] at $R=\\mathbf Z$. Its unbounded projective chain model is left proper, tractable, biclosed monoidal and satisfies the monoid axiom; its monoidal localization is $\\mathbf D(\\mathbf Z)$ with derived tensor. These are all the hypotheses in Haugseng's fixed-object rectification route. The cochain and quasi-isomorphism conventions are precisely those of [def-weil-abstract-derived-category]. Work in a larger universe containing the sets of objects and the categories of such small categories.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Example 5.11 (unbounded case); Definition 5.1 and Proposition 5.2 hypotheses."
+   }
+  },
+  {
+   "text": "For each object set $S$, apply [lem-coef-fixed-object-enriched-rectification]. This gives the comparison equivalence $\\eta_S$ at fixed object set, natural coherently in functions of sets. On a fixed-object cofibrant replacement $Q\\mathcal A\\to\\mathcal A$, the comparison applies the monoidal localization to the cofibrant mapping complexes. The quasi-isomorphisms $Q\\mathcal A(s,t)\\to\\mathcal A(s,t)$ identify its mapping objects with the classes of the original complexes. Thus the construction uses the derived tensor even when the original mapping complexes are not flat. The cited statement also identifies closed arrows after taking their cohomology classes.",
+   "uses": [
+    "lem-coef-fixed-object-enriched-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.1 and Proposition 5.2; Corollary 3.15 on mapping objects of cofibrant enriched categories."
+   }
+  },
+  {
+   "text": "Use [lem-coef-enriched-fibre-assembly] to assemble these fixed-object comparisons. It supplies an equivalence $\\eta:\\mathrm{dgCat}_{\\mathbf Z}[\\mathrm{FFB}^{-1}]_\\infty\\simeq\\operatorname{Alg}_{\\mathrm{cat}}(\\mathbf D(\\mathbf Z))_{\\mathrm{Set}}$ over sets. Its statement specifies not only the fibre equivalences but the image of a dg functor with any object function: on mapping objects it is exactly the original chain map after the replacement comparisons. Here $\\mathrm{FFB}$ means bijective on objects and mapping-complex quasi-isomorphisms, a subclass of the quasi-equivalences in the item.",
+   "uses": [
+    "lem-coef-enriched-fibre-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.3 and Theorem 5.4; fibrewise localization Corollary 4.22."
+   }
+  },
+  {
+   "text": "Compute the underlying homotopy category and the weak equivalence class explicitly. By [def-coef-complete-algebroid], its morphisms from $x$ to $y$ are $\\pi_0\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}(\\mathbf Z[0],\\mathcal A(x,y))$. By [lem-coef-projective-chains-monoidal-model], $\\mathbf Z[0]$ is cofibrant, every target is fibrant, and this set is chain maps modulo chain homotopy. A chain map is determined by a cycle $c=f(1)\\in\\mathcal A(x,y)^0$; two such maps are homotopic exactly when their cycles differ by $d(b)$ for $b\\in\\mathcal A(x,y)^{-1}$. The result is $H^0\\mathcal A(x,y)$ with the convention of [def-weil-abstract-derived-category]. For composition, lift cohomology classes to $Q\\mathcal A$ using the isomorphisms on $H^0$ supplied by its mapping-complex quasi-isomorphisms. Localization on the cofibrant complexes respects composition and units, and the dg functor $Q\\mathcal A\\to\\mathcal A$ sends products of these classes to their original products. Thus the induced composition is the product of degree-zero cycles modulo boundaries. Explicitly, if $u,u+db$ and $v,v+de$ are degree-zero cycle representatives, then $(v+de)(u+db)-vu=d((v+de)b+eu)$; the two products therefore have the same $H^0$ class. A closed arrow $c$ corresponds to the chain map $1\\mapsto c$, hence to its $H^0$ class and its underlying homotopy-category arrow. By [lem-coef-enriched-fibre-assembly] and the equivalence criterion for chain maps in the model node, a dg functor is fully faithful after comparison exactly when its mapping maps are quasi-isomorphisms. Essential surjectivity then says exactly that its $H^0$ functor is essentially surjective. Thus the two specified weak equivalence classes correspond on dg functors.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-projective-chains-monoidal-model",
+    "def-weil-abstract-derived-category",
+    "lem-coef-enriched-fibre-assembly"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.6 and Corollary 5.7; Hovey Theorem 2.3.11 and following chain-homotopy paragraph, followed by the explicit cycle/boundary computation."
+   }
+  },
+  {
+   "text": "By [lem-coef-projective-chains-monoidal-model], $\\mathbf D(\\mathbf Z)$ is presentably symmetric monoidal. Apply [lem-coef-enriched-completion-localization] to identify localization of its discrete-object categorical algebras with localization of all its categorical algebras at fully faithful essentially surjective functors. The existing [lem-coef-algebroid-completion] identifies the latter localization with the infinity-category of complete enriched categories, and supplies fully faithful essentially surjective completion units. To justify the further localization on the dg side, test it against any infinity-category $\\mathcal E$. By the universal property of localization, functors out of $\\mathrm{dgCat}_{\\mathbf Z}[\\mathrm{quasi\\ equivalences}^{-1}]_\\infty$ are precisely functors out of $\\mathrm{dgCat}_{\\mathbf Z}[\\mathrm{FFB}^{-1}]_\\infty$ inverting the images of quasi-equivalences. Under the equivalence of [lem-coef-enriched-fibre-assembly] these are exactly the functors inverting fully faithful essentially surjective maps. To check this for all morphisms after the first localization, use the roof clause of the assembly statement: each component is represented by $A\\xleftarrow{q}QA\\xrightarrow{f}B$, with $q$ in $\\mathrm{FFB}$. Its image is $\\eta(f)\\eta(q)^{-1}$. The functor $\\eta(q)$ is bijective on objects and an equivalence on every mapping object. Precomposition with its inverse merely reindexes the source objects and precomposes the mapping-object maps by equivalences. Hence those maps are equivalences exactly when those of $\\eta(f)$ are, and the essential image in the underlying homotopy category is the same. Consequently the roof image is fully faithful essentially surjective if and only if $\\eta(f)$ is, if and only if $f$ is a quasi-equivalence by step 4. A path between maps of these discrete-object algebras fixes their object function (the mapping spaces in the nerve of sets are discrete) and gives homotopic maps on each mapping object. Fully faithfulness is unchanged by those homotopies. The resulting object assignments in the underlying homotopy category agree, so essential surjectivity is unchanged as well. This checks every component of every mapping space. Hence both further localizations have the same functor universal property, on mapping spaces as well as objects. This proves the displayed equivalence with $\\operatorname{Cat}_{\\mathbf D(\\mathbf Z)}$. Completion has fully faithful units by [lem-coef-algebroid-completion], so it preserves the mapping-object and $H^0$ descriptions of steps 2 and 4.",
+   "uses": [
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-enriched-fibre-assembly",
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-algebroid-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 5.7 and Theorem 5.8 proof; Remark 5.5 on the total model structure."
+   }
+  },
+  {
+   "text": "The equivalence is induced by the functor of [lem-coef-enriched-fibre-assembly] followed by the completion functor of [lem-coef-algebroid-completion], so it is functorial in dg functors. The fixed-object statement [lem-coef-fixed-object-enriched-rectification] identifies a closed degree-zero arrow with its underlying arrow, and step 4 gives its $H^0$ class. All equivalences and localizations above are in infinity-categories and retain their homotopies. The chosen inverted maps are exactly quasi-equivalences by step 4; no Morita equivalences have been added. No step takes an ordinary homotopy-category natural transformation as input, so no lifting of such arbitrary transformations is asserted.",
+   "uses": [
+    "lem-coef-enriched-fibre-assembly",
+    "lem-coef-algebroid-completion",
+    "lem-coef-fixed-object-enriched-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 5.8, Example 5.11, and the distinction in the item between enhanced and ordinary localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-weil-abstract-derived-category",
+  "lem-coef-algebroid-completion",
+  "lem-coef-enriched-completion-localization",
+  "lem-coef-enriched-fibre-assembly",
+  "lem-coef-fixed-object-enriched-rectification",
+  "lem-coef-projective-chains-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Written-out specialization of Proposition 5.2, Theorem 5.4, Corollary 5.7, Theorem 5.8 and Example 5.11, read online. The unarchived foundations are WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of differential graded categories at quasi equivalences is equivalent to categories enriched in derived chain complexes",
+   "results": "{\"t\": \"2026-10-16T11:06:49Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of differential graded categories at quasi equivalences is equivalent to categories enriched in derived chain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"ComplexShape.quotient_isLocalization\", \"HomologicalComplexUpToQuasiIso.Q\", \"DerivedCategory.Qh\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\"], \"digest\": \"c54b93ec4d3dac5b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"HomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-16T11:06:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"HomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|quasi.?equivalence|rectification",
+   "results": "{\"t\": \"2026-10-16T11:06:39Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|quasi.?equivalence|rectification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded categories present infinity categories enriched in the derived category of abelian groups",
+   "results": "{\"t\": \"2026-10-16T11:06:39Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded categories present infinity categories enriched in the derived category of abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"DerivedCategory.instCategory\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"DerivedCategory\", \"HomologicalComplexUpToQuasiIso\", \"DerivedCategory.instPreadditive\"], \"digest\": \"536556a997aabd65\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict chain enriched categories and coherently enriched categories have equivalent homotopy theories",
+   "results": "{\"t\": \"2026-10-16T11:06:50Z\", \"tool\": \"leanfinder\", \"query\": \"Strict chain enriched categories and coherently enriched categories have equivalent homotopy theories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.CatEnrichedOrdinary.instStrict\", \"CategoryTheory.CatEnriched.instStrict\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\"], \"digest\": \"0c27bc5687a696a5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*enrich|enrich.*derived|differential graded categor",
+   "results": "{\"t\": \"2026-10-16T11:06:40Z\", \"tool\": \"grep\", \"query\": \"derived.*enrich|enrich.*derived|differential graded categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No match. DerivedCategory and its IsLocalization instances concern the ordinary localization of complexes. EnrichedCategory/TransportEnrichment and SSet.QCat enrichment concern strict ordinary enrichment; none compares dg categories with derived-chain-enriched infinity-categories."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.?model|monoid.?axiom|rectif|many.object|categorical.?algebra|enrich.*complet|complet.*enrich|fibrewise|fiberwise",
+   "results": "{\"t\": \"2026-10-16T13:07:52Z\", \"tool\": \"grep\", \"query\": \"projective.?model|monoid.?axiom|rectif|many.object|categorical.?algebra|enrich.*complet|complet.*enrich|fibrewise|fiberwise\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/WithTerminal/FinCategory.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\"], \"digest\": \"1282f675b292b0ba\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh source check. The broad scoped grep also hits ordinary fibrewise Kan colimits and bibliography references; the refined grep returns only ordinary monoid laws in Monoidal/Mon.lean:320 and Monoidal/Skeleton.lean:58,77. Read these places: none is a model-category monoid axiom, enriched rectification, or enriched completion theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rectification|quasi.?equivalence|projective.?model.?structure|monoid.?axiom|categorical.?algebras|enriched.?completion|fibrewise.?localization|fiberwise.?localization",
+   "results": "{\"t\": \"2026-10-16T13:08:06Z\", \"tool\": \"grep\", \"query\": \"rectification|quasi.?equivalence|projective.?model.?structure|monoid.?axiom|categorical.?algebras|enriched.?completion|fibrewise.?localization|fiberwise.?localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\"], \"digest\": \"76c434bb4424cc76\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh source check. The broad scoped grep also hits ordinary fibrewise Kan colimits and bibliography references; the refined grep returns only ordinary monoid laws in Monoidal/Mon.lean:320 and Monoidal/Skeleton.lean:58,77. Read these places: none is a model-category monoid axiom, enriched rectification, or enriched completion theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-enhanced-localization-universal",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-enrichment-rectification",
+  "worker": "stage1",
+  "summary": "Repaired an interrupted attempt. Preserved the target statement; made the four proper intermediate statements self-contained, supplied cofibrant mapping-complex and total-model roof comparisons, computed underlying H^0 via cycles and chain homotopies, and wrote the two-stage localization argument. Recorded actual logged searches and unarchived-source provenance. Fresh shared-DAG review reused the newly available projective-cochain model and algebroid completion; the two overlapping foundation statements are narrowed to their missing supplemental properties and discrete-object reduction.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2: the finite mapping-complex adjunction inside R lim and the final unit/counit triangle sentence. Steps 1–3 supply its dg-to-derived-enrichment interpretation; steps 4–6 verify the weak equivalences, underlying arrows and coherent functoriality. This is a foundation below the unit route, not a replacement of its geometric argument."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-174d91618",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-174d91618 (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full. Checked all six proof steps against Haugseng, Gepner–Haugseng, Hovey and the cited DAG statements; verified edge cases, duplicate candidates, acyclicity and exact master target interfaces. No repairs or tool_uses required. Detailed findings are in review.md."
+ }
+}
