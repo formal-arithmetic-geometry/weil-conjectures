@@ -1,0 +1,223 @@
+{
+ "id": "lem-coef-infinity-pointwise-adjoint-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim; Pointwise representability assembles into a coherent infinity adjunction, foundational to its coherent adjunction and limit interpretation.",
+   "via": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointwise representability assembles into a coherent infinity adjunction",
+ "statement": "Use infinity categories, mapping spaces and coherent functors as in [def-cbc-enhanced-diagrams-cones], with the universes of [def-coef-complete-algebroid] and small mapping spaces. Let $F:\\mathcal C\\to\\mathcal D$ be a functor; no presentability or completeness is assumed. It has a right adjoint if and only if for each $d\\in\\mathcal D$ the presheaf $c\\mapsto\\operatorname{Map}_{\\mathcal D}(F(c),d)$ is representable, that is, naturally equivalent to $\\operatorname{Map}_{\\mathcal C}(-,r_d)$ for some $r_d\\in\\mathcal C$. Dually a functor $i:\\mathcal E\\to\\mathcal C$ has a left adjoint if and only if for each $c\\in\\mathcal C$ the covariant functor $e\\mapsto\\operatorname{Map}_{\\mathcal C}(c,i(e))$ is representable by an object of $\\mathcal E$. The representing objects assemble to a coherent functor and an equivalence of mapping-space bifunctors; the universal representing maps are its unit or counit. The resulting adjunction has coherent units, counits and triangle identities, including their higher compatibility data.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 5.2.4.2 and its opposite; Definition 5.2.2.7 and Proposition 5.2.2.8; section 5.2.7 for fully faithful adjunctions Read online; not archived in literature/. No matching Stacks tag for this assertion."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Necessity is the unit/counit calculation on mapping spaces, made coherent by Yoneda evaluation. Suppose $F\\dashv R$, with coherent unit $\\eta$ and counit $\\epsilon$. For $c\\in\\mathcal C$ and $d\\in\\mathcal D$ define $\\Phi(a)=R(a)\\eta_c$ and $\\Psi(b)=\\epsilon_dF(b)$, for $a:Fc\\to d$ and $b:c\\to Rd$. Naturality and the two triangle homotopies give\n$$\\Psi\\Phi(a)\\simeq a\\epsilon_{Fc}F(\\eta_c)\\simeq a,\\qquad \\Phi\\Psi(b)\\simeq R(\\epsilon_d)\\eta_{Rd}b\\simeq b,$$\nhomotopies of maps of the entire mapping spaces obtained from the given coherent transformations and triangle homotopies. Hence each $\\Psi_c:\\operatorname{Map}_{\\mathcal C}(c,Rd)\\to\\operatorname{Map}_{\\mathcal D}(Fc,d)$ is an equivalence of spaces with homotopy inverse $\\Phi_c$. To make these components one coherent transformation, apply the inverse clause of [lem-coef-infinity-pointwise-yoneda-evaluation] to $\\mathcal E=\\mathcal C$, $a=Rd$, the presheaf $P_d(c)=\\operatorname{Map}_{\\mathcal D}(Fc,d)$ (whose action on $t$ is precomposition with $F(t)$) and the point $\\epsilon_d\\in P_d(Rd)$: it gives a coherent transformation $h_{Rd}\\to P_d$ whose component at $c$ is $b\\mapsto P_d(b)(\\epsilon_d)=\\epsilon_d\\circ F(b)=\\Psi_c(b)$. Every vertex component is an equivalence, so by the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] it is an equivalence in $\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathcal S)$. Setting $r_d=Rd$ proves representability of $\\operatorname{Map}_{\\mathcal D}(F(-),d)$. For the dual necessity, suppose $L\\dashv i$ with unit $\\eta'$ and counit $\\epsilon'$. For $a:Lc\\to e$ and $b:c\\to i(e)$ set $\\Phi'(a)=i(a)\\eta'_c$ and $\\Psi'(b)=\\epsilon'_eL(b)$. Naturality and the triangles give\n$$\\Psi'\\Phi'(a)\\simeq a\\epsilon'_{Lc}L(\\eta'_c)\\simeq a,\\qquad \\Phi'\\Psi'(b)\\simeq i(\\epsilon'_e)\\eta'_{i(e)}b\\simeq b,$$\nso every $\\Phi'_e:\\operatorname{Map}_{\\mathcal E}(Lc,e)\\to\\operatorname{Map}_{\\mathcal C}(c,i(e))$ is an equivalence. The covariant clause of [lem-coef-infinity-pointwise-yoneda-evaluation], applied to $Q_c(e)=\\operatorname{Map}_{\\mathcal C}(c,i(e))$ and $\\eta'_c\\in Q_c(Lc)$, gives a coherent transformation $h^{Lc}\\to Q_c$ with components $a\\mapsto i(a)\\circ\\eta'_c=\\Phi'_e(a)$; by the same componentwise criterion it is an equivalence in $\\operatorname{Fun}(\\mathcal E,\\mathcal S)$, so $Lc$ represents $Q_c$. Coherent transformations and their parameters have the internal-functor meaning of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Necessity paragraph, expanded unit/counit computation; Proposition 6.2.1.17 (02F1); coherence via Definition 5.6.6.1 (038A) and Theorem 4.4.4.4 (01DK), componentwise detection of natural isomorphisms."
+   }
+  },
+  {
+   "text": "Assume the right-adjoint representability condition and fix $d$. Choose an equivalence of coherent presheaves $\\theta_d:\\operatorname{Map}_{\\mathcal C}(-,r_d)\\simeq P_d$, where $P_d(c)=\\operatorname{Map}_{\\mathcal D}(Fc,d)$. The Yoneda evaluation statement [lem-coef-infinity-pointwise-yoneda-evaluation] applies because the mapping spaces are small and $\\theta_d$ is coherent, not merely a collection of objectwise equivalences. Put $\\epsilon_d=\\theta_d(r_d)(\\operatorname{id}_{r_d}):F(r_d)\\to d$. The inverse formula in that statement identifies $\\theta_d(c)$, on the entire mapping space and with its coherent naturality, with\n$$\\operatorname{Map}_{\\mathcal C}(c,r_d)\\longrightarrow\\operatorname{Map}_{\\mathcal D}(Fc,d),\\qquad t\\longmapsto\\epsilon_d\\circ F(t).$$\nConsequently these actual composition maps are equivalences for every $c$. No choice of maps $r_d\\to r_{d'}$ has been assumed.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Sufficiency: conversion of a representing equivalence to the universal arrow, by Kerodon 03M5 and its opposite."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-local-adjoint-criterion] to $F^{\\mathrm{op}}:\\mathcal C^{\\mathrm{op}}\\to\\mathcal D^{\\mathrm{op}}$, taking $\\mathcal X=\\mathcal C^{\\mathrm{op}}$, $\\mathcal Y=\\mathcal D^{\\mathrm{op}}$, $x_d=r_d$ and $u_d=\\epsilon_d^{\\mathrm{op}}$. Its comparison map is the map of step 2 up to the canonical identifications, which are made as follows. Reversing the vertex order identifies the right-pinched space $\\operatorname{Map}_{\\mathcal C^{\\mathrm{op}}}(r_d,c)$ with the opposite of the left-pinched model of maps $c\\to r_d$; this is not literally the right-pinched $\\operatorname{Map}_{\\mathcal C}(c,r_d)$. Compare both through the arrow spaces $U$ of [lem-coef-infinity-pinch-comparison]: since $(\\Delta^1)^{\\mathrm{op}}\\cong\\Delta^1$ with the endpoints exchanged, $U_{\\mathcal C^{\\mathrm{op}}}(r_d,c)=U_{\\mathcal C}(c,r_d)^{\\mathrm{op}}$, and the right-pinch inclusions $j_{\\mathcal C^{\\mathrm{op}},r_d,c}$ and $j_{\\mathcal C,c,r_d}^{\\mathrm{op}}$ are homotopy equivalences into it by that statement. Likewise for $\\mathcal D$. Under these identifications $F^{\\mathrm{op}}(v)\\circ\\epsilon_d^{\\mathrm{op}}$ corresponds to $\\epsilon_d\\circ F(v)$, composition with a fixed edge being given by the same $2$-simplex fillers read in reverse order. A simplicial homotopy $K\\times\\Delta^1\\to L$ reverses to $K^{\\mathrm{op}}\\times\\Delta^1\\to L^{\\mathrm{op}}$, so a map of Kan complexes is a homotopy equivalence if and only if its opposite is. Hence the comparison maps of the criterion are equivalences because those of step 2 are. The cited criterion requires no completeness or presentability and explicitly permits nonfunctorial initial choices. It supplies a coherent left adjoint $L$ to $F^{\\mathrm{op}}$; reversing every simplex of $L$, its unit and counit, and their triangle homotopies gives the coherent right adjoint $R=L^{\\mathrm{op}}$ to $F$. The natural mapping-space equivalences and triangle homotopies are therefore the reversed ones supplied by the cited conclusion. In particular the counit components are universal representing maps of $P_d$; the representing objects may be taken to be $R(d)$, replacing the initial choices by equivalent representatives.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Proposition 6.2.6.1 (02FV), applied to the opposite functor."
+   }
+  },
+  {
+   "text": "For dual sufficiency fix $c$ and choose a coherent equivalence $\\lambda_c:\\operatorname{Map}_{\\mathcal E}(l_c,-)\\simeq Q_c$, where $Q_c(e)=\\operatorname{Map}_{\\mathcal C}(c,i(e))$. The covariant clause of [lem-coef-infinity-pointwise-yoneda-evaluation] sends it to $u_c=\\lambda_c(l_c)(\\operatorname{id}_{l_c}):c\\to i(l_c)$ and identifies its component at $e$ with $v\\mapsto i(v)\\circ u_c$. This is therefore an equivalence for every $e$, including all parameters. Now use [lem-coef-infinity-local-adjoint-criterion] with $R=i$, $\\mathcal X=\\mathcal E$, $\\mathcal Y=\\mathcal C$, $x_c=l_c$ and this $u_c$. It supplies a coherent $L\\dashv i$, natural equivalences of the two-variable mapping-space functors, and coherent unit, counit and triangle homotopies. The unit components are universal representing maps, so take $l_c=L(c)$. In both variances this is an adjunction in the coherent infinity-categorical sense delivered by the criterion: its transformations and homotopies retain their higher compatibility as coherent diagrams, rather than only as equations in the ordinary homotopy category. Together with step 1 this proves both equivalences in the statement.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Proposition 6.2.6.1 (02FV), following the covariant Yoneda extraction of Kerodon 03M5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent adjunction foundation; expanded using the online local criterion Kerodon 02FV, the mapping-space calculation of 02F1, and Yoneda evaluation 03M5. Online references are not archived locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor of infinity categories has a right adjoint when each mapping space presheaf Map F x y is representable",
+   "results": "{\"t\": \"2026-10-16T13:37:12Z\", \"tool\": \"leanfinder\", \"query\": \"A functor of infinity categories has a right adjoint when each mapping space presheaf Map F x y is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.IsRightAdjoint\", \"CategoryTheory.Functor.rightAdjointObjIsDefined\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_iff\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.partialRightAdjointObj\", \"CategoryTheory.Functor.PartialRightAdjointSource\", \"CategoryTheory.Functor.IsLeftAdjoint\"], \"digest\": \"d192c1fc9480bfac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top (Adjunction/PartialAdjoint.lean:294) is an ordinary Hom-set criterion. Quasicategory/StrictBicategory.lean concerns homotopy-category functors, not coherent mapping-space adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\"",
+   "results": "{\"t\": \"2026-10-16T13:37:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\"], \"digest\": \"2168a7127feeb479\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top (Adjunction/PartialAdjoint.lean:294) is an ordinary Hom-set criterion. Quasicategory/StrictBicategory.lean concerns homotopy-category functors, not coherent mapping-space adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|adjoint|counit|unit",
+   "results": "{\"t\": \"2026-10-16T13:37:06Z\", \"tool\": \"grep\", \"query\": \"adjunction|adjoint|counit|unit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"84aa202a09283c27\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top (Adjunction/PartialAdjoint.lean:294) is an ordinary Hom-set criterion. Quasicategory/StrictBicategory.lean concerns homotopy-category functors, not coherent mapping-space adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping space representability criterion for coherent adjunctions between quasicategories",
+   "results": "{\"t\": \"2026-10-16T13:37:07Z\", \"tool\": \"leansearch\", \"query\": \"Mapping space representability criterion for coherent adjunctions between quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.representableBy\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_of_adjunction\", \"CategoryTheory.Functor.rightAdjointObjIsDefined\", \"CategoryTheory.Adjunction.corepresentableBy\", \"CategoryTheory.Functor.CorepresentableBy.mk\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_iff\", \"CategoryTheory.RepresentablyCoflat.of_isLeftAdjoint\"], \"digest\": \"124b39e2fc574d01\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top (Adjunction/PartialAdjoint.lean:294) is an ordinary Hom-set criterion. Quasicategory/StrictBicategory.lean concerns homotopy-category functors, not coherent mapping-space adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable bifunctors of infinity categories assemble into adjunctions with coherent units and counits",
+   "results": "{\"t\": \"2026-10-16T13:37:15Z\", \"tool\": \"leanfinder\", \"query\": \"Representable bifunctors of infinity categories assemble into adjunctions with coherent units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.ParametrizedAdjunction.mk'_adj\", \"CategoryTheory.Adjunction.representableBy\", \"CategoryTheory.ParametrizedAdjunction.mk'\", \"CategoryTheory.ParametrizedAdjunction\", \"CategoryTheory.ParametrizedAdjunction.adj\"], \"digest\": \"08b847e7fdc49e7f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits; CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top (Adjunction/PartialAdjoint.lean:294) is an ordinary Hom-set criterion. Quasicategory/StrictBicategory.lean concerns homotopy-category functors, not coherent mapping-space adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Partial adjoint functors from representable mapping bifunctors in a quasicategory",
+   "results": "{\"t\": \"2026-10-16T15:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"Partial adjoint functors from representable mapping bifunctors in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.partialRightAdjointMap\", \"CategoryTheory.Functor.partialLeftAdjointMap\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.partialLeftAdjoint\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.Functor.partialRightAdjointHomEquiv\", \"CategoryTheory.Functor.partialRightAdjointObj\"], \"digest\": \"e6f544d59cd3193c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: PartialAdjoint.lean:45-80 assumes ordinary Category instances and gives Hom-set bijections. The nerve/homotopy-category adjunction is also ordinary."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]artial.*[Aa]dj|[Rr]epresentable.*[Bb]ifunctor",
+   "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"[Pp]artial.*[Aa]dj|[Rr]epresentable.*[Bb]ifunctor\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/Reflective.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\"], \"digest\": \"c0c31487293b2850\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: PartialAdjoint.lean:45-80 assumes ordinary Category instances and gives Hom-set bijections. The nerve/homotopy-category adjunction is also ordinary."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|representab|adjoint",
+   "results": "{\"t\": \"2026-10-16T16:08:28Z\", \"tool\": \"grep\", \"query\": \"yoneda|representab|adjoint\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/PartialAdjoint.lean:197-210 and 294: these are ordinary-category Hom-set criteria. AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 constructs an ordinary bicategory, not this representability criterion. Nerve/hoFunctor adjunction hits concern different functors, not arbitrary infinity categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of quasicategories has a right adjoint if its mapping space presheaves are representable",
+   "results": "{\"t\": \"2026-10-16T16:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A functor of quasicategories has a right adjoint if its mapping space presheaves are representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightAdjoint_of_leftAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_iff\", \"CategoryTheory.Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.isRightAdjoint_of_isEquivalence\", \"CategoryTheory.Functor.rightAdjointObjIsDefined\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_limit\", \"CategoryTheory.Functor.IsRightAdjoint.mk\"], \"digest\": \"099d66d27426c016\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/PartialAdjoint.lean:197-210 and 294: these are ordinary-category Hom-set criteria. AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 constructs an ordinary bicategory, not this representability criterion. Nerve/hoFunctor adjunction hits concern different functors, not arbitrary infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-16T16:09:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/PartialAdjoint.lean:197-210 and 294: these are ordinary-category Hom-set criteria. AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 constructs an ordinary bicategory, not this representability criterion. Nerve/hoFunctor adjunction hits concern different functors, not arbitrary infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between infinity categories has a right adjoint exactly when every presheaf Map F c d is representable and these assemble coherently",
+   "results": "{\"t\": \"2026-10-16T16:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between infinity categories has a right adjoint exactly when every presheaf Map F c d is representable and these assemble coherently\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Functor.IsRightAdjoint\", \"CategoryTheory.Functor.rightAdjointObjIsDefined\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_iff\", \"CategoryTheory.Functor.isRightAdjoint_iff_leftAdjointObjIsDefined_eq_top\", \"CategoryTheory.Functor.partialRightAdjoint\", \"CategoryTheory.Functor.PartialRightAdjointSource\"], \"digest\": \"fb987ea353f6a1bf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/PartialAdjoint.lean:197-210 and 294: these are ordinary-category Hom-set criteria. AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 constructs an ordinary bicategory, not this representability criterion. Nerve/hoFunctor adjunction hits concern different functors, not arbitrary infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objectwise universal arrows assemble a functor and a coherent adjunction between arbitrary quasicategories",
+   "results": "{\"t\": \"2026-10-16T16:12:05Z\", \"tool\": \"leanfinder\", \"query\": \"Objectwise universal arrows assemble a functor and a coherent adjunction between arbitrary quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.coskAdj\", \"CategoryTheory.Functor.ranAdjunction\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.adjunctionOfStructuredArrowInitials\"], \"digest\": \"25c9ee30bec01304\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/PartialAdjoint.lean:197-210 and 294: these are ordinary-category Hom-set criteria. AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 constructs an ordinary bicategory, not this representability criterion. Nerve/hoFunctor adjunction hits concern different functors, not arbitrary infinity categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-presentable-infinity-adjoints",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pointwise-adjoint-criterion",
+  "worker": "stage1",
+  "summary": "Expanded both necessity and sufficiency without changing the statement. Necessity is the explicit inverse unit/counit calculation. Extracted universal arrows from representing equivalences using a new general infinity Yoneda evaluation statement, and reused the existing local coherent-adjoint criterion in the original and opposite variance. Checked that fully faithful infinity Yoneda alone does not state the evaluation lemma, and that ordinary Mathlib adjunction/Yoneda results do not apply to arbitrary quasicategories. No Lean attachment, compiles, or live edits. Maintainer reader (Q12 review): step 1 made coherent through the Yoneda inverse clause and the componentwise equivalence criterion; step 3 opposite mapping-space transport made explicit through the pinch comparison.",
+  "blueprint": "Realizes the coherent adjunction foundation in paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md before the derived inverse-limit calculation, via the existing ancestry. No unit route is replaced. The item is not a unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 1 uses only its componentwise criterion: a coherent transformation of space-valued diagrams whose vertex components are equivalences is an equivalence of functors. This generic quasicategory fact (Kerodon 4.4.4.4) has no node in sk-prop-sf-biduality-general; the same tool use is already accepted on lem-coef-presentable-infinity-adjoints and lem-coef-infinity-finite-poset-kan-extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-0e12e54e9",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-0e12e54e9 (reviewer sub-agent of L); spot-checked: FIX with two repairs to the item, written to fixes/dag/nodes/sec-six-functors/lem-coef-infinity-pointwise-adjoint-criterion.json; the details are in review.md. I read the item and both new and cited node statements in full, and checked the sources online: Kerodon 02FV (local adjoint criterion), 03M5 with 038A (infinity-Yoneda lemma and the formula f↦P(f)(p)), and 01DK (Theorem 4.4.4.4: a natural transformation is an equivalence iff each component is). The item's statement is correct and unchanged. Small cases check out: empty C (no representing object, no adjoint), empty D, a one-point category, discrete categories. Repair 1, under C2/E5: step 1 was marked elementary but claimed coherent naturality of Phi/Psi 'by whiskering'. It now uses the inverse clause of the new Yoneda node, applied to epsilon_d (dually eta'_c), to get a coherent transformation whose components are Psi (dually Phi'). The componentwise criterion of lem-cbc-enhanced-functor-cone-calculus then makes it an equivalence in Fun. I accepted that node as a tool use (the same use is already accepted on lem-coef-presentable-infinity-adjoints, lem-coef-infinity-finite-poset-kan-extension and lem-coef-infinity-monadic-comparison) and declared it in split_report.tool_uses. Repair 2, under E5: step 3 said that reversing vertex order turns the right-pinched Map_{C^op}(r,c) into Map_C(c,r). In fact it gives the opposite of the left-pinched model. The step now passes through lem-coef-infinity-pinch-comparison: U_{C^op}(r,c)=U_C(c,r)^op, and a map of Kan complexes is a homotopy equivalence iff its opposite is. Steps 2 and 4 are correct, with the right variance and all hypotheses of the local criterion met. The new node lem-coef-infinity-pointwise-yoneda-evaluation is true (03M5 and its opposite), self-contained and statement-only, and does not restate any clause of the item. It is not a duplicate of the Q55 node lem-coef-infinity-yoneda-evaluation: Q55 requires a small D and has only the contravariant clause, while the item's C has only U-small mapping spaces, so the item needs the general case. proof_deps is recomputed. A DFS over the corrected item's dependency closure (63 nodes) finds no cycle. The item is not a target node and uses no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

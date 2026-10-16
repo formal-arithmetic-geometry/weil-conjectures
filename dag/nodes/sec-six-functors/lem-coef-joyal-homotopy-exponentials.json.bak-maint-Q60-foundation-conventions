@@ -1,0 +1,353 @@
+{
+ "id": "lem-coef-joyal-homotopy-exponentials",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: coherent derived coefficient adjunction before the displayed R Hom / R lim calculation; Rigidification and coherent enriched-diagram comparison. Supporting Products and exponentials in the Joyal homotopy category.",
+   "via": [
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Products and exponentials in the Joyal homotopy category",
+ "statement": "Use the Joyal model structure and categorical equivalences of [lem-coef-joyal-model-structure], the coherent-nerve adjunction $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ of [lem-coef-coherent-nerve-comparison], and the universe conventions of [def-coef-complete-algebroid]. Write $h\\mathsf{sSet}_{\\mathrm J}$ for the ordinary localization of simplicial sets at categorical equivalences, and $[X,Y]_{\\mathrm J}$ for its Hom sets. For simplicial sets $K,L$, their degreewise product represents the categorical product in this homotopy category, and the natural functor\n$$\\mathfrak C[K\\times L]\\longrightarrow\\mathfrak C[K]\\times\\mathfrak C[L]$$\nis a Dwyer--Kan equivalence. For every quasicategory $Q$, define $\\operatorname{Fun}(K,Q)_n=\\operatorname{Hom}_{\\mathsf{sSet}}(K\\times\\Delta^n,Q)$. This is a quasicategory, and evaluation induces natural bijections\n$$[X,\\operatorname{Fun}(K,Q)]_{\\mathrm J}\\ \\cong\\ [X\\times K,Q]_{\\mathrm J}.$$\nThese bijections use the actual simplicial evaluation map. In particular $\\operatorname{Fun}(K,Q)$ represents $[Q]^{[K]}$ in the Joyal homotopy category, not just an exponential of ordinary homotopy categories.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollaries 2.2.5.4 and 2.2.5.6, Proposition 2.2.5.7, and the proof of Proposition 1.2.7.3 printed pp.92-94; products of simplicial categories preserve DK equivalences as used there. Read online; not archived in literature/. No Stacks tag states this simplicial homotopy-theoretic result."
+ },
+ "stmt_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-complete-algebroid"
+ ],
+ "proof": [
+  {
+   "text": "First verify that the stated internal Hom is a quasicategory. A horn $\\Lambda_i^n\\to\\operatorname{Fun}(K,Q)$ transposes to a map $K\\times\\Lambda_i^n\\to Q$. Apply [lem-coef-inner-anodyne-pushout-product] to the inner horn inclusion and $\\varnothing\\hookrightarrow K$: its pushout-product is $K\\times\\Lambda_i^n\\hookrightarrow K\\times\\Delta^n$, up to interchanging factors, and is inner anodyne. Here an inner horn is inner anodyne because every inner fibration lifts against it by definition. Since $Q\\to\\Delta^0$ is an inner fibration, the transposed map extends, giving the required horn filler. All sets and maps remain in the chosen universe.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3(1), printed p.94; Corollary 2.3.2.4."
+   }
+  },
+  {
+   "text": "Products with any simplicial set preserve categorical equivalences. Indeed, for $u:A\\to B$ a categorical equivalence, any $K$, and any test quasicategory $C$, simplicial currying gives isomorphisms $\\operatorname{Fun}(B\\times K,C)\\cong\\operatorname{Fun}(B,\\operatorname{Fun}(K,C))$ and the corresponding isomorphism for $A$. Step 1 makes the new target $\\operatorname{Fun}(K,C)$ a quasicategory. Use the current conventions of [lem-coef-joyal-model-structure], which now refers directly to the enhanced-diagram conventions: its standard simplices, degreewise products and inner-horn definition of quasicategory agree with the ones in Step 1 and in the displayed currying formulas. By that node's testing definition, restriction along $u$ induces an equivalence after applying $h$ to the latter functor simplicial sets; hence restriction along $u\\times1_K$ does too. This holds for every $C$, so $u\\times1_K$ is a categorical equivalence. Factoring $u\\times v$ as $(u\\times1)$ followed by $(1\\times v)$ proves the same for products of two categorical equivalences. The strict product bifunctor therefore descends to the ordinary localization: first localize in each variable, using this preservation of inverted arrows.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4, printed p.92; direct argument from the categorical-equivalence testing convention already supplied by the DAG."
+   }
+  },
+  {
+   "text": "Fix the ordinary groupoid $\\mathcal I$ with objects $0,1$ and exactly one morphism between each ordered pair, and put $E=N\\mathcal I$. Regard $\\mathcal I$ and the one-object terminal category as discrete simplicial categories. They are locally Kan, hence Bergner fibrant by [lem-coef-coherent-nerve-comparison]: all mapping sets are points, and the equivalence-lifting condition for a terminal map is filled by the identity. The functor $\\mathcal I\\to *$ is a DK equivalence, since all its mapping maps are identities of points and $\\pi_0\\mathcal I\\to *$ is fully faithful and essentially surjective. For the coherent-nerve Quillen adjunction, [lem-coef-model-infinity-derived-adjunction] says its right adjoint preserves weak equivalences between fibrant objects. Thus $E\\to\\Delta^0$ is a Joyal weak equivalence, since the coherent nerve on discrete simplicial categories is the ordinary nerve. For every $X$, the endpoints $X\\amalg X\\hookrightarrow X\\times E$ form a monomorphism and the projection $X\\times E\\to X$ is a categorical equivalence by Step 2. Consequently $X\\times E$ is a cylinder with a cofibration as its endpoint inclusion. This construction also works for $X=\\varnothing$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.5.7, printed p.93: replace the chosen two-vertex contractible Kan interval by the nerve of the two-object indiscrete groupoid; Theorem 2.2.5.1 for the nerve adjunction."
+   }
+  },
+  {
+   "text": "For every simplicial set $X$ and quasicategory $Q$, [lem-coef-model-localization-homotopy-classes] applies: $X$ is cofibrant because $\\varnothing\\to X$ is a monomorphism, and $Q$ is fibrant by [lem-coef-joyal-model-structure]. It says that every element of $[X,Q]_{\\mathrm J}$ has an actual simplicial representative and that equality is left homotopy using some cylinder. Equality can in fact be computed with the fixed cylinder $X\\times E$ of Step 3. To prove the nontrivial direction, let $J\\xrightarrow{c}X$, with endpoints $e_0,e_1$ and $ce_i=1_X$, and $H:J\\to Q$ witness equality. Factor $c$ as a trivial cofibration $j:J\\to J'$ followed by a fibration $p:J'\\to X$; two-out-of-three makes $p$ a trivial fibration. Fibrancy of $Q$ extends $H$ along $j$ to $H':J'\\to Q$. Lift the square whose top map is $X\\amalg X\\xrightarrow{(je_0,je_1)}J'$, bottom map is the projection $X\\times E\\to X$, left map is the endpoint cofibration, and right map is $p$. The current Joyal model statement supplies both lifting properties through its two mutually characterized weak factorization systems: the trivial cofibration lifts against the terminal fibration of $Q$, and the endpoint cofibration lifts against the trivial fibration $p$. Its filler $a:X\\times E\\to J'$ makes $H'a$ a homotopy on the fixed cylinder with the prescribed endpoints. Conversely any such fixed-cylinder homotopy is a cylinder homotopy, so the cited equality criterion applies. Hence $[X,Q]_{\\mathrm J}$ is precisely the set of actual maps $X\\to Q$ modulo homotopies $X\\times E\\to Q$.",
+   "uses": [
+    "lem-coef-model-localization-homotopy-classes",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.5.7, printed p.93; fixed-cylinder comparison proved explicitly from the model factorization and lifting axioms."
+   }
+  },
+  {
+   "text": "Choose Joyal fibrant replacements $K\\to K^f$ and $L\\to L^f$ using [lem-coef-joyal-model-structure]. Their product is a categorical equivalence by Step 2, and $K^f\\times L^f$ is fibrant because inner horns can be filled in each coordinate. For any $X$, actual maps $X\\to K^f\\times L^f$ are pairs of actual maps to $K^f,L^f$. By Step 4, equality of each component in the localization is witnessed on the same fixed cylinder $X\\times E$. Pair the two homotopies to get a homotopy into $K^f\\times L^f$; conversely any product homotopy projects to the two component homotopies. Surjectivity on representatives and this equality criterion give a bijection\n$$[X,K^f\\times L^f]_{\\mathrm J}\\cong[X,K^f]_{\\mathrm J}\\times[X,L^f]_{\\mathrm J}$$\ninduced by the actual projections. Invert the replacement weak equivalences and the product replacement; their squares with the projections commute, so the same bijection holds for $K,L,K\\times L$. It holds for every $X$, which is the product universal property in the ordinary localization. All comparisons are natural because the maps that induce them are the product projections.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-model-localization-homotopy-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3, printed p.94: product assertion, expanded by fixed-cylinder representatives instead of an uncited general homotopy-product theorem."
+   }
+  },
+  {
+   "text": "Simplicial currying identifies actual maps $f:X\\to\\operatorname{Fun}(K,Q)$ with maps $\\widetilde f:X\\times K\\to Q$. Explicitly, at an $n$-simplex $(x,k)$ it sends $(x,k)$ to the value of $f_n(x):K\\times\\Delta^n\\to Q$ on $(k,1_{[n]})$. Conversely a map $g:X\\times K\\to Q$ sends $x\\in X_n$ to the simplicial map whose value on $(k,\\alpha:[m]\\to[n])$ is $g_m(X(\\alpha)(x),k)$. These formulas commute with all simplex operators and undo one another. They identify homotopies $X\\times E\\to\\operatorname{Fun}(K,Q)$ with homotopies $(X\\times K)\\times E\\to Q$, interchanging the $K,E$ factors. Step 1 gives fibrancy of $\\operatorname{Fun}(K,Q)$, so the representative/equality criterion of Step 4 on both sides yields the required bijection\n$$[X,\\operatorname{Fun}(K,Q)]_{\\mathrm J}\\cong[X\\times K,Q]_{\\mathrm J}.$$\nThe forward formula is exactly $\\operatorname{ev}\\circ(f\\times1_K)$ for the actual simplicial evaluation map. Strict currying is natural in all three variables. To check explicitly that the function objects respect inverted arrows, for a categorical equivalence $u:Q\\to Q'$ between quasicategories, the displayed bijection identifies the map induced by $\\operatorname{Fun}(K,u)$ on Hom sets from any $X$ with postcomposition by the isomorphism $[u]$ on $[X\\times K,Q]_{\\mathrm J}$. For a categorical equivalence $v:K\\to K'$, it identifies the map induced by $\\operatorname{Fun}(v,Q)$ with precomposition by $[1_X\\times v]$, an isomorphism by Step 2. Both induced maps are therefore bijections for every $X$. An arrow $t:Y\\to Z$ inducing such bijections is an isomorphism: take $X=Z$ to get $s:Z\\to Y$ with $ts=1_Z$, then injectivity with $X=Y$ and $tst=t$ gives $st=1_Y$. Thus these function-object maps are isomorphisms in the ordinary localization. Step 2 already makes products functorial there; the strict naturality squares now remain commuting after replacing any inverted arrow by its inverse. Together with Step 5 this proves the exponential universal property with its specified evaluation and its naturality in all the variables.",
+   "uses": [
+    "lem-coef-model-localization-homotopy-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 1.2.7.3, printed p.94, using Proposition 2.2.5.7; the evaluation and homotopy compatibility are written explicitly."
+   }
+  },
+  {
+   "text": "For the rigidification assertion, first establish the needed product fact for weak homotopy equivalences without assuming it. Let $f:A\\to B$ and $g:C\\to D$ be weak homotopy equivalences. By [lem-coef-ex-infinity-finite-products], the units into $\\operatorname{Ex}^{\\infty}$ are weak homotopy equivalences, so naturality and two-out-of-three make $\\operatorname{Ex}^{\\infty}f$ and $\\operatorname{Ex}^{\\infty}g$ weak homotopy equivalences between Kan complexes. The projection $B'\\times C'\\to B'$ is a Kan fibration whenever $C'$ is Kan: in a horn-lifting square the $B'$ coordinate is prescribed and the $C'$ coordinate is filled by its Kan condition. By right properness in [lem-coef-kan-quillen-right-proper], the pullback of $A'\\to B'$ along this projection is a weak homotopy equivalence $A'\\times C'\\to B'\\times C'$. The same argument with factors interchanged gives $B'\\times C'\\to B'\\times D'$, so their composite is a weak homotopy equivalence. Apply this with primes denoting $\\operatorname{Ex}^{\\infty}$. Its natural product isomorphisms identify that composite with $\\operatorname{Ex}^{\\infty}(f\\times g)$; the unit naturality square and two-out-of-three then show that $f\\times g$ is a weak homotopy equivalence. This uses right properness only for the Kan--Quillen structure, not for the Joyal structure.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6, printed p.93: mapping-set product stability used in the proof; expanded using the existing product-preserving Kan replacement and right-properness nodes."
+   }
+  },
+  {
+   "text": "It follows that products of two DK equivalences of simplicial categories are DK equivalences. Their maps on mapping simplicial sets are products of weak homotopy equivalences, covered by Step 7. Also $\\pi_0(A\\times B)\\cong\\pi_0A\\times\\pi_0B$: components of a product mapping simplicial set are pairs of components, since edge zigzags project to each coordinate and coordinate zigzags can be combined after inserting identity steps in the other coordinate. Composition and identities act coordinatewise. Hence the induced $\\pi_0$ functor is the product of two equivalences: the inverse functors and their natural isomorphisms can be paired. This verifies both parts of the DK definition in [lem-coef-coherent-nerve-comparison], including for empty object sets.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6, printed p.93: stability of simplicial-category equivalences under products, with the mapping-set and essential-image checks made explicit."
+   }
+  },
+  {
+   "text": "For every locally Kan simplicial category $T$, [lem-coef-coherent-nerve-comparison] makes $T$ Bergner fibrant and $N_{\\mathrm{hc}}T$ Joyal cofibrant. Its Quillen equivalence has an equivalence as its left derived functor. Apply [lem-coef-quillen-derived-counit-criterion] with $L=\\mathfrak C$, $U=N_{\\mathrm{hc}}$, $Y=T$, and the identity cofibrant replacement of $N_{\\mathrm{hc}}T$. It gives a DK equivalence $\\epsilon_T:\\mathfrak C[N_{\\mathrm{hc}}T]\\to T$. Now take any $K$, set $A=\\mathfrak C[K]$, and use the object-preserving locally Kan replacement $r:A\\to RA$ of [lem-coef-coherent-nerve-comparison]. Let $v_K:K\\to N_{\\mathrm{hc}}(RA)$ be the adjoint of $r$. The adjunction identity is the actual equality $\\epsilon_{RA}\\circ\\mathfrak C[v_K]=r$. Since both $r$ and $\\epsilon_{RA}$ are DK equivalences, two-out-of-three makes $\\mathfrak C[v_K]$ one as well. The detection theorem [lem-coef-rigidification-equivalence-detection] therefore makes $v_K$ a categorical equivalence. Thus every simplicial set admits a categorical equivalence to the coherent nerve of a locally Kan simplicial category, by a construction independent of the product comparison being proved.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-quillen-derived-counit-criterion",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6, printed p.93; Theorem 2.2.5.1, derived counit and adjunction triangle identity. This supplies the nerve replacements used there."
+   }
+  },
+  {
+   "text": "Write $P_{K,L}:\\mathfrak C[K\\times L]\\to\\mathfrak C[K]\\times\\mathfrak C[L]$ for the functor whose components are rigidifications of the two projections. First let $K=N_{\\mathrm{hc}}T$, $L=N_{\\mathrm{hc}}U$, with $T,U$ locally Kan. From the defining nerve formula, $N_{\\mathrm{hc}}(T\\times U)\\cong N_{\\mathrm{hc}}T\\times N_{\\mathrm{hc}}U$: a simplicial functor out of each simplex thickening into a product is exactly a pair of such functors. The product $T\\times U$ is locally Kan, by filling each horn in each mapping-set coordinate. Under this nerve identification, the composite $(\\epsilon_T\\times\\epsilon_U)P_{K,L}$ equals $\\epsilon_{T\\times U}$: postcomposing either map with a product projection gives the same map by naturality of the adjunction counit. Step 9 makes all three counits DK equivalences, and Step 8 makes $\\epsilon_T\\times\\epsilon_U$ a DK equivalence. Two-out-of-three proves that $P_{K,L}$ is a DK equivalence in this case.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6, first case of the proof, printed p.93; equality of the actual composite with the counit is checked by projections."
+   }
+  },
+  {
+   "text": "For arbitrary $K,L$, choose the maps $v_K:K\\to K'=N_{\\mathrm{hc}}(R\\mathfrak C[K])$ and $v_L:L\\to L'=N_{\\mathrm{hc}}(R\\mathfrak C[L])$ constructed in Step 9. Naturality of the product projections gives the commuting square\n$$\\begin{array}{ccc}\\mathfrak C[K\\times L]&\\xrightarrow{P_{K,L}}&\\mathfrak C[K]\\times\\mathfrak C[L]\\\\ \\downarrow\\mathfrak C[v_K\\times v_L]&&\\downarrow\\mathfrak C[v_K]\\times\\mathfrak C[v_L]\\\\ \\mathfrak C[K'\\times L']&\\xrightarrow{P_{K',L'}}&\\mathfrak C[K']\\times\\mathfrak C[L'].\\end{array}$$\nStep 2 and [lem-coef-rigidification-equivalence-detection] make the left vertical map a DK equivalence. The same detection theorem and Step 8 make the right vertical map a DK equivalence. Step 10 makes the bottom map a DK equivalence. Two-out-of-three in the Bergner structure of [lem-coef-coherent-nerve-comparison] therefore makes the actual top map $P_{K,L}$ a DK equivalence. This proves the remaining clause without replacing the specified natural map by an unspecified derived isomorphism.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.6, general case, printed p.93; natural replacement square and two-out-of-three."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-homotopy-classes",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-rigidification-equivalence-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proofs of Corollaries 2.2.5.4 and 2.2.5.6, Proposition 2.2.5.7 and Proposition 1.2.7.3, printed pp.92-94. HTT was read online but is not archived in literature/; the fixed-cylinder and product-stability arguments are supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The internal simplicial Hom into a quasicategory represents the cartesian exponential in the Joyal homotopy category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHom\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → C → C → SSet\", \"doc\": \"For objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, this denotes the simplicial set of morphisms from $K$ to $L$, defined as the internal hom $K \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.homEquiv'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.SimplicialCategory C] →\\n      (K L : C) → (K ⟶ L) ≃ (CategoryTheory.SimplicialCategory.sHom K L).obj (Opposite.op (SimplexCategory.mk 0))\", \"doc\": \"For any objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, there is a natural equivalence between the hom-set $\\\\text{Hom}(K, L)$ in $\\\\mathcal{C}$ and the se\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂.Hom\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"{A : SSet.Truncated 2} → [A.Quasicategory₂] → A.HomotopyCategory₂ → A.HomotopyCategory₂ → Type u_1\", \"doc\": \"For a 2-truncated quasicategory $ A $, the hom-set between objects $ x $ and $ y $ in its homotopy category is defined as the quotient of the set of edges $ x \\to y $ by the homotopy equivalence relati\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.MonoidalClosed SSet\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"SSet.instCartesianMonoidalCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.CartesianMonoidalCategory SSet\", \"doc\": \"The category of simplicial sets is equipped with a Cartesian monoidal category structure, inherited pointwise from the Cartesian monoidal structure on the category of types. This structure uses object\"}\n  {\"name\": \"SSet.QCat.catEnrichedOrdinaryCategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.EnrichedOrdinaryCategory CategoryTheory.Cat SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with an ordinary category structure enriched over the category of small categories (Cat). This structure is obtained by transporting the enrichment \"}\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"{A : SSet.Truncated 2} → [A.Quasicategory₂] → CategoryTheory.CategoryStruct.{u_1, u_1} A.HomotopyCategory₂\", \"doc\": \"For any 2-truncated quasicategory $ A $, its homotopy category is equipped with a category structure where: (1) objects are 0-simplices of $ A $; (2) hom-sets between objects are defined as equivalenc\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed is the ordinary internal Hom before Joyal localization. hoFunctor.isIso_prodComparison is the ordinary homotopy-category functor to Cat, not simplicial rigidification. Read SimplicialSet/Monoidal.lean and SimplicialNerve.lean:14-34. JoyalTrick.lean:13-25 is a model-axiom recognition trick and contains no Joyal model structure or homotopy exponentials."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"exp\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed is the ordinary internal Hom before Joyal localization. hoFunctor.isIso_prodComparison is the ordinary homotopy-category functor to Cat, not simplicial rigidification. Read SimplicialSet/Monoidal.lean and SimplicialNerve.lean:14-34. JoyalTrick.lean:13-25 is a model-axiom recognition trick and contains no Joyal model structure or homotopy exponentials."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|categorical_equivalence|homotopy.*exponential",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"13\", \"text\": \"# A trick by Joyal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"17\", \"text\": \"of cofibrations with respect to trivial fibrations. A trick by Joyal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"40\", \"text\": \"/-- Joyal's trick: that cofibrations have the left lifting property\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"44\", \"text\": \"lemma hasLiftingProperty_of_joyalTrick\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"line\": \"69\", \"text\": \"/-- Joyal's trick (dual): that trivial cofibrations have the left lifting\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed is the ordinary internal Hom before Joyal localization. hoFunctor.isIso_prodComparison is the ordinary homotopy-category functor to Cat, not simplicial rigidification. Read SimplicialSet/Monoidal.lean and SimplicialNerve.lean:14-34. JoyalTrick.lean:13-25 is a model-axiom recognition trick and contains no Joyal model structure or homotopy exponentials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy category of quasicategories is cartesian closed with exponentials given by simplicial internal hom",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Cat.closed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": Closed (Cat.of C)\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"CategoryTheory.cartesianClosedOfReflective'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Ideal\", \"type\": \"(l : i.EssImageSubcategory ⥤ D) (φ : l ⋙ i ≅ i.essImage.ι) : MonoidalClosed D\", \"doc\": \"Given a reflective subcategory $\\\\mathcal{D}$ of a Cartesian monoidal closed category $\\\\mathcal{C}$, this constructs the Cartesian closed structure on $\\\\mathcal{D}$ by showing that for any objects $B,X\"}\n  {\"name\": \"CategoryTheory.CartesianClosed\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.MonoidalCategory C] → Type (max u v)\", \"doc\": \"A category equipped with finite products and an internal hom-functor $[-,-]$ satisfying the adjunction condition: for all objects $A, B, C$, there is a natural isomorphism $\\\\mathrm{Hom}(A \\\\times B, C)\"}\n  {\"name\": \"CategoryTheory.exp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] → (A : C) → [CategoryTheory.Closed A] → CategoryTheory.Functor C C\", \"doc\": \"For a cartesian closed category $\\\\mathcal{C}$ and an object $A \\\\in \\\\mathcal{C}$, the exponential functor $\\\\text{exp}(A) : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ sends each object $Y$ to the exponential object $\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (SSet.{u})\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"CategoryTheory.Cat.cartesianClosed\", \"module\": \"Mathlib.CategoryTheory.Category.Cat.CartesianClosed\", \"type\": \": MonoidalClosed Cat.{u, u}\", \"doc\": \"The category $\\\\mathsf{Cat}$ of small categories is Cartesian closed, meaning it has a Cartesian monoidal structure with categorical products as the tensor product and functor categories $[\\\\mathcal{C},\"}\n  {\"name\": \"SSet.Truncated.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (Truncated.{u} n)\", \"doc\": \"The category of $ n $-truncated simplicial sets, equipped with the Cartesian monoidal structure, is a monoidal closed category. This means it has an internal hom-functor $[X, Y]$ such that for all obj\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed is the ordinary internal Hom before Joyal localization. hoFunctor.isIso_prodComparison is the ordinary homotopy-category functor to Cat, not simplicial rigidification. Read SimplicialSet/Monoidal.lean and SimplicialNerve.lean:14-34. JoyalTrick.lean:13-25 is a model-axiom recognition trick and contains no Joyal model structure or homotopy exponentials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidification of a product of simplicial sets is Dwyer Kan equivalent to the product of their simplicial rigidifications",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ (n m : ℕ),\\n  CategoryTheory.IsIso\\n    (CategoryTheory.Limits.prodComparison SSet.hoFunctor (SSet.stdSimplex.obj (SimplexCategory.mk n))\\n      (SSet.stdSimplex.obj (SimplexCategory.mk m)))\", \"doc\": \"The product comparison morphism induced by the homotopy category functor, when applied to standard simplices $\\\\Delta[n]$ and $\\\\Delta[m]$, is an isomorphism. This means that the homotopy category of th\"}\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {D : SSet} (X : SSet),\\n  (∀ (m : ℕ),\\n      CategoryTheory.IsIso\\n        (CategoryTheory.Limits.prodComparison SSet.hoFunctor D (SSet.stdSimplex.obj (SimplexCategory.mk m)))) →\\n    CategoryTheory.IsIso (CategoryTheory.Limits.prodComparison SSet.hoFunctor D X)\", \"doc\": \"If the product comparison morphism of the homotopy category functor is an isomorphism for all standard simplices $\\\\Delta[m]$ and a fixed simplicial set $D$, then it is also an isomorphism for any simp\"}\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ (X Y : SSet), CategoryTheory.IsIso (CategoryTheory.Limits.prodComparison SSet.hoFunctor X Y)\", \"doc\": \"For any two simplicial sets $X$ and $Y$, the homotopy category functor applied to their product induces an isomorphism between the homotopy category of $X \\times Y$ and the product of the homotopy cate\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.iso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X Y : SSet.Truncated 2) →\\n  CategoryTheory.Cat.of (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y).HomotopyCategory ≅\\n    CategoryTheory.Cat.of (X.HomotopyCategory × Y.HomotopyCategory)\", \"doc\": \"For any 2-truncated simplicial sets $X$ and $Y$, the homotopy category of their product $X \\times Y$ is isomorphic to the product of their individual homotopy categories $\\\\mathcal{H}(X) \\times \\\\mathcal{\"}\n  {\"name\": \"SSet.prodStdSimplex.isoNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex\", \"type\": \"(p q : ℕ) →\\n  CategoryTheory.MonoidalCategoryStruct.tensorObj (SSet.stdSimplex.obj (SimplexCategory.mk p))\\n      (SSet.stdSimplex.obj (SimplexCategory.mk q)) ≅\\n    CategoryTheory.nerve (ULift.{u, 0} (Fin (p + 1) × Fin (q + 1)))\", \"doc\": \"For natural numbers $p$ and $q$, the Cartesian product of the standard simplices $\\\\Delta^p$ and $\\\\Delta^q$ in the category of simplicial sets is naturally isomorphic to the nerve of the product catego\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Limits.PreservesFiniteProducts SSet.hoFunctor\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category by truncating at dimension 2 and quotienting by homotopy r\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ (C D : Type u) [inst : CategoryTheory.Category.{u, u} C] [inst_1 : CategoryTheory.Category.{u, u} D],\\n  CategoryTheory.IsIso\\n    (CategoryTheory.Limits.prodComparison SSet.hoFunctor (CategoryTheory.nerve C) (CategoryTheory.nerve D))\", \"doc\": \"For any categories $ C $ and $ D $, the product comparison morphism induced by the homotopy category functor applied to the nerves of $ C $ and $ D $ is an isomorphism. This means the canonical morphi\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.functor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X Y : SSet.Truncated 2) →\\n  CategoryTheory.Functor (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y).HomotopyCategory\\n    (X.HomotopyCategory × Y.HomotopyCategory)\", \"doc\": \"Given two 2-truncated simplicial sets $X$ and $Y$, this functor maps the homotopy category of their product $X \\times Y$ to the product of their individual homotopy categories $\\\\mathcal{H}(X) \\times \\\\ma\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: SSet.instMonoidalClosed is the ordinary internal Hom before Joyal localization. hoFunctor.isIso_prodComparison is the ordinary homotopy-category functor to Cat, not simplicial rigidification. Read SimplicialSet/Monoidal.lean and SimplicialNerve.lean:14-34. JoyalTrick.lean:13-25 is a model-axiom recognition trick and contains no Joyal model structure or homotopy exponentials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy category of quasicategories is cartesian closed, with exponential the simplicial internal hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.MonoidalClosed SSet\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Limits.PreservesFiniteProducts SSet.hoFunctor\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category by truncating at dimension 2 and quotienting by homotopy r\"}\n  {\"name\": \"SSet.instCartesianMonoidalCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.CartesianMonoidalCategory SSet\", \"doc\": \"The category of simplicial sets is equipped with a Cartesian monoidal category structure, inherited pointwise from the Cartesian monoidal structure on the category of types. This structure uses object\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Limits.PreservesLimitsOfShape (CategoryTheory.Discrete CategoryTheory.Limits.WalkingPair) SSet.hoFunctor\", \"doc\": \"The homotopy category functor for simplicial sets preserves binary products. This means that for any pair of simplicial sets, their product in the category of simplicial sets is mapped by the homotopy\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X Y : SSet.Truncated 2) →\\n  CategoryTheory.Functor X.HomotopyCategory\\n    (CategoryTheory.Functor Y.HomotopyCategory (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y).HomotopyCategory)\", \"doc\": \"A curried inverse for the binary product in the homotopy category of 2-truncated simplicial sets, constructed by lifting through homotopy equivalence. This defines a functor $ X.\\text{HomotopyCategory}\"}\n  {\"name\": \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"{A : SSet.Truncated 2} → [A.Quasicategory₂] → CategoryTheory.Category.{u_1, u_1} A.HomotopyCategory₂\", \"doc\": \"For any 2-truncated quasicategory $ A $, its homotopy category $ \\\\text{HomotopyCategory}_2(A) $ is equipped with a canonical category structure. This structure has 0-simplices of $ A $ as objects, hom\"}\n  {\"name\": \"SSet.QCat.catEnrichedOrdinaryCategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.EnrichedOrdinaryCategory CategoryTheory.Cat SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with an ordinary category structure enriched over the category of small categories (Cat). This structure is obtained by transporting the enrichment \"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"{A : SSet.Truncated 2} → [A.Quasicategory₂] → CategoryTheory.CategoryStruct.{u_1, u_1} A.HomotopyCategory₂\", \"doc\": \"For any 2-truncated quasicategory $ A $, its homotopy category is equipped with a category structure where: (1) objects are 0-simplices of $ A $; (2) hom-sets between objects are defined as equivalenc\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.instMonoidalClosed is ordinary simplicial internal Hom, and hoFunctor product preservation is the ordinary homotopy-category functor, not Joyal localization exponentials or rigidification products."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.Kan|IChunk|chunk|projectiveModel|categoricalEquivalen|CategoricalEquivalen",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in AlgebraicTopology for the enriched model, Bergner, chunk, or Joyal categorical-equivalence vocabulary."
+  },
+  {
+   "tool": "grep",
+   "query": "prod.*[Ww]eak[Ee]quivalence|[Ww]eak[Ee]quivalence.*prod|[Pp]reserves.*[Pp]roduct|[Qq]uillen.*[Aa]djunction",
+   "results": "{\"t\": \"2026-10-16T18:33:22Z\", \"tool\": \"grep\", \"query\": \"prod.*[Ww]eak[Ee]quivalence|[Ww]eak[Ee]quivalence.*prod|[Pp]reserves.*[Pp]roduct|[Qq]uillen.*[Aa]djunction\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Quillen adjunction induces an adjunction of homotopy categories, with the bijection on hom sets computed by ordinary adjunction for cofibrant and fibrant objects",
+   "results": "{\"t\": \"2026-10-16T18:33:30Z\", \"tool\": \"leanfinder\", \"query\": \"A Quillen adjunction induces an adjunction of homotopy categories, with the bijection on hom sets computed by ordinary adjunction for cofibrant and fibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_symm_mk\"], \"digest\": \"1248f6d1d60398da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalences.*(prod|tensor)|(prod|tensor).*weakEquivalences|IsMonoidalModelCategory|MonoidalModelCategory",
+   "results": "{\"t\": \"2026-10-16T18:33:50Z\", \"tool\": \"grep\", \"query\": \"weakEquivalences.*(prod|tensor)|(prod|tensor).*weakEquivalences|IsMonoidalModelCategory|MonoidalModelCategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"weakEquivalences\", \"prod\"",
+   "results": "{\"t\": \"2026-10-16T18:33:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"weakEquivalences\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of two weak homotopy equivalences of simplicial sets is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T18:34:02Z\", \"tool\": \"leanfinder\", \"query\": \"The product of two weak homotopy equivalences of simplicial sets is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.functor_map\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"ContinuousMap.HomotopyEquiv.prodCongr\", \"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\"], \"digest\": \"8d0f099f8b803000\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "grep",
+   "query": "weakHomotopyEquivalences|WeakHomotopyEquivalence|weakHomotopyEquivalence",
+   "results": "{\"t\": \"2026-10-16T18:34:08Z\", \"tool\": \"grep\", \"query\": \"weakHomotopyEquivalences|WeakHomotopyEquivalence|weakHomotopyEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cartesian product of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T18:34:09Z\", \"tool\": \"leansearch\", \"query\": \"The cartesian product of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"ContinuousMap.HomotopyEquiv.prodCongr\", \"ContinuousMap.HomotopyEquiv.piCongrRight\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"ContinuousMap.Homotopic.prodMk\", \"ContinuousMap.Homotopic.prodMap\", \"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\", \"ContinuousMap.Homotopy.prod\"], \"digest\": \"a57b0eecc04815f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|rigidification|homotopy.*exponential",
+   "results": "{\"t\": \"2026-10-16T18:34:23Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalEquivalence|rigidification|homotopy.*exponential\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"exp\"",
+   "results": "{\"t\": \"2026-10-16T18:34:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial internal hom into a quasicategory represents the exponential in the localization of simplicial sets at categorical equivalences",
+   "results": "{\"t\": \"2026-10-16T18:34:32Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial internal hom into a quasicategory represents the exponential in the localization of simplicial sets at categorical equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat.bicategory\"], \"digest\": \"fc416ddad0745179\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Joyal homotopy category is cartesian closed and rigidification preserves products up to Dwyer Kan equivalence",
+   "results": "{\"t\": \"2026-10-16T18:35:06Z\", \"tool\": \"leansearch\", \"query\": \"The Joyal homotopy category is cartesian closed and rigidification preserves products up to Dwyer Kan equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Cat.closed\", \"CategoryTheory.CartesianClosed\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.cartesianClosedOfEquiv\", \"CategoryTheory.Cat.cartesianClosed\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\"], \"digest\": \"69e94d50f66214d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy category of the Joyal model structure is cartesian closed, with products of simplicial sets and exponentials their simplicial function complexes",
+   "results": "{\"t\": \"2026-10-16T18:35:50Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy category of the Joyal model structure is cartesian closed, with products of simplicial sets and exponentials their simplicial function complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"SSet.Truncated.hoFunctor.monoidal\"], \"digest\": \"89d6126b80f1e215\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: hits concern ordinary simplicial internal Hom or the ordinary homotopy-category functor to Cat, abstract model-category operations, or a lifting trick. They do not state the Joyal-localization exponential or rigidification-product assertion. Auxiliary product searches were investigated and the needed product argument is instead proved in Steps 7-8 from existing DAG statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-diagram-rectification",
+  "date": "2026-10-16",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-homotopy-exponentials",
+  "worker": "stage1",
+  "summary": "Eleven steps prove all original clauses, using existing DAG nodes only. The proof spells out internal-Hom horn lifting, product stability in the testing convention, a fixed categorical cylinder and its comparison with arbitrary cylinders, quotient-level currying with actual evaluation, and the counit/replacement square for the actual rigidification product comparison. No statement change, new node, Lean edit or compilation. Repair of return for reviewed head 826dd1d533: revalidated all nine cited statements against the current DAG, checked the Joyal node's revised definition binding, and made its use in Steps 2 and 4 explicit; refreshed all four affected statement quotes. The mathematical statement and dependency sets are unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2: coherent derived coefficient adjunction preceding the displayed RHom/Rlim calculation; via the recorded ancestry, supplies the Joyal product/exponential tool used in Step 5 of lem-coef-enriched-diagram-rectification."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-6400c272e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-6400c272e (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 11 steps. I read the full statements of all ten dependencies (joyal-model-structure, coherent-nerve-comparison, inner-anodyne-pushout-product, model-localization-homotopy-classes, model-infinity-derived-adjunction, ex-infinity-finite-products, kan-quillen-right-proper, quillen-derived-counit-criterion, rigidification-equivalence-detection, complete-algebroid) and the parent's step 5. The statement is unchanged and true (HTT Cor 2.2.5.4/2.2.5.6, Prop 2.2.5.7/1.2.7.3; the Joyal structure is cartesian, C[K×L]→C[K]×C[L] is a DK equivalence, and Fun(K,Q) is the exponential), and it gives the parent exactly what step 5 uses. Every step checks against what its cited nodes say. Step 1: the pushout-product with ∅⊂K gives Λ×K→Δ×K, which is inner anodyne. Step 2: currying of the testing definition. Step 3: E=N(indiscrete 2-object groupoid); E→Δ^0 is a categorical equivalence because the right Quillen adjoint preserves weak equivalences between fibrant objects and N_hc agrees with N on discrete categories. Step 4: the fixed-cylinder lift; the factorization, 2-of-3 and both lifting systems are verified. Steps 5–6: product and exponential bijections, with explicit currying formulas and a Yoneda-type iso test. Steps 7–8: products of weak homotopy equivalences via Ex^∞, then Kan–Quillen right properness along Kan projections, then products of DK equivalences. Steps 9–11: the counit criterion, the triangle identity ε∘C[v]=r with detection, the fibrant-nerve case via counit naturality, and the replacement square with 2-of-3 for the actual map P_{K,L}. Edge cases (empty K, empty X, K=Δ^0, Δ^1 vs E) pass. There are no new nodes. All citations are in the same unit, so no tool_uses are needed. There is no cycle: the item is not in its 214-node closure. Mathlib has no Joyal model structure, which I confirmed by grep. I found no duplicate: infinity-functor-pushout is an ∞-level cartesian-closure statement, not this one. HTT is not in literature/ and I could not open it; it is recorded as WANTED, with proof_origin agent. No SGA is cited. I made no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

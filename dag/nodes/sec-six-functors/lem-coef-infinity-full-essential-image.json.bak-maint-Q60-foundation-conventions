@@ -1,0 +1,362 @@
+{
+ "id": "lem-coef-infinity-full-essential-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2 of main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, coherent middle mapping-complex adjunction: lifting the entire free simplicial resolution through the fully faithful graph comparison, rather than selecting independent lifts of its terms.",
+   "via": [
+    "lem-coef-infinity-monadic-comparison",
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A fully faithful infinity-functor is equivalent to its full essential image",
+ "statement": "Use the universe and infinity-category conventions of [def-coef-complete-algebroid] and the coherent functors, full subcategories, mapping spaces and functor equivalences of [def-cbc-enhanced-diagrams-cones]. Let $J:\\mathcal X\\to\\mathcal Y$ be a coherent functor of infinity-categories which is fully faithful, meaning that $\\operatorname{Map}_{\\mathcal X}(x,x')\\to\\operatorname{Map}_{\\mathcal Y}(Jx,Jx')$ is an equivalence for every $x,x'\\in\\mathcal X$. Let $\\mathcal Y_0$ be the full subcategory of $\\mathcal Y$ whose objects are precisely those $y$ for which there exist $x\\in\\mathcal X$ and an equivalence $y\\simeq Jx$ in $\\mathcal Y$. The restricted functor $J_0:\\mathcal X\\to\\mathcal Y_0$ admits a coherent quasi-inverse $K:\\mathcal Y_0\\to\\mathcal X$, with coherent natural equivalences $KJ_0\\simeq1_{\\mathcal X}$ and $J_0K\\simeq1_{\\mathcal Y_0}$.",
+ "source": {
+  "document": "https://kerodon.net/tag/01JX",
+  "place": "Kerodon, Theorem 4.8.4.1 (Kerodon Tag 01JX), applied to the functor with codomain its full replete essential image. This is a Kerodon identifier, not Stacks Tag 01JX."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Work in a containing universe in which the simplicial sets $\\mathcal X,\\mathcal Y$ and their mapping spaces are small, with a further universe for their functor categories; this is a change of size convention, not a smallness hypothesis on the original categories. Apply [lem-cbc-enhanced-functor-cone-calculus] with $K=\\Delta^0$, so $\\operatorname{Fun}(K,\\mathcal Y)=\\mathcal Y$ by its simplicial definition: the full subcategory $\\mathcal Y_0$ is a quasicategory. The full-subcategory definition in [def-cbc-enhanced-diagrams-cones] makes $J$ factor as a simplicial functor $J_0:\\mathcal X\\to\\mathcal Y_0$: every vertex $Jx$ belongs to the stated object class. For objects $u,v$ of $\\mathcal Y_0$, every right-pinched mapping simplex between them has only the vertices $u,v$, so it lies in $\\mathcal Y_0$ exactly when it lies in $\\mathcal Y$. Thus the two mapping simplicial sets are equal. In particular $J_0$ is fully faithful by the given hypothesis on $J$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Theorem 4.8.4.1, specialization to the full essential image; agent verification of the full-subcategory and universe conventions."
+   }
+  },
+  {
+   "text": "For each $y\\in\\mathcal Y_0$, its defining property supplies $x_y\\in\\mathcal X$ and an equivalence edge $e_y:y\\to J_0x_y$ with inverse $d_y:J_0x_y\\to y$. For every $z\\in\\mathcal X$, consider\n$$\\operatorname{Map}_{\\mathcal X}(x_y,z)\\xrightarrow{J_0}\\operatorname{Map}_{\\mathcal Y_0}(J_0x_y,J_0z)\\xrightarrow{e_y^*}\\operatorname{Map}_{\\mathcal Y_0}(y,J_0z),\\qquad e_y^*(a)=a\\circ e_y.$$\nThe first map is an equivalence by Step 1. Use the composition maps and their homotopy classes in [lem-coef-infinity-mapping-composition] for the second map and for $d_y^*(b)=b\\circ d_y$. Associativity, dependence of precomposition on the component of its edge, and the two inverse-triangle witnesses give homotopies on the entire mapping spaces\n$$d_y^*e_y^*(a)=(a\\circ e_y)\\circ d_y\\simeq a\\circ(e_y\\circ d_y)\\simeq a\\circ1_{J_0x_y}\\simeq a,$$\n$$e_y^*d_y^*(b)=(b\\circ d_y)\\circ e_y\\simeq b\\circ(d_y\\circ e_y)\\simeq b\\circ1_y\\simeq b.$$\nThe equalities of homotopy classes here are simplicial homotopies with Kan targets, in the convention of the cited node. Thus $d_y^*$ is a simplicial homotopy inverse for $e_y^*$. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that $e_y^*$ is a weak homotopy equivalence. The composite is consequently an equivalence of spaces (the induced component bijections and based homotopy-group isomorphisms compose). It is exactly $v\\mapsto J_0(v)\\circ e_y$, the universal-arrow map required next. These objectwise choices have not been asserted to form a functor.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Composition and precomposition, Construction 4.6.8.9 and Notation 4.6.8.15; agent inverse-homotopy calculation verifying the hypotheses of the local adjoint criterion, Kerodon 6.2.6.1 (02FV). Realization weak-equivalence implication: Kerodon 3.1.7.13 (00UB)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-local-adjoint-criterion] to $R=J_0:\\mathcal X\\to\\mathcal Y_0$ and the arrows of Step 2. Both categories are quasicategories by the hypothesis and Step 1, and the displayed universal-arrow map has just been proved an equivalence for every $y,z$; no completeness, presentability or colimit assumption is used. The criterion supplies a coherent left adjoint $K:\\mathcal Y_0\\to\\mathcal X$, a coherent unit $\\eta:1_{\\mathcal Y_0}\\to J_0K$, a coherent counit $\\epsilon:KJ_0\\to1_{\\mathcal X}$, and the triangle homotopies. In particular for $x,z\\in\\mathcal X$ it supplies the equivalence\n$$A_z:\\operatorname{Map}_{\\mathcal X}(KJ_0x,z)\\longrightarrow\\operatorname{Map}_{\\mathcal Y_0}(J_0x,J_0z),\\qquad v\\longmapsto J_0(v)\\circ\\eta_{J_0x}.$$\nThe transformations and their coherences are supplied together by the cited criterion, rather than assembled from independent objectwise lifts.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Proposition 6.2.6.1 and Proposition 6.2.1.17 (02F1), with the explicit induced mapping-space equivalence."
+   }
+  },
+  {
+   "text": "Every counit component $\\epsilon_x:KJ_0x\\to x$ is an equivalence. Write $q=KJ_0x$. On components of the mapping spaces, the triangle identity and the formula in Step 3 give\n$$[A_z]\\bigl([u]\\,[\\epsilon_x]\\bigr)=[J_0u]\\,[J_0\\epsilon_x]\\,[\\eta_{J_0x}]=[J_0u].$$\nHere components and their composition form the homotopy categories provided by [lem-coef-infinity-mapping-composition]. The maps $[A_z]$ are bijective by Step 3, and $[u]\\mapsto[J_0u]$ is bijective by Step 1. Hence precomposition with $[\\epsilon_x]$ is a bijection $\\operatorname{Hom}_{h\\mathcal X}(x,z)\\to\\operatorname{Hom}_{h\\mathcal X}(q,z)$ for every $z$. Taking $z=q$ gives $r:x\\to q$ with $[r][\\epsilon_x]=1_q$. Taking $z=x$ and using injectivity, the equation $([\\epsilon_x][r])[\\epsilon_x]=[\\epsilon_x]=1_x[\\epsilon_x]$ gives $[\\epsilon_x][r]=1_x$. Every component is represented by an edge, and the invertible-component criterion of the cited node turns these two equations into inverse-edge witnesses. Thus $\\epsilon_x$ is an equivalence. This is an explicit two-sided inverse argument, not an invocation of a further Yoneda lemma.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Agent calculation with the induced adjunction equivalence; the counit inverse is proved explicitly in the homotopy category."
+   }
+  },
+  {
+   "text": "The triangle identity gives $[J_0\\epsilon_x][\\eta_{J_0x}]=1_{J_0x}$. A simplicial functor preserves equivalence edges by applying itself to the inverse edge and its two triangle simplices. Thus $J_0\\epsilon_x$ is an equivalence by Step 4, and this equation makes $\\eta_{J_0x}$ its inverse in the homotopy category. For any $y\\in\\mathcal Y_0$ choose $e:y\\to J_0x$ as in Step 2. Naturality of the coherent unit gives\n$$[J_0K(e)][\\eta_y]=[\\eta_{J_0x}][e].$$\nBoth $e$ and $J_0K(e)$ are equivalences, as is $\\eta_{J_0x}$. Multiplying by the inverse of $[J_0K(e)]$ shows $[\\eta_y]$ is invertible. The invertible-component criterion of [lem-coef-infinity-mapping-composition] makes every $\\eta_y$ an equivalence edge. The same calculation works when there are no objects, since then there is no component to check.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Agent extension from image objects to the replete essential image, using naturality and the adjunction triangle identities."
+   }
+  },
+  {
+   "text": "The coherent counit and unit supplied in Step 3 have equivalence components by Steps 4 and 5. Apply the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] in $\\operatorname{Fun}(\\mathcal X,\\mathcal X)$ and $\\operatorname{Fun}(\\mathcal Y_0,\\mathcal Y_0)$. It makes $\\epsilon:KJ_0\\to1_{\\mathcal X}$ and $\\eta:1_{\\mathcal Y_0}\\to J_0K$ equivalences in these functor quasicategories. Hence $\\epsilon$ and the inverse of $\\eta$ are the required coherent natural equivalences $KJ_0\\simeq1_{\\mathcal X}$ and $J_0K\\simeq1_{\\mathcal Y_0}$. In particular $K$ is a coherent quasi-inverse on the whole full essential image, including every higher simplex of every diagram.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Agent conclusion proving this specialization of Theorem 4.8.4.1 through the local adjoint criterion; componentwise equivalences yield coherent natural equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-local-adjoint-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01JX",
+  "place": "Agent proof of the essential-image specialization of Theorem 4.8.4.1, via Kerodon 6.2.6.1 (02FV) and 6.2.1.17 (02F1), existing mapping-composition, simplicial-homotopy-invariance and componentwise-equivalence DAG tools. Step 2 writes both inverse homotopies explicitly, avoiding the cyclic mapping-bifunctor dependency. The online sources are not archived in literature/."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor of quasicategories is an equivalence onto its replete full essential image and every diagram in the essential image lifts coherently",
+   "results": "{\"t\": \"2026-10-16T16:25:05Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor of quasicategories is an equivalence onto its replete full essential image and every diagram in the essential image lifts coherently\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"SSet.Truncated.sk.fullyFaithful\", \"SSet.Truncated.cosk.fullyFaithful\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\"], \"digest\": \"29f2c6ef76104e8f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullyFaithful\", \"whiskeringRight\"",
+   "results": "{\"t\": \"2026-10-16T16:25:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"FullyFaithful\\\", \\\"whiskeringRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.whiskeringRight\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight_preimage_app\"], \"digest\": \"65a5011fb64b40d1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|fully.faithful|essSurj|essentially.surjective|isEquivalence",
+   "results": "{\"t\": \"2026-10-16T16:25:13Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|fully.faithful|essSurj|essentially.surjective|isEquivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToEssImage|fullyFaithful.*whiskeringRight|def ExtraDegeneracy|def isColimit|theorem isColimit",
+   "results": "{\"t\": \"2026-10-16T16:27:25Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulToEssImage|fullyFaithful.*whiskeringRight|def ExtraDegeneracy|def isColimit|theorem isColimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adhesive/Subobject.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\", \"Mathlib/CategoryTheory/GradedObject.lean\", \"Mathlib/CategoryTheory/GradedObject.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Whiskering.lean\"], \"digest\": \"30f1af699524229f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor of infinity categories is an equivalence onto its essential image",
+   "results": "{\"t\": \"2026-10-16T16:27:25Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful functor of infinity categories is an equivalence onto its essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.IsEquivalence.mk\", \"CategoryTheory.Functor.FullyFaithful.casesOn\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Functor.FullyFaithful.faithful\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.essImage.liftFunctor\", \"CategoryTheory.Functor.FullyFaithful.ctorIdx\"], \"digest\": \"11e3fa999528f62d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful functors between infinity categories induce equivalences with the full subcategory spanned by objects equivalent to images",
+   "results": "{\"t\": \"2026-10-16T16:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful functors between infinity categories induce equivalences with the full subcategory spanned by objects equivalent to images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.FullyFaithful.isoEquiv\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.Equivalence.congrFullSubcategory_counitIso\"], \"digest\": \"ee1e6982a7873bd0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for infinity-categories: CategoryTheory.Equivalence.fullyFaithfulToEssImage (Mathlib/CategoryTheory/Equivalence.lean:711) and Functor.FullyFaithful.whiskeringRight (Mathlib/CategoryTheory/Whiskering.lean:116) have ordinary category hypotheses and hom-set full faithfulness. They do not supply a quasi-inverse from equivalences of quasicategorical mapping spaces. The grep under AlgebraicTopology/Quasicategory returned no matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\"",
+   "results": "{\"t\": \"2026-10-16T16:56:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"essImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.EssImageSubcategory\", \"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"], \"digest\": \"74fe8d63260f62f1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned ordinary category interfaces; they use Category instances and hom sets, and do not construct a coherent inverse or a free resolution for arbitrary quasicategories. The nerve and homotopy-category adjunctions concern specific functors, not the arbitrary adjunction in this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinity functor inducing equivalences on mapping spaces construct an inverse functor on the full subcategory spanned by objects equivalent to its values",
+   "results": "{\"t\": \"2026-10-16T16:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinity functor inducing equivalences on mapping spaces construct an inverse functor on the full subcategory spanned by objects equivalent to its values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShrinkHoms.instIsEquivalenceInverse\", \"CategoryTheory.ObjectProperty.topEquivalence_inverse\", \"CategoryTheory.Equivalence.congrFullSubcategory_inverse\", \"CategoryTheory.Equivalence.inverseFunctor\", \"CategoryTheory.Equivalence.induced_inverse_obj\", \"CategoryTheory.Equivalence.induced_inverse_map\", \"CategoryTheory.Equivalence.full_inverse\", \"EquivFunctor.mapEquiv_symm_apply\"], \"digest\": \"cf3ccc46264f00cf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned ordinary category interfaces; they use Category instances and hom sets, and do not construct a coherent inverse or a free resolution for arbitrary quasicategories. The nerve and homotopy-category adjunctions concern specific functors, not the arbitrary adjunction in this node."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage|fullyFaithful|barConstruction|comonad",
+   "results": "{\"t\": \"2026-10-16T16:57:18Z\", \"tool\": \"grep\", \"query\": \"essImage|fullyFaithful|barConstruction|comonad\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no matching declaration under AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|essential.image|quasi.inverse",
+   "results": "{\"t\": \"2026-10-16T18:12:09Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|essential.image|quasi.inverse\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "FullyFaithful, IsEquivalence, essential image",
+   "results": "{\"t\": \"2026-10-16T18:12:09Z\", \"tool\": \"loogle\", \"query\": \"FullyFaithful, IsEquivalence, essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FullyFaithful'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid Loogle identifier; query was rerun as the quoted declaration-name search recorded below, not used as evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful functor between infinity categories has a coherent quasi-inverse on the full replete essential image",
+   "results": "{\"t\": \"2026-10-16T18:12:09Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful functor between infinity categories has a coherent quasi-inverse on the full replete essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.fullyFaithfulOfCoreflective\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Functor.FullyFaithful.casesOn\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.Functor.FullyFaithful.homEquiv_symm_apply\", \"CategoryTheory.reflectsIsomorphisms_of_full_and_faithful\", \"CategoryTheory.Functor.FullyFaithful.compUliftYonedaCompWhiskeringLeft_inv_app_app_down\"], \"digest\": \"13bafeb979156e71\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor of infinity categories is equivalent to its full replete essential image",
+   "results": "{\"t\": \"2026-10-16T18:12:10Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor of infinity categories is equivalent to its full replete essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Functor.Full.toEssImage\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Functor.toEssImage\"], \"digest\": \"6775a6c104af8b90\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToEssImage",
+   "results": "{\"t\": \"2026-10-16T18:30:05Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulToEssImage\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Equivalence.lean\"], \"digest\": \"cd80fddec568e2ac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulToEssImage\"",
+   "results": "{\"t\": \"2026-10-16T18:30:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"fullyFaithfulToEssImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\"], \"digest\": \"c646f23f7867e76c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory equivalence from a fully faithful essentially surjective functor using representability of mapping space presheaves",
+   "results": "{\"t\": \"2026-10-16T18:30:16Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory equivalence from a fully faithful essentially surjective functor using representability of mapping space presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Quasicategory\", \"SSet.StrictSegal.quasicategory\", \"SSet.QCat.bicategory\"], \"digest\": \"ab6a89b4c2881b72\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: inspected CategoryTheory.Equivalence.fullyFaithfulToEssImage at Mathlib/CategoryTheory/Equivalence.lean:711-712, which assumes ordinary Category structures and hom-set Full/Faithful. Nerve/homotopy-category equivalences, QCat and the horn definition do not supply a coherent quasi-inverse from equivalences of arbitrary mapping spaces. No matching quasicategory source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor of quasicategories has a coherent quasi-inverse on its full replete essential image",
+   "results": "{\"t\": \"2026-10-16T19:26:23Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor of quasicategories has a coherent quasi-inverse on its full replete essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.nerveFunctor.full\", \"SSet.Truncated.cosk.fullyFaithful\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\"], \"digest\": \"789a1671ef44dfa9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Equivalence.fullyFaithfulToEssImage, read in Mathlib/CategoryTheory/Equivalence.lean:711-712, assumes ordinary categories and hom-set full faithfulness. The other returned nerve, truncation and QCat bicategory statements do not give a coherent inverse for an arbitrary map inducing equivalences of mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|essential.image|quasi.inverse|equivalence",
+   "results": "{\"t\": \"2026-10-16T19:26:49Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|essential.image|quasi.inverse|equivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictBicategory.lean:14-32 and 49-73 and TwoTruncated.lean:12-30. These provide the QCat bicategory and homotopy relations on truncated simplicial sets, not an essential-image inverse for an arbitrary fully faithful quasicategory functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful essentially surjective functor of infinity categories admits an inverse up to coherent natural equivalence",
+   "results": "{\"t\": \"2026-10-16T19:26:49Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful essentially surjective functor of infinity categories admits an inverse up to coherent natural equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEquivalence.mk\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.IsEquivalence.mk'\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.Equivalence.essSurj_functor\", \"CategoryTheory.Functor.inv\", \"CategoryTheory.Equivalence.essSurj_inverse\", \"CategoryTheory.Functor.asEquivalence\"], \"digest\": \"576a7c3612202846\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Equivalence.fullyFaithfulToEssImage, read in Mathlib/CategoryTheory/Equivalence.lean:711-712, assumes ordinary categories and hom-set full faithfulness. The other returned nerve, truncation and QCat bicategory statements do not give a coherent inverse for an arbitrary map inducing equivalences of mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences on all mapping spaces and essential surjectivity imply an equivalence of quasicategories with a coherent inverse functor",
+   "results": "{\"t\": \"2026-10-16T19:26:57Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences on all mapping spaces and essential surjectivity imply an equivalence of quasicategories with a coherent inverse functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"SSet.QCat.bicategory\", \"SSet.Truncated.Quasicategory₂\", \"SSet.QCat\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.Equivalence.essSurj_inverse\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.LocallyDiscrete.locallyDiscreteEquiv\"], \"digest\": \"79399ea1e10edf66\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.Equivalence.fullyFaithfulToEssImage, read in Mathlib/CategoryTheory/Equivalence.lean:711-712, assumes ordinary categories and hom-set full faithfulness. The other returned nerve, truncation and QCat bicategory statements do not give a coherent inverse for an arbitrary map inducing equivalences of mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|essImage|EssSurj|IsEquivalence",
+   "results": "{\"t\": \"2026-10-16T20:24:33Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|essImage|EssSurj|IsEquivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no fullyFaithful, essImage, EssSurj or IsEquivalence declaration in the quasicategory source subtree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An infinity functor inducing weak equivalences on all mapping spaces is an equivalence with the full subcategory of objects equivalent to its values",
+   "results": "{\"t\": \"2026-10-16T20:24:34Z\", \"tool\": \"leansearch\", \"query\": \"An infinity functor inducing weak equivalences on all mapping spaces is an equivalence with the full subcategory of objects equivalent to its values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Equivalence.congrFullSubcategory_functor\", \"CategoryTheory.Equivalence.congrFullSubcategory\", \"HomotopicalAlgebra.weakEquivalence_iff_of_objectProperty\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"4a3fa6505c5e7314\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary full-subcategory equivalences and model-category cofibrant-object localization results. Read the returned signatures and CofibrantObjectHomotopy.lean:28-130; they do not construct a coherent inverse for an arbitrary fully faithful quasicategory functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-16T20:24:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"essImage\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\"], \"digest\": \"c646f23f7867e76c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: returned ordinary category declarations have Category instances and hom-set Full/Faithful hypotheses. Read CategoryTheory/Equivalence.lean:711-712 and ObjectProperty/Equivalence.lean:55-80; neither gives the enhanced assertion as a one-line specialization. Other returned nerve and truncation functors are particular ordinary fully faithful functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor between quasicategories admits a coherent quasi-inverse on its full replete essential image",
+   "results": "{\"t\": \"2026-10-16T20:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor between quasicategories admits a coherent quasi-inverse on its full replete essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.nerveFunctor.full\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"SSet.Truncated.cosk.fullyFaithful\"], \"digest\": \"f59805739acac65f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: returned ordinary category declarations have Category instances and hom-set Full/Faithful hypotheses. Read CategoryTheory/Equivalence.lean:711-712 and ObjectProperty/Equivalence.lean:55-80; neither gives the enhanced assertion as a one-line specialization. Other returned nerve and truncation functors are particular ordinary fully faithful functors."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToEssImage|congrFullSubcategory|instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism",
+   "results": "{\"t\": \"2026-10-16T20:24:45Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulToEssImage|congrFullSubcategory|instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\"], \"digest\": \"9fd63b3c0e3ab25f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: returned ordinary category declarations have Category instances and hom-set Full/Faithful hypotheses. Read CategoryTheory/Equivalence.lean:711-712 and ObjectProperty/Equivalence.lean:55-80; neither gives the enhanced assertion as a one-line specialization. Other returned nerve and truncation functors are particular ordinary fully faithful functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially surjective map of infinity categories which induces equivalences on mapping Kan complexes has an inverse up to coherent natural equivalence",
+   "results": "{\"t\": \"2026-10-16T20:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"An essentially surjective map of infinity categories which induces equivalences on mapping Kan complexes has an inverse up to coherent natural equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.essSurj_inverse\", \"CategoryTheory.Functor.IsEquivalence.essSurj\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.Equivalence.essSurjInducedFunctor\", \"CategoryTheory.Equivalence.essSurj_functor\", \"CategoryTheory.Functor.isEquivalence_inv\", \"CategoryTheory.Functor.essSurj_of_iso\", \"CategoryTheory.Functor.instEssSurjSkeletonMapSkeleton\"], \"digest\": \"0b17810d656f247b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for arbitrary quasicategories: returned ordinary category declarations have Category instances and hom-set Full/Faithful hypotheses. Read CategoryTheory/Equivalence.lean:711-712 and ObjectProperty/Equivalence.lean:55-80; neither gives the enhanced assertion as a one-line specialization. Other returned nerve and truncation functors are particular ordinary fully faithful functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toEssImage\"",
+   "results": "{\"t\": \"2026-10-16T20:38:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"toEssImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.EssSurj.toEssImage\", \"CategoryTheory.Functor.Faithful.toEssImage\", \"CategoryTheory.Functor.Full.toEssImage\", \"CategoryTheory.Functor.toEssImage_obj_obj\", \"CategoryTheory.Functor.toEssImageCompι\", \"CategoryTheory.Functor.toEssImage_map_hom\", \"CategoryTheory.Functor.toEssImageCompι_hom_app\"], \"digest\": \"4749b6e5bbe361bc\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. The semantic search returned the QCat bicategory, homotopy-category quotients, nerves and edge-representative surjectivity; none constructs an inverse from arbitrary mapping-space equivalences. Loogle toEssImage returned ordinary CategoryTheory.Functor and Full/Faithful instances; the closest fullyFaithfulToEssImage instance, read in Mathlib/CategoryTheory/Equivalence.lean:711-712, assumes ordinary categories and hom sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of quasicategories can be constructed from maps inducing weak homotopy equivalences on morphism spaces and surjectivity on equivalence classes of objects",
+   "results": "{\"t\": \"2026-10-16T20:38:42Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence of quasicategories can be constructed from maps inducing weak homotopy equivalences on morphism spaces and surjectivity on equivalence classes of objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"SSet.Truncated.HomotopyCategory₂.mk_surjective\", \"SSet.Truncated.HomotopyCategory₂.homMk_surjective\", \"SSet.Truncated.HomotopyCategory.mk_surjective\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.hoFunctor\"], \"digest\": \"3b145ac7e94c6747\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. The semantic search returned the QCat bicategory, homotopy-category quotients, nerves and edge-representative surjectivity; none constructs an inverse from arbitrary mapping-space equivalences. Loogle toEssImage returned ordinary CategoryTheory.Functor and Full/Faithful instances; the closest fullyFaithfulToEssImage instance, read in Mathlib/CategoryTheory/Equivalence.lean:711-712, assumes ordinary categories and hom sets."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-monadic-comparison",
+  "date": "2026-10-17",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-full-essential-image",
+  "worker": "stage1",
+  "summary": "Preserved the statement and six-step adjunction proof. Rechecked every cited statement and repaired a newly present dependency cycle: replaced the mapping-bifunctor invocation by explicit precomposition inverse homotopies using existing mapping-composition and simplicial-homotopy-equivalence-weak nodes. Verified the counit and unit inverse equations and the coherent componentwise criterion. No new nodes, no Mathlib leaves and no project attachment; fresh actual Mathlib searches and current citation excerpts are recorded.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, coherent middle mapping-complex adjunction. This node supplies the coherent inverse on the full essential image used in Step 5 of lem-coef-infinity-monadic-comparison; it keeps the existing blueprint ancestry and the unit and chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory/full-subcategory and componentwise natural-equivalence criterion, needed to recognize the adjunction maps as coherent equivalences. It does not replace any geometric or coefficient-transport step of the unit."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy invariance of realization, converting the explicit precomposition inverse homotopies into the weak equivalence needed by the universal-arrow criterion. No statement of this unit supplies this topological tool; no geometric or coefficient route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N6-07d20a1d0",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-07d20a1d0 (reviewer sub-agent of L); spot-checked: I read the full item and the full statements of all six cited nodes. The statement is unchanged, and it is exactly Kerodon Theorem 4.8.4.1 (01JX, fetched online: an essentially surjective, fully faithful functor is an equivalence) specialised to the full replete essential image. Kerodon Proposition 6.2.6.1 (02FV, fetched) matches the orientation of local-adjoint-criterion. Kerodon is not archived, so the proof is correctly marked by=agent with a WANTED line, and no SGA source is used. Step 1: Fun(Δ^0,Y)=Y, cone-calculus makes the full subcategory a quasicategory, and pinched mapping simplices have only their two vertices, so the mapping spaces of Y_0 and Y agree. Step 2: the explicit d*e*≃id and e*d*≃id use associativity, units, component dependence and the inverse 2-simplices from mapping-composition; homotopy-equivalence-weak then gives the weak equivalence, and the result is the universal-arrow map. Step 3: the criterion's hypotheses hold exactly and it supplies K, η, ε and the triangles. Step 4: [A_z]∘(−∘[ε])=[J_0], so precomposition with [ε] is bijective, giving a two-sided inverse of ε_x. Step 5: η_{J0x} is the inverse of J_0ε_x, and the naturality square along e:y→J_0x uses repleteness. Step 6: by the componentwise criterion, ε and η are equivalence edges in Fun. Edge cases checked: empty X, the identity functor, a one object into a two-object groupoid, empty mapping spaces, and BG→pt, which does not satisfy the hypothesis. proof_deps equals the union of the step uses. A traversal of 99 reachable nodes finds no cycle and no missing or merged node; the removed transport-classification citation would have closed a cycle. No duplicate among the joyal-functor-equivalence-test, joyal-quasicategory-characterizations, simplicial-fully-faithful-homotopy-image and enriched-completion-localization nodes. There are no new nodes. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-homotopy-equivalence-weak, both generic tools with the same precedent across this unit. No target, coefficient category or base-change morphism is involved. I made no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "id": "lem-coef-infinity-pointwise-yoneda-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the displayed derived coefficient mapping-complex adjunction: evaluation at an identity extracts the universal map from a representing equivalence before applying the local coherent adjoint criterion.",
+   "via": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Infinity Yoneda evaluation at the identity",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$ as in [def-coef-complete-algebroid], and use quasicategories, mapping spaces and coherent transformations as in [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal E$ be a $\\mathcal U'$-small quasicategory and have $\\mathcal U$-small mapping spaces, let $\\mathcal S$ denote the infinity category of $\\mathcal U$-small spaces, and let $a\\in\\mathcal E$. Write $h_a(x)=\\operatorname{Map}_{\\mathcal E}(x,a)$ for the coherent representable presheaf. For every coherent presheaf $P:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S$, evaluation at $\\operatorname{id}_a$ induces an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)\\simeq P(a),\\qquad \\alpha\\longmapsto\\alpha_a(\\operatorname{id}_a).$$\nIts inverse sends $p\\in P(a)$ to the coherent transformation whose component at $x$ is $f\\mapsto P(f)(p)$ for $f:x\\to a$. Thus for any coherent transformation $\\alpha:h_a\\to P$, its component maps are homotopic to $f\\mapsto P(f)(\\alpha_a(\\operatorname{id}_a))$, coherently in $x$ and in parameters in the mapping spaces. Dually, for $Q:\\mathcal E\\to\\mathcal S$ and $h^a(x)=\\operatorname{Map}_{\\mathcal E}(a,x)$, evaluation gives $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E,\\mathcal S)}(h^a,Q)\\simeq Q(a)$ with inverse $q\\mapsto(f\\mapsto Q(f)(q))$. These are equivalences of full spaces of coherent transformations, not just bijections on homotopy classes.",
+ "source": {
+  "document": "https://kerodon.net/tag/03M5",
+  "place": "Kerodon Proposition 8.3.1.3 (03M5), with evaluation defined in Notation 8.3.1.2 (03M4); apply also to the opposite category. Definition 5.6.6.1 (038A) gives the action on a universal element, and Theorem 5.6.6.13 (038J) supplies the coherent representable functor. Read online; not archived in literature/. These are Kerodon identifiers; no corresponding Stacks tag states this infinity-categorical assertion."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal S'$ be the infinity category of $\\mathcal U'$-small spaces, formed in a further universe. Use the coherent-nerve model $N_{\\mathrm{hc}}(\\mathsf{Kan})$ specified in [lem-coef-space-valued-straightening], solely for its explicit definition of spaces and coherent nerve. The inclusion $\\iota:\\mathcal S\\hookrightarrow\\mathcal S'$ is a full subcategory inclusion: the simplicial category of $\\mathcal U$-small Kan complexes has the same internal mapping complexes as the larger one, and a coherent-nerve simplex with vertices in the smaller category uses only those unchanged mapping complexes. The internal-functor and full-subcategory definitions of [def-cbc-enhanced-diagrams-cones] then show that $\\operatorname{Fun}(K,\\mathcal S)\\hookrightarrow\\operatorname{Fun}(K,\\mathcal S')$ is full for every $\\mathcal U'$-small $K$. Indeed, a simplex is $K\\times\\Delta^n\\to\\mathcal S'$; if each vertex functor lands in $\\mathcal S$, every vertex of its domain does, so fullness makes the entire simplex factor through $\\mathcal S$. Consequently the right-pinched mapping spaces between two such functors are identical in the two functor categories. This is a degreewise statement and includes empty mapping spaces.",
+   "uses": [
+    "lem-coef-space-valued-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03MR",
+    "place": "Universe enlargement and full subcategories; explicit coherent-nerve and internal-functor definitions in the cited nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-yoneda-evaluation] with its smaller universe equal to $\\mathcal U'$ and $D=\\mathcal E$. Its hypotheses hold because $\\mathcal E$ is $\\mathcal U'$-small. Regard $P$ as $\\iota P:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S'$. The representable $j(a)$ has the same values $\\operatorname{Map}_{\\mathcal E}(x,a)$ and coherent action as $\\iota h_a$; local $\\mathcal U$-smallness ensures these values lie in $\\mathcal S$. The cited node gives the actual identity-evaluation map $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S')}(\\iota h_a,\\iota P)\\simeq P(a)$, natural as an equivalence of coherent functors in the object and presheaf variables. Step 1 identifies its source with $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)$ and leaves evaluation unchanged. This proves the contravariant assertion on full spaces. Choose a homotopy inverse $s$ of this equivalence in spaces, with its two inverse homotopies; no independent choices for individual points are needed.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03M5",
+    "place": "Proposition 8.3.1.3 and Notation 8.3.1.2, via the existing small-category node in the enlarged universe."
+   }
+  },
+  {
+   "text": "Write $\\Phi_x:\\operatorname{Map}(h_x,P)\\simeq P(x)$ for the coherent natural evaluation equivalences supplied by [lem-coef-infinity-yoneda-evaluation] in Step 2. For $f:x\\to a$, naturality in the representable variable gives\n$$P(f)\\big(\\Phi_a(\\alpha)\\big)\\simeq\\Phi_x\\big(\\alpha\\circ j(f)\\big)=\\alpha_x(f).$$\nFor the last equality, evaluate the composite at $\\operatorname{id}_x$: the representable map $j(f):h_x\\to h_a$ sends that identity to $f$ by composition with $f$. The unit homotopy gives the displayed equality in spaces. This square is the restriction of the cited natural equivalence on $\\mathcal E^{\\mathrm{op}}\\times\\mathcal P(\\mathcal E)$, not an independently selected homotopy for each $f$. In particular, restrict it to any simplex of arrows and any simplex of the parameter space $\\operatorname{Map}(h_a,P)$; its faces and degeneracies are the restrictions of that one coherent square. Setting $\\alpha=s(p)$ and using the inverse homotopy $\\Phi_a s\\simeq\\operatorname{id}$ gives the components $f\\mapsto P(f)(p)$ with these coherent homotopies. The other inverse homotopy $s\\Phi_a\\simeq\\operatorname{id}$ reconstructs every $\\alpha$. Thus the formula identifies an already constructed inverse on spaces and does not attempt to assemble transformations from objectwise maps.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/038A",
+    "place": "Universal-element action of Definition 5.6.6.1; formal naturality calculation from the coherent equivalence stated in the cited node."
+   }
+  },
+  {
+   "text": "Apply Steps 1-3 to the quasicategory $\\mathcal E^{\\mathrm{op}}$ and the presheaf $Q:(\\mathcal E^{\\mathrm{op}})^{\\mathrm{op}}\\to\\mathcal S$. Its representable at $a$ is the coherent covariant representable of $\\mathcal E$. To check its mapping-space values in the stated convention, use the arrow spaces $U$ and the natural pinch comparisons of [lem-coef-infinity-pinch-comparison]:\n$$\\operatorname{Map}_{\\mathcal E^{\\mathrm{op}}}(x,a)\\xrightarrow{\\ j\\ }U_{\\mathcal E^{\\mathrm{op}}}(x,a)=U_{\\mathcal E}(a,x)^{\\mathrm{op}}\\xleftarrow{\\ j^{\\mathrm{op}}\\ }\\operatorname{Map}_{\\mathcal E}(a,x)^{\\mathrm{op}}.$$\nBoth arrows are homotopy equivalences; reversing a simplicial homotopy reverses its interval and exchanges the endpoints. For a Kan complex $T$, the formula $[t,(r_0,\\ldots,r_n)]\\mapsto[t,(r_n,\\ldots,r_0)]$ gives a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$, directly from the realization relations of [def-cbc-enhanced-diagrams-cones]. It is its own inverse and sends the realized map of a simplicial map to the same map with reversed coordinates. Thus this coherent representable is a model for $h^a(x)=\\operatorname{Map}_{\\mathcal E}(a,x)$ as a space. The coherent functor structure is the representable one on $\\mathcal E^{\\mathrm{op}}$, so it is already supplied before this pointwise identification; one is not asserting a strict isomorphism of the two pinched models. The identity vertex remains the identity. The evaluation equivalence is consequently $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E,\\mathcal S)}(h^a,Q)\\simeq Q(a)$. The arrow $x\\to a$ in $\\mathcal E^{\\mathrm{op}}$ is $f:a\\to x$ in $\\mathcal E$, so Step 3 reads $q\\mapsto(f\\mapsto Q(f)(q))$, including its coherent naturality and both inverse homotopies.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03MY",
+    "place": "Remark 8.3.3.6 (Hom-functor duality), with Proposition 4.6.5.10 (01L5), applied to the proved evaluation formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-space-valued-straightening",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent adjunction foundation. Agent proof reduces to the existing small-category Yoneda evaluation node by explicit full universe enlargement, extracts the inverse from its coherent naturality, and checks the covariant mapping-space convention by pinches. Online Kerodon sources are not archived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "yoneda|representab|adjoint",
+   "results": "{\"t\": \"2026-10-16T16:08:28Z\", \"tool\": \"grep\", \"query\": \"yoneda|representab|adjoint\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv\"",
+   "results": "{\"t\": \"2026-10-16T16:08:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.coyonedaEquiv\", \"CategoryTheory.uliftCoyonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.uliftCoyonedaEquiv_symm_apply_app\", \"CategoryTheory.uliftCoyonedaEquiv_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\"], \"digest\": \"2e2fb287f7b111ab\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma for infinity categories evaluation of coherent natural transformations from a representable space valued presheaf at the identity is an equivalence of spaces",
+   "results": "{\"t\": \"2026-10-16T16:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma for infinity categories evaluation of coherent natural transformations from a representable space valued presheaf at the identity is an equivalence of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.representableByEquiv\", \"SSet.yonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv_apply\", \"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.uliftYonedaEquiv\", \"CategoryTheory.yonedaLemma\"], \"digest\": \"3e43d477e584c8b1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma|rightAdjointObjIsDefined_iff",
+   "results": "{\"t\": \"2026-10-16T16:08:59Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma|rightAdjointObjIsDefined_iff\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\"], \"digest\": \"cca1bc5ce94db940\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda lemma evaluation of natural transformations from a representable presheaf at identity is an equivalence of mapping spaces",
+   "results": "{\"t\": \"2026-10-16T16:09:00Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda lemma evaluation of natural transformations from a representable presheaf at identity is an equivalence of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Functor.RepresentableBy.homEquiv_eq\", \"CategoryTheory.Functor.representableByEquiv\", \"CategoryTheory.presheafHomSectionsEquiv\", \"CategoryTheory.Functor.RepresentableBy.homEquiv\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\"], \"digest\": \"b60203afb7ac746c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable space valued functors on a quasicategory admit Yoneda evaluation equivalences Nat Map x a P equals P a with coherent inverse",
+   "results": "{\"t\": \"2026-10-16T16:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"Representable space valued functors on a quasicategory admit Yoneda evaluation equivalences Nat Map x a P equals P a with coherent inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.shrinkYonedaEquiv\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.yonedaEquiv\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.map_shrinkYonedaEquiv\", \"CategoryTheory.map_yonedaEquiv\"], \"digest\": \"79f4d5e019119fa1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T16:12:00Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma\", \"sub\": \"CategoryTheory/Yoneda.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"22\", \"716\", \"724\", \"733\"], \"digest\": \"d36e3aa8007189cc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Yoneda.lean:39,724-743: CategoryTheory.yonedaEquiv and its inverse formula use ordinary Category instances and Type-valued presheaves. SSet.yonedaEquiv concerns ordinary simplex maps, not transformations of space-valued infinity functors. Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 only constructs the bicategory; Quasicategory grep finds simplex-Yoneda uses and no infinity evaluation lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T16:12:00Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma\", \"sub\": \"CategoryTheory/Yoneda.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"22\", \"716\", \"724\", \"733\"], \"digest\": \"d36e3aa8007189cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib hits; all are ordinary Type-valued/category-theory Yoneda statements, not coherent space-valued infinity-categorical evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T18:37:51Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\"], \"digest\": \"9415a74c5af78982\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib hits; all are ordinary Type-valued/category-theory Yoneda statements, not coherent space-valued infinity-categorical evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical Yoneda evaluation of coherent natural transformations at identity",
+   "results": "{\"t\": \"2026-10-16T18:37:51Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical Yoneda evaluation of coherent natural transformations at identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Yoneda.obj_map_id\", \"CategoryTheory.Yoneda.fullyFaithful_preimage\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.Yoneda.ext\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₁_id\", \"CategoryTheory.coyonedaEquiv\"], \"digest\": \"298d3bdaec22b3d7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib hits; all are ordinary Type-valued/category-theory Yoneda statements, not coherent space-valued infinity-categorical evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T18:37:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib hits; all are ordinary Type-valued/category-theory Yoneda statements, not coherent space-valued infinity-categorical evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda evaluation equivalence of coherent transformations from representable space valued presheaves in infinity categories",
+   "results": "{\"t\": \"2026-10-16T18:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda evaluation equivalence of coherent transformations from representable space valued presheaves in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst_eq\", \"CategoryTheory.yonedaLemma\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₁_yonedaEquivFst\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'_symm_app_naturality_left_assoc\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'_symm_naturality_right_assoc\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_ι_presheafHom\"], \"digest\": \"035d017e0ddcfa52\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib hits; all are ordinary Type-valued/category-theory Yoneda statements, not coherent space-valued infinity-categorical evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda evaluation mapping space from representable presheaf to arbitrary space valued presheaf on a small infinity category",
+   "results": "{\"t\": \"2026-10-16T19:51:38Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda evaluation mapping space from representable presheaf to arbitrary space valued presheaf on a small infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEvaluation\", \"CategoryTheory.Presheaf.functorToRepresentables\", \"ContinuousMap.yonedaPresheaf\", \"ContinuousMap.yonedaPresheaf_obj\", \"ContinuousMap.yonedaPresheaf_map\", \"CategoryTheory.OverPresheafAux.YonedaCollection.fst\", \"ContinuousMap.yonedaPresheaf'_obj\", \"CategoryTheory.OverPresheafAux.yonedaCollectionPresheafToA\"], \"digest\": \"d201e621def41c9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "yonedaEquiv, CategoryTheory.yonedaLemma, SSet.yonedaEquiv",
+   "results": "{\"t\": \"2026-10-16T19:51:39Z\", \"tool\": \"loogle\", \"query\": \"yonedaEquiv, CategoryTheory.yonedaLemma, SSet.yonedaEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'yonedaEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma|[Yy]oneda.*[Ee]val",
+   "results": "{\"t\": \"2026-10-16T19:51:39Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma|[Yy]oneda.*[Ee]val\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/OfSection.lean\", \"Mathlib/CategoryTheory/Subfunctor/OfSection.lean\", \"Mathlib/CategoryTheory/Subfunctor/OfSection.lean\", \"Mathlib/CategoryTheory/Subfunctor/OfSection.lean\", \"Mathlib/CategoryTheory/Subfunctor/OfSection.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\"], \"digest\": \"0421329e173ff215\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent mapping space Yoneda evaluation for space valued presheaf on quasicategory",
+   "results": "{\"t\": \"2026-10-16T19:51:40Z\", \"tool\": \"leansearch\", \"query\": \"coherent mapping space Yoneda evaluation for space valued presheaf on quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEvaluation\", \"CategoryTheory.yonedaEvaluation_map_down\", \"ContinuousMap.comp_yonedaPresheaf'\", \"CategoryTheory.OverPresheafAux.yonedaCollectionPresheaf_map\", \"CategoryTheory.curriedYonedaLemma\", \"PresheafOfModules.evaluation_map\", \"PresheafOfModules.evaluation\", \"ContinuousMap.yonedaPresheaf'_obj\"], \"digest\": \"362ea165937ab58f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv",
+   "results": "{\"t\": \"2026-10-16T19:51:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yonedaEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv\", \"CategoryTheory.yonedaEquiv_yoneda_map\", \"CategoryTheory.yonedaEquiv_symm_app\", \"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.map_yonedaEquiv'\", \"CategoryTheory.map_yonedaEquiv\", \"CategoryTheory.yonedaEquiv_comp\", \"CategoryTheory.yonedaEquiv_naturality\"], \"digest\": \"764e556f9d3716a0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|presheaf|quasicategory",
+   "results": "{\"t\": \"2026-10-16T19:51:54Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|quasicategory\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"a7128b499870473c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For locally small quasicategories coherent presheaf transformations from Map minus a to P are equivalent to P a with inverse given by contravariant transport",
+   "results": "{\"t\": \"2026-10-16T19:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"For locally small quasicategories coherent presheaf transformations from Map minus a to P are equivalent to P a with inverse given by contravariant transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.presheafHomObjHomEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"CategoryTheory.Pseudofunctor.presheafHomObjHomEquiv_symm_apply\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_ι_presheafHom\", \"CategoryTheory.GrothendieckTopology.uliftYonedaEquiv\", \"CategoryTheory.GrothendieckTopology.yonedaEquiv\", \"CategoryTheory.GrothendieckTopology.yonedaULiftEquiv\", \"CategoryTheory.Presieve.FamilyOfElements.singletonEquiv\"], \"digest\": \"9ae44ff133ed7ca5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724-745 and its Type-valued hypotheses; quasicategory Basic.lean:32-66 only gives horn filling and simplex-Yoneda uses. Returned Yoneda evaluation, ordinary presheaf and prestack hom-set declarations do not identify mapping spaces of coherent infinity functors. The first Loogle query had an unknown identifier; the corrected qualified query returned the ordinary theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedYoneda|[Yy]oneda.*[Hh]omotopy|[Yy]oneda.*[Qq]uasicategory",
+   "results": "{\"t\": \"2026-10-16T20:11:57Z\", \"tool\": \"grep\", \"query\": \"enrichedYoneda|[Yy]oneda.*[Hh]omotopy|[Yy]oneda.*[Qq]uasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. Ordinary Yoneda and its inverse formula concern Category-valued hom sets and Type-valued presheaves (CategoryTheory/Yoneda.lean:724-745); the simplicial hom equivalence concerns vertices of strict simplicial enrichment (SimplicialCategory/Basic.lean:65); Sites/Monoidal.lean:51 assumes an ordinary indexing category. None supplies coherent infinity-functor mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEquiv_symm_app_apply\"",
+   "results": "{\"t\": \"2026-10-16T20:11:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEquiv_symm_app_apply\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv_symm_app_apply\", \"CategoryTheory.coyonedaEquiv_symm_app_apply\", \"CategoryTheory.GrothendieckTopology.yonedaEquiv_symm_app_apply\", \"CategoryTheory.GrothendieckTopology.uliftYonedaEquiv_symm_app_apply\"], \"digest\": \"52626e7b895cd7fa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. Ordinary Yoneda and its inverse formula concern Category-valued hom sets and Type-valued presheaves (CategoryTheory/Yoneda.lean:724-745); the simplicial hom equivalence concerns vertices of strict simplicial enrichment (SimplicialCategory/Basic.lean:65); Sites/Monoidal.lean:51 assumes an ordinary indexing category. None supplies coherent infinity-functor mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched Yoneda equivalence for homotopy coherent simplicial functors with Kan complex values",
+   "results": "{\"t\": \"2026-10-16T20:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched Yoneda equivalence for homotopy coherent simplicial functors with Kan complex values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\"], \"digest\": \"7e33263a1ceb6064\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. Ordinary Yoneda and its inverse formula concern Category-valued hom sets and Type-valued presheaves (CategoryTheory/Yoneda.lean:724-745); the simplicial hom equivalence concerns vertices of strict simplicial enrichment (SimplicialCategory/Basic.lean:65); Sites/Monoidal.lean:51 assumes an ordinary indexing category. None supplies coherent infinity-functor mapping spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-pointwise-adjoint-criterion",
+  "date": "2026-10-17",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "worker": "stage1",
+  "summary": "Second reader replaced the cyclic right-fibration proof by four steps using full universe enlargement, the existing small-category Yoneda evaluation, its coherent naturality for the inverse, and the covariant dual with a pinch-model check. No new nodes or Mathlib leaves. Made the intended quasicategory hypothesis explicit; normalized inherited TeX only otherwise.",
+  "blueprint": "Realizes the identity-evaluation input to the coherent finite-coefficient adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, through the historical pointwise-adjoint branch.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-81e0c2b0c",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-81e0c2b0c (reviewer sub-agent of L); spot-checked: I read the item and the four cited nodes in full, plus the only citer (pointwise-adjoint-criterion, steps 1, 2 and 4). The statement agrees with Kerodon 03M5 and 03M4, which I read online: the comparison map is evaluation followed by precomposition with the universal element, here id_a, and the item's form follows by duality. The 'quasicategory' wording added by the second reader only states the intended hypothesis; it matches the DAG convention in lem-coef-infinity-yoneda-presheaf-limits and is not a weakening. Step 1 is correct: Kan_U sits fully inside Kan_U', a simplex of Fun(K,S') whose vertices lie in S factors through S, so the right-pinched mapping spaces are literally equal. Step 2 applies lem-coef-infinity-yoneda-evaluation in the universe pair (U',U''); a third universe is already used in the same unit (lem-coef-algebroid-universe-embeddings), and only the cited node's statement is used. Step 3 is a formal consequence of that node's naturality on D^op x P(D), restricted to simplices of arrows and parameters, with both inverse homotopies. Step 4 is correct: U_{E^op}(x,a) = U_E(a,x)^op, the pinch comparison gives homotopy equivalences that pass to opposites, and |T^op| is homeomorphic to |T|. Small cases checked: point, empty P(a), discrete E, BG, and empty E. I confirmed the cycle through lem-coef-space-transport-classification that the second reader removed; the new 40-node closure has no cycle and nothing missing or merged. proof_deps equals the union of the steps' uses, every cited statement is in the same unit, there are no new nodes and no tool_uses, and no SGA source is used. One existing duplication, outside this delivery, is left for the maintainer: lem-coef-space-yoneda-density and lem-coef-infinity-yoneda-evaluation state the same small-category evaluation result. No changes made."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
