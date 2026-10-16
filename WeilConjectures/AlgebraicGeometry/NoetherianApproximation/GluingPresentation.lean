@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.SectionSubrings
 
 /-!
 # Finite affine gluing presentations and their finite-type stages
@@ -20,6 +21,25 @@ A *stage* of such a presentation (`AlgebraicGeometry.Scheme.FiniteAffineGluingPr
 is a family of finitely generated subrings `Aₐ ⊆ Γ(S, Uₐ)` containing the basic-open elements
 and satisfying finitely many gluing conditions; the spectra `Spec Aₐ` then glue along the basic
 opens of the `f a b r` to a scheme of finite type over `ℤ`.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.localizationSubring_range_appLE`: for `p : S ⟶ X` and an affine open
+  `V` of `X`, the localization subring of the image of `Γ(X, V)` at (the image of) `s` is the
+  image of `Γ(X, D(s))`.
+- `AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.compactSpace`,
+  `AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.quasiSeparatedSpace`: a scheme with a
+  finite affine gluing presentation is quasi-compact and quasi-separated.
+- `AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.witnesses`: finitely many sections of
+  each chart such that every family of subrings containing them satisfies the unit conditions.
+- `AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.exists_stage_of_model`: the images of
+  the sections over affine opens of a scheme locally of finite type over `ℤ` through which the
+  presentation factors form a stage.
+- `AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.exists_stage_superset`: cofinality;
+  any finitely many sections lie in the coefficient subrings of some stage. The proof uses a
+  Noetherian approximation of `S` (`AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`).
+- The stages form a join-semilattice (componentwise supremum); in particular they are directed,
+  and they are nonempty.
 -/
 
 @[expose] public section
@@ -121,6 +141,349 @@ structure Stage where
 
 end FiniteAffineGluingPresentation
 
+@[simp]
+lemma resLE_refl {U : S.Opens} (x : Γ(S, U)) : S.resLE (le_refl U) x = x := by
+  rw [resLE, show homOfLE (le_refl U) = 𝟙 U from Subsingleton.elim _ _, op_id,
+    CategoryTheory.Functor.map_id]
+  rfl
+
+/-! ### Localization subrings -/
+
+/-- The inverse of the restriction of `s` to an open `W ≤ D(s)`. -/
+noncomputable def basicOpenInv {U : S.Opens} (s : Γ(S, U)) (W : S.Opens)
+    (hW : W ≤ S.basicOpen s) : Γ(S, W) :=
+  (((RingedSpace.isUnit_res_basicOpen S.toRingedSpace s).map
+    (S.presheaf.map (homOfLE hW).op).hom).unit⁻¹ : Γ(S, W)ˣ).val
+
+lemma resLE_mul_basicOpenInv {U : S.Opens} (s : Γ(S, U)) (W : S.Opens)
+    (hW : W ≤ S.basicOpen s) :
+    S.resLE (hW.trans (S.basicOpen_le s)) s * basicOpenInv s W hW = 1 := by
+  have h := IsUnit.mul_val_inv ((RingedSpace.isUnit_res_basicOpen S.toRingedSpace s).map
+    (S.presheaf.map (homOfLE hW).op).hom)
+  convert h using 2
+  · change _ = (S.presheaf.map _ ≫ S.presheaf.map (homOfLE hW).op) s
+    rw [← Functor.map_comp]
+    rfl
+  · rfl
+
+lemma localizationSubring_eq_closure {U : S.Opens} (A : Subring Γ(S, U)) (s : Γ(S, U))
+    (W : S.Opens) (hW : W ≤ S.basicOpen s) :
+    localizationSubring A s W hW = Subring.closure (insert (basicOpenInv s W hW)
+      ((S.resLE (hW.trans (S.basicOpen_le s))).hom '' A)) :=
+  rfl
+
+lemma basicOpenInv_mem_localizationSubring {U : S.Opens} (A : Subring Γ(S, U)) (s : Γ(S, U))
+    (W : S.Opens) (hW : W ≤ S.basicOpen s) :
+    basicOpenInv s W hW ∈ localizationSubring A s W hW :=
+  Subring.subset_closure (Set.mem_insert _ _)
+
+lemma resLE_mem_localizationSubring {U : S.Opens} {A : Subring Γ(S, U)} (s : Γ(S, U))
+    (W : S.Opens) (hW : W ≤ S.basicOpen s) {y : Γ(S, U)} (hy : y ∈ A) :
+    S.resLE (hW.trans (S.basicOpen_le s)) y ∈ localizationSubring A s W hW :=
+  Subring.subset_closure (Set.mem_insert_of_mem _ ⟨y, hy, rfl⟩)
+
+lemma localizationSubring_mono {U : S.Opens} {A B : Subring Γ(S, U)} (h : A ≤ B)
+    (s : Γ(S, U)) (W : S.Opens) (hW : W ≤ S.basicOpen s) :
+    localizationSubring A s W hW ≤ localizationSubring B s W hW :=
+  Subring.closure_mono (Set.insert_subset_insert (Set.image_mono h))
+
+lemma localizationSubring_sup {U : S.Opens} (A B : Subring Γ(S, U)) (s : Γ(S, U))
+    (W : S.Opens) (hW : W ≤ S.basicOpen s) :
+    localizationSubring (A ⊔ B) s W hW =
+      localizationSubring A s W hW ⊔ localizationSubring B s W hW := by
+  refine le_antisymm (Subring.closure_le.mpr (Set.insert_subset_iff.mpr
+    ⟨(le_sup_left : _ ≤ _ ⊔ localizationSubring B s W hW)
+      (basicOpenInv_mem_localizationSubring A s W hW), ?_⟩))
+    (sup_le (localizationSubring_mono le_sup_left s W hW)
+      (localizationSubring_mono le_sup_right s W hW))
+  rw [← Subring.coe_map, Subring.map_sup, SetLike.coe_subset_coe]
+  exact sup_le_sup (Subring.map_le_iff_le_comap.mpr fun y hy ↦
+      resLE_mem_localizationSubring s W hW hy)
+    (Subring.map_le_iff_le_comap.mpr fun y hy ↦ resLE_mem_localizationSubring s W hW hy)
+
+/-- Every section over `D(s)` of an affine open is of the form `y / sⁿ`; in particular it lies
+in the localization subring of every subring containing a suitable numerator `y`. -/
+lemma exists_forall_mem_localizationSubring {U : S.Opens} (hU : IsAffineOpen U) (s : Γ(S, U))
+    (z : Γ(S, S.basicOpen s)) :
+    ∃ y : Γ(S, U), ∀ A : Subring Γ(S, U), y ∈ A →
+      z ∈ localizationSubring A s (S.basicOpen s) le_rfl := by
+  have := hU.isLocalization_basicOpen s
+  obtain ⟨n, y, hy⟩ := IsLocalization.Away.surj s z
+  refine ⟨y, fun A hyA ↦ ?_⟩
+  have hy' : z * S.resLE (le_rfl.trans (S.basicOpen_le s)) s ^ n =
+      S.resLE (le_rfl.trans (S.basicOpen_le s)) y := hy
+  have hz : z = S.resLE (le_rfl.trans (S.basicOpen_le s)) y *
+      basicOpenInv s (S.basicOpen s) le_rfl ^ n := by
+    rw [← hy', mul_assoc, ← mul_pow, resLE_mul_basicOpenInv, one_pow, mul_one]
+  rw [hz]
+  exact mul_mem (resLE_mem_localizationSubring s _ le_rfl hyA)
+    (pow_mem (basicOpenInv_mem_localizationSubring A s _ le_rfl) n)
+
+/-- If the basic opens of finitely many sections cover an affine open `W`, then their
+restrictions generate the unit ideal of `Γ(S, W)`. -/
+lemma exists_sum_mul_resLE_eq_one {U W : S.Opens} (hW : IsAffineOpen W) (hWU : W ≤ U)
+    {σ : Type*} [Fintype σ] (h : σ → Γ(S, U)) (hcov : W ≤ ⨆ q, S.basicOpen (h q)) :
+    ∃ c : σ → Γ(S, W), ∑ q, c q * S.resLE hWU (h q) = 1 := by
+  have hspan : Ideal.span (Set.range fun q ↦ S.resLE hWU (h q)) = ⊤ := by
+    rw [← hW.iSup_basicOpen_eq_self_iff,
+      iSup_range' (fun x : Γ(S, W) ↦ S.basicOpen x) fun q ↦ S.resLE hWU (h q)]
+    simp only [Scheme.basicOpen_res]
+    rw [← inf_iSup_eq, inf_eq_left.mpr hcov]
+  have h1 : (1 : Γ(S, W)) ∈ Ideal.span (Set.range fun q ↦ S.resLE hWU (h q)) := by
+    rw [hspan]
+    exact Submodule.mem_top
+  exact Ideal.mem_span_range_iff_exists_fun.mp h1
+
+lemma range_appLE_congr {X : Scheme.{u}} (p : S ⟶ X) {O O' : X.Opens} (h : O = O')
+    (W : S.Opens) (e : W ≤ p ⁻¹ᵁ O) (e' : W ≤ p ⁻¹ᵁ O') :
+    (p.appLE O W e).hom.range = (p.appLE O' W e').hom.range := by
+  subst h
+  rfl
+
+lemma appLE_congr_hom {X Y : Scheme.{u}} {p q : X ⟶ Y} (h : p = q) (O : Y.Opens) (W : X.Opens)
+    (e : W ≤ p ⁻¹ᵁ O) (e' : W ≤ q ⁻¹ᵁ O) : p.appLE O W e = q.appLE O W e' := by
+  subst h
+  rfl
+
+lemma basicOpen_appLE_le {X : Scheme.{u}} (p : S ⟶ X) {V : X.Opens} {U : S.Opens}
+    (e : U ≤ p ⁻¹ᵁ V) (s : Γ(X, V)) : S.basicOpen (p.appLE V U e s) ≤ p ⁻¹ᵁ X.basicOpen s := by
+  rw [Scheme.basicOpen_appLE]
+  exact inf_le_right
+
+/-- The localization subring of the image of the sections over an affine open `V` at (the image
+of) `s'` is the image of the sections over `D(s')`. -/
+lemma localizationSubring_range_appLE {X : Scheme.{u}} (p : S ⟶ X) {V : X.Opens}
+    (hV : IsAffineOpen V) {U : S.Opens} (e : U ≤ p ⁻¹ᵁ V) (s' : Γ(X, V)) {s : Γ(S, U)}
+    (hs : p.appLE V U e s' = s) (W : S.Opens) (hW : W ≤ S.basicOpen s) :
+    localizationSubring (p.appLE V U e).hom.range s W hW =
+      (p.appLE (X.basicOpen s') W
+        (by subst hs; exact hW.trans (basicOpen_appLE_le p e s'))).hom.range := by
+  subst hs
+  have hW' : W ≤ p ⁻¹ᵁ X.basicOpen s' := hW.trans (basicOpen_appLE_le p e s')
+  have := hV.isLocalization_basicOpen s'
+  have hψ : ∀ y : Γ(X, V), p.appLE (X.basicOpen s') W hW'
+      (X.presheaf.map (homOfLE (X.basicOpen_le s')).op y) =
+        S.resLE (hW.trans (S.basicOpen_le _)) (p.appLE V U e y) := by
+    intro y
+    rw [← CommRingCat.comp_apply, ← CommRingCat.comp_apply, Scheme.Hom.map_appLE,
+      Scheme.Hom.appLE_map]
+  set t : Γ(X, X.basicOpen s') := IsLocalization.Away.invSelf s'
+  have ht : S.resLE (hW.trans (S.basicOpen_le _)) (p.appLE V U e s') *
+      p.appLE (X.basicOpen s') W hW' t = 1 := by
+    rw [← hψ, ← map_mul]
+    have : X.presheaf.map (homOfLE (X.basicOpen_le s')).op s' * t = 1 :=
+      IsLocalization.Away.mul_invSelf s'
+    rw [this, map_one]
+  have hu : basicOpenInv (p.appLE V U e s') W hW = p.appLE (X.basicOpen s') W hW' t := by
+    have h1 := resLE_mul_basicOpenInv (p.appLE V U e s') W hW
+    calc basicOpenInv (p.appLE V U e s') W hW
+        = basicOpenInv (p.appLE V U e s') W hW *
+          (S.resLE (hW.trans (S.basicOpen_le _)) (p.appLE V U e s') *
+            p.appLE (X.basicOpen s') W hW' t) := by rw [ht, mul_one]
+      _ = p.appLE (X.basicOpen s') W hW' t := by rw [← mul_assoc, mul_comm _ (S.resLE _ _), h1,
+            one_mul]
+  refine le_antisymm (Subring.closure_le.mpr (Set.insert_subset_iff.mpr ⟨⟨t, hu.symm⟩, ?_⟩)) ?_
+  · rintro _ ⟨_, ⟨y, rfl⟩, rfl⟩
+    exact ⟨_, hψ y⟩
+  · rintro _ ⟨z, rfl⟩
+    obtain ⟨n, y, hy⟩ := IsLocalization.Away.surj s' z
+    have hz : z = X.presheaf.map (homOfLE (X.basicOpen_le s')).op y * t ^ n := by
+      have hy' : z * X.presheaf.map (homOfLE (X.basicOpen_le s')).op s' ^ n =
+          X.presheaf.map (homOfLE (X.basicOpen_le s')).op y := hy
+      have h1 : X.presheaf.map (homOfLE (X.basicOpen_le s')).op s' * t = 1 :=
+        IsLocalization.Away.mul_invSelf s'
+      rw [← hy', mul_assoc, ← mul_pow, h1, one_pow, mul_one]
+    rw [hz, map_mul, map_pow, hψ, ← hu]
+    exact mul_mem (resLE_mem_localizationSubring _ W hW ⟨y, rfl⟩)
+      (pow_mem (basicOpenInv_mem_localizationSubring _ _ W hW) n)
+
+namespace FiniteAffineGluingPresentation
+
+variable (G : S.FiniteAffineGluingPresentation)
+
+lemma basicOpen_f_le_inf (a b : G.ι) (r : G.κ a b) :
+    S.basicOpen (G.f a b r) ≤ (G.U a : S.Opens) ⊓ G.U b :=
+  (le_iSup (fun r ↦ S.basicOpen (G.f a b r)) r).trans (G.iSup_basicOpen_f a b).le
+
+lemma basicOpen_g_le_inf (a b : G.ι) (r : G.κ a b) :
+    S.basicOpen (G.g a b r) ≤ (G.U a : S.Opens) ⊓ G.U b :=
+  (G.basicOpen_f a b r).ge.trans (G.basicOpen_f_le_inf a b r)
+
+lemma isCompact_U (a : G.ι) : IsCompact (G.U a : Set S) :=
+  (G.U a).2.isCompact
+
+/-- Part of blueprint `lemma-nagata-finite-affine-gluing-presentation`: the overlaps of the
+charts are quasi-compact. -/
+lemma isCompact_inf (a b : G.ι) : IsCompact (((G.U a : S.Opens) ⊓ G.U b : S.Opens) : Set S) := by
+  rw [← G.iSup_basicOpen_f, TopologicalSpace.Opens.coe_iSup]
+  exact isCompact_iUnion fun r ↦ ((G.U a).2.basicOpen _).isCompact
+
+include G in
+/-- Part of blueprint `lemma-nagata-finite-affine-gluing-presentation`: a scheme with a finite
+affine gluing presentation is quasi-compact. -/
+theorem compactSpace : CompactSpace S := by
+  refine ⟨?_⟩
+  have := congrArg (fun V : S.Opens ↦ (V : Set S)) G.iSup_U
+  simp only [TopologicalSpace.Opens.coe_iSup, TopologicalSpace.Opens.coe_top] at this
+  rw [← this]
+  exact isCompact_iUnion G.isCompact_U
+
+include G in
+/-- Part of blueprint `lemma-nagata-finite-affine-gluing-presentation`: a scheme with a finite
+affine gluing presentation is quasi-separated. -/
+theorem quasiSeparatedSpace : QuasiSeparatedSpace S :=
+  Scheme.quasiSeparatedSpace_of_isOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
+    (fun a ↦ (G.U a).2) fun a b ↦ G.isCompact_inf a b
+
+/-! ### Witnesses of the unit conditions -/
+
+/-- Coefficients exhibiting that the `f a a r` generate the unit ideal of `Γ(S, Uₐ)`. -/
+noncomputable def unitSelfCoeff (a : G.ι) : G.κ a a → Γ(S, G.U a) :=
+  (exists_sum_mul_resLE_eq_one (G.U a).2 le_rfl (G.f a a)
+    ((G.iSup_basicOpen_f a a).trans (inf_idem _)).ge).choose
+
+lemma sum_unitSelfCoeff_mul (a : G.ι) : ∑ r, G.unitSelfCoeff a r * G.f a a r = 1 := by
+  have := (exists_sum_mul_resLE_eq_one (G.U a).2 le_rfl (G.f a a)
+    ((G.iSup_basicOpen_f a a).trans (inf_idem _)).ge).choose_spec
+  simp only [resLE_refl] at this
+  exact this
+
+/-- Coefficients exhibiting that the restrictions of the `f b a q` generate the unit ideal of
+`Γ(S, D(g a b r))`. -/
+noncomputable def unitSymmCoeff (a b : G.ι) (r : G.κ a b) :
+    G.κ b a → Γ(S, S.basicOpen (G.g a b r)) :=
+  (exists_sum_mul_resLE_eq_one ((G.U b).2.basicOpen _) (S.basicOpen_le (G.g a b r)) (G.f b a)
+    (by rw [G.iSup_basicOpen_f, inf_comm]; exact G.basicOpen_g_le_inf a b r)).choose
+
+lemma sum_unitSymmCoeff_mul (a b : G.ι) (r : G.κ a b) :
+    ∑ q, G.unitSymmCoeff a b r q * S.resLE (S.basicOpen_le (G.g a b r)) (G.f b a q) = 1 :=
+  (exists_sum_mul_resLE_eq_one ((G.U b).2.basicOpen _) (S.basicOpen_le (G.g a b r)) (G.f b a)
+    (by rw [G.iSup_basicOpen_f, inf_comm]; exact G.basicOpen_g_le_inf a b r)).choose_spec
+
+lemma basicOpen_mul_le (a b c : G.ι) (r : G.κ a b) (s : G.κ a c) :
+    S.basicOpen (G.f a b r * G.f a c s) ≤ (G.U b : S.Opens) ⊓ G.U c := by
+  rw [Scheme.basicOpen_mul]
+  exact le_inf (inf_le_left.trans ((G.basicOpen_f_le_inf a b r).trans inf_le_right))
+    (inf_le_right.trans ((G.basicOpen_f_le_inf a c s).trans inf_le_right))
+
+/-- Coefficients exhibiting that the restrictions of the `f b c q` generate the unit ideal of
+`Γ(S, D(f a b r * f a c s))`. -/
+noncomputable def unitTripleCoeff (a b c : G.ι) (r : G.κ a b) (s : G.κ a c) :
+    G.κ b c → Γ(S, S.basicOpen (G.f a b r * G.f a c s)) :=
+  (exists_sum_mul_resLE_eq_one ((G.U a).2.basicOpen _)
+    ((G.basicOpen_mul_le a b c r s).trans inf_le_left) (G.f b c)
+    (by rw [G.iSup_basicOpen_f]; exact G.basicOpen_mul_le a b c r s)).choose
+
+lemma sum_unitTripleCoeff_mul (a b c : G.ι) (r : G.κ a b) (s : G.κ a c) :
+    ∑ q, G.unitTripleCoeff a b c r s q *
+      S.resLE ((G.basicOpen_mul_le a b c r s).trans inf_le_left) (G.f b c q) = 1 :=
+  (exists_sum_mul_resLE_eq_one ((G.U a).2.basicOpen _)
+    ((G.basicOpen_mul_le a b c r s).trans inf_le_left) (G.f b c)
+    (by rw [G.iSup_basicOpen_f]; exact G.basicOpen_mul_le a b c r s)).choose_spec
+
+variable {G} in
+/-- A numerator of a section `z` over `D(s)`, for `s` a section over an affine open `U`: every
+subring of `Γ(S, U)` containing it has `z` in its localization subring at `s`. -/
+noncomputable def numerator {U : S.Opens} (hU : IsAffineOpen U) (s : Γ(S, U))
+    (z : Γ(S, S.basicOpen s)) : Γ(S, U) :=
+  (exists_forall_mem_localizationSubring hU s z).choose
+
+lemma mem_localizationSubring_of_numerator_mem {U : S.Opens} (hU : IsAffineOpen U)
+    (s : Γ(S, U)) (z : Γ(S, S.basicOpen s)) {A : Subring Γ(S, U)} (h : numerator hU s z ∈ A) :
+    z ∈ localizationSubring A s (S.basicOpen s) le_rfl :=
+  (exists_forall_mem_localizationSubring hU s z).choose_spec A h
+
+/-- The finitely many *witnesses* of chart `a`: the basic-open elements of the chart, and the
+coefficients (resp. numerators of the coefficients) witnessing the unit conditions of a stage.
+Every family of subrings containing the witnesses satisfies the unit conditions of a stage. -/
+def witnesses (a : G.ι) : Set Γ(S, G.U a) :=
+  Set.range (fun p : Σ b, G.κ a b ↦ G.f a p.1 p.2) ∪
+  Set.range (fun p : Σ b, G.κ b a ↦ G.g p.1 a p.2) ∪
+  Set.range (G.unitSelfCoeff a) ∪
+  Set.range (fun p : Σ b, G.κ b a × G.κ a b ↦
+    numerator (G.U a).2 (G.g p.1 a p.2.1) (G.unitSymmCoeff p.1 a p.2.1 p.2.2)) ∪
+  Set.range (fun p : Σ b c, G.κ a b × G.κ a c × G.κ b c ↦
+    numerator (G.U a).2 (G.f a p.1 p.2.2.1 * G.f a p.2.1 p.2.2.2.1)
+      (G.unitTripleCoeff a p.1 p.2.1 p.2.2.1 p.2.2.2.1 p.2.2.2.2))
+
+lemma witnesses_finite (a : G.ι) : (G.witnesses a).Finite :=
+  ((((Set.finite_range _).union (Set.finite_range _)).union (Set.finite_range _)).union
+    (Set.finite_range _)).union (Set.finite_range _)
+
+lemma f_mem_witnesses (a b : G.ι) (r : G.κ a b) : G.f a b r ∈ G.witnesses a :=
+  Or.inl (Or.inl (Or.inl (Or.inl ⟨⟨b, r⟩, rfl⟩)))
+
+lemma g_mem_witnesses (a b : G.ι) (r : G.κ a b) : G.g a b r ∈ G.witnesses b :=
+  Or.inl (Or.inl (Or.inl (Or.inr ⟨⟨a, r⟩, rfl⟩)))
+
+/-- A family of finitely generated subrings containing the witnesses and satisfying the
+localization equations is a stage. -/
+def Stage.mk' (A : ∀ a, Subring Γ(S, G.U a))
+    (fg : ∀ a, ∃ s : Finset Γ(S, G.U a), Subring.closure (s : Set Γ(S, G.U a)) = A a)
+    (hA : ∀ a, G.witnesses a ⊆ A a)
+    (localization_eq : ∀ a b r,
+      localizationSubring (A a) (G.f a b r) (S.basicOpen (G.f a b r)) le_rfl =
+        localizationSubring (A b) (G.g a b r) (S.basicOpen (G.f a b r))
+          (G.basicOpen_f a b r).le) : G.Stage where
+  A := A
+  fg := fg
+  f_mem a b r := hA a (G.f_mem_witnesses a b r)
+  g_mem a b r := hA b (G.g_mem_witnesses a b r)
+  unit_self a := ⟨G.unitSelfCoeff a, fun r ↦ hA a (Or.inl (Or.inl (Or.inr ⟨r, rfl⟩))),
+    G.sum_unitSelfCoeff_mul a⟩
+  localization_eq := localization_eq
+  unit_symm a b r := ⟨G.unitSymmCoeff a b r, fun q ↦ mem_localizationSubring_of_numerator_mem
+    _ _ _ (hA b (Or.inl (Or.inr ⟨⟨a, r, q⟩, rfl⟩))), G.sum_unitSymmCoeff_mul a b r⟩
+  unit_triple a b c r s := ⟨G.unitTripleCoeff a b c r s, fun q ↦
+    mem_localizationSubring_of_numerator_mem _ _ _ (hA a (Or.inr ⟨⟨b, c, r, s, q⟩, rfl⟩)),
+    G.sum_unitTripleCoeff_mul a b c r s⟩
+
+@[simp] lemma Stage.mk'_A (A) (fg) (hA) (h) : (Stage.mk' G A fg hA h).A = A := rfl
+
+/-- The componentwise supremum of two stages is a stage. -/
+def Stage.sup (l l' : G.Stage) : G.Stage where
+  A a := l.A a ⊔ l'.A a
+  fg a := by
+    classical
+    obtain ⟨s, hs⟩ := l.fg a
+    obtain ⟨s', hs'⟩ := l'.fg a
+    exact ⟨s ∪ s', by rw [Finset.coe_union, Subring.closure_union, hs, hs']⟩
+  f_mem a b r := (le_sup_left : _ ≤ _ ⊔ l'.A _) (l.f_mem a b r)
+  g_mem a b r := (le_sup_left : _ ≤ _ ⊔ l'.A _) (l.g_mem a b r)
+  unit_self a := by
+    obtain ⟨c, hc, h⟩ := l.unit_self a
+    exact ⟨c, fun r ↦ (le_sup_left : _ ≤ _ ⊔ l'.A _) (hc r), h⟩
+  localization_eq a b r := by
+    rw [localizationSubring_sup, localizationSubring_sup, l.localization_eq, l'.localization_eq]
+  unit_symm a b r := by
+    obtain ⟨c, hc, h⟩ := l.unit_symm a b r
+    exact ⟨c, fun q ↦ localizationSubring_mono le_sup_left _ _ _ (hc q), h⟩
+  unit_triple a b c r s := by
+    obtain ⟨e, he, h⟩ := l.unit_triple a b c r s
+    exact ⟨e, fun q ↦ localizationSubring_mono le_sup_left _ _ _ (he q), h⟩
+
+/-- A stage from a model: if `p : S ⟶ X` is a morphism to a scheme locally of finite type over
+`ℤ`, the charts are preimages of affine opens `V a` of `X`, the basic-open elements come from
+sections `f'`, `g'` over the `V a` with `D(f') = D(g')` in `X`, and the images of the sections
+over the `V a` contain the witnesses, then these images form a stage. -/
+theorem exists_stage_of_model {X : Scheme.{u}} [LocallyOfFiniteType (specULiftZIsTerminal.from X)]
+    (p : S ⟶ X) (V : G.ι → X.Opens) (hV : ∀ a, IsAffineOpen (V a))
+    (hUV : ∀ a, (G.U a : S.Opens) ≤ p ⁻¹ᵁ V a)
+    (f' : ∀ a b, G.κ a b → Γ(X, V a)) (g' : ∀ a b, G.κ a b → Γ(X, V b))
+    (hf' : ∀ a b r, p.appLE (V a) (G.U a) (hUV a) (f' a b r) = G.f a b r)
+    (hg' : ∀ a b r, p.appLE (V b) (G.U b) (hUV b) (g' a b r) = G.g a b r)
+    (hfg' : ∀ a b r, X.basicOpen (f' a b r) = X.basicOpen (g' a b r))
+    (hW : ∀ a, G.witnesses a ⊆ (p.appLE (V a) (G.U a) (hUV a)).hom.range) :
+    ∃ l : G.Stage, ∀ a, l.A a = (p.appLE (V a) (G.U a) (hUV a)).hom.range := by
+  refine ⟨Stage.mk' G (fun a ↦ (p.appLE (V a) (G.U a) (hUV a)).hom.range)
+    (fun a ↦ have := (hV a).finiteType_of_locallyOfFiniteType
+      RingHom.exists_finset_closure_eq_range _) hW (fun a b r ↦ ?_), fun a ↦ rfl⟩
+  rw [localizationSubring_range_appLE p (hV a) (hUV a) (f' a b r) (hf' a b r),
+    localizationSubring_range_appLE p (hV b) (hUV b) (g' a b r) (hg' a b r)]
+  exact range_appLE_congr p (hfg' a b r) _ _ _
+
+end FiniteAffineGluingPresentation
+
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
@@ -137,15 +500,94 @@ instance : PartialOrder G.Stage := PartialOrder.lift _ (Stage.A_injective G)
 
 lemma Stage.le_iff {l₁ l₂ : G.Stage} : l₁ ≤ l₂ ↔ ∀ a, l₁.A a ≤ l₂.A a := Iff.rfl
 
+/-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the stages form a
+join-semilattice under inclusion, the join being the componentwise supremum. -/
+instance : SemilatticeSup G.Stage :=
+  { (inferInstance : PartialOrder G.Stage) with
+    sup := Stage.sup G
+    le_sup_left := fun _ _ _ ↦ le_sup_left
+    le_sup_right := fun _ _ _ ↦ le_sup_right
+    sup_le := fun _ _ _ h h' a ↦ sup_le (h a) (h' a) }
+
+lemma Stage.sup_A (l l' : G.Stage) (a : G.ι) : (l ⊔ l').A a = l.A a ⊔ l'.A a := rfl
+
+/-- Cofinality of the stages: finitely many sections of each chart lie in the coefficient
+subrings of a single stage. The stage is the image of the sections of affine opens of a stage of
+a Noetherian approximation of `S`. -/
+theorem exists_stage_superset (T : ∀ a, Set Γ(S, G.U a)) (hT : ∀ a, (T a).Finite) :
+    ∃ l : G.Stage, ∀ a, T a ⊆ l.A a := by
+  have := G.compactSpace
+  have := G.quasiSeparatedSpace
+  obtain ⟨N⟩ := S.nonempty_noetherianApproximation
+  -- The charts are preimages of affine opens `V a` of a stage `k₀`.
+  obtain ⟨k₀, V, hV, hVU⟩ := N.exists_isAffineOpen_preimage_eq (fun a ↦ (G.U a : S.Opens))
+    fun a ↦ (G.U a).2
+  -- The sections of `T a` and the witnesses come from the preimages of the `V a` at `k₁`.
+  obtain ⟨k₁, g₁, hk₁⟩ := N.exists_hom_forall_exists_appLE_eq V hV _ hVU
+    (fun a ↦ T a ∪ G.witnesses a) fun a ↦ (hT a).union (G.witnesses_finite a)
+  set V₁ : G.ι → (N.D.obj k₁).Opens := fun a ↦ N.D.map g₁ ⁻¹ᵁ V a with hV₁_def
+  have hV₁U : ∀ a, N.proj k₁ ⁻¹ᵁ V₁ a = (G.U a : S.Opens) := fun a ↦
+    (N.proj_preimage_map_preimage g₁ (V a)).trans (hVU a)
+  choose f' hf' using fun a b r ↦ hk₁ a (G.f a b r) (Or.inr (G.f_mem_witnesses a b r))
+  choose g' hg' using fun a b r ↦ hk₁ b (G.g a b r) (Or.inr (G.g_mem_witnesses a b r))
+  have hpre : ∀ a (t : Γ(N.D.obj k₁, V₁ a)), N.proj k₁ ⁻¹ᵁ (N.D.obj k₁).basicOpen t =
+      S.basicOpen ((N.proj k₁).appLE (V₁ a) (G.U a : S.Opens) (hV₁U a).ge t) := by
+    intro a t
+    rw [Scheme.basicOpen_appLE, inf_eq_right.mpr]
+    rw [← hV₁U a]
+    exact fun x hx ↦ (N.D.obj k₁).basicOpen_le t hx
+  -- The basic opens of the lifts of `f a b r` and `g a b r` agree at a stage `k₂`.
+  obtain ⟨k₂, h₂, hk₂⟩ := N.exists_hom_forall_map_preimage_eq
+    (fun p : Σ a b, G.κ a b ↦ (N.D.obj k₁).basicOpen (f' p.1 p.2.1 p.2.2))
+    (fun p ↦ (N.D.obj k₁).basicOpen (g' p.1 p.2.1 p.2.2))
+    (fun p ↦ (((hV p.1).preimage (N.D.map g₁)).basicOpen _).isCompact)
+    (fun p ↦ (((hV p.2.1).preimage (N.D.map g₁)).basicOpen _).isCompact) fun p ↦ by
+      rw [hpre, hpre, hf', hg', G.basicOpen_f]
+  -- The images of the sections over the preimages of the `V a` at `k₂` form a stage.
+  set V₂ : G.ι → (N.D.obj k₂).Opens := fun a ↦ N.D.map h₂ ⁻¹ᵁ V₁ a with hV₂_def
+  have hUV₂ : ∀ a, (G.U a : S.Opens) ≤ N.proj k₂ ⁻¹ᵁ V₂ a := fun a ↦
+    ((N.proj_preimage_map_preimage h₂ (V₁ a)).trans (hV₁U a)).ge
+  have hcomp : ∀ a (t : Γ(N.D.obj k₁, V₁ a)), (N.proj k₂).appLE (V₂ a) (G.U a : S.Opens) (hUV₂ a)
+      ((N.D.map h₂).appLE (V₁ a) (V₂ a) le_rfl t) =
+        (N.proj k₁).appLE (V₁ a) (G.U a : S.Opens) (hV₁U a).ge t := by
+    intro a t
+    rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+      appLE_congr_hom (N.proj_comp_map h₂) _ _ _ (hV₁U a).ge]
+  have hbo : ∀ a (t : Γ(N.D.obj k₁, V₁ a)),
+      (N.D.obj k₂).basicOpen ((N.D.map h₂).appLE (V₁ a) (V₂ a) le_rfl t) =
+        N.D.map h₂ ⁻¹ᵁ (N.D.obj k₁).basicOpen t := by
+    intro a t
+    rw [Scheme.basicOpen_appLE, inf_eq_right.mpr]
+    exact fun x hx ↦ (N.D.obj k₁).basicOpen_le t hx
+  have hsub : ∀ a, T a ∪ G.witnesses a ⊆
+      ((N.proj k₂).appLE (V₂ a) (G.U a : S.Opens) (hUV₂ a)).hom.range := by
+    intro a x hx
+    obtain ⟨t, rfl⟩ := hk₁ a x hx
+    exact ⟨_, hcomp a t⟩
+  obtain ⟨l, hl⟩ := G.exists_stage_of_model (N.proj k₂) V₂
+    (fun a ↦ ((hV a).preimage _).preimage _) hUV₂
+    (fun a b r ↦ (N.D.map h₂).appLE (V₁ a) (V₂ a) le_rfl (f' a b r))
+    (fun a b r ↦ (N.D.map h₂).appLE (V₁ b) (V₂ b) le_rfl (g' a b r))
+    (fun a b r ↦ by rw [hcomp, hf']) (fun a b r ↦ by rw [hcomp, hg'])
+    (fun a b r ↦ by rw [hbo, hbo]; exact hk₂ ⟨a, b, r⟩)
+    (fun a ↦ Set.subset_union_right.trans (hsub a))
+  refine ⟨l, fun a ↦ ?_⟩
+  rw [hl a]
+  exact Set.subset_union_left.trans (hsub a)
+
 /-- Part of blueprint `lemma-nagata-valid-refinements-directed`: valid stages are directed. -/
-instance : IsDirected G.Stage (· ≤ ·) := sorry
+instance : IsDirected G.Stage (· ≤ ·) := ⟨fun l l' ↦ ⟨l ⊔ l', le_sup_left, le_sup_right⟩⟩
 
 /-- Part of blueprint `lemma-nagata-valid-refinements-directed`: valid stages exist. -/
-instance : Nonempty G.Stage := sorry
+instance : Nonempty G.Stage :=
+  ⟨(G.exists_stage_superset (fun _ ↦ ∅) fun _ ↦ Set.finite_empty).choose⟩
 
 /-- Cofinality of the valid stages: every section of every chart lies in the coefficient
 subring of some valid stage. -/
-theorem exists_stage_mem (a : G.ι) (x : Γ(S, G.U a)) : ∃ l : G.Stage, x ∈ l.A a := sorry
+theorem exists_stage_mem (a : G.ι) (x : Γ(S, G.U a)) : ∃ l : G.Stage, x ∈ l.A a := by
+  obtain ⟨l, hl⟩ := G.exists_stage_superset (fun b ↦ Set.range fun h : b = a ↦ h ▸ x)
+    fun b ↦ Set.finite_range _
+  exact ⟨l, hl a ⟨rfl, rfl⟩⟩
 
 end AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
 
@@ -154,6 +596,9 @@ namespace AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
 variable {S : Scheme.{u}} {G : S.FiniteAffineGluingPresentation}
 
 /-- The coefficient rings of a stage are finitely generated `ℤ`-algebras. -/
-instance Stage.finiteType (l : G.Stage) (a : G.ι) : Algebra.FiniteType ℤ (l.A a) := sorry
+instance Stage.finiteType (l : G.Stage) (a : G.ι) : Algebra.FiniteType ℤ (l.A a) := by
+  obtain ⟨s, hs⟩ := l.fg a
+  rw [← hs]
+  exact Subring.finiteType_closure_finset s
 
 end AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation
