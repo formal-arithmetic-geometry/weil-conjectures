@@ -26,57 +26,222 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack presentability using [def-coef-presentable-infinity-category]. Choose an infinite regular cardinal $\\kappa\\in\\mathcal U$ and an essentially small full subcategory of $\\kappa$-compact generators. Call this subcategory $A$, choose an equivalence $e:D\\to A$ from a small quasicategory, and write $f:D\\to\\mathcal C$ for its composite with the full inclusion. If $q:I\\to A$ presents an object, choose a quasi-inverse $r:A\\to D$ and put $p=rq$; the equivalence $er\\simeq\\operatorname{id}_A$ identifies $fp$ with the original diagram in $\\mathcal C$ and identifies their cocones, so the same colimit is obtained. Full faithfulness of the inclusion and of $e$ makes $f$ fully faithful, and its values are $\\kappa$-compact because they lie in $A$. Thus every $c\\in\\mathcal C$ has a specified small $\\kappa$-filtered presentation $c\\simeq\\operatorname{colim}_{a\\in I}f(p(a))$ with $p:I\\to D$. Here only a presentation of the particular object under consideration is chosen; the functors below are not defined by making unrelated choices of such presentations. The category $\\mathcal C$ is locally small and has all small colimits, including the empty colimit.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.0.1; accessibility convention of Proposition 5.4.2.2. Agent argument from compact generators, for the conclusion of Theorem 5.5.1.1(5)."
+   }
+  },
+  {
+   "text": "Put $\\mathcal P=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$ and $j(d)=\\operatorname{Map}_D(-,d)$. Construct $i$ by composing the coherent Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] for $\\mathcal C$ with restriction along $f^{\\mathrm{op}}$. In particular $i(c)(d)=\\operatorname{Map}_{\\mathcal C}(f(d),c)$ is a small space, and full faithfulness of $f$ gives a coherent equivalence $if\\simeq j$. Let $q:I\\to\\mathcal C$ be a small $\\kappa$-filtered diagram with a specified colimiting cocone to $c$. Fix $d\\in D$ and write $H_d(a)=i(q(a))(d)$ and $M_d=i(c)(d)$, including their induced cocone. The current definition [def-coef-presentable-infinity-category] says that this mapping-space cocone, viewed in $\\mathcal S_{\\mathcal U'}$, is colimiting: compactness is defined using the larger-space-valued coherent corepresented functor, not by presupposing a colimit in $\\mathcal S=\\mathcal S_{\\mathcal U}$. To descend it, use [lem-coef-spaces-small-colimits-universe]. It gives a small-space colimit $Q_d=\\operatorname{colim}_I H_d$ and says that the fully faithful universe inclusion $\\iota:\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal U'}$ carries its cocone to a colimit cocone. The given cocone to $M_d$ induces a comparison $\\alpha_d:Q_d\\to M_d$. After inclusion both cocones are colimiting, so $\\iota(\\alpha_d)$ is an equivalence: their universal properties give an inverse map of cocones, and each composite is homotopic to the identity since the mapping space out of a colimiting cocone is contractible. This uses the cocone/initial-object clauses of [lem-cbc-enhanced-functor-cone-calculus], with $\\mathcal U'$ as the universe of spaces and a further ambient universe. Full faithfulness of $\\iota$ lifts the inverse and its two inverse homotopies to the small mapping spaces, proving that $\\alpha_d$ itself is an equivalence. Thus the canonical cocone $iq\\to i(c)$ is objectwise colimiting in small spaces. The pointwise colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits], applied with the small parameter $D^{\\mathrm{op}}$, now shows that $i$ preserves these colimits. All colimits in $\\mathcal P$ and in this conclusion retain the original $\\mathcal U$-small meaning.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Definition 5.3.4.5 (corepresented functor to larger spaces); Corollary 4.2.4.8 and the universe-change statement of lem-coef-spaces-small-colimits-universe; Propositions 5.1.2.2 and 5.1.3.1. Explicit descent of the compactness cocone to small spaces."
+   }
+  },
+  {
+   "text": "Fix $c,c'\\in\\mathcal C$ and use a presentation $c\\simeq\\operatorname{colim}_{a\\in I}f(p(a))$ from step 1. Step 2 gives $ic\\simeq\\operatorname{colim}_{a\\in I}j(p(a))$. The colimit mapping-space test of [lem-coef-infinity-yoneda-presheaf-limits] in $\\mathcal P$ and in $\\mathcal C$, together with [lem-coef-infinity-yoneda-evaluation], gives\n$$\\operatorname{Map}_{\\mathcal P}(ic,ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P}(j(p(a)),ic')\\simeq\\lim_{a\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(f(p(a)),c')\\simeq\\operatorname{Map}_{\\mathcal C}(c,c').$$\nThis identifies the actual map induced by $i$ as an equivalence: at each $p(a)$, evaluation at its identity sends the transformation induced by $u:c\\to c'$ to the composite $f(p(a))\\to c\\xrightarrow{u}c'$. These are exactly the components of the colimit comparison on the right, including their coherent compatibilities. Hence the map on the entire mapping space, rather than just on components, is inverted by the displayed chain. This proves full faithfulness of $i$. Every limit here is indexed by the small $I^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.5.1.1(1) to (5), agent expansion via restricted Yoneda; Propositions 5.1.3.1-5.1.3.2 and Lemma 5.1.5.2 supply the mapping-space tests."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-presheaf-free-cocompletion], $\\mathcal P$ has small mapping spaces and all small colimits. Apply its restriction equivalence with target $\\mathcal C$ to the functor $f$. This gives a coherent functor $L:\\mathcal P\\to\\mathcal C$, preserving every small colimit, and a coherent natural equivalence $Lj\\simeq f$. Thus the colimit-preservation assertion of the item already holds. This construction uses the full free-cocompletion equivalence, not the adjoint functor theorem for presentable categories.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.1.5.6; construction of the colimit extension of the compact-generator inclusion."
+   }
+  },
+  {
+   "text": "For $c\\in\\mathcal C$ compare the contravariant space-valued functors $K_c(X)=\\operatorname{Map}_{\\mathcal C}(LX,c)$ and $R_c(X)=\\operatorname{Map}_{\\mathcal P}(X,ic)$. They take small colimits to limits by step 4 and [lem-coef-infinity-yoneda-presheaf-limits]. On $j(D)$ their restrictions are naturally equivalent: $K_c(jd)\\simeq\\operatorname{Map}_{\\mathcal C}(f(d),c)=ic(d)\\simeq R_c(jd)$ by $Lj\\simeq f$ and [lem-coef-infinity-yoneda-evaluation]. Since $\\mathcal S$ has small limits by [lem-coef-infinity-yoneda-presheaf-limits], its opposite has small colimits. Apply [lem-coef-infinity-presheaf-free-cocompletion] with target $\\mathcal S^{\\mathrm{op}}$ to $K_c^{\\mathrm{op}},R_c^{\\mathrm{op}}:\\mathcal P\\to\\mathcal S^{\\mathrm{op}}$. A quasi-inverse to its restriction equivalence lifts the equivalence just obtained, giving $K_c\\simeq R_c$. This lift is coherent in $c$ as well as $X$: apply that same quasi-inverse to the diagram of restrictions parametrized by $\\mathcal C^{\\mathrm{op}}$, and compose with its two inverse-functor equivalences. Postcomposition by a quasi-inverse is defined on diagrams and all their simplices, so the equivalence is one of mapping-space bifunctors. One may use an additional ambient universe for this parameter functor category without changing $D$, the spaces, or the meaning of small. No limit indexed by the large $\\mathcal P$ or $\\mathcal C$ is used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.1.5.6 with opposite target; Propositions 5.1.3.1-5.1.3.2 and Lemma 5.1.5.2. Agent construction of the natural adjunction equivalence."
+   }
+  },
+  {
+   "text": "Step 5 represents, for each $c$, the presheaf $X\\mapsto\\operatorname{Map}_{\\mathcal C}(LX,c)$ by the actual object $ic$. Apply [lem-coef-infinity-pointwise-adjoint-criterion] to obtain a coherent right adjoint $r$ and its representing mapping-space bifunctor equivalence. Composing that equivalence with step 5 gives $\\operatorname{Map}_{\\mathcal P}(-,rc)\\simeq\\operatorname{Map}_{\\mathcal P}(-,ic)$, coherently in $c$. Full faithfulness of the Yoneda functor $j_{\\mathcal P}:\\mathcal P\\to\\operatorname{Fun}(\\mathcal P^{\\mathrm{op}},\\mathcal S)$ in [lem-coef-infinity-yoneda-presheaf-limits] ($\\mathcal P$ has small mapping spaces by step 4) identifies this with a natural equivalence $r\\simeq i$, as follows. The displayed equivalence is an equivalence edge $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$ in $\\operatorname{Fun}(\\mathcal C,\\operatorname{Fun}(\\mathcal P^{\\mathrm{op}},\\mathcal S))$. Let $\\mathcal Y_0$ be the full subcategory on presheaves equivalent to some $j_{\\mathcal P}(X)$; since a full subcategory contains every simplex whose vertices lie in it, this edge and its inverse witnesses lie in $\\operatorname{Fun}(\\mathcal C,\\mathcal Y_0)$. By [lem-coef-infinity-full-essential-image] the corestriction $J_0:\\mathcal P\\to\\mathcal Y_0$ has a coherent quasi-inverse $K$ with $KJ_0\\simeq1_{\\mathcal P}$. Postcomposition with $K$ is a simplicial map of functor quasicategories and carries equivalence edges with their witnessing $2$-simplices to equivalence edges, so $r\\simeq KJ_0r\\simeq KJ_0i\\simeq i$ in $\\operatorname{Fun}(\\mathcal C,\\mathcal P)$, the outer equivalences being $KJ_0\\simeq1_{\\mathcal P}$ whiskered by $r$ and by $i$. Compose the adjunction equivalence with this identification to write the adjunction as $L\\dashv i$. Its representing equivalence is the one in step 5, and the cited adjoint criterion supplies its unit $\\eta$, counit $\\epsilon$ and coherent triangle identities. Consequently its forward map sends $h:LX\\to c$ to $i(h)\\eta_X$, and its inverse sends $g:X\\to ic$ to $\\epsilon_c L(g)$: these follow by naturality from the images of the identity maps that define the unit and counit.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.2.4.2, Definition 5.2.2.7 and Proposition 5.2.2.8; unit and counit of the representing adjunction."
+   }
+  },
+  {
+   "text": "For each $c,c'\\in\\mathcal C$, precomposition by $\\epsilon_c:Lic\\to c$ is an equivalence $\\operatorname{Map}_{\\mathcal C}(c,c')\\to\\operatorname{Map}_{\\mathcal C}(Lic,c')$. Indeed, under the adjunction its value at $h$ is $i(h\\epsilon_c)\\eta_{ic}\\simeq i(h)$ by the triangle identity $i(\\epsilon_c)\\eta_{ic}\\simeq1_{ic}$; the map $h\\mapsto i(h)$ is an equivalence by step 3. Taking $c'=Lic$ supplies $t:c\\to Lic$ with $t\\epsilon_c\\simeq1_{Lic}$. The two maps $\\epsilon_ct$ and $1_c$ have homotopic images under precomposition by $\\epsilon_c$; using the same equivalence with $c'=c$ yields $\\epsilon_ct\\simeq1_c$. Thus every counit component is an equivalence, with an explicit two-sided inverse. The counit is already a coherent transformation by step 6. Apply the vertexwise-equivalence clause of [lem-cbc-enhanced-functor-cone-calculus] with $K=\\mathcal C$, using $\\mathcal U\\prime$ as that clause's small universe and one further ambient universe. The parameter and target $\\mathcal C$ fit in $\\mathcal U\\prime$; this application does not change the original meaning of small colimits or spaces. This makes $\\epsilon$ a natural equivalence, as required.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.2.7, reflective adjunction; explicit inverse argument from steps 3 and 6."
+   }
+  },
+  {
+   "text": "The other triangle identity is $\\epsilon_{LX}L(\\eta_X)\\simeq1_{LX}$. Since $\\epsilon_{LX}$ is an equivalence by step 7, $L(\\eta_X)$ is its inverse and is therefore an equivalence. Finally full faithfulness in step 3 and the adjunction in step 6 identify the composite\n$$\\operatorname{Map}_{\\mathcal P}(iLX,ic)\\simeq\\operatorname{Map}_{\\mathcal C}(LX,c)\\simeq\\operatorname{Map}_{\\mathcal P}(X,ic)$$\nwith precomposition by $\\eta_X$: a map $i(h)$ is sent to $i(h)\\eta_X$, and every map on the left is so represented on its full mapping space. This is an equivalence and gives the displayed unit-precomposition assertion. Along with steps 3, 4, 6 and 7 this proves every clause of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.2.7.2 and the triangle identities; explicit unit-precomposition calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-full-essential-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite-stage mapping-complex adjunction: foundational presheaf-presentation input. Agent proof of the conclusion of online HTT Theorem 5.5.1.1(1) to (5), using the existing compact-generator definition, free cocompletion and mapping-space nodes; not the printed Ind/idempotent-completion proof. HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every presentable infinity category is an accessible reflective localization of the space valued presheaves on a small infinity category",
-   "results": "{\"t\": \"2026-10-16T16:16:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every presentable infinity category is an accessible reflective localization of the space valued presheaves on a small infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_uliftCoyoneda_obj\", \"CategoryTheory.instIsCardinalAccessibleObjOppositeFunctorTypeUliftCoyonedaOpOfIsCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\"], \"digest\": \"687748b272c63eda\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsLocallyPresentable\", \"IsRightAdjoint\"",
-   "results": "{\"t\": \"2026-10-16T16:16:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyPresentable\\\", \\\"IsRightAdjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
-  },
-  {
    "tool": "grep",
-   "query": "[Pp]resentab.*[Ll]ocal|[Ll]ocal.*[Pp]resentab|[Pp]resheaf",
-   "results": "{\"t\": \"2026-10-16T16:16:12Z\", \"tool\": \"grep\", \"query\": \"[Pp]resentab.*[Ll]ocal|[Ll]ocal.*[Pp]resentab|[Pp]resheaf\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\"], \"digest\": \"c37b463e1d716875\"}",
+   "query": "presentab|[Rr]eflect|[Pp]resheaf",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"grep\", \"query\": \"presentab|[Rr]eflect|[Pp]resheaf\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"8e27e63339ab8e50\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
   },
   {
    "tool": "leansearch",
-   "query": "A presentable quasicategory is a reflective subcategory of a small infinity presheaf category",
-   "results": "{\"t\": \"2026-10-16T16:16:13Z\", \"tool\": \"leansearch\", \"query\": \"A presentable quasicategory is a reflective subcategory of a small infinity presheaf category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"SSet.Quasicategory\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"SSet.Quasicategory.mk\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"SSet.QCat\"], \"digest\": \"a7330e67fb9bd67f\"}",
+   "query": "Restricted Yoneda embeds an accessible infinity category fully faithfully into space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"leansearch\", \"query\": \"Restricted Yoneda embeds an accessible infinity category fully faithfully into space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObj\", \"CategoryTheory.Yoneda.yoneda_full\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.OverPresheafAux.restrictedYoneda_obj\", \"CategoryTheory.GrothendieckTopology.yonedaFullyFaithful\", \"CategoryTheory.Functor.isDense_iff_fullyFaithful_restrictedULiftYoneda\"], \"digest\": \"f009e3f8f692d2fb\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyPresentable\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T18:31:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyPresentable\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
   },
   {
    "tool": "leanfinder",
-   "query": "Simpson presentation theorem an accessible cocomplete infinity category admits a fully faithful right adjoint to a presheaf infinity category",
-   "results": "{\"t\": \"2026-10-16T16:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"Simpson presentation theorem an accessible cocomplete infinity category admits a fully faithful right adjoint to a presheaf infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Limits.IsIndObject.nonempty_presentation\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\"], \"digest\": \"dfe8fd6b2c6baaef\"}",
+   "query": "A presentable infinity category has a reflective presentation by small space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"leanfinder\", \"query\": \"A presentable infinity category has a reflective presentation by small space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\"], \"digest\": \"96f0e954ec634e8f\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
   },
   {
    "tool": "grep",
-   "query": "yoneda|presheaf|presentab|localization|cocomplet",
-   "results": "{\"t\": \"2026-10-16T16:17:06Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|presentab|localization|cocomplet\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "query": "yoneda|presheaf|presentab|localization",
+   "results": "{\"t\": \"2026-10-16T18:31:45Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|presentab|localization\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read CategoryTheory/Presentable/Adjunction.lean:65-92 and the ordinary Category definitions in Presentable/LocallyPresentable.lean. They show inheritance of presentability under an existing ordinary reflective adjunction; they do not construct a reflective presentation of an arbitrary presentable infinity category by space-valued presheaves. Quasicategory/Basic.lean and StrictBicategory.lean supply quasicategories, not Simpson presentation."
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every accessible cocomplete quasicategory embeds reflectively in an infinity category of space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T18:31:55Z\", \"tool\": \"leanfinder\", \"query\": \"Every accessible cocomplete quasicategory embeds reflectively in an infinity category of space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"SSet.QCat\", \"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"156d3a5e527ab143\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Presentable/Dense.lean:32-65, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:65-84, and Functor/KanExtension/Dense.lean:37-59. These use ordinary Category and Type-valued presheaves. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn-filling only; the nerve/ho adjunction is between ordinary categories and simplicial sets. None supplies a reflective presentation of an arbitrary presentable infinity category with coherent space-valued mapping bifunctors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictedYoneda\"",
+   "results": "{\"t\": \"2026-10-16T18:48:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"restrictedYoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.restrictedYonedaObj\", \"CategoryTheory.OverPresheafAux.restrictedYoneda\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObj_obj\", \"CategoryTheory.OverPresheafAux.restrictedYoneda_obj\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObjMap₁\", \"CategoryTheory.OverPresheafAux.toOverYonedaCompRestrictedYoneda\", \"CategoryTheory.OverPresheafAux.restrictedYoneda_map\", \"CategoryTheory.OverPresheafAux.restrictedYonedaObjMap₁_app\"], \"digest\": \"a7470bff08061bbf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. The returned declarations have ordinary Category instances and Type-valued presheaves; Limits/Presheaf.lean:62-66,150-173 and Functor/KanExtension/Dense.lean:41-55 confirm those hypotheses. They do not state the space-valued quasicategorical assertion. Quasicategory/Basic.lean:32-42 defines horn filling without this presentation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocomplete quasicategory generated by a small set of compact objects admits a fully faithful restricted Yoneda right adjoint",
+   "results": "{\"t\": \"2026-10-16T18:48:48Z\", \"tool\": \"leanfinder\", \"query\": \"A cocomplete quasicategory generated by a small set of compact objects admits a fully faithful restricted Yoneda right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.instFullIndYoneda\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.instRepresentablyCoflatIndYoneda\", \"CategoryTheory.Functor.instFullOppositeTypeRestrictedULiftYonedaOfIsDense\", \"CategoryTheory.Presheaf.uliftYonedaAdjunction\", \"CategoryTheory.Presheaf.yonedaAdjunction\"], \"digest\": \"5be9cfaec38a2caf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. The returned declarations have ordinary Category instances and Type-valued presheaves; Limits/Presheaf.lean:62-66,150-173 and Functor/KanExtension/Dense.lean:41-55 confirm those hypotheses. They do not state the space-valued quasicategorical assertion. Quasicategory/Basic.lean:32-42 defines horn filling without this presentation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflective localization presentation of an accessible cocomplete infinity category by space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T19:35:00Z\", \"tool\": \"leanfinder\", \"query\": \"Reflective localization presentation of an accessible cocomplete infinity category by space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.OrthogonalReflection.corepresentableBy\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\"], \"digest\": \"a56139342d0b275f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:31-65, Presentable/LocallyPresentable.lean:34-80, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:62-84,150-173, Functor/KanExtension/Dense.lean:37-59 and AlgebraicTopology/Quasicategory/Basic.lean:32-45. The presentability, density and presheaf-adjoint candidates assume ordinary Category instances and Type-valued presheaves. The condensed-space embedding concerns ordinary topological spaces and condensed sets. None states a reflective presentation for arbitrary space-valued quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "presentab|[Rr]eflect|[Pp]resheaf",
+   "results": "{\"t\": \"2026-10-16T19:35:04Z\", \"tool\": \"grep\", \"query\": \"presentab|[Rr]eflect|[Pp]resheaf\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/EssentiallyLarge.lean\", \"Mathlib/CategoryTheory/Presentable/EssentiallyLarge.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"0b7291cabf01e701\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:31-65, Presentable/LocallyPresentable.lean:34-80, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:62-84,150-173, Functor/KanExtension/Dense.lean:37-59 and AlgebraicTopology/Quasicategory/Basic.lean:32-45. The presentability, density and presheaf-adjoint candidates assume ordinary Category instances and Type-valued presheaves. The condensed-space embedding concerns ordinary topological spaces and condensed sets. None states a reflective presentation for arbitrary space-valued quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presentable infinity category is a reflective localization of a space valued presheaf infinity category",
+   "results": "{\"t\": \"2026-10-16T19:35:04Z\", \"tool\": \"leansearch\", \"query\": \"A presentable infinity category is a reflective localization of a space valued presheaf infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.IsLocallyPresentable.mk\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.Types.instIsPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_uliftCoyoneda_obj\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\"], \"digest\": \"5e5166f2c763287e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:31-65, Presentable/LocallyPresentable.lean:34-80, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:62-84,150-173, Functor/KanExtension/Dense.lean:37-59 and AlgebraicTopology/Quasicategory/Basic.lean:32-45. The presentability, density and presheaf-adjoint candidates assume ordinary Category instances and Type-valued presheaves. The condensed-space embedding concerns ordinary topological spaces and condensed sets. None states a reflective presentation for arbitrary space-valued quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.restrictedYoneda, CategoryTheory.IsLocallyPresentable",
+   "results": "{\"t\": \"2026-10-16T19:35:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.restrictedYoneda, CategoryTheory.IsLocallyPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Presheaf.restrictedYoneda'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: the service rejected the identifier CategoryTheory.Presheaf.restrictedYoneda; not evidence of absence. Replaced by the logged quoted IsLocallyPresentable query."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyPresentable\"",
+   "results": "{\"t\": \"2026-10-16T19:36:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsLocallyPresentable.exists_cardinal\", \"CategoryTheory.IsLocallyPresentable.mk\", \"CategoryTheory.Presheaf.instIsLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Equivalence.isLocallyPresentable\", \"CategoryTheory.IsDiscrete.instIsLocallyPresentableOfSubsingletonOfNonempty\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\"], \"digest\": \"fe82600c3cfe0ecb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:31-65, Presentable/LocallyPresentable.lean:34-80, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:62-84,150-173, Functor/KanExtension/Dense.lean:37-59 and AlgebraicTopology/Quasicategory/Basic.lean:32-45. The presentability, density and presheaf-adjoint candidates assume ordinary Category instances and Type-valued presheaves. The condensed-space embedding concerns ordinary topological spaces and condensed sets. None states a reflective presentation for arbitrary space-valued quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact generators of a presentable quasicategory give a fully faithful restricted Yoneda functor with colimit preserving left adjoint",
+   "results": "{\"t\": \"2026-10-16T19:36:07Z\", \"tool\": \"leanfinder\", \"query\": \"Compact generators of a presentable quasicategory give a fully faithful restricted Yoneda functor with colimit preserving left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.fullyFaithfulShrinkYoneda\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.Functor.IsDense.of_fullyFaithful_restrictedULiftYoneda\", \"CategoryTheory.instFullIndYoneda\", \"CategoryTheory.Functor.isDense_iff_fullyFaithful_restrictedULiftYoneda\", \"CategoryTheory.Functor.instFullOppositeTypeRestrictedULiftYonedaOfIsDense\"], \"digest\": \"4cf75659303e11fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/Dense.lean:31-65, Presentable/LocallyPresentable.lean:34-80, Presentable/Adjunction.lean:74-92, Limits/Presheaf.lean:62-84,150-173, Functor/KanExtension/Dense.lean:37-59 and AlgebraicTopology/Quasicategory/Basic.lean:32-45. The presentability, density and presheaf-adjoint candidates assume ordinary Category instances and Type-valued presheaves. The condensed-space embedding concerns ordinary topological spaces and condensed sets. None states a reflective presentation for arbitrary space-valued quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-continuous-presheaf-representability",
@@ -84,5 +249,29 @@
   "group": "Q55"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-presentable-presheaf-presentation",
+  "worker": "stage1",
+  "summary": "Repair of landing refusal at returned head 1b8a7db392: revalidated all cited statements against the current DAG. Step 2 now applies compactness in the larger space category as the revised definition requires, and descends its colimiting cocone through the existing fully faithful, colimit-preserving universe inclusion. Added the existing spaces-small-colimits-universe input and the existing cocone-calculus input to step 2; refreshed every quotation. The eight-step proof, theorem statement and unit/chapter binding are retained, with zero new nodes and zero Mathlib leaves.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit. Read its current main-20261015 proof, now under sk-thm-sf-package. These steps supply the presheaf-presentation foundation in the existing created.item chain through presentable adjoints and enriched-category calculus, without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 2 uses the generic cocone/initial-object clauses to compare the two colimit cocones in larger spaces; step 7 uses the generic vertexwise equivalence criterion after its explicit counit inverse calculation. No node of this unit states those generic quasicategory criteria. These applications do not replace any geometric or coefficient step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-2b0307122",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-2b0307122 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of all 9 cited nodes. I also read unit sk-prop-sf-biduality-general and the main-20261015 ancestor proof (prop-coef-integral-exceptional-adjoint, paragraph 2). HTT is not archived, and the proof is correctly marked by=agent with a WANTED line. The statement follows from HTT 5.5.1.1 (1)=>(5) and Def 5.2.7.2, without accessibility, and no hypothesis is added. Step 2 now matches the current compactness definition: it applies compactness in S_U', then descends through spaces-small-colimits-universe (small colimit exists, iota fully faithful and colimit-preserving), using initial-cocone contractibility and lifting the inverse homotopies; every clause it uses is in the cited statements. Steps 3-5 check out: colimit-to-limit tests, the evaluation node and free cocompletion with V=C and V=S^op, with variance and smallness of P's mapping spaces verified. Steps 7-8 (two-sided counit inverse via the triangle and step 3; vertexwise criterion in the shifted universe; L(eta) invertible; eta-precomposition) are sound. Fault (C4-type missing citation) in step 6: the bifunctor equivalence j_P r ~ j_P i was turned into a functor-level equivalence r~i by objectwise Yoneda full faithfulness alone. I repaired it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-presentable-presheaf-presentation.json by citing the existing in-unit node lem-coef-infinity-full-essential-image (quasi-inverse K on the essential image, then whiskering K J_0 ~ 1), and added it to step 6 uses and to proof_deps; the statement is unchanged. Edge cases checked: terminal C, C=S, the empty colimit (preserved by L, not claimed for i), and universe placement in steps 2, 5 and 7. There are no new nodes, no duplicates and no cycle, including with the added dependency. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic cocone/initial-object and vertexwise-equivalence clauses). Mathlib searches: no match, which I agree with.; 1 file(s) fixed by the reviewer"
+ }
 }
