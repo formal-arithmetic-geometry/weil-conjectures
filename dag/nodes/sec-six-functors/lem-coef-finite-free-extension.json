@@ -3,59 +3,361 @@
  "blueprint": {
   "is": "lem-coef-finite-free-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite free coefficient extensions and cofinal levels",
- "statement": "Let $E\\subset L$ be a finite extension of coefficient fields,\nwith ramification index $e$. For every $n\\geq1$, put\n\n$$\nA=\\mathcal O_E/\\varpi_E^n,\\qquad\nB=\\mathcal O_L/\\varpi_E^n\\mathcal O_L\n=\\mathcal O_L/\\varpi_L^{en}=A_{L,en}.\n$$\n\nEquality here is equality of ideals; a unit relating the chosen\nuniformizers does not change the quotient. The coefficient ring\n$B$ is finite free over $A$. For finite-Tor constructible\ncomplexes the canonical maps give isomorphisms\n\n$$\n\\begin{aligned}\n(Rf_{*,A}K)\\otimes_A B&\\cong Rf_{*,B}(K\\otimes_A B),\\\\\n(Ri_A^!M)\\otimes_A B&\\cong Ri_B^!(M\\otimes_A B),\\\\\n\\omega_{X,A}\\otimes_A B&\\cong\\omega_{X,B},\\\\\nR\\mathcal Hom_A(K,M)\\otimes_A B\n&\\cong R\\mathcal Hom_B(K\\otimes_A B,M\\otimes_A B),\\\\\n(D_{X,A}K)\\otimes_A B&\\cong D_{X,B}(K\\otimes_A B).\n\\end{aligned}\n$$\n\nThey respect evaluation, double-dual maps and the adjunction\ncounits, are compatible with further finite coefficient-field\nextension, and commute with coefficient reduction. Their formation\nis natural under scheme isomorphisms, in particular Frobenius.\nThus the levels $en$ give the coefficient comparisons on a\ncofinal subsystem of the $\\mathcal O_L$-adic tower.",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. A coefficient field means a finite extension of $\\mathbf Q_\\ell$, with its valuation ring and chosen uniformizer [def-weil-l-adic-coefficient-extension]. Let $X,T,Z$ be separated finite-type $k$-schemes, let $f:T\\to X$ be a separated finite-type morphism, and let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-finite-type-morphism, def-weil-proper-morphism, def-weil-closed-immersion]. Work first on the ordinary small etale derived categories [def-weil-pbc-derived-categories]. Bounded constructible means [def-weil-pbc-constructible-complexes]; finite Tor amplitude means that for some integers $a\\le b$, $\\mathcal H^r(K\\otimes_A^L N)=0$ for every degree-zero module sheaf $N$ and every $r\\notin[a,b]$. On the finite-coefficient pro-etale constructible realization use [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. Coefficient extension is the derived change of rings [lem-pur-derived-change-of-rings]. Direct image is the usual derived direct image, $Ri_A^!$ on the etale site is the right adjoint of $i_*$ [lem-exc-closed-ambient], and $\\omega_{X,A}=a_{X,A}^{\\times}A$ with $a_X:X\\to\\operatorname{Spec}k$, where $a_{X,A}^{\\times}$ is the etale compact-support right adjoint [thm-amb-etale-exceptional-adjoint, def-amb-etale-compact-support]. Put $D_{X,A}K=R\\mathcal Hom_A(K,\\omega_{X,A})$ using [def-pur-derived-internal-hom, lem-weil-duality-pairing]. On the pro-etale realization use the transported exceptional functor and dualizing object [def-weil-exceptional-inverse-image, lem-weil-finite-duality-site-comparison]. All tensor products below are derived; since $B$ will be finite free over $A$, tensoring with $B$ is also ordinary exact tensoring. In the direct-image formula $K\\in D^b_{ctf}(T,A)$; in the closed-exceptional formula $M\\in D^b_{ctf}(X,A)$; in the remaining formulas $K,M\\in D^b_{ctf}(X,A)$.\n\nLet $E\\subset L$ be a finite extension of coefficient fields,\nwith ramification index $e$. For every $n\\geq1$, put\n\n$$\nA=\\mathcal O_E/\\varpi_E^n,\\qquad\nB=\\mathcal O_L/\\varpi_E^n\\mathcal O_L\n=\\mathcal O_L/\\varpi_L^{en}=A_{L,en}.\n$$\n\nEquality here is equality of ideals; a unit relating the chosen\nuniformizers does not change the quotient. The coefficient ring\n$B$ is finite free over $A$. For finite-Tor constructible\ncomplexes the canonical maps give isomorphisms\n\n$$\n\\begin{aligned}\n(Rf_{*,A}K)\\otimes_A B&\\cong Rf_{*,B}(K\\otimes_A B),\\\\\n(Ri_A^!M)\\otimes_A B&\\cong Ri_B^!(M\\otimes_A B),\\\\\n\\omega_{X,A}\\otimes_A B&\\cong\\omega_{X,B},\\\\\nR\\mathcal Hom_A(K,M)\\otimes_A B\n&\\cong R\\mathcal Hom_B(K\\otimes_A B,M\\otimes_A B),\\\\\n(D_{X,A}K)\\otimes_A B&\\cong D_{X,B}(K\\otimes_A B).\n\\end{aligned}\n$$\n\nThey respect evaluation, double-dual maps and the adjunction\ncounits, are compatible with further finite coefficient-field\nextension, and commute with coefficient reduction. Their formation\nis natural under scheme isomorphisms, in particular Frobenius.\nThus the levels $en$ give the coefficient comparisons on a\ncofinal subsystem of the $\\mathcal O_L$-adic tower.\n\nMore explicitly, the direct-image map is the projection comparison [def-kun-projection-formula-map]. The closed-exceptional map is the adjoint of scalar-extended exceptional counit. The dualizing map is adjoint to the scalar-extended compact-support counit using the finite-free comparison $T_{A,B}Ra_{X,A!}\\cong Ra_{X,B!}T_{A,B}$, where $T_{A,B}=-\\otimes_A^LB$. The internal-Hom map is the transpose of scalar-extended evaluation, and the Verdier map is its composite with the dualizing map. Coefficient-reduction compatibility means the commuting squares for $A_{E,n}\\to A_{E,m}$ and $A_{L,en}\\to A_{L,em}$, $1\\le m\\le n$, using the canonical derived tensor reassociations and the quotient comparisons of [lem-coef-finite-direct-image, lem-coef-finite-closed-shriek, lem-coef-finite-dualizing, thm-coef-finite-hom, cor-coef-finite-verdier]. Frobenius here means the scheme isomorphism $\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ on a geometric fiber $X_0\\times_{k_0}k$, for the automorphism $\\gamma$ of $k$ [def-weil-global-geometric-frobenius], with its corresponding base isomorphism; it is not a claim that the absolute Frobenius of an arbitrary scheme is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
   "place": "node lem-coef-finite-free-extension, order 2143"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-derived-change-of-rings",
+  "lem-exc-closed-ambient",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-amb-etale-compact-support",
+  "def-pur-derived-internal-hom",
+  "lem-weil-duality-pairing",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-finite-duality-site-comparison",
+  "def-kun-projection-formula-map",
+  "lem-coef-finite-direct-image",
+  "lem-coef-finite-closed-shriek",
+  "lem-coef-finite-dualizing",
+  "thm-coef-finite-hom",
+  "cor-coef-finite-verdier",
+  "def-weil-global-geometric-frobenius"
+ ],
  "proof": [
   {
-   "text": "The module $\\mathcal O_L$ is finite and torsion free over the\nDVR $\\mathcal O_E$, hence finite free; reducing a free basis\nmodulo $\\varpi_E^n$ proves the assertion about $B/A$.\nThe ordinary direct-image projection comparison is an isomorphism\nfor a finite free coefficient module by additivity; this is the\nfinite-free starting case of [lem-coef-finite-direct-image].\nApply it to the closed-support triangle exactly as in\n[lem-coef-finite-closed-shriek]. This proves the closed\nexceptional comparison with the same counit-defined map.\nThe local closed-embedding computation of\n[lem-coef-finite-dualizing] then proves the comparison for\n$\\omega_X$. The Tate twists of [def-coefficient-twists-detailed]\ncommute with coefficient extension: they are the tensor extensions\nof the same prime-to-characteristic root-of-unity sheaves, and\nthe affine-space trace uses their coefficient-linear counit.",
+   "text": "The restriction of $|\\cdot|_L$ to $E$ equals $|\\cdot|_E$ by uniqueness [lem-weil-l-adic-extension-absolute-value]; hence $\\mathcal O_E=E\\cap\\mathcal O_L$ and $0<|\\varpi_E|_L<1$. Apply the uniformizer factorization in [lem-weil-l-adic-extension-integers-dvr] in $L$: $\\varpi_E=u\\varpi_L^e$ for a unit $u$ and a positive integer $e$, the ramification index. Consequently $\\varpi_E^n\\mathcal O_L=\\varpi_L^{en}\\mathcal O_L$ for all $n$. The quotient $\\mathcal O_L/\\varpi_E\\mathcal O_L$ is finite by [lem-weil-valued-dvr-finite-quotients] at exponent $e$ in $L$. It is therefore a finitely generated module over $\\mathcal O_E/\\varpi_E$: the images of all its finitely many elements are a generating set.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "The ring $R=\\mathcal O_E$ is $(\\varpi_E)$-adically complete. Indeed, for a compatible sequence of residues choose lifts $x_n\\in R$; then $x_{n+1}-x_n\\in\\varpi_E^nR$, so $(x_n)$ is Cauchy and converges by [lem-weil-l-adic-extension-complete]. Its limit is in $R$ and has the prescribed residues because $\\varpi_E^nR=\\{x:|x|_E\\le |\\varpi_E|_E^n\\}$ is closed. The intersection of these balls is zero, so the lift is unique, proving the definition [def-weil-pbc-adically-complete-ring]. If $y\\in\\bigcap_n\\varpi_E^n\\mathcal O_L$, then $|y|_L\\le |\\varpi_E|_L^n$ for every $n$. Since $0<|\\varpi_E|_L<1$, this forces $|y|_L=0$, hence $y=0$. Apply [lem-weil-pbc-finite-over-complete-ring] to $R$, $I=(\\varpi_E)$ and $M=\\mathcal O_L$ using the finite residue module of step 1. Thus $\\mathcal O_L$ is finite over $R$. It is torsion-free since it is a subring of the field $L$ and $R\\hookrightarrow L$ is injective; $R$ is a DVR by [lem-weil-l-adic-extension-integers-dvr]. Hence [lem-sc-dvr-fg-torsionfree-free] gives an $R$-basis $b_1,\\ldots,b_r$ of $\\mathcal O_L$. Reducing this basis gives $B\\cong A^{\\oplus r}$ as $A$-modules.",
+   "uses": [
+    "lem-weil-l-adic-extension-complete",
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-finite-over-complete-ring",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031D, lemma-finite-over-complete-ring; application after the explicit completeness check"
+   }
+  },
+  {
+   "text": "On either coefficient site write $T_W=-\\otimes_A B_W$ and $U_W$ for restriction of scalars [def-pc-sheaf-restrict-scalars]. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to the identity topos and $A_W\\to B_W$: $T_W\\dashv U_W$. By [lem-pur-change-of-rings-tensor-comparison] and the basis in step 2, $U_WT_WN\\cong N^{\\oplus r}$. Thus $T_W$ is exact; $U_W$ is exact and reflects zero objects because it leaves the underlying abelian sheaf unchanged. The exact functors descend termwise by [lem-weil-pbc-exact-functor-derived-factorization]. The termwise unit and counit of [lem-weil-pbc-termwise-adjunction-homotopy] descend as well and retain their triangle identities, so $T_W\\dashv U_W$ also on derived categories, and $U_W$ reflects isomorphisms (apply it to the cohomology of a cone). The exact derived $T_W$ is the derived change of rings of [lem-pur-derived-change-of-rings]. Tensor extension preserves bounded constructibility: it is exact, and on each stratum a finite locally constant $A$-module becomes a finite locally constant $B$-module. It preserves any Tor interval $[a,b]$ because $(T_WK)\\otimes_B^L N\\cong K\\otimes_A^L U_WN$, on K-flat tensor complexes [lem-weil-pbc-site-derived-tensor-descent]: the balanced maps are $(p\\otimes b)\\otimes n\\mapsto p\\otimes bn$ and $p\\otimes n\\mapsto(p\\otimes1)\\otimes n$. They are inverse chain maps; extension of a K-flat $A$-complex is K-flat over $B$, since this formula identifies its tensor with an acyclic $B$-complex with tensor against that complex restricted to $A$, which is acyclic because $U$ is exact.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; exact finite-free specialization and passage to complexes"
+   }
+  },
+  {
+   "text": "First work etale. For a $B$-complex $N$ the canonical comparison $U_XRf_{*,B}N\\cong Rf_{*,A}U_TN$ is [lem-sbc-canonical-restrict-scalars-functor-comparisons] on bounded-below objects. For a finite-free extension the same comparison is available on unbounded objects directly: a $B$-K-injective resolution remains $A$-K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since $T_T$ is exact, and direct image commutes sectionwise with $U$. Under this identification the underlying map of the projection comparison $c_f:T_XRf_{*,A}K\\to Rf_{*,B}T_TK$ [def-kun-projection-formula-map] is the finite-sum comparison $(Rf_{*,A}K)^{\\oplus r}\\to Rf_{*,A}(K^{\\oplus r})$. To verify the map, precompose with its $j$-th summand: the projection map is adjoint to the inverse-image counit, and the component is $Rf_*$ applied to the inclusion $k\\mapsto k\\otimes b_j$; these are exactly the finite-sum inclusions. Any additive functor $F$ preserves this finite sum explicitly: applying $F$ to projections $p_j$ and inclusions $s_j$ preserves $p_js_h=\\delta_{jh}$ and $\\sum_js_jp_j=1$, giving inverse comparison matrices. Apply this to $Rf_{*,A}$. Thus $U_Xc_f$, and hence $c_f$, is invertible. This proves the first displayed comparison without any cohomological-dimension hypothesis.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, first paragraph: finite-free direct-image case (with the finite-sum calculation written out)"
+   }
+  },
+  {
+   "text": "For compact supports, factor the chosen morphism as an open immersion followed by a proper morphism. A separated finite-type morphism between our schemes is compactifiable by [thm-nagata-compactification], and the schemes in the compactification are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: a field has only the zero and unit ideals, so $\\operatorname{Spec}k$ is Noetherian, and each scheme here is finite type over it. For a fixed $f:T\\xrightarrow{j}\\overline T\\xrightarrow{p}X$ with $\\overline T$ finite type over $X$, the etale functor is $F_A=Rp_{*,A}j_!$ [def-amb-etale-compact-support]. Extension by zero commutes with coefficient extension and restriction: off the open its stalk is zero, and on the open it is the given stalk [lem-weil-pbc-extension-by-zero-stalks, lemma-weil-pbc-geometric-stalk-conservative]; the comparison is the map induced by $m\\otimes b\\mapsto m\\otimes b$. Combining this with step 4 for $p$ gives $c^!_f:T_XF_A\\xrightarrow{\\sim}F_BT_T$, natural in all objects. After restriction it is the finite-sum comparison, whose components are $F_A$ of the inclusions $m\\mapsto m\\otimes b_j$. This construction also applies to the structure morphism $a_X$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, first paragraph: counit-defined dualizing comparison; compact-support finite-free calculation"
+   }
+  },
+  {
+   "text": "Apply extension and restriction of scalars to the two exceptional adjunctions. Let $F_A\\dashv G_A$ and $F_B\\dashv G_B$ be either $i_*\\dashv Ri^!$ [lem-exc-closed-ambient], or $Ra_{X!}\\dashv a_X^{\\times}$ [thm-amb-etale-exceptional-adjoint]. Their left functors have the comparison $c:T F_A\\xrightarrow{\\sim}F_BT$ of steps 4 and 5 (for $i_*$ use its derived direct image). For a $B$-object $N$ and an $A$-test object $P$, the successive adjunctions give\n$$\\operatorname{Hom}_A(P,UG_BN)=\\operatorname{Hom}_B(TP,G_BN)=\\operatorname{Hom}_B(F_BTP,N)=\\operatorname{Hom}_B(TF_AP,N)=\\operatorname{Hom}_A(F_AP,UN)=\\operatorname{Hom}_A(P,G_AUN).$$\nThe bijections are natural in $P,N$; they therefore identify $UG_BN$ with $G_AUN$: evaluate the bijection and its inverse at identity maps to obtain inverse morphisms. Define $b_M:TG_AM\\to G_BTM$ to be adjoint to $(T\\varepsilon_{A,M})c_{G_AM}^{-1}$. Under the preceding identification and $UTM=M^{\\oplus r}$, $Ub_M$ is the map $(G_AM)^{\\oplus r}\\to G_A(M^{\\oplus r})$ whose $j$-th component is $G_A$ of the $j$-th inclusion; this follows by transposing that component, which gives precisely $\\varepsilon_{A,M}$ followed by that inclusion. The finite-sum matrix calculation of step 4 makes this an isomorphism. Since $U$ reflects isomorphisms, $b_M$ is an isomorphism. The two choices of $F,G$ give the closed-exceptional comparison and, at $M=A_s$, the dualizing comparison $u:T\\omega_{X,A}\\xrightarrow{\\sim}\\omega_{X,B}$. By definition they obey $\\varepsilon_{B,TM}F_B(b_M)=(T\\varepsilon_{A,M})c_{G_AM}^{-1}$, which is the required counit identity.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, first paragraph: exceptional and dualizing maps defined by their counits; explicit finite-free adjunction argument"
+   }
+  },
+  {
+   "text": "For the transpositions used here, [lem-pur-rhom-global-sections, lem-weil-pbc-ringed-internal-hom-exact-restriction] give the actual derived tensor-Hom adjunction on each coefficient site: writing $\\mathcal C$ for the site and $H=R\\mathcal Hom$, the natural bijections are\n$$\\operatorname{Hom}(L,H(K,N))\\cong H^0(\\mathcal C,H(L,H(K,N)))\\cong H^0(\\mathcal C,H(L\\otimes^L K,N))\\cong\\operatorname{Hom}(L\\otimes^L K,N).$$\nHere $H^0(\\mathcal C,-)$ is degree-zero derived global sections, as in [lem-pur-rhom-global-sections], not the cohomology sheaf. Their counit is evaluation. For internal Hom, establish the internal change-of-rings adjunction explicitly. Choose a $B$-K-injective resolution $N\\to J$. Its restriction $UJ$ is $A$-K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since $T$ is exact. For any complex $P$ representing $K$, extension-restriction adjunction on every localized site [lem-weil-pbc-ringed-topoi-module-adjunction] gives an isomorphism of sheaf Hom complexes\n$$U\\mathcal Hom_B^\\bullet(TP,J)=\\mathcal Hom_A^\\bullet(P,UJ).$$\nIt respects the differential because its termwise rule is $h\\mapsto(p\\mapsto h(p\\otimes1))$, with inverse $g\\mapsto(p\\otimes b\\mapsto b\\,g(p))$; both rules commute with restrictions, products and the Hom differential. By [def-pur-sheaf-hom, def-pur-derived-internal-hom] this computes a canonical isomorphism $UR\\mathcal Hom_B(TK,N)\\cong R\\mathcal Hom_A(K,UN)$. At $N=TM$, the underlying map of the canonical evaluation-defined comparison $v_{K,M}$ is therefore\n$$R\\mathcal Hom_A(K,M)^{\\oplus r}\\longrightarrow R\\mathcal Hom_A(K,M^{\\oplus r}).$$\nIts $j$-th component is induced by $m\\mapsto m\\otimes b_j$, so the finite-sum matrix calculation again supplies its inverse. Additivity here is also visible directly in the Hom complex: the finite sum of K-injectives representing the $r$ copies of $M$ is K-injective, since a map from an acyclic complex into it is the tuple of its components, each null-homotopic. Thus $Uv_{K,M}$ and $v_{K,M}$ are isomorphisms, with no global perfectness assumption on $K$.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pur-sheaf-hom",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; combined with sites-modules Tag 03CZ and the displayed Hom-complex calculation"
+   }
+  },
+  {
+   "text": "Define $\\beta_K$ as $v_{K,\\omega_{X,A}}$ followed by $R\\mathcal Hom_B(TK,u)$. Steps 6 and 7 make it an isomorphism $TD_{X,A}K\\to D_{X,B}TK$. Its evaluation identity is\n$$u\\,T(\\mathrm{ev}_{A,K})=\\mathrm{ev}_{B,TK}(\\beta_K\\otimes1),$$\nwhere tensor reassociation is understood. Indeed, both sides send a functional tensored with $k$ and coefficient $b$ to its value multiplied by $b$, followed by $u$; this is exactly the defining transposition in step 7. The double-dual map is the transpose of evaluation [lem-weil-duality-pairing], so transposing this identity once more gives\n$$\\beta_{D_AK}\\,T(\\delta_{A,K})=D_B(\\beta_K)\\,\\delta_{B,TK}.$$\nThis is the double-dual compatibility (both sides land in $D_B(TD_AK)$). In particular, it does not presume biduality in order to prove compatibility.",
+   "uses": [
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, second and third paragraphs: evaluation and the double-dual transpose"
+   }
+  },
+  {
+   "text": "The basis was used only to test invertibility. All five maps were defined before choosing a basis by projection, counit or evaluation. For $E\\subset L\\subset H$, put $d=e(H/L)$ and $C=\\mathcal O_H/\\varpi_E^n\\mathcal O_H=A_{H,den}$. The factorization $\\varpi_E=u\\varpi_L^e$ and $\\varpi_L=v\\varpi_H^d$ gives $\\varpi_E=uv^e\\varpi_H^{de}$ with a unit coefficient, so the iterated coefficient stage is exactly $C$. Compare the maps for $A\\to B\\to C$ with that for $A\\to C$, using $(K\\otimes_A B)\\otimes_B C\\cong K\\otimes_A C$. This reassociation and its action on morphisms can be checked on K-flat tensor complexes [lem-weil-pbc-site-derived-tensor-descent]. For direct image, under the inverse-image adjunction both composite maps have transpose $f^*Rf_*K\\otimes_A C\\to K\\otimes_A C$, the inverse-image counit tensored with $C$. For exceptional and dualizing maps, their transposes are respectively $F_C(T_{A,C}G_AM)\\xrightarrow{(c_{A,C})^{-1}}T_{A,C}F_AG_AM\\xrightarrow{T_{A,C}\\varepsilon_A}T_{A,C}M$; expanding either composite gives this formula, since the intermediate $F_B\\dashv G_B$ unit followed by counit cancels by its triangle identity. For internal Hom the transpose of either composite is $T_{A,C}(\\mathrm{ev}_A)$ after tensor reassociation. Adjunction is a bijection on morphisms, so equality of these displayed transposes proves each composition law, and composition proves the Verdier law. For the identity extension the same transposes are the original counit/evaluation, giving the identity comparisons.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, third paragraph: transposes for identity and successive field extensions"
+   }
+  },
+  {
+   "text": "Write $A_n=A_{E,n}$, $B_n=A_{L,en}$ and similarly $A_m,B_m$, where $1\\le m\\le n$. Step 2 gives $B_n$ free over $A_n$, so\n$$B_n\\otimes^L_{A_n}A_m=B_n/\\varpi_E^m B_n=B_m.$$\nThus the two derived composites $T_{A_m,B_m}T_{A_n,A_m}$ and $T_{B_n,B_m}T_{A_n,B_n}$ are identified by reassociation. This uses the commutative square of coefficient maps, not an identification of the numerical indices $n$ and $en$. The vertical quotient comparisons exist: direct image by [lem-coef-finite-direct-image], and closed exceptional image on the pro-etale constructible realization by [lem-coef-finite-closed-shriek] (the etale assertion is recovered in step 11), the dualizing object by [lem-coef-finite-dualizing], internal Hom by [thm-coef-finite-hom], and the Verdier dual by [cor-coef-finite-verdier]. Apply those nodes only to the quotients $A_n\\to A_m$ and $A_{L,en}\\to A_{L,em}$ within their own fields. Scalar extension preserves the input finite-Tor constructible condition by step 3, so the quotient comparisons apply on the $L$ side as well. In particular, the current [thm-coef-finite-hom] is used over $E$ with exponents $n,m$ and over the coefficient field $L/\\mathbf Q_\\ell$ with exponents $en,em$; $e\\ge1$ gives $en\\ge em\\ge1$, and step 3 makes $K\\otimes_{A_n}B_n$ and $M\\otimes_{A_n}B_n$ objects of $D^b_{ctf}(X,B_n)$. Both sites and the constant coefficient sheaves are exactly those of that theorem. Its evaluation-transpose characterization identifies the two vertical internal-Hom maps used below; no application to the non-quotient extension $A_n\\to B_n$ is made. The constant rank-one complex $A_X$ is finite-Tor constructible, and $D_{X,A}(A_X)=\\omega_{X,A}$ by the unit-module Hom formula. Thus [lem-weil-verdier-preservation-strata] makes $\\omega_{X,A}$ finite-Tor constructible, and the identical application to $B_X$ gives the required condition for $\\omega_{X,B}$. In particular the compact-support quotient comparisons below can be applied to these dualizing objects. For the direct-image square both transposes are the counit $f^*Rf_*K\\to K$ tensored to $B_m$. For the exceptional square on that pro-etale realization and for the etale dualizing square, both transposes are the exceptional counit tensored to $B_m$, using in the latter case the ordinary etale compact-support coefficient isomorphism $c_{X,A,B,\\omega_{X,A}}$ and the displayed counit identity explicitly stated in [lem-coef-finite-dualizing]. That statement supplies this etale map at each same-field quotient, so here it applies separately over $E$ and $L$; no etale assertion is inferred from the pro-etale compact-support theorem. For the internal-Hom square both transposes are evaluation tensored to $B_m$. Consequently the squares commute by injectivity of each adjunction bijection, and their composite is the Verdier square. The evaluation and double-dual identities of step 8 remain the same identities after this derived tensor; duals are still finite-Tor constructible by [lem-weil-verdier-preservation-strata], so the quotient comparisons used for them have the required hypotheses.",
    "uses": [
     "lem-coef-finite-direct-image",
     "lem-coef-finite-closed-shriek",
     "lem-coef-finite-dualizing",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For internal Hom one can either repeat the strata argument of\n[thm-coef-finite-hom], or use finite freeness directly.\nThe tensor–Hom adjunction in\n[def-weil-derived-pullback-tensor-hom] identifies the\nunderlying $A$-object of the target with\n$R\\mathcal Hom_A(K,M\\otimes_A B)$.\nFor a finite free coefficient module, additivity identifies this\nwith $R\\mathcal Hom_A(K,M)\\otimes_A B$. The canonical\nidentification is independent of the temporary choice of a\nfree basis, since it is the map adjoint to evaluation. Combining\nthis with the dualizing comparison gives the Verdier comparison\nby precisely the construction of [cor-coef-finite-verdier].",
-   "uses": [
     "thm-coef-finite-hom",
-    "def-weil-derived-pullback-tensor-hom",
-    "cor-coef-finite-verdier"
+    "cor-coef-finite-verdier",
+    "lem-weil-verdier-preservation-strata"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, third paragraph: quotient followed by extension, with the actual coefficient square and transposes"
+   }
   },
   {
-   "text": "For two field extensions, or a quotient followed by extension,\ntranspose both proposed composite comparisons under the same\nadjunction. Both are tensor reassociation followed by the same\nevaluation or counit. This proves their equality, as well as\nevaluation and double-dual compatibility. The constructions use\nonly pullback, tensor, evaluation, and natural adjunction maps,\nso they are unchanged by transporting along a scheme\nisomorphism. Finally the positive multiples $en$ are cofinal\namong the positive integers, and\n$(\\varpi_E^n)\\mathcal O_L=(\\varpi_L^{en})$. These are exactly\nthe finite levels needed when reconstructing after scalar extension;\none does not identify equal numerical indices for the two different\nuniformizers.",
-   "uses": [],
-   "elementary": null
+   "text": "These comparisons also give the finite-coefficient pro-etale assertions. Direct image commutes with the etale/pro-etale pullback by [lem-weil-pbc-comparison-direct-image-canonical-mate], applicable since $f$ is quasi-compact and quasi-separated and the input is bounded below; coefficient pullback commutes with derived tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The exceptional functor is the etale functor transported on the constructible class [def-weil-exceptional-inverse-image]; use precisely that functor, without assuming an ambient pro-etale exceptional adjoint. The dualizing and internal-Hom identifications, including evaluation and its double-dual transpose, are [lem-weil-finite-duality-site-comparison], applied separately at the two finite coefficient stages. Its first input is finite-Tor and its second bounded constructible, as required; for the Verdier comparison the second input is the dualizing object, whose bounded constructibility was checked in step 10. The canonical-mate statement identifies the pulled-back inverse-image counit with the pro-etale counit. Under the tensor pullback isomorphism the transpose of the pulled-back direct-image comparison is therefore the pro-etale counit tensored with $B$, which is exactly the defining transpose of the pro-etale coefficient comparison. The internal-Hom transpose is pulled-back evaluation, and the transported exceptional counit is the defining etale counit by [def-weil-exceptional-inverse-image]. Thus applying comparison pullback to the etale maps gives the same counit/evaluation-defined maps on the pro-etale realization; all identities already proved persist under that functor. Alternatively the Hom-complex argument of step 7 works on either site. For clarity, the current statement [lem-coef-finite-closed-shriek] supplies the closed-exceptional quotient comparison on the pro-etale constructible site only. To recover its etale version, first send the etale input $M$ to a pro-etale finite-Tor constructible input by [lem-sf-comparison-tor-amplitude]. Its transported exceptional image is exactly $\\nu_Z^*Ri_{A,\\mathrm{et}}^!M$ by [def-weil-exceptional-inverse-image], and is finite-Tor constructible by [thm-sf-preservation-class]. The closed coefficient theorem states that its coefficient extension and the exceptional image after reduction are both bounded constructible, and that its map is defined by the exceptional counit. By the tensor pullback comparison above, these two outputs are the pullbacks of the two etale outputs in the desired quotient comparison. The exact pullback with isomorphic sheaf unit in [prop-weil-pbc-site-comparison-finite-level] is conservative on sheaves: applying its right adjoint to an isomorphism of pullbacks and using that unit recovers an isomorphism. Since exact pullback commutes with cohomology, boundedness of these pro-etale outputs implies boundedness of their etale preimages. Constructibility is reflected as well: each constructible pro-etale cohomology sheaf has a constructible etale preimage by [lem-sf-proetale-constructible-origin], and full faithfulness from the sheaf unit identifies that preimage with the corresponding etale cohomology sheaf. The pro-etale outputs in fact have finite Tor amplitude by [lem-coef-finite-closed-shriek]. Apply clause (ii) of [lem-sf-comparison-tor-amplitude] to each etale preimage, now known to be bounded below: it reflects the same finite Tor interval to the etale site. Thus the descended comparison has its two outputs in the required etale finite-Tor constructible category. Now [thm-weil-pbc-site-comparison] gives full faithfulness on these bounded-below etale objects. Thus the pro-etale quotient isomorphism and the mixed square descend uniquely to etale. They are the etale counit-defined map and square: the comparison for closed direct image follows from [lem-weil-pbc-comparison-direct-image-canonical-mate], and the transported exceptional counit is the original etale counit under [def-weil-exceptional-inverse-image]; their transposes therefore agree. This recovery uses no etale claim in the pro-etale closed coefficient statement.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-exceptional-inverse-image",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-coef-finite-closed-shriek",
+    "lem-sf-comparison-tor-amplitude",
+    "thm-sf-preservation-class",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, all paragraphs: finite constructible realization on the two sites"
+   }
+  },
+  {
+   "text": "Finally, transport a diagram along scheme isomorphisms (and the base isomorphism when present). The induced site equivalences identify module sheaves by inverse reindexing; their inverse transports are actual inverses up to the canonical pullback identifications. The formula for tensor, scalar extension, the Hom differential, and evaluation is unchanged under this reindexing. Transport the left adjunction and its unit/counit as well. The transported right adjoint is the original right adjoint under the unique counit-compatible identification; after bringing both functors into the same categories this uniqueness is [lem-trf-adjoint-mate]. Consequently the transported comparison is the comparison on the transported diagram: both have exactly the projection-counit or evaluation transposes displayed in steps 6, 7 and 9. This includes the semilinear Frobenius isomorphism of [def-weil-global-geometric-frobenius] because $\\gamma$ is a field automorphism with inverse. Lastly $e\\ge1$ and for every $m\\ge1$ there is $n\\ge1$ with $en\\ge m$ (take $n=m$); the set of such $n$ is a nonempty tail and hence directed. Thus the indices $en$ are cofinal for the inverse tower. The ideal equality in step 1 identifies exactly those levels with $B_n$; changing either uniformizer by a unit does not change these ideals or quotient maps.",
+   "uses": [
+    "lem-trf-adjoint-mate",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof, final paragraph: scheme-isomorphism naturality, Frobenius transport, and cofinal levels"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-l-adic-extension-complete",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-kun-projection-formula-map",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-closed-ambient",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-duality-pairing",
   "lem-coef-finite-direct-image",
   "lem-coef-finite-closed-shriek",
   "lem-coef-finite-dualizing",
-  "def-coefficient-twists-detailed",
   "thm-coef-finite-hom",
-  "def-weil-derived-pullback-tensor-hom",
-  "cor-coef-finite-verdier"
+  "cor-coef-finite-verdier",
+  "lem-weil-verdier-preservation-strata",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-sf-preservation-class",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-trf-adjoint-mate",
+  "def-weil-global-geometric-frobenius"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-  "place": "## Proof"
+  "place": "Proof: finite-free argument with explicit scalar adjunctions, counit transposes, and reduction square"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(coeff|[Ss]heaf)|[Cc]oeff.*finiteFree|dualizing.*(coeff|baseChange)",
+   "results": "No source hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free scalar extension commutes with derived internal Hom and duality of sheaves",
+   "results": "LeanSearch returned Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, \"linear\"",
+   "results": "Loogle reported unknown identifier CategoryTheory; query gave no usable result.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; replaced by the later mapBiproduct query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of coefficients commutes with derived direct image exceptional inverse image dualizing complexes and derived internal Hom of etale sheaves",
+   "results": "No matching coefficient/duality theorem; hits concern Kahler differentials and open module restriction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor commutes with finite direct sums and a finite free coefficient extension is a finite direct sum of the identity functor",
+   "results": "Finite-additive-category facts, including CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive; not the five sheaf comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; finite-sum calculation is elementary"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBiproduct\"",
+   "results": "CategoryTheory.Functor.mapBiproduct and its structural formulas; no coefficient change theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBiproduct|Finite.*[Bb]iproduct",
+   "results": "AdditiveFunctor.lean:203 preservesFiniteBiproductsOfAdditive and related finite-biproduct infrastructure.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; finite-sum identities are proved inside step 4"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction of scalars along a finite free algebra commutes with right derived functors and derived sheaf Hom by preservation of finite biproducts",
+   "results": "8 hits: Ext.mapExactFunctor_hom, Functor.mapExactFunctor_smul, LightCondensed monoidal closed instance, Ext.mapExactFunctor, Functor.instLinearDerivedCategoryMapDerivedCategory, two sheafification finite-limit instances, and LightCondensed.free_internallyProjective_iff_tensor_condition. None states the five coefficient comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(derived|[Hh]om)|[Hh]om.*changeOfRings|finiteFree.*[Dd]erived|[Dd]erived.*finiteFree",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "12 hits in CategoryTheory.Adjunction.Unique, including rightAdjointUniq, rightAdjointUniq_hom_counit, unit_rightAdjointUniq_hom, and transitivity. Source read; these supply categorical uniqueness only, not the coefficient-comparison item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; foundational uniqueness already represented by lem-trf-adjoint-mate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsBaseChange.*[Cc]oeff|[Cc]hangeOfRings.*[Rr]ightDerived|[Ff]inite[Ff]ree.*[Rr]estrictScalars",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules, finite free extension of coefficient rings commutes with derived internal Hom and derived direct image via the canonical evaluation and adjunction maps",
+   "results": "8 hits: SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, LightCondensed.freeForgetAdjunction. Read Sheaf/Free.lean lines 69-77 and Sheaf/PullbackContinuous.lean lines 69-101: free-sheaf maps and the underived sheaf-module pullback adjunction, not the derived finite-free coefficient comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +385,154 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-finite-free-extension",
+  "worker": "stage1",
+  "summary": "Bound the formerly free scheme/complex variables and specify etale versus transported pro-etale operations, cofinal reduction indices, and the semilinear Frobenius. Prove finite freeness from complete-DVR tools, then all five canonical comparisons by finite sums, extension/restriction adjunction and explicit counit/evaluation transposes. Reuse existing generic statements and existing quotient-only comparisons solely for reduction compatibility. No new nodes or Mathlib leaves. Current-DAG return repair rechecks all citation statements, writes the Noetherian compactification hypothesis into step 5, and explicitly reflects finite Tor amplitude for both etale closed-comparison outputs in step 11 after boundedness and constructibility have been established. Landing-return repair of the changed thm-coef-finite-hom statement: step 10 now explicitly specializes its current field, quotient-exponent, site and finite-Tor hypotheses on both sides of the reduction square, and revalidates its evaluation-defined maps against a fresh verbatim citation. Second reader repairs two site/map citation gaps: the etale compact-support counit is cited from lem-coef-finite-dualizing, and the site comparison now cites the explicit canonical-mate normalization and writes the projection/evaluation transpose argument.",
+  "blueprint": "Proof paragraph 1 is realized by steps 1-6 (finite freeness, direct image, exceptional and dualizing maps); paragraph 2 by steps 7-8 (internal Hom and Verdier); paragraph 3 by steps 8-12 (evaluation, double dual, field-extension composition, quotient square, two-site realization, isomorphism/Frobenius naturality and cofinality). The dualizing argument is the finite-free adjunction calculation rather than a repeat of the local closed-embedding calculation; the unit has no prescribed proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Generic A Hausdorff module over a complete ring that is finite modulo the ideal is finite used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Generic Natural comparison of restricted scalar extension and sheaf tensor used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic Canonical inverse- and direct-image coefficient comparisons used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project] used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic Closed-immersion right adjoint before restriction used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-verdier-preservation-strata",
+    "why": "Generic Constructible preservation before biduality used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "The specified etale/pro-etale direct-image comparison is an invertible counit mate on bounded-below inputs. Its explicit counit normalization identifies the coefficient projection map and descends the closed-exceptional counit; the general direct-image existence statement alone does not state that normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "Generic Finite-stage duality under the site comparison used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic Mates along an isomorphism of left adjoints used with its displayed hypotheses in the finite-free argument; this unit has no statement of this general tool. Its use does not replace any step of the unit (which has no prescribed steps). The quotient compact-support comparison is used only for the coefficient-reduction square."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Global derived-Hom sections identify morphisms, used with currying to supply the tensor-Hom adjunction behind evaluation transposes; no geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Unbounded ringed-site currying supplies the derived tensor-Hom bijection with the global-sections theorem; this unit has no substitute statement of that foundational fact."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Transfer the etale finite-Tor input to the pro-etale class of the current closed coefficient theorem."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Supply bounded constructibility of the transported exceptional image before reflecting the quotient comparison."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exact comparison pullback and its sheaf unit detect boundedness and identify constructible cohomology sheaves."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Constructible sheaf equivalence reflects constructibility of the etale preimages of the closed-comparison outputs."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Full faithfulness on bounded-below etale derived categories descends the pro-etale counit-defined closed comparison and its mixed square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-closed-ambient",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-verdier-preservation-strata",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-trf-adjoint-mate",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-sf-preservation-class",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q10-ff665fdf0",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-ff665fdf0 (reviewer sub-agent of L); spot-checked: Read the full item, report, all 55 cited statements, and cited source passages. Verified all twelve steps, canonical maps, ramified indices, reduction squares, site descent, edge cases, and absence of cycles or duplicates. Accepted the declared generic tools. No repairs needed; review.md records the checks. Condensed target-category bridges remain separate obligations."
+ }
 }
