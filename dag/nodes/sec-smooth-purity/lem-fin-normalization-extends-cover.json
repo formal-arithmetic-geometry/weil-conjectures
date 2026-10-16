@@ -226,5 +226,23 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-582079739 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, source passages, and unit/chapter route. All five steps hold, including the structural field inclusion and gluing over V without separatedness. No new nodes, duplicate replacement, or dependency cycle found. Accept lem-fin-etale-normal-components as a generic tool use. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationExtendsCover",
+  "declaration": "AlgebraicGeometry.Scheme.normalizationIn_functionField_extends_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationExtendsCover.lean",
+  "statement": "theorem normalizationIn_functionField_extends_cover {k : Type u} [Field k] (X : Scheme.{u}) [IsIntegral X] [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (V : X.Opens) [Nonempty V] (hV : IsNormalScheme V.toScheme) (P : Scheme.{u}) [ConnectedSpace P] (f : P ⟶ V.toScheme) [IsFinite f] [Etale f] : ∃ (_ : IsIntegral P) (_ : Algebra X.functionField P.functionField), X.fromSpecOfAlgebraFunctionField P.functionField = P.fromSpecFunctionField ≫ f ≫ V.ι ∧ ∃ e : pullback (X.fromNormalizationIn P.functionField) V.ι ≅ P, e.hom ≫ f = pullback.snd (X.fromNormalizationIn P.functionField) V.ι",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cdf9380a3",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Audited the immutable module, all eight statement dependencies, sources, report sections, edge cases, universes, and verbatim signature. Single-file scompile.py checks passed for sandbox and library module. No findings or fixes required."
  }
 }
