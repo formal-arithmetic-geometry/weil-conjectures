@@ -41,15 +41,15 @@ monoidal closed structure on `Dᵇc` is that of
 - `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y` and `a_Y : Y ⟶ S`,
   the identification `γ : Rf^! ω_Y ≅ ω_X` with `ω_X` relative to `f ≫ a_Y`, the composition
   isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!`
-  (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp`) at the unit.
+  (`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`) at the unit.
 - `ProEtale.CondensedRing.absoluteVerdierExchange` and
   `ProEtale.CondensedRing.dualVerdierExchange`: the absolute exchange
   `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K` and the opposite exchange `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, built
   with `γ`.
 
-The isomorphism `γ` is constructed from the composition isomorphism of lower shrieks
-`R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_Y_!`, which is still `sorry`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp`).
+The isomorphism `γ` is the conjugate of the composition isomorphism of lower shrieks
+`R(f ≫ a_Y)_! ≅ Rf_! ⋙ Ra_Y_!`
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl`).
 
 ## Main results
 
@@ -159,11 +159,11 @@ variable {X Y S : Over (Spec (.of k))}
 
 /-- The identification `γ : Rf^! ω_Y ≅ ω_X` of the dualizing complexes `ω_Y = Ra_Y^! ℚ̄_ℓ,S` and
 `ω_X = R(f ≫ a_Y)^! ℚ̄_ℓ,S`: the composition isomorphism `R(f ≫ a_Y)^! ≅ Ra_Y^! ⋙ Rf^!` of
-`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp` at the unit. -/
+`ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl` at the unit. -/
 noncomputable def upperShriekDualizingComplexIso :
     (boundedConstructibleUpperShriek _ ℓ f).obj (dualizingComplex ℓ aY) ≅
       dualizingComplex ℓ (f ≫ aY) :=
-  ((boundedConstructibleUpperShriekComp _ ℓ f aY).app (𝟙_ _)).symm
+  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f aY).app (𝟙_ _)).symm
 
 /-- The **absolute Verdier exchange morphism** `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_! K`, with `𝔻_X` relative to
 `f ≫ a_Y` and `𝔻_Y` relative to `a_Y`: the exchange morphism `Φ_{f,K,ω_Y}` precomposed with the
