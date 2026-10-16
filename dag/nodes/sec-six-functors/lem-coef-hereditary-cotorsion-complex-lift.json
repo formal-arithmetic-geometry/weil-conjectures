@@ -24,9 +24,197 @@
  "stmt_deps": [
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-coef-complexes-grothendieck] and [lem-sp-grothendieck-enough-injectives] to know that both $\\mathcal A$ and $\\operatorname{Ch}(\\mathcal A)$ have enough injectives. Use [lem-coef-yoneda-derived-ext-comparison] to identify the Yoneda groups in the statement with derived Ext, so the two cited six-term sequences apply. By [lem-coef-cotorsion-orthogonality-calculus], $\\mathcal F,\\mathcal T$ contain zero and are extension- and retract-closed. If $0\\to K\\to F_0\\to F_1\\to0$ has $F_0,F_1\\in\\mathcal F$, the first-variable sequence injects $\\operatorname{Ext}^1(K,T)$ into $\\operatorname{Ext}^2(F_1,T)=0$ for every $T\\in\\mathcal T$; thus $K\\in\\mathcal F$. If $0\\to T_0\\to T_1\\to C\\to0$ has $T_0,T_1\\in\\mathcal T$, the second-variable sequence injects $\\operatorname{Ext}^1(F,C)$ into $\\operatorname{Ext}^2(F,T_0)=0$; thus $C\\in\\mathcal T$. Every injective object lies in $\\mathcal T$. In particular an acyclic complex with cycles in either class has terms in that class, by its cycle short exact sequences.",
+   "uses": [
+    "lem-coef-complexes-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-coef-ext-contravariant-six-term",
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; Stacks 06XU and 06XP, dimension shifting."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-derived-single-fully-faithful] to identify degree-zero derived Ext with ordinary Hom, in both abelian categories. For $F\\in\\mathcal F$ and $U\\in\\widetilde{\\mathcal T}$, apply the covariant sequence to $0\\to Z^jU\\to U^j\\to Z^{j+1}U\\to0$: $\\operatorname{Hom}(F,U^j)\\to\\operatorname{Hom}(F,Z^{j+1}U)$ is onto because $\\operatorname{Ext}^1(F,Z^jU)=0$. Hence $\\operatorname{Hom}^{\\bullet}(S^nF,U)$ is acyclic, so $S^nF\\in\\operatorname{dg}\\mathcal F$. Dually the contravariant sequence for $0\\to Z^jV\\to V^j\\to Z^{j+1}V\\to0$, with $V\\in\\widetilde{\\mathcal F}$ and $T\\in\\mathcal T$, shows that $\\operatorname{Hom}^{\\bullet}(V,S^nT)$ is acyclic, so $S^nT\\in\\operatorname{dg}\\mathcal T$. Write $D^nA$ for the disk $A\\xrightarrow{1}A$ in degrees $n,n+1$. A disk is acyclic, its nonzero cycle is $A$, and its identity is null-homotopic by the identity from degree $n+1$ to degree $n$. Pre- or postcomposing this contraction contracts the corresponding Hom complex. Thus disks on $F$ lie in both $\\widetilde{\\mathcal F}$ and $\\operatorname{dg}\\mathcal F$, and disks on $T$ lie in both $\\widetilde{\\mathcal T}$ and $\\operatorname{dg}\\mathcal T$. All four classes are closed under shifts: shifts just reindex terms and cycles and shift Hom cohomology.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-coef-ext-contravariant-six-term",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument, single-degree and disk tests; definitions and Hom exactness."
+   }
+  },
+  {
+   "text": "We show $\\operatorname{dg}\\mathcal F={}^{\\perp_1}\\widetilde{\\mathcal T}$. If $P\\in\\operatorname{dg}\\mathcal F$ and $U\\in\\widetilde{\\mathcal T}$, their termwise Ext groups vanish, so the degreewise split calculation [lem-coef-complex-ext-disk-sphere] identifies $\\operatorname{Ext}^1(P,U)$ with $H^1\\operatorname{Hom}^{\\bullet}(P,U)=0$. Conversely, if $P\\perp_1\\widetilde{\\mathcal T}$, test on $D^nT$ for every $T\\in\\mathcal T$: the disk identity gives $\\operatorname{Ext}^1(P^{n+1},T)=0$, so every term of $P$ lies in $\\mathcal F$. The same degreewise split identity, applied to every shift of every $U\\in\\widetilde{\\mathcal T}$, makes every degree of $\\operatorname{Hom}^{\\bullet}(P,U)$ have zero cohomology. This is precisely $P\\in\\operatorname{dg}\\mathcal F$.",
+   "uses": [
+    "lem-coef-complex-ext-disk-sphere"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument, first left orthogonal; Gillespie (2004), Proposition 3.6."
+   }
+  },
+  {
+   "text": "We show $(\\operatorname{dg}\\mathcal F)^{\\perp_1}=\\widetilde{\\mathcal T}$. One inclusion follows from Step 3. Suppose $X\\perp_1$ on the right of $\\operatorname{dg}\\mathcal F$. For every $n$, apply the contravariant sequence to $0\\to S^{n+1}G\\to D^nG\\to S^nG\\to0$. Since $\\operatorname{Ext}^1(S^nG,X)=0$ by Step 2, every map $S^{n+1}G\\to X$ extends over $D^nG$. Equivalently every $G\\to Z^{n+1}X$ lifts through $X^n\\to Z^{n+1}X$. To see the latter map is epic, take an epimorphism from a coproduct of copies of $G$ onto $Z^{n+1}X$, lift each summand, and combine the lifts. Thus $X$ is acyclic. Only now apply the sphere identity [lem-coef-complex-ext-disk-sphere]: for every $F\\in\\mathcal F$, $0=\\operatorname{Ext}^1(S^nF,X)=\\operatorname{Ext}^1(F,Z^nX)$. Hence $Z^nX\\in\\mathcal T$. This proves the first cotorsion pair.",
+   "uses": [
+    "lem-coef-complex-ext-disk-sphere",
+    "lem-coef-ext-contravariant-six-term",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; Gillespie arXiv:math/0607769, Lemma 3.6 and Proposition 3.7, with exactness established before using the sphere-cycle identity."
+   }
+  },
+  {
+   "text": "We show $(\\widetilde{\\mathcal F})^{\\perp_1}=\\operatorname{dg}\\mathcal T$. If $X$ is in the left-hand right orthogonal, testing on $D^nF\\in\\widetilde{\\mathcal F}$ and using the first disk identity gives $X^n\\in\\mathcal T$. The degreewise split identity for each $V\\in\\widetilde{\\mathcal F}$ and all its shifts now identifies the vanishing of the extension groups with acyclicity of $\\operatorname{Hom}^{\\bullet}(V,X)$. Conversely, the terms of $V$ are in $\\mathcal F$ and those of a dg-$\\mathcal T$ complex are in $\\mathcal T$, so termwise extensions split and its defining Hom acyclicity kills $\\operatorname{Ext}^1(V,X)$ by the same identity.",
+   "uses": [
+    "lem-coef-complex-ext-disk-sphere"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument, second right orthogonal; Gillespie (2004), Proposition 3.6."
+   }
+  },
+  {
+   "text": "We show ${}^{\\perp_1}(\\operatorname{dg}\\mathcal T)=\\widetilde{\\mathcal F}$. One inclusion follows from Step 5. For the other, suppose $X\\perp_1\\operatorname{dg}\\mathcal T$. By Step 2 every $S^nI$, with $I$ injective, lies in $\\operatorname{dg}\\mathcal T$. The injective-sphere identity [lem-coef-complex-ext-disk-sphere] gives $\\operatorname{Hom}(H^{n-1}X,I)=0$ for every injective $I$. Embed $H^{n-1}X$ into an injective; the embedding must be zero, so $H^{n-1}X=0$. Thus $X$ is acyclic. Test next on $S^nT$ for arbitrary $T\\in\\mathcal T$ and use the exact-source sphere identity to get $\\operatorname{Ext}^1(Z^{n+1}X,T)=0$. Hence all cycles lie in $\\mathcal F$, as required. This establishes the second cotorsion pair.",
+   "uses": [
+    "lem-coef-complex-ext-disk-sphere",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; enough injectives replaces an unavailable projective generator in the dual exactness test."
+   }
+  },
+  {
+   "text": "For $V\\in\\widetilde{\\mathcal F}$ and $U\\in\\widetilde{\\mathcal T}$, their cycles are pairwise Ext-one orthogonal. By [lem-coef-acyclic-cycle-orthogonal-splitting], $\\operatorname{Ext}^1(V,U)=0$. The same is true after every shift of either complex. Since their terms are also Ext-one orthogonal, [lem-coef-complex-ext-disk-sphere] gives $H^r\\operatorname{Hom}^{\\bullet}(V,U)=0$ for all $r$. It follows from the two defining dg conditions that $\\widetilde{\\mathcal F}\\subseteq\\operatorname{dg}\\mathcal F\\cap\\mathcal W$ and $\\widetilde{\\mathcal T}\\subseteq\\operatorname{dg}\\mathcal T\\cap\\mathcal W$.",
+   "uses": [
+    "lem-coef-acyclic-cycle-orthogonal-splitting",
+    "lem-coef-complex-ext-disk-sphere"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; cycle splittings are the content behind Gillespie (2004), Lemma 3.10."
+   }
+  },
+  {
+   "text": "Let $\\Sigma=\\{S^nA:n\\in\\mathbf Z, A\\in S\\cup\\{G\\}\\}$. It is a set, and Step 2 puts it in $\\operatorname{dg}\\mathcal F$, so $\\widetilde{\\mathcal T}\\subseteq\\Sigma^{\\perp_1}$. If $X\\in\\Sigma^{\\perp_1}$, repeat exactly the generator-sphere argument in Step 4 to make $X$ acyclic; it uses only the spheres on $G$. Then the exact-target sphere identity gives $\\operatorname{Ext}^1(A,Z^nX)=0$ for every $A\\in S$, so $Z^nX\\in S^{\\perp_1}=\\mathcal T$. Hence $\\Sigma^{\\perp_1}=\\widetilde{\\mathcal T}$. The complex $H=\\bigoplus_n D^nG$ is a generator of the complex category: lift a generating family $G\\to X^n$ to disk maps and combine them to an epimorphism onto $X$. Each term of $H$ is $G\\oplus G\\in\\mathcal F$, and $\\operatorname{Hom}^{\\bullet}(H,U)=\\prod_n\\operatorname{Hom}^{\\bullet}(D^nG,U)$ is contractible by the product of the explicit disk contractions. Thus $H\\in\\operatorname{dg}\\mathcal F={}^{\\perp_1}\\Sigma^{\\perp_1}$. Apply [lem-coef-generating-set-cotorsion-smallness] in the Grothendieck complex category, with $\\Sigma$ and $H$, to conclude that the first induced pair is complete. In particular every $X$ has $0\\to X\\to U\\to P\\to0$ with $U\\in\\widetilde{\\mathcal T}$ and $P\\in\\operatorname{dg}\\mathcal F$.",
+   "uses": [
+    "lem-coef-complex-ext-disk-sphere",
+    "lem-coef-ext-contravariant-six-term",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-complexes-grothendieck",
+    "lem-coef-generating-set-cotorsion-smallness",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; Gillespie arXiv:math/0607769, Proposition 3.7, and the existing set-cogeneration completeness tool."
+   }
+  },
+  {
+   "text": "Let $P\\in\\operatorname{dg}\\mathcal F\\cap\\mathcal W$ and $T\\in\\mathcal T$. Embed $T$ into an injective $I^0$ and iteratively embed each cokernel into another injective. Every cosyzygy remains in $\\mathcal T$ by the coresolving property in Step 1. The augmented complex $E(T)$ of [lem-coef-augmented-injective-cycle-test] consequently belongs to $\\widetilde{\\mathcal T}$. For each integer $j$, reindex $P$ so that its cycles in degree two are $Z^jP$; its degree-one term is still in $\\mathcal F$, hence has zero $\\operatorname{Ext}^1$ into $T$. The cited cycle-test formula identifies $\\operatorname{Ext}^1(Z^jP,T)$ with $H^0\\operatorname{Hom}^{\\bullet}(P\\text{ reindexed},E(T))$, which vanishes by the dg-$\\mathcal F$ property. Since $T$ and $j$ were arbitrary, all cycles of $P$ lie in $\\mathcal F$. Together with Step 7 this gives $\\operatorname{dg}\\mathcal F\\cap\\mathcal W=\\widetilde{\\mathcal F}$.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-coef-augmented-injective-cycle-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; explicit enough-injectives cycle test underlying Gillespie (2004), Theorem 3.12."
+   }
+  },
+  {
+   "text": "Let $X\\in\\operatorname{dg}\\mathcal T\\cap\\mathcal W$. Use Step 8 to choose $0\\to X\\to U\\to P\\to0$ with $U\\in\\widetilde{\\mathcal T}$ and $P\\in\\operatorname{dg}\\mathcal F$. The cohomology long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] makes $P$ acyclic; Step 9 therefore puts $P$ in $\\widetilde{\\mathcal F}$. By Step 5, $\\operatorname{Ext}^1(P,X)=0$, so this sequence splits. Thus $X$ is a retract of $U$, and taking kernels of the retraction maps makes every $Z^nX$ a retract of $Z^nU\\in\\mathcal T$. Retract closure in [lem-coef-cotorsion-orthogonality-calculus] gives $X\\in\\widetilde{\\mathcal T}$. Together with Step 7 this proves the second intersection identity.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; Gillespie (2004), Lemma 3.14 / Recktenwald (2019), Lemma 2.2.10."
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to K\\to V_0\\to V_1\\to0$ with $V_0,V_1\\in\\widetilde{\\mathcal F}$, the cohomology long exact sequence makes $K$ acyclic. The cycle sequence $0\\to Z^nK\\to Z^nV_0\\to Z^nV_1\\to0$ is then exact (surjectivity follows because $H^{n+1}K=0$). Its kernel lies in $\\mathcal F$ by Step 1, so $K\\in\\widetilde{\\mathcal F}$. Likewise for $0\\to U_0\\to U_1\\to C\\to0$ with $U_0,U_1\\in\\widetilde{\\mathcal T}$: $C$ is acyclic, its cycle short exact sequences are cokernel sequences of cycles of $U_0,U_1$, and Step 1 gives $Z^nC\\in\\mathcal T$. Thus $\\widetilde{\\mathcal T}$ is closed under these cokernels.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; cycle short exact sequences and the closure already proved in Step 1."
+   }
+  },
+  {
+   "text": "For $0\\to K\\to P\\to Q\\to0$ with $P,Q\\in\\operatorname{dg}\\mathcal F$, Step 1 puts every $K^n$ in $\\mathcal F$. For $U\\in\\widetilde{\\mathcal T}$, the contravariant Ext sequence and $\\operatorname{Ext}^1(Q^n,U^j)=0$ make $0\\to\\operatorname{Hom}^{\\bullet}(Q,U)\\to\\operatorname{Hom}^{\\bullet}(P,U)\\to\\operatorname{Hom}^{\\bullet}(K,U)\\to0$ degreewise exact: a family of maps lifts coordinatewise, so taking the products of abelian groups preserves the surjections. The Hom cohomology long exact sequence makes the last complex acyclic, so $K\\in\\operatorname{dg}\\mathcal F$. Dually, if $0\\to X\\to Y\\to C\\to0$ has $X,Y\\in\\operatorname{dg}\\mathcal T$, the terms of $C$ lie in $\\mathcal T$ by Step 1. For $V\\in\\widetilde{\\mathcal F}$, the covariant Ext sequence and $\\operatorname{Ext}^1(V^n,X^j)=0$ give a short exact sequence $0\\to\\operatorname{Hom}^{\\bullet}(V,X)\\to\\operatorname{Hom}^{\\bullet}(V,Y)\\to\\operatorname{Hom}^{\\bullet}(V,C)\\to0$. Its cohomology makes the last Hom complex acyclic. Hence $C\\in\\operatorname{dg}\\mathcal T$.",
+   "uses": [
+    "lem-coef-ext-contravariant-six-term",
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; hereditary closure of the dg classes is checked on Hom complexes, not assumed from the lifting theorem."
+   }
+  },
+  {
+   "text": "For either induced pair $(\\mathcal L,\\mathcal R)$ established above, its right class is coresolving by Steps 11-12 and contains every injective object of $\\operatorname{Ch}(\\mathcal A)$: injective targets have zero Yoneda Ext-one by [lem-coef-yoneda-derived-ext-comparison]. Embed $R\\in\\mathcal R$ into an injective $J_0$ and continue with its cokernel $R_1$, then $R_2$, and so on. Enough injectives are supplied by [lem-coef-complexes-grothendieck] and [lem-sp-grothendieck-enough-injectives]; coresolving closure keeps all $R_i$ in $\\mathcal R$. For $L\\in\\mathcal L$, the covariant Ext sequence gives $\\operatorname{Ext}^{i}(L,R)\\cong\\operatorname{Ext}^1(L,R_{i-1})=0$ for every $i\\geq1$, by repeated dimension shifting and injective vanishing. The Yoneda comparison transfers the conclusion back to the meaning of Ext in the statement. This proves higher-Ext heredity as well as both closure properties. No step used enough projectives or set cogeneration of the second pair.",
+   "uses": [
+    "lem-coef-complexes-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-sc-abelian-ext-covariant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, abstract complex lifting foundation; Agent argument; dimension shifting in the complex category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-complexes-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-sc-abelian-ext-covariant-exact",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-coef-cotorsion-orthogonality-calculus",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-coef-complex-ext-disk-sphere",
+  "lem-coef-acyclic-cycle-orthogonal-splitting",
+  "lem-coef-generating-set-cotorsion-smallness",
+  "lem-coef-augmented-injective-cycle-test",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, abstract homological-algebra foundation for derived coefficient adjunction. Agent proof with exact disk/sphere tests, cycle-extension splitting, injective-tail detection, and set-cogeneration completeness; online comparison with Gillespie arXiv:math/0607769, Proposition 3.7 and Corollary 3.8, and Recktenwald 2.2.7-2.2.13. Those documents are not locally archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +271,45 @@
    "results": "2 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsLeftOrthogonal, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsRightOrthogonal",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Ambient sheaf/Grothendieck, Ext and K-projective/K-injective declarations do not state this cotorsion theorem; generatingMonomorphisms_rlp is for all monomorphisms, and neither a general Ext-detecting set nor the prescribed flat classes are supplied. Kaplansky hits concern dimension, factorization, or topological rings. Loogle orthogonal-closure hits alone cannot supply the theorem and their module is absent from the pinned local Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hereditary cotorsion pairs on Grothendieck abelian categories induce dg and exact cycle cotorsion pairs on unbounded cochain complexes",
+   "results": "8 hits: HomologicalComplex.isGrothendieckAbelian, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.IsGrothendieckAbelian.hasExt, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b, CochainComplex.IsKInjective, DerivedCategory.isGE_Q_obj_iff, CochainComplex.IsKProjective",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient Grothendieck-category instance is separated into its own exact leaf. K-projective/K-injective orthogonality concerns different test classes and does not supply either cotorsion pair or compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of dg cotorsion pairs and exact complexes detected by sphere Ext orthogonality",
+   "results": "8 hits: CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂', CategoryTheory.hasExt_iff, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient Grothendieck-category instance is separated into its own exact leaf. K-projective/K-injective orthogonality concerns different test classes and does not supply either cotorsion pair or compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"CochainComplex\"",
+   "results": "12 hits: CochainComplex.next, Homotopy.dNext_cochainComplex, CochainComplex.HomComplex.Cochain.ext, CochainComplex.HomComplex.Cochain.ext_iff, CochainComplex.HomComplex.Cochain.ext₀, CochainComplex.HomComplex.Cochain.ext₀_iff, CochainComplex.HomComplex.Cocycle.ext, CochainComplex.HomComplex.Cocycle.ext_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient Grothendieck-category instance is separated into its own exact leaf. K-projective/K-injective orthogonality concerns different test classes and does not supply either cotorsion pair or compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|dgCotorsion|dgFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient Grothendieck-category instance is separated into its own exact leaf. K-projective/K-injective orthogonality concerns different test classes and does not supply either cotorsion pair or compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cotorsion pair hereditary induced unbounded complexes sphere cogeneration",
+   "results": "8 hits: HomologicalComplex.isGrothendieckAbelian, HomologicalComplex.instAbelian, CochainComplex.cm5b.instIsStrictlyGEI, HomologicalComplex.instHasLimitsOfShape, HomologicalComplex.homologyIsCokernel, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instIsNormalMonoCategory, CategoryTheory.ShortComplex.hasColimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient Grothendieck-category instance is separated into its own exact leaf. K-projective/K-injective orthogonality concerns different test classes and does not supply either cotorsion pair or compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-flat-complex-cotorsion-pairs",
   "by": "worker",
@@ -102,5 +325,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-hereditary-cotorsion-complex-lift",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved both induced orthogonal identifications using disk/sphere tests; established generator-sphere exactness before applying sphere-cycle Ext; used the existing set-cogeneration theorem for completeness of the first pair; proved compatibility by an explicit injective-tail test and a splitting argument; proved hereditary closures and higher Ext vanishing. Six new technical nodes, two exact Mathlib leaves. No Lean or build work.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient adjunction infrastructure supplied through lem-coef-flat-complex-cotorsion-pairs; the blueprint contains no separate cotorsion proof. Steps 1-8 build the abstract pairs and sphere cogeneration, 9-10 compatibility, and 11-13 heredity. All six children retain this exact blueprint ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic cohomology long exact sequence for short exact sequences of complexes; the unit has no separate homology-calculus node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-e85ed2d43",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-e85ed2d43 (reviewer sub-agent of L); spot-checked: review.md records checks of all thirteen steps and six new nodes, cited statements, Stacks and Mathlib sources, online comparisons, duplicate searches, and nonsemisimple edge cases. No mathematical repairs required. Unavailable WANTED originals are explicitly distinguished from sources read; their assertions were independently checked."
  }
 }

@@ -1,0 +1,78 @@
+{
+ "id": "lem-coef-augmented-injective-cycle-test",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Injective-tail test for cycles of an acyclic dg-left complex; WANTED: Gillespie (2004), the enough-injectives part of Theorem 3.12. Agent-formulated explicit test; no Stacks tag states this formula for an unbounded source.",
+   "via": [
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Augmented injective coresolutions detect Ext of cycles",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $T\\in\\mathcal A$, and fix an injective resolution [def-sp-injective-resolutions] $0\\to T\\xrightarrow{\\varepsilon}I^0\\to I^1\\to\\cdots$. Define the acyclic integer cochain complex $E(T)$ by $E(T)^0=T$, $E(T)^{k+1}=I^k$ for $k\\geq0$, and $E(T)^k=0$ for $k<0$, with differential $\\varepsilon$ in degree zero and the resolution differentials thereafter. Let $X$ be an acyclic integer cochain complex and assume $\\operatorname{Ext}^1_{\\mathcal A}(X^1,T)=0$, where $\\operatorname{Ext}^1$ denotes short exact extension classes. Put $Z^nX=\\ker d_X^n$. With $\\operatorname{Hom}^r(X,E(T))=\\prod_n\\operatorname{Hom}_{\\mathcal A}(X^n,E(T)^{n+r})$ and differential $\\delta h=d_Eh-(-1)^rhd_X$, there is a natural isomorphism\n$$H^0\\operatorname{Hom}^{\\bullet}(X,E(T))\\cong\\operatorname{Ext}^1_{\\mathcal A}(Z^2X,T).$$\nFor a cochain map $f:X\\to E(T)$, the corresponding extension class is the pushout of $0\\to Z^1X\\to X^1\\to Z^2X\\to0$ along the unique map $Z^1X\\to T$ through which $f^0:X^0\\to T$ factors via $d_X^0:X^0\\twoheadrightarrow Z^1X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Agent-formulated tool for proof paragraph 2: Injective-tail test for cycles of an acyclic dg-left complex; WANTED: Gillespie (2004), the enough-injectives part of Theorem 3.12. Agent-formulated explicit test; no Stacks tag states this formula for an unbounded source."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes from an exact cochain complex into an augmented injective coresolution detect Ext1 of its cycles",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.HasExt.standard, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.sub_extMk, CategoryTheory.Abelian.Ext",
+   "date": "2026-10-16",
+   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic complex Hom into injective resolution with augmentation computes Ext1 of cycle objects",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extMk",
+   "date": "2026-10-16",
+   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"IsKInjective\"",
+   "results": "4 hits: CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_apply, CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+  },
+  {
+   "tool": "grep",
+   "query": "(augmented|augmentation).*(injective|Injective)|Ext.*(cocycle|cycle)",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmented injective resolution detects first Ext of cycles of an exact complex",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.mk, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+   "date": "2026-10-16",
+   "verdict": "no match: InjectiveResolution.extEquivCohomologyClass computes Ext from a single object into an unaugmented resolution. equivOfIsKInjective needs a K-injective target, whereas E(T) includes T and is acyclic; it need not be K-injective. No candidate gives this augmented-tail cycle test."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-hereditary-cotorsion-complex-lift",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

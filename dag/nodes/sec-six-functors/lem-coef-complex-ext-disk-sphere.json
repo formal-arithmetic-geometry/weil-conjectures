@@ -1,0 +1,78 @@
+{
+ "id": "lem-coef-complex-ext-disk-sphere",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Elementary building-block extension calculations used in orthogonal detection; WANTED: Gillespie, The flat model structure on Ch(R) (2004), Lemma 3.1 and the degreewise split extension discussion preceding Proposition 3.6. No Stacks tag states all these disk/sphere calculations.",
+   "via": [
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Disk, sphere and degreewise split extension calculations",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and use Yoneda $\\operatorname{Ext}^1$, the group of short exact sequences with fixed endpoints modulo isomorphism, with Baer addition. Let $X,Y$ be integer cochain complexes in $\\mathcal A$, $A,B\\in\\mathcal A$, and $n\\in\\mathbf Z$. Put $Z^nX=\\ker d_X^n$, and call $X$ acyclic if $\\operatorname{im}d_X^{n-1}=Z^nX$ for every $n$. Let $S^nA$ have $A$ only in degree $n$, and let $D^nA$ have $A$ in degrees $n,n+1$, with differential $1_A$. Then there are natural isomorphisms\n$$\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(D^nA,Y)\\cong\\operatorname{Ext}^1_{\\mathcal A}(A,Y^n),\\qquad \\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,D^nB)\\cong\\operatorname{Ext}^1_{\\mathcal A}(X^{n+1},B).$$\nIf $Y$ is acyclic, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(S^nA,Y)\\cong\\operatorname{Ext}^1_{\\mathcal A}(A,Z^nY)$. If $X$ is acyclic, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,S^nB)\\cong\\operatorname{Ext}^1_{\\mathcal A}(Z^{n+1}X,B)$.\nDefine $\\operatorname{Hom}^r(X,Y)=\\prod_k\\operatorname{Hom}_{\\mathcal A}(X^k,Y^{k+r})$ with differential $\\delta h=d_Yh-(-1)^rhd_X$. If $\\operatorname{Ext}^1_{\\mathcal A}(X^k,Y^k)=0$ for every $k$, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,Y)\\cong H^1\\operatorname{Hom}^{\\bullet}(X,Y)$; under degreewise splittings, the extension corresponds to the off-diagonal differential of its middle complex. For every injective $I$ [def-sp-injective-resolutions], with no acyclicity assumption on $X$, one has $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,S^nI)\\cong\\operatorname{Hom}_{\\mathcal A}(H^{n-1}(X),I)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Agent-formulated tool for proof paragraph 2: Elementary building-block extension calculations used in orthogonal detection; WANTED: Gillespie, The flat model structure on Ch(R) (2004), Lemma 3.1 and the degreewise split extension discussion preceding Proposition 3.6. No Stacks tag states all these disk/sphere calculations."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extensions of cochain complexes by disks and sphere complexes computed by Ext of components and cycles, degreewise split extensions classified by Hom complex first cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-16",
+   "verdict": "no match: cocycleOfDegreewiseSplit constructs the off-diagonal cocycle (DegreewiseSplit.lean:39-64), and distinguished_iff_iso_trianglehOfDegreewiseSplit gives triangles, not this Yoneda Ext classification or the disk/sphere formulas. InjectiveResolution.extEquivCohomologyClass computes object Ext from resolutions, not extensions between arbitrary complexes. Read these candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext1 in the category of complexes is homotopy classes of maps into a shift when all degreewise extensions split",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.hom', CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.homAddEquiv, CategoryTheory.HasExt.standard, CategoryTheory.hasExt_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: cocycleOfDegreewiseSplit constructs the off-diagonal cocycle (DegreewiseSplit.lean:39-64), and distinguished_iff_iso_trianglehOfDegreewiseSplit gives triangles, not this Yoneda Ext classification or the disk/sphere formulas. InjectiveResolution.extEquivCohomologyClass computes object Ext from resolutions, not extensions between arbitrary complexes. Read these candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"HomologicalComplex\"",
+   "results": "12 hits: HomologicalComplex.xNext, HomologicalComplex.xNextIso, HomologicalComplex.xNextIsoSelf, HomologicalComplex.Hom.next, HomologicalComplex.Hom.ext, HomologicalComplex.Hom.ext_iff, HomologicalComplex.dFrom_comp_xNextIso, HomologicalComplex.ext_of_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: cocycleOfDegreewiseSplit constructs the off-diagonal cocycle (DegreewiseSplit.lean:39-64), and distinguished_iff_iso_trianglehOfDegreewiseSplit gives triangles, not this Yoneda Ext classification or the disk/sphere formulas. InjectiveResolution.extEquivCohomologyClass computes object Ext from resolutions, not extensions between arbitrary complexes. Read these candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "degreewise.*split|degreewiseSplit|ext.*(disk|sphere)|Ext.*HomComplex",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: cocycleOfDegreewiseSplit constructs the off-diagonal cocycle (DegreewiseSplit.lean:39-64), and distinguished_iff_iso_trianglehOfDegreewiseSplit gives triangles, not this Yoneda Ext classification or the disk/sphere formulas. InjectiveResolution.extEquivCohomologyClass computes object Ext from resolutions, not extensions between arbitrary complexes. Read these candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact extensions of complexes degreewise split correspond to homotopy classes",
+   "results": "8 hits: HomologicalComplex.shortExact_of_degreewise_shortExact, CategoryTheory.ShortComplex.Splitting.shortExact, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ShortComplex.Homotopy.ext, HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit, CategoryTheory.ShortComplex.Splitting.exact, CochainComplex.trianglehOfDegreewiseSplit, HomologicalComplex.shortExact_iff_degreewise_shortExact",
+   "date": "2026-10-16",
+   "verdict": "no match: cocycleOfDegreewiseSplit constructs the off-diagonal cocycle (DegreewiseSplit.lean:39-64), and distinguished_iff_iso_trianglehOfDegreewiseSplit gives triangles, not this Yoneda Ext classification or the disk/sphere formulas. InjectiveResolution.extEquivCohomologyClass computes object Ext from resolutions, not extensions between arbitrary complexes. Read these candidates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-hereditary-cotorsion-complex-lift",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
