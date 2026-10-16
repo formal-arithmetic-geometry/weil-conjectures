@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-trf-coefficient-conventions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Trace-formula coefficient conventions",
- "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, and a finite\nextension $E/\\Ql$ contained in a fixed algebraic closure $\\Qlb$ of\n$\\Ql$, with valuation ring $\\mathcal O_E$, a uniformizer\n$\\varpi_E$, and an integer $n\\in\\mathbf Z_{\\geq1}$. Put\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, put $X=X_0\\times_{k_0}k$, and write\n$a_X:X\\to\\Spec k$ for its structure morphism. On the\nsmall pro-etale site of $X$,\nuse the bounded\nconstructible finite-torsion coefficient category $D^b_c(X,A)$ and\nthe finite-Tor subcategory\n$D^b_{ctf}(X,A)$, the\nderived pullback, tensor\nand internal Hom, the\ncohomology sheaves, and\nthe compact-support\ncohomology construction; in particular\n\n$$\nR\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K),\\qquad\nH_c^i(X,K)=\\mathrm H^i\\bigl(R\\Gamma_c(X,K)\\bigr)\n$$\n\nwith the finite-coefficient\ncategories over a point.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]\n$p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, and a finite\nextension $E/\\Ql$ contained in a fixed algebraic closure $\\Qlb$ of\n$\\Ql$, with valuation ring $\\mathcal O_E$, a uniformizer\n$\\varpi_E$, and an integer $n\\in\\mathbf Z_{\\geq1}$. Put\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme [def-weil-scheme-morphism-properties], put $X=X_0\\times_{k_0}k$, and write\n$a_X:X\\to s=\\Spec k$ for its structure morphism, with geometric base change as in [def-weil-finite-field-fiber]. On the\nsmall pro-etale site of $X$ [def-weil-pbc-proetale-site],\nuse the bounded\nconstructible finite-torsion coefficient category $D^b_c(X,A)$ of [def-weil-finite-torsion-constructibility] and\nthe finite-Tor subcategory\n$D^b_{ctf}(X,A)$ of [def-weil-finite-tor-amplitude], the\nderived pullback, tensor\nand internal Hom of [def-weil-derived-pullback-tensor-hom], the\ncohomology sheaves of [def-weil-derived-cohomology-sheaves], and\nthe compact-support\ncohomology construction of [def-weil-ordinary-compact-cohomology]; in particular, for $K\\in D^b_c(X,A)$ and $i\\in\\mathbf Z$, define\n\n$$\nR\\Gamma_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K),\\qquad\nH_c^i(X,K)=\\mathrm H^i\\bigl(R\\Gamma_c(X,K)\\bigr)\n$$\n\nwith $\\operatorname{Fib}_s:D^b_c(s,A)\\to D^b_{\\mathrm{fin}}(A)$ and the finite-coefficient categories over a point of [def-weil-finite-coefficient-point]. Here $\\mathrm H^i$ is the cohomology module of the coefficient complex, as in [def-weil-ordinary-compact-cohomology].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-trf-coefficient-conventions.md",
   "place": "node def-trf-coefficient-conventions, order 1511",
@@ -29,9 +29,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible derived category of finite torsion modules on a small pro-etale site, its finite Tor amplitude subcategory, and compactly supported cohomology as the fibre of the exceptional direct image over an algebraically closed field",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod and DerivedCategory t-structure/bounded representative lemmas, including exists_iso_Q_obj_of_isGE_of_isLE (Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180). These give ambient infrastructure, not constructibility, finite Tor categories and compact-support cohomology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"constructible\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|compactly.supported|constructibleFiniteTor",
+   "results": "25 returned hits: AlgebraicGeometry/Sites/Proetale.lean (proetalePrecoverage:52) and ElladicCohomology.lean (ellAdicSheaf:63; EllAdicCohomology:76), and compactly supported functions/distributions. Read the site and ell-adic definitions; neither defines the finite constructible/finite-Tor categories or compact-support derived direct image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient conventions for constructible pro-etale complexes and compact support cohomology over a finite field",
+   "results": "Service unavailable: Internal Server Error; no hits could be read.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficients A the constructible derived category Dbc X A and its finite Tor subcategory Dctf X A on the proetale site; define R Gamma c X K from R a shriek K and the geometric point fibre",
+   "results": "8 hits: CategoryTheory.Sheaf.H, cohomologyPresheafFunctor, cohomologyPresheaf (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:63,77,87), HasGlobalSectionsFunctor and light condensed module declarations. Read the sheaf-cohomology definitions: ordinary Ext-valued cohomology, not the finite coefficient convention bundle or exceptional compact-support construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactSupport\"",
+   "results": "12 returned hits: HasCompactSupport and its properties, for functions on topological spaces; no sheaf-theoretic compact-support cohomology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lowerShriek|TorAmplitude|cohomology",
+   "results": "In AlgebraicGeometry/Sites: 6 returned hits, imports and documentation in ElladicCohomology.lean and BigZariski.lean; EllAdicCohomology is ordinary cohomology of the completed integral coefficient sheaf, not this finite-stage bundle.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -78,5 +128,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-trf-coefficient-conventions",
+  "worker": "stage1",
+  "summary": "Definition-only split: checked the master blueprint source and all nine existing definition dependencies, and made each notion an explicit citation. Bound the formerly implicit s, K and i in the displayed formula; kept the finite-level pro-etale categories and the finite-Tor condition distinct. No new nodes, theorem assertions, proof steps, or exact Lean/Mathlib attachment. All original hypotheses and constructions are retained. Return repair: reread all nine current dependency statements after the merge-lock landing refusal and revalidated the finite-level domains, formulas and chapter/unit route before rebuilding the delivery against the current DAG.",
+  "blueprint": "Realizes the whole statement of blueprint def-trf-coefficient-conventions, order 1511: global finite-field and finite-coefficient datum; geometric fibre and small pro-etale site; bounded constructible and finite-Tor categories; derived pullback/tensor/internal Hom and cohomology sheaves; compact-support coefficient complex and its cohomology via Fib_s. The containing admissibility unit has no proof steps, and this recorded-in-advance node is not its key statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-1d745fac7",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-1d745fac7 (reviewer sub-agent of L); spot-checked: Read the complete item, report, nine cited statements, exact master sources, and chapter/unit route. Finite coefficients, geometric base change, Fib_s codomain, and compact-support formulas agree; edge cases preserve the finite-Tor distinction. No new nodes or repairs. Review written to review.md; inherited DAG incompleteness noted separately."
+ }
 }
