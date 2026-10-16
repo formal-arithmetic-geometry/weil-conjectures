@@ -337,5 +337,38 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-9e369aa02 (reviewer sub-agent of L); spot-checked: Read the full definition, all 26 dependencies, blueprint route, cited sources, and exact master target morphisms/categories. Finite composites type-check; higher-coefficient comparisons remain explicit prerequisites. Repaired the stale citer audit to match all 31 current direct citers. Review and corrected whole-node JSON are written under the review directory; no targets changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExchangeProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteExchangeProjection",
+   "AlgebraicGeometry.ProEtale.coefficientExtensionExchangeProjection",
+   "CategoryTheory.compactificationExchangeFromData",
+   "CategoryTheory.compactificationProjectionFromData",
+   "CategoryTheory.ExchangeProjectionStage",
+   "CategoryTheory.ExchangeProjectionStage.exchange",
+   "CategoryTheory.ExchangeProjectionStage.compactExchange",
+   "CategoryTheory.ExchangeProjectionStage.projection",
+   "CategoryTheory.exchangeProjectionCoefficientRepresentative",
+   "CategoryTheory.ExchangeProjectionComparisonPreserves",
+   "CategoryTheory.ExchangeProjectionAdjunctionComparison",
+   "CategoryTheory.ExchangeProjectionScalarCocycle"
+  ],
+  "file": "lean/Sheaf/Paper/ExchangeProjection.lean",
+  "statement": "def coefficientExtensionExchangeProjection (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (S : Scheme.{u}) [∀ s : S, Invertible (l : S.residueField s)] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [X.Over S] [Y.Over S] [Y'.Over S] [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [LocallyOfFiniteType (Y ↘ S)] [QuasiCompact (Y ↘ S)] [LocallyOfFiniteType (Y' ↘ S)] [QuasiCompact (Y' ↘ S)] [f.IsOver S] [g.IsOver S] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (sq : IsPullback g' f' f g) (c : Compactification f)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Finite coefficients use the existing standard fixed-scalar ModuleCat-sheaf presentation of constant coefficient modules and the existing canonical derived maps, rather than a second definition of tensor, pullback, direct image, extension by zero, or the three finite maps. The higher-stage definition is parametric in the supplied closed domains, adjunctions and natural comparison isomorphisms exactly as the node requests; the auxiliary comparison predicates state unit/counit transport, preservation of structural comparisons, and identity/tower normalization. No existence, invertibility or compactification-independence assertion is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-760802677",
+  "group": "NG",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, declarations, edge cases, docstrings, report sections, and per-file scompile evidence; no substantive or mechanical findings."
  }
 }

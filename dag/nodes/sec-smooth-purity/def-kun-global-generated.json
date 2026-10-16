@@ -140,5 +140,30 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-9b63fa999 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, blueprint sources, unit/chapter route, Stacks passages, and Mathlib candidates. Evaluation and coefficient conventions agree; edge cases pass. No new nodes, duplicate definition, missing citation, or dependency cycle found. No repairs or tool_uses needed. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGloballyGenerated",
+  "declaration": "AlgebraicGeometry.Scheme.IsGloballyGeneratedEtaleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleGlobalSectionsEvaluation",
+   "AlgebraicGeometry.Scheme.IsGloballyGeneratedEtaleSheaf",
+   "AlgebraicGeometry.Scheme.etaleAbelianGlobalSectionsEvaluation",
+   "AlgebraicGeometry.Scheme.IsGloballyGeneratedAbelianEtaleSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGloballyGenerated.lean",
+  "statement": "def IsGloballyGeneratedEtaleSheaf {T : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The evaluation source is represented by the constant sheaf of the free module on all global sections. This is the displayed coproduct: constantSheaf is a left adjoint, hence preserves coproducts, and the free module is the coproduct of coefficient modules. The map is the adjoint of Finsupp.linearCombination applied to the identity family, hence sends 1_s to s. The abelian versions use the free abelian group on the same global sections, implementing the integer-coefficient clause directly in AddCommGrpCat. No geometric-stalk equivalence is asserted here; it is the separate lem-kun-global-generated-stalkwise node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a90d2a61d",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Canonical evaluation map, dependencies, universes, docstrings, edge cases, report sections, and per-file compilation all checked; no errors found."
  }
 }
