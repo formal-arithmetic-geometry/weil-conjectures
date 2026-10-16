@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-cartan-eilenberg-double-complex-homotopy-filtration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartan-eilenberg-double-complex-homotopy",
+   "place": "stage-3 decomposition"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Second-filtration factorization of the total homotopy",
+ "statement": "Let $\\mathcal C$ be an abelian category. Let $I'$ and $J'$ be double cochain complexes indexed by $\\mathbb Z\\times\\mathbb Z$ with total objects for the cochain shape [def-sp-double-complex-total], and let $\\delta:I'\\to J'$ be a morphism of double complexes. Assume the first-quadrant hypothesis $hJ$: $J'^{p,q}$ is a zero object whenever $p<0$ or $q<0$. Let $H$ be a homotopy from $\\operatorname{Tot}(\\delta)$ to zero, and let component maps $s_1^{p,q}:I'^{p,q}\\to J'^{p-1,q}$ and $s_2^{p,q}:I'^{p,q}\\to J'^{p,q-1}$ be given for all integers $p,q$. Assume $hcomp$: for all integers $p,q,n$ with $p+q=n$, in diagrammatic composition order,\n$$\\iota_{I'}^{p,q,n}\\gg H^{n,n-1}=s_1^{p,q}\\gg\\iota_{J',0}^{p-1,q,n-1}+(-1)^p\\bigl(s_2^{p,q}\\gg\\iota_{J',0}^{p,q-1,n-1}\\bigr),$$\nwhere $\\iota$ is the total diagonal inclusion and $\\iota_0$ is `ιTotalOrZero`. Write $F^q\\operatorname{Tot}(I')^n$ and $F^{q-1}\\operatorname{Tot}(J')^{n-1}$ for the second-filtration subobjects [def-sp-filtration], defined by the finite suprema of images of the inclusions at $(n-i,i)$ for $q\\le i\\le n$ and at $(n-1-j,j)$ for $q-1\\le j\\le n-1$, respectively. Then for every pair of integers $q,n$ there is a morphism $f:F^q\\operatorname{Tot}(I')^n\\to F^{q-1}\\operatorname{Tot}(J')^{n-1}$ whose composite with the target subobject arrow equals the source subobject arrow followed by $H^{n,n-1}$. No vanishing hypothesis on $I'$ or on the component maps is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark Tag 015K (functoriality) together with the comparison construction of Lemma Tag 015I; horizontal/vertical decomposition is the Cartan--Eilenberg homotopy argument (Weibel, Homological Algebra, Lemma 5.7.10)"
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Fix q,n and let Q be the target second-filtration step. The source step is the finite supremum of the images of inclusions at (n-i,i), q <= i <= n. By hcomp their composites with H are sums of s1 terms in vertical degree i and signed s2 terms in vertical degree i-1. Each target inclusion with vertical degree b >= q-1 factors through Q: when b <= n-1 its image is a term of the defining supremum, and when b > n-1 its horizontal degree is negative so hJ makes it zero. Factorizations are preserved by precomposition, integer scalar multiplication and addition. Pull Q back along H.hom n (n-1); each source generating image lies in this pullback, so their finite supremum does as well (also for an empty interval). The pullback factorization equivalence gives the desired factorization, and factorThru with its defining equation gives f. The Lean proof reuses the existing private factors_finset_sup, factors_zsmul and secondFiltration_inclusion_factors lemmas of Sheaf.CategoryTheory.DoubleComplexTotal through a proof-only import all; it introduces no duplicate helpers.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark Tag 015K"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark Tag 015K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy.*(total|bicomplex)|(total|bicomplex).*homotopy|Factors.*(sup|iSup)",
+   "results": "25 hit(s): Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/NumberTheory/ArithmeticFunction/Misc.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A null homotopic morphism of augmented double complexes has a total homotopy assembled from a column map and compatible row homotopies",
+   "results": "8 hit(s): Homotopy.nullHomotopy', Homotopy.nullHomotopicMap'_f, Homotopy.nullHomotopicMap_f, Homotopy.nullHomotopicMap, Homotopy.nullHomotopicMap', Homotopy.nullHomotopy, CategoryTheory.ShortComplex.Homotopy.ofNullHomotopic, HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, Homotopy",
+   "results": "1 hit(s): HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy with horizontal and vertical components on a first quadrant double complex lowers the filtration by vertical degree at most one",
+   "results": "8 hit(s): CategoryTheory.ShortComplex.Homotopy.h₁, CategoryTheory.ShortComplex.Homotopy.h₀, Homotopy.hom, HomologicalComplex.mapBifunctorMapHomotopy.hom₂, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁, Homotopy.mk, Homotopy.mkInductiveAux₂, CochainComplex.HomComplex.Cochain.ofHomotopy; generic short-complex or bifunctor homotopy components only, no filtered arbitrary-bicomplex theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy",
+  "date": "2026-10-16",
+  "group": "Q4"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-double-complex-homotopy",
+  "worker": "stage1",
+  "summary": "Split the double-complex homotopy into horizontal comparison lifting and vertical null-homotopy of the residual defect, then assembled the total homotopy and checked its filtration shift. No sorry-free Lean declaration or Mathlib Cartan--Eilenberg theorem states the item.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: comparison homotopies for the lifted Cartan--Eilenberg maps."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopyFiltration",
+  "declaration": "CategoryTheory.cartanEilenberg_secondFiltration_factor",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergDoubleComplexHomotopyFiltration.lean",
+  "statement": "theorem cartanEilenberg_secondFiltration_factor (C : Type u) [Category.{v} C] [Abelian C] (I' J' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) [I'.HasTotal (ComplexShape.up ℤ)] [J'.HasTotal (ComplexShape.up ℤ)] (δ : I' ⟶ J') (hJ : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((J'.X p).X q)) (H : Homotopy (HomologicalComplex₂.total.map δ (ComplexShape.up ℤ)) 0) (s1 : ∀ p q : ℤ, (I'.X p).X q ⟶ (J'.X (p - 1)).X q) (s2 : ∀ p q : ℤ, (I'.X p).X q ⟶ (J'.X p).X (q - 1)) (hcomp : ∀ (p q n : ℤ) (hpq : p + q = n), I'.ιTotal (ComplexShape.up ℤ) p q n hpq ≫ H.hom n (n - 1) = s1 p q ≫ J'.ιTotalOrZero (ComplexShape.up ℤ) (p - 1) q (n - 1) + p.negOnePow • (s2 p q ≫ J'.ιTotalOrZero (ComplexShape.up ℤ) p (q - 1) (n - 1))) : ∀ q n : ℤ, ∃ f : ((I'.secondFiltration n).step q : C) ⟶ ((J'.secondFiltration (n - 1)).step (q - 1) : C), f ≫ ((J'.secondFiltration (n - 1)).step (q - 1)).arrow = ((I'.secondFiltration n).step q).arrow ≫ H.hom n (n - 1)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261016T061027-L-327874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261016T061027-L-327874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

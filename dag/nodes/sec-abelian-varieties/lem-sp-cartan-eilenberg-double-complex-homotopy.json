@@ -27,57 +27,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the horizontal comparison construction to the exact source rows and injective target rows. The augmentation identity and the given null-homotopy w = d_L s + s d_K give maps s1 with the prescribed augmentation identity, and the residual R = delta - d_h s1 - s1 d_h is a vertical-complex map whose augmented horizontal row is zero.",
+   "text": "Apply the component construction theorem to obtain total-object witnesses, s1, s2 and H with the component identity and augmentation conditions; reuse those witnesses. Extension by zero and hJ give first-quadrant vanishing for the target extended double complex.",
    "uses": [
-    "lem-sp-ce-horizontal-lift"
+    "lem-sp-cartan-eilenberg-double-complex-homotopy-components"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I comparison construction by boundary, cycle, and cohomology rows; Weibel Homological Algebra Lemma 5.7.10"
+    "place": "Tag 015I and Remark 015K"
    }
   },
   {
-   "text": "The residual map vanishes on the augmentation and is a morphism of double complexes: it commutes with d_h because delta does and d_h(d_hs_1+s_1d_h)=d_hs_1d_h=(d_hs_1+s_1d_h)d_h, and with d_v because delta and s_1 do. So the comparison theorem on the boundary, cycle, and horizontal-cohomology row resolutions supplies the row null-homotopies and the vertical child assembles them through the exact sequences into maps s2, zero in vertical degree zero, with R = d_v s2 + s2 d_v and s2 commuting with the horizontal differentials.",
+   "text": "Apply the second-filtration factorization theorem to the component identity; this gives the required filtered factorization for H.",
    "uses": [
-    "lem-sp-ce-vertical-nullhomotopy"
+    "lem-sp-cartan-eilenberg-double-complex-homotopy-filtration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I compatibility with the second exact sequence and vertical differential; Weibel Homological Algebra Lemma 5.7.10"
-   }
-  },
-  {
-   "text": "Define H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}. Expanding d_Tot=d_h+(-1)^p d_v gives the three component identities: in bidegree (p,q), d_hs_1+s_1d_h=delta-d_vs_2-s_2d_v; in bidegree (p+1,q-1), s_2d_h=d_hs_2; and in bidegree (p-1,q+1), s_1d_v=d_vs_1. The first is the definition of R together with the vertical identity, the second is the horizontal compatibility of s2, and the third is the column-complex property of s1, so d_Tot H+Hd_Tot=delta.",
-   "uses": [
-    "lem-sp-ce-horizontal-lift",
-    "lem-sp-ce-vertical-nullhomotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 015K, filtered total-complex comparison"
-   }
-  },
-  {
-   "text": "The component s1 preserves vertical degree and s2 lowers it by one; therefore the resulting homotopy sends the q-th filtration piece in total degree n into the (q-1)-st piece in degree n-1. First-quadrant boundedness makes all total sums finite.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 015K (remark-functorial-ss)"
+    "place": "Remark Tag 015K"
    }
   }
  ],
  "proof_deps": [
-  "lem-sp-ce-horizontal-lift",
-  "lem-sp-ce-vertical-nullhomotopy"
+  "lem-sp-cartan-eilenberg-double-complex-homotopy-components",
+  "lem-sp-cartan-eilenberg-double-complex-homotopy-filtration"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 015I and Remark 015K; row-by-row comparison-homotopy argument"
+  "place": "component construction plus filtered factorization"
  },
  "mathlib_searches": [
   {
@@ -163,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261016T061027-L-327874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

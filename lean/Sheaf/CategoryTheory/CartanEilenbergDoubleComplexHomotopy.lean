@@ -9,8 +9,8 @@ public import Sheaf.CategoryTheory.CartanEilenbergExists
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Homotopy
-import Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy
-import Sheaf.CategoryTheory.HorizontalComparisonLift
+import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopyComponents
+import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopyFiltration
 
 /-!
 # Horizontal and vertical components of a Cartan--Eilenberg comparison homotopy
@@ -115,6 +115,27 @@ theorem cartanEilenberg_doubleComplex_homotopy
               ((J'.secondFiltration (n - 1)).step (q - 1) : C),
               f ≫ ((J'.secondFiltration (n - 1)).step (q - 1)).arrow =
                 ((I'.secondFiltration n).step q).arrow ≫ H.hom n (n - 1)) := by
-  sorry
+  dsimp
+  let E := (ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let I' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ) := E.obj I
+  let J' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ) := E.obj J
+  have hquadJ : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((J'.X p).X q) := by
+    intro p q hpq
+    rcases hpq with hp | hq
+    · exact (HomologicalComplex.eval C (ComplexShape.up ℤ) q).map_isZero
+        (Functor.map_isZero (ComplexShape.embeddingUpNat.extendFunctor C) (hJ p hp))
+    · exact HomologicalComplex.isZero_extend_X _ _ _ (by
+        intro i hi
+        simp at hi
+        omega)
+  obtain ⟨tI, tJ, s1, s2, hs1, hs2, haug, H, hcomp⟩ :=
+    cartanEilenberg_doubleComplex_homotopy_components C K L I J eI eJ hI hJ hIres hJres
+      hJinj δ w s hs hδ
+  let := tI
+  let := tJ
+  refine ⟨tI, tJ, s1, s2, hs1, hs2, haug, H, hcomp, ?_⟩
+  intro q n
+  exact cartanEilenberg_secondFiltration_factor C I' J' (E.map δ) hquadJ H s1 s2 hcomp q n
 
 end CategoryTheory

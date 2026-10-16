@@ -1,0 +1,167 @@
+{
+ "id": "lem-sp-cartan-eilenberg-double-complex-homotopy-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartan-eilenberg-double-complex-homotopy",
+   "place": "stage-3 decomposition"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Horizontal and vertical components and total homotopy before filtration",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $K^\\bullet$ and $L^\\bullet$ be cochain complexes in $\\mathcal A$, and let $I^{\\bullet,\\bullet}$ and $J^{\\bullet,\\bullet}$ be first-quadrant double complexes with augmentations $\\epsilon_I:K^\\bullet\\to I^{\\bullet,0}$ and $\\epsilon_J:L^\\bullet\\to J^{\\bullet,0}$. For each horizontal degree $p$, write $B_I^p$, $Z_I^p$, and $H_I^p$ for the boundary, cycle, and horizontal-cohomology row complexes of $I$, and similarly for $J$; assume the augmented $B_I$, $Z_I$, and $H_I$ rows (and their exact sequences, including $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$) are exact resolutions, while the corresponding augmented $B_J$, $Z_J$, and $H_J$ rows are injective resolutions [def-sp-injective-resolutions]. Let $\\delta:I\\to J$ be a morphism of double complexes. Suppose a complex map $w:K^\\bullet\\to L^\\bullet$ and maps $s^p:K^p\\to L^{p-1}$ satisfy $w^p=d_L^{p-1}s^p+s^{p+1}d_K^p$ and $\\delta^{p,0}\\epsilon_I^p=\\epsilon_J^p w^p$ for every $p$. Then there exist maps $s_1^{p,q}:I^{p,q}\\to J^{p-1,q}$ and $s_2^{p,q}:I^{p,q}\\to J^{p,q-1}$, zero outside the first quadrant, such that $s_1^{p,0}\\epsilon_I^p=\\epsilon_J^{p-1}s^p$ and, with $H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}$, one has $d_{\\operatorname{Tot}J}H+Hd_{\\operatorname{Tot}I}=\\delta$ for the total-complex convention [def-sp-double-complex-total].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark Tag 015K (functoriality) together with the comparison construction of Lemma Tag 015I; horizontal/vertical decomposition is the Cartan--Eilenberg homotopy argument (Weibel, Homological Algebra, Lemma 5.7.10)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-sp-cartan-eilenberg-exists"
+ ],
+ "proof": [
+  {
+   "text": "First derive the hypotheses required by horizontal_comparison_lift. The canonical short exact sequences 0 -> Z_I^p -> I^{p,*} -> B_I^{p+1} -> 0, and those for the single-degree source, form a natural map of short exact sequences under eI. The two outer maps are quasi-isomorphisms by hIres, using its boundary clause at p+1, so the homology long exact sequence gives a quasi-isomorphism on the middle column. For J, evaluation in each vertical degree gives a short exact sequence with injective first and third terms by hJinj, hence a splitting and injectivity of its middle term. Apply the horizontal comparison construction with these derived column hypotheses and the given row hypotheses. This gives column maps s1 with the prescribed augmentation identity. The residual R = delta - d_h s1 - s1 d_h vanishes on the augmentation.",
+   "uses": [
+    "lem-sp-ce-horizontal-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I comparison construction by boundary, cycle, and cohomology rows; Weibel Homological Algebra Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "The residual map vanishes on the augmentation and is a morphism of double complexes: it commutes with d_h because delta does and d_h(d_hs_1+s_1d_h)=d_hs_1d_h=(d_hs_1+s_1d_h)d_h, and with d_v because delta and s_1 do. So the comparison theorem on the boundary, cycle, and horizontal-cohomology row resolutions supplies the row null-homotopies and the vertical child assembles them through the exact sequences into maps s2, zero in vertical degree zero, with R = d_v s2 + s2 d_v and s2 commuting with the horizontal differentials.",
+   "uses": [
+    "lem-sp-ce-vertical-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I compatibility with the second exact sequence and vertical differential; Weibel Homological Algebra Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "Define H^{p,q}=s_1^{p,q}+(-1)^p s_2^{p,q}. Expanding d_Tot=d_h+(-1)^p d_v gives the three component identities: in bidegree (p,q), d_hs_1+s_1d_h=delta-d_vs_2-s_2d_v; in bidegree (p+1,q-1), s_2d_h=d_hs_2; and in bidegree (p-1,q+1), s_1d_v=d_vs_1. The first is the definition of R together with the vertical identity, the second is the horizontal compatibility of s2, and the third is the column-complex property of s1, so d_Tot H+Hd_Tot=delta.",
+   "uses": [
+    "lem-sp-ce-horizontal-lift",
+    "lem-sp-ce-vertical-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K, filtered total-complex comparison"
+   }
+  },
+  {
+   "text": "Extend the vertical natural index by zero to the integers and transport s1 and s2 along the extension isomorphisms in nonnegative degrees. The first-quadrant vanishing makes each total diagonal a finite coproduct, so the component formula defines H by its restrictions to the diagonal inclusions, and the identities from step 3 prove the total homotopy identity. For s1 the target is zero when p <= 0, and the source is zero when q < 0; for s2 the source is zero when p < 0 and the target is zero when q <= 0. These give the required component vanishing and preserve the augmentation identity at vertical degree zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K (remark-functorial-ss)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-horizontal-lift",
+  "lem-sp-ce-vertical-nullhomotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "component construction extracted from parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy.*(total|bicomplex)|(total|bicomplex).*homotopy|Factors.*(sup|iSup)",
+   "results": "25 hit(s): Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/NumberTheory/ArithmeticFunction/Misc.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A null homotopic morphism of augmented double complexes has a total homotopy assembled from a column map and compatible row homotopies",
+   "results": "8 hit(s): Homotopy.nullHomotopy', Homotopy.nullHomotopicMap'_f, Homotopy.nullHomotopicMap_f, Homotopy.nullHomotopicMap, Homotopy.nullHomotopicMap', Homotopy.nullHomotopy, CategoryTheory.ShortComplex.Homotopy.ofNullHomotopic, HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, Homotopy",
+   "results": "1 hit(s): HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy with horizontal and vertical components on a first quadrant double complex lowers the filtration by vertical degree at most one",
+   "results": "8 hit(s): CategoryTheory.ShortComplex.Homotopy.h₁, CategoryTheory.ShortComplex.Homotopy.h₀, Homotopy.hom, HomologicalComplex.mapBifunctorMapHomotopy.hom₂, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁, Homotopy.mk, Homotopy.mkInductiveAux₂, CochainComplex.HomComplex.Cochain.ofHomotopy; generic short-complex or bifunctor homotopy components only, no filtered arbitrary-bicomplex theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy",
+  "date": "2026-10-16",
+  "group": "Q4"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-double-complex-homotopy",
+  "worker": "stage1",
+  "summary": "Split the double-complex homotopy into horizontal comparison lifting and vertical null-homotopy of the residual defect, then assembled the total homotopy and checked its filtration shift. No sorry-free Lean declaration or Mathlib Cartan--Eilenberg theorem states the item.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: comparison homotopies for the lifted Cartan--Eilenberg maps."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopyComponents",
+  "declaration": "CategoryTheory.cartanEilenberg_doubleComplex_homotopy_components",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergDoubleComplexHomotopyComponents.lean",
+  "statement": "theorem cartanEilenberg_doubleComplex_homotopy_components (C : Type u) [Category.{v} C] [Abelian C] (K L : CochainComplex C ℤ) (I J : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (eI : ((CochainComplex.single₀ C).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I) (eJ : ((CochainComplex.single₀ C).mapHomologicalComplex (ComplexShape.up ℤ)).obj L ⟶ J) (hI : ∀ p : ℤ, p < 0 → IsZero (I.X p)) (hJ : ∀ p : ℤ, p < 0 → IsZero (J.X p)) (hIres : ∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap eI p) ∧ QuasiIso (image.map (Arrow.homMk' (eI.f (p - 1)) (eI.f p) (eI.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eI p)) (hJres : ∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap eJ p) ∧ QuasiIso (image.map (Arrow.homMk' (eJ.f (p - 1)) (eJ.f p) (eJ.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eJ p)) (hJinj : ∀ (p : ℤ) (q : ℕ), Injective ((J.cycles p).X q) ∧ Injective ((image (J.d (p - 1) p)).X q) ∧ Injective ((J.homology p).X q)) (δ : I ⟶ J) (w : K ⟶ L) (s : ∀ p : ℤ, K.X p ⟶ L.X (p - 1)) (hs : ∀ p : ℤ, w.f p = s p ≫ L.d (p - 1) p + K.d p (p + 1) ≫ s (p + 1) ≫ eqToHom (congrArg L.X (Int.add_sub_cancel p 1))) (hδ : ∀ p : ℤ, (eI.f p).f 0 ≫ (δ.f p).f 0 = w.f p ≫ (eJ.f p).f 0) : let E := (ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex (ComplexShape.up ℤ) let I' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ) := E.obj I let J' : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ) := E.obj J ∃ (tI : I'.HasTotal (ComplexShape.up ℤ)) (tJ : J'.HasTotal (ComplexShape.up ℤ)), letI := tI letI := tJ ∃ (s1 : ∀ p q : ℤ, (I'.X p).X q ⟶ (J'.X (p - 1)).X q) (s2 : ∀ p q : ℤ, (I'.X p).X q ⟶ (J'.X p).X (q - 1)), (∀ p q : ℤ, p ≤ 0 ∨ q < 0 → s1 p q = 0) ∧ (∀ p q : ℤ, p < 0 ∨ q ≤ 0 → s2 p q = 0) ∧ (∀ p : ℤ, (eI.f p).f 0 ≫ ((I.X p).extendXIso ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫ s1 p 0 = s p ≫ (eJ.f (p - 1)).f 0 ≫ ((J.X (p - 1)).extendXIso ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv) ∧ ∃ H : Homotopy (HomologicalComplex₂.total.map (E.map δ) (ComplexShape.up ℤ)) 0, (∀ (p q n : ℤ) (hpq : p + q = n), I'.ιTotal (ComplexShape.up ℤ) p q n hpq ≫ H.hom n (n - 1) = s1 p q ≫ J'.ιTotalOrZero (ComplexShape.up ℤ) (p - 1) q (n - 1) + p.negOnePow • (s2 p q ≫ J'.ιTotalOrZero (ComplexShape.up ℤ) p (q - 1) (n - 1)))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261016T061027-L-327874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261016T061027-L-327874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
