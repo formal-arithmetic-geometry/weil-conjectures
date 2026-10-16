@@ -3,38 +3,161 @@
  "blueprint": {
   "is": "lem-sf-triangle-two-out-of-three",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Isomorphism on two terms of a distinguished triangle",
- "statement": "In the setting of [def-sf-datum], let $\\Phi,\\Psi$ be exact functors\nbetween triangulated categories and let $\\alpha:\\Phi\\to\\Psi$ be a natural\ntransformation. If $\\alpha$ is an isomorphism on two terms of a\ndistinguished triangle, then it is an isomorphism on the third.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category] and let $\\Phi,\\Psi:\\mathcal C\\to\\mathcal D$ be exact functors with their natural shift isomorphisms $\\varphi_X:\\Phi(X[1])\\xrightarrow{\\sim}\\Phi(X)[1]$ and $\\psi_X:\\Psi(X[1])\\xrightarrow{\\sim}\\Psi(X)[1]$. Let $\\alpha:\\Phi\\to\\Psi$ be a natural transformation compatible with these isomorphisms: $\\psi_X\\circ\\alpha_{X[1]}=\\alpha_X[1]\\circ\\varphi_X$ for every $X$. For every distinguished triangle $T=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ [def-weil-pbc-triangles-with-shift], if any two of $\\alpha_X,\\alpha_Y,\\alpha_Z$ are isomorphisms, then the third is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-determination/lem-sf-triangle-two-out-of-three.md",
   "place": "node lem-sf-triangle-two-out-of-three, order 1863"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
  ],
  "proof": [
   {
-   "text": "Apply the\ncohomology functors $H^q$ to the map of triangles induced by $\\alpha$: the\nhypothesis gives a ladder of long exact sequences in which two of the three\ncolumns are isomorphisms, so the third is an isomorphism by the five lemma;\na morphism whose cone has vanishing cohomology is zero in the derived\ncategory, by [def-weil-derived-cohomology-sheaves].",
+   "text": "Fix such a distinguished triangle $T$. Its image triangles have vertices $(\\Phi X,\\Phi Y,\\Phi Z)$ and $(\\Psi X,\\Psi Y,\\Psi Z)$, arrows $(\\Phi u,\\Phi v,\\varphi_X\\circ\\Phi w)$ and $(\\Psi u,\\Psi v,\\psi_X\\circ\\Psi w)$, respectively. Both image triangles are distinguished, by the definition of exact functor. This checks the distinguishedness hypotheses needed below.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves"
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+    "place": "Functor.mapTriangle, lines 42--53; Functor.IsTriangulated and map_distinguished, lines 186--191 (exact functor; Stacks Tag 014V)"
+   }
+  },
+  {
+   "text": "Apply the shift-compatible-transformation lemma to obtain the morphism $a=(\\alpha_X,\\alpha_Y,\\alpha_Z):\\Phi T\\to\\Psi T$. Its first two squares are naturality for $u$ and $v$. Explicitly its last square is\n$$\\alpha_X[1]\\circ\\varphi_X\\circ\\Phi(w)=\\psi_X\\circ\\alpha_{X[1]}\\circ\\Phi(w)=\\psi_X\\circ\\Psi(w)\\circ\\alpha_Z.$$\nThe first equality is the stated shift compatibility at $X$ and the second is naturality for $w$. Thus the cited lemma is used for precisely its assertion about the three components forming a morphism of image triangles; distinguishedness comes from Step 1.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/Mathlib/CategoryTheory/Triangulated/Functor.lean",
+    "place": "CategoryTheory.NatTrans.mapTriangle, lines 36--45; the morphism-of-triangles definition is Stacks Tag 0144"
+   }
+  },
+  {
+   "text": "Apply the two-out-of-three lemma to $a$ and the two distinguished image triangles. Its hypotheses hold in $\\mathcal D$, which is in particular pre-triangulated. If $(\\alpha_X,\\alpha_Y)$ are isomorphisms, its third-component assertion gives that $\\alpha_Z$ is an isomorphism. If $(\\alpha_X,\\alpha_Z)$ are isomorphisms, its second-component assertion gives that $\\alpha_Y$ is an isomorphism. If $(\\alpha_Y,\\alpha_Z)$ are isomorphisms, its first-component assertion gives that $\\alpha_X$ is an isomorphism. These are all possible pairs, proving the claim.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+    "place": "CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃, lines 479--507; isIso₃_of_isIso₁₂, lines 516--519; isIso₁_of_isIso₂₃, lines 526--529; Stacks Tag 014A (lemma-third-isomorphism-triangle)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-determination/lem-sf-triangle-two-out-of-three.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraph, corrected using the shift-compatible triangle construction in WeilConjectures/Mathlib/CategoryTheory/Triangulated/Functor.lean:36--79 and the Mathlib implementation of Stacks Tag 014A"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between triangulated functors compatible with shifts isomorphism on two terms of distinguished triangle",
+   "results": "CategoryTheory.Functor.mapTriangleCommShiftIso; CategoryTheory.Functor.mapTriangleIso; no non-invertible natural-transformation two-out-of-three theorem found",
+   "date": "2026-10-16",
+   "verdict": "no exact match; project declaration supplies the non-invertible transformation mapTriangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂, CategoryTheory.NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃, CategoryTheory.NatTrans.isIso_app_obj₁_of_isIso_app_obj₂₃",
+   "results": "unknown identifier; no hits",
+   "date": "2026-10-16",
+   "verdict": "no match in Mathlib (these are project declarations)"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app_obj[₁₂₃]_of_isIso_app_obj",
+   "results": "0 hits in Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match for project declaration names in Mathlib source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural transformation compatible with shifts two out of three for distinguished triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of two components of a morphism of distinguished triangles implies isomorphism of the third",
+   "results": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂, isIso₂_of_isIso₁₃, isIso₁_of_isIso₂₃",
+   "date": "2026-10-16",
+   "verdict": "generalization: exact Mathlib lemmas for each pair of components"
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso₃_of_isIso₁₂, isIso₂_of_isIso₁₃, isIso₁_of_isIso₂₃",
+   "results": "unknown identifier; no hits",
+   "date": "2026-10-16",
+   "verdict": "no match from Loogle; grep and LeanFinder found the Mathlib declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₃_of_isIso₁₂|isIso₂_of_isIso₁₃|isIso₁_of_isIso₂₃",
+   "results": "0 hits in Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+   "date": "2026-10-16",
+   "verdict": "no match with this source path form"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_.*isIso",
+   "results": "0 hits in Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match with this source path form"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₃_of_isIso₁₂|isIso₂_of_isIso₁₃|isIso₁_of_isIso₂₃",
+   "results": "7 hits in CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "generalization: exact generic triangle morphism two-out-of-three lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.IsTriangulated",
+   "results": "8 hits: Functor.isTriangulated_of_iso, isTriangulated_iff_of_iso, isTriangulated_iff_comp_right, isTriangulated_of_precomp_iso, isTriangulated_of_leftExtension, isTriangulated_of_rightExtension, and two LocalizerMorphism.Derives triangulated derived-functor lemmas.",
+   "date": "2026-10-16",
+   "verdict": "no match: these transport exactness of functors or derive it; none asserts componentwise two-out-of-three for a noninvertible natural transformation"
+  },
+  {
+   "tool": "grep",
+   "query": "mapTriangle|isIso.*of_isIso",
+   "results": "5 hits from subdirectory CategoryTheory/Triangulated/Functor.lean: lines 17, 42, 56, 65, 71; the single-file invocation omits filename prefixes and msearch mislabels line numbers as file fields.",
+   "date": "2026-10-16",
+   "verdict": "no exact match among these five hits; read Functor.mapTriangle at line 42; this truncated search is supplemented below"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₃_of_isIso₁₂|isIso₂_of_isIso₁₃|isIso₁_of_isIso₂₃|def mapTriangleIso|NatTrans.mapTriangle",
+   "results": "8 hits in subdirectory CategoryTheory/Triangulated: Subcategory.lean:331; Functor.lean:168,233; Pretriangulated.lean:479,516,518,526,528. Read the three declarations at 479,516,526 and Functor.mapTriangleIso at 168.",
+   "date": "2026-10-16",
+   "verdict": "generalization for the final triangle-morphism step only: the three Pretriangulated lemmas give each pairwise conclusion after a triangle morphism has been constructed. mapTriangleIso requires an already invertible transformation, so does not supply the item."
+  },
+  {
+   "tool": "grep",
+   "query": "^(def|lemma) (mapTriangleIso|isTriangulated_of_iso|isTriangulated_iff_of_iso|isTriangulated_iff_comp_right|isTriangulated_of_precomp_iso)|NatTrans.mapTriangle",
+   "results": "5 hits in subdirectory CategoryTheory/Triangulated: Functor.lean:168,260,265,274,303. Read the declaration signatures and bodies.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: mapTriangleIso assumes F₁ ≅ F₂; the other four declarations transport or reflect functor exactness. No noninvertible NatTrans.mapTriangle is supplied by these hits."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +180,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sf-determination"
+ "unit": "sk-lem-sf-determination",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-triangle-two-out-of-three",
+  "worker": "stage1",
+  "summary": "Corrected the missing compatibility of the natural transformation with the exact functors’ shift isomorphisms, with a counterexample in report.md. Made explicit that both image triangles are distinguished by exactness and checked the third commuting square. Applied the existing generic triangle-morphism Mathlib leaf to all three pairs of vertices. No new nodes and no attachment claim. Removed the unused six-functor context preamble and its statement dependency so the categorical assertion introduces all its objects and hypotheses on its own.",
+  "blueprint": "The node's imported paragraph and the triangle part of unit sk-lem-sf-determination step 1 intend the five-lemma argument on a map of distinguished triangles. Their inference that mere naturality and functor exactness give that map is false: in D^b(fdVect_k), the natural endomorphism of Id acting as identity on H^0 and zero on other cohomological degrees has components (id,0,0) on the distinguished triangle k[0]→0→k[1]→k[1], so the first two are invertible and the third is not. The corrected statement adds exactly the missing shift-compatibility equation. Step 1 forms the distinguished images, Step 2 checks all three squares, and Step 3 invokes the categorical five lemma (Stacks 014A). For general triangulated categories no conservative family H^q is part of the hypotheses; the generic triangle-morphism theorem realizes the intended five-lemma argument without adding that extra structure. The imported phrase 'a morphism whose cone has vanishing cohomology is zero' must mean that the cone is zero and the morphism is an isomorphism in the derived-category case. The unit record is not changed: this node is only its triangle clause, not its key statement; the omitted shift-compatibility premise is reported for the unit and its callers.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "why": "This cross-unit node supplies the shift-compatible natural transformation’s morphism of image triangles; the smooth-purity unit has no separate node for that categorical construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-bf3bc47a6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-bf3bc47a6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Verified all three steps against cited node statements, Stacks 0144/014V/014A, and Mathlib/project sources. The explicit shift-compatibility premise correctly repairs the source's false assertion; small cases and all three isomorphism pairs check out. No new nodes, citation faults, or cycles. Accepted the declared generic triangle-morphism tool use. No target, coefficient category, or base-change morphism is altered."
+ }
 }
