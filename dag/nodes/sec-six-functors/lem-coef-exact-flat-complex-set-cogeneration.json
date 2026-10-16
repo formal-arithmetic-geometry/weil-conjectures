@@ -27,7 +27,8 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-cochain-complex-modules",
   "def-pc-acyclic-complex-modules",
-  "lem-coef-cotorsion-orthogonality-calculus"
+  "lem-coef-cotorsion-orthogonality-calculus",
+  "lem-coef-hereditary-cotorsion-complex-lift"
  ],
  "proof": [
   {
@@ -344,5 +345,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-115ddd52d (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all ten steps, cited statements, Recktenwald §§2.5.24–37, Stacks sources, route, duplicates, and edge cases. The bounded subextension and compatible-splitting arguments are sound; reported source errors are correctly avoided. No repairs needed. Detailed findings and accepted tool uses are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ExactFlatComplexSetCogeneration",
+  "declaration": "SheafOfModules.exact_flat_complex_set_cogeneration",
+  "file": "lean/Sheaf/Algebra/Homology/ExactFlatComplexSetCogeneration.lean",
+  "statement": "theorem exact_flat_complex_set_cogeneration {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{u}) : ∃ (I : Type u) (S : I → CochainComplex (ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ), (∀ i : I, Cotorsion.acyclicCycles (IsFlatOnSite (R := R)) (S i)) ∧ ∀ T : CochainComplex (ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ, (Cotorsion.acyclicCycles (IsFlatOnSite (R := R))).rightSplittingOrthogonal T ↔ ∀ i : I, Cotorsion.ExtOneOrthogonal (S i) T",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b0a7b8715",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Wrote review.md. Checked statement clauses, dependency definitions, sources, universes, edge cases, docstrings, and verbatim signature. Snapshot compiled cleanly through scompile.py. No delivery errors found; branch unchanged."
  }
 }
