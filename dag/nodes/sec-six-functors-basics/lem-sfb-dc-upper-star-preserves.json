@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-dc-upper-star-preserves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$Lf^*$ preserves bounded constructible complexes",
@@ -19,26 +19,201 @@
  ],
  "proof": [
   {
-   "text": "The module-object pullback $f^*$ is exact ([sk-prop-sfb-module-pullback-exact]), and\n$Lf^*\\cong D(f^*)$ is computed levelwise ([sk-prop-sfb-module-derived-factorization]). Hence\n$H^q(Lf^*K)\\cong f^*H^q(K)$ for all $q$, so $Lf^*K$ is bounded. It remains to show that $f^*M$\nis constructible ([sk-def-sfb-constructible]) for a constructible $\\Lambda_Y$-module $M$. Let\n$Y=\\bigsqcup_aY_a$ be a finite stratification such that each $M|_{Y_a}$ is locally finitely\npresented. Then the preimages $X_a=f^{-1}(Y_a)$ form a finite stratification of $X$ by locally\nclosed subschemes. Since pullbacks compose ([sk-def-sfb-module-pushforward-pullback]),\n$(f^*M)|_{X_a}$ is the pullback of $M|_{Y_a}$ along $f_a\\colon X_a\\to Y_a$. Choose a pro-étale cover\n$\\{U_i\\to Y_a\\}$ with $M|_{U_i}\\cong\\operatorname{coker}(\\Lambda^m\\to\\Lambda^n)$. Its base change\n$\\{U_i\\times_{Y_a}X_a\\to X_a\\}$ is a pro-étale cover. The pullback is right exact, and it carries\nfree modules of finite rank to free modules of the same rank. So on this cover the restrictions\nof $f^*M$ are again cokernels of maps between finite free modules.",
+   "text": "First verify exactness for every commutative condensed ring, not just the admissible adic rings. On abelian sheaves the tensor product is closed symmetric monoidal and tensoring preserves colimits, hence is additive and right exact [sk-def-sfb-sheaf-tensor]. Thus the module categories in question are abelian [lem-sfb-modobj-abelian]. The inverse image $f^*_{\\Ab}$ is exact [lem-sfb-finite-upper-star-exact]. The functor $\\operatorname{mapMod}(f^*_{\\Ab})$ commutes with the forgetful functors by [def-sfb-modobj-transport]; apply [det-prop-sfb-module-pullback-exact-lifted] to conclude it is additive and exact. By [lem-sfb-alpha-iso], $\\alpha_f$ is invertible for this arbitrary $\\Lambda$. Extension along it is naturally isomorphic to $\\operatorname{Res}_{\\alpha_f^{-1}}$ [def-sfb-modobj-extension-along-iso]. Restriction is the identity on underlying objects and morphisms [def-sfb-modobj-restriction], so the same lifted-exactness lemma, now with underlying functor the identity of $\\Sh(X_{\\mathrm{proét}},\\Ab)$, proves this restriction exact. Consequently the composite $f^*=\\operatorname{Ext}_{\\alpha_f}\\operatorname{mapMod}(f^*_{\\Ab})$ of [def-sfb-module-upper-star] is additive and exact. This argument applies to every morphism of schemes, including the maps between strata and covers used below.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-finite-upper-star-exact",
+    "def-sfb-modobj-transport",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "lem-sfb-alpha-iso",
+    "def-sfb-modobj-extension-along-iso",
+    "def-sfb-modobj-restriction",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "First sentence: exactness of the module-object pullback; expand its two factors"
+   }
+  },
+  {
+   "text": "Represent $K$ by a complex $C$ and take a K-flat resolution $P\\to C$. By the definition of the total derived composite [sk-def-sfb-module-derived-pushpull], $Lf^*K$ is represented by $f^*P$. The exact-functor cohomology isomorphism [lem-weil-pbc-exact-functor-complex-cohomology], applied to the exact functor of step 1, gives\n$$H^q(Lf^*K)=H^q(f^*P)\\simeq f^*H^q(P)\\simeq f^*H^q(K).$$\nThe last isomorphism is induced by the quasi-isomorphism $P\\to C$. Choose a finite interval $[a,b]$ outside which $H^q(K)=0$, as in [sk-def-sfb-bounded-constructible]. An additive functor sends the zero object to a zero object, so the displayed formula gives $H^q(Lf^*K)=0$ outside the same interval. It remains to check constructibility of $f^*M$ for any constructible module $M$.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "First two sentences: termwise computation, cohomology, and boundedness"
+   }
+  },
+  {
+   "text": "Choose a witnessing finite stratification $(i_a:Y_a\\hookrightarrow Y)_a$ and pro-étale covers $u_{ai}:U_{ai}\\to Y_a$ for the finite constant local models in [sk-def-sfb-constructible]. Put $X_a=X\\times_Y Y_a$, with maps $j_a:X_a\\to X$ and $f_a:X_a\\to Y_a$. By [lemma-constructible-pullback-stratification] these maps give a finite stratification of $X$ with images $f^{-1}(|Y_a|)$. The schemes $X,Y$ are of finite type over the field $k$ by [sk-def-sfb-dc-setting]. In particular their topological spaces are Noetherian, and their locally closed strata are constructible by [def-weil-constructible-subset]. Thus this is a stratification of the kind required by [sk-def-sfb-constructible], including its constructible-subset condition. Empty strata may be removed; no reduced scheme structure or equality of scheme-theoretic fibres with set-theoretic preimages is assumed.",
    "uses": [
     "sk-def-sfb-constructible",
-    "sk-def-sfb-module-pushforward-pullback"
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-dc-setting",
+    "def-weil-constructible-subset"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Stratification and its inverse image; retain constructibility of the strata"
+   }
+  },
+  {
+   "text": "For each $a$, form $V_{ai}=X_a\\times_{Y_a}U_{ai}$, with projections $v_{ai}:V_{ai}\\to X_a$ and $h_{ai}:V_{ai}\\to U_{ai}$. The arrows $u_{ai}$ are weakly étale and the family is fpqc, by the covering definition [def-weil-pbc-proetale-covering]. Base change preserves weak étaleness [lem-weil-pbc-weakly-etale-composition-base-change] and preserves fpqc covering families [lem-galois-fpqc-covering-base-change]. Hence $(v_{ai})_i$ is again a pro-étale cover of $X_a$. These results impose no Noetherian, finite-type, surjectivity-of-each-arrow, or quasi-compactness-of-each-arrow assumption, so they apply to the chosen cover.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "The base-changed pro-étale cover"
+   }
+  },
+  {
+   "text": "Pullback composition [def-sfb-module-upper-star-comp] gives the required comparison on this cover. Indeed $f j_a=i_a f_a$ and $f_a v_{ai}=u_{ai}h_{ai}$, and therefore\n$$v_{ai}^*j_a^*f^*M\\simeq v_{ai}^*f_a^*i_a^*M\\simeq h_{ai}^*u_{ai}^*i_a^*M.$$\nThus it suffices to pull back the finite scalar-matrix presentation of $u_{ai}^*i_a^*M$ along $h_{ai}$. This uses composition of module-object pullbacks, rather than an underived base-change assertion about pushforwards.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "The restriction identity obtained by composition of pullbacks"
+   }
+  },
+  {
+   "text": "Write the local model as the cokernel of a finite matrix $A_{ai}$ with entries in $R=\\Lambda(*)$:\n$$u_{ai}^*i_a^*M\\simeq\\operatorname{coker}(A_{ai}:\\Lambda_{U_{ai}}^{m_{ai}}\\to\\Lambda_{U_{ai}}^{n_{ai}}),$$\nas permitted by the scalar-matrix formulation of [sk-def-sfb-constructible]. From the formula in [def-sfb-module-upper-star] and the transport action in [def-sfb-modobj-transport], pullback sends the regular module $\\Lambda_U$ to the regular module $\\Lambda_V$: its first factor sends $\\Lambda_U$ to the regular $h^*_{\\Ab}\\Lambda_U$-module, and extension of scalars identifies the latter with $\\Lambda_V$ by the map $b\\otimes a\\mapsto b\\alpha_h(a)$. Its inverse is $b\\mapsto b\\otimes1$: the unit gives one composite equal to the identity, and the balancing relation $b\\alpha_h(a)\\otimes1=b\\otimes a$ gives the other. These formulas denote the maps induced by multiplication and unit on the relative tensor product. Additivity from step 1 sends its finite direct sums to the same finite direct sums. Moreover a scalar $r\\in\\Lambda(*)$ gives a morphism $r:\\mathbf Z\\to\\Lambda$ of condensed abelian groups. Put $r_U=p_U^*r:\\mathbf1_U\\to\\Lambda_U$ and $r_V=p_V^*r:\\mathbf1_V\\to\\Lambda_V$; its action is $\\mu_U(r_U\\otimes\\mathrm{id})$ [sk-def-sfb-pulled-back-coefficients]. Let $\\beta:h^*_{\\Ab}p_U^*\\xrightarrow{\\sim}p_V^*$ be the monoidal natural isomorphism of [sk-def-sfb-pullback-from-point-comp]. Its component $\\beta_\\Lambda$ is $\\alpha_h$ [sk-def-sfb-coefficient-morphisms], and naturality at the abelian-group morphism $r$ gives $\\alpha_h\\circ h^*_{\\Ab}(r_U)=r_V\\circ\\beta_{\\mathbf Z}$. Monoidality identifies $\\beta_{\\mathbf Z}$ with the unit comparison and identifies the transported multiplication with that of $\\Lambda_V$. Consequently the pulled-back action $\\mu_U(r_U\\otimes\\mathrm{id})$, under the regular-module identification just written, is $\\mu_V(r_V\\otimes\\mathrm{id})$. This uses naturality on abelian sheaves; $r$ is not required to be a morphism of rings. Thus the pulled-back matrix is exactly $A_{ai}$ with the same scalar entries, not an arbitrary matrix over sections on $V_{ai}$. Right exactness from step 1 now gives\n$$h_{ai}^*(u_{ai}^*i_a^*M)\\simeq\\operatorname{coker}(A_{ai}:\\Lambda_{V_{ai}}^{m_{ai}}\\to\\Lambda_{V_{ai}}^{n_{ai}}).$$\nThe ranks are finite and may be zero. Together with step 5 this is a finite constant local model for $(f^*M)|_{X_a}$ on the cover of step 4.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-sfb-module-upper-star",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Last sentences: finite free modules, right exactness, and the scalar entries of the presentations"
+   }
+  },
+  {
+   "text": "Steps 3–6 give the witnessing finite constructible stratification and finite constant local models for $f^*M$; hence $f^*M$ is constructible by [sk-def-sfb-constructible]. Apply this to every $M=H^q(K)$. The isomorphisms of step 2 show that all $H^q(Lf^*K)$ are constructible, and step 2 already supplies the finite cohomological interval. These are precisely the two conditions of [sk-def-sfb-bounded-constructible]. Therefore $Lf^*K$ is bounded constructible.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+    "place": "Conclusion: boundedness and constructibility of every cohomology sheaf"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-finite-upper-star-exact",
+  "def-sfb-modobj-transport",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-alpha-iso",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-modobj-restriction",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-constructible",
-  "sk-def-sfb-module-pushforward-pullback"
+  "lemma-constructible-pullback-stratification",
+  "sk-def-sfb-dc-setting",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "def-sfb-module-upper-star-comp",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-pullback-from-point-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
+  "place": "Proof, expanded termwise-exactness and stratified scalar-presentation argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes, derived pullback with coefficients in a condensed ring preserves bounded complexes with constructible cohomology",
+   "results": "SheafOfModules.pullback, Scheme.Modules.pullback and their left-adjoint/additive instances, SheafOfModules.pullbackComp, and sheafPullbackConstruction.preservesFiniteLimits; none states condensed-coefficient constructibility.",
+   "date": "2026-10-16",
+   "verdict": "no match: supporting results do not state this item or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, \"constructible\"",
+   "results": "Loogle responded: unknown identifier Sheaf; no hits. This query is not evidence of absence.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; retried with a valid name-substring query"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(pullback|upperStar)|(pullback|upperStar).*constructible",
+   "results": "No matches under Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match: supporting results do not state this item or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image functor on sheaves preserves finite scalar matrix presentations and bounded constructible derived complexes",
+   "results": "SheafOfModules.Presentation.map and IsFinitePresentation machinery in Algebra/Category/ModuleCat/Sheaf/Quasicoherent. These transport module presentations, not stratified scalar-constant local models or bounded constructible derived objects.",
+   "date": "2026-10-16",
+   "verdict": "no match: supporting results do not state this item or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Topology.IsConstructible and IsLocallyConstructible with their Boolean closure lemmas; these concern topological subsets, not sheaves or complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match: supporting results do not state this item or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image preserves bounded constructible complexes of sheaves of modules over a condensed coefficient ring",
+   "results": "UNAVAILABLE: service returned Rate limit exceeded: 60 per 1 minute.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|constructible",
+   "results": "Morphisms/FinitePresentation.lean:117–124: Chevalley image theorem for locally constructible topological subsets. No statement about constructible module sheaves or derived pullback.",
+   "date": "2026-10-16",
+   "verdict": "no match: supporting results do not state this item or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image preserves bounded constructible complexes of sheaves of modules over a condensed coefficient ring",
+   "results": "Retry succeeded with eight hits: SheafOfModules.pullback, pullbackPushforwardAdjunction, instIsLeftAdjointPullback, sheafificationCompPullback; the two sheafPullback finite-limit instances; SheafOfModules.pushforwardNatIso_inv; Condensed.instAB4StarCondensedMod. These state constructions, adjunctions, exactness or products, not preservation of bounded constructible condensed-coefficient module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match: none states the constructibility conclusion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible.*(inverseImage|comap)|Preserves.*[Cc]onstructible|mapDerivedCategory_upperStar",
+   "results": "Six hits, all in AlgebraicGeometry/Morphisms/FinitePresentation.lean and RingTheory/Spectrum/Prime/Chevalley.lean: constructible images on prime spectra; none concerns sheaf module objects or derived pullback.",
+   "date": "2026-10-16",
+   "verdict": "no match: topological constructible images do not state the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -54,5 +229,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors"
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-upper-star-preserves",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph argument into seven steps, reusing existing exact-lift, cohomology, stratification, covering, and coefficient-comparison nodes. Kept the statement unchanged and tracked the stronger scalar-constant local models. No new nodes, no exact Lean attachment, and no Mathlib match for the item. Missing parent-unit imports are bypassed only by their existing component interfaces, without changing the proof route.",
+  "blueprint": "Realizes the entire proof in lem-sfb-dc-upper-star-preserves.proof.md: exact module pullback (step 1), termwise cohomology and boundedness (2), inverse-image stratification (3), base-changed cover (4), composition on restrictions (5), scalar finite presentation (6), and conclusion (7)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-bcaa14adb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-bcaa14adb (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all 23 cited node statements, blueprint chapter/unit route, and Stacks Tags 010N, 094U, 022D, and 005L. The arbitrary condensed coefficient category, exact pullback argument, stratification and cover base change, scalar-matrix transport, hypotheses, edge cases, and Mathlib searches all check. No new nodes or repairs are needed; review.md records accepted generic tool uses."
+ }
 }

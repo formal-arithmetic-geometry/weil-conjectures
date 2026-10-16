@@ -1,322 +1,786 @@
 {
-  "id": "fix-prop-projection-formula",
-  "blueprint": {
-    "is": "fix-prop-projection-formula",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Compact-support projection formula at all coefficient stages",
-  "statement": "In the six-functor datum of\n[def-fix-six-functor-datum], let $f:X\\to Y$ be\nseparated of finite\ntype, let $K\\in D^b_c(X,\\Lambda)$ and\n$L\\in D^b_{ctf}(Y,\\Lambda)$, using the\nfinite-Tor subcategory.\nThe\nprojection transformation, built from the\nderived tensor and pullback\nand the finite-level compact-support direct image of\n[def-compact-support-direct-image-detailed] and its higher-coefficient versions\n[def-weil-integral-rational-qbar-compact-support],\nis then an isomorphism at every coefficient stage:\n\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_{\\Lambda}L\n\\xrightarrow{\\ \\sim\\ }Rf_!\\bigl(K\\otimes^L_{\\Lambda}Lf^*L\\bigr),\n$$\n\nnatural in $K$ and $L$, compatible with the composition law of\n[thm-sf-comp-composition] (associativity pentagon), with the compactification comparisons, with\nfinite reduction on the stated finite-Tor domains and scalar extension,\nand with the identification\n$Rf_!\\cong Rf_*$ for proper $f$. At the rational and algebraically closed stages, when $X=X_0\\otimes_{k_0}k$, $Y=Y_0\\otimes_{k_0}k$ for separated finite-type $k_0$-schemes and $f$ is the geometric base change of a separated finite-type $k_0$-morphism $f_0:X_0\\to Y_0$, the isomorphism restricts to the Weil categories [def-wf-weil-category], with tensor as in [def-wf-tensor-product]. A projection formula for the\nderived direct image is asserted\nonly in the proper case, where it is this same statement via\n$Rf_!\\cong Rf_*$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-    "place": "node fix-prop-projection-formula, order 2109"
-  },
-  "stmt_deps": [
-    "def-fix-six-functor-datum",
-    "def-compact-support-direct-image-detailed",
-    "thm-sf-comp-composition",
-    "def-wf-tensor-product",
-    "def-exchange-projection",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-wf-weil-category"
-  ],
-  "proof": [
-    {
-      "text": "Use the operation datum [def-fix-six-functor-datum] and fix the projection transformation of [def-exchange-projection]. For a compactification $f=pj$, its component is the projection map of $Rp_*$ at $(j_!K,L)$ followed by $Rp_*$ of $j_!K\\otimes^LLp^*L\\cong j_!(K\\otimes^LLf^*L)$. At finite coefficients $Rf_!^c=Rp_*j_!$ is [def-compact-support-direct-image-detailed]; at the integral, rational and algebraically closed stages use precisely the completed, localized and common-stage functors of [def-weil-integral-rational-qbar-compact-support]. Thus throughout the proof PF means this specified natural transformation, rather than an arbitrary isomorphism with the same endpoints.",
-      "uses": [
-        "def-fix-six-functor-datum",
-        "def-exchange-projection",
-        "def-compact-support-direct-image-detailed",
-        "def-weil-integral-rational-qbar-compact-support"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, first sentence; statement, projection transformation and coefficient stages"
-      }
-    },
-    {
-      "text": "Let $\\Lambda=A_{E,n}$. By [lem-sf-proetale-constructible-origin], choose bounded constructible etale representatives $K_0,L_0$ with witnesses $\\nu_X^*K_0\\cong K$, $\\nu_Y^*L_0\\cong L$. The converse direction of [lem-sf-comparison-tor-amplitude] transfers the finite Tor interval of $L$ to $L_0$; $L_0$ is bounded below because it is bounded. Now [lem-weil-finite-compact-projection-formula] applies to $f,K_0,L_0$ and its witnessed pro-etale realizations. It says exactly that the component of the transformation in step 1 is invertible and natural in $K,L$. No finite Tor condition on $K$ is needed here.",
-      "uses": [
-        "lem-sf-proetale-constructible-origin",
-        "lem-sf-comparison-tor-amplitude",
-        "lem-weil-finite-compact-projection-formula"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, first sentence: finite coefficient formula, with intrinsic pro-etale objects supplied witnesses"
-      }
-    },
-    {
-      "text": "For $1\\le m\\le n$, restrict now to $K,L$ both in the finite-Tor domains. The square asserted by [prop-sf-pf-reduction] compares the actual maps $\\operatorname{PF}_{f,K,L}$ and $\\operatorname{PF}_{f,K_m,L_m}$, so the isomorphisms of step 2 commute with successive finite reductions. The stronger map-identification information in [lem-fix-operation-reduction] says that coefficient comparisons preserve the tensor associativity, units and counits which construct PF, and also applies from the completed integral stage to each $A_{E,n}$. Consequently these are reduction compatibilities of the specified transformation. This does not assert that finite reduction stays bounded constructible for arbitrary non-finite-Tor $K$.",
-      "uses": [
-        "prop-sf-pf-reduction",
-        "lem-fix-operation-reduction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, second sentence: successive coefficient reductions"
-      }
-    },
-    {
-      "text": "Let $\\Lambda=\\mathcal O_E$. By [lem-coef-integral-residue-tor], $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$, so the given $K$, as well as $L$, satisfies the uniform finite-level Tor condition. Their reductions therefore lie in the domains of step 3. They are derived complete and uniformly bounded in the sense of [def-weil-derived-complete-integral-detailed]. Apply the concrete reconstruction assertion of [thm-sf-pf-adic]: the compatible finite components realize the canonical component $\\operatorname{PF}_{f,K,L}$ as an isomorphism, compatible with every finite reduction. The stated conclusion of that node identifies the canonical map itself; no inference that conservative reduction functors are faithful on morphisms is made.",
-      "uses": [
-        "lem-coef-integral-residue-tor",
-        "def-weil-derived-complete-integral-detailed",
-        "thm-sf-pf-adic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, third sentence, integral clause; supplies the previously missing finite-Tor hypothesis on K"
-      }
-    },
-    {
-      "text": "At $E$-coefficients, [def-weil-rationalization-karoubi] defines the category as the raw scalar localization of the integral category, with the same objects. Thus choose integral representatives of $K$ and $L$; step 4 applies to those representatives. The concrete coefficient-passage assertion of [thm-sf-pf-field] gives the canonical projection isomorphism over $E$ and its extension compatibilities. At $\\overline{\\mathbf Q}_\\ell$, [def-weil-algebraically-closed-coefficients] represents both inputs over a common finite extension $E'$. Apply the same assertion of [thm-sf-pf-field] there and take its common-stage image. Its scalar-extension compatibility makes the image independent of the chosen common stage. By [def-weil-finite-tor-amplitude], at these field stages $D^b_{ctf}=D^b_c$ by definition; no assertion that constructible sheaves are site-perfect is used.",
-      "uses": [
-        "def-weil-rationalization-karoubi",
-        "thm-sf-pf-field",
-        "def-weil-algebraically-closed-coefficients",
-        "def-weil-finite-tor-amplitude"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, third sentence, field clause"
-      }
-    },
-    {
-      "text": "The finite-site realization for arbitrary bounded constructible $K$ has already been established in step 2 by the witnessed clause of [lem-weil-finite-compact-projection-formula]. On finite-Tor inputs the realization assertion is also [thm-sf-pf-proetale]. At the integral stage the extra finite-Tor hypothesis on $K$ required by that node was supplied in step 4, and at field stages it is part of the convention recalled in step 5. Thus [thm-sf-pf-proetale] identifies the realizations at all the remaining stages. This uses the completed integral coefficient system and its finite realizations, followed by localization and common stages; it never replaces those coefficient categories with discrete etale $\\mathcal O_E$- or $E$-module categories. In particular that finite-Tor realization theorem was not applied to a non-finite-Tor finite-level $K$.",
-      "uses": [
-        "lem-weil-finite-compact-projection-formula",
-        "thm-sf-pf-proetale"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, fourth sentence: pro-etale realization"
-      }
-    },
-    {
-      "text": "Apply the transformation-identity clauses of [prop-sf-pf-coherence] to the projection transformations fixed in step 1: naturality, the associativity pentagon through $\\alpha_{g,f}$, and independence of the compactification give exactly the first compatibility assertions in the statement. At finite coefficients $\\alpha_{g,f}$ is the unital associative law of [thm-sf-comp-composition] on bounded-below etale-origin complexes; the representatives of step 2 belong to that domain. At the higher stages it is the composition comparison in the coherence statement, compatible with the finite one under the coefficient comparisons. No higher-coefficient composition theorem is inferred from the finite-level statement of [thm-sf-comp-composition]. The same coherence statement expressly includes finite reduction, scalar extension and pro-etale realization; finite reduction is read only on the finite-Tor domains as in step 3. These are identities for the specified natural transformations; one does not choose separate inverses or unrelated isomorphisms at the different stages.",
-      "uses": [
-        "prop-sf-pf-coherence",
-        "thm-sf-comp-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, fifth sentence: composition, refinement and coefficient identities"
-      }
-    },
-    {
-      "text": "If $f$ is proper, use the proper-coincidence clause of [prop-sf-pf-coherence]. It identifies the map in step 1 through $Rf_!\\cong Rf_*$ with the direct-image projection transformation. The isomorphism already proved is therefore the direct-image formula in precisely this proper case. This clause provides the asserted compatibility with proper coincidence, rather than postulating a direct-image formula for arbitrary $f$.",
-      "uses": [
-        "prop-sf-pf-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, fifth sentence: proper-coincidence identity"
-      }
-    },
-    {
-      "text": "For the Weil assertion impose the finite-field model stated in the corrected statement, and let the inputs carry Weil structures. [lem-fix-weil-operations] applies to $f_0$ and its geometric fiber $f$ at $E$ or $\\overline{\\mathbf Q}_\\ell$: the underlying operations have their canonical Weil structures on the stated bounded constructible domains and the projection transformation is equivariant. Its tensor structure is the one of [def-wf-tensor-product]. Thus the underlying projection isomorphism is a morphism between the required Weil objects. This is why the finite-field model is required here; it is not a restriction on the non-Weil projection formula proved in the earlier steps.",
-      "uses": [
-        "lem-fix-weil-operations",
-        "def-wf-tensor-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, sixth sentence: equivariance for Weil complexes"
-      }
-    },
-    {
-      "text": "Write $u:S\\to T$ for this component and $\\varphi_S,\\varphi_T$ for its Weil maps. Equivariance says $u\\varphi_S=\\varphi_T\\Phi^*(u)$. Multiply on the left by $u^{-1}$ and on the right by $\\Phi^*(u^{-1})$ to obtain $\\varphi_S\\Phi^*(u^{-1})=u^{-1}\\varphi_T$. Hence its underlying inverse is also a Weil morphism, by [def-wf-weil-category]. Therefore the equivariant morphism of step 9 is an isomorphism in the Weil category itself, and its naturality follows from the same naturality equation already used for the underlying transformation.",
-      "uses": [
-        "def-wf-weil-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-        "place": "Proof, sixth sentence, explicit passage from equivariant underlying isomorphism to Weil isomorphism"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "fix-prop-projection-formula",
+ "blueprint": {
+  "is": "fix-prop-projection-formula",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compact-support projection formula at all coefficient stages",
+ "statement": "In the six-functor datum of\n[def-fix-six-functor-datum], let $f:X\\to Y$ be\nseparated of finite\ntype, let $K\\in D^b_c(X,\\Lambda)$ and\n$L\\in D^b_{ctf}(Y,\\Lambda)$, using the\nfinite-Tor subcategory.\nThe\nprojection transformation, built from the\nderived tensor and pullback\nand the finite-level compact-support direct image of\n[def-compact-support-direct-image-detailed] and its higher-coefficient versions\n[def-weil-integral-rational-qbar-compact-support],\nis then an isomorphism at every coefficient stage:\n\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_{\\Lambda}L\n\\xrightarrow{\\ \\sim\\ }Rf_!\\bigl(K\\otimes^L_{\\Lambda}Lf^*L\\bigr),\n$$\n\nnatural in $K$ and $L$, compatible with the composition law of\n[thm-sf-comp-composition] (associativity pentagon), with the compactification comparisons, with\nfinite reduction on the stated finite-Tor domains and scalar extension,\nand with the identification\n$Rf_!\\cong Rf_*$ for proper $f$. At the rational and algebraically closed stages, when $X=X_0\\otimes_{k_0}k$, $Y=Y_0\\otimes_{k_0}k$ for separated finite-type $k_0$-schemes and $f$ is the geometric base change of a separated finite-type $k_0$-morphism $f_0:X_0\\to Y_0$, the isomorphism restricts to the Weil categories [def-wf-weil-category], with tensor as in [def-wf-tensor-product]. A projection formula for the\nderived direct image is asserted\nonly in the proper case, where it is this same statement via\n$Rf_!\\cong Rf_*$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+  "place": "node fix-prop-projection-formula, order 2109"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-compact-support-direct-image-detailed",
+  "thm-sf-comp-composition",
+  "def-wf-tensor-product",
+  "def-exchange-projection",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-wf-weil-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the operation datum [def-fix-six-functor-datum] and fix the projection transformation of [def-exchange-projection]. For a compactification $f=pj$, its component is the projection map of $Rp_*$ at $(j_!K,L)$ followed by $Rp_*$ of $j_!K\\otimes^LLp^*L\\cong j_!(K\\otimes^LLf^*L)$. At finite coefficients $Rf_!^c=Rp_*j_!$ is [def-compact-support-direct-image-detailed]; at the integral, rational and algebraically closed stages use precisely the completed, localized and common-stage functors of [def-weil-integral-rational-qbar-compact-support]. Thus throughout the proof PF means this specified natural transformation, rather than an arbitrary isomorphism with the same endpoints.",
+   "uses": [
     "def-fix-six-functor-datum",
     "def-exchange-projection",
     "def-compact-support-direct-image-detailed",
-    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Proof, first sentence; statement, projection transformation and coefficient stages"
+   }
+  },
+  {
+   "text": "Let $\\Lambda=A_{E,n}$. By [lem-sf-proetale-constructible-origin], choose bounded constructible etale representatives $K_0,L_0$ with witnesses $\\nu_X^*K_0\\cong K$, $\\nu_Y^*L_0\\cong L$. The converse direction of [lem-sf-comparison-tor-amplitude] transfers the finite Tor interval of $L$ to $L_0$; $L_0$ is bounded below because it is bounded. Now [lem-weil-finite-compact-projection-formula] applies to $f,K_0,L_0$ and its witnessed pro-etale realizations. It says exactly that the component of the transformation in step 1 is invertible and natural in $K,L$. No finite Tor condition on $K$ is needed here.",
+   "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
-    "lem-weil-finite-compact-projection-formula",
-    "prop-sf-pf-reduction",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Proof, first sentence: finite coefficient formula, with intrinsic pro-etale objects supplied witnesses"
+   }
+  },
+  {
+   "text": "For $1\\le m\\le n$, assume $K,L$ are in the finite-Tor domains and write $\\rho_T(-)=-\\otimes^L_{A_{E,n}}A_{E,m}$ on each scheme. For the tensor input, [lem-sf-pullback-tor-amplitude] preserves the Tor interval of $L$, and [lem-sf-tensor-ctf](ii) gives finite Tor amplitude for $K\\otimes^LLf^*L$ by adding the two intervals. Thus the compact-support coefficient comparison applies to this input as well as to $K$. The coefficient comparison of [lem-fix-compact-support-coefficient-change] is an isomorphism for the compact-support direct image, and [lem-fix-operation-reduction] gives the tensor and pullback comparisons together with preservation of the units and counits used in the mate defining [def-exchange-projection]. Define the comparison $u$ on the source of PF by first applying the tensor comparison and then the compact-support comparison to $K$, and define $v$ on its target by applying the compact-support comparison to $K\\otimes^LLf^*L$ and then the tensor and pullback comparisons. Expanding the two composites through a compactification $f=pj$, the proper factor is the transpose of the same counit composite (the counit identity in [lem-fix-compact-support-coefficient-change]), while the open factor is the same extension-by-zero tensor map after coefficient change. Hence $v\\circ\\rho(\\operatorname{PF}_{n})=\\operatorname{PF}_{m}\\circ u$. This is an equality of the specified mate composites, so it does not use an axiom asserting that PF is invertible. The finite formula [lem-weil-finite-compact-projection-formula] supplies invertibility at both levels.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
     "lem-fix-operation-reduction",
-    "lem-coef-integral-residue-tor",
+    "def-exchange-projection",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Proof, repaired concrete step 3"
+   }
+  },
+  {
+   "text": "Work integrally with the actual projection component $u:S\\to T$ specified in step 1, not a lift chosen from its reductions. The objects $K,L$ are derived complete and have uniformly bounded constructible reductions by [def-weil-derived-complete-integral-detailed]. By [lem-coef-integral-residue-tor] their reductions have uniform finite Tor intervals. By [lem-pur-integral-operations-preserve-constructible], $Lf^*L$, $K\\widehat\\otimes^LLf^*L$, and $S=(Rf_!K)\\widehat\\otimes^LL$ are integral constructible; here [lem-sf-integral-compact-support-constructible] first supplies $Rf_!K$ and also supplies $T=Rf_!(K\\widehat\\otimes^LLf^*L)$. Thus both endpoints of $u$ are derived complete. Apply the integral clause of [lem-fix-operation-reduction]: its comparisons identify $S_n,T_n$ with the finite projection endpoints, and its preservation of units, counits and tensor comparisons identifies the reduction of the actual composite $u$ with $\\operatorname{PF}_{f,K_n,L_n}$. That finite map is invertible by [lem-weil-finite-compact-projection-formula]. The cone of $u$ remains in the complete constructible category by [lem-weil-integral-constructible-triangulated] (rotate its cone triangle to use the stated extension closure). Its first reduction is zero. The isomorphism-detection clause of [sk-lem-pe-derived-nakayama] therefore proves $u$ invertible. This proves invertibility of the specified map itself and its reduction square; it does not construct a map from an incoherent family, or deduce equality of maps from conservativity.",
+   "uses": [
     "def-weil-derived-complete-integral-detailed",
-    "thm-sf-pf-adic",
+    "lem-coef-integral-residue-tor",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-fix-operation-reduction",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-weil-integral-constructible-triangulated",
+    "sk-lem-pe-derived-nakayama"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Integral reconstruction sentence: concrete reduction of the canonical map and derived Nakayama"
+   }
+  },
+  {
+   "text": "The raw localization [def-weil-rationalization-karoubi] has the same objects as the integral category, so choose integral representatives of the two rational inputs. The rational operations and transformations are the localized integral ones by [def-weil-derived-pullback-tensor-hom], [def-weil-integral-rational-qbar-compact-support] and [def-exchange-projection]. Apply localization to the map and its inverse from step 4. For an extension of finite coefficient fields use the scalar-comparison clause of [lem-fix-operation-reduction]: it commutes with the operations and preserves the units, counits and tensor associators defining PF, so it identifies extension of this very component with the component over the larger field. Exactness of the extension functor is [lem-weil-scalar-extension-exact-triangulated]; preservation of an inverse also follows simply from functoriality. For algebraically closed coefficients choose one common finite field for both inputs and the map, as in [def-weil-algebraically-closed-coefficients]. The supplied comparisons in [def-exchange-projection] satisfy the identity and tower cocycle. Hence enlarging the field gives the same morphism class, and the finite-stage inverse gives its inverse class. This proves the field formulas and their scalar compatibility without an axiomatized projection theorem.",
+   "uses": [
     "def-weil-rationalization-karoubi",
-    "thm-sf-pf-field",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-finite-tor-amplitude",
-    "thm-sf-pf-proetale",
-    "prop-sf-pf-coherence",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-exchange-projection",
+    "lem-fix-operation-reduction",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Field-passage sentence: localization and canonical scalar comparisons"
+   }
+  },
+  {
+   "text": "For finite coefficients, [lem-sf-proetale-constructible-origin] gives an étale-origin witness for every bounded constructible pro-étale input, and [lem-sf-comparison-tor-amplitude] transfers the finite-Tor interval to the étale representative. The finite projection lemma [lem-weil-finite-compact-projection-formula] explicitly includes the pro-étale realizations with these witnesses, so it gives invertibility of the actual pro-étale PF component, including arbitrary finite-level $K$ and finite-Tor $L$. At the integral stage, the pro-étale operations and their reduction maps are the ones in the tower definition [def-weil-integral-rational-qbar-compact-support], and step 4 identifies their inverse-limit map with PF. Rationalization and common-stage scalar extension then give the field stages by step 5. Thus no abstract pro-étale projection axiom or replacement of the completed coefficient system by a discrete étale one is used.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-compact-projection-formula",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Proof, repaired concrete step 6"
+   }
+  },
+  {
+   "text": "We establish the finite coherence identities before imposing constructibility. Write $P_u=Lu^*$, $R_u=Ru_*$ and $\\pi_u$ for the counit-defined map of [def-exchange-projection]. Under the adjunction-normalized direct-image compositor [lem-weil-derived-direct-image-composition], the identity to prove for composable $u,v$ is $\\pi_{vu;M,N}=R_v(\\pi_{u;M,P_vN})\\,\\pi_{v;R_uM,N}$, with the pullback and tensor identifications inserted. Transpose both sides under $P_uP_v\\dashv R_vR_u$. By [lem-weil-pbc-mate-pasting] its counit is $\\varepsilon_u\\circ P_u\\varepsilon_vR_u$. Both transposes are therefore the composite from $P_uP_v(R_vR_uM\\otimes N)$ to $M\\otimes P_uP_vN$ which first distributes the two pullbacks over tensor, then applies $P_u\\varepsilon_{v,R_uM}$ to the first factor, and finally $\\varepsilon_{u,M}$ to that factor. Naturality of the tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] moves the middle counit across that comparison. The two iterated tensor comparisons agree: on flat-term K-flat models [lem-pc-kflat-resolution] both send a local pure tensor to the same pure tensor, and their total-complex differentials have the same signs. The adjunction bijection now gives the equality. The same calculation with an identity adjunction gives the identity constraint. Iterating this fixed counit composite proves equality of all parenthesizations. These identities require no Tor hypothesis on $M$ and no invertibility of $\\pi_u$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-derived-direct-image-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; composition-adjunction counit calculation"
+   }
+  },
+  {
+   "text": "Consider a commutative proper/open square with top $k:A\\hookrightarrow B$, bottom $i:C\\hookrightarrow D$, and proper verticals $r:A\\to C$, $p:B\\to D$. Use the normalized proper/open map $\\gamma:i_!R_r\\to R_pk_!$ of [lem-cbc-strict-tower-proper-open-calculus], first on a single finite coefficient level (equivalently evaluate the construction on constant towers). That statement gives its actual mate normalization: $\\gamma$ is the mate of $\\alpha:P_pi_!\\to k_!P_r$, where $\\alpha$ is cartesian open base change followed by projection to the clopen component $A\\subset B\\times_DC$. For $M$ on $A$ and $N$ on $D$, let $\\delta_j$ denote the open tensor isomorphism [lem-cbc-extension-zero-projection-formula]. The following two maps from $i_!R_rM\\otimes N$ to $R_pk_!(M\\otimes P_rP_iN)$ agree:\n$$\\gamma_{M\\otimes P_rP_iN}\\,i_!(\\pi_{r;M,P_iN})\\,\\delta_i\n=R_p(\\delta_k)\\,\\pi_{p;k_!M,N}\\,(\\gamma_M\\otimes1).$$\nIndeed transpose under $P_p\\dashv R_p$ and insert the displayed mate formula for $\\gamma$. Naturality of $\\varepsilon_p$, the triangle identity and [lem-weil-pbc-mate-pasting] reduce both transposes to $k_!(\\varepsilon_{r,M}\\otimes1)$ following $\\alpha_{R_rM}$ tensored with $P_pN$ and the open tensor identifications. The needed tensor identity for $\\alpha$ is checked before deriving: cartesian open base change carries a section and a local pure tensor to that same section and tensor, and the clopen projection is identity on its chosen component and zero on the other component. Tensoring either identity or zero has exactly the same effect before or after that projection. The ringed open tensor comparison is [lem-weil-pbc-ringed-slice-extension-tensor]; apply flat-term K-flat resolutions and the derived tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to descend this identity. Thus the transpose calculation is valid in the derived category, not merely on cohomology. The strict-tower lemma identifies evaluation with the canonical finite proper/open map, including refinement squares; its construction imposes no Tor condition on $M$.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D: normalized proper/open map; explicit tensor/mate calculation"
+   }
+  },
+  {
+   "text": "For a refinement $u:c_1\\to c_2$, use precisely $\\theta_u=R_{p_2}(\\gamma_u^{-1})c_{p_2,u}$ of [def-sf-refinement-comparison-isomorphism]. Step 7 makes the direct-image compositor commute with projection. Step 8, applied to $r=\\mathrm{id}_X$, $k=j_1$, $i=j_2$, $p=u$, makes $\\gamma_u$ and its inverse commute with the open tensor/projection maps. Substitute these two identities in the defining composite of $\\theta_u$; they give\n$$\\theta_{u,K\\otimes Lf^*L}\\operatorname{PF}^{c_1}_{f,K,L}\n=\\operatorname{PF}^{c_2}_{f,K,L}(\\theta_{u,K}\\otimes1).$$\nThe comparison cocycle and common refinements of [prop-compactification-coherence-detailed] extend this equality to arbitrary compactifications. Its witnessed domain applies: [lem-sf-pullback-tor-amplitude] gives bounded constructible finite-Tor $Lf^*L$, and [lem-sf-tensor-ctf](i), with that as the finite-Tor factor and the symmetry of tensor, gives bounded constructibility of $K\\otimes^LLf^*L$ even for arbitrary bounded constructible $K$. [lem-sf-proetale-constructible-origin] gives witnesses for $K$ and for the bounded constructible tensor appearing in the finite formula [lem-weil-finite-compact-projection-formula]. No finite Tor assumption on $K$ was used in either local identity. Hence the specified finite PF descends independently of compactification on the full domain of the item.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism",
+    "prop-compactification-coherence-detailed",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B and 0F7G: refinement normalization and tensor compatibility"
+   }
+  },
+  {
+   "text": "For $X\\xrightarrow fY\\xrightarrow gZ$, all original schemes are Noetherian and qcqs: apply [lem-weil-pbc-finite-type-over-noetherian] over the spectrum of the field, then [lem-weil-pbc-locally-noetherian-quasi-separated]. Proper compactification schemes are again of finite type over that field. Choose a compactification $Y\\xhookrightarrow i\\overline Y\\xrightarrow sZ$ and use [lem-weil-pbc-compatible-compactification-triangle] to obtain $X\\xhookrightarrow jV\\xhookrightarrow b\\overline X$, with $q:V\\to Y$, $p:\\overline X\\to\\overline Y$ proper and $pb=iq$ cartesian. The normalized composition map is\n$$R_s i_!R_qj_!\\xrightarrow{R_s\\gamma}R_sR_pb_!j_!\\cong R_{sp}(bj)_!.$$\nThe etale normalization and its agreement with the bounded-below compositor are explicitly part of [lem-amb-unbounded-compact-support-comparisons]. At finite pro-etale level the same normalization is supplied by [lem-cbc-strict-tower-proper-open-calculus]: evaluations are the specified etale proper/open maps under the canonical comparisons. The latter direct-image comparison has the counit normalization [lem-weil-pbc-comparison-direct-image-canonical-mate], and the open comparison [lem-cbc-proetale-extension-zero-comparison] respects open composition. Thus this is the specified $\\alpha_{g,f}$ of [thm-sf-comp-composition] on the witnesses, rather than a new unnormalized compositor. In this displayed composite, step 8 handles $\\gamma$, step 7 handles $R_sR_p$, and [lem-cbc-extension-zero-composition] handles $b_!j_!$ (both open tensor maps are identity on a local tensor supported on $X$, and zero off $X$). Substituting gives\n$$\\alpha_{g,f,K\\otimes Lf^*Lg^*L}\\,Rg_!(\\operatorname{PF}_{f,K,Lg^*L})\\,\\operatorname{PF}_{g,Rf_!K,L}\n=\\operatorname{PF}_{gf,K,L}(\\alpha_{g,f,K}\\otimes1).$$\nAll maps in this calculation are defined on ambient finite categories; witnesses are needed only for the invertible compactification comparisons, as supplied in step 2 and preserved by [thm-sf-comp-composition]. The two parenthesizations for a third morphism agree by the associative compositor in that theorem and the fixed equality just proved. This is the asserted projection associativity, including arbitrary non-finite-Tor finite-level $K$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
     "thm-sf-comp-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition: compatible compactifications and normalized four-line composite"
+   }
+  },
+  {
+   "text": "We also need integral coherence as equality of actual maps. Use the derived coefficient-system category $D(\\mathscr S_W)$, the functorial reduction $\\mathcal R_W$ and total limit $\\mathcal L_W$ of [lem-coef-derived-system-evaluation-calculus]. The ring $\\mathcal O_E$ is complete for its non-zero-divisor $\\varpi_E$. Thus [lem-pur-coefficient-system-derived-comparison] supplies the actual derived adjunctions for all scheme maps on these varying-coefficient systems, with evaluation comparisons preserving their units and counits and quotient maps. On the diagram site of [lem-weil-pbc-diagram-site-realization], take the ring sheaf $\\mathcal A_\\bullet(n,U)=(A_{E,n})_W(U)$, with its quotient transitions, rather than tensoring restricted $A_{E,n}$-modules over the constant ring $\\mathcal O_E$. A module over this ring is exactly a strict coefficient system: the sheaf gluing is levelwise and its action maps commute with the quotient transitions. This is the same component description as the diagram-site equivalence. The general ringed-site derived tensor, tensor-pullback comparison and counit-defined projection map [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-projection-mate-exact] therefore apply on this diagram site. Open base change, the clopen identity/zero projection and the proper adjunctions give the maps $\\alpha,\\gamma$ there by the formulas in step 8. All their maps are $\\mathcal A_\\bullet$-linear: restriction and component projection preserve the scalar action. The transpose and pure-tensor calculations of steps 7--8 consequently hold as identities in this derived coefficient-system category. Evaluation identifies the maps with the normalized finite maps; [lem-coef-derived-system-evaluation-calculus] permits detecting their invertibility by evaluations, not detecting equality that way. The proper/open identity and pasting normalization before evaluation are also the formulas of [lem-cbc-strict-tower-proper-open-calculus] after restricting to constant $\\mathcal O_E$ coefficients; [lem-weil-pbc-constant-completion-equivalence] relates that constant realization to the completed coefficient realization, preserving the reduction and completion units. Thus the refinement and composition calculations of steps 9--10 are equations of derived systems before taking any limit.\n\nNow apply the actual functor $\\mathcal L_W$, computed by the total right derived strict inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The unit of $\\mathcal R_W\\dashv\\mathcal L_W$ is the quotient-tower completion unit; it is invertible on complete inputs by [lem-weil-pbc-constant-completion-equivalence]. Tensor and pullback are completed from these finite systems by [def-weil-derived-pullback-tensor-hom], and compact support is their total-limit construction [def-weil-integral-rational-qbar-compact-support]; direct image commutes with this total limit by [prop-weil-pbc-direct-image-limits]. Use the reduction and operation comparisons of [lem-fix-operation-reduction], which preserve the units, counits and associators, to identify their composites with the integral mate of step 1. This identification is induced on simultaneous derived system resolutions by these quotient, tensor and adjunction maps and the unit/counit of $\\mathcal R_W\\dashv\\mathcal L_W$; it is not an arbitrary lift from evaluated morphisms. It carries the system compositor and refinement maps to the completed forms of those maps, so functoriality of $\\mathcal L_W$ carries the already proved equations to the required integral equations. All intermediate outputs are constructible and complete by the preservation lemmas used in step 4; direct images of the proper factors are also integral constructible by [lem-sf-integral-direct-image-constructible]. Finally localization and the scalar comparisons preserving these maps in [lem-fix-operation-reduction] carry the same equations to $E$ and to common finite stages as in step 5. No faithfulness of reductions, of evaluation on derived systems, or of a Roos-triangle lift is asserted.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-fix-operation-reduction",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Integral coherence: simultaneous derived coefficient systems, then functorial total limit; explicit replacement for the conditional coherence invocation"
+   }
+  },
+  {
+   "text": "If $f$ is proper, choose the compactification with $j=\\operatorname{id}$ and $p=f$ in [def-weil-integral-rational-qbar-compact-support] and [def-exchange-projection]. By the defining proper-coincidence identification in [def-fix-six-functor-datum] (equivalently the finite compact-support definition), $Rf_!$ is $Rf_*$. The projection component is then exactly the direct-image projection mate for $p$. Its invertibility follows by applying the finite, integral-tower, and scalar-extension arguments of steps 2--5 to this proper morphism; no direct-image projection formula is asserted for a nonproper morphism.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-exchange-projection",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Proof, repaired concrete step 8"
+   }
+  },
+  {
+   "text": "Before the Weil restriction, compare the actual coefficient models. A finite affine cover of each finite-type $k$-scheme has finitely generated $k$-algebras as coordinate rings; [lem-wf-affine-noetherian-components] makes these rings Noetherian. Together with [lem-kun-dimension-finite-type], this verifies the Noetherian finite-dimensional hypotheses of [lem-weil-pbc-integral-stratified-perfect-characterization]. That theorem explicitly identifies the integral full subcategory used by [def-wf-weil-category] with [def-weil-derived-complete-integral-detailed], including compatible etale-origin witnesses, over the same completed ring sheaf and with the same reductions. Raw rationalization [def-weil-rationalization-karoubi] therefore gives the same rational category, and the common-stage convention in [def-wf-weil-category] uses these same finite fields. The operations needed here preserve these domains: integral pullback and completed tensor do so by [lem-pur-integral-operations-preserve-constructible], and the integral compact-support direct image does so by [lem-sf-integral-compact-support-constructible]; their field versions are obtained on representatives as in steps 1 and 5. There is also a canonical tensor identification, not just equality of object classes. For integral constructible $M,N$ on $W\\in\\{X,Y\\}$, put $B=\\widehat{\\mathcal O}_{E,W}$ and $T=M\\otimes^L_BN$. By [lem-fix-constructible-tensor-completion], its canonical map $\\chi:T\\to M\\widehat\\otimes^L N$ is an isomorphism. The target is integral constructible by the preservation theorem just cited, hence so is $T$. The category-identification theorem puts $T$ in the intrinsic complete category, so its Koszul completion map $\\eta_T:T\\to T^{\\wedge}_{\\mathrm{Kos}}$ is an isomorphism by [def-weil-pbc-intrinsic-completion]. Thus $\\eta_T\\chi^{-1}$ identifies the six-functor tensor with the tensor of [def-wf-tensor-product]. These maps are natural canonical completion maps of the same tensor complex. To check Frobenius compatibility, use the flat-term K-flat representatives and the coefficient transport specified in [def-wf-tensor-product]: that transport fixes $\\varpi_E$ and all its residue classes. It therefore commutes with the coefficient quotient maps defining $\\chi$ and with the two terms and transitions $[B\\xrightarrow{\\varpi_E^m}B]$ defining $\\eta$. Applying the product and mapping-fiber constructions gives the same commuting square for both completion maps. Thus the tensor identification intertwines the specified Frobenius tensor maps. Rationalizing and taking common finite stages gives the specified tensor identification at $E$ and $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-wf-weil-category",
+    "def-weil-rationalization-karoubi",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-fix-constructible-tensor-completion",
+    "def-weil-pbc-intrinsic-completion",
+    "def-wf-tensor-product",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Weil-equivariance sentence: explicit identification of coefficient categories and completed tensor models"
+   }
+  },
+  {
+   "text": "For the Weil assertion impose the finite-field model stated in the corrected statement, and let the inputs carry Weil structures. At $E$-coefficients choose integral representatives of the underlying objects only, to apply the preservation assertions of step 13; the Weil isomorphisms remain morphisms in the rational category. No integral lift of a Weil isomorphism is required. At $\\overline{\\mathbf Q}_\\ell$ choose a common finite coefficient field for the two Weil objects, as in [def-wf-weil-category]. The preceding step verifies that the pullback, tensor and compact-support functors have bounded constructible outputs in precisely these coefficient categories. Now [lem-fix-weil-operations] applies to $f_0$ and its geometric fiber $f$: these underlying operations carry their canonical Weil structures and the specified projection transformation is equivariant. Read the tensor Frobenius via [def-wf-tensor-product] and the canonical tensor identification of step 13. Thus, at that finite coefficient field, the underlying projection isomorphism is a morphism between the required Weil objects. The finite-field model is needed for this Weil assertion; the preceding non-Weil projection formula retains its separated finite-type hypotheses.",
+   "uses": [
     "lem-fix-weil-operations",
     "def-wf-tensor-product",
     "def-wf-weil-category"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
-    "place": "Proof, all seven sentences; expanded with intrinsic-origin, uniform integral Tor and inverse-equivariance arguments; finite-field hypothesis made explicit for the Weil clause"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Weil-equivariance sentence, after checking coefficient models and constructible domains"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.projectionMap",
-      "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.projectionMap'",
-      "date": "2026-10-16",
-      "verdict": "inconclusive query: unknown identifier; a second substring query was run"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Compactly supported derived pushforward satisfies the projection formula for constructible sheaves of finite Tor amplitude at torsion and adic coefficient stages",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_inv_app_val_app, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', SheafOfModules.pushforwardComp",
-      "date": "2026-10-16",
-      "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Projection formula for compactly supported derived direct image of constructible etale sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "projectionMap|projection.formula",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a separated morphism of finite type, proper support pushforward commutes with tensoring by a bounded constructible complex of finite Tor dimension, with coefficient change and Frobenius equivariance",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_comp",
-      "date": "2026-10-16",
-      "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"projection\"",
-      "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
-      "date": "2026-10-16",
-      "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerShriek|projection.formula|projectionMap",
-      "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2109,
-  "blueprint_uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-exchange-projection",
-    "def-fix-six-functor-datum",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties",
-    "def-wf-tensor-product",
-    "lem-fix-weil-operations",
-    "lem-weil-finite-compact-projection-formula",
-    "prop-sf-pf-coherence",
-    "prop-sf-pf-reduction",
-    "thm-sf-pf-adic",
-    "thm-sf-pf-field",
-    "thm-sf-pf-proetale",
-    "thm-sf-comp-composition"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-exchange-projection",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-rem-sf-pf-done",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "fix-prop-projection-formula",
-    "worker": "stage1",
-    "summary": "Expanded the imported assembly into ten steps using existing nodes only. Kept arbitrary bounded constructible K at finite coefficients, supplied actual etale-origin and Tor-transfer statements, supplied the reviewed residue lemma for integral K, respected finite-Tor reduction domains and completed/rationalized/common-stage coefficients, and spelled out inverse equivariance. STATEMENT-DISPUTED: the unqualified Weil restriction is false for f not descending to the finite field; corrected only that clause by the hypothesis of the cited Weil-operations lemma.",
-    "blueprint": "Proof sentences 1-2 are steps 2-3; sentence 3 is steps 4-5; sentence 4 is step 6; sentence 5 is steps 7-8; sentence 6 is steps 9-10. Step 1 fixes the common map for all of them. The final sentence (no purity or duality) is respected: residue Tor is a standalone coefficient lemma and no duality theorem is invoked.",
-    "tool_uses": [
-      {
-        "node": "lem-sf-proetale-constructible-origin",
-        "why": "Generic equivalence supplies the actual etale representatives for intrinsic bounded constructible pro-etale inputs; the assembly unit has no origin theorem."
-      },
-      {
-        "node": "lem-sf-comparison-tor-amplitude",
-        "why": "Generic transfer of the target input Tor interval to its etale representative; the finite projection lemma needs this hypothesis on that representative."
-      },
-      {
-        "node": "lem-coef-integral-residue-tor",
-        "why": "Standalone coefficient theorem supplies the missing uniform Tor hypothesis on integral K; its statement has no duality hypothesis, despite its filing unit."
-      },
-      {
-        "node": "lem-fix-operation-reduction",
-        "why": "Generic coefficient comparisons preserve the units, counits and tensor associativity constructing the actual projection map; no independent map-identification theorem in this assembly unit."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "lem-coef-integral-residue-tor",
-    "lem-fix-operation-reduction"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q20-dfb1670f4",
-    "group": "Q20",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-dfb1670f4 (reviewer sub-agent of L); spot-checked: Read the complete item, ten steps, unit/chapter route, all cited node statements, blueprint sources, and cited literature. Verified coefficient domains, projection-map construction, reductions, adic/field/pro-etale passage, coherence, proper case, and Weil equivariance. The non-rational-point counterexample validates the repaired finite-field descent hypothesis. No new nodes, duplicates, attachments, or unresolved faults; review written to review.md."
+  {
+   "text": "At the finite coefficient field just chosen, write $u:S\\to T$ for the projection component and $\\varphi_S,\\varphi_T$ for its Weil maps. Step 5 makes $u$ invertible there, and step 14 gives $u\\varphi_S=\\varphi_T\\Phi^*(u)$. Multiply on the left by $u^{-1}$ and on the right by $\\Phi^*(u^{-1})$ to obtain $\\varphi_S\\Phi^*(u^{-1})=u^{-1}\\varphi_T$. Thus the inverse is a commuting Weil morphism by [def-wf-weil-category], so $u$ is an isomorphism in the finite-stage Weil category. For algebraically closed coefficients take the class of this inverse at the common finite stage; the definition's composition rule makes its two composites the identity classes. This proves invertibility in the common-stage Weil category itself. The underlying naturality equations are equations of Weil morphisms, so they also prove the asserted naturality after this restriction.",
+   "uses": [
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Weil-equivariance sentence, inverse calculation at a common finite coefficient field"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-operation-reduction",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "sk-lem-pe-derived-nakayama",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-sf-refinement-comparison-isomorphism",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "thm-sf-comp-composition",
+  "lem-cbc-extension-zero-composition",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-wf-affine-noetherian-components",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-wf-weil-category",
+  "lem-fix-constructible-tensor-completion",
+  "def-weil-pbc-intrinsic-completion",
+  "def-wf-tensor-product",
+  "lem-fix-weil-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Finite formula, coefficient reduction, integral and field passage, proper/open mate calculations before limits, and Weil restriction; repaired conditional-framework gap"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.projectionMap",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.projectionMap'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive query: unknown identifier; a second substring query was run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived pushforward satisfies the projection formula for constructible sheaves of finite Tor amplitude at torsion and adic coefficient stages",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_inv_app_val_app, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', SheafOfModules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for compactly supported derived direct image of constructible etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|projection.formula",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated morphism of finite type, proper support pushforward commutes with tensoring by a bounded constructible complex of finite Tor dimension, with coefficient change and Frobenius equivariance",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|projection.formula|projectionMap",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state the compact-support projection formula at all coefficient stages or its coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support derived pushforward of constructible etale sheaves satisfies the projection formula with finite Tor coefficients and adic scalar extension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. These concern ordinary sheaves of modules, not the claimed derived compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", CategoryTheory.Adjunction",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|HasProjectionFormula|projection.formula|lowerShriek",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:146 is a comment about Ehresmann connections; Mathlib/RingTheory/WittVector/Identities.lean:20,98 concern Frobenius/Verschiebung. None concerns derived sheaf compact support.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for derived compactly supported direct image of constructible sheaves with finite Tor amplitude",
+   "results": "8 hits: TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.CostructuredArrow.grothendieckProj_map, CategoryTheory.ShortComplex.homologyπ, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.StructuredArrow.proj_map, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'. These are generic projections or projective-resolution maps.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type map f, Rf_! K tensor L is naturally isomorphic to Rf_! of K tensor f pullback L for constructible adic sheaves, compatibly with composition and Weil structures",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AdicCompletion.tensor_map_id_left_eq_map, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp. None states the compact-support theorem at the specified coefficient stages.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection isomorphism for a monoidal left adjoint and proper support derived pushforward on adic constructible sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, LightCondensed.ihomPoints_symm_comp, LightCondMod.LocallyConstant.adjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CondensedMod.LocallyConstant.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app. These concern ordinary module-sheaf adjunctions or condensed modules, not the all-stage constructible compact-support projection formula.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|HasProjectionFormula|lowerShriek|projection.formula",
+   "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; the two Witt-vector formulas are at lines 20 and 98 and the Ehresmann-connection comment is at line 146.",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state the constructible derived compact-support projection formula or its coefficient and Weil compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support projection formula on derived constructible sheaves with adic coefficients",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding, hasCompactSupport_def, HasCompactSupport.deriv, CompactlySupported.term_→C_c_, HasCompactMulSupport.comp_isClosedEmbedding, TestFunction.coe_ofSupportedIn, CompHausLike.LocallyConstant.counit_app_val, AlgebraicGeometry.Scheme.Hom.support_ker",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state the constructible derived compact-support projection formula or its coefficient and Weil compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", CategoryTheory.Functor",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state the constructible derived compact-support projection formula or its coefficient and Weil compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support pushforward projection formula for constructible adic complexes and Frobenius equivariance",
+   "results": "8 hits: BDeRhamPlus, BDeRham, localCohomology.diagram, localCohomology.ofDiagram, localCohomology, AdicCompletion.pi_apply_coe, localCohomology.ofSelfLERadical, instCommRingBDeRhamPlus",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state the constructible derived compact-support projection formula or its coefficient and Weil compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal adjunction projection morphism for derived sheaves and proper direct image with constructible adic coefficients",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. The returned types concern ordinary module-sheaf adjunctions, monoidal light condensed modules, or sheafification.",
+   "date": "2026-10-16",
+   "verdict": "no match: none states the all-stage constructible compact-support projection formula and its transformation and Weil compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact-support projection formula for constructible adic sheaves with finite Tor tensor factor, compatible with compactification refinements and composition",
+   "results": "8 hits: localCohomology.ofDiagram, localCohomology.diagram, AdicCompletion.tensor_map_id_left_eq_map, Condensed.profiniteSolid, localCohomology, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit. Read the returned signatures: ordinary module-sheaf direct images, local cohomology or adic completion of finite modules, or unrelated projection formulas; not the constructible compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", CategoryTheory.Adjunction",
+   "results": "0 hits: . Read the returned signatures: ordinary module-sheaf direct images, local cohomology or adic completion of finite modules, or unrelated projection formulas; not the constructible compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap|HasProjectionFormula|projection.formula|lowerShriek",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean. Read the returned signatures: ordinary module-sheaf direct images, local cohomology or adic completion of finite modules, or unrelated projection formulas; not the constructible compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compactly supported pushforward commutes with tensoring by a constructible finite Tor complex over adic coefficients",
+   "results": "8 hits: SheafOfModules.pushforward, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardComp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, SheafOfModules.instIsRightAdjointPushforward, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AlgebraicGeometry.Scheme.Modules.pushforwardComp. Read the returned signatures: ordinary module-sheaf direct images, local cohomology or adic completion of finite modules, or unrelated projection formulas; not the constructible compact-support theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2109,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-wf-tensor-product",
+  "lem-fix-weil-operations",
+  "lem-weil-finite-compact-projection-formula",
+  "prop-sf-pf-coherence",
+  "prop-sf-pf-reduction",
+  "thm-sf-pf-adic",
+  "thm-sf-pf-field",
+  "thm-sf-pf-proetale",
+  "thm-sf-comp-composition"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-exchange-projection",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fix-prop-projection-formula",
+  "worker": "stage1",
+  "summary": "Repaired both returned C4/E1 findings on the original domain: concrete coefficient comparisons reduce the actual integral projection mate, derived Nakayama detects invertibility, and normalized proper/open tensor/mate calculations prove refinement and composition identities for arbitrary finite-level K. Integral coherence is proved on simultaneous derived coefficient systems before applying the functorial total limit, then localized. No axiomatized-datum theorem is used; no separatedness of the schemes or finite Tor condition on finite-level K is added. No new nodes.",
+  "blueprint": "Current main-20261015 proof route: steps 1-2 finite projection and witnesses; 3 reduction square; 4 actual integral map and Nakayama; 5 field passage; 6 pro-etale realization; 7-10 explicit finite coherence; 11 coherent integral and field passage; 12 proper coincidence; 13-15 Weil coefficient models, equivariance and inverse.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Its derived etale-origin equivalence supplies representatives for intrinsic bounded constructible pro-etale inputs; this assembly unit has no replacement theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Its converse transfers the target finite-Tor interval to the etale representative required by the finite projection theorem."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "It identifies coefficient comparisons with the tensor associativity, units and counits that define the actual projection map."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "It supplies the uniform finite-level Tor bound for integral K, which the adic reconstruction theorem requires."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Verifies bounded constructibility of integral pullback and completed tensor before applying the conditional Weil-operations lemma. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Verifies bounded constructibility of the integral compact-support output needed for the Weil restriction. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "It ensures the cone of the integral projection map remains in the derived-complete constructible category before applying derived Nakayama."
+   },
+   {
+    "node": "sk-lem-pe-derived-nakayama",
+    "why": "It detects an isomorphism of derived-complete complexes from an isomorphism after first reduction, needed for the reconstructed projection map."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "def-sf-refinement-comparison-isomorphism",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "It supplies the concrete refinement comparison cocycle used in the mate calculation of compactification independence."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Applied to the coordinate rings of a finite affine cover to verify the Noetherian hypothesis of the coefficient-category comparison. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Verifies the finite-dimensional hypothesis of the coefficient-category comparison for finite-type schemes over k. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the integral full categories, completed coefficient sheaf, reductions and compatible etale-origin witnesses used by the six-functor and Weil conventions. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "def-wf-weil-category",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Concrete generic input for the explicit coefficient-system, proper/open or mate calculation; the assembly unit contains no replacement statement."
+   },
+   {
+    "node": "def-weil-pbc-intrinsic-completion",
+    "why": "Specifies the Koszul completion map and defines completeness by its invertibility, needed to identify the two tensor models. No node of the assembly unit supplies this generic input."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Provides ordinary pullback/direct-image adjunctions on actual varying-coefficient systems, with finite-evaluation units and counits, on arbitrary small topoi; no separated-scheme restriction."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Supplies the finite-Tor pullback domain needed before tensor and compact-support coefficient change; no extra condition on finite-level K."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Supplies bounded constructibility for finite K and finite-Tor L, and the sum Tor interval when both factors have finite Tor, before coefficient change and witnessed comparisons."
+   }
+  ],
+  "route_error": "The unit sk-rem-sf-pf-done claims the conditional theorems in def-sf-datum discharge this concrete interface. This inference is invalid: A3 already assumes projection invertibility and A5 coefficient compatibility. Moreover its finite-Tor domain excludes K=A/(varpi) over A=O_E/(varpi^2), although the present item includes it. Steps 3-12 keep the unit finite/reduction/adic/field/pro-etale/coherence route, replacing this circular inference by concrete reductions and normalized mate calculations."
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-coef-integral-residue-tor",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "sk-lem-pe-derived-nakayama",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-sf-refinement-comparison-isomorphism",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-composition",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-wf-affine-noetherian-components",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-wf-weil-category",
+  "lem-fix-constructible-tensor-completion",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-f13b29dc5",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-f13b29dc5 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, all cited node statements, blueprint sources, and cited literature. Verified the fifteen proof steps, hypotheses, coefficient categories, base-change and mate calculations, finite/integral/rational/pro-etale transitions, coherence, proper case, Weil restriction, edge cases, and route-lock compliance. No new nodes, duplicates, circularity, or unresolved mathematical faults."
+ }
 }
