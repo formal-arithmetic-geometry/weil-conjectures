@@ -1760,6 +1760,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationField
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianWeaklyEtale
 public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
