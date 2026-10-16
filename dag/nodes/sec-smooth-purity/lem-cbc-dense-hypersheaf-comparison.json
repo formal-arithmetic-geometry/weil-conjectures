@@ -25,9 +25,176 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J,K$ for the two topologies and $p_!S$ for the image-generated sieve. Cover preservation gives $S\\in J\\Rightarrow p_!S\\in K$. For the converse suppose $p_!S$ covers $p(C)$. Apply the cover-refinement hypothesis to the family of all its arrows to obtain a covering $\\{t_i:C_i\\to C\\}$ with $p(t_i)=p(s_i)b_i$, where $s_i:A_i\\to C$ belongs to $S$ and $b_i:p(C_i)\\to p(A_i)$. Locally lift each $b_i$: on a covering $v_{ij}:C_{ij}\\to C_i$ there are $c_{ij}:C_{ij}\\to A_i$ with $p(c_{ij})=b_i p(v_{ij})$. The arrows $t_i v_{ij}$ and $s_i c_{ij}$ then have equal images. Local faithfulness supplies a further covering on which they are equal. Those composite covering arrows belong to $S$, so transitivity makes $S$ covering. Local fullness and local faithfulness also make the sieves $L_b,E_{f,g}$ in [lem-cbc-local-dense-ordinary-sheaves] cover on $\\mathcal C$; cover preservation makes their image sieves cover on $\\mathcal D$. Cover density is precisely the remaining hypothesis of that node. Thus all its sieve conditions hold without any fibre product.",
+   "uses": [
+    "lem-cbc-local-dense-ordinary-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0, lemma-equivalence, ordinary comparison prototype. Agent-written enhanced proof through existing bounded-below hypersheaf realization and generic derived presheaf Kan extension; no enhanced assertion is attributed to this Stacks tag."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-local-dense-ordinary-sheaves] with $\\mathcal A=\\operatorname{Mod}_{\\Lambda}$. This category has all small limits, so the required comma limits exist. Denote its restriction equivalence by $L$ and its right adjoint by $T$; the underlying presheaf of $TN$ is $\\operatorname{Ran}_{p^{\\mathrm{op}}}N$. Sheaves of fixed-$\\Lambda$ modules are modules over the constant sheaf of rings $\\underline\\Lambda$ [def-weil-pbc-constant-sheaf]. To check this identification, for an abelian sheaf $N$ form the ring presheaf $\\mathcal E_N(C)=\\operatorname{End}(N|_{\\mathcal C/C})$, with addition and composition and restriction by further localization. It is a sheaf: endomorphisms agreeing on a covering sieve act compatibly on the restrictions of each section over each object of the slice; the sheaf axiom glues their images uniquely, and uniqueness verifies naturality and additivity. A fixed-$\\Lambda$ action is a ring map from the constant presheaf $\\Lambda$ to $\\mathcal E_N$. By the sheafification universal property in rings it extends uniquely to $\\underline\\Lambda\\to\\mathcal E_N$, giving the required module-sheaf action by evaluation. Restricting this action to the constant presheaf is inverse; for a fixed-$\\Lambda$-linear map $\\phi:N\\to N'$, use the ring subsheaf of $\\mathcal E_N\\times\\mathcal E_{N'}$ consisting of pairs $(s,t)$ with $\\phi s=t\\phi$ on the slice. The constant scalar map lands in this subsheaf; its unique extension has the already constructed actions as projections, so $\\phi$ is $\\underline\\Lambda$-linear. Thus the objects and morphisms of the two module-sheaf categories are identified. Hence these are exactly the module-sheaf categories in [lem-cbc-bounded-below-hypersheaf-model]. The functor $L$ is additive since maps add sectionwise; $T$ is additive by its limit formula. By [lem-weil-pbc-equivalence-injective-resolutions], they are exact, preserve injectives, and preserve kernels and cokernels. In particular $H^i(LM)=L\\mathcal H^i(M)$ and $\\mathcal H^i(TM)=T\\mathcal H^i(M)$ for termwise application to complexes.",
+   "uses": [
+    "lem-cbc-local-dense-ordinary-sheaves",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0, lemma-equivalence, ordinary comparison prototype. Agent-written enhanced proof through existing bounded-below hypersheaf realization and generic derived presheaf Kan extension; no enhanced assertion is attributed to this Stacks tag."
+   }
+  },
+  {
+   "text": "Apply $L,T$ termwise to complexes. The ordinary unit $\\mathrm{id}\\to TL$ and counit $LT\\to\\mathrm{id}$ are then chain isomorphisms; their naturality for differentials is exactly the chain-map equation. Exactness from step 2 makes both functors preserve acyclic complexes and quasi-isomorphisms. For a complex $A$ and a complex $I$, the additive adjunction identifies the product Hom complexes, with differential $dh=d_Ih-(-1)^{|h|}h d_A$, so the adjunction is dg. Its two composite isomorphisms and triangle equations are also dg. The enriched localization universal property [lem-coef-enhanced-localization-universal] therefore gives mutually inverse enhanced derived functors $\\mathbf L,\\mathbf T$ and the localized coherent unit and counit. The cohomology calculation of step 2 shows that this equivalence restricts to cohomology sheaves zero below the specified $a$.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0, lemma-equivalence, ordinary comparison prototype. Agent-written enhanced proof through existing bounded-below hypersheaf realization and generic derived presheaf Kan extension; no enhanced assertion is attributed to this Stacks tag."
+   }
+  },
+  {
+   "text": "Let $Q_{\\mathcal C},Q_{\\mathcal D}$ denote the derived-section equivalences of the current [lem-cbc-bounded-below-hypersheaf-model]. Its coherent-presheaf definition, derived mapping complexes and arbitrary covering-sieve sites are the ones in our statement, and its fixed bound $a$ is the same integer on both sites. The fixed-ring/constant-ring-sheaf identification of step 2 checks its module-category hypothesis. For a bounded-below derived sheaf object $M$ on $\\mathcal D$, take a K-injective resolution $M\\to I$ with injective terms by [prop-pur-kinjective-resolutions-exist]. The exact equivalence $L$ preserves K-injectivity: if $A$ is acyclic on $\\mathcal C$, full faithfulness of the termwise dg equivalence $T$, followed by the inverse of $I\\to TLI$, gives $\\operatorname{Hom}^{\\bullet}(A,LI)\\cong\\operatorname{Hom}^{\\bullet}(TA,TLI)\\cong\\operatorname{Hom}^{\\bullet}(TA,I)$, and $TA$ is acyclic. Thus $R\\Gamma(C,LM)$ is represented by $(LI)(C)=I(p(C))$, which also represents $R\\Gamma(p(C),M)$. The equality is natural in $C$, in chain maps, and in the full Hom complexes, since both evaluation maps act componentwise. Consequently $Q_{\\mathcal C}\\mathbf L\\simeq p^*Q_{\\mathcal D}$ as enhanced functors. The two $Q$'s and $\\mathbf L$ are equivalences, so this proves that precomposition lands in hypersheaves and is an equivalence on the subcategories with bound $a$; its abstract quasi-inverse is $Q_{\\mathcal D}\\mathbf TQ_{\\mathcal C}^{-1}$.",
+   "uses": [
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0, lemma-equivalence, ordinary comparison prototype. Agent-written enhanced proof through existing bounded-below hypersheaf realization and generic derived presheaf Kan extension; no enhanced assertion is attributed to this Stacks tag."
+   }
+  },
+  {
+   "text": "We need a concrete model for coherent presheaves, before taking any comma limit. On the one-object category with only its identity and the topology in which just the maximal sieve covers, a sheaf of modules over the constant ring $\\Lambda$ is simply a $\\Lambda$-module. Apply [lem-coef-sheaf-flat-model] to this small ringed site to obtain a stable combinatorial dg model for $\\operatorname{Ch}(\\Lambda)$ with quasi-isomorphisms as weak equivalences. Apply [lem-coef-quillen-section-rectification] to the constant diagram with this value and identity Quillen transition functors, indexed by $\\mathcal E^{\\mathrm{op}}$ for any small category $\\mathcal E$. Strict sections are exactly complexes of module presheaves on $\\mathcal E$, and objectwise weak equivalences are their quasi-isomorphisms, since kernels, images and cohomology of presheaves are computed objectwise [lem-weil-pbc-site-module-presheaf-sheafification-exact], applied with the maximal-sieve topology. Thus their enhanced localization presents $\\operatorname{Fun}(N(\\mathcal E)^{\\mathrm{op}},\\mathbf D(\\Lambda))$, including derived mapping complexes. This presentation identifies the localized restriction functor with coherent precomposition: on a strict diagram it restricts its objects, arrows and their strict composition diagrams, and the displayed coherent-end formula in the rectification statement restricts by selecting strings in the smaller index category. The localization universal property [lem-coef-enhanced-localization-universal] then identifies these functors and their specified comparisons after inversion.",
+   "uses": [
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-quillen-section-rectification",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Constant-diagram case of the existing Quillen-section rectification and trivial one-object site case of the existing flat model; agent-written application for the dense-site comparison"
+   }
+  },
+  {
+   "text": "Here is the mapping-complex calculation needed for that model. For an abelian category $\\mathcal A$ of modules or module presheaves, a complex $A$ and a K-injective $J$, the canonical map from $\\operatorname{Hom}^{\\bullet}(A,J)$ to the derived mapping complex is a quasi-isomorphism. Indeed its degree-$n$ cohomology map is exactly\n$$\\operatorname{Hom}_{K(\\mathcal A)}(A,J[n])\\longrightarrow\\operatorname{Hom}_{D(\\mathcal A)}(QA,Q(J[n])).$$\nThe identification on the left sends a degree-$n$ cocycle to the chain map into $J[n]$; boundaries are precisely the null-homotopic maps, by the Hom differential $dh=d_Jh-(-1)^n h d_A$. For the identification on the right, use the stable dg enhancement of step 5: its mapping complex into $J[n]$ is its mapping complex into $J$ shifted by $n$, and $H^0$ is Hom in its homotopy category. That homotopy category is the ordinary localization $D(\\mathcal A)$ [def-weil-abstract-derived-category], since both localizations invert the same quasi-isomorphisms. Thus this uses the stable presentation, not an enhanced assertion in the ordinary derived-category definition. The shift $J[n]$ is K-injective, because shifting $\\operatorname{Hom}^{\\bullet}(B,J)$ preserves acyclicity for acyclic $B$. Therefore every displayed map is bijective by [lem-weil-pbc-kinjective-hom-derived]. This proves the quasi-isomorphism in every degree, rather than promoting only a degree-zero bijection to an enhanced assertion. The comparison is the canonical map supplied by localization, so it is natural as a dg bifunctor and respects composition. Quasi-isomorphisms between K-injectives are homotopy equivalences by [lem-weil-pbc-kinjective-hom-derived], hence induce homotopy equivalences on Hom complexes; source quasi-isomorphisms are also inverted by the just-proved comparison. The opposite and multivariable clauses of [lem-coef-enhanced-localization-universal] consequently retain this comparison and its composition diagrams on the localized domains, including coherent transformations.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective: apply (1) implies (3) to every shifted target; explicit extension from all cohomology groups to the canonical derived mapping-complex comparison"
+   }
+  },
+  {
+   "text": "Let $F\\simeq Q_{\\mathcal C}N$ be a hypersheaf with the specified bound. Choose a K-injective resolution $N\\to J$ with injective terms by [prop-pur-kinjective-resolutions-exist]. Write $i$ for inclusion of module sheaves into presheaves. By [lem-weil-pbc-site-module-presheaf-sheafification-exact], its left adjoint $\\#$ is exact. The degreewise adjunction is an isomorphism of Hom complexes: its naturality with respect to the two differentials gives\n$$\\operatorname{Hom}^{\\bullet}(A,iJ)\\cong\\operatorname{Hom}^{\\bullet}(\\#A,J).$$\nFor acyclic $A$, $\\#A$ is acyclic, so $iJ$ is K-injective as a presheaf complex. The derived-section model [lem-cbc-bounded-below-hypersheaf-model] says that its coherent value presheaf represents $F$: at $C$ its value is $J(C)$ computing $R\\Gamma(C,N)$. For an acyclic sheaf complex $B$ on $\\mathcal D$, the dg adjunction gives $\\operatorname{Hom}^{\\bullet}(B,TJ)\\cong\\operatorname{Hom}^{\\bullet}(LB,J)$, which is acyclic because $L$ is exact. Thus $TJ$ is K-injective; it has injective terms by step 2. For an acyclic presheaf complex $A$ on $\\mathcal D$, $\\operatorname{Hom}^{\\bullet}(A,iTJ)\\cong\\operatorname{Hom}^{\\bullet}(\\#A,TJ)$ is acyclic because $\\#$ is exact. Consequently $i(TJ)$ is K-injective as a presheaf complex and represents $Q_{\\mathcal D}\\mathbf T N$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-cbc-bounded-below-hypersheaf-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent-written enriched derived Kan calculation; ordinary prototypes Stacks Tag 070I, lemma-K-injective, and Tag 03A0, lemma-equivalence"
+   }
+  },
+  {
+   "text": "Construct the ordinary presheaf right Kan extension $R^0_p$. For a complex $V$ of presheaves on $\\mathcal C$, its degree-$r$ value at $D$ is the submodule of $\\prod_{(C,f:p(C)\\to D)}V^r(C)$ consisting of families $(x_{C,f})$ satisfying $V(h)x_{C,f}=x_{C',f p(h)}$ for each $h:C'\\to C$. Differential is coordinatewise, and restriction along $b:D'\\to D$ selects the coordinates $(C,bf')$ for $f':p(C)\\to D'$. This constructs the small comma limit, including the empty case, without any final-object assertion. A map $\\alpha:p^*G\\to V$ gives $G\\to R^0_p V$ by $g\\mapsto(\\alpha_C(G(f)g))_{C,f}$; the inverse sends $\\beta:G\\to R^0_p V$ to its coordinate $(C,\\mathrm{id}_{p(C)})$ after evaluating at $p(C)$. The compatibility equations show these formulas are inverse. Applying them in every Hom degree gives the dg adjunction\n$$\\operatorname{Hom}^{\\bullet}(G,R^0_p V)\\cong\\operatorname{Hom}^{\\bullet}(p^*G,V);$$\nthe Hom differential commutes because the two formulas are natural in both complexes. Since $p^*$ is exact objectwise, this adjunction shows that $R^0_p V$ is K-injective whenever $V$ is: for acyclic $A$, its Hom complex is $\\operatorname{Hom}^{\\bullet}(p^*A,V)$, which is acyclic. By step 6, for K-injective $V$ this actual dg adjunction is therefore an equivalence of the derived mapping complexes. For $V=iJ$, the ordinary comparison theorem [lem-cbc-local-dense-ordinary-sheaves] identifies $R^0_p(iJ)=i(TJ)$ termwise, so it already represents the abstract inverse found in step 4.",
+   "uses": [
+    "lem-cbc-local-dense-ordinary-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0 ordinary right Kan limit formula; explicit compatible-family adjunction. No use of the incorrect final-object sentence in its proof"
+   }
+  },
+  {
+   "text": "To prove that this ordinary limit on the chosen representative is the required homotopy limit, fix $D$ and put $E=(p\\downarrow D)^{\\mathrm{op}}$, with $q:E\\to\\mathcal C^{\\mathrm{op}}$ the projection. Regard a module diagram $V$ on $E$ as a presheaf on $E^{\\mathrm{op}}$. Presheaf diagram categories are abelian with objectwise cohomology by [lem-weil-pbc-site-module-presheaf-sheafification-exact], applied with maximal-sieve topologies on $\\mathcal C$ and $E^{\\mathrm{op}}$. The restriction $q^*$ has an exact left adjoint $q_!$ given explicitly by\n$$(q_!V)(C)=\\bigoplus_{f:p(C)\\to D}V(C,f).$$\nFor $h:C'\\to C$ each summand indexed by $f$ maps to the summand indexed by $fp(h)$ using the corresponding arrow $(C,f)\\to(C',fp(h))$ of $E$. A map from these direct sums to a presheaf $A$ is exactly a compatible family of maps $V(C,f)\\to A(C)$, proving $q_!\\dashv q^*$, also on Hom complexes. Exactness is objectwise: kernels are componentwise in a direct sum, and a finite-support vector in the target of a surjection lifts by lifting its finitely many nonzero coordinates; hence direct sums preserve short exact sequences. Thus for acyclic $B$, $q_!B$ is acyclic, and\n$$\\operatorname{Hom}^{\\bullet}(B,q^*iJ)\\cong\\operatorname{Hom}^{\\bullet}(q_!B,iJ)$$\nis acyclic. In degree zero this says that every map from an acyclic complex to $q^*iJ$ is null-homotopic, which is the K-injective condition in [lem-weil-pbc-kinjective-hom-derived]. Thus $q^*iJ$ is K-injective in the comma diagram category. The argument uses the actual source arrows in the comma category, not local fullness or a purported final object.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent explicit direct-sum left adjoint for the comma projection and its exactness; ordinary comma indexing from Tag 03A0"
+   }
+  },
+  {
+   "text": "For any small $E$, the constant-diagram functor $\\Delta:\\operatorname{Ch}(\\Lambda)\\to\\operatorname{Ch}(\\operatorname{Fun}(E,\\operatorname{Mod}_{\\Lambda}))$ is exact. Its right adjoint is the limit, constructed as the compatible-family subcomplex of the product. Explicitly, a degree-$r$ map $B\\to\\lim_E V$ is a family of degree-$r$ maps $b_e:B\\to V(e)$ such that $V(\\alpha)b_e=b_{e'}$ for each $\\alpha:e\\to e'$. These are exactly the degree-$r$ maps $\\Delta B\\to V$. Projection and tuple formation are inverse and commute with $dh=d_Vh-(-1)^r h d_B$, proving the dg adjunction. Thus $\\lim_E q^*iJ$ is a K-injective $\\Lambda$-complex: Hom from an acyclic $B$ is $\\operatorname{Hom}^{\\bullet}(\\Delta B,q^*iJ)$, acyclic by step 9. Step 6 on both sides of this dg adjunction gives, naturally in every $B\\in\\mathbf D(\\Lambda)$,\n$$R\\operatorname{Hom}_{\\Lambda}(B,\\lim_E q^*iJ)\\simeq R\\operatorname{Hom}_{\\operatorname{Fun}(N(E),\\mathbf D(\\Lambda))}(\\Delta B,q^*F).$$\nHere step 5 supplies the coherent-diagram identification for the small category $E^{\\mathrm{op}}$. This equivalence is induced by the actual projection cone from the constructed limit. Passing to underlying mapping spaces and applying the cone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that this cone is limiting. Hence\n$$(iTJ)(D)=(R^0_piJ)(D)=\\lim_E q^*iJ\\simeq\\operatorname{holim}_{(p(C)\\to D)^{\\mathrm{op}}}F(C).$$\nThe cone projections, their dg adjunction, and the canonical mapping comparisons in step 6 are natural in $D$ and in maps of representatives. Their localization is therefore an enhanced natural comparison [lem-coef-enhanced-localization-universal], not unrelated objectwise choices. This proves the homotopy right Kan formula and its hypersheaf property, since $iTJ$ already represents $Q_{\\mathcal D}\\mathbf TN$ by step 7.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent proof of the homotopy-limit universal property via the exact constant-diagram adjunction, the all-degree K-injective mapping comparison of Tag 070I, and the existing coherent cone criterion"
+   }
+  },
+  {
+   "text": "The unit and counit on these representatives are the maps constructed in step 8. In particular the counit $p^*R_pF\\to F$ is evaluation at $(C,\\mathrm{id}_{p(C)})$, whereas the unit $G\\to R_pp^*G$ has cone maps $G(D)\\to G(p(C))$ induced by $p(C)\\to D$. For the first triangle, $g\\in G(p(C))$ is sent by the unit to the family $(G(f)g)_{A,f:p(A)\\to p(C)}$, and evaluation at $(C,\\mathrm{id})$ returns $g$. For the second triangle, a compatible family $(x_{C,f})$ is first sent at $(A,b:p(A)\\to D)$ to the restricted family $(x_{C,bf})$ and the right Kan extension of the counit then selects $x_{A,b}$. Thus both triangle composites are identities before localization. Under steps 4 and 7--10 these are the localized unit and counit of the exact sheaf equivalence $L\\dashv T$, hence both are equivalences. Their naturality and triangle diagrams localize with all their coherences by [lem-coef-enhanced-localization-universal]. On derived mapping complexes the inverse of restriction sends $h:p^*G\\to p^*H$ to $\\eta_H^{-1}R_p(h)\\eta_G$. Unit naturality gives $\\eta_H^{-1}R_p(p^*f)\\eta_G=f$. For an arbitrary $h$, the triangles identify $(p^*\\eta_H)^{-1}$ and $(p^*\\eta_G)^{-1}$ with the corresponding counits; counit naturality then gives $p^*(\\eta_H^{-1}R_p(h)\\eta_G)=\\epsilon_{p^*H}p^*R_p(h)\\epsilon_{p^*G}^{-1}=h$. In a composite the adjacent factors $\\eta_H\\eta_H^{-1}$ cancel, and identities remain identities, proving compatibility with composition on the full mapping complexes. This also follows from the explicit derived Hom-complex adjunction of step 8; no conclusion about derived ends is taken just from ordinary local fullness.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent-written enriched derived Kan calculation; ordinary prototypes Stacks Tag 070I, lemma-K-injective, and Tag 03A0, lemma-equivalence"
+   }
+  },
+  {
+   "text": "Restriction preserves the pointwise bound by evaluation. Its inverse preserves it by steps 7--10: under the bounded-below hypersheaf model it is the exact sheaf equivalence $\\mathbf T$, whose cohomology sheaves remain zero below $a$, and the stated equivalence $\\mathbf D_{\\ge a}\\simeq\\operatorname{Hyp}_{\\ge a}$ then gives pointwise vanishing. This uses the model's explicit subcategory with the fixed bound, rather than any assertion that ordinary evaluation of sheaves is exact. For naturality, take a commutative square $p:\\mathcal C\\to\\mathcal D$, $p':\\mathcal C'\\to\\mathcal D'$, $u:\\mathcal C'\\to\\mathcal C$, $v:\\mathcal D'\\to\\mathcal D$ of the site functors in the statement, so $pu=vp'$. Precomposition gives $u^*p^*=p'^*v^*$ on coherent presheaves and hence on hypersheaves by step 4 applied to these functors. Its inverse-functor comparison is the composite $v^*R_p\\xrightarrow{\\eta^{p'}}R_{p'}p'^*v^*R_p=R_{p'}u^*p^*R_p\\xrightarrow{R_{p'}u^*\\epsilon^p}R_{p'}u^*$. Both arrows are equivalences, by step 11. Write this comparison as $\\theta_{u,v}$. Its defining mate equation is $\\epsilon^{p'}_{u^*F}\\,p'^*(\\theta_{u,v,F})=u^*(\\epsilon^p_F)$; substituting the displayed definition proves it by naturality of $\\epsilon^{p'}$ and the triangle identity $\\epsilon^{p'}p'^*\\eta^{p'}=\\mathrm{id}$. For an identity square the comparison is $R_p\\epsilon^p\\circ\\eta^pR_p=\\mathrm{id}$. For a second square $(u',v')$ from $p'\\!:\\mathcal C'\\to\\mathcal D'$ to $p''\\!:\\mathcal C''\\to\\mathcal D''$, the pasted comparison is $\\theta_{u',v'}u^*\\circ v'^*\\theta_{u,v}$. Apply $p''^*$ and then $\\epsilon^{p''}$: the two mate equations reduce its value to $u'^*u^*\\epsilon^p$, which is the mate equation for the composite square. Since $p''^*$ is an enhanced equivalence by step 4, it is fully faithful on these transformation mapping spaces, so this identifies the pasted comparison with the one for the composite square, including its specified homotopy. For three or more squares every parenthesization has this same mate equation; the equivalence on mapping spaces makes the space of lifts with that fixed image contractible. This supplies all associativity and higher compatibility homotopies. The localization theorem [lem-coef-enhanced-localization-universal] retains these specified diagrams. This argument uses the square of restriction equivalences; it does not assert arbitrary comma-category base change for Kan extensions.",
+   "uses": [
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A0, lemma-equivalence, ordinary comparison prototype. Agent-written enhanced proof through existing bounded-below hypersheaf realization and generic derived presheaf Kan extension; no enhanced assertion is attributed to this Stacks tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-bounded-below-hypersheaf-model",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-local-dense-ordinary-sheaves",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-quillen-section-rectification",
+  "lem-coef-sheaf-flat-model",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Ordinary comparison: sites.tex Tag 03A0, independently matched to Mathlib; all-degree K-injective mapping comparison: derived.tex Tag 070I. Agent explicit exact comma-projection/constant adjoints prove the enhanced Kan formula, using existing enriched localization, rectification and cone-calculus nodes; no SGA source used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,9 +213,9 @@
   {
    "tool": "grep",
    "query": "IsDenseSubsite|denseSubsite|hypersheaf|hypercomplete",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"574\", \"text\": \"  haveI := U.instIsDenseSubsiteSubtypeMemOverGrothendieckTopologyOverInverseOverEquivalence\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"81\", \"text\": \"instance : Functor.IsDenseSubsite (topology S) S.smallEtaleTopology (AffineEtale.Spec S) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"113\", \"text\": \"  Functor.IsDenseSubsite.hasSheafify_of_isEquivalence\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"126\", \"text\": \"    (Functor.IsDenseSubsite.coverPreserving (AffineEtale.topology S) _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.OneHypercoverDense\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"129\", \"text\": \"instance : (toOpensFunctor X).IsDenseSubsite\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"133\", \"text\": \"  [G.IsDenseSubsite J K] {T : C} (hT : IsTerminal T) (hT' : IsTerminal (G.obj T))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"135\", \"text\": \"open IsDenseSubsite\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"line\": \"66\", \"text\": \"instance : e.functor.IsDenseSubsite J (e.inverse.inducedTopology J) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"line\": \"74\", \"text\": \"lemma eq_inducedTopology_of_isDenseSubsite [e.inverse.IsDenseSubsite K J] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"line\": \"81\", \"text\": \"lemma isDenseSubsite_functor_of_isCocontinuous\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"line\": \"83\", \"text\": \"    e.functor.IsDenseSubsite J K where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"578\", \"text\": \"    f.iteratedSliceEquiv.inverse.IsDenseSubsite (J.over _) ((J.over _).over _) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"96\", \"text\": \"    F.IsDenseSubsite (coherentTopology C) (coherentTopology D) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"101\", \"text\": \"  IsDenseSubsite.coverPreserving _ _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"120\", \"text\": \"  Functor.IsDenseSubsite.sheafEquiv _ _ F _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"144\", \"text\": \"  Functor.IsDenseSubsite.sheafEquiv _ _ F _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\", \"line\": \"41\", \"text\": \"    e.inverse.IsDenseSubsite (coherentTopology D) (coherentTopology C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\", \"line\": \"88\", \"text\": \"    e.inverse.IsDenseSubsite (regularTopology D) (regularTopology C) where\"}",
+   "results": "{\"t\": \"2026-10-16T13:49:20Z\", \"tool\": \"grep\", \"query\": \"IsDenseSubsite|denseSubsite|hypersheaf|hypercomplete\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the IsDenseSubsite comparison theorems concern ordinary category-valued sheaves. Read DenseSubsite/SheafEquiv.lean:12-36,74-109 and DenseSubsite/InducedTopology.lean:12-29. They do not identify derived mapping complexes or hypercomplete coherent presheaves."
+   "verdict": "unusable source coverage: actual output was zero hits because the subdirectory Mathlib/ was appended twice. Superseded by the second reader whole-Mathlib hypersheaf grep and correct scoped DenseSubsite grep; no positive hits are attributed to this failed-path search."
   },
   {
    "tool": "leansearch",
@@ -70,10 +237,24 @@
    "results": "[leanfinder] OK 8 hit(s)\n  CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\n  CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\n  CategoryTheory.Functor.IsCoverDense.compatiblePreserving\n  CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\n  CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\n  CategoryTheory.Functor.IsCoverDense.sheafIso\n  CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse\n  CategoryTheory.Equivalence.sheafCongr.functor",
    "date": "2026-10-16",
    "verdict": "no match: DenseSubsite/SheafEquiv.lean:30-115 uses ordinary Cat-valued sheaves and ordinary right Kan extensions; its IsEquivalence does not state the hypercomplete enhanced or mapping-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hypersheaf|hypercomplete|hyperdescent",
+   "results": "{\"t\": \"2026-10-16T14:26:48Z\", \"tool\": \"grep\", \"query\": \"hypersheaf|hypercomplete|hyperdescent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits in the complete pinned Mathlib source. Ordinary dense-site comparison was separately found and reused as a Mathlib leaf, not as the enhanced item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a locally fully faithful cover dense functor of Grothendieck sites is an equivalence on bounded below hypercomplete derived module presheaves, with inverse homotopy right Kan extension",
+   "results": "{\"t\": \"2026-10-16T15:13:49Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a locally fully faithful cover dense functor of Grothendieck sites is an equivalence on bounded below hypercomplete derived module presheaves, with inverse homotopy right Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse\", \"CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous\", \"CategoryTheory.Equivalence.sheafCongr.functor\", \"CategoryTheory.Equivalence.sheafCongr\"], \"digest\": \"178bb060bb5be0c0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: successful search; dense-site hits concern ordinary category-valued sheaves, whose pinned statements were read. No enhanced hypercomplete or derived-mapping-complex theorem is supplied."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-zariski-enhanced-derived-descent",
   "by": "worker",
@@ -89,5 +270,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-dense-hypersheaf-comparison",
+  "worker": "stage1",
+  "summary": "B1 repair: removed the unsupported statement-only derived Kan auxiliary node. Its argument is now carried by item steps 5--11: a constant Quillen-section presentation, all-degree K-injective Hom comparison, explicit compatible-family right adjunction, exact direct-sum left adjoint to the comma projection, and constant-diagram adjunction proving the homotopy-limit universal property. Retained ordinary module sheaf equivalence, correctly oriented unit/counit, lower bound and coherent square naturality. Only the ordinary comparison Mathlib leaf is new. Independent second reading corrected source lines, recorded fresh searches, expanded the dual K-injective and constant-diagram arguments, wrote coordinate triangle and mate-pasting calculations, and removed elementary flags from the substantial Kan steps. The current second reader expands the fixed-ring/constant-ring-sheaf action identification using the explicitly constructed endomorphism sheaf and cites the constant-sheaf definition. Landing-return repair of 2026-10-17: revalidated the current bounded-below model statement (the only statement delta is its explicit coherent-presheaf definition reference), checked all 28 step/node citations against current DAG statements, replaced its four stale whole-statement quotes with precise current clauses, and made the fixed-site, coefficient-category and uniform-bound hypotheses explicit in steps 4 and 12. The delivery wrapper rebases this retained split onto current main; no cited node is overwritten.",
+  "blueprint": "Realizes the dense-site comparison in the proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale, through lem-cbc-zariski-enhanced-derived-descent and lem-cbc-etale-local-compact-support-extension.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-sheaf-flat-model",
+    "why": "Its trivial one-object site specialization supplies a stable combinatorial dg model of module complexes, needed to check the hypotheses of generic section rectification."
+   },
+   {
+    "node": "lem-coef-quillen-section-rectification",
+    "why": "Its constant Quillen diagram specialization presents coherent derived presheaves including mapping complexes; no dense-site comparison is assumed."
+   },
+   {
+    "node": "lem-coef-enhanced-localization-universal",
+    "why": "Generic enriched localization retains the explicitly constructed dg comparisons and their coherent composition diagrams."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Provides K-injective resolutions with injective terms on the two small ringed sites; the unit has no replacement for this resolution tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-sheaf-flat-model",
+  "lem-coef-quillen-section-rectification",
+  "lem-coef-enhanced-localization-universal",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-8b0432559",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8b0432559 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 12 steps, the new leaf, the 13 proof dependencies and 4 statement dependencies, the parent lem-cbc-zariski-enhanced-derived-descent (its steps 3, 5 and 6 use exactly the item's equivalence with fixed bound a, the homotopy right Kan inverse, the unit/counit equivalences on mapping complexes, and square naturality), Stacks sites.tex Tag 03A0 lemma-equivalence, the main-20261015 ancestor proof (thm-cbc-finite-level-proetale line 5), and pinned Mathlib: DenseSubsite/Basic.lean 532-571, LocallyFullyFaithful.lean 40-100, SheafEquiv.lean 30-45 and 97-108, CoverLifting.lean 275-330. The item's site hypotheses are 03A0 (1)-(5) in sieve form. Its coefficient category is the constant-Lambda module sheaves, the same as the parent's and the bounded-below model's. It is not a target, so no base-change morphism is involved, and nothing is weakened. Step checks: step 1's topology reflection was verified line by line, and its elementary flag is acceptable. In step 9 I recomputed q_! as the direct sum over f of V(C,f), since (q down C) has the discrete reflective subcategory {(C,f,id)}. Step 10 uses exactly the cone criterion of lem-cbc-enhanced-functor-cone-calculus. Steps 11 and 12 have correct triangle and mate directions. proof_deps equals the union of the uses. Small cases: identity p, an equivalence, empty C, the zero ring, a=0 and a=1. The report's 03A0 final-object counterexample (monoid {1,e}) is valid; it is an E7 source error the item avoids. The leaf matches IsDenseSubsite, imageSieve, Sieve.equalizer, coverByImage and StructuredArrow X G.op clause by clause, and its Ran clause is Iso.refl at CoverLifting.lean:297-299. It is not a duplicate: lem-pc-fppf-dense-sheaf-equivalence needs actual full faithfulness, which the parent's total site lacks, and the other candidates are set-valued, equivalence-only or a different statement. I accept the four declared tool_uses (lem-coef-sheaf-flat-model, lem-coef-quillen-section-rectification, lem-coef-enhanced-localization-universal, prop-pur-kinjective-resolutions-exist): they are generic black boxes, two of them already accepted on the sibling lem-cbc-bounded-below-hypersheaf-model, and no SGA source is used. FIX: the leaf's created record ({by:'Q69 second reader'}, no group) is corrected to {by:worker, item, date 2026-10-16, group Q69} in fixes/dag/nodes/sec-smooth-purity/lem-cbc-local-dense-ordinary-sheaves.json; no other change.; 1 file(s) fixed by the reviewer"
  }
 }

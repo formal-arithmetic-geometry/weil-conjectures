@@ -17,10 +17,138 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Fix a vertex $y$ of $Y$ and write $X_y=\\{y\\}\\times_YX$. A horn in $X_y$ gives a lifting square for $p$ with bottom the constant simplex at $y$; a lift remains over $y$. Hence $X_y$ is Kan, even though $X,Y$ need not be Kan. By [lem-coef-kan-realization-serre], $|p|$ is a Serre fibration. Apply the current finite-limit clause of [lem-coef-realization-finite-limits] to the degreewise pullback $X_y=\\Delta^0\\times_YX$, where $\\Delta^0\\to Y$ selects $y$. It gives the canonical homeomorphism $|X_y|\\cong\\{ |y|\\}\\times_{|Y|}^{\\mathcal K}|X|$. The same statement specifies that limits in $\\mathcal K$ are k-ifications of topological limits. Therefore this is exactly the fiber of $|p|$ with the k-space fiber topology required below; no ordinary-product topology or Kan condition on $Y$ is substituted. Thus the exact sequence, path lifting and component action of [lem-coef-serre-homotopy-exact-sequence] apply to this fiber.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.6.2 and Theorem 3.6.4; Lemma 2.4.16; agent explicit horn pullback argument."
+   }
+  },
+  {
+   "text": "Assume $p$ is a weak homotopy equivalence. Surjectivity on realized components supplies a point $x\\in|X|$ and a path from $|p|(x)$ to $|y|$. Lift this path using [lem-coef-serre-homotopy-exact-sequence]; its endpoint lies in $|X_y|$, so that fiber is nonempty. Fix any $e\\in|X_y|$. The orbit set of $\\pi_1(|Y|,|y|)$ on $\\pi_0(|X_y|)$ is the set of components of $|X|$ mapping to the component of $|y|$, which is a singleton because $\\pi_0(|p|)$ is bijective. The stabilizer of the component of $e$ is the image of $\\pi_1(|X|,e)$; this image is the whole group because $|p|$ induces an isomorphism. The action is therefore both transitive and fixes that component, so $\\pi_0(|X_y|)$ is a singleton. This is the required connectedness, without assuming either total space or base connected.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16 and Proposition 2.4.18, low-degree component/path-lifting argument; agent orbit/stabilizer expansion."
+   }
+  },
+  {
+   "text": "For each $e\\in|X_y|$ and $n\\geq1$, use the exact segment $\\pi_{n+1}(|X|,e)\\to\\pi_{n+1}(|Y|,|y|)\\to\\pi_n(|X_y|,e)\\to\\pi_n(|X|,e)\\to\\pi_n(|Y|,|y|)$ from [lem-coef-serre-homotopy-exact-sequence]. The first map is surjective, so the connecting map is zero and the map out of $\\pi_n(|X_y|,e)$ is injective. The last map is injective, so that injective map has zero image. Hence $\\pi_n(|X_y|,e)=0$. Together with step 2 and the Kan assertion of step 1, this proves that every vertex fiber is a contractible Kan complex in the precise weak-contractibility convention of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.6.4, fiber argument, with Lemma 2.4.16; explicit kernel/image calculation."
+   }
+  },
+  {
+   "text": "Conversely assume all vertex fibers are contractible Kan. We first extract an actual contraction of any such fiber $K$. Apply [lem-cbc-kan-mapping-homotopy-invariance] to the realization weak equivalence $u:K\\to\\Delta^0$ and Kan target $K$. Precomposition $U:K=\\operatorname{Fun}(\\Delta^0,K)\\to\\operatorname{Fun}(K,K)$ has a simplicial homotopy inverse $V$, with $UV$ homotopic to the identity. Evaluate that homotopy at the identity map of $K$: this is a simplicial path from the constant map at $k=V(\\mathrm{id}_K)$ to $\\mathrm{id}_K$. Its exponential transpose is $J:K\\times\\Delta^1\\to K$, from the constant map at $k$ to the identity. For every $n\\geq1$ and boundary map $a:\\partial\\Delta^n\\to K$, composition with $J$ gives a path from the constant boundary map at $k$ to $a$ in $\\operatorname{Fun}(\\partial\\Delta^n,K)$. By [lem-cbc-internal-hom-fibration-corner-map] for $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $K\\to\\Delta^0$, restriction $\\operatorname{Fun}(\\Delta^n,K)\\to\\operatorname{Fun}(\\partial\\Delta^n,K)$ is Kan. Lift that path starting at the constant simplex at $k$, using its dimension-one horn lifting. The other endpoint fills $a$. In dimension zero, weak contractibility makes $|K|$ nonempty; a representing simplex has a vertex, so an empty boundary also extends.\n\nNow fix a boundary square $a:\\partial\\Delta^n\\to X$, $\\sigma:\\Delta^n\\to Y$ for $p$, with $n\\geq1$. Put $T=\\Delta^n\\times_YX$ and $q:T\\to\\Delta^n$, and let $a'$ be the given boundary section. A horn lift for $q$ is obtained by lifting against $p$ and pairing with its specified bottom coordinate; thus $q$ is Kan. Its fiber $K$ over $0$ is exactly $X_{\\sigma(0)}$. Let $c:\\Delta^n\\times\\Delta^1\\to\\Delta^n$ be induced by the monotone function $c(j,0)=0$, $c(j,1)=j$. Apply [lem-cbc-internal-hom-fibration-corner-map] with $\\varnothing\\hookrightarrow\\partial\\Delta^n$ and $q$: the exponential map $\\operatorname{Fun}(\\partial\\Delta^n,T)\\to\\operatorname{Fun}(\\partial\\Delta^n,\\Delta^n)$ is Kan. Lift the path $c|_{\\partial\\Delta^n\\times\\Delta^1}$ with prescribed final endpoint $a'$, using the other dimension-one horn. This gives $h:\\partial\\Delta^n\\times\\Delta^1\\to T$ over $c$, whose initial endpoint $h_0$ lands in $K$. The fiber extension just proved extends $h_0$ to $v:\\Delta^n\\to K$.\n\nApply the same corner-map theorem with $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $q$. The pair $(h,c)$ is a path in its pullback target, and $v$, considered as a map to $T$, lies over its initial endpoint. Lift this path starting at $v$. Its exponential transpose $w:\\Delta^n\\times\\Delta^1\\to T$ satisfies $qw=c$ and $w|_{\\partial\\Delta^n\\times\\Delta^1}=h$. Restricting to time $1$ and projecting to $X$ gives a lift of $\\sigma$ with exactly boundary $a$. For $n=0$, the nonempty fiber supplies a vertex over $\\sigma(0)$ as above. This proves all boundary lifting, precisely the trivial Kan fibration condition of [def-weil-pbc-trivial-kan-fibration]. Neither $T$ nor $Y$ was assumed Kan: only $q$ and the fiber $K$ were used in that sense.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03PJ",
+    "place": "Proposition 3.1.7.17 for the fiber contraction, checked with Corollary 3.6.4.3 (03X7) for the realization convention. Agent explicit three-path-lift boundary-filling argument using the exact Mathlib corner-map theorem, PushoutProduct.lean:70-93. It replaces the circular use of Kerodon 01NU through the existing right-fibration node."
+   }
+  },
+  {
+   "text": "If $p$ is a trivial Kan fibration, [lem-weil-pbc-trivial-kan-homotopy-equivalence] supplies $g:Y\\to X$ with $pg=1_Y$ and a simplicial homotopy from $1_X$ to $gp$. The identity homotopy on $Y$ supplies the other composite. Applying [lem-cbc-simplicial-homotopy-equivalence-weak] to these maps proves that $p$ is a weak homotopy equivalence. Steps 1-5 give the three-way equivalence for arbitrary Kan fibrations, including non-Kan bases.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 08NS, lemma-trivial-kan-homotopy, lines 5641-5664; Kerodon Proposition 3.1.7.13 (00UB) for realization weak equivalence."
+   }
+  },
+  {
+   "text": "Let $B$ be Kan. Apply [lem-cbc-internal-hom-fibration-corner-map] to $i:\\partial\\Delta^1\\hookrightarrow\\Delta^1$ and to $B\\to\\Delta^0$. The first map is degreewise injective, and the second is a Kan fibration by the definition of Kan complex in [def-cbc-enhanced-diagrams-cones]. The target corner pullback is $\\operatorname{Fun}(\\partial\\Delta^1,B)$: both functor spaces into $\\Delta^0$ are the one-point simplicial set. Since $\\partial\\Delta^1=\\{0\\}\\amalg\\{1\\}$, restriction to it is the pair of endpoint evaluations, and its functor space is degreewise $B\\times B$. Thus the joint endpoint map $q:\\operatorname{Fun}(\\Delta^1,B)\\to B\\times B$ is a Kan fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "SSet.fibration_pullbackObjObjπ, lines 70-72; terminal-target specialization at 144-148. Explicit degreewise identification with joint endpoint restriction."
+   }
+  },
+  {
+   "text": "For $f:A\\to B$ with $A,B$ Kan, the map $P(f)\\to A\\times B$, $(a,\\gamma)\\mapsto(a,\\gamma(1))$, is the pullback of $q$ from step 6 along $(a,b)\\mapsto(f(a),b)$. A horn square for this pullback is solved by the lift for $q$ together with its prescribed $(a,b)$ coordinate. The projection $A\\times B\\to B$ lifts horns by filling their $A$ coordinate in the Kan complex $A$. Given a horn square for their composite, first fill in $A\\times B$ and then lift to $P(f)$. Thus the stated endpoint map $p_f:P(f)\\to B$ is a Kan fibration. Since $B$ is Kan, filling a horn first in $B$ and then lifting shows that $P(f)$ is Kan too.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10, second bullet; elementary pullback/projection/composition lifting argument, using the joint endpoint result established in step 6."
+   }
+  },
+  {
+   "text": "Let $r:P(f)\\to A$ forget the path and $i:A\\to P(f)$ assign the constant path at $f(a)$. Then $ri=1_A$. The order-preserving function $\\min:[1]\\times[1]\\to[1]$ induces a simplicial map $\\Delta^1\\times\\Delta^1\\to\\Delta^1$. Precomposing each path with $s\\mapsto\\min(s,t)$ defines $H:P(f)\\times\\Delta^1\\to P(f)$, $H((a,\\gamma),t)=(a,\\gamma(\\min(-,t)))$. This formula means the exponential transpose, so it defines all simplex degrees and commutes with all simplicial operators. It remains in $P(f)$ because $\\min(0,t)=0$. At $t=0$ it is $ir$; at $t=1$ it is the identity. Thus $i,r$ are simplicial homotopy inverses. By [lem-cbc-simplicial-homotopy-equivalence-weak], $i$ is a weak homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0101",
+    "place": "Example 3.1.8.10, first bullet; agent explicit min-contraction in place of invoking the endpoint trivial-fibration theorem."
+   }
+  },
+  {
+   "text": "The equality $p_fi=f$ holds since the final endpoint of the constant path at $f(a)$ is $f(a)$. The two-out-of-three property of weak homotopy equivalences of k-spaces in [lem-coef-topological-serre-model], applied to the continuous maps $|i|$, $|p_f|$ and $|f|$ between realizations (all objects lie in $\\mathcal K$ by the current realization-values clause of [lem-coef-realization-finite-limits]), and step 8 show that $f$ is a weak homotopy equivalence if and only if $p_f$ is. Apply the three-way criterion of steps 1-5 to the Kan fibration $p_f$. Its strict fiber over $b$ is degreewise exactly $A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B}\\{b\\}$, the homotopy fiber in [def-cbc-enhanced-diagrams-cones]. Hence $f$ is a weak homotopy equivalence exactly when every homotopy fiber is contractible. If $B$ is empty, existence of $f$ forces $A$ and $P(f)$ empty and all conclusions remain valid; otherwise an empty fiber fails contractibility because its component set is empty.",
+   "uses": [
+    "lem-coef-topological-serre-model",
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0328",
+    "place": "Remark 3.4.0.6, using the explicitly constructed factorization and the already proved criterion; Hovey Theorem 2.4.23 for topological two-out-of-three."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "lem-coef-topological-serre-model",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00ZP",
+  "place": "Agent synthesis following Proposition 3.3.7.6 and Example 3.1.8.10 (0101), using existing realization/Serre-sequence and internal-hom corner-map leaf; continuous and simplicial low-degree details are expanded above. Online sources read, archival copies WANTED."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +198,132 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"contractib.*fib|fib.*contractib|mappingPath|weakHomotopyEquiv|WeakHomotopyEquiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: CategoryWithFibrations.lean:36-49,66-89 defines horn fibrations and generating boundary cofibrations but leaves the full Quillen model structure TODO. Generic trivialFibrations is only the intersection of an assumed weak-equivalence class with fibrations; it does not prove this geometric-realization criterion or the homotopy-fiber characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kan fibration weak equivalence trivial Kan fibration contractible fibers mapping path replacement homotopy fibers",
+   "results": "{\"t\": \"2026-10-16T17:02:17Z\", \"tool\": \"leanfinder\", \"query\": \"Kan fibration weak equivalence trivial Kan fibration contractible fibers mapping path replacement homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.IsGood\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.IsVeryGood\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"bc2f99618dae0f55\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanComplex\", \"WeakEquivalence\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-16T17:02:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\", \\\"WeakEquivalence\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "KanFibration|trivialKan|homotopy.*fiber|mapping.*path",
+   "results": "{\"t\": \"2026-10-16T17:02:17Z\", \"tool\": \"grep\", \"query\": \"KanFibration|trivialKan|homotopy.*fiber|mapping.*path\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kan fibrations are weak equivalences exactly when their fibers are contractible; mapping path replacement is a fibration",
+   "results": "{\"t\": \"2026-10-16T17:02:19Z\", \"tool\": \"leansearch\", \"query\": \"Kan fibrations are weak equivalences exactly when their fibers are contractible; mapping path replacement is a fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\"], \"digest\": \"9beca17d7c26801e\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every simplicial homotopy equivalence is a weak homotopy equivalence after geometric realization",
+   "results": "{\"t\": \"2026-10-16T17:05:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every simplicial homotopy equivalence is a weak homotopy equivalence after geometric realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyRel\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"44c912de80472a80\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\", \"homotopyGroup\"",
+   "results": "{\"t\": \"2026-10-16T17:05:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyEquiv\\\", \\\"homotopyGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv.*[Ww]eak|[Ww]eak.*homotopyEquiv|homotopyGroup.*[Ee]quiv|homotopyGroup.*[Ii]so",
+   "results": "{\"t\": \"2026-10-16T17:05:16Z\", \"tool\": \"grep\", \"query\": \"homotopyEquiv.*[Ww]eak|[Ww]eak.*homotopyEquiv|homotopyGroup.*[Ee]quiv|homotopyGroup.*[Ii]so\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial map admitting a simplicial homotopy inverse induces bijection on path components and isomorphisms of all homotopy groups of geometric realizations",
+   "results": "{\"t\": \"2026-10-16T17:05:16Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial map admitting a simplicial homotopy inverse induces bijection on path components and isomorphisms of all homotopy groups of geometric realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.term_≃ₕ_\", \"ContinuousMap.HomotopyEquiv.symm\", \"ContinuousMap.HomotopyEquiv.Simps.symm_apply\", \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\", \"CategoryTheory.ShortComplex.HomotopyEquiv.inv\", \"CategoryTheory.ShortComplex.HomotopyEquiv.symm_hom\", \"HomotopyEquiv.symm\", \"HomotopyEquiv.toHomologyIso\"], \"digest\": \"3353e0aed92d02d0\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial homotopies become continuous homotopies on geometric realization and homotopy equivalences induce isomorphisms on homotopy groups",
+   "results": "{\"t\": \"2026-10-16T17:05:19Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial homotopies become continuous homotopies on geometric realization and homotopy equivalences induce isomorphisms on homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"FundamentalGroupoidFunctor.instIsIsoFunctorFundamentalGroupoidHomotopicMapsNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\"], \"digest\": \"9e6816fde6f9dadf\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read ModelCategory/LeftHomotopy.lean:133-146, ModelCategory/PathObject.lean:150-180, SimplicialSet/CategoryWithFibrations.lean:17-27,66-89, SimplicialSet/HomotopyCat.lean:17-37 and Topology/Homotopy/Equiv.lean:12-60. Generic cylinder/path-object results assume a class of weak equivalences and a cylinder/path object already satisfying it; Mathlib has not supplied the realization weak-equivalence structure on SSet (the Quillen model structure is marked TODO). The topological HomotopyEquiv hits and the ordinary homotopy-category functor do not identify simplicial homotopies with realization homotopies or prove the full node. Chain-complex homotopy equivalences concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyEquiv|homotopyEquiv|Homotopic",
+   "results": "{\"t\": \"2026-10-16T17:05:19Z\", \"tool\": \"grep\", \"query\": \"HomotopyEquiv|homotopyEquiv|Homotopic\", \"sub\": \"AlgebraicTopology/Homotopy\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No usable source result: this requested subdirectory AlgebraicTopology/Homotopy does not exist. The subsequent whole-Mathlib grep is the source search used for the decision."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquiv.*[Ww]eak|[Ww]eak.*homotopyEquiv|homotopyGroup.*[Ee]quiv|homotopyGroup.*[Ii]so",
+   "results": "{\"t\": \"2026-10-16T17:06:43Z\", \"tool\": \"grep\", \"query\": \"homotopyEquiv.*[Ww]eak|[Ww]eak.*homotopyEquiv|homotopyGroup.*[Ee]quiv|homotopyGroup.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/HomotopyGroup.lean\", \"Mathlib/Topology/Homotopy/HomotopyGroup.lean\", \"Mathlib/Topology/Homotopy/HomotopyGroup.lean\", \"Mathlib/Topology/Homotopy/HomotopyGroup.lean\", \"Mathlib/Topology/Homotopy/HomotopyGroup.lean\"], \"digest\": \"44bbffac551568fe\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: five source hits in Topology/Homotopy/HomotopyGroup.lean:452,471,488-489,504 compare homotopy groups with the fundamental group or degree-zero homotopy; they do not assert realization invariance of a simplicial homotopy equivalence."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kan-fibration-fiber-criterion",
+  "worker": "stage1",
+  "summary": "Nine-step split with two new nodes: one statement-only homotopy-invariance theorem and one exact Mathlib internal-hom corner-map leaf. The arbitrary-base criterion uses realized fibers and the Serre sequence. Its boundary-lifting implication is proved by extracting a contraction of each fiber via the existing Kan mapping-homotopy-invariance theorem, filling fiber boundaries by path lifting, then lifting the boundary and simplex contraction paths through explicit corner maps. This avoids the existing right-fibration theorem, whose new proof cites this item and failed the second-reader server preflight. The mapping-path clause uses the same corner-map leaf and an explicit min contraction. No statement changed. Return repair: revalidated every cited statement against the current DAG, including the reviewed realization lemma with its added boundary definition. Step 1 now writes the vertex pullback and its k-ified fiber topology explicitly; step 9 specifies the maps in the k-space two-out-of-three application. The statement and all dependency edges are retained.",
+  "blueprint": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint. Current ancestor source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md. The split supplies the coherent-cone foundation required by its opening compactification choice, retaining the same unit and chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-kan-realization-serre",
+    "why": "Generic realization of arbitrary Kan fibrations, used to pass to a Serre fibration without assuming the base Kan; the compact-support unit has no realization theorem."
+   },
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Generic realization/finite-limit theorem, used only to identify strict realized vertex fibers and the k-space setting."
+   },
+   {
+    "node": "lem-coef-serre-homotopy-exact-sequence",
+    "why": "Generic Serre long exact homotopy sequence and component monodromy action; supplies the low-degree argument missing from a bare group sequence."
+   },
+   {
+    "node": "def-weil-pbc-trivial-kan-fibration",
+    "why": "Existing definition of boundary lifting, including dimension zero; its convention agrees with the item."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic section and simplicial homotopy for a boundary-lifting fibration, used to prove weak equivalence."
+   },
+   {
+    "node": "lem-coef-topological-serre-model",
+    "why": "Only two-out-of-three for realized weak equivalences is used; no Kan model structure or infinity-categorical cone theorem is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-topological-serre-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-88554e53b",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-88554e53b (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 8 cited statements in full. Kerodon 00ZP: the arbitrary-base equivalence trivial Kan <=> weak equivalence <=> contractible Kan fibers matches the item's three conditions, and no target is weakened. Kerodon 00UB: the new node is its true forward implication for arbitrary simplicial sets (single cylinder homotopies, either order). Mathlib leaf SSet.fibration_pullbackObjObjπ at PushoutProduct.lean:70-72 is an exact match: Fibration = J.rlp horn lifting including outer horns, Mono = degreewise injective. Steps 1-9 checked: Kan vertex fiber and k-fiber; pi0 via orbit/stabilizer; all pi_n vanish by exactness at every basepoint; step 4's contraction plus three corner-map lifts (monotone c, edge direction harmless, n=0 case); trivial Kan to weak equivalence via section and homotopy; endpoint map Kan; the P(f) pullback/composite argument, which is genuinely elementary; the monotone min homotopy; two-out-of-three in k-spaces with the strict fiber equal to the homotopy fiber; the empty-base cases. The item is not in its own 34-node closure, and none of its 5 citers is in that closure. All 6 declared tool_uses are accepted as generic black boxes. No new node duplicates or restates a clause of the item. Maintainer note: the existing nodes lem-coef-space-kan-fibration-fiber-criterion, lem-coef-space-path-fibration-replacement and lem-coef-space-contractible-fiber-equivalence are special cases or clauses of this item and are candidates for a later merge; proving those clauses in-unit is consistent with C7 and is not a fault. No fixes made. Minor: the item's source.place still mentions Kerodon 3.1.3.1. Review is in review.md."
+ }
 }

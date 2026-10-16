@@ -1,0 +1,110 @@
+{
+ "id": "lem-cbc-internal-hom-fibration-corner-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Opening compactification choice in thm-cbc-finite-level-proetale.proof.md, through the coherent-cone foundation: the mapping-path replacement in the Kan fiber criterion requires joint endpoint restriction to be a Kan fibration. This generic Mathlib corner-map theorem supplies that restriction, not a new compact-support route.",
+   "via": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fibrations of internal homs along monomorphisms",
+ "statement": "Use small simplicial sets, internal functor simplicial sets and horns as in [def-cbc-enhanced-diagrams-cones]. Let $i:C\\hookrightarrow L$ be a degreewise injective simplicial map, and let $p:E\\to B$ be a Kan fibration, meaning a simplicial map with the right lifting property against every horn inclusion $\\Lambda_k^n\\hookrightarrow\\Delta^n$ for $n\\geq1$ and $0\\leq k\\leq n$. Then the natural restriction/postcomposition map $$\\operatorname{Fun}(L,E)\\longrightarrow\\operatorname{Fun}(C,E)\\times_{\\operatorname{Fun}(C,B)}\\operatorname{Fun}(L,B),\\qquad h\\longmapsto(h\\circ i,p\\circ h),$$ is a Kan fibration. The pullback is degreewise. No Kan assumption on $B$ or on $C,L$ is imposed.",
+ "source": {
+  "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+  "place": "SSet.fibration_pullbackObjObjπ, lines 70-93, statement at 70-72; the terminal-target specialization appears at 144-148. Fibrations are precisely horn-lifting maps in SimplicialSet/CategoryWithFibrations.lean:36-45,70-89. No Stacks tag for this theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In simplicial sets for a monomorphism i and a Kan fibration p the internal hom pullback corner restriction map is a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T17:11:16Z\", \"tool\": \"leanfinder\", \"query\": \"In simplicial sets for a monomorphism i and a Kan fibration p the internal hom pullback corner restriction map is a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"04a0c5452e7847af\"}",
+   "date": "2026-10-16",
+   "verdict": "Semantic hits only identify the horn-defined fibration structures and monomorphism properties. The subsequent exact Loogle query and source grep identify the full matching corner-map theorem at PushoutProduct.lean:70."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.fibration_pullbackObjObjπ",
+   "results": "{\"t\": \"2026-10-16T17:11:16Z\", \"tool\": \"loogle\", \"query\": \"SSet.fibration_pullbackObjObjπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"241883e59bc3ed71\"}",
+   "date": "2026-10-16",
+   "verdict": "Exact match: Loogle returns SSet.fibration_pullbackObjObjπ. Read PushoutProduct.lean:70-93,144-148 and CategoryWithFibrations.lean:36-45,70-89; the explicit corner map is its internalHom.PullbackObjObj projection."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma fibration_pullbackObjObjπ|instance.*Mono i|Fibration.*MonoidalClosed.pre",
+   "results": "{\"t\": \"2026-10-16T17:11:16Z\", \"tool\": \"grep\", \"query\": \"lemma fibration_pullbackObjObjπ|instance.*Mono i|Fibration.*MonoidalClosed.pre\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"70\", \"144\", \"145\"], \"digest\": \"c7bdcea6cbee89bc\"}",
+   "date": "2026-10-16",
+   "verdict": "Matching declaration text at source line 70; because rg searched a single file, msearch displayed the line number in its file slot. The subsequent directory grep correctly records the full path and line 70."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monomorphism of simplicial sets and a Kan fibration the induced internal hom pullback corner map is a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T17:11:17Z\", \"tool\": \"leansearch\", \"query\": \"For a monomorphism of simplicial sets and a Kan fibration the induced internal hom pullback corner map is a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.monomorphisms\", \"CategoryTheory.Limits.hasPullback_of_left_factors_mono\", \"CategoryTheory.Limits.pullback_snd_iso_of_left_factors_mono\", \"CategoryTheory.Limits.pullbackIsPullbackOfCompMono\", \"CategoryTheory.Square.IsPullback.mono_f₁₃\"], \"digest\": \"45ecd6bd6b4144b8\"}",
+   "date": "2026-10-16",
+   "verdict": "Semantic hits only identify the horn-defined fibration structures and monomorphism properties. The subsequent exact Loogle query and source grep identify the full matching corner-map theorem at PushoutProduct.lean:70."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma fibration_pullbackObjObjπ|Fibration.*MonoidalClosed.pre",
+   "results": "{\"t\": \"2026-10-16T17:11:29Z\", \"tool\": \"grep\", \"query\": \"lemma fibration_pullbackObjObjπ|Fibration.*MonoidalClosed.pre\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"e24d5b0903902526\"}",
+   "date": "2026-10-16",
+   "verdict": "Exact match: Loogle returns SSet.fibration_pullbackObjObjπ. Read PushoutProduct.lean:70-93,144-148 and CategoryWithFibrations.lean:36-45,70-89; the explicit corner map is its internalHom.PullbackObjObj projection."
+  },
+  {
+   "tool": "grep",
+   "query": "realiz.*homotop|homotop.*realiz|fibration_pullbackObjObj",
+   "results": "{\"t\": \"2026-10-16T17:19:34Z\", \"tool\": \"grep\", \"query\": \"realiz.*homotop|homotop.*realiz|fibration_pullbackObjObj\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"b5842068b3b13091\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: the broader cofibration/exponential query returns the horn-fibration structure and abstract model-category results. Source grep and exact Loogle confirm SSet.fibration_pullbackObjObjπ; read PushoutProduct.lean:70-93 and CategoryWithFibrations.lean:36-98. Its Mono and Fibration hypotheses and corner-map conclusion agree exactly with this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential pullback map induced by a cofibration and a fibration of simplicial sets is a fibration",
+   "results": "{\"t\": \"2026-10-16T17:19:36Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential pullback map induced by a cofibration and a fibration of simplicial sets is a fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\"], \"digest\": \"d2d7e457897d8510\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: the broader cofibration/exponential query returns the horn-fibration structure and abstract model-category results. Source grep and exact Loogle confirm SSet.fibration_pullbackObjObjπ; read PushoutProduct.lean:70-93 and CategoryWithFibrations.lean:36-98. Its Mono and Fibration hypotheses and corner-map conclusion agree exactly with this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.fibration_pullbackObjObjπ",
+   "results": "{\"t\": \"2026-10-16T17:20:39Z\", \"tool\": \"loogle\", \"query\": \"SSet.fibration_pullbackObjObjπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"241883e59bc3ed71\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: the broader cofibration/exponential query returns the horn-fibration structure and abstract model-category results. Source grep and exact Loogle confirm SSet.fibration_pullbackObjObjπ; read PushoutProduct.lean:70-93 and CategoryWithFibrations.lean:36-98. Its Mono and Fibration hypotheses and corner-map conclusion agree exactly with this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.fibration_pullbackObjObjπ",
+   "results": "{\"t\": \"2026-10-16T18:52:49Z\", \"tool\": \"loogle\", \"query\": \"SSet.fibration_pullbackObjObjπ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"241883e59bc3ed71\"}",
+   "date": "2026-10-16",
+   "verdict": "Fresh second-reading exact Loogle confirmation: the returned type has precisely Mono i, Fibration p and Fibration of the exponential pullback corner. Re-read the local declaration at PushoutProduct.lean:70-93 and horn-fibration definition at CategoryWithFibrations.lean:44-47,71-100. Exact match."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet.fibration_pullbackObjObjπ",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+  "line": 70,
+  "how": "Exact statement at lines 70-72: for Mono i and horn-defined Fibration p, any internalHom.PullbackObjObj i p has Fibration sq₁₃.π. Choose the degreewise pullback in the displayed formula. Internal hom is the simplicial exponential of def-cbc-enhanced-diagrams-cones, whose n-simplices are maps L x Delta[n] -> E. The typeclass is exactly horn lifting by CategoryWithFibrations.lean:70-89; no weak-equivalence comparison or model-category assumption is used. The proof ends at line 93."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-kan-fibration-fiber-criterion",
+  "date": "2026-10-17",
+  "group": "NR"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}
