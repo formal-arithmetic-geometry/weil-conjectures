@@ -5,6 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
 public import Sheaf.Paper.CoefficientDerivedFunctorAPI
+import Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 
 /-! # Direct image preserves the finite coefficient etale image -/
@@ -57,6 +58,24 @@ theorem finiteDiscreteCoefficient_directImage_origin [DiscreteTopology B] [Finit
       ((coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) h).obj
         ((finiteDiscreteRealization B S
           (finiteDiscreteCoefficientEquivalence B eR G hG S)).obj K)) := by
-  sorry
+  obtain ⟨e⟩ :=
+    AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar
+      (ModuleCat.{u + 1} (ULift.{u + 1} B)) h
+  refine ⟨(R+(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)).obj K, ?_⟩
+  let Eₛ := finiteDiscreteCoefficientEquivalence B eR G hG S
+  let Eₜ := finiteDiscreteCoefficientEquivalence B eR G hG T
+  let q := (D(Eₜ.functor)).mapIso (DerivedCategory.Plus.ι.mapIso (e.app K))
+  let iₜ := (ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)]).mapDerivedCategoryPlusCompatibility.app
+    ((R+(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)).obj K)
+  let iₛ := (ν^*(S)[ModuleCat.{u + 1} (ULift.{u + 1} B)]).mapDerivedCategoryPlusCompatibility.app K
+  obtain ⟨hc⟩ := finiteDiscreteCoefficient_directImage_conjugation B eR G hG h
+    ((D+(ν^*(S)[ModuleCat.{u + 1} (ULift.{u + 1} B)])).obj K)
+  refine ⟨?_⟩
+  let qt := (D(Eₜ.functor)).mapIso iₜ
+  let qs := (D(Eₛ.functor)).mapIso iₛ
+  let hs := (coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) h).mapIso qs
+  simpa only [finiteDiscreteRealization, Eₛ, Eₜ, Functor.comp_obj] using
+    qt.symm ≪≫ q ≪≫ hc ≪≫ hs
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

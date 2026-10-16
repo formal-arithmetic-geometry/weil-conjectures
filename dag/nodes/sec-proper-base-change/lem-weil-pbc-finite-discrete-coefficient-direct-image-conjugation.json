@@ -1,0 +1,111 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+ "kind": "statement",
+ "title": "Coefficient equivalences conjugate bounded-below direct image",
+ "statement": "For a finite discrete commutative ring B, the explicitly constructed coefficient equivalences E_S and E_T, and a quasi-compact quasi-separated morphism h:S to T, applying the internal derived direct image to E_S of a bounded-below pro-etale module complex is naturally isomorphic to applying E_T to the bounded-below module-valued pro-etale direct image.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 099R"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the common coefficient equivalence into the sectionwise additive encoding and the constant-ring equivalence. The equality hG identifies all sectionwise restriction maps, while naturality of the coefficient-ring map pulled back from the profinite point identifies scalar actions after direct image.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting underived natural isomorphism is transported through the exact coefficient equivalences and the right-derived-functor construction. Restricting to bounded-below objects and including them into the full derived category gives the displayed objectwise isomorphism.",
+   "uses": [
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.4.1 and 5.4.3",
+  "note": "Strict lower-level coefficient-conjugation interface needed to transport the ordinary finite-coefficient direct-image comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafEncoding lowerStar direct image coefficient equivalence",
+   "results": "No existing declaration identifies the sectionwise encoding with module-valued direct image.",
+   "verdict": "new interface needed",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derivedComapLowerStarIso",
+   "results": "Found the generic restriction-of-scalars comparison, but it does not include the sectionwise encoding equivalence.",
+   "verdict": "insufficient",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence internal modules sheaves conjugate pushforward",
+   "results": "No exact match.",
+   "verdict": "new interface needed",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-direct-image-origin",
+   "place": "Coefficient-conjugation part of the proof",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientDirectImageConjugation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_directImage_conjugation",
+  "statement": "theorem finiteDiscreteCoefficient_directImage_conjugation [DiscreteTopology B] [Finite B]\n    {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h] :\n    ∀ X : DerivedCategory.Plus (FiniteDiscreteProEtaleSheaves B S),\n      Nonempty (\n        (D((finiteDiscreteCoefficientEquivalence B eR G hG T).functor)).obj\n            (DerivedCategory.Plus.ι.obj\n              ((R+(ProEtale.lowerStar\n                (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)).obj X)) ≅\n        (coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) h).obj\n          ((D((finiteDiscreteCoefficientEquivalence B eR G hG S).functor)).obj\n            (DerivedCategory.Plus.ι.obj X)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T153007-L-348712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T153007-L-348712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
