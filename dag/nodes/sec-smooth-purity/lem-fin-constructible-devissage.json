@@ -209,5 +209,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-3c862c52d (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, blueprint source, unit/chapter route, and delivery materials in full. Verified hypotheses, coefficient category, open–closed exactness, dimension induction, closure/base-change morphisms, filtration quotients, edge cases, searches, duplicates, and route/tool uses. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f4996a5d0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, source, all statement dependencies, exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim signature. Per-file overlay compilation passed cleanly. No corrections needed; no repository or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleSheafDevissage",
+  "declaration": "AlgebraicGeometry.Etale.exists_constructible_sheaf_devissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleSheafDevissage.lean",
+  "statement": "theorem exists_constructible_sheaf_devissage (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : IsSmoothBaseChangeCoefficients N Λ X) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ (m : ℕ) (S : Fin (m + 1) → Subobject F), IsZero (S 0 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ∧ S (Fin.last m) = ⊤ ∧ ∃ hS : ∀ r : Fin m, S r.castSucc ≤ S r.succ, ∀ r : Fin m, ∃ (T : Scheme.{u}) (j : T ⟶ X), IsImmersion j ∧ Topology.IsConstructible (Set.range j) ∧ ∃ (_ : IsOpenImmersion j.toImage) (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)), Scheme.IsFiniteLocallyConstantSheaf L ∧ Nonempty (cokernel (Subobject.ofLE (S r.castSucc) (S r.succ) (hS r)) ≅ (lowerStar (ModuleCat.{u + 1} Λ) j.imageι).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j.toImage).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

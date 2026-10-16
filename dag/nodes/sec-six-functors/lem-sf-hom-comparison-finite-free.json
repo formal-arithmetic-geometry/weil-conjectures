@@ -23,7 +23,8 @@
   "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sf-evaluation-hom-site-comparison"
  ],
  "proof": [
   {
@@ -296,5 +297,27 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-14b451d93 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, exact master blueprint and Stacks sources in full. Verified all five steps, canonical evaluation comparison, coefficient sites, bounds, signs, nonflat edge cases, route and four tool uses. No new nodes, duplicate, missing dependency or cycle found. Written review.md; no fixes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-332f7d2f6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Recorded review.md. Canonical evaluation map, hypotheses, dependencies, universes and edge cases agree with the node. All three immutable modules compile; signatures match exactly. No delivery faults found. Confirmed the separately reported deliver2.py substring-check bug.; reverted the delivery's change of existing node(s) lem-sf-comparison-pullback-exact (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeHomComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison",
+  "file": "lean/Sheaf/Paper/FiniteFreeHomComparison.lean",
+  "statement": "theorem isIso_finiteFreeHomComparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (T : Scheme.{u}) (_hinv : IsUnit (l : T.presheaf.obj (op ⊤))) (P N : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ℤ) (_hP : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) (_hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ ∐ fun _ : Fin r ↦ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj (ModuleCat.of (Padic.coefficientExtensionRing l E n) (Padic.coefficientExtensionRing l E n)))) (_hN : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (N.X i)) (_hc : Etale.DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) T (_root_.DerivedCategory.Q.obj N)) : IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) T (_root_.DerivedCategory.Q.obj P) (_root_.DerivedCategory.Q.obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteFreeHomComparison_coefficientFinite",
+   "AlgebraicGeometry.ProEtale.isIso_finiteFreeHomComparison"
+  ]
  }
 }

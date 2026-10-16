@@ -276,5 +276,24 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-56e1b6a4f (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all six steps, hypotheses, comparison direction, coefficient categories, and edge cases pass. No new nodes or dependency cycle. Corrected only proof_origin to agent provenance in fixes; detailed checks and accepted tool uses are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2a0fb6e20",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Audited all eight statement dependencies, source correspondence, exact declarations, universes, edge cases, intrinsic predicates, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py at sandbox and library paths. No fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImage_boundedConstructible_torAmplitude",
+  "file": "lean/Sheaf/Paper/ProEtaleFiniteCoefficientDirectImage.lean",
+  "statement": "theorem finiteCoefficientDirectImage_boundedConstructible_torAmplitude (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X Y : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (d : ℕ) (hd : topologicalKrullDim X.left ≤ (d : WithBot ℕ∞)) (a b : ℤ) {K : Scheme.proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing l E n)} (hK : WeilConjectures.finiteTorConstructible l E n hn X.left K) (hTor : Scheme.HasProEtaleTorAmplitude X.left (Padic.coefficientExtensionRing l E n) K a b) : Scheme.intrinsicFiniteTorsionConstructible l E n hn Y.left ((Scheme.proEtaleConstantDerivedDirectImage f.left (Padic.coefficientExtensionRing l E n)).obj K) ∧ Scheme.HasProEtaleTorAmplitude Y.left (Padic.coefficientExtensionRing l E n) ((Scheme.proEtaleConstantDerivedDirectImage f.left (Padic.coefficientExtensionRing l E n)).obj K) a (b + 2 * (d : ℤ))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Intrinsic finite-coefficient specialization using the recorded finiteTorConstructible, intrinsicFiniteTorsionConstructible, HasProEtaleTorAmplitude and canonical proEtaleConstantDerivedDirectImage. Bundled schemes over the algebraic closure record both structure maps and the compatibility of f. The upstream similarly named theorem uses a different etale-origin constructibility interface and cannot be used as an exact existing attachment."
  }
 }

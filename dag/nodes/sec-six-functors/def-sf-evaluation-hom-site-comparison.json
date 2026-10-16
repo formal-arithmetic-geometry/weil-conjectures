@@ -1,0 +1,110 @@
+{
+ "id": "def-sf-evaluation-hom-site-comparison",
+ "kind": "definition",
+ "title": "Evaluation-induced derived Hom comparison for the etale-proetale morphism",
+ "status": "split",
+ "statement": "For a scheme $T$, let $A$ be a coefficient abelian Grothendieck category in the common size convention, equipped with the symmetric closed preadditive monoidal structure and functorial flat resolutions used by the existing derived tensor and internal Hom constructions. Assume the canonical comparison inverse image $F=\\nu_T^*$ preserves flat sheaves. This includes $A=\\mathrm{Mod}(\\Lambda)$ for any finite commutative ring $\\Lambda$. For arbitrary derived objects $K,M$ on the etale site define the canonical evaluation comparison $F_D R\\mathcal Hom(K,M)\\to R\\mathcal Hom(F_DK,F_DM)$ as the tensor--Hom adjoint of the inverse canonical derived tensor comparison followed by $F_D$ of evaluation. Here $F_D$ is termwise derived comparison pullback; the canonical derived tensor comparison is transported along $LF\\cong F_D$ from the K-flat representative comparison. This specializes to the finite constant coefficient sheaves in lem-sf-hom-comparison-finite-free. No isomorphism assertion or Tor condition on $K$ or $M$ is part of the definition. The sites and fixed-module specialization are [def-weil-pbc-etale-sheaves] and [def-weil-pbc-proetale-site], the derived categories and internal Hom are [def-weil-pbc-derived-categories] and [def-pur-derived-internal-hom], with [def-weil-size-convention]. The comparison inverse image is [def-weil-pbc-site-comparison-morphism], its exactness is [lem-sf-comparison-pullback-exact], and its canonical tensor comparison is [lem-weil-pbc-ringed-topoi-module-pullback-tensor].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "def-weil-size-convention",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-comparison-finite-free.md",
+  "place": "Evaluation comparison paragraph; Stacks Tags 03EO, 03EL, 08J7"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived internal Hom comparison for etale proetale inverse image induced by evaluation",
+   "results": "UNAVAILABLE 0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image commutes with derived internal Hom from bounded finite free complexes of sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; SheafOfModules.freeHomEquiv_symm_comp; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; SheafOfModules.unitHomEquiv_symm_comp; LightCondensed.ihomPoints_symm_apply; SheafOfModules.ιFree_mapFree_inv; LightCondensed.ihom_map_val_app",
+   "date": "2026-10-16",
+   "verdict": "No site comparison map on derived categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homObj\"",
+   "results": "1 hit: PresheafOfModules.instModuleCarrierObjOppositeCommRingCatCarrierCarrierRingCatCompForget₂RingHomObj",
+   "date": "2026-10-16",
+   "verdict": "No derived evaluation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Hh]om|[Hh]om.*[Cc]omparison; source IsIso.*[Hh]omComparison|def.*[Hh]omComparison; blueprint_refs search evaluation Hom comparison",
+   "results": "Mathlib: 25 hits, underived limits/colimits and locally constant comparisons. Upstream: generic LaxMonoidal.ihomComparison and underived pullback comparisons, no monoidal derived comparison functor. ProEtale/Derived/HomComparison.lean explicitly leaves this canonical map unformalized. Project Sheaf: affine/scheme Hom comparisons, no comparison for these two sites. DAG: blueprint_refs returned 0 matches for evaluation Hom comparison. Existing finite-duality comparison nodes assert the isomorphism, not a definition of its map.",
+   "date": "2026-10-16",
+   "verdict": "Missing canonical construction: combine existing derived tensor comparison, evaluation and exact-functor identification."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-hom-comparison-finite-free",
+  "date": "2026-10-16",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-hom-comparison-finite-free",
+   "place": "Statement, canonical evaluation comparison obtained by currying pulled-back evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EvaluationHomSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/EvaluationHomSiteComparison.lean",
+  "statement": "def siteComparisonEvaluationHom (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] (T : Scheme.{u}) [(comparisonUpperStar A T).PreservesFlat] (K M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) : (comparisonUpperStar A T).mapDerivedCategory.obj (((Etale.derivedHom A T).obj (op K)).obj M) ⟶ ((derivedHom A T).obj (op ((comparisonUpperStar A T).mapDerivedCategory.obj K))).obj ((comparisonUpperStar A T).mapDerivedCategory.obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.siteComparisonEvaluationHom"
+  ],
+  "note": "The generic upstream coefficient-category interface avoids a costly redundant specialization declaration. At ModuleCat Λ all structures are the existing canonical instances and flat preservation follows from finiteness. The assigned theorem uses this specialization directly."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-332f7d2f6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-332f7d2f6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Recorded review.md. Canonical evaluation map, hypotheses, dependencies, universes and edge cases agree with the node. All three immutable modules compile; signatures match exactly. No delivery faults found. Confirmed the separately reported deliver2.py substring-check bug.; reverted the delivery's change of existing node(s) lem-sf-comparison-pullback-exact (--revert-nodes; kept as on newtargets-dag)"
+ }
+}
