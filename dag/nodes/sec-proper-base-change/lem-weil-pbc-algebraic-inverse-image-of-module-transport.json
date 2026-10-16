@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-algebraic-inverse-image-of-module-transport",
+ "kind": "statement",
+ "title": "Recover algebraic inverse-image compatibility from module-operation transport",
+ "statement": "Let (C,J) and (D,K) be small sites, L : Sh(J,Set) → Sh(K,Set) preserve finite limits, and R and A be sheaves of commutative rings. Suppose eR : A_set ≅ L(R_set), I : Mod(R) → Mod(A), and a natural isomorphism eI : U_A I ≅ L U_R are given. Assume for every M there are addition and scalar multiplication morphisms on U_R(M) and U_A(I(M)) realizing the actual sectionwise operations, and that L maps the source operations to the target operations via the binary-product comparison and eI.inv (and eR.inv for the scalar factor). Then there is an AlgebraicInverseImage L R A [def-weil-pbc-algebraic-inverse-image] whose module functor is exactly I, whose ring comparison is exactly eR.symm, and whose module comparison is heterogeneously equal to eI. In particular the given eR.inv preserves ring addition, multiplication, zero and one on generalized sections, and eI.inv preserves module addition, zero and scalar multiplication.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7, algebraic structures under inverse image; regular-module verification of compatibility"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For binary operations, functoriality and the product-comparison projection identities carry an operation graph z=op(x,y) to the target graph. Sheaf extensionality turns the sectionwise source identity into such a graph. Apply this to each of the supplied addition and scalar multiplication witnesses. This gives moduleAdd and moduleSMul on arbitrary generalized sections. The Lean proof reuses the existing private graph_sections helper from Sheaf.CategoryTheory.RingedToposKFlatPullback rather than restating it.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let M0 be the regular R-module. Its underlying set sheaf is R_set. For a test sheaf Z, write 1_Z : Z → R_set for the constant unit and v=(L(1_Z);eI.inv) evaluated at t∈L(Z)(W). For every a∈A(W), binary-product preservation lifts the pair (t,eR(a)) to L(Z×R_set)(W). Apply moduleSMul there to snd·(fst;1_Z)=snd. It follows that theta(a)=a·v, where theta=eR.hom;eI.inv on the underlying sets. This theta is a bijection, hence scalar multiplication on v is injective. This works whenever a section t is present; when none is present the required graph equations have no instances. The pair is lifted using Mathlib surjective_of_epi for prodComparison followed by Types.binaryProductIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a generalized ring section a:Z→R_set, the preceding equality and the inverse-isomorphism identities identify (L(a);eI.inv)(t) with (L(a);eR.inv)(t)·v. Apply the transported module addition equation to z=a+b in M0; rewrite these three expressions and use add_smul. Injectivity of scalar multiplication on v proves ringAdd. Apply moduleSMul in M0 to z=a*b, rewrite and use mul_smul; the same injectivity proves ringMul.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a zero generalized section use z=z+z and additive cancellation, both for the ring and for each module, obtaining ringZero and moduleZero. For a unit generalized section a, sheaf extensionality gives a=1_Z; the previous expression for its inverse image and one_smul show that its scalar action on v agrees with 1, so injectivity gives ringOne. Assemble these seven verified graph properties and the unchanged data eR.symm, I and eI into the AlgebraicInverseImage record. Reflexivity supplies the three asserted data equalities.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker G4",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; explicit regular-module argument supplied here to reconcile the two existing inverse-image interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving functor transporting the regular module addition and scalar action determines the transported ring structure",
+   "results": "8 hits: FGModuleCat.ulift, MoritaEquivalence.instAdditiveModuleCatFunctorEqv, CategoryTheory.Linear.inducedCategory, FGModuleCat.instLinearModuleCatForget₂, CategoryTheory.Functor.inducedFunctorLinear, FGModuleRepr.embed, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive, Condensed.finFree",
+   "date": "2026-10-16",
+   "verdict": "No exact recovery theorem. Product comparison and its projection equations are reused in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.prodComparison",
+   "results": "12 hits: CategoryTheory.Limits.prodComparison, CategoryTheory.Limits.prodComparison_fst, CategoryTheory.Limits.prodComparison_snd, CategoryTheory.Limits.prodComparisonNatTrans_app, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.Limits.prodComparison_fst_assoc, CategoryTheory.Limits.prodComparison_snd_assoc, CategoryTheory.Limits.inv_prodComparison_map_fst",
+   "date": "2026-10-16",
+   "verdict": "No exact recovery theorem. Product comparison and its projection equations are reused in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|regular.*module.*ring",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact recovery theorem. Product comparison and its projection equations are reused in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite product preserving functor transporting regular module addition and scalar multiplication determines the transported ring operations",
+   "results": "8 hits: Equiv.module, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.Functor.Linear, CategoryTheory.functorCategoryLinear, MoritaEquivalence.instAdditiveModuleCatFunctorEqv, CategoryTheory.Functor.inducedFunctorLinear, PresheafOfModules.pushforward₀, ModuleCat.restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "No exact recovery theorem. Product comparison and its projection equations are reused in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ModulePullbackTensorIsoE",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "The ordinary natural tensor map on representatives: recover its algebraic inverse-image presentation from the explicit module-operation witnesses",
+   "via": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraicInverseImageOfTransport",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraicInverseImageOfTransport.lean",
+  "declaration": "SheafOfModules.algebraicInverseImage_of_module_transport",
+  "statement": "theorem algebraicInverseImage_of_module_transport\n    {C D : Type u} [Category.{u} C] [Category.{u} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))\n    [PreservesFiniteLimits L]\n    (R : Sheaf J CommRingCat.{u})\n    (A : Sheaf K CommRingCat.{u})\n    (eR : ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A) ≅\n      L.obj ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R))\n    (I : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R) ⥤\n      SheafOfModules.{u} ((sheafCompose K (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj A))\n    (eI : I ⋙ (toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙\n      sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})) ≅\n      (toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n        sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})) ⋙ L)\n    (hI : ∀ M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R),\n          ∃ (addM : ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n            sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⨯ ((toSheaf\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n            (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⟶ ((toSheaf ((sheafCompose J (forget₂\n            CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n            AddCommGrpCat.{u})).obj M))\n            (muM : ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯ ((toSheaf\n              ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n              (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⟶ ((toSheaf ((sheafCompose J\n              (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n              AddCommGrpCat.{u})).obj M))\n            (addI : ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙\n              sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⨯ ((toSheaf\n              ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n              (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((toSheaf ((sheafCompose K\n              (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget\n              AddCommGrpCat.{u})).obj (I.obj M)))\n            (muI : ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A) ⨯ ((toSheaf\n              ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n              (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((toSheaf ((sheafCompose K\n              (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget\n              AddCommGrpCat.{u})).obj (I.obj M))),\n      (∀ (W : Cᵒᵖ) (x : (((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n        sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⨯ ((toSheaf ((sheafCompose\n        J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n        AddCommGrpCat.{u})).obj M)).obj.obj W),\n        addM.hom.app W x = @Add.add (M.val.obj W) inferInstance (((prod.fst : ((toSheaf\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⨯ ((toSheaf ((sheafCompose J (forget₂\n          CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj M) ⟶ ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj\n          M)).hom.app W x) : M.val.obj W) (((prod.snd : ((toSheaf ((sheafCompose J (forget₂\n          CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj M) ⨯ ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⟶\n          ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj M)).hom.app W x) : M.val.obj W)) ∧\n      (∀ (W : Cᵒᵖ) (x : (((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯\n        ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n        (CategoryTheory.forget AddCommGrpCat.{u})).obj M)).obj.obj W),\n        muM.hom.app W x = @SMul.smul (R.obj.obj W) (M.val.obj W) inferInstance (((prod.fst :\n          ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯ ((toSheaf\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⟶ ((sheafCompose J\n          (CategoryTheory.forget CommRingCat.{u})).obj R)).hom.app W x) : R.obj.obj W) (((prod.snd :\n          ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj R) ⨯ ((toSheaf\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ⟶ ((toSheaf ((sheafCompose J (forget₂\n          CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj M)).hom.app W x) : M.val.obj W)) ∧\n      (∀ (W : Dᵒᵖ) (x : (((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙\n        sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⨯ ((toSheaf\n        ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n        (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M))).obj.obj W),\n        addI.hom.app W x = @Add.add ((I.obj M).val.obj W) inferInstance (((prod.fst : ((toSheaf\n          ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⨯ ((toSheaf ((sheafCompose K\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj\n          (I.obj M))).hom.app W x) : (I.obj M).val.obj W) (((prod.snd : ((toSheaf ((sheafCompose K\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj (I.obj M)) ⨯ ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u}\n          RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj\n          (I.obj M)) ⟶ ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙\n          sheafCompose K (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M))).hom.app W x) :\n          (I.obj M).val.obj W)) ∧\n      (∀ (W : Dᵒᵖ) (x : (((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A) ⨯\n        ((toSheaf ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n        (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M))).obj.obj W),\n        muI.hom.app W x = @SMul.smul (A.obj.obj W) ((I.obj M).val.obj W) inferInstance (((prod.fst :\n          ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A) ⨯ ((toSheaf\n          ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((sheafCompose K\n          (CategoryTheory.forget CommRingCat.{u})).obj A)).hom.app W x) : A.obj.obj W) (((prod.snd :\n          ((sheafCompose K (CategoryTheory.forget CommRingCat.{u})).obj A) ⨯ ((toSheaf\n          ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K\n          (CategoryTheory.forget AddCommGrpCat.{u})).obj (I.obj M)) ⟶ ((toSheaf ((sheafCompose K\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙ sheafCompose K (CategoryTheory.forget\n          AddCommGrpCat.{u})).obj (I.obj M))).hom.app W x) : (I.obj M).val.obj W)) ∧\n          L.map addM = prodComparison L ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u}\n            RingCat.{u})).obj R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M)\n            ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙ sheafCompose\n            J (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ≫\n            prod.map (eI.inv.app M) (eI.inv.app M) ≫ addI ≫ eI.hom.app M ∧\n          L.map muM = prodComparison L ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).obj\n            R) ((toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⋙\n            sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M) ≫\n            prod.map eR.inv (eI.inv.app M) ≫ muI ≫ eI.hom.app M) :\n    ∃ AI : AlgebraicInverseImage L R A, AI.modules = I ∧\n      AI.ringUnderlying = eR.symm ∧ HEq AI.moduleUnderlying eI",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fa694",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T073841-L-1112588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fa694",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T073841-L-1112588",
+  "kind": "interface",
+  "note": "independent Codex review: Lean statements and proofs matched with DAG records, cited constructions, unchanged signatures and public imports; both delivered modules and the sole direct importer compile cleanly."
+ }
+}

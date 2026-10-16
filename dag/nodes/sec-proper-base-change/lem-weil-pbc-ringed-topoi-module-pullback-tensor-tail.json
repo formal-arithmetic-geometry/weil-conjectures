@@ -12,22 +12,33 @@
  ],
  "proof": [
   {
-   "text": "The module adjunction and the source tensor universal property identify Hom(T(M tensor_R N), H) with R-bilinear sheaf maps M times N to P(H). Transpose through L ⊣ V, using finite-product comparisons, eI and eP. The addition and scalar-action transport equations hI and hP identify exactly the A-bilinear sheaf maps I(M) times I(N) to H restricted along c. Extend these sectionwise by (s tensor x, t tensor y) maps to st beta(x,y), and uniquely sheafify in both variables. The target tensor universal property gives Hom(T(M) tensor_S T(N), H). The natural Hom equivalence yields mutually inverse comparison maps by evaluation on identities. Functoriality hTmap gives simultaneous naturality; hAdj and hq identify the comparison on generalized pure tensors. This is the proof plan of the remaining named sorry, not a completed Lean proof.",
+   "text": "Recover an AlgebraicInverseImage presentation with modules exactly I, ring underlying comparison eR.symm and module underlying comparison eI from the explicit operation-transport witnesses hI. The new recovery theorem proves ring-operation compatibility by testing hI on the regular module. Substitute its modules equality and identify its module comparison with eI using the heterogeneous equality.",
    "uses": [
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "lem-weil-pbc-sheafification-sets-exact"
+    "lem-weil-pbc-algebraic-inverse-image-of-module-transport"
    ],
    "elementary": false
+  },
+  {
+   "text": "Postcompose hTmap with the inverse objectwise equality cast. Associativity and cancellation of eqToHom give the scalar-extension map equation required by the existing canonical normalized comparison construction. Apply that construction with the recovered algebraic inverse image, c, T, hT and the sheaf adjunction L ⊣ V.",
+   "uses": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack its insertion maps q-prime, tensor isomorphisms, simultaneous naturality and pure equation. Both q-prime and the specified q have the same sectionwise insertion-of-one formula by q_one and hq; function and sheaf extensionality identify them. Substitute this equality, specialize naturality, and reassociate compositions in the pure equation to obtain exactly the stated conclusion. The supplied hP, am and hAdj are not needed by this route; their binders remain unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-weil-pbc-sheafification-sets-exact"
+  "lem-weil-pbc-algebraic-inverse-image-of-module-transport",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
  ],
  "proof_origin": {
-  "by": "worker E2 second reading",
+  "by": "worker G4",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, Hom/bilinear comparison; Tags 03D2 and 03D7 for the explicit module operations"
+  "place": "Tag 03EL: reuse the existing normalized tensor construction; Tags 03D2 and 03D7: derive its algebraic-lift interface from hI using the regular module"
  },
  "mathlib_searches": [
   {
@@ -94,12 +105,12 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-5ffef",
-  "group": "E2",
+  "reviewer": "X-fa694",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261016T054833-L-155881",
+  "landing": "20261016T073841-L-1112588",
   "kind": "interface",
-  "note": "independent Codex review: Matched the corrected tail signature and normalization with its DAG node, change record, Stacks tensor-pullback argument, and unchanged parent contract; verified compilation, forced adaptations, importers, and axioms."
+  "note": "independent Codex review: Lean statements and proofs matched with DAG records, cited constructions, unchanged signatures and public imports; both delivered modules and the sole direct importer compile cleanly."
  },
  "statement_change": {
   "date": "2026-10-16",

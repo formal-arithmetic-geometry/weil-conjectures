@@ -3,9 +3,14 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.CategoryTheory.AlgebraicInverseImageOfTransport
+import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
+
+/-! # Tensor comparison from explicit inverse-image module operations
+
+Source: Stacks Project, Modules on Sites, Tag 03EL.
+(blueprint: lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail)
+-/
 
 @[expose] public section
 
@@ -16,6 +21,8 @@ namespace SheafOfModules
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
+set_option maxHeartbeats 800000 in
+-- Elaborate the explicit scalar-extension casts and the normalized tensor-comparison data.
 /-- The tensor comparison and its generalized pure-tensor normalization for the
 specified inverse-image and scalar-extension module functors.
 Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
@@ -23,45 +30,20 @@ Tags 03D2, 03D7 and 03CZ for transport, adjunction and sheafification.
 (blueprint: lem-weil-pbc-ringed-topoi-module-pullback-tensor-tail)
 
 The equations hI identify addition and scalar multiplication under eI and eR.
-The equations hP identify the direct-image module action with the adjunct of c.
-These operation equations are essential: an underlying-sheaf comparison and a
-compatible module adjunction alone can also describe nongeometric scalar actions.
 
 Proof:
-For an S-module H, the adjunction am and the sheaf tensor universal property
-identify Hom(T(M tensor_R N), H) with R-bilinear sheaf maps from M times N to P(H).
-Transpose such a map through _adj, using the inverse of the product comparison
-for L and eI in the two source factors and eP in the target. The addition equations
-in hI and hP identify the two additivity diagrams with their transposes. For the
-scalar equations, use the product comparison on the three factors R, M and N.
-The two projections specifying k in hP identify its ring component with the
-adjunct of eR.inv followed by c and its module component with eP. Its last equation
-therefore identifies the transposed scalar action with restriction of the H-action
-along c. The scalar equations in hI identify the source actions through eR.
-Injectivity of the adjunction hom equivalence proves both directions. We obtain
-exactly the A-bilinear sheaf maps I(M) times I(N) to H restricted along c.
+Recover the full `AlgebraicInverseImage` presentation from hI. The module graph
+conditions follow directly from product comparisons. Ring compatibility follows by
+testing the module conditions on the regular R-module: the inverse image of its
+section 1 is a faithful scalar generator, so its additive and scalar equations
+recover ring addition and multiplication, and hence zero and one.
 
-Extend such a map beta sectionwise by
-(s tensor x, t tensor y) mapping to (s * t) times beta(x, y).
-A-bilinearity gives the two tensor balancing relations. Commutativity of S gives
-S-linearity in each variable. The restriction maps agree on pure tensors, hence
-on all tensors by tensor induction. Sheafification extends the two variables
-uniquely: finite-product preservation of set sheafification transports the
-bilinear equations, and the sheaf tensor universal property gives an S-linear
-map T(M) tensor_S T(N) to H. Conversely, precompose with q in both variables.
-The equation hq and linearity show that these constructions are inverse, first
-on pure tensors and then on their sheafifications. This gives a Hom equivalence
-natural in H. Applying it and its inverse to identities gives the two comparison
-maps; naturality shows their composites are identities. Take the orientation
-from T(M tensor_R N) to T(M) tensor_S T(N).
-
-The constructions commute with precomposition in M and N; the functorial
-identification hTmap gives the displayed simultaneous naturality. Finally hAdj
-identifies the mate of a map out of T with its composite after eI.inv and q.
-Thus the Hom equivalence applied to the identity of T(M) tensor_S T(N) sends
-the inverse image of the source pure-tensor map to the tensor of the two maps
-obtained by q. This equality of sheaf morphisms can be precomposed by any Z
-and evaluated at every W and t, giving exactly the stated normalization.
+Apply `canonicalRingedTensorComparison_nonempty` to this presentation. Its existing
+bilinear universal-property construction gives the tensor isomorphisms, simultaneous
+naturality, and generalized pure-tensor normalization. The map equation hTmap gives
+the construction's functoriality equation after cancelling the objectwise casts.
+Its insertion maps coincide with the specified q because both satisfy hq. Substituting
+these equalities gives exactly the normalization in the conclusion.
 -/
 theorem module_pullback_tensor_iso_tail
     {C D : Type u} [Category.{u} C] [Category.{u} D]
@@ -368,6 +350,30 @@ theorem module_pullback_tensor_iso_tail
                 ((T.obj M).val ⊗ (T.obj N).val)).app W
               ((L.map x ≫ (eI.inv.app M ≫ q M)).hom.app W t ⊗ₜ[S.obj.obj W]
                 (L.map y ≫ (eI.inv.app N ≫ q N)).hom.app W t)) := by
-  sorry
+  classical
+  have _ := hP
+  obtain ⟨AI, rfl, hring, hunderlying⟩ :=
+    algebraicInverseImage_of_module_transport J K L R A eR I eI hI
+  have hmap' : ∀ {M N : SheafOfModules.{u} ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (f : M ⟶ N),
+      T.map f = eqToHom (hT M) ≫ changeOfRingsHom c (AI.modules.obj M) (AI.modules.map f) ≫
+        eqToHom (hT N).symm := by
+    intro M N f
+    simpa only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id] using
+      congrArg (fun g ↦ g ≫ eqToHom (hT N).symm) (hTmap f)
+  have hu : AI.moduleUnderlying = eI := eq_of_heq hunderlying
+  cases hu
+  have hT' : ∀ M, T.obj M = changeOfRings c (AI.modules.obj M) := hT
+  obtain ⟨k⟩ := canonicalRingedTensorComparison_nonempty
+    R S A L AI c T hT' V _adj hmap'
+  rcases k with ⟨q', hq', e, he, hp⟩
+  have hqq : q' = q := by
+    funext M
+    ext W m
+    exact (hq' M W m).trans (hq M W m).symm
+  subst q'
+  refine ⟨e, fun M M' N N' f g ↦ he f g, ?_⟩
+  intro M N Z x y z hz W t
+  simpa only [Category.assoc] using hp M N Z x y z hz W t
 
 end SheafOfModules
