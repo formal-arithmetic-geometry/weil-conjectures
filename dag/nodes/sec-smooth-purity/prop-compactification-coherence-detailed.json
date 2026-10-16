@@ -343,5 +343,27 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-196ae24ea (reviewer sub-agent of L); spot-checked: Read the item, report, required instructions, all 20 cited node statements, unit/chapter route, and cited Stacks sources. Verified all nine proof steps, hypotheses, map directions, naturality, coherence, witness independence, refinement equalization, coefficient scope, and edge cases. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.compactification_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.compactificationOriginCandidate",
+   "AlgebraicGeometry.ProEtale.compactification_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/CompactificationCoherence.lean",
+  "statement": "theorem compactification_coherence (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : K₀)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ theta : ∀ (c₁ c₂ : Compactification f) (_r : c₁ ⟶ c₂), compactificationOriginCandidate l E n hn c₁ ≅ compactificationOriginCandidate l E n hn c₂, (∀ (c₁ c₂ : Compactification f) (r : c₁ ⟶ c₂) (O : RefinementFiniteLevelOrigin l E n hn X), (theta c₁ c₂ r).app O = refinementComparisonIsomorphism K₀ l hl E n hn f r O) ∧ (∀ c : Compactification f, theta c c (𝟙 c) = Iso.refl _) ∧ (∀ (c₁ c₂ c₃ : Compactification f) (r : c₁ ⟶ c₂) (s : c₂ ⟶ c₃), theta c₁ c₃ (r ≫ s) = theta c₁ c₂ r ≪≫ theta c₂ c₃ s) ∧ (∀ (m : ℕ) (c : Fin m → Compactification f), ∃ d : Compactification f, ∀ i : Fin m, Nonempty (d ⟶ c i)) ∧ ∃ comparison : ∀ c₁ c₂ : Compactification f, compactificationOriginCandidate l E n hn c₁ ≅ compactificationOriginCandidate l E n hn c₂, (∀ (c₁ c₂ d : Compactification f) (r₁ : d ⟶ c₁) (r₂ : d ⟶ c₂), comparison c₁ c₂ = (theta d c₁ r₁).symm ≪≫ theta d c₂ r₂) ∧ (∀ c₁ c₂ c₃ : Compactification f, comparison c₁ c₂ ≪≫ comparison c₂ c₃ = comparison c₁ c₃)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bf7596c91",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all ten statement dependencies, source correspondence, canonical comparisons, universes, edge cases, report sections, and verbatim signature. Independent scompile.py compilation passed at both module paths. No fixes needed; branch unchanged."
  }
 }
