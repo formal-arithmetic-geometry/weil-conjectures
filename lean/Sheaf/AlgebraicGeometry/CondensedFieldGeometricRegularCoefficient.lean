@@ -284,6 +284,7 @@ private lemma realization_conjugate
         (inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫ f ≫
           condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫
         (condensedFieldContinuousMapIso E V).hom.hom := by
+  simp only [condensedFieldPullbackRealization_eq]
   exact conjugate_comp (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p)
     ((Mon.forget _).mapIso (condensedFieldContinuousMapIso E V)) f
 
@@ -390,6 +391,7 @@ theorem condensedField_geometric_regular_coefficient
         (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).hom) =
       (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
         condensedFieldPullbackRealization E p).hom.app
-          (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z) := by sorry
+          (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z) := by
+  simpa only [coefficientValue] using geometric_scalar_value E Ω p a z f
 
 end AlgebraicGeometry.ProEtale

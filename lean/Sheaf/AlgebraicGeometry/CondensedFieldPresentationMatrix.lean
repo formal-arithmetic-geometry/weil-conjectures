@@ -43,6 +43,22 @@ noncomputable def continuousFieldPresentationMatrix
   (((inv e ≫ a.hom ≫ e).hom.app
     (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down
 
+/-- The explicit composite uniquely determines the pullback realization.
+Source: Hemo--Richarz--Scholbach, Example 3.1
+(blueprint: def-weil-pbc-condensed-field-presentation-matrix).
+Proof: the displayed composite is a witness, and the defining equality proves uniqueness. -/
+theorem existsUnique_condensedFieldPullbackRealization
+    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
+    {X V : Scheme.{u}} (g : V ⟶ X) :
+    ∃! α : (upperStar AddCommGrpCat.{u + 1} g).obj
+      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ⟶
+    (sheafCompose (Scheme.ProEt.topology V)
+      (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+        (continuousCoefficientRingSheaf V E),
+      α = condensedPullbackHom (Profinite.continuousCoefficientRingObj E) g ≫
+        (condensedFieldContinuousMapIso E V).hom.hom := by
+  exact ⟨_, rfl, fun _ h ↦ h⟩
+
 /-- The realization of coefficients pulled back along an arbitrary scheme map.
 Source: Hemo--Richarz--Scholbach, Example 3.1
 (blueprint: def-weil-pbc-condensed-field-presentation-matrix).
@@ -55,19 +71,31 @@ noncomputable def condensedFieldPullbackRealization
     (sheafCompose (Scheme.ProEt.topology V)
       (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
         (continuousCoefficientRingSheaf V E) :=
-  condensedPullbackHom (Profinite.continuousCoefficientRingObj E) g ≫
-    (condensedFieldContinuousMapIso E V).hom.hom
+  (existsUnique_condensedFieldPullbackRealization E g).exists.choose
+
+/-- The pullback realization equals its explicit defining composite.
+Source: Hemo--Richarz--Scholbach, Example 3.1
+(blueprint: def-weil-pbc-condensed-field-presentation-matrix).
+Proof: the chosen morphism satisfies its uniquely determining equality. This equation
+allows controlled rewriting without reducing the inverse-image construction at evaluation. -/
+theorem condensedFieldPullbackRealization_eq
+    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
+    {X V : Scheme.{u}} (g : V ⟶ X) :
+    condensedFieldPullbackRealization E g =
+      condensedPullbackHom (Profinite.continuousCoefficientRingObj E) g ≫
+        (condensedFieldContinuousMapIso E V).hom.hom :=
+  (existsUnique_condensedFieldPullbackRealization E g).exists.choose_spec
 
 instance isIso_condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) : IsIso (condensedFieldPullbackRealization E g) := by
-  unfold condensedFieldPullbackRealization
+  rw [condensedFieldPullbackRealization_eq]
   infer_instance
 
 instance isMonHom_condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) : IsMonHom (condensedFieldPullbackRealization E g) := by
-  unfold condensedFieldPullbackRealization
+  rw [condensedFieldPullbackRealization_eq]
   infer_instance
 
 end AlgebraicGeometry.ProEtale

@@ -44,9 +44,10 @@
    "elementary": false
   },
   {
-   "text": "Conjugate the square by the realization isomorphisms, using adjunction-unit naturality and conjugated_morphism_square. Apply it to the constant section 1 at the terminal pro-etale object. Its pullback has a canonical section over the source scheme; naturality along the terminal projection identifies evaluation at y upstairs with evaluation at a(y) downstairs. This proves scalar_naturality. Combine it with regular_conjugate and the inverse-of-composite identity realization_conjugate to obtain geometric_scalar_value. The remaining open step is conversion from coefficientValue to the raw evaluation in the theorem statement; no H-coordinate transport occurs in this node.",
+   "text": "Conjugate the square by the realization isomorphisms, using adjunction-unit naturality and conjugated_morphism_square. Apply it to the constant section 1 at the terminal pro-etale object. Its pullback has a canonical section over the source scheme; naturality along the terminal projection identifies evaluation at y upstairs with evaluation at a(y) downstairs. This proves scalar_naturality. Combine it with regular_conjugate and realization_conjugate to obtain geometric_scalar_value. In realization_conjugate use condensedFieldPullbackRealization_eq to expose the composite only where needed. Finally unfold only coefficientValue to pass from the folded scalar identity to the displayed raw evaluation. No coordinate transport or H is used.",
    "uses": [
-    "lem-weil-pbc-integral-regular-coefficient-pullback"
+    "lem-weil-pbc-integral-regular-coefficient-pullback",
+    "def-weil-pbc-condensed-field-presentation-matrix"
    ],
    "elementary": false
   }
@@ -55,13 +56,14 @@
   "lem-weil-pbc-condensed-field-evaluation-functors",
   "lem-weil-pbc-condensed-field-continuous-realization",
   "lem-weil-pbc-continuous-chart-scheme-naturality",
-  "lem-weil-pbc-integral-regular-coefficient-pullback"
+  "lem-weil-pbc-integral-regular-coefficient-pullback",
+  "def-weil-pbc-condensed-field-presentation-matrix"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Example 3.1",
-  "note": "B4: scalar compatibility split after sustained proof work. All private folded-value identities are proved, ending in geometric_scalar_value. The public raw-evaluation statement remains sorry: unfolding coefficientValue and exacting the folded identity triggers a kernel deterministic timeout. Second reading reproduced this; no public definition or signature was changed."
+  "note": "A4: closed the raw-evaluation hole from the already proved geometric_scalar_value. The source of the kernel timeout was reduction of condensedFieldPullbackRealization at concrete evaluation. Its definition now selects the unique morphism equal to the original explicit composite, from a proved unique-existence theorem. The equation API proves realization_conjugate with controlled unfolding. The final simpa unfolds only coefficientValue. Full theorem and all new API declarations use only the three permitted axioms; zero new holes."
  },
  "mathlib_searches": [
   {
@@ -128,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "X-c15ad",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T090411-L-1837879",
+  "landing": "20261016T102626-L-2294524",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean against unchanged signatures, node statements and proof records; exact realization equality; clean delivery, importer and consumer compilation; permitted axioms only."
  }
 }
