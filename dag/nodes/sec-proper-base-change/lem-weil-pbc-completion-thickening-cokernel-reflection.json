@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Put Q = cokernel(a) and B = K^s Q with inclusion j. Coherent cokernel closure makes Q coherent. Reuse the proved private idealSheafPower_quasicoherent and idealModuleProduct_quasicoherent lemmas of CoherentFormalModule to obtain quasi-coherence of B; the coherent submodule clause makes B coherent. Reuse idealModuleProduct_quotient_comp_zero_iff to pass K^q annihilation from G to Q, and idealModuleProduct_zero_of_mono to pass it to B. These existing lemmas use right exactness of tensor products and naturality of multiplication.",
+   "text": "Put Q = cokernel(a) and B = K^s Q with monic inclusion j. Coherent cokernel closure makes Q coherent. The s-th quotient of Q is coherent by formalCompletionSystem_coherent, evaluated at s-1 (s is positive). The kernel of its projection is coherent. Abelian.monoIsKernelOfCokernel identifies B with that kernel; transport quasi-coherence along the resulting isomorphism and apply coherent submodule closure. No private quasi-coherence or ideal-power helpers from the retired formal-module module are used.",
    "uses": [
     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
     "pqf-lem-coherent-ft-locnoeth",
@@ -25,19 +25,21 @@
    "elementary": false
   },
   {
-   "text": "Set i:Z=V(K^q)→X. The power quotient comparison identifies each quotient by K^q with pushforward of tensor pullback, preserving the quotient projection as the adjunction unit. Annihilation makes that projection invertible. The unit-kernel comparison then gives support of Q and B on Z. Completion on Z followed by inclusion and termwise closed pushforward is faithful. The coherent closed-immersion equivalence, the natural completion comparison, and essential surjectivity of the equivalence transport this faithfulness to the completion functor on supported coherent modules of X.",
+   "text": "Set i:Z=V(K^q)→X. The power quotient comparison identifies each quotient by K^q with pushforward of tensor pullback, preserving the quotient projection as the adjunction unit. Annihilation makes that projection invertible. The unit-kernel comparison then gives support of Q and B on Z. Completion on Z followed by inclusion and termwise closed pushforward is faithful. The coherent closed-immersion equivalence, the natural completion comparison, and essential surjectivity of the equivalence transport this faithfulness to the completion functor on supported coherent modules of X. Use idealModuleProduct_exact_calculus to descend annihilation along the epimorphism G to Q and pull it back along the monomorphism B to Q.",
    "uses": [
     "lem-weil-pbc-closed-immersion-power-quotient",
     "lem-weil-pbc-closed-immersion-unit-kernel",
     "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "lem-weil-pbc-ideal-module-product-exact-calculus"
    ],
    "elementary": false
   },
   {
-   "text": "For every positive level, reduction of the epimorphism G→Q is epimorphic: its composite with the source quotient projection is the composite of G→Q with the target quotient projection. It kills the reduction of a, so factors through the reduced cokernel by cokernel.desc. This factor is epi by cancellation. Passing the given K^s annihilation through this epimorphism kills the ideal product of Q/I^(n+1)Q. formalModuleQuotient_factor applied to Q→Q/I^(n+1)Q gives j followed by that projection equal to zero. Cancel the source quotient projection in the definition of formalModuleQuotientMap to show that each component of the completion of j is zero.",
+   "text": "For every positive level, reduction of the epimorphism G→Q is epimorphic: its composite with the source quotient projection is the composite of G→Q with the target quotient projection. It kills the reduction of a, so factors through the reduced cokernel by cokernel.desc. This factor is epi by cancellation. Passing the given K^s annihilation through this epimorphism kills the ideal product of Q/I^(n+1)Q. formalModuleQuotient_factor applied to Q→Q/I^(n+1)Q gives j followed by that projection equal to zero. Cancel the source quotient projection in the definition of formalModuleQuotientMap to show that each component of the completion of j is zero. Reuse the already proved private product_zero_of_epi from CoherentMapReductionTorsionCoker for the ideal-power multiplication arrow; this avoids redeclaring that helper.",
    "uses": [
-    "lem-weil-pbc-formal-module-ideal-power-factor"
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "lem-weil-pbc-coherent-map-reduction-torsion-coker"
    ],
    "elementary": false
   },
@@ -52,20 +54,22 @@
  "proof_deps": [
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
   "pqf-lem-coherent-ft-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-closed-immersion-power-quotient",
   "lem-weil-pbc-closed-immersion-unit-kernel",
   "lem-weil-pbc-closed-immersion-coherent-equivalence",
   "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-ideal-module-product-exact-calculus",
   "lem-weil-pbc-formal-module-ideal-power-factor",
-  "def-weil-pbc-coherent-formal-module"
+  "lem-weil-pbc-coherent-map-reduction-torsion-coker"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "V2",
-  "date": "2026-10-13",
+  "by": "worker",
+  "group": "K2",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A (lemma-existence-tricky), identification of supported coherent categories and reflection of the second bound; Tag 087T",
-  "note": "Cokernel-only proof by right exactness of reduction and faithfulness on the supported category; the Lean proof avoids exactness of affine completion. Second reading reuses the already proved private ideal-product and power lemmas from CoherentFormalModule instead of duplicating them."
+  "place": "Tag 088A (lemma-existence-tricky), second use of Remark 0888; Tag 087T identifies coherent modules on a closed thickening; proof expanded using right exactness for the cokernel alone",
+  "note": "Restore the commented cokernel route after the upstream sync and combine both estimates. All delivered theorems are proved with no new sorry; the reflection proof uses public closure and annihilator calculus instead of private helpers of the retired formal-module file."
  },
  "mathlib_searches": [
   {
@@ -138,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T045612-L-139492",
-  "kind": "proof",
+  "landing": "20261016T221615-L-1616737",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

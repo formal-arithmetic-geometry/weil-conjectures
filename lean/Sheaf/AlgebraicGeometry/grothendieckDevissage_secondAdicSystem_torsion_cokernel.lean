@@ -11,15 +11,13 @@ import Sheaf.AlgebraicGeometry.CompletionThickeningCokernelReflection
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- One half of the quantitative torsion reflection for a fixed compatible
+/-- One half of the quantitative torsion reflection for a fixed compatible
 algebraization. Source: Stacks Project, Tags 088A and 0888.
 Proof: use the scalar reverse maps from Remark 0888 on affine sections,
 transport them through the comparison square, and pass to inverse limits;
 then use the closed-immersion equivalence and completion reflection.
-(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion-cokernel) - /
+(blueprint: lem-weil-pbc-devissage-second-adic-system-torsion-cokernel) -/
 theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)
@@ -51,7 +49,7 @@ theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
   let F : CoherentModules X := ⟨N.obj.obj (op e), N.property.1 e⟩
   let G : CoherentModules X :=
     ⟨((completion X K).obj H).obj.obj (op e), ((completion X K).obj H).property.1 e⟩
-  let a : F ⟶ G := ⟨δ.hom.app (op e)⟩
+  let a : F ⟶ G := ObjectProperty.homMk (δ.hom.app (op e))
   have hred : ∀ n : ℕ,
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * t)).2
         (cokernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1))))) := by
@@ -59,13 +57,13 @@ theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
     let Fn : CoherentModules X := ⟨M.obj.obj (op n), M.property.1 n⟩
     let Gn : CoherentModules X :=
       ⟨((completion X I).obj H).obj.obj (op n), ((completion X I).obj H).property.1 n⟩
-    let an : Fn ⟶ Gn := ⟨α.hom.app (op n)⟩
+    let an : Fn ⟶ Gn := ObjectProperty.homMk (α.hom.app (op n))
     have hz := coherentMap_reduction_torsion_coker K K Fn Gn an t ht
       (hα n).1 (hα n).2 e
     let p := (σ.app (op e)).app (op n)
     let q := (θ.app (op e)).app (op n)
     let c := cokernel.mapIso
-      (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))
+      (f := formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))
       (formalModuleQuotientMap K an.hom (Nat.le_refl (e + 1))) p q
       (hsquare e n).symm
     let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
@@ -91,6 +89,5 @@ theorem grothendieckDevissage_secondAdicSystem_torsion_cokernel
   have heq : 2 * (2 * t) = 4 * t := by omega
   rw [heq] at h
   exact h
--/
 
 end AlgebraicGeometry

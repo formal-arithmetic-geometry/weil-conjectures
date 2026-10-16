@@ -3,7 +3,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
+import all Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionCoker
+import Sheaf.AlgebraicGeometry.IdealModuleProductExactCalculus
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
@@ -22,21 +23,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-private theorem product_zero_of_epi {X : Scheme.{u}} {J F Q : X.Modules}
-    (j : J ⟶ SheafOfModules.unit X.ringCatSheaf) (p : F ⟶ Q) [Epi p]
-    (h : IsZero (Scheme.idealModuleProduct j F)) :
-    IsZero (Scheme.idealModuleProduct j Q) := by
-  have := idealModuleProduct_mono j Q
-  apply IsZero.of_mono_eq_zero (Scheme.idealModuleProductι j Q)
-  have hz := (idealModuleProduct_quotient_comp_zero_iff j p (𝟙 Q)).mpr
-    (h.eq_zero_of_src _)
-  simpa using hz
--/
-
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem supported_of_power_zero {X : Scheme.{u}}
     (K : X.IdealSheafData) (q : ℕ) (F : X.Modules)
@@ -54,11 +40,12 @@ private theorem supported_of_power_zero {X : Scheme.{u}}
     rw [← he]
     infer_instance
   obtain ⟨_, w, _⟩ := Scheme.Modules.closedImmersion_unit_kernel i F
-  have := idealModuleProduct_mono i.ker.toModulesι F
+  have : Mono (Scheme.idealModuleProductι i.ker.toModulesι F) := by
+    dsimp [Scheme.idealModuleProductι]
+    infer_instance
   apply IsZero.of_mono_eq_zero (Scheme.idealModuleProductι i.ker.toModulesι F)
   apply (cancel_mono (adj.unit.app F)).mp
   simpa only [Scheme.idealModuleProductι, Scheme.idealModuleProduct, adj, zero_comp] using w
--/
 
 private theorem supported_completion_faithful {X Z : Scheme.{u}}
     [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i] (I : X.IdealSheafData)
@@ -100,10 +87,8 @@ private theorem supported_completion_faithful {X Z : Scheme.{u}}
   apply (E.functor ⋙ H).map_injective
   simpa using hfg
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- Completion on a fixed closed thickening reflects a uniform cokernel torsion bound.
+/-- Completion on a fixed closed thickening reflects a uniform cokernel torsion bound.
 Source: Stacks Project, Tag 088A, the second use of Remark 0888 and the identification
 of coherent modules killed by the thickening ideal (Tag 087T).
 https://stacks.math.columbia.edu/tag/088A
@@ -123,7 +108,7 @@ every reduction of j is zero. Faithful completion therefore gives j = 0, hence B
 Finally formalModuleQuotient_factor at the identity of Q factors the inclusion K^(2s)Q
 through K^s Q and proves the requested vanishing. No affine completion exactness or
 kernel torsion hypothesis is used. In fact the cokernel argument does not need hF.
-- /
+-/
 theorem completion_thickening_cokernel_reflection
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (q : ℕ) (hq : 1 ≤ q)
@@ -154,18 +139,34 @@ theorem completion_thickening_cokernel_reflection
     ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X Q).mp hQ).1
   let j := Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι s).2 Q
   let B := Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2 Q
-  have hj : Mono j := idealModuleProduct_mono _ Q
-  have : (Scheme.idealSheafPower K.toModulesι s).1.IsQuasicoherent :=
-    idealSheafPower_quasicoherent K s
-  have : B.IsQuasicoherent := idealModuleProduct_quasicoherent _ Q
+  have hj : Mono j := by
+    dsimp [j, Scheme.idealModuleProductι]
+    infer_instance
+  have hquot : RingedSpace.IsCoherent X.toRingedSpace (formalModuleQuotient K s Q) := by
+    have hc := (formalCompletionSystem_coherent K (⟨Q, hQ⟩ : CoherentModules X)).1 (s - 1)
+    change RingedSpace.IsCoherent X.toRingedSpace
+      (formalModuleQuotient K (s - 1 + 1) Q) at hc
+    simpa only [Nat.sub_add_cancel hs] using hc
+  have : (formalModuleQuotient K s Q).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hquot).1
+  have hkcoh := ((hcoh.1 Q (formalModuleQuotient K s Q) hQ hquot).1
+    (cokernel.π j)).1
+  have : (kernel (cokernel.π j)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hkcoh).1
+  let eB : B ≅ kernel (cokernel.π j) :=
+    (Abelian.monoIsKernelOfCokernel _ (cokernelIsCokernel j)).conePointUniqueUpToIso
+      (limit.isLimit _)
+  have : B.IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso eB.symm inferInstance
   have hB : RingedSpace.IsCoherent X.toRingedSpace B :=
     (hcoh.2 Q B j hQ hj inferInstance).1
   have hQs : IsZero (Scheme.idealModuleProduct
       (K ^ q).subschemeι.ker.toModulesι Q) :=
-    product_zero_of_epi _ p (supported_of_power_zero K q G.obj hG)
+    (Scheme.idealModuleProduct_exact_calculus X).2.1 _ p
+      (supported_of_power_zero K q G.obj hG)
   have hBs : IsZero (Scheme.idealModuleProduct
       (K ^ q).subschemeι.ker.toModulesι B) :=
-    idealModuleProduct_zero_of_mono _ j hQs
+    (Scheme.idealModuleProduct_exact_calculus X).1 _ j hQs
   have hcompleted : formalCompletionMap I j = formalCompletionMap I (0 : B ⟶ Q) := by
     apply NatTrans.ext
     funext n
@@ -211,12 +212,14 @@ theorem completion_thickening_cokernel_reflection
   have hzero : IsZero B := IsZero.of_mono_eq_zero j hjzero
   obtain ⟨k, hk⟩ := formalModuleQuotient_factor K (𝟙 Q)
     (show s ≤ 2 * s by omega)
-  have := idealModuleProduct_mono (Scheme.idealSheafPower K.toModulesι (2 * s)).2 Q
+  have : Mono (Scheme.idealModuleProductι
+      (Scheme.idealSheafPower K.toModulesι (2 * s)).2 Q) := by
+    dsimp [Scheme.idealModuleProductι]
+    infer_instance
   apply IsZero.of_mono_eq_zero
     (Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι (2 * s)).2 Q)
   simpa only [Category.comp_id, hzero.eq_zero_of_src
     (Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι s).2 Q), comp_zero]
     using hk
--/
 
 end AlgebraicGeometry
