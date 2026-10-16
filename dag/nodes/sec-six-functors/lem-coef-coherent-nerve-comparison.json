@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure"
  ],
  "proof": [
   {
@@ -326,5 +327,37 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-4ba36f4ac (reviewer sub-agent of L); spot-checked: Read the item, six new nodes, cited statements, unit/chapter route, delivery rules A–F, and cited Bergner, HTT, Kerodon, and Cisinski source passages. Verified all 14 proof steps, hypotheses, edge cases, searches, blueprint route, no duplicates/cycles/restated clauses, and no SGA use. Wrote review.md with the concrete checks. No repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d70b4523a",
+  "group": "NZ",
+  "result": "fix",
+  "note": "H3 finding fixed: the delivered homotopy_pushout_preservation only said the infinity-equivalence preserves infinity-colimiting cocones, which follows from derived_equivalence and never links homotopy pushout squares in sCat to Cat-infinity. The node, its proof step 11 and the citer lem-coef-hammock-infinity-localization step 4 need that link. fixes/CoherentNerveComparison.lean replaces the field: a span D and cocone c in SCat, a span D' with cofibrant apex and cofibrant legs, an objectwise weak equivalence r : D' to D, and a colimit of D' whose comparison hc'.desc ((Cocone.precompose r).obj c) is a weak equivalence, conclude FiniteReedy.IsColimitEdge of diagram/object/transformation under largeNerveMap derived_nerve followed by qcat_localization (RN_hc then the Cat-infinity localization). The theorem docstring step (6) is updated. Signature, lean.statement and all records are unchanged. The fixes include the full report with a maintainer-fix section. All other clauses match the node: DK/Bergner/Joyal classes, replacement with discrete normalization, simplex realization, adjunction, both Quillen statements, derived nerve with IsLocalization and normalization, discrete nerve, quasicategory and Kan conclusions, and the mapping comparison pinned by HTT's max-subset formula (checked to be functorial and simplicial). All fields are satisfiable. The new definition node is valid with no duplicate notion. No hollow defs, sorry only. Delivered and fixed files compile clean with nt_compile.py --json (side overlay), and a #check probe confirms the new field's type."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentNerveComparison",
+  "declaration": "CategoryTheory.coherent_nerve_comparison",
+  "declarations": [
+   "CategoryTheory.PiZeroEssentiallySurjective",
+   "CategoryTheory.PiZeroEquivalence",
+   "CategoryTheory.DwyerKanEquivalence",
+   "CategoryTheory.IsPiZeroIso",
+   "CategoryTheory.HasPiZeroIsoLifting",
+   "CategoryTheory.BergnerModelData",
+   "CategoryTheory.JoyalModelData",
+   "CategoryTheory.CoherentMappingComparison",
+   "CategoryTheory.CoherentNerveComparisonStatement",
+   "CategoryTheory.coherent_nerve_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentNerveComparison.lean",
+  "statement": "theorem coherent_nerve_comparison : Nonempty CoherentNerveComparisonStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of returned head 23874fdc7710: all comparison fields now have concrete types; Bergner and Joyal data use ModelCategory axioms and characterized classes. The replacement is a functor into new enriched categories with a natural unit and full discrete normalization.",
+  "fixed_by": "NT-stage2-cc-d70b4523a"
  }
 }

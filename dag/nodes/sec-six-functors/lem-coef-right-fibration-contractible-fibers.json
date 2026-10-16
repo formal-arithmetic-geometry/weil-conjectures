@@ -274,16 +274,16 @@
   "file": "lean/Sheaf/CategoryTheory/RightFibrationContractibleFibers.lean",
   "statement": "theorem rightFibration_of_contractible_fibers {E S : SSet.{u}} (q : E ⟶ S) (hq : ∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι q) (hf : ∀ (s : S _⦋0⦌), KanComplex (pullback (SSet.const (X := Δ[0]) s) q) ∧ Enhanced.IsContractible (pullback (SSet.const (X := Δ[0]) s) q)) : modelCategoryQuillen.I.rlp q",
   "branch": "newtargets-dag",
-  "by": "Q15",
+  "by": "N7",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-cc-719444c0b",
-  "group": "Q15",
-  "result": "pass",
-  "note": "Every clause matches the node and Kerodon 01NU (3)=>(1): arbitrary q with no instances on E or S; right-horn RLP for n>=1, 0<i<=n via Fin(n+1); strict vertex fiber pullback(const s, q) required to be KanComplex and Enhanced.IsContractible (Q15 correctly added the Kan conjunct); conclusion I.rlp q, the recorded match of def-weil-pbc-trivial-kan-fibration, includes dimension 0. Edge cases checked: empty S, empty fiber (excluded by IsContractible), n=0, single universe u. No definitions; proof is sorry only; docstrings carry source, blueprint id and 7-step proof; imports cover the stated proof dependencies (the other three have no Lean record yet); node differs from side only in lean, and lean.statement matches the file verbatim; report has both sections. nt_compile --json exited 0 with no errors or warnings (item 1.5 s). No findings."
+  "reviewer": "NT-stage2-cc-d52beba13",
+  "group": "N7",
+  "result": "fix",
+  "note": "Delivery = landed Q15 module/node plus one docstring line and lean.by Q15->N7; statement byte-identical. Every clause checked against node and Kerodon 01NU (3)=>(1): arbitrary q with no assumptions on S; hq = right horns n>=1, 0<i<=n via Fin(n+1); hf = KanComplex and Enhanced.IsContractible (real realization-based weak equivalence to Δ[0]) of pullback(const s, q) for every vertex; conclusion I.rlp q includes n=0. Edge cases ok: empty S, empty fiber excluded, n=0, n=1 horns, single universe u. No defs, sorry only, docstrings carry source/blueprint/7-step proof, no competing declaration. nt_compile --json on the snapshot exits 0, no errors or warnings. Only defect: garbled citation '(Definition the project server)' in the report's second reading; fixes/lem-coef-right-fibration-contractible-fibers.report.md replaces it with 'Kerodon Definition 4.2.1.1, right-handed variant', otherwise identical."
  }
 }

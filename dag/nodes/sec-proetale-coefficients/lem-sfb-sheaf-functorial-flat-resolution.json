@@ -244,11 +244,14 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-categories",
  "lean": {
+  "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+  "declaration": "CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall",
+  "statement": "instance hasFunctorialFlatResolution_sheaf_of_essentiallySmall [Abelian.HasFunctorialFlatResolution A] : Abelian.HasFunctorialFlatResolution (Sheaf J A)",
   "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 18:14 UTC for group NM, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: This declaration gives the functorial flat resolution clause for the cited sheafified tensor structure on \\(\\operatorname{Sh}("
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The upstream declaration is the exact functorial-flat-resolution conclusion for the same essentially small site and symmetric monoidal closed additive Grothendieck abelian coefficient category. Its surrounding source variables provide [Category.{u + 1} A], [Abelian A], [IsGrothendieckAbelian.{u + 1} A], {C : Type (u + 1)}, [Category.{u} C], [EssentiallySmall.{u + 1} C], (J : GrothendieckTopology C), [MonoidalCategory A], [MonoidalPreadditive A], [SymmetricCategory A], [MonoidalClosed A], and the declaration adds [Abelian.HasFunctorialFlatResolution A]. The conclusion is Abelian.HasFunctorialFlatResolution (Sheaf J A), matching the node's final clause; the source module docstring identifies the construction via flat separators and the sheafified tensor structure."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -268,5 +271,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f65da59c",
+  "group": "NR",
+  "result": "pass",
+  "note": "Existing-declaration attachment to CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall (Monoidal/FlatResolution.lean:198-207, sorry-free; axioms propext/Classical.choice/Quot.sound). Delivery changes only the node lean record and the report. Every node clause matches: essentially small site per the size convention of dep lem-weil-pbc-sheaf-tensor-closed (C:Type(u+1), Hom u, EssentiallySmall.{u+1}; A homs u+1); IsGrothendieckAbelian; symmetric monoidal closed; sheafified tensor = monoidalCategory_sheaf_of_essentiallySmall (verified by compile); flat = tensorLeft and tensorRight exact; HasFunctorialFlatResolution = Nonempty LeftResolution of flat.ι (functor + natural epi). Conclusion exact. No empty-site/zero/finiteness/char restrictions. No duplicate node (lem-weil-pbc-sheaf-flat-separator is the separate separator-transfer step). check_record and check_existing clean, statement verbatim; both report sections present. nt_compile.py --json scratch check: no errors. Minor: compiled declaration omits the unused MonoidalPreadditive that the record note lists, a harmless generalisation (additivity is automatic for closed tensor). No fixes needed."
  }
 }

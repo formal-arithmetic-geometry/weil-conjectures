@@ -172,5 +172,49 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-218f32297 (reviewer sub-agent of L); spot-checked: I read the item, the one new node (lem-coef-simplex-category-last-vertex), and the statements of all cited nodes: def-weil-pbc-simplicial-set, lem-coef-kan-quillen-right-proper and lem-coef-bisimplicial-diagonal-equivalence. Sources: I downloaded Low arXiv:1409.8062 and read pp.3-5 (Def 1.1, Rem 1.2, Lem 1.3-1.4). The item's BK/KB chain and face conventions match Low exactly, and the statement is unchanged. The degree-zero [0]-summand clause is not in Low; it comes from the imported statement, the Thomason citer needs it, and step 6 proves it. Kerodon 01NA/02QS/00X4: the last-vertex map from the full category of simplices (all nondecreasing arrows) is a weak homotopy equivalence for every S. The new node states exactly this. I checked by hand that the last-vertex map is simplicial (faces d_p, inner faces, degeneracies). Step 4: T(Z) column = NE(K). Step 5: B(Z) column = N(E(K)^op); u is monotone and simplicial, and the reversal composite equals u(i)=f_1...f_i(0); |S^rev|=|S| holds. Step 6: the exchanged-direction clause of the diagonal lemma applies, and u=v=id on [0]. Step 2: coproduct realization gives the weak equivalence elementarily, including empty index sets. Step 3: the main clause of the diagonal lemma. No cycle: the diagonal lemma's deps do not reach the item or the new node. Small cases tested on the new node: K empty, K=Delta^0 (Delta has a terminal object), K discrete, K=Delta^1. Duplicate search: the DAG grep (last vertex, category of simplices, Thomason, hocolim) and blueprint_refs search (0 hits) found nothing; the aspherical route would be circular via Thomason. Mathlib Simplices.lean has only a preorder and Elements^op, with no theorem; slopmaster2 has nothing. The blueprint ancestor and via are correct. All cited nodes are in the same unit, so no tool_uses are needed. No SGA. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa33e47a0",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, both stmt deps (Mathlib SSet; SSet.Enhanced.IsWeakHomotopyEquivalence at EnhancedDiagramsCones:93, realization pi_0 and pi_r bijections), Low Def 1.1/Lem 1.3-1.4 conventions, module, report (real Worker report and Second reading by NV). BKObj/KBObj are exact chain-indexed dependent sums (X(c_0) for BK; Cop chains with X(c_r) for KB). BKMap/KBMap restrict chains and transport along the endpoint arrow, matching the faces and degeneracies. Diagram functors, reindexing via ulift with independent universes, invariance of the induced bkMap/kbMap under exactly the objectwise WHE hypothesis, actual diagonal (diag then uncurry), natural WHE families beta/kappa with degree-zero [0]-summand identity. Edge cases: empty C, empty Z_00, r=0, universes; no extra assumptions. No hollow defs; sorry only in 6 theorems with proof docstrings; source/blueprint docstrings on all decls; lean.statement verbatim (script-checked); declarations complete; no duplicate. nt_compile --json of the snapshot against the side overlay: clean, 2.4 s, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BousfieldKanComparisonCalculus",
+  "declaration": "SSet.BousfieldKan.comparison_calculus",
+  "file": "lean/Sheaf/AlgebraicTopology/BousfieldKanComparisonCalculus.lean",
+  "statement": "theorem comparison_calculus : (∀ (C : Type v) [Category.{w} C] (X Y : C ⥤ SSet.{u}) (η : X ⟶ Y), (∀ c, SSet.Enhanced.IsWeakHomotopyEquivalence (η.app c)) → SSet.Enhanced.IsWeakHomotopyEquivalence (bkMap η) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (kbMap η)) ∧ ∃ (β : ∀ Z : SimplexCategoryᵒᵖ ⥤ SSet.{u}, BK SimplexCategoryᵒᵖ Z ⟶ diagonal Z) (κ : ∀ Z : SimplexCategoryᵒᵖ ⥤ SSet.{u}, KB SimplexCategoryᵒᵖ Z ⟶ diagonal Z), (∀ Z, SSet.Enhanced.IsWeakHomotopyEquivalence (β Z) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (κ Z) ∧ ∀ x : (Z.obj (op ⦋0⦌)).obj (op ⦋0⦌), (β Z).app (op ⦋0⦌) ⟨ComposableArrows.mk₀ (op ⦋0⦌), x⟩ = x ∧ (κ Z).app (op ⦋0⦌) ⟨ComposableArrows.mk₀ (op (op ⦋0⦌)), x⟩ = x) ∧ (∀ (Z Z' : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (η : Z ⟶ Z'), bkMap η ≫ β Z' = β Z ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map η) ∧ kbMap η ≫ κ Z' = κ Z ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map η))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SSet.BousfieldKan.BKObj",
+   "SSet.BousfieldKan.BKMap",
+   "SSet.BousfieldKan.BKMap_laws",
+   "SSet.BousfieldKan.BK",
+   "SSet.BousfieldKan.bkMapApp",
+   "SSet.BousfieldKan.bkMapApp_laws",
+   "SSet.BousfieldKan.bkMap",
+   "SSet.BousfieldKan.bkFunctor",
+   "SSet.BousfieldKan.KBObj",
+   "SSet.BousfieldKan.KBMap",
+   "SSet.BousfieldKan.KBMap_laws",
+   "SSet.BousfieldKan.KB",
+   "SSet.BousfieldKan.kbMapApp",
+   "SSet.BousfieldKan.kbMapApp_laws",
+   "SSet.BousfieldKan.kbMap",
+   "SSet.BousfieldKan.kbFunctor",
+   "SSet.BousfieldKan.diagonal",
+   "SSet.BousfieldKan.bkReindexApp",
+   "SSet.BousfieldKan.kbReindexApp",
+   "SSet.BousfieldKan.reindex_laws",
+   "SSet.BousfieldKan.bkReindex",
+   "SSet.BousfieldKan.kbReindex",
+   "SSet.BousfieldKan.comparison_calculus"
+  ],
+  "note": "Second reading repaired constant-point replacements to explicit dependent sums of chains, their simplicial operators, functors on diagrams, and reindexing maps with independent universes. The main theorem concerns the induced bkMap/kbMap, not arbitrary maps, and natural comparison families from the full bisimplicial diagram to its actual diagonal, with degree-zero normalization. The five auxiliary law theorems state the well-definedness and functoriality clauses already included in this node; all construction data are explicit and only proof fields use those named postponed theorems."
  }
 }
