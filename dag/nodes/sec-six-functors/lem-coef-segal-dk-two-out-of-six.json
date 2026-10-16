@@ -34,48 +34,169 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the composition clause. On homotopy categories, quasi-inverses for $ha$ and $hb$, in reverse order, give a quasi-inverse for $h(b a)=(hb)(ha)$; whiskering the two given natural isomorphisms gives the inverse equations. At a pair $x,y$ of objects of $A_0$, the actual map on strict mapping fibers for $b a$ is the composite of the maps for $a$ at $(x,y)$ and $b$ at $(ax,ay)$. Both are weak equivalences. The Kan model structure of [lem-coef-kan-quillen-right-proper], with the model-category two-out-of-three axiom stated in [lem-coef-reedy-model-structure], makes their composite a weak equivalence. This proves the first clause directly.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 7.4 and Lemma 7.5, first clause (printed p.16)."
+   }
+  },
+  {
+   "text": "We prepare explicit mapping-space operations for the cancellation clause. Fix any of the Segal spaces $V$. For a finite simplicial subset $L$ of an outer simplex, write $V(L)_q$ for compatible assignments of elements of $V_{k,q}$ to its $k$-simplices. Restriction along $L\\subseteq L'$ is a Kan fibration: attach the finitely many missing nondegenerate simplices in increasing dimension. At a $k$-simplex the restriction is a pullback of $V_k\\to M_kV$, which is a Kan fibration by [lem-coef-reedy-model-structure]. Pullbacks and composites have the horn-lifting property, by pulling a lifting square back, or lifting it successively. The same argument with the vertex subset gives $V_n\\to V_0^{n+1}$ a Kan fibration; $V_0$ and its finite powers are Kan, filling horns coordinatewise. Thus its strict fibers $V(x_0,\\ldots,x_n)$ are Kan. Restriction to the spine gives the Segal map, hence a Kan fibration and a weak equivalence. By [lem-coef-kan-quillen-right-proper] it has the boundary-lifting property, as does its pullback\n$$q_n:V(x_0,\\ldots,x_n)\\longrightarrow\\prod_{i=1}^n M_V(x_{i-1},x_i).$$\nIn particular all the mapping spaces used below are Kan. Boundary lifting extends to lifting against every monomorphism: express that monomorphism as the transfinite boundary-cell composite supplied by the same node, choose lifts at successor stages and take their compatible union at limit stages. Consequently $q_n$ has a section $s_n$ (lift the identity of its target against the empty inclusion). If $u,v:P\\to V(x_0,\\ldots,x_n)$ are two lifts of the same $P\\to\\prod_iM_V(x_{i-1},x_i)$, lift along $P\\times\\partial\\Delta^1\\hookrightarrow P\\times\\Delta^1$, with that base map constant in the interval, to obtain a simplicial homotopy from $u$ to $v$ over the target. This is a parameterized lifting argument, not only a statement about components.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 4.1 and 5.1 (printed pp.11-12), boundary-lifting expansion of the stated trivial fibrations."
+   }
+  },
+  {
+   "text": "Choose such sections for $n=2,3$ and every object tuple. Define $\\mu_V(v,u)=d_1s_2(u,v)$. These operations are associative and unital up to homotopies of maps of the entire mapping spaces, as follows. On triples $(u,v,w)$ let $t=s_3(u,v,w)$. Its faces $d_3t,d_1t$ calculate $w\\circ(v\\circ u)$, while $d_0t,d_2t$ calculate $(w\\circ v)\\circ u$. Compare $d_3t$ with the chosen lift $s_2(u,v)$ over the same pair using the lift homotopy in step 2, and then compare $d_1t$ with the chosen lift of $(d_1d_3t,w)$; these comparisons homotope the first parenthesization to $d_1d_1t$. Similarly the other parenthesization is homotopic to $d_1d_2t$. The equality $d_1d_1=d_1d_2$ identifies their endpoints. For the units, compare $s_2(1,u)$ and $s_2(u,1)$ with $s_0u$ and $s_1u$ respectively; the identities $d_1s_0=d_1s_1=1$ give the unit homotopies. All comparisons use the boundary-lifting consequence of [lem-coef-kan-quillen-right-proper] as in step 2, with the parameter space retained. For a map $f:V\\to V'$, the two maps $f_2s_2$ and $s'_2(f_1\\times f_1)$ into $V'(fx,fy,fz)$ lift the same pair in the target of $q'_2$, so the same argument gives $f\\mu_V\\simeq\\mu_{V'}(f\\times f)$. Identities are preserved strictly. Passing to components proves functoriality of the specified $hV$ and shows that these composition operations give precisely its stated composition.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 5.3-5.5 and Proposition 5.4 (printed pp.12-13), with the same lift argument performed on parameter spaces."
+   }
+  },
+  {
+   "text": "If $\\alpha:x\\to x'$ and $\\beta:y\\to y'$ represent isomorphisms in $hV$, choose arrows $\\bar\\alpha:x'\\to x$, $\\bar\\beta:y'\\to y$ representing their inverses. The equations in $hV$ say that the four composites lie in the components of the corresponding identities in the Kan mapping spaces. Points in the same component are joined by a finite chain of simplicial edges: partition the vertices by the equivalence relation generated by edge endpoints. Every simplex has all its vertices in one class. These labels define a continuous map from the quotient realization to the discrete set of classes, and each fiber is path connected, since a point of a simplex joins a vertex by a straight line and vertices in one class join by finitely many realized edges. Thus these classes are exactly the path components. Compose those edges with $\\mu_V$ and use the parameterized associativity and unit homotopies of step 3. This proves that\n$$T_V:M_V(x,y)\\longrightarrow M_V(x',y'),\\qquad u\\longmapsto\\beta\\circ u\\circ\\bar\\alpha$$\nhas homotopy inverse $u'\\mapsto\\bar\\beta\\circ u'\\circ\\alpha$, after realization. Indeed the composites reassociate to $(\\bar\\beta\\beta)u(\\bar\\alpha\\alpha)$ and $(\\beta\\bar\\beta)u'(\\alpha\\bar\\alpha)$ and then to $u,u'$. The cylinder homeomorphism of [lem-coef-simplicial-realization-cylinder] turns every simplicial homotopy here into a continuous homotopy with the same endpoints; finite chains concatenate as continuous homotopies. The homotopy-equivalence clause of [lem-coef-homotopy-groups-basepoint-change] therefore makes $T_V$ a weak homotopy equivalence, including at nonstationary basepoints. By the naturality in step 3, for $f:V\\to V'$ the square with horizontal maps $T_V,T_{V'}$, using $f\\alpha,f\\beta$ and their specified inverse representatives in $V'$, and vertical maps on mapping spaces induced by $f$, commutes up to such a homotopy. Thus a mapping-space map for $f$ is a weak equivalence at $(x,y)$ if and only if it is at $(x',y')$: the square's horizontal maps are weak equivalences, homotopic realizations have the same weak-equivalence property by the basepoint-change node, and two-out-of-three holds by [lem-coef-reedy-model-structure] and [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-groups-basepoint-change",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 5.3-5.5; mapping-space conjugation argument needed in the proof of Lemma 7.5 (printed p.16)."
+   }
+  },
+  {
+   "text": "We also record the short cancellation argument for maps of Kan complexes. Suppose $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}T$ have $vu$ and $wv$ weak homotopy equivalences. By [lem-cbc-kan-whitehead-inverse], choose simplicial homotopy inverses $r:Z\\to X$ of $vu$ and $s:T\\to Y$ of $wv$. Put $l=sw:Z\\to Y$ and $t=ur:Z\\to Y$. Then $lv\\simeq1_Y$ and $vt\\simeq1_Z$. After realizing, compose these homotopies to obtain $l\\simeq lvt\\simeq t$, and hence $tv\\simeq lv\\simeq1_Y$. Together with $vt\\simeq1_Z$ this makes $|v|$ a homotopy equivalence. The simplicial homotopies realize using [lem-coef-simplicial-realization-cylinder]; [lem-coef-homotopy-groups-basepoint-change] makes $v$ a weak equivalence. Now $vu$ and $v$ give $u$, and $wv$ and $v$ give $w$, by two-out-of-three in [lem-coef-kan-quillen-right-proper] with the axiom in [lem-coef-reedy-model-structure]. This proves the required three-map cancellation for Kan mapping spaces, without any connectedness assumption.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-groups-basepoint-change",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 7.5, second clause (printed p.16): explicit Kan-space cancellation underpinning the omitted argument."
+   }
+  },
+  {
+   "text": "For ordinary categories, equivalences have the same cancellation property by the definition through quasi-inverses. Write $F=ha$, $G=hb$, $H=hc$. Choose quasi-inverses $L$ to $GF$ and $R$ to $HG$, which exist by the two assumptions. Then $P=RH$ and $Q=FL$ satisfy $PG\\cong1_{hA_1}$ and $GQ\\cong1_{hA_2}$. Whiskering gives $P\\cong PGQ\\cong Q$. Therefore also $QG\\cong PG\\cong1_{hA_1}$, so $Q$ is a quasi-inverse for $G$. It follows that $F\\cong QGF$ and $H\\cong HGQ$ are equivalences: each displayed right side is a composite of equivalences, whose quasi-inverse is the reverse composite. Thus all three homotopy-category functors are equivalences. In particular $ha$ and $hb$ are essentially surjective. No assertion about the spaces of objects $A_{i,0}$ follows or is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 7.5, second clause (printed p.16): ordinary-category part, written using quasi-inverses."
+   }
+  },
+  {
+   "text": "Fix vertices $x,y$ of $A_0$ and consider the maps of Kan spaces\n$$M_{A_0}(x,y)\\xrightarrow{u}M_{A_1}(ax,ay)\\xrightarrow{v}M_{A_2}(bax,bay)\\xrightarrow{w}M_{A_3}(cbax,cbay).$$\nHere $vu$ is the actual mapping-space map of $ba$ at $(x,y)$, and $wv$ is that of $cb$ at $(ax,ay)$, so both are weak equivalences by hypothesis. Apply the Kan cancellation argument of step 5 (whose inverse maps are furnished by [lem-cbc-kan-whitehead-inverse]) to conclude that $u$ and $v$ are weak equivalences. The pair $(x,y)$ was arbitrary, so $a$ is fully faithful on mapping spaces, and $b$ has the same property at every pair $(ax,ay)$. All four spaces are Kan by step 2, so the hypothesis of the inverse theorem is met.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 7.5, second clause (printed p.16): cancellation at pairs of objects coming from $A_0$."
+   }
+  },
+  {
+   "text": "For any vertices $z,z'$ of $A_1$, essential surjectivity of $ha$ from step 6 supplies vertices $x,y$ of $A_0$ and isomorphisms $ax\\cong z$, $ay\\cong z'$ in $hA_1$. Use these isomorphisms and their images under $hb$ in the conjugation square of step 4 for the actual map $b$. Its left mapping-space map is a weak equivalence by step 7; its two conjugations are weak equivalences and the square commutes up to realized homotopy. The homotopy-invariance clause of [lem-coef-homotopy-groups-basepoint-change] and the Kan model's two-out-of-three axiom ([lem-coef-kan-quillen-right-proper], [lem-coef-reedy-model-structure]) make the right mapping-space map a weak equivalence. This establishes the mapping-space condition for $b$ at every pair, not merely in the image of $a$. Together with step 6, $a$ and $b$ are Dwyer--Kan equivalences.",
+   "uses": [
+    "lem-coef-homotopy-groups-basepoint-change",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 7.5, second clause (printed p.16): extend full faithfulness of $b$ using essential surjectivity of $ha$."
+   }
+  },
+  {
+   "text": "For vertices $z,z'$ of $A_1$, the composite\n$$M_{A_1}(z,z')\\xrightarrow{b}M_{A_2}(bz,bz')\\xrightarrow{c}M_{A_3}(cbz,cbz')$$\nis a weak equivalence by the hypothesis on $cb$, and its first map is a weak equivalence by step 8. Two-out-of-three in [lem-coef-kan-quillen-right-proper], with its axiom stated in [lem-coef-reedy-model-structure], makes the second map a weak equivalence. For arbitrary vertices $v,v'$ of $A_2$, essential surjectivity of $hb$ from step 6 gives $bz\\cong v$ and $bz'\\cong v'$. Apply the step-4 conjugation square to $c$ with those isomorphisms. Its horizontal maps are weak equivalences and its left vertical map is the one just proved to be a weak equivalence; homotopy invariance from [lem-coef-homotopy-groups-basepoint-change] and two-out-of-three give the right vertical map. Thus $c$ is fully faithful on all mapping spaces and, by step 6, is a Dwyer--Kan equivalence. This finishes the second clause. Empty Segal spaces and empty mapping spaces require no extra case or nonemptiness assumption: all inverse and lifting statements used allow empty inputs, and the object-pair claims are vacuous when there are no pairs.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-homotopy-groups-basepoint-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 7.5, second clause (printed p.16): full faithfulness and conclusion for $c$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, mapping-space foundations. Original expanded argument for Rezk Lemma 7.5, whose published proof is omitted; Rezk Sections 4-5 and 7.4-7.5 were read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Dwyer Kan equivalences of Segal spaces are closed under composition and satisfy two out of three and two out of six",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n",
-   "date": "2026-10-17",
-   "verdict": "no match: the grep hits at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:124,313 are equivalences between simplices and their spines in a single strict Segal simplicial set. Read lines 115-134 and 275-325. The semantic hits also concern strict Segal simplicial sets and quasicategories, not the Dwyer--Kan class of maps between Reedy fibrant simplicial spaces. No result establishes the required class or its cancellation."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "If two adjacent composites of three maps of Segal spaces are fully faithful on mapping spaces and essentially surjective then all three maps are equivalences",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegalCore.mk.inj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} {n : ℕ}\\n  {concat :\\n    (x : X.obj (Opposite.op (SimplexCategory.mk 1))) →\\n      (s : X.obj (Opposite.op (SimplexCategory.mk n))) →\\n        CategoryTheory.SimplicialObject.δ X 0 x = X.map ((SimplexCategory.mk 0).const (SimplexCategory.mk n) 0).op s →\\n          X.obj (Opposite.op (Simple\", \"doc\": \"For a simplicial set $X$ and natural number $n$, if two instances of the strict Segal condition at level $n$ share the same concatenation operation, compatibility with the face map $\\\\delta_0$, and inj\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.StrictSegal.mk.inj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} {spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))}\\n  {spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id}\\n  {spineToSimplex_spine : ∀ (n : ℕ), spineToSimplex ∘ X.spine n = id}\\n  {spineToSimplex_1 : {n : ℕ} → X.Path n → X.obj (Opposite.op (S\", \"doc\": \"If two strict Segal space structures on a simplicial set $X$ have families of functions $\\\\text{spineToSimplex}_n: X_{\\\\text{Path}}(n) \\\\to X([n])$ that satisfy $\\\\text{spine}_n \\\\circ \\\\text{spineToSimplex\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n",
-   "date": "2026-10-17",
-   "verdict": "no match: the grep hits at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:124,313 are equivalences between simplices and their spines in a single strict Segal simplicial set. Read lines 115-134 and 275-325. The semantic hits also concern strict Segal simplicial sets and quasicategories, not the Dwyer--Kan class of maps between Reedy fibrant simplicial spaces. No result establishes the required class or its cancellation."
+   "query": "Dwyer Kan equivalences of Segal spaces satisfy two out of six and composition",
+   "results": "{\"t\": \"2026-10-16T22:38:45Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan equivalences of Segal spaces satisfy two out of six and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.Truncated.IsStrictSegal\"], \"digest\": \"2ac74db15551297e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned strict Segal simplicial-set and nerve declarations describe one simplicial set, not maps of Reedy fibrant simplicial spaces. StrictSegal.lean:115-134 and 275-325 were read; its spineEquiv is an equivalence of simplices with strings. The generic homotopy-class bijectivity hit does not state the Dwyer--Kan cancellation criterion."
   },
   {
    "tool": "loogle",
-   "query": "\"Segal\", \"comp\"",
-   "results": "[loogle] OK 0 hit(s)\n",
-   "date": "2026-10-17",
-   "verdict": "no match: the grep hits at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:124,313 are equivalences between simplices and their spines in a single strict Segal simplicial set. Read lines 115-134 and 275-325. The semantic hits also concern strict Segal simplicial sets and quasicategories, not the Dwyer--Kan class of maps between Reedy fibrant simplicial spaces. No result establishes the required class or its cancellation."
+   "query": "\"Segal\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-16T22:39:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned strict Segal simplicial-set and nerve declarations describe one simplicial set, not maps of Reedy fibrant simplicial spaces. StrictSegal.lean:115-134 and 275-325 were read; its spineEquiv is an equivalence of simplices with strings. The generic homotopy-class bijectivity hit does not state the Dwyer--Kan cancellation criterion."
   },
   {
    "tool": "grep",
-   "query": "Dwyer.?Kan|[Ss]egal.*[Ee]quival|[Tt]wo[Oo]ut[Oo]f[Ss]ix",
-   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"124\", \"text\": \"/-- The fields of `StrictSegal` define an equivalence between `X _⦋m⦌ₙ₊₁`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"line\": \"313\", \"text\": \"/-- The fields of `StrictSegal` define an equivalence between `X _⦋n⦌`\"}\n",
-   "date": "2026-10-17",
-   "verdict": "no match: the grep hits at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:124,313 are equivalences between simplices and their spines in a single strict Segal simplicial set. Read lines 115-134 and 275-325. The semantic hits also concern strict Segal simplicial sets and quasicategories, not the Dwyer--Kan class of maps between Reedy fibrant simplicial spaces. No result establishes the required class or its cancellation."
+   "query": "Dwyer.?Kan|[Ss]egal.*[Ee]quival|twoOutOfSix|two_out_of_six",
+   "results": "{\"t\": \"2026-10-16T22:39:19Z\", \"tool\": \"grep\", \"query\": \"Dwyer.?Kan|[Ss]egal.*[Ee]quival|twoOutOfSix|two_out_of_six\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\"], \"digest\": \"034c1d9fffe0d302\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned strict Segal simplicial-set and nerve declarations describe one simplicial set, not maps of Reedy fibrant simplicial spaces. StrictSegal.lean:115-134 and 275-325 were read; its spineEquiv is an equivalence of simplices with strings. The generic homotopy-class bijectivity hit does not state the Dwyer--Kan cancellation criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful essentially surjective maps of Reedy fibrant simplicial spaces cancel when the two adjacent composites are equivalences",
+   "results": "{\"t\": \"2026-10-16T22:40:15Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful essentially surjective maps of Reedy fibrant simplicial spaces cancel when the two adjacent composites are equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Truncated.cosk.fullyFaithful\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.Truncated.cosk.fullyFaithful\", \"CategoryTheory.SimplicialObject.Truncated.cosk.full\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"2a556efb8f021b11\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned strict Segal simplicial-set and nerve declarations describe one simplicial set, not maps of Reedy fibrant simplicial spaces. StrictSegal.lean:115-134 and 275-325 were read; its spineEquiv is an equivalence of simplices with strings. The generic homotopy-class bijectivity hit does not state the Dwyer--Kan cancellation criterion."
   },
   {
    "tool": "leansearch",
    "query": "Dwyer Kan equivalences of Segal spaces satisfy two out of six",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.isRightKanExtension\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(sx : StrictSegal X) : X.IsRightKanExtension (𝟙 ((inclusion 2).op ⋙ X))\", \"doc\": \"For a strict Segal space $ X $, the simplicial set $ X $ is the right Kan extension of the composition of the opposite of the inclusion functor $ \\\\Delta_{\\\\leq 2} \\\\to \\\\Delta $ with $ X $. This characte\"}\n  {\"name\": \"SSet.StrictSegal.mk.injEq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"∀ {X : SSet} (spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n)))\\n  (spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id)\\n  (spineToSimplex_spine : ∀ (n : ℕ), spineToSimplex ∘ X.spine n = id)\\n  (spineToSimplex_1 : {n : ℕ} → X.Path n → X.obj (Opposite.op (S\", \"doc\": \"If two strict Segal space structures on a simplicial set $X$ are defined using the same family of spine-to-simplex isomorphisms $\\\\text{spineToSimplex}_n: X_{\\\\text{Path}}(n) \\\\to X([n])$ that satisfy $\\\\\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(n : ℕ) : (rightExtensionInclusion X 2).IsPointwiseRightKanExtensionAt ⟨⦋n⦌⟩\", \"doc\": \"For a strict Segal space $X$ and natural number $n$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at the object $[n]$. This means\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(n : ℕ) : X _⦋n⦌ ≃ Path X n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \": (rightExtensionInclusion X 2).IsPointwiseRightKanExtension\", \"doc\": \"For a strict Segal space $X$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at each object $[n]$. This means the canonical cone co\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"{n : ℕ} (s : Cone (proj (op ⦋n⦌) (Truncated.inclusion 2).op ⋙ (Truncated.inclusion 2).op ⋙ X)) (x : s.pt) (i : ℕ)\\n  (hi : i < n) : X.map (mkOfSucc ⟨i, hi⟩).op (lift sx s x) = s.π.app (strArrowMk₂ (mkOfSucc ⟨i, hi⟩)) x\", \"doc\": \"For a strict Segal space $X$, natural number $n$, cone $s$ over a diagram involving the truncated simplex category $\\\\Delta_{\\\\leq 2}$, and element $x$ in the apex of $s$, the compatibility condition as\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"{n : ℕ} (s : Cone (proj (op ⦋n⦌) (Truncated.inclusion 2).op ⋙ (Truncated.inclusion 2).op ⋙ X)) (x : s.pt) (i j : ℕ)\\n  (hij : i ≤ j) (hj : j ≤ n) :\\n  X.map (mkOfLe ⟨i, by lia⟩ ⟨j, by lia⟩ hij).op (lift sx s x) =\\n    s.π.app (strArrowMk₂ (mkOfLe ⟨i, by lia⟩ ⟨j, by lia⟩ hij)) x\", \"doc\": \"For a strict Segal space $X$, natural number $n$, and a cone $s$ over a diagram involving the truncated simplex category $\\\\Delta_{\\\\leq 2}$, the mapping of the order-preserving morphism $[i] \\\\to [n]$ (\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": (X _⦋m⦌ₙ ₊ ₁) ≃ Path X m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n",
-   "date": "2026-10-17",
-   "verdict": "no match: the grep hits at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:124,313 are equivalences between simplices and their spines in a single strict Segal simplicial set. Read lines 115-134 and 275-325. The semantic hits also concern strict Segal simplicial sets and quasicategories, not the Dwyer--Kan class of maps between Reedy fibrant simplicial spaces. No result establishes the required class or its cancellation."
+   "results": "{\"t\": \"2026-10-16T22:40:16Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan equivalences of Segal spaces satisfy two out of six\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.mk.injEq\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.spineEquiv\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.Truncated.StrictSegal.spineEquiv\"], \"digest\": \"861faa0fea40e965\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned strict Segal simplicial-set and nerve declarations describe one simplicial set, not maps of Reedy fibrant simplicial spaces. StrictSegal.lean:115-134 and 275-325 were read; its spineEquiv is an equivalence of simplices with strings. The generic homotopy-class bijectivity hit does not state the Dwyer--Kan cancellation criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-equivalence-dk",
@@ -95,5 +216,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-dk-two-out-of-six",
+  "worker": "stage1",
+  "summary": "Proved both clauses with no new nodes: expanded Reedy matching-space lifting to parameterized Segal composition, proved conjugation invariance, and supplied separate quasi-inverse cancellation arguments for Kan spaces and ordinary categories. Mapping cancellation is first established on image pairs and then extended using the homotopy-category essential surjectivity. Statement unchanged; existing Mathlib candidates only concern strict Segal simplicial sets.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction, mapping-space foundation through the cosimplicial-frame/cofibrant-inversion and Rezk-completion chain. Supporting the categorical-equivalence criterion used in Rezk Section 14, proof of assertions (1) and (3); this is additional Segal-space infrastructure, not a literal assertion of the blueprint paragraph. Generic supporting cancellation lemma for Proposition 13.8: both clauses of Lemma 7.5.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic Whitehead inverse theorem for weak equivalences of arbitrary Kan complexes, used solely for the Kan mapping-space cancellation in steps 5 and 7. This unit has no such inverse theorem; it replaces no step of the coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-183418305",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-183418305 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps and the full statements of the six cited nodes. Checked against Rezk (text copy already on this machine, /tmp/q34rezk): §5.1 (objects are vertices of W0, map_W is the strict fiber of (d1,d0), identity s0x), §7.4 (both DK conditions) and Lemma 7.5 (both clauses, no completeness). The statement is unchanged and matches the source exactly. Step 2: the matching object for Δ^op is Hom(∂Δ^k,V); attaching faces is a pullback of V_k→M_kV; the Segal map restricted to the spine is a trivial fibration, so the fiberwise q_n has boundary lifting, and lifting extends to all monos via the Kan node's cell-decomposition sentence. Step 3: μ(v,u)=d1 s2(u,v); checked the faces of t=s3, d1d1=d1d2, units from s0u/s1u, naturality. Step 4: conjugation inverse checked, realized via the cylinder node, weak equivalence via the homotopy-equivalence clause of the basepoint-change node; the naturality square gives invariance of the mapping-space condition along isomorphisms. Step 5: types of r, s, l=sw, t=ur checked; lv≃1, vt≃1, l≃t, so v is a homotopy equivalence and 2-of-3 gives u and w. Step 6 (elementary): P=RH, Q=FL, P≅Q, F≅QGF, H≅HGQ, all well-typed. Steps 7–9: the image pairs are exactly those of the hypotheses, then extended via essential surjectivity of ha/hb and the step-4 square. Edge cases: empty spaces, discrete nerves with isomorphic distinct objects, a Segal groupoid with nontrivial π1, the noncomplete walking isomorphism. No new nodes; no duplicate (lem-coef-segal-homotopy-category-components only overlaps the π0 part of step 3, and the parameterized homotopies are needed); no cycle (the 132-node closure does not reach the item); no Mathlib match. Accepted tool_use: lem-cbc-kan-whitehead-inverse (unit sk-prop-sf-cbc, off-route, generic black-box Whitehead inverse for Kan complexes, steps 5 and 7). Minor: the report says the second reader changed created.item, but the file keeps the creating item lem-coef-segal-categorical-equivalence-dk, which is correct. Cosmetic, pre-existing: the A0 notation clash in the statement. No fixes."
  }
 }

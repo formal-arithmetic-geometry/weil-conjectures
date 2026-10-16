@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-kun-0f0f",
-   "place": "Proof, preliminary stalkwise integral homological algebra, paragraph beginning \"Since Z has global dimension 1\": filtered tensor construction underlying the bounded Kunneth calculation.",
+   "place": "## Proof, final paragraph: the assertion that a free resolution computes the displayed ordinary integral derived tensors; this node supplies the convolution/graded comparison in the stalkwise bounded Kunneth calculation used by the corrected split of lem-kun-integral-derived-tensor-bounded-torsion.",
    "via": [
     "lem-kun-bounded-tensor-tor-spectral-sequence",
     "lem-kun-integral-bounded-kunneth-exact",
@@ -26,19 +26,18 @@
   "def-sp-filtered-complex-subquotients",
   "def-pc-module-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-sp-finite-filtration-induction"
+  "lem-pc-derived-tensor-second-factor-functor"
  ],
  "proof": [
   {
-   "text": "We first record the elementary module consequences needed below, with flat meaning exactness of tensor as in the hypotheses. Tensor commutes with direct sums: the inverse to the distribution map sends a pure tensor with a finite-support vector to the finite sum of its component tensors; the two composites are identities on pure tensors. Thus direct sums of exact sequences are exact, by checking kernels and lifting finitely many nonzero components, and direct sums of flat modules are flat. Tensor products of flat modules are flat, since their tensor functor is the composite of two exact tensor functors, under $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$. For $0\\to A\\to B\\to C\\to0$ with $A,C$ flat, [lem-weil-pbc-flat-quotient-tensor-injective] gives a short exact row after tensoring with any module. For an injection $X\\hookrightarrow Y$, form these rows for $X,Y$. If an element of $X\\otimes B$ dies in $Y\\otimes B$, its image in $X\\otimes C$ is zero by flatness of $C$; lift it to $X\\otimes A$, whose image in $Y\\otimes A$ is zero since the bottom row is injective at its first term. Flatness of $A$ kills the lift. Hence tensoring with $B$ preserves injections. Tensor is right exact because balanced maps out of a cokernel tensor correspond exactly to balanced maps annihilating the defining image; consequently $B$ is flat. In particular all modules $P^r/F^iP^r$ and $Q^s/F^jQ^s$ are flat: induct on the finite number of graded layers, starting from the zero quotient at a lower filtration bound, using $0\\to\\operatorname{gr}^iP^r\\to P^r/F^{i+1}P^r\\to P^r/F^iP^r\\to0$, and the corresponding sequence for $Q$.",
+   "text": "We first record the elementary module consequences needed below, with flat meaning exactness of tensor as in the hypotheses. Tensor commutes with direct sums: the inverse to the distribution map sends a pure tensor with a finite-support vector to the finite sum of its component tensors; the two composites are identities on pure tensors. Thus direct sums of exact sequences are exact, by checking kernels and lifting finitely many nonzero components, and direct sums of flat modules are flat. Tensor products of flat modules are flat, since their tensor functor is the composite of two exact tensor functors, under $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$. For $0\\to A\\to B\\to C\\to0$ with $A,C$ flat, [lem-weil-pbc-flat-quotient-tensor-injective] gives a short exact row after tensoring with any module. For an injection $X\\hookrightarrow Y$, form these rows for $X,Y$. If an element of $X\\otimes B$ dies in $Y\\otimes B$, its image in $X\\otimes C$ is zero by flatness of $C$; lift it to $X\\otimes A$, whose image in $Y\\otimes A$ is zero since the bottom row is injective at its first term. Flatness of $A$ kills the lift. Hence tensoring with $B$ preserves injections. Tensor is right exact because balanced maps out of a cokernel tensor correspond exactly to balanced maps annihilating the defining image; consequently $B$ is flat. In particular all modules $P^r/F^iP^r$ and $Q^s/F^jQ^s$ are flat: induct on the finite number of graded layers, starting from the zero quotient at a lower filtration bound, using $0\\to\\operatorname{gr}^iP^r\\to P^r/F^{i+1}P^r\\to P^r/F^iP^r\\to0$, and the corresponding sequence for $Q$. More precisely, for $i\\le A_P$ the quotient $P^r/F^iP^r$ is zero. Induct for $A_P\\le i<B_P$ through the displayed short exact sequences; for $i\\ge B_P$ the quotient is $P^r$, already assumed flat. The identical argument covers every $j$ for $Q$. Zero modules are flat since their tensor functor is zero.",
    "uses": [
     "lem-weil-pbc-flat-quotient-tensor-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800. Elementary exact-row chase and finite induction supplying quotient flatness, not an additional assumption."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800. Module exactness input: Tag 00HL (algebra-lemma-flat-tor-zero); the flat-extension chase and finite induction are written out."
    }
   },
   {
@@ -50,11 +49,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800."
    }
   },
   {
-   "text": "Fix $a$. For each $i+j=a$ project $T$ to $U_{ij}=\\operatorname{Tot}((P/F^{i+1}P)\\otimes_R(Q/F^{j+1}Q))$. Only finitely many $U_{ij}$ can be nonzero: $i<A_P$ or $j<A_Q$ makes one quotient zero. Restrict these projections to $G^aT$ and combine them into a map to their finite direct sum. On the image of $\\operatorname{Tot}(F^rP\\otimes F^sQ)$ with $r+s=a$, every component except $(i,j)=(r,s)$ vanishes: otherwise $r>i$ or $s>j$, so one factor projects to zero. Its diagonal component has image $C_{rs}=\\operatorname{Tot}(\\operatorname{gr}^rP\\otimes\\operatorname{gr}^sQ)$. This image identifies with $C_{rs}$ as a subcomplex of $U_{rs}$: apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to\\operatorname{gr}^rP^k\\to P^k/F^{r+1}P^k\\to P^k/F^rP^k\\to0$ and its $Q$ analogue; the quotients are flat by Step 1. Tensoring the two injections successively and taking direct sums over cochain degrees preserves injections. The same lemma, applied to the step/graded short exact sequences, identifies the kernel of the diagonal surjection $\\operatorname{Tot}(F^rP\\otimes F^sQ)\\to C_{rs}$ with the sum of the images of $\\operatorname{Tot}(F^{r+1}P\\otimes F^sQ)$ and $\\operatorname{Tot}(F^rP\\otimes F^{s+1}Q)$. Explicitly, first quotient the first factor, whose kernel is $F^{r+1}P\\otimes F^sQ$; then quotient the second factor, whose kernel is $\\operatorname{gr}^rP\\otimes F^{s+1}Q$, the image of $F^rP\\otimes F^{s+1}Q$. All these assertions hold termwise and their maps commute with the signed tensor differential.",
+   "text": "Fix $a$. For each $i+j=a$ project $T$ to $U_{ij}=\\operatorname{Tot}((P/F^{i+1}P)\\otimes_R(Q/F^{j+1}Q))$. Only finitely many $U_{ij}$ can be nonzero: $i<A_P$ or $j<A_Q$ makes one quotient zero. Restrict these projections to $G^aT$ and combine them into a map to their finite direct sum. On the image of $\\operatorname{Tot}(F^rP\\otimes F^sQ)$ with $r+s=a$, every component except $(i,j)=(r,s)$ vanishes: otherwise $r>i$ or $s>j$, so one factor projects to zero. Its diagonal component has image $C_{rs}=\\operatorname{Tot}(\\operatorname{gr}^rP\\otimes\\operatorname{gr}^sQ)$. This image identifies with $C_{rs}$ as a subcomplex of $U_{rs}$: apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to\\operatorname{gr}^rP^k\\to P^k/F^{r+1}P^k\\to P^k/F^rP^k\\to0$ and its $Q$ analogue; the quotients are flat by Step 1. Tensoring the two injections successively and taking direct sums over cochain degrees preserves injections. The same lemma, applied to the step/graded short exact sequences, identifies the kernel of the diagonal surjection $\\operatorname{Tot}(F^rP\\otimes F^sQ)\\to C_{rs}$ with the sum of the images of $\\operatorname{Tot}(F^{r+1}P\\otimes F^sQ)$ and $\\operatorname{Tot}(F^rP\\otimes F^{s+1}Q)$. Explicitly, first quotient the first factor, whose kernel is $F^{r+1}P\\otimes F^sQ$; then quotient the second factor, whose kernel is $\\operatorname{gr}^rP\\otimes F^{s+1}Q$, the image of $F^rP\\otimes F^{s+1}Q$. All these assertions hold termwise and their maps commute with the signed tensor differential. The same flat-quotient lemma applied to $0\\to F^rP^k\\to P^k\\to P^k/F^rP^k\\to0$ and to $Q$ also shows that the step tensor complexes embed in $T$; however the image formulation in the statement already suffices for the argument. When a diagonal quotient is zero, its entire step tensor lies in the kernel just computed, so no index outside the finite nonzero graded range is discarded without accounting for its contribution.",
    "uses": [
     "lem-weil-pbc-flat-quotient-tensor-injective",
     "def-pc-tensor-complex-sheaves",
@@ -63,7 +62,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800. Diagonal quotient construction and its explicit two-stage kernel calculation."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800."
    }
   },
   {
@@ -74,7 +73,7 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800."
    }
   },
   {
@@ -88,18 +87,19 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800. Finite extension argument for flatness and K-flatness; no boundedness of cochain degrees is used."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800. K-flatness is Definition 06XZ (definition-K-flat); acyclicity in degreewise short exact sequences is Tag 0117 (homology-lemma-long-exact-sequence-cochain)."
    }
   },
   {
-   "text": "For filtered chain maps $u:P\\to P'$ and $v:Q\\to Q'$, the tensor map sends $G^aT$ into $G^aT'$ because it sends each image for $(i,j)$ into the corresponding image. On the graded comparison of Step 4 the two composites send $[x]\\otimes[y]$ to $[u(x)\\otimes v(y)]$. These tensors generate, proving simultaneous naturality, including identities and composition. Apply [lem-pc-derived-tensor-second-factor-functor] with $A=R$ to the identity K-flat resolutions of $P$ and of each $\\operatorname{gr}^iP$. It identifies $T$ with $P\\otimes_R^{\\mathbf L}Q$ and each $C_{ij}$ with $\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ$ in $D(R)$. The theorem's canonicity and second-variable natural transformation identify their morphisms with ordinary tensor maps on these representatives. Consequently the complex comparisons give the displayed natural derived comparisons, with the same identity and composition laws.",
+   "text": "For filtered chain maps $u:P\\to P'$ and $v:Q\\to Q'$, the tensor map sends $G^aT$ into $G^aT'$ because it sends each image for $(i,j)$ into the corresponding image. On the graded comparison of Step 4 the two composites send $[x]\\otimes[y]$ to $[u(x)\\otimes v(y)]$. These tensors generate, proving simultaneous naturality, including identities and composition. Apply [lem-pc-derived-tensor-second-factor-functor] with $A=R$ to the identity K-flat resolutions of $P$ and of each $\\operatorname{gr}^iP$. It identifies $T$ with $P\\otimes_R^{\\mathbf L}Q$ and each $C_{ij}$ with $\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ$ in $D(R)$. The theorem's canonicity and second-variable natural transformation identify their morphisms with ordinary tensor maps on these representatives. Consequently the complex comparisons give the displayed natural derived comparisons, with the same identity and composition laws. Only $A_P\\le i<B_P$ and $A_Q\\le j<B_Q$ have nonzero graded complexes, so every displayed graded sum is a finite biproduct. In the additive derived category with its induced localization structure [def-weil-abstract-derived-category], the chain-level summand inclusions and projections still satisfy $p_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_ip_i=1$. These equations exhibit the localization of that complex sum as the direct sum of the localized graded tensors: the map with prescribed components is $\\sum_i\\iota_if_i$, and uniqueness follows by the second identity. Thus the derived comparison includes the canonical direct-sum identification, not only the separate identifications of its summands. Its naturality follows from the same inclusions and the representative formula already proved.",
    "uses": [
-    "lem-pc-derived-tensor-second-factor-functor"
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800. Derived tensor input: Tag 06Y6 (lemma-derived-base-change), construction before it, and lemma-derived-tor-quasi-isomorphism-other-side. Finite biproduct identity verification is explicit."
    }
   },
   {
@@ -110,7 +110,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800."
+    "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800. Quasi-isomorphism inputs are clauses (1) and (3) of lem-pc-derived-tensor-second-factor-functor, from Tag 06Y6 and lemma-derived-tor-quasi-isomorphism-other-side."
    }
   }
  ],
@@ -121,12 +121,13 @@
   "def-sp-filtered-complex-subquotients",
   "def-pc-module-kflat-complex",
   "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-pc-derived-tensor-second-factor-functor"
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Section section-kunneth-spectral-sequence, convolution construction before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); read cache /home/ubuntu/c1-stacks-review/more-algebra.tex lines 15425–15520 and 15765–15800. Expanded diagonal kernel proof and finite flat/K-flat induction; naturality and filtered quasi-isomorphism argument supplied explicitly."
+  "place": "Section section-kunneth-spectral-sequence, explicit convolution construction and diagonal quotient/kernel calculation before Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); literature/stacks-project/more-algebra.tex lines 15425-15520 and 15765-15800. Agent expansion of quotient flatness, the diagonal kernel, finite flat/K-flat extension induction, representative naturality and filtered quasi-isomorphism preservation; no spectral-sequence input."
  },
  "mathlib_searches": [
   {
@@ -296,10 +297,52 @@
    "results": "{\"t\": \"2026-10-16T03:08:07Z\", \"tool\": \"grep\", \"query\": \"(associated.?graded|convolution|filtration).{0,90}tensor|tensor.{0,90}(associated.?graded|filtration)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"], \"digest\": \"b188e1f0954f8324\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: inspected Graded/Internal.lean lines 12-110 and DayConvolution.lean lines 12-85. Graded algebra tensor multiplication, graded scalar multiplication, and Day convolution of functors do not state the associated graded quotient comparison for filtered complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "(associated.?graded|convolution|filtration).{0,90}tensor|tensor.{0,90}(associated.?graded|filtration)",
+   "results": "{\"t\": \"2026-10-16T22:49:16Z\", \"tool\": \"grep\", \"query\": \"(associated.?graded|convolution|filtration).{0,90}tensor|tensor.{0,90}(associated.?graded|filtration)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"], \"digest\": \"b188e1f0954f8324\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"Filtration\"",
+   "results": "{\"t\": \"2026-10-16T22:49:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"Filtration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded tensor product convolution filtration of K-flat complexes",
+   "results": "{\"t\": \"2026-10-16T22:49:19Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded tensor product convolution filtration of K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedTensorProduct.tmul\", \"GradedTensorProduct.instRing\", \"GradedTensorProduct\", \"TensorProduct.gradedMul_def\", \"IsRingFiltration.toGradedMonoid\", \"TensorProduct.term_ᵍ⊗[_]_\", \"GradedTensorProduct.term_ᵍ⊗ₜ[_]_\", \"GradedTensorProduct.instModule\"], \"digest\": \"1d02600ebc7dd308\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated graded of the convolution filtration on a tensor product of flat filtered complexes is the direct sum of tensor products of graded complexes",
+   "results": "{\"t\": \"2026-10-16T22:49:22Z\", \"tool\": \"leanfinder\", \"query\": \"Associated graded of the convolution filtration on a tensor product of flat filtered complexes is the direct sum of tensor products of graded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.gradedMul\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"TensorProduct.one_gradedMul\", \"TensorProduct.gradedMul_assoc\", \"TensorProduct.gradedMul_def\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"TensorProduct.algebraMap_gradedMul\"], \"digest\": \"977760bc91780cd1\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|filteredTensor|filtered_tensor|convolution.*filtration",
+   "results": "{\"t\": \"2026-10-16T22:50:00Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|filteredTensor|filtered_tensor|convolution.*filtration\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded functor is monoidal for finite filtered complexes with flat quotient modules and preserves graded quasi-isomorphisms under tensor product",
+   "results": "{\"t\": \"2026-10-16T22:50:02Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded functor is monoidal for finite filtered complexes with flat quotient modules and preserves graded quasi-isomorphisms under tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\"], \"digest\": \"4178da90560d015a\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: inspected TensorProduct/Graded/Internal.lean lines 12-110 and External.lean lines 12-95 (multiplication of already graded algebras), Homology/Monoidal.lean lines 12-102 (ordinary tensor of complexes), DayConvolution.lean lines 12-78 (Kan-extension convolution of functors), and Monoidal/Tor.lean lines 12-66 (module-object Tor). None states a filtered convolution quotient comparison, its flat/K-flat closure, or filtered quasi-isomorphism preservation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
   "by": "worker",
@@ -321,15 +364,15 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-kun-filtered-tensor-graded-comparison",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded the convolution tensor comparison into finite bounds, quotient-flatness preparation, diagonal quotient maps and their kernels, the canonical graded isomorphism, finite flat/K-flat extension induction, derived interpretation, and naturality/filtered quasi-isomorphism preservation. Reused existing generic module and complex exactness nodes, with no new nodes. Read the Stacks source in its existing cache and checked each cited statement; no finished project declaration or exact Mathlib match found.",
-  "blueprint": "Realizes the preliminary integral homological algebra attributed to lem-kun-0f0f, paragraph beginning \"Since Z has global dimension 1\", through the convolution step of lem-kun-bounded-tensor-tor-spectral-sequence. The unit has no proof steps in its record; its Kunneth/projection-formula route is retained.",
+  "summary": "Re-audited the inherited seven-step proof against the local Stacks source and every cited node statement. Kept the statement unchanged, covered both constant tails in the quotient-flatness induction, made step tensor injections and zero diagonal contributions explicit, and added the finite-biproduct verification for the derived comparison. Removed unused statement dependency lem-sp-finite-filtration-induction. No new nodes and no Mathlib leaf; no exact finished project declaration. Six fresh logged Mathlib searches with two semantic phrasings supplement the inherited searches.",
+  "blueprint": "The current main-20261015 lem-kun-0f0f keeps its proof in the separate file lem-kun-0f0f.proof.md, whose text is identical to the older master ## Proof; its final paragraph asserts that free resolutions compute the ordinary integral tensor. The corrected ancestor split replaces that unsupported assertion by stalkwise bounded Kunneth homological algebra, realized here by its convolution/graded comparison. The inherited from.place mistakenly attributed the Stacks phrase Since Z has global dimension 1 to the blueprint; corrected to the actual blueprint paragraph and explicit descendant chain. No chapter or unit route changes.",
   "tool_uses": [
    {
     "node": "lem-pc-derived-tensor-second-factor-functor",
-    "why": "Generic K-flat ordinary-module derived tensor and preservation of quasi-isomorphisms, already named in the item statement; the Kunneth unit has no ordinary-module replacement for this interface."
+    "why": "Ordinary-module K-flat computation and quasi-isomorphism preservation in D(R), already specified in the item statement; no ordinary-module derived-tensor interface in this Kunneth unit replaces this generic tool."
    }
   ]
  },
@@ -339,10 +382,10 @@
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-Codex-NP-2ab07ff33",
-  "group": "NP",
+  "reviewer": "NT-cc-Q41-315f7199a",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-2ab07ff33 (reviewer sub-agent of L); spot-checked: Read the complete item, all seven proof steps, unit/chapter route, cited DAG statements, and Stacks sources (section-kunneth-spectral-sequence, Tags 0H7Y, 00HL, 0117, 06Y6). Verified filtration bounds, quotient flatness induction, diagonal kernel and canonical graded isomorphism, K-flatness, derived base-change category D(R), naturality, and filtered quasi-isomorphism preservation. Tested zero, one-layer, gaps, negative indices, zero ring, and unbounded complexes. No duplicates, circularity, missing citations, false claims, or repairs found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-315f7199a (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, every cited statement, Stacks more-algebra.tex 15425-15530 (section-kunneth-spectral-sequence) and Tag 0H7Y at 15760-15825, the master lem-kun-0f0f.md proof and the main-20261015 lem-kun-0f0f.proof.md. The statement is unchanged from base, so no target is weakened, and its hypotheses match Stacks' flatness and K-flatness assumptions specialized to finite filtrations. Step 1: the flat-extension chase is correct (C flat makes X⊗C→Y⊗C injective; A flat kills the lift), and the quotient-flatness induction covers both tails. Step 2: the bounds G^{A_P+A_Q}=T and G^{B_P+B_Q-1}=0 are correct. Step 3: off-diagonal terms vanish, gr⊗gr injects into U_rs using the flat quotients from step 1, and the kernel is im(F^{r+1}⊗F^s)+im(F^r⊗F^{s+1}) by right exactness. Step 4: ker ρ_a = G^{a+1}, and the inverse is the representative map. Step 5: I rechecked the associator signs; K-flatness of steps follows from degreewise exactness (flat graded terms), the long exact sequence and descending induction. Step 6: Q is additive (Mathlib DerivedCategory/Basic.lean:146), so the finite biproduct is preserved. Step 7: clause (1) handles gr^i u⊗1 and clause (3) handles 1⊗gr^j v. Small cases tested: one-layer filtrations, R^2 with F^1=Re_1, and the Z ⊃ 2Z non-flat case, which the hypotheses correctly exclude. Accepted tool_use: lem-pc-derived-tensor-second-factor-functor (generic ordinary derived tensor, already in the statement). No new nodes and no duplicates (grep for 0H7Y, kunneth-filtered and convolution); lem-kun-finite-filtered-kflat-replacement cites the item but creates no cycle. Removing lem-sp-finite-filtration-induction from stmt_deps is correct. The corrected from.place is right: 'Since Z has global dimension 1' is not in the blueprint. Fix: split_report.blueprint wrongly said main-20261015 lem-kun-0f0f has no proof; its proof is in lem-kun-0f0f.proof.md, identical to master. Corrected in fixes/dag/nodes/sec-smooth-purity/lem-kun-filtered-tensor-graded-comparison.json. A minor report inaccuracy remains: source.place still holds the old cache path, which is maintainer-owned and harmless.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.FilteredTensorGradedComparison",

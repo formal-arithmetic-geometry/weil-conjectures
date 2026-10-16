@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-integration-component-sum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integration splits over the open–closed components",
@@ -17,6 +17,7 @@
   "thm-trf-dualizing-complex-composition",
   "def-trf-integration",
   "def-trf-dualizing-complex",
+  "def-trf-correspondence",
   "def-trf-fixed-scheme",
   "def-trf-local-term",
   "def-trf-coefficient-conventions",
@@ -24,45 +25,200 @@
  ],
  "proof": [
   {
-   "text": "*Properness.* The morphism $a_T:T\\to s$ is separated and of finite\ntype. It is universally closed: for any $s'\\to s$ the base change\n$T_{s'}=\\coprod_\\beta\\beta_{s'}$ is a finite disjoint union of\nopen-and-closed pieces, a closed subset $Z\\subseteq T_{s'}$ is the\nfinite union of the closed subsets $Z\\cap\\beta_{s'}$ of the\n$\\beta_{s'}$, and its image in $s'$ is the finite union of their\nimages, which are closed because each $\\beta\\to s$ is universally\nclosed. Hence $T$ is proper over $s$ and $\\int_T$ of\n[def-trf-integration] is defined.",
+   "text": "Properness, directly from the definition [def-weil-proper-morphism]. The structure map $a_T$ is separated and of finite type by hypothesis. After any base change $s'\\to s$, the given disjoint-union presentation gives $T_{s'}=\\coprod_\\beta\\beta_{s'}$. For closed $Z\\subseteq T_{s'}$, its image is $\\bigcup_{\\beta\\in B}a_{\\beta,s'}(Z\\cap\\beta_{s'})$. Each intersection is closed in $\\beta_{s'}$ and its image is closed because $a_\\beta$ is universally closed. This is a finite union, hence closed. Thus $a_T$ is universally closed and proper. Every $j_\\beta$ is a closed immersion as well as an open immersion, hence proper by [lem-weil-pbc-closed-immersion-proper](a).",
    "uses": [
-    "def-trf-integration"
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-proper"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, first paragraph: properness after any base change"
+   }
   },
   {
-   "text": "*Splitting.* The pro-etale site of a disjoint union of schemes is the\ndisjoint union of the sites ([def-weil-pbc-proetale-site]), so\n$D(T,A)\\cong\\prod_{\\beta}D(\\beta,A)$ via $(Lj_\\beta^*)_\\beta$, and the\nsix operations decompose\naccordingly: in particular\n$R\\Gamma(T,-)\\cong\\prod_\\beta R\\Gamma(\\beta,-)$ (the product is a direct\nsum over the finite set $B$),\nthe unit $A\\to R\\Gamma(T,A_T)$ of [def-trf-integration] is the\ntuple of the units of the components, and the counit\n$\\varepsilon_{a_T}$ is the tuple of the counits\n$\\varepsilon_{a_\\beta}$ (the adjunctions of [def-trf-integration]\ndecompose with the products, by the compatibility of the six-functor\nformalism with disjoint unions; here $a_\\beta=a_Tj_\\beta$ and\n$Rj_\\beta^!=Lj_\\beta^*$). Under this decomposition $\\omega_{T,A}$\ncorresponds to the tuple of the $Lj_\\beta^*\\omega_{T,A}\\cong\n\\omega_{\\beta,A}$ of [thm-trf-dualizing-complex-composition], and\n$\\tau$ to the tuple of its restrictions $\\tau|_\\beta$ defined above.\nHence the composite displayed in\n[def-trf-integration] for $\\int_T\\tau$ is the tuple of the\ncomposites defining the $\\int_\\beta(\\tau|_\\beta)$; the unit\n$A\\to\\bigoplus_\\beta R\\Gamma(\\beta,A_\\beta)$ is the diagonal and the\ncounit $\\bigoplus_\\beta R\\Gamma(\\beta,\\omega_{\\beta,A})\\to A$ is the sum\nmap, so the composite is the sum of the component composites, which is\nthe displayed identity. If $B=\\emptyset$ then $T=\\emptyset$,\n$R\\Gamma(T,-)=0$ and both sides vanish.",
+   "text": "Fix the canonical clopen adjunctions. Write $P_\\beta=Lj_\\beta^*$ and $J_\\beta=Rj_{\\beta*}=Rj_{\\beta!}$, using proper coincidence and the open, dimension-zero purity clause of [prop-functor-package]. The open adjunction $j_!\\dashv j^*$ and its invertible unit are [prop-weil-open-closed-recollement-adjunctions]. Its closed-adjunction clause, applied with the closed immersion $i=j_\\beta$ and its open complement, supplies $P_\\beta\\dashv J_\\beta$. Thus on these clopen pieces we have $P_\\beta\\dashv J_\\beta\\dashv P_\\beta$. Denote the ordinary unit by $s_{\\beta,L}:L\\to J_\\beta P_\\beta L$ and the exceptional counit, under open purity, by $r_{\\beta,L}:J_\\beta P_\\beta L\\to L$. The open counit is the one induced termwise from the sheaf extension-by-zero counit, as specified in [def-weil-open-closed-recollement]; the normalized dimension-zero trace of [prop-functor-package] is this counit. In particular the ordinary counit $P_\\beta J_\\beta\\to\\mathrm{id}$ and the open unit $\\mathrm{id}\\to P_\\beta J_\\beta$ are inverse: on sheaves restricted to $\\beta$ both are the identity, and the same identity holds termwise and descends to the derived category. By [thm-trf-dualizing-complex-composition], $P_\\beta\\omega_{T,A}=Rj_\\beta^!\\omega_{T,A}\\cong\\omega_{\\beta,A}$. Consequently $P_\\beta\\tau$ under these comparisons is precisely the restriction in the statement. All objects used here are in the finite-coefficient constructible finite-Tor domains: this includes $A_T$ and $Ra_T^!A_s$ by the preservation clauses of [prop-functor-package].",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-trf-integration",
+    "prop-functor-package",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "def-weil-open-closed-recollement",
     "thm-trf-dualizing-complex-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, first paragraph: clopen operations and the specified units and counits"
+   }
   },
   {
-   "text": "*The fixed-scheme case.* For $T=F$ and $B=\\pi_0(F)$, finite by\nhypothesis ([def-trf-fixed-scheme]), the restriction $\\tau|_\\beta$\nabove is literally the composite used in [def-trf-local-term], so the\nlast assertion is the special case just proved.",
+   "text": "For any $L$ in the stated domain form the finite biproduct $Q_L=\\bigoplus_{\\beta\\in B}J_\\beta P_\\beta L$, the row $R_L:Q_L\\to L$ with entries $r_{\\beta,L}$, and the column $S_L:L\\to Q_L$ with entries $s_{\\beta,L}$. For $\\gamma\\ne\\beta$, proper base change [prop-functor-package], applied to $j_\\gamma$ and $j_\\beta$, gives $P_\\gamma J_\\beta=0$: their fibre product is empty, whose module-sheaf category is zero since the empty covering forces its only value to be zero. For $\\gamma=\\beta$ the same fibre product is $\\beta$, and $P_\\beta J_\\beta\\cong\\mathrm{id}$. The restriction $P_\\gamma R_L$ is therefore $P_\\gamma r_{\\gamma,L}$, an isomorphism by the triangle identity and the invertible open unit of [prop-weil-open-closed-recollement-adjunctions]. The finite clopen covering detects derived isomorphisms by [lem-cbc-proetale-stalk-conservative](1), so $R_L$ is an isomorphism. This uses covering-family locality, with no claim about arbitrary geometric stalks.",
+   "uses": [
+    "prop-functor-package",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, first paragraph: base change and local detection of R_L"
+   }
+  },
+  {
+   "text": "Identify the inverse by adjunction, rather than testing equality of arbitrary derived morphisms locally. The $(\\gamma,\\beta)$ matrix entry of $S_LR_L$ is $s_{\\gamma,L}r_{\\beta,L}$. Under $P_\\gamma\\dashv J_\\gamma$ it corresponds to a map $P_\\gamma J_\\beta P_\\beta L\\to P_\\gamma L$. Off the diagonal its source is zero by Step 3. On the diagonal the adjunct is $c_{\\gamma,P_\\gamma L}\\,P_\\gamma(s_{\\gamma,L})\\,P_\\gamma(r_{\\gamma,L})=P_\\gamma(r_{\\gamma,L})$, where $c$ is the ordinary counit; the equality is the ordinary triangle identity. The open triangle identity identifies this last map with the inverse of the open unit, which by Step 2 is $c_{\\gamma,P_\\gamma L}$, the ordinary adjunct of the identity of $J_\\gamma P_\\gamma L$. Thus every matrix entry is the corresponding entry of the identity. Hence $S_LR_L=1$, and since $R_L$ is invertible, $S_L=R_L^{-1}$ and $R_LS_L=1$. The adjunctions and their invertible open unit are those of [prop-weil-open-closed-recollement-adjunctions].",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, first paragraph: the ordinary-adjoint matrix calculation"
+   }
+  },
+  {
+   "text": "Apply this to $L=A_T,\\omega_{T,A}$. Naturality of the counits gives $R_{\\omega_T}(\\bigoplus_\\beta J_\\beta P_\\beta\\tau)=\\tau R_{A_T}$. Multiplying by $S_{A_T}$ and using Step 4 yields the equality of global morphisms\n$$\\tau=R_{\\omega_T}(\\bigoplus_\\beta J_\\beta(\\tau|_\\beta))S_{A_T}=\\sum_{\\beta\\in B}r_{\\beta,\\omega_T}\\,J_\\beta(\\tau|_\\beta)\\,s_{\\beta,A_T}=\\sum_{\\beta\\in B}(j_\\beta)_*(\\tau|_\\beta).$$\nThe last equality is the displayed definition of Borel–Moore pushforward [def-trf-borel-moore-pushforward]: its proper comparison and inverse dualizing-composition map are exactly those used in $r_{\\beta,\\omega_T}$ and in $\\tau|_\\beta$. In particular no equality of derived morphisms is inferred merely from equality after restriction.",
+   "uses": [
+    "def-trf-borel-moore-pushforward"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, second paragraph: naturality and the finite biproduct identity"
+   }
+  },
+  {
+   "text": "Verify integration of each proper pushforward. Let $h:V\\to W$ be proper between proper schemes in the setting, put $a=a_W$ and $b=ah$, and let $\\gamma:A_V\\to\\omega_V$. Use the canonical direct-image composition comparisons and dualizing comparison [thm-trf-dualizing-complex-composition]. Composition coherence [fix-prop-coherence] and the formula for a composite adjunction [def-weil-pbc-composite-adjunction] give, in these coordinates,\n$$\\eta_b=Ra_*\\eta_h\\circ\\eta_a,\\qquad \\varepsilon_b=\\varepsilon_a\\circ Ra_!\\varepsilon_h.$$\nHere the second formula includes $Rb^!\\cong Rh^!Ra^!$; the proper comparisons identify $*$ with $!$ compatibly with composition by [prop-functor-package]. In the formula for $\\int_W h_*\\gamma$, substitute the composite defining $h_*\\gamma$ [def-trf-borel-moore-pushforward]. Its middle portion is $Ra_*\\varepsilon_h\\circ Ra_*Rh_*\\gamma\\circ Ra_*\\eta_h$. The two displayed composition formulas then give\n$$\\int_W h_*\\gamma=\\varepsilon_a\\,Ra_*\\varepsilon_h\\,Ra_*Rh_*\\gamma\\,Ra_*\\eta_h\\,\\eta_a=\\varepsilon_b\\,Rb_*\\gamma\\,\\eta_b=\\int_V\\gamma,$$\nwhere integrations mean the further $R\\Gamma(s,-)$ and scalar identification in [def-trf-integration]. The inverse dualizing-composition arrows in the definition of pushforward cancel the dualizing-composition arrows in the composite counit. Naturality allows $Rh_*\\gamma$ between them. This proves the needed equality of the specified maps, not merely of their isomorphism classes.",
+   "uses": [
+    "thm-trf-dualizing-complex-composition",
+    "fix-prop-coherence",
+    "def-weil-pbc-composite-adjunction",
+    "prop-functor-package",
+    "def-trf-borel-moore-pushforward",
+    "def-trf-integration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, third paragraph: units and counits of a composite and integration of proper pushforward"
+   }
+  },
+  {
+   "text": "For nonempty $B$, apply the $A$-linearity of integration [lem-trf-integration-linear] to the finite sum in Step 5, and Step 6 to each proper $j_\\beta$ (Step 1). The result is\n$$\\int_T\\tau=\\sum_\\beta\\int_T(j_\\beta)_*(\\tau|_\\beta)=\\sum_\\beta\\int_\\beta(\\tau|_\\beta).$$\nFor $B=\\emptyset$, $T=\\emptyset$ and every module sheaf, complex, and Borel–Moore section on $T$ is zero: the empty covering gives the zero module on its sole object. Thus the middle derived-direct-image map in the definition [def-trf-integration] factors through zero and its scalar value is zero, equal to the empty sum. This also verifies the zero-section case and allows any empty pieces among a nonempty family.",
+   "uses": [
+    "lem-trf-integration-linear",
+    "def-trf-integration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Proof, third paragraph: integrate the finite sum and handle empty support"
+   }
+  },
+  {
+   "text": "Finally take $T=F$ and $B=\\pi_0(F)$. The disjoint-union clause of [def-trf-fixed-scheme] gives $F=\\coprod_{\\beta\\in B}\\beta$. Here is an explicit check of the geometric hypotheses, using only the assumed properness of these pieces. By [def-weil-proper-morphism] every $\\beta$ is separated and of finite type over $k$. Choose a finite affine cover of each $\\beta$ by spectra of finitely generated $k$-algebras. Their union is a finite affine cover of $F$, so $F\\to s$ is of finite type by [def-weil-finite-type-morphism]. The products $\\beta\\times_s\\gamma$ form a finite clopen partition of $F\\times_sF$. On an off-diagonal block the inverse image of $\\Delta_F$ is empty; on a diagonal block its map is $\\Delta_\\beta$, a closed immersion. Consequently $\\Delta_F$ is a homeomorphism onto a closed subset (the finite union of the closed diagonal images), and its structure-sheaf map is surjective, as can be checked on these open blocks. It is a closed immersion by [def-weil-closed-immersion], so $F$ is separated by [def-weil-proper-morphism]. This also works for $B=\\emptyset$. All hypotheses of the preceding argument now hold, giving properness and the sum formula for $F$. The restricted-section formula of [def-trf-local-term] is exactly $A_\\beta\\cong Lj_\\beta^*A_F\\to Lj_\\beta^*\\omega_{F,A}\\cong\\omega_{\\beta,A}$, with the same open-purity and dualizing-composition comparisons. Thus the restrictions in this specialization are precisely those in the last clause of the statement.",
    "uses": [
     "def-trf-fixed-scheme",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
     "def-trf-local-term"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+    "place": "Item proof, fixed-scheme specialization; unit proof, final displayed sum"
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-integration",
-  "def-weil-pbc-proetale-site",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "def-weil-open-closed-recollement",
   "thm-trf-dualizing-complex-composition",
+  "lem-cbc-proetale-stalk-conservative",
+  "def-trf-borel-moore-pushforward",
+  "fix-prop-coherence",
+  "def-weil-pbc-composite-adjunction",
+  "def-trf-integration",
+  "lem-trf-integration-linear",
   "def-trf-fixed-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
   "def-trf-local-term"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/lem-trf-integration-component-sum.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/_section.md",
+  "place": "Proof, all three paragraphs; expands the explicit clopen-adjunction argument of the unit rather than the unsupported site-decomposition sentence of the imported item"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integration of a Borel Moore section of a dualizing complex over a finite disjoint union of proper clopen schemes is the sum of the component integrals",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso, BoxIntegral.integralSum_disjUnion, MeasureTheory.hasSum_integral_iUnion, AlgebraicGeometry.disjoint_opensRange_sigmaι, MeasureTheory.integral_biUnion_eq_sum_powerset, MeasureTheory.integral_fintype_iUnion, MeasureTheory.integral_iUnion_fintype, CompHausLike.LocallyConstant.sigmaIso; hits concern coproduct scheme structure sheaves, measure or box integration, or linear-map traces; none states the Borel–Moore integration assertion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "borelMoore|integral_eq_sum_localTerm|dualizing.*clopen|clopen.*dualizing",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"integral\"",
+   "results": "none; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace integration over a finite disjoint union of proper schemes equals sum of integrals of restrictions of a section of the dualizing complex",
+   "results": "MeasureTheory.integral_iUnion, BoxIntegral.integralSum_disjUnion, MeasureTheory.lintegral_biUnion_finset₀, MeasureTheory.integral_iUnion_fintype, MeasureTheory.integral_biUnion_finset, LinearMap.trace_eq_sum_trace_restrict', MeasureTheory.lintegral_biUnion_finset, MeasureTheory.integral_fintype_iUnion; hits concern coproduct scheme structure sheaves, measure or box integration, or linear-map traces; none states the Borel–Moore integration assertion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additivity of the counit trace of compactly supported cohomology under decomposition of a scheme into finitely many open and closed subschemes",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.isCompl_opensRange_inl_inr, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, LinearMap.trace_eq_sum_trace_restrict', AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; hits concern coproduct scheme structure sheaves, measure or box integration, or linear-map traces; none states the Borel–Moore integration assertion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.map_comp_bijective_iff, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.left_triangle_components_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: generic composite adjunction only; it is already represented by def-weil-pbc-composite-adjunction, not the geometric integration assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*disjoint|disjoint.*trace|dualizing|Borel.Moore",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an additive category the sum over a finite clopen cover of the adjunction unit followed by the counit equals the identity",
+   "results": "AlgebraicTopology.DoldKan.P_add_Q_f, AlgebraicTopology.DoldKan.P_add_Q, AlgebraicTopology.DoldKan.PInfty_f_add_QInfty_f, AlgebraicTopology.DoldKan.PInfty_add_QInfty, PrimeSpectrum.isIdempotentElemEquivClopens_symm_sup, AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self, SimplicialObject.Splitting.decomposition_id, SimplicialObject.Splitting.cofan_inj_πSummand_eq_id; hits concern Dold–Kan splittings, simplicial splittings, and prime-spectrum idempotents; none states this geometric integration assertion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "biproduct.*(unit|counit)|clopen.*(integral|dualizing)|integral.*clopen",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -96,5 +252,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-local"
+ "unit": "sk-p-local",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-integration-component-sum",
+  "worker": "stage1",
+  "summary": "Kept every clause and all hypotheses. Replaced the unsupported decomposition of the entire derived category and all six operations with the unit’s explicit finite clopen counit/unit matrix argument. Proved equality of global sections, expanded the composite-adjunction integration calculation, and treated empty support. Reused existing nodes only; no new nodes or Mathlib leaves. Read the nearby Lean theorem: its proof is sorry and its statement is not this full lemma. Second reading supplies the finite-affine-cover and diagonal-block proof that the fixed-scheme specialization has the required geometric hypotheses, directly from its proper clopen pieces.",
+  "blueprint": "Steps 1–4 realize sk-p-local Proof paragraph 1; Step 5 realizes paragraph 2; Steps 6–7 realize paragraph 3. Step 8 realizes the item’s fixed-scheme specialization. The main-20261015 item has the identical statement and no replacement proof; the stored unit and master unit supply the route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-4abec02b8",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-4abec02b8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement (verbatim from the blueprint; master and main-20261015 have the same statement and proof), all 8 steps, the statement of every cited node, the unit sk-p-local, and the main-20261015 _section and proof. The proof follows the unit's matrix route. Step 1: properness holds because the image of a closed set is a finite union of closed images. Step 2: on one clopen j_beta, the recollement adjunctions give P -| J -| P; clause 6 at relative dimension 0 identifies the exceptional counit with the extension-by-zero counit; clause 3 gives Rj_! = Rj_*. Step 3: proper base change (clause 4) gives P_gamma J_beta = 0 for gamma != beta; the triangle identity with the invertible open unit makes P_gamma r_gamma invertible; only clause (1) of lem-cbc-proetale-stalk-conservative, covering-family locality, is used. Step 4: I recomputed the adjunct of each matrix entry; it gives S_L R_L = 1 as a global equality, so S_L = R_L^{-1}. Step 5: the summands match def-trf-borel-moore-pushforward arrow by arrow, and the inverse purity/dualizing comparison cancels. Step 6: I checked the composite unit and counit (eta_b = Ra_* eta_h . eta_a, eps_b = eps_a . Ra_! eps_h) against def-weil-pbc-composite-adjunction and fix-prop-coherence. Step 7: linearity, and B empty gives 0. Step 8: F is finite type and separated, checked on the finite clopen blocks of F x_s F, and the restriction is the one of def-trf-local-term. Small cases tested: |B| = 1, two points (the sum map on A^2), empty T, empty pieces. The coefficients are finite A_{E,n} on the pro-etale site with no substitution, and no SGA source is used. All 16 proof_deps are on the transitive route of sk-p-local; I accept no tool_uses. No cycle and no duplicate: the candidates lem-trf-integration-as-pushforward, lem-trf-local-term-point, thm-trf-trace-proper-compatibility and prop-trf-pairing-local-decomposition (which depends on this item) state other things. There are no new nodes. Fixes: (1) stmt_deps gains def-trf-correspondence, which defines the 'admissible correspondence' the statement uses (B3); (2) split_report.tool_uses is removed, because both declared nodes are on the route. The report also wrongly says main-20261015 has no proof section; its .proof.md is identical to master, so nothing changes.; 1 file(s) fixed by the reviewer"
+ }
 }
