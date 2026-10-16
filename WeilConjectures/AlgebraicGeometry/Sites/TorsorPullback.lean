@@ -194,6 +194,26 @@ lemma equiv₀_cohomologyMap (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 
 variable {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
   {G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
 
+/-- **Pullback in degree zero, with change of coefficients.** For `φ : G ⟶ g_* G'`, the map
+`H⁰(Y, G) ⟶ H⁰(X, g^* G) ⟶ H⁰(X, G')` induced by the transpose `g^* G ⟶ G'` of `φ` is `φ` on
+global sections, followed by the restriction along a morphism `X ⟶ Y ×_Y X` of étale
+`X`-schemes. -/
+lemma equiv₀_map_cohomologyMap (φ : G ⟶ (g)_*[AddCommGrpCat.{u + 1}].obj G') (x : H G 0)
+    {TX : X.Etale} (hTX : IsTerminal TX) {TY : Y.Etale} (hTY : IsTerminal TY)
+    (e : TX ⟶ g.Etale.obj TY) :
+    H.equiv₀ G' hTX (H.map (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv
+        _ _).symm φ) 0 (cohomologyMap g G 0 x)) =
+      G'.obj.map e.op (φ.hom.app (op TY) (H.equiv₀ G hTY x)) := by
+  let adj := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g
+  let ψ : (g)^*[AddCommGrpCat.{u + 1}].obj G ⟶ G' := (adj.homEquiv _ _).symm φ
+  have hφ : adj.homEquiv _ _ ψ = φ := Equiv.apply_symm_apply _ _
+  rw [← H.equiv₀_naturality, equiv₀_cohomologyMap g G x hTX hTY e]
+  refine (ConcreteCategory.congr_hom (ψ.hom.naturality e.op)
+    ((adj.unit.app G).hom.app (op TY) (H.equiv₀ G hTY x))).trans ?_
+  refine congrArg (G'.obj.map e.op) ?_
+  rw [← hφ, Adjunction.homEquiv_unit]
+  rfl
+
 /-- **Pullback of torsors**, for arbitrary terminal objects of the small étale sites. See
 `AlgebraicGeometry.Etale.classH1_eq_map_cohomologyMap_of_equivariant`. -/
 theorem classH1_eq_map_cohomologyMap_of_equivariant'

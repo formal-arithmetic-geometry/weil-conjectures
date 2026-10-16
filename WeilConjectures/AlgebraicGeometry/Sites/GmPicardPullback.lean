@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Sites.GmConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTransport
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsorPullback
@@ -189,5 +190,15 @@ theorem gmCohomologyMap_toCohomologicalPicardGroup (L : Y.Pic) :
   rw [Pic.toCohomologicalPicardGroup_apply, Pic.toCohomologicalPicardGroup_apply, hL,
     Pic.etaleTorsorClass_mk]
   exact (@classH1_etaleIsoTorsor_pullback _ _ g _ _ this).symm
+
+/-- **Pullback of global units.** In degree zero, under the identification of `H⁰(-, 𝔾ₘ)` with
+the sections of `𝔾ₘ` over the terminal object, the pullback map `H⁰(Y, 𝔾ₘ) ⟶ H⁰(X, 𝔾ₘ)` along
+`g : X ⟶ Y` is the pullback of sections `AlgebraicGeometry.Scheme.gmSectionsPullback`, that is,
+the pullback of global units (`AlgebraicGeometry.Scheme.gmSectionsPullback_gmSection`). -/
+lemma equiv₀_gmCohomologyMap_zero (x : Sheaf.H Y.gmSheaf 0) :
+    Sheaf.H.equiv₀ _ terminalIsTerminal (gmCohomologyMap g 0 x) =
+      (gmSectionsPullback g).hom (Sheaf.H.equiv₀ _ terminalIsTerminal x) :=
+  Etale.equiv₀_map_cohomologyMap g (gmSheafToLowerStarGmSheaf g) x terminalIsTerminal
+    terminalIsTerminal (PreservesTerminal.iso g.Etale).inv
 
 end AlgebraicGeometry.Scheme

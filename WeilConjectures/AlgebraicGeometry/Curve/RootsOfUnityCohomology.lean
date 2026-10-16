@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.GmCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 
 /-!
 # The cohomology of `μₙ` on a smooth proper curve
@@ -207,6 +210,100 @@ theorem sheafH_rootsOfUnitySheaf_of_isProper (f : C ⟶ Spec (.of k)) [IsConnect
     rw [hd', hd, hD]
   · intro q hq
     exact IsCurve.subsingleton_sheafH_of_three_le f _ (C.isTorsion_rootsOfUnitySheaf hn0) q hq
+
+/-- A morphism of sheaves which is an isomorphism induces bijections on cohomology. -/
+lemma _root_.CategoryTheory.Sheaf.H.bijective_map_of_isIso {X : Scheme.{u}}
+    {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) [IsIso φ] (q : ℕ) :
+    Function.Bijective (Sheaf.H.map φ q) :=
+  ((Sheaf.functorH _ q).mapIso (asIso φ)).addCommGroupIsoToAddEquiv.bijective
+
+/-- Blueprint `det-curveestimate-canonical-mu`, part 5: invariance under extension of
+algebraically closed fields.
+
+Let `C` be a smooth proper connected curve over an algebraically closed field `k`, let
+`k ⊆ k'` be an extension of algebraically closed fields, `π : C_{k'} ⟶ C` the projection and
+`n ≥ 1` prime to `char k`. Then the pullback maps `ρᵠ : Hᵠ(C, μₙ) ⟶ Hᵠ(C_{k'}, μₙ)`
+(`AlgebraicGeometry.Scheme.rootsOfUnityCohomologyMap`) are bijective, and under the
+identifications of `AlgebraicGeometry.IsConnectedCurve.sheafH_rootsOfUnitySheaf_of_isProper`
+
+* `ρ⁰` is the inclusion `μₙ(k) ⟶ μₙ(k')`: on the global units it is the pullback of units
+  along `π`;
+* `ρ¹` is the restriction of the base change map `π^* : Pic(C) ⟶ Pic(C_{k'})` to `n`-torsion,
+  which on `Pic⁰(C) = J(k)` is the base change map `J[n](k) ⟶ J[n](k')`;
+* `ρ²` is the identity of `ℤ/n`: `degₙ' ∘ ρ² = degₙ` for the isomorphisms `degₙ` and `degₙ'`
+  characterised by `degₙ (δ² [L]) = deg L mod n`.
+
+The pullback commutes with the Kummer sequences, hence with all maps of their long exact
+sequences (`AlgebraicGeometry.Scheme.map_kernelι_rootsOfUnityCohomologyMap`,
+`AlgebraicGeometry.Scheme.rootsOfUnityCohomologyMap_kummerδ₁`), the identification
+`Pic = H¹(-, 𝔾ₘ)` is natural (`AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup`)
+and pullback preserves degrees (`AlgebraicGeometry.Scheme.Hom.picDegree_map_baseChangeField`).
+Bijectivity follows from the comparison `π^* μₙ ≅ μₙ` and the invariance of the cohomology of
+`ℤ/n ≅ μₙ` (`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper`).
+-/
+theorem rootsOfUnityCohomologyMap_baseChangeField (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsProper f] (k' : Type u) [Field k'] [Algebra k k'] [IsAlgClosed k'] (n : ℕ)
+    (hn : (n : k) ≠ 0) :
+    (∀ q, Function.Bijective (Scheme.rootsOfUnityCohomologyMap
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n q)) ∧
+    (∀ (x : Sheaf.H (C.rootsOfUnitySheaf n) 0) (a : Γ(C, ⊤)ˣ),
+      Sheaf.H.equiv₀ _ terminalIsTerminal (Sheaf.H.map (C.rootsOfUnitySheafι n) 0 x) =
+        Scheme.gmSection a →
+      Sheaf.H.equiv₀ _ terminalIsTerminal
+          (Sheaf.H.map (Scheme.rootsOfUnitySheafι _ n) 0 (Scheme.rootsOfUnityCohomologyMap
+            (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 0 x)) =
+        Scheme.gmSection (Units.map (pullback.fst f
+          (Spec.map (CommRingCat.ofHom (algebraMap k k')))).appTop.hom.toMonoidHom a)) ∧
+    (∀ (x : Sheaf.H (C.rootsOfUnitySheaf n) 1) (L : C.Pic),
+      Sheaf.H.map (C.rootsOfUnitySheafι n) 1 x = Scheme.Pic.toCohomologicalPicardGroup C L →
+      Sheaf.H.map (Scheme.rootsOfUnitySheafι _ n) 1 (Scheme.rootsOfUnityCohomologyMap
+          (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 1 x) =
+        Scheme.Pic.toCohomologicalPicardGroup _ (Scheme.Pic.map
+          (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L)) ∧
+    ∀ (hC : IsUnit (n : Γ(C, ⊤)))
+      (hC' : IsUnit (n : Γ(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))), ⊤)))
+      (d : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ ZMod n)
+      (d' : Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).rootsOfUnitySheaf
+        n) 2 ≃+ ZMod n),
+      (∀ L : C.Pic, d (C.kummerδ₁ n hC (Scheme.Pic.toCohomologicalPicardGroup C L)) =
+        (f.picDegree L : ZMod n)) →
+      (∀ L, d' (Scheme.kummerδ₁ _ n hC' (Scheme.Pic.toCohomologicalPicardGroup _ L)) =
+        ((f.baseChangeField k').picDegree L : ZMod n)) →
+      ∀ y, d' (Scheme.rootsOfUnityCohomologyMap
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) n 2 y) = d y := by
+  set π := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))
+  have hn0 : NeZero n := ⟨by rintro rfl; exact hn Nat.cast_zero⟩
+  have hnC := Scheme.isUnit_natCast_of_ne_zero f hn
+  refine ⟨fun q ↦ ?_, fun x a hx ↦ ?_, fun x L hx ↦ ?_, fun hC hC' d d' hd hd' y ↦ ?_⟩
+  · -- `π^* μₙ ≅ μₙ`, and the cohomology of `μₙ ≅ ℤ/n` is invariant
+    have : IsIso (Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf n π) :=
+      Scheme.isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit n π hnC
+    have : NeZero (n : k) := ⟨hn⟩
+    obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k n
+    let θ := C.constantZModIsoRootsOfUnitySheaf n f hζ
+    have hZ := IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper f k' n hn q
+    have hμ : Function.Bijective (Etale.cohomologyMap π (C.rootsOfUnitySheaf n) q) := by
+      have h : ⇑(Etale.cohomologyMap π (C.rootsOfUnitySheaf n) q) =
+          Sheaf.H.map ((Etale.upperStar AddCommGrpCat.{u + 1} π).map θ.hom) q ∘
+            Etale.cohomologyMap π (C.constantZMod n) q ∘ Sheaf.H.map θ.inv q := by
+        ext z
+        simp only [Function.comp_apply]
+        rw [← Etale.cohomologyMap_map, ← Sheaf.H.map_comp_apply, Iso.inv_hom_id,
+          Sheaf.H.map_id_apply]
+      rw [h]
+      exact (Sheaf.H.bijective_map_of_isIso _ q).comp
+        (hZ.comp (Sheaf.H.bijective_map_of_isIso _ q))
+    exact (Sheaf.H.bijective_map_of_isIso _ q).comp hμ
+  · rw [Scheme.map_kernelι_rootsOfUnityCohomologyMap, Scheme.equiv₀_gmCohomologyMap_zero, hx,
+      Scheme.gmSectionsPullback_gmSection]
+  · rw [Scheme.map_kernelι_rootsOfUnityCohomologyMap, hx,
+      Scheme.gmCohomologyMap_toCohomologicalPicardGroup]
+  · obtain ⟨-, -, ⟨hsurj, -⟩, -⟩ := sheafH_rootsOfUnitySheaf_of_isProper f n hn
+    obtain ⟨c, rfl⟩ := hsurj y
+    obtain ⟨L, rfl⟩ := (Scheme.Pic.toCohomologicalPicardGroup C).surjective c
+    rw [Scheme.rootsOfUnityCohomologyMap_kummerδ₁ π n _ hC',
+      Scheme.gmCohomologyMap_toCohomologicalPicardGroup, hd', hd,
+      Scheme.Hom.picDegree_map_baseChangeField]
 
 end IsConnectedCurve
 
