@@ -51,4 +51,19 @@ theorem HasCompactification.of_isOver {S X Y : Scheme.{u}} [X.Over S] [Y.Over S]
   have := quasiSeparatedSpace_of_quasiSeparated (Y ↘ S)
   infer_instance
 
+/-- The underlying morphism of schemes `f.left` of a morphism `f : X ⟶ Y` of `Over S`, `S`
+quasi-compact and quasi-separated, between objects whose structure morphisms are separated and
+of finite type, has a compactification: this is `HasCompactification.of_isOver`. This is not an
+instance, since `S` cannot be inferred from `f.left`; it can be used as a local instance. -/
+theorem HasCompactification.of_over {S : Scheme.{u}} {X Y : Over S} (f : X ⟶ Y)
+    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated Y.hom] [QuasiCompact Y.hom] [CompactSpace S] [QuasiSeparatedSpace S] :
+    HasCompactification f.left :=
+  have : IsSeparated (X.left ↘ S) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (X.left ↘ S) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ S) := ‹QuasiCompact X.hom›
+  have : IsSeparated (Y.left ↘ S) := ‹IsSeparated Y.hom›
+  have : QuasiCompact (Y.left ↘ S) := ‹QuasiCompact Y.hom›
+  of_isOver (S := S) f.left
+
 end AlgebraicGeometry
