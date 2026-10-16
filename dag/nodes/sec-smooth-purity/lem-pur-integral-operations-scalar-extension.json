@@ -21,7 +21,10 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-integral-scalar-extension",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-scalar-extension-composition"
  ],
  "proof": [
   {
@@ -327,5 +330,33 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-1fbebd98f (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, sources, and unit/chapter route. All nine mathematical steps pass; no new nodes or dependency cycle. Corrected step 9’s source location: Tag 03EO belongs to sites-modules.tex. Whole corrected JSON is under fixes/dag/nodes/sec-smooth-purity/; detailed checks and eight accepted tool uses are in review.md. No target-category or base-change-morphism comparison is inferred from this auxiliary lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2289267fc",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source correspondence, canonical maps, coherence, universes, edge cases, docstrings, and verbatim signature. Immutable module passed both scompile.py checks without diagnostics. No fixes needed; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsScalarExtension",
+  "declaration": "WeilConjectures.integralOperationsScalarExtension",
+  "declarations": [
+   "WeilConjectures.IntegralScalarOperations.Ambient",
+   "WeilConjectures.IntegralScalarOperations.extend",
+   "WeilConjectures.IntegralScalarOperations.ordinary",
+   "WeilConjectures.IntegralScalarOperations.constructible",
+   "WeilConjectures.IntegralScalarOperations.complete",
+   "WeilConjectures.IntegralScalarOperations.site",
+   "WeilConjectures.IntegralScalarOperations.Comparisons",
+   "WeilConjectures.integralOperationsScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralOperationsScalarExtension.lean",
+  "statement": "theorem integralOperationsScalarExtension (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X Y : AlgebraicGeometry.Scheme.{u}) (f : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : IntegralScalarOperations.Comparisons l Ω X Y f",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
