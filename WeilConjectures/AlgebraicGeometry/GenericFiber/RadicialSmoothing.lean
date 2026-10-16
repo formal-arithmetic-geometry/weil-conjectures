@@ -44,7 +44,8 @@ Let `S` be integral of finite type over a field `k` and let `f : X ⟶ S` be of 
 `X` nonempty. Then there are a nonempty open `U ⊆ S` and a finite, surjective, radicial
 (universally injective) `π : S' ⟶ U`, with base change `f' : X' ⟶ S'` of `f` over `U`, and an
 immersion `v : V ⟶ X'` from a reduced scheme, with open dense image (so that `V` is a dense open
-of `(X')_red`), such that `V` is smooth over `S'`. For a given constructible sheaf `F` on `X`,
+of `(X')_red`), such that `V` is smooth over `S'`; `S'` is integral, being the spectrum of a
+domain in the blueprint construction. For a given constructible sheaf `F` on `X`,
 one may require the pullback of `F` to `V` to be finite locally constant.
 
 Moreover, every point `x` of the generic fibre of `f'` outside `V` is a proper specialization of
@@ -59,7 +60,7 @@ theorem exists_isFinite_universallyInjective_smooth_dense {k : Type u} [Field k]
     [IsConstructibleSheaf F] :
     ∃ (U : S.Opens) (S' : Scheme.{u}) (π : S' ⟶ U) (X' : Scheme.{u}) (q : X' ⟶ f ⁻¹ᵁ U)
       (f' : X' ⟶ S') (V : Scheme.{u}) (v : V ⟶ X'),
-      (U : Set S).Nonempty ∧ IsFinite π ∧ Surjective π ∧ UniversallyInjective π ∧
+      (U : Set S).Nonempty ∧ IsIntegral S' ∧ IsFinite π ∧ Surjective π ∧ UniversallyInjective π ∧
       IsPullback q f' (f ∣_ U) π ∧ IsImmersion v ∧ IsReduced V ∧ IsOpen (Set.range v) ∧
       Dense (Set.range v) ∧ Smooth (v ≫ f') ∧
       IsFiniteLocallyConstantSheaf
