@@ -1,0 +1,119 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK"
+ },
+ "id": "lem-weil-pbc-finite-discrete-coefficient-terminal",
+ "title": "The coefficient comparison at the pulled terminal object",
+ "statement": "For any topological commutative ring B and coefficient identification eR, the coefficient-unit pushforward equality holds at the particular object obtained by pulling proEtTerminal Spec Z to T. No arbitrary test object V is asserted here.",
+ "stmt_deps": [
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "proof": [
+  {
+   "text": "Proof in words. Put W = proEtTerminal Spec Z and W_X = pi_X^* W. The conjugation\nunit law for constantPullbackMonoidalIso identifies the sheafification unit followed\nby finiteDiscreteSchemeRingIso on W_X with q0 followed by the unit of pi_X^*.\nHere q0 is the constant sheafification unit on Spec Z followed by constantPointIso\nand pointUpperStar applied to eR. This formula follows from unit_conjugateEquiv_symm\nand naturality of the inverse-image adjunction unit in eR. Apply\nunit_comp_map_condensedPushforwardHom at W and precompose with q0. Its right-hand\nside is the coefficient map on W_U followed by the restrictions for pullbackCongr\n(comp_toSpecZ j) and pullbackComp j (toSpecZ T). Each restriction disappears by\nnaturality of a map from a constant presheaf: q(Y) = q(X) followed by restriction\nalong X to Y. Applying this twice gives the displayed equality at j^* W_T.\nThis uses no nonemptiness, finiteness, discreteness or nonzero-ring hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
+  "note": "D3: terminal portion of the existing adjunction argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(Pullback|pullback).*(unit|Unit)|unit.*constantSheaf|constantSheaf.*unit",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "No direct replacement; use generic adjunction-unit and constant-presheaf APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_conjugateEquiv_symm\"",
+   "results": "1 hits: CategoryTheory.unit_conjugateEquiv_symm",
+   "date": "2026-10-16",
+   "verdict": "No direct replacement; use generic adjunction-unit and constant-presheaf APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical constant sheaf pullback isomorphism commutes with adjunction units and composition of inverse image functors",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.constantCommuteCompose, CategoryTheory.constantSheafAdj_counit_w, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "date": "2026-10-16",
+   "verdict": "No direct replacement; use generic adjunction-unit and constant-presheaf APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant coefficient sheaf unit commutes with inverse image direct image adjunction and composition",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.constantCommuteCompose, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.sheafifyComposeIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.constantSheafΓAdj, CategoryTheory.constantSheafAdj_counit_w",
+   "date": "2026-10-16",
+   "verdict": "The results give generic adjunction and constant-sheaf APIs, not the terminal coefficient identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientSections",
+  "date": "2026-10-17",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-coefficient-sections",
+   "place": "The terminal-object part of proof steps 1 through 3",
+   "via": [
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "lem-weil-pbc-finite-discrete-coefficient-realization",
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientTerminal",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientTerminal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal",
+  "statement": "theorem finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (T U : Scheme.{u}) (j : U ⟶ T) :\n    ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app\n        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B T eR).hom.hom).app\n        (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj\n          (proEtTerminal specZ.{u}))) ≫\n        (condensedPushforwardHom (Profinite.continuousMapRingObj.{u} B) j).hom.app\n        (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj\n          (proEtTerminal specZ.{u}))) =\n    ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app\n        ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B U eR).hom.hom).app\n        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj\n          (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj\n          (proEtTerminal specZ.{u}))))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T171806-L-1680950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T171806-L-1680950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

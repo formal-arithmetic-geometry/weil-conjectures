@@ -43,6 +43,11 @@
     "def-weil-pbc-adjunction-square-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "D3: condensedPushforwardHom has an exact equality API to its original unit/comparison composite. Its composition-unit API is proved from the existing adjunction law. All mathematical data and signatures are unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -52,7 +57,7 @@
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/UpperLowerStar/Defs.lean",
   "place": "Exact section (preservesFiniteLimits_upperStar and preservesHomology_upperStar), together with ModuleObjects/MapMod.lean change of scalars along an isomorphism and DerivedCategory/LeftDerivedFunctor/MapDerivedCategory.lean exact-functor comparison and composition.",
-  "note": "Preserves the previous exact derived-pullback verification. E4 adds the proved equality between the adjunct presentation and the specified restricted exchange; no mathematical definition changes."
+  "note": "Preserves the previous exact derived-pullback verification. E4 adds the proved equality between the adjunct presentation and the specified restricted exchange; no mathematical definition changes. D3: condensedPushforwardHom has an exact equality API to its original unit/comparison composite. Its composition-unit API is proved from the existing adjunction law. All mathematical data and signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -499,7 +504,10 @@
   "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing",
   "declaration": "Profinite.isCommMonObj_continuousCoefficientRingObj",
   "declarations": [
-   "Profinite.isCommMonObj_continuousCoefficientRingObj"
+   "Profinite.isCommMonObj_continuousCoefficientRingObj",
+   "AlgebraicGeometry.ProEtale.condensedPushforwardHom_exists",
+   "AlgebraicGeometry.ProEtale.condensedPushforwardHom_def",
+   "AlgebraicGeometry.ProEtale.unit_comp_map_condensedPushforwardHom"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientCommRing.lean",
   "statement": "instance isCommMonObj_continuousCoefficientRingObj : IsCommMonObj (continuousCoefficientRingObj T)",
@@ -520,11 +528,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-1b63d",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261016T040743-L-2515722",
+  "landing": "20261016T171806-L-1680950",
   "kind": "interface",
-  "note": "independent Codex review: Lean theorem and existing signatures matched the DAG and baseline; exchange equality preserves the original definition; delivered modules and all 13 direct importers compile; axioms checked."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

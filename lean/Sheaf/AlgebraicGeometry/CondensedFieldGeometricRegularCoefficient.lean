@@ -93,7 +93,7 @@ private theorem realization_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     comparisonAdjoint X E from realization_adjoint E X]
   simp only [adjX, Adjunction.comp_homEquiv]
   erw [Equiv.trans_apply]
-  simp only [condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
+  simp only [condensedPushforwardHom_def, Category.assoc]
   erw [hleft, pointUpperStarLowerStarAdjunction.homEquiv_naturality_right]
   have hY := realization_adjoint E Y
   simp only [Adjunction.comp_homEquiv] at hY
@@ -191,14 +191,16 @@ private theorem scalar_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
       ringScalar E X (f y) p := by
   delta ringScalar
   apply continuous_unit_scalar_value f E
+  have hc := adjunction_conjugation (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+      (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) f) p
+  rw [← condensedPushforwardHom_def] at hc
   have h := CondensedRing.conjugated_morphism_square
     (lowerStar AddCommGrpCat.{u + 1} f)
     (condensedFieldContinuousMapIso E X).hom.hom
     (condensedFieldContinuousMapIso E Y).hom.hom
     (condensedPushforwardHom (Profinite.continuousCoefficientRingObj E) f)
     (continuousPush E f) p _ (realization_naturality f E)
-    (adjunction_conjugation (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
-      (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) f) p)
+    hc
   have hX : inv (condensedFieldContinuousMapIso E X).hom.hom =
       (condensedFieldContinuousMapIso E X).inv.hom := by
     simpa only [IsIso.Iso.inv_hom, Mon.forget] using

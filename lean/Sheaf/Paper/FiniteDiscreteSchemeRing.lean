@@ -183,16 +183,32 @@ instance : NatTrans.IsMonoidal constantPointIso.{u}.hom := by
   unfold constantPointIso
   infer_instance
 
-abbrev proEtTerminal (T : Scheme.{u}) : T.ProEt :=
-  MorphismProperty.Over.mk ⊤ (𝟙 T) (by infer_instance)
+/-- The identity object is an explicit terminal pro-etale object.
+The equality condition determines the witness uniquely. -/
+theorem proEtTerminal_exists (T : Scheme.{u}) :
+    ∃ W : T.ProEt, W = MorphismProperty.Over.mk ⊤ (𝟙 T) (by infer_instance) :=
+  ⟨_, rfl⟩
+
+/-- A terminal object, kept behind its equality API to avoid reducing iterated pullbacks
+of the identity scheme during kernel checks of section comparisons. The defining theorem
+specifies the exact identity object, so this choice carries no arbitrary data. -/
+noncomputable def proEtTerminal (T : Scheme.{u}) : T.ProEt :=
+  Classical.choose (proEtTerminal_exists T)
+
+/-- The terminal object is exactly the identity scheme over itself. -/
+theorem proEtTerminal_eq (T : Scheme.{u}) :
+    proEtTerminal T = MorphismProperty.Over.mk ⊤ (𝟙 T) (by infer_instance) :=
+  Classical.choose_spec (proEtTerminal_exists T)
 
 instance (T : Scheme.{u}) : IsIso (proEtTerminal T).hom := by
+  rw [proEtTerminal_eq]
   change IsIso (𝟙 T)
   infer_instance
 
 instance (T : Scheme.{u}) : IsIso
     ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
       (proEtTerminal specZ.{u})).hom := by
+  rw [proEtTerminal_eq]
   change IsIso (pullback.snd (𝟙 specZ.{u}) (toSpecZ T))
   infer_instance
 
@@ -230,6 +246,20 @@ open scoped CategoryTheory.Obj
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
+theorem finiteDiscreteSchemeRingIso_exists (T : Scheme.{u})
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
+      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
+        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B) :
+    ∃ e : (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
+        condensedRingObj (Profinite.continuousMapRingObj.{u} B) T), e =
+      (constantSchemeIso T).app (AddCommGrpCat.of (ULift.{u + 1} B)) ≪≫
+    (upperStarFromPoint T).mapIso eR :=
+  ⟨_, rfl⟩
+
+/-- The explicit constant coefficient comparison, accessed through its equality API.
+This construction chooses the unique value specified by a proved equality, so it adds
+no arbitrary coefficient identification. -/
 noncomputable def finiteDiscreteSchemeRingIso (T : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
@@ -237,8 +267,16 @@ noncomputable def finiteDiscreteSchemeRingIso (T : Scheme.{u})
     Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (ProEt.topology T)
       ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
         condensedRingObj (Profinite.continuousMapRingObj.{u} B) T :=
-  (constantSchemeIso T).app (AddCommGrpCat.of (ULift.{u + 1} B)) ≪≫
-    (upperStarFromPoint T).mapIso eR
+  Classical.choose (finiteDiscreteSchemeRingIso_exists B T eR)
+
+theorem finiteDiscreteSchemeRingIso_eq (T : Scheme.{u})
+    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
+      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
+        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B) :
+    finiteDiscreteSchemeRingIso B T eR =
+      (constantSchemeIso T).app (AddCommGrpCat.of (ULift.{u + 1} B)) ≪≫
+    (upperStarFromPoint T).mapIso eR :=
+  Classical.choose_spec (finiteDiscreteSchemeRingIso_exists B T eR)
 
 instance (T : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
@@ -267,7 +305,8 @@ instance (T : Scheme.{u})
       (hf := Functor.isMonHom_compAlgHom S P (constantSchemeIso T).inv A)
   have hh := monHomInvExplicit (transfer mS) mQ ((constantSchemeIso T).app A).symm hi
   have hmap : IsMonHom (P.map eR.hom) := inferInstance
-  dsimp only [finiteDiscreteSchemeRingIso, Iso.trans_hom, Functor.mapIso_hom]
+  rw [finiteDiscreteSchemeRingIso_eq]
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom]
   exact monHomCompExplicit mQ (transfer mS) _
     ((constantSchemeIso T).hom.app A) (P.map eR.hom) hh hmap
 /-- The monoidal constant-ring identification on a profinite point pulls to every scheme.

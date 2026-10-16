@@ -28,6 +28,11 @@
    "text": "Apply the resulting monoidal natural isomorphism to ULift B. Explicitly identify monoid structures for constant ring presheaves, sheafification, and composition, using monObjObj_comp. Map the given coefficient-ring isomorphism along upperStarFromPoint and compose the ring-object morphisms.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "D3: terminal object and coefficient comparison are specified by proved equalities to their original explicit constructions. The chosen witnesses are unique by equality; no arbitrary existence data is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
@@ -35,7 +40,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Section 5.3; uniqueness of monoidal left adjoints and the constant-sheaf adjunction",
-  "note": "B3: concrete coefficient realization and existing library APIs."
+  "note": "B3: concrete coefficient realization and existing library APIs. D3: terminal object and coefficient comparison are specified by proved equalities to their original explicit constructions. The chosen witnesses are unique by equality; no arbitrary existence data is used."
  },
  "mathlib_searches": [
   {
@@ -118,7 +123,14 @@
   "statement": "theorem finiteDiscreteSchemeRing_constant (T : Scheme.{u})\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (heR : IsMonHom eR.hom) :\n    ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (ProEt.topology T)\n      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n        condensedRingObj (Profinite.continuousMapRingObj.{u} B) T,\n      IsMonHom e.hom",
   "branch": "sheaf-dag",
   "by": "A3",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRing_constant",
+   "AlgebraicGeometry.ProEtale.proEtTerminal_exists",
+   "AlgebraicGeometry.ProEtale.proEtTerminal_eq",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRingIso_exists",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRingIso_eq"
+  ]
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -133,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-7a03c",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261016T054832-L-154891",
+  "landing": "20261016T171806-L-1680950",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
