@@ -27,9 +27,164 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an infinite cardinal $\\mu$ bounding $|\\operatorname{Ob}\\mathcal C|$, $|\\operatorname{Mor}\\mathcal C|$, and $|\\coprod_U R(U)|$. Fix an infinite $\\kappa\\geq\\mu$ with $\\kappa^\\mu=\\kappa$. In particular $2^\\mu\\leq\\kappa$, $\\mu\\kappa=\\kappa$, $\\kappa^{<\\omega}=\\kappa$, and $\\aleph_0\\kappa=\\kappa$. Restriction data of a section on any covering can be encoded by its target, a subset of the set of arrows, and one value for each distinct arrow. Repetitions of an arrow give equal restrictions, so at most $\\mu$ distinct arrows suffice for this encoding, even when the given covering has a larger indexing set. We retain the given covering when using the site axioms; we do not assert that deleting repetitions is an allowed covering.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VH (definition-site); elementary cardinal arithmetic and encoding by distinct arrows."
+   }
+  },
+  {
+   "text": "Here is a bounded generation construction valid inside any module sheaf $E$. For a family $S\\subseteq\\coprod_U E(U)$ of size at most $\\kappa$, let $H_S(V)$ be the $R(V)$-span of all restrictions to $V$ of members of $S$. Restriction of coefficients and generators proves that $H_S$ is a subpresheaf of modules. There are at most $\\mu|S|\\leq\\kappa$ restricted generators, and every linear combination is a finite tuple of generators and ring sections. Thus $|H_S|\\leq\\kappa$, including the zero section at each object.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules); explicit span and finite-tuple count."
+   }
+  },
+  {
+   "text": "For any subpresheaf $H\\subseteq E$ with $|H|\\leq\\kappa$, define $L_E(H)(U)$ to consist of those sections of $E(U)$ whose restrictions belong to $H$ on some covering of $U$. Pulling back coverings gives restriction stability. A common refinement of two witnessing coverings gives closure under addition, and scalar multiplication uses the same covering. A matching family of such sections glues in $E$; composing its witnessing coverings shows that the glue belongs to $L_E(H)$. Thus $L_E(H)$ is the smallest subsheaf containing $H$. For the size estimate, choose one restriction code as in Step 1 for each section. Equal codes determine equal sections by separatedness of $E$, including the case of an empty covering. Consequently $|L_E(H)|\\leq\\mu\\,2^\\mu\\kappa^\\mu\\leq\\kappa$. Define $G_E(S)=L_E(H_S)$. Steps 2-3 give a subsheaf of size at most $\\kappa$ containing $S$, all of whose sections are locally finite linear combinations of restricted members of $S$. These statements follow directly from the sheaf axiom; no cardinal bound on a sheafification functor is assumed.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VH (definition-site), base change and composition of coverings; sheaf equalizer axiom. Agent local-saturation construction and code count."
+   }
+  },
+  {
+   "text": "We first justify local lifting without any sectionwise-surjectivity assumption. For an epimorphism $f:M\\to N$ of module sheaves, its cokernel is zero and is the module sheafification of $T(U)=N(U)/f_U(M(U))$ by [def-weil-sheaf-of-modules-category]. By [lem-pc-sites-module-sheafification-interface] its underlying abelian sheaf is the abelian sheafification; by [lem-pc-sites-sheafification-underlying-sets] its underlying set sheaf is the associated sheaf of the underlying sets of $T$. For $n\\in N(U)$ the class $[n]\\in T(U)$ and zero therefore have equal images in $T^\\#(U)=0$. The local-equality clause of [lem-weil-pbc-site-sheafification-sections-local] gives a covering on which $[n]=0$ in the sectionwise quotient. On each member choose a preimage of the restricted section in $M$. This proves precisely local lifting for every epimorphism used below.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), cokernels as sheafified sectionwise cokernels; Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tags 00WB (theorem-plus) and 00WK (lemma-sections-sheafification)."
+   }
+  },
+  {
+   "text": "Put $E(U)=\\{b\\in B(U):q_U(b)\\in C_0(U)\\}$. The sheaf axiom and linearity show that $E$ is a subsheaf of $B$, the stated inverse image. Apply Step 4 to $q$ and every section $c\\in C_0(U)$. Choose a witnessing covering and local lifts in $B$. For each distinct arrow in that covering choose one lift and use it at all repetitions; it still lifts the same restricted $c$. Every lift lies in $E$. Altogether there are at most $\\mu|C_0|\\leq\\kappa$ chosen lifts. Call their family $S$ and set $N_0=G_E(S)$. Thus $|N_0|\\leq\\kappa$, and every section of $C_0$ locally lifts to $N_0$. Identify $A$ with $\\ker q\\subseteq B$ using the given short exact sequence: kernels are computed sectionwise [def-weil-sheaf-of-modules-category], and the short-exact kernel identification is an isomorphism. This identification preserves all section cardinalities.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), sectionwise kernels; Tag 00VH for the coverings. Agent bounded selection using Steps 1-4."
+   }
+  },
+  {
+   "text": "Inductively suppose $N_j\\subseteq E$ has size at most $\\kappa$. Put $K_j=A\\cap N_j$, with intersection taken sectionwise. For every object $V$, finite matrix $T\\in\\operatorname{Mat}_{r\\times t}(R(V))$, and vector $c\\in K_j(V)^r$ for which $Tx=c$ has a solution in $A(V)^t$, choose one such solution. There are at most $\\kappa$ systems: objects and coefficients are bounded by $\\mu$, and right-hand sides are finite tuples of the at most $\\kappa$ sections of $K_j$. Adjoin all entries of the chosen solutions, regarded in $A\\subseteq E$, to all sections of $N_j$, and take $G_E$ of this family to define $N_{j+1}$. Then $N_j\\subseteq N_{j+1}\\subseteq E$ and $|N_{j+1}|\\leq\\kappa$. This defines the sequence for all $j\\in\\mathbf N$ by ordinary recursion and set-indexed choice. It uses solutions in $A(V)$, not a claim that $A(V)$ is flat over $R(V)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules); explicit finite-equation closure. Bounded generation was proved in Steps 2-3."
+   }
+  },
+  {
+   "text": "Let $D(V)=\\bigcup_{j<\\omega}N_j(V)$. Increasingness makes $D$ a subpresheaf of $E$ and gives $|D|\\leq\\aleph_0\\kappa=\\kappa$. Set $B_0=L_E(D)$ and $A_0=A\\cap B_0$. Step 3 proves that $B_0$ is a subsheaf of $q^{-1}(C_0)$ with $|B_0|\\leq\\kappa$. A finite tuple of sections of $B_0(V)$ locally lies in a single $N_j$: choose a witnessing covering for each entry, take their finite common refinement, and on each member take the maximum of the finitely many stage indices. The index can vary with the member. For a tuple in $A_0(V)$ the resulting local sections also lie in $A$, so they lie in $K_j$ there. We take local saturation of the union, since the sectionwise countable union need not be a sheaf.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VH (definition-site), finite common refinements by covering base change and composition; sheaf axiom and Steps 3, 6."
+   }
+  },
+  {
+   "text": "The inclusion $A_0\\subseteq A$ has the following explicitly proved local equation-reflection property. Given a finite system $Tx=c$ over $R(V)$ with $c\\in A_0(V)^r$ and a solution in $A(V)^t$, apply Step 7 to $c$. On each covering member $W$, its entries lie in $K_j(W)$ for some $j$. Restrict both the matrix and the given solution to $W$. This very system over $R(W)$ was among those considered at stage $j$ in Step 6. Its selected solution lies in $A(W)^t\\cap N_{j+1}(W)^t\\subseteq A_0(W)^t$. Thus it has a solution in $A_0$ locally. No theorem about pure subobjects is used; this local reflection property is what the remaining argument needs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument from Steps 6-7, restricting coefficients and equations together."
+   }
+  },
+  {
+   "text": "To prove that $A_0$ is tensor-flat, start with a relation $\\sum_i a_i u_i=0$ in $A_0(V)$. It is a relation in $A(V)$. The forward direction of [lem-weil-pbc-site-flat-equational-criterion], applied to the assumed tensor-flat sheaf $A$, gives locally a factorization $u_i=\\sum_h b_{ih}z_h$ with $z_h\\in A$ and $\\sum_i a_i b_{ih}=0$. Apply Step 8 to the finite system $Bz=(u_i)_i$ on each covering member. On a further covering it has a solution $z'_h\\in A_0$ with the same restricted matrix $B$; the coefficient identities restrict unchanged. Composing coverings gives the factorization demanded by the converse direction of that same criterion for $A_0$. Hence $A_0$ is flat. Empty relations admit the empty factorization.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FC (lemma-flat-eq), equivalence (1) and (2); Tag 00VH for composed coverings. Local equation reflection is Step 8."
+   }
+  },
+  {
+   "text": "Put $Q=A/A_0$. By [def-weil-sheaf-of-modules-category] this is the module sheafification of $T(V)=A(V)/A_0(V)$. The statements [lem-pc-sites-module-sheafification-interface] and [lem-pc-sites-sheafification-underlying-sets] identify its underlying sets with the associated set sheaf of $T$. By [lem-weil-pbc-site-sheafification-sections-local], every section of $Q$ locally comes from a section of $T$, which can be lifted to $A$ by the definition of the sectionwise quotient. Also, if $a\\in A(V)$ maps to zero in $Q(V)$, the local-equality clause makes $[a]=0$ in $T$ on a covering. Thus $a$ locally belongs to $A_0$; since $A_0$ is a subsheaf, gluing proves $a\\in A_0(V)$. Finite tuples of sections of $Q$ lift simultaneously after finitely many common refinements.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tags 00WB (theorem-plus), 00WK (lemma-sections-sheafification), 00VH (definition-site)."
+   }
+  },
+  {
+   "text": "For a relation $\\sum_i a_i v_i=0$ in $Q(V)$, Step 10 gives simultaneous local lifts $x_i\\in A$. On each member, $c=\\sum_i a_i x_i$ maps to zero in $Q$, hence belongs to $A_0$ by Step 10. The single finite equation $\\sum_i a_i y_i=c$ has the solution $(x_i)_i$ in $A$; Step 8 gives locally a solution $(y_i)_i$ in $A_0$. Therefore $g_i=x_i-y_i$ obeys $\\sum_i a_i g_i=0$ in $A$. Flatness of $A$ and [lem-weil-pbc-site-flat-equational-criterion] give on another covering $g_i=\\sum_h b_{ih}t_h$ with $\\sum_i a_i b_{ih}=0$. Passing to $Q$ yields $v_i=\\sum_h b_{ih}\\overline{t_h}$, since $y_i$ maps to zero. Compose these coverings and apply the converse direction of the criterion to conclude that $Q=A/A_0$ is tensor-flat. This also covers the empty relation.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FC (lemma-flat-eq), equivalence (1) and (2); Tag 00VH for composition. Quotient representatives and kernel membership are Step 10."
+   }
+  },
+  {
+   "text": "Every section of $C_0$ locally lifts to $N_0\\subseteq B_0$ by Step 5. Thus $q|_{B_0}:B_0\\to C_0$ is epic: two morphisms out of $C_0$ that agree after this map agree on the local lifts of every section, and separatedness of their target makes them equal. Its sectionwise kernel is $A\\cap B_0=A_0$ because $A=\\ker q$ and $C_0\\hookrightarrow C$ is monic. The sectionwise kernel description in [def-weil-sheaf-of-modules-category] therefore gives the required short exact row. Steps 7, 9 and 11 prove all size and flatness clauses with the single cardinal $\\mu$ fixed in Step 1. The construction remains valid when $C_0=0$ or $A=0$, and on the empty site. It does not need the extra assumed flatness of $C_0$; the statement retains that hypothesis unchanged.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), sectionwise kernels and short exactness; Tag 00VH and the sheaf separatedness axiom for epimorphy."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-site-flat-equational-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent bounded finite-equation construction, using Tags 03CV, 03DA, 03CY, 08FC and Sites Tags 00VH, 00WB, 00WK. No unarchived purity/envelope theorem is assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -121,15 +276,103 @@
    "results": "0 hits: ; loogle: unknown identifier 'Subobject'",
    "date": "2026-10-16",
    "verdict": "invalid query: Loogle did not recognize Subobject; retried with quoted name substrings, which returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "subextension|pure.*subsheaf|small.*flat.*sheaf|flat.*small.*sheaf",
+   "results": "17 hits: Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IntermediateField/ExtendRight.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: field subextensions and universe-small sheaf limit instances do not assert a bounded subextension or flat kernel quotient. Read the returned lines and Sheaf/Limits.lean:35-95."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every short exact sequence of module sheaves has a small subextension over a given bounded subobject with pure kernel",
+   "results": "8 hits: CategoryTheory.ShortComplex.moduleCat_exact_iff_ker_sub_range, CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact, CategoryTheory.ShortComplex.moduleCat_exact_iff, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.ShortExact.mk', CategoryTheory.ShortComplex.ShortExact.mono_f, CategoryTheory.ShortComplex.Exact.moduleCat_range_eq_ker, CategoryTheory.ShortComplex.exact_of_f_is_kernel",
+   "date": "2026-10-16",
+   "verdict": "no match: ShortComplex/ModuleCat.lean:48-78 and ShortExact constructors concern exactness over a single ring and contain no bounded sheaf subextension construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism of sheaves of modules with flat kernel admits a bounded subextension over a specified small flat subsheaf, with flat kernel and flat kernel quotient",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.Presentation, SheafOfModules.GeneratingSections.ofEpi_I, SheafOfModules.Presentation.IsFinite, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: GeneratingSections and finite-presentation declarations do not construct bounded subextensions or reflect finite systems in the kernel; read Sheaf/Generators.lean:43-66."
+  },
+  {
+   "tool": "grep",
+   "query": "pure|cardinal|small",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: field subextensions and universe-small sheaf limit instances do not assert a bounded subextension or flat kernel quotient. Read the returned lines and Sheaf/Limits.lean:35-95."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subset of a flat sheaf of modules is contained in a subsheaf of bounded cardinality whose inclusion is pure and whose quotient is flat",
+   "results": "8 hits: SheafOfModules.GeneratingSections.I, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections",
+   "date": "2026-10-16",
+   "verdict": "no match: GeneratingSections and finite-presentation declarations do not construct bounded subextensions or reflect finite systems in the kernel; read Sheaf/Generators.lean:43-66."
+  },
+  {
+   "tool": "grep",
+   "query": "Pure.*(Submodule|submodule)|Submodule.*[Pp]ure|Kaplansky",
+   "results": "19 hits, all Kaplansky references, topology uses of pure, or unrelated algebra; none states a pure submodule or bounded flat sheaf subextension theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure submodule of a flat module and its quotient are flat; a small subset is contained in a pure submodule of bounded cardinality",
+   "results": "8 hits. Read Flat/Basic.lean:172-201 (retracts and universe shrink) and Flat/EquationalCriterion.lean:117-126,197-201 (equational criterion for modules over one ring). Neither constructs bounded subsheaves on a site nor gives this extension statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-exact-flat-complex-set-cogeneration",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-small-flat-subextension",
+  "worker": "Q19-stage1",
+  "summary": "Statement unchanged. Proved bounded generation by local saturation and a cardinal code count, selected bounded local lifts, adjoined solutions of finite systems in the flat kernel in a countable recursion, and proved kernel and quotient flatness by the existing local equational criterion. All non-elementary sheafification and flatness inputs cite existing nodes; no new nodes and no Lean attachment.",
+  "blueprint": "Supplies the finite-row input underneath paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint, via the recorded flat-model and exact-flat-complex ancestry. The present construction expands this infrastructure only; the current main-20261015 paragraph and the historical unit binding are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-equational-criterion",
+    "why": "Generic local criterion for tensor-flatness on an arbitrary small ringed site; the coefficient unit provides no replacement."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Module sheafification has underlying abelian sheaf the abelian sheafification; needed to interpret sectionwise cokernels on a site."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Abelian sheafification commutes with underlying sets; needed before applying the set-valued local section/equality criterion."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives and local equality for associated sheaves on an arbitrary small site; used for epimorphism lifts and quotient sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-equational-criterion",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-ad4055e19",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-ad4055e19 (reviewer sub-agent of L); spot-checked: Read the full item, report, route, cited DAG statements, and Stacks sources 00VH, 00WB, 00WK, 03CV, 03CY, 03DA, and 08FC. Verified every proof step, hypotheses, cardinal bounds, local lifting, equation reflection, flatness arguments, epimorphy, edge cases, route lock, searches, tool uses, and absence of duplicates or cycles. Wrote review.md; no repair is warranted."
+ }
 }
