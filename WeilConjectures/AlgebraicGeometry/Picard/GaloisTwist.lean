@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 
@@ -167,5 +168,102 @@ theorem eq_of_homEquiv_galoisTwistHom {σ : AlgebraicClosure k →ₐ[k] Algebra
     f = g := by
   have := congrArg CommaMorphism.left (e.homEquiv.injective hfg)
   simpa using this
+
+/-! ### The geometric fiber of a curve -/
+
+namespace Scheme.Hom
+
+variable {C₀ : Scheme.{u}} (p : C₀ ⟶ Spec (.of k)) [IsProper p] [LocallyOfFinitePresentation p]
+  (d : ℤ)
+
+/-- The canonical identification of the restriction of `Pic^d_{C₀/k}` to `k̄`-schemes with
+`Pic^d_{C/k̄}` for the geometric fiber `C = C₀ ×_k k̄`
+(`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`). -/
+noncomputable def geometricFiberPicardIso :
+    (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))).op ⋙
+        (picardFunctorDegree p d).obj ≅
+      (picardFunctorDegree p.geometricFiberToAlgebraicClosure d).obj :=
+  letI : C₀.Over (Spec (.of k)) := ⟨p⟩
+  letI : p.geometricFiber.Over (Spec (.of (AlgebraicClosure k))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  haveI : IsProper (C₀ ↘ Spec (.of k)) := ‹IsProper p›
+  haveI : LocallyOfFinitePresentation (C₀ ↘ Spec (.of k)) := ‹LocallyOfFinitePresentation p›
+  picardFunctorDegreeIsoOfIsPullback p.geometricFiberProj (IsPullback.of_hasPullback _ _) d
+
+/-- Blueprint `lem-wf-geometric-jacobian-galois-action`: the action
+`σ_C^* : Pic^d_{C/k̄}(T) ⟶ Pic^d_{C/k̄}(T^σ)` of `σ ∈ Gal(k̄/k)` on the degree-`d` Picard functor
+of the geometric fiber `C = C₀ ×_k k̄` (`AlgebraicGeometry.picardFunctorDegreeGaloisMap`). -/
+noncomputable def geometricFiberPicardGaloisMap
+    (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k) (T : Over (Spec (.of (AlgebraicClosure k)))) :
+    (picardFunctorDegree p.geometricFiberToAlgebraicClosure d).obj.obj (.op T) →
+      (picardFunctorDegree p.geometricFiberToAlgebraicClosure d).obj.obj
+        (.op (galoisTwist σ T)) :=
+  letI : C₀.Over (Spec (.of k)) := ⟨p⟩
+  letI : p.geometricFiber.Over (Spec (.of (AlgebraicClosure k))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  haveI : IsProper (C₀ ↘ Spec (.of k)) := ‹IsProper p›
+  haveI : LocallyOfFinitePresentation (C₀ ↘ Spec (.of k)) := ‹LocallyOfFinitePresentation p›
+  picardFunctorDegreeGaloisMap p.geometricFiberProj (IsPullback.of_hasPullback _ _) d σ T
+
+variable {p d} {J₀ : Over (Spec (.of k))}
+  {r : (picardFunctorDegree p d).obj.RepresentableBy J₀}
+  {rK : (picardFunctorDegree p.geometricFiberToAlgebraicClosure d).obj.RepresentableBy
+    (Over.mk J₀.hom.geometricFiberToAlgebraicClosure)}
+
+/-- Blueprint `lem-wf-geometric-jacobian-galois-action`: let `J₀` represent `Pic^d_{C₀/k}` by `r`
+and let `J = J₀ ×_k k̄` represent `Pic^d_{C/k̄}` by the base change `rK` of `r`. The automorphism
+`σ_J = 𝟙 × Spec σ` of `J` induces the Galois action `σ_C^*` on the represented functor. -/
+theorem homEquiv_galoisTwistHom_geometricFiberGaloisMap
+    (hrK : ∀ (T : Over (Spec (.of (AlgebraicClosure k))))
+      (y : (picardFunctorDegree p d).obj.obj
+        (.op ((Over.map (Spec.map (CommRingCat.ofHom
+          (algebraMap k (AlgebraicClosure k))))).obj T))),
+      rK.homEquiv.symm ((p.geometricFiberPicardIso d).hom.app (.op T) y) =
+        (Over.mapPullbackAdj _).homEquiv T J₀ (r.homEquiv.symm y))
+    (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k) {T : Over (Spec (.of (AlgebraicClosure k)))}
+    (x : T ⟶ Over.mk J₀.hom.geometricFiberToAlgebraicClosure) :
+    rK.homEquiv (galoisTwistHom (J₀.hom.geometricFiberGaloisMap σ)
+      (J₀.hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure σ) x) =
+      p.geometricFiberPicardGaloisMap d σ T (rK.homEquiv x) :=
+  letI : C₀.Over (Spec (.of k)) := ⟨p⟩
+  letI : p.geometricFiber.Over (Spec (.of (AlgebraicClosure k))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  haveI : IsProper (C₀ ↘ Spec (.of k)) := ‹IsProper p›
+  haveI : LocallyOfFinitePresentation (C₀ ↘ Spec (.of k)) := ‹LocallyOfFinitePresentation p›
+  homEquiv_galoisTwistHom (q := p.geometricFiberProj) (h := IsPullback.of_hasPullback _ _)
+    (r := r) (rK := rK) hrK σ (J₀.hom.geometricFiberGaloisMap σ)
+    (J₀.hom.geometricFiberGaloisMap_comp_geometricFiberProj σ)
+    (J₀.hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure σ) x
+
+
+/-- Blueprint `lem-wf-geometric-jacobian-galois-action`: in the situation of
+`AlgebraicGeometry.Scheme.Hom.homEquiv_galoisTwistHom_geometricFiberGaloisMap`, the automorphism
+`σ_J = 𝟙 × Spec σ` is the unique endomorphism of `J` lying over `Spec σ` which induces the Galois
+action `σ_C^*` on the represented functor (blueprint `lem-pc-representable-unique`). -/
+theorem homEquiv_galoisTwistHom_iff
+    (hrK : ∀ (T : Over (Spec (.of (AlgebraicClosure k))))
+      (y : (picardFunctorDegree p d).obj.obj
+        (.op ((Over.map (Spec.map (CommRingCat.ofHom
+          (algebraMap k (AlgebraicClosure k))))).obj T))),
+      rK.homEquiv.symm ((p.geometricFiberPicardIso d).hom.app (.op T) y) =
+        (Over.mapPullbackAdj _).homEquiv T J₀ (r.homEquiv.symm y))
+    (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k)
+    (f : J₀.hom.geometricFiber ⟶ J₀.hom.geometricFiber)
+    (hf : f ≫ J₀.hom.geometricFiberToAlgebraicClosure =
+      J₀.hom.geometricFiberToAlgebraicClosure ≫ (Scheme.specAlgebraicClosureMap σ).left) :
+    (∀ (T : Over (Spec (.of (AlgebraicClosure k))))
+      (x : T ⟶ Over.mk J₀.hom.geometricFiberToAlgebraicClosure),
+      rK.homEquiv (galoisTwistHom (J := Over.mk J₀.hom.geometricFiberToAlgebraicClosure)
+        f hf x) = p.geometricFiberPicardGaloisMap d σ T (rK.homEquiv x)) ↔
+      f = J₀.hom.geometricFiberGaloisMap σ := by
+  constructor
+  · intro H
+    refine eq_of_homEquiv_galoisTwistHom rK hf
+      (J₀.hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure σ) ?_
+    rw [H, homEquiv_galoisTwistHom_geometricFiberGaloisMap hrK]
+  · rintro rfl T x
+    exact homEquiv_galoisTwistHom_geometricFiberGaloisMap hrK σ x
+
+end Scheme.Hom
 
 end AlgebraicGeometry
