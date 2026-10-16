@@ -139,8 +139,8 @@ omit [SmoothOfRelativeDimension d p.left] in
 /-- **Poincaré duality**: the Poincaré duality morphism
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
 theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by
-  have := isIso_verdierExchange (Profinite.padicAlgClRingObj ℓ) ℓ p (𝟙_ _) (𝟙_ _)
+  have := isIso_verdierExchange ℓ p (𝟙_ _) (𝟙_ _)
   unfold poincareMap Verdier.poincareMap
-  exact inferInstanceAs (IsIso (_ ≫ verdierExchange _ ℓ p (𝟙_ _) (𝟙_ _)))
+  exact inferInstanceAs (IsIso (_ ≫ verdierExchange ℓ p (𝟙_ _) (𝟙_ _)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
