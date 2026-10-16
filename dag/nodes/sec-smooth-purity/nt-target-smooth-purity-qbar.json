@@ -1,47 +1,271 @@
 {
-  "id": "nt-target-smooth-purity-qbar",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-pur-rational-and-qbar-purity",
-      "place": "Upstream master declaration AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso (#1461); the Qlb case of the blueprint theorem for the unit object",
-      "via": []
-    },
-    "same_as": []
+ "id": "nt-target-smooth-purity-qbar",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Upstream master declaration AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso (#1461); the Qlb case of the blueprint theorem for the unit object",
+   "via": []
   },
-  "kind": "statement",
-  "title": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
-  "statement": "Let l be a prime and k a field of characteristic p>0 with p != l. Let X, Y be separated schemes of finite type over Spec k (objects of Over (Spec k)) and f:X->Y a morphism over k whose underlying morphism of schemes is smooth of pure relative dimension d. Write Qlb for the condensed ring Profinite.padicAlgClRingObj l, Qlb_Y for the tensor unit of the monoidal category D^b_c(Y)[[Qlb]] of bounded constructible module objects over Qlb on the pro-etale site of Y, Rf^! for boundedConstructibleUpperShriek (the right adjoint of Rf_!, built from a Nagata compactification of f), and Qlb_X(d) for the Tate twist tateTwistDerived X l d of WeilConjectures.TateTwist.ProEtale. Then there is an isomorphism (Rf^! Qlb_Y) ~= Qlb_X(d)[2d] in D(Mod_{Qlb_X}) (after the fully faithful inclusion of D^b_c(X)[[Qlb]]). The upstream declaration is a chosen isomorphism (data, @[no_expose]); it should be the purity isomorphism of SGA 4 XVIII 3.2.5 / Bhatt-Scholze 6.8, i.e. the inverse of gamma_{f,K} of [thm-pur-rational-and-qbar-purity] for K the unit object, composed with Lf^* of the unit being the unit.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
+ "statement": "Let l be a prime and k a field of characteristic p>0 with p != l. Let X, Y be separated schemes of finite type over Spec k (objects of Over (Spec k)) and f:X->Y a morphism over k whose underlying morphism of schemes is smooth of pure relative dimension d. Write Qlb for the condensed ring Profinite.padicAlgClRingObj l, Qlb_Y for the tensor unit of the monoidal category D^b_c(Y)[[Qlb]] of bounded constructible module objects over Qlb on the pro-etale site of Y, Rf^! for boundedConstructibleUpperShriek (the right adjoint of Rf_!, built from a Nagata compactification of f), and Qlb_X(d) for the Tate twist tateTwistDerived X l d of WeilConjectures.TateTwist.ProEtale. Then there is an isomorphism (Rf^! Qlb_Y) ~= Qlb_X(d)[2d] in D(Mod_{Qlb_X}) (after the fully faithful inclusion of D^b_c(X)[[Qlb]]). The upstream declaration is a chosen isomorphism (data, @[no_expose]). Its intended SGA normalization is obtained by reconstructing the inverse finite-coefficient smooth-purity comparisons, extending coefficients to the finite-extension-valued condensed Qlb ring, and identifying Lf^* of the unit with the unit. The common-stage Qlb category of [def-weil-pbc-qbar-category] and the condensed-module category are related by coefficient realization, not identified by definition.",
+ "source": {
+  "document": "literature/upstream-master-20261016/WeilConjectures/SmoothPurity/Defs.lean",
+  "place": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
+  "commit": "7347520d9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Set $A_n=\\mathbf Z/\\ell^n\\mathbf Z$. The unit $A_{n,Y}$ is constructible (use the single stratum $Y$ and the constant rank-one module), and has Tor amplitude $[0,0]$: $A_{n,Y}\\otimes^L_{A_{n,Y}}N=N$ for every module sheaf $N$ in degree zero. Thus it belongs to $D^b_{ctf}(Y,A_n)$. Apply [lem-pur-finite-smooth-adjunction-general-base] with $K=A_{n,Y}$: its hypotheses hold for the given separated finite-type $k$-schemes and smooth $f$, since $\\ell$ is invertible in $k$. It gives the SGA-normalized isomorphisms $\\gamma_n:A_{n,X}(d)[2d]\\simeq Rf_n^!A_{n,Y}$ compatible with derived reduction and the quotient cocycle. Supply the strict tower explicitly, rather than lifting an arbitrary diagram in a derived category. Write $\\widehat Z_X=\\varprojlim_n A_{n,X}$, and let $P_\\bullet=(A_{n,X}(d))_n[2d]$ be the complex of strict towers with its sole nonzero sheaf in degree $-2d$, using the power maps on roots of unity in each tensor factor as transitions. Take $M_\\bullet$ to be a second copy of this same strict tower complex, equipped at level $n$ with the identification $\\operatorname{ev}_n(M_\\bullet)\\xrightarrow{\\gamma_n}Rf_n^!A_{n,Y}$. The coefficient compatibility of $\\gamma_n$ identifies the actual transitions of $M_\\bullet$ with the exceptional-image quotient transitions. The finite twists have the required derived-reduction normalizations by [lem-pur-twist-sheaf-locally-free]: locally choose a generator of $\\mu_{\\ell^{n+1}}$; its $\\ell$-th power generates $\\mu_{\\ell^n}$. Each $d$-fold tensor power is then free of rank one, so its derived tensor with $A_n$ is ordinary tensor and the power transition is the quotient map. For $d=0$ these are the unit coefficient quotient maps. Successive quotients send a local generator to its corresponding image, independently of the intermediate level, which gives the quotient cocycle. Conjugating these normalizations by $\\gamma_{n+1}$ and $\\gamma_n$ gives the exceptional-image normalizations by the finite lemma's coefficient compatibility, with the same cocycle. Let $\\gamma_\\bullet:P_\\bullet\\to M_\\bullet$ be the identity between the two copies. Under the supplied level identifications its evaluations are exactly $\\gamma_n$. Thus a coherent strict model for the exceptional images is supplied by explicit finite twist sheaves. No good-truncation theorem or general diagram-lifting assertion is needed.",
+   "uses": [
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 3.2.5 and finite-coefficient/reduction input for unit Steps 1–2"
+   }
+  },
+  {
+   "text": "The two towers of Step 1 have finite constructible levels and the same interval $[-2d,-2d]$, by the finite-coefficient lemma. Apply [lem-weil-pbc-normalized-constructible-local-effectivity] to obtain common local models and stratifications; apply [lem-weil-pbc-reconstruction-uniform-tower] to both. Their limits $P=R\\lim P_\\bullet$ and $M=R\\lim M_\\bullet$ are derived complete and recover the specified normalized levels. Take $L=R\\lim_n(A_{n,Y})$ on $Y$; the same argument in interval $[0,0]$ gives its normalized reductions. For this unit tower use the explicit global local model $\\widehat{\\mathbf Z}_{\\ell,Y}$ in degree zero, the single stratum $Y$, and the identity covering: it is free of rank one over itself, so its derived reductions are $A_{n,Y}$ with precisely the quotient normalizations. The local-model conclusion of [lem-weil-pbc-reconstruction-uniform-tower] then identifies $L$ with this integral coefficient object. These objects satisfy the integral-category conditions: the finite-level roots of unity and their tensor powers have etale origin, and the finite exceptional images are identified with those etale-origin objects by $\\gamma_n$, coherently with reduction. Thus $L\\in\\mathcal I_Y$ and $P,M\\in\\mathcal I_X$ in [def-weil-pbc-bounded-constructible-complete]. The Noetherian hypotheses follow because a field is Noetherian and a finite-type scheme over it is locally Noetherian by [pqf-lem-locnoeth-lft], and is quasi-compact by [lem-weil-pbc-qcqs-over-affine]; its dimension is finite by [lem-kun-dimension-finite-type].",
+   "uses": [
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-reconstruction-uniform-tower",
+    "def-weil-pbc-bounded-constructible-complete",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Step 2: uniform towers, their coherent reconstruction, and its actual hypotheses"
+   }
+  },
+  {
+   "text": "The strict tower morphism $\\gamma_\\bullet$ is an isomorphism in the derived category of towers: evaluation of its cone has zero cohomology at every level, since every $\\gamma_n$ is an isomorphism; kernels and cokernels in the tower category are levelwise by [lem-weil-tower-category-levelwise-abelian], so the cone is acyclic as a tower. Apply the exact strict derived-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. This gives $\\gamma_{\\mathbf Z_\\ell}:P\\xrightarrow{\\sim}M$. This step uses an actual morphism in the derived category of strict towers from Step 1, not just levelwise maps in an ordinary derived category.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+    "place": "Step 2: a levelwise isomorphism of the coherent systems induces an isomorphism"
+   }
+  },
+  {
+   "text": "Apply the functor $U_X$ of [lem-pur-condensed-exceptional-reconstruction] to $\\gamma_{\\mathbf Z_\\ell}$. This functor first localizes at $\\ell$, applies the finite-stage realization, and then extends scalars along the bottom field $\\mathbf Q_\\ell\\subset\\Omega$; hence it carries the isomorphism and its inverse to inverse maps. The hypotheses on $M_\\bullet,M$ in that comparison lemma were verified in Steps 1–2. Its adjunction comparison identifies $U_X(M)$ with the specified bounded constructible condensed $Rf^!_\\Omega(U_YL)$, and it identifies $U_YL$ with the tensor unit. Thus $U_X(P)\\simeq Rf^!_\\Omega\\Omega_Y$. The exceptional comparison is a separate non-elementary input: neither an equivalence of coefficient categories alone nor the definition of a right adjoint supplies it. At the exact master revision, for its chosen compactification $c=(j,g)$, first the proper right adjoint and then open pullback are applied: $Rf^!_\\Omega(K)=j^*((Rg_{*,\\Omega})^R K)$. The adjunction is the composite specified by the new comparison node. Thus its conclusion uses the actual chosen adjunction, including the arbitrary proper right-adjoint choice; it does not require this choice to be equal to a reconstructed functor.",
+   "uses": [
+    "lem-pur-condensed-exceptional-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261016/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperShriek.lean",
+    "place": "Master 7347520d9b0d17cc31d0fc34ea20f1381a83fe13, lines 100–118 and 128–146; application of the separately stated condensed-exceptional-reconstruction obligation. This is not a consequence asserted by Bhatt–Scholze 6.8.14–15."
+   }
+  },
+  {
+   "text": "First compare the integral coefficient rings used in the two constructions. On each affine weakly contractible pro-etale object $V$, [lem-weil-pbc-condensed-point-basis-evaluation] evaluates the condensed pullback of $C(-,\\mathbf Z_\\ell)$ as $C(\\pi_0(|V|),\\mathbf Z_\\ell)$. Reduction gives its identification with $\\varprojlim_n C(\\pi_0(|V|),\\mathbf Z/\\ell^n)$: a map into the inverse-limit topological ring $\\mathbf Z_\\ell$ is continuous exactly when all its reductions are continuous. These are the sections of $\\widehat Z_X$. The identifications are compatible with restrictions and ring operations, and [lem-weil-pbc-proetale-affine-wcontractible-covering-family] gives such a covering of every site object, so they define the canonical ring-sheaf isomorphism $p_X^*C(-,\\mathbf Z_\\ell)\\simeq\\widehat Z_X$. The same basis calculation gives $\\widehat Z_X/\\ell^n\\widehat Z_X=A_{n,X}$: for a profinite space $S$, every continuous map $S\\to\\mathbf Z/\\ell^n$ lifts continuously to $\\mathbf Z_\\ell$ by choosing one lift of each of its finitely many values, and a continuous $\\mathbf Z_\\ell$-valued function zero modulo $\\ell^n$ is uniquely $\\ell^n$ times a continuous function. These are sheafwise surjectivity and kernel calculations on the covering basis. This uses basis evaluation rather than assuming that geometric inverse image commutes with an infinite inverse limit. Identify the other endpoint explicitly. Let $Z_X(1)=\\varprojlim_n\\mu_{\\ell^n,X}$ and $\\widehat Z_X=\\widehat{\\mathbf Z}_{\\ell,X}$. By [lem-pur-twist-sheaf-locally-free], $Z_X(1)$ is locally free of rank one over $\\widehat Z_X$, is derived complete, and reduces to $\\mu_{\\ell^n,X}$. Its $d$-fold tensor power has the same properties, by trivializing the line on the pro-etale covering supplied there and taking its ordinary rank-one tensor powers; on that covering the reduction is just $A_n\\otimes_{A_n}\\cdots\\otimes_{A_n}A_n=A_n$ and has no higher Tor. For $d=0$ take $\\widehat Z_X$. Therefore its canonical reductions identify its strict reduction tower, shifted by $[2d]$, with $P_\\bullet$, including the quotient transitions: tensoring the projections $Z_X(1)\\to\\mu_{\\ell^n,X}$ gives these maps, and the power transitions commute with those projections. Apply [lem-weil-pbc-reconstruction-uniform-tower] with this explicit global local model $L_X=Z_X(1)^{\\otimes_{\\widehat Z_X}d}[2d]$, the single stratum $X$, and its identity covering. This model has one nonzero term, adic lisse of finite type because it is pro-etale locally $\\widehat Z_X$; every reduction has one finite lisse cohomology sheaf, and its identifications with $P_n$ respect normalization as just checked. The theorem's local-model isomorphism on this identity covering is the required global isomorphism $L_X\\simeq P$. The realization [lem-weil-pbc-condensed-e-realization] is derived extension from the completed integral coefficient sheaf, and extension to $\\Omega$ is the derived tensor of [prop-weil-pbc-qbar-condensed-two-colimit]. Tensor associativity now gives\n$$U_X(P)\\simeq(\\Omega_X^c\\otimes_{\\widehat Z_X}Z_X(1))^{\\otimes_{\\Omega_X^c}d}[2d].$$\nThe ordinary tensors suffice because the line is locally free. This is precisely $\\mathrm{tateTwistDerived}(X,\\ell,d)[2d]$: the upstream construction takes the limit of the free $\\widehat Z_X$-modules on $\\mu_{\\ell^n}$, extends scalars to $\\Omega_X^c$, takes the $d$-fold tensor power, and places it in degree zero. Indeed $\\widehat Z_X\\otimes_{\\mathbf Z}\\mu_{\\ell^n}\\simeq\\mu_{\\ell^n}$ because $\\widehat Z_X/\\ell^n=A_{n,X}$; these identifications commute with the power transitions. This compares the actual constructions, including $d=0$, without assuming the two coefficient categories equal. The upstream inverse system also includes $n=0$, where $\\mu_{\\ell^0}=\\mu_1$ is the zero abelian sheaf. A cone over the positive levels extends uniquely to that level by the zero map, and restriction forgets just this map; these inverse operations identify the two inverse limits and their projections. All these are definitions at the target commit 7347520d9b0d17cc31d0fc34ea20f1381a83fe13, checked in the verbatim source evidence in the report. In particular $\\mathrm{tateTwistOne}$ extends along the pullback of $\\mathbf Z_\\ell\\to\\mathbf Q_\\ell\\to\\Omega$ through the bottom finite intermediate field (lines 81–103 and 150–154); this is the same coefficient map as the composite used by $U_X$. The scalar-extension identification is induced by the balanced map $b\\otimes(a\\otimes z)\\mapsto ba\\otimes z$, with inverse $b\\otimes z\\mapsto b\\otimes(1\\otimes z)$. For the $d$-fold line, the balanced map $(b_1\\otimes z_1)\\otimes\\cdots\\otimes(b_d\\otimes z_d)\\mapsto (b_1\\cdots b_d)\\otimes(z_1\\otimes\\cdots\\otimes z_d)$ has inverse $b\\otimes(z_1\\otimes\\cdots\\otimes z_d)\\mapsto(b\\otimes z_1)\\otimes(1\\otimes z_2)\\otimes\\cdots\\otimes(1\\otimes z_d)$ for $d\\geq1$. Balancing moves each coefficient $b_i$ into the first factor, so both composites are identities; for $d=0$ the comparison is the coefficient unit isomorphism. These maps give tensor compatibility; locally all terms are free rank one, so the ordinary and derived tensors agree. The definition $\\mathrm{tateTwistNat}(0)=\\mathbf1$ handles $d=0$, $\\mathrm{tateTwist}$ on a nonnegative integer is this same tensor power by definition, and $\\mathrm{tateTwistDerived}$ is precisely the degree-zero single-complex inclusion (lines 158–179).",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-pbc-reconstruction-uniform-tower",
+    "lem-weil-pbc-condensed-e-realization",
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261016/WeilConjectures/TateTwist/ProEtale.lean",
+    "place": "Exact master 7347520d9b0d17cc31d0fc34ea20f1381a83fe13: padicIntCondensedRingToPadicAlgCl, lines 79–103; tateModuleLevel/Transition/System/Module, lines 119–144; tateTwistOne/Nat/Derived, lines 148–179. Imported ModuleObjects/Free.lean, lines 63–85, defines freeFunctor on abelian sheaves. Full sources and object hashes are reproduced in report.md."
+   }
+  },
+  {
+   "text": "Let $\\iota_X:\\mathcal C^c_\\Omega(X)\\hookrightarrow D(\\operatorname{Mod}_{\\Omega_X^c})$ be the full-subcategory inclusion. Step 4 gives $a:U_X(P)\\xrightarrow{\\sim}Rf^!_\\Omega\\Omega_Y$ inside $\\mathcal C^c_\\Omega(X)$. First invert $a$ there and apply $\\iota_X$, obtaining $\\iota_X(Rf^!_\\Omega\\Omega_Y)\\xrightarrow{\\sim}\\iota_X(U_X(P))$. Step 5 supplies the ambient isomorphism $b:\\iota_X(U_X(P))\\xrightarrow{\\sim}\\mathrm{tateTwistDerived}(X,\\ell,d)[2d]$. Compose these in the ambient category: $b\\circ\\iota_X(a^{-1})$ has exactly the required source and target. Its inverse is $\\iota_X(a)\\circ b^{-1}$, as follows by the two inverse equations for $a$ and $b$. This constructs the chosen isomorphism as data, with the inverse finite-level SGA normalization used in Step 1 and the coefficient and adjunction comparisons. The source signature requires no further composition or base-change equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/upstream-master-20261016/WeilConjectures/SmoothPurity/Defs.lean",
-    "place": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
-    "commit": "7347520d9"
-  },
-  "stmt_deps": [
-    "thm-pur-rational-and-qbar-purity",
-    "def-weil-pbc-qbar-category",
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-pur-conventions"
-  ],
-  "proof": "",
-  "proof_deps": [],
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "launcher",
-    "date": "2026-10-16",
-    "item": "batch 3 target (the human: upstream SmoothPurity/Defs.lean)"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "upstream_target": {
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
-    "module": "WeilConjectures.SmoothPurity.Defs",
-    "file": "WeilConjectures/SmoothPurity/Defs.lean",
-    "commit": "7347520d9"
+    "place": "Master 7347520d9b0d17cc31d0fc34ea20f1381a83fe13, SmoothPurity/Defs.lean lines 76–92: exact section hypotheses, chosen isomorphism, ambient inclusion, natural-number Tate exponent and integer shift."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-weil-pbc-bounded-constructible-complete",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-condensed-exceptional-reconstruction",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity for condensed Qbar l module objects: the exceptional inverse image of the unit for a smooth scheme map of relative dimension d is the Tate line d shifted by 2d",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern ordinary structure-sheaf adjunctions, algebraic smoothness or trace, abstract derived objects, or discrete/solid condensed modules; none supplies the geometric finite trace, reconstruction comparison, or condensed smooth purity asserted here",
+   "digest": "2c0e9d00050c0f83"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern ordinary structure-sheaf adjunctions, algebraic smoothness or trace, abstract derived objects, or discrete/solid condensed modules; none supplies the geometric finite trace, reconstruction comparison, or condensed smooth purity asserted here",
+   "digest": "5eabcb2dd173fdd6"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|tateTwistDerived|boundedConstructibleUpperShriek",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern ordinary structure-sheaf adjunctions, algebraic smoothness or trace, abstract derived objects, or discrete/solid condensed modules; none supplies the geometric finite trace, reconstruction comparison, or condensed smooth purity asserted here",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth relative purity for pro etale constructible Qbar l modules",
+   "results": "8 hits: Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; AlgebraicGeometry.IsEtale.instIsSmooth; Algebra.FormallyEtale.of_unramified_and_smooth; Algebra.FormallyEtale.instFormallySmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; Algebra.FormallyEtale.iff_unramified_and_smooth; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Smooth.flat",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern ordinary structure-sheaf adjunctions, algebraic smoothness or trace, abstract derived objects, or discrete/solid condensed modules; none supplies the geometric finite trace, reconstruction comparison, or condensed smooth purity asserted here",
+   "digest": "32703a2fa28683cf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality identifies the dualizing complex of a smooth scheme with the shifted l adic Tate twist",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; HomologicalComplex.dgoEquivHomologicalComplex; HomologicalComplex.dgoEquivHomologicalComplex_counitIso; HomologicalComplex.dgoEquivHomologicalComplex_unitIso; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.dgoEquivHomologicalComplexUnitIso; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern ordinary structure-sheaf adjunctions, algebraic smoothness or trace, abstract derived objects, or discrete/solid condensed modules; none supplies the geometric finite trace, reconstruction comparison, or condensed smooth purity asserted here",
+   "digest": "f290d1b4a064724a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "launcher",
+  "date": "2026-10-16",
+  "item": "batch 3 target (the human: upstream SmoothPurity/Defs.lean)"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "upstream_target": {
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso",
+  "module": "WeilConjectures.SmoothPurity.Defs",
+  "file": "WeilConjectures/SmoothPurity/Defs.lean",
+  "commit": "7347520d9"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Steps 1–3 (finite reductions, coherent adic reconstruction, rational/finite-stage coefficient transport), specialized to the unit; the arbitrary-ground-field input and comparison to the specified condensed adjoint are made explicit"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "nt-target-smooth-purity-qbar",
+  "worker": "stage1",
+  "summary": "Repair of F1/F2/C4: obtained immutable exact-master source objects at 7347520d9b0d17cc31d0fc34ea20f1381a83fe13 by read-only export and reproduced the complete target, Tate, upper-shriek and coefficient definition sources with Git blob and SHA-256 hashes in the report. Verified the target archive byte-for-byte. Steps 4–6 now name and compare the actual compactification-based adjunction, bottom-field coefficient inclusion, free-module inverse system, tensor powers and degree-zero inclusion at that commit. The exceptional comparison remains an explicitly agent-formulated unsplit lemma; Bhatt–Scholze is no longer cited as asserting it. Refreshed all actual msearch records and all verbatim citation evidence. The two substantive unsplit inputs and the six-step finite-to-adic-to-rational route remain; no Lean writing, compilation or push. Independent second reading: made the finite-unit Tor hypothesis and twist-reduction normalizations explicit, wrote the inverse tensor comparison, and corrected the order of ambient inclusion and endpoint composition; retained both substantive new frontier statements.",
+  "blueprint": "Realizes sk-thm-purity-transport Steps 1–3 for K the unit, following the lattice/finite-extension route in thm-pur-rational-and-qbar-purity proof Steps 1–2; Step 4 of that unit is only for structure morphisms and is not applied to general f. Seed blueprint.from is retained. blueprint_refs ancestor returns None because created.item is a batch description, so new nodes record the exact computed null ancestor and name the intended blueprint places in from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "why": "Generic Local effectivity of uniformly bounded normalized constructible towers used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-pbc-reconstruction-uniform-tower",
+    "why": "Generic Reconstruction of a uniform local tower used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "def-weil-pbc-bounded-constructible-complete",
+    "why": "Generic Bounded constructible complete category used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Finite type over a locally Noetherian base used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic Inverse systems in an abelian category form an abelian category, computed levelwise used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Generic Realization of rationalized integral coefficients in condensed E module objects used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
+    "why": "Generic Filtered two-colimit presentation of condensed Qbar bounded constructible complexes used with its stated hypotheses for the coherent coefficient reconstruction/realization. This is a tool for the finite-to-adic-to-rational route of sk-thm-purity-transport, not a replacement of that route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-point-basis-evaluation",
+    "why": "Generic basis-evaluation tool needed to identify the completed integral coefficient ring with the condensed point pullback in Step 5; the unit does not supply this coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "why": "Generic basis-evaluation tool needed to identify the completed integral coefficient ring with the condensed point pullback in Step 5; the unit does not supply this coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-weil-pbc-bounded-constructible-complete",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ed6a1daf3",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ed6a1daf3 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked SGA XVIII 3.2.5, exact-master adjoint/coefficient/Tate exhibits, all six steps, both new nodes, duplicate candidates, and edge cases. The two substantive comparison inputs remain explicit unsplit obligations. No repairs needed. Full checks and accepted tool uses are in review.md."
+ }
 }
