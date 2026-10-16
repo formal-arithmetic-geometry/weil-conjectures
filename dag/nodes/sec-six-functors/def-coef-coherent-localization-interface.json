@@ -1,0 +1,109 @@
+{
+ "id": "def-coef-coherent-localization-interface",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction.",
+   "via": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Universal homotopy coherent localization interface",
+ "statement": "Let $A$ be an ordinary category, $W$ a class of its morphisms, and $K$ a simplicial set [def-weil-pbc-simplicial-set]. Use the mapping spaces, coherent functor simplicial sets, equivalence edges, full subcategories and coherent functor equivalences of [def-cbc-enhanced-diagrams-cones]. The enlarged nerve $N(A)$ has simplices the degreewise universe lifts of strings of composable arrows. A simplicial map $q:N(A)\\to K$ inverts $W$ if every edge coming from $W$ maps to an equivalence edge. Write $\\operatorname{Fun}_W(N(A),T)$ for the full subcategory of $\\operatorname{Fun}(N(A),T)$ on these edge-inverting functors. Say $q$ is a homotopy coherent localization if $K$ is a quasicategory, $q$ inverts $W$, and, for every quasicategory $T$ in the chosen enlarged universe, precomposition by $q$ factors through $\\operatorname{Fun}_W(N(A),T)$ as a coherent functor equivalence. In particular the whole coherent functor category, including its mapping spaces and higher simplices, occurs in this universal property. The image of an ordinary object is its zero-simplex under $q$. Two objects are equivalent if an equivalence edge has them as endpoints; a compositional triangle is a two-simplex with the specified three edges. All object and morphism universes of $A$ are independent, and the simplicial-set universe contains both.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hinich.pdf",
+  "place": "Section 1.1, defining localization by its universal property, and Section 1.2, Proposition 1.2.1. The existing landed declarations are helpers in Sheaf.CategoryTheory.FiniteReedyLocalization; no use of its finite-Reedy theorem is made."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasicategory homotopy coherent localization is universal on the entire functor quasicategory of weak equivalence inverting functors",
+   "results": "Eight ordinary categorical localization declarations, including Functor.IsLocalization.mk and StrictUniversalPropertyFixedTarget; none is the quasicategorical interface.",
+   "date": "2026-10-16",
+   "verdict": "No Mathlib match; the landed project helper FiniteReedy.IsLocalization is exact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy coherent localization of a relative category represented by a quasicategory and mapping spaces",
+   "results": "SSet.hoFunctor, SSet.QCat, and ordinary homotopy localization results; no coherent universal property.",
+   "date": "2026-10-16",
+   "verdict": "No Mathlib match; exact existing project helper found by direct source search."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*resolution|cosimplicial.*frame|homotopy.coherent.*localization|localDiagrams|FrameMapping",
+   "results": "Mathlib: zero hits. Separate rg of WeilConjectures found no coherent-localization definition. rg of lean/Sheaf found HomotopicalAlgebra.FiniteReedy.{largeNerve,Inverts,localDiagrams,IsLocalization,object,EquivalentObjects,Composes} in FiniteReedyLocalization.lean. DAG definition-node search found no node for this interface.",
+   "date": "2026-10-16",
+   "verdict": "Reuse the exact landed helpers; no new module or copied definition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cosimplicial-frame-mapping",
+  "date": "2026-10-16",
+  "group": "N9"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteReedyLocalization",
+  "declaration": "HomotopicalAlgebra.FiniteReedy.IsLocalization",
+  "declarations": [
+   "HomotopicalAlgebra.FiniteReedy.largeNerve",
+   "HomotopicalAlgebra.FiniteReedy.Inverts",
+   "HomotopicalAlgebra.FiniteReedy.localDiagrams",
+   "HomotopicalAlgebra.FiniteReedy.IsLocalization",
+   "HomotopicalAlgebra.FiniteReedy.object",
+   "HomotopicalAlgebra.FiniteReedy.EquivalentObjects",
+   "HomotopicalAlgebra.FiniteReedy.Composes"
+  ],
+  "statement": "noncomputable def IsLocalization {A : Type u} [Category.{v} A]\n    (W : MorphismProperty A) {C : SSet.{max u v t}}\n    (q : largeNerve.{u, v, t} A ⟶ C) : Prop",
+  "existing": true,
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-16",
+  "note": "Exact existing helper definition; records the coherent localization notion separately from the finite-diagram theorem. Only definitions from that module are used, so this adds no theorem dependency on the downstream finite-Reedy statement."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1948ddd5",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1948ddd5",
+  "group": "N9",
+  "result": "pass",
+  "note": "Audited node, dependencies, source declarations, module, report, edge cases, docstrings, exact theorem signature, and scompile evidence; no findings."
+ }
+}

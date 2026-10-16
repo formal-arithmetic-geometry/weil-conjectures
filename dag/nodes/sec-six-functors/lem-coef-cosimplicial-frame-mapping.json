@@ -33,7 +33,8 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -301,5 +302,53 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c55dbd41c (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources. No false statements, cycles, or restated splits found. Supplied provenance repairs, corrected step 12’s source URL, and added an arbitrary-relative-category localization reference without weakening statements. Full checks and corrected JSON files are in review.md and fixes/dag/nodes/.; 8 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CosimplicialFrameMapping",
+  "declaration": "CategoryTheory.cosimplicial_frame_mapping",
+  "file": "lean/Sheaf/CategoryTheory/CosimplicialFrameMapping.lean",
+  "statement": "theorem cosimplicial_frame_mapping (C : Type u) [Category.{v} C] [HasLimits C] [HasColimits C] [ModelCategory C] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations C) (fibrations C)] [MorphismProperty.HasFunctorialFactorization (cofibrations C) (trivialFibrations C)] (K : SSet.{max u v u' v' t}) (q : FiniteReedy.largeNerve.{u, v, max u v u' v' t} C ⟶ K) (hq : FiniteReedy.IsLocalization (weakEquivalences C) q) : ∃ M : CosimplicialFrameMappingData C K q, FrameKanPullbacksAndProducts.{max u v u' v' t} ∧ ∀ (D : Type u') [Category.{v'} D] [HasLimits D] [HasColimits D] [ModelCategory D] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations D) (fibrations D)] [MorphismProperty.HasFunctorialFactorization (cofibrations D) (trivialFibrations D)] (L : SSet.{max u v u' v' t}) (r : FiniteReedy.largeNerve.{u', v', max u v u' v' t} D ⟶ L), FiniteReedy.IsLocalization (weakEquivalences D) r → FrameLeftQuillenClause.{u, v, t, u', v'} M D L r",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.FrameLatchingIndex",
+   "CategoryTheory.frameLatchingDiagram",
+   "CategoryTheory.frameLatchingCocone",
+   "CategoryTheory.CosimplicialFrame",
+   "CategoryTheory.frameHom",
+   "CategoryTheory.frameHomPost",
+   "CategoryTheory.frameHomPre",
+   "CategoryTheory.frameSpaceWeakEquivalences",
+   "CategoryTheory.FrameSpaceHo",
+   "CategoryTheory.frameSpaceQ",
+   "CategoryTheory.frameVertex",
+   "CategoryTheory.frameEvaluation",
+   "CategoryTheory.frameHomLarge",
+   "CategoryTheory.frameHomLargePost",
+   "CategoryTheory.frameHomLargePre",
+   "CategoryTheory.FrameMappingRelation",
+   "CategoryTheory.frameQEdge",
+   "CategoryTheory.frameEdgePoint",
+   "CategoryTheory.CosimplicialFrameMappingData",
+   "CategoryTheory.framePullbackComparison",
+   "CategoryTheory.FrameKanPullbacksAndProducts",
+   "CategoryTheory.frameLargeNerveMap",
+   "CategoryTheory.FrameIsImage",
+   "CategoryTheory.frameFunctorHomMap",
+   "CategoryTheory.frameCofibrantComponent",
+   "CategoryTheory.FrameLeftQuillenClause",
+   "CategoryTheory.cosimplicial_frame_mapping"
+  ],
+  "note": "Second reading replaces arbitrary Prop fields and arbitrary latching arrows by the actual colimits, function complexes, coherent localization interface, normalized space comparisons, canonical naturality spans, fibrant-leg pullback comparison, products, and the induced left-Quillen mapping action. Object and morphism universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1948ddd5",
+  "group": "N9",
+  "result": "pass",
+  "note": "Audited node, dependencies, source declarations, module, report, edge cases, docstrings, exact theorem signature, and scompile evidence; no findings."
  }
 }
