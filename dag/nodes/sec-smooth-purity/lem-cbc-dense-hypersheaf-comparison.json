@@ -23,7 +23,8 @@
   "def-weil-size-convention",
   "def-weil-abstract-derived-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-cbc-derived-hypersheaf-presentation"
  ],
  "proof": [
   {
@@ -309,5 +310,30 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8b0432559 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 12 steps, the new leaf, the 13 proof dependencies and 4 statement dependencies, the parent lem-cbc-zariski-enhanced-derived-descent (its steps 3, 5 and 6 use exactly the item's equivalence with fixed bound a, the homotopy right Kan inverse, the unit/counit equivalences on mapping complexes, and square naturality), Stacks sites.tex Tag 03A0 lemma-equivalence, the main-20261015 ancestor proof (thm-cbc-finite-level-proetale line 5), and pinned Mathlib: DenseSubsite/Basic.lean 532-571, LocallyFullyFaithful.lean 40-100, SheafEquiv.lean 30-45 and 97-108, CoverLifting.lean 275-330. The item's site hypotheses are 03A0 (1)-(5) in sieve form. Its coefficient category is the constant-Lambda module sheaves, the same as the parent's and the bounded-below model's. It is not a target, so no base-change morphism is involved, and nothing is weakened. Step checks: step 1's topology reflection was verified line by line, and its elementary flag is acceptable. In step 9 I recomputed q_! as the direct sum over f of V(C,f), since (q down C) has the discrete reflective subcategory {(C,f,id)}. Step 10 uses exactly the cone criterion of lem-cbc-enhanced-functor-cone-calculus. Steps 11 and 12 have correct triangle and mate directions. proof_deps equals the union of the uses. Small cases: identity p, an equivalence, empty C, the zero ring, a=0 and a=1. The report's 03A0 final-object counterexample (monoid {1,e}) is valid; it is an E7 source error the item avoids. The leaf matches IsDenseSubsite, imageSieve, Sieve.equalizer, coverByImage and StructuredArrow X G.op clause by clause, and its Ran clause is Iso.refl at CoverLifting.lean:297-299. It is not a duplicate: lem-pc-fppf-dense-sheaf-equivalence needs actual full faithfulness, which the parent's total site lacks, and the other candidates are set-valued, equivalence-only or a different statement. I accept the four declared tool_uses (lem-coef-sheaf-flat-model, lem-coef-quillen-section-rectification, lem-coef-enhanced-localization-universal, prop-pur-kinjective-resolutions-exist): they are generic black boxes, two of them already accepted on the sibling lem-cbc-bounded-below-hypersheaf-model, and no SGA source is used. FIX: the leaf's created record ({by:'Q69 second reader'}, no group) is corrected to {by:worker, item, date 2026-10-16, group Q69} in fixes/dag/nodes/sec-smooth-purity/lem-cbc-local-dense-ordinary-sheaves.json; no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DenseHypersheafComparison",
+  "declaration": "CategoryTheory.DerivedHypersheaf.dense_hypersheaf_comparison",
+  "declarations": [
+   "CategoryTheory.DerivedHypersheaf.LocalEquivalence",
+   "CategoryTheory.DerivedHypersheaf.PreservesRepresentatives",
+   "CategoryTheory.DerivedHypersheaf.IsRestrictionModel",
+   "CategoryTheory.DerivedHypersheaf.IsSquareNatural",
+   "CategoryTheory.DerivedHypersheaf.dense_hypersheaf_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DenseHypersheafComparison.lean",
+  "statement": "theorem dense_hypersheaf_comparison {C D : Type u} [Category.{v} C] [Category.{v} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (p : C ⥤ D) (R : Type (max u v w)) [CommRing R] [HasWeakSheafify J (Type (max u v w))] [HasWeakSheafify K (Type (max u v w))] (_hp : LocalEquivalence J K p) (a : ℤ) : Nonempty (Presentation J R a) ∧ Nonempty (Presentation K R a) ∧ Nonempty (CoefficientPresentation R) ∧ ∃ (hres : PreservesRepresentatives J K p R a) (hran : ∀ I : KInjectiveRepresentatives J R a, HasHyperdescent K R ((rightKan p R).obj I.obj.obj) ∧ IsPointwiseGE ((rightKan p R).obj I.obj.obj) a), (∀ (HC : Presentation J R a) (HD : Presentation K R a), ∃ (f : HD.category ⟶ HC.category) (g : HC.category ⟶ HD.category), IsRestrictionModel J K p R a hres HC HD f ∧ SSet.Enhanced.AreNaturallyEquivalent (f ≫ g) (𝟙 HD.category) ∧ SSet.Enhanced.AreNaturallyEquivalent (g ≫ f) (𝟙 HC.category) ∧ SSet.Enhanced.IsFullyFaithful f ∧ SSet.Enhanced.AreNaturallyEquivalent (nerveMap (ranRepresentatives J K p R a hran) ≫ HD.localization) (nerveMap (forgetKInjective J R a) ≫ HC.localization ≫ g) ∧ IsSquareNatural J K p R a HC HD f g) ∧ (∀ (L : CoefficientPresentation R) (I : KInjectiveRepresentatives J R a) (T : D), IsDerivedLimit (largeRightKanCone p R I.obj.obj T) L.localization) ∧ ∀ (X Y : Representatives K R a) (I : Complex D R) [I.IsKInjective] (i : Y.obj ⟶ I) [QuasiIso i] (I' : Complex C R) [I'.IsKInjective] (j : (restriction p R).obj I ⟶ I') [QuasiIso j], QuasiIso (mapHomComplex ((whiskeringLeft Cᵒᵖ Dᵒᵖ (ModuleCat R)).obj p.op) X.obj I ≫ CoefficientFlatModel.homMap (𝟙 ((restriction p R).obj X.obj)) j)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-425e17286",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Every node clause matched to its Lean: five covering-sieve site hypotheses, all-degree hyperdescent via the free hypercover augmentation, pointwise bound a, full coherent localization, actual restriction and right Kan inverse on K-injective representatives, homotopy limit over (p↓D)^op via the cone category, quasi-isomorphism on derived mapping complexes, naturality for commutative squares. Nothing weakened or strengthened; edge cases admitted. Gates checked: real definitions, sorry only in the theorem proof, source/blueprint docstrings on all 32 declarations, 12 proof steps in the theorem docstring, statements verbatim, item changes only lean and stmt_deps, new node fields correct, report sections present. nt_compile --json on both modules: no errors or warnings; axiom probe and sheafification-binder probe ok. Preflight not rerun (guard blocks git); report records the dry run OK. Non-blocking: Q23's later-landed module duplicates the hypercover/augmentation helpers in equivalent form (consolidate later); the ring universe max u v w fits the size convention."
  }
 }

@@ -215,5 +215,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-666e621ff (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and current-blueprint sources. Verified all four mate-braiding and ring-transport steps, arbitrary-morphism hypotheses, coefficient tensor, and edge cases. No duplicate replacement, missing dependency, or cycle found. Accepted ring-object transport tool use; no DAG fixes needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+  "declaration": "AlgebraicGeometry.ProEtale.laxBraided_upperStar",
+  "statement": "noncomputable instance ProEtale.laxBraided_upperStar : (g)^*[A].LaxBraided",
+  "branch": "slopmaster2",
+  "by": "Q78",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing declaration in the published 51-module pro-etale framework, read with scompile.py --source. Its section has arbitrary scheme morphism g and closed braided monoidal Grothendieck-abelian coefficients; specialize to the node's symmetric coefficients. It supplies braiding compatibility for the very monoidal_upperStar of def-sfb-finite-upper-star-monoidal: the lax structures are definitionally equal and its oplax structure is the fixed adjunction mate. The final commutative-ring-object clause is Functor.isCommMonObj_obj (Mathlib.CategoryTheory.Monoidal.CommMon_), using the MonObj transport of det-def-sfb-ring-object-monoid and det-def-sfb-ring-object-transport. A scratch consumer with only the node's hypotheses compiled locally and on the server through scompile.py, checking the braiding equation, both structure equalities, and commutative-object transport. The compiler's full signature has no WeaklyEtale assumption; the older InternalHom declaration with that assumption is not used. #print axioms gives only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14aebf85e",
+  "group": "Q78",
+  "result": "pass",
+  "note": "existing:true record for AlgebraicGeometry.ProEtale.laxBraided_upperStar (ModuleObject/UpperLowerStar/Monoidal.lean). The blueprint names this declaration and the node statement is verbatim. The declaration is fully proved by the mate route with no sorry; arbitrary g, no WeaklyEtale; needs only a braided coefficient category, weaker than the node's symmetric one; lean.statement verbatim. nt_compile --json consumer with only the node hypotheses, autoImplicit false: exit 0, no warnings. rfl: toLaxMonoidal = monoidal_upperStar's and toOplaxMonoidal = oplaxMonoidal_upperStar (same structure as the dependency); symmetric sheaf braiding = inferred braiding. Braiding equation; Functor.Braided assembled; IsCommMonObj(g^*B) via isCommMonObj_obj; transported multiplication formula; mapCommMon; identity case. Axioms propext/Classical.choice/Quot.sound. No duplicate DAG record; Worker report and Second reading by Q78 present; only the lean field changed. Cosmetic only: stale lean_not_found flags."
  }
 }
