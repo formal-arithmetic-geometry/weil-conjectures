@@ -24,18 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Finite free trivializations show module tensor with P is exact. Its right adjoint internal Hom from P therefore preserves K-injective complexes, by transporting the acyclic Hom tests.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
-   }
-  },
-  {
-   "text": "On a functorial K-injective resolution J, ordinary sections of internal Hom from P are the additive Hom complex from P. Degree n cycles are chain maps P[0]→J[n], boundaries are homotopies, and K-injectivity identifies these classes with derived maps. Compute the specified right derived sections on the same K-injective complex. Transport the ringed-site evaluation formula to internal module objects over the identical ring.",
+   "text": "Use the ordinary internal-module evaluation isomorphism: sections after Mod.ihom P are naturally additive Hom(P,-). This is proved directly with the free-module and tensor-Hom adjunctions; no ringed-site/internal-module equivalence is required.",
    "uses": [
-    "lem-weil-pbc-ringed-site-locally-free-derived-hom"
+    "lem-weil-pbc-condensed-internal-hom-sections"
    ],
    "elementary": false,
    "source": {
@@ -44,9 +35,38 @@
    }
   },
   {
-   "text": "Evaluation commutes with chain maps, addition and the signed shift differential. Consequently the identifications form the required natural isomorphism of functors for every integer n.",
-   "uses": [],
-   "elementary": true,
+   "text": "Local finite freeness makes module tensor with P exact. Its right adjoint F=Mod.ihom P therefore preserves K-injective complexes. The existing finite-free internal-Hom colimit theorem and its right adjointness also make F exact.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "The derived additive-coyoneda evaluation theorem identifies Hom(P[0],QK[n]) with Hn of R(Hom(P,-))(QK), naturally on every complex K. Derive the ordinary evaluation isomorphism and use the composition theorem, since F preserves K-injectives, to identify this with Hn(RGamma(RF(QK))).",
+   "uses": [
+    "lem-weil-pbc-derived-coyoneda-evaluation",
+    "lem-weil-pbc-condensed-internal-hom-sections",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
+    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+   }
+  },
+  {
+   "text": "Since F is exact, its total right derived functor is the functor induced by applying F termwise. The canonical localization factorization then identifies Q followed by RF with termwise F followed by Q. Whisker the preceding isomorphisms by homology to obtain exactly the displayed functors.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits"
+   ],
+   "elementary": false,
    "source": {
     "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
     "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
@@ -54,12 +74,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-site-locally-free-derived-hom"
+  "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-weil-pbc-condensed-internal-hom-sections",
+  "lem-weil-pbc-derived-coyoneda-evaluation",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
-  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2)"
+  "place": "Complete proof by E1: ordinary internal-module evaluation, unbounded derived coyoneda, exact tensor and derived composition"
  },
  "mathlib_searches": [
   {
@@ -117,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-bef8e",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261016T011145-L-265743",
+  "landing": "20261016T021739-L-1027599",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

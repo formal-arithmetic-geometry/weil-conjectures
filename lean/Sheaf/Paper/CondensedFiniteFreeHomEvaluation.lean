@@ -8,7 +8,11 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Sheaf.Paper.CondensedQcqsPushforwardContinuity
-import Sheaf.Algebra.Homology.LocallyFreeDerivedHom
+import Sheaf.CategoryTheory.DerivedCoyonedaEvaluation
+import Sheaf.Paper.CondensedInternalHomSections
+import Sheaf.Paper.CondensedFiniteFreeTensorExact
+import Sheaf.Paper.CondensedFiniteFreeInternalHomColimits
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # The evaluation identification for finite locally free internal modules -/
 
@@ -51,6 +55,29 @@ theorem condensed_finite_free_hom_evaluation
         (Mod.ihom P).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⋙
           (condensedModuleSections Λ X).rightDerivedFunctor ⋙
             DerivedCategory.homologyFunctor _ n) := by
-  sorry
+  -- Use ordinary internal-module evaluation directly; no ringed-site transport is needed.
+  let R := condensedRingObj Λ X
+  let F := Mod.ihom P
+  let Γ := condensedModuleSections Λ X
+  have : PreservesFiniteLimits (Mod.tensorLeft P) :=
+    condensed_locally_free_tensor_preservesFiniteLimits R P hP
+  have : (Mod.tensorLeft P).Additive := (Mod.ihomAdjunction P).left_adjoint_additive
+  have : PreservesLimitsOfSize.{u + 1, u + 1} F :=
+    (Mod.ihomAdjunction P).rightAdjoint_preservesLimits
+  have : F.PreservesKInjectiveComplexes :=
+    (Mod.ihomAdjunction P).preservesKInjectiveComplexes
+  have : PreservesColimitsOfSize.{u + 1, u + 1} F :=
+    condensed_locally_free_ihom_preservesColimits R P hP
+  obtain ⟨e⟩ := condensed_internal_hom_sections X Λ P
+  obtain ⟨d⟩ := CategoryTheory.derived_coyoneda_evaluation P n
+  let c : (preadditiveCoyoneda.obj (op P)).rightDerivedFunctor ≅
+      F.mapDerivedCategory ⋙ Γ.rightDerivedFunctor :=
+    (Functor.rightDerivedFunctorCompIso' F Γ e).symm ≪≫
+      Functor.isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory _
+  exact ⟨Functor.isoWhiskerLeft DerivedCategory.Q d ≪≫
+    Functor.isoWhiskerLeft DerivedCategory.Q
+      (Functor.isoWhiskerRight c (DerivedCategory.homologyFunctor _ n)) ≪≫
+    Functor.isoWhiskerRight F.mapDerivedCategoryFactors
+      (Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ n)⟩
 
 end AlgebraicGeometry.ProEtale

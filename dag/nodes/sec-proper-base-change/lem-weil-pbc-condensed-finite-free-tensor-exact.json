@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: preservation through the common-stage colimit; finite locally free evaluation input.",
+   "via": [
+    "lem-weil-pbc-condensed-finite-free-hom-evaluation",
+    "lem-weil-pbc-condensed-local-piece-hom-continuity",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensoring with a pro-etale locally finite free internal module preserves finite limits",
+ "statement": "Let X be a scheme, R a commutative internal ring in abelian sheaves on its pro-etale site, and P an internal R-module [def-weil-pbc-condensed-e-module-category, def-weil-pbc-sites-and-cohomology]. Suppose a pro-etale covering C of X makes each pullback of P finite free. Then the ordinary module tensor functor Mod.tensorLeft P preserves every finite limit. No noetherianity or coefficient-field hypothesis is imposed.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+  "place": "Declaration docstring: evaluation on K-injective resolutions and locally finite free tensor calculation; Stacks 08JJ and HRS Lemma 5.3(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For P isomorphic to R^n, the tensor-Hom adjunction identifies its right adjoint with the finite-power functor. The finite-copower functor is another left adjoint of that finite-power functor, so uniqueness of left adjoints identifies tensor with finite copower. In an abelian category finite copower is also finite power and therefore preserves finite limits. The argument also works for n=0.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+    "place": "Declaration docstring: evaluation on K-injective resolutions and locally finite free tensor calculation; Stacks 08JJ and HRS Lemma 5.3(2)"
+   }
+  },
+  {
+   "text": "Pullback of internal modules along any scheme morphism commutes with tensor: transport the parallel-pair coequalizer defining relative tensor using the strong braided monoidal pullback and preservation of coequalizers. Pullback preserves finite limits, since its underlying sheaf functor does and the module forgetful functor creates and reflects limits.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+    "place": "Declaration docstring: evaluation on K-injective resolutions and locally finite free tensor calculation; Stacks 08JJ and HRS Lemma 5.3(2)"
+   }
+  },
+  {
+   "text": "For a finite diagram, pull its limit-comparison map back along every member of the trivializing cover. By the tensor-pullback isomorphism and the finite-free calculation the pulled-back comparison is invertible. These pullbacks jointly reflect isomorphisms: on underlying sheaves, use the covering sieve obtained by base change to each pro-etale object and the sheaf local-isomorphism criterion; the module forgetful functor reflects isomorphisms. Hence the original limit comparison is invertible, proving preservation of the limit.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/CondensedFiniteFreeHomEvaluation.lean",
+    "place": "Declaration docstring: evaluation on K-injective resolutions and locally finite free tensor calculation; Stacks 08JJ and HRS Lemma 5.3(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CondensedFiniteFreeTensorExact.lean",
+  "place": "Complete Lean proof by E1, using the existing proved library infrastructure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring with a locally finite free sheaf of modules preserves finite limits",
+   "date": "2026-10-16",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no mathematical conclusion inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a locally finite free sheaf of modules preserves finite limits",
+   "date": "2026-10-16",
+   "results": "Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier and Module.Flat.iff_preservesFiniteLimits_tensorLeft treat ordinary modules over a ring, not internal modules on a pro-etale site.",
+   "verdict": "No exact match for this functorial internal-module or total-derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/RingTheory/Flat/CategoryTheory",
+   "date": "2026-10-16",
+   "results": "Ordinary flat-module tensor exactness and existence of sheaf limits are present, but no covering descent statement for the internal module tensor functor.",
+   "verdict": "Ingredients found and reused; no exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedFiniteFreeHomEvaluation",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteFreeTensorExact",
+  "file": "lean/Sheaf/Paper/CondensedFiniteFreeTensorExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_locally_free_tensor_preservesFiniteLimits",
+  "statement": "theorem condensed_locally_free_tensor_preservesFiniteLimits {X : Scheme.{u}}\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj R)\n        (((upperStar Ab.{u + 1} (C.f s)).mapMod R).obj P)) :\n    PreservesFiniteLimits (Mod.tensorLeft P)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T021739-L-1027599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T021739-L-1027599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
