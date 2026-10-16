@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-base-change-open-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change for open-closed immersions",
@@ -14,26 +14,177 @@
  },
  "stmt_deps": [
   "def-weil-pbc-underived-exchange",
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-cartesian-square",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Fix a geometric point $\\bar y$ of $Y$ with image $\\bar x=g(\\bar y)$. If $x\\in U$, the stalk of $g^{-1}j_*F$ at $\\bar y$ is\n$F_{\\bar x}$, the universal property of the pullback in the\ncartesian square identifying the inverse images along $g\\circ j$\nwith $F_{\\bar x}$; the same holds for $h_*p^{-1}F$. If $x\\notin U$, then $X\\setminus U$ is an open neighbourhood of $x$ because\n$j$ is a closed immersion, and every etale source $W\\to X$ with a\nlift of $\\bar x$ has $W\\times_XU$ empty over that component, so\nboth stalks are zero: $j_*F$ has zero sections over an open\nneighbourhood of $x$, and $p^{-1}F$ similarly. The map is an\nisomorphism on all stalks, hence an isomorphism by\nlem:weil-pbc-geometric-stalk-conservative.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $U'=Y\\times_XU$. By [def-weil-open-immersion], $j$ identifies $U$ with an open subscheme of $X$; by [def-weil-closed-immersion] its image is closed, so $V=X\\setminus j(U)$ is also open. By [lem-weil-pbc-open-immersion-base-change], $h:U'\\to Y$ is an open immersion. The pullback property [def-weil-pbc-cartesian-square] identifies its image with $g^{-1}(j(U))$: a morphism to $Y$ whose composite with $g$ factors through $U$ has a unique lift to $U'$. In particular, for a geometric point $\\bar y$ of $Y$ with $\\bar x=g\\bar y$, if $x\\in j(U)$ then there are unique lifts $\\bar u$ to $U$ and $\\bar t$ to $U'$, with $p\\bar t=\\bar u$ and $h\\bar t=\\bar y$. Otherwise $y\\in g^{-1}(V)$, an open disjoint from $U'$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Agent expansion of the blueprint first case distinction: Stacks 01HE (definition-immersion-locally-ringed-spaces), 01HK (definition-closed-immersion-locally-ringed-spaces), 01IO (definition-immersion), and 01JY (lemma-base-change-immersion), open-immersion case."
+   }
+  },
+  {
+   "text": "Suppose $x\\in j(U)$, and use the geometric points of step 1. The inverse-image stalk comparison [lem-weil-pbc-inverse-image-stalk-germ], first for $g$ and then for $j$, and the counit isomorphism $j^{-1}j_*F\\xrightarrow{\\sim}F$ from [lem-kun-open-immersion-restriction], identify\n$$ (g^{-1}j_*F)_{\\bar y}\\cong(j_*F)_{\\bar x}\\cong F_{\\bar u}. $$\nApplying the same open-immersion counit isomorphism to $h$ and the inverse-image stalk comparison to $h$ and $p$ identifies\n$$ (h_*p^{-1}F)_{\\bar y}\\cong(p^{-1}F)_{\\bar t}\\cong F_{\\bar u}. $$\nThese open-immersion isomorphisms are the restriction counits: on an etale object over the open, direct image evaluates on that same object. Thus the indicated identifications send a represented germ to its restriction at the lifted point.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-kun-open-immersion-restriction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback), part (3) and its direct colimit proof; Tag 03PY (definition-direct-image-sheaf); Tag 0F70 (lemma-jshriek-open), the restriction counit for an open immersion."
+   }
+  },
+  {
+   "text": "Under the two identifications of step 2, the specified exchange map is the identity. Indeed, by [def-weil-pbc-geometric-stalks] a germ of $j_*F$ at $\\bar x$ is represented by a pointed etale neighbourhood $(W,\\bar w)$ of $\\bar x$ and $s\\in(j_*F)(W)=F(W\\times_XU)$ [def-weil-pbc-direct-image]. The germ comparison [lem-weil-pbc-inverse-image-stalk-germ] for $g$ says that its inverse image is represented by the unit pullback of $s$ on $W_Y=Y\\times_XW$, pointed by $(\\bar y,\\bar w)$. The representative formula in [def-weil-pbc-underived-exchange] sends this section to its inverse-image section on\n$$ U'\\times_YW_Y\\cong U'\\times_U(U\\times_XW). $$\nAt the lifted point, the germ comparison for $p$ sends this section back to the germ of the original $s$ at $(\\bar u,\\bar w)$ in $U\\times_XW$. This is exactly the image of the original germ under the source identification of step 2. Every source germ has such a representative, so the map on stalks is the identity on $F_{\\bar u}$, hence is invertible.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (lemma-stalk-pullback), direct proof and compatibility with the inverse-image unit; Tag 03PY (definition-direct-image-sheaf); expansion of the fixed exchange map from the blueprint."
+   }
+  },
+  {
+   "text": "Suppose $x\\notin j(U)$. For a pointed etale neighbourhood $(W,\\bar w)$ of $\\bar x$, replace it by $W_V=W\\times_XV$. This is still an etale neighbourhood of $\\bar x$: $V\\to X$ is an etale object by [lem-weil-pbc-open-immersion-etale], and the fibre product is an object of the same small etale site by [def-weil-pbc-etale-site]. The lift of $\\bar x$ to $V$ and $\\bar w$ give its pointing, and the projection $W_V\\to W$ is a pointed neighbourhood morphism. Thus every section on $W$ has the same germ as its restriction to $W_V$ in the defining stalk colimit [def-weil-pbc-geometric-stalks]. On each such neighbourhood, [def-weil-pbc-direct-image] gives\n$$ (j_*F)(W_V)=F(W_V\\times_XU)=F(\\varnothing)=0. $$\nHere the middle fibre product is empty since $V$ is disjoint from $j(U)$, and the empty covering in the sheaf axiom [def-weil-pbc-abelian-etale-sheaves] gives $F(\\varnothing)=0$. Thus $(j_*F)_{\\bar x}=0$, and [lem-weil-pbc-inverse-image-stalk-germ] for $g$ gives $(g^{-1}j_*F)_{\\bar y}=0$. For the target, put $C=g^{-1}(V)$, the open neighbourhood of $y$ disjoint from $U'$ in step 1. Given a pointed etale neighbourhood $(T,\\bar t_0)$ of $\\bar y$, the fibre product $T_C=T\\times_Y C$ is a pointed etale neighbourhood by [lem-weil-pbc-open-immersion-etale] and [def-weil-pbc-etale-site]. Its projection to $T$ is a neighbourhood refinement. Since $T_C\\times_Y U'=\\varnothing$, the direct-image formula gives $(h_*p^{-1}F)(T_C)=(p^{-1}F)(\\varnothing)=0$, again by the empty covering sheaf axiom. Every section on $T$ therefore represents the zero germ after this refinement, proving $(h_*p^{-1}F)_{\\bar y}=0$. The exchange stalk map is therefore the unique map $0\\to0$, an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FX (lemma-stalk-pushforward-closed-immersion), proof of the outside case; Tag 03Q1 (lemma-stalk-pullback); Tag 02GP (morphisms-lemma-open-immersion-etale); Tag 021D (topologies-lemma-fibre-products-etale)."
+   }
+  },
+  {
+   "text": "Every geometric point of $Y$ falls into one of the two cases of step 1. The actual exchange map is invertible at these stalks by steps 3 and 4, so [lemma-weil-pbc-geometric-stalk-conservative] makes it an isomorphism of abelian sheaves. If $Y$ is empty there are no geometric points and the same conservativity statement applies vacuously. If $U$ is empty only step 4 occurs; if $U=X$ only steps 2 and 3 occur.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PU (theorem-exactness-stalks); final sentence of the blueprint proof."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-kun-open-immersion-restriction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-base-change-open-closed.md",
-  "place": "## Proof"
+  "place": "Proof: the inside/outside geometric-stalk argument, expanded using Stacks 03Q1, 03PY, 04FX and 03PU."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]so|[Ii]so.*baseChange",
+   "results": "{\"t\": \"2026-10-15T20:28:27Z\", \"tool\": \"grep\", \"query\": \"baseChange.*[Ii]so|[Ii]so.*baseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\"], \"digest\": \"034375f0b091b6ed\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern stability of scheme morphism properties and site precoverages, not a base-change map of etale sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the pushforward along a clopen subscheme is the original stalk on the subscheme and zero elsewhere; its base change exchange is invertible",
+   "results": "{\"t\": \"2026-10-15T20:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of the pushforward along a clopen subscheme is the original stalk on the subscheme and zero elsewhere; its base change exchange is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"AlgebraicGeometry.stalkMap_toStalk\", \"AlgebraicGeometry.Scheme.Hom.resLEStalkMap\"], \"digest\": \"b9e48467fc9c41ed\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: returned structure-sheaf stalk and restriction declarations do not state etale sheaf direct-image exchange."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaves base change for pushforward along an open and closed immersion",
+   "results": "{\"t\": \"2026-10-15T20:28:28Z\", \"tool\": \"leansearch\", \"query\": \"Etale sheaves base change for pushforward along an open and closed immersion\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable: LeanSearch returned Internal Server Error; no absence conclusion drawn from this service."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-15T20:28:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: both hits characterize sheaf conditions for a precoverage, not the exchange map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open and closed immersion of schemes, direct image of etale abelian sheaves commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-15T20:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"For an open and closed immersion of schemes, direct image of etale abelian sheaves commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\"], \"digest\": \"161ef2965c6007b1\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the returned Scheme.Modules declarations concern structure-sheaf modules on Zariski sites, not abelian sheaves on small etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category of sheaves of abelian groups, the Beck Chevalley transformation for direct image along the inclusion of a clopen subset is an isomorphism",
+   "results": "{\"t\": \"2026-10-15T20:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"In a category of sheaves of abelian groups, the Beck Chevalley transformation for direct image along the inclusion of a clopen subset is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CompHausLike.LocallyConstant.functorIso\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"TopCat.Presheaf.generateEquivalenceOpensLe_counitIso\", \"TopologicalSpace.OpenNhds.inclusionMapIso\", \"TopCat.subpresheafContinuousPrelocalIsoPresheafToTop\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\"], \"digest\": \"7523ee38d0f03069\"}",
+   "date": "2026-10-15",
+   "verdict": "No match: hits concern condensed locally constant sheaves, topological neighbourhood functors and topological presheaf inverse-image evaluations, not exchange for abelian sheaves on small etale sites."
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|baseChange.*[Ii]so|[Ii]so.*baseChange|clopen",
+   "results": "{\"t\": \"2026-10-15T20:43:32Z\", \"tool\": \"grep\", \"query\": \"BeckChevalley|baseChange.*[Ii]so|[Ii]so.*baseChange|clopen\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\"], \"digest\": \"7c89b6f032b7f690\"}",
+   "date": "2026-10-15",
+   "verdict": "No match: the ten hits concern precoverage stability and hypercover constructions, not a direct-image exchange morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley map for base change of pushforward of abelian sheaves along a complemented open subtopos is an isomorphism",
+   "results": "{\"t\": \"2026-10-15T23:03:22Z\", \"tool\": \"leanfinder\", \"query\": \"The Beck Chevalley map for base change of pushforward of abelian sheaves along a complemented open subtopos is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"SheafOfModules.pullbackIso\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pushforwardNatIso\", \"TopCat.Sheaf.pushforwardForgetIso\"], \"digest\": \"3c7082c96c1a814c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits are pullback constructions, composition/forgetful isomorphisms, and a unit-object comparison for sheaves of modules; none states this exchange for clopen inclusions on small etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inclusion of a union of connected components, the direct image of a sheaf of abelian groups satisfies Beck Chevalley after arbitrary pullback",
+   "results": "{\"t\": \"2026-10-15T23:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"For an inclusion of a union of connected components, the direct image of a sheaf of abelian groups satisfies Beck Chevalley after arbitrary pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"TopCat.Sheaf.interUnionPullbackConeLift_left\", \"TopCat.Sheaf.interUnionPullbackCone\", \"TopCat.Sheaf.interUnionPullbackConeLift_right\", \"topCatToSheafCompHausLike_map_val_app\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'\"], \"digest\": \"c946dc8a68361b9c\"}",
+   "date": "2026-10-15",
+   "verdict": "No match: hits are TopCat open-set presheaf pullbacks, topological sheaf gluing and condensed topological comparison; none states small-etale direct-image exchange for a clopen immersion."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*isIso|[Bb]eck.*[Cc]hevalley",
+   "results": "{\"t\": \"2026-10-15T23:56:02Z\", \"tool\": \"grep\", \"query\": \"isIso.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*isIso|[Bb]eck.*[Cc]hevalley\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean\"], \"digest\": \"2bf5d278218c3e31\"}",
+   "date": "2026-10-15",
+   "verdict": "No match: the single hit is the instance that scheme-independent subcanonical precoverage isomorphisms are local on the target, not a sheaf direct-image base-change theorem."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +212,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-base-change-open-closed",
+  "worker": "stage1",
+  "summary": "Kept the exact abelian-sheaf statement and the blueprint inside/outside geometric-stalk route. Replaced the incomplete imported paragraph with five steps, including the actual exchange map on unit-generated germs and the explicit complementary-open refinement. Reused existing definitions and stalk results; no new nodes. Added statement notions and exact proof-dependency union; searched the whole blueprint and Mathlib.",
+  "blueprint": "Steps 1-3 realize the first case x in U and identify the specified map; step 4 realizes the complementary-open zero-stalk case with a neighbourhood refinement; step 5 realizes geometric-stalk conservativity. The item is an imported blueprint node, so blueprint.from remains null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Steps 2-4 use the unit-compatible stalk comparison for an arbitrary scheme morphism to calculate the specified exchange on represented germs; the unit has no node providing that generic comparison. The maintainer accepted this tool in the a5c9ae3bab59 review."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-d705ac448",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-d705ac448 (reviewer sub-agent of L); spot-checked: Read the complete item, report, DAG/unit/chapter route, required coordination files, all 14 cited node statements, and cited Stacks sources. The five-step stalk proof correctly verifies the specified abelian small-etale base-change morphism, including inside/outside cases, empty refinements, hypotheses, coefficient category, and edge cases. No new nodes or repairs are needed."
+ }
 }
