@@ -1,0 +1,84 @@
+{
+ "id": "lem-coef-kan-fibration-tower-limit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; HTT Proposition 5.4.4.3, used in the pushout and two-out-of-three parts of Lemma 5.5.4.14 to express diagrams in an accessible functor category as filtered colimits of small compact diagrams. General tool: Mapping-space descent along spines and increasing unions. Specifically, the general Kan-fibration tower theorem used to justify the coherent inverse-limit comparison.",
+   "via": [
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-accessible-diagram-presentations",
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kan-fibration towers compute limits of spaces",
+ "statement": "Use simplicial sets, Kan complexes, spaces, weak homotopy equivalences and coherent limiting cones from [def-cbc-enhanced-diagrams-cones], and the infinity category of spaces from [def-coef-infinity-category-of-spaces]. A Kan fibration means a simplicial map with the right lifting property against every horn inclusion $\\Lambda_i^m\\hookrightarrow\\Delta^m$, $m\\geq1$ and $0\\leq i\\leq m$. Let $X_0\\xleftarrow{p_0}X_1\\xleftarrow{p_1}X_2\\leftarrow\\cdots$ be a strict inverse sequence of Kan complexes in a fixed universe, with each $p_n$ a Kan fibration. Let $X$ be its degreewise inverse limit: $X_m$ is the set of families $(x_n)_{n\\geq0}$ with $x_n\\in(X_n)_m$ and $p_n(x_{n+1})=x_n$, and simplicial operators act coordinatewise. Then $X$ is a Kan complex, and the cone of its projections represents a limit of the induced coherent diagram $N(\\mathbb N^{\\mathrm{op}})\\to\\mathcal S$ in the infinity category $\\mathcal S$ of spaces. Equivalently the canonical map $X\\to\\operatorname{holim}_nX_n$ is a weak homotopy equivalence. This is natural for strict maps of towers. Empty complexes are allowed; no surjectivity on vertices is assumed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.3.4.11, printed p.398 (PDF p.416), specialized to S a point and Kan fibrations (which lift all left horns); its proof identifies this case as an already fibrant tower. The coherent-limit interpretation is the space-valued homotopy-limit convention, also explained in Section 3.3.3. Read online 2026-10-17; not archived in literature/. No Stacks tag states this infinity-categorical comparison."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tower|homotopyLimit|homotopy_limit|Reedy.*limit|limit.*fibr",
+   "results": "{\"t\": \"2026-10-16T21:24:43Z\", \"tool\": \"grep\", \"query\": \"tower|homotopyLimit|homotopy_limit|Reedy.*limit|limit.*fibr\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12c1d5023ed53629\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of Kan complexes whose transition maps are Kan fibrations has strict inverse limit representing the homotopy inverse limit",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"A tower of Kan complexes whose transition maps are Kan fibrations has strict inverse limit representing the homotopy inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"SSet.Truncated.hasLimits\"], \"digest\": \"499fc3fe4a0bcb61\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of a tower of fibrant objects with fibration transition maps computes the homotopy limit",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"leansearch\", \"query\": \"The inverse limit of a tower of fibrant objects with fibration transition maps computes the homotopy limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.limit\", \"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.piEquivLim.congr_simp\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.invLimEquiv.congr_simp\", \"HomotopicalAlgebra.fibrantObjects\", \"InverseSystem.piEquivLim\", \"InverseSystem.invLimEquiv\"], \"digest\": \"0494ebc0e32db52b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.KanComplex\", \"limit\"",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.KanComplex\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy fibrant inverse sequences of simplicial sets have ordinary limits equal to their derived limits",
+   "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"Reedy fibrant inverse sequences of simplicial sets have ordinary limits equal to their derived limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"SSet.hasLimits\", \"SSet.Truncated.hasLimits\", \"DeltaGenerated.hasLimits\", \"CategoryTheory.CosimplicialObject.Truncated.instHasLimits\"], \"digest\": \"61e12bf324be3e36\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-functor-spine-tower-mapping-descent",
+  "date": "2026-10-17",
+  "group": "N2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

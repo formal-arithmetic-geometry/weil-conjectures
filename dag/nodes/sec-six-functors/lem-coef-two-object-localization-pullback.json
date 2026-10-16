@@ -35,10 +35,85 @@
  ],
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "First check the homotopy-equivalence subcategory rather than assuming it is a simplicial groupoid. The vertices of any simplex of $E'(a,b)$ lie in one path component, since they are joined by its realized edges. Hence the selected simplices are stable under faces and degeneracies. Their composites are selected because compositions of invertible morphisms in $\\pi_0E'$ are invertible; identities are selected as well. Moreover $|E(a,b)|$ is exactly the union of the invertible path components of $|E'(a,b)|$, with their original topology. Indeed the realization quotient in [def-cbc-enhanced-diagrams-cones] has a continuous map to the discrete set $\\pi_0|E'(a,b)|$, constant on each simplex; the selected union is open and closed, and restricting a quotient map to the inverse image of an open subset is again a quotient map. Thus paths witnessing equality between selected components stay inside $|E(a,b)|$. Every component has a vertex representative, since a point represented in a simplex is joined within that simplex to a vertex. Every inverse component of a selected vertex is itself selected, and the two inverse equations, witnessed in $E'$, consequently hold in $\\pi_0E$. Therefore every arrow of $\\pi_0E$ is invertible, and $e$ supplies the specified functor $F\\to E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4 opening, printed p.13: restriction to homotopy equivalences; elementary expansion from the realization quotient."
+   }
+  },
+  {
+   "text": "Put $q:\\widetilde E\\to E$. By the meaning of cofibrant replacement in the mappingwise model structure [lem-coef-sorted-simplicial-algebra-model], $\\widetilde E$ is cofibrant and $q$ induces bijections on all component sets. For a component $[u]:a\\to b$ of $\\widetilde E$, choose the component $[v]:b\\to a$ corresponding under $q$ to $[q(u)]^{-1}$. Injectivity on components gives $[v][u]=1_a$ and $[u][v]=1_b$. Thus $\\pi_0\\widetilde E$ is a groupoid. Naturality of the chosen replacements, using the assumed isomorphism $\\widetilde F\\cong F$, gives a functor $u:F\\to\\widetilde E$ with $qu$ equal to the prescribed $F\\to E$.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4 opening, printed p.13: functorial cofibrant replacement and its naturality."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cofibrant-homotopy-groupoid-completion] to $A=\\widetilde E$ and $O=\\{x,y\\}$. Cofibrancy is part of the chosen replacement, and the groupoid hypothesis was proved in step 2. It follows that the canonical map $j:\\widetilde E\\to\\widetilde E^{-1}\\widetilde E$ is a weak homotopy equivalence on every mapping simplicial set. This is a mappingwise assertion, stronger than a weak equivalence of realized nerves.",
+   "uses": [
+    "lem-coef-cofibrant-homotopy-groupoid-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 4.1, printed p.14: use of Dwyer–Kan [4, Proposition 9.5]."
+   }
+  },
+  {
+   "text": "Let $B=\\widetilde E^{-1}\\widetilde E$ and $J=\\widetilde F^{-1}\\widetilde F\\cong F^{-1}F$. In each degree $F^{-1}F$ has precisely $1_x,1_y,g,g^{-1}$: any composable word in $g,g^{-1}$ reduces by adjacent cancellations to the unique arrow with its prescribed endpoints. All its simplicial operators are identities, so $J(a,b)=\\Delta^0$ for every pair $a,b$. In the stipulated factorization $J\\xrightarrow{i}Z\\xrightarrow{p}B$, $i$ is a mappingwise weak equivalence and $p$ a mappingwise Kan fibration. Consequently every $Z(a,b)$ has one path component and zero positive homotopy groups, because $i(a,b)$ induces bijections/isomorphisms on these invariants. Equivalently every $Z(a,b)$ is weakly contractible in the sense of [def-cbc-enhanced-diagrams-cones]. Keep $Z$ as the replacement; the original map $J\\to B$ need not be a fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4, printed p.13, factorization through Z; Lemma 4.1, printed p.14, calculation of the four mapping sets of F inverse F."
+   }
+  },
+  {
+   "text": "For each labelled pair $a,b$, the projection $G(a,b)\\to Z(a,b)$ is the pullback of $j(a,b):\\widetilde E(a,b)\\to B(a,b)$ along the Kan fibration $p(a,b):Z(a,b)\\to B(a,b)$. By the right-properness clause of [lem-coef-kan-quillen-right-proper] and step 3 this projection is a weak homotopy equivalence. Step 4 then gives one component and trivial positive homotopy groups for $G(a,b)$ as well, so its map to $\\Delta^0$ is a weak homotopy equivalence. This proves weak contractibility of all four mapping sets, without assuming that $B$, $Z$ or $\\widetilde E$ is locally Kan.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 4.1, printed p.14: right properness, applied directly to the four simplicial pullback squares."
+   }
+  },
+  {
+   "text": "The two functors from $F$ are $u:F\\to\\widetilde E$ and $F\\to J\\xrightarrow{i}Z$. Their composites to $B$ agree: both are $F\\xrightarrow{u}\\widetilde E\\xrightarrow{j}B$, by functoriality of degreewise completion and $pi:J\\to B$ being the functor being factored. The pullback therefore gives $F\\to G$ explicitly, sending each arrow to the pair of its two images. Pairwise composition, identities and simplicial operators agree because they do in each coordinate. Composing with $G\\to\\widetilde E\\xrightarrow{q}E\\hookrightarrow E'$ recovers $F\\to E'$ since $qu$ is the prescribed functor. All maps fix the labels, which proves the stated factorization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4, printed pp.13–14: pullback square and the factorization of the prescribed walking-arrow map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-cofibrant-homotopy-groupoid-completion",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 mapping-space foundations, via the simplicial-interval witness chain. Agent expansion of the online Bergner Section 4/Lemma 4.1 proof, with Dwyer–Kan Proposition 9.5 isolated as a statement node; external sources are WANTED for the local literature archive."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -89,6 +164,62 @@
    "results": "{\"t\": \"2026-10-16T20:26:30Z\", \"tool\": \"grep\", \"query\": \"(localization|Localization|completion|Completion).*(simplicial|Simplicial)|(simplicial|Simplicial).*(localization|Localization)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned declarations concern CW cell constructions or general model/localization theory, not the stated sphere-class countability or simplicial-category groupoid-completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.?completion|simplicial.*groupoid|groupoid.*simplicial|cofibrant.*(invert|localiz)",
+   "results": "{\"t\": \"2026-10-16T21:24:08Z\", \"tool\": \"grep\", \"query\": \"groupoid.?completion|simplicial.*groupoid|groupoid.*simplicial|cofibrant.*(invert|localiz)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\"], \"digest\": \"8554c2f3f406ace5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Groupoid completion of a cofibrant simplicial category whose arrows are homotopy equivalences is a weak equivalence on mapping spaces",
+   "results": "{\"t\": \"2026-10-16T21:24:08Z\", \"tool\": \"leansearch\", \"query\": \"Groupoid completion of a cofibrant simplicial category whose arrows are homotopy equivalences is a weak equivalence on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\"], \"digest\": \"525739c63363096a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofibrant simplicial category with groupoid homotopy category maps by weak homotopy equivalences on mapping spaces to its degreewise groupoid completion",
+   "results": "{\"t\": \"2026-10-16T21:24:08Z\", \"tool\": \"leanfinder\", \"query\": \"A cofibrant simplicial category with groupoid homotopy category maps by weak homotopy equivalences on mapping spaces to its degreewise groupoid completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\"], \"digest\": \"b718490bfed651d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject, Groupoid",
+   "results": "{\"t\": \"2026-10-16T21:24:08Z\", \"tool\": \"loogle\", \"query\": \"SimplicialObject, Groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialObject'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid|Groupoid",
+   "results": "{\"t\": \"2026-10-16T21:24:26Z\", \"tool\": \"grep\", \"query\": \"groupoid|Groupoid\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\"], \"digest\": \"161296673f314f80\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, CategoryTheory.Groupoid",
+   "results": "{\"t\": \"2026-10-16T21:24:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, CategoryTheory.Groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical functor from a free simplicial category with invertible pi zero morphisms to its simplicial groupoid of fractions induces weak equivalences of all hom spaces",
+   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical functor from a free simplicial category with invertible pi zero morphisms to its simplicial groupoid of fractions induces weak equivalences of all hom spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.lift\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.quotientFunctor\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\"], \"digest\": \"888a56da32bbe7d7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two object walking arrow factors through a simplicial category with contractible hom spaces using a pullback of groupoid completion along a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"leanfinder\", \"query\": \"A two object walking arrow factors through a simplicial category with contractible hom spaces using a pullback of groupoid completion along a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.cechNerve\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.SimplicialObject.cechNerve_map\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.Arrow.cechNerve_map\"], \"digest\": \"c3b2f5c844e74d1a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary free groupoids, homotopy categories of arbitrary model categories, truncated simplicial homotopy categories or Cech nerves; none gives the fixed-object simplicial-category completion comparison or the two-object contractible pullback."
   }
  ],
  "created": {
@@ -96,5 +227,21 @@
   "item": "lem-coef-countable-equivalence-witness",
   "date": "2026-10-17",
   "group": "Q24"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-two-object-localization-pullback",
+  "worker": "stage1",
+  "group": "Q22",
+  "summary": "Read Bergner Section 4 and Dwyer–Kan Proposition 9.5 online. Retained the statement; separated the cofibrant homotopy-groupoid completion comparison as one new unsplit node. Expanded the core, component-level inverse lifting, walking-groupoid computation, fibration-replacement pullback and prescribed-arrow compatibility. Existing inversion and nerve-comparison nodes do not state the required local comparison. All searches were run with msearch.py; no project Lean declaration was found.",
+  "blueprint": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation and following unit/counit compatibility: mapping-space foundations for coherent finite adjunction diagrams; the localization step in the simplicial-interval witness construction. Steps 1–6 supply the two-object localization-pullback input of the prescribed equivalence witness; they do not change the coefficient-adjunction route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-cd913d39e",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-cd913d39e (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, the four cited node statements, the parent lem-coef-countable-equivalence-witness, seven nearby candidate duplicates and blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint. Bergner §4 Lemma 4.1 and Dwyer–Kan 9.5 are not archived and network access is blocked, so I could not reread them. I checked the mathematics independently against the cited node definitions. The item statement is unchanged and is exactly what the parent's step 1 uses. The condition that F̃→F be an isomorphism can be met by the Dwyer–Kan standard resolution, so it is not vacuous. Steps: (1) the realization quotient restricted to a saturated clopen union of simplices gives π0E as the invertible part of π0E'; elementary. (2) q is a component bijection, so π0Ẽ is isomorphic to the groupoid π0E; elementary. (3) the new node is applied with its hypotheses checked: Ẽ is cofibrant and π0Ẽ is a groupoid. (4) F^{-1}F is the walking isomorphism with Δ^0 mapping sets, so Z is mappingwise weakly contractible. (5) the orientation is right: G(a,b)→Z(a,b) is the pullback of the weak equivalence j along the Kan fibration p, so right properness of lem-coef-kan-quillen-right-proper applies. (6) the pullback factorization is coordinatewise and recovers qu. The new node is true and is the sufficient direction of DK 9.5. Small cases: O empty, identity-only, the loop-group resolution of a discrete group, and disconnected or empty mapping sets all hold; the free monoid is correctly excluded by the groupoid hypothesis. It is statement-only and self-contained, and its cofibrancy definition matches the sorted-model structure. It does not restate a clause of the item and duplicates none of cofibrant-simplicial-inversion, dk-cofibrant-localization-comparison, free-factor-hammock-comparison, simplicial-groupoid-models, fixed-object-simplicial-free-calculus or simplicial-pullback-equivalence. A blueprint grep found nothing, so same_as [] is right. The route stays inside unit sk-prop-sf-biduality-general, there are no tool_uses, and a DFS found no cycle. Three kinds of Mathlib search are recorded. This is not a target node, so the base-change and coefficient checks do not apply. No SGA. No fixes written. One cosmetic point is left as is: an inherited search verdict on the item has copy-pasted text."
  }
 }

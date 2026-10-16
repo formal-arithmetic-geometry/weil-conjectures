@@ -30,9 +30,117 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First show that $i_n:\\operatorname{Sp}[n]\\hookrightarrow\\Delta^n$ has the left lifting property against every inner fibration, using the lifting-class meaning of inner anodyne in [lem-coef-inner-anodyne-pushout-product]. For $n=0,1$ it is the identity. Inductively fill the face $\\Delta^{\\{0,\\ldots,n-1\\}}$ from its spine, leaving the last edge fixed. Starting from this face together with $\\{n-1,n\\}$, adjoin the faces on $S\\cup\\{n-1,n\\}$ for nonempty $S\\subseteq\\{0,\\ldots,n-2\\}$ in increasing order of $|S|$. Each is attached along the inner horn missing the face $S\\cup\\{n\\}$, opposite vertex $n-1$, whose position is $|S|$. The face omitting $n$ was in the initial face, and each face omitting an element of S was attached for a smaller S. The missing face itself is not present yet: it has the same S and cannot lie in any previously attached face. Thus this is precisely a horn attachment, of dimension $|S|+1\\geq2$ and inner index $|S|$. Every nondegenerate simplex involving n is either the last vertex/edge or belongs to exactly one such pair of new faces. Successive inner-horn lifts solve every lifting problem for $i_n$; gluing agrees on the displayed intersections. This proves the claim with its base and inductive step, rather than assuming a spine theorem.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00JA",
+    "place": "Example 1.5.7.7(a); explicit finite horn filtration supplied here for the path-graph case."
+   }
+  },
+  {
+   "text": "Write $P=\\operatorname{Fun}(\\Delta^n,\\mathcal C)$ and $Q=\\operatorname{Fun}(\\operatorname{Sp}[n],\\mathcal C)$; these are quasicategories by [lem-cbc-internal-hom-quasicategory]. A boundary lifting problem for restriction $r:P\\to Q$ transposes, by the internal-functor definition [def-cbc-enhanced-diagrams-cones], to extending a map to $\\mathcal C$ from $(\\operatorname{Sp}[n]\\times\\Delta^m)\\cup(\\Delta^n\\times\\partial\\Delta^m)$. The inclusion into $\\Delta^n\\times\\Delta^m$ is the pushout product of $i_n$ with the boundary inclusion, so is inner anodyne by [lem-coef-inner-anodyne-pushout-product]. Since $\\mathcal C\\to\\Delta^0$ is an inner fibration, the lift exists, including $m=0$. Hence r is a trivial Kan fibration. By [lem-coef-kan-quillen-right-proper] it lifts every monomorphism. Lift $\\varnothing\\hookrightarrow Q$ to obtain a section s. Let J be the nerve of the groupoid with two objects and exactly one arrow between each ordered pair. Lift the monomorphism $P\\times\\{0,1\\}\\hookrightarrow P\\times J$ with endpoints $sr,1_P$ and base map r constant on J. The unique arrows of J and their inverse triangles give a coherent natural equivalence $sr\\simeq1_P$, while $rs=1_Q$. This proves that r is a functor equivalence as defined in [def-cbc-enhanced-diagrams-cones]. By [lem-cbc-enhanced-functor-cone-calculus] it induces equivalences on all mapping spaces.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00JA",
+    "place": "Example 1.5.7.7(b); boundary-lifting transposition and the section/invertible-interval argument are written out."
+   }
+  },
+  {
+   "text": "Put $D_n=\\operatorname{Fun}(L_n,\\mathcal C)$ and $D=\\operatorname{Fun}(L,\\mathcal C)$. They are quasicategories by [lem-cbc-internal-hom-quasicategory]. By [lem-coef-infinity-isofibration-exponentiation] every $D_{n+1}\\to D_n$ is an isofibration, hence an inner fibration. Write $U_E(x,y)=\\{x\\}\\times_{E,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,E)\\times_{\\operatorname{ev}_1,E}\\{y\\}$ as in that node. Its morphism-space clause says that $U_n=U_{D_n}(F|_{L_n},G|_{L_n})$ is Kan and $U_{n+1}\\to U_n$ is a Kan fibration. No surjectivity on vertices is inferred or needed.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1 and Corollary 4.4.5.3; morphism-space lifting is Proposition 4.6.1.22 (01P8)."
+   }
+  },
+  {
+   "text": "In simplicial degree m, a map $L\\times\\Delta^m\\to\\mathcal C$ is exactly a compatible family of maps $L_n\\times\\Delta^m\\to\\mathcal C$: the products form the same degreewise union, and two restrictions agree wherever their domains meet. Conversely glue their values on each simplex, choosing any stage containing it; compatibility makes that value independent of the stage and preserves every simplicial operator. Thus $D=\\varprojlim_nD_n$ strictly. Apply the identical gluing to maps $L\\times\\Delta^m\\times\\Delta^1\\to\\mathcal C$ with endpoint maps constant in the parameter at F,G. The endpoint conditions hold if and only if they hold at every stage. Therefore $U_D(F,G)=\\varprojlim_n U_n$ as simplicial sets, with their projection cones. This uses only the internal-functor and degreewise-pullback formulas of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13(6), the strict inverse-limit identity expanded degree by degree."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-fibration-tower-limit] to the tower $U_n$ of Step 3. Step 4 identifies its strict limit with $U_D(F,G)$, so the restriction cone exhibits $U_D(F,G)\\simeq\\lim_nU_n$ in spaces. The natural right-pinch maps of [lem-coef-infinity-pinch-comparison] identify $\\operatorname{Map}_{D}(F,G)$ with $U_D(F,G)$ and identify every $\\operatorname{Map}_{D_n}(F|_{L_n},G|_{L_n})$ with $U_n$. Their naturality under restriction identifies the two tower diagrams. Limits carry equivalences of diagrams to equivalences: by [lem-cbc-enhanced-functor-cone-calculus] a transformation of coherent diagrams $N(\\mathbb N^{\\mathrm{op}})\\to\\mathcal S$ whose vertex components are equivalences is an equivalence, and a cone is limiting exactly when its induced maps $\\operatorname{Map}_{\\mathcal S}(x,\\text{apex})\\to\\operatorname{Map}(\\Delta x,\\text{diagram})$ are equivalences for every $x$; postcomposing with the diagram equivalence and precomposing with the apex equivalence $j_{D}$ preserves this criterion, since a functor equivalence induces equivalences on all mapping spaces. Consequently the cone on the pinched mapping spaces is limiting, and its comparison is the asserted restriction equivalence. It is a limit of entire spaces, including higher homotopies, because the cited tower theorem is a coherent-limit statement.",
+   "uses": [
+    "lem-coef-kan-fibration-tower-limit",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.3.4.11 (S a point), and Proposition 5.3.4.13(6), with Kerodon Proposition 4.6.5.10 (01L5)."
+   }
+  },
+  {
+   "text": "The restriction comparisons are natural in both diagrams with their coherent precomposition and postcomposition operations. By [lem-cbc-simplicial-composition-spine], these operations, their identities and their higher associativity homotopies are given by simplex and consecutive-edge restriction, naturally in simplicial functors. Every $D\\to D_n$ and $D_{n+1}\\to D_n$ is such a functor. Their restrictions therefore commute with this entire composition calculus, not only with composition of components. The degreewise gluing in Step 4 commutes with all these face and degeneracy restrictions; the same gluing holds with any additional simplicial parameter T since $L\\times T\\times\\Delta^m$ is the union of $L_n\\times T\\times\\Delta^m$. The pinch inclusions commute with the functors by [lem-coef-infinity-pinch-comparison]. Thus the cone used in Step 5 is a coherent cone of bifunctors in the endpoint diagrams. Its pointwise limiting property identifies it naturally with the limit: limits of functors to spaces are computed pointwise by [lem-coef-infinity-yoneda-presheaf-limits], applied in a sufficiently large universe. The two endpoint categories need only fit in that universe; no smallness of their object sets in the original universe is asserted. Hence the displayed equivalence is natural in both diagrams, including noninvertible transformations, rather than merely a separately chosen equivalence at each pair.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion of the natural restriction comparison in Proposition 5.3.4.13(6); Kerodon 01F1 and 01L5 provide the relative evaluation and natural pinch models."
+   }
+  },
+  {
+   "text": "For local smallness fix two diagrams F,G on a small L and let J consist of the values $F(v),G(v)$ for vertices v of L. This is a small family. By [lem-coef-infinity-small-full-subcategory], the replete full subcategory $E\\subseteq\\mathcal C$ on that family has a small quasicategory model $E_0$ with an equivalence $e:E_0\\to E$. Both diagrams factor through E, because every vertex of every simplex of their images belongs to E. Moreover $\\operatorname{Fun}(L,E)$ is the full subcategory of $\\operatorname{Fun}(L,\\mathcal C)$ on E-valued diagrams: an m-simplex has image vertices among the vertices of those diagrams. Its pinched mapping space from F to G is therefore exactly the one in $\\operatorname{Fun}(L,\\mathcal C)$. Postcompose with e and a quasi-inverse; the coherent inverse equivalences postcompose as well, and their components are equivalences by [lem-cbc-enhanced-functor-cone-calculus]. Hence $\\operatorname{Fun}(L,E_0)\\to\\operatorname{Fun}(L,E)$ is a functor equivalence and induces mapping-space equivalences. The former functor simplicial set is small: in each degree its simplices are a subset of the set of all functions from the small graded set $L\\times\\Delta^m$ to the small graded set $E_0$, subject to the operator equations. Its mapping simplicial sets are small by the same counting argument and Kan by [lem-cbc-enhanced-functor-cone-calculus]. Thus the mapping space from F to G has a small Kan model, which is precisely local smallness [def-coef-presentable-infinity-category]. For empty L the functor category is the one-point quasicategory and the conclusion holds directly.",
+   "uses": [
+    "lem-coef-infinity-small-full-subcategory",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7 and Example 5.4.1.8; the vertex-image proof works also for small simplicial shapes that are not quasicategories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-inner-anodyne-pushout-product",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-kan-fibration-tower-limit",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-small-full-subcategory",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Online HTT Lemma 5.3.4.11, Proposition 5.3.4.13(2)-(3),(6), Proposition 5.4.1.7 and Example 5.4.1.8; explicit spine horn filtration, endpoint gluing and naturality supplied here. WANTED: archived HTT and Kerodon 00JA/01F1/01L5."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +183,52 @@
    "results": "{\"t\": \"2026-10-16T20:34:45Z\", \"tool\": \"leanfinder\", \"query\": \"Internal hom simplicial set restriction to spine categorical equivalence inverse limit of mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.StrictSegal.spineToDiagonal\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.Truncated.spine\", \"SSet.spine\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"f012c6832d808cc6\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. Returned ordinary CategoryTheory declarations require Category instances with Hom sets; StrictSegal declarations give strict simplex/path bijections. Neither covers the stated quasicategorical mapping-space theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "spine.*(innerAnodyne|anodyne)|isInnerAnodyne.*spine|tower|inverse.*limit",
+   "results": "{\"t\": \"2026-10-16T21:23:51Z\", \"tool\": \"grep\", \"query\": \"spine.*(innerAnodyne|anodyne)|isInnerAnodyne.*spine|tower|inverse.*limit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces of coherent diagrams on an increasing union form the homotopy inverse limit",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces of coherent diagrams on an increasing union form the homotopy inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.invLimEquiv\", \"CategoryTheory.Cat.HasLimits.homDiagram\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"DirectLimit.map\", \"Profinite.lim'\", \"Profinite.lim\", \"Profinite.limitCone\", \"ModuleCat.directLimitCocone\"], \"digest\": \"2c269420dc1cb04a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"spine\"",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"spine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.spine\", \"SSet.stdSimplex.spineId\", \"SSet.Truncated.spine\", \"SSet.stdSimplex.spineId_arrow_apply_one\", \"SSet.stdSimplex.spineId_arrow_apply_zero\", \"SSet.horn.spineId\", \"SSet.spine_map_subinterval\", \"SSet.spine_arrow\"], \"digest\": \"084860817cd10311\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the spine of a standard simplex is inner anodyne",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of the spine of a standard simplex is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.spineId_map_hornInclusion\", \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"SSet.Truncated.StrictSegal.spineToSimplex_spine_apply\", \"SSet.spine\", \"SSet.modelCategoryQuillen.I\", \"SSet.StrictSegalCore.spineToSimplex_spine\", \"SSet.Truncated.spine\", \"SSet.horn.spineId\"], \"digest\": \"48498bd7921845b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of functor quasicategories to simplex spines is an equivalence and mapping spaces commute with increasing unions of simplicial subsets",
+   "results": "{\"t\": \"2026-10-16T21:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of functor quasicategories to simplex spines is an equivalence and mapping spaces commute with increasing unions of simplicial subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.StrictSegal.spineToSimplex_map\", \"SSet.StrictSegal.spineToSimplex_map\", \"SSet.Truncated.StrictSegal.spineToSimplex_spine_apply\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"SSet.truncation_spine\", \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"SSet.Truncated.StrictSegal.spine_spineToSimplex_apply\", \"SSet.StrictSegal.spineEquiv\"], \"digest\": \"29057be187a94197\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "spine|innerAnodyne",
+   "results": "{\"t\": \"2026-10-16T21:24:43Z\", \"tool\": \"grep\", \"query\": \"spine|innerAnodyne\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"3e3cde5592784fae\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-diagram-presentations",
@@ -86,5 +236,34 @@
   "group": "NV"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-functor-spine-tower-mapping-descent",
+  "worker": "stage1",
+  "summary": "No project declaration states the item. Kept every clause and every hypothesis. Gave an explicit spine horn filtration and trivial-fibration inverse; computed the tower using unpinched Kan morphism spaces and natural pinch inclusions; proved local smallness by the existing small-full-subcategory lemma. One new statement-only Kan tower lemma; no duplicate spine or local-smallness lemma. Checked endpoint conventions, universes, empty cases and each cited statement.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; HTT Proposition 5.4.4.3, used in the pushout and two-out-of-three parts of Lemma 5.5.4.14 to express diagrams in an accessible functor category as filtered colimits of small compact diagrams. General tool: Mapping-space descent along spines and increasing unions. Steps 1-2 supply the simplex/spine case, 3-6 the increasing-union mapping limit, and 7 the local-smallness infrastructure for the accessible-diagram presentation used in the displayed mapping-complex adjunction calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic simplicial/quasicategory foundations: functor closure, coherent composition, or pointwise space-valued limits. Used solely through its statement; the coefficient-adjunction unit supplies no replacement."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic simplicial/quasicategory foundations: functor closure, coherent composition, or pointwise space-valued limits. Used solely through its statement; the coefficient-adjunction unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-af9a86632",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-af9a86632 (reviewer sub-agent of L); spot-checked: Every step and both statements are mathematically correct; one citation fix was needed in Step 5. I could not check the HTT page and lemma numbers at the cited places: HTT and Kerodon are not archived locally and this reviewer has no network. Both nodes are marked agent-written with WANTED lines, so I checked the mathematics directly. The item statement is unchanged and true. Small cases checked: n=0,1, L empty, constant filtration and empty early stages. Step 1: I re-did the spine filtration (S∪{n-1,n} attached along the horn opposite n-1 at index |S|, which is inner; the missing face S∪{n} is new; all simplices containing n are covered; n=2 gives Λ^2_1). Step 2: the pushout product with boundary inclusions (including m=0) makes r a trivial fibration; the Kan-Quillen node gives lifting against monos, hence a section; the lift through P×J gives inverse triangles from N(J). Step 3 matches the isofibration-exponentiation statement, including the Kan-fibration clause for U. Step 4 is an elementary degreewise gluing. Step 5: the fault was that 'limits carry equivalences of diagrams to equivalences' and pointwise detection of equivalences were used without a citation. I added lem-cbc-enhanced-functor-cone-calculus (already in proof_deps and tool_uses) to Step 5 uses and wrote out the argument in the corrected item file under fixes/. Step 6 is condensed but sound at the level of statements (composition-spine naturality, pinch naturality, objectwise limits in an enlarged universe). Step 7: the vertex-image full subcategory, small model, functor equivalences in both directions and the cardinality bound are correct. New node lem-coef-kan-fibration-tower-limit: statement only, self-contained and true (X Kan as a limit of fibrations; a fibrant tower computes the holim). Edge cases checked: X_1 empty gives the empty set; non-surjective fibrations are allowed; no lim π_0 claim. It does not restate a clause of the parent and duplicates nothing after a scan of all Kan/tower/Reedy/holim nodes. It has all four Mathlib search records with no match, and correct blueprint from/via. There is no dependency cycle (closure of 309 nodes). Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine, both generic quasicategory foundations. No SGA used.; 1 file(s) fixed by the reviewer"
+ }
 }
