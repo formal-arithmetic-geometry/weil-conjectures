@@ -274,5 +274,28 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-2d66d3ded (reviewer sub-agent of L); spot-checked: Read the full mathematics and all 20 cited statements; checked Stacks 07RB, 09AA, 09BM, blueprint sources, restricted-adjunction domains, edge cases and cycles. Six-step proof accepted. Corrected the unit realization to include the existing all-stages node. Details in review.md; corrected JSON under fixes/dag/units/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersionUpperShriek",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app",
+   "AlgebraicGeometry.ProEtale.isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion",
+   "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar"
+  ],
+  "statement": "theorem isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion [Finite Λ]\n    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]\n    {Q : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}\n    (hQ : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z Q) :\n    IsIso (rightDerivedUpperShriekHomEquiv i hQ.plusEtaleOrigin\n      (hQ.plusEtaleOrigin.rightDerivedLowerShriek_obj i).plus (𝟙 _))",
+  "branch": "slopmaster2",
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Both clauses already exist. The ambient declaration is in the imported Derived.ClosedImmersion module, with R : Type (u+1), Ring R, i closed, j open and quasi-compact, and hij the complementary ranges; use R = ULift A_{E,n}. Noetherian T supplies quasi-compactness of j. The primary declaration is the constructible exceptional unit, namely rightDerivedUpperShriekHomEquiv applied to the identity of Ri_! Q; the third declaration identifies Ri_! with Ri_*. In the current server source the constructible theorem also takes Etale.HasBoundedBelowUpperShriek; this is supplied under the stated finite-type field hypotheses by the already-recorded finiteTypeHasBoundedBelowUpperShriek in Sheaf.Paper.FiniteTypeExceptionalInverseImage, not assumed as an ambient pro-etale datum. At finite coefficients the etale-origin boundedConstructible predicate is the intrinsic finite-torsion condition, as recorded by lem-sf-proetale-constructible-origin. See the worker report for every specialization and the two full signatures. No module or duplicate notion is introduced. Second reading: the constructibility comparison is an equivalence of presentations, not a definitional equality. The intrinsic constant-ring category is canonically realized from fixed-ring module sheaves (sfIntrinsicModuleEquivalence); finiteCoefficientRealization and originConstantModules relate it to the origin theorem. Upstream etale constructibility uses finitely generated stalks, which equal finite stalks for this finite coefficient ring, with the same finite constructible locally closed stratifications. Thus no bounded-constructible object is excluded by the upstream predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7f1b9f999",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Wrote review.md. Verified both canonical units, all eight dependencies, verbatim signature, universes and edge cases. Delivery probes compile cleanly. Recorded a separate inherited constructibility-origin import collision."
  }
 }
