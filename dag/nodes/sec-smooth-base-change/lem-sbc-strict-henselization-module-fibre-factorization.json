@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the cocone of coordinate rings mapping to global sections of Spec Omega by the marked neighbourhood maps. Its colimit desc, followed contravariantly by Spec and the Gamma-Spec unit, defines t. The coprojection-desc identity and Gamma-Spec naturality show t followed by every affine limit leg is the marked map. Nonemptiness of the affine pointed index and the structural-map characterization give t rho=s.",
+   "text": "The marked maps define a cone on the double-opposite small affine diagram after composition with the Gamma-Spec unit. Naturality follows from Scheme.toSpecΓ_naturality and the point equation of each category-of-elements morphism. Lift this cone to strictHenselizationCone using the IsLimit furnished by strictHenselization_properties. Its fac equations and toSpecΓ_SpecMap_ΓSpecIso_inv give the pointed limit-leg equations. Choose one object using cofiltered nonemptiness and use strictHenselizationStructuralMap_eq and its marked point equation to get t followed by the structural map equal to s.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map"
@@ -23,31 +23,31 @@
    "elementary": false
   },
   {
-   "text": "Apply the closed-fibre equivalence with A equal to the strict-henselization ring and the identity spectrum isomorphism to t(closedPoint Omega). Its premise follows from t rho=s. Define i by pullback.lift with projections g-prime and f-prime followed by t. Its two projection equations hold by lift_fst and lift_snd; cancellation of the right Cartesian square proves IsPullback i f-prime p t.",
+   "text": "Apply strictHenselizationStructuralMap_fiber_eq_closedPoint to the identity spectrum isomorphism and t(closedPoint Omega); the premise is t followed by the structural map equal to s, evaluated at the closed point. Construct i by pullback.lift with projections g-prime and f-prime followed by t. The projection equations follow from lift_fst and lift_snd. Cancel the right pullback square with IsPullback.of_right to obtain the required Cartesian square.",
    "uses": [
     "lem-weil-pbc-strict-henselization-closed-fiber"
    ],
    "elementary": false
   },
   {
-   "text": "Use exists_qcqsStrictLocalModuleComparison to obtain Theta and its affine representative equations, avoiding a second module/set comparison construction. This previously proved module comparison is a generic tool from the proper-base-change unit; no properness or torsion hypothesis is used.",
+   "text": "Obtain Theta and its representative formula directly from exists_qcqsStrictLocalModuleComparison. This is the existing generic qcqs continuity tool; neither properness nor torsion is used.",
    "uses": [
     "lem-weil-pbc-qcqs-strict-local-module-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Import all GeometricFibreExchangeGerms for proof use and apply its existing private theorem terminalGerm_isIso, without restating it: at the identity geometric point every pointed neighbourhood has a marked section, so the terminal germ is bijective. Its inverse, followed by the unique terminal-object pullback isomorphism, defines b-zero from the target stalk to the identity sections. Apply the existing private sourceStalkIso_germ from the same module, without restating it. The exchange-unit equation and the two pullback projection calculations then show that germ followed by sourceIso.inv, exchange, and b-zero equals geometricFibreSectionRestriction on every neighbourhood. The specialized exchange representative helper is proved completely.",
-   "uses": [
-    "lemma-openclosed-stalk-upperstar",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": false
+   "text": "At the identity geometric point, the identity marked neighbourhood is initial in the category of elements: the unique pointed arrow to (V,v) is the marked section v itself. Uniqueness follows by taking the left component of the pointed-arrow equation. Its opposite is terminal, so IsColimit.isIso_ι_app_of_isTerminal applied to isColimitPresheafFiberCocone proves the terminal germ j is an isomorphism. Let eX and eOmega be the global-section/identity-section isomorphisms. Define d as eX.inv, lowerStarCompGlobalSectionsIso.inv, eOmega.hom and j. Define b as global sections of upperStarComp.inv followed by eX.hom. All factors of d are isomorphisms.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Define b as global sections of upperStarComp.inv, the inverse pushforward-global-sections comparison, the terminal-section comparison, the terminal germ isomorphism, and b-zero. Apply strictLocal_exchange_compatibility to the pointed-leg equations, the two projection equations of i, and Theta.hom. Cancel the source stalk isomorphism to identify Theta.hom followed by restriction and b.hom with sourceIso.inv followed by exchange and b-zero.hom. Precompose with an arbitrary germ, use the preceding representative calculation, and evaluate at z. This proves precisely the displayed formula.",
+   "text": "Apply strictLocal_exchange_compatibility using the pointed-leg and projection equations and Theta.hom. The proved private transportedIso_hom lemma identifies the equality transport in geometricPointSourceStalkIso with composition by eqToHom, and eX.hom followed by eX.inv cancels. Thus exchange equals sourceIso.hom followed by Theta.hom, restriction along i, b.hom and d.hom. The existing exchange_pointed_representative theorem gives germ followed by sourceIso.inv and exchange equal to geometricFibreSectionRestriction followed by d.hom. Substitute the first equality into the second, cancel sourceIso.inv followed by sourceIso.hom, and cancel d.hom, which is monic because it is an isomorphism. Evaluating the resulting module-morphism equality at z gives exactly the requested formula.",
    "uses": [
-    "lem-weil-pbc-strict-local-exchange-compatibility"
+    "lem-weil-pbc-strict-local-exchange-compatibility",
+    "lem-weil-pbc-exchange-pointed-representative",
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-underived-exchange"
    ],
    "elementary": false
   }
@@ -57,14 +57,17 @@
   "def-weil-pbc-strict-henselization-structural-map",
   "lem-weil-pbc-strict-henselization-closed-fiber",
   "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lem-weil-pbc-strict-local-exchange-compatibility",
+  "lem-weil-pbc-exchange-pointed-representative",
   "lemma-openclosed-stalk-upperstar",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-strict-local-exchange-compatibility"
+  "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
-  "by": "agent",
+  "kind": "agent",
+  "by": "M3",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03Q9, 03Q1, 04HX and 0EYP; reuse of the qcqs module comparison and strict-local exchange compatibility. Reuse terminalGerm_isIso and sourceStalkIso_germ through a proof-only import all of GeometricFibreExchangeGerms, and specialize its exchange representative calculation to exchange itself."
+  "place": "Tags 03Q9, 03Q1, 04HX and 0A3U; direct marked limit-cone construction, existing qcqs module comparison and exchange-pointed representative calculation. The terminal germ is proved by the initial identity marked neighbourhood and Mathlib IsColimit.isIso_ι_app_of_isTerminal; no private declaration of another module is used."
  },
  "mathlib_searches": [
   {
@@ -133,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T211612-L-1056618",
+  "landing": "20261016T221619-L-1617525",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
