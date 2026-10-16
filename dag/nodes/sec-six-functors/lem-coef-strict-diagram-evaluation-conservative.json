@@ -1,0 +1,91 @@
+{
+ "id": "lem-coef-strict-diagram-evaluation-conservative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation: the strict/coherent diagram comparison used in that mapping calculation; conservativity paragraph preceding (7.9.8.7) in Cisinski, which is the detection input to the free-diagram generation subargument (7.9.8.11)-(7.9.8.14).",
+   "via": [
+    "lem-coef-free-diagram-homotopy-density",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Evaluations detect equivalences in localized strict model diagrams",
+ "statement": "Use quasicategories, nerves, coherent functor categories and functor equivalences of [def-cbc-enhanced-diagrams-cones]. Fix a universe $\\mathcal U$. Let $\\mathcal M$ be an ordinary category with $\\mathcal U$-small Hom sets and all $\\mathcal U$-small limits and colimits, equipped with classes $C,F,W$. Assume that $W$ is retract closed and satisfies two-out-of-three, and that $(C,F\\cap W)$ and $(C\\cap W,F)$ are weak factorization systems with functorial factorizations. Here a weak factorization system consists of a factorization of every arrow into the two classes, each class being characterized by diagonal lifting against the other. Let $0$ be initial and let $\\mathcal M_c$ be the full subcategory on objects $X$ with $0\\to X\\in C$. For a $\\mathcal U$-small ordinary category $I$, let $W_I$ consist of natural transformations in $\\operatorname{Fun}(I,\\mathcal M_c)$ whose components lie in $W$. In sufficiently large universes put\n$$\\mathcal B=N(\\mathcal M_c)[W^{-1}]_\\infty,\\qquad \\mathcal A_I=N(\\operatorname{Fun}(I,\\mathcal M_c))[W_I^{-1}]_\\infty.$$\nEach localization is characterized by restriction giving, into every quasicategory, an equivalence on the entire functor quasicategory with the full subcategory of functors inverting the indicated arrows. Evaluation followed by localization induces $\\operatorname{ev}_i^L:\\mathcal A_I\\to\\mathcal B$ for $i\\in I$. For every arrow $a$ of $\\mathcal A_I$, if $\\operatorname{ev}_i^L(a)$ is an equivalence for every $i\\in I$, then $a$ is an equivalence. Equivalently, the induced evaluation comparison $\\mathcal A_I\\to\\operatorname{Fun}(N(I),\\mathcal B)$ is conservative, meaning that it reflects equivalences. No model structure on $\\mathcal M^I$, simplicial enrichment, combinatoriality or properness is assumed. The empty category $I$ is allowed.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 7.9.8, printed p. 410, conservativity paragraph between (7.9.8.6) and (7.9.8.7), for the nerve of the cofibrant part of an ordinary model category; the model-category saturation and the cofibration-category fraction calculus supply its hypotheses. Remark 7.9.7 checks heredity by sequential lifting. Read online 2026-10-17; not archived in literature/. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Objectwise evaluation is conservative on the infinity localization of strict diagrams in a model category",
+   "results": "{\"t\": \"2026-10-16T20:21:42Z\", \"tool\": \"leansearch\", \"query\": \"Objectwise evaluation is conservative on the infinity localization of strict diagrams in a model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation\", \"CategoryTheory.Limits.evaluationPreservesLimits\", \"CategoryTheory.Limits.evaluation_preservesLimitsOfShape\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_hom_π_assoc\", \"CategoryTheory.Limits.instPreservesFiniteColimitsFunctorObjEvaluationOfHasFiniteColimits\", \"CategoryTheory.Limits.instPreservesWellOrderContinuousOfShapeFunctorObjEvaluationOfHasIterationOfShape\", \"CategoryTheory.Limits.evaluation_preservesColimitsOfShape\", \"CategoryTheory.Limits.evaluation_preservesColimits\"], \"digest\": \"cd41aa7d85360aa2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "locali[sz].*conserv|conserv.*locali[sz]|evaluation.*[Rr]eflect",
+   "results": "{\"t\": \"2026-10-16T20:21:43Z\", \"tool\": \"grep\", \"query\": \"locali[sz].*conserv|conserv.*locali[sz]|evaluation.*[Rr]eflect\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexEvaluation.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\"], \"digest\": \"5f1e3147416cd792\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "reflectsIsomorphisms|ReflectsIsomorphisms|weakEquivalence_toHoCat_map_iff",
+   "results": "{\"t\": \"2026-10-16T20:21:43Z\", \"tool\": \"grep\", \"query\": \"reflectsIsomorphisms|ReflectsIsomorphisms|weakEquivalence_toHoCat_map_iff\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\"], \"digest\": \"bdf0b5c56f333140\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CofibrantObject\", \"ReflectsIsomorphisms\"",
+   "results": "{\"t\": \"2026-10-16T20:21:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject\\\", \\\"ReflectsIsomorphisms\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation functors jointly reflect equivalences after localizing strict diagrams of cofibrant objects in a model category at objectwise weak equivalences",
+   "results": "{\"t\": \"2026-10-16T20:21:47Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation functors jointly reflect equivalences after localizing strict diagrams of cofibrant objects in a model category at objectwise weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\"], \"digest\": \"367c1b82582f2dde\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the homotopy category of strict model diagrams is invertible whenever each evaluation is invertible without a projective model structure",
+   "results": "{\"t\": \"2026-10-16T20:21:50Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism in the homotopy category of strict model diagrams is invertible whenever each evaluation is invertible without a projective model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.quotient_inverts_homotopyEquivalences\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopyCategory.isoOfHomotopyEquiv\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv\"], \"digest\": \"2a12fc0a8612f758\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-free-diagram-homotopy-density",
+  "date": "2026-10-17",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -1,0 +1,102 @@
+{
+ "id": "lem-coef-nonsymmetric-operads-presentability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the Section 3.2 operad category used as the presentable base of the universal algebra fibration",
+   "via": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Presentability of the infinity category of nonsymmetric infinity operads",
+ "statement": "Fix universes and the infinity-category conventions of [def-coef-complete-algebroid], and let $\\Delta^{\\mathrm{op}}_{\\mathrm{inert}}$ be the subcategory of $\\Delta^{\\mathrm{op}}$ consisting of inert maps (those corresponding to inclusions of consecutive subintervals). Let $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$ be the infinity category whose objects are small inner fibrations $\\pi:\\mathcal O^\\otimes\\to\\Delta^{\\mathrm{op}}$ such that every inert map admits a $\\pi$-cocartesian lift and the inert Segal maps $\\mathcal O_{[n]}\\to\\mathcal O_{[1]}^n$ are equivalences, with the following relative-limit condition: for every $C\\in\\mathcal O_{[n]}$, its chosen cocartesian inert projections $C\\to C_i$ over $\\rho_i:[n]\\to[1]$, every $X\\in\\mathcal O_{[m]}$ and every $\\phi:[m]\\to[n]$, composition gives an equivalence $\\operatorname{Map}_{\\mathcal O}^{\\phi}(X,C)\\simeq\\prod_{i=1}^n\\operatorname{Map}_{\\mathcal O}^{\\rho_i\\phi}(X,C_i)$. Here $\\operatorname{Map}^{\\phi}$ is the homotopy fiber of the map on mapping spaces over the base arrow $\\phi$; the empty product for $n=0$ is a point. An inert operad edge means a cocartesian edge over an inert base map. The morphisms of $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$ are functors over $\\Delta^{\\mathrm{op}}$ carrying inert cocartesian edges to inert cocartesian edges. Use presentability as in [def-coef-presentable-infinity-category]. In the fixed universe, $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$ is a presentable infinity category: it is accessible and admits colimits of every small simplicial diagram.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Section 3.2, opening paragraph; Definitions 3.2.1-3.2.3, Example 3.2.4(i), Corollary 3.2.6 and Definition 3.2.7, printed pp.606-608. All operads are small in the fixed smaller universe. Shared archive WANTED; source digest in report.md."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small nonsymmetric infinity operads with inert preserving maps is presentable",
+   "results": "[leanfinder] OK 8 hit(s): SSet.Finite.instIsFinitelyPresentable; SSet; SSet.QCat; SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex; SSet.Augmented; SSet.largeCategory; SSet.hasColimits; SSet.QCat.catEnrichedOrdinaryCategory. These concern simplicial sets or ordinary quasicategories, not the categorical-pattern infinity category of nonsymmetric operads.",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no declaration for presentability of the infinity category of nonsymmetric infinity operads."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsAccessibleCategory",
+   "results": "[loogle] OK 12 hit(s): CategoryTheory.IsAccessibleCategory and related declarations in Mathlib.CategoryTheory.Presentable.* concern ordinary categories with set-valued homs, not infinity operads.",
+   "date": "2026-10-17",
+   "verdict": "no match: the ordinary-category predicate does not state this infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad.*[Pp]resentable",
+   "results": "[grep] OK 0 hit(s) in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match: no operad-presentability declaration occurs in the Mathlib CategoryTheory sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentability of the quasicategory of small nonsymmetric infinity operads",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"(X : C) : Prop\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is presentable if the hom-functor $ \\\\text{Hom}(-, X) : \\\\mathcal{C} \\\\to \\\\text{Type} $ is accessible, meaning it preserves sufficiently filtered colimits. T\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \": ObjectProperty C\", \"doc\": \"The property of an object $ X $ in a category $ \\\\mathcal{C} $ being finitely presentable, meaning that the hom-functor $ \\\\mathrm{Hom}(X, -) $ preserves $ \\\\aleph_0 $-filtered colimits.\"}\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"(S : SSet) [KanComplex S] : Quasicategory S\", \"doc\": \"Every Kan complex is a quasicategory. This follows because a Kan complex, which has fillers for all horn inclusions, automatically satisfies the condition of having fillers for inner horns (0 < k < n)\"}\n  {\"name\": \"SSet.Quasicategory.mk\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"∀ {S : SSet},\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ) →\\n    S.Quasicategory\", \"doc\": \"A simplicial set $ S $ is a quasi-category if for every inner horn $ \\\\Lambda^k[n] \\\\to S $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it, for all $ 0 < k < n $.\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [toHasCardinalFilteredGenerator : CategoryTheory.HasCardinalFilteredGenerator C κ]\\n  [toHasColimitsOfSize : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v, u} C],\\n  CategoryTheory.IsCardinalLo\", \"doc\": \"If a category $\\\\mathcal{C}$ has a $\\\\kappa$-filtered generator and all colimits of $\\\\kappa$-small diagrams, then $\\\\mathcal{C}$ is locally presentable with respect to the regular cardinal $\\\\kappa$.\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"(X : SSet.{u}) [IsStrictSegal X] : Quasicategory X\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical pattern on the simplex category presents a cocomplete accessible infinity category of planar operads",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instCategorySimplexCategoryGenRel\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"CategoryTheory.Category.{0, 0} SimplexCategoryGenRel\", \"doc\": \"The simplex category constructed as the quotient of the path category of the free simplex quiver (with objects and morphisms identified with natural numbers) by a hom-set relation that identifies cert\"}\n  {\"name\": \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable\", \"type\": \"∀ (n : SimplexCategory), CategoryTheory.IsFinitelyPresentable (SSet.stdSimplex.obj n)\", \"doc\": \"For each finite ordinal $[n]$ in the simplex category $\\\\Delta$, the standard simplex $\\\\Delta^n$ (represented by the simplicial set $\\\\mathrm{stdSimplex}.\\\\mathrm{obj}\\\\, n$) is a finitely presentable obj\"}\n  {\"name\": \"AugmentedSimplexCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic\", \"type\": \"Type\", \"doc\": \"The category obtained by adjoining an initial object to the simplex category $\\\\Delta$, typically denoted as $[-1]$. This category is used in algebraic topology to model augmented simplicial objects.\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max (max u (v + 1)) v)\", \"doc\": \"The ordinary category structure on a category $\\\\mathcal{C}$ obtained by enriching it over the monoidal category of simplicial sets $\\\\mathbf{SSet}$, where hom-objects are simplicial sets and compositio\"}\n  {\"name\": \"SSet\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"Type (u + 1)\", \"doc\": \"The category of simplicial sets, defined as simplicial objects in the category of types. A simplicial set is a functor from the opposite of the simplex category $\\\\Delta^\\text{op}$ to the category of ty\"}\n  {\"name\": \"SSet.Augmented\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"Type (u + 1)\", \"doc\": \"The category of augmented simplicial sets, defined as the comma category between the identity functor on simplicial sets and the constant functor from $\\\\mathrm{Type}\\\\, u$ to simplicial sets. Objects a\"}\n  {\"name\": \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {Δ : SimplexCategoryᵒᵖ} → CategoryTheory.Category.{v_1, max u_1 v_1} ((CategoryTheory.nerve C).obj Δ)\", \"doc\": \"For any category $\\\\mathcal{C}$ and any object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the nerve of $\\\\mathcal{C}$ evaluated at $\\\\Delta$ is the category of composable sequences of \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) : Prop\", \"doc\": \"A simplicial set `S` is a *quasicategory* if it satisfies the following horn-filling condition:\\nfor every `n : ℕ` and `0 < i < n`,\\nevery map of simplicial sets `σ₀ : Λ[n, i] → S` can be extended to a \"}\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) [S.KanComplex] : S.Quasicategory\", \"doc\": \"Every Kan complex is a quasicategory. \"}\n  {\"name\": \"SSet.quasicategory_of_hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) (h : ∀ {n : ℕ} {i : Fin (n + 1)}, 0 < i → i < Fin.last n → CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)) : S.Quasicategory\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) [S.Quasicategory] {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) {n : ℕ} {i : Fin (n + 1)} (h0 : 0 < i) (hn : i < Fin.last n) : CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)\", \"doc\": \"\"}\n  {\"name\": \"SSet.quasicategory_iff_hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) : S.Quasicategory ↔ ∀ {n : ℕ} {i : Fin (n + 1)}, 0 < i → i < Fin.last n → CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄ (h0 : 0 < i) (hn : i < Fin.last n) (σ₀ : (SSet.horn n i).toSSet ⟶ S) : ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S) (_h0 : 0 < i) (_hn : i < Fin.last (n + 2)) : ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.mk\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} (hornFilling' : ∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S), 0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ) : S.Quasicategory\", \"doc\": \"\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) (filler : ∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S), 0 < i → i < Fin.last (n + 2) → ∃ σ, ∀ (j : Fin (n + 3)) (h : j ≠ i), (CategoryTheory.ConcreteCategory.hom (CategoryTheory.SimplicialObject.δ S j)) σ = (CategoryTheory.ConcreteCategory.hom (σ₀.app (Opposite.op \", \"doc\": \"\"}\n  {\"name\": \"SSet.instQuasicategory₂ObjTruncatedOfNatNatTruncationOfQuasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.TwoTruncatedQuasicategory\", \"type\": \" (X : SSet) [X.Quasicategory] : ((SSet.truncation 2).obj X).Quasicategory₂\", \"doc\": \"\"}\n  {\"name\": \"SSet.Edge.HomotopyL.homotopyR\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.CompStruct\", \"type\": \" {X : SSet} {x₀ x₁ : X.obj (Opposite.op { len := 0 })} [X.Quasicategory] {e e' : SSet.Edge x₀ x₁} (h : e.HomotopyL e') : e.HomotopyR e'\", \"doc\": \"In a quasicategory, two left homotopic edges are also right homotopic. \"}\n  {\"name\": \"SSet.Edge.HomotopyR.homotopyL\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.CompStruct\", \"type\": \" {X : SSet} {x₀ x₁ : X.obj (Opposite.op { len := 0 })} [X.Quasicategory] {e e' : SSet.Edge x₀ x₁} (h : e.HomotopyR e') : e.HomotopyL e'\", \"doc\": \"In a quasicategory, two right homotopic edges are also left homotopic. \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn filling does not give the infinity category of operads or its presentability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial sets categorical patterns localization is presentable infinity category of operads",
+   "results": "{\"t\": \"2026-10-16T20:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets categorical patterns localization is presentable infinity category of operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.cosk\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.QCat.bicategory\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.hasColimits\"], \"digest\": \"997b97461b116d6a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered",
+   "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-operadic-algebra-presentability",
+  "date": "2026-10-17",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

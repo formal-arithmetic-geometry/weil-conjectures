@@ -21,18 +21,92 @@
  },
  "kind": "statement",
  "title": "Relative marked-anodyne fibrant replacement",
- "statement": "Use marked simplicial sets, Cartesian fibrations and the relative Cartesian model $\\mathsf M_S$ of [lem-coef-marked-relative-cartesian-model], and the four marked-anodyne generator types of [lem-coef-marked-anodyne-lifting-calculus]. A marked map over $S$ is marked anodyne if its underlying marked map lies in the weakly saturated class of those generators (closure under pushouts, transfinite composition and retracts). For every small simplicial set $S$, every marked object $X\\to S$ admits a functorial marked-anodyne map $X\\to Z^\\natural$ over $S$, where $Z\\to S$ is a Cartesian fibration and $Z^\\natural$ marks exactly its Cartesian edges. Every marked-anodyne map over $S$ is a trivial cofibration of $\\mathsf M_S$. The replacements and their small-object constructions may be taken in the universe of the input. No quasicategory hypothesis on $S$ is required.",
+ "statement": "Use marked simplicial sets, Cartesian fibrations and the relative Cartesian model $\\mathsf M_S$ of [lem-coef-marked-relative-cartesian-model], and the four marked-anodyne generator types of [lem-coef-marked-anodyne-lifting-calculus]. A marked map over $S$ is marked anodyne if its underlying marked map lies in the weakly saturated class of those generators (closure under pushouts, transfinite composition and retracts). For every small simplicial set $S$, every marked object $X\\to S$ admits a functorial marked-anodyne map $X\\to Z^\\natural$ over $S$, where $Z\\to S$ is a Cartesian fibration and $Z^\\natural$ marks exactly its Cartesian edges. Every marked-anodyne map over $S$ is a trivial cofibration of $\\mathsf M_S$. The replacements and their small-object constructions may be taken in the universe of the input. Here the relative terminology is used for arbitrary simplicial bases: an inner fibration has fillers against all inner horns; an edge is Cartesian when every final outer-horn lifting problem of dimension at least two with that final edge has a filler, and a Cartesian fibration is an inner fibration admitting a Cartesian lift with specified target of each base edge, as made precise in [lem-coef-relative-marked-anodyne-calculus]. No quasicategory hypothesis on $S$ or on the total simplicial set is required.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Definition 3.1.1.1, Proposition 3.1.1.6, Remark 3.1.1.10 and Remark 3.1.3.4; relative small-object factorization used in Corollary 3.2.1.16. Read online on 2026-10-17; not archived under literature/. No Stacks tag states this marked simplicial or infinity-categorical result."
  },
  "stmt_deps": [
   "lem-coef-marked-relative-cartesian-model",
-  "lem-coef-marked-anodyne-lifting-calculus"
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-relative-marked-anodyne-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an input universe $\\mathcal U$ and a $\\mathcal U$-small base $S$. Regard the category in the statement as marked sets over $S^\\sharp$, so its terminal object is $S^\\sharp\\to S^\\sharp$. By the small-generation clause of the marked lifting calculus choose representatives $I$ of the four generator types with only countable Kan complexes in type (iv). Each source and target has countably many simplices in total. For each $a:A\\to B$ in $I$ and each simplicial map $b:B\\to S$ include $(A\\to S)\\to(B\\to S)$ in $I_S$. The maps $b$ form a small set, so $I_S$ is small. Colimits of marked simplicial sets are computed by taking the colimit in each degree and marking precisely the images of marked edges; the same construction with its induced structure map computes colimits over $S^\\sharp$. Hom sets are subsets of products of small sets and hence small. These formulas verify all the colimit and size hypotheses of the cellular factorization theorem. The generators are underlying monomorphisms, and their coproducts and pushouts are monomorphisms by the degreewise set formulas; their transfinite composites are increasing unions. Thus all the cellular chains in the smallness hypothesis are chains of monomorphisms. In a chain of monomorphisms of length $\\omega_1$, a map from a countable generator domain lands in one stage: select a stage for the image of each simplex and each marked edge, and take the supremum of this countable set of countable ordinals. This supremum is below $\\omega_1$; the relations and the base map then hold in that stage because all transition maps are injective. Equality of two maps is tested in the same way. Thus each generator domain satisfies that theorem's smallness hypothesis with the regular cardinal $\\aleph_1$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.1, Remark 3.1.1.3 and the degreewise smallness verification for the small-object argument in A.1.2"
+   }
+  },
+  {
+   "text": "Apply the functorial cellular factorization to $X\\to S^\\sharp$ in this slice, obtaining $X\\xrightarrow{j_X}R_S(X)\\xrightarrow{p_X}S^\\sharp$. The first map is an $I_S$-cell map and the second has the right lifting property against $I_S$. Forgetting the map to $S$ preserves the coproducts, pushouts and limit-stage colimits just described, so $j_X$ is marked anodyne. This uses the cellular assertion, not merely existence of an abstract left lifting map. Functoriality in commutative squares restricts to functoriality in $X$ over the fixed $S$. A square against an underlying generator over $S^\\sharp$ is exactly a square against the corresponding member of $I_S$. Lifts against the generators extend across their weak saturation: for a pushout use its universal property; for a transfinite composite construct compatible lifts successively and take their colimit at a limit stage; for a retract compose a lift with the retraction maps. Hence $p_X$ lifts against every marked-anodyne map. The whole construction uses small sets of squares and $\\omega_1$ stages, so every intermediate object, its marking and its structure map belong to $\\mathcal U$.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.1.3, A.1.2 small-object factorization; relative form used with Remark 3.1.1.10"
+   }
+  },
+  {
+   "text": "Use the relative lifting criterion of [lem-coef-relative-marked-anodyne-calculus]: for arbitrary small $S$, right lifting against every marked-anodyne map is equivalent to being a naturally marked Cartesian fibration over $S^\\sharp$. Step 2 has supplied this right lifting property for $p_X$, so the underlying simplicial set $Z=R_S(X)$ is a Cartesian fibration and the marked object is exactly $Z^\\natural$. Conversely the same cited equivalence says that every Cartesian fibration $q:T\\to S$, with exactly its Cartesian edges marked, lifts against all marked-anodyne maps over $S^\\sharp$; this is the direction needed for the mapping test below. This statement explicitly uses the arbitrary-base final-horn definition, so no quasicategory hypothesis on either $S$ or $Z$ is introduced. The factorization, functoriality and universe bound were constructed in Steps 1-2 rather than supplied by the criterion.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6 and Remark 3.1.1.10"
+   }
+  },
+  {
+   "text": "Let $i:A\\to B$ be any marked-anodyne map over $S$, and let $q:T\\to S$ be any small Cartesian fibration. Write $r:\\operatorname{Map}^{\\sharp}_S(B,T^\\natural)\\to\\operatorname{Map}^{\\sharp}_S(A,T^\\natural)$ for restriction. A square for $r$ against $\\partial\\Delta^n\\to\\Delta^n$, including $n=0$, is exactly a marked extension problem over $S$ from\n$$ (B\\times(\\partial\\Delta^n)^\\sharp)\\amalg_{A\\times(\\partial\\Delta^n)^\\sharp}(A\\times(\\Delta^n)^\\sharp)\\longrightarrow B\\times(\\Delta^n)^\\sharp $$\nto $T^\\natural$, where every structure map to $S$ ignores the simplex factor. This follows degree by degree from the displayed definition of the relative mapping object. The left map is the pushout product of $i$ with the marked monomorphism $(\\partial\\Delta^n)^\\sharp\\to(\\Delta^n)^\\sharp$, so it is marked anodyne by the product clause of the lifting calculus. The converse established in Step 3 gives the required marked diagonal over $S^\\sharp$. Thus $r$ has the right lifting property against all boundary inclusions; the Kan-Quillen boundary criterion makes it a trivial Kan fibration, in particular a weak homotopy equivalence. This proves the relative Cartesian-equivalence test for every $q$.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.3 and Remark 3.1.3.4, using the fully marked simplex mapping object"
+   }
+  },
+  {
+   "text": "Every generator is degreewise injective, even a marking-only generator, whose underlying simplicial map is an identity. Pushouts preserve underlying injections (in each degree, pushing out an injection of sets adds new elements without identifying old ones); a transfinite composite is an increasing union after identifying its stages; a retract of an injection is injective. The underlying simplicial map of every marked-anodyne map is consequently a monomorphism. The relative model has precisely these maps as cofibrations, and its weak equivalences are the Cartesian equivalences verified in Step 4. Thus every marked-anodyne map over $S$ is a trivial cofibration. Applying this to $j_X$ completes the replacement assertion, with the functoriality and input-universe bound already proved in Step 2.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.1, Remark 3.1.3.4 and Proposition 3.1.3.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-small-object-cell-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Definitions 3.1.1.1 and 3.1.1.8; Remark 3.1.1.3; Proposition 3.1.1.6; Remarks 3.1.1.10 and 3.1.3.4. Read online; source absent from literature/; explicit slice-smallness and mapping-space argument written by this worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +149,45 @@
    "results": "{\"t\": \"2026-10-16T20:02:23Z\", \"tool\": \"leanfinder\", \"query\": \"marked horn inner anodyne fibrant replacement relative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn.ι\"], \"digest\": \"77854f9f640bd66a\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search returned related ordinary simplicial, enriched-category or model-category declarations, but none states this marked-cone result."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedAnodyne|MarkedSSet|marked.{0,20}anodyne|CartesianFibration",
+   "results": "{\"t\": \"2026-10-16T20:40:04Z\", \"tool\": \"grep\", \"query\": \"MarkedAnodyne|MarkedSSet|marked.{0,20}anodyne|CartesianFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Kan-Quillen simplicial structure and general small-object factorization do not provide marked relative replacements. The latter is reused through the existing Mathlib leaf lem-coef-small-object-cell-factorization. Read CategoryWithFibrations.lean:37-100 and IsCardinalForSmallObjectArgument.lean:318-330,460-469."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial marked anodyne replacement in the Cartesian model structure over a simplicial base",
+   "results": "{\"t\": \"2026-10-16T20:40:04Z\", \"tool\": \"leansearch\", \"query\": \"Functorial marked anodyne replacement in the Cartesian model structure over a simplicial base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.Functor.IsCartesian.map.congr_simp\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.SimplicialObject.whiskering\"], \"digest\": \"e63f8415856640c2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Kan-Quillen simplicial structure and general small-object factorization do not provide marked relative replacements. The latter is reused through the existing Mathlib leaf lem-coef-small-object-cell-factorization. Read CategoryWithFibrations.lean:37-100 and IsCardinalForSmallObjectArgument.lean:318-330,460-469."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedAnodyne\"",
+   "results": "{\"t\": \"2026-10-16T20:40:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedAnodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Kan-Quillen simplicial structure and general small-object factorization do not provide marked relative replacements. The latter is reused through the existing Mathlib leaf lem-coef-small-object-cell-factorization. Read CategoryWithFibrations.lean:37-100 and IsCardinalForSmallObjectArgument.lean:318-330,460-469."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked anodyne fibrant replacement over any simplicial set by a Cartesian fibration",
+   "results": "{\"t\": \"2026-10-16T20:40:07Z\", \"tool\": \"leanfinder\", \"query\": \"Marked anodyne fibrant replacement over any simplicial set by a Cartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.FibrantObject\"], \"digest\": \"38cf2933adc8bafe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Kan-Quillen simplicial structure and general small-object factorization do not provide marked relative replacements. The latter is reused through the existing Mathlib leaf lem-coef-small-object-cell-factorization. Read CategoryWithFibrations.lean:37-100 and IsCardinalForSmallObjectArgument.lean:318-330,460-469."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small object factorization using marked Cartesian horn inclusions relative to a base",
+   "results": "{\"t\": \"2026-10-16T20:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"Small object factorization using marked Cartesian horn inclusions relative to a base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.SmallObject.llp_rlp_ιObj\", \"CategoryTheory.SmallObject.rlp_πObj\", \"CategoryTheory.SmallObject.functorialFactorizationData_Z_obj\", \"CategoryTheory.SmallObject.functorialFactorizationData_i_app\", \"CategoryTheory.SmallObject.hasRightLiftingProperty_πObj\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"e43269a5139e5800\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Kan-Quillen simplicial structure and general small-object factorization do not provide marked relative replacements. The latter is reused through the existing Mathlib leaf lem-coef-small-object-cell-factorization. Read CategoryWithFibrations.lean:37-100 and IsCardinalForSmallObjectArgument.lean:318-330,460-469."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -86,5 +195,20 @@
   "group": "Q111"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-marked-anodyne-replacement",
+  "worker": "stage1",
+  "summary": "Reused the newly landed relative marked-anodyne calculus instead of creating a general lifting criterion. Five steps verify the slice smallness hypotheses, construct a functorial cellular replacement, identify its exact marking, and prove the relative weak-equivalence and cofibration assertions. Clarified arbitrary-base terminology without changing any conclusion. No new nodes and no project attachment.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before derived inverse limit; foundation below lem-coef-algebroid-external-product: Marked cone straightening: Quillen unit and counit. Technical input: Relative marked-anodyne fibrant replacement. Steps 1-3 construct the relative replacement needed before the marked-cone Quillen unit/counit argument; Steps 4-5 establish its use as a relative trivial cofibration. This is a foundation for the inherited exceptional-adjoint diagram route, not a replacement of a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-b8aa75461",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-b8aa75461 (reviewer sub-agent of L); spot-checked: I read the item and all five cited node statements in full (marked-relative-cartesian-model, marked-anodyne-lifting-calculus, relative-marked-anodyne-calculus, small-object-cell-factorization [Mathlib leaf], kan-quillen-right-proper). HTT is not in literature/, so I fetched the public PDF to /tmp and checked it. Def 3.1.1.1 (p.147) has generators (1)-(4) identical to types (i)-(iv) of the lifting calculus. Rem 3.1.1.3 says countable Kan complexes suffice, giving small generation. Prop 3.1.1.6 and Rem 3.1.1.10 (pp.149-151) give the criterion over arbitrary S: RLP holds iff the map is Z^natural -> S^sharp with Z Cartesian. Rem 3.1.3.4 (p.155) shows marked anodyne implies Cartesian equivalence via a smash product. The item uses (dDelta^n)^sharp with Map^sharp_S, which matches the DAG's definition of Cartesian equivalence. The statement is faithful and not weakened; the arbitrary-base terminology matches the current model and relative-calculus nodes. Step 1: I_S is small, colimits are degreewise, the chains are chains of monomorphisms, and countable domains land in one stage below omega_1, so the aleph_1 hypothesis of the cited cellular node holds. Step 2: the cellular first leg forgets to an I-cell map, so it is marked anodyne; lifting passes from generators to the weak saturation. Step 3: the relative criterion is used in both directions. Step 4: the pushout-product clause applies because the boundary inclusion is degreewise injective; the n=0 case is included; the boundary criterion gives a trivial Kan fibration for every small Cartesian q. Step 5 is a correct elementary monomorphism argument. Edge cases checked: empty S, point S, non-quasicategorical Lambda^2_1, marking-only generators, and n=0,1. No cycle (checked the transitive dependencies), all citations are in the same unit, no tool_uses, no new nodes, and no duplicate found in the DAG. The only citer, marked-cone-straightening-quillen step 7, gets exactly what it uses. No fixes."
+ }
 }

@@ -26,9 +26,68 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-relative-join-cartesian-realization] to $R$. Write $E=E_R$ and $p:E\\to\\Delta^1$, with full fibers $E_0=\\mathcal Y$, $E_1=\\mathcal X$ and the explicit coherent cartesian transport witness $h$ for $R$. An edge $u_y:y\\to R(x_y)$ defines a mixed edge $f_y:y\\to x_y$ of $E$, using the mixed-edge correspondence of that node. Its mapping-space isomorphisms identify precomposition with $f_y$ on maps into $z\\in E_1$ with $v\\mapsto R(v)\\circ u_y$. No naturality of the initial choices $x_y,u_y$ is used.",
+   "uses": [
+    "lem-coef-infinity-relative-join-cartesian-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/024K",
+    "place": "Variant 5.2.3.19 (024K), with Remark 5.2.3.14 (024F)."
+   }
+  },
+  {
+   "text": "Test $f_y$ by [lem-coef-infinity-cocartesian-mapping-criterion]. The required inner-fibration hypothesis holds because $p$ is cartesian. If $z\\in E_1$, the two bottom mapping spaces in the criterion are $\\operatorname{Map}_{\\Delta^1}(1,1)=\\Delta^0$ and $\\operatorname{Map}_{\\Delta^1}(0,1)=\\Delta^0$. Its top map is the equivalence in the hypothesis, by step 1; therefore the square is a homotopy pullback. If $z\\in E_0$, its upper left and lower left corners are both empty: $\\operatorname{Map}_E(x_y,z)=\\varnothing$ and $\\operatorname{Map}_{\\Delta^1}(1,0)=\\varnothing$. Its lower right corner is $\\Delta^0$; the homotopy pullback of any space over $\\Delta^0$ with $\\varnothing$ is empty. Thus this square too is a homotopy pullback. All vertices of $E$ lie in one of these two fibers, so $f_y$ is $p$-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-relative-join-cartesian-realization",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TQ",
+    "place": "Corollary 5.1.2.3 (01TQ), cocartesian dual over the interval; using the existing general mapping-square criterion."
+   }
+  },
+  {
+   "text": "The only nonidentity edge of $\\Delta^1$ is $0\\to1$. For each object over $0$, step 2 supplies its cocartesian lift. For an identity edge at either base vertex, take the identity edge of the chosen object of $E$: the unital clause of [lem-coef-infinity-mapping-composition] identifies precomposition by this edge with the identity homotopy class. Choose identity representatives for the two horizontal maps in its mapping square in [lem-coef-infinity-cocartesian-mapping-criterion]; the square is then a homotopy pullback. Thus identity edges are cocartesian as well. Since $p$ is already inner, the definition [def-coef-infinity-fibrations] now says that $p$ is cocartesian. It is therefore both cartesian and cocartesian. This argument covers an empty fiber without choosing an object in it.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Proposition 6.2.6.1 (02FV), sufficiency, promotion from the mixed cocartesian lifts to a cocartesian fibration."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-bicartesian-interval-adjunction] to this $p$ and the coherent cartesian witness $h$ from step 1. Its hypotheses now hold by steps 1 and 3, so it supplies $L:E_0\\to E_1$, a coherent adjunction to the specified functor $R:E_1\\to E_0$, and its natural unit and counit. Substituting the strict fiber identifications $E_0=\\mathcal Y$ and $E_1=\\mathcal X$ in its conclusion gives exactly the displayed mapping equivalences $v\\mapsto R(v)\\circ\\eta_y$ and both coherent triangle homotopies of this item. The resulting functor is obtained by coherent transport; there is no assertion that the initially chosen pairs form a functor.",
+   "uses": [
+    "lem-coef-infinity-bicartesian-interval-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Proposition 6.2.5.4 (02FN), bicartesian direction; Proposition 6.2.1.17 (02F1), adjunct maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-bicartesian-interval-adjunction",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-relative-join-cartesian-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02FV",
+  "place": "Sufficiency proof of Proposition 6.2.6.1: explicit relative join, mapping-space cocartesian test, then bicartesian interval transport (024K, 024F, 01TQ, 02FN). Read online 2026-10-17; not archived. Replaces the erroneous comma-right-fibration argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +144,31 @@
    "results": "{\"t\": \"2026-10-16T14:54:30Z\", \"tool\": \"grep\", \"query\": \"colimit|adjunction|representab|KanExtension\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the actual directory-wide read-only search returned zero hits. StrictBicategory.lean was separately read; its bicategory structures do not state any of the three claimed results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Corepresentable mapping functors yield right adjoint functors of quasicategories",
+   "results": "{\"t\": \"2026-10-16T18:34:24Z\", \"tool\": \"leanfinder\", \"query\": \"Corepresentable mapping functors yield right adjoint functors of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Adjunction.corepresentableBy\", \"CategoryTheory.Functor.instIsCorepresentableCompObjOppositeTypeCoyonedaOpObjLeftAdjointObjIsDefined\", \"SSet.Truncated.nerve\\u2082Adj\", \"SSet.coskAdj\", \"CategoryTheory.rightAdjointOfCostructuredArrowTerminals\"], \"digest\": \"baaeb70d6d0b2888\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second reader inspected Mathlib/CategoryTheory/Adjunction/Comma.lean:35-70 and PartialAdjoint.lean:45-90; these use ordinary Category instances and Type-valued coyoneda, not arbitrary quasicategories and mapping spaces. No new leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"corepresentable\", \"adjoint\"",
+   "results": "{\"t\": \"2026-10-16T18:34:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"corepresentable\\\", \\\"adjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsCorepresentableCompObjOppositeTypeCoyonedaOpObjLeftAdjointObjIsDefined\"], \"digest\": \"bb9dcbee12c1b4be\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second reader inspected Mathlib/CategoryTheory/Adjunction/Comma.lean:35-70 and PartialAdjoint.lean:45-90; these use ordinary Category instances and Type-valued coyoneda, not arbitrary quasicategories and mapping spaces. No new leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "corepresentable|StructuredArrow|IsUniversal",
+   "results": "{\"t\": \"2026-10-16T18:34:24Z\", \"tool\": \"grep\", \"query\": \"corepresentable|StructuredArrow|IsUniversal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Generator/HomologicalComplex.lean\"], \"digest\": \"9b9d0983070f018d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: second reader inspected Mathlib/CategoryTheory/Adjunction/Comma.lean:35-70 and PartialAdjoint.lean:45-90; these use ordinary Category instances and Type-valued coyoneda, not arbitrary quasicategories and mapping spaces. No new leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-finite-poset-kan-extension",
@@ -96,5 +176,20 @@
   "group": "Q33"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-local-adjoint-criterion",
+  "worker": "stage1",
+  "summary": "Second reading replaced the false comma-right-fibration claim by the actual relative-join proof of Kerodon 02FV. Two general statement-only foundations give the cartesian relative-join realization and the adjunction of bicartesian interval transports. The existing cocartesian mapping-square criterion proves every required mixed lift is cocartesian, including the empty mapping-space cases. No item statement change, no Mathlib leaf, no use of the pointwise criterion (which now depends on this item).",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the general universal-arrow criterion used to assemble pointwise Kan universal arrows into a coherent functor and adjunction, through the stable-model foundation and suspension-square grid."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NS-fe5a556ac",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-fe5a556ac (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-coef-infinity-relative-join, lem-coef-infinity-mapping-composition, lem-coef-infinity-cocartesian-mapping-criterion). Checked the sources on Kerodon: 02FV sufficiency builds the relative join C*_C D, which is cartesian over Delta^1 (5.2.3.15/024K, with h witnessing G as contravariant transport); it shows each universal arrow gives a cocartesian edge (5.1.2.3), so U is cocartesian; 02FN (6.2.5.4) then gives the left adjoint, and the right adjoint is the contravariant transport. The four steps follow this exactly. Item statement is unchanged, objectwise, with the right map orientation and unit/counit types; nothing is weakened. Step 1: in Y*_Y X, mixed edges y->x are exactly pairs with sigma: y->Rx. Mapping spaces: Map(y,x) is isomorphic to Map_Y(y,Rx) and Map(x,y) is empty. In a 2-simplex sigma restricts to u and R(v), so precomposition corresponds to v->R(v)u. Step 2: inner because cartesian. For z in E1 the square is pt/pt under the hypothesis equivalence; for z in E0 both left corners are empty, so it is a homotopy pullback. Step 3 (elementary): identity edges are cocartesian by the unital clause, and the lift over 0->1 comes from step 2; the empty-fiber case is covered. Step 4: hypotheses of the bicartesian node hold, h is over Delta^1, and the variance L:E0->E1 left adjoint to R is correct. New nodes are statement-only and self-contained, with TeX correct and three kinds of search recorded. Tested R=id, X empty, X=Y=pt, and one or both fibers empty. Neither new node restates the item. Duplicate grep (02FN/024K/02FV/02FM, bicartesian, transport, relative join): the pointwise-adjoint and parametric-universal-arrows nodes are users of this item, not duplicates; the fiberwise-relative-join and arrow-join nodes are about other matters; the 02FM hits in sec-smooth-base-change are unrelated Stacks tags. The 119-node dependency closure is acyclic with no missing or merged nodes. All cited statements are in unit sk-prop-sf-biduality-general; there are no tool_uses and no SGA citation. Minor report-only issue: the opening file list still names the withdrawn comma nodes, but later sections supersede it. No fixes."
+ }
 }

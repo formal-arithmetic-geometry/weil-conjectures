@@ -29,9 +29,119 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-infinity-filtered-cofinal-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each category choose an accessibility rank $\\lambda_v$ and for each functor a preservation rank $\\rho_e$, using [def-coef-presentable-infinity-category] and the stated meaning of accessible functor. Choose a small infinite cardinal $\\mu$ at least all these finitely many ranks, and set $\\kappa=(2^\\mu)^+$. A successor cardinal $\\theta^+$ is regular: a union of at most $\\theta$ sets each of size at most $\\theta$ still has size at most $\\theta$, so no shorter cofinal sequence reaches $\\theta^+$. For $a<\\kappa$ and $b<\\lambda_v\\leq\\mu$, one has $a\\leq2^\\mu$ and $a^b\\leq(2^\\mu)^\\mu=2^\\mu<\\kappa$ (the finite exponent cases are included). Thus $\\lambda_v\\ll\\kappa$, and the rank-enlargement clause of [lem-coef-accessible-infinity-rank-calculus] makes every category $\\kappa$-accessible. A $\\kappa$-filtered category is $\\rho_e$-filtered, so every $F_e$ preserves its colimits. Every category is locally small by its accessibility definition. In the empty-family case take $\\mu=\\aleph_0$; all bounds below remain vacuous. The current compactness definition tests the corepresented cocone in $\\mathcal S_{\\mathcal U\\prime}$. For locally small categories the small-space comparison calculations below (steps 2 and 7) give the same test: [lem-coef-spaces-small-colimits-universe] says that the fully faithful inclusion $\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal U\\prime}$ preserves small colimits. Hence the colimit of a small diagram of small mapping-space models, when viewed in the larger universe, is still its colimit; the canonical comparison is an equivalence in one universe if and only if it is in the other. The mapping-space models are coherent and compatible with postcomposition by [lem-coef-space-transport-classification]. Thus the mapping-space calculations in steps 2 and 7 apply to the updated definition, including its larger-universe convention.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-accessible-infinity-rank-calculus",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9; common first rank in the proof of Proposition 5.4.6.6; elementary cardinal calculation as in Definition A.2.6.3"
+   }
+  },
+  {
+   "text": "For every $v$, $\\mathcal C_v$ is $\\kappa$-accessible by step 1, so its full subcategory of all $\\kappa$-compact objects is essentially small by [lem-coef-accessible-compact-slice-density]. Choose small models. For each target category $\\mathcal C_v$, collect the images of the objects of these models under all $F_e$ with $t(e)=v$. This is a small family: it is indexed by a finite disjoint union of small object sets. Apply the existing [lem-coef-infinity-common-compactness-rank] to this family in $\\mathcal C_v$, obtaining an infinite regular $\\eta_v$ for which every image in that family is $\\eta_v$-compact. Choose a small infinite $\\nu$ at least all the finitely many $\\eta_v$ and at least $\\kappa$, and put $\\tau=(2^\\nu)^+$. The calculation of step 1 gives regular uncountable $\\tau>\\kappa$ and $\\kappa\\ll\\tau$. Compactness at any smaller rank implies compactness at $\\tau$, since a $\\tau$-filtered diagram is filtered at the smaller rank. Thus the $F_e$ send $\\kappa$-compact objects to $\\tau$-compact objects; every category is $\\tau$-accessible by rank enlargement. A $\\tau$-compact $x$ in a source category is a retract of a $\\tau$-small $\\kappa$-filtered colimit of $\\kappa$-compact objects by the bounded-retract clause. Apply $F_e$, which preserves this colimit. Its values on the diagram are $\\tau$-compact, so [lem-coef-compact-small-colimits] makes the image colimit $\\tau$-compact. Compactness is closed under retracts: the canonical comparison for the retract's mapping functor is a retract of the corresponding comparison for the original object; a retract of an equivalence is an equivalence (retract its inverse). Consequently $F_e(x)$ is $\\tau$-compact. Preservation of $\\tau$-filtered colimits follows already from preservation at $\\kappa$. Since every $\\mathcal C_v$ is $\\tau$-accessible, [lem-coef-accessible-compact-slice-density] with cardinal $\\tau$ gives essential smallness of every $\\mathcal C_v^\\tau$.",
+   "uses": [
+    "lem-coef-accessible-infinity-rank-calculus",
+    "lem-coef-compact-small-colimits",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-common-compactness-rank",
+    "lem-coef-accessible-compact-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9 and its bounded-presentation proof; cardinal choice in Proposition 5.4.6.6; Corollary 5.3.4.15"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-compact-slice-density] with its cardinal equal to $\\tau$ to the $\\tau$-accessible category $\\mathcal C_v$ of step 2 and the object $x=c$. Its replete full subcategory $D$ of all $\\tau$-compact objects is $\\mathcal C_v^\\tau$, and its $D_{/c}$ is the full subcategory of the coherent slice $\\mathcal C_v{}_{/c}$ (arrows into $c$, coherent commuting triangles, all higher compatibilities) on arrows with $\\tau$-compact source; this is exactly $K_v(c)$. The cited statement says that $K_v(c)$ is essentially small and $\\tau$-filtered, and that its source projection $K_v(c)\\to\\mathcal C_v$ with the tautological cocone to $c$ is a colimit diagram, colimits indexed by $K_v(c)$ being taken after passage to a small equivalent quasicategory. This is the asserted canonical colimit $c$. The cited statement holds for every $\\tau$-accessible quasicategory, and step 7 applies it to a cocone category.",
+   "uses": [
+    "lem-coef-accessible-compact-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.2, Corollary 5.3.5.4 and Lemma 5.1.5.3: the canonical compact-source slice of an accessible category"
+   }
+  },
+  {
+   "text": "A diagram in $\\mathcal C_{/c}$ whose sources have a colimit $d$ in $\\mathcal C$ has a colimit over $c$ with source $d$. Indeed, the diagram's arrows induce $d\\to c$, and the mapping space from $(d\\to c)$ to $(y\\to c)$ is the homotopy fiber of $\\operatorname{Map}(d,y)\\to\\operatorname{Map}(d,c)$ at the specified arrow. This is the dual fixed-boundary mapping formula of [lem-coef-infinity-join-cone-calculus]. Replacing the two mapping spaces by their limits over the source diagram, using [lem-coef-infinity-yoneda-presheaf-limits], identifies this fiber with the limit of the slice mapping spaces. Limits commute with taking this fiber by their universal property. Thus the slice cocone is colimiting. Now let the diagram have $\\tau$-small $\\kappa$-filtered shape and sources in $\\mathcal C^\\tau$. Its source colimit exists by $\\kappa$-accessibility. It is $\\tau$-compact by [lem-coef-compact-small-colimits], since the category admits $\\tau$-filtered colimits and the diagram is $\\tau$-small. The slice colimit therefore belongs to $K_v(c)$, a full subcategory, so is its colimit too. Applying $F_e$ preserves the source colimit by step 1; its source remains $\\tau$-compact by step 2. The same slice mapping calculation shows that its image is the colimit in $K_{t(e)}(F_e(c))$. This proves existence, computation and preservation of all the colimits claimed in the item.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-compact-small-colimits",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.15; slice colimits from the coherent mapping-space universal property"
+   }
+  },
+  {
+   "text": "We will use an elementary consequence of the universal property of colimits of spaces. For any small diagram $X:I\\to\\mathcal S$, every component of $\\operatorname{colim}_I X$ is represented by a component of some $X(i)$. To verify it, maps from a space $T$ to a discrete set $B$ are exactly functions $\\pi_0(T)\\to B$ (a simplicial map to a discrete set is constant on each edge component, with no additional higher data). Testing the colimit against every discrete $B$ therefore identifies $\\pi_0(\\operatorname{colim} X)$ with the ordinary colimit of the sets $\\pi_0(X(i))$; this ordinary colimit is the quotient of their disjoint union by the identifications induced by arrows. Every element of that quotient has a representative in a summand. Colimits of small spaces and their mapping-space universal property are provided by the two cited nodes. Consequently, when a compactness comparison is an equivalence of spaces, any prescribed map into the colimit factors through some stage up to a path in the mapping space, with exactly the coherences that such a path records.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary component factorization used in the proof of Lemma 5.4.6.1; colimit universal property"
+   }
+  },
+  {
+   "text": "Fix an edge functor $F:\\mathcal C\\to\\mathcal D$, an object $c\\in\\mathcal C$, and a diagram $h:K\\to K_{\\mathcal C}(c)$ where $K$ is $\\kappa$-small and weakly contractible as required in the definition of $\\kappa$-cofinality. Write $p:K\\to\\mathcal C$ for its source diagram and $\\bar c\\in\\mathcal C_{p/}$ for its coherent cocone to $c$. Both $p$ and $Fp$ have $\\tau$-compact vertex values by step 2. Apply [lem-coef-accessible-compact-cocones] with $\\alpha=\\kappa$, $\\beta=\\tau$ to obtain $\\tau$-accessible categories $\\mathcal E=\\mathcal C_{p/}$ and $\\mathcal H=\\mathcal D_{Fp/}$, whose $\\tau$-compact objects are detected by their apices. The coherent functor $T:\\mathcal E\\to\\mathcal H$ applies $F$ to every cocone. It preserves $\\tau$-filtered colimits: the cited node creates and detects them on apices, and $F$ preserves these apex colimits. It carries $\\tau$-compact objects to $\\tau$-compact objects because $F$ does so on apices. Coherent cocones and their fixed-boundary mapping spaces here agree with the join models by [lem-coef-infinity-join-cone-calculus]; hence these statements concern the full coherent cocone categories, not their ordinary homotopy categories. The cocone categories appearing in the cofinality test are themselves $\\tau$-filtered: if $I$ is either compact-source slice and $h:K\\to I$ is the fixed diagram, a diagram $L\\to I_{h/}$ with $L$ $\\tau$-small is a map $K\\star L\\to I$ restricting to $h$. The join has fewer than $\\tau$ nondegenerate simplices, since $K$ is $\\kappa$-small, $\\kappa<\\tau$, and $\\tau$ is uncountable regular. A cocone on this join exists by $\\tau$-filteredness of $I$ and is a map $K\\star L^{\\triangleright}\\to I$, giving the required cocone in $I_{h/}$. The case $L=\\varnothing$ also gives nonemptiness. This verifies the filteredness required for the cited definition of weak cofinality.",
+   "uses": [
+    "lem-coef-accessible-compact-cocones",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-filtered-cofinal-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, applied in the proof of Lemma 5.4.6.1; Definition 5.4.5.8"
+   }
+  },
+  {
+   "text": "An object of $(K_{\\mathcal D}(F(c)))_{Fh/}$ is a cocone $\\bar b\\in\\mathcal H$ with $\\tau$-compact apex $b$ and a specified arrow $\\phi:\\bar b\\to T(\\bar c)$ in $\\mathcal H$. The arrow includes the triangle to $F(c)$ and all compatibilities with the boundary $Fp$. Since $\\mathcal E$ is $\\tau$-accessible, [lem-coef-accessible-compact-slice-density] with cardinal $\\tau$ and $x=\\bar c$ gives a small $\\tau$-filtered compact-source presentation of $\\bar c$ in $\\mathcal E$: the source projection of the essentially small $\\tau$-filtered slice $(\\mathcal E^\\tau)_{/\\bar c}$ with its tautological cocone is a colimit diagram. Its image under $T$ has colimit $T(\\bar c)$ by step 6. The object $\\bar b$ is $\\tau$-compact in $\\mathcal H$ by [lem-coef-accessible-compact-cocones], so compactness gives the equivalence from the filtered colimit of $\\operatorname{Map}_{\\mathcal H}(\\bar b,T(\\bar a))$ to $\\operatorname{Map}_{\\mathcal H}(\\bar b,T(\\bar c))$. Step 5 factors the prescribed $\\phi$ through a stage $T(\\bar a)$ up to a path in this mapping space. Here $\\bar a\\to\\bar c$ is a $\\tau$-compact cocone in $\\mathcal E$ over $c$; its apex $a$ is $\\tau$-compact by the same cocone theorem. Thus it is an object of $(K_{\\mathcal C}(c))_{h/}$. The factorization arrow $\\bar b\\to T(\\bar a)$, together with that path over $T(\\bar c)$, is precisely a morphism from the chosen target cocone to the image of this source cocone in $(K_{\\mathcal D}(F(c)))_{Fh/}$. This proves weak cofinality on every required cocone category, hence $\\kappa$-cofinality by [lem-coef-infinity-filtered-cofinal-pullback]. Weak contractibility of $K$ is allowed but the argument in fact works for all $\\kappa$-small $K$. All presentations used here have small equivalent indexing models, so no colimit indexed by a large category was invoked.",
+   "uses": [
+    "lem-coef-accessible-compact-cocones",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-filtered-cofinal-pullback",
+    "lem-coef-accessible-compact-slice-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma 5.4.6.1, with the reduction to cocone categories and the compact mapping-space factorization written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-accessible-compact-cocones",
+  "lem-coef-accessible-compact-slice-density",
+  "lem-coef-accessible-infinity-rank-calculus",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-infinity-common-compactness-rank",
+  "lem-coef-infinity-filtered-cofinal-pullback",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Sections 5.3.5, 5.4.2 and proof of Lemma 5.4.6.1; detailed assembly by Q57 after online reading; HTT not archived in literature/"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -102,10 +212,38 @@
    "results": "{\"t\": \"2026-10-16T19:50:07Z\", \"tool\": \"grep\", \"query\": \"cofinal|filtered|compact|presentable|pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: zero source hits in the quasicategory directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform compact approximation slices of accessible infinity functors are kappa cofinal",
+   "results": "{\"t\": \"2026-10-16T20:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform compact approximation slices of accessible infinity functors are kappa cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\"], \"digest\": \"79a78e4742d6f2bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic and Loogle hits use ordinary Category instances, Type-valued presheaves, and ordinary comma categories. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77, Dense.lean:34-79, Limits/Indization/IndObject.lean:53-70, Presentable/SharplyLT/Basic.lean:41-58 and AlgebraicTopology/Quasicategory/Basic.lean:34-43. The ordinary Ind and cardinal statements do not specialize to coherent mapping-space compactness or right fibrations of quasicategories. The broad grep also matches words such as induction; none is the asserted theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinality of compact source slices induced by accessible functors of quasicategories",
+   "results": "{\"t\": \"2026-10-16T20:18:37Z\", \"tool\": \"leansearch\", \"query\": \"Cofinality of compact source slices induced by accessible functors of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible.casesOn\", \"CategoryTheory.Functor.IsCardinalAccessible.recOn\", \"CategoryTheory.Functor.instIsCardinalAccessibleComp\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.Functor.IsAccessible.mk\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.IsFinitelyAccessible\"], \"digest\": \"bd1869147592ff63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic and Loogle hits use ordinary Category instances, Type-valued presheaves, and ordinary comma categories. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77, Dense.lean:34-79, Limits/Indization/IndObject.lean:53-70, Presentable/SharplyLT/Basic.lean:41-58 and AlgebraicTopology/Quasicategory/Basic.lean:34-43. The ordinary Ind and cardinal statements do not specialize to coherent mapping-space compactness or right fibrations of quasicategories. The broad grep also matches words such as induction; none is the asserted theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-16T20:18:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.instIsClosedUnderIsomorphismsIsCardinalPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\", \"CategoryTheory.isCardinalPresentable_of_iso\", \"CategoryTheory.instIsCardinalPresentableObjIsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_le\"], \"digest\": \"76e31efea567382c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic and Loogle hits use ordinary Category instances, Type-valued presheaves, and ordinary comma categories. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77, Dense.lean:34-79, Limits/Indization/IndObject.lean:53-70, Presentable/SharplyLT/Basic.lean:41-58 and AlgebraicTopology/Quasicategory/Basic.lean:34-43. The ordinary Ind and cardinal statements do not specialize to coherent mapping-space compactness or right fibrations of quasicategories. The broad grep also matches words such as induction; none is the asserted theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ofinal|[Cc]ompact|[Aa]ccessible",
+   "results": "{\"t\": \"2026-10-16T20:18:36Z\", \"tool\": \"grep\", \"query\": \"[Cc]ofinal|[Cc]ompact|[Aa]ccessible\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic and Loogle hits use ordinary Category instances, Type-valued presheaves, and ordinary comma categories. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77, Dense.lean:34-79, Limits/Indization/IndObject.lean:53-70, Presentable/SharplyLT/Basic.lean:41-58 and AlgebraicTopology/Quasicategory/Basic.lean:34-43. The ordinary Ind and cardinal statements do not specialize to coherent mapping-space compactness or right fibrations of quasicategories. The broad grep also matches words such as induction; none is the asserted theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-infinity-pullback",
@@ -113,5 +251,21 @@
   "group": "Q11"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-compact-approximation",
+  "worker": "stage1",
+  "summary": "Kept the statement; proved common sharp cardinal choices, compact preservation via bounded retract presentations, canonical compact-source density from the existing lem-coef-accessible-compact-slice-density, closure and preservation of slice colimits, and the full cocone-category cofinality factorization. Two statement-only foundational nodes; no ordinary-category Mathlib result was mistaken for a quasicategorical result. Second reading reuses the existing common-rank node instead of duplicating eventual compactness and spells out filteredness of the cocone categories used in weak cofinality. Maintainer reading: replaced the restricted-Yoneda re-derivation (old steps 3-4) by a citation of the existing lem-coef-accessible-compact-slice-density, dropped the new restricted-Yoneda node, and removed the rank node's essential-smallness clause, which that existing node supplies where used.",
+  "blueprint": "The current main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2 computes the finite-coefficient derived mapping adjunction before the inverse limit. Its compact approximation infrastructure is reached through the recorded seven intermediate nodes. The blueprint has no literal accessible-category or compact-slice sentence; the seven steps supply that lower-level infrastructure following the HTT route recorded by the parent, without changing the unit or its geometric proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-e1cdc65fc",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-e1cdc65fc (reviewer sub-agent of L); spot-checked: FIX, one fault (C5). I read the item, the three new nodes and every cited statement in full and checked them against HTT 5.3.5.1, 5.3.5.10-11, 5.4.2.2, 5.4.2.8-9, 5.4.2.4, 5.4.2.11, 5.4.5.14-15, 5.4.6.1 and 5.4.6.6. The mathematics is correct. Cardinals: (2^mu)^+ is regular and sharply larger than each lambda_v. Step 2 checks every hypothesis of compact-small-colimits at rank tau and shows retracts of compact objects are compact. The cocone node holds with alpha=kappa and beta=tau; it assumes alpha << beta, more than the argument needs, so nothing is false. Weak cofinality factors phi through a compact-apex stage in D_{Fp/}. Edge cases checked: empty family, empty accessible category, Set, identity and constant functors, K empty or a point. The C5 fault: old steps 3-4 and the new node lem-coef-accessible-restricted-yoneda-ind re-derive what the existing lem-coef-accessible-compact-slice-density states (same unit, unsplit). It gives the compact-source slice's essential smallness, its tau-filteredness and its canonical colimit. The rank node's first clause (C^gamma essentially small) is also supplied by that node wherever it is used. Repairs in fixes/: the item's steps 3-4 become one step citing compact-slice-density, and steps 2 and 7 (old 8) cite it too; steps are renumbered and proof_deps recomputed. The statement and stmt_deps are unchanged. The essential-smallness clause is removed from the rank node. The restricted-Yoneda node is dropped, with no citation left. No cycle and no tool use. The report's HTT 5.4.6.1 source-error note (the test shape must be kappa-small) is correct and needs no statement change. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ }
 }

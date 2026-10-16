@@ -30,9 +30,127 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=\\operatorname{Fun}(I,\\mathcal M_c)$, $\\mathcal B=N(\\mathcal M_c)[W^{-1}]_\\infty$ and $\\mathcal P=\\operatorname{Fun}(N(I),\\mathcal B)$. Check [lem-coef-cocomplete-cofibration-localization] for both $\\mathcal M_c$ and $\\mathcal D$, with pointwise cofibrations in the latter. By [lem-coef-lifting-class-closure], the two ground left lifting classes $C$ and $C\\cap W$ contain identities, are composition and retract closed, and are pushout closed. Isomorphisms have both lifting properties, so belong to $C\\cap W$. A coproduct of left lifting maps has that lifting property: restrict a square to each summand, choose lifts, and assemble them. Thus coproducts of cofibrant objects are cofibrant; pushouts along cofibrations stay cofibrant since the other leg's target is cofibrant and its map into the pushout is a cofibration. Ground functorial factorization of diagram arrows gives natural pointwise factorizations with cofibrant middle objects. Pushouts and coproducts in $\\mathcal D$ are computed pointwise; their universal properties follow by restricting a transformation to each component. All weak-equivalence axioms are pointwise. These are exactly the hypotheses of the cocompletion lemma, which gives $\\mathcal U$-small colimits in $\\mathcal B,\\mathcal A_I$ and preservation by their localization maps of initial objects, coproducts and cofibration pushouts. By [lem-coef-coherent-diagram-coyoneda], $\\mathcal P$ has pointwise $\\mathcal U$-small colimits. Evaluation followed by localization inverts $W_I$, since the components are equivalences and [lem-cbc-enhanced-functor-cone-calculus] detects equivalences componentwise. The localization universal property therefore gives $\\Theta:\\mathcal A_I\\to\\mathcal P$. Before localization this functor preserves initial objects, coproducts and cofibration pushouts pointwise. The functor clause of the cocompletion lemma makes $\\Theta$ preserve all $\\mathcal U$-small colimits.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual of Definition 7.7.2, Proposition 7.7.4, Theorem 7.7.9; proof of Theorem 7.9.8 through (7.9.8.2). Ground-model and pointwise axiom checks expanded."
+   }
+  },
+  {
+   "text": "The strict formula gives $E_i\\dashv\\operatorname{ev}_i$ on cofibrant objects: a transformation $E_iX\\to D$ is determined by its restriction $X\\to D(i)$ to the identity summand, and the inverse sends $a:X\\to D(i)$ on the $u:i\\to j$ summand to $D(u)a$. The two composites are identities by naturality and the identity arrow in $I$. Evaluation preserves weak equivalences. To show that $E_i$ does too, apply [lem-coef-brown-split-factorizations] to every member $f$ of a small family of weak equivalences between cofibrant objects. Write $f=pi$ and $ps=1$ with $p\\in F\\cap W$ and $i,s\\in C$. Two-out-of-three makes $i,s$ trivial cofibrations. Their coproducts are trivial cofibrations by the summand lifting argument of Step 1. Since $(\\coprod p)(\\coprod s)=1$, two-out-of-three makes $\\coprod p$ a weak equivalence, and hence also $\\coprod f$. This proves the assertion for the $\\operatorname{Hom}_I(i,j)$-indexed coproducts; their values are cofibrant by Step 1. The empty coproduct gives the identity on the initial object. Consequently $E_i$ and evaluation are relative functors. The free construction is contravariantly functorial in $i$, with $a:i\\to i'$ acting by $u:i'\\to j\\mapsto ua:i\\to j$. The finite-product preservation of localization in [lem-coef-system-localization-universal] descends this bifunctor to\n$$T:N(I)^{\\mathrm{op}}\\times\\mathcal B\\longrightarrow\\mathcal A_I,\\qquad T(i,qX)=q_I(E_iX).$$",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, (7.9.8.3)-(7.9.8.5); Brown factorization argument for coproduct weak equivalences supplied explicitly."
+   }
+  },
+  {
+   "text": "Descend the ordinary adjunction's unit and counit through the entire-functor-category localization property. The product clause in [lem-coef-system-localization-universal] permits all variables to be localized together. Fully faithful restriction descends the triangle identities and their compatibility with the transformations. More explicitly, if $U_i=\\operatorname{ev}_i^L$ and $T_i=T(i,-)$, the two maps between mapping spaces send $f:T_ix\\to F$ to $U_i(f)\\eta_x$, and $g:x\\to U_iF$ to $\\epsilon_F T_i(g)$. Naturality and the triangles reduce their composites to $f$ and $g$; whiskering the same transformations acts on whole simplices, so these are homotopy-inverse maps of spaces, coherently in $i,x,F$. Hence\n$$\\operatorname{Map}_{\\mathcal A_I}(T(i,x),F)\\simeq\\operatorname{Map}_{\\mathcal B}(x,U_iF).$$\nPreservation of coproducts by $q$ in Step 1 identifies $\\Theta T(i,qX)$ with $i!qX$, including the maps in $i$ and $X$: both send the $u$-summand by composition in $I$. Fully faithful restriction extends this identification to all of $N(I)^{\\mathrm{op}}\\times\\mathcal B$, giving $\\Theta T(i,x)\\simeq i!x$. Under this identification the evaluation adjunction of [lem-coef-coherent-diagram-coyoneda] identifies the actual map on mapping spaces induced by $\\Theta$ with the identity of $\\operatorname{Map}_{\\mathcal B}(x,U_iF)$, since both adjunct maps restrict to the identity summand. Thus that map on mapping spaces is an equivalence, without asserting full faithfulness of $\\Theta$ on other objects.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.1.14 and Theorem 7.9.8, (7.9.8.7)-(7.9.8.11); explicit maps and triangle calculation for descending the free/evaluation adjunction."
+   }
+  },
+  {
+   "text": "Fix any object $F\\in\\mathcal A_I$ and write $J=N(I)^{\\mathrm{op}}\\times\\mathcal B$. Form the two relative slices\n$$S_F=J\\times_{T,\\mathcal A_I}(\\mathcal A_I)_{/F},\\qquad R_F=J\\times_{(i,x)\\mapsto i!x,\\mathcal P}\\mathcal P_{/\\Theta F}.$$\nUse the join-slice model of [lem-coef-infinity-slice-right-fibration]. Both projections to $J$ are right fibrations: pullback preserves each horn lifting property by viewing the same square in the original category. Their fibers at $(i,x)$ are the Kan spaces $\\operatorname{Map}_{\\mathcal A_I}(T(i,x),F)$ and $\\operatorname{Map}_{\\mathcal P}(i!x,\\Theta F)$. The coherent identification $\\Theta T\\simeq i!(-)$ of Step 3 induces the map $h:S_F\\to R_F$ over $J$, and Step 3 says its fiber maps are equivalences. When the identification is represented by a coherent natural equivalence rather than a strict equality of simplicial maps, pull back $\\mathcal P_{/\\Theta F}$ first along $\\Theta T$; composition with that natural equivalence identifies its fibers and total right fibration with the displayed $R_F$. Explicitly, precompose each arrow to $\\Theta F$ with the chosen natural equivalence or its inverse; their inverse homotopies, whiskered with that arrow, give the two inverse transformations on relative slices. This works on every simplex, not just on vertices. Thus all comparisons retain the homotopies of the original cocones. This is precisely the relative-slice comparison in (7.9.8.12).",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, (7.9.8.11)-(7.9.8.12); join-slice definitions and their fiber descriptions made explicit."
+   }
+  },
+  {
+   "text": "Here is the equivalence test for this particular $h$, using existing smaller nodes instead of a new right-fibration theorem. For $e\\in(S_F)_b$, $e'\\in(S_F)_{b'}$, [lem-cbc-right-fibration-morphism-space] writes $\\operatorname{Map}_{S_F}(e,e')$ as the homotopy fiber at $e$ of the transport map $\\operatorname{Map}_J(b,b')\\to(S_F)_b$; the same formula holds in $R_F$. Applying $h$ takes each lifted edge to a lifted edge with the same target. The contractible compatible choice of such lifts in that node gives a commuting square up to coherent homotopy between the transport maps. Its map on the common source $\\operatorname{Map}_J(b,b')$ is the identity, and its map on the target fibers is the equivalence $h_b$. Apply [lem-coef-spaces-homotopy-fiber-detection] to this square. Both horizontal comparison maps are equivalences, so the induced map on the two homotopy fibers is an equivalence. Thus $h$ is fully faithful. It is essentially surjective as well: every vertex $r$ over $b$ is joined in the Kan fiber $(R_F)_b$ to some $h(e)$, since $h_b$ induces a bijection on components. A path in that Kan fiber is an equivalence in $R_F$; its inverse and the two inverse triangles are obtained by Kan horn fillings. The full replete essential image is therefore all of $R_F$. By [lem-coef-infinity-full-essential-image], $h$ has a coherent quasi-inverse. All categories and fibers are taken in one larger universe, which is allowed here even though $J$ need not be $\\mathcal U$-small.",
+   "uses": [
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8 after (7.9.8.12), using Theorem 4.1.16; its consequence here derived from the stated mapping-space formula and equivalence-onto-essential-image criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-diagram-coyoneda] to $\\Theta F$. It supplies a final map $k:K\\to R_F$ with $K$ a $\\mathcal U$-small simplicial set and the co-Yoneda colimit cocone on $k$. Compose $k$ with a quasi-inverse of $h$ to obtain $\\widetilde k:K\\to S_F$, so that $h\\widetilde k\\simeq k$. This map is final: for any diagram on $S_F$, precomposition with the two mutually inverse equivalences $h,h^{-1}$ identifies its cocones with those of the corresponding diagram on $R_F$; the two natural equivalences of composites give inverse equivalences of these cocone categories. The defining finality of $k$ then gives exactly finality of $\\widetilde k$. Form the $\\mathcal U$-small coherent colimit\n$$G_F=\\operatorname{colim}_{K}\\bigl(T\\circ\\operatorname{pr}_J\\circ\\widetilde k\\bigr)\\quad\\hbox{in }\\mathcal A_I.$$\nThe tautological arrows in the slice supply a coherent cocone to $F$, hence a map $a_F:G_F\\to F$. Step 1 makes $\\Theta$ preserve this colimit. The equivalence $h\\widetilde k\\simeq k$ identifies the image of the entire cocone $a_F$ with the canonical co-Yoneda cocone on $k$, using $\\Theta T(i,x)\\simeq i!x$. The co-Yoneda statement therefore says that the actual map $\\Theta(a_F)$ is an equivalence. The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] justifies this identification by its mapping-space universal property. No colimit indexed by an unrestricted large relative slice has been taken.",
+   "uses": [
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, (7.9.8.12)-(7.9.8.14), and Lemma 6.7.5. Small final indexing map and preservation of the actual cocone, not only its apex."
+   }
+  },
+  {
+   "text": "The evaluation of $\\Theta(a_F)$ at $i$ is $\\operatorname{ev}_i^L(a_F)$. Since $\\Theta(a_F)$ is an equivalence, all these evaluations are equivalences. Apply [lem-coef-strict-diagram-evaluation-conservative], with exactly the original model hypotheses and with the original $\\mathcal U$-small $I$. It gives that $a_F$ is an equivalence. In particular every $F$ is a $\\mathcal U$-small coherent colimit of objects of the form $T(i,x)$, up to equivalence. This uses only equivalence detection in the strict-diagram localization, not the rectification theorem which the item helps to prove.",
+   "uses": [
+    "lem-coef-strict-diagram-evaluation-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, conservativity paragraph preceding (7.9.8.7), and final paragraph after (7.9.8.14)."
+   }
+  },
+  {
+   "text": "It remains to check that the objects $T(i,x)$ used in Step 7 belong to the prescribed closure, although $x$ is an arbitrary object of $\\mathcal B$. The localization universal property implies that $q:N(\\mathcal M_c)\\to\\mathcal B$ is essentially surjective, as follows. Let $\\mathcal B_0$ be the full subcategory on objects equivalent to some $qX$ and factor $q$ through $q_0:N(\\mathcal M_c)\\to\\mathcal B_0$. It still inverts $W$, since inverses and their witnesses between vertices of a full subcategory lie in that subcategory. Universality produces $r:\\mathcal B\\to\\mathcal B_0$ with $rq\\simeq q_0$. For the inclusion $j:\\mathcal B_0\\to\\mathcal B$, fully faithful restriction along $q$ takes $jr$ and the identity to equivalent functors, so $jr\\simeq1_{\\mathcal B}$. Therefore every $x$ is equivalent to an object of $\\mathcal B_0$ and hence to a $qX$. Functoriality gives $T(i,x)\\simeq T(i,qX)=q_I(E_iX)$. Every full replete colimit-closed subcategory containing the stipulated free diagrams thus contains the whole $K$-diagram of Step 6, its colimit $G_F$, and the equivalent object $F$. This proves the generation assertion. If $I$ is empty, $J$ and the indexing $K$ are empty; the argument uses the empty colimit, and the strict diagram category and its localization are terminal. For $I=*$, $E_*X=X$ and the conclusion reduces to essential surjectivity of localization. No projective model structure is used.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, final paragraph on printed p. 412; essential surjectivity of the localization and the empty indexing case expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-lifting-class-closure",
+  "lem-coef-cocomplete-cofibration-localization",
+  "lem-coef-coherent-diagram-coyoneda",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-system-localization-universal",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-strict-diagram-evaluation-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient-adjunction calculation. Expanded foundation following Cisinski, Higher Categories and Homotopical Algebra, Theorem 7.9.8, (7.9.8.1)-(7.9.8.14), online July 30, 2026 revision, printed pp. 409-412. The source is not archived in literature/; WANTED recorded in report.md. Relative-slice equivalence and localization essential-surjectivity arguments supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +207,59 @@
    "results": "{\"t\": \"2026-10-16T19:50:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorHoCatAdjCounit'\", \"HomotopicalAlgebra.BifibrantObject.ιCofibrantObjectLocalizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorHoCatCounitHoCatAdj\"], \"digest\": \"360a1695ef513181\"}",
    "date": "2026-10-16",
    "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free strict diagrams generate under small coherent colimits the localization of diagrams of cofibrant objects in an arbitrary model category",
+   "results": "{\"t\": \"2026-10-16T20:20:38Z\", \"tool\": \"leanfinder\", \"query\": \"Free strict diagrams generate under small coherent colimits the localization of diagrams of cofibrant objects in an arbitrary model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"1b2793aa18e885bd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CofibrantObject\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:20:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*diagram|diagram.*homotopy.*dens|homotopy.*dens.*diagram",
+   "results": "{\"t\": \"2026-10-16T20:20:39Z\", \"tool\": \"grep\", \"query\": \"free.*diagram|diagram.*homotopy.*dens|homotopy.*dens.*diagram\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free evaluation diagrams generate infinity localization of strict model category diagrams under small colimits",
+   "results": "{\"t\": \"2026-10-16T20:20:40Z\", \"tool\": \"leansearch\", \"query\": \"Free evaluation diagrams generate infinity localization of strict model category diagrams under small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.evaluationJointlyReflectsColimits\", \"HomologicalComplex.instPreservesColimitEval\", \"CategoryTheory.Limits.FormalCoproduct.isColimitEvalMapCoconeCofan\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.lift\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.fac\", \"CategoryTheory.ObjectProperty.instSmallStrictLimitsOfShapeOfSmallOfLocallySmall\"], \"digest\": \"24cd66df3501946e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyCoherent|homotopy.*dens|free.*evaluation|evaluation.*free",
+   "results": "{\"t\": \"2026-10-16T20:23:02Z\", \"tool\": \"grep\", \"query\": \"homotopyCoherent|homotopy.*dens|free.*evaluation|evaluation.*free\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsDense\"",
+   "results": "{\"t\": \"2026-10-16T20:23:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"IsDense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite\", \"CategoryTheory.Functor.IsDenseSubsite.isCoverDense\", \"CategoryTheory.Functor.IsDenseSubsite.isCoverDense'\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful'\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull'\", \"CategoryTheory.Functor.IsDenseSubsite.coverPreserving\"], \"digest\": \"cc9eac850700b31f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy colimit generation of a localization of ordinary model diagrams by copowers of representables with cofibrant objects",
+   "results": "{\"t\": \"2026-10-16T20:23:11Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy colimit generation of a localization of ordinary model diagrams by copowers of representables with cofibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"31b178d53e1b22ed\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic results are ordinary CofibrantObject localizers and ordinary colimit evaluation theorems. Read CofibrantObjectHomotopy.lean:32-105, Adjunction/Evaluation.lean:38-74, Quasicategory/StrictBicategory.lean:15-70, and Sites/DenseSubsite/Basic.lean:15-58. These do not assert generation under coherent colimits of the infinity localization of strict model diagrams; the second copower phrasing and quasicategory grep likewise gave no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-diagram-model-rectification",
@@ -100,5 +267,34 @@
   "group": "Q51"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-diagram-homotopy-density",
+  "worker": "stage1",
+  "summary": "Preserved the statement and expanded the Cisinski generation subargument into pointwise cofibration cocompletion, homotopical free adjunctions, relative-slice equivalence, a small co-Yoneda colimit and conservative evaluation detection. One new statement-only node supplies only the last equivalence-detection input. Reused the existing co-Yoneda, Brown, right-fibration mapping-space, space homotopy-fiber and essential-image statements, avoiding cyclic rectification/presentation/saturation dependencies. Checked all direct cited statements, universes, actual cocones and empty/terminal indexing cases. Mathlib searches performed through msearch.py and recorded verbatim.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, the coherent derived coefficient-adjunction mapping comparison. At its inherited rectification foundation, Steps 1-3 realize (7.9.8.1)-(7.9.8.11), Steps 4-6 realize (7.9.8.12)-(7.9.8.14), and Steps 7-8 realize the final generation inference on printed p. 412. No unit/chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise-equivalence and coherent cocone mapping criterion, used to retain transformations in localization and in the small colimit; this unit has no replacement for that foundational quasicategory calculus."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic transport/homotopy-fiber formula for the mapping spaces of a right fibration, used to prove the relative-slice comparison fully faithful; no statement of this unit supplies that formula without a cyclic diagram-rectification prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-a94e3a8af",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-a94e3a8af (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps and the new node lem-coef-strict-diagram-evaluation-conservative in full, plus the statement of every cited node. Read Cisinski CatLR Def 7.9.4, Ex 7.9.6, Rem 7.9.7 and Thm 7.9.8 with its full proof (pp. 408-412) from the public PDF fetched read-only to /tmp. The conservativity paragraph between (7.9.8.6) and (7.9.8.7), calculus of fractions plus Def 7.9.4(ii), is exactly the new node. Steps 1-8 expand (7.9.8.2)-(7.9.8.14) and the final paragraph of the proof faithfully. Hypotheses: the ordinary model hypotheses with functorial factorizations give U-heredity via Ex 7.9.6. W contains identities and isomorphisms by retract arguments, so W is a system. Checked each step against what the cited nodes state: summand lifting and Brown split factorization for coproduct weak equivalences; descended adjunction, where Theta's map on mapping spaces is the adjunction equivalence; right-fibration fibers; hofib-detection with u=id and v=h_b; small final K from the co-Yoneda node; essential surjectivity of q via B_0. The new node is true by fraction calculus plus saturation, independent of rectification and generation, and is neither a restated clause nor a duplicate (rg over dag/nodes). Tested small cases: I empty, singleton, discrete, the arrow [1], W = isomorphisms or all maps. B1-B7, blueprint from/via and the four search kinds are present. The 122-node dependency closure has no cycle and no merged node. Accepted tool uses: lem-cbc-enhanced-functor-cone-calculus (already accepted precedent in this unit) and lem-cbc-right-fibration-morphism-space, both generic quasicategory tools; the unit route is unchanged. No SGA source. No fixes."
+ }
 }

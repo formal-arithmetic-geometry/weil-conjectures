@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-generalized-operadic-monadicity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, coherent finite-coefficient mapping-complex adjunction before R lim: supporting operadic-algebra foundation, Monadicity of generalized operadic algebras over color diagrams.",
+   "via": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Monadicity of generalized operadic algebras over color diagrams",
+ "statement": "Use the universes and monoidal infinity categories of [def-coef-complete-algebroid], and presentability of [def-coef-presentable-infinity-category]. A small generalized nonsymmetric infinity operad is an inner fibration $\\mathcal M\\to\\Delta^{\\mathrm{op}}$ with cocartesian lifts of all inert arrows, Segal equivalences $\\mathcal M_{[n]}\\simeq\\mathcal M_{[1]}\\times_{\\mathcal M_{[0]}}\\cdots\\times_{\\mathcal M_{[0]}}\\mathcal M_{[1]}$ (the zero-factor fiber product for $n=0$ is $\\mathcal M_{[0]}$), and the following relative-limit axiom: write $I_n$ for the category of inert maps $\\alpha:[n]\\to[i]$, $i=0,1$, and commuting triangles of inert maps between their targets. For every $C\\in\\mathcal M_{[n]}$ choose its cocartesian inert projection diagram $C_\\alpha$. For every $X\\in\\mathcal M_{[m]}$ and $\\phi:[m]\\to[n]$, the canonical map $\\operatorname{Map}^{\\phi}_{\\mathcal M}(X,C)\\to\\lim_{\\alpha\\in I_n}\\operatorname{Map}^{\\alpha\\phi}_{\\mathcal M}(X,C_\\alpha)$ is an equivalence. Here the superscript specifies the homotopy fiber of the map on mapping spaces over that base arrow. A base map is inert when opposite to inclusion of a consecutive subinterval; an edge of $\\mathcal M$ is inert when it is cocartesian over such a base map. Assume $\\mathcal M_{[0]}$ is Kan and $\\mathcal V$ admits small colimits preserved separately by tensoring. Let $\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)$ be the full infinity category of inert-preserving functors $\\mathcal M\\to\\mathcal V^\\otimes$ over $\\Delta^{\\mathrm{op}}$, and let $U$ be restriction to $\\mathcal M_{[1]}$. Then $U:\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)\\to\\operatorname{Fun}(\\mathcal M_{[1]},\\mathcal V)$ has a coherent left adjoint $F$ and is monadic: the comparison to the infinity category of homotopy coherent algebras for the monad $UF$, whose unit and multiplication come from $F\\dashv U$, is an equivalence over $\\operatorname{Fun}(\\mathcal M_{[1]},\\mathcal V)$. Moreover $\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)$ has all small sifted colimits and $U$ preserves them. Sifted means that colimits of spaces indexed by the shape commute with finite products; this includes geometric realizations indexed by $\\Delta^{\\mathrm{op}}$. No presentability of $\\mathcal V$ is required.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Proposition 3.4.5, Theorem A.4.6 for the inert inclusion, Corollary A.5.4 and Corollary A.5.6 with its proof, printed pp.616,706,709-710. This is the free/forgetful monadicity input, not Corollary A.5.7 presentability. Read from retained sandbox source; full shared archive WANTED in report.md. No Stacks tag states this infinity-categorical result."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebras over generalized nonsymmetric infinity operads are monadic over functors on colors and forgetful functor preserves sifted colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monad.forget_creates_colimits_of_monad_preserves\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfShape J (T : C ⥤ C)] (D : J ⥤ Algebra T) [HasColimit (D ⋙ forget T)] : HasColimit D\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if $ T $ preserves colimits of shape $ J $, then for any diagram $ D : J \\\\to \\\\text{Algebra}(T) $, the existence of a colimit for the composition $ D \"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfShape J (T : C ⥤ C)] : CreatesColimitsOfShape J (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a monad $T$ on $\\\\mathcal{C}$, and a small category $J$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of shape $J$, then the forget\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimits\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfSize.{v, u} (T : C ⥤ C)] : CreatesColimitsOfSize.{v, u} (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a monad $T$ on $\\\\mathcal{C}$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of a specified size, then the forgetful functor $\\\\ma\"}\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(T : Monad C) : MonadicRightAdjoint T.forget\", \"doc\": \"For any monad $ T $ on a category $ \\\\mathcal{C} $, the forgetful functor from the Eilenberg-Moore category of $ T $-algebras to $ \\\\mathcal{C} $ is a monadic right adjoint. This means the adjunction be\"}\n  {\"name\": \"MonCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \": PreservesFilteredColimits (forget MonCat.{u})\", \"doc\": \"The canonical forgetful functor from the category of monoids to the category of types preserves filtered colimits. This means that for any filtered diagram of monoids, the underlying set of the colimi\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimit\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"(D : J ⥤ Algebra T) [PreservesColimit (D ⋙ forget T) (T : C ⥤ C)]\\n  [PreservesColimit ((D ⋙ forget T) ⋙ ↑T) (T : C ⥤ C)] : CreatesColimit D (forget T)\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"AddCommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \"CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.forget AddCommMonCat)\", \"doc\": \"The forgetful functor from the category of additive commutative monoids to the category of types preserves filtered colimits. That is, for any filtered diagram in the category of additive commutative \"}\n  {\"name\": \"CommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib.Algebra.Category.MonCat.FilteredColimits\", \"type\": \": PreservesFilteredColimits (forget CommMonCat.{u})\", \"doc\": \"The forgetful functor from the category of commutative monoidal categories to the category of types preserves filtered colimits. This means that applying the forgetful functor to a filtered colimit in\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monadic free algebra adjunction for generalized nonsymmetric operads with Kan zero fiber",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MonCat.adj\", \"module\": \"Mathlib/Algebra/Category/MonCat/Adjunctions\", \"type\": \"MonCat.free ⊣ CategoryTheory.forget MonCat\", \"doc\": \"The free monoid functor is left adjoint to the forgetful functor from the category of monoids to the category of types. This establishes a natural bijection between monoid homomorphisms from the free \"}\n  {\"name\": \"AlgCat.adj\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"(R : Type u) → [inst : CommRing R] → AlgCat.free R ⊣ CategoryTheory.forget (AlgCat R)\", \"doc\": \"For any commutative ring $ R $, the free algebra functor from the category of types to the category of $ R $-algebras is left adjoint to the forgetful functor. This adjunction is established by the na\"}\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (T : CategoryTheory.Monad C) → CategoryTheory.MonadicRightAdjoint T.forget\", \"doc\": \"For any monad $ T $ on a category $ \\\\mathcal{C} $, the forgetful functor from the Eilenberg-Moore category of $ T $-algebras to $ \\\\mathcal{C} $ is a monadic right adjoint. This means the adjunction be\"}\n  {\"name\": \"CategoryTheory.Monad.adj\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v₁, u₁} C] → (T : CategoryTheory.Monad C) → T.free ⊣ T.forget\", \"doc\": \"For a monad $ T $ on a category $ \\\\mathcal{C} $, the free functor $ \\\\text{free}: \\\\mathcal{C} \\\\to \\\\mathcal{C}^T $ (mapping objects to free $ T $-algebras) is left adjoint to the forgetful functor $ \\\\te\"}\n  {\"name\": \"CategoryTheory.Quiv.adj\", \"module\": \"Mathlib/CategoryTheory/Category/Quiv\", \"type\": \"CategoryTheory.Cat.free ⊣ CategoryTheory.Quiv.forget\", \"doc\": \"The free category functor from quivers to small categories is left adjoint to the forgetful functor that maps small categories to their underlying quivers, establishing a natural bijection between fun\"}\n  {\"name\": \"CategoryTheory.Monad.instIsRightAdjointAlgebraForget\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (T : CategoryTheory.Monad C), T.forget.IsRightAdjoint\", \"doc\": \"The forgetful functor from the Eilenberg-Moore category of T-algebras to the base category $\\\\mathcal{C}$ is a right adjoint.\"}\n  {\"name\": \"AddCommMonCat.instIsLeftAdjointFree\", \"module\": \"Mathlib/Algebra/Category/MonCat/Adjunctions\", \"type\": \"AddCommMonCat.free.IsLeftAdjoint\", \"doc\": \"The functor from the category of types to the category of additive commutative monoids, which sends a type $\\\\alpha$ to the free additive commutative monoid generated by $\\\\alpha$, is a left adjoint fun\"}\n  {\"name\": \"CategoryTheory.Monad.free\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] → (T : CategoryTheory.Monad C) → CategoryTheory.Functor C T.Algebra\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the Eilenberg-Moore category of $T$-algebras that sends each object $X$ to the free $T$-algebra $(T(X), \\\\mu_X)$, where $\\\\mu_X: T(T(X)) \\\\to T(X)$ is the monad\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad, CategoryTheory.MonadicRightAdjoint",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (T : CategoryTheory.Monad C) : CategoryTheory.MonadicRightAdjoint T.forget\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad.*[Mm]onad|[Mm]onad.*[Oo]perad",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monadic right adjoint preserving geometric realizations gives presentable category of coherent algebras",
+   "results": "{\"t\": \"2026-10-16T20:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"Monadic right adjoint preserving geometric realizations gives presentable category of coherent algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.RepresentablyCoflat.of_isLeftAdjoint\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"CategoryTheory.Monad.MonadicityInternal.leftAdjointComparison\", \"CategoryTheory.Monad.instIsRightAdjointAlgebraForget\"], \"digest\": \"6a4a708424b0986a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered",
+   "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-operadic-algebra-presentability",
+  "date": "2026-10-17",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

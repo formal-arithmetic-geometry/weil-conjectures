@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-operadic-active-colimit-extension-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, coherent finite-coefficient mapping-complex adjunction before R lim: supporting operadic-algebra foundation, Active-slice criterion for operadic free extension.",
+   "via": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Active-slice criterion for operadic free extension",
+ "statement": "Use the universes and monoidal infinity categories of [def-coef-complete-algebroid], and presentability of [def-coef-presentable-infinity-category]. Use ordinary nonsymmetric infinity operads and their inert maps as defined in [lem-coef-nonsymmetric-operads-presentability]. Let $u:\\mathcal O\\to\\mathcal P$ be an inert-preserving map of small such operads. Let $\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ be any monoidal infinity category; no presentability or cocompleteness is assumed. An algebra is a functor over $\\Delta^{\\mathrm{op}}$ preserving inert edges; their full functor infinity category is denoted $\\operatorname{Alg}_{\\mathcal O}(\\mathcal V)$. A base arrow is active if its opposite preserves the endpoints. Let $\\mathcal O_{\\mathrm{act}}$ be the wide subcategory of active arrows, and for $b\\in\\mathcal P_{[1]}$ put\n$$K_b=\\mathcal O_{\\mathrm{act}}\\times_{\\mathcal P_{\\mathrm{act}}}(\\mathcal P_{\\mathrm{act}})_{/b}.$$\nFor an $\\mathcal O$-algebra $A$, let $D_{A,b}:K_b\\to\\mathcal V$ send $(a,u(a)\\to b)$, with $a$ over $[n]$ and successive inert colors $a_1,\\ldots,a_n$, to $\\bigotimes_{i=1}^n A(a_i)$, with value $\\mathbf1$ for $n=0$; its arrows use the active algebra structure and composition of operations. Suppose, for every $A,b$, this diagram has a colimit and, for every pair of fixed objects $L,R\\in\\mathcal V$, the functor $x\\mapsto L\\otimes x\\otimes R$ preserves this colimit. The tensor unit may be used for $L$ or $R$, so one-sided tensoring is included. Then restriction $u^*$ has a coherent left adjoint $u_!$, with\n$$(u_!A)(b)\\simeq\\operatorname{colim}_{K_b}D_{A,b},\\qquad \\operatorname{Map}(u_!A,B)\\simeq\\operatorname{Map}(A,u^*B),$$\nnaturally in $A,B$. The adjunction unit is the cocone map associated to the identity operation of $u(a)$; the extension uses operadic substitution. All diagrams, colimits and adjunctions are homotopy coherent.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Proposition A.2.10 and Propositions A.4.3-A.4.4, Corollary A.4.5, printed pp.703,705-706, specialized to ordinary operads. The ordinary zero-fibers are contractible. The conditional criterion, rather than the unconditional presentably-monoidal theorem of the downstream free-extension node, is used here. Read from retained sandbox source; full shared archive WANTED in report.md. No Stacks tag states this infinity-categorical result."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-nonsymmetric-operads-presentability"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Operadic left Kan extension exists when active slice colimits exist and tensor products preserve these colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.LeftExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"(L : C ⥤ D) (F : C ⥤ H)\", \"doc\": \"The left Kan extension of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ along a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, defined as the comma category (structured arrow category) between $ F $ and\"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"(L : C ⥤ D) (F : C ⥤ H)\", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the left Kan extension of $ F $ along $ L $ exists. This is characterized by the comma category (structured \"}\n  {\"name\": \"CategoryTheory.Bicategory.lanIsKan\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Kan.HasKan\", \"type\": \"(f : a ⟶ b) (g : a ⟶ c) [HasLeftKanExtension f g] : (lanLeftExtension f g).IsKan\", \"doc\": \"Given 1-cells $f : a \\to b$ and $g : a \\to c$ in a bicategory $\\\\mathcal{B}$, if a left Kan extension of $g$ along $f$ exists, then this left Kan extension is a Kan extension, meaning it is an initial ob\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"module\": \"Mathlib.CategoryTheory.Monoidal.ExternalProduct.KanExtension\", \"type\": \"[∀ d : D', ∀ e : E, Limits.PreservesColimitsOfShape (CostructuredArrow L d) (tensorRight <| K.obj e)]\\n  (P : (Functor.LeftExtension.mk H' α).IsPointwiseLeftKanExtension) :\\n  Functor.LeftExtension.mk (H' ⊠ K) (extensionUnitLeft H' α K) |>.IsPointwiseLeftKanExtension\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$, functors $H : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, $L : \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, $H' : \\\\mathcal{D}' \\\\to \\\\mathcal{C}$, and $K : \\\\mathcal{E} \\\\to \\\\mathcal{C}$ with\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"module\": \"Mathlib.CategoryTheory.Monoidal.ExternalProduct.KanExtension\", \"type\": \"(d : D') (P : (Functor.LeftExtension.mk H' α).IsPointwiseLeftKanExtensionAt d) (e : E)\\n  [Limits.PreservesColimitsOfShape (CostructuredArrow L d) (tensorRight <| K.obj e)] :\\n  Functor.LeftExtension.mk (H' ⊠ K) (extensionUnitLeft H' α K) |>.IsPointwiseLeftKanExtensionAt (d, e)\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$, functors $H : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, $L : \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, $H' : \\\\mathcal{D}' \\\\to \\\\mathcal{C}$, and $K : \\\\mathcal{E} \\\\to \\\\mathcal{C}$ with\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftKanExtension.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"∀ {C : Type u_1} {H : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} H] [inst_2 : CategoryTheory.Category.{v_4, u_4} D]\\n  {F' : CategoryTheory.Functor D H} {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H}\\n  {α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ F' : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, and a natural transformation $ \\\\alpha : F \\\\Rightarrow L \\\\circ F' $, if th\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \"{C : Type u_1} →\\n  {H : Type u_3} →\\n    {D : Type u_4} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_3} H] →\\n          [inst_2 : CategoryTheory.Category.{v_4, u_4} D] →\\n            (F' : CategoryTheory.Functor D H) →\\n              {L : Cate\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{H}, \\\\mathcal{D}$ and functors $F' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, a natural transformation\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Presheaf\", \"type\": \"(L : (Cᵒᵖ ⥤ Type max w v₁ v₂) ⥤ ℰ) (e : A ≅ uliftYoneda.{max w v₂} ⋙ L)\\n  [PreservesColimitsOfSize.{v₁, max w u₁ v₁ v₂} L] : L.IsLeftKanExtension e.hom\", \"doc\": \"If a functor $ L $ from the category of presheaves on $ \\\\mathcal{C} $ to a category $ \\\\mathcal{E} $ preserves colimits of a given size, then the natural transformation from an object $ A $ to the comp\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free extension of nonsymmetric infinity operad algebras from operadic colimits over active operations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FreeAlgebra.Pre\", \"module\": \"Mathlib/Algebra/FreeAlgebra\", \"type\": \"Type u_1 → Type u_2 → Type (max u_1 u_2)\", \"doc\": \"The inductive type representing terms in the free algebra generated by a type over a ring, before quotienting by relations\"}\n  {\"name\": \"AlgCat.free\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.Functor (Type u) (AlgCat R)\", \"doc\": \"The functor from the category of types to the category of $ R $-algebras that assigns to each type $ S $ the free $ R $-algebra generated by $ S $, and to each function $ f : S \\to T $ the unique $ R $\"}\n  {\"name\": \"CategoryTheory.Free\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"Type u_1 → Type u → Type u\", \"doc\": \"The free object generated by the type $ C $ in the category.\"}\n  {\"name\": \"AlgCat.free_map\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] {X Y : Type u} (f : X ⟶ Y),\\n  (AlgCat.free R).map f = AlgCat.ofHom ((FreeAlgebra.lift R) (FreeAlgebra.ι R ∘ f))\", \"doc\": \"For any commutative ring $ R $ and types $ X $ and $ Y $, the action of the free algebra functor on a function $ f : X \\to Y $ is the $ R $-algebra homomorphism from $ \\\\text{FreeAlgebra}(R, X) $ to $ \\\\\"}\n  {\"name\": \"FreeAlgebra.Pre.mul\", \"module\": \"Mathlib/Algebra/FreeAlgebra\", \"type\": \"{R : Type u_1} → {X : Type u_2} → FreeAlgebra.Pre R X → FreeAlgebra.Pre R X → FreeAlgebra.Pre R X\", \"doc\": \"Given a ring $R$ and a type $X$, this constructor takes two terms $a$ and $b$ in the free algebra $\\\\mathrm{FreeAlgebra.Pre}(R, X)$ and returns their product $a \\\\cdot b$, forming a new term in $\\\\mathrm\"}\n  {\"name\": \"FreeAlgebra.ι_def\", \"module\": \"Mathlib/Algebra/FreeAlgebra\", \"type\": \"∀ (R : Type u_3) {X : Type u_4} [inst : CommSemiring R] (m : X),\\n  FreeAlgebra.ι R m = Quot.mk (FreeAlgebra.Rel R X) (FreeAlgebra.Pre.of m)\", \"doc\": \"The canonical embedding $\\\\iota: X \\\\to \\\\text{FreeAlgebra}(R, X)$ maps each generator $x \\\\in X$ to the equivalence class of the corresponding term in the free algebra over the commutative semiring $R$, \"}\n  {\"name\": \"AlgCat.free_obj\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (S : Type u), (AlgCat.free R).obj S = AlgCat.of R (FreeAlgebra R S)\", \"doc\": \"For any commutative ring $ R $ and type $ S $, the object component of the free algebra functor applied to $ S $ yields the free $ R $-algebra generated by $ S $. This establishes the correspondence b\"}\n  {\"name\": \"CategoryTheory.FreeBicategory\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Free\", \"type\": \"Type u → Type u\", \"doc\": \"Given a type $ B $, the free bicategory generated by $ B $ is the bicategory whose 0-cells are the elements of $ B $, with 1-cells and 2-cells freely generated from identities and compositions.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"operad\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]peradic|[Oo]perad",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operadic left Kan extension at a color computed by tensor colimit over active operations",
+   "results": "{\"t\": \"2026-10-16T20:02:15Z\", \"tool\": \"leanfinder\", \"query\": \"Operadic left Kan extension at a color computed by tensor colimit over active operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.isPointwiseLeftKanExtensionCan\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitRight\"], \"digest\": \"b5f0ef104ad7f965\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered",
+   "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-operadic-algebra-presentability",
+  "date": "2026-10-17",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

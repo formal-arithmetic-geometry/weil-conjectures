@@ -32,9 +32,101 @@
   "def-coef-zigzag-homotopy-calculus",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=E(C,F,*)$, where $*$ is the terminal category, and let $P:A\\to C$ forget the $F$ component. Thus objects of $A$ are $(c,a)$ and an arrow $(c,a)\\to(c',a')$ is $(h,u)$ with $u:a\\to F(h)a'$. For each $c$ form $D(c)=(c\\downarrow P)$: objects are $(x,t:c\\to Px)$ and an arrow to $(x',t')$ is $v:x\\to x'$ with $P(v)t=t'$. Precomposition in $t$ makes $D:C^{\\mathrm{op}}\\to\\mathrm{Cat}$ a strict functor. Define $R_c:D(c)\\to F(c)$ by $R_c((d,a),t)=F(t)a$. If $v=(h,u)$ and $ht=t'$, put $R_c(v)=F(t)u$; its target is $F(t)F(h)a'=F(t')a'$. The equalities for identities and composites follow from those of $F$. Precomposition gives $R_cD(s)=F(s)R_{c'}$ for $s:c\\to c'$, so $R:D\\Rightarrow F$ is strictly natural. The functor $J_c:F(c)\\to D(c)$ takes $a$ to $((c,a),1_c)$. Then $R_cJ_c=1$, and the arrows $(t,1):J_cR_c(x,t)\\to(x,t)$ give a natural transformation $J_cR_c\\Rightarrow1$. Consequently [lem-coef-nerve-natural-homotopy-equivalence] makes every $NR_c$ a weak homotopy equivalence. The choices $J_c$ need not be natural in $c$; only $R$ is used to define the comparison map.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 9.1 and proof 9.10, first assertion: explicit comma-fiber retraction."
+   }
+  },
+  {
+   "text": "Let $M=\\operatorname{diag}T(C,D,G)$. The natural transformation $R$ gives a simplicial map $r:M\\to B(C,F,G)$. Here the formulas defining $T$ apply to the new strict functor $D$ without any change. A coproduct of weak homotopy equivalences over a fixed small set is a weak homotopy equivalence: the realization quotient retains the summand index, so realization is the disjoint union, and its components and based homotopy groups are computed in the corresponding summand. For fixed $k,j$, the map $T(C,D,G)_{\\bullet,k,j}\\to T(C,F,G)_{\\bullet,k,j}$ is a coproduct of copies of the weak equivalences $NR_{c_k}$, indexed by the base chains and the set $N_jG(c_0)$. Thus it is a weak equivalence in the first direction. Apply [lem-coef-bisimplicial-diagonal-equivalence] first in $(i,k)$ for each fixed $j$, and then in $(i=k,j)$. The resulting diagonal map is exactly $r$, hence $r$ is a weak equivalence. Empty coproducts cause no exception.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 9.10, left comparison of Lemma 9.7; factorwise diagonal argument expanded without using Corollary 9.6 circularly."
+   }
+  },
+  {
+   "text": "Here is the terminal-slice calculation needed for the other comparison. Fix $c\\in C$, let $I_c=C/c$ have objects $t:d\\to c$, and let $G_c:I_c\\to\\mathrm{Cat}$ send $(d,t)$ to $G(d)$. There is an augmentation\n$$\\epsilon_c:\\mathrm{BK}_{I_c}(NG_c)\\longrightarrow NG(c)$$\nthat sends a simplex consisting of a chain $(d_0,t_0)\\to\\cdots\\to(d_q,t_q)$ and $z\\in N_qG(d_0)$ to $N_qG(t_0)z$. It commutes with the first face because $t_1h_1=t_0$, and with every other face or degeneracy by functoriality. To prove it is a weak equivalence, apply [lem-coef-thomason-grothendieck-comparison] to get the natural weak equivalence $\\tau:\\mathrm{BK}_{I_c}(NG_c)\\to N\\operatorname{Th}_{I_c}G_c$. Define $L:\\operatorname{Th}_{I_c}G_c\\to G(c)$ by $L((d,t),z)=G(t)z$ and $L(h,v)=G(t')v$, where $t'h=t$. The inclusion $J(z)=((c,1_c),z)$ has $LJ=1$, and the arrows $(t,1):((d,t),z)\\to JL((d,t),z)$ form a natural transformation $1\\Rightarrow JL$. Thus $NL$ is a weak equivalence by [lem-coef-nerve-natural-homotopy-equivalence]. Apply naturality of $\\tau$ under the unique functor $I_c\\to[0]$ and the natural transformation $G_c\\Rightarrow\\operatorname{const}G(c)$ with components $G(t)$: it says $NL\\,\\tau=\\tau_0\\epsilon_c$. The point comparison $\\tau_0:NG(c)\\to NG(c)$ is a weak equivalence by the same Thomason statement, whether or not it is identified with the identity. By the weak-equivalence definition quoted in [lem-coef-kan-quillen-right-proper], composition and two-of-three follow by composing bijections and homotopy-group isomorphisms and cancelling them; hence $\\epsilon_c$ is a weak equivalence. This uses the actual augmentation formula, rather than choosing a homotopy inverse of a comparison.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 9.10, terminal overcategory homotopy-colimit augmentation, derived using the existing one-sided Thomason theorem."
+   }
+  },
+  {
+   "text": "Take the partial diagonal $S_{i,q}=T(C,D,G)_{i,q,q}$. An $i$-simplex in $D(c_q)$ is uniquely a chain $x_0\\xrightarrow{v_1}\\cdots\\xrightarrow{v_i}x_i$ in $A$ together with $t:c_q\\to Px_0$; its other comma arrows are $P(v_a\\cdots v_1)t$. Hence, for each fixed $i$, there is an isomorphism of $q$-simplicial sets\n$$S_{i,\\bullet}=\\coprod_{x_0\\to\\cdots\\to x_i\\text{ in }A}\\mathrm{BK}_{C/Px_0}(NG_{Px_0}).$$\nA summand simplex records $c_0\\to\\cdots\\to c_q\\xrightarrow{t}Px_0$ and $z\\in N_qG(c_0)$; equivalently it is the chain in $C/Px_0$ whose arrows to $Px_0$ are the corresponding composites. Endpoint faces in the original $k$ direction respectively apply $G$ to the first arrow and precompose the last comma arrow, exactly as in this simplicial replacement; nerve operators in $G$ act on $z$. Let\n$$U_{i,j}=\\coprod_{x_0\\to\\cdots\\to x_i\\text{ in }A}N_jG(Px_0).$$\nThe $i$ first face applies $G(Pv_1)$, other $i$ faces compose or delete the chain, and $i$ degeneracies insert identities; $j$ operators are nerve operators. Thus $U$ is bisimplicial and $\\operatorname{diag}U=\\mathrm{BK}_A(N(GP))$ with the convention of [lem-coef-bousfield-kan-comparison-calculus]. On the displayed summand define $e:S_{i,q}\\to U_{i,q}$ by $z\\mapsto G(t h_q\\cdots h_1)z$.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 9.10, regrouping the partial diagonal by chains in F tensor_C *, with indices reversed from the printed source."
+   }
+  },
+  {
+   "text": "Check the remaining operators of $e$. Deleting $x_0$ in a comma-category nerve chain replaces its last comma arrow $t:c_q\\to Px_0$ by $P(v_1)t:c_q\\to Px_1$. Applying $e$ therefore gives $G(Pv_1)G(t h_q\\cdots h_1)z$, precisely the first $i$ face of $U$ after $e$. The other $i$ faces only compose or delete arrows after $x_0$ and leave the evaluated element unchanged; degeneracies insert identities. In the $q$ direction the augmentation commutes with all operators by the formula in Step 3. Thus $e:S\\to U$ is a bisimplicial map. For every $i$, Step 4 identifies $e_{i,\\bullet}$ with the coproduct, over all $A$-chains of length $i$, of the weak equivalences $\\epsilon_{Px_0}$ from Step 3. The disjoint-union argument in Step 2 makes it a weak equivalence, including when there are no such chains. By [lem-coef-bisimplicial-diagonal-equivalence], its diagonal\n$$e:M\\longrightarrow\\mathrm{BK}_A(N(GP))$$\nis a weak equivalence; the domain is $M$ since the diagonal of $S$ has entries $T(C,D,G)_{q,q,q}$.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 9.10, right comparison of Lemma 9.7; first-face compatibility and diagonal explicitly verified."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-thomason-grothendieck-comparison] once more to the small category $A$ and diagram $GP:A\\to\\mathrm{Cat}$. It gives a natural weak equivalence\n$$\\mathrm{BK}_A(N(GP))\\longrightarrow N\\operatorname{Th}_A(GP).$$\nThe category on the right is canonically isomorphic to $E(C,F,G)$: its object $((c,a),b)$ is $(a,c,b)$; an arrow is $(h,u)$ in $A$ and $v:G(h)b\\to b'$, exactly the three components of the stated arrow in $E$. Its composition is $(h'h,F(h)(u')u,v'G(h')(v))$, so this correspondence preserves composition and identities, with the inverse given by the same regrouping. Its nerve is an isomorphism, so its realization is an isomorphism and it is a weak equivalence by the definition quoted in [lem-coef-kan-quillen-right-proper]. Combining this map with Steps 2 and 5 gives the fixed three-arrow zigzag\n$$B(C,F,G)\\xleftarrow{\\ r\\ }M\\xrightarrow{\\ e\\ }\\mathrm{BK}_A(N(GP))\\longrightarrow NE(C,F,G).$$\nAll its arrows are weak homotopy equivalences. This proves the comparison without introducing another lemma that restates it.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 9.9: E is the iterated one-sided Grothendieck construction; the final one-sided comparison is supplied by the existing Thomason node."
+   }
+  },
+  {
+   "text": "Verify strict naturality of the whole zigzag. For data $(H,\\alpha,\\beta)$ as in the statement, let $\\widehat H:A'\\to A$ send $(c',a')$ to $(Hc',\\alpha_{c'}a')$ and use $(Hh',\\alpha_{c'}u')$ on arrows; naturality of $\\alpha$ identifies the target with $F(Hh')\\alpha_{d'}a''$. Then $P\\widehat H=HP'$ strictly. There is a functor $D'(c')\\to D(Hc')$, $(x',t')\\mapsto(\\widehat Hx',Ht')$. It commutes with precomposition, and\n$$R_{Hc'}(\\widehat Hx',Ht')=\\alpha_{c'}R'_{c'}(x',t')$$\nby naturality of $\\alpha$. Along with $\\beta$, it defines the map $M'\\to M$ by applying $H$ to base arrows, $\\widehat H$ to comma chains, and $\\beta$ to the $G$ factor. This equality proves commutation with $r$. For $e$, put $s=t'h'_q\\cdots h'_1:c'_0\\to P'x'_0$ in a simplex of Step 4. The two resulting evaluated elements are equal by\n$$\\beta_{P'x'_0}G'(s)=G(Hs)\\beta_{c'_0}.$$\nTheir base chain is the image under $\\widehat H$, so this proves commutation with $e$ on every simplex. Finally $\\beta P'$ gives $G'P'\\Rightarrow GP\\widehat H$; the naturality under reindexing and diagram transformations of [lem-coef-thomason-grothendieck-comparison] proves commutation with the last arrow. The regrouping $\\operatorname{Th}_A(GP)\\cong E(C,F,G)$ sends its induced functor to exactly $(\\alpha,H,\\beta)$ on objects and the specified three components on arrows. At the other end $r$ has target the bar map applying $H,\\alpha,\\beta$, by its definition. The identity data give identity functors and maps at every stage, and composing data composes their action on every component of these tuples; thus the maps preserve identities and composition strictly. All categories, comma categories, products and coproducts remain small in the fixed larger universe. If $C$ is empty all four simplicial sets are empty. If either endpoint fiber is empty the corresponding summands vanish; if both endpoint functors are terminal, the construction specializes to a natural zigzag from $NC$ to itself. No nonemptiness or equivalence hypothesis was used.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 9.1 naturality and proof 9.7–9.10; explicit functoriality under simultaneous base and endpoint changes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-thomason-grothendieck-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan Proposition 9.5, Lemma 9.7 and proofs 9.9–9.10, printed pp.31–33 (PDF pp.15–17), read online. Expanded comma argument; the terminal-slice and final one-sided comparisons use existing Thomason rather than creating their duplicates. The source is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +183,38 @@
    "results": "{\"t\": \"2026-10-16T20:00:28Z\", \"tool\": \"grep\", \"query\": \"homotopyColimit|HomotopyColimit|two.?sided|Thomason\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/TriangleShift.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\"], \"digest\": \"86ea5c7b5b81f8a2\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader grep of Mathlib/CategoryTheory. Thirteen hits are assert_not_exists TwoSidedIdeal checks or the tensor-unit comment in Monoidal/Category.lean:130; none states a classifying-space or categorical bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small category with contravariant and covariant category valued functors, the diagonal two sided bar is weakly equivalent to the nerve of the category of triples",
+   "results": "{\"t\": \"2026-10-16T20:32:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a small category with contravariant and covariant category valued functors, the diagonal two sided bar is weakly equivalent to the nerve of the category of triples\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\"], \"digest\": \"c125b5c41b429595\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the ordinary nerve adjunction, 2-coskeletality and product comparisons, not a two-sided categorical bar weak equivalence. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:393–455 and Mathlib/CategoryTheory/Grothendieck.lean:61–140; the latter defines only the one-sided category."
+  },
+  {
+   "tool": "grep",
+   "query": "Thomason|Grothendieck.*nerve|nerve.*Grothendieck|two.?sided.*bar",
+   "results": "{\"t\": \"2026-10-16T20:33:09Z\", \"tool\": \"grep\", \"query\": \"Thomason|Grothendieck.*nerve|nerve.*Grothendieck|two.?sided.*bar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the ordinary nerve adjunction, 2-coskeletality and product comparisons, not a two-sided categorical bar weak equivalence. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:393–455 and Mathlib/CategoryTheory/Grothendieck.lean:61–140; the latter defines only the one-sided category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan two sided categorical bar construction compared with the nerve of its Grothendieck category",
+   "results": "{\"t\": \"2026-10-16T20:33:10Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan two sided categorical bar construction compared with the nerve of its Grothendieck category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveFunctor.full\", \"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\"], \"digest\": \"3acda1646ae056de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the ordinary nerve adjunction, 2-coskeletality and product comparisons, not a two-sided categorical bar weak equivalence. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:393–455 and Mathlib/CategoryTheory/Grothendieck.lean:61–140; the latter defines only the one-sided category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T20:33:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the ordinary nerve adjunction, 2-coskeletality and product comparisons, not a two-sided categorical bar weak equivalence. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:393–455 and Mathlib/CategoryTheory/Grothendieck.lean:61–140; the latter defines only the one-sided category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-two-sided-simplicial-grothendieck-invariance",
@@ -102,5 +222,20 @@
   "group": "N5"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinary-two-sided-bar-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Realized Dwyer–Kan 9.7 and 9.9–9.10 by the explicit natural zigzag B <- diag T(C,c/P,G) -> BK_A N(GP) -> NE. Reused the existing one-sided Thomason comparison, nerve homotopy-equivalence and diagonal/calculus nodes. No new nodes; no Lean attachment or statement dispute. Checked all face formulas, strict naturality and empty cases.",
+  "blueprint": "Auxiliary mapping-space foundation of prop-coef-integral-exceptional-adjoint proof paragraph 2: ordinary bar comparison used degreewise in Dwyer–Kan 10.6, before diagonalizing the simplicial base. No change to the integral adjunction route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-dfc9ad84d",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-dfc9ad84d (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statements of all five cited proof deps and both statement deps, and the parent's three steps that cite this item. Statement: the variance of F and G, the d_0 and d_k endpoint actions, and the composition law of E(C,F,G) all type-check. Step 1: R_c is strictly natural, R_cJ_c=1, and I checked the transformation J_cR_c=>1 by hand using A's composition. Step 2: for fixed (k,j) the map is a coproduct of the NR_{c_k}, and the diagonal lemma is applied twice (exchanged, then plain) with its hypotheses met. Step 3: Thomason's naturality under C/c->[0] gives NL tau = tau_0 eps; two-of-three then follows from the definition, using only the stated naturality, not Thomason's proof. Step 4: the regrouping into BK_{C/Px_0} is a bijection of tuples, so 'elementary' is justified; its faces match the BK node's convention. Step 5: the first i-face equals G(Pv_1), so e is bisimplicial and the diagonal lemma applies. Step 6: Th_A(GP) is isomorphic to E, checked on objects, arrows and composition. Step 7: P Hhat = H P' and the alpha and beta equations give strict naturality for every arrow of the zigzag. Edge cases: C empty, empty fibers, terminal F and G, k=0, and C=[0]. The route stays inside the unit sk-prop-sf-biduality-general, so no tool_uses are needed. There are no new nodes, no cycle, and proof_deps equals the union of uses. A DAG grep found no duplicate, only the one-sided Thomason node, which the proof uses. The item is not a restatement of its parent. Dwyer-Kan 9.5/9.7-9.10 is not archived in literature/: the report has a WANTED line, the same URL is the source of 22 existing nodes, and the proof is correctly marked by:agent. This is not a target, no SGA is used, and I made no changes."
+ }
 }

@@ -27,62 +27,175 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent $C$ by a small quasicategory $Q$ and put $\\Gamma(Q)_{p,q}=C(Q)_{p,q}$ of [lem-coef-quasicategory-classification-realization]. Its stated equality $C(Q)_{p,\\bullet}=\\operatorname{Fun}(\\Delta^p,Q)^\\simeq$ identifies it with the formula for $R(C)$, including all simplicial operators. The same cited statement gives the homotopy Segal condition. This is the ordinal-arrow construction, not $\\operatorname{Map}(E^p,Q)$ for the indiscrete equivalence algebroids.",
+   "uses": [
+    "lem-coef-quasicategory-classification-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 4.9 and the first part of Proposition 4.10."
+   }
+  },
+  {
+   "text": "The matching map for $\\Gamma(Q)$ in degree $p$ is the restriction $\\operatorname{Fun}(\\Delta^p,Q)^\\simeq\\to\\operatorname{Fun}(\\partial\\Delta^p,Q)^\\simeq$. Indeed a compatible collection of boundary-face simplices is exactly a map from the boundary, and the condition that each vertical edge be an equivalence is tested on its vertices. Apply the Kan restriction-fibration assertion of [lem-coef-marked-anodyne-lifting-calculus] to $(\\partial\\Delta^p)^\\flat\\hookrightarrow(\\Delta^p)^\\flat$ and $Q^\\natural$. Thus $\\Gamma(Q)$ is vertically Reedy fibrant, including degree zero, where the restriction is $Q^\\simeq\\to *$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proof of Proposition 4.10, matching-fibration calculation."
+   }
+  },
+  {
+   "text": "By [lem-coef-quasicategory-classification-realization], the endpoint projection on $\\Gamma(Q)_1$ is a Kan fibration with strict fiber $U_Q(x,y)$, also modeling its homotopy fiber. By [lem-coef-infinity-pinch-comparison], the specified right-pinch map $\\operatorname{Map}_Q(x,y)\\to U_Q(x,y)$ is a natural homotopy equivalence. These give the required equivalence of homotopy fibers with the right-pinched mapping-space convention fixed in the statement. On vertices this identifies an arrow with that same edge of $Q$; the long edge of a $2$-simplex computes composition in both homotopy categories. Consequently invertibility in $h\\Gamma(Q)$ is precisely invertibility of the corresponding edge of $Q$.",
+   "uses": [
+    "lem-coef-quasicategory-classification-realization",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Section 1, arrow-space convention; mapping-space identification via the specified pinch comparison."
+   }
+  },
+  {
+   "text": "Let $A$ be the full subquasicategory of $\\operatorname{Fun}(\\Delta^1,Q)$ on equivalence edges of $Q$. The preceding step identifies $\\Gamma(Q)_{\\mathrm{eq}}$ with $A^\\simeq$: equivalence of arrows in the functor category is componentwise by [lem-cbc-enhanced-functor-cone-calculus], so the condition on its objects selects exactly the indicated components of the core. Evaluation at the source is an inverse to the constant-arrow map $Q\\to A$ up to a specified natural equivalence. The composite evaluation after constant arrow is the identity. For the other composite, the monotone map $[1]\\times[1]\\to[1]$, $(t,s)\\mapsto\\min(t,s)$, supplies the transformation from the constant source arrow to the original arrow $f$. Its endpoint components are $1_x$ and $f$, both equivalences. The componentwise criterion makes this transformation an equivalence. Its restriction to cores is a simplicial homotopy, since its edges in the transformation direction are equivalences; reversing its equivalence gives the inverse homotopy. Hence $s_0:Q^\\simeq\\to\\Gamma(Q)_{\\mathrm{eq}}$ is an equivalence. Together with the preceding two steps, this makes $\\Gamma(Q)$ fibrant in the Rezk structure of [lem-coef-rezk-local-model].",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-rezk-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 4.10, completeness; explicit identity-arrow deformation retraction replacing an appeal to algebroid completion."
+   }
+  },
+  {
+   "text": "Put $(p^*A)_{p,q}=A_p$ and $i^*Z=Z_{\\bullet,0}$. A map $p^*A\\to Z$ is determined by its degree-zero vertical part, because its value on every vertical simplex must be the degeneracy of that value. This gives $p^*\\dashv i^*$. Taking $j:\\varnothing\\to\\Delta^0$ in the box pushout-product theorem of [lem-coef-rezk-local-model] shows that $p^*$ preserves cofibrations and trivial cofibrations from the Joyal structure. Apply [lem-coef-model-infinity-derived-adjunction] to obtain the derived adjunction, with coherent unit and counit. All source objects are cofibrant since cofibrations are monomorphisms in [lem-coef-joyal-model-structure].",
+   "uses": [
+    "lem-coef-rezk-local-model",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 4.6 and beginning of Proposition 4.7; derived adjunction with coherent naturality."
+   }
+  },
+  {
+   "text": "The row $\\Gamma(Q)_{\\bullet,q}$ is the full subcategory $\\operatorname{Fun}_{\\mathrm{eq}}(\\Delta^q,Q)$. Degree by degree, the equality says that a map $\\Delta^p\\times\\Delta^q\\to Q$ has equivalence edges in each vertical $\\Delta^q$ exactly when all of its $p$-vertices are such functors; the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] gives the equivalent core condition. The constant-functor map $Q\\to\\operatorname{Fun}_{\\mathrm{eq}}(\\Delta^q,Q)$ has inverse evaluation at $0$ up to a coherent natural equivalence. In detail the monotone map $[q]\\times[1]\\to[q]$ sending $(t,0)$ to $0$ and $(t,1)$ to $t$ gives a transformation from the constant functor at $F(0)$ to $F$. Each component is $F(0\\to t)$ and is invertible by the definition of this full subcategory. The componentwise criterion therefore makes it an equivalence. Whiskering this quasi-inverse and its inverse transformations with functors to any test quasicategory gives inverse equivalences on the testing homotopy categories in [lem-coef-joyal-model-structure], so each row map is a categorical equivalence. Thus the natural map $a_Q:p^*Q\\to\\Gamma(Q)$ is a Rezk weak equivalence by [lem-coef-segal-categorical-constancy]. Its first row is exactly $1_Q$.",
+   "uses": [
+    "lem-coef-quasicategory-classification-realization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-segal-categorical-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Propositions 4.9-4.10, including the row calculation $\\Gamma(Q)_{\\bullet,q}=Q^{(\\Delta^q)}$ and the constant-row replacement map."
+   }
+  },
+  {
+   "text": "For a Rezk-fibrant $Z$, [lem-coef-segal-categorical-constancy] says that $i^*Z$ is a quasicategory and every row of the ordinary counit $\\epsilon_Z:p^*i^*Z\\to Z$ is a categorical equivalence: its row of degree $q$ is exactly the degeneracy $Z_{\\bullet,0}\\to Z_{\\bullet,q}$. The same node makes $\\epsilon_Z$ a Rezk weak equivalence. Since $i^*Z$ is cofibrant and $Z$ is fibrant, this ordinary counit represents the derived counit of [lem-coef-model-infinity-derived-adjunction]. For a fibrant Joyal object $Q$, use the Rezk weak equivalence $a_Q$ to the Rezk-fibrant $\\Gamma(Q)$ as its fibrant replacement after $p^*$. The derived unit is then represented by $Q\\to i^*\\Gamma(Q)$, which is $1_Q$ by the preceding step. Every Joyal object is weakly equivalent to a fibrant one. Hence both derived unit and derived counit are equivalences, and the derived functors are mutually inverse as infinity functors.",
+   "uses": [
+    "lem-coef-segal-categorical-constancy",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proofs of Proposition 4.7 and Theorem 4.11; explicit unit and counit calculation."
+   }
+  },
+  {
+   "text": "The Quillen equivalence in [lem-coef-coherent-nerve-comparison], together with the coherent derived-adjunction theorem already used, identifies the Joyal localization with the Bergner localization; the same coherent-nerve statement identifies the latter with $\\mathrm{Cat}_\\infty$. Also, [lem-coef-rezk-local-model] identifies the Rezk homotopy theory with the full subcategory $\\mathrm{CSS}_\\infty$ specified in the item, retaining coherent mapping spaces. Thus the left derived functor in the preceding step is computed on every $Q$ by $\\Gamma(Q)$ and is precisely $R$. For a categorical equivalence $f:Q\\to Q^\\prime$, $p^*f$ is a Rezk weak equivalence by the derived-adjunction preservation assertion, since every source object is cofibrant. The naturality square for $a$ and two-out-of-three therefore make $\\Gamma(f)$ a Rezk weak equivalence as well. The natural maps $a_Q$ identify these functors after localization; this is an identification of coherent functors, because the derived-adjunction node supplies coherent localization and natural transformations, not just an equivalence of homotopy categories. The mapping-fiber comparison in step 3 is natural under every functor carrying the endpoints, as stated in [lem-coef-infinity-pinch-comparison] and the classification-diagram node. Restriction along simplicial operators and postcomposition are the same maps throughout, so these comparisons also give the claimed coherent naturality.",
+   "uses": [
+    "lem-coef-rezk-local-model",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-quasicategory-classification-realization",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorem 4.11, interpreted in homotopy coherent localizations; Proposition 4.9 identifies the actual derived functor."
+   }
+  },
+  {
+   "text": "Let $S$ be the coherent inverse to $R$ obtained from the derived right adjoint. For any small $K$, postcomposition gives $R_*$ and $S_*$. Whiskering the two coherent natural equivalences $SR\\simeq1$ and $RS\\simeq1$ with a $K$-diagram gives natural transformations $S_*R_*\\simeq1$ and $R_*S_*\\simeq1$. Their components are equivalences, so [lem-cbc-enhanced-functor-cone-calculus] makes them equivalences in the functor infinity categories. These are the inverse data for the asserted equivalence on $\\operatorname{Fun}(K,-)$. This argument includes $K=\\varnothing$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Formal consequence of Theorem 4.11, with the coherent derived units and counits whiskered explicitly; not a separate quoted paragraph in the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-quasicategory-classification-realization",
+  "lem-coef-rezk-local-model",
+  "lem-coef-segal-categorical-constancy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Propositions 4.9-4.10 and proof of Theorem 4.11, using Propositions 4.4 and 4.6 and Theorem 4.5; explicit completeness contraction and row contractions. The paper is read online but not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Complete Segal spaces and quasicategories are equivalent models of infinity categories via the Rezk nerve",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.QCat.bicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with a bicategory structure, obtained by transporting the enrichment along the homotopy category functor for simplicial sets. This structure uses th\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ (S : SSet) [S.KanComplex], S.Quasicategory\", \"doc\": \"Every Kan complex is a quasicategory. This follows because a Kan complex, which has fillers for all horn inclusions, automatically satisfies the condition of having fillers for inner horns (0 < k < n)\"}",
+   "query": "The Rezk nerve gives an equivalence between quasicategories and complete Segal spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.Nerve.nerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat (SSet.Truncated 2)\", \"doc\": \"The functor from the category of small categories to 2-truncated simplicial sets, obtained by composing the nerve functor (which maps a category to its simplicial nerve) with the truncation functor th\"}\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.nerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → SSet\", \"doc\": \"The nerve functor sends a category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corresponds to a composable sequence of $n$ morphisms in $\\\\mathcal{C}$. For a simplicial operator\"}",
    "date": "2026-10-17",
-   "verdict": "no match: StrictSegal.quasicategory concerns strict Segal simplicial sets, not complete Segal spaces. The only Rezk grep hit is a bibliography entry. SimplicialNerve.lean does not supply the Rezk model comparison."
+   "verdict": "no match: ordinary nerve and strict-Segal simplicial-set results do not compare complete Segal spaces with quasicategories. Read Quasicategory/StrictSegal.lean:11-35 and SimplicialNerve.lean:12-34; the Rezk grep hit is only a bibliography entry."
   },
   {
    "tool": "loogle",
-   "query": "\"Quasicategory\", \"Segal\"",
+   "query": "\"Segal\", \"Quasicategory\"",
    "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) : X.Quasicategory\", \"doc\": \"Any `StrictSegal` simplicial set is a `Quasicategory`. \"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \" (X : SSet) [X.IsStrictSegal] : X.Quasicategory\", \"doc\": \"Any simplicial set satisfying `IsStrictSegal` is a `Quasicategory`. \"}",
    "date": "2026-10-17",
-   "verdict": "no match: StrictSegal.quasicategory concerns strict Segal simplicial sets, not complete Segal spaces. The only Rezk grep hit is a bibliography entry. SimplicialNerve.lean does not supply the Rezk model comparison."
+   "verdict": "no match: ordinary nerve and strict-Segal simplicial-set results do not compare complete Segal spaces with quasicategories. Read Quasicategory/StrictSegal.lean:11-35 and SimplicialNerve.lean:12-34; the Rezk grep hit is only a bibliography entry."
   },
   {
    "tool": "grep",
-   "query": "Rezk|CompleteSegal|complete.*Segal|Segal.*complete",
+   "query": "Rezk|CompleteSegal|SegalSpace|classificationDiagram",
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"line\": \"22\", \"text\": \"* [Charles Rezk, *Introduction to Quasi-categories*, Proposition 21.5][Rezk2022]\"}",
    "date": "2026-10-17",
-   "verdict": "no match: StrictSegal.quasicategory concerns strict Segal simplicial sets, not complete Segal spaces. The only Rezk grep hit is a bibliography entry. SimplicialNerve.lean does not supply the Rezk model comparison."
+   "verdict": "no match: ordinary nerve and strict-Segal simplicial-set results do not compare complete Segal spaces with quasicategories. Read Quasicategory/StrictSegal.lean:11-35 and SimplicialNerve.lean:12-34; the Rezk grep hit is only a bibliography entry."
   },
   {
    "tool": "leansearch",
-   "query": "The complete Segal space nerve of an infinity category has levels the cores of its functor categories",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialNerve\", \"type\": \"(C : Type u) [Category.{v} C] [SimplicialCategory C] : SSet.{max u v}\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": StrictSegal (nerve C)\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"CategoryTheory.coreFunctor\", \"module\": \"Mathlib.CategoryTheory.Core\", \"type\": \": Core (C ⥤ D) ⥤ Core C ⥤ Core D\", \"doc\": \"The core functor that maps the core of the functor category $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ to the functor category between the cores of $\\\\mathcal{C}$ and $\\\\mathcal{D}$. For each functor $F: \\\\mathcal{C}\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Nerve\", \"type\": \"{C : Type u} [Category.{v} C] : Quasicategory (nerve C)\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.nerve\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Nerve\", \"type\": \"(C : Type u) [Category.{v} C] : SSet.{max u v}\", \"doc\": \"The nerve functor sends a category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corresponds to a composable sequence of $n$ morphisms in $\\\\mathcal{C}$. For a simplicial operator\"}\n  {\"name\": \"CategoryTheory.nerve_obj\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Nerve\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (Δ : SimplexCategoryᵒᵖ),\\n  (CategoryTheory.nerve C).obj Δ = CategoryTheory.ComposableArrows C (Opposite.unop Δ).len\", \"doc\": \"For a category $\\\\mathcal{C}$ and an object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the nerve of $\\\\mathcal{C}$ evaluated at $\\\\Delta$ is the category of composable sequences of $n$\"}\n  {\"name\": \"CategoryTheory.nerveEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Nerve\", \"type\": \"{C : Type u} [Category.{v} C] : ComposableArrows C 0 ≃ C\", \"doc\": \"There is a canonical equivalence between the category of 0-length composable arrows in $\\\\mathcal{C}$ (which corresponds to the objects of $\\\\mathcal{C}$) and the category $\\\\mathcal{C}$ itself. This est\"}\n  {\"name\": \"CategoryTheory.Functor.coreComp\", \"module\": \"Mathlib.CategoryTheory.Core\", \"type\": \"{E : Type u₃} [Category.{v₃} E] (F : C ⥤ D) (G : D ⥤ E) : (F ⋙ G).core ≅ F.core ⋙ G.core\", \"doc\": \"For categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, the core of the composition $G \\\\circ F$ is naturally isomorphi\"}",
+   "query": "Complete Segal spaces model the infinity category of infinity categories with mapping space fibers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"{X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(sx : StrictSegal X) : SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any strict Segal space $X$ is a 2-coskeletal simplicial set, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(h : ∀ n, X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"(X : SSet.{u}) [IsStrictSegal X] : Quasicategory X\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \": StrictSegal (nerve C)\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegal.casesOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {motive : X.StrictSegal → Sort u_1} →\\n    (t : X.StrictSegal) →\\n      ((spineToSimplex : {n : ℕ} → X.Path n → X.obj (Opposite.op (SimplexCategory.mk n))) →\\n          (spine_spineToSimplex : ∀ (n : ℕ), X.spine n ∘ spineToSimplex = id) →\\n            (spineToSimplex_spine : ∀ (n : ℕ), sp\", \"doc\": \"Given a strict Segal space $X$, this function performs case analysis on its structure by specifying: (1) a family of functions $\\\\text{spineToSimplex}_n: X_{\\\\text{Path}}(n) \\\\to X([n])$ for each $n \\\\in \"}",
    "date": "2026-10-17",
-   "verdict": "no match: StrictSegal.quasicategory concerns strict Segal simplicial sets, not complete Segal spaces. The only Rezk grep hit is a bibliography entry. SimplicialNerve.lean does not supply the Rezk model comparison."
+   "verdict": "no match: ordinary nerve and strict-Segal simplicial-set results do not compare complete Segal spaces with quasicategories. Read Quasicategory/StrictSegal.lean:11-35 and SimplicialNerve.lean:12-34; the Rezk grep hit is only a bibliography entry."
   },
   {
    "tool": "leanfinder",
-   "query": "Joyal Tierney equivalence between complete Segal spaces and quasicategories preserves mapping spaces",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerve.homEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {x y : CategoryTheory.ComposableArrows C 0} →\\n      SSet.Edge x y ≃ (CategoryTheory.nerveEquiv x ⟶ CategoryTheory.nerveEquiv y)\", \"doc\": \"For any two objects $x$ and $y$ in a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of edges (1-simplices) between the corresponding 0-simplices in the nerve of $\\\\mathcal{C}$\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) _auto_36✝) →\\n          X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h }) ≃ X.Path m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C))} →\\n      (X ⟶ Y) ≃ (SSet.OneTruncation₂.nerveEquiv X ⟶ SSet.OneTruncation₂.nerveEquiv Y)\", \"doc\": \"For any two objects $X$ and $Y$ in the 2-truncated nerve of a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of morphisms (1-simplices) from $X$ to $Y$ in the truncated nerve\"}\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n  {\"name\": \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ (X : CategoryTheory.Cat) (a : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve ↑X))),\\n  (SSet.OneTruncation₂.ofNerve₂.natIso.hom.app X).obj a = SSet.OneTruncation₂.nerveEquiv a\", \"doc\": \"For any small category $\\\\mathcal{C}$ and any element $a$ in the 2-truncated simplicial set obtained by truncating the nerve of $\\\\mathcal{C}$, applying the hom-component of the natural isomorphism betw\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.fullyfaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories $\\\\mathsf{Cat}$ to the category of simplicial sets $\\\\mathsf{SSet}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\mathsf{Ca\"}",
+   "query": "Cores of functor quasicategories on finite ordinals form the fully faithful classification diagram with complete Segal essential image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.fullyfaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories $\\\\mathsf{Cat}$ to the category of simplicial sets $\\\\mathsf{SSet}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\mathsf{Ca\"}\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.Truncated.cosk.fullyFaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → (SSet.Truncated.cosk n).FullyFaithful\", \"doc\": \"The coskeleton functor extending $ n $-truncated simplicial sets to full simplicial sets is fully faithful. This follows from the adjunction between the truncation functor and the coskeleton functor, \"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}",
    "date": "2026-10-17",
-   "verdict": "no match: StrictSegal.quasicategory concerns strict Segal simplicial sets, not complete Segal spaces. The only Rezk grep hit is a bibliography entry. SimplicialNerve.lean does not supply the Rezk model comparison."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Classification diagram sending a quasicategory to the cores of its categories of composable arrows is fully faithful with complete Segal essential image",
-   "results": "{\"t\": \"2026-10-16T18:29:29Z\", \"tool\": \"leanfinder\", \"query\": \"Classification diagram sending a quasicategory to the cores of its categories of composable arrows is fully faithful with complete Segal essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.faithful\", \"CategoryTheory.nerveFunctor.full\", \"SSet.QCat\", \"instFullLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"8c55072b4346839a\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic hits concern the fully faithful ordinary category nerve and the ordinary Cat-enriched QCat bicategory. StrictSegal simplicial sets are not Rezk-complete simplicial spaces; SimplicialNerve.lean:26-34 lists even its basic quasicategory comparison as future work."
-  },
-  {
-   "tool": "grep",
-   "query": "Segal|Rezk|algebroid",
-   "results": "{\"t\": \"2026-10-16T18:30:48Z\", \"tool\": \"grep\", \"query\": \"Segal|Rezk|algebroid\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"b57d2ed06b36ad73\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic hits concern the fully faithful ordinary category nerve and the ordinary Cat-enriched QCat bicategory. StrictSegal simplicial sets are not Rezk-complete simplicial spaces; SimplicialNerve.lean:26-34 lists even its basic quasicategory comparison as future work."
+   "verdict": "no match: ordinary nerve and strict-Segal simplicial-set results do not compare complete Segal spaces with quasicategories. Read Quasicategory/StrictSegal.lean:11-35 and SimplicialNerve.lean:12-34; the Rezk grep hit is only a bibliography entry."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enrichment-change-adjunction",
@@ -90,5 +203,20 @@
   "group": "Q02"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-complete-segal-quasicategory-comparison",
+  "worker": "stage1",
+  "summary": "Replaced the saved incorrect all-invertible-algebroid argument by the source first-row adjunction argument. Reused the classification diagram, marked restriction-fibration, pinch and coherent derived-adjunction nodes. Two statement-only Rezk-model prerequisites are new; construction, completeness, fibrant replacement, derived unit/counit, and diagram naturality are proved in the item. Statement unchanged; no Mathlib match or Lean attachment.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient enriched adjunction before R lim, through the recorded ancestry: the Joyal–Tierney prerequisite of lem-coef-enrichment-change-adjunction. This foundational item is below the fixed unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-d11e6b49f",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-d11e6b49f (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the full statements of all 12 cited or stmt_deps nodes. Joyal–Tierney and Rezk are not archived and the review guard blocks network access, so I did not re-check the theorem numbers against the papers. I checked all of their mathematical content myself; proof_origin=agent and the report carries WANTED lines.\n\nItem statement: unchanged and true. Edge cases ∅, N[1] (fiber 0→1 is a point, 1→0 empty) and BG all behave as stated.\n\nSteps 1–9 hold:\n- Step 1: C(Q)_{p,•}=Fun(Δ^p,Q)^≃ matches R, and the homotopy Segal property comes from the classification node.\n- Step 2: the matching object is Map^♯((∂Δ^p)^♭,Q^♮), and restriction is a Kan fibration by the marked-anodyne node; at p=0, M_0=*.\n- Step 3: the strict fiber U_Q is equivalent to the pinched Map by the pinch node, so hΓ(Q)≅hQ.\n- Step 4: the min(t,s) transformation has components 1_x and f and restricts to cores, so s_0 is a homotopy equivalence and Γ(Q) is complete.\n- Step 5: p^*A=A⊠Δ^0, and the box theorem with j=∅→Δ^0 makes p^* left Quillen.\n- Step 6: the map (t,0)↦0, (t,1)↦t is monotone with components F(0→t) invertible, so the rows are categorical equivalences and a_Q is a Rezk equivalence whose first row is 1_Q.\n- Step 7: the counit rows are degeneracies, handled by the constancy clause under fibrancy; the derived unit is i^*a_Q=1_Q.\n- Step 8: the coherent-nerve node identifies the Joyal localization with Cat_∞, the Rezk node identifies the Rezk localization with CSS_∞, and the a-square with 2-out-of-3 finishes.\n- Step 9: elementary whiskering.\n\nproof_deps equals the union of the step uses, and there is no cycle (the item's 251-node dependency closure does not contain it).\n\nlem-coef-rezk-local-model: Bousfield-localized vertical Reedy structure (cofibrations are monomorphisms, fibrant objects are Reedy-fibrant complete Segal spaces, weak equivalences detected by vertical Map_ss), the ∞-localization identified with complete Segal objects, and the mixed Joyal/Kan box theorem. All true; tested on the spine with ∅→Δ^0, on Δ^0⊠(weak equivalence), and on M_0=*. Not a duplicate of the generic Bousfield or Reedy nodes, the DK-levelwise, explicit-completion or inverse-evaluation nodes, or the algebroid Segal-localization nodes.\n\nlem-coef-segal-categorical-constancy: rows are quasicategories with categorical-equivalence degeneracies (true via the vertical cotensor), and rowwise categorical equivalence implies Rezk equivalence for arbitrary source and target (true via the coend X≅∫^q X_{•,q}⊠Δ^q and the box theorem). The noncomplete walking-isomorphism nerve has constant rows; this is consistent because the converse is not claimed.\n\nNeither new node restates a clause of the item, both are statement-only, and the Mathlib search records cover all three required kinds.\n\nAccepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, off-route), used in steps 4, 6 and 9 only for the componentwise-equivalence and full-subcategory clauses; 35 nodes of this unit already record the same tool use. It should be copied into the item's tool_uses at merge. No fixes and no drops."
+ }
 }
