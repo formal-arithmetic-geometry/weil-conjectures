@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-point-lower-star",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The direct image $p_*$ to the point",
@@ -12,27 +12,56 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-point-lower-star.md",
   "place": "node def-sfb-point-lower-star, order 1540"
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "$p_*G$ is a sheaf because $u$ is continuous\n([lem-sfb-profinite-to-proetale-continuous]). Restriction is functorial in $G$.",
-   "uses": [
-    "lem-sfb-profinite-to-proetale-continuous"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
+ "stmt_deps": [
+  "def-sfb-profinite-to-proetale",
   "lem-sfb-profinite-to-proetale-continuous"
  ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-point-lower-star.md",
-  "place": "## Proof"
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves along a continuous functor of sites is a functor on sheaves",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous); also TopCat.Sheaf.pushforward and sheafPullback. Read the general site declaration in Continuous.lean, lines 355–365.",
+   "date": "2026-10-16",
+   "verdict": "match: sheafPushforwardContinuous specializes in one line to the given continuous functor u with abelian-group coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPushforwardContinuous",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous; sheafPushforwardContinuous_obj_obj_obj; sheafPushforwardContinuousCompSheafToPresheafIso; identity, composition and natural-transformation variants. The first declaration has precisely the continuous-site restriction type.",
+   "date": "2026-10-16",
+   "verdict": "match: the first declaration supplies the definition and the object formula by unfolding."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image on abelian sheaves along a continuous functor of sites is precomposition with its opposite functor",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous and its map_val_app, obj_val_obj and obj_val_map formulas; also sheafPullback and SheafOfModules.pushforward.",
+   "date": "2026-10-16",
+   "verdict": "match: the generic sheaf pushforward has the required direction, coefficients and restriction formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a continuous site functor F C D and an abelian sheaf G on D, define the sheaf on C by G composed with F opposite",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuous; op_comp_isSheaf; sheafPushforwardContinuous_obj_val_obj; sheafPullback and sheafAdjunctionContinuous.",
+   "date": "2026-10-16",
+   "verdict": "match: second phrasing confirms the same generic construction."
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafPushforwardContinuous|sheafPushforwardContinuous_obj_val|sheafPushforwardContinuous_obj_obj_obj",
+   "results": "Mathlib/CategoryTheory/Sites/Continuous.lean:362 def sheafPushforwardContinuous : Sheaf K A ⥤ Sheaf J A; related declarations at lines 370, 377, 383, 393. Searched CategoryTheory/Sites. Read lines 355–372: continuity is the hypothesis at 356, and the body at 363–365 is lifted precomposition by F.op.",
+   "date": "2026-10-16",
+   "verdict": "match: local source line 362 verifies the declaration and lines 363–365 verify every clause of the restriction formula."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.sheafPushforwardContinuous",
+  "file": "Mathlib/CategoryTheory/Sites/Continuous.lean",
+  "how": "specializes in one line: at line 362 (body lines 363–365), take F = u of def-sfb-profinite-to-proetale, A = Ab, J = the coherent topology on Profinite, and K = the small pro-étale topology of Spec Z; supply IsContinuous from lem-sfb-profinite-to-proetale-continuous. Thus p_* := u.sheafPushforwardContinuous Ab J K. The body is precomposition with u.op, so its value at S is G(u(S)) = G(Spec LC(S,Z)); on a sheaf morphism alpha it is alpha at u(S). No comparison theorem or extra hypothesis is needed. Lines 355–365 were read in the local Mathlib checkout."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -49,5 +78,21 @@
   "AlgebraicGeometry.ProEtale.pointLowerStar"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-point-lower-star",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier attempt against the current blueprint, both project source checkouts, all statement dependencies and the local Mathlib declaration. Corrected its missed one-line Mathlib specialization: restriction along the continuous functor u is exactly sheafPushforwardContinuous. Kept the imported statement verbatim, recorded the searches actually run, retained both the functor construction and its continuity as statement dependencies, and removed the redundant proof steps because this item is a Mathlib leaf. No new nodes.",
+  "blueprint": "The definition and complete proof paragraph of def-sfb-point-lower-star, within clause 3 of sk-def-sfb-pullback-from-point, are realized by specializing Mathlib sheafPushforwardContinuous to u and Ab. Clause 1 supplies u and its continuity through the two existing dependency nodes. Whole-blueprint searches found no other node stating this standalone definition; the enclosing unit contains it as one clause and is not equivalent to the item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-035387ba2",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-035387ba2 (reviewer sub-agent of L); spot-checked: Read the full item, cited dependency statements, current blueprint chapter/unit route, report, Mathlib construction, and master implementation. The Mathlib specialization matches both sites, Ab coefficients, variance, and evaluation formula. Empty, singleton, and two-point cases pass; dependency closure is acyclic. No new nodes, repairs, or accepted tool_uses. Details in review.md."
+ }
 }
