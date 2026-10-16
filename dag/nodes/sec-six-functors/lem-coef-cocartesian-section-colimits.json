@@ -27,7 +27,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -244,5 +246,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10cb8b980",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read the item node, which differs from side only in its lean record and two added landed stmt_deps (sifted-colimit-calculus, final-index-colimit; allowed, no cycle); the 4 dependency modules' exact declarations; the delivered module; and report.md, which has a real Worker report and Second reading by Q91. Clause by clause: quasicategory E,B; cocartesianFibration; arbitrary g; IsContractible K; htransport quantifies over every q with IsCocartesianTransport (coherent lift over f with cocartesian components = HTT 5.2.1.1 associated functor, so equivalent to f_! preserving K-colimits); fiberwise HasInfinityColimitsOfShape; sectionCategory = strict fiber of postcomposition over g; conclusions existence / IsColimiting iff EvaluatesCoconeAt at all t (unique factorization through the actual fiber inclusion of diagram, apex and coconeHomotopy) / closure of the H-cocartesian full subcategory under colimiting apexes. Single universe u is the size convention, not a restriction. Edge cases checked: T, H, K empty or a point, empty fibers or base, degenerate f. No duplicate notion found (calculusTransport, sectionSSet, IsMonoidalTransport differ). No hollow definitions; docstrings carry source and blueprint; only sorry; lean.statement verbatim. nt_compile.py --json: clean, no errors or warnings (the tool hides the sorry warning, confirmed with a control file). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianSectionColimits",
+  "declaration": "SSet.Enhanced.cocartesian_section_colimits",
+  "declarations": [
+   "SSet.Enhanced.sectionCategory",
+   "SSet.Enhanced.sectionUnderlying",
+   "SSet.Enhanced.sectionEvaluation",
+   "SSet.Enhanced.IsCocartesianTransport",
+   "SSet.Enhanced.EvaluatesCoconeAt",
+   "SSet.Enhanced.cocartesian_section_colimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianSectionColimits.lean",
+  "statement": "theorem cocartesian_section_colimits {T E B K : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : cocartesianFibration p) (g : T ⟶ B) (hK : IsContractible K) (htransport : ∀ (b b' : B _⦋0⦌) (f : B _⦋1⦌), B.δ 1 f = b → B.δ 0 f = b' → ∀ q : fiber p b ⟶ fiber p b', IsCocartesianTransport f q → PreservesInfinityColimitsOfShape K q) (hfiber : ∀ (b : B _⦋0⦌), HasInfinityColimitsOfShape K (fiber p b)) : HasInfinityColimitsOfShape K (sectionCategory p g) ∧ (∀ (A : K ⟶ sectionCategory p g) (c : (coconeCategory A) _⦋0⦌), IsColimiting A c ↔ ∀ (t : T _⦋0⦌), EvaluatesCoconeAt t A c) ∧ (∀ (H : Set (T _⦋1⦌)) (A : K ⟶ sectionCategory p g), (∀ (k : K _⦋0⦌) (e : T _⦋1⦌), e ∈ H → IsCocartesianEdge p (SSet.yonedaEquiv.symm ((sectionUnderlying (A.app _ k)).app _ e))) → ∀ c : (coconeCategory A) _⦋0⦌, IsColimiting A c → ∀ e : T _⦋1⦌, e ∈ H → IsCocartesianEdge p (SSet.yonedaEquiv.symm ((sectionUnderlying c.1.1).app _ e)))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed coherent colimit/exact image-cocone predicates and cylinder extraction, rather than duplicating them. Helpers give the fixed-base section fiber, its underlying maps and total evaluation, coherent cocartesian transport, and the uniquely forced evaluation-cocone factorization into the actual fiber. No data is chosen from an unproved existence theorem."
  }
 }
