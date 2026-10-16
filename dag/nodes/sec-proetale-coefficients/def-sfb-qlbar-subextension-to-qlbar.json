@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-qlbar-subextension-to-qlbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The inclusions $\\underline E\\to\\underline{\\overline{\\mathbf Q}}_\\ell$",
@@ -20,24 +20,124 @@
  ],
  "proof": [
   {
-   "text": "The composite $S\\to E\\subseteq\\Qlb$ is continuous, because $E$ carries the subspace\ntopology. It takes values in the finite subextension $E$, so it is a section of\n$\\underline{\\Qlb}$. The assignment is a ring homomorphism, since the operations are\npointwise, and it commutes with precomposition. So it is a morphism of sheaves of rings,\nand by part 3 of [sk-def-sfb-ring-object] a morphism of ring objects. Both\n$j_F\\circ\\iota_{E,F}$ and $j_E$ send $a$ to the same map $S\\to\\Qlb$, which gives the\ncompatibility.",
+   "text": "For a profinite set $S$, a section of $\\underline E$ is a continuous map $a:S\\to E$ by [def-sfb-padic-subfield-condensed-ring]. Write $i_E:E\\hookrightarrow\\Qlb$ for the field inclusion. It is continuous because $E$ has the subspace topology; hence $i_E\\circ a$ is continuous and its image lies in the finite subextension $E$. Thus $j_{E,S}(a):=i_E\\circ a$ belongs to $\\underline{\\Qlb}(S)$ by [sk-def-sfb-qlbar-condensed]. The domain operations and restrictions are pointwise operations and precomposition by [def-sfb-continuous-map-condensed-ring], and the target has these same formulas by [sk-def-sfb-qlbar-condensed]. For $a,b\\in C(S,E)$ and $s\\in S$, $i_E(a(s)+b(s))=i_E(a(s))+i_E(b(s))$ and $i_E(a(s)b(s))=i_E(a(s))i_E(b(s))$; also $i_E(0)=0$ and $i_E(1)=1$. These identities make $j_{E,S}$ a unital ring homomorphism. For $u:S'\\to S$, $j_{E,S'}(a\\circ u)=i_E\\circ a\\circ u=j_{E,S}(a)\\circ u$, so the components are natural. They therefore define a morphism of sheaves of rings. Clause 3 of [sk-def-sfb-ring-object] makes its underlying abelian-sheaf morphism a morphism of ring objects.",
    "uses": [
+    "def-sfb-padic-subfield-condensed-ring",
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
     "sk-def-sfb-ring-object"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-to-qlbar.proof.md",
+    "place": "construction paragraph"
+   }
+  },
+  {
+   "text": "If $E\\subseteq F$, the map [def-sfb-qlbar-subextension-map] is postcomposition with $E\\subseteq F$. Therefore both $j_F\\circ\\iota_{E,F}$ and $j_E$ send every section $a:S\\to E$ to the same composite $S\\to E\\subseteq\\Qlb$, so the compatibility $j_F\\circ\\iota_{E,F}=j_E$ holds.",
+   "uses": [
+    "def-sfb-qlbar-subextension-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-to-qlbar.proof.md",
+    "place": "compatibility sentence"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-ring-object"
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-ring-object",
+  "def-sfb-qlbar-subextension-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-to-qlbar.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "morphism from condensed ring of finite p-adic subextension to algebraic closure condensed ring",
+   "results": "PadicAlgCl, PadicAlgCl.coe_eq, PadicAlgCl.instCoePadic, PadicAlgCl.isAlgebraic in Mathlib/NumberTheory/Padics/Complex",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib has the ambient algebraic-closure type and embeddings, but no condensed-ring construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj, RingHom, ContinuousMap",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "padicSubfieldRingObjToPadicAlgCl|continuous.*ring.*map [Mathlib]",
+   "results": "no hits; the recorded subdirectory Mathlib resolves to Mathlib/Mathlib, which does not exist",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; no conclusion about Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous ring homomorphism induced by inclusion of a finite subextension into an algebraic closure",
+   "results": "Subring.subtype, Subfield.subtype, Subring.inclusion, Subfield.inclusion, IntermediateField.val, Subalgebra.valA, Algebra.algebraMap_ofSubring",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary ring/subfield inclusion homomorphisms, no condensed sheaf map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "map continuous functions from finite p-adic field E into algebraic closure Qbar_p as condensed ring morphism",
+   "results": "PadicAlgCl, PadicAlgCl.coe_eq, PadicAlgCl.instCoePadic, PadicComplex.instAlgebraPadic in Mathlib/NumberTheory/Padics/Complex",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient PadicAlgCl facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap E Q, RingHom, CategoryTheory.IsMonHom",
+   "results": "no hits (the service also reported unknown identifier E)",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported unknown identifier E; this does not establish absence"
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousMap|RingHom|IsMonHom",
+   "results": "no hits; searches.jsonl records only sub= Mathlib/Topology, resolving to the nonexistent Mathlib/Mathlib/Topology directory; no Algebra search was run",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; no conclusion about Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "postcomposition with a continuous ring inclusion induces a morphism of sheaves of rings",
+   "results": "TopCat.continuousFunctions.map in Mathlib/Topology/Sheaves/CommRingCat; other sheafed-space maps",
+   "date": "2026-10-16",
+   "verdict": "related result only: TopCat.continuousFunctions.map gives a ring homomorphism between continuous-function rings for a fixed source space; it does not construct the finite-subextension-valued condensed-ring morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous homomorphism of topological rings induces a natural transformation on continuous functions on profinite spaces preserving multiplication and one",
+   "results": "{\"t\": \"2026-10-16T12:44:43Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous homomorphism of topological rings induces a natural transformation on continuous functions on profinite spaces preserving multiplication and one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.continuousFunctions.map\", \"RingHom.compLeftContinuous\", \"ProfiniteGrp.Hom.hom'\", \"ProfiniteGrp.Hom.hom\", \"RingHom.compLeftContinuous_apply_apply\", \"TopCat.continuousFunctions.pullback\", \"LocallyConstant.comapRingHom\", \"ProfiniteGrp.ofHom\"], \"digest\": \"f059572c4fd88fbd\"}",
+   "date": "2026-10-16",
+   "verdict": "related results only: RingHom.compLeftContinuous and TopCat.continuousFunctions.map give sectionwise ring homomorphisms into all continuous maps; neither gives the finite-subextension-valued condensed-ring morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.comp",
+   "results": "{\"t\": \"2026-10-16T12:44:40Z\", \"tool\": \"loogle\", \"query\": \"ContinuousMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ContinuousMap.comp\", \"ContinuousMap.comp_id\", \"ContinuousMap.id_comp\", \"ContinuousMap.const_comp\", \"ContinuousMap.comp_const\", \"ContinuousMap.comp_assoc\", \"ContinuousMap.cancel_left\", \"ContinuousMap.cancel_right\"], \"digest\": \"9ae0c58000207ab8\"}",
+   "date": "2026-10-16",
+   "verdict": "related elementary composition lemmas only; no declaration of this condensed-ring map"
+  },
+  {
+   "tool": "grep",
+   "query": "CondensedRing|Condensed.*Ring|topCatToCondensed|topCatTo.*Condensed",
+   "results": "{\"t\": \"2026-10-16T12:44:38Z\", \"tool\": \"grep\", \"query\": \"CondensedRing|Condensed.*Ring|topCatToCondensed|topCatTo.*Condensed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Light/Module.lean\", \"Mathlib/Condensed/Light/AB.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"a72a4bf9013067a4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: TopComparison defines condensed sets from spaces, and Module defines condensed modules; neither states this morphism of ring objects with finite-subextension-valued target"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +158,21 @@
   "Profinite.padicSubfieldRingObjToPadicAlgCl"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-qlbar-subextension-to-qlbar",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the current 2026-10-15 blueprint. No finished declaration exists in the read-only Lean source. The proof is split into constructing the sectionwise inclusion as a sheaf and ring-object morphism, then checking compatibility with the transition maps; all four statement dependencies are cited. Second reader made the sectionwise ring identities and naturality explicit, cited the source-domain operations directly, and corrected invalid historical search verdicts after fresh searches.",
+  "blueprint": "Realizes the construction paragraph and compatibility sentence of def-sfb-qlbar-subextension-to-qlbar.proof.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-1778a23c3",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-1778a23c3 (reviewer sub-agent of L); spot-checked: Independent review completed and written to review.md. The item matches blueprint order 1532; both proof steps are supported by the cited nodes, topology, finite-image condition, ring operations, naturality, and transition-map compatibility. Edge cases and duplicate/search checks pass. No repairs or new nodes are needed."
+ }
 }
