@@ -38,7 +38,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- The analytic part of the Chow construction, for a specified projective model.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The analytic part of the Chow construction, for a specified projective model.
 No integrality, birationality, or generic-stalk condition is required.
 
 Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
@@ -59,7 +61,7 @@ Proof:
    A linear Leray comparison for p, whose positive higher images vanish, identifies
    these groups with the cohomology of p_* L^n. The pushforwardComp isomorphism
    identifies the latter with that of i_* pi_* L^n. Restrict scalars along f.appTop
-   and transport finite generation through the two linear equivalences. -/
+   and transport finite generation through the two linear equivalences. - /
 theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (i : W ⟶ X) [IsClosedImmersion i] (π : Y ⟶ W) [IsProper π]
@@ -75,5 +77,6 @@ theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
         letI : Module Γ(T, ⊤)
           (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) := by
   sorry
+-/
 
 end AlgebraicGeometry.Scheme.Modules

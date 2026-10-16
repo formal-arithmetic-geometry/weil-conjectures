@@ -21,11 +21,13 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Pointed evaluation lands in the relative separable closure.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Pointed evaluation lands in the relative separable closure.
 (blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
 Source: Stacks Project, Tag 04HX. Represent a colimit element by an affine pointed
 étale neighbourhood; its residue extension is finite separable over the base residue
-field, so its chosen embedding into Ω lands in the relative separable closure. -/
+field, so its chosen embedding into Ω lands in the relative separable closure. - /
 theorem strictHenselizationPointEvaluation_mem
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -80,5 +82,6 @@ theorem strictHenselizationPointEvaluation_mem
     rw [hΩ]
     exact congrArg CommRingCat.Hom.hom hh.symm
   exact hsep.of_equiv_equiv eqv (RingEquiv.refl Ω) hmaps
+-/
 
 end AlgebraicGeometry.Scheme

@@ -33,6 +33,8 @@ private local instance quotientProjection_epi {X : Scheme.{u}} (I : X.IdealSheaf
 set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ⟶
@@ -52,6 +54,7 @@ private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
     rw [cokernel.π_desc]
     simp [qI, formalModuleQuotientπ]
   exact cokernel.desc bI t hI
+-/
 -/
 
 @[reassoc (attr := simp)]

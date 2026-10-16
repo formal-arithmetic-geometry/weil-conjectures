@@ -226,6 +226,8 @@ private theorem derived_g_comm (X : BigradedExactCouple C s)
   simp only [Category.assoc]
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def comparisonDerived (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) :
     FunctorComparison Φ X.derived Y.derived where
@@ -234,6 +236,7 @@ private noncomputable def comparisonDerived (X : BigradedExactCouple C s)
   alpha_comm := derived_alpha_comm X Y T
   f_comm := derived_f_comm X Y T
   g_comm := derived_g_comm X Y T
+-/
 private noncomputable def comparisonPages
     (X : BigradedExactCouple C 0) (Y : BigradedExactCouple B 0)
     (T : FunctorComparison Φ X Y) :

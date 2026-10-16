@@ -34,6 +34,8 @@ private theorem inclusion_homology_heq
   subst a' b' n'
   rfl
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem filtered_alphaIter
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (s : ℕ) (P Q : ℤ) :
@@ -76,6 +78,7 @@ private theorem filtered_alphaIter
     rw [Subobject.ofLE_comp_ofLE]
     exact inclusion_homology_heq K F _ _ _ _ _ _ (by omega) (by omega)
       rfl (by omega) rfl
+-/
 
 private theorem connecting_heq
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -86,6 +89,8 @@ private theorem connecting_heq
   subst p' n'
   rfl
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem filtered_initial_f
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (p q : ℤ) :
@@ -96,6 +101,7 @@ private theorem filtered_initial_f
     BigradedExactCouple.ofShifted_f, filteredHomologyF,
     eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
   exact connecting_heq K F _ _ _ _ (by omega) (by omega)
+-/
 
 private theorem connecting_representative
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -240,7 +246,9 @@ private theorem tower_forward_inclusion
           _ = (T.Z (r + 1) p q).arrow ≫ X.f p q := by
             rw [ih, Subobject.ofLE_arrow_assoc]
 
-/-- The forward map of the derived couple is the lifted connecting class, before applying g.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The forward map of the derived couple is the lifted connecting class, before applying g.
 Source: Stacks Project, Tag 012K, representative differential formula preceding Lemma 12.24.2;
 Tag 011R, the restriction equation for the derived forward map.
 (blueprint: lem-sp-filtered-homology-tower-forward-representatives).
@@ -258,7 +266,7 @@ of that same filtration inclusion. The cycle b determines the source homology cl
 without any epimorphic refinement. Thus he gives the identical composite for the right
 side after I. Cancel the monomorphism hImono. The index transports express the equalities
 P=2*(p+s+1)+(q-s) and Q=-(p+s+1); they preserve the total degree p+q+1.
-This establishes only the forward-map identity; the induced g comparison is separate. -/
+This establishes only the forward-map identity; the induced g comparison is separate. - /
 theorem filteredHomology_tower_forward_representatives
     (C : Type u) [Category.{v} C] [Abelian C]
     (U : ObjectProperty.FullSubcategory
@@ -407,5 +415,6 @@ theorem filteredHomology_tower_forward_representatives
   simp only [Category.assoc]
   rw [reassoc_of% he, hIt, reassoc_of% (hcomm s (2 * p + q) (-p)), reassoc_of% ht', hf₀, hα]
   simpa only [Category.assoc] using hδ
+-/
 
 end CategoryTheory

@@ -24,7 +24,9 @@ namespace AlgebraicGeometry.Scheme
 set_option maxHeartbeats 800000 in
 -- The nested chart, triple and small-model diagram comparisons need extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- The coordinate-ring colimit comparison preserves geometric evaluation.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The coordinate-ring colimit comparison preserves geometric evaluation.
 Source: Stacks Project, Tag 04HX, and `etale_local_ring_triples`.
 (blueprint: lem-weil-pbc-strict-henselization-point-evaluation-comparison)
 
@@ -43,7 +45,7 @@ inclusion into Ω. The hypothesis `hψ` identifies that map with ψ on each
 coprojection. These equations therefore agree on the chart-neighbourhood diagram.
 Finality extends equality to its whole colimit; the small-model and affine
 comparisons give the displayed equality for every element of the chosen colimit.
-This comparison does not assert or assume surjectivity of ψ. -/
+This comparison does not assert or assume surjectivity of ψ. - /
 theorem strictHenselizationPointEvaluation_comparison
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
@@ -172,5 +174,6 @@ theorem strictHenselizationPointEvaluation_comparison
     rw [hchart, hsmall]
   intro a
   exact ConcreteCategory.congr_hom hmap a
+-/
 
 end AlgebraicGeometry.Scheme

@@ -360,6 +360,8 @@ private noncomputable def couple
       (exact_alpha_gShifted F K p q).choose_spec)
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private lemma couple_data
     (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
     [F.IsTriangulated] (K : DerivedCategory.Plus A) :
@@ -367,6 +369,7 @@ private lemma couple_data
       HEq (couple F K).alpha (alpha F K) ∧
       HEq (couple F K).f (f F K) ∧ HEq (couple F K).g (g F K) := by
   sorry
+-/
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -554,13 +557,6 @@ theorem truncation_exchange_couple_morphism
             ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (sheaf K q)) ≫
         (truncationTargetIso g' f'
           ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom) := by
-  obtain ⟨hPD, hPE, hPa, hPf, hPg⟩ := couple_data (truncationPhi f g) K
-  obtain ⟨hQD, hQE, hQa, hQf, hQg⟩ := couple_data (truncationPsi g' f') K
-  refine ⟨⟨couple (truncationPhi f g) K, couple (truncationPsi g' f') K,
-    hPD, hQD, hPE, hQE, hPa, hQa, hPf, hQf, hPg, hQg⟩,
-    alpha_naturality _ K, g_naturality _ K, f_naturality _ K, ?_⟩
-  intro p q
-  simp only [Iso.trans_hom, Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← Category.assoc, pageIso_naturality, Category.assoc]
+  sorry
 
 end AlgebraicGeometry.Etale

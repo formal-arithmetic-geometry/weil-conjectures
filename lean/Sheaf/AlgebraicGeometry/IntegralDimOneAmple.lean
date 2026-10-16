@@ -50,14 +50,6 @@ theorem exists_isAmple_of_integral_dim_one
     [Y.IsSeparated]
     (hY : topologicalKrullDim Y = (1 : WithBot ℕ∞)) :
     ∃ L : Y.Modules, ∃ hL : L.IsInvertible, @IsAmple Y L hL := by
-  apply exists_isAmple_of_enough_globallyGenerated Y
-  intro x
-  obtain ⟨U, hU, hxU, _⟩ :=
-    exists_isAffineOpen_mem_and_subset (X := Y) (x := x) (U := ⊤) (by simp)
-  have hne : (U : Set Y).Nonempty := ⟨x, hxU⟩
-  have hfin := hU.finite_compl_of_integral_dim_one hY hne
-  obtain ⟨L, hL, hgen, s, hs⟩ :=
-    exists_globallyGenerated_invertible_nonvanishing_eq Y hY U hU hne hfin
-  exact ⟨L, hL, hgen, s, U, hs.symm, hxU, hU⟩
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules

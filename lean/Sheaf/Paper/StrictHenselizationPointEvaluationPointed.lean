@@ -21,10 +21,12 @@ namespace AlgebraicGeometry.Scheme
 
 set_option maxHeartbeats 800000 in
 -- The colimit comparison unfolds the full affine neighborhood diagram.
-/-- Evaluation recovers the given geometric point at every chosen neighbourhood.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Evaluation recovers the given geometric point at every chosen neighbourhood.
 Source: Stacks Project, Tag 04HX. This is the colimit coprojection equation,
 followed by the naturality and triangle identities of Γ and Spec.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-pointed). -/
+(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-pointed). - /
 theorem strictHenselizationPointEvaluation_pointed
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -47,5 +49,6 @@ theorem strictHenselizationPointEvaluation_pointed
   rw [Spec.map_comp, SpecMap_ΓSpecIso_hom, ← toSpecΓ_naturality]
   change z ≫ V.isoSpec.hom ≫ V.isoSpec.inv = z
   simp
+-/
 
 end AlgebraicGeometry.Scheme

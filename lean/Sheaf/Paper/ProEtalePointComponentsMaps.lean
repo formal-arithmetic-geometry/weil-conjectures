@@ -99,11 +99,14 @@ private noncomputable def relativeMapEquiv (X : Scheme.{u}) (U : X.ProEt)
       exact f.w.symm
   right_inv f := by simp
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def pointComponentsEquiv (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] (S : Profinite.{u}) :
     (U ⟶ (profiniteToProEtOf X).obj S) ≃ C(ConnectedComponents U.left, S) :=
   (relativeMapEquiv X U S).trans
     ((affineMapEquiv U.left S).trans (componentMapEquiv U.left S))
+-/
 
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.

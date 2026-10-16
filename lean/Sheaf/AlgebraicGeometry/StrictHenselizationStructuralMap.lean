@@ -63,7 +63,9 @@ noncomputable abbrev strictHenselizationStructuralMap
   strictLocalizationToBase s
 -/
 
-/-- The representative limit legs factor through upstream's structure morphism. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The representative limit legs factor through upstream's structure morphism. - /
 theorem strictHenselizationStructuralMap_eq
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
@@ -76,5 +78,6 @@ theorem strictHenselizationStructuralMap_eq
             (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
       strictHenselizationStructuralMap s := by
   sorry
+-/
 
 end AlgebraicGeometry.Scheme

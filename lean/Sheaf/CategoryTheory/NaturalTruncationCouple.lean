@@ -44,6 +44,8 @@ private theorem zero_projection_square
   dsimp only at hc
   rw [Category.assoc, ← hc, ← Category.assoc, h, Category.assoc]
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def rawCouple
     {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
     [HasDerivedCategory.{wA} A]
@@ -62,6 +64,7 @@ private noncomputable def rawCouple
     (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.1 p q).choose_spec)
     (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.2.1 p q).choose_spec)
     (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (h.2.2 p q).choose_spec)
+-/
 
 private theorem abutmentMap_isIso
     {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
@@ -71,15 +74,7 @@ private theorem abutmentMap_isIso
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
     (K : CochainComplex.Plus A) (n : ℤ) :
     IsIso (TruncationCouple.abutmentMap F K n) := by
-  obtain ⟨H, hH, j, c, hj, hc, hiso, _, _⟩ :=
-    truncation_abutment_cocone F K (rawCouple F K) rfl
-      (by intro p q; simp [rawCouple])
-  subst H
-  have he : c n = TruncationCouple.abutmentMap F K n := by
-    rw [hc, hj]
-    simp [TruncationCouple.abutmentMap, rawCouple]
-  rw [← he]
-  exact hiso n
+  sorry
 
 /-- Choose truncation couples for individual derived objects with a fixed lower bound.
 The comparisons commute with every individual morphism. No coproduct is involved.
@@ -133,69 +128,6 @@ theorem exists_natural_boundedBelow_truncation_couples
             (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
               DerivedCategory.homologyFunctor B (p : ℤ)).map
                 ((DerivedCategory.homologyFunctor A r).map c)) := by
-  classical
-  dsimp only
-  let L := {M : DerivedCategory A // ∀ r : ℤ, r < a →
-    IsZero ((DerivedCategory.homologyFunctor A r).obj M)}
-  have hrep (M : L) : ∃ K : CochainComplex.Plus A,
-      Nonempty (DerivedCategory.Q.obj K.obj ≅ M.val) := by
-    have : M.val.IsGE a := (DerivedCategory.isGE_iff M.val a).2 M.property
-    obtain ⟨K, hK, ⟨e⟩⟩ := M.val.exists_iso_Q_obj_of_isGE a
-    exact ⟨⟨K, ⟨a, hK⟩⟩, ⟨e.symm⟩⟩
-  choose K he using hrep
-  let e (M : L) : DerivedCategory.Q.obj (K M).obj ≅ M.val := Classical.choice (he M)
-  let Z (M : L) := rawCouple F (K M)
-  let HD (n : ℤ) := F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n
-  let HE (p : ℤ) := DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
-    DerivedCategory.homologyFunctor B p
-  have hi (M : L) (n : ℤ) : IsIso (TruncationCouple.abutmentMap F (K M) n) :=
-    abutmentMap_isIso F (K M) n
-  let eD (M : L) (n : ℤ) : (Z M).D 0 n ≅ (HD n).obj M.val :=
-    asIso (TruncationCouple.abutmentMap F (K M) n) ≪≫ (HD n).mapIso (e M)
-  let h (M : L) (r : ℤ) : (K M).obj.homology r ≅
-      (DerivedCategory.homologyFunctor A r).obj M.val :=
-    ((DerivedCategory.homologyFunctorFactors A r).app (K M).obj).symm ≪≫
-      (DerivedCategory.homologyFunctor A r).mapIso (e M)
-  let eE (M : L) (p : ℕ) (r : ℤ) : (Z M).E p r ≅
-      (HE p).obj ((DerivedCategory.homologyFunctor A r).obj M.val) :=
-    TruncationCouple.singleIso F (K M) p r ≪≫ (HE p).mapIso (h M r)
-  refine ⟨Z, eD, eE, ?_, ?_, ?_⟩
-  · intro M p r hr
-    exact (truncation_quadrant_vanishing F (K M) a
-      (fun r hr ↦ (M.property r hr).of_iso (h M r))).2.1 p r hr
-  · intro M p r hp
-    have hz := truncation_quadrant_vanishing F (K M) a
-      (fun r hr ↦ (M.property r hr).of_iso (h M r))
-    exact hz.1 p r hp
-  · intro M N c
-    let c' := (e M).hom ≫ c ≫ (e N).inv
-    obtain ⟨tD, tE, ha, hf, hg, hd, he'⟩ :=
-      TruncationCouple.raw_naturality F (K M) (K N) c'
-    let T : BigradedExactCouple.CoupleMorphism (Z M) (Z N) :=
-      { tD := tD
-        tE := tE
-        alpha_comm := by
-          intro p q
-          simpa [Z, rawCouple] using ha p q
-        f_comm := by
-          intro p q
-          simpa [Z, rawCouple] using hf p q
-        g_comm := by
-          intro p q
-          simpa [Z, rawCouple] using
-            zero_projection_square _ _ _ _ tD tE
-              (TruncationCouple.g F (K M)) (TruncationCouple.g F (K N)) hg p q }
-    refine ⟨T, ?_, ?_⟩
-    · intro n
-      dsimp only [T, eD, Iso.trans_hom, Functor.mapIso_hom, asIso_hom]
-      rw [← Category.assoc, hd n, Category.assoc, ← Functor.map_comp]
-      simp [c', HD, Functor.map_comp, Category.assoc]
-    · intro p r
-      dsimp only [T, eE, Iso.trans_hom, Functor.mapIso_hom]
-      rw [← Category.assoc, he' p r, Category.assoc, ← Functor.map_comp]
-      have hh : TruncationCouple.homologyMap c' r ≫ (h N r).hom =
-          (h M r).hom ≫ (DerivedCategory.homologyFunctor A r).map c := by
-        simp [TruncationCouple.homologyMap, h, c', Functor.map_comp, Category.assoc]
-      rw [hh, Functor.map_comp, Category.assoc]
+  sorry
 
 end CategoryTheory
