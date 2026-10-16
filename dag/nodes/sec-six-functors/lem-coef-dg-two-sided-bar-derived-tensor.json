@@ -27,9 +27,142 @@
   "lem-coef-dgcat-model-structure",
   "lem-coef-dg-module-semi-free-replacement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the right representable $h_X(U)=\\mathcal B(U,X)$, the map $h_X\\otimes_{\\mathcal B}F\\to F(X)$ sends $a\\otimes f$ to $af$. Its inverse sends $f$ to $1_X\\otimes f$: the balanced relation gives $a\\otimes f=1_X\\otimes af$. Both maps commute with the differential by the chain-map action and $d1_X=0$. Likewise $G\\otimes_{\\mathcal B}\\mathcal B(X,-)\\cong G(X)$ by $g\\otimes a\\mapsto ga$, inverse $g\\mapsto g\\otimes1_X$. For a right shift $h_X[k]$, the evaluation $a\\otimes f\\mapsto af$ identifies $h_X[k]\\otimes_{\\mathcal B}F$ with $F(X)[k]$. For a left shift $L[k]$, the shifted left action is $a\\cdot y=(-1)^{k|a|}ay$; the map $g\\otimes y\\mapsto(-1)^{k|g|}g\\otimes y$ identifies $G\\otimes_{\\mathcal B}L[k]$ with $(G\\otimes_{\\mathcal B}L)[k]$. These formulas respect the balanced relation and the shifted differentials. Tensor distributes over direct sums because every tensor and every balanced relation has finite support. Thus sums of shifted representables give sums of shifted evaluations. All sums are indexed by sets, since the object set is small in the fixed universe.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LM (dga-lemma-tensor), several-object evaluation checked directly; Drinfeld 14.4 for orientation."
+   }
+  },
+  {
+   "text": "We will repeatedly use this elementary acyclicity argument. In a degreewise short exact sequence $0\\to A\\to C\\to D\\to0$ with $A,D$ acyclic, a cycle $z\\in C$ maps to $d\\bar y$ in $D$; lift $\\bar y$ to $y\\in C$, then $z-dy$ is a cycle in $A$ and hence a boundary. Thus $C$ is acyclic. A direct sum of acyclic complexes is acyclic because a cycle has finite support, so one may choose primitives in its finitely many nonzero components. The union of an increasing sequence of acyclic subcomplexes is acyclic because every cycle belongs to a stage and bounds there. For the cone test, write $\\operatorname{Cone}(u)^r=C^r\\oplus A^{r+1}$ with $d(c,a)=(dc+u(a),-da)$, as in [def-weil-abstract-derived-category]. If the cone is acyclic, every cycle $(c,0)$ bounds $(y,b)$, so $db=0$ and $c=dy+u(b)$, proving surjectivity of $H(u)$. If $da=0$ and $u(a)=dc$, the cone cycle $(-c,a)$ bounds, so $a$ is a boundary, proving injectivity. Conversely assume $H(u)$ is bijective and $(c,a)$ is a cone cycle. Since $u(a)=-dc$, injectivity gives $a=db$. The element $c+u(b)$ is closed; surjectivity gives a closed $e$ and a $y$ with $c+u(b)=u(e)+dy$. Then $(c,a)=d(y,e-b)$. This proves the cone criterion directly for complexes of abelian groups, including objectwise module cones.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S3 (dga-lemma-functoriality-bc), filtration acyclicity argument; cone criterion proved directly by the displayed cycles with the cone convention of def-weil-abstract-derived-category."
+   }
+  },
+  {
+   "text": "Let $P$ be semi-free and $N$ an objectwise acyclic left module. Tensor the graded-split filtration $P_i$ with $N$. The graded splitting ensures that $P_i\\otimes_{\\mathcal B}N\\to P_{i+1}\\otimes_{\\mathcal B}N$ is injective and the quotient is $(P_{i+1}/P_i)\\otimes_{\\mathcal B}N$: the graded retraction and the universal balanced relations give the direct-sum decomposition before taking the differential. By step 1 each quotient is a direct sum of shifted complexes $N(X)$, hence acyclic. Starting with $P_0=0$, step 2 proves acyclicity at every stage and at the union. That union is $P\\otimes_{\\mathcal B}N$: each tensor is a finite sum of pure tensors from some $P_i$, and each finite set of balanced relations occurs at a later common stage. For an objectwise quasi-isomorphism $u:F\\to F'$, the chain isomorphism $P\\otimes\\operatorname{Cone}(u)\\cong\\operatorname{Cone}(P\\otimes u)$ is identity on the $P\\otimes F'$ summand and sends $x\\otimes a$ in $P\\otimes F[1]$ to $(-1)^{|x|}x\\otimes a$ in $(P\\otimes F)[1]$. The balanced relations respect this sign because a left shift twists its action by $(-1)^{|a|}$; substitution in the cone differential verifies the isomorphism. Apply what was just proved to $N=\\operatorname{Cone}(u)$, then the cone test of step 2. This proves $P\\otimes_{\\mathcal B}u$ is a quasi-isomorphism without any flatness assumption on the mapping complexes. For the left-input assertion, use the graded opposite category: composition reverses with the Koszul sign, a left $\\mathcal B$-module $L$ becomes a right $\\mathcal B^{\\mathrm{op}}$-module by $\\ell\\cdot a=(-1)^{|\\ell||a|}a\\ell$, and a right module $M$ becomes a left one by $a\\cdot m=(-1)^{|a||m|}ma$. The map $m\\otimes\\ell\\mapsto(-1)^{|m||\\ell|}\\ell\\otimes m$ is a chain isomorphism $M\\otimes_{\\mathcal B}L\\cong L\\otimes_{\\mathcal B^{\\mathrm{op}}}M$: substitution verifies both the relation and the differential. A semi-free left input is semi-free on the right over the opposite category; the right-input assertion there therefore gives the left-input assertion here.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S3 (dga-lemma-functoriality-bc), proof by split property-(P) filtration, expanded for dg categories; also Tag 0GZ2 (dga-lemma-compute-bc)."
+   }
+  },
+  {
+   "text": "Choose $p:P\\to G$ and $q:Q\\to F$ by [lem-coef-dg-module-semi-free-replacement], applying it also to $\\mathcal B^{\\mathrm{op}}$. Step 3 applied to $q$ with right input $P$ gives $P\\otimes q$, and its left-input version applied to $p$ with input $Q$ gives $p\\otimes Q$. These are exactly the two arrows in the displayed span, and both are quasi-isomorphisms. We may thus use $P\\otimes Q$, $P\\otimes F$, or $G\\otimes Q$ as the same object of $D(\\mathbf Z)$.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LS (dga-lemma-derived-bc), 09S3 (dga-lemma-functoriality-bc), 0GZ2 (dga-lemma-compute-bc); several-object application of step 3."
+   }
+  },
+  {
+   "text": "Here are the map and independence checks for this construction, rather than just its object values. By [lem-coef-dg-semi-free-homotopically-projective], for a semi-free $P$ the complex $\\underline{\\operatorname{Hom}}(P,N)$ is acyclic whenever $N$ is objectwise acyclic. For any quasi-isomorphism $s:N\\to N'$, the cone of $\\underline{\\operatorname{Hom}}(P,s)$ identifies with $\\underline{\\operatorname{Hom}}(P,\\operatorname{Cone}(s))$ by the two summands. The cone test gives an isomorphism on $H^0$. Hence, for a module map $f:G\\to G'$ and resolutions $p:P\\to G$, $p':P'\\to G'$, there is a map $\\widetilde f:P\\to P'$ with $p'\\widetilde f$ chain homotopic to $fp$, and its homotopy class is unique. Identity and composition follow from this uniqueness. Taking $f=1$ in both directions shows any two resolutions of $G$ are canonically chain homotopy equivalent over $G$; taking $f$ a quasi-isomorphism shows its lift is a quasi-isomorphism. For semi-free $P,P'$, a quasi-isomorphism between them is a homotopy equivalence: apply the $H^0$ isomorphism first with source $P'$ to obtain a right inverse, then with source $P$ to obtain the other inverse identity. Apply this mapping-complex argument to right modules over $\\mathcal B^{\\mathrm{op}}$, using the action conversion in step 3; these are exactly the left resolutions and left-module homotopies needed here.",
+   "uses": [
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM (dga-lemma-property-P-K-projective), Tag 09LS; mapping-complex cone and lifting calculations written explicitly, using the existing dg-category homotopical-projectivity statement."
+   }
+  },
+  {
+   "text": "Balanced tensor preserves these homotopies. If $h$ is a right-module homotopy then $h\\otimes1$ is the tensor homotopy; if $k$ is a left-module homotopy then on homogeneous tensors its formula is $x\\otimes y\\mapsto(-1)^{|x|}x\\otimes k(y)$. Substitution in $d(x\\otimes y)=dx\\otimes y+(-1)^{|x|}x\\otimes dy$ gives $dH+Hd$ equal to the desired difference of maps. For a right homotopy $h$, $h(xa)=h(x)a$; for a left homotopy $k$, $k(ay)=(-1)^{|a|}ak(y)$. These identities verify the balanced relation for the two displayed formulas. On any cycle $z$ the difference of the induced maps is $dH(z)$, so homotopic maps induce equal cohomology maps. Thus on maps define the derived tensor by $\\widetilde f\\otimes\\widetilde g$ on $P\\otimes Q$. Step 5 makes it independent of lifts and resolutions and compatible with composition; step 3 and homotopy equivalences show it inverts objectwise quasi-isomorphisms in each variable. Its canonical map to the ordinary tensor is $p\\otimes q$. This verifies naturality, both-variable invariance and compatibility with the two one-input computations in step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09LR (dga-lemma-bc-homotopy), 09LS, 09S3; tensor homotopy formulas checked directly."
+   }
+  },
+  {
+   "text": "Now impose the extra flatness hypotheses. The formulas in the statement define the unnormalized bar complex: associativity gives $\\partial_i\\partial_j=\\partial_{j-1}\\partial_i$ for $i<j$, so the two orders of merging three neighboring factors cancel in the alternating sum and the horizontal differential squares to zero. Each face is a chain map for the internal tensor differential; hence $(-1)^n d_{V_n}$ anticommutes with the face differential, since a face changes $n$ to $n-1$. This proves $d_B^2=0$. Units give the degeneracies. On $V_1$, augmentation after $\\partial_0-\\partial_1$ is zero by the balanced relation; on other lengths its compatibility is immediate. Applying a module map to the end factor commutes with every face, internal differential and augmentation, so this is a natural construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld 3.6(i), expanded by the worker: verification of the specific bar convention of this node."
+   }
+  },
+  {
+   "text": "For any left module $F$, the augmentation $B(h_X,\\mathcal B,F)\\to F(X)$ is a homotopy equivalence. Include $F(X)$ as augmented simplicial degree $-1$. Define $s_{-1}(f)=1_X\\otimes f$; on a bar tensor beginning with $a\\in\\mathcal B(U_n,X)$ define $s_n$ by prepending $1_X$ and treating $a$ as the newly inserted mapping-complex factor. Then $\\partial_0s_n=1$ and $\\partial_i s_n=s_{n-1}\\partial_{i-1}$ for $i>0$, by the unit and associativity laws, including the augmentation at $n=0$. Consequently $bs+sb=1$ on the augmented horizontal complex, where $b$ is the alternating face differential. The maps $s_n$ commute with internal differentials before totalization; afterwards their internal contributions cancel because the total internal signs on lengths $n$ and $n+1$ are opposite. Thus on the unaugmented total complex $s$ gives $ds+sd=1-i\\epsilon$, with $\\epsilon i=1$ and $i(f)=1_X\\otimes f$. For shifts, $B(h_X[k],\\mathcal B,F)\\cong B(h_X,\\mathcal B,F)[k]$ multiplies the length-$n$ summand by $(-1)^{kn}$. Its internal differential matches by the right-shift convention, and this length sign makes the face differential match the outer shift sign $(-1)^k$. On a shifted complex a homotopy is multiplied by $(-1)^k$; conjugating that shifted contraction by this isomorphism gives the unit-insertion contraction for $h_X[k]$. Taking direct sums of these isomorphisms and homotopies gives the assertion for sums of shifted representables.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld 3.6(i), bar contraction supplied explicitly by the worker; no flatness is used in the representable contraction."
+   }
+  },
+  {
+   "text": "Let $P$ be an arbitrary semi-free right module. Filter $B(P,\\mathcal B,F)$ and $P\\otimes_{\\mathcal B}F$ by $P_i$ and filter the cone of their augmentation correspondingly. Since $P_i\\subset P_{i+1}$ is graded-split, tensoring its values with any of the other factors preserves that splitting and quotient, and so does the direct sum over strings and lengths. The successive cone quotients are the cones of the bar augmentations for $P_{i+1}/P_i$, which are acyclic by step 8. Step 2, induction from zero and then the union prove that the augmentation $B(P,\\mathcal B,F)\\to P\\otimes_{\\mathcal B}F$ is a quasi-isomorphism, for every $F$. Finite support of tensors and bar lengths identifies the unions with the full complexes, so this argument imposes no boundedness. In particular $B(P,\\mathcal B,Q)\\to P\\otimes_{\\mathcal B}Q$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S3 split-filtration argument, applied to the explicit augmented bar cones of step 8; worker expansion of Drinfeld 3.6(i)."
+   }
+  },
+  {
+   "text": "We check the flatness and unbounded-totalization issue needed for the other comparison. If $K,L$ are homotopically flat over $\\mathbf Z$, then $K\\otimes L$ is so: for acyclic $A$, first $L\\otimes A$ is acyclic and then $K\\otimes(L\\otimes A)$ is acyclic; reassociate pure tensors. A shifted complex is homotopically flat with $K$, and sums preserve this property by the finite-support argument of step 2. A graded-split exhaustive filtration whose quotient complexes are homotopically flat also has homotopically flat union: tensor with an arbitrary acyclic $A$, keep the splitting and quotient, and apply the induction and union argument of step 2. Applying this at each object to the semi-free filtrations shows that $P$ and $Q$ are objectwise homotopically flat, because their representable quotient values are sums of shifted mapping complexes and these are flat by the added hypothesis. Finally a tensor with a homotopically flat complex preserves quasi-isomorphisms: its tensor with the cone is acyclic, and tensor commutes with that cone up to the Koszul signs, so step 2 applies.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld 3.3 definition; all flatness-closure assertions here are proved from that definition and the split-filtration cycle argument."
+   }
+  },
+  {
+   "text": "Suppose first that $F$ is objectwise homotopically flat. For $p:P\\to G$, in each fixed simplicial degree the map $V_n(P,\\mathcal B,F)\\to V_n(G,\\mathcal B,F)$ is a quasi-isomorphism: each summand tensors $p(U_n)$ with finitely many homotopically flat mapping complexes and $F(U_0)$, so step 10 applies; then take their direct sum. To pass from columns to the direct-sum total, filter the cone of the bar map by lengths $0\\leq n\\leq r$. Faces decrease length, so these are subcomplexes; the quotient at length $r$ is a shift of the acyclic column cone. Step 2 gives acyclicity by induction in $r$ and by the union. Thus $B(P,\\mathcal B,F)\\to B(G,\\mathcal B,F)$ is a quasi-isomorphism. For $B(P,\\mathcal B,Q)\\to B(P,\\mathcal B,F)$, each column tensors $q(U_0)$ with $P(U_n)$ and the mapping-complex factors, all homotopically flat by step 10. Its column cone is acyclic; filtering the total cone by length gives acyclic shifted column quotients, so induction and union in step 2 prove the claimed quasi-isomorphism. If instead only $G$ is objectwise flat, factor the comparison in the other order: $B(P,\\mathcal B,Q)\\to B(G,\\mathcal B,Q)\\to B(G,\\mathcal B,F)$. For the first arrow, each column tensors $p(U_n)$ with the flat mapping factors and $Q(U_0)$, which is flat by step 10. For the second, each column tensors $q(U_0)$ with the flat mapping factors and $G(U_n)$, which is flat by this case hypothesis. Thus every column cone is acyclic in each arrow; their total cones have the length filtration with acyclic shifted column quotients, and step 2 proves both total cones acyclic. This explicitly handles arbitrarily unbounded internal cochain degrees without a spectral-sequence convergence claim.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld 3.6(i), generalized module comparison proved by the worker; finite-length cone filtration replaces any convergence assertion."
+   }
+  },
+  {
+   "text": "Combining steps 9 and 11 gives the natural comparison span\n$$B(G,\\mathcal B,F)\\ \\longleftarrow\\ B(P,\\mathcal B,Q)\\ \\longrightarrow\\ P\\otimes_{\\mathcal B}Q.$$\nBoth arrows are quasi-isomorphisms, and the right-hand object is the derived balanced tensor of steps 4–6. The arrows commute with augmentation to $G\\otimes_{\\mathcal B}F$, since every component uses only $p,q$, actions and composition. For a module map lift it to the resolutions as in step 5: the resulting squares commute up to chain homotopy. Explicitly write a homogeneous length-$n$ tensor as $x\\otimes a_n\\otimes\\cdots\\otimes a_1\\otimes y$. A homotopy $h$ of right-module maps gives the internal homotopy $h(x)\\otimes a_n\\otimes\\cdots\\otimes a_1\\otimes y$; a homotopy $k$ of left-module maps gives $(-1)^{|x|+\\sum_j|a_j|}x\\otimes a_n\\otimes\\cdots\\otimes a_1\\otimes k(y)$. The graded module identities in step 6 show that these commute with every face: at the right-action face use $h(xa)=h(x)a$, and at the left-action face use $k(ay)=(-1)^{|a|}ak(y)$; the other faces just merge unaffected adjacent factors. Multiply either internal homotopy by $(-1)^n$ on length $n$. Its internal contribution to $dH+Hd$ is the difference of the end maps; the two face contributions cancel since the signs at lengths $n$ and $n-1$ are opposite. For two varying ends, decompose the difference as $(f-f')\\otimes g+f'\\otimes(g-g')$ and add the two homotopies, with the unchanged end acted on by the indicated chain map. Consequently the comparison is independent of lifts and natural for maps between pairs satisfying the stated flatness condition, even when different end factors supply flatness. The shift identity $(V_n[n])[1]=V_n[n+1]$ gives exactly $n+1$ suspensions in $B[1]$, finishing the last clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld 1.3.1 and 3.6(i); worker construction of the natural comparison and its homotopy check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-module-semi-free-replacement",
+  "def-weil-abstract-derived-category",
+  "lem-coef-dg-semi-free-homotopically-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09LM, 09LR, 09LS, 09S3, 0GZ2: split-filtration derived tensor argument extended explicitly to dg categories; bar contraction and length-filtration proof by the worker. Drinfeld 1.3.1, 3.6(i), 14.3–14.8 read online, archive absent locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +212,115 @@
    "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sided bar complex of differential graded category modules computes derived balanced tensor product",
+   "results": "{\"t\": \"2026-10-16T16:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"Two sided bar complex of differential graded category modules computes derived balanced tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensorHom\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₂₃\"], \"digest\": \"5b7e2f14e27e4c4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barComplex\"",
+   "results": "{\"t\": \"2026-10-16T16:33:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"barComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barComplex.d\", \"Rep.barComplex.isoStandardComplex\", \"Rep.barComplex.d_def\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\"], \"digest\": \"576ec8ac9e40af03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "grep",
+   "query": "two.?sided.?bar|semi.?free|DGModule|barComplex",
+   "results": "{\"t\": \"2026-10-16T16:33:59Z\", \"tool\": \"grep\", \"query\": \"two.?sided.?bar|semi.?free|DGModule|barComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"4062c0c11d78f510\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semi free dg modules preserve quasi isomorphisms under tensor and a flat bar resolution computes derived tensor",
+   "results": "{\"t\": \"2026-10-16T16:34:00Z\", \"tool\": \"leansearch\", \"query\": \"Semi free dg modules preserve quasi isomorphisms under tensor and a flat bar resolution computes derived tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"lTensorHomEquivHomLTensor\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"Module.Flat.ker_lTensor_eq\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"18d265ef068d3fee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopically flat differential graded modules and augmented bar resolution over many object algebra",
+   "results": "{\"t\": \"2026-10-16T16:35:17Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopically flat differential graded modules and augmented bar resolution over many object algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.barResolution_complex\", \"Rep.standardComplex.forget₂ToModuleCat\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.standardResolution\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\"], \"digest\": \"f9dab10ecf147541\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "grep",
+   "query": "bar.?resolution|KFlat|IsKFlat|homotopically.?flat",
+   "results": "{\"t\": \"2026-10-16T16:35:17Z\", \"tool\": \"grep\", \"query\": \"bar.?resolution|KFlat|IsKFlat|homotopically.?flat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary group representation bar resolutions, tensor-complex structure, or ordinary flat modules; none states balanced derived tensor for unbounded modules over arbitrary dg categories. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–434 and Algebra/Homology/Monoidal.lean:180–230."
+  },
+  {
+   "tool": "grep",
+   "query": "Coend|coend|TwoSidedBar|BarConstruction|IsKFlat|KFlat",
+   "results": "{\"t\": \"2026-10-16T16:49:16Z\", \"tool\": \"grep\", \"query\": \"Coend|coend|TwoSidedBar|BarConstruction|IsKFlat|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\"], \"digest\": \"6ad8eb3ee75ff855\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:41-66 (an end defining ordinary functor morphisms) and CategoryTheory/Limits/Shapes/End.lean:35-73 (ordinary coends). Neither states a derived dg-module tensor or a bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coend of enriched functors computed by a simplicial two sided bar construction",
+   "results": "{\"t\": \"2026-10-16T16:49:27Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coend of enriched functors computed by a simplicial two sided bar construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.enrichedComp\", \"CategoryTheory.Enriched.FunctorCategory.diagram\", \"CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedComp\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\"], \"digest\": \"07b3490c924e6b34\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:41-66 (an end defining ordinary functor morphisms) and CategoryTheory/Limits/Shapes/End.lean:35-73 (ordinary coends). Neither states a derived dg-module tensor or a bar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coend\", \"quasiIso\"",
+   "results": "{\"t\": \"2026-10-16T16:51:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"coend\\\", \\\"quasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of functors enriched in chain complexes via a homotopy coequalizer and its bar resolution",
+   "results": "{\"t\": \"2026-10-16T19:14:16Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor product of functors enriched in chain complexes via a homotopy coequalizer and its bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.coinvariantsTensorObj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit\"], \"digest\": \"954aa86f37ac0ae5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader found ordinary tensor-complex structure, natural-number Tor of objects in an abelian category, and the group-representation bar resolution. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–443, CategoryTheory/Monoidal/Tor.lean:38–64, and Algebra/Homology/Monoidal.lean:180–225; none states a balanced derived tensor or bar comparison for modules over a small dg category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barResolution\"",
+   "results": "{\"t\": \"2026-10-16T19:14:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"barResolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barResolution_complex\", \"Rep.barResolution.extIso\"], \"digest\": \"d9f9fae41cf325bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader found ordinary tensor-complex structure, natural-number Tor of objects in an abelian category, and the group-representation bar resolution. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–443, CategoryTheory/Monoidal/Tor.lean:38–64, and Algebra/Homology/Monoidal.lean:180–225; none states a balanced derived tensor or bar comparison for modules over a small dg category."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|TwoSidedBar|barResolution|homotopicallyFlat",
+   "results": "{\"t\": \"2026-10-16T19:14:17Z\", \"tool\": \"grep\", \"query\": \"DGModule|TwoSidedBar|barResolution|homotopicallyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"ffc54578fd0f7359\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reader found ordinary tensor-complex structure, natural-number Tor of objects in an abelian category, and the group-representation bar resolution. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:398–443, CategoryTheory/Monoidal/Tor.lean:38–64, and Algebra/Homology/Monoidal.lean:180–225; none states a balanced derived tensor or bar comparison for modules over a small dg category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quotient-hom-cone",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-two-sided-bar-derived-tensor",
+  "worker": "stage1",
+  "summary": "Preserved the entire statement and supplied twelve explicit proof steps: representable evaluation, cone/filtration cycle arguments, semi-free tensor invariance, resolution maps, and a natural flat bar comparison. No new node is needed. Read the local Stacks proofs and Drinfeld online; verified the unbounded direct-sum totalization and both one-flat-input cases. Second reading replaced the uncited connecting-map computation with a direct cone-cycle proof, removed the off-unit long-exact-sequence dependency, and expanded opposite-category, shift and bar-homotopy signs.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md (current main-20261015, sk-thm-sf-package): derived coefficient adjunction and the three derived Hom objects, through the inherited dg-quotient auxiliary chain. Historical ancestry and unit metadata preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-406643af3",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-406643af3 (reviewer sub-agent of L); spot-checked: I read the item statement and all 12 steps in full. Every cited statement checks out: def-weil-abstract-derived-category gives the cone and shift used in step 2. lem-coef-dg-module-semi-free-replacement gives the graded-module-split filtration, the representable quotients and the shift convention used in steps 1, 3, 4, 9 and 10. lem-coef-dg-semi-free-homotopically-projective gives the Hom acyclicity used in step 5. All cited nodes are in unit sk-prop-sf-biduality-general or are Mathlib, so no tool_uses are needed. Source check: local Stacks dga.tex 09LM, 09LR, 09LS, 09S3 (filtration/short exact sequence/colimit pattern), 0GZ2 (opposite swap) and 09KM, with labels confirmed in tags/tags. Drinfeld is recorded as WANTED, proof_origin is by agent, and no SGA is cited. I rechecked by hand: the cone-criterion cycles; the right-shift evaluation sign; that d_B squares to zero (faces are internal chain maps, cross terms (-1)^{n-1}(db-bd)); that the augmentation kills the two length-one faces; the extra degeneracy (internal terms cancel, ds+sd=1-i eps); the P_i filtration of the augmentation cone; h-flatness of P(U) and Q(U) from flat mapping complexes; and both one-flat-end factorizations, where finite length filtrations handle unbounded internal degrees. Edge cases: the empty category gives zero; over Z with F=G=Z only H^0=Z survives; with F=G=Z/2 the bar misses Tor_1, so the flat-end hypothesis is needed and the statement includes it. The dependency closure (237 nodes) has no cycle, and the cyclic module-projective-resolution node was correctly avoided. The created.item chain matches via, and from.place matches paragraph 2 of the main-20261015 proof. The parent lem-coef-dg-quotient-hom-cone steps 4-6 use exactly the stated clauses, unweakened. An rg search for bar, balanced/derived tensor, semi-free and h-flat found no duplicate. There are no new nodes, no fixes and no tool_uses."
+ }
 }

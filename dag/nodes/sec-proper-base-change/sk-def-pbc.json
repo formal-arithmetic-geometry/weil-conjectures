@@ -3,26 +3,190 @@
  "blueprint": {
   "is": "sk-def-pbc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Torsion and the PBC property",
- "statement": "A sheaf $F$ of abelian groups, or of $\\Lambda$-modules, is *torsion* if every\ngeometric stalk is a torsion abelian group. Equivalently,\n\n$$\nF=\\varinjlim_{n\\geq1}F[n],\\qquad F[n]=\\ker(n:F\\to F),\n$$\n\nwhere the positive integers are ordered by divisibility. These are sheaf\ncolimits. The equivalence follows by taking geometric stalks, which commute\nwith colimits and finite limits and detect isomorphisms.\n\nFor a morphism $f:X\\to Y$, write $\\mathrm{PBC}_\\Lambda(f)$ if the exchange\nmorphism $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ of [sk-def-exchange]\nis an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$ for every base change\n$g:Y'\\to Y$ and every $K\\in D^+(X_{\\Et},\\Lambda)$ with torsion cohomology\nsheaves. Put $\\mathrm{PBC}(f)=\\mathrm{PBC}_{\\mathbf Z}(f)$. The definition\nmakes sense for any $f$; for proper $f$ the property is proved in\n[sk-thm-p1] and [sk-thm-reduction].\n\nTorsion is a local condition on sections: every section is killed by an\ninteger after an étale covering, with the integer allowed to vary between\nmembers of the covering. On a non-quasi-compact object a section need not be\nkilled by a single integer. For example, the constant sheaf $\\mathbf Q/\\mathbf Z$\non a nonempty scheme is torsion, but on the disjoint union of countably many\ncopies of the scheme its sections include $(1/2^n)_{n\\geq1}$, which has\ninfinite order.",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a discrete commutative ring, with the coefficient conventions of [sk-def-pbc-conventions]. Sheaves are on the small étale site $T_{\\Et}$ [def-weil-pbc-etale-site], with universes as in [def-weil-size-convention]; a sheaf of $\\Lambda$-modules means a sheaf of modules over the constant ring sheaf $\\Lambda_T$ [def-weil-pbc-derived-categories].\n\nA sheaf $F$ of abelian groups, or of $\\Lambda$-modules, is *torsion* if every\ngeometric stalk is a torsion abelian group. Equivalently,\n\n$$\nF=\\varinjlim_{n\\geq1}F[n],\\qquad F[n]=\\ker(n:F\\to F),\n$$\n\nwhere the positive integers are ordered by divisibility. These are sheaf\ncolimits. The equivalence follows by taking geometric stalks, which commute\nwith colimits and finite limits and detect isomorphisms.\n\nFor a morphism $f:X\\to Y$, write $\\mathrm{PBC}_\\Lambda(f)$ if the exchange\nmorphism $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ of [sk-def-exchange]\nis an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$ for every base change\n$g:Y'\\to Y$ and every $K\\in D^+(X_{\\Et},\\Lambda)$ with torsion cohomology\nsheaves. Put $\\mathrm{PBC}(f)=\\mathrm{PBC}_{\\mathbf Z}(f)$. The definition\nmakes sense for any $f$; for proper $f$ (in the sense of [sk-def-conv]) the property is proved in\nthe blueprint units sk-thm-p1 and sk-thm-reduction.\n\nTorsion is a local condition on sections: every section is killed by an\ninteger after an étale covering, with the integer allowed to vary between\nmembers of the covering. On a non-quasi-compact object a section need not be\nkilled by a single integer. For example, the constant sheaf $\\mathbf Q/\\mathbf Z$\non a nonempty scheme is torsion, but on the disjoint union of countably many\ncopies of the scheme its sections include $(1/2^n)_{n\\geq1}$, which has\ninfinite order.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
   "place": "node sk-def-pbc, order 1046"
  },
  "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-category-colimit",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constant-sheaf",
   "sk-def-exchange",
-  "sk-def-conv",
-  "sk-def-pbc-conventions"
+  "sk-def-pbc-conventions",
+  "sk-def-conv"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For an abelian sheaf $F$, use the kernel and colimit construction of [def-weil-pbc-torsion-etale-sheaf]. Explicitly, if $n\\mid m$ and $ns=0$, then $ms=(m/n)(ns)=0$, so the kernel inclusions form a diagram indexed by positive integers under divisibility. This is a small filtered category: it contains $1$, and $nm$ is an upper bound for $n,m$; parallel arrows in a poset already agree. The compatible inclusions give the specified comparison $c_F:\\varinjlim_n F[n]\\to F$. Thus the displayed equality means that this canonical comparison is an isomorphism, not a sectionwise colimit assertion.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-category-colimit",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+    "place": "first paragraph and displayed torsion-kernel colimit"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-torsion-sheaf-characterizations], conditions (1), (2), (3), to this very $c_F$: it is an isomorphism exactly when all geometric stalks are torsion, and exactly when every section is locally killed by positive integers with locally varying orders. The stalk explanation in the source uses precisely [prop-weil-pbc-geometric-stalks-exact], [lem-kun-stalks-commute-colimits], and [lemma-weil-pbc-geometric-stalk-conservative]: the stalk of $c_F$ is the inclusion of the union of the subgroups killed by $n$ into $F_{\\bar t}$, which is surjective exactly when that group is torsion. An exact additive stalk functor also preserves finite products (finite biproducts) and kernels, hence finite limits. No quasi-compactness hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalks-commute-colimits",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+    "place": "first paragraph, equivalence and sentence explaining the geometric-stalk argument; last paragraph, local condition"
+   }
+  },
+  {
+   "text": "For a sheaf $F$ of $\\Lambda$-modules, work with module-valued sheaves using [lem-weil-pbc-module-sheaf-constant-ring-equivalence], which retains the underlying abelian sheaf $A$. By [def-weil-sheaf-of-modules-category], kernels are sectionwise, so the underlying sheaf of $F[n]$ is $A[n]$, with the same inclusions. Apply parts (2) and (3) of [lem-weil-pbc-module-sheaves-colimits-forgetful] to the small divisibility diagram: its module-sheaf colimit exists, and forgetting modules carries its colimit cocone to the abelian colimit cocone, so it carries $c_F$ to $c_A$. The required abelian sheafification exists on the small étale site, as included in that node's hypotheses and example. If the underlying abelian-sheaf map is invertible, its inverse commutes with restrictions. At every object $U$ it is linear over the scalar ring: applying the injective map $c_F(U)$ to $c_F(U)^{-1}(a y)$ and to $a c_F(U)^{-1}(y)$ gives $a y$ in both cases. Thus this inverse is a module-sheaf morphism, so forgetting reflects isomorphisms. The underlying abelian geometric stalk is likewise the stalk of $A$: in the pointed-neighbourhood description [def-weil-pbc-geometric-stalks], forgetting changes neither representatives $(U,\\bar u,s)$ nor their restriction identifications; addition and scalar multiplication are induced on these same germ classes. Consequently torsion of these stalks and local annihilation of sections are exactly the conditions of step 2 for $A$. This proves all torsion characterizations for $\\Lambda$-module sheaves as well.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+    "place": "first paragraph, words \"or of Lambda-modules\", and sheaf-colimit convention"
+   }
+  },
+  {
+   "text": "For any morphism $f:X\\to Y$, use $D^+(X_{\\Et},\\Lambda)$ and its cohomology sheaves from [def-weil-pbc-derived-categories]. Require each $\\mathcal H^j(K)$ to satisfy the torsion condition of steps 2 and 3. For every $g:Y'\\to Y$ and its cartesian square, the specified adjunction construction of [sk-def-exchange] supplies $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ in $D^+(Y'_{\\Et},\\Lambda)$. The conjunction of the assertions that these specified arrows are isomorphisms is the definition of $\\mathrm{PBC}_\\Lambda(f)$. Substitute $\\Lambda=\\mathbf Z$ to define $\\mathrm{PBC}(f)$. This formation uses no properness assumption or invertibility of torsion orders; the subsequent properness theorem is a forward reference, not a premise of this definition. In particular this definition quantifies over complexes with torsion cohomology, rather than only degree-zero sheaves.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "sk-def-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+    "place": "second paragraph, definition of PBC_Lambda(f) and its specialization to Z"
+   }
+  },
+  {
+   "text": "For the final example apply the moreover clause of [lem-weil-pbc-torsion-sheaf-characterizations] with $T$ nonempty. It states that $\\underline{\\mathbf Q/\\mathbf Z}$ is torsion and that restriction from $U=\\coprod_{n\\ge1}T$ identifies its sections with the product of the sections on the copies of $T$, where the section with constant dyadic coordinates has infinite order. Thus the phrase $(1/2^n)_{n\\ge1}$ means the glued section with coordinates given by the canonical constant-sheaf maps; it is not an assertion that all sections on $T$ are constant. This gives the claimed failure of a single global annihilator while retaining local annihilators.",
+   "uses": [
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+    "place": "last paragraph, non-quasi-compact object and constant Q/Z example"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-category-colimit",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-categories",
+  "sk-def-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc/_section.md",
+  "place": "first two paragraphs: torsion definition and canonical torsion-kernel colimit; PBC definition; last paragraph: local torsion and the dyadic counterexample"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Torsion sheaves on the small etale site and derived proper base change for bounded below complexes with torsion cohomology",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, DerivedCategory.IsGE, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: Grothendieck abelian categories, sheaf cohomology and boundedness, not the torsion/PBC predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorsionBaseChange|torsionHomology|IsTorsionSheaf|IsTorsion",
+   "results": "0 hits: ; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match in CategoryTheory/Sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsion sheaf is the filtered colimit of the kernels of multiplication by positive integers",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, Submodule.isTorsion'_iff_torsion'_eq_top, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, AddMonoid.IsTorsion, Submodule.torsionBy, CategoryTheory.Sheaf.createsColimitOfIsSheaf, IdealFilter.isTorsion_def, AlgebraicGeometry.Scheme.Modules.instHasColimits",
+   "date": "2026-10-17",
+   "verdict": "no match: existence of sheaf colimits and module/group torsion ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsAddTorsion",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion|baseChange|derivedBaseChange",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean; subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern base-change stability of site-cover morphism properties, not derived etale sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "12 hits: Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono",
+   "date": "2026-10-17",
+   "verdict": "no match: extension of scalars for modules and linear maps, not derived etale base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf torsion means every geometric stalk is a torsion abelian group and equals the union of its integer torsion subsheaves",
+   "results": "8 hits: SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsQuasicoherent, AddMonoid.isTorsion_iff_isTorsion_int, AlgebraicGeometry.isReduced_of_isReduced_stalk, ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-17",
+   "verdict": "no match: module finite generation/quasi-coherence, additive group torsion, and Zariski module stalks do not state this etale-sheaf predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "def IsTorsion|class IsTorsion|isTorsion_iff|torsion.*[Cc]olimit",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match in CategoryTheory; searched the general sheaf terminology independently"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of abelian groups is locally torsion if and only if its fibers at all points are torsion groups",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.I, CategoryTheory.Sheaf.H, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "no match: finite-type module sheaves and sheaf cohomology, not local integer torsion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsion\"",
+   "results": "12 hits: IsAddTorsionFree, IsMulTorsionFree, instIsAddTorsionFreeOfhasUniqueDiv, instIsMulTorsionFreeOfHasUniqueRoots, IsAddTorsionFree.eq_of_nsmul_eq_nsmul_of_addCommute, IsAddTorsionFree.mk, IsAddTorsionFree.pow_left_injective, isAddTorsionFree_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern additive/multiplicative torsion-free monoids, not torsion sheaves or derived exchange"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -51,5 +215,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc"
+ "unit": "sk-def-pbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-pbc",
+  "worker": "stage1",
+  "summary": "Audited the current main-20261015 definition against its source and the source Lean. Kept the full torsion-cohomology, arbitrary-morphism PBC definition, made its site and discrete coefficient ring explicit, and supplied verification steps for the non-definitional torsion equivalences and counterexample. Reused the existing abelian characterization, module-to-abelian colimit and constant-ring equivalence nodes; no new nodes. HasTorsionBaseChange alone covers only the PBC part, so there is no whole-item attachment. Repair of the landing return: revalidated every direct dependency and every proof quotation against the current shared DAG. In particular the updated sk-def-conv explicitly justifies the equivalence between the locally-finite-type and finite-type formulations of properness using universal closedness implying quasi-compactness. Made its sole use explicit in the contextual forward reference to the properness theorem; no proof step invokes that equivalence or assumes properness.",
+  "blueprint": "Steps 1-3 realize the first paragraph and displayed colimit, step 4 the second paragraph, and step 5 the last paragraph of main-20261015/sk-def-pbc/_section.md. The source has no separate proof block."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-1fa5d833a",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-1fa5d833a (reviewer sub-agent of L); spot-checked: I read the main-20261015 sk-def-pbc source, the older master unit and chapter records, the item in full, all 12 stmt_deps and all 13 proof_deps (including the blueprint_update texts of the stalk-conservativity, etale-sheaves and def-weil-pbc-property nodes), and the slopmaster2 Lean HasTorsionBaseChange and IsTorsionSheaf for comparison. The statement keeps every source clause. It covers arbitrary f, every g, every K in D^+(X_Et,Λ) with integer-torsion cohomology, and the specified Ex arrow g^{-1}Rf_*→Rf'_*g'^{-1} from sk-def-exchange in Mod(Λ_T). Only an explicit conventions paragraph and the plain unit names were added. Nothing is weakened and no properness, qcqs or invertibility hypothesis is introduced. Step 1 (divisibility diagram, filteredness, c_F) is elementary and correct. Step 2 uses statements (1)-(3) of lem-weil-pbc-torsion-sheaf-characterizations together with the exactness, colimit and conservativity stalk statements. Step 3 reduces the Λ case through sectionwise kernels and the forgetful functor preserving colimits (parts 2-3); the inverse-linearity argument is correct and the torsion is additive Z-torsion. Step 4 only forms the predicate. Step 5 is the lemma's moreover clause verbatim, with T nonempty. Edge cases checked: empty T, zero sheaf, Λ=0, n=1 (n=0 excluded), constant Z (not torsion), constant Q with Λ=Q (not Z-torsion), unbounded orders of the Q/Z dyadic section. No new nodes, no cycle (353 reachable nodes checked), proof_deps equals the union of the uses, and same_as [] is correct (def-weil-pbc-property is proper/degree-0, and its update drops torsion). I accept as tool_uses lem-kun-stalks-commute-colimits, lem-weil-pbc-module-sheaves-colimits-forgetful and lem-weil-pbc-module-sheaf-constant-ring-equivalence, all generic. Stage-2 note: the Lean uses ModuleCat-valued sheaves where the blueprint uses SheafOfModules over Λ_T; the equivalence lemma is the bridge. No fixes written."
+ }
 }

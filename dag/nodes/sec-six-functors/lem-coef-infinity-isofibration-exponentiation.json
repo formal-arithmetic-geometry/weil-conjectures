@@ -27,9 +27,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the inner-fibration part for any inner fibration $r:\\mathcal E\\to\\mathcal F$, without equivalence lifting. Identify a degreewise injective $A\\to B$ with its image simplicial subset: the degreewise bijections to its image commute with operators. Unfold [def-cbc-enhanced-diagrams-cones]. The internal-hom adjunction is explicit: a map $V\\to\\operatorname{Fun}(H,X)$ corresponds to a map $H\\times V\\to X$; in degrees, its value at $(h,v)\\in H_n\\times V_n$ is obtained by evaluating the diagram represented by $v$ at $(h,\\operatorname{id}_{[n]})$. Conversely a map $a:H\\times V\\to X$ sends $v\\in V_n$ to the map with $m$-simplex value $(h,\\alpha:[m]\\to[n])\\mapsto a_m(h,V(\\alpha)v)$. These rules commute with operators and are inverse. Thus a lifting problem for the corner map against an inner horn $j:\\Lambda_k^n\\hookrightarrow\\Delta^n$ transposes to one for $r$ against\n$$j\\mathbin{\\square}i:(\\Lambda_k^n\\times B)\\amalg_{\\Lambda_k^n\\times A}(\\Delta^n\\times A)\\longrightarrow\\Delta^n\\times B.$$\nThe two specified maps agree on the intersection and glue by the colimit property of [def-weil-pbc-category-colimit]. Every inner horn is inner anodyne under the lifting-class definition in [lem-coef-inner-anodyne-pushout-product], directly because every inner fibration lifts that horn. That node makes the displayed map inner anodyne, so it lifts against $r$. Transposition proves the corner is an inner fibration. Taking $r:X\\to\\Delta^0$ and $i:\\varnothing\\hookrightarrow H$ proves $\\operatorname{Fun}(H,X)$ is a quasicategory for every quasicategory $X$. Taking arbitrary $i$ and $r:\\mathcal D\\to\\Delta^0$ proves restriction to $A$ is an inner fibration. Consequently the target $T=\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D)$ is a quasicategory: fill an inner horn in its first factor, then use the restriction inner fibration in its second factor to lift over that chosen filler. Its source is a quasicategory by the preceding special case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1, inner-fibration and quasicategory part, expanded by the lifting adjunction and the existing inner-anodyne pushout-product theorem (compare Proposition 4.1.4.1)."
+   }
+  },
+  {
+   "text": "Let $u:B\\to\\mathcal C$ be an object and let $\\tau$ be an equivalence edge in $T$ starting at the image of $u$. The two projections of $\\tau$ give maps $\\Delta^1\\times A\\to\\mathcal C$ and $g:\\Delta^1\\times B\\to\\mathcal D$, compatible over $A$, with initial maps $u|_A$ and $pu$. Evaluating a simplicial functor on an equivalence preserves its inverse edge and its two witnessing triangles; hence all their vertex components are equivalences. For each vertex $b\\in B$ outside $A$, use the isofibration hypothesis on $p$ to choose an equivalence edge $e_b$ starting at $u(b)$ and mapping exactly to $g|_{\\Delta^1\\times\\{b\\}}$. Let $A'=A\\cup\\operatorname{sk}_0B$, where $\\operatorname{sk}_0B$ consists of the vertices and all their degeneracies. Glue the map on $\\Delta^1\\times A$, the edges $e_b$ with their degeneracies, and $u$ on $\\{0\\}\\times B$. They agree on every intersection (at a new vertex the intersection is its specified initial object), so the pushout property in [def-weil-pbc-category-colimit] gives $h_0:(\\Delta^1\\times A')\\amalg_{\\{0\\}\\times A'}(\\{0\\}\\times B)\\to\\mathcal C$ over $g$. Now $A'$ contains every vertex of $B$, and every prescribed vertex edge is an equivalence. Apply [lem-coef-infinity-equivalence-prism-extension] with $r=p$ and $\\epsilon=0$ to extend $h_0$ over $\\Delta^1\\times B$, still exactly over $g$. All vertex components remain the prescribed equivalences. By [lem-coef-infinity-pointwise-equivalences] this is an equivalence edge in $\\operatorname{Fun}(B,\\mathcal C)$. Its initial endpoint is $u$ and its corner image is exactly $\\tau$. Together with Step 1 this proves the asserted isofibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-equivalence-prism-extension",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NY",
+    "place": "Corollary 4.4.5.9, adjoining the 0-skeleton and applying Proposition 4.4.5.8; the source-fixed version is obtained by opposites. The item uses the source-fixed definition of isofibration."
+   }
+  },
+  {
+   "text": "The map $\\mathcal C\\to\\Delta^0$ is an isofibration: inner lifting is the quasicategory condition, and the unique equivalence edge of the point lifts at any chosen $c$ to the degenerate identity edge of $c$ with degenerate inverse witnesses. Apply Steps 1-2 to this map. The two internal functor simplicial sets into $\\Delta^0$ have exactly one simplex in each degree, so its corner target identifies degreewise with $\\operatorname{Fun}(A,\\mathcal C)$. This gives the stated restriction isofibration, also for empty $A$ or $B$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3, specialization to the point; the point and identity-edge checks are explicit."
+   }
+  },
+  {
+   "text": "Now let $p:\\mathcal C\\to\\mathcal D$ be only an inner fibration and fix $x,y\\in\\mathcal C$. Set $B=\\Delta^1$, $A=\\partial\\Delta^1=\\{0\\}\\amalg\\{1\\}$ and $f:A\\to\\mathcal C$ with values $x,y$. Let $\\theta$ be the corner map for this $p$ and $i$, an inner fibration by Step 1. The map\n$$U_{\\mathcal D}(p(x),p(y))\\longrightarrow\\operatorname{Fun}(A,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal D)}\\operatorname{Fun}(B,\\mathcal D)$$\nsends a simplex $v$ to $(f,v)$, using the constant simplex at the diagram $f$. Its ordinary simplicial pullback along $\\theta$ is exactly $U_{\\mathcal C}(x,y)$: in each degree the equations are precisely that both endpoint simplices of the arrow diagram are constant at $x,y$. A lifting square for this pullback against an inner horn maps to one for $\\theta$; its filler paired with the already specified base simplex is a filler of the original square. Thus the induced map $s:U_{\\mathcal C}(x,y)\\to U_{\\mathcal D}(p(x),p(y))$ is an inner fibration. Prove independently that $U_X(a,b)$ is Kan for every quasicategory $X$. Its inner horns fill by the same Step 1 argument applied to $X\\to\\Delta^0$ and the boundary inclusion $A\\subset B$. For $n\\geq2$, a left outer horn in $U_X(a,b)$ transposes to a map $B\\times\\Lambda_0^n\\to X$; adjoin the constant maps at $a,b$ on $A\\times\\Delta^n$. They agree on $A\\times\\Lambda_0^n$, so [def-weil-pbc-category-colimit] glues them. For each vertex of $B=\\Delta^1$, the edge in the parameter direction $[0,1]$ is an identity, since both vertices belong to $A$. Apply [lem-cbc-invertible-prism-extension] to extend over $B\\times\\Delta^n$, keeping the two endpoint strips constant. Transposition gives the required filler in $U_X(a,b)$. For the right outer horn use the same argument with opposites: define $X^{\\mathrm{op}}_m=X_m$ with the operator of $\\alpha:[k]\\to[m]$ that of $\\alpha^{\\mathrm{rev}}(j)=m-\\alpha(k-j)$. This operation sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, preserves inner horn filling, and commutes with products and degreewise pullbacks. Reversing the shape interval gives the degreewise identification $U_X(a,b)^{\\mathrm{op}}=U_{X^{\\mathrm{op}}}(b,a)$. Thus a right outer horn becomes a left outer horn, the preceding construction fills it, and applying the involution again gives the desired original filler. In dimension one either horn specifies only a vertex, filled by its degenerate identity edge. Hence all horns fill, with no assertion that the space is nonempty. Apply this result to $X=\\mathcal C,\\mathcal D$. This establishes that the source and target of $s$ are Kan independently of the pinch comparison.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8 with Q=X, A=boundary of Delta^1 and B=Delta^1: the endpoint strips make every required parameter edge an identity. Right outer horns follow by the explicit opposite involution. Inner horns use Step 1; compare Proposition 4.6.1.11 and Proposition 4.6.1.24 (01PC)."
+   }
+  },
+  {
+   "text": "For a vertex $a\\in U_{\\mathcal C}(x,y)$ and an edge $\\gamma$ in $U_{\\mathcal D}(p(x),p(y))$ starting at $s(a)$, transpose $\\gamma$ to $g:\\Delta^1\\times B\\to\\mathcal D$ with $B=\\Delta^1$ as in Step 4. Its restriction to $\\Delta^1\\times A$ is constant at the two endpoint objects. Prescribe $h_0$ to be constant at $x,y$ on these two strips and to equal $a$ on $\\{0\\}\\times B$. The overlaps agree, and $ph_0=g$ there; the gluing has exactly the pushout meaning of [def-weil-pbc-category-colimit]. The subset $A=\\partial\\Delta^1$ contains every vertex of $B$, and the two vertical edges of $h_0$ are identities, hence equivalences. Therefore [lem-coef-infinity-equivalence-prism-extension] with $\\epsilon=0$ and this inner fibration $p$ gives an extension over the whole square. It is an edge in $U_{\\mathcal C}(x,y)$ starting at $a$ and mapping exactly to $\\gamma$. In particular it lifts every equivalence edge of the target. Every edge in the source Kan complex is itself an equivalence by the Kan-complex clause of [lem-coef-infinity-core-kan-fibration]. Hence $s$ is an isofibration between Kan complexes, using Step 4 for inner lifting. Apply the core-map clause of that same node to $s$: it gives a Kan fibration on cores. Its Kan-complex clause identifies both cores with the entire $U$ spaces, so this is precisely the asserted Kan fibration $U_{\\mathcal C}(x,y)\\to U_{\\mathcal D}(p(x),p(y))$. This proves all horn lifts, including dimension one and both outer horns, without imposing equivalence lifting on the original $p$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-equivalence-prism-extension",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PC",
+    "place": "Proposition 4.6.1.24 proof and Variant 4.4.5.11 (01NZ), expanded directly with the relative prism; core-map input is Proposition 4.4.3.7 (01EZ), with Proposition 4.4.2.1 (019D)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-infinity-equivalence-prism-extension",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-cbc-invertible-prism-extension",
+  "lem-coef-infinity-core-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01F1",
+  "place": "Expanded online proofs of Kerodon 01F1, 01NY, 01F3, 01P8 and 01PC. The Kan property of fixed-endpoint arrow spaces is proved directly using the existing absolute invertible-prism theorem (01DP), not pinch comparison. The separate relative-prism, pointwise-equivalence and core-map inputs remain statement-only. WANTED entries are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,15 +150,67 @@
    "results": "{\"t\": \"2026-10-16T14:25:26Z\", \"tool\": \"grep\", \"query\": \"isofibration|isoFibration|CategoricalFibration|modelCategoryJoyal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: read Quasicategory/InnerFibration.lean:55-123 and Basic.lean:35-80. InnerFibration and quasicategory_of_innerFibration only assert inner-horn lifting and closure of quasicategories. The pinned file does not contain the service hit instInnerFibrationAppPreOfMonoOfQuasicategory; even that hit asserts inner-fibration restriction, without equivalence lifting or the Kan morphism-space conclusion. Quillen-model fibrations lift all horns and cannot be substituted for quasicategorical isofibrations. Read StrictBicategory.lean:14-70; it uses homotopy categories of internal Homs. The focused/global isofibration search has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|isoFibration|CategoricalFibration|modelCategoryJoyal",
+   "results": "{\"t\": \"2026-10-16T16:42:41Z\", \"tool\": \"grep\", \"query\": \"isofibration|isoFibration|CategoricalFibration|modelCategoryJoyal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the actual hits only provide inner-fibration restriction, quasicategory closure, Quillen all-horn fibrations or ordinary hom-lift properties. Read pinned Inner/PushoutProduct.lean:69-109,133-149 and Quasicategory/InnerFibration.lean:55-103. The inner corner theorem proves only the inner-horn part and supplies neither equivalence lifting nor the final morphism-space Kan fibration; the whole item is not a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-16T16:42:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.quasicategory_of_from_innerFibrations\", \"SSet.Quasicategory.from_innerFibrations\", \"SSet.instInnerFibrationFromOfQuasicategory\", \"SSet.quasicategory_iff_from_innerFibration\", \"SSet.quasicategory_iff_innerFibration\", \"SSet.instInnerFibrationAppPreOfMonoOfQuasicategory\"], \"digest\": \"3f7e9f1a608fc48c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the actual hits only provide inner-fibration restriction, quasicategory closure, Quillen all-horn fibrations or ordinary hom-lift properties. Read pinned Inner/PushoutProduct.lean:69-109,133-149 and Quasicategory/InnerFibration.lean:55-103. The inner corner theorem proves only the inner-horn part and supplies neither equivalence lifting nor the final morphism-space Kan fibration; the whole item is not a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction internal hom of quasicategories preserves equivalence lifting and inner fibrations",
+   "results": "{\"t\": \"2026-10-16T16:42:47Z\", \"tool\": \"leansearch\", \"query\": \"Restriction internal hom of quasicategories preserves equivalence lifting and inner fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BasedFunctor.preserves_isHomLift\", \"CategoryTheory.IsHomLift.lift_comp_id\", \"CategoryTheory.IsHomLift.comp_eqToHom_lift\", \"CategoryTheory.IsHomLift.inv_lift_inv\", \"CategoryTheory.IsHomLift.lift_eqToHom_comp_iff\", \"CategoryTheory.IsHomLift.lift_comp_eqToHom_iff\", \"CategoryTheory.IsHomLift.comp_id_lift\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"248a19df7d09ac78\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the actual hits only provide inner-fibration restriction, quasicategory closure, Quillen all-horn fibrations or ordinary hom-lift properties. Read pinned Inner/PushoutProduct.lean:69-109,133-149 and Quasicategory/InnerFibration.lean:55-103. The inner corner theorem proves only the inner-horn part and supplies neither equivalence lifting nor the final morphism-space Kan fibration; the whole item is not a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isofibration of quasicategories induces an isofibration on relative functor categories and a Kan fibration on morphism spaces",
+   "results": "{\"t\": \"2026-10-16T16:42:48Z\", \"tool\": \"leanfinder\", \"query\": \"An isofibration of quasicategories induces an isofibration on relative functor categories and a Kan fibration on morphism spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"CategoryTheory.Nerve.quasicategory\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"f0dbe5a7b5b975f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the actual hits only provide inner-fibration restriction, quasicategory closure, Quillen all-horn fibrations or ordinary hom-lift properties. Read pinned Inner/PushoutProduct.lean:69-109,133-149 and Quasicategory/InnerFibration.lean:55-103. The inner corner theorem proves only the inner-horn part and supplies neither equivalence lifting nor the final morphism-space Kan fibration; the whole item is not a Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-join-cone-calculus",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-isofibration-exponentiation",
+  "worker": "stage1",
+  "summary": "Repair of the returned dependency cycle against the current shared DAG: removed the pinch-comparison citation, whose current dependencies reach this item. Step 4 now proves the Kan property directly, filling inner horns with Step 1 and outer horns by the existing absolute invertible-prism lemma with fixed endpoint identities and explicit opposite involution. The item statement and all maintainer metadata are unchanged; the three retained statement-only helpers are unchanged. No Lean, compiler or live-project writes.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. The joint endpoint restriction is an isofibration; its action on unpinched morphism spaces is a Kan fibration. Steps 1-3 establish the joint endpoint restriction input; Steps 4-5 establish its action on unpinched morphism spaces. All inputs remain in the inherited stable coherent-diagram foundation below the specified coefficient adjunction; no chapter/unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Generic absolute outer-horn prism extension, used with shape Delta^1 and its boundary to prove that fixed-endpoint arrow spaces are Kan. It replaces the cyclic pinch-comparison citation; no acyclic statement in this unit supplies this prism interface, and no unit-level argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-db7e63890",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-db7e63890 (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, the 3 new nodes and every cited statement (def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit, Mathlib leaf lem-coef-inner-anodyne-pushout-product, lem-cbc-invertible-prism-extension) in full. Checked the sources online at kerodon.net. 01F1 (Prop 4.4.5.1) is the corner isofibration. 01P8 (Prop 4.6.1.22) needs only an inner fibration and is about the unpinched Hom = U_C(x,y), so the item statement is unchanged and not weakened. 01NX (Prop 4.4.5.8) assumes A contains every vertex and asks for isomorphisms at final vertices; the new node strengthens this to all vertices, which is valid, and gets epsilon=0 by the opposite dual. 01DK (Thm 4.4.4.4) is pointwise detection; 01EZ (Prop 4.4.3.7) is the map on cores. Step 1: the transposition to j□i and the leaf's inner-anodyne pushout-product statement are correct, and the source and target quasicategory special cases hold. Step 2: equivalence lifting is used only at vertices outside A; the gluing over A u sk_0 B lies over g; the relative prism with eps=0 and the pointwise node give an equivalence lifting tau exactly. Step 3 is an elementary point specialization. Step 4: the pullback of theta is exactly U_C, so s is an inner fibration. U_X is Kan: the Lambda^n_0 horn fills by the absolute prism with identity vertex edges, since both vertices of Delta^1 lie in the boundary; Lambda^n_n fills via the explicit opposite involution; n=1 is degenerate. Step 5: the relative prism lifts every edge, so s is an isofibration between Kan complexes, and the core node then gives a Kan fibration. This step is needed because an inner fibration between Kan complexes need not be Kan (pt -> N(iso)). Small cases tested: B=Delta^1 with A its boundary, A=B, empty K, nerves. No duplicates found (rg of isofibration, core, pointwise and the tags). lem-cbc-enhanced-functor-cone-calculus lies downstream of the item and would make a cycle. Transitive closures of all dependencies avoid the item, so there is no cycle. Accepted tool_use: lem-cbc-invertible-prism-extension (sk-prop-sf-cbc), a generic absolute prism used as a black box. No SGA source. No fixes."
+ }
 }
