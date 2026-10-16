@@ -253,5 +253,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-06f4b0f59 (reviewer sub-agent of L); spot-checked: Read the whole delivery and every source at the cited places: more-algebra 09E8, 09EE with its full proof, 0BU7 with its proof, 0BU8; pione 0BUA full proof and the 0BUB statement; Mathlib Profinite.lean:300-341 and GaloisClosure.lean:85-97; the blueprint main-20261015 lem-exc-dvr-galois proof; the unit record and the parent's use of the item. Item statement: unchanged and true; it is the henselian, algebraically-closed-residue case of 0BUB and gives exactly what the parent step uses. Step 1: the 04GH product lemma (zero factors allowed) plus the domain-idempotent argument makes B_L local, so D=I=G; the inertia character comes from 09EE. Step 2: 0BU7 surjections on D, I, P; I checked the scaled formula q_L*e_M/e_L = q_M*n_M/n_L myself; the identity and composition laws hold; directedness comes from the Lattice/OrderBot instances. Step 3: Eisenstein irreducibility, henselian lifting of mu_m, cyclic extension with e=m, so the tame indices are cofinal; m=1 holds and p|m is correctly excluded. Step 4: every hypothesis of the inverse-limit node is supplied; G is identified with lim G_L by continuousMulEquivToLimit (exact leaf, lines 323-327). Step 5: correctly elementary; choice-independence through a common overfield, both composites are the identity, continuity holds coordinatewise. Step 6: composes with the compatible-root/CRT product isomorphism. All five unsplit new nodes are true, self-contained, strictly smaller than the item and not restatements of it; small cases tested (L=K, p-power e, p=2 with e_L=3, e_M=6, singleton systems, m=1). The duplicate search over the existing DAG (tags 09EE/0BU7/0BU8/0BUA/0BUB/0BU2/09HW/09E8 and the Kummer, root, inertia and profinite candidates, including the lem-sbc root nodes and lem-sc-primitive-root) found no duplicate. Accepted tool use: lem-weil-pbc-finite-over-henselian-local-product (generic 04GH locality lemma, reviewed; the same tool is already declared in this unit by lem-exc-punctured-curve-branches). No SGA; no slopmaster2 attachment exists. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f2a1a9c28",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, required report sections, and compiler evidence all checked; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.HenselianDVRTameSequence",
+  "declaration": "IsDiscreteValuationRing.exists_tame_galois_sequence",
+  "file": "lean/Sheaf/FieldTheory/HenselianDVRTameSequence.lean",
+  "statement": "theorem exists_tame_galois_sequence (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (hR : IsExcellent R) [HenselianLocalRing R] (F : Type v) [Field F] [Algebra R F] [IsFractionRing R F] (p : ℕ) [Fact p.Prime] [CharP (IsLocalRing.ResidueField R) p] [IsAlgClosed (IsLocalRing.ResidueField R)] (Fsep : Type w) [Field Fsep] [Algebra F Fsep] [IsSepClosure F Fsep] : ∃ (P : Subgroup (Gal(Fsep/F))) (_ : P.Normal), IsClosed (P : Set (Gal(Fsep/F))) ∧ ∃ θ : Gal(Fsep/F) →* Multiplicative (∀ r : {r : Nat.Primes // (r : ℕ) ≠ p}, @PadicInt r.1 (Fact.mk r.1.2)), Continuous θ ∧ Function.Surjective θ ∧ θ.ker = P ∧ (∃ e : (Gal(Fsep/F) ⧸ P) ≃ₜ* Multiplicative (∀ r : {r : Nat.Primes // (r : ℕ) ≠ p}, @PadicInt r.1 (Fact.mk r.1.2)), ∀ g : Gal(Fsep/F), e (QuotientGroup.mk' P g) = θ g) ∧ ∀ (Q : Type z) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q] [Finite Q] (f : P →* Q), Continuous f → Function.Surjective f → ∃ n : ℕ, Nat.card Q = p ^ n",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
