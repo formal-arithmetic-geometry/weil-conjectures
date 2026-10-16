@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.Category
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory

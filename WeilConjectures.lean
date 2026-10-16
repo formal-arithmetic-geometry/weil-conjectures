@@ -2087,6 +2087,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatTelescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.AssociatorShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ClosedTriangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
@@ -2466,6 +2467,7 @@ public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
 public import WeilConjectures.Compactification.BoundarySeparationData
+public import WeilConjectures.Compactification.Category
 public import WeilConjectures.Compactification.CategoryBaseChange
 public import WeilConjectures.Compactification.Cofiltered
 public import WeilConjectures.Compactification.CommonModification
@@ -3544,6 +3546,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.TateModule
+public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.PoincareDuality.Verdier
@@ -4319,6 +4322,7 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
