@@ -172,5 +172,31 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-56d06b42e (reviewer sub-agent of L); spot-checked: I read the whole delivery and the statement is true. It needed one missing citation (C1/C2/C3) and two thin spots filled in. Statement: a self-contained profinite span-limit lemma (compatible-partition triples I, finite pullbacks B_i, P homeomorphic to lim B_i). I checked it against Stacks 08ZY's statement and proof (topology.tex lemma-profinite), 0A2P, 005D and 08YE, and against the blueprint main-20261015 'Fibre products' paragraph of lem-sfb-profinite-to-proetale-finite-limits. I tested empty spaces, an empty source, a one-point base, finite discrete spans, disjoint images, and S_1=S_2=S Cantor with f=id, where finite stages are not surjective. It is not a duplicate: I searched the DAG with rg for 08ZY, 0A2P and clopen-partition phrasing and opened the clopen-basis, function-factorization, w-contractible clopen-partition and spectral-limit nodes. It is not a clause of its parent. The three kinds of Mathlib search are recorded and asLimit is not a one-line specialization. Steps 1 (closed equalizer, profinite) and 4 (compact-to-Hausdorff bijection) are correct. The fixes: step 3 was marked elementary but used 'finite clopen partitions separate points', which is 08ZY's proof via 08ZN, and attributed surjectivity to 0A2P. Step 3 now cites the existing Mathlib leaf lem-weil-pbc-profinite-clopen-basis (isTopologicalBasis_isClopen, Topology/Separation/Profinite.lean:66), writes out the t(alpha) and (f^-1 gamma, gamma, f^-1 gamma) triples and the finite-intersection argument (005D), and is set elementary=false; proof_deps is updated. Step 2 now checks that refinement maps commute with the g maps, so b_ji lands in B_i. Step 4's source place now names 08YE. The statement is unchanged and no target is involved. The only citation is a Mathlib leaf, so the route is unaffected and no tool_uses are needed; no SGA. The report is mostly a stale copy of the parent's report, which is a weak F review. The corrected file is fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-finite-quotient-fiber-product.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6028a0a8b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: DiscreteQuotient = finite clopen partitions (compact, empty space -> empty carrier), LEComap = block-into-fibre compatibility, refinement order correct (Mathlib finer<=coarser, reversed args), B_i = equalizer subtype of discrete quotient product via DiscreteQuotient.map, p/b fixed by proj/ofLE component equations, h fixed pointwise to canonical map into product-subtype limit. No extra hypotheses or universe restriction; edge cases (empty spaces, empty source, disjoint images, singletons, identity span) covered. Real data in all helpers, only theorem sorry; source+blueprint docstrings; proof docstring present; lean.statement verbatim; node diff only adds lean. nt_compile.py --json clean (rc=0, no diagnostics; error control verified). Worker report section stale but explicitly superseded by Second reading by NQ."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteQuotientFiberProduct",
+  "file": "lean/Sheaf/Topology/FiniteQuotientFiberProduct.lean",
+  "declaration": "Topology.finite_quotient_fiber_product",
+  "declarations": [
+   "Topology.CompatibleFinitePartitionSpan",
+   "Topology.compatiblePartitionRefines",
+   "Topology.finitePartitionFiber",
+   "Topology.topologicalFiber",
+   "Topology.finitePartitionLimit",
+   "Topology.finite_quotient_fiber_product"
+  ],
+  "statement": "theorem finite_quotient_fiber_product (S₁ S S₂ : Type u) [TopologicalSpace S₁] [TopologicalSpace S] [TopologicalSpace S₂] [CompactSpace S₁] [CompactSpace S] [CompactSpace S₂] [T2Space S₁] [T2Space S] [T2Space S₂] [TotallyDisconnectedSpace S₁] [TotallyDisconnectedSpace S] [TotallyDisconnectedSpace S₂] (f₁ : C(S₁, S)) (f₂ : C(S₂, S)) : CompactSpace (topologicalFiber f₁ f₂) ∧ T2Space (topologicalFiber f₁ f₂) ∧ TotallyDisconnectedSpace (topologicalFiber f₁ f₂) ∧ Nonempty (CompatibleFinitePartitionSpan f₁ f₂) ∧ (∀ i j : CompatibleFinitePartitionSpan f₁ f₂, ∃ k : CompatibleFinitePartitionSpan f₁ f₂, compatiblePartitionRefines i k ∧ compatiblePartitionRefines j k) ∧ ∃ (p : ∀ i : CompatibleFinitePartitionSpan f₁ f₂, topologicalFiber f₁ f₂ → finitePartitionFiber i), (∀ (i : CompatibleFinitePartitionSpan f₁ f₂) (q : topologicalFiber f₁ f₂), (p i q).1.1 = i.left.proj q.1.1 ∧ (p i q).1.2 = i.right.proj q.1.2) ∧ (∀ i, Continuous (p i)) ∧ ∃ (b : ∀ (i j : CompatibleFinitePartitionSpan f₁ f₂), compatiblePartitionRefines i j → finitePartitionFiber j → finitePartitionFiber i), (∀ (i j : CompatibleFinitePartitionSpan f₁ f₂) (hij : compatiblePartitionRefines i j) (x : finitePartitionFiber j), (b i j hij x).1.1 = DiscreteQuotient.ofLE hij.1 x.1.1 ∧ (b i j hij x).1.2 = DiscreteQuotient.ofLE hij.2.2 x.1.2) ∧ (∀ (i j k : CompatibleFinitePartitionSpan f₁ f₂) (hij : compatiblePartitionRefines i j) (hjk : compatiblePartitionRefines j k) (hik : compatiblePartitionRefines i k) (x : finitePartitionFiber k), b i k hik x = b i j hij (b j k hjk x)) ∧ ∃ (coh : ∀ (q : topologicalFiber f₁ f₂) (i j : CompatibleFinitePartitionSpan f₁ f₂) (hij : compatiblePartitionRefines i j), b i j hij (p j q) = p i q), ∃ (h : topologicalFiber f₁ f₂ ≃ₜ finitePartitionLimit b), ∀ (q : topologicalFiber f₁ f₂), h q = ⟨fun i => p i q, coh q⟩",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
