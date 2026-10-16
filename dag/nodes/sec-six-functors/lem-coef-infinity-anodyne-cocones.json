@@ -24,7 +24,9 @@
   "place": "Kerodon Proposition 4.3.6.4 (018J), right anodyne/monomorphism case, for the pushout-join assertion; Example 4.3.6.5 (0235) for K empty and L the point. For the mapping-space assertion, Proposition 7.2.1.3 (02N3) identifies right anodyne monomorphisms with right cofinal monomorphisms, and the opposite-category dual of Proposition 7.2.2.1 (02NR), conditions (1) and (6), identifies right cofinality with restriction equivalences on coherent cocones. Naturality is that of the displayed precomposition functor. Read online, not archived in literature/. Tags here are Kerodon tags, not the unrelated Stacks tags with the same characters. Mapping-space convention check: Kerodon Construction 4.6.5.1 (01KX), Proposition 4.6.5.5 (01L0), and Proposition 4.6.5.10 (01L5). The natural pinch-inclusion equivalences identify the right-pinched model used here with the unadorned Hom spaces used in the cited cofinality/finality statements; after taking opposites use the left-pinch comparison as well."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-pushout-join-saturation"
  ],
  "proof": [
   {
@@ -245,5 +247,24 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-006106137 (reviewer sub-agent of L); spot-checked: Read all six statements, every proof step, cited statements, sources, and unit/chapter route. Mathematics checks passed, including 5,840 finite horn/join checks; no duplicate, restated split, missing dependency, or cycle found. Corrected the pinch helper’s blueprint reference from Construction 4.6.5.6 to 4.6.5.7 under fixes/. Accepted the declared functor-category tool use. Full findings are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.AnodyneCocones",
+  "declaration": "SSet.Enhanced.anodyne_cocones",
+  "file": "lean/Sheaf/AlgebraicTopology/AnodyneCocones.lean",
+  "statement": "theorem anodyne_cocones {A B : SSet.{u}} (i : A ⟶ B) [Mono i] (hi : SSet.rightAnodyneExtensions i) : (∀ {K L : SSet.{u}} (k : K ⟶ L) [Mono k], innerAnodyneExtensions (pushoutJoin i k)) ∧ ∀ (C : SSet.{u}) (_ : Quasicategory C), constantDiagrams B C ≫ (MonoidalClosed.pre i).app C = constantDiagrams A C ∧ ∀ (p : B ⟶ C) (T : C _⦋0⦌), KanComplex (mappingSpace ((ihom B).obj C) (diagramVertex p) ((constantDiagrams B C).app _ T)) ∧ KanComplex (mappingSpace ((ihom A).obj C) (diagramVertex (i ≫ p)) ((constantDiagrams A C).app _ T)) ∧ IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre i).app C) (diagramVertex p) ((constantDiagrams B C).app _ T))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed right-anodyne definition and ordered join/pushoutJoin from def-coef-infinity-right-anodyne and lem-coef-infinity-pushout-join-saturation, added to stmt_deps without a mathematical statement change. Restriction is exactly the existing Mathlib MonoidalClosed.pre followed by the dependency mappingSpaceMap; its endpoint images are the restricted diagram and constant diagram. The landed pinch-comparison proof dependency is imported non-publicly. No helper constructions or duplicate definitions remain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-091df96a9",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, source references, exact declarations, universes, edge cases, docstrings, and verbatim signature. Per-file scompile reproduced cleanly in sandbox and library positions (1.8 s, 1.9 s). No defects or fixes; branch head unchanged."
  }
 }
