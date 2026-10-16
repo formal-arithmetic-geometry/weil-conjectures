@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: projective dg-module models used to compute the finite derived mapping-complex adjunction before total inverse limit.",
+   "place": "Proof paragraph 2: projective dg-module models used to compute the finite derived mapping-complex adjunction before total inverse limit; this auxiliary node supplies the homotopical-projectivity criterion for semi-free models.",
    "via": [
     "lem-coef-dg-module-projective-resolution",
     "lem-coef-derived-enriched-yoneda",
@@ -24,9 +24,86 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Let $N$ be objectwise acyclic, let $r\\in\\mathbf Z$, and let $f$ be a degree-$r$ cocycle in $\\underline{\\operatorname{Hom}}_{\\mathcal B}(P,N)$. Thus $d_Nf=(-1)^rfd_P$. By the displayed definition of the Hom differential it suffices to construct a graded module map $h$ of degree $r-1$ with $d_Nh+(-1)^rhd_P=f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Choose the filtration in the statement. Write $Q_i=P_{i+1}/P_i\\simeq\\bigoplus_{\\alpha\\in I_i}\\mathcal B(-,U_\\alpha)[n_\\alpha]$. A graded retraction $\\rho_i:P_{i+1}\\to P_i$ yields a graded section of the quotient: $s_i(\\bar x)=x-j_i\\rho_i(x)$, independent of the lift $x$, since $\\rho_i j_i=1$. Hence $P_{i+1}=P_i\\oplus s_i(Q_i)$ as graded modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "The identity $1_{U_\\alpha}$ in the $\\alpha$th shifted representable is a closed element of degree $k_\\alpha=-n_\\alpha$; let $e_\\alpha=s_i(1_{U_\\alpha})$. Since the quotient map is a chain map, $d_Pe_\\alpha\\in P_i$. At each object every element of $s_i(Q_i)$ is a finite sum of terms $e_\\alpha a_\\alpha$: indeed each element $a\\in\\mathcal B(V,U_\\alpha)$ equals $1_{U_\\alpha}a$. Thus specifying images of the $e_\\alpha$ of the required degrees specifies a unique graded module map on this summand, by the formula $e_\\alpha a\\mapsto y_\\alpha a$ and additivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Start with $h_0=0$ on $P_0=0$. Suppose $h_i:P_i\\to N$ has degree $r-1$ and satisfies $d_Nh_i+(-1)^rh_id_P=f|_{P_i}$. For a cell $e=e_\\alpha$ of degree $k=k_\\alpha$ put $z_e=f(e)-(-1)^rh_i(d_Pe)\\in N(U_\\alpha)^{k+r}$. Since $d_P^2e=0$, the induction equation at $d_Pe$ gives $d_Nh_i(d_Pe)=f(d_Pe)$. Consequently $d_Nz_e=(-1)^rf(d_Pe)-(-1)^rf(d_Pe)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Acyclicity of $N(U_\\alpha)$ says precisely that every cycle in degree $k+r$ is a boundary. Choose $y_e\\in N(U_\\alpha)^{k+r-1}$ with $d_Ny_e=z_e$, for all cells of this layer. These choices range over a set in the fixed enlarged universes. Define $h_{i+1}|_{P_i}=h_i$ and $h_{i+1}(e_\\alpha a)=y_{e_\\alpha}a$. The graded direct-sum decomposition makes this well-defined and additive; associativity of the actions makes it module-linear, and $|y_e|=|e|+r-1$ gives its degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Check the required equation on homogeneous $ea$ as well as on $P_i$. The chain-map action gives $d_P(ea)=(d_Pe)a+(-1)^k e(d_{\\mathcal B}a)$ and $d_N(y_ea)=(d_Ny_e)a+(-1)^{k+r-1}y_e(d_{\\mathcal B}a)$. Therefore $(d_Nh_{i+1}+(-1)^rh_{i+1}d_P)(ea)=(d_Ny_e+(-1)^rh_i(d_Pe))a+\\bigl((-1)^{k+r-1}+(-1)^{k+r}\\bigr)y_e(d_{\\mathcal B}a)=f(e)a=f(ea)$. On $P_i$ this is the induction hypothesis; additivity proves it on $P_{i+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Induction on $i\\in\\mathbf N$ gives compatible maps $h_i$, because each construction extends the preceding map. For $x\\in P(U)=\\bigcup_i P_i(U)$ define $h_U(x)=h_{i,U}(x)$ for any $i$ with $x\\in P_i(U)$. Two such choices agree in the larger stage. Addition, graded degree, and the right action are respected by taking a stage containing the finitely many elements involved. Since each $P_i$ is a dg submodule, the equation $d_Nh+(-1)^rhd_P=f$ likewise holds on every element in such a stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  },
+  {
+   "text": "Thus every degree-$r$ cocycle $f$ is the boundary of the degree-$(r-1)$ map $h$ in the Hom complex. As $r$ was arbitrary, $\\underline{\\operatorname{Hom}}_{\\mathcal B}(P,N)$ is acyclic. This holds for every objectwise acyclic $N$, which is the stated definition of homotopical projectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, section 13.2(iii) (extension of a homotopy through a semi-free filtration), and section 14.8 (dg categories, with right modules by the opposite category); the calculations here spell out that extension with the conventions of this statement."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Explicit graded-cell nullhomotopy induction following Drinfeld sections 13.2(iii) and 14.8; compare the ordinary dg-algebra assertion in Stacks tag 09KM."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +174,66 @@
    "results": "{\"t\": \"2026-10-16T12:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.Q\", \"DerivedCategory.Qh\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"868de05f7dcce0f8\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|homotopically.?projective|dg.?module|dg.?categor",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: dg vocabulary search has no hits; named K-projective hits concern ordinary cochain complexes, not dg modules over a dg category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every semi-free right module over a small differential graded category is homotopically projective",
+   "results": "ModuleCat.projective_of_free; Module.projective_of_semisimple_ring; ModuleCat.enoughProjectives; ModuleCat.instProjectiveObjFree; Module.Projective.of_free; IsProjective.iff_projective; Module.Invertible.instProjective; Module.Projective.iff_split'",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary free modules are projective; this does not assert homotopical projectivity of filtered dg modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\"",
+   "results": "CochainComplex.IsKProjective; CochainComplex.isKProjective_of_projective; HomotopyEquiv.isKProjective; CochainComplex.isKProjective_of_iso; CochainComplex.isKProjective_iff_of_iso; CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX; CochainComplex.instIsKProjectiveObjIntShiftFunctor; CochainComplex.isKProjective_shift_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary cochain-complex K-projectivity and homotopy invariance; the bounded-above degreewise-projective criterion does not specialize to arbitrary semi-free dg modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module with a countable split filtration by sums of shifted representables has acyclic mapping complex into every acyclic module",
+   "results": "HomotopyCategory.subcategoryAcyclic; CochainComplex.IsKProjective; CochainComplex.IsKInjective; CochainComplex.IsKProjective.nonempty_homotopy_zero; HomologicalComplex.Acyclic; CochainComplex.IsKProjective.leftOrthogonal; CochainComplex.IsKInjective.rightOrthogonal; CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary cochain-complex K-projectivity and homotopy invariance; the bounded-above degreewise-projective criterion does not specialize to arbitrary semi-free dg modules"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsKProjective|isKProjective_of_projective|lemma projective_of_free",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: dg vocabulary search has no hits; named K-projective hits concern ordinary cochain complexes, not dg modules over a dg category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofibrant differential graded modules have an acyclic complex of morphisms into every acyclic module",
+   "results": "{\"t\": \"2026-10-16T15:00:25Z\", \"tool\": \"leanfinder\", \"query\": \"Cofibrant differential graded modules have an acyclic complex of morphisms into every acyclic module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"HomotopyCategory.subcategoryAcyclic\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\"], \"digest\": \"bedb56464cd92cf3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. HomotopyCategory/KProjective.lean:35-54 assumes K-projectivity and defines its homotopies; its construction at lines 113-115 requires bounded-above projective terms. DerivedCategory/KProjective.lean:73-102 assumes K-projectivity to identify Hom cohomology with localized morphisms. The grep hits are generic model-category cofibrancy declarations, with no dg-module category or semi-free criterion. None proves the stated unbounded representable-filtration criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "SemiFree|semiFree|DGModule|DifferentialGraded|Cofibrant",
+   "results": "{\"t\": \"2026-10-16T15:01:11Z\", \"tool\": \"grep\", \"query\": \"SemiFree|semiFree|DGModule|DifferentialGraded|Cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean\"], \"digest\": \"15cb49291b8bda4b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. HomotopyCategory/KProjective.lean:35-54 assumes K-projectivity and defines its homotopies; its construction at lines 113-115 requires bounded-above projective terms. DerivedCategory/KProjective.lean:73-102 assumes K-projectivity to identify Hom cohomology with localized morphisms. The grep hits are generic model-category cofibrancy declarations, with no dg-module category or semi-free criterion. None proves the stated unbounded representable-filtration criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"HomComplex\"",
+   "results": "{\"t\": \"2026-10-16T15:01:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKProjective\\\", \\\"HomComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\"], \"digest\": \"8fe49864dc778925\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. HomotopyCategory/KProjective.lean:35-54 assumes K-projectivity and defines its homotopies; its construction at lines 113-115 requires bounded-above projective terms. DerivedCategory/KProjective.lean:73-102 assumes K-projectivity to identify Hom cohomology with localized morphisms. The grep hits are generic model-category cofibrancy declarations, with no dg-module category or semi-free criterion. None proves the stated unbounded representable-filtration criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-module-projective-resolution",
   "by": "worker",
@@ -116,5 +249,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-semi-free-homotopically-projective",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied eight explicit elementary steps constructing compatible nullhomotopies cell by cell. Removed two provisional auxiliary nodes: their role is carried by the cycle calculation and the union construction. Checked the right-module and shift signs, universe bounds, Lean attachment search, and both Mathlib phrasings. No new lemma or Mathlib leaf is needed.",
+  "blueprint": "Realizes the projective dg-module model requirement in paragraph 2 of prop-coef-integral-exceptional-adjoint through the inherited auxiliary chain; no change of unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-2fd21c08f",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-2fd21c08f (reviewer sub-agent of L); spot-checked: Reviewed the complete item and eight proof steps against Drinfeld §§13.1–13.2(iii), 14.8, Stacks 09KM, the universe dependency, and the current blueprint route. Sign, filtration, union, edge-case, duplicate, and Mathlib checks pass; no repairs are needed."
  }
 }

@@ -1,266 +1,423 @@
 {
-  "id": "thm-pur-diagonal-dualizing-object",
-  "blueprint": {
-    "is": "thm-pur-diagonal-dualizing-object",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The smooth dualizing object is the Tate twist",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $X,Y$ be separated finite-type $k$-schemes, in the domain of\n[def-weil-exceptional-inverse-image], and let $f:X\\to Y$ be smooth,\nseparated, of pure\nrelative dimension $d$. Then there is a canonical isomorphism\n\n$$\n\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d].\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-    "place": "node thm-pur-diagonal-dualizing-object, order 2010"
-  },
-  "stmt_deps": [
+ "id": "thm-pur-diagonal-dualizing-object",
+ "blueprint": {
+  "is": "thm-pur-diagonal-dualizing-object",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The smooth dualizing object is the Tate twist",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $X,Y$ be finite-type $k$-schemes, in the domain of\n[def-weil-exceptional-inverse-image], and let $f:X\\to Y$ be smooth,\nseparated, of pure relative dimension $d$. With the coefficient twists of\n[def-coefficient-twists-detailed], there is a canonical isomorphism\n\n$$\n\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d].\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
+  "place": "node thm-pur-diagonal-dualizing-object, order 2010"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Work at the finite coefficient stage $\\Lambda=A=A_{E,n}$ prescribed by [def-pur-conventions]. Choose a finite affine open cover $\\{V_i=\\operatorname{Spec}B_i\\}$ of $Y$ with each $B_i$ finitely generated over $k$, using [def-weil-finite-type-morphism]. Put $X_i=X\\times_YV_i$, $f_i:X_i\\to V_i$, $j_i:X_i\\hookrightarrow X$, and $W_i=X_i\\times_{V_i}X_i$. The domain of [def-weil-exceptional-inverse-image] gives that $f$ is separated and finite type. Thus [lem-pod-separated-finite-type-base-change] gives the same properties for $f_i$ and the two projections of $W_i$, and [lem-sbc-smooth-relative-dimension-permanence](1) gives their smoothness of pure relative dimension $d$. The affine structure map $V_i\\to\\operatorname{Spec}k$ is separated by [lem-weil-pbc-affine-morphism-permanence](3); composing separated maps by [lem-weil-pbc-proper-fp-permanence](e) makes $X_i$ and $W_i$ separated over $k$. They are finite type over $k$: a finite affine cover of $X_i$ has coordinate rings finitely generated over $B_i$, hence over $k$, and the same argument applies to $W_i$ over an affine cover of $X_i$. This is the finite-type criterion in [def-weil-finite-type-morphism]. Finally [thm-pur-cohomological-smoothness](3) gives canonical identifications $Lj_i^*\\omega_f\\cong\\omega_{f_i}$. All subsequent applications of the restricted DNC theorem are to these separated finite-type schemes.",
+   "uses": [
     "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-exceptional-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "Put $W=X\\times_YX$ with projections $p_1,p_2$ and diagonal $\\Delta$. By [lem-pur-diagonal-base-change], $p_1$ is smooth and its diagonal section invariant has the base-change identification $\\alpha:C(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_f$. By [lem-pur-diagonal-regular-immersion], $\\Delta$ is a closed immersion and its normal bundle is canonically $N_{\\Delta/W}\\cong T_{X/Y}$. By [lem-sc-smooth-omega-finite-locally-free], $\\Omega^1_{X/Y}$ is locally free of rank $d$. On an open where it is $\\mathcal O_X^d$, its dual is $\\mathcal O_X^d$ with the dual basis, so the relative tangent bundle has rank $d$, also when $d=0$. The equality $p_1\\Delta=\\mathrm{id}_X$ is the fibre-product diagonal identity. Thus $(p_1,\\Delta)$ is a smooth morphism with a closed section, as required in [def-pur-section-invariant]. Only the closed-immersion and normal-bundle clauses of the geometry lemma are needed here, not a codimension convention excluding zero.",
-      "uses": [
-        "lem-pur-diagonal-base-change",
-        "lem-pur-diagonal-regular-immersion",
-        "def-pur-section-invariant",
-        "lem-sc-smooth-omega-finite-locally-free"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-        "place": "Proof, Step 1 of the unit sk-thm-smooth-purity; item Proof, Step 1 (diagonal and normal bundle), with the rank check from Stacks Tag 02G1, lemma-smooth-omega-finite-locally-free"
-      }
-    },
-    {
-      "text": "Use the deformation family of [def-pur-dnc-section-family] for $g=p_1$, $s=\\Delta$ and base $B=X$. Applying [thm-pur-dnc-invariance] gives the normalized isomorphism $\\delta:C(p_1,\\Delta)\\xrightarrow{\\sim}C(\\pi_T,0_T)$, where $\\pi_T:T_{X/Y}\\to X$. This uses the actual normal bundle identified in Step 1; no trivialization of $T_{X/Y}$ is selected and the bundle is not replaced by $\\mathbf A^d_X$. The uniqueness and coordinate normalization in the cited theorem specify $\\delta$ independently of the local coordinates.",
-      "uses": [
-        "def-pur-dnc-section-family",
-        "thm-pur-dnc-invariance"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-        "place": "Proof, Step 1 (deformation of the diagonal); unit sk-thm-smooth-purity Proof, Step 2"
-      }
-    },
-    {
-      "text": "Apply the explicitly stated dualizing-object clause of [cor-pur-vector-bundle-purity] to the rank-$d$ bundle $\\pi_T$. It gives a canonical $\\gamma:\\omega_{\\pi_T}\\xrightarrow{\\sim}\\Lambda_{T_{X/Y}}(d)[2d]$. By [def-pur-section-invariant], $C(\\pi_T,0_T)=L0_T^*\\omega_{\\pi_T}$. The schemes $X$ and $T_{X/Y}$ are in the separated finite-type setting of vector-bundle purity: the vector-bundle projection is affine by its relative-Spec description, and on a trivializing affine $U=\\operatorname{Spec}R$ its total space is $\\operatorname{Spec}R[t_1,\\ldots,t_d]$. Thus the projection is separated and of finite type, and its composite with the separated finite-type map $X\\to\\operatorname{Spec}k$ has both properties. The zero section is the closed immersion defined by the augmentation in [def-pur-vector-bundle-zero-section]. Apply the functor $L0_T^*$ to $\\gamma$ and then use the explicit restriction clause of [lem-pur-immersion-twist]: the restriction of $\\Lambda_{T_{X/Y}}(d)[2d]$ to the closed zero section is $\\Lambda_X(d)[2d]$. This yields $\\beta:C(\\pi_T,0_T)\\xrightarrow{\\sim}\\Lambda_X(d)[2d]$. The citation of the immersion lemma is solely to its stated restriction identification; no identification of $L0_T^*$ with $R0_T^!$ is made and its exceptional-pullback formula is not applied.",
-      "uses": [
-        "cor-pur-vector-bundle-purity",
-        "def-pur-vector-bundle-zero-section",
-        "def-pur-section-invariant",
-        "lem-pur-immersion-twist"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-        "place": "Proof, Step 2 (vector-bundle purity and zero-section restriction); unit sk-thm-smooth-purity Proof, Step 3"
-      }
-    },
-    {
-      "text": "Define $\\theta_f=\\beta\\circ\\delta\\circ\\alpha^{-1}:\\omega_f\\xrightarrow{\\sim}\\Lambda_X(d)[2d]$ using the three isomorphisms constructed above. Its inverse is $\\alpha\\circ\\delta^{-1}\\circ\\beta^{-1}$: the two composites cancel successive inverse pairs. The arrows $\\alpha$ (the specified base-change comparison), $\\delta$ (the uniquely normalized deformation comparison), and $\\beta$ (the canonical vector-bundle comparison followed by coefficient restriction) were specified without choices. Their composite is therefore the claimed canonical isomorphism. This is a construction of the specified map, not a claim that all isomorphisms between these two objects are equal.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-        "place": "Proof, final paragraph (combining the two steps and canonicity); unit sk-thm-smooth-purity Proof, paragraph after Step 3"
-      }
-    }
-  ],
-  "proof_deps": [
+    "def-weil-finite-type-morphism",
+    "def-weil-exceptional-inverse-image",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "thm-pur-cohomological-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Step 1, localized on affine target opens to meet the current DNC hypotheses; Stacks Tags 01S7, 01KU, 01T3, 01T4, 01VB, 02NK"
+   }
+  },
+  {
+   "text": "For each $i$, let $p_{1,i},p_{2,i}:W_i\\to X_i$ be the projections and $\\Delta_i:X_i\\hookrightarrow W_i$ the diagonal. By [lem-pur-diagonal-base-change] there is the canonical isomorphism $\\alpha_i:C(p_{1,i},\\Delta_i)\\xrightarrow{\\sim}\\omega_{f_i}$. By [lem-pur-diagonal-regular-immersion], the diagonal is a regular closed immersion of pure codimension $d$, with $N_i=N_{\\Delta_i/W_i}\\cong T_{X_i/V_i}$. The normal-bundle description of [def-pur-normal-bundle] makes $\\pi_i:N_i\\to X_i$ a vector bundle of rank $d$, with zero section $z_i$. The identity $p_{1,i}\\Delta_i=\\operatorname{id}_{X_i}$ verifies the section hypothesis. Step 1 verifies that both the base $X_i$ and the total space $W_i$ are separated finite type over $k$ and that $p_{1,i}$ is separated finite type and smooth of pure dimension $d$. Consequently [thm-pur-dnc-invariance] applies and gives its uniquely normalized comparison $\\delta_i:C(p_{1,i},\\Delta_i)\\xrightarrow{\\sim}C(\\pi_i,z_i)$.",
+   "uses": [
     "lem-pur-diagonal-base-change",
     "lem-pur-diagonal-regular-immersion",
+    "def-pur-normal-bundle",
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Step 1: the section invariant of the diagonal, on each separated target chart"
+   }
+  },
+  {
+   "text": "Apply [cor-pur-vector-bundle-purity] to $\\pi_i$ to obtain $\\omega_{\\pi_i}\\xrightarrow{\\sim}\\Lambda_{N_i}(d)[2d]$. By [def-pur-section-invariant], $C(\\pi_i,z_i)=Lz_i^*\\omega_{\\pi_i}$. Restricting the vector-bundle comparison to $z_i$ gives $\\beta_i:C(\\pi_i,z_i)\\xrightarrow{\\sim}\\Lambda_{X_i}(d)[2d]$. For the final identification use [det-prop-sfb-cartesian-coefficients-twists] for $z_i$, at the finite coefficient $A=A_{E,n}$: $z_i^{-1}\\Lambda_{N_i}(d)\\cong\\Lambda_{X_i}(d)$ on the small pro-etale site. Derived finite-coefficient pullback is termwise inverse image by [def-weil-derived-pullback-tensor-hom], so this sheaf comparison also gives the displayed shifted comparison. The twists are those of [def-coefficient-twists-detailed]; at finite level their nonnegative powers are sheaves in degree zero. The same Tate comparison for open inclusions identifies $\\Lambda_X(d)|_{X_i}$ with $\\Lambda_{X_i}(d)$. Form the local orientation $\\theta_i=\\beta_i\\delta_i\\alpha_i^{-1}:\\omega_{f_i}\\xrightarrow{\\sim}\\Lambda_{X_i}(d)[2d]$, and use Step 1 to view its source as $\\omega_f|_{X_i}$.",
+   "uses": [
+    "cor-pur-vector-bundle-purity",
     "def-pur-section-invariant",
-    "lem-sc-smooth-omega-finite-locally-free",
-    "def-pur-dnc-section-family",
+    "def-coefficient-twists-detailed",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Step 2: the two sides; combining the diagonal, DNC and zero-section comparisons locally"
+   }
+  },
+  {
+   "text": "We check agreement of these maps on overlaps, without assuming that an intersection of affine target opens is affine. Cover $V_i\\cap V_j$ by affine opens $V=\\operatorname{Spec}(B_i)_b$ distinguished in $V_i$ and contained in $V_j$. The basis assertion is [lem-weil-pbc-spec-localization-away-basic-open](i), and [lem-weil-pbc-affine-open-section-vanishing-prime](b) identifies their affine coordinate rings with the displayed localizations; $(B_i)_b$ is finitely generated over $k$, by adding $b^{-1}$ to generators of $B_i$. For $X_V=X\\times_YV$, repeat Steps 1--3 and call the resulting orientation $\\theta_V$. The base change of the pair $(W_i\\to X_i,\\Delta_i)$ along $a_i:X_V\\to X_i$ is exactly $(X_V\\times_VX_V\\to X_V,\\Delta_V)$: once the first component has image in $V$, its second component has the same image in $Y$ and therefore also lies over $V$. The same description holds using $j$. By [thm-pur-cohomological-smoothness](3), the dualizing-object comparisons in [lem-pur-diagonal-base-change] restrict to those for $f_V$. By the base-change compatibility in [thm-pur-dnc-invariance], the restriction of $\\delta_i$ is $\\delta_V$, with the normal bundle and zero section identified with their pullbacks. This application has separated finite-type base $X_V$ by Step 1; its morphism $a_i$ needs no flatness hypothesis. By the base-change compatibility in [cor-pur-vector-bundle-purity], the zero-section comparison $\\beta_i$ restricts to $\\beta_V$. Thus, under the canonical source restriction and Tate target restriction identifications of [det-prop-sfb-cartesian-coefficients-twists], $\\theta_i|_{X_V}=\\beta_V\\delta_V\\alpha_V^{-1}=\\theta_V=\\theta_j|_{X_V}$. These equalities also hold on a further refinement, because each comparison is the pullback of the same canonical factor. The next two steps convert this local equality into equality and gluing on $X_i\\cap X_j$.",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "lem-pur-diagonal-base-change",
     "thm-pur-dnc-invariance",
     "cor-pur-vector-bundle-purity",
-    "def-pur-vector-bundle-zero-section",
-    "lem-pur-immersion-twist"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/thm-pur-diagonal-dualizing-object.md",
-    "place": "Proof, Steps 1–2 and final combining paragraph; unit sk-thm-smooth-purity Proof, Steps 1–3. Original files read in the read-only cache /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/."
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Combining paragraph: base-change compatibility, used on common affine refinements of target overlaps; Stacks Tags 00E0 (basic-open basis), 01I3 (standard-open-affine)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "dualizingComplex|smooth.purity|Tate.*twist",
-      "results": "0 hits",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth separated morphism of schemes of pure relative dimension d, the exceptional inverse image of the constant torsion sheaf is canonically the Tate twist shifted by 2d",
-      "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.instAdditivePullback. Read returned signatures: scheme module pullback coherence and ordinary differential/smoothness results, not the exceptional inverse image or a Tate-twist purity isomorphism.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
-      "results": "0 hits",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth purity identifies the relative dualizing complex with the shifted Tate twist",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The relative dualizing complex of a smooth morphism is a rank one constant sheaf with Tate twist and even cohomological shift",
-      "results": "Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth; Algebra.smoothLocus_eq_compl_support_inter; Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential. Read returned signatures: scheme module pullback coherence and ordinary differential/smoothness results, not the exceptional inverse image or a Tate-twist purity isomorphism.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "upperShriek|exceptional.inverse.image|TateTwist",
-      "results": "0 hits",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizing object smooth morphism exceptional inverse image Tate twist",
-      "results": "0 hits",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Relative Poincare duality: the dualizing sheaf of a smooth scheme morphism is the constant coefficient sheaf twisted and shifted by twice the fibre dimension",
-      "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizing|shriek|Tate|purity",
-      "results": "25 hits: Mathlib/AlgebraicGeometry/Cover/Directed.lean; Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Birational/Composition.lean. Text matches concern statements/tactic rotation or a citation to J. Tate; no exceptional pullback or smooth purity declaration.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth scheme morphism of constant relative dimension, extraordinary pullback of the unit sheaf is the orientation line shifted by twice the relative dimension",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; AlgebraicGeometry.Scheme.Modules.instAdditivePullback. Returned types are ordinary structure-sheaf module pullback and coherence, not exceptional inverse-image purity.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "\\bdualizing\\w*|\\bshriek\\w*|\\bTate\\b|\\bpurity\\b",
-      "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean. Text matches concern statements/tactic rotation or a citation to J. Tate; no exceptional pullback or smooth purity declaration.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2010,
-  "blueprint_uses": [
-    "cor-pur-vector-bundle-purity",
+  {
+   "text": "Here is the explicit reduction to sheaf maps on the possibly nonseparated scheme $X$. Put $K=\\omega_f$, $r=-2d$, $M=\\mathcal H^r(K)$ and $G=\\Lambda_X(d)$, using [def-weil-derived-cohomology-sheaves] and [def-coefficient-twists-detailed]. By [lem-weil-proetale-weakly-etale-localization](1)--(3), sheaves on each open are exactly sheaves on the localized site with the restricted constant coefficient ring. Exact restriction [lem-pur-site-restriction-module-adjunction-exact] commutes with kernels, images and quotients, hence with cohomology. The local orientations of Step 3 therefore give $\\mathcal H^q(K)|_{X_i}=0$ for $q\\ne r$. A sheaf which restricts to zero on a covering family is zero: restrict any section to the induced cover of its domain and apply uniqueness in the sheaf axiom. Thus $\\mathcal H^q(K)=0$ for $q\\ne r$ globally. For a representative $P$ of $K$, the good truncation of [def-kun-truncations] gives the explicit roof $P\\xleftarrow{\\sim}\\tau_{\\le r}P\\xrightarrow{\\sim}M[-r]$. The left arrow induces an identity on cohomology in degrees at most $r$, and the groups above $r$ vanish. The right arrow is the quotient $\\ker d^r\\to\\ker d^r/\\operatorname{im}d^{r-1}$ in degree $r$ and zero in lower degrees; it induces the identity in degree $r$, and the other cohomology groups vanish. Both arrows are therefore quasi-isomorphisms. Inverting the left arrow in [def-weil-abstract-derived-category] gives the canonical isomorphism $\\epsilon:K\\xrightarrow{\\sim}M[2d]$. Both truncation and cohomology preserve quasi-isomorphisms by their displayed cohomology computations, so the natural roof descends through the localization universal property and is independent of the representative. The roof is natural in $P$; exact restriction preserves its kernels and quotient, so it gives the same isomorphism on every open. This calculation uses no absolute separatedness and does not apply the separated-scheme concentration lemma to $X$.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
     "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-derived-tensor",
-    "def-weil-scheme-morphism-properties",
-    "lem-pur-diagonal-base-change",
-    "lem-pur-diagonal-regular-immersion",
-    "thm-pur-dnc-invariance"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations): good truncations and the explicit kernel/quotient calculation; derived localization as in Definition 05RU"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-smooth-purity",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "thm-pur-diagonal-dualizing-object",
-    "worker": "stage1",
-    "summary": "Second reader checked the original blueprint item and unit in the launcher literature cache, all cited node statements, and Stacks Tag 02G1. The diagonal, its actual normal bundle, the normalized DNC comparison, vector-bundle purity and shifted Tate restriction give the stated canonical composite. Retained the explicitly reported scheme-domain typing correction and rank-zero-safe local dual-basis argument. Expanded the elementary finiteness check for the tangent bundle. No new nodes.",
-    "blueprint": "Realizes sk-thm-smooth-purity proof paragraph 1 Steps 1–3, also the item imported proof Steps 1–2 and its canonicity conclusion. Does not claim the full unit, which additionally treats coefficients, composition, and model agreement.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-immersion-twist",
-        "why": "Only its explicit clause identifying the restriction of the shifted Tate line to a closed immersion is used. The unit route supplies vector-bundle purity but no other statement of this restriction identification; this is a coefficient-restriction tool, not another purity argument."
-      },
-      {
-        "node": "lem-sc-smooth-omega-finite-locally-free",
-        "why": "Generic smooth differentials rank theorem supplies rank d independently of the positive-codimension restriction in def-pur-regular-immersion; no purity argument is replaced."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-immersion-twist",
-    "lem-sc-smooth-omega-finite-locally-free"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-NR-3dbebe76e",
-    "group": "NR",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-3dbebe76e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Verified all four steps, canonical composite, coefficient conventions, rank-zero cases, route, reuse candidates and absence of a dependency cycle. Accepted both declared tool uses. No fixes needed; review.md records checks and upstream limitations. No target-category comparison is certified by this internal split."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth,\nseparated, of pure\nrelative dimension $d$. Then there is a canonical isomorphism\n\n$$\n\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d].\n$$",
-    "proof": [
-      {
-        "text": "The final restriction of the Tate line uses [def-coefficient-twists-detailed], with tensor identifications as in [def-weil-derived-tensor].\nStep 1: the section invariant of the diagonal. Apply\n[thm-pur-dnc-invariance] to the smooth map\n$p_1:W\\to X$ of [lem-pur-diagonal-base-change] and its closed\nsection $\\Delta$. By [lem-pur-diagonal-regular-immersion] its\nnormal bundle is canonically $N_\\Delta\\cong T_{X/Y}$, a vector\nbundle of rank $d$, so\n\n$$\nC(p_1,\\Delta)\\;\\cong\\;C(\\pi_T:T_{X/Y}\\to X,\\,0_T).\n$$",
-        "uses": [
-          "def-coefficient-twists-detailed",
-          "def-weil-derived-tensor",
-          "thm-pur-dnc-invariance",
-          "lem-pur-diagonal-base-change",
-          "lem-pur-diagonal-regular-immersion"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 2: the two sides. The left side is $\\omega_f$ by\n[lem-pur-diagonal-base-change]. For the right side,\n[cor-pur-vector-bundle-purity] applied to $\\pi_T$ gives\n\n$$\n\\omega_{\\pi_T}=R\\pi_T^!\\Lambda_X\\;\\cong\\;\\Lambda_{T_{X/Y}}(d)[2d],\n$$\n\nand pulling back by the zero section $0_T$ gives\n\n$$\nC(\\pi_T,0_T)=0_T^*\\omega_{\\pi_T}\n\\;\\cong\\;0_T^*\\Lambda_{T_{X/Y}}(d)[2d]\n\\;\\cong\\;\\Lambda_X(d)[2d].\n$$",
-        "uses": [
-          "lem-pur-diagonal-base-change",
-          "cor-pur-vector-bundle-purity"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Combining the two steps proves the assertion. The identification is\ncanonical (every displayed step is canonical, by the uniqueness clause\nof [thm-pur-dnc-invariance]); compatibility with base change\nfollows from the base-change compatibility of the diagonal, of\n[thm-pur-dnc-invariance], and of\n[cor-pur-vector-bundle-purity] (the normal bundle of the diagonal\nof the base change is the base change of the normal bundle).",
-        "uses": [
-          "thm-pur-dnc-invariance",
-          "cor-pur-vector-bundle-purity"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Taking $\\mathcal H^{-2d}$ of $\\theta_i$ gives isomorphisms of sheaves $t_i:M|_{X_i}\\xrightarrow{\\sim}G|_{X_i}$. Their restrictions to the common affine refinements agree by Step 4. Apply uniqueness in [lem-pur-sheaf-hom-cover-gluing] on the cover of each overlap $X_i\\cap X_j$ by these $X_V$ to conclude that $t_i$ and $t_j$ agree on the whole overlap. The same node, now for the covering family $\\{X_i\\to X\\}$, glues them to a unique sheaf map $t:M\\to G$. Their inverses agree as well and glue to $s:G\\to M$; uniqueness applied to $st$ and $ts$ makes them the identity, so $t$ is an isomorphism. Define $\\theta_f=t[2d]\\circ\\epsilon:K\\xrightarrow{\\sim}G[2d]$. After removing the common shift, [lem-weil-pbc-derived-single-fully-faithful] identifies morphisms between degree-zero sheaves with their sheaf maps, so $\\theta_f|_{X_i}$ is exactly $\\theta_i$, not just an isomorphism with the same source and target. For another affine cover, Step 4 gives agreement on a common affine refinement, and sheaf-map uniqueness gives the same $t$ and hence the same $\\theta_f$. The factors of each $\\theta_i$ are canonical, with the DNC factor fixed by its uniqueness clause in Step 2. The global map is therefore canonical and proves the asserted isomorphism for arbitrary finite-type $X,Y$ and separated smooth $f$.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM (lemma-internal-hom), via Sites Tag 04TQ; Stacks Tag 06XS (derived.tex, lemma-negative-exts (2)); gluing the current blueprint local diagonal orientation"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-exceptional-inverse-image",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-pur-cohomological-smoothness",
+  "lem-pur-diagonal-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "def-pur-normal-bundle",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "def-pur-section-invariant",
+  "def-coefficient-twists-detailed",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining paragraph; expanded affine-target localization and sheaf-level overlap gluing to retain the source domain"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|smooth.purity|Tate.*twist",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of schemes of pure relative dimension d, the exceptional inverse image of the constant torsion sheaf is canonically the Tate twist shifted by 2d",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.instAdditivePullback. Read returned signatures: scheme module pullback coherence and ordinary differential/smoothness results, not the exceptional inverse image or a Tate-twist purity isomorphism.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity identifies the relative dualizing complex with the shifted Tate twist",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative dualizing complex of a smooth morphism is a rank one constant sheaf with Tate twist and even cohomological shift",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth; Algebra.smoothLocus_eq_compl_support_inter; Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential. Read returned signatures: scheme module pullback coherence and ordinary differential/smoothness results, not the exceptional inverse image or a Tate-twist purity isomorphism.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.inverse.image|TateTwist",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing object smooth morphism exceptional inverse image Tate twist",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality: the dualizing sheaf of a smooth scheme morphism is the constant coefficient sheaf twisted and shifted by twice the fibre dimension",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|shriek|Tate|purity",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Cover/Directed.lean; Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Birational/Composition.lean. Text matches concern statements/tactic rotation or a citation to J. Tate; no exceptional pullback or smooth purity declaration.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme morphism of constant relative dimension, extraordinary pullback of the unit sheaf is the orientation line shifted by twice the relative dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; AlgebraicGeometry.Scheme.Modules.instAdditivePullback. Returned types are ordinary structure-sheaf module pullback and coherence, not exceptional inverse-image purity.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bdualizing\\w*|\\bshriek\\w*|\\bTate\\b|\\bpurity\\b",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean. Text matches concern statements/tactic rotation or a citation to J. Tate; no exceptional pullback or smooth purity declaration.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|sectionInvariant|TateTwist|deformationToNormalCone",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned signatures concern ordinary scheme/module pullback or algebraic smoothness, not exceptional inverse image and Tate-twist purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity identifies the relative dualizing complex with the shifted Tate twist",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, RingHom.Smooth, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.FormallySmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-16",
+   "verdict": "no match: returned signatures concern ordinary scheme/module pullback or algebraic smoothness, not exceptional inverse image and Tate-twist purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, \"dualizing\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned signatures concern ordinary scheme/module pullback or algebraic smoothness, not exceptional inverse image and Tate-twist purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of finite type schemes, the exceptional inverse image of the constant torsion sheaf is canonically the Tate twist shifted by twice the relative dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: returned signatures concern ordinary scheme/module pullback or algebraic smoothness, not exceptional inverse image and Tate-twist purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality identifies extraordinary pullback of the unit sheaf for a smooth scheme map with the orientation line in even degree",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-16",
+   "verdict": "no match: returned signatures concern ordinary scheme/module pullback or algebraic smoothness, not exceptional inverse image and Tate-twist purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated map of finite type schemes the relative dualizing complex is canonically the constant torsion sheaf with Tate twist d and shift 2d",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension (Mathlib/AlgebraicGeometry/Morphisms/Smooth), AlgebraicGeometry.IsSmooth, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map (Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf), AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. Read the returned signatures: algebraic smoothness, ordinary structure-sheaf pullback and differentials, or open immersion maps; none is an exceptional inverse-image purity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image of the unit sheaf for a smooth morphism is an orientation line placed in degree minus twice the relative dimension",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree), smoothSheafCommGroup.compLeft, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.isSmoothOfRelativeDimension_iff (Mathlib/AlgebraicGeometry/Morphisms/Smooth), PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp, AlgebraicGeometry.Scheme.Modules.pullback (Mathlib/AlgebraicGeometry/Modules/Sheaf). Read the returned signatures: algebraic smoothness, ordinary structure-sheaf pullback and differentials, or open immersion maps; none is an exceptional inverse-image purity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2010,
+ "blueprint_uses": [
+  "cor-pur-vector-bundle-purity",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-diagonal-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "thm-pur-dnc-invariance"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-pur-diagonal-dualizing-object",
+  "worker": "stage1",
+  "summary": "Repaired E1/E7: removed absolute separatedness of X and Y, retaining separatedness of f and the finite-type exceptional-inverse-image domain. Applied diagonal/DNC/vector-bundle comparisons only over affine target charts, checked every separated finite-type hypothesis there, proved agreement on common affine refinements, and glued the sole nonzero cohomology sheaf maps using an explicit natural truncation roof. No new nodes; no Lean or build commands.",
+  "blueprint": "Current main-20261015 Steps 1--2 are realized on each affine target chart (Steps 1--3); the combining/base-change paragraph gives overlap compatibility (Step 4); Steps 5--6 write out the gluing needed to keep the source domain. The existing unit realization already names this item and is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Separatedness and finite type of the chart morphisms and projections; a geometric permanence tool, not a replacement for the diagonal route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Pure relative dimension survives target-open base change; this is a geometric permanence tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affine target charts are separated over the affine field base; no purity content is taken from this tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Composition of separated maps makes the localized source and diagonal ambient scheme separated; only clause (e) is used."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of restriction permits the kernel/quotient calculation of the sole nonzero cohomology sheaf."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Maps of module sheaves glue uniquely; this glues the locally constructed orientation after the explicit single-degree reduction."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "A morphism between sheaves in degree zero is determined by its sheaf map; this identifies the glued orientation with each local derived map."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "The finite-coefficient Tate line pulls back canonically along the zero section; the comparison is stated on the pro-etale site and uses the existing coefficient twists."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Principal basic opens form a basis of the Zariski topology; this provides common refinements of affine target charts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "A basic open inside an affine scheme is affine with the localized coordinate ring; this ensures the common refinement is finite type over k."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "The small pro-etale site of an open subscheme is the localized site, and its constant ring is the restriction of the original ring; this allows the sheaf restriction and gluing tools to apply literally."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-immersion-twist",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-7d33db6e3",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-7d33db6e3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages and unit/chapter route. Verified all six steps, affine localization, DNC hypotheses, overlap compatibility, coefficient pullback, truncation and gluing; tested edge cases and checked reuse/cycles. Accepted eleven declared tool uses. No fixes needed. Exact master target categories remain distinct; no unstated comparison is certified. Findings recorded in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth,\nseparated, of pure\nrelative dimension $d$. Then there is a canonical isomorphism\n\n$$\n\\omega_f=Rf^!\\Lambda_Y\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d].\n$$",
+  "proof": [
+   {
+    "text": "The final restriction of the Tate line uses [def-coefficient-twists-detailed], with tensor identifications as in [def-weil-derived-tensor].\nStep 1: the section invariant of the diagonal. Apply\n[thm-pur-dnc-invariance] to the smooth map\n$p_1:W\\to X$ of [lem-pur-diagonal-base-change] and its closed\nsection $\\Delta$. By [lem-pur-diagonal-regular-immersion] its\nnormal bundle is canonically $N_\\Delta\\cong T_{X/Y}$, a vector\nbundle of rank $d$, so\n\n$$\nC(p_1,\\Delta)\\;\\cong\\;C(\\pi_T:T_{X/Y}\\to X,\\,0_T).\n$$",
+    "uses": [
+     "def-coefficient-twists-detailed",
+     "def-weil-derived-tensor",
+     "thm-pur-dnc-invariance",
+     "lem-pur-diagonal-base-change",
+     "lem-pur-diagonal-regular-immersion"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: the two sides. The left side is $\\omega_f$ by\n[lem-pur-diagonal-base-change]. For the right side,\n[cor-pur-vector-bundle-purity] applied to $\\pi_T$ gives\n\n$$\n\\omega_{\\pi_T}=R\\pi_T^!\\Lambda_X\\;\\cong\\;\\Lambda_{T_{X/Y}}(d)[2d],\n$$\n\nand pulling back by the zero section $0_T$ gives\n\n$$\nC(\\pi_T,0_T)=0_T^*\\omega_{\\pi_T}\n\\;\\cong\\;0_T^*\\Lambda_{T_{X/Y}}(d)[2d]\n\\;\\cong\\;\\Lambda_X(d)[2d].\n$$",
+    "uses": [
+     "lem-pur-diagonal-base-change",
+     "cor-pur-vector-bundle-purity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Combining the two steps proves the assertion. The identification is\ncanonical (every displayed step is canonical, by the uniqueness clause\nof [thm-pur-dnc-invariance]); compatibility with base change\nfollows from the base-change compatibility of the diagonal, of\n[thm-pur-dnc-invariance], and of\n[cor-pur-vector-bundle-purity] (the normal bundle of the diagonal\nof the base change is the base change of the normal bundle).",
+    "uses": [
+     "thm-pur-dnc-invariance",
+     "cor-pur-vector-bundle-purity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }
