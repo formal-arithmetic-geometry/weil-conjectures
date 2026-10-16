@@ -19,21 +19,191 @@
  },
  "kind": "statement",
  "title": "Associative monoidal descent along a compatible reflector",
- "statement": "Use [def-coef-complete-algebroid], [def-coef-presentable-infinity-category] and [lem-coef-presentable-infinity-adjoints], the generalized nonsymmetric operads and their algebra categories of [lem-coef-operadic-algebra-presentability], and the strongly saturated closure specified in [lem-coef-infinity-small-localization-saturation]. In the generalized-operad convention, the degree-zero fibre is a Kan space, inert edges are cocartesian over consecutive-subinterval maps, and the incidence-diagram axiom includes both vertex and edge projections. Let $\\mathcal V$ be presentably monoidal, with no symmetry assumed, and $L:\\mathcal V\\rightleftarrows\\mathcal U:i$ an accessible reflective localization. Suppose the class $W$ of arrows inverted by $L$ is stable under tensoring on either side by every object of $\\mathcal V$. Then $\\mathcal U$ has a presentably monoidal structure for which $L$ is strong monoidal, $i$ is lax monoidal, its unit is $L(\\mathbf1)$, and $u\\otimes_{\\mathcal U}u'=L(iu\\otimes_{\\mathcal V}iu')$. For every monoidal infinity category $\\mathcal E$, precomposition with $L$ identifies the infinity category of strong monoidal functors $\\mathcal U\\to\\mathcal E$ with the full subcategory of strong monoidal functors $\\mathcal V\\to\\mathcal E$ that invert $W$. For cocomplete $\\mathcal E$, this equivalence restricts to the colimit-preserving functors. It includes monoidal natural transformations. If $W$ is generated as a strongly saturated class by a small set $S$, it suffices that tensoring every arrow of $S$ on either side by every object yields an arrow inverted by $L$. All comparisons are compatible with coherent diagrams of monoidal reflectors. Also, the full sub-operad of $\\mathcal V^\\otimes$ on lists of local objects is the operad associated with this lax monoidal inclusion; for every generalized nonsymmetric operad, its algebras form the full subcategory of $\\mathcal V$-valued algebras whose colour values are local. For every small generalized nonsymmetric infinity operad $\\mathcal O$, composition with these two monoidal functors gives a coherent adjunction $L_*:\\operatorname{Alg}_{\\mathcal O}(\\mathcal V)\\rightleftarrows\\operatorname{Alg}_{\\mathcal O}(\\mathcal U):i_*$. Its unit and counit are induced by the relative monoidal adjunction, and the adjunction is natural under restriction along maps of operads.",
+ "statement": "Use [def-coef-complete-algebroid], the monoidal infinity categories, inert edges and lax and strong monoidal functors of [def-coef-monoidal-infinity-category], [def-coef-presentable-infinity-category] and [lem-coef-presentable-infinity-adjoints], the generalized nonsymmetric operads and their algebra categories of [lem-coef-operadic-algebra-presentability], and the strongly saturated closure specified in [lem-coef-infinity-small-localization-saturation]. In the generalized-operad convention, the degree-zero fibre is a Kan space, inert edges are cocartesian over consecutive-subinterval maps, and the incidence-diagram axiom includes both vertex and edge projections. Let $\\mathcal V$ be presentably monoidal, with no symmetry assumed, and $L:\\mathcal V\\rightleftarrows\\mathcal U:i$ an accessible reflective localization. Suppose the class $W$ of arrows inverted by $L$ is stable under tensoring on either side by every object of $\\mathcal V$. Then $\\mathcal U$ has a presentably monoidal structure for which $L$ is strong monoidal, $i$ is lax monoidal, its unit is $L(\\mathbf1)$, and $u\\otimes_{\\mathcal U}u'=L(iu\\otimes_{\\mathcal V}iu')$. For every monoidal infinity category $\\mathcal E$, precomposition with $L$ identifies the infinity category of strong monoidal functors $\\mathcal U\\to\\mathcal E$ with the full subcategory of strong monoidal functors $\\mathcal V\\to\\mathcal E$ that invert $W$. For cocomplete $\\mathcal E$, this equivalence restricts to the colimit-preserving functors. It includes monoidal natural transformations. If $W$ is generated as a strongly saturated class by a small set $S$, it suffices that tensoring every arrow of $S$ on either side by every object yields an arrow inverted by $L$. All comparisons are compatible with coherent diagrams of monoidal reflectors. Also, the full sub-operad of $\\mathcal V^\\otimes$ on lists of local objects is the operad associated with this lax monoidal inclusion; for every generalized nonsymmetric operad, its algebras form the full subcategory of $\\mathcal V$-valued algebras whose colour values are local. For every small generalized nonsymmetric infinity operad $\\mathcal O$, composition with these two monoidal functors gives a coherent adjunction $L_*:\\operatorname{Alg}_{\\mathcal O}(\\mathcal V)\\rightleftarrows\\operatorname{Alg}_{\\mathcal O}(\\mathcal U):i_*$. Its unit and counit are induced by the relative monoidal adjunction, and the adjunction is natural under restriction along maps of operads.",
  "source": {
   "document": "https://arxiv.org/html/2006.08269v2",
   "place": "Remarks 7.7 and 7.10, Corollary 7.12 and Corollary 7.20, for the associative pattern; monoidal localization universal property of Proposition 7.6 No Stacks tag states this infinity-categorical result; online reference, not archived."
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
+  "def-coef-monoidal-infinity-category",
   "lem-coef-presentable-infinity-adjoints",
   "def-coef-presentable-infinity-category",
   "lem-coef-infinity-small-localization-saturation",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $\\mathcal U$ with the replete full subcategory of local objects in $\\mathcal V$, and write $\\eta:\\mathrm{id}\\to iL$ and $\\varepsilon:Li\\simeq\\mathrm{id}$ for the reflective adjunction. Accessibility here means accessibility of the reflector endofunctor $iL$. Apply [lem-coef-accessible-localization-small-generators] to obtain a small set $S_0$ whose local objects are exactly $\\mathcal U$. [lem-coef-presentable-infinity-adjoints] then makes $\\mathcal U$ presentable, computes its colimits by reflection, and makes $L$ colimit-preserving. For any arrow $f:A\\to B$, adjunction identifies the maps testing $f$ on all local objects with $\\operatorname{Map}_{\\mathcal U}(LB,u)\\to\\operatorname{Map}_{\\mathcal U}(LA,u)$. By Yoneda (apply [lem-coef-infinity-yoneda-presheaf-limits] to the opposite category), these are equivalences for all $u$ exactly when $Lf$ is an equivalence. In particular each $\\eta_A$ lies in $W$, since $L\\eta_A$ is inverse to $\\varepsilon_{LA}$ by the triangle identity.",
+   "uses": [
+    "lem-coef-accessible-localization-small-generators",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12, hypothesis (1), and Remark 7.21; reflective-adjunction preliminaries; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "Put $B=N(\\Delta^{\\mathrm{op}})$ and $p:\\mathcal V^\\otimes\\to B$. Under the Segal equivalence, a tuple $x=(x_1,\\ldots,x_n)$ has a coordinatewise unit edge $t_x:x\\to(iLx_1,\\ldots,iLx_n)$ over $\\mathrm{id}_{[n]}$. If $\\phi:[n]\\to[m]$ has opposite map $a:[m]\\to[n]$, its $j$th transported coordinate is the ordered tensor of $x_k$ for $a(j-1)<k\\le a(j)$; an empty block gives $\\mathbf1$. This formula follows by composing the inert projection to the relevant consecutive subinterval with its active fold, using [def-coef-monoidal-infinity-category] and coherent composition of transports in [lem-coef-infinity-pointwise-cocartesian-transport]. Each coordinate of $\\phi_!t_x$ belongs to $W$: replace the entries of that block one at a time by their units, tensoring on the left and right by the other entries. Each replacement is in $W$ by the hypothesis, and their composite is in $W$ because $L$ is a functor. Empty blocks give identity maps. This proves the all-arity compatibility needed below without assuming symmetry.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12, hypothesis (2), and Corollary 7.20, proof, last two sentences; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "Let $\\mathcal U^\\otimes$ be the full subcategory of $\\mathcal V^\\otimes$ on the tuples of local objects, with inclusion $j$ and projection $q$. It is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Its projection is an inner fibration: fill an inner horn in $\\mathcal V^\\otimes$ over the specified simplex of $B$; all its vertices are already vertices of the horn, hence local, so fullness puts that filler in $\\mathcal U^\\otimes$. For a tuple $x$ write $\\ell_nx=(Lx_k)_k$, initially only as an object. For every local tuple $u$ over $[m]$ and every $\\phi:[n]\\to[m]$, the object case of [lem-coef-infinity-pointwise-cocartesian-transport] identifies precomposition by $t_x$ with\n$$\\operatorname{Map}_{\\mathcal V^\\otimes_{[m]}}(\\phi_!j\\ell_nx,ju)\\longrightarrow\\operatorname{Map}_{\\mathcal V^\\otimes_{[m]}}(\\phi_!x,ju).$$\nThe fiber is a product of mapping spaces in $\\mathcal V$. Step 2 makes the map in each input a $W$-arrow; Step 1 and locality of each coordinate of $u$ make each mapping-space map an equivalence. Therefore all these fiber maps are equivalences. The base mapping space in $B$ is discrete by [def-coef-monoidal-infinity-category]; [lem-coef-spaces-homotopy-fiber-detection], over its identity map, gives the total equivalence\n$$\\operatorname{Map}_{\\mathcal U^\\otimes}(\\ell_nx,u)\\simeq\\operatorname{Map}_{\\mathcal V^\\otimes}(x,ju).$$\nThus $t_x$ is a universal arrow for the inclusion of the total categories.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12, proof: expand the local cocartesian and composition argument by the mapping-space criterion; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "Apply the dual assertion of [lem-coef-parametric-universal-arrows] to $j:\\mathcal U^\\otimes\\to\\mathcal V^\\otimes$, with the whole $\\mathcal V^\\otimes$ as the full target subcategory, and the universal arrows of Step 3. It assembles them into a coherent adjunction $\\ell\\dashv j$, with a contractible space of universal-arrow data and fiberwise identification $\\ell|_{[n]}=L^n$. This adjunction is relative to $B$: a universal arrow is equivalent to the chosen $t_x$; its target equivalence projects to an isomorphism of $\\Delta^{\\mathrm{op}}$, necessarily an identity, so its base arrow is $\\mathrm{id}_{[n]}$. Naturality of the assembled unit implies $q\\ell=p$ on every edge, and then on every simplex because the base is the nerve of an ordinary category. The counit also lies over identities by its triangle with that unit. Consequently the adjunction mapping equivalence is over each base mapping space. For a $p$-cocartesian edge $c:x\\to y$, use this relative mapping equivalence with every $u\\in\\mathcal U^\\otimes$: the mapping-space square testing $\\ell c$ is identified with the square testing $c$ against $ju$. The latter is a homotopy pullback, so [lem-coef-infinity-cocartesian-mapping-criterion] says $\\ell c$ is $q$-cocartesian. Every base arrow with local source has a $q$-cocartesian lift: choose its $p$-lift and apply $\\ell$, identifying $\\ell ju\\simeq u$ by the counit. Step 3 already proved $q$ inner, so $q$ is a cocartesian fibration.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.6 and Corollary 7.12, proof: relative adjoint assembly and preservation of cocartesian edges; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "The fibers of $q$ are $\\mathcal U^n$, including the one-point fiber for $n=0$. Inert transport is still projection to a consecutive sublist, so a $p$-inert lift starting at a local tuple has local target and is also $q$-cocartesian. Uniqueness of cocartesian transports from [lem-coef-infinity-pointwise-cocartesian-transport] identifies all $q$-inert lifts with these. Hence $j$ preserves inert edges. The relative incidence mapping-space condition in [def-coef-monoidal-infinity-category] is inherited from $\\mathcal V^\\otimes$, since $j$ is full and these inert projections are the same edges. Thus $q$ is the required nonsymmetric monoidal infinity category. Step 4 says $\\ell$ preserves all cocartesian edges, so it is strong monoidal; $j$ is lax monoidal. The transport along $\\phi$ in $\\mathcal U^\\otimes$ is $L^m\\phi_!j$ by the construction of its lifts. Binary and nullary folds give precisely\n$$u\\otimes_{\\mathcal U}v=L(iu\\otimes_{\\mathcal V}iv),\\qquad\\mathbf1_{\\mathcal U}=L(\\mathbf1_{\\mathcal V}).$$\nAssociativity, units and their higher compatibilities are supplied by this single cocartesian fibration, rather than by separately chosen binary identifications. The relative unit and counit of Step 4 are transformations over $B$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12, conclusions (i)-(iii), with Notation 7.11 and Remark 7.9; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "To verify presentable monoidality, fix $u\\in\\mathcal U$ and a small diagram $D:I\\to\\mathcal U$. Step 1 computes $c=\\operatorname{colim}_{\\mathcal U}D=L(\\operatorname{colim}_{\\mathcal V}iD)$. The unit of $z=\\operatorname{colim}_{\\mathcal V}iD$ is in $W$; tensor compatibility and Step 5 therefore give\n$$u\\otimes_{\\mathcal U}c\\simeq L(iu\\otimes z)\\simeq L\\operatorname{colim}_I(iu\\otimes iD)\\simeq\\operatorname{colim}_I(u\\otimes_{\\mathcal U}D).$$\nHere tensoring in $\\mathcal V$ preserves colimits by presentable monoidality as defined in [def-coef-complete-algebroid], and $L$ preserves them by [lem-coef-presentable-infinity-adjoints]. This is an identification of the canonical cocones. Repeating the same calculation with $iu$ on the right proves preservation in the other variable. Step 1 gave presentability of $\\mathcal U$, so this proves presentable monoidality.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12, presentably monoidal specialization; explicit colimit verification; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "For a monoidal $\\mathcal E$, consider the full subcategories of the functor categories over $B$ on functors preserving all cocartesian edges; these are the strong monoidal functors with monoidal transformations. If $F:\\mathcal V^\\otimes\\to\\mathcal E^\\otimes$ is strong monoidal and inverts $W$ in the degree-one fiber, put $G=Fj$. A $q$-cocartesian lift with local source is represented in $\\mathcal V^\\otimes$ by a $p$-cocartesian lift $u\\to y$ followed by the coordinatewise unit $y\\to j\\ell y$ (Steps 4-5 and the adjunction triangle). The first edge is sent to a cocartesian edge by $F$. The second is sent to a fiberwise equivalence: under the Segal equivalence $F$ acts coordinatewise by its degree-one functor, and every coordinate unit is in $W$. Composing with an equivalence preserves the mapping-space cocartesian test [lem-coef-infinity-cocartesian-mapping-criterion]. Thus $G$ is strong monoidal. Conversely precomposition with $\\ell$ sends every strong monoidal functor on $\\mathcal U$ to a $W$-inverting one. The whiskered unit $F\\eta:F\\to Fj\\ell$ and counit $H\\varepsilon:H\\ell j\\to H$ are equivalences over $B$; the first by the preceding coordinate argument and the second because $\\varepsilon$ is invertible. [lem-cbc-enhanced-functor-cone-calculus] makes these componentwise equivalences into coherent functor equivalences. They exhibit $j^*$ and $\\ell^*$ as inverse functors between exactly the indicated full subcategories, including all their transformations and higher simplices. This is the stated universal property for every monoidal $\\mathcal E$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.6 and Corollary 7.12: universal property deduced from the relative unit and counit; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "Assume only that $\\mathcal E$ is cocomplete for the colimit-preserving assertion; no compatibility of its tensor with colimits is needed. If $H:\\mathcal U\\to\\mathcal E$ preserves colimits, then $HL$ does, since $L$ is a left adjoint between the presentable categories of Step 1. Conversely suppose the $W$-inverting $F:\\mathcal V\\to\\mathcal E$ of Step 7 preserves colimits, and put $H=Fi$. For a small $D:I\\to\\mathcal U$, the calculation is\n$$H(\\operatorname{colim}_{\\mathcal U}D)=FiL(\\operatorname{colim}_{\\mathcal V}iD)\\simeq F(\\operatorname{colim}_{\\mathcal V}iD)\\simeq\\operatorname{colim}_I FiD.$$\nThe first identification is reflected colimits from [lem-coef-presentable-infinity-adjoints]; the second is $F$ applied to the unit, which it inverts. These are the canonical colimit comparisons, so $H$ preserves colimits. The equivalence of Step 7 therefore restricts to the stated full subcategories.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.12: colimit-preserving restriction, proved directly by reflected colimits; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "For the generator criterion, assume $W=\\langle S\\rangle$ in the strongly saturated sense of [lem-coef-infinity-small-localization-saturation]. For a fixed $v\\in\\mathcal V$, the class $\\{f\\mid L(v\\otimes f)\\text{ is an equivalence}\\}$ contains $S$ by the assumed generator test. It is strongly saturated: the functor $L(v\\otimes-)$ preserves small colimits, and its inverse image of equivalences is closed under equivalences, two-out-of-three and retracts; it is closed under pushouts and arrow-colimits because those colimits are computed at source and target and a colimit of a diagram of equivalences is an equivalence. The latter follows also by applying the mapping-space characterization of colimits in [lem-coef-infinity-yoneda-presheaf-limits]. Thus it contains $\\langle S\\rangle=W$. The same argument applies to $L(-\\otimes v)$. Consequently the generator assumption implies the original two-sided stability assumption, and Steps 1-8 apply. This closure calculation uses the small-colimit-preserving tensor of $\\mathcal V$ and $L$, without requiring the inclusion $i$ to preserve colimits.",
+   "uses": [
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-complete-algebroid",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Corollary 7.20, proof: extend generator compatibility to the strongly saturated closure; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "The construction in Steps 3-5 is literally the full sub-operad of $\\mathcal V^\\otimes$ on lists of local objects, with its inherited inert maps, and its inclusion is the constructed lax monoidal $j$. Let $A:\\mathcal O\\to\\mathcal V^\\otimes$ be an algebra for any generalized nonsymmetric operad in the convention of [lem-coef-operadic-algebra-presentability]. If $A$ factors through this full sub-operad then all its color values are local. Conversely, if its color values are local, take an object over $[n]$ and its inert edge projections to the $n$ colors. Because $A$ preserves inert edges, the Segal coordinates of its value are exactly those local color values, so its value belongs to $\\mathcal U^\\otimes$. Over $[0]$ there is the unique empty tuple. Thus every vertex of $A$ belongs to that full simplicial subcategory; fullness puts every simplex there and gives the factorization. The same fullness argument applies degreewise to functors $\\mathcal O\\times\\Delta^r$, so inclusion identifies the entire algebra infinity category with the full subcategory on these objects, including transformations. The vertex-and-edge incidence convention causes no extra condition: this argument uses only the algebra's inert preservation and the target's Segal equivalence, and works also when $\\mathcal O_{[0]}$ is an arbitrary Kan space.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Remark 7.10 and Notation 7.11: full-subcategory characterization; generalized nonsymmetric version; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "For a small generalized $\\mathcal O$, whisker the relative adjunction $\\ell\\dashv j$ with $\\mathcal O$. The dual coherent-diagram formula of [lem-coef-parametric-universal-arrows], with $K=\\mathcal O$, gives\n$$\\operatorname{Map}(\\ell_*A,B)\\simeq\\operatorname{Map}(A,j_*B),\\qquad k\\longmapsto j_*(k)\\eta_A,$$\nwith inverse $h\\longmapsto\\varepsilon_B\\ell_*(h)$. Since the coefficient unit and counit lie over identities of $B=N(\\Delta^{\\mathrm{op}})$, these formulas preserve the projection to $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal O,B)}(pA,qB)$; take its homotopy fiber over the specified identity to obtain the same equivalence for functors over $B$. The identification of these homotopy fibers with mapping spaces in the degreewise functor fibers is the functor-fibration formula of [lem-coef-infinity-pointwise-cocartesian-transport], applied to $p$ and $q$, parameter $K=\\mathcal O$, and the identity transformation of the fixed base diagram; thus this step does not equate a strict fiber with a homotopy fiber without a cited comparison. Both $\\ell$ and $j$ preserve inert edges (Step 5), so postcomposition preserves algebras. Their categories are full subcategories on inert-preserving functors over $B$ by [lem-coef-operadic-algebra-presentability]; hence the equivalence restricts to the desired algebra mapping spaces. Its unit and counit are $\\eta_A$ and $\\varepsilon_B$ and satisfy the triangles by whiskering the coefficient triangles. This gives the asserted $L_*\\dashv i_*$ without applying an ordinary-operad-only theorem to a generalized operad. For every operad map $r:\\mathcal O'\\to\\mathcal O$, precomposition commutes with these same whiskerings and formulas, including all their higher simplices, as provided by the parameter compatibility in [lem-coef-parametric-universal-arrows]. This proves naturality under restriction.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Remarks 7.7 and 7.10: induced adjunction on algebras by postcomposition; explicit restriction to inert-preserving functors; no Stacks tag for this infinity-categorical assertion"
+   }
+  },
+  {
+   "text": "Finally consider the coherent diagrams in the assertion. Step 7 provides actual inverse equivalences of full functor infinity categories, with the equivalences given by whiskering the single relative unit and counit, rather than only an objectwise factorization. Applying these inverse functors to a diagram of any small simplicial shape, and whiskering their unit/counit again, gives inverse equivalences on those diagram categories by [lem-cbc-enhanced-functor-cone-calculus]. Restriction along a composite is the composite restriction, so the comparisons for compositions of reflectors and for all higher simplices are the images of the same specified diagrams under these equivalences. The universal-arrow choice space in [lem-coef-parametric-universal-arrows] is contractible, so changing the assembled relative adjunction preserves its comparisons with their specified restrictions. Step 11 uses precisely these same transformations and commutes with every restriction in the operad. This proves compatibility with coherent diagrams of monoidal reflectors and completes all clauses.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.6 and Remarks 7.7/7.10: coherent functoriality of relative adjunctions; no Stacks tag for this infinity-categorical assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-monoidal-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-accessible-localization-small-generators",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-small-localization-saturation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent derived coefficient adjunction: independent expansion of the generic associative localization input, following the online proof of Chu-Haugseng, Free Algebras Through Day Convolution, Proposition 7.6, Remarks 7.7/7.9/7.10, Notation 7.11, and Corollaries 7.12/7.20; no archived copy of that paper is present."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -104,10 +274,59 @@
    "results": "{\"t\": \"2026-10-16T19:46:35Z\", \"tool\": \"leanfinder\", \"query\": \"Reflective monoidal subcategory of an infinity category and operadic algebras adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom\", \"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.exponentialIdealReflective\"], \"digest\": \"cf3fcf34fe0e7698\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reading search returned ordinary category declarations or simplicial-set/quasicategory constructions, not the stated coherent infinity-category theorem; the returned signatures use ordinary Hom sets and do not specialize to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor compatible reflective localization of an associative monoidal infinity category has a strong monoidal reflector",
+   "results": "{\"t\": \"2026-10-16T22:25:18Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor compatible reflective localization of an associative monoidal infinity category has a strong monoidal reflector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\", \"CategoryTheory.Localization.Monoidal.μ\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.tensor_comp\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\"], \"digest\": \"ef48a0caab56ed73\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal",
+   "results": "{\"t\": \"2026-10-16T22:25:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Localization.Monoidal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: loogle: unknown identifier 'CategoryTheory.Localization.Monoidal'; corrected Loogle query CategoryTheory.LocalizedMonoidal was subsequently run."
+  },
+  {
+   "tool": "grep",
+   "query": "reflective.*monoidal|monoidal.*reflective",
+   "results": "{\"t\": \"2026-10-16T22:25:19Z\", \"tool\": \"grep\", \"query\": \"reflective.*monoidal|monoidal.*reflective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\"], \"digest\": \"43cdc6fceff016ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor compatible reflective localization of an associative monoidal infinity category has a strong monoidal reflector",
+   "results": "{\"t\": \"2026-10-16T22:26:32Z\", \"tool\": \"leansearch\", \"query\": \"A tensor compatible reflective localization of an associative monoidal infinity category has a strong monoidal reflector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\"], \"digest\": \"4e5ba13f04ba22b8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizedMonoidal",
+   "results": "{\"t\": \"2026-10-16T22:26:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.LocalizedMonoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\"], \"digest\": \"14db8add92b3e5e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
+  },
+  {
+   "tool": "grep",
+   "query": "reflective.*monoidal|monoidal.*reflective",
+   "results": "{\"t\": \"2026-10-16T22:26:33Z\", \"tool\": \"grep\", \"query\": \"reflective.*monoidal|monoidal.*reflective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\"], \"digest\": \"ceeaf38616706d0b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal reflective localization of infinity categories induces a coherent adjunction on generalized nonsymmetric operadic algebras",
+   "results": "{\"t\": \"2026-10-16T22:30:07Z\", \"tool\": \"leanfinder\", \"query\": \"Monoidal reflective localization of infinity categories induces a coherent adjunction on generalized nonsymmetric operadic algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Monoidal.Reflective.closed\", \"CategoryTheory.Monoidal.Reflective.monoidalClosed\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_inv\"], \"digest\": \"40231a381bd5fee7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean:36-47,79-87, Functor.lean:32-37 and Monoidal/Braided/Reflection.lean:80-101. These signatures require ordinary Category and MonoidalCategory instances (the reflection theorem also assumes symmetry and closedness). They do not construct the stated quasicategorical relative adjunction, generalized-operad algebras or coherent monoidal localization; no one-line specialization applies."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -127,5 +346,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-associative-reflective-localization",
+  "worker": "stage1",
+  "summary": "Twelve-step proof constructs the full local-object total operad and checks its mapping-space universal arrows before assembling the relative adjunction. Its cocartesian lifts yield the descended tensor coherently. Explicit whiskered inverse functors prove the monoidal universal property; reflected-colimit and saturation calculations give the cocontinuous and generator clauses; relative diagram adjunction formulas cover generalized operads and restriction. No new nodes, no statement change, and no dependency on an algebroid construction that uses this item.",
+  "blueprint": "Retains prop-coef-integral-exceptional-adjoint ancestry through the enriched localization chain. Supports paragraph 2 of its current main-20261015 proof, the coherent finite mapping-complex adjunction before R inverse limit. The chapter and inherited unit are unchanged; this generic associative tool expands Chu-Haugseng Corollary 7.12 rather than replacing a geometric route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic facts that full subcategories are quasicategories and equivalences in functor categories are componentwise, used for the local total operad and coherent natural transformations. No coefficient-unit node replaces these basic facts; this is not a change of the geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-01abbc5d9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-01abbc5d9 (reviewer sub-agent of L); spot-checked: I read the item in full: all 12 steps, all 13 cited statements, the unit sk-prop-sf-biduality-general and chapter sec-six-functors, and the user lem-coef-algebroid-segal-localization-model. The source is Chu-Haugseng arXiv:2006.08269v2 §7, read online: Prop 7.6 relative-adjoint criterion, Rem 7.7/7.9/7.10, Not 7.11, Cor 7.12 hypotheses (1)/(2) and conclusions (i)-(iii). Cor 7.20 did not render in my fetch; Step 9, which uses it, is elementary and I checked it directly. The statement is true and not weakened. Step checks: (2) the block formula a(j-1)<k<=a(j) holds, including empty blocks, and it needs two-sided stability, which is assumed. (3) Fibre mapping spaces come from the K=Delta^0 pointwise-transport lemma plus homotopy-fibre detection over a discrete base, which gives universal arrows. (4) The dual parametric universal-arrow lemma gives a relative adjunction; q l = p holds because the base is the nerve of an ordinary category. The cocartesian criterion is applied only after q is shown inner. (5) Monoidal axioms are inherited by fullness; the tensor is L(iu (x) iv) and the unit is L1. (6) Two-variable colimit preservation uses iu (x) eta in W. (7) The universal property comes from F(eta) and H(epsilon) being componentwise equivalences. (8) Only cocompleteness of E is used. (9) The saturation closure matches the cited node exactly, so elementary=true is justified. (10)/(11) Generalized operads with non-discrete Kan O_[0] are handled, and the adjunction on algebras passes through hofibres over the identity. Acyclic over a 523-node closure, no SGA, no new nodes, and the tool use lem-cbc-enhanced-functor-cone-calculus is accepted. Two fixes: (1) B3, added def-coef-monoidal-infinity-category to the statement and to stmt_deps; (2) source.place no longer attributes the W-inverting universal property to Prop 7.6, which is only the relative-adjoint criterion; that property is agent-written. Not a defect: the report's line saying created.item/group were changed to the item/Q20 is wrong. The file keeps the correct historical Q39 creation record, and I left it unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
