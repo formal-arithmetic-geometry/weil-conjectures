@@ -227,29 +227,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-b3843febc (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources. Repaired one step-2 citation gap by citing existing canonical constant-ring structure-map and isomorphism nodes; statement unchanged. Verified unbounded composition, nonflat coefficients, comparison direction and inverse resolution formula. review.md records all checks, accepted tool_uses, and a pre-existing dependency cycle outside this delivery.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b3d897215",
-  "group": "NR",
+  "reviewer": "NT-stage2-Codex-29b37cee7",
+  "group": "Q35",
   "result": "pass",
-  "note": "Statement, dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and per-file compilation all checked; no findings."
+  "note": "Wrote review.md. Checked all statement dependencies, source clauses, canonical maps, universes, edge cases, signatures, docstrings, and sorry-only proofs. All three immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedDirectImage_restrictScalars",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage_kInjective",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars_preservesFiniteLimits",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientRestrictScalars_preservesFiniteColimits",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison_existsUnique",
-   "AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison",
-   "AlgebraicGeometry.Scheme.proEtaleDerivedDirectImage_restrictScalars"
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionPullback",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImageMap",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImageMap_isIso",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage",
+   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImage_kInjective"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDirectImageRestrictionOfScalars.lean",
-  "statement": "theorem proEtaleDerivedDirectImage_restrictScalars {X Y : Scheme.{u}} (f : X ⟶ Y) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) : ∃ d : (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙ proEtaleConstantDerivedDirectImage f A ≅ proEtaleConstantDerivedDirectImage f B ⋙ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory, ∀ (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X B)) ℤ) [J.IsKInjective] (I : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) [I.IsKInjective] (j : ((proEtaleCoefficientRestrictScalars X φ).mapHomologicalComplex (.up ℤ)).obj J ⟶ I) [QuasiIso j], QuasiIso (((proEtaleConstantModuleDirectImage f A).mapHomologicalComplex (.up ℤ)).map j) ∧ d.hom.app (DerivedCategory.Q.obj J) ≫ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory.map ((proEtaleConstantModuleDirectImage f B).rightDerivedFunctorObjQIso J).hom ≫ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategoryFactors.hom.app (((proEtaleConstantModuleDirectImage f B).mapHomologicalComplex (.up ℤ)).obj J) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (proEtaleCoefficientDirectImageComparison f φ) (.up ℤ)).hom.app J) ≫ DerivedCategory.Q.map (((proEtaleConstantModuleDirectImage f A).mapHomologicalComplex (.up ℤ)).map j) = (proEtaleConstantDerivedDirectImage f A).map ((proEtaleCoefficientRestrictScalars X φ).mapDerivedCategoryFactors.hom.app J) ≫ (proEtaleConstantDerivedDirectImage f A).map (DerivedCategory.Q.map j) ≫ ((proEtaleConstantModuleDirectImage f A).rightDerivedFunctorObjQIso I).hom",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFixedScalarRestrictionDirectImage.lean",
+  "statement": "theorem fixedScalarRestrictionDirectImage_kInjective {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) (J : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) ℤ) [J.IsKInjective] (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) ℤ) [I.IsKInjective] (j : ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapHomologicalComplex (.up ℤ)).obj J ⟶ I) [QuasiIso j] : QuasiIso (((lowerStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).map j) ∧ (fixedScalarRestrictionDirectImage φ f).hom.app (_root_.DerivedCategory.Q.obj J) ≫ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ).map ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorObjQIso J).hom ≫ (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryFactors.hom.app (((lowerStar (ModuleCat.{u + 1} B) f).mapHomologicalComplex (.up ℤ)).obj J) ≫ _root_.DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).map j) = (R((f)_*[ModuleCat.{u + 1} A])).map ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactors.hom.app J) ≫ (R((f)_*[ModuleCat.{u + 1} A])).map (_root_.DerivedCategory.Q.map j) ≫ ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorObjQIso I).hom",
   "branch": "newtargets-dag",
-  "by": "NR",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B) interface repair: the recorded intrinsic constant-ring module interface imports the newer FiniteCoefficient upper/lower-star framework, whose declaration AlgebraicGeometry.ProEtale.lowerStarComp conflicts with the fixed-scalar framework used by the recorded compact-support functor. This module states the same canonical comparison in the equivalent fixed-scalar presentation without that incompatible import. It defines the actual mate and states its invertibility and the full K-injective resolution normalization, with exact-restriction factorization maps. No claim that restriction preserves K-injectives is used."
  }
 }

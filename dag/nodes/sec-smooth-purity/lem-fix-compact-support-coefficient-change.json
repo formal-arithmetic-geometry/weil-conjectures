@@ -21,7 +21,9 @@
   "def-compact-support-direct-image-detailed",
   "def-weil-derived-pullback-tensor-hom",
   "def-exchange-projection",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
  ],
  "proof": [
   {
@@ -443,5 +445,42 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-6bcfaf83e (reviewer sub-agent of L); spot-checked: The mathematics and nine-step split pass source, hypothesis, edge-case, route, and citation checks. Repair required: add existing definition node def-weil-scheme-morphism-properties to stmt_deps, since the statement uses separated finite-type morphism. Corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/lem-fix-compact-support-coefficient-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29b37cee7",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source clauses, canonical maps, universes, edge cases, signatures, docstrings, and sorry-only proofs. All three immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportCoefficientChange",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteReductionCompactSupportComparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel",
+   "AlgebraicGeometry.ProEtale.nonempty_coefficientTensorModel",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.map",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.comp",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.pullback_universal",
+   "AlgebraicGeometry.ProEtale.CoefficientTensorModel.pullback",
+   "AlgebraicGeometry.ProEtale.compactSupportCoefficientComparison",
+   "AlgebraicGeometry.ProEtale.finiteReductionCompactSupportComparison",
+   "AlgebraicGeometry.ProEtale.finiteReductionCompactSupportComparison_isIso",
+   "AlgebraicGeometry.ProEtale.compactSupportCoefficientComparison_comp",
+   "AlgebraicGeometry.ProEtale.compactSupportCoefficientComparison_pullback",
+   "AlgebraicGeometry.ProEtale.directImageCoefficientComparison",
+   "AlgebraicGeometry.ProEtale.directImageCoefficientComparison_counit",
+   "AlgebraicGeometry.ProEtale.openCoefficientComparison",
+   "AlgebraicGeometry.ProEtale.openCoefficientComparison_unit",
+   "AlgebraicGeometry.ProEtale.compactSupportCoefficientComparison_factorization"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportCoefficientChange.lean",
+  "statement": "theorem finiteReductionCompactSupportComparison_isIso (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))))) (_hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) X K) (M : CoefficientTensorModel (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n) (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))) X K) (N : CoefficientTensorModel (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n) (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))) Y ((Rf_!(c)[ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))]).obj K)) : IsIso (finiteReductionCompactSupportComparison l E m n hm hmn c M N)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical B-linear map is defined through the published universal property Sheaf.IsDerivedBaseChange of actual derived scalar extension; its existence is stated explicitly. Fixed-scalar coefficient sheaves are used, as in the recorded compact-support and exchange/projection interfaces. The finite-only constructible finite-Tor predicate is the published equivalent etale-origin presentation; no adic coefficient stage is changed. Helpers also state successive-reduction, arbitrary pullback, proper counit, open unit and proper/open factorization identities."
  }
 }
