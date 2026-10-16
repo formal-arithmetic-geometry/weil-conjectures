@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-split-replacement-boundary-attachment",
+ "kind": "statement",
+ "title": "Split simplicial attachment of a given relative boundary cover",
+ "statement": "Let X be a scheme, K a simplicial etale X-scheme, A a finite split replacement stage through n, and Q boundary data for A [def-weil-pbc-finite-split-replacement-stage]. Suppose N is a finite coproduct of qcqs etale X-schemes with locally finitely presented, quasi-compact and quasi-separated structure maps. Suppose b:N to Q.M is surjective and g:N to K_(n+1) satisfies every lower boundary compatibility equation with A.f. Then A extends to a replacement stage B through n+1, whose restriction is exactly A. No hypercover condition on K is assumed.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "0DAV, construction of the split extension and simplicial composition check; 01GJ, refinement naturality."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-replacement-stage",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "Apply the split-data theorem to the explicitly constructed attachment of the prescribed boundary cover. Obtain U with its equality to the attached functor and its exact restriction to A.U.",
+   "uses": [
+    "lem-weil-pbc-finite-split-replacement-attachment-structure",
+    "def-weil-pbc-finite-split-replacement-attachment-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved attachedRefinement to construct the map from U to K, transporting its source along the functor equality. This uses the boundary equation on V and the proved naturality on all old summands.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-attachment-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the replacement stage B from U and this refinement. Stage structure extensionality reduces restriction equality to equality of underlying finite split data and refinement maps. The former is supplied by the data theorem. The latter follows from functoriality of equality transports and attachedRefinement_restrict.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-attachment-construction",
+    "def-weil-pbc-finite-split-replacement-stage"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-split-replacement-attachment-construction",
+  "def-weil-pbc-finite-split-replacement-stage",
+  "lem-weil-pbc-finite-split-replacement-attachment-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "0DAV and 01GJ: explicit attached functor and refinement, with only finite split and matching data supplied separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercover|Hypercover|Skeleton|skelet",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting",
+   "results": "loogle: unknown identifier 'SimplicialObject.Splitting'",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split simplicial étale hypercover refining an arbitrary hypercover exists by extending finite skeleta",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover, CategoryTheory.PreOneHypercover.toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.toOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover_toPreOneHypercover",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation of simplicial objects is obtained from compatible morphisms on every finite truncation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending finite split simplicial hypercover skeleta using finite affine covers of relative matching schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible sequence of truncated split simplicial objects with maps into a fixed simplicial object assembles to a split simplicial object and a natural transformation",
+   "results": "8 hits: SimplicialObject.Split.mk', SimplicialObject.Split.s, SimplicialObject.Splitting.φ, SimplicialObject.Splitting.ι, SimplicialObject.Splitting, SimplicialObject.instCategorySplit, SimplicialObject.Split.Hom, SimplicialObject.Split",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverReplacement",
+  "date": "2026-10-16",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 3: construct the relative target in each degree and continue the finite split construction in all degrees.",
+   "via": [
+    "lem-weil-pbc-finite-split-hypercover-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitReplacementBoundaryAttachment",
+  "file": "lean/Sheaf/Paper/FiniteSplitReplacementBoundaryAttachment.lean",
+  "declaration": "AlgebraicGeometry.exists_replacement_stage_of_boundary_cover",
+  "statement": "theorem exists_replacement_stage_of_boundary_cover\n    {X : Scheme.{u}} (K : SimplicialObject X.Etale)\n    {n : ℕ} (A : FiniteSplitReplacementStage K n) (Q : ReplacementBoundary A.U)\n    (N : X.Etale) (b : N ⟶ Q.M)\n    (g : N ⟶ K.obj (op (SimplexCategory.mk (n + 1))))\n    (hc : Surjective b.left)\n    (hf : ∃ (k : ℕ) (V : Fin k → X.Etale) (ι : ∀ i, V i ⟶ N),\n      Nonempty (IsColimit (Cofan.mk N ι)) ∧\n        ∀ i, CompactSpace (V i).left ∧ QuasiSeparatedSpace (V i).left ∧\n          LocallyOfFinitePresentation (V i).hom ∧ QuasiCompact (V i).hom ∧\n            QuasiSeparated (V i).hom)\n    (hcomp : ∀ (Δ : SimplexCategory.Truncated n)\n      (θ : Δ.obj ⟶ SimplexCategory.mk (n + 1)),\n      b ≫ Q.π Δ θ ≫ A.f.app (op Δ) = g ≫ K.map θ.op) :\n    ∃ B : FiniteSplitReplacementStage K (n + 1), B.restrict n (Nat.le_succ n) = A",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

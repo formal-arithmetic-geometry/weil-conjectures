@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-split-replacement-stage-zero",
+ "kind": "statement",
+ "title": "Initial finite replacement stage",
+ "statement": "For a quasi-compact quasi-separated scheme X and an etale hypercover K [def-weil-pbc-etale-hypercover], there exists a finite split replacement stage through degree zero [def-weil-pbc-finite-split-replacement-stage].",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "01GJ, degree-zero refinement; 0DAV, initial stage; 094K, finite affine choices."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-replacement-stage",
+  "def-weil-pbc-etale-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "The matching universal property in degree zero has no projections. Apply it to the identity of X to obtain a section of the structure map of the matching object. Consequently that structure map is surjective. Its composite with the surjective matching arrow of K is the structure map of K_0, hence K_0 covers X.",
+   "uses": [
+    "def-weil-pbc-etale-hypercover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Regard K_0 to X as a one-member etale cover. Images of its affine opens are open. Compactness of X selects finitely many covering images, by QuasiCompactCover.exists_isAffineOpen_of_isCompact. Take the corresponding affine Spec schemes as W_i. They are qcqs and their etale structure maps to X are locally of finite presentation, quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take T to be the coproduct of the W_i in the etale over category. The coproduct injections and selected covering images show that T to X is surjective. The induced T to K_0 defines a constant degree-zero truncated object and its refinement map. There is exactly one surjection from a retained degree to degree zero; its cofan is the identity colimit. Take T as N_0 and the identity as inclusion; use X as the empty matching limit. These data give the required stage.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-pbc-finite-split-replacement-stage",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "01GJ, degree-zero refinement; 0DAV, initial stage; 094K, finite affine choices."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercover|Hypercover|Skeleton|skelet",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting",
+   "results": "loogle: unknown identifier 'SimplicialObject.Splitting'",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split simplicial étale hypercover refining an arbitrary hypercover exists by extending finite skeleta",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover, CategoryTheory.PreOneHypercover.toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.toOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover_toPreOneHypercover",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation of simplicial objects is obtained from compatible morphisms on every finite truncation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending finite split simplicial hypercover skeleta using finite affine covers of relative matching schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible sequence of truncated split simplicial objects with maps into a fixed simplicial object assembles to a split simplicial object and a natural transformation",
+   "results": "8 hits: SimplicialObject.Split.mk', SimplicialObject.Split.s, SimplicialObject.Splitting.φ, SimplicialObject.Splitting.ι, SimplicialObject.Splitting, SimplicialObject.instCategorySplit, SimplicialObject.Split.Hom, SimplicialObject.Split",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverReplacement",
+  "date": "2026-10-16",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 3: construct the relative target in each degree and continue the finite split construction in all degrees.",
+   "via": [
+    "lem-weil-pbc-finite-split-hypercover-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitReplacementStageZero",
+  "file": "lean/Sheaf/Paper/FiniteSplitReplacementStageZero.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_replacement_stage_zero",
+  "statement": "theorem exists_replacement_stage_zero\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) :\n    Nonempty (FiniteSplitReplacementStage K 0)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

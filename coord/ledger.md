@@ -15303,3 +15303,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:09 L: returned deliver/N2/Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence (reviewer RETURN: (the landing tools, head 27d55f991) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 00:09 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ProEtaleComparisonMatchingTransport (stage 3; reviewer PASS; first push; landing 20261016T000943-L-3677675 (proof); batch 20261016T000941; modules 1; new nodes 0)
 - 00:09 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic (stage 3; reviewer PASS; first push; landing 20261016T000943-L-3677782 (interface); batch 20261016T000941; modules 2; new nodes 1)
+- 00:09 L: merged deliver/M4/Sheaf.Paper.FiniteSplitHypercoverReplacement (stage 3; reviewer PASS; after a return; landing 20261016T000943-L-3677896 (interface); batch 20261016T000941; modules 10; new nodes 9)

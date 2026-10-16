@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-finite-split-replacement-stage-assembly",
+ "kind": "statement",
+ "title": "Assembly of a compatible tower of replacement stages",
+ "statement": "Let X be quasi-compact and quasi-separated, let K be a simplicial etale X-scheme, and let A_n be replacement stages through n [def-weil-pbc-finite-split-replacement-stage]. If restricting A_(n+1) to n gives A_n, there exists a full finite split etale hypercover V [def-weil-pbc-finite-split-hypercover] and a simplicial morphism V to K.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "0DAV, passage from compatible finite skeleta to a full simplicial hypercover."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-replacement-stage",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "Induction using transitivity of restriction gives compatibility between any two bounds. Define the term in degree d from stage d. For an operator use any common bound containing its two degrees, transporting the source and target along compatibility equalities. Functor congruence proves independence of this bound. Check identity and composition at a common bound, giving the full simplicial object S. The generic underlying functor and its truncation equality are supplied by the existing private towerGlue and towerGlue_restrict helpers of Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence, accessed by a proof-only import all; no copy of those helpers is introduced.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Read the refinement map in degree d from A_d. The same equality transports show that this is the map read at any larger stage, so naturality follows from that of A_n at a common bound.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take N_d and its inclusion from A_d. Each splitting index in degree d is a surjection to a simplex of degree at most d. Thus reindex the finite-stage splitting cofan by the full splitting index set; transports of the N objects identify its injections. The cofan universal property gives a full splitting. The finiteness witness for N_d is exactly the finite-stage witness.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each d, transfer the matching object, projections, matching map and universal property of A_d along the proved equality of its simplicial object with the truncation of S. Every simplex of degree below d belongs to that truncation, so universality still holds for every scheme over X. The covering property is unchanged. Package these data with the splitting and refinement map.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-finite-split-replacement-stage"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "0DAV, passage from compatible finite skeleta to a full simplicial hypercover. The Lean proof reuses the existing generic tower helpers of Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence via a proof-only import all."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercover|Hypercover|Skeleton|skelet",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting",
+   "results": "loogle: unknown identifier 'SimplicialObject.Splitting'",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split simplicial étale hypercover refining an arbitrary hypercover exists by extending finite skeleta",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover, CategoryTheory.PreOneHypercover.toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.toOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover, CategoryTheory.GrothendieckTopology.Cover.oneHypercover_toPreOneHypercover",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation of simplicial objects is obtained from compatible morphisms on every finite truncation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending finite split simplicial hypercover skeleta using finite affine covers of relative matching schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible sequence of truncated split simplicial objects with maps into a fixed simplicial object assembles to a split simplicial object and a natural transformation",
+   "results": "8 hits: SimplicialObject.Split.mk', SimplicialObject.Split.s, SimplicialObject.Splitting.φ, SimplicialObject.Splitting.ι, SimplicialObject.Splitting, SimplicialObject.instCategorySplit, SimplicialObject.Split.Hom, SimplicialObject.Split",
+   "date": "2026-10-16",
+   "verdict": "No exact finite-stage replacement, relative attachment, or tower-assembly theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverReplacement",
+  "date": "2026-10-16",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 3: construct the relative target in each degree and continue the finite split construction in all degrees.",
+   "via": [
+    "lem-weil-pbc-finite-split-hypercover-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitReplacementStageAssembly",
+  "file": "lean/Sheaf/Paper/FiniteSplitReplacementStageAssembly.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_replacement_of_stage_tower",
+  "statement": "theorem exists_replacement_of_stage_tower\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (K : SimplicialObject X.Etale)\n    (A : ∀ n, FiniteSplitReplacementStage K n)\n    (e : ∀ n, (A (n + 1)).restrict n (Nat.le_succ n) = A n) :\n    ∃ V : FiniteSplitEtaleHypercover X, Nonempty (V.simplicial ⟶ K)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261016T000943-L-3677896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

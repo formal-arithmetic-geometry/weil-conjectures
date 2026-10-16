@@ -13,47 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Fix the full subsite of quasi-compact quasi-separated etale $X$-schemes. It contains $X$ and is closed under the finite limits used to form matching objects: fibre products are etale over $X$ by [def-weil-pbc-etale-site], and their quasi-compactness and quasi-separatedness follow by applying [lem-weil-pbc-qcqs-morphism-permanence] to the projections and composites; equalizers are pullbacks of diagonals of quasi-separated etale objects. Hence when the terms through degree $n-1$ are finite unions of such objects, every component $T$ of $M_n(U)$ is quasi-compact and quasi-separated. Cover $T$ by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Restrict any etale covering of $T$ to each of those opens using [lem-weil-pbc-etale-covering-base-change], then refine each restricted cover by finitely many affine opens of its members using [lem-weil-pbc-etale-covering-affine-refinement]. Taking the union over the finite affine cover of $T$ gives a finite affine etale refinement of the original covering. Each chosen affine member is etale and of finite presentation over $X$ by [lem-weil-pbc-qcqs-morphism-permanence](1).",
+   "text": "Obtain a finite replacement stage A_0 in degree zero.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-etale-covering-affine-refinement"
+    "lem-weil-pbc-finite-split-replacement-stage-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 094K (lemma-w-contractible), proof (a),(b), together with Lemma 0DAV (lemma-hypercovering-object), construction of the next matching cover; Topologies Lemma 021D for finite limits"
-   }
+   "elementary": false
   },
   {
-   "text": "Inductively construct a split V and a map to K in every degree. In degree zero refine the cover K_0 to X by finitely many affine pieces. Suppose V and its map have been constructed below n. Finite limits of qcqs etale X-schemes are qcqs etale, so M_n(V) is qcqs, and the matching limits are universal among all schemes over X. The relative target is M_n(V) times_{M_n(K)} K_n. Its projection to M_n(V) is a base change of the surjective etale matching arrow of K. Cover M_n(V) by finitely many affine opens and refine this relative cover over each by affine opens of its members. Their images are open and cover a quasi-compact space, so finitely many suffice. These pieces are qcqs and of finite presentation over X with quasi-compact, quasi-separated structure maps. No quasi-compactness of K_n is needed. Let N_n be their finite disjoint union. Adjoin to N_n the prescribed copies of earlier nondegenerate summands indexed by surjections [n] to [m], m < n. On N_n the map to the relative target supplies both matching faces in V and the map to K_n; on a degenerate copy the latter is the old map followed by the corresponding degeneracy of K. The pullback equation gives compatibility of all proper faces with the map to K. Define simplicial operators by factoring composites as a surjection followed by an injection. Uniqueness of this factorization and the matching face equations give the simplicial identities and naturality of V to K. The canonical degeneracy cofans are coproduct cofans, giving the required splitting. N_n covers the entire matching object, so V's matching arrow is surjective. Repeat without a degree bound; dependent choice gives compatible skeletons in all degrees and hence the stated full refinement.",
+   "text": "For every n choose the successor extension operation on stages through n and its restriction equality. Dependent natural-number recursion constructs a compatible tower A_n starting at A_0.",
    "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "def-weil-pbc-finite-split-hypercover"
+    "lem-weil-pbc-finite-split-replacement-stage-extension",
+    "def-weil-pbc-finite-split-replacement-stage"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01GJ (lemma-covering), statement and relative-cover construction; Lemma 0DAV, split extension; Lemma 094K, finiteness of each degree"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved assembly theorem to this tower to obtain the full finite split hypercover and its simplicial refinement morphism to K.",
+   "uses": [
+    "lem-weil-pbc-finite-split-replacement-stage-assembly"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-finite-split-hypercover",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-qcqs-morphism-permanence"
+  "def-weil-pbc-finite-split-replacement-stage",
+  "lem-weil-pbc-finite-split-replacement-stage-assembly",
+  "lem-weil-pbc-finite-split-replacement-stage-extension",
+  "lem-weil-pbc-finite-split-replacement-stage-zero"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Lemmas 0DAV, 094K, 01GS; finite split construction and endpoint path object"
+  "place": "0DAV: degree zero, finite successor extension, and passage to compatible stages in all degrees. M4 Lean reduction; geometric matching and finite affine cover steps proved."
  },
  "mathlib_searches": [
   {
@@ -145,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T044756-L-2041303",
+  "landing": "20261016T000943-L-3677896",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
