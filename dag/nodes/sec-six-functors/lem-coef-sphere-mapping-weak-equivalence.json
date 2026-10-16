@@ -212,5 +212,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e7ee9b158 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with the statements of every cited node. Statement unchanged and not weakened. Tested on r=-1 (both mapping spaces are points), r=0 (X×X, fibre X), X empty (forces Y empty, all r>=0 mapping spaces empty) and nonconnected X. Hovey Model Categories §2.4 is not in the project literature: it is WANTED, and proof_origin by=agent is kept. I judged the proof on its own mathematics. Step 1: kification changes neither the compact-Hausdorff test maps nor the k-topology of Cont(K,Z), so arbitrary X,Y reduce to k-spaces. Step 2: the retraction R(v,t)=(sv,2+s(t-2)), s=1/max(1-t/2,|v|), lands on the bottom or the side and fixes both; its denominator is at least 1/2; m=0 is covered. Step 3: the shell homotopy is correct, but it re-proves inline the existing same-unit node lem-coef-homotopy-equivalence-weak (no proof deps, so no cycle). Step 4: (sin πt u, cos πt) is a quotient map (closed surjection from compact to Hausdorff), the k-pullback description holds, and p is a pullback of q. Step 5: fibre identification, radial cube/disk map, and F=X for r=0. Steps 6 and 7: five-lemma chases checked in both directions, including nonabelian j=1 and the pointed-set π0 injection, against the exact segment the exact-sequence node states. Step 8: an orbit-set bijection from a group isomorphism plus an equivariant bijection, assembled over π0. Every cited statement is in unit sk-prop-sf-biduality-general and def-cbc is only a notion, so no tool_uses are needed. No cycle before or after the repair. No new nodes, no duplicate statement in the DAG. FIX: step 3 now cites lem-coef-compact-open-currying for the continuity of e, c and H on Cont(D^m,Z) and lem-coef-homotopy-equivalence-weak (f=e_Z, g=c_Z, homotopies H and the constant one), then transfers to the kification by step 1. proof_deps now adds that node; the split_report summary is updated. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-sphere-mapping-weak-equivalence.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a9749736",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Checked commit 7a9749736fa8: it adds only the node's lean block, the module (byte-identical to the snapshot) and a report with real Worker report and Second reading by Q71 sections. Clause-by-clause match: arbitrary X:Type u, Y:Type v; hypotheses use the dependency's componentsMap (path components) and homotopyGroupMap (cubical, n>=1, every x); spheres Metric.sphere 0 1 in EuclideanSpace ℝ (Fin m) for all m:ℕ, so m=0 is S^-1 = empty; Mathlib compact-open topology; kification through WithTopology and compactlyGenerated.{max u v}, which equals the dependency's {u,u} convention when u=v, as in the only consumer TopologicalSerreModel, and is sound for any test universe; g is uniquely fixed as postcomposition; the conclusion is the same weak-equivalence pair. Edge cases m=0, m=1, empty X, disconnected spaces, n=1 checked. No duplicate in Mathlib or the project. No hollow definition; a single sorry; source and blueprint docstrings with the 8 steps; statement field verbatim; stmt_deps intact. nt_compile.py --json of the module against the side overlay: rc=0, no errors or warnings, 1.5 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SphereMappingWeakEquivalence",
+  "declaration": "SSet.Enhanced.sphere_mapping_weak_equivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/SphereMappingWeakEquivalence.lean",
+  "statement": "theorem sphere_mapping_weak_equivalence {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y] (f : C(X, Y)) (hπ₀ : Function.Bijective (componentsMap f)) (hπ : ∀ (n : ℕ), 1 ≤ n → ∀ (x : X), Function.Bijective (homotopyGroupMap f n x)) : ∀ (m : ℕ), ∃ g : C( WithTopology C(↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin m)) 1), X) (TopologicalSpace.compactlyGenerated.{max u v} C(↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin m)) 1), X)), WithTopology C(↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin m)) 1), Y) (TopologicalSpace.compactlyGenerated.{max u v} C(↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin m)) 1), Y))), (∀ a, WithTopology.ofTopology (g a) = f.comp (WithTopology.ofTopology a)) ∧ Function.Bijective (componentsMap g) ∧ ∀ (n : ℕ), 1 ≤ n → ∀ x, Function.Bijective (homotopyGroupMap g n x)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

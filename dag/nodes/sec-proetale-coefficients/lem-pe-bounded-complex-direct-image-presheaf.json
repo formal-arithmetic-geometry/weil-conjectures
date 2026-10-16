@@ -24,7 +24,8 @@
   "det-pe-topos-functoriality-inverse-image",
   "def-pc-scheme",
   "def-weil-size-convention",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "det-pe-bounded-continuity-sections"
  ],
  "proof": [
   {
@@ -254,5 +255,57 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-aa528f498 (reviewer sub-agent of L); spot-checked: I read the whole item and all 4 steps, the full statement of every cited node, Stacks sites-cohomology.tex 0D6I (lemma-unbounded-describe-higher-direct-images, l.4434-4450, proved through Leray and lemma-sheafification-cohomology), and the first proof paragraph of blueprint main-20261015 det-pe-bounded-continuity-direct-image. The item is that 0D6I specialization: u(V)=X×_YV, an arbitrary ring sheaf R, target ring f_*R, bounded below, which is weaker than Stacks' unbounded case. Its statement is unchanged and it matches what the parent's step 1 uses. Step 1: Mod(R) is Grothendieck abelian; this applies with universe 𝒱 because X_proét is formed inside 𝒱 with a 𝒱-small skeleton. The K-injective existence lemma supplies the hypothesis of def-sfb-right-derived-functor (the two definitions of K-injective agree), so RΓ(U,K)=I(U) and Rf_*K=f_*I. The restriction maps follow from the unit's universal property in a few lines. Step 2: clause 2 of det-pe-topos-functoriality-inverse-image gives (f_*I)(V)=I(u(V)); the f_*R-module structure is checked directly, and presheaf cohomology is sectionwise, giving P_K^q. Step 3: exact sheafification together with the exact-functor/cohomology node, A^#≅B by the universal property (checked: e a=1 and a e=1 by uniqueness), and forgetful exactness over f_*R on Y. Step 4: chain-map representative h from the K-injective Hom bijection; h s≃r t because J is K-injective; naturality of η; the quasi-isomorphism between resolutions is a homotopy equivalence. All four steps are correct. There are no new nodes. Duplicate search (rg for 0D6I, its label, lemma-sheafification-cohomology): lem-weil-pbc-site-higher-direct-image-sheafified-presheaf covers a single abelian sheaf in degrees q≥0, and lem-pc-ringed-space-sheafification-cohomology and def-pc-derived-section-presheaf are Zariski/ringed-space results, so none is a duplicate. Edge cases checked: K=0, f=id, the zero ring, X empty, a one-term shifted complex, negative q. All six declared tool_uses are accepted (Grothendieck, K-injective existence, topos functoriality, sheafification exact, exact-functor cohomology, forgetful exact); all are generic black-box tools and the unit's continuity route is kept. No SGA is cited. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93da205c5",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Repair of return 11ac1f2038a4 complete: original X.ProEt/Y.ProEt sites; the AsSmall model is used only inside the resolution construction. Clause-by-clause match with the node and Stacks 0D6I (sites-cohomology.tex l.4433-4450); no extra hypotheses or universe equalities; independent bounds, q:Z. nt_compile.py --json rc 0: module 15.2 s clean. My probe imports the untouched consumer and checks by rfl: boundedRingModuleDirectImage/DerivedDirectImage/HigherDirectImage = ringModuleDirectImage/ringDerivedDirectImage/ringHigherDirectImage; P(V) and P(t)(V) = ringHypercohomology obj/map; restriction maps; the iso is used at the consumer's exact target. The iso is real composed canonical data. The four postponed theorems (K-injective transport, two naturality helpers, final naturality square) were checked true. lean.statement verbatim and all declarations exist; the added stmt_dep det-pe-bounded-continuity-sections is acyclic; the delivery touches only module, node lean/stmt_deps and report. Docstrings, report sections, edge cases ok. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedComplexDirectImagePresheaf",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.boundedComplexDirectImagePresheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.boundedDirectImageModules_hasDerivedCategory",
+   "AlgebraicGeometry.Scheme.ProEt.boundedRingModuleDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.boundedRingModuleDirectImage_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleFromModel_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleToModel_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleModelRoundTrip",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleModelResolutionFunctor",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleResolutionFunctor",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleResolutionMap",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleResolution_isKInjective_quasiIso",
+   "AlgebraicGeometry.Scheme.ProEt.boundedRingModuleDirectImage_hasKInjectiveResolutions",
+   "AlgebraicGeometry.Scheme.ProEt.boundedRingDerivedDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.boundedRingHigherDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageModuleSections",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageModuleSections_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleModelEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleModelEvaluation_additive",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageModuleEvaluationIso",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageSectionComplex",
+   "AlgebraicGeometry.Scheme.ProEt.resolvedInverseImageCohomologyPresheaf",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageSectionEvaluationIso",
+   "AlgebraicGeometry.Scheme.ProEt.resolvedInverseImageCohomologyEvaluation",
+   "AlgebraicGeometry.Scheme.ProEt.resolvedInverseImageCohomologyEvaluation_naturality",
+   "AlgebraicGeometry.Scheme.ProEt.resolvedInverseImageCohomologyEvaluationIso",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageCohomologyPresheaf",
+   "AlgebraicGeometry.Scheme.ProEt.inverseImageCohomologyPresheafIso",
+   "AlgebraicGeometry.Scheme.ProEt.sectionHomologySheafificationIso",
+   "AlgebraicGeometry.Scheme.ProEt.sectionHomologyPresheaf_naturality",
+   "AlgebraicGeometry.Scheme.ProEt.sectionHomologyPresheafIso",
+   "AlgebraicGeometry.Scheme.ProEt.boundedComplexDirectImagePresheafIso",
+   "AlgebraicGeometry.Scheme.ProEt.boundedComplexDirectImagePresheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedComplexDirectImagePresheaf.lean",
+  "statement": "theorem boundedComplexDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Sheaf (topology X) RingCat.{u + 1}) (q : ℤ) (K L : CochainComplex (ringedSiteModules.{u + 1} R) ℤ) (hK : ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero (K.X n)) (hL : ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero (L.X n)) (t : K ⟶ L) : (presheafToSheaf (topology Y) AddCommGrpCat.{u + 1}).map ((inverseImageCohomologyPresheaf f R q).map t) ≫ (boundedComplexDirectImagePresheafIso f R q L hL).hom = (boundedComplexDirectImagePresheafIso f R q K hK).hom ≫ ((DerivedCategory.Q ⋙ boundedRingHigherDirectImage f R q) ⋙ SheafOfModules.toSheaf _).map t",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Return 11ac1f2038a4 repaired on the original X.ProEt/Y.ProEt sites, using the explicitly authorized definitional-equality alternative. The transparent boundedRingModuleDirectImage / boundedRingDerivedDirectImage / boundedRingHigherDirectImage specializations are definitionally equal (rfl checked importing the untouched landed consumer) to ringModuleDirectImage / ringDerivedDirectImage / ringHigherDirectImage, including its exact original-site direct-image coefficient ring and standard derived-category instance. The consumer accepts the composed isomorphism at its exact target type with no transport or comparison map. P(V) and P(t)(V) are literally the landed ringHypercohomology object and map (rfl checked). The actual transported resolution and augmentation are certified by a postponed theorem, not assumed. Independent lower bounds and q : ℤ remain."
  }
 }
