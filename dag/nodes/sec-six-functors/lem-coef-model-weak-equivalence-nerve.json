@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "lem-coef-cosimplicial-frame-mapping",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof": [
   {
@@ -252,5 +253,43 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-f97e01730 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all 7 cited statements, the unit/chapter and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint (paragraph 2) in full. The statement is unchanged and true; no target is touched and no SGA source is used. Source access: HAG II is not archived and the review service blocks network access, so I did not open the PDF myself. A local copy of Toën's dg-categories paper (/tmp/q28toen) quotes HAG II Cor. A.0.4 (π1 = Aut, πi = π_{i-1} Map) and Prop. A.0.6 (bifibrant nerve), which match the item. I did not check the wording of Prop. A.0.3 or the paragraph after it against the PDF; I verified both new statements as mathematics instead (Grothendieck-construction Quillen equivalence; Dwyer–Kan local model). Step 1: N_C(h_x) = N(C/x), contracted by its terminal object; the path fibration with its max-contraction, pulled back to B, has contractible total space by the cited right-properness, so the raw nerve is not assumed Kan. The SM7 endpoint fibration comes from node 1's simplicial slice structure (acceptable). Step 2: the four-term chain over the same C = wS; identification with q comes from node 2's stated naturality. Step 3: Kan cores, extension along the Kan replacement (hypotheses checked), mapping spaces of the core equal the equivalence components, π0 and πn argued. Steps 4–6 are elementary and correct (functorial replacements, 2-of-3, closure, prism); citing the same-unit lem-coef-nerve-natural-homotopy-equivalence would be optional. Step 7: derived-adjunction formulas, cofibrant replacement before L, LQX in T via a zigzag and closure. proof_deps equals the union of uses; there is no cycle. New nodes: B1–B7 pass, searches recorded. Small cases: empty, terminal, [1], discrete, BG; Set with isomorphisms; sSet at a point and at S^1. Node 2 is strictly smaller than the item and follows the source's own division; neither node duplicates presheaf-localization-comparison, the hammock nodes, the right-fibration node or the straightening nodes. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-groupoid-localization. Cosmetic only, not changed: a missing period in both new source.place strings, and the PDF page offsets differ between the item and the new nodes. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3005c848f",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NE), module, and the dependency interfaces (ReplacementAdjunction/CoherentAdjunction, FiniteReedy.IsLocalization/object/transformation/diagram/EquivalentObjects, Enhanced core/fullSubcomplex/IsEquivalenceEdge/mappingSpace/IsWeakHomotopyEquivalence, frameLargeNerveMap). Every node clause is rendered: wS as Mathlib InducedWideCategory; replete represented full subcomplex and its core; the localization-induced f pinned by f≫coreInclusion=N(incl)≫q (unique since mono) and a weak homotopy equivalence with Kan core; pi0 formula via Ho(C) isomorphism; path formula via equivalenceMaps; three replacement inclusions; Quillen clause with arbitrary functorial Q/B and ReplacementAdjunction, unit/counit equivalence edges, mutual represented-class conditions, N(LQ) weak equivalence, cofibrant L clause with L(e) 2-simplex, and core unit/counit/right-comparison normalizations. Edge orientations checked against ReplacementAdjunction; all existentials satisfiable. Edge cases (empty classes, non-Kan nerve, non-fixing replacements, independent universes) fine; no extra hypotheses. Remark only: naturality is stated for any Quillen adjunction carrying S into T, which is true and consistent with the node. Records: node changed only in lean and stmt_deps (+ landed lem-coef-model-infinity-derived-adjunction, used in the signature, no cycle); lean.statement verbatim; all 17 declarations present; docstrings with source/blueprint; sorry only; imports per section 3 rule 7; lines at most 100. nt_compile.py --json: exit 0, no errors or warnings, 2.5 s."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModelWeakEquivalenceNerve",
+  "declaration": "HomotopicalAlgebra.ModelNerve.model_weak_equivalence_nerve",
+  "declarations": [
+   "HomotopicalAlgebra.ModelNerve.WeakObjects",
+   "HomotopicalAlgebra.ModelNerve.inclusion",
+   "HomotopicalAlgebra.ModelNerve.restriction",
+   "HomotopicalAlgebra.ModelNerve.weakFunctor",
+   "HomotopicalAlgebra.ModelNerve.localizationDiagram",
+   "HomotopicalAlgebra.ModelNerve.represented",
+   "HomotopicalAlgebra.ModelNerve.localizedCore",
+   "HomotopicalAlgebra.ModelNerve.coreInclusion",
+   "HomotopicalAlgebra.ModelNerve.equivalenceMaps",
+   "HomotopicalAlgebra.ModelNerve.ComponentsFormula",
+   "HomotopicalAlgebra.ModelNerve.PathFormula",
+   "HomotopicalAlgebra.ModelNerve.ReplacementInclusions",
+   "HomotopicalAlgebra.ModelNerve.Comparison",
+   "HomotopicalAlgebra.ModelNerve.CoreAdjunction",
+   "HomotopicalAlgebra.ModelNerve.CofibrantClause",
+   "HomotopicalAlgebra.ModelNerve.QuillenClause",
+   "HomotopicalAlgebra.ModelNerve.model_weak_equivalence_nerve"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModelWeakEquivalenceNerve.lean",
+  "statement": "theorem model_weak_equivalence_nerve {C : Type u} [Category.{v} C] [ModelCategory C] [HasLimits C] [HasColimits C] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] (P : ObjectProperty C) (hP : ∀ {X Y : C} (a : X ⟶ Y), weakEquivalences C a → (P X ↔ P Y)) {K : SSet.{max u v u' v' t}} (q : FiniteReedy.largeNerve.{u, v, max u v u' v' t} C ⟶ K) (hq : FiniteReedy.IsLocalization (weakEquivalences C) q) : ∃ f : FiniteReedy.largeNerve.{u, v, max u v u' v' t} (WeakObjects P) ⟶ localizedCore.{u, v, max u v u' v' t} P q, Comparison.{u, v, max u v u' v' t} P q f ∧ ∀ (D : Type u') [Category.{v'} D] [ModelCategory D] [HasLimits D] [HasColimits D] [(cofibrations D).HasFunctorialFactorization (trivialFibrations D)] [(trivialCofibrations D).HasFunctorialFactorization (fibrations D)], QuillenClause.{u, v, u', v', t} P q f D",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The comparison factors the actual localization diagram in every degree. The full statement includes the component and path formulas, all three replacement inclusions, the actual LQ and cofibrant L nerve maps, and coherent naturality normalized to the recorded derived comparison and its unit and counit. Helpers construct or specify this node’s own comparisons; no other DAG node is stated."
  }
 }
