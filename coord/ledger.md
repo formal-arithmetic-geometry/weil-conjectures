@@ -15470,3 +15470,12 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 2026-10-16 08:11 UTC L-only maintenance Q20/thm-sf-fullcd-etale-origin: correct thm-sc-finite-type-torsion-cd proof-unit binding from compact-support base change to finiteness, as explicitly named by that unit's dimension paragraph; accept its affine input and three existing dimension-bound callers as generic tool uses. Preserve all statements, proofs, dependencies and blueprint ancestry. See coord/reports/maintenance/Q20-fullcd-etale-origin-binding.md; backups *.maint-Q20-fullcd-1792138070.bak.
 - 08:13 L: merged deliver/C3/Sheaf.AlgebraicGeometry.GrothendieckEtaleRelativeSectionColimit (stage 3; reviewer PASS; after a return; landing 20261016T081350-L-1435770 (interface); batch 20261016T081348; modules 2; new nodes 1; change records: coord/changes/c3-grothendieck-relative-section-proof-scopes.md)
+- 2026-10-16 16:18:03 launcher: retired R2 delivery/claim of Sheaf.AlgebraicGeometry.CartesianRawClassChartRepresentative (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired V3 delivery/claim of Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired XR4ee1424d1f9ed605 delivery/claim of Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired XR65519786246dce9c delivery/claim of Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired XRaa0d61df2ef4956f delivery/claim of Sheaf.Paper.ModuleCupSinglePairingHomology (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.AlgebraicGeometry.ConstantGroupScheme (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.AlgebraicGeometry.MeromorphicModule (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (not in the queue: pruned or finished)
+- 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.NumberTheory.Padics.CoefficientExtension (not in the queue: pruned or finished)
