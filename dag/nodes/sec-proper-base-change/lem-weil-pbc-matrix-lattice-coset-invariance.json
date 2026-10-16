@@ -78,7 +78,7 @@
   "date": "2026-10-16",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 6.8.4(6), proof, pp. 59--60, constant matrices and evaluation of lattice coordinates",
-  "note": "Proved in Lean from the free-sheaf basis identities, finite matrix algebra, subtype injectivity and evaluation of continuous coefficients. No new sorry and no positive-rank assumption."
+  "note": "Proved in Lean from the free-sheaf basis identities, finite matrix algebra, subtype injectivity and evaluation of continuous coefficients. No new sorry and no positive-rank assumption. B3 generalized the proved detection argument to any nonempty slice object and exposed the two existing coefficient ring homomorphisms. The old theorem signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -114,17 +114,21 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
-  "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
+  "module": "Sheaf.Paper.LatticeSheafBasic",
+  "file": "lean/Sheaf/Paper/LatticeSheafBasic.lean",
   "declaration": "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_iff",
   "declarations": [
    "AlgebraicGeometry.ProEtale.matrixLatticeImage_eq_of_coset_eq",
    "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_of_eq",
-   "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_iff"
+   "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_iff",
+   "AlgebraicGeometry.ProEtale.integralMatrixSubgroup_mem_iff",
+   "AlgebraicGeometry.ProEtale.matrixLatticeImage_coset_eq_of_eq_at",
+   "AlgebraicGeometry.ProEtale.latticeConstantRingHom",
+   "AlgebraicGeometry.ProEtale.latticeEvaluationRingHom"
   ],
   "statement": "theorem matrixLatticeImage_coset_eq_iff\n    (g h : Matrix.GeneralLinearGroup (Fin n) K) (hU : Nonempty U.left) :\n    (Quotient.mk _ g : integralMatrixCosets A n) = Quotient.mk _ h ↔\n      ∀ T, matrixLatticeImage X K A U n g T = matrixLatticeImage X K A U n h T",
   "branch": "sheaf-dag",
-  "by": "F2",
+  "by": "B3",
   "date": "2026-10-16"
  },
  "reviewed": {
@@ -140,11 +144,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-1f92e",
-  "group": "F2",
+  "reviewer": "X-395a1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261016T062623-L-449261",
+  "landing": "20261016T085349-L-1757920",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
  }
 }

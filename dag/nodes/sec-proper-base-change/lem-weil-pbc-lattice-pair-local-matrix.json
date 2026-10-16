@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-lattice-pair-local-matrix",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary A cover by continuous matrix presentations of a lattice",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A cover by continuous matrix presentations of a lattice",
+ "statement": "In the context of the specified-basis matrix calculation [lem-weil-pbc-lattice-pair-matrix-at-basis], every integral lattice pair P over V → U admits a covering sieve S of V [def-weil-pbc-sites-and-cohomology] such that every arrow a:W → V in S has an invertible continuous coefficient matrix whose integral column image agrees with the embedded image of P on every object over W.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; A cover by continuous matrix presentations of a lattice"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-matrix-at-basis",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite locally free generators q for P.module. At the identity object of Over V the sieve of objects admitting a map to some q.X(i) is covering. Transfer it along Sieve.overEquiv to a sieve S on V.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; A cover by continuous matrix presentations of a lattice"
+   }
+  },
+  {
+   "text": "For every member a:W → V of S, its membership supplies i and a factorization Over.mk a → q.X(i). Apply the specified-basis calculation to this factorization. Transport the harmless a ≫ id = a equation explicitly.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-matrix-at-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; A cover by continuous matrix presentations of a lattice"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-lattice-pair-matrix-at-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. Proof compiled with no direct sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free integral sheaf in a trivial rational sheaf is locally the image of an invertible matrix of continuous coefficient sections",
+   "results": "8 hits: SheafOfModules.IsFiniteType.mk, SheafOfModules.isFinitePresentation, SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.quasicoherentDataOfIsFinitePresentation; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "12 hits: SheafOfModules.free, SheafOfModules.freeSection, SheafOfModules.freeFunctor_obj, SheafOfModules.ιFree, SheafOfModules.freeMap, SheafOfModules.freeHomEquiv, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeFunctor_map; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "freeSectionsLinearEquiv|changeOfRings.*[Oo]ver|[Oo]ver.*changeOfRings",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticePairLocalMatrix",
+  "file": "lean/Sheaf/Paper/LatticePairLocalMatrix.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLatticePair_localMatrix",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLatticePair_localMatrix"
+  ],
+  "statement": "theorem integralLatticePair_localMatrix (X : Scheme.{u}) (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (L : SheafOfModules.{u + 1} (latticeModuleRing X K)) (U : X.ProEt) (n : ℕ) (e : L.over U ≅ latticeFreeSheaf X K U n) (V : X.ProEt) (f : V ⟶ U) (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L V) : ∃ S : Sieve V, S ∈ Scheme.ProEt.topology X V ∧ ∀ (W : X.ProEt) (a : W ⟶ V), S a → ∃ G : Matrix.GeneralLinearGroup (Fin n) ((latticeCoefficientSheaf X K).obj.obj (op W)), ∀ T : Over W, Set.image (e.hom.val.app (op (Over.mk (T.hom ≫ a ≫ f)))) (P.image (op (Over.mk (T.hom ≫ a)))) = sectionMatrixLatticeImage X K A U n (op (Over.mk (T.hom ≫ a ≫ f))) (Matrix.GeneralLinearGroup.map (((latticeCoefficientSheaf X K).obj.map T.hom.op).hom) G)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

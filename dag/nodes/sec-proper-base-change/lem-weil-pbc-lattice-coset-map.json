@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-lattice-coset-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary The normalized constant-coset map to lattice classes",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized constant-coset map to lattice classes",
+ "statement": "For an exact lattice-class sheaf presentation (F,c) [lem-weil-pbc-lattice-pair-image-classification] over a topological field K and subring A, and a rational frame e:L|U ≅ K_U^n, constructed constant-matrix pairs give a natural map from the constant presheaf ULift(GL_n(K)/GL_n(A)) to F|U. It is locally injective. If it is locally surjective, its sheafification is an isomorphism from the constant sheaf to F|U, with the exact embedded-image normalization.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; The normalized constant-coset map to lattice classes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-constant-matrix-lattice-pair",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Choose each matrix pair from the proved existence theorem. Its image formula, image classification and coset invariance make its class independent of the right-coset representative. Define restriction using F.map; image formulas and the restriction clause of the presentation prove normalization on every slice object.",
+   "uses": [
+    "lem-weil-pbc-constant-matrix-lattice-pair",
+    "lem-weil-pbc-lattice-pair-image-classification",
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; The normalized constant-coset map to lattice classes"
+   }
+  },
+  {
+   "text": "On a nonempty object, equality of the two classes gives equality of the matrix images on every further object. Evaluate at a point to recover equality of cosets. The equalizer sieve is therefore maximal there; on an empty object it is covering by the empty-cover axiom. Thus the presheaf map is locally injective.",
+   "uses": [
+    "lem-weil-pbc-matrix-lattice-coset-invariance",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; The normalized constant-coset map to lattice classes"
+   }
+  },
+  {
+   "text": "Extend the map by sheafifyLift. At the required large value universe, the unit of sheafification is locally bijective. The unit factorization transfers local bijectivity to the map of sheaves, hence it is an isomorphism by Mathlib Sheaf.isLocallyBijective_iff_isIso. The unit equation supplies the normalization.",
+   "uses": [
+    "lem-weil-pbc-large-set-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; The normalized constant-coset map to lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-matrix-lattice-pair",
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-matrix-lattice-coset-invariance",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-large-set-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. Proof compiled with no direct sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant coset presheaf map to lattice classes is locally bijective and extends to an isomorphism from the constant sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, CategoryTheory.Sheaf.isLocallyInjective_of_iso, TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, CompHausLike.LocallyConstant.functorToPresheavesIso; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "12 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.constantSheafAdj, CategoryTheory.constantCommuteCompose, CategoryTheory.equivCommuteConstant; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*[Ss]heaf|[Ss]heaf.*[Ll]attice",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeCosetMap",
+  "file": "lean/Sheaf/Paper/LatticeCosetMap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.latticeCosetSheafMap_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.matrixLatticePair",
+   "AlgebraicGeometry.ProEtale.matrixLatticePair_image",
+   "AlgebraicGeometry.ProEtale.matrixLatticePair_class_eq_iff",
+   "AlgebraicGeometry.ProEtale.matrixLatticePair_class_eq",
+   "AlgebraicGeometry.ProEtale.latticeCosetSection",
+   "AlgebraicGeometry.ProEtale.latticeCosetMap",
+   "AlgebraicGeometry.ProEtale.latticeCosetMap_normalization",
+   "AlgebraicGeometry.ProEtale.latticeCosetMap_eq_restrict_iff",
+   "AlgebraicGeometry.ProEtale.latticeCosetMap_injective_at",
+   "AlgebraicGeometry.ProEtale.latticeCosetMap_locallyInjective",
+   "AlgebraicGeometry.ProEtale.latticeCosetSheafMap",
+   "AlgebraicGeometry.ProEtale.latticeCosetSheafMap_unit",
+   "AlgebraicGeometry.ProEtale.latticeCosetSheafMap_normalization",
+   "AlgebraicGeometry.ProEtale.latticeCosetSheafMap_isIso"
+  ],
+  "statement": "theorem latticeCosetSheafMap_isIso (hsurj : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology X).over U) (latticeCosetMap X K A L F c hc U n e)) : IsIso (latticeCosetSheafMap X K A L F c hc U n e)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

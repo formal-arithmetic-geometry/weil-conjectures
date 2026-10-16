@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-lattice-pair-matrix-at-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary An integral basis gives a rational continuous matrix",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An integral basis gives a rational continuous matrix",
+ "statement": "Let K be a topological field, A a subring, L a sheaf of K_X-modules, e:L|U ≅ K_U^n, and P an integral lattice pair on V → U [lem-weil-pbc-lattice-pair-image-classification]. Fix finite local generators q of P.module which are bases. For a basis member q.X(i) and any arrow W → V factoring through it, there is G ∈ GL_n(C(|W|,K)) whose restriction to every T → W gives exactly e(P.image(T)) as its integral column span [lem-weil-pbc-lattice-section-matrix].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-lattice-section-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the specified integral basis to W. Tensor the finite free integral module with K, identifying the sheafified tensor product with the free rational module by the basis formula. Compose with P.rationalization and e to get mutually inverse coordinate maps.",
+   "uses": [
+    "lem-weil-pbc-lattice-free-scalar-extension",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+   }
+  },
+  {
+   "text": "If W is nonempty, evaluate at a point; invariant basis number over K gives the equality of the two finite ranks. Reindex the integral basis by Fin n. Its rational coordinates and the coordinates of the inverse form G and G⁻¹. Every integral section is an integral linear combination of these columns, and naturality gives the same formula on all T → W. If W is empty all coefficient and free section modules on its slice are singletons, and both nonempty images are the whole singleton. Rank zero is the same finite free computation.",
+   "uses": [
+    "lem-weil-pbc-lattice-section-matrix",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; An integral basis gives a rational continuous matrix"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-free-scalar-extension",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-lattice-section-matrix",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. This is one of two remaining strictly smaller steps; proof in words is also in its Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free integral sheaf in a trivial rational sheaf is locally the image of an invertible matrix of continuous coefficient sections",
+   "results": "8 hits: SheafOfModules.IsFiniteType.mk, SheafOfModules.isFinitePresentation, SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.quasicoherentDataOfIsFinitePresentation; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "12 hits: SheafOfModules.free, SheafOfModules.freeSection, SheafOfModules.freeFunctor_obj, SheafOfModules.ιFree, SheafOfModules.freeMap, SheafOfModules.freeHomEquiv, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeFunctor_map; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "freeSectionsLinearEquiv|changeOfRings.*[Oo]ver|[Oo]ver.*changeOfRings",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticePairMatrixAtBasis",
+  "file": "lean/Sheaf/Paper/LatticePairMatrixAtBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLatticePair_matrixAtBasis",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLatticePair_matrixAtBasis"
+  ],
+  "statement": "theorem integralLatticePair_matrixAtBasis (X : Scheme.{u}) (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (L : SheafOfModules.{u + 1} (latticeModuleRing X K)) (U : X.ProEt) (n : ℕ) (e : L.over U ≅ latticeFreeSheaf X K U n) (V : X.ProEt) (f : V ⟶ U) (P : IntegralLatticePair (latticeCoefficientSheafMap X A.subtype continuous_subtype_val) L V) (q : P.module.LocalGeneratorsData) [q.IsLocallyFreeData] [q.IsFiniteType] (i : q.I) (W : X.ProEt) (a : W ⟶ V) (t : Over.mk a ⟶ q.X i) : ∃ G : Matrix.GeneralLinearGroup (Fin n) ((latticeCoefficientSheaf X K).obj.obj (op W)), ∀ T : Over W, Set.image (e.hom.val.app (op (Over.mk (T.hom ≫ a ≫ f)))) (P.image (op (Over.mk (T.hom ≫ a)))) = sectionMatrixLatticeImage X K A U n (op (Over.mk (T.hom ≫ a ≫ f))) (Matrix.GeneralLinearGroup.map (((latticeCoefficientSheaf X K).obj.map T.hom.op).hom) G)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

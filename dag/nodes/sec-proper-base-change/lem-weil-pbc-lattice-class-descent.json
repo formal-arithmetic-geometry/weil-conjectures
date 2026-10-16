@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-lattice-class-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary Descent and an exact presentation of lattice classes",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent and an exact presentation of lattice classes",
+ "statement": "For a finite p-adic coefficient extension and any sheaf L of rational coefficient modules on X_proet [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category], there exist a set-valued sheaf F and surjections c_U from integral lattice pairs to its sections. Their exact kernel relation is intertwining integral isomorphism, and restriction is characterized by the embedded images on all slice objects [lem-weil-pbc-lattice-pair-image-classification]. No local-freeness assumption on L is required for this presentation.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-pair-image-classification"
+ ],
+ "proof": [
+  {
+   "text": "Form the quotient of lattice pairs by intertwining integral isomorphisms. Restrict pairs by localization; sectionwise tensor and sheafification commute with the slice restriction. The resulting quotient presheaf has the asserted kernel relation by construction and the image-classification lemma.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-image-classification",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  },
+  {
+   "text": "For a matching family choose representatives. Their intertwining overlap isomorphisms are unique because integral embeddings are injective, so they satisfy the cocycle. Glue the integral modules with site-module-sheaf gluing. A composite refinement of their finite free basis covers proves finite local freeness of the glued module.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-image-classification",
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  },
+  {
+   "text": "Glue their embeddings into L sectionwise. Tensoring gives the rationalization, whose local inverses agree and glue; hence it is an isomorphism. The same uniqueness glues isomorphisms between any two amalgamations. Thus the quotient is a sheaf and the class maps have precisely the embedded-image restriction criterion.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lattice-pair-image-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. This is one of two remaining strictly smaller steps; proof in words is also in its Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism classes of locally free integral lattice pairs form a sheaf by unique descent of submodules of a fixed rational sheaf",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.Functor.IsCoverDense.Types.sheafIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, ModuleCat.Tilde.stalkIso, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsSheaf",
+   "results": "12 hits: CategoryTheory.Presheaf.IsSheaf, CategoryTheory.isSheaf_iff_isSheaf_of_type, CategoryTheory.Presheaf.isSheaf_iff_isSheaf', CategoryTheory.Presheaf.IsSheaf.of_le, CategoryTheory.Presheaf.isSheaf_of_isTerminal, CategoryTheory.Sheaf.isTerminalTerminal, CategoryTheory.sheafToPresheaf, CategoryTheory.Presheaf.isSheaf_comp_of_isSheaf; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Ss]heaf|[Ss]heaf.*glue",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeClassDescent",
+  "file": "lean/Sheaf/Paper/LatticeClassDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_latticeClassPresentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_latticeClassPresentation"
+  ],
+  "statement": "theorem exists_latticeClassPresentation (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : SheafOfModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) : ∃ (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (c : ∀ U : X.ProEt, IntegralLatticePair (integralLatticeCoefficientMap X l E) L U → F.obj.obj (op U)), IsLatticeClassPresentation (integralLatticeCoefficientMap X l E) L F c",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-lattice-coset-local-surjectivity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary Local surjectivity of constant matrix lattice classes",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local surjectivity of constant matrix lattice classes",
+ "statement": "For the finite p-adic coefficient extension, an exact lattice class presentation and a rational frame [lem-weil-pbc-lattice-pair-image-classification], the constant-coset presheaf map [lem-weil-pbc-lattice-coset-map] is locally surjective: every class is locally represented by a constant invertible matrix.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Local surjectivity of constant matrix lattice classes"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "lem-weil-pbc-lattice-coset-map"
+ ],
+ "proof": [
+  {
+   "text": "Represent an arbitrary target section by a pair P using surjectivity of c. Choose its covering sieve of continuous matrix frames. Transfer this cover to the slice over U.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-local-matrix",
+    "lem-weil-pbc-lattice-coset-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Local surjectivity of constant matrix lattice classes"
+   }
+  },
+  {
+   "text": "On a frame chart W, evaluate G at each point x. Continuity of matrix entries and inverse entries gives an open neighborhood with constant right coset. Use the continuous integral lifting lemma to identify the sectionwise matrix lattice with that constant-matrix lattice on every further object.",
+   "uses": [
+    "lem-weil-pbc-lattice-matrix-neighborhoods",
+    "lem-weil-pbc-lattice-section-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Local surjectivity of constant matrix lattice classes"
+   }
+  },
+  {
+   "text": "The open neighborhoods cover W. Apply the existing ProEt.mem_topology_of_openImmersion directly to obtain a pro-etale covering, with no etale comparison detour. The restriction criterion for the coset map makes these arrows members of its image sieve. Transitivity with the original frame cover proves local surjectivity.",
+   "uses": [
+    "lem-weil-pbc-lattice-coset-map",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Local surjectivity of constant matrix lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-pair-local-matrix",
+  "lem-weil-pbc-lattice-coset-map",
+  "lem-weil-pbc-lattice-matrix-neighborhoods",
+  "lem-weil-pbc-lattice-section-matrix",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. Proof compiled with no direct sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant coset presheaf map to lattice classes is locally bijective and extends to an isomorphism from the constant sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, CategoryTheory.Sheaf.isLocallyInjective_of_iso, TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, CompHausLike.LocallyConstant.functorToPresheavesIso; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "12 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.constantSheafAdj, CategoryTheory.constantCommuteCompose, CategoryTheory.equivCommuteConstant; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*[Ss]heaf|[Ss]heaf.*[Ll]attice",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeCosetLocalSurjectivity",
+  "file": "lean/Sheaf/Paper/LatticeCosetLocalSurjectivity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.latticeCosetMap_locallySurjective",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeCosetMap_locallySurjective"
+  ],
+  "statement": "theorem latticeCosetMap_locallySurjective (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : SheafOfModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (c : ∀ V : X.ProEt, IntegralLatticePair (integralLatticeCoefficientMap X l E) L V → F.obj.obj (op V)) (hc : IsLatticeClassPresentation (integralLatticeCoefficientMap X l E) L F c) (U : X.ProEt) (n : ℕ) (e : L.over U ≅ latticeFreeSheaf X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) U n) : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology X).over U) (latticeCosetMap X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) (latticeCoefficientIntegers l E) L F c hc U n e)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

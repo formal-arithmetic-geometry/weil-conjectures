@@ -15488,3 +15488,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:40 L: merged deliver/E2/Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent (stage 3; reviewer PASS; first push; landing 20261016T084037-L-1660191 (interface); batch 20261016T084036; modules 13; new nodes 12)
 - 08:53 L: returned deliver/B2/Sheaf.Paper.ContinuousEtaleLocalLattices (reviewer RETURN: (the landing tools, head 72710e07a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 08:53 L: returned deliver/E4/Sheaf.Paper.IntegralMatrixPointwiseRank (reviewer RETURN: (the landing tools, head d3521dc76) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 08:53 L: merged deliver/B3/Sheaf.Paper.LatticeSheafLocallyConstant (stage 3; reviewer PASS; first push; landing 20261016T085349-L-1757920 (interface); batch 20261016T085347; modules 10; new nodes 8; change records: coord/changes/lattice-coset-comparison.md)

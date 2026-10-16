@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-lattice-section-matrix",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary Continuous coefficient matrices and pointwise integral cosets",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuous coefficient matrices and pointwise integral cosets",
+ "statement": "For the coefficient sheaves A_X and K_X on X_proet [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category], define the section-matrix lattice image of G ∈ GL_n(C(|V|,K)) by integral linear combinations of its columns. Right multiplication by a continuous integral invertible matrix preserves the image. If every pointwise coset of G equals the coset of a fixed h ∈ GL_n(K), its image equals the constant-matrix lattice image of h.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Continuous coefficient matrices and pointwise integral cosets"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Lift the entries of a continuous coefficient matrix and its inverse to A-valued continuous functions whenever both are pointwise integral. The subtype topology gives continuity and injectivity of coefficient inclusion gives the inverse equations.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Continuous coefficient matrices and pointwise integral cosets"
+   }
+  },
+  {
+   "text": "Prove invariance under integral right multiplication by reindexing the finite column sum; use the inverse matrix for the opposite inclusion. Lift h⁻¹G by the first step and apply invariance; the constant-matrix formula is definitional.",
+   "uses": [
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Continuous coefficient matrices and pointwise integral cosets"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. Proof compiled with no direct sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible matrix of continuous functions whose matrix and inverse are pointwise in a subring lifts to an invertible matrix of continuous subring valued functions",
+   "results": "8 hits: Matrix.GeneralLinearGroup.map_inv, ContinuousLinearMap.IsInvertible.of_inverse, ContinuousMap.unitsLift_apply_inv_apply, ContinuousLinearMap.IsInvertible.inverse, continuousSubring, ContinuousMap.canLift, ContinuousLinearMap.isInvertible_equiv, Matrix.invertibleEquivDetInvertible; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "12 hits: SheafOfModules.free, SheafOfModules.freeSection, SheafOfModules.freeFunctor_obj, SheafOfModules.ιFree, SheafOfModules.freeMap, SheafOfModules.freeHomEquiv, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeFunctor_map; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "freeSectionsLinearEquiv|changeOfRings.*[Oo]ver|[Oo]ver.*changeOfRings",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSectionMatrix",
+  "file": "lean/Sheaf/Paper/LatticeSectionMatrix.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sectionMatrixLatticeImage_eq_of_pointwise_coset",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sectionMatrixLatticeImage",
+   "AlgebraicGeometry.ProEtale.sectionMatrixLatticeImage_integral_mul",
+   "AlgebraicGeometry.ProEtale.sectionMatrixLatticeImage_constant",
+   "AlgebraicGeometry.ProEtale.coefficientMatrix_integral_of_pointwise",
+   "AlgebraicGeometry.ProEtale.sectionMatrixLatticeImage_eq_of_pointwise_coset"
+  ],
+  "statement": "theorem sectionMatrixLatticeImage_eq_of_pointwise_coset (T : (Over U)ᵒᵖ) (g : Matrix.GeneralLinearGroup (Fin n) ((latticeCoefficientSheaf X K).obj.obj (op T.unop.left))) (h : Matrix.GeneralLinearGroup (Fin n) K) (hgh : ∀ x : T.unop.left.left, (Quotient.mk _ h : integralMatrixCosets A n) = Quotient.mk _ (Matrix.GeneralLinearGroup.map (latticeEvaluationRingHom X K T.unop.left x) g)) : sectionMatrixLatticeImage X K A U n T g = matrixLatticeImage X K A U n h T",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}

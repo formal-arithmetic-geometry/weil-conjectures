@@ -32,129 +32,40 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-lattice-pair-image-classification]. The inclusion of continuous integral coefficients into rational coefficients is injective on every section ring. The completed local-basis and sheafification calculation proves that each pair embeds in L, that equality of embedded images is exactly equivalence of pairs, and that intertwining integral isomorphisms are unique.",
+   "text": "Apply the exact descent/presentation theorem, obtaining F,c and the three presentation clauses. This is the global class-descent part only; it asserts neither local constancy nor a coset isomorphism. Foundational declarations are reexported from LatticeSheafBasic without changing their signatures.",
    "uses": [
-    "lem-weil-pbc-lattice-pair-image-classification"
+    "lem-weil-pbc-lattice-class-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For a covering $(U_i\\to U)_i$ and a matching family of classes, choose representatives $(M_i,\\alpha_i)$. Equality of classes on overlaps supplies unique intertwining isomorphisms $\\phi_{ij}$. On triple overlaps, $\\phi_{jk}\\phi_{ij}$ and $\\phi_{ik}$ intertwine the same rationalizations, so step 1 proves the cocycle. Apply [lem-weil-pbc-site-module-sheaf-gluing] on the slice over $U$ with ring sheaf $A_U$ to obtain $M$ and local isomorphisms $e_i:M|_{U_i}\\cong M_i$. Composite refinements trivializing all the $M_i$ trivialize $M$, using the site covering axioms. Slice restrictions have the sectionwise coefficient and module structures of [def-pur-localized-ringed-site].",
+   "text": "For each rational frame use the normalized constant-coset map. Its local injectivity is proved by image classification and point evaluation, including the empty-cover case. Its local surjectivity follows from finite local bases, continuous matrix frames and open constant-coset neighborhoods.",
    "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-lattice-coset-map",
+    "lem-weil-pbc-lattice-coset-local-surjectivity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "The maps $j_{M_i}e_i$ agree on overlaps. For any section of $M$ over $V\\to U$, glue their images on $V\\times_UU_i$ by the sheaf condition of $L$. Uniqueness makes this a natural $A_U$-linear map $j:M\\to L|_U$. The bilinear rule $(e,m)\\mapsto ej(m)$ induces $\\alpha:E_U\\otimes_{A_U}M\\to L|_U$. Slice restriction commutes with this tensor: sectionwise tensors and coverings of slice objects are the same, so the sheafifications have identical local descriptions. Locally $\\alpha$ is $\\alpha_i$, and their inverse maps agree and glue sectionwise. Thus $\\alpha$ is an isomorphism. For two amalgamations the unique intertwining local isomorphisms of step 1 agree on overlaps and glue; their inverses glue too. This proves unique amalgamation of classes and the sheaf property of $\\mathscr L_L$.",
+   "text": "The locally bijective presheaf map induces an isomorphism of set sheaves in the required large universe. Take its asIso and use the proved normalization theorem to identify the action on every constant coset. The original finite-local-freeness hypothesis is retained; the argument works on any specified rational frame.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-lattice-coset-map"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
-  },
-  {
-   "text": "Fix a trivialization e:L|U -> E_U^n. Apply [lem-weil-pbc-constant-matrix-lattice-pair] to construct the actual finite free integral lattice pair for each constant g, with the exact matrixLatticeImage formula on every test object. Its standard-free scalar extension and basis formula are proved in [lem-weil-pbc-lattice-free-scalar-extension]. Apply [lem-weil-pbc-matrix-lattice-coset-invariance]: right multiplication by an integral invertible matrix preserves this image, and on a nonempty object equality of images recovers equality of cosets by evaluation at a point. Step 1 then identifies the corresponding pair classes. On an empty object use the empty covering. Passing these constructed pairs to the global class presentation, checking compatibility with slice restriction and using the empty covering still belong to the descent/local-classification argument.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-matrix-lattice-coset-invariance",
-    "lem-weil-pbc-lattice-free-scalar-extension",
-    "lem-weil-pbc-constant-matrix-lattice-pair"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
-  },
-  {
-   "text": "For any pair over $V\\to U$, refine a pro-etale covering to choose a basis of $M$ on each nonempty member $T$. The rationalized basis and inverse of $\\alpha$ give mutually inverse matrices between $E_T^r$ and $E_T^n$. Evaluation at a point gives $r=n$, since these matrices define inverse vector-space isomorphisms. The embedded lattice is therefore $gA_T^n$ for $g$ and $g^{-1}$ with entries in $E_T(T)=C(|T|,E)$. A linear map out of a finite free module sheaf is determined by the global coordinate sections, and every section is their coefficient-linear combination, so these matrices describe the maps on every slice object.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
-  },
-  {
-   "text": "For $t\\in|T|$ put $g_t=g(t)$. Apply [lem-pod-lattice-stabilizer-open] with $E^n$ and the finitely generated spanning lattice $A^n$. Its stabilizer is $\\operatorname{GL}_n(A)$, because preservation in both directions means that a matrix and its inverse have entries in $A$. Finite-dimensional evaluation at a basis identifies the compact-open linear-map topology with the matrix-entry topology: evaluation is continuous, and any compact set has bounded coordinates, so sufficiently small entry differences are uniformly small on it. Thus continuity of the entries of $g$ makes $W_t=\\{s:g_t^{-1}g(s)\\in\\operatorname{GL}_n(A)\\}$ an open neighborhood of $t$. On every object over $W_t$, the matrices $g_t^{-1}g$ and $g^{-1}g_t$ are inverse matrices with continuous $A$-valued entries (use the induced topology on $A$). They are inverse over its coefficient ring, so $gA^n|_{W_t}=g_tA_{W_t}^n$ as submodule sheaves. The opens $W_t$ cover $T$; [lem-weil-pbc-open-immersion-etale], [def-weil-pbc-etale-site], and the covering-preserving inclusion in [def-weil-pbc-site-comparison-morphism] make them a pro-etale covering. Composition with the basis covering proves local surjectivity of the constant-presheaf map.",
-   "uses": [
-    "lem-pod-lattice-stabilizer-open",
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
-  },
-  {
-   "text": "By [def-weil-pbc-constant-sheaf] and [def-weil-pbc-sheafification], the map of step 4 extends uniquely to $\\underline{S_n}_U\\to\\mathscr L_L|_U$. It is locally surjective by step 6. To prove local injectivity, [lem-weil-pbc-site-sheafification-sections-local] represents two source sections by constant cosets on a common covering refinement. If their images agree, step 4 makes these representatives equal on a further covering, so the source sections are locally equal. Apply [lem-galois-set-sheaf-local-bijection-isomorphism] to obtain the isomorphism, with the stated action on constant cosets. For $n=0$ there is one coset and only the zero pair. For an empty scheme the empty-cover sheaf axiom gives the unique section. The original covering trivializing $L$ therefore witnesses local constancy with the allowed varying ranks.",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-galois-set-sheaf-local-bijection-isomorphism",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lattice-pair-image-classification",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-matrix-lattice-coset-invariance",
-  "lem-weil-pbc-lattice-free-scalar-extension",
-  "lem-weil-pbc-constant-matrix-lattice-pair",
-  "lem-pod-lattice-stabilizer-open",
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-galois-set-sheaf-local-bijection-isomorphism"
+  "lem-weil-pbc-lattice-class-descent",
+  "lem-weil-pbc-lattice-coset-map",
+  "lem-weil-pbc-lattice-coset-local-surjectivity"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F2",
+  "group": "B3",
   "date": "2026-10-16",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4(6), proof, pp. 59–60; explicit continuous-matrix form of the local calculation",
-  "note": "Stage 3 F2: coefficient-sheaf descent proved directly from fpqc descent. Step 1 is proved by lem-weil-pbc-lattice-pair-image-classification. The scalar-extension comparison, actual constant-matrix lattice pair construction and its exact image formula, and constant-matrix coset classification are proved by lem-weil-pbc-lattice-free-scalar-extension, lem-weil-pbc-constant-matrix-lattice-pair and lem-weil-pbc-matrix-lattice-coset-invariance. The main theorem retains its original sorry: global class descent/presentation and compatibility with restrictions, the empty-cover passage, and the general continuous-matrix local classification in steps 2--7 remain to be proved."
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Compiled reduction of the original hole to two genuine parts: exact class descent and the matrix calculation on one specified basis chart. All coset, neighborhood, cover, integral continuous lifting, local-bijectivity, sheafification and normalization glue is proved. No unit route is bypassed. Foundational definitions and the previously proved four auxiliary nodes move to LatticeSheafBasic solely to allow acyclic proof imports."
  },
  "mathlib_searches": [
   {
@@ -311,32 +222,15 @@
   "module": "Sheaf.Paper.LatticeSheafLocallyConstant",
   "declaration": "AlgebraicGeometry.ProEtale.integralLatticeSheaf_locallyConstant",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.latticeCoefficientPresheaf",
-   "AlgebraicGeometry.ProEtale.latticeScalarMap",
-   "AlgebraicGeometry.ProEtale.IntegralLatticePair",
-   "AlgebraicGeometry.ProEtale.IntegralLatticePair.Equivalent",
-   "AlgebraicGeometry.ProEtale.IntegralLatticePair.image",
-   "AlgebraicGeometry.ProEtale.isSheaf_latticeCoefficientPresheaf",
-   "AlgebraicGeometry.ProEtale.latticeCoefficientSheaf",
-   "AlgebraicGeometry.ProEtale.latticeCoefficientSheafMap",
-   "AlgebraicGeometry.ProEtale.latticeCoefficientIntegers",
-   "AlgebraicGeometry.ProEtale.integralMatrixSubgroup",
-   "AlgebraicGeometry.ProEtale.integralMatrixCosets",
-   "AlgebraicGeometry.ProEtale.latticeModuleRing",
-   "AlgebraicGeometry.ProEtale.integralLatticeCoefficientMap",
-   "AlgebraicGeometry.ProEtale.IsLatticeClassPresentation",
-   "AlgebraicGeometry.ProEtale.latticeFreeSheaf",
-   "AlgebraicGeometry.ProEtale.latticeConstantCoefficient",
-   "AlgebraicGeometry.ProEtale.matrixLatticeImage",
    "AlgebraicGeometry.ProEtale.integralLatticeSheaf_locallyConstant"
   ],
   "file": "lean/Sheaf/Paper/LatticeSheafLocallyConstant.lean",
   "statement": "theorem integralLatticeSheaf_locallyConstant (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : SheafOfModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) [L.IsFiniteLocallyFree] : ∃ (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (c : ∀ U : X.ProEt, IntegralLatticePair (integralLatticeCoefficientMap X l E) L U → F.obj.obj (op U)), IsLatticeClassPresentation (integralLatticeCoefficientMap X l E) L F c ∧ ∀ (U : X.ProEt) (n : ℕ) (e : L.over U ≅ latticeFreeSheaf X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) U n), ∃ k : (constantSheaf ((Scheme.ProEt.topology X).over U) (Type (u + 2))).obj (ULift.{u + 2} (integralMatrixCosets (latticeCoefficientIntegers l E) n)) ≅ F.over U, ∀ (g : Matrix.GeneralLinearGroup (Fin n) (WithAbs (Padic.coefficientExtensionAbsoluteValue l E))) (P : IntegralLatticePair (integralLatticeCoefficientMap X l E) L U), k.hom.hom.app (op (Over.mk (𝟙 U))) (((toSheafify ((Scheme.ProEt.topology X).over U) ((Functor.const (Over U)ᵒᵖ).obj (ULift.{u + 2} (integralMatrixCosets (latticeCoefficientIntegers l E) n)))).app (op (Over.mk (𝟙 U)))) (ULift.up (Quotient.mk _ g))) = c U P ↔ ∀ T : (Over U)ᵒᵖ, Set.image (e.hom.val.app T) (P.image T) = matrixLatticeImage X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) (latticeCoefficientIntegers l E) U n g T",
   "branch": "newtargets-dag",
-  "by": "NF",
-  "date": "2026-10-15",
+  "by": "B3",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "Uses an exact quotient presentation: sections are covered by actual lattice pairs with equality precisely intertwining integral isomorphism; all restriction maps are characterized by embedded images on slice objects. The constant-coset isomorphism is normalized on every constant matrix. WithAbs transports the recorded valuation subring to its canonical absolute-value topology; no topology assumption or rank bound is added. Helpers belong to the constructions explicitly introduced in this node. The commutative continuous-coefficient presentation generalizes the upstream RingCat-only, Type-zero coefficient construction to coefficients in the scheme universe."
+  "note": "Uses an exact quotient presentation: sections are covered by actual lattice pairs with equality precisely intertwining integral isomorphism; all restriction maps are characterized by embedded images on slice objects. The constant-coset isomorphism is normalized on every constant matrix. WithAbs transports the recorded valuation subring to its canonical absolute-value topology; no topology assumption or rank bound is added. Helpers belong to the constructions explicitly introduced in this node. The commutative continuous-coefficient presentation generalizes the upstream RingCat-only, Type-zero coefficient construction to coefficients in the scheme universe. B3: all former foundational declarations live in the publicly imported LatticeSheafBasic with unchanged signatures and definitions; see its four attached auxiliary nodes and the interface change record."
  },
  "statement_change": {
   "date": "2026-10-15",
@@ -456,11 +350,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-1f92e",
-  "group": "F2",
+  "reviewer": "X-395a1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261016T062623-L-449261",
+  "landing": "20261016T085349-L-1757920",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean declarations match the four new DAG nodes; existing signatures and definitions are unchanged. Module and sole direct importer Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal compile cleanly; all nine proved public declarations use only permitted axioms."
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
  }
 }

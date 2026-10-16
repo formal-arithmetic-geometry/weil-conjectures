@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-lattice-matrix-neighborhoods",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: \"Choose an integral lattice for K\"; the auxiliary assertion in Proposition 6.8.4(6): the lattice sheaf is represented by GL_n(E)/GL_n(O_E); auxiliary Open neighborhoods with constant integral matrix coset",
+   "via": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open neighborhoods with constant integral matrix coset",
+ "statement": "Let K be a topological field, A an open subring [def-weil-l-adic-coefficient-extension], Y a topological space, and g:Y → GL_n(K) have continuous entries and inverse entries. Every x has an open neighborhood W on which the right coset g(y)GL_n(A) equals g(x)GL_n(A). For the canonical finite p-adic coefficient extension its integer subring is open, since it contains the open unit ball.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Open neighborhoods with constant integral matrix coset"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof": [
+  {
+   "text": "The integer subring contains the open ball of radius one about zero by its norm description. Translation makes it an open additive subgroup. Membership in the integral matrix subgroup is equivalent to integrality of every matrix and inverse entry.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Open neighborhoods with constant integral matrix coset"
+   }
+  },
+  {
+   "text": "For fixed x, intersect the inverse images of A under all entries of g(x)⁻¹g(y) and g(y)⁻¹g(x). Finiteness makes this open; at x the entries form the identity and are integral. The two matrices are inverse, so the subgroup criterion gives equality of right cosets.",
+   "uses": [
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Open neighborhoods with constant integral matrix coset"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60",
+  "note": "Stage-3 explicit continuous-matrix route. Proof compiled with no direct sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous matrices modulo the general linear group of an open subring have locally constant cosets",
+   "results": "8 hits: Matrix.GeneralLinearGroup.continuous_det, Matrix.SpecialLinearGroup.continuous_toGL, QuotientGroup.instContinuousConstSMul, IsLocallyConstant.continuous, continuous_matrix, instIsTopologicalSemiringMatrix, Continuous.matrix_adjugate, Matrix.GeneralLinearGroup.continuous_upperRightHom; ",
+   "date": "2026-10-16",
+   "verdict": "Related generic API only; read the returned signatures, no exact theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open subring of a topological field is an open additive subgroup",
+   "results": "8 hits: RingSubgroupsBasis.openAddSubgroup, Valued.isOpen_valuationSubring, OpenAddSubgroup.instTop, AddSubgroup.addSubgroupOf_isOpen, OpenAddSubgroup.toOpens_top, OpenAddSubgroup.isOpen, AddSubgroup.isOpen_mono, OpenAddSubgroup; ",
+   "date": "2026-10-16",
+   "verdict": "Generic API, used where applicable; no exact lattice statement."
+  },
+  {
+   "tool": "grep",
+   "query": "integralMatrixSubgroup|latticeCoefficientIntegers",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem; local repository search and blueprint search also found no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSheafLocallyConstant",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeMatrixNeighborhoods",
+  "file": "lean/Sheaf/Paper/LatticeMatrixNeighborhoods.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousMatrixCoset_neighborhood",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isOpen_latticeCoefficientIntegers",
+   "AlgebraicGeometry.ProEtale.continuousMatrixCoset_neighborhood"
+  ],
+  "statement": "theorem continuousMatrixCoset_neighborhood {K : Type u} [Field K] [TopologicalSpace K] [IsTopologicalRing K] (A : Subring K) (hA : IsOpen (A : Set K)) (n : ℕ) {Y : Type v} [TopologicalSpace Y] (g : Y → Matrix.GeneralLinearGroup (Fin n) K) (hg : ∀ i j, Continuous (fun y ↦ (g y).val i j)) (hginv : ∀ i j, Continuous (fun y ↦ ((g y)⁻¹).val i j)) (x : Y) : ∃ W : TopologicalSpace.Opens Y, x ∈ W ∧ ∀ y ∈ W, (Quotient.mk _ (g x) : integralMatrixCosets A n) = Quotient.mk _ (g y)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-395a1",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T085349-L-1757920",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched against DAG statements, published interfaces, cited source, permitted axioms, and five direct importer compiles."
+ }
+}
