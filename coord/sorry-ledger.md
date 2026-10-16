@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1299**, closure **24**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1298**, closure **23**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -44,22 +44,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1104 | 22 |
+| Sheaf | 1103 | 21 |
 | WeilConjectures | 195 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2284 | 757 | 1527 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2238 | 755 | 1483 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 22 | 1959 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2284 | 756 | 1528 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2238 | 754 | 1484 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 21 | 1960 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3629 |
+| proved | 3630 |
 | decomposed | 52 |
-| moved | 4017 |
+| moved | 4018 |
 | pruned | 131 |
 | other | 609 |
 
@@ -78,7 +78,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C2 | 124 | 119 | 84 | 35 | 57/124 (46.0%) |
 | C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
 | C4 | 54 | 55 | 33 | 22 | 21/54 (38.9%) |
-| D2 | 138 | 138 | 89 | 49 | 61/138 (44.2%) |
+| D2 | 139 | 139 | 89 | 50 | 61/139 (43.9%) |
 | D3 | 108 | 119 | 68 | 51 | 49/108 (45.4%) |
 | D4 | 67 | 64 | 47 | 17 | 28/67 (41.8%) |
 | E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
@@ -146,6 +146,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | W4 | 49 | 43 | 36 | 7 | 27/49 (55.1%) |
 | X2 | 121 | 118 | 95 | 23 | 64/121 (52.9%) |
 | X3 | 101 | 96 | 62 | 34 | 43/101 (42.6%) |
+| XR0d56945a24047e2a | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | XR1b27919aec52b018 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XR701758115908ba19 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
@@ -172,21 +173,21 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | module | distance | holes | group |
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | A2 |
-| Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | XR0d56945a24047e2a |
-| Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis | 4 | 1 | — |
-| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | — |
+| Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis | 4 | 1 | A3 |
+| Sheaf.Paper.CondensedQbarPullbackCube | 5 | 1 | D4 |
+| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | C3 |
 | Sheaf.Paper.CondensedLocalModelGluing | 7 | 1 | A3 |
 | Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | B3 |
-| Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | — |
-| Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | — |
+| Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | D2 |
+| Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | E1 |
 | Sheaf.Paper.IntegralResidueProjectionNormalization | 8 | 1 | D3 |
-| WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf | 8 | 1 | — |
-| Sheaf.AlgebraicGeometry.ComparisonDirectImage | 9 | 3 | — |
+| WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf | 8 | 1 | E2 |
+| Sheaf.AlgebraicGeometry.ComparisonDirectImage | 9 | 3 | E3 |
 | Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | A4 |
-| Sheaf.Paper.ContinuousModuleEncodingLattices | 9 | 1 | — |
-| Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity | 10 | 1 | — |
+| Sheaf.Paper.ContinuousModuleEncodingLattices | 9 | 1 | E4 |
+| Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity | 10 | 1 | F1 |
 | Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear | 11 | 1 | — |
+| Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear | 11 | 1 | F2 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
 | Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 14 | 1 | C4 |
