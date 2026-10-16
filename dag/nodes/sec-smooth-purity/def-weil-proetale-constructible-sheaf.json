@@ -156,23 +156,23 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-05abf5292",
-  "group": "Q06",
+  "reviewer": "NT-stage2-Codex-cab367e52",
+  "group": "NC",
   "result": "pass",
-  "note": "Statement, dependencies, edge cases, docstrings, universes, and canonical operations checked; all four files compiled locally and with server confirmation."
+  "note": "Reviewed immutable node, dependencies, Lean modules, docstrings, edge cases, report sections, and recorded scompile/dry-run evidence. No substantive or mechanical faults found; review.md written."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
-  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf",
+  "module": "Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleCoefficientModuleSheaf",
   "declarations": [
-   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf"
+   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleCoefficientModuleSheaf"
   ],
-  "file": "lean/Sheaf/Paper/ProEtaleFixedModuleConstructible.lean",
-  "statement": "def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
+  "file": "lean/Sheaf/Paper/ProEtaleConstructibleCoefficientSheaf.lean",
+  "statement": "def IsConstructibleProEtaleCoefficientModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] (F : pbcModules Y (adicLisseConstantRing Y A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q06",
+  "by": "NC",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B): the recorded intrinsic predicate takes coefficients in Type u and ringed module sheaves over the ULift constant ring. Here the positive quotients of the lifted valuation ring lie in Type (u+1), in the fixed-module encoding required by the etale comparison. This module gives precisely the same intrinsic finite constructible stratification, local constancy, and finite geometric stalk definition in that existing fixed-module encoding, using the recorded local-constancy and geometric-stalk declarations. The original predicate is publicly imported and preserved."
+  "note": "§1(B), coefficient-universe generalization. The recorded predicate restricts the finite scalar ring to Type u and uses its ULift. The adic datum and AdicTower allow the scalar ring in Type (u+1); equating these universes would change the site. Re-export the original interface and supply its same intrinsic finite-stratification, finite-lisse notion for site-universe coefficients, using the existing IsRelativelyFiniteLisseModule and actual inverse-image coefficient sheaves. Finite constant local modules express precisely local constancy with finite geometric stalks, by refinement of a trivializing covering. No etale-origin assumption or alternate tower is introduced. Current base records ProEtaleFixedModuleConstructible, whose predicate is instead on fixed ModuleCat-valued sheaves; it cannot be applied directly to the ringed module sheaves M.level uses. This delivery retains the same ringed-coefficient interface, without changing the underlying constructibility notion."
  }
 }
