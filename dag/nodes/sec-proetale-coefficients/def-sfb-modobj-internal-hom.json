@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-internal-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Internal hom of module objects",
@@ -13,41 +13,221 @@
   "place": "node def-sfb-modobj-internal-hom, order 1581"
  },
  "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
   "def-sfb-modobj-symmetric-tensor",
   "lem-sfb-modobj-abelian"
  ],
  "proof": [
   {
-   "text": "Since $\\mathcal C$ is closed and symmetric, $X\\otimes-$ and $-\\otimes X$ preserve colimits.\nSo [def-sfb-modobj-symmetric-tensor] and [lem-sfb-modobj-abelian] apply.",
+   "text": "The category $\\mathcal C$ has small colimits by [def-sp-grothendieck-abelian]. For each $X$, $X\\otimes-$ has the right adjoint specified in the statement. The natural symmetry gives $-\\otimes X\\dashv\\underline{\\Hom}(X,-)$ as well: precompose $L\\otimes X\\to Y$ with $\\beta_{X,L}$ and then use the given adjunction. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to these adjunctions. Both tensor functors preserve small colimits, in particular coequalizers and finite colimits. Thus [def-sfb-modobj-relative-tensor] and [def-sfb-modobj-symmetric-tensor] apply, and [lem-sfb-modobj-abelian] gives the abelian category of modules. All indexing categories used here are small; the coequalizer diagram is the finite parallel-pair category.",
    "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-relative-tensor",
     "def-sfb-modobj-symmetric-tensor",
     "lem-sfb-modobj-abelian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
   },
   {
-   "text": "Let $L$ be an $\\mathcal R$-module object. An $\\mathcal R$-linear map\n$L\\otimes_{\\mathcal R}M\\to N$ is a morphism $g\\colon L\\otimes M\\to N$ of $\\mathcal C$ with\ntwo properties:\n- $g$ is *balanced*: it coequalizes the actions of $\\mathcal R$ on $L$ and on $M$;\n- $g$ is $\\mathcal R$-linear for the action through $L$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $H=\\underline{\\Hom}(M,N)$ and $K=\\underline{\\Hom}(\\mathcal R\\otimes M,N)$, and call the two displayed arrows $p,q:H\\rightrightarrows K$, with $p$ obtained from the action on $N$ and $q$ from the action on $M$. Equalizers exist: by [def-sp-abelian] take $E=\\ker(p-q)$, with inclusion $i:E\\to H$. In what follows all associators and unitors are inserted in the displayed order of the factors, and interchanging factors means the specified symmetry. Write $\\epsilon=\\mathrm{ev}\\circ(1_M\\otimes i):M\\otimes E\\to N$. Naturality and injectivity of the adjunction bijection identify $pi=qi$ with\n$$\\epsilon\\circ(\\gamma_M\\otimes1_E)=\\gamma_N\\circ(1_{\\mathcal R}\\otimes\\epsilon)\\quad\\text{on }\\mathcal R\\otimes M\\otimes E.\\tag{B}$$\nHere the right adjoint, its natural hom-set bijections, and their inverse $h\\mapsto\\mathrm{ev}\\circ(1\\otimes h)$ are the closed structure assumed in the statement, not an additional existence assertion.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
   },
   {
-   "text": "Together these say that\n$g$ is linear for the action of $\\mathcal R$ through $M$ as well, i.e. that \"act on $M$,\nthen apply $g$\" equals \"apply $g$, then act on $N$\". Let $g^\\sharp\\colon L\\to\\underline{\\Hom}(M,N)$\nbe the adjoint of $g$ (using the symmetry to move $M$ to the left). Under the adjunction of\n$\\mathcal C$, this condition says that $g^\\sharp$ equalizes the two maps defining\n$\\Hom_{\\mathcal R}(M,N)$. Linearity through $L$ says that the resulting map\n$L\\to\\Hom_{\\mathcal R}(M,N)$ is $\\mathcal R$-linear for the action through $N$. On the\nequalizer this action agrees with the action through $M$, because $\\mathcal R$ is\ncommutative. So $g\\mapsto g^\\sharp$ is a bijection between $\\mathcal R$-linear maps\n$L\\otimes_{\\mathcal R}M\\to N$ and $\\mathcal R$-linear maps $L\\to\\Hom_{\\mathcal R}(M,N)$.\nIt is natural in $L$ and $N$ because the adjunction of $\\mathcal C$ is.",
+   "text": "Define $a_H:\\mathcal R\\otimes H\\to H$ to be the transpose of\n$$M\\otimes\\mathcal R\\otimes H\\xrightarrow{\\beta_{M,\\mathcal R}\\otimes1}\\mathcal R\\otimes M\\otimes H\\xrightarrow{1\\otimes\\mathrm{ev}}\\mathcal R\\otimes N\\xrightarrow{\\gamma_N}N.$$\nIt satisfies the module axioms of [sk-def-sfb-module-objects]. Indeed, uncurrying $a_H\\circ(\\eta\\otimes1_H)$ gives $\\gamma_N\\circ(\\eta\\otimes\\mathrm{ev})=\\mathrm{ev}$ by the unit law of $N$. Uncurrying the two associativity composites from $\\mathcal R\\otimes\\mathcal R\\otimes H$ gives, after moving $M$ past the two scalar factors, respectively $\\gamma_N\\circ(\\mu\\otimes\\mathrm{ev})$ and $\\gamma_N\\circ(1\\otimes\\gamma_N)\\circ(1\\otimes1\\otimes\\mathrm{ev})$. They agree by associativity of $N$. Equality of the transposes proves the asserted laws.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "The morphism $t=a_H\\circ(1_{\\mathcal R}\\otimes i):\\mathcal R\\otimes E\\to H$ equalizes $p,q$. Here is the complete check after uncurrying, on $\\mathcal R\\otimes\\mathcal R\\otimes M\\otimes E$. Use slot notation: $r,s,m,e$ label tensor factors, $s m$ means $\\gamma_M(s,m)$, and $r\\epsilon(m,e)$ means $\\gamma_N(r,\\epsilon(m,e))$; these are composites of morphisms, not elements of objects or a test for equality on points. The two uncurried composites are equal by\n$$r\\epsilon(s m,e)=r(s\\epsilon(m,e))=(rs)\\epsilon(m,e)=(sr)\\epsilon(m,e)=s(r\\epsilon(m,e)).$$\nThe first equality is (B), the second and last are the associativity axiom for $N$ from [sk-def-sfb-module-objects], and the middle equality is $\\mu\\circ\\beta_{\\mathcal R,\\mathcal R}=\\mu$, the assumed commutativity of $\\mathcal R$. Thus the equalizer property gives a unique $a_E:\\mathcal R\\otimes E\\to E$ with $ia_E=t$. This constructs precisely the action through $N$ in the statement.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "The action $a_E$ is unital and associative: postcompose its unit equation and its associativity equation with $i$, replace $ia_E$ by $a_H(1\\otimes i)$, use the corresponding equations for $a_H$ from step 3, and cancel the monomorphism $i$. For a module morphism $f:N\\to N'$, postcomposition induces $H\\to H'$ and carries $E$ to $E'$: the equality $f\\gamma_N=\\gamma_{N'}(1\\otimes f)$ takes (B) to (B) for $N'$. It is linear for the target actions because both sides, after uncurrying, are $f\\gamma_N(1\\otimes\\mathrm{ev})=\\gamma_{N'}(1\\otimes f\\mathrm{ev})$. Cancellation of $i'$ makes the induced $E\\to E'$ linear. Identities and composites follow by postcomposing with $i'$ and uniqueness of equalizer lifts. Hence $E=\\Hom_{\\mathcal R}(M,N)$ is a module and is functorial in $N$. These checks use exactly the module and module-morphism equations of [sk-def-sfb-module-objects].",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "Fix a module $L$. Let $Q=L\\otimes_{\\mathcal R}M$ with projection $\\pi:L\\otimes M\\to Q$ as in [def-sfb-modobj-relative-tensor]. By its coequalizer property, a map $u:Q\\to N$ of $\\mathcal C$ is equivalent to $g=u\\pi:L\\otimes M\\to N$ satisfying\n$$g(rl,m)=g(l,rm).\\tag{bal}$$\nHere and below the same slot convention as in step 4 specifies equalities of tensor composites; the action on the right of $L$ in the defining parallel pair is $\\gamma_L\\beta_{L,\\mathcal R}$. The projection and the action through $L$ satisfy $\\gamma_Q(1\\otimes\\pi)=\\pi(\\gamma_L\\otimes1_M)$, with the canonical reordering of factors. Thus linearity of $u$ implies\n$$g(rl,m)=r g(l,m).\\tag{lin-L}$$\nConversely (lin-L) implies linearity of the descended $u$: precompose its proposed linearity equation with $1_{\\mathcal R}\\otimes\\pi$. This is an epimorphism because it is a coequalizer, by step 1 and [lem-weil-pbc-left-adjoint-preserves-colimits]; a coequalizer is epi by uniqueness of its factorizations. Hence the two composites agreeing implies the linearity equation. Equations (bal) and (lin-L) together are equivalent to (lin-L) and\n$$g(l,rm)=r g(l,m).\\tag{lin-M}$$\nThis last equivalence just replaces one side of (bal) using (lin-L).",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "Transpose $g\\beta_{M,L}:M\\otimes L\\to N$ to $h:L\\to H$. The equalizer property says that $h=iv$ for a unique $v:L\\to E$ exactly when $ph=qh$. Uncurrying the latter equality gives\n$$\\gamma_N\\circ(1_{\\mathcal R}\\otimes g)\\circ(1_{\\mathcal R}\\otimes\\beta_{M,L})\n=g\\circ\\beta_{M,L}\\circ(\\gamma_M\\otimes1_L)$$\nas maps $\\mathcal R\\otimes M\\otimes L\\to N$. This is exactly (lin-M) after reordering the tensor factors. No condition about linearity in $L$ was used in this step; it expresses only that $h$ takes values in the equalizer.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "The transpose $h:L\\to H$ is linear for $a_H$ exactly when $h\\gamma_L=a_H(1_{\\mathcal R}\\otimes h)$. Uncurrying gives the equation on $M\\otimes\\mathcal R\\otimes L$ whose two sides, in slot notation, are $g(rl,m)$ and $r g(l,m)$; the definition of $a_H$ in step 3 gives the second composite. This is precisely (lin-L). If $h=iv$, then\n$$i\\,v\\gamma_L=h\\gamma_L,\\qquad i\\,a_E(1\\otimes v)=a_H(1\\otimes h).$$\nSince $i$ is mono, $v$ is linear exactly when $h$ is linear. Thus the module-morphism definition of [sk-def-sfb-module-objects] and the two transpose calculations give: $g$ satisfies (lin-L) and (lin-M) if and only if its transpose uniquely lifts to a module morphism $v:L\\to E$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "Steps 6--8 give a bijection\n$$\\Hom_{\\mathcal R}(L\\otimes_{\\mathcal R}M,N)\\cong\\Hom_{\\mathcal R}(L,E).$$\nExplicitly the forward map takes $u$ to the equalizer lift of $\\operatorname{curry}(u\\pi\\beta_{M,L})$. The reverse map takes $v$ to the coequalizer descent of $\\mathrm{ev}(1_M\\otimes iv)\\beta_{L,M}$. Currying and uncurrying are inverse, and $\\beta_{M,L}\\beta_{L,M}=1$, so the two constructions are inverse after precomposing with $\\pi$, respectively postcomposing with $i$. The universal properties cancel $\\pi$ and $i$. For a module morphism $b:L'\\to L$, the transpose formula takes $g(b\\otimes1_M)$ to $hb$. For a module morphism $f:N\\to N'$, it takes $fg$ to $\\underline{\\Hom}(M,f)h$. These are the naturality identities of the given ambient adjunction; uniqueness of both lifts therefore gives naturality in $L,N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
+  },
+  {
+   "text": "Finally [def-sfb-modobj-symmetric-tensor] supplies the natural module isomorphism $\\beta^{\\mathcal R}_{L,M}:L\\otimes_{\\mathcal R}M\\to M\\otimes_{\\mathcal R}L$. Precomposition with it identifies\n$$\\Hom_{\\mathcal R}(M\\otimes_{\\mathcal R}L,N)\\cong\\Hom_{\\mathcal R}(L\\otimes_{\\mathcal R}M,N).$$\nCompose with step 9. Its inverse uses $\\beta^{\\mathcal R}_{M,L}$, and naturality follows from naturality of that symmetry and of step 9. This is the adjunction $M\\otimes_{\\mathcal R}-\\dashv\\Hom_{\\mathcal R}(M,-)$ with the specified equalizer right adjoint. A monoidal category is closed precisely when each $M\\otimes-$ has such a right adjoint; hence the given symmetric monoidal structure is closed.",
+   "uses": [
+    "def-sfb-modobj-symmetric-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "definition and imported proof, expanded by Q09"
+   }
   }
  ],
  "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-modobj-relative-tensor",
   "def-sfb-modobj-symmetric-tensor",
-  "lem-sfb-modobj-abelian"
+  "lem-sfb-modobj-abelian",
+  "def-sp-abelian",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
-  "place": "## Proof"
+  "place": "Equalizer definition and adjunction clause; detailed expansion of the three imported proof paragraphs, keeping the module-category unit, clause 3 route."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monoidalClosed|ihomAdjunction|ihomObj",
+   "results": "No hits; this directory is not the module-object source file. Corrected by the search in CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: wrong search path, not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of modules over a commutative monoid object is monoidal closed with internal hom equalizer",
+   "results": "CategoryTheory.ihom; CategoryTheory.MonoidalClosed.closed; CategoryTheory.MonoidalClosed; Rep.instMonoidalClosed; CategoryTheory.MonoidalClosed.ofEquiv; ModuleCat.instMonoidalClosed; CategoryTheory.Functor.functorCategoryMonoidalClosed; ModuleCat.monoidalClosed_curry",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat or other special coefficient categories do not give the general module-object equalizer construction and the specified symmetric monoidal structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"ihom\"",
+   "results": "ModuleCat.ihom_map_apply; ModuleCat.ihom_coev_app; ModuleCat.ihom_ev_app; FGModuleCat.ihom_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat or other special coefficient categories do not give the general module-object equalizer construction and the specified symmetric monoidal structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of module objects over a commutative monoid in a symmetric monoidal closed category is monoidal closed with internal hom given by an equalizer",
+   "results": "ModuleCat.instMonoidalClosed; LightCondensed.instMonoidalClosedLightCondMod; FGModuleCat.instIsMonoidalClosedModuleCatIsFG; ModuleCat.monoidalClosed_uncurry; ModuleCat.monoidalClosed_curry; ModuleCat.monoidalClosed_pre_app; ModuleCat.monoidalClosedHomEquiv; ModuleCat.ihom_ev_app",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat or other special coefficient categories do not give the general module-object equalizer construction and the specified symmetric monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|ihom|Closed|equalizer",
+   "results": "No hits; this directory is not the module-object source file. Corrected by the search in CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: wrong search path, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom for modules over a monoid object via equalizer of two currying maps",
+   "results": "ModuleCat.instMonoidalClosed; ModuleCat.ihom_ev_app; FGModuleCat.ihom_obj; Rep.ihom_obj_V_isModule; ModuleCat.ihom_map_apply; ModuleCat.monoidalClosed_uncurry; ModuleCat.monoidalClosed_curry; Rep.ihom_obj_V_carrier",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat or other special coefficient categories do not give the general module-object equalizer construction and the specified symmetric monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom|closed|equalizer",
+   "results": "No hits; this directory is not the module-object source file. Corrected by the search in CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: wrong search path, not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_",
+   "results": "CategoryTheory.Mod_",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat or other special coefficient categories do not give the general module-object equalizer construction and the specified symmetric monoidal structure"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom|closed|equalizer",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the module-object source file has no closed/internal-hom/equalizer construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative algebra object in a cocomplete symmetric closed tensor category has a closed category of left modules",
+   "results": "ModuleCat.instMonoidalClosed; LightCondensed.instMonoidalClosedLightCondMod; FGModuleCat.instIsMonoidalClosedModuleCatIsFG; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.IsGrothendieckAbelian.tensorObj; ModuleCat.instMonoidalLinear; LightCondensed.instMonoidalCategoryLightCondMod; ModuleCat.monoidalCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: the ordinary ModuleCat, light condensed, and finite-dimensional instances are special ambient categories; Gabriel-Popescu tensorObj is a functor from ordinary modules over End(G) to C, not a tensor product or internal hom on internal R-modules"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalClosed|Closed|equalizer|ihom",
+   "results": "No hits in Mathlib/CategoryTheory/Monoidal/Mod.lean (correct positional path).",
+   "date": "2026-10-16",
+   "verdict": "no match in the actual module-object file; the earlier --sub invocation was inconclusive and is retained honestly in the raw log"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -68,5 +248,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-category"
+ "unit": "sk-prop-sfb-module-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-internal-hom",
+  "worker": "stage1",
+  "summary": "Expanded the equalizer construction and proof into ten checked steps, including the action through the target, its closure under the equalizer relation, separate linearity in each tensor factor, universal-property inverse maps and naturality, and the explicit descended symmetry that changes - tensor M to M tensor -. Reused all needed categorical facts from existing nodes; created no nodes. The earlier proposed attachment is not repeated.",
+  "blueprint": "The original equalizer and action clauses are steps 2--5; imported proof paragraph 1 is step 1, paragraph 2 is step 6, paragraph 3 is steps 7--10. These realize clause 3 (closed structure) of sk-prop-sfb-module-category without changing its route. The current maintained unit proof paragraph 4 (Part 3) explicitly cites this item for closedness; this item does not realize the other conjuncts or the full unit statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-ce524087d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-ce524087d (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All ten steps establish the specified equalizer action and correctly oriented tensor–Hom adjunction. Checked nonflat, zero, unit and nilpotent-coefficient cases; no missing dependencies, cycles, duplicate nodes or route departures found. No repairs needed. Detailed checks are in review.md."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-derived-extend-comp-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Transitivity $T_{F,\\Qlb}\\circ T_{E,F}\\cong T_{E,\\Qlb}$",
@@ -18,34 +18,84 @@
  ],
  "proof": [
   {
-   "text": "The extensions of scalars along $E_X\\to F_X$ and $F_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ are exact\n([lem-sfb-subfield-flat], [lem-sfb-qlbar-flat]), and so is the one along their composite, which\nequals $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ ([lem-sfb-subfield-coefficient-map-comp]), via the isomorphism of\n[def-sfb-extend-scalars-iso-of-eq]. For exact functors the left derived functor of a composite\nis the composite of the left derived functors ([sk-def-sfb-derived-categories]), so\n$T_{F,\\Qlb}\\circ T_{E,F}\\cong L(\\operatorname{Ext}_{F_X\\to\\overline{\\mathbf Q}_{\\ell,X}}\\circ\n\\operatorname{Ext}_{E_X\\to F_X})$. Extension of scalars is compatible with composition\n([sk-def-sfb-change-of-scalars]), and by\n[lem-sfb-subfield-coefficient-map-comp] and [def-sfb-extend-scalars-iso-of-eq] the composite\nis $\\operatorname{Ext}_{E_X\\to\\overline{\\mathbf Q}_{\\ell,X}}$, whose left derived functor is $T_{E,\\Qlb}$.",
+   "text": "Put $\\varphi:E_X\\to F_X$, $\\psi:F_X\\to\\overline{\\mathbf Q}_{\\ell,X}$, and $\\chi:E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ for the coefficient inclusions underlying [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar]. Write $A=\\operatorname{Ext}_{\\varphi}$, $B=\\operatorname{Ext}_{\\psi}$ and $C=\\operatorname{Ext}_{\\chi}$. These functors are right exact by [sk-def-sfb-change-of-scalars](2). The functor $A$ preserves finite limits by [lem-sfb-subfield-flat]; $B$ and $C$ do so by [lem-sfb-qlbar-flat], applied to $F$ and to $E$, respectively. Thus all three are exact. These applications require only the stated finite subextensions and the arbitrary scheme $X$.",
    "uses": [
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar",
+    "sk-def-sfb-change-of-scalars",
     "lem-sfb-subfield-flat",
-    "lem-sfb-qlbar-flat",
-    "lem-sfb-subfield-coefficient-map-comp",
-    "def-sfb-extend-scalars-iso-of-eq",
-    "sk-def-sfb-derived-categories",
+    "lem-sfb-qlbar-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the restriction formula in [sk-def-sfb-change-of-scalars](1), the $E_X$-action on $\\operatorname{Res}_{\\varphi}\\operatorname{Res}_{\\psi}N$ is $\\gamma_N\\circ(\\psi\\otimes\\mathrm{id}_N)\\circ(\\varphi\\otimes\\mathrm{id}_N)=\\gamma_N\\circ((\\psi\\circ\\varphi)\\otimes\\mathrm{id}_N)$. Restriction leaves underlying morphisms unchanged, so $\\operatorname{Res}_{\\varphi}\\circ\\operatorname{Res}_{\\psi}=\\operatorname{Res}_{\\psi\\circ\\varphi}$ as functors. The adjunctions in clause (2) give, naturally in $M,N$,\n$$\\Hom(BAM,N)\\cong\\Hom(AM,\\operatorname{Res}_{\\psi}N)\\cong\\Hom(M,\\operatorname{Res}_{\\varphi}\\operatorname{Res}_{\\psi}N)=\\Hom(M,\\operatorname{Res}_{\\psi\\circ\\varphi}N).$$\nConsequently $B\\circ A$ is left adjoint to $\\operatorname{Res}_{\\psi\\circ\\varphi}$.",
+   "uses": [
     "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The functor $\\operatorname{Ext}_{\\psi\\circ\\varphi}$ is also left adjoint to $\\operatorname{Res}_{\\psi\\circ\\varphi}$ by [sk-def-sfb-change-of-scalars](2). Apply the equal-right-adjoint case of [lem-weil-pbc-conjugate-iso-unit-equation] to the adjunction in step 2 and this adjunction; it gives the canonical unit-compatible natural isomorphism $B\\circ A\\cong\\operatorname{Ext}_{\\psi\\circ\\varphi}$. By [lem-sfb-subfield-coefficient-map-comp], $\\psi\\circ\\varphi=\\chi$; [def-sfb-extend-scalars-iso-of-eq] then gives the specified comparison $\\theta:B\\circ A\\xrightarrow{\\sim}C$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sfb-subfield-coefficient-map-comp",
+    "def-sfb-extend-scalars-iso-of-eq"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-functor clause of [sk-def-sfb-derived-categories], together with the definitions [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar], identifies $T_{E,F}\\cong D(A)$, $T_{F,\\Qlb}\\cong D(B)$ and $T_{E,\\Qlb}\\cong D(C)$. For a cochain complex $K$, the maps $\\theta_{K^n}:B(A(K^n))\\to C(K^n)$ commute with differentials because $C(d_K^n)\\theta_{K^n}=\\theta_{K^{n+1}}BA(d_K^n)$, the naturality equation of $\\theta$. They therefore define a natural chain isomorphism with inverse given by $\\theta_{K^n}^{-1}$. For each of $A,B,C$, exactness preserves the kernels and cokernels defining cohomology, so $H^n(D(F)K)\\cong F(H^n(K))$ for $F=A,B,C$; hence each functor sends quasi-isomorphisms to quasi-isomorphisms. The universal property of localization therefore sends the chain isomorphism and its inverse to mutually inverse natural transformations on derived categories. Applying $A$ and then $B$ termwise gives exactly the objects, differentials and maps of $B\\circ A$ termwise. Thus\n$$T_{F,\\Qlb}\\circ T_{E,F}\\cong D(B)\\circ D(A)\\cong D(B\\circ A)\\xrightarrow{D(\\theta)}D(C)\\cong T_{E,\\Qlb},$$\nwith source and target the unbounded derived categories in the statement.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar",
+  "sk-def-sfb-change-of-scalars",
   "lem-sfb-subfield-flat",
   "lem-sfb-qlbar-flat",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-sfb-subfield-coefficient-map-comp",
   "def-sfb-extend-scalars-iso-of-eq",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between left adjoints having the same right adjoint",
+   "results": "8 hits, led by CategoryTheory.Adjunction.leftAdjointUniq in Mathlib/CategoryTheory/Adjunction/Unique.lean:36. This supplies the generic uniqueness step already carried by the existing Mathlib leaf, not the full derived coefficient-change assertion.",
+   "date": "2026-10-16",
+   "verdict": "tool match only; no direct match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits, led by CategoryTheory.Adjunction.leftAdjointCompIso in Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:72. This constructs comparisons given adjunctions and a right-adjoint comparison; the scalar restriction calculation and passage to derived categories are still required.",
+   "date": "2026-10-16",
+   "verdict": "tool match only; no direct match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|unit_leftAdjointUniq_hom_app|def extendScalarsComp",
+   "results": "18 hits, including CompositionIso.lean:72, Unique.lean:53, and Algebra/Category/ModuleCat/ChangeOfRings.lean:984. Read the declarations: the first two are generic adjunction tools, while extendScalarsComp concerns ordinary modules over commutative rings rather than these derived internal modules.",
+   "date": "2026-10-16",
+   "verdict": "tool match only; no direct match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +117,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-extend-comp-iso",
+  "worker": "stage1",
+  "summary": "Second reading removed the unnecessary new underived composition node: restriction composition and the pasted Hom adjunction are elementary. The existing reviewed Mathlib leaf for uniqueness of left adjoints is retained as an explicitly declared generic tool, and the coefficient-map comparison remains on the item route. Replaced the imported paragraph by four explicit steps for exactness, restriction and adjunction composition, the unit-compatible scalar comparison, and termwise passage to derived categories. The statement is unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the single current blueprint proof paragraph: step 1 is exactness; steps 2 and 3 expand underived extension composition and coefficient-map identification; step 4 expands the exact-functor derived comparison and specifies the induced chain isomorphism. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of left adjoints from equal right adjoints is needed to compare the composite Ext functor with Ext along the composite map; the two-colimit unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-9596336b2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-9596336b2 (reviewer sub-agent of L); spot-checked: The statement and mathematics pass full review. Repair the item JSON to retain the necessary reviewed generic tool lemma `lem-weil-pbc-conjugate-iso-unit-equation` for equal-right-adjoint uniqueness and declare it in `split_report.tool_uses`; the corrected file is in fixes/dag/nodes/sec-six-functors-basics/def-sfb-derived-extend-comp-iso.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
