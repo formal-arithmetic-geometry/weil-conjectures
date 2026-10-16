@@ -26,9 +26,137 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pur-ringed-site-grothendieck-abelian], $\\mathcal A$ is Grothendieck and has the generator $G=\\bigoplus_U j_{U!}R_U$. Each summand is flat by [lem-pc-sites-modules-j-shriek-flat], and its coproduct is flat by [lem-pc-sites-modules-coproduct-flat]. To check the epimorphic-image meaning of generator required here, [lem-pc-sites-modules-quotient-j-shriek] supplies, for each $M$, an epimorphism $\\bigoplus_{(U,s)}j_{U!}R_U\\to M$. For each pair $(U,s)$ extend its summand map to $G$ by setting its other components equal to zero. The resulting map $\\bigoplus_{(U,s)}G\\to M$ is epic because the preceding epimorphism factors through it. Smallness of the site and of every section set makes both index sets small. Consequently every module admits an epimorphism from a flat module, without any assertion that sections of an arbitrary epimorphism are surjective.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-pc-sites-modules-quotient-j-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA/03DB, 03EV (lemma-j-shriek-flat), 03EW (lemma-module-quotient-flat); form the sum over all objects."
+   }
+  },
+  {
+   "text": "We record the closure calculations needed below. By [lem-weil-pbc-site-flat-quotient-tensor-ses], kernels of epimorphisms between flats are flat. In $0\\to A\\to B\\to C\\to0$ with $A,C$ flat, that same lemma makes the sequence stay short exact after tensoring with any $N$. For a monomorphism $N\\to N^{\\prime}$, the diagram of these two tensor sequences has monic left and right vertical maps. Its middle vertical map is monic: locally an element in its kernel maps to zero in $C\\otimes N$, so comes from $A\\otimes N$, and vanishes by monicity of $A\\otimes N\\to A\\otimes N^{\\prime}$ and of $A\\otimes N^{\\prime}\\to B\\otimes N^{\\prime}$. Thus $B$ is flat; tensor is right exact because it is an additive left adjoint by [lem-pc-sheaf-modules-tensor-closed]. A retract of a flat module is flat since the tensor map of a monomorphism is then a retract of a monomorphism. Finally filtered colimits of flats are flat: tensor commutes with those colimits by the same tensor-Hom adjunction, and those colimits are exact by [lem-pur-ringed-site-grothendieck-abelian]. This proves the claims by applying the colimit to the tensor of any short exact sequence. Small coproduct closure was already supplied in Step 1. The zero module is flat since its tensor functor is zero.",
+   "uses": [
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EX (lemma-flat-tor-zero), 03EY (lemma-flat-ses), 03EU (lemma-colimits-flat), and 03EP (lemma-tensor-commute-colimits); explicit monomorphism and retract calculations."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-flat-subsheaf] and fix its infinite bound $\\kappa$. Let $S$ contain one representative of each isomorphism class of flat module sheaves of size at most $\\kappa$, including zero when it satisfies this bound. These representatives form a set: choose section sets as subsets of a fixed set of cardinal $\\kappa$ and encode addition, scalar multiplication and restriction by their graphs. There are only set-many such graphs since the objects, arrows, and ring section sets of the site are sets; the sheaf axiom and flatness just select a subclass of this set. Thus $S\\subseteq\\mathcal F$. Every nonzero flat quotient encountered below contains a nonzero subobject isomorphic to a member of $S$ and has flat quotient by that subobject.",
+   "uses": [
+    "lem-coef-small-flat-subsheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent set-coding argument; online Recktenwald, Corollary 2.5.33 proof (bounded-subobject part). WANTED: archive this reference."
+   }
+  },
+  {
+   "text": "For every flat $F$ construct a continuous filtration $F_0=0\\subseteq F_1\\subseteq\\cdots\\subseteq F_\\lambda=F$ with flat residual quotients $F/F_\\alpha$ and successive factors in $S$ up to isomorphism. At a successor, if $F/F_\\alpha\\ne0$, choose its nonzero bounded flat subobject $P$ using [lem-coef-small-flat-subsheaf], and take $F_{\\alpha+1}$ to be its inverse image in $F$; then $F_{\\alpha+1}/F_\\alpha=P$ and $F/F_{\\alpha+1}=(F/F_\\alpha)/P$ are flat. The pullback short exact sequence is the opposite-category form of [lem-weil-pbc-pushout-short-exact-sequence]. At a nonzero limit $\\beta$ take the colimit in $\\mathcal A$ of the preceding subobjects. Exact filtered colimits from [lem-pur-ringed-site-grothendieck-abelian] make its map into $F$ monic and identify $F/F_\\beta=\\varinjlim_{\\alpha<\\beta}F/F_\\alpha$, flat by Step 2. Each nonterminal successor strictly enlarges the subobject, so contributes a section of $F$ not in its predecessor. Distinct successors contribute distinct sections in the disjoint union of the $F(U)$. Therefore the process must stop before the successor cardinal of $|F|$; all the ordinals used are small. For $F=0$ use the length-zero filtration.",
+   "uses": [
+    "lem-coef-small-flat-subsheaf",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent transfinite construction making explicit the filtration used in Recktenwald Lemma 2.5.24/Corollary 2.5.33. WANTED: archive the reference."
+   }
+  },
+  {
+   "text": "Let $T\\in S^{\\perp_1}$ and $0\\to T\\to E\\xrightarrow{p}F\\to0$ be an extension, with $F$ flat and filtration as in Step 4. Write $E_\\alpha=p^{-1}F_\\alpha$; pullback exactness is [lem-weil-pbc-pushout-short-exact-sequence] in the opposite abelian category. We construct compatible sections $s_\\alpha:F_\\alpha\\to E_\\alpha$. The initial section is zero. Given $s_\\alpha$, put $D=E_{\\alpha+1}/s_\\alpha(F_\\alpha)$. The quotient sequence $0\\to T\\to D\\to F_{\\alpha+1}/F_\\alpha\\to0$ is short exact: $s_\\alpha(F_\\alpha)$ meets $T$ in zero, and a section whose projection lies in $F_\\alpha$ differs, locally, from its $s_\\alpha$ image by a unique section of $T$. Since the last object is isomorphic to a member of $S$, the quotient extension splits. Take its retraction onto $T$ and compose with $E_{\\alpha+1}\\to D$, obtaining $r:E_{\\alpha+1}\\to T$ with $r|_T=1$ and $rs_\\alpha=0$. The inverse of $\\ker(r)\\xrightarrow{p}F_{\\alpha+1}$ gives $s_{\\alpha+1}$ extending $s_\\alpha$: for a local lift $e$ of $x$, the inverse is $e-i r(e)$, independent of the lift. At a limit, the compatible maps $F_\\alpha\\to E$ induce a map $F_\\beta\\to E$ by the colimit universal property; its composite with $p$ is the inclusion, so it is the required section. The pullback filtrations and their short exact sequences persist at limits by [lem-pur-ringed-site-grothendieck-abelian]. At the last stage this splits $p$. Hence $S^{\\perp_1}\\subseteq\\mathcal F^{\\perp_1}$; the reverse inclusion follows from $S\\subseteq\\mathcal F$. We have proved $\\mathcal T=S^{\\perp_1}$, including the empty filtration case, by an explicit compatible-splitting induction.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of the transfinite extension-splitting argument underlying Recktenwald Lemma 2.5.24. No unproved compatibility at limits is asserted."
+   }
+  },
+  {
+   "text": "Put $\\mathcal L={}^{\\perp_1}(S^{\\perp_1})={}^{\\perp_1}\\mathcal T$. By the definition of $\\mathcal T$, every flat object, including the generator $G$ of Step 1, lies in $\\mathcal L$. The hypotheses of [lem-coef-generating-set-cotorsion-smallness] therefore hold: $\\mathcal A$ is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], $S$ is a set, and $G\\in\\mathcal L$ is a generator in the epimorphic-image sense. Its filtration/retract conclusion says every $L\\in\\mathcal L$ is a retract of an $(S\\cup\\{G\\})$-filtered object. Such an object is flat by transfinite induction using the zero, extension and filtered-colimit closure of Step 2, since all its successive factors are flat. Retract closure in Step 2 now gives $L$ flat. Together with the opposite inclusion already noted, this proves $\\mathcal F={}^{\\perp_1}\\mathcal T$. No module-specific cotorsion result is being assumed in the generic theorem.",
+   "uses": [
+    "lem-coef-generating-set-cotorsion-smallness",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent alternative to Recktenwald Proposition 2.5.20: apply the existing general set-cogenerated approximation/filtration theorem after the explicit set-detection argument."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cotorsion-orthogonality-calculus] to the abelian category $\\mathcal A$: both left and right Ext-one orthogonals are closed under extensions and retracts and contain zero. Since Step 6 identifies $\\mathcal F$ with the left orthogonal of $\\mathcal T$ and $\\mathcal T=\\mathcal F^{\\perp_1}$ by definition, this supplies the stated extension/retract closure of both classes. The coproduct closure of $\\mathcal F$ is Step 1; its kernel closure is Step 2.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent application of splitting-orthogonal closure; source conventions for extensions: Stacks homology.tex, Section 010I."
+   }
+  },
+  {
+   "text": "We prove the higher Yoneda vanishing by induction on $n\\ge1$, simultaneously for all flat $F$ and all $T\\in\\mathcal T$. The base $n=1$ is the definition of $\\mathcal T$. For $n\\ge2$ represent a class by $0\\to T\\to E_{n-1}\\to\\cdots\\to E_1\\to E_0\\to F\\to0$, and put $L=\\ker(E_0\\to F)$. By Step 1 choose a flat epimorphism $P\\to E_0$; then $K=\\ker(P\\to F)$ is flat by [lem-weil-pbc-site-flat-quotient-tensor-ses]. Pull back the prefix $(n-1)$-extension ending in $L$ along $K\\to L$. Concretely replace its last middle object $E_1$ by $E_1\\times_LK$ and leave the earlier objects unchanged; this remains exact by the opposite-category version of [lem-weil-pbc-pushout-short-exact-sequence], applied to the last short exact sequence of the prefix. The result is an $(n-1)$-extension of $K$ by $T$, zero by induction. Splice it with $0\\to K\\to P\\to F\\to0$. The projections on the pulled-back term, the map $P\\to E_0$, and identities on all other terms give a morphism from this $n$-extension to the original one, equal to the identity on $T$ and $F$. Thus they are the same Yoneda class. To check directly that the first class is zero, recall that Yoneda equivalence is generated by morphisms of exact extensions fixing both endpoints. Append the fixed sequence $0\\to K\\to P\\to F\\to0$ to each morphism in a zigzag from the pulled-back prefix to a zero representative; adjoining $P\\xrightarrow{}F$ with identity maps on these terms preserves every commutative square. For $n=2$, the zero prefix is $0\\to T\\to T\\oplus K\\to K\\to0$. Its splice maps to the zero two-extension $0\\to T\\xrightarrow{1}T\\xrightarrow{0}F\\xrightarrow{1}F\\to0$ by the projection $T\\oplus K\\to T$ and the quotient $P\\to F$, with identity endpoint maps. For $n\\ge3$, use the zero $(n-1)$-extension $0\\to T\\xrightarrow{1}T\\to0\\to\\cdots\\to0\\to K\\xrightarrow{1}K\\to0$ (with no intermediate zero object when $n=3$). After splicing, its last two middle objects are $K,P$. Map them to $0,F$ by zero and $P\\to F$, map the first middle $T$ identically to $T$, and map all intervening zero objects by zero. This is a morphism to the zero $n$-extension of $F$ by $T$: the only additional square commutes because $K\\to P\\to F$ is zero. Hence the appended zigzag ends at zero, as required. This establishes $\\operatorname{Ext}^n(F,T)=0$ for every $n\\ge1$, using flat covers rather than projective covers.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent Yoneda pullback-and-splice induction, spelling out the resolving/generating argument of Recktenwald Corollary 2.5.21 without invoking a projective resolution."
+   }
+  },
+  {
+   "text": "For completeness, verify the claimed cokernel closure without importing an unstated long exact Yoneda sequence. Suppose $0\\to T_0\\to T_1\\xrightarrow{q}T_2\\to0$ is short exact with $T_0,T_1\\in\\mathcal T$, and consider an extension $0\\to T_2\\to E\\to F\\to0$ with $F$ flat. Choose a flat epimorphism $P\\to E$ using Step 1. Put $K=\\ker(P\\to F)$, flat by [lem-weil-pbc-site-flat-quotient-tensor-ses], and let $a:K\\to T_2$ be the induced map. Pull back $q$ along $a$; by [lem-weil-pbc-pushout-short-exact-sequence] in the opposite category it is an extension of flat $K$ by $T_0$, so splits. It gives a lift $\\widetilde a:K\\to T_1$. Push out $0\\to K\\to P\\to F\\to0$ along $\\widetilde a$ using the same cited theorem. Its result $0\\to T_1\\to E^{\\prime}\\to F\\to0$ splits because $T_1\\in\\mathcal T$. Its pushout along $q$ is therefore split and is the pushout of the original $K\\to P$ sequence along $a$. That latter pushout is $E$: the maps $T_2\\to E$ and $P\\to E$ agree on $K$, and any agreeing maps out of $T_2,P$ factor uniquely through $E$ since $P\\to E$ is epic with kernel $\\ker(a:K\\to T_2)$; also $K\\to T_2$ is epic by pulling back the epic $P\\to E$. This checks the universal property directly. Consequently the original extension splits. This holds for every flat $F$, hence $T_2\\in\\mathcal T$. All pullbacks and quotients here are in the abelian sheaf category; none requires a sectionwise lift of an arbitrary epimorphism. Steps 1-9 give all clauses of the item.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent explicit pushout/pullback proof of coresolving closure, corresponding to Recktenwald Lemma 2.1.8 and Corollary 2.5.21."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-modules-quotient-j-shriek",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-coef-small-flat-subsheaf",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-coef-generating-set-cotorsion-smallness",
+  "lem-coef-cotorsion-orthogonality-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, additional flat-cotorsion infrastructure for the words \"derived coefficient adjunction\". Stacks 03EU/03EV/03EW/03EX/03EY supply the archived flatness calculations. The set-filtration/splitting and Yoneda arguments are written explicitly by the worker; Recktenwald (2019) is read online but remains WANTED for the archive."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +213,66 @@
    "results": "2 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsLeftOrthogonal, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsRightOrthogonal",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Ambient sheaf/Grothendieck, Ext and K-projective/K-injective declarations do not state this cotorsion theorem; generatingMonomorphisms_rlp is for all monomorphisms, and neither a general Ext-detecting set nor the prescribed flat classes are supplied. Kaplansky hits concern dimension, factorization, or topological rings. Loogle orthogonal-closure hits alone cannot supply the theorem and their module is absent from the pinned local Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|deconstructible|small.*flat.*sub|pure.*[Ss]heaf",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaves form a hereditary cotorsion pair on a small ringed site",
+   "results": "8 hits: Module.Flat.iff_rTensor_preserves_shortComplex_exact, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.Flat.of_projective, Module.Flat.instOfIsDedekindDomainOfIsTorsionFree, Module.Flat.mk, SheafOfModules, Module.Flat.iff_lTensor_preserves_shortComplex_exact, SheafOfModules.hasLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat sheaves and cotorsion sheaves on any small ringed site form a hereditary set cogenerated cotorsion pair",
+   "results": "8 hits: Condensed.instAB4CondensedMod, CategoryTheory.Sheaf.H, PresheafOfModules.wellPowered, SheafOfModules.isFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.SheafOfTypes.balanced, Condensed.instAB5CondensedMod, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "grep",
+   "query": "Kaplansky|cotorsion|deconstructible|pure.*submodule|submodule.*pure",
+   "results": "19 hits: Mathlib/Topology/Algebra/LinearTopology.lean, Mathlib/Topology/Algebra/AsymptoticCone.lean, Mathlib/LinearAlgebra/Dimension/DivisionRing.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pure\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf modules admit a flat generator and a set of flat Ext detectors, with flat left orthogonal and vanishing higher Ext against cotorsion objects",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.HasExt.standard, instHasExtModuleCatOfSmall, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
+  },
+  {
+   "tool": "grep",
+   "query": "def isFinitePresentation|class IsFinitePresentation|def IsFinitePresentation|theorem iff_forall_exists_factorization|tfae_equational_criterion",
+   "results": "2 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the ambient AB4/AB5, Grothendieck, HasExt, and single-ring Module.Flat declarations do not assert the flat cotorsion orthogonality, heredity, or a set of flat Ext detectors."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-flat-complex-cotorsion-pairs",
   "by": "worker",
@@ -104,5 +288,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-module-flat-cotorsion-foundation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the flat generator from existing j-shriek facts. Reduced to one new bounded-flat-subobject lemma, constructed the transfinite filtrations, and wrote the compatible splitting argument yielding set cogeneration. Applied the existing general approximation/filtration theorem to obtain reverse orthogonality. Wrote the higher-Yoneda induction and the cokernel-closure pushout calculation explicitly, using flat covers and no enough-projectives/points assumption. No exact Lean attachment or Mathlib match. Unarchived online source explicitly WANTED. Second reading expanded the Yoneda-zero splice into explicit endpoint-fixing morphisms and recorded independent Mathlib searches.",
+  "blueprint": "All steps supply the module flat-cotorsion infrastructure below proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the words \"derived coefficient adjunction\"; this is not a new route for any unit step. The unit is not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Grothendieck abelianness and exact filtered colimits of arbitrary ringed-site modules; generic ambient theorem, not a geometric duality route. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Flatness of each localized-unit generator on an arbitrary ringed site. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-pc-sites-modules-coproduct-flat",
+    "why": "Flatness of the generator sum and of its epimorphic covers. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-pc-sites-modules-quotient-j-shriek",
+    "why": "Canonical generator epimorphism, used to verify the required epimorphic-image generator convention. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Flat-quotient tensor exactness and kernel flatness, the ringed-site resolving-class input. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Symmetry and tensor-Hom adjunction, to justify right exactness and commutation with colimits. No node in this unit provides that generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic abelian pushout exactness; its opposite-category instance gives pullback exactness. No node in this unit provides that generic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-modules-quotient-j-shriek",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-af2e9d69e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-af2e9d69e (reviewer sub-agent of L); spot-checked: Reviewed item, new node, all cited statements and sources, unit/chapter route, edge cases, searches, and repaired Yoneda splice. No mathematical, citation, duplication, or route faults found. Review written to review.md."
  }
 }
