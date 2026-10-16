@@ -12,9 +12,127 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-twisted-arrow-left-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=C^{\\mathrm{op}}\\times C$. For mapping simplices $u:a'\\to a$, $z:a\\to b$, $v:b\\to b'$, the formula $(u,z,v)\\mapsto vzu$ is simplicial. Associativity gives $(v'v)z(uu')=v'(vzu)u'$ and the enriched identities give its two unit equations. By the internal-Hom adjunction this defines the enriched Hom functor. The coherent nerve preserves products directly from its definition as enriched functors out of $\\mathfrak C[\\Delta^n]$. Reversing vertex labels in the subset-poset formula identifies its opposite with the nerve of the opposite enriched category. Thus its nerve is precisely the stated $H:B\\to\\mathcal S$. For Kan complexes $X,Y$, the map $Y\\to\\Delta^0$ lifts every horn, hence is a right fibration. Taking base $\\Delta^0$ in the mapping-complex clause of the simplicial-right-fibration presentation shows that $\\operatorname{Fun}(X,Y)$ is Kan. Thus $\\operatorname{Kan}$ is locally Kan, and both $C$ and $\\mathcal S$ are quasicategories by the locally Kan clause of the coherent-nerve node.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Construction 8.3.6.1 (03N6); enriched composition and coherent-nerve subset-poset definitions."
+   }
+  },
+  {
+   "text": "Construct a map $t:\\operatorname{Tw}(C)\\to\\mathcal S_{\\Delta^0/}$ over $H$, where $\\mathcal S_{\\Delta^0/}$ is the join coslice with initial vertex $\\Delta^0$. An $n$-simplex of $\\operatorname{Tw}(C)$ is an enriched functor $f:\\mathfrak C[N(\\overline{[n]}\\star[n])]\\to\\mathcal A$. Its image under $H\\lambda$ is the enriched diagram $F(j)=\\mathcal A(f(\\bar j),f(j))$. Adjoin a first object $*$ to $[n]$ and extend this diagram by $\\widetilde F(*)=\\Delta^0$. The mapping set $\\mathfrak C[\\Delta^{n+1}](*,j)$ is the nerve of the inclusion poset of nonempty subsets $I\\subseteq\\{0,\\ldots,j\\}$ with maximum $j$ (the full subset is $\\{*\\}\\cup I$). Define its map to $\\operatorname{Fun}(\\Delta^0,F(j))=F(j)$ by applying $f$ to the subset $\\bar I\\cup I$ of $\\overline{[n]}\\star[n]$. On all mapping sets between the old objects use $F$. The following step verifies that these data define an enriched functor; its coherent nerve is the desired simplex of the coslice.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-twisted-arrow-left-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Construction 8.3.6.5 (03NA), rewritten with the inclusion-poset coherent-nerve convention of the existing node."
+   }
+  },
+  {
+   "text": "Here is the composition and operator check for Step 2. A mapping simplex from $i$ to $j$ is a chain of subsets $T\\subseteq\\{i,\\ldots,j\\}$ containing $i,j$; $F$ acts on $z$ by $f(T)\\,z\\,f(\\bar T)$. Composing it with a subset $I$ having maximum $i$ replaces $I$ by $I\\cup T$. Since $\\overline{I\\cup T}\\cup(I\\cup T)=\\bar T\\cup\\bar I\\cup I\\cup T$, and composition in $\\mathfrak C$ is union, applying $f$ gives exactly $f(T)f(\\bar I\\cup I)f(\\bar T)$. This holds pointwise on chains of subsets, hence on the whole mapping simplicial set. Composition among old objects holds because $F$ is the enriched Hom diagram; identities correspond to singleton subsets. For an arbitrary monotone $\\theta:[m]\\to[n]$, images of subsets satisfy $\\overline{\\theta(I)}\\cup\\theta(I)=(\\bar\\theta\\star\\theta)(\\bar I\\cup I)$. This also holds for noninjective $\\theta$, so both faces and degeneracies commute. These equations prove enriched functoriality and the required simplicial map $t$, with the exact projection equation $Ut=H\\lambda$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Exercise 8.3.6.6 (03NC): explicit union and monotone-image calculation, rather than invoking the exercise without its argument."
+   }
+  },
+  {
+   "text": "There is a comparison $d:\\mathcal S_{\\Delta^0/}\\to W$ over $\\mathcal S$: on an $n$-simplex $h:\\Delta^0\\star\\Delta^n\\to\\mathcal S$, precompose with the monotone map $[n]\\times[1]\\to[0]\\star[n]$ sending $(j,0)$ to the new first vertex and $(j,1)$ to $j$. Interchange the product factors to match the internal functor convention. This is exactly the opposite-category dual of the map $\\delta_y$ of the slice-arrow-equivalence node, applied to $\\mathcal S^{\\mathrm{op}}$ and $y=\\Delta^0$; reversing labels sends its final-vertex equation to our initial-vertex equation. That node therefore makes $d$ an equivalence over $\\mathcal S$. The coslice projection is a left fibration by the opposite of the slice-right-fibration node, and $W\\to\\mathcal S$ is a left fibration by the universal-left-fibration node. Apply the right-fibration fiber node to their opposites: $d$ induces homotopy equivalences on vertex fibers. Reversing a simplicial homotopy reverses the parameter interval, so taking opposites preserves homotopy equivalences. The composite $(\\lambda,dt)$ defines the actual simplicial map $\\Phi:\\operatorname{Tw}(C)\\to B\\times_{H,\\mathcal S,r}W$ over $B$.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-universal-left-fibration-identity",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Construction 8.3.6.5 and Proposition 8.3.6.7 (03ND), with the join-coslice to fixed-source arrow comparison supplied by the existing slice-arrow node."
+   }
+  },
+  {
+   "text": "Fix $a,b$ and put $K=\\mathcal A(a,b)$. Let $M_C^L(a,b)$ have $n$-simplices $\\Delta^0\\star\\Delta^n\\to C$ with first vertex $a$ and entire last face constant at $b$. Equivalently $M_C^L(a,b)=\\operatorname{Map}_{C^{\\mathrm{op}}}(b,a)^{\\mathrm{op}}$, by reversing labels. The source-fixed slice comparison in the twisted-arrow node is a map of left fibrations over $C$. Taking opposites and applying the right-fibration fiber node shows that its restriction $\\iota:M_C^L(a,b)\\to\\operatorname{Tw}(C)_{(a,b)}$ is a homotopy equivalence of Kan complexes. The source coslice projection is a left fibration by the opposite slice-right-fibration statement. This establishes the actual fiber comparison, including empty fibers, without identifying right- and left-pinched mapping sets.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Proposition 8.3.6.7 (03ND), using Corollary 8.1.2.11 (03K1); its hypotheses are supplied by the existing source-fixed slice and right-fibration fiber statements."
+   }
+  },
+  {
+   "text": "On these fibers the composite $t_{a,b}\\iota$ is a canonical isomorphism $M_C^L(a,b)\\cong M_{\\mathcal S}^L(\\Delta^0,K)$. We spell out the dependence on $K$ that proves this, rather than inferring coherence from equivalence of homotopy types. Collapse the final face of $\\Delta^0\\star\\Delta^n$ to $b$ and call the resulting two-vertex simplicial set $J_L^n$. Its coherent realization is obtained by the simplex-colimit formula in the coherent-nerve node. By the adjunction, $\\mathfrak C[J_L^n]=\\mathfrak C[\\Delta^{n+1}]\\amalg_{\\mathfrak C[\\Delta^n]}\\mathfrak C[\\Delta^0]$, with the second map collapsing the final face. This has two formal objects, identity endomorphism complexes and no mapping simplices from the final object to the first: no composable path can return to an earlier vertex. Thus an enriched functor with the two object images fixed at $a,b$ is exactly a simplicial map $Q_L^n=\\mathfrak C[J_L^n](a,b)\\to K$. This is the left-hand version of the pinched construction $J^n,Q^n$ in the pinched-resolution node, obtained by reversing ordered labels. An enriched functor from this same two-object realization to $\\operatorname{Kan}$, with object images $\\Delta^0,K$, is instead exactly a simplicial map into $\\operatorname{Fun}(\\Delta^0,K)=K$, so in each degree both sides are the same set $\\operatorname{Hom}_{\\mathrm{sSet}}(Q_L^n,K)$, with the same operators. Under the coslice inclusion, the barred block of a subset $\\bar I\\cup I$ collapses to $a$ and the unbarred block remains $I$; hence Step 2's formula becomes the same map on $Q_L^n$. Thus $t_{a,b}\\iota$ is this isomorphism, naturally in $a,b$ and in enriched functors.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Remark 4.6.7.17 (03LK) and the subset calculation in the proof of Proposition 8.3.6.7; the argument is included from the coherent-realization and pinched definitions."
+   }
+  },
+  {
+   "text": "Since $\\iota$ and $t_{a,b}\\iota$ are homotopy equivalences, $t_{a,b}$ is one as well: put $g=t_{a,b}\\iota$, choose homotopy inverses $u$ to $g$ and $j$ to $\\iota$, and set $s=\\iota u$. Then $t_{a,b}s=gu\\simeq\\mathrm{id}$ and $st_{a,b}\\simeq st_{a,b}\\iota j=\\iota u g j\\simeq\\iota j\\simeq\\mathrm{id}$. Step 4 gives the same property for the fiber of $d$, so $\\Phi$ is a weak homotopy equivalence on each vertex fiber. Its source is a left fibration by the twisted-arrow node, and its target is a left fibration: it is the pullback of $r$, and a horn lifting problem in the pullback is a horn lifting problem for $r$ with its fixed base coordinate. The last clause of the simplicial-right-fibration presentation now gives an inverse to $\\Phi$ up to simplicial homotopies over $B$. This is the required equivalence over $C^{\\mathrm{op}}\\times C$. The fiber comparison just computed is induced by the coherent-nerve adjunction, so its identification with $K$ is precisely the coherent-nerve mapping comparison, retaining the vertex-to-edge convention.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-universal-left-fibration-identity",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Proposition 8.3.6.7 (03ND), proof by the actual maps on vertex fibers and the left-fibration fiberwise criterion."
+   }
+  },
+  {
+   "text": "For $n=0$, the subset formula sends the edge $z:a\\to b$ to the point $z\\in\\mathcal A(a,b)$, and in particular sends the identity to the enriched identity. For a simplicial functor $G:\\mathcal A\\to\\mathcal A'$, applying $G$ after $f(\\bar I\\cup I)$ is equal to the same formula for $Gf$, proving naturality of the whole map, not merely of its fibers. Precomposition and postcomposition are $z\\mapsto vzu$; the union equation in Step 3 proves compatibility on all mapping simplices. The two unit equations and associativity for enriched composition are preserved on every chain of subsets, and face restrictions give their coherence equations in every dimension. Consequently their coherent-nerve images supply the unit homotopy and the higher composition homotopies in the assertion. The map $d$ is defined by a fixed monotone map and commutes with all these restrictions, so the same clauses hold for $\\Phi$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03N5",
+    "place": "Construction 8.3.6.5 (03NA), Exercise 8.3.6.6 (03NC), and the identity normalization of Proposition 8.3.5.5 (03NK)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-universal-left-fibration-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03N5",
+  "place": "Online subsection 8.3.6, Construction 8.3.6.5 (03NA), Exercise 8.3.6.6 (03NC), and proof of Proposition 8.3.6.7 (03ND), with Remark 4.6.7.17 (03LK). Not archived in literature/; expanded in the inclusion-poset convention of the existing coherent-nerve node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +182,80 @@
    "results": "{\"t\": \"2026-10-16T19:40:07Z\", \"tool\": \"grep\", \"query\": \"left.?fibration|right.?fibration|straighten|edgewise|twisted.?arrow\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read the returned types: ordinary Grothendieck arrows, simplicial Hom objects and ordinary nerves do not compare quasicategorical transport; Kan-Quillen model fibrations lift all horns, and their slice structure is not the covariant model structure. The Mathlib source grep found no one-sided fibration or twisted-arrow declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent nerve of an enriched Hom functor is represented by the twisted-arrow left fibration",
+   "results": "{\"t\": \"2026-10-16T20:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent nerve of an enriched Hom functor is represented by the twisted-arrow left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"e2c637c59d82ba55\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialNerve hom twisted arrow left fibration",
+   "results": "{\"t\": \"2026-10-16T20:12:38Z\", \"tool\": \"loogle\", \"query\": \"SimplicialNerve hom twisted arrow left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `SimplicialNerve`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle reports an unknown identifier, so this query supplies no absence evidence; the corrected fully qualified Loogle query and both semantic searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?arrow|left.?fibration|enriched.?hom",
+   "results": "{\"t\": \"2026-10-16T20:12:38Z\", \"tool\": \"grep\", \"query\": \"twisted.?arrow|left.?fibration|enriched.?hom\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\"], \"digest\": \"3b3996a353058fe2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent nerve enriched hom functor twisted arrow coupling mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:13:22Z\", \"tool\": \"leansearch\", \"query\": \"coherent nerve enriched hom functor twisted arrow coupling mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.eHomFunctor\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_map\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHom\", \"CategoryTheory.nerve\", \"CategoryTheory.eCoyoneda\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\"], \"digest\": \"6a39c26d2f58f8d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted arrow left fibration is classified by the enriched mapping space bifunctor",
+   "results": "{\"t\": \"2026-10-16T20:13:24Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted arrow left fibration is classified by the enriched mapping space bifunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"CategoryTheory.Functor.Fiber.homMk\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.BifibrantObject.homMk\"], \"digest\": \"aacb0fa15f3bb2cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve CategoryTheory.nerve.homEquiv",
+   "results": "{\"t\": \"2026-10-16T20:13:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve CategoryTheory.nerve.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|homEquiv|twisted",
+   "results": "{\"t\": \"2026-10-16T20:13:25Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|homEquiv|twisted\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\"], \"digest\": \"0baa6b407617d410\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures. Ordinary enriched Hom, coherent-nerve definitions and ordinary nerve edges do not identify twisted-arrow left fibrations; model-category fibrations use all horns. The grep includes SimplicialNerve.lean:28-29, which lists basic nerve comparisons as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyCoherent|homotopy.coherent|TwistedArrow|twisted.arrow|edgewise",
+   "results": "{\"t\": \"2026-10-16T20:31:50Z\", \"tool\": \"grep\", \"query\": \"HomotopyCoherent|homotopy.coherent|TwistedArrow|twisted.arrow|edgewise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"260b133ff7f49fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second-reader search: returned signatures concern the simplicial-nerve definition, ordinary nerve functors, or the subset-poset action. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-33,158-167,193-208; the Hom-functor/twisted-arrow comparison is not stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"twisted\"",
+   "results": "{\"t\": \"2026-10-16T20:31:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"twisted\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second-reader search: returned signatures concern the simplicial-nerve definition, ordinary nerve functors, or the subset-poset action. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-33,158-167,193-208; the Hom-functor/twisted-arrow comparison is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent simplicial nerve sends the simplicial mapping object bifunctor to a Hom functor of infinity categories",
+   "results": "{\"t\": \"2026-10-16T20:31:55Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent simplicial nerve sends the simplicial mapping object bifunctor to a Hom functor of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve.nerveFunctor\\u2082_map_functorOfNerveMap\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor\\u2082\", \"CategoryTheory.Nerve.nerveFunctor\\u2082\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveMap\", \"CategoryTheory.SimplicialThickening.functor_map\"], \"digest\": \"58460757ae1e2664\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second-reader search: returned signatures concern the simplicial-nerve definition, ordinary nerve functors, or the subset-poset action. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-33,158-167,193-208; the Hom-functor/twisted-arrow comparison is not stated."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-transport-classification",
@@ -80,7 +268,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the first and last R Hom / R inverse-limit comparisons: coherent mapping functors and universal arrows. Identifies the explicit enriched Hom construction with the geometric coupling, retaining composition and units.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the first and last derived Hom/inverse-limit comparisons require the coherent enriched Hom bifunctor and its identification with the twisted-arrow coupling, including composition and units.",
    "via": [
     "lem-coef-space-transport-classification",
     "lem-coef-infinity-yoneda-presheaf-limits",
@@ -93,5 +281,20 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-hom-twisted-arrow-comparison",
+  "worker": "stage1",
+  "summary": "Eight steps construct the coherent witness by the symmetric-subset formula, verify composition and degeneracies, compare join coslices with arrow slices, and prove the map is a fiberwise equivalence through the explicit left-pinched mapping comparison. All source inputs are existing DAG statements; no new nodes, no standalone invocation of the item or of its equivalent Kerodon theorem. Corrected an initial draft that had inferred a coherent witness from pairwise mapping equivalences.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, first and last derived Hom/R inverse-limit comparisons."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-4e74731c7",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-4e74731c7 (reviewer sub-agent of L); spot-checked: I read the whole item, all eight steps and the full statements of the nine cited nodes. The statement is unchanged and matches Kerodon 03N7 hypothesis by hypothesis: an arbitrary locally Kan A, full Kan-valued Hom, comparison over C^op×C, nothing weakened. No target, base change or coefficient category is involved. Kerodon is not archived and could not be fetched here, so I checked every step by hand. Step 1: Fun(X,Y) is Kan by the presentation node with S=Δ^0; products and opposites under N_hc check. Step 2: Ī∪I runs from j̄ to j in the join order. Step 3: the union and image identities hold, including non-injective θ. Step 4: relabelling ρ_n gives d^op=δ_{Δ^0} for S^op, so the fiber node applies to the opposites of two left fibrations. Step 5: both sides are left fibrations over C and the fiber M^L is correctly identified. Step 6: 𝔠[J_L^n] has two objects, trivial endomorphisms and no morphism b→*, also when a=b, so tι is the identity on Hom(Q_L^n,K) in each degree. Step 7: the inverse algebra checks and the left-fibration fiber criterion applies. Step 8: naturality holds on the formula. Edge cases checked: empty, point and discrete A, a=b, n=0 and n=1. Bookkeeping: no new nodes; proof_deps equals the union of step uses; no cycle; all citations are in-unit apart from one definition, and no tool_uses; no duplicate in the DAG; Mathlib has no twisted-arrow result and 17 searches are recorded; blueprint ancestor paragraph 2 named; no SGA. No fixes."
  }
 }

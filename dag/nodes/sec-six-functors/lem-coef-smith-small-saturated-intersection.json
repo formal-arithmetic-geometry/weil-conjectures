@@ -30,55 +30,112 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-lifting-class-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every isomorphism belongs to $C\\cap W$ by the assumed weak saturation of that intersection, hence belongs to $W$. In particular both component isomorphisms of an isomorphism in the arrow category, and their inverses, belong to $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.9, hypotheses (1)-(4), printed pp. 821-823; elementary repleteness verification for applying the existing replete formulation."
+   }
+  },
+  {
+   "text": "The full subcategory on $W$ is replete. Indeed, let $f:X\\to Y$ lie in $W$ and let $(a,b):f\\to g$ be an isomorphism in the arrow category, with $a:X\\to X'$, $b:Y\\to Y'$. Its inverse commuting square shows that $a,b$ are isomorphisms in $\\mathcal A$, and its commuting equation gives $ga=bf$, hence $g=bfa^{-1}$. By step 1, $a^{-1},b\\in W$. Applying two-out-of-three to the pairs $(a^{-1},f)$ and $(fa^{-1},b)$ gives $fa^{-1}\\in W$ and then $g\\in W$. This proves closure under every isomorphism of arrows, without adding a repleteness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.9, hypotheses (1)-(4), printed pp. 821-823; elementary repleteness verification for applying the existing replete formulation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-intersection-generators] in the fixed universe to the same $\\mathcal A,C,W$. Its locally presentable and cocomplete ambient category is exactly the one assumed here (the additional completeness of this item is not needed). Its hypothesis (i) holds for the given small generating subset $C_0$; (ii) is the assumed weak saturation of $C\\cap W$; the filtered-colimit closure and small generating family in (iii) are the stated accessibility assumption, with the same infinite regular $\\lambda$, and its repleteness requirement is step 2; (iv) is the given two-out-of-three property. The cited conclusion supplies a small $J\\subseteq C\\cap W$ whose weakly saturated closure is $C\\cap W$. Set $S=J$, which is precisely the required conclusion.",
+   "uses": [
+    "lem-coef-accessible-intersection-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.9, hypotheses (1)-(4) and small-set generation conclusion, printed pp. 821-823; application of the existing DAG formulation after the elementary repleteness verification in steps 1-2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-intersection-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.2.6.9, read online, not archived. Reuse the existing DAG statement in its replete formulation after explicitly deriving its extra repleteness condition; no new generator lemma is introduced."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A small generating set for a weakly saturated class intersected with an accessible class satisfying two out of three",
-   "results": "{\"t\": \"2026-10-16T19:31:16Z\", \"tool\": \"leanfinder\", \"query\": \"A small generating set for a weakly saturated class intersected with an accessible class satisfying two out of three\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator\", \"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerator.exists_small_generator\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\"], \"digest\": \"27b9f8c8707f0656\"}",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator; CategoryTheory.AreCardinalFilteredGenerators; CategoryTheory.instIsPresentableOfIsAccessibleCategory; CategoryTheory.HasCardinalFilteredGenerators; CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal; CategoryTheory.HasCardinalFilteredGenerator; CategoryTheory.HasCardinalFilteredGenerator.exists_small_generator; CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable.",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: filtered-generator definitions and local-object orthogonality do not supply weak-saturation generators for an intersection."
   },
   {
    "tool": "loogle",
-   "query": "MorphismProperty, smallObject",
-   "results": "{\"t\": \"2026-10-16T19:12:26Z\", \"tool\": \"loogle\", \"query\": \"MorphismProperty, smallObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MorphismProperty'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.MorphismProperty, CategoryTheory.IsLocallyPresentable",
+   "results": "OK, 0 hits.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "weakly.saturated|Smith|solution.set",
-   "results": "{\"t\": \"2026-10-16T19:31:13Z\", \"tool\": \"grep\", \"query\": \"weakly.saturated|Smith|solution.set\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/WithTerminal/Basic.lean\"], \"digest\": \"8665e5ad955a9ef7\"}",
+   "results": "CategoryTheory: 6 hits, AdjointFunctorTheorems.lean:17,24,52,70,80 and WithTerminal/Basic.lean:4. Read the solution-set definition and adjoint-functor statement; these concern right adjoints, not weak-saturation generators.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Small generating set for the trivial cofibrations in Smith recognition",
-   "results": "{\"t\": \"2026-10-16T19:31:13Z\", \"tool\": \"leansearch\", \"query\": \"Small generating set for the trivial cofibrations in Smith recognition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.mem_trivialCofibrations\", \"HomotopicalAlgebra.mem_trivialCofibrations_iff\", \"HomotopicalAlgebra.trivialCofibrations_sub_cofibrations\", \"HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.trivialFibrations\"], \"digest\": \"f030364f42ae45ef\"}",
+   "results": "8 hits: HomotopicalAlgebra.trivialCofibrations; HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations; HomotopicalAlgebra.mem_trivialCofibrations; HomotopicalAlgebra.mem_trivialCofibrations_iff; HomotopicalAlgebra.trivialCofibrations_sub_cofibrations; HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences; HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations; HomotopicalAlgebra.trivialFibrations.",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: all assume an existing model structure or merely define its trivial classes."
   },
   {
    "tool": "leanfinder",
    "query": "An accessible two out of three class of arrows intersected with a set generated weakly saturated class is again generated by a set",
-   "results": "{\"t\": \"2026-10-16T19:31:42Z\", \"tool\": \"leanfinder\", \"query\": \"An accessible two out of three class of arrows intersected with a set generated weakly saturated class is again generated by a set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyMin\", \"CategoryTheory.MorphismProperty.le_isLocal_isLocal\", \"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.MorphismProperty.instHasOfPostcompPropertyMin\", \"CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsLocal\", \"CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyTop\", \"CategoryTheory.MorphismProperty.instHasOfPrecompPropertyMin\", \"CategoryTheory.MorphismProperty.precoverage_inf\"], \"digest\": \"e25f6d0376b72961\"}",
+   "results": "8 hits: CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyMin; CategoryTheory.MorphismProperty.le_isLocal_isLocal; CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal; CategoryTheory.MorphismProperty.instHasOfPostcompPropertyMin; CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsLocal; CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyTop; CategoryTheory.MorphismProperty.instHasOfPrecompPropertyMin; CategoryTheory.MorphismProperty.precoverage_inf.",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: intersection two-out-of-three and local-object closure are not weak-saturation generation."
+  },
+  {
+   "tool": "grep",
+   "query": "isCardinalAccessible_ι_isLocal|exists_small_generator|instIsWeakFactorizationSystemTrivialCofibrationsFibrations",
+   "results": "CategoryTheory: 4 hits, StrongGenerator.lean:168; OrthogonalReflection.lean:95,478; CardinalFilteredPresentation.lean:166. Read OrthogonalReflection.lean:85-112 and CardinalFilteredPresentation.lean:155-178.",
+   "date": "2026-10-17",
+   "verdict": "no match: the orthogonal-reflection result gives accessibility of local objects, and exists_small_generator chooses a filtered generator from an already given filtered-generator instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small family generates the intersection of a cofibrantly generated morphism property with accessible weak equivalences",
+   "results": "{\"t\": \"2026-10-16T20:25:35Z\", \"tool\": \"leanfinder\", \"query\": \"A small family generates the intersection of a cofibrantly generated morphism property with accessible weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"fa5834dca461abcb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal in Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:95-103, which concerns the inclusion of local objects; ModelCategory.mk' in Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:127-133 assumes both weak factorization systems. Neither gives a small generating subset of the intersection."
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty, CategoryTheory.IsLocallyPresentable",
-   "results": "{\"t\": \"2026-10-16T19:31:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty, CategoryTheory.IsLocallyPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "\"IsLocallyPresentable\", \"HasSmallObjectArgument\"",
+   "results": "{\"t\": \"2026-10-16T20:26:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyPresentable\\\", \\\"HasSmallObjectArgument\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "No match: zero hits for local presentability together with the small-object argument."
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklySaturated|weaklySaturated|IsWeaklySaturated",
+   "results": "{\"t\": \"2026-10-16T20:26:16Z\", \"tool\": \"grep\", \"query\": \"WeaklySaturated|weaklySaturated|IsWeaklySaturated\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits in CategoryTheory for these weak-saturation spellings."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-smith-model-recognition",
@@ -86,5 +143,20 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-smith-small-saturated-intersection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Found the already existing lem-coef-accessible-intersection-generators (the replete formulation of HTT A.2.6.9), proved its extra repleteness assumption from weak saturation and two-out-of-three in two elementary steps, and applied it with all hypotheses checked. No new nodes or Mathlib leaves, no attachment, and no model-recognition theorem used.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint and its auxiliary Smith-recognition ancestry are preserved. This is the small-generator input below the current main-20261015 statement's exceptional-adjunction clause. The historical proof-paragraph location in blueprint.from is retained; the current main-20261015 ancestor file has the statement but no proof text. No unit step or coefficient category is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-8984a75e5",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-8984a75e5 (reviewer sub-agent of L); spot-checked: I read the item, its 3 steps, the cited node lem-coef-accessible-intersection-generators, the parent lem-coef-smith-model-recognition, Q50's lem-coef-perfect-weak-equivalence-model-recognition, the stmt_deps (lem-coef-lifting-class-closure, def-weil-pbc-category-colimit) and the unit/chapter records. The item's statement is unchanged and matches the inputs (i)-(iv) that the Smith-recognition parent uses. Step 1 is correct: weak saturation of C∩W puts every isomorphism in W. Step 2 is correct: from ga=bf we get g=b f a^{-1}, and two-out-of-three applied twice gives repleteness; I checked sources and targets. Step 3: I matched the cited node's hypotheses one by one (universe, Hom-smallness, cocomplete and locally presentable, (i) C generated by a small set, (ii) C∩W weakly saturated, (iii) accessibility with the same definition, where the extra repleteness is step 2, (iv) two-out-of-three), and its conclusion is the item's with S=J. The cited node has proof_deps [], so there is no cycle. Both nodes are in unit sk-prop-sf-biduality-general, so there is no off-unit use and no tool_uses. There are no new nodes. Edge cases checked: the terminal category with S empty, the isomorphisms in Set with S empty, all maps in Set, and an empty category, which cocompleteness excludes. Convention note: I read the item's cardinals as cardinals of the fixed universe, as the cited node states explicitly; even under the degenerate reading the item stays true. HTT A.2.6.9 is not in literature/ and network commands are blocked for reviewers, so I could not open the cited pages; the hypotheses agree with my recollection of HTT A.2.6.8/A.2.6.9, and the proof does not depend on the source. The item and the cited node are a same-day duplicate pair. Citing the existing node is the right handling within this split; the maintainer should eventually merge them, and likewise the two overlapping Smith-recognition nodes. No fixes were written."
+ }
 }
