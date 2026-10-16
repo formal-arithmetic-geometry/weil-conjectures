@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-lem-integral-models-generators",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral generators of $D^b_c(X,E)$ and $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$",
@@ -12,49 +12,235 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.md",
   "place": "node det-lem-integral-models-generators, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-module-lower-shriek",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-open-immersion"
+ ],
  "proof": [
   {
-   "text": "(1) By [det-cor-coefficient-heart-ii-generation], every $K\\in\\Dbc(X,E)$ is obtained by finitely\nmany cones and shifts from objects $a_!L$, $L$ lisse on a locally closed $S$. By\n[det-lem-stratified-lattice-trace] there is a finite stratification $S=\\coprod_bS_b$, ordered\nwith open unions ([det-lem-coefficient-heart-common-stratification]), and lattices\n$L_{0,b}\\subseteq L|_{S_b}$ with $L_{0,b}[1/\\ell]=L|_{S_b}$. The filtration of\n[det-lem-coefficient-heart-filtration] applied to $L$ on $S$ and pushed forward by the exact\n$a_!$ shows that $a_!L$ is an iterated extension of the $a_{b!}(L|_{S_b})$, where\n$a_b\\colon S_b\\hookrightarrow X$ (composites of locally closed immersions are locally closed,\nand extension by zero is transitive). Finally $a_{b!}(L|_{S_b})=a_{b!}(L_{0,b}[1/\\ell])=(a_{b!}L_{0,b})[1/\\ell]$\nbecause $a_{b!}$ is exact and commutes with the filtered colimit defining $[1/\\ell]$. Each\nextension is a distinguished triangle, so $K$ is built from $\\mathcal G_E$ by finitely many\ncones and shifts.",
+   "text": "Preliminaries for the locally closed extensions used below. A standing scheme is separated of finite type over the field in [sk-def-sfb-dc-setting]; the field is Noetherian since its only ideals are zero and the unit ideal, and [pqf-lem-locnoeth-lft] makes X locally Noetherian. Finite type gives a finite affine cover, hence X is Noetherian. Open subschemes and closed subschemes have affine charts given by localizations and quotient rings, so the same holds for all the locally closed subschemes used here. The Noetherian topology and constructibility facts in [def-weil-constructible-subset] show that these schemes are qcqs, their open immersions are quasi-compact, and their locally closed strata are constructible. For a locally closed immersion $a=i\\circ u$, use $a_!=i_*u_!$. By [lem-weil-pbc-proetale-ringed-open-closed], both factors are exact for any sheaf of coefficient rings. Their coefficient restrictions are the required ones by [sk-prop-sfb-cartesian-coefficients]. We will also use transitivity of this extension by zero, with the following explicit verification. A sheaf $N$ extending a sheaf $M$ on $S\\subset X$ is $i_*u_!M$ whenever its restriction outside $\\overline S$ and its restriction to $\\overline S\\setminus S$ are zero: the open–closed short exact sequence gives $N\\simeq i_*i^*N$, and on $\\overline S$ the same sequence gives $i^*N\\simeq u_!M$. Apply these two canonical identifications to the iterated extension along $T\\subset S\\subset X$. Its restriction to $T$ is $M$ and its restrictions to the complementary pieces vanish, by the identities and base-change isomorphisms in [det-sf-open-closed-sequence-ring-sheaf]. More explicitly, put $C=\\overline T$ in $X$. Since $C\\subseteq\\overline S$, the intersection $C\\cap S$ is open in $C$. On $C\\setminus T$, its open piece $(C\\cap S)\\setminus T$ has zero restriction because $b_!M$ vanishes off $T$ in $S$, and its closed complementary piece $C\\setminus S$ has zero restriction because $a_!$ vanishes off $S$. The open–closed exact sequence on $C\\setminus T$ therefore makes the entire restriction zero. The restriction to $X\\setminus C$ is zero as well: decompose it first by $\\overline S$ and then by $S$, and use $b_!M=0$ on $S\\setminus C$ and $a_!=0$ on the other pieces. The support characterization applied to $T\\subset C\\subset X$ now gives $a_!b_!M\\simeq (ab)_!M$. The composite is a locally closed immersion: writing $S$ closed in an open $V\\subset X$ and $T$ closed in an open $W\\subset S$, choose an open $V'\\subset V$ with $W=S\\cap V'$; then $T$ is closed in $V'$ (on affine charts the two surjective ring maps compose), and $V'$ is open in $X$.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-constructible-subset",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(1): exactness and transitivity of locally closed extension by zero"
+   }
+  },
+  {
+   "text": "For any lisse finite free integral module $M_0$ on a locally closed $b:T\\hookrightarrow X$, apply [det-lem-integral-models-operations] (4) to $L=M_0$ and $M=E_X$, viewed as an integral module. The coefficient restriction is $b^*E_X=E_T$ by [sk-prop-sfb-cartesian-coefficients]. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=\\mathcal O_{E,X}[1/\\ell]$ is flat, and the same holds on $T$. Therefore this projection formula reads, in degree zero,\n$$E_X\\otimes_{\\mathcal O_{E,X}}b_!M_0\\simeq b_!(E_T\\otimes_{\\mathcal O_{E,T}}M_0)=b_!(M_0[1/\\ell]).$$\nHere exactness of $b_!$ is step 1, so its application to the degree-zero tensor calculation introduces no higher cohomology. This establishes the scalar-extension identity needed for every integral generator, without presuming any unproved commutation with an infinite colimit.",
+   "uses": [
+    "det-lem-integral-models-operations",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(1): the identity $a_{b!}(L_{0,b}[1/\\ell])=(a_{b!}L_{0,b})[1/\\ell]$"
+   }
+  },
+  {
+   "text": "Let $K\\in D^b_c(X,E)$. By [det-cor-coefficient-heart-ii-generation], it suffices to build each sheaf $a_!L$, with $a:S\\hookrightarrow X$ locally closed and $L$ lisse, from integral generators. Apply [sk-lem-stratified-lattice] to the standing scheme $S$ and $L$. It gives a finite locally closed stratification carrying lisse finite free lattices $L_{0,b}$ in $L|_{S_b}$. Apply [det-lem-coefficient-heart-common-stratification] (1) to refine and order it so that the successive unions are open in $S$. On a refined stratum restrict the old lattice: a trivialization of a finite free module restricts to a trivialization, and its scalar extension still equals the restricted $L$, since inverse image is exact and monoidal. This uses the coefficient and exact-inverse-image identification of [sk-prop-sfb-cartesian-coefficients]; lisseness after restriction is also [det-lem-coefficient-heart-common-stratification] (2). Thus the refinement retains the lattices.",
    "uses": [
     "det-cor-coefficient-heart-ii-generation",
-    "det-lem-stratified-lattice-trace",
+    "sk-lem-stratified-lattice",
     "det-lem-coefficient-heart-common-stratification",
-    "det-lem-coefficient-heart-filtration"
+    "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(1): generation, stratified lattices, and ordering the strata"
+   }
   },
   {
-   "text": "(2) By [det-lem-coefficient-finite-descent-objects], $K\\cong(K_E)_{\\Qlb}$ for some finite $E$ and\n$K_E\\in\\Dbc(X,E)$. Apply (1) to $K_E$; the exact functor $\\QbarX\\otimes_{E_X}-$ preserves cones\nand shifts and sends $E_X\\otimes a_!L_0$ to $\\QbarX\\otimes_{\\cO_{E,X}}a_!L_0$.",
+   "text": "The lisse sheaf $L$ is constructible by [sk-def-sfb-constructible], using its finite free local models and the single stratum $S$. Apply [det-lem-coefficient-heart-filtration] on $S$ to $L$ and the ordered stratification of step 3. It gives finitely many short exact sequences with quotients $b_!(L|_{S_b})$. Push these sequences forward by the exact $a_!$ of step 1; transitivity identifies their quotients with $(ab)_!(L|_{S_b})$. By step 2 and $L|_{S_b}=L_{0,b}[1/\\ell]$, each is $( (ab)_!L_{0,b})[1/\\ell]\\in\\mathcal G_E$. By [lem-sf-derived-ses-triangle], each short exact sequence of module sheaves gives a distinguished triangle of their degree-zero complexes in the ambient derived category. Induct on the filtration length: the zero first term is the rank-zero generator, and a triangle with earlier term and quotient already constructed expresses the next term as a cone up to a shift. This builds $a_!L$ by finitely many cones and shifts. Substitute these finite constructions into the finite cone construction of $K$ from [det-cor-coefficient-heart-ii-generation]; there are only finitely many such substitutions, proving (1).",
    "uses": [
-    "det-lem-coefficient-finite-descent-objects"
+    "det-lem-coefficient-heart-filtration",
+    "lem-sf-derived-ses-triangle",
+    "det-cor-coefficient-heart-ii-generation",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(1): filtration, exact pushforward, and conversion of extensions to cones"
+   }
   },
   {
-   "text": "(3) $L_0$ is locally $\\cO_{E,S}^r$; its reductions $L_0/\\pi_E^n$ are locally constant sheaves of\nfinite free $\\cO_E/\\pi_E^n$-modules, i.e. finitely presented, so they come from the étale site\n(\\stacks{099Y}) and are constructible; $L_0$ is derived complete (locally finite free over the\ncomplete $\\cO_{E,S}$). So $L_0\\in\\Dbc(S,\\cO_E)$ by [sk-prop-integral-criterion], hence\n$a_!L_0\\in\\Dbc(X,\\cO_E)$ by [det-lem-integral-models-operations] (3). $L_0$ is flat, so\n$a_!L_0\\otimes^{\\mathbf L}\\cO_E/\\pi_E^n=a_!(L_0/\\pi_E^n)$, which is the extension by zero of a\nclassical sheaf, again classical and constructible.",
+   "text": "For $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ choose one finite $E$ and $K_E\\in D^b_c(X,E)$ with $K\\simeq(K_E)_{\\overline{\\mathbf Q}_\\ell}$ by [det-lem-coefficient-finite-descent-objects]. The functor $T=\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}-$ is exact: it is right exact as the extension-of-scalars left adjoint in [sk-def-sfb-change-of-scalars], and preserves finite limits by [lem-sfb-qlbar-flat]. Hence [lem-sf-exact-functor-derived-triangulated] shows that it preserves the cones and shifts in the construction of (1) for $K_E$. Its value on a generator is\n$$\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}(E_X\\otimes_{\\mathcal O_{E,X}}a_!L_0)\\simeq \\overline{\\mathbf Q}_{\\ell,X}\\otimes_{\\mathcal O_{E,X}}a_!L_0.$$\nThis is the associativity of the relative tensor product: the maps on local pure tensors are $q\\otimes(e\\otimes m)\\mapsto qe\\otimes m$ and $q\\otimes m\\mapsto q\\otimes(1\\otimes m)$, mutually inverse and compatible with all balancing relations and restrictions. Thus all generators use this same $E$, proving (2).",
    "uses": [
+    "det-lem-coefficient-finite-descent-objects",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-qlbar-flat",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(2): finite descent followed by exact scalar extension"
+   }
+  },
+  {
+   "text": "For (3), a lisse finite free $L_0$ on $S$ has finite constant local models $\\mathcal O_{E,S}\\otimes_{\\mathcal O_E}\\mathcal O_E^r$. This is precisely condition (1) of [sk-def-sfb-constructible], with the single stratum $S$; the rank may vary between trivializing opens. Hence the complex concentrated in degree zero is in $D^b_c(S,\\mathcal O_E)$ by [sk-def-sfb-bounded-constructible]. Apply [det-lem-integral-models-operations] (3) to get $a_!L_0\\in D^b_c(X,\\mathcal O_E)$. This uses the blueprint's intrinsic category of bounded complexes with constructible cohomology; the integral criterion is an equivalent characterization, not an extra condition that must be proved anew here.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
     "det-lem-integral-models-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(3): integral constructibility of $L_0$ and of $a_!L_0$"
+   }
+  },
+  {
+   "text": "Fix $n\\ge1$ and put $A_n=\\mathcal O_E/\\pi_E^n$. By [det-prop-integral-criterion-constant-coefficients] (1), $\\mathcal O_{E,X}/\\pi_E^n=(A_n)_X$, and likewise on $S$. Apply [det-lem-integral-models-operations] (4) with $L=L_0$ and $M=(A_n)_X$; its restriction to $S$ is $(A_n)_S$ by [sk-prop-sfb-cartesian-coefficients]. Finite free modules are flat, and this is local on the trivializing cover, so $L_0\\otimes^{\\mathbf L}_{\\mathcal O_{E,S}}(A_n)_S=L_0/\\pi_E^n$. The degree-zero formula and exactness from step 1 give\n$$(a_!L_0)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(A_n)_X\\simeq a_!(L_0/\\pi_E^n).$$\nThe elementary flatness calculation here is that tensoring with $\\mathcal O_{E,S}^r$ takes an exact sequence to its $r$-fold direct sum, so no higher terms of a flat resolution contribute. In particular the formula is derived reduction, not a claim that quotienting is exact on arbitrary integral sheaves.",
+   "uses": [
+    "det-prop-integral-criterion-constant-coefficients",
+    "det-lem-integral-models-operations",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(3): reduction of extension by zero"
+   }
+  },
+  {
+   "text": "On $S$, $L_0/\\pi_E^n$ is locally the constant finite free $A_n$-module $A_n^r$. On $\\overline S\\setminus S$ and $X\\setminus\\overline S$ the sheaf $a_!(L_0/\\pi_E^n)$ restricts to zero, by [lem-weil-pbc-proetale-ringed-open-closed]. These three locally closed pieces form a finite constructible stratification (discard empty pieces). Thus this degree-zero sheaf is constructible by [sk-def-sfb-constructible], so is in $D^b_c(X,A_n)$ by [sk-def-sfb-bounded-constructible]. The coefficient datum [def-weil-l-adic-coefficient-extension] (4) states that $A_n$ is finite for $n\\ge1$. With its quotient topology it is discrete; every ideal is a finite set and is generated by that set, so $A_n$ is Noetherian. Also $X$ is qcqs by step 1. Consequently [det-pe-constructible-comparison-classical] applies to this very stratification: its restrictions are locally constant of finite type, and therefore the sheaf is classical, i.e. is a pullback from $X_{\\mathrm{et}}$. This proves the remaining assertions of (3), with the cohomology of every reduction concentrated in the single interval $[0,0]$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible",
+    "det-pe-constructible-comparison-classical",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "(3): constructibility and classical origin of every finite reduction"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-constructible-subset",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "det-lem-integral-models-operations",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "det-cor-coefficient-heart-ii-generation",
-  "det-lem-stratified-lattice-trace",
+  "sk-lem-stratified-lattice",
   "det-lem-coefficient-heart-common-stratification",
   "det-lem-coefficient-heart-filtration",
+  "lem-sf-derived-ses-triangle",
+  "sk-def-sfb-constructible",
   "det-lem-coefficient-finite-descent-objects",
-  "det-lem-integral-models-operations"
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-qlbar-flat",
+  "lem-sf-exact-functor-derived-triangulated",
+  "sk-def-sfb-bounded-constructible",
+  "det-prop-integral-criterion-constant-coefficients",
+  "det-pe-constructible-comparison-classical",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs (1)–(3), with explicit support/transitivity, projection-formula, and finite-reduction arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible pro-etale complexes over a finite extension of Q_l are generated by extensions by zero of integral lisse lattices",
+   "results": "The hits concern abstract derived categories, condensed modules and unrelated integer lattices; none states integral generation on a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|stratified.*lattice|integral.*generator",
+   "results": "Only the basic pro-etale site and ell-adic sheaf/cohomology files occur; read ElladicCohomology.lean, which contains no constructible derived generation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded constructible l-adic complex is generated by extensions by zero of locally free integral lattices",
+   "results": "Hits include DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and ZLattice.module_free; neither supplies constructible stratified integral generators.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"lattice\"",
+   "results": "latticeClosure_constructibleTopologySubbasis concerns constructible subsets of a spectral space, not sheaves or integral generators.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible derived categories on schemes are generated under cones and shifts by lisse sheaves extended by zero from strata",
+   "results": "The hits concern abstract derived categories, condensed modules and unrelated integer lattices; none states integral generation on a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible l-adic sheaf has a finite filtration whose factors are extensions by zero of local systems admitting integral lattices",
+   "results": "Eight hits: Condensed.lanSheafProfinite, SheafOfModules.IsFiniteType and light condensed sheaf constructions. None states stratified integral generation. Independent second-reader query.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|lattice",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry/Sites. Independent second-reader source search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible derived sheaf on a scheme is generated by extension by zero of finite rank local systems with integral lattices",
+   "results": "Eight hits in SheafOfModules.LocalGeneratorsData and GeneratingSections concern local generation of module sheaves, not finite cone generation of constructible derived sheaves by integral lattices.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible|IsLocallyConstant|Lisse|integral.*lattice",
+   "results": "25 returned hits concern constructible subsets, locally constant functions, and flat rank. None states the scheme-theoretic integral generator theorem. The search was over all Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -73,5 +259,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-integral-models"
+ "unit": "sk-lem-integral-models",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-integral-models-generators",
+  "worker": "stage1",
+  "summary": "Retained the statement and all three clauses. Replaced conditional trace use by the existing stratified-lattice theorem; expanded exact extension, transitivity, projection-formula rationalization, filtration cones, flat rational scalar extension, and every derived finite reduction. Constructibility of a locally finite free integral sheaf follows directly from its defining finite constant local models; classical origin follows from the existing constructible comparison. All lemmas already exist; no new nodes.",
+  "blueprint": "Proof paragraph (1) is realized by steps 1–4; paragraph (2) by step 5; paragraph (3) by steps 6–8. Unit sk-lem-integral-models clause (4) retains the generation/lattice/finite-descent route. No chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-b6c8ae1b5",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-b6c8ae1b5 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements and sources, and the unit/chapter route. Checked support/transitivity, lattice filtration, single-E descent, derived reductions, classical comparison, edge cases, duplicates and cycles. No repairs or new nodes. Three generic tool uses accepted and documented in review.md."
+ }
 }
