@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-continuous-field-matrix-elimination",
+ "kind": "statement",
+ "title": "Gaussian elimination of continuous matrices on constant-rank neighbourhoods",
+ "statement": "For a normed field E, topological space T and finite row and column sets, a matrix M of continuous E-valued functions having constant pointwise rank r has near each point an invertible r-minor. After any continuous pullback into that neighbourhood, M equals P times the reindexed identity-and-zero block matrix times Q, with determinants of P and Q units. For locally constant rank the same conclusion holds with a rank depending on the chosen neighbourhood. Zero rank and empty index sets are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Gaussian elimination of continuous matrices on constant-rank neighbourhoods"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-index-splitting"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-dimensional rank/minor criterion to choose an r-minor nonzero at the point; nonzero determinant forces the row and column selections injective. Its nonvanishing locus is open. Use the existing PadicAlgCl.sumComplEquiv and sumComplEquiv_symm_inl, extracted unchanged to the shared finite-index-splitting module, to identify the selected block.",
+   "uses": [
+    "def-weil-pbc-finite-index-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A nowhere-zero continuous function is a unit: its reciprocal is continuous by inv_zero continuity away from zero. On any pullback to the chosen locus this makes the selected minor invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the source library Matrix.schur_eq_zero_of_rank_le to all evaluation homomorphisms. Evaluations jointly detect zero continuous functions, and the constant-rank bound kills the Schur complement. Matrix.exists_eq_mul_fromBlocks_one_zero gives P and Q; reindex back. Evaluation homomorphisms are abbreviations of Mathlib ContinuousMap.evalAlgHom over ℤ, forgetting its algebra structure.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For locally constant rank first choose a rank-constant open neighbourhood, apply the constant-rank theorem to its subspace, and take the open image of the resulting neighbourhood. Continuous maps into that image lift to the subspace.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-index-splitting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Gaussian elimination of continuous matrices on constant-rank neighbourhoods; repair reuses the existing PadicAlgCl finite-index splitting and inverse equation rather than declaring a duplicate theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.evalAlgHom",
+   "digest": "d3ba4ca034b1bcee",
+   "date": "2026-10-15",
+   "results": "ContinuousMap.evalAlgHom, ContinuousMap.evalAlgHom_apply",
+   "verdict": "The Mathlib evaluation homomorphism is reused through an abbreviation; no duplicate construction remains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Gaussian elimination of continuous matrices on constant-rank neighbourhoods",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousFieldMatrixElimination",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousFieldMatrixElimination.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousField_exists_isOpen_eq_mul",
+  "statement": "lemma continuousField_exists_isOpen_eq_mul (M : Matrix κ ι (C(T, E))) (r : ℕ) (hr : ∀ t, (M.map (continuousFieldEval t)).rank = r) (t₀ : T) : ∃ (U : Set T) (ρ : Fin r → κ) (γ : Fin r → ι) (hρ : Function.Injective ρ) (hγ : Function.Injective γ), IsOpen U ∧ t₀ ∈ U ∧ ∀ {T' : Type w} [TopologicalSpace T'] (g : C(T', T)), Set.range g ⊆ U → ∃ (P : Matrix κ κ (C(T', E))) (Q : Matrix ι ι (C(T', E))), IsUnit P.det ∧ IsUnit Q.det ∧ M.map ((ContinuousMap.compRightAlgHom ℤ E g)) = P * ((Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ}) (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousFieldEval",
+   "AlgebraicGeometry.ProEtale.sumComplEquiv",
+   "AlgebraicGeometry.ProEtale.continuousField_exists_isOpen_eq_mul",
+   "AlgebraicGeometry.ProEtale.continuousField_exists_isOpen_eq_mul_of_locallyConstant"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

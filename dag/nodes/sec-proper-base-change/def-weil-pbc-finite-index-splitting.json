@@ -1,0 +1,112 @@
+{
+ "id": "def-weil-pbc-finite-index-splitting",
+ "kind": "definition",
+ "title": "Shared finite-index splitting along an injection",
+ "statement": "For a type κ with decidable equality and an injection ρ : Fin r → κ, PadicAlgCl.sumComplEquiv ρ hρ is the equivalence κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} obtained by splitting the range of ρ and identifying that range with Fin r. Its inverse sends Sum.inl a to ρ a. This includes r = 0 and empty κ.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UnitMatrix.lean",
+  "place": "PadicAlgCl.sumComplEquiv and PadicAlgCl.sumComplEquiv_symm_inl, extracted unchanged"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose (Equiv.sumCompl (· ∈ Set.range ρ)).symm with the sum of (Equiv.ofInjective ρ hρ).symm and the identity on the complement. On the left summand, Mathlib simplification of inverse composition, sumCongr, ofInjective and sumCompl yields ρ a. These are the existing definition and proof from UnitMatrix, moved without changing their types or bodies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UnitMatrix.lean",
+  "place": "PadicAlgCl.sumComplEquiv and sumComplEquiv_symm_inl"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sumComplEquiv|sumComplEquiv_symm_inl",
+   "date": "2026-10-16",
+   "results": "msearch: no Mathlib hits. Local rg finds both existing generic declarations in WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix.",
+   "verdict": "Reuse the existing declarations by extracting their coefficient-independent module."
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.sumCompl",
+   "date": "2026-10-16",
+   "results": "Equiv.sumCompl, Equiv.sumCompl_apply_inl and related inverse equations; 11 hits.",
+   "verdict": "These are the Mathlib ingredients of the unchanged existing definition and proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injection from Fin r into a type splits that type into Fin r and the complement of its range, and the inverse maps inl a to the injection of a",
+   "date": "2026-10-16",
+   "results": "Equiv.sumCompl_symm_apply_pos, Equiv.Set.sumCompl_symm_apply_of_mem, finSumEquivOfFinset_inl and related results; 8 hits.",
+   "verdict": "No replacement with the same interface; preserve and share the already proved library API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injection of Fin r into a type gives an equivalence with the sum of Fin r and the complement of the image",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Gaussian elimination of continuous matrices on constant-rank neighbourhoods",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.FiniteIndexSplitting",
+  "file": "lean/Sheaf/LinearAlgebra/FiniteIndexSplitting.lean",
+  "declaration": "PadicAlgCl.sumComplEquiv",
+  "declarations": [
+   "PadicAlgCl.sumComplEquiv",
+   "PadicAlgCl.sumComplEquiv_symm_inl"
+  ],
+  "statement": "def sumComplEquiv {r : ℕ} (ρ : Fin r → κ) (hρ : Function.Injective ρ) : κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ}",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

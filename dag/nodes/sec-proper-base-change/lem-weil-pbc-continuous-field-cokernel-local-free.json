@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-continuous-field-cokernel-local-free",
+ "kind": "statement",
+ "title": "Local finite freeness of the cokernel of a locally constant-rank presentation",
+ "statement": "For a normed field E, scheme V, ring sheaf R identified by an invertible monoid morphism with the continuous E-function coefficients, and finite-free map f with locally constant pointwise matrix rank, there is a pro-etale cover on which the inverse image of cokernel f is finite free. No noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Local finite freeness of the cokernel of a locally constant-rank presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Choose the cover and source/target decompositions from the local block normal form.",
+   "uses": [
+    "lem-weil-pbc-continuous-field-presentation-normal-form"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image preserves cokernels. The commuting square with the two change-of-basis isomorphisms gives an isomorphism from the cokernel of pulled-back f to that of diag(identity,zero).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The latter block map is the split epimorphism biprod.fst followed by biprod.inl. Cokernels ignore the epimorphism, and cokernel of biprod.inl is the second target summand, a finite-free module. These comparisons give precisely the required IsFree witness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-field-presentation-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Local finite freeness of the cokernel of a locally constant-rank presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Local finite freeness of the cokernel of a locally constant-rank presentation",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousFieldCokernelLocalFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousFieldCokernelLocalFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_cokernel_of_locallyConstant_rank",
+  "statement": "theorem exists_finiteFree_cover_cokernel_of_locallyConstant_rank (E : Type u) [NormedField E] (V : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R] (e : R ⟶ (sheafCompose (Scheme.ProEt.topology V) (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (continuousCoefficientRingSheaf V E)) [IsIso e] [IsMonHom e] {m n : ℕ} (f : Mod.finiteFree R m ⟶ Mod.finiteFree R n) (hr : IsLocallyConstant (fun v : V ↦ ((continuousFieldPresentationMatrix E V e f).map (fun a ↦ a v)).rank)) : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage V, ∀ i : C.I₀, Mod.IsFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj R) (((upperStar AddCommGrpCat.{u + 1} (C.f i)).mapMod R).obj (cokernel f))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

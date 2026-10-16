@@ -1,0 +1,177 @@
+{
+ "id": "lem-weil-pbc-condensed-field-presentation-corank",
+ "kind": "statement",
+ "title": "Common-fibre coranks of two finite presentations",
+ "statement": "Let E be a totally disconnected normed field, X any scheme, P a module over its condensed E coefficient ring, C a pro-etale cover, and f_i:R_i^{m_i} to R_i^{n_i} finite free presentations of the inverse images of P. At v in C_i and w in C_j with the same image in X, n_i minus the rank of the continuous presentation matrix evaluated at v equals n_j minus its rank evaluated at w. No noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Common-fibre coranks of two finite presentations"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Form the tensor product of the residue fields of v and w over their common base residue field. It is nonzero because tensoring vector spaces over a field is faithful. Choose a prime and an algebraic closure of its residue field. The resulting geometric point factors through both v and w.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull back both presentations to that geometric field. The inverse-image composition comparison and canonical coefficient comparison identify the two resulting modules. Pullback preserves finite biproducts and cokernels.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at the final object. Covers of the algebraically closed field split, so evaluation preserves the cokernels. It sends coefficients to E and the presentation maps to the pointwise matrices, by the adjoint test characterization of the continuous realization.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "def-weil-pbc-condensed-field-presentation-matrix"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two matrices have isomorphic finite-dimensional E-vector space cokernels. Rank-nullity gives the displayed equality, including zero rows or columns.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Common-fibre coranks of two finite presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite presentations of an internal sheaf module over continuous field coefficients have the same cokernel dimension at points above the same scheme point",
+   "digest": "436b6677077e1496",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "verdict": "Independent second reading: no exact result for internal condensed module sheaves; the returned ordinary module or quasicoherent APIs require a comparison not yet present here."
+  },
+  {
+   "tool": "grep",
+   "query": "corank|PresentationMatrix|unitMatrix|ofUnitMatrix|freeMatrix (lean/Sheaf and lean/WeilConjectures)",
+   "date": "2026-10-16",
+   "results": "WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix provides the analogous matrix API for locally finite functions into PadicAlgCl; WeilConjectures.AlgebraicGeometry.Modules.FreeMatrix handles Zariski structure-sheaf modules. Neither identifies the arbitrary continuous-field internal modules in this statement. No matching condensed corank declaration found.",
+   "verdict": "Related proved tools inspected; no exact replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank of a finite presentation is invariant under exact evaluation at a geometric point and pullback of sheaves of modules",
+   "digest": "5310012805c5ee5d",
+   "date": "2026-10-15",
+   "results": "Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_eq, Module.Grassmannian.rankAtStalk_eq, Module.rankAtStalk_prod, Module.rankAtStalk_pi, Module.rankAtStalk_eq_finrank_tensorProduct, ModuleCat.free_shortExact_rank_add",
+   "verdict": "Independent repair reading: related ordinary module/sheaf APIs require an internal-module comparison, and no direct replacement closes this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Common-fibre coranks of two finite presentations",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldPresentationCorank.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedField_presentation_corank_eq",
+  "statement": "theorem condensedField_presentation_corank_eq (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u}) (P : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X) (n m : C.I₀ → ℕ) (f : ∀ i, Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (m i) ⟶ Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (n i)) (e : ∀ i, (((upperStar AddCommGrpCat.{u + 1} (C.f i)).mapMod (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)).obj P) ≅ cokernel (f i)) (i j : C.I₀) (v : C.X i) (w : C.X j) (h : C.f i v = C.f j w) : n i - ((continuousFieldPresentationMatrix E (C.X i) (condensedFieldPullbackRealization E (C.f i)) (f i)).map (fun a ↦ a v)).rank = n j - ((continuousFieldPresentationMatrix E (C.X j) (condensedFieldPullbackRealization E (C.f j)) (f j)).map (fun a ↦ a w)).rank",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

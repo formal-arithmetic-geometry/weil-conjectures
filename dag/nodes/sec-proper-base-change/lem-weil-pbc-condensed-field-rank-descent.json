@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-condensed-field-rank-descent",
+ "kind": "statement",
+ "title": "Descent of specialization-invariant functions along a flat surjective family",
+ "statement": "Let X be a topologically noetherian scheme, V_i any indexed family of schemes with flat maps f_i jointly surjective on points, and A any type. Suppose functions r_i:V_i to A agree over equal base points and are invariant under specialization in each V_i. Then there is a locally constant d:X to A whose pullback to each V_i is r_i.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Descent of specialization-invariant functions along a flat surjective family"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a lift of each point of X and use fibre compatibility to obtain the pullback equality for any lift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Flat.generalizingMap lifts a generalization at the chosen point. Specialization invariance upstairs proves specialization invariance downstairs. This uses the Mathlib theorem for flat maps directly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "There are finitely many irreducible components of X, each closed with a generic point. A specialization-invariant subset is a union of the components it meets; it is closed. Apply this to each fibre and its complement to prove fibres open and hence local constancy.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Descent of specialization-invariant functions along a flat surjective family"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Descent of specialization-invariant functions along a flat surjective family",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldRankDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldRankDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_locallyConstant_descent_of_specializes",
+  "statement": "theorem exists_locallyConstant_descent_of_specializes {X : Scheme.{u}} [NoetherianSpace X] {I : Type v} (V : I → Scheme.{u}) (f : ∀ i, V i ⟶ X) (hf : ∀ i, Flat (f i)) (hsurj : ∀ x : X, ∃ i, ∃ v : V i, f i v = x) {A : Type*} (r : ∀ i, V i → A) (hcompat : ∀ i j (v : V i) (w : V j), f i v = f j w → r i v = r j w) (hspec : ∀ i ⦃v w : V i⦄, v ⤳ w → r i v = r i w) : ∃ d : X → A, IsLocallyConstant d ∧ ∀ i v, d (f i v) = r i v",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

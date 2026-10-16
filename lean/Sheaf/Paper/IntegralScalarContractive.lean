@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 
 import WeilConjectures.CategoryTheory.Sites.MonObj
-import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import all Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
 import Sheaf.Paper.ProEtaleSheafificationWcontractibleSections
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated

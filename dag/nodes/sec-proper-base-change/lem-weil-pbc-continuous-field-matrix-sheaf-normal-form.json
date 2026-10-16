@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-continuous-field-matrix-sheaf-normal-form",
+ "kind": "statement",
+ "title": "Lift a specified continuous block factorization along an open immersion",
+ "statement": "Let E be a normed field, g:W to V an open immersion, R a ring sheaf identified by an invertible monoid morphism e with continuous E coefficients, and f:R^m to R^n. Suppose a specified factorization of its matrix after composition with g is P times a reindexed identity-and-zero block times Q, where P and Q have unit determinants and the selected row and column maps Fin r into Fin n and Fin m are injective. Then the pulled-back source and target split as R_W^r plus finite-free complements, and pulled-back f is diag(identity,zero) under these isomorphisms. No locally constant-rank, noetherian or covering hypothesis is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Lift a specified continuous block factorization along an open immersion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-field-presentation-matrix",
+  "lem-weil-pbc-continuous-field-matrix-elimination"
+ ],
+ "proof": [
+  {
+   "text": "For continuous-function coefficients, identify each regular-module endomorphism with its global value at one. Linearity gives multiplication by that function on every section; naturality identifies local values with its restriction. Multiplication by a global continuous function gives the inverse assignment. Check addition and composition sectionwise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Biproduct inclusions and projections identify finite-free maps with matrices compatibly with composition. Thus P and Q and their inverse matrices give module automorphisms. The chosen injections identify the selected entries with Fin r and their complements with finite sets.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the monoidal inverse-image/localization-restriction comparison along the open immersion. It identifies the pulled-back coefficient sheaf with continuous functions on W, and the given matrix entries with composition along g. Transport by e and the finite-biproduct comparisons. The explicit factorization now gives the equality of module maps. Enumerate the complementary finite sets by Fin of their cardinalities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Lift a specified continuous block factorization along an open immersion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between finite sums of the regular module object are matrices of global sections and invertible matrices give module isomorphisms",
+   "digest": "095b8c388b615f06",
+   "date": "2026-10-16",
+   "results": "ModuleCat.matrixEquivalence, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, MatrixModCat.unitIso, ModuleCat.matrixEquivalence_functor, MatrixModCat.counitIso, ModuleCat.matrixEquivalence_unitIso, moritaEquivalenceMatrix, ModuleCat.matrixEquivalence_inverse",
+   "verdict": "Independent second reading: no exact result for internal condensed module sheaves; the returned ordinary module or quasicoherent APIs require a comparison not yet present here."
+  },
+  {
+   "tool": "grep",
+   "query": "corank|PresentationMatrix|unitMatrix|ofUnitMatrix|freeMatrix (lean/Sheaf and lean/WeilConjectures)",
+   "date": "2026-10-16",
+   "results": "WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix provides the analogous matrix API for locally finite functions into PadicAlgCl; WeilConjectures.AlgebraicGeometry.Modules.FreeMatrix handles Zariski structure-sheaf modules. Neither identifies the arbitrary continuous-field internal modules in this statement. No matching condensed corank declaration found.",
+   "verdict": "Related proved tools inspected; no exact replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "endomorphisms of the regular internal module object equal global sections of a sheaf of rings; finite free module morphisms are matrices",
+   "digest": "71f73062e8dad9f4",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, ModuleCat.endRingEquiv, SheafOfModules.freeHomEquiv, PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_apply_coe, ModuleCat.endRingEquiv_apply, SheafOfModules.unitHomEquiv_comp_apply",
+   "verdict": "Independent repair reading: related ordinary module/sheaf APIs require an internal-module comparison, and no direct replacement closes this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Lift a specified continuous block factorization along an open immersion",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousFieldMatrixSheafNormalForm.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousField_matrix_sheaf_normalForm",
+  "statement": "theorem continuousField_matrix_sheaf_normalForm (E : Type u) [NormedField E] {V W : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R] (e : R ⟶ (sheafCompose (Scheme.ProEt.topology V) (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (continuousCoefficientRingSheaf V E)) [IsIso e] [IsMonHom e] {m n : ℕ} (f : Mod.finiteFree R m ⟶ Mod.finiteFree R n) (g : W ⟶ V) [IsOpenImmersion g] (r : ℕ) (ρ : Fin r → Fin n) (γ : Fin r → Fin m) (hρ : Function.Injective ρ) (hγ : Function.Injective γ) (P : Matrix (Fin n) (Fin n) (C(W, E))) (Q : Matrix (Fin m) (Fin m) (C(W, E))) (hP : IsUnit P.det) (hQ : IsUnit Q.det) (h : (continuousFieldPresentationMatrix E V e f).map (ContinuousMap.compRightAlgHom ℤ E ⟨g.base.hom, g.continuous⟩) = P * ((Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ}) (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q) : ∃ (s t : ℕ) (a : ((upperStar AddCommGrpCat.{u + 1} g).mapMod R).obj (Mod.finiteFree R m) ≅ Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} g).obj R) r ⊞ Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} g).obj R) s) (b : ((upperStar AddCommGrpCat.{u + 1} g).mapMod R).obj (Mod.finiteFree R n) ≅ Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} g).obj R) r ⊞ Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} g).obj R) t), ((upperStar AddCommGrpCat.{u + 1} g).mapMod R).map f = a.hom ≫ biprod.map (𝟙 _) 0 ≫ b.inv",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}

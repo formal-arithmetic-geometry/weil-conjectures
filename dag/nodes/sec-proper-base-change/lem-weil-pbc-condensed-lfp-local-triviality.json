@@ -32,125 +32,63 @@
  ],
  "proof": [
   {
-   "text": "Use the already constructed continuous coefficient ring sheaf from [def-weil-pbc-condensed-e-module-category]. Its compatible continuous functions descend along fpqc covers; that construction is not repeated in this module.",
+   "text": "Use the uniquely characterized continuous coefficient realization. A finite normed extension of Q_l is totally disconnected by a finite-dimensional basis homeomorphism.",
    "uses": [
-    "def-weil-pbc-condensed-e-module-category"
+    "lem-weil-pbc-condensed-field-continuous-realization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, sheaf-property proof; Stacks openness tool is the statement of the cited node"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the adjoint by composing each continuous test function with the canonical projection |X[S]| → S. Prove projection naturality and ring compatibility, then transpose through the existing monoidal adjunction. On an affine U, use the explicit component-map equivalence of [lem-weil-pbc-proetale-point-components-maps] to construct U → X[π₀(U)] and prove it terminal in the opposite comma category. Its Kan cocone leg is invertible. The comparison on U is composition with U → π₀(U); connected-component factorization and total disconnectedness of the finite normed extension E make this map bijective. On a weakly contractible affine, [lem-weil-pbc-proetale-sheafification-wcontractible-sections] identifies the sheafification unit as invertible. Uniqueness of left adjoints transfers the Kan comparison to the given composite inverse image. The affine covers of [lem-weil-pbc-proetale-affine-wcontractible-covering-family] make the resulting sheaf morphism locally bijective, hence invertible. The adjoint equations on all test functions imply uniqueness by injectivity of the adjunction equivalence.",
+   "text": "Choose the local finite presentations in hP and construct their continuous matrices. Define the corank functions n_i-rank. The common-fibre comparison makes them compatible over base points.",
    "uses": [
-    "lem-weil-pbc-proetale-point-components-maps",
-    "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-weil-pbc-condensed-field-presentation-matrix",
+    "lem-weil-pbc-condensed-field-presentation-corank"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1; restriction and basis-gluing argument written out"
-   }
+   "elementary": false
   },
   {
-   "text": "Define $r(x)$ intrinsically, rather than from a chosen presentation. For a geometric point $\\bar x:\\operatorname{Spec}K\\to X$, pull back $P$ and then evaluate at $\\operatorname{Spec}K$. The abelian inverse image preserves cokernels by [lem-weil-pbc-site-pullback-abelian-exact]; the composition comparisons in [lem-weil-pbc-profinite-point-pullback] identify its coefficient ring with $E_{\\operatorname{Spec}K}^c$. By [lem-weil-pbc-geometric-field-proetale-evaluation], evaluation preserves cokernels and has coefficient ring $C(*,E)=E$. Base changing a presentation covering to $\\operatorname{Spec}K$ gives a covering there, and its section through one member lets one pull that finite presentation back to the final object. Consequently the evaluated module is a finite-dimensional $E$-vector space; set $r(x)$ equal to its dimension. Its value is independent of the algebraically closed representative: each such field contains an algebraic closure of $\\kappa(x)$, and the extension comparisons of the same cited node preserve evaluation. In particular, if $v\\in V_\\alpha$ lies above $x$ and $A_\\alpha$ is the $n_\\alpha$ by $m_\\alpha$ matrix of the presentation, then $r(x)=n_\\alpha-\\operatorname{rank}_E A_\\alpha(v)$. A module map between finite free ring sheaves is a matrix of global ring sections: its columns are the images of the unit basis sections, and linearity determines it. The coefficient identification of the preceding step turns these sections into continuous functions.",
+   "text": "Continuous maps to the Hausdorff field E agree on comparable points, so each matrix and its corank are specialization invariant. Pro-etale cover maps are flat and jointly surjective. Apply the proved noetherian descent theorem to obtain a locally constant descended corank.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-condensed-field-rank-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the descended corank to each cover member. The rank bound rank<=n and Nat.sub_sub_self recover local constancy of each matrix rank. Apply the local cokernel-freeness theorem and transport the given cokernel presentation isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-continuous-field-cokernel-local-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the resulting pro-etale covers with the original presentation cover. The monoidal inverse-image composition comparison and restriction-of-scalars equivalence transport finite freeness to the pullback along the composite.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a locally closed stratum, transport coefficients along the canonical coefficient pullback isomorphism; finite-colimit-preserving additive functors carrying regular modules to regular modules preserve finite presentations. Apply the local-freeness theorem and transport the free-module witnesses back.",
+   "uses": [
     "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "def-weil-proetale-inverse-image"
+    "def-constructible-stratification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Example 4.2.11; agent rank construction using exact inverse image and split covers, not the lisse-heart theorem"
-   }
-  },
-  {
-   "text": "If $x$ is a generalization of $y$ in $X$, choose $v\\in V_\\alpha$ above $y$. The map $V_\\alpha\\to X$ is flat by [def-weil-pbc-proetale-site] and [def-weil-flat-morphism]. Apply [lem-sc-flat-going-down] to the flat local ring map $\\mathcal O_{X,y}\\to\\mathcal O_{V_\\alpha,v}$, lifting the prime corresponding to $x$ below the maximal ideal; it gives a generalization $v'$ of $v$ above $x$. Continuous maps to the Hausdorff field $E$ have equal values at two comparable points: continuity carries specialization to specialization and a Hausdorff space has only equality specializations. Hence every entry of $A_\\alpha(v')$ equals the corresponding entry of $A_\\alpha(v)$. The formula of the preceding step proves $r(x)=r(y)$. No openness of the weakly etale covering map is assumed.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-flat-morphism",
-    "lem-sc-flat-going-down"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Agent rank descent; going-down source is Stacks Algebra Tag 00HS (lemma-flat-going-down), as recorded in the cited node"
-   }
-  },
-  {
-   "text": "The topologically noetherian hypothesis gives finitely many irreducible components $Z_i$ by [lem-sc-noetherian-finite-irreducible-components]. Each has a generic point $\\eta_i$ by [lem-sc-scheme-sober]. Every $x\\in Z_i$ specializes from $\\eta_i$, so the preceding step gives $r(x)=r(\\eta_i)$. Therefore each rank level is a union of some of the finitely many closed components. Its complement is also a finite union of closed components, so the level is clopen. These finitely many clopen levels cover $X$. Notice that algebraic noetherianity of coordinate rings was not used.",
-   "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "lem-sc-scheme-sober"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Agent topological rank argument; finite-components and sobriety tools are Stacks Tags 0052 and 01IS, respectively"
-   }
-  },
-  {
-   "text": "Restrict each presentation on $V_\\alpha$ to the inverse images of the clopen rank levels of $X$. These are open subschemes and cover $V_\\alpha$. Restriction preserves its cokernel by [lem-weil-pbc-site-pullback-abelian-exact], and [lem-weil-pbc-profinite-point-pullback] identifies the restricted coefficient with the corresponding coefficient ring sheaf. On one such piece $V$, write its matrix as $A$, of size $n$ by $m$, and write $r$ for the base rank. The evaluation formula from step 3 gives $\\operatorname{rank}_E A(v)=s:=n-r$ at every point $v\\in V$. In particular $0\\le s\\le\\min(m,n)$.",
-   "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-profinite-point-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Agent argument: pull back the rank partition, retaining each original finite presentation"
-   }
-  },
-  {
-   "text": "For $s>0$, the nonvanishing loci of the $s$ by $s$ minors of $A$ are open and cover $V$; for $s=0$ use all of $V$. On a locus with invertible minor, permute rows and columns to write $A=\\left(\\begin{smallmatrix}B&C\\cr D&H\\end{smallmatrix}\\right)$ with $\\det B\\ne0$ everywhere. The entries of $B^{-1}=\\operatorname{adj}(B)/\\det B$ are continuous, so define ring sections on this locus. The invertible block operations give $\\left(\\begin{smallmatrix}B^{-1}&0\\cr -DB^{-1}&1\\end{smallmatrix}\\right)A\\left(\\begin{smallmatrix}1&-B^{-1}C\\cr 0&1\\end{smallmatrix}\\right)=\\left(\\begin{smallmatrix}1&0\\cr 0&H-DB^{-1}C\\end{smallmatrix}\\right)$. Pointwise rank $s$ implies every entry of the Schur complement vanishes at every point; since these sections are actual functions, it is the zero matrix of sections. The cokernel is thus the free coefficient sheaf of rank $n-s=r$. If $s=0$, every entry of $A$ vanishes pointwise and its cokernel is the free sheaf of rank $n$. This proves a sheaf isomorphism by explicit matrix operations, without using geometric-point conservativity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Agent Gaussian elimination step, explicit Schur complement calculation"
-   }
-  },
-  {
-   "text": "The opens in step 7 cover each piece in step 6, and those pieces cover the given presentation covering. Composing gives the required pro-etale finite-free covering; this local-freeness theorem remains the single open Lean obligation. The application to strata is proved: restriction gives a module over the pulled-back coefficient ring. Transport it along the inverse of the canonical condensed coefficient pullback isomorphism. Additive finite-colimit-preserving functors carrying the regular module to the regular module preserve finite presentations, by their finite-biproduct and cokernel comparison isomorphisms. This proves preservation of local finite presentations under the coefficient isomorphism. Apply the local-freeness theorem to the stratum, transport its free modules back using finite-biproduct comparisons, and use naturality of mapModComapIso to obtain exactly the displayed restricted modules. No nonempty, positive-rank, or positive-presentation-size assumption is used.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-constructible-stratification",
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-profinite-point-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Agent conclusion and application to strata; archived ProEtaleModule/Def.lean local finite presentation is unchanged"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-condensed-e-module-category",
-  "lem-weil-pbc-proetale-point-components-maps",
-  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-condensed-field-presentation-matrix",
+  "lem-weil-pbc-condensed-field-presentation-corank",
+  "lem-weil-pbc-condensed-field-rank-descent",
+  "lem-weil-pbc-continuous-field-cokernel-local-free",
   "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "def-weil-proetale-inverse-image",
-  "def-weil-pbc-proetale-site",
-  "def-weil-flat-morphism",
-  "lem-sc-flat-going-down",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sc-scheme-sober",
   "def-constructible-stratification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1; B3 stage-3 canonical Kan-extension comparison and coefficient-isomorphism transport prove the coefficient realization and stratum clauses. The original ND rank/descent and matrix plan is retained for the one remaining local-freeness hole, not quoted from Theorem 6.2."
+  "place": "F1 compiling rank/descent proof from two strictly simpler pending steps: geometric corank compatibility and local continuous-module normal form. The realization and strata clauses retain their earlier proofs."
  },
  "mathlib_searches": [
   {
@@ -298,8 +236,6 @@
   "module": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
   "declaration": "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_of_condensedField_lfp",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.profiniteTestProjection",
-   "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso",
    "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_of_condensedField_lfp",
    "AlgebraicGeometry.ProEtale.exists_finiteFree_cover_on_condensedField_strata"
   ],
@@ -309,16 +245,16 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false,
-  "note": "Returned H3 repaired: the ring isomorphism is uniquely characterized by its adjoint on all profinite test functions. Coefficients now range over Type u, the universe bound containing X and E, using the generalized sectionwise coefficient API in the dependency repair."
+  "note": "F1: coefficient-realization public declarations moved unchanged to the publicly reexported CondensedFieldContinuousRealization module; local freeness proved from corank compatibility, flat rank descent and the continuous cokernel criterion."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-40966",
-  "group": "B3",
+  "reviewer": "X-0b366",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261015T191322-L-1006744",
+  "landing": "20261016T005128-L-4190704",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean module, DAG node, report, change record, and three direct importers against the review packet"
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
  }
 }

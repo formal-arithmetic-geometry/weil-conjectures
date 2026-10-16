@@ -1,0 +1,143 @@
+{
+ "id": "def-weil-pbc-condensed-field-presentation-matrix",
+ "kind": "definition",
+ "title": "Continuous presentation matrices and pulled-back coefficient realization",
+ "statement": "Let E be a normed field, V a scheme, R an abelian ring sheaf and e an invertible morphism from R to the continuous-function coefficient sheaf. For a map f:R^m to R^n define its n by m matrix of global continuous functions by conjugating each regular-module component by e and evaluating it at 1 on the terminal site object. For totally disconnected E and g:V to X define the pulled-back coefficient realization as the canonical condensed coefficient pullback morphism followed by the unique continuous-function realization on V; it is an invertible monoid morphism.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Continuous presentation matrices and pulled-back coefficient realization"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "proof": [
+  {
+   "text": "Define each component by the corresponding biproduct inclusion, f, and projection. Conjugate by e and evaluate at one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the condensed coefficient pullback isomorphism and the continuous realization; invertibility and monoid compatibility follow from their composition.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Continuous presentation matrices and pulled-back coefficient realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Continuous presentation matrices and pulled-back coefficient realization",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldPresentationMatrix.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousFieldPresentationMatrix",
+  "statement": "def continuousFieldPresentationMatrix (E : Type u) [NormedField E] (V : Scheme.{u}) {R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}} [MonObj R] (e : R ⟶ (sheafCompose (Scheme.ProEt.topology V) (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (continuousCoefficientRingSheaf V E)) [IsIso e] {m n : ℕ} (f : Mod.finiteFree R m ⟶ Mod.finiteFree R n) : Matrix (Fin n) (Fin m) C(V, E)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousFieldPresentationMatrix",
+   "AlgebraicGeometry.ProEtale.condensedFieldPullbackRealization",
+   "AlgebraicGeometry.ProEtale.isIso_condensedFieldPullbackRealization",
+   "AlgebraicGeometry.ProEtale.isMonHom_condensedFieldPullbackRealization"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+ }
+}
