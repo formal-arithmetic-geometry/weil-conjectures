@@ -1,100 +1,105 @@
 {
-  "id": "sk-def-sfb-transport",
-  "kind": "definition",
-  "title": "Transport of module objects and projection formulas",
-  "statement": "Let $\\mathcal C$ and $\\mathcal D$ be monoidal categories. Monoid objects and module objects\nare as in [sk-def-sfb-ring-object] and [sk-def-sfb-module-objects].\n\n1. **Transport along a lax monoidal functor.** Let $F\\colon\\mathcal C\\to\\mathcal D$ be lax\n   monoidal, with structure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$. For a\n   monoid object $\\mathcal R$ of $\\mathcal C$, $F\\mathcal R$ is a monoid object of\n   $\\mathcal D$. An $\\mathcal R$-module object $M$ gives the $F\\mathcal R$-module object\n   $FM$, with action\n   $F\\mathcal R\\otimes FM\\xrightarrow{\\mu^F}F(\\mathcal R\\otimes M)\\xrightarrow{F\\gamma_M}FM$.\n   This defines a functor\n   $$\n   \\operatorname{mapMod}(F)\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{F\\mathcal R}(\\mathcal D)\n   $$\n   that commutes with the forgetful functors.\n2. **Monoidal adjunctions.** Let $F\\dashv G$ be a monoidal adjunction, with $F$ strong\n   monoidal and $G$ lax monoidal, the structures being mates. Then the unit\n   $u_{\\mathcal R}\\colon\\mathcal R\\to GF\\mathcal R$ is a morphism of monoid objects, and,\n   with the restriction of scalars of [sk-def-sfb-change-of-scalars],\n   $$\n   \\operatorname{mapMod}(F)\\dashv\\operatorname{Res}_{u_{\\mathcal R}}\\circ\\operatorname{mapMod}(G).\n   $$\n3. **Projection formulas.** Let $S\\colon\\mathcal D\\to\\mathcal C$ be strong monoidal and\n   $P\\colon\\mathcal C\\to\\mathcal D$ a functor. A *projection formula* for $P$ relative to\n   $S$ is a family of isomorphisms $P(SL\\otimes M)\\cong L\\otimes PM$, natural in $L$ and\n   $M$ and compatible with the unit and the associativity constraints. It *linearizes*\n   $P$: for every monoid object $\\mathcal B$ of $\\mathcal D$, it gives a functor\n   $$\n   P_{\\mathcal B}\\colon\\Mod_{S\\mathcal B}(\\mathcal C)\\to\\Mod_{\\mathcal B}(\\mathcal D),\n   \\qquad M\\mapsto PM,\n   $$\n   where $\\mathcal B$ acts by\n   $\\mathcal B\\otimes PM\\cong P(S\\mathcal B\\otimes M)\\xrightarrow{P\\gamma_M}PM$. Every\n   right adjoint $G$ of $P$ linearizes to a functor\n   $G_{\\mathcal B}\\colon\\Mod_{\\mathcal B}(\\mathcal D)\\to\\Mod_{S\\mathcal B}(\\mathcal C)$,\n   $N\\mapsto GN$, and $P_{\\mathcal B}\\dashv G_{\\mathcal B}$.\n4. **Adjunctions $P\\dashv S$.** For an adjunction $P\\dashv S$ with $S$ strong monoidal, the\n   *projection formula map* $P(SL\\otimes M)\\to L\\otimes PM$ is the adjoint of\n   $SL\\otimes M\\to SL\\otimes SPM\\to S(L\\otimes PM)$. If these maps are isomorphisms, they\n   form a projection formula. Then $G_{\\mathcal B}=\\operatorname{mapMod}(S)$, so\n   $P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/_section.md",
-    "place": "node sk-def-sfb-transport, order 861"
-  },
-  "stmt_deps": [
-    "sk-def-sfb-ring-object",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
-  ],
-  "proof": [
-    {
-      "text": "Part 1 is [def-sfb-modobj-transport]. Part 2 is [def-sfb-modobj-transport-adjunction].",
-      "uses": [
-        "def-sfb-modobj-transport",
-        "def-sfb-modobj-transport-adjunction"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Part 3: projection formulas are defined in [def-sfb-projection-formula]. The\nlinearization $P_{\\mathcal B}$ is [def-sfb-modobj-linearization], and\n$G_{\\mathcal B}$ is [def-sfb-modobj-linearization-right-adjoint]. The adjunction\n$P_{\\mathcal B}\\dashv G_{\\mathcal B}$ is [def-sfb-modobj-linearized-adjunction].",
-      "uses": [
-        "def-sfb-projection-formula",
-        "def-sfb-modobj-linearization",
-        "def-sfb-modobj-linearization-right-adjoint",
-        "def-sfb-modobj-linearized-adjunction"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Part 4: the projection formula map and the condition that it is invertible are\n[def-sfb-adjunction-has-projection-formula]. The resulting projection formula is\n[def-sfb-adjunction-projection-formula]. The adjunction\n$P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$ is\n[def-sfb-modobj-linearization-transport-adjunction].",
-      "uses": [
-        "def-sfb-adjunction-has-projection-formula",
-        "def-sfb-adjunction-projection-formula",
-        "def-sfb-modobj-linearization-transport-adjunction"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-def-sfb-transport",
+ "blueprint": {
+  "is": "sk-def-sfb-transport",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Transport of module objects and projection formulas",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be monoidal categories. Monoid objects and module objects\nare as in [sk-def-sfb-ring-object] and [sk-def-sfb-module-objects].\n\n1. **Transport along a lax monoidal functor.** Let $F\\colon\\mathcal C\\to\\mathcal D$ be lax\n   monoidal, with structure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$. For a\n   monoid object $\\mathcal R$ of $\\mathcal C$, $F\\mathcal R$ is a monoid object of\n   $\\mathcal D$. An $\\mathcal R$-module object $M$ gives the $F\\mathcal R$-module object\n   $FM$, with action\n   $F\\mathcal R\\otimes FM\\xrightarrow{\\mu^F}F(\\mathcal R\\otimes M)\\xrightarrow{F\\gamma_M}FM$.\n   This defines a functor\n   $$\n   \\operatorname{mapMod}(F)\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{F\\mathcal R}(\\mathcal D)\n   $$\n   that commutes with the forgetful functors.\n2. **Monoidal adjunctions.** Let $F\\dashv G$ be a monoidal adjunction, with $F$ strong\n   monoidal and $G$ lax monoidal, the structures being mates. Then the unit\n   $u_{\\mathcal R}\\colon\\mathcal R\\to GF\\mathcal R$ is a morphism of monoid objects, and,\n   with the restriction of scalars of [sk-def-sfb-change-of-scalars],\n   $$\n   \\operatorname{mapMod}(F)\\dashv\\operatorname{Res}_{u_{\\mathcal R}}\\circ\\operatorname{mapMod}(G).\n   $$\n3. **Projection formulas.** Let $S\\colon\\mathcal D\\to\\mathcal C$ be strong monoidal and\n   $P\\colon\\mathcal C\\to\\mathcal D$ a functor. A *projection formula* for $P$ relative to\n   $S$ is a family of isomorphisms $P(SL\\otimes M)\\cong L\\otimes PM$, natural in $L$ and\n   $M$ and compatible with the unit and the associativity constraints. It *linearizes*\n   $P$: for every monoid object $\\mathcal B$ of $\\mathcal D$, it gives a functor\n   $$\n   P_{\\mathcal B}\\colon\\Mod_{S\\mathcal B}(\\mathcal C)\\to\\Mod_{\\mathcal B}(\\mathcal D),\n   \\qquad M\\mapsto PM,\n   $$\n   where $\\mathcal B$ acts by\n   $\\mathcal B\\otimes PM\\cong P(S\\mathcal B\\otimes M)\\xrightarrow{P\\gamma_M}PM$. Every\n   right adjoint $G$ of $P$ linearizes to a functor\n   $G_{\\mathcal B}\\colon\\Mod_{\\mathcal B}(\\mathcal D)\\to\\Mod_{S\\mathcal B}(\\mathcal C)$,\n   $N\\mapsto GN$, and $P_{\\mathcal B}\\dashv G_{\\mathcal B}$.\n4. **Adjunctions $P\\dashv S$.** For an adjunction $P\\dashv S$ with $S$ strong monoidal, the\n   *projection formula map* $P(SL\\otimes M)\\to L\\otimes PM$ is the adjoint of\n   $SL\\otimes M\\to SL\\otimes SPM\\to S(L\\otimes PM)$. If these maps are isomorphisms, they\n   form a projection formula. Then $G_{\\mathcal B}=\\operatorname{mapMod}(S)$, so\n   $P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/_section.md",
+  "place": "node sk-def-sfb-transport, order 861"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Part 1 is [def-sfb-modobj-transport]. Part 2 is [def-sfb-modobj-transport-adjunction].",
+   "uses": [
     "def-sfb-modobj-transport",
-    "def-sfb-modobj-transport-adjunction",
+    "def-sfb-modobj-transport-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Part 3: projection formulas are defined in [def-sfb-projection-formula]. The\nlinearization $P_{\\mathcal B}$ is [def-sfb-modobj-linearization], and\n$G_{\\mathcal B}$ is [def-sfb-modobj-linearization-right-adjoint]. The adjunction\n$P_{\\mathcal B}\\dashv G_{\\mathcal B}$ is [def-sfb-modobj-linearized-adjunction].",
+   "uses": [
     "def-sfb-projection-formula",
     "def-sfb-modobj-linearization",
     "def-sfb-modobj-linearization-right-adjoint",
-    "def-sfb-modobj-linearized-adjunction",
+    "def-sfb-modobj-linearized-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Part 4: the projection formula map and the condition that it is invertible are\n[def-sfb-adjunction-has-projection-formula]. The resulting projection formula is\n[def-sfb-adjunction-projection-formula]. The adjunction\n$P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$ is\n[def-sfb-modobj-linearization-transport-adjunction].",
+   "uses": [
     "def-sfb-adjunction-has-projection-formula",
     "def-sfb-adjunction-projection-formula",
     "def-sfb-modobj-linearization-transport-adjunction"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_not_found"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 861,
-  "blueprint_uses": [
-    "sk-def-sfb-change-of-scalars"
-  ],
-  "blueprint_lean": [
-    "CategoryTheory.Functor.mapMod",
-    "CategoryTheory.Adjunction.mapModAdjunction",
-    "CategoryTheory.Functor.ProjectionFormula",
-    "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
-    "CategoryTheory.Functor.ProjectionFormula.mapModRight",
-    "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
-    "CategoryTheory.Adjunction.HasProjectionFormula",
-    "CategoryTheory.Adjunction.projectionFormula",
-    "CategoryTheory.Adjunction.mapModLeftAdjunction"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.Functor.mapMod",
-    "CategoryTheory.Adjunction.mapModAdjunction",
-    "CategoryTheory.Functor.ProjectionFormula",
-    "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
-    "CategoryTheory.Functor.ProjectionFormula.mapModRight",
-    "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
-    "CategoryTheory.Adjunction.HasProjectionFormula",
-    "CategoryTheory.Adjunction.projectionFormula",
-    "CategoryTheory.Adjunction.mapModLeftAdjunction"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-transport-adjunction",
+  "def-sfb-projection-formula",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-linearization-right-adjoint",
+  "def-sfb-modobj-linearized-adjunction",
+  "def-sfb-adjunction-has-projection-formula",
+  "def-sfb-adjunction-projection-formula",
+  "def-sfb-modobj-linearization-transport-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 861,
+ "blueprint_uses": [
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.mapMod",
+  "CategoryTheory.Adjunction.mapModAdjunction",
+  "CategoryTheory.Functor.ProjectionFormula",
+  "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+  "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+  "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
+  "CategoryTheory.Adjunction.HasProjectionFormula",
+  "CategoryTheory.Adjunction.projectionFormula",
+  "CategoryTheory.Adjunction.mapModLeftAdjunction"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.mapMod",
+  "CategoryTheory.Adjunction.mapModAdjunction",
+  "CategoryTheory.Functor.ProjectionFormula",
+  "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+  "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+  "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
+  "CategoryTheory.Adjunction.HasProjectionFormula",
+  "CategoryTheory.Adjunction.projectionFormula",
+  "CategoryTheory.Adjunction.mapModLeftAdjunction"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

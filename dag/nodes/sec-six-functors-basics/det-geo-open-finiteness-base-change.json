@@ -1,85 +1,90 @@
 {
-  "id": "det-geo-open-finiteness-base-change",
-  "kind": "statement",
-  "title": "Base change for open direct images over a field",
-  "statement": "Let $k$ be a field, let $\\ell\\ne\\operatorname{char}(k)$, let $\\Lambda$ be a\nfinite ring with $\\ell^r\\Lambda=0$ for some $r\\ge1$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type $k$-schemes. Let\n$T$ be a finite-type $k$-scheme, write $X_T=X\\times_kT$, $Y_T=Y\\times_kT$, let\n$j_T:X_T\\hookrightarrow Y_T$ be the base change of $j$, and let\n$g_X:X_T\\to X$, $g_Y:Y_T\\to Y$ be the projections. Then for every\n$K\\in\\Dbc(X_{\\mathrm{ét}},\\Lambda)$ the derived base-change map of\n[sbc-def-base-change-map]\n\n$$\n\\operatorname{BC}(K):g_Y^*Rj_*K\\longrightarrow Rj_{T,*}\\,g_X^*K\n\\quad\\text{in }D^+((Y_T)_{\\mathrm{ét}},\\Lambda)\n$$\n\nis an isomorphism. In particular $Rj_{T,*}g_X^*K$ is bounded constructible.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/det-geo-open-finiteness-base-change.md",
-    "place": "node det-geo-open-finiteness-base-change, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0D6J"
-      }
-    ]
+ "id": "det-geo-open-finiteness-base-change",
+ "blueprint": {
+  "is": "det-geo-open-finiteness-base-change",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Base change for open direct images over a field",
+ "statement": "Let $k$ be a field, let $\\ell\\ne\\operatorname{char}(k)$, let $\\Lambda$ be a\nfinite ring with $\\ell^r\\Lambda=0$ for some $r\\ge1$, and let\n$j:X\\hookrightarrow Y$ be an open immersion of finite-type $k$-schemes. Let\n$T$ be a finite-type $k$-scheme, write $X_T=X\\times_kT$, $Y_T=Y\\times_kT$, let\n$j_T:X_T\\hookrightarrow Y_T$ be the base change of $j$, and let\n$g_X:X_T\\to X$, $g_Y:Y_T\\to Y$ be the projections. Then for every\n$K\\in\\Dbc(X_{\\mathrm{ét}},\\Lambda)$ the derived base-change map of\n[sbc-def-base-change-map]\n\n$$\n\\operatorname{BC}(K):g_Y^*Rj_*K\\longrightarrow Rj_{T,*}\\,g_X^*K\n\\quad\\text{in }D^+((Y_T)_{\\mathrm{ét}},\\Lambda)\n$$\n\nis an isomorphism. In particular $Rj_{T,*}g_X^*K$ is bounded constructible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/det-geo-open-finiteness-base-change.md",
+  "place": "node det-geo-open-finiteness-base-change, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0D6J"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "*Step 0: the base-change map is a morphism of triangulated functors.* Both\n$g_Y^*Rj_*$ and $Rj_{T,*}g_X^*$ are exact functors\n$D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+((Y_T)_{\\mathrm{ét}},\\Lambda)$, and\n$\\operatorname{BC}$ is built from the unit of $g_X^*\\dashv Rg_{X,*}$, the\ncounit of $g_Y^*\\dashv Rg_{Y,*}$ and the composition isomorphisms of derived\ndirect images, all of which commute with shifts and carry distinguished\ntriangles to morphisms of distinguished triangles. Hence for every\ndistinguished triangle $K'\\to K\\to K''\\to K'[1]$ in\n$D^+(X_{\\mathrm{ét}},\\Lambda)$ the maps $\\operatorname{BC}(K')$,\n$\\operatorname{BC}(K)$, $\\operatorname{BC}(K'')$ form a morphism of\ndistinguished triangles, and $\\operatorname{BC}(K[m])=\\operatorname{BC}(K)[m]$.\nBy the five lemma on cohomology sheaves, if two of the three maps are\nisomorphisms, so is the third.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sbc-def-base-change-map"
-  ],
-  "proof": [
-    {
-      "text": "*Step 0: the base-change map is a morphism of triangulated functors.* Both\n$g_Y^*Rj_*$ and $Rj_{T,*}g_X^*$ are exact functors\n$D^+(X_{\\mathrm{ét}},\\Lambda)\\to D^+((Y_T)_{\\mathrm{ét}},\\Lambda)$, and\n$\\operatorname{BC}$ is built from the unit of $g_X^*\\dashv Rg_{X,*}$, the\ncounit of $g_Y^*\\dashv Rg_{Y,*}$ and the composition isomorphisms of derived\ndirect images, all of which commute with shifts and carry distinguished\ntriangles to morphisms of distinguished triangles. Hence for every\ndistinguished triangle $K'\\to K\\to K''\\to K'[1]$ in\n$D^+(X_{\\mathrm{ét}},\\Lambda)$ the maps $\\operatorname{BC}(K')$,\n$\\operatorname{BC}(K)$, $\\operatorname{BC}(K'')$ form a morphism of\ndistinguished triangles, and $\\operatorname{BC}(K[m])=\\operatorname{BC}(K)[m]$.\nBy the five lemma on cohomology sheaves, if two of the three maps are\nisomorphisms, so is the third.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 1: reduction to $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$.* Let\n$\\operatorname{For}$ denote the forgetful functor from $\\Lambda$-modules to\n$\\mathbf Z/\\ell^r\\mathbf Z$-modules along $\\mathbf Z/\\ell^r\\mathbf Z\\to\\Lambda$.\nIt is exact, commutes with $g_X^*$, $g_Y^*$ (computed on sheaves), and with the\nderived direct images $Rj_*$, $Rj_{T,*}$, $Rg_{X,*}$, $Rg_{Y,*}$ (Stacks, Tag\n[0D6J](https://stacks.math.columbia.edu/tag/0D6J); for $\\Lambda$ an\n$\\Fell$-algebra this is [lem-fin-coefficients-forgetful-direct-image]),\ncompatibly with the units and counits of the adjunctions $g^*\\dashv Rg_*$.\nTherefore $\\operatorname{For}(\\operatorname{BC}_\\Lambda(K))=\n\\operatorname{BC}_{\\mathbf Z/\\ell^r}(\\operatorname{For}K)$. The functor\n$\\operatorname{For}$ does not change cohomology sheaves, so it is conservative;\nand a constructible $\\Lambda$-sheaf has constructible underlying abelian sheaf,\nbecause a finite locally constant $\\Lambda$-module sheaf is finite locally\nconstant as an abelian sheaf ($\\Lambda$ is finite). So\n$\\operatorname{For}K\\in\\Dbc(X_{\\mathrm{ét}},\\mathbf Z/\\ell^r\\mathbf Z)$, and it\nsuffices to treat $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$.",
-      "uses": [
-        "lem-fin-coefficients-forgetful-direct-image"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2: constructible sheaves killed by $\\ell$.* Let $F$ be a constructible\nsheaf with $\\ell F=0$. It is a constructible $\\Fell$-sheaf, and by\n[lem-fin-coefficients-forgetful-direct-image] its derived direct images may be\ncomputed with $\\Fell$-coefficients, compatibly with pullback and with the\nbase-change map (as in Step 1). Apply [thm-fin-deligne-generic-open] with\n$S=\\operatorname{Spec}k$: it gives a nonempty open $U\\subset S$, and the only\nnonempty open of $\\operatorname{Spec}k$ is $S$ itself, so $U=S$. Since $T$ is\nof finite type over $k$, it is Noetherian, so the theorem says that\n$\\operatorname{BC}(F)$ is an isomorphism.",
-      "uses": [
-        "lem-fin-coefficients-forgetful-direct-image",
-        "thm-fin-deligne-generic-open"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: constructible sheaves killed by $\\ell^s$.* Induct on $s\\ge1$, the\ncase $s=1$ being Step 2. If $\\ell^sF=0$, consider the short exact sequence of\nsheaves\n\n$$\n0\\longrightarrow\\ell F\\longrightarrow F\\longrightarrow F/\\ell F\\longrightarrow0 .\n$$\n\nThe sheaf $\\ell F$ is the image and $F/\\ell F$ the cokernel of multiplication\nby $\\ell$ on $F$, so both are constructible by [thm-constructible-serre].\nMoreover $\\ell^{s-1}(\\ell F)=0$ and $\\ell(F/\\ell F)=0$. The sequence gives a\ndistinguished triangle in $D^+(X_{\\mathrm{ét}},\\mathbf Z/\\ell^r\\mathbf Z)$; by\ninduction and Step 2, $\\operatorname{BC}(\\ell F)$ and\n$\\operatorname{BC}(F/\\ell F)$ are isomorphisms, so $\\operatorname{BC}(F)$ is\none by Step 0. Since $\\ell^rF=0$ for every\n$\\mathbf Z/\\ell^r\\mathbf Z$-sheaf, this covers all constructible sheaves.",
-      "uses": [
-        "thm-constructible-serre"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4: bounded constructible complexes.* Induct on the number of nonzero\ncohomology sheaves of $K$. If there is one, $K\\simeq\\mathcal H^m(K)[-m]$ and\nSteps 0 and 3 apply. Otherwise, choose $m$ with $\\tau^{\\le m}K$ and\n$\\tau^{>m}K$ both having fewer nonzero cohomology sheaves; both are bounded\nconstructible, and the truncation triangle\n$\\tau^{\\le m}K\\to K\\to\\tau^{>m}K\\to$ together with Step 0 finishes the\ninduction.\n\nFinally, $g_Y^*Rj_*K$ is bounded constructible because $Rj_*K$ is\n([cor-fin-deligne-open-finite-coefficients]) and pullback preserves\nconstructibility of cohomology sheaves; the isomorphism\n$\\operatorname{BC}(K)$ transfers this to $Rj_{T,*}g_X^*K$.",
-      "uses": [
-        "cor-fin-deligne-open-finite-coefficients"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-fin-coefficients-forgetful-direct-image",
-    "thm-fin-deligne-generic-open",
-    "thm-constructible-serre",
-    "cor-fin-deligne-open-finite-coefficients"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/det-geo-open-finiteness-base-change.md",
-    "place": "## Proof"
+  {
+   "text": "*Step 1: reduction to $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$.* Let\n$\\operatorname{For}$ denote the forgetful functor from $\\Lambda$-modules to\n$\\mathbf Z/\\ell^r\\mathbf Z$-modules along $\\mathbf Z/\\ell^r\\mathbf Z\\to\\Lambda$.\nIt is exact, commutes with $g_X^*$, $g_Y^*$ (computed on sheaves), and with the\nderived direct images $Rj_*$, $Rj_{T,*}$, $Rg_{X,*}$, $Rg_{Y,*}$ (Stacks, Tag\n[0D6J](https://stacks.math.columbia.edu/tag/0D6J); for $\\Lambda$ an\n$\\Fell$-algebra this is [lem-fin-coefficients-forgetful-direct-image]),\ncompatibly with the units and counits of the adjunctions $g^*\\dashv Rg_*$.\nTherefore $\\operatorname{For}(\\operatorname{BC}_\\Lambda(K))=\n\\operatorname{BC}_{\\mathbf Z/\\ell^r}(\\operatorname{For}K)$. The functor\n$\\operatorname{For}$ does not change cohomology sheaves, so it is conservative;\nand a constructible $\\Lambda$-sheaf has constructible underlying abelian sheaf,\nbecause a finite locally constant $\\Lambda$-module sheaf is finite locally\nconstant as an abelian sheaf ($\\Lambda$ is finite). So\n$\\operatorname{For}K\\in\\Dbc(X_{\\mathrm{ét}},\\mathbf Z/\\ell^r\\mathbf Z)$, and it\nsuffices to treat $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$.",
+   "uses": [
+    "lem-fin-coefficients-forgetful-direct-image"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "thm-fin-deligne-generic-open",
-    "cor-fin-deligne-open-finite-coefficients",
+  {
+   "text": "*Step 2: constructible sheaves killed by $\\ell$.* Let $F$ be a constructible\nsheaf with $\\ell F=0$. It is a constructible $\\Fell$-sheaf, and by\n[lem-fin-coefficients-forgetful-direct-image] its derived direct images may be\ncomputed with $\\Fell$-coefficients, compatibly with pullback and with the\nbase-change map (as in Step 1). Apply [thm-fin-deligne-generic-open] with\n$S=\\operatorname{Spec}k$: it gives a nonempty open $U\\subset S$, and the only\nnonempty open of $\\operatorname{Spec}k$ is $S$ itself, so $U=S$. Since $T$ is\nof finite type over $k$, it is Noetherian, so the theorem says that\n$\\operatorname{BC}(F)$ is an isomorphism.",
+   "uses": [
     "lem-fin-coefficients-forgetful-direct-image",
-    "sbc-def-base-change-map",
+    "thm-fin-deligne-generic-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: constructible sheaves killed by $\\ell^s$.* Induct on $s\\ge1$, the\ncase $s=1$ being Step 2. If $\\ell^sF=0$, consider the short exact sequence of\nsheaves\n\n$$\n0\\longrightarrow\\ell F\\longrightarrow F\\longrightarrow F/\\ell F\\longrightarrow0 .\n$$\n\nThe sheaf $\\ell F$ is the image and $F/\\ell F$ the cokernel of multiplication\nby $\\ell$ on $F$, so both are constructible by [thm-constructible-serre].\nMoreover $\\ell^{s-1}(\\ell F)=0$ and $\\ell(F/\\ell F)=0$. The sequence gives a\ndistinguished triangle in $D^+(X_{\\mathrm{ét}},\\mathbf Z/\\ell^r\\mathbf Z)$; by\ninduction and Step 2, $\\operatorname{BC}(\\ell F)$ and\n$\\operatorname{BC}(F/\\ell F)$ are isomorphisms, so $\\operatorname{BC}(F)$ is\none by Step 0. Since $\\ell^rF=0$ for every\n$\\mathbf Z/\\ell^r\\mathbf Z$-sheaf, this covers all constructible sheaves.",
+   "uses": [
     "thm-constructible-serre"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: bounded constructible complexes.* Induct on the number of nonzero\ncohomology sheaves of $K$. If there is one, $K\\simeq\\mathcal H^m(K)[-m]$ and\nSteps 0 and 3 apply. Otherwise, choose $m$ with $\\tau^{\\le m}K$ and\n$\\tau^{>m}K$ both having fewer nonzero cohomology sheaves; both are bounded\nconstructible, and the truncation triangle\n$\\tau^{\\le m}K\\to K\\to\\tau^{>m}K\\to$ together with Step 0 finishes the\ninduction.\n\nFinally, $g_Y^*Rj_*K$ is bounded constructible because $Rj_*K$ is\n([cor-fin-deligne-open-finite-coefficients]) and pullback preserves\nconstructibility of cohomology sheaves; the isomorphism\n$\\operatorname{BC}(K)$ transfers this to $Rj_{T,*}g_X^*K$.",
+   "uses": [
+    "cor-fin-deligne-open-finite-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-coefficients-forgetful-direct-image",
+  "thm-fin-deligne-generic-open",
+  "thm-constructible-serre",
+  "cor-fin-deligne-open-finite-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/det-geo-open-finiteness-base-change.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "thm-fin-deligne-generic-open",
+  "cor-fin-deligne-open-finite-coefficients",
+  "lem-fin-coefficients-forgetful-direct-image",
+  "sbc-def-base-change-map",
+  "thm-constructible-serre"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

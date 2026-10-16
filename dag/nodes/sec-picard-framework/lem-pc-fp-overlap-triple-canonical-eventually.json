@@ -1,5 +1,14 @@
 {
  "id": "lem-pc-fp-overlap-triple-canonical-eventually",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Finite-stage canonical triple overlap equation",
  "statement": "theorem finitePresentation_overlap_triple_canonical_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (a b d : U.I₀)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    :\n    ∀ (k : I) (hjk : j ≤ k),\n      let q₀ := overlapStageMap R f hij hjk\n      let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=\n        U.pullback₁ q₀\n      let p₀ := overlapLimitMap R c f (hij.trans hjk)\n      ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f,\n        (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →\n        (T.pull (p := p₀) (α := fun a ↦ a)\n          (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →\n        ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →\n          let q := overlapStageMap R f hij (hjk.trans hkm)\n          let V : (pullback f (Spec.map\n              (R.map (homOfLE (hij.trans (hjk.trans hkm)))))).OpenCover.{u} :=\n            U.pullback₁ q\n          let r := overlapStageMap R f (hij.trans hjk) hkm\n          let s := overlapRefinementHom U q₀ q r\n            (overlapStageMap_comp R f hij hjk hkm)\n          let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)\n            (fun a ↦ overlapRefinementHom_map U q₀ q r\n              (overlapStageMap_comp R f hij hjk hkm) a)\n          ∃ sq : ∀ x y, ChosenPullback (V.f x) (V.f y),\n          ∃ sq₃ : ∀ x y z, ChosenPullback₃ (sq x y) (sq y z) (sq x z),\n            T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n                (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n                (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n                (sq₃ a b d).w₁ (sq₃ a b d).w₃",
@@ -72,14 +81,6 @@
   "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually",
   "date": "2026-10-14",
   "group": "G3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-fp-overlap-triple-eventually",
-   "place": "split of the triple defect proof",
-   "via": []
-  }
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",

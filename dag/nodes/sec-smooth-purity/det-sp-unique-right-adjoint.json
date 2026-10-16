@@ -1,51 +1,56 @@
 {
-  "id": "det-sp-unique-right-adjoint",
-  "kind": "statement",
-  "title": "Right adjoints are unique up to a unique counit-compatible isomorphism",
-  "statement": "Let $F:\\mathcal C\\to\\mathcal D$ be a functor with two right adjoints $G,J:\\mathcal D\\to\\mathcal C$,\nwith counits $\\varepsilon^G:FG\\to\\mathrm{id}$ and $\\varepsilon^J:FJ\\to\\mathrm{id}$. For\n$K\\in\\mathcal D$ let $\\gamma(K):GK\\to JK$ be the $J$-transpose of\n$\\varepsilon^G(K):FGK\\to K$, i.e. the unique morphism with\n$\\varepsilon^J(K)\\circ F(\\gamma(K))=\\varepsilon^G(K)$, and let $\\delta(K):JK\\to GK$\nbe the $G$-transpose of $\\varepsilon^J(K)$. Then $\\gamma$ and $\\delta$ are natural\ntransformations, mutually inverse, and $\\gamma$ is the only natural\ntransformation $G\\to J$ (indeed the only family of morphisms) compatible with\nthe counits.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
-    "place": "node det-sp-unique-right-adjoint, order None"
+ "id": "det-sp-unique-right-adjoint",
+ "blueprint": {
+  "is": "det-sp-unique-right-adjoint",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Right adjoints are unique up to a unique counit-compatible isomorphism",
+ "statement": "Let $F:\\mathcal C\\to\\mathcal D$ be a functor with two right adjoints $G,J:\\mathcal D\\to\\mathcal C$,\nwith counits $\\varepsilon^G:FG\\to\\mathrm{id}$ and $\\varepsilon^J:FJ\\to\\mathrm{id}$. For\n$K\\in\\mathcal D$ let $\\gamma(K):GK\\to JK$ be the $J$-transpose of\n$\\varepsilon^G(K):FGK\\to K$, i.e. the unique morphism with\n$\\varepsilon^J(K)\\circ F(\\gamma(K))=\\varepsilon^G(K)$, and let $\\delta(K):JK\\to GK$\nbe the $G$-transpose of $\\varepsilon^J(K)$. Then $\\gamma$ and $\\delta$ are natural\ntransformations, mutually inverse, and $\\gamma$ is the only natural\ntransformation $G\\to J$ (indeed the only family of morphisms) compatible with\nthe counits.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
+  "place": "node det-sp-unique-right-adjoint, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Transposes.* For an adjunction $F\\dashv J$ with counit $\\varepsilon^J$, the map\n$\\operatorname{Hom}(A,JK)\\to\\operatorname{Hom}(FA,K)$, $\\phi\\mapsto\\varepsilon^J(K)\\circ F\\phi$, is\na bijection, natural in $A$ and $K$. So $\\gamma(K)$ and $\\delta(K)$ exist and are\nunique.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*Transposes.* For an adjunction $F\\dashv J$ with counit $\\varepsilon^J$, the map\n$\\operatorname{Hom}(A,JK)\\to\\operatorname{Hom}(FA,K)$, $\\phi\\mapsto\\varepsilon^J(K)\\circ F\\phi$, is\na bijection, natural in $A$ and $K$. So $\\gamma(K)$ and $\\delta(K)$ exist and are\nunique.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Naturality.* For $u:K\\to K'$, both $\\gamma(K')\\circ Gu$ and $Ju\\circ\\gamma(K)$\nhave $J$-transpose $u\\circ\\varepsilon^G(K)$: the first by naturality of\n$\\varepsilon^G$, $\\varepsilon^J(K')\\circ F\\gamma(K')\\circ FGu=\\varepsilon^G(K')\\circ FGu=u\\circ\\varepsilon^G(K)$;\nthe second by naturality of $\\varepsilon^J$,\n$\\varepsilon^J(K')\\circ FJu\\circ F\\gamma(K)=u\\circ\\varepsilon^J(K)\\circ F\\gamma(K)=u\\circ\\varepsilon^G(K)$.\nHence they are equal. Likewise for $\\delta$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Inverse.* The $G$-transpose of $\\delta(K)\\circ\\gamma(K)$ is\n$\\varepsilon^G(K)\\circ F\\delta(K)\\circ F\\gamma(K)=\\varepsilon^J(K)\\circ F\\gamma(K)=\\varepsilon^G(K)$,\nwhich is also the $G$-transpose of $\\mathrm{id}_{GK}$; so\n$\\delta(K)\\circ\\gamma(K)=\\mathrm{id}$. Symmetrically\n$\\gamma(K)\\circ\\delta(K)=\\mathrm{id}_{JK}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Uniqueness.* If $\\gamma'(K):GK\\to JK$ satisfies\n$\\varepsilon^J(K)\\circ F\\gamma'(K)=\\varepsilon^G(K)$, its $J$-transpose is\n$\\varepsilon^G(K)$, the same as that of $\\gamma(K)$, so $\\gamma'(K)=\\gamma(K)$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
-    "place": "## Proof"
+  {
+   "text": "*Naturality.* For $u:K\\to K'$, both $\\gamma(K')\\circ Gu$ and $Ju\\circ\\gamma(K)$\nhave $J$-transpose $u\\circ\\varepsilon^G(K)$: the first by naturality of\n$\\varepsilon^G$, $\\varepsilon^J(K')\\circ F\\gamma(K')\\circ FGu=\\varepsilon^G(K')\\circ FGu=u\\circ\\varepsilon^G(K)$;\nthe second by naturality of $\\varepsilon^J$,\n$\\varepsilon^J(K')\\circ FJu\\circ F\\gamma(K)=u\\circ\\varepsilon^J(K)\\circ F\\gamma(K)=u\\circ\\varepsilon^G(K)$.\nHence they are equal. Likewise for $\\delta$.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Inverse.* The $G$-transpose of $\\delta(K)\\circ\\gamma(K)$ is\n$\\varepsilon^G(K)\\circ F\\delta(K)\\circ F\\gamma(K)=\\varepsilon^J(K)\\circ F\\gamma(K)=\\varepsilon^G(K)$,\nwhich is also the $G$-transpose of $\\mathrm{id}_{GK}$; so\n$\\delta(K)\\circ\\gamma(K)=\\mathrm{id}$. Symmetrically\n$\\gamma(K)\\circ\\delta(K)=\\mathrm{id}_{JK}$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Uniqueness.* If $\\gamma'(K):GK\\to JK$ satisfies\n$\\varepsilon^J(K)\\circ F\\gamma'(K)=\\varepsilon^G(K)$, its $J$-transpose is\n$\\varepsilon^G(K)$, the same as that of $\\gamma(K)$, so $\\gamma'(K)=\\gamma(K)$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

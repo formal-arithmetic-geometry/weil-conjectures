@@ -1,63 +1,68 @@
 {
-  "id": "det-cor-jacobian-torsion-structure",
-  "kind": "statement",
-  "title": "The group structure of $A(k)[n]$",
-  "statement": "Let $k$ be algebraically closed, let $A/k$ be an abelian variety of\ndimension $g$, and let $n>0$ be invertible in $k$. Then there is an\nisomorphism of groups\n\n$$\nA[n](k)=A(k)[n]\\simeq(\\Z/n\\Z)^{2g}.\n$$\n\nThe set of such isomorphisms is a torsor under\n$\\mathrm{GL}_{2g}(\\Z/n\\Z)$; the argument below produces no distinguished\nelement of it, which is the sense in which the isomorphism is not\ncanonical. In particular $J(C)[n](k)\\simeq(\\Z/n\\Z)^{2g}$ for $C/k$ a smooth\nproper connected curve of genus $g$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-structure.md",
-    "place": "node det-cor-jacobian-torsion-structure, order None"
+ "id": "det-cor-jacobian-torsion-structure",
+ "blueprint": {
+  "is": "det-cor-jacobian-torsion-structure",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The group structure of $A(k)[n]$",
+ "statement": "Let $k$ be algebraically closed, let $A/k$ be an abelian variety of\ndimension $g$, and let $n>0$ be invertible in $k$. Then there is an\nisomorphism of groups\n\n$$\nA[n](k)=A(k)[n]\\simeq(\\Z/n\\Z)^{2g}.\n$$\n\nThe set of such isomorphisms is a torsor under\n$\\mathrm{GL}_{2g}(\\Z/n\\Z)$; the argument below produces no distinguished\nelement of it, which is the sense in which the isomorphism is not\ncanonical. In particular $J(C)[n](k)\\simeq(\\Z/n\\Z)^{2g}$ for $C/k$ a smooth\nproper connected curve of genus $g$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-structure.md",
+  "place": "node det-cor-jacobian-torsion-structure, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The group $A(k)$ is commutative ([sk-cor-av-commutative]), so every\n$A(k)[m]$ is a finite abelian group, of order $m^{2g}$ for $m$ invertible\nin $k$ by [det-cor-jacobian-torsion-kernel] (2).",
+   "uses": [
+    "det-cor-jacobian-torsion-kernel"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The group $A(k)$ is commutative ([sk-cor-av-commutative]), so every\n$A(k)[m]$ is a finite abelian group, of order $m^{2g}$ for $m$ invertible\nin $k$ by [det-cor-jacobian-torsion-kernel] (2).",
-      "uses": [
-        "det-cor-jacobian-torsion-kernel"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Prime-power part.* Let $q$ be a prime dividing $n$ and let $q^a$ be the\nexact power of $q$ dividing $n$; then $q$ and $q^a$ are invertible in $k$.\nThe group $G=A(k)[q^a]$ has order $q^{2ga}$ and is killed by $q^a$. By the\nclassification of finite abelian groups,\n$G\\simeq\\bigoplus_{i=1}^s\\Z/q^{e_i}\\Z$ with $1\\le e_i\\le a$. The subgroup\nof $G$ killed by $q$ is $A(k)[q]$, of order $q^{2g}$; on the other hand it\nis $\\bigoplus_i q^{e_i-1}\\Z/q^{e_i}\\Z\\simeq(\\Z/q\\Z)^s$, of order $q^s$.\nHence $s=2g$. Comparing orders, $\\sum_{i=1}^{2g}e_i=2ga$ with every\n$e_i\\le a$, which forces $e_i=a$ for all $i$. Thus\n$A(k)[q^a]\\simeq(\\Z/q^a\\Z)^{2g}$. (Equivalently, since $A(k)$ is\ndivisible, this is [sk-prop-av-divisible-structure] with $r=2g$.)",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Combining primes.* Write $n=\\prod_qq^{a_q}$. A finite abelian group killed\nby $n$ is the direct sum of its $q$-primary parts, and the $q$-primary part\nof $A(k)[n]$ is $A(k)[q^{a_q}]$. Hence\n$$\nA(k)[n]=\\bigoplus_{q\\mid n}A(k)[q^{a_q}]\\simeq\\bigoplus_{q\\mid n}(\\Z/q^{a_q}\\Z)^{2g}\\simeq(\\Z/n\\Z)^{2g},\n$$\nthe last step by the Chinese remainder theorem\n$\\Z/n\\Z\\simeq\\prod_q\\Z/q^{a_q}\\Z$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Non-canonicity.* Two isomorphisms $\\phi,\\psi\\colon A(k)[n]\\to(\\Z/n\\Z)^{2g}$\ndiffer by $\\psi\\circ\\phi^{-1}\\in\\mathrm{GL}_{2g}(\\Z/n\\Z)$, and every element\nof this group arises; the construction above involves choosing cyclic\ndecompositions, so it singles out no element.\n\nFor $A=J(C)$, which is an abelian variety of dimension $g$ by\n[sk-thm-picard-main], this gives $J(C)[n](k)\\simeq(\\Z/n\\Z)^{2g}$.",
-      "uses": [
-        "sk-thm-picard-main"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-cor-jacobian-torsion-kernel",
+  {
+   "text": "*Prime-power part.* Let $q$ be a prime dividing $n$ and let $q^a$ be the\nexact power of $q$ dividing $n$; then $q$ and $q^a$ are invertible in $k$.\nThe group $G=A(k)[q^a]$ has order $q^{2ga}$ and is killed by $q^a$. By the\nclassification of finite abelian groups,\n$G\\simeq\\bigoplus_{i=1}^s\\Z/q^{e_i}\\Z$ with $1\\le e_i\\le a$. The subgroup\nof $G$ killed by $q$ is $A(k)[q]$, of order $q^{2g}$; on the other hand it\nis $\\bigoplus_i q^{e_i-1}\\Z/q^{e_i}\\Z\\simeq(\\Z/q\\Z)^s$, of order $q^s$.\nHence $s=2g$. Comparing orders, $\\sum_{i=1}^{2g}e_i=2ga$ with every\n$e_i\\le a$, which forces $e_i=a$ for all $i$. Thus\n$A(k)[q^a]\\simeq(\\Z/q^a\\Z)^{2g}$. (Equivalently, since $A(k)$ is\ndivisible, this is [sk-prop-av-divisible-structure] with $r=2g$.)",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Combining primes.* Write $n=\\prod_qq^{a_q}$. A finite abelian group killed\nby $n$ is the direct sum of its $q$-primary parts, and the $q$-primary part\nof $A(k)[n]$ is $A(k)[q^{a_q}]$. Hence\n$$\nA(k)[n]=\\bigoplus_{q\\mid n}A(k)[q^{a_q}]\\simeq\\bigoplus_{q\\mid n}(\\Z/q^{a_q}\\Z)^{2g}\\simeq(\\Z/n\\Z)^{2g},\n$$\nthe last step by the Chinese remainder theorem\n$\\Z/n\\Z\\simeq\\prod_q\\Z/q^{a_q}\\Z$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Non-canonicity.* Two isomorphisms $\\phi,\\psi\\colon A(k)[n]\\to(\\Z/n\\Z)^{2g}$\ndiffer by $\\psi\\circ\\phi^{-1}\\in\\mathrm{GL}_{2g}(\\Z/n\\Z)$, and every element\nof this group arises; the construction above involves choosing cyclic\ndecompositions, so it singles out no element.\n\nFor $A=J(C)$, which is an abelian variety of dimension $g$ by\n[sk-thm-picard-main], this gives $J(C)[n](k)\\simeq(\\Z/n\\Z)^{2g}$.",
+   "uses": [
     "sk-thm-picard-main"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-structure.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-cor-jacobian-torsion-kernel",
-    "sk-cor-av-commutative",
-    "sk-prop-av-divisible-structure"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-cor-jacobian-torsion-kernel",
+  "sk-thm-picard-main"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-structure.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-cor-jacobian-torsion-kernel",
+  "sk-cor-av-commutative",
+  "sk-prop-av-divisible-structure"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,73 +1,78 @@
 {
-  "id": "det-pe-unbounded-classical-bounds",
-  "kind": "statement",
-  "title": "Uniform cohomological bounds in the finite-type range",
-  "statement": "Let $k$ be a finite or algebraically closed field, $X$ and $Y$ schemes of finite\ntype over $k$, $g\\colon X\\to Y$ a morphism of finite type, and put\n$e_X=2\\dim X+1$, $e_Y=2\\dim Y+1$. Let $G$ be a torsion sheaf on $X_{\\Et}$.\n\n1. If $U=\\varprojlim_iU_i$ is a pro-étale affine presentation of an object of\n   $X_{\\Proet}$ ($U_i$ affine étale over $X$), then\n   $H^q(U_{\\Proet},(\\nu_X^*G)|_U)=0$ for $q>e_X$.\n2. If $V=\\varprojlim_iV_i$ is a pro-étale affine presentation of an object of\n   $Y_{\\Proet}$ ($V_i$ affine étale over $Y$), then\n   $H^q\\bigl((X\\times_YV)_{\\Proet},(\\nu_X^*G)|_{X\\times_YV}\\bigr)=0$ for\n   $q>e_X$.\n3. $R^qg_{\\Et,*}G=0$ for $q>e_X$.\n\nThe same statements hold with $X$ replaced by $Y$ and $e_X$ by $e_Y$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
-    "place": "node det-pe-unbounded-classical-bounds, order None"
+ "id": "det-pe-unbounded-classical-bounds",
+ "blueprint": {
+  "is": "det-pe-unbounded-classical-bounds",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Uniform cohomological bounds in the finite-type range",
+ "statement": "Let $k$ be a finite or algebraically closed field, $X$ and $Y$ schemes of finite\ntype over $k$, $g\\colon X\\to Y$ a morphism of finite type, and put\n$e_X=2\\dim X+1$, $e_Y=2\\dim Y+1$. Let $G$ be a torsion sheaf on $X_{\\Et}$.\n\n1. If $U=\\varprojlim_iU_i$ is a pro-étale affine presentation of an object of\n   $X_{\\Proet}$ ($U_i$ affine étale over $X$), then\n   $H^q(U_{\\Proet},(\\nu_X^*G)|_U)=0$ for $q>e_X$.\n2. If $V=\\varprojlim_iV_i$ is a pro-étale affine presentation of an object of\n   $Y_{\\Proet}$ ($V_i$ affine étale over $Y$), then\n   $H^q\\bigl((X\\times_YV)_{\\Proet},(\\nu_X^*G)|_{X\\times_YV}\\bigr)=0$ for\n   $q>e_X$.\n3. $R^qg_{\\Et,*}G=0$ for $q>e_X$.\n\nThe same statements hold with $X$ replaced by $Y$ and $e_X$ by $e_Y$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
+  "place": "node det-pe-unbounded-classical-bounds, order None"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd"
+ ],
+ "proof": [
+  {
+   "text": "By [det-base-field-cd-finite-field], $\\operatorname{cd}_{\\rm tor}(k)\\leq1$. Let $W$\nbe a scheme of finite type over $k$ admitting an étale morphism to $X$. Then\n$\\dim W\\leq\\dim X$, since étale morphisms have discrete fibres and are\nopen, and [thm-sc-finite-type-torsion-cd] gives\n$\\operatorname{cd}_{\\rm tor}(W)\\leq2\\dim X+1=e_X$.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-sc-etale-torsion-cd"
-  ],
-  "proof": [
-    {
-      "text": "By [det-base-field-cd-finite-field], $\\operatorname{cd}_{\\rm tor}(k)\\leq1$. Let $W$\nbe a scheme of finite type over $k$ admitting an étale morphism to $X$. Then\n$\\dim W\\leq\\dim X$, since étale morphisms have discrete fibres and are\nopen, and [thm-sc-finite-type-torsion-cd] gives\n$\\operatorname{cd}_{\\rm tor}(W)\\leq2\\dim X+1=e_X$.",
-      "uses": [
-        "thm-sc-finite-type-torsion-cd"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1).* Each $U_i$ is affine étale over $X$, hence of finite type over $k$, so\n$\\operatorname{cd}_{\\rm tor}(U_i)\\leq e_X$ for all $i$. The scheme $U$ is the limit\nof the qcqs schemes $U_i$ along affine transition maps, so\n[lem-sc-cd-affine-limit] gives $\\operatorname{cd}_{\\rm tor}(U)\\leq e_X$. The slice\n$X_{\\Proet}/U$ is $U_{\\Proet}$ and $(\\nu_X^*G)|_U\\cong\\nu_U^*(G|_U)$, so the\ncohomology comparison ([sk-prop-sf-comparison]) gives\n$H^q(U_{\\Proet},(\\nu_X^*G)|_U)\\cong H^q(U_{\\Et},G|_U)=0$ for $q>e_X$.",
-      "uses": [
-        "lem-sc-cd-affine-limit",
-        "sk-prop-sf-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(2).* Each $V_i$ is affine and étale over $Y$, hence of finite type over $k$, and\n$X\\times_YV_i$ is of finite type over $k$ and étale over $X$. So\n$\\operatorname{cd}_{\\rm tor}(X\\times_YV_i)\\leq e_X$. The scheme\n$X\\times_YV=\\varprojlim_iX\\times_YV_i$ is a limit of qcqs schemes along affine\ntransition maps (base changes of the affine maps $V_j\\to V_i$), and\n[lem-sc-cd-affine-limit] and the cohomology comparison conclude as in (1).",
-      "uses": [
-        "lem-sc-cd-affine-limit"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3).* The sheaf $R^qg_{\\Et,*}G$ is the sheafification of\n$V\\mapsto H^q((X\\times_YV)_{\\Et},G)$ on affine étale $V\\to Y$. Each\n$X\\times_YV$ is of finite type over $k$ and étale over $X$, so these groups vanish\nfor $q>e_X$.\n\nThe statements for $Y$ are the case $g=\\mathrm{id}_Y$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "thm-sc-finite-type-torsion-cd",
+  {
+   "text": "*(1).* Each $U_i$ is affine étale over $X$, hence of finite type over $k$, so\n$\\operatorname{cd}_{\\rm tor}(U_i)\\leq e_X$ for all $i$. The scheme $U$ is the limit\nof the qcqs schemes $U_i$ along affine transition maps, so\n[lem-sc-cd-affine-limit] gives $\\operatorname{cd}_{\\rm tor}(U)\\leq e_X$. The slice\n$X_{\\Proet}/U$ is $U_{\\Proet}$ and $(\\nu_X^*G)|_U\\cong\\nu_U^*(G|_U)$, so the\ncohomology comparison ([sk-prop-sf-comparison]) gives\n$H^q(U_{\\Proet},(\\nu_X^*G)|_U)\\cong H^q(U_{\\Et},G|_U)=0$ for $q>e_X$.",
+   "uses": [
     "lem-sc-cd-affine-limit",
     "sk-prop-sf-comparison"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "thm-sc-finite-type-torsion-cd",
-    "lem-sc-cd-affine-limit",
-    "det-base-field-cd-finite-field",
-    "sk-prop-sf-comparison",
-    "def-sc-etale-torsion-cd"
-  ],
-  "uses_not_cited": [
-    "def-sc-etale-torsion-cd"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*(2).* Each $V_i$ is affine and étale over $Y$, hence of finite type over $k$, and\n$X\\times_YV_i$ is of finite type over $k$ and étale over $X$. So\n$\\operatorname{cd}_{\\rm tor}(X\\times_YV_i)\\leq e_X$. The scheme\n$X\\times_YV=\\varprojlim_iX\\times_YV_i$ is a limit of qcqs schemes along affine\ntransition maps (base changes of the affine maps $V_j\\to V_i$), and\n[lem-sc-cd-affine-limit] and the cohomology comparison conclude as in (1).",
+   "uses": [
+    "lem-sc-cd-affine-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3).* The sheaf $R^qg_{\\Et,*}G$ is the sheafification of\n$V\\mapsto H^q((X\\times_YV)_{\\Et},G)$ on affine étale $V\\to Y$. Each\n$X\\times_YV$ is of finite type over $k$ and étale over $X$, so these groups vanish\nfor $q>e_X$.\n\nThe statements for $Y$ are the case $g=\\mathrm{id}_Y$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-finite-type-torsion-cd",
+  "lem-sc-cd-affine-limit",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "thm-sc-finite-type-torsion-cd",
+  "lem-sc-cd-affine-limit",
+  "det-base-field-cd-finite-field",
+  "sk-prop-sf-comparison",
+  "def-sc-etale-torsion-cd"
+ ],
+ "uses_not_cited": [
+  "def-sc-etale-torsion-cd"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

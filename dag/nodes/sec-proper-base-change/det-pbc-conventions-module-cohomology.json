@@ -1,68 +1,73 @@
 {
-  "id": "det-pbc-conventions-module-cohomology",
-  "kind": "statement",
-  "title": "Module cohomology is abelian cohomology",
-  "statement": "Let $\\Lambda$ be a commutative ring, let $T$ be a scheme and write\n$\\mathrm{For}:\\Mod(T_{\\Et},\\Lambda)\\to\\Ab(T_{\\Et})$ for the functor forgetting\nthe $\\Lambda$-module structure.\n\n1. If $I$ is an injective object of $\\Mod(T_{\\Et},\\Lambda)$, then for every\n   étale $U\\to T$ one has $H^q(U_{\\Et},\\mathrm{For}\\,I)=0$ for $q>0$.\n2. For every sheaf $F$ of $\\Lambda$-modules and every étale $U\\to T$, the\n   derived functors of $\\Gamma(U,-)$ computed in $\\Mod(T_{\\Et},\\Lambda)$ and\n   in $\\Ab(T_{\\Et})$ agree: $\\mathrm{For}\\,H^q_{\\Lambda}(U,F)\\cong\n   H^q(U,\\mathrm{For}\\,F)$ canonically.\n3. For a morphism $u:S\\to T$ and $F\\in\\Mod(S_{\\Et},\\Lambda)$ there are\n   canonical isomorphisms $\\mathrm{For}\\,R^qu_*F\\cong R^qu_*\\mathrm{For}\\,F$,\n   and for $K\\in D^+(S_{\\Et},\\Lambda)$ a canonical isomorphism\n   $\\mathrm{For}\\,Ru_*K\\cong Ru_*\\mathrm{For}\\,K$ in $D^+(T_{\\Et},\\mathbf Z)$.\n\nThe forgetful functor need not preserve injectives; only the acyclicity of\n(1) is used.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc-conventions/sk-def-pbc-conventions-module-cohomology.md",
-    "place": "node det-pbc-conventions-module-cohomology, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03FD"
-      }
-    ]
+ "id": "det-pbc-conventions-module-cohomology",
+ "blueprint": {
+  "is": "det-pbc-conventions-module-cohomology",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Module cohomology is abelian cohomology",
+ "statement": "Let $\\Lambda$ be a commutative ring, let $T$ be a scheme and write\n$\\mathrm{For}:\\Mod(T_{\\Et},\\Lambda)\\to\\Ab(T_{\\Et})$ for the functor forgetting\nthe $\\Lambda$-module structure.\n\n1. If $I$ is an injective object of $\\Mod(T_{\\Et},\\Lambda)$, then for every\n   étale $U\\to T$ one has $H^q(U_{\\Et},\\mathrm{For}\\,I)=0$ for $q>0$.\n2. For every sheaf $F$ of $\\Lambda$-modules and every étale $U\\to T$, the\n   derived functors of $\\Gamma(U,-)$ computed in $\\Mod(T_{\\Et},\\Lambda)$ and\n   in $\\Ab(T_{\\Et})$ agree: $\\mathrm{For}\\,H^q_{\\Lambda}(U,F)\\cong\n   H^q(U,\\mathrm{For}\\,F)$ canonically.\n3. For a morphism $u:S\\to T$ and $F\\in\\Mod(S_{\\Et},\\Lambda)$ there are\n   canonical isomorphisms $\\mathrm{For}\\,R^qu_*F\\cong R^qu_*\\mathrm{For}\\,F$,\n   and for $K\\in D^+(S_{\\Et},\\Lambda)$ a canonical isomorphism\n   $\\mathrm{For}\\,Ru_*K\\cong Ru_*\\mathrm{For}\\,K$ in $D^+(T_{\\Et},\\mathbf Z)$.\n\nThe forgetful functor need not preserve injectives; only the acyclicity of\n(1) is used.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc-conventions/sk-def-pbc-conventions-module-cohomology.md",
+  "place": "node det-pbc-conventions-module-cohomology, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03FD"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "*(1)* Let $\\mathfrak U=\\{U_i\\to U\\}_{i\\in A}$ be an étale covering of an étale\n$T$-scheme $U$, and for a finite tuple $i_0,\\dots,i_p$ write\n$j_{i_0\\cdots i_p}:U_{i_0\\cdots i_p}=U_{i_0}\\times_U\\cdots\\times_UU_{i_p}\\to T$.\nLet $\\Lambda_{V}=j_!\\Lambda$ denote the extension by zero of the constant\nmodule sheaf along an étale $j:V\\to T$; it represents\n$G\\mapsto G(V)$ on $\\Mod(T_{\\Et},\\Lambda)$. The complex of module sheaves\n\n$$\n\\cdots\\to\\bigoplus_{i_0,i_1}\\Lambda_{U_{i_0i_1}}\\to\n\\bigoplus_{i_0}\\Lambda_{U_{i_0}}\\to\\Lambda_U\\to0\n$$\n\n(alternating sums of the projections as differentials) is exact: on the\nstalk at a geometric point $\\bar t$ it is the augmented chain complex of\n$\\Lambda$-linear combinations on the simplicial set\n$E_p=\\{(i_0,\\dots,i_p,\\text{lift of }\\bar t)\\}$ over each lift of $\\bar t$\nto $U$, and since $\\mathfrak U$ is a covering each lift of $\\bar t$ to $U$\nlifts to some $U_i$, so this simplicial set is a cone (insert a fixed index in\nfront) and its augmented chain complex is contractible. Applying the exact\nfunctor $\\Hom_\\Lambda(-,I)$ gives the Čech complex\n$\\check C^\\bullet(\\mathfrak U,I)$, augmented by $I(U)$, which is therefore\nexact. So $\\check H^p(\\mathfrak U,\\mathrm{For}\\,I)=0$ for $p>0$ for all\ncoverings of all étale $U$. By Cartan's criterion (Stacks Project, Cohomology on Sites, section on Čech\ncohomology and cohomology; this is the argument of Tag 03FD),\nan abelian sheaf whose higher Čech cohomology vanishes for every covering of\nevery object has vanishing higher cohomology on every object. This proves (1).",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof": [
-    {
-      "text": "*(1)* Let $\\mathfrak U=\\{U_i\\to U\\}_{i\\in A}$ be an étale covering of an étale\n$T$-scheme $U$, and for a finite tuple $i_0,\\dots,i_p$ write\n$j_{i_0\\cdots i_p}:U_{i_0\\cdots i_p}=U_{i_0}\\times_U\\cdots\\times_UU_{i_p}\\to T$.\nLet $\\Lambda_{V}=j_!\\Lambda$ denote the extension by zero of the constant\nmodule sheaf along an étale $j:V\\to T$; it represents\n$G\\mapsto G(V)$ on $\\Mod(T_{\\Et},\\Lambda)$. The complex of module sheaves\n\n$$\n\\cdots\\to\\bigoplus_{i_0,i_1}\\Lambda_{U_{i_0i_1}}\\to\n\\bigoplus_{i_0}\\Lambda_{U_{i_0}}\\to\\Lambda_U\\to0\n$$\n\n(alternating sums of the projections as differentials) is exact: on the\nstalk at a geometric point $\\bar t$ it is the augmented chain complex of\n$\\Lambda$-linear combinations on the simplicial set\n$E_p=\\{(i_0,\\dots,i_p,\\text{lift of }\\bar t)\\}$ over each lift of $\\bar t$\nto $U$, and since $\\mathfrak U$ is a covering each lift of $\\bar t$ to $U$\nlifts to some $U_i$, so this simplicial set is a cone (insert a fixed index in\nfront) and its augmented chain complex is contractible. Applying the exact\nfunctor $\\Hom_\\Lambda(-,I)$ gives the Čech complex\n$\\check C^\\bullet(\\mathfrak U,I)$, augmented by $I(U)$, which is therefore\nexact. So $\\check H^p(\\mathfrak U,\\mathrm{For}\\,I)=0$ for $p>0$ for all\ncoverings of all étale $U$. By Cartan's criterion (Stacks Project, Cohomology on Sites, section on Čech\ncohomology and cohomology; this is the argument of Tag 03FD),\nan abelian sheaf whose higher Čech cohomology vanishes for every covering of\nevery object has vanishing higher cohomology on every object. This proves (1).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(2)* Choose an injective resolution $F\\to I^\\bullet$ in\n$\\Mod(T_{\\Et},\\Lambda)$. Since $\\mathrm{For}$ is exact,\n$\\mathrm{For}\\,F\\to\\mathrm{For}\\,I^\\bullet$ is a resolution, by (1) consisting\nof $\\Gamma(U,-)$-acyclic abelian sheaves. By the acyclic-resolution lemma\n[lemma-weil-pbc-leray-acyclicity],\n$H^q(\\Gamma(U,\\mathrm{For}\\,I^\\bullet))\\cong H^q(U,\\mathrm{For}\\,F)$, while\nthe left side is by definition $\\mathrm{For}\\,H^q_\\Lambda(U,F)$. Independence\nof the resolution follows from uniqueness of comparison maps up to homotopy.",
-      "uses": [
-        "lemma-weil-pbc-leray-acyclicity"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3)* For an abelian sheaf $G$ on $S_{\\Et}$, $R^qu_*G$ is the sheafification\nof $V\\mapsto H^q(S\\times_TV,G)$ on étale $V\\to T$, and the same holds for\nmodule sheaves with module cohomology. For an injective module sheaf $I$ on\n$S_{\\Et}$, (1) applied on $S$ to the étale objects $S\\times_TV$ gives\n$R^qu_*\\mathrm{For}\\,I=0$ for $q>0$. Thus for a module-injective resolution\n$F\\to I^\\bullet$, the resolution $\\mathrm{For}\\,F\\to\\mathrm{For}\\,I^\\bullet$ is\n$u_*$-acyclic, and [lemma-weil-pbc-leray-acyclicity] gives\n$R^qu_*\\mathrm{For}\\,F\\cong H^q(u_*\\mathrm{For}\\,I^\\bullet)=\n\\mathrm{For}\\,H^q(u_*I^\\bullet)=\\mathrm{For}\\,R^qu_*F$, using\n$\\mathrm{For}\\circ u_*=u_*\\circ\\mathrm{For}$. For $K\\in D^+(S_{\\Et},\\Lambda)$\nchoose a bounded below complex of injective module sheaves $I^\\bullet$\nquasi-isomorphic to $K$; then $\\mathrm{For}\\,I^\\bullet$ is a bounded below\ncomplex of $u_*$-acyclic sheaves quasi-isomorphic to $\\mathrm{For}\\,K$, and\nthe complex form of [lemma-weil-pbc-leray-acyclicity] identifies\n$Ru_*\\mathrm{For}\\,K$ with $u_*\\mathrm{For}\\,I^\\bullet=\\mathrm{For}\\,u_*I^\\bullet\n=\\mathrm{For}\\,Ru_*K$.",
-      "uses": [
-        "lemma-weil-pbc-leray-acyclicity"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "*(2)* Choose an injective resolution $F\\to I^\\bullet$ in\n$\\Mod(T_{\\Et},\\Lambda)$. Since $\\mathrm{For}$ is exact,\n$\\mathrm{For}\\,F\\to\\mathrm{For}\\,I^\\bullet$ is a resolution, by (1) consisting\nof $\\Gamma(U,-)$-acyclic abelian sheaves. By the acyclic-resolution lemma\n[lemma-weil-pbc-leray-acyclicity],\n$H^q(\\Gamma(U,\\mathrm{For}\\,I^\\bullet))\\cong H^q(U,\\mathrm{For}\\,F)$, while\nthe left side is by definition $\\mathrm{For}\\,H^q_\\Lambda(U,F)$. Independence\nof the resolution follows from uniqueness of comparison maps up to homotopy.",
+   "uses": [
     "lemma-weil-pbc-leray-acyclicity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc-conventions/sk-def-pbc-conventions-module-cohomology.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-sheaves",
+  {
+   "text": "*(3)* For an abelian sheaf $G$ on $S_{\\Et}$, $R^qu_*G$ is the sheafification\nof $V\\mapsto H^q(S\\times_TV,G)$ on étale $V\\to T$, and the same holds for\nmodule sheaves with module cohomology. For an injective module sheaf $I$ on\n$S_{\\Et}$, (1) applied on $S$ to the étale objects $S\\times_TV$ gives\n$R^qu_*\\mathrm{For}\\,I=0$ for $q>0$. Thus for a module-injective resolution\n$F\\to I^\\bullet$, the resolution $\\mathrm{For}\\,F\\to\\mathrm{For}\\,I^\\bullet$ is\n$u_*$-acyclic, and [lemma-weil-pbc-leray-acyclicity] gives\n$R^qu_*\\mathrm{For}\\,F\\cong H^q(u_*\\mathrm{For}\\,I^\\bullet)=\n\\mathrm{For}\\,H^q(u_*I^\\bullet)=\\mathrm{For}\\,R^qu_*F$, using\n$\\mathrm{For}\\circ u_*=u_*\\circ\\mathrm{For}$. For $K\\in D^+(S_{\\Et},\\Lambda)$\nchoose a bounded below complex of injective module sheaves $I^\\bullet$\nquasi-isomorphic to $K$; then $\\mathrm{For}\\,I^\\bullet$ is a bounded below\ncomplex of $u_*$-acyclic sheaves quasi-isomorphic to $\\mathrm{For}\\,K$, and\nthe complex form of [lemma-weil-pbc-leray-acyclicity] identifies\n$Ru_*\\mathrm{For}\\,K$ with $u_*\\mathrm{For}\\,I^\\bullet=\\mathrm{For}\\,u_*I^\\bullet\n=\\mathrm{For}\\,Ru_*K$.",
+   "uses": [
     "lemma-weil-pbc-leray-acyclicity"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc-conventions/sk-def-pbc-conventions-module-cohomology.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

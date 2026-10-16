@@ -1,60 +1,65 @@
 {
-  "id": "det-uniform-constructible-ext-devissage",
-  "kind": "statement",
-  "title": "Ext bounds pass through finite filtrations",
-  "statement": "Let $\\mathcal A$ be an abelian category of sheaves of $\\Lambda_X$-modules and $c\\in\\mathbf Z$.\n\n1. If $0=C_0\\subset C_1\\subset\\cdots\\subset C_m=C$ is a finite filtration and\n   $\\Ext^q(C_k/C_{k-1},N)=0$ for all $k$ and all $q>c_k$, then $\\Ext^q(C,N)=0$ for $q>\\max_kc_k$.\n2. If $0=N_0\\subset\\cdots\\subset N_r=N$ is a finite filtration and $\\Ext^q(C,N_k/N_{k-1})=0$ for all\n   $k$ and all $q>c$, then $\\Ext^q(C,N)=0$ for $q>c$.\n\nConsequently, for $\\Lambda=E$ or $\\Qlb$, if for a lisse $L$ on a locally closed\n$a\\colon S\\hookrightarrow X$ there is $c_a$ with $\\Ext^q(a_!L,b_!M)=0$ for all $q>c_a$, all locally\nclosed $b\\colon T\\hookrightarrow X$ and all lisse $M$ on $T$, then every $C\\in\\Cons(X,\\Lambda)$ admits a\nuniform bound $d_C$ as in [sk-lem-uniform-constructible-ext].",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-devissage.md",
-    "place": "node det-uniform-constructible-ext-devissage, order None"
+ "id": "det-uniform-constructible-ext-devissage",
+ "blueprint": {
+  "is": "det-uniform-constructible-ext-devissage",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Ext bounds pass through finite filtrations",
+ "statement": "Let $\\mathcal A$ be an abelian category of sheaves of $\\Lambda_X$-modules and $c\\in\\mathbf Z$.\n\n1. If $0=C_0\\subset C_1\\subset\\cdots\\subset C_m=C$ is a finite filtration and\n   $\\Ext^q(C_k/C_{k-1},N)=0$ for all $k$ and all $q>c_k$, then $\\Ext^q(C,N)=0$ for $q>\\max_kc_k$.\n2. If $0=N_0\\subset\\cdots\\subset N_r=N$ is a finite filtration and $\\Ext^q(C,N_k/N_{k-1})=0$ for all\n   $k$ and all $q>c$, then $\\Ext^q(C,N)=0$ for $q>c$.\n\nConsequently, for $\\Lambda=E$ or $\\Qlb$, if for a lisse $L$ on a locally closed\n$a\\colon S\\hookrightarrow X$ there is $c_a$ with $\\Ext^q(a_!L,b_!M)=0$ for all $q>c_a$, all locally\nclosed $b\\colon T\\hookrightarrow X$ and all lisse $M$ on $T$, then every $C\\in\\Cons(X,\\Lambda)$ admits a\nuniform bound $d_C$ as in [sk-lem-uniform-constructible-ext].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-devissage.md",
+  "place": "node det-uniform-constructible-ext-devissage, order None"
+ },
+ "stmt_deps": [
+  "sk-lem-uniform-constructible-ext"
+ ],
+ "proof": [
+  {
+   "text": "(1) By induction on $m$. The short exact sequence $0\\to C_{m-1}\\to C\\to C/C_{m-1}\\to0$ gives the\nlong exact sequence\n\n$$\n\\cdots\\to\\Ext^q(C/C_{m-1},N)\\to\\Ext^q(C,N)\\to\\Ext^q(C_{m-1},N)\\to\\cdots.\n$$",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-lem-uniform-constructible-ext"
-  ],
-  "proof": [
-    {
-      "text": "(1) By induction on $m$. The short exact sequence $0\\to C_{m-1}\\to C\\to C/C_{m-1}\\to0$ gives the\nlong exact sequence\n\n$$\n\\cdots\\to\\Ext^q(C/C_{m-1},N)\\to\\Ext^q(C,N)\\to\\Ext^q(C_{m-1},N)\\to\\cdots.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "For $q>\\max_kc_k$ the outer terms vanish (the left one by hypothesis, the right one by induction), so\nthe middle one vanishes.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(2) Similarly, from $0\\to N_{r-1}\\to N\\to N/N_{r-1}\\to0$ and the sequence\n$\\Ext^q(C,N_{r-1})\\to\\Ext^q(C,N)\\to\\Ext^q(C,N/N_{r-1})$, by induction on $r$; the bound does not\nchange.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "For the consequence: by part (3) of [sk-lem-coefficient-heart], every $C\\in\\Cons(X,\\Lambda)$ has a\nfinite filtration with subquotients $(a_k)_!L_k$, and every $N\\in\\Cons(X,\\Lambda)$ has one with\nsubquotients $b_!M$. Put $d_C=\\max_kc_{a_k}$; then (2) gives $\\Ext^q((a_k)_!L_k,N)=0$ for $q>c_{a_k}$\nand every constructible $N$, and (1) gives $\\Ext^q(C,N)=0$ for $q>d_C$. The bound depends only on $C$\n(through the chosen filtration), not on $N$.",
-      "uses": [
-        "sk-lem-coefficient-heart"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-coefficient-heart"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-devissage.md",
-    "place": "## Proof"
+  {
+   "text": "For $q>\\max_kc_k$ the outer terms vanish (the left one by hypothesis, the right one by induction), so\nthe middle one vanishes.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
+  {
+   "text": "(2) Similarly, from $0\\to N_{r-1}\\to N\\to N/N_{r-1}\\to0$ and the sequence\n$\\Ext^q(C,N_{r-1})\\to\\Ext^q(C,N)\\to\\Ext^q(C,N/N_{r-1})$, by induction on $r$; the bound does not\nchange.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For the consequence: by part (3) of [sk-lem-coefficient-heart], every $C\\in\\Cons(X,\\Lambda)$ has a\nfinite filtration with subquotients $(a_k)_!L_k$, and every $N\\in\\Cons(X,\\Lambda)$ has one with\nsubquotients $b_!M$. Put $d_C=\\max_kc_{a_k}$; then (2) gives $\\Ext^q((a_k)_!L_k,N)=0$ for $q>c_{a_k}$\nand every constructible $N$, and (1) gives $\\Ext^q(C,N)=0$ for $q>d_C$. The bound depends only on $C$\n(through the chosen filtration), not on $N$.",
+   "uses": [
     "sk-lem-coefficient-heart"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-coefficient-heart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-devissage.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "sk-lem-coefficient-heart"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

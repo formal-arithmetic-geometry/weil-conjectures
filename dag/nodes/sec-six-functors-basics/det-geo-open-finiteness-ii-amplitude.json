@@ -1,82 +1,87 @@
 {
-  "id": "det-geo-open-finiteness-ii-amplitude",
-  "kind": "statement",
-  "title": "Bounded amplitude of open direct image on classical torsion sheaves",
-  "statement": "Let $k$ be a field, let $\\Lambda$ be a finite ring with $\\ell^r\\Lambda=0$ for\nsome $r\\ge1$, and let $j:X\\hookrightarrow Y$ be an open immersion of\nfinite-type $k$-schemes. Put $d=\\operatorname{cd}(j)$ in the sense of\n[def-kun-cd]. Then $d<\\infty$, and:\n\n1. for every sheaf $F$ of $\\Lambda$-modules on $X_{\\mathrm{ét}}$ and every\n   $q>d$, $R^qj_{\\mathrm{ét},*}F=0$;\n2. for every such $F$ and every $q>d$,\n   $\\mathcal H^q\\bigl(Rj_{\\mathrm{proét},*}\\nu_X^*F\\bigr)=0$, where\n   $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ is the comparison morphism;\n3. consequently, if $M\\in D^+(X_{\\mathrm{ét}},\\Lambda)$ has cohomology in\n   degrees $[a,b]$, then $Rj_{\\mathrm{proét},*}\\nu_X^*M$ has cohomology in\n   degrees $[a,b+d]$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
-    "place": "node det-geo-open-finiteness-ii-amplitude, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0D6J"
-      }
-    ]
+ "id": "det-geo-open-finiteness-ii-amplitude",
+ "blueprint": {
+  "is": "det-geo-open-finiteness-ii-amplitude",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Bounded amplitude of open direct image on classical torsion sheaves",
+ "statement": "Let $k$ be a field, let $\\Lambda$ be a finite ring with $\\ell^r\\Lambda=0$ for\nsome $r\\ge1$, and let $j:X\\hookrightarrow Y$ be an open immersion of\nfinite-type $k$-schemes. Put $d=\\operatorname{cd}(j)$ in the sense of\n[def-kun-cd]. Then $d<\\infty$, and:\n\n1. for every sheaf $F$ of $\\Lambda$-modules on $X_{\\mathrm{ét}}$ and every\n   $q>d$, $R^qj_{\\mathrm{ét},*}F=0$;\n2. for every such $F$ and every $q>d$,\n   $\\mathcal H^q\\bigl(Rj_{\\mathrm{proét},*}\\nu_X^*F\\bigr)=0$, where\n   $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ is the comparison morphism;\n3. consequently, if $M\\in D^+(X_{\\mathrm{ét}},\\Lambda)$ has cohomology in\n   degrees $[a,b]$, then $Rj_{\\mathrm{proét},*}\\nu_X^*M$ has cohomology in\n   degrees $[a,b+d]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+  "place": "node det-geo-open-finiteness-ii-amplitude, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0D6J"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-cd",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "*Finiteness of $d$.* The morphism $j$ is a morphism between schemes of finite\ntype over the field $k$, so $\\operatorname{cd}(j)<\\infty$ by\n[lem-kun-0f10] (1).",
+   "uses": [
+    "lem-kun-0f10"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-kun-cd",
-    "def-weil-pbc-site-comparison-morphism"
-  ],
-  "proof": [
-    {
-      "text": "*Finiteness of $d$.* The morphism $j$ is a morphism between schemes of finite\ntype over the field $k$, so $\\operatorname{cd}(j)<\\infty$ by\n[lem-kun-0f10] (1).",
-      "uses": [
-        "lem-kun-0f10"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1).* Every sheaf $F$ of $\\Lambda$-modules is killed by $\\ell^r$, hence is a\ntorsion abelian sheaf. The forgetful functor from $\\Lambda$-modules to abelian\nsheaves is exact and commutes with derived direct image (Stacks, Tag\n[0D6J](https://stacks.math.columbia.edu/tag/0D6J)), so $R^qj_{\\mathrm{ét},*}F$\ncomputed with $\\Lambda$-coefficients has the same underlying abelian sheaf as\n$R^qj_*$ of the underlying torsion abelian sheaf. The latter vanishes for\n$q>d$ by the definition [def-kun-cd] of $d=\\operatorname{cd}(j)$.",
-      "uses": [
-        "def-kun-cd"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(2).* An open immersion of Noetherian schemes is quasi-compact and\nquasi-separated, so the comparison direct image\n[prop-weil-pbc-comparison-direct-image], applied to $F$ placed in degree $0$,\ngives an isomorphism\n$\\nu_Y^*Rj_{\\mathrm{ét},*}F\\xrightarrow{\\sim}Rj_{\\mathrm{proét},*}\\nu_X^*F$.\nSince $\\Lambda$ is finite, $\\nu_Y^*$ is exact\n([prop-weil-pbc-site-comparison-finite-level]), so it commutes with taking\ncohomology sheaves:\n\n$$\n\\mathcal H^q\\bigl(Rj_{\\mathrm{proét},*}\\nu_X^*F\\bigr)\\cong\n\\nu_Y^*\\bigl(R^qj_{\\mathrm{ét},*}F\\bigr),\n$$\n\nwhich vanishes for $q>d$ by (1).",
-      "uses": [
-        "prop-weil-pbc-comparison-direct-image",
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3).* Induct on the number of nonzero cohomology sheaves of $M$. If there is\nonly one, $M\\simeq\\mathcal H^m(M)[-m]$ with $a\\le m\\le b$, and (2) together\nwith $\\mathcal H^q=0$ for $q<0$ of the direct image of a sheaf gives\ncohomology in $[m,m+d]\\subset[a,b+d]$. Otherwise choose $a\\le m<b$ splitting\nthe nonzero cohomology sheaves, and apply the exact functor\n$Rj_{\\mathrm{proét},*}\\nu_X^*$ to the truncation triangle\n$\\tau^{\\le m}M\\to M\\to\\tau^{>m}M\\to$; the outer terms have cohomology in\n$[a,m+d]$ and $[m+1,b+d]$ by induction, and the long exact cohomology sequence\nputs the middle term in $[a,b+d]$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-kun-0f10",
-    "def-kun-cd",
+  {
+   "text": "*(1).* Every sheaf $F$ of $\\Lambda$-modules is killed by $\\ell^r$, hence is a\ntorsion abelian sheaf. The forgetful functor from $\\Lambda$-modules to abelian\nsheaves is exact and commutes with derived direct image (Stacks, Tag\n[0D6J](https://stacks.math.columbia.edu/tag/0D6J)), so $R^qj_{\\mathrm{ét},*}F$\ncomputed with $\\Lambda$-coefficients has the same underlying abelian sheaf as\n$R^qj_*$ of the underlying torsion abelian sheaf. The latter vanishes for\n$q>d$ by the definition [def-kun-cd] of $d=\\operatorname{cd}(j)$.",
+   "uses": [
+    "def-kun-cd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2).* An open immersion of Noetherian schemes is quasi-compact and\nquasi-separated, so the comparison direct image\n[prop-weil-pbc-comparison-direct-image], applied to $F$ placed in degree $0$,\ngives an isomorphism\n$\\nu_Y^*Rj_{\\mathrm{ét},*}F\\xrightarrow{\\sim}Rj_{\\mathrm{proét},*}\\nu_X^*F$.\nSince $\\Lambda$ is finite, $\\nu_Y^*$ is exact\n([prop-weil-pbc-site-comparison-finite-level]), so it commutes with taking\ncohomology sheaves:\n\n$$\n\\mathcal H^q\\bigl(Rj_{\\mathrm{proét},*}\\nu_X^*F\\bigr)\\cong\n\\nu_Y^*\\bigl(R^qj_{\\mathrm{ét},*}F\\bigr),\n$$\n\nwhich vanishes for $q>d$ by (1).",
+   "uses": [
     "prop-weil-pbc-comparison-direct-image",
     "prop-weil-pbc-site-comparison-finite-level"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "def-kun-cd",
-    "lem-kun-0f10",
-    "def-weil-pbc-site-comparison-morphism",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "prop-weil-pbc-comparison-direct-image"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-site-comparison-morphism"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*(3).* Induct on the number of nonzero cohomology sheaves of $M$. If there is\nonly one, $M\\simeq\\mathcal H^m(M)[-m]$ with $a\\le m\\le b$, and (2) together\nwith $\\mathcal H^q=0$ for $q<0$ of the direct image of a sheaf gives\ncohomology in $[m,m+d]\\subset[a,b+d]$. Otherwise choose $a\\le m<b$ splitting\nthe nonzero cohomology sheaves, and apply the exact functor\n$Rj_{\\mathrm{proét},*}\\nu_X^*$ to the truncation triangle\n$\\tau^{\\le m}M\\to M\\to\\tau^{>m}M\\to$; the outer terms have cohomology in\n$[a,m+d]$ and $[m+1,b+d]$ by induction, and the long exact cohomology sequence\nputs the middle term in $[a,b+d]$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness-ii/det-geo-open-finiteness-ii-amplitude.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "def-kun-cd",
+  "lem-kun-0f10",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

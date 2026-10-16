@@ -1,5 +1,14 @@
 {
  "id": "lem-pc-isomorphic-single-tensor-counit-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Transport isomorphism for an isomorphic source",
  "statement": "theorem exists_isomorphic_single_tensor_counit_transport\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X P Z : Scheme.{u}} (p : P ⟶ X) (e : Z ≅ P) :\n    let a := Classical.choose (exists_schemeDerivedAdjunction e.hom\n      (hAdd := (Classical.choose exists_derivedPullbackComposition) e.hom)\n      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) e.hom)\n      ((Classical.choose (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))) e.hom))\n    let b := (conjugateIsoEquiv\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (e.hom ≫ p)))\n      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)).comp\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction e.hom)))).symm\n          (Scheme.Modules.pushforwardComp e.hom p).symm\n    ∃ t : (Scheme.Modules.tensorPullback (e.hom ≫ p) ⋙\n      DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0) ⋙\n      schemeDerivedDirectImage e.hom ≅\n      Scheme.Modules.tensorPullback p ⋙ DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0,\n      ∀ M : X.Modules,\n        t.inv.app M =\n          a.unit.app ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0).obj\n              ((Scheme.Modules.tensorPullback p).obj M)) ≫\n          (schemeDerivedDirectImage e.hom).map\n            (pinnedSingleTensorCounit e.hom 0 ((Scheme.Modules.tensorPullback p).obj M) ≫\n              (DerivedCategory.singleFunctor\n                (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).map (b.hom.app M))",
@@ -86,13 +95,6 @@
   "item": "Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit",
   "date": "2026-10-14",
   "group": "T2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-isomorphic-single-tensor-counit",
-   "place": "factorization under source isomorphism"
-  }
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",

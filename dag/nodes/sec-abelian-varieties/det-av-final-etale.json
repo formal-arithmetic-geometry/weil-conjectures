@@ -1,51 +1,56 @@
 {
-  "id": "det-av-final-etale",
-  "kind": "statement",
-  "title": "Multiplication by an invertible integer is étale",
-  "statement": "Let $B$ be an abelian variety of dimension $g$ over a field $k$ and let\n$n>0$ be invertible in $k$. Then:\n\n1. the differential of $[n]$ at the identity,\n$d[n]_e:T_eB\\to T_eB$, is multiplication by $n$, hence an isomorphism;\n1. for every point $x\\in B(\\bar k)$ the differential\n$d[n]_x:T_xB_{\\bar k}\\to T_{nx}B_{\\bar k}$ is an isomorphism;\n1. $[n]:B\\to B$ is étale; consequently $B[n]=[n]^{-1}(e)$ is a finite\nétale $k$-group scheme, of rank $\\deg[n]$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-thm-av-final/sk-thm-av-final-etale.md",
-    "place": "node det-av-final-etale, order None"
+ "id": "det-av-final-etale",
+ "blueprint": {
+  "is": "det-av-final-etale",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Multiplication by an invertible integer is étale",
+ "statement": "Let $B$ be an abelian variety of dimension $g$ over a field $k$ and let\n$n>0$ be invertible in $k$. Then:\n\n1. the differential of $[n]$ at the identity,\n$d[n]_e:T_eB\\to T_eB$, is multiplication by $n$, hence an isomorphism;\n1. for every point $x\\in B(\\bar k)$ the differential\n$d[n]_x:T_xB_{\\bar k}\\to T_{nx}B_{\\bar k}$ is an isomorphism;\n1. $[n]:B\\to B$ is étale; consequently $B[n]=[n]^{-1}(e)$ is a finite\nétale $k$-group scheme, of rank $\\deg[n]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-thm-av-final/sk-thm-av-final-etale.md",
+  "place": "node det-av-final-etale, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "(1) Let $m:B\\times B\\to B$ be the group law. Identify\n$T_{(e,e)}(B\\times B)=T_eB\\oplus T_eB$. Since $m(x,e)=x=m(e,x)$, the\ndifferential $dm_{(e,e)}$ restricts to the identity on each summand, so\n$dm_{(e,e)}(v,w)=v+w$. Now $[n]=m\\circ([n-1]\\times\\mathrm{id})\\circ\\Delta$\nfor $n\\ge2$, and $d\\Delta_e(v)=(v,v)$; by induction\n$d[n]_e(v)=d[n-1]_e(v)+v=nv$, starting from $[1]=\\mathrm{id}$. As $n$ is a\nunit in $k$, multiplication by $n$ is invertible on the $k$-vector space\n$T_eB$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "(1) Let $m:B\\times B\\to B$ be the group law. Identify\n$T_{(e,e)}(B\\times B)=T_eB\\oplus T_eB$. Since $m(x,e)=x=m(e,x)$, the\ndifferential $dm_{(e,e)}$ restricts to the identity on each summand, so\n$dm_{(e,e)}(v,w)=v+w$. Now $[n]=m\\circ([n-1]\\times\\mathrm{id})\\circ\\Delta$\nfor $n\\ge2$, and $d\\Delta_e(v)=(v,v)$; by induction\n$d[n]_e(v)=d[n-1]_e(v)+v=nv$, starting from $[1]=\\mathrm{id}$. As $n$ is a\nunit in $k$, multiplication by $n$ is invertible on the $k$-vector space\n$T_eB$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(2) Work over $\\bar k$. For $x\\in B(\\bar k)$ let $\\tau_x$ denote\ntranslation by $x$, an automorphism of $B_{\\bar k}$. Since $[n]$ is a\nhomomorphism ([sk-prop-av-mult-hom]; $B$ is commutative),\n$[n]\\circ\\tau_x=\\tau_{nx}\\circ[n]$. Differentiating at $e$ gives\n$d[n]_x\\circ d(\\tau_x)_e=d(\\tau_{nx})_e\\circ d[n]_e$, and the\ndifferentials of translations are isomorphisms, so $d[n]_x$ is an\nisomorphism by (1).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(3) $B$ is smooth of dimension $g$ over $k$, and $[n]$ is a morphism of\nsmooth $k$-varieties of the same dimension. By (2), for every closed point\n$x$ of $B_{\\bar k}$ the map $[n]^*\\Omega^1_{B}\\to\\Omega^1_{B}$ is an\nisomorphism on fibres at $x$ (it is dual to $d[n]_x$). Both sheaves are\nlocally free of rank $g$, so the map is an isomorphism near every closed\npoint of $B_{\\bar k}$, hence everywhere, hence over $k$ by faithfully flat\ndescent; thus $\\Omega^1_{B/B}=0$ for the source over the target, i.e.\n$[n]$ is unramified. It is flat: it is finite and surjective\n([sk-prop-av-mult-finite], [sk-prop-av-mult-surjective]) between regular\nschemes of the same dimension (miracle flatness), or directly by\n[sk-prop-av-isogeny]. Flat, unramified and of finite presentation means\nétale. Étale morphisms are stable under base change, so the fibre\n$B[n]=[n]^{-1}(e)=B\\times_{[n],B,e}\\Spec k$ is étale over $k$; it is\nfinite of rank $\\deg[n]$, the rank of the finite locally free\n$[n]_*\\cO_B$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-thm-av-final/sk-thm-av-final-etale.md",
-    "place": "## Proof"
+  {
+   "text": "(2) Work over $\\bar k$. For $x\\in B(\\bar k)$ let $\\tau_x$ denote\ntranslation by $x$, an automorphism of $B_{\\bar k}$. Since $[n]$ is a\nhomomorphism ([sk-prop-av-mult-hom]; $B$ is commutative),\n$[n]\\circ\\tau_x=\\tau_{nx}\\circ[n]$. Differentiating at $e$ gives\n$d[n]_x\\circ d(\\tau_x)_e=d(\\tau_{nx})_e\\circ d[n]_e$, and the\ndifferentials of translations are isomorphisms, so $d[n]_x$ is an\nisomorphism by (1).",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "sk-prop-av-mult-hom",
-    "sk-prop-av-mult-finite",
-    "sk-prop-av-mult-surjective",
-    "sk-prop-av-isogeny"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "(3) $B$ is smooth of dimension $g$ over $k$, and $[n]$ is a morphism of\nsmooth $k$-varieties of the same dimension. By (2), for every closed point\n$x$ of $B_{\\bar k}$ the map $[n]^*\\Omega^1_{B}\\to\\Omega^1_{B}$ is an\nisomorphism on fibres at $x$ (it is dual to $d[n]_x$). Both sheaves are\nlocally free of rank $g$, so the map is an isomorphism near every closed\npoint of $B_{\\bar k}$, hence everywhere, hence over $k$ by faithfully flat\ndescent; thus $\\Omega^1_{B/B}=0$ for the source over the target, i.e.\n$[n]$ is unramified. It is flat: it is finite and surjective\n([sk-prop-av-mult-finite], [sk-prop-av-mult-surjective]) between regular\nschemes of the same dimension (miracle flatness), or directly by\n[sk-prop-av-isogeny]. Flat, unramified and of finite presentation means\nétale. Étale morphisms are stable under base change, so the fibre\n$B[n]=[n]^{-1}(e)=B\\times_{[n],B,e}\\Spec k$ is étale over $k$; it is\nfinite of rank $\\deg[n]$, the rank of the finite locally free\n$[n]_*\\cO_B$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-abelian-varieties/sk-thm-av-final/sk-thm-av-final-etale.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "sk-prop-av-mult-hom",
+  "sk-prop-av-mult-finite",
+  "sk-prop-av-mult-surjective",
+  "sk-prop-av-isogeny"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

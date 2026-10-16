@@ -1,62 +1,67 @@
 {
-  "id": "sk-def-sfb-filtered-two-colimit",
-  "kind": "definition",
-  "title": "Filtered 2-colimits of categories",
-  "statement": "Let $I$ be a preordered set (in the applications a directed one) and $(\\mathcal C_i)_{i\\in I}$\ncategories. A *cocone of categories* with vertex a category $\\mathcal D$ consists of\n\n- transition functors $T_{ij}\\colon\\mathcal C_i\\to\\mathcal C_j$ for $i\\le j$,\n- functors $\\Phi_i\\colon\\mathcal C_i\\to\\mathcal D$, and\n- natural isomorphisms $\\theta_{ij}\\colon\\Phi_j\\circ T_{ij}\\cong\\Phi_i$ for $i\\le j$.\n\nNo coherence between the transition functors is required. The cocone *is a filtered 2-colimit*\nif it satisfies:\n\n- **(Obj)** every object of $\\mathcal D$ is isomorphic to $\\Phi_i(x)$ for some $i\\in I$ and\n  $x\\in\\mathcal C_i$;\n- **(Hom-surj)** for all $i,j\\in I$, $x\\in\\mathcal C_i$, $y\\in\\mathcal C_j$ and every morphism\n  $\\varphi\\colon\\Phi_i(x)\\to\\Phi_j(y)$ there are $k\\ge i,j$ and a morphism\n  $g\\colon T_{ik}x\\to T_{jk}y$ in $\\mathcal C_k$ with\n  $\\varphi=\\theta_{jk,y}\\circ\\Phi_k(g)\\circ\\theta_{ik,x}^{-1}$;\n- **(Hom-inj)** for every $k\\in I$ and morphisms $g,g'\\colon x\\to y$ in $\\mathcal C_k$ with\n  $\\Phi_k(g)=\\Phi_k(g')$ there is $k'\\ge k$ with $T_{kk'}(g)=T_{kk'}(g')$.\n\nIn particular, in a filtered 2-colimit every object of $\\mathcal D$ comes from a finite stage,\nand morphisms of $\\mathcal C_k$ identified in $\\mathcal D$ are identified at a finite stage.\nThis is a property of ordinary categories and functors; no higher categories are involved.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
-    "place": "node sk-def-sfb-filtered-two-colimit, order 1691"
+ "id": "sk-def-sfb-filtered-two-colimit",
+ "blueprint": {
+  "is": "sk-def-sfb-filtered-two-colimit",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Filtered 2-colimits of categories",
+ "statement": "Let $I$ be a preordered set (in the applications a directed one) and $(\\mathcal C_i)_{i\\in I}$\ncategories. A *cocone of categories* with vertex a category $\\mathcal D$ consists of\n\n- transition functors $T_{ij}\\colon\\mathcal C_i\\to\\mathcal C_j$ for $i\\le j$,\n- functors $\\Phi_i\\colon\\mathcal C_i\\to\\mathcal D$, and\n- natural isomorphisms $\\theta_{ij}\\colon\\Phi_j\\circ T_{ij}\\cong\\Phi_i$ for $i\\le j$.\n\nNo coherence between the transition functors is required. The cocone *is a filtered 2-colimit*\nif it satisfies:\n\n- **(Obj)** every object of $\\mathcal D$ is isomorphic to $\\Phi_i(x)$ for some $i\\in I$ and\n  $x\\in\\mathcal C_i$;\n- **(Hom-surj)** for all $i,j\\in I$, $x\\in\\mathcal C_i$, $y\\in\\mathcal C_j$ and every morphism\n  $\\varphi\\colon\\Phi_i(x)\\to\\Phi_j(y)$ there are $k\\ge i,j$ and a morphism\n  $g\\colon T_{ik}x\\to T_{jk}y$ in $\\mathcal C_k$ with\n  $\\varphi=\\theta_{jk,y}\\circ\\Phi_k(g)\\circ\\theta_{ik,x}^{-1}$;\n- **(Hom-inj)** for every $k\\in I$ and morphisms $g,g'\\colon x\\to y$ in $\\mathcal C_k$ with\n  $\\Phi_k(g)=\\Phi_k(g')$ there is $k'\\ge k$ with $T_{kk'}(g)=T_{kk'}(g')$.\n\nIn particular, in a filtered 2-colimit every object of $\\mathcal D$ comes from a finite stage,\nand morphisms of $\\mathcal C_k$ identified in $\\mathcal D$ are identified at a finite stage.\nThis is a property of ordinary categories and functors; no higher categories are involved.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
+  "place": "node sk-def-sfb-filtered-two-colimit, order 1691"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The two final assertions are (Obj) and (Hom-inj) restated.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The two final assertions are (Obj) and (Hom-inj) restated.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "The conditions characterise the 2-colimit. Suppose $I$ is directed and the transition functors\nare coherent (a pseudofunctor $I\\to\\mathrm{Cat}$, with the $\\theta_{ij}$ compatible with its\nstructure isomorphisms). The 2-colimit is then modelled by the ordinary category $\\mathcal C_\\infty$\nwhose objects are pairs $(i,x)$ with $x\\in\\mathcal C_i$ and whose morphisms are\n$\\Hom((i,x),(j,y))=\\operatorname{colim}_{k\\ge i,j}\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)$, a\nfiltered colimit of sets, with composition defined after passing to a common index. The cocone\ninduces a comparison functor $\\Phi\\colon\\mathcal C_\\infty\\to\\mathcal D$,\n$(i,x)\\mapsto\\Phi_i(x)$. It is essentially surjective if and only if (Obj) holds. On morphisms\nit is the canonical map $\\operatorname{colim}_k\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)\\to\n\\Hom_{\\mathcal D}(\\Phi_i x,\\Phi_j y)$: (Hom-surj) is its surjectivity, and since the colimit is\nfiltered, two elements with the same image can be represented at a common index $k$, where\n(Hom-inj) makes them equal at a later index; so (Hom-surj) and (Hom-inj) say that $\\Phi$ is\nfully faithful. Hence, under these assumptions, the cocone is a filtered 2-colimit if and only if\n$\\Phi$ is an equivalence of categories.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [
-    "lean_not_found"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1691,
-  "blueprint_uses": [],
-  "blueprint_lean": [
-    "CategoryTheory.CategoryCocone",
-    "CategoryTheory.CategoryCocone.EssSurjObj",
-    "CategoryTheory.CategoryCocone.HomSurj",
-    "CategoryTheory.CategoryCocone.HomInj",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_iso",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_map_eq"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.CategoryCocone",
-    "CategoryTheory.CategoryCocone.EssSurjObj",
-    "CategoryTheory.CategoryCocone.HomSurj",
-    "CategoryTheory.CategoryCocone.HomInj",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_iso",
-    "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_map_eq"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "The conditions characterise the 2-colimit. Suppose $I$ is directed and the transition functors\nare coherent (a pseudofunctor $I\\to\\mathrm{Cat}$, with the $\\theta_{ij}$ compatible with its\nstructure isomorphisms). The 2-colimit is then modelled by the ordinary category $\\mathcal C_\\infty$\nwhose objects are pairs $(i,x)$ with $x\\in\\mathcal C_i$ and whose morphisms are\n$\\Hom((i,x),(j,y))=\\operatorname{colim}_{k\\ge i,j}\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)$, a\nfiltered colimit of sets, with composition defined after passing to a common index. The cocone\ninduces a comparison functor $\\Phi\\colon\\mathcal C_\\infty\\to\\mathcal D$,\n$(i,x)\\mapsto\\Phi_i(x)$. It is essentially surjective if and only if (Obj) holds. On morphisms\nit is the canonical map $\\operatorname{colim}_k\\Hom_{\\mathcal C_k}(T_{ik}x,T_{jk}y)\\to\n\\Hom_{\\mathcal D}(\\Phi_i x,\\Phi_j y)$: (Hom-surj) is its surjectivity, and since the colimit is\nfiltered, two elements with the same image can be represented at a common index $k$, where\n(Hom-inj) makes them equal at a later index; so (Hom-surj) and (Hom-inj) say that $\\Phi$ is\nfully faithful. Hence, under these assumptions, the cocone is a filtered 2-colimit if and only if\n$\\Phi$ is an equivalence of categories.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1691,
+ "blueprint_uses": [],
+ "blueprint_lean": [
+  "CategoryTheory.CategoryCocone",
+  "CategoryTheory.CategoryCocone.EssSurjObj",
+  "CategoryTheory.CategoryCocone.HomSurj",
+  "CategoryTheory.CategoryCocone.HomInj",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_iso",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_map_eq"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.CategoryCocone",
+  "CategoryTheory.CategoryCocone.EssSurjObj",
+  "CategoryTheory.CategoryCocone.HomSurj",
+  "CategoryTheory.CategoryCocone.HomInj",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_iso",
+  "CategoryTheory.CategoryCocone.IsFilteredTwoColimit.exists_map_eq"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

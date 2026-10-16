@@ -13,12 +13,6 @@
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tag 01FM, cohomology-equation-first-homotopy; explicit verification of the labelled tail deletion"
  },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-alternating-cech-first-sorting-junction-deletions"
-  }
- },
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions",
@@ -26,6 +20,15 @@
   "group": "M1"
  },
  "id": "lem-pc-alternating-cech-first-sorting-junction-tail-contribution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "title": "Tail-labelled junction deletion contribution",
  "statement": "Let X be a scheme, I a linearly ordered type, U : I -> X.Opens, F an abelian-group-valued presheaf, S a SiteCechComplex for the maps U_i -> X [def-weil-pbc-site-cech-complex], p a natural number, s a degree-(p+1) cochain, and t : Fin (p+2) -> I. Use the stable sorting filter, partial sorting filter, and junction map [def-pc-alternating-cech-sorting-operators]. Define E and B by the following displayed formulas. The sum of junction-labelled deletions with a < r equals minus the sum of advanced partial sorting contributions B_(a+1).\n\nlet E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let T := ∑ σ, ∑ a, ∑ τ, ∑ r,\n      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n          cechJunction σ τ a r = σ a) ∧ a.val < r.val then E σ a τ r else 0\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ, ∑ τ, if cechStableSort t σ ∧\n          (∀ k, k.val < a → τ k = σ k) ∧\n          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    T = - ∑ a : Fin (p + 2), B (a.val + 1) t",
  "proof": [

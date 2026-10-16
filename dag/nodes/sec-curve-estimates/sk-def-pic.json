@@ -1,63 +1,68 @@
 {
-  "id": "sk-def-pic",
-  "kind": "definition",
-  "title": "Picard group, degree, $\\Pic^0$",
-  "statement": "For a scheme $X$ (for instance $C$ as in [sk-def-curve]), the\n*(cohomological) Picard group* is $\\Pic(X)=H^1(X_{\\Et},\\mathbb G_m)$,\n$\\mathbb G_m$ being the sheaf of units of the structure sheaf on the\nsmall étale site. For $C$\nsmooth proper connected (in particular of dimension $1$,\n[sk-def-curve]) there is a *degree* homomorphism\n$\\deg:\\Pic(C)\\to\\Z$ and we set $\\Pic^0(C)=\\ker\\deg$; for a group\n$f$ and $n\\ge1$, $f[n]$, $n\\cdot f$, $f/n\\cdot f$ denote kernel,\nimage and cokernel of the multiplication-by-$n$ map.\n\nTwo facts are asserted in the above:\n\n- **(P1)** *(Equivalence of the definitions of $\\Pic$.)* The\nétale cohomology group $H^1(C_{\\Et},\\mathbb G_m)$ is canonically\nisomorphic to the group of isomorphism classes of invertible\n$\\mathcal O_C$-modules under $\\otimes$; equivalently, to\n$H^1(C_{\\mathrm{Zar}},\\mathcal O_C^\\times)$ and to the group of\ndivisors modulo principal divisors $\\mathrm{Div}(C)/\\mathrm{Princ}(C)$\nwhen $C$ is moreover integral and regular.\n- **(P2)** *(Well-definedness of $\\deg$.)* For $C$ smooth\nproper connected of dimension $1$,\n$\\deg\\big(\\sum_pn_p[p]\\big)=\\sum_pn_p[\\kappa(p):k]$\nkills principal divisors, hence descends to a homomorphism\n$\\Pic(C)\\to\\Z$; it is surjective and independent of all choices.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-def-pic/_section.md",
-    "place": "node sk-def-pic, order 995"
+ "id": "sk-def-pic",
+ "blueprint": {
+  "is": "sk-def-pic",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Picard group, degree, $\\Pic^0$",
+ "statement": "For a scheme $X$ (for instance $C$ as in [sk-def-curve]), the\n*(cohomological) Picard group* is $\\Pic(X)=H^1(X_{\\Et},\\mathbb G_m)$,\n$\\mathbb G_m$ being the sheaf of units of the structure sheaf on the\nsmall étale site. For $C$\nsmooth proper connected (in particular of dimension $1$,\n[sk-def-curve]) there is a *degree* homomorphism\n$\\deg:\\Pic(C)\\to\\Z$ and we set $\\Pic^0(C)=\\ker\\deg$; for a group\n$f$ and $n\\ge1$, $f[n]$, $n\\cdot f$, $f/n\\cdot f$ denote kernel,\nimage and cokernel of the multiplication-by-$n$ map.\n\nTwo facts are asserted in the above:\n\n- **(P1)** *(Equivalence of the definitions of $\\Pic$.)* The\nétale cohomology group $H^1(C_{\\Et},\\mathbb G_m)$ is canonically\nisomorphic to the group of isomorphism classes of invertible\n$\\mathcal O_C$-modules under $\\otimes$; equivalently, to\n$H^1(C_{\\mathrm{Zar}},\\mathcal O_C^\\times)$ and to the group of\ndivisors modulo principal divisors $\\mathrm{Div}(C)/\\mathrm{Princ}(C)$\nwhen $C$ is moreover integral and regular.\n- **(P2)** *(Well-definedness of $\\deg$.)* For $C$ smooth\nproper connected of dimension $1$,\n$\\deg\\big(\\sum_pn_p[p]\\big)=\\sum_pn_p[\\kappa(p):k]$\nkills principal divisors, hence descends to a homomorphism\n$\\Pic(C)\\to\\Z$; it is surjective and independent of all choices.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-def-pic/_section.md",
+  "place": "node sk-def-pic, order 995"
+ },
+ "stmt_deps": [
+  "sk-def-curve",
+  "sk-def-av-pic"
+ ],
+ "proof": [
+  {
+   "text": "The first two clauses of (P1) are\n[sk-prop-hilbert90]: first cohomology of an abelian sheaf\nclassifies torsors, a $\\mathbb G_m$-torsor is the sheaf of\nisomorphisms of an invertible module, and the étale and the\nZariski computation agree by Hilbert 90 plus descent for\n$\\mathbb G_m$-torsors. The further identification with\n$\\mathrm{Div}(C)/\\mathrm{Princ}(C)$ for $C$ integral regular is the\nlong exact cohomology sequence of the divisor sequence\n[sk-prop-divisor-gen]: its middle term has\n$H^1(C,i_*\\mathbb G_{m,\\eta})=0$, because Leray for $i:\\eta\\to C$\nembeds this group into $H^1(\\eta,\\mathbb G_m)$, which vanishes by\nthe last assertion of [sk-prop-hilbert90]; so\n\n$$\nk(C)^\\times=H^0(C,i_*\\mathbb G_{m,\\eta})\n\\xrightarrow{\\ \\operatorname{div}\\ }\n\\mathrm{Div}(C)=H^0\\Big(C,\\bigoplus_pi_{p*}\\Z\\Big)\n\\longrightarrow H^1(C,\\mathbb G_m)\\longrightarrow0\n$$\n\nis exact, i.e. $\\Pic(C)=\\mathrm{Div}(C)/\\mathrm{Princ}(C)$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-def-curve",
-    "sk-def-av-pic"
-  ],
-  "proof": [
-    {
-      "text": "The first two clauses of (P1) are\n[sk-prop-hilbert90]: first cohomology of an abelian sheaf\nclassifies torsors, a $\\mathbb G_m$-torsor is the sheaf of\nisomorphisms of an invertible module, and the étale and the\nZariski computation agree by Hilbert 90 plus descent for\n$\\mathbb G_m$-torsors. The further identification with\n$\\mathrm{Div}(C)/\\mathrm{Princ}(C)$ for $C$ integral regular is the\nlong exact cohomology sequence of the divisor sequence\n[sk-prop-divisor-gen]: its middle term has\n$H^1(C,i_*\\mathbb G_{m,\\eta})=0$, because Leray for $i:\\eta\\to C$\nembeds this group into $H^1(\\eta,\\mathbb G_m)$, which vanishes by\nthe last assertion of [sk-prop-hilbert90]; so\n\n$$\nk(C)^\\times=H^0(C,i_*\\mathbb G_{m,\\eta})\n\\xrightarrow{\\ \\operatorname{div}\\ }\n\\mathrm{Div}(C)=H^0\\Big(C,\\bigoplus_pi_{p*}\\Z\\Big)\n\\longrightarrow H^1(C,\\mathbb G_m)\\longrightarrow0\n$$\n\nis exact, i.e. $\\Pic(C)=\\mathrm{Div}(C)/\\mathrm{Princ}(C)$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(P2) is the degree of a principal divisor\n($\\deg\\operatorname{div}(f)=0$, Stacks `0BFL`): a nonconstant\n$f\\in k(C)^\\times$ is a finite surjective morphism\n$f:C\\to\\Pone$ of degree $d=[k(C):k(t)]$ with\n$\\operatorname{div}(f)=f^*[0]-f^*[\\infty]$, and\n$\\deg(f^*D)=\\deg f\\cdot\\deg D$ for a finite flat morphism $f$ of\nproper curves and a divisor $D$ on its target (whereas pushforward\npreserves degrees, $\\deg(f_*D)=\\deg D$, and $f_*f^*D=\\deg f\\cdot D$;\nStacks `02R3`, `0AZ0`), so\n$\\deg\\operatorname{div}(f)=d-d=0$; a constant $f$ has\n$\\operatorname{div}(f)=0$. Hence $\\deg$ descends to $\\Pic(C)$, and\nit is surjective because $C$, being of dimension $1$, has a closed\npoint $p$, and over algebraically closed $k$ a closed\npoint has $[\\kappa(p):k]=1$ (for the zero-dimensional $C=\\Spec k$,\n$\\Pic(C)=0$ and no surjective degree exists, which is why dimension\n$1$ is required).",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-def-pic/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 995,
-  "blueprint_uses": [
-    "sk-def-av-pic",
-    "sk-def-curve",
-    "sk-prop-hilbert90"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.CohomologicalPicardGroup"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.Scheme.CohomologicalPicardGroup"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-def-av-pic"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "(P2) is the degree of a principal divisor\n($\\deg\\operatorname{div}(f)=0$, Stacks `0BFL`): a nonconstant\n$f\\in k(C)^\\times$ is a finite surjective morphism\n$f:C\\to\\Pone$ of degree $d=[k(C):k(t)]$ with\n$\\operatorname{div}(f)=f^*[0]-f^*[\\infty]$, and\n$\\deg(f^*D)=\\deg f\\cdot\\deg D$ for a finite flat morphism $f$ of\nproper curves and a divisor $D$ on its target (whereas pushforward\npreserves degrees, $\\deg(f_*D)=\\deg D$, and $f_*f^*D=\\deg f\\cdot D$;\nStacks `02R3`, `0AZ0`), so\n$\\deg\\operatorname{div}(f)=d-d=0$; a constant $f$ has\n$\\operatorname{div}(f)=0$. Hence $\\deg$ descends to $\\Pic(C)$, and\nit is surjective because $C$, being of dimension $1$, has a closed\npoint $p$, and over algebraically closed $k$ a closed\npoint has $[\\kappa(p):k]=1$ (for the zero-dimensional $C=\\Spec k$,\n$\\Pic(C)=0$ and no surjective degree exists, which is why dimension\n$1$ is required).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-def-pic/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 995,
+ "blueprint_uses": [
+  "sk-def-av-pic",
+  "sk-def-curve",
+  "sk-prop-hilbert90"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.CohomologicalPicardGroup"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.CohomologicalPicardGroup"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-av-pic"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

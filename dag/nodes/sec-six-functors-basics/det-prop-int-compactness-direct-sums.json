@@ -1,79 +1,84 @@
 {
-  "id": "det-prop-int-compactness-direct-sums",
-  "kind": "statement",
-  "title": "Integral proper direct image on the localizing categories",
-  "statement": "Let $p:X\\to Y$ be proper, with fibres of dimension $\\le d$.\n\n1. For $N\\in\\Cons(X,\\mathcal O_E)$, $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ has\n   cohomology in degrees $[0,2d+1]$; for $N\\in\\IndCons(X,\\mathcal O_E)$,\n   $H^qRp_*N\\in\\IndCons(Y,\\mathcal O_E)$ and vanishes outside $[0,2d+1]$.\n2. For $K\\in\\Dic(X,\\mathcal O_E)$, $H^qRp_*K$ depends only on the degrees\n   $[q-2d-1,q]$ of $K$, and $Rp_*$ commutes with arbitrary direct sums of\n   objects of $\\Dic(X,\\mathcal O_E)$.\n3. $Rp_*$ maps $\\Loc(\\Dbc(X,\\mathcal O_E))$ into $\\Loc(\\Dbc(Y,\\mathcal O_E))$ and\n   preserves direct sums there.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
-    "place": "node det-prop-int-compactness-direct-sums, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 095U"
-      },
-      {
-        "document": "Milnor",
-        "place": "Direct image commutes with derived limits, so $Rp_*N=R\\varprojlim_nRp_*(N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ by derived completeness of $N$, and one derived limit of a countable tower raises the upper bound by at most one (Milnor sequence): $Rp_*N$ has cohomology in degrees $\\le2d+1$."
-      },
-      {
-        "document": "Milnor",
-        "place": "The proofs of [sk-lem-proper-unbounded-window] and [sk-lem-proper-unbounded-window-ii], which use only this uniform bound, the left completeness of the pro-étale derived category and the Milnor sequence, show that $H^qRp_*K=H^qRp_*\\tau_{[q-2d-1,q]}K$."
-      }
-    ]
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "(1) $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ by the integral case of\n[sk-thm-sfb-proper-base-change]. On a weakly contractible affine $V\\to Y$,\nproper direct image of a torsion sheaf has cohomology in degrees $\\le2d$\n(Stacks, Tag 095U), and $\\Gamma(V,-)$ is exact, so this bounds the cohomology of\nsections. The reductions $N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ are torsion\ncomplexes in degrees $[-1,0]$, so their direct images have cohomology in\ndegrees $\\le2d$. Direct image commutes with derived limits, so\n$Rp_*N=R\\varprojlim_nRp_*(N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ by derived\ncompleteness of $N$, and one derived limit of a countable tower raises the\nupper bound by at most one (Milnor sequence): $Rp_*N$ has cohomology in\ndegrees $\\le2d+1$. It has no cohomology in negative degrees because $N$ is a\nsheaf in degree $0$ and $p_*$ is left exact. For\n$N=\\varinjlim_iN_i$ with $N_i$ constructible, the family is bounded below\nuniformly, so by continuity of direct image for bounded below systems\n(as in [sk-lem-int-ext](1)) $H^qRp_*N=\\varinjlim_iH^qRp_*N_i$, a filtered\ncolimit of constructible sheaves, i.e. an object of $\\IndCons(Y,\\mathcal O_E)$,\nvanishing outside $[0,2d+1]$.",
-      "uses": [
-        "sk-lem-int-ext"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(2) By (1), each cohomology object of $K$ contributes to $H^qRp_*K$ only from\ndegrees $[q-2d-1,q]$. The proofs of [sk-lem-proper-unbounded-window] and\n[sk-lem-proper-unbounded-window-ii], which use only this uniform bound, the\nleft completeness of the pro-étale derived category and the Milnor sequence,\nshow that $H^qRp_*K=H^qRp_*\\tau_{[q-2d-1,q]}K$. On complexes with cohomology in\na finite range, $Rp_*$ commutes with direct sums by induction on the length of\nthe range, starting from the case of a single object of $\\IndCons$, where it\nfollows from (1) and continuity. Truncations commute with direct sums, so\n$Rp_*$ commutes with arbitrary direct sums in $\\Dic(X,\\mathcal O_E)$, with no\ncommon lower bound needed.",
-      "uses": [
-        "sk-lem-proper-unbounded-window",
-        "sk-lem-proper-unbounded-window-ii"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(3) The objects of $\\Loc(\\Dbc(X,\\mathcal O_E))$ whose direct image lies in\n$\\Loc(\\Dbc(Y,\\mathcal O_E))$ are closed under shifts and cones ($Rp_*$ is exact)\nand under direct sums (by (2), since\n$\\Loc(\\Dbc(X,\\mathcal O_E))\\subset\\Dic(X,\\mathcal O_E)$ by\n[det-prop-int-compactness-compact](2)). They contain $\\Dbc(X,\\mathcal O_E)$ by\nthe first assertion of (1), extended to complexes by finite extensions.\nHence they form a localizing subcategory containing the generators, i.e. all\nof $\\Loc(\\Dbc(X,\\mathcal O_E))$; and $Rp_*$ preserves direct sums there by (2).",
-      "uses": [
-        "det-prop-int-compactness-compact"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-int-ext",
-    "sk-lem-proper-unbounded-window",
-    "sk-lem-proper-unbounded-window-ii",
-    "det-prop-int-compactness-compact"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-prop-int-compactness-compact",
-    "sk-thm-sfb-proper-base-change",
-    "sk-lem-proper-unbounded-window",
-    "sk-lem-proper-unbounded-window-ii",
+ "id": "det-prop-int-compactness-direct-sums",
+ "blueprint": {
+  "is": "det-prop-int-compactness-direct-sums",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Integral proper direct image on the localizing categories",
+ "statement": "Let $p:X\\to Y$ be proper, with fibres of dimension $\\le d$.\n\n1. For $N\\in\\Cons(X,\\mathcal O_E)$, $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ has\n   cohomology in degrees $[0,2d+1]$; for $N\\in\\IndCons(X,\\mathcal O_E)$,\n   $H^qRp_*N\\in\\IndCons(Y,\\mathcal O_E)$ and vanishes outside $[0,2d+1]$.\n2. For $K\\in\\Dic(X,\\mathcal O_E)$, $H^qRp_*K$ depends only on the degrees\n   $[q-2d-1,q]$ of $K$, and $Rp_*$ commutes with arbitrary direct sums of\n   objects of $\\Dic(X,\\mathcal O_E)$.\n3. $Rp_*$ maps $\\Loc(\\Dbc(X,\\mathcal O_E))$ into $\\Loc(\\Dbc(Y,\\mathcal O_E))$ and\n   preserves direct sums there.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
+  "place": "node det-prop-int-compactness-direct-sums, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 095U"
+   },
+   {
+    "document": "Milnor",
+    "place": "Direct image commutes with derived limits, so $Rp_*N=R\\varprojlim_nRp_*(N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ by derived completeness of $N$, and one derived limit of a countable tower raises the upper bound by at most one (Milnor sequence): $Rp_*N$ has cohomology in degrees $\\le2d+1$."
+   },
+   {
+    "document": "Milnor",
+    "place": "The proofs of [sk-lem-proper-unbounded-window] and [sk-lem-proper-unbounded-window-ii], which use only this uniform bound, the left completeness of the pro-étale derived category and the Milnor sequence, show that $H^qRp_*K=H^qRp_*\\tau_{[q-2d-1,q]}K$."
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "(1) $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ by the integral case of\n[sk-thm-sfb-proper-base-change]. On a weakly contractible affine $V\\to Y$,\nproper direct image of a torsion sheaf has cohomology in degrees $\\le2d$\n(Stacks, Tag 095U), and $\\Gamma(V,-)$ is exact, so this bounds the cohomology of\nsections. The reductions $N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ are torsion\ncomplexes in degrees $[-1,0]$, so their direct images have cohomology in\ndegrees $\\le2d$. Direct image commutes with derived limits, so\n$Rp_*N=R\\varprojlim_nRp_*(N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ by derived\ncompleteness of $N$, and one derived limit of a countable tower raises the\nupper bound by at most one (Milnor sequence): $Rp_*N$ has cohomology in\ndegrees $\\le2d+1$. It has no cohomology in negative degrees because $N$ is a\nsheaf in degree $0$ and $p_*$ is left exact. For\n$N=\\varinjlim_iN_i$ with $N_i$ constructible, the family is bounded below\nuniformly, so by continuity of direct image for bounded below systems\n(as in [sk-lem-int-ext](1)) $H^qRp_*N=\\varinjlim_iH^qRp_*N_i$, a filtered\ncolimit of constructible sheaves, i.e. an object of $\\IndCons(Y,\\mathcal O_E)$,\nvanishing outside $[0,2d+1]$.",
+   "uses": [
     "sk-lem-int-ext"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(2) By (1), each cohomology object of $K$ contributes to $H^qRp_*K$ only from\ndegrees $[q-2d-1,q]$. The proofs of [sk-lem-proper-unbounded-window] and\n[sk-lem-proper-unbounded-window-ii], which use only this uniform bound, the\nleft completeness of the pro-étale derived category and the Milnor sequence,\nshow that $H^qRp_*K=H^qRp_*\\tau_{[q-2d-1,q]}K$. On complexes with cohomology in\na finite range, $Rp_*$ commutes with direct sums by induction on the length of\nthe range, starting from the case of a single object of $\\IndCons$, where it\nfollows from (1) and continuity. Truncations commute with direct sums, so\n$Rp_*$ commutes with arbitrary direct sums in $\\Dic(X,\\mathcal O_E)$, with no\ncommon lower bound needed.",
+   "uses": [
+    "sk-lem-proper-unbounded-window",
+    "sk-lem-proper-unbounded-window-ii"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) The objects of $\\Loc(\\Dbc(X,\\mathcal O_E))$ whose direct image lies in\n$\\Loc(\\Dbc(Y,\\mathcal O_E))$ are closed under shifts and cones ($Rp_*$ is exact)\nand under direct sums (by (2), since\n$\\Loc(\\Dbc(X,\\mathcal O_E))\\subset\\Dic(X,\\mathcal O_E)$ by\n[det-prop-int-compactness-compact](2)). They contain $\\Dbc(X,\\mathcal O_E)$ by\nthe first assertion of (1), extended to complexes by finite extensions.\nHence they form a localizing subcategory containing the generators, i.e. all\nof $\\Loc(\\Dbc(X,\\mathcal O_E))$; and $Rp_*$ preserves direct sums there by (2).",
+   "uses": [
+    "det-prop-int-compactness-compact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-int-ext",
+  "sk-lem-proper-unbounded-window",
+  "sk-lem-proper-unbounded-window-ii",
+  "det-prop-int-compactness-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-prop-int-compactness-compact",
+  "sk-thm-sfb-proper-base-change",
+  "sk-lem-proper-unbounded-window",
+  "sk-lem-proper-unbounded-window-ii",
+  "sk-lem-int-ext"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

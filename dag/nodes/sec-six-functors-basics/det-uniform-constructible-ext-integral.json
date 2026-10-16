@@ -1,83 +1,88 @@
 {
-  "id": "det-uniform-constructible-ext-integral",
-  "kind": "statement",
-  "title": "The integral stratum bound",
-  "statement": "In the situation of [det-uniform-constructible-ext-torsion],\n\n$$\n\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)=0\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2),\n$$\n\nExt taken in $\\D(X_{\\mathrm{proét}},\\mathcal O_E)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-integral.md",
-    "place": "node det-uniform-constructible-ext-integral, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09BP"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09BM"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 08TB"
-      }
-    ]
+ "id": "det-uniform-constructible-ext-integral",
+ "blueprint": {
+  "is": "det-uniform-constructible-ext-integral",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The integral stratum bound",
+ "statement": "In the situation of [det-uniform-constructible-ext-torsion],\n\n$$\n\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)=0\\quad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2),\n$$\n\nExt taken in $\\D(X_{\\mathrm{proét}},\\mathcal O_E)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-integral.md",
+  "place": "node det-uniform-constructible-ext-integral, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09BP"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09BM"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 08TB"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "det-uniform-constructible-ext-torsion"
+ ],
+ "proof": [
+  {
+   "text": "*Completeness of the target.* $b=i_T\\circ j_T$ with $j_T$ a quasi-compact open immersion into a closed\nsubscheme. Extension by zero is exact and preserves limits (Stacks, Tag 09BP), and closed direct image\nis exact (Stacks, Tag 09BM) and preserves limits as a right adjoint. Since $M_0$ is derived\n$\\pi_E$-complete and $\\pi_E$-torsion free, so is $b_!M_0$, and\n$b_!M_0\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n=b_!(M_0/\\pi_E^n)$; thus\n$b_!M_0=R\\varprojlim_nb_!(M_0/\\pi_E^n)$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "det-uniform-constructible-ext-torsion"
-  ],
-  "proof": [
-    {
-      "text": "*Completeness of the target.* $b=i_T\\circ j_T$ with $j_T$ a quasi-compact open immersion into a closed\nsubscheme. Extension by zero is exact and preserves limits (Stacks, Tag 09BP), and closed direct image\nis exact (Stacks, Tag 09BM) and preserves limits as a right adjoint. Since $M_0$ is derived\n$\\pi_E$-complete and $\\pi_E$-torsion free, so is $b_!M_0$, and\n$b_!M_0\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n=b_!(M_0/\\pi_E^n)$; thus\n$b_!M_0=R\\varprojlim_nb_!(M_0/\\pi_E^n)$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Completeness of $F$.* Put $F=L_0^\\vee\\otimes u^*R\\underline\\Gamma_Z\\,b_!M_0$. By\n[sk-lem-formal-closed-support-ii], each functor in this composite commutes with derived inverse limits\nof sequences. Each also commutes with reduction modulo $\\pi_E^n$, the cone of multiplication by\n$\\pi_E^n$, being exact and $\\mathcal O_E$-linear. Hence\n\n$$\nF=R\\varprojlim_nF_n,\\qquad F_n=F\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\n=(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n).\n$$",
-      "uses": [
-        "sk-lem-formal-closed-support-ii"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Global sections.* $R\\Gamma(S,-)$ is a right adjoint, so it preserves products, and it is exact, so it\npreserves derived inverse limits of sequences. By part (2) of [sk-lem-formal-closed-support] (with\n$\\Lambda=\\mathcal O_E$),\n\n$$\nR\\operatorname{Hom}_X(a_!L_0,b_!M_0)=R\\Gamma(S,F)=R\\varprojlim_nR\\Gamma(S,F_n).\n$$",
-      "uses": [
-        "sk-lem-formal-closed-support"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The bound.* Put $c=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$. By\n[det-uniform-constructible-ext-torsion], $H^qR\\Gamma(S,F_n)=0$ for $q>c$. The Milnor sequence\n\n$$\n0\\to\\varprojlim^1_nH^{q-1}R\\Gamma(S,F_n)\\to H^qR\\varprojlim_nR\\Gamma(S,F_n)\\to\\varprojlim_nH^qR\\Gamma(S,F_n)\\to0\n$$\n\n(the derived limit is the fiber of $1-\\mathrm{shift}$ on a product, and products of abelian groups are\nexact; Stacks, Tag 08TB) shows that $H^q$ of the limit vanishes as soon as $q>c$ and $q-1>c$, i.e. for\n$q>c+1$. This is the claim.",
-      "uses": [
-        "det-uniform-constructible-ext-torsion"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-formal-closed-support-ii",
-    "sk-lem-formal-closed-support",
-    "det-uniform-constructible-ext-torsion"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-integral.md",
-    "place": "## Proof"
+  {
+   "text": "*Completeness of $F$.* Put $F=L_0^\\vee\\otimes u^*R\\underline\\Gamma_Z\\,b_!M_0$. By\n[sk-lem-formal-closed-support-ii], each functor in this composite commutes with derived inverse limits\nof sequences. Each also commutes with reduction modulo $\\pi_E^n$, the cone of multiplication by\n$\\pi_E^n$, being exact and $\\mathcal O_E$-linear. Hence\n\n$$\nF=R\\varprojlim_nF_n,\\qquad F_n=F\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\n=(L_0^\\vee/\\pi_E^n)\\otimes u^*R\\underline\\Gamma_Z\\,b_!(M_0/\\pi_E^n).\n$$",
+   "uses": [
+    "sk-lem-formal-closed-support-ii"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-uniform-constructible-ext-torsion",
-    "sk-lem-formal-closed-support",
-    "sk-lem-formal-closed-support-ii",
-    "sk-prop-pe-milnor"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Global sections.* $R\\Gamma(S,-)$ is a right adjoint, so it preserves products, and it is exact, so it\npreserves derived inverse limits of sequences. By part (2) of [sk-lem-formal-closed-support] (with\n$\\Lambda=\\mathcal O_E$),\n\n$$\nR\\operatorname{Hom}_X(a_!L_0,b_!M_0)=R\\Gamma(S,F)=R\\varprojlim_nR\\Gamma(S,F_n).\n$$",
+   "uses": [
+    "sk-lem-formal-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The bound.* Put $c=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$. By\n[det-uniform-constructible-ext-torsion], $H^qR\\Gamma(S,F_n)=0$ for $q>c$. The Milnor sequence\n\n$$\n0\\to\\varprojlim^1_nH^{q-1}R\\Gamma(S,F_n)\\to H^qR\\varprojlim_nR\\Gamma(S,F_n)\\to\\varprojlim_nH^qR\\Gamma(S,F_n)\\to0\n$$\n\n(the derived limit is the fiber of $1-\\mathrm{shift}$ on a product, and products of abelian groups are\nexact; Stacks, Tag 08TB) shows that $H^q$ of the limit vanishes as soon as $q>c$ and $q-1>c$, i.e. for\n$q>c+1$. This is the claim.",
+   "uses": [
+    "det-uniform-constructible-ext-torsion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-formal-closed-support-ii",
+  "sk-lem-formal-closed-support",
+  "det-uniform-constructible-ext-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-integral.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-uniform-constructible-ext-torsion",
+  "sk-lem-formal-closed-support",
+  "sk-lem-formal-closed-support-ii",
+  "sk-prop-pe-milnor"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

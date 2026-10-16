@@ -1,58 +1,63 @@
 {
-  "id": "det-sp-tower-evaluation-adjoint",
-  "kind": "statement",
-  "title": "Evaluation of towers has an exact right adjoint",
-  "statement": "For $n\\geq1$ and an $\\mathcal O_{E,T}/\\ell^n$-module sheaf $J$ on $T_{\\mathrm{proét}}$,\nlet $r_nJ\\in\\operatorname{Tow}(T,\\mathcal O_E)$ be the tower with $(r_nJ)_r=J$ for\n$r\\geq n$ (an $\\mathcal O_{E,T}/\\ell^r$-module by restriction of scalars along\n$\\mathcal O_{E,T}/\\ell^r\\to\\mathcal O_{E,T}/\\ell^n$), $(r_nJ)_r=0$ for $r<n$,\nidentity transitions $(r_nJ)_{r+1}\\to(r_nJ)_r$ for $r\\geq n$ and zero\ntransitions below. Then $r_n$ is an exact functor, right adjoint to evaluation\n$C_\\bullet\\mapsto C_n$. Consequently $r_n$ preserves injective objects, and\nevery tower $C_\\bullet$ embeds into $\\prod_{n\\geq1}r_nJ_n$ for injective\n$\\mathcal O_{E,T}/\\ell^n$-modules $J_n\\supset C_n$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
-    "place": "node det-sp-tower-evaluation-adjoint, order None"
+ "id": "det-sp-tower-evaluation-adjoint",
+ "blueprint": {
+  "is": "det-sp-tower-evaluation-adjoint",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Evaluation of towers has an exact right adjoint",
+ "statement": "For $n\\geq1$ and an $\\mathcal O_{E,T}/\\ell^n$-module sheaf $J$ on $T_{\\mathrm{proét}}$,\nlet $r_nJ\\in\\operatorname{Tow}(T,\\mathcal O_E)$ be the tower with $(r_nJ)_r=J$ for\n$r\\geq n$ (an $\\mathcal O_{E,T}/\\ell^r$-module by restriction of scalars along\n$\\mathcal O_{E,T}/\\ell^r\\to\\mathcal O_{E,T}/\\ell^n$), $(r_nJ)_r=0$ for $r<n$,\nidentity transitions $(r_nJ)_{r+1}\\to(r_nJ)_r$ for $r\\geq n$ and zero\ntransitions below. Then $r_n$ is an exact functor, right adjoint to evaluation\n$C_\\bullet\\mapsto C_n$. Consequently $r_n$ preserves injective objects, and\nevery tower $C_\\bullet$ embeds into $\\prod_{n\\geq1}r_nJ_n$ for injective\n$\\mathcal O_{E,T}/\\ell^n$-modules $J_n\\supset C_n$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
+  "place": "node det-sp-tower-evaluation-adjoint, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Well-defined.* The transitions are linear over the reduction maps: for\n$r\\geq n$ the identity $J\\to J$ is linear over\n$\\mathcal O/\\ell^{r+1}\\to\\mathcal O/\\ell^r$ since both act through\n$\\mathcal O/\\ell^n$; the maps into level $n-1$ and below are zero.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*Well-defined.* The transitions are linear over the reduction maps: for\n$r\\geq n$ the identity $J\\to J$ is linear over\n$\\mathcal O/\\ell^{r+1}\\to\\mathcal O/\\ell^r$ since both act through\n$\\mathcal O/\\ell^n$; the maps into level $n-1$ and below are zero.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Adjunction.* Let $\\phi:C_\\bullet\\to r_nJ$ be a map of towers. Its components\nfor $r<n$ are zero. For $r\\geq n$, compatibility with transitions gives\n$\\phi_r=\\phi_n\\circ(C_r\\to C_n)$, the transition from level $r$ down to\nlevel $n$ (the transitions of $r_nJ$ being identities). Conversely, for any\n$\\mathcal O_{E,T}/\\ell^n$-linear $\\psi:C_n\\to J$, the family $\\phi_r=0$ ($r<n$),\n$\\phi_r=\\psi\\circ(C_r\\to C_n)$ ($r\\geq n$) commutes with the transitions: for\n$r\\geq n$ by construction, and at $r=n-1$ because the target transition\n$(r_nJ)_n\\to(r_nJ)_{n-1}=0$ is zero. So\n$\\operatorname{Hom}(C_\\bullet,r_nJ)=\\operatorname{Hom}(C_n,J)$, naturally.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Exactness.* Kernels and cokernels of towers are computed levelwise, and at\neach level $r_n$ is either the identity (restriction of scalars, exact) or zero.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Consequences.* A right adjoint of an exact functor preserves injectives. For\nthe embedding, the adjoint of $C_n\\hookrightarrow J_n$ is a map\n$C_\\bullet\\to r_nJ_n$, and the product of these maps is, at level $r$, the map\n$C_r\\to\\prod_{n\\leq r}J_n$ whose component $n=r$ is the monomorphism\n$C_r\\hookrightarrow J_r$; so it is a monomorphism at each level, hence a\nmonomorphism of towers (products of towers being levelwise, and only finitely\nmany factors being nonzero at each level).",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "det-sp-coefficient-towers-abelian"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
-    "place": "## Proof"
+  {
+   "text": "*Adjunction.* Let $\\phi:C_\\bullet\\to r_nJ$ be a map of towers. Its components\nfor $r<n$ are zero. For $r\\geq n$, compatibility with transitions gives\n$\\phi_r=\\phi_n\\circ(C_r\\to C_n)$, the transition from level $r$ down to\nlevel $n$ (the transitions of $r_nJ$ being identities). Conversely, for any\n$\\mathcal O_{E,T}/\\ell^n$-linear $\\psi:C_n\\to J$, the family $\\phi_r=0$ ($r<n$),\n$\\phi_r=\\psi\\circ(C_r\\to C_n)$ ($r\\geq n$) commutes with the transitions: for\n$r\\geq n$ by construction, and at $r=n-1$ because the target transition\n$(r_nJ)_n\\to(r_nJ)_{n-1}=0$ is zero. So\n$\\operatorname{Hom}(C_\\bullet,r_nJ)=\\operatorname{Hom}(C_n,J)$, naturally.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-sp-coefficient-towers-abelian"
-  ],
-  "uses_not_cited": [
-    "det-sp-coefficient-towers-abelian"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Exactness.* Kernels and cokernels of towers are computed levelwise, and at\neach level $r_n$ is either the identity (restriction of scalars, exact) or zero.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Consequences.* A right adjoint of an exact functor preserves injectives. For\nthe embedding, the adjoint of $C_n\\hookrightarrow J_n$ is a map\n$C_\\bullet\\to r_nJ_n$, and the product of these maps is, at level $r$, the map\n$C_r\\to\\prod_{n\\leq r}J_n$ whose component $n=r$ is the monomorphism\n$C_r\\hookrightarrow J_r$; so it is a monomorphism at each level, hence a\nmonomorphism of towers (products of towers being levelwise, and only finitely\nmany factors being nonzero at each level).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "uses_not_cited": [
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

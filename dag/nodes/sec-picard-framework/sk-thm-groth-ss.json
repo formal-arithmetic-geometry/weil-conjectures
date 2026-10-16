@@ -1,98 +1,103 @@
 {
-  "id": "sk-thm-groth-ss",
-  "kind": "statement",
-  "title": "Grothendieck spectral sequence and its Leray specialization",
-  "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories,\n$\\mathcal C$ an abelian category, and $\\Phi:\\mathcal A\\to\\mathcal B$,\n$\\Psi:\\mathcal B\\to\\mathcal C$ additive left exact functors forming a\ncomposable pair with acyclicity in the sense of [sk-def-groth-ss]\n($\\Phi$ sends injective objects to $\\Psi$-acyclic objects). Then for\nevery $A\\in\\mathcal A$ there is a first-quadrant cohomological spectral\nsequence\n\n$$\nE_2^{p,q}\\cong R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr)\\ \\Longrightarrow\\ R^{p+q}(\\Psi\\circ\\Phi)(A).\n$$\n\nIn particular, let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of sites (or\nschemes with their étale or small Zariski sites). For an abelian\nsheaf $F$ on $X$, since $f_*$ carries injectives\nto $h_*$-acyclics ($f_*$ is right adjoint to the exact $f^{-1}$, so\nit preserves injectives), there is a spectral sequence\n\n$$\nE_2^{p,q}=R^ph_*R^qf_*F\\ \\Longrightarrow\\ R^{p+q}(hf)_*F.\n$$\n\nFor $Z$ the punctual site, so that $h_*=\\Gamma(Y,-)$, this is the\n*Leray* spectral sequence\n\n$$\nE_2^{p,q}=H^p(Y,R^qf_*F)\\ \\Longrightarrow\\ H^{p+q}(X,F).\n$$\n\nIn particular this includes $Y_{\\mathrm{zar}}$ and $X_{\\mathrm{zar}}$\nfor a morphism of schemes. For proper $f$ and coherent $F$ the\nZariski sequence is the spectral sequence of\n$\\Gamma(Y,-)\\circ f_*$ on $\\cO$-modules.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
-    "place": "node sk-thm-groth-ss, order 716",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0732"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0733"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01F2"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01F6"
-      }
-    ]
+ "id": "sk-thm-groth-ss",
+ "blueprint": {
+  "is": "sk-thm-groth-ss",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Grothendieck spectral sequence and its Leray specialization",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories,\n$\\mathcal C$ an abelian category, and $\\Phi:\\mathcal A\\to\\mathcal B$,\n$\\Psi:\\mathcal B\\to\\mathcal C$ additive left exact functors forming a\ncomposable pair with acyclicity in the sense of [sk-def-groth-ss]\n($\\Phi$ sends injective objects to $\\Psi$-acyclic objects). Then for\nevery $A\\in\\mathcal A$ there is a first-quadrant cohomological spectral\nsequence\n\n$$\nE_2^{p,q}\\cong R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr)\\ \\Longrightarrow\\ R^{p+q}(\\Psi\\circ\\Phi)(A).\n$$\n\nIn particular, let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of sites (or\nschemes with their étale or small Zariski sites). For an abelian\nsheaf $F$ on $X$, since $f_*$ carries injectives\nto $h_*$-acyclics ($f_*$ is right adjoint to the exact $f^{-1}$, so\nit preserves injectives), there is a spectral sequence\n\n$$\nE_2^{p,q}=R^ph_*R^qf_*F\\ \\Longrightarrow\\ R^{p+q}(hf)_*F.\n$$\n\nFor $Z$ the punctual site, so that $h_*=\\Gamma(Y,-)$, this is the\n*Leray* spectral sequence\n\n$$\nE_2^{p,q}=H^p(Y,R^qf_*F)\\ \\Longrightarrow\\ H^{p+q}(X,F).\n$$\n\nIn particular this includes $Y_{\\mathrm{zar}}$ and $X_{\\mathrm{zar}}$\nfor a morphism of schemes. For proper $f$ and coherent $F$ the\nZariski sequence is the spectral sequence of\n$\\Gamma(Y,-)\\circ f_*$ on $\\cO$-modules.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
+  "place": "node sk-thm-groth-ss, order 716",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0732"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0733"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F2"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-groth-ss"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the double complex).* A Grothendieck abelian category has\nenough injectives, so $A$ has an injective resolution $A\\to I^\\bullet$\nin $\\mathcal A$. Put $C^\\bullet=\\Phi(I^\\bullet)$, a complex in\n$\\mathcal B$ concentrated in degrees $\\ge0$ with\n$\\mathcal H^q(C^\\bullet)=R^q\\Phi(A)$. As $\\mathcal B$ has enough\ninjectives, $C^\\bullet$ has a Cartan–Eilenberg resolution\n$C^\\bullet\\to J^{\\bullet,\\bullet}$; set $D^{p,q}=\\Psi(J^{p,q})$, a\nfirst-quadrant double complex in $\\mathcal C$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-def-groth-ss"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (the double complex).* A Grothendieck abelian category has\nenough injectives, so $A$ has an injective resolution $A\\to I^\\bullet$\nin $\\mathcal A$. Put $C^\\bullet=\\Phi(I^\\bullet)$, a complex in\n$\\mathcal B$ concentrated in degrees $\\ge0$ with\n$\\mathcal H^q(C^\\bullet)=R^q\\Phi(A)$. As $\\mathcal B$ has enough\ninjectives, $C^\\bullet$ has a Cartan–Eilenberg resolution\n$C^\\bullet\\to J^{\\bullet,\\bullet}$; set $D^{p,q}=\\Psi(J^{p,q})$, a\nfirst-quadrant double complex in $\\mathcal C$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 2 (filtration by the second degree).* For fixed $p$ the column\n$J^{p,\\bullet}$ is an injective resolution of $C^p=\\Phi(I^p)$, so the\nfirst spectral sequence of $D$ has\n$E_1^{p,q}=R^q\\Psi\\bigl(\\Phi(I^p)\\bigr)$, which vanishes for $q>0$\nbecause $\\Phi(I^p)$ is $\\Psi$-acyclic (the acyclicity hypothesis). The\nsequence therefore collapses on the bottom edge, and as $I^\\bullet$ is an\ninjective resolution of $A$,\n\n$$\nH^n(\\operatorname{Tot}D)\\cong\n\\mathcal H^n\\bigl(\\Psi\\Phi(I^\\bullet)\\bigr)=R^n(\\Psi\\circ\\Phi)(A) .\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 3 (filtration by the first degree).* By the defining property\nof a Cartan–Eilenberg resolution, the horizontal cohomology objects of\n$J^{\\bullet,\\bullet}$ form injective resolutions of the\n$\\mathcal H^q(C^\\bullet)$, split compatibly with the cycles and\nboundaries; hence the other spectral sequence of the same double complex\nhas\n\n$$\nE_2^{p,q}=R^p\\Psi\\bigl(\\mathcal H^q(C^\\bullet)\\bigr)=R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr).\n$$\n\nBoth spectral sequences abut to $H^\\bullet(\\operatorname{Tot}D)$, which\nStep 2 identifies with $R^{p+q}(\\Psi\\circ\\Phi)(A)$; this is the displayed\nfirst-quadrant spectral sequence, with the image filtration of\n[sk-def-groth-ss] on the abutment, finite in each degree.",
-      "uses": [
-        "sk-def-groth-ss"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4 (morphisms of sites).* The categories of abelian sheaves on\nthe sites $X$, $Y$, $Z$ are Grothendieck abelian, and $f_*$, $h_*$ are\nadditive and left exact. The functor $f^{-1}$ is exact and left adjoint\nto $f_*$, so $f_*$ carries injectives to injectives, and an injective\nsheaf is $h_*$-acyclic. Hence $(\\Phi,\\Psi)=(f_*,h_*)$ is a composable\npair with acyclicity in the sense of [sk-def-groth-ss], and since\n$(hf)_*=h_*f_*$ the theorem gives the spectral sequence\n$R^ph_*R^qf_*F\\Rightarrow R^{p+q}(hf)_*F$. For $Z$ the punctual site,\n$h_*=\\Gamma(Y,-)$ and $(hf)_*=\\Gamma(X,-)$, which is the Leray spectral\nsequence; the Zariski sites of schemes are a special case.",
-      "uses": [
-        "sk-def-groth-ss"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 5 (the Zariski coherent case).* On $\\cO$-modules (again a\nGrothendieck abelian category) the composite is\n$\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$, but $f^*$ is no longer exact, so\nacyclicity is supplied differently: an injective $\\cO_X$-module $\\cI$ is\nflasque (apply injectivity to $j_!\\cI|_U\\to\\cI$ for\n$j:U\\hookrightarrow X$ open to extend a section over $U$), $f_*$\npreserves flasqueness, and a flasque module is $\\Gamma$-acyclic on every\nopen. So $(f_*,\\Gamma(Y,-))$ is again a composable pair with acyclicity\nin the sense of [sk-def-groth-ss], and the theorem applies; for proper\n$f$ and coherent $F$ this is the Zariski sequence of the statement.\n\nThe topos form of the sequence and of the acyclicity criterion are\nStacks, Cohomology on Sites, Lemmas 21.14.5/21.14.6\n([`0732`](https://stacks.math.columbia.edu/tag/0732),\n[`0733`](https://stacks.math.columbia.edu/tag/0733)), and\nfor ringed spaces Lemmas 20.13.4/20.13.8\n([`01F2`](https://stacks.math.columbia.edu/tag/01F2),\n[`01F6`](https://stacks.math.columbia.edu/tag/01F6)).",
-      "uses": [
-        "sk-def-groth-ss"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-def-groth-ss"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
-    "place": "## Proof"
+  {
+   "text": "*Step 2 (filtration by the second degree).* For fixed $p$ the column\n$J^{p,\\bullet}$ is an injective resolution of $C^p=\\Phi(I^p)$, so the\nfirst spectral sequence of $D$ has\n$E_1^{p,q}=R^q\\Psi\\bigl(\\Phi(I^p)\\bigr)$, which vanishes for $q>0$\nbecause $\\Phi(I^p)$ is $\\Psi$-acyclic (the acyclicity hypothesis). The\nsequence therefore collapses on the bottom edge, and as $I^\\bullet$ is an\ninjective resolution of $A$,\n\n$$\nH^n(\\operatorname{Tot}D)\\cong\n\\mathcal H^n\\bigl(\\Psi\\Phi(I^\\bullet)\\bigr)=R^n(\\Psi\\circ\\Phi)(A) .\n$$",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 716,
-  "blueprint_uses": [
+  {
+   "text": "*Step 3 (filtration by the first degree).* By the defining property\nof a Cartan–Eilenberg resolution, the horizontal cohomology objects of\n$J^{\\bullet,\\bullet}$ form injective resolutions of the\n$\\mathcal H^q(C^\\bullet)$, split compatibly with the cycles and\nboundaries; hence the other spectral sequence of the same double complex\nhas\n\n$$\nE_2^{p,q}=R^p\\Psi\\bigl(\\mathcal H^q(C^\\bullet)\\bigr)=R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr).\n$$\n\nBoth spectral sequences abut to $H^\\bullet(\\operatorname{Tot}D)$, which\nStep 2 identifies with $R^{p+q}(\\Psi\\circ\\Phi)(A)$; this is the displayed\nfirst-quadrant spectral sequence, with the image filtration of\n[sk-def-groth-ss] on the abutment, finite in each degree.",
+   "uses": [
     "sk-def-groth-ss"
-  ],
-  "blueprint_lean": [
-    "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4 (morphisms of sites).* The categories of abelian sheaves on\nthe sites $X$, $Y$, $Z$ are Grothendieck abelian, and $f_*$, $h_*$ are\nadditive and left exact. The functor $f^{-1}$ is exact and left adjoint\nto $f_*$, so $f_*$ carries injectives to injectives, and an injective\nsheaf is $h_*$-acyclic. Hence $(\\Phi,\\Psi)=(f_*,h_*)$ is a composable\npair with acyclicity in the sense of [sk-def-groth-ss], and since\n$(hf)_*=h_*f_*$ the theorem gives the spectral sequence\n$R^ph_*R^qf_*F\\Rightarrow R^{p+q}(hf)_*F$. For $Z$ the punctual site,\n$h_*=\\Gamma(Y,-)$ and $(hf)_*=\\Gamma(X,-)$, which is the Leray spectral\nsequence; the Zariski sites of schemes are a special case.",
+   "uses": [
+    "sk-def-groth-ss"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 5 (the Zariski coherent case).* On $\\cO$-modules (again a\nGrothendieck abelian category) the composite is\n$\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$, but $f^*$ is no longer exact, so\nacyclicity is supplied differently: an injective $\\cO_X$-module $\\cI$ is\nflasque (apply injectivity to $j_!\\cI|_U\\to\\cI$ for\n$j:U\\hookrightarrow X$ open to extend a section over $U$), $f_*$\npreserves flasqueness, and a flasque module is $\\Gamma$-acyclic on every\nopen. So $(f_*,\\Gamma(Y,-))$ is again a composable pair with acyclicity\nin the sense of [sk-def-groth-ss], and the theorem applies; for proper\n$f$ and coherent $F$ this is the Zariski sequence of the statement.\n\nThe topos form of the sequence and of the acyclicity criterion are\nStacks, Cohomology on Sites, Lemmas 21.14.5/21.14.6\n([`0732`](https://stacks.math.columbia.edu/tag/0732),\n[`0733`](https://stacks.math.columbia.edu/tag/0733)), and\nfor ringed spaces Lemmas 20.13.4/20.13.8\n([`01F2`](https://stacks.math.columbia.edu/tag/01F2),\n[`01F6`](https://stacks.math.columbia.edu/tag/01F6)).",
+   "uses": [
+    "sk-def-groth-ss"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-groth-ss"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 716,
+ "blueprint_uses": [
+  "sk-def-groth-ss"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

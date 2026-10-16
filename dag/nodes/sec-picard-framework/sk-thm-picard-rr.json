@@ -1,111 +1,116 @@
 {
-  "id": "sk-thm-picard-rr",
-  "kind": "statement",
-  "title": "Riemann–Roch and coherent Serre duality",
-  "statement": "Fix a smooth projective geometrically connected curve $C/k$, and set\n$g=\\dim_kH^1(C,\\cO_C)$. (Smooth proper geometrically connected curves\nover a field are projective (Stacks Project, Tag 0A26), so this includes\nthe proper curves of the main text.) For an invertible sheaf $\\cL$ on $C$,\n\n$$\n\\chi(C,\\cL)=\\deg\\cL+1-g,\n\\qquad\nH^1(C,\\cL)^\\vee\\simeq H^0(C,\\omega_{C/k}\\otimes\\cL^{-1}),\n\\qquad \\deg\\omega_{C/k}=2g-2.\n$$\n\nThese identifications commute with field extension. In particular, if\n$\\deg\\cL>2g-2$, then\n\n$$\nH^1(C,\\cL)=0,\n\\qquad h^0(C,\\cL)=\\deg\\cL+1-g.\n$$\n\nHere $\\deg\\cL=\\deg D=\\sum_xn_x[\\kappa(x):k]$ for any divisor\n$D=\\sum_xn_x\\,x$ with $\\cL\\cong\\cO_C(D)$ (well defined, since principal\ndivisors have degree $0$), and $\\chi(C,\\cL)=h^0(C,\\cL)-h^1(C,\\cL)$.\n\n*Complements* (also proved in this sketch and used in this block). The\nRiemann–Roch formula extends to coherent $\\cF$ as\n$\\chi(\\cF)=\\deg\\cF+\\operatorname{rk}(\\cF)(1-g)$, with\n$\\deg\\cF=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\cF/\\mathcal T)$ for the torsion\nsubsheaf $\\mathcal T$; and:\n\n1. **(G)** *positive degree $\\Rightarrow$ ample:* a line bundle $\\cL$\non $C$ with $\\deg\\cL>0$ is ample;\n1. **(H)** *affine complement:* if $D$ is an effective Cartier divisor\non a proper $k$-scheme $X$ with $\\cO_X(D)$ ample, then\n$X\\setminus\\operatorname{Supp}(D)$ is affine.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-    "place": "node sk-thm-picard-rr, order 605",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A26"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B5B"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-def-av-jacobian",
-    "sk-def-av-pic"
-  ],
-  "proof": [
-    {
-      "text": "This is coherent duality and Riemann–Roch for smooth curves (Stacks\nProject, Tag 0B5B); the duality is given by the residue trace on\ndifferentials ([sk-thm-picard-duality], with $n=1$, $q=1$, $\\cF=\\cL$).",
-      "uses": [
-        "sk-thm-picard-duality"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Riemann–Roch.* By additivity of $\\chi$ in short exact sequences, the\ntorsion part of a coherent $\\cF$ (for which $\\chi=h^0$ is the length,\ni.e. the degree) and a filtration of the locally free quotient by line\nbundles (along which $\\deg\\det$ is additive) reduce the formula to line\nbundles $\\cO_C(D)$. There\n$0\\to\\cO_C(D-x)\\to\\cO_C(D)\\to\\kappa(x)\\to0$ gives\n$\\chi(\\cO_C(D))=\\chi(\\cO_C(D-x))+[\\kappa(x):k]$ (coherent cohomology\nvanishes in degrees $\\ge2$ on the one-dimensional noetherian space $C$,\nso $\\chi=h^0-h^1$ throughout); applied to $D$ when $n_x>0$ and to $D+x$\nwhen $n_x<0$, it lowers $\\sum_x|n_x|$ by one and leaves $\\chi-\\deg$\nunchanged, so by induction $\\chi(\\cO_C(D))=\\deg D+\\chi(\\cO_C)$, and\n$\\chi(\\cO_C)=h^0-h^1=1-g$ because $H^0(C,\\cO_C)=k$ ($C$ geometrically\nconnected and geometrically reduced).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Canonical degree.* Duality with $\\cL=\\cO_C$ gives $h^0(\\omega_{C/k})=g$\nand $h^1(\\omega_{C/k})=h^0(\\cO_C)=1$, so\n$\\deg\\omega_{C/k}=\\chi(\\omega_{C/k})-\\chi(\\cO_C)=(g-1)-(1-g)=2g-2$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Field extension.* For $K/k$, flat base change identifies\n$H^i(C_K,\\cL_K)=H^i(C,\\cL)\\otimes_kK$, degrees and the genus are\npreserved, $\\omega_{C_K/K}=(\\omega_{C/k})_K$, and the residue trace is\ncompatible with base change, so all three identifications commute with\nextension of the ground field.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Vanishing.* If $\\deg\\cL>2g-2$, the dual sheaf\n$\\omega_{C/k}\\otimes\\cL^{-1}$ has negative degree. A nonzero section of\nan invertible sheaf on an integral curve has an effective zero divisor,\nof degree $\\ge0$, so a negative-degree sheaf has no nonzero section.\nHence $H^1(C,\\cL)=0$, and Riemann–Roch gives\n$h^0(C,\\cL)=\\chi(C,\\cL)=\\deg\\cL+1-g$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(G).* Ampleness descends along $\\Spec\\bar k\\to\\Spec k$ and degree is\npreserved by flat base change, so we may take $k$ algebraically closed,\nwhere every closed point is rational. For $m\\deg\\cL\\ge2g+1$ and closed\npoints $P,Q$ (possibly equal), the range $\\deg>2g-2$ above gives\n$h^0(\\cL^{\\otimes m}(-P))=h^0(\\cL^{\\otimes m})-1$ and\n$h^0(\\cL^{\\otimes m}(-P-Q))=h^0(\\cL^{\\otimes m})-2$, i.e.\n$\\cL^{\\otimes m}$ is base-point free and separates points and tangent\nvectors; hence $\\cL^{\\otimes m}$ is very ample and $\\cL$ is ample.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(H).* Classical: the complement of the support of an ample effective\nCartier divisor $D$ is the non-vanishing locus of the canonical section\nof $\\cO_X(D)$, and non-vanishing loci of sections of an ample sheaf on a\nproper scheme are affine.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-thm-picard-rr",
+ "blueprint": {
+  "is": "sk-thm-picard-rr",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Riemann–Roch and coherent Serre duality",
+ "statement": "Fix a smooth projective geometrically connected curve $C/k$, and set\n$g=\\dim_kH^1(C,\\cO_C)$. (Smooth proper geometrically connected curves\nover a field are projective (Stacks Project, Tag 0A26), so this includes\nthe proper curves of the main text.) For an invertible sheaf $\\cL$ on $C$,\n\n$$\n\\chi(C,\\cL)=\\deg\\cL+1-g,\n\\qquad\nH^1(C,\\cL)^\\vee\\simeq H^0(C,\\omega_{C/k}\\otimes\\cL^{-1}),\n\\qquad \\deg\\omega_{C/k}=2g-2.\n$$\n\nThese identifications commute with field extension. In particular, if\n$\\deg\\cL>2g-2$, then\n\n$$\nH^1(C,\\cL)=0,\n\\qquad h^0(C,\\cL)=\\deg\\cL+1-g.\n$$\n\nHere $\\deg\\cL=\\deg D=\\sum_xn_x[\\kappa(x):k]$ for any divisor\n$D=\\sum_xn_x\\,x$ with $\\cL\\cong\\cO_C(D)$ (well defined, since principal\ndivisors have degree $0$), and $\\chi(C,\\cL)=h^0(C,\\cL)-h^1(C,\\cL)$.\n\n*Complements* (also proved in this sketch and used in this block). The\nRiemann–Roch formula extends to coherent $\\cF$ as\n$\\chi(\\cF)=\\deg\\cF+\\operatorname{rk}(\\cF)(1-g)$, with\n$\\deg\\cF=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\cF/\\mathcal T)$ for the torsion\nsubsheaf $\\mathcal T$; and:\n\n1. **(G)** *positive degree $\\Rightarrow$ ample:* a line bundle $\\cL$\non $C$ with $\\deg\\cL>0$ is ample;\n1. **(H)** *affine complement:* if $D$ is an effective Cartier divisor\non a proper $k$-scheme $X$ with $\\cO_X(D)$ ample, then\n$X\\setminus\\operatorname{Supp}(D)$ is affine.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "node sk-thm-picard-rr, order 605",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A26"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B5B"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-av-jacobian",
+  "sk-def-av-pic"
+ ],
+ "proof": [
+  {
+   "text": "This is coherent duality and Riemann–Roch for smooth curves (Stacks\nProject, Tag 0B5B); the duality is given by the residue trace on\ndifferentials ([sk-thm-picard-duality], with $n=1$, $q=1$, $\\cF=\\cL$).",
+   "uses": [
     "sk-thm-picard-duality"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 605,
-  "blueprint_uses": [
-    "sk-def-av-jacobian",
-    "sk-def-av-pic",
-    "sk-thm-picard-duality"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.eulerChar_free_eq",
-    "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
-    "AlgebraicGeometry.Scheme.finrankH_zero_eq",
-    "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
-    "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.Scheme.eulerChar_free_eq",
-    "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
-    "AlgebraicGeometry.Scheme.finrankH_zero_eq",
-    "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
-    "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-def-av-jacobian",
-    "sk-def-av-pic"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Riemann–Roch.* By additivity of $\\chi$ in short exact sequences, the\ntorsion part of a coherent $\\cF$ (for which $\\chi=h^0$ is the length,\ni.e. the degree) and a filtration of the locally free quotient by line\nbundles (along which $\\deg\\det$ is additive) reduce the formula to line\nbundles $\\cO_C(D)$. There\n$0\\to\\cO_C(D-x)\\to\\cO_C(D)\\to\\kappa(x)\\to0$ gives\n$\\chi(\\cO_C(D))=\\chi(\\cO_C(D-x))+[\\kappa(x):k]$ (coherent cohomology\nvanishes in degrees $\\ge2$ on the one-dimensional noetherian space $C$,\nso $\\chi=h^0-h^1$ throughout); applied to $D$ when $n_x>0$ and to $D+x$\nwhen $n_x<0$, it lowers $\\sum_x|n_x|$ by one and leaves $\\chi-\\deg$\nunchanged, so by induction $\\chi(\\cO_C(D))=\\deg D+\\chi(\\cO_C)$, and\n$\\chi(\\cO_C)=h^0-h^1=1-g$ because $H^0(C,\\cO_C)=k$ ($C$ geometrically\nconnected and geometrically reduced).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Canonical degree.* Duality with $\\cL=\\cO_C$ gives $h^0(\\omega_{C/k})=g$\nand $h^1(\\omega_{C/k})=h^0(\\cO_C)=1$, so\n$\\deg\\omega_{C/k}=\\chi(\\omega_{C/k})-\\chi(\\cO_C)=(g-1)-(1-g)=2g-2$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Field extension.* For $K/k$, flat base change identifies\n$H^i(C_K,\\cL_K)=H^i(C,\\cL)\\otimes_kK$, degrees and the genus are\npreserved, $\\omega_{C_K/K}=(\\omega_{C/k})_K$, and the residue trace is\ncompatible with base change, so all three identifications commute with\nextension of the ground field.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Vanishing.* If $\\deg\\cL>2g-2$, the dual sheaf\n$\\omega_{C/k}\\otimes\\cL^{-1}$ has negative degree. A nonzero section of\nan invertible sheaf on an integral curve has an effective zero divisor,\nof degree $\\ge0$, so a negative-degree sheaf has no nonzero section.\nHence $H^1(C,\\cL)=0$, and Riemann–Roch gives\n$h^0(C,\\cL)=\\chi(C,\\cL)=\\deg\\cL+1-g$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(G).* Ampleness descends along $\\Spec\\bar k\\to\\Spec k$ and degree is\npreserved by flat base change, so we may take $k$ algebraically closed,\nwhere every closed point is rational. For $m\\deg\\cL\\ge2g+1$ and closed\npoints $P,Q$ (possibly equal), the range $\\deg>2g-2$ above gives\n$h^0(\\cL^{\\otimes m}(-P))=h^0(\\cL^{\\otimes m})-1$ and\n$h^0(\\cL^{\\otimes m}(-P-Q))=h^0(\\cL^{\\otimes m})-2$, i.e.\n$\\cL^{\\otimes m}$ is base-point free and separates points and tangent\nvectors; hence $\\cL^{\\otimes m}$ is very ample and $\\cL$ is ample.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(H).* Classical: the complement of the support of an ample effective\nCartier divisor $D$ is the non-vanishing locus of the canonical section\nof $\\cO_X(D)$, and non-vanishing loci of sections of an ample sheaf on a\nproper scheme are affine.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-picard-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 605,
+ "blueprint_uses": [
+  "sk-def-av-jacobian",
+  "sk-def-av-pic",
+  "sk-thm-picard-duality"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+  "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+  "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+  "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
+  "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+  "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+  "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+  "AlgebraicGeometry.Scheme.isAmple_of_degree_pos",
+  "AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-av-jacobian",
+  "sk-def-av-pic"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

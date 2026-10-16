@@ -1,5 +1,14 @@
 {
  "id": "new-picard-residue-homology-comparison-source-residue",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "picard_residue_homology_source_residue_comparison",
  "statement": "Under the complete signature below, the explicit degree-one affine residue cycles modulo boundaries compute the derived residue fibre of any object represented by the strictly perfect complex; no geometric direct-image data are assumed.\n\nExact Lean statement:\ntheorem picard_residue_homology_source_residue_comparison\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    (W : Scheme.{v}) (E : schemeDerivedCategory W) (w : W)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj K)) :\n    Nonempty (affineResidueCycleHomology W U p K ≃+\n      derivedFiberCohomology W E 1 w)",
@@ -78,14 +87,6 @@
   "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource",
   "date": "2026-10-14",
   "group": "Q2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "new-picard-residue-homology-comparison-source",
-   "place": "Tags 06YJ and 010V",
-   "via": []
-  }
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",

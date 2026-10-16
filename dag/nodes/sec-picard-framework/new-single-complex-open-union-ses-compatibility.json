@@ -1,5 +1,14 @@
 {
  "id": "new-single-complex-open-union-ses-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Compatibility component for union SES maps",
  "statement": "theorem singleComplexOpenComparison_union_ses_compatibility\n    {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]\n    (A B A' B' : CochainComplex C ℤ)\n    (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n    (hc : t ≫ β = α ≫ t')\n    {L₁ L₂ L₃ R₁ R₂ R₃ : DerivedCategory C}\n    (b₁ : L₁ ⟶ R₁) (b₂ : L₂ ⟶ R₂) (b₃ : L₃ ⟶ R₃)\n    (e₁ : DerivedCategory.Q.obj A ≅ L₁)\n    (e₂ : DerivedCategory.Q.obj B ≅ L₂)\n    (e₃ : DerivedCategory.Q.obj (mappingCone t) ≅ L₃)\n    (e₁' : DerivedCategory.Q.obj A' ≅ R₁)\n    (e₂' : DerivedCategory.Q.obj B' ≅ R₂)\n    (e₃' : DerivedCategory.Q.obj (mappingCone t') ≅ R₃)\n    (hα : DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ b₁)\n    (hβ : DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ b₂)\n    (hγ : DerivedCategory.Q.map (mappingCone.map t t' α β hc) ≫ e₃'.hom =\n      e₃.hom ≫ b₃) :\n    ∃ (P P' : ShortComplex (CochainComplex C ℤ)) (m : P ⟶ P')\n      (d₁ : DerivedCategory.Q.obj P.X₁ ≅ L₁)\n      (d₂ : DerivedCategory.Q.obj P.X₂ ≅ L₂)\n      (d₃ : DerivedCategory.Q.obj P.X₃ ≅ L₃)\n      (d₁' : DerivedCategory.Q.obj P'.X₁ ≅ R₁)\n      (d₂' : DerivedCategory.Q.obj P'.X₂ ≅ R₂)\n      (d₃' : DerivedCategory.Q.obj P'.X₃ ≅ R₃),\n      P.ShortExact ∧ P'.ShortExact ∧\n      DerivedCategory.Q.map m.τ₁ ≫ d₁'.hom = d₁.hom ≫ b₁ ∧\n      DerivedCategory.Q.map m.τ₂ ≫ d₂'.hom = d₂.hom ≫ b₂ ∧\n      DerivedCategory.Q.map m.τ₃ ≫ d₃'.hom = d₃.hom ≫ b₃",
@@ -67,16 +76,6 @@
   "branch": "sheaf-dag",
   "by": "S4",
   "date": "2026-10-14"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-single-complex-open-union-ses-presentation",
-   "place": "Decomposition of the chain-level union SES presentation before the target theorem.",
-   "via": [
-    "lem-pc-single-complex-open-union-ses-presentation"
-   ]
-  }
  },
  "reviewed": {
   "date": "2026-10-13",

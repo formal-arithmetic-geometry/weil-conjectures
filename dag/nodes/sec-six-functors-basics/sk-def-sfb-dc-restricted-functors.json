@@ -1,51 +1,31 @@
 {
-  "id": "sk-def-sfb-dc-restricted-functors",
-  "kind": "definition",
-  "title": "$Lf^*$, $Rf_*$, $j_!$, $\\otimes^{\\mathrm L}$, $\\RHom$ on $D_{\\mathrm{cons}}$: restrictions",
-  "statement": "Work in the setting of [sk-def-sfb-dc-setting], and let $\\Lambda$ be a commutative condensed\nring. Consider the following functors on the ambient derived categories of module objects:\n\n- the derived pullback $Lf^*\\colon D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda_X})$ and the derived\n  pushforward $Rf_*\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y})$ of a morphism\n  $f\\colon X\\to Y$ ([sk-def-sfb-module-derived-pushpull]);\n- the extension by zero $j_!=D(j_!)\\colon D(\\Mod_{\\Lambda_U})\\to D(\\Mod_{\\Lambda_X})$ along an\n  open immersion $j\\colon U\\to X$, applied levelwise to complexes\n  ([sk-def-sfb-module-lower-shriek], [sk-prop-sfb-module-derived-factorization]);\n- the derived tensor product $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ and the derived internal hom\n  $\\RHom_{\\Lambda_X}(-,-)$ on $D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-derived-tensor-hom]).\n\nEach of them carries bounded constructible complexes ([sk-def-sfb-bounded-constructible]) to\nbounded constructible complexes in the following cases. For $Lf^*$ and $j_!$ this holds for every\n$\\Lambda$. For $Rf_*$, $\\otimes^{\\mathrm L}$ and $\\RHom$ it holds for the $\\ell$-adic rings\n$\\Lambda=\\underline{\\cO}_E$, $\\underline E$ ($E/\\mathbf Q_\\ell$ finite;\n[sk-def-sfb-condensed-ring]) and $\\Lambda=\\underline{\\Qlb}$ ([sk-def-sfb-qlbar-condensed]); these\nare Deligne's finiteness theorems. It fails for a general $\\Lambda$.\n\nWhen the preservation property holds, the functor on $D_{\\mathrm{cons}}$ is defined as the\n**restriction** of the ambient functor: it is the unique functor whose composite with the fully\nfaithful inclusion $D_{\\mathrm{cons}}\\subseteq D(\\Mod)$ equals the composite of the inclusion with\nthe ambient functor. This gives\n\n$$\n\\begin{gathered}\nLf^*\\colon D_{\\mathrm{cons}}(Y,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\nRf_*\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Y,\\Lambda),\\qquad\nj_!\\colon D_{\\mathrm{cons}}(U,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\\\\n-\\otimes^{\\mathrm L}-\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\n\\RHom(-,-)\\colon D_{\\mathrm{cons}}(X,\\Lambda)^{\\mathrm{op}}\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda).\n\\end{gathered}\n$$\n\nBy construction they commute with the inclusions. Nothing is derived afresh. The following\nstructure is also restricted along the fully faithful inclusions:\n\n- the adjunctions $Lf^*\\dashv Rf_*$, $j_!\\dashv Lj^*$, and $K\\otimes^{\\mathrm L}-\\dashv\\RHom(K,-)$ for\n  $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$;\n- the composition isomorphism $L(g\\circ f)^*\\cong Lf^*\\circ Lg^*$ for $f\\colon X\\to Y$,\n  $g\\colon Y\\to Z$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/_section.md",
-    "place": "node sk-def-sfb-dc-restricted-functors, order 1699"
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-module-derived-pushpull",
-    "sk-def-sfb-module-lower-shriek",
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-qlbar-condensed",
-    "sk-thm-sfb-qlbar-two-colimit"
-  ],
-  "proof": [
-    {
-      "text": "The preservation statements are [lem-sfb-dc-upper-star-preserves],\n[lem-sfb-dc-lower-star-preserves], [lem-sfb-dc-open-lower-shriek-preserves],\n[lem-sfb-dc-tensor-preserves] and [lem-sfb-dc-hom-preserves]. The restricted functors are\n[def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor] and [def-sfb-dc-hom].",
-      "uses": [
-        "lem-sfb-dc-upper-star-preserves",
-        "lem-sfb-dc-lower-star-preserves",
-        "lem-sfb-dc-open-lower-shriek-preserves",
-        "lem-sfb-dc-tensor-preserves",
-        "lem-sfb-dc-hom-preserves",
-        "def-sfb-dc-upper-star",
-        "def-sfb-dc-lower-star",
-        "def-sfb-dc-open-lower-shriek",
-        "def-sfb-dc-tensor",
-        "def-sfb-dc-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Two general facts are used. If an ambient functor $F$ carries the full subcategory $\\mathcal C$ into\nthe full subcategory $\\mathcal C'$, then $F\\circ\\iota_{\\mathcal C}$ factors uniquely through\n$\\iota_{\\mathcal C'}$. If the two functors of an ambient adjunction $L\\dashv R$ both restrict, then\nthe Hom-bijections restrict too, since Hom-sets in a full subcategory are the ambient ones. So the\nadjunction restricts. In the same way, a natural isomorphism between composites of restricted\nfunctors is the preimage, under the fully faithful inclusion, of the ambient one. This gives the\nadjunctions [def-sfb-dc-upper-lower-adjunction], [def-sfb-dc-open-lower-shriek-adjunction] and\n[def-sfb-dc-tensor-hom-adjunction], and the composition isomorphism [def-sfb-dc-upper-star-comp].",
-      "uses": [
-        "def-sfb-dc-upper-lower-adjunction",
-        "def-sfb-dc-open-lower-shriek-adjunction",
-        "def-sfb-dc-tensor-hom-adjunction",
-        "def-sfb-dc-upper-star-comp"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": "sk-def-sfb-dc-restricted-functors",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "$Lf^*$, $Rf_*$, $j_!$, $\\otimes^{\\mathrm L}$, $\\RHom$ on $D_{\\mathrm{cons}}$: restrictions",
+ "statement": "Work in the setting of [sk-def-sfb-dc-setting], and let $\\Lambda$ be a commutative condensed\nring. Consider the following functors on the ambient derived categories of module objects:\n\n- the derived pullback $Lf^*\\colon D(\\Mod_{\\Lambda_Y})\\to D(\\Mod_{\\Lambda_X})$ and the derived\n  pushforward $Rf_*\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y})$ of a morphism\n  $f\\colon X\\to Y$ ([sk-def-sfb-module-derived-pushpull]);\n- the extension by zero $j_!=D(j_!)\\colon D(\\Mod_{\\Lambda_U})\\to D(\\Mod_{\\Lambda_X})$ along an\n  open immersion $j\\colon U\\to X$, applied levelwise to complexes\n  ([sk-def-sfb-module-lower-shriek], [sk-prop-sfb-module-derived-factorization]);\n- the derived tensor product $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ and the derived internal hom\n  $\\RHom_{\\Lambda_X}(-,-)$ on $D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-derived-tensor-hom]).\n\nEach of them carries bounded constructible complexes ([sk-def-sfb-bounded-constructible]) to\nbounded constructible complexes in the following cases. For $Lf^*$ and $j_!$ this holds for every\n$\\Lambda$. For $Rf_*$, $\\otimes^{\\mathrm L}$ and $\\RHom$ it holds for the $\\ell$-adic rings\n$\\Lambda=\\underline{\\cO}_E$, $\\underline E$ ($E/\\mathbf Q_\\ell$ finite;\n[sk-def-sfb-condensed-ring]) and $\\Lambda=\\underline{\\Qlb}$ ([sk-def-sfb-qlbar-condensed]); these\nare Deligne's finiteness theorems. It fails for a general $\\Lambda$.\n\nWhen the preservation property holds, the functor on $D_{\\mathrm{cons}}$ is defined as the\n**restriction** of the ambient functor: it is the unique functor whose composite with the fully\nfaithful inclusion $D_{\\mathrm{cons}}\\subseteq D(\\Mod)$ equals the composite of the inclusion with\nthe ambient functor. This gives\n\n$$\n\\begin{gathered}\nLf^*\\colon D_{\\mathrm{cons}}(Y,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\nRf_*\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Y,\\Lambda),\\qquad\nj_!\\colon D_{\\mathrm{cons}}(U,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\\\\n-\\otimes^{\\mathrm L}-\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda),\\qquad\n\\RHom(-,-)\\colon D_{\\mathrm{cons}}(X,\\Lambda)^{\\mathrm{op}}\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda).\n\\end{gathered}\n$$\n\nBy construction they commute with the inclusions. Nothing is derived afresh. The following\nstructure is also restricted along the fully faithful inclusions:\n\n- the adjunctions $Lf^*\\dashv Rf_*$, $j_!\\dashv Lj^*$, and $K\\otimes^{\\mathrm L}-\\dashv\\RHom(K,-)$ for\n  $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$;\n- the composition isomorphism $L(g\\circ f)^*\\cong Lf^*\\circ Lg^*$ for $f\\colon X\\to Y$,\n  $g\\colon Y\\to Z$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/_section.md",
+  "place": "node sk-def-sfb-dc-restricted-functors, order 1699"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The preservation statements are [lem-sfb-dc-upper-star-preserves],\n[lem-sfb-dc-lower-star-preserves], [lem-sfb-dc-open-lower-shriek-preserves],\n[lem-sfb-dc-tensor-preserves] and [lem-sfb-dc-hom-preserves]. The restricted functors are\n[def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor] and [def-sfb-dc-hom].",
+   "uses": [
     "lem-sfb-dc-upper-star-preserves",
     "lem-sfb-dc-lower-star-preserves",
     "lem-sfb-dc-open-lower-shriek-preserves",
@@ -55,72 +35,97 @@
     "def-sfb-dc-lower-star",
     "def-sfb-dc-open-lower-shriek",
     "def-sfb-dc-tensor",
-    "def-sfb-dc-hom",
+    "def-sfb-dc-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Two general facts are used. If an ambient functor $F$ carries the full subcategory $\\mathcal C$ into\nthe full subcategory $\\mathcal C'$, then $F\\circ\\iota_{\\mathcal C}$ factors uniquely through\n$\\iota_{\\mathcal C'}$. If the two functors of an ambient adjunction $L\\dashv R$ both restrict, then\nthe Hom-bijections restrict too, since Hom-sets in a full subcategory are the ambient ones. So the\nadjunction restricts. In the same way, a natural isomorphism between composites of restricted\nfunctors is the preimage, under the fully faithful inclusion, of the ambient one. This gives the\nadjunctions [def-sfb-dc-upper-lower-adjunction], [def-sfb-dc-open-lower-shriek-adjunction] and\n[def-sfb-dc-tensor-hom-adjunction], and the composition isomorphism [def-sfb-dc-upper-star-comp].",
+   "uses": [
     "def-sfb-dc-upper-lower-adjunction",
     "def-sfb-dc-open-lower-shriek-adjunction",
     "def-sfb-dc-tensor-hom-adjunction",
     "def-sfb-dc-upper-star-comp"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1699,
-  "blueprint_uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-thm-sfb-rationalization-comparison",
-    "sk-thm-sfb-qlbar-two-colimit"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
-    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-thm-sfb-qlbar-two-colimit"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-dc-lower-star-preserves",
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "lem-sfb-dc-tensor-preserves",
+  "lem-sfb-dc-hom-preserves",
+  "def-sfb-dc-upper-star",
+  "def-sfb-dc-lower-star",
+  "def-sfb-dc-open-lower-shriek",
+  "def-sfb-dc-tensor",
+  "def-sfb-dc-hom",
+  "def-sfb-dc-upper-lower-adjunction",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "def-sfb-dc-tensor-hom-adjunction",
+  "def-sfb-dc-upper-star-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1699,
+ "blueprint_uses": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-thm-sfb-rationalization-comparison",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarComp",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStar",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriek",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedTensor_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_derivedHom_obj",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensor",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHom",
+  "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunction"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

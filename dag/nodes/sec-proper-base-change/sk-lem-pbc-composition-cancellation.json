@@ -1,73 +1,78 @@
 {
-  "id": "sk-lem-pbc-composition-cancellation",
-  "kind": "statement",
-  "title": "Composition and cancellation",
-  "statement": "Let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be proper morphisms.\n\n1. If $\\mathrm{PBC}(u)$ and $\\mathrm{PBC}(v)$ hold, then $\\mathrm{PBC}(vu)$\n   holds.\n2. If $u$ is surjective and $\\mathrm{PBC}(u)$ and $\\mathrm{PBC}(vu)$ hold,\n   then $\\mathrm{PBC}(v)$ holds.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-composition-cancellation/_section.md",
-    "place": "node sk-lem-pbc-composition-cancellation, order 1058",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0734"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-def-pbc"
-  ],
-  "proof": [
-    {
-      "text": "We use [sk-thm-iff]. Fix a prime $r$ and an arbitrary base change\n$c:Z'\\to Z$. Write $a:X'\\to X$ and $b:Y'\\to Y$ for the projections, and\n$u':X'\\to Y'$, $v':Y'\\to Z'$ for the induced maps. Since inverse image of\nconstant-coefficient module sheaves is exact, its right adjoint $u_*$\npreserves injectives. Thus the Grothendieck spectral sequence for direct\nimages ([sk-thm-groth-ss]; Stacks Project, Tag 0734) is available:\n\n$$\nR^pv'_*R^qu'_*a^{-1}J\\ \\Longrightarrow\\ R^{p+q}(v'u')_*a^{-1}J.\n$$\n\nIt is a first-quadrant spectral sequence, natural in the sheaf $J$.",
-      "uses": [
-        "sk-thm-iff",
-        "sk-thm-groth-ss"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1)* Let $J$ be injective among $\\mathbf F_r$-module sheaves on $X$. The\ncondition $\\mathrm{IA}_r(u)$ gives $R^qu'_*a^{-1}J=0$ for $q>0$. Degree-zero\nproper base change [sk-prop-pbc-degree-zero] identifies, as sheaves of\n$\\mathbf F_r$-modules on $Y'_{\\Et}$,\n\n$$\nu'_*a^{-1}J\\simeq b^{-1}u_*J.\n$$\n\nThe sheaf $u_*J$ is injective, so $\\mathrm{IA}_r(v)$ kills\n$R^pv'_*b^{-1}u_*J$ for $p>0$. Thus the spectral sequence gives\n$R^m(v'u')_*a^{-1}J=0$ for $m>0$. This proves $\\mathrm{IA}_r(vu)$ for every\n$r$, and hence (1).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(2)* Let $I$ be injective among $\\mathbf F_r$-module sheaves on $Y$. Choose a\nmonomorphism of sheaves $u^{-1}I\\hookrightarrow J$ with $J$ injective on $X$,\nand let $\\iota:I\\to u_*J$ be its adjoint. This is a global sheaf morphism. It\nis monic: for a geometric point $\\bar y$ choose a geometric point $\\bar x$\nabove it, which exists by surjectivity of $u$. The composite\n\n$$\nI_{\\bar y}\\xrightarrow{\\ \\iota_{\\bar y}\\ }(u_*J)_{\\bar y}\\longrightarrow J_{\\bar x}\n$$\n\nis the stalk of the chosen monomorphism, under $(u^{-1}I)_{\\bar x}=I_{\\bar y}$,\nso it is injective. Injectivity of $I$ now supplies a sheaf map\n$s:u_*J\\to I$ satisfying $s\\iota=\\mathrm{id}_I$. Thus $I$ is a direct summand\nof $u_*J$.\n\nThe assumptions on $u$ and $vu$ give\n\n$$\nR^qu'_*a^{-1}J=0\\quad(q>0),\\qquad R^m(v'u')_*a^{-1}J=0\\quad(m>0).\n$$\n\nThe spectral sequence collapses to its $q=0$ row and gives\n\n$$\nR^pv'_*b^{-1}u_*J\\simeq R^pv'_*u'_*a^{-1}J=0\\qquad(p>0).\n$$\n\nThe splitting of $I\\to u_*J$ remains a splitting after $b^{-1}$. Higher\ndirect image preserves finite direct sums and their direct summands, so\n$R^pv'_*b^{-1}I=0$ for $p>0$. This proves $\\mathrm{IA}_r(v)$, and (2) follows\nfor all primes $r$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-lem-pbc-composition-cancellation",
+ "blueprint": {
+  "is": "sk-lem-pbc-composition-cancellation",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Composition and cancellation",
+ "statement": "Let $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ be proper morphisms.\n\n1. If $\\mathrm{PBC}(u)$ and $\\mathrm{PBC}(v)$ hold, then $\\mathrm{PBC}(vu)$\n   holds.\n2. If $u$ is surjective and $\\mathrm{PBC}(u)$ and $\\mathrm{PBC}(vu)$ hold,\n   then $\\mathrm{PBC}(v)$ holds.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-composition-cancellation/_section.md",
+  "place": "node sk-lem-pbc-composition-cancellation, order 1058",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0734"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-pbc"
+ ],
+ "proof": [
+  {
+   "text": "We use [sk-thm-iff]. Fix a prime $r$ and an arbitrary base change\n$c:Z'\\to Z$. Write $a:X'\\to X$ and $b:Y'\\to Y$ for the projections, and\n$u':X'\\to Y'$, $v':Y'\\to Z'$ for the induced maps. Since inverse image of\nconstant-coefficient module sheaves is exact, its right adjoint $u_*$\npreserves injectives. Thus the Grothendieck spectral sequence for direct\nimages ([sk-thm-groth-ss]; Stacks Project, Tag 0734) is available:\n\n$$\nR^pv'_*R^qu'_*a^{-1}J\\ \\Longrightarrow\\ R^{p+q}(v'u')_*a^{-1}J.\n$$\n\nIt is a first-quadrant spectral sequence, natural in the sheaf $J$.",
+   "uses": [
     "sk-thm-iff",
     "sk-thm-groth-ss"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-composition-cancellation/_section.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1058,
-  "blueprint_uses": [
-    "sk-def-pbc",
-    "sk-thm-iff",
-    "sk-prop-pbc-degree-zero",
-    "sk-thm-groth-ss"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-def-pbc"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*(1)* Let $J$ be injective among $\\mathbf F_r$-module sheaves on $X$. The\ncondition $\\mathrm{IA}_r(u)$ gives $R^qu'_*a^{-1}J=0$ for $q>0$. Degree-zero\nproper base change [sk-prop-pbc-degree-zero] identifies, as sheaves of\n$\\mathbf F_r$-modules on $Y'_{\\Et}$,\n\n$$\nu'_*a^{-1}J\\simeq b^{-1}u_*J.\n$$\n\nThe sheaf $u_*J$ is injective, so $\\mathrm{IA}_r(v)$ kills\n$R^pv'_*b^{-1}u_*J$ for $p>0$. Thus the spectral sequence gives\n$R^m(v'u')_*a^{-1}J=0$ for $m>0$. This proves $\\mathrm{IA}_r(vu)$ for every\n$r$, and hence (1).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(2)* Let $I$ be injective among $\\mathbf F_r$-module sheaves on $Y$. Choose a\nmonomorphism of sheaves $u^{-1}I\\hookrightarrow J$ with $J$ injective on $X$,\nand let $\\iota:I\\to u_*J$ be its adjoint. This is a global sheaf morphism. It\nis monic: for a geometric point $\\bar y$ choose a geometric point $\\bar x$\nabove it, which exists by surjectivity of $u$. The composite\n\n$$\nI_{\\bar y}\\xrightarrow{\\ \\iota_{\\bar y}\\ }(u_*J)_{\\bar y}\\longrightarrow J_{\\bar x}\n$$\n\nis the stalk of the chosen monomorphism, under $(u^{-1}I)_{\\bar x}=I_{\\bar y}$,\nso it is injective. Injectivity of $I$ now supplies a sheaf map\n$s:u_*J\\to I$ satisfying $s\\iota=\\mathrm{id}_I$. Thus $I$ is a direct summand\nof $u_*J$.\n\nThe assumptions on $u$ and $vu$ give\n\n$$\nR^qu'_*a^{-1}J=0\\quad(q>0),\\qquad R^m(v'u')_*a^{-1}J=0\\quad(m>0).\n$$\n\nThe spectral sequence collapses to its $q=0$ row and gives\n\n$$\nR^pv'_*b^{-1}u_*J\\simeq R^pv'_*u'_*a^{-1}J=0\\qquad(p>0).\n$$\n\nThe splitting of $I\\to u_*J$ remains a splitting after $b^{-1}$. Higher\ndirect image preserves finite direct sums and their direct summands, so\n$R^pv'_*b^{-1}I=0$ for $p>0$. This proves $\\mathrm{IA}_r(v)$, and (2) follows\nfor all primes $r$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-iff",
+  "sk-thm-groth-ss"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-composition-cancellation/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1058,
+ "blueprint_uses": [
+  "sk-def-pbc",
+  "sk-thm-iff",
+  "sk-prop-pbc-degree-zero",
+  "sk-thm-groth-ss"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-pbc"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

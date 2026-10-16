@@ -1,5 +1,14 @@
 {
  "id": "lem-pc-isomorphic-single-tensor-counit-equation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Counit equation for the transported isomorphism",
  "statement": "theorem isomorphic_single_tensor_counit_transport_equation\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X P Z : Scheme.{u}} (p : P ⟶ X) (e : Z ≅ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let t := Classical.choose (exists_isomorphic_single_tensor_counit_transport p e)\n    ∀ M : X.Modules,\n      let K := (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n      (a e.hom).unit.app ((derivedPullback p).obj K) ≫\n          (schemeDerivedDirectImage e.hom).map\n            ((c e.hom p).hom.app K ≫ pinnedSingleTensorCounit (e.hom ≫ p) 0 M) ≫\n          t.hom.app M = pinnedSingleTensorCounit p 0 M",
@@ -84,13 +93,6 @@
   "item": "Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit",
   "date": "2026-10-14",
   "group": "T2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-isomorphic-single-tensor-counit",
-   "place": "factorization under source isomorphism"
-  }
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",

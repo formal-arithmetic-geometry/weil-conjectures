@@ -1,67 +1,72 @@
 {
-  "id": "det-ctf-finite-compact-etale",
-  "kind": "statement",
-  "title": "Finite-Tor constructible complexes are compact in the étale derived category",
-  "statement": "Let $A$ be a finite $\\ell$-primary ring and $X$ a scheme of the standing setting (finite type over the base\nfield, so all $\\operatorname{cd}_\\ell$ are finite). Every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ is compact in\n$\\D(X_{\\mathrm{ét}},A)$: for every family $(K_s)$ in $\\D(X_{\\mathrm{ét}},A)$,\n$\\bigoplus_s\\Hom(C,K_s)\\to\\Hom(C,\\bigoplus_sK_s)$ is an isomorphism.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
-    "place": "node det-ctf-finite-compact-etale, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F11"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0D6J"
-      }
-    ]
+ "id": "det-ctf-finite-compact-etale",
+ "blueprint": {
+  "is": "det-ctf-finite-compact-etale",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite-Tor constructible complexes are compact in the étale derived category",
+ "statement": "Let $A$ be a finite $\\ell$-primary ring and $X$ a scheme of the standing setting (finite type over the base\nfield, so all $\\operatorname{cd}_\\ell$ are finite). Every $C\\in\\Dctf(X_{\\mathrm{ét}},A)$ is compact in\n$\\D(X_{\\mathrm{ét}},A)$: for every family $(K_s)$ in $\\D(X_{\\mathrm{ét}},A)$,\n$\\bigoplus_s\\Hom(C,K_s)\\to\\Hom(C,\\bigoplus_sK_s)$ is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
+  "place": "node det-ctf-finite-compact-etale, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F11"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0D6J"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Generators.* By [sk-lem-sf-flat-model] (étale form), $\\Dctf(X_{\\mathrm{ét}},A)$ is generated under shifts,\nfinite extensions and direct summands by sheaves $a_!L$, with $a\\colon S\\hookrightarrow X$ locally closed and\n$L$ locally constant with finite projective local models. The compact objects of a triangulated category\nwith sums form a thick subcategory (five lemma for cones; a summand of a compact object is compact since\nthe comparison map for it is a retract of an isomorphism). So it suffices to treat $C=a_!L$.",
+   "uses": [
+    "sk-lem-sf-flat-model"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*Generators.* By [sk-lem-sf-flat-model] (étale form), $\\Dctf(X_{\\mathrm{ét}},A)$ is generated under shifts,\nfinite extensions and direct summands by sheaves $a_!L$, with $a\\colon S\\hookrightarrow X$ locally closed and\n$L$ locally constant with finite projective local models. The compact objects of a triangulated category\nwith sums form a thick subcategory (five lemma for cones; a summand of a compact object is compact since\nthe comparison map for it is a retract of an isomorphism). So it suffices to treat $C=a_!L$.",
-      "uses": [
-        "sk-lem-sf-flat-model"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Formula.* Write $a=i\\circ u$ ($i\\colon Z\\hookrightarrow X$ closed, $u\\colon S\\hookrightarrow Z$ open) and let\n$j\\colon X\\setminus Z\\hookrightarrow X$ be the complement. $L$ is dualizable with dual\n$L^\\vee=\\underline{\\operatorname{Hom}}_A(L,A_S)$, so $L\\otimes-$ has right adjoint $L^\\vee\\otimes-$. Using\n$a_!=i_*u_!$, $u_!\\dashv u^*$, $i_*\\dashv R\\underline\\Gamma_Z$ (étale form of part (1) of\n[sk-lem-formal-closed-support]) and $\\Hom(L\\otimes A_S,M)=\\Hom(A_S,L^\\vee\\otimes M)$:\n\n$$\nR\\operatorname{Hom}_X(a_!L,K)=R\\operatorname{Hom}_S(L,u^*R\\underline\\Gamma_ZK)=R\\Gamma\\bigl(S,L^\\vee\\otimes_Au^*R\\underline\\Gamma_ZK\\bigr),\n\\qquad R\\underline\\Gamma_ZK=i^*\\fib(K\\to Rj_*j^*K).\n$$",
-      "uses": [
-        "sk-lem-formal-closed-support"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Sums.* Each functor in $K\\mapsto R\\Gamma(S,L^\\vee\\otimes u^*i^*\\fib(K\\to Rj_*j^*K))$ preserves arbitrary\ndirect sums of unbounded complexes: $j^*$, $i^*$, $u^*$ are left adjoints; $L^\\vee\\otimes-$ is a left adjoint;\nfibers commute with sums; and $Rj_*$, $R\\Gamma(S,-)$ have finite cohomological dimension on $\\ell$-primary\ntorsion sheaves in our setting, so they commute with direct sums of unbounded complexes (Stacks, Tag\n0F11), for $A$-modules because derived direct image and global sections commute with forgetting the\ncoefficient ring (Stacks, Tag 0D6J). Hence\n$R\\operatorname{Hom}(a_!L,\\bigoplus K_s)=\\bigoplus R\\operatorname{Hom}(a_!L,K_s)$, and taking $H^0$ gives\n$\\Hom(a_!L,\\bigoplus K_s)=\\bigoplus\\Hom(a_!L,K_s)$ (cohomology of complexes of abelian groups commutes with\nsums).",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-sf-flat-model",
+  {
+   "text": "*Formula.* Write $a=i\\circ u$ ($i\\colon Z\\hookrightarrow X$ closed, $u\\colon S\\hookrightarrow Z$ open) and let\n$j\\colon X\\setminus Z\\hookrightarrow X$ be the complement. $L$ is dualizable with dual\n$L^\\vee=\\underline{\\operatorname{Hom}}_A(L,A_S)$, so $L\\otimes-$ has right adjoint $L^\\vee\\otimes-$. Using\n$a_!=i_*u_!$, $u_!\\dashv u^*$, $i_*\\dashv R\\underline\\Gamma_Z$ (étale form of part (1) of\n[sk-lem-formal-closed-support]) and $\\Hom(L\\otimes A_S,M)=\\Hom(A_S,L^\\vee\\otimes M)$:\n\n$$\nR\\operatorname{Hom}_X(a_!L,K)=R\\operatorname{Hom}_S(L,u^*R\\underline\\Gamma_ZK)=R\\Gamma\\bigl(S,L^\\vee\\otimes_Au^*R\\underline\\Gamma_ZK\\bigr),\n\\qquad R\\underline\\Gamma_ZK=i^*\\fib(K\\to Rj_*j^*K).\n$$",
+   "uses": [
     "sk-lem-formal-closed-support"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "sk-lem-sf-flat-model",
-    "sk-lem-formal-closed-support"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Sums.* Each functor in $K\\mapsto R\\Gamma(S,L^\\vee\\otimes u^*i^*\\fib(K\\to Rj_*j^*K))$ preserves arbitrary\ndirect sums of unbounded complexes: $j^*$, $i^*$, $u^*$ are left adjoints; $L^\\vee\\otimes-$ is a left adjoint;\nfibers commute with sums; and $Rj_*$, $R\\Gamma(S,-)$ have finite cohomological dimension on $\\ell$-primary\ntorsion sheaves in our setting, so they commute with direct sums of unbounded complexes (Stacks, Tag\n0F11), for $A$-modules because derived direct image and global sections commute with forgetting the\ncoefficient ring (Stacks, Tag 0D6J). Hence\n$R\\operatorname{Hom}(a_!L,\\bigoplus K_s)=\\bigoplus R\\operatorname{Hom}(a_!L,K_s)$, and taking $H^0$ gives\n$\\Hom(a_!L,\\bigoplus K_s)=\\bigoplus\\Hom(a_!L,K_s)$ (cohomology of complexes of abelian groups commutes with\nsums).",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-sf-flat-model",
+  "sk-lem-formal-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-etale.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "sk-lem-sf-flat-model",
+  "sk-lem-formal-closed-support"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,59 +1,64 @@
 {
-  "id": "det-pe-sections-limits-colimits",
-  "kind": "statement",
-  "title": "Evaluation on a weakly contractible affine preserves limits and colimits of modules",
-  "statement": "Let $\\mathcal R$ be a sheaf of rings on $X_{\\mathrm{proét}}$ and let $W$ be an affine\nweakly contractible object. Then $\\Gamma(W,-)$ from $\\mathcal R$-modules to\n$\\mathcal R(W)$-modules preserves all limits and all colimits. In particular, for every\nfamily $(M_i)_{i\\in I}$ the map $\\bigoplus_iM_i(W)\\to(\\bigoplus_iM_i)(W)$ is an\nisomorphism, and $\\Gamma(W,-)$ commutes with filtered colimits.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
-    "place": "node det-pe-sections-limits-colimits, order None"
+ "id": "det-pe-sections-limits-colimits",
+ "blueprint": {
+  "is": "det-pe-sections-limits-colimits",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Evaluation on a weakly contractible affine preserves limits and colimits of modules",
+ "statement": "Let $\\mathcal R$ be a sheaf of rings on $X_{\\mathrm{proét}}$ and let $W$ be an affine\nweakly contractible object. Then $\\Gamma(W,-)$ from $\\mathcal R$-modules to\n$\\mathcal R(W)$-modules preserves all limits and all colimits. In particular, for every\nfamily $(M_i)_{i\\in I}$ the map $\\bigoplus_iM_i(W)\\to(\\bigoplus_iM_i)(W)$ is an\nisomorphism, and $\\Gamma(W,-)$ commutes with filtered colimits.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
+  "place": "node det-pe-sections-limits-colimits, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*Limits.* Limits of sheaves of modules are computed sectionwise, so $\\Gamma(W,-)$ preserves\nthem.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*Limits.* Limits of sheaves of modules are computed sectionwise, so $\\Gamma(W,-)$ preserves\nthem.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Direct sums.* Let $P$ be the presheaf $V\\mapsto\\bigoplus_iM_i(V)$; then\n$\\bigoplus_iM_i=P^{\\#}$. For a finite subset $J\\subset I$, the finite sum\n$\\bigoplus_{i\\in J}M_i=\\prod_{i\\in J}M_i$ is already a sheaf, and it is a subsheaf of\n$P^{\\#}$ (the presheaf inclusion $\\bigoplus_JM_i\\to P$ is injective and sheafification is\nexact).\n\nSurjectivity: let $s\\in P^{\\#}(W)$. Every section of a sheafification is locally a section\nof the presheaf, so there are a covering $\\{V_k\\to W\\}$ and $p_k\\in P(V_k)$ with\n$s|_{V_k}=p_k$. Since $W$ is affine, the covering condition\n[def-weil-pbc-proetale-covering] gives finitely many affine opens of members of the\ncovering whose images cover $W$; they form a finite covering $\\{V'_l\\to W\\}$ refining the\nfirst one, and restricting the $p_k$ gives $p'_l\\in P(V'_l)$. Each $p'_l$ has finite\nsupport, so there is one finite $J\\subset I$ with $p'_l\\in\\bigoplus_{i\\in J}M_i(V'_l)$ for\nall $l$. The $p'_l$ are compatible in $P^{\\#}$, hence in the subsheaf\n$\\bigoplus_JM_i$, so they glue to $t\\in(\\bigoplus_JM_i)(W)=\\bigoplus_{i\\in J}M_i(W)$. Its\nimage in $P^{\\#}(W)$ agrees with $s$ on the covering, hence equals $s$.\n\nInjectivity: an element of $\\bigoplus_iM_i(W)$ lies in $\\bigoplus_{i\\in J}M_i(W)$ for some\nfinite $J$, and $(\\bigoplus_JM_i)(W)\\to P^{\\#}(W)$ is injective because\n$\\bigoplus_JM_i\\subset P^{\\#}$ is a subsheaf.",
-      "uses": [
-        "def-weil-pbc-proetale-covering"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Colimits.* A colimit of $\\mathcal R$-modules is the cokernel of a map between direct sums\n$\\bigoplus_{\\alpha\\to\\beta}M_\\alpha\\to\\bigoplus_\\gamma M_\\gamma$. $\\Gamma(W,-)$ preserves\nboth direct sums and cokernels, the latter because it is exact\n([det-pe-wc-sections-exact], valid for every weakly contractible $W$ by part 3 of\n[det-pe-weak-contractible-equivalences]); hence it preserves the colimit. Filtered\ncolimits are a special case.",
-      "uses": [
-        "det-pe-wc-sections-exact",
-        "det-pe-weak-contractible-equivalences"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-proetale-covering",
+  {
+   "text": "*Direct sums.* Let $P$ be the presheaf $V\\mapsto\\bigoplus_iM_i(V)$; then\n$\\bigoplus_iM_i=P^{\\#}$. For a finite subset $J\\subset I$, the finite sum\n$\\bigoplus_{i\\in J}M_i=\\prod_{i\\in J}M_i$ is already a sheaf, and it is a subsheaf of\n$P^{\\#}$ (the presheaf inclusion $\\bigoplus_JM_i\\to P$ is injective and sheafification is\nexact).\n\nSurjectivity: let $s\\in P^{\\#}(W)$. Every section of a sheafification is locally a section\nof the presheaf, so there are a covering $\\{V_k\\to W\\}$ and $p_k\\in P(V_k)$ with\n$s|_{V_k}=p_k$. Since $W$ is affine, the covering condition\n[def-weil-pbc-proetale-covering] gives finitely many affine opens of members of the\ncovering whose images cover $W$; they form a finite covering $\\{V'_l\\to W\\}$ refining the\nfirst one, and restricting the $p_k$ gives $p'_l\\in P(V'_l)$. Each $p'_l$ has finite\nsupport, so there is one finite $J\\subset I$ with $p'_l\\in\\bigoplus_{i\\in J}M_i(V'_l)$ for\nall $l$. The $p'_l$ are compatible in $P^{\\#}$, hence in the subsheaf\n$\\bigoplus_JM_i$, so they glue to $t\\in(\\bigoplus_JM_i)(W)=\\bigoplus_{i\\in J}M_i(W)$. Its\nimage in $P^{\\#}(W)$ agrees with $s$ on the covering, hence equals $s$.\n\nInjectivity: an element of $\\bigoplus_iM_i(W)$ lies in $\\bigoplus_{i\\in J}M_i(W)$ for some\nfinite $J$, and $(\\bigoplus_JM_i)(W)\\to P^{\\#}(W)$ is injective because\n$\\bigoplus_JM_i\\subset P^{\\#}$ is a subsheaf.",
+   "uses": [
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Colimits.* A colimit of $\\mathcal R$-modules is the cokernel of a map between direct sums\n$\\bigoplus_{\\alpha\\to\\beta}M_\\alpha\\to\\bigoplus_\\gamma M_\\gamma$. $\\Gamma(W,-)$ preserves\nboth direct sums and cokernels, the latter because it is exact\n([det-pe-wc-sections-exact], valid for every weakly contractible $W$ by part 3 of\n[det-pe-weak-contractible-equivalences]); hence it preserves the colimit. Filtered\ncolimits are a special case.",
+   "uses": [
     "det-pe-wc-sections-exact",
     "det-pe-weak-contractible-equivalences"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-pe-wc-sections-exact",
-    "det-pe-weak-contractible-equivalences",
-    "def-weil-pbc-proetale-covering"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-covering",
+  "det-pe-wc-sections-exact",
+  "det-pe-weak-contractible-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-pe-wc-sections-exact",
+  "det-pe-weak-contractible-equivalences",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

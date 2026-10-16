@@ -1,72 +1,77 @@
 {
-  "id": "det-pe-topos-functoriality-inverse-image",
-  "kind": "statement",
-  "title": "The geometric morphism attached to a morphism of schemes",
-  "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes and let\n$u\\colon Y_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$ be base change, $u(V)=V\\times_YX$.\n\n1. $u$ preserves finite limits (it sends $Y$ to $X$ and fibre products to fibre products)\n   and sends coverings to coverings.\n2. $f_*G:=G\\circ u$ defines a functor\n   $f_*\\colon\\Sh(X_{\\mathrm{proét}})\\to\\Sh(Y_{\\mathrm{proét}})$, and\n   $f^{-1}F:=\\bigl(\\operatorname{Lan}_{u^{\\mathrm{op}}}F\\bigr)^{\\#}$ (left Kan extension\n   followed by sheafification) is left adjoint to it.\n3. $f^{-1}$ preserves all colimits and finite limits, so\n   $(f^{-1},f_*)$ is a geometric morphism $f_{\\mathrm{proét}}$.\n4. On abelian sheaves, $f^{-1}$ (computed on underlying sheaves of sets) is exact.\n5. For $g\\colon Y\\to Z$ there are canonical isomorphisms $(g\\circ f)_*\\cong g_*\\circ f_*$\n   and $(g\\circ f)^{-1}\\cong f^{-1}\\circ g^{-1}$, so\n   $(g\\circ f)_{\\mathrm{proét}}\\cong g_{\\mathrm{proét}}\\circ f_{\\mathrm{proét}}$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
-    "place": "node det-pe-topos-functoriality-inverse-image, order None"
+ "id": "det-pe-topos-functoriality-inverse-image",
+ "blueprint": {
+  "is": "det-pe-topos-functoriality-inverse-image",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The geometric morphism attached to a morphism of schemes",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes and let\n$u\\colon Y_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$ be base change, $u(V)=V\\times_YX$.\n\n1. $u$ preserves finite limits (it sends $Y$ to $X$ and fibre products to fibre products)\n   and sends coverings to coverings.\n2. $f_*G:=G\\circ u$ defines a functor\n   $f_*\\colon\\Sh(X_{\\mathrm{proét}})\\to\\Sh(Y_{\\mathrm{proét}})$, and\n   $f^{-1}F:=\\bigl(\\operatorname{Lan}_{u^{\\mathrm{op}}}F\\bigr)^{\\#}$ (left Kan extension\n   followed by sheafification) is left adjoint to it.\n3. $f^{-1}$ preserves all colimits and finite limits, so\n   $(f^{-1},f_*)$ is a geometric morphism $f_{\\mathrm{proét}}$.\n4. On abelian sheaves, $f^{-1}$ (computed on underlying sheaves of sets) is exact.\n5. For $g\\colon Y\\to Z$ there are canonical isomorphisms $(g\\circ f)_*\\cong g_*\\circ f_*$\n   and $(g\\circ f)^{-1}\\cong f^{-1}\\circ g^{-1}$, so\n   $(g\\circ f)_{\\mathrm{proét}}\\cong g_{\\mathrm{proét}}\\circ f_{\\mathrm{proét}}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
+  "place": "node det-pe-topos-functoriality-inverse-image, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*1.* If $V\\to Y$ is weakly étale, its base change $V\\times_YX\\to X$ is weakly étale, so\n$u$ is well defined. Base change carries $\\mathrm{id}_Y$ to $\\mathrm{id}_X$ and\n$V_1\\times_{V}V_2$ to $(V_1\\times_YX)\\times_{V\\times_YX}(V_2\\times_YX)$, so it preserves the\nterminal object and fibre products, hence all finite limits. Pro-étale coverings are\nstable under base change along $X\\to Y$: fpqc coverings are stable under arbitrary base\nchange of schemes (Stacks Project, Topologies, fpqc coverings), and weakly étale morphisms are stable under base\nchange, as in part 1 of [det-pe-topos-functoriality-site].",
+   "uses": [
+    "det-pe-topos-functoriality-site"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*1.* If $V\\to Y$ is weakly étale, its base change $V\\times_YX\\to X$ is weakly étale, so\n$u$ is well defined. Base change carries $\\mathrm{id}_Y$ to $\\mathrm{id}_X$ and\n$V_1\\times_{V}V_2$ to $(V_1\\times_YX)\\times_{V\\times_YX}(V_2\\times_YX)$, so it preserves the\nterminal object and fibre products, hence all finite limits. Pro-étale coverings are\nstable under base change along $X\\to Y$: fpqc coverings are stable under arbitrary base\nchange of schemes (Stacks Project, Topologies, fpqc coverings), and weakly étale morphisms are stable under base\nchange, as in part 1 of [det-pe-topos-functoriality-site].",
-      "uses": [
-        "det-pe-topos-functoriality-site"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*2.* Since $u$ preserves coverings and fibre products, $G\\circ u$ satisfies the sheaf\ncondition for every sheaf $G$, as in [def-sfb-finite-lower-star]. The left Kan extension\nalong $u^{\\mathrm{op}}$ is left adjoint to restriction $G\\mapsto G\\circ u$ on presheaves,\nand sheafification is left adjoint to the inclusion of sheaves; composing these\nadjunctions gives $\\Hom(f^{-1}F,G)\\cong\\Hom(\\operatorname{Lan}F,G)\\cong\\Hom(F,G\\circ u)$.",
-      "uses": [
-        "def-sfb-finite-lower-star"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*3.* As a left adjoint $f^{-1}$ preserves colimits. For finite limits: the category\n$(u\\downarrow T)$ indexing the pointwise Kan extension at $T\\in X_{\\mathrm{proét}}$ has\nobjects $(V,T\\to u(V))$; since $Y_{\\mathrm{proét}}$ has finite limits and $u$ preserves\nthem, the opposite of this category is filtered (it has the object $(Y,T\\to X)$, and\ncones over finite diagrams are given by limits in $Y_{\\mathrm{proét}}$). Hence\n$\\operatorname{Lan}_{u^{\\mathrm{op}}}F(T)=\\varinjlim F(V)$ is a filtered colimit, which\ncommutes with finite limits of sets. Sheafification is left exact. So $f^{-1}$ preserves\nfinite limits.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*4.* A functor preserving finite products preserves abelian group objects, so $f^{-1}$\ncarries abelian sheaves to abelian sheaves, and its restriction is left adjoint to $f_*$\non abelian sheaves. It preserves kernels (finite limits) and cokernels (as a left adjoint),\nhence is exact.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*5.* $(g\\circ f)_*G=G\\circ u_{g\\circ f}$ and $g_*f_*G=G\\circ u_f\\circ u_g$; the canonical\nisomorphisms $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$ give a natural isomorphism\n$u_f\\circ u_g\\cong u_{g\\circ f}$, whence $(g\\circ f)_*\\cong g_*\\circ f_*$ (compare\n[def-sfb-finite-lower-star-comp]). Left adjoints of isomorphic functors are canonically\nisomorphic, so $(g\\circ f)^{-1}\\cong f^{-1}\\circ g^{-1}$, compatibly with the adjunctions.",
-      "uses": [
-        "def-sfb-finite-lower-star-comp"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-pe-topos-functoriality-site",
-    "def-sfb-finite-lower-star",
-    "def-sfb-finite-lower-star-comp"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
-    "place": "## Proof"
+  {
+   "text": "*2.* Since $u$ preserves coverings and fibre products, $G\\circ u$ satisfies the sheaf\ncondition for every sheaf $G$, as in [def-sfb-finite-lower-star]. The left Kan extension\nalong $u^{\\mathrm{op}}$ is left adjoint to restriction $G\\mapsto G\\circ u$ on presheaves,\nand sheafification is left adjoint to the inclusion of sheaves; composing these\nadjunctions gives $\\Hom(f^{-1}F,G)\\cong\\Hom(\\operatorname{Lan}F,G)\\cong\\Hom(F,G\\circ u)$.",
+   "uses": [
+    "def-sfb-finite-lower-star"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-pe-topos-functoriality-site",
-    "def-sfb-finite-lower-star",
+  {
+   "text": "*3.* As a left adjoint $f^{-1}$ preserves colimits. For finite limits: the category\n$(u\\downarrow T)$ indexing the pointwise Kan extension at $T\\in X_{\\mathrm{proét}}$ has\nobjects $(V,T\\to u(V))$; since $Y_{\\mathrm{proét}}$ has finite limits and $u$ preserves\nthem, the opposite of this category is filtered (it has the object $(Y,T\\to X)$, and\ncones over finite diagrams are given by limits in $Y_{\\mathrm{proét}}$). Hence\n$\\operatorname{Lan}_{u^{\\mathrm{op}}}F(T)=\\varinjlim F(V)$ is a filtered colimit, which\ncommutes with finite limits of sets. Sheafification is left exact. So $f^{-1}$ preserves\nfinite limits.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*4.* A functor preserving finite products preserves abelian group objects, so $f^{-1}$\ncarries abelian sheaves to abelian sheaves, and its restriction is left adjoint to $f_*$\non abelian sheaves. It preserves kernels (finite limits) and cokernels (as a left adjoint),\nhence is exact.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*5.* $(g\\circ f)_*G=G\\circ u_{g\\circ f}$ and $g_*f_*G=G\\circ u_f\\circ u_g$; the canonical\nisomorphisms $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$ give a natural isomorphism\n$u_f\\circ u_g\\cong u_{g\\circ f}$, whence $(g\\circ f)_*\\cong g_*\\circ f_*$ (compare\n[def-sfb-finite-lower-star-comp]). Left adjoints of isomorphic functors are canonically\nisomorphic, so $(g\\circ f)^{-1}\\cong f^{-1}\\circ g^{-1}$, compatibly with the adjunctions.",
+   "uses": [
     "def-sfb-finite-lower-star-comp"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-topos-functoriality-site",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-star-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-pe-topos-functoriality-site",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-star-comp"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

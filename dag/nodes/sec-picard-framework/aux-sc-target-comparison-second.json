@@ -36,13 +36,6 @@
   "date": "2026-10-14",
   "group": "E4"
  },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-scheme-tensor-shift-localization-normalization",
-   "place": "component"
-  }
- },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
@@ -56,6 +49,15 @@
   "statement": "theorem schemeTensorShift_second_normalization\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    let A := DerivedCategory.Q.obj P\n    let K := DerivedCategory.Q.obj T\n    let M := DerivedCategory.Q.obj U\n    let c := schemeTensorShiftTargetComparison X P T U\n    let v := schemeTensorShiftSourceComparison X P T U\n    ((((tensorRight K).commShiftIso (1 : ℤ)).hom.app A) ▷ M ≫\n        ((tensorRight M).commShiftIso (1 : ℤ)).hom.app (A ⊗ K) ≫\n        (α_ A K M).hom⟦(1 : ℤ)⟧') ≫ c =\n      v ≫ DerivedCategory.Q.map\n        ((CochainComplex.mapBifunctorShift₁Iso P T\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫\n        (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫\n        (α_ P T U).hom⟦(1 : ℤ)⟧')"
  },
  "id": "aux-sc-target-comparison-second",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "title": "Second localization normalization component",
  "statement": "Second displayed normalization equality",
  "stmt_deps": [

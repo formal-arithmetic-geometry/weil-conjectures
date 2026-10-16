@@ -1,5 +1,14 @@
 {
  "id": "lem-sc-etale-stalk-continuous-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "lemma",
  "title": "For an abelian etale sheaf on Spec K whose geometric stalk identifies equivariantly with a discrete Galois representation M, its sheaf cohomology in every degree is equivalent to continuous cohomology of M.",
  "statement": "For an abelian etale sheaf on Spec K whose geometric stalk identifies equivariantly with a discrete Galois representation M, its sheaf cohomology in every degree is equivalent to continuous cohomology of M. The precise hypotheses and action-on-germs formula are recorded by the following Lean signature: theorem nonempty_equiv_etale_cohomology_continuous_stalk\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (M : TopRep.{u} ℤ (Gal(Ks/K))) [DiscreteTopology M]\n    (c : ((pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n      (A := AddCommGrpCat.{u + 1})).obj F\n      ≃+ M)\n    (hc : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : F.obj.obj (op X)),\n      c ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' F.obj z) =\n      M.ρ g (c ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z)))\n    (n : ℕ) :\n    Nonempty (Sheaf.H.{u + 1} F n ≃ continuousCohomology n M)",
@@ -104,14 +113,6 @@
   "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding",
   "date": "2026-10-12",
   "group": "S1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-etale-units-h2-forward-embedding",
-   "place": "intermediate comparison",
-   "via": []
-  }
  },
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",

@@ -1,60 +1,65 @@
 {
-  "id": "det-sp-reduction-direct-image",
-  "kind": "statement",
-  "title": "Compactly supported direct image commutes with extension of coefficients",
-  "statement": "Let $f:X\\to Y$ be a separated morphism of finite type with a compactification\n$f=\\bar f\\circ j$ ($j$ an open immersion, $\\bar f$ proper), and let $A\\to B$ be\na map of finite commutative rings killed by a power of $\\ell$. For\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ there is an isomorphism in\n$\\Dctf(Y_{\\mathrm{proét}},B)$, natural in $M$,\n\n$$\nb(M):(Rf_{!,A}M)_B=(R\\bar f_{*}j_!M)\\otimes^{\\mathbf L}_{A_Y}B_Y\n\\xrightarrow{\\ \\sim\\ }R\\bar f_{*}j_!(M\\otimes^{\\mathbf L}_{A_X}B_X)=Rf_{!,B}(M_B),\n$$\n\nwith no flatness or finite projective dimension hypothesis on $B$ over $A$.\nFor a further map $B\\to C$, $b$ for $A\\to C$ is the composite of $(b)_C$ for\n$A\\to B$, $b$ for $B\\to C$ and the associativity isomorphisms of\n[det-sp-scalar-extension-functor].",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
-    "place": "node det-sp-reduction-direct-image, order None"
+ "id": "det-sp-reduction-direct-image",
+ "blueprint": {
+  "is": "det-sp-reduction-direct-image",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Compactly supported direct image commutes with extension of coefficients",
+ "statement": "Let $f:X\\to Y$ be a separated morphism of finite type with a compactification\n$f=\\bar f\\circ j$ ($j$ an open immersion, $\\bar f$ proper), and let $A\\to B$ be\na map of finite commutative rings killed by a power of $\\ell$. For\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ there is an isomorphism in\n$\\Dctf(Y_{\\mathrm{proét}},B)$, natural in $M$,\n\n$$\nb(M):(Rf_{!,A}M)_B=(R\\bar f_{*}j_!M)\\otimes^{\\mathbf L}_{A_Y}B_Y\n\\xrightarrow{\\ \\sim\\ }R\\bar f_{*}j_!(M\\otimes^{\\mathbf L}_{A_X}B_X)=Rf_{!,B}(M_B),\n$$\n\nwith no flatness or finite projective dimension hypothesis on $B$ over $A$.\nFor a further map $B\\to C$, $b$ for $A\\to C$ is the composite of $(b)_C$ for\n$A\\to B$, $b$ for $B\\to C$ and the associativity isomorphisms of\n[det-sp-scalar-extension-functor].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
+  "place": "node det-sp-reduction-direct-image, order None"
+ },
+ "stmt_deps": [
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the natural map.* For any $N\\in D(\\bar X_{\\mathrm{proét}},A)$ there is\na natural projection map\n$R\\bar f_*N\\otimes^{\\mathbf L}_{A_Y}B_Y\\to R\\bar f_*(N\\otimes^{\\mathbf L}_{A_{\\bar X}}B_{\\bar X})$,\nthe transpose under $\\bar f^*\\dashv R\\bar f_*$ of\n$\\bar f^*R\\bar f_*N\\otimes^{\\mathbf L}B_{\\bar X}\\to N\\otimes^{\\mathbf L}B_{\\bar X}$\n(counit tensored with the identity, using $\\bar f^*B_Y=B_{\\bar X}$). Extension\nby zero is exact and commutes with tensoring with the constant sheaf $B$:\n$j_!(M)\\otimes^{\\mathbf L}B_{\\bar X}\\simeq j_!(M\\otimes^{\\mathbf L}B_X)$.\nDefine $b(M)$ as the composite with $N=j_!M$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "det-sp-scalar-extension-functor"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the natural map.* For any $N\\in D(\\bar X_{\\mathrm{proét}},A)$ there is\na natural projection map\n$R\\bar f_*N\\otimes^{\\mathbf L}_{A_Y}B_Y\\to R\\bar f_*(N\\otimes^{\\mathbf L}_{A_{\\bar X}}B_{\\bar X})$,\nthe transpose under $\\bar f^*\\dashv R\\bar f_*$ of\n$\\bar f^*R\\bar f_*N\\otimes^{\\mathbf L}B_{\\bar X}\\to N\\otimes^{\\mathbf L}B_{\\bar X}$\n(counit tensored with the identity, using $\\bar f^*B_Y=B_{\\bar X}$). Extension\nby zero is exact and commutes with tensoring with the constant sheaf $B$:\n$j_!(M)\\otimes^{\\mathbf L}B_{\\bar X}\\simeq j_!(M\\otimes^{\\mathbf L}B_X)$.\nDefine $b(M)$ as the composite with $N=j_!M$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 2: free terms.* Choose a resolution $F_\\bullet\\to B$ by finite free\n$A$-modules, bounded above but possibly infinite to the left. Represent $M$ by\na bounded complex $P$ of flat constructible $A_X$-modules in degrees $[a,b]$\n([lem-sf-flat-model]). Then $M_B$ is the total complex of\n$j_!P\\otimes_{A}F_\\bullet$, and similarly on $Y$. For a free term\n$F_{-i}=A^{r_i}$ the comparison map is the identity of\n$(R\\bar f_*j_!P)^{\\oplus r_i}$, an isomorphism.",
-      "uses": [
-        "lem-sf-flat-model"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: finite windows.* $R\\bar f_*$ has cohomological dimension at most\n$c=\\operatorname{cd}_\\ell(\\bar f)<\\infty$ on $\\ell$-power torsion sheaves.\nHence in a fixed total degree $q$, only the terms $F_{-i}$ with\n$a-i\\leq q\\leq b-i+c$, i.e. finitely many $i$, contribute to $H^q$ of either\nside (truncate the resolution, the stupid truncation changing the totalization\nonly in degrees below $q$). On this finite window the comparison is a finite\nextension of isomorphisms of Step 2, hence an isomorphism on $H^q$. As $q$ is\narbitrary, $b(M)$ is an isomorphism, regardless of the projective dimension of\n$B$ over $A$; this is the scalar projection argument used for the\ncoefficient comparisons of the six operations.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 4: naturality and composition.* Naturality in $M$ holds since every map\nused is natural. For $A\\to B\\to C$, the projection maps of Step 1 compose under\nthe associativity isomorphism $(N_B)_C\\simeq N_C$, because the counit\ntransposes compose; hence the stated cocycle identity holds.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "*Step 2: free terms.* Choose a resolution $F_\\bullet\\to B$ by finite free\n$A$-modules, bounded above but possibly infinite to the left. Represent $M$ by\na bounded complex $P$ of flat constructible $A_X$-modules in degrees $[a,b]$\n([lem-sf-flat-model]). Then $M_B$ is the total complex of\n$j_!P\\otimes_{A}F_\\bullet$, and similarly on $Y$. For a free term\n$F_{-i}=A^{r_i}$ the comparison map is the identity of\n$(R\\bar f_*j_!P)^{\\oplus r_i}$, an isomorphism.",
+   "uses": [
     "lem-sf-flat-model"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-sp-scalar-extension-functor",
-    "lem-sf-flat-model"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Step 3: finite windows.* $R\\bar f_*$ has cohomological dimension at most\n$c=\\operatorname{cd}_\\ell(\\bar f)<\\infty$ on $\\ell$-power torsion sheaves.\nHence in a fixed total degree $q$, only the terms $F_{-i}$ with\n$a-i\\leq q\\leq b-i+c$, i.e. finitely many $i$, contribute to $H^q$ of either\nside (truncate the resolution, the stupid truncation changing the totalization\nonly in degrees below $q$). On this finite window the comparison is a finite\nextension of isomorphisms of Step 2, hence an isomorphism on $H^q$. As $q$ is\narbitrary, $b(M)$ is an isomorphism, regardless of the projective dimension of\n$B$ over $A$; this is the scalar projection argument used for the\ncoefficient comparisons of the six operations.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 4: naturality and composition.* Naturality in $M$ holds since every map\nused is natural. For $A\\to B\\to C$, the projection maps of Step 1 compose under\nthe associativity isomorphism $(N_B)_C\\simeq N_C$, because the counit\ntransposes compose; hence the stated cocycle identity holds.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-sp-scalar-extension-functor",
+  "lem-sf-flat-model"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

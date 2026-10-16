@@ -1,80 +1,85 @@
 {
-  "id": "sk-prop-sf-existence",
-  "kind": "statement",
-  "title": "Existence of the exceptional inverse image",
-  "statement": "Let $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring. For every separated finite-type morphism $f:X\\to Y$, the\ncoproduct-preserving functor\n$Rf_!:\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ has an exact right adjoint\n\n$$\nf^!:\\Loc(\\Dctf(Y,\\Lambda))\\longrightarrow\\Loc(\\Dctf(X,\\Lambda)),\\qquad\n\\Hom(Rf_!M,N)\\simeq\\Hom(M,f^!N),\n$$\n\nfor $M\\in\\Loc(\\Dctf(X,\\Lambda))$ and $N\\in\\Loc(\\Dctf(Y,\\Lambda))$. It is unique\nup to unique isomorphism compatible with the adjunction and preserves\narbitrary direct sums.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
-    "place": "node sk-prop-sf-existence, order 1541",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A8F"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A8G"
-      }
-    ]
+ "id": "sk-prop-sf-existence",
+ "blueprint": {
+  "is": "sk-prop-sf-existence",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Existence of the exceptional inverse image",
+ "statement": "Let $\\Lambda\\in\\{A,\\Zl,\\mathcal O_E,\\Ql,E,\\Qlb\\}$ be any admissible coefficient\nring. For every separated finite-type morphism $f:X\\to Y$, the\ncoproduct-preserving functor\n$Rf_!:\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ has an exact right adjoint\n\n$$\nf^!:\\Loc(\\Dctf(Y,\\Lambda))\\longrightarrow\\Loc(\\Dctf(X,\\Lambda)),\\qquad\n\\Hom(Rf_!M,N)\\simeq\\Hom(M,f^!N),\n$$\n\nfor $M\\in\\Loc(\\Dctf(X,\\Lambda))$ and $N\\in\\Loc(\\Dctf(Y,\\Lambda))$. It is unique\nup to unique isomorphism compatible with the adjunction and preserves\narbitrary direct sums.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
+  "place": "node sk-prop-sf-existence, order 1541",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A8F"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A8G"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "For $N\\in\\Loc(\\Dctf(Y,\\Lambda))$, the functor\n\n$$\n\\Loc(\\Dctf(X,\\Lambda))^{\\mathrm{op}}\\longrightarrow\\Ab,\\qquad\nM\\longmapsto\\Hom(Rf_!M,N)\n$$\n\nis cohomological and sends direct sums to products ($Rf_!$ is exact and\npreserves direct sums by [sk-prop-sf-comp-coherence]). By\n[sk-lem-brown-hypotheses], Brown representability (Stacks, Tag 0A8F) gives a\nrepresenting object $f^!N$. The Yoneda lemma makes these objects into a right\nadjoint, and a right adjoint of an exact functor of triangulated categories is\nexact (Stacks, Tag 0A8G).",
+   "uses": [
+    "sk-lem-brown-hypotheses"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "sk-def-localizing-closure"
-  ],
-  "proof": [
-    {
-      "text": "For $N\\in\\Loc(\\Dctf(Y,\\Lambda))$, the functor\n\n$$\n\\Loc(\\Dctf(X,\\Lambda))^{\\mathrm{op}}\\longrightarrow\\Ab,\\qquad\nM\\longmapsto\\Hom(Rf_!M,N)\n$$\n\nis cohomological and sends direct sums to products ($Rf_!$ is exact and\npreserves direct sums by [sk-prop-sf-comp-coherence]). By\n[sk-lem-brown-hypotheses], Brown representability (Stacks, Tag 0A8F) gives a\nrepresenting object $f^!N$. The Yoneda lemma makes these objects into a right\nadjoint, and a right adjoint of an exact functor of triangulated categories is\nexact (Stacks, Tag 0A8G).",
-      "uses": [
-        "sk-lem-brown-hypotheses"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For direct sums, test the canonical map\n$\\bigoplus_\\alpha f^!N_\\alpha\\to f^!(\\bigoplus_\\alpha N_\\alpha)$ in\n$\\Loc(\\Dctf(X,\\Lambda))$ on a compact generator $G\\in\\Dctf(X,\\Lambda)$ and its\nshifts. Both $G$ and $Rf_!G\\in\\Dctf(Y,\\Lambda)$ are compact, so adjunction\nidentifies the two Hom groups with $\\bigoplus_\\alpha\\Hom(Rf_!G[n],N_\\alpha)$. The\ngenerators detect isomorphisms, which proves the assertion.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-brown-hypotheses",
-    "sk-prop-sf-comparison"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "lean_not_found",
-    "in_cycle"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1541,
-  "blueprint_uses": [
-    "sk-prop-sf-comparison",
-    "sk-prop-sf-comp-coherence",
-    "sk-def-localizing-closure"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction",
-    "AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction",
-    "AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-prop-sf-comparison",
-    "sk-def-localizing-closure"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "For direct sums, test the canonical map\n$\\bigoplus_\\alpha f^!N_\\alpha\\to f^!(\\bigoplus_\\alpha N_\\alpha)$ in\n$\\Loc(\\Dctf(X,\\Lambda))$ on a compact generator $G\\in\\Dctf(X,\\Lambda)$ and its\nshifts. Both $G$ and $Rf_!G\\in\\Dctf(Y,\\Lambda)$ are compact, so adjunction\nidentifies the two Hom groups with $\\bigoplus_\\alpha\\Hom(Rf_!G[n],N_\\alpha)$. The\ngenerators detect isomorphisms, which proves the assertion.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-brown-hypotheses",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "lean_not_found",
+  "in_cycle"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1541,
+ "blueprint_uses": [
+  "sk-prop-sf-comparison",
+  "sk-prop-sf-comp-coherence",
+  "sk-def-localizing-closure"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction",
+  "AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction",
+  "AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-prop-sf-comparison",
+  "sk-def-localizing-closure"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,5 +1,14 @@
 {
  "id": "new-picard-residue-homology-comparison-source-fibre",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "picard_residue_homology_source_fibre_comparison",
  "statement": "Under the complete signature below, the derived residue fibre of the direct image of the pulled-back line bundle is additively equivalent to degree-one structure-sheaf cohomology of X_s; no affine representative is assumed.\n\nExact Lean statement:\ntheorem picard_residue_homology_source_fibre_comparison\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    Nonempty (derivedFiberCohomology W E 1 w ≃+\n      Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)",
@@ -121,14 +130,6 @@
   "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource",
   "date": "2026-10-14",
   "group": "Q2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "new-picard-residue-homology-comparison-source",
-   "place": "Tags 0B91, 0BF2 and 01XK",
-   "via": []
-  }
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",

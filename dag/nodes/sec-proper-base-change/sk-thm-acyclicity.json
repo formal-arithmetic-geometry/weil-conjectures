@@ -1,61 +1,66 @@
 {
-  "id": "sk-thm-acyclicity",
-  "kind": "statement",
-  "title": "Acyclic resolutions",
-  "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor between\nabelian categories with enough injectives. If $F\\to A^\\bullet$ is a resolution\nand each $A^m$ is $v$-acyclic, then\n\n$$\n\\mathcal H^q(vA^\\bullet)\\simeq R^qvF.\n$$\n\nMore generally, for a bounded below complex $A^\\bullet$ of $v$-acyclic\nobjects, the canonical comparison $vA^\\bullet\\to Rv(A^\\bullet)$ is an\nisomorphism in $D^+(\\mathcal B)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
-    "place": "node sk-thm-acyclicity, order 1050"
+ "id": "sk-thm-acyclicity",
+ "blueprint": {
+  "is": "sk-thm-acyclicity",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Acyclic resolutions",
+ "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor between\nabelian categories with enough injectives. If $F\\to A^\\bullet$ is a resolution\nand each $A^m$ is $v$-acyclic, then\n\n$$\n\\mathcal H^q(vA^\\bullet)\\simeq R^qvF.\n$$\n\nMore generally, for a bounded below complex $A^\\bullet$ of $v$-acyclic\nobjects, the canonical comparison $vA^\\bullet\\to Rv(A^\\bullet)$ is an\nisomorphism in $D^+(\\mathcal B)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
+  "place": "node sk-thm-acyclicity, order 1050"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For the first assertion put $Z^0=F$ and let $Z^{m+1}$ be the image of\n$A^m\\to A^{m+1}$. The exact sequences\n\n$$\n0\\longrightarrow Z^m\\longrightarrow A^m\\longrightarrow Z^{m+1}\\longrightarrow0\n$$\n\ngive\n\n$$\n\\operatorname{coker}(vA^m\\to vZ^{m+1})\\simeq R^1vZ^m,\n\\qquad R^avZ^{m+1}\\simeq R^{a+1}vZ^m\\quad(a\\geq1).\n$$",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "For the first assertion put $Z^0=F$ and let $Z^{m+1}$ be the image of\n$A^m\\to A^{m+1}$. The exact sequences\n\n$$\n0\\longrightarrow Z^m\\longrightarrow A^m\\longrightarrow Z^{m+1}\\longrightarrow0\n$$\n\ngive\n\n$$\n\\operatorname{coker}(vA^m\\to vZ^{m+1})\\simeq R^1vZ^m,\n\\qquad R^avZ^{m+1}\\simeq R^{a+1}vZ^m\\quad(a\\geq1).\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Left exactness identifies the kernel of $vA^q\\to vA^{q+1}$ with $vZ^q$.\nConsequently, for $q\\geq1$,\n\n$$\n\\mathcal H^q(vA^\\bullet)=\\operatorname{coker}(vA^{q-1}\\to vZ^q)\n\\simeq R^1vZ^{q-1}\\simeq\\cdots\\simeq R^qvF,\n$$\n\nand degree zero is $vF$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "For the complex assertion first observe that a bounded below exact complex\nof $v$-acyclic objects remains exact after applying $v$. Indeed, its cycle\nsequences have the same form, starting with a zero cycle at the first nonzero\ndegree. The long exact sequences show inductively that all cycles are\n$v$-acyclic, so each cycle sequence remains short exact after $v$. Now choose\na quasi-isomorphism $A^\\bullet\\to J^\\bullet$ to a bounded below complex of\ninjectives. Its cone is bounded below, exact, and termwise $v$-acyclic, since\nits terms are finite direct sums of terms of $A^\\bullet$ and of $J^\\bullet$.\nApplying $v$ to the cone shows that $vA^\\bullet\\to vJ^\\bullet$ is a\nquasi-isomorphism. The target computes $Rv(A^\\bullet)$, proving the\nassertion. No spectral sequence is needed; this is why the lemma is separated\nfrom [sk-thm-groth-ss].",
-      "uses": [
-        "sk-thm-groth-ss"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Left exactness identifies the kernel of $vA^q\\to vA^{q+1}$ with $vZ^q$.\nConsequently, for $q\\geq1$,\n\n$$\n\\mathcal H^q(vA^\\bullet)=\\operatorname{coker}(vA^{q-1}\\to vZ^q)\n\\simeq R^1vZ^{q-1}\\simeq\\cdots\\simeq R^qvF,\n$$\n\nand degree zero is $vF$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For the complex assertion first observe that a bounded below exact complex\nof $v$-acyclic objects remains exact after applying $v$. Indeed, its cycle\nsequences have the same form, starting with a zero cycle at the first nonzero\ndegree. The long exact sequences show inductively that all cycles are\n$v$-acyclic, so each cycle sequence remains short exact after $v$. Now choose\na quasi-isomorphism $A^\\bullet\\to J^\\bullet$ to a bounded below complex of\ninjectives. Its cone is bounded below, exact, and termwise $v$-acyclic, since\nits terms are finite direct sums of terms of $A^\\bullet$ and of $J^\\bullet$.\nApplying $v$ to the cone shows that $vA^\\bullet\\to vJ^\\bullet$ is a\nquasi-isomorphism. The target computes $Rv(A^\\bullet)$, proving the\nassertion. No spectral sequence is needed; this is why the lemma is separated\nfrom [sk-thm-groth-ss].",
+   "uses": [
     "sk-thm-groth-ss"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1050,
-  "blueprint_uses": [],
-  "blueprint_lean": [
-    "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-groth-ss"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-acyclicity/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1050,
+ "blueprint_uses": [],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.nonempty_rightDerivedObjIso_homology_of_acyclic"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

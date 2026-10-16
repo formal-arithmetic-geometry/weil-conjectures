@@ -1,5 +1,14 @@
 {
  "id": "lem-sp-vertical-cutoff-column-quasiiso-strict",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Nested smart cutoff comparison: strict endpoints",
  "statement": "Let C be an abelian category and L a nonnegative cochain complex. For integers a < b, let g be a map of the indicated cutoffs compatible with their inclusions into the reextended L, and let q satisfy the canonical projection equation below. Then q is a quasi-isomorphism.\ntheorem verticalCutoff_column_quasiIso_strict\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a < b)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L)\n    (q : cokernel g ⟶ (verticalWindow a b).obj L)\n    (hq : cokernel.π g ≫ q = HomologicalComplex.restrictionMap\n      (CochainComplex.truncLEMap\n        (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n      ComplexShape.embeddingUpNat) : QuasiIso q",
@@ -119,14 +128,6 @@
   "item": "Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIso",
   "date": "2026-10-13",
   "group": "V3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sp-vertical-cutoff-column-quasiiso",
-   "place": "Decomposition of endpoint cases",
-   "via": []
-  }
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",

@@ -1,5 +1,14 @@
 {
  "id": "new-picard-residue-homology-comparison-source",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Source geometric comparison equivalence",
  "statement": "Under the derived localization instances and geometric hypotheses in the following signature, the explicit residue cycle quotient has an additive equivalence to degree-one structure-sheaf fibre cohomology: theorem picard_residue_homology_geometric_comparison_source\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅\n        DerivedCategory.Q.obj K))\n    :\n    Nonempty (affineResidueCycleHomology W U p K ≃+\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)",
@@ -79,14 +88,6 @@
   "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparison",
   "date": "2026-10-14",
   "group": "Q4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "new-picard-residue-homology-comparison",
-   "place": "decomposition of proof",
-   "via": []
-  }
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",

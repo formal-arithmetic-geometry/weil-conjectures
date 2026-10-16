@@ -1,69 +1,74 @@
 {
-  "id": "det-pe-classical-sheaves-modules",
-  "kind": "statement",
-  "title": "The module form of the classical equivalence",
-  "statement": "Let $\\Lambda$ be a discrete commutative ring, $\\Lambda_{X,\\Et}$ its constant\nsheaf on $X_{\\Et}$, and identify $\\Lambda_X=\\nu_X^*\\Lambda_{X,\\Et}$. Then\n$\\nu_X^*$ and $\\nu_{X,*}$ restrict to an adjoint pair between\n$\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Proet},\\Lambda_X)$; the functor\n$\\nu_X^*\\colon\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda_X)$ is exact and\nfully faithful, and it is an equivalence onto the full subcategory of\nclassical $\\Lambda_X$-module sheaves, with quasi-inverse $\\nu_{X,*}$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
-    "place": "node det-pe-classical-sheaves-modules, order None"
+ "id": "det-pe-classical-sheaves-modules",
+ "blueprint": {
+  "is": "det-pe-classical-sheaves-modules",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The module form of the classical equivalence",
+ "statement": "Let $\\Lambda$ be a discrete commutative ring, $\\Lambda_{X,\\Et}$ its constant\nsheaf on $X_{\\Et}$, and identify $\\Lambda_X=\\nu_X^*\\Lambda_{X,\\Et}$. Then\n$\\nu_X^*$ and $\\nu_{X,*}$ restrict to an adjoint pair between\n$\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Proet},\\Lambda_X)$; the functor\n$\\nu_X^*\\colon\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda_X)$ is exact and\nfully faithful, and it is an equivalence onto the full subcategory of\nclassical $\\Lambda_X$-module sheaves, with quasi-inverse $\\nu_{X,*}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
+  "place": "node det-pe-classical-sheaves-modules, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The inverse image $\\nu_X^*$ preserves finite products, so it carries the\naction map $\\Lambda_{X,\\Et}\\times M\\to M$ of a $\\Lambda$-module sheaf and the\naddition $M\\times M\\to M$ to the corresponding maps for $\\nu_X^*M$, and the\nmodule axioms (equalities of maps built from finite products) are preserved.\nThe direct image $\\nu_{X,*}$ is restriction, so it carries a\n$\\Lambda_X$-module structure on $G$ to a $\\nu_{X,*}\\Lambda_X$-module structure,\nand $\\nu_{X,*}\\Lambda_X=\\nu_{X,*}\\nu_X^*\\Lambda_{X,\\Et}\\cong\\Lambda_{X,\\Et}$ by\n[det-pe-classical-sheaves-unit]. The unit and counit are linear because they\nare natural transformations between functors commuting with finite products,\nso the adjunction restricts to module sheaves.",
+   "uses": [
+    "det-pe-classical-sheaves-unit"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The inverse image $\\nu_X^*$ preserves finite products, so it carries the\naction map $\\Lambda_{X,\\Et}\\times M\\to M$ of a $\\Lambda$-module sheaf and the\naddition $M\\times M\\to M$ to the corresponding maps for $\\nu_X^*M$, and the\nmodule axioms (equalities of maps built from finite products) are preserved.\nThe direct image $\\nu_{X,*}$ is restriction, so it carries a\n$\\Lambda_X$-module structure on $G$ to a $\\nu_{X,*}\\Lambda_X$-module structure,\nand $\\nu_{X,*}\\Lambda_X=\\nu_{X,*}\\nu_X^*\\Lambda_{X,\\Et}\\cong\\Lambda_{X,\\Et}$ by\n[det-pe-classical-sheaves-unit]. The unit and counit are linear because they\nare natural transformations between functors commuting with finite products,\nso the adjunction restricts to module sheaves.",
-      "uses": [
-        "det-pe-classical-sheaves-unit"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Exactness: on module sheaves $\\nu_X^*$ preserves kernels (finite limits) and\ncokernels (it is a left adjoint), as recorded in\n[prop-weil-pbc-site-comparison-finite-level] for finite rings; the argument\nuses only that $\\nu_X^*$ preserves finite limits and colimits, so it applies to\nany discrete $\\Lambda$.",
-      "uses": [
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Full faithfulness: a $\\Lambda$-linear map is in particular a map of sheaves,\nand by [det-pe-classical-sheaves-unit] every map of sheaves\n$\\nu_X^*M\\to\\nu_X^*M'$ is $\\nu_X^*\\varphi$ for a unique map of sheaves\n$\\varphi\\colon M\\to M'$. If $\\nu_X^*\\varphi$ is linear, then so is $\\varphi$:\nthe two maps $\\Lambda_{X,\\Et}\\times M\\to M'$ expressing linearity agree after\n$\\nu_X^*$, hence agree by faithfulness.",
-      "uses": [
-        "det-pe-classical-sheaves-unit"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Essential image: a module sheaf is classical if and only if its underlying\nsheaf of sets is ([det-pe-classical-definition-continuity-map]). If $G$ is a\nclassical $\\Lambda_X$-module sheaf, then by [det-pe-classical-sheaves-image]\nthe linear counit $\\nu_X^*\\nu_{X,*}G\\to G$ is an isomorphism of sheaves, hence\nof module sheaves. Conversely every $\\nu_X^*M$ is classical. Together with the\nunit isomorphism this shows that $\\nu_X^*$ and $\\nu_{X,*}$ are inverse\nequivalences between $\\Mod(X_{\\Et},\\Lambda)$ and classical\n$\\Lambda_X$-modules.",
-      "uses": [
-        "det-pe-classical-definition-continuity-map",
-        "det-pe-classical-sheaves-image"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-pe-classical-sheaves-unit",
-    "prop-weil-pbc-site-comparison-finite-level",
+  {
+   "text": "Exactness: on module sheaves $\\nu_X^*$ preserves kernels (finite limits) and\ncokernels (it is a left adjoint), as recorded in\n[prop-weil-pbc-site-comparison-finite-level] for finite rings; the argument\nuses only that $\\nu_X^*$ preserves finite limits and colimits, so it applies to\nany discrete $\\Lambda$.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Full faithfulness: a $\\Lambda$-linear map is in particular a map of sheaves,\nand by [det-pe-classical-sheaves-unit] every map of sheaves\n$\\nu_X^*M\\to\\nu_X^*M'$ is $\\nu_X^*\\varphi$ for a unique map of sheaves\n$\\varphi\\colon M\\to M'$. If $\\nu_X^*\\varphi$ is linear, then so is $\\varphi$:\nthe two maps $\\Lambda_{X,\\Et}\\times M\\to M'$ expressing linearity agree after\n$\\nu_X^*$, hence agree by faithfulness.",
+   "uses": [
+    "det-pe-classical-sheaves-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Essential image: a module sheaf is classical if and only if its underlying\nsheaf of sets is ([det-pe-classical-definition-continuity-map]). If $G$ is a\nclassical $\\Lambda_X$-module sheaf, then by [det-pe-classical-sheaves-image]\nthe linear counit $\\nu_X^*\\nu_{X,*}G\\to G$ is an isomorphism of sheaves, hence\nof module sheaves. Conversely every $\\nu_X^*M$ is classical. Together with the\nunit isomorphism this shows that $\\nu_X^*$ and $\\nu_{X,*}$ are inverse\nequivalences between $\\Mod(X_{\\Et},\\Lambda)$ and classical\n$\\Lambda_X$-modules.",
+   "uses": [
     "det-pe-classical-definition-continuity-map",
     "det-pe-classical-sheaves-image"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-pe-classical-sheaves-unit",
-    "det-pe-classical-sheaves-image",
-    "prop-weil-pbc-site-comparison-finite-level"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-sheaves-unit",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "det-pe-classical-definition-continuity-map",
+  "det-pe-classical-sheaves-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-pe-classical-sheaves-unit",
+  "det-pe-classical-sheaves-image",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

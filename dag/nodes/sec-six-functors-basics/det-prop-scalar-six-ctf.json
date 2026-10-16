@@ -1,75 +1,80 @@
 {
-  "id": "det-prop-scalar-six-ctf",
-  "kind": "statement",
-  "title": "Extension of scalars preserves $\\Dctf$",
-  "statement": "Let $\\Lambda\\to\\Lambda'$ be one of the listed coefficient maps of\n[sk-prop-scalar-six] (or a composite of them) and $X$ a standing scheme. Then:\n\n1. Every object of $\\Dctf(X,\\Lambda)$ is obtained by finitely many shifts,\n   extensions and direct summands from objects $a_!P$, where\n   $a\\colon S\\hookrightarrow X$ is a locally closed immersion and $P$ is pro-étale locally on\n   $S$ of the form $P_0\\otimes_{\\Lambda(*)}\\Lambda_S$ for a bounded complex $P_0$ of\n   finite projective $\\Lambda(*)$-modules (\"locally perfect\").\n2. If $P$ is locally perfect over $\\Lambda$, then $P_{\\Lambda'}$ is locally perfect over\n   $\\Lambda'$, and $a_!(P_{\\Lambda'})\\in\\Dctf(X,\\Lambda')$.\n3. $K\\mapsto K_{\\Lambda'}$ maps $\\Dctf(X,\\Lambda)$ into $\\Dctf(X,\\Lambda')$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.md",
-    "place": "node det-prop-scalar-six-ctf, order None"
+ "id": "det-prop-scalar-six-ctf",
+ "blueprint": {
+  "is": "det-prop-scalar-six-ctf",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Extension of scalars preserves $\\Dctf$",
+ "statement": "Let $\\Lambda\\to\\Lambda'$ be one of the listed coefficient maps of\n[sk-prop-scalar-six] (or a composite of them) and $X$ a standing scheme. Then:\n\n1. Every object of $\\Dctf(X,\\Lambda)$ is obtained by finitely many shifts,\n   extensions and direct summands from objects $a_!P$, where\n   $a\\colon S\\hookrightarrow X$ is a locally closed immersion and $P$ is pro-étale locally on\n   $S$ of the form $P_0\\otimes_{\\Lambda(*)}\\Lambda_S$ for a bounded complex $P_0$ of\n   finite projective $\\Lambda(*)$-modules (\"locally perfect\").\n2. If $P$ is locally perfect over $\\Lambda$, then $P_{\\Lambda'}$ is locally perfect over\n   $\\Lambda'$, and $a_!(P_{\\Lambda'})\\in\\Dctf(X,\\Lambda')$.\n3. $K\\mapsto K_{\\Lambda'}$ maps $\\Dctf(X,\\Lambda)$ into $\\Dctf(X,\\Lambda')$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.md",
+  "place": "node det-prop-scalar-six-ctf, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "By [det-prop-scalar-six-pullback] (3) a composite of listed maps can be handled one\nstep at a time, so we may assume $\\Lambda\\to\\Lambda'$ is one of the elementary maps.",
+   "uses": [
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "By [det-prop-scalar-six-pullback] (3) a composite of listed maps can be handled one\nstep at a time, so we may assume $\\Lambda\\to\\Lambda'$ is one of the elementary maps.",
-      "uses": [
-        "det-prop-scalar-six-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1) Generators.* For a finite ring $A$ this is [sk-lem-sf-flat-model]: the\ngenerators are $a_!L$ with $L$ locally constant with finite projective local\nmodels. For $\\Lambda=\\mathcal O_E$ one has $\\Dctf=\\Dbc$, and\n[det-lem-int-tensor-shriek] (2) writes every object as an iterated extension of\n$a_!M$ with $M$ locally $P_0\\otimes_{\\mathcal O_E}\\mathcal O_{E,S}$, $P_0$ a bounded complex of\nfinite free $\\mathcal O_E$-modules. For $\\Lambda=E$ or $\\Qlb$, again $\\Dctf=\\Dbc$, and\nby [sk-cor-coefficient-heart-ii] every object is obtained by finitely many cones\nfrom $a_!L[n]$ with $L$ lisse, i.e. locally free of finite rank\n([sk-lem-coefficient-heart]).",
-      "uses": [
-        "sk-lem-sf-flat-model",
-        "det-lem-int-tensor-shriek",
-        "sk-lem-coefficient-heart"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(2) Local models.* If $P|_W\\simeq P_0\\otimes_{\\Lambda(*)}\\Lambda_W$ on a cover\n$\\{W\\to S\\}$, then, as $P_0$ is a complex of projective modules,\n$$\nP_{\\Lambda'}|_W\\simeq\\Lambda'_W\\otimes_{\\Lambda_W}(P_0\\otimes_{\\Lambda(*)}\\Lambda_W)=(\\Lambda'(*)\\otimes_{\\Lambda(*)}P_0)\\otimes_{\\Lambda'(*)}\\Lambda'_W,\n$$\nand $\\Lambda'(*)\\otimes_{\\Lambda(*)}P_0$ is a bounded complex of finite projective\n$\\Lambda'(*)$-modules. So $P_{\\Lambda'}$ is locally perfect. A locally perfect\ncomplex $Q$ over $\\Lambda'$ on $S$ lies in $\\Dctf(S,\\Lambda')$:\n- for $\\Lambda'$ a finite ring or a field ($E$, $F$, $\\Qlb$), its cohomology sheaves\n  are locally $H^q(Q_0)\\otimes_{\\Lambda'(*)}\\Lambda'_W$ with $H^q(Q_0)$ finitely\n  presented (the coefficient sheaves are flat over $\\Lambda'(*)$, which is\n  Noetherian or a field), so they are constructible on the single stratum $S$; and\n  $Q$ has Tor amplitude in the amplitude of $Q_0$, since tensoring with a complex\n  of flat modules is computed termwise;\n- for $\\Lambda'=\\mathcal O_F$, $Q$ is locally a bounded complex of finite free\n  $\\mathcal O_{F,W}$-modules, hence derived complete (derived completeness is local) with\n  constructible reduction, so $Q\\in\\Dbc(S,\\mathcal O_F)=\\Dctf(S,\\mathcal O_F)$ by\n  [sk-prop-integral-criterion].\nFinally $a_!$ preserves $\\Dctf$ ([sk-thm-sf-ctf-stability], or directly\n[det-lem-int-tensor-shriek] (1) for $\\mathcal O_F$), so $a_!(P_{\\Lambda'})\\in\\Dctf(X,\\Lambda')$.",
-      "uses": [
-        "det-lem-int-tensor-shriek"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3)* By [det-prop-scalar-six-pullback] (2), $(a_!P)_{\\Lambda'}\\simeq a_!(P_{\\Lambda'})$,\nwhich lies in $\\Dctf(X,\\Lambda')$ by (2). Extension of scalars is a triangulated\nfunctor (a left derived functor), and additive, so it commutes with shifts,\ncones and direct summands. The subcategory $\\Dctf(X,\\Lambda')$ is thick: it is\ntriangulated (for $\\mathcal O_F$ by [sk-lem-int-integral-heart], for fields by\n[sk-cor-coefficient-heart-ii], for finite rings by comparison with the étale\nsite where constructible sheaves form a weak Serre subcategory), Tor amplitude\nbounds pass to cones and summands, and a direct summand of a constructible\nsheaf is the image of an idempotent, hence constructible. Thus the class of\n$K$ with $K_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$ contains the generators of (1) and is\nclosed under the operations of (1), so it is all of $\\Dctf(X,\\Lambda)$.",
-      "uses": [
-        "det-prop-scalar-six-pullback",
-        "sk-lem-int-integral-heart"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-prop-scalar-six-pullback",
+  {
+   "text": "*(1) Generators.* For a finite ring $A$ this is [sk-lem-sf-flat-model]: the\ngenerators are $a_!L$ with $L$ locally constant with finite projective local\nmodels. For $\\Lambda=\\mathcal O_E$ one has $\\Dctf=\\Dbc$, and\n[det-lem-int-tensor-shriek] (2) writes every object as an iterated extension of\n$a_!M$ with $M$ locally $P_0\\otimes_{\\mathcal O_E}\\mathcal O_{E,S}$, $P_0$ a bounded complex of\nfinite free $\\mathcal O_E$-modules. For $\\Lambda=E$ or $\\Qlb$, again $\\Dctf=\\Dbc$, and\nby [sk-cor-coefficient-heart-ii] every object is obtained by finitely many cones\nfrom $a_!L[n]$ with $L$ lisse, i.e. locally free of finite rank\n([sk-lem-coefficient-heart]).",
+   "uses": [
     "sk-lem-sf-flat-model",
     "det-lem-int-tensor-shriek",
-    "sk-lem-coefficient-heart",
+    "sk-lem-coefficient-heart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2) Local models.* If $P|_W\\simeq P_0\\otimes_{\\Lambda(*)}\\Lambda_W$ on a cover\n$\\{W\\to S\\}$, then, as $P_0$ is a complex of projective modules,\n$$\nP_{\\Lambda'}|_W\\simeq\\Lambda'_W\\otimes_{\\Lambda_W}(P_0\\otimes_{\\Lambda(*)}\\Lambda_W)=(\\Lambda'(*)\\otimes_{\\Lambda(*)}P_0)\\otimes_{\\Lambda'(*)}\\Lambda'_W,\n$$\nand $\\Lambda'(*)\\otimes_{\\Lambda(*)}P_0$ is a bounded complex of finite projective\n$\\Lambda'(*)$-modules. So $P_{\\Lambda'}$ is locally perfect. A locally perfect\ncomplex $Q$ over $\\Lambda'$ on $S$ lies in $\\Dctf(S,\\Lambda')$:\n- for $\\Lambda'$ a finite ring or a field ($E$, $F$, $\\Qlb$), its cohomology sheaves\n  are locally $H^q(Q_0)\\otimes_{\\Lambda'(*)}\\Lambda'_W$ with $H^q(Q_0)$ finitely\n  presented (the coefficient sheaves are flat over $\\Lambda'(*)$, which is\n  Noetherian or a field), so they are constructible on the single stratum $S$; and\n  $Q$ has Tor amplitude in the amplitude of $Q_0$, since tensoring with a complex\n  of flat modules is computed termwise;\n- for $\\Lambda'=\\mathcal O_F$, $Q$ is locally a bounded complex of finite free\n  $\\mathcal O_{F,W}$-modules, hence derived complete (derived completeness is local) with\n  constructible reduction, so $Q\\in\\Dbc(S,\\mathcal O_F)=\\Dctf(S,\\mathcal O_F)$ by\n  [sk-prop-integral-criterion].\nFinally $a_!$ preserves $\\Dctf$ ([sk-thm-sf-ctf-stability], or directly\n[det-lem-int-tensor-shriek] (1) for $\\mathcal O_F$), so $a_!(P_{\\Lambda'})\\in\\Dctf(X,\\Lambda')$.",
+   "uses": [
+    "det-lem-int-tensor-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3)* By [det-prop-scalar-six-pullback] (2), $(a_!P)_{\\Lambda'}\\simeq a_!(P_{\\Lambda'})$,\nwhich lies in $\\Dctf(X,\\Lambda')$ by (2). Extension of scalars is a triangulated\nfunctor (a left derived functor), and additive, so it commutes with shifts,\ncones and direct summands. The subcategory $\\Dctf(X,\\Lambda')$ is thick: it is\ntriangulated (for $\\mathcal O_F$ by [sk-lem-int-integral-heart], for fields by\n[sk-cor-coefficient-heart-ii], for finite rings by comparison with the étale\nsite where constructible sheaves form a weak Serre subcategory), Tor amplitude\nbounds pass to cones and summands, and a direct summand of a constructible\nsheaf is the image of an idempotent, hence constructible. Thus the class of\n$K$ with $K_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$ contains the generators of (1) and is\nclosed under the operations of (1), so it is all of $\\Dctf(X,\\Lambda)$.",
+   "uses": [
+    "det-prop-scalar-six-pullback",
     "sk-lem-int-integral-heart"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-prop-scalar-six-pullback",
-    "sk-lem-sf-flat-model",
-    "det-lem-int-tensor-shriek",
-    "sk-cor-coefficient-heart-ii",
-    "sk-thm-sf-ctf-stability"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-scalar-six-pullback",
+  "sk-lem-sf-flat-model",
+  "det-lem-int-tensor-shriek",
+  "sk-lem-coefficient-heart",
+  "sk-lem-int-integral-heart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-prop-scalar-six-pullback",
+  "sk-lem-sf-flat-model",
+  "det-lem-int-tensor-shriek",
+  "sk-cor-coefficient-heart-ii",
+  "sk-thm-sf-ctf-stability"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

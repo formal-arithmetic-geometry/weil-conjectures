@@ -1,60 +1,65 @@
 {
-  "id": "det-pe-injective-acyclicity-reduction",
-  "kind": "statement",
-  "title": "Reduction of the acyclicity to affine étale objects",
-  "statement": "Let $X$ be a scheme and $\\Lambda$ a discrete commutative ring.\n\n1. For every $\\Lambda_X$-module sheaf $G$ on $X_{\\Proet}$ and every $q\\geq0$, the\n   sheaf $R^q\\nu_{X,*}G$ on $X_{\\Et}$ is the sheafification of the presheaf\n   $$\n   W\\longmapsto H^q(W_{\\Proet},G|_W)\n   $$\n   on affine étale $W\\to X$. In particular, if $H^q(W_{\\Proet},G|_W)=0$ for all\n   affine étale $W\\to X$, then $R^q\\nu_{X,*}G=0$.\n2. If $I$ is an injective $\\Lambda$-module sheaf on $X_{\\Et}$ and $W\\to X$ is\n   affine and étale, then $(\\nu_X^*I)|_W\\cong\\nu_W^*(I|_W)$, the sheaf $I|_W$ is\n   injective on $W_{\\Et}$, and $H^q(W_{\\Proet},(\\nu_X^*I)|_W)=0$ for $q>0$.\n\nConsequently $R^q\\nu_{X,*}\\nu_X^*I=0$ for $q>0$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/sk-lem-pe-injective-acyclicity-reduction.md",
-    "place": "node det-pe-injective-acyclicity-reduction, order None"
+ "id": "det-pe-injective-acyclicity-reduction",
+ "blueprint": {
+  "is": "det-pe-injective-acyclicity-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Reduction of the acyclicity to affine étale objects",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a discrete commutative ring.\n\n1. For every $\\Lambda_X$-module sheaf $G$ on $X_{\\Proet}$ and every $q\\geq0$, the\n   sheaf $R^q\\nu_{X,*}G$ on $X_{\\Et}$ is the sheafification of the presheaf\n   $$\n   W\\longmapsto H^q(W_{\\Proet},G|_W)\n   $$\n   on affine étale $W\\to X$. In particular, if $H^q(W_{\\Proet},G|_W)=0$ for all\n   affine étale $W\\to X$, then $R^q\\nu_{X,*}G=0$.\n2. If $I$ is an injective $\\Lambda$-module sheaf on $X_{\\Et}$ and $W\\to X$ is\n   affine and étale, then $(\\nu_X^*I)|_W\\cong\\nu_W^*(I|_W)$, the sheaf $I|_W$ is\n   injective on $W_{\\Et}$, and $H^q(W_{\\Proet},(\\nu_X^*I)|_W)=0$ for $q>0$.\n\nConsequently $R^q\\nu_{X,*}\\nu_X^*I=0$ for $q>0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/sk-lem-pe-injective-acyclicity-reduction.md",
+  "place": "node det-pe-injective-acyclicity-reduction, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "*(1).* Choose an injective resolution $G\\to J^\\bullet$ in\n$\\Mod(X_{\\Proet},\\Lambda_X)$. The direct image $\\nu_{X,*}$ is restriction to the\nétale subsite, so $R\\nu_{X,*}G$ is represented by the complex of presheaves\n$W\\mapsto J^\\bullet(W)$ on $X_{\\Et}$ (these are already sheaves), and\n$R^q\\nu_{X,*}G$ is the $q$-th cohomology sheaf of this complex, i.e. the\nsheafification of $W\\mapsto H^q(J^\\bullet(W))$. For an étale $W\\to X$, the\nrestriction $J^\\bullet|_W$ is an injective resolution of $G|_W$ on the slice\n$W_{\\Proet}$ by [lem-weil-pbc-proetale-restriction-injectives], so\n$H^q(J^\\bullet(W))=H^q(W_{\\Proet},G|_W)$. Affine étale objects form a basis\nof $X_{\\Et}$, so sheafification may be computed from the presheaf on them. If\nthe presheaf vanishes on this basis, its sheafification is zero.",
+   "uses": [
+    "lem-weil-pbc-proetale-restriction-injectives"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "*(1).* Choose an injective resolution $G\\to J^\\bullet$ in\n$\\Mod(X_{\\Proet},\\Lambda_X)$. The direct image $\\nu_{X,*}$ is restriction to the\nétale subsite, so $R\\nu_{X,*}G$ is represented by the complex of presheaves\n$W\\mapsto J^\\bullet(W)$ on $X_{\\Et}$ (these are already sheaves), and\n$R^q\\nu_{X,*}G$ is the $q$-th cohomology sheaf of this complex, i.e. the\nsheafification of $W\\mapsto H^q(J^\\bullet(W))$. For an étale $W\\to X$, the\nrestriction $J^\\bullet|_W$ is an injective resolution of $G|_W$ on the slice\n$W_{\\Proet}$ by [lem-weil-pbc-proetale-restriction-injectives], so\n$H^q(J^\\bullet(W))=H^q(W_{\\Proet},G|_W)$. Affine étale objects form a basis\nof $X_{\\Et}$, so sheafification may be computed from the presheaf on them. If\nthe presheaf vanishes on this basis, its sheafification is zero.",
-      "uses": [
-        "lem-weil-pbc-proetale-restriction-injectives"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(2).* For $W\\to X$ étale, the slice of $X_{\\Proet}$ over $W$ is $W_{\\Proet}$ and\nthe slice of $X_{\\Et}$ over $W$ is $W_{\\Et}$; the comparison morphisms commute\nwith these localizations because $\\nu_X^*$ commutes with restriction to $W$ (both\ncomposites are inverse images along the commutative square of continuous\ninclusion functors of sites, cf. [def-weil-pbc-site-comparison-morphism]).\nHence $(\\nu_X^*I)|_W\\cong\\nu_W^*(I|_W)$. Restriction to an étale $W$ has the exact\nleft adjoint extension by zero, so it preserves injectives\n([lem-weil-pbc-etale-restriction-injectives]). Now $W$ is affine, and $W$\nitself is a basis object of $W_{\\Proet}$ (with the constant presentation), so\n[lem-weil-pbc-comparison-injective-acyclicity], applied to the affine scheme\n$W$ and the injective sheaf $I|_W$, gives\n$H^q(W_{\\Proet},\\nu_W^*(I|_W))=0$ for $q>0$.\n\nThe final assertion follows by combining (1) with $G=\\nu_X^*I$ and (2).",
-      "uses": [
-        "def-weil-pbc-site-comparison-morphism",
-        "lem-weil-pbc-etale-restriction-injectives",
-        "lem-weil-pbc-comparison-injective-acyclicity"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-proetale-restriction-injectives",
+  {
+   "text": "*(2).* For $W\\to X$ étale, the slice of $X_{\\Proet}$ over $W$ is $W_{\\Proet}$ and\nthe slice of $X_{\\Et}$ over $W$ is $W_{\\Et}$; the comparison morphisms commute\nwith these localizations because $\\nu_X^*$ commutes with restriction to $W$ (both\ncomposites are inverse images along the commutative square of continuous\ninclusion functors of sites, cf. [def-weil-pbc-site-comparison-morphism]).\nHence $(\\nu_X^*I)|_W\\cong\\nu_W^*(I|_W)$. Restriction to an étale $W$ has the exact\nleft adjoint extension by zero, so it preserves injectives\n([lem-weil-pbc-etale-restriction-injectives]). Now $W$ is affine, and $W$\nitself is a basis object of $W_{\\Proet}$ (with the constant presentation), so\n[lem-weil-pbc-comparison-injective-acyclicity], applied to the affine scheme\n$W$ and the injective sheaf $I|_W$, gives\n$H^q(W_{\\Proet},\\nu_W^*(I|_W))=0$ for $q>0$.\n\nThe final assertion follows by combining (1) with $G=\\nu_X^*I$ and (2).",
+   "uses": [
     "def-weil-pbc-site-comparison-morphism",
     "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-comparison-injective-acyclicity",
-    "det-pe-classical-sheaves-modules"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/sk-lem-pe-injective-acyclicity-reduction.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-injective-acyclicity",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "det-pe-classical-sheaves-modules"
-  ],
-  "uses_not_cited": [
-    "det-pe-classical-sheaves-modules"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+    "lem-weil-pbc-comparison-injective-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-comparison-injective-acyclicity",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/sk-lem-pe-injective-acyclicity-reduction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-injective-acyclicity",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "det-pe-classical-sheaves-modules"
+ ],
+ "uses_not_cited": [
+  "det-pe-classical-sheaves-modules"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

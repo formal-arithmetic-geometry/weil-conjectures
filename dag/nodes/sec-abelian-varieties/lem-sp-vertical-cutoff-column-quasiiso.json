@@ -1,5 +1,14 @@
 {
  "id": "lem-sp-vertical-cutoff-column-quasiiso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Canonical nested-cutoff comparison on one column",
  "statement": "Let C be abelian and L a nonnegative cochain complex. For integers a<=b, let g between the cutoffs be compatible with their inclusions into the reextended L. Every map q from cokernel(g) to the smart window whose composite with the cokernel projection equals the restricted b-1 upper truncation of the canonical lower projection at a is a quasi-isomorphism. The projection equation, rather than just the type of q, is essential. theorem verticalCutoff_column_quasiIso\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a ≤ b)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L)\n    (q : cokernel g ⟶ (verticalWindow a b).obj L)\n    (hq : cokernel.π g ≫ q = HomologicalComplex.restrictionMap\n      (CochainComplex.truncLEMap\n        (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n      ComplexShape.embeddingUpNat) : QuasiIso q",
@@ -93,14 +102,6 @@
   "item": "Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison",
   "date": "2026-10-13",
   "group": "C2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sp-vertical-cutoff-quotient-comparison",
-   "place": "Column homology verification after explicit construction of the bicomplex cokernel comparison",
-   "via": []
-  }
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",

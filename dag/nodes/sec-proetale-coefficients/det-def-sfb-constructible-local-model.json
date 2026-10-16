@@ -1,63 +1,68 @@
 {
-  "id": "det-def-sfb-constructible-local-model",
-  "kind": "definition",
-  "title": "Finite constant local models",
-  "statement": "Let $\\Lambda$ be a commutative condensed ring with scalar ring $\\Lambda(*)$, the ring of\nsections over the one-point profinite set, and let $X$ be a scheme. For $U\\in X_{\\mathrm{proét}}$\nthere is a ring map from the constant sheaf $\\Lambda(*)_U$ to $\\Lambda_U$ (adjoint to\n$\\Lambda(*)\\to\\Gamma(U,\\Lambda_U)$, the pullback along $U\\to *$ of global sections). For a\n$\\Lambda(*)$-module $P$ put $\\Lambda_U\\otimes_{\\Lambda(*)}P:=\\Lambda_U\\otimes_{\\Lambda(*)_U}P_U$.\n\nA $\\Lambda_X$-module $M$ has a *finite constant local model* if there are a pro-étale cover\n$\\{U_i\\to X\\}$ and finitely presented $\\Lambda(*)$-modules $P_i$ with\n$M|_{U_i}\\simeq\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i$.\n\n**Lemma.** For a $\\Lambda_X$-module $M$ and a cover $\\{U_i\\to X\\}$ the following are\nequivalent:\n\n1. $M|_{U_i}\\simeq\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i$ with $P_i$ finitely presented over\n   $\\Lambda(*)$;\n2. $M|_{U_i}\\simeq\\operatorname{coker}\\bigl(\\Lambda_{U_i}^{m_i}\\xrightarrow{\\ A_i\\ }\\Lambda_{U_i}^{n_i}\\bigr)$\n   for a matrix $A_i$ with entries in $\\Lambda(*)$, acting through $\\Lambda(*)\\to\\Lambda_{U_i}$.\n\nIn particular a module with a finite constant local model is locally finitely presented\n([def-sfb-locally-finitely-presented]); the converse fails in general, since a local\npresentation over $\\Lambda_{U}$ may have entries that are not constant.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
-    "place": "node det-def-sfb-constructible-local-model, order None"
+ "id": "det-def-sfb-constructible-local-model",
+ "blueprint": {
+  "is": "det-def-sfb-constructible-local-model",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Finite constant local models",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring with scalar ring $\\Lambda(*)$, the ring of\nsections over the one-point profinite set, and let $X$ be a scheme. For $U\\in X_{\\mathrm{proét}}$\nthere is a ring map from the constant sheaf $\\Lambda(*)_U$ to $\\Lambda_U$ (adjoint to\n$\\Lambda(*)\\to\\Gamma(U,\\Lambda_U)$, the pullback along $U\\to *$ of global sections). For a\n$\\Lambda(*)$-module $P$ put $\\Lambda_U\\otimes_{\\Lambda(*)}P:=\\Lambda_U\\otimes_{\\Lambda(*)_U}P_U$.\n\nA $\\Lambda_X$-module $M$ has a *finite constant local model* if there are a pro-étale cover\n$\\{U_i\\to X\\}$ and finitely presented $\\Lambda(*)$-modules $P_i$ with\n$M|_{U_i}\\simeq\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i$.\n\n**Lemma.** For a $\\Lambda_X$-module $M$ and a cover $\\{U_i\\to X\\}$ the following are\nequivalent:\n\n1. $M|_{U_i}\\simeq\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i$ with $P_i$ finitely presented over\n   $\\Lambda(*)$;\n2. $M|_{U_i}\\simeq\\operatorname{coker}\\bigl(\\Lambda_{U_i}^{m_i}\\xrightarrow{\\ A_i\\ }\\Lambda_{U_i}^{n_i}\\bigr)$\n   for a matrix $A_i$ with entries in $\\Lambda(*)$, acting through $\\Lambda(*)\\to\\Lambda_{U_i}$.\n\nIn particular a module with a finite constant local model is locally finitely presented\n([def-sfb-locally-finitely-presented]); the converse fails in general, since a local\npresentation over $\\Lambda_{U}$ may have entries that are not constant.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
+  "place": "node det-def-sfb-constructible-local-model, order None"
+ },
+ "stmt_deps": [
+  "def-sfb-locally-finitely-presented",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "$(1)\\Rightarrow(2)$. Choose a presentation $\\Lambda(*)^m\\xrightarrow{A}\\Lambda(*)^n\\to P_i\\to0$.\nPassing to constant sheaves is exact, and $\\Lambda_{U_i}\\otimes_{\\Lambda(*)_{U_i}}-$ is right\nexact and sends $\\Lambda(*)_{U_i}^k$ to $\\Lambda_{U_i}^k$. So\n$\\Lambda_{U_i}^m\\xrightarrow{A}\\Lambda_{U_i}^n\\to\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i\\to0$ is\nexact, with the same matrix $A$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "def-sfb-locally-finitely-presented",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-pbc-proetale-site"
-  ],
-  "proof": [
-    {
-      "text": "$(1)\\Rightarrow(2)$. Choose a presentation $\\Lambda(*)^m\\xrightarrow{A}\\Lambda(*)^n\\to P_i\\to0$.\nPassing to constant sheaves is exact, and $\\Lambda_{U_i}\\otimes_{\\Lambda(*)_{U_i}}-$ is right\nexact and sends $\\Lambda(*)_{U_i}^k$ to $\\Lambda_{U_i}^k$. So\n$\\Lambda_{U_i}^m\\xrightarrow{A}\\Lambda_{U_i}^n\\to\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i\\to0$ is\nexact, with the same matrix $A$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "$(2)\\Rightarrow(1)$. Let $P_i=\\operatorname{coker}(A\\colon\\Lambda(*)^m\\to\\Lambda(*)^n)$, a\nfinitely presented $\\Lambda(*)$-module. By the computation just made,\n$\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i=\\operatorname{coker}(A\\colon\\Lambda_{U_i}^m\\to\\Lambda_{U_i}^n)\\cong M|_{U_i}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Finally (2) is in particular a presentation of $M|_{U_i}$ as the cokernel of a map of finite\nfree $\\Lambda_{U_i}$-modules, which is the definition of local finite presentation\n([def-sfb-finitely-presented-module], [def-sfb-locally-finitely-presented]).",
-      "uses": [
-        "def-sfb-finitely-presented-module",
-        "def-sfb-locally-finitely-presented"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "$(2)\\Rightarrow(1)$. Let $P_i=\\operatorname{coker}(A\\colon\\Lambda(*)^m\\to\\Lambda(*)^n)$, a\nfinitely presented $\\Lambda(*)$-module. By the computation just made,\n$\\Lambda_{U_i}\\otimes_{\\Lambda(*)}P_i=\\operatorname{coker}(A\\colon\\Lambda_{U_i}^m\\to\\Lambda_{U_i}^n)\\cong M|_{U_i}$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Finally (2) is in particular a presentation of $M|_{U_i}$ as the cokernel of a map of finite\nfree $\\Lambda_{U_i}$-modules, which is the definition of local finite presentation\n([def-sfb-finitely-presented-module], [def-sfb-locally-finitely-presented]).",
+   "uses": [
     "def-sfb-finitely-presented-module",
     "def-sfb-locally-finitely-presented"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "def-sfb-locally-finitely-presented",
-    "def-sfb-finitely-presented-module",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-pbc-proetale-site"
-  ],
-  "uses_not_cited": [
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-pbc-proetale-site"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finitely-presented-module",
+  "def-sfb-locally-finitely-presented"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "def-sfb-locally-finitely-presented",
+  "def-sfb-finitely-presented-module",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site"
+ ],
+ "uses_not_cited": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,56 +1,61 @@
 {
-  "id": "det-finite-window-reduction",
-  "kind": "statement",
-  "title": "The finite window from the lower tail vanishing",
-  "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$ and $K\\in\\Dic(X,\\Lambda)$. Assume that $\\Hom(C,L)=0$ for\nevery $L\\in\\Dic(X,\\Lambda)$ with $H^q(L)=0$ for $q>-d_C-1$. Then the maps\n$K\\leftarrow\\tau_{\\leq0}K\\to\\tau_{\\geq-d_C}\\tau_{\\leq0}K$ induce isomorphisms\n\n$$\n\\Hom(C,K)\\xleftarrow{\\ \\sim\\ }\\Hom(C,\\tau_{\\leq0}K)\\xrightarrow{\\ \\sim\\ }\\Hom(C,\\tau_{\\geq-d_C}\\tau_{\\leq0}K).\n$$\n\nApplied to $K[m]$ this gives the isomorphism of [sk-lem-finite-window].",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-reduction.md",
-    "place": "node det-finite-window-reduction, order None"
+ "id": "det-finite-window-reduction",
+ "blueprint": {
+  "is": "det-finite-window-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The finite window from the lower tail vanishing",
+ "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$ and $K\\in\\Dic(X,\\Lambda)$. Assume that $\\Hom(C,L)=0$ for\nevery $L\\in\\Dic(X,\\Lambda)$ with $H^q(L)=0$ for $q>-d_C-1$. Then the maps\n$K\\leftarrow\\tau_{\\leq0}K\\to\\tau_{\\geq-d_C}\\tau_{\\leq0}K$ induce isomorphisms\n\n$$\n\\Hom(C,K)\\xleftarrow{\\ \\sim\\ }\\Hom(C,\\tau_{\\leq0}K)\\xrightarrow{\\ \\sim\\ }\\Hom(C,\\tau_{\\geq-d_C}\\tau_{\\leq0}K).\n$$\n\nApplied to $K[m]$ this gives the isomorphism of [sk-lem-finite-window].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-reduction.md",
+  "place": "node det-finite-window-reduction, order None"
+ },
+ "stmt_deps": [
+  "sk-lem-finite-window"
+ ],
+ "proof": [
+  {
+   "text": "*Upper truncation.* From the triangle $\\tau_{\\leq0}K\\to K\\to\\tau_{>0}K\\to$ we get the exact sequence\n\n$$\n\\Hom(C,\\tau_{>0}K[-1])\\to\\Hom(C,\\tau_{\\leq0}K)\\to\\Hom(C,K)\\to\\Hom(C,\\tau_{>0}K).\n$$\n\nSince $C$ is a sheaf in degree $0$ and $\\tau_{>0}K[s]\\in\\D^{\\geq1}$ for $s=0,-1$, the outer terms vanish\n($t$-structure axiom: no maps from $\\D^{\\leq0}$ to $\\D^{\\geq1}$).",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-lem-finite-window"
-  ],
-  "proof": [
-    {
-      "text": "*Upper truncation.* From the triangle $\\tau_{\\leq0}K\\to K\\to\\tau_{>0}K\\to$ we get the exact sequence\n\n$$\n\\Hom(C,\\tau_{>0}K[-1])\\to\\Hom(C,\\tau_{\\leq0}K)\\to\\Hom(C,K)\\to\\Hom(C,\\tau_{>0}K).\n$$\n\nSince $C$ is a sheaf in degree $0$ and $\\tau_{>0}K[s]\\in\\D^{\\geq1}$ for $s=0,-1$, the outer terms vanish\n($t$-structure axiom: no maps from $\\D^{\\leq0}$ to $\\D^{\\geq1}$).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Lower truncation.* Put $K'=\\tau_{\\leq0}K$ and $L=\\tau_{\\leq-d_C-1}K'$. The triangle\n$L\\to K'\\to\\tau_{\\geq-d_C}K'\\to L[1]$ gives\n\n$$\n\\Hom(C,L)\\to\\Hom(C,K')\\to\\Hom(C,\\tau_{\\geq-d_C}K')\\to\\Hom(C,L[1]).\n$$\n\nBoth $L$ and $L[1]$ lie in $\\Dic(X,\\Lambda)$ ([sk-cor-ambient-ind-derived]) and have cohomology in degrees\n$\\leq-d_C-1$ (resp. $\\leq-d_C-2$), so the outer terms vanish by hypothesis (which holds by\n[det-finite-window-unbounded]). Hence the middle map is an isomorphism; note\n$\\tau_{\\geq-d_C}K'=\\tau_{\\geq-d_C}\\tau_{\\leq0}K$.",
-      "uses": [
-        "det-finite-window-unbounded"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Shift.* For general $m$, apply this to $K[m]$, using $\\tau_{\\leq0}(K[m])=(\\tau_{\\leq m}K)[m]$ and\n$\\tau_{\\geq-d_C}(K[m])=(\\tau_{\\geq m-d_C}K)[m]$. Naturality in $K$ is clear since all maps are truncation\nmaps.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "*Lower truncation.* Put $K'=\\tau_{\\leq0}K$ and $L=\\tau_{\\leq-d_C-1}K'$. The triangle\n$L\\to K'\\to\\tau_{\\geq-d_C}K'\\to L[1]$ gives\n\n$$\n\\Hom(C,L)\\to\\Hom(C,K')\\to\\Hom(C,\\tau_{\\geq-d_C}K')\\to\\Hom(C,L[1]).\n$$\n\nBoth $L$ and $L[1]$ lie in $\\Dic(X,\\Lambda)$ ([sk-cor-ambient-ind-derived]) and have cohomology in degrees\n$\\leq-d_C-1$ (resp. $\\leq-d_C-2$), so the outer terms vanish by hypothesis (which holds by\n[det-finite-window-unbounded]). Hence the middle map is an isomorphism; note\n$\\tau_{\\geq-d_C}K'=\\tau_{\\geq-d_C}\\tau_{\\leq0}K$.",
+   "uses": [
     "det-finite-window-unbounded"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-reduction.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-finite-window-unbounded",
-    "sk-cor-ambient-ind-derived"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Shift.* For general $m$, apply this to $K[m]$, using $\\tau_{\\leq0}(K[m])=(\\tau_{\\leq m}K)[m]$ and\n$\\tau_{\\geq-d_C}(K[m])=(\\tau_{\\geq m-d_C}K)[m]$. Naturality in $K$ is clear since all maps are truncation\nmaps.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "det-finite-window-unbounded"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-reduction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-finite-window-unbounded",
+  "sk-cor-ambient-ind-derived"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

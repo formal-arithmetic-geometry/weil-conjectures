@@ -1,5 +1,14 @@
 {
  "id": "lem-weil-pbc-strict-local-section-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Strict-local representative section pullback",
  "statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : qcqsStrictLocalSectionRestriction Λ f s F j ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
@@ -122,13 +131,6 @@
   "item": "Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility",
   "date": "2026-10-12",
   "group": "U3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-strict-local-exchange-compatibility",
-   "place": "Representative calculation in original steps 3 and 4"
-  }
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",

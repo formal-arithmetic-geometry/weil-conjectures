@@ -1,5 +1,14 @@
 {
  "id": "new-stage3-compact-derived-source-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Compact derived source core",
  "statement": "theorem compact_derived_source_core\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    {S : Type w} [rS : Ring S]\n    [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)] :\n    ∃ (B : Type (max uA vA ((max w vH) + 1))) (cB : Category.{max w vH} B),\n      letI := cB\n      ∃ (zB : HasZeroObject B) (sB : HasShift B ℤ) (pB : Preadditive B),\n      letI := zB\n      letI := sB\n      letI := pB\n      ∃ aB : ∀ n : ℤ, (shiftFunctor B n).Additive,\n      letI := aB\n      ∃ tB : Pretriangulated B,\n      letI := tB\n      ∃ (iB : IsTriangulated B) (sumsB : HasCoproducts.{max w vH} B),\n      letI := iB\n      letI := sumsB\n      IsCompactlyGeneratedTriangulated.{max w vH} B ∧\n      ∃ (e : B ≌ DerivedCategory (ModuleCat.{max w vH} S))\n        (se : e.functor.CommShift ℤ),\n      letI := se\n      e.functor.IsTriangulated",
@@ -77,14 +86,6 @@
   "group": "F3",
   "date": "2026-10-14",
   "item": "Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
-   "place": "stage-3 decomposition",
-   "via": []
-  }
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",

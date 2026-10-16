@@ -1,5 +1,14 @@
 {
  "id": "lem-sc-etale-units-stalk-galois",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "lemma",
  "title": "The stalk of the etale units sheaf is additively equivalent to separable-closure units with the natural Galois action.",
  "statement": "The stalk of the etale units sheaf is additively equivalent to separable-closure units with the natural Galois action. The precise hypotheses and action-on-germs formula are recorded by the following Lean signature: theorem exists_etale_units_stalk_galois_equiv (K : Type u) [Field K] :\n    let Ks := SeparableClosure K\n    let Ω := AlgebraicClosure K\n    let S := Spec (.of K)\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∃ c : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf ≃+ Field.galoisUnitsTopRep K,\n      ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n        (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n          τ.toRingHom.comp (algebraMap Ks Ω))\n        (X : S.Etale) (x x' : p.fiber.obj X)\n        (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n        (z : S.gmSheaf.obj.obj (op X)),\n        c (p.toPresheafFiber X x' S.gmSheaf.obj z) =\n          (Field.galoisUnitsTopRep K).ρ g (c (p.toPresheafFiber X x S.gmSheaf.obj z))",
@@ -87,14 +96,6 @@
   "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding",
   "date": "2026-10-12",
   "group": "S1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-etale-units-h2-forward-embedding",
-   "place": "intermediate comparison",
-   "via": []
-  }
  },
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",

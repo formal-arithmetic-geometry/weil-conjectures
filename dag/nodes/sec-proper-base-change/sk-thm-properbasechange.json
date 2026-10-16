@@ -1,92 +1,97 @@
 {
-  "id": "sk-thm-properbasechange",
-  "kind": "statement",
-  "title": "Proper base change on classical pro-étale complexes",
-  "statement": "Let $\\Lambda$ be a commutative ring, let $f:X\\to Y$ be a proper morphism of\nschemes, and let $g:Y'\\to Y$ be arbitrary. Set $X'=X\\times_YY'$, with\nprojections $f':X'\\to Y'$ and $g':X'\\to X$. If\n$K\\in D^+_{\\mathrm{class}}(X_{\\mathrm{proét}},\\Lambda)$ has torsion underlying\nabelian cohomology sheaves, the canonical exchange, defined as in\n[sk-def-exchange] from the pro-étale inverse and direct images $g^*,g'^*$ and\n$Rf_*,Rf'_*$ on $D^+(\\,\\cdot_{\\mathrm{proét}},\\Lambda)$,\n\n$$\ng^*Rf_*K\\longrightarrow Rf'_*g'^*K\n$$\n\nis an isomorphism in $D^+_{\\mathrm{class}}(Y'_{\\mathrm{proét}},\\Lambda)$.\n\nThe complex $K$ need not be constructible, and the torsion orders need not be\ninvertible on $Y$. Classicality of $K$ is required: it is what brings the\nstatement back to the étale site.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/_section.md",
-    "place": "node sk-thm-properbasechange, order 1062",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03FD"
-      }
-    ]
+ "id": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": "sk-thm-properbasechange",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Proper base change on classical pro-étale complexes",
+ "statement": "Let $\\Lambda$ be a commutative ring, let $f:X\\to Y$ be a proper morphism of\nschemes, and let $g:Y'\\to Y$ be arbitrary. Set $X'=X\\times_YY'$, with\nprojections $f':X'\\to Y'$ and $g':X'\\to X$. If\n$K\\in D^+_{\\mathrm{class}}(X_{\\mathrm{proét}},\\Lambda)$ has torsion underlying\nabelian cohomology sheaves, the canonical exchange, defined as in\n[sk-def-exchange] from the pro-étale inverse and direct images $g^*,g'^*$ and\n$Rf_*,Rf'_*$ on $D^+(\\,\\cdot_{\\mathrm{proét}},\\Lambda)$,\n\n$$\ng^*Rf_*K\\longrightarrow Rf'_*g'^*K\n$$\n\nis an isomorphism in $D^+_{\\mathrm{class}}(Y'_{\\mathrm{proét}},\\Lambda)$.\n\nThe complex $K$ need not be constructible, and the torsion orders need not be\ninvertible on $Y$. Classicality of $K$ is required: it is what brings the\nstatement back to the étale site.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/_section.md",
+  "place": "node sk-thm-properbasechange, order 1062",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03FD"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-exchange",
+  "sk-def-conv",
+  "sk-def-pbc"
+ ],
+ "proof": [
+  {
+   "text": "By [sk-cor-pe-classical-derived], write $K=\\nu_X^*K_{\\mathrm{ét}}$ with\n$K_{\\mathrm{ét}}\\in D^+(X_{\\Et},\\Lambda)$. On the étale site,\n[sk-thm-reduction] proves proper base change for torsion abelian sheaves,\nwith the projective-line case [sk-thm-p1] as its input. Three passages lead\nfrom there to the theorem: to bounded below complexes, to $\\Lambda$-modules,\nand to the pro-étale site.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-def-exchange",
-    "sk-def-conv",
-    "sk-def-pbc"
-  ],
-  "proof": [
-    {
-      "text": "By [sk-cor-pe-classical-derived], write $K=\\nu_X^*K_{\\mathrm{ét}}$ with\n$K_{\\mathrm{ét}}\\in D^+(X_{\\Et},\\Lambda)$. On the étale site,\n[sk-thm-reduction] proves proper base change for torsion abelian sheaves,\nwith the projective-line case [sk-thm-p1] as its input. Three passages lead\nfrom there to the theorem: to bounded below complexes, to $\\Lambda$-modules,\nand to the pro-étale site.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Bounded below complexes.* Write $K$ for the étale complex\n$K_{\\mathrm{ét}}$, and suppose first that it is a bounded below complex of\nabelian sheaves with torsion cohomology. Fix an integer $m$. Both functors\n$g^{-1}Rf_*,\\ Rf'_*g'^{-1}:D^+(X_{\\Et},\\mathbf Z)\\to D^+(Y'_{\\Et},\\mathbf Z)$\nsend $D^{\\geq m+1}$ to $D^{\\geq m+1}$, so their $m$th cohomology on $K$ is\nunchanged upon replacing $K$ by the bounded truncation $\\tau_{\\leq m}K$. Using\ntruncation triangles, its finite Postnikov filtration reduces the exchange\nisomorphism in degree $m$ to torsion sheaves and their shifts.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*$\\Lambda$-modules.* Next forget the $\\Lambda$-action. The forgetful functor\nto abelian sheaves is exact and conservative, and commutes with inverse image\nand direct image. It also commutes with bounded below derived direct image.\nIndeed, an injective sheaf of $\\Lambda$-modules is acyclic, as an abelian\nsheaf, for sections over every object of the site (Stacks Project, Tag 03FD;\nsee [sk-def-pbc-conventions]); the same assertion on the étale slices gives\nacyclicity for direct image, so a module-injective resolution computes the\nunderlying abelian derived direct image. These identifications preserve the\nunits and counits defining the exchange. The underlying abelian map is\ntherefore the exchange in $D^+(Y'_{\\Et},\\mathbf Z)$ already shown to be an\nisomorphism, and hence so is the exchange in $D^+(Y'_{\\Et},\\Lambda)$.",
-      "uses": [
-        "sk-def-pbc-conventions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Pro-étale site.* Finally apply $\\nu_{Y'}^*$. Since $f$ and $f'$ are proper,\nhence qcqs, the direct-image comparison [sk-thm-pe-direct-image-comparison]\napplies. Together with the inverse-image comparison\n$g_{\\mathrm{proét}}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\mathrm{ét}}^*$ it identifies\n$\\nu_{Y'}^*g^{-1}Rf_*K_{\\mathrm{ét}}$ and\n$\\nu_{Y'}^*Rf'_*g'^{-1}K_{\\mathrm{ét}}$ with $g^*Rf_*K$ and $Rf'_*g'^*K$ in\n$D^+(Y'_{\\mathrm{proét}},\\Lambda)$. These comparisons respect the units and\ncounits, so the resulting isomorphism is the canonical pro-étale exchange\nmap.",
-      "uses": [
-        "sk-thm-pe-direct-image-comparison"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-def-pbc-conventions",
-    "sk-thm-pe-direct-image-comparison"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/_section.md",
-    "place": "## Proof"
+  {
+   "text": "*Bounded below complexes.* Write $K$ for the étale complex\n$K_{\\mathrm{ét}}$, and suppose first that it is a bounded below complex of\nabelian sheaves with torsion cohomology. Fix an integer $m$. Both functors\n$g^{-1}Rf_*,\\ Rf'_*g'^{-1}:D^+(X_{\\Et},\\mathbf Z)\\to D^+(Y'_{\\Et},\\mathbf Z)$\nsend $D^{\\geq m+1}$ to $D^{\\geq m+1}$, so their $m$th cohomology on $K$ is\nunchanged upon replacing $K$ by the bounded truncation $\\tau_{\\leq m}K$. Using\ntruncation triangles, its finite Postnikov filtration reduces the exchange\nisomorphism in degree $m$ to torsion sheaves and their shifts.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1062,
-  "blueprint_uses": [
-    "sk-def-conv",
-    "sk-def-exchange",
-    "sk-def-pbc",
-    "sk-def-pbc-conventions",
-    "sk-thm-p1",
-    "sk-thm-reduction",
-    "sk-cor-pe-classical-derived",
+  {
+   "text": "*$\\Lambda$-modules.* Next forget the $\\Lambda$-action. The forgetful functor\nto abelian sheaves is exact and conservative, and commutes with inverse image\nand direct image. It also commutes with bounded below derived direct image.\nIndeed, an injective sheaf of $\\Lambda$-modules is acyclic, as an abelian\nsheaf, for sections over every object of the site (Stacks Project, Tag 03FD;\nsee [sk-def-pbc-conventions]); the same assertion on the étale slices gives\nacyclicity for direct image, so a module-injective resolution computes the\nunderlying abelian derived direct image. These identifications preserve the\nunits and counits defining the exchange. The underlying abelian map is\ntherefore the exchange in $D^+(Y'_{\\Et},\\mathbf Z)$ already shown to be an\nisomorphism, and hence so is the exchange in $D^+(Y'_{\\Et},\\Lambda)$.",
+   "uses": [
+    "sk-def-pbc-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Pro-étale site.* Finally apply $\\nu_{Y'}^*$. Since $f$ and $f'$ are proper,\nhence qcqs, the direct-image comparison [sk-thm-pe-direct-image-comparison]\napplies. Together with the inverse-image comparison\n$g_{\\mathrm{proét}}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\mathrm{ét}}^*$ it identifies\n$\\nu_{Y'}^*g^{-1}Rf_*K_{\\mathrm{ét}}$ and\n$\\nu_{Y'}^*Rf'_*g'^{-1}K_{\\mathrm{ét}}$ with $g^*Rf_*K$ and $Rf'_*g'^*K$ in\n$D^+(Y'_{\\mathrm{proét}},\\Lambda)$. These comparisons respect the units and\ncounits, so the resulting isomorphism is the canonical pro-étale exchange\nmap.",
+   "uses": [
     "sk-thm-pe-direct-image-comparison"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-def-conv",
-    "sk-def-pbc"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pbc-conventions",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1062,
+ "blueprint_uses": [
+  "sk-def-conv",
+  "sk-def-exchange",
+  "sk-def-pbc",
+  "sk-def-pbc-conventions",
+  "sk-thm-p1",
+  "sk-thm-reduction",
+  "sk-cor-pe-classical-derived",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.isIso_baseChange_of_isProper"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-conv",
+  "sk-def-pbc"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

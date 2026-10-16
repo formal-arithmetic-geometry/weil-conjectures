@@ -1,85 +1,90 @@
 {
-  "id": "det-prop-scalar-six-exceptional",
-  "kind": "statement",
-  "title": "Coefficient comparison for exceptional inverse image",
-  "statement": "Let $f\\colon X\\to Y$ be a morphism of standing schemes, $\\Lambda\\to\\Lambda'$ a listed\ncoefficient map, and $f^!$ the right adjoint of $Rf_!$ on $\\Loc(\\Dctf(-,\\Lambda))$\nand on $\\Loc(\\Dctf(-,\\Lambda'))$ ([sk-thm-existence]). For $K\\in\\Dctf(Y,\\Lambda)$ let\n$$\n\\beta_{f,K}\\colon(f^!K)_{\\Lambda'}\\longrightarrow f^!(K_{\\Lambda'})\n$$\nbe the transpose under $Rf_!\\dashv f^!$ over $\\Lambda'$ of\n$$\nRf_!\\bigl((f^!K)_{\\Lambda'}\\bigr)\\xrightarrow{(\\gamma^!_{f,f^!K})^{-1}}(Rf_!f^!K)_{\\Lambda'}\\xrightarrow{(\\epsilon_K)_{\\Lambda'}}K_{\\Lambda'}\n$$\n(with $\\gamma^!$ the isomorphism of [det-prop-scalar-six-compact-support]). Then\n$\\beta_{f,K}$ is an isomorphism in $\\Dctf(X,\\Lambda')$, and the $\\beta$ are compatible\nwith composition, $\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$ under $(gf)^!=f^!g^!$,\nand with restriction to open subschemes; for an open immersion, $\\beta$ is the\npullback identification.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.md",
-    "place": "node det-prop-scalar-six-exceptional, order None"
-  },
-  "stmt_deps": [
-    "sk-thm-existence",
-    "det-prop-scalar-six-compact-support"
-  ],
-  "proof": [
-    {
-      "text": "*Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\\in\\Dctf(X,\\Lambda)$,\nso $\\gamma^!_{f,f^!K}$ is defined and invertible, and $(f^!K)_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$\nby [det-prop-scalar-six-ctf]; hence $\\beta_{f,K}$ is a morphism in $\\Dctf(X,\\Lambda')$. The\ncounit of a composite adjunction $R(gf)_!=Rg_!Rf_!\\dashv f^!g^!$ is the composite of the\ncounits, and $\\gamma^!$ is compatible with composition\n([det-prop-scalar-six-compact-support]); transposing gives\n$\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$. For an open immersion $u$, $Ru_!=u_!$ and\n$u^!=u^*$ with counit $u_!u^*\\to\\mathrm{id}$; the transpose of the extension of scalars of\nthis counit is the pullback identification of [det-prop-scalar-six-pullback]. In\nparticular $\\beta$ is compatible with open restriction ($u^*f^!=(fu)^!$).",
-      "uses": [
-        "sk-thm-existence",
-        "det-prop-scalar-six-ctf",
-        "det-prop-scalar-six-compact-support",
-        "det-prop-scalar-six-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Closed immersions.* Let $i\\colon Z\\hookrightarrow Y$ be closed with open complement\n$j\\colon V\\hookrightarrow Y$; here $Ri_!=i_*$. By [sk-lem-formal-closed-support] there is a\ndistinguished triangle\n$i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to$ whose first map is the counit of\n$i_*\\dashv R\\underline\\Gamma_Z$. For $K\\in\\Dctf(Y,\\Lambda)$ the third term lies in $\\Dctf$\n([sk-thm-sf-ctf-stability]), hence so does $i_*R\\underline\\Gamma_ZK$, and\n$R\\underline\\Gamma_ZK=i^*i_*R\\underline\\Gamma_ZK\\in\\Dctf(Z,\\Lambda)$. For $C$ in\n$\\Loc(\\Dctf(Z,\\Lambda))$, $\\Hom(C,R\\underline\\Gamma_ZK)=\\Hom(i_*C,K)=\\Hom(C,i^!K)$, so by\nYoneda in $\\Loc(\\Dctf(Z,\\Lambda))$, $R\\underline\\Gamma_ZK\\simeq i^!K$ compatibly with the\ncounits. So we have a triangle in $\\Dctf(Y,\\Lambda)$\n$$\ni_*i^!K\\xrightarrow{\\epsilon_K}K\\longrightarrow Rj_*j^*K\\longrightarrow i_*i^!K[1],\n$$\nand the same over $\\Lambda'$ for $K_{\\Lambda'}$. Extension of scalars is triangulated, so\nit carries the first triangle to a triangle. Compare it with the second via the\nmaps\n$$\n(i_*i^!K)_{\\Lambda'}\\simeq i_*\\bigl((i^!K)_{\\Lambda'}\\bigr)\\xrightarrow{i_*\\beta_{i,K}}i_*i^!(K_{\\Lambda'}),\\qquad\\mathrm{id}_{K_{\\Lambda'}},\\qquad(Rj_*j^*K)_{\\Lambda'}\\xrightarrow{\\gamma_{j}}Rj_*\\bigl((j^*K)_{\\Lambda'}\\bigr)\\simeq Rj_*j^*(K_{\\Lambda'}).\n$$\nThe left square commutes by the definition of $\\beta_{i,K}$ as a transpose of\n$(\\epsilon_K)_{\\Lambda'}$; the right square commutes because $\\gamma_j$ is compatible with\nthe units of $j^*\\dashv Rj_*$ ([det-prop-scalar-six-direct-image] (2)). The right vertical\nmap is an isomorphism by [det-prop-scalar-six-direct-image] (1) and\n[det-prop-scalar-six-pullback] (1). In a morphism of distinguished triangles whose\nsecond and third components are isomorphisms, the first is an isomorphism. So\n$i_*\\beta_{i,K}$ is an isomorphism, and since $i_*$ is fully faithful\n($i^*i_*=\\mathrm{id}$), $\\beta_{i,K}$ is an isomorphism.",
-      "uses": [
-        "sk-lem-formal-closed-support",
-        "det-prop-scalar-six-direct-image",
-        "det-prop-scalar-six-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The projective line.* Let $q\\colon\\mathbf P^1_Y\\to Y$. By [sk-prop-geo-p1-adjunction] and\n[sk-prop-diagonal-tower], $Rq_*\\dashv q^*(1)[2]$ on $\\Dctf$, with unit built from the\ndiagonal class $\\delta_\\Lambda$ and counit $\\epsilon_N=(1\\otimes\\operatorname{Tr}_q)\\circ(\\text{projection formula})$;\nsince $q$ is proper, $Rq_!=Rq_*$ and therefore $q^!\\simeq q^*(1)[2]$ with this counit.\nThe classes $\\delta_\\Lambda$ and $\\operatorname{Tr}_q$ commute with every listed coefficient map:\nfor finite rings they are constructed from the Kummer sequence and derived scalar\nextension, and are compatible with change of finite coefficients\n([sk-prop-geo-p1-adjunction]); the $\\mathcal O_E$-classes are the compatible limits of the\nfinite ones; the $E$- and $\\Qlb$-classes are their scalar extensions\n([sk-prop-diagonal-tower]). For $\\mathcal O_E\\to A$, the finite free resolution of $A_X$\nconstructed in [det-prop-scalar-six-direct-image] shows that $A_X\\otimes^{\\mathbf L}-$ commutes\nwith the inverse limits defining the integral classes, and the resulting classes\nare exactly the finite coefficient classes. Consequently the counit over $\\Lambda'$ at\n$N_{\\Lambda'}$ is the extension of scalars of the counit over $\\Lambda$ at $N$, modulo the\ncomparisons $\\gamma_q$ and the projection formula. With $K=N$ this says that\n$\\beta_{q,K}$ is the pullback-and-twist identification\n$(q^*K(1)[2])_{\\Lambda'}\\simeq q^*(K_{\\Lambda'})(1)[2]$, an isomorphism.",
-      "uses": [
-        "det-prop-scalar-six-direct-image"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Affine space.* The projection $\\mathbf A^1_Y\\to Y$ is $q\\circ u$ with\n$u\\colon\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$ open; by compatibility with composition and\nthe open case, $\\beta$ is an isomorphism for it, and then for $\\mathbf A^n_Y\\to Y$ as a\ncomposite of $n$ such projections.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*General $f$.* Since $\\beta$ is compatible with open restriction and isomorphisms in\n$\\D(X_{\\mathrm{proét}},\\Lambda')$ can be checked on an open cover, we may replace $X$ by the\nmembers of a finite affine open cover. For $X$ affine of finite type over $k$,\nchoose a closed immersion $\\iota\\colon X\\hookrightarrow\\mathbf A^n_k$; then\n$(\\iota,f)\\colon X\\to\\mathbf A^n_k\\times_kY=\\mathbf A^n_Y$ is a closed immersion (its composite\nwith the separated projection to $\\mathbf A^n_k$ is one), and $f$ is $(\\iota,f)$ followed by\nthe projection $\\mathbf A^n_Y\\to Y$. By the closed-immersion and affine-space cases and\ncompatibility with composition, $\\beta_{f,K}$ is an isomorphism.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "det-prop-scalar-six-exceptional",
+ "blueprint": {
+  "is": "det-prop-scalar-six-exceptional",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Coefficient comparison for exceptional inverse image",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of standing schemes, $\\Lambda\\to\\Lambda'$ a listed\ncoefficient map, and $f^!$ the right adjoint of $Rf_!$ on $\\Loc(\\Dctf(-,\\Lambda))$\nand on $\\Loc(\\Dctf(-,\\Lambda'))$ ([sk-thm-existence]). For $K\\in\\Dctf(Y,\\Lambda)$ let\n$$\n\\beta_{f,K}\\colon(f^!K)_{\\Lambda'}\\longrightarrow f^!(K_{\\Lambda'})\n$$\nbe the transpose under $Rf_!\\dashv f^!$ over $\\Lambda'$ of\n$$\nRf_!\\bigl((f^!K)_{\\Lambda'}\\bigr)\\xrightarrow{(\\gamma^!_{f,f^!K})^{-1}}(Rf_!f^!K)_{\\Lambda'}\\xrightarrow{(\\epsilon_K)_{\\Lambda'}}K_{\\Lambda'}\n$$\n(with $\\gamma^!$ the isomorphism of [det-prop-scalar-six-compact-support]). Then\n$\\beta_{f,K}$ is an isomorphism in $\\Dctf(X,\\Lambda')$, and the $\\beta$ are compatible\nwith composition, $\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$ under $(gf)^!=f^!g^!$,\nand with restriction to open subschemes; for an open immersion, $\\beta$ is the\npullback identification.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.md",
+  "place": "node det-prop-scalar-six-exceptional, order None"
+ },
+ "stmt_deps": [
+  "sk-thm-existence",
+  "det-prop-scalar-six-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "*Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\\in\\Dctf(X,\\Lambda)$,\nso $\\gamma^!_{f,f^!K}$ is defined and invertible, and $(f^!K)_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$\nby [det-prop-scalar-six-ctf]; hence $\\beta_{f,K}$ is a morphism in $\\Dctf(X,\\Lambda')$. The\ncounit of a composite adjunction $R(gf)_!=Rg_!Rf_!\\dashv f^!g^!$ is the composite of the\ncounits, and $\\gamma^!$ is compatible with composition\n([det-prop-scalar-six-compact-support]); transposing gives\n$\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$. For an open immersion $u$, $Ru_!=u_!$ and\n$u^!=u^*$ with counit $u_!u^*\\to\\mathrm{id}$; the transpose of the extension of scalars of\nthis counit is the pullback identification of [det-prop-scalar-six-pullback]. In\nparticular $\\beta$ is compatible with open restriction ($u^*f^!=(fu)^!$).",
+   "uses": [
     "sk-thm-existence",
     "det-prop-scalar-six-ctf",
     "det-prop-scalar-six-compact-support",
-    "det-prop-scalar-six-pullback",
-    "sk-lem-formal-closed-support",
-    "det-prop-scalar-six-direct-image"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.md",
-    "place": "## Proof"
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-prop-scalar-six-compact-support",
-    "det-prop-scalar-six-direct-image",
-    "sk-thm-existence",
+  {
+   "text": "*Closed immersions.* Let $i\\colon Z\\hookrightarrow Y$ be closed with open complement\n$j\\colon V\\hookrightarrow Y$; here $Ri_!=i_*$. By [sk-lem-formal-closed-support] there is a\ndistinguished triangle\n$i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to$ whose first map is the counit of\n$i_*\\dashv R\\underline\\Gamma_Z$. For $K\\in\\Dctf(Y,\\Lambda)$ the third term lies in $\\Dctf$\n([sk-thm-sf-ctf-stability]), hence so does $i_*R\\underline\\Gamma_ZK$, and\n$R\\underline\\Gamma_ZK=i^*i_*R\\underline\\Gamma_ZK\\in\\Dctf(Z,\\Lambda)$. For $C$ in\n$\\Loc(\\Dctf(Z,\\Lambda))$, $\\Hom(C,R\\underline\\Gamma_ZK)=\\Hom(i_*C,K)=\\Hom(C,i^!K)$, so by\nYoneda in $\\Loc(\\Dctf(Z,\\Lambda))$, $R\\underline\\Gamma_ZK\\simeq i^!K$ compatibly with the\ncounits. So we have a triangle in $\\Dctf(Y,\\Lambda)$\n$$\ni_*i^!K\\xrightarrow{\\epsilon_K}K\\longrightarrow Rj_*j^*K\\longrightarrow i_*i^!K[1],\n$$\nand the same over $\\Lambda'$ for $K_{\\Lambda'}$. Extension of scalars is triangulated, so\nit carries the first triangle to a triangle. Compare it with the second via the\nmaps\n$$\n(i_*i^!K)_{\\Lambda'}\\simeq i_*\\bigl((i^!K)_{\\Lambda'}\\bigr)\\xrightarrow{i_*\\beta_{i,K}}i_*i^!(K_{\\Lambda'}),\\qquad\\mathrm{id}_{K_{\\Lambda'}},\\qquad(Rj_*j^*K)_{\\Lambda'}\\xrightarrow{\\gamma_{j}}Rj_*\\bigl((j^*K)_{\\Lambda'}\\bigr)\\simeq Rj_*j^*(K_{\\Lambda'}).\n$$\nThe left square commutes by the definition of $\\beta_{i,K}$ as a transpose of\n$(\\epsilon_K)_{\\Lambda'}$; the right square commutes because $\\gamma_j$ is compatible with\nthe units of $j^*\\dashv Rj_*$ ([det-prop-scalar-six-direct-image] (2)). The right vertical\nmap is an isomorphism by [det-prop-scalar-six-direct-image] (1) and\n[det-prop-scalar-six-pullback] (1). In a morphism of distinguished triangles whose\nsecond and third components are isomorphisms, the first is an isomorphism. So\n$i_*\\beta_{i,K}$ is an isomorphism, and since $i_*$ is fully faithful\n($i^*i_*=\\mathrm{id}$), $\\beta_{i,K}$ is an isomorphism.",
+   "uses": [
     "sk-lem-formal-closed-support",
-    "sk-prop-geo-p1-adjunction",
-    "sk-prop-diagonal-tower"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The projective line.* Let $q\\colon\\mathbf P^1_Y\\to Y$. By [sk-prop-geo-p1-adjunction] and\n[sk-prop-diagonal-tower], $Rq_*\\dashv q^*(1)[2]$ on $\\Dctf$, with unit built from the\ndiagonal class $\\delta_\\Lambda$ and counit $\\epsilon_N=(1\\otimes\\operatorname{Tr}_q)\\circ(\\text{projection formula})$;\nsince $q$ is proper, $Rq_!=Rq_*$ and therefore $q^!\\simeq q^*(1)[2]$ with this counit.\nThe classes $\\delta_\\Lambda$ and $\\operatorname{Tr}_q$ commute with every listed coefficient map:\nfor finite rings they are constructed from the Kummer sequence and derived scalar\nextension, and are compatible with change of finite coefficients\n([sk-prop-geo-p1-adjunction]); the $\\mathcal O_E$-classes are the compatible limits of the\nfinite ones; the $E$- and $\\Qlb$-classes are their scalar extensions\n([sk-prop-diagonal-tower]). For $\\mathcal O_E\\to A$, the finite free resolution of $A_X$\nconstructed in [det-prop-scalar-six-direct-image] shows that $A_X\\otimes^{\\mathbf L}-$ commutes\nwith the inverse limits defining the integral classes, and the resulting classes\nare exactly the finite coefficient classes. Consequently the counit over $\\Lambda'$ at\n$N_{\\Lambda'}$ is the extension of scalars of the counit over $\\Lambda$ at $N$, modulo the\ncomparisons $\\gamma_q$ and the projection formula. With $K=N$ this says that\n$\\beta_{q,K}$ is the pullback-and-twist identification\n$(q^*K(1)[2])_{\\Lambda'}\\simeq q^*(K_{\\Lambda'})(1)[2]$, an isomorphism.",
+   "uses": [
+    "det-prop-scalar-six-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Affine space.* The projection $\\mathbf A^1_Y\\to Y$ is $q\\circ u$ with\n$u\\colon\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$ open; by compatibility with composition and\nthe open case, $\\beta$ is an isomorphism for it, and then for $\\mathbf A^n_Y\\to Y$ as a\ncomposite of $n$ such projections.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*General $f$.* Since $\\beta$ is compatible with open restriction and isomorphisms in\n$\\D(X_{\\mathrm{proét}},\\Lambda')$ can be checked on an open cover, we may replace $X$ by the\nmembers of a finite affine open cover. For $X$ affine of finite type over $k$,\nchoose a closed immersion $\\iota\\colon X\\hookrightarrow\\mathbf A^n_k$; then\n$(\\iota,f)\\colon X\\to\\mathbf A^n_k\\times_kY=\\mathbf A^n_Y$ is a closed immersion (its composite\nwith the separated projection to $\\mathbf A^n_k$ is one), and $f$ is $(\\iota,f)$ followed by\nthe projection $\\mathbf A^n_Y\\to Y$. By the closed-immersion and affine-space cases and\ncompatibility with composition, $\\beta_{f,K}$ is an isomorphism.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-existence",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-compact-support",
+  "det-prop-scalar-six-pullback",
+  "sk-lem-formal-closed-support",
+  "det-prop-scalar-six-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-prop-scalar-six-compact-support",
+  "det-prop-scalar-six-direct-image",
+  "sk-thm-existence",
+  "sk-lem-formal-closed-support",
+  "sk-prop-geo-p1-adjunction",
+  "sk-prop-diagonal-tower"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

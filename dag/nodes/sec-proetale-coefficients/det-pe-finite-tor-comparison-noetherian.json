@@ -1,71 +1,76 @@
 {
-  "id": "det-pe-finite-tor-comparison-noetherian",
-  "kind": "statement",
-  "title": "Tor amplitude under comparison for Noetherian coefficients",
-  "statement": "Let $X$ be quasi-compact and quasi-separated, $\\Lambda$ a discrete Noetherian\nring and $K\\in D^b_c(X_{\\Et},\\Lambda)$. For integers $a\\leq b$, $K$ has Tor\namplitude in $[a,b]$ (that is, $K\\otimes^{\\mathrm L}_\\Lambda N$ has cohomology\nonly in degrees $[a,b]$ for every $\\Lambda$-module sheaf $N$ on $X_{\\Et}$) if and\nonly if $\\nu_X^*K$ has Tor amplitude in $[a,b]$ on $X_{\\Proet}$. Consequently\n$\\nu_X^*$ restricts to an equivalence\n$D^b_{\\mathrm{ctf}}(X_{\\Et},\\Lambda)\\simeq\\Dctf(X,\\Lambda)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.md",
-    "place": "node det-pe-finite-tor-comparison-noetherian, order None"
+ "id": "det-pe-finite-tor-comparison-noetherian",
+ "blueprint": {
+  "is": "det-pe-finite-tor-comparison-noetherian",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Tor amplitude under comparison for Noetherian coefficients",
+ "statement": "Let $X$ be quasi-compact and quasi-separated, $\\Lambda$ a discrete Noetherian\nring and $K\\in D^b_c(X_{\\Et},\\Lambda)$. For integers $a\\leq b$, $K$ has Tor\namplitude in $[a,b]$ (that is, $K\\otimes^{\\mathrm L}_\\Lambda N$ has cohomology\nonly in degrees $[a,b]$ for every $\\Lambda$-module sheaf $N$ on $X_{\\Et}$) if and\nonly if $\\nu_X^*K$ has Tor amplitude in $[a,b]$ on $X_{\\Proet}$. Consequently\n$\\nu_X^*$ restricts to an equivalence\n$D^b_{\\mathrm{ctf}}(X_{\\Et},\\Lambda)\\simeq\\Dctf(X,\\Lambda)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.md",
+  "place": "node det-pe-finite-tor-comparison-noetherian, order None"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "*Flatness is preserved.* The proof of [lem-exc-constant-inverse-image-flat]\nuses of the coefficient ring only that it is Noetherian (to choose a finite\ngenerating set of the kernel of a row matrix) and that $\\nu_X^*$ is exact and\npreserves constant matrices. Hence for Noetherian $\\Lambda$ the inverse image of a\nflat étale $\\Lambda$-module sheaf is flat.",
+   "uses": [
+    "lem-exc-constant-inverse-image-flat"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-finite-tor-amplitude"
-  ],
-  "proof": [
-    {
-      "text": "*Flatness is preserved.* The proof of [lem-exc-constant-inverse-image-flat]\nuses of the coefficient ring only that it is Noetherian (to choose a finite\ngenerating set of the kernel of a row matrix) and that $\\nu_X^*$ is exact and\npreserves constant matrices. Hence for Noetherian $\\Lambda$ the inverse image of a\nflat étale $\\Lambda$-module sheaf is flat.",
-      "uses": [
-        "lem-exc-constant-inverse-image-flat"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Tor amplitude is preserved.* Suppose $K$ has Tor amplitude in $[a,b]$. As in\n[lem-exc-comparison-tor-interval], choose a bounded-above flat resolution $P$ of\n$K$ with $P^q=0$ for $q>b$; the cokernel $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$\nis flat since $\\operatorname{Tor}_1(Q,N)=H^{a-1}(P\\otimes N)=0$ for all $N$, and\n$[Q\\to P^{a+1}\\to\\dots\\to P^b]$ is a flat representative of $K$ in degrees\n$[a,b]$. Its termwise pullback is a bounded complex of flat sheaves representing\n$\\nu_X^*K$ (exactness of $\\nu_X^*$), hence K-flat, and tensoring it with any\npro-étale module sheaf gives a complex in degrees $[a,b]$.",
-      "uses": [
-        "lem-exc-comparison-tor-interval"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Tor amplitude is detected.* Suppose $\\nu_X^*K$ has Tor amplitude in $[a,b]$ and\nlet $N$ be an étale module sheaf. Taking bounded-above flat resolutions of $K$\nand $N$, whose pullbacks stay flat, and using that $\\nu_X^*$ is exact and commutes\nwith tensor products and direct sums, we get\n$\\nu_X^*(K\\otimes^{\\mathrm L}_\\Lambda N)\\cong\n\\nu_X^*K\\otimes^{\\mathrm L}_{\\Lambda_X}\\nu_X^*N$, which has cohomology only in\n$[a,b]$. Since $\\nu_X^*$ is exact and faithful on module sheaves,\n$H^q(K\\otimes^{\\mathrm L}N)=0$ whenever $\\nu_X^*H^q(K\\otimes^{\\mathrm L}N)=0$.\nSo $K$ has Tor amplitude in $[a,b]$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*The equivalence.* By [det-pe-constructible-comparison-equivalence], $\\nu_X^*$ is\nan equivalence $D^b_c(X_{\\Et},\\Lambda)\\to\\Dbc(X,\\Lambda)$; by the two previous\nparagraphs an object has finite Tor amplitude if and only if its image does, so\nthe equivalence restricts to the full subcategories of objects of finite Tor\namplitude.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-exc-constant-inverse-image-flat",
-    "lem-exc-comparison-tor-interval",
-    "det-pe-classical-derived-equivalence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.md",
-    "place": "## Proof"
+  {
+   "text": "*Tor amplitude is preserved.* Suppose $K$ has Tor amplitude in $[a,b]$. As in\n[lem-exc-comparison-tor-interval], choose a bounded-above flat resolution $P$ of\n$K$ with $P^q=0$ for $q>b$; the cokernel $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$\nis flat since $\\operatorname{Tor}_1(Q,N)=H^{a-1}(P\\otimes N)=0$ for all $N$, and\n$[Q\\to P^{a+1}\\to\\dots\\to P^b]$ is a flat representative of $K$ in degrees\n$[a,b]$. Its termwise pullback is a bounded complex of flat sheaves representing\n$\\nu_X^*K$ (exactness of $\\nu_X^*$), hence K-flat, and tensoring it with any\npro-étale module sheaf gives a complex in degrees $[a,b]$.",
+   "uses": [
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "lem-exc-constant-inverse-image-flat",
-    "lem-exc-comparison-tor-interval",
-    "det-pe-classical-derived-equivalence",
-    "det-pe-constructible-comparison-equivalence",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "uses_not_cited": [
-    "det-pe-classical-derived-equivalence",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "*Tor amplitude is detected.* Suppose $\\nu_X^*K$ has Tor amplitude in $[a,b]$ and\nlet $N$ be an étale module sheaf. Taking bounded-above flat resolutions of $K$\nand $N$, whose pullbacks stay flat, and using that $\\nu_X^*$ is exact and commutes\nwith tensor products and direct sums, we get\n$\\nu_X^*(K\\otimes^{\\mathrm L}_\\Lambda N)\\cong\n\\nu_X^*K\\otimes^{\\mathrm L}_{\\Lambda_X}\\nu_X^*N$, which has cohomology only in\n$[a,b]$. Since $\\nu_X^*$ is exact and faithful on module sheaves,\n$H^q(K\\otimes^{\\mathrm L}N)=0$ whenever $\\nu_X^*H^q(K\\otimes^{\\mathrm L}N)=0$.\nSo $K$ has Tor amplitude in $[a,b]$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*The equivalence.* By [det-pe-constructible-comparison-equivalence], $\\nu_X^*$ is\nan equivalence $D^b_c(X_{\\Et},\\Lambda)\\to\\Dbc(X,\\Lambda)$; by the two previous\nparagraphs an object has finite Tor amplitude if and only if its image does, so\nthe equivalence restricts to the full subcategories of objects of finite Tor\namplitude.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-inverse-image-flat",
+  "lem-exc-comparison-tor-interval",
+  "det-pe-classical-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "lem-exc-constant-inverse-image-flat",
+  "lem-exc-comparison-tor-interval",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-constructible-comparison-equivalence",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "uses_not_cited": [
+  "det-pe-classical-derived-equivalence",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

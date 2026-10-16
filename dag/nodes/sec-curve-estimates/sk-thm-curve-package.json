@@ -1,99 +1,104 @@
 {
-  "id": "sk-thm-curve-package",
-  "kind": "statement",
-  "title": "Cohomology of curves over an algebraically closed field",
-  "statement": "*Conventions.* Cohomology means cohomology on $C_{\\mathrm{proét}}$, and the\nsheaves are *classical*: by [sk-thm-pe-classical-sheaves] a classical sheaf is\nthe inverse image $\\nu_C^*$ of a sheaf on $C_{\\mathrm{ét}}$ under the\ncomparison morphism $\\nu_C$, and [sk-prop-sf-comparison] identifies its\ncohomology, together with restriction and pullback maps, with étale\ncohomology.\n\nLet $k$ be algebraically closed, $C$ a separated scheme of finite type over\n$k$ of dimension at most one, and $F$ a classical torsion abelian sheaf on\n$C_{\\mathrm{proét}}$. The following statements hold (compare\n[sk-def-pbc-curve-assertions]).\n\n- $(C_1)$ $H^q(C,F)=0$ for $q>2$.\n- $(C_2)$ If $C$ is affine, $H^q(C,F)=0$ for $q>1$.\n- $(C_3)$ If $\\operatorname{char}k=p>0$ and $F$ is $p$-primary, then\n  $H^q(C,F)=0$ for $q>1$.\n- $(C_4)$ If $F$ is constructible with finite stalks and its torsion orders\n  are prime to $\\operatorname{char}k$, all its cohomology groups are finite.\n- $(C_5)$ If $C$ is proper and $F$ is constructible with finite stalks, all\n  its cohomology groups are finite.\n- $(C_6)$ For an extension $k'/k$ of algebraically closed fields, the natural\n  pullback maps $H^q(C,F)\\to H^q(C_{k'},F|_{C_{k'}})$ are isomorphisms if $F$\n  is prime to the characteristic.\n- $(C_7)$ If $C$ is proper, these pullback maps are isomorphisms for every\n  classical torsion $F$.\n- $(C_8)$ For every open $U\\subseteq C$, the map\n  $H^2(C,F)\\to H^2(U,F|_U)$ is surjective.\n\nIn characteristic zero every torsion order is allowed in $(C_4)$ and $(C_6)$.\n\nThis is the pro-étale form of (Stacks, Tag 03SC).",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-curve-package/_section.md",
-    "place": "node sk-thm-curve-package, order 879",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03SC"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A5C"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03SI"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03SA"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-thm-pe-classical-sheaves",
-    "sk-prop-sf-comparison",
-    "sk-def-pbc-curve-assertions"
-  ],
-  "proof": [
-    {
-      "text": "*Overview.* The proof has three stages. First, for constant coefficients on a\nsmooth connected curve the cohomology is computed explicitly: by the Kummer\nsequence and the Jacobian for primes invertible in $k$\n([sk-thm-br], [sk-thm-curveestimate], [sk-prop-curve-affine-kummer]), and by\nthe Artin–Schreier sequence and coherent cohomology for the characteristic\nprime ([sk-prop-curve-artin-schreier], [sk-lem-curve-affine-artin-schreier]).\nThese calculations carry the content of the theorem. Second, normalization\nand removal of finitely many points change cohomology only by sheaves\nsupported on finitely many points, which affect degrees zero and one in a\ncontrolled way ([sk-lem-curve-finite-support], [sk-lem-curve-normalization],\n[sk-lem-curve-dense-open]). Third, a local system with finite monodromy\nbecomes a successive extension of constant sheaves on a finite étale cover of\ndegree prime to the torsion order, and the trace splits off the original\nsheaf ([sk-lem-curve-sylow-trace]). A dévissage and a passage to filtered\ncolimits then give arbitrary torsion sheaves.",
-      "uses": [
-        "sk-thm-br",
-        "sk-lem-curve-affine-artin-schreier",
-        "sk-lem-curve-finite-support",
-        "sk-lem-curve-normalization",
-        "sk-lem-curve-dense-open",
-        "sk-lem-curve-sylow-trace"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The assertions pass along short exact sequences.* Let $0\\to F_1\\to F\\to F_2\\to0$ be\nexact, with the assertions known for $F_1$ and $F_2$. Vanishing and\nfiniteness follow from the long exact sequence, and invariance under field\nextension from the map between the two long exact sequences and the five\nlemma. For $(C_8)$, take $b\\in H^2(U,F)$. Lift its image in $H^2(U,F_2)$ to\n$c_2\\in H^2(C,F_2)$. The obstruction to lifting $c_2$ to $H^2(C,F)$ lies in\n$H^3(C,F_1)$, which vanishes by $(C_1)$. After choosing a lift $c$, the\ndifference $b-c|_U$ comes from $H^2(U,F_1)$, and $(C_8)$ for $F_1$ lifts this\ndifference. Adding that lift to $c$ gives the required global class (Stacks,\nTag 0A5C).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Proof of the theorem.* By [sk-prop-sf-comparison] we may work on\n$C_{\\mathrm{ét}}$. A universal homeomorphism does not change the étale topos (Stacks,\nTag 03SI), so we may replace $C$ by\n$C_{\\mathrm{red}}$. A constructible torsion sheaf has a finite exponent,\nbecause it has finitely many isomorphism types of finite stalks. It is the\ndirect sum of its finitely many primary parts, and a finite filtration of an\n$r$-primary part reduces to constructible $\\mathbf F_r$-sheaves. By the stability\nunder extensions just proved, it suffices to treat such sheaves.\n\nChoose a dense smooth open $j:U\\hookrightarrow C$ on which the sheaf is\nfinite locally constant. [sk-lem-curve-dense-open] reduces to its extension\nby zero. On the connected components of $U$, [sk-lem-curve-sylow-trace] and\nfinite direct image reduce to constant $\\mathbf F_r$ extended by zero on\ncurves finite over $C$. Normalization ([sk-lem-curve-normalization]) and\n[sk-lem-curve-finite-support] reduce these sheaves to the constant\ncalculations on smooth curves: the Kummer sequence for\n$r\\neq\\operatorname{char}k$ ([sk-thm-curveestimate],\n[sk-prop-curve-affine-kummer]) and the Artin–Schreier sequence for\n$r=\\operatorname{char}k$ ([sk-prop-curve-artin-schreier],\n[sk-lem-curve-affine-artin-schreier]). All reductions preserve the hypothesis\nthat $C$ is proper or affine. This proves the theorem for constructible\ntorsion sheaves.\n\nAn arbitrary torsion sheaf on the qcqs scheme $C$ is a filtered colimit of\nconstructible torsion sheaves, and cohomology commutes with filtered colimits\n(Stacks, Tags 03SA, 03Q5). For\ntorsion prime to the characteristic or $p$-primary torsion, the constructible\nsheaves may be taken with the same kind of torsion, by splitting off primary\nparts before passing to the colimit. Pullback and restriction also commute\nwith filtered colimits, so vanishing and the pullback isomorphisms pass to the\ncolimit. Surjectivity in $(C_8)$ passes to it because a representative of a\nclass already occurs at one stage. Finiteness is asserted only for\nconstructible sheaves. Finally [sk-prop-sf-comparison] returns these\nconclusions and their maps to $C_{\\mathrm{proét}}$.",
-      "uses": [
-        "sk-prop-sf-comparison",
-        "sk-lem-curve-dense-open",
-        "sk-lem-curve-sylow-trace",
-        "sk-lem-curve-normalization",
-        "sk-lem-curve-finite-support",
-        "sk-lem-curve-affine-artin-schreier"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-thm-curve-package",
+ "blueprint": {
+  "is": "sk-thm-curve-package",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Cohomology of curves over an algebraically closed field",
+ "statement": "*Conventions.* Cohomology means cohomology on $C_{\\mathrm{proét}}$, and the\nsheaves are *classical*: by [sk-thm-pe-classical-sheaves] a classical sheaf is\nthe inverse image $\\nu_C^*$ of a sheaf on $C_{\\mathrm{ét}}$ under the\ncomparison morphism $\\nu_C$, and [sk-prop-sf-comparison] identifies its\ncohomology, together with restriction and pullback maps, with étale\ncohomology.\n\nLet $k$ be algebraically closed, $C$ a separated scheme of finite type over\n$k$ of dimension at most one, and $F$ a classical torsion abelian sheaf on\n$C_{\\mathrm{proét}}$. The following statements hold (compare\n[sk-def-pbc-curve-assertions]).\n\n- $(C_1)$ $H^q(C,F)=0$ for $q>2$.\n- $(C_2)$ If $C$ is affine, $H^q(C,F)=0$ for $q>1$.\n- $(C_3)$ If $\\operatorname{char}k=p>0$ and $F$ is $p$-primary, then\n  $H^q(C,F)=0$ for $q>1$.\n- $(C_4)$ If $F$ is constructible with finite stalks and its torsion orders\n  are prime to $\\operatorname{char}k$, all its cohomology groups are finite.\n- $(C_5)$ If $C$ is proper and $F$ is constructible with finite stalks, all\n  its cohomology groups are finite.\n- $(C_6)$ For an extension $k'/k$ of algebraically closed fields, the natural\n  pullback maps $H^q(C,F)\\to H^q(C_{k'},F|_{C_{k'}})$ are isomorphisms if $F$\n  is prime to the characteristic.\n- $(C_7)$ If $C$ is proper, these pullback maps are isomorphisms for every\n  classical torsion $F$.\n- $(C_8)$ For every open $U\\subseteq C$, the map\n  $H^2(C,F)\\to H^2(U,F|_U)$ is surjective.\n\nIn characteristic zero every torsion order is allowed in $(C_4)$ and $(C_6)$.\n\nThis is the pro-étale form of (Stacks, Tag 03SC).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-curve-package/_section.md",
+  "place": "node sk-thm-curve-package, order 879",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03SC"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A5C"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03SI"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03SA"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-thm-pe-classical-sheaves",
+  "sk-prop-sf-comparison",
+  "sk-def-pbc-curve-assertions"
+ ],
+ "proof": [
+  {
+   "text": "*Overview.* The proof has three stages. First, for constant coefficients on a\nsmooth connected curve the cohomology is computed explicitly: by the Kummer\nsequence and the Jacobian for primes invertible in $k$\n([sk-thm-br], [sk-thm-curveestimate], [sk-prop-curve-affine-kummer]), and by\nthe Artin–Schreier sequence and coherent cohomology for the characteristic\nprime ([sk-prop-curve-artin-schreier], [sk-lem-curve-affine-artin-schreier]).\nThese calculations carry the content of the theorem. Second, normalization\nand removal of finitely many points change cohomology only by sheaves\nsupported on finitely many points, which affect degrees zero and one in a\ncontrolled way ([sk-lem-curve-finite-support], [sk-lem-curve-normalization],\n[sk-lem-curve-dense-open]). Third, a local system with finite monodromy\nbecomes a successive extension of constant sheaves on a finite étale cover of\ndegree prime to the torsion order, and the trace splits off the original\nsheaf ([sk-lem-curve-sylow-trace]). A dévissage and a passage to filtered\ncolimits then give arbitrary torsion sheaves.",
+   "uses": [
     "sk-thm-br",
     "sk-lem-curve-affine-artin-schreier",
     "sk-lem-curve-finite-support",
     "sk-lem-curve-normalization",
     "sk-lem-curve-dense-open",
-    "sk-lem-curve-sylow-trace",
-    "sk-prop-sf-comparison"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-curve-package/_section.md",
-    "place": "## Proof"
+    "sk-lem-curve-sylow-trace"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 879,
-  "blueprint_uses": [
-    "sk-def-pbc-curve-assertions",
+  {
+   "text": "*The assertions pass along short exact sequences.* Let $0\\to F_1\\to F\\to F_2\\to0$ be\nexact, with the assertions known for $F_1$ and $F_2$. Vanishing and\nfiniteness follow from the long exact sequence, and invariance under field\nextension from the map between the two long exact sequences and the five\nlemma. For $(C_8)$, take $b\\in H^2(U,F)$. Lift its image in $H^2(U,F_2)$ to\n$c_2\\in H^2(C,F_2)$. The obstruction to lifting $c_2$ to $H^2(C,F)$ lies in\n$H^3(C,F_1)$, which vanishes by $(C_1)$. After choosing a lift $c$, the\ndifference $b-c|_U$ comes from $H^2(U,F_1)$, and $(C_8)$ for $F_1$ lifts this\ndifference. Adding that lift to $c$ gives the required global class (Stacks,\nTag 0A5C).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Proof of the theorem.* By [sk-prop-sf-comparison] we may work on\n$C_{\\mathrm{ét}}$. A universal homeomorphism does not change the étale topos (Stacks,\nTag 03SI), so we may replace $C$ by\n$C_{\\mathrm{red}}$. A constructible torsion sheaf has a finite exponent,\nbecause it has finitely many isomorphism types of finite stalks. It is the\ndirect sum of its finitely many primary parts, and a finite filtration of an\n$r$-primary part reduces to constructible $\\mathbf F_r$-sheaves. By the stability\nunder extensions just proved, it suffices to treat such sheaves.\n\nChoose a dense smooth open $j:U\\hookrightarrow C$ on which the sheaf is\nfinite locally constant. [sk-lem-curve-dense-open] reduces to its extension\nby zero. On the connected components of $U$, [sk-lem-curve-sylow-trace] and\nfinite direct image reduce to constant $\\mathbf F_r$ extended by zero on\ncurves finite over $C$. Normalization ([sk-lem-curve-normalization]) and\n[sk-lem-curve-finite-support] reduce these sheaves to the constant\ncalculations on smooth curves: the Kummer sequence for\n$r\\neq\\operatorname{char}k$ ([sk-thm-curveestimate],\n[sk-prop-curve-affine-kummer]) and the Artin–Schreier sequence for\n$r=\\operatorname{char}k$ ([sk-prop-curve-artin-schreier],\n[sk-lem-curve-affine-artin-schreier]). All reductions preserve the hypothesis\nthat $C$ is proper or affine. This proves the theorem for constructible\ntorsion sheaves.\n\nAn arbitrary torsion sheaf on the qcqs scheme $C$ is a filtered colimit of\nconstructible torsion sheaves, and cohomology commutes with filtered colimits\n(Stacks, Tags 03SA, 03Q5). For\ntorsion prime to the characteristic or $p$-primary torsion, the constructible\nsheaves may be taken with the same kind of torsion, by splitting off primary\nparts before passing to the colimit. Pullback and restriction also commute\nwith filtered colimits, so vanishing and the pullback isomorphisms pass to the\ncolimit. Surjectivity in $(C_8)$ passes to it because a representative of a\nclass already occurs at one stage. Finiteness is asserted only for\nconstructible sheaves. Finally [sk-prop-sf-comparison] returns these\nconclusions and their maps to $C_{\\mathrm{proét}}$.",
+   "uses": [
     "sk-prop-sf-comparison",
-    "sk-thm-pe-classical-sheaves"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+    "sk-lem-curve-dense-open",
+    "sk-lem-curve-sylow-trace",
+    "sk-lem-curve-normalization",
+    "sk-lem-curve-finite-support",
+    "sk-lem-curve-affine-artin-schreier"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-br",
+  "sk-lem-curve-affine-artin-schreier",
+  "sk-lem-curve-finite-support",
+  "sk-lem-curve-normalization",
+  "sk-lem-curve-dense-open",
+  "sk-lem-curve-sylow-trace",
+  "sk-prop-sf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-thm-curve-package/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 879,
+ "blueprint_uses": [
+  "sk-def-pbc-curve-assertions",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-classical-sheaves"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

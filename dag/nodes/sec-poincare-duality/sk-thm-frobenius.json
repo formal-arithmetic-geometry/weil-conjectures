@@ -1,59 +1,64 @@
 {
-  "id": "sk-thm-frobenius",
-  "kind": "statement",
-  "title": "Frobenius: equivariance, similitudine, reciprocity",
-  "statement": "In the setting of [sk-def-sf-weil-complexes] ($X_0$ need not be proper),\nfor a strict Weil complex $K$ perfect over $\\Lambda_X$:\n\n**(a)** *Equivariance and similitude, at every coefficient stage.* At every\nstage $\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$ the derived pairing $\\beta_K$ of\n[sk-def-pairing] is a morphism of Weil objects, so the induced degreewise\npairing satisfies\n$\\langle F_{c,K}x,F_{K^\\vee(d)}y\\rangle_i=\\langle x,y\\rangle_i$, and the\nuntwisted line-valued pairing satisfies\n\n$$\n\\langle F_{c,K}x,F_{K^\\vee}y\\rangle_i^{\\mathrm{untw}}\n=q^d\\langle x,y\\rangle_i^{\\mathrm{untw}}.\n$$\n\nThese are identities between bilinear maps and use no nondegeneracy.\n\n**(b)** *Reciprocity, at the field stages.* If moreover $\\Lambda$ is a field\ncoefficient stage in the sense of [sk-thm-derived-duality] (in practice\n$\\Lambda\\in\\{E,\\Qlb\\}$), so that the degreewise pairings are perfect, then\n$F_{K^\\vee}$ is conjugate to $q^d(F_{c,K}^{-1})^{\\mathsf t}$ on the\nfinite-dimensional space $H^{2d-i}(X,K^\\vee)$, so the eigenvalues of $F$ on\n$H^{2d-i}(X,K^\\vee)$ are the $q^d/\\alpha$ with the multiplicities of the\neigenvalues $\\alpha$ on $H^i_c(X,K)$ (for proper $X$, $H^i_c=H^i$).\n\nClause (b) is false at the integral stage $\\Lambda=\\Oe$: for\n$X_0=\\Spec\\Fq$, $d=0$, and the perfect complex\n$K=[\\Oe\\xrightarrow{\\varpi_E}\\Oe]$ in degrees $-1,0$ with the identity\nWeil datum, $H^0(K)=\\Oe/\\varpi_E$ while $H^0(K^\\vee)=0$ and\n$H^1(K^\\vee)=\\Oe/\\varpi_E$; the degreewise form of the duality is not\nperfect there ([sk-thm-sf-identification]), the missing information being\ncarried by an $\\operatorname{Ext}^1$ term.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/_section.md",
-    "place": "node sk-thm-frobenius, order 2789"
-  },
-  "stmt_deps": [
-    "sk-def-sf-weil-complexes",
-    "sk-def-pairing",
-    "sk-thm-sf-identification"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (each ingredient is equivariant).* The mixed-support cup\nproduct is induced by the tensor product of complexes and its\n$\\Gamma_c$-realization, both of which are lifted to Weil complexes by the\nfunctoriality built into [sk-def-sf-weil-complexes]; the evaluation is a morphism of\nWeil objects; and the orientation of [sk-def-sf-orientation] is\nFrobenius-equivariant, by the Weil equivariance of purity and trace\n(whose target datum on the coefficient ring is the canonical one).\n*Step 2 (the pairing is a morphism of Weil objects).* Composing, the\ntriple $\\bigl(\\RGammac(X,K),\\RGamma(X,K^\\vee(d))[2d],\\Lambda\\bigr)$ carries\nthe Weil data $\\varphi_{c,K}$, $\\varphi_{K^\\vee(d)}$ and the canonical\ndata, and $\\beta_K$ is a morphism of Weil objects from the tensor of the\nfirst two to the last. Evaluated on the tensor of two vectors this reads\n$\\langle F_{c,K}x,F_{K^\\vee(d)}y\\rangle_i=F(\\langle x,y\\rangle_i)$; the\ntarget datum is the canonical one, so $F$ acts on $\\Lambda$ as the\nidentity by [sk-def-sf-weil-complexes], which is the equivariance clause. Nothing\nhere depends on the coefficient stage: the identity holds for the\n$\\Lambda$-bilinear map induced by $\\beta_K$ on cohomology at every\n$\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$.\n*Step 3 (eliminating the twist).* The second factor is\n$H^{2d-i}(X,K^\\vee)\\otimes\\Lambda(d)$, and\n$\\varphi_{K^\\vee(d)}=\\varphi_{K^\\vee}\\otimes\\tau_d$, where $\\tau_d$ is\nthe scalar $q^{-d}$ on the twist line; writing $y=y_0\\otimes\\xi_d$ under\nthat identification turns the identity of Step 2 into\n\n$$\n\\langle F_{c,K}x,F_{K^\\vee}y_0\\rangle_i^{\\mathrm{untw}}\n=q^d\\,\\langle x,y_0\\rangle_i^{\\mathrm{untw}},\n$$\n\nbecause the untwisted pairing is a morphism into the value line\n$\\Lambda(-d)$ and $F$ acts on $\\Lambda(-d)$ by $q^d$ by the\nnormalization of [sk-def-sf-weil-complexes].\n*Step 4 (reciprocity, field stages only).* This is the one step that\nneeds a field stage. Over a field coefficient stage the degreewise pairing is\nperfect by [sk-thm-derived-duality], so the adjoint\n$\\Phi:H^{2d-i}(X,K^\\vee)\\to H^i_c(X,K)^\\vee$, $\\Phi(y)(x)=\\langle\nx,y\\rangle_i^{\\mathrm{untw}}$, is an isomorphism of finite-dimensional\nvector spaces, and the similitude of Step 3 reads\n$\\Phi\\circ F_{K^\\vee}=q^d(F_{c,K}^{-1})^{\\mathsf t}\\circ\\Phi$; hence\n$F_{K^\\vee}$ is conjugate to $q^d(F_{c,K}^{-1})^{\\mathsf t}$. The\ncharacteristic polynomial is invariant under transposition, so the\neigenvalues of $F$ on $H^{2d-i}(X,K^\\vee)$ are the $q^d/\\alpha$, with the\nmultiplicities of the eigenvalues $\\alpha$ of $F$ on $H^i_c(X,K)$.\nOver $\\Oe$ the adjoint $\\Phi$ is not an isomorphism in general (only the\nderived duality holds, [sk-thm-sf-identification]), and the example in the\nstatement shows that (b) genuinely fails there; the derived equivariance of\nStep 2 is all that survives at that stage. (The conjugacy alone holds\nwhenever the degreewise pairing is perfect, e.g. over $\\AEn$ for proper\n$X$ by [sk-thm-sf-identification], since $\\Phi$ is then an\nisomorphism of $\\Lambda$-modules.) No step uses properness.",
-      "uses": [
-        "sk-def-sf-weil-complexes",
-        "sk-def-sf-orientation",
-        "sk-thm-sf-identification"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-thm-frobenius",
+ "blueprint": {
+  "is": "sk-thm-frobenius",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Frobenius: equivariance, similitudine, reciprocity",
+ "statement": "In the setting of [sk-def-sf-weil-complexes] ($X_0$ need not be proper),\nfor a strict Weil complex $K$ perfect over $\\Lambda_X$:\n\n**(a)** *Equivariance and similitude, at every coefficient stage.* At every\nstage $\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$ the derived pairing $\\beta_K$ of\n[sk-def-pairing] is a morphism of Weil objects, so the induced degreewise\npairing satisfies\n$\\langle F_{c,K}x,F_{K^\\vee(d)}y\\rangle_i=\\langle x,y\\rangle_i$, and the\nuntwisted line-valued pairing satisfies\n\n$$\n\\langle F_{c,K}x,F_{K^\\vee}y\\rangle_i^{\\mathrm{untw}}\n=q^d\\langle x,y\\rangle_i^{\\mathrm{untw}}.\n$$\n\nThese are identities between bilinear maps and use no nondegeneracy.\n\n**(b)** *Reciprocity, at the field stages.* If moreover $\\Lambda$ is a field\ncoefficient stage in the sense of [sk-thm-derived-duality] (in practice\n$\\Lambda\\in\\{E,\\Qlb\\}$), so that the degreewise pairings are perfect, then\n$F_{K^\\vee}$ is conjugate to $q^d(F_{c,K}^{-1})^{\\mathsf t}$ on the\nfinite-dimensional space $H^{2d-i}(X,K^\\vee)$, so the eigenvalues of $F$ on\n$H^{2d-i}(X,K^\\vee)$ are the $q^d/\\alpha$ with the multiplicities of the\neigenvalues $\\alpha$ on $H^i_c(X,K)$ (for proper $X$, $H^i_c=H^i$).\n\nClause (b) is false at the integral stage $\\Lambda=\\Oe$: for\n$X_0=\\Spec\\Fq$, $d=0$, and the perfect complex\n$K=[\\Oe\\xrightarrow{\\varpi_E}\\Oe]$ in degrees $-1,0$ with the identity\nWeil datum, $H^0(K)=\\Oe/\\varpi_E$ while $H^0(K^\\vee)=0$ and\n$H^1(K^\\vee)=\\Oe/\\varpi_E$; the degreewise form of the duality is not\nperfect there ([sk-thm-sf-identification]), the missing information being\ncarried by an $\\operatorname{Ext}^1$ term.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/_section.md",
+  "place": "node sk-thm-frobenius, order 2789"
+ },
+ "stmt_deps": [
+  "sk-def-sf-weil-complexes",
+  "sk-def-pairing",
+  "sk-thm-sf-identification"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (each ingredient is equivariant).* The mixed-support cup\nproduct is induced by the tensor product of complexes and its\n$\\Gamma_c$-realization, both of which are lifted to Weil complexes by the\nfunctoriality built into [sk-def-sf-weil-complexes]; the evaluation is a morphism of\nWeil objects; and the orientation of [sk-def-sf-orientation] is\nFrobenius-equivariant, by the Weil equivariance of purity and trace\n(whose target datum on the coefficient ring is the canonical one).\n*Step 2 (the pairing is a morphism of Weil objects).* Composing, the\ntriple $\\bigl(\\RGammac(X,K),\\RGamma(X,K^\\vee(d))[2d],\\Lambda\\bigr)$ carries\nthe Weil data $\\varphi_{c,K}$, $\\varphi_{K^\\vee(d)}$ and the canonical\ndata, and $\\beta_K$ is a morphism of Weil objects from the tensor of the\nfirst two to the last. Evaluated on the tensor of two vectors this reads\n$\\langle F_{c,K}x,F_{K^\\vee(d)}y\\rangle_i=F(\\langle x,y\\rangle_i)$; the\ntarget datum is the canonical one, so $F$ acts on $\\Lambda$ as the\nidentity by [sk-def-sf-weil-complexes], which is the equivariance clause. Nothing\nhere depends on the coefficient stage: the identity holds for the\n$\\Lambda$-bilinear map induced by $\\beta_K$ on cohomology at every\n$\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$.\n*Step 3 (eliminating the twist).* The second factor is\n$H^{2d-i}(X,K^\\vee)\\otimes\\Lambda(d)$, and\n$\\varphi_{K^\\vee(d)}=\\varphi_{K^\\vee}\\otimes\\tau_d$, where $\\tau_d$ is\nthe scalar $q^{-d}$ on the twist line; writing $y=y_0\\otimes\\xi_d$ under\nthat identification turns the identity of Step 2 into\n\n$$\n\\langle F_{c,K}x,F_{K^\\vee}y_0\\rangle_i^{\\mathrm{untw}}\n=q^d\\,\\langle x,y_0\\rangle_i^{\\mathrm{untw}},\n$$\n\nbecause the untwisted pairing is a morphism into the value line\n$\\Lambda(-d)$ and $F$ acts on $\\Lambda(-d)$ by $q^d$ by the\nnormalization of [sk-def-sf-weil-complexes].\n*Step 4 (reciprocity, field stages only).* This is the one step that\nneeds a field stage. Over a field coefficient stage the degreewise pairing is\nperfect by [sk-thm-derived-duality], so the adjoint\n$\\Phi:H^{2d-i}(X,K^\\vee)\\to H^i_c(X,K)^\\vee$, $\\Phi(y)(x)=\\langle\nx,y\\rangle_i^{\\mathrm{untw}}$, is an isomorphism of finite-dimensional\nvector spaces, and the similitude of Step 3 reads\n$\\Phi\\circ F_{K^\\vee}=q^d(F_{c,K}^{-1})^{\\mathsf t}\\circ\\Phi$; hence\n$F_{K^\\vee}$ is conjugate to $q^d(F_{c,K}^{-1})^{\\mathsf t}$. The\ncharacteristic polynomial is invariant under transposition, so the\neigenvalues of $F$ on $H^{2d-i}(X,K^\\vee)$ are the $q^d/\\alpha$, with the\nmultiplicities of the eigenvalues $\\alpha$ of $F$ on $H^i_c(X,K)$.\nOver $\\Oe$ the adjoint $\\Phi$ is not an isomorphism in general (only the\nderived duality holds, [sk-thm-sf-identification]), and the example in the\nstatement shows that (b) genuinely fails there; the derived equivariance of\nStep 2 is all that survives at that stage. (The conjugacy alone holds\nwhenever the degreewise pairing is perfect, e.g. over $\\AEn$ for proper\n$X$ by [sk-thm-sf-identification], since $\\Phi$ is then an\nisomorphism of $\\Lambda$-modules.) No step uses properness.",
+   "uses": [
     "sk-def-sf-weil-complexes",
     "sk-def-sf-orientation",
     "sk-thm-sf-identification"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "long_proof_few_deps",
-    "unreachable",
-    "in_cycle"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2789,
-  "blueprint_uses": [
-    "sk-def-pairing",
-    "sk-def-sf-orientation",
-    "sk-def-sf-weil-complexes",
-    "sk-thm-derived-duality"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sf-weil-complexes",
+  "sk-def-sf-orientation",
+  "sk-thm-sf-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "long_proof_few_deps",
+  "unreachable",
+  "in_cycle"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2789,
+ "blueprint_uses": [
+  "sk-def-pairing",
+  "sk-def-sf-orientation",
+  "sk-def-sf-weil-complexes",
+  "sk-thm-derived-duality"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

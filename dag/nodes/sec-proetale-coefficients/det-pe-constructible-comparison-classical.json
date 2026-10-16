@@ -1,71 +1,76 @@
 {
-  "id": "det-pe-constructible-comparison-classical",
-  "kind": "statement",
-  "title": "Constructible pro-étale sheaves are classical",
-  "statement": "Let $\\Lambda$ be a discrete Noetherian ring, $X$ a quasi-compact and\nquasi-separated scheme, and $F$ a $\\Lambda_X$-module sheaf on $X_{\\Proet}$ for which\nthere is a partition $X=Z_1\\sqcup\\dots\\sqcup Z_n$ into constructible locally\nclosed subsets such that each restriction $F|_{Z_k}$ to $(Z_k)_{\\Proet}$ (reduced\nstructure) is locally constant of finite type. Then $F$ is classical. The same\nholds if such a partition exists only locally on $X$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-classical.md",
-    "place": "node det-pe-constructible-comparison-classical, order None"
+ "id": "det-pe-constructible-comparison-classical",
+ "blueprint": {
+  "is": "det-pe-constructible-comparison-classical",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Constructible pro-étale sheaves are classical",
+ "statement": "Let $\\Lambda$ be a discrete Noetherian ring, $X$ a quasi-compact and\nquasi-separated scheme, and $F$ a $\\Lambda_X$-module sheaf on $X_{\\Proet}$ for which\nthere is a partition $X=Z_1\\sqcup\\dots\\sqcup Z_n$ into constructible locally\nclosed subsets such that each restriction $F|_{Z_k}$ to $(Z_k)_{\\Proet}$ (reduced\nstructure) is locally constant of finite type. Then $F$ is classical. The same\nholds if such a partition exists only locally on $X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-classical.md",
+  "place": "node det-pe-constructible-comparison-classical, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Since $\\Lambda$ is Noetherian, a locally constant sheaf of finite type has\nfinitely presented models, so it is a local system of finite presentation. The\nlast sentence follows from the first by [det-pe-constructible-comparison-local],\napplied to an open covering by quasi-compact opens on which a partition exists.\n\nWe prove the first statement by induction on $n$, for all quasi-compact\nquasi-separated schemes simultaneously. If $n=0$ then $X=\\emptyset$. If $n=1$,\n$F$ is a local system of finite presentation and is classical by\n[det-pe-finite-local-systems-twist].\n\nLet $n\\geq2$. By [det-pe-constructible-comparison-local] it suffices to show that\nevery $x\\in X$ has an open neighbourhood on which $F$ is classical. Let\n$x\\in Z_k$. As $Z_k$ is locally closed, there is an affine open $W\\ni x$ with\n$Z:=Z_k\\cap W$ closed in $W$. Let $i\\colon Z\\to W$ be the closed immersion and\n$j\\colon U=W\\setminus Z\\to W$ the open immersion. Since $Z_k$ is constructible,\n$Z$ is a constructible closed subset of the affine scheme $W$, so $U$ is\nquasi-compact; it is quasi-separated as an open of an affine scheme. By\n[sk-prop-sf-open-closed-triangle] there is an exact sequence of\n$\\Lambda_W$-module sheaves\n\n$$\n0\\to j_!j^*(F|_W)\\to F|_W\\to i_*i^*(F|_W)\\to0 .\n$$",
+   "uses": [
+    "det-pe-constructible-comparison-local"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Since $\\Lambda$ is Noetherian, a locally constant sheaf of finite type has\nfinitely presented models, so it is a local system of finite presentation. The\nlast sentence follows from the first by [det-pe-constructible-comparison-local],\napplied to an open covering by quasi-compact opens on which a partition exists.\n\nWe prove the first statement by induction on $n$, for all quasi-compact\nquasi-separated schemes simultaneously. If $n=0$ then $X=\\emptyset$. If $n=1$,\n$F$ is a local system of finite presentation and is classical by\n[det-pe-finite-local-systems-twist].\n\nLet $n\\geq2$. By [det-pe-constructible-comparison-local] it suffices to show that\nevery $x\\in X$ has an open neighbourhood on which $F$ is classical. Let\n$x\\in Z_k$. As $Z_k$ is locally closed, there is an affine open $W\\ni x$ with\n$Z:=Z_k\\cap W$ closed in $W$. Let $i\\colon Z\\to W$ be the closed immersion and\n$j\\colon U=W\\setminus Z\\to W$ the open immersion. Since $Z_k$ is constructible,\n$Z$ is a constructible closed subset of the affine scheme $W$, so $U$ is\nquasi-compact; it is quasi-separated as an open of an affine scheme. By\n[sk-prop-sf-open-closed-triangle] there is an exact sequence of\n$\\Lambda_W$-module sheaves\n\n$$\n0\\to j_!j^*(F|_W)\\to F|_W\\to i_*i^*(F|_W)\\to0 .\n$$",
-      "uses": [
-        "det-pe-constructible-comparison-local"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The open part.* The sets $Z_m\\cap U$, $m\\neq k$, form a partition of $U$ into at\nmost $n-1$ constructible locally closed subsets, and $F|_{Z_m\\cap U}$ is the\nrestriction of the local system $F|_{Z_m}$ to an open, hence locally constant of\nfinite type. By induction $j^*(F|_W)\\cong\\nu_U^*G$ for an étale module sheaf $G$.\nBy [lem-cbc-proetale-extension-zero-comparison],\n$j_!\\nu_U^*G\\cong\\nu_W^*j_!G$, which is classical.",
-      "uses": [
-        "lem-cbc-proetale-extension-zero-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The closed part.* $i^*(F|_W)=F|_{Z}$ is a local system of finite type on\n$Z_{\\Proet}$, hence $\\cong\\nu_Z^*H$ for an étale module sheaf $H$ by the case\n$n=1$. The closed immersion $i$ is quasi-compact and quasi-separated, so\n[prop-weil-pbc-comparison-direct-image] gives\n$Ri_{\\Proet,*}\\nu_Z^*H\\cong\\nu_W^*Ri_{\\Et,*}H$. Both direct images along a closed\nimmersion are exact (on the pro-étale side by\n[sk-prop-sf-open-closed-triangle]), so in degree zero\n$i_*\\nu_Z^*H\\cong\\nu_W^*i_*H$, which is classical.",
-      "uses": [
-        "prop-weil-pbc-comparison-direct-image"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The extension.* $F|_W$ is an extension of two classical module sheaves, hence\nclassical by [det-pe-classical-derived-weak-serre]. This proves the claim on\nthe neighbourhood $W$ of $x$.",
-      "uses": [
-        "det-pe-classical-derived-weak-serre"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-pe-constructible-comparison-local",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "prop-weil-pbc-comparison-direct-image",
+  {
+   "text": "*The open part.* The sets $Z_m\\cap U$, $m\\neq k$, form a partition of $U$ into at\nmost $n-1$ constructible locally closed subsets, and $F|_{Z_m\\cap U}$ is the\nrestriction of the local system $F|_{Z_m}$ to an open, hence locally constant of\nfinite type. By induction $j^*(F|_W)\\cong\\nu_U^*G$ for an étale module sheaf $G$.\nBy [lem-cbc-proetale-extension-zero-comparison],\n$j_!\\nu_U^*G\\cong\\nu_W^*j_!G$, which is classical.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The closed part.* $i^*(F|_W)=F|_{Z}$ is a local system of finite type on\n$Z_{\\Proet}$, hence $\\cong\\nu_Z^*H$ for an étale module sheaf $H$ by the case\n$n=1$. The closed immersion $i$ is quasi-compact and quasi-separated, so\n[prop-weil-pbc-comparison-direct-image] gives\n$Ri_{\\Proet,*}\\nu_Z^*H\\cong\\nu_W^*Ri_{\\Et,*}H$. Both direct images along a closed\nimmersion are exact (on the pro-étale side by\n[sk-prop-sf-open-closed-triangle]), so in degree zero\n$i_*\\nu_Z^*H\\cong\\nu_W^*i_*H$, which is classical.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The extension.* $F|_W$ is an extension of two classical module sheaves, hence\nclassical by [det-pe-classical-derived-weak-serre]. This proves the claim on\nthe neighbourhood $W$ of $x$.",
+   "uses": [
     "det-pe-classical-derived-weak-serre"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-classical.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-pe-constructible-comparison-local",
-    "det-pe-finite-local-systems-twist",
-    "det-pe-classical-derived-weak-serre",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "prop-weil-pbc-comparison-direct-image",
-    "sk-prop-sf-open-closed-triangle"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-constructible-comparison-local",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "det-pe-classical-derived-weak-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-classical.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-pe-constructible-comparison-local",
+  "det-pe-finite-local-systems-twist",
+  "det-pe-classical-derived-weak-serre",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "sk-prop-sf-open-closed-triangle"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

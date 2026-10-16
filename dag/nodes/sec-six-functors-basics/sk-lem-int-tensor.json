@@ -1,79 +1,63 @@
 {
-  "id": "sk-lem-int-tensor",
-  "kind": "statement",
-  "title": "Inverse image and tensor product",
-  "statement": "Inverse image $g^*\\colon\\D(Y_{\\mathrm{proét}},\\mathcal O_E)\\to\\D(X_{\\mathrm{proét}},\\mathcal O_E)$ along a morphism $g\\colon X\\to Y$\npreserves $\\Dbc(-,\\mathcal O_E)$, and on these categories it agrees, after restriction of scalars to\n$\\underline{\\mathcal O_E}$, with the completed inverse image of the Stacks Project. For\n$K,L\\in\\Dbc(X,\\mathcal O_E)$, the tensor product $K\\otimes_{\\mathcal O_{E,X}}^{\\mathbf L}L\\in\\D(X_{\\mathrm{proét}},\\mathcal O_E)$,\nwithout completion, lies in $\\Dbc(X,\\mathcal O_E)$. Extension by zero along a quasi-compact open immersion and\ndirect image along a closed immersion preserve $\\Dbc(-,\\mathcal O_E)$.\n\nArguments by dévissage along a stratification need inverse image, tensor products and extension by zero\nalong strata to preserve integral constructible complexes; these are the statements above.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/_section.md",
-    "place": "node sk-lem-int-tensor, order 1568",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09BP"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09BM"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09AA"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-derived-tensor-hom"
-  ],
-  "proof": [
-    {
-      "text": "*Extension by zero and closed direct image.* For a quasi-compact open immersion $j$, $j_!$ is exact and\npreserves all limits (Stacks, Tag 09BP). For a closed immersion $i$, the complementary open immersion is\nquasi-compact since our schemes are Noetherian, and $i_*$ is exact (Stacks, Tag 09BM) and preserves limits\n(Stacks, Tag 09AA). Both therefore preserve derived completeness, and being exact they commute with\nreduction modulo $\\pi_E^n$, where they preserve constructibility with torsion coefficients. Hence they\npreserve $\\Dbc(-,\\mathcal O_E)$. Combining this with open–closed localization along a stratification, every\n$K\\in\\Dbc(X,\\mathcal O_E)$ is built by finitely many extensions from objects $a_!M$, where\n$a\\colon S\\hookrightarrow X$ is the inclusion of a stratum and $M$ is pro-étale locally the completion of a\nbounded complex of finite free $\\mathcal O_E$-modules ([sk-lem-int-integral-heart];\n[det-sfb-dc-restricted-functors-closed-image], [lem-sfb-dc-open-lower-shriek-preserves]).",
-      "uses": [
-        "sk-lem-int-integral-heart",
-        "det-sfb-dc-restricted-functors-closed-image",
-        "lem-sfb-dc-open-lower-shriek-preserves"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Inverse image.* For such a local model $M$, the inverse image is the same complex of finite free\n$\\mathcal O_E$-modules, completed over the coefficient ring of the new scheme. It is derived complete and its\nreduction is constructible. Since inverse image commutes with $a_!$ (base change for open extension and for\nclosed direct image), the conclusion passes to $a_!M$ and then, through the finitely many localization\ntriangles, to all of $\\Dbc(-,\\mathcal O_E)$. The comparison map to the completed inverse image is an\nisomorphism on the local models, hence on all objects by the same triangles\n([lem-sfb-dc-upper-star-preserves], [det-sfb-dc-restricted-functors-completed-pullback]).",
-      "uses": [
-        "lem-sfb-dc-upper-star-preserves",
-        "det-sfb-dc-restricted-functors-completed-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Tensor product.* For a locally closed immersion $a$,\n\n$$\n(a_!M)\\otimes^{\\mathbf L}L\\simeq a_!(M\\otimes^{\\mathbf L}a^*L);\n$$\n\nthis holds for an open immersion and for a closed immersion, first termwise and then on K-flat\nresolutions, and a locally closed immersion is a composite of the two. It therefore suffices to show that\n$M\\otimes^{\\mathbf L}a^*L\\in\\Dbc(S,\\mathcal O_E)$. The local models of $M$ provide a derived dual and evaluation\nand coevaluation maps locally; these descend, and the triangle identities can be checked locally. Thus $M$\nis dualizable, and $M\\otimes^{\\mathbf L}-$, having adjoints on both sides, preserves products and derived\ninverse limits. Since $a^*L$ is derived complete, so is $M\\otimes^{\\mathbf L}a^*L$. Its reduction modulo\n$\\pi_E$ is the tensor product of the reductions, which is constructible. By the first paragraph, $a_!$\npreserves these properties, and finitely many triangles in the first variable give the claim for all $K$\nand $L$ ([lem-sfb-dc-tensor-preserves]).",
-      "uses": [
-        "lem-sfb-dc-tensor-preserves"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Restricted functors.* Since these functors preserve bounded constructible complexes, they restrict to the\nfull subcategories $D_{\\mathrm{cons}}$ (together with $Rf_*$ and the internal Hom for the $\\ell$-adic rings, by\nDeligne's finiteness theorems), and the ambient adjunctions and composition isomorphisms restrict along\nthe fully faithful inclusions: [def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor], [def-sfb-dc-hom], [def-sfb-dc-upper-lower-adjunction],\n[def-sfb-dc-open-lower-shriek-adjunction], [def-sfb-dc-tensor-hom-adjunction], [def-sfb-dc-upper-star-comp],\nwith preservation statements [lem-sfb-dc-hom-preserves].",
-      "uses": [
-        "def-sfb-dc-upper-star",
-        "def-sfb-dc-lower-star",
-        "def-sfb-dc-open-lower-shriek",
-        "def-sfb-dc-tensor",
-        "def-sfb-dc-hom",
-        "def-sfb-dc-upper-lower-adjunction",
-        "def-sfb-dc-open-lower-shriek-adjunction",
-        "def-sfb-dc-tensor-hom-adjunction",
-        "def-sfb-dc-upper-star-comp",
-        "lem-sfb-dc-hom-preserves"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-lem-int-tensor",
+ "blueprint": {
+  "is": "sk-lem-int-tensor",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Inverse image and tensor product",
+ "statement": "Inverse image $g^*\\colon\\D(Y_{\\mathrm{proét}},\\mathcal O_E)\\to\\D(X_{\\mathrm{proét}},\\mathcal O_E)$ along a morphism $g\\colon X\\to Y$\npreserves $\\Dbc(-,\\mathcal O_E)$, and on these categories it agrees, after restriction of scalars to\n$\\underline{\\mathcal O_E}$, with the completed inverse image of the Stacks Project. For\n$K,L\\in\\Dbc(X,\\mathcal O_E)$, the tensor product $K\\otimes_{\\mathcal O_{E,X}}^{\\mathbf L}L\\in\\D(X_{\\mathrm{proét}},\\mathcal O_E)$,\nwithout completion, lies in $\\Dbc(X,\\mathcal O_E)$. Extension by zero along a quasi-compact open immersion and\ndirect image along a closed immersion preserve $\\Dbc(-,\\mathcal O_E)$.\n\nArguments by dévissage along a stratification need inverse image, tensor products and extension by zero\nalong strata to preserve integral constructible complexes; these are the statements above.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/_section.md",
+  "place": "node sk-lem-int-tensor, order 1568",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09BP"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09BM"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09AA"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "*Extension by zero and closed direct image.* For a quasi-compact open immersion $j$, $j_!$ is exact and\npreserves all limits (Stacks, Tag 09BP). For a closed immersion $i$, the complementary open immersion is\nquasi-compact since our schemes are Noetherian, and $i_*$ is exact (Stacks, Tag 09BM) and preserves limits\n(Stacks, Tag 09AA). Both therefore preserve derived completeness, and being exact they commute with\nreduction modulo $\\pi_E^n$, where they preserve constructibility with torsion coefficients. Hence they\npreserve $\\Dbc(-,\\mathcal O_E)$. Combining this with open–closed localization along a stratification, every\n$K\\in\\Dbc(X,\\mathcal O_E)$ is built by finitely many extensions from objects $a_!M$, where\n$a\\colon S\\hookrightarrow X$ is the inclusion of a stratum and $M$ is pro-étale locally the completion of a\nbounded complex of finite free $\\mathcal O_E$-modules ([sk-lem-int-integral-heart];\n[det-sfb-dc-restricted-functors-closed-image], [lem-sfb-dc-open-lower-shriek-preserves]).",
+   "uses": [
     "sk-lem-int-integral-heart",
     "det-sfb-dc-restricted-functors-closed-image",
-    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-sfb-dc-open-lower-shriek-preserves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Inverse image.* For such a local model $M$, the inverse image is the same complex of finite free\n$\\mathcal O_E$-modules, completed over the coefficient ring of the new scheme. It is derived complete and its\nreduction is constructible. Since inverse image commutes with $a_!$ (base change for open extension and for\nclosed direct image), the conclusion passes to $a_!M$ and then, through the finitely many localization\ntriangles, to all of $\\Dbc(-,\\mathcal O_E)$. The comparison map to the completed inverse image is an\nisomorphism on the local models, hence on all objects by the same triangles\n([lem-sfb-dc-upper-star-preserves], [det-sfb-dc-restricted-functors-completed-pullback]).",
+   "uses": [
     "lem-sfb-dc-upper-star-preserves",
-    "det-sfb-dc-restricted-functors-completed-pullback",
-    "lem-sfb-dc-tensor-preserves",
+    "det-sfb-dc-restricted-functors-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Tensor product.* For a locally closed immersion $a$,\n\n$$\n(a_!M)\\otimes^{\\mathbf L}L\\simeq a_!(M\\otimes^{\\mathbf L}a^*L);\n$$\n\nthis holds for an open immersion and for a closed immersion, first termwise and then on K-flat\nresolutions, and a locally closed immersion is a composite of the two. It therefore suffices to show that\n$M\\otimes^{\\mathbf L}a^*L\\in\\Dbc(S,\\mathcal O_E)$. The local models of $M$ provide a derived dual and evaluation\nand coevaluation maps locally; these descend, and the triangle identities can be checked locally. Thus $M$\nis dualizable, and $M\\otimes^{\\mathbf L}-$, having adjoints on both sides, preserves products and derived\ninverse limits. Since $a^*L$ is derived complete, so is $M\\otimes^{\\mathbf L}a^*L$. Its reduction modulo\n$\\pi_E$ is the tensor product of the reductions, which is constructible. By the first paragraph, $a_!$\npreserves these properties, and finitely many triangles in the first variable give the claim for all $K$\nand $L$ ([lem-sfb-dc-tensor-preserves]).",
+   "uses": [
+    "lem-sfb-dc-tensor-preserves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Restricted functors.* Since these functors preserve bounded constructible complexes, they restrict to the\nfull subcategories $D_{\\mathrm{cons}}$ (together with $Rf_*$ and the internal Hom for the $\\ell$-adic rings, by\nDeligne's finiteness theorems), and the ambient adjunctions and composition isomorphisms restrict along\nthe fully faithful inclusions: [def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor], [def-sfb-dc-hom], [def-sfb-dc-upper-lower-adjunction],\n[def-sfb-dc-open-lower-shriek-adjunction], [def-sfb-dc-tensor-hom-adjunction], [def-sfb-dc-upper-star-comp],\nwith preservation statements [lem-sfb-dc-hom-preserves].",
+   "uses": [
     "def-sfb-dc-upper-star",
     "def-sfb-dc-lower-star",
     "def-sfb-dc-open-lower-shriek",
@@ -83,40 +67,61 @@
     "def-sfb-dc-open-lower-shriek-adjunction",
     "def-sfb-dc-tensor-hom-adjunction",
     "def-sfb-dc-upper-star-comp",
-    "lem-sfb-dc-hom-preserves",
-    "sk-thm-sfb-qlbar-two-colimit"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1568,
-  "blueprint_uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-thm-sfb-rationalization-comparison",
-    "sk-thm-sfb-qlbar-two-colimit",
-    "sk-lem-int-integral-heart"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-derived-tensor-hom",
-    "sk-thm-sfb-qlbar-two-colimit"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+    "lem-sfb-dc-hom-preserves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-int-integral-heart",
+  "det-sfb-dc-restricted-functors-closed-image",
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "lem-sfb-dc-upper-star-preserves",
+  "det-sfb-dc-restricted-functors-completed-pullback",
+  "lem-sfb-dc-tensor-preserves",
+  "def-sfb-dc-upper-star",
+  "def-sfb-dc-lower-star",
+  "def-sfb-dc-open-lower-shriek",
+  "def-sfb-dc-tensor",
+  "def-sfb-dc-hom",
+  "def-sfb-dc-upper-lower-adjunction",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "def-sfb-dc-tensor-hom-adjunction",
+  "def-sfb-dc-upper-star-comp",
+  "lem-sfb-dc-hom-preserves",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1568,
+ "blueprint_uses": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-thm-sfb-rationalization-comparison",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-lem-int-integral-heart"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,69 +1,74 @@
 {
-  "id": "det-picard-main-jacobian",
-  "kind": "statement",
-  "title": "The Jacobian of a geometric curve: points, tangent space, base change",
-  "statement": "In the situation of [det-picard-main-geometry], put\n$J(C)=\\underline{\\operatorname{Pic}}^0_{C/k}$. Then:\n\n1. $J(C)$ is an abelian variety of dimension $g$ (a smooth proper\nconnected group scheme over $k$; it is commutative);\n1. $J(C)(k)=\\operatorname{Pic}^0(C)$, the group of invertible sheaves of\ndegree $0$ on $C$;\n1. the tangent space at the unit is $T_0J(C)\\cong H^1(C,\\cO_C)$ as\n$k$-vector spaces;\n1. for every field extension $K/k$, $\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$\nrepresents $\\operatorname{Pic}_{C_K/K}$, its degree components are\n$\\underline{\\operatorname{Pic}}^d_{C/k}\\times_kK=\\underline{\\operatorname{Pic}}^d_{C_K/K}$,\nand $J(C)\\times_kK=\\underline{\\operatorname{Pic}}^0_{C_K/K}$ (which is\n$J(C_K)$ when $K$ is algebraically closed).",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-jacobian.md",
-    "place": "node det-picard-main-jacobian, order None"
-  },
-  "stmt_deps": [
+ "id": "det-picard-main-jacobian",
+ "blueprint": {
+  "is": "det-picard-main-jacobian",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The Jacobian of a geometric curve: points, tangent space, base change",
+ "statement": "In the situation of [det-picard-main-geometry], put\n$J(C)=\\underline{\\operatorname{Pic}}^0_{C/k}$. Then:\n\n1. $J(C)$ is an abelian variety of dimension $g$ (a smooth proper\nconnected group scheme over $k$; it is commutative);\n1. $J(C)(k)=\\operatorname{Pic}^0(C)$, the group of invertible sheaves of\ndegree $0$ on $C$;\n1. the tangent space at the unit is $T_0J(C)\\cong H^1(C,\\cO_C)$ as\n$k$-vector spaces;\n1. for every field extension $K/k$, $\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$\nrepresents $\\operatorname{Pic}_{C_K/K}$, its degree components are\n$\\underline{\\operatorname{Pic}}^d_{C/k}\\times_kK=\\underline{\\operatorname{Pic}}^d_{C_K/K}$,\nand $J(C)\\times_kK=\\underline{\\operatorname{Pic}}^0_{C_K/K}$ (which is\n$J(C_K)$ when $K$ is algebraically closed).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-jacobian.md",
+  "place": "node det-picard-main-jacobian, order None"
+ },
+ "stmt_deps": [
+  "det-picard-main-geometry"
+ ],
+ "proof": [
+  {
+   "text": "(1) By [det-picard-main-degree] (3), $J(C)$ is an open and closed subgroup\nscheme; by [det-picard-main-geometry] (3) it is a smooth proper\ngeometrically connected variety of dimension $g$. The group law is the\ntensor product of invertible sheaves, which is commutative. A smooth\nproper connected group variety is an abelian variety.",
+   "uses": [
+    "det-picard-main-degree",
     "det-picard-main-geometry"
-  ],
-  "proof": [
-    {
-      "text": "(1) By [det-picard-main-degree] (3), $J(C)$ is an open and closed subgroup\nscheme; by [det-picard-main-geometry] (3) it is a smooth proper\ngeometrically connected variety of dimension $g$. The group law is the\ntensor product of invertible sheaves, which is commutative. A smooth\nproper connected group variety is an abelian variety.",
-      "uses": [
-        "det-picard-main-degree",
-        "det-picard-main-geometry"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(2) A $k$-point is a class in $\\operatorname{Pic}_{C/k}(\\Spec k)$, which by\nrigidification along $P$ (and $\\operatorname{Pic}(\\Spec k)=0$) is\n$\\operatorname{Pic}(C)$; those in $J(C)$ are the classes of degree $0$\n([det-picard-main-degree] (2)).",
-      "uses": [
-        "det-picard-main-degree"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(3) Let $k[\\epsilon]=k[x]/(x^2)$ and $C[\\epsilon]=C\\times_k\\Spec k[\\epsilon]$,\nwhich has the same underlying space as $C$. The tangent space at $0$ is\nthe kernel of $J(C)(k[\\epsilon])\\to J(C)(k)$; since the point\n$\\Spec k[\\epsilon]$ is connected and $J(C)$ is open and closed, this equals\nthe kernel of $\\underline{\\operatorname{Pic}}_{C/k}(k[\\epsilon])\\to\\underline{\\operatorname{Pic}}_{C/k}(k)$,\ni.e. (as $\\operatorname{Pic}(\\Spec k[\\epsilon])=0$, the local ring\n$k[\\epsilon]$ having trivial Picard group) the kernel of\n$\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C)$. On $|C|$ there\nis an exact sequence of abelian sheaves\n\n$$\n0\\longrightarrow\\cO_C\\xrightarrow{\\ a\\mapsto1+\\epsilon a\\ }\\cO_{C[\\epsilon]}^\\times\\longrightarrow\\cO_C^\\times\\longrightarrow1\n$$\n\n($u+\\epsilon v$ is a unit iff $u$ is, and $(1+\\epsilon a)(1+\\epsilon b)=1+\\epsilon(a+b)$).\nIts cohomology sequence reads\n$H^0(\\cO_{C[\\epsilon]}^\\times)=k[\\epsilon]^\\times\\to H^0(\\cO_C^\\times)=k^\\times\\to H^1(C,\\cO_C)\\to\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C)$,\nusing $H^0(C,\\cO_C)=k$. The first map is surjective, so\n$H^1(C,\\cO_C)\\xrightarrow{\\sim}\\ker(\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C))$:\nconcretely a Čech cocycle $(a_{ij})$ goes to the line bundle with\ntransition functions $1+\\epsilon a_{ij}$, and coboundaries correspond to\nchanges of trivialization. The rigidification along $P$ removes only\nscalar automorphisms and does not change this kernel. The bijection is\nadditive; it is $k$-linear because the $k$-vector space structure on the\ntangent space is induced by the endomorphisms $\\epsilon\\mapsto\\lambda\\epsilon$\nof $k[\\epsilon]$, which act on $1+\\epsilon a_{ij}$ by\n$a_{ij}\\mapsto\\lambda a_{ij}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(4) For a $K$-scheme $T$, $C_K\\times_KT=C\\times_kT$, so the presheaves\n$T\\mapsto\\operatorname{Pic}(C_T)/\\operatorname{Pic}(T)$ of $C/k$ and of\n$C_K/K$ agree on $K$-schemes, and the fppf site of $\\Spec K$ is the\nslice of that of $\\Spec k$; hence sheafification commutes with this\nrestriction, and $\\operatorname{Pic}_{C_K/K}$ is the restriction of\n$\\operatorname{Pic}_{C/k}$ ([def-pc-picard-functor]). A $K$-morphism\n$T\\to\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$ is the same as a\n$k$-morphism $T\\to\\underline{\\operatorname{Pic}}_{C/k}$, so\n$\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$ represents\n$\\operatorname{Pic}_{C_K/K}$. Fibrewise degrees are computed on the same\nfibres, so the degree components and in particular the degree-zero\ncomponent are compatible with base change.",
-      "uses": [
-        "def-pc-picard-functor"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-picard-main-degree",
-    "det-picard-main-geometry",
-    "def-pc-picard-functor"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-jacobian.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-picard-main-degree",
-    "det-picard-main-geometry",
+  {
+   "text": "(2) A $k$-point is a class in $\\operatorname{Pic}_{C/k}(\\Spec k)$, which by\nrigidification along $P$ (and $\\operatorname{Pic}(\\Spec k)=0$) is\n$\\operatorname{Pic}(C)$; those in $J(C)$ are the classes of degree $0$\n([det-picard-main-degree] (2)).",
+   "uses": [
+    "det-picard-main-degree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) Let $k[\\epsilon]=k[x]/(x^2)$ and $C[\\epsilon]=C\\times_k\\Spec k[\\epsilon]$,\nwhich has the same underlying space as $C$. The tangent space at $0$ is\nthe kernel of $J(C)(k[\\epsilon])\\to J(C)(k)$; since the point\n$\\Spec k[\\epsilon]$ is connected and $J(C)$ is open and closed, this equals\nthe kernel of $\\underline{\\operatorname{Pic}}_{C/k}(k[\\epsilon])\\to\\underline{\\operatorname{Pic}}_{C/k}(k)$,\ni.e. (as $\\operatorname{Pic}(\\Spec k[\\epsilon])=0$, the local ring\n$k[\\epsilon]$ having trivial Picard group) the kernel of\n$\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C)$. On $|C|$ there\nis an exact sequence of abelian sheaves\n\n$$\n0\\longrightarrow\\cO_C\\xrightarrow{\\ a\\mapsto1+\\epsilon a\\ }\\cO_{C[\\epsilon]}^\\times\\longrightarrow\\cO_C^\\times\\longrightarrow1\n$$\n\n($u+\\epsilon v$ is a unit iff $u$ is, and $(1+\\epsilon a)(1+\\epsilon b)=1+\\epsilon(a+b)$).\nIts cohomology sequence reads\n$H^0(\\cO_{C[\\epsilon]}^\\times)=k[\\epsilon]^\\times\\to H^0(\\cO_C^\\times)=k^\\times\\to H^1(C,\\cO_C)\\to\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C)$,\nusing $H^0(C,\\cO_C)=k$. The first map is surjective, so\n$H^1(C,\\cO_C)\\xrightarrow{\\sim}\\ker(\\operatorname{Pic}(C[\\epsilon])\\to\\operatorname{Pic}(C))$:\nconcretely a Čech cocycle $(a_{ij})$ goes to the line bundle with\ntransition functions $1+\\epsilon a_{ij}$, and coboundaries correspond to\nchanges of trivialization. The rigidification along $P$ removes only\nscalar automorphisms and does not change this kernel. The bijection is\nadditive; it is $k$-linear because the $k$-vector space structure on the\ntangent space is induced by the endomorphisms $\\epsilon\\mapsto\\lambda\\epsilon$\nof $k[\\epsilon]$, which act on $1+\\epsilon a_{ij}$ by\n$a_{ij}\\mapsto\\lambda a_{ij}$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(4) For a $K$-scheme $T$, $C_K\\times_KT=C\\times_kT$, so the presheaves\n$T\\mapsto\\operatorname{Pic}(C_T)/\\operatorname{Pic}(T)$ of $C/k$ and of\n$C_K/K$ agree on $K$-schemes, and the fppf site of $\\Spec K$ is the\nslice of that of $\\Spec k$; hence sheafification commutes with this\nrestriction, and $\\operatorname{Pic}_{C_K/K}$ is the restriction of\n$\\operatorname{Pic}_{C/k}$ ([def-pc-picard-functor]). A $K$-morphism\n$T\\to\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$ is the same as a\n$k$-morphism $T\\to\\underline{\\operatorname{Pic}}_{C/k}$, so\n$\\underline{\\operatorname{Pic}}_{C/k}\\times_kK$ represents\n$\\operatorname{Pic}_{C_K/K}$. Fibrewise degrees are computed on the same\nfibres, so the degree components and in particular the degree-zero\ncomponent are compatible with base change.",
+   "uses": [
     "def-pc-picard-functor"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-picard-main-degree",
+  "det-picard-main-geometry",
+  "def-pc-picard-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-jacobian.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-picard-main-degree",
+  "det-picard-main-geometry",
+  "def-pc-picard-functor"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

@@ -1,67 +1,72 @@
 {
-  "id": "det-lem-int-tensor-projection",
-  "kind": "statement",
-  "title": "Projection formula for extension by zero along a locally closed immersion",
-  "statement": "Let $\\Lambda$ be a condensed ring, $X$ a standing scheme, and\n$a=i\\circ u\\colon S\\hookrightarrow X$ a locally closed immersion, with\n$u\\colon S\\hookrightarrow\\overline S$ open and $i\\colon\\overline S\\hookrightarrow X$ closed, and\n$a_!=i_*u_!$. For $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ and $L\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\nthere is a natural isomorphism\n$$\n(a_!M)\\otimes^{\\mathbf L}_{\\Lambda_X}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*L\\bigr)\n\\quad\\text{in }\\D(X_{\\mathrm{proét}},\\Lambda).\n$$",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
-    "place": "node det-lem-int-tensor-projection, order None"
+ "id": "det-lem-int-tensor-projection",
+ "blueprint": {
+  "is": "det-lem-int-tensor-projection",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Projection formula for extension by zero along a locally closed immersion",
+ "statement": "Let $\\Lambda$ be a condensed ring, $X$ a standing scheme, and\n$a=i\\circ u\\colon S\\hookrightarrow X$ a locally closed immersion, with\n$u\\colon S\\hookrightarrow\\overline S$ open and $i\\colon\\overline S\\hookrightarrow X$ closed, and\n$a_!=i_*u_!$. For $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ and $L\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\nthere is a natural isomorphism\n$$\n(a_!M)\\otimes^{\\mathbf L}_{\\Lambda_X}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*L\\bigr)\n\\quad\\text{in }\\D(X_{\\mathrm{proét}},\\Lambda).\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
+  "place": "node det-lem-int-tensor-projection, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Throughout we use [sk-prop-sf-open-closed-triangle]: for an open immersion $j$\nwith closed complement $i$, the functors $j^*$, $j_!$, $i^*$, $i_*$ are exact,\n$j^*j_!=\\mathrm{id}$, $i^*i_*=\\mathrm{id}$, $i^*j_!=0$, $j^*i_*=0$, and a morphism of\nmodule sheaves on $X$ that becomes an isomorphism after $j^*$ and after $i^*$\nis an isomorphism (apply the localization sequence to its kernel and\ncokernel). Inverse images $j^*$, $i^*$ are compatible with tensor products,\nsince the coefficient sheaves are pulled back\n([sk-prop-sfb-cartesian-coefficients]).",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Throughout we use [sk-prop-sf-open-closed-triangle]: for an open immersion $j$\nwith closed complement $i$, the functors $j^*$, $j_!$, $i^*$, $i_*$ are exact,\n$j^*j_!=\\mathrm{id}$, $i^*i_*=\\mathrm{id}$, $i^*j_!=0$, $j^*i_*=0$, and a morphism of\nmodule sheaves on $X$ that becomes an isomorphism after $j^*$ and after $i^*$\nis an isomorphism (apply the localization sequence to its kernel and\ncokernel). Inverse images $j^*$, $i^*$ are compatible with tensor products,\nsince the coefficient sheaves are pulled back\n([sk-prop-sfb-cartesian-coefficients]).",
-      "uses": [
-        "sk-prop-sfb-cartesian-coefficients"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Open immersions, sheaves.* Let $j\\colon V\\hookrightarrow Y$ be open, $M$ a\n$\\Lambda_V$-module and $N$ a $\\Lambda_Y$-module. The identity of $M\\otimes j^*N$,\nviewed as a map $M\\otimes j^*N\\to j^*j_!M\\otimes j^*N=j^*(j_!M\\otimes N)$, is\nadjoint under $j_!\\dashv j^*$ to a natural map\n$\\theta\\colon j_!(M\\otimes j^*N)\\to j_!M\\otimes N$. After $j^*$ it is the identity;\nafter $i^*$ both sides vanish ($i^*(j_!M\\otimes N)=i^*j_!M\\otimes i^*N=0$). So $\\theta$\nis an isomorphism.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Closed immersions, sheaves.* Let $i\\colon T\\hookrightarrow Y$ be closed, $M$ a\n$\\Lambda_T$-module and $N$ a $\\Lambda_Y$-module. The unit of $i^*\\dashv i_*$ gives\n$i_*M\\otimes N\\to i_*i^*(i_*M\\otimes N)=i_*(M\\otimes i^*N)$. After $i^*$ it is the\nidentity of $M\\otimes i^*N$, and after $j^*$ both sides vanish. So it is an\nisomorphism.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Derived version.* Represent $L$ by a K-flat complex $Q$ of $\\Lambda_X$-modules\n([sk-def-sfb-derived-tensor-hom]). Inverse image along an open or closed\nimmersion preserves K-flatness: if $C$ is acyclic on the subscheme, then\n$C\\otimes j^*Q=j^*(j_!C\\otimes Q)$, respectively $C\\otimes i^*Q=i^*(i_*C\\otimes Q)$ by the\nsheaf formulas, and $j_!C$, $i_*C$ are acyclic. Applying the sheaf formulas\ntermwise to the double complexes gives\n$j_!M\\otimes Q\\simeq j_!(M\\otimes j^*Q)$ and $i_*M\\otimes Q\\simeq i_*(M\\otimes i^*Q)$ for any\ncomplex $M$; since $Q$, $j^*Q$, $i^*Q$ are K-flat and $j_!$, $i_*$ are exact, these\nare the derived isomorphisms $j_!M\\otimes^{\\mathbf L}L\\simeq j_!(M\\otimes^{\\mathbf L}j^*L)$ and\n$i_*M\\otimes^{\\mathbf L}L\\simeq i_*(M\\otimes^{\\mathbf L}i^*L)$.",
-      "uses": [
-        "sk-def-sfb-derived-tensor-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Locally closed immersions.* Combining,\n$$\na_!M\\otimes^{\\mathbf L}L=i_*(u_!M)\\otimes^{\\mathbf L}L\\simeq i_*\\bigl(u_!M\\otimes^{\\mathbf L}i^*L\\bigr)\n\\simeq i_*u_!\\bigl(M\\otimes^{\\mathbf L}u^*i^*L\\bigr)=a_!(M\\otimes^{\\mathbf L}a^*L).\n$$\nAll maps are natural in $M$ and $L$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-derived-tensor-hom"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
-    "place": "## Proof"
+  {
+   "text": "*Open immersions, sheaves.* Let $j\\colon V\\hookrightarrow Y$ be open, $M$ a\n$\\Lambda_V$-module and $N$ a $\\Lambda_Y$-module. The identity of $M\\otimes j^*N$,\nviewed as a map $M\\otimes j^*N\\to j^*j_!M\\otimes j^*N=j^*(j_!M\\otimes N)$, is\nadjoint under $j_!\\dashv j^*$ to a natural map\n$\\theta\\colon j_!(M\\otimes j^*N)\\to j_!M\\otimes N$. After $j^*$ it is the identity;\nafter $i^*$ both sides vanish ($i^*(j_!M\\otimes N)=i^*j_!M\\otimes i^*N=0$). So $\\theta$\nis an isomorphism.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "sk-prop-sf-open-closed-triangle",
+  {
+   "text": "*Closed immersions, sheaves.* Let $i\\colon T\\hookrightarrow Y$ be closed, $M$ a\n$\\Lambda_T$-module and $N$ a $\\Lambda_Y$-module. The unit of $i^*\\dashv i_*$ gives\n$i_*M\\otimes N\\to i_*i^*(i_*M\\otimes N)=i_*(M\\otimes i^*N)$. After $i^*$ it is the\nidentity of $M\\otimes i^*N$, and after $j^*$ both sides vanish. So it is an\nisomorphism.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Derived version.* Represent $L$ by a K-flat complex $Q$ of $\\Lambda_X$-modules\n([sk-def-sfb-derived-tensor-hom]). Inverse image along an open or closed\nimmersion preserves K-flatness: if $C$ is acyclic on the subscheme, then\n$C\\otimes j^*Q=j^*(j_!C\\otimes Q)$, respectively $C\\otimes i^*Q=i^*(i_*C\\otimes Q)$ by the\nsheaf formulas, and $j_!C$, $i_*C$ are acyclic. Applying the sheaf formulas\ntermwise to the double complexes gives\n$j_!M\\otimes Q\\simeq j_!(M\\otimes j^*Q)$ and $i_*M\\otimes Q\\simeq i_*(M\\otimes i^*Q)$ for any\ncomplex $M$; since $Q$, $j^*Q$, $i^*Q$ are K-flat and $j_!$, $i_*$ are exact, these\nare the derived isomorphisms $j_!M\\otimes^{\\mathbf L}L\\simeq j_!(M\\otimes^{\\mathbf L}j^*L)$ and\n$i_*M\\otimes^{\\mathbf L}L\\simeq i_*(M\\otimes^{\\mathbf L}i^*L)$.",
+   "uses": [
     "sk-def-sfb-derived-tensor-hom"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Locally closed immersions.* Combining,\n$$\na_!M\\otimes^{\\mathbf L}L=i_*(u_!M)\\otimes^{\\mathbf L}L\\simeq i_*\\bigl(u_!M\\otimes^{\\mathbf L}i^*L\\bigr)\n\\simeq i_*u_!\\bigl(M\\otimes^{\\mathbf L}u^*i^*L\\bigr)=a_!(M\\otimes^{\\mathbf L}a^*L).\n$$\nAll maps are natural in $M$ and $L$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "sk-prop-sf-open-closed-triangle",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

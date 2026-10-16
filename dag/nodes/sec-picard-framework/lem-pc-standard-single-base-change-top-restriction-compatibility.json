@@ -1,5 +1,14 @@
 {
  "id": "lem-pc-standard-single-base-change-top-restriction-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Compatibility after top restriction source comparison",
  "statement": "theorem standardSingleBaseChange_topRestriction_compatibility\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∀ (e : (schemeDerivedDirectImage p).obj\n          ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n        (schemeDerivedDirectImage ((⊤ : Y.Opens).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj (M.restrict (⊤ : Y.Opens).ι))),\n      e = standardSingleBaseChange_topRestriction_sourceIso p M → ∃ (t : (schemeDerivedDirectImage\n          (pullback.snd ((⊤ : Y.Opens).ι ≫ p) g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj\n              (pullback.fst ((⊤ : Y.Opens).ι ≫ p) g)\n              (M.restrict (⊤ : Y.Opens).ι))) ≅\n        (schemeDerivedDirectImage (pullback.snd p g)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj\n            (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))),\n      standardSingleBaseChangeMap p M g =\n        (derivedPullback g).map e.hom ≫\n          standardSingleBaseChangeMap ((⊤ : Y.Opens).ι ≫ p)\n            (M.restrict (⊤ : Y.Opens).ι) g ≫ t.hom",
@@ -89,13 +98,6 @@
   "item": "Sheaf.AlgebraicGeometry.StandardSingleBaseChangeTopRestriction",
   "date": "2026-10-14",
   "group": "A3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-standard-single-base-change-top-restriction",
-   "place": "compatibility equation"
-  }
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",

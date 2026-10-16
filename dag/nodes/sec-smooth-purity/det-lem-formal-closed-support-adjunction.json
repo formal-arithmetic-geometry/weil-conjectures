@@ -1,71 +1,76 @@
 {
-  "id": "det-lem-formal-closed-support-adjunction",
-  "kind": "statement",
-  "title": "Sections with closed support: adjunction and fiber triangle for all coefficients",
-  "statement": "Let $\\Lambda$ be a condensed ring (in particular any admissible one), $i\\colon Z\\hookrightarrow X$\na closed immersion with quasi-compact open complement $j\\colon V\\hookrightarrow X$, and\n$\\underline\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$ for $\\Lambda_X$-modules $M$\n(as in [def-exc-proetale-sections-with-support], with $\\Lambda$ in place of a finite ring).\n\n1. $\\ker(M\\to j_*j^*M)=i_*\\underline\\Gamma_Z(M)$, and $\\underline\\Gamma_Z$ is right adjoint to\n   $i_*$ on module sheaves; it is left exact.\n2. $R\\underline\\Gamma_Z$, computed on K-injective complexes, is right adjoint to $i_*$ on\n   $D(-_{\\mathrm{proét}},\\Lambda)$; equivalently\n   $R\\operatorname{Hom}_X(i_*A,K)\\cong R\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK)$.\n3. For an injective $\\Lambda_X$-module $I$, the unit $I\\to j_*j^*I$ is surjective.\n4. There is a distinguished triangle\n   $i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to i_*R\\underline\\Gamma_ZK[1]$, natural in $K$, and\n   $R\\underline\\Gamma_ZK\\cong i^*\\fib(K\\to Rj_*j^*K)$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
-    "place": "node det-lem-formal-closed-support-adjunction, order None"
-  },
-  "stmt_deps": [
-    "def-exc-proetale-sections-with-support"
-  ],
-  "proof": [
-    {
-      "text": "The proofs of [lem-exc-proetale-closed-support] and [lem-exc-proetale-support-triangle] use\nonly the following properties, which hold for modules over any sheaf of rings $\\Lambda_X$\n(pulled back to $Z$ and $V$ via [sk-prop-sfb-cartesian-coefficients]): $i_*$ and $j_!$ are\nexact, $i_*$ and $j_*$ are fully faithful, $i^*i_*=\\mathrm{id}$, $j^*i_*=0$, and the\nlocalization sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$ is exact ([sk-prop-sf-open-closed-triangle]).",
-      "uses": [
-        "lem-exc-proetale-closed-support",
-        "lem-exc-proetale-support-triangle",
-        "sk-prop-sfb-cartesian-coefficients"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(1) $N=\\ker(M\\to j_*j^*M)$ satisfies $j^*N=\\ker(j^*M\\xrightarrow{\\mathrm{id}}j^*M)=0$, so by the\nlocalization sequence $N\\cong i_*i^*N=i_*\\underline\\Gamma_Z(M)$. For a morphism\n$\\phi\\colon i_*A\\to M$, the composite to $j_*j^*M$ is adjoint to $j^*\\phi\\colon j^*i_*A=0\\to j^*M$,\nhence zero; so $\\phi$ factors uniquely through $N=i_*\\underline\\Gamma_Z(M)$, and by full\nfaithfulness of $i_*$ corresponds to a unique $A\\to\\underline\\Gamma_Z(M)$. Left exactness: a\nright adjoint is left exact.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(2) Since $i_*$ is exact, its right adjoint $\\underline\\Gamma_Z$ sends K-injective complexes to\nK-injective complexes: $\\Hom_{K}(C,\\underline\\Gamma_ZI)=\\Hom_K(i_*C,I)=0$ for acyclic $C$. Choose\nK-injective resolutions (\\stacks{079P}); then\n$\\Hom_{D}(i_*A,K)=\\Hom_K(i_*A,I)=\\Hom_K(A,\\underline\\Gamma_ZI)=\\Hom_D(A,R\\underline\\Gamma_ZK)$,\nand the same with shifts and internal Hom complexes gives the $R\\operatorname{Hom}$ form.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(3) $j_!j^*I\\to j_*j^*I$ is a monomorphism (it is the identity on $V$, and its source is zero\non $Z$). By injectivity of $I$, the inclusion $j_!j^*I\\hookrightarrow I$ (the counit) extends\nto $s\\colon j_*j^*I\\to I$. Let $e=\\eta\\circ s\\colon j_*j^*I\\to j_*j^*I$, $\\eta$ the unit. Then\n$j^*e=\\mathrm{id}$, since on $V$ all three maps are identities; by full faithfulness of\n$j_*$, $e=\\mathrm{id}$. So $\\eta$ is a split epimorphism.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(4) Represent $K$ by a K-injective complex $I^\\bullet$ with injective terms. $j^*I^\\bullet$ is\nK-injective (its left adjoint $j_!$ is exact), so $Rj_*j^*K=j_*j^*I^\\bullet$. By (1), (3) the\nsequences $0\\to i_*\\underline\\Gamma_Z(I^n)\\to I^n\\to j_*j^*I^n\\to0$ are exact; they form a\nshort exact sequence of complexes, hence a distinguished triangle whose first term is\n$i_*\\underline\\Gamma_Z(I^\\bullet)=i_*R\\underline\\Gamma_ZK$. Thus\n$i_*R\\underline\\Gamma_ZK\\cong\\fib(K\\to Rj_*j^*K)$, and applying the exact $i^*$ with\n$i^*i_*=\\mathrm{id}$ gives the formula. Naturality follows from functoriality of K-injective\nresolutions in the homotopy category.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "det-lem-formal-closed-support-adjunction",
+ "blueprint": {
+  "is": "det-lem-formal-closed-support-adjunction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Sections with closed support: adjunction and fiber triangle for all coefficients",
+ "statement": "Let $\\Lambda$ be a condensed ring (in particular any admissible one), $i\\colon Z\\hookrightarrow X$\na closed immersion with quasi-compact open complement $j\\colon V\\hookrightarrow X$, and\n$\\underline\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$ for $\\Lambda_X$-modules $M$\n(as in [def-exc-proetale-sections-with-support], with $\\Lambda$ in place of a finite ring).\n\n1. $\\ker(M\\to j_*j^*M)=i_*\\underline\\Gamma_Z(M)$, and $\\underline\\Gamma_Z$ is right adjoint to\n   $i_*$ on module sheaves; it is left exact.\n2. $R\\underline\\Gamma_Z$, computed on K-injective complexes, is right adjoint to $i_*$ on\n   $D(-_{\\mathrm{proét}},\\Lambda)$; equivalently\n   $R\\operatorname{Hom}_X(i_*A,K)\\cong R\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK)$.\n3. For an injective $\\Lambda_X$-module $I$, the unit $I\\to j_*j^*I$ is surjective.\n4. There is a distinguished triangle\n   $i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to i_*R\\underline\\Gamma_ZK[1]$, natural in $K$, and\n   $R\\underline\\Gamma_ZK\\cong i^*\\fib(K\\to Rj_*j^*K)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
+  "place": "node det-lem-formal-closed-support-adjunction, order None"
+ },
+ "stmt_deps": [
+  "def-exc-proetale-sections-with-support"
+ ],
+ "proof": [
+  {
+   "text": "The proofs of [lem-exc-proetale-closed-support] and [lem-exc-proetale-support-triangle] use\nonly the following properties, which hold for modules over any sheaf of rings $\\Lambda_X$\n(pulled back to $Z$ and $V$ via [sk-prop-sfb-cartesian-coefficients]): $i_*$ and $j_!$ are\nexact, $i_*$ and $j_*$ are fully faithful, $i^*i_*=\\mathrm{id}$, $j^*i_*=0$, and the\nlocalization sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$ is exact ([sk-prop-sf-open-closed-triangle]).",
+   "uses": [
     "lem-exc-proetale-closed-support",
     "lem-exc-proetale-support-triangle",
     "sk-prop-sfb-cartesian-coefficients"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "def-exc-proetale-sections-with-support",
-    "lem-exc-proetale-closed-support",
-    "lem-exc-proetale-support-triangle",
-    "sk-prop-sf-open-closed-triangle"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+  {
+   "text": "(1) $N=\\ker(M\\to j_*j^*M)$ satisfies $j^*N=\\ker(j^*M\\xrightarrow{\\mathrm{id}}j^*M)=0$, so by the\nlocalization sequence $N\\cong i_*i^*N=i_*\\underline\\Gamma_Z(M)$. For a morphism\n$\\phi\\colon i_*A\\to M$, the composite to $j_*j^*M$ is adjoint to $j^*\\phi\\colon j^*i_*A=0\\to j^*M$,\nhence zero; so $\\phi$ factors uniquely through $N=i_*\\underline\\Gamma_Z(M)$, and by full\nfaithfulness of $i_*$ corresponds to a unique $A\\to\\underline\\Gamma_Z(M)$. Left exactness: a\nright adjoint is left exact.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(2) Since $i_*$ is exact, its right adjoint $\\underline\\Gamma_Z$ sends K-injective complexes to\nK-injective complexes: $\\Hom_{K}(C,\\underline\\Gamma_ZI)=\\Hom_K(i_*C,I)=0$ for acyclic $C$. Choose\nK-injective resolutions (\\stacks{079P}); then\n$\\Hom_{D}(i_*A,K)=\\Hom_K(i_*A,I)=\\Hom_K(A,\\underline\\Gamma_ZI)=\\Hom_D(A,R\\underline\\Gamma_ZK)$,\nand the same with shifts and internal Hom complexes gives the $R\\operatorname{Hom}$ form.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(3) $j_!j^*I\\to j_*j^*I$ is a monomorphism (it is the identity on $V$, and its source is zero\non $Z$). By injectivity of $I$, the inclusion $j_!j^*I\\hookrightarrow I$ (the counit) extends\nto $s\\colon j_*j^*I\\to I$. Let $e=\\eta\\circ s\\colon j_*j^*I\\to j_*j^*I$, $\\eta$ the unit. Then\n$j^*e=\\mathrm{id}$, since on $V$ all three maps are identities; by full faithfulness of\n$j_*$, $e=\\mathrm{id}$. So $\\eta$ is a split epimorphism.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "(4) Represent $K$ by a K-injective complex $I^\\bullet$ with injective terms. $j^*I^\\bullet$ is\nK-injective (its left adjoint $j_!$ is exact), so $Rj_*j^*K=j_*j^*I^\\bullet$. By (1), (3) the\nsequences $0\\to i_*\\underline\\Gamma_Z(I^n)\\to I^n\\to j_*j^*I^n\\to0$ are exact; they form a\nshort exact sequence of complexes, hence a distinguished triangle whose first term is\n$i_*\\underline\\Gamma_Z(I^\\bullet)=i_*R\\underline\\Gamma_ZK$. Thus\n$i_*R\\underline\\Gamma_ZK\\cong\\fib(K\\to Rj_*j^*K)$, and applying the exact $i^*$ with\n$i^*i_*=\\mathrm{id}$ gives the formula. Naturality follows from functoriality of K-injective\nresolutions in the homotopy category.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-proetale-closed-support",
+  "lem-exc-proetale-support-triangle",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-adjunction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "def-exc-proetale-sections-with-support",
+  "lem-exc-proetale-closed-support",
+  "lem-exc-proetale-support-triangle",
+  "sk-prop-sf-open-closed-triangle"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

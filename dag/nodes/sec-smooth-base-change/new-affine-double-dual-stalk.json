@@ -1,5 +1,14 @@
 {
  "id": "new-affine-double-dual-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Stalk comparison for the actual affine double dual",
  "statement": "theorem affine_double_dual_stalk\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (M : ModuleCat.{u} A)\n    [Module.Finite A M] (x : Spec A) :\n    ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n        (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x),\n      letI := hfinite\n      Nonempty\n        (TopCat.Presheaf.stalk (C := Ab.{u})\n            (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))).val.presheaf x\n          ≃ₗ[(Spec A).presheaf.stalk x]\n            Module.Dual ((Spec A).presheaf.stalk x)\n              (Module.Dual ((Spec A).presheaf.stalk x)\n                (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x)))",
@@ -57,13 +66,6 @@
   "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty",
   "date": "2026-10-13",
   "group": "E1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "new-affine-depth-two-boundary-property",
-   "place": "structural double-dual repair, reviewer X-7ea0b"
-  }
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",

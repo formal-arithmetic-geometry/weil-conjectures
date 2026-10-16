@@ -1,60 +1,65 @@
 {
-  "id": "sk-lem-failure-field",
-  "kind": "statement",
-  "title": "A failure is detected on the generic fibre",
-  "statement": "Let $f:X\\to S$ be a morphism of schemes, $\\Lambda$ a commutative ring,\nand $q\\ge1$. If $\\mathrm{BC}(f,\\Lambda,r)$ holds universally for every\n$r\\le q-1$ ([sk-def-bc]: base change in all degrees $\\le q-1$, after\nevery preliminary base change of $f$) but $\\mathrm{BC}(f,\\Lambda,q)$ does\nnot hold, then there is a counterexample over a field: a morphism\n$S'\\to S$ with $S'$ an affine scheme (so that $S'\\to S$ is an affine\nmorphism when $S$ is separated), the base change\n$f':X'=X\\times_SS'\\to S'$, a field $K$ with a morphism\n$g:\\Spec K\\to S'$, the Cartesian square of $f'$ along $g$ with\n$Y=X'\\times_{S'}\\Spec K$, $h:Y\\to X'$, $e:Y\\to\\Spec K$, and a sheaf\n$\\mathcal F$ of $\\Lambda$-modules on $(\\Spec K)_{\\Et}$ with\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ not an\nisomorphism.\n\nThe hypothesis in degrees $\\le q-1$ has to be the universal one: the\nclosed–open step of the proof applies it to a base change of $f$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-lem-failure-field/_section.md",
-    "place": "node sk-lem-failure-field, order 1444"
-  },
-  "stmt_deps": [
-    "sk-def-bc"
-  ],
-  "proof": [
-    {
-      "text": "Let $g:T\\to S$, $\\mathcal F$ be a failing datum: $g$ is a\nquasi-compact quasi-separated *morphism* ([sk-def-bc]) but $T$\nneed not be a qcqs scheme, as [sk-lem-minimal] requires. Being an\nisomorphism is local on $X$, and restriction to an affine open\n$S'\\subseteq S$ is pullback along an étale map, with which\n$R^qg_*$, $R^qh_*$ and the base-change map commute; so the map already\nfails over some affine open $S'$, and replacing $S$ by $S'$, $X$ by\n$X\\times_SS'$ and $T$ by $T\\times_SS'$ we may assume $S$ affine (this\nis the $S'$ of the statement; the hypothesis in degrees $\\le q-1$ is\ninherited, being universal). Now $T$, being qcqs over the affine\n$S$, is a qcqs scheme. Since $\\mathrm{BC}(f,\\Lambda,q-1)$ holds, the\nbase-change map in degree $q$ is injective ([sk-prop-injectivity] (1)),\nso it is not surjective: there is a geometric point $\\bar x$ of $X$ and\nan element $\\xi$ of the stalk of $R^qh_*e^{-1}\\mathcal F$ at $\\bar x$\nnot in the image. Apply [sk-lem-minimal] to the property ``the chosen cokernel\nelement survives'' (for $T'\\to T$ qcqs, the image of $\\xi$ in the stalk\nof the corresponding $R^qh'_*$ of the pulled-back sheaf is not in the image\nof the base-change map): it fails for the empty scheme, over which the stalk of\n$R^qh_*e^{-1}\\mathcal F$ is $0$, so the image of $\\xi$ is $0$ and\nlies in the image; thickenings do not change the étale site; limits work by\nthe limit theorem for higher direct images. For the closed–open\nsplit let $i:Z\\to T'$ be closed with quasi-compact open complement\n$j:V\\to T'$, and let $\\mathcal J$ be an injective sheaf of\n$\\Lambda$-modules on $V$ containing $j^{-1}\\mathcal F'$; the injectivity of\n[sk-prop-injectivity] (2) applied to the embedding\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ puts the\nsurviving element into one of the two summands. The closed summand\nis handled by the exactness of $i_*$. For the open summand one\ncannot use exactness of $j_*$, which fails in general\n($R^1j_*(\\Z/\\ell)\\neq0$ for $j:\\gm\\hookrightarrow\\Aaf^1$); instead\nlet $e':Y'=X\\times_ST'\\to T'$ be the base change of $f$ along\n$T'\\to S$ and $j':V\\times_{T'}Y'\\to Y'$. The hypothesis that\n$\\mathrm{BC}(f,\\Lambda,r)$ holds universally for $r\\le q-1$, applied to $e'$ and the qcqs morphism\n$j$ — this is where the property after a *preliminary* base\nchange, $T'\\to S$, and in *all* degrees $\\le q-1$ is consumed\n— gives $e'^{-1}j_*\\mathcal J\\cong j'_*e_V^{-1}\\mathcal J$ (degree\n$0$) and $R^aj'_*e_V^{-1}\\mathcal J\\cong e'^{-1}R^aj_*\\mathcal J=0$\nfor $1\\le a\\le q-1$ ($\\mathcal J$ is injective). The relative Leray\nspectral sequence for $h'\\circ j'$ then makes\n$R^qh'_*e'^{-1}j_*\\mathcal J\\to R^q(h'\\circ j')_*e_V^{-1}\\mathcal J$\ninjective, and [sk-prop-injectivity] (3) for the square of $f$\nalong $g'\\circ j:V\\to S$ and $j^{-1}\\mathcal F'\\subseteq\\mathcal J$\nshows that the element survives on $V$. Hence [sk-lem-minimal] gives a\nmorphism $\\Spec K\\to T$ with $K$ a field over which the element survives;\ntaking $g$ to be the composite $\\Spec K\\to T\\to S'$ and $\\mathcal F$ the\npullback of the coefficient sheaf to $\\Spec K$, the base-change map of the\nsquare of $f'$ along $g$ is not surjective, hence not an isomorphism.",
-      "uses": [
-        "sk-def-bc",
-        "sk-lem-minimal"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-lem-failure-field",
+ "blueprint": {
+  "is": "sk-lem-failure-field",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "A failure is detected on the generic fibre",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, $\\Lambda$ a commutative ring,\nand $q\\ge1$. If $\\mathrm{BC}(f,\\Lambda,r)$ holds universally for every\n$r\\le q-1$ ([sk-def-bc]: base change in all degrees $\\le q-1$, after\nevery preliminary base change of $f$) but $\\mathrm{BC}(f,\\Lambda,q)$ does\nnot hold, then there is a counterexample over a field: a morphism\n$S'\\to S$ with $S'$ an affine scheme (so that $S'\\to S$ is an affine\nmorphism when $S$ is separated), the base change\n$f':X'=X\\times_SS'\\to S'$, a field $K$ with a morphism\n$g:\\Spec K\\to S'$, the Cartesian square of $f'$ along $g$ with\n$Y=X'\\times_{S'}\\Spec K$, $h:Y\\to X'$, $e:Y\\to\\Spec K$, and a sheaf\n$\\mathcal F$ of $\\Lambda$-modules on $(\\Spec K)_{\\Et}$ with\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ not an\nisomorphism.\n\nThe hypothesis in degrees $\\le q-1$ has to be the universal one: the\nclosed–open step of the proof applies it to a base change of $f$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-lem-failure-field/_section.md",
+  "place": "node sk-lem-failure-field, order 1444"
+ },
+ "stmt_deps": [
+  "sk-def-bc"
+ ],
+ "proof": [
+  {
+   "text": "Let $g:T\\to S$, $\\mathcal F$ be a failing datum: $g$ is a\nquasi-compact quasi-separated *morphism* ([sk-def-bc]) but $T$\nneed not be a qcqs scheme, as [sk-lem-minimal] requires. Being an\nisomorphism is local on $X$, and restriction to an affine open\n$S'\\subseteq S$ is pullback along an étale map, with which\n$R^qg_*$, $R^qh_*$ and the base-change map commute; so the map already\nfails over some affine open $S'$, and replacing $S$ by $S'$, $X$ by\n$X\\times_SS'$ and $T$ by $T\\times_SS'$ we may assume $S$ affine (this\nis the $S'$ of the statement; the hypothesis in degrees $\\le q-1$ is\ninherited, being universal). Now $T$, being qcqs over the affine\n$S$, is a qcqs scheme. Since $\\mathrm{BC}(f,\\Lambda,q-1)$ holds, the\nbase-change map in degree $q$ is injective ([sk-prop-injectivity] (1)),\nso it is not surjective: there is a geometric point $\\bar x$ of $X$ and\nan element $\\xi$ of the stalk of $R^qh_*e^{-1}\\mathcal F$ at $\\bar x$\nnot in the image. Apply [sk-lem-minimal] to the property ``the chosen cokernel\nelement survives'' (for $T'\\to T$ qcqs, the image of $\\xi$ in the stalk\nof the corresponding $R^qh'_*$ of the pulled-back sheaf is not in the image\nof the base-change map): it fails for the empty scheme, over which the stalk of\n$R^qh_*e^{-1}\\mathcal F$ is $0$, so the image of $\\xi$ is $0$ and\nlies in the image; thickenings do not change the étale site; limits work by\nthe limit theorem for higher direct images. For the closed–open\nsplit let $i:Z\\to T'$ be closed with quasi-compact open complement\n$j:V\\to T'$, and let $\\mathcal J$ be an injective sheaf of\n$\\Lambda$-modules on $V$ containing $j^{-1}\\mathcal F'$; the injectivity of\n[sk-prop-injectivity] (2) applied to the embedding\n$\\mathcal F'\\to j_*\\mathcal J\\oplus i_*i^{-1}\\mathcal F'$ puts the\nsurviving element into one of the two summands. The closed summand\nis handled by the exactness of $i_*$. For the open summand one\ncannot use exactness of $j_*$, which fails in general\n($R^1j_*(\\Z/\\ell)\\neq0$ for $j:\\gm\\hookrightarrow\\Aaf^1$); instead\nlet $e':Y'=X\\times_ST'\\to T'$ be the base change of $f$ along\n$T'\\to S$ and $j':V\\times_{T'}Y'\\to Y'$. The hypothesis that\n$\\mathrm{BC}(f,\\Lambda,r)$ holds universally for $r\\le q-1$, applied to $e'$ and the qcqs morphism\n$j$ — this is where the property after a *preliminary* base\nchange, $T'\\to S$, and in *all* degrees $\\le q-1$ is consumed\n— gives $e'^{-1}j_*\\mathcal J\\cong j'_*e_V^{-1}\\mathcal J$ (degree\n$0$) and $R^aj'_*e_V^{-1}\\mathcal J\\cong e'^{-1}R^aj_*\\mathcal J=0$\nfor $1\\le a\\le q-1$ ($\\mathcal J$ is injective). The relative Leray\nspectral sequence for $h'\\circ j'$ then makes\n$R^qh'_*e'^{-1}j_*\\mathcal J\\to R^q(h'\\circ j')_*e_V^{-1}\\mathcal J$\ninjective, and [sk-prop-injectivity] (3) for the square of $f$\nalong $g'\\circ j:V\\to S$ and $j^{-1}\\mathcal F'\\subseteq\\mathcal J$\nshows that the element survives on $V$. Hence [sk-lem-minimal] gives a\nmorphism $\\Spec K\\to T$ with $K$ a field over which the element survives;\ntaking $g$ to be the composite $\\Spec K\\to T\\to S'$ and $\\mathcal F$ the\npullback of the coefficient sheaf to $\\Spec K$, the base-change map of the\nsquare of $f'$ along $g$ is not surjective, hence not an isomorphism.",
+   "uses": [
     "sk-def-bc",
     "sk-lem-minimal"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-lem-failure-field/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "long_proof_few_deps",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1444,
-  "blueprint_uses": [
-    "sk-def-bc"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.FieldFailure",
-    "AlgebraicGeometry.Etale.nonempty_fieldFailure"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.Etale.FieldFailure",
-    "AlgebraicGeometry.Etale.nonempty_fieldFailure"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-bc",
+  "sk-lem-minimal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-lem-failure-field/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1444,
+ "blueprint_uses": [
+  "sk-def-bc"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.FieldFailure",
+  "AlgebraicGeometry.Etale.nonempty_fieldFailure"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.FieldFailure",
+  "AlgebraicGeometry.Etale.nonempty_fieldFailure"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

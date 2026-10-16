@@ -1,109 +1,114 @@
 {
-  "id": "sk-def-sfb-derived-categories",
-  "kind": "definition",
-  "title": "Derived categories and derived functors",
-  "statement": "All derived categories are unbounded. For an abelian category $\\mathcal C$, $D(\\mathcal C)$\nis the localization of the category of cochain complexes in $\\mathcal C$ at the\nquasi-isomorphisms [def-weil-abstract-derived-category]. Its bounded below part\n$D^+(\\mathcal C)\\subseteq D(\\mathcal C)$ is the full subcategory of complexes whose\ncohomology vanishes in all sufficiently negative degrees. Derived functors are total\nderived functors on the unbounded categories, computed on resolutions:\n\n- **Right derived functors.** Let $\\mathcal C$ have K-injective resolutions, i.e. every\n  complex admits a quasi-isomorphism to a K-injective complex. Then every additive\n  functor $F\\colon\\mathcal C\\to\\mathcal D$ to an abelian category has a total right\n  derived functor $RF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$\n  termwise to a K-injective resolution. Every Grothendieck abelian category has\n  K-injective resolutions.\n- **Left derived functors.** Let $\\mathcal C$ be a monoidal abelian category with the\n  following properties: its tensor product is additive in each variable; it has\n  countable coproducts and exact $\\mathbf Z$-indexed colimits, which tensoring with a\n  fixed object on either side preserves; and it has functorial flat resolutions. Let\n  $F\\colon\\mathcal C\\to\\mathcal D$ be additive and send quasi-isomorphisms between\n  K-flat complexes to quasi-isomorphisms. Then $F$ has a total left derived functor\n  $LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$ termwise to a\n  K-flat resolution. Pullback, tensor product and extension of scalars are derived\n  this way.\n- **Exact functors.** If $F$ is exact, then $RF\\cong D(F)$ and $LF\\cong D(F)$, where\n  $D(F)$ applies $F$ termwise.\n- **Derived adjunctions.** Let $f\\colon\\mathcal C\\rightleftarrows\\mathcal D\\colon g$ be\n  an adjunction $f\\dashv g$ of additive functors, with $f$ as in the second item and\n  $\\mathcal D$ with K-injective resolutions. Then $Lf\\dashv Rg$.\n\nThe derived categories of this section are the following.\n\n| Category | Definition |\n|---|---|\n| $D(X_{\\mathrm{proét}},\\mathcal A)$ | $D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$, finite coefficients (layer A). Here $\\mathcal A$ is a closed symmetric monoidal Grothendieck abelian category and $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ carries the tensor product of [sk-def-sfb-sheaf-tensor]. |\n| $D(\\Mod_{\\Lambda_X})$ | $D(\\Mod(\\Sh(X_{\\mathrm{proét}},\\Ab),\\Lambda_X))$, non-finite coefficients (layer B), for the ring object $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] and its module objects [sk-def-sfb-module-objects]. For $\\Lambda=\\underline{\\cO}_E$ resp. $\\underline E$ this is $D(X_{\\mathrm{proét}},\\cO_E)$ resp. $D(X_{\\mathrm{proét}},E)$. |\n| $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ | the bounded complexes with constructible cohomology in $D(\\Mod_{\\mathcal R})$, see [sk-def-sfb-bounded-constructible]. |",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
-    "place": "node sk-def-sfb-derived-categories, order 862"
-  },
-  "stmt_deps": [
-    "def-weil-abstract-derived-category",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-bounded-constructible"
-  ],
-  "proof": [
-    {
-      "text": "*Right derived functors.* $RF$ is [def-sfb-right-derived-functor]. A Grothendieck abelian\ncategory has K-injective resolutions by [lem-sfb-grothendieck-k-injective].",
-      "uses": [
-        "def-sfb-right-derived-functor",
-        "lem-sfb-grothendieck-k-injective"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Left derived functors.* The hypothesis on $F$ is [def-sfb-preserves-kflat-quasi-iso], and\n$LF$ is [def-sfb-left-derived-functor].",
-      "uses": [
-        "def-sfb-preserves-kflat-quasi-iso",
-        "def-sfb-left-derived-functor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Exact functors.* By [def-sfb-right-derived-exact] and [def-sfb-left-derived-exact].",
-      "uses": [
-        "def-sfb-right-derived-exact",
-        "def-sfb-left-derived-exact"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Derived adjunctions.* Let $K\\in D(\\mathcal C)$ and $L\\in D(\\mathcal D)$. Choose a K-flat\nresolution $P\\to K$ and a K-injective resolution $L\\to I$, so that $Lf(K)=f(P)$ and\n$Rg(L)=g(I)$. Since $I$ is K-injective, morphisms into $I$ in the derived category are\nhomotopy classes of maps. The adjunction $f\\dashv g$ extends termwise to complexes and is\ncompatible with homotopies. Hence\n$$\n\\Hom_{D(\\mathcal D)}(Lf(K),L)=\\Hom_{K(\\mathcal D)}(f(P),I)=\\Hom_{K(\\mathcal C)}(P,g(I)).\n$$\nOn the other side, by the calculus of fractions\n$\\Hom_{D(\\mathcal C)}(K,Rg(L))=\\colim_{s}\\Hom_{K(\\mathcal C)}(P',g(I))$. The colimit runs over\nthe quasi-isomorphisms $s\\colon P'\\to P$, and the K-flat $P'$ are cofinal among them,\nsince every complex has a K-flat resolution. For such $s$, the map\n$\\Hom_{K(\\mathcal C)}(P,g(I))\\to\\Hom_{K(\\mathcal C)}(P',g(I))$ is identified by the\nadjunction with $\\Hom_{K(\\mathcal D)}(f(P),I)\\to\\Hom_{K(\\mathcal D)}(f(P'),I)$. That map is\nbijective, because $f(s)$ is a quasi-isomorphism by the hypothesis on $f$ and $I$ is\nK-injective. So the colimit is $\\Hom_{K(\\mathcal C)}(P,g(I))$. The resulting bijection\n$\\Hom(Lf(K),L)\\cong\\Hom(K,Rg(L))$ is natural in $K$ and $L$, so $Lf\\dashv Rg$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*The categories of the table.* $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is a Grothendieck\nabelian category, because the small pro-étale site [def-weil-pbc-proetale-site] is\nessentially small. With the tensor product of [sk-def-sfb-sheaf-tensor] it is closed\nsymmetric monoidal. It has functorial flat resolutions when $\\mathcal A$ does: the\nsheafified free objects on representables, tensored with a flat separator of\n$\\mathcal A$, form a flat separator. Likewise $\\Mod_{\\Lambda_X}$ is a closed symmetric\nmonoidal Grothendieck abelian category with functorial flat resolutions\n[sk-prop-sfb-module-category]. So in both cases right derived functors exist for every\nadditive functor, and left derived functors exist for every additive functor that\npreserves K-flat quasi-isomorphisms.",
-      "uses": [
-        "def-weil-pbc-proetale-site",
-        "sk-def-sfb-sheaf-tensor"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-def-sfb-derived-categories",
+ "blueprint": {
+  "is": "sk-def-sfb-derived-categories",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Derived categories and derived functors",
+ "statement": "All derived categories are unbounded. For an abelian category $\\mathcal C$, $D(\\mathcal C)$\nis the localization of the category of cochain complexes in $\\mathcal C$ at the\nquasi-isomorphisms [def-weil-abstract-derived-category]. Its bounded below part\n$D^+(\\mathcal C)\\subseteq D(\\mathcal C)$ is the full subcategory of complexes whose\ncohomology vanishes in all sufficiently negative degrees. Derived functors are total\nderived functors on the unbounded categories, computed on resolutions:\n\n- **Right derived functors.** Let $\\mathcal C$ have K-injective resolutions, i.e. every\n  complex admits a quasi-isomorphism to a K-injective complex. Then every additive\n  functor $F\\colon\\mathcal C\\to\\mathcal D$ to an abelian category has a total right\n  derived functor $RF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$\n  termwise to a K-injective resolution. Every Grothendieck abelian category has\n  K-injective resolutions.\n- **Left derived functors.** Let $\\mathcal C$ be a monoidal abelian category with the\n  following properties: its tensor product is additive in each variable; it has\n  countable coproducts and exact $\\mathbf Z$-indexed colimits, which tensoring with a\n  fixed object on either side preserves; and it has functorial flat resolutions. Let\n  $F\\colon\\mathcal C\\to\\mathcal D$ be additive and send quasi-isomorphisms between\n  K-flat complexes to quasi-isomorphisms. Then $F$ has a total left derived functor\n  $LF\\colon D(\\mathcal C)\\to D(\\mathcal D)$, computed by applying $F$ termwise to a\n  K-flat resolution. Pullback, tensor product and extension of scalars are derived\n  this way.\n- **Exact functors.** If $F$ is exact, then $RF\\cong D(F)$ and $LF\\cong D(F)$, where\n  $D(F)$ applies $F$ termwise.\n- **Derived adjunctions.** Let $f\\colon\\mathcal C\\rightleftarrows\\mathcal D\\colon g$ be\n  an adjunction $f\\dashv g$ of additive functors, with $f$ as in the second item and\n  $\\mathcal D$ with K-injective resolutions. Then $Lf\\dashv Rg$.\n\nThe derived categories of this section are the following.\n\n| Category | Definition |\n|---|---|\n| $D(X_{\\mathrm{proét}},\\mathcal A)$ | $D(\\Sh(X_{\\mathrm{proét}},\\mathcal A))$, finite coefficients (layer A). Here $\\mathcal A$ is a closed symmetric monoidal Grothendieck abelian category and $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ carries the tensor product of [sk-def-sfb-sheaf-tensor]. |\n| $D(\\Mod_{\\Lambda_X})$ | $D(\\Mod(\\Sh(X_{\\mathrm{proét}},\\Ab),\\Lambda_X))$, non-finite coefficients (layer B), for the ring object $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] and its module objects [sk-def-sfb-module-objects]. For $\\Lambda=\\underline{\\cO}_E$ resp. $\\underline E$ this is $D(X_{\\mathrm{proét}},\\cO_E)$ resp. $D(X_{\\mathrm{proét}},E)$. |\n| $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$ | the bounded complexes with constructible cohomology in $D(\\Mod_{\\mathcal R})$, see [sk-def-sfb-bounded-constructible]. |",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
+  "place": "node sk-def-sfb-derived-categories, order 862"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "*Right derived functors.* $RF$ is [def-sfb-right-derived-functor]. A Grothendieck abelian\ncategory has K-injective resolutions by [lem-sfb-grothendieck-k-injective].",
+   "uses": [
     "def-sfb-right-derived-functor",
-    "lem-sfb-grothendieck-k-injective",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Left derived functors.* The hypothesis on $F$ is [def-sfb-preserves-kflat-quasi-iso], and\n$LF$ is [def-sfb-left-derived-functor].",
+   "uses": [
     "def-sfb-preserves-kflat-quasi-iso",
-    "def-sfb-left-derived-functor",
+    "def-sfb-left-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Exact functors.* By [def-sfb-right-derived-exact] and [def-sfb-left-derived-exact].",
+   "uses": [
     "def-sfb-right-derived-exact",
-    "def-sfb-left-derived-exact",
+    "def-sfb-left-derived-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Derived adjunctions.* Let $K\\in D(\\mathcal C)$ and $L\\in D(\\mathcal D)$. Choose a K-flat\nresolution $P\\to K$ and a K-injective resolution $L\\to I$, so that $Lf(K)=f(P)$ and\n$Rg(L)=g(I)$. Since $I$ is K-injective, morphisms into $I$ in the derived category are\nhomotopy classes of maps. The adjunction $f\\dashv g$ extends termwise to complexes and is\ncompatible with homotopies. Hence\n$$\n\\Hom_{D(\\mathcal D)}(Lf(K),L)=\\Hom_{K(\\mathcal D)}(f(P),I)=\\Hom_{K(\\mathcal C)}(P,g(I)).\n$$\nOn the other side, by the calculus of fractions\n$\\Hom_{D(\\mathcal C)}(K,Rg(L))=\\colim_{s}\\Hom_{K(\\mathcal C)}(P',g(I))$. The colimit runs over\nthe quasi-isomorphisms $s\\colon P'\\to P$, and the K-flat $P'$ are cofinal among them,\nsince every complex has a K-flat resolution. For such $s$, the map\n$\\Hom_{K(\\mathcal C)}(P,g(I))\\to\\Hom_{K(\\mathcal C)}(P',g(I))$ is identified by the\nadjunction with $\\Hom_{K(\\mathcal D)}(f(P),I)\\to\\Hom_{K(\\mathcal D)}(f(P'),I)$. That map is\nbijective, because $f(s)$ is a quasi-isomorphism by the hypothesis on $f$ and $I$ is\nK-injective. So the colimit is $\\Hom_{K(\\mathcal C)}(P,g(I))$. The resulting bijection\n$\\Hom(Lf(K),L)\\cong\\Hom(K,Rg(L))$ is natural in $K$ and $L$, so $Lf\\dashv Rg$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*The categories of the table.* $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is a Grothendieck\nabelian category, because the small pro-étale site [def-weil-pbc-proetale-site] is\nessentially small. With the tensor product of [sk-def-sfb-sheaf-tensor] it is closed\nsymmetric monoidal. It has functorial flat resolutions when $\\mathcal A$ does: the\nsheafified free objects on representables, tensored with a flat separator of\n$\\mathcal A$, form a flat separator. Likewise $\\Mod_{\\Lambda_X}$ is a closed symmetric\nmonoidal Grothendieck abelian category with functorial flat resolutions\n[sk-prop-sfb-module-category]. So in both cases right derived functors exist for every\nadditive functor, and left derived functors exist for every additive functor that\npreserves K-flat quasi-isomorphisms.",
+   "uses": [
     "def-weil-pbc-proetale-site",
     "sk-def-sfb-sheaf-tensor"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_not_found",
-    "in_cycle"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 862,
-  "blueprint_uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-proetale-site"
-  ],
-  "blueprint_lean": [
-    "DerivedCategory",
-    "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-    "CategoryTheory.Functor.rightDerivedFunctor",
-    "CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory",
-    "CategoryTheory.Functor.PreservesKFlatQuasiIso",
-    "CategoryTheory.Functor.leftDerivedFunctor",
-    "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory"
-  ],
-  "blueprint_lean_not_found": [
-    "DerivedCategory",
-    "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-    "CategoryTheory.Functor.rightDerivedFunctor",
-    "CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory",
-    "CategoryTheory.Functor.PreservesKFlatQuasiIso",
-    "CategoryTheory.Functor.leftDerivedFunctor",
-    "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-left-derived-functor",
+  "def-sfb-right-derived-exact",
+  "def-sfb-left-derived-exact",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found",
+  "in_cycle"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 862,
+ "blueprint_uses": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site"
+ ],
+ "blueprint_lean": [
+  "DerivedCategory",
+  "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+  "CategoryTheory.Functor.rightDerivedFunctor",
+  "CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory",
+  "CategoryTheory.Functor.PreservesKFlatQuasiIso",
+  "CategoryTheory.Functor.leftDerivedFunctor",
+  "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory"
+ ],
+ "blueprint_lean_not_found": [
+  "DerivedCategory",
+  "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+  "CategoryTheory.Functor.rightDerivedFunctor",
+  "CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory",
+  "CategoryTheory.Functor.PreservesKFlatQuasiIso",
+  "CategoryTheory.Functor.leftDerivedFunctor",
+  "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

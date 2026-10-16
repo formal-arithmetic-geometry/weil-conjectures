@@ -1,5 +1,14 @@
 {
  "id": "lem-pc-perfect-hom-open-restricted-data-pinned",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "lemma",
  "title": "Pinned equations for restricted representing data",
  "statement": "theorem perfect_hom_open_restricted_data_pinned {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (e : PerfectHomOpenRestrictedEquivFields R c s B Q F d) (hs : ∀ j : Set.Ici i, e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj (F.obj j)) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j (F.obj j) (𝟙 _))) (hl : e.limitEquiv ((schemeMVDerivedRestriction Y B).obj d.pt) (𝟙 _) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv d.pt (𝟙 _))) : (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j), e.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧ (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt), e.limitEquiv ((schemeMVDerivedRestriction Y B).obj M) ((schemeMVDerivedRestriction Y B).map f) = perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f))",
@@ -69,10 +78,6 @@
   "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData",
   "date": "2026-10-14",
   "group": "U2"
- },
- "blueprint": {
-  "is": null,
-  "from": "lem-pc-perfect-hom-open-restricted-data"
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",

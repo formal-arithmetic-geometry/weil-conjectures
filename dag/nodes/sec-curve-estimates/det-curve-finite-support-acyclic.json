@@ -1,72 +1,77 @@
 {
-  "id": "det-curve-finite-support-acyclic",
-  "kind": "statement",
-  "title": "Sheaves supported on finitely many closed points",
-  "statement": "Let $k$ be algebraically closed, $C$ a separated scheme of finite type over\n$k$ of dimension at most one, $Z\\subseteq C$ a finite set of closed points\nwith its reduced structure, $i:Z\\hookrightarrow C$, and $F$ an abelian sheaf\non $C_{\\mathrm{ét}}$ with $F_{\\bar x}=0$ for every geometric point $\\bar x$\nnot lying over $Z$. Then:\n\n1. the unit $F\\to i_*i^{-1}F$ is an isomorphism;\n2. $H^q(C,F)=0$ for $q>0$ and\n   $H^0(C,F)\\xrightarrow{\\sim}\\bigoplus_{z\\in Z}F_{\\bar z}$;\n3. for an extension $k\\subseteq k'$ of algebraically closed fields, the\n   pullback $F_{k'}$ is supported on $Z_{k'}$, which is the set of points\n   $z\\otimes k'$, its stalks there are $F_{\\bar z}$, and the pullback map\n   $H^q(C,F)\\to H^q(C_{k'},F_{k'})$ is an isomorphism for all $q$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-finite-support/det-curve-finite-support-acyclic.md",
-    "place": "node det-curve-finite-support-acyclic, order None"
-  },
-  "stmt_deps": [
-    "def-sc-field-extension"
-  ],
-  "proof": [
-    {
-      "text": "*Part 1.* The closed immersion $i$ is finite, so by the finite stalk formula\n([lemma-weil-pbc-finite-stalk-formula]) the stalk of $i_*i^{-1}F$ at a\ngeometric point $\\bar x$ is $F_{\\bar x}$ if $\\bar x$ lies over $Z$ and $0$\notherwise, and the unit induces the identity on the stalks over $Z$. By the\nsupport hypothesis the unit is an isomorphism on all geometric stalks, hence\nan isomorphism ([lemma-weil-pbc-geometric-stalk-conservative]).",
-      "uses": [
-        "lemma-weil-pbc-finite-stalk-formula",
-        "lemma-weil-pbc-geometric-stalk-conservative"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Part 2.* The direct image $i_*$ is exact\n([lemma-weil-pbc-finite-direct-image-exact]) and has the exact left adjoint\n$i^{-1}$, so it preserves injectives and\n$H^q(C,i_*G)=H^q(Z,G)$ for every sheaf $G$ on $Z$. The scheme $Z$ is\nseparated, of finite type and of dimension zero, so\n$H^q(Z,i^{-1}F)=0$ for $q>0$ and $H^0(Z,i^{-1}F)=\\prod_{z\\in Z}F_{\\bar z}$,\na finite product, i.e. a direct sum\n([lem-weil-pbc-zero-dimensional-cohomology]). Combine with Part 1.",
-      "uses": [
-        "lemma-weil-pbc-finite-direct-image-exact",
-        "lem-weil-pbc-zero-dimensional-cohomology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Part 3.* Let $\\pi:C_{k'}\\to C$. Each $z\\in Z$ is a $k$-point, so\n$Z_{k'}=Z\\times_kk'$ is the finite set of $k'$-points $z\\otimes k'$, and the\ngeometric point of $C_{k'}$ at $z\\otimes k'$ maps to a geometric point over\n$z$; since pullback preserves stalks,\n$(F_{k'})_{\\overline{z\\otimes k'}}=F_{\\bar z}$, and the stalks of $F_{k'}$\noutside $Z_{k'}$ vanish because their images in $C$ lie outside $Z$. The\nfinite base change isomorphism ([lemma-weil-pbc-finite-exchange]) identifies\n$\\pi^{-1}i_*i^{-1}F$ with $i'_*i'^{-1}F_{k'}$ for\n$i':Z_{k'}\\hookrightarrow C_{k'}$. By Part 2 applied over $k$ and over $k'$,\nboth cohomologies vanish in positive degrees, and in degree zero the pullback\nmap is the identity of $\\bigoplus_{z\\in Z}F_{\\bar z}$, since it is\ncompatible with the restriction maps to the stalks.",
-      "uses": [
-        "lemma-weil-pbc-finite-exchange"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "det-curve-finite-support-acyclic",
+ "blueprint": {
+  "is": "det-curve-finite-support-acyclic",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Sheaves supported on finitely many closed points",
+ "statement": "Let $k$ be algebraically closed, $C$ a separated scheme of finite type over\n$k$ of dimension at most one, $Z\\subseteq C$ a finite set of closed points\nwith its reduced structure, $i:Z\\hookrightarrow C$, and $F$ an abelian sheaf\non $C_{\\mathrm{ét}}$ with $F_{\\bar x}=0$ for every geometric point $\\bar x$\nnot lying over $Z$. Then:\n\n1. the unit $F\\to i_*i^{-1}F$ is an isomorphism;\n2. $H^q(C,F)=0$ for $q>0$ and\n   $H^0(C,F)\\xrightarrow{\\sim}\\bigoplus_{z\\in Z}F_{\\bar z}$;\n3. for an extension $k\\subseteq k'$ of algebraically closed fields, the\n   pullback $F_{k'}$ is supported on $Z_{k'}$, which is the set of points\n   $z\\otimes k'$, its stalks there are $F_{\\bar z}$, and the pullback map\n   $H^q(C,F)\\to H^q(C_{k'},F_{k'})$ is an isomorphism for all $q$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-finite-support/det-curve-finite-support-acyclic.md",
+  "place": "node det-curve-finite-support-acyclic, order None"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "*Part 1.* The closed immersion $i$ is finite, so by the finite stalk formula\n([lemma-weil-pbc-finite-stalk-formula]) the stalk of $i_*i^{-1}F$ at a\ngeometric point $\\bar x$ is $F_{\\bar x}$ if $\\bar x$ lies over $Z$ and $0$\notherwise, and the unit induces the identity on the stalks over $Z$. By the\nsupport hypothesis the unit is an isomorphism on all geometric stalks, hence\nan isomorphism ([lemma-weil-pbc-geometric-stalk-conservative]).",
+   "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Part 2.* The direct image $i_*$ is exact\n([lemma-weil-pbc-finite-direct-image-exact]) and has the exact left adjoint\n$i^{-1}$, so it preserves injectives and\n$H^q(C,i_*G)=H^q(Z,G)$ for every sheaf $G$ on $Z$. The scheme $Z$ is\nseparated, of finite type and of dimension zero, so\n$H^q(Z,i^{-1}F)=0$ for $q>0$ and $H^0(Z,i^{-1}F)=\\prod_{z\\in Z}F_{\\bar z}$,\na finite product, i.e. a direct sum\n([lem-weil-pbc-zero-dimensional-cohomology]). Combine with Part 1.",
+   "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-zero-dimensional-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Part 3.* Let $\\pi:C_{k'}\\to C$. Each $z\\in Z$ is a $k$-point, so\n$Z_{k'}=Z\\times_kk'$ is the finite set of $k'$-points $z\\otimes k'$, and the\ngeometric point of $C_{k'}$ at $z\\otimes k'$ maps to a geometric point over\n$z$; since pullback preserves stalks,\n$(F_{k'})_{\\overline{z\\otimes k'}}=F_{\\bar z}$, and the stalks of $F_{k'}$\noutside $Z_{k'}$ vanish because their images in $C$ lie outside $Z$. The\nfinite base change isomorphism ([lemma-weil-pbc-finite-exchange]) identifies\n$\\pi^{-1}i_*i^{-1}F$ with $i'_*i'^{-1}F_{k'}$ for\n$i':Z_{k'}\\hookrightarrow C_{k'}$. By Part 2 applied over $k$ and over $k'$,\nboth cohomologies vanish in positive degrees, and in degree zero the pullback\nmap is the identity of $\\bigoplus_{z\\in Z}F_{\\bar z}$, since it is\ncompatible with the restriction maps to the stalks.",
+   "uses": [
     "lemma-weil-pbc-finite-exchange"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-finite-support/det-curve-finite-support-acyclic.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-finite-exchange",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-sc-field-extension"
-  ],
-  "uses_not_cited": [
-    "def-sc-field-extension"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-finite-support/det-curve-finite-support-acyclic.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-sc-field-extension"
+ ],
+ "uses_not_cited": [
+  "def-sc-field-extension"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

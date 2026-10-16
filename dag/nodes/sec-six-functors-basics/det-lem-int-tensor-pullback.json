@@ -1,80 +1,85 @@
 {
-  "id": "det-lem-int-tensor-pullback",
-  "kind": "statement",
-  "title": "Integral inverse image preserves $\\Dbc$ and agrees with the completed inverse image",
-  "statement": "Let $g\\colon X\\to Y$ be a morphism of standing schemes and\n$g^*\\colon\\D(Y_{\\mathrm{proét}},\\mathcal O_E)\\to\\D(X_{\\mathrm{proét}},\\mathcal O_E)$ the inverse image.\n\n1. $g^*$ maps $\\Dbc(Y,\\mathcal O_E)$ into $\\Dbc(X,\\mathcal O_E)$.\n2. For $K\\in\\Dbc(Y,\\mathcal O_E)$ the natural map\n   $$\n   c_K\\colon g^*K\\longrightarrow R\\varprojlim_ng^{-1}\\bigl(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\\bigr)\n   $$\n   is an isomorphism. After restriction of scalars to the constant sheaf\n   $\\underline{\\mathcal O_E}$ the target is the completed inverse image of\n   the Stacks Project (Stacks, Tags 099I, 09C4), so on\n   $\\Dbc(-,\\mathcal O_E)$ the inverse image $g^*$ agrees with the completed inverse\n   image.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
-    "place": "node det-lem-int-tensor-pullback, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 099I"
-      }
-    ]
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "By [sk-prop-sfb-cartesian-coefficients], $g^{-1}\\mathcal O_{E,Y}=\\mathcal O_{E,X}$ and\n$g^{-1}(\\mathcal O_E/\\pi_E^n)_Y=(\\mathcal O_E/\\pi_E^n)_X$, so $g^*=g^{-1}$ is exact on\nmodule sheaves, needs no deriving, and commutes with reduction:\n$g^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)=g^*K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ (both are the\ncone of $\\pi_E^n$ on $g^*K$). The maps $g^*K\\to g^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ are\ncompatible in $n$ and define $c_K$; its target is\n$R\\varprojlim_n(g^*K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$, so $c_K$ is the completion map\nof $g^*K$, and **$c_K$ is an isomorphism if and only if $g^*K$ is derived\ncomplete** ([sk-def-pe-derived-completion]). Both $g^*$ and\n$K\\mapsto R\\varprojlim_ng^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ are exact functors and\n$c$ is a natural transformation between them.",
-      "uses": [
-        "sk-prop-sfb-cartesian-coefficients",
-        "sk-def-pe-derived-completion"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Local models.* Let $a\\colon S\\hookrightarrow Y$ be a stratum inclusion and $M$ as in\n[det-lem-int-tensor-shriek] (2): there is a pro-étale cover $\\{W_k\\to S\\}$ with\n$M|_{W_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$, $P_k$ a bounded complex of finite\nfree $\\mathcal O_E$-modules. Let $S'=S\\times_YX$, with $a'\\colon S'\\hookrightarrow X$ and\n$g_S\\colon S'\\to S$. The open–closed operations commute with base change\n([sk-prop-sf-open-closed-triangle]), so $g^*a_!M\\simeq a'_!g_S^*M$. The base\nchanges $W'_k=W_k\\times_SS'$ form a pro-étale cover of $S'$, and\n$(g_S^*M)|_{W'_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W'_k}$, the same complex of finite\nfree modules over the coefficient ring of the new scheme. This is a bounded\ncomplex of finite free $\\mathcal O_{E,W'_k}$-modules; it is derived complete since\n$\\mathcal O_{E,W'_k}$ is, and its reduction $P_k/\\pi_E\\otimes(\\mathcal O_E/\\pi_E)_{W'_k}$ is a\nbounded complex of finite free modules, hence constructible. Derived\ncompleteness is pro-étale local (restriction to $W'_k$ is exact, preserves\nproducts and hence $R\\varprojlim$, and the restrictions to a cover are jointly\nconservative), and a finite constant local model on a cover of the single\nstratum $S'$ is what constructibility requires. So $g_S^*M\\in\\Dbc(S',\\mathcal O_E)$ by\n[sk-prop-integral-criterion], and $g^*a_!M=a'_!g_S^*M\\in\\Dbc(X,\\mathcal O_E)$ by\n[det-lem-int-tensor-shriek] (1). In particular $c_{a_!M}$ is an isomorphism.",
-      "uses": [
-        "det-lem-int-tensor-shriek"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Dévissage.* By [det-lem-int-tensor-shriek] (2), every $K\\in\\Dbc(Y,\\mathcal O_E)$ is\nobtained from objects $a_!M$ as above by finitely many extensions. The\nsubcategory of $K$ with $g^*K\\in\\Dbc(X,\\mathcal O_E)$ is closed under extensions,\nbecause $g^*$ is exact and $\\Dbc(X,\\mathcal O_E)$ is triangulated\n([sk-lem-int-integral-heart]); so (1) holds. Similarly the subcategory where\n$c_K$ is an isomorphism is closed under extensions by the five lemma, which\nproves the first half of (2).",
-      "uses": [
-        "det-lem-int-tensor-shriek",
-        "sk-lem-int-integral-heart"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Comparison with the Stacks Project.* By [sk-lem-integral-models] (1),(2),\nrestriction of scalars along $\\underline{\\mathcal O_E}\\to\\mathcal O_{E,X}$ identifies\n$\\Dbc(X,\\mathcal O_E)$ with the category $\\Dc(X,\\mathcal O_E)$ of the Stacks Project\n(Stacks, Tags 099I, 099L), and it commutes with $g^{-1}$, with reduction\nmodulo $\\pi_E^n$ (both are cones of $\\pi_E^n$) and with $R\\varprojlim$ (restriction\nof scalars is exact and preserves products). The completed inverse image of\nthe Stacks Project is $R\\varprojlim_ng^{-1}(K\\otimes^{\\mathbf L}\\underline{\\mathcal O_E}/\\pi_E^n)$, i.e.\nthe restriction of scalars of the target of $c_K$. Hence $c_K$ identifies\n$g^*K$ with the completed inverse image.",
-      "uses": [
-        "sk-lem-integral-models"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "det-lem-int-tensor-pullback",
+ "blueprint": {
+  "is": "det-lem-int-tensor-pullback",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Integral inverse image preserves $\\Dbc$ and agrees with the completed inverse image",
+ "statement": "Let $g\\colon X\\to Y$ be a morphism of standing schemes and\n$g^*\\colon\\D(Y_{\\mathrm{proét}},\\mathcal O_E)\\to\\D(X_{\\mathrm{proét}},\\mathcal O_E)$ the inverse image.\n\n1. $g^*$ maps $\\Dbc(Y,\\mathcal O_E)$ into $\\Dbc(X,\\mathcal O_E)$.\n2. For $K\\in\\Dbc(Y,\\mathcal O_E)$ the natural map\n   $$\n   c_K\\colon g^*K\\longrightarrow R\\varprojlim_ng^{-1}\\bigl(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n\\bigr)\n   $$\n   is an isomorphism. After restriction of scalars to the constant sheaf\n   $\\underline{\\mathcal O_E}$ the target is the completed inverse image of\n   the Stacks Project (Stacks, Tags 099I, 09C4), so on\n   $\\Dbc(-,\\mathcal O_E)$ the inverse image $g^*$ agrees with the completed inverse\n   image.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
+  "place": "node det-lem-int-tensor-pullback, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 099I"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "By [sk-prop-sfb-cartesian-coefficients], $g^{-1}\\mathcal O_{E,Y}=\\mathcal O_{E,X}$ and\n$g^{-1}(\\mathcal O_E/\\pi_E^n)_Y=(\\mathcal O_E/\\pi_E^n)_X$, so $g^*=g^{-1}$ is exact on\nmodule sheaves, needs no deriving, and commutes with reduction:\n$g^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)=g^*K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ (both are the\ncone of $\\pi_E^n$ on $g^*K$). The maps $g^*K\\to g^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ are\ncompatible in $n$ and define $c_K$; its target is\n$R\\varprojlim_n(g^*K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$, so $c_K$ is the completion map\nof $g^*K$, and **$c_K$ is an isomorphism if and only if $g^*K$ is derived\ncomplete** ([sk-def-pe-derived-completion]). Both $g^*$ and\n$K\\mapsto R\\varprojlim_ng^*(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ are exact functors and\n$c$ is a natural transformation between them.",
+   "uses": [
     "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-pe-derived-completion",
-    "det-lem-int-tensor-shriek",
-    "sk-lem-int-integral-heart",
-    "sk-lem-integral-models"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-lem-int-tensor-shriek",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-lem-integral-models",
     "sk-def-pe-derived-completion"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Local models.* Let $a\\colon S\\hookrightarrow Y$ be a stratum inclusion and $M$ as in\n[det-lem-int-tensor-shriek] (2): there is a pro-étale cover $\\{W_k\\to S\\}$ with\n$M|_{W_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$, $P_k$ a bounded complex of finite\nfree $\\mathcal O_E$-modules. Let $S'=S\\times_YX$, with $a'\\colon S'\\hookrightarrow X$ and\n$g_S\\colon S'\\to S$. The open–closed operations commute with base change\n([sk-prop-sf-open-closed-triangle]), so $g^*a_!M\\simeq a'_!g_S^*M$. The base\nchanges $W'_k=W_k\\times_SS'$ form a pro-étale cover of $S'$, and\n$(g_S^*M)|_{W'_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W'_k}$, the same complex of finite\nfree modules over the coefficient ring of the new scheme. This is a bounded\ncomplex of finite free $\\mathcal O_{E,W'_k}$-modules; it is derived complete since\n$\\mathcal O_{E,W'_k}$ is, and its reduction $P_k/\\pi_E\\otimes(\\mathcal O_E/\\pi_E)_{W'_k}$ is a\nbounded complex of finite free modules, hence constructible. Derived\ncompleteness is pro-étale local (restriction to $W'_k$ is exact, preserves\nproducts and hence $R\\varprojlim$, and the restrictions to a cover are jointly\nconservative), and a finite constant local model on a cover of the single\nstratum $S'$ is what constructibility requires. So $g_S^*M\\in\\Dbc(S',\\mathcal O_E)$ by\n[sk-prop-integral-criterion], and $g^*a_!M=a'_!g_S^*M\\in\\Dbc(X,\\mathcal O_E)$ by\n[det-lem-int-tensor-shriek] (1). In particular $c_{a_!M}$ is an isomorphism.",
+   "uses": [
+    "det-lem-int-tensor-shriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Dévissage.* By [det-lem-int-tensor-shriek] (2), every $K\\in\\Dbc(Y,\\mathcal O_E)$ is\nobtained from objects $a_!M$ as above by finitely many extensions. The\nsubcategory of $K$ with $g^*K\\in\\Dbc(X,\\mathcal O_E)$ is closed under extensions,\nbecause $g^*$ is exact and $\\Dbc(X,\\mathcal O_E)$ is triangulated\n([sk-lem-int-integral-heart]); so (1) holds. Similarly the subcategory where\n$c_K$ is an isomorphism is closed under extensions by the five lemma, which\nproves the first half of (2).",
+   "uses": [
+    "det-lem-int-tensor-shriek",
+    "sk-lem-int-integral-heart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Comparison with the Stacks Project.* By [sk-lem-integral-models] (1),(2),\nrestriction of scalars along $\\underline{\\mathcal O_E}\\to\\mathcal O_{E,X}$ identifies\n$\\Dbc(X,\\mathcal O_E)$ with the category $\\Dc(X,\\mathcal O_E)$ of the Stacks Project\n(Stacks, Tags 099I, 099L), and it commutes with $g^{-1}$, with reduction\nmodulo $\\pi_E^n$ (both are cones of $\\pi_E^n$) and with $R\\varprojlim$ (restriction\nof scalars is exact and preserves products). The completed inverse image of\nthe Stacks Project is $R\\varprojlim_ng^{-1}(K\\otimes^{\\mathbf L}\\underline{\\mathcal O_E}/\\pi_E^n)$, i.e.\nthe restriction of scalars of the target of $c_K$. Hence $c_K$ identifies\n$g^*K$ with the completed inverse image.",
+   "uses": [
+    "sk-lem-integral-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-pe-derived-completion",
+  "det-lem-int-tensor-shriek",
+  "sk-lem-int-integral-heart",
+  "sk-lem-integral-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-lem-int-tensor-shriek",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-lem-integral-models",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }

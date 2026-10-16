@@ -1,54 +1,59 @@
 {
-  "id": "det-curve-affine-artin-schreier-les",
-  "kind": "statement",
-  "title": "Artin–Schreier cohomology of an affine scheme",
-  "statement": "Let $U=\\operatorname{Spec}A$ be an affine scheme over a field of\ncharacteristic $p>0$ (for instance an affine curve over an algebraically\nclosed field of characteristic $p$), and let $\\wp=F-1:A\\to A$,\n$\\wp(a)=a^p-a$. Then the Artin–Schreier sequence induces\n\n$$\nH^0(U_{\\mathrm{ét}},\\mathbf F_p)=\\ker(\\wp:A\\to A),\\qquad\nH^1(U_{\\mathrm{ét}},\\mathbf F_p)\\xrightarrow{\\sim}A/\\wp(A),\\qquad\nH^q(U_{\\mathrm{ét}},\\mathbf F_p)=0\\quad(q\\geq2).\n$$\n\nThe isomorphism in degree one sends the class of $a\\in A$ to the class of\nthe $\\mathbf F_p$-torsor of étale local solutions of $y^p-y=a$, and it is\nnatural for morphisms of affine schemes over $\\mathbf F_p$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-affine-artin-schreier/det-curve-affine-artin-schreier-les.md",
-    "place": "node det-curve-affine-artin-schreier-les, order None"
+ "id": "det-curve-affine-artin-schreier-les",
+ "blueprint": {
+  "is": "det-curve-affine-artin-schreier-les",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Artin–Schreier cohomology of an affine scheme",
+ "statement": "Let $U=\\operatorname{Spec}A$ be an affine scheme over a field of\ncharacteristic $p>0$ (for instance an affine curve over an algebraically\nclosed field of characteristic $p$), and let $\\wp=F-1:A\\to A$,\n$\\wp(a)=a^p-a$. Then the Artin–Schreier sequence induces\n\n$$\nH^0(U_{\\mathrm{ét}},\\mathbf F_p)=\\ker(\\wp:A\\to A),\\qquad\nH^1(U_{\\mathrm{ét}},\\mathbf F_p)\\xrightarrow{\\sim}A/\\wp(A),\\qquad\nH^q(U_{\\mathrm{ét}},\\mathbf F_p)=0\\quad(q\\geq2).\n$$\n\nThe isomorphism in degree one sends the class of $a\\in A$ to the class of\nthe $\\mathbf F_p$-torsor of étale local solutions of $y^p-y=a$, and it is\nnatural for morphisms of affine schemes over $\\mathbf F_p$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-affine-artin-schreier/det-curve-affine-artin-schreier-les.md",
+  "place": "node det-curve-affine-artin-schreier-les, order None"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The sequence\n\n$$\n0\\longrightarrow\\mathbf F_p\\longrightarrow\\mathbf G_a\n\\xrightarrow{\\ \\wp\\ }\\mathbf G_a\\longrightarrow0\n$$\n\nis exact on $U_{\\mathrm{ét}}$. The kernel of $\\wp$ is $\\mathbf F_p$ because\n$y^p-y=\\prod_{c\\in\\mathbf F_p}(y-c)$: for $y\\in\\cO(V)$ with $y^p=y$ the\nelements $y-c$ are pairwise comaximal (their differences are units of\n$\\mathbf F_p$), so by the Chinese remainder theorem $V$ is the disjoint union\nof the closed and open pieces $\\{y=c\\}$, i.e. $y$ is a locally constant\n$\\mathbf F_p$-valued function. Surjectivity holds étale\nlocally: for $f\\in\\cO(V)$ the $\\cO(V)$-algebra $\\cO(V)[y]/(y^p-y-f)$ is free\nof rank $p$ and étale because the derivative of $y^p-y-f$ is $-1$, and $y$ is\na $\\wp$-preimage of $f$ on it (this is [lem-sc-as-sequence] when $U$ is a\ncurve; the argument is the same for any scheme over $\\mathbf F_p$).",
+   "uses": [
+    "lem-sc-as-sequence"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The sequence\n\n$$\n0\\longrightarrow\\mathbf F_p\\longrightarrow\\mathbf G_a\n\\xrightarrow{\\ \\wp\\ }\\mathbf G_a\\longrightarrow0\n$$\n\nis exact on $U_{\\mathrm{ét}}$. The kernel of $\\wp$ is $\\mathbf F_p$ because\n$y^p-y=\\prod_{c\\in\\mathbf F_p}(y-c)$: for $y\\in\\cO(V)$ with $y^p=y$ the\nelements $y-c$ are pairwise comaximal (their differences are units of\n$\\mathbf F_p$), so by the Chinese remainder theorem $V$ is the disjoint union\nof the closed and open pieces $\\{y=c\\}$, i.e. $y$ is a locally constant\n$\\mathbf F_p$-valued function. Surjectivity holds étale\nlocally: for $f\\in\\cO(V)$ the $\\cO(V)$-algebra $\\cO(V)[y]/(y^p-y-f)$ is free\nof rank $p$ and étale because the derivative of $y^p-y-f$ is $-1$, and $y$ is\na $\\wp$-preimage of $f$ on it (this is [lem-sc-as-sequence] when $U$ is a\ncurve; the argument is the same for any scheme over $\\mathbf F_p$).",
-      "uses": [
-        "lem-sc-as-sequence"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Here $\\mathbf G_a$ is the étale sheaf $\\cO_{\\mathrm{ét}}$ associated with the\nquasi-coherent module $\\cO_U$ ([def-sc-etale-qcoherent-module]). Since $U$ is\naffine, $H^q(U_{\\mathrm{ét}},\\mathbf G_a)=0$ for $q>0$\n([lem-sc-etale-affine-qcoherent]), and $H^0(U_{\\mathrm{ét}},\\mathbf G_a)=A$.\nThe long exact cohomology sequence therefore reads\n\n$$\n0\\to H^0(U,\\mathbf F_p)\\to A\\xrightarrow{\\wp}A\\xrightarrow{\\delta}\nH^1(U,\\mathbf F_p)\\to H^1(U,\\mathbf G_a)=0,\n$$\n\nand $0=H^{q-1}(U,\\mathbf G_a)\\to H^q(U,\\mathbf F_p)\\to H^q(U,\\mathbf G_a)=0$\nfor $q\\geq2$. Hence $\\delta$ induces $A/\\wp(A)\\xrightarrow{\\sim}H^1(U,\\mathbf F_p)$\nand the higher groups vanish. By the construction of the boundary map,\n$\\delta(a)$ is the class of the torsor of local $\\wp$-preimages of $a$, i.e.\nof local solutions of $y^p-y=a$. A morphism of affine $\\mathbf F_p$-schemes\npulls back the Artin–Schreier sequence to the Artin–Schreier sequence, so the\nlong exact sequences and hence the identifications are natural.",
-      "uses": [
-        "def-sc-etale-qcoherent-module",
-        "lem-sc-etale-affine-qcoherent"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-as-sequence",
+  {
+   "text": "Here $\\mathbf G_a$ is the étale sheaf $\\cO_{\\mathrm{ét}}$ associated with the\nquasi-coherent module $\\cO_U$ ([def-sc-etale-qcoherent-module]). Since $U$ is\naffine, $H^q(U_{\\mathrm{ét}},\\mathbf G_a)=0$ for $q>0$\n([lem-sc-etale-affine-qcoherent]), and $H^0(U_{\\mathrm{ét}},\\mathbf G_a)=A$.\nThe long exact cohomology sequence therefore reads\n\n$$\n0\\to H^0(U,\\mathbf F_p)\\to A\\xrightarrow{\\wp}A\\xrightarrow{\\delta}\nH^1(U,\\mathbf F_p)\\to H^1(U,\\mathbf G_a)=0,\n$$\n\nand $0=H^{q-1}(U,\\mathbf G_a)\\to H^q(U,\\mathbf F_p)\\to H^q(U,\\mathbf G_a)=0$\nfor $q\\geq2$. Hence $\\delta$ induces $A/\\wp(A)\\xrightarrow{\\sim}H^1(U,\\mathbf F_p)$\nand the higher groups vanish. By the construction of the boundary map,\n$\\delta(a)$ is the class of the torsor of local $\\wp$-preimages of $a$, i.e.\nof local solutions of $y^p-y=a$. A morphism of affine $\\mathbf F_p$-schemes\npulls back the Artin–Schreier sequence to the Artin–Schreier sequence, so the\nlong exact sequences and hence the identifications are natural.",
+   "uses": [
     "def-sc-etale-qcoherent-module",
     "lem-sc-etale-affine-qcoherent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-affine-artin-schreier/det-curve-affine-artin-schreier-les.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "lem-sc-as-sequence",
-    "lem-sc-etale-affine-qcoherent",
-    "def-sc-etale-qcoherent-module"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-as-sequence",
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-affine-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-curve-estimates/sk-lem-curve-affine-artin-schreier/det-curve-affine-artin-schreier-les.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "lem-sc-as-sequence",
+  "lem-sc-etale-affine-qcoherent",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015"
 }

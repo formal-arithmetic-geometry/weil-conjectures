@@ -1,5 +1,14 @@
 {
  "id": "new-single-complex-open-union-ses-objects",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Construction component for union SES objects",
  "statement": "theorem singleComplexOpenComparison_union_ses_objects\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) :\n    let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦\n      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)\n    ∃ (P P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n      (m : P ⟶ P')\n      (e₁ : DerivedCategory.Q.obj P.X₁ ≅ (a (U ⊔ V)).left)\n      (e₂ : DerivedCategory.Q.obj P.X₂ ≅ (a U).left ⊞ (a V).left)\n      (e₃ : DerivedCategory.Q.obj P.X₃ ≅ (a (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ (a (U ⊔ V)).right)\n      (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (a U).right ⊞ (a V).right)\n      (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (a (U ⊓ V)).right),\n      P.ShortExact ∧ P'.ShortExact",
@@ -76,16 +85,6 @@
   "branch": "sheaf-dag",
   "by": "S4",
   "date": "2026-10-14"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-single-complex-open-union-ses-presentation",
-   "place": "Decomposition of the chain-level union SES presentation before the target theorem.",
-   "via": [
-    "lem-pc-single-complex-open-union-ses-presentation"
-   ]
-  }
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -1,73 +1,78 @@
 {
-  "id": "det-pe-hypercover-existence",
-  "kind": "statement",
-  "title": "Hypercovers by single w-contractible affines",
-  "statement": "Let $U$ be a quasi-compact, quasi-separated object of $X_{\\mathrm{proét}}$.\n\n1. A finite product $D=D_1\\times\\dots\\times D_k$ of w-contractible rings is w-contractible.\n2. Every quasi-compact object $V$ of $X_{\\mathrm{proét}}$ admits a single covering map\n   $\\operatorname{Spec}D\\to V$ with $D$ w-contractible.\n3. There is a hypercovering $W_\\bullet\\to U$ in $X_{\\mathrm{proét}}$ (a simplicial object\n   over $U$ such that $W_0\\to U$ and every map $W_{r+1}\\to(\\operatorname{cosk}_r\n   \\operatorname{sk}_rW_\\bullet)_{r+1}$ to the matching object is a covering) with every\n   $W_r=\\operatorname{Spec}D_r$, $D_r$ w-contractible; in particular every $W_r$ is\n   affine and weakly contractible.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
-    "place": "node det-pe-hypercover-existence, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09A1"
-      }
-    ]
+ "id": "det-pe-hypercover-existence",
+ "blueprint": {
+  "is": "det-pe-hypercover-existence",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Hypercovers by single w-contractible affines",
+ "statement": "Let $U$ be a quasi-compact, quasi-separated object of $X_{\\mathrm{proét}}$.\n\n1. A finite product $D=D_1\\times\\dots\\times D_k$ of w-contractible rings is w-contractible.\n2. Every quasi-compact object $V$ of $X_{\\mathrm{proét}}$ admits a single covering map\n   $\\operatorname{Spec}D\\to V$ with $D$ w-contractible.\n3. There is a hypercovering $W_\\bullet\\to U$ in $X_{\\mathrm{proét}}$ (a simplicial object\n   over $U$ such that $W_0\\to U$ and every map $W_{r+1}\\to(\\operatorname{cosk}_r\n   \\operatorname{sk}_rW_\\bullet)_{r+1}$ to the matching object is a covering) with every\n   $W_r=\\operatorname{Spec}D_r$, $D_r$ w-contractible; in particular every $W_r$ is\n   affine and weakly contractible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
+  "place": "node det-pe-hypercover-existence, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09A1"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "det-pe-wlocal-strict-contractible"
+ ],
+ "proof": [
+  {
+   "text": "*1.* $\\operatorname{Spec}D=\\bigsqcup_j\\operatorname{Spec}D_j$ is a finite disjoint union of\nclopen pieces. Its closed points are the union of those of the pieces, hence closed; every\npoint specializes only inside its piece, hence to exactly one closed point; and the local\nrings at closed points are those of the $D_j$, strictly henselian. Its space of components\nis the finite disjoint union of the $\\pi_0(\\operatorname{Spec}D_j)$; the closure of an open\nsubset is computed piecewise, so extremal disconnectedness is preserved.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "det-pe-wlocal-strict-contractible"
-  ],
-  "proof": [
-    {
-      "text": "*1.* $\\operatorname{Spec}D=\\bigsqcup_j\\operatorname{Spec}D_j$ is a finite disjoint union of\nclopen pieces. Its closed points are the union of those of the pieces, hence closed; every\npoint specializes only inside its piece, hence to exactly one closed point; and the local\nrings at closed points are those of the $D_j$, strictly henselian. Its space of components\nis the finite disjoint union of the $\\pi_0(\\operatorname{Spec}D_j)$; the closure of an open\nsubset is computed piecewise, so extremal disconnectedness is preserved.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*2.* By [det-pe-wcb-cover], $V$ has a covering by maps\n$\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\subset V$ with $\\operatorname{Spec}B_i$\nranging over all affine opens and $B_i\\to D_i$ faithfully flat. As $V$ is quasi-compact,\nfinitely many affine opens $\\operatorname{Spec}B_1,\\dots,\\operatorname{Spec}B_k$ cover\n$V$. Put $D=D_1\\times\\dots\\times D_k$, w-contractible by 1. The map\n$\\operatorname{Spec}D\\to V$ is weakly étale, and $\\{\\operatorname{Spec}D\\to V\\}$ is a\npro-étale covering: for an affine open $W\\subset V$ the sets $W\\cap\\operatorname{Spec}B_j$\nare covered by finitely many opens that are standard in both $W$ and\n$\\operatorname{Spec}B_j$ (a standard fact on affine opens of a scheme), and the preimage in $\\operatorname{Spec}D_j$\nof such a standard open $D(h)$ is the affine $\\operatorname{Spec}(D_j)_h$, surjecting\nonto $D(h)$.",
-      "uses": [
-        "det-pe-wcb-cover"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*3.* Fibre products of quasi-compact, quasi-separated objects over the quasi-separated $U$\nare quasi-compact and quasi-separated, and so are equalizers ($A\\times_{B\\times_UB}B$ for\ntwo maps $A\\rightrightarrows B$, the diagonal of $B/U$ being quasi-compact). Hence finite\nlimits over $U$ of quasi-compact, quasi-separated objects (which exist in\n$X_{\\mathrm{proét}}$ by part 1 of [det-pe-topos-functoriality-site]) are quasi-compact and\nquasi-separated. Build $W_\\bullet$ by induction on the simplicial degree, using the split\nconstruction: let $N_0\\to U$ be a covering as in 2 and $W_0=N_0$. Given the $r$-truncated\nsimplicial object $W_{\\leq r}$ with all terms of the required form, let\n$M_{r+1}=(\\operatorname{cosk}_rW_{\\leq r})_{r+1}$, a finite limit of the $W_i$, $i\\leq r$,\nover $U$; it is quasi-compact and quasi-separated, so 2 gives a covering\n$N_{r+1}=\\operatorname{Spec}D'\\to M_{r+1}$ with $D'$ w-contractible. Put\n\n$$\nW_{r+1}=N_{r+1}\\sqcup\\bigsqcup_{\\sigma\\colon[r+1]\\twoheadrightarrow[k],\\ k\\leq r}N_k ,\n$$\n\nwith degeneracies and faces defined as in the standard construction of split\nhypercoverings (Stacks, Tag 09A1, and the general construction of hypercoverings in\nStacks, Chapter Hypercoverings). The map $W_{r+1}\\to M_{r+1}$ restricts on $N_{r+1}$ to a\ncovering, hence is a covering. Finally $W_{r+1}$ is a finite disjoint union of spectra of\nw-contractible rings, hence the spectrum of a w-contractible ring by 1, and it is weakly\ncontractible by [det-pe-weak-contractible-equivalences].",
-      "uses": [
-        "det-pe-topos-functoriality-site",
-        "det-pe-weak-contractible-equivalences"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-pe-wcb-cover",
+  {
+   "text": "*2.* By [det-pe-wcb-cover], $V$ has a covering by maps\n$\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\subset V$ with $\\operatorname{Spec}B_i$\nranging over all affine opens and $B_i\\to D_i$ faithfully flat. As $V$ is quasi-compact,\nfinitely many affine opens $\\operatorname{Spec}B_1,\\dots,\\operatorname{Spec}B_k$ cover\n$V$. Put $D=D_1\\times\\dots\\times D_k$, w-contractible by 1. The map\n$\\operatorname{Spec}D\\to V$ is weakly étale, and $\\{\\operatorname{Spec}D\\to V\\}$ is a\npro-étale covering: for an affine open $W\\subset V$ the sets $W\\cap\\operatorname{Spec}B_j$\nare covered by finitely many opens that are standard in both $W$ and\n$\\operatorname{Spec}B_j$ (a standard fact on affine opens of a scheme), and the preimage in $\\operatorname{Spec}D_j$\nof such a standard open $D(h)$ is the affine $\\operatorname{Spec}(D_j)_h$, surjecting\nonto $D(h)$.",
+   "uses": [
+    "det-pe-wcb-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*3.* Fibre products of quasi-compact, quasi-separated objects over the quasi-separated $U$\nare quasi-compact and quasi-separated, and so are equalizers ($A\\times_{B\\times_UB}B$ for\ntwo maps $A\\rightrightarrows B$, the diagonal of $B/U$ being quasi-compact). Hence finite\nlimits over $U$ of quasi-compact, quasi-separated objects (which exist in\n$X_{\\mathrm{proét}}$ by part 1 of [det-pe-topos-functoriality-site]) are quasi-compact and\nquasi-separated. Build $W_\\bullet$ by induction on the simplicial degree, using the split\nconstruction: let $N_0\\to U$ be a covering as in 2 and $W_0=N_0$. Given the $r$-truncated\nsimplicial object $W_{\\leq r}$ with all terms of the required form, let\n$M_{r+1}=(\\operatorname{cosk}_rW_{\\leq r})_{r+1}$, a finite limit of the $W_i$, $i\\leq r$,\nover $U$; it is quasi-compact and quasi-separated, so 2 gives a covering\n$N_{r+1}=\\operatorname{Spec}D'\\to M_{r+1}$ with $D'$ w-contractible. Put\n\n$$\nW_{r+1}=N_{r+1}\\sqcup\\bigsqcup_{\\sigma\\colon[r+1]\\twoheadrightarrow[k],\\ k\\leq r}N_k ,\n$$\n\nwith degeneracies and faces defined as in the standard construction of split\nhypercoverings (Stacks, Tag 09A1, and the general construction of hypercoverings in\nStacks, Chapter Hypercoverings). The map $W_{r+1}\\to M_{r+1}$ restricts on $N_{r+1}$ to a\ncovering, hence is a covering. Finally $W_{r+1}$ is a finite disjoint union of spectra of\nw-contractible rings, hence the spectrum of a w-contractible ring by 1, and it is weakly\ncontractible by [det-pe-weak-contractible-equivalences].",
+   "uses": [
     "det-pe-topos-functoriality-site",
     "det-pe-weak-contractible-equivalences"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-pe-wcb-cover",
-    "det-pe-wlocal-strict-contractible",
-    "det-pe-weak-contractible-equivalences",
-    "det-pe-topos-functoriality-site"
-  ],
-  "uses_not_cited": [
-    "det-pe-wlocal-strict-contractible"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-wcb-cover",
+  "det-pe-topos-functoriality-site",
+  "det-pe-weak-contractible-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-pe-wcb-cover",
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-weak-contractible-equivalences",
+  "det-pe-topos-functoriality-site"
+ ],
+ "uses_not_cited": [
+  "det-pe-wlocal-strict-contractible"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015"
 }
