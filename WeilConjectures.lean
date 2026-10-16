@@ -3650,6 +3650,7 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
@@ -3662,6 +3663,7 @@ public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
+public import WeilConjectures.RingTheory.Etale.TraitSection
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftReduction
