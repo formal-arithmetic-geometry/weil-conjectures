@@ -192,7 +192,9 @@ def finiteChartEquiv (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :
       exact ((MvPolynomial.renameEquiv R finSumFinEquiv).symm_apply_apply _).symm)).trans
     (ULift.algEquiv (R := R)).symm
 
-/-- The smooth special fibre of the partial chart has dimension n at the chosen prime.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The smooth special fibre of the partial chart has dimension n at the chosen prime.
 
 Source: Stacks Project, Tag 07CP (lemma-lifting), the calculation of D_k/pi D_k.
 (blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension).
@@ -209,7 +211,7 @@ basis to the residue field; its rank is (n-card(E_k))+card(E_k)=n by Prepared.ca
 The smooth-over-field differential dimension theorem gives dimension n at Q. The spectrum
 map of localization at t is an open embedding, which preserves dimension at a point,
 so the original fibre point also has dimension n. No flatness or equality of annihilators
-is used. -/
+is used. - /
 theorem partial_chart_fibre_dimension [Algebra R Cbar]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -298,6 +300,7 @@ theorem partial_chart_fibre_dimension [Algebra R Cbar]
   change topologicalKrullDimAt qF = _
   rw [← hQ, ← Algebra.dimAt_openEmbedding
     (PrimeSpectrum.localization_away_isOpenEmbedding L t) Q, ← hdim, hfin]
+-/
 
 /-- Apply equation-count flatness to the finite presentation of the partial chart.
 

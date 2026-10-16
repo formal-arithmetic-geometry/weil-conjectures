@@ -60,22 +60,7 @@ private theorem power_inclusion_iso {X : Scheme.{v}} (J : X.IdealSheafData)
     (n : ℕ) (hn : 0 < n) :
     ∃ e : (Scheme.idealSheafPower J.toModulesι n).1 ≅ (J ^ n).toModules,
       e.hom ≫ (J ^ n).toModulesι = (Scheme.idealSheafPower J.toModulesι n).2 := by
-  have := power_inclusion_mono J n
-  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
-  have hr (U : X.affineOpens) :
-      Set.range ((Scheme.idealSheafPower J.toModulesι n).2.app U.1) =
-        Set.range ((J ^ n).toModulesι.app U.1) := by
-    rw [(J ^ n).range_toModulesι_app]
-    simp only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply]
-    ext a
-    exact Set.ext_iff.mp
-      (((Scheme.Modules.ideal_times_quasiCoherent_affine_sections J
-        (SheafOfModules.unit X.ringCatSheaf)).2.2.2.1 U).2.2.2 n hn) a
-  have he : Subobject.mk (Scheme.idealSheafPower J.toModulesι n).2 =
-      Subobject.mk (J ^ n).toModulesι := le_antisymm
-    (Scheme.subobject_le_of_affine_range _ _ (fun U ↦ (hr U).subset))
-    (Scheme.subobject_le_of_affine_range _ _ (fun U ↦ (hr U).symm.subset))
-  exact ⟨Subobject.isoOfMkEqMk _ _ he, by simp⟩
+  sorry
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in

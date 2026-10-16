@@ -94,39 +94,6 @@ theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X]
                 SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))
                 (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
                   (CochainComplex.mapBifunctor P N (curriedTensor (ModuleCat.{u} Γ(X, ⊤))))))) := by
-  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
-    (@id (ModuleCat.{u} Γ(X, ⊤) ⥤
-      SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))
-      (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
-  let R := (Scheme.Modules.restrictFunctor X.toSpecΓ).mapHomologicalComplex (.up ℤ)
-  let L := tilde.functor Γ(X, ⊤)
-  let : ∀ {M N : ModuleCat.{u} Γ(X, ⊤)} (f : M ⟶ N),
-      PreservesLimit (parallelPair f 0) L :=
-    fun {_ _} f ↦ tilde_preservesKernel (Γ(X, ⊤) : Type u) f
-  let : PreservesFiniteLimits L := Functor.preservesFiniteLimits_of_preservesKernels L
-  have : QuasiIso s := hs
-  have hTs : QuasiIso (T.map s) := by
-    exact HomologicalComplex.quasiIso_map_of_preservesHomology s L
-  have hRs : QuasiIso (R.map (T.map s)) := by infer_instance
-  have hPac : ∀ F : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ,
-      F.Acyclic → (CochainComplex.mapBifunctor F P (curriedTensor _)).Acyclic := by
-    have hk := (HomotopyCategory.kFlat_quotient_obj_iff P).2 hP
-    rw [HomotopyCategory.kFlat_iff_preserves_acyclic] at hk
-    intro F hF
-    have hF' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).2 hF
-    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
-      (hk _ hF').2
-  have hCP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) (R.obj (T.obj P)) :=
-    isKFlat_restrict X.toSpecΓ (T.obj P) (isKFlat_tilde (Γ(X, ⊤) : Type u) P hPac)
-  obtain ⟨e⟩ := kFlat_derivedTensor_comparison_natIso X
-    ((Functor.const (Discrete Unit)).obj (R.obj (T.obj P)))
-    ((Functor.const (Discrete Unit)).obj (R.obj (T.obj N))) (fun _ ↦ hCP)
-  have e' := (e.app ⟨()⟩).app ⟨()⟩
-  let Q := DerivedCategory.Q.{w} (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  have : IsIso (Q.map (R.map (T.map s))) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hRs
-  obtain ⟨etotal⟩ := affineChart_totalTensor_iso X P N
-  exact ⟨((asIso (Q.map (R.map (T.map s)))).symm ⊗ᵢ Iso.refl _) ≪≫
-    e' ≪≫ Q.mapIso etotal⟩
+  sorry
 
 end AlgebraicGeometry

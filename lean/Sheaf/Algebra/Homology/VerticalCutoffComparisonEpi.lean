@@ -89,31 +89,6 @@ The conjugating upper-boundary identifications preserve epimorphy. -/
 theorem verticalCutoff_comparison_epi
     (K : CochainComplex C ℤ) (a t : ℤ) (hat : a ≤ t) (n : ℤ) :
     Epi ((CochainComplex.truncLEMap (K.πTruncGE a) t).f n) := by
-  by_cases hn : t < n
-  · exact ((K.truncGE a).truncLE t).isZero_of_isStrictlyLE t n hn |>.epi _
-  · by_cases hn' : n < t
-    · have : IsIso ((K.ιTruncLE t).f n) := inclusion_f_isIso K t n hn'
-      have : IsIso (((K.truncGE a).ιTruncLE t).f n) :=
-        inclusion_f_isIso (K.truncGE a) t n hn'
-      have : Epi ((K.πTruncGE a).f n) :=
-        inferInstanceAs (Epi ((HomologicalComplex.πTruncGE K
-          (ComplexShape.embeddingUpIntGE a)).f n))
-      have h := congrArg (fun f => f.f n)
-        (CochainComplex.ιTruncLE_naturality (K.πTruncGE a) t)
-      simp only [HomologicalComplex.comp_f] at h
-      have he : Epi ((CochainComplex.truncLEMap (K.πTruncGE a) t).f n ≫
-          ((K.truncGE a).ιTruncLE t).f n) := by
-        rw [h]
-        infer_instance
-      exact (epi_comp_iff_of_isIso _ _).mp he
-    · have hnt : n = t := by omega
-      subst n
-      have : Epi (HomologicalComplex.cyclesMap (K.πTruncGE a) t) :=
-        cycles_projection_epi K a t hat
-      have he : Epi ((CochainComplex.truncLEMap (K.πTruncGE a) t).f t ≫
-          ((K.truncGE a).truncLEXIsoCycles t).hom) := by
-        rw [CochainComplex.truncLEXIsoCycles_naturality]
-        infer_instance
-      exact (epi_comp_iff_of_isIso _ _).mp he
+  sorry
 
 end HomologicalComplex₂

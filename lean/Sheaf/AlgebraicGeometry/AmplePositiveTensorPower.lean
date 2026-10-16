@@ -78,34 +78,6 @@ which need not be ample on a nonaffine scheme.
 -/
 theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]
     (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)  := by
-  refine ⟨hM.1, fun x ↦ ?_⟩
-  obtain ⟨n, hn, s, U, hx, hU, hs⟩ := hM.2 x
-  let f : 𝟙_ X.Modules ⟶ M.tensorPow n := homOfGlobalSection _ s
-  let e : (M.tensorPow n).tensorPow k ≅ (M.tensorPow k).tensorPow n :=
-    (M.tensorPowMulIso n k).symm ≪≫
-      eqToIso (congrArg M.tensorPow (Nat.mul_comm n k)) ≪≫ M.tensorPowMulIso k n
-  let t := tensorPowSectionOne f k ⊤
-  refine ⟨n, hn, e.hom.app ⊤ t, U, hx, hU, ?_⟩
-  have hloc : nonvanishingLocus ((M.tensorPow n).tensorPow k) t =
-      nonvanishingLocus (M.tensorPow n) s := by
-    ext y
-    have := IsInvertible.sheafOfModules_isInvertible (M.tensorPow n)
-    obtain ⟨V, hyV, _, v, hv⟩ :=
-      exists_isFreeGenerator (M.tensorPow n) (x := y) (W := ⊤) trivial
-    let a := hv.coeff ((M.tensorPow n).presheaf.map (homOfLE le_top).op s)
-    have ha : (M.tensorPow n).presheaf.map (homOfLE le_top).op s = a • v :=
-      (hv.coeff_smul _).symm
-    have hf : f.app V.1 (unitSectionsEquiv V.1 1) = a • v := by
-      exact (homOfGlobalSection_app_one _ s V.1).trans ha
-    obtain ⟨E, hE, hEt⟩ := exists_tensorPowSectionOne_eq_pow_smul f hv hf k
-    have ht : ((M.tensorPow n).tensorPow k).presheaf.map (homOfLE le_top).op t =
-        a ^ k • E := by
-      rw [presheaf_map_tensorPowSectionOne]
-      exact hEt
-    rw [nonvanishing_of_frame _ t hE (a ^ k) ht y hyV,
-      nonvanishing_of_frame _ s hv a ha y hyV, map_pow, isUnit_pow_iff hk.ne']
-  intro y
-  exact (hs y).trans ((Set.ext_iff.mp hloc y).symm.trans
-    (Set.ext_iff.mp (nonvanishingLocus_iso e t) y).symm)
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules

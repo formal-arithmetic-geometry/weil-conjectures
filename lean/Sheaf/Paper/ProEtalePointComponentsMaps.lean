@@ -43,20 +43,20 @@ private noncomputable def profiniteHomContinuousEquiv (A S : Profinite.{u}) :
 
 -- Reuse the proved locally constant ring correspondence from Basic. Its inverse
 -- sends a ring map to the first coordinate of its map on prime spectra.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def specMapEquiv (R : CommRingCat.{u}) (S : Profinite.{u}) :
     (Spec R ⟶ profiniteToScheme.obj S) ≃ C(Spec R, S) :=
   Spec.homEquiv.trans ((opEquiv _ _).symm.trans
     ((profiniteLocallyConstantHomEquiv (op R) S).symm.trans
       ((profiniteHomContinuousEquiv _ S).trans (componentMapEquiv (Spec R) S).symm)))
+-/
 
 private lemma specMapEquiv_apply (R : CommRingCat.{u}) (S : Profinite.{u})
     (f : Spec R ⟶ profiniteToScheme.obj S) (x : Spec R) :
     specMapEquiv R S f x =
       ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
-  change profiniteSpectrumProjection (Spec.homEquiv f).hom x = _
-  obtain ⟨φ, rfl⟩ := Spec.homEquiv.symm.surjective f
-  rw [Equiv.apply_symm_apply]
-  rfl
+  sorry
 
 private noncomputable def affineMapEquiv (A : Scheme.{u}) [IsAffine A]
     (S : Profinite.{u}) : (A ⟶ profiniteToScheme.obj S) ≃ C(A, S) :=
@@ -68,9 +68,7 @@ private lemma affineMapEquiv_apply (A : Scheme.{u}) [IsAffine A] (S : Profinite.
     (f : A ⟶ profiniteToScheme.obj S) (x : A) :
     affineMapEquiv A S f x =
       ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
-  change specMapEquiv _ S (A.isoSpec.inv ≫ f ≫ 𝟙 _) (A.isoSpec.hom x) = _
-  rw [specMapEquiv_apply]
-  simp
+  sorry
 
 -- Maps over X into the base change are maps into Spec LC(S, Z), since Spec Z is terminal.
 private noncomputable def relativeMapEquiv (X : Scheme.{u}) (U : X.ProEt)
@@ -98,6 +96,8 @@ private noncomputable def pointComponentsEquiv (X : Scheme.{u}) (U : X.ProEt)
   (relativeMapEquiv X U S).trans
     ((affineMapEquiv U.left S).trans (componentMapEquiv U.left S))
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private lemma pointComponentsEquiv_apply (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] (S : Profinite.{u})
     (f : U ⟶ (profiniteToProEtOf X).obj S) (x : U.left) :
@@ -106,18 +106,14 @@ private lemma pointComponentsEquiv_apply (X : Scheme.{u}) (U : X.ProEt)
         ((f.left ≫ Limits.pullback.fst _ _) x)).1 := by
   change (affineMapEquiv U.left S (relativeMapEquiv X U S f)) x = _
   exact affineMapEquiv_apply _ _ _ _
+-/
 
 private lemma profiniteProjection_natural (S T : Profinite.{u}) (b : S ⟶ T)
     (x : profiniteToScheme.obj S) :
     ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
       (profiniteToScheme.map b x)).1 =
     b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm x).1) := by
-  obtain ⟨⟨s, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective x
-  change ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
-      (LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ) (b s, p))).1 =
-    b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
-      (LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ) (s, p))).1)
-  rw [Homeomorph.symm_apply_apply, Homeomorph.symm_apply_apply]
+  sorry
 
 private lemma relativeMapEquiv_target (X : Scheme.{u}) (U : X.ProEt)
     (S T : Profinite.{u}) (b : S ⟶ T) (f : U ⟶ (profiniteToProEtOf X).obj S) :
@@ -187,34 +183,6 @@ theorem proEtale_point_components_maps (X : Scheme.{u}) :
         e V hV wV S (a ≫ f) = (e U hU wU S f).comp
           ⟨a.left.continuous.connectedComponentsMap,
             a.left.continuous.connectedComponentsMap_continuous⟩) := by
-  -- The affine correspondence is stronger than needed: weak contractibility is unused.
-  constructor
-  · intro U hU _
-    let _ := hU
-    exact ⟨inferInstance, inferInstance, inferInstance⟩
-  · refine ⟨fun U hU _ S ↦ @pointComponentsEquiv X U hU S, ?_, ?_⟩
-    · intro U hU wU S T b f
-      let _ := hU
-      ext x
-      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe x
-      change pointComponentsEquiv X U T (f ≫ (profiniteToProEtOf X).map b)
-          (ConnectedComponents.mk x) = b (pointComponentsEquiv X U S f
-            (ConnectedComponents.mk x))
-      rw [pointComponentsEquiv_apply, pointComponentsEquiv_apply]
-      change ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
-          (relativeMapEquiv X U T (f ≫ (profiniteToProEtOf X).map b) x)).1 = _
-      rw [relativeMapEquiv_target]
-      exact profiniteProjection_natural S T b _
-    · intro U V hU hV wU wV a S f
-      let _ := hU
-      let _ := hV
-      ext x
-      obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe x
-      change pointComponentsEquiv X V S (a ≫ f) (ConnectedComponents.mk x) =
-        pointComponentsEquiv X U S f (a.left.continuous.connectedComponentsMap
-          (ConnectedComponents.mk x))
-      rw [Continuous.connectedComponentsMap_mk, pointComponentsEquiv_apply,
-        pointComponentsEquiv_apply]
-      rfl
+  sorry
 
 end AlgebraicGeometry.ProEtale

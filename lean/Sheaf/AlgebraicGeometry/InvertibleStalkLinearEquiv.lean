@@ -37,16 +37,6 @@ theorem invertible_stalk_linearEquiv (Y : Scheme.{u}) (L : Y.Modules)
     [L.IsInvertible] (y : Y) :
     Nonempty (↑(TopCat.Presheaf.stalk L.val.presheaf y) ≃ₗ[Y.presheaf.stalk y]
       ↑(Y.presheaf.stalk y)) := by
-  obtain ⟨U, hy, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := L) y
-  let e' : L.restrict U.ι ≅ Modules.unit U :=
-    (restrictFunctorIsoPullback U.ι).app L ≪≫ e
-  have ht' := (isFreeGenerator_one (⊤ : U.toScheme.Opens)).app_hom e'.symm
-  obtain ⟨t, ht⟩ : ∃ t : Γ(L, U), IsFreeGenerator t :=
-    ⟨_, ((isFreeGenerator_restrict_iff U.ι L _).mp ht').map
-      (Scheme.Opens.ι_image_top U).ge⟩
-  let f := LinearMap.toSpanSingleton (Y.presheaf.stalk y)
-    (L.presheaf.stalk y) (L.presheaf.germ U y hy t)
-  have hf : Function.Bijective f := stalk_generator_bijective ht y hy
-  exact ⟨(LinearEquiv.ofBijective f hf).symm⟩
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules

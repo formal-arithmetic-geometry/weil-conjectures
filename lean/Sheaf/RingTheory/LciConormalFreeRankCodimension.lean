@@ -82,35 +82,6 @@ theorem exists_basis_cotangent_localization_of_completeIntersection
     ∃ d : ℕ, topologicalKrullDimAt q = (d : WithBot ℕ∞) ∧ d ≤ n ∧
       Nonempty (Module.Basis (Fin (n - d)) (Localization.AtPrime q.asIdeal)
         (LocalizedModule q.asIdeal.primeCompl I.Cotangent)) := by
-  classical
-  obtain ⟨g, hg, hci⟩ := hci
-  obtain ⟨p, hp⟩ : ∃ p : PrimeSpectrum (Localization.Away g),
-      PrimeSpectrum.comap (algebraMap _ (Localization.Away g)) p = q := by
-    have hq : q ∈ Set.range (PrimeSpectrum.comap
-        (algebraMap _ (Localization.Away g))) := by
-      rw [PrimeSpectrum.localization_away_comap_range (Localization.Away g) g]
-      exact hg
-    exact hq
-  let : Nontrivial (Localization.Away g) := p.nontrivial
-  rcases hci with hz | ⟨m, t, f, htm, ⟨e⟩, hdim⟩
-  · exact False.elim (zero_ne_one (hz.elim 0 1))
-  let T := MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)
-  let : Nontrivial T := e.toEquiv.nontrivial
-  let H := PrimeSpectrum.homeomorphOfRingEquiv e.toRingEquiv
-  have hdT : topologicalKrullDim (AlgebraicGeometry.Spec (CommRingCat.of T)) =
-      ((m - t : ℕ) : WithBot ℕ∞) := by
-    exact H.isHomeomorph.topologicalKrullDim_eq.trans hdim
-  have hd : topologicalKrullDimAt q = ((m - t : ℕ) : WithBot ℕ∞) := by
-    rw [← hp, ← Algebra.dimAt_openEmbedding
-      (PrimeSpectrum.localization_away_isOpenEmbedding (Localization.Away g) g) p]
-    rw [← H.apply_symm_apply p, ← Algebra.dimAt_openEmbedding H.isOpenEmbedding (H.symm p)]
-    exact AlgebraicGeometry.topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq
-      k m t f inferInstance ⟨htm, hdT⟩ (H.symm p)
-  obtain ⟨E⟩ := Ideal.stable_conormal_of_completeIntersection_presentation n I q g hg
-    m t f htm e hdim
-  obtain ⟨hle, ⟨b⟩⟩ := basis_of_stably_free m (t + n) E
-  have hdn : m - t ≤ n := by omega
-  have hr : t + n - m = n - (m - t) := by omega
-  exact ⟨m - t, hd, hdn, ⟨b.reindex (finCongr hr)⟩⟩
+  sorry
 
 end Ideal

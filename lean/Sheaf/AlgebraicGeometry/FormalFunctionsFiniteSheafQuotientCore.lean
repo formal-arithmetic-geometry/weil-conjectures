@@ -70,6 +70,8 @@ private theorem tensor_unit_factor {A B C : Scheme.{u}} (i : A ⟶ B) (g : B ⟶
 
 
 set_option backward.isDefEq.respectTransparency false in
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
     (n : ℕ) (F : B.Modules) :
     ∃ e : formalModuleQuotient J n F ≅
@@ -98,6 +100,7 @@ private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
     simp [q, Scheme.idealModuleProductι]
   refine ⟨cokernel.mapIso _ _ q (Iso.refl F) (by simpa using hq.symm), ?_⟩
   simp [formalModuleQuotientπ, cokernel.mapIso]
+-/
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

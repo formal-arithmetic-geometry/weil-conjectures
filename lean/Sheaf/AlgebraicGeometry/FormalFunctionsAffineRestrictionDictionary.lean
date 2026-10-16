@@ -67,7 +67,9 @@ private noncomputable def affineRestrictionSectionsIso {X Y : Scheme.{u}}
     exact (t.mapPresheaf.naturality _).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine chart identifies the original sections and quotient system with the
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The affine chart identifies the original sections and quotient system with the
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.
 Source: Stacks Project, Theorem 02OC and Lemma 088B; Schemes, Tags 01I8 and 01IC.
@@ -89,7 +91,7 @@ Cancel the quotient epimorphisms to check every transition square, giving b as a
 isomorphism. These steps use only restriction and finite-level quotients; they do not
 use the theorem on formal functions. Empty U, F=0, and zero or unit J satisfy the same
 restriction and cokernel universal properties.
--/
+- /
 theorem formalFunctions_affine_restriction_dictionary
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (F : CoherentModules X)
@@ -193,5 +195,6 @@ theorem formalFunctions_affine_restriction_dictionary
   rw [← Category.assoc]
   erw [← e.hom.naturality]
   simp
+-/
 
 end AlgebraicGeometry

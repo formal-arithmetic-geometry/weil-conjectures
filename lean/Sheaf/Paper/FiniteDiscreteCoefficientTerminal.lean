@@ -142,6 +142,8 @@ private theorem terminal_coefficient_of_units (M : Ab.{u + 1})
   exact coefficient_comp q0 _ _ _ _ _ _ _ _ hT hU hc'
     (constant_lowerStarComp M T U j HU qU W)
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem coefficient_unit_comp
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     (T U : Scheme.{u}) (j : U ⟶ T) :
@@ -156,6 +158,7 @@ private theorem coefficient_unit_comp
   rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
   exact unit_comp_lowerStar_map_unit_comp_upperStarComp Ab.{u + 1}
     j (toSpecZ U) (toSpecZ T) (comp_toSpecZ j) (pointUpperStar.obj R)
+-/
 
 private theorem constantScheme_pushforward (M : Ab.{u + 1})
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

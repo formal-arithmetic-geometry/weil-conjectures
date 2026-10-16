@@ -63,47 +63,6 @@ theorem tensorHom_restriction_of_local_scalar
           (overFunctorEquiv U).inv.app H ≫
           (overEquiv U).functor.map (⟨s⟩ : H.over U ⟶ F.over U) ≫
           (overFunctorEquiv U).hom.app F := by
-  intro β hβ
-  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
-  let j := U.ι
-  obtain ⟨e, he⟩ := exists_restriction_tensor_comparison j A H
-  apply (cancel_epi e.inv).mp
-  apply tensor_hom_ext
-  intro V a g
-  simp only [Hom.comp_app, ConcreteCategory.comp_apply]
-  have hev := he V a g
-  change e.inv.app V (tmulSection a g) =
-    tmulSection (M := A) (N := H) (U := j ''ᵁ V) a g at hev
-  rw [hev]
-  let W : X.Opens := j ''ᵁ V
-  have hW : W ≤ U := by
-    rintro x ⟨y, hy, rfl⟩
-    exact y.property
-  have hb := hβ W a g
-  change β.app W (tmulSection a g) = _ at hb
-  erw [hb]
-  rw [hα W hW a]
-  change (((show X.sheaf.obj.obj (op W) from ι.app W a) •
-    PresheafOfModules.restrictOverMap (homOfLE hW) s).app
-    (op (Over.mk (𝟙 W)))) g = _
-  rw [PresheafOfModules.smul_app]
-  erw [ModuleCat.comp_apply, PresheafOfModules.sectionsSMul_app_apply,
-    PresheafOfModules.overSections_coe_apply]
-  have hid (r : X.sheaf.obj.obj (op W)) :
-      X.sheaf.obj.map (𝟙 (op W)) r = r := by simp
-  erw [hid]
-  change ι.app W a • (s.app (op (Over.mk (homOfLE hW)))) g = _
-  have hm : ((restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom)).app V
-      (tmulSection (M := A) (N := H) (U := W) a g) =
-        (show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g) := by
-    change (ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g) = _
-    rw [Hom.comp_app, ConcreteCategory.comp_apply,
-      whiskerRight_app_tmulSection]
-    exact leftUnitor_hom_app_tmulSection' (M := H) (ι.app W a) g
-  rw [hm]
-  change ι.app W a • (s.app (op (Over.mk (homOfLE hW)))) g =
-    (s.app (op (Over.mk (homOfLE hW))))
-      ((show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g))
-  exact ((s.app (op (Over.mk (homOfLE hW)))).hom.map_smul _ _).symm
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules

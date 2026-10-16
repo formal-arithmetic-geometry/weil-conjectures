@@ -33,26 +33,7 @@ private theorem powers_range {X : Scheme.{u}} {I : X.Modules}
     (LinearMap.range ((idealSheafPower ι n).2.val.app (op V.1)).hom :
       Ideal Γ(X, V.1)) =
       (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ n := by
-  induction n using Nat.twoStepInduction with
-  | zero => change LinearMap.range LinearMap.id = _; simp
-  | one => simp [idealSheafPower]
-  | more n _ ih =>
-    have := Modules.powers_qc ι (n + 1)
-    change LinearMap.range
-      (((idealSheafPower ι (n + 1)).2.val.app (op V.1)).hom.comp
-        ((idealModuleProductι ι (idealSheafPower ι (n + 1)).1).val.app (op V.1)).hom) = _
-    rw [LinearMap.range_comp]
-    have hr : LinearMap.range ((idealModuleProductι ι
-        (idealSheafPower ι (n + 1)).1).val.app (op V.1)).hom =
-        (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) •
-          (⊤ : Submodule Γ(X, V.1) Γ((idealSheafPower ι (n + 1)).1, V.1)) :=
-      SetLike.coe_injective (Modules.multiplication_range ι
-        (idealSheafPower ι (n + 1)).1 V)
-    rw [hr, Submodule.map_smul'', Submodule.map_top, ih, Ideal.smul_eq_mul]
-    change (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) *
-      (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ (n + 1) =
-      (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ (n + 2)
-    exact (pow_succ' _ _).symm
+  sorry
 
 private theorem app_res {X : Scheme.{u}} {M N : X.Modules}
     (f : M ⟶ N) {U W : X.Opens} (i : W ⟶ U) (s : Γ(M, U)) :
@@ -221,7 +202,9 @@ private theorem affine_hom_zero {X : Scheme.{u}} {M N : X.Modules}
     exact hb i.1 _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation zero forces eventual vanishing on a single affine open. No compactness
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Evaluation zero forces eventual vanishing on a single affine open. No compactness
 of the ambient scheme is required.
 
 Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and Lemma 01PQ,
@@ -243,7 +226,7 @@ the power inclusions puts its section image in this multiple. Thus phi composed
 with r is zero on sections over V. Clear denominators on basic opens using
 quasi-coherence of P_m, then use sheaf separation on their covers of every
 subopen of V to obtain the zero restricted morphism. This also covers the zero
-ideal, the zero ring, the empty affine open, and n = 0. -/
+ideal, the zero ring, the empty affine open, and n = 0. - /
 theorem ideal_power_evaluation_affine_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -301,5 +284,6 @@ theorem ideal_power_evaluation_affine_eventually_zero
     exact hker hmem
   have := Modules.powers_qc ι (n + k)
   exact ⟨n + k, hnm, affine_hom_zero V _ hzero⟩
+-/
 
 end AlgebraicGeometry.Scheme

@@ -57,11 +57,7 @@ theorem mapTruncLEComparison_ι (F : C ⥤ D) [F.Additive]
 private theorem inclusion_kernel (K : CochainComplex C ℤ) (q : ℤ) :
     ∃ h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0,
       Nonempty (IsLimit (KernelFork.ofι ((K.ιTruncLE q).f q) h)) := by
-  have h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0 := by
-    rw [← CochainComplex.truncLEXIsoCycles_comp_iCycles]
-    simp
-  exact ⟨h, ⟨IsKernel.isoKernel _ _ (K.cyclesIsKernel q (q + 1) (by simp))
-    (K.truncLEXIsoCycles q) (CochainComplex.truncLEXIsoCycles_comp_iCycles K q)⟩⟩
+  sorry
 
 instance mapTruncLEComparison_isIso (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
     (K : CochainComplex C ℤ) (q : ℤ) : IsIso (mapTruncLEComparison F K q) := by

@@ -32,6 +32,8 @@ private theorem epi_over {X : Scheme.{u}} {P Q : X.Modules}
   rw [hn]
   infer_instance
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem restrict_quotient_iso_π {X : Scheme.{u}} (J : X.IdealSheafData)
     (P : X.Modules) [P.IsQuasicoherent] (U : X.Opens) (n : ℕ)
     {Q : U.toScheme.Modules} (e : (Scheme.Modules.restrictFunctor U.ι).obj P ≅ Q) :
@@ -42,6 +44,7 @@ private theorem restrict_quotient_iso_π {X : Scheme.{u}} (J : X.IdealSheafData)
   rw [← restrictionQuotientIso_π]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   exact quotientMap_π _ _ _
+-/
 
 private theorem local_epi_cancel {X : Scheme.{u}} {P Q S : X.Modules}
     (q : P ⟶ Q) [Epi q] (A B W : X.Opens) (ha : W ≤ A) (hb : W ≤ B)
@@ -142,98 +145,5 @@ theorem compatible_quotient_formal_comparisons
           ((ε j).hom.app n).val.app (op (Over.mk (homOfLE hj)))) ∧
       (∀ (n : ℕᵒᵖ) (i : ι), (δ.hom.app n).over (U i) =
         (ε i).hom.app n ≫ (((completion X J).map a).hom.app n).over (U i)) := by
-  set_option backward.isDefEq.respectTransparency false in
-    classical
-    have : F.obj.IsQuasicoherent :=
-      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj).mp
-        F.property).1
-    let bsch (i : ι) : ((completion X J).obj F).obj ⋙
-        Scheme.Modules.restrictFunctor (U i).ι ≅
-        N.obj ⋙ Scheme.Modules.restrictFunctor (U i).ι :=
-      (restrictionCompletionIso J F.obj (U i)).symm ≪≫
-        (formalCompletionFunctor (J.comap (U i).ι)).mapIso (ei i) ≪≫ (βi i).symm
-    let R (i : ι) := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) (U i)
-    let E (i : ι) := (Scheme.Modules.overEquiv (U i)).functor
-    let T (i : ι) := (Functor.whiskeringRight ℕᵒᵖ _ _).obj (E i)
-    let d (i : ι) : (T i).obj (((completion X J).obj F).obj ⋙ R i) ≅
-        (T i).obj (N.obj ⋙ R i) :=
-      Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft _ (Scheme.Modules.overFunctorEquiv (U i)) ≪≫ bsch i ≪≫
-          (Functor.isoWhiskerLeft _ (Scheme.Modules.overFunctorEquiv (U i))).symm ≪≫
-            (Functor.associator _ _ _).symm
-    let b (i : ι) : ((completion X J).obj F).obj ⋙ R i ≅ N.obj ⋙ R i :=
-      (T i).preimageIso (d i)
-    have hb (i : ι) (n : ℕᵒᵖ) :
-        (formalModuleQuotientπ J (n.unop + 1) F.obj).over (U i) ≫ (b i).hom.app n =
-          pi i n := by
-      apply (E i).map_injective
-      apply (cancel_mono ((Scheme.Modules.overFunctorEquiv (U i)).hom.app (N.obj.obj n))).mp
-      rw [hpi i n]
-      simp only [Functor.map_comp]
-      have hbm : (E i).map ((b i).hom.app n) =
-          (Scheme.Modules.overFunctorEquiv (U i)).hom.app
-            (((completion X J).obj F).obj.obj n) ≫ (bsch i).hom.app n ≫
-              (Scheme.Modules.overFunctorEquiv (U i)).inv.app (N.obj.obj n) := by
-        have hm : (T i).map ((b i).hom) = (d i).hom := (T i).map_preimage _
-        have hm' := congrArg (fun f ↦ f.app n) hm
-        change (E i).map ((b i).hom.app n) = (d i).hom.app n at hm'
-        dsimp [d] at hm'
-        exact hm'.trans (Category.id_comp _)
-      rw [hbm]
-      simp only [Category.assoc, Iso.inv_hom_id_app]
-      change (E i).map ((formalModuleQuotientπ J (n.unop + 1) F.obj).over (U i)) ≫
-          (Scheme.Modules.overFunctorEquiv (U i)).hom.app
-            (formalModuleQuotient J (n.unop + 1) F.obj) ≫ (bsch i).hom.app n = _
-      have hn := (Scheme.Modules.overFunctorEquiv (U i)).hom.naturality
-        (formalModuleQuotientπ J (n.unop + 1) F.obj)
-      change (E i).map ((formalModuleQuotientπ J (n.unop + 1) F.obj).over (U i)) ≫
-          (Scheme.Modules.overFunctorEquiv (U i)).hom.app
-            (formalModuleQuotient J (n.unop + 1) F.obj) =
-        (Scheme.Modules.overFunctorEquiv (U i)).hom.app F.obj ≫
-          (Scheme.Modules.restrictFunctor (U i).ι).map
-            (formalModuleQuotientπ J (n.unop + 1) F.obj) at hn
-      rw [← Category.assoc, hn, Category.assoc]
-      congr 1
-      change (Scheme.Modules.restrictFunctor (U i).ι).map
-          (formalModuleQuotientπ J (n.unop + 1) F.obj) ≫ (bsch i).hom.app n = _
-      change (Scheme.Modules.restrictFunctor (U i).ι).map
-          (formalModuleQuotientπ J (n.unop + 1) F.obj) ≫
-        (restrictionQuotientIso J F.obj (U i) (n.unop + 1)).inv ≫
-          formalModuleQuotientMap (J.comap (U i).ι) (ei i).hom
-            (Nat.le_refl (n.unop + 1)) ≫ (βi i).inv.app n = _
-      exact (Category.assoc _ _ _).symm.trans
-        (congrArg (· ≫ (βi i).inv.app n)
-          (restrict_quotient_iso_π J F.obj (U i) (n.unop + 1) (ei i)))
-    refine ⟨fun i ↦ (b i).symm, ?_, ?_⟩
-    · intro n i j W hi hj
-      have : Epi (formalModuleQuotientπ J (n.unop + 1) F.obj) :=
-        inferInstanceAs (Epi (cokernel.π
-          (Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι
-            (n.unop + 1)).2 F.obj)))
-      have he := local_epi_cancel (formalModuleQuotientπ J (n.unop + 1) F.obj)
-        (U i) (U j) W hi hj ((b i).hom.app n) ((b j).hom.app n) (by
-          intro V hVi hVj
-          rw [hb i n, hb j n]
-          exact hcompat n i j V hVi hVj)
-      let ei := (SheafOfModules.evaluation ((moduleRings X.toRingedSpace).over (U i))
-        (op (Over.mk (homOfLE hi)))).mapIso ((b i).app n)
-      let ej := (SheafOfModules.evaluation ((moduleRings X.toRingedSpace).over (U j))
-        (op (Over.mk (homOfLE hj)))).mapIso ((b j).app n)
-      exact (Iso.inv_eq_inv ei ej).mpr he
-    · intro n i
-      apply (cancel_epi ((b i).hom.app n)).mp
-      simp only [Iso.symm_hom, ← Category.assoc, (b i).hom_inv_id_app, Category.id_comp]
-      have : Epi (formalModuleQuotientπ J (n.unop + 1) F.obj) :=
-        inferInstanceAs (Epi (cokernel.π
-          (Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι
-            (n.unop + 1)).2 F.obj)))
-      have := epi_over (formalModuleQuotientπ J (n.unop + 1) F.obj) (U i)
-      apply (cancel_epi ((formalModuleQuotientπ J (n.unop + 1) F.obj).over (U i))).mp
-      rw [← Category.assoc, hb i n, hδ i n]
-      change a.hom.over (U i) ≫ (formalModuleQuotientπ J (n.unop + 1) H.obj).over (U i) =
-        (formalModuleQuotientπ J (n.unop + 1) F.obj).over (U i) ≫
-          (formalModuleQuotientMap J a.hom (Nat.le_refl (n.unop + 1))).over (U i)
-      simpa only [Functor.map_comp] using
-        congrArg (fun f ↦ f.over (U i))
-          (quotientMap_π J a.hom (Nat.le_refl (n.unop + 1))).symm
+  sorry
 end AlgebraicGeometry

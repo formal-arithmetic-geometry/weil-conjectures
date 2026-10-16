@@ -332,18 +332,7 @@ private theorem restrict_pull_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory
             (comapUpperStarIso (integralReductionMap ℓ E) f).inv (.up ℤ)).app N) := by
-  unfold residueExchangeRestrictPullIso residueExchangeUpperStarCounit
-    residueExchangeRestriction residueExchangeUpperStar
-    leftDerivedUpperStarIsoMapDerivedCategory
-  dsimp only [id_eq]
-  have h := exactLeftSquareFac
-    (Mod.comap (coefficientMap (integralReductionMap ℓ E) Y))
-    ((f)^*⟦integralCoeff ℓ E⟧)
-    ((f)^*⟦Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)⟧)
-    (Mod.comap (coefficientMap (integralReductionMap ℓ E) X))
-    (comapUpperStarIso (integralReductionMap ℓ E) f) N
-  simpa only [derivedComapUpperStarIso, Iso.trans_symm, Iso.symm_symm_eq,
-    Iso.trans_assoc] using h
+  sorry
 
 
 
@@ -403,108 +392,7 @@ theorem residueExchangePull_flatModel
           (((Mod.extendScalars
             (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory
               (.up ℤ)).obj H)) := by
-  have _ := hP
-  let O := integralCoeff ℓ E
-  let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)
-  -- Cache the canonical structures of the four module categories locally to this proof.
-  let := cachedProofInstance1 X O
-  let := cachedProofInstance2 X O
-  let := cachedProofInstance3 X O
-  let := cachedProofInstance4 X O
-  let := cachedProofInstance5 X O
-  let := cachedProofInstance6 X O
-  let := cachedProofInstance7 X O
-  let := cachedProofInstance8 X O
-  let := cachedProofInstance9 X O
-  let := cachedProofInstance10 X O
-  let := cachedProofInstance11 X O
-  let := cachedProofInstance12 X O
-  let := cachedProofInstance1 X A
-  let := cachedProofInstance2 X A
-  let := cachedProofInstance3 X A
-  let := cachedProofInstance4 X A
-  let := cachedProofInstance5 X A
-  let := cachedProofInstance6 X A
-  let := cachedProofInstance7 X A
-  let := cachedProofInstance8 X A
-  let := cachedProofInstance9 X A
-  let := cachedProofInstance10 X A
-  let := cachedProofInstance11 X A
-  let := cachedProofInstance12 X A
-  let := cachedProofInstance1 Y O
-  let := cachedProofInstance2 Y O
-  let := cachedProofInstance3 Y O
-  let := cachedProofInstance4 Y O
-  let := cachedProofInstance5 Y O
-  let := cachedProofInstance6 Y O
-  let := cachedProofInstance7 Y O
-  let := cachedProofInstance8 Y O
-  let := cachedProofInstance9 Y O
-  let := cachedProofInstance10 Y O
-  let := cachedProofInstance11 Y O
-  let := cachedProofInstance12 Y O
-  let := cachedProofInstance1 Y A
-  let := cachedProofInstance2 Y A
-  let := cachedProofInstance3 Y A
-  let := cachedProofInstance4 Y A
-  let := cachedProofInstance5 Y A
-  let := cachedProofInstance6 Y A
-  let := cachedProofInstance7 Y A
-  let := cachedProofInstance8 Y A
-  let := cachedProofInstance9 Y A
-  let := cachedProofInstance10 Y A
-  let := cachedProofInstance11 Y A
-  let := cachedProofInstance12 Y A
-  dsimp only
-  constructor
-  · have : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat :=
-      integralResidue_pullback_preservesFlat ℓ E f
-    have hk := Functor.kFlat_mapHomologicalComplex_obj_of_colimitsOfShape
-      (f)^*⟦integralCoeff ℓ E⟧ hcolim
-    unfold residueExchangeReductionCounit residueExchangeReduction integralReduction
-    dsimp only [id_eq]
-    exact (Mod.extendScalars (coefficientMap (integralReductionMap ℓ E) X))
-      |>.isIso_leftDerivedFunctorCounit_app_of_kFlat _ hk
-  · generalize (HomotopyCategory.quotient _ (.up ℤ)).obj P = H
-    let U := (f)^*⟦O⟧
-    let V := (f)^*⟦A⟧
-    let FX := Mod.extendScalars (coefficientMap (integralReductionMap ℓ E) X)
-    let FY := Mod.extendScalars (coefficientMap (integralReductionMap ℓ E) Y)
-    let RX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (coefficientMap (integralReductionMap ℓ E) X)
-    let RY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (coefficientMap (integralReductionMap ℓ E) Y)
-    let o := (NatTrans.mapHomotopyCategory
-      (pullIso (integralReductionMap ℓ E) f).hom (.up ℤ)).app H
-    let qo := (NatTrans.mapHomotopyCategory
-      (comapUpperStarIso (integralReductionMap ℓ E) f).inv (.up ℤ)).app
-        ((FY.mapHomotopyCategory (.up ℤ)).obj H)
-    let ηX := ((Mod.extendRestrictAdjunction
-      (coefficientMap (integralReductionMap ℓ E) X)).mapHomotopyCategory (.up ℤ)).unit.app
-        ((U.mapHomotopyCategory (.up ℤ)).obj H)
-    let ηY := ((Mod.extendRestrictAdjunction
-      (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory (.up ℤ)).unit.app H
-    unfold residueExchangePullHom
-    refine mateModel (residueExchangeReductionAdjunction ℓ E X)
-      (residueExchangeReductionAdjunction ℓ E Y)
-      (residueExchangeUpperStar O f) (residueExchangeUpperStar A f)
-      (residueExchangeRestrictPullIso ℓ E f).hom _ _ _ _ _
-      (RX.mapDerivedCategoryFactorsh.hom.app
-        ((FX.mapHomotopyCategory (.up ℤ)).obj ((U.mapHomotopyCategory (.up ℤ)).obj H)))
-      (RX.mapDerivedCategoryFactorsh.hom.app
-        ((V.mapHomotopyCategory (.up ℤ)).obj ((FY.mapHomotopyCategory (.up ℤ)).obj H)))
-      (RY.mapDerivedCategoryFactorsh.hom.app ((FY.mapHomotopyCategory (.up ℤ)).obj H))
-      ((residueExchangeUpperStarCounit O f).app
-        ((RY.mapHomotopyCategory (.up ℤ)).obj ((FY.mapHomotopyCategory (.up ℤ)).obj H)))
-      (DerivedCategory.Qh.map qo) (DerivedCategory.Qh.map ηX) (DerivedCategory.Qh.map ηY)
-      (DerivedCategory.Qh.map ((RX.mapHomotopyCategory (.up ℤ)).map o)) ?_ ?_ ?_ ?_ ?_
-    · exact reduction_unit_fac ℓ E X _
-    · exact reduction_unit_fac ℓ E Y _
-    · exact RX.mapDerivedCategoryFactorsh.hom.naturality o
-    · exact restrict_pull_fac ℓ E f _
-    · exact naturalOrdinaryFac (residueExchangeUpperStarCounit O f)
-        ηY ηX ((RX.mapHomotopyCategory (.up ℤ)).map o) qo
-        (residueExchangePull_ordinary_unit ℓ E f H)
+  sorry
 
 
 

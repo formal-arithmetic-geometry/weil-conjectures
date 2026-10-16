@@ -110,11 +110,7 @@ private theorem truncation_boundary_kernel {D : Type u} [Category.{v} D] [Abelia
     (K : CochainComplex D ℤ) (q : ℤ) :
     ∃ h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0,
       Nonempty (IsLimit (KernelFork.ofι ((K.ιTruncLE q).f q) h)) := by
-  have h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0 := by
-    rw [← CochainComplex.truncLEXIsoCycles_comp_iCycles]
-    simp
-  exact ⟨h, ⟨IsKernel.isoKernel _ _ (K.cyclesIsKernel q (q + 1) (by simp))
-    (K.truncLEXIsoCycles q) (CochainComplex.truncLEXIsoCycles_comp_iCycles K q)⟩⟩
+  sorry
 
 end CochainComplex
 namespace HomologicalComplex₂

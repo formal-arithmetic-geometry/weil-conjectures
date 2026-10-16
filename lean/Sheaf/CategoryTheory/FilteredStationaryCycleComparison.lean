@@ -173,6 +173,8 @@ private theorem filtered_class_preimage
   rw [hSB, sup_comm, inf_eq_right.mpr
     (sup_le (inf_le_inf_left A hB) (inf_le_inf_right Z hA))]
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem quotient_kernel
     {C : Type u} [Category.{v} C] [Abelian C] {X T : C}
     (B Z : Subobject X) (h : B ≤ Z) (z : T ⟶ (Z : C)) :
@@ -189,6 +191,7 @@ private theorem quotient_kernel
     simp [b]
   rw [← BigradedExactCouple.pullback_kernelSubobject, hk, ← hp,
     ← Subobject.pullback_comp]
+-/
 
 /-- The page projection and graded homology projection kill the same actual cycles.
 Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2;

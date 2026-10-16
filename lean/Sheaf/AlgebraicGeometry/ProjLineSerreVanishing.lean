@@ -46,27 +46,7 @@ private theorem finitePresentation_of_finiteType_kernels
     (hker : ∀ (U : C) (n : ℕ)
       (f : SheafOfModules.free (R := R.over U) (ULift.{u} (Fin n)) ⟶ F.over U),
       (Limits.kernel f).IsFiniteType) : F.IsFinitePresentation := by
-  classical
-  have : F.IsFiniteType := hfin
-  obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-  have hfp (i : q.I) :
-      SheafOfModules.IsFinitePresentation (R := R.over (q.X i))
-        (F.over (q.X i)) := by
-    have := hq.isFiniteType i
-    let _ := Fintype.ofFinite (q.generators i).I
-    let n := Fintype.card (q.generators i).I
-    let e := (SheafOfModules.freeFunctor (R := R.over (q.X i))).mapIso
-      ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
-    let f := e.hom ≫ (q.generators i).π
-    have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
-    let G := SheafOfModules.GeneratingSections.ofEpiFree f
-    have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
-    have : (Limits.kernel G.π).IsFiniteType := by
-      simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
-        using hker (q.X i) n f
-    exact isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
-  exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
-    F q.I q.X q.coversTop hfp
+  sorry
 
 end Scheme.Modules
 

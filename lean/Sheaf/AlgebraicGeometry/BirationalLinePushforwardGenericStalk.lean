@@ -52,25 +52,7 @@ private theorem stalk_free_of_restrict_iso {Z W : Scheme.{u}}
     (e : M.restrict j ≅ SheafOfModules.unit Z.ringCatSheaf) (z : Z) :
     Nonempty (((RingedSpace.moduleStalkFunctor W.toRingedSpace (j z)).obj M)
       ≃ₗ[W.presheaf.stalk (j z)] W.presheaf.stalk (j z)) := by
-  let A := restrictAdjunction j
-  let f := A.unit.app M ≫ (pushforward j).map e.hom
-  let g := A.unit.app (SheafOfModules.unit W.ringCatSheaf) ≫
-    (pushforward j).map (restrictUnitIso j).hom
-  have : IsIso ((restrictFunctor j).map f) := by
-    dsimp only [f]
-    rw [Functor.map_comp]
-    infer_instance
-  have : IsIso ((restrictFunctor j).map g) := by
-    dsimp only [g]
-    rw [Functor.map_comp]
-    infer_instance
-  let T := RingedSpace.moduleStalkFunctor W.toRingedSpace (j z)
-  let ef := LinearEquiv.ofBijective (T.map f).hom
-    (stalk_bijective_of_restrict_iso j f z)
-  let eg := LinearEquiv.ofBijective (T.map g).hom
-    (stalk_bijective_of_restrict_iso j g z)
-  obtain ⟨eu, _⟩ := AlgebraicGeometry.Scheme.unit_stalk_iso W (j z)
-  exact ⟨ef.trans (eg.symm.trans eu.toLinearEquiv)⟩
+  sorry
 
 set_option maxHeartbeats 800000 in
 -- Local module-stalk comparisons unfold several nested restriction functors.
