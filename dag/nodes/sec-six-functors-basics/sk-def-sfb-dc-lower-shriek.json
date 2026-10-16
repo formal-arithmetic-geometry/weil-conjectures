@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-sfb-dc-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$Rf_!$ on $D_{\\mathrm{cons}}$: assembled from $i_!$ and $Rp_*$",
- "statement": "Work in the setting of [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring\nfor which the derived pushforwards restrict to bounded constructible complexes\n([sk-def-sfb-dc-restricted-functors]; for instance $\\Lambda=\\underline{\\cO}_E,\\underline E,\\underline{\\Qlb}$).\nFor a morphism $f\\colon X\\to Y$ and a compactification $c=(X\\xrightarrow{i}Z\\xrightarrow{p}Y)$\nof $f$, the *lower shriek attached to $c$* is the composite of the two restricted functors of\n[sk-def-sfb-dc-restricted-functors]:\n\n$$\nRf_!^c:=Rp_*\\circ i_!\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Y,\\Lambda).\n$$\n\nThe *derived lower shriek* is $Rf_!:=Rf_!^{c_f}$ for the chosen compactification $c_f$ of\n[sk-def-sfb-dc-setting]. No separate preservation statement is needed for $Rf_!$.\n\nThe functor $Rf_!^c$ is compatible with the ambient lower shriek\n$Rf_!^c=R(p_*)\\circ D(i_!)$ on $D(\\Mod_{\\Lambda_X})$ of [sk-def-sfb-module-derived-lower-shriek]:\nthere is a natural isomorphism $\\iota\\circ Rf_!^c\\cong Rf_!^c\\circ\\iota$, with $\\iota$ the inclusions\nof $D_{\\mathrm{cons}}$. In particular $Rf_!$ on $D_{\\mathrm{cons}}$ is compatible with the ambient\n$Rf_!$ for the chosen compactification.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes below are separated and of finite type over $k$, and all morphisms are $k$-morphisms, as in [sk-def-sfb-dc-setting]. Write $D_{\\mathrm{cons}}(T,\\Lambda)\\subseteq D(\\Mod_{\\Lambda_T})$ for the bounded constructible derived category of module objects over the pulled-back coefficient ring $\\Lambda_T$, with its inclusion functor, as defined there. Let $\\Lambda$ be a commutative condensed ring\nfor which the derived pushforwards restrict to bounded constructible complexes\n([sk-def-sfb-dc-restricted-functors]; for instance $\\Lambda=\\underline{\\cO}_E,\\underline E,\\underline{\\Qlb}$).\nFor a morphism $f\\colon X\\to Y$ and a compactification $c=(X\\xrightarrow{i}Z\\xrightarrow{p}Y)$\nof $f$, the *lower shriek attached to $c$* is the composite of the two restricted functors of\n[sk-def-sfb-dc-restricted-functors]:\n\n$$\nRf_!^c:=Rp_*\\circ i_!\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Y,\\Lambda).\n$$\n\nThe *derived lower shriek* is $Rf_!:=Rf_!^{c_f}$ for the chosen compactification $c_f$ of\n[sk-def-sfb-dc-setting]. No separate preservation statement is needed for $Rf_!$.\n\nThe functor $Rf_!^c$ is compatible with the ambient lower shriek\n$Rf_!^c=R(p_*)\\circ D(i_!)$ on $D(\\Mod_{\\Lambda_X})$ of [sk-def-sfb-module-derived-lower-shriek]:\nthere is a natural isomorphism $\\iota\\circ Rf_!^c\\cong Rf_!^c\\circ\\iota$, with $\\iota$ the inclusions\nof $D_{\\mathrm{cons}}$. In particular $Rf_!$ on $D_{\\mathrm{cons}}$ is compatible with the ambient\n$Rf_!$ for the chosen compactification.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
   "place": "node sk-def-sfb-dc-lower-shriek, order 1693"
@@ -19,26 +19,133 @@
  ],
  "proof": [
   {
-   "text": "The restricted $i_!$ and $Rp_*$ commute with the inclusions\n([sk-def-sfb-dc-restricted-functors]): $\\iota\\circ i_!\\cong D(i_!)\\circ\\iota$ and\n$\\iota\\circ Rp_*\\cong R(p_*)\\circ\\iota$. Pasting the two isomorphisms gives\n\n$$\n\\iota\\circ Rp_*\\circ i_!\\cong R(p_*)\\circ\\iota\\circ i_!\\cong R(p_*)\\circ D(i_!)\\circ\\iota ,\n$$\n\nwhich is the asserted compatibility with the ambient functor of\n[sk-def-sfb-module-derived-lower-shriek]. The statement for $Rf_!$ is the case $c=c_f$.",
+   "text": "By [sk-def-sfb-dc-setting], the compactification $c=(i,p)$ stays inside the setting: $Z$ is separated and of finite type over $k$, $i$ is an open immersion and $p$ is proper. By [sk-def-sfb-dc-restricted-functors], $F=i_!$ is a functor from $D_{\\mathrm{cons}}(X,\\Lambda)$ to $D_{\\mathrm{cons}}(Z,\\Lambda)$ for every $\\Lambda$, and $G=Rp_*$ is a functor from there to $D_{\\mathrm{cons}}(Y,\\Lambda)$ under the preservation hypothesis on $\\Lambda$. Define $Rf_!^c=G\\circ F$: on objects it sends $K$ to $G(F(K))$, and on a morphism $u$ it sends $u$ to $G(F(u))$. The identity and composition laws follow by applying those of $F$ and $G$. Thus its values already belong to the required constructible category; no new preservation assertion is used.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-dc-restricted-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
+    "place": "definition, first displayed composite; det-def-sfb-dc-lower-shriek-definition.md, defining paragraph"
+   }
+  },
+  {
+   "text": "Write $I_T$ for the inclusion $D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$. The restriction clause of [sk-def-sfb-dc-restricted-functors] gives natural isomorphisms $a:I_Z\\circ F\\cong D(i_!)\\circ I_X$ and $b:I_Y\\circ G\\cong R(p_*)\\circ I_Z$. At an object $K$, define $\\theta_K$ as the composite of $b_{F(K)}$ followed by $R(p_*)(a_K)$. This is invertible, with inverse the composite of $R(p_*)(a_K^{-1})$ followed by $b_{F(K)}^{-1}$. For $u:K\\to L$, naturality of $b$ gives $b_{F(L)}\\circ I_Y(G(F(u)))=R(p_*)(I_Z(F(u)))\\circ b_{F(K)}$, and applying $R(p_*)$ to naturality of $a$ gives $R(p_*)(a_L)\\circ R(p_*)(I_Z(F(u)))=R(p_*)(D(i_!)(I_X(u)))\\circ R(p_*)(a_K)$. Composing these equations proves naturality of $\\theta$. By the definition in [sk-def-sfb-module-derived-lower-shriek], its target is the ambient $Rf_!^c\\circ I_X$. Hence $\\theta:I_Y\\circ Rf_!^c\\cong Rf_!^c\\circ I_X$ is the asserted compatibility. This is just composition of the given isomorphisms, not an additional geometric theorem.",
    "uses": [
     "sk-def-sfb-dc-restricted-functors",
     "sk-def-sfb-module-derived-lower-shriek"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
+    "place": "last paragraph; det-def-sfb-dc-lower-shriek-compatibility.md, Proof"
+   }
+  },
+  {
+   "text": "Take the chosen compactification $c_f$ of [sk-def-sfb-dc-setting] in the preceding construction and define $Rf_!=Rf_!^{c_f}$. The ambient chosen lower shriek of [sk-def-sfb-module-derived-lower-shriek] is also defined using that chosen compactification. Substituting $c=c_f$ in $\\theta$ therefore gives the asserted compatibility for $Rf_!$. No comparison between different compactifications is required.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-module-derived-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
+    "place": "chosen-compactification definition and final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-dc-setting",
   "sk-def-sfb-dc-restricted-functors",
   "sk-def-sfb-module-derived-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
-  "place": "## Proof"
+  "place": "definition and last paragraph; detail proof det-def-sfb-dc-lower-shriek-compatibility.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Define compactly supported derived pushforward on bounded constructible pro-etale sheaves with condensed ring coefficients using an open immersion compactification followed by proper pushforward",
+   "results": "Scheme.Modules pushforward/right-adjoint and SheafOfModules.pushforward; condensed Kan extensions. These are underived sheaves, not the bounded constructible pro-etale composite.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleLowerShriek|rightDerivedLowerShriek|compactly.supported.*pushforward",
+   "results": "0 hits across Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification defines derived lower shriek on bounded constructible complexes of modules over a condensed ring on the pro-etale site",
+   "results": "Condensed.lanSheafProfinite, Condensed.free, Condensed.ofSheafCompHaus, LightCondensed.lanLightCondSet, CondensedMod and related module/abelian declarations; none defines this functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero followed by derived proper direct image defines lower shriek for a compactification and commutes with inclusions of full subcategories of constructible complexes",
+   "results": "TopCat.Sheaf pushforward and adjunction, sheafification compatibility, Scheme.Modules.restrictFunctor/restrictAdjunction, and sheafPushforwardContinuous. These concern underived topological/Zariski sheaves or site pushforward, not this constructible derived functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|compactification|extension.by.zero",
+   "results": "AlgebraicGeometry subdirectory: 5 hits, all FinitePresentation.lean:117-124, Chevalley/local constructibility of images of sets; no sheaf lower shriek.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor defined as extension by zero and derived proper pushforward on bounded constructible complexes",
+   "results": "ComplexShape.Embedding.extendFunctor, Functor.mapShortComplex, Functor.toRightDerivedZero/rightDerivedZeroIsoSelf, triangulated zero morphisms, and functor-category zero objects; none defines this functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor on a full subcategory obtained by composing restricted functors, with a natural isomorphism after the inclusion functor",
+   "results": "Eight hits: mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, totalRightDerived, leftDerivedLift and related derived-functor machinery. Read ExactFunctor.lean:41-44,61-64: the first two compare localization with an exact functor induced on a derived category, rather than restrictions to bounded constructible pro-etale module objects. No match for the whole item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.hcomp\"",
+   "results": "Three hits: CategoryTheory.NatIso.hcomp, hcomp_hom and hcomp_inv. Read Mathlib/CategoryTheory/NatIso.lean:209-211: horizontal composition of natural isomorphisms supplies the elementary categorical operation used in step 2. It does not state the coefficient-specific restricted lower-shriek construction, so the item is not a Mathlib leaf; no auxiliary node is needed.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|constructible.*[Ff]unctor|lower[Ss]hriek|lower[Ss]hriek",
+   "results": "Zero hits across Mathlib. Second reader independently searched using full-subcategory and functor vocabulary.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -66,5 +173,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-dc-lower-shriek",
+  "worker": "stage1",
+  "summary": "Expanded the initial main-20261015 setting reference into its exact field, prime, finite-type and separated hypotheses, keeping all mathematical clauses and the three notion dependencies. Checked the setting, restricted functors and ambient composite in their own statements. Expanded composition and inclusion compatibility into elementary steps, including components, inverse and naturality, and used the same chosen compactification. The first dry run requested this self-contained opening (B2). No new nodes; existing blueprint detail nodes already cover the two clauses. No finished slopmaster2 declaration and no Mathlib match were found.",
+  "blueprint": "The defining display and chosen-compactification paragraph are step 1 and step 3; the last compatibility paragraph is step 2 and its specialization in step 3. The detail definition and compatibility proof under the same blueprint unit were read; no unit record exists in dag/units for this newly imported sketch."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-9fdd0bdb9",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-9fdd0bdb9 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint sources, route documents, and archived base-change source. Verified all hypotheses, coefficient categories, ambient comparison, elementary composition steps, edge cases, duplicate searches, and no SGA usage. Wrote review.md; no repairs or tool_uses needed."
+ }
 }
