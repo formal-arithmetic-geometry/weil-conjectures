@@ -1,0 +1,100 @@
+{
+ "id": "def-weil-pbc-finite-split-local-replacement-stage",
+ "kind": "definition",
+ "title": "Finite cofans solving covering sieves on a replacement stage",
+ "statement": "Let X be a scheme, K a simplicial etale X-scheme, S_m a sieve on K_m for each m, and A a finite split replacement stage through n [def-weil-pbc-finite-split-replacement-stage]. StageSolves K S A means that for each q at most n the term A_q has a coproduct presentation indexed by Fin l, for some natural number l, such that each constituent map followed by the component of A to K belongs to S_q. The constituents are etale X-schemes; no compactness or affine condition is required of this auxiliary presentation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DAV",
+  "place": "Lemma 25.12.2 (0DAV), finite split skeleta; Lemmas 25.7.3 and 25.7.4 (01GJ and 01GK), local lifts on constituent pieces."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-replacement-stage",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0DAV",
+  "place": "Lemma 25.12.2 (0DAV), finite split skeleta; Lemmas 25.7.3 and 25.7.4 (01GJ and 01GK), local lifts on constituent pieces. The local-sieve bookkeeping is written out in Lean by E1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale covering sieve over a quasi compact scheme has a finite affine subcover",
+   "results": "QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, Scheme.affineCover, Scheme.OpenCover.finiteSubcover; these supply the geometric finite-cover ingredients, not the prescribed-sieve finite split construction.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the existing finite-affine-cover Mathlib API in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of finite split simplicial hypercover refinements preserves prescribed covering sieves",
+   "results": "GrothendieckTopology.Cover.oneHypercover and preOneHypercover, OneHypercover.mk and mk'; only degree-one hypercovers.",
+   "date": "2026-10-16",
+   "verdict": "No all-degree finite split replacement with local conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sieve, Finite",
+   "results": "coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily, extensiveTopology.mem_sieves_iff_contains_colimit_cofan; no finite split replacement or compatible-stage theorem.",
+   "date": "2026-10-16",
+   "verdict": "Related finite-cofan descriptions, not the required simplicial construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg local_requirements|coveringSieve|sieve.*refin|refin.*sieve on lean/Sheaf, lean/WeilConjectures/AlgebraicGeometry; rg pullback.*Cofan|isColimit.*pullback in Mathlib/CategoryTheory and AlgebraicGeometry",
+   "results": "The source root contains an unproved duplicate of the item and no usable proof. Existing replacement stage, boundary cover and attachment modules provide the unconstrained construction. Mathlib Extensive.lean supplies finitaryExtensive_of_preserves_and_reflects_isomorphism and isIso_sigmaDesc_fst; Products.lean supplies Cofan.isColimitTrans and Cofan.isColimitEquivOfEquiv.",
+   "date": "2026-10-16",
+   "verdict": "No duplicate local-stage statement. Reuse existing stage data and the Mathlib cofan lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverRefinement",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof, local-lifting paragraph: impose the finitely many pulled-back requirements before fixing each degree, retain degeneracies, and continue the split construction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitLocalReplacementStage",
+  "file": "lean/Sheaf/Paper/FiniteSplitLocalReplacementStage.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.StageSolves",
+  "statement": "def StageSolves {X : Scheme.{u}} (K : SimplicialObject X.Etale)\n    (S : ∀ n : ℕ, Sieve (K.obj (op (SimplexCategory.mk n))))\n    {n : ℕ} (A : FiniteSplitReplacementStage K n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T041811-L-2678814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T041811-L-2678814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-finite-split-local-replacement-zero",
+ "kind": "statement",
+ "title": "Initial replacement stage with prescribed degree-zero sieve",
+ "statement": "Let X be qcqs, K an etale hypercover [def-weil-pbc-etale-hypercover], and S_m a sieve on K_m for each m. If S_0 is covering, there exists a finite split replacement stage A through zero [def-weil-pbc-finite-split-replacement-stage] satisfying StageSolves K S A [def-weil-pbc-finite-split-local-replacement-stage].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DAV",
+  "place": "Lemma 25.12.2 (0DAV), initial split stage; Lemmas 25.7.3 (01GJ) and 25.12.6 (094K), finite covering with prescribed local lifts."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-pbc-finite-split-local-replacement-stage"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero matching universal property of K has an empty cone. Apply it to id_X to obtain a section of the matching object over X. This makes the matching object surjective over X. The matching arrow from K_0 is surjective, so K_0 to X is surjective.",
+   "uses": [
+    "def-weil-pbc-etale-hypercover"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite prescribed-sieve covering lemma to E=K_0, M=X, e its structure map, and R=S_0. Its output is a finite affine coproduct T, a map t:T to K_0, surjective structure map T to X, and a finite cofan whose composites with t lie in S_0.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-sieve-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the constant degree-zero truncated functor on T. Set N_0=T with identity inclusion, and use X as its terminal matching object. There is only one degree-zero surjection, so the canonical cofan is the identity colimit. Its matching surjectivity is that of T to X. The unique operators of the zero truncation define its refinement to K using t. The chosen cofan from the previous step proves StageSolves; its extra identity simplicial operator disappears by K.map_id.",
+   "uses": [
+    "def-weil-pbc-finite-split-replacement-stage",
+    "def-weil-pbc-finite-split-local-replacement-stage"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-pbc-finite-split-local-replacement-stage",
+  "def-weil-pbc-finite-split-replacement-stage",
+  "lem-weil-pbc-finite-etale-sieve-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0DAV",
+  "place": "Lemma 25.12.2 (0DAV), initial split stage; Lemmas 25.7.3 (01GJ) and 25.12.6 (094K), finite covering with prescribed local lifts. The local-sieve bookkeeping is written out in Lean by E1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale covering sieve over a quasi compact scheme has a finite affine subcover",
+   "results": "QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, Scheme.affineCover, Scheme.OpenCover.finiteSubcover; these supply the geometric finite-cover ingredients, not the prescribed-sieve finite split construction.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the existing finite-affine-cover Mathlib API in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of finite split simplicial hypercover refinements preserves prescribed covering sieves",
+   "results": "GrothendieckTopology.Cover.oneHypercover and preOneHypercover, OneHypercover.mk and mk'; only degree-one hypercovers.",
+   "date": "2026-10-16",
+   "verdict": "No all-degree finite split replacement with local conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sieve, Finite",
+   "results": "coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily, extensiveTopology.mem_sieves_iff_contains_colimit_cofan; no finite split replacement or compatible-stage theorem.",
+   "date": "2026-10-16",
+   "verdict": "Related finite-cofan descriptions, not the required simplicial construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg local_requirements|coveringSieve|sieve.*refin|refin.*sieve on lean/Sheaf, lean/WeilConjectures/AlgebraicGeometry; rg pullback.*Cofan|isColimit.*pullback in Mathlib/CategoryTheory and AlgebraicGeometry",
+   "results": "The source root contains an unproved duplicate of the item and no usable proof. Existing replacement stage, boundary cover and attachment modules provide the unconstrained construction. Mathlib Extensive.lean supplies finitaryExtensive_of_preserves_and_reflects_isomorphism and isIso_sigmaDesc_fst; Products.lean supplies Cofan.isColimitTrans and Cofan.isColimitEquivOfEquiv.",
+   "date": "2026-10-16",
+   "verdict": "No duplicate local-stage statement. Reuse existing stage data and the Mathlib cofan lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverRefinement",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof, local-lifting paragraph: impose the finitely many pulled-back requirements before fixing each degree, retain degeneracies, and continue the split construction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitLocalReplacementZero",
+  "file": "lean/Sheaf/Paper/FiniteSplitLocalReplacementZero.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_local_replacement_stage_zero",
+  "statement": "theorem exists_local_replacement_stage_zero\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)\n    (S : ∀ n : ℕ, Sieve (K.obj (op (SimplexCategory.mk n))))\n    (hS : S 0 ∈ X.smallEtaleTopology _) :\n    ∃ A : FiniteSplitReplacementStage K 0, StageSolves K S A",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T041811-L-2678814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T041811-L-2678814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -32,17 +32,20 @@
    }
   },
   {
-   "text": "For finitely many prescribed locally solvable lifts in degrees at most $r$, list in advance their pullbacks along every degeneracy from a lower degree at most $r$; there are finitely many such maps in each bounded degree. When constructing a nondegenerate component in degree $m$, impose all requirements on it, including these pullbacks of requirements from higher degrees, before fixing that degree. Local solvability supplies finitely many etale covering families. Cover the quasi-compact matching component by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover], pull back the local-lifting covers to them by [lem-weil-pbc-etale-covering-base-change], and take a common finite affine refinement of the resulting finite family with [lem-weil-pbc-etale-covering-affine-refinement]. That choice defines $N_m$ and its lifts at once; every degree-$n$ degenerate copy, $n\\leq r$, inherits its required lift from its lower nondegenerate source. Repeat through $r$ and use the unconstrained extension of step 2 above $r$.",
+   "text": "For each degree n define S_n as the intersection, over the finite set of pairs (j, theta:[degree(j)] to [n]), of the pullback of R_j along U(theta). Finite intersections of covering sieves are covering. A composite operator theta followed by alpha is another index of this intersection, so functoriality of U proves stability of S under every simplicial operator. This includes all the degeneracies that can affect a retained local requirement.",
    "uses": [
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "lem-weil-pbc-etale-covering-base-change"
+    "def-weil-pbc-finite-split-hypercover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01GK (lemma-covering-sheaf), proof, and Lemma 01GJ (lemma-covering), construction of a refinement lifting local data in a chosen degree; Lemma 094K for finite covers"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Take a finite replacement stage in degree zero solving S_0. Apply the constrained successor-stage theorem recursively; dependent choice gives a compatible tower whose stages all solve S. Assemble this tower retaining its finite solving cofans. In the prescribed degree of R_j, membership in S includes the identity operator, hence the constituent composite belongs to R_j. Substituting the equality degree(j)=n removes the transport in the stated conclusion. This constructs the required refinement and finite cofan in every retained degree, including the empty requirement family and empty cofans.",
+   "uses": [
+    "lem-weil-pbc-finite-split-local-replacement-zero",
+    "lem-weil-pbc-finite-split-local-replacement-extension",
+    "lem-weil-pbc-finite-split-local-replacement-assembly"
+   ],
+   "elementary": false
   },
   {
    "text": "Convert the semi-representable hypercover to the ordinary étale hypercover condition using the singleton matching-object comparison, then apply the finite split replacement theorem. Truncating the resulting simplicial map gives the required map through degree r.",
@@ -59,19 +62,19 @@
  ],
  "proof_deps": [
   "def-weil-pbc-finite-split-hypercover",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-covering-base-change",
   "lem-weil-pbc-etale-hypercover-homotopy-equalizer",
   "lem-weil-pbc-finite-split-hypercover-existence",
   "lem-weil-pbc-finite-split-hypercover-replacement",
+  "lem-weil-pbc-finite-split-local-replacement-assembly",
+  "lem-weil-pbc-finite-split-local-replacement-extension",
+  "lem-weil-pbc-finite-split-local-replacement-zero",
   "lem-weil-pbc-hypercover-product",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
   "lem-weil-pbc-sr-hypercover-etale"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Finite split existence and replacement, products, endpoint homotopy equalizer, and local-lifting construction; third Lean proof reduces via singleton conversion and truncation"
+  "document": "https://stacks.math.columbia.edu/tag/0DAV",
+  "place": "Existence/cofilteredness and truncation proofs retained. The local-requirement proof uses 01GJ/01GK covering sieves, finite all-operator intersections, and the 0DAV split induction with finite affine choices as in 094K. E1 wrote and proved every new finite-stage and assembly lemma; no new sorry remains."
  },
  "mathlib_searches": [
   {
@@ -163,12 +166,12 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261015T231531-L-3178029",
+  "landing": "20261016T041811-L-2678814",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
