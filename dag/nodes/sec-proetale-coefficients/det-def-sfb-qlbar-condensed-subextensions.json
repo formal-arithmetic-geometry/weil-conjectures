@@ -3,37 +3,129 @@
  "blueprint": {
   "is": "det-def-sfb-qlbar-condensed-subextensions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite subextensions of $\\overline{\\mathbf Q}_\\ell$ form a directed poset",
- "statement": "Let $\\ell$ be a prime and $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$. A *finite subextension*\nis an intermediate field $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Qlb$ with $[E:\\mathbf Q_\\ell]<\\infty$.\nThen:\n\n1. for finite subextensions $E_1,\\dots,E_n$, the compositum $E_1\\cdots E_n\\subseteq\\Qlb$ is a finite\n   subextension containing each $E_\\nu$, with $[E_1\\cdots E_n:\\mathbf Q_\\ell]\\le\\prod_\\nu[E_\\nu:\\mathbf Q_\\ell]$;\n   in particular the finite subextensions, ordered by inclusion, form a directed poset;\n2. every finite subset of $\\Qlb$ lies in a finite subextension, and $\\Qlb$ is the union of the\n   finite subextensions.",
+ "statement": "Let $\\ell$ be a prime, let $k=\\mathbf Q_\\ell$ be the field of $\\ell$-adic numbers [def-weil-l-adic-numbers], and let $\\Qlb$ be an algebraic closure of $k$ [def-weil-algebraic-closure]. A *finite subextension* is an intermediate field $k\\subseteq E\\subseteq\\Qlb$ that is finite-dimensional over $k$ [def-weil-finite-dimensional-subspace]; its degree $[E:k]$ is its $k$-vector-space dimension [def-weil-vector-space-dimension]. The compositum of intermediate fields is the smallest subfield of $\\Qlb$ containing them, and the empty compositum is $k$. Then:\n\n1. for finite subextensions $E_1,\\dots,E_n$, the compositum $E_1\\cdots E_n\\subseteq\\Qlb$ is a finite subextension containing each $E_\\nu$, with $[E_1\\cdots E_n:k]\\le\\prod_\\nu[E_\\nu:k]$; in particular the finite subextensions, ordered by inclusion, form a directed poset (a nonempty partially ordered set in which any two elements have a common upper bound);\n2. every finite subset of $\\Qlb$ lies in a finite subextension, and $\\Qlb$ is the union of the finite subextensions.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
   "place": "node det-def-sfb-qlbar-condensed-subextensions, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
  "proof": [
   {
-   "text": "1. By induction it suffices to treat $n=2$. Let $E_2=\\mathbf Q_\\ell(b_1,\\dots,b_m)$ (finitely many\n   generators exist since $E_2$ is finite-dimensional). Then $E_1E_2=E_1(b_1,\\dots,b_m)$, and a basis\n   of $E_2$ over $\\mathbf Q_\\ell$ spans $E_1E_2$ over $E_1$, because the $E_1$-span of $E_2$ is a\n   ring that is finite-dimensional over the field $E_1$ and a domain, hence a field containing $E_1$\n   and the $b_j$. So $[E_1E_2:E_1]\\le[E_2:\\mathbf Q_\\ell]$ and\n   $[E_1E_2:\\mathbf Q_\\ell]=[E_1E_2:E_1][E_1:\\mathbf Q_\\ell]\\le[E_1:\\mathbf Q_\\ell][E_2:\\mathbf Q_\\ell]$.\n   The empty compositum is $\\mathbf Q_\\ell$ itself, so the poset is nonempty, and any two elements\n   have an upper bound.",
-   "uses": [],
-   "elementary": null
+   "text": "For two finite subextensions $E,F\\subseteq\\Qlb$, apply [lem-weil-pbc-compositum-degree-bound] with ambient field $\\Qlb$, base field $k$, and its fields $K=F$, $M=E$. Its hypothesis $K/k$ finite is exactly the finiteness of $F/k$, so the compositum $EF$ is finite over $E$ and $[EF:E]\\le[F:k]$. Since also $E/k$ is finite, [lem-weil-pbc-field-degree-multiplicativity] applied to $k\\subseteq E\\subseteq EF$ proves that $EF/k$ is finite and gives\n$$[EF:k]=[EF:E]\\,[E:k]\\le[F:k]\\,[E:k]=[E:k]\\,[F:k].$$\nThe field $EF$ contains $E$ and $F$ by the defining property of the compositum. No separability, disjointness or completeness hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-compositum-degree-bound",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
+    "place": "statement clause 1; binary case, using Stacks fields.tex Tag 09ID (definition-compositum) and Tag 09G9 (lemma-multiplicativity-degrees)"
+   }
   },
   {
-   "text": "2. Each $x\\in\\Qlb$ is algebraic over $\\mathbf Q_\\ell$, so $\\mathbf Q_\\ell(x)$ is a finite\n   subextension; for a finite set take the compositum of these, by 1.",
+   "text": "Induct on $j$ to prove that $C_j=E_1\\cdots E_j$ is finite over $k$, contains every $E_i$ for $i\\le j$, and has $[C_j:k]\\le\\prod_{i=1}^j[E_i:k]$. For $j=0$, $C_0=k$, whose basis over itself is $\\{1\\}$, so its degree and the empty product are both $1$. If the assertion holds for $j$, the binary result in step 1 makes $C_{j+1}=C_jE_{j+1}$ finite, containing all the required fields, and gives\n$$[C_{j+1}:k]\\le[C_j:k][E_{j+1}:k]\\le\\left(\\prod_{i=1}^j[E_i:k]\\right)[E_{j+1}:k].$$\nThis recursively defined $C_{j+1}$ is the compositum of all $j+1$ fields: any subfield containing them contains $C_j$ by induction and hence contains $C_jE_{j+1}$. This proves the finite-family assertion including the empty case. Inclusion is a partial order by the ordinary subset laws; $k$ is one finite subextension, and step 1 supplies the common upper bound $EF$ for any pair. Thus this poset is nonempty and directed.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
+    "place": "statement clause 1; finite-family induction, empty compositum, and directedness"
+   }
+  },
+  {
+   "text": "By [def-weil-algebraic-closure], every $x\\in\\Qlb$ is algebraic over $k$. Applying [lem-weil-pbc-algebraic-generators-finite-extension] to the one-element list $(x)$ gives the finite subextension $k(x)\\subseteq\\Qlb$, which contains $x$ by the definition of the generated subfield. For a finite subset $S=\\{x_1,\\dots,x_r\\}\\subseteq\\Qlb$, step 2 applied to $k(x_1),\\dots,k(x_r)$ produces a finite compositum containing every $x_i$, hence containing $S$. If $S$ is empty, use $k$. All fields are subfields of the same chosen $\\Qlb$, so this is a compositum inside the specified ambient field.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
+    "place": "statement clause 2; algebraicity and singleton adjunction, Stacks fields.tex Tag 09GH (lemma-algebraic-finitely-generated), followed by clause 1"
+   }
+  },
+  {
+   "text": "Every finite subextension is a subset of $\\Qlb$, so their union is contained in $\\Qlb$. Conversely, for $x\\in\\Qlb$, step 3 applied to $\\{x\\}$ puts $x$ in a finite subextension, hence in that union. The two inclusions prove $\\Qlb=\\bigcup_{E/k\\text{ finite},\\ E\\subseteq\\Qlb}E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
+    "place": "statement clause 2; equality with the union by the two set inclusions"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
-  "place": "## Proof"
+  "place": "clauses 1–2; expanded argument of the imported proof (the current source markdown contains the statement only)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank_sup|finrank.*iSup|finiteDimensional.*(sup|adjoin)|finiteDimensional_adjoin",
+   "results": "25 hits; Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/Isaacs.lean, Mathlib/FieldTheory/Galois/GaloisClosure.lean, Mathlib/FieldTheory/Galois/GaloisClosure.lean, Mathlib/FieldTheory/Galois/GaloisClosure.lean, Mathlib/FieldTheory/Normal/Closure.lean",
+   "date": "2026-10-16",
+   "verdict": "partial matches for field-theory ingredients; whole item needs the finite-family induction and set arguments written in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compositum of finitely many finite field extensions has degree at most the product of their degrees and every finite subset of an algebraic extension generates a finite extension.",
+   "results": "8 hits; IntermediateField.LinearDisjoint.finrank_sup, FiniteField.instFieldExtension, IntermediateField.LinearDisjoint.rank_sup, IntermediateField.rank_sup_le_of_isAlgebraic, FiniteField.Extension, IntermediateField.exists_finset_of_mem_supr'', Field.finite_intermediateField_of_exists_primitive_element, IntermediateField.finite_of_fg_of_isAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "partial matches for field-theory ingredients; whole item needs the finite-family induction and set arguments written in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField, Module.finrank",
+   "results": "12 hits; IntermediateField.finrank_dvd_of_le_left, IntermediateField.finrank_le_of_le_left, IntermediateField.finrank_lt_of_gt, IntermediateField.eq_of_le_of_finrank_eq', IntermediateField.eq_iff_finrank_eq_of_le', IntermediateField.eq_of_le_of_finrank_le', IntermediateField.finrank_dvd_of_le_right, IntermediateField.finrank_eq_finrank_subalgebra",
+   "date": "2026-10-16",
+   "verdict": "related intermediate-field dimension lemmas; no direct match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite intermediate fields of an algebraic field extension are directed under compositum, the compositum degree is bounded by the product of degrees, and every finite subset is contained in a finite subextension.",
+   "results": "8 hits; Field.Emb.Cardinal.directed_filtration, Field.finite_intermediateField_of_exists_primitive_element, IntermediateField.fg_top, finiteExts, Field.isAlgebraic_of_finite_intermediateField, IntermediateField.FG, Field.exists_primitive_element_iff_finite_intermediateField, Field.FiniteDimensional.of_finite_intermediateField",
+   "date": "2026-10-16",
+   "verdict": "partial matches for field-theory ingredients; whole item needs the finite-family induction and set arguments written in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin_rank_le_of_isAlgebraic_right|finiteDimensional_adjoin|finrank_mul_finrank",
+   "results": "7 hits; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Algebraic.lean, Mathlib/FieldTheory/IntermediateField/Algebraic.lean",
+   "date": "2026-10-16",
+   "verdict": "partial matches for field-theory ingredients; whole item needs the finite-family induction and set arguments written in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.finrank_sup_le",
+   "results": "1 hits; IntermediateField.finrank_sup_le",
+   "date": "2026-10-16",
+   "verdict": "partial match: the binary degree inequality, not the full finite-family and finite-subset statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a compositum over one intermediate field is at most the degree of the other intermediate field over the base. A finite set of algebraic elements generates a finite dimensional field extension.",
+   "results": "8 hits; IntermediateField.rank_sup_le_of_isAlgebraic, IntermediateField.adjoin_rank_le_of_isAlgebraic, IntermediateField.adjoin_rank_le_of_isAlgebraic_right, IntermediateField.adjoin_rank_le_of_isAlgebraic_left, IntermediateField.rank_sup_le, IntermediateField.finrank_sup_le, IntermediateField.finiteDimensional_sup, IntermediateField.finInsepDegree_le_of_left_le",
+   "date": "2026-10-16",
+   "verdict": "partial matches for field-theory ingredients; whole item needs the finite-family induction and set arguments written in the proof"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -44,5 +136,20 @@
  "proof_split_by": "list",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-qlbar-condensed"
+ "unit": "sk-def-sfb-qlbar-condensed",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-qlbar-condensed-subextensions",
+  "worker": "stage1",
+  "summary": "Reused the three existing Mathlib leaves for the relative compositum bound, finite tower law, and adjoining algebraic generators. Wrote out the binary argument, induction including n=0, partial-order and directedness argument, finite-subset construction, and the two union inclusions. Added definition references and inline meanings without changing any mathematical hypothesis or conclusion. No new nodes, no Lean edits or compiles.",
+  "blueprint": "The node is itself the blueprint lemma. Step 1 realizes the binary degree calculation of imported proof paragraph 1; step 2 realizes its induction, empty-compositum case, and directedness. Step 3 realizes imported proof paragraph 2 (algebraicity, singleton adjunction, finite compositum); step 4 writes its union conclusion as two inclusions. The current main-20261015 node markdown states clauses 1–2 without a Proof section; the parent sk-def-sfb-qlbar-condensed uses exactly this finite-compositum directedness."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-2a0010b3a",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-2a0010b3a (reviewer sub-agent of L); spot-checked: Reviewed mathematics, sources, route, cited nodes, edge cases, and DAG overlap. No faults or repairs found; review written to review.md."
+ }
 }
