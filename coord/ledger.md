@@ -15643,3 +15643,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/M3/Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization (stage 3; reviewer PASS; first push; landing 20261016T221619-L-1617525 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest (stage 3; reviewer PASS; first push; landing 20261016T221619-L-1617625 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/N2/Sheaf.Paper.FiniteDiscreteCoefficientTerminal (stage 3; reviewer PASS; first push; landing 20261016T221620-L-1617735 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (stage 3; reviewer PASS; first push; landing 20261016T221620-L-1617866 (proof); batch 20261016T221550; modules 1; new nodes 0)

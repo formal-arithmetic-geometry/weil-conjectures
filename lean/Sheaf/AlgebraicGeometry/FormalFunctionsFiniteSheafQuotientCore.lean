@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import all Sheaf.AlgebraicGeometry.IdealPowerProductRestrictionZero
+import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 
 @[expose] public section
 universe u
@@ -69,8 +69,6 @@ private theorem tensor_unit_factor {A B C : Scheme.{u}} (i : A ⟶ B) (g : B ⟶
     Iso.symm_hom, Adjunction.comp_unit_app, Category.assoc] using hu.symm
 
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
     (n : ℕ) (F : B.Modules) :
@@ -78,9 +76,10 @@ private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
         cokernel (Scheme.idealModuleProductι (J ^ n).toModulesι F),
       formalModuleQuotientπ J n F ≫ e.hom =
         cokernel.π (Scheme.idealModuleProductι (J ^ n).toModulesι F) := by
-  have := Scheme.Modules.power_mono J n
-  let e := Subobject.isoOfMkEqMk _ _ (Scheme.Modules.power_subobject J n)
+  obtain ⟨d, hd⟩ := (Scheme.Modules.idealData_recursive_power_comparison J n).2
+  let e := d.symm
   have he : e.hom ≫ (J ^ n).toModulesι = (Scheme.idealSheafPower J.toModulesι n).2 := by
+    rw [← hd]
     simp [e]
   let : MonoidalCategory B.Modules := SheafOfModules.monoidalCategory B.sheaf
   open MonoidalCategory in
@@ -100,7 +99,15 @@ private theorem power_quotient_iso {B : Scheme.{u}} (J : B.IdealSheafData)
     simp [q, Scheme.idealModuleProductι]
   refine ⟨cokernel.mapIso _ _ q (Iso.refl F) (by simpa using hq.symm), ?_⟩
   simp [formalModuleQuotientπ, cokernel.mapIso]
--/
+
+private theorem ideal_quotient_congr {B : Scheme.{u}} (J K : B.IdealSheafData)
+    (h : J = K) (F : B.Modules) :
+    ∃ e : cokernel (Scheme.idealModuleProductι J.toModulesι F) ≅
+        cokernel (Scheme.idealModuleProductι K.toModulesι F),
+      cokernel.π (Scheme.idealModuleProductι J.toModulesι F) ≫ e.hom =
+        cokernel.π (Scheme.idealModuleProductι K.toModulesι F) := by
+  subst K
+  exact ⟨Iso.refl _, by simp⟩
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -125,6 +132,45 @@ theorem formalFunctionsFinite_sheaf_quotient_iso {X Y : Scheme.{u}} (f : X ⟶ Y
           ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F),
       formalModuleQuotientπ J (n + 1) F' ≫ e.hom =
         formalFunctionsFiniteFMap f y F n := by
-  sorry
+  classical
+  dsimp only
+  let p := pullback.fst (Y.fromSpecStalk y) f
+  let g := pullback.snd (Y.fromSpecStalk y) f
+  let i := formalFunctionsFiniteι f y n
+  let F' := (Scheme.Modules.tensorPullback g).obj F
+  let J := (Scheme.IdealSheafData.ofIdealTop
+    ((maximalIdeal (Y.presheaf.stalk y)).map
+      (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap p
+  have hp : IsPullback (pullback.fst (formalFibreBaseMap Y y n) f) i
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (formalFibreIdeal Y y n)))) p := by
+    apply ((IsPullback.of_hasPullback (Y.fromSpecStalk y) f).paste_vert_iff
+      (by simp [i, formalFunctionsFiniteι])).mp
+    simpa [i, p, formalFunctionsFiniteι, formalFibreBaseMap, formalFibreι] using
+      (IsPullback.of_hasPullback (formalFibreBaseMap Y y n) f)
+  have hk : i.ker = J ^ (n + 1) := by
+    rw [← hp.flip.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso]
+    rw [(quotientBaseChange_closedImmersion_ideal p (formalFibreIdeal Y y n)).2.1]
+    exact ((quotientBaseChange_extendedIdeal_mul_pow p).2
+      (maximalIdeal (Y.presheaf.stalk y)) (n + 1) (by omega)).symm
+  have : IsClosedImmersion i := formalFunctionsFiniteι_isClosedImmersion f y n
+  obtain ⟨a, ha⟩ := power_quotient_iso J (n + 1) F'
+  obtain ⟨d, hd⟩ := ideal_quotient_congr (J ^ (n + 1)) i.ker hk.symm F'
+  obtain ⟨η, hη, _⟩ := Scheme.Modules.closedImmersion_unit_quotient i
+  have hη' := hη F'
+  have : IsIso (η F') := hη'.2.2.2
+  let b := asIso (η F')
+  have hb : cokernel.π (Scheme.idealModuleProductι i.ker.toModulesι F') ≫ b.hom =
+      (Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)).unit.app F' :=
+    hη'.2.2.1
+  obtain ⟨c, hc⟩ := tensor_unit_factor i g (formalFibreι f y n)
+    (formalFunctionsFiniteι_snd f y n).symm
+    (Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)) F
+  refine ⟨a ≪≫ d ≪≫ b ≪≫ (Scheme.Modules.pushforward i).mapIso c, ?_⟩
+  change formalModuleQuotientπ J (n + 1) F' ≫
+    a.hom ≫ d.hom ≫ b.hom ≫ (Scheme.Modules.pushforward i).map c.hom = _
+  rw [← Category.assoc, ha]
+  rw [← Category.assoc, hd]
+  rw [← Category.assoc, hb]
+  exact hc
 
 end AlgebraicGeometry

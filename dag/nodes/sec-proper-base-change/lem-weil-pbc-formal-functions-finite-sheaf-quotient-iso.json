@@ -27,14 +27,14 @@
    "elementary": true
   },
   {
-   "text": "Use the existing private Scheme.Modules.power_mono and Scheme.Modules.power_subobject lemmas from IdealPowerProductRestrictionZero, imported with import all, to identify the recursive idealSheafPower inclusion with (J^(n+1)).toModulesι as subobjects. Whiskering their subobject isomorphism with the arbitrary F gives equal multiplication-image subobjects. Subobject.isoOfMkEqMk and cokernel.mapIso produce a quotient isomorphism compatible with quotient projections. This is the fully proved private power_quotient_iso argument; no affine separatedness, range factorization or power-subobject proof is duplicated locally.",
+   "text": "Apply the public proved idealData_recursive_power_comparison and invert its isomorphism. Its inclusion equation identifies the recursive idealSheafPower inclusion with (J^(n+1)).toModulesι. Whiskering the isomorphism with the arbitrary module F gives equal multiplication-image subobjects. Subobject.isoOfMkEqMk and cokernel.mapIso yield the proved private power_quotient_iso, including compatibility with quotient projections. No private power lemma is imported and no power comparison is reproved locally.",
    "uses": [
-    "lem-weil-pbc-ideal-power-product-restriction-zero"
+    "lem-pc-ideal-data-recursive-power-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply closedImmersion_unit_quotient to the finite map and F prime. Its isomorphic quotient map gives an isomorphism from the cokernel of multiplication by the kernel ideal to pushforward of tensorPullback of F prime. Transport the previous quotient comparison by the kernel equality; its projection followed by this isomorphism is the closed-immersion adjunction unit.",
+   "text": "Apply closedImmersion_unit_quotient to the finite map and F prime. Its induced quotient morphism is an isomorphism from the cokernel of multiplication by the kernel ideal to the pushforward of tensorPullback of F prime, and its composite with the quotient projection is the adjunction unit. Transport the quotient along the kernel equality using ideal_quotient_congr: eliminate the ideal equality and use the identity isomorphism. Keeping this transport as a separate isomorphism avoids rewriting the equality inside the recursive formalModuleQuotient definition.",
    "uses": [
     "lem-weil-pbc-closed-immersion-unit-quotient"
    ],
@@ -52,15 +52,15 @@
  "proof_deps": [
   "lem-weil-pbc-formal-functions-finite-sheaf-quotient-closed",
   "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "lem-pc-ideal-data-recursive-power-comparison",
   "lem-weil-pbc-closed-immersion-unit-quotient",
   "def-weil-pbc-formal-functions-finite-pullback",
   "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
-  "by": "C1 stage-3 worker",
+  "by": "N3 stage-3 worker",
   "document": "Stacks Project; existing library declarations and Mathlib",
-  "place": "Tags 02OD, 04CJ (1), 01I8 and 01IC; explicit categorical transport by conjugateIsoEquiv and cokernel.mapIso"
+  "place": "Tags 02OD and 04CJ (1); public idealData_recursive_power_comparison, pasted pullback square, cokernel.mapIso, equality elimination and conjugateIsoEquiv"
  },
  "mathlib_searches": [
   {
@@ -116,12 +116,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T040742-L-3946969",
+  "landing": "20261016T221620-L-1617866",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
