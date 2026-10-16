@@ -3,40 +3,73 @@
  "blueprint": {
   "is": "def-sfb-rationalization-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$D_{\\mathrm{cons}}(X,E)$ as the rationalization of $D_{\\mathrm{cons}}(X,\\mathcal O_E)$",
- "statement": "Let $X$ be a scheme whose underlying topological space is Noetherian. There is an\nequivalence of categories\n$$\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)[\\ell^{-1}]\\simeq D_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)\n$$\nfrom the rationalization at the powers of $\\ell$ [sk-def-sfb-rationalization]. Composed\nwith the localization functor\n$Q\\colon D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)\\to D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)[\\ell^{-1}]$,\nit is isomorphic to $E\\otimes^{\\mathrm L}_{\\cO_E}-$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E\\subseteq\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and its ring of integers $\\cO_E$ [sk-def-sfb-condensed-ring]. Let $X$ be a scheme whose underlying topological space is Noetherian. Use the pulled-back coefficient rings of [sk-def-sfb-pulled-back-coefficients] and the bounded constructible derived categories of [sk-def-sfb-bounded-constructible]. There is an\nequivalence of categories\n$$\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)[\\ell^{-1}]\\simeq D_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)\n$$\nfrom the rationalization at the powers of $\\ell$ [sk-def-sfb-rationalization]. Composed\nwith the localization functor\n$Q\\colon D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)\\to D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)[\\ell^{-1}]$,\nit is isomorphic to $E\\otimes^{\\mathrm L}_{\\cO_E}-$, the functor of [def-sfb-bounded-constructible-extend-scalars].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.md",
   "place": "node def-sfb-rationalization-equivalence, order 1651"
  },
  "stmt_deps": [
-  "sk-def-sfb-rationalization"
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-rationalization",
+  "def-sfb-bounded-constructible-extend-scalars"
  ],
  "proof": [
   {
-   "text": "Both $Q$ and $E\\otimes^{\\mathrm L}_{\\cO_E}-$ are localization functors for the same class\n$W_{\\ell^{\\mathbf N}}$: $Q$ by definition [sk-def-sfb-rationalization], and\n$E\\otimes^{\\mathrm L}_{\\cO_E}-$ by [thm-sfb-extend-scalars-localization]. Two localizations\nat the same class are related by a unique equivalence compatible with the localization\nfunctors.",
+   "text": "Set $\\mathcal C=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\cO_E)$, $\\mathcal D_1=\\mathcal C[\\ell^{-1}]$, $\\mathcal D_2=D_{\\mathrm{cons}}(X_{\\mathrm{proét}},E)$, and $L_1=Q$. Define $L_2\\colon\\mathcal C\\to\\mathcal D_2$ to be $\\operatorname{boundedConstructibleExtendScalars}(X,\\ell,E)$ of [def-sfb-bounded-constructible-extend-scalars]: the restriction of $L(\\operatorname{Ext}_\\varphi)=E_X\\otimes^{\\mathrm L}_{\\cO_{E,X}}-$, with the pulled-back coefficient morphism $\\varphi\\colon\\cO_{E,X}\\to E_X$. Thus $L_2$ is precisely the restricted functor denoted $E\\otimes^{\\mathrm L}_{\\cO_E}-$ in the item and in [thm-sfb-extend-scalars-localization]; no change of coefficient categories is involved. Take $W$ to consist of morphisms whose mapping cone is killed by some power $\\ell^n$, $n\\geq0$. Then $L_1$ is a localization for $W$ by [sk-def-sfb-rationalization], and $L_2$ is a localization for this same $W$ by [thm-sfb-extend-scalars-localization], since $X$ is topologically Noetherian.",
    "uses": [
+    "def-sfb-bounded-constructible-extend-scalars",
     "sk-def-sfb-rationalization",
     "thm-sfb-extend-scalars-localization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.proof.md",
+    "place": "sole proof paragraph"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-weil-pbc-localization-universal-property], applied to the localization $Q\\colon\\mathcal C\\to\\mathcal D_1$ and the $W$-inverting functor $L_2$, choose $F\\colon\\mathcal D_1\\to\\mathcal D_2$ with a natural isomorphism $\\alpha\\colon F\\circ Q\\cong L_2$. Apply clause (1) again to the localization $L_2\\colon\\mathcal C\\to\\mathcal D_2$ and the $W$-inverting functor $Q$ to choose $G\\colon\\mathcal D_2\\to\\mathcal D_1$ with $\\beta\\colon G\\circ L_2\\cong Q$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.proof.md",
+    "place": "sole proof paragraph"
+   }
+  },
+  {
+   "text": "The composite $\\beta\\circ G(\\alpha)$ is a natural isomorphism $G\\circ F\\circ Q\\cong Q$. Apply clause (2) of [lem-weil-pbc-localization-universal-property] with localization $Q$, functors $G\\circ F\\circ Q$ and $Q$ on $\\mathcal C$, and their lifts $G\\circ F$ and $\\operatorname{id}_{\\mathcal D_1}$, using the identity comparison isomorphisms (with the canonical associativity and identity identifications). These functors invert $W$ because $Q$ does and functors preserve isomorphisms. The composite therefore lifts to $G\\circ F\\cong\\operatorname{id}_{\\mathcal D_1}$. The composite $\\alpha\\circ F(\\beta)$ is a natural isomorphism $F\\circ G\\circ L_2\\cong L_2$. Apply clause (2) with localization $L_2$, functors $F\\circ G\\circ L_2$ and $L_2$, and their lifts $F\\circ G$ and $\\operatorname{id}_{\\mathcal D_2}$, again with identity comparisons. These functors invert $W$ because $L_2$ does. This gives $F\\circ G\\cong\\operatorname{id}_{\\mathcal D_2}$. Thus $G$ is a quasiinverse of $F$, so $F$ is an equivalence, and $\\alpha\\colon F\\circ Q\\cong L_2$ is the required comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.proof.md",
+    "place": "sole proof paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-bounded-constructible-extend-scalars",
   "sk-def-sfb-rationalization",
-  "thm-sfb-extend-scalars-localization"
+  "thm-sfb-extend-scalars-localization",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-rationalization-equivalence.proof.md",
+  "place": "sole proof paragraph"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -59,5 +92,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-sfb-rationalization-comparison"
+ "unit": "sk-thm-sfb-rationalization-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-rationalization-equivalence",
+  "worker": "stage1",
+  "summary": "Identify Q and extension of scalars as localizations at the same torsion-cone class. Use the existing Mathlib leaf lem-weil-pbc-localization-universal-property to lift each functor through the other localization, and lift the two explicit composite natural isomorphisms to exhibit a quasiinverse. No new nodes: the proposed generic uniqueness leaf is unnecessary. Restore the unit's ambient prime/finite-extension hypotheses and definition references. Repair of returned head 9f13399b2f: re-read the revised extension-of-scalars definition and all seven cited statements against the current live DAG mirror; step 1 now explicitly identifies its named full-subcategory restriction with the functor of the localization theorem. The comparison construction and statement are unchanged.",
+  "blueprint": "Step 1 realizes the first two sentences of the sole current blueprint proof paragraph. Steps 2–3 supply the argument behind its last sentence (uniqueness of localizations), using the existing generic universal-property Mathlib leaf; both composites are written explicitly. The unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-8a1d75cfb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-8a1d75cfb (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited nodes and sources, and audited all three proof steps. The repaired scalar-extension identification is type-correct; both functors localize the same ell-power torsion-cone class; the universal-property lifts and quasiinverse composites are correct. Edge cases and duplicate searches passed. Review recorded in review.md."
+ }
 }

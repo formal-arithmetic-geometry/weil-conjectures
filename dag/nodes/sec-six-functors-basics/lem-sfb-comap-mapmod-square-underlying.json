@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-comap-mapmod-square-underlying",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The square isomorphism is the identity on underlying objects",
@@ -17,24 +17,116 @@
  ],
  "proof": [
   {
-   "text": "Each constituent isomorphism in the construction of [def-sfb-comap-mapmod-square] (associators,\ncompatibility of restriction of scalars with composition and with equal morphisms, compatibility\nof $\\mathrm{mapMod}(F)$ with restriction of scalars) has identity underlying morphisms, and so\ndoes their composite.",
+   "text": "First compute the scalar-restriction comparisons from [def-sfb-modobj-restriction]. For monoid morphisms $a:A\\to B$, $b:B\\to T$ and a $T$-module $N$ with action $\\gamma_N$, restriction successively along $b$ and $a$ gives the action $\\gamma_N\\circ(b\\otimes 1_N)\\circ(a\\otimes 1_N)=\\gamma_N\\circ((b\\circ a)\\otimes 1_N)$. This is exactly restriction along $b\\circ a$ by functoriality of tensor. Equal scalar morphisms also give equal actions. In each case the canonical comparison and its inverse have underlying map $1_N$: the module-morphism equation of [sk-def-sfb-module-objects] reduces to equality of these actions. Naturality reduces to $u\\circ1=1\\circ u$, since restriction leaves every underlying arrow unchanged. Functor-composition associators likewise evaluate to identity module maps, since reparenthesizing functor composition changes neither its object nor arrow assignment.",
    "uses": [
-    "def-sfb-comap-mapmod-square"
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-mapmod-square-underlying.proof.md",
+    "place": "sole proof paragraph; expanded constituent comparisons"
+   }
+  },
+  {
+   "text": "Next compute compatibility of transport with restriction, using the action formula of [def-sfb-modobj-transport] and [def-sfb-modobj-restriction]. Write $m$ for the underlying object of the given $S_X$-module $M$ and $\\gamma:S_X\\otimes m\\to m$ for its action. The $FR_X$-actions on transport after restriction and on restriction after transport are respectively $F(\\gamma\\circ(\\varphi_X\\otimes1_m))\\circ\\mu^F_{R_X,m}$ and $F\\gamma\\circ\\mu^F_{S_X,m}\\circ(F\\varphi_X\\otimes1_{Fm})$. They are equal, because $F$ preserves composition and the naturality axiom of its lax monoidal structure says $F(\\varphi_X\\otimes1_m)\\circ\\mu^F_{R_X,m}=\\mu^F_{S_X,m}\\circ(F\\varphi_X\\otimes1_{Fm})$. Thus $1_{Fm}$ is linear in both directions by [sk-def-sfb-module-objects]. These identity maps give the canonical comparison and its inverse; naturality reduces to $Fu\\circ1=1\\circ Fu$, since both functors take an underlying module map $u$ to $Fu$. No structure map $\\mu^F$ is inverted.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-mapmod-square-underlying.proof.md",
+    "place": "sole proof paragraph; expanded constituent comparisons"
+   }
+  },
+  {
+   "text": "Use the specified common-composite comparison of [def-sfb-comap-mapmod-square]. Write $T_S$ and $T_R$ for $\\operatorname{mapMod}(F)$ on $S_X$-modules and $R_X$-modules respectively. Up to the functor-composition associators, its path is\n$$\n\\operatorname{Res}_{\\varphi_Y}\\circ\\operatorname{Res}_{\\eta_S}\\circ T_S\n\\cong\\operatorname{Res}_{\\eta_S\\circ\\varphi_Y}\\circ T_S\n\\cong\\operatorname{Res}_{F\\varphi_X\\circ\\eta_R}\\circ T_S\n\\cong\\operatorname{Res}_{\\eta_R}\\circ\\operatorname{Res}_{F\\varphi_X}\\circ T_S\n\\cong\\operatorname{Res}_{\\eta_R}\\circ T_R\\circ\\operatorname{Res}_{\\varphi_X}.\n$$\nThe first and third comparisons are the composition comparisons of step 1; the second is its equal-morphism comparison applied to $\\eta_S\\circ\\varphi_Y=F\\varphi_X\\circ\\eta_R$; the fourth is the inverse of step 2, followed by $\\operatorname{Res}_{\\eta_R}$. Each constituent and each functor associator has underlying identity at $M$, by steps 1 and 2. Whiskering preserves this property: restriction leaves underlying arrows unchanged by [def-sfb-modobj-restriction], and transport sends an identity to $F(1_m)=1_{Fm}$ by [def-sfb-modobj-transport]. Composition of module morphisms is composition in the ambient category by [sk-def-sfb-module-objects]. Thus the specified square isomorphism has underlying component a composite of identities of $Fm$, hence $1_{Fm}$, as required.",
+   "uses": [
+    "def-sfb-comap-mapmod-square",
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-mapmod-square-underlying.proof.md",
+    "place": "sole proof paragraph; expanded constituent comparisons"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport",
   "def-sfb-comap-mapmod-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-mapmod-square-underlying.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-mapmod-square-underlying.proof.md",
+  "place": "sole proof paragraph; expanded constituent comparisons"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the component of comap mapMod comap isomorphism has identity underlying morphism",
+   "results": "8 hits: Mod_.comap_map_hom, comap_obj_X, Scheme.Modules.pullbackId, ModuleCat.restrictScalarsId, and presheaf/sheaf module comparisons. Read pinned Mod.lean:351-414 and ChangeOfRings.lean:195-269; these give restriction or concrete-module comparisons, not the general lax-monoidal square.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along a commuting square of monoid objects commutes with a lax monoidal functor via identity maps on the transported modules",
+   "results": "8 hits: Mod_.scalarRestriction, scalarRestriction_hom, scalarRestriction_smul and ModuleCat.restrictScalarsId/Comp component lemmas. Read pinned Mod.lean:351-414 and ChangeOfRings.lean:195-269. None states the module-transport square.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.comap, CategoryTheory.Functor.mapMod",
+   "results": "0 hits; service responded: unknown identifier 'CategoryTheory.Functor.mapMod'. This query alone does not establish absence; semantic and source searches were also read.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comapComp|comapIsoOfEq|mapModComapIso|comap_map_hom|def mapMod",
+   "results": "0 literal hits under CategoryTheory/Monoidal. Read Mod.lean:351-414: comap exists but the composition/equality interactions are only a TODO; Mon.lean:856 also leaves mapMod as a TODO.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|mapMod",
+   "results": "5 hits when restricted to CategoryTheory/Monoidal/Mod.lean: section comap at 351, documentation at 397 and 401, def comap at 403 and TODO at 412. The wrapper prints line-only rg output with malformed file labels for a single-file subpath; actual lines were read directly.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport of internal modules by a lax monoidal functor commutes with restriction of scalars and the canonical isomorphism has identity components",
+   "results": "8 hits: ModuleCat.restrictScalarsId; Mod_.comap_obj_mod, comap, comap_map_hom; restrictScalarsId component naturality; TransportEnrichment.forgetEnrichmentEquiv; Monoidal.commTensorRight and coreMonoidalTransport. Restriction/ordinary module results do not include transport of arbitrary internal modules; enrichment and strong-monoidal tensor comparisons concern different constructions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules in monoidal categories the natural comparison between scalar restriction before or after a lax monoidal functor is induced by identity isomorphisms",
+   "results": "8 hits: Mod_.scalarRestriction_hom, scalarRestriction, scalarRestriction_smul, comap_obj_mod, comap and ModuleCat.restrictScalarsId component results. Read pinned Mod.lean:351-414 and ChangeOfRings.lean:195-269. These give scalar restriction, not the arbitrary lax-monoidal transport square.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*[Cc]omap|[Cc]omap.*mapMod|comapComp|comapIsoOfEq",
+   "results": "4 hits under CategoryTheory: GradedObject.lean:202,204,215 and Pi/Basic.lean:99. Read Pi/Basic.lean:80-118 and GradedObject.lean:185-220: comap reindexes category-valued families or graded objects, not internal modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -54,5 +146,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-comap-mapmod-square-underlying",
+  "worker": "stage1",
+  "summary": "Replaced the earlier preservation-only argument by explicit computations of restriction-composition actions and the transport-restriction action equality via lax-monoidal naturality. The canonical constituent comparisons and their inverses are identities on underlying objects, so the specified composite is too. Reused four existing definition nodes; no new nodes. Checked the read-only project for attachment and the pinned Mathlib sources after two semantic phrasings. Second reading writes the four-comparison path explicitly and cites the ambient-composition rule; independent semantic and source searches confirm no full-item Mathlib match.",
+  "blueprint": "Expands all constituents listed in the sole blueprint proof paragraph: step 1 covers functor associators and restriction along composites/equal maps, step 2 proves transport-restriction compatibility by the displayed action calculation, step 3 composes them along the common square morphism. This is the formal-input clause of unit step 1; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q33-66c0891eb",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-66c0891eb (reviewer sub-agent of L); spot-checked: Read the full item, report, four cited statements, current blueprint sources and unit/chapter route. All three action and component calculations agree with master ChangeOfScalarsSquare.lean:73–98; hypotheses, comparison directions and lax-monoidal generality are correct. Edge cases, duplicate searches and dependency checks found no fault. No fixes or tool_uses needed. Detailed checks are in review.md."
+ }
 }

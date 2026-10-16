@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-cd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Cohomological dimension",
- "statement": "For a qcqs scheme $S$ and a qcqs morphism $g\\colon X\\to Y$, the\n*$\\ell$-cohomological dimensions* are\n\n$$\n\\begin{aligned}\n\\operatorname{cd}_\\ell(S)&=\\sup\\{q: H^q(S_{\\Proet},F)\\neq0\n  \\text{ for some classical $\\ell$-power torsion sheaf $F$}\\},\\\\\n\\operatorname{cd}_\\ell(g)&=\\sup\\{q: R^qg_*F\\neq0\n  \\text{ for some classical $\\ell$-power torsion sheaf $F$ on }X_{\\Proet}\\}.\n\\end{aligned}\n$$\n\nFor a field $K$ we write $\\operatorname{cd}_\\ell(K)=\\operatorname{cd}_\\ell(\\Spec K)$.\n\nBy the cohomology comparison and the direct-image comparison these are the usual\n$\\ell$-cohomological dimensions computed on the étale sites, so the classical\nbounds apply. If $K$ is a field with $\\operatorname{cd}_\\ell(K)<\\infty$, then\n$\\operatorname{cd}_\\ell(S)$ and $\\operatorname{cd}_\\ell(g)$ are finite for all\nschemes $S$ and morphisms $g$ of finite type over $K$ (Stacks Project, Tag\n0F10).",
+ "statement": "Fix a prime $\\ell$. All sheaves below are sheaves of abelian groups. On either site, put $F[\\ell^r]=\\ker(\\ell^r:F\\to F)$ for $r\\geq0$, and call $F$ *$\\ell$-power torsion* if the canonical map $\\varinjlim_{r\\geq0}F[\\ell^r]\\to F$ is an isomorphism, with the inclusions as transition maps. This is the local torsion convention; no common exponent is required. Take the following suprema over $q\\in\\mathbf Z_{\\geq0}$ in $\\mathbf Z_{\\geq0}\\cup\\{+\\infty\\}$, whose empty supremum is $0$.\n\nFor a qcqs scheme $S$ and a qcqs morphism $g\\colon X\\to Y$, the\n*$\\ell$-cohomological dimensions* are\n\n$$\n\\begin{aligned}\n\\operatorname{cd}_\\ell(S)&=\\sup\\{q: H^q(S_{\\Proet},F)\\neq0\n  \\text{ for some classical $\\ell$-power torsion sheaf $F$}\\},\\\\\n\\operatorname{cd}_\\ell(g)&=\\sup\\{q: R^qg_*F\\neq0\n  \\text{ for some classical $\\ell$-power torsion sheaf $F$ on }X_{\\Proet}\\}.\n\\end{aligned}\n$$\n\nFor a field $K$ we write $\\operatorname{cd}_\\ell(K)=\\operatorname{cd}_\\ell(\\Spec K)$.\n\nBy the cohomology comparison and the direct-image comparison these are the usual\n$\\ell$-cohomological dimensions computed on the étale sites, so the classical\nbounds apply. If $K$ is a field with $\\operatorname{cd}_\\ell(K)<\\infty$, then\n$\\operatorname{cd}_\\ell(S)$ and $\\operatorname{cd}_\\ell(g)$ are finite for all\nschemes $S$ and morphisms $g$ of finite type over $K$ (Stacks Project, Tag\n0F10).\n\nHere the small pro-étale site is [sk-def-pe-site], classical means [sk-def-pe-classical-definition], and qcqs and finite type have the conventions of [def-weil-pbc-scheme-conventions]. The notation $H^q(S_{\\Proet},F)$ means $\\mathcal H^q(R\\Gamma(S_{\\Proet},F))$, where $\\Gamma$ is evaluation at the terminal object $S$; $R^qg_*F$ means $\\mathcal H^q(Rg_*F)$, where $(g_*F)(V)=F(V\\times_YX)$ is the direct image on the small pro-étale sites [det-pe-topos-functoriality-inverse-image]. Both right derived functors are as in [def-sfb-right-derived-functor], applied to a sheaf in degree zero. The étale notation in the comparison clause is that of [def-weil-pbc-etale-cohomology] and [def-weil-pbc-direct-image]. In the last sentence $g:X\\to Y$ is a $K$-morphism between finite-type $K$-schemes, in the sense of [def-weil-scheme-over-base].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/_section.md",
   "place": "node sk-def-cd, order 1506",
@@ -19,16 +19,194 @@
   ]
  },
  "stmt_deps": [
+  "sk-def-pe-site",
   "sk-def-pe-classical-definition",
+  "def-weil-pbc-scheme-conventions",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit",
+  "det-pe-topos-functoriality-inverse-image",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-direct-image",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Use the small pro-étale sites of [sk-def-pe-site]: their objects are weakly étale schemes over the base, and a covering must satisfy the fpqc finite-refinement condition above each affine open, with no requirement that the whole covering family be finite. The annihilator colimits below are colimits in sheaves for this topology. Transport the allowed coefficient sheaves, taking $\\Lambda=\\mathbf Z$ in [det-pe-classical-sheaves-modules]. Every classical abelian sheaf is $F\\cong\\nu^*F_0$, uniquely up to isomorphism, and $\\nu^*$ is exact and fully faithful. In particular $\\nu^*(F_0[\\ell^r])\\cong(\\nu^*F_0)[\\ell^r]$, by the kernel definition [def-pur-abelian-sheaf-kernel]. The adjunction also shows that $\\nu^*$ preserves the colimit of this countable diagram: maps from $\\nu^*(\\varinjlim A_r)$ to $G$ are the same as compatible maps $A_r\\to\\nu_*G$, hence as compatible maps $\\nu^*A_r\\to G$. The colimits exist by [lem-weil-pbc-module-sheaves-colimits-forgetful], for the constant ring $\\mathbf Z$ on each site. Therefore applying $\\nu^*$ identifies the canonical map $\\varinjlim F_0[\\ell^r]\\to F_0$ with $\\varinjlim F[\\ell^r]\\to F$. Full faithfulness reflects an isomorphism: lift its inverse by fullness and verify the two inverse equations by faithfulness. Thus $F$ is $\\ell$-power torsion if and only if $F_0$ is. This uses the local colimit condition, not the false requirement that all sections on arbitrary disconnected site objects have finite order.",
+   "uses": [
+    "sk-def-pe-site",
+    "det-pe-classical-sheaves-modules",
+    "def-pur-abelian-sheaf-kernel",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/_section.md",
+    "place": "comparison sentence; coefficient-sheaf identification"
+   }
+  },
+  {
+   "text": "For a sheaf $F_0$ regarded as a complex in degree zero, the right-derived notation is interpreted by [def-sfb-right-derived-functor], whose statement specifies the total right derived functor applied to such complexes. Then [sk-prop-sf-comparison], with $\\Lambda=\\mathbf Z$, gives $R\\Gamma(S_{\\Proet},\\nu_S^*F_0)\\simeq R\\Gamma(S_{\\Et},F_0)$. Taking degree $q$ cohomology identifies the two groups. Step 1 identifies exactly the permitted coefficient sheaves, so the sets of nonvanishing degrees, and hence their suprema, agree. This proves the absolute comparison clause, also for $\\operatorname{Spec}K$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099V (lemma-relative-comparison), 099W (lemma-compare-cohomology)"
+   }
+  },
+  {
+   "text": "For the given qcqs $g$, apply [sk-thm-pe-direct-image-comparison] to $F_0$ in degree zero and take degree $q$ cohomology. Exactness of $\\nu_Y^*$ from [det-pe-classical-sheaves-modules] gives $R^qg_{\\Proet,*}\\nu_X^*F_0\\cong\\nu_Y^*R^qg_{\\Et,*}F_0$. The same fully faithful exact functor detects zero objects: if $\\nu_Y^*G=0$, its identity is zero, so faithfulness implies $\\mathrm{id}_G=0$ and $G=0$; it preserves zero by additivity. Thus the higher direct images vanish in exactly the same degrees. Step 1 again identifies all permitted sheaves, proving the relative comparison clause. The qcqs hypothesis is precisely the hypothesis of the cited comparison theorem.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6 (lemma-morphism-comparison), assertion (2)"
+   }
+  },
+  {
+   "text": "Let $g:X\\to Y$ be a $K$-morphism between finite-type $K$-schemes. First check the geometric hypotheses explicitly. The field $K$ has only the ideals $(0)$ and $(1)$, so $\\operatorname{Spec}K$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and $Y$ are Noetherian. Every open of $X$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus any morphism with source $X$ is quasi-compact: its inverse image of an affine open is an open of $X$. Apply this also to the diagonal $X\\to X\\times_YX$ to see that $g$ is quasi-separated. The same argument for the structure maps proves that every finite-type $K$-scheme is qcqs. Clause (1) of [lem-kun-0f10] supplies a natural number $e_g$ bounding $R^qg_{\\Et,*}F_0$ for every torsion abelian étale sheaf, in the convention [def-kun-cd]. Every $\\ell$-power torsion sheaf is torsion: by the sheafified-colimit construction used in step 1, each section locally comes from some $F_0[\\ell^r]$, and is therefore locally annihilated by the positive integer $\\ell^r$. The local-section criterion of [lem-weil-pbc-torsion-sheaf-characterizations] implies the colimit-isomorphism condition of [def-weil-pbc-torsion-etale-sheaf]. Consequently this bound applies to the sheaves of step 1. Step 3 implies $\\operatorname{cd}_\\ell(g)\\leq e_g<\\infty$. No assumption on $\\operatorname{cd}_\\ell(K)$ is needed for this relative assertion.",
+   "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10 (lemma-finite-cd), assertion (1); Tag 0F0Z (definition-cd-f)"
+   }
+  },
+  {
+   "text": "We record explicitly the coefficient condition needed for the absolute bound. For an étale abelian sheaf $G$, [prop-weil-pbc-geometric-stalks-exact] identifies $(G[\\ell^r])_{\\bar y}$ with $(G_{\\bar y})[\\ell^r]$, and [lem-kun-stalks-commute-colimits] identifies the stalk of $\\varinjlim_rG[\\ell^r]$ with the corresponding colimit of abelian groups. By [lem-weil-pbc-filtered-colimit-modules-elementwise], applied to $\\mathbf Z$-modules, this is the union of the subgroups killed by powers of $\\ell$. Its inclusion into $G_{\\bar y}$ is an isomorphism exactly when every element is killed by such a power. By [lemma-weil-pbc-geometric-stalk-conservative], the canonical sheaf map is an isomorphism exactly when this holds at every geometric point. If $s:S\\to\\operatorname{Spec}K$ is qcqs and $F_0$ is $\\ell$-power torsion, apply [lem-sbc-qcqs-higher-images-prime-torsion] with the singleton set of primes $\\{\\ell\\}$. Each stalk element of $R^qs_*F_0$ is killed by a positive integer with all prime divisors equal to $\\ell$; such an integer is $\\ell^r$ (including $1=\\ell^0$). The criterion just proved shows that every $R^qs_*F_0$ is $\\ell$-power torsion in exactly the same sense as $F_0$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalks-commute-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-sbc-qcqs-higher-images-prime-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0DDC (lemma-torsion-cohomology), 0DDD (lemma-torsion-direct-image), fixed-prime refinement as stated in the cited node"
+   }
+  },
+  {
+   "text": "Suppose $\\operatorname{cd}_\\ell(K)<\\infty$ and let $S$ be finite type over $K$. Its structure morphism $s:S\\to\\operatorname{Spec}K$ is a morphism between finite-type $K$-schemes. Clause (1) of [lem-kun-0f10], in the convention [def-kun-cd], supplies $e_s\\geq0$ with $R^qs_*F_0=0$ for all torsion $F_0$ and $q>e_s$. The Noetherian-source argument in step 4 proves that $S$ and its structure morphism $s$ are qcqs, so the comparison of step 2 and the preservation theorem of step 5 apply. By step 2 choose $c\\geq0$ with $H^p(K_{\\Et},G)=0$ for $p>c$ and all $\\ell$-power torsion $G$. For any $\\ell$-power torsion $F_0$ on $S_{\\Et}$, step 5 shows that $G=R^qs_*F_0$ has this property for every $q\\geq0$. Both hypotheses of [lem-sc-leray-vanishing-bound] now hold for $s,F_0,c,e_s$, so $H^n(S_{\\Et},F_0)=0$ for $n>c+e_s$. Step 2 yields $\\operatorname{cd}_\\ell(S)\\leq c+e_s<\\infty$. This does not replace finite $\\ell$-dimension of $K$ by the stronger hypothesis of finite torsion dimension. Empty schemes and morphisms with empty source give only zero cohomology, consistent with the empty-supremum convention.",
+   "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "lem-sc-leray-vanishing-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/_section.md",
+    "place": "last sentence, absolute finiteness; relative input Stacks Tag 0F10 and the Leray rectangle bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-cd",
+  "def-pur-abelian-sheaf-kernel",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "det-pe-classical-sheaves-modules",
+  "lem-kun-0f10",
+  "lem-kun-stalks-commute-colimits",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-sc-leray-vanishing-bound",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sk-def-pe-site",
   "sk-prop-sf-comparison",
   "sk-thm-pe-direct-image-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-cd/_section.md",
+  "place": "comparison sentence and final finiteness sentence, made explicit using Stacks Tags 099V, 099W, 09A6, 0F10 and the cited fixed-prime and Leray inputs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ell cohomological dimension of a scheme or morphism is the supremum of degrees with nonzero cohomology of classical ell power torsion pro etale sheaves",
+   "results": "8 hits: CategoryTheory.injectiveDimension, CategoryTheory.projectiveDimension, CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.HasInjectiveDimensionLT, DerivedCategory.IsLE, CategoryTheory.HasProjectiveDimensionLE, DerivedCategory.IsGE, CategoryTheory.HasProjectiveDimensionLT",
+   "date": "2026-10-16",
+   "verdict": "no match: objectwise injective/projective dimension and derived cohomological bounds do not state or define the scheme/morphism invariant here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologicalDimension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological.dimension|ProEtale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits define the pro-etale topology and ell-adic cohomology with a fixed coefficient sheaf, not the supremum over classical ell-power torsion sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ell primary torsion etale cohomological dimension of a scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.subsingleton_h1Cotangent, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+   "date": "2026-10-16",
+   "verdict": "no match: etale topology, etale algebras and scheme dimension are different notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomological dimension of a left exact functor is the least upper bound of its nonzero right derived functors",
+   "results": "8 hits: CategoryTheory.injectiveDimension, CategoryTheory.projectiveDimension, CategoryTheory.HasInjectiveDimensionLE, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.HasInjectiveDimensionLT, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-16",
+   "verdict": "no match: objectwise injective/projective dimension and derived cohomological bounds do not state or define the scheme/morphism invariant here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of higher direct images for torsion abelian sheaves under a quasi compact quasi separated scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern vanishing of structure-sheaf sections after localization; grep found no declaration of this invariant"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?[Dd]imension|HasCohomologicalDimension|torsion.*vanish",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern vanishing of structure-sheaf sections after localization; grep found no declaration of this invariant"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologicalDimension|cohomologicalDimension|cohomological_dimension",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic results define etale topologies, individual sheaf cohomology, sheaf finiteness and Grothendieck abelian structure; none defines or bounds the classical ell-primary cohomological dimension. The independent Mathlib source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cohomological dimension of pushforward between small etale sites for primary torsion sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, CategoryTheory.Sheaf.H, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic results define etale topologies, individual sheaf cohomology, sheaf finiteness and Grothendieck abelian structure; none defines or bounds the classical ell-primary cohomological dimension. The independent Mathlib source grep has no hits."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -48,5 +226,94 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-cd"
+ "unit": "sk-def-cd",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-cd",
+  "worker": "stage1",
+  "summary": "Kept both pro-etale definitions, the field notation and both theorem clauses. Made the implicit prime, degree range, empty supremum, abelian coefficients, local ell-power torsion and right-derived operations explicit. Audited all statement notions and wrote six steps for the bundled comparison/finiteness assertions. Used exact full faithfulness and the sheaf adjunction for coefficient transport, then the two stated comparison theorems. Relative finiteness uses the existing all-torsion 0F10 input; absolute finiteness uses its relative clause together with fixed-prime preservation of higher direct images and the Leray bound, without strengthening the field hypothesis. No new nodes or Mathlib leaves. Avoided the comparison lemma phrased in terms of this definition and the all-in-one derived-category node whose dependency closure returns to this item. Second reading made the Noetherian-source proof of qcqs and the local-section torsion criterion explicit. Repaired the returned landing against the current DAG: reread the changed total-right-derived-functor statement, made the notation dependency explicit in step 2, and recorded its current universal-property clause verbatim in citations.json. Repaired the subsequent sk-def-pe-site landing rejection against returned head d0641a87e7a48e2b9f46c87ea7b74593b5048d87: reread its explicitly bound scheme and fpqc-covering prerequisite, made the topology convention an explicit input in step 1, and added a verbatim quote from the current site statement. The finite-refinement topology and all invariant clauses are unchanged. Repaired the returned missing-unit-file landing: included dag/units/sk-def-cd.json with realized.statement=[sk-def-cd], realized.steps=[] and realized_by, preserving every other unit field. Rebased the retained split against the current DAG and reread the direct-image comparison coefficient clarification; the existing application uses the discrete ring Z, so its hypotheses still hold.",
+  "blueprint": "The two displayed definitions and field notation are realized by stmt_deps and the explicit conventions. Steps 1-3 realize the comparison sentence; step 4 realizes final-sentence relative finiteness; steps 5-6 realize final-sentence absolute finiteness with its actual ell-primary field hypothesis. Imported blueprint node: from remains null; whole-blueprint searches found no equivalent definition. Step 1 now explicitly fixes the finite-refinement fpqc topology using the current site definition before transporting the coefficient sheaves.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Exact fully faithful classical-sheaf equivalence and its adjunction identify the allowed sheaves; these are the existing coefficient-comparison tools, not assertions about this invariant."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Provides colimits of abelian sheaves as modules over the constant ring Z on either site for the annihilator diagram."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The unit route explicitly calls for this cohomology comparison."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The unit route explicitly calls for this qcqs direct-image comparison."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Existing Stacks 0F10 relative torsion bound supplies finite integers; this is the exact classical bound named by the item."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exact stalks commute with the annihilator kernels in the fixed-prime criterion."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Stalks commute with the countable annihilator colimit."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Identifies the filtered colimit of stalk annihilator subgroups with their union."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects that the annihilator-colimit map is an isomorphism from its stalks."
+   },
+   {
+    "node": "lem-sbc-qcqs-higher-images-prime-torsion",
+    "why": "Supplies preservation of the singleton set of torsion primes by qcqs higher direct images; ordinary torsion preservation alone would not suffice."
+   },
+   {
+    "node": "lem-sc-leray-vanishing-bound",
+    "why": "Turns relative vanishing and field ell-primary cohomology vanishing into a uniform absolute bound."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes finite-type K-schemes Noetherian before applying the qcqs comparison and fixed-prime preservation tools."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Every open of a Noetherian source is quasi-compact, proving quasi-compactness both of a morphism and of its diagonal."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "The local-section criterion turns locally annihilating powers of ell into the torsion colimit condition required by the all-torsion bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-kun-0f10",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-sc-leray-vanishing-bound",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-3a5d58191",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-3a5d58191 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, 26 cited prerequisite statements, unit/chapter route and source passages. Classical ℓ-power torsion comparison, qcqs hypotheses, fixed-prime preservation and Leray finiteness are valid without strengthening the field hypothesis. No new nodes, circular dependency or repairs. Concrete checks recorded in review.md."
+ }
 }

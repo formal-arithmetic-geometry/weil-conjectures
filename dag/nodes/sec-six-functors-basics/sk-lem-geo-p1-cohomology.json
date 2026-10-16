@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "sk-lem-geo-p1-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-amb-p1-decomposition"
+  ]
  },
  "kind": "statement",
  "title": "Cohomology of the projective line and the trace",
- "statement": "Let $S$ be a Noetherian scheme on which $\\ell$ is invertible and\n$p:\\mathbf P^1_S\\to S$ the projection. The unit\n$\\Lambda_S\\to Rp_*\\Lambda_{\\mathbf P^1_S}$ and the class\n$c_1(\\mathcal O_{\\mathbf P^1_S}(1))$ define an isomorphism\n\n$$\n\\Lambda_S\\oplus\\Lambda_S(-1)[-2]\n      \\ \\xrightarrow{\\ \\sim\\ }\\ Rp_*\\Lambda_{\\mathbf P^1_S}\n      \\quad\\text{in }D(S_{\\mathrm{proét}},\\Lambda),   \\qquad\\text{(G2)}\n$$\n\ncompatible with base change: for $g:S'\\to S$ with $S'$ as in the lemma, the\nbase-change map $g^*Rp_*\\Lambda\\to Rp'_*\\Lambda$ in\n$D(S'_{\\mathrm{proét}},\\Lambda)$ carries the pullback of (G2) to (G2) for $S'$.\nLet\n\n$$\n\\operatorname{Tr}_p:Rp_*\\Lambda_{\\mathbf P^1_S}(1)[2]\\longrightarrow\\Lambda_S\n\\qquad\\text{(G3)}\n$$\n\nbe the morphism in $D(S_{\\mathrm{proét}},\\Lambda)$ given by the projection onto\nthe summand $\\Lambda_S$ of the twist of (G2). Then $\\operatorname{Tr}_p$ is\ncompatible with every Noetherian base change.",
+ "statement": "Fix a prime $\\ell$, an integer $r\\geq1$, and a finite commutative $\\mathbf Z/\\ell^r\\mathbf Z$-algebra $\\Lambda$. On each site the coefficient ring sheaf is the constant sheaf associated to the finite discrete ring $\\Lambda$; the Tate twists below need only be locally constant. Use the small pro-etale site and its ordinary derived category [def-weil-pbc-proetale-site], derived tensor [def-weil-derived-tensor], and the exact inverse image and derived direct image with their adjunction [sk-def-sfb-finite-derived-functors]. For a scheme $T$ on which $\\ell$ is invertible, put $\\Lambda_{T,\\mathrm{et}}(1)=\\mu_{\\ell^r,T}\\otimes_{\\mathbf Z/\\ell^r}\\Lambda_T$, and $\\Lambda_{T,\\mathrm{et}}(-1)=\\mathcal Hom_\\Lambda(\\Lambda_{T,\\mathrm{et}}(1),\\Lambda_T)$ [def-asd-finite-etale-tate-sheaf]. Define $\\Lambda_T(\\pm1)=\\nu_T^*\\Lambda_{T,\\mathrm{et}}(\\pm1)$ using the etale/pro-etale comparison pullback [def-sf-comparison-derived-pullback], and $K(1)=K\\otimes_\\Lambda^L\\Lambda_T(1)$. The Chern class is the scalar-extended Kummer boundary, pulled through $\\nu_T^*$; it is also the Cartier class composite of [sk-lem-geo-cartier]. Write $\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change]. The line bundle $\\mathcal O(1)$ is given on the standard charts by the degree-one transition $e_i=(x_i/x_j)e_j$ [def-pc-projective-space-twist]. A Noetherian scheme means one with a finite affine cover by spectra of Noetherian rings.\n\nLet $S$ be a Noetherian scheme on which $\\ell$ is invertible and\n$p:\\mathbf P^1_S\\to S$ the projection. The unit\n$\\Lambda_S\\to Rp_*\\Lambda_{\\mathbf P^1_S}$ and the class\n$c_1(\\mathcal O_{\\mathbf P^1_S}(1))$ define an isomorphism\n\n$$\n\\Lambda_S\\oplus\\Lambda_S(-1)[-2]\n      \\ \\xrightarrow{\\ \\sim\\ }\\ Rp_*\\Lambda_{\\mathbf P^1_S}\n      \\quad\\text{in }D(S_{\\mathrm{proét}},\\Lambda),   \\qquad\\text{(G2)}\n$$\n\ncompatible with base change: for $g:S'\\to S$ with $S'$ as in the lemma, the\nbase-change map $g^*Rp_*\\Lambda\\to Rp'_*\\Lambda$ in\n$D(S'_{\\mathrm{proét}},\\Lambda)$ carries the pullback of (G2) to (G2) for $S'$.\nLet\n\n$$\n\\operatorname{Tr}_p:Rp_*\\Lambda_{\\mathbf P^1_S}(1)[2]\\longrightarrow\\Lambda_S\n\\qquad\\text{(G3)}\n$$\n\nbe the morphism in $D(S_{\\mathrm{proét}},\\Lambda)$ given by the projection onto\nthe summand $\\Lambda_S$ of the twist of (G2). Then $\\operatorname{Tr}_p$ is\ncompatible with every Noetherian base change.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/_section.md",
   "place": "node sk-lem-geo-p1-cohomology, order 1544",
@@ -18,37 +20,235 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-tensor",
+  "sk-def-sfb-finite-derived-functors",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-sf-comparison-derived-pullback",
+  "sk-lem-geo-cartier",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist"
+ ],
  "proof": [
   {
-   "text": "Use the bounded-below cohomology and proper direct-image comparisons of\n[sk-prop-sf-comparison] and [sk-thm-pe-direct-image-comparison]. They reduce\n(G2) and (G3) to the following calculation in $D^+(S_{\\mathrm{ét}},\\Lambda)$,\nalso in the Noetherian generality of the lemma.",
+   "text": "Put $P=\\mathbf P^1_S$ and $N=\\ell^r$. The projection $p$ is proper by [lemma-nagata-projective-space-base-change-proper], hence separated and of finite type by [def-weil-proper-morphism]. Finite type includes quasi-compactness [def-weil-finite-type-morphism], and separated morphisms are quasi-separated [lem-pc-separated-quasi-separated]. Also $P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Thus all the ordinary etale proper-projection and comparison results used below apply, including after replacing $S$ by any Noetherian $S'$. By [lem-asd-etale-finite-twist-pullback], the etale twists are invertible locally free lines, their pullbacks are the corresponding twists, and these comparisons respect evaluation and tensor products. In particular twisting by $(1)[2]$ has inverse twisting by $(-1)[-2]$. Over $\\operatorname{Spec}R\\subset S$, the standard Proj charts [def-nagata-affine-proj] and affine fibre products [lem-weil-pbc-fibre-product-affine-spectra] give $R[t]$, $R[s]$, where $t=x_1/x_0$, $s=x_0/x_1$ and $s=t^{-1}$ on the intersection: the degree-zero monomials after inverting $x_i$ are powers of $x_{1-i}/x_i$. The infinity section $D$ is empty on the $t$ chart and is $s=0$ on the $s$ chart. Its ideal has generators $1,s$; multiplication by $s$ on $R[s]$ is injective by comparison of polynomial coefficients. Thus $D$ is effective Cartier, also after every $R\\to R'$. Its dual ideal [def-pc-divisor-line-bundle] has bases $e_0=1$, $e_1=s^{-1}$ with $e_0=s e_1=(x_0/x_1)e_1$, so it is exactly $\\mathcal O_P(1)$ [def-pc-projective-space-twist]. These formulas also show that the infinity section and this line bundle pull back to their counterparts on $P'$.",
    "uses": [
-    "sk-prop-sf-comparison",
-    "sk-thm-pe-direct-image-comparison"
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-nagata-affine-proj",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-divisor-line-bundle",
+    "def-pc-projective-space-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 1 (hypotheses for comparison); paragraph 2 (finite coefficients)"
+   }
   },
   {
-   "text": "Both components of (G2) are globally defined, the second by\n[sk-lem-geo-cartier] applied to the section at infinity. By proper base\nchange and since geometric stalks detect isomorphisms, it suffices to check\n(G2) on a geometric fibre, first for $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$. There\nthe genus-zero case of [sk-thm-curveestimate] gives cohomology only in\ndegrees $0$ and $2$, with $H^0=\\mathbf Z/\\ell^r\\mathbf Z$ and\n$H^2=(\\mathbf Z/\\ell^r\\mathbf Z)(-1)$, and its Kummer description sends a line\nbundle to its degree modulo $\\ell^r$. Since $\\mathcal O(1)$ has degree one, its\nclass generates $H^2$, and (G2) is an isomorphism. The unit and the class of\n$\\mathcal O(1)$ commute with base change, hence so do (G2), its inverse, and\n(G3). For a finite $\\mathbf Z/\\ell^r\\mathbf Z$-algebra $\\Lambda$, the case\n$\\mathbf Z/\\ell^r\\mathbf Z$ and the projection formula (Stacks, Tag\n[0GL5](https://stacks.math.columbia.edu/tag/0GL5)) give the assertion.",
+   "text": "Work first on the ordinary etale sites and put $A=\\mathbf Z/N\\mathbf Z$. For $B=A$ or $\\Lambda$, put $L_{T,B}=B_{T,\\mathrm{et}}(1)$ and define\n$$b_{S,B}:L_{S,B}[2]\\oplus B_S\\longrightarrow Rp_{\\mathrm{et},*}L_{P,B}[2].$$\nIts first component is the shifted unit $L_{S,B}[2]\\to Rp_*p^{-1}L_{S,B}[2]$, using twist pullback; its second component is adjoint to the scalar-extended Kummer class of $\\mathcal O_P(1)$ [def-asd-ordinary-finite-p1-kummer-class]. For arbitrary $g:S'\\to S$, these two components commute with the canonical exchange. For the unit this is the adjunction triangle identity in the three-factor exchange formula [def-kun-unbounded-exchange]. For the class, pullback of units gives a morphism from the inverse image of the Kummer sequence to the Kummer sequence on $P'$ [lem-amb-kummer-any-base]; the map on kernels is the root comparison of [lem-asd-etale-finite-twist-pullback]. The frame torsor of $\\mathcal O(1)$ [lem-sc-line-bundle-torsor] pulls back to the frame torsor of the line bundle with the same transition functions from step 1. Naturality of torsor classes and connecting maps [lem-amb-relative-torsor-cohomology], with empty open complement, therefore sends its Kummer boundary to the boundary on $P'$. Applying the adjunction-mate formula gives\n$$\\operatorname{BC}_{g,B}\\,g^{-1}b_{S,B}=b_{S',B}\\,e_{g,B},$$\nwhere $e_{g,B}$ is the ordered-sum comparison for $L_{S,B}[2]\\oplus B_S$.\n\nFor $B=A$, the finite-coefficient geometric-fibre formula [cor-weil-pbc-geometric-fiber-finite] identifies its cohomology stalks with the shifted cohomology of $\\mathbf P^1_{\\bar s}$. Apply derived geometric-stalk conservativity [lem-weil-pbc-derived-stalk-conservative] to the underlying abelian complexes (a map of coefficient modules is invertible whenever its underlying map is). These complexes are bounded below since they are derived direct images of shifted sheaves. The fibre is a smooth proper connected genus-zero curve by [lem-asd-projective-line-genus-zero]. Choose a primitive $N$th root only for this fibre calculation. Then [thm-sc-proper-cohomology] gives $H^0=A$, $H^1=0$, $H^2=A$ under root trivialization, and zero cohomology above degree two. Applying [lem-sc-constant-proper-degree-coordinates] with the identical algebraically closed fields and the curve itself as compactification identifies the Kummer boundary of a line bundle with its degree modulo $N$. By step 1 and [lem-pc-degree-agrees-sc], $\\mathcal O(1)=\\mathcal O([\\infty])$ has degree $1$. Thus the two components of $b_{S,A}$ induce isomorphisms on the only nonzero cohomology groups (degrees $-2,0$ after the shift), so $b_{S,A}$ is an isomorphism.\n\nFor general finite $\\Lambda$, apply derived scalar extension $-\\otimes_A^L\\Lambda_S$ [lem-pur-derived-change-of-rings] to this isomorphism. The proper projection formula [lem-amb-proper-coproducts-projection], with coefficient ring $A$, $K=\\Lambda_S$ and $L=L_{P,A}[2]$, identifies its target with $Rp_*L_{P,\\Lambda}[2]$. The identification of coefficient-restricted $Rp_*L_{P,\\Lambda}$ with the direct image computed in $A$-modules follows from [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]: apply its canonical composition comparison to $p$ and the identity-topos coefficient-restriction maps; restriction is exact, so its derived functor is restriction itself. Because the twist is a locally free $A$-line, $L_{P,A}\\otimes_A^L\\Lambda_P=L_{P,\\Lambda}$. To specify the $\\Lambda$-linear map, take the $p_\\Lambda^{-1}\\dashv Rp_{\\Lambda,*}$-adjunct of $1\\otimes\\varepsilon_{p,L}$ from $p_\\Lambda^{-1}(\\Lambda_S\\otimes_A^L Rp_{A,*}L)\\cong\\Lambda_P\\otimes_A^L p_A^{-1}Rp_{A,*}L$ to $\\Lambda_P\\otimes_A^L L$, using the derived pullback tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. After restriction to $A$ this is precisely the canonical projection map, by its mate-of-counit definition. Hence it is invertible: exact restriction of coefficients detects zero cohomology and therefore reflects isomorphisms. The mate-of-counit definition of projection sends the unit component to the unit component and the Kummer component to its scalar extension, which is exactly the defining scalar-root map $z\\mapsto1\\otimes z$. Consequently the resulting map is $b_{S,\\Lambda}$. This proves its invertibility even when $\\Lambda$ is nonflat over $A$. The componentwise exchange equality above already proves its compatibility with every Noetherian base change. Write $b_S=b_{S,\\Lambda}$ from now on.",
    "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-kun-unbounded-exchange",
+    "lem-amb-kummer-any-base",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sc-line-bundle-torsor",
+    "lem-amb-relative-torsor-cohomology",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-asd-projective-line-genus-zero",
+    "thm-sc-proper-cohomology",
+    "lem-sc-constant-proper-degree-coordinates",
+    "lem-pc-degree-agrees-sc",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 2, geometric-fibre genus-zero and Kummer calculation; compare current same-unit thm-amb-p1-decomposition"
+   }
+  },
+  {
+   "text": "Let $R_S=Rp_{\\mathrm{et},*}\\Lambda_P$ and $L_S=\\Lambda_{S,\\mathrm{et}}(1)$. The proper projection formula [lem-amb-proper-coproducts-projection] and $p^{-1}L_S\\cong L_P$ identify the target of $b_S$ with $(R_S\\otimes_\\Lambda^L L_S)[2]$. Tensor $b_S$ with $L_S^\\vee[-2]$ and use the evaluation $L_S\\otimes L_S^\\vee\\cong\\Lambda_S$ to obtain\n$$F_S:\\Lambda_S\\oplus\\Lambda_{S,\\mathrm{et}}(-1)[-2]\\xrightarrow{\\sim}R_S.$$\nThe first component is the unit; the second is the adjoint form of the same Kummer class. These identifications commute with base change: twist pullback and evaluation do so by [lem-asd-etale-finite-twist-pullback], and exchange commutes with the projection map by the explicit two-composite equality of [lem-weil-pbc-ringed-exchange-tensor-coherence]. Consequently, writing $d_g:g^{-1}(\\Lambda_S\\oplus\\Lambda_S(-1)[-2])\\cong\\Lambda_{S'}\\oplus\\Lambda_{S'}(-1)[-2]$, we have $\\mathrm{BC}^{\\mathrm{et}}_g\\,g^{-1}F_S=F_{S'}d_g$. No flatness of $\\Lambda$ over $\\mathbf Z/\\ell^r$ is needed: the invertible lines are flat over $\\Lambda$ itself.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 2, final sentence: extension to finite algebras by projection formula (Stacks 0GL5)"
+   }
+  },
+  {
+   "text": "Apply $\\nu_S^*$ to $F_S$. This is an exact functor on complexes by [lem-sf-comparison-pullback-exact]; its canonical derived tensor comparison is an isomorphism by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The bounded-below comparison is fully faithful by [sk-prop-sf-comparison]. All objects here are bounded below: the etale decomposition identifies $R_S$ with a sum in degrees $0,2$, and the coefficient sheaves and twists start in degree zero. For the qcqs map $p$, [sk-thm-pe-direct-image-comparison] gives the canonical isomorphism\n$$C_p:\\nu_S^*Rp_{\\mathrm{et},*}\\Lambda_P\\xrightarrow{\\sim}Rp_{\\mathrm{proet},*}\\Lambda_P.$$\nHence $\\widetilde F_S=C_p\\,\\nu_S^*F_S$ is an isomorphism with the source in (G2). Compatibility of $C_p$ with adjunction units identifies its first component with the pro-etale unit. For the second, the Chern class was defined by pulling back the same Kummer boundary. Its identification with the Cartier convention is precisely [sk-lem-geo-cartier]: the Cartier composite is $c_1(\\mathcal O(D))$, for $D$ the infinity section and $\\mathcal O(D)=\\mathcal O_P(1)$. The polynomial and transition calculation in step 1 establishes the Cartier hypothesis for every base change and identifies $\\mathcal O(D)$ with the specified $\\mathcal O(1)$, including its sign. Thus (G2) is the stated map.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-prop-sf-comparison",
+    "sk-thm-pe-direct-image-comparison",
     "sk-lem-geo-cartier"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 1, comparisons; paragraph 2, the two globally defined components"
+   }
+  },
+  {
+   "text": "Check the exchange morphism itself. Let $g:S'\\to S$ and $g_P:P'\\to P$ be its projective-line base change. Write $a_g:g_{\\mathrm{proet}}^*\\nu_S^*\\cong\\nu_{S'}^*g_{\\mathrm{et}}^*$ for the pullback comparison of [sk-thm-pe-direct-image-comparison]. Under these identifications,\n$$\\mathrm{BC}^{\\mathrm{proet}}_g\\,g^*C_p\n=C_{p'}\\,\\nu_{S'}^*(\\mathrm{BC}^{\\mathrm{et}}_g)\\,a_g,$$\nwith the analogous pullback comparison on $P'$ understood. Indeed exchange is unit, followed by the pullback-square isomorphism, followed by the image of the counit, as explicitly given by [def-kun-unbounded-exchange]; the same adjunction-mate formula applies on the pro-etale sites using [sk-def-sfb-finite-derived-functors]. To spell out the substitution, for either proper projection $u:U\\to V$ ($u=p$ or $p'$) write $H_T=\\nu_T^*$, put hats on the pro-etale adjunction, and set $a_u:\\widehat u^*H_V\\cong H_Uu^*$. The unit and counit compatibility in [sk-thm-pe-direct-image-comparison] are the two identities\n$$\\widehat\\eta_{u,H_VK}=R\\widehat u_*(a_{u,K}^{-1})\\,C_{u,u^*K}\\,H_V(\\eta_{u,K}),\\qquad\n\\widehat\\varepsilon_{u,H_UE}\\,\\widehat u^*(C_{u,E})=H_U(\\varepsilon_{u,E})\\,a_{u,Ru_*E}.$$\nIn the three-factor formula $\\mathrm{BC}^{\\mathrm{et}}_{g,E}=Rp'_*g_P^*(\\varepsilon_{p,E})\\,Rp'_*(\\theta_{Rp_*E})\\,\\eta_{p',g^*Rp_*E}$, the first identity replaces the unit factor and the second replaces the counit factor. Naturality moves $C$ past each intervening morphism. Compatibility of $a_u$ with composition identifies the middle factor with $\\widehat\\theta$ for the same square $pg_P=gp'$. The resulting three factors are exactly $R\\widehat p'_*\\widehat g_P^*(\\widehat\\varepsilon_{p,H_PE})\\,R\\widehat p'_*(\\widehat\\theta_{R\\widehat p_*H_PE})\\,\\widehat\\eta_{p',\\widehat g^*R\\widehat p_*H_PE}$, the pro-etale exchange at $H_PE$. Take $E=\\Lambda_P$ to obtain the displayed comparison equation. Substitute the equality for $F_S$ from step 3 to obtain\n$$\\mathrm{BC}^{\\mathrm{proet}}_g\\,g^*\\widetilde F_S=\\widetilde F_{S'}d_g.$$\nThis proves the asserted compatibility with the canonical base-change map. Both decompositions and $d_g$ are invertible, so this equality also proves that this base-change map is an isomorphism on the coefficient object. Apply the same comparison equation also to the bounded-below input $\\Lambda_P(1)[2]$. To identify it with twisting (G2), express the projection map as the mate of counit tensor identity. The displayed counit identity, together with the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], identifies its image under $\\nu^*$ with the pro-etale projection map. Twist/exchange compatibility is the equality of the two composites in [lem-weil-pbc-ringed-exchange-tensor-coherence], now on the pro-etale ringed topoi. Consequently\n$$B_S=C_{p,\\Lambda_P(1)[2]}\\nu_S^*b_S:\\Lambda_S(1)[2]\\oplus\\Lambda_S\\xrightarrow{\\sim}Rp_*\\Lambda_P(1)[2]$$\nis precisely the twist of (G2), and satisfies $\\operatorname{BC}^{(1)[2]}_g\\,g^*B_S=B_{S'}e_g$, with $e_g$ the ordered-sum twist comparison.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "def-kun-unbounded-exchange",
+    "sk-def-sfb-finite-derived-functors",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 2: the unit and class commute with base change"
+   }
+  },
+  {
+   "text": "Use $B_S$ and its base-change square from step 5. Define $\\operatorname{Tr}_p=\\operatorname{pr}_2B_S^{-1}$, exactly the projection specified in (G3). Multiplying that equality by the inverses and then projecting yields\n$$\\operatorname{Tr}_{p'}\\,\\mathrm{BC}^{(1)[2]}_g\n=\\operatorname{pr}_2e_g\\,g^*(B_S^{-1})\n=g^*(\\operatorname{pr}_2B_S^{-1})=g^*\\operatorname{Tr}_p.$$\nThe second equality uses that $e_g$ preserves the ordered summands and is the identity on the second coefficient summand. This is the required trace compatibility for every Noetherian base change. This last step is just inversion and composition of the preceding commutative square, not an additional trace theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+    "place": "paragraph 2: the isomorphism, its inverse and trace commute with base change"
+   }
   }
  ],
  "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-nagata-affine-proj",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-kun-unbounded-exchange",
+  "lem-amb-kummer-any-base",
+  "lem-sc-line-bundle-torsor",
+  "lem-amb-relative-torsor-cohomology",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-asd-projective-line-genus-zero",
+  "thm-sc-proper-cohomology",
+  "lem-sc-constant-proper-degree-coordinates",
+  "lem-pc-degree-agrees-sc",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-comparison-pullback-exact",
   "sk-prop-sf-comparison",
   "sk-thm-pe-direct-image-comparison",
-  "sk-lem-geo-cartier"
+  "sk-lem-geo-cartier",
+  "sk-def-sfb-finite-derived-functors"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/sk-lem-geo-p1-cohomology.proof.md",
+  "place": "paragraphs 1–2; ordinary-etale geometric-fibre genus-zero and degree calculation, then explicit comparison and trace inversion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projective.*(cohomology|tate|trace)|p1.*decompos|chern",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of constant torsion coefficients on projective one space is the sum of the constant sheaf and its negative Tate twist shifted by minus two",
+   "results": "8 hits; CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpectrum, Sheaf",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpectrum'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: identifier not resolved; this query provides no absence evidence. The later valid Sheaf/IsIso query was inspected separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology projective line splits into constant sheaf and Tate twist degree two, naturally under base change",
+   "results": "8 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self, Algebra.etaleLocus_eq_compl_support, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, Rep.standardComplex.instQuasiIsoNatεToSingle₀, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Extension.tensorH1Cotangent",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective bundle formula in etale cohomology: first Chern class of O(1) gives derived splitting for projective space of dimension one",
+   "results": "8 hits; AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.Proj.pullbackAwayιIso, Rep.standardComplex.x_projective, AlgebraicGeometry.projIsoSpec, WeierstrassCurve.Projective.PointClass, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsIso",
+   "results": "12 hits; CategoryTheory.sheafification_reflective, CategoryTheory.isIso_sheafificationAdjunction_counit, CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction, CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, CategoryTheory.GrothendieckTopology.W_iff, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.instIsIsoFunctorOppositeSheafToPresheafToSheafCompComposeAndSheafify, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|ChernClass|projective.bundle.formula|ProjectiveLine",
+   "results": "1 hits; Mathlib/NumberTheory/ModularForms/Cusps.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned algebraic/constant-sheaf/general category declarations do not state projective-line etale cohomology or its trace"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveBundle|projective_bundle|firstChern|Chern|etale.*cohomolog|cohomolog.*etale",
+   "results": "12 hits; Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/Basic.lean, Mathlib/Probability/Moments/Basic.lean, Mathlib/Probability/Moments/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Chernoff and tactic-name text, or Proj affine-chart declarations; none states a torsion etale projective-bundle decomposition or trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective bundle formula decomposes derived pushforward of a constant torsion etale sheaf on the projective line via the first Chern class",
+   "results": "8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.awayMap_awayToSection",
+   "date": "2026-10-16",
+   "verdict": "no match: Chernoff and tactic-name text, or Proj affine-chart declarations; none states a torsion etale projective-bundle decomposition or trace"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(bundle|cohomology)|etaleCohomology|EtaleCohomology",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: Proj structure-sheaf and condensed projectivity declarations do not state normalized projective-line etale cohomology or trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of the constant sheaf along a projective space projection and the projective bundle theorem for etale sheaves",
+   "results": "8 hits; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: Proj structure-sheaf and condensed projectivity declarations do not state normalized projective-line etale cohomology or trace"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -66,5 +266,129 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-geo-p1-cohomology"
+ "unit": "sk-lem-geo-p1-cohomology",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-geo-p1-cohomology",
+  "worker": "stage1",
+  "summary": "Second reading repaired wrong-site proper base change and etale-cover citations, supplied genus-zero and degree hypotheses, defined the intermediate twisted map, removed the implicit P1-adjunction theorem reference, and made class and twist exchange compatibility explicit. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof paragraph 1: steps 1 and 4–5 verify and apply the bounded-below comparisons. Paragraph 2: step 1 gives the base-change-stable infinity Cartier divisor; step 2 constructs the globally normalized map and proves the cyclic case by geometric fibres, genus-zero cohomology and degree one, then uses projection for finite algebras; step 3 untwists; steps 4–5 identify the pro-etale normalized map and canonical exchange; step 6 inverts and projects for trace compatibility.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic projective space is proper over its base used only to check comparison/projection hypotheses or to identify finite twists; no new geometric calculation or different unit route is introduced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic finite tate lines on the small etale site and their pullback used only to check comparison/projection hypotheses or to identify finite twists; no new geometric calculation or different unit route is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product formula to compute the projective-line charts after arbitrary base change."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Kummer exact sequence on an arbitrary scheme with N invertible, used for the normalized class and its pullback."
+   },
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic line-bundle/frame-torsor dictionary; supplies the Picard class used to define the Kummer boundary."
+   },
+   {
+    "node": "lem-amb-relative-torsor-cohomology",
+    "why": "Generic torsor-class and connecting-map naturality with empty open complement; supplies Kummer functoriality for arbitrary base schemes."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Ordinary etale finite-coefficient geometric-fibre cohomology formula, precisely the proper-base-change reduction prescribed by the unit proof. No standing-scheme or pro-etale constructibility restriction is imported."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Geometric-stalk detection of bounded-below derived isomorphisms, exactly the detection prescribed by the unit proof; an etale-cover lemma does not state this."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Geometry of P1 as a smooth proper connected genus-zero curve, needed to instantiate the unit prescribed curve cohomology theorem; no P1 etale cohomology is imported."
+   },
+   {
+    "node": "lem-pc-degree-agrees-sc",
+    "why": "Degree of the rational infinity point is one, needed for the Kummer degree generator prescribed by the unit proof."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic the proper projection formula on the ambient category used only to check comparison/projection hypotheses or to identify finite twists; no new geometric calculation or different unit route is introduced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived scalar-extension construction, needed because the allowed finite coefficient algebra need not be flat over the cyclic ring."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic canonical composition of derived ringed-topos direct images; applied to coefficient restriction over the identity topoi, it identifies direct image after forgetting scalars without any flatness assumption."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic equality of the two tensor/exchange composites; needed to untwist the intermediate etale calculation naturally, not a replacement for its geometric calculation."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic the comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves used only to check comparison/projection hypotheses or to identify finite twists; no new geometric calculation or different unit route is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for arbitrary ringed topoi used only to check comparison/projection hypotheses or to identify finite twists; no new geometric calculation or different unit route is introduced."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The exact bounded-below cohomology comparison explicitly prescribed by paragraph 1 of the unit proof."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The canonical qcqs direct-image and pullback comparisons explicitly prescribed by paragraph 1 of the unit proof."
+   },
+   {
+    "node": "sk-lem-geo-cartier",
+    "why": "The Cartier class and normalization explicitly prescribed by paragraph 2 and the unit uses list."
+   },
+   {
+    "node": "thm-sc-proper-cohomology",
+    "why": "The genus-zero specialization of the generic smooth proper curve cohomology calculation is explicitly required by paragraph 2 of this unit proof (its sk-thm-curveestimate reference). This supplies the fibre groups, not an imported projective-line decomposition."
+   },
+   {
+    "node": "lem-sc-constant-proper-degree-coordinates",
+    "why": "The generic Kummer degree coordinates on a proper curve, specialized to identical algebraically closed fields and the curve itself as compactification, supply the degree-normalized generator explicitly required by paragraph 2. This does not replace the projective-line argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-amb-kummer-any-base",
+  "lem-sc-line-bundle-torsor",
+  "lem-amb-relative-torsor-cohomology",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-asd-projective-line-genus-zero",
+  "lem-pc-degree-agrees-sc",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-prop-sf-comparison",
+  "sk-thm-pe-direct-image-comparison",
+  "sk-lem-geo-cartier",
+  "thm-sc-proper-cohomology",
+  "lem-sc-constant-proper-degree-coordinates"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-2a2905265",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-2a2905265 (reviewer sub-agent of L); spot-checked: Read the full item, all 36 cited statements, sources, and route. Six-step proof, finite coefficient scope, canonical exchange, and edge cases check out. Repaired two missing off-unit tool declarations (C8) in the corrected JSON. No mathematical changes or new nodes. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
