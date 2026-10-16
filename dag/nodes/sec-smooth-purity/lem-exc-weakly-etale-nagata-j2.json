@@ -1,0 +1,92 @@
+{
+ "id": "lem-exc-weakly-etale-nagata-j2",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: \"localization and strict henselization preserve excellence\"; Greco Theorem 5.3(iv) reduces this ascent assertion to Theorem 5.3(ii).",
+   "via": [
+    "lem-exc-weakly-etale-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Nagata and J-2 ascend together along weakly etale maps",
+ "statement": "Let $A$ and $B$ be commutative Noetherian rings [def-weil-pbc-noetherian-ring], and let $f:A\\to B$ be weakly etale [def-weil-pbc-ind-etale-algebra]. Assume $A$ is Nagata [def-weil-pbc-nagata-ring] and J-2 [def-exc-excellent-ring]. Then $B$ is Nagata and J-2. Here J-2 means that in every finite type algebra over the ring the set of primes with regular local localization is open; this is the J-2 predicate explicitly defined in [def-exc-excellent-ring].",
+ "source": {
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Theorem 5.3(ii), printed pp. 146–147 (PDF pp. 8–9); Remark 5.2 for weakly etale = AF. The proof refers to Greco 1971, results 4.8, 2.9, 4.11. Definitions: Stacks Tag 032R (definition-nagata), Tag 07P7 (definition-J).",
+  "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/8F98780AD8CD9051866A2716C67833C3/S0027763000017190a.pdf/two-theorems-on-excellent-rings1.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-nagata-ring",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nagata J2 rings remain Nagata and J2 under weakly etale Noetherian algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etaleness, flatness, or regular sequences; none asserts this property ascent. Name searches are empty; Nagata/Japanese grep hits are bibliographic or analytic, not the ring properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute flat ring maps preserve the Nagata and open regular locus properties",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationPrime fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the canonical ring homomorphism $ R \\to S $ induces a flat $ R $-module structure on $ S $. This means tensoring with $ S $ preserves exact \"}\n  {\"name\": \"RingHom.Flat.localRingHom\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat →\\n    ∀ (P : Ideal S) [inst_2 : P.IsPrime] (Q : Ideal R) [inst_3 : Q.IsPrime] (hQP : Q = Ideal.comap f P),\\n      (Localization.localRingHom Q P f hQP).Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, $ P \\\\subseteq S $ is a prime ideal, and $ Q = f^{-1}(P) \\\\subseteq R $ is the corresponding prime ideal in $ R $, then the indu\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S]\\n  {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs → RingTheory.Sequence.IsWeaklyRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ R $ is a flat $ S $-module and $ rs $ is a weakly regular sequence in $ R $, then the image of $ rs $ under the canonical algebra homomorphism $ R \\\\to S $ forms a weakly regular sequence in $ S $\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etaleness, flatness, or regular sequences; none asserts this property ascent. Name searches are empty; Nagata/Japanese grep hits are bibliographic or analytic, not the ring properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nagata\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etaleness, flatness, or regular sequences; none asserts this property ascent. Name searches are empty; Nagata/Japanese grep hits are bibliographic or analytic, not the ring properties."
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|IsJTwo|J2Ring|Japanese",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Analysis.SpecialFunctions.JapaneseBracket\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean\", \"line\": \"26\", \"text\": \"- `Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean`: integrability of `(1+‖x‖)^(-r)`.\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean\", \"line\": \"16\", \"text\": \"# Japanese Bracket\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean\", \"line\": \"18\", \"text\": \"In this file, we show that Japanese bracket $(1 + \\\\|x\\\\|^2)^{1/2}$ can be estimated from above\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/JapaneseBracket.lean\", \"line\": \"26\", \"text\": \"* `integrable_jap` the Japanese bracket is integrable\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/TemperateGrowth.lean\", \"line\": \"17\", \"text\": \"import Mathlib.Analysis.SpecialFunctions.JapaneseBracket\"}\n  {\"file\": \"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"line\": \"18\", \"text\": \"don't satisfy the classical notion were provided independently by Hiblot and Nagata.\"}\n  {\"file\": \"Mathlib/Algebra/EuclideanDomain/Defs.lean\", \"line\": \"56\", \"text\": \"* [M. Nagata, *On Euclid algorithm*][MR541021]\"}\n  {\"file\": \"Mathlib/RingTheory/NoetherNormalization.lean\", \"line\": \"14\", \"text\": \"This file contains a proof by Nagata of the Noether normalization lemma.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etaleness, flatness, or regular sequences; none asserts this property ascent. Name searches are empty; Nagata/Japanese grep hits are bibliographic or analytic, not the ring properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nagata J2 property ascends along weakly etale maps of Noetherian rings",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of the regular locus in finite type algebras and the universally Japanese property ascend along absolutely flat ring maps",
+   "results": "{\"t\": \"2026-10-16T02:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Openness of the regular locus in finite type algebras and the universally Japanese property ascend along absolutely flat ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_unramifiedLocus\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.isOpen_etaleLocus\", \"PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"e4f5b2eb28d3da27\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned locus theorems concern smooth, unramified or etale loci relative to a specified base, not the regular locus of every finite type algebra or Nagata ascent."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bG.?ring\\b|geometrically.?regular|universally.?Japanese|\\bNagata\\b|\\bJTwo\\b|\\bJ2Ring\\b|catenar",
+   "results": "{\"t\": \"2026-10-16T02:00:33Z\", \"tool\": \"grep\", \"query\": \"\\\\bG.?ring\\\\b|geometrically.?regular|universally.?Japanese|\\\\bNagata\\\\b|\\\\bJTwo\\\\b|\\\\bJ2Ring\\\\b|catenar\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the sole hit, Mathlib/RingTheory/NoetherNormalization.lean:14, credits Nagata for Noether normalization; it states none of the searched ring properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-exc-weakly-etale-excellent",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

@@ -25,123 +25,156 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unfold excellence using [def-exc-excellent-ring]. The hypothesis on $R$ supplies Noetherianity, the G-ring property, J-2, and universal catenarity; in particular $R$ is quasi-excellent. The given Noetherianity of $S$ and weak etaleness of $f$ will be used unchanged in each ascent lemma below. No finite-presentation or faithful-flatness assumption is imposed.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QT (definition-excellent), unpacking the four conditions"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-quasi-excellent-nagata] to the quasi-excellent ring $R$ from step 1. It gives that $R$ is Nagata. For each prime $\\mathfrak p$ of $R$, the last sentence of [lem-weil-pbc-nagata-localization] then says directly that $R_{\\mathfrak p}$ is Nagata. Thus $R$ satisfies both the global Nagata hypothesis of the J-2 ascent lemma and the local Nagata hypothesis of the catenarity ascent lemma.",
+   "uses": [
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QV (lemma-quasi-excellent-nagata) and 032U (algebra.tex, lemma-nagata-localize)"
+   }
+  },
+  {
+   "text": "Use [lem-exc-weakly-etale-g-ring] with $A=R$, $B=S$ and the given $f$. Its source G-ring hypothesis is step 1; its two Noetherian hypotheses are step 1 and the hypothesis on $S$; weak etaleness is the hypothesis on $f$. Its conclusion is that $S$ is a G-ring.",
+   "uses": [
+    "lem-exc-weakly-etale-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Theorem 5.3(i), specialization P = geometrically regular; Remark 5.2"
+   }
+  },
+  {
+   "text": "Use [lem-exc-weakly-etale-nagata-j2] with the same rings and map. Step 2 supplies Nagata for $R$ and step 1 supplies J-2. Both rings are Noetherian and $f$ is weakly etale as checked in step 3. The lemma concludes that $S$ is Nagata and J-2; retain its J-2 conclusion.",
+   "uses": [
+    "lem-exc-weakly-etale-nagata-j2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Theorem 5.3(ii); Remark 5.2"
+   }
+  },
+  {
+   "text": "Use [lem-exc-weakly-etale-locally-nagata-catenary]. Step 2 supplies that every prime localization of $R$ is Nagata; step 1 supplies universal catenarity of $R$. The same Noetherian and weakly-etale hypotheses still hold. Its conclusion gives universal catenarity of $S$. The additional conclusion about prime localizations of $S$ is not needed.",
+   "uses": [
+    "lem-exc-weakly-etale-locally-nagata-catenary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Theorem 5.3(iii); Remark 5.2"
+   }
+  },
+  {
+   "text": "The target $S$ is Noetherian by hypothesis, a G-ring by step 3, J-2 by step 4, and universally catenary by step 5. By [def-exc-excellent-ring] the first three properties make $S$ quasi-excellent, and adjoining universal catenarity makes it excellent. This proves exactly the item, including the zero-ring case where the conditions on prime ideals are vacuous.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Theorem 5.3(iv), opening proof sentence on printed p. 147; definition 07QT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-nagata-localization",
+  "lem-exc-weakly-etale-g-ring",
+  "lem-exc-weakly-etale-nagata-j2",
+  "lem-exc-weakly-etale-locally-nagata-catenary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Theorem 5.3(iv), proof opening on printed p. 147: assembly of (i), (ii), (iii); prerequisite hypotheses expanded using Stacks 07QT, 07QV, and 032U. Second reader retrieved and read the official Cambridge PDF in the permitted sandbox; report.md gives the retrieval URL and SHA256. The shared literature copy remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Excellence ascends along weakly etale homomorphisms of Noetherian commutative rings",
-   "results": "Algebra.IsEtaleAt.comp, Algebra.Etale.comp, RingHom.Etale.toAlgebra, RingHom.etale_algebraMap, RingHom.Etale.propertyIsLocal, Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.ofLocalizationSpan",
+   "results": "{\"t\": \"2026-10-16T01:34:56Z\", \"tool\": \"leanfinder\", \"query\": \"Excellence ascends along weakly etale homomorphisms of Noetherian commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.comp\", \"RingHom.Etale.toAlgebra\", \"RingHom.etale_algebraMap\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\"], \"digest\": \"417426e58d6a4159\"}",
    "date": "2026-10-16",
-   "verdict": "no match: no excellence assertion or predicate in the returned declarations"
+   "verdict": "no match: actual returned declaration types give etaleness, flatness or going down, without an excellence conclusion; grep sole hit is a bibliographic adjective."
   },
   {
    "tool": "loogle",
    "query": "\"WeaklyEtale\"",
-   "results": "AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtSource, AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtTarget, AlgebraicGeometry.WeaklyEtale.instIsMultiplicativeScheme, AlgebraicGeometry.WeaklyEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.WeaklyEtale.instRespectsIsoScheme, AlgebraicGeometry.WeaklyEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.WeaklyEtale, AlgebraicGeometry.WeaklyEtale.flat",
+   "results": "{\"t\": \"2026-10-16T01:34:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeaklyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.WeaklyEtale.instIsMultiplicativeScheme\", \"AlgebraicGeometry.WeaklyEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.WeaklyEtale.instRespectsIsoScheme\", \"AlgebraicGeometry.WeaklyEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.WeaklyEtale\", \"AlgebraicGeometry.WeaklyEtale.flat\"], \"digest\": \"bae20b3780437e20\"}",
    "date": "2026-10-16",
-   "verdict": "no match: scheme weakly-etale definitions and stability only; source read in Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, lines 23-26 and 42-60, contains no excellence assertion"
+   "verdict": "no match: actual returned declaration types give etaleness, flatness or going down, without an excellence conclusion; grep sole hit is a bibliographic adjective."
   },
   {
    "tool": "grep",
    "query": "WeaklyEtale.*[Ee]xcellent|[Ee]xcellent|[Ee]xcellence",
-   "results": "No hits (directory Mathlib/RingTheory/)",
+   "results": "{\"t\": \"2026-10-16T01:34:56Z\", \"tool\": \"grep\", \"query\": \"WeaklyEtale.*[Ee]xcellent|[Ee]xcellent|[Ee]xcellence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/InvariantForm.lean\"], \"digest\": \"371d3433061e241b\"}",
    "date": "2026-10-16",
-   "verdict": "no match: no excellence assertion or predicate in the returned declarations"
+   "verdict": "no match: actual returned declaration types give etaleness, flatness or going down, without an excellence conclusion; grep sole hit is a bibliographic adjective."
   },
   {
    "tool": "leansearch",
    "query": "A weakly etale Noetherian algebra over an excellent ring is excellent",
-   "results": "service unavailable: Internal Server Error; ",
+   "results": "{\"t\": \"2026-10-16T01:34:56Z\", \"tool\": \"leansearch\", \"query\": \"A weakly etale Noetherian algebra over an excellent ring is excellent\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
-   "query": "Greco excellence ascends along absolutely flat ring homomorphisms between Noetherian rings",
-   "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.HasGoingDown.of_flat, Algebra.Smooth.flat_of_isNoetherianRing, RingHom.Flat.propertyIsLocal, RingHom.Flat, RingHom.FaithfullyFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat.of_specComap_surjective",
+   "query": "If a map of Noetherian rings is flat with flat diagonal then excellence of the source implies excellence of the target",
+   "results": "{\"t\": \"2026-10-16T01:48:29Z\", \"tool\": \"leanfinder\", \"query\": \"If a map of Noetherian rings is flat with flat diagonal then excellence of the source implies excellence of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Module.FaithfullyFlat.of_comap_surjective\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"9544ed3cb49e4749\"}",
    "date": "2026-10-16",
-   "verdict": "no match: no excellence assertion or predicate in the returned declarations"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Excellence of a noetherian S follows from excellence of R when R to S and S tensor R S to S are flat",
-   "results": "Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.HasGoingDown.of_flat, IsReduced.tensorProduct_of_flat_of_forall_fg, RingHom.FaithfullyFlat, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.QuasiFiniteAt.baseChange, RingHom.Flat.propertyIsLocal",
-   "date": "2026-10-16",
-   "verdict": "no match: returned types do not define or conclude excellence, and no excellence/catenarity declarations were found by the RingTheory grep"
-  },
-  {
-   "tool": "grep",
-   "query": "[Ee]xcellen|[Cc]atenary|quasi.?excellent",
-   "results": "No hits (directory Mathlib/RingTheory/)",
-   "date": "2026-10-16",
-   "verdict": "no match: returned types do not define or conclude excellence, and no excellence/catenarity declarations were found by the RingTheory grep"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "If the diagonal multiplication of a flat algebra S over R is flat and S is Noetherian then excellence ascends from R to S",
-   "results": "{\"t\": \"2026-10-15T23:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"If the diagonal multiplication of a flat algebra S over R is flat and S is Noetherian then excellence ascends from R to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"bc00b668b8d01d94\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected actual returned types; none defines or concludes excellence. Grep hits are unrelated Ring_Ring sections and the adjective in a Lie-algebra docstring."
-  },
-  {
-   "tool": "grep",
-   "query": "Excellent|QuasiExcellent|Catenary|G_ring",
-   "results": "{\"t\": \"2026-10-15T23:23:32Z\", \"tool\": \"grep\", \"query\": \"Excellent|QuasiExcellent|Catenary|G_ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/Algebra/Lie/InvariantForm.lean\"], \"digest\": \"0b09c6ba86ccbd1e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected actual returned types; none defines or concludes excellence. Grep hits are unrelated Ring_Ring sections and the adjective in a Lie-algebra docstring."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For Noetherian rings R and S, a weakly etale ring map R to S carries excellence of R to excellence of S",
-   "results": "Algebra.IsEtaleAt.comp, RingHom.Etale.toAlgebra, RingHom.Etale.propertyIsLocal, Algebra.Etale.comp, RingHom.etale_algebraMap, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.ofLocalizationSpan, Algebra.Etale.exists_subalgebra_fg",
-   "date": "2026-10-16",
-   "verdict": "no match: returned declaration types concern fields, reducedness or etaleness, without an excellence conclusion; the excellence name and RingTheory source searches returned no hits"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"ExcellentRing\"",
-   "results": "No hits",
-   "date": "2026-10-16",
-   "verdict": "no match: returned declaration types concern fields, reducedness or etaleness, without an excellence conclusion; the excellence name and RingTheory source searches returned no hits"
-  },
-  {
-   "tool": "grep",
-   "query": "excellent|quasi.?excellent|universally.?catenary",
-   "results": "No hits (directory Mathlib/RingTheory/)",
-   "date": "2026-10-16",
-   "verdict": "no match: returned declaration types concern fields, reducedness or etaleness, without an excellence conclusion; the excellence name and RingTheory source searches returned no hits"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A flat homomorphism with flat diagonal between Noetherian rings preserves excellence of its source",
-   "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.HasGoingDown.of_flat, RingHom.Flat.propertyIsLocal, RingHom.Flat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, RingHom.FaithfullyFlat, RingHom.Flat.of_bijective",
-   "date": "2026-10-16",
-   "verdict": "no match: read returned types; none asserts excellence, J-2 or universal catenarity"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Catenary\"",
-   "results": "No hits",
-   "date": "2026-10-16",
-   "verdict": "no match: no declarations returned"
-  },
-  {
-   "tool": "grep",
-   "query": "excellent|quasiexcel|universally.?catenary",
-   "results": "No hits",
-   "date": "2026-10-16",
-   "verdict": "no match: no declarations returned"
+   "verdict": "no match: actual returned declaration types give etaleness, flatness or going down, without an excellence conclusion; grep sole hit is a bibliographic adjective."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-field-algebra-strict-henselization-excellent",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-weakly-etale-excellent",
+  "worker": "stage1",
+  "summary": "Retained the statement and exposed Greco 5.3(iv) as six steps assembling independent G-ring, Nagata/J-2, and locally-Nagata/catenarity ascent results under weaker source hypotheses. Three statement-only nodes carry Greco 5.3(i)–(iii); the existing quasi-excellent-implies-Nagata and Nagata-localization nodes supply their extra hypotheses. All new nodes have logged Mathlib searches in two phrasings; none is an excellence theorem or Mathlib leaf.",
+  "blueprint": "Realizes the second-paragraph permanence sentence of ancestor thm-exc-curve-open-dimension-general, through lem-exc-field-algebra-strict-henselization-excellent. That ancestor says strict henselization preserves excellence; it does not name Greco. The six steps implement the Greco route already chosen by this item, without changing the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nagata-localization",
+    "why": "Generic algebra tool: its last sentence gives the Nagata property of every prime localization of a Nagata ring. This checks the local Nagata hypothesis in Greco 5.3(iii), and does not replace a step of the affine-line/Kummer unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nagata-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-3753f7f6a",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-3753f7f6a (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed; item and all three new nodes agree with Greco 5.3(i)-(iv), Stacks definitions, and the recorded DAG route. Hypotheses, weakly-etale map, local Nagata distinction, dependencies, searches, duplicates, edge cases, and delivery checks A-F pass. Review written to review.md."
+ }
 }
