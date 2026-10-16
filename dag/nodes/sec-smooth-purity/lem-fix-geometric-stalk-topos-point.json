@@ -1,0 +1,134 @@
+{
+ "id": "lem-fix-geometric-stalk-topos-point",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-finite-tor-perfect",
+   "place": "Proof, first paragraph: supply the topos-point adjunction required when applying general derived pullback to the geometric-stalk functor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric stalks are inverse images of topos points",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], and let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point]. Let $\\mathcal C$ be either the small etale site $Y_{\\mathrm{et}}$ [def-weil-pbc-etale-site] or the small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], with sheaves and universes as in [def-weil-pbc-sites-and-cohomology] and [def-weil-size-convention]. For $U\\to Y$ in $\\mathcal C$ put $L(U)=\\operatorname{Hom}_Y(\\operatorname{Spec}\\Omega,U)$. For a sheaf of sets $\\mathcal F$ put $S(\\mathcal F)=\\varinjlim_{(U,u)}\\mathcal F(U)$, where $u\\in L(U)$ and the index is the opposite category of pointed neighbourhoods: this is [def-weil-pbc-geometric-stalks] in the etale case and [def-weil-proetale-geometric-stalk] in the pro-etale case. Then the presheaf $p_*T$ with $(p_*T)(U)=\\operatorname{Map}(L(U),T)$ and restriction by precomposition along $L(V)\\to L(U)$ is a sheaf for every set $T$. There is an adjunction\n$$S:\\operatorname{Sh}(\\mathcal C)\\rightleftarrows\\mathbf{Set}:p_*,$$\nand $S$ preserves finite limits. Thus this adjunction is a morphism of topoi $p:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$, with inverse image $p^{-1}=S$; here a morphism of topoi means an adjunction whose left adjoint preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0991, section-points, paragraph following lemma-geometric-lift-to-cover and preceding lemma-classical-point; etale-cohomology.tex Tag 04FM, lemma-stalk-gives-point; sites.tex Tag 00Y8, lemma-point-pushforward-sheaf, clauses (1)-(2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric point of a scheme gives a point of the small pro etale topos whose inverse image is the geometric stalk",
+   "results": "8 hits about scheme stalk maps and etale forgetful functors; none constructs the pro-etale topos point.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"Proetale\"",
+   "results": "0 hits for the conjunction of Point and Proetale.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointSmallPro|pointPro|[Pp]roetale.*[Pp]oint|[Pp]oint.*[Pp]roetale",
+   "results": "0 hits in Mathlib/AlgebraicGeometry for pro-etale point-construction names.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk functor on the small etale or proetale site has a right adjoint and preserves finite limits",
+   "results": "8 hits: instIsLeftAdjointPresheafStalkFunctor, stalkSkyscraperSheafAdjunction, skyscraperPresheafStalkAdjunction and other topological-space/skyscraper or sheafification declarations. Read Mathlib/Topology/Sheaves/Skyscraper.lean; the topological-space stalk does not construct a point of the small pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"fiber\", \"adj\"",
+   "results": "1 hit: CategoryTheory.GrothendieckTopology.Point.instIsLeftAdjointSheafSheafFiber, Mathlib.CategoryTheory.Sites.Point.Skyscraper. Read Skyscraper.lean: the general skyscraper adjunction assumes an existing site point; it does not establish that the geometric-lift functor on either scheme site is such a point.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "point.*[Pp]roetale|[Pp]roetale.*point|stalk.*[Aa]dj|[Aa]dj.*stalk",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric stalk is the inverse image of a point of the small etale or proetale topos",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of geometric points on the small étale site is flat and continuous and its fibre functor has the skyscraper right adjoint",
+   "results": "8 hits, including topological-space stalk/skyscraper adjunctions and etale site definitions; none states the geometric stalk topos-point construction on the pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"skyscraper\"",
+   "results": "12 hits in CategoryTheory.Sites.Point.Skyscraper. Read isSheaf_skyscraperPresheaf (line 187), skyscraperSheafAdjunction (line 222) and the left adjoint instance (lines 233-235): these assume a supplied site point and do not construct the pro-etale geometric-lift point.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*point|point.*geometric",
+   "results": "1 hit in Mathlib/AlgebraicGeometry/Sites/Etale.lean line 97. Read geometricFiber lines 93-118: constructs a point of the big etale topology for a separably closed field; it does not supply the pro-etale point required by this statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat continuous functor from a scheme site to sets geometric fibre point of proetale topology",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Etale.forget, Scheme.Hom.fiber, GrothendieckTopology.Point.sheafFiber and Scheme.etaleTopology. The generic sheafFiber takes a supplied site point; no pro-etale geometric-lift point construction was returned.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"IsContinuous\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|geometricFiber",
+   "results": "11 hits in AlgebraicGeometry/Sites: Etale.lean:97 geometricFiber, Proetale.lean definitions of proetalePrecoverage and its topology, and ElladicCohomology.lean coefficient constructions. Read Etale.lean:93-118, Proetale.lean:45-140 and Point/Skyscraper.lean:187-235. The geometricFiber point is for the big etale topology; the skyscraper adjunction requires an already supplied point. No declaration states the combined small-etale/pro-etale assertion. An initial invocation mistakenly repeated Mathlib/ in the subdirectory and gave zero hits; this corrected invocation supplies the actual source search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "fix-lem-finite-tor-perfect",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness"
+}

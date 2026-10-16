@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "fix-lem-finite-tor-perfect",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Geometric-stalk perfectness at finite and field coefficients",
@@ -13,64 +13,263 @@
   "place": "node fix-lem-finite-tor-perfect, order 1825"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
- ],
- "proof": [
-  {
-   "text": "Put $C=M_{\\bar y}$, using [def-weil-pbc-geometric-stalks].\nConstructibility in [def-weil-finite-torsion-constructibility]\nmakes each $H^r(C)$ finite over $\\Lambda$, and only finitely\nmany are nonzero. Choose $[a,b]$ as in\n[def-weil-finite-tor-amplitude]. For an arbitrary\n$\\Lambda$-module $N$, use its constant sheaf $\\underline N$\non $Y$. The exact stalk functor commutes with the\n[def-weil-derived-tensor] derived tensor product, so\n\n$$\nH^r(C\\otimes_\\Lambda^L N)\n=\\mathcal H^r(M\\otimes_\\Lambda^L\\underline N)_{\\bar y}=0\n\\qquad(r\\notin[a,b]).\n$$",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-derived-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Taking $N=\\Lambda$ also gives $H^r(C)=0$ outside $[a,b]$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The ring $\\Lambda=\\mathcal O_E/\\varpi_E^n$ is Noetherian and local.\nConstruct a bounded-above finite-free resolution $P^\\bullet\\to C$\nwith $P^r=0$ for $r>b$. The construction proceeds downwards:\nchoose finitely many generators of the highest cohomology, lift\nthem to cycles, and map a finite free module in that degree to a\nrepresentative of $C$. The cone has zero cohomology in that degree\nand finitely generated cohomology in lower degrees; Noetherianity\nensures finite generation of the new kernels. Repeating this step\nconstructs the resolution, which stabilizes in each fixed degree.\nBeing bounded above and free, $P^\\bullet$ is K-flat.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Put $Q=\\operatorname{coker}(P^{a-1}\\xrightarrow{d^{a-1}}P^a)$.\nSince $H^r(P^\\bullet)=0$ for $r<a$, the augmented sequence\n\n$$\n\\cdots\\longrightarrow P^{a-2}\\longrightarrow P^{a-1}\n\\longrightarrow P^a\\longrightarrow Q\\longrightarrow0\n$$\n\nis a free resolution of $Q$. Hence, for every $\\Lambda$-module\n$N$, with no finiteness restriction,\n\n$$\n\\operatorname{Tor}^{\\Lambda}_1(Q,N)\n=\n\\frac{\\ker(P^{a-1}\\otimes N\\longrightarrow P^a\\otimes N)}\n{\\operatorname{im}(P^{a-2}\\otimes N\\longrightarrow P^{a-1}\\otimes N)}\n=H^{a-1}(P^\\bullet\\otimes_\\Lambda N)=0.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Thus $Q$ is flat. It is finitely presented, as a cokernel of\nfinite free modules, so is projective and therefore finite free\nover the local ring $\\Lambda$. The differential $d^a$ factors\nthrough $Q$, and the quotient map to\n\n$$\n0\\longrightarrow Q\\longrightarrow P^{a+1}\n\\longrightarrow\\cdots\\longrightarrow P^b\\longrightarrow0\n$$\n\nwith $Q$ in degree $a$ is a quasi-isomorphism.\nThis proves the finite-coefficient assertion on either site.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "At a field coefficient $F$, the constructible stalk is instead a\nbounded complex with finite-dimensional cohomology over $F$.\nSplitting cycles and boundaries as vector subspaces gives\n$\\bigoplus_r H^r(C)[-r]\\xrightarrow{\\sim}C$, with a finite direct\nsum, and proves perfectness directly at the rational stage of\n[def-weil-rationalization-karoubi].\nFor $\\Qlb$, choose a finite field of definition from\n[def-weil-algebraically-closed-coefficients] and extend this\nfinite-dimensional complex to $\\Qlb$.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
+  "def-weil-pbc-proetale-site",
   "def-weil-pbc-geometric-stalks",
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude",
   "def-weil-derived-tensor",
   "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "For finite coefficients write $C=M_{\\bar y}$. On the pro-etale site use the pointed weakly etale stalk of [def-weil-proetale-geometric-stalk], whose exactness is [lem-cbc-proetale-classical-stalk]; on the small etale site use [def-weil-pbc-geometric-stalks] and [prop-weil-pbc-geometric-stalks-exact]. Exactness identifies $H^i(C)$ with $\\mathcal H^i(M)_{\\bar y}$. Each is finite and only finitely many are nonzero, by [def-weil-finite-torsion-constructibility] on the coefficient site and by the corresponding bounded constructibility hypothesis in the small etale assertion.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-cbc-proetale-classical-stalk",
+    "def-weil-pbc-geometric-stalks",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, first paragraph: bounded finite stalk cohomology"
+   }
+  },
+  {
+   "text": "On the pro-etale site the geometric stalk is the inverse-image functor of the topos point of [lem-fix-geometric-stalk-topos-point], using its explicitly stated adjunction and finite-limit preservation. For any sheaf of rings $R$, it gives the ringed-topos morphism with target ring $R_{\\bar y}$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this morphism: exactness of the stalk makes its derived pullback termwise stalk, and the cited theorem supplies K-flat stalk representatives and\n$$(F\\otimes_R^L G)_{\\bar y}\\simeq F_{\\bar y}\\otimes_{R_{\\bar y}}^L G_{\\bar y}.$$\nFor $R=\\Lambda_Y$, [lem-weil-proetale-constant-sheaf-stalk] identifies $R_{\\bar y}=\\Lambda$ and $(\\underline N_Y)_{\\bar y}=N$ for every $\\Lambda$-module $N$, without a finiteness condition. Choose $[a,b]$ from [def-weil-finite-tor-amplitude] and apply the formula with $F=M$ and $G=\\underline N_Y$. Exactness gives\n$$H^r(C\\otimes_\\Lambda^L N)\\cong\\mathcal H^r(M\\otimes_\\Lambda^L\\underline N_Y)_{\\bar y}=0\\quad(r\\notin[a,b]).$$\nThus $C$ has finite Tor amplitude.",
+   "uses": [
+    "lem-cbc-proetale-classical-stalk",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-finite-tor-amplitude",
+    "lem-fix-geometric-stalk-topos-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, first paragraph: pro-etale derived tensor and the Tor interval"
+   }
+  },
+  {
+   "text": "On the small etale site use its geometric topos point from [lem-fix-geometric-stalk-topos-point] and the exact functor [prop-weil-pbc-geometric-stalks-exact]. Its ordinary tensor comparison is [lem-pod-etale-stalk-tensor-scalar], clause 1. The general ringed-topos result [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applies to this point too and gives the comparison for derived tensor. By [lem-weil-pbc-constant-sheaf-geometric-stalk] the stalk of the constant sheaf of an arbitrary $\\Lambda$-module $N$ is $N$; the isomorphism is $\\Lambda$-linear because it sends $\\lambda n$ to $\\lambda$ times the germ of $n$. Therefore\n$$H^r(C\\otimes_\\Lambda^L N)\\cong\\mathcal H^r(M\\otimes_\\Lambda^L\\underline N_Y)_{\\bar y}.$$\nThe small etale Tor-amplitude hypothesis makes the right side zero outside its interval $[a,b]$, for every $N$. This establishes the Tor-amplitude hypothesis over $\\Lambda$ for the small etale stalk as well.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-fix-geometric-stalk-topos-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, first paragraph and small etale clause: the etale comparison"
+   }
+  },
+  {
+   "text": "On each site, step 1 puts $C$ in $D^b(\\Lambda)$ with finitely generated (indeed finite) cohomology in a finite interval, and steps 2 or 3 supply finite Tor amplitude in one interval. If a bounded representative is needed for the stated criterion, replace a representative by its good truncation in an interval containing its cohomological support; the natural truncation maps are quasi-isomorphisms since the omitted cohomology groups vanish. Thus the two hypotheses in [lem-trf-finite-tor-amplitude-perfect]—finite cohomology and finite Tor amplitude—hold for the same stalk complex. Apply its only-if direction with $A=\\Lambda=A_{E,n}$. Its conclusion is already a bounded complex of finitely generated free modules; no additional projective-to-free theorem is being inferred from a definition. This proves both finite-coefficient assertions.",
+   "uses": [
+    "lem-trf-finite-tor-amplitude-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, finite coefficients: apply the existing algebraic perfectness criterion"
+   }
+  },
+  {
+   "text": "For the rational coefficient assertion, represent $M\\in D^b_c(Y,E)$ by an integral object $K\\in D^b_c(Y,\\mathcal O_E)$ as in [def-weil-rationalization-karoubi]. Put $R=\\mathcal O_E$, $\\pi=\\varpi_E$, $A_j=R/(\\pi^j)$, $K_j=K\\otimes^L_{\\widehat R_Y}(A_j)_Y$, and $C_j=(K_j)_{\\bar y}$. By [def-weil-derived-complete-integral-detailed] each $K_j$ is bounded constructible, with a common cohomological interval. Hence step 1 gives bounded finite $A_j$-cohomology for $C_j$. Use one K-flat resolution $P\\to K$ with flat terms in [def-weil-integral-derived-reduction] to form all reductions. Change of rings preserves K-flatness by [lem-pur-kflat-change-of-rings], so\n$$(P\\otimes_{\\widehat R_Y}(A_{j+1})_Y)\\otimes_{(A_{j+1})_Y}(A_j)_Y=P\\otimes_{\\widehat R_Y}(A_j)_Y$$\ncomputes derived change of rings. Taking stalks using the comparison of step 2 yields coherent isomorphisms $C_{j+1}\\otimes^L_{A_{j+1}}A_j\\simeq C_j$; the transition maps are induced by the quotient maps in this single resolution, so their composites agree. More explicitly, set $P_j=P\\otimes_{\\widehat R_Y}(A_j)_Y$. The quotient maps $P_{j+1}\\to P_j$ are maps of complexes of $(A_{j+1})_Y$-modules, with the target viewed by restriction of scalars. Their stalks are therefore $A_{j+1}$-linear chain maps representing $C_{j+1}\\to C_j$ in $D(A_{j+1})$. Each $P_j$ is K-flat with flat terms by the cited change-of-rings lemma, and its stalk is K-flat with flat terms by step 2. The displayed termwise tensor identity thus identifies precisely the derived quotient map induced by this transition with an isomorphism, as required in step 8; it is not merely an unrelated isomorphism of the two objects.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-integral-derived-reduction",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, final paragraph: finite reductions of an integral representative"
+   }
+  },
+  {
+   "text": "The ring $R$ is $\\pi$-adically complete: [lem-weil-l-adic-extension-integers-dvr] identifies $\\pi$-powers with valuation bounds and gives $|\\pi|<1$, and [lem-weil-l-adic-extension-complete] makes $E$ complete. Lifts $x_j\\in R$ of a compatible family modulo $\\pi^j$ satisfy $|x_{j+1}-x_j|\\leq|\\pi|^j$ and converge to a unique element of the closed unit ball $R$, with the prescribed residues. More explicitly, compatibility gives $x_k-x_j\\in\\pi^jR$ for every $k\\geq j$, hence $|x_k-x_j|\\leq|\\pi|^j$. The balls $\\pi^jR=\\{z:|z|\\leq|\\pi|^j\\}$ are closed, so the limit $x$ satisfies $x-x_j\\in\\pi^jR$ for every $j$. Two elements with these residues have difference of absolute value at most $|\\pi|^j$ for every $j$, hence are equal. Thus the canonical ring map $R\\to\\varprojlim_jA_j$ is an isomorphism. By [lem-cbc-proetale-classical-stalk] the pro-etale stalk is evaluation on the strict localization, so it commutes with products and inverse limits of sheaves, which are computed objectwise. Together with [lem-weil-proetale-constant-sheaf-stalk] this gives $(\\widehat R_Y)_{\\bar y}=\\varprojlim_jA_j=R$. Let $C_0=K_{\\bar y}\\in D(R)$. The derived-completeness triangle of [def-weil-derived-complete] remains a distinguished triangle after this exact stalk functor. Its product terms become $\\prod_j C_j$, and its transition endomorphism has $j$-th component $z_j-t_jz_{j+1}$. By [lem-weil-derived-limit-products-core] termwise products compute these derived products (for the source this is built into [def-weil-derived-complete], and products of modules are exact). It follows that $C_0\\simeq R\\varprojlim_jC_j$. This argument uses evaluation at the pro-etale strict localization, rather than assuming that an etale stalk commutes with countable products. Here products of module sheaves and the completed coefficient sheaf are evaluated on the same strict-localization object. Consequently, for any chosen complexes representing the reductions, stalk applied to their degreewise product is the degreewise product of their stalk complexes, with the stated transition maps. Exactness makes this independent of the chosen representatives and preserves the triangle: applying the stalk termwise preserves the finite direct sums in a mapping cone and its differential. Products of modules are exact because a tuple in the product of quotient modules can be lifted one coordinate at a time; kernels are coordinatewise as well. The hypotheses of the cited derived-product theorem therefore hold for the target module category, while the source degreewise-product model is supplied by the derived-completeness definition.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-complete",
+    "lem-cbc-proetale-classical-stalk",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-derived-complete",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, final paragraph: identify the integral fibre with its derived reduction limit"
+   }
+  },
+  {
+   "text": "The residue ring $A_1$ is a field by [lem-weil-l-adic-extension-integers-dvr]. The complex $C_1$ has bounded finite-dimensional cohomology by step 5. Choose a basis of each nonzero $H^i(C_1)$ and cycle lifts in a representative complex; these define a chain map $\\bigoplus_i H^i(C_1)[-i]\\to C_1$ inducing the identity on all cohomology groups. The sum is finite and its terms are finite-dimensional, so this map is a quasi-isomorphism and $C_1$ is perfect.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, final paragraph: split the residue-field complex"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-rlim-perfect-complete] with $A=R$, $I=(\\pi)$ and the system $C_j$. Completeness was verified in step 6, the required derived quotient isomorphisms in step 5, and perfectness of $C_1$ in step 7. It follows that $C_0\\simeq R\\varprojlim_jC_j$ is a bounded complex of finite projective $R$-modules. The rational stalk of the representative $K$ is $C_0\\otimes_R E$ by scalar localization [def-weil-rationalization-karoubi]: a localized morphism $f\\otimes e$ acts by $f_{\\bar y}\\otimes e$. Localization $R\\to E=R[1/\\pi]$ is flat, since localization sends an exact sequence to an exact sequence by the fraction criterion for zero. Thus termwise tensor represents the derived scalar extension. Each term of the perfect model is a direct summand of $R^m$ and becomes a direct summand of $E^m$, hence a finite-dimensional vector space. This is the required bounded finite-dimensional perfect model at stage $E$.",
+   "uses": [
+    "lem-weil-pbc-rlim-perfect-complete",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, final paragraph: reconstruct and rationalize the integral perfect fibre"
+   }
+  },
+  {
+   "text": "For an object of $D^b_c(Y,\\Qlb)$ choose its representative $(E,M_E)$ in [def-weil-algebraically-closed-coefficients]. Step 8 produces a bounded finite-dimensional $E$-complex $V^\\bullet$ for its geometric fibre. Its fibre over $\\Qlb$ is represented by $V^\\bullet\\otimes_E\\Qlb$. Choosing a basis in each degree identifies its terms with $\\Qlb^{\\dim_E V^i}$, and the degrees outside the original finite interval remain zero. Tensor over the field $E$ is exact because every short exact sequence of vector spaces splits. Consequently this is a bounded finite-dimensional complex representing the geometric stalk, and proves the common-stage field assertion.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
+    "place": "Proof, final paragraph: extend a finite-field model to the common-stage coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-integral-derived-reduction",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-rationalization-karoubi",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-kflat-change-of-rings",
+  "lem-trf-finite-tor-amplitude-perfect",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/fix-lem-finite-tor-perfect.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex finite Tor amplitude finite cohomology perfect finite free local ring",
+   "results": "Eight hits including CategoryTheory.hasProjectiveDimensionLT_iff, DerivedCategory.isGE_iff, and related projective-dimension support; no exact perfectness theorem returned.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isPerfect_of_finiteTorAmplitude",
+   "results": "0 hits; unknown identifier 'DerivedCategory.isPerfect_of_finiteTorAmplitude'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPerfect_of_finiteTorAmplitude in Mathlib/Algebra",
+   "results": "0 matching declarations in Mathlib/Algebra; the declaration is project-specific in WeilConjectures/CategoryTheory/DerivedCategory/Perfect.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric stalk of a constructible complex with finite Tor amplitude is represented by finite free modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk of a bounded constructible finite Tor amplitude complex is perfect",
+   "results": "Eight generic DerivedCategory boundedness hits; no exact stalk/perfectness declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfect, DerivedCategory.isPerfect_of_finiteTorAmplitude",
+   "results": "0 hits; unknown identifier 'DerivedCategory.IsPerfect'.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|isPerfect_of_finiteTorAmplitude|stalk.*perfect in Mathlib",
+   "results": "0 matching declarations in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk functor on sheaves of modules is monoidal commutes with tensor product",
+   "results": "8 hits: presheaf-module monoidal structure and Tilde stalk maps; no bounded constructible stalk perfectness theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"Monoidal\"",
+   "results": "4 hits in Mathlib.CategoryTheory.Sites.Point.Monoidal, including Point.instMonoidalSheafSheafFiber. Read local Monoidal.lean lines 121-134: the ordinary sheaf fibre functor is monoidal, with no derived or constructible perfectness conclusion. Existing general DAG derived-pullback theorem supplies the stronger fact required by this item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|stalk",
+   "results": "5 matching lines in CategoryTheory/Sites/Point/Monoidal.lean, including the ordinary sheaf fibre monoidal instance at line 122; no derived stalk or perfectness declaration. The script reports malformed file/line columns when its search root is a file; inspected the actual file directly.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an object of the derived category of modules over a field is perfect if its cohomology is finite dimensional and bounded",
+   "results": "8 generic K-projective and derived boundedness hits, no perfectness equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\"",
+   "results": "12 hits about perfect pairings and graph matchings, no perfect derived complex theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|finiteTorAmplitude|torAmplitudeIn",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -101,5 +300,69 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-trace-perfectness"
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fix-lem-finite-tor-perfect",
+  "worker": "stage1",
+  "summary": "Repair of merge-lock return: re-read all current statement and proof dependencies against the preserved citation quotes and the local Stacks sources. Retained the nine-step route and the single smaller topos-point node. Made the A_{j+1}-linear transition maps and the induced derived quotient isomorphisms explicit in step 5, and expanded step 6 to verify the degreewise product, mapping-cone and exact-module-product arguments. Repeated the narrower-node Mathlib searches, including a second phrasing and unavailable LeanSearch. The delivery tool rebases this sandbox overlay onto the current origin/newtargets-dag. Independent second reading verified all nine steps and the new topos-point statement against current dependencies and local Stacks TeX. Added the bounded-representative truncation and explicit closed-ball/residue/uniqueness details in the completeness argument; independently repeated broader Mathlib searches.",
+  "blueprint": "Steps 1-3 realize the first paragraph on exact stalks and the Tor interval, step 4 the finite-coefficient algebra step; steps 5-9 supply the integral-representative, residue-field and scalar-extension details needed by the final field paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-classical-stalk",
+    "why": "General pro-etale stalk/evaluation exactness tool needed for finite stalk cohomology and the integral product calculation; this unit has no site-level stalk theorem."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "General ordinary etale stalk tensor comparison fixes the small-etale conventions; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "General K-flat change-of-rings tool computes compatible reductions of one integral representative; the unit supplies no such resolution theorem."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "General exact-product theorem computes the module Roos products after taking the stalk; no derived-product theorem is stated in this unit."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient-ring DVR structure gives the residue field and uniformizer valuation bounds used by the field-stage proof; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "General constant etale stalk identification applies to every coefficient module; no node of this unit supplies this site-level identification."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-topos derived pullback theorem supplies tensor comparison and preservation of K-flat flat-term resolutions for either topos point; the unit has no such theorem."
+   },
+   {
+    "node": "lem-weil-pbc-rlim-perfect-complete",
+    "why": "General complete-ring perfect derived-limit criterion reconstructs the integral fibre from its reductions; this is a black-box algebraic tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "General constant pro-etale stalk identification fixes the coefficient ring and arbitrary module fibres; no node of this unit states this site-level fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-classical-stalk",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-rlim-perfect-complete",
+  "lem-weil-proetale-constant-sheaf-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-7dd055c83",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-7dd055c83 (reviewer sub-agent of L); spot-checked: Mathematics, citations, routes, hypotheses, base-change morphism, coefficient categories, edge cases, and Mathlib searches were checked. The new node's created record omitted required by/date/group fields; corrected full DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-fix-geometric-stalk-topos-point.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
