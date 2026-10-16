@@ -29,9 +29,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=\\mathcal C_{/t}$. The join-slice theorem [lem-coef-infinity-slice-right-fibration] makes $E$ a quasicategory. For $K=\\Delta^0$, its degree-$n$ definition is precisely maps $\\Delta^{n+1}\\to\\mathcal C$ with last vertex $t$, with operators extending $\\alpha$ by the last vertex. Thus $E$ is the simplicial set $S_t$ of [lem-coef-infinity-slice-arrow-equivalence]. That node supplies an equivalence\n$$\\delta:E\\longrightarrow T=\\operatorname{Fun}(\\Delta^1,\\mathcal C)\\times_{\\operatorname{ev}_1,\\mathcal C}\\{t\\}.$$\nIn degree zero $\\rho_0:\\Delta^0\\times\\Delta^1\\to\\Delta^1$ is the identity under the canonical identification, so $\\delta$ sends the vertex $f$ to the same arrow $f$ in $T$. Both $E,T$ are quasicategories. Their right-pinched mapping spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus], applied to each category and the shape $\\Delta^0$, whose functor category is the category itself.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VT",
+    "place": "Slice diagonal equivalence; explicit degree-zero formula and the Kan mapping-space assertion of the cited nodes"
+   }
+  },
+  {
+   "text": "We first record the elementary consequence of [lem-coef-infinity-mapping-composition] that precomposition or postcomposition with an equivalence edge is a homotopy equivalence on mapping spaces. If $u$ has inverse class represented by $v$, the composites of the two induced maps are composition with $[v][u]=[\\mathrm{id}]$ and $[u][v]=[\\mathrm{id}]$. Associativity, unitality and dependence only on the component class, all stated in that node, identify these composites with identity homotopy classes. This also shows that replacing either endpoint by an equivalent object preserves weak contractibility of a mapping space: the two maps induce mutually inverse maps on components and on all homotopy groups (with basepoints transported along the inverse homotopies).",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Unitality, associativity and induced pre/postcomposition"
+   }
+  },
+  {
+   "text": "Finality of $f$ in $E$ is equivalent to finality of $\\delta(f)$ in $T$. Here are both directions, rather than treating finality as automatic under an equivalence. By [lem-cbc-enhanced-functor-cone-calculus], $\\delta$ induces weak equivalences on every mapping space. If $\\delta(f)$ is final, apply this to each pair $(a,f)$ to see that $\\operatorname{Map}_E(a,f)$ is weakly contractible. Conversely, take a quasi-inverse $L$ and a coherent natural equivalence $\\delta L\\simeq\\mathrm{id}_T$, as in [def-cbc-enhanced-diagrams-cones]. Its component $\\epsilon_b:\\delta L(b)\\to b$ is an equivalence by the componentwise assertion of [lem-cbc-enhanced-functor-cone-calculus], with shape $T$. The universes can be enlarged so this shape is small. Step 2 gives an equivalence from $\\operatorname{Map}_T(b,\\delta f)$ to $\\operatorname{Map}_T(\\delta L(b),\\delta f)$, while the latter is weakly equivalent to $\\operatorname{Map}_E(L(b),f)$. If $f$ is final in $E$ this last space is weakly contractible. Thus every incoming mapping space to $\\delta f$ is weakly contractible, proving the converse. Terminal and final both denote the mapping-space condition of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VT",
+    "place": "Transport along the slice diagonal, expanded using mapping spaces, a quasi-inverse and composition"
+   }
+  },
+  {
+   "text": "Now apply [lem-cbc-enhanced-functor-cone-calculus] with ambient category $\\mathcal C$, shape $K=\\Delta^0$, and diagram the vertex $t$. The map $\\mathcal C\\to\\operatorname{Fun}(\\Delta^0,\\mathcal C)$ and its evaluation inverse are degreewise identities under $\\Delta^0\\times\\Delta^n\\cong\\Delta^n$. Consequently the coherent cone category in [def-cbc-enhanced-diagrams-cones] is exactly $T$: a cone with apex $z$ is an edge $z\\to t$, and the cone $\\mu$ with apex $x$ is the specified edge $f$. The cited cone-calculus node says that $\\mu$ is limiting, hence terminal in $T$, if and only if for every vertex $z$ the postcomposition map\n$$P_z:\\operatorname{Map}_{\\mathcal C}(z,x)\\longrightarrow\\operatorname{Map}_{\\mathcal C}(z,t),\\qquad h\\longmapsto f\\circ h,$$\nis an equivalence of spaces. The composition here is the canonical class of [lem-coef-infinity-mapping-composition], characterized there by restrictions from fixed-vertex $2$-simplex strings and the specified pinch inclusions. Thus it is the postcomposition used in the cited cone criterion, rather than an arbitrary operation agreeing only on components. Changing the representing simplicial map does not change whether it is a weak equivalence.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "dag/nodes/sec-smooth-purity/lem-cbc-enhanced-functor-cone-calculus.json",
+    "place": "The explicitly stated general cone criterion, specialized to the singleton shape. This is an existing agent-formulated foundation; Kerodon 02R3 is only its coslice analogue, not a source asserting the general comma criterion."
+   }
+  },
+  {
+   "text": "If $f$ is an equivalence, choose an inverse edge $g:t\\to x$ as in [def-cbc-enhanced-diagrams-cones]. Step 2, using [lem-coef-infinity-mapping-composition], gives that each $P_z$ has inverse up to homotopy given by postcomposition with $g$. Thus Step 4 makes $f$ final in $T$, and Step 3 makes it final in $E$. Its incoming mapping spaces are already Kan by Step 1, so they satisfy the exact right-pinched weak-contractibility condition of the item.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Two inverse composition operations, followed by Steps 3 and 4"
+   }
+  },
+  {
+   "text": "Conversely suppose all $\\operatorname{Map}_E(a,f)$ are weakly contractible. By Steps 3 and 4, every $P_z$ induces a bijection on components. For $z=t$, surjectivity gives an edge $g:t\\to x$ whose component satisfies $[f][g]=[\\mathrm{id}_t]$. For $z=x$, compute, using [lem-coef-infinity-mapping-composition],\n$$\\pi_0(P_x)([g][f])=[f][g][f]=[f]=\\pi_0(P_x)([\\mathrm{id}_x]).$$\nInjectivity gives $[g][f]=[\\mathrm{id}_x]$. Thus $[g]$ is a two-sided inverse to $[f]$; the equivalence criterion in that composition node gives that $f$ is an equivalence edge. This proves the reverse implication with the stated witnesses. Neither direction used finality of $t$ in $\\mathcal C$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Ordinary inverse calculation on the component category, following the singleton cone criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02J2",
+  "place": "Expanded proof via the existing join-slice/arrow equivalence, singleton coherent cone criterion, and the mapping-space composition laws of Kerodon Subsection Composition of Morphisms. The inverse calculation is explicit; this is not an application of the item itself. Online sources are not archived under literature/; see WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +172,31 @@
    "results": "{\"t\": \"2026-10-16T14:13:27Z\", \"tool\": \"grep\", \"query\": \"RightFibration|right_fibration|rightFibration|over.*quasicategory|quasicategory.*over\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the pinned Mathlib AlgebraicTopology source returned zero hits for right-fibration identifiers or over/quasicategory combinations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence edge in a quasicategory is a final object in the slice over its target",
+   "results": "{\"t\": \"2026-10-16T15:54:35Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence edge in a quasicategory is a final object in the slice over its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.right_edge\", \"SSet.modelCategoryQuillen.J\", \"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.StrictSegal.quasicategory\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.Quasicategory₂.fill31\"], \"digest\": \"e8876371a0d6ac75\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: only ordinary-category Over terminality, quasicategory horn axioms and ordinary homotopy categories are returned. The higher right-pinched mapping-space condition in the join slice is not stated."
+  },
+  {
+   "tool": "grep",
+   "query": "slice.*final|final.*slice|IsTerminal.*Over|Over.*IsTerminal",
+   "results": "{\"t\": \"2026-10-16T15:54:36Z\", \"tool\": \"grep\", \"query\": \"slice.*final|final.*slice|IsTerminal.*Over|Over.*IsTerminal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Spaces.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"b635046e6dcc999e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: only ordinary-category Over terminality, quasicategory horn axioms and ordinary homotopy categories are returned. The higher right-pinched mapping-space condition in the join slice is not stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an infinity category, equivalence arrows into t are exactly terminal objects of the slice over t",
+   "results": "{\"t\": \"2026-10-16T15:55:16Z\", \"tool\": \"leansearch\", \"query\": \"For an infinity category, equivalence arrows into t are exactly terminal objects of the slice over t\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-normalized-final-cone",
   "by": "worker",
@@ -107,5 +212,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-slice-equivalence-final",
+  "worker": "stage1",
+  "summary": "Repaired the earlier circular-in-content appeal to Kerodon 02J2 by giving the full argument: compare join and coherent singleton slices, transport finality explicitly, apply the existing singleton cone criterion, and prove the needed mapping-space equivalence criterion by constructing an inverse to f on components. One general statement-only composition lemma is new; all slice and cone tools are reused. Statement unchanged; no Lean or compiler invocation.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 uses derived coefficient adjunction; this item serves its coherent-diagram/final-index foundation through the normalized identity-cone criterion. The current main-20261015 proof was read; the auxiliary split remains under this inherited ancestry. Steps 1-6 prove the auxiliary equivalence/final-slice criterion, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-49957d75c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-49957d75c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-mapping-composition, and the full statements of every cited node: def-cbc-enhanced-diagrams-cones, slice-right-fibration, slice-arrow-equivalence, cbc-enhanced-functor-cone-calculus and pinch-comparison. I also read the unit sk-prop-sf-biduality-general and Kerodon online, which is not archived and is listed as WANTED. Kerodon 02J2 (Prop. 4.7.3.20) matches the item hypothesis for hypothesis: any quasicategory, f is an isomorphism iff f is final in C_{/Y}, with no finality assumption on t. The statement is unchanged. Step 1: the join slice with K=Δ^0 is literally S_t. δ(f)=f because ρ_0 is the identity. The Kan property comes from cone-calculus with K=Δ^0. Step 2 is elementary from associativity, unitality and dependence on component classes. Step 3 transports finality in both directions, using full faithfulness, the quasi-inverse L, and the counit components, which are equivalences by the componentwise criterion; the direction of precomposition is correct. Step 4: with K=Δ^0 the cone category is degreewise T and μ=f, so the cone criterion becomes 'P_z=f∘- is an equivalence for all z'. Step 5 inverts each P_z by post_g. Step 6 gets a two-sided inverse on π_0 from surjectivity at t and injectivity at x, then applies the new node's inverse-triangle criterion. The new node agrees with Kerodon 01PF: Cor. 4.6.8.5 and 4.6.8.8, Constr. 4.6.8.9, Rem. 4.6.8.10, Props. 4.6.8.11 and 4.6.8.12, Rem. 4.6.8.14, Notation 4.6.8.15. In it, V is the fixed-vertex Δ^2-string space, θ goes to the 12 and 01 edges in that order, and c is unique up to homotopy because j is a homotopy equivalence. It is statement-only (B1–B7 hold), its blueprint from/via is correct, and it is not a restatement of the item. I tested small cases: N([1]) with f=id_1, with the non-invertible edge 0→1 (incoming space empty) and with t=0 (not final); the empty quasicategory; nerves of ordinary categories; one-object groupoids. I found no duplicate after rg over dag/nodes and opening kan-mapping-restriction, join-cone-calculus, arrow-morphism-square, right-fibration-fibers, normalized-final-cone, terminal-anodyne, complete-algebroid and others, plus a blueprint grep. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) as a black box for the generic mapping-space and cone criteria; no node of this unit gives them, and sibling nodes of the unit already cite it. No SGA source is used, nothing is weakened, and no fixes were needed."
  }
 }
