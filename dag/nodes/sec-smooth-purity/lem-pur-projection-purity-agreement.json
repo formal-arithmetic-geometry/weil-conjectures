@@ -3,56 +3,337 @@
  "blueprint": {
   "is": "lem-pur-projection-purity-agreement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Agreement with the affine-line route on affine space",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nfor the projection $p_d:\\mathbf A^d_Y\\to Y$ the smooth purity map\n$\\gamma_{p_d,K}$ of [def-pur-smooth-purity-map] equals the\naffinity-space purity comparison of [cor-pur-affine-space-purity],\ni.e. the ordered composite of the $d$ affinity-line purity maps of\n[thm-pur-affine-line-purity].",
+ "statement": "Use the finite-coefficient purity conventions [def-pur-conventions], with $A=\\Lambda=A_{E,n}$ for any $n\\geq1$. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], let $d\\geq0$, let $p_d:X=\\mathbf A^d_Y\\to Y$ be the projection [def-sbc-affine-space], and let $K\\in D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude]. Use the specified pro-etale twists [def-coefficient-twists-detailed] and exceptional inverse images [def-weil-exceptional-inverse-image].\n\nThe affine comparison at every coefficient level is specified as follows. For an affine-line projection $p:\\mathbf A^1_S\\to S$ with standard compactification $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$, $q:\\mathbf P^1_S\\to S$, define $I_S:Rp_!A(1)[2]\\to A_S$ by $Rq_*j_!A(1)[2]\\to Rq_*A(1)[2]\\xrightarrow{t_q}A_S$. Here $t_q$ is the ordinary etale projective-line trace [def-amb-p1-trace], formed with $\\mu_{\\ell^r}^{\\mathrm{et}}\\otimes_{\\mathbf Z/\\ell^r}A$ for any $r\\geq1$ such that $\\ell^rA=0$, and realized on the specified pro-etale Tate twist by [lem-amb-cartier-kummer-map, lem-sf-class-compact-support-comparison]. Define $\\Gamma_{p,K}$ as the exceptional transpose of\n$$\nRp_!Lp^*K(1)[2]\\xrightarrow{\\mathrm{PF}^{-1}}K\\otimes_A^LRp_!A(1)[2]\\xrightarrow{1_K\\otimes I_S}K,\n$$\nusing the projection map [def-exchange-projection]. These maps are independent of $r$. Put $\\Gamma_{p_0,K}=1_K$ and define $\\Gamma_{p_d,K}$ as the ordered composite of these $d$ affine-line maps, with the exceptional-composition and twist-additivity isomorphisms as in [def-pur-affine-space-comparison]. On the domain $e(E/\\mathbf Q_\\ell)\\mid n$ of [def-pur-affine-line-datum], these are exactly the named maps [def-pur-affine-line-purity-comparison, thm-pur-affine-line-purity, cor-pur-affine-space-purity]; the displayed construction specifies their extension to all $n\\geq1$.\n\nSpecify the diagonal/DNC normalization in the smooth purity map [def-pur-smooth-purity-map] as follows, as in the model paragraph of the unit. Put $W=X\\times_YX$, with projections $p_1,p_2$ and diagonal $\\Delta$, and let $\\alpha:C(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_{p_d}$ be [lem-pur-diagonal-base-change]. Let $N=N_{\\Delta/W}$ and let $\\delta:C(p_1,\\Delta)\\xrightarrow{\\sim}C(\\pi_N,0_N)$ be the normalized comparison [thm-pur-dnc-invariance], with section invariants [def-pur-section-invariant]. On the normal bundle use the inverse of the integration-transposed comparison of [thm-amb-vector-bundle-purity], with integration [def-amb-vector-integration], transported by [thm-sf-ambient-adjoint-class]. Pulling it back along $0_N$ and restricting the twist gives $\\beta:C(\\pi_N,0_N)\\xrightarrow{\\sim}A_X(d)[2d]$. The dualizing orientation used in the middle arrow of the smooth purity map is $\\vartheta_p=\\beta\\delta\\alpha^{-1}:\\omega_p\\xrightarrow{\\sim}A_X(d)[2d]$; that middle arrow uses $\\vartheta_p^{-1}$.\n\nThen this smooth purity map equals $\\Gamma_{p_d,K}$ as a morphism\n$$\nLp_d^*K(d)[2d]\\longrightarrow Rp_d^!K.\n$$\nFor $d=0$ both maps are $1_K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
   "place": "node lem-pur-projection-purity-agreement, order 2019"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-pur-smooth-purity-map",
-  "cor-pur-affine-space-purity",
-  "thm-pur-affine-line-purity",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-finite-tor-amplitude",
   "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-exceptional-inverse-image",
+  "def-amb-p1-trace",
+  "lem-amb-cartier-kummer-map",
+  "lem-sf-class-compact-support-comparison",
+  "def-exchange-projection",
+  "def-pur-affine-space-comparison",
+  "def-pur-affine-line-datum",
+  "def-pur-affine-line-purity-comparison",
+  "thm-pur-affine-line-purity",
+  "cor-pur-affine-space-purity",
+  "def-pur-smooth-purity-map",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "def-pur-section-invariant",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration",
+  "thm-sf-ambient-adjoint-class",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
-   "text": "Both maps are canonical and, by [thm-pur-composition-coherence]\nand [prop-pur-affine-space-purity-compatibilities], they are\ncompatible with the tower of affine projections. It therefore suffices\nto compare them after restriction to a geometric fiber of $Y$, where\nboth are determined by the Kummer computation: the dualizing-object\nidentification of [def-pur-smooth-purity-map] for $p_d$ comes\nfrom the deformation of the diagonal $\\Delta$ and the standard-pair\ncomputation of [lem-pur-dnc-section-geometry](4) – the diagonal\nof the standard pair $(\\mathbf A^{2d}_Y,\\Delta)$ has normal bundle the\ntrivial rank-$d$ bundle $T_{p_d}$, and the DNC invariance of\n[thm-pur-dnc-invariance] is the identity on the standard pair –\nwhose class, by\n[lem-pur-dnc-section-geometry] and the definition of the\n[def-pur-frame-class] (class of a frame), is the $d$-fold\nexterior product of the rank-one Kummer boundaries, i.e. the\n$d$-fold product of the affinity-line orientations; the affinity-space\npurity of [cor-pur-affine-space-purity] is built from exactly the\nsame $d$-fold product of the affinity-line orientations. The two\nassemblies differ only by the canonical reassociations of the package\n(the Koszul signs are $+1$, since all shift factors are of even\ndegree, by [prop-pur-affine-space-purity-compatibilities]); hence\nthe maps agree.",
+   "text": "Choose $r\\geq1$ with $\\ell^rA=0$; it exists since $A=\\mathcal O_E/\\varpi_E^n$. The prime $\\ell$ is invertible on every $k$-scheme. The roots-of-unity sheaf is locally free of rank one over $\\mathbf Z/\\ell^r$ by [lem-asd-etale-finite-twist-pullback], so its derived tensor with $A$ is its ordinary tensor. To use the coefficient identification of [lem-amb-cartier-kummer-map] on any such scheme $T$, take the empty effective Cartier divisor: its ideal is generated by the nonzerodivisor $1$. Its projection-induced identification realizes this ordinary etale Tate line as the specified pro-etale Tate line. For any scheme pullback, first commute it with $\\nu^*$ by [lem-weil-pbc-comparison-pullback], then apply the roots-of-unity pullback identification of [lem-asd-etale-finite-twist-pullback]. Apply [lem-pur-derived-pullback-tensor-iso] at finite coefficients to the Tate line and an arbitrary ambient complex. Its tensor, unit and composition compatibilities, followed by the tensor-power associators and shift additivity, give $Lf^*(M(a)[b])\\cong(Lf^*M)(a)[b]$ for the nonnegative twists used here. These fix the coherent twist restrictions and reassociations used below. The unit and the Kummer class $h=c_1(\\mathcal O(1))$ are the two summands defining $b_q$ in [def-amb-p1-trace]. For the coefficient realization of $h$, apply [lem-amb-cartier-kummer-map] to the infinity divisor on $\\mathbf P^1_S$. In its affine chart that divisor is cut out by the polynomial coordinate, a nonzerodivisor over every base ring; its line bundle is $\\mathcal O(1)$, as its two standard local generators show. The lemma makes this realized Kummer class independent of $r$. Full faithfulness of [thm-weil-pbc-site-comparison] reflects that equality to the ordinary etale derived category after the specified coefficient identifications. The unit also is independent of $r$. Thus $b_q$, $t_q=\\operatorname{pr}_2b_q^{-1}$, and its affine restriction $I_S$ are independent of $r$. Applying the projection formula, exceptional transpose, and ordered composition preserves that equality, so the displayed $\\Gamma$ is well defined at every $n\\geq1$. On the domain of the original affine-line datum its formulas are exactly those of [def-pur-affine-line-purity-comparison]. For the coefficient input $K$, choose $K^{\\mathrm{et}}\\in D^b_c(Y_{\\mathrm{et}},A)$ with $\\nu_Y^*K^{\\mathrm{et}}\\cong K$ using [lem-sf-proetale-constructible-origin](ii). Clause (ii) of [lem-sf-comparison-tor-amplitude] gives this witness the same finite Tor interval as $K$. Thus the map comparison [lem-pur-vector-integration-site-comparison] applies to these inputs: it identifies the actual tensor projection maps, the integrations, and their exceptional transposes under the specified Tate and compact-support comparisons. In particular the ordinary integration-transposed vector-bundle isomorphism gives the pro-etale transpose of the specified pro-etale projection/integration composite. This comparison also applies at the tensor unit. Every finite-type $k$-scheme used below is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is a Noetherian ring.\n\nLet $X=\\mathbf A^d_Y$, $p=p_d$, $W=X\\times_YX$, with coordinates $(x_1,\\ldots,x_d,y_1,\\ldots,y_d)$, and let $p_1,p_2,\\Delta$ be the projections and diagonal. The projection $p$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]. By [lem-pur-diagonal-base-change] the specified base-change arrow gives $\\alpha:C(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_p$. By [lem-pur-diagonal-regular-immersion], the diagonal is a closed section with normal bundle $T_{X/Y}$. Explicitly its ideal is $(y_i-x_i)_{1\\leq i\\leq d}$; modulo its square these generators form a basis, so the normal bundle is the trivial rank-$d$ bundle over $X$. The $X$-isomorphism $h:W\\to\\mathbf A^d_X$, $(x,y)\\mapsto(x,u=y-x)$, has inverse $(x,u)\\mapsto(x,y=x+u)$ and takes $\\Delta$ to the zero section. The induced map on the displayed normal bases is the identity. All schemes here are separated and finite type. The affine spaces and W restrict over affine base charts to spectra of polynomial rings; the trace compactifications are the proper finite-type projective lines of [def-amb-p1-trace]. Thus the section invariant and DNC constructions have their required domains. These coordinate statements also hold for $d=0$.",
    "uses": [
-    "thm-pur-composition-coherence",
-    "prop-pur-affine-space-purity-compatibilities",
-    "def-pur-smooth-purity-map",
-    "lem-pur-dnc-section-geometry",
-    "thm-pur-dnc-invariance",
-    "def-pur-frame-class",
-    "cor-pur-affine-space-purity"
+    "lem-pur-diagonal-base-change",
+    "lem-pur-diagonal-regular-immersion",
+    "def-pur-section-invariant",
+    "def-amb-p1-trace",
+    "lem-amb-cartier-kummer-map",
+    "def-pur-affine-line-purity-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-comparison-pullback",
+    "sbc-lem-affine-space-smooth",
+    "lem-pur-derived-pullback-tensor-iso",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-pur-vector-integration-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+    "place": "Proof, diagonal and normal-bundle calculation; unit Agreement on the model, first two sentences"
+   }
+  },
+  {
+   "text": "We first prove that translating affine coordinates preserves the specified trace. For $S$ empty the assertion is the unique equality on the empty scheme. Otherwise let $S$ be separated finite type and write $t_{q}:Rq_!A(d)[2d]\\xrightarrow{\\sim}A_S$ for the affine-space trace of [lem-amb-affine-space-top-trace]. On the parameter scheme $P=\\mathbf A^d_S$, consider the universal translation $\\tau(a,z)=(a,z-a)$ of $\\mathbf A^d_P/P$. Since $q\\tau=q$, the coherent composition comparisons of [lem-amb-etale-compact-comparisons], with the identification of the constant Tate coefficient under the isomorphism $\\tau$, give an automorphism $T_\\tau$ of $Rq_!A(d)[2d]$. Conjugating by $t_q$ gives an automorphism of $A_P$. Apply the fully faithful bounded-below comparison [thm-weil-pbc-site-comparison] to regard this as a pro-etale automorphism; this derived endomorphism of the degree-zero sheaf $A_P$ is a unique sheaf endomorphism by [lem-weil-pbc-derived-single-fully-faithful], and it is multiplication by a locally constant unit $v$ by [lem-pur-lisse-rank-one-aut]. At the zero parameter translation is the identity. Base-change compatibility of $t_q$ therefore gives $v|_{0(S)}=1$. Iterating clause (1) of [lem-pur-a1-components] shows that every connected component of $P$ is the inverse image of a component of $S$ and meets $0(S)$: in rank one, the inverse image of a component contains its zero-section image, and iteration gives the assertion in rank $d$. Thus $v=1$, so $t_qT_\\tau=t_q$. For $d=0$ it is the identity. Specializing the parameter proves translation invariance for every section. The specific integration comparison [lem-pur-vector-integration-site-comparison] identifies the trace maps and their transposes on the two sites. Applying comparison pullback to the trace equality and using these identifications gives the corresponding equality on the finite etale-origin objects here; the relative Hom bijections are those of [thm-sf-ambient-adjoint-class]. In particular the affine/vector-bundle comparison obtained by transposing integration is unchanged by $h$ of Step 1. This is the translation argument required in the unit's model paragraph, rather than an inference from equality on individual geometric fibers.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-lisse-rank-one-aut",
+    "lem-pur-a1-components",
+    "lem-amb-etale-compact-comparisons",
+    "lem-sf-class-compact-support-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "thm-amb-vector-bundle-purity",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
+    "place": "Proof, Agreement on the model, translation invariance and connected components"
+   }
+  },
+  {
+   "text": "Denote by $P_{q,K}:Lq^*K(d)[2d]\\xrightarrow{\\sim}Rq^!K$ the transpose of integration for a rank-$d$ trivial bundle $q$, using [thm-amb-vector-bundle-purity, def-amb-vector-integration] and the actual hom bijections [thm-sf-ambient-adjoint-class]. The equality of this transported transpose with the specified pro-etale projection/integration transpose is [lem-pur-vector-integration-site-comparison], on the witnesses fixed in Step 1. Set $L=A_X(d)[2d]$, $P=P_{p,A_Y}:L\\to\\omega_p$, $L'=A_W(d)[2d]$, and $J=P_{p_1,A_X}:L'\\to\\omega_{p_1}$. We prove the required base-change identity for these particular maps, without identifying two unspecified canonical orientations. Write $C_M:Lp^*Rp_!M\\to Rp_{1!}Lp_2^*M$ for compact-support exchange in the diagonal square. By [thm-cbc-finite-level-proetale] it is precisely the transported ordinary etale exchange. The trace identity in [lem-amb-affine-space-top-trace], with base change $p:X\\to Y$, is therefore $t_{p_1}C_L=Lp^*t_p$, using Step 1's Tate pullback identifications and [lem-sf-class-compact-support-comparison]. Let $B:Lp_2^*\\omega_p\\to\\omega_{p_1}$ be the specified dualizing base-change map of [def-pur-co-smoothness](3). Its transpose is $Lp^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}$. Naturality of $C$ with respect to $P$ shows that the transpose of $B\\circ Lp_2^*P$ is\n$$Lp^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}\\circ Rp_{1!}(Lp_2^*P)\n=Lp^*(\\varepsilon_p\\circ Rp_!P)\\circ C_L^{-1}\n=Lp^*t_p\\circ C_L^{-1}=t_{p_1}.$$\nThe middle equality is the defining adjunction equation for $P$. The defining transpose of $J$ is also $t_{p_1}$, so injectivity of the same hom bijection gives $J=B\\circ Lp_2^*P$. In [lem-pur-diagonal-base-change], $\\alpha=(L\\Delta^*B)^{-1}$ after $p_2\\Delta=1_X$. Consequently\n$$\\alpha\\circ L\\Delta^*J=P.$$\nThe ordinary restriction $L\\Delta^*L'=L$ is Step 1's coherent Tate restriction, not exceptional pullback. Finally Step 2 identifies $J$ in coordinates $u=y-x$ with the same integration-transposed comparison in the standard-bundle coordinates. This uses equality of traces and transposes, not an unrecorded construction from the proof of the vector-bundle corollary.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "def-amb-vector-integration",
+    "thm-sf-ambient-adjoint-class",
+    "thm-cbc-finite-level-proetale",
+    "lem-amb-affine-space-top-trace",
+    "lem-sf-class-compact-support-comparison",
+    "def-pur-co-smoothness",
+    "lem-pur-diagonal-base-change",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
+    "place": "Proof, Agreement on the model, base-change identification under the vector-bundle comparisons"
+   }
+  },
+  {
+   "text": "Apply [thm-pur-dnc-invariance] to $(p_1,\\Delta)$, obtaining $\\delta:C(p_1,\\Delta)\\xrightarrow{\\sim}C(\\pi_N,0_N)$. In the global coordinates $u_i=y_i-x_i$ this is a standard affine pair. Its deformation is given by $u_i=t v_i$ and has constant family object by the standard-pair clause of [lem-pur-dnc-section-geometry]. The normalization clause of the DNC theorem makes $\\delta$ the identity between these two standard section invariants. Write $\\beta=L0_N^*(P_{\\pi_N,A_X}^{-1})$, followed by Step 1's ordinary Tate restriction, so $\\beta:C(\\pi_N,0_N)\\to A_X(d)[2d]$. The induced normal coordinates $v_i$ use the same ordered basis as $u_i$, by Step 1. With Step 2's translation invariance, the standard-pair identity says precisely $\\beta\\delta=(L\\Delta^*J)^{-1}$. The explicitly specified diagonal/DNC normalization in the statement and in the middle arrow of [def-pur-smooth-purity-map] is $\\theta_p=\\beta\\delta\\alpha^{-1}$. By Step 3,\n$$\\theta_p=(L\\Delta^*J)^{-1}\\alpha^{-1}=P_{p,A_Y}^{-1}.$$\nThis checks the actual normalized arrows; it does not deduce equality merely from existence of isomorphisms to a twist. In rank zero the displayed coordinate lists are empty, the deformation is the constant rank-zero pair, and the same equations are identities.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-dnc-section-geometry",
+    "def-pur-section-invariant",
+    "thm-amb-vector-bundle-purity",
+    "def-amb-vector-integration",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+    "place": "Proof, standard-pair identity; unit Agreement on the model, final three sentences"
+   }
+  },
+  {
+   "text": "We now prove equality for arbitrary $K$, using transposes rather than naturality alone. Put $L=A_X(d)[2d]$ and $P=P_{p,A_Y}:L\\to\\omega_p$. By [def-pur-smooth-purity-map] and Step 4, smooth purity is $\\theta_{p,K}(1\\otimes P)$ after twist reassociation, where $\\theta_{p,K}$ is the canonical tensor arrow of [thm-pur-cohomological-smoothness]. By the explicit definition in [def-pur-co-smoothness], its exceptional transpose is the projection-formula composite with $Rp_!\\omega_p\\xrightarrow{\\varepsilon_{p,A_Y}}A_Y$. Naturality of the projection map [def-exchange-projection] with respect to $P$ moves $Rp_!P$ to this counit. Since $P$ is by definition the transpose of $t_p$, the adjunction identity gives $\\varepsilon_{p,A_Y}\\circ Rp_!P=t_p$. The resulting transpose is therefore exactly\n$$Rp_!(Lp^*K\\otimes L)\\xrightarrow{\\mathrm{PF}^{-1}}K\\otimes Rp_!L\\xrightarrow{1_K\\otimes t_p}K.$$\nThis is the defining transpose of the ordinary comparison in [thm-amb-vector-bundle-purity], and [lem-pur-vector-integration-site-comparison] identifies it with the specified pro-etale defining transpose of $P_{p,K}$. The projection maps used here are invertible on these bounded constructible finite-Tor inputs by [fix-prop-projection-formula]. Equality of transposes under the actual adjunction [def-weil-exceptional-inverse-image] proves that smooth purity equals $P_{p,K}$.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "thm-pur-cohomological-smoothness",
+    "def-pur-co-smoothness",
+    "def-exchange-projection",
+    "fix-prop-projection-formula",
+    "thm-amb-vector-bundle-purity",
+    "def-weil-exceptional-inverse-image",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+    "place": "Proof, final assertion that the two assemblies agree, with the coefficient argument expanded"
+   }
+  },
+  {
+   "text": "Finally $P_{p,K}$ is the ordered affine-line comparison. In rank one, the displayed definition of $\\Gamma_{p,K}$ (agreeing with [def-pur-affine-line-purity-comparison] on its domain) is the transpose of the projective-line trace restricted to the affine line, with the projection formula. This is exactly the affine-line integration used in [lem-amb-affine-space-top-trace]. More precisely, [lem-asd-ordinary-finite-p1-adjunction] states that the actual projective-line counit at every $K$ is $(1_K\\otimes t_q)\\mathrm{PF}^{-1}$. Composing with the open-extension adjunction specified in [lem-amb-affine-space-top-trace] restricts $t_q$ to $I_S$; projection-map composition compatibility therefore gives the same formula for the actual affine-line counit, not just for its value at the tensor unit. Suppose the identification has been checked for $p_d:\\mathbf A^d_Y\\to Y$, and write $q:\\mathbf A^{d+1}_Y\\to\\mathbf A^d_Y$ for the last-coordinate projection. Use the explicit affine adjunctions $F_d\\dashv G_d$ and $F_1\\dashv G_1$ of [lem-amb-affine-space-top-trace], whose right adjoints are twisted pullbacks. By [def-weil-pbc-composite-adjunction], their composite counit at $K$ is $\\varepsilon_{p_d,K}\\circ Rp_{d!}(\\varepsilon_{q,G_dK})$, where $G_dK=p_d^*K(d)[2d]$ and the two $\\varepsilon$ here denote the counits of these explicit affine adjunctions. Their identification with the actual exceptional adjunctions is through the integration transposes $P$, not an identification of their right adjoints by notation alone. By definition the trace $t_{p_{d+1}}$ in [lem-amb-affine-space-top-trace] is the counit of precisely this composite, and [def-amb-vector-integration] uses that trace on a trivial bundle. Write $L_d=A_{X_d}(d)[2d]$ and $L_q=A_{X_{d+1}}(1)[2]$. Under the coherent pullback/tensor and compact-support composition identifications of Step 1, the composition compatibility of [fix-prop-projection-formula] rewrites that composite counit as\n$$\nK\\otimes Rp_{d!}(L_d\\otimes Rq_!L_q)\n\\xrightarrow{1_K\\otimes Rp_{d!}(1_{L_d}\\otimes t_q)}\nK\\otimes Rp_{d!}L_d\n\\xrightarrow{1_K\\otimes t_{p_d}}K.\n$$\nHere $t_q$ is the affine-line counit at the tensor unit. At $K=A_Y$ the same displayed composite is $t_{p_{d+1}}$, by its definition as the composite counit. Thus at general $K$ the displayed map is $1_K\\otimes t_{p_{d+1}}$ after the projection isomorphism. The composition identification for the pro-etale compact-support functors is [thm-sf-comp-composition]; the current definition [def-pur-affine-space-comparison] specifies its conjugate $c_d$ on exceptional inverse images. Its recursion applies the last affine-line map to $Rp_d^!K$, whereas the explicit composite adjunction first uses $G_dK=Lp_d^*K(d)[2d]$. Both inputs have the required bounded constructible finite-Tor domain: [lem-sf-pullback-tor-amplitude] applies to the separated finite-type projection $p_d$ and gives $Lp_d^*K$ bounded constructible with the same Tor interval as $K$. Tensor with the locally free Tate line is exact and preserves finite local constancy on each constructible stratum, and the shift translates the finite cohomological and Tor intervals, so $G_dK$ has these properties; Step 5 identifies $Rp_d^!K$ with $G_dK$. These agree: naturality of the affine-line transpose (from naturality of its defining projection map) gives\n$$\\Gamma_{q,Rp_d^!K}\\circ Lq^*(P_{p_d,K})(1)[2]\n=Rq^!(P_{p_d,K})\\circ\\Gamma_{q,G_dK}.$$\nSubstituting this equation and the induction hypothesis into the recursion of [def-pur-affine-space-comparison], its transpose is exactly the composite counit just computed. Taking that transpose gives the ordered composite of the already identified $d$ affine-line comparisons and the last affine-line comparison, with the exceptional-composition and twist-additivity isomorphisms. This is the ordered recursion defining $\\Gamma$ in the statement, and [def-pur-affine-space-comparison] on its original domain. The induction starts with the identity adjunction at $d=0$. All shifts added are even, so these reassociations introduce no sign. The specific comparison [lem-pur-vector-integration-site-comparison] identifies the projection/integration maps and their transposes, and [thm-sf-ambient-adjoint-class] supplies the corresponding hom bijections. Applying comparison pullback to the computed equality and inserting those identifications gives this equality in the stated pro-etale category. Together with Step 5 it proves the claimed agreement for every $K$, including $K=0$.",
+   "uses": [
+    "def-pur-affine-line-purity-comparison",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "def-amb-vector-integration",
+    "fix-prop-projection-formula",
+    "def-pur-affine-space-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-comp-composition",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
+    "place": "Proof, ordered affine-line tower and canonical reassociations, expanded by the composite counit"
+   }
   }
  ],
  "proof_deps": [
-  "thm-pur-composition-coherence",
-  "prop-pur-affine-space-purity-compatibilities",
+  "def-amb-p1-trace",
+  "def-amb-vector-integration",
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-comparison",
+  "def-pur-co-smoothness",
+  "def-pur-section-invariant",
   "def-pur-smooth-purity-map",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "fix-prop-projection-formula",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-a1-components",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-diagonal-base-change",
+  "lem-pur-diagonal-regular-immersion",
   "lem-pur-dnc-section-geometry",
+  "lem-pur-lisse-rank-one-aut",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-vector-bundle-purity",
+  "thm-cbc-finite-level-proetale",
+  "thm-pur-cohomological-smoothness",
   "thm-pur-dnc-invariance",
-  "def-pur-frame-class",
-  "cor-pur-affine-space-purity"
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-comp-composition",
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "agreement of smooth purity map with affine space purity comparison",
+   "results": "AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp; AlgebraicGeometry.AffineSpace.mapSpecMap; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom; AlgebraicGeometry.AffineSpace.map_toSpecMvPoly; AlgebraicGeometry.AffineSpace.map_Spec_map; AlgebraicGeometry.AffineSpace.map_SpecMap; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "smoothPurityIso affineSpace purity comparison",
+   "results": "none; loogle reported Unknown identifier smoothPurityIso",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityIso|affineSpace.*purity|projection.*purity [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "agreement of smooth purity map with affine-space purity comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purity isomorphism for affine space projection equals iterated affine line purity",
+   "results": "AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom; AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over; AlgebraicGeometry.AffineSpace.isoOfIsAffine; AlgebraicGeometry.AffineSpace.SpecIso_inv_over; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc; AlgebraicGeometry.AffineSpace.mapSpecMap; AlgebraicGeometry.AffineSpace.map_Spec_map",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace",
+   "results": "none; loogle reported unknown identifier AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineSpace|rightDerivedUpperShriek_affineSpace|smoothPurityIso [WeilConjectures/EtaleCohomology/Purity/Smooth]",
+   "results": "The requested subdirectory is outside Mathlib and does not exist under Mathlib/. The search tool returned zero hits; this is not evidence of absence.",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "iterated affine line purity comparison for affine space projection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizingComplex|rightDerivedUpperShriek",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of a smooth morphism is the pullback tensor the relative dualizing complex, compatibly with the counit",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.pullbackSpecIso_inv_fst'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|dualizingComplex|UpperShriek|purity [AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity for an affine space projection and its trace normalization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine space smooth purity orientation agrees with the iterated trace adjunction from the projective line",
+   "results": "Orientation.volumeForm_def; Orientation.map_apply; Orientation.volumeForm; Orientation.volumeForm_zero_neg; Orientation.map_eq_det_inv_smul; Orientation.volumeForm_zero_pos; Orientation.volumeForm_map; exteriorPower.pairingDual_ιMulti_ιMulti",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "Lean.Compiler.LCNF.Purity; Lean.Compiler.LCNF.tacticPurity_tac; Lean.Compiler.LCNF.Purity.impure; Lean.Compiler.LCNF.Purity.pure; Lean.Compiler.LCNF.instDecidableEqPurity; Lean.Compiler.LCNF.instHashablePurity; Lean.Compiler.LCNF.instInhabitedPurity; Lean.Compiler.LCNF.instToStringPurity",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional pullback for an affine space projection equals twisted pullback with the normalization given by integration along the fiber",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.AffineSpace.isPullback_map; AlgebraicGeometry.AffineSpace.over_over; AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.pullbackSpecIso_inv_fst'; AlgebraicGeometry.pullbackSpecIso_hom_fst; AlgebraicGeometry.pullbackSpecIso_hom_fst'; AlgebraicGeometry.pullbackSpecIso_inv_fst",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*Tate|Tate.*trace|exceptional.*pullback|upperShriek",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -90,5 +371,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-smooth-purity"
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-projection-purity-agreement",
+  "worker": "stage1",
+  "summary": "Repair of F1-F4: read every direct cited statement and its source at the exact place, the full smooth-purity unit/model route, and all five current archived target signatures. Added the degree-zero derived/sheaf Hom interface, smoothness and coherent Tate pullback citations. Replaced the ambiguous vector-bundle base-change identification by equality of actual exceptional transposes; specified the trace-normalized diagonal/DNC orientation and matched the precise current affine-tower recursion. Retained the reported all-n coefficient-domain repair. No new nodes or Lean changes. Second reading: supplied the empty/infinity Cartier divisors, explicit pullback-tensor coherence and finite-Tor preservation citations, and the tensor form of the composite counit. Supplied the specific normalized vector-integration site comparison and its etale-origin/finite-Tor hypotheses; a functor comparison alone is insufficient for the map equality.",
+  "blueprint": "Item Proof, sole paragraph: diagonal and standard-pair computation (Steps 1, 3, 4), normalized trace (Step 2), arbitrary K and ordered affine-line assembly (Steps 5, 6). Unit sk-thm-smooth-purity, Agreement on the model paragraph: translation invariance, base-change identity, standard DNC identity, and final comparison.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic natural projection isomorphism and its composition compatibility identify the arbitrary-K and tower counits in Steps 5-6; the diagonal/DNC/vector-bundle route is retained."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Step 6 needs the existing generic preservation of bounded constructibility and a finite Tor interval by the separated finite-type projection, to apply the next affine-line map on its stated domain."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Step 1 needs reflection of the finite Tor interval onto the etale witness, so that the specific normalized vector-integration site comparison applies to K."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-comparison-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-c56e35159",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-c56e35159 (reviewer sub-agent of L); spot-checked: Read the item, unit route, cited statements, and source literature in full. Verified all six proof steps, exchange-map directions, finite-coefficient hypotheses, DNC normalization, affine-tower recursion, edge cases, duplicate/cycle checks, and declared tool uses. No new nodes or repairs are needed; review.md records the detailed checks."
+ }
 }
