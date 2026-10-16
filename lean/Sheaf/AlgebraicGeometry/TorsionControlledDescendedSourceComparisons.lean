@@ -6,9 +6,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import all Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons
-import Sheaf.Topology.GlueSheavesOfModules
+import all Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Torsion-controlled local descent data
 
@@ -101,7 +101,67 @@ theorem torsionControlled_descended_source_comparisons
       (∀ i, ∃ e : (Scheme.Modules.restrictFunctor (U i).ι).obj M ≅ (Fi i).obj,
         (Scheme.Modules.restrictFunctor (U i).ι).map a.hom ≫
           eqToHom (hHlocal i).symm = e.hom ≫ (ai i).hom) := by
-  sorry
+  let e (i : ι) : (Scheme.Modules.restrictFunctor (U i).ι).obj M ≅ (Fi i).obj :=
+    ((Scheme.Modules.overFunctorEquiv (U i)).app M).symm ≪≫
+      (Scheme.Modules.overEquiv (U i)).functor.mapIso (φ i) ≪≫ li i
+  have hM : RingedSpace.IsCoherent X.toRingedSpace M := by
+    apply (coherent_module_local_on_open_cover X M ι U hcover).2
+    intro i
+    exact (RingedSpace.coherent_kernel_cokernel_sum
+      (U i).toScheme.toRingedSpace).2.2.2.2 _ _ (e i).symm (Fi i).property
+  have hb : ∀ (i j : ι) (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j),
+      ((φ i).hom ≫ bi i).val.app (op (Over.mk (homOfLE hi))) =
+        ((φ j).hom ≫ bi j).val.app (op (Over.mk (homOfLE hj))) := by
+    intro i j W hi hj
+    change (φ i).hom.val.app (op (Over.mk (homOfLE hi))) ≫
+        (bi i).val.app (op (Over.mk (homOfLE hi))) =
+      (φ j).hom.val.app (op (Over.mk (homOfLE hj))) ≫
+        (bi j).val.app (op (Over.mk (homOfLE hj)))
+    rw [← hbcompat i j W hi hj, ← Category.assoc, hφ i j W hi hj]
+  obtain ⟨a₀, ha₀⟩ :=
+    module_hom_gluing_exists X.toRingedSpace ι U hcover M H.obj
+      (fun i ↦ (φ i).hom ≫ bi i) hb
+  let a : (⟨M, hM⟩ : CoherentModules X) ⟶ H := ⟨a₀⟩
+  have hpi : ∀ (i : ι) (n : ℕᵒᵖ),
+      (Scheme.Modules.overEquiv (U i)).functor.map ((φ i).hom ≫ qi i n) ≫
+        (Scheme.Modules.overFunctorEquiv (U i)).hom.app (N.obj.obj n) =
+      (Scheme.Modules.overFunctorEquiv (U i)).hom.app M ≫ (e i).hom ≫
+        formalModuleQuotientπ (J.comap (U i).ι) (n.unop + 1) (Fi i).obj ≫
+          (βi i).inv.app n := by
+    intro i n
+    simp only [Functor.map_comp, Category.assoc, hqi]
+    simp [e]
+  have hpcompat : ∀ (n : ℕᵒᵖ) (i j : ι) (W : X.Opens)
+      (hi : W ≤ U i) (hj : W ≤ U j),
+      ((φ i).hom ≫ qi i n).val.app (op (Over.mk (homOfLE hi))) =
+        ((φ j).hom ≫ qi j n).val.app (op (Over.mk (homOfLE hj))) := by
+    intro n i j W hi hj
+    change (φ i).hom.val.app (op (Over.mk (homOfLE hi))) ≫
+        (qi i n).val.app (op (Over.mk (homOfLE hi))) =
+      (φ j).hom.val.app (op (Over.mk (homOfLE hj))) ≫
+        (qi j n).val.app (op (Over.mk (homOfLE hj)))
+    rw [← hqcompat n i j W hi hj, ← Category.assoc, hφ i j W hi hj]
+  have hpδ : ∀ (i : ι) (n : ℕᵒᵖ),
+      ((φ i).hom ≫ qi i n) ≫ (δ.hom.app n).over (U i) =
+        a.hom.over (U i) ≫ (formalModuleQuotientπ J (n.unop + 1) H.obj).over (U i) := by
+    intro i n
+    change ((φ i).hom ≫ qi i n) ≫ (δ.hom.app n).over (U i) =
+      a₀.over (U i) ≫ _
+    rw [ha₀ i, Category.assoc, hδ, Category.assoc]
+  obtain ⟨ε, hε, hεδ⟩ := compatible_quotient_formal_comparisons J H ⟨M, hM⟩ N δ a
+    ι U Fi e βi (fun i n ↦ (φ i).hom ≫ qi i n) hpi hpcompat hpδ
+  refine ⟨hM, a, ε, hε, hεδ, ?_⟩
+  intro i
+  refine ⟨e i, ?_⟩
+  have hn := (Scheme.Modules.overFunctorEquiv (U i)).hom.naturality a₀
+  change (Scheme.Modules.overEquiv (U i)).functor.map (a₀.over (U i)) ≫
+      (Scheme.Modules.overFunctorEquiv (U i)).hom.app H.obj =
+    (Scheme.Modules.overFunctorEquiv (U i)).hom.app M ≫
+      (Scheme.Modules.restrictFunctor (U i).ι).map a₀ at hn
+  apply (cancel_epi ((Scheme.Modules.overFunctorEquiv (U i)).hom.app M)).mp
+  rw [← Category.assoc, ← hn, ha₀ i, Functor.map_comp]
+  simp only [Category.assoc, hbi]
+  simp [e]
 
 
 end AlgebraicGeometry

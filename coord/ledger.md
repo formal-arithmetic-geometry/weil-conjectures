@@ -15645,3 +15645,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/N2/Sheaf.Paper.FiniteDiscreteCoefficientTerminal (stage 3; reviewer PASS; first push; landing 20261016T221620-L-1617735 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (stage 3; reviewer PASS; first push; landing 20261016T221620-L-1617866 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/P1/Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators (stage 3; reviewer PASS; first push; landing 20261016T221621-L-1617965 (proof); batch 20261016T221550; modules 1; new nodes 0)
+- 22:16 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons (stage 3; reviewer PASS; first push; landing 20261016T221621-L-1618071 (proof); batch 20261016T221550; modules 1; new nodes 0)
