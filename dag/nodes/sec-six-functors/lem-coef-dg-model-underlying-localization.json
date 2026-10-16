@@ -26,9 +26,110 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C_n=N\\mathbf Z[\\Delta^n]$, with a nondegenerate simplex $[i_0<\\cdots<i_r]$ in cochain degree $-r$ and differential its alternating boundary. A monotone map sends this generator to its image simplex if the image vertices are distinct, and to zero otherwise. These formulas give a cosimplicial complex $C_\\bullet$. Its augmentation $\\varepsilon_n:C_n\\to\\mathbf Z[0]$ sends each vertex to $1$ and positive-dimensional simplices to zero. On the augmented complex, inserting the initial vertex $0$ when it is absent, and giving zero when it is present, is the usual contraction: $dh+hd=1-v_0\\varepsilon_n$. Thus each augmentation is a quasi-isomorphism. The latching complex is the subcomplex spanned by proper faces, since its basis is precisely the simplices contained in proper faces and the overlap relations identify equal basis simplices. For $n>0$ its inclusion into $C_n$ attaches just the top generator in degree $-n$ with its prescribed alternating boundary, hence is a pushout of $S^{-n+1}\\hookrightarrow D^{-n}$ of [lem-coef-projective-cochain-monoidal-model]. For $n=0$ it is $0\\to\\mathbf Z[0]$, a cofibration by the cofibrant-unit clause of that node. Consequently $C_\\bullet$ is a cosimplicial frame on $\\mathbf Z[0]$ in the projective model category of complexes, with degree-zero augmentation the identity, in the terminology of [lem-coef-cosimplicial-frame-mapping].",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent construction for paragraph 2: normalized simplex chains, their contraction and latching cells; compare Hovey Definition 5.2.7 and HA Remark 1.3.1.12."
+   }
+  },
+  {
+   "text": "Fix a cofibrant $P\\in\\mathcal M$. The initial object is also terminal: enrichment makes the category preadditive, and the identity of the initial object is zero, so every map into it is zero. Denote it by $0$. The tensor adjunction identifies $\\underline{\\operatorname{Hom}}(P,0)$ with the zero complex, since maps from every complex $K$ into it correspond to maps $K\\otimes P\\to0$, of which there is exactly one. The cotensor adjunction likewise identifies $\\underline{\\operatorname{Hom}}(0,X)$ with the zero complex for every $X$: maps from $K$ into this complex correspond to maps $0\\to X^K$, of which there is exactly one. Thus both $\\underline{\\operatorname{Hom}}(0,X)$ and $\\underline{\\operatorname{Hom}}(0,Y)$ in the mapping axiom vanish. Applying the assumed mapping axiom to $0\\to P$ and a fibration $X\\to Y$ shows that $\\underline{\\operatorname{Hom}}(P,X)\\to\\underline{\\operatorname{Hom}}(P,Y)$ is degreewise surjective, and a quasi-isomorphism if the fibration is trivial. The ordinary tensor--Hom adjunction therefore makes $T_P(K)=K\\otimes P$ a left Quillen functor from the projective complex model of [lem-coef-projective-cochain-monoidal-model]: transposing a lifting problem against a (trivial) fibration gives a lift against its image under the right adjoint. This proves preservation of both cofibrations and trivial cofibrations using the two characterized lifting classes. By [lem-coef-cosimplicial-frame-mapping], $T_PC_\\bullet$ is a cosimplicial frame on $P$. In particular all $C_n\\otimes P\\to P$ are weak equivalences; no claim that arbitrary tensor inputs preserve weak equivalences is needed.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument for paragraph 2: deriving the chain tensor from the stated mapping axiom and transporting the explicit frame."
+   }
+  },
+  {
+   "text": "Let $q_0:N\\mathcal M\\to\\mathcal L$ be the universal ordinary infinity localization supplied by [lem-coef-hammock-infinity-localization]; the model weak equivalences form a wide subcategory because identities are in both lifting classes and two-out-of-three gives closure under composition. For cofibrant $P$ and fibrant $I$, apply [lem-coef-cosimplicial-frame-mapping] to the frame of step 2. Apply that same node to the frame $C_\\bullet$ of step 1 and the fibrant complex $H=\\underline{\\operatorname{Hom}}(P,I)$; every complex is fibrant by [lem-coef-projective-chains-monoidal-model]. The latter node identifies the coherent monoidal localization of the complex model with $\\mathbf D(\\mathbf Z)$, with unit $\\mathbf Z[0]$. The tensor--Hom adjunction is an equality of the following simplicial mapping constructions, natural for every monotone simplex operator, not only on components:\n$$\\operatorname{Map}_{\\mathcal L}(q_0P,q_0I)\\simeq\\bigl[n\\mapsto\\operatorname{Hom}_{\\mathcal M}(C_n\\otimes P,I)\\bigr]\\cong\\bigl[n\\mapsto\\operatorname{Hom}_{\\mathrm{Ch}}(C_n,H)\\bigr]\\simeq\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}(\\mathbf Z[0],H).$$\nBoth displayed simplicial sets are Kan by the cited frame theorem. This identifies all mapping-space homotopy groups without any boundedness assumption on $H$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent mapping-space calculation for paragraph 2: apply the same frame theorem in M and in unbounded complexes; Hovey Section 5.4 and the existing coherent frame comparison."
+   }
+  },
+  {
+   "text": "The functor $q=U\\ell$ inverts $W$ by [lem-coef-enhanced-localization-universal]. The universal property of $q_0$ in [lem-coef-hammock-infinity-localization] therefore gives a coherent functor $F:\\mathcal L\\to U\\mathcal D$ and a specified equivalence $Fq_0\\simeq q$. By [lem-coef-dg-model-mapping-comparison], for the mixed pair $(P,I)$ the mapping object of $\\mathcal D$ is $H=\\underline{\\operatorname{Hom}}(P,I)$, naturally on the mixed domain. Under this identification, the map on spaces induced by $F$ is the comparison of step 3. To check the actual map, an $n$-simplex on its middle left is an evaluation map $a:C_n\\otimes P\\to I$. Its localization is the span $qP\\xleftarrow{q\\varepsilon_n}q(C_n\\otimes P)\\xrightarrow{qa}qI$, with an invertible left edge. A simplex operator is carried to the commuting square obtained by precomposition with $C_m\\to C_n$, so these spans and their face/degeneracy compatibilities form the coherent evaluation comparison used by the frame theorem. On the chain-enriched side the same $a$ is its tensor adjoint $C_n\\to H$. To see explicitly why evaluation gives that span without assuming that $\\ell$ preserves arbitrary tensors, let $b_n:C_n\\to\\underline{\\operatorname{Hom}}(P,C_n\\otimes P)$ be the tensor coevaluation. Compose it with the map on enriched Homs induced by $\\ell$. Postcomposition with $q\\varepsilon_n$ takes this map to $\\varepsilon_n$ times $1_{qP}$: before localization this is exactly the naturality identity of the tensor adjunction, and an enriched functor preserves it. Postcomposition with the equivalence $q\\varepsilon_n$ is an equivalence on derived mapping objects, so the image of $b_n$ is its inverse applied to $\\varepsilon_n1_{qP}$. Composing with $qa$ now identifies the localized adjoint $C_n\\to\\mathcal D(qP,qI)$ with $qa\\,(q\\varepsilon_n)^{-1}\\varepsilon_n$, exactly the evaluation span above. The augmentations $\\varepsilon_n:C_n\\to\\mathbf Z[0]$ form an objectwise equivalence of the whole cosimplicial diagram in derived complexes. Likewise step 2 makes $q(C_\\bullet\\otimes P)\\to\\operatorname{const}(qP)$ objectwise an equivalence. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes these transformations coherent natural equivalences and supplies inverse coherent diagrams. The preceding identities are coherent in that diagram and in the parameter $a$: they come from tensor-adjunction naturality and preservation of composition by the enriched functor, before passing to homotopy classes. In the frame constructions of step 3, this identifies the parameterized evaluation comparison on each simplex and all its restriction maps. Inverting the augmentation here retains this entire coherent family, including the homotopies carried by its positive-dimensional simplices. Postcomposition with $q\\varepsilon_n$ has a homotopy inverse given by composition with an inverse edge; its two inverse homotopies follow from the inverse equations and associativity. Applying that inverse to the coherent coevaluation identity therefore identifies the induced mapping-space map with the comparison of step 3. Consequently the map induced by $F$ is a weak homotopy equivalence for every cofibrant-source, fibrant-target pair. This is a comparison of the specified functor, rather than an abstract equality of homotopy groups.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent compatibility check for paragraph 2: the evaluation spans underlying both frame comparisons and the specified localization functor."
+   }
+  },
+  {
+   "text": "Factor $0\\to X$ and $Y\\to0$ to obtain a cofibrant replacement $QX\\to X$ and a fibrant replacement $Y\\to TY$. Their maps lie in $W$, so they give equivalences under both $q_0$ and $q$. Conjugating the mapping-space map of $F$ by these equivalences identifies it with the map for $(QX,TY)$ proved to be an equivalence in step 4. Every object of $\\mathcal L$ is represented by an object of $\\mathcal M$, since the hammock construction and its locally Kan replacement retain the objects by [lem-coef-hammock-infinity-localization]. Hence $F$ is fully faithful on all objects. Every object of $\\mathcal D$ is equivalent to the image of a bifibrant object by the full-bifibrant-presentation clause of [lem-coef-dg-model-mapping-comparison]. Its underlying equivalence is also an equivalence in $U\\mathcal D$. Thus $F$ is essentially surjective.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-dg-model-mapping-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent reduction to mixed replacements and essential surjectivity for paragraph 2."
+   }
+  },
+  {
+   "text": "Here is a coherent inverse, so no inference from equivalence of ordinary homotopy categories is being used. For every $d\\in U\\mathcal D$, choose $x_d\\in\\mathcal L$ and an equivalence $u_d:d\\to Fx_d$ using step 5. Full faithfulness says that $v\\mapsto F(v)u_d$ is an equivalence $\\operatorname{Map}_{\\mathcal L}(x_d,z)\\simeq\\operatorname{Map}_{U\\mathcal D}(d,Fz)$ for every $z$. Apply [lem-coef-infinity-local-adjoint-criterion] to $F$. It constructs a coherent left adjoint $G$ with unit $\\eta$ and counit $\\epsilon$ and their triangle homotopies. The universal arrow $(Gd,\\eta_d)$ is equivalent to $(x_d,u_d)$: under the two representing equivalences the identities give mutually inverse maps, since their composites correspond to the respective identities. It follows that every $\\eta_d$ is an equivalence. The triangle identity $F\\epsilon\\circ\\eta F\\simeq1$ makes each $F\\epsilon_x$ an equivalence. A fully faithful functor reflects equivalences: lift an inverse class through the equivalence of mapping spaces and use injectivity on components to get the two inverse equations. Hence every $\\epsilon_x$ is an equivalence. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] now makes $\\eta$ and $\\epsilon$ coherent natural equivalences. Therefore $F$ is an equivalence of infinity categories.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent construction of a coherent inverse from the verified mapping-space comparison; generic local-adjoint tool, without replacing the coefficient unit route."
+   }
+  },
+  {
+   "text": "For any infinity category $\\mathcal E$, restriction along the equivalence $F$ has inverse restriction along $G$; the natural equivalences are given by precomposing with the unit and counit of step 6. Composing it with restriction along $q_0$ gives\n$$\\operatorname{Fun}(U\\mathcal D,\\mathcal E)\\simeq\\operatorname{Fun}(\\mathcal L,\\mathcal E)\\simeq\\operatorname{Fun}_W(N\\mathcal M,\\mathcal E),$$\nwhere the second equivalence is precisely [lem-coef-hammock-infinity-localization]. Since $Fq_0\\simeq q$, this composite is restriction along the specified $q$. Precomposition and its inverse act on whole coherent functor categories, so the conclusion includes coherent natural transformations and their higher homotopies.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent conclusion for paragraph 2: transport the full functor-category universal property along the constructed equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-dg-model-mapping-comparison",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived coefficient-adjunction / inverse-limit comparison. Agent proof via explicit normalized simplex chains, the existing cosimplicial-frame localization theorem and mixed mapping-complex presentation. Hovey Definitions 5.2.7 and Section 5.4 and HA Remark 1.3.1.12/Proposition 1.3.1.17 were read online; these references are not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +193,73 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. Read ModelCategory/Basic.lean:40-100, Bifibrant.lean:150-220 and CofibrantObjectHomotopy.lean:235-305. ModelCategory supplies ordinary lifting axioms; homMk supplies full-subcategory morphisms; HoCat and localizerMorphism concern ordinary homotopy-category localization. None identifies all mapping spaces or the universal functor infinity categories of the derived chain-enriched localization. Grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dgNerve|derivedMappingSpace|mappingSpace.*[Cc]omplex",
+   "results": "{\"t\": \"2026-10-16T20:06:42Z\", \"tool\": \"grep\", \"query\": \"dgNerve|derivedMappingSpace|mappingSpace.*[Cc]omplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "grep",
+   "query": "DoldKan|doldKan",
+   "results": "{\"t\": \"2026-10-16T20:06:42Z\", \"tool\": \"grep\", \"query\": \"DoldKan|doldKan\", \"sub\": \"AlgebraicTopology/DoldKan\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Faces.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Faces.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Faces.lean\", \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\"], \"digest\": \"4daedeb0c8c1c5f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Dold Kan space of a cochain complex represents the derived mapping space from the unit integer complex",
+   "results": "{\"t\": \"2026-10-16T20:06:42Z\", \"tool\": \"leansearch\", \"query\": \"The Dold Kan space of a cochain complex represents the derived mapping space from the unit integer complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"CategoryTheory.Idempotents.DoldKan.Γ\", \"CategoryTheory.Preadditive.DoldKan.Γ\", \"CategoryTheory.Idempotents.DoldKan.N\", \"CategoryTheory.Idempotents.DoldKan.ε\", \"CategoryTheory.Idempotents.DoldKan.η\"], \"digest\": \"2711cbec017f9f91\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DoldKan\"",
+   "results": "{\"t\": \"2026-10-16T20:06:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"DoldKan\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.equivalence₀\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₀_functor\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₀_inverse\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₁\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₂\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"AlgebraicTopology.DoldKan.Compatibility.equivalence₁_functor\", \"AlgebraicTopology.DoldKan.Compatibility.equivalenceCounitIso\"], \"digest\": \"9198f61b7850151d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dold Kan simplicial abelian group of chain maps from normalized chains on simplices to an unbounded cochain complex computes its derived mapping space from the integers",
+   "results": "{\"t\": \"2026-10-16T20:06:46Z\", \"tool\": \"leanfinder\", \"query\": \"Dold Kan simplicial abelian group of chain maps from normalized chains on simplices to an unbounded cochain complex computes its derived mapping space from the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.obj\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"AlgebraicTopology.DoldKan.Γ₀\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"CategoryTheory.Idempotents.DoldKan.Γ_obj_obj\", \"AlgebraicTopology.DoldKan.N₂\"], \"digest\": \"370f63f6d620bb80\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smart nonpositive truncation of a cochain complex gives a Kan simplicial abelian group with homotopy groups H minus n and a natural derived mapping space comparison",
+   "results": "{\"t\": \"2026-10-16T20:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"Smart nonpositive truncation of a cochain complex gives a Kan simplicial abelian group with homotopy groups H minus n and a natural derived mapping space comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ιTruncLE\", \"CochainComplex.πTruncGE\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"CochainComplex.truncLE\", \"CochainComplex.truncGE\", \"CochainComplex.πTruncGE_naturality_assoc\", \"CochainComplex.shortComplexTruncLE\", \"CochainComplex.πTruncGE_naturality\"], \"digest\": \"db00915ffbe32947\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Gamma and ordinary Dold-Kan equivalence declarations, truncation maps, or no hits. Read Equivalence.lean:20-105 and FunctorGamma.lean:12-30. These do not state the infinity-functor-category universal property for a general dg model category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying infinity category of a differential graded model enriched localization universally inverts the weak equivalences of the ordinary category on full coherent functor categories",
+   "results": "{\"t\": \"2026-10-16T20:11:15Z\", \"tool\": \"leanfinder\", \"query\": \"The underlying infinity category of a differential graded model enriched localization universally inverts the weak equivalences of the ordinary category on full coherent functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\"], \"digest\": \"1f2b3eff3670b8b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned ordinary CofibrantObject.HoCat/localizerMorphism declarations in ModelCategory/CofibrantObjectHomotopy.lean:235-305. Their universal properties concern ordinary categories, not enriched infinity localizations or coherent functor categories."
+  },
+  {
+   "tool": "grep",
+   "query": "CosimplicialFrame|cosimplicial.*frame|dgNerve|DifferentialGraded.*Nerve|homotopy coherent localization",
+   "results": "{\"t\": \"2026-10-16T20:23:39Z\", \"tool\": \"grep\", \"query\": \"CosimplicialFrame|cosimplicial.*frame|dgNerve|DifferentialGraded.*Nerve|homotopy coherent localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader. Zero source hits for frames or dg localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "HomotopicalAlgebra model category function complexes cosimplicial resolution mapping spaces enriched homotopy coherent nerve localization",
+   "results": "{\"t\": \"2026-10-16T20:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"HomotopicalAlgebra model category function complexes cosimplicial resolution mapping spaces enriched homotopy coherent nerve localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\"], \"digest\": \"1673c4dad3bbe296\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader. Read SimplicialNerve.lean:193-208, Nerve.lean:35-74, and NerveAdjunction.lean:230-238: these define nerve constructions and the ordinary homotopy-category adjunction; none states the enriched model-localization comparison or its coherent functor-category universal property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-model-homotopy-colimits",
@@ -103,5 +267,29 @@
   "group": "NH"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-model-underlying-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Built the normalized-simplex chain frame explicitly and transported it by the tensor Quillen adjunction derived from the assumed mapping axiom. Applied the same existing frame comparison in M and in complexes, checked its identification with the map induced by q using evaluation spans, and constructed a coherent inverse via the existing local-adjoint criterion. No new nodes or Mathlib leaves; no attachment. Initial snapshot lacked the assignment, which appeared during the routine shared refresh. Second reading supplies the missing vanishing of Hom(0,X) via cotensors and spells out the coherent parametrization and inverse-composition argument in step 4.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, displayed R Hom / R lim calculation: all seven steps justify the underlying coherent model localization used by the homotopy-colimits foundation. No change to unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Its generic componentwise criterion inverts the augmentation diagrams in step 4 and turns the adjunction unit and counit into natural equivalences in step 6; no node in this coefficient unit supplies that general quasicategory fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-656c98f98",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-656c98f98 (reviewer sub-agent of L); spot-checked: I read the item, all 8 proof dependencies and 3 statement dependencies, the unit, the chapter and the main-20261015 ancestor proof paragraph 2. The statement is unchanged and its hypotheses match lem-coef-dg-model-mapping-comparison and lem-coef-dg-derived-quillen-calculus; nothing is weakened. Step 1: I checked the contraction h (dh+hd=1-v_0 eps). The latching map L_n->C_n is a pushout of S^{-n+1}->D^{-n}; for n=0 the map 0->Z[0] is a cofibration by the cofibrant-unit clause; n=1 also checked. Step 2: the category is preadditive, so the initial object is zero. Hom(P,0)=0 by the tensor adjunction and Hom(0,X)=0 by the cotensor adjunction. The axiom applied to 0->P makes Hom(P,-) right Quillen, and the frame node's left-adjoint clause then gives the frame on P. Step 3: identities lie in W because they lie in C∩W, so W is wide. The frame node applies in M and in Ch(Z); 'combinatorial' includes functorial factorizations. The adjunction is natural in C_n. Step 4: I verified the coevaluation identity (q eps)_* l(b_n) = eps_n 1_qP, so l(adjoint of a) is the evaluation span, using only enriched composition. Coherence comes from the componentwise criterion. Steps 5-7: the replacements are in W, essential surjectivity comes from the bifibrant-presentation clause, and the local-adjoint criterion with R=F works as stated. I accept the declared tool_use of lem-cbc-enhanced-functor-cone-calculus (off-unit, a generic componentwise-equivalence criterion). There are no new nodes. The rg duplicate search over the dg/localization nodes found none, the BFS over 472 reachable nodes found no cycle, and no SGA source is used. No fixes."
+ }
 }
