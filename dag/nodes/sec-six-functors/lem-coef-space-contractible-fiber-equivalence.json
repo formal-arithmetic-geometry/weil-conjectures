@@ -119,5 +119,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-95c26d602 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, def-cbc-enhanced-diagrams-cones, the unit and the ancestor proof in full, and checked the Kerodon sources online. Remark 3.4.0.6 (tag 0328) factors f as the path fibration (Example 3.1.8.10, tag 0101) after a homotopy equivalence and applies Proposition 3.3.7.6 (tag 00ZP); steps 1–3 follow it exactly. Kerodon's 'contractible' agrees with the def node's weak sense for Kan complexes, so the item is not weakened. Step 2's two-out-of-three cancellation (change of basepoint) is a few lines and is correctly written into the step; the separate node was rightly dropped. Edge cases check out: ∅→∅, ∅→Δ⁰, id_Q, Δ⁰→BG, a map missing some components, and a degree-2 cover. Both new statements are true, contain only statements (no proofs), are strictly smaller than the item and do not restate it. Duplicate checks: lem-coef-spaces-homotopy-fiber-detection is a broader comparison theorem, not a one-line specialization. lem-coef-right-fibration-contractible-fibers covers only the reverse direction of the fiber criterion. Neither is a duplicate. No base-change morphism or coefficient category is involved, no SGA is used and no tool_uses are needed. One fault, B3: 'Kan fibration' is defined neither in def-cbc-enhanced-diagrams-cones nor in any definition node. I fixed it with an inline definition (lifting against all horns, n≥1, 0≤i≤n) in both new nodes. I also made 'over Q' explicit as p∘i=f, and corrected the item's step source places (step 1 now cites Example 3.1.8.10 / tag 0101). The item statement is unchanged. Details are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ca425e49",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Theorem SSet.Enhanced.isWeakHomotopyEquivalence_iff_contractible_homotopyFiber {P Q : SSet.{u}} [KanComplex P] [KanComplex Q] (f) : IsWeakHomotopyEquivalence f ↔ ∀ q : Q _⦋0⦌, IsContractible (homotopyFiber f q) matches the node clause by clause. homotopyFiber = comma P Q f q true, the degreewise pullback with ev0 = f and ev1 = const q, which is the node's displayed homotopy fiber. Weak formulations are equivalent to Kerodon 0328 for Kan complexes. Edge cases (empty source/target, disconnected identity, pt→BG, double cover) hold, and there are no extra assumptions. Single-universe use matches the dependency API. Only the lean record changed; lean.statement is verbatim; docstrings carry the source and blueprint id and the proof steps; the proof is only sorry; no duplicate in the side lean tree or Mathlib (lem-coef-spaces-homotopy-fiber-detection is broader, with no Lean). nt_compile --json on the snapshot text: rc=0, no diagnostics. Both report sections are present."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ContractibleHomotopyFiberEquivalence",
+  "declaration": "SSet.Enhanced.isWeakHomotopyEquivalence_iff_contractible_homotopyFiber",
+  "file": "lean/Sheaf/AlgebraicTopology/ContractibleHomotopyFiberEquivalence.lean",
+  "statement": "theorem isWeakHomotopyEquivalence_iff_contractible_homotopyFiber {P Q : SSet.{u}} [KanComplex P] [KanComplex Q] (f : P ⟶ Q) : IsWeakHomotopyEquivalence f ↔ ∀ q : Q _⦋0⦌, IsContractible (homotopyFiber f q)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

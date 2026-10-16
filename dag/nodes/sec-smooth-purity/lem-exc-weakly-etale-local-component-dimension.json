@@ -229,5 +229,23 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-839f8ffe5 (reviewer sub-agent of L); spot-checked: Item statement is unchanged; it is byte-identical to the base and was set by the reviewed parent lem-exc-weakly-etale-locally-nagata-catenary from Greco Lemma 5.5. Greco is not in literature/ and network access is blocked, so I could not reopen it. Instead I checked the item's truth through the full 7-step proof. Step 1: the tensor node's hypotheses are exactly the item's, and E is finite over D/P because the generators descend. Step 2: dim E_n = dim A, using integral-injective dimension, finite local dimension, maximal ideal existence and chains-below-prime; no catenarity of A is used. Step 3: the idempotent projection is a localization, so C'_m->E_n is a weakly étale base change and local; locality is claimed only after localizing. Step 4: n∩A = m_A, so m∩C = m_C, and m is maximal by incomparability. Step 5: flat local map, so faithfully flat, so dim R <= dim S. Step 6: the fibre over a field is weakly étale with integral elements (092Q), so fibre primes are incomparable and the inclusion-preserving fibre bijection gives dim S <= dim R. Step 7 is elementary. New node normalization-tensor is true: I checked it via Stacks 092W lemma-normality-goes-up (more-algebra.tex:30728, read) plus Q(D) = K⊗D reduced and zero-dimensional, then the product splitting over minimal primes. It is not derivable in 2–3 lines and is not a duplicate. New node normalization-dimension: Stacks 02IJ (algebra.tex:27520, read) with transcendence degree 0 and a finite residue extension. Universal catenarity is genuinely needed (Nagata example). Small cases checked: a DVR with its strict henselization, the nodal local ring with its henselization (semilocal C'), and a field. Route: off-unit citations are Mathlib leaves, Lean-closed nodes, a definition, or declared tools. Accepted tool_uses: lem-weil-pbc-weak-etale-field, lem-weil-pbc-integral-injective-dimension-equal, lem-sc-faithfully-flat-local-dimension (on route anyway). The removed af-local-dimension node has no file and no citation; the report's first section listing it is stale. The new nodes lack created.group (not a fault). Commutative algebra only: no base-change morphism or coefficient category, no SGA, no target touched. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d7406f17",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Clause-by-clause match of RingHom.WeaklyEtale.ringKrullDim_quotient_minimalPrime_eq against the node and Greco Lemma 5.5: Noetherian/local/domain C, IsUniversallyCatenary C (ExcellentRing.lean:62, Type u finite-type algebras, no real restriction), Module.Finite C (integralClosure C (FractionRing C)), Noetherian local D in an independent universe, IsLocalHom f, f.WeaklyEtale = Mathlib Algebra.WeaklyEtale via toAlgebra (the recorded dependency declaration, not a pro-etale substitute), all P in minimalPrimes D, ringKrullDim equality. No extra or stronger assumptions (the Noetherian redundancy in hC is harmless). Edge cases (field, DVR, zero rings excluded by convention, universes) are fine. Theorem only, proof by sorry; source/blueprint docstrings with all 7 proof steps; lean.statement verbatim; the node changed only by the added lean record; the report has the Worker report and Second reading by Q60 sections (same session, disclosed). No name collision. nt_compile on the side overlay: rc 0, no errors or warnings, 11.7 s."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension",
+  "declaration": "RingHom.WeaklyEtale.ringKrullDim_quotient_minimalPrime_eq",
+  "file": "lean/Sheaf/RingTheory/WeaklyEtaleLocalComponentDimension.lean",
+  "statement": "theorem ringKrullDim_quotient_minimalPrime_eq {C : Type u} {D : Type v} [CommRing C] [CommRing D] [IsNoetherianRing C] [IsLocalRing C] [IsDomain C] [IsNoetherianRing D] [IsLocalRing D] [Module.Finite C (integralClosure C (FractionRing C))] (f : C →+* D) [IsLocalHom f] (hf : f.WeaklyEtale) (hC : IsUniversallyCatenary C) (P : Ideal D) (hP : P ∈ minimalPrimes D) : ringKrullDim (D ⧸ P) = ringKrullDim C",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
