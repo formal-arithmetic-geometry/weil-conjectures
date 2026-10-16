@@ -162,26 +162,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-7ca6498be (reviewer sub-agent of L); spot-checked: Read the item, packet/report, required stage and coordination documents, exact blueprint sources, every cited dependency, and relevant Mathlib definitions. The statement preserves all hypotheses and the inclusive cohomological interval; coefficient quotient, cohomology, constructibility, amplitude, and inherited full-subcategory interpretations are correct. No proof steps or new nodes exist, searches and route metadata are valid, edge cases pass, and no base-change morphism is present to verify. Review written to review.md; no Lean/build/compiler actions performed."
  },
  "lean": {
-  "module": "Sheaf.Paper.ConstructibleIntervalsUnordered",
-  "declaration": "WeilConjectures.constructibleInterval",
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Constructible",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleIn",
   "declarations": [
-   "WeilConjectures.constructibleInterval",
-   "WeilConjectures.constructibleIntervalCategory"
+   "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleIn",
+   "AlgebraicGeometry.ProEtale.DerivedCategoryConstructibleIn"
   ],
-  "file": "lean/Sheaf/Paper/ConstructibleIntervalsUnordered.lean",
-  "statement": "def constructibleInterval (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : AlgebraicGeometry.Scheme.{u}) (a b : ℤ) : ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
-  "branch": "newtargets-dag",
-  "by": "NW",
+  "statement": "def DerivedCategory.constructibleIn (a b : ℤ) :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
+  "branch": "slopmaster2",
+  "by": "ND",
   "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B): The recorded interval interface requires a proof a ≤ b and a local prime-invertibility witness, and cannot express the reversed output endpoints explicitly required by the consumer. This conservative intrinsic interval interface uses the same finite-torsion constructibility predicate and canonical cohomological support, for arbitrary integer endpoints; on a ≤ b it states the unchanged dependency notion, and on b < a all cohomology vanishes. No theorem or geometric hypothesis is added."
+  "existing": true,
+  "note": "Section 1(B), finite coefficient-presentation repair. The intrinsic ringed-module record imports the reorganized FiniteCoefficient.UpperLowerStar declarations, incompatible with the published exceptional and Tor interfaces that use the legacy modules. Reuse the existing upstream constructibleIn and its FullSubcategory DerivedCategoryConstructibleIn, specialized to fixed-scalar ModuleCat of ULift A_{E,n}. Their definition is bounded constructibility intersect homologyConcentratedIn a b, with no Tor premise. At the finite coefficient stages used here, bounded etale origin is equivalent to intrinsic constructibility by lem-sf-proetale-constructible-origin. No interval or tensor definition is duplicated; no nonfinite coefficient identification is made."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f1f014da1",
-  "group": "NW",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, all 24 dependencies, sources, canonical mates, universes, edge cases, and the 25-citer audit. Both Lean modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
+  "reviewer": "NT-stage2-Codex-45d0fe955",
+  "group": "ND",
+  "result": "fix",
+  "note": "Reviewed all statements, dependencies, sources, declarations and edge cases. Both Lean modules compile cleanly through scompile.py. Complete fixes clarify the finite-Tor coefficient interface in the report and item record; Lean statements remain unchanged. Findings are recorded in review.md."
  }
 }

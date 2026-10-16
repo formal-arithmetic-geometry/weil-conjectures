@@ -120,5 +120,26 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-61de7d0d4 (reviewer sub-agent of L); spot-checked: Read the item, all four cited statements and their blueprint sources, report, and unit/chapter route in full. The specialization h=p, A=j_!E preserves both inverse equations and the strict-perfect hypotheses; small cases pass. No condensed-coefficient comparison is inferred. Repaired the omitted LeanSearch record with an actual unavailable response. Corrected JSON and detailed review.md written; no new nodes or statement changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionFormulaProperPiece",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProjectionFormula_properPiece",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleProjectionFormula_properPiece"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionFormulaProperPiece.lean",
+  "statement": "theorem proEtaleProjectionFormula_properPiece {X Y : Scheme.{u}} {f : X ⟶ Y} (d : Compactification f) [QuasiCompact d.i] (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1}) (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ) (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) (a : ProEtaleTensorModel Y RY) (b : ProEtaleTensorModel d.Z RZ) (E : DerivedCategory (proEtaleRingModules X RX)) (K : CochainComplex (proEtaleRingModules d.Z RZ) ℤ) (hK : K.IsKInjective) (rep : (proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E ≅ DerivedCategory.Q.obj K) (F : CochainComplex (proEtaleRingModules Y RY) ℤ) (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY) F) (hb : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) : derivedProjectionFormulaMate (proEtaleRingDerivedPullback d.g RY RZ cp) (proEtaleRingDerivedDirectImage d.g RY RZ cp) (proEtaleRingDerivedAdjunction d.g RY RZ cp) a.tensor b.tensor (proEtaleCanonicalTensorComparison d.g RY RZ cp a b) ((proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E) (DerivedCategory.Q.obj F) ≫ proEtalePerfectProjectionInverse d.g RY RZ cp a b ((proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E) K hK rep F P hb = 𝟙 (a.tensor.obj ((proEtaleRingCompactSupportImage d RY RZ RX cp cj).obj E, DerivedCategory.Q.obj F)) ∧ proEtalePerfectProjectionInverse d.g RY RZ cp a b ((proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E) K hK rep F P hb ≫ derivedProjectionFormulaMate (proEtaleRingDerivedPullback d.g RY RZ cp) (proEtaleRingDerivedDirectImage d.g RY RZ cp) (proEtaleRingDerivedAdjunction d.g RY RZ cp) a.tensor b.tensor (proEtaleCanonicalTensorComparison d.g RY RZ cp a b) ((proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E) (DerivedCategory.Q.obj F) = 𝟙 ((proEtaleRingDerivedDirectImage d.g RY RZ cp).obj (b.tensor.obj ((proEtaleRingDerivedOpenExtension d.i RZ RX cj).obj E, (proEtaleRingDerivedPullback d.g RY RZ cp).obj (DerivedCategory.Q.obj F))))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ac491448d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Wrote review.md. Audited immutable files, sources, dependencies, canonical arrows, hypotheses, universes, signatures, and edge cases. All three modules passed scompile.py without warnings or errors. No repairs needed."
  }
 }

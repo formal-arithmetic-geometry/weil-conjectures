@@ -383,5 +383,28 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-ae410ff05 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit/chapter route, cited DAG statements, literature sources, and report. The corrected relative-adjunction scope, chart-corollary application, endpoint arithmetic, finite-Tor argument, coefficient-stage uniformity, and empty-scheme cases are valid. No new nodes, duplicate/circular splits, missing citations, or target weakening found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfPreservationClass",
+  "declaration": "AlgebraicGeometry.Scheme.sf_preservation_class",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sf_preservation_class"
+  ],
+  "file": "lean/Sheaf/Paper/SfPreservationClass.lean",
+  "statement": "theorem sf_preservation_class (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X Y : Scheme.{u}) [X.Over (Spec (.of F.k))] [Y.Over (Spec (.of F.k))] [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))] [LocallyOfFiniteType (Y ↘ Spec (.of F.k))] [QuasiCompact (Y ↘ Spec (.of F.k))] [IsSeparated (Y ↘ Spec (.of F.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of F.k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification f) (C : SfAffineChartPresentation f) : ∀ (n : ℕ) (hn : 1 ≤ n) (a b : ℤ) (_hab : a ≤ b), (∀ L : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))), ProEtale.DerivedCategory.constructibleIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) Y a b L → ProEtale.DerivedCategory.constructibleIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X (a - 2 * (C.maxDimension : ℤ)) (b + 2 * (sfDimension Y : ℤ) + 1) ((ProEtale.sfFiniteExceptionalInverseImage F.k l E n hn c).obj L)) ∧ (∀ K : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))), ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) Y K → ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) Y a b K → ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X (a - 2 * (C.maxDimension : ℤ)) (b + 2 * (sfDimension Y : ℤ) + 1) ((ProEtale.sfFiniteExceptionalInverseImage F.k l E n hn c).obj K)) ∧ (∀ K : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))), ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) Y K → ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X ((ProEtale.sfFiniteExceptionalInverseImage F.k l E n hn c).obj K))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Finite-stage coefficient-presentation clarification by the independent maintainer reader: the snapshot def-weil-finite-tor-amplitude record names WeilConjectures.finiteTorConstructible in Sheaf.Paper.FiniteTorAmplitude (intrinsic constant-ring modules). This theorem uses the already existing ProEtale.DerivedCategory.constructibleFiniteTor and torAmplitudeIn in WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude, at ModuleCat of ULift of the actual positive coefficient quotient. These are alternate presentations, not definitionally the recorded intrinsic predicate. Fixed-scalar module sheaves are canonically modules over the constant ring sheaf; this exact tensor equivalence identifies all degree-zero module tests and derived tensor products. At finite coefficients lem-sf-proetale-constructible-origin identifies bounded constructibility. Thus the finite-stage conditions coincide under the canonical presentation comparison. The intrinsic dependency record is retained for its integral and field clauses; no integral/field identification or new definition is asserted here.",
+  "fixed_by": "NT-stage2-Codex-45d0fe955"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45d0fe955",
+  "group": "ND",
+  "result": "fix",
+  "note": "Reviewed all statements, dependencies, sources, declarations and edge cases. Both Lean modules compile cleanly through scompile.py. Complete fixes clarify the finite-Tor coefficient interface in the report and item record; Lean statements remain unchanged. Findings are recorded in review.md."
  }
 }

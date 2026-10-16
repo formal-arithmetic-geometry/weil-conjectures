@@ -117,39 +117,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-02e7d051b (reviewer sub-agent of L); spot-checked: Read the full definition, dependency statements, sources, and unit/chapter route. Retract inverses, chain models, differential signs, and edge cases check out. Added the existing underived pullback–tensor comparison citation; all 14 dependencies are acyclic relative to the item. No new nodes or target weakening. Corrected JSON and concrete source checks are recorded under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f79ab05d6",
-  "group": "NU",
-  "result": "fix",
-  "note": "Wrote review.md and complete replacements in fixes/. Replaced two local naturality proof scripts with existing Mathlib adapters; all signatures remain unchanged. Statement, dependencies, canonical maps, universes and edge cases pass. Original and corrected modules compiled cleanly through server-only scompile.py. Branch head unchanged."
+  "reviewer": "NT-stage2-Codex-ac491448d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Wrote review.md. Audited immutable files, sources, dependencies, canonical arrows, hypotheses, universes, signatures, and edge cases. All three modules passed scompile.py without warnings or errors. No repairs needed."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProjectionFormulaArrows",
-  "declaration": "SheafOfModules.ringedProjectionFormulaArrows",
+  "module": "Sheaf.Paper.ProEtaleProjectionFormulaArrows",
+  "declaration": "AlgebraicGeometry.Scheme.proEtalePerfectProjectionInverse",
   "declarations": [
-   "CategoryTheory.tensorAdjunctionMate",
-   "CategoryTheory.tensorAdjunctionMate_free_isIso",
-   "CategoryTheory.tensorAdjunctionFreeInverse",
-   "CategoryTheory.tensorAdjunctionRetractInverse",
-   "CategoryTheory.tensorAdjunctionTotal",
-   "CategoryTheory.tensorAdjunctionTotal_isIso",
-   "CategoryTheory.tensorAdjunctionTotalInverse",
-   "CategoryTheory.tensorAdjunctionTotalInverse_summand",
-   "CategoryTheory.tensorAdjunctionTotal_target_isKInjective",
-   "CategoryTheory.derivedProjectionFormulaMate",
-   "CategoryTheory.derivedProjectionFormulaFreeInverse",
-   "CategoryTheory.derivedProjectionFormulaRetractInverse",
-   "SheafOfModules.mixedTensorRepresentative_existsUnique",
-   "SheafOfModules.mixedTensorRepresentative",
-   "SheafOfModules.StrictPerfectCoefficientPackage.isKFlat_flat",
-   "SheafOfModules.ringedProjectionFormulaArrows"
+   "AlgebraicGeometry.Scheme.proEtaleProjectionUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleStrictPerfect_flat",
+   "AlgebraicGeometry.Scheme.proEtaleMixedTensor_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleMixedTensor",
+   "AlgebraicGeometry.Scheme.proEtalePerfectProjectionInverse"
   ],
-  "file": "lean/Sheaf/Paper/ProjectionFormulaArrows.lean",
-  "statement": "def ringedProjectionFormulaArrows {C D : Type u} [Category.{u} C] [Category.{u} D] {JC : GrothendieckTopology C} {JD : GrothendieckTopology D} {R : Sheaf JC CommRingCat.{u}} {S RI : Sheaf JD CommRingCat.{u}} (uInv : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u)) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S) (uStar : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤ SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) (hobj : ∀ M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R), uStar.obj M = changeOfRings c (I.modules.obj M)) (hmap : ∀ {M N : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (a : M ⟶ N), uStar.map a = eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm) [uStar.Additive] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))] (LF : DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) (epsilon : DerivedCategory.Qh ⋙ LF ⟶ uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hLF : LF.IsLeftDerivedFunctor epsilon (HomotopyCategory.quasiIso (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ))) (PR : ObjectProperty (CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)) (PS : ObjectProperty (CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ)) (hPR : ∀ P, PR P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat) (hPS : ∀ P, PS P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat) (TR : (DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (TS : (DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) × (DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) (rR : (PR.ι.prod PR.ι) ⋙ Functor.uncurry.obj ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) _ (SheafOfModules.monoidalCategory R)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅ ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙ TR) (rS : (PS.ι.prod PS.ι) ⋙ Functor.uncurry.obj ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) _ (SheafOfModules.monoidalCategory S)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅ ((PS.ι ⋙ DerivedCategory.Q).prod (PS.ι ⋙ DerivedCategory.Q)) ⋙ TS) (k : CanonicalRingedTensorComparison R S RI uInv I c uStar hobj) (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤ SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am : uStar ⊣ V) [V.Additive] (RF : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (eta : V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF) (hRF : ∀ G : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)), Function.Bijective (fun b : RF ⟶ G ↦ eta ≫ Functor.whiskerLeft DerivedCategory.Qh b)) (computeR : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ, K.IsKInjective → IsIso (derivedPushforwardComplexComparison V RF eta K)) (computeL : ∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ, P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) → IsIso (derivedPullbackComplexComparison uStar LF epsilon P)) (adjD : LF ⊣ RF) (canonicalAdj : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ, K.IsKInjective → LF.map (derivedPushforwardComplexComparison V RF eta K) ≫ adjD.counit.app (DerivedCategory.Q.obj K) = derivedPullbackComplexComparison uStar LF epsilon ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((am.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K)) (E : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) (K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hK : K.IsKInjective) (repE : E ≅ DerivedCategory.Q.obj K) (F : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (P : StrictPerfectCoefficientPackage ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) F) (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) : (TR.obj (RF.obj E, DerivedCategory.Q.obj F) ⟶ RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) × (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F))) ⟶ TR.obj (RF.obj E, DerivedCategory.Q.obj F))",
+  "file": "lean/Sheaf/Paper/ProEtaleProjectionFormulaArrows.lean",
+  "statement": "def proEtalePerfectProjectionInverse (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) (E : DerivedCategory (proEtaleRingModules X S)) (K : CochainComplex (proEtaleRingModules X S) ℤ) (hK : K.IsKInjective) (rep : E ≅ DerivedCategory.Q.obj K) (F : CochainComplex (proEtaleRingModules Y R) ℤ) (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) F) (hb : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) : (proEtaleRingDerivedDirectImage f R S c).obj (b.tensor.obj (E, (proEtaleRingDerivedPullback f R S c).obj (DerivedCategory.Q.obj F))) ⟶ a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj E, DerivedCategory.Q.obj F)",
   "branch": "newtargets-dag",
-  "by": "NU",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q09",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The recorded ringed arrow interface identifies site object and morphism universes. Reexport it and supply its finite-total inverse on the original small pro-etale sites using the already published canonical tensor and adjunction interfaces. Unit and mixed representative comparisons retain full unique normalization; rho is Q of the specified finite-total chain inverse, never an arbitrary map. The 2026-10-16 repair uses the landed SheafOfModules.StrictPerfectCoefficientPackageOnSite directly; no pro-etale duplicate splitting structure is introduced."
  }
 }

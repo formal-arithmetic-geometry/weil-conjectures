@@ -23,7 +23,8 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-closed-immersion",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "proof": [
   {
@@ -388,5 +389,28 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-35ed54ad8 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements and source passages, and unit/chapter route. All six steps check out, including noncommutative finite coefficients and both adjunction maps. No new nodes; the 516-node dependency closure has no cycles or missing references. Accepted the declared generic tool uses. Detailed checks are in review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_proEtale_closedSupportTriangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedSupportPushforward_preservesZeroMorphisms",
+   "AlgebraicGeometry.ProEtale.exists_proEtale_closedSupportTriangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClosedSupportTriangle.lean",
+  "statement": "theorem exists_proEtale_closedSupportTriangle {T Z U : Scheme.{u}} [IsLocallyNoetherian T] [CompactSpace T] (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] (hU : Set.range j = (Set.range i)ᶜ) (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] : ∃ (iPush : FiniteCoefficientDerivedCategory Z A ⥤ FiniteCoefficientDerivedCategory T A) (jPull : FiniteCoefficientDerivedCategory T A ⥤ FiniteCoefficientDerivedCategory U A), Nonempty ((SheafOfModules.pushforward.{u + 1} (F := Scheme.proEtaleBaseChange i) (J := Scheme.ProEt.topology T) (K := Scheme.ProEt.topology Z) (finiteCoefficientDirectImageMap i A)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ iPush) ∧ Nonempty ((finiteCoefficientModulePullback j A).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ jPull) ∧ ∃ (iShriek : FiniteCoefficientDerivedCategory T A ⥤ FiniteCoefficientDerivedCategory Z A) (jPush : FiniteCoefficientDerivedCategory U A ⥤ FiniteCoefficientDerivedCategory T A) (closedAdj : iPush ⊣ iShriek) (openAdj : jPull ⊣ jPush), ∀ K : FiniteCoefficientDerivedCategory T A, ∃ δ : jPush.obj (jPull.obj K) ⟶ (iPush.obj (iShriek.obj K))⟦(1 : ℤ)⟧, Triangle.mk (closedAdj.counit.app K) (openAdj.unit.app K) δ ∈ distTriang (FiniteCoefficientDerivedCategory T A)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The ambient i_* and j^* are characterized by localization of their actual module functors; the right adjoints then specify Ri^! and Rj_* uniquely up to canonical adjunction isomorphism. This avoids the commutativity restriction on the older chosen derived-direct-image API. No mathematical hypothesis, coefficient category or derived category is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ee1b695a8",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, report sections and verbatim signature. Immutable module passed scompile.py sandbox and library checks without diagnostics. No fixes or branch changes."
  }
 }
