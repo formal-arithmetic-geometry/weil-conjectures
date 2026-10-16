@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-proper-heart-bound-torsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The torsion bound over a weakly contractible base",
- "statement": "Let $p\\colon X\\to Y$ be proper with geometric fibres of dimension $\\leq d$, let $V\\to Y$ be affine weakly\ncontractible, $p_V\\colon X_V\\to V$ the base change, $a\\colon S\\hookrightarrow X$ locally closed, and $L_0$ a\nlisse finite free $\\mathcal O_{E,S}$-module. Then for every $n\\geq1$, $a_!L_0\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n=a_!(L_0/\\pi_E^n)$\nis a classical constructible sheaf, and\n\n$$\nH^q\\bigl(X_V,a_!(L_0/\\pi_E^n)\\bigr)=0\\qquad(q>2d).\n$$",
+ "statement": "Fix a prime $\\ell$, a field $k$ of positive characteristic different from $\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated schemes of finite type over $k$, the standing setting [sk-def-sfb-dc-setting], let $p:X\\to Y$ be a proper $k$-morphism [def-weil-proper-morphism], and let $d\\in\\mathbf Z_{\\ge0}$ bound the Krull dimensions of all geometric fibres [def-pc-base-change, def-kun-topological-krull-dimension]. Let $V\\to Y$ be an affine weakly contractible object of $Y_{\\mathrm{proét}}$ [sk-def-pe-weak-contractible, def-weil-pbc-proetale-site], and set $X_V=X\\times_YV$, with projection $p_V:X_V\\to V$. The scheme $V$ need not be Noetherian. Let $a:S\\hookrightarrow X$ be a locally closed immersion, factor it as $S\\xrightarrow{u}\\overline S\\xrightarrow{i}X$ with $u$ open and $i$ closed, and put $a_!=i_*u_!$ [det-lem-int-tensor-projection]. Write $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}$ for the coefficient ring object pulled back from the condensed topological valuation ring [sk-def-sfb-pulled-back-coefficients]. Let $L_0$ be a lisse finite free $\\mathcal O_{E,S}$-module, meaning a module object [sk-def-sfb-module-objects] which on a pro-étale covering is a finite direct sum of $\\mathcal O_{E,S}$. For $n\\ge1$ put $A_n=\\mathcal O_E/\\pi_E^n$, using its finite discrete constant coefficient sheaf. Then the relative derived tensor [sk-def-sfb-derived-tensor-hom] has a natural isomorphism\n$$\n(a_!L_0)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(A_n)_X\\simeq a_!(L_0/\\pi_E^nL_0).\n$$\nIts right-hand side is a sheaf in degree zero and is classical constructible: it is $\\nu_X^*F_n$ for a constructible étale $A_n$-module sheaf $F_n$ [def-weil-pbc-site-comparison-morphism, def-weil-pbc-etale-constructible-sheaf]. If $r:X_V\\to X$ is the other projection and $r^*$ is finite constant-coefficient inverse image [def-weil-proetale-inverse-image], then pro-étale cohomology [def-sfb-finite-derived-global-sections] satisfies\n$$\nH^q(X_V,r^*a_!(L_0/\\pi_E^nL_0))=0\\qquad(q>2d).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.md",
   "place": "node det-proper-heart-bound-torsion, order None",
@@ -34,38 +34,281 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-kun-topological-krull-dimension",
+  "sk-def-pe-weak-contractible",
+  "def-weil-pbc-proetale-site",
+  "det-lem-int-tensor-projection",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-finite-derived-global-sections"
+ ],
  "proof": [
   {
-   "text": "*Reduction.* $L_0$ is flat over $\\mathcal O_{E,S}$, so $L_0\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n=L_0/\\pi_E^n$, and $a_!$\nis exact, so it commutes with the cone of $\\pi_E^n$; hence the derived reduction of $a_!L_0$ is the sheaf\n$a_!(L_0/\\pi_E^n)$. The lisse torsion sheaf $L_0/\\pi_E^n$ is pulled back from $S_{\\mathrm{ét}}$ (Stacks, Tag\n099Y), and $a_!$ commutes with that pullback (Stacks, Tags 09AF, 09A6), so $a_!(L_0/\\pi_E^n)=\\nu^*F$ for a\nconstructible étale sheaf $F$ of $\\mathcal O_E/\\pi_E^n$-modules on $X$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $Q_n=L_0/\\pi_E^nL_0$. By [det-pe-derived-nakayama-resolution], derived reduction is the two-term complex $[L_0\\xrightarrow{\\pi_E^n}L_0]$ in degrees $-1,0$. On a covering trivializing $L_0$, multiplication by $\\pi_E^n$ is injective on each of its finitely many coefficient summands, by the same node's exact coefficient sequence. Thus its kernel sheaf is zero, its cokernel is $Q_n$, and $L_0\\otimes^{\\mathbf L}(A_n)_S\\simeq Q_n[0]$. On this covering $Q_n$ is finite free over the finite constant ring $A_n$, so it is locally constant with finite values. Finiteness of $A_n$ is supplied by [lem-weil-pbc-standard-quotients-perfect].",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Reduction paragraph: flat lattice and finite quotient"
+   }
   },
   {
-   "text": "*Étale vanishing.* $p_V$ is proper with geometric fibres of dimension $\\leq d$ (base change does not\nchange geometric fibres). By the proper vanishing theorem (Stacks, Tag 095U), valid over any base and in\nparticular over the non-Noetherian $V$, $R^qp_{V,*}F|_{X_V}=0$ for $q>2d$ on the étale site.",
-   "uses": [],
-   "elementary": null
+   "text": "The field $k$ has only two ideals and its one-point spectrum is quasi-compact. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ a Noetherian scheme. By the affine-cover definition [pqf-def-locnoeth] and quasi-compactness choose finitely many affine opens with Noetherian coordinate rings. Each has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. Any ascending chain of opens of $X$ stabilizes on each chart, hence on $X$ by taking the maximum of these finitely many stabilization indices. The closed subspace $\\overline S$ is topologically Noetherian as well: if $O_m=\\overline S\\cap W_m$ is an ascending chain of opens there, replace $W_m$ by $\\bigcup_{j\\le m}W_j$ to obtain an ascending lifting chain in $X$. By [def-weil-constructible-subset], every subset of these topologically Noetherian spaces is retrocompact. In particular the complementary open of $i$ and the open $S\\subseteq\\overline S$ are retrocompact; hence their open immersions, including $u$, are quasi-compact. Apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=\\mathcal O_{E,X}$ to $i$. The coefficient isomorphisms $f^{-1}\\mathcal O_{E,T}\\simeq\\mathcal O_{E,T'}$ of [sk-def-sfb-coefficient-morphisms] identify the theorem's inverse-image ring sheaves with the specified coefficients. Thus $i_*$ is exact for the integral coefficient ring; $u_!$ is exact by [sk-def-sfb-module-lower-shriek], so $a_!$ is exact as well. Apply the locally closed projection formula [det-lem-int-tensor-projection] with $\\Lambda=\\underline{\\mathcal O_E}$, $M=L_0$, and $L=(A_n)_X$. Its displayed isomorphism and step 1 give $(a_!L_0)\\otimes^{\\mathbf L}(A_n)_X\\simeq a_!Q_n$, with the right side in degree zero by exactness. On the cover of step 1, $Q_n\\simeq(A_n)_S^{r}$, the finite constant local model with scalar module $A_n^r$; hence it is constructible on the one-stratum partition of $S$ by [sk-def-sfb-constructible]. Apply [lem-weil-pbc-condensed-constructible-open-closed-images] first to $u$ and then to $i$, using the finite discrete condensed ring $A_n$, the quasi-compact open $u$ and the quasi-compact open complementary to $i$ just checked. This gives a finite constructible stratification on whose pieces $a_!Q_n$ is locally finitely presented. Over a finite constant ring such a presentation is locally constant with finite values: locally write it as the cokernel of a finite matrix, trivialize the finitely many locally constant entries of that matrix, and take the constant finite cokernel. Thus $a_!Q_n$ is intrinsically constructible, and [lem-weil-pbc-finite-ring-constructible-sheaf-origin] supplies $F_n$ and $\\nu_X^*F_n\\simeq a_!Q_n$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-coefficient-morphisms",
+    "det-lem-int-tensor-projection",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-condensed-constructible-open-closed-images",
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+    "place": "Reduction paragraph: extension, constructibility and classical origin"
+   }
   },
   {
-   "text": "*Comparison.* By Stacks, Tag 09A6, the pro-étale $Rp_{V,*}$ of $\\nu^*F$ is $\\nu^*$ of the étale\n$Rp_{V,*}F$; so $R^qp_{V,*}(a_!(L_0/\\pi_E^n)|_{X_V})=0$ for $q>2d$.",
-   "uses": [],
-   "elementary": null
+   "text": "The base change $p_V$ is proper by [lem-pc-proper-base-change]. To verify its fibre-dimension hypothesis, let $T$ be any finite-type fibre over its residue field $K_0$ and let $K/K_0$ be a field extension. A finite affine cover $\\operatorname{Spec}B_j$ of $T$ pulls back to the cover $\\operatorname{Spec}(B_j\\otimes_{K_0}K)$ of $T_K$ by [lem-weil-pbc-fibre-product-affine-spectra], [lem-weil-pbc-open-fibre-product] and the fibre-product identities [def-pc-base-change]. The empty scheme stays empty. If $T$ is nonempty, a nonzero $B_j$ stays nonzero under this scalar extension (a $K_0$-basis becomes a $K$-basis), so $T_K$ is nonempty too. For both nonempty schemes, [lem-pc-dimension-affine-open-cover] and [lem-pc-scheme-dimension-local-rings] express topological dimension as the supremum of these chart ring dimensions. Each chart dimension is unchanged by [lem-pc-dim-base-change], so $\\dim T_K=\\dim T$. Applied first to $X_y$ and $\\overline{\\kappa(y)}/\\kappa(y)$, this turns the geometric-fibre bound into the ordinary-fibre bound. For $v\\in V$ mapping to $y$, the fibre-product identity identifies $(X_V)_v$ with $X_y\\times_{\\kappa(y)}\\kappa(v)$; another application gives the same bound $d$. Restriction compatibility [lem-weil-pbc-comparison-pullback] identifies $r^*a_!Q_n$ with $\\nu_{X_V}^*F_{n,V}$, where $F_{n,V}$ is the étale inverse image of $F_n$ along $r$. The underlying abelian étale sheaf $F_{n,V}$ is killed by the positive integer $|A_n|$: the finite additive group of $A_n$ is killed by its order, and its unit therefore satisfies $|A_n|\\cdot1=0$. Apply [lem-kun-proper-torsion-cd-bound] to $p_V$ and this torsion abelian sheaf to obtain $R^qp_{V,\\mathrm{et},*}F_{n,V}=0$ for $q>2d$. The theorem imposes no Noetherian condition on $V$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-dim-base-change",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U, lemma-cohomological-dimension-proper; algebra.tex Tag 00P3, lemma-dimension-preserved-field-extension"
+   }
   },
   {
-   "text": "*Sections.* Since $V$ is weakly contractible, $\\Gamma(V,-)$ is exact on all pro-étale sheaves\n([sk-cor-pe-wc-sections]; Stacks, Tag 0991), so $R\\Gamma(X_V,-)=\\Gamma(V,Rp_{V,*}(-))$ and\n$H^q(X_V,-)=\\Gamma(V,R^qp_{V,*}(-))$, which vanishes for $q>2d$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [def-weil-proper-morphism], $p_V$ is separated and of finite type. Finite type includes quasi-compactness [def-weil-finite-type-morphism], and [lem-pc-separated-quasi-separated] makes it quasi-separated. Therefore [sk-thm-pe-direct-image-comparison] applies to $p_V$ and the bounded-below étale abelian complex $F_{n,V}[0]$, with discrete coefficients $\\mathbf Z$. It gives $Rp_{V,\\mathrm{proét},*}\\nu_{X_V}^*F_{n,V}\\simeq\\nu_V^*Rp_{V,\\mathrm{et},*}F_{n,V}$. Since comparison inverse image is exact, taking cohomology shows $R^qp_{V,\\mathrm{proét},*}(r^*a_!Q_n)=0$ for $q>2d$. Work here with the underlying abelian sheaves throughout; no change between integral condensed and constant coefficient categories occurs in this comparison.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison"
+   }
+  },
+  {
+   "text": "The hypothesis on $V$ is categorical weak contractibility [sk-def-pe-weak-contractible]. It also holds for the terminal object of $V_{\\mathrm{proét}}$. Indeed [lem-weil-proetale-weakly-etale-localization] identifies that site with $Y_{\\mathrm{proét}}/V$, and [lem-weil-pbc-localized-sheaves-over-representable] identifies its set sheaves with $\\Sh(Y_{\\mathrm{proét}})/h_V$. An epimorphism $e:F\\to G$ in this latter slice is an epimorphism of underlying sheaves: given maps $b,c:G\\to T$ with $be=ce$, pair them with the structure map $G\\to h_V$ to obtain maps $G\\to T\\times h_V$ over $h_V$; the slice epimorphism gives their equality and hence $b=c$. For a section $t:h_V\\to G$ over $h_V$, projectivity of $h_V$ now gives a lift $s:h_V\\to F$ with $es=t$. Since $e$ is over $h_V$, the composite of $s$ with $F\\to h_V$ is the identity. The fibre formula of the equivalence identifies $t$ and $s$ precisely with sections over the terminal object of the localized site. Thus evaluation at that terminal object sends every set-sheaf epimorphism to a surjection. With the constant ring $\\mathbf Z$, [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] therefore makes $\\Gamma(V,-)$ exact on abelian sheaves on $V_{\\mathrm{proét}}$. No implication from categorical contractibility to a ring-theoretic criterion is used.",
+   "uses": [
+    "sk-def-pe-weak-contractible",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y1, lemma-essential-image-j-shriek; section-localize-topoi; sites-cohomology.tex Tag 0946, lemma-w-contractible (1)"
+   }
+  },
+  {
+   "text": "Put $G=r^*a_!Q_n$. By [def-sfb-finite-derived-global-sections], $R\\Gamma$ is the right derived functor of sections. Derived direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied with constant ring $\\mathbf Z$ and the global-section morphism to the point, gives $R\\Gamma(X_V,G)\\simeq R\\Gamma(V,Rp_{V,*}G)$. Since $\\Gamma(V,-)$ is exact by the preceding step, the exact-functor clause of [sk-def-sfb-derived-categories] computes the right-hand side by applying $\\Gamma(V,-)$ termwise to any representative $C^\\bullet$ of $Rp_{V,*}G$. Exactness preserves the kernels, images and quotients defining $H^q(C^\\bullet)$, so $H^q(X_V,G)\\simeq\\Gamma(V,H^q(C^\\bullet))=\\Gamma(V,R^qp_{V,*}G)$. Step 4 makes this zero for $q>2d$.",
+   "uses": [
+    "def-sfb-finite-derived-global-sections",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-sfb-finite-derived-global-sections",
+  "def-weil-constructible-subset",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "det-lem-int-tensor-projection",
+  "det-pe-derived-nakayama-resolution",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-proper-base-change",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-condensed-constructible-open-closed-images",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-def-locnoeth",
+  "sk-def-pe-weak-contractible",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-thm-pe-direct-image-comparison"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-torsion.proof.md",
+  "place": "Reduction, Étale vanishing, Comparison, Sections; expanded using cited Stacks lemmas"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism torsion sheaf cohomology vanishes above twice fibre dimension",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs; DerivedCategory.isZero_of_isGE; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; DerivedCategory.isGE_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proper direct image, etale torsion cohomology, dimension bound",
+   "results": "loogle: Unknown identifier `Proper`",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid query, Loogle reported an unknown identifier; no conclusion about theorem availability"
+  },
+  {
+   "tool": "grep",
+   "query": "R[\\^]?q.*f.*F|proper.*torsion",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "invalid source directory: the logged subdirectory was Mathlib, but msearch already prefixes Mathlib/; zero hits are not evidence of absence. Superseded by the valid AlgebraicGeometry grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism torsion sheaf cohomology vanishing above twice fibre dimension",
+   "results": "AlgebraicGeometry.IsProper.mk; AlgebraicGeometry.IsProper; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.instCompScheme; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsProper.recOn; AlgebraicGeometry.IsProper.toLocallyOfFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomological dimension of proper pushforward finite coefficient local systems",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; LightCondAb.ofSheafLightProfinite; LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; Condensed.lanSheafProfinite; LightCondensed; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|higherDirectImage|[Pp]ro[Ee]tale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsion local systems over weakly contractible affine proper base cohomology vanishing",
+   "results": "isZero_groupCohomology_succ_of_subsingleton; Module.IsTorsion'; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; Algebra.FormallySmooth.subsingleton_h1Cotangent; AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace; Subsingleton.to_moduleIsTorsionFree; Profinite.NobelingProof.instIsAddTorsionFreeLocallyConstantInt; Submodule.coe_torsion'",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper torsion etale cohomological dimension fibre dimension",
+   "results": "Algebra.IsStandardSmooth.relativeDimension; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.etaleLocus; Algebra.IsStandardSmoothOfRelativeDimension.out; Algebra.IsEtaleAt; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsProper, R^q",
+   "results": "loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid query, Loogle reported an unknown identifier; no conclusion about theorem availability"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*torsion|cohomological.*dimension|higher.*direct.*image",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper torsion etale direct image vanishing",
+   "results": "AlgebraicGeometry.IsEtale; Algebra.formallyEtale_iff; AlgebraicGeometry.Scheme.Etale; Algebra.Etale.formallyEtale; KaehlerDifferential.isBaseChange_of_formallyEtale; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state proper torsion cohomology vanishing or the full item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image cohomology of a torsion etale sheaf vanishes above twice the fibre dimension",
+   "results": "{\"t\": \"2026-10-16T15:23:08Z\", \"tool\": \"leansearch\", \"query\": \"proper direct image cohomology of a torsion etale sheaf vanishes above twice the fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_top\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"d0a9c027553a7447\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures do not state the torsion vanishing bound or the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torsion sheaves on a proper scheme over a weakly contractible affine have cohomology zero above twice relative dimension",
+   "results": "{\"t\": \"2026-10-16T15:23:10Z\", \"tool\": \"leanfinder\", \"query\": \"Torsion sheaves on a proper scheme over a weakly contractible affine have cohomology zero above twice relative dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"DerivedCategory.isZero_of_isGE\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"da80485bbd6a9ec0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures do not state the torsion vanishing bound or the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*cohomolog|cohomolog.*torsion|cohomologicalDimension|higherDirectImage",
+   "results": "{\"t\": \"2026-10-16T15:54:24Z\", \"tool\": \"grep\", \"query\": \"torsion.*cohomolog|cohomolog.*torsion|cohomologicalDimension|higherDirectImage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned derived-category bounds require the bound as an input; no proper torsion direct-image bound or full reduction-and-constructibility statement is returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"cohomology\"",
+   "results": "{\"t\": \"2026-10-16T15:54:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned derived-category bounds require the bound as an input; no proper torsion direct-image bound or full reduction-and-constructibility statement is returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of torsion abelian sheaves under proper morphisms vanish in degrees greater than twice the dimension of fibers",
+   "results": "{\"t\": \"2026-10-16T15:54:25Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of torsion abelian sheaves under proper morphisms vanish in degrees greater than twice the dimension of fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"Rep.isZero_Tor_succ_of_projective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"df7db914fb7c9e66\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned derived-category bounds require the bound as an input; no proper torsion direct-image bound or full reduction-and-constructibility statement is returned."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -79,5 +322,134 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-heart-bound"
+ "unit": "sk-lem-proper-heart-bound",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-heart-bound-torsion",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the isolated imported statement omitted the standing finite-type setting needed for constructibility and retrocompact-complement exactness. Restored that setting explicitly, made condensed integral and finite constant coefficient rings and restriction to X_V explicit, and expanded the original four paragraphs into six steps using existing nodes only. See report.md for the non-quasi-compact-open counterexample and source audit. Replaced the ring-theoretic exact-sections citation by the general categorical evaluation theorem, proving passage to the localized site explicitly; used the exact-derived-functor statement to avoid an uncited injective-resolution existence assertion. Second reading makes the scheme-to-topological Noetherian implication explicit, checks exactness over the integral ring using arbitrary-ring open/closed recollement and the coefficient isomorphism, and supplies the affine-cover and topological-dimension statements needed to pass the ring dimension theorem to scheme fibres.",
+  "blueprint": "Unit sk-lem-proper-heart-bound step 3; original node Reduction becomes steps 1-2, Étale vanishing step 3, Comparison step 4 and Sections steps 5-6.",
+  "tool_uses": [
+   {
+    "node": "det-lem-int-tensor-projection",
+    "why": "Generic locally closed projection formula implements the source reduction. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Coefficient two-term resolution, not a replacement of the proper-heart-bound route. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "The precise arbitrary-base Stacks 095U theorem invoked by the unit. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Affine fibre dimension invariance under field extension. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic properness stability, needed by source step 3. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Properness supplies separatedness; this lemma verifies the comparison theorem’s quasi-separatedness hypothesis. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Restriction compatibility for the classical sheaf on X_V. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-constructible-open-closed-images",
+    "why": "Generic finite-stratification preservation for the two immersion factors. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Finite-ring comparison makes the torsion sheaf classical. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over the field makes X Noetherian, ensuring quasi-compact complementary opens. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic derived composition identifies global sections over source and base. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Finiteness of the DVR quotients used as coefficients. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The precise Stacks 09A6 comparison invoked by the unit. No node of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the site of the weakly etale object V with the ambient localized site; needed to transfer categorical weak contractibility, with no such generic site theorem in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Generic equivalence with the slice topos makes passage of projectivity to the localized site explicit; not a substitute for the unit torsion-bound route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "General exact-evaluation theorem applies to the categorical weak-contractibility hypothesis; the ring-specific sections node requires a stronger criterion not asserted here."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Converts Noetherian affine chart rings to Noetherian topological spaces; no theorem of this unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Arbitrary-ring-sheaf exactness checks the integral lower shriek, before derived reduction; finite constant-coefficient exactness alone would not justify that step."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Converts chart dimension equality under field extension to equality of fibre scheme dimensions; no statement in this unit supplies the generic affine-cover formula."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies the local-ring dimension in the affine-cover formula with the topological Krull dimension in this item."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies the pulled-back affine fibre charts with tensor-product spectra; generic tool for the fibre-bound check."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "The pulled-back affine fibre charts form an open cover of the field extension; generic open fibre-product tool for the chart dimension calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-int-tensor-projection",
+  "det-pe-derived-nakayama-resolution",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-dim-base-change",
+  "lem-pc-proper-base-change",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-condensed-constructible-open-closed-images",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-f57250b90",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-f57250b90 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All six steps check, including arbitrary-base 095U, discrete-coefficient 09A6 comparison, and categorical weak-contractibility localization. No new nodes, duplicates, circularity, or mathematical gaps found. review.md records concrete checks and inherited source-pointer discrepancies; no correction files were needed."
+ }
 }
