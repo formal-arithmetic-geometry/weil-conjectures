@@ -1,6 +1,6 @@
 # Work queue
 
-15 items; claim with `tools/claim.py next <group> [--stage N]`.
+14 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (15)
+## Stage 3: modules to prove (14)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -18,9 +18,8 @@
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.CondensedCoefficientPointUnitPasting` | 11 | 1 | proof |
-| `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
-| `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
+| `Sheaf.Paper.FiniteDiscreteCoefficientTerminal` | 12 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
 | `Sheaf.Paper.InverseImageModuleFlat` | 12 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
