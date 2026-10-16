@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-linearization-right-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Linearization of a right adjoint",
@@ -14,33 +14,224 @@
  },
  "stmt_deps": [
   "def-sfb-projection-formula",
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport"
  ],
  "proof": [
   {
-   "text": "Transposing along $P\\dashv G$ turns the naturality, unit and associativity compatibilities\nof $\\pi$ ([def-sfb-projection-formula]) into the following properties of $\\theta$:\n- $\\theta$ is natural in $L$ and $N$;\n- with $\\varepsilon^S\\colon\\mathbf 1\\to S\\mathbf 1$ the unit structure map of $S$,\n  $G(\\lambda_N)\\circ\\theta_{\\mathbf 1,N}\\circ(\\varepsilon^S\\otimes GN)=\\lambda_{GN}$;\n- with $\\mu^S$ the lax structure maps of $S$,\n  $G(\\alpha_{L,L',N})\\circ\\theta_{L\\otimes L',N}\\circ(\\mu^S_{L,L'}\\otimes GN)\n  =\\theta_{L,L'\\otimes N}\\circ(SL\\otimes\\theta_{L',N})\\circ\\alpha_{SL,SL',GN}$.",
+   "text": "Write $m^S_{L,L'}=\\delta_{L,L'}^{-1}$ and $e^S=\\epsilon^{-1}$ for the strong monoidal structure maps. By the monoid-transport clause of [def-sfb-modobj-transport] applied to $S$, the monoid $S\\mathcal B$ has multiplication $S(\\mu_{\\mathcal B})\\circ m^S_{\\mathcal B,\\mathcal B}$ and unit $S(\\eta_{\\mathcal B})\\circ e^S$. For $h:X\\to GY$, write $T(h)=c_Y\\circ P(h)$ for its transpose. This is the inverse of the hom-bijection of the assumed adjunction; thus it is injective and satisfies $T(G(v)\\circ h\\circ u)=v\\circ T(h)\\circ P(u)$, by functoriality and counit naturality. The defining equation of the mate is\n$$T(\\theta_{L,N})=(1_L\\otimes c_N)\\circ\\pi_{L,GN}=:q_{L,N}.$$\nWe use these formulas to check the required identities directly.",
+   "uses": [
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, first paragraph: notation for transposition; second paragraph: the coefficient monoid"
+   }
+  },
+  {
+   "text": "For $u:L\\to L'$, the transposes of $G(u\\otimes1_N)\\circ\\theta_{L,N}$ and $\\theta_{L',N}\\circ(Su\\otimes1_{GN})$ are, respectively,\n$$(u\\otimes1_N)\\circ(1_L\\otimes c_N)\\circ\\pi_{L,GN},\\qquad\n(1_{L'}\\otimes c_N)\\circ\\pi_{L',GN}\\circ P(Su\\otimes1_{GN}).$$\nThey agree by naturality of $\\pi$ in $L$ and bifunctoriality of tensor. For $v:N\\to N'$, the transposes of $G(1_L\\otimes v)\\circ\\theta_{L,N}$ and $\\theta_{L,N'}\\circ(1_{SL}\\otimes Gv)$ are\n$$(1_L\\otimes(v\\circ c_N))\\circ\\pi_{L,GN},\\qquad\n(1_L\\otimes(c_{N'}\\circ PGv))\\circ\\pi_{L,GN},$$\nwhere the second expression uses naturality of $\\pi$ in its second variable. These agree by counit naturality. Injectivity of $T$ proves naturality of $\\theta$ in both variables.",
    "uses": [
     "def-sfb-projection-formula"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, first paragraph, first bullet: naturality of the mate"
+   }
   },
   {
-   "text": "These are the unit and associativity axioms of the lax structure of a lax monoidal\nfunctor, with $\\theta$ in place of the structure maps. The module axioms\nfor $GN$ and the linearity of $Gf$ then follow exactly as in the case of a lax monoidal\nfunctor.",
-   "uses": [],
-   "elementary": null
+   "text": "The transpose of $G(\\lambda_N)\\circ\\theta_{\\mathbf1,N}\\circ(e^S\\otimes1_{GN})$ is\n$$\\begin{aligned}\n\\lambda_N\\circ(1_{\\mathbf1}\\otimes c_N)\\circ\\pi_{\\mathbf1,GN}\\circ P(e^S\\otimes1_{GN})\n&=c_N\\circ\\lambda_{PGN}\\circ\\pi_{\\mathbf1,GN}\\circ P(e^S\\otimes1_{GN})\\\\\n&=c_N\\circ P(\\lambda_{GN}\\circ(\\epsilon\\otimes1_{GN})\\circ(e^S\\otimes1_{GN}))\\\\\n&=c_N\\circ P(\\lambda_{GN}).\n\\end{aligned}$$\nThe first equality is naturality of the unitor; the second is exactly the unit compatibility in [def-sfb-projection-formula]; the third uses $\\epsilon e^S=1$. The last expression is $T(\\lambda_{GN})$. Hence\n$$G(\\lambda_N)\\circ\\theta_{\\mathbf1,N}\\circ(e^S\\otimes1_{GN})=\\lambda_{GN}.$$",
+   "uses": [
+    "def-sfb-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, first paragraph, second bullet: unit identity of the mate"
+   }
+  },
+  {
+   "text": "The transpose of\n$$G(\\alpha_{L,L',N})\\circ\\theta_{L\\otimes L',N}\\circ(m^S_{L,L'}\\otimes1_{GN})$$\nis\n$$\\alpha_{L,L',N}\\circ(1_{L\\otimes L'}\\otimes c_N)\\circ\\pi_{L\\otimes L',GN}\\circ P(m^S_{L,L'}\\otimes1_{GN}).$$\nNaturality of the associator moves $c_N$ past $\\alpha$. Apply the associativity compatibility of [def-sfb-projection-formula] at $M=GN$ and cancel $\\delta_{L,L'}m^S_{L,L'}=1$. The result is\n$$R=(1_L\\otimes q_{L',N})\\circ\\pi_{L,SL'\\otimes GN}\\circ P(\\alpha_{SL,SL',GN}).$$\nOn the other hand, the transpose of\n$$\\theta_{L,L'\\otimes N}\\circ(1_{SL}\\otimes\\theta_{L',N})\\circ\\alpha_{SL,SL',GN}$$\nis\n$$(1_L\\otimes c_{L'\\otimes N})\\circ\\pi_{L,G(L'\\otimes N)}\\circ P(1_{SL}\\otimes\\theta_{L',N})\\circ P(\\alpha_{SL,SL',GN}).$$\nNaturality of $\\pi$ at the morphism $\\theta_{L',N}$ rewrites this as\n$$(1_L\\otimes(c_{L'\\otimes N}\\circ P\\theta_{L',N}))\\circ\\pi_{L,SL'\\otimes GN}\\circ P(\\alpha_{SL,SL',GN})=R,$$\nusing $T(\\theta_{L',N})=q_{L',N}$. Injectivity of $T$ proves the claimed associativity identity for $\\theta$.",
+   "uses": [
+    "def-sfb-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, first paragraph, third bullet: associativity identity of the mate"
+   }
+  },
+  {
+   "text": "For a $\\mathcal B$-module object $N$, put $a_N=G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}$, and write $\\eta$ and $\\mu$ for the unit and multiplication of $\\mathcal B$. The transported monoid formulas of Step 1, the first-variable naturality from Step 2, the module equations in [sk-def-sfb-module-objects], and Steps 3 and 4 give\n$$\\begin{aligned}\na_N\\circ(\\eta^{S\\mathcal B}\\otimes1_{GN})\n&=G(\\gamma_N\\circ(\\eta\\otimes1_N))\\circ\\theta_{\\mathbf1,N}\\circ(e^S\\otimes1_{GN})\\\\\n&=G(\\lambda_N)\\circ\\theta_{\\mathbf1,N}\\circ(e^S\\otimes1_{GN})=\\lambda_{GN},\\\\\na_N\\circ(\\mu^{S\\mathcal B}\\otimes1_{GN})\n&=G(\\gamma_N\\circ(\\mu\\otimes1_N))\\circ\\theta_{\\mathcal B\\otimes\\mathcal B,N}\\circ(m^S_{\\mathcal B,\\mathcal B}\\otimes1_{GN})\\\\\n&=G(\\gamma_N)\\circ G(1_{\\mathcal B}\\otimes\\gamma_N)\\circ G(\\alpha_{\\mathcal B,\\mathcal B,N})\\circ\\theta_{\\mathcal B\\otimes\\mathcal B,N}\\circ(m^S_{\\mathcal B,\\mathcal B}\\otimes1_{GN})\\\\\n&=G(\\gamma_N)\\circ G(1_{\\mathcal B}\\otimes\\gamma_N)\\circ\\theta_{\\mathcal B,\\mathcal B\\otimes N}\\circ(1_{S\\mathcal B}\\otimes\\theta_{\\mathcal B,N})\\circ\\alpha_{S\\mathcal B,S\\mathcal B,GN}\\\\\n&=G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}\\circ(1_{S\\mathcal B}\\otimes G(\\gamma_N))\\circ(1_{S\\mathcal B}\\otimes\\theta_{\\mathcal B,N})\\circ\\alpha_{S\\mathcal B,S\\mathcal B,GN}\\\\\n&=a_N\\circ(1_{S\\mathcal B}\\otimes a_N)\\circ\\alpha_{S\\mathcal B,S\\mathcal B,GN}.\n\\end{aligned}$$\nThe penultimate equality uses second-variable naturality at $\\gamma_N:\\mathcal B\\otimes N\\to N$. These are precisely the two required module-object axioms.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, second paragraph: verify both module axioms"
+   }
+  },
+  {
+   "text": "For a $\\mathcal B$-linear map $f:N\\to N'$, its defining equation in [sk-def-sfb-module-objects] and Step 2 give\n$$\\begin{aligned}\nGf\\circ a_N\n&=G(f\\circ\\gamma_N)\\circ\\theta_{\\mathcal B,N}\\\\\n&=G(\\gamma_{N'})\\circ G(1_{\\mathcal B}\\otimes f)\\circ\\theta_{\\mathcal B,N}\\\\\n&=G(\\gamma_{N'})\\circ\\theta_{\\mathcal B,N'}\\circ(1_{S\\mathcal B}\\otimes Gf)\n=a_{N'}\\circ(1_{S\\mathcal B}\\otimes Gf).\n\\end{aligned}$$\nThus $Gf$ is linear. Define $G_{\\mathcal B}$ by $(N,\\gamma_N)\\mapsto(GN,a_N)$ and $f\\mapsto Gf$. The identity and composition laws hold because they hold for $G$ and module morphisms are underlying morphisms satisfying the displayed equation. Writing $U_{\\mathcal B}$ and $U_{S\\mathcal B}$ for the forgetful functors, both composites $U_{S\\mathcal B}\\circ G_{\\mathcal B}$ and $G\\circ U_{\\mathcal B}$ send $N$ to $GN$ and $f$ to $Gf$; hence they agree.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+    "place": "Proof, second paragraph: linearity, functor laws, and forgetful compatibility"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-projection-formula"
+  "def-sfb-modobj-transport",
+  "def-sfb-projection-formula",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization-right-adjoint.proof.md",
+  "place": "Proof: mate coherence and explicit verification of the module equations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mate of a projection formula gives a lax action on a right adjoint and linearization of module objects",
+   "results": "8 hits: Rep.linearization_δ_hom; Rep.linearization_μ_hom; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; Rep.instMonoidalActionTypeLinearization; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; Rep.ihom_coev_app_hom; Rep.linearization_ε_hom; Action.instRigidCategory",
+   "date": "2026-10-16",
+   "verdict": "related generic monoidal-adjunction declarations; no exact projection-formula linearization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ProjectionFormula, CategoryTheory.Functor.mapModRight, CategoryTheory.Functor.rightModObj",
+   "results": "0 hits; unknown identifier CategoryTheory.Functor.ProjectionFormula",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier query; no evidence of absence; superseded by the valid fully qualified Loogle query and semantic searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModRight|rightModObj|ProjectionFormula [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (Mathlib/ was repeated); returned zero hits but gives no evidence of absence; superseded by corrected searches below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoint of a functor with a projection formula induces module-object action via the mate",
+   "results": "8 hits: ModuleCat.instIsRightAdjointCoextendScalars; CategoryTheory.evaluationRightAdjoint; CategoryTheory.rightAdjointMate; CategoryTheory.Monad.comparison_obj_a; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; CategoryTheory.Adjunction.rightAdjointOfEquiv_obj; SheafOfModules.instIsRightAdjointPushforward; ModuleCat.instIsRightAdjointRestrictScalars",
+   "date": "2026-10-16",
+   "verdict": "related generic adjunction declarations; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint projection formula mate module object action",
+   "results": "8 hits: ModuleCat.ihom_coev_app; ModuleCat.instIsRightAdjointCoextendScalars; Rep.ihom_coev_app_hom; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.ihom_ev_app; ModuleCat.monoidalClosedHomEquiv; CategoryTheory.rightAdjointMate",
+   "date": "2026-10-16",
+   "verdict": "related generic adjunction declarations; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.rightAdjointLaxMonoidal_μ, Functor.mapMod",
+   "results": "0 hits; unknown identifier Adjunction.rightAdjointLaxMonoidal_μ",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier query; no evidence of absence; superseded by the valid fully qualified Loogle query and semantic searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal|mapMod|modObjObj [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (Mathlib/ was repeated); returned zero hits but gives no evidence of absence; superseded by corrected searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointLaxMonoidal_μ [Mathlib/CategoryTheory/Monoidal]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (Mathlib/ was repeated); returned zero hits but gives no evidence of absence; superseded by corrected searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModRight|rightModObj|rightSMul [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "invalid source subdirectory (Mathlib/ was repeated); returned zero hits but gives no evidence of absence; superseded by corrected searches below"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModRight|rightModObj|ProjectionFormula|rightAdjointLaxMonoidal [CategoryTheory]",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "read hits; generic monoidal-adjunction infrastructure, not this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula gives an action of a monoid on the right adjoint of a module object",
+   "results": "8 hits: CategoryTheory.ActionCategory.π_obj, Rep.instIsRightAdjointActionModuleCatRes, Bimod.actRight, ModuleCat.instIsRightAdjointForget, Rep.instIsRightAdjointCoindFunctor, IsMprojection, CategoryTheory.ActionCategory.π, Rep.instIsLeftAdjointActionModuleCatRes",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure only; no exact construction of the projection-formula mate and its module linearization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+   "results": "1 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure only; no exact construction of the projection-formula mate and its module linearization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor with a projection formula lifts its right adjoint to categories of module objects over monoids",
+   "results": "8 hits: CategoryTheory.Mod_.comap, Rep.instIsRightAdjointCoindFunctor, Rep.instIsRightAdjointActionModuleCatRes, Rep.instIsRightAdjointModuleCatInvariantsFunctor, ModuleCat.instIsRightAdjointForget, Rep.resCoindAdjunction, Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor, Rep.instIsLeftAdjointActionModuleCatRes",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure only; no exact construction of the projection-formula mate and its module linearization"
+  },
+  {
+   "tool": "grep",
+   "query": "lax.*(action|linear)|adjoint|mapMod|comap [CategoryTheory/Monoidal/Mod_.lean]",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "deprecated import shim has no matching declarations; inspected the imported Mod.lean instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a coherent projection formula under an adjunction is a lax module functor between monoidal actions",
+   "results": "8 hits: CategoryTheory.Functor.LaxLeftLinear.μₗ, CategoryTheory.Functor.LaxRightLinear.μᵣ, CategoryTheory.Functor.LeftLinear.μₗIso, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.mapMon, CategoryTheory.Functor.LaxLeftLinear.μₗ_unitality_inv_assoc, CategoryTheory.Functor.LaxLeftLinear.μₗ_unitality",
+   "date": "2026-10-16",
+   "verdict": "related infrastructure only; no exact construction of the projection-formula mate and its module linearization"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|lax|mapMod|comap|map [CategoryTheory/Monoidal/Mod.lean]",
+   "results": "5 hits: 37, 41, 45, 54, 60",
+   "date": "2026-10-16",
+   "verdict": "tool output parsed line numbers as filenames for a single-file rg; inspected the actual Mod.lean source directly, which defines module objects but not this construction"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|Adjunction|mapMod|mapModObj|mapMod_ [CategoryTheory/Monoidal/Action]",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxLeftLinear|adjoint.*linear|linear.*adjoint|mapMod [CategoryTheory/Monoidal]",
+   "results": "6 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean, Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean, Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean, Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean, Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no exact match. The source at Monoidal/Mon.lean:856 still lists mapMod as TODO; Action/LinearFunctor.lean:48-65 supplies coherent lineator data, not the adjoint mate construction or module lift. Semantic hits concern representation adjunctions and scalar restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoint of a strong equivariant functor is lax equivariant for tensor actions, inducing functors on internal modules",
+   "results": "8 hits: Rep.instIsLeftAdjointIndFunctor, Rep.instIsRightAdjointActionModuleCatRes, Rep.instIsLeftAdjointActionModuleCatRes, Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor, Rep.homEquiv, Rep.indResAdjunction, CategoryTheory.Mod_.comap, Rep.MonoidalClosed.linearHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no exact match. The source at Monoidal/Mon.lean:856 still lists mapMod as TODO; Action/LinearFunctor.lean:48-65 supplies coherent lineator data, not the adjoint mate construction or module lift. Semantic hits concern representation adjunctions and scalar restriction."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -58,5 +249,21 @@
   "CategoryTheory.Functor.ProjectionFormula.mapModRight"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-linearization-right-adjoint",
+  "worker": "stage1",
+  "summary": "Replaced the abbreviated transpose argument by explicit counit-transpose calculations for naturality, the unit, and associativity, and displayed the module-unit, module-associativity, and linearity calculations. Reused the existing closed lax-monoidal transport node only for the coefficient monoid S B. Corrected the earlier Mathlib source-directory searches and inspected their genuine hits. No statement changes or new nodes. Second reading clarified the coefficient-monoid notation, corrected two invalid Loogle-query verdicts, and recorded independent general equivariant-functor searches; all six mathematical steps were retained.",
+  "blueprint": "Unit sk-def-sfb-transport clause 3, right-adjoint linearization: Steps 1–4 realize the first proof paragraph and its three bullets; Steps 5–6 realize the second paragraph. The monoid-transport clause of the existing closed def-sfb-modobj-transport supplies only the coefficient monoid.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-96cc4bb02",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-96cc4bb02 (reviewer sub-agent of L); spot-checked: Read the full packet, item, route, cited nodes, blueprint sources, and delivery errors A–F. All six proof steps and hypotheses check, including mate naturality, unit/associativity, transported coefficient monoid, module axioms, linearity, and forgetful compatibility. Small cases pass; no duplicate, circularity, source mismatch, or repair is needed. Review written to review.md."
+ }
 }
