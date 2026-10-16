@@ -304,5 +304,24 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-6b6d9eeaf (reviewer sub-agent of L); spot-checked: Mathematics and citations pass after checking all eight steps, the exact blueprint, Stacks Tags 0F1I/0F1C/0F1D, hypotheses, edge cases, coefficients, morphisms, and DAG duplicates. Removed worker-recorded cross-unit tool_uses from split_report per delivery-errors C8; corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-kun-0f1i.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e3d614137",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Reviewed node, source, Lean declaration, all four dependencies, docstrings, edge cases, searches, and report sections. Reproduced per-file compilation with scompile.py successfully; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.BaseChangeTowardsFields",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_towardsSpecField",
+  "file": "lean/Sheaf/Targets/BaseChangeTowardsFields.lean",
+  "statement": "theorem baseChange_towardsSpecField {K : Type u} [Field K] {X S' T : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] [S'.Over (Spec (.of K))] [T.Over (Spec (.of K))] (g : T ⟶ S') [g.IsOver (Spec (.of K))] [QuasiCompact g] [QuasiSeparated g] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionOfInvertibleOrder K (Over.mk (T ↘ Spec (.of K))) F) : IsIso (((exactDerivedBaseChangeMap AddCommGrpCat.{u + 1} (CommSq.mk (pullback.condition (f := pullback.snd f (S' ↘ Spec (.of K))) (g := g)).symm)).app ((DerivedCategory.singleFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of immutable-head file-only compilation: use the published def-kun-torsion-invertible declaration AlgebraicGeometry.Etale.IsTorsionOfInvertibleOrder from Sheaf.AlgebraicGeometry.InvertibleTorsionOrders. The K-scheme argument is Over.mk of the recorded structure map. No dependency declaration is duplicated."
  }
 }
