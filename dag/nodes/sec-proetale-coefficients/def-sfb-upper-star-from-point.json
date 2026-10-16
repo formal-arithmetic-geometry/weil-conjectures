@@ -155,5 +155,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-a2aae667d (reviewer sub-agent of L); spot-checked: Read the item, complete proof, cited statements and source locations, and chapter/unit route. Composite comparison maps, coherence, braiding, coefficient category and edge cases check out. No new nodes, circular dependencies, missing citations or repairs. Detailed checks recorded in review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c343b670d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Existing binding upperStarFromPoint := pointUpperStar ⋙ upperStar Ab (toSpecZ X) (checked by rfl) is exactly p_X^* = π_X^* ∘ p^*, on Sheaf (coherentTopology Profinite.{u}) Ab.{u+1} ⥤ Sheaf (ProEt.topology X) Ab.{u+1}, X arbitrary, no extra hypotheses, size-convention universes, matches the blueprint's lean field. The monoidal instance is checked by rfl to equal sfbSheafTensorStructure.monoidal on source and target, and the braiding agrees by HEq.rfl. Monoidal and LaxBraided instances give the braided strong monoidal clause. The dependency def-sfb-point-upper-star gets a valid §1(B) record-only repair to pointUpperStar (sheafPullback along profiniteToProEt; mathlib_match kept, note given). Only lean fields were added (diffed). No Lean delivered, no hollow definition, no global build. nt_compile.py check file: no errors, only long-line warnings. Notes: the dependency record also lists laxBraided_pointUpperStar, which the blueprint assigns to lem-sfb-point-upper-star-braided; def-sfb-profinite-to-proetale is still unbound."
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+   "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
+   "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint"
+  ],
+  "statement": "def upperStarFromPoint (X : Scheme.{u}) :\n    Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⥤ Sheaf (ProEt.topology X) Ab.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "note": "The published pro-etale framework supplies the exact composite p_X^* = pointUpperStar ⋙ (toSpecZ X)^*[Ab], together with its strong monoidal and braided structure instances. The point pullback is the sheafified left Kan extension along profiniteToProEt, and the scheme pullback is the recorded ProEtale.upperStar for the structure morphism; no independent construction is introduced."
+ }
 }
