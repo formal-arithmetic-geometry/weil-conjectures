@@ -1,0 +1,219 @@
+{
+ "id": "lem-coef-dg-module-projective-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite derived mapping-complex adjunction before total inverse limit; the projective models compute derived mapping complexes and the dg-category of such models presents the enhanced localization.",
+   "via": [
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopically projective dg-module replacements and enhanced localization",
+ "statement": "Fix universes as in [def-weil-size-convention], enlarged to contain the module categories used here. Let $\\mathcal B$ be a small dg category over $\\mathbf Z$: every $\\mathcal B(U,V)$ is a cochain complex, composition is a unital associative chain map, and a cochain differential has degree $1$ and square zero. A right dg module consists of complexes $M(U)$ with unital associative chain-map actions $M(V)\\otimes\\mathcal B(U,V)\\to M(U)$. Write $\\underline{\\operatorname{Hom}}_{\\mathcal B}(M,N)$ for the complex whose degree-$r$ elements are degree-$r$ maps of graded right modules (so $f(ma)=f(m)a$), with differential $df=d_Nf-(-1)^rf d_M$. A module is objectwise acyclic if all its cohomology groups at every object vanish; a module map is an objectwise quasi-isomorphism if it induces isomorphisms on these cohomology groups. Call $Q$ homotopically projective if $\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,N)$ is acyclic whenever $N$ is objectwise acyclic.\n\nEvery right dg module $M$ admits an objectwise quasi-isomorphism $q_M:QM\\to M$ with $QM$ homotopically projective. The full dg category of homotopically projective modules, with the displayed Hom complexes and composition of graded maps, presents the enhanced localization of right dg modules at objectwise quasi-isomorphisms. Here enhanced localization retains the derived complexes of maps and their homotopy coherent compositions, rather than only the category with morphisms $H^0$. For a homotopically projective module $Q$ and any module $M$, the complex $\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,M)$ represents the derived mapping complex from $Q$ to $M$. These identifications are compatible with composition and with the localization functor. An objectwise quasi-isomorphism between homotopically projective modules is a chain homotopy equivalence, meaning it has a closed degree-zero inverse up to boundaries in the Hom complexes. In particular equivalence of such modules in the enhanced localization is the same as isomorphism in the category whose morphisms are $H^0$ of these Hom complexes.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: the finite derived mapping-complex adjunction before total inverse limit; projective models needed to compute the enriched representing modules Additional general dg foundation, not asserted by a Stacks tag in the supplied corpus. WANTED: Bernhard Keller, On differential graded categories, https://webusers.imj-prg.fr/~bernhard.keller/publ/dgcat.pdf, sections 3.1-3.2, Proposition 3.1 and Theorem 3.2, pp. 5-6; compare Francesco Genovese, Adjunctions of quasi-functors between dg-categories, https://fgenovese1987.github.io/documents/papers/qfun_adj.pdf, section 4.1, Propositions 4.4 and 4.6, Corollary 4.7 and Remark 4.5, pp. 15-16; PDFs read online, absent from local literature.",
+  "external": [
+   {
+    "document": "Bernhard Keller, On differential graded categories, https://webusers.imj-prg.fr/~bernhard.keller/publ/dgcat.pdf",
+    "place": "sections 3.1-3.2, Proposition 3.1 and Theorem 3.2, pp. 5-6; compare Francesco Genovese, Adjunctions of quasi-functors between dg-categories, https://fgenovese1987.github.io/documents/papers/qfun_adj.pdf, section 4.1, Propositions 4.4 and 4.6, Corollary 4.7 and Remark 4.5, pp. 15-16; PDFs read online, absent from local literature"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For each right dg module $M$, apply the semi-free replacement statement to obtain $q_M:QM\\to M$, with a countable exhaustive filtration starting at zero, graded-split inclusions and shifted-representable successor quotients. This supplies the replacements used below; it requires no boundedness, flatness or projectivity of the complexes $\\mathcal B(U,V)$.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Section 14.8; dg-algebra prototype Stacks tag 09KP, label dga-lemma-resolve."
+   }
+  },
+  {
+   "text": "Apply the semi-free homotopical-projectivity statement to the filtration of $QM$. Thus $\\underline{\\operatorname{Hom}}_{\\mathcal B}(QM,N)$ is acyclic for every objectwise acyclic $N$, which is exactly the condition defining homotopical projectivity in the item. This supplies the first assertion.",
+   "uses": [
+    "lem-coef-dg-semi-free-homotopically-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Section 14.8; dg-algebra prototype Stacks tag 09KM, label dga-lemma-property-P-K-projective."
+   }
+  },
+  {
+   "text": "For a closed degree-zero map $s:N\\to N\\prime$, its cone has $C(s)^r=N\\prime{}^r\\oplus N^{r+1}$ and differential $(y,x)\\mapsto(dy+s(x),-dx)$. If $s$ is a quasi-isomorphism and $(y,x)$ is a cone cocycle, injectivity on cohomology gives $x=dz$; subtracting $d(0,-z)=(-s(z),dz)$ leaves $(y+s(z),0)$. Surjectivity gives a cycle $w$ and $b$ with $y+s(z)=s(w)+db$, so this remainder is $d(b,w)$. Conversely, acyclicity of the cone applied to $(y,0)$ for a target cycle gives $y=db+s(a)$ with $da=0$, proving surjectivity; applied to $(-y,x)$ when $dx=0$ and $s(x)=dy$, it gives $x=-da$, proving injectivity. Thus its cone is objectwise acyclic precisely when $s$ is an objectwise quasi-isomorphism. Applying the graded Hom definition gives $\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,C(s))=C(\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,s))$: in degree $r$ both sides consist of pairs of maps of degrees $r$ and $r+1$, with the same displayed cone differential. If $Q$ is homotopically projective this cone is acyclic, so Hom from $Q$ preserves objectwise quasi-isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Cone calculation; compare tag 09KY, label dga-lemma-hom-derived, proof."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the full dg category of right dg $\\mathcal B$-modules with module values in a fixed universe, enlarging once more to make this category small, and let $\\mathcal A$ be its full subcategory of objectwise acyclic modules. Zero, shifts and cones are computed objectwise, so both are pretriangulated and $\\mathcal A$ is closed under shifts and cones. By step 3, the maps with cone in $\\mathcal A$ are precisely the objectwise quasi-isomorphisms. Apply the generic dg-quotient statement: $j:\\mathcal C\\to\\mathcal C/\\mathcal A$ therefore presents the enhanced localization. For homotopically projective $Q$, the left $\\mathcal A$-module $h^Q(N)=\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,N)$ is objectwise acyclic. It is thus equivalent to the zero module, and the derived tensor $h_M\\otimes^{\\mathbf L}_{\\mathcal A}h^Q$ is zero. The cofiber sequence now says that the canonical map $\\underline{\\operatorname{Hom}}_{\\mathcal B}(Q,M)\\to(\\mathcal C/\\mathcal A)(jQ,jM)$ is an equivalence in $\\mathbf D(\\mathbf Z)$. This computes the derived mapping complex; underived tensor exactness over $\\mathbf Z$ is not assumed.",
+   "uses": [
+    "lem-coef-dg-quotient-hom-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Sections 1.3.1-1.3.3, 1.6.2, 2.4 and 3.5-3.6; Keller section 4.4, Theorem 4.8."
+   }
+  },
+  {
+   "text": "Restrict the quotient map $j$ to the full dg category $\\mathcal P$ of homotopically projective modules. Step 4 gives equivalences on every mapping object, so this functor is fully faithful with its derived enrichment. For every module $M$, steps 1-2 supply $QM\\in\\mathcal P$ and the inverted map $j(q_M):j(QM)\\simeq j(M)$, so it is essentially surjective. By the fully faithful and essentially surjective criterion in dg-enrichment rectification, $\\mathcal P$ presents the enhanced localization. The comparison maps are restrictions of the single enriched quotient functor $j$. Explicitly, on $\\operatorname{Hom}(Q\\prime,Q\\prime\\prime)\\otimes^{\\mathbf L}\\operatorname{Hom}(Q,Q\\prime)$, composing first in $\\mathcal C$ and then applying its mapping-object comparison agrees with applying the two comparisons first and then composing in $\\mathcal C/\\mathcal A$; this is the enriched-functor composition axiom for $j$. Its unit axiom takes the identity class of $Q$ to that of $jQ$, and its coherent functor structure supplies the corresponding compatibility for all higher compositions. These are statements in the derived enrichment; no strict enriched replacement functor or cochain-level representative of the quotient functor is assumed. Naturality in an arbitrary target $M$ is the naturality of the cofiber comparison of step 4. Thus these identifications preserve composition, units and all coherent composition data, and agree with the localization functor.",
+   "uses": [
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Section 1.3.2-1.3.3 and 1.6; enriched interpretation through the existing rectification statement."
+   }
+  },
+  {
+   "text": "Let $u:Q\\to Q\\prime$ be an objectwise quasi-isomorphism with both modules homotopically projective. Step 3 with source $Q\\prime$ gives a bijection $H^0\\operatorname{Hom}(Q\\prime,Q)\\to H^0\\operatorname{Hom}(Q\\prime,Q\\prime)$ by postcomposition with $u$. Lift $[1_{Q\\prime}]$ to a class represented by a closed degree-zero $v:Q\\prime\\to Q$; then $uv-1_{Q\\prime}=dh\\prime$ for a degree-$-1$ map $h\\prime$. Step 3 with source $Q$ makes postcomposition with $u$ injective on $H^0\\operatorname{Hom}(Q,Q)$. Since $u(vu-1_Q)=(uv-1_{Q\\prime})u=d(h\\prime u)$, injectivity gives $vu-1_Q=dh$ for a degree-$-1$ map $h$. Thus $v$ is a chain homotopy inverse. Conversely these boundary equations imply inverse cohomology maps. By step 5 and the rectification statement identifying the underlying homotopy category with $H^0$, any equivalence between such modules is an isomorphism in their $H^0$ category, and every such isomorphism yields an equivalence.",
+   "uses": [
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://fgenovese1987.github.io/documents/papers/qfun_adj.pdf",
+    "place": "Section 4.1, Remark 4.5; explicit lifting and injectivity argument, compare Stacks tag 09KY, label dga-lemma-hom-derived."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-quotient-hom-cone",
+  "lem-coef-dg-semi-free-homotopically-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Sections 14.8 and 1.3-1.6; Keller sections 3.1-3.2 and 4.4; cone and inverse-lifting calculations written explicitly. Stacks tags 09KM, 09KP, 09KY are dg-algebra prototypes only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every differential graded module over a small dg category has a homotopically projective resolution computing derived mapping complexes",
+   "results": "8 hits: CategoryTheory.projectiveResolutions, CategoryTheory.Functor.mapProjectiveResolution, CategoryTheory.HasProjectiveResolutions, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.HasProjectiveResolution, HomotopyEquiv.isKProjective, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.ofComplex",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveResolution\"",
+   "results": "12 hits: ModuleCat.projectiveResolution, CategoryTheory.HasProjectiveResolutions, CategoryTheory.HasProjectiveResolution, CategoryTheory.ProjectiveResolution, CategoryTheory.ProjectiveResolution.self, CategoryTheory.HasProjectiveResolutions.mk, CategoryTheory.HasProjectiveResolutions.out, CategoryTheory.HasProjectiveResolution.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "hProjective|h_projective|homotopically.projective|dgModule|dgCategory",
+   "results": "25 hits: Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective model structure on dg modules over a differential graded category with objectwise quasi isomorphisms",
+   "results": "8 hits: HasDerivedCategory.standard, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, ModuleCat.projective_of_categoryTheory_projective, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.ProjectiveResolution.mk.injEq, QuasiIso, CategoryTheory.ProjectiveResolution.of_def, DerivedCategory.instIsIsoMapCochainComplexIntQ",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofibrant dg modules present the enhanced derived category of modules over a dg category",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bhproj\\b|\\bdgModule\\b|\\bdgCategory\\b|homotopically.?projective",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\"",
+   "results": "12 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, HomotopyEquiv.isKProjective, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CochainComplex.isKProjective_shift_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected CategoryTheory/Preadditive/Projective/Resolution.lean:35-68 (ordinary nonnegative projective resolutions of an object) and Algebra/Homology/HomotopyCategory/KProjective.lean:29-51 (K-projectivity of complexes in an abelian category). Neither handles modules over a dg category with graded actions, arbitrary unbounded dg-module replacements, or enhanced localization; the broad grep also matched EnoughProjectives substrings. The final word-boundary dg search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semi free resolutions of differential graded presheaves compute derived enriched Hom and localization",
+   "results": "8 hits: Ext, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans, DerivedCategory.instLinearHomotopyCategoryIntUpQh, HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader inspected the returned types. CofibrantObject.HoCat results concern an ordinary localization after assuming a model structure; DerivedCategory.Linear supplies linearity for complexes in an abelian category, and HomologicalComplex tensor declarations construct tensor products of complexes. None constructs dg-module resolutions, dg-category internal Hom, or derived bimodule transformation complexes. The independent dg vocabulary grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|quasi.?functor|quasi.?equivalen|dg.?bimodule",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader inspected the returned types. CofibrantObject.HoCat results concern an ordinary localization after assuming a model structure; DerivedCategory.Linear supplies linearity for complexes in an abelian category, and HomologicalComplex tensor declarations construct tensor products of complexes. None constructs dg-module resolutions, dg-category internal Hom, or derived bimodule transformation complexes. The independent dg vocabulary grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|dg.?quotient|homotopically.?projective|dg.?module",
+   "results": "{\"t\": \"2026-10-16T12:46:17Z\", \"tool\": \"grep\", \"query\": \"semi.?free|dg.?quotient|homotopically.?projective|dg.?module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.IsKProjective\"",
+   "results": "{\"t\": \"2026-10-16T12:46:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.isKProjective_shift_iff\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.mk\"], \"digest\": \"be776532da0100e0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules",
+   "results": "{\"t\": \"2026-10-16T12:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.Q\", \"DerivedCategory.Qh\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"868de05f7dcce0f8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-derived-enriched-yoneda",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-module-projective-resolution",
+  "worker": "stage1",
+  "summary": "Semi-free replacement and homotopical-projectivity foundations; generic derived dg-quotient cofiber calculation computes the localized Hom objects, then full faithfulness and essential surjectivity give the presentation. Explicit cone and inverse-lifting calculations. Avoids the cyclic generic model-comparison dependency.",
+  "blueprint": "Proof paragraph 2: the finite derived mapping-complex adjunction before total inverse limit; the projective models compute derived mapping complexes and the dg-category of such models presents the enhanced localization."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-4eab15aeb",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-4eab15aeb (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources. Drinfeld §§1.3/14.8, Keller §4.4, and explicit cone/homotopy calculations support all six steps and three new lemmas. No mathematical gap or duplicate found. Completed three new-node provenance/audit records under fixes/; statements unchanged. Full checks are in review.md.; 3 file(s) fixed by the reviewer"
+ }
+}
