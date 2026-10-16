@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-affine-line-orientation-uniqueness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniqueness of the global orientation",
@@ -15,37 +15,233 @@
  "stmt_deps": [
   "def-pur-conventions",
   "thm-pur-affine-line-orientation",
-  "thm-pur-rank-one-local-calculation",
-  "def-weil-scheme-morphism-properties"
+  "thm-pur-rank-one-local-calculation"
  ],
  "proof": [
   {
-   "text": "Step 1: reduction to sections of a sheaf. By\n[lem-pur-gysin-structure], $F:=Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ is\nconcentrated in degree zero with\n\n$$\n\\Hom_{D(Y,\\Lambda)}(\\Lambda_Y,F)=H^0(Y,F)=\\Gamma\\bigl(Y,\\mathcal H^0(F)\\bigr),\n$$\n\nthe first equality being the definition of the global sections as\n$\\operatorname{Hom}$ with the unit object (the tensor–internal-Hom\nadjunction of [def-weil-derived-pullback-tensor-hom]) and the\nsecond the degree-zero cohomology of a complex concentrated in one\ndegree. Step 2: the injectivity. A section $s\\in\\Gamma(Y,\\mathcal H^0(F))$ is determined by its stalks: if all stalks $s_{\\bar y}=0$,\nthen $s=0$, by the stalk criterion for the equality of sheaf\nsections on the (small pro-)etale site\n([def-weil-derived-cohomology-sheaves]). The map of the statement\nis exactly the stalkwise evaluation of the section, hence injective.\nStep 3: the image contains $(1)_{\\bar y}$. By the normalization in\n[thm-pur-affine-line-orientation], the pullback of\n$\\operatorname{pur}_s$ to $\\bar y$ is the class $1$ of\n[thm-pur-rank-one-local-calculation] under the canonical\nidentification of $(Rs^!\\Lambda(1)[2])_{\\bar y}$ with the support\nobject at the point (the exactness of the pullback along a geometric\npoint and [lem-pur-gysin-structure]). Step 4: the uniqueness.\nIf $\\varphi:\\Lambda_Y\\to F$ is any morphism whose pullbacks are all\n$1$, then its section equals the section of $\\operatorname{pur}_s$\nby Step 2, so $\\varphi=\\operatorname{pur}_s$.",
+   "text": "Use the current [def-pur-conventions]: $\\Lambda=A=A_{E,n}$ is the finite coefficient ring, $A_Y$ is its degree-zero constant coefficient unit, and $Rs^!$ denotes the constructible exceptional inverse image of [def-weil-exceptional-inverse-image] on the stated bounded constructible categories. The input $A_X(1)$ and the support object below are the finite-level objects of those conventions. Put $X=\\mathbf A^1_Y$, $U=\\mathbf G_{m,Y}$, $p:X\\to Y$, $\\pi=pj$, and $F=Rs^!A_X(1)[2]$. Use precisely [def-pur-affine-line-datum], including its present coefficient-level convention $e(E/\\mathbf Q_\\ell)\\mid n$ and the specified etale/pro-etale identification of the twist and Kummer class; no integral or rational coefficients are asserted here. The base is separated finite type over $k$, as assumed in the item. By [lem-pur-gysin-structure], $F\\in D^b_{ctf}(Y,A)$ and $\\mathcal H^i(F)=0$ for $i\\ne0$. Put $L=\\mathcal H^0(F)$. Applying [lem-pur-concentrated-complex-shift](1) with $r=0$ gives $F\\simeq L[0]$. The fully faithful degree-zero embedding of [lem-weil-pbc-derived-single-fully-faithful] therefore identifies\n$$\\operatorname{Hom}_{D(Y,A)}(A_Y,F)=\\operatorname{Hom}_{A_Y}(A_Y,L)=\\Gamma(Y,L).$$\nThe last bijection sends a sheaf map to the image of $1$; its inverse sends a section $v$ to $a\\mapsto av$, on every object of the site. This also explains why the Hom group is a module of global sections, not a rank-one sheaf or necessarily a rank-one module.",
    "uses": [
+    "def-pur-conventions",
+    "def-weil-exceptional-inverse-image",
+    "def-pur-affine-line-datum",
     "lem-pur-gysin-structure",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-cohomology-sheaves",
+    "lem-pur-concentrated-complex-shift",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
+  },
+  {
+   "text": "We need the normalized boundary to trivialize $L$, not merely an unspecified lisse rank-one structure. Here is the unit's localization argument. Work first on ordinary etale sites with $B=A_X(1)^{\\mathrm{et}}$. The zero section and open complement are those of the datum; $j$ is quasi-compact since locally its image is $D(t)$. By [lem-exc-closed-support-triangle] there is the counit/unit triangle\n$$s_*Rs^!B\\longrightarrow B\\longrightarrow Rj_*j^*B\\longrightarrow .$$\nApply $Rp_*$, which carries distinguished triangles to distinguished triangles by [lem-pc-right-derived-functor-triangulated]. Choose the small skeletons in [def-weil-size-convention]. The K-injective resolutions required there exist for these module-sheaf categories by [prop-pur-kinjective-resolutions-exist]. The composition isomorphisms of [lem-weil-derived-direct-image-composition], with $ps=\\mathrm{id}_Y$ and $pj=\\pi$, give\n$$Rs^!B\\longrightarrow Rp_*B\\longrightarrow R\\pi_*j^*B\\longrightarrow Rs^!B[1].$$\nTo match this ordinary etale calculation with the current convention [def-pur-conventions], take the compactification $Y\\xrightarrow{\\mathrm{id}}Y\\xrightarrow{s}X$ of the zero section. Its etale compact-support functor is $Rs_*=s_*$: on the displayed affine charts $s$ is the finite cyclic quotient $R[t]\\to R$, and [lemma-weil-pbc-finite-direct-image-exact] makes its direct image exact. Although that node is stated for abelian sheaves, its exactness applies to $A$-module sheaves: kernels and cokernels have the same underlying abelian sheaves, and forgetting the $A$-action commutes with direct image and reflects exactness. Thus the termwise module direct image preserves quasi-isomorphisms and computes $Rs_*$ as well. Thus the ordinary etale adjoint $s^{\\times}$ used in [def-weil-exceptional-inverse-image] and the $Rs^!$ of the support triangle are right adjoints of the same $s_*$. Their natural Hom bijections identify them and their counits. The current convention gives the adjunction on the bounded constructible categories; the bounded-below finite-level formula in that definition provides the etale-origin comparison used here. No ambient pro-etale adjoint or additional exceptional-adjoint admissibility datum is needed. The same calculation therefore represents the chapter's support object: [def-weil-exceptional-inverse-image] defines its finite-level value by transport of the etale adjoint, and [thm-weil-pbc-site-comparison] gives the required identity $R\\nu_*\\nu^*B=B$. The comparison in [prop-weil-pbc-comparison-direct-image] applies to $p,j,\\pi$ (all are quasi-compact and quasi-separated: over $\\operatorname{Spec}R\\subset Y$ their sources are $\\operatorname{Spec}R[t]$ and $\\operatorname{Spec}R[t,t^{-1}]$, and $j$ is the principal-open localization. These affine charts and their diagonals are spectra of rings, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; this verifies the definitions of quasi-compactness and quasi-separatedness in [def-weil-finite-type-morphism], [def-weil-quasi-separated-morphism]) and is compatible with composites and input maps, while [lem-sf-comparison-pullback-exact] commutes with cohomology. More explicitly, the comparison isomorphisms identify the $\\nu_Y^*$-images of the etale terms and their maps with the pro-etale terms and maps in [prop-pur-gm-relative-kummer]. Exactness gives $\\mathcal H^q(\\nu_Y^*K)=\\nu_Y^*\\mathcal H^q(K)$. Full faithfulness reflects zero objects and isomorphisms: if $\\nu_Y^*M=0$, its identity comes from $\\mathrm{id}_M$ and faithfulness forces $M=0$; apply this to the kernel and cokernel to reflect an isomorphism of sheaves. Hence the vanishing and Kummer-generator isomorphism in that node hold on the etale models too. Applying the exact $\\nu_Y^*$ to their long exact sequence gives the pro-etale calculation with the same input maps.\nTake the long exact cohomology sequence by [lem-sf-derived-homology-long-exact]. The vanishing of $R^1p_*B$ and $R^2p_*B$ in [prop-pur-gm-relative-kummer](1) makes its boundary\n$$\\delta:R^1\\pi_*A(1)\\xrightarrow{\\sim}\\mathcal H^2(Rs^!A_X(1))=L$$\nan isomorphism. Clause (2) of that node supplies the isomorphism $A_Y\\to R^1\\pi_*A(1)$, $1\\mapsto\\kappa(t)$. Their composite $o:A_Y\\to L$ is consequently an isomorphism. It is exactly $\\mathcal H^0(\\operatorname{pur}_s)$: the first arrow of the localization triangle is the counit, its connecting map is the support boundary, and [lem-pur-gysin-structure] and [thm-pur-affine-line-orientation] define $\\operatorname{pur}_s$ from that boundary. To check this last identification on global sections, the edge map sends the global class $\\kappa(t)$ to its section in $R^1\\pi_*A(1)$, by clause (2) of [prop-pur-gm-relative-kummer]. The connecting morphism $R\\pi_*A(1)\\to Rs^!A_X(1)[1]$ induces both the boundary on global cohomology and $\\delta$ on cohomology sheaves. The edge maps are natural for this morphism, so $\\delta$ of that section is the section corresponding to the global boundary $\\partial\\kappa(t)$. Thus the composite sends $1$ to precisely that section under the canonical identification of [lem-pur-gysin-structure]. This verifies the normalization of the sheaf isomorphism, rather than assuming an additional normalized Kummer datum.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-sf-comparison-pullback-exact",
+    "prop-pur-gm-relative-kummer",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pur-gysin-structure",
+    "thm-pur-affine-line-orientation",
+    "def-weil-size-convention",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "def-pur-conventions",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
+  },
+  {
+   "text": "Combining the degree-zero Hom identification of step 1 with $o^{-1}$ of step 2 identifies every $\\varphi:A_Y\\to F$ with a unique section $a\\in\\Gamma(Y,A_Y)$. Explicitly the endomorphism $m_a:A_Y\\to A_Y$, $b\\mapsto ab$, satisfies\n$$\\varphi=\\operatorname{pur}_s\\circ m_a.$$\nIndeed both sides correspond to the sheaf map $o\\circ m_a$ under the fully faithful single-complex embedding. The orientation corresponds to the section $1$. This is a calculation of sheaf maps on the degree-zero representatives, so it does not require a claim that geometric pullback is faithful on an arbitrary derived category.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
+  },
+  {
+   "text": "Fix a geometric point $g:\\bar y=\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed. Let $h:\\mathbf A^1_{\\bar y}\\to X$ and $s':\\bar y\\to\\mathbf A^1_{\\bar y}$ be the base changes. Under the natural supported-Hom description [lem-pur-supported-hom] and the etale-origin closed-immersion adjunction of [def-weil-exceptional-inverse-image], restriction in the statement sends the transpose of a supported class to the transpose of its pullback; the supported pullback is the functoriality in the pair and the coefficient sheaf in [thm-pur-with-support-exactness]. For completeness, if $\\epsilon:s_*F\\to A_X(1)[2]$ is the counit, the supported representative of $\\varphi$ is $\\epsilon\\circ s_*\\varphi$. With $\\varphi=\\operatorname{pur}_s\\circ m_a$, it is $(\\epsilon\\circ s_*\\operatorname{pur}_s)\\circ s_*m_a$. Pullback carries this precomposition to precomposition by $s'_*g^*m_a$, using the canonical supported-source comparison. Here that comparison is natural in the sheaf on $Y$: on the etale models the zero section and its base change are finite (on affine charts they are the cyclic quotients $R[t]\\to R$ and $\\Omega[t]\\to\\Omega$). By [lemma-weil-pbc-finite-stalk-formula], their pushforwards have the original stalk on the closed support and zero stalk off it. [lem-weil-pbc-geometric-point-pullback-stalk] identifies global sections of geometric inverse images with the corresponding stalks, so the canonical map $h^*s_*M\\to s'_*g^*M$ is the identity on all these stalks and is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Explicitly this comparison is adjoint under $s'^*\\dashv s'_*$ to $s'^*h^*s_*M\\cong g^*s^*s_*M\\to g^*M$, where the last arrow is the pullback of the counit of $s^*\\dashv s_*$. Naturality of this counit makes the comparison commute with every map $M\\to M'$, in particular $m_a$. [lemma-weil-pbc-finite-direct-image-exact] and the exact module inverse image [prop-weil-pbc-inverse-image-modules-exact] make this also the comparison of the derived functors on the bounded-below etale models. The finite-level site comparisons in step 2 and [lem-weil-pbc-comparison-pullback] give the supported-source comparison for the chapter's objects. In particular it is natural in $m_a$, which is all the calculation requires. Since $m_a$ is multiplication by a section, $g^*m_a$ is multiplication by its germ $a_{\\bar y}\\in A$. This is also seen by extending the multiplier to $p^*a$ on $X$; $s^*p^*a=a$ because $ps=\\mathrm{id}$, and on the fibre $h^*p^*a$ is the constant scalar $a_{\\bar y}$. Thus restriction on supported cohomology gives\n$$r_{\\bar y}(\\varphi)=a_{\\bar y}\\,r_{\\bar y}(\\operatorname{pur}_s).$$\nThe ordinary finite-coefficient inverse image is exact and preserves constant coefficients by [prop-weil-pbc-inverse-image-modules-exact]; the global sections of its value at a geometric point are the stalk by [lem-weil-pbc-geometric-point-pullback-stalk]. For the chapter's pro-etale models the same formula follows from [lem-weil-pbc-comparison-pullback] and the specified comparison of the supported class. By [thm-pur-affine-line-orientation], $r_{\\bar y}(\\operatorname{pur}_s)$ is the normalized class, and [thm-pur-rank-one-local-calculation] gives the $A$-linear residue isomorphism $\\rho_{\\bar y}$ sending it to $1$. Therefore\n$$\\rho_{\\bar y}\\bigl(r_{\\bar y}(\\varphi)\\bigr)=a_{\\bar y}.$$\nThis argument only uses pullback of supported classes and its naturality; it does not assume that an exceptional-base-change mate is invertible or that $\\operatorname{Spec}\\Omega$ is finite type over $k$.",
+   "uses": [
+    "lem-pur-supported-hom",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-comparison-pullback",
+    "thm-pur-affine-line-orientation",
+    "thm-pur-rank-one-local-calculation",
+    "def-weil-exceptional-inverse-image",
+    "thm-pur-with-support-exactness",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
+  },
+  {
+   "text": "Suppose $r_{\\bar y}(\\varphi)=r_{\\bar y}(\\psi)$ for every geometric point, and write $a,b\\in\\Gamma(Y,A_Y)$ for their sections in step 3. Step 4 gives $a_{\\bar y}=b_{\\bar y}$ everywhere. We justify the section test in the correct category. The constant sheaf $A_Y$ is the exact comparison pullback of its etale model, by [lem-sf-comparison-pullback-exact](1),(2). Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison], together with [lem-weil-pbc-derived-single-fully-faithful], identifies its pro-etale sheaf endomorphisms with its etale sheaf endomorphisms. These identifications respect geometric inverse image by [lem-weil-pbc-comparison-pullback]. Let $f$ be the etale endomorphism corresponding to $m_a-m_b$. Its stalk maps are zero by step 4 and [lem-weil-pbc-geometric-point-pullback-stalk]. On underlying abelian sheaves put $I=\\operatorname{im}f$. Exactness of etale geometric stalks [prop-weil-pbc-geometric-stalks-exact] gives $I_{\\bar y}=\\operatorname{im}f_{\\bar y}=0$. Applying [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to I$ gives $I=0$, hence $f=0$, hence $m_a=m_b$ and $a=b$. Step 3 then gives $\\varphi=\\psi$. This proves injectivity of the displayed restriction homomorphism. The test was made on etale sheaves and transported by full faithfulness; geometric stalks need not be conservative on arbitrary pro-etale sheaves.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
+  },
+  {
+   "text": "The morphism $\\operatorname{pur}_s$ exists by [thm-pur-affine-line-orientation] and has every geometric component equal to the class corresponding to $1\\in A$ under [thm-pur-rank-one-local-calculation]. Therefore the all-ones family lies in the image. If another morphism has these same components, injectivity from step 5 makes it equal to $\\operatorname{pur}_s$. No connectedness of $Y$ was assumed: on a disconnected base sections can take different values on different components and the product tests each of them. If $Y$ is empty, its sheaf module category and the Hom group are zero and the empty product is the zero group, so the same assertion and uniqueness hold.",
+   "uses": [
     "thm-pur-affine-line-orientation",
     "thm-pur-rank-one-local-calculation"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+    "place": "Steps 1–4; expanded with the unit rank-one calculation"
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-affine-line-datum",
   "lem-pur-gysin-structure",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-cohomology-sheaves",
+  "lem-pur-concentrated-complex-shift",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-exc-closed-support-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-derived-direct-image-composition",
+  "thm-weil-pbc-site-comparison",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "prop-pur-gm-relative-kummer",
+  "lem-sf-derived-homology-long-exact",
   "thm-pur-affine-line-orientation",
-  "thm-pur-rank-one-local-calculation"
+  "def-weil-size-convention",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-pur-supported-hom",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-pur-rank-one-local-calculation",
+  "thm-pur-with-support-exactness",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/prop-pur-affine-line-orientation-uniqueness.proof.md",
+  "place": "Steps 1–4, with the localization/Kummer normalization of sk-prop-a1 made explicit and etale-origin correction of the stalk argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineLineOrientation|kummerBoundary|geometric.*stalk.*ext",
+   "results": "0 hits: ; subdirectory of Mathlib/: AlgebraicGeometry; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"affineLineOrientation\"",
+   "results": "0 hits: ; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of the Kummer normalized orientation of the zero section of the affine line from its geometric stalks",
+   "results": "8 hits: Bundle.mdifferentiableOn_zeroSection, IsEmpty.oriented.congr_simp, Bundle.mdifferentiable_zeroSection, Bundle.contMDiffOn_zeroSection, Bundle.mdifferentiableAt_zeroSection, Bundle.mdifferentiableWithinAt_zeroSection, Bundle.contMDiff_zeroSection, ContMDiffSection.coe_zero; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the constant finite etale sheaf to the degree zero zero-section support complex on the affine line is determined by its restrictions at geometric points",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.hom_ext_iff, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.ext_of_isAffine, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*cohomology|cohomology.*support|etale.*stalk|stalk.*etale",
+   "results": "4 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean; subdirectory of Mathlib/: (root); read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\"",
+   "results": "12 hits: RingHom.SurjectiveOnStalks, RingHom.surjectiveOnStalks_of_isLocalization, RingEquiv.surjectiveOnStalks, RingHom.surjectiveOnStalks_of_surjective, RingHom.SurjectiveOnStalks.of_comp, RingHom.SurjectiveOnStalks.comp, RingHom.surjectiveOnStalks_iff_of_isLocalHom, RingHom.surjectiveOnStalks_of_exists_div; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of etale cohomology classes with support in the zero section to geometric fibres is injective, because the supported complex is a sheaf in degree zero",
+   "results": "8 hits: AlgebraicGeometry.specTargetImageFactorization_app_injective, Algebra.Extension.h1Cotangentι_injective, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_injective, AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond; read the hit signatures: no theorem on supported etale affine-line orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the unit sheaf to a complex concentrated in degree zero are determined by geometric fibre restrictions",
+   "results": "8 hits: SheafOfModules.unitHomEquiv, CategoryTheory.evalEquiv, CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext, CategoryTheory.GrothendieckTopology.hom_ext_uliftYoneda, AlgebraicGeometry.Scheme.Modules.hom_ext_iff. Read returned signatures: these give generic sheaf/global-section or presheaf-fibre tools, not the supported Kummer-normalized restriction theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.FullyFaithful|presheaf.*stalk|stalk.*conservative",
+   "results": "25 hits; first hits include Mathlib/CategoryTheory/Widesubcategory.lean:8, Mathlib/Condensed/Discrete/LocallyConstant.lean:389 and Mathlib/CategoryTheory/Subobject/MonoOver.lean:159,164,168,510. Returned lines concern fully faithful functors or ringed-space stalk maps, not the supported etale affine-line orientation theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of a sheaf of modules vanishes when its maps on every geometric stalk vanish",
+   "results": "8 hits: PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero, CategoryTheory.instZeroHomSheaf, AlgebraicGeometry.Scheme.Modules.Hom.zero_app, ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero; returned signatures concern zero scalar actions, structure sheaves, or Zariski stalks, not the finite etale supported-orientation statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.unitHomEquiv|presheafFiber_hom_ext",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean; read Mathlib/CategoryTheory/Sites/Point/Basic.lean lines 106–110: extensionality for maps out of a single presheaf fibre, not detection of supported etale classes at all geometric points.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +275,139 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1"
+ "unit": "sk-prop-a1",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-affine-line-orientation-uniqueness",
+  "worker": "stage1",
+  "summary": "Expanded the imported paragraph into six steps. Derived that the actual Kummer orientation trivializes the degree-zero support sheaf by the unit localization argument, computed the restriction of every morphism as the germ of its scalar section, and proved section detection on etale models rather than on arbitrary pro-etale sheaves. Checked the conditional normalized-datum Lean declarations and did not attach them, since they do not discharge the concrete normalization used here. No statement changes or new nodes. Repair after landing refusal: re-read the revised def-pur-conventions and all direct cited statements on the current DAG; made the finite coefficient unit and constructible exceptional-functor convention explicit in step 1 and identified the closed etale adjoint with its finite-level transported value and counit in step 2. Added verbatim citations for these uses; the statement and unit route remain unchanged. Fresh second reading: made explicit the passage from finite direct-image exactness on abelian sheaves to module sheaves and termwise derived direct image; independently revalidated all six steps and all 45 citation quotes.",
+  "blueprint": "Step 1 realizes blueprint Step 1. Step 2 makes explicit the normalized rank-one sheaf identification in the sk-prop-a1 unit proof. Steps 3–5 realize blueprint Step 2 and justify the geometric restriction interpretation without an unproved exceptional base-change isomorphism. Step 6 realizes blueprint Steps 3–4.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-concentrated-complex-shift",
+    "why": "Generic truncation reconstruction at r=0, used only to replace the already concentrated support object by its degree-zero sheaf. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic fully faithful degree-zero embedding, identifying derived maps between sheaves with ordinary sheaf maps. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Ordinary etale closed-support triangle with its counit; used to spell out the unit localization argument before site transport. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic exactness of a right derived functor, used for Rp_* of the localization triangle. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective resolutions in the module-sheaf categories, verifying the derived-functor tool hypothesis. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic composition comparison for Rp_*s_* and Rp_*Rj_* in the unit localization argument. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Specifies the finite pro-etale support functor as the transported etale adjoint, not an unrestricted ambient pro-etale adjoint. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic qcqs direct-image comparison used for p,j,pi in the same localization computation. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exactness and constant-coefficient preservation of the site comparison; keeps the degree-zero argument in the proper site. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology exact sequence of the unit localization triangle. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Natural supported-cohomology Hom identification for the supported restriction map. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and constant coefficients for ordinary etale inverse image at geometric points. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Identifies global sections of ordinary etale geometric inverse image with the stalk, and the etale module category of an algebraically closed point with modules. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Compatibility of etale/pro-etale comparison with geometric inverse image. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic exactness used on the image of an etale sheaf endomorphism. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic etale zero-sheaf criterion used to show a section with zero germs is zero. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Chooses small site skeletons before invoking the K-injective resolution theorem. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic quasi-compactness of the explicit affine charts and diagonal charts, verifying qcqs for the comparison functors. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Definition of quasi-compactness on inverse images of affine opens. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "def-weil-quasi-separated-morphism",
+    "why": "Definition of quasi-separatedness by the quasi-compact diagonal. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic closed-source comparison under geometric pullback, on finite zero sections. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic exactness allowing the same closed-source comparison on bounded-below derived etale models. No node of sk-prop-a1 supplies this generic assertion."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic bounded-below fully faithful etale/pro-etale comparison, needed only to transport the same localization and sheaf-map argument; the unit does not provide this site comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-concentrated-complex-shift",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-exc-closed-support-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-exceptional-inverse-image",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pur-supported-hom",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-size-convention",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-3f094d545",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-3f094d545 (reviewer sub-agent of L); spot-checked: I read the whole delivery, so PASS certifies a full reading. The statement is byte-identical to the blueprint text in main-20261015 and in the master snapshot (checked with diff); nothing is weakened. All 30 cited statements were read, with the full text of def-pur-conventions, def-weil-exceptional-inverse-image and def-pur-affine-line-datum, including their blueprint_update. Step 1: gysin-structure(1), concentrated-complex-shift(1) at r=0, and full faithfulness of the degree-zero embedding give Hom(A_Y,F)=Gamma(Y,L). Step 2: the etale support triangle with Rp_*, and the compactification (id,s) with s_* exact. This identifies the adjoint s^x in def-weil-exceptional-inverse-image with the triangle's Rs^!. p, j and pi are qcqs on affine charts, so the site comparison applies. relative-kummer (1),(2), stated on the pro-etale site, are carried to the etale models by an exact, fully faithful functor. The long exact sequence indices check out, so delta is an isomorphism, and its normalization agrees with pur_s through gysin(2). Step 3: phi=pur_s m_a, an elementary consequence. Step 4: supported-hom, the closed adjunction on etale-origin objects, and functoriality of supported cohomology in the pair. The comparison h^*s_* -> s'_*g^* is invertible by the finite-stalk formula and conservativity, and it is natural in m_a. g^*m_a is multiplication by the germ a_y. The A-linear rho of rank-one-local-calculation then gives rho(r_y(phi))=a_y. Spec Omega is not assumed to be of finite type, and no exceptional base-change mate is used. Step 5: sections are detected on etale models only, through full faithfulness, exact stalks and conservativity. This correctly repairs the blueprint's pro-etale stalk claim. Step 6 is elementary. Edge cases checked: Y empty, two points (Hom=A^2), non-reduced Y, n>1, and ramified E with e|n kept. There are no new nodes. The transitive dependency closure does not contain the item, so there is no cycle. All three search kinds are recorded. The off-unit generic tools (site comparison, derived-functor formalities, finite pushforward stalks and base change) are declared in split_report.tool_uses and I accept them; the unit's localization route is kept. No SGA source is cited. No fixes were made."
+ }
 }
