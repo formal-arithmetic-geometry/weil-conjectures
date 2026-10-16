@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-coef-infinity-right-anodyne"
  ],
  "proof": [
   {
@@ -156,5 +157,27 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-973960046 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit/chapter route in full. Verified all four proof steps against Kerodon 0154/0153, Stacks 08NL, and the exact Mathlib transfinite-lifting theorem. Checked horn orientation, empty and limit cases, duplicates, and dependency cycles. No repairs or additional tool_uses needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationExponentiation",
+  "declaration": "SSet.rightFibration_exponentiation",
+  "declarations": [
+   "SSet.rightFibration_exponentiation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationExponentiation.lean",
+  "statement": "theorem rightFibration_exponentiation {A B E S : SSet.{u}} (q : E ⟶ S) (i : A ⟶ B) (hq : ∀ (m : ℕ) (j : Fin (m + 1)), 1 ≤ m → 0 < j → HasLiftingProperty (horn m j).ι q) (hi : rightAnodyneExtensions i) : modelCategoryQuillen.I.rlp (((MonoidalCategory.Arrow.pullbackHom.obj (Opposite.op (Arrow.mk i))).obj (Arrow.mk q)).hom ≫ (pullbackSymmetry ((ihom A).map q) ((MonoidalClosed.pre i).app S)).hom)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed rightAnodyneExtensions definition and the canonical Mathlib MonoidalCategory.Arrow.pullbackHom, followed by pullbackSymmetry to retain the displayed factor order; right fibrations are stated directly by their full positive-index horn lifting property. The second reading removed a duplicate construction of the relative internal hom map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aaf8ec48c",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical Mathlib map, report sections, and compiler evidence all checked; no substantive or mechanical defects found."
  }
 }
