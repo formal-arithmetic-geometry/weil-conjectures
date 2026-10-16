@@ -322,5 +322,38 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d91d90b88 (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements, source passages, and unit/chapter route. All ten steps check; the canonical comparison and arbitrary Grothendieck abelian coefficients are preserved. Verified the exact Mathlib leaf, fpqc cover, edge cases, duplicate candidates, and dependency checks. No repairs needed. Detailed findings and accepted tool uses are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fac6f8bd3",
+  "group": "Q84",
+  "result": "fix",
+  "note": "The mathematics is correct: every clause of the node matches the existing upstream declarations. That covers the sheafified localization Kan extension j_! (localizationLowerShriek_eq is rfl), the adjunction j_! ⊣ upperStar, finite limits/colimits plus Additive (so exact), full faithfulness, Compactification.lowerShriek = i_! ⋙ g_*, the chosen lowerShriek, the canonical comparison j_!(δ⁻¹) ≫ ε, and IsIso under IsProper, proved with only standard axioms. There are no added hypotheses, no unbound universes and no hollow definitions. Report sections are present. F1 (H4/(d), mechanical): lean.module WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper is a stale path. Upstream sync bcf29a2028 (02:56, before the delivery) moved LowerShriek/{Comparison,Proper,OpenImmersion/*} to FiniteCoefficient/LowerShriek/{Comparison,Proper,Open/*}. The old Proper survives only as a side-tree copy that redeclares the live names: importing it with FiniteCoefficient.LowerShriek.Proper fails with 'environment already contains fullyFaithfulOpenImmersionLowerShriek'. Fix: fixes/sk-def-sfb-finite-lower-shriek.lean-record.json sets module to WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper. Declaration, verbatim statement, existing and branch are unchanged, and the note is updated. check_existing on the fixed record has no failures or notes. nt_compile is clean for import plus #check of all 12 declarations, and for a full probe (adjunction, exactness instances, FullyFaithful, IsIso, BoundaryCompactification c.obj.obj). Not fixed, outside this delivery: lem-sfb-finite-extension-by-zero-fully-faithful, def-sfb-finite-lower-shriek-to-lower-star and lem-exc-proetale-open-unit record the same stale paths."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_lowerShriekToLowerStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
+   "AlgebraicGeometry.ProEtale.localizationLowerShriek_eq",
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek",
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriek_additive",
+   "AlgebraicGeometry.ProEtale.fullyFaithfulOpenImmersionLowerShriek",
+   "AlgebraicGeometry.ProEtale.Compactification.lowerShriek",
+   "AlgebraicGeometry.ProEtale.lowerShriek",
+   "AlgebraicGeometry.ProEtale.lowerShriek_eq",
+   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekToLowerStar",
+   "AlgebraicGeometry.ProEtale.lowerShriekToLowerStar",
+   "AlgebraicGeometry.ProEtale.isIso_lowerShriekToLowerStar"
+  ],
+  "statement": "instance ProEtale.isIso_lowerShriekToLowerStar :\n    IsIso (ProEtale.lowerShriekToLowerStar A f)",
+  "branch": "slopmaster2",
+  "by": "Q84",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing canonical finite-coefficient implementation and the companion declarations listed here give every clause of this umbrella unit: sheafified localization Kan extension, adjunction to upperStar, exactness and full faithfulness, compactification composition, the chosen lowerShriek, its canonical comparison with lowerStar, and invertibility of that comparison for proper morphisms. The primary module is FiniteCoefficient.LowerShriek.Proper, whose public import closure (Open.Complement, Open.Conservative, Comparison, Open.FullyFaithful, Defs, Open.Defs) exposes every recorded declaration. The upstream sync bcf29a2028 (2026-10-17) moved the ordinary LowerShriek.{Comparison,Proper,OpenImmersion.*} modules into FiniteCoefficient.LowerShriek.{Comparison,Proper,Open.*}; the old LowerShriek.Defs and LowerShriek.OpenImmersion.Defs paths are only compatibility re-exports, and the old Proper path survives only as a stale side copy whose declarations clash with the live ones (reviewer fix). The recorded BoundaryCompactification specializes the upstream compactification via c.obj.obj, retaining its quasi-compact open immersion; no alternative compactification or sheaf category is defined. This is a statement match, not a proof-closure claim.",
+  "fixed_by": "NT-stage2-cc-fac6f8bd3"
  }
 }
