@@ -3,24 +3,97 @@
  "blueprint": {
   "is": "def-sf-orientation",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sf-orientation"
+  ]
  },
  "kind": "definition",
  "title": "Orientation datum",
- "statement": "In the setting of [def-sf-datum], an *orientation datum* consists\nof, for every smooth separated finite-type $f:X\\to Y$ of pure relative\ndimension $d$, an isomorphism\n\n$$\n\\gamma_{f,\\Lambda_Y}:\\ Lf^*\\Lambda_Y(d)[2d]\\xrightarrow{\\ \\sim\\ }Rf^!\\Lambda_Y,\n$$\n\nnatural in $Y$, compatible with composition, with étale base change,\nwith finite reduction, scalar extension, and the pro-étale realization,\nand equal to the canonical orientation of the affine line\n$\\mathbf A^1_Y\\to Y$ on the projection; for $f=a_X$ it reads\n$\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$.",
+ "statement": "Work in the six-functor datum [def-sf-datum], with finite-type schemes over the fixed algebraic closure $k$ of a finite field of characteristic $p$, a prime $\\ell\\ne p$, and the coefficient stages $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use its bounded constructible finite-Tor categories, adjunctions, exchange and projection transformations, and coefficient comparisons. The coefficient objects $\\Lambda_T$, Tate twists and shifts are those of [def-coefficient-twists-detailed] and [def-sf-datum]: $K(m)=K\\otimes^L_{\\Lambda_T}\\Lambda_T(m)$; the integral unit and tensor products are completed, and the algebraically closed field stage is interpreted at a common finite coefficient extension.\n\nAn *orientation datum* is a family, for every smooth separated finite-type $k$-morphism $f:X\\to Y$ of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms] and every displayed coefficient stage, of isomorphisms\n$$\n\\gamma_{f,\\Lambda_Y}:Lf^*\\Lambda_Y(d)[2d]\\xrightarrow{\\sim}Rf^!\\Lambda_Y\n$$\nin $D^b_{ctf}(X,\\Lambda)$, subject to the compatibility and normalization conditions below. At finite coefficients $A=A_{E,n}$ the family also includes the etale components: for every such $f$, an isomorphism $\\gamma^{e}_{f}:f_e^{*}L_Y(d)[2d]\\xrightarrow{\\sim}f^{\\times}A_Y$ in $D(X_{\\mathrm{et}},A)$, where $f^{\\times}$ is the etale right adjoint of etale compact support from which $Rf^!$ is transported in [def-weil-exceptional-inverse-image], and $L_T(d)$ is the ordinary etale twist of [lem-asd-etale-finite-twist-pullback] built from $L_T=\\mu^{\\mathrm{et}}_{\\ell^r,T}\\otimes_{\\mathbf Z/\\ell^r}A_T$ for some $r\\geq1$ with $\\ell^rA=0$ (the canonical identifications for different $r$ in that node are understood). The realization equation in clause 3 relates $\\gamma^e_f$ to the pro-etale component $\\gamma_{f,A_Y}$. Put $T_{X,d}=\\Lambda_X(d)[2d]$ and $\\omega_f=Rf^!\\Lambda_Y$, and use the coefficient-unit identification to write the component also as $\\gamma_f:T_{X,d}\\xrightarrow{\\sim}\\omega_f$.\n\nHere are the precise comparison conventions, all formed from the supplied datum. Write $\\varepsilon_f:Rf_!Rf^!\\to\\mathrm{id}$ for the counit. For $K\\in D^b_{ctf}(Y,\\Lambda)$, let\n$$\n\\theta_{f,K}:Lf^*K\\otimes^L\\omega_f\\longrightarrow Rf^!K\n$$\nbe the adjoint transpose of\n$$\nRf_!(Lf^*K\\otimes^L\\omega_f)\\cong Rf_!(\\omega_f\\otimes^LLf^*K)\n\\xrightarrow{\\operatorname{PF}^{-1}}Rf_!\\omega_f\\otimes^LK\n\\xrightarrow{\\varepsilon_{f,\\Lambda_Y}\\otimes1}\\Lambda_Y\\otimes^LK\\cong K.\n$$\nFor a Cartesian square in this setting\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{u}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{v}&Y,\n\\end{array}\n$$\nlet $\\beta_{f,v}:Lu^*\\omega_f\\to\\omega_{f'}$ be the adjoint transpose under $Rf'_!\\dashv Rf'^!$ of\n$$\nRf'_!Lu^*\\omega_f\\xrightarrow{\\operatorname{Ex}_!^{-1}}Lv^*Rf_!\\omega_f\n\\xrightarrow{Lv^*\\varepsilon_{f,\\Lambda_Y}}Lv^*\\Lambda_Y\\cong\\Lambda_{Y'}.\n$$\nThe inverse projection and exchange maps used here are part of axioms (A3) and (A2) of [def-sf-datum]. These formulas specify maps; no assertion of smooth purity is built into their definition.\n\n1. **Naturality in the base, including etale base change.** In every such square, with $f$ smooth of pure relative dimension $d$, require\n$$\n\\gamma_{f'}=\\beta_{f,v}\\circ Lu^*(\\gamma_f)\\circ\\bigl(T_{X',d}\\xrightarrow{\\sim}Lu^*T_{X,d}\\bigr).\n$$\nThe last identification is the pullback, twist and shift comparison. In particular impose this equation when $v$ is etale. The squares range over the fixed finite-type setting: $Y'$ is a finite-type $k$-scheme and $v$ is a separated finite-type morphism, the domain on which (A2) supplies $\\operatorname{Ex}_!$; no properness or smoothness of $v$ is added.\n\n2. **Composition.** For smooth separated finite-type $f:X\\to Y$ and $g:Y\\to Z$ of pure relative dimensions $d$ and $e$, require $\\gamma_{g\\circ f}$ to be the composite\n$$\n\\begin{aligned}\nT_{X,d+e}&\\cong Lf^*T_{Y,e}\\otimes^LT_{X,d}\n\\xrightarrow{1\\otimes\\gamma_f}Lf^*T_{Y,e}\\otimes^L\\omega_f\n\\xrightarrow{\\theta_{f,T_{Y,e}}}Rf^!T_{Y,e}\\\\\n&\\xrightarrow{Rf^!(\\gamma_g)}Rf^!Rg^!\\Lambda_Z\n\\xrightarrow{\\sim}R(g\\circ f)^!\\Lambda_Z.\n\\end{aligned}\n$$\nThe first isomorphism is twist multiplicativity and tensor-shift compatibility; the last is the right-adjoint composition comparison corresponding to (A1) and (A4) of [def-sf-datum].\n\n3. **Coefficient comparisons and pro-etale realization.** For each comparison functor $C_T$ supplied by (A5), let $t_C:C_XT_{X,d}\\xrightarrow{\\sim}T'_{X,d}$ and $w_C:C_X\\omega_f\\xrightarrow{\\sim}\\omega'_f$ be its twist and exceptional-image comparisons. Require the equality of maps from $C_XT_{X,d}$ to $\\omega'_f$\n$$\nw_C\\circ C_X(\\gamma_f)=\\gamma'_f\\circ t_C.\n$$\nThis is required for finite reductions $A_{E,n}\\to A_{E,m}$ ($1\\leq m\\leq n$), integral-to-finite reductions, scalar extension and rationalization, and common-stage finite coefficient extensions, exactly on the domains specified by (A5). The same equation expresses compatibility with the pro-etale realization: at finite coefficients $C_T=\\nu_T^*$ is the derived etale-to-pro-etale pullback [def-sf-comparison-derived-pullback], the unprimed component is the etale component $\\gamma^e_f$, and the primed orientation is the pro-etale one $\\gamma_{f,A_Y}$. Here $t_C:\\nu_X^*\\bigl(L_X(d)[2d]\\bigr)\\xrightarrow{\\sim}A_X(d)[2d]$ is the $d$-th tensor power, shifted, of the comparison $\\tau_X:\\nu_X^*L_X\\xrightarrow{\\sim}A_X(1)$ of [lem-pur-vector-integration-site-comparison] (applied over the base $X$), and $w_C:\\nu_X^*f^{\\times}A_Y\\xrightarrow{\\sim}\\nu_X^*f^{\\times}R\\nu_{Y,*}\\nu_Y^*A_Y=Rf^!A_Y$ is induced by the unit $A_Y\\xrightarrow{\\sim}R\\nu_{Y,*}\\nu_Y^*A_Y$, as in [def-weil-exceptional-inverse-image]. At integral and field stages use the completed, rationalized and common-stage comparisons of the datum. No reduction from field coefficients to finite coefficients is meant.\n\n4. **Affine-line normalization.** For the projection $\\pi:\\mathbf A^1_Y\\to Y$, require $\\gamma_{\\pi,\\Lambda_Y}$ to equal its canonical affine-line orientation. Explicitly at finite coefficients $A=A_{E,n}$, take the standard compactification $\\mathbf A^1_Y\\xrightarrow{j}\\mathbf P^1_Y\\xrightarrow{q}Y$. Choose $r\\geq1$ with $\\ell^r A=0$ and let $B_T=\\mu^{\\mathrm{et}}_{\\ell^r,T}\\otimes_{\\mathbf Z/\\ell^r}A_T$ on the etale site. Let $t_q^e:Rq_{e,*}B_{\\mathbf P^1_Y}[2]\\to A_Y$ be the trace of [def-amb-p1-trace] at $N=\\ell^r$. With $C_T=\\nu_T^*$, use the twist comparison $\\tau_T:C_TB_T\\xrightarrow{\\sim}A_T(1)$ and the proper direct-image comparison $\\beta_q:C_YRq_{e,*}\\xrightarrow{\\sim}Rq_{p,*}C_{\\mathbf P^1_Y}$ of [lem-pur-vector-integration-site-comparison]. Here the subscripts $e,p$ distinguish the etale and pro-etale operations. On the twist-identified source define\n$$\nt_q^p=C_Y(t_q^e)\\circ\\bigl(Rq_{p,*}(\\tau_{\\mathbf P^1_Y}[2])\\circ\\beta_{q,B_{\\mathbf P^1_Y}[2]}\\bigr)^{-1}:\nRq_{p,*}A_{\\mathbf P^1_Y}(1)[2]\\longrightarrow A_Y.\n$$\nThe cited comparison statement also identifies the open-extension counits and makes this trace independent of $r$. In the following pro-etale formula write $t_q=t_q^p$ and suppress the site subscripts. Define\n$$\n\\int_\\pi:R\\pi_!A_{\\mathbf A^1_Y}(1)[2]=Rq_*j_!A_{\\mathbf A^1_Y}(1)[2]\n\\xrightarrow{Rq_*(\\varepsilon^j)}Rq_*A_{\\mathbf P^1_Y}(1)[2]\\xrightarrow{t_q}A_Y,\n$$\nwhere $\\varepsilon^j:j_!j^*\\to\\mathrm{id}$ is the extension-by-zero counit. The canonical orientation is the adjoint transpose under $R\\pi_!\\dashv R\\pi^!$ of $\\int_\\pi$. Impose equality with this map, with the pullback-unit identification on its source. At integral coefficients the canonical normalization has these finite reductions; at rational and algebraically closed coefficients it is their rationalization and common-stage scalar extension. These are the coefficient conventions of [def-sf-datum].\n\nThe conditions are on the entire family, including its coefficient and realization components. Existence of a family satisfying them is a separate theorem, not an assertion of this definition. For $f=a_X:X\\to\\operatorname{Spec}k$, when $X$ is smooth separated of pure dimension $d$, the component read in reverse is exactly $\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$, with $\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$ as in [def-sf-datum].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-def-sf-orientation/def-sf-orientation.md",
   "place": "node def-sf-orientation, order 2047"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-sf-comparison-derived-pullback",
+  "def-amb-p1-trace",
+  "lem-pur-vector-integration-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "lem-asd-etale-finite-twist-pullback"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Orientation datum for six functors: smooth purity isomorphisms compatible with composition, base change, coefficient change and affine line normalization",
+   "results": "Eight hits on Scheme.Modules pseudofunctor coherence, ordinary module-sheaf pullback/pushforward composition and affine-space morphisms; none defines exceptional inverse images or the orientation family. Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:285-310: ordinary module-sheaf pullback coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor",
+   "results": "Twelve hits, led by CategoryTheory.Functor.mapIso and its identity, inverse and composition formulas. Read Mathlib/CategoryTheory/Iso.lean:471-476: mapping an existing isomorphism, not geometric orientation data.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.?twist|smooth.?purity|orientation.?datum|dualizing.?complex",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity orientation exceptional inverse image shifted Tate twist compatible with base change",
+   "results": "Eight hits concerning smooth morphisms and stability under base change, including AlgebraicGeometry.isSmooth_isStableUnderBaseChange and isSmoothOfRelativeDimension_isStableUnderBaseChange. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:119-133: geometric smoothness, not smooth-purity orientations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Verdier smooth purity orientation isomorphism Tate twist dualizing complex compatible family of six functors",
+   "results": "Eight hits on shifts of derived functors, ordinary Scheme.Modules pullback composition, free module pullback and bounded derived representatives. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:48-63: an underived sheaf-of-modules adjunction, not six-functor orientation data.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*six|six.*formalism|exceptional.*inverse|upper.?shriek",
+   "results": "One hit: Mathlib/CategoryTheory/Adjunction/Mates.lean:40. Read lines 30-42: six operations are motivation only and are explicitly not developed there.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "OrientationDatum|relativeDualizing|smoothPurity|tateObject",
+   "results": "{\"t\": \"2026-10-16T23:07:37Z\", \"tool\": \"grep\", \"query\": \"OrientationDatum|relativeDualizing|smoothPurity|tateObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace normalized trivialization of relative dualizing objects for smooth morphisms, coherent under pullback and composition",
+   "results": "{\"t\": \"2026-10-16T23:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"Trace normalized trivialization of relative dualizing objects for smooth morphisms, coherent under pullback and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_\\u03c4l\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"3438468ee6b25bf3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module pullback coherence and abstract adjunction equivalences do not define the geometric orientation family"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-16T23:08:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"b9045516afe2e41d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module pullback coherence and abstract adjunction equivalences do not define the geometric orientation family"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +114,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-def-sf-orientation"
+ "unit": "sk-def-sf-orientation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sf-orientation",
+  "worker": "stage1",
+  "summary": "One-level definition split with no new nodes: retained every family, naturality, composition, coefficient, realization and affine-line-normalization clause. Named the existing coefficient/twist, smooth-dimension, realization and projective-line-trace notions. Wrote the comparison maps and the required equations using only the six-functor datum, including an explicit affine-line normalization valid for a nonseparated finite-type base. No existence or invertibility theorem has been inserted into the definition. The finite-coefficient project record is not an exact attachment for the full coefficient family. Second reading made the finite etale companion components explicit and specified the finite trace realization, including the roots-of-unity twist comparison, by an existing comparison statement. Maintainer reader fix: named the etale components by the etale exceptional adjoint of def-weil-exceptional-inverse-image and the etale twist of lem-asd-etale-finite-twist-pullback, wrote the realization comparisons t_C and w_C explicitly, and made explicit that the base-change squares use separated finite-type v as in (A2).",
+  "blueprint": "Realizes every clause of current main-20261015 def-sf-orientation (order 2391) and the orientation interface of sk-def-sf-orientation: component isomorphism, naturality, composition, etale base change, finite reduction, scalar extension, pro-etale realization, affine-line normalization, and structure-morphism reading. This definition has no proof steps. The unit already has its own separate key node sk-def-sf-orientation, so no unit realization field is edited."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-f5e022cf7",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-f5e022cf7 (reviewer sub-agent of L); spot-checked: I read every clause of the item against main-20261015 def-sf-orientation.md (order 2391, the same text as master order 2047) and its unit sk-def-sf-orientation. The item has the component family, naturality in Y, composition, étale base change, the coefficient and realization conditions, the affine-line normalization and the a_X reading. Nothing is weakened or added. I checked the directions and types of every map. theta: PF^{-1} (A3), then ε⊗1, transposed under Rf_!⊣Rf^!. beta: Ex_!^{-1} (A2), then Lv^*ε. Composition: twist d+e, θ, Rf^!γ_g, then the mate of (A4). Clause 4 matches main-20261015 def-pur-affine-line-purity-comparison.md (∫_p = t_q∘restriction, then the exceptional adjoint). The item uses def-amb-p1-trace (Noetherian base, N invertible) to allow a nonseparated finite-type Y. Its t_q^p = C(t_q^e)∘(Rq_*τ∘β_q)^{-1} agrees with lem-pur-vector-integration-site-comparison. Small cases checked: d=0 and the identity (γ_id=1), empty X, A^1 (d=1, [2], (1)), n=1 with ramified E, the field stages (no field→finite reduction), and a nonseparated Y. No new nodes, so B1–B7 and D1 do not apply and nothing is dropped. The only orientation nodes besides the item are sk-def-sf-orientation (cites the item; kept in same_as) and its citers. There is no cycle over the full graph, including the dependencies I added. No SGA is used, and no tool_uses are needed (definition with no proof). Two B3-type faults, fixed in fixes/dag/nodes/sec-six-functors/def-sf-orientation.json: (1) the étale components had no cited definition, although the datum's D^b_ctf, Rf^! and twists are pro-étale. I defined γ^e_f: f^*L_Y(d)[2d] ≅ f^×A_Y with f^× from def-weil-exceptional-inverse-image (Rf_n^! = ν^* f^× Rν_*) and the twist from lem-asd-etale-finite-twist-pullback. I wrote t_C = τ^{⊗d}[2d] and w_C = the unit identification explicitly, and added both nodes to stmt_deps. (2) In clause 1, v must be separated of finite type, the domain of (A2)'s Ex_!; this is now stated. review.md has the details.; 1 file(s) fixed by the reviewer"
+ }
 }

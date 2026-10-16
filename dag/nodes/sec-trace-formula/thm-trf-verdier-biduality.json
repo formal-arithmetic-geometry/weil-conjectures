@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-verdier-biduality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Verdier biduality for the dualizing complex",
@@ -24,28 +24,109 @@
  ],
  "proof": [
   {
-   "text": "Finite-stage geometric biduality, [thm-fix-general-biduality],\nsupplies the double-dual isomorphism on the stated constructible\nfinite-Tor category, with no additional boundary hypothesis.\nIts dualizing object is the one in [def-trf-dualizing-complex],\nby uniqueness of the exceptional right adjoint.\nThe double-dual morphism is the adjoint of evaluation\nby [lem-weil-duality-pairing], so its evaluation is the map of\n[def-trf-dualizing-complex] displayed in the statement.",
+   "text": "Work on the small pro-etale site, as prescribed by [def-trf-coefficient-conventions]. Thus $n\\geq1$, $\\ell\\ne p$, and $A=A_{E,n}$, with $k=\\overline{\\mathbf F}_q$. By [def-trf-dualizing-complex], $\\omega_{Y,A}=Ra_Y^!A_s$ and $D_Y=R\\mathcal Hom_A(-,Ra_Y^!A_s)$. By [def-trf-admissibility], the specified right adjoint in the exceptional-admissibility hypothesis is the constructible exceptional inverse image of [def-weil-exceptional-inverse-image]. Thus the exceptional functor here is precisely the finite-stage comparison-transport functor of [def-weil-exceptional-inverse-image], restricted to the constructible category. Hence these are the same object and functor denoted $\\omega_Y$ and $D_Y$ in finite-stage geometric biduality; $A$ there denotes the constant coefficient object on $s$. No comparison with a separately chosen dualizing object, and no ambient pro-etale adjoint assumption, is needed.",
    "uses": [
-    "thm-fix-general-biduality",
+    "def-trf-coefficient-conventions",
+    "def-trf-dualizing-complex",
+    "def-weil-exceptional-inverse-image",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-verdier-biduality.proof.md",
+    "place": "Proof, first two sentences: identify the coefficient category and dualizing object"
+   }
+  },
+  {
+   "text": "Apply the small pro-etale assertion of [thm-fix-general-biduality] to this $Y$, $A$, and $K=M$. Its hypotheses are exactly that $Y$ is separated of finite type over $k=\\overline{\\mathbf F}_q$, $A=A_{E,n}$, and $M\\in D^b_{ctf}(Y,A)$, all given here. Its anti-equivalence assertion ensures that $D_YM$ and $D_YD_YM$ belong to this same category, and its biduality assertion makes the natural morphism $\\delta_M:M\\to D_YD_YM$ invertible. Its stated naturality supplies the functorial isomorphism required in the item. The additional exceptional admissibility hypothesis of the item is retained; no boundary-duality hypothesis is introduced.",
+   "uses": [
+    "thm-fix-general-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-verdier-biduality.proof.md",
+    "place": "Proof, first sentence: specialize finite-stage geometric biduality"
+   }
+  },
+  {
+   "text": "By [def-trf-dualizing-complex], the inverse image of $\\operatorname{id}_{D_YM}$ under the displayed tensor-internal-Hom adjunction is exactly $\\operatorname{ev}_M:D_YM\\otimes_A^LM\\to\\omega_{Y,A}$. By the pro-etale formal construction stated in [lem-weil-duality-pairing], its transpose is the natural double-dual morphism $\\delta_M$ used above. More explicitly, compose the symmetry $M\\otimes_A^LD_YM\\to D_YM\\otimes_A^LM$ with this evaluation and transpose with respect to the $D_YM$ variable; the result is $M\\to R\\mathcal Hom_A(D_YM,\\omega_{Y,A})=D_YD_YM$. The dualizing object needed for that formal construction is already specified in step 1. Thus the isomorphism has the specified evaluation pairing, with the factor order displayed in the statement. The pairing is determined uniquely by the identity under the adjunction bijection, so no alternative evaluation is being chosen.",
+   "uses": [
     "def-trf-dualizing-complex",
     "lem-weil-duality-pairing"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-verdier-biduality.proof.md",
+    "place": "Proof, last sentence: the evaluation and its double-dual transpose"
+   }
   }
  ],
  "proof_deps": [
-  "thm-fix-general-biduality",
+  "def-trf-admissibility",
+  "def-trf-coefficient-conventions",
   "def-trf-dualizing-complex",
+  "def-weil-exceptional-inverse-image",
+  "thm-fix-general-biduality",
   "lem-weil-duality-pairing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-six/thm-trf-verdier-biduality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-verdier-biduality.proof.md",
+  "place": "Proof, sole paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|bidual",
+   "results": "6 hits; Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier biduality double dual isomorphism for bounded constructible finite Tor sheaf complexes",
+   "results": "8 hits; Module.evalEquiv, AddChar.doubleDualEquiv, FinBddDistLat.dualEquiv, AddChar.doubleDualEmb_doubleDualEquiv_symm_apply, BddOrd.dualEquiv_inverse, Module.Dual.instIsReflecive, FinBddDistLat.dualEquiv_inverse, FractionalIdeal.dual_dual. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev",
+   "results": "12 hits; CategoryTheory.ihom.ev, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.uncurry_pre. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier biduality for constructible finite Tor complexes of sheaves over a finite coefficient ring",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Verdier|toIhomIhom",
+   "results": "24 hits; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation transpose into the derived Hom double dual with respect to the exceptional pullback of the constant sheaf is invertible for constructible finite Tor complexes",
+   "results": "8 hits; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.singleFunctorCompHomologyFunctorIso, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.exists_iso_Q_obj_of_isLE, LightCondensed.free_internallyProjective_iff_tensor_condition. Hits concern formal evaluation, module double duality, derived-category structure, or unrelated Verdier terminology; none states geometric Verdier biduality on constructible finite-Tor pro-etale complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived internal Hom into an exceptional inverse image of a constant finite ring sheaf defines a duality on bounded constructible complexes with finite Tor dimension",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor. All are derived-category t-structure support or representative statements; none asserts a duality for constructible finite-Tor sheaf complexes or invertibility of the geometric evaluation transpose.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -85,5 +166,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-six"
+ "unit": "sk-d-six",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-verdier-biduality",
+  "worker": "stage1",
+  "summary": "Checked the master and main-20261015 statements and proof, all cited current DAG statements, coefficient and exceptional-functor conventions, and Lean attachment candidates. Kept the statement unchanged. Expanded the existing finite-stage specialization into coefficient/object identification, natural biduality, and the explicit evaluation transpose with tensor symmetry. No new nodes or Mathlib leaves. Second reading: cited the admissibility definition explicitly for the identification of its specified right adjoint, and expanded citation excerpts to cover the exact scope used.",
+  "blueprint": "Steps 1 and 2 realize the first two sentences of the sole blueprint proof paragraph; step 3 realizes its final evaluation-adjoint sentence. The identification uses the same specified exceptional functor rather than an unrecorded uniqueness theorem.",
+  "tool_uses": [
+   {
+    "node": "thm-fix-general-biduality",
+    "why": "The blueprint explicitly imports finite-stage geometric biduality to realize the biduality clause of sk-d-six; no independent proof of geometric biduality is provided in this package-definition unit."
+   },
+   {
+    "node": "lem-weil-duality-pairing",
+    "why": "The blueprint explicitly imports the general evaluation-transpose construction to identify its canonical double-dual map; the unit specifies the package rather than reproving this formal construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-fix-general-biduality",
+  "lem-weil-duality-pairing"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-787a4b67d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-787a4b67d (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement verbatim in master and main-20261015; every hypothesis and both clauses kept; not weakened. Step 1 elementary: def-trf-dualizing-complex sets omega=Ra_Y^!A_s and D_Y=RHom(-,omega); def-trf-admissibility (and its update) names its functor as the constructible exceptional inverse image of def-weil-exceptional-inverse-image (nu_X^* f^x Rnu_Y,*); thm-fix-general-biduality's stmt_deps use that same node. So the dualizing objects agree by definition, and the delivery correctly drops the blueprint's appeal to uniqueness of the right adjoint. Step 2: thm-fix-general-biduality (split, reviewed NF 2026-10-16), pro-etale clause, hypotheses exactly present (k=F_q-bar, A=A_{E,n}, Y separated finite type); its anti-equivalence and natural delta give the functorial isomorphism; same pro-etale D^b_ctf category. Step 3: ev_M is the adjunction transpose of id by definition; lem-weil-duality-pairing explicitly covers the pro-etale case with a specified dualizing object; factor order checked: M ⊗ DM -> DM ⊗ M -> omega transposes to M -> DDM. Edge cases: empty Y, Y=Spec k (perfect complexes over O_E/ϖ^n), M=0; the finite-Tor hypothesis is kept at n>=2. No new nodes. Duplicate regex scan across the DAG finds only the stronger thm-fix-general-biduality and related biduality lemmas, none a duplicate of this item. Acyclic (12829 ancestors, item not among them). Accepted tool_uses: thm-fix-general-biduality and lem-weil-duality-pairing, both from sk-prop-sf-biduality-general in sec-six-functors (a chapter sec-trace-formula uses), explicitly imported by the blueprint proof, while sk-d-six (uses only sk-d-setup) has no steps. No SGA cited. Searches cover all three kinds, verdict no match; no Lean to attach."
+ }
 }
