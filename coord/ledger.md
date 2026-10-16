@@ -15308,3 +15308,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: returned deliver/F3/Sheaf.Paper.CondensedStratumModelInductionStepNonempty (reviewer RETURN: (reviewer X-254ef, head 254efff4c) 1. H1 (review point 4): Both new admitted declarations are inside the existing item m)
 - 00:31 L: returned deliver/C4/Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound (reviewer RETURN: (the landing tools, head 3942087a9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:31 L: returned deliver/E4/Sheaf.Paper.FiniteHypercoverDescentParts (reviewer RETURN: (the landing tools, head b02a3cf9c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 00:31 L: merged deliver/A2/Sheaf.Paper.ContinuousConstructibleIntegralModel (stage 3; reviewer PASS; first push; landing 20261016T003157-L-3926386 (interface); batch 20261016T003156; modules 3; new nodes 2)

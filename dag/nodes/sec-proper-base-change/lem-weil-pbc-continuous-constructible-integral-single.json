@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-continuous-constructible-integral-single",
+ "kind": "statement",
+ "title": "Integral models for constructible continuous E sheaves in degree zero",
+ "statement": "For prime ℓ and finite normed E/ℚ_ℓ and a scheme X with Noetherian underlying space, let F be a constructible module over the continuous E coefficient ring of [def-weil-pbc-continuous-integral-coefficients]. The single complex F[0] is isomorphic in the ambient E derived category to integralScalarExtension(M), for an integral bounded constructible complex M. This asserts only the degree-zero case, not the result for arbitrary bounded complexes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 and the sheaf case of Proposition 6.8.14(2); uses Lemma 6.8.12 for Ext1 localization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "On each of finitely many strata, pass from local finite presentations to finite-rank local systems. Choose constructible integral lattices by Lemma 6.8.13. Refine to a finite open--closed filtration, extend the integral models by zero, and lift the successive Ext1 classes after multiplying by powers of ℓ using bounded-below compactness. Such scalars are invertible over E, so the reconstructed integral sheaf rationalizes to F. Exact coefficient localization and the compact-test continuous-function calculation identify the scalar extension of its degree-zero complex with F[0]. The empty scheme and zero module use zero.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 and the sheaf case of Proposition 6.8.14(2); uses Lemma 6.8.12 for Ext1 localization",
+  "note": "A2 second reading: a strictly partial obligation for the bounded dévissage argument; replaces the false unrationalized equivalence claim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral models for constructible continuous l adic sheaves, and closure under cones of the image of derived extension from integral coefficients by clearing denominators",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a constructible continuous l adic sheaf placed in degree zero has an integral lattice whose scalar extension is isomorphic to it",
+   "date": "2026-10-16",
+   "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.IsSolid; CondensedMod; CondensedMod.ofSheafProfinite; CondensedMod.LocallyConstant.functor; LightCondMod; LightCondMod.ofSheafLightProfinite; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "verdict": "No integral lattice result; only general condensed module results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.essImage; CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage; CategoryTheory.Functor.essImage.witness; CategoryTheory.Functor.obj_mem_essImage; CategoryTheory.Functor.EssSurj.mem_essImage; CategoryTheory.Functor.EssSurj.mk; CategoryTheory.Functor.toEssImage; CategoryTheory.Functor.essImage.ofIso",
+   "verdict": "Essential-image API supplies formal transport, not a constructible integral lattice."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*single|single.*integral|[Cc]onstructible.*[Ll]attice|[Ll]attice.*[Cc]onstructible",
+   "date": "2026-10-16",
+   "results": "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/Probability/Distributions/Binomial.lean; Mathlib/Probability/Distributions/Bernoulli.lean; Mathlib/Probability/Distributions/Poisson/Basic.lean",
+   "verdict": "Hits concern unrelated integrals and integral closures; no integral model result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralModel",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-model",
+   "place": "Proof: degree-zero lattices and triangulated closure, followed by bounded truncation dévissage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousConstructibleIntegralSingle",
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleIntegralSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousConstructible_integral_single_model",
+  "statement": "theorem continuousConstructible_integral_single_model (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X]\n    (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hF : ProEtale.IsConstructibleModuleObject\n      (condensedRingObj (Profinite.continuousMapRingObj E) X) F) :\n    ∃ M : integralConstructible ℓ E X,\n      Nonempty ((integralScalarExtension ℓ E X).obj M.obj ≅\n        (DerivedCategory.singleFunctor _ 0).obj F)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T003157-L-3926386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T003157-L-3926386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
