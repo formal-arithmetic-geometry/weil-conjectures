@@ -4,14 +4,14 @@
   "is": null,
   "from": {
    "node": "def-pur-normal-bundle",
-   "place": "Statement, the clause that a regular immersion has a vector-bundle normal cone: all ideal-power quotients, not only the degree-one conormal module, must be identified.",
+   "place": "Current split of def-pur-normal-bundle, step 4: “Under this identification $\\psi_z$ sends $T_j$ to $[f_j]_1$ and fixes constants. It is therefore exactly the map $\\theta$ of [lem-pur-regular-sequence-graded-polynomial], which is an isomorphism.” This supplies the all-degree stalk identification in the regular-immersion vector-bundle clause.",
    "via": []
   },
   "same_as": []
  },
  "kind": "statement",
  "title": "Associated graded of a regular-sequence ideal is polynomial",
- "statement": "Let $R$ be a commutative ring, let $c\\in\\mathbb N$, and let $f_1,\\ldots,f_c$ be an $R$-regular sequence [def-weil-pbc-regular-sequence]. Put $J=(f_1,\\ldots,f_c)$, $B=R/J$ [def-weil-pbc-algebra-hom-quotient], and give\n$$\\operatorname{gr}_J(R)=\\bigoplus_{n\\geq0}J^n/J^{n+1}$$\nthe graded $B$-algebra structure of [def-weil-pbc-associated-graded-ring]. Give $B[T_1,\\ldots,T_c]$ [def-weil-pbc-mv-polynomial-ring] its total-degree grading. The $B$-algebra homomorphism\n$$\\theta:B[T_1,\\ldots,T_c]\\longrightarrow\\operatorname{gr}_J(R),\\qquad T_j\\longmapsto[f_j]_1,$$\nwhich is the identity on $B$ in degree zero, is an isomorphism of graded algebras. In degree $n$ its formula is\n$$\\theta\\left(\\sum_{|\\alpha|=n}\\bar a_\\alpha T^\\alpha\\right)=\\left[\\sum_{|\\alpha|=n}a_\\alpha f_1^{\\alpha_1}\\cdots f_c^{\\alpha_c}\\right]_n.$$\nIn particular the degree-$n$ monomials in the $f_j$ form a $B$-basis of $J^n/J^{n+1}$ for every $n\\geq0$.",
+ "statement": "Let $R$ be a commutative ring, let $c\\in\\mathbb N$, and let $f_1,\\ldots,f_c$ be an $R$-regular sequence [def-weil-pbc-regular-sequence]. Put $J=(f_1,\\ldots,f_c)$, $B=R/J$ [def-weil-pbc-algebra-hom-quotient], and give\n$$\\operatorname{gr}_J(R)=\\bigoplus_{n\\geq0}J^n/J^{n+1}$$\nthe graded $B$-algebra structure of [def-weil-pbc-associated-graded-ring]. Give $B[T_1,\\ldots,T_c]$ [def-weil-pbc-mv-polynomial-ring] its total-degree grading. The $B$-algebra homomorphism\n$$\\theta:B[T_1,\\ldots,T_c]\\longrightarrow\\operatorname{gr}_J(R),\\qquad T_j\\longmapsto[f_j]_1,$$\nwhich is the identity on $B$ in degree zero, is an isomorphism of graded algebras. In degree $n$ its formula is\n$$\\theta\\left(\\sum_{|\\alpha|=n}\\bar a_\\alpha T^\\alpha\\right)=\\left[\\sum_{|\\alpha|=n}a_\\alpha f_1^{\\alpha_1}\\cdots f_c^{\\alpha_c}\\right]_n.$$\nIn particular the degree-$n$ monomials in the $f_j$ form a $B$-basis [def-weil-pbc-free-module] of $J^n/J^{n+1}$ for every $n\\geq0$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00LN (lemma-regular-quasi-regular), part (1), with Tag 061P (definition-quasi-regular-sequence) and Tag 061N (equation-quasi-regular): the canonical polynomial-to-associated-graded map is an isomorphism for a regular sequence."
@@ -20,76 +20,249 @@
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-algebra-hom-quotient",
   "def-weil-pbc-associated-graded-ring",
-  "def-weil-pbc-mv-polynomial-ring"
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $G_n=J^n/J^{n+1}$ and $G=\\bigoplus_{n\\geq0}G_n$ as in [def-weil-pbc-associated-graded-ring]. Apply [lem-weil-pbc-associated-graded-ring-structure](1)-(3), with $A=R$, to obtain its commutative $B$-algebra structure, its degree-zero inclusion, and $[x]_n[y]_m=[xy]_{n+m}$ for $x\\in J^n,y\\in J^m$. Clause (3) also gives the scalar formula $\\bar a[x]_n=[ax]_n$ for $a\\in R$, which will be used for the coefficients of $\\theta$ in Step 2. These are the ring, scalar and multiplication facts used below; in particular $[f_j]_1$ is an element of this algebra.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061N (equation-quasi-regular), construction of the target graded algebra; ring structure also appears in Tag 05GH (lemma-completion-Noetherian), proof."
+   }
+  },
+  {
+   "text": "The universal property in [def-weil-pbc-mv-polynomial-ring] gives the unique $B$-algebra map $\\theta$ taking $T_j$ to $[f_j]_1$. Multiplying these classes by the formula of Step 1 gives $\\theta(\\bar a T^\\alpha)=[a f^\\alpha]_{|\\alpha|}$, where $|\\alpha|=\\sum_j\\alpha_j$. Additivity gives the displayed degree-$n$ formula and shows that $\\theta$ preserves total degree. Changing a coefficient lift by an element of $J$ changes $a f^\\alpha$ by an element of $J^{|\\alpha|+1}$, so this formula is independent of all lifts.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061N (equation-quasi-regular), formula for the canonical map, specialized to $M=R$."
+   }
+  },
+  {
+   "text": "From the definition of ideal multiplication in [def-weil-pbc-algebra-hom-quotient], $J^n$ is spanned over $R$ by the monomials $f^\\alpha$ with $|\\alpha|=n$: for $n=0$ the monomial is $1$; in the successor step expand both factors in $J^{n+1}=J^nJ$ and distribute. Consequently every $x\\in J^{n+1}$ has an expression $x=\\sum_{|\\alpha|=n}b_\\alpha f^\\alpha$ with all $b_\\alpha\\in J$: split one generator off each degree-$(n+1)$ monomial and group by the remaining degree-$n$ monomial. All these sums are finite, including when $c=0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), first paragraph: expression for an element of $J^{n+1}$."
+   }
+  },
+  {
+   "text": "We prove by induction on the length $c$, simultaneously for every commutative ring and every regular sequence of that length, the coefficient assertion $Q(c)$: for every $n\\geq0$, if $\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha\\in J^{n+1}$ then every $a_\\alpha\\in J$. When $c=0$, $J=0$; for $n=0$ the only monomial is $1$ and the assumption is $a_0=0$, while for $n>0$ there are no degree-$n$ monomials and there is nothing to prove. In the following steps fix $c>0$ and assume $Q(c-1)$ in all degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), induction on $c$; empty-sequence base written out."
+   }
+  },
+  {
+   "text": "Put $g=(f_1,\\ldots,f_{c-1})$, $t=f_c$, and $K=(g)$. The prefix $g$ is regular by [def-weil-pbc-regular-sequence]: its successive multiplication maps are among those for $f$, and $K\\subseteq J\\ne R$ makes $R/K\\ne0$. The same definition says multiplication by $t$ on $R/K$ is injective. Hence $t^l a\\in K$ implies $a\\in K$ for every $l\\geq0$, by applying this injectivity $l$ times (with $l=0$ immediate). No permutation of the sequence is used.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), $J\\prime$ and cancellation of $f_c^l$ modulo $J\\prime$; regularity is Tag 00LF (definition-regular-sequence)."
+   }
+  },
+  {
+   "text": "Fix $n$ and a relation as in $Q(c)$. By Step 3 subtract a degree-$n$ expression with coefficients in $J$ for its value, reducing to $\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha=0$; after proving the assertion for these new coefficients, adding back coefficients in $J$ proves the original assertion. Regroup the zero relation as $\\sum_{e=0}^n(\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta)t^e=0$, where $\\beta$ runs through $(c-1)$-tuples. For $0\\leq l\\leq n$ let $P(l)$ assert that every coefficient in any such zero relation truncated to $0\\leq e\\leq l$ belongs to $J$. We prove $P(l)$ by induction on $l$; this inner induction is for the fixed length $c$ and fixed degree $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), reduction to a zero relation and setup of induction on $l$."
+   }
+  },
+  {
+   "text": "For $l=0$ the relation is $\\sum_{|\\beta|=n}a_{\\beta,0}g^\\beta=0\\in K^{n+1}$. Apply the outer induction hypothesis $Q(c-1)$ to the regular prefix from Step 5. It gives $a_{\\beta,0}\\in K\\subseteq J$, proving $P(0)$. This also handles $n=0$ at every length.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), inner induction, base $l=0$ made explicit."
+   }
+  },
+  {
+   "text": "Let $1\\leq l\\leq n$ and suppose $P(l-1)$. In a relation truncated at $l$, set $d=n-l$. For $e<l$, each $g^\\beta$ in its coefficient sum is a product of $n-e$ generators of $K$, so $g^\\beta\\in K^{n-e}$. Since $K^{n-e}$ is an ideal, arbitrary coefficients $a_{\\beta,e}\\in R$ and finite addition keep the sum in $K^{n-e}\\subseteq K^{d+1}$, using $n-e\\geq d+1$. Multiplication by $t^e$ also keeps it in $K^{d+1}$. The zero relation therefore gives the explicit equality $\\sum_{|\\beta|=d}(t^l a_{\\beta,l})g^\\beta=-\\sum_{e=0}^{l-1}\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta t^e\\in K^{d+1}$. The inclusion of powers follows from $K^{r+1}=K^rK\\subseteq K^r$, iterated. Apply $Q(c-1)$ in degree $d$, and then the cancellation of Step 5: $t^l a_{\\beta,l}\\in K$ implies $a_{\\beta,l}\\in K$. This argument applies also when $d=0$ and when the prefix is empty.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), top-exponent coefficient calculation using the outer induction."
+   }
+  },
+  {
+   "text": "Write $a_{\\beta,l}=\\sum_{j=1}^{c-1}d_{\\beta,j}g_j$. For each $(c-1)$-tuple $\\gamma$ of degree $d+1$ define $b_\\gamma=\\sum_{\\beta,j:\\,\\beta+\\varepsilon_j=\\gamma}d_{\\beta,j}$, where $\\varepsilon_j$ has entry $1$ in position $j$ and $0$ elsewhere. Distributing gives $\\sum_{|\\beta|=d}a_{\\beta,l}g^\\beta=\\sum_{|\\gamma|=d+1}b_\\gamma g^\\gamma$. Multiplication by $t^l$ gives $\\sum_{|\\beta|=d}a_{\\beta,l}g^\\beta t^l=\\sum_{|\\gamma|=d+1}(t b_\\gamma)g^\\gamma t^{l-1}$ because $l\\geq1$. Thus the same zero relation becomes $\\sum_{e=0}^{l-2}\\sum_{|\\beta|=n-e}a_{\\beta,e}g^\\beta t^e+\\sum_{|\\gamma|=d+1}(a_{\\gamma,l-1}+t b_\\gamma)g^\\gamma t^{l-1}=0$, where the first sum is empty for $l=1$. This is exactly a degree-$n$ relation of the form quantified in $P(l-1)$, with all lower coefficients unchanged. If $c=1$, membership in $K=0$ makes the top term zero and the displayed empty sums still give the same rewrite.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), rewriting coefficients in $J\\prime$; the coefficient family $b_\\gamma$ is explicit here."
+   }
+  },
+  {
+   "text": "The rewritten relation has last exponent $l-1$, so $P(l-1)$ puts $a_{\\gamma,l-1}+t b_\\gamma$ and all unchanged coefficients with $e\\leq l-2$ in $J$. Since $t b_\\gamma\\in J$, subtraction gives $a_{\\gamma,l-1}\\in J$; Step 8 already put all exponent-$l$ coefficients in $K\\subseteq J$. This proves $P(l)$. At $l=n$ it proves the zero-relation case; restore the subtracted coefficients of Step 6 to prove $Q(c)$. This completes both inductions.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular), proof (1), final displayed relation and conclusion of the two inductions."
+   }
+  },
+  {
+   "text": "For a homogeneous polynomial $F=\\sum_{|\\alpha|=n}\\bar a_\\alpha T^\\alpha$ in the kernel of $\\theta$, choose coefficient lifts $a_\\alpha\\in R$. Its value formula in Step 2 says $\\sum a_\\alpha f^\\alpha\\in J^{n+1}$. The proved assertion $Q(c)$ makes all $a_\\alpha\\in J$, so all $\\bar a_\\alpha=0$ in $B$, and therefore $F=0$ by the coefficient description of [def-weil-pbc-mv-polynomial-ring]. Thus every degree map is injective. For any class $[x]_n$, Step 3 writes $x=\\sum_{|\\alpha|=n}a_\\alpha f^\\alpha$; the corresponding polynomial with reduced coefficients maps to $[x]_n$, proving surjectivity in every degree.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LN (lemma-regular-quasi-regular) (1), 061P (definition-quasi-regular-sequence), and 061N (equation-quasi-regular), degreewise bijectivity."
+   }
+  },
+  {
+   "text": "Every polynomial is a finite sum of its homogeneous components, by grouping its finitely many monomials by $|\\alpha|$, and every element of $G$ is a finite sum of its degree components by [def-weil-pbc-associated-graded-ring]. Since $\\theta$ preserves degrees, a polynomial in its kernel has each homogeneous component in the degreewise kernel, hence each is zero by Step 11. Conversely lift each of the finitely many components of an element of $G$ by Step 11 and sum them. This proves bijectivity of $\\theta$. Its inverse respects degree by the same component argument; it respects addition, multiplication, units and $B$-scalars by applying $\\theta$ to each required identity and using injectivity. Hence $\\theta$ is an isomorphism of graded $B$-algebras.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00LN (lemma-regular-quasi-regular) (1) and 061N (equation-quasi-regular), passage from the degreewise isomorphisms to the graded algebra."
+   }
+  },
+  {
+   "text": "The degree-$n$ monomials $T^\\alpha$ are a $B$-basis of the homogeneous degree-$n$ polynomials: finite existence and uniqueness of their coefficients are part of [def-weil-pbc-mv-polynomial-ring]. Under the bijection of Step 11 they become $[f^\\alpha]_n$. Thus every element of $J^n/J^{n+1}$ has a unique finite expansion in these classes, which is precisely the basis criterion of [def-weil-pbc-free-module]. For $n=0$ this is the singleton basis $1$ of $B$; if $c=0$ and $n>0$, it is the empty basis of the zero module.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 061N (equation-quasi-regular) and 00LN (lemma-regular-quasi-regular) (1), monomial-basis reading in each degree."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00LN (lemma-regular-quasi-regular), proof of (1), with Tags 061N (equation-quasi-regular) and 061P (definition-quasi-regular-sequence); both induction bases and the coefficient-rewriting formula are written out."
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebra of an ideal generated by a regular sequence is a polynomial algebra over the quotient ring",
+   "results": "8 hits: Ideal.span_pow_eq_map_homogeneousSubmodule, adjoin_monomial_eq_reesAlgebra, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, RingTheory.Sequence.isWeaklyRegular_iff_Fin, Ideal.span_eq_map_homogeneousSubmodule, reesAlgebra, RingTheory.Sequence.isWeaklyRegular_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
+  },
   {
    "tool": "grep",
    "query": "quasi.?regular|associated.?graded|normal.?cone|conormal",
-   "results": "3 hits: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean; source directory Mathlib/RingTheory",
+   "results": "1 hits: Mathlib/RingTheory/Regular/RegularSequence.lean; source directory Mathlib/RingTheory/Regular",
    "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
   },
   {
-   "tool": "leanfinder",
-   "query": "For a regular sequence f1 to fc generating I in a commutative ring R, the associated graded ring direct sum I powers modulo next powers is the polynomial algebra over R modulo I",
-   "results": "8 hits: Ideal.span_pow_eq_map_homogeneousSubmodule, reesAlgebra, adjoin_monomial_eq_reesAlgebra, Ideal.mem_span_pow_iff_exists_isHomogeneous, HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, Ideal.span_eq_map_homogeneousSubmodule, HomogeneousIdeal.irrelevant_eq_span, Ideal.powQuotPowSuccEquivMapMkPowSuccPow",
+   "tool": "leansearch",
+   "query": "The associated graded ring of an ideal generated by a regular sequence is polynomial over the quotient ring",
+   "results": "service unavailable: service unavailable: Internal Server Error",
    "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
+   "verdict": "unavailable"
   },
   {
    "tool": "loogle",
    "query": "RingTheory.Sequence.IsRegular, MvPolynomial",
-   "results": "loogle: Loogle is currently under load, please try again later.",
+   "results": "0 hits: ",
    "date": "2026-10-16",
-   "verdict": "unavailable"
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
   },
   {
    "tool": "grep",
    "query": "IsRegular|IsWeaklyRegular|quasi.?regular",
    "results": "15 hits: Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean; source directory Mathlib/RingTheory/Regular",
    "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Regular sequence gives an isomorphism from a polynomial algebra over R modulo I to the associated graded ring of I",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
   },
   {
    "tool": "leanfinder",
-   "query": "A regular sequence is quasi regular: monomials in generators give a basis of each successive ideal power quotient over the quotient ring",
-   "results": "8 hits: RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.isRegular_iff, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.isWeaklyRegular_cons_iff', RingTheory.Sequence.IsWeaklyRegular.cons'",
+   "query": "A regular sequence is quasi regular: every homogeneous polynomial relation among generators has coefficients in their ideal",
+   "results": "8 hits: RingTheory.Sequence.isRegular_iff, RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.IsRegular.toIsWeaklyRegular, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.isWeaklyRegular_cons_iff', RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.IsWeaklyRegular.cons'",
    "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsRegular\"",
-   "results": "12 hits: Lean.ReducibilityHints.isRegular, Lean.PrettyPrinter.Delaborator.ParamKind.isRegularExplicit, IsRegular, IsRegular.left, IsRegular.right, IsRegular.mk, isRegular_iff, IsRegular.all",
-   "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
   },
   {
    "tool": "loogle",
    "query": "RingTheory.Sequence.IsRegular",
    "results": "12 hits: RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.nil, RingTheory.Sequence.IsRegular.nontrivial, RingTheory.Sequence.IsRegular.toIsWeaklyRegular, RingTheory.Sequence.eq_nil_of_isRegular_on_artinian, IsLocalRing.isRegular_of_perm, LinearEquiv.isRegular_congr, RingTheory.Sequence.IsRegular.of_isWeaklyRegular_of_mem_maximalIdeal",
    "date": "2026-10-16",
-   "verdict": "no match: regular-sequence definitions, Rees algebra, polynomial images of ideal powers and an individual ideal-power quotient equivalence do not assert injectivity or the polynomial description of the associated graded; RegularSequence.lean:21 lists quasi-regular sequences as TODO"
+   "verdict": "no match: ideal-power generation and regular-sequence definitions do not prove the coefficient independence for the associated graded; quasi-regular sequences are TODO in RegularSequence.lean:21"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-pur-normal-bundle",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-regular-sequence-graded-polynomial",
+  "worker": "stage1",
+  "summary": "Read Stacks 00LN (1), 061N and 061P; wrote the double coefficient induction with both bases, all-degree outer claim, prefix nonzerodivisor cancellation, explicit rewriting coefficients and degreewise assembly. No new nodes: every coefficient calculation is written as an elementary step from definitions and earlier induction hypotheses. Reused the existing associated-graded structure theorem and polynomial universal property. Added only the missing basis-definition citation to the statement. Mathlib searches were run with msearch.py; no exact project declaration found. Repair after the merge-lock return: rebased the sandbox record on the current shared item, re-read all six current dependency statements and the parent route, made the scalar-action use in Step 1 and exponent-lowering equality in Step 9 explicit, and aligned blueprint.from.place to the current parent step 4. Fresh repair of the repeated merge-lock return: rechecked all six current cited statements, retained current base metadata, and displayed the exact isolated top-term equality in Step 8 and the entire rewritten zero relation in Step 9, including the l=1 empty sum. These make the domains of the two induction applications explicit.",
+  "blueprint": "Realizes the regular-immersion vector-bundle clause of def-pur-normal-bundle, current step 4: its stalk map psi_z fixes constants and sends T_j to [f_j]_1, exactly the theta whose all-degree bijectivity is proved here. Current step 3 separately handles degree-one conormal freeness; it is not used as an all-degree theorem. The unit sk-def-purity-conv has no proof steps; no unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "The general ideal-power direct-sum ring structure and homogeneous multiplication formula, independent of purity, are needed to construct the polynomial map. No node of this unit states those ring axioms; the regular-sequence argument itself follows 00LN directly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-c29432360",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-c29432360 (reviewer sub-agent of L); spot-checked: Read the full item, report, six cited statements and source passages. All 13 steps follow Stacks 00LN(1); both inductions, canonical map and edge cases check out. No duplicates, missing dependencies or cycles found. Accepted the associated-graded structure theorem as a generic tool use. No repairs needed; detailed review written to review.md."
+ }
 }
