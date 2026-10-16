@@ -26,9 +26,89 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For all mapping-space tests below, work in a universe containing the mapping spaces of $\\mathcal C,\\mathcal E,\\mathcal B$ (for example $\\mathcal U\\prime$, with a further containing universe). Apply [lem-coef-infinity-yoneda-presheaf-limits] with that universe as its small universe. The indexing category $\\Delta$ remains $\\mathcal U$-small; this changes no colimit-existence hypothesis on the given categories. First $H$ preserves every small geometric realization. Given $P:\\Delta^{\\mathrm{op}}\\to\\mathcal C$ with realization $c$, let $z$ be a realization of $HP$ in $\\mathcal E$. The cocone $HP\\to Hc$ induces $h:z\\to Hc$. The functors $V$ and $U$ preserve these realizations. Under the given coherent equivalence $VH\\simeq U$, both $Vz$ and $VHc\\simeq Uc$, with their displayed cocones, are colimits of the same diagram $UP$. Consequently $Vh$ is an equivalence: its map on every mapping space out of these colimits identifies with the identity of the limit of mapping spaces, by the colimit criterion in [lem-coef-infinity-yoneda-presheaf-limits]. The componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus] allows the coherent equivalence $VHP\\simeq UP$ to identify these diagrams. Conservativity of $V$ makes $h$ an equivalence. Hence the cocone with apex $Hc$ is colimiting. This argument only uses realizations indexed by the small category $\\Delta^{\\mathrm{op}}$; it requires no arbitrary colimits in $\\mathcal B$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Agent argument with the colimit comparison used at the end of the proof of Corollary 4.7.3.16, printed p.690; universal mapping-space criteria supplied by the cited DAG nodes."
+   }
+  },
+  {
+   "text": "For each $b$, conservativity of $V$ and the hypothesis on $V(\\alpha_b)$ imply that $\\alpha_b:Gb\\to HFb$ is an equivalence in $\\mathcal E$. Fix $c\\in\\mathcal C$. Consider the composite\n$$\\operatorname{Map}_{\\mathcal C}(Fb,c)\\xrightarrow{H}\\operatorname{Map}_{\\mathcal E}(HFb,Hc)\\xrightarrow{\\alpha_b^*}\\operatorname{Map}_{\\mathcal E}(Gb,Hc)\\simeq\\operatorname{Map}_{\\mathcal B}(b,VHc)\\simeq\\operatorname{Map}_{\\mathcal B}(b,Uc).$$\nUnder the adjunction $G\\dashv V$, a map $Hf\\circ\\alpha_b$ corresponds to $VHf\\circ V\\alpha_b\\circ\\eta^G_b$. By the defining adjunct formula for $\\alpha_b$ and naturality of $VH\\simeq U$, this is $Uf\\circ e_b$. Thus the composite is the given equivalence of mapping spaces for $F\\dashv U$, with its coherent naturality. Since precomposition by $\\alpha_b$ is invertible (precompose by its inverse), the actual map induced by $H$, $\\operatorname{Map}_{\\mathcal C}(Fb,c)\\to\\operatorname{Map}_{\\mathcal E}(HFb,Hc)$, is an equivalence. This is a calculation with the specified adjunction equivalences, not merely a bijection of homotopy classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 4.7.3.17 and the free-object comparison in the proof of Corollary 4.7.3.16, printed p.690; the displayed adjunct calculation is written here."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-adjunction-free-simplicial-resolution] to $F\\dashv U$ and to $G\\dashv V$. Each adjunction is coherent by hypothesis; $U,V$ reflect equivalences, their source categories admit all small geometric realizations, and they preserve them. Therefore every $c\\in\\mathcal C$ has a colimiting coherent resolution $P_\\bullet\\to c$ with each $P_n\\simeq Fb_n$, and every $a\\in\\mathcal E$ has a colimiting coherent resolution $Q_\\bullet\\to a$ with each $Q_n\\simeq Gd_n$. The source objects $b_n,d_n\\in\\mathcal B$ are chosen degree by degree; we will use the coherent diagrams $P_\\bullet,Q_\\bullet$ themselves and do not assert that their arrows descend to arrows between these chosen base objects.",
+   "uses": [
+    "lem-coef-adjunction-free-simplicial-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.7.3.14, printed p.689; the hypotheses here are stronger than its split-realization hypotheses."
+   }
+  },
+  {
+   "text": "The functor $H$ is fully faithful. Fix $c,d\\in\\mathcal C$ and use its resolution $P_\\bullet\\to c$ from step 3. The mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] and step 1 identify the actual $H$-induced map with\n$$\\operatorname{Map}_{\\mathcal C}(c,d)\\simeq\\lim_{[n]\\in\\Delta}\\operatorname{Map}_{\\mathcal C}(P_n,d)\\longrightarrow\\lim_{[n]\\in\\Delta}\\operatorname{Map}_{\\mathcal E}(HP_n,Hd)\\simeq\\operatorname{Map}_{\\mathcal E}(Hc,Hd).$$\nThe middle arrow is induced by the coherent transformation of cosimplicial mapping-space diagrams obtained by applying the functor $H$; its naturality holds for all arrows of $P_\\bullet$. Each component is an equivalence by step 2, after conjugating by $P_n\\simeq Fb_n$ and its image under $H$. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] makes it an equivalence of the entire diagrams. Applying its coherent inverse gives an inverse on limits by the limiting universal property. All limits here are small limits of spaces, which exist by [lem-coef-infinity-yoneda-presheaf-limits]. If needed, take a larger ambient universe of spaces containing the specified mapping spaces; only the original small $\\Delta$ is used as index, so no larger colimit in $\\mathcal C$, $\\mathcal E$, or $\\mathcal B$ is required.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Agent mapping-space argument using the free resolutions of Proposition 4.7.3.14 (printed p.689); compare the Yoneda and cosimplicial mapping-space argument of Corollary 4.7.3.16, printed p.690."
+   }
+  },
+  {
+   "text": "Let $\\mathcal E_0\\subseteq\\mathcal E$ be the full replete essential image of $H$. By step 4 and [lem-coef-infinity-full-essential-image], the restricted functor $H_0:\\mathcal C\\to\\mathcal E_0$ has a coherent inverse $K$ and a coherent equivalence $H_0K\\simeq1_{\\mathcal E_0}$. Fix $a\\in\\mathcal E$ and its coherent resolution $Q_\\bullet\\to a$ from step 3. Every $Q_n\\simeq Gd_n\\simeq HFd_n$ lies in $\\mathcal E_0$ by step 2. As a full subcategory contains every simplex whose vertices it contains, by [def-cbc-enhanced-diagrams-cones], the entire simplicial diagram $Q_\\bullet$ factors through $\\mathcal E_0$. Composing that factorization with $K$ gives a coherent simplicial diagram $P'_\\bullet$ in $\\mathcal C$. Restrict the coherent equivalence $H_0K\\simeq1$ along this factorization: this supplies $HP'_\\bullet\\simeq Q_\\bullet$ as coherent diagrams, including every face, degeneracy, and higher compatibility. This is not a choice of unrelated objectwise lifts.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Agent lifting argument via the full essential image; Higher Algebra proof of Corollary 4.7.3.16, printed p.690, likewise lifts a whole simplicial diagram through a fully faithful Yoneda image. Essential-image inverse: Kerodon Theorem 4.8.4.1 (01JX)."
+   }
+  },
+  {
+   "text": "Let $c'=|P'_\\bullet|$, which exists by the assumed geometric realizations in $\\mathcal C$. Step 1 identifies $Hc'$ with $|HP'_\\bullet|$. The coherent diagram equivalence of step 5 and the colimit mapping-space criterion in [lem-coef-infinity-yoneda-presheaf-limits] identify this with $|Q_\\bullet|\\simeq a$: for each testing object the induced limits of mapping spaces are equivalent, by applying the coherent inverse of the diagram equivalence. Thus every object of $\\mathcal E$ lies in $\\mathcal E_0$. A full subcategory on all vertices is the entire category, by [def-cbc-enhanced-diagrams-cones]. Applying [lem-coef-infinity-full-essential-image] to the fully faithful $H$ now gives a coherent quasi-inverse on $\\mathcal E$ itself. Therefore $H$ is an equivalence, as required.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Agent completion of the free-resolution argument for Corollary 4.7.3.16, printed pp.689-690; no SGA route or geometric purity input is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-adjunction-free-simplicial-resolution",
+  "lem-coef-infinity-full-essential-image",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Adaptation of Higher Algebra (2017), Proposition 4.7.3.14, Corollary 4.7.3.16 and Remark 4.7.3.17, printed pp.689-690: prove preservation and full faithfulness directly, then lift a free resolution through the full essential image. The cited external sources are not archived in literature/; see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +172,45 @@
    "results": "{\"t\": \"2026-10-16T15:24:00Z\", \"tool\": \"grep\", \"query\": \"monadic|algebra.*comparison\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: Monad/Adjunction.lean:253-277 defines ordinary MonadicRightAdjoint, and Monad/Monadicity.lean:14-36 gives ordinary Beck coequalizer criteria. These do not assert a quasicategorical geometric-realization criterion. The quasicategory grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of infinity categories over a base conservative right adjoints preserving geometric realizations equivalence on free objects",
+   "results": "{\"t\": \"2026-10-16T16:15:51Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of infinity categories over a base conservative right adjoints preserving geometric realizations equivalence on free objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"SSet.Truncated.skAdj.coreflective\"], \"digest\": \"f3c5d0c1d5915543\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerve and realization adjunctions, ordinary monad comparison equivalences and ordinary Beck results do not state the coherent infinity-category comparison criterion. Read Monad/Adjunction.lean:253-282 and the ordinary-category Mathlib interfaces; no arbitrary-quasicategory theorem is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monadic\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-16T16:15:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monadic\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.instIsEquivalenceAlgebraToMonadMonadicAdjunctionComparison\", \"CategoryTheory.instIsEquivalenceCoalgebraToComonadComonadicAdjunctionComparison\"], \"digest\": \"8cee501f53c07d92\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerve and realization adjunctions, ordinary monad comparison equivalences and ordinary Beck results do not state the coherent infinity-category comparison criterion. Read Monad/Adjunction.lean:253-282 and the ordinary-category Mathlib interfaces; no arbitrary-quasicategory theorem is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "monadic|Barr|Beck|barResolution",
+   "results": "{\"t\": \"2026-10-16T16:17:04Z\", \"tool\": \"grep\", \"query\": \"monadic|Barr|Beck|barResolution\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"c1e27a1ab4215419\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerve and realization adjunctions, ordinary monad comparison equivalences and ordinary Beck results do not state the coherent infinity-category comparison criterion. Read Monad/Adjunction.lean:253-282 and the ordinary-category Mathlib interfaces; no arbitrary-quasicategory theorem is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical comparison theorem conservative forgetful functors geometric realizations free objects",
+   "results": "{\"t\": \"2026-10-16T16:17:05Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical comparison theorem conservative forgetful functors geometric realizations free objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quiv.adj\", \"CategoryTheory.Grpd.instReflectiveCatForgetToCat\", \"TopCat.forget_preservesLimits\", \"TopCat.forget_preservesColimits\", \"CategoryTheory.Grpd.freeForgetAdjunction\", \"TopCat.forget_preservesLimitsOfSize\", \"CategoryTheory.Types.instReflectsColimitsOfSizeForgetType\", \"TopCat.forget_preservesColimitsOfSize\"], \"digest\": \"5cf3c5327df6600d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerve and realization adjunctions, ordinary monad comparison equivalences and ordinary Beck results do not state the coherent infinity-category comparison criterion. Read Monad/Adjunction.lean:253-282 and the ordinary-category Mathlib interfaces; no arbitrary-quasicategory theorem is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barr Beck monadicity for quasicategories comparison functor agrees on free objects",
+   "results": "{\"t\": \"2026-10-16T16:17:10Z\", \"tool\": \"leanfinder\", \"query\": \"Barr Beck monadicity for quasicategories comparison functor agrees on free objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.left_comparison\", \"CategoryTheory.Monad.free_obj_A\", \"CategoryTheory.Cat.freeMap_obj\", \"CategoryTheory.Monad.free_map_f\", \"CategoryTheory.Cat.FreeRefl.lift_obj\", \"CategoryTheory.Monad.free_obj_a\", \"CategoryTheory.Cat.free_map\", \"CategoryTheory.Cat.FreeRefl.lift_spec\"], \"digest\": \"0a9a7f0d249750be\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerve and realization adjunctions, ordinary monad comparison equivalences and ordinary Beck results do not state the coherent infinity-category comparison criterion. Read Monad/Adjunction.lean:253-282 and the ordinary-category Mathlib interfaces; no arbitrary-quasicategory theorem is supplied."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-enriched-rectification",
@@ -103,5 +218,29 @@
   "group": "Q43"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-monadic-comparison",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and all hypotheses. Checked Higher Algebra 4.7.3.14, 4.7.3.16 and 4.7.3.17 and Kerodon 4.8.4.1 online, the current blueprint paragraph, all cited node statements, and project/Mathlib search candidates. Added two smaller statement-only foundations: a single-adjunction free simplicial resolution and equivalence onto the full essential image. The six-step proof explicitly proves H preserves realizations, computes its actual mapping-space map on free sources, derives full faithfulness by resolutions, and lifts an entire coherent resolution to prove essential surjectivity. No project attachment and no full Mathlib match were found.",
+  "blueprint": "Realizes the coherent middle finite-level mapping-complex adjunction in paragraph 2 of main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md via the existing chain of enhanced-localization and graph-comparison nodes; it does not replace any geometric or coefficient-category step of the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Uses componentwise detection of equivalences of coherent mapping-space diagrams; this generic infinity-category calculus is not a geometric route of the compact-support unit and no node of the assigned unit supplies this componentwise criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read the full mathematics and the sources at the cited places. Higher Algebra was fetched read-only and converted with pdftotext under /tmp: Thm 4.7.3.5(c) p.688, Prop 4.7.3.14 p.689, Cor 4.7.3.16 and Rem 4.7.3.17 pp.689-690. Kerodon Thm 4.8.4.1 (tag 01JX) was read online. The item statement is byte-equal to the base copy and is HA 4.7.3.16/17 with HA's U,G,G',F,F' = H,U,V,F,G and stronger realization hypotheses; alpha's direction and the V(alpha_b) hypothesis match Rem 4.7.3.17, and the parent lem-coef-fixed-object-enriched-rectification applies it with exactly these data. The six steps are a valid agent route checked against the full statements of lem-coef-infinity-yoneda-presheaf-limits, lem-cbc-enhanced-functor-cone-calculus and def-cbc-enhanced-diagrams-cones (whose full-subcategory clause gives step 5's factorization): (1) H preserves realizations via conservativity of V; (2) the adjunct calculation makes H invertible on Map(Fb,c); (3) free resolutions for F-U and G-V; (4) full faithfulness through the cosimplicial limit and the componentwise criterion; (5) a coherent lift of Q through E_0 by K; (6) |P'| realizes a, so H has a quasi-inverse on E. New node lem-coef-adjunction-free-simplicial-resolution is true (HA 4.7.3.14 with stronger hypotheses; checked on the empty and identity cases and on the bar construction). New node lem-coef-infinity-full-essential-image is true (Kerodon 4.8.4.1 applied to the codomain restriction; checked on the empty and proper-inclusion cases). Neither is a clause of the item. An rg search found no duplicate: the only infinity-categorical fully-faithful and essentially-surjective hits are about enriched categories, and the 01JX hits are Stacks tags. Search records, the proof_deps union, TeX and blueprint.from are in order. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus as a generic componentwise criterion. No SGA citation. Not a target node. No fixes."
+ }
 }
