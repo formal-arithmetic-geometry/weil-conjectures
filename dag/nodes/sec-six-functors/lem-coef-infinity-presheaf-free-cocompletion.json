@@ -28,9 +28,149 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First control size and colimits. For $F,G\\in\\mathcal P(D)$ choose $\\mathcal U$-small right fibrations $q_F:E_F\\to D$ and $q_G:E_G\\to D$ classifying them. Transport classification identifies $\\operatorname{Map}_{\\mathcal P(D)}(F,G)$ with the Kan complex of simplicial maps $E_F\\times\\Delta^n\\to E_G$ over $D$. Each degree of this complex is $\\mathcal U$-small since both total spaces are small, so the mapping space has a small model. Small colimits exist in $\\mathcal S$ by [lem-coef-spaces-small-colimits-universe]. To obtain existence in $\\mathcal P(D)$ explicitly, fix a small simplicial set $K$. A colimit cocone on $p:K\\to\\mathcal S$ is a universal arrow $p\\to\\Delta_K L$ by [lem-cbc-enhanced-functor-cone-calculus]. Apply the opposite universal-arrow assertion of [lem-coef-parametric-universal-arrows] to $\\Delta_K:\\mathcal S\\to\\operatorname{Fun}(K,\\mathcal S)$: it assembles these arrows to a coherent left adjoint $\\operatorname{colim}_K$, and supplies its adjunction also for coherent $D^{\\mathrm{op}}$-diagrams. Currying by the simplicial identity $D^{\\mathrm{op}}\\times K\\cong K\\times D^{\\mathrm{op}}$ turns the latter mapping-space adjunction into $\\operatorname{colim}_K\\dashv\\Delta_K$ for $\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$. Its unit cocone is thus the required colimit, evaluated objectwise. This constructs every small colimit in $\\mathcal P(D)$; the objectwise characterization of [lem-coef-infinity-yoneda-presheaf-limits] identifies and detects its cocone. For later use put $\\widehat{\\mathcal P}(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S_{\\mathcal U'})$ and let $\\iota:\\mathcal P(D)\\to\\widehat{\\mathcal P}(D)$ be universe inclusion. Its values preserve small colimit cocones by the new space lemma, so objectwise detection shows that $\\iota$ preserves all $\\mathcal U$-small colimits. The same right-fibration size argument in $\\mathcal U'$ shows that $\\widehat{\\mathcal P}(D)$ has $\\mathcal U'$-small mapping spaces. Form $\\widehat{\\mathcal P}(D)$ in one further auxiliary universe; this changes no hypothesis on $D$ or on the target $\\mathcal V$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 5.1.2.3-4; Corollary 4.2.4.8; right-fibration classification of Section 3.3.2"
+   }
+  },
+  {
+   "text": "Record the sections calculation explicitly, rather than introducing another lemma. Let $B$ be a small quasicategory and let a right fibration $Z\\to B$ classify $H:B^{\\mathrm{op}}\\to\\mathcal S$ (the same calculation works in $\\mathcal U'$). The constant terminal-space functor is classified by $B\\to B$. Thus transport classification identifies the space of sections $\\operatorname{Fun}_{/B}(B,Z)$ with $\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\mathcal S)}(\\Delta *,H)$. The latter is $\\operatorname{Map}_{\\mathcal S}(*,\\lim H)$ by the mapping-space universal property of the limit; limits of spaces exist by [lem-coef-infinity-yoneda-presheaf-limits]. Finally $\\operatorname{Map}_{\\mathcal S}(*,L)\\simeq L$, since a simplex of the simplicial mapping complex from a point to a Kan complex $L$ is just a simplex of $L$; [lem-coef-coherent-nerve-comparison] identifies that enriched mapping complex with the mapping space of the coherent nerve presenting spaces. Hence sections are $\\lim H$. These are the displayed classification and cone equivalences, so they are natural in $H$ and in pullbacks on $B$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.3.4 and its opposite; here derived from the cited classification and cone statements"
+   }
+  },
+  {
+   "text": "For $F,G\\in\\mathcal P(D)$ a map $E_F\\to E_G$ over $D$ is precisely a section of $E_F\\times_D E_G\\to E_F$, in every simplicial degree. Pullback compatibility of transport says that this right fibration classifies $G\\circ q_F^{\\mathrm{op}}$. Apply step 2 to obtain the canonical equivalence\n$$\\operatorname{Map}_{\\mathcal P(D)}(F,G)\\simeq\\lim_{e\\in E_F^{\\mathrm{op}}}G(q_F(e)).$$\nFor a larger-valued presheaf $Q$, choose its right-fibration representative $E_Q\\to D$ in $\\mathcal U'$. By the right-fibration compatibility clause of [lem-coef-spaces-small-colimits-universe], the unchanged small right fibration $E_F\\to D$, regarded in $\\mathcal U'$, classifies $\\iota F$. Classification in $\\mathcal U'$ identifies the mapping space from $\\iota F$ to $Q$ with maps $E_F\\to E_Q$ over $D$. In each simplicial degree these are sections of $E_F\\times_D E_Q\\to E_F$; pullback classification gives its presheaf $Q\\circ q_F^{\\mathrm{op}}$, so step 2 identifies that section space with its limit. This gives\n$$\\operatorname{Map}_{\\widehat{\\mathcal P}(D)}(\\iota F,Q)\\simeq\\lim_{e\\in E_F^{\\mathrm{op}}}Q(q_F(e))$$\nfor every $\\mathcal U'$-space-valued presheaf $Q$. The displayed equivalences use the actual map-over-$D$ comparison and pullback, so they commute with precomposition in $F$ and postcomposition in $G$ or $Q$, including higher simplices.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 3.3.2-3.3.3; maps of right fibrations as sections of a pullback"
+   }
+  },
+  {
+   "text": "Derive the canonical density cocone, not merely an unspecified presentation of $F$. By [lem-coef-infinity-yoneda-evaluation], the right fibration $D\\times_{\\mathcal P(D)}\\mathcal P(D)_{/F}\\to D$ is classified by $d\\mapsto\\operatorname{Map}(j(d),F)\\simeq F(d)$; the target-fixed slice classifier is supplied by [lem-coef-space-transport-classification]. Consequently it is equivalent over $D$ to $E_F$. Its canonical arrows to $F$ give a coherent cocone $j q_F\\to\\Delta F$. For any test presheaf $G$, evaluation identifies $\\operatorname{Map}(j(q_F(e)),G)$ with $G(q_F(e))$, and step 3 identifies the limit of these spaces with $\\operatorname{Map}(F,G)$. These are the maps induced by that cocone: a transformation $\\eta:F\\to G$ sends an element $e=(d,x)$ to $\\eta_d(x)$, which is evaluation at the identity of the composite $j(d)\\xrightarrow{x}F\\xrightarrow{\\eta}G$. Thus the sections comparison of step 3 and the cocone comparison agree, including their higher simplices by the natural evaluation and transport equivalences. The colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] now shows that this cocone is colimiting. Evaluation at $G=j(d')$ also proves that $j$ is fully faithful. Let $A$ be its full essential image. By [lem-coef-infinity-full-essential-image], $j:D\\to A$ has a coherent quasi-inverse. Write $k:A\\to D$ for that quasi-inverse and $\\epsilon:jk\\simeq\\operatorname{id}_A$ for its counit. The functor from $A_{/F}$ to the pullback slice over $D$ sends $(a,u:a\\to F)$ to $(k(a),u\\epsilon_a:jk(a)\\to F)$; in the other direction use $(d,x)\\mapsto(j(d),x)$. The unit and counit, whiskered with these arrows, give the two inverse natural equivalences, on all simplices. Combining with the slice classifier identifies $A_{/F}$ with $E_F$, so $A_{/F}$ is essentially $\\mathcal U$-small and its canonical cocone in $\\mathcal P(D)$ is colimiting. Here equivalences of right-fibration classifiers give maps with inverse homotopies over $D$; these supply equivalences of their total categories. Reindexing a cone by a functor equivalence preserves its universal property, since restriction along the equivalence and its quasi-inverse are inverse on coherent cone spaces.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3 (canonical density), Lemma 5.1.5.2 and Proposition 5.1.3.1"
+   }
+  },
+  {
+   "text": "Fix $f:D\\to\\mathcal V$. Compose with a quasi-inverse of $D\\simeq A$ to get $f_A:A\\to\\mathcal V$. For every $F$, write $a_F:A_{/F}\\to A$ for the projection. The diagram $f_Aa_F$ admits a colimit: reindex it by its small model $E_F$ from step 4, and use the assumed small cocompleteness of $\\mathcal V$. Explicitly, choose an equivalence $r:E_F\\to A_{/F}$ and a quasi-inverse $t$. A colimit cocone for $f_Aa_Fr$ gives a cocone for $f_Aa_F$ by precomposition with $t$ and the equivalence $rt\\simeq1$; restrictions along $r,t$ identify the two cocone spaces and their universal arrows. The opposite of the fixed-boundary assertion of [lem-coef-infinity-join-cone-calculus] then gives a join cocone restricting exactly to $f_Aa_F$ on $A_{/F}$. These are the actual local lifts required below, not just choices of colimit apices. Apply [lem-coef-infinity-relative-kan-existence] to $A\\subseteq\\mathcal P(D)$ and $p:\\mathcal V\\to *$. This is an isofibration: inner horns lift since $\\mathcal V$ is a quasicategory and the identity edge lifts the unique equivalence of $*$. For this $p$, local $p$-colimit cocones are ordinary colimit cocones. To check the last assertion with the precise conventions of the cited lemma, apply the opposite of the join-cone mapping formula of [lem-coef-infinity-join-cone-calculus]: a map between two cocones is a boundary transformation, an apex map, and the path relating them. For a colimiting first cocone with apex $x$ and a test cocone with apex $y$, the universal-arrow map $\\operatorname{Map}(x,y)\\to\\operatorname{Map}(f_Aa_F,\\Delta y)$ is an equivalence. The mapping formula expresses the space of maps between these join cocones as its homotopy pullback along the map sending a boundary transformation $b$ to the composite of $b$ with the test cocone. Projection from this homotopy pullback to the space of boundary transformations is therefore an equivalence. This is exactly the homotopy-pullback square defining a $p$-colimit for $p$ to a point. The existence lemma therefore gives $H:\\mathcal P(D)\\to\\mathcal V$, with $H|_A=f_A$ and with all these local cocones colimiting. In particular $Hj\\simeq f$ and\n$$H(F)\\simeq\\operatorname{colim}_{e\\in E_F}f(q_F(e)).$$\nThis is a coherent functor furnished by relative Kan existence; no functor is chosen from unrelated objectwise colimit choices.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-full-essential-image",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.5(2), via Lemma 4.3.2.13; join/ordinary cocone comparison of Section 4.2"
+   }
+  },
+  {
+   "text": "For $v\\in\\mathcal V$, form $Q_v:D^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal U'}$, $Q_v(d)=\\operatorname{Map}_{\\mathcal V}(f(d),v)$. The coherent mapping bifunctor and precomposition action are supplied by [lem-coef-space-transport-classification] with $\\mathcal U'$ as the mapping-space universe. This is legitimate because $\\mathcal V$ lies in $\\mathcal U'$; its mapping spaces need not be $\\mathcal U$-small. The colimit cocone from step 5 and the colimit mapping-space criterion give\n$$\\operatorname{Map}_{\\mathcal V}(H(F),v)\\simeq\\lim_{e\\in E_F^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal V}(f(q_F(e)),v)\\simeq\\operatorname{Map}_{\\widehat{\\mathcal P}(D)}(\\iota F,Q_v),$$\nwhere the second equivalence is step 3. More precisely this map takes $a:H(F)\\to v$ to the transformation whose component at a point $x\\in F(d)$ is $f(d)\\xrightarrow{\\sim}Hj(d)\\xrightarrow{H(x)}H(F)\\xrightarrow{a}v$, using Yoneda evaluation to regard $x$ as $j(d)\\to F$. The coherent evaluation equivalence, $H$, and composition make this a natural transformation of the two mapping bifunctors. The preceding pointwise calculation proves that its components are equivalences, hence it is a coherent natural equivalence by [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.5(1): mapping-space calculation for the colimit preservation direction"
+   }
+  },
+  {
+   "text": "Prove that $H$ preserves every small colimit. Let $p:K\\to\\mathcal P(D)$ have colimit cocone with apex $L$, with $K$ any $\\mathcal U$-small simplicial set. Step 1 says that $\\iota L$ with the image cocone is the colimit of $\\iota p$. Testing against $v\\in\\mathcal V$, step 6 and the mapping-space colimit criterion give\n$$\\operatorname{Map}_{\\mathcal V}(H(L),v)\\simeq\\operatorname{Map}_{\\widehat{\\mathcal P}(D)}(\\iota L,Q_v)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\widehat{\\mathcal P}(D)}(\\iota p(k),Q_v)\\simeq\\lim_{k\\in K^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal V}(H(p(k)),v).$$\nNaturality from step 6 identifies this composite with precomposition by the cocone $Hp\\to\\Delta H(L)$. The same colimit criterion proves that this cocone is colimiting. Thus $H$ preserves small colimits, including the empty colimit; $K=\\varnothing$ makes both limiting mapping spaces terminal. This proves essential surjectivity of the stated restriction functor for every permitted $\\mathcal V$.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.5(1), expressed through the larger-space mapping presheaf; Theorem 5.1.5.6"
+   }
+  },
+  {
+   "text": "Let $B_1,B_2:\\mathcal P(D)\\to\\mathcal V$ preserve small colimits. The canonical cocone on $A_{/F}$ is the small colimit of step 4, so applying $B_1$ still gives a colimit for every $F$. The first hypothesis of [lem-coef-infinity-kan-mapping-restriction] is therefore satisfied for $A\\subseteq\\mathcal P(D)$, $F=B_1$, $G=B_2$. It gives an equivalence on the mapping spaces between these functors and their restrictions to $A$. Restriction along $D\\simeq A$ is also an equivalence on functor categories: precomposition with a quasi-inverse is its inverse, with the natural equivalences obtained by whiskering those of $D\\simeq A$. Hence restriction along $j$ induces an equivalence\n$$\\operatorname{Map}(B_1,B_2)\\simeq\\operatorname{Map}(B_1j,B_2j).$$\nThis is the actual restriction map, coherent under precomposition and postcomposition by the cited statement. Thus $j^*$ is fully faithful on the full subcategory of colimit-preserving functors.",
+   "uses": [
+    "lem-coef-infinity-kan-mapping-restriction",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.3.2.12 and Corollary 4.3.2.16; colimit-preserving direction of Lemma 5.1.5.5(1)"
+   }
+  },
+  {
+   "text": "The source full subcategory and both functor categories are quasicategories in a sufficiently large auxiliary universe by [lem-cbc-enhanced-functor-cone-calculus]. Steps 5-7 show that every target object $f$ is equivalent to $Hj$, and step 8 shows that $j^*$ is fully faithful. Apply [lem-coef-infinity-full-essential-image] to $j^*$; its full essential image is all of $\\operatorname{Fun}(D,\\mathcal V)$, so it has a coherent quasi-inverse. This is the claimed equivalence of infinity categories, retaining transformation spaces and their higher compositions. In particular an equivalence between two restrictions lifts to an equivalence upstairs: apply the quasi-inverse to that edge and compose with the quasi-inverse unit equivalences.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.1.5.6 and Corollary 4.3.2.16"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-kan-mapping-restriction",
+  "lem-coef-infinity-relative-kan-existence",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational presheaf argument for the finite-coefficient mapping-complex adjunction in the second display; agent expansion using HTT read online, Sections 3.3.2-3.3.3, 4.3.2 and 5.1.2-5.1.5. HTT is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +213,73 @@
    "results": "{\"t\": \"2026-10-16T16:17:06Z\", \"tool\": \"grep\", \"query\": \"yoneda|presheaf|presentab|localization|cocomplet\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
    "date": "2026-10-17",
    "verdict": "no match: read CategoryTheory/Limits/Presheaf.lean:337-395, especially isLeftKanExtension_along_uliftYoneda_iff at line 337 and uniqueExtensionAlongULiftYoneda at line 376. Their source is the ordinary category of Type-valued presheaves and their conclusion an ordinary natural isomorphism. These cannot specialize in one line to the coherent functor-category equivalence for space-valued presheaves on an arbitrary small quasicategory. The Quasicategory grep contains no such construction."
+  },
+  {
+   "tool": "grep",
+   "query": "uniqueExtensionAlong|isLeftKanExtension_along",
+   "results": "{\"t\": \"2026-10-16T18:33:06Z\", \"tool\": \"grep\", \"query\": \"uniqueExtensionAlong|isLeftKanExtension_along\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"4f03f911f4a15765\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Limits/Presheaf.lean:337-386 proves the ordinary Type-valued presheaf result. The source category is an ordinary category and natural isomorphisms are ordinary; it is not the coherent functor-category equivalence for an arbitrary small quasicategory and space-valued presheaves. Read these source declarations; no one-line specialization gives this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presheaf\", \"isLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T18:33:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Presheaf\\\", \\\"isLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType\", \"CategoryTheory.Presheaf.isIso_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\"], \"digest\": \"a2bbff20ea4bf393\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Limits/Presheaf.lean:337-386 proves the ordinary Type-valued presheaf result. The source category is an ordinary category and natural isomorphisms are ordinary; it is not the coherent functor-category equivalence for an arbitrary small quasicategory and space-valued presheaves. Read these source declarations; no one-line specialization gives this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along the infinity Yoneda embedding gives an equivalence on categories of colimit preserving functors",
+   "results": "{\"t\": \"2026-10-16T18:33:07Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along the infinity Yoneda embedding gives an equivalence on categories of colimit preserving functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.OverPresheafAux.restrictedYoneda\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Limits.PushoutCocone.isColimitYonedaEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\", \"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\"], \"digest\": \"6555c5ec25583321\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Limits/Presheaf.lean:337-386 proves the ordinary Type-valued presheaf result. The source category is an ordinary category and natural isomorphisms are ordinary; it is not the coherent functor-category equivalence for an arbitrary small quasicategory and space-valued presheaves. Read these source declarations; no one-line specialization gives this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda embedding of a small infinity category freely generates space valued presheaves under homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T18:33:16Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda embedding of a small infinity category freely generates space valued presheaves under homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yoneda_obj_isGeneratedBy\", \"CategoryTheory.Presheaf.freeYoneda\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\", \"CategoryTheory.Presheaf.isStrongGenerator\", \"CategoryTheory.Limits.isIndObject_yoneda\", \"CategoryTheory.instRepresentablyCoflatIndYoneda\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.Ind.yoneda\"], \"digest\": \"c9335244d15137d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Limits/Presheaf.lean:337-386 proves the ordinary Type-valued presheaf result. The source category is an ordinary category and natural isomorphisms are ordinary; it is not the coherent functor-category equivalence for an arbitrary small quasicategory and space-valued presheaves. Read these source declarations; no one-line specialization gives this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimit preserving functors on space valued presheaves of a quasicategory are uniquely determined by their restriction along Yoneda",
+   "results": "{\"t\": \"2026-10-16T18:33:51Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit preserving functors on space valued presheaves of a quasicategory are uniquely determined by their restriction along Yoneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.Presheaf.uniqueExtensionAlongULiftYoneda\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp\", \"CategoryTheory.Limits.IndObjectPresentation.mk.inj\", \"AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc\", \"AlgebraicGeometry.PresheafedSpace.colimit\"], \"digest\": \"9fe3088f0621e3f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CategoryTheory/Limits/Presheaf.lean:337-386 proves the ordinary Type-valued presheaf result. The source category is an ordinary category and natural isomorphisms are ordinary; it is not the coherent functor-category equivalence for an arbitrary small quasicategory and space-valued presheaves. Read these source declarations; no one-line specialization gives this item."
+  },
+  {
+   "tool": "grep",
+   "query": "uniqueExtensionAlong|isLeftKanExtension_along|free.*cocompletion",
+   "results": "{\"t\": \"2026-10-16T19:17:29Z\", \"tool\": \"grep\", \"query\": \"uniqueExtensionAlong|isLeftKanExtension_along|free.*cocompletion\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"f9bf0c7b887ef43d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned presheaf declarations in Mathlib/CategoryTheory/Limits/Presheaf.lean:337-386 use ordinary categories and Type-valued presheaves. Their source signatures were read; they do not state coherent space-valued presheaf cocompletion for arbitrary quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Presheaf\", \"uniqueExtensionAlongYoneda\"",
+   "results": "{\"t\": \"2026-10-16T19:26:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Presheaf\\\", \\\"uniqueExtensionAlongYoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned presheaf declarations in Mathlib/CategoryTheory/Limits/Presheaf.lean:337-386 use ordinary categories and Type-valued presheaves. Their source signatures were read; they do not state coherent space-valued presheaf cocompletion for arbitrary quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along Yoneda is an equivalence for colimit preserving functors from space valued infinity presheaves",
+   "results": "{\"t\": \"2026-10-16T19:26:43Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along Yoneda is an equivalence for colimit preserving functors from space valued infinity presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.OverPresheafAux.restrictedYoneda\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.Limits.PushoutCocone.isColimitYonedaEquiv\", \"CategoryTheory.colimitYonedaHomEquiv\", \"CategoryTheory.OverPresheafAux.restrictedYoneda_obj\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv\"], \"digest\": \"63fc00a534fe1254\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned presheaf declarations in Mathlib/CategoryTheory/Limits/Presheaf.lean:337-386 use ordinary categories and Type-valued presheaves. Their source signatures were read; they do not state coherent space-valued presheaf cocompletion for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of space valued presheaves on a small infinity category is the free cocompletion under small colimits",
+   "results": "{\"t\": \"2026-10-16T19:26:44Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of space valued presheaves on a small infinity category is the free cocompletion under small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.instHasColimitsOfShape\", \"AlgebraicGeometry.PresheafedSpace.instHasColimits\", \"SSet.QCat\", \"TopCat.instHasColimitsOfSizePresheafOfHasColimits\", \"AlgebraicGeometry.PresheafedSpace.colimit\", \"CategoryTheory.Limits.IndObjectPresentation\", \"TopCat.instHasColimitsOfShapePresheaf\", \"CategoryTheory.Ind.inclusion\"], \"digest\": \"ffb185d4d4e55758\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned presheaf declarations in Mathlib/CategoryTheory/Limits/Presheaf.lean:337-386 use ordinary categories and Type-valued presheaves. Their source signatures were read; they do not state coherent space-valued presheaf cocompletion for arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-continuous-presheaf-representability",
@@ -84,5 +287,29 @@
   "group": "Q55"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-presheaf-free-cocompletion",
+  "worker": "stage1",
+  "summary": "Checked the full infinity-categorical universal property, including arbitrary larger-universe targets, against HTT 5.1.5.6. Derived maps from sections of right fibrations and the canonical small density presentation, constructed extensions by existing relative Kan existence, proved their colimit preservation by a larger-space mapping-presheaf calculation, and proved full faithfulness with existing Kan mapping restriction. Added only the independent universe-invariant colimits-of-spaces input, with real Mathlib searches. No Lean declarations or compiles.",
+  "blueprint": "Realizes the foundational small presheaf extension used in the enhancement chain for prop-coef-integral-exceptional-adjoint, proof paragraph beginning 'For K', second line of its displayed finite-coefficient mapping-complex adjunction. The current main-20261015 copy places the ancestor under sk-thm-sf-package; historical DAG unit/ancestry retained.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor/cone and componentwise equivalence calculus, used to interpret sections, mapping comparisons and the full functor subcategory. It does not replace a geometric step of the unit. No node of this unit supplies the full cone-category mapping formula and the functor/full-subcategory quasicategory assertions needed here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-dc3537de9",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-dc3537de9 (reviewer sub-agent of L); spot-checked: I read all of it: the item's nine steps, the one new node, the statement of every cited node, the unit and ancestor blueprint proof, and the parent. The statement matches HTT Thm 5.1.5.6 and Cor 5.1.2.3: D small, V any infinity category with small colimits, no local smallness of V. HTT is not local, so it is checked from knowledge, with WANTED recorded. Steps 1, 2, 4, 5, 6, 7, 8 and 9 are correct against the cited statements: relative-kan-existence with p:V->* and exact p-colimit lifts via the join-cone mapping formula; full faithfulness via the first hypothesis of kan-mapping-restriction; essential surjectivity via the Q_v argument with larger values, as in HTT 5.1.5.5. One repairable fault (E5/C1) in step 3: it claimed the small right fibration E_F classifies iota F in universe U' 'because its fibers and transport maps are unchanged'. This compatibility of transport across universes is stated by no cited node. FIX: I added that clause to the new node lem-coef-spaces-small-colimits-universe (true by construction of straightening; tested on Delta^0 and Delta^1; executed Mathlib grep for straighten/RightFibration/LeftFibration gave zero hits). Step 3 now cites it and is marked elementary=false; proof_deps is unchanged. The new node is no duplicate (rg over the DAG: yoneda-presheaf-limits, space-presheaf-presentability, simplicial-model-coherent-diagrams and algebroid-universe-embeddings all differ). It does not restate a clause of the item, and its tests (empty diagram, a point, a discrete family, BG) all hold. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, the generic cone/functor calculus from sk-prop-sf-cbc. Not changed: the item's HTT page locator still reads 318, although the second reader reports correcting it to 319.; 2 file(s) fixed by the reviewer"
+ }
 }
