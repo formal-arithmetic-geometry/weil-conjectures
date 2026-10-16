@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResiduePullSquare
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! Computation of the scalar-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.

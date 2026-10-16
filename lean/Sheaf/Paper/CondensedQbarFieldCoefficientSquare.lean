@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.CondensedQbarCoefficientConstruction
 public import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 import Sheaf.Paper.CondensedQbarFieldPointCoefficientValue
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! # The coefficient square for geometric field evaluation
 

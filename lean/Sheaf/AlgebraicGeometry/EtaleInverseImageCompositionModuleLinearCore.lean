@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules

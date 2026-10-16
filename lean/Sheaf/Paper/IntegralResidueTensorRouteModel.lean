@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! Computation of the tensor-route in the residue tensor square.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
