@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-constructible-comparison-local",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Classicality is Zariski local",
@@ -12,28 +12,129 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.md",
   "place": "node det-pe-constructible-comparison-local, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-pe-classical-sheaves-modules"
+ ],
  "proof": [
   {
-   "text": "The inverse image $\\nu^*$ commutes with restriction to open subschemes, which\ngives the converse. For the first statement, write\n$\\alpha_a\\colon\\nu_{X_a}^*F_a\\cong F|_{X_a}$ with $F_a$ a $\\Lambda$-module sheaf on\n$(X_a)_{\\Et}$ ([det-pe-classical-sheaves-modules]). On $X_{ab}=X_a\\cap X_b$ the\nisomorphism $\\alpha_b^{-1}\\alpha_a$ is $\\nu^*\\varphi_{ab}$ for a unique linear\nisomorphism $\\varphi_{ab}\\colon F_a|_{X_{ab}}\\to F_b|_{X_{ab}}$, by full\nfaithfulness of $\\nu_{X_{ab}}^*$ on module sheaves; uniqueness gives the cocycle\ncondition $\\varphi_{bc}\\varphi_{ab}=\\varphi_{ac}$. Étale sheaves glue along Zariski\ncoverings, so the $F_a$ glue to an étale module sheaf $F_0$, and the $\\alpha_a$,\nwhich agree on overlaps by construction, glue to an isomorphism\n$\\nu_X^*F_0\\cong F$. Hence $F$ is classical.",
+   "text": "First justify restriction compatibility. For an open $U\\subset X$, [lem-weil-pbc-etale-site-localization-open] and [lem-weil-proetale-weakly-etale-localization] identify its two sites with the respective slice sites and identify the restricted pro-étale coefficient ring with $\\Lambda_U$. For an étale sheaf $E$ on $X$ and $W\\to U$ pro-étale, the presheaf-colimit formula of [def-weil-pbc-site-comparison-morphism] identifies the two presheaf pullbacks: replace each pair $(T,W\\to T)$ with $(T\\times_XU,W\\to T\\times_XU)$ and each section $s\\in E(T)$ with its restriction. Inclusion of pairs étale over $U$ is the inverse on colimits, since $T\\times_XU\\to T$ supplies the relation identifying these representatives. The coverings and their refinements over every such $W$ are the same in the slice and the original site; hence the two plus constructions of [lem-weil-pbc-sheafification-plus-theorem] show that sheafification commutes with this restriction. The resulting natural identification $(\\nu_X^*E)|_U\\cong\\nu_U^*(E|_U)$ respects addition and scalar action, since it is defined by restriction of sections. If $F$ is classical, [det-pe-classical-sheaves-modules] gives $F\\cong\\nu_X^*E$ for an étale module sheaf $E$; the displayed identification and the same node for $U$ prove that $F|_U$ is classical.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-sheafification-plus-theorem",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
+    "place": "First sentence: inverse image commutes with restriction to open subschemes."
+   }
+  },
+  {
+   "text": "Assume the restrictions to an open cover $X=\\bigcup_aX_a$ are classical. By [det-pe-classical-sheaves-modules], choose a $\\Lambda$-module sheaf $F_a$ on $(X_a)_{\\Et}$ and an isomorphism $\\alpha_a:\\nu_{X_a}^*F_a\\xrightarrow{\\sim}F|_{X_a}$ for each $a$. On $X_{ab}=X_a\\cap X_b$, functoriality of restriction identifies the restriction of $\\alpha_b^{-1}\\alpha_a$ with a map $\\nu_{X_{ab}}^*(F_a|_{X_{ab}})\\to\\nu_{X_{ab}}^*(F_b|_{X_{ab}})$. The full-faithfulness clause of [det-pe-classical-sheaves-modules] gives a unique $\\Lambda$-linear isomorphism $\\varphi_{ab}:F_a|_{X_{ab}}\\xrightarrow{\\sim}F_b|_{X_{ab}}$ lifting it. On triple overlaps the two composites have the same image under $\\nu^*$, so faithfulness gives $\\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}$; the diagonal maps are identities by uniqueness applied to $\\alpha_a^{-1}\\alpha_a=\\mathrm{id}$.",
    "uses": [
     "det-pe-classical-sheaves-modules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
+    "place": "Choice of local models and overlap cocycle."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] to the étale site of $X$ with final object $X$, the covering family of open immersions $X_a\\to X$, the constant ring sheaf $\\Lambda$, the local module sheaves $F_a$, and the transition isomorphisms $\\varphi_{ab}$. The slice identification from step 1 identifies the local module categories. Since coverings on an object over $X_a$ are unchanged, the same plus-construction argument from step 1 applied to the constant ring presheaf identifies the restricted constant étale ring sheaf with the one on $X_a$, including all ring operations. Its fibre products are the overlap schemes $X_{ab}$, and its cocycle hypothesis, including repeated indices, is the identity from step 2. We obtain an étale module sheaf $F_0$ and linear isomorphisms $e_a:F_0|_{X_a}\\xrightarrow{\\sim}F_a$ satisfying $\\varphi_{ab}e_a=e_b$ on overlaps.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
+    "place": "Étale sheaves glue along Zariski coverings."
+   }
+  },
+  {
+   "text": "Set $\\beta_a=\\alpha_a\\circ\\nu^*(e_a)$ using step 1's natural restriction identification. On $X_{ab}$ the two overlap equations give $\\beta_a=\\alpha_a\\nu^*e_a=\\alpha_b\\nu^*\\varphi_{ab}\\nu^*e_a=\\alpha_b\\nu^*e_b=\\beta_b$. The Zariski cover is a pro-étale cover by [sk-def-pe-site]. Apply [lem-pur-sheaf-hom-cover-gluing] to the pro-étale site of $X$, its final object $X$, ring $\\Lambda_X$, and module sheaves $\\nu_X^*F_0,F$. All overlap fibre products exist as scheme fibre products; step 1 identifies the slice restrictions and coefficients. It gives a unique linear map $\\beta:\\nu_X^*F_0\\to F$ with these local restrictions. Since equal isomorphisms have equal inverses, the $\\beta_a^{-1}$ agree on overlaps and the same lemma glues them to $\\gamma:F\\to\\nu_X^*F_0$. The composites $\\gamma\\beta$ and $\\beta\\gamma$ restrict to the identity maps, so uniqueness in that lemma makes them identities globally. Thus $F\\cong\\nu_X^*F_0$ is classical by [det-pe-classical-sheaves-modules].",
+   "uses": [
+    "sk-def-pe-site",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
+    "place": "The local isomorphisms glue to an isomorphism $\\nu_X^*F_0\\cong F$."
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-sheafification-plus-theorem",
   "det-pe-classical-sheaves-modules",
-  "det-pe-classical-sheaves-unit"
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "sk-def-pe-site",
+  "lem-pur-sheaf-hom-cover-gluing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "classicality of a pro-etale module sheaf is local for an open covering and restriction preserves classicality",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.X; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.topologically_isZariskiLocalAtSource'; AlgebraicGeometry.topologically_isLocalAtSource'; AlgebraicGeometry.IsLocalAtTarget.of_openCover; AlgebraicGeometry.IsLocalAtTarget.iff_of_openCover; AlgebraicGeometry.topologically_isZariskiLocalAtTarget'; AlgebraicGeometry.topologically_isLocalAtTarget'; no pro-étale classicality theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, Sheaf, gluing",
+   "results": "0 hits; service reports unknown identifier 'Sheaf'.",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; no conclusion about matching"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*sheaf|sheaf.*glue in Mathlib/CategoryTheory/Sites",
+   "results": "0 hits, but the search used Mathlib/CategoryTheory/Sites as its subdirectory even though msearch.py already prefixes Mathlib; this searched a nonexistent directory and is inconclusive.",
+   "date": "2026-10-16",
+   "verdict": "invalid search directory; no conclusion about matching"
+  },
+  {
+   "tool": "leansearch",
+   "query": "classicality of a pro-etale module sheaf is local for an open covering and restriction preserves classicality",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal; ModuleCat.Tilde.toOpen; AlgebraicGeometry.Scheme.Modules.restrict_obj; TopCat.Presheaf.IsSheafOpensLeCover; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules; AlgebraicGeometry.Scheme.Modules.isSheaf; no pro-étale classicality theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "maps of sheaves glue uniquely over a covering site",
+   "results": "8 hits including CategoryTheory.Presheaf.IsSheaf.hom_ext, amalgamate_map, hom_ext_ofArrows, TopCat.Sheaf.existsUnique_gluing and GrothendieckTopology.sheafify_hom_ext; section amalgamation/local extensionality rather than the classicality theorem. Reused the existing DAG module-map gluing theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafHom\"",
+   "results": "12 hits including Functor.IsCoverDense.sheafHom and restriction equations, presheafHom for Yoneda/Lan, scheme ring sheaf homs and skyscraper hom equivalence. No classicality theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafHom_isSheaf|sheafHom|amalgamate_map",
+   "results": "25 displayed hits, truncated at 25 by msearch.py, including smoothSheafHom, scheme module morphisms, presheafHom and descent-data compatible Hom sections; no conclusion from truncation. The needed module-map gluing is already a reviewed DAG node.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive full-tree search; existing DAG theorem reused"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +149,49 @@
   "det-pe-classical-sheaves-unit"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-constructible-comparison-local",
+  "worker": "stage1",
+  "summary": "Four proof steps establish explicit open-restriction compatibility, lift overlap isomorphisms by classical module full faithfulness, glue étale module objects, and glue comparison maps and their inverses. Reused existing nodes only; removed a duplicate map-gluing node on second reading. No Lean files or compiles.",
+  "blueprint": "Steps 1–4 realize the four logical moves in sk-thm-pe-constructible-comparison-local.proof.md: restriction functoriality; construction of overlap cocycle by module full faithfulness; étale module-sheaf gluing; and gluing the local comparison isomorphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Generic effective descent for module sheaves on a site, instantiated for the étale site and the open covering; the pro-étale-locality unit has no separate gluing node."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic linear morphism gluing supplies the final comparison map and inverse; this is a tool for the blueprint gluing sentence, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies open étale sites with their slices in the restriction compatibility argument."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies open pro-étale sites, restricted constant rings and module categories with the localized ones."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "Its explicit double-plus formula shows that identical covering/refinement diagrams give identical restricted sheafifications."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-83904ce64",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-83904ce64 (reviewer sub-agent of L); spot-checked: Read the item, report, governance files, blueprint proof, cited DAG statements, and Stacks sources (Tags 00WB, 04TR, 04TQ, 04TS, 03EM, 00XZ, 098B). All four proof steps are mathematically valid with hypotheses, coefficient categories, overlap cocycles, inverse gluing, edge cases, route, and accepted tool uses checked. The provisional morphism-gluing node was correctly removed as redundant; no new node remains and no repair is needed."
+ }
 }

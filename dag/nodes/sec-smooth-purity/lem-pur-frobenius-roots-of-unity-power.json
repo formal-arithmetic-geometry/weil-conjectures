@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-coefficient-twists",
-   "place": "unspecified",
+   "place": "statement: the Frobenius action on the coefficient twists is reduced to the cyclotomic Tate module of roots of unity",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Frobenius acts on roots of unity by the q-th power",
@@ -21,27 +21,155 @@
   "def-weil-frobenius-substitution",
   "def-weil-l-adic-numbers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-primitive-root] with n=N to the algebraically closed field k. Since N is prime to p=char(k), it gives exactly N distinct roots and a primitive root, hence the multiplicative group μ_N(k) is cyclic of order N. For any field automorphism σ, σ(ζ)^N=σ(ζ^N)=1, so σ preserves μ_N(k); this last preservation is the direct field-homomorphism calculation. Applying the same equation to σ^{-1} shows that the image is the whole subgroup.",
+   "uses": [
+    "lem-sc-primitive-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/sk-p-cyclotomic.proof.md",
+    "place": "first paragraph: arithmetic Frobenius sends each root of unity to its q-th power"
+   }
+  },
+  {
+   "text": "By [def-weil-frobenius-substitution], the arithmetic Frobenius is the field automorphism φ_q(z)=z^q and the geometric Frobenius is φ_q^{-1}. Thus φ_q(ζ)=ζ^q. Since gcd(q,N)=1, choose q′ with qq′≡1 mod N; then φ_q(ζ^{q′})=ζ, and applying φ_q^{-1} gives γ(ζ)=ζ^{q′}. If q′ is replaced by another inverse, the two exponents differ by a multiple of N and give the same value on μ_N(k).",
+   "uses": [
+    "def-weil-frobenius-substitution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/sk-p-cyclotomic.proof.md",
+    "place": "second paragraph: inverse of q modulo each ℓ^n and the inverse automorphism"
+   }
+  },
+  {
+   "text": "Regard k^× as the additive group M=Additive(k^×). Its ℓ-torsion is the subgroup of units ζ with ζ^ℓ=1, which is μ_ℓ(k); by [lem-sc-primitive-root] this has cardinality ℓ. Multiplication by ℓ on M is surjective: for x∈k^×, the polynomial X^ℓ−x has a root y in the algebraically closed field k by [def-weil-algebraic-closure], and y is nonzero with y^ℓ=x. Therefore [lem-av-tate-module-group-rank] with r=1 gives a ℤ_ℓ-linear equivalence T_ℓM≃ℤ_ℓ. Under [def-tate-module-abelian-group], this T_ℓM is exactly the inverse limit of the groups μ_{ℓ^r}(k) with transition ζ↦ζ^ℓ, so it is the stated free rank-one module.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "def-weil-algebraic-closure",
+    "lem-av-tate-module-group-rank",
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/GroupTheory/TateModule.lean",
+    "place": "slopmaster2 read-only source, theorem AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq, lines 228–230: specialize to M=Additive(k^×) and r=1; divisibility and torsion-cardinality hypotheses verified explicitly in this step"
+   }
+  },
+  {
+   "text": "The action on T_ℓM is componentwise by [def-tate-module-abelian-group]. It preserves the transition maps because for s=φ_q or γ one has s(ζ^ℓ)=s(ζ)^ℓ. For r≥1, apply Step 2 with N=ℓ^r: the r-th coordinate φ_q(ζ)=ζ^q is q-fold addition in Additive(k^×), hence the action of q modulo ℓ^r by the scalar rule of the cited definition. Thus φ_q is multiplication by q∈ℤ_ℓ. Choose the unique inverse residue c_r of q modulo ℓ^r, which exists since ℓ≠p and q=p^a. The reduction of c_{r+1} is an inverse of q modulo ℓ^r, so uniqueness gives its equality to c_r. Hence c=(c_r)∈ℤ_ℓ and qc=1 in every coordinate, making q a unit with inverse c=q^{-1}. Step 2 gives γ(ζ)=ζ^{c_r} on μ_{ℓ^r}(k), so the scalar rule identifies its componentwise action with multiplication by c. If the limit includes r=0, that coordinate is μ_1(k)={1} and satisfies both formulas automatically.",
+   "uses": [
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/sk-p-cyclotomic.proof.md",
+    "place": "second paragraph: compatible inverses define q^{-1} in ℤ_ℓ and the inverse automorphism acts by q^{-1}"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-tate-module-abelian-group",
+  "def-weil-algebraic-closure",
+  "def-weil-frobenius-substitution",
+  "lem-av-tate-module-group-rank",
+  "lem-sc-primitive-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/sk-p-cyclotomic.proof.md",
+  "place": "the complete proof, paragraphs 1–2, expanded with the finite-field rank-one specialization"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rn 'theorem\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean",
-   "results": "modularCyclotomicCharacter (L ≃+* L →* (ZMod n)ˣ) with .spec g ζ = ζ^(χ g).val and .unique; cyclotomicCharacter L p : (L ≃+* L) →* ℤ_[p]ˣ with cyclotomicCharacter.spec and .toZModPow; nothing evaluates the character at a Frobenius",
-   "date": "2026-10-09",
-   "verdict": "generalization: (3) is the statement cyclotomicCharacter k ℓ (frobenius) = q, which follows from cyclotomicCharacter.toZModPow, modularCyclotomicCharacter.unique and FiniteField.coe_frobeniusAlgEquivOfAlgebraic in several lines, not one; no match"
+   "tool": "leanfinder",
+   "query": "Frobenius acts on roots of unity by q-th power and on the Tate module by q",
+   "results": "modularCyclotomicCharacter.aux_spec; cyclotomicCharacter; modularCyclotomicCharacter.toFun_spec; modularCyclotomicCharacter.toFun_spec'; modularCyclotomicCharacter'.spec'; modularCyclotomicCharacter.spec; AlgHom.IsArithFrobAt.apply_of_pow_eq_one; no single whole-item declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cyclotomicCharacter, frobeniusAlgEquivOfAlgebraic, RootsOfUnity",
+   "results": "0 hits; loogle reported unknown identifier frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: unknown identifier"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'theorem.*frobenius\\|lemma.*frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean; grep -rln frobenius ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln 'rootsOfUnity\\|IsPrimitiveRoot'",
-   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic K L : Gal(L/K) with coe_frobeniusAlgEquivOfAlgebraic : ⇑ = (· ^ q) (this is (2) for phi_q, by definition); RingTheory/RootsOfUnity/PrimitiveRoots.lean and RingTheory/Polynomial/Cyclotomic/Factorization.lean use frobenius only for injectivity/factorization; rootsOfUnity.isCyclic (RingTheory/RootsOfUnity/Basic.lean) and RingTheory/RootsOfUnity/AlgebraicallyClosed.lean give (1)",
-   "date": "2026-10-09",
-   "verdict": "no match for the whole statement (parts (1) and the phi_q half of (2) are in Mathlib)"
+   "query": "frobenius.*rootsOfUnity|cyclotomicCharacter.*frobenius Mathlib/",
+   "results": "The logged query returned 0 hits, but its subdirectory argument Mathlib/ incorrectly targeted Mathlib/Mathlib/. It is not evidence of absence; superseded by the second reader searches with valid subdirectories.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: wrong search subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite field Frobenius acts on roots of unity by q-th power Tate module",
+   "results": "FiniteField.Extension.frob; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; FiniteField.coe_frobeniusAlgHom; FiniteField.Extension.frob_apply; FiniteField.frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgHom_apply; modularCyclotomicCharacter.toFun_spec'; modularCyclotomicCharacter.spec",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "arithmetic and geometric Frobenius on cyclotomic Tate module",
+   "results": "cyclotomicCharacter; modularCyclotomicCharacter'; modularCyclotomicCharacter.aux; cyclotomicCharacter.toFun; modularCyclotomicCharacter.toFun_spec; cyclotomicCharacter.toFun_spec; cyclotomicCharacter.toFun_apply; no whole-item rank-one/action theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cyclotomicCharacter.toZModPow, FiniteField.coe_frobeniusAlgEquivOfAlgebraic",
+   "results": "0 hits; the search log records no error note.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity.*isCyclic|frobeniusAlgEquivOfAlgebraic Mathlib/",
+   "results": "The logged query returned 0 hits, but its subdirectory argument Mathlib/ incorrectly targeted Mathlib/Mathlib/. It is not evidence of absence; superseded by the second reader searches with valid subdirectories.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: wrong search subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "roots of unity cyclic group algebraically closed field prime to characteristic",
+   "results": "AlgebraicClosure.hasEnoughRootsOfUnity; rootsOfUnity.isCyclic; HasEnoughRootsOfUnity.rootsOfUnity_isCyclic; Polynomial.isRoot_cyclotomic_iff_charZero; HasEnoughRootsOfUnity.cyc; mem_rootsOfUnity_iff_mem_nthRoots; no whole item",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of prime power roots of unity over an algebraically closed field is free of rank one over the p-adic integers",
+   "results": "8 hits; The returned cyclotomic-character declarations describe scalar values and their residues, not a free rank-one equivalence of the inverse limit. Logged top results: cyclotomicCharacter.toFun_apply, PadicAlgCl, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toZModPow, PadicAlgCl.isAlgebraic, cyclotomicCharacter.spec, cyclotomicCharacter, cyclotomicCharacter.toFun_spec",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"card\"",
+   "results": "10 hits; IsPrimitiveRoot.card_rootsOfUnity and HasEnoughRootsOfUnity.natCard_rootsOfUnity give the finite-root count used by the already-existing primitive-root node; none states the full item. Logged top results: card_rootsOfUnity, IsPrimitiveRoot.card_rootsOfUnity, card_rootsOfUnity_eq_iff_exists_isPrimitiveRoot, IsPrimitiveRoot.card_rootsOfUnity', Complex.card_rootsOfUnity, HasEnoughRootsOfUnity.natCard_rootsOfUnity, HasEnoughRootsOfUnity.of_card_le, CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|rootsOfUnity|modularCyclotomicCharacter",
+   "results": "25 hits; The NumberTheory grep returned roots-of-unity and modular-character occurrences; these do not state the full finite-root and Tate-module theorem. Logged top results: Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean, Mathlib/NumberTheory/LegendreSymbol/AddCharacter.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|Tate module",
+   "results": "0 hits; No hits in Mathlib/GroupTheory; the rank theorem is in the project source and is already represented by lem-av-tate-module-group-rank. Logged top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +192,34 @@
   "unreachable"
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv"
+ "unit": "sk-def-purity-conv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-frobenius-roots-of-unity-power",
+  "worker": "stage1",
+  "summary": "Audited the imported three-clause statement against Deligne Weil I (2.2), Weil II (1.1.7), and the current cyclotomic blueprint. No single sorry-free project declaration states all three clauses. The proof now uses the existing primitive-root statement and the closed general Tate-module rank theorem; it spells out the algebraic-closure divisibility, torsion-cardinality, componentwise scalar action, and inverse-exponent calculation. No new node was created because each auxiliary fact is already an existing definition or lemma, and the only rank theorem is the reusable existing group-theoretic node.",
+  "blueprint": "Realizes the cyclotomic Frobenius argument: arithmetic q-power on roots, compatible modular inverses for geometric Frobenius, and the rank-one Tate-module specialization of sk-p-cyclotomic.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Its statement supplies the exact primitive-root existence, distinct-root count, and cyclic μ_N conclusion used in clauses 1 and 3; the finite-field specialization does not replace this route."
+   },
+   {
+    "node": "lem-av-tate-module-group-rank",
+    "why": "Its statement is the generic ℓ-divisible-group rank theorem applied to Additive(k^×), which is the group-theoretic rank step absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "lem-av-tate-module-group-rank"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-de66f2f4f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-de66f2f4f (reviewer sub-agent of L); spot-checked: Read the complete item and report, all cited statements, and source locations. All four steps check: cyclicity, inverse Frobenius exponents, rank-one Tate module, and compatible scalar actions. Accepted both declared generic tools; found no cycle, duplicate, target weakening, or coefficient-category identification. Small cases passed. Full review written to review.md; no corrections needed."
+ }
 }

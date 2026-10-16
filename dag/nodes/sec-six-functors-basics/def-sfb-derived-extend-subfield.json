@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-derived-extend-subfield",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived extension of scalars $T_{E,F}$",
@@ -19,9 +19,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars along inclusion of finite p-adic subfields on sheaf module derived categories",
+   "results": "8 hits (BDeRhamPlus; Condensed.profiniteSolid; Condensed.profiniteFree; LightCondensed monoidal instances; CondensedMod); none states this derived-category functor",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived extension scalars, CategoryTheory.Functor, L, Mod.extendScalars",
+   "results": "0 hits; unknown identifier derived",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedFunctor, CategoryTheory.Mod.extendScalars",
+   "results": "0 hits; unknown identifier CategoryTheory.Functor.leftDerivedFunctor",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedExtendScalarsSubfield|leftDerivedFunctor|extendScalars (Mathlib/CategoryTheory)",
+   "results": "Maintainer rerun on /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory: Abelian/LeftDerived.lean:45-46 mentions F.leftDerivedFunctorMinus in a TODO; no derivedExtendScalarsSubfield or sheaf-module scalar-extension construction found. Read lines 30-60: this file develops degree-indexed projective derived functors and explicitly lists the derived-category functor as future work.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic derived-category references found"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived|DerivedCategory|extendScalars (Mathlib/CategoryTheory)",
+   "results": "Maintainer rerun on /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory: multiple DerivedCategory imports/references, including Abelian/Injective/Ext.lean:8-9, Sites/SheafCohomology/Basic.lean:10-13, and Abelian/LeftDerived.lean:45-46 (a TODO). These are not the unbounded derived extension between internal coefficient-module categories on the pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic derived-category references found"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedExtendScalarsSubfield|leftDerivedFunctor|extendScalars (Mathlib/Condensed)",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars functor from modules over E_X to modules over F_X",
+   "results": "8 hits including ModuleCat.extendScalars and related underived module-category declarations; none gives the project sheaf derived functor",
+   "date": "2026-10-16",
+   "verdict": "generalization: ModuleCat.extendScalars is underived and over ordinary module categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -39,5 +89,21 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.derivedExtendScalarsSubfield"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-extend-subfield",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint source and its two statement dependencies. The construction is already fully expressed as the derived extension-of-scalars definition specialized to the coefficient map E_X→F_X; no auxiliary theorem or proof node is needed. Marked the definition split, corrected blueprint.same_as to an empty list, and recorded the required Mathlib searches.",
+  "blueprint": "The item realizes the displayed definition in def-sfb-derived-extend-subfield.md (order 1758), using exactly the two imported dependencies sk-def-sfb-derived-extension-of-scalars and def-sfb-subfield-coefficient-map.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-d309ec873",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-d309ec873 (reviewer sub-agent of L); spot-checked: Read the full definition, cited statements, current blueprint route, and archived target sources. Coefficient categories, functor direction, hypotheses, and edge cases agree; no circular dependency or new duplicate node found. Corrected inaccurate grep results and invalid-query Loogle verdicts in the whole-node JSON. Mathematics unchanged; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

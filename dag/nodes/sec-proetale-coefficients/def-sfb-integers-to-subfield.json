@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-integers-to-subfield",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The inclusion $\\mathcal O_{E,X}\\to E_X$",
- "statement": "For a scheme $X$, the morphism of ring objects\n$$\n\\varphi=p_X^*(\\underline{\\cO}_E\\to\\underline E)\\colon\\cO_{E,X}=p_X^*\\underline{\\cO}_E\\to E_X=p_X^*\\underline E\n$$\nof $\\Sh(X_{\\mathrm{proét}},\\Ab)$ is the image under $p_X^*$ [sk-def-sfb-pullback-from-point]\nof the morphism of [def-sfb-integers-to-subfield-point], between the coefficient rings of\n[sk-def-sfb-pulled-back-coefficients].",
+ "statement": "Let $\\ell$ be a prime, let $E\\subseteq\\overline{\\mathbf Q}_\\ell$ be a finite extension of $\\mathbf Q_\\ell$, and let $\\mathcal O_E$ be its ring of integers, as in [def-sfb-integers-to-subfield-point]. For a scheme $X$, define\n$$\n\\varphi=p_X^*(a)\\colon\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O}_E\\longrightarrow E_X=p_X^*\\underline E,\n$$\nwhere $a\\colon\\underline{\\mathcal O}_E\\to\\underline E$ is the condensed inclusion of [def-sfb-integers-to-subfield-point] and $p_X^*$ is the inverse image of [sk-def-sfb-pullback-from-point]. This is a morphism of ring objects of $\\Sh(X_{\\mathrm{proét}},\\Ab)$ between the pulled-back coefficient rings of [sk-def-sfb-pulled-back-coefficients].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield.md",
   "place": "node def-sfb-integers-to-subfield, order 1647"
@@ -19,24 +19,149 @@
  ],
  "proof": [
   {
-   "text": "$p_X^*$ is monoidal [sk-def-sfb-pulled-back-coefficients], so it sends morphisms of ring\nobjects to morphisms of ring objects.",
+   "text": "By [def-sfb-integers-to-subfield-point], the inclusion $\\mathcal O_E\\hookrightarrow E$ gives a specified morphism $a\\colon\\underline{\\mathcal O}_E\\to\\underline E$ of ring objects in $\\Sh(*_{\\mathrm{proét}},\\Ab)$. We use this morphism, whose map on a profinite set $S$ is postcomposition with the inclusion $\\mathcal O_E\\hookrightarrow E$.",
    "uses": [
-    "sk-def-sfb-pulled-back-coefficients"
+    "def-sfb-integers-to-subfield-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield.md",
+    "place": "Definition and proof: the morphism at the point; def-sfb-integers-to-subfield-point"
+   }
+  },
+  {
+   "text": "Set $F=p_X^*$, the strong monoidal inverse image functor supplied by [sk-def-sfb-pullback-from-point], part 4. Apply the ring-object coefficient functor of [sk-def-sfb-pulled-back-coefficients] to the morphism $a$ of step 1 and define $\\varphi=F(a)$. Its source is $F\\underline{\\mathcal O}_E=\\mathcal O_{E,X}$ and its target is $F\\underline E=E_X$ by that coefficient-ring definition. Explicitly, write $\\delta$ and $\\epsilon$ for the tensor and unit comparison maps of $F$, and write $\\mu_A,\\eta_A$ and $\\mu_B,\\eta_B$ for the ring structures of $A=\\underline{\\mathcal O}_E$ and $B=\\underline E$. Since $a$ preserves multiplication and unit [def-sfb-integers-to-subfield-point], naturality of $\\delta$ and functoriality give\n$$\nF(a)\\circ\\mu_{A,X}=F(a\\circ\\mu_A)\\circ\\delta_{A,A}=F(\\mu_B)\\circ F(a\\otimes a)\\circ\\delta_{A,A}=\\mu_{B,X}\\circ(F(a)\\otimes F(a)),\n\\qquad\nF(a)\\circ\\eta_{A,X}=F(a\\circ\\eta_A)\\circ\\epsilon=F(\\eta_B)\\circ\\epsilon=\\eta_{B,X}.\n$$\nThese are exactly the two ring-object morphism conditions for $\\varphi$.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-integers-to-subfield-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield.md",
+    "place": "Proof, sole paragraph: image of the ring-object morphism under monoidal pullback"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-integers-to-subfield-point",
+  "sk-def-sfb-pullback-from-point",
   "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-integers-to-subfield.md",
-  "place": "## Proof"
+  "place": "Definition and sole paragraph of def-sfb-integers-to-subfield.proof.md, expanded as a specialization of the coefficient functor"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicIntegersToPadicSubfield|padicSubfieldRingObj|upperStarFromPoint|mapMon",
+   "results": "Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean; Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean; Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean; Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean; Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean; Mathlib/AlgebraicTopology/DoldKan/GammaCompN.lean; Mathlib/AlgebraicTopology/DoldKan/GammaCompN.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item. Generic mapMon machinery was found; CategoryTheory/Monoidal/Mon.lean lines 825-869 were read. It presupposes the functor and ring-object data supplied here by project nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of p-adic integers into a finite extension of p-adic numbers induces a morphism of ring objects after inverse image of sheaves",
+   "results": "PadicInt.Coe.ringHom; PadicInt.algebraMap_apply; PadicInt.instCoePadic; PadicInt.subring; PadicInt.instCommRing; PadicInt.instInhabited; PadicInt.isOpenEmbedding_coe; PadicInt.algebra",
+   "date": "2026-10-16",
+   "verdict": "No match: PadicInt.Coe.ringHom and the other PadicInt hits concern the scalar inclusion for E = Q_p, not the pulled-back ring objects for arbitrary finite E."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "CategoryTheory.Functor.mapMon; CategoryTheory.Functor.Faithful.mapMon; CategoryTheory.Functor.mapMonIdIso; CategoryTheory.Functor.FullyFaithful.mapMon; CategoryTheory.Functor.Full.mapMon; CategoryTheory.Functor.mapMon_obj_X; CategoryTheory.Functor.instLaxMonoidalMonMapMon; CategoryTheory.Functor.essImage_mapMon",
+   "date": "2026-10-16",
+   "verdict": "Supporting general machinery only: CategoryTheory.Functor.mapMon lifts a supplied lax monoidal functor; it does not define the project-specific pro-etale pullback or its p-adic coefficient morphism. No match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pull back the inclusion of the ring of integers of a finite p-adic field into the field as a morphism of ring objects on the pro-etale site of a scheme",
+   "results": "BDeRhamPlus; BDeRham; instCommRingBDeRhamPlus; fontaineThetaInvertP; WittVector.fontaineTheta; WittVector.StandardOneDimIsocrystal; AlgebraicGeometry.Scheme.Etale.forget; PreTilt",
+   "date": "2026-10-16",
+   "verdict": "No match: BDeRhamPlus, BDeRham, fontaineThetaInvertP, WittVector.fontaineTheta, Isocrystal, Scheme.Etale.forget and PreTilt are different objects or constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "def mapMon|def map.*Mon|padicIntegersToPadicSubfield|upperStarFromPoint",
+   "results": "Mathlib/CategoryTheory/Monoidal/Comon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean. Grep subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item. Generic mapMon machinery was found; CategoryTheory/Monoidal/Mon.lean lines 825-869 were read. It presupposes the functor and ring-object data supplied here by project nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal inverse image functor on abelian sheaves induces a functor on ring objects and sends a homomorphism to its inverse image",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.over; SheafOfModules.pushforward; SheafOfModules.fullyFaithfulForget_preimage_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map",
+   "date": "2026-10-16",
+   "verdict": "No match: SheafOfModules.restrictScalars/pullback/over/pushforward and Scheme module pullback use sheaves of modules, and the remaining hits concern other sheaf maps; none defines this coefficient morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor sends a morphism of monoid objects to a morphism of monoid objects preserving multiplication and unit",
+   "results": "CategoryTheory.Functor.map.instIsMonHom; CategoryTheory.Functor.mapMonFunctor; CategoryTheory.Functor.mapMon; CategoryTheory.Functor.mapMon_map_hom; CategoryTheory.Functor.instIsMonHomμ; CategoryTheory.Functor.mapMonNatTrans; CategoryTheory.Functor.mapMon_obj_mon_mul; CategoryTheory.Functor.mon_ClassObj",
+   "date": "2026-10-16",
+   "verdict": "The general preservation fact is CategoryTheory.Functor.map.instIsMonHom, Mathlib/CategoryTheory/Monoidal/Mon.lean:850-852 (read with monObjObj:827-835 and mapMon:867-869). It assumes the supplied functor, objects and input ring morphism; it does not define the project-specific coefficient inclusion. No match for the whole item; no auxiliary node is needed for the elementary calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "map.instIsMonHom|abbrev monObjObj|def mapMon",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean. Grep subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "The general preservation fact is CategoryTheory.Functor.map.instIsMonHom, Mathlib/CategoryTheory/Monoidal/Mon.lean:850-852 (read with monObjObj:827-835 and mapMon:867-869). It assumes the supplied functor, objects and input ring morphism; it does not define the project-specific coefficient inclusion. No match for the whole item; no auxiliary node is needed for the elementary calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map.instIsMonHom",
+   "results": "CategoryTheory.Functor.map.instIsMonHom",
+   "date": "2026-10-16",
+   "verdict": "The general preservation fact is CategoryTheory.Functor.map.instIsMonHom, Mathlib/CategoryTheory/Monoidal/Mon.lean:850-852 (read with monObjObj:827-835 and mapMon:867-869). It assumes the supplied functor, objects and input ring morphism; it does not define the project-specific coefficient inclusion. No match for the whole item; no auxiliary node is needed for the elementary calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map of monoid objects induced by a lax monoidal functor is the original functor applied to the underlying morphism",
+   "results": "CategoryTheory.Functor.mapMon_map_hom; CategoryTheory.Functor.mapMonFunctor_obj; CategoryTheory.Functor.mapMon_obj_X; CategoryTheory.Functor.mapMonFunctor; CategoryTheory.Functor.mapMonFunctor_map_app_hom; CategoryTheory.Functor.mapMon; CategoryTheory.Mon.EquivLaxMonoidalFunctorPUnit.laxMonoidalToMon_map; CategoryTheory.Functor.mapMon_obj_mon_mul",
+   "date": "2026-10-16",
+   "verdict": "Generic mapMon and its map formula found. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869; map.instIsMonHom at 850-852 supplies the elementary preservation calculation, but none defines the project-specific point inclusion and inverse image. No whole-item match; no auxiliary node needed."
+  },
+  {
+   "tool": "grep",
+   "query": "instance map.instIsMonHom|map f := .mk",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Ring.lean; Mathlib/CategoryTheory/Monoidal/Ring.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Comon_.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; subdirectory CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "Generic functor on monoid morphisms only; read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869, including map.instIsMonHom:850-852 and mapMon:867-869. The project-specific inverse image and inclusion remain prerequisites; no whole-item match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon_map_hom",
+   "results": "CategoryTheory.Functor.mapMon_map_hom",
+   "date": "2026-10-16",
+   "verdict": "Generic functor on monoid morphisms only; read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869, including map.instIsMonHom:850-852 and mapMon:867-869. The project-specific inverse image and inclusion remain prerequisites; no whole-item match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying a monoidal functor to a ring homomorphism gives a homomorphism between the induced monoid objects",
+   "results": "CategoryTheory.Functor.homMonoidHom; CategoryTheory.Functor.homMonoidHom_apply; ModuleCat.MonModuleEquivalenceAlgebra.functor_map_hom_apply; CommRingCat.monoidAlgebra_map; CategoryTheory.Functor.mapMonFunctor; CategoryTheory.Functor.mapMon_map_hom; CommRingCat.commMon_forget₂_map; CategoryTheory.Functor.map.instIsMonHom",
+   "date": "2026-10-16",
+   "verdict": "Supporting general monoidal machinery only. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869, especially monObjObj:827-835, map.instIsMonHom:850-852 and mapMon:867-869. These require the supplied functor and point inclusion, and do not define the project-specific map. No whole-item match; no auxiliary node needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon_obj_mon_one",
+   "results": "CategoryTheory.Functor.mapMon_obj_mon_one",
+   "date": "2026-10-16",
+   "verdict": "Supporting general monoidal machinery only. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869, especially monObjObj:827-835, map.instIsMonHom:850-852 and mapMon:867-869. These require the supplied functor and point inclusion, and do not define the project-specific map. No whole-item match; no auxiliary node needed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon_obj_mon_one|mapMon_map_hom|map.instIsMonHom",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "Supporting general monoidal machinery only. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:820-869, especially monObjObj:827-835, map.instIsMonHom:850-852 and mapMon:867-869. These require the supplied functor and point inclusion, and do not define the project-specific map. No whole-item match; no auxiliary node needed."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +180,20 @@
   "AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-integers-to-subfield",
+  "worker": "stage1",
+  "summary": "Expanded the monoidal-pullback definition into two steps using the existing point inclusion and coefficient functor. Made the ambient prime and finite subextension explicit from the source unit. Checked all three cited statements, the current main blueprint and both read-only Lean sources; no slopmaster2 attachment and no new nodes. Mathlib supplies generic mapMon only. The new-snapshot node lacks chapter/unit records; its source unit was read directly without changing maintainer metadata.",
+  "blueprint": "The formula in def-sfb-integers-to-subfield.md and the sole paragraph of def-sfb-integers-to-subfield.proof.md: step 1 identifies the input inclusion; step 2 applies the ring-object coefficient functor. The containing sk-prop-sfb-qlbar-colimit-x unit uses this definition in the second comparison with localization; this split makes no assertion of that comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-e2a17b6ad",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-e2a17b6ad (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and current blueprint sources. Both steps and ring-morphism equations are correct; hypotheses and edge cases check out. No new nodes, circular dependencies, missing citations or category identifications. Archived master target conventions remain unchanged. Detailed checks written to review.md; no repairs or tool_uses."
+ }
 }

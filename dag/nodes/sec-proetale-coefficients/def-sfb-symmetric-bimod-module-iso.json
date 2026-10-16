@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-symmetric-bimod-module-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Symmetric bimodules come from module objects",
@@ -17,11 +17,11 @@
  ],
  "proof": [
   {
-   "text": "The two bimodules have the same underlying object and the same left action $\\gamma_P$.\nThe right action of the bimodule attached to $M$ is $\\gamma_P\\beta_{P,\\mathcal R}$\n([lem-sfb-modobj-symmetric-bimodules]), and this equals the right action $\\rho_P$\nbecause $P$ is symmetric. So the identity is compatible with both actions.",
+   "text": "Write $Q$ for the bimodule attached to the underlying left module $M$ of $P$. By [lem-sfb-modobj-symmetric-bimodules], $Q$ has underlying object $P$, left action $\\gamma_P$, and right action $\\gamma_P\\circ\\beta_{P,\\mathcal R}=\\rho_P$, the last equality being the symmetry hypothesis on $P$. Thus $Q$ and $P$ have identical action maps. In either direction the underlying identity $1_P$ is a bimodule morphism: its left compatibility equation reduces to $\\gamma_P=\\gamma_P$ and its right compatibility equation to $\\rho_P=\\rho_P$, since tensoring preserves identities. Taking these two identity maps as forward and inverse maps, both composites are the identity on the underlying object, hence the identity bimodule morphisms. This gives the asserted isomorphism $Q\\cong P$.",
    "uses": [
     "lem-sfb-modobj-symmetric-bimodules"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -29,12 +29,97 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-symmetric-bimod-module-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-symmetric-bimod-module-iso.proof.md",
+  "place": "complete proof paragraph; inverse and its two identities expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "symmetric bimodule isomorphism to bimodule attached to underlying module object identity",
+   "results": "Bimod.LeftUnitorBimod.hom, Bimod.RightUnitorBimod.inv, Bimod.id', Bimod.regular_X; no symmetric-bimodule reconstruction theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; returned generic bimodule unitors and identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.IsSymmetric.iso, Bimod.isoOfIso, CategoryTheory.Mod.toBimodObj",
+   "results": "0 hits; unknown identifier Bimod.IsSymmetric.iso",
+   "date": "2026-10-16",
+   "verdict": "unavailable query (identifier or parser error); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSymmetric\\.iso|fullyFaithfulToBimod|toBimodObj Mathlib/CategoryTheory/Monoidal",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "identity isomorphism from a symmetric bimodule to the bimodule associated to its underlying module",
+   "results": "QuadraticModuleCat.ofIso_refl; Bimod.isoOfIso_hom_hom; Bimod.id'; Bimod.id_hom'; no symmetric reconstruction theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; Bimod.isoOfIso is only the generic constructor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric Bimod right action equals braiding left action identity Bimod isomorphism",
+   "results": "Bimod.rightUnitorBimod and generic action lemmas; no symmetric reconstruction theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.isoOfIso, Bimod.Hom, actRight = (β_ _ _).hom ≫ actLeft",
+   "results": "0 hits (input parser rejected the action-expression pattern)",
+   "date": "2026-10-16",
+   "verdict": "unavailable query (identifier or parser error); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "def isoOfIso|structure Hom|actRight Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "results": "0 hits from msearch wrapper",
+   "date": "2026-10-16",
+   "verdict": "no match in wrapper search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bimodules whose right action is braiding followed by left action are isomorphic to bimodule from a module",
+   "results": "SemimoduleCat.MonoidalCategory.braiding_hom_apply; Bimod.rightUnitorBimod; Bimod.isoOfIso_hom_hom; no exact theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic Bimod.isoOfIso only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric bimodule identity isomorphism attached module object",
+   "results": "Bimod.id', Bimod.instInhabited, Bimod.LeftUnitorBimod.hom, Bimod.regular_X, Bimod.RightUnitorBimod.inv, CategoryTheory.Mod_.id, Bimod.homInhabited, Bimod.RightUnitorBimod.hom",
+   "date": "2026-10-16",
+   "verdict": "no exact match; generic identity and unitors only"
+  },
+  {
+   "tool": "grep",
+   "query": "isoOfIso|IsSymmetric",
+   "results": "Four isoOfIso occurrences in CategoryTheory/Monoidal/Bimod.lean; definition at line 148 read directly. No IsSymmetric match.",
+   "date": "2026-10-16",
+   "verdict": "generic constructor needs the action equalities; no symmetric-module construction or exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.isoOfIso",
+   "results": "Bimod.isoOfIso, Bimod.isoOfIso_hom_hom, Bimod.isoOfIso_inv_hom; all generic constructors or projection formulae.",
+   "date": "2026-10-16",
+   "verdict": "no symmetric-bimodule reconstruction theorem; candidate requires the two action compatibility proofs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric bimodule isomorphic to bimodule from underlying left module",
+   "results": "Bimod.LeftUnitorBimod.hom_left_act_hom', Bimod.LeftUnitorBimod.hom_inv_id, Bimod.regular_X, Bimod.LeftUnitorBimod.inv, Bimod.instInhabited, Bimod.leftUnitorBimod, Bimod.LeftUnitorBimod.hom, ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_X_isModule",
+   "date": "2026-10-16",
+   "verdict": "no exact match; unitors require coequalizers and concern a relative tensor product, not reconstruction from a forgotten right action"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -52,5 +137,21 @@
   "Bimod.IsSymmetric.iso"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-symmetric-bimod-module-iso",
+  "worker": "stage1",
+  "summary": "Checked the main-20261015 statement and its complete proof paragraph. The existing lemma supplies the attached right action, and symmetry identifies it with the original right action. Explicitly constructed identity bimodule morphisms in both directions and checked their inverse equations. This is an elementary calculation from the cited lemma and definitions; no child node is needed. Read-only slopmaster2 has no matching attachment.",
+  "blueprint": "Realizes the complete proof paragraph in def-sfb-symmetric-bimod-module-iso.proof.md: same underlying object and left action, right action gamma_P beta_{P,R}, and compatibility by symmetry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-e7d40b402",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-e7d40b402 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, current blueprint sources, and unit/chapter route. The identity maps satisfy both action equations and inverse identities; small cases pass. No new nodes, duplicate, cycle, missing mathematical citation, or repair found. Documented the pre-existing route-metadata omission and independent Mathlib searches in review.md."
+ }
 }

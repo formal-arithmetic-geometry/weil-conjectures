@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-restriction-preserves-limits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Restriction of scalars preserves limits",
@@ -13,28 +13,144 @@
   "place": "node lem-sfb-modobj-restriction-preserves-limits, order 1589"
  },
  "stmt_deps": [
-  "def-sfb-modobj-extension"
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-restriction"
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Res}_\\varphi$ is a right adjoint by\n[def-sfb-modobj-extend-restrict-adjunction].",
+   "text": "Under the hypotheses of [def-sfb-modobj-extension], [def-sfb-modobj-extend-restrict-adjunction] supplies the adjunction $\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$. Thus the restriction functor in the statement is the right adjoint of extension of scalars; this uses precisely the braided, coequalizer and tensor-colimit hypotheses already assumed, and no closedness or coextension of scalars.",
    "uses": [
     "def-sfb-modobj-extend-restrict-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-restriction-preserves-limits.proof.md",
+    "place": "Complete one-sentence proof; sk-def-sfb-change-of-scalars/_section.md item 2"
+   }
+  },
+  {
+   "text": "Let $I$ be any small category, let $F:I\\to\\operatorname{Mod}_{\\mathcal S}(\\mathcal C)$ be a diagram, and let $(L,(\\pi_i)_i)$ be any limit cone of $F$. Apply [lem-weil-pbc-right-adjoint-preserves-limits] to the adjunction of step 1, with $\\mathcal D=\\operatorname{Mod}_{\\mathcal S}(\\mathcal C)$, $\\mathcal C$ there equal to $\\operatorname{Mod}_{\\mathcal R}(\\mathcal C)$ here, and $R=\\operatorname{Res}_\\varphi$. It says exactly that $(\\operatorname{Res}_\\varphi L,(\\operatorname{Res}_\\varphi\\pi_i)_i)$ is a limit cone for $\\operatorname{Res}_\\varphi\\circ F$. Since the shape and the existing limit cone were arbitrary, restriction preserves limits (in every size for which the diagram and cone are defined). This is a preservation assertion and does not assert existence of all limits in either module category.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact, part (2): right adjoints commute with representable limits"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-extend-restrict-adjunction"
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-restriction-preserves-limits.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0038, lemma-adjoint-exact, part (2), applied to the blueprint adjunction in sk-def-sfb-change-of-scalars, item 2"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preserves.*[Ll]imits.*comap|[Pp]reservesLimits.*[Cc]omap|comap.*preserves.*[Ll]imits",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for internal module objects preserves all limits",
+   "results": "8 hits; ModuleCat.preservesLimit_restrictScalars, RestrictScalars, ModuleCat.preservesColimit_restrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, LinearMap.restrictScalarsₗ, SheafOfModules.restrictScalars, instAddCommGroupRestrictScalars; ordinary ModuleCat restriction is a different coefficient category; Mod_.comap constructs restriction but gives no limit-preservation theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap, CategoryTheory.Limits.PreservesLimitsOfSize",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a morphism of monoid objects in a monoidal category preserves limits",
+   "results": "8 hits; CategoryTheory.Mon.forget_preservesLimitsOfShape, MonCat.forget_preservesLimits, CommMonCat.forget₂Mon_preservesLimits, ModuleCat.preservesLimit_restrictScalars, CategoryTheory.Mod_.scalarRestriction, MonCat.forget_preservesLimitsOfShape, CategoryTheory.Mod_.comap, CommMonCat.forget_preservesLimits; ordinary ModuleCat restriction is a different coefficient category; Mod_.comap constructs restriction but gives no limit-preservation theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint_preservesLimits|def comap|PreservesLimitsOfSize",
+   "results": "0 hits; this is not the installed source filename; superseded by search in CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "general right-adjoint tool found; use existing Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits, not a direct leaf for this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+   "results": "1 hits; CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+   "date": "2026-10-16",
+   "verdict": "general right-adjoint tool found; use existing Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits, not a direct leaf for this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor which is a right adjoint preserves limits of every diagram",
+   "results": "8 hits; CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint, CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint, CategoryTheory.Adjunction.rightAdjoint_preservesLimits, CategoryTheory.Functor.rightAdjointObjIsDefined_limit, CategoryTheory.Functor.corepresentable_preservesLimitsOfShape, CategoryTheory.Functor.corepresentable_preservesLimits, CategoryTheory.Adjunction.lim_preservesLimits, CategoryTheory.hasLimitsOfShape_of_coreflective",
+   "date": "2026-10-16",
+   "verdict": "general right-adjoint tool found; use existing Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits, not a direct leaf for this item"
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|rightAdjoint_preservesLimits|preservesLimit_restrictScalars",
+   "results": "25 hits; Mathlib/Probability/Kernel/Basic.lean, Mathlib/Probability/Kernel/Composition/MapComap.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean, Mathlib/Algebra/Algebra/Subalgebra/Basic.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean, Mathlib/Algebra/Field/Subfield/Basic.lean, Mathlib/Geometry/Convex/Cone/Pointed.lean, Mathlib/LinearAlgebra/AffineSpace/AffineSubspace/Basic.lean; output capped at 25, so repeated with targeted directory scopes",
+   "date": "2026-10-16",
+   "verdict": "general right-adjoint tool found; use existing Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits, not a direct leaf for this item"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|preserves|Preserves",
+   "results": "0 hits; this file is only a deprecated import shim for Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimit_restrictScalars",
+   "results": "1 hits; 932; single-file rg omits filename and the wrapper parses the line oddly; repeated with directory scope, locating ChangeOfRings.lean:932",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint_preservesLimits",
+   "results": "5 hits; Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "general right-adjoint tool found; use existing Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits, not a direct leaf for this item"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|preserves|Preserves",
+   "results": "25 hits; Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimit_restrictScalars",
+   "results": "1 hits; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for internal-module restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "comap|preservesLimits|PreservesLimit",
+   "results": "25 hits in CategoryTheory/Monoidal, including Mathlib/CategoryTheory/Monoidal/Mod.lean:351,397,401,403,412 for the restriction construction; other hits concern Mon.forget, tensor factors, reflectors, internal Hom, or comonads. Read Mod.lean:340–425: comap is defined at 403, but no limit-preservation assertion is present there.",
+   "date": "2026-10-16",
+   "verdict": "no match for internal-module restriction limit preservation; retain the split via the existing adjunction and general right-adjoint Mathlib leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -52,5 +168,29 @@
   "CategoryTheory.Mod.instPreservesLimitsOfSizeComap_weilConjectures"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-restriction-preserves-limits",
+  "worker": "stage1",
+  "summary": "Kept the statement and the unit item-2 adjunction route. Added the restriction definition as a statement dependency and the existing Mathlib right-adjoint-preserves-limits node as a proof dependency. Wrote explicit application to an arbitrary existing limit cone; no new nodes and no unproved limit-existence assumption. Checked completed project source, current blueprint, Stacks Tag 0038, and recorded actual Mathlib searches.",
+  "blueprint": "Realizes sk-def-sfb-change-of-scalars item 2, final implication: extension is left adjoint to restriction, hence restriction preserves limits; the imported item proof is its one-sentence adjunction assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Existing Mathlib leaf for Tag 0038 applies to the extension-restriction adjunction without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-adjoint-preserves-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-da16f66ad",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-da16f66ad (reviewer sub-agent of L); spot-checked: Read the item and cited statements in full; no new nodes. Both steps match the blueprint adjunction route and Stacks Tag 0038(2), with correct internal-module categories and unchanged hypotheses. Checked Mathlib sources, duplicates, small cases, and the dependency closure; no gaps or cycles found. Accepted the existing right-adjoint-preserves-limits tool use. Wrote review.md; no repairs needed."
+ }
 }
