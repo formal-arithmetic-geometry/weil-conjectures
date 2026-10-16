@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-sfb-cartesian-coefficients-finite-free",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\mathcal O_{F,X}$ is finite free over $\\mathcal O_{E,X}$",
@@ -13,32 +13,200 @@
   "place": "node det-prop-sfb-cartesian-coefficients-finite-free, order None"
  },
  "stmt_deps": [
-  "lem-sfb-subfield-flat"
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-integers-to-subfield",
+  "def-sfb-subfield-coefficient-map",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-change-of-scalars"
  ],
  "proof": [
   {
-   "text": "$\\cO_F$ is a finite torsion-free, hence free, module over the discrete valuation ring\n$\\cO_E$, of rank $d$. The map $\\cO_E^d\\to\\cO_F$, $(a_i)\\mapsto\\sum a_ib_i$, is a continuous\n$\\cO_E$-linear bijection between compact Hausdorff spaces, hence a homeomorphism. So for\nevery profinite $S$ it induces a bijection $C(S,\\cO_E)^d=C(S,\\cO_E^d)\\to C(S,\\cO_F)$, natural in\n$S$ and $C(S,\\cO_E)$-linear: an isomorphism of condensed $\\underline{\\cO_E}$-modules\n$\\underline{\\cO_E}^{\\,d}\\cong\\underline{\\cO_F}$ ([sk-def-sfb-condensed-ring]). Apply the\nadditive, monoidal functor $p_X^*$ ([sk-def-sfb-pullback-from-point]): it gives\n$\\cO_{E,X}^{\\,d}\\cong\\cO_{F,X}$ as $\\cO_{E,X}$-modules. Inverting $\\ell$\n([det-prop-sfb-qlbar-colimit-x-invert-ell]) gives $E_X^{\\,d}\\cong F_X$, and the two\nisomorphisms are compatible with $\\cO\\to E$ by construction. Compatibility with inverse\nimage follows from naturality of $f^{-1}p_Y^*\\cong p_X^*$.",
+   "text": "Put $R=\\mathcal O_E$ and $T=\\mathcal O_F$. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a DVR with fraction field $E$, in particular a PID. By [lem-weil-pbc-pid-noetherian-normal] it is Noetherian and normal. The field extension $F/E$ is finite and separable: in characteristic zero each irreducible minimal polynomial has nonzero derivative of lower degree, so its gcd with its derivative is 1 and it has no repeated roots. By [lem-sfb-padic-integers-integral-closure], $T$ is its integral closure. Thus [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] (Stacks Tag 032L) makes $T$ a finite $R$-module. It is torsion-free, since $R\\subset T\\subset F$ and $F$ is a field. Apply [lem-sc-dvr-fg-torsionfree-free] to obtain an $R$-basis $b_1,\\ldots,b_r$ of $T$.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-pullback-from-point",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sfb-padic-integers-integral-closure",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-sc-dvr-fg-torsionfree-free"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "First sentence: finite torsion-free, hence free over the DVR"
+   }
+  },
+  {
+   "text": "The same $b_i$ form an $E$-basis of $F$. Indeed, for each $x\\in F$, choose $m\\geq0$ so that $|\\ell|^m|x|_F\\leq1$; then $\\ell^m x\\in T$, so the $b_i$ span $F$ over $E$. For any relation $\\sum_i a_i b_i=0$ with $a_i\\in E$, choose a common $m$ with $\\ell^m a_i\\in R$ for every $i$; the $R$-linear independence forces all $a_i=0$. Here $0<|\\ell|=\\ell^{-1}<1$, and the rings of integers are the unit balls of [def-weil-l-adic-coefficient-extension]. Consequently $r=[F:E]=d$. This proves existence of the basis in the statement and applies to any choice of it.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "First sentence: rank equals d"
+   }
+  },
+  {
+   "text": "Let $\\psi_E:E^d\\to F$ send $(a_i)$ to $\\sum_i a_i b_i$. It is the $E$-linear equivalence just proved. The absolute-value topologies are Hausdorff and make addition and scalar multiplication continuous; $E$ is complete by [lem-weil-l-adic-extension-complete] and is nontrivially normed since $|\\ell|<1$. Apply [lem-weil-pbc-finite-dimensional-linear-homeomorphism] to $\\psi_E$. The integral map $\\psi:R^d\\to T$ is the restriction of this homeomorphism to $R^d$, whose image is exactly $T$ by the integral basis property. Both integral topologies are subspace topologies as in [def-sfb-padic-integers-condensed-ring]; hence $\\psi$ and its inverse are continuous. This proves the homeomorphism used by the blueprint without a separate compact-bijection lemma.",
+   "uses": [
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+    "def-sfb-padic-integers-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Second sentence: the basis map is a homeomorphism"
+   }
+  },
+  {
+   "text": "For every profinite $S$, send $(a_i)\\in C(S,R)^d$ to the function $s\\mapsto\\sum_i a_i(s)b_i$. Its inverse sends $h\\in C(S,T)$ to the coordinate functions of $\\psi^{-1}\\circ h$; these are continuous by the preceding step. The two composites are the identities, and both maps are $C(S,R)$-linear. Precomposition with any $S'\\to S$ commutes with these formulas. By the section description of [sk-def-sfb-condensed-ring], this is an isomorphism $\\underline R^{\\,d}\\cong\\underline T$ of condensed $\\underline R$-modules.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Third sentence: continuous functions, naturality, and condensed linearity"
+   }
+  },
+  {
+   "text": "Apply $p_X^*$ from [sk-def-sfb-pullback-from-point]. It preserves finite coproducts: for its right adjoint $G$, the adjunction gives $\\operatorname{Hom}(p_X^*(\\bigoplus_i A_i),B)\\cong\\prod_i\\operatorname{Hom}(A_i,GB)\\cong\\prod_i\\operatorname{Hom}(p_X^*A_i,B)$. Finite coproducts of abelian sheaves are finite direct sums. The module transport in [sk-def-sfb-transport] gives the action $p_X^*\\underline R\\otimes p_X^*\\underline T\\cong p_X^*(\\underline R\\otimes\\underline T)\\to p_X^*\\underline T$; applying this functor to the isomorphism and its inverse preserves their linearity and both identity composites. Using [sk-def-sfb-pulled-back-coefficients] gives $\\Psi_{X,0}:R_X^d\\cong T_X$ as $R_X$-modules. Its restriction to summand $i$ is multiplication by the constant element $b_i$ pulled back from the point; therefore its formula is the stated $\\sum_i a_i b_i$.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-transport",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Apply the additive monoidal functor p_X^*"
+   }
+  },
+  {
+   "text": "Localize $\\Psi_{X,0}$ at $\\ell$. Restriction of scalars along $R_X\\to T_X$ preserves colimits by the coextension adjunction in [sk-def-sfb-change-of-scalars]; the required closed tensor structure and colimit preservation of tensor are given by [sk-def-sfb-sheaf-tensor]. Equalizers of abelian sheaves are computed sectionwise: the subgroup on which two maps agree is a sheaf, since compatible sections glue uniquely in the ambient sheaf and their equality can be checked after restriction to a cover. This verifies the equalizer hypothesis for coextension. Thus the localization colimit of $T_X$ can equally be computed in $R_X$-modules. The colimit of a finite direct sum of systems is the finite direct sum of their colimits: maps from either object to a test module are exactly the same compatible families of maps from each summand. Since $\\Psi_{X,0}$ is linear, it commutes with multiplication by $\\ell$, so it induces an isomorphism between the colimits of $(R_X^d,\\ell)$ and $(T_X,\\ell)$. Identify these with $E_X^d$ and $F_X$ by [det-prop-sfb-qlbar-colimit-x-invert-ell], for $E$ and for $F$. The scalar map $\\iota_X:E_X\\to F_X$ is exactly the coefficient change of the condensed inclusion $\\underline E\\to\\underline F$ by [def-sfb-subfield-coefficient-map]; by [def-sfb-coefficient-map] its underlying map is $p_X^*$ of that inclusion. At the point the square of inclusions $\\underline R\\to\\underline T$ and $\\underline E\\to\\underline F$ commutes on every continuous function. Applying $p_X^*$ shows that $\\iota_X$ extends the integral scalar map after the maps $\\varphi_E,\\varphi_F$. By the localization universal property, this is the unique ring map from $R_X[1/\\ell]$ extending that integral scalar map, since $\\ell$ is invertible on $F_X$. Consequently the localized action on $F_X$ is restriction along precisely $\\iota_X$, so the isomorphism has the $E_X$-module structure required in the statement. On term $m$ the formula is $(a_i)\\mapsto\\ell^{-m}\\sum_i a_i b_i$, so the resulting $\\Psi_{X,1}$ has the required formula and is $E_X$-linear. The maps from term zero are precisely the integral-to-field morphisms of [def-sfb-integers-to-subfield]; thus $\\Psi_{X,1}\\circ\\varphi_E^d=\\varphi_F\\circ\\Psi_{X,0}$.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "def-sfb-integers-to-subfield",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-subfield-coefficient-map",
+    "def-sfb-coefficient-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Invert ell and check the integral-to-rational square"
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$, let $f^*$ denote inverse image on abelian pro-étale sheaves. Use the monoidal natural isomorphism $\\theta_f:f^*p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp]: first identify $p_Y^*=\\pi_Y^*p^*$, apply the inverse of the composition isomorphism to get $f^*\\pi_Y^*p^*\\cong(\\pi_Y\\circ f)^*p^*$, and then use $\\pi_Y\\circ f=\\pi_X$. Its components on the coefficient rings are the maps $\\alpha_f$ of [sk-def-sfb-coefficient-morphisms]. Naturality on each point-level map $\\underline R\\to\\underline T$, $a\\mapsto ab_i$, says $\\alpha_{f,T}\\circ f^*(b_i\\cdot-)=(b_i\\cdot-)\\circ\\alpha_{f,R}$. Hence the integral basis square commutes on every coproduct injection, and therefore commutes. Apply the same naturality to the rational point-level maps $\\underline E\\to\\underline F$, $a\\mapsto ab_i$ (they are continuous by the homeomorphism in step 3). Their pulled-back coproduct map agrees with step 6 because both agree after $R_X^d\\to E_X^d$ and are linear with $\\ell$ invertible. This proves the rational inverse-image square too.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Last sentence: compatibility with inverse image"
+   }
+  },
+  {
+   "text": "For either $(A,B)=(R_X,T_X)$ or $(E_X,F_X)$, the basis isomorphism identifies the underlying $A$-module of $B$ with $A^d$. The balanced coequalizer defining $B\\otimes_A M$ in [sk-def-sfb-change-of-scalars] therefore identifies its underlying abelian sheaf with $M^d$: explicitly, $(\\sum_i a_i b_i)\\otimes m\\mapsto(a_i m)_i$ and $(m_i)_i\\mapsto\\sum_i b_i\\otimes m_i$. For $a\\in A$, the images of $((\\sum_i a_i b_i)a)\\otimes m$ and $(\\sum_i a_i b_i)\\otimes (am)$ are both $(a_i a m)_i$, so the first formula is balanced. Additivity follows coordinatewise. The composite on $(m_i)_i$ is $(m_i)_i$, while the other composite sends $(\\sum_i a_i b_i)\\otimes m$ to $\\sum_i b_i\\otimes a_i m=\\sum_i a_i b_i\\otimes m$. These identities on the tensor generators prove that the maps are inverse. They define sheaf maps and factor through the sheaf tensor product of [sk-def-sfb-sheaf-tensor]; equivalently, distribute the coequalizer across the finite coproduct, using that tensor preserves coproducts. This identification is natural in $M$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Flatness conclusion: identify tensor with a finite power"
+   }
+  },
+  {
+   "text": "Finite limits of abelian sheaves exist sectionwise: compatible component sections glue component by component, and the diagram equations hold after gluing by uniqueness. For either coefficient ring $C=A$ or $C=B$, limits of $C$-module objects are computed on those underlying abelian sheaves: given their limit $L$ for a diagram of $C$-modules, compose $C\\otimes L\\to C\\otimes M_j\\to M_j$ with its projections to define the unique action on $L$; its unit and associativity identities and its universal property follow after every projection, using the action identities of [sk-def-sfb-module-objects]. Finite products commute with finite limits, since a map to either iterated limit is precisely the same family of components satisfying both sets of compatibility equations. Under the natural identification in step 8, scalar extension consequently preserves finite limits on underlying abelian sheaves and thus on $B$-modules. Thus both extension-of-scalars functors of [sk-def-sfb-change-of-scalars] preserve finite limits, which is the flatness asserted here.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Flatness conclusion: finite-limit preservation"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-padic-integers-integral-closure",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "def-sfb-padic-integers-condensed-ring",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pullback-from-point",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell"
+  "sk-def-sfb-transport",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "def-sfb-integers-to-subfield",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-subfield-coefficient-map",
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "Whole proof; expanded arithmetic, topology, naturality, and flatness arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padic.*[Ff]ree|[Ff]ree.*padic|continuousMap.*[Bb]asis",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the pro-etale finite-free coefficient sheaf isomorphisms with both compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, Module.Free",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the pro-etale finite-free coefficient sheaf isomorphisms with both compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of p-adic fields the associated condensed coefficient sheaves form a finite free module extension",
+   "results": "Condensed.finFree; Condensed.profiniteFree; BDeRham; BDeRhamPlus; PadicComplex.instAlgebraPadic; PadicAlgCl; Condensed.profiniteSolid; CondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the pro-etale finite-free coefficient sheaf isomorphisms with both compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A choice of integral basis of a finite extension induces isomorphisms of pro-etale coefficient sheaves compatible with pullback",
+   "results": "StandardEtalePair.homEquiv_apply_coe; StandardEtalePair.homEquiv; StandardEtalePresentation.mapEquiv; StandardEtalePair.homEquiv_symm_apply; StandardEtalePair.instFormallyEtaleRing; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; StandardEtalePresentation.mk.inj; KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-16",
+   "verdict": "no match: no result states the pro-etale finite-free coefficient sheaf isomorphisms with both compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of p-adic fields induces finite free condensed coefficient sheaves compatible with inverse image",
+   "results": "FiniteField.instFiniteExtension_1; Padic.field; Condensed.free; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; LightCondensed; FiniteField.instFiniteExtension; Condensed; Condensed.finFree",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern finite fields, the p-adic base field, general condensed categories or free-module functors; none states the finite-extension pro-etale sheaf theorem with its two compatibility clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -52,5 +220,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-cartesian-coefficients"
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-sfb-cartesian-coefficients-finite-free",
+  "worker": "stage1",
+  "summary": "Reused existing arithmetic and finite-dimensional topology leaves; isolated only the valuation/integral-closure bridge as a statement-only child. Wrote explicit condensed maps, adjunction transport, localization square, inverse-image naturality and both flatness proofs. Statement unchanged. Repair of the returned delivery: revalidated every dependency against current main; made the localized scalar action explicitly equal to the current coefficient inclusion, with citations to the coefficient-change definitions and a localization-uniqueness argument. Second reading refreshed verbatim citations, corrected substantive-step flags, and expanded module transport, tensor inverses, and the limit action for both coefficient rings. Current return 75e2ab96e7 repaired: re-read all 22 distinct dependencies against the latest DAG; the only changed statement is pullback-from-point composition. Step 7 now writes its composition construction, consistently uses f^* for abelian inverse image, and the citation quote is refreshed. No statement or hypothesis changes.",
+  "blueprint": "Steps 1-2 realize the first sentence, step 3 the homeomorphism sentence, step 4 the condensed module isomorphism, step 5 pullback, step 6 inversion of ell, step 7 naturality, steps 8-9 the flatness conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Arithmetic DVR/fraction-field input for coefficient fields, not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q24-b2ffd1d81",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-b2ffd1d81 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full; checked all nine steps, cited statements and sources, unit/chapter route, canonical inverse-image maps, coefficient categories, duplicate candidates, and small cases. No mathematical faults or repairs needed. Detailed findings are in review.md."
+ }
 }

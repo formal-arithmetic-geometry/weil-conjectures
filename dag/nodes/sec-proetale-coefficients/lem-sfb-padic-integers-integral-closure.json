@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-padic-integers-integral-closure",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+   "place": "Proof, first sentence: O_F is a finite torsion-free module over the DVR O_E; the valuation/integrality identification needed before applying the finite-integral-closure theorem",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integers of a finite local-field extension are the integral closure",
+ "statement": "Let $\\ell$ be a prime and let $E\\subseteq F$ be finite extensions of $\\mathbf Q_\\ell$. Give them their compatible extending $\\ell$-adic absolute values, and put $\\mathcal O_E=\\{a\\in E:|a|_E\\leq1\\}$ and $\\mathcal O_F=\\{x\\in F:|x|_F\\leq1\\}$, as in [def-weil-l-adic-coefficient-extension]. Then, for every $x\\in F$, $x\\in\\mathcal O_F$ if and only if $x$ satisfies a monic polynomial with coefficients in $\\mathcal O_E$. Equivalently, $\\mathcal O_F$ is the integral closure of $\\mathcal O_E$ in $F$ [def-weil-pbc-integral-closure].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+  "place": "First sentence, the arithmetic input on O_F/O_E: valuation/integral-closure bridge implicit in the finite-module assertion. A textbook treatment is Serre, Local Fields, Ch. II, section 2, Proposition 3 and its corollaries (wanted, not obtained)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite extension of p-adic fields the valuation ring in the larger field is the integral closure of the smaller valuation ring",
+   "results": "ValuationSubring.isIntegral_of_mem_ringOfIntegers'; instIsIntegrallyClosedSubtypeMemValuationSubring; Valuation.Integers.integrallyClosed; ValuationSubring.isIntegral_of_mem_ringOfIntegers; Valuation.Integers.isIntegrallyClosed_integers; Valuation.HasExtension.ofComapInteger; Valuation.Integers.isIntegrallyClosed; instIsIntegrallyClosedSubtypeMemSubring",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not identify the valuation ring in a finite field extension with the integral closure of the smaller valuation ring"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_iff_v_le_one|isIntegralClosure|integralClosure",
+   "results": "Mathlib/RingTheory/Valuation/Integral.lean:34,59,61,79 (Valuation.Integers.isIntegral_iff_v_le_one and integralClosure); Mathlib/RingTheory/Valuation/AlgebraInstances.lean:42-48 (isIntegral_of_mem_ringOfIntegers and its primed version); Mathlib/RingTheory/Valuation/LocalSubring.lean:220,225 (integral closures of subrings, without the local-field extension identification)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not identify the valuation ring in a finite field extension with the integral closure of the smaller valuation ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation.Integers.isIntegral_iff_v_le_one",
+   "results": "Valuation.Integers.isIntegral_iff_v_le_one",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not identify the valuation ring in a finite field extension with the integral closure of the smaller valuation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a finite p-adic field extension is integral over the base ring of integers if and only if its absolute value is at most one",
+   "results": "Valued.integer.mem_iff; Valuation.Integers.isIntegral_iff_v_le_one; PadicInt.mem_subring_iff; IsDedekindDomain.HeightOneSpectrum.mem_adicCompletionIntegers; PadicComplexInt.integers; NumberField.FinitePlace.norm_lt_one_iff_mem; NumberField.FinitePlace.norm_le_one; PadicInt.one_le_norm_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not identify the valuation ring in a finite field extension with the integral closure of the smaller valuation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of p-adic fields the valuation ring in the larger field is the integral closure of the smaller valuation ring",
+   "results": "ValuationSubring.isIntegral_of_mem_ringOfIntegers'; ValuationSubring.isIntegral_of_mem_ringOfIntegers; Valuation.Integers.isIntegrallyClosed; PadicComplex.valuation_extends; NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal; Valuation.Integers.integrallyClosed; Valuation.Integers.integralClosure; Valuation.Integers.isIntegrallyClosed_integers",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not identify the valuation ring in a finite field extension with the integral closure of the smaller valuation ring"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral.*norm|norm.*isIntegral|integral.*norm.*one",
+   "results": "Full-source hits concern number-field embeddings, algebraic normal extensions, and field norms. Repeated in Analysis: Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean:431,447 concern minimal polynomials over a field; Mathlib/Analysis/SpecialFunctions/Complex/LogBounds.lean:170 and Analysis/Calculus/BumpFunction/Normed.lean:96 concern analytic integration.",
+   "date": "2026-10-16",
+   "verdict": "no match: neither field integrality nor analytic integration identifies the larger valuation ring with the integral closure of the smaller one"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite extension of a complete nonarchimedean normed field an element is integral over the base valuation ring if and only if its norm is at most one",
+   "results": "Valued.integer.mem_iff; Valuation.Integers.isIntegral_iff_v_le_one; Valued.toNormedField.setOf_mem_integer_eq_closedBall; Valued.integer.norm_le_one; NumberField.FinitePlace.norm_lt_one_iff_mem; ValuationSubring.isIntegral_of_mem_ringOfIntegers; ValuationSubring.isIntegral_of_mem_ringOfIntegers'; Valued.toNormedField.norm_le_one_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the valuation-ring membership and norm-bound equivalences do not assert integrality over the smaller ring, while the integrality hits have the missing identification as a hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure_eq|isIntegralClosure.*[Vv]alu|[Vv]alu.*isIntegralClosure|isIntegral_of_norm_le_one",
+   "results": "Mathlib/RingTheory/ZariskisMainTheorem.lean; Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean; Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: same-ambient valuation-ring integrality or prior integral-closure membership is assumed; no result identifies the unit ball in the finite field extension with the integral closure of the base valuation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power bounded element in a finite dimensional extension of a complete discretely valued field is integral over the valuation ring",
+   "results": "ValuationSubring.isIntegral_of_mem_ringOfIntegers'; ValuationSubring.isIntegral_of_mem_ringOfIntegers; PowerBasis.repr_pow_isIntegral; Valuation.Integers.mem_of_integral; Valuation.Integers.isIntegral_iff_v_le_one; Valuation.Integers.isIntegrallyClosed; Valuation.Integers.isIntegrallyClosed_integers; Valued.integer.mem_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: same-ambient valuation-ring integrality or prior integral-closure membership is assumed; no result identifies the unit ball in the finite field extension with the integral closure of the base valuation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring of integers in a finite extension of a complete nontrivially normed nonarchimedean field is integral over the base valuation subring",
+   "results": "ValuationSubring.isIntegral_of_mem_ringOfIntegers'; ValuationSubring.isIntegral_of_mem_ringOfIntegers; ValuationSubring.algebra; NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal; Valuation.HasExtension.instAlgebraInteger; Valuation.Integers.mem_of_integral; Valuation.Integers.isIntegrallyClosed; NumberField.RingOfIntegers.extension_algebra_isIntegral (8 actual hits)",
+   "date": "2026-10-16",
+   "verdict": "no match: valuation integrality candidates assume prior integral-closure membership or the same-ambient integers hypothesis; number-field results and field-norm identities do not identify the unit ball of a finite local-field extension with the integral closure of the smaller unit ball"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral.*[Nn]orm|[Nn]orm.*isIntegral|IsIntegralClosure.*integer|[Ii]nteger.*IsIntegralClosure|integralClosure.*[Cc]losed[Bb]all",
+   "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Norm.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean; Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean (25 actual hits)",
+   "date": "2026-10-16",
+   "verdict": "no match: valuation integrality candidates assume prior integral-closure membership or the same-ambient integers hypothesis; number-field results and field-norm identities do not identify the unit ball of a finite local-field extension with the integral closure of the smaller unit ball"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-sfb-cartesian-coefficients-finite-free",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients"
+}
