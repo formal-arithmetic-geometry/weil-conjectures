@@ -25,9 +25,165 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary prime $\\mathfrak q\\subset B$, put $\\mathfrak p=f^{-1}(\\mathfrak q)$, $R=A_{\\mathfrak p}$ and $S=B_{\\mathfrak q}$, and let $g:R\\to S$ be the induced map. Weak etaleness supplies flatness of $f$ by [def-weil-pbc-ind-etale-algebra]. By [lem-weil-pbc-flat-local-ring-maps], $R$ and $S$ are Noetherian local rings and $g$ is flat and local. Write $u:R\\to\\widehat R$ and $v:S\\to\\widehat S$ for their completion maps. The G-ring hypothesis on $A$, unfolded by [def-weil-pbc-g-ring], says exactly that $u$ is regular. It remains to show that $v$ is regular for every such $\\mathfrak q$. If $B$ has no primes, this universal condition is vacuous.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Greco Theorem 5.3(i), reduction to local rings; Stacks Tag 00HT (lemma-flat-localization) and Tag 07GH (definition-G-ring)."
+   }
+  },
+  {
+   "text": "The localized map $g$ is weakly etale, as follows directly from the flat multiplication criterion. Put $T=B\\otimes_A B$ and $U=B\\setminus\\mathfrak q$. The $T$-module $B$, via multiplication, is flat; [lem-pc-affine-flat-module-localization-preserves-flatness] with this $B$-module and $U$ shows that $S=U^{-1}B$ is flat over $T$. The ring $S\\otimes_R S$ is the localization of $T$ obtained by inverting $b\\otimes1$ and $1\\otimes b$ for $b\\in U$: the forward map sends $(b/u)\\otimes(c/w)$ to $(b\\otimes c)/((u\\otimes1)(1\\otimes w))$, and the inverse sends $b\\otimes c$ to $(b/1)\\otimes(c/1)$ and inverts the displayed denominator factors. The balancing relations hold over $A$, and elements of $A\\setminus\\mathfrak p$ are already units in both factors. Its action on $S$ is multiplication. By [lem-weil-pbc-flat-over-localization], $S$ is flat over $S\\otimes_R S$. Together with step 1 this is the two-flatness definition [def-weil-pbc-ind-etale-algebra].",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization), parts (2) and (6); weak etaleness criterion, Tag 092B (definition-weakly-etale)."
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak t\\subset R$ put $k_{\\mathfrak t}=\\kappa(\\mathfrak t)$ and $F_{\\mathfrak t}=S\\otimes_R k_{\\mathfrak t}$. This fibre is Noetherian by [lem-weil-pbc-fibre-ring-noetherian] and weakly etale over the field $k_{\\mathfrak t}$ by the base-change clause of [lem-weil-pbc-ind-etale-stability]. The ind-etale conclusion of [lem-weil-pbc-weak-etale-field] gives a filtered presentation by etale algebras over this field. Apply [lem-weil-pbc-henselization-finite-separable-fibres] to $k_{\\mathfrak t}\\to F_{\\mathfrak t}$ at the zero prime of the base field. It gives a finite product $F_{\\mathfrak t}\\cong\\prod_{i=1}^r L_i$ with every $L_i/k_{\\mathfrak t}$ separable algebraic. The factors are the residue fields $\\kappa(\\mathfrak s_i)$ of the primes of $S$ contracting to $\\mathfrak t$: prime ideals and residue fields on both sides agree by taking first the quotient by $\\mathfrak t$ and then inverting the elements of $R\\setminus\\mathfrak t$. The empty product is allowed if the fibre is empty.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-henselization-finite-separable-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 092H (lemma-base-change-weakly-etale), 092Q (lemma-absolutely-flat-over-field), and 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres)."
+   }
+  },
+  {
+   "text": "At $\\mathfrak t=\\mathfrak m_R$ the closed fibre $S/\\mathfrak m_RS$ is nonzero and local, since $\\mathfrak m_RS\\subseteq\\mathfrak m_S$ and it is a quotient of $S$. A nonzero finite product of fields is local only when there is one factor: for two nonzero coordinate idempotents $e$ and $1-e$, neither is a unit, contradicting locality. Thus this fibre is $L=\\kappa(\\mathfrak m_S)$ and $L/k_{\\mathfrak m_R}$ is separable algebraic by step 3. By [lem-exc-separable-algebraic-square-zero-lifting], every $k_{\\mathfrak m_R}$-algebra map from $L$ to a square-zero quotient lifts. The maximal ideal of $L$ is zero, so every such map kills its first power. This is exactly formal smoothness of the closed fibre for its maximal-ideal-adic topology by [def-weil-pbc-formally-smooth-adic].",
+   "uses": [
+    "lem-exc-separable-algebraic-square-zero-lifting",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0322 (proposition-characterize-separable-field-extensions), square-zero lifting; Greco Theorem 5.3(i), the separable algebraic closed fibre in Remark 5.2."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-formally-smooth-closed-fibre-adic] to the flat local map $g:R\\to S$ of step 1 and the formally smooth closed fibre of step 4. It gives formal smoothness of $S/R$ for the $\\mathfrak m_S$-adic topology. Now [lem-weil-pbc-fs-adic-complete-source-target] gives the coordinate homomorphism $\\widehat g:\\widehat R\\to\\widehat S$ and formal smoothness of $\\widehat S/\\widehat R$ for the $\\mathfrak m_S\\widehat S$-adic topology. The map sends a compatible sequence represented by $r_n\\bmod\\mathfrak m_R^n$ to $g(r_n)\\bmod\\mathfrak m_S^n$; locality of $g$ makes these maps well-defined and compatible. Both $\\widehat g\\circ u$ and $v\\circ g$ send $r$ to $g(r)\\bmod\\mathfrak m_S^n$ at every level, hence they agree.",
+   "uses": [
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-complete-source-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NQ (proposition-fs-flat-fibre-fs), (2) implies (3); Tag 07ED (lemma-formally-smooth-completion), (1) implies (3); Greco Theorem 5.3(i), completed-local-map argument."
+   }
+  },
+  {
+   "text": "For $T=R,S$, the completion $\\widehat T$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Its maximal ideal $\\mathfrak m_T$ is finitely generated since $T$ is Noetherian. By [lem-weil-pbc-adic-completion-mod-ideal], $\\widehat T$ is complete for $I_T=\\mathfrak m_T\\widehat T$ and $\\widehat T/I_T\\cong T/\\mathfrak m_T$, a field. By [lem-weil-pbc-adic-complete-jacobson-radical], every maximal ideal contains $I_T$; the field quotient then forces $I_T$ to be the unique maximal ideal. The first-coordinate formula in step 5 sends the kernel of $\\widehat R\\to R/\\mathfrak m_R$ into that of $\\widehat S\\to S/\\mathfrak m_S$, so $\\widehat g$ is local. Thus step 5 supplies exactly the formal-smoothness hypothesis for this local map of complete Noetherian local rings, and [lem-weil-pbc-formally-smooth-complete-local-regular] proves $\\widehat g$ regular.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-formally-smooth-complete-local-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PM (proposition-fs-regular), (4) implies (1); completion properties: Algebra Tag 0316 (lemma-completion-Noetherian-Noetherian), Tag 05GG (lemma-hathat-finitely-generated), Tag 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "The ring $\\widehat S$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. For every prime $\\mathfrak t\\subset R$, its fibre $\\widehat S\\otimes_R\\kappa(\\mathfrak t)$ is therefore Noetherian by [lem-weil-pbc-fibre-ring-noetherian]. The regular maps $u$ from step 1 and $\\widehat g$ from step 6 consequently satisfy every hypothesis of [lem-weil-pbc-regular-composition]. Their composite $h=v\\circ g:R\\to\\widehat S$ is regular. In particular $D_{\\mathfrak t}=\\widehat S\\otimes_R k_{\\mathfrak t}$ is geometrically regular over $k_{\\mathfrak t}$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-regular-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian) and 07QI (lemma-regular-composition); Greco Theorem 5.3(i), composite-map sentence."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak t$ and the finite product $F_{\\mathfrak t}=\\prod_iL_i$ of step 3. By [lem-weil-pbc-tensor-cancel-base-change], $D_{\\mathfrak t}\\cong\\widehat S\\otimes_SF_{\\mathfrak t}$. The maps $c\\otimes(x_i)_i\\mapsto(c\\otimes x_i)_i$ and $(c_i\\otimes x_i)_i\\mapsto\\sum_i c_i\\otimes e_ix_i$, extended additively, are mutually inverse: $e_ix_i$ denotes $x_i$ inserted in the $i$th coordinate and zero elsewhere; the $e_i$ are the finitely many orthogonal coordinate idempotents and sum to one. They give $D_{\\mathfrak t}\\cong\\prod_i C_i$, where $C_i=\\widehat S\\otimes_S L_i=\\widehat S\\otimes_S\\kappa(\\mathfrak s_i)$, compatibly with the $k_{\\mathfrak t}$-actions. Each $C_i$ is the localization of $D_{\\mathfrak t}$ at $e_i$; explicitly all other coordinate idempotents become zero and the $i$th becomes one.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Greco Theorem 5.3(i), final formal-fibre argument, expanded as in Stacks Tag 0AH3 (lemma-henselization-pair-G-ring), displayed finite-product identity."
+   }
+  },
+  {
+   "text": "Each $C_i$ is geometrically regular over $k_{\\mathfrak t}$. Indeed it is Noetherian by [lem-weil-pbc-fibre-ring-noetherian], applied to $S\\to\\widehat S$ at $\\mathfrak s_i$. For any finite purely inseparable field extension $K/k_{\\mathfrak t}$, $K\\otimes_{k_{\\mathfrak t}}C_i$ is the localization of $K\\otimes_{k_{\\mathfrak t}}D_{\\mathfrak t}$ at $1\\otimes e_i$, via $(a\\otimes d)/(1\\otimes e_i)^n\\mapsto a\\otimes(d/e_i^n)$, with inverse $a\\otimes(d/e_i^n)\\mapsto(a\\otimes d)/(1\\otimes e_i)^n$. The balancing and localization relations make these maps well-defined and their composites fix every displayed generator. The latter ring is regular by step 7 and [def-weil-pbc-g-ring]; [lem-weil-pbc-localization-of-regular-ring] makes its localization regular. This is exactly the definition of geometric regularity of $C_i$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-of-regular-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0381 (lemma-geometrically-regular), localization argument in its proof; Tag 0AH3, extraction of a formal-fibre component."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak s\\subset S$, choose its contraction $\\mathfrak t$ and its factor $L_i=\\kappa(\\mathfrak s)$ in step 3. Step 9 gives $\\widehat S\\otimes_S\\kappa(\\mathfrak s)$ geometrically regular over $k_{\\mathfrak t}$. The extension $\\kappa(\\mathfrak s)/k_{\\mathfrak t}$ is separable algebraic, and this fibre is Noetherian as already checked, so [lem-weil-pbc-geometric-regularity-separable-extension] gives geometric regularity over $\\kappa(\\mathfrak s)$ itself. The map $v$ is flat by [lem-weil-pbc-local-completion-faithfully-flat]. By [def-weil-pbc-g-ring] it is therefore regular. Since the original prime $\\mathfrak q\\subset B$ was arbitrary and $B$ is Noetherian by hypothesis, the same definition gives that $B$ is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QH (lemma-geometrically-regular-over-separable-algebraic), 00MC (lemma-completion-faithfully-flat), 07GH (definition-G-ring); Greco Theorem 5.3(i), final inference."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-g-ring",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-exc-separable-algebraic-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-geometric-regularity-separable-extension",
+  "lem-weil-pbc-local-completion-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Theorem 5.3(i), proof on printed p. 147, specialized to geometric regularity; finite-product formal-fibre calculation expanded using Stacks Tag 0AH3. Greco read online; shared literature copy remains WANTED. Stacks sources read in the existing read-only literature mirror /home/ubuntu/work-bp/sheaf/literature/stacks-project/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,15 +233,332 @@
    "results": "{\"t\": \"2026-10-16T02:00:33Z\", \"tool\": \"grep\", \"query\": \"\\\\bG.?ring\\\\b|geometrically.?regular|universally.?Japanese|\\\\bNagata\\\\b|\\\\bJTwo\\\\b|\\\\bJ2Ring\\\\b|catenar\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
    "date": "2026-10-16",
    "verdict": "no match: the sole hit, Mathlib/RingTheory/NoetherNormalization.lean:14, credits Nagata for Noether normalization; it states none of the searched ring properties."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|formal.?fib[er]+|IsGRing",
+   "results": "{\"t\": \"2026-10-16T02:36:10Z\", \"tool\": \"grep\", \"query\": \"geometrically.?regular|formal.?fib[er]+|IsGRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leansearch\", \"query\": \"A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"RingHom.Smooth\", \"RingHom.Smooth.toAlgebra\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"644910b5a4da992a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"Algebra.smooth_iff\", \"Algebra.Smooth\"], \"digest\": \"b8c8bf3f78b949d0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G ring property ascends along weakly etale homomorphisms of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"G ring property ascends along weakly etale homomorphisms of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.toAlgebra\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.comp\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"3b6b4f59fda561fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of formal fibres is preserved by absolutely flat ring maps",
+   "results": "{\"t\": \"2026-10-16T02:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of formal fibres is preserved by absolutely flat ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"50f21840bd53fb41\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|formal.?fib[er]+|IsGRing",
+   "results": "{\"t\": \"2026-10-16T02:36:10Z\", \"tool\": \"grep\", \"query\": \"geometrically.?regular|formal.?fib[er]+|IsGRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leansearch\", \"query\": \"A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"RingHom.Smooth\", \"RingHom.Smooth.toAlgebra\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"644910b5a4da992a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"Algebra.smooth_iff\", \"Algebra.Smooth\"], \"digest\": \"b8c8bf3f78b949d0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G ring property ascends along weakly etale homomorphisms of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"G ring property ascends along weakly etale homomorphisms of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.toAlgebra\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.comp\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"3b6b4f59fda561fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of formal fibres is preserved by absolutely flat ring maps",
+   "results": "{\"t\": \"2026-10-16T02:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of formal fibres is preserved by absolutely flat ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"50f21840bd53fb41\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale maps of Noetherian rings preserve the G-ring property",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"leansearch\", \"query\": \"Weakly etale maps of Noetherian rings preserve the G-ring property\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GRing\"",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"GRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.instMonadCommRingRingM\", \"DirectSum.GRing\", \"Ring.directSumGRing\", \"DirectSum.GCommRing.toGRing\", \"DirectSum.GRing.toGSemiring\", \"DirectSum.GRing.intCast\", \"DirectSum.GRing.intCast_ofNat\", \"DirectSum.GRing.intCast_negSucc_ofNat\"], \"digest\": \"9fe0239ab0af7780\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|formal.?fib[er]+|IsGRing",
+   "results": "{\"t\": \"2026-10-16T02:36:10Z\", \"tool\": \"grep\", \"query\": \"geometrically.?regular|formal.?fib[er]+|IsGRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leansearch\", \"query\": \"A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"RingHom.Smooth\", \"RingHom.Smooth.toAlgebra\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"644910b5a4da992a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"Algebra.smooth_iff\", \"Algebra.Smooth\"], \"digest\": \"b8c8bf3f78b949d0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G ring property ascends along weakly etale homomorphisms of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"G ring property ascends along weakly etale homomorphisms of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.toAlgebra\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.comp\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"3b6b4f59fda561fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of formal fibres is preserved by absolutely flat ring maps",
+   "results": "{\"t\": \"2026-10-16T02:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of formal fibres is preserved by absolutely flat ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"50f21840bd53fb41\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale maps of Noetherian rings preserve the G-ring property",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"leansearch\", \"query\": \"Weakly etale maps of Noetherian rings preserve the G-ring property\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GRing\"",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"GRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.instMonadCommRingRingM\", \"DirectSum.GRing\", \"Ring.directSumGRing\", \"DirectSum.GCommRing.toGRing\", \"DirectSum.GRing.toGSemiring\", \"DirectSum.GRing.intCast\", \"DirectSum.GRing.intCast_ofNat\", \"DirectSum.GRing.intCast_negSucc_ofNat\"], \"digest\": \"9fe0239ab0af7780\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|formal.?fib[er]+|IsGRing",
+   "results": "{\"t\": \"2026-10-16T02:36:10Z\", \"tool\": \"grep\", \"query\": \"geometrically.?regular|formal.?fib[er]+|IsGRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leansearch\", \"query\": \"A flat local Noetherian ring homomorphism with geometrically regular closed fibre is adically formally smooth\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local ring maps with smooth special fibre have the infinitesimal lifting property for continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"RingHom.Smooth\", \"RingHom.Smooth.toAlgebra\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"644910b5a4da992a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of Noetherian local rings with geometrically regular closed fibre is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\", \"Algebra.smooth_iff\", \"Algebra.Smooth\"], \"digest\": \"b8c8bf3f78b949d0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "G ring property ascends along weakly etale homomorphisms of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T02:36:11Z\", \"tool\": \"leanfinder\", \"query\": \"G ring property ascends along weakly etale homomorphisms of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.toAlgebra\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt.comp\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.comp\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"3b6b4f59fda561fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of formal fibres is preserved by absolutely flat ring maps",
+   "results": "{\"t\": \"2026-10-16T02:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric regularity of formal fibres is preserved by absolutely flat ring maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"50f21840bd53fb41\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale maps of Noetherian rings preserve the G-ring property",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"leansearch\", \"query\": \"Weakly etale maps of Noetherian rings preserve the G-ring property\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GRing\"",
+   "results": "{\"t\": \"2026-10-16T02:39:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"GRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Meta.Grind.Arith.CommRing.instMonadCommRingRingM\", \"DirectSum.GRing\", \"Ring.directSumGRing\", \"DirectSum.GCommRing.toGRing\", \"DirectSum.GRing.toGSemiring\", \"DirectSum.GRing.intCast\", \"DirectSum.GRing.intCast_ofNat\", \"DirectSum.GRing.intCast_negSucc_ofNat\"], \"digest\": \"9fe0239ab0af7780\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits state etale or smooth algebra facts, flatness, going down, lifting maps to completions, or regular sequences; none gives G-ring ascent or geometric regularity of formal fibres."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-excellent",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-weakly-etale-g-ring",
+  "worker": "stage1",
+  "summary": "Second-reader repair: expanded the completed-local-map argument using existing formal-smoothness and completion nodes; removed the unsplit completion criterion and introduced only a Mathlib leaf for square-zero lifting over a separable algebraic field extension. Ten explicit steps retain Greco 5.3(i) and the finite-product formal-fibre calculation. The item statement is unchanged.",
+  "blueprint": "Realizes the second proof paragraph of thm-exc-curve-open-dimension-general: the G-ring component of localization and strict-henselization permanence of excellence, via lem-exc-weakly-etale-excellent. The formal-smoothness/completed-map route is Greco 5.3(i); no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic commutative-algebra input: Localizing a flat module over an algebra. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-noetherian",
+    "why": "Generic commutative-algebra input: Fibre rings of a Noetherian algebra are Noetherian. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic commutative-algebra input: Stability and diagonal of an ind-etale algebra. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic commutative-algebra input: Weakly etale algebras over a field. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-finite-separable-fibres",
+    "why": "Generic commutative-algebra input: A Noetherian filtered colimit of etale algebras has finite separable fibres. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "why": "Generic commutative-algebra input: Flatness and an adically formally smooth closed fibre imply adic formal smoothness. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-complete-source-target",
+    "why": "Generic commutative-algebra input: Adic formal smoothness passes to the completions of source and target. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input: The completion of a Noetherian ring is Noetherian. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "why": "Generic commutative-algebra input: Formally smooth local maps of complete Noetherian local rings are regular. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic commutative-algebra input: Composition of regular ring maps. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic commutative-algebra input: A localization of a regular ring is regular. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-regularity-separable-extension",
+    "why": "Generic commutative-algebra input: Geometric regularity over a separable algebraic extension. Used only within Greco Theorem 5.3(i); no affine-line/Kummer lemma supplies this local ring or formal-smoothness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-geometric-regularity-separable-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-9486891d1",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-9486891d1 (reviewer sub-agent of L); spot-checked: Read and checked all ten proof steps and the new lifting leaf against Greco 5.3(i), the cited Stacks sources, and Mathlib’s exact lifting interface. Hypotheses, edge cases, duplicate candidates, route, and twelve tool uses checked; no mathematical repair required. Full review recorded in review.md."
+ }
 }
