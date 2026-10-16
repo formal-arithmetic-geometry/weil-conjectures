@@ -1,0 +1,125 @@
+{
+ "id": "lem-exc-semilocal-restriction-length",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the general norm/order formula behind this length calculation, Stacks Tag 02MJ.",
+   "via": [
+    "lem-exc-dvr-norm-valuation-sum",
+    "lem-exc-dvr-galois-degree-data",
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of scalars length for a semilocal algebra",
+ "statement": "Let $A$ be a commutative local ring, meaning a commutative ring with exactly one maximal ideal $\\mathfrak m$, and put $k=A/\\mathfrak m$. Let $A\\to B$ be a unital homomorphism to a commutative ring whose set $X$ of maximal ideals is finite. Suppose every $\\mathfrak q\\in X$ contracts to $\\mathfrak m$ and the induced field extension $k\\to B/\\mathfrak q$ has finite dimension $f_{\\mathfrak q}=[B/\\mathfrak q:k]$ [def-weil-vector-space-dimension]. Let $M$ be a $B$-module of finite length [def-weil-pbc-module-length]. For $\\mathfrak q\\in X$ write $B_{\\mathfrak q}$ for the localization [def-weil-pbc-localization-at-prime] and $M_{\\mathfrak q}=(B\\setminus\\mathfrak q)^{-1}M$ for module localization [def-weil-pbc-module-localization]. Then $M$ has finite length over $A$ by restriction of scalars and $$\\mathrm{length}_A(M)=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\,\\mathrm{length}_{B_{\\mathfrak q}}(M_{\\mathfrak q}).$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M0 (lemma-pushdown-module), statement and its simple-factor filtration proof."
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "length of a finite module over a one dimensional local ring equals the sum of local lengths weighted by residue field degrees",
+   "results": "{\"t\": \"2026-10-16T20:43:17Z\", \"tool\": \"leanfinder\", \"query\": \"length of a finite module over a one dimensional local ring equals the sum of local lengths weighted by residue field degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_eq_finrank\", \"Ideal.finrank_quotient_eq_sum\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.length_of_free_of_finite\", \"IsLocalRing.finrank_quotient_map\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.length_of_free\", \"Module.length_eq_rank\"], \"digest\": \"ce8832292eeff60f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a semilocal algebra over a local ring, length of a finite length module after restriction of scalars is the sum of lengths of its localizations multiplied by residue field dimensions",
+   "results": "{\"t\": \"2026-10-16T20:45:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a semilocal algebra over a local ring, length of a finite length module after restriction of scalars is the sum of lengths of its localizations multiplied by residue field dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq\", \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.length_eq_finrank\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"IsLocalRing.finrank_quotient_map\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.length_of_free_of_finite\"], \"digest\": \"de59706eb4b5e3a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module length over a local ring equals sum of localized lengths weighted by residue extension degrees in a semilocal algebra",
+   "results": "{\"t\": \"2026-10-16T20:45:48Z\", \"tool\": \"leansearch\", \"query\": \"Module length over a local ring equals sum of localized lengths weighted by residue extension degrees in a semilocal algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_eq_add_of_exact\", \"Module.length_pi_of_fintype\", \"IsLocalization.rank_eq\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Module.length_of_free\", \"Module.length_eq_rank\", \"IsLocalRing.finrank_quotient_map\", \"Module.length_eq_finrank\"], \"digest\": \"ef5f0aa09e7b9465\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, localization, residue field degree",
+   "results": "{\"t\": \"2026-10-16T20:43:12Z\", \"tool\": \"loogle\", \"query\": \"Module.length, localization, residue field degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid Loogle pattern; the service reported unknown identifier localization. Replaced by the valid named query IsLocalRing.length_restrictScalars, which returned the local-ring theorem and was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.length_restrictScalars",
+   "results": "{\"t\": \"2026-10-16T20:45:49Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing.length_restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalRing.length_restrictScalars\"], \"digest\": \"eeb7fcda38958ef6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*local|local.*length|residue.*degree",
+   "results": "{\"t\": \"2026-10-16T20:43:16Z\", \"tool\": \"grep\", \"query\": \"length.*local|local.*length|residue.*degree\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\"], \"digest\": \"9347751ef8a2079d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "length_restrictScalars|length.*sum|sum.*length",
+   "results": "{\"t\": \"2026-10-16T20:45:48Z\", \"tool\": \"grep\", \"query\": \"length_restrictScalars|length.*sum|sum.*length\", \"sub\": \"RingTheory/Length.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"223\", \"300\"], \"digest\": \"5fc8ba56a561aff4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsLocalRing.length_restrictScalars (read LocalRing/Length.lean:25-78, theorem at 54) assumes B itself local and has no semilocal localization sum. Module.length_pi_of_fintype is additivity for a product already given; the required localization decomposition is not its statement. The other hits are rank, length additivity, or ramification of a base uniformizer, not this arbitrary finite-length-module formula. The Loogle query containing localization reported an unknown identifier and supplies no absence evidence; the valid named Loogle search was also run.",
+   "subdirectory": "RingTheory/Length.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition length of a module restricted along a ring homomorphism is sum over maximal ideals of localized composition lengths times residue field dimensions",
+   "results": "{\"t\": \"2026-10-16T21:24:10Z\", \"tool\": \"leanfinder\", \"query\": \"Composition length of a module restricted along a ring homomorphism is sum over maximal ideals of localized composition lengths times residue field dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Module.rankAtStalk_eq\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\"], \"digest\": \"40d34ecefa23b2b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73; IsLocalRing.length_restrictScalars at lines 54-55 requires B local. Composition-series length and ramification/inertia results do not give the stated localization sum for an arbitrary finite-length module over a semilocal ring. No one-line specialization yields this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"length\", \"local\"",
+   "results": "{\"t\": \"2026-10-16T21:24:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"length\\\", \\\"local\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsLocalRing.length_restrictScalars\", \"IsLocalRing.length_baseChange\", \"IsLocalRing.depth_eq_sSup_length_isRegular\", \"IsLocalRing.ideal_depth_eq_sSup_length_isRegular\"], \"digest\": \"db37112f30af1732\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73; IsLocalRing.length_restrictScalars at lines 54-55 requires B local. Composition-series length and ramification/inertia results do not give the stated localization sum for an arbitrary finite-length module over a semilocal ring. No one-line specialization yields this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition length under restriction to a local base is a residue degree weighted sum of lengths at maximal ideals of a semilocal algebra",
+   "results": "{\"t\": \"2026-10-16T21:25:18Z\", \"tool\": \"leansearch\", \"query\": \"Composition length under restriction to a local base is a residue degree weighted sum of lengths at maximal ideals of a semilocal algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization\", \"IsLocalRing.ResidueField.map_map\", \"Module.length_compositionSeries\", \"isFiniteLength_of_exists_compositionSeries\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Localization.localRingHom_comp\", \"IsLocalRing.ResidueField.map_comp\", \"Ideal.sum_ramification_inertia\"], \"digest\": \"dd8833da9a5faa6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73; IsLocalRing.length_restrictScalars at lines 54-55 requires B local. Composition-series length and ramification/inertia results do not give the stated localization sum for an arbitrary finite-length module over a semilocal ring. No one-line specialization yields this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det",
+   "results": "{\"t\": \"2026-10-16T21:24:24Z\", \"tool\": \"grep\", \"query\": \"length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean\", \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\"], \"digest\": \"b95842049980ddc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73; IsLocalRing.length_restrictScalars at lines 54-55 requires B local. Composition-series length and ramification/inertia results do not give the stated localization sum for an arbitrary finite-length module over a semilocal ring. No one-line specialization yields this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-norm-valuation-sum",
+  "date": "2026-10-17",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

@@ -29,9 +29,100 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-endomorphism-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $B$ as an $A$-submodule of $L$ and let $S$ be its $K$-linear span. Finite $A$-generators [def-weil-finitely-generated-module] also span $S$ over $K$, so $S$ is finite-dimensional [def-weil-finite-dimensional-subspace]. It contains $1$, is closed under multiplication, and is contained in the field $L$. For a nonzero $c\\in S$, multiplication by $c$ is an injective $K$-linear endomorphism of the finite-dimensional space $S$, hence is surjective; in particular $1=cz$ for some $z\\in S$. Thus $S$ is a subfield containing $B$ and therefore contains its fraction field $L$. Consequently $S=L$, so $B$ is a finite $A$-submodule spanning $L$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), the lattice B in L used in the final proof paragraph; spanning verified explicitly."
+   }
+  },
+  {
+   "text": "Fix $y\\in L^\\times$ and let $g:L\\to L$ be multiplication by $y$, an invertible $K$-linear map with inverse multiplication by $y^{-1}$. Put $H=B\\cap yB$ inside $L$, and $M_+=B/H$, $M_-=yB/H$. The intersection $H$ is a $B$-submodule of both $B$ and $yB$ because multiplication in $L$ is commutative. Apply [lem-exc-dvr-lattice-distance-determinant] to $R=A$, $V=L$, the lattice $B$ from Step 1 and $g$. It gives finite $A$-length of both $M_+$ and $M_-$, and $$v_A(N_{L/K}(y))=\\ell_A(M_+)-\\ell_A(M_-),$$ since $N_{L/K}(y)$ is by definition the determinant of multiplication by $y$ [def-weil-endomorphism-determinant].",
+   "uses": [
+    "lem-exc-dvr-lattice-distance-determinant",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02MI (lemma-order-vanishing-determinant) and 02MG (definition-distance), applied to the lattice B as in Tag 02MJ."
+   }
+  },
+  {
+   "text": "Every strict chain of $B$-submodules of either $M_+$ or $M_-$ is also a strict chain of $A$-submodules. Thus the finite $A$-lengths in Step 2 imply finite $B$-lengths by [def-weil-pbc-module-length]. Apply [lem-exc-semilocal-restriction-length] separately to these two $B$-modules. The hypotheses hold: $X$ is finite, every maximal ideal contracts to $\\mathfrak m_A$, and the residue degrees $f_{\\mathfrak q}$ are finite by assumption. Subtract the resulting two finite sums, in $\\mathbf Z$, to obtain $$v_A(N_{L/K}(y))=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\bigl(\\ell_{B_{\\mathfrak q}}((M_+)_{\\mathfrak q})-\\ell_{B_{\\mathfrak q}}((M_-)_{\\mathfrak q})\\bigr).$$",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "lem-exc-semilocal-restriction-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M0 (lemma-pushdown-module), applied to the two quotient modules in the distance formula of Tag 02MI."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in X$ and put $R=B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. Since $B$ is a domain, every denominator outside $\\mathfrak q$ is nonzero, so these localizations embed in $L$. The localizations of $B$ and $yB$ inside $L$ are $R$ and $yR$. Also $\\operatorname{Frac}(R)=L$: the inclusions $B\\subseteq R\\subseteq L$ show that $\\operatorname{Frac}(R)\\subseteq L$, and every fraction of elements of $B$ is a fraction of elements of $R$, giving the reverse inclusion. Moreover $H_{\\mathfrak q}=R\\cap yR$: if $x=b/s=yc/t$ with $b,c\\in B$ and $s,t\\notin\\mathfrak q$, then $stx=tb=ysc\\in B\\cap yB=H$, so $x\\in H_{\\mathfrak q}$; the reverse inclusion is immediate. Apply [lem-weil-pbc-localization-module-exact] to the quotient exact sequences $H\\to B\\to M_+$ and $H\\to yB\\to M_-$. The localized quotient maps are surjective (lift a fraction of a quotient to the fraction of any representative) by [def-weil-pbc-module-localization]. Hence they induce $R$-linear isomorphisms $$(M_+)_{\\mathfrak q}\\cong R/(R\\cap yR),\\qquad (M_-)_{\\mathfrak q}\\cong yR/(R\\cap yR).$$ Each isomorphism identifies submodules in both directions by image and inverse image and preserves strict inclusions; therefore the corresponding module lengths are equal by [def-weil-pbc-module-length].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02M0 and 02MI; identification of the localized quotients and intersection, written explicitly from fractions."
+   }
+  },
+  {
+   "text": "The ring $R$ is a DVR by hypothesis and [def-sc-discrete-valuation-ring]. It is a principal ideal domain, so [lem-weil-pbc-pid-noetherian-normal] gives Noetherianity. Fix a uniformizer $t$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], each nonzero principal ideal of $R$ is $(t^j)$ for some $j\\geq0$. Since every ideal is principal, the ideals containing $(t^n)$ are precisely $(t^j)$ for $0\\leq j\\leq n$; if $j>n$ and $t^n\\in(t^j)$, cancellation would make the nonunit $t$ invertible, so necessarily $j\\leq n$; divisibility of powers gives the reverse order on the exponents. Submodules of $R/(t^n)$ are the corresponding ideals modulo $(t^n)$, so their longest strict chain has length $n$, and $\\ell_R(R/(t^n))=n$ by [def-weil-pbc-module-length], also for $n=0$. Every nonzero fraction $y=a/b$ with $a,b\\in R$ has such a form: apply the cited power lemma to $a=u_1t^i$ and $b=u_2t^j$ to get $y=(u_1u_2^{-1})t^{i-j}$. The exponent is unique, since equality of two such forms with different exponents would make a positive power of $t$ a unit. Thus write $y=ut^r$ with $u\\in R^\\times$, $r=v_R(y)\\in\\mathbf Z$, using the normalized-valuation convention stated above. If $r\\geq0$, then $yR=t^rR\\subseteq R$ and the two lengths in Step 4 are $r$ and $0$. If $r=-n<0$, then $R\\subseteq yR=t^{-n}R$ and the two lengths are $0$ and $n$: multiplication by $t^n$ identifies $yR/R$ with $R/t^nR$. In both cases the first length minus the second is $v_R(y)$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MD (definition-ord), normalized to the uniformizer exponent using Tag 00PD (lemma-characterize-dvr); the ideal-chain and negative-exponent calculations are written out."
+   }
+  },
+  {
+   "text": "Substitute the local difference computed in Steps 4 and 5 into the sum in Step 3. This yields $$v_A(N_{L/K}(y))=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\,v_{B_{\\mathfrak q}}(y).$$ The argument used only $y\\ne0$ and includes units, positive valuations and negative valuations, so it proves the assertion for every $y\\in L^\\times$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MJ (lemma-finite-extension-dim-1), final norm/order equality, with arbitrary fractions handled by the full lattice-distance formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-finite-dimensional-subspace",
+  "lem-exc-dvr-lattice-distance-determinant",
+  "def-weil-endomorphism-determinant",
+  "def-weil-pbc-module-length",
+  "lem-exc-semilocal-restriction-length",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02MJ (lemma-finite-extension-dim-1), using its inputs Tags 02M0 and 02MI directly. Apply the full lattice-distance formula to arbitrary nonzero y instead of first reducing to y in B; compute both signed local lengths explicitly in a DVR."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -103,10 +194,46 @@
    "results": "[leanfinder] OK 8 hit(s); Ring.ordFrac_eq_ord, NumberField.FinitePlace.norm_def, NumberField.FinitePlace.norm_embedding_eq, NumberField.FinitePlace.norm_def', NumberField.FinitePlace.norm_def_int, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun, IsDedekindDomain.HeightOneSpectrum.adicAbvDef, Ideal.relNorm_eq_pow_of_isMaximal",
    "date": "2026-10-16",
    "verdict": "no match: the independent ideal-norm search gives principal-ideal norm identities, not the sum of normalized valuations. Read pinned Ideal/Norm/RelNorm.lean:49-83,270-302,401-440: the prime norm comparison either assumes Galois fraction fields or a perfect base fraction field, whereas the present arbitrary finite field extension has neither hypothesis. The other hits are analytic norms or definitions, and no declaration specializes in one line to this formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valuation of the field norm in an arbitrary finite extension of fraction fields of DVRs is the sum of residue degrees times normalized valuations",
+   "results": "{\"t\": \"2026-10-16T20:45:59Z\", \"tool\": \"leanfinder\", \"query\": \"Valuation of the field norm in an arbitrary finite extension of fraction fields of DVRs is the sum of residue degrees times normalized valuations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intNormAux\", \"NumberField.FinitePlace.norm_def_int\", \"NumberField.FinitePlace.norm_def'\", \"NumberField.FinitePlace.norm_embedding_eq\", \"Valued.norm\", \"NormedField.valuation\", \"NumberField.FinitePlace.norm_def\", \"Valued.norm_def\"], \"digest\": \"bd2c89c31712728b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic norms and order/valuation definitions only; no weighted norm-order identity. Read the Ring.ord definition in OrderOfVanishing/Basic.lean and the length comparison in LocalRing/Length.lean. The latter handles local restriction of scalars and does not itself prove a field-norm formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field norm order of vanishing equals residue field degree weighted sum of local orders for a finite semilocal extension of a DVR",
+   "results": "{\"t\": \"2026-10-16T20:46:21Z\", \"tool\": \"leanfinder\", \"query\": \"Field norm order of vanishing equals residue field degree weighted sum of local orders for a finite semilocal extension of a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.FinitePlace.norm_embedding_eq\", \"NumberField.FinitePlace.norm_def_int\", \"NumberField.FinitePlace.norm_def'\", \"NumberField.FinitePlace.norm_def\", \"Ring.ordFrac\", \"ModP.preVal\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"Ring.ordFrac_eq_ord\"], \"digest\": \"90bf607a4fcf5beb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic norms and order/valuation definitions only; no weighted norm-order identity. Read the Ring.ord definition in OrderOfVanishing/Basic.lean and the length comparison in LocalRing/Length.lean. The latter handles local restriction of scalars and does not itself prove a field-norm formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The discrete valuation of a field norm is the sum of residue field degrees times local discrete valuations",
+   "results": "{\"t\": \"2026-10-16T20:46:19Z\", \"tool\": \"leansearch\", \"query\": \"The discrete valuation of a field norm is the sum of residue field degrees times local discrete valuations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedField.v_eq_valuation\", \"Valued.norm\", \"IsDiscreteValuationRing.addVal_mul\", \"IsNonarchimedeanLocalField.instIsDiscrete\", \"NormedField.valuation_apply\", \"Valued.toNormedField.norm_le_iff\", \"IsDiscreteValuationRing.addVal_def\", \"Valued.coe_valuation_eq_rankOne_hom_comp_valuation\"], \"digest\": \"63e76394d8fdf744\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic norms and order/valuation definitions only; no weighted norm-order identity. Read the Ring.ord definition in OrderOfVanishing/Basic.lean and the length comparison in LocalRing/Length.lean. The latter handles local restriction of scalars and does not itself prove a field-norm formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.ordFrac, Algebra.norm",
+   "results": "{\"t\": \"2026-10-16T20:45:49Z\", \"tool\": \"loogle\", \"query\": \"Ring.ordFrac, Algebra.norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic norms and order/valuation definitions only; no weighted norm-order identity. Read the Ring.ord definition in OrderOfVanishing/Basic.lean and the length comparison in LocalRing/Length.lean. The latter handles local restriction of scalars and does not itself prove a field-norm formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ordFrac.*norm|norm.*ordFrac|norm.*valuation|valuation.*norm",
+   "results": "{\"t\": \"2026-10-16T20:45:48Z\", \"tool\": \"grep\", \"query\": \"ordFrac.*norm|norm.*ordFrac|norm.*valuation|valuation.*norm\", \"sub\": \"RingTheory/Ideal/Norm\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: analytic norms and order/valuation definitions only; no weighted norm-order identity. Read the Ring.ord definition in OrderOfVanishing/Basic.lean and the length comparison in LocalRing/Length.lean. The latter handles local restriction of scalars and does not itself prove a field-norm formula.",
+   "subdirectory": "RingTheory/Ideal/Norm"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-dvr-galois-degree-data",
@@ -114,5 +241,21 @@
   "group": "N7"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-dvr-norm-valuation-sum",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Stacks 02MJ and its cited 02M0, 02MI, 02MF, 02MG and 02MD. Replaced the empty proof with lattice spanning, determinant distance, semilocal length restriction, localization and the explicit signed DVR ideal-chain computation. Two statement-only general-purpose inputs are new; neither restates the norm formula. All definitions, localization exactness and DVR factorization reuse existing nodes. No project Lean declaration gives this item.",
+  "blueprint": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the general norm/order formula behind this length calculation, Stacks Tag 02MJ. Steps 1-6 supply the norm/order calculation underlying the finite-free-normalization length argument of that paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-ND-5932cf706",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-5932cf706 (reviewer sub-agent of L); spot-checked: The item statement is unchanged against the side DAG base, and the live copy is still unsplit. It is the DVR case of Stacks 02MJ (algebra.tex lemma-finite-extension-dim-1, l.30038), and it adds no separability, normality or henselian hypothesis. The six steps are correct. Step 1: the K-span of B is a finite-dimensional domain inside L, so it is a field equal to L. Step 2: the lattice node is applied with M=B and g=multiplication by y; the sign agrees with 02MI/02MG, where d(M,gM)=l(M/H)-l(gM/H). Step 3: finite A-length gives finite B-length, the 02M0 node is applied to both quotients, and they are subtracted in Z. Step 4: localization embeds in L, H_q=R∩yR by the common denominator st, the localized quotient maps are surjective, and Frac(B_q)=L. Step 5: the ideals over (t^n) give length n, and the cases r≥0 and r<0 are both written out. Step 6: substitution. New node lem-exc-dvr-lattice-distance-determinant is the DVR case of 02MI plus 02MF(2,3) and 02MG, true and statement-only. I tested it on V=0, rank one with g=t^r, and diag(t,t^-1). New node lem-exc-semilocal-restriction-length is exactly 02M0 (l.12603). I tested it on M=0, B=k×k, and a residue extension of degree f. Mathlib's IsLocalRing.length_restrictScalars needs B local and Ideal.sum_ramification_inertia_eq_finrank_fiber states something different, so neither node has a Mathlib match. Grep of the side and live DAGs for tags 02M0, 02MF, 02MG, 02MI and 02MJ and for lattice/norm keywords found no duplicate. Every cited node is a Mathlib leaf or definition, so there is no route issue and no tool_uses. The blueprint from.place is verified in main-20261015 lem-exc-dvr-galois.proof.md, first paragraph. No changes were made."
+ }
 }

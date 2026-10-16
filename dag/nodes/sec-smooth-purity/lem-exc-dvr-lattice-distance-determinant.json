@@ -1,0 +1,133 @@
+{
+ "id": "lem-exc-dvr-lattice-distance-determinant",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the general norm/order formula behind this length calculation, Stacks Tag 02MJ.",
+   "via": [
+    "lem-exc-dvr-norm-valuation-sum",
+    "lem-exc-dvr-galois-degree-data",
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Relative length of DVR lattices equals determinant valuation",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $K$ be its fraction field, and let $V$ be a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace]. Let $M\\subseteq V$ be an $R$-submodule which is finitely generated [def-weil-finitely-generated-module] and whose $K$-linear span is $V$. Let $g:V\\to V$ be a $K$-linear isomorphism and put $H=M\\cap g(M)$. Write $\\ell_R$ for module length [def-weil-pbc-module-length], $\\det_K(g)$ for the endomorphism determinant [def-weil-endomorphism-determinant], and $v_R:K^\\times\\to\\mathbf Z$ for the normalized valuation, defined by $v_R(ut^r)=r$ for a unit $u\\in R^\\times$, a uniformizer $t$ and $r\\in\\mathbf Z$. Then both $M/H$ and $g(M)/H$ have finite $R$-length, and, regarding those lengths as integers, $$\\ell_R(M/H)-\\ell_R(g(M)/H)=v_R(\\det_K(g)).$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02MI (lemma-order-vanishing-determinant), specialized to a DVR, with the finite-length assertion from Tag 02MF (lemma-compare-lattices) and the distance definition Tag 02MG (definition-distance). Order as defined in Tag 02MD (definition-ord) is the normalized uniformizer exponent for a DVR."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-length",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "length of quotient by an endomorphism equals valuation of determinant over a DVR",
+   "results": "{\"t\": \"2026-10-16T20:43:16Z\", \"tool\": \"leansearch\", \"query\": \"length of quotient by an endomorphism equals valuation of determinant over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.natAbs_det_equiv\", \"LinearMap.det_eq_det_mul_det\", \"LinearMap.det\", \"Submodule.natAbs_det_basis_change\", \"ModP.preVal_mk\", \"LinearMap.associated_det_comp_equiv\", \"Valuation.onQuotVal\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\"], \"digest\": \"e3c7689834d53002\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "length quotient by endomorphism determinant valuation DVR",
+   "results": "{\"t\": \"2026-10-16T20:43:19Z\", \"tool\": \"leanfinder\", \"query\": \"length quotient by endomorphism determinant valuation DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModP.preVal\", \"ClassGroup.cardM\", \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"Ring.ordFrac\", \"Module.length_quotient\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"Ring.ord\", \"Submodule.natAbs_det_basis_change\"], \"digest\": \"7d64d47b9f100774\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a DVR lattice M in a finite dimensional fraction field vector space and an automorphism g, length M modulo intersection gM minus length gM modulo intersection M equals valuation of determinant g",
+   "results": "{\"t\": \"2026-10-16T20:45:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a DVR lattice M in a finite dimensional fraction field vector space and an automorphism g, length M modulo intersection gM minus length gM modulo intersection M equals valuation of determinant g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.natAbs_det_equiv\", \"Submodule.natAbs_det_basis_change\", \"AddSubgroup.relIndex_eq_natAbs_det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"AddSubgroup.relIndex_eq_abs_det\", \"AddSubgroup.relindex_eq_abs_det\", \"Ideal.natAbs_det_equiv\", \"AddSubgroup.index_eq_natAbs_det\"], \"digest\": \"5b7773baf36c042d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lattice and its image under a fraction field linear automorphism have relative length equal to the discrete valuation of its determinant",
+   "results": "{\"t\": \"2026-10-16T20:46:19Z\", \"tool\": \"leansearch\", \"query\": \"A lattice and its image under a fraction field linear automorphism have relative length equal to the discrete valuation of its determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.relIndex_eq_abs_det\", \"FractionalIdeal.abs_det_basis_change\", \"LinearEquiv.det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"ZLattice.covolume_eq_det_inv\", \"ZLattice.covolume_eq_det\", \"ZLattice.covolume_eq_det_mul_measureReal\", \"ZLattice.comap_equiv\"], \"digest\": \"6df13fac57e9278d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, Module.length",
+   "results": "{\"t\": \"2026-10-16T20:43:14Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, Module.length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, Ring.ordFrac",
+   "results": "{\"t\": \"2026-10-16T20:45:49Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, Ring.ordFrac\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*length|length.*determinant|ord.*det",
+   "results": "{\"t\": \"2026-10-16T20:43:16Z\", \"tool\": \"grep\", \"query\": \"determinant.*length|length.*determinant|ord.*det\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\"], \"digest\": \"4f54d3c8f946764e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization.",
+   "subdirectory": "LinearAlgebra"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*det|det.*length|distance.*lattice",
+   "results": "{\"t\": \"2026-10-16T20:45:48Z\", \"tool\": \"grep\", \"query\": \"length.*det|det.*length|distance.*lattice\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a discrete valuation ring the length of the cokernel of an injective map of finite free modules is the additive valuation of its determinant",
+   "results": "{\"t\": \"2026-10-16T21:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"Over a discrete valuation ring the length of the cokernel of an injective map of finite free modules is the additive valuation of its determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_of_free_of_finite\", \"Module.length_le_of_injective\", \"Ideal.finrank_quotient_eq_sum\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.length_of_free\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Submodule.finrank_quotient_eq_sum\"], \"digest\": \"6fd3218c6eb5742b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, \"ord\"",
+   "results": "{\"t\": \"2026-10-16T21:24:25Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, \\\"ord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The additive valuation of the determinant of an invertible matrix over the fraction field of a discrete valuation ring equals the signed length of two lattices modulo their intersection",
+   "results": "{\"t\": \"2026-10-16T21:25:18Z\", \"tool\": \"leansearch\", \"query\": \"The additive valuation of the determinant of an invertible matrix over the fraction field of a discrete valuation ring equals the signed length of two lattices modulo their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isUnits_det_units\", \"Matrix.isAddUnit_detp_mul_detp\", \"IsDiscreteValuationRing.addVal_mul\", \"Matrix.detInvertibleOfInvertible\", \"Matrix.GeneralLinearGroup.val_det_apply\", \"IsDiscreteValuationRing.addVal.congr_simp\", \"IsDiscreteValuationRing.addVal\", \"Matrix.invertibleEquivDetInvertible\"], \"digest\": \"6a9f6d5e5bf5ace8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det",
+   "results": "{\"t\": \"2026-10-16T21:24:24Z\", \"tool\": \"grep\", \"query\": \"length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean\", \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\"], \"digest\": \"b95842049980ddc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-norm-valuation-sum",
+  "date": "2026-10-17",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}
