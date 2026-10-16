@@ -43,9 +43,255 @@
   "prop-weil-pbc-comparison-direct-image",
   "lem-cbc-proetale-extension-zero-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the operations on the whole strict diagram category, without a finiteness assumption on $B$. The canonical constant-ring identifications hold for any ring: the sheafification universal property identifies maps from $\\underline B$ to a ring sheaf $F$ with ring maps $B\\to F(1)$; composing inverse images of topoi therefore identifies inverse image of $\\underline B$ with $\\underline B$, preserving its constant sections. Under this identification the module pullback is the exact inverse image of [def-weil-pbc-proetale-operations]. Extension along an open is the localized-site functor of [lem-pur-site-restriction-module-adjunction-exact], by weakly-etale localization. Apply these additive functors termwise to towers. Kernels and cokernels of towers are levelwise, so their exactness persists; the componentwise units and counits commute with transitions and give the termwise adjunctions. The diagram-site realization is a small ringed site, so its module complexes admit K-injective resolutions. The right adjoint of an exact additive functor preserves K-injectives. Consequently termwise direct image has its unbounded total derived functor; the termwise adjunction on homotopy categories and the canonical derived-adjunction theorem give $G_u\\dashv R_u^{\\mathcal T}$. Exact open extension and open restriction descend directly, giving $j_!\\dashv G_j$ with their termwise units and counits. In particular no replacement of strict towers by arbitrary diagrams in individual derived categories has occurred.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); derived.tex Tags 08BJ and 0DVC; diagram application supplied by agent"
+   }
+  },
+  {
+   "text": "For the cartesian open square, localization gives $j^{-1}g_*\\cong(g_V)_*j'^{-1}$, with the identity comparison on the same sections over the pulled-back test object. Hence $G_gj_!$ and $j'_!G_{g_V}$ are left adjoints of canonically identified right adjoints. The unit-normalized uniqueness of left adjoints supplies their canonical isomorphism $\\beta$. Its inverse $t:j'_!G_{g_V}\\to G_gj_!$ has $j'_!\\dashv j'^{-1}$ transpose equal to $G_{g_V}\\eta_j$, followed by $G_{g_V}G_j\\cong G_{j'}G_g$: this follows by composing the two adjunction Hom bijections and inserting the open unit. It is the inverse direction specified in the statement. The identities $j^{-1}j_!\\cong1$ used here follow directly on the localized extension presheaf: for an object over the open there is exactly one lift to that open. These comparisons, units and their equations act termwise on towers and complexes, and descend by exact-functor factorization and the localization universal property. For successive base changes, transpose both inverse comparisons under the final open adjunction. Both transposes are $G_{hg,V}\\eta_j$ followed by the same iterated inverse-image compositor; naturality of the unit identifies the successive transpose with this one. For successive opens transpose under the composite open adjunction: the unit is $G_{j_1}\\eta_{j_2}j_{1!}\\circ\\eta_{j_1}$, so again the two transposes coincide. Identity comparisons have the identity transpose. Injectivity of the adjunction Hom bijections proves the base-change, open-composition and identity laws, with the canonical compositors, before any evaluation. At finite $B$ this is the canonical extension-by-zero base change of the existing node, since its restriction comparison and open unit are the same ones.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE (definition-extension-zero) and 09AF (lemma-jshriek-comparison), left-adjoint uniqueness argument; sites-modules.tex Tag 04J0 (lemma-localize-morphism-ringed-sites)"
+   }
+  },
+  {
+   "text": "Construct $s$ by the fibre-product universal property. Base change of the open $i$ makes $b:W_S\\to W$ an open immersion. The commutativity $pk=ir$ says that $k(V)$ lies in this open. Restricting an open immersion to an open containing its image is again the same isomorphism onto its image: identify $W_S$ with $p^{-1}(i(S))\\subset W$, and $V$ with $k(V)$ therein; the induced map is $s$, by the fibre-product uniqueness. Thus $s$ is an open immersion, with $bs=k$ and $qs=r$. The map $q$ is separated, being the base change of the separated map $p$. Since $r$ is proper, the proper-over-separated theorem, applied over $S$ to $qs=r$, makes $s$ proper. A proper immersion is a closed immersion. Therefore $s(V)$ and its complement $C$ are disjoint open subschemes covering $W_S$. This argument applies equally to the empty open and does not assume that $r$ is an identity or that the original square is cartesian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6 (lemma-image-proper-scheme-closed), part (2); schemes.tex Tag 01IQ (lemma-immersion-when-closed); applied to the open case of more-etale.tex Tag 0F7B"
+   }
+  },
+  {
+   "text": "For a module sheaf $F$ on $W_S$, every pro-etale test object $H$ is covered by the two disjoint opens $H\\times_{W_S}s(V)$ and $H\\times_{W_S}C$. The sheaf axiom identifies its sections with the product of the two component section modules, since the intersection is empty. Projection to the first factor, extended by zero on the second, consequently defines a unique natural module map $\\pi_s:F\\to s_!s^{-1}F$. On a clopen immersion extension by zero and direct image agree by exactly this product formula (the other component is the zero module); thus this is the claimed projection and it commutes with restrictions, module maps, tower transitions and differentials. Compose it with the $\\beta$ of step 2 and the open-composition comparison to obtain exactly the displayed $\\alpha_Q$. If the square is cartesian then $s=1$, so $\\pi_s=1$ and $\\alpha_Q=\\beta_{i,p}$. If $r=1$ and $V=S$, then $s=(k,1)$ is the indicated clopen section and the projection is its component projection. This is a construction, not an inference from the finite-coefficient theorem.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-fibre-product",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; proetale.tex Tag 09AE; intrinsic component projection supplied by agent"
+   }
+  },
+  {
+   "text": "We verify the geometric identities for $\\alpha$ itself. Write $J_j=j_!$ and suppress inverse-image compositors. For vertically stacked squares the required identity is\n$$\\alpha_{Q_2Q_1}=(\\alpha_{Q_1}G_{r_2})\\circ(G_{p_1}\\alpha_{Q_2}):G_{p_1}G_{p_2}J_{i_2}\\to J_{k_1}G_{r_1}G_{r_2}.$$\nUse $\\beta$ to identify the source with extension from the inverse image in the top-right scheme of the bottom-left open. The first projection on the right selects the inverse image of the middle-left open; the second selects the top-left open $k_1(V)$ inside it. The latter open is contained in the former by commutativity. Their composite is therefore identity on $k_1(V)$ and zero on the complementary clopen pieces, exactly the outer projection. To check this on sheaves, pull back the two clopen decompositions to each test object and take their four intersections; on each nonempty intersection the two maps are either both identity or both zero. Sheaf uniqueness then proves equality. For horizontally adjacent squares the formula is\n$$\\alpha_{Q_2Q_1}=(J_l\\alpha_{Q_1})\\circ(\\alpha_{Q_2}J_i):G_qJ_jJ_i\\to J_lJ_kG_r.$$\nHere the first projection selects $l(W)$ and the second selects $lk(V)$ inside it; the same intersection argument proves the formula. The $\\beta$ and open-extension identifications agree by step 2, so these are identities of the specified maps, not just their supports. Finally base change pulls $W_S=s(V)\\amalg C$ to $W_{1,S_1}=s_1(V_1)\\amalg C_1$. Inverse image sends this split module decomposition and its identity/zero projections to the pulled-back ones, since it is additive and preserves finite products. The beta comparisons identify the two open extensions by step 2. If $\\theta:G_{p_1}G_b\\cong G_aG_p$ is the pullback square identification, the resulting cube equation is\n$$(\\beta_kG_r)\\circ(G_a\\alpha_Q)\\circ(\\theta J_i)=(\\alpha_{Q_1}G_c)\\circ(G_{p_1}\\beta_i),$$\nwhere $G_dG_r$ and $G_{r_1}G_c$ are identified canonically. It is checked on the two clopen components just described. These arguments work on arbitrary sheaves and with arbitrary $B$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change); explicit clopen proof of their underived input in the pro-etale case"
+   }
+  },
+  {
+   "text": "All functors occurring in $\\alpha$ and $\\beta$ are exact. Apply their sheaf transformations termwise to towers and then to complexes. Exact-functor factorization and the uniqueness part of localization descend their transformations and every equation of steps 2, 4 and 5 to the unbounded derived strict-tower categories. Now take the mate of $\\alpha_Q$ for $G_r\\dashv R_r^{\\mathcal T}$ and $G_p\\dashv R_p^{\\mathcal T}$. The mate definition is precisely\n$$(R_p^{\\mathcal T}J_k\\varepsilon_r)\\circ(R_p^{\\mathcal T}\\alpha_QR_r^{\\mathcal T})\\circ(\\eta_pJ_iR_r^{\\mathcal T}).$$\nThis constructs the stated $\\gamma_Q$, naturally on the derived tower category. Its transformation is fixed by this formula on that category. In particular it is not selected by asking for prescribed evaluations.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), unit-square-counit construction; arbitrary proper/open square uses alpha from steps 4-5"
+   }
+  },
+  {
+   "text": "Evaluation commutes with exact $G_u,J_j$ termwise. Choose a K-injective tower representative $I$ of an input. Its evaluation $I_n$ is K-injective by the tower-evaluation theorem, so $\\operatorname{ev}_n(u_*I)=u_*I_n$ computes both $\\operatorname{ev}_nR_u^{\\mathcal T}$ and $Ru_*\\operatorname{ev}_n$, with the canonical resolution comparison. These identifications preserve the adjunction units and counits: on homotopy categories the adjunction is the termwise one, and the canonical derived Hom bijection is computed by that adjunction into the K-injective representative. Evaluating that chain-map transpose gives exactly the transpose into $I_n$; the K-injective Hom bijection makes it the same derived transpose. Hence evaluating the mate formula of step 6 gives the single-level mate of the single-level clopen $\\alpha_Q$. No assertion that evaluation is faithful is needed. For a coefficient map $B\\to\\Lambda$, apply the ring-sheaf-change-adjunction theorem to $\\underline B_T\\to\\underline\\Lambda_T$. It supplies the canonical inverse-image and derived direct-image scalar-restriction comparisons and their adjunct identity. Open extension commutes with scalar restriction as well: its extension presheaf has exactly the same underlying additive sections and the restricted scalar action, and sheafification gives the same underlying sheaf with that action. The component projection also has the same identity/zero formula. Thus the adjunct identity and the mate formula identify the single-level $B$-mate on $\\operatorname{Res}N$ with the restriction of the $\\Lambda$-mate on $N$. This uses no flatness of $B\\to\\Lambda$ and does not assert that scalar restriction preserves K-injectives.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), Tag 0DVC (lemma-pre-derived-adjoint-functors); sites-cohomology.tex Tags 0D6E and 07A6 for coefficient comparison"
+   }
+  },
+  {
+   "text": "We identify the resulting single-level mate at $\\nu_V^*L$, for finite $\\Lambda$ and $L\\in D^+(V_{\\mathrm{et}},\\Lambda)$. First the normalized finite etale comparison of [lem-cbc-proper-open-interchange-coherence] is the mate of the etale version of our $\\alpha$. To see the normalization, restrict to $i:S\\hookrightarrow T$. Localization gives $G_iRp_*k_!L\\cong Rq_*G_bk_!L=Rq_*s_!L\\cong Rr_*L$. The last comparison uses $s_!=s_*$ for the clopen component and derived pushforward composition. On a K-injective representative $J$ of $L$, the sheaf identification $i_!r_*J\\cong p_*k_!J$ in that node restricts, under these identifications, to the identity of $r_*J$: sections on $s(V)$ are retained and the complementary component is zero. A resolution $k_!J\\to I$ gives the canonical derived comparison, so the open-adjunction transpose of that node's specified arrow is the inverse of this restriction identification. The transpose of our proper mate is the same map: restricting $\\alpha$ to $s(V)$ gives the identity and $G_rRr_*\\to1$ is its counit, so the proper adjunction triangle identity cancels its unit. Injectivity of the open-adjunction Hom bijection identifies the two arrows. This also proves the claimed refinement normalization, since the finite node explicitly identifies its refinement arrow.\nNow compare the two sites. The finite open comparison $\\nu^*j_!\\cong j_!\\nu^*$ and pullback comparison identify the two alpha maps: after the clopen decomposition each is identity on the same component and zero on its complement. The canonical direct-image comparison is explicitly the counit mate in [lem-weil-pbc-comparison-direct-image-canonical-mate]. Its displayed counit equation, applied to $p$ and $r$, and the mate-pasting identities therefore identify the proper mate of this alpha square with\n$$i_!\\nu_S^*Rr_{\\mathrm{et},*}L\\cong\\nu_T^*i_!Rr_{\\mathrm{et},*}L\\xrightarrow{\\nu_T^*\\gamma_Q^{\\mathrm{et}}}\\nu_T^*Rp_{\\mathrm{et},*}k_!L\\cong Rp_{\\mathrm{proet},*}k_!\\nu_V^*L,$$\nwith the source also identified with $i_!Rr_{\\mathrm{proet},*}\\nu_V^*L$. More explicitly, transpose under $G_p\\dashv Rp_*$: the counit equation replaces $G_p$ of each direct-image comparison followed by $\\varepsilon_p$ by $\\nu^*\\varepsilon_p^{\\mathrm{et}}$; the same equation for $r$ replaces its counit. The remaining map is precisely the compared clopen alpha, so the two transposes are equal. Proper $p,r$ are qcqs: finite type includes quasi-compactness, and their separated diagonals are closed immersions. On an affine open a closed immersion is the affine quotient by an ideal, so its inverse image is quasi-compact. Thus the diagonals are quasi-compact, which is the definition of quasi-separatedness. These are exactly the hypotheses of the direct-image site-comparison theorem; no Noetherian hypothesis on schemes is used. Exact open extension preserves the lower bound of $L$, so $k_!L$ is also in its required $D^+$ domain. The displayed transported comparison is an isomorphism because the finite etale gamma and the two canonical site comparisons are isomorphisms. Together with step 7 this proves both the specified finite-evaluation normalization and invertibility of every evaluated gamma in the statement.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-derived-open-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-adjunction-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), K-injective normalization; proetale.tex Tag 09AF (lemma-jshriek-comparison) and 099R (section-comparison), with counit-mate normalization from the cited existing node"
+   }
+  },
+  {
+   "text": "Let $M$ satisfy the stated witnesses, with a possibly different finite ring and lower bound for every $n$. Step 7 transports evaluation of $\\gamma_{Q,M}$ along the given isomorphism $\\operatorname{ev}_nM\\cong\\operatorname{Res}\\nu_V^*L_n$; step 8 proves that transported arrow is an isomorphism. Evaluation is exact and tower cohomology is levelwise, so for every degree $a$ the morphism $H^a(\\gamma_{Q,M})$ has isomorphic components at every $n$. A morphism of towers with isomorphic components is itself invertible: the component inverses commute with transitions by multiplying the original commutative transition squares by those inverses. Therefore each $H^a(\\gamma_{Q,M})$ is an isomorphism, and the unbounded-derived cohomology criterion makes $\\gamma_{Q,M}$ an isomorphism. This detects invertibility only. It does not infer equality of derived morphisms from equality of their evaluations, and it uses no uniform bound in $n$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), cohomological isomorphism criterion; homology.tex Tag 02MZ (lemma-inverse-systems-abelian) for levelwise cohomology"
+   }
+  },
+  {
+   "text": "Apply the two mate-pasting formulas to the alpha equations in step 5, now in the derived tower categories of step 6. Pasting along the proper adjunctions sends $(\\alpha_{Q_1}G_{r_2})(G_{p_1}\\alpha_{Q_2})$ to\n$$(R_{p_2}^{\\mathcal T}\\gamma_{Q_1})\\circ(\\gamma_{Q_2}R_{r_1}^{\\mathcal T}).$$\nPasting along the open functors sends $(J_l\\alpha_{Q_1})(\\alpha_{Q_2}J_i)$ to\n$$(\\gamma_{Q_2}J_k)\\circ(J_j\\gamma_{Q_1}).$$\nThese are the two displayed gamma laws. Use the composite-adjunction units and counits in the mate-pasting theorem. They correspond to the canonical proper direct-image compositor: right adjoints of the exact inverse images preserve K-injectives, so on a K-injective tower complex $I$ the composition is represented by the underived equality $(p_2p_1)_*I=p_{2,*}p_{1,*}I$; this is the normalization of the ringed-topos composition theorem on the diagram sites. The open compositor is similarly the unit-normalized left adjoint of iterated restriction from step 2. For three proper maps, these underived identifications associate to the same triple direct image on $I$; for three opens the transposes are the same iterated restriction unit. The Hom/localization bijections and uniqueness of adjoints preserve these equations. Together with associativity of natural-transformation composition and the alpha projection identities, this proves independence of parenthesization. Identity horizontal maps give $\\alpha=1_{G_p}$ and the identity clause of mate-pasting gives $1_{R_p^{\\mathcal T}}$. Identity vertical maps give $\\alpha=1_{J_i}$ and identity adjunctions give $1_{J_i}$. These are equalities of derived tower transformations on all inputs, before the finite-origin restriction.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C and 0F7D, corresponding vertical/horizontal pasting; sites-cohomology.tex Tags 0D6E, 0E46, 0E47; generic mate-pasting applied to the proved alpha identities"
+   }
+  },
+  {
+   "text": "Finally take mates of the cube equation in step 5. The pullback square isomorphisms $G_{p_1}G_b\\cong G_aG_p$ and $G_{r_1}G_c\\cong G_dG_r$ have mates $E_p^{\\mathcal T}$ and $E_r^{\\mathcal T}$. The mate-pasting formulas, with the open beta transformations left untransposed, turn the left side of that cube into\n$$(R_{p_1}^{\\mathcal T}\\beta_k)\\circ(E_p^{\\mathcal T}J_k)\\circ(G_b\\gamma_Q),$$\nand the right side into\n$$(\\gamma_{Q_1}G_d)\\circ(J_{i_1}E_r^{\\mathcal T})\\circ(\\beta_iR_r^{\\mathcal T}).$$\nOne can verify the cancellations directly from the mate formula: insert $\\eta_p,\\varepsilon_r$ for $\\gamma_Q$ and the analogous units and counits for the two exchange mates; naturality moves the beta and alpha factors between them. Each intermediate adjacent unit-counit pair cancels by the adjunction triangle identity. The two uncancelled middle composites are exactly $(\\beta_kG_r)(G_a\\alpha_Q)(\\theta J_i)$ and $(\\alpha_{Q_1}G_c)(G_{p_1}\\beta_i)$ of step 5, so their equality proves this formula. This uses the mate-pasting theorem as an equality theorem, not invertibility of either exchange. Proper and open base-change stability ensure that $Q_1$ is again an allowed square, and quasi-compactness of the opens is preserved by base change. All constituent equations were already descended from strict sheaf-diagram equations or proved by adjunction in the strict derived categories. Thus the base-change equation, the two composition laws and their identity normalizations hold for arbitrary commutative proper/open squares, including all intermediate refinement squares specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change); sites-cohomology.tex Tag 07A7 (remark-base-change), cube mate calculation supplied explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-proper-base-change",
+  "lem-pc-quasi-compact-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases, with sites-cohomology.tex Tag 07A7. Strict-tower enhancement, clopen alpha construction, alpha cube/pasting verification, finite normalization and derived-category argument supplied by agent."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -137,15 +383,173 @@
    "results": "139, 159, 417; returned gluing, profinite-limit or underived sheaf-pushforward signatures do not give proper/open interchange in derived strict pro-etale towers. Read SheafOfModules.pushforwardComp and pushforward_assoc in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139,159: these are underived pushforward compositors only.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived strict tower proper open comparison on pro-etale module sheaves with coherent mates",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.comp, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; generic scheme-module adjunctions or derived natural transformations/mate pasting only; not the full strict pro-etale tower proper/open theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedNatTrans, Adjunction, extensionByZero",
+   "results": "0 hits: . loogle: unknown identifier 'rightDerivedNatTrans'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid identifier query; repeated with quoted identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|proper_open|strict.tower|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; generic scheme-module adjunctions or derived natural transformations/mate pasting only; not the full strict pro-etale tower proper/open theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward and open extension by zero commute coherently for derived inverse systems",
+   "results": "0 hits: . service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero open immersion sheaves derived functors adjunction mate base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; generic scheme-module adjunctions or derived natural transformations/mate pasting only; not the full strict pro-etale tower proper/open theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedNatTrans\"",
+   "results": "9 hits: CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; generic scheme-module adjunctions or derived natural transformations/mate pasting only; not the full strict pro-etale tower proper/open theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|mateEquiv_hcomp|mateEquiv_vcomp",
+   "results": "16 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read hits; generic scheme-module adjunctions or derived natural transformations/mate pasting only; not the full strict pro-etale tower proper/open theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-cbc-complete-proetale",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "worker": "stage1",
+  "summary": "Eleven-step proof using existing nodes only. Constructed the open unit-normalized isomorphism for arbitrary constant B; proved the clopen geometry and intrinsic projection identities, descended them to strict derived towers, and took proper mates. Separated finite-evaluation/coefficients/site normalization and cohomological isomorphism detection from pre-evaluation equality. Wrote both alpha pasting identities and the base-change cube whose mates are all claimed gamma laws. No statement change, new node, Mathlib leaf, Lean edit or compilation.",
+  "blueprint": "Realizes thm-cbc-complete-proetale Proof, final sentence on compatibility of compactification comparisons with completed maps: steps 1-6 construct the actual strict-tower open/proper transformations; steps 7-9 give the finite-origin normalization and invertibility; steps 10-11 give the pre-evaluation refinement, composition and base-change equations needed before Rlim.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic Strict diagrams as modules on a small site; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic Pre-derived adjunction from essentially constant derived systems; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic Localization of a morphism of ringed sites; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Generic Evaluation preserves K-injective complexes of inverse systems; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic Derived adjunctions under compatible changes of ring sheaves; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Generic Derived direct image restricted to an open; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic Comparison direct image; used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site); used for the strict-diagram construction or its categorical/geometric normalization. The compact-support unit supplies no replacement for this tool, and its proper/open then finite-level route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-7b63271f4",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-7b63271f4 (reviewer sub-agent of L); spot-checked: Read the complete item, all eleven steps, cited statements and sources. Verified clopen geometry, mate normalization, finite-origin evaluation, scalar restriction, and coherence before evaluation. No new nodes, circular dependency involving the item, or required repairs. Concrete source checks, edge cases, and accepted tool_uses are recorded in review.md."
+ }
 }
