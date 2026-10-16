@@ -31,9 +31,69 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $H$ be the simplicial subset of the displayed degreewise construction consisting of the pure $K$ and $N(I)$ simplices and of the mixed simplices whose lower simplex $\\sigma$ lies in $K_{a_{i+1}}$. The face and degeneracy operators on a lower block act inside that simplicial subset. Operators on the upper chain preserve its order; when the first upper index is deleted, the new first index is larger and the inclusion $K_{a_{i+1}}\\subseteq K_{a_{i+2}}$ carries $\\sigma$ to the required lower block. If the upper block disappears, the pure $K$ summand remains, and if the lower block disappears the pure nerve summand remains. Thus the stated formulas define a simplicial set $H=K_F$ and the evident inclusion $N(I)\\hookrightarrow H$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1 and the simplicial-operator rules for K_F; direct verification in the specialized increasing-cover case"
+   }
+  },
+  {
+   "text": "For every nondegenerate simplex $\\sigma$ of $K$, put $I_\\sigma=\\{a\\in I\\mid \\sigma\\in K_a\\}$ with the induced order. It is nonempty because the $K_a$ cover $K$. If $a,b\\in I_\\sigma$, an upper bound $c$ for $\\{a,b\\}$ lies in $I_\\sigma$ because the family is increasing. Hence $I_\\sigma$ is a small nonempty directed poset; its parallel arrows are equal. The statement of [lem-cbc-filtered-nerve-weak-contractibility] therefore applies and gives $N(I_\\sigma)\\to\\Delta^0$ a weak homotopy equivalence.",
+   "uses": [
+    "lem-cbc-filtered-nerve-weak-contractibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.8, directed-index verification for the subposets of indices containing a simplex; weak contractibility input"
+   }
+  },
+  {
+   "text": "Well-order the nondegenerate simplices of $K$ by increasing dimension, so that every face of a simplex comes before it, and for an initial collection $L$ let $H(L)$ contain all of $N(I)$, the pure simplices of $K$ whose nondegenerate root lies in $L$, and exactly the mixed simplices whose lower simplex has its nondegenerate root in $L$. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], every simplex $\\tau$ of $K$ is uniquely $S(s)(\\rho)$ for a surjection $s$ and a nondegenerate root $\\rho$; since each $K_a$ is a simplicial subset, $\\tau\\in K_a$ if and only if $\\rho\\in K_a$. As faces of $\\rho$ have roots of smaller dimension, each $H(L)$ is a simplicial subset. Starting with $H(\\varnothing)=N(I)$, adjoining a nondegenerate $m$-simplex $\\sigma$ is the pushout of $\\partial\\Delta^m\\star N(I_\\sigma)\\hookrightarrow\\Delta^m\\star N(I_\\sigma)$ along the map sending a pure simplex $\\alpha$ of $\\Delta^m$ to $S(\\alpha)(\\sigma)$, a chain to itself, and a mixed pair $(\\alpha,a_{i+1}\\leq\\cdots\\leq a_n)$ to $(S(\\alpha)(\\sigma),a_{i+1}\\leq\\cdots\\leq a_n)$, which lies in $K_F$ because $\\sigma\\in K_{a_{i+1}}$. The boundary part lands in the old stage, because the faces of $\\sigma$ come earlier. The simplices of $\\Delta^m\\star N(I_\\sigma)$ outside $\\partial\\Delta^m\\star N(I_\\sigma)$ are those whose $\\Delta^m$ part is a surjection $s$ onto $[m]$. By the uniqueness of the decomposition they correspond bijectively to the new simplices: the pure degeneracies $S(s)(\\sigma)$, and the mixed simplices with lower simplex $S(s)(\\sigma)$ and first index in $I_\\sigma$. Their whole chain then lies in $I_\\sigma$, since $I_\\sigma$ is upward closed. Hence the square is a pushout degreewise. Unlike the plain relative skeletal filtration of [lem-coef-infinity-monomorphism-boundary-cells], which attaches all cells of one dimension in a single coproduct, this is a transfinite sequence of single attachments. At a limit stage, the union is $H(L)$ for the union of the earlier collections.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.8, filtration of K_F by nondegenerate simplices and its pushout description; Proposition 4.2.3.1 notation"
+   }
+  },
+  {
+   "text": "By step 2, $N(I_\\sigma)\\to\\Delta^0$ is a weak homotopy equivalence. Apply [lem-coef-contractible-join-right-anodyne] to $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and $N(I_\\sigma)$; it says that each attaching map $\\partial\\Delta^m\\star N(I_\\sigma)\\hookrightarrow\\Delta^m\\star N(I_\\sigma)$ is right anodyne, with no quasicategory hypothesis on either factor. The sequence in step 3 is obtained by pushouts of these maps, including the successive pushouts used to refine any coproduct of cells, and its limit is their transfinite composite. Closure under pushouts and small transfinite compositions, which is part of [def-coef-infinity-right-anodyne], therefore makes the composite $N(I)=H(\\varnothing)\\hookrightarrow H(K)=K_F$ right anodyne. The empty-dimensional case uses $\\partial\\Delta^0=\\varnothing$ and is included.",
+   "uses": [
+    "lem-coef-contractible-join-right-anodyne",
+    "def-coef-infinity-right-anodyne",
+    "lem-cbc-filtered-nerve-weak-contractibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.8 and Remark 4.2.3.9, pp. 252-253; transfinite attachment conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne",
+  "lem-cbc-filtered-nerve-weak-contractibility",
+  "lem-coef-contractible-join-right-anodyne",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Proposition 4.2.3.8 and Remark 4.2.3.9, specialized to the increasing directed cover and expanded through the explicit nondegenerate-simplex filtration. The online text is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +129,38 @@
    "results": "{\"t\": \"2026-10-16T21:25:28Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial replacement of a directed cover has a cofinal inclusion of its indexing nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.representableBy\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialThickening.functor_map\", \"SSet.stdSimplex.isoNerve\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"adb38e22d16e7ed6\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits concern ordinary nerves, sets, or generators for the Quillen model structure using all horns. They do not assert the one-sided right-anodyne decomposition inclusion. Loogle has zero hits; pinned grep finds only directed paths in Path.lean:13,35."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of the nerve of a directed poset into the decomposition simplicial set is right anodyne",
+   "results": "8 hits: SSet.modelCategoryQuillen.J; SSet.stdSimplex.isoNerve_hom_app_apply; CategoryTheory.Nerve.quasicategory; SSet.prodStdSimplex.isoNerve; CategoryTheory.Nerve.isStrictSegal; SSet.modelCategoryQuillen.I; SSet.stdSimplex.isoNerve. None states the directed-cover right-anodyne inclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "right anodyne, nerve, directed, simplicial",
+   "results": "0 hits; unknown identifier right",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|directed|decomposition [Mathlib/AlgebraicTopology/SimplicialSet]",
+   "results": "5 hits in HomotopyCat.lean:36, Path.lean:13,35, Degenerate.lean:156,213; none states the target inclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Directed union of simplicial subsets gives a right anodyne nerve inclusion into the decomposition simplicial set",
+   "results": "8 hits: Set.directedOn_sUnion; SSet.Truncated.rightExtensionInclusion; Set.inj_on_iUnion_of_directed; SSet.modelCategoryQuillen.J; AlgebraicGeometry.Scheme.IsLocallyDirected.V; SSet.degenerate_eq_iUnion_range_σ; Set.directedOn_iUnion; SSet.skeleton. None states the target inclusion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-directed-cone-cover",
@@ -92,5 +180,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-directed-decomposition-right-anodyne",
+  "worker": "stage1",
+  "summary": "Expanded the HTT directed-cover argument. The mixed-simplex rules are checked directly; each simplex has a nonempty directed index poset whose nerve is weakly contractible; the decomposition is filtered by nondegenerate simplices with join attachments; and the contractible-join right-anodyne lemma plus transfinite closure proves the nerve inclusion. The statement and hypotheses are unchanged, and no new node was needed.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the directed-cover retraction: HTT Proposition 4.2.3.8 and Remark 4.2.3.9, with Notation 4.2.3.1 for K_F.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-filtered-nerve-weak-contractibility",
+    "why": "Step 2 uses its weak-contractibility conclusion for each simplex-index poset; this generic filtered-nerve fact is in the CBC unit and has no replacement in the directed-cover route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-filtered-nerve-weak-contractibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-76a5f0050",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-76a5f0050 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics. The statement is HTT Prop 4.2.3.8 / Remark 4.2.3.9 specialized to an increasing directed cover, with K_F from Notation 4.2.3.1. K_F is the simplicial subset of K⋆N(I) whose mixed simplices (σ; a_{i+1}≤…≤a_n) have σ∈K_{a_{i+1}}. The index count, the join order (consistent with lem-coef-contractible-join-right-anodyne and the parents) and the right-anodyne direction (K=Δ^0 gives Λ^1_1↪Δ^1) are correct. The hypotheses match what both citing parents supply, and nothing is weakened. Step 1 is genuinely elementary. Step 2: I_σ is nonempty and upward closed and its parallel arrows are equal, so the hypotheses of lem-cbc-filtered-nerve-weak-contractibility hold. I accept that node as a declared generic tool use from unit sk-prop-sf-cbc. Step 3: I checked the degreewise pushout through Δ^m⋆N(I_σ)→K_F, (α,chain)↦(σα,chain); the non-boundary simplices (surjective Δ^m part) biject with the new simplices. Step 4: the join lemma (HTT 4.2.3.6) applied to ∂Δ^m↪Δ^m, plus closure under pushouts and transfinite compositions, finishes the proof; the case m=0 is included. I tested K=∅, K=Δ^0 with I={0<1}, the Λ-shaped I_x, non-directed I (excluded by hypothesis) and degenerate simplices. Duplicate search over the DAG found none: lem-coef-decomposition-local-colimit-cocones is HTT 4.2.3.4, a different statement; directed-union-local-colimits, directed-cover-colimit-assembly and directed-cone-cover all use the item rather than state it; cone-mono-right-anodyne covers only joins with Δ^0. The delivery has no new nodes. One fault (C1 plus loose wording): step 3 used the Eilenberg–Zilber unique-degeneracy decomposition without citing a node, said the faces of σ were new, and did not say that a mixed simplex must lie outside the boundary. Fixed: step 3 is rewritten and now cites the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which is also added to proof_deps. The statement is unchanged. No SGA source is used. HTT is not archived; the WANTED entry stands.; 1 file(s) fixed by the reviewer"
  }
 }

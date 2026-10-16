@@ -30,14 +30,115 @@
   "lem-coef-simplicial-presheaf-localization-comparison",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a simplicial presheaf $X$ and a complex $K$, a chain map $N\\Lambda X\\to K$ factors uniquely through $\\tau^{\\le0}K$: the degree-zero component must land in $\\ker(d_K^0)$, and all negative-degree components are unchanged. Here $\\mathsf{sMod}_\\Lambda$ denotes simplicial $\\Lambda$-modules. Apply the normalization equivalence of [lem-cbc-dold-kan-homology] objectwise and the free-module universal property degreewise to obtain natural bijections $\\operatorname{Hom}_{\\operatorname{Ch}}(N\\Lambda X,K)\\cong\\operatorname{Hom}_{\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathsf{sMod}_\\Lambda)}(\\Lambda[X],\\Gamma tK)\\cong\\operatorname{Hom}_{\\mathsf U(\\mathcal C)}(X,RK)$. The bijections commute with the restriction maps, since all three constructions are functorial. This proves the claimed adjunction.",
+   "uses": [
+    "lem-cbc-dold-kan-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, §3.3, sequence (1), Fact 3.14(3) and Proposition 3.15, printed pp. 11–12; smart truncation and natural presheaf adjunction."
+   }
+  },
+  {
+   "text": "Evaluate $K$ at $V$. Its smart truncation reindexes to the complex $t(K(V))$ of [lem-cbc-dold-kan-homology]. That node gives Kan fillers, the natural formulas $\\pi_0R(K)(V)\\cong H^0(K(V))$ and $\\pi_m(R(K)(V),0)\\cong H^{-m}(K(V))$, and translation at every vertex. For $x\\in R(K)(V)_0$, restrict $x$ along each arrow $W\\to V$; subtracting that restricted vertex defines the translation on the whole slice site, so these identifications commute with its restriction maps.",
+   "uses": [
+    "lem-cbc-dold-kan-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, Fact 3.14(4) and the final sentence of the proof of Lemma 5.12, printed pp. 11, 20; restriction and translation at all slice basepoints."
+   }
+  },
+  {
+   "text": "Let $f:K\\to L$ induce isomorphisms on every cohomology sheaf. By [lem-cbc-module-sheafification-underlying-sets], the underlying set maps of $H^0(f)$ become isomorphisms after set sheafification, so step 2 proves the required $\\pi_0$ assertion. For any $V$ and $m\\ge1$, [lem-cbc-sieve-slice-sheafification] identifies the sheafification of the restriction of $H^{-m}(f)$ to $\\mathcal C/V$ with the restriction of its sheafification. This is an isomorphism by hypothesis. Apply [lem-cbc-module-sheafification-underlying-sets] also on this slice to identify its underlying set map with the set sheafification of the restricted cohomology map; it is an isomorphism, and the compatible abelian group operations give the same isomorphism as group sheaves. Step 2 identifies it with the homotopy-sheaf map at zero. Its translation by each restricted vertex identifies it with the map at any specified $x$. These are exactly all tests in the definition of local weak equivalence stated above.",
+   "uses": [
+    "lem-cbc-module-sheafification-underlying-sets",
+    "lem-cbc-sieve-slice-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, Proof of Lemma 5.12, second claim, printed p. 20; expanded using underlying-set and slice sheafification comparisons."
+   }
+  },
+  {
+   "text": "Suppose $f:K\\to L$ is a projective fibration of complexes, thus degreewise surjective at every object by [lem-cbc-dg-presheaf-model-localizations]. For $m>0$, the degree-m map of the normalized chains of $R(f)(V)$ is $f^{-m}(V)$, since smart truncation changes only degree zero. Hence [lem-cbc-simplicial-module-model] implies that $R(f)(V)$ is a Kan fibration. If $f$ is also an objectwise quasi-isomorphism, the same node's normalized weak-equivalence criterion gives that $R(f)(V)$ is a weak equivalence (its normalized homology in all nonnegative degrees is $H^{-m}(f(V))$). The source projective fibrations and trivial fibrations are objectwise by [lem-coef-simplicial-presheaf-projective-model]. Thus $R$ preserves projective fibrations and trivial fibrations, so step 1 is a projective Quillen adjunction. Objectwise weak homotopy equivalences $g$ of simplicial presheaves are sent by $N\\Lambda$ to objectwise quasi-isomorphisms: this is the final assertion of [lem-cbc-simplicial-module-model] at each $V$.",
+   "uses": [
+    "lem-cbc-dg-presheaf-model-localizations",
+    "lem-cbc-simplicial-module-model",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, §3.3, transferred-model paragraph before Proposition 3.15 and its proof, printed pp. 11–12; objectwise right Quillen check."
+   }
+  },
+  {
+   "text": "For an augmentation $s:U_\\bullet\\to h_T$ in $H$, apply [lem-cbc-normalized-alternating-homotopy-equivalence] at every object $V$ to the simplicial module $\\Lambda[U_\\bullet(V)]$. Naturality assembles these inclusions into a map of complex presheaves. Each evaluated inclusion is a chain homotopy equivalence; consequently the assembled map is an objectwise quasi-isomorphism: $dh+hd$ induces zero on homology because on a cycle it is the boundary $d(hz)$. The composite $N\\Lambda(U_\\bullet)\\to A_U\\xrightarrow{e_U}L_T[0]$ is $N\\Lambda(s)$, since in degree zero the inclusion is the identity and augmentations commute with faces. As $e_U\\in B$, this composite is a weak equivalence in the B-localized complex model by [lem-cbc-dg-presheaf-model-localizations]. Let $Q$ be functorial projective cofibrant replacement of simplicial presheaves, available by [lem-coef-simplicial-presheaf-projective-model]. Its objectwise weak equivalences $QX\\to X$ remain objectwise quasi-isomorphisms under $N\\Lambda$ by step 4. In the natural square comparing $N\\Lambda Q(s)$ with $N\\Lambda(s)$, both vertical arrows and the lower horizontal arrow are therefore B-localized weak equivalences. Two-out-of-three proves the same for $N\\Lambda Q(s)$, without any projective-cofibrancy assumption on $U_\\bullet$.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "lem-cbc-dg-presheaf-model-localizations",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, Proof of Lemma 5.12, first claim, printed p. 20; Fact 3.14(1) and derived-generator check via functorial cofibrant replacement."
+   }
+  },
+  {
+   "text": "The identity from projective complexes to the B-localized model is left Quillen by [lem-cbc-dg-presheaf-model-localizations]; compose it with step 4. The source projective simplicial-presheaf model is simplicial by [lem-coef-simplicial-presheaf-projective-model], its H-localization exists with the mapping-space convention of [lem-coef-simplicial-presheaf-localization-comparison], and step 5 verifies the image-of-cofibrant-replacement hypothesis for every $s\\in H$. Apply [lem-coef-bousfield-quillen-descent] to this adjunction and target the B-localized complex model. It gives exactly $N\\Lambda:\\mathsf U(\\mathcal C)_H\\rightleftarrows\\operatorname{Ch}(\\mathcal P)_B:R$ as a Quillen adjunction. Only $e_U[0]\\in B$ is needed here; all shifts cause no obstruction. No density assumption has been used.",
+   "uses": [
+    "lem-cbc-dg-presheaf-model-localizations",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-bousfield-quillen-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, Proof of Lemma 5.12, first claim, printed p. 20; localization universal property made explicit by the cited Bousfield Quillen descent lemma."
+   }
+  },
+  {
+   "text": "Compute the normalized free interval object at $V$ and put $L=L_T(V)$. The degree-zero term is $L v_0\\oplus L v_1$. In degree one the basis is $v_0,e=[01],v_1$ with $d_1(e)=v_0$ and $d_1(v_i)=v_i$; thus $\\ker d_1$ is the copy of $L$ generated by $e-s_0v_0$. Its $d_0$ is $v_1-v_0$, giving $a\\mapsto(-a,a)$. For $n\\ge2$, write the n-simplex basis as the two constant simplices and cuts $e_j=0^{j+1}1^{n-j}$ ($0\\le j<n$). The kernel of $d_n$ is generated by $e_{n-1}-v_0$, and $d_{n-1}$ sends this to $e_{n-2}-v_0$, a difference of distinct basis vectors. Hence $\\ker d_n\\cap\\ker d_{n-1}=0$ and the normalized degree-n term vanishes. The boundary has only the two constant vertices; its normalized complex is $L[0]\\oplus L[0]$, and its map into the interval sends them to $v_0,v_1$. These calculations commute with restriction in $V$, proving the claimed complexes and the actual endpoint inclusion for $L_T$. The bijections of step 1 therefore identify squares with this map on the left with squares with the simplicial boundary inclusion on the left, retaining both endpoint maps.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, Proof of Lemma 5.13, interval paragraph, printed pp. 20–21; direct basis calculation in the opposite-face normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-dg-presheaf-model-localizations",
+  "lem-cbc-dold-kan-homology",
+  "lem-cbc-module-sheafification-underlying-sets",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-cbc-simplicial-module-model",
+  "lem-coef-bousfield-quillen-descent",
+  "lem-coef-simplicial-presheaf-localization-comparison",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1511.02828",
+  "place": "Source-guided reconstruction of Proposition 3.15 and Lemmas 5.12–5.13, with cochain reindexing and the explicit interval calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Free module normalization and Dold Kan truncation form a Quillen adjunction between simplicial presheaves localized at hypercovers and unbounded module presheaves localized at shifted augmentations",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.hε\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C],\\n  AlgebraicTopology.DoldKan.Compatibility.υ CategoryTheory.Idempotents.DoldKan.isoN₁ = Alg\", \"doc\": \"The natural isomorphism between the composition of the Karoubi envelope embedding of simplicial objects in a preadditive category $\\\\mathcal{C}$ with the Dold-Kan equivalence functor and the normalized\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₁Γ₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/GammaCompN\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        AlgebraicTopology.DoldKan.Γ₀.comp AlgebraicTopology.DoldKan.N₁ ≅\\n          CategoryTheory.Idempotents.toKaroubi (Cha\", \"doc\": \"In a preadditive category $\\\\mathcal{C}$ with finite coproducts, the composition of the $\\\\Gamma_0$ functor (mapping chain complexes to simplicial objects) with the normalized chain complex functor $N_1\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₂N₂\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Functor.id (CategoryTheory.Idempotents.Karoubi (CategoryTheory.SimplicialObject C)) ≅\\n          Algeb\", \"doc\": \"The natural isomorphism $ \\\\Gamma_2 \\\\circ N_2 \\\\cong \\\\text{id} $ establishes that composing the normalized chain complex functor $ N_2 $ with the $ \\\\Gamma_2 $ functor (which maps to the Karoubi envelope\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/NReflectsIso\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C],\\n  AlgebraicTopology.DoldKan.N₂.comp (CategoryTheory.Idempotents.karoubiChainComplexEquivalence C ℕ).functor =\\n    (CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding SimplexCategoryᵒᵖ C).c\", \"doc\": \"The composition of the extended normalized chain complex functor $ N_2 $ with the forward functor of the Karoubi chain complex equivalence is equal to the composition of the Karoubi functor embedding,\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₂Γ₂\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/GammaCompN\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        AlgebraicTopology.DoldKan.Γ₂.comp AlgebraicTopology.DoldKan.N₂ ≅\\n          CategoryTheory.Functor.id (CategoryTheory\", \"doc\": \"In a preadditive category $\\\\mathcal{C}$ with finite coproducts, the composition of the functors $\\\\Gamma_2$ (mapping Karoubi envelopes of chain complexes to Karoubi envelopes of simplicial objects) and\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₂N₁\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Idempotents.toKaroubi (CategoryTheory.SimplicialObject C) ≅\\n          AlgebraicTopology.DoldKan.N₁.co\", \"doc\": \"The natural isomorphism between the composition of the Γ₂ functor and the normalized chain complex functor N₁, and the identity functor in the Dold-Kan correspondence framework. This establishes that \"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.η\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.IsIdempotentComplete C] →\\n        [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Idempotents.DoldKan.Γ.comp CategoryTheor\", \"doc\": \"In a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts, the composition of the $\\\\Gamma$ functor (mapping chain complexes to simplicial objects) with the normalized chain c\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.η_hom_app_f\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  (X : ChainComplex C ℕ) (i : ℕ),\\n  (CategoryTheory.Idempotents.DoldKan.η.hom.app X).f i =\\n\", \"doc\": \"In a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts, for any chain complex $X$ over $\\\\mathcal{C}$ and index $i \\\\in \\\\mathbb{N}$, the component $\\\\eta_X(i)$ of the natural\"}\n",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.skAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [inst_1 :\\n          ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.SimplicialObject.Truncated.sk \", \"doc\": \"The skeleton functor for $ n $-truncated simplicial objects is left adjoint to the truncation functor. This adjunction arises from the left Kan extension along the inclusion $ \\\\Delta_{\\\\leq n} \\\\to \\\\Del\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₁Γ₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/GammaCompN\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        AlgebraicTopology.DoldKan.Γ₀.comp AlgebraicTopology.DoldKan.N₁ ≅\\n          CategoryTheory.Idempotents.toKaroubi (Cha\", \"doc\": \"In a preadditive category $\\\\mathcal{C}$ with finite coproducts, the composition of the $\\\\Gamma_0$ functor (mapping chain complexes to simplicial objects) with the normalized chain complex functor $N_1\"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.ε\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.IsIdempotentComplete C] →\\n        [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor.id (CategoryTheory.SimplicialObj\", \"doc\": \"A natural isomorphism between the identity functor on the category of simplicial objects in a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts and the composition of the \"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.N₁_iso_normalizedMooreComplex_comp_toKaroubi\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Normalized\", \"type\": \"(A : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n    [inst_1 : CategoryTheory.Abelian A] →\\n      AlgebraicTopology.DoldKan.N₁ ≅\\n        (AlgebraicTopology.normalizedMooreComplex A).comp (CategoryTheory.Idempotents.toKaroubi (ChainComplex A ℕ))\", \"doc\": \"An isomorphism between the $ N_1 $-functor and the composition of the normalized Moore complex functor with the Karoubi envelope embedding. This establishes that for any simplicial object $ X $ in an \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.coskAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [inst_1 :\\n          ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.SimplicialObject.truncation n\", \"doc\": \"The truncation functor from simplicial objects to $ n $-truncated simplicial objects is left adjoint to the coskeleton functor, which extends $ n $-truncated simplicial objects to full simplicial obje\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: DoldKan.Equivalence.lean:10-95 supplies the additive equivalence between simplicial objects and nonnegative chains. It does not assert a Quillen adjunction from simplicial presheaves localized at H to unbounded complexes localized at all shifts, or preservation of cohomology-sheaf equivalences. This is not a one-line specialization of the additive equivalence."
   },
@@ -71,7 +172,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hypercover-localization-generation",
@@ -91,5 +192,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-dold-kan-hypercover-quillen",
+  "worker": "stage1",
+  "summary": "Retained and checked the repaired seven-step split: the adjunction and interval are proved directly, the ordinary Dold–Kan homology node is reused, and the localized Quillen clause is derived by checking cofibrant replacements of augmentation maps. Three new nodes are needed: an ordinary simplicial-module model input and two Mathlib leaves. Reran all search records, checked cited statements and sources, and corrected omitted projective-model citations and the obsolete report. Second reading: clarified the presheaf Hom category and objectwise normalization comparison, corrected the item source page, checked leaf instances and independently reran semantic searches for all three new nodes.",
+  "blueprint": "Realizes the main-20261015 proof opening “Choose a compactification c=(j,p)” through the supporting primitive “Localized free Dold–Kan adjunction for module presheaves,” below the bounded-below hypersheaf-model steps 4–5. The item has no dedicated blueprint node; ancestry is thm-cbc-finite-level-proetale via the imported localization-generation route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-simplicial-presheaf-projective-model",
+    "why": "Generic simplicial projective-model input needed to check the source hypothesis of Bousfield Quillen descent; no statement of this unit supplies simpliciality."
+   },
+   {
+    "node": "lem-coef-simplicial-presheaf-localization-comparison",
+    "why": "Existing generic existence and mapping-space conventions of set-localized simplicial-presheaf models, already a statement dependency."
+   },
+   {
+    "node": "lem-coef-bousfield-quillen-descent",
+    "why": "Generic localization universal property; the item explicitly checks its derived-generator hypothesis instead of creating a hypercover-specific restatement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-presheaf-localization-comparison",
+  "lem-coef-bousfield-quillen-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-0a7eb353f",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-0a7eb353f (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the statement of every cited node in full, and checked the steps against Choudhury–Gallauer arXiv:1511.02828, which is not archived in literature/. I fetched the PDF from arXiv and read it with pdftotext. Places checked: Fact 3.14 and sequence (1), p.11; the transferred simplicial-module model and Prop 3.15, pp.11-12; Lemma 5.12, p.20; the interval paragraph of Lemma 5.13, pp.20-21. Steps 1-7 are correct. (1) The adjunction factors through tau<=0 and goes through Dold–Kan plus the free/forget adjunction, objectwise and natural. (2) pi_0=H^0 and pi_m=H^{-m}, with translation compatible on the slice. (3) The new set-sheafification leaf plus slice sheafification give every sheaf-of-pi test. (4) Positive normalized degree of R(f) is f^{-m}, so R(f) is a fibration with no degree-0 surjectivity needed; Ken Brown gives that NLambda preserves weak equivalences. (5) NLambda(h_T)=L_T[0]; B and W_obj lie in W_B, and two-out-of-three on the Q-square gives NLambdaQ(s) in W_B. (6) The hypotheses of the Bousfield descent lemma hold exactly; L_S exists by the steps of the comparison node. (7) I recomputed the interval: ker d1=<e-s0v0>, d0 gives v1-v0, and for n>=2, ker d_n=<e_{n-1}-v0> while d_{n-1} of it is e_{n-2}-v0, nonzero, so N_n=0. New nodes: the simplicial-module model is a true, standard result and strictly smaller than the item. Both leaves are confirmed at the Mathlib lines HomotopyEquivalence.lean:79-87, AlternatingFaceMapComplex.lean:300-301, MooreComplex.lean:64-90 and PreservesSheafification.lean:233-242,305-314. rg found no duplicates; the pc/weil-pbc set-sheafification nodes cover other sites or other value categories. No cycle, no SGA source. I accept the 3 declared lem-coef tool_uses as generic model-category tools. FIX: the item's source.place still said Prop 3.15 is on p.10, although the report says it was corrected; the printed page is 12. The corrected whole item file is at fixes/dag/nodes/sec-smooth-purity/lem-cbc-dold-kan-hypercover-quillen.json.; 1 file(s) fixed by the reviewer"
  }
 }
