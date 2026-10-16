@@ -19,7 +19,7 @@
  },
  "kind": "statement",
  "title": "Relative left lifting maps over small direct categories induce left lifting colimit maps",
- "statement": "Let $\\mathcal B$ be a category admitting all small colimits [def-weil-pbc-category-colimit], and let $T$ be any class of its morphisms. Write $\\mathcal L={}^{\\square}T$ for the maps with the left lifting property against every member of $T$, with the diagonal property as in [lem-coef-lifting-class-closure]. Let $K$ be any small category equipped with a function $e:\\operatorname{Ob}K\\to\\mathbf N$ strictly increased by every nonidentity arrow; neither its objects nor its morphisms are required to be finite. For $D:K\\to\\mathcal B$, define $L_kD$ to be the colimit of the domain diagram on the full subcategory of $K/k$ obtained by deleting $1_k$, with commuting triangles as morphisms. For a natural transformation $f:A\\to B$, suppose that every relative latching map $A_k\\amalg_{L_kA}L_kB\\to B_k$ belongs to $\\mathcal L$. Then the induced map $\\operatorname{colim}_K A\\to\\operatorname{colim}_K B$ belongs to $\\mathcal L$. The assertion includes the empty category. No factorization, weak equivalence, model structure or finiteness hypothesis is required.",
+ "statement": "Let $\\mathcal B$ be a category admitting all small colimits [def-weil-pbc-category-colimit], and let $T$ be any class of its morphisms. Write $\\mathcal L={}^{\\square}T$ for the maps with the left lifting property against every member of $T$, with the diagonal property as in [lem-coef-lifting-class-closure]. Let $K$ be any small category equipped with a function $e:\\operatorname{Ob}K\\to\\mathbf N$ strictly increased by every nonidentity arrow; neither its objects nor its morphisms are required to be finite. For $D:K\\to\\mathcal B$, define $L_kD$ to be the colimit of the domain diagram on the full subcategory of $K/k$ obtained by deleting $1_k$, with commuting triangles as morphisms. For a natural transformation $f:A\\to B$, the structure maps from the latching colimits to $A_k$ and $B_k$, together with $f_k$ and the induced map $L_kA\\to L_kB$, define the relative latching map $\\lambda_k(f):=A_k\\amalg_{L_kA}L_kB\\to B_k$. Suppose that every $\\lambda_k(f)$ belongs to $\\mathcal L$. Then the induced map $\\operatorname{colim}_K A\\to\\operatorname{colim}_K B$ belongs to $\\mathcal L$. The assertion includes the empty category. No factorization, weak equivalence, model structure or finiteness hypothesis is required.",
  "source": {
   "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
   "place": "Proposition 5.1.4 and Corollary 5.1.5, printed pp. 121-122: compatible lifts by increasing degree followed by the universal colimit cocone. Agent formulation for a single left lifting class, retaining arbitrary small direct categories; the source proof uses only lifting, not factorization. No Stacks tag states this direct-diagram lifting theorem. Stacks 002F (categories.tex, definition-colimit) supplies only its colimit notion."
@@ -28,9 +28,84 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-lifting-class-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use functional composition. Put $C_A=\\operatorname{colim}_K A$, $C_B=\\operatorname{colim}_K B$, with coprojections $a_k,b_k$, and let $F:C_A\\to C_B$ be the map with $Fa_k=b_kf_k$. These equations define $F$ by [def-weil-pbc-category-colimit], since naturality of $f$ makes $(b_kf_k)$ a cocone. Fix any $p:X\\to Y$ in $T$ and maps $u:C_A\\to X$, $v:C_B\\to Y$ with $pu=vF$. Set $u_k=ua_k$, $v_k=vb_k$. They are cocones and satisfy $pu_k=v_kf_k$. By the diagonal-property definition in [lem-coef-lifting-class-closure], it suffices to construct a cocone $h_k:B_k\\to X$ with $h_kf_k=u_k$ and $ph_k=v_k$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.1.5, printed pp. 121-122: the colimit square and its constant-diagram square; Stacks 002F, categories.tex, definition-colimit, for the cocone correspondence."
+   }
+  },
+  {
+   "text": "Let $K_{<n}$ be the full subcategory of objects $k$ with $e(k)<n$. We construct compatible partial cocones $h^{(n)}$ on $B|_{K_{<n}}$, satisfying $h^{(n)}_kf_k=u_k$ and $ph^{(n)}_k=v_k$, and require that $h^{(n+1)}$ restricts to $h^{(n)}$. The base $n=0$ is the empty family. For an object $k$ of degree $n$, every object $\\alpha:j\\to k$ of its latching category has $e(j)<n$. A morphism from $\\alpha:j\\to k$ to $\\beta:i\\to k$ is $t:j\\to i$ with $\\beta t=\\alpha$; both domains lie in $K_{<n}$. Thus $h^{(n)}_iB(t)=h^{(n)}_j$, so these components give a cocone on the entire latching diagram, including all its parallel arrows. Its index category is small, being a subcategory of $K/k$. The universal property in [def-weil-pbc-category-colimit] gives $\\ell_k:L_kB\\to X$ whose restriction on the coprojection indexed by $\\alpha:j\\to k$ is $h^{(n)}_j$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.1.4, printed p. 121: induction on degree and the map out of the latching object. Natural-number degrees suffice for this item; the empty base and full partial-cocone invariant are explicit."
+   }
+  },
+  {
+   "text": "Write $\\iota^A_\\alpha:A_j\\to L_kA$, $\\iota^B_\\alpha:B_j\\to L_kB$ for the latching coprojections, and $s^A_k:L_kA\\to A_k$, $s^B_k:L_kB\\to B_k$ for the latching structure maps. The map $L_kf:L_kA\\to L_kB$ is defined by $L_kf\\,\\iota^A_\\alpha=\\iota^B_\\alpha f_j$; compatibility follows from naturality of $f$. For every $\\alpha:j\\to k$ we have $\\ell_kL_kf\\,\\iota^A_\\alpha=h^{(n)}_jf_j=u_j=u_kA(\\alpha)=u_ks^A_k\\iota^A_\\alpha$. Hence $\\ell_kL_kf=u_ks^A_k$ by colimit uniqueness. The pushout $P_k=A_k\\amalg_{L_kA}L_kB$, with coprojections $r_k:A_k\\to P_k$, $s_k:L_kB\\to P_k$, therefore gives $q_k:P_k\\to X$ with $q_kr_k=u_k$ and $q_ks_k=\\ell_k$. Naturality likewise gives $f_ks^A_k=s^B_kL_kf$, so its relative latching map $\\lambda_k:P_k\\to B_k$ satisfies $\\lambda_kr_k=f_k$ and $\\lambda_ks_k=s^B_k$. All these constructions and tests on coprojections use [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.1.4, printed p. 121: construction of the upper map from the relative latching pushout; Stacks 002F for both universal properties, expanded here."
+   }
+  },
+  {
+   "text": "The square with left map $\\lambda_k$, right map $p$, upper map $q_k$ and lower map $v_k$ commutes. On $A_k$ the equality $pq_k=v_k\\lambda_k$ is $pu_k=v_kf_k$. On a latching component indexed by $\\alpha:j\\to k$, it is $p\\ell_k\\iota^B_\\alpha=ph^{(n)}_j=v_j=v_kB(\\alpha)=v_ks^B_k\\iota^B_\\alpha$; first latching-colimit and then pushout uniqueness [def-weil-pbc-category-colimit] prove equality on $P_k$. By hypothesis $\\lambda_k\\in{}^{\\square}T$ and the fixed map $p$ lies in $T$. The defining lifting property of [lem-coef-lifting-class-closure] supplies $h_k:B_k\\to X$ with $h_k\\lambda_k=q_k$ and $ph_k=v_k$. Its restrictions give $h_kf_k=u_k$ and $h_kB(\\alpha)=h^{(n)}_j$ for every incoming nonidentity arrow $\\alpha:j\\to k$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.1.4, printed p. 121, the relative latching lifting square. Only the defining diagonal property is used; no model-category axiom beyond the stated left lifting assumption is retained."
+   }
+  },
+  {
+   "text": "Choose such a filler for each object of degree $n$, retaining all maps previously chosen on $K_{<n}$. This is a small family of independent choices of morphisms (ordinary classical choice). There is no nonidentity arrow between degree-$n$ objects, nor from a degree-$n$ object to an object of lower degree, by strict increase of $e$. Thus the last equation of Step 4 is exactly every new cocone equation, and identity arrows satisfy it automatically. It follows that these maps extend $h^{(n)}$ to $h^{(n+1)}$ with both required triangle equations. Iterate this operation by ordinary recursion on $n\\in\\mathbf N$. For each $k$ put $h_k=h^{(e(k)+1)}_k$. Restrictions agree at every later stage, so for any arrow $\\alpha:j\\to k$ the equation $h_kB(\\alpha)=h_j$ is checked at stage $e(k)+1$; if $\\alpha$ is nonidentity then $e(j)<e(k)$, and if it is identity the equation is tautological. We have therefore constructed the required cocone on all of $K$, even when degrees are unbounded or infinitely many objects have one degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.1.4, printed p. 121: independent choices at one degree and compatibility of the inductive lifts. Here the ordinal induction specializes to ordinary natural-number recursion, with no finiteness bound on the objects or arrows."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-category-colimit] the cocone $(h_k)$ gives $h:C_B\\to X$ with $hb_k=h_k$. Then $hFa_k=h_kf_k=u_k=ua_k$ for every $k$, so $hF=u$ by uniqueness out of $C_A$. Likewise $phb_k=ph_k=v_k=vb_k$ for all $k$, so $ph=v$ by uniqueness out of $C_B$. This is a filler for the arbitrary square of Step 1. Since $p$ was arbitrary in $T$, [lem-coef-lifting-class-closure] identifies the conclusion as $F\\in{}^{\\square}T$. When $K$ is empty, the same argument uses empty cocones and uniqueness out of the two initial objects, so it still gives both equations. At an object with no nonidentity incoming arrow, $L_kA,L_kB$ are initial and Step 4 uses precisely the assumed relative latching map; it imposes no additional compatibility condition.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.1.5, printed pp. 121-122: descend the compatible lift through the colimit. Stacks 002F, categories.tex, definition-colimit, including the empty-colimit initial object."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-lifting-class-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction. Supporting direct-diagram induction read in Hovey, Model Categories, Proposition 5.1.4 and Corollary 5.1.5, printed pp. 120-122, from the existing Q27 review PDF and extract. Hovey is not archived under literature/: WANTED in report.md. The generalized single-left-class argument is written out in full here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -108,15 +183,65 @@
    "results": "{\"t\": \"2026-10-16T15:25:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"llp\\\", \\\"colimitsOfShape\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\"], \"digest\": \"1101dc8f9c3c0fcd\"}",
    "date": "2026-10-16",
    "verdict": "no match (current independent second reading): LiftingProperty.lean:141-150 is restricted to Discrete J; TransfiniteCompositionLifting.lean:292-310 assumes a transfinite-composite presentation. Neither constructs compatible lifts on an arbitrary direct diagram. The broad colimitsOfShape query returns only existence/preservation infrastructure. AlgebraicTopology/Reedy/Basic.lean:21-24 lists the diagram model structure as TODO. All returned candidate statements were read; none is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|relativeLatching|colimitsOfShape.*llp|llp.*colimitsOfShape",
+   "results": "{\"t\": \"2026-10-16T16:08:16Z\", \"tool\": \"grep\", \"query\": \"latching|relativeLatching|colimitsOfShape.*llp|llp.*colimitsOfShape\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\"], \"digest\": \"494a8a7727d934c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the discrete-colimit theorem only treats coproducts; the transfinite-composition theorem requires a continuous chain presentation not given here. Colocal-object closure assumes bijective extensions, a stronger and different property. Small-object cardinality results assume cellular presentations/presentability. Joyal trick assumes model data. Reedy/Basic.lean lists diagram model construction as TODO. None supplies the compatible lifts for the stated small direct category as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits of direct diagrams preserve a left lifting class when relative latching maps are in that class",
+   "results": "{\"t\": \"2026-10-16T16:08:17Z\", \"tool\": \"leansearch\", \"query\": \"Colimits of direct diagrams preserve a left lifting class when relative latching maps are in that class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.liftColimit\", \"CategoryTheory.Limits.preservesColimit_of_leftOp\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.instHasLiftingPropertyMap_1\", \"CategoryTheory.Limits.PreservesColimit\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift\"], \"digest\": \"03e8ad79467281f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the discrete-colimit theorem only treats coproducts; the transfinite-composition theorem requires a continuous chain presentation not given here. Colocal-object closure assumes bijective extensions, a stronger and different property. Small-object cardinality results assume cellular presentations/presentability. Joyal trick assumes model data. Reedy/Basic.lean lists diagram model construction as TODO. None supplies the compatible lifts for the stated small direct category as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.llp, \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T16:08:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty.llp, \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\"], \"digest\": \"1101dc8f9c3c0fcd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the discrete-colimit theorem only treats coproducts; the transfinite-composition theorem requires a continuous chain presentation not given here. Colocal-object closure assumes bijective extensions, a stronger and different property. Small-object cardinality results assume cellular presentations/presentability. Joyal trick assumes model data. Reedy/Basic.lean lists diagram model construction as TODO. None supplies the compatible lifts for the stated small direct category as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small direct category a natural transformation whose relative latching maps have the left lifting property induces a colimit map with the left lifting property",
+   "results": "{\"t\": \"2026-10-16T16:08:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a small direct category a natural transformation whose relative latching maps have the left lifting property induces a colimit map with the left lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot\", \"CategoryTheory.SmallObject.llp_rlp_ιObj\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"CategoryTheory.SmallObject.rlp_πObj\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.MorphismProperty.rlp_pushouts\"], \"digest\": \"20e7b2e5976a366f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the discrete-colimit theorem only treats coproducts; the transfinite-composition theorem requires a continuous chain presentation not given here. Colocal-object closure assumes bijective extensions, a stronger and different property. Small-object cardinality results assume cellular presentations/presentability. Joyal trick assumes model data. Reedy/Basic.lean lists diagram model construction as TODO. None supplies the compatible lifts for the stated small direct category as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left orthogonal of a morphism class is stable under colimits over a degree ordered category when every relative latching map lies in the left orthogonal",
+   "results": "{\"t\": \"2026-10-16T16:08:41Z\", \"tool\": \"leanfinder\", \"query\": \"The left orthogonal of a morphism class is stable under colimits over a degree ordered category when every relative latching map lies in the left orthogonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_toSucc\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.ObjectProperty.isColocal_trW\", \"CategoryTheory.MorphismProperty.instIsClosedUnderColimitsOfShapeIsColocal\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\"], \"digest\": \"b7ca8375a0e8f985\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the discrete-colimit theorem only treats coproducts; the transfinite-composition theorem requires a continuous chain presentation not given here. Colocal-object closure assumes bijective extensions, a stronger and different property. Small-object cardinality results assume cellular presentations/presentability. Joyal trick assumes model data. Reedy/Basic.lean lists diagram model construction as TODO. None supplies the compatible lifts for the stated small direct category as a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-reedy-model-structure",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-direct-colimit-lifting",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-small-direct-category statement. Wrote the full degree-by-degree partial-cocone induction, relative latching square, compatible choices and universal-colimit descent. No model structure, factorization, finite indexing hypothesis, new nodes or project attachments used. Started from the current live-DAG mirror because the shared working checkout lacked this newly landed node.",
+  "blueprint": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Remark 5.2.3 and Theorem 5.2.5, printed pp. 124-126; objectwise consequences from Proposition 5.1.4 and its dual; the direct latching-colimit lifting argument used to deduce objectwise and trivial-map properties in the Reedy model construction."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-1e9c90198",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-1e9c90198 (reviewer sub-agent of L); spot-checked: Read the item JSON in full, both cited nodes (def-weil-pbc-category-colimit and lem-coef-lifting-class-closure, both Mathlib leaves), the parent lem-coef-reedy-model-structure steps 4-6, the unit record and the main-20261015 ancestor proof. Statement: the only change from the side-DAG base is that the construction of the relative latching map is spelled out. Hypotheses and conclusion are the same and nothing is weakened. It is exactly what Reedy steps 4-6 need: an infinite slice D_j, L = C or C∩W, a cocomplete category. Small cases checked by hand: empty K, discrete K (agrees with Mathlib colimitsOfShape_discrete_le_llp_rlp, LiftingProperty.lean:141), a single arrow (colim f is lambda_1 composed with the pushout of f_0), two parallel arrows (latching object A_0 coproduct A_0), and unbounded degree. Steps 1-6 recomputed: the colimit map F; the induction invariant with an empty base; ell_k by the latching universal property; the identity ell_k L_kf = u_k s^A_k; the pushout map q_k; the square tested on both coprojections; the filler from the defining diagonal property; restrictions giving h_k f_k = u_k and h_k B(alpha) = h_j; the four kinds of arrow in K_{<n+1}; N-recursion with choice; descent through the colimit with both triangles; the empty case. No step uses a cited node's proof and there are no new nodes. Route: both citations are Mathlib-leaf notions, so no tool_uses are needed. Duplicates checked: lem-coef-direct-wfs-extension (finite K, functorial WFS; its colimit clause is a special case of the item), lem-coef-transfinite-left-lifting and lem-coef-model-cofibrant-colimit-comparison; none states this. Blueprint grep finds no latching/Reedy node, so same_as = [] is right. Mathlib has latching only as definitions in AlgebraicTopology/Reedy/Basic.lean, so the item is not a leaf; searches of all three kinds are recorded. Hovey is not in literature/ or on this machine, so the place numbers Prop 5.1.4/Cor 5.1.5 could not be checked against the page; the report records WANTED and proof_origin is agent, and the proof stands on the cited statements alone. No fixes written."
+ }
 }
