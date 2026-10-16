@@ -1,0 +1,153 @@
+{
+ "id": "stage3-affine-comparison-categorical-cech-system",
+ "kind": "statement",
+ "title": "Positive categorical Cech exactness passes through a simultaneous affine etale presentation",
+ "statement": "Let Y be a scheme, V a pro-etale Y-object, U a finite family over V, and S an AffineEtaleCechSystem for U indexed by a small cofiltered category I [def-cbc-affine-etale-cech-system]. Let A be Grothendieck abelian [def-sp-grothendieck-abelian] and J an A-valued sheaf on Y_et. Assume every S.nerveCone is a limit after forgetting to schemes. If the categorical finite Cech complex of J at each etale stage is exact at q+1, then the categorical finite Cech complex of the comparison pullback of J on the original family U is exact at q+1 [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/099U",
+  "place": "Lemma 61.19.4, the two finite Cech limit reductions; categorical extension via AB5."
+ },
+ "stmt_deps": [
+  "def-cbc-affine-etale-cech-system",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each nerve term apply the already proved categorical comparison continuity API AlgebraicGeometry.ProEtale.isColimit_comparisonUpperStar_mapCocone_of_isAffine from WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity. Its cocone maps are the restrictions along S.π. Naturality of S.π and S.π_face imply compatibility with the alternating differential. Construct the complex diagram and its original-complex cocone.",
+   "uses": [
+    "def-cbc-affine-etale-cech-system",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each degree commute the filtered colimit with the finite product, using exactness of filtered colimits. The products of the component section cocones are therefore colimiting.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose three consecutive degrees into a short complex in a functor category. Use the existing upstream ShortComplex.exact_iff_evaluation to prove its exactness objectwise. Apply Mathlib CategoryTheory.Limits.colim.exact_mapShortComplex to the three degreewise colimits, obtaining exactness of the original complex.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-affine-etale-cech-system",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/099U",
+  "place": "Lemma 61.19.4, the two finite Cech limit reductions; categorical extension via AB5.",
+  "group": "H4",
+  "date": "2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite products commute with filtered colimits in a Grothendieck abelian category and filtered colimits of exact complexes are exact",
+   "results": "AB5; HomologicalComplex.instHasFilteredColimitsOfSize; colimitLimitIso. The matching exact-colimit ingredients are used.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of filtered colimits and commutation with finite products imply that a finite Cech complex is a degreewise colimit of stage complexes and remains exact",
+   "results": "CategoryTheory.Limits.colim.exact_mapShortComplex; used directly after constructing the cocones.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colim.exact_mapShortComplex",
+   "results": "Exact match for the final colimit-of-short-complex step, not for the assembled geometric Cech system.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "exact_mapShortComplex|HasExactColimitsOfShape",
+   "results": "Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim; used.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing",
+  "date": "2026-10-16",
+  "group": "H4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+   "via": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "stage3-affine-comparison-injective-derived-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonCategoricalCechSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonCategoricalCechSystem.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineEtaleCechSystem.categoricalOriginalExactAt",
+  "statement": "theorem categoricalOriginalExactAt [IsCofiltered I]\n    (hS : ∀ k y, Nonempty (IsLimit\n      ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone (S.nerveCone k y))))\n    (q : ℕ) (hstage : ∀ i, (S.categoricalStageComplex J i).ExactAt (q + 1)) :\n    (categoricalOriginalComplex (U := U) J).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+  "edge_cases": "Empty finite covers, repeated indices and degree q+1=1 are included; all products used for exactness are finite.",
+  "tool_uses": {
+   "def-cbc-affine-etale-cech-system": "Geometric diagram data only, reused from the comparison unit; no cohomology theorem or alternative unit route is used."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
+ }
+}

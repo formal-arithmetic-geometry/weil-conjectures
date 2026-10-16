@@ -1,0 +1,134 @@
+{
+ "id": "stage3-categorical-injective-cech-exactness",
+ "kind": "statement",
+ "title": "Injective categorical presheaves have exact positive finite Cech complexes",
+ "statement": "Let C be a category with object universe u+1 and morphism universe u. Let A be an abelian category with morphism universe u+1, products indexed by types in u+1, and finite products. Let P:C^op→A be injective in the presheaf category [def-sp-injective-resolutions]. Let V:C, assume finite products in Over V, and let U:Fin n→Over V be a finite family of arrows to V. For every q≥0 its categorical Cech complex is exact at q+1. In degree k this complex is the product, over tuples y:Fin(k+1)→Fin n, of P on the underlying object of the product of the U(y j) in Over V. Its differential is the alternating sum of the omitted-factor restriction maps. No covering or sheaf hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2 and its injective-presheaf contraction argument, extended by categorical cofree presheaves."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Embed P into its explicit cofree presheaf: at Y take the product of P(Z) indexed by pairs (Z,h:Z→Y), with transition given by precomposition. The coordinate (Y,id) shows that the embedding is monic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Applying Hom(B,-) identifies the categorical cofree object and its Cech complex with the ordinary abelian-group cofree construction and its Cech complex. Use the proved cofree Cech contraction from WeilConjectures.CategoryTheory.Sites.CechComplex to get exactness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Detect categorical exactness by taking B to be the kernel of the outgoing differential. Surjectivity of the incoming Hom map gives a section of the morphism to cycles. Injectivity of P splits its cofree embedding, and homology sends that retract to a retract of zero.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2 and its injective-presheaf contraction argument, extended by categorical cofree presheaves.",
+  "group": "H4",
+  "date": "2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An injective presheaf valued in an abelian category has vanishing positive Cech homology",
+   "results": "InjectiveResolution.ofCocomplex_exactAt_succ; TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective; no categorical finite Cech exactness theorem.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective presheaf with values in an arbitrary abelian category has an exact finite Cech complex in positive degrees, by the cofree presheaf contraction",
+   "results": "InjectiveResolution.cocomplex_exactAt_succ and MayerVietorisSquare short-exact lemmas; no cofree Cech theorem.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "exactAt.*cech|exact.*Cech|cech.*injective",
+   "results": "No applicable Mathlib theorem. Local rg finds the ordinary abelian-group cofree Cech contraction in the source library, which is used.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing",
+  "date": "2026-10-16",
+  "group": "H4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+   "via": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "stage3-affine-comparison-injective-derived-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CategoricalInjectiveCechExactness",
+  "file": "lean/Sheaf/CategoryTheory/CategoricalInjectiveCechExactness.lean",
+  "declaration": "CategoryTheory.Presheaf.exactAt_categoricalCech_of_injective",
+  "statement": "theorem exactAt_categoricalCech_of_injective [Injective P] (q : ℕ) :\n    ((cechComplexFunctor U).obj ((Over.forget V).op ⋙ P)).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+  "edge_cases": "Empty finite covers, repeated indices and degree q+1=1 are included; all products used for exactness are finite."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
+ }
+}

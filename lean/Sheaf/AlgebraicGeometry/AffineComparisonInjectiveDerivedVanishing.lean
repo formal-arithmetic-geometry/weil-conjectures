@@ -7,12 +7,12 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.Paper.EtaleFiniteDataDescent
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.IndPrincipalZariski
+import Sheaf.AlgebraicGeometry.AffineComparisonEtaleCechPresentation
+import Sheaf.AlgebraicGeometry.AffineComparisonCategoricalCechSystem
+import Sheaf.CategoryTheory.CategoricalInjectiveCechExactness
+import Sheaf.CategoryTheory.CategoricalFiniteCechCriterion
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing
 
 /-!
 # Affine comparison vanishing for Grothendieck abelian coefficients
@@ -28,6 +28,8 @@ universe u' u
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
+
+attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A]
@@ -66,6 +68,19 @@ theorem isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine
       (evaluation X.ProEtᵒᵖ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X)
         (MorphismProperty.id_mem _ X)))).rightDerived (q + 1)).obj
       ((comparisonUpperStar A X).obj I)) := by
-  sorry
+  have : Injective I.obj := (sheafificationAdjunction X.smallEtaleTopology A).map_injective
+    I inferInstance
+  apply CategoryTheory.Sheaf.isZero_rightDerived_eval_of_finiteCech
+    (fun V : X.ProEt ↦ proAffineEtale V.hom) _ ((comparisonUpperStar A X).obj I) _
+    _ (Scheme.AffineProEt.ofEtale (𝟙 X)).prop q
+  · intro V hV R hR
+    obtain ⟨n, U, hU, hUR, hcover⟩ := affineProEt_finite_refinement X V hV R hR
+    exact ⟨n, U, fun k y ↦ affineProEt_cechNerve X V hV U hU k y, hUR, hcover⟩
+  · intro V hV n U hnerve hcover k
+    obtain ⟨D, hD, hfilter, S, hS⟩ :=
+      exists_affine_etale_cech_system X V hV U hnerve hcover
+    exact S.categoricalOriginalExactAt I hS k (fun i ↦
+      Presheaf.exactAt_categoricalCech_of_injective I.obj
+        (fun b ↦ Over.mk (S.f i b)) k)
 
 end AlgebraicGeometry.ProEtale

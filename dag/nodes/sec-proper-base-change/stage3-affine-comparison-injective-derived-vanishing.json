@@ -14,63 +14,51 @@
  },
  "proof": [
   {
-   "text": "Use the affine ind-etale basis and finite covering refinements, closed under fibre products. Present each member of a finite basis cover as a cofiltered limit of affine etale schemes over its target. The finite product of index sets is directed; each stage family covers since the original cover does.",
+   "text": "Import the existing affineProEt_finite_refinement and affineProEt_cechNerve helpers from AffineComparisonInjectiveVanishing, made public in place without changing their statements or proofs. They give finite refinements of covering sieves on affine ind-etale objects and closure of repeated nerve terms in that basis.",
    "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra"
+    "lem-weil-pbc-ind-etale-basis"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the categorical comparison-section continuity construction isColimit_comparisonUpperStar_mapCocone_of_isAffine and its naturality. Fibre products commute with these limits. Exact filtered colimits in the Grothendieck abelian coefficient category commute with finite products and homology, so the finite Cech complex is the filtered colimit of its stage complexes. This is the categorical argument underlying the module specialization in lem-weil-pbc-comparison-sections; no underlying abelian injectivity is assumed.",
+   "text": "Choose a simultaneous etale presentation of the finite cover. This keeps the two-limit geometric route of the unit and descends no coefficient data.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "def-sp-grothendieck-abelian",
-    "lem-weil-pbc-comparison-sections"
+    "lem-cbc-affine-etale-cech-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Present the covered basis object U as an inverse limit of affine etale X-schemes. Descend each arrow of the finite etale cover to a common stage by finite presentation, then take a cofinal tail on which the family covers. Descend only this finite diagram; all higher intersections are formed by base change. Apply the same continuity and finite-product argument to identify the Cech complex with a filtered colimit of complexes for I on the original etale site of X.",
+   "text": "The exact sheafification adjunction makes the underlying etale presheaf of I injective. Apply the cofree categorical Cech contraction at every stage, and transfer exactness through the presentation by exact filtered colimits and finite products.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent",
-    "lem-weil-pbc-limit-affine-stage",
-    "lem-weil-pbc-ind-etale-stability"
+    "stage3-categorical-injective-cech-exactness",
+    "stage3-affine-comparison-categorical-cech-system"
    ],
    "elementary": false
   },
   {
-   "text": "The augmented finite Cech complex of I for each stage cover is exact in positive degrees by injectivity on X_et. The usual injective Cech argument and dimension-shifting criterion are categorical with finite products: sheafification is exact, the augmented covering resolution is exact locally, and finite products of short exact section sequences are exact. Consequently the criterion applies to A-valued sheaves as well. No exact infinite product is used. This is the same finite Cech argument of Stacks 099U, expressed in a Grothendieck abelian category, rather than an application of the abelian-group-only Lean theorem.",
+   "text": "Apply the categorical finite-cover Cech criterion to the comparison pullback sheaf. The terminal pro-etale object of affine X is affine ind-etale, so its positive right derived evaluation is zero.",
    "uses": [
-    "def-sp-grothendieck-abelian",
-    "def-sp-injective-resolutions"
+    "stage3-categorical-finite-cech-criterion"
    ],
-   "elementary": true
-  },
-  {
-   "text": "Exactness of filtered colimits kills all positive Cech homology in the two limits. The Cech criterion therefore gives zero derived evaluation on every basis object. The affine terminal object is a basis object, giving the statement. The empty covering has zero positive complex; q+1 always lies in positive degree.",
-   "uses": [
-    "def-sp-grothendieck-abelian"
-   ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-ind-etale-algebra",
-  "def-weil-pbc-site-comparison-morphism",
-  "def-sp-grothendieck-abelian",
-  "lem-weil-pbc-comparison-sections",
-  "lem-weil-pbc-etale-finite-data-descent",
-  "lem-weil-pbc-limit-affine-stage",
-  "def-sp-injective-resolutions"
+  "lem-cbc-affine-etale-cech-presentation",
+  "stage3-categorical-injective-cech-exactness",
+  "stage3-affine-comparison-categorical-cech-system",
+  "stage3-categorical-finite-cech-criterion"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "H4",
+  "date": "2026-10-16",
   "document": "https://stacks.math.columbia.edu/tag/099U",
-  "place": "Categorical form of the two-limit finite Cech proof, with Grothendieck abelian coefficients; not a claim that Stacks states this coefficient generality verbatim."
+  "place": "The two-limit finite Cech proof, assembled in Lean with categorical products, AB5, cofree injective contraction and dimension shifting. The one unproved local-zero sheafification obligation is stage3-categorical-finite-cover-local-zero. Repair of the returned duplicate helpers: reuse the existing geometric theorems from AffineComparisonInjectiveVanishing after exposing them in place; no duplicate proof remains.",
+  "tool_uses_requested": {
+   "lem-cbc-affine-etale-cech-presentation": "Coefficient-free geometric construction reused from the comparison unit; the original proper-base-change two-limit route is retained."
+  }
  },
  "mathlib_searches": [
   {
@@ -158,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-df2b8",
-  "group": "V2",
+  "reviewer": "X-08cee",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261016T054838-L-158175",
+  "landing": "20261016T090411-L-1838030",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their DAG statements; compilation and all seven direct importer checks passed."
+  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
  }
 }

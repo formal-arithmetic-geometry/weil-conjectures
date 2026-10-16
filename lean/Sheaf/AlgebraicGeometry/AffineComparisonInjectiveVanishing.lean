@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.CategoryTheory.Sites.CechComplex
 import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import WeilConjectures.CategoryTheory.Sites.CechCriterion
@@ -31,7 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
-private theorem affineProEt_cechNerve (Y : Scheme.{u}) [IsAffine Y]
+theorem affineProEt_cechNerve (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)
     {n : ℕ} (U : Fin n → Over V)
     (hU : ∀ i, proAffineEtale (U i).left.hom) (k : ℕ)
@@ -73,7 +75,7 @@ private theorem affineProEt_cechNerve (Y : Scheme.{u}) [IsAffine Y]
   rw [← hw, proAffineEtale.cancel_left_of_respectsIso]
   exact h
 
-private theorem affineProEt_finite_refinement (Y : Scheme.{u}) [IsAffine Y]
+theorem affineProEt_finite_refinement (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)
     (R : Sieve V) (hR : R ∈ Scheme.ProEt.topology Y V) :
     ∃ (n : ℕ) (U : Fin n → Over V),

@@ -1,0 +1,160 @@
+{
+ "id": "stage3-categorical-finite-cover-local-zero",
+ "kind": "statement",
+ "title": "Locally zero sections detect maps from a presheaf with zero sheafification on a finite basis",
+ "statement": "Let (C,J) be a site [def-weil-pbc-sites-and-cohomology], A a Grothendieck abelian coefficient category [def-sp-grothendieck-abelian], and B a predicate on objects of C. Assume finite products in every Over V and that each covering sieve of a B-object contains a finite covering family all of whose nonempty repeated nerve terms satisfy B. Let P:C^op→A have zero sheafification. For V satisfying B and b:P(V)→T, suppose that for each such finite basis cover U of V, every coefficient object E and x:E→P(V), vanishing of all restrictions of x to the one-fold nerve terms of U implies x≫b=0. Then b=0. Different locally zero generalized sections may use different finite covers.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00W1",
+  "place": "Section 7.10, the filtered-colimit local equality description before Lemma 7.10.8 and the finite-composition argument of Theorem 7.10.10 (Tag 00WB); categorical extension using AB5 and transfinite plus, not a claim of verbatim coefficient generality."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For each covering sieve form the kernel of restriction from P(V) to its matching-family object. Refinement gives a filtered family. AB5 identifies its union with the kernel of the plus unit, since plus is the filtered colimit of matching-family objects. Refining the sieve to a finite B-cover shows that each such kernel is killed by a finite restriction map.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Iterate plus transfinitely, using the source library TransfinitePlus and TransfinitePlusSheaf constructions. At a successor step pull back local kernels along the earlier unit. Inductively express the restrictions on each of finitely many covering members as filtered unions of further local kernels. Commute these unions with finite pullbacks and products by AB5, compose the finite covers, and refine again by the given basis hypothesis. Before invoking hcov on a covering member, replace the family by its canonically isomorphic one-fold nerve family, whose members satisfy B literally. Refining the final composite at V restores the stipulated nerve condition. No invariance of B under isomorphism is assumed. Thus the pulled-back kernel is a union of kernels killed on finite B-covers.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a limit ordinal AB5 identifies the kernel with the union of earlier kernels. For a sufficiently large regular cardinal the transfinite plus construction is a sheafification. Its value is zero by the hypothesis and uniqueness of sheafification, so the union of locally zero kernels is all of P(V). The hypothesis on b kills each kernel, and hence b.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00W1",
+  "place": "Section 7.10, the filtered-colimit local equality description before Lemma 7.10.8 and the finite-composition argument of Theorem 7.10.10 (Tag 00WB); categorical extension using AB5 and transfinite plus, not a claim of verbatim coefficient generality.",
+  "group": "H4",
+  "date": "2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A presheaf with zero sheafification on a finite covering basis is the union of kernels of restriction to finite covers",
+   "results": "TopCat.Presheaf.sheafify; Presheaf.isSheaf_iff_isLimit_coverage; no categorical local-zero criterion.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf valued in a Grothendieck abelian category, zero sheafification implies generalized sections are locally zero after epimorphic refinement on a finite covering basis",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify and SheafOfModules.LocalGeneratorsData; these require concrete module coefficients and do not apply to arbitrary A.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafify.*kernel|kernel.*toPlus|IsZero.*sheafify",
+   "results": "No Mathlib hits. The source library has a generic transfinite plus sheafification, but no local-kernel API.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck abelian category, the kernel of categorical sheafification on a site with finite covering basis is generated by kernels of restriction maps to finite covers",
+   "results": "Independent second reading: 8 hits, including Presheaf.isLocallyInjective_toSheafify′ (concrete coefficients), Sheaf.ab5ofSize, and IsGrothendieckAbelian.IsPresentable.injectivity₀.f. None states the finite-cover local-kernel criterion for arbitrary coefficients.",
+   "date": "2026-10-16",
+   "verdict": "No applicable theorem closes this obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSheafify\"",
+   "results": "Independent second reading: 12 hits for the generic or concrete sheafification unit, its naturality and universal-property identities. None gives the required categorical local-kernel description.",
+   "date": "2026-10-16",
+   "verdict": "No applicable local-zero theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*(sheafif|toPlus)|sheafif.*kernel|IsZero.*presheafToSheaf|hom_eq_zero_of.*(local|sheaf)|exact_of_evaluations",
+   "results": "Independent second reading over lean/Sheaf, lean/WeilConjectures and Mathlib sites: module-valued local-image lemmas are too specialized. Found upstream ShortComplex.exact_iff_evaluation; used it to remove the duplicate pointwise exactness helper from the proved modules.",
+   "date": "2026-10-16",
+   "verdict": "No categorical local-zero match; upstream pointwise exactness reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing",
+  "date": "2026-10-16",
+  "group": "H4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+   "via": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "stage3-affine-comparison-injective-derived-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero",
+  "file": "lean/Sheaf/CategoryTheory/CategoricalFiniteCoverLocalZero.lean",
+  "declaration": "CategoryTheory.Presheaf.hom_eq_zero_of_sheafification_zero",
+  "statement": "theorem hom_eq_zero_of_sheafification_zero\n    (B : C → Prop)\n    (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),\n      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (Presheaf.cechNerveObj U y).left) ∧\n      (∀ a, R (U a).hom) ∧\n      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ J V)\n    (P : Cᵒᵖ ⥤ A) (hP : IsZero ((presheafToSheaf J A).obj P))\n    (V : C) (hV : B V) {T : A} (b : P.obj (op V) ⟶ T)\n    (h : ∀ {n : ℕ} (U : Fin n → Over V),\n      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (Presheaf.cechNerveObj U y).left) →\n      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ J V →\n      ∀ {E : A} (x : E ⟶ P.obj (op V)),\n        x ≫ cechAugmentation U Over.mkIdTerminal ((Over.forget V).op ⋙ P) = 0 →\n        x ≫ b = 0) : b = 0",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+  "edge_cases": "Empty finite covers, repeated indices and degree q+1=1 are included; all products used for exactness are finite."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
+ }
+}

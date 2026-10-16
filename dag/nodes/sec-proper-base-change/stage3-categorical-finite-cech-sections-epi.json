@@ -1,0 +1,151 @@
+{
+ "id": "stage3-categorical-finite-cech-sections-epi",
+ "kind": "statement",
+ "title": "First categorical finite Cech exactness makes quotient maps epic on basis sections",
+ "statement": "Let (C,J), A and B have the finite covering basis hypotheses of [stage3-categorical-finite-cover-local-zero]. Let 0→F→I→Q→0 be short exact in A-valued sheaves. Suppose the categorical finite Cech complex of F is exact in degree 1 for every finite B-cover of every B-object. Then I(V)→Q(V) is epic in A for every B-object V.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F8",
+  "place": "Lemma 21.10.8, with coefficient epimorphic refinements and finite products replacing elementwise lifts."
+ },
+ "stmt_deps": [
+  "stage3-categorical-finite-cover-local-zero"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local-lift test to the cokernel projection of I(V)→Q(V). Fix a finite B-cover and a local lift cochain in I of a generalized Q(V)-section.",
+   "uses": [
+    "stage3-categorical-finite-cover-local-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its differential maps to zero in the degree-one Q-product. Evaluation is left exact, so lift that differential uniquely through the degree-one F-product. Monicity in degree two and d squared zero show that this lift is a cocycle. Exactness in degree one gives a primitive after an epimorphism of coefficient objects.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Subtract the image of this primitive from the I-cochain. Its differential is zero. The categorical degree-zero Cech cocycle calculation gives compatibility on overlaps, and the sheaf axiom glues it to an I(V)-section. The sheaf uniqueness axiom makes the Q-augmentation monic, so this global lift has the required Q-image.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The cokernel projection kills the refined section. Cancel the coefficient epimorphism and use the local-lift test to show that projection is zero. Hence I(V)→Q(V) is epic.",
+   "uses": [
+    "stage3-categorical-finite-cover-local-epi"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "stage3-categorical-finite-cover-local-epi",
+  "lem-sp-abelian-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F8",
+  "place": "Lemma 21.10.8, with coefficient epimorphic refinements and finite products replacing elementwise lifts.",
+  "group": "H4",
+  "date": "2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing first Cech homology for a kernel sheaf makes a short exact sequence of sheaves surjective on sections on a finite cover basis",
+   "results": "ShortComplex.exact_of_f_is_kernel and Sheaf.epi_of_isLocallySurjective for sets; no generic categorical section-epimorphism lemma.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves in a Grothendieck abelian category with a finite covering basis, vanishing first Cech cohomology makes short exact sequences surjective on sections",
+   "results": "MayerVietorisSquare short exactness and coherent topology results for sets; no arbitrary coefficient criterion.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.toPlus",
+   "results": "toPlus and isIso_toPlus_of_isSheaf; no Cech section-lifting result.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "epi.*app|app.*epi|isLocallySurjective_iff_epi",
+   "results": "Mathlib Sites local-surjectivity APIs require concrete coefficients. Source CechCriterion has the abelian-group version only.",
+   "date": "2026-10-16",
+   "verdict": "No existing theorem states this categorical obligation; matching ingredients are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing",
+  "date": "2026-10-16",
+  "group": "H4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+   "via": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "stage3-affine-comparison-injective-derived-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CategoricalFiniteCechSectionsEpi",
+  "file": "lean/Sheaf/CategoryTheory/CategoricalFiniteCechSectionsEpi.lean",
+  "declaration": "CategoryTheory.Sheaf.epi_app_of_finite_cech_exact_one",
+  "statement": "theorem epi_app_of_finite_cech_exact_one\n    (B : C → Prop)\n    (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),\n      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (Presheaf.cechNerveObj U y).left) ∧\n      (∀ a, R (U a).hom) ∧\n      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ J V)\n    {S : ShortComplex (Sheaf J A)} (hS : S.ShortExact)\n    (hF : ∀ V, B V → ∀ {n : ℕ} (U : Fin n → Over V),\n      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (Presheaf.cechNerveObj U y).left) →\n      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ J V →\n      ((cechComplexFunctor U).obj ((Over.forget V).op ⋙ S.X₁.obj)).ExactAt 1)\n    (V : C) (hV : B V) : Epi (S.g.hom.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-16"
+ },
+ "split_report": {
+  "blueprint": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+  "edge_cases": "Empty finite covers, repeated indices and degree q+1=1 are included; all products used for exactness are finite."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-08cee",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1838030",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
+ }
+}
