@@ -1,0 +1,249 @@
+{
+ "id": "lem-weil-integral-constructible-linear",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "place": "its statement (a notion the statement uses)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral constructible category is O_E-linear with O_E-linear shift",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a scheme $Y$. The derived category $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ of sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules [def-weil-completed-integral-coefficients] is $\\mathcal O_E$-linear: $a\\in\\mathcal O_E$ acts on every Hom group through the ring map $\\mathcal O_E=\\varprojlim_n A_{E,n}\\to\\Gamma(Y_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,Y})$ induced by the constant sections, composition is $\\mathcal O_E$-bilinear, and the shift functors act $\\mathcal O_E$-linearly. Consequently the full subcategory $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], with the triangulated structure of [lem-weil-integral-constructible-triangulated], is an $\\mathcal O_E$-linear triangulated category with $\\mathcal O_E$-linear shift.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+  "place": "the hypothesis 'If $\\mathcal C$ is an $\\mathcal O_E$-linear triangulated category', applied to $\\mathcal C=D^b_c(Y,\\mathcal O_E)$; the linearity is not proved in the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-linear-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause (2) of lem-pod-adic-limit-finite-modules to the free rank-one module $M=\\mathcal O_E$. Its finite-generation hypothesis holds because $1$ generates $M$. It identifies the canonical reduction map $\\mathcal O_E\\to\\varprojlim_n A_{E,n}$ with an isomorphism. This is a ring isomorphism, since each coordinate is the quotient ring homomorphism and addition and multiplication of compatible sequences are coordinatewise.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 031B (algebra-lemma-when-finite-module-complete-over-complete-ring), 00MA (algebra-lemma-completion-tensor); specialization of the cited coefficient-module completeness statement"
+   }
+  },
+  {
+   "text": "For each object $U$ of $Y_{\\mathrm{proet}}$, map $a\\in\\mathcal O_E$ to the sequence of constant sections $(a\\bmod\\varpi_E^n)_U$ in $(A_{E,n})_Y(U)$. These sections come from the constant-presheaf-to-sheaf map in the definition of $(A_{E,n})_Y$. The reduction maps take the $(n+1)$st coordinate to the $n$th. The sectionwise inverse-limit description therefore gives an element $c_U(a)$ of $\\widehat{\\mathcal O}_{E,Y}(U)$. Coordinatewise ring operations make $c_U$ a unital ring homomorphism, and restriction along $V\\to U$ takes $c_U(a)$ to $c_V(a)$. At the terminal object $Y$ this is precisely the stated map to global sections, using the identification of Step 1. No equality between the constant sheaf $(\\mathcal O_E)_Y$ and the completed sheaf is asserted.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "constant-section construction in the missing integral-linearity justification; limits as in the cited definition"
+   }
+  },
+  {
+   "text": "Put $\\mathcal O=\\widehat{\\mathcal O}_{E,Y}$. On morphisms $f:M\\to N$ of $\\mathcal O$-module sheaves set $(a f)_U(x)=c_U(a)f_U(x)$. Each $A_{E,n}$ is commutative; local representatives in its constant sheaf therefore commute, and multiplication in their inverse limit is coordinatewise. Hence $\\mathcal O$ is commutative, so $(a f)_U$ is $\\mathcal O(U)$-linear. Semilinearity of restriction and $c_U(a)|_V=c_V(a)$ show that these components commute with restriction. All module identities hold sectionwise: $(a+b)f=af+bf$, $a(f+g)=af+ag$, $(ab)f=a(bf)$ and $1f=f$. For composable $f,g$, linearity of $g_U$ gives $g_U(c_U(a)f_U(x))=c_U(a)g_U(f_U(x))$, hence $g\\circ(af)=a(g\\circ f)=(ag)\\circ f$. Addition is sectionwise as well. Thus the sheaf category is $\\mathcal O_E$-linear; its abelian structure is supplied by the cited module-category statement in a universe large enough for the site.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-linear-category",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW (sites-modules-definition-sheaf-modules), Tag 03DA (sites-modules-lemma-abelian); the scalar calculation is written here, with linearity as in Tag 09MJ"
+   }
+  },
+  {
+   "text": "Apply lem-weil-linear-abelian-derived-category with $R=\\mathcal O_E$ and $\\mathcal A=\\Mod(\\widehat{\\mathcal O}_{E,Y})$, using the abelian category and scalar action of Step 3. The derived category here is exactly $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ by the completed-coefficients definition. Take the localization universe from the abstract-derived-category convention. The lemma makes this category linear, its localization functor linear, and every integer shift linear. To identify the action, multiplication by $c_U(a)$ on each term defines a cochain endomorphism $\\mu_{a,K}$, since the differentials are module maps; already on complexes $\\mu_{a,K}=a\\,\\mathrm{id}_K$. Consequently $Q(\\mu_{a,K})=a\\,\\mathrm{id}_{QK}$. For any derived morphism $f:QK\\to QL$, bilinearity now gives $af=Q(\\mu_{a,L})\\circ f=f\\circ Q(\\mu_{a,K})$. Thus it is exactly the action through the constant global sections constructed above, including on morphisms introduced by localization.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+    "place": "lines 24-40; derived-category notion: Stacks Tag 05RU (derived-definition-unbounded-derived-category)"
+   }
+  },
+  {
+   "text": "By def-weil-derived-complete-integral-detailed, $D^b_c(Y,\\mathcal O_E)$ is a full subcategory of the ambient derived category. Give each of its Hom groups exactly the ambient module structure: sums, scalar multiples and compositions still have the same source and target, so all module and bilinearity identities are the ambient identities. By lem-weil-integral-constructible-triangulated it is closed under every integer shift and has the induced triangulated structure. Its shift maps on Hom groups are therefore the ambient shift maps, and $[m](af)=a[m](f)$ is the identity proved in Step 4. This proves the final assertion without imposing a new boundedness, finite-Tor-dimension, or coefficient hypothesis.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "application of the O_E-linear triangulated-category hypothesis to D^b_c(Y,O_E); inherited full-subcategory calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-adic-limit-finite-modules",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-linear-category",
+  "lem-weil-linear-abelian-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+  "place": "The blueprint assumes integral linearity without proving it; supplied by the explicit constant-section and module-morphism calculations, existing coefficient completeness, and the Mathlib derived linearity theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Linear.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Linear/Basic.lean",
+   "results": "Linear R (DerivedCategory C) for an R-linear abelian C (DerivedCategory/Linear.lean:29), shift functors R-linear (line 39); Linear R Z.FullSubcategory (Linear/Basic.lean:117)",
+   "date": "2026-10-09",
+   "verdict": "generalization not in one line: it specializes once the abelian category of sheaves of Ô_{E,Y}-modules is shown O_E-linear (via O_E → Γ(Y,Ô_{E,Y})), which Mathlib does not state for sheaves of modules on a site"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Linear' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of an R-linear abelian category is R-linear and its shift functors are R-linear",
+   "results": "8 hits; DerivedCategory.instLinear, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearShiftFunctorInt, DerivedCategory.instLinearSingleFunctor, HasDerivedCategory, DerivedCategory.instCategory",
+   "date": "2026-10-14",
+   "verdict": "match: DerivedCategory.instLinear (line 29), DerivedCategory.instLinearCochainComplexIntQ (line 36), DerivedCategory.instLinearShiftFunctorInt (line 39), all in Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; declarations read with their hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Linear",
+   "results": "10 hits; DerivedCategory.instLinear, DerivedCategory.instLinearSingleFunctor, DerivedCategory.instLinearShiftFunctorInt, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.homLinearEquiv_apply, CategoryTheory.Abelian.Ext.smul_hom",
+   "date": "2026-10-14",
+   "verdict": "match: DerivedCategory.instLinear (line 29), DerivedCategory.instLinearCochainComplexIntQ (line 36), DerivedCategory.instLinearShiftFunctorInt (line 39), all in Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; declarations read with their hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "shiftFunctor.*Linear|Functor.Linear R \\(DerivedCategory.Q|noncomputable instance : Linear",
+   "results": "4 hits; Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+   "date": "2026-10-14",
+   "verdict": "match: DerivedCategory.instLinear (line 29), DerivedCategory.instLinearCochainComplexIntQ (line 36), DerivedCategory.instLinearShiftFunctorInt (line 39), all in Mathlib/Algebra/Homology/DerivedCategory/Linear.lean; declarations read with their hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of a linear abelian category and its shift functors are linear",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over a sheaf of commutative rings are linear over a ring acting by constant global sections, including the derived category",
+   "results": "8 hits; SheafOfModules.instPreadditive, SheafOfModules.instCategory, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.instAbelian, SheafOfModules, AlgebraicGeometry.Scheme.Modules.instCategory, instAbelianCondensedMod",
+   "date": "2026-10-14",
+   "verdict": "no match for completed-coefficient sheaf linearity; the general derived results require the explicit Step 3 construction, so the item is not a Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Linear",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match for completed-coefficient sheaf linearity; the general derived results require the explicit Step 3 construction, so the item is not a Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|SMul|homModule",
+   "results": "3 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for completed-coefficient sheaf linearity; the general derived results require the explicit Step 3 construction, so the item is not a Mathlib leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-rationalization-karoubi",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-integral-constructible-linear",
+  "worker": "stage1",
+  "summary": "Constructed the compatible constant-section ring maps and the sheaf Hom scalar action explicitly, cited the existing finite-module adic completeness for O_E = lim A_E,n, and added one general Mathlib leaf for linear derived categories, their localization functors, and integer shifts. Full-subcategory linearity is an elementary final step. No statement change and no identification with discrete constant coefficients.",
+  "blueprint": "def-weil-rationalization-karoubi, statement: the hypothesis 'If C is an O_E-linear triangulated category' used for C = D^b_c(Y,O_E). The unit has no proof paragraphs; this justifies a prerequisite, without altering its six-operation route.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Step 1 uses only clause (2), specialized to the rank-one module O_E, to identify O_E with the inverse limit of its quotient rings. This generic coefficient-completeness result is not supplied by sk-def-sf-operations and replaces no six-operation or comparison step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-adic-limit-finite-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-a0c998980",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a0c998980 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all five steps and the new Mathlib leaf check out. Supplied fixes add the existing linear-functor definition citation, document additivity instances, and restore the accepted completeness tool declaration. Item statement unchanged; no duplicate, cycle, or unsupported coefficient comparison. Details in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fbed1231d",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Full source, node, dependency, Lean, edge-case, docstring, hollow-definition, and report audit completed; recorded five-file scompile/server evidence is clean. Fresh rerun was blocked only by the live library lacking a sibling .olean, with no substantive delivery defect found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleLinear",
+  "declaration": "WeilConjectures.integralCoefficientLinear_existsUnique",
+  "declarations": [
+   "WeilConjectures.integralConstructibleTriangulatedStructure",
+   "WeilConjectures.integralConstructible_linear",
+   "WeilConjectures.integralCoefficientLinear_existsUnique",
+   "WeilConjectures.integralCoefficientLinear",
+   "WeilConjectures.integralCoefficientShift_linear",
+   "WeilConjectures.integralConstructibleLinear",
+   "WeilConjectures.integralConstructibleClosedIso",
+   "WeilConjectures.integralConstructibleTriangulated",
+   "WeilConjectures.integralConstructibleShift_linear"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralConstructibleLinear.lean",
+  "statement": "theorem integralCoefficientLinear_existsUnique : ∃! s : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y)), (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y))] ↦ ∀ (a : Padic.coefficientExtensionIntegers l E) (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'), a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B), second-reading compatibility repair: retain the published integralConstructible_linear theorem and integralConstructibleTriangulatedStructure declaration verbatim. Its existential instance interface requires the auxiliary finite-field datum and does not expose a chosen action shared with integralScalarDerivedAction or reusable linear instances. Add the unique constant-section characterization, canonical ambient action independent of that auxiliary datum, inherited subcategory instances, and shift-linearity interface needed by scalar localization; mathematical objects and hypotheses are unchanged."
+ }
+}

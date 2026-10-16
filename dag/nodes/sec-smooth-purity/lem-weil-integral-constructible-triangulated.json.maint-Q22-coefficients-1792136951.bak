@@ -1,0 +1,388 @@
+{
+ "id": "lem-weil-integral-constructible-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "statement, first sentence: full triangulated subcategory; the uniform-amplitude paragraph is checked explicitly in proof steps 5 and 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded constructible derived-complete integral complexes form a triangulated subcategory",
+ "statement": "Fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $Y$. The full subcategory $D^b_c(Y,\\mathcal O_E)$ of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] is a triangulated subcategory: it contains a zero object, it is closed under isomorphisms and under the shifts $[m]$, $m\\in\\mathbf Z$, and for every distinguished triangle $K'\\to K\\to K''\\to K'[1]$ of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-triangulated-category] with $K'$ and $K''$ in $D^b_c(Y,\\mathcal O_E)$, also $K$ is in $D^b_c(Y,\\mathcal O_E)$. Hence $D^b_c(Y,\\mathcal O_E)$, with the shift and the distinguished triangles of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ lying in it, is a triangulated category and its inclusion is an exact functor.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, the sentence after Definition 6.5.1 ('It is immediate that D_cons(X_proet, R^) is a triangulated subcategory'), for the variant of the definition used in def-weil-derived-complete-integral-detailed; the derived-complete part is Stacks Project, the paragraph after the definition of derived completeness on a ringed site, Tag 0999 (literature/stacks-project/algebraization.tex lines 919-925); the blueprint states it inside the definition (literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-complete-integral-detailed.md)"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-triangulated-category",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_E$, $t=\\varpi_E$, $B=\\widehat{\\mathcal O}_{E,Y}$ and $B_n=(A_{E,n})_Y$. All sites are taken in the small skeleton and universe of the coefficient categories. For $M\\in D(B)$, let $C(M)=R\\lim_n\\operatorname{Res}_n(M\\otimes_B^L B_n)$, using a strict K-flat reduction tower, with its quotient-induced unit $\\eta_M:M\\to C(M)$. The constant/completed coefficient comparison identifies this quotient completion, including its unit, with the one-generator Koszul completion over $B$. The ringed Koszul reflector theorem therefore says that $C(M)$ is locally derived $(t)B$-complete and that $\\eta_M$ is an isomorphism exactly when $M$ is locally derived $(t)B$-complete. Here locally complete means $R\\mathcal Hom_{B_U}(B_U[1/f],M|_U)=0$ for every slice $U$ and $f\\in (t)B(U)$; the localization is sheafified sectionwise localization. Apply the coefficient comparison with the Noetherian ring $R$ and ideal $(t)$; it requires no Noetherian or finite-dimensional hypothesis on $Y$.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion), 0A0E (lemma-derived-completion-koszul); quotient/completed comparison as in the cited node"
+   }
+  },
+  {
+   "text": "Check that this local condition is precisely the stored notion of derived completeness, which asks for a Roos triangle with first arrow $c=(c_n)$. Countable products of $B$-module sheaves are exact. On a K-injective resolution $I_\\bullet$ of the strict quotient tower, its termwise limit represents $C(M)$, and the tower-core triangle gives $C(M)\\to\\prod_n M_n\\xrightarrow{1-s}\\prod_nM_n\\to C(M)[1]$, where $M_n=\\operatorname{Res}_n(M\\otimes_B^L B_n)$. Products of the evaluated representatives compute derived products, so the componentwise quasi-isomorphisms from the original tower identify these products and their transition maps. The first arrow composed with $\\eta_M$ has components $c_n$: on complexes the unit is obtained by factoring the compatible quotient maps through the termwise limit of $I_\\bullet$. If $\\eta_M$ is invertible, write $p:C(M)\\to\\prod_nM_n$ and $\\delta:\\prod_nM_n\\to C(M)[1]$ for the first and last arrows of this triangle. The triangle on $M$ has arrows $p\\eta_M=c$, $1-s$, and $\\eta_M[1]^{-1}\\delta$; the triple $(\\eta_M,\\mathrm{id},\\mathrm{id})$ is an isomorphism to the distinguished triangle on $C(M)$, so the triangle on $M$ is distinguished by TR1. Conversely, if the required Roos triangle on $M$ exists, rotate it and this triangle so their first arrow is the same $1-s$. TR3 on the identity maps of the two products, followed by the two-isomorphisms lemma, gives an isomorphism $M\\cong C(M)$. Since $C(M)$ is locally complete by step 1, so is $M$; thus step 1 makes $\\eta_M$ invertible too. This argument does not assume uniqueness of an arbitrary lift of $c$. The ringed module and small-diagram Grothendieck theorems supply the categories in which the K-injective tower computation is made. Apply the enough-injectives theorem and the general K-injective functorial-existence theorem to these Grothendieck categories; this supplies both hypotheses of the derived-limit statements, not merely abelianness.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-derived-limit-tower-core-property-triangle",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0BK6, 0BK7, 070M (derived product/limit triangles), 014A (lemma-third-isomorphism-triangle)"
+   }
+  },
+  {
+   "text": "Derived completeness is now closed under zero, isomorphisms, all shifts, and extensions. To see this without assuming an unspecified completion functor is exact, use the global generator $t$. The local criterion of step 1 is equivalent to vanishing of the single global object $H_t(M)=R\\mathcal Hom_B(B[1/t],M)$. Indeed internal Hom commutes with slice restriction, so global vanishing implies vanishing for $t|_U$ on every slice; the sheaf-of-ideals theorem then gives vanishing for every local section of $(t)B$. The converse is the local criterion applied to the generator, using that sheaves are detected on the covering family of all objects. The internal-Hom calculus theorem says $H_t$ preserves triangles, shifts and isomorphisms. It takes zero to zero. Applied to a triangle with complete outside vertices, it gives $0\\to H_t(M)\\to0\\to0$, whence $H_t(M)=0$ (apply the long exact cohomology sequence). This proves the extension assertion and the other closures for completeness alone.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); algebraization.tex Tag 0998 (lemma-ideal-of-elements-complete-wrt)"
+   }
+  },
+  {
+   "text": "For each $n\\geq1$ write $F_n(M)=M\\otimes_B^L B_n$, now in $D(Y_{\\mathrm{proet}},A_{E,n})$, rather than in $D(B)$. The definition of integral reduction identifies $F_n$ with derived change of rings along $B\\to B_n$. The change-of-rings theorem makes it an exact triangulated functor; in particular $F_n(0)=0$, it preserves isomorphisms, $F_n(M[m])\\cong F_n(M)[m]$, and it sends every ambient distinguished triangle to a distinguished triangle over $A_{E,n}$. No flatness of $B_n$ over $B$ is required: this is the derived functor.",
+   "uses": [
+    "def-weil-integral-derived-reduction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), identity of the underlying site"
+   }
+  },
+  {
+   "text": "Zero has zero reduction at every level, and all its cohomological supports are empty, hence contained in $[0,0]$. Isomorphisms preserve each reduction, its constructibility and all its cohomology sheaves. If $M$ has reduction supports in $[r,s]$, then step 4 and the cohomology-shift isomorphism give $\\mathcal H^i(F_n(M[m]))\\cong\\mathcal H^{i+m}(F_n(M))$. Thus all shifted reduction supports lie in $[r-m,s-m]$, independently of $n$. Finite-level bounded constructibility is preserved by zero, isomorphisms and shifts by the pro-etale bounded-constructible triangulation theorem (each $A_{E,n}$ is a finite commutative ring). Combining these observations with completeness from step 3 and the defining conditions proves zero, isomorphism and shift closure for the integral category. The finite-torsion definition and the pro-etale constructible-sheaf definition give the same property here: each asks for a finite partition by locally closed constructible subschemes, locally constant restrictions with finite module stalks, and finitely many nonzero cohomology sheaves. Thus the finite-level theorem applies to the precise finite-torsion category used in the integral definition.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-cohomological-support",
+    "lem-sp-derived-cohomology-shift",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and the following sentence; uniform-amplitude variant in the blueprint ancestor"
+   }
+  },
+  {
+   "text": "Let $K'\\to K\\to K''\\to K'[1]$ be distinguished, with the outside vertices in the integral category. For every $n$, step 4 gives the distinguished triangle $F_n(K')\\to F_n(K)\\to F_n(K'')\\to F_n(K')[1]$. Its outside vertices are bounded constructible by the integral definition. Apply the pro-etale bounded-constructible triangulation theorem with the finite ring $A_{E,n}$ to conclude that $F_n(K)$ is bounded constructible. Completeness of $K$ was proved in step 3. This argument is levelwise and has not yet supplied the uniform interval; that is checked next.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B5 (lemma-constructible-serre), proof of Tag 09AL (lemma-compare-constructible-derived)"
+   }
+  },
+  {
+   "text": "Choose reduction intervals $[r',s']$ for $K'$ and $[r'',s'']$ for $K''$, each independent of $n$. Set $r=\\min(r',r'')$ and $s=\\max(s',s'')$, so $r\\leq s$. For any $n$ and $i<r$ or $i>s$, the exact segment $\\mathcal H^i(F_n(K'))\\to\\mathcal H^i(F_n(K))\\to\\mathcal H^i(F_n(K''))$ has both outside terms zero, so its middle term is zero. Hence $\\operatorname{Supp}_{\\mathrm{coh}}F_n(K)\\subseteq[r,s]$ for every $n$. Together with step 6 and completeness, these are all the defining conditions for $K\\in D^b_c(Y,\\mathcal O_E)$. No uniform bound on ranks or a common stratification across $n$ is used or needed.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-cohomological-support",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS (lemma-cohomology-homological), the long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "The category is full by its definition. Steps 5--7 give zero, isomorphism, integer-shift and extension closure. The full-triangulated-subcategory theorem equips it with the inherited triangulation and says that its inclusion is exact. Equivalently cone closure follows by rotating a triangle on a map between two objects: the other two vertices are a shift of the source and the target, already in the subcategory. This establishes every clause of the item.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05QM (definition-triangulated-subcategory), 05QX (lemma-triangulated-subcategory)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-derived-complete",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-derived-limit-tower-core-property-triangle",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-integral-derived-reduction",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-cohomological-support",
+  "lem-sp-derived-cohomology-shift",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-triangulated-subcategory",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.5 following Definition 6.5.1, with the Roos/local-completeness comparison expanded using §3.4–3.5 and the cited ringed-site lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsTriangulated\\|IsTriangulatedClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "results": "ObjectProperty.IsTriangulated (Subcategory.lean:182) = ContainsZero + IsStableUnderShift ℤ + IsTriangulatedClosed₂ (line 69); instances only for orthogonals, triangulated envelopes, kernels of homological functors, t-structure hearts",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the notion of a triangulated subcategory (the form in which this statement is to be written) but not this instance"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'derived complete\\|derivedComplete\\|IsDerivedComplete\\|Constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only IsConstructible / IsLocallyConstructible for subsets of topological spaces and schemes (AlgebraicGeometry/Morphisms/FinitePresentation.lean); no derived completeness, no constructible complexes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|boundedConstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complexes of sheaves with constructible finite reductions form a triangulated subcategory",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedComplete\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible complexes of sheaves with uniformly bounded finite reductions form a triangulated subcategory",
+   "results": "8 hits: DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsLE",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|AdicCompletion",
+   "results": "25 hits: Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|Roos|adic.*orthogonal",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex is derived complete for a principal ideal if and only if derived Hom from the localized ring vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of derived internal Hom from the localization is the category of derived adically complete complexes of module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint, localCohomology.diagram, CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint, CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint, LinearMap.toKerIsLocalized, localCohomology, LinearMap.toKerIsLocalized_apply_coe, LinearMap.toKerLocalized_isLocalizedModule",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with exact countable products, completeness expressed by the Roos triangle of derived quotients by powers of a nonzerodivisor is equivalent to vanishing of derived internal Hom from its localization",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\"",
+   "results": "12 hits: IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of bounded constructible integral complexes under shifts and extensions follows from exact reduction modulo powers and derived completeness",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected results concern ordinary adic module completion, abstract localizations, or general derived t-structures; none states completed-proetale constructible triangulation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of a right orthogonal subcategory with inverse images of bounded cohomology under exact functors is stable under triangles",
+   "results": "8 hits: CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂LeftOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedRightOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.isLocal_trW, CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt, CategoryTheory.ObjectProperty.isColocal_trW, CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel",
+   "date": "2026-10-14",
+   "verdict": "no match: Orthogonal.lean:56-68 gives abstract orthogonal closure and HomologicalFunctor.lean:117-126 gives homological-kernel closure. Neither identifies completed-coefficient Roos completeness or finite reductions and their uniform bounds; those require the present proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-complete-integral-detailed",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-integral-constructible-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded triangulation into the local/Roos completeness comparison, internal-Hom closure, exact derived reduction, finite-level constructibility and explicit uniform cohomological bounds. Reused existing DAG lemmas; no new nodes. No exact completed-proetale Lean attachment found. Statement retained.",
+  "blueprint": "Ancestor def-weil-derived-complete-integral-detailed: first sentence (triangulation), reduction condition, and final uniform-amplitude paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+    "why": "Generic ringed-site/derived-category tool; used for the completeness, reduction, or cohomological closure argument, not to replace the six-operations unit route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence theorem for injectives and K-injective resolutions in Grothendieck categories, applied to module sheaves and their small tower category."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic existence theorem for injectives and K-injective resolutions in Grothendieck categories, applied to module sheaves and their small tower category."
+   },
+   {
+    "node": "lem-weil-derived-limit-tower-core-property-triangle",
+    "why": "Generic Roos-triangle theorem for an evaluated K-injective strict tower, used in step 2 to identify the first map with the quotient-induced completion unit. The ambient six-operations definition unit has no proof step supplying this theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-derived-limit-tower-core-property-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-b667269de",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-b667269de (reviewer sub-agent of L); spot-checked: Read the full item, all 26 cited statements, chapter/unit route, report, and cited literature passages. All eight proof steps check out, including completion-unit compatibility, finite-coefficient reduction, and uniform bounds. Repaired one C8 omission by declaring the tower-core triangle theorem as an accepted generic tool. Corrected JSON and detailed source/edge-case checks are in fixes/ and review.md. No targets changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-26a22ba19",
+  "group": "NZ",
+  "result": "pass",
+  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleTriangulated",
+  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean",
+  "statement": "theorem boundedConstructibleDerivedCompleteIntegral_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) ∧ ObjectProperty.IsTriangulated.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralConstructibleAbSheafify",
+   "WeilConjectures.integralConstructibleAbLocallyBijective",
+   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated"
+  ],
+  "note": "§1(B), H10 repair: rebuild the existing integral constructibility triangulation statement against the repaired completeness and tower interfaces. It retains arbitrary Y, the original coefficient data, isomorphism closure, zero, all integer shifts, extensions, inherited triangulation and exact inclusion."
+ }
+}
