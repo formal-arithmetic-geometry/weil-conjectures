@@ -1,6 +1,6 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+38 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (38)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -22,7 +22,6 @@
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralGluing` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralStratum` | 5 | 1 | proof |
-| `Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPivotCover` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
