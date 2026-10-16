@@ -2676,6 +2676,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafCoinvariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
