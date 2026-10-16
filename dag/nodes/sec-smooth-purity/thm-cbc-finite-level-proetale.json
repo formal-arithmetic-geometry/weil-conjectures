@@ -18,7 +18,10 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-etale-origin-witness",
-  "lem-cbc-etale-local-compact-support-extension"
+  "lem-cbc-etale-local-compact-support-extension",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
@@ -330,5 +333,33 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-fb6da747a (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but the new node's `created` record omits required `by`, `date`, and `group` fields. Corrected full JSON is in fixes/dag/nodes/sec-smooth-purity/lem-cbc-etale-local-compact-support-extension.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteLevelProEtaleCompactSupportBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.cbcCoefficientPullbackComparison",
+   "AlgebraicGeometry.ProEtale.cbcDerivedPullbackComparison",
+   "AlgebraicGeometry.ProEtale.cbcComparisonUnitIso",
+   "AlgebraicGeometry.ProEtale.cbcTransportedCompactSupport",
+   "AlgebraicGeometry.ProEtale.cbcCompactSupportComparison",
+   "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange",
+   "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteLevelProEtaleCompactSupportBaseChange.lean",
+  "statement": "theorem finiteLevelCompactSupportExchange_isIso (D : Etale.LocalCompactSupportExtension Λ) {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (K : FiniteCoefficientDerivedCategoryPlus X Λ) (W : EtaleOriginWitness X Λ K) : IsIso (finiteLevelCompactSupportExchange Λ D sq K W) ∧ ∀ (W' : EtaleOriginWitness X Λ K) (e : W.L ≅ W'.L), (finiteCoefficientComparison X Λ).mapDerivedCategoryPlus.mapIso e ≪≫ W'.alpha = W.alpha → finiteLevelCompactSupportExchange Λ D sq K W = finiteLevelCompactSupportExchange Λ D sq K W'",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The coherent extension data are supplied by the prerequisite existence theorem; the statement holds for every such simultaneously normalized system. Endpoints are A H Rnu, independent of the retained witness. The arrow is the prescribed conjugate of the specified etale exchange."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9dc0c4d6b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Wrote review.md. Statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings and records match. All three immutable Lean files compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
  }
 }
