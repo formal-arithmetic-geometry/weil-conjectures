@@ -141,10 +141,10 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a9569c0d9",
-  "group": "Q30",
-  "result": "pass",
-  "note": "Full statement, dependencies, source, declarations, edge cases, docstrings, canonical constructions, and compiler evidence checked; no fixes required."
+  "reviewer": "NT-stage2-cc-5065ece5d",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Mathematics correct: all clauses match the corrected node and Stacks 0GL0/095U/0GL6 (quantifier order, bounded-domain reduction with no finite-Tor assumption, canonical adjunction-transpose comparison, [c,d+2e] uniform in m and c, fibre bound on f itself); lean.statement verbatim; no hollow definitions; proof only sorry; universes unforced. The delivered module does not compile on the server today: its non-public import of the recorded FiniteTypeSheafFiniteness hits the stale live olean of Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf (duplicate definition). FIX: fixes/FiniteCompactSupportConstructibility.lean drops only that unused import and compiles rc=0 in the stale server environment and with the current re-export source. The delivered ProEtaleFiniteModules import-only repair is needed in the current environment; all 16 direct importers compile with it (rc=0)."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModules",
@@ -184,9 +184,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteModules.lean",
   "statement": "abbrev FiniteCoefficientModules",
   "branch": "newtargets-dag",
-  "by": "Q30",
-  "date": "2026-10-16",
+  "by": "Q53",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B), returned immutable head 70af360f4afc: explicitly import Sheaf.CategoryTheory.RingedSiteModules, whose canonical ringedSiteModules abbreviation was absent from the imported compiled site-comparison interface. Retains every original finite-coefficient construction and statement verbatim; fixes the first unknown identifier and its cascading realization/category errors. The separately recorded refinement realization interface remains available in its original module. Second reading also supplies the missing source/blueprint references and natural-language proof in the two final realization docstrings; signatures and definition bodies are unchanged."
+  "note": "Section 1(B), returned immutable head 70af360f4afc: explicitly import Sheaf.CategoryTheory.RingedSiteModules, whose canonical ringedSiteModules abbreviation was absent from the imported compiled site-comparison interface. Retains every original finite-coefficient construction and statement verbatim; fixes the first unknown identifier and its cascading realization/category errors. The separately recorded refinement realization interface remains available in its original module. Second reading also supplies the missing source/blueprint references and natural-language proof in the two final realization docstrings; signatures and definition bodies are unchanged. Dependency repair in Q53 delivery: the published module imported both upstream and side declarations of IsConstructibleEtaleModuleSheaf, causing an environment duplicate; this copy retains the side declaration and removes the redundant upstream declaration import and the unused coefficient-vocabulary import that reintroduced it transitively."
  }
 }

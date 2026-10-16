@@ -212,5 +212,30 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-db7e63890 (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, the 3 new nodes and every cited statement (def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit, Mathlib leaf lem-coef-inner-anodyne-pushout-product, lem-cbc-invertible-prism-extension) in full. Checked the sources online at kerodon.net. 01F1 (Prop 4.4.5.1) is the corner isofibration. 01P8 (Prop 4.6.1.22) needs only an inner fibration and is about the unpinched Hom = U_C(x,y), so the item statement is unchanged and not weakened. 01NX (Prop 4.4.5.8) assumes A contains every vertex and asks for isomorphisms at final vertices; the new node strengthens this to all vertices, which is valid, and gets epsilon=0 by the opposite dual. 01DK (Thm 4.4.4.4) is pointwise detection; 01EZ (Prop 4.4.3.7) is the map on cores. Step 1: the transposition to j□i and the leaf's inner-anodyne pushout-product statement are correct, and the source and target quasicategory special cases hold. Step 2: equivalence lifting is used only at vertices outside A; the gluing over A u sk_0 B lies over g; the relative prism with eps=0 and the pointwise node give an equivalence lifting tau exactly. Step 3 is an elementary point specialization. Step 4: the pullback of theta is exactly U_C, so s is an inner fibration. U_X is Kan: the Lambda^n_0 horn fills by the absolute prism with identity vertex edges, since both vertices of Delta^1 lie in the boundary; Lambda^n_n fills via the explicit opposite involution; n=1 is degenerate. Step 5: the relative prism lifts every edge, so s is an isofibration between Kan complexes, and the core node then gives a Kan fibration. This step is needed because an inner fibration between Kan complexes need not be Kan (pt -> N(iso)). Small cases tested: B=Delta^1 with A its boundary, A=B, empty K, nerves. No duplicates found (rg of isofibration, core, pointwise and the tags). lem-cbc-enhanced-functor-cone-calculus lies downstream of the item and would make a cycle. Transitive closures of all dependencies avoid the item, so there is no cycle. Accepted tool_use: lem-cbc-invertible-prism-extension (sk-prop-sf-cbc), a generic absolute prism used as a black box. No SGA source. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a610dcfaf",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones (IsEquivalenceEdge, evaluation), RightPinchComparison arrowMappingSpace, Mathlib InnerFibration/J/KanComplex/PullbackObjObj, Kerodon 01F1/01F3/01P8. Delivery changes only module, report and the node's lean field; lean.statement verbatim. All clauses match: IsIsofibration bundles quasicategory conditions, inner fibration and source-fixed exact equivalence lifting; corner is canonical PullbackObjObj.π; restriction clause needs only Quasicategory C and injective i; U is the inline pullback that arrowMappingSpace unfolds to (downstream module, so not imported; no duplicate); Kan clause assumes only an inner fibration and uses J.rlp (all horns, dim>=1). Edge cases empty A/B/C/D/U, single universe, no extra assumptions. Gates pass: real definitions, only the item sorry, source/blueprint docstrings, 5-step proof docstring. nt_compile --json exit 0 with no diagnostics; control run with an injected error showed the tool reports errors. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IsofibrationExponentiation",
+  "declaration": "SSet.Enhanced.isofibration_exponentiation",
+  "declarations": [
+   "SSet.Enhanced.IsIsofibration",
+   "SSet.Enhanced.exponentialCorner",
+   "SSet.Enhanced.arrowMappingSpaceMap",
+   "SSet.Enhanced.isofibration_exponentiation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IsofibrationExponentiation.lean",
+  "statement": "theorem isofibration_exponentiation : (∀ {A B C D : SSet.{u}} (i : A ⟶ B) (p : C ⟶ D), (∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) → IsIsofibration p → IsIsofibration (exponentialCorner i p)) ∧ (∀ {A B C : SSet.{u}} [Quasicategory C] (i : A ⟶ B), (∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) → IsIsofibration ((MonoidalClosed.pre i).app C)) ∧ (∀ {C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (p : C ⟶ D) [InnerFibration p] (x y : C _⦋0⦌), KanComplex (pullback (lift (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 0)) (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1))) (lift (SSet.const (X := Δ[0]) x) (SSet.const y))) ∧ KanComplex (pullback (lift (evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 0)) (evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 1))) (lift (SSet.const (X := Δ[0]) (p.app _ x)) (SSet.const (p.app _ y)))) ∧ modelCategoryQuillen.J.rlp (arrowMappingSpaceMap p x y))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All clauses are stated together. IsIsofibration includes both quasicategory conditions and lifts outgoing equivalence edges. The canonical corner is Mathlib PullbackObjObj.π. The unpinched map is constructed by pullback.map; its source and target are the existing arrowMappingSpace after unfolding its definitions, so no downstream pinch-comparison module or theorem is needed."
  }
 }
