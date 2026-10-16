@@ -28,11 +28,12 @@
  ],
  "proof": [
   {
-   "text": "For nonempty $T$, choose a finite stratification for $M$. The union of the interiors of its strata is dense by `Topology.Stratification.dense_iUnion_interior_stratum`, the proved topological declaration recorded under [prop-constructible-generic-constancy], so some stratum has nonempty interior $U$. Pull back its finite presentations to that open. The base change of the stratum to $U$ is a surjective closed immersion; empty-complement recollement gives a coefficient-compatible equivalence reflecting the presentations, even when the stratum has a different nilpotent structure.",
+   "text": "Apply the published coefficient-generic locally finitely presented open-piece theorem. If M is locally finitely presented everywhere (including empty T), transport it along the identity inverse-image comparison and use identity immersions to obtain a piece. Otherwise it supplies a nonempty open U on which the normalized pullback of M is locally finitely presented. Its proof uses finite-stratum interior density and immersion presentation transport, so no scheme-theoretic factorization through a stratum is assumed.",
    "uses": [
-    "def-constructible-stratification",
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "prop-constructible-generic-constancy"
+    "lem-weil-pbc-condensed-constructible-generic-lfp",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-condensed-locally-closed-piece"
    ],
    "elementary": false,
    "source": {
@@ -52,10 +53,12 @@
    }
   },
   {
-   "text": "Open/closed recollement gives exact closed pushforward and the first distinguished triangle $j_!j^*M[0]\\to M[0]\\to i_*i^*M[0]$. Its first object is a piece, taking the identity closed immersion of $T$; its third is $D(i_*)(M_Z[0])$ by the exact functor single comparison. Map the bounded-below triangle to the ordinary derived category. For empty $T$ every module is zero and locally finitely presented, giving the first alternative using identity immersions and rank zero presentations.",
+   "text": "Use open/closed recollement at the complement of U. Map its bounded-below triangle to the ordinary derived category, then transport all three objects using exact-functor/single comparison isomorphisms. The first object is a piece via the identity closed immersion, using the identity direct-image comparison. In the globally locally finitely presented case, the identity inverse-image comparison and identity extension-by-zero adjunction give the first alternative.",
    "uses": [
     "lem-weil-pbc-condensed-open-closed-recollement",
-    "def-weil-pbc-condensed-constructible-piece"
+    "def-weil-pbc-condensed-constructible-piece",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-condensed-locally-closed-piece"
    ],
    "elementary": false,
    "source": {
@@ -65,16 +68,17 @@
   }
  ],
  "proof_deps": [
-  "def-constructible-stratification",
   "def-weil-pbc-condensed-constructible-piece",
+  "def-weil-pbc-condensed-locally-closed-piece",
+  "lem-weil-pbc-condensed-constructible-generic-lfp",
   "lem-weil-pbc-condensed-open-closed-recollement",
   "lem-weil-pbc-module-constructible-pullback",
-  "prop-constructible-generic-constancy"
+  "lem-weil-pbc-profinite-point-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-  "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
+  "document": "lean/Sheaf/Paper/CondensedConstructibleOneStep.lean",
+  "place": "J1 second reading, 2026-10-16: reuse the published generic locally finitely presented open-piece theorem and canonical locally closed piece predicate, followed by open/closed recollement and ordinary distinguished-triangle transport."
  },
  "mathlib_searches": [
   {
@@ -137,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261015T192134-L-1051130",
-  "kind": "interface",
+  "landing": "20261016T061027-L-327766",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
