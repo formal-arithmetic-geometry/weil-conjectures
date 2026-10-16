@@ -31,205 +31,22 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $y$ with $A$ a finite type smooth $K$-algebra; such charts exist by the finite-type and affine-local smoothness conventions. Since $Y$ is integral, $A$ is a domain. Put $\\mathfrak p=y\\in\\operatorname{Spec}A$ and $B=A_{\\mathfrak p}$; the affine stalk localization identifies $B$ with $\\mathcal O_{Y,y}$, compatibly with germs and the residue-field map. Write $l$ for the separable closure of $\\kappa(y)$ in the field of the geometric point.",
+   "text": "Apply the regularity, dimension, residue and function-field component, then the coefficient-field component, and assemble their conjunctions by dependent existential introduction.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-sbc-smooth-morphisms",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-weil-pbc-relative-separable-closure"
+    "lem-sc-smooth-strict-local-field-model-core",
+    "lem-sc-smooth-strict-local-field-model-coeff"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX (lemma-describe-etale-local-ring), proof, choice of affine chart; affine-local smoothness in def-sbc-smooth-morphisms"
-   }
-  },
-  {
-   "text": "Identify the pointed-neighbourhood colimit defining $R$ with the algebraic strict henselization $B^{\\mathrm{sh}}$ relative to $l$, as follows. In every affine pointed neighbourhood, the inverse image of $U$ contains its marked point; choose an affine open there containing that point. Thus neighbourhoods factoring through $U$ refine every neighbourhood, and the full-subcategory colimit lemma applies to the cofiltered system of the strict-local definition. For a neighbourhood over $U$, its residue field is finite separable over $\\kappa(y)$, so its chosen image in the geometric-point field is contained in $l$. This verifies the hypothesis of the chart/residue-triples equivalence. Its natural ring isomorphism and the equivalence-colimit clause identify the colimit with the etale-residue-triples colimit over $(A,\\mathfrak p,l)$. The localized-triples lemma gives this very colimit an $A_{\\mathfrak p}$-algebra strict henselization structure, with unchanged structural map. The triples theorem therefore gives a surjective reduction $\\rho:R\\to l$, with kernel $\\mathfrak m_R$, and says $R$ is henselian and $l$ separably closed.",
-   "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-etale-algebra-residue-field-separable",
-    "lem-weil-pbc-etale-chart-residue-triples-equivalence",
-    "lem-sbc-etale-triples-localized-strict-henselization",
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX (lemma-describe-etale-local-ring), proof; Algebra Tags 04GW and 04GP via the cited triples statements"
-   }
-  },
-  {
-   "text": "The smooth-algebra regularity lemma makes $B$ a regular local ring, in particular Noetherian. Regularity is preserved by strict henselization, so $R$ is regular local. The regular-local-domain lemma makes $R$ an integral domain. Its structural map $B\\to R$ is faithfully flat. It is injective: if $b$ maps to zero, the inclusion $bB\\hookrightarrow B$ remains injective after flat tensoring with $R$, but its image is zero; faithfulness then forces $bB=0$, hence $b=0$. Consequently $A\\hookrightarrow B\\hookrightarrow R$ embeds $K(Y)=\\operatorname{Frac}(A)$ in $Q=\\operatorname{Frac}(R)$.",
-   "uses": [
-    "lem-weil-pbc-smooth-over-field-regular-local",
-    "lem-sc-strict-henselization-regular",
-    "lem-sc-regular-local-domain",
-    "lem-sc-strict-henselization-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 06LN (lemma-henselization-regular), 07QM (lemma-dumb-properties-henselization); Algebra Tags 00TT and 00NP"
-   }
-  },
-  {
-   "text": "For every nonempty open of $Y$ the integral locally-algebraic open-dimension lemma gives dimension $d$. By the definition of dimension at a point (minimum of neighbourhood dimensions), $\\dim_yY=d$. Apply the finite-type point dimension formula: $d=\\dim B+a$, so $0\\le a\\le d$ and $\\dim B=d-a$. The strict-henselization dimension lemma gives $\\dim R=\\dim B=d-a$. At the generic point $\\eta$ of $Y$, the closed-irreducible dimension/trdeg lemma with $C=|Y|$ gives $\\operatorname{trdeg}_K K(Y)=d$; the affine stalk formula at the zero prime identifies $\\kappa(\\eta)$ with $\\operatorname{Frac}(A)$.",
-   "uses": [
-    "lem-sc-integral-locally-algebraic-opens-dimension",
-    "def-kun-dimension",
-    "lem-kun-dimension-formula",
-    "lem-sc-strict-henselization-dimension",
-    "lem-sc-closed-irreducible-dimension-trdeg",
-    "lem-weil-pbc-affine-open-stalk-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), (3), (6), (10); More on Algebra Tag 06LK (lemma-henselization-dimension)"
-   }
-  },
-  {
-   "text": "The chart ind-etale lemma presents $R$ as a filtered colimit of etale $A$-algebras $C_i$. For $r\\in R$, choose a representative $c\\in C_i$ and put $\\mathfrak q=\\ker(C_i\\to R\\hookrightarrow Q)$. Its contraction to $A$ is zero by the injection just proved. Thus $C_i/\\mathfrak q$ embeds in $Q$, and its fraction field $\\kappa(\\mathfrak q)$ embeds in $Q$. The etale-algebra residue-field lemma at this prime says $\\kappa(\\mathfrak q)$ is finite separable over $\\kappa(0)=K(Y)$. In particular $r$ is algebraic over $K(Y)$. For a fraction $r/s\\in Q$ choose a common stage representing $r$ and $s$ by filteredness. The same prime construction places $r/s$ in a finite separable residue field (the image of $s$ is nonzero). Hence $Q/K(Y)$ is algebraic; no injectivity of $C_i\\to R$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-etale-algebra-residue-field-separable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX (lemma-describe-etale-local-ring), affine etale colimit; Algebra Tag 00U3 (lemma-etale-over-field) via its cited residue-field consequence"
-   }
-  },
-  {
-   "text": "The residue field $\\kappa(y)/K$ is finitely generated by the finite-type residue-field lemma applied to $K\\to A$. As $K$ is algebraically closed, the separating-basis lemma gives $t_1,\\ldots,t_a$ algebraically independent over $K$ with $\\kappa(y)$ separable algebraic over $L=K(t_1,\\ldots,t_a)$. Their number is $a$ by the transcendence-degree definition. Choose lifts $u_i\\in R$ with $\\rho(u_i)=t_i$. For every nonzero $P\\in K[T_1,\\ldots,T_a]$, $\\rho(P(u))=P(t)\\ne0$. Hence $P(u)$ is a unit in the local ring $R$, and evaluation uniquely extends to a $K$-embedding $j:L\\hookrightarrow R$ whose reduction is the prescribed inclusion $L\\subset l$. The empty basis gives $L=K$ by the same argument.",
-   "uses": [
-    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
-    "lem-weil-pbc-algclosed-fg-field-separating-basis",
-    "def-kun-transcendence-degree",
-    "def-weil-pbc-transcendence-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, first paragraph; Algebra Tag 030Z (lemma-perfect) via the separating-basis node"
-   }
-  },
-  {
-   "text": "The entire field $l$ is a separable closure of $L$, not merely a field containing one. To check this without choosing incompatible closures, let $M$ be the separable algebraic closure of $L$ inside $l$. The relative-closure statement says $M$ is a separably closed subfield. Every element of $\\kappa(y)$ is separable algebraic over $L$, so $\\kappa(y)\\subseteq M$. For $z\\in l$, its minimal polynomial over $\\kappa(y)$ is separable. Over $M$ it remains separable, since its Bezout identity with its derivative remains valid; It splits into linear factors in $M$: choose a root using separable closedness and divide by its linear factor; the quotient is separable because a common factor of the quotient and its derivative would also divide the original polynomial and its derivative. Induction on degree finishes the factorization. Evaluating this factorization in the field $l$ forces $z$ to equal one of these roots in $M$. Thus $l=M$ and $l/L$ is separable algebraic and separably closed. In particular it is the directed union of its finite separable subextensions.",
-   "uses": [
-    "def-weil-pbc-relative-separable-closure",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-pc-separable-polynomial",
-    "def-pc-separably-closed",
-    "def-pd-separable-closure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, first paragraph, choice of the separable closure; relative-closure statement from Fields Tags 09HC and 09HB"
-   }
-  },
-  {
-   "text": "For a finite subextension $E/L$ in $l$, choose a primitive element $\\alpha$ by the primitive-element lemma. Its monic minimal polynomial $P\\in L[T]$ is separable. Map the coefficients into $R$ by $j$; the residue polynomial is the original $P$ in $l[T]$, whose root $\\alpha$ is simple: a Bezout identity $UP+VP'=1$ gives $V(\\alpha)P'(\\alpha)=1$. Since $R$ is henselian, the root-lifting lemma gives $v\\in R$ with $P^j(v)=0$ and $\\rho(v)=\\alpha$. The evaluation map $L[T]\\to E$ is surjective: $E=L(\\alpha)$, and if $h(\\alpha)\\ne0$, irreducibility of $P$ gives $uh+vP=1$ for some $u,v\\in L[T]$, hence $u(\\alpha)=h(\\alpha)^{-1}$. Thus $L[\\alpha]=L(\\alpha)$ and $E\\cong L[T]/(P)$. Evaluation gives a unital $L$-algebra map $E=L[T]/(P)\\to R$ sending $\\alpha$ to $v$, because the kernel of evaluation $L[T]\\to E$ is $(P)$. Its composite with $\\rho$ is the inclusion $E\\subset l$, so the map is injective. Denote it $s_E$.",
-   "uses": [
-    "lem-weil-pbc-finite-separable-extension-primitive-element",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-pc-separable-polynomial",
-    "lem-weil-pbc-henselian-local-root-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, first paragraph, primitive elements and prescribed simple-root lifts; Fields Tag 030N and Algebra Tag 04GG"
-   }
-  },
-  {
-   "text": "These maps do not depend on the primitive-element choices and are compatible under inclusions. Indeed, for any $\\beta\\in E$, its monic minimal polynomial $P_\\beta\\in L[T]$ is separable. Any two $L$-algebra maps $E\\to R$ reducing to $E\\subset l$ send $\\beta$ to roots of $P_\\beta^j$ with the same residue $\\beta$ and derivative a unit. The simple-root uniqueness lemma makes those two values equal, for every $\\beta$. For $E\\subset E'$, the restriction of $s_{E'}$ and $s_E$ have precisely these properties, hence agree. The directed union description of $l$ now defines a single ring map $s:l\\to R$: set $s(z)=s_E(z)$ at any finite stage containing $z$. Given two elements, take a common finite stage; its ring-homomorphism laws give additivity and multiplicativity for $s$. One has $\\rho s=\\mathrm{id}_l$ and $s$ extends $j$.",
-   "uses": [
-    "lem-weil-pbc-simple-root-uniqueness",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-pc-separable-polynomial",
-    "def-pd-separable-closure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, first paragraph, compatibility on finite subextensions; Algebra Tag 06RR (lemma-uniqueness)"
-   }
-  },
-  {
-   "text": "Set $F=s(l)\\subset R$. Since $\\rho s=\\mathrm{id}_l$, $s$ is injective; its image is a subfield (the inverse of $s(z)$ for $z\\ne0$ is $s(z^{-1})$), contains $K$, and reduction restricts to a field isomorphism $F\\cong l$. Thus $F$ is separably closed: for a nonconstant separable polynomial $H=\\sum c_iT^i\\in F[T]$, apply $\\rho|_F$ to its coefficients and to a Bezout identity for $H,H'$. The resulting nonconstant polynomial over $l$ is separable, so has a root $z\\in l$. Since $s(\\rho(c_i))=c_i$, applying $s$ to its vanishing at $z$ gives $H(s(z))=0$. The lifted family $u_1,\\ldots,u_a$ is a transcendence basis of $F/K$, since it reduces to the basis and $F/j(L)\\cong l/L$ is algebraic. Hence $\\operatorname{trdeg}_KF=a$. The arbitrary geometric-point field has not been identified with $l$.",
-   "uses": [
-    "def-pc-separably-closed",
-    "def-weil-pbc-transcendence-basis",
-    "def-kun-transcendence-degree"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, first paragraph, the coefficient subfield and its residue identification"
-   }
-  },
-  {
-   "text": "Apply the transcendence-degree tower formula to $K\\subset K(Y)\\subset Q$: algebraicity of $Q/K(Y)$ gives $\\operatorname{trdeg}_KQ=d$. Here the algebraic degree contributes zero because the empty family is a transcendence basis of an algebraic field extension. Apply the same formula to $K\\subset F\\subset Q$ to obtain $d=\\operatorname{trdeg}_FQ+a$. Since $d$ and $a$ are finite and $a\\le d$, this forces $\\operatorname{trdeg}_FQ=d-a$. Together with the regularity, dimension and residue calculation, this proves every assertion.",
-   "uses": [
-    "lem-sbc-transcendence-degree-tower",
-    "def-weil-pbc-transcendence-basis",
-    "def-kun-transcendence-degree"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-    "place": "Proof, Local calculation in dimension d, second paragraph, fraction-field transcendence degree; Fields Tag 030H (lemma-transcendence-degree-tower)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "def-sbc-smooth-morphisms",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "def-weil-pbc-relative-separable-closure",
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-weil-pbc-etale-chart-residue-triples-equivalence",
-  "lem-sbc-etale-triples-localized-strict-henselization",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-smooth-over-field-regular-local",
-  "lem-sc-strict-henselization-regular",
-  "lem-sc-regular-local-domain",
-  "lem-sc-strict-henselization-faithfully-flat",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-sc-integral-locally-algebraic-opens-dimension",
-  "def-kun-dimension",
-  "lem-kun-dimension-formula",
-  "lem-sc-strict-henselization-dimension",
-  "lem-sc-closed-irreducible-dimension-trdeg",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
-  "lem-weil-pbc-algclosed-fg-field-separating-basis",
-  "def-kun-transcendence-degree",
-  "def-weil-pbc-transcendence-basis",
-  "def-weil-pbc-separable-algebraic-extension",
-  "def-pc-separable-polynomial",
-  "def-pc-separably-closed",
-  "def-pd-separable-closure",
-  "lem-weil-pbc-finite-separable-extension-primitive-element",
-  "lem-weil-pbc-henselian-local-root-lifting",
-  "lem-weil-pbc-simple-root-uniqueness",
-  "lem-sbc-transcendence-degree-tower"
+  "lem-sc-smooth-strict-local-field-model-core",
+  "lem-sc-smooth-strict-local-field-model-coeff"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Proof, Local calculation in dimension d, first two paragraphs, expanded using the cited Stacks statements"
+  "place": "Short composition of the two strictly smaller intermediate components in this delivery"
  },
  "mathlib_searches": [
   {
@@ -515,5 +332,15 @@
   "date": "2026-10-15",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-f505ec7db"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261016T015248-L-722121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -14,26 +14,8 @@ public import Mathlib.FieldTheory.SeparableClosure
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
-import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.RingTheory.StrictHenselizationRegular
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.RingTheory.StrictHenselizationDimension
-import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
-import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
-import Sheaf.RingTheory.IndPrincipalZariski
-import Mathlib.FieldTheory.Separable
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
-import Sheaf.RingTheory.HenselianLocalRootLifting
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore
+import Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff
 
 /-! # Coefficient fields of smooth strict localizations
 
@@ -117,7 +99,14 @@ theorem smooth_strict_local_field_model
                 (letI := ((algebraMap (strictHenselizationRing s)
                     (FractionRing (strictHenselizationRing s))).comp j.toRingHom).toAlgebra
                  Algebra.trdeg F (FractionRing (strictHenselizationRing s)) =
-                   ((d - a : ℕ) : Cardinal)) :=
-  sorry
+                   ((d - a : ℕ) : Cardinal)) := by
+  obtain ⟨hreg, hlocal, hdomain, hdim, he, hres, i, hi, halg⟩ :=
+    smooth_strict_local_field_model_core K Y f d a hd Ω s y hy hκ hΩ ha hK
+  let := hlocal
+  let := hdomain
+  obtain ⟨F, hfield, hKF, j, hsep, hbij, htr, htrQ⟩ :=
+    smooth_strict_local_field_model_coeff K Y f d a hd Ω s y hy hκ hΩ ha hK
+  exact ⟨hreg, hlocal, hdomain, hdim, he, hres, i, hi, halg,
+    ⟨F, hfield, hKF, j, hsep, hbij, htr, htrQ⟩⟩
 
 end AlgebraicGeometry.Scheme
