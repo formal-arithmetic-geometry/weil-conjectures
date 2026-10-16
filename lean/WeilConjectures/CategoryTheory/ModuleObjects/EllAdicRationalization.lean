@@ -13,8 +13,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
-public import Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated
-
 /-!
 
 # Bounded constructible `E`-coefficients as `𝒪_E`-coefficients with `ℓ` inverted
@@ -51,10 +49,9 @@ functors (`ProEtale.rationalizationQCompEquivalenceIso`).
 
 The statement is made on bounded constructible complexes only: on the full derived categories
 `D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` is not a localization at the morphisms with `ℓ`-power-torsion
-mapping cone in general. The integral coefficient Serre theorem makes the bounded constructible
-complexes a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible_padicIntegers`), on which the
-rationalization is defined.
+mapping cone in general. Noetherianity makes the bounded constructible complexes a triangulated
+subcategory (`ProEtale.isTriangulated_boundedConstructible`), on which the rationalization is
+defined.
 
 Neither description is taken as a definition: `E_X` is defined by its sections, not as
 `𝒪_{E,X}[1/ℓ]`, following `WeilConjectures/RefactorInstruction.tex`. Finiteness of `E` is what

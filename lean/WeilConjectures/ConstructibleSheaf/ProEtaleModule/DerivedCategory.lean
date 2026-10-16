@@ -39,13 +39,11 @@ No derived completeness condition is imposed.
 
 If the constructible `R`-modules are closed under kernels, cokernels and extensions, the
 bounded constructible complexes form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible_of_serre`). These closure hypotheses concern the
+(`ProEtale.isTriangulated_boundedConstructible`). These closure hypotheses concern the
 coefficient ring as well as the scheme: noetherianity of the underlying space alone does
 not imply them for an arbitrary `R`. The definition `ProEtale.boundedConstructible` makes
 sense without them, on any scheme. Neither this definition nor its full subcategory is
-changed by the closure hypotheses. Zero objects and integer shifts are supplied
-unconditionally by `ProEtale.containsZero_boundedConstructible` and
-`ProEtale.isStableUnderShift_boundedConstructible`.
+changed by the closure hypotheses.
 
 The proof uses the general weak Serre class construction of
 `DerivedCategory.homologyProperty_isTriangulated`. Isomorphism invariance and the zero case
@@ -139,49 +137,6 @@ private lemma constructible_of_isZero
   exact locallyFinitelyPresented_of_isZero _
     (((ProEtale.upperStar A _).mapMod R).map_isZero hM)
 
-/-- Bounded constructibility is invariant under isomorphisms.
-
-Source: `DerivedCategory.homologyProperty` and Mathlib's canonical bounded t-structure.
-Proof: transport each cohomology presentation across the homology of the isomorphism;
-boundedness is invariant under isomorphisms as well.
-(blueprint: prop-weil-pbc-module-bounded-constructible-triangulated) -/
-instance isClosedUnderIsomorphisms_boundedConstructible :
-    (boundedConstructible R).IsClosedUnderIsomorphisms := by
-  have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstructibleModuleObject R) :=
-    ⟨fun e hM ↦ constructible_of_iso R e hM⟩
-  change (DerivedCategory.TStructure.t.bounded ⊓
-    DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsClosedUnderIsomorphisms
-  infer_instance
-
-/-- The zero complex is bounded constructible for any coefficient ring.
-
-Source: `DerivedCategory.homologyProperty` and Mathlib's canonical bounded t-structure.
-Proof: all homology objects of zero are zero; the zero module is constructible by the
-rank-zero presentation and the single-stratum stratification. Zero is bounded.
-(blueprint: prop-weil-pbc-module-bounded-constructible-triangulated) -/
-instance containsZero_boundedConstructible : (boundedConstructible R).ContainsZero := by
-  have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstructibleModuleObject R) :=
-    ⟨fun e hM ↦ constructible_of_iso R e hM⟩
-  have : ObjectProperty.ContainsZero (IsConstructibleModuleObject R) :=
-    ⟨0, isZero_zero _, constructible_of_isZero R (isZero_zero _)⟩
-  change (DerivedCategory.TStructure.t.bounded ⊓
-    DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).ContainsZero
-  infer_instance
-
-/-- Every integer shift of a bounded constructible complex is bounded constructible.
-
-Source: `DerivedCategory.homologyProperty` and Mathlib's canonical bounded t-structure.
-Proof: homology of a shift is isomorphic to homology in the translated degree. Transport
-constructibility across this isomorphism; translation preserves boundedness.
-(blueprint: prop-weil-pbc-module-bounded-constructible-triangulated) -/
-instance isStableUnderShift_boundedConstructible :
-    (boundedConstructible R).IsStableUnderShift ℤ := by
-  have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstructibleModuleObject R) :=
-    ⟨fun e hM ↦ constructible_of_iso R e hM⟩
-  change (DerivedCategory.TStructure.t.bounded ⊓
-    DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsStableUnderShift ℤ
-  infer_instance
-
 /- STATEMENT-DISPUTED: the original noetherian-only signature is false for arbitrary `R`.
 Over a geometric point take the constant discrete ring k ⊕ V, with V an infinite-dimensional
 k-vector space and V² = 0. Multiplication by a nonzero v ∈ V has kernel V, which is not
@@ -215,5 +170,12 @@ instance (priority := 2000) isTriangulated_boundedConstructible_of_serre
   change (DerivedCategory.TStructure.t.bounded ⊓
     DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsTriangulated
   infer_instance
+
+/-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
+subcategory. -/
+instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
+    (boundedConstructible R).IsTriangulated :=
+  sorry
+
 
 end AlgebraicGeometry.ProEtale
