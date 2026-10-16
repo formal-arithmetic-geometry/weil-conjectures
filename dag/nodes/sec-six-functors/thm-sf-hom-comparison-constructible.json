@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sf-hom-comparison-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal-Hom comparison for finite-Tor constructible inputs",
@@ -13,28 +13,217 @@
   "place": "node thm-sf-hom-comparison-constructible, order 2198"
  },
  "stmt_deps": [
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-flat-model",
+  "def-pur-derived-internal-hom"
  ],
  "proof": [
   {
-   "text": "The assertion is local on $X$, since internal Hom and site\ncomparison restrict to open subschemes. A finite affine cover\ntherefore reduces to separated $X$. This is then the internal-Hom assertion of\n[lem-weil-finite-duality-site-comparison]. Its proof uses\nextension by zero from site-perfect strata and the closed-support\ntriangle to compare exceptional restriction, so it applies to a\ngeneral finite-Tor constructible first argument.",
+   "text": "Put $k=\\overline{\\mathbf F}_q$ and $A=A_{E,n}$, with the coefficient conventions in the statement. Finite type over $k$ makes $X$ quasi-compact, so [lem-weil-pbc-qcqs-finite-affine-open-cover] gives a finite affine open cover $j_i:U_i\\hookrightarrow X$. Each $U_i$ is of finite type over $k$: [lem-weil-pbc-lft-affine-pairs] says that its coordinate ring is a finitely generated $k$-algebra, and the single affine chart is a finite cover in the definition of finite type. Its structure morphism is separated by [lem-weil-pbc-affine-source-morphism-separated]. We will apply the separated comparison theorem on these $U_i$; no assertion that intersections of affine opens of $X$ are affine is needed.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
+    "place": "Proof, sentences 1-2: finite affine cover and reduction to separated schemes"
+   }
+  },
+  {
+   "text": "Restriction to an open subscheme is localization of either small site at that open object: an object over $U_i$ is precisely an etale, respectively weakly etale, $X$-object equipped with a factorization through $U_i$. By [lem-pur-site-restriction-module-adjunction-exact] this restriction is exact. Therefore it commutes with cohomology, computed as kernels modulo images, and preserves the cohomological bounds. Intersecting a constructible stratification with $U_i$ preserves its finite locally constant restrictions; hence $K_i=K|_{U_i}$ and $M_i=M|_{U_i}$ are bounded constructible, using [def-weil-pbc-constructible-complexes]. To check finite Tor amplitude without any assumption on $M$, choose a bounded flat model $P$ for $K$ using the etale-site clause of [lem-sf-flat-model]. Restriction carries its quasi-isomorphism to a quasi-isomorphism, and each $P^r|_{U_i}$ is flat by [lem-weil-pbc-slice-restriction-flat]. The converse flat-model implication on $U_i$ gives $K_i\\in D^b_{ctf}(U_{i,\\mathrm{et}},A)$ with the same interval.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-slice-restriction-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Localization discussion before Tag 08FI, label lemma-restrict-K-injective-to-open; flat-model and slice-flatness statements cited explicitly"
+   }
+  },
+  {
+   "text": "On either ringed site the canonical identification\n$$R\\mathcal Hom(K,M)|_U\\cong R\\mathcal Hom(K|_U,M|_U)$$\nfollows directly from the Hom-complex model. Choose a complex $L$ representing $K$ and a K-injective representative $I$ of $M$, as in [def-pur-derived-internal-hom]. By [lem-pur-kinjective-restrict-localized], $I|_U$ is K-injective. The formulas in [def-pur-sheaf-hom] and [def-pur-localized-ringed-site] identify both ordinary sheaf Hom restrictions by relocalization; products are sectionwise, so [def-pur-hom-complex] identifies both Hom complexes term by term, with the identical differential $d_I f-(-1)^n f d_L$. This proves the displayed derived identification, natural in both variables, without asserting a stalk formula for derived Hom.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB, label lemma-restriction-RHom-to-U; its proof using Tag 08FI"
+   }
+  },
+  {
+   "text": "The comparison pullback also commutes canonically with open restriction. To see the actual identification, write $j_{\\tau,*}$ for direct image from $U_\\tau$ to $X_\\tau$, given by $(j_{\\tau,*}G)(V)=G(V\\times_XU)$, for $\\tau=\\mathrm{et},\\mathrm{proet}$. The restriction/direct-image adjunction follows by sending a natural map $F|_U\\to G$ to its components $F(V)\\to F(V\\times_XU)\\to G(V\\times_XU)$, and recovering the former map at objects already over $U$. The formula $(\\nu_*G)(V)=G(V)$ on etale $V$ in [def-weil-pbc-site-comparison-morphism] gives, componentwise,\n$$\\nu_{X,*}j_{\\mathrm{proet},*}=j_{\\mathrm{et},*}\\nu_{U,*}.$$\nConsequently the two left adjoints $j_{\\mathrm{proet}}^*\\nu_X^*$ and $\\nu_U^*j_{\\mathrm{et}}^*$ have the same Hom bijections, giving the canonical isomorphism between them (the unique map corresponding to the identity of the common right adjoint). Exactness of $\\nu^*$ [lem-sf-comparison-pullback-exact] and of restriction makes this the same identification on complexes and derived categories.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-pur-localized-ringed-site",
+    "lem-sf-comparison-pullback-exact",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
+    "place": "Proof, sentence 1: site comparison restricts to open subschemes (adjunction calculation written out)"
+   }
+  },
+  {
+   "text": "Under the identifications of steps 3 and 4, restriction takes the specified canonical comparison $\\beta_{X,K,M}$ to $\\beta_{U,K|_U,M|_U}$, rather than merely relating their source and target objects. Here is the evaluation check. The derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], together with [lem-sf-comparison-pullback-exact], identifies the transpose defining $\\beta_X$ with\n$$\\nu_X^*R\\mathcal Hom(K,M)\\otimes_A^L\\nu_X^*K\\longrightarrow\\nu_X^*(R\\mathcal Hom(K,M)\\otimes_A^LK)\\xrightarrow{\\nu_X^*\\mathrm{ev}}\\nu_X^*M.$$\nThe tensor-Hom bijection used to transpose is obtained on each site by choosing K-flat representatives of the tensor arguments [lem-pc-kflat-resolution] and a K-injective target [def-pur-derived-internal-hom]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] also to each localization morphism $j_U$: the chosen K-flat complexes with flat terms remain K-flat with flat terms after restriction. Their restricted quasi-isomorphisms remain quasi-isomorphisms by exact restriction from step 2, and the K-injective target remains K-injective by step 3. Thus the following calculation uses the same valid resolution models before and after restriction. The complex currying isomorphism [lem-sc-derived-hom-tensor-total], the K-injectivity of Hom from a K-flat into a K-injective [lem-pur-hom-kflat-into-kinjective], and [lem-pur-rhom-global-sections] give the derived Hom bijection. These are the sectionwise currying and evaluation maps. Restriction of them is the same currying and evaluation: on a homogeneous tensor $f\\otimes x$ evaluation is $f(x)$ before and after restriction. Tensor restriction and the pullback tensor comparisons are induced by the same map on pure tensors, and the adjunction identification of step 4 respects units and counits by its construction from the Hom bijections. Thus the restricted transpose is exactly $\\nu_U^*\\mathrm{ev}$ with its tensor comparison; its transpose is $\\beta_U$. This establishes the required equality of comparison maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact",
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0A90 (lemma-compose), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08JA (lemma-section-RHom-over-U) and 08JB (lemma-restriction-RHom-to-U); evaluation calculation for the canonical comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-finite-duality-site-comparison] on each $U_i$. Its separated finite-type hypothesis was checked in step 1, and its first and second input hypotheses in step 2. The coefficient is exactly the same finite stage $A_{E,n}$, with $\\ell\\ne p$ as in the fixed conventions. Its statement says that the canonical evaluation-defined map $\\beta_{K_i,M_i}$ is an isomorphism. By step 5 this is the restriction of $\\beta_{X,K,M}$ to $U_{i,\\mathrm{proet}}$. We use only that lemma's internal-Hom assertion; its dualizing-object and biduality assertions are unnecessary.",
    "uses": [
     "lem-weil-finite-duality-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
+    "place": "Proof, sentences 3-5: invoke the internal-Hom assertion of the separated finite-stage comparison"
+   }
+  },
+  {
+   "text": "Finally fix $r\\in\\mathbf Z$ and apply $\\mathcal H^r$ to $\\beta_X$. Exact restriction commutes with these cohomology sheaves, so step 6 gives an inverse on every $U_i$. These inverses agree on overlaps by uniqueness of a two-sided inverse. For every pro-etale object $V\\to X$, the opens $V\\times_XU_i$ cover $V$; the sheaf axiom glues the local inverse maps uniquely, and their two composites are the identity since they are so on this cover. Therefore $\\mathcal H^r(\\beta_X)$ is an isomorphism for every $r$. The cohomology detection criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category of pro-etale $A$-module sheaves, proves that $\\beta_X$ itself is an isomorphism. If $X$ is empty the sheaf axiom for the empty covering gives the same conclusion, so the argument also covers the empty affine covering.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
+    "place": "Proof, sentence 1: locality of isomorphisms, with the sheaf gluing argument made explicit"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-duality-site-comparison"
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-slice-restriction-flat",
+  "def-pur-derived-internal-hom",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/thm-sf-hom-comparison-constructible.md",
-  "place": "## Proof"
+  "place": "Proof, affine-cover reduction; expanded using Stacks sites-cohomology Tags 08FI, 08JB, 07A4, 0A96, 08JA"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback from the etale to the proetale site commutes with derived internal Hom for bounded constructible complexes with finite Tor amplitude",
+   "results": "SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"ihom\"",
+   "results": "CategoryTheory.ihom, CategoryTheory.ihom.coev, CategoryTheory.ihom.ev, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.ihom.ihom_adjunction_unit, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.inverse, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence_functor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|derivedHom.*[Cc]omparison|ihomComparison",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale pullback preserves derived sheaf Hom when the first argument is constructible of finite Tor dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical internal Hom comparison for inverse image is an isomorphism for perfect constructible complexes on etale and proetale sites",
+   "results": "CondensedMod.IsSolid.isIso_solidification_map, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image functor between sheaves of modules commutes with derived internal hom for constructible finite Tor dimension objects",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, instMonoidalClosedLightCondSet, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|internalHom|derivedHom",
+   "results": "Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Algebra/Lie/LieTheorem.lean, Mathlib/Algebra/Lie/LieTheorem.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: broad regular expression also matches unrelated names; not used as an absence test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(derivedHom|RHom|internalHom)\\b",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the etale/proetale derived internal-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom comparison for constructible torsion sheaves under etale to proetale inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -60,5 +249,84 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-hom-ctf"
+ "unit": "sk-thm-sf-hom-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-sf-hom-comparison-constructible",
+  "worker": "stage1",
+  "summary": "Expanded the finite affine-cover reduction into seven steps with the exact canonical-map compatibility, the flat-model check on the first input, and sheaf-local detection of isomorphisms. Reused existing nodes throughout; no new nodes or statement changes. The slopmaster2 theorem has sorry and states only existence of an isomorphism, so is not an attachment. Second reading made explicit that localization preserves the K-flat flat-term models used in the canonical-map calculation.",
+  "blueprint": "Steps 1-2 realize the finite affine-cover reduction; steps 3-5 expand the opening locality sentence, including compatibility of the canonical arrow; step 6 realizes the invocation of the separated comparison; step 7 completes the locality reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Gives the finite affine covering used in the blueprint locality reduction. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Checks finite generation on every selected affine chart, rather than assuming it from one chosen finite-type chart. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Checks separatedness of each selected affine structure morphism. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of restriction on either localized ringed site. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-slice-restriction-flat",
+    "why": "Checks that a restricted bounded flat model is still flat. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Justifies use of the restricted K-injective representative in the Hom-complex calculation. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies the canonical tensor comparison that defines the internal-Hom comparison by evaluation. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies K-flat models for the evaluation and currying calculation on either ringed site. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Supplies the complex currying isomorphism for arbitrary ringed sites. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Justifies computing the iterated derived Hom by the nested Hom complex. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Turns the nested-Hom calculation into the derived tensor-Hom bijection. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Detects the global derived isomorphism after gluing the inverses on cohomology sheaves. This is a general tool for the prescribed affine-cover argument, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-b311ecb51",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-b311ecb51 (reviewer sub-agent of L); spot-checked: Reviewed the target against blueprint order 2198, the unit/chapter route, all seven proof steps, all 22 cited DAG statements, and the cited Stacks sources. Hypotheses, coefficient category, canonical comparison map, localization, edge cases, searches, and duplicate/cycle checks pass; no new nodes or repairs are required. Review written to review.md."
+ }
 }
