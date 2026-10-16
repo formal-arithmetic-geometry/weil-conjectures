@@ -181,5 +181,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-471bc00d2",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Single theorem SSet.Enhanced.kan_realization_mapping_classes (sorry only). Node differs from the side clone only in lean, and the statement field is verbatim in the file. Clauses match node and Kerodon 0149/0148: any K, Kan W, one universe u, π₀ of ihom (edge-generated), Quot by unbased ContinuousMap.Homotopic. The equivalence family is pinned by e[diagramVertex a]=[|a|], which determines it since every component has a map representative. Precomposition (MonoidalClosed.pre, direction checked) and postcomposition (both Kan) naturality hold on every component. Edge cases K empty, W empty, Δ[0] are not excluded. diagramVertex is the canonical natTransEquiv vertex. No hollow definitions, extra assumptions, axioms or local instances; source and blueprint docstrings and five-step proof docstring present; report has both required sections; no duplicate found. nt_compile.py --json against the side overlay: rc=0, no errors or warnings (2.1 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanRealizationMappingClasses",
+  "declaration": "SSet.Enhanced.kan_realization_mapping_classes",
+  "file": "lean/Sheaf/AlgebraicTopology/KanRealizationMappingClasses.lean",
+  "statement": "theorem kan_realization_mapping_classes : ∃ e : ∀ (K W : SSet.{u}) [KanComplex W], π₀ ((ihom K).obj W) ≃ Quot (@ContinuousMap.Homotopic |K| |W| _ _), (∀ (K W : SSet.{u}) [KanComplex W] (a : K ⟶ W), e K W (π₀.mk (diagramVertex a)) = Quot.mk _ (toTop.map a).hom) ∧ (∀ (K K' W : SSet.{u}) [KanComplex W] (r : K' ⟶ K) (x : π₀ ((ihom K).obj W)), e K' W (mapπ₀ ((MonoidalClosed.pre r).app W) x) = Quot.map (fun f : C(|K|, |W|) ↦ f.comp (toTop.map r).hom) (fun _ _ h ↦ h.comp (ContinuousMap.Homotopic.refl (toTop.map r).hom)) (e K W x)) ∧ (∀ (K W W' : SSet.{u}) [KanComplex W] [KanComplex W'] (s : W ⟶ W') (x : π₀ ((ihom K).obj W)), e K W' (mapπ₀ ((ihom K).map s) x) = Quot.map (fun f : C(|K|, |W|) ↦ (toTop.map s).hom.comp f) (fun _ _ h ↦ (ContinuousMap.Homotopic.refl (toTop.map s).hom).comp h) (e K W x))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "A single existential family of equivalences, fixed on every simplicial-map representative by geometric realization, with explicit precomposition and postcomposition naturality. Uses Mathlib edge components and the literal quotient by ContinuousMap.Homotopic; no comparison map is supplied as a hypothesis."
  }
 }
