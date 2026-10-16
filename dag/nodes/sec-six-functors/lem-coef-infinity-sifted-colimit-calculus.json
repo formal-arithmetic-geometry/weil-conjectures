@@ -29,9 +29,73 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the space-valued definition of siftedness in the statement, including preservation of the empty product. The first paragraph of [lem-coef-sifted-nerve-index-calculus] applies to an arbitrary small infinity-category, not only a nerve: it identifies this condition with nonemptiness and finality of the diagonal $\\delta:K\\to K\\times K$, and asserts weak contractibility. Thus $K$ is weakly contractible, and restriction along $\\delta$ takes any existing colimit cocone on $K\\times K$ to a colimit cocone on $K$. Only this finality assertion, not an ordinary-category finality statement, is used below.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.8.1, Proposition 5.5.8.7, and the space-valued characterization of Lemma 5.5.8.11 / Remark 5.5.8.12; characterization reused from the existing sifted-index node."
+   }
+  },
+  {
+   "text": "Choose colimit cocones $p:P\\to\\Delta_Kc$ and $q:Q\\to\\Delta_Kd$, where $c=\\operatorname{colim}_KP$ and $d=\\operatorname{colim}_KQ$; as coherent transformations they are simplicial maps $p:K\\times\\Delta^1\\to\\mathcal C$ and $q:K\\times\\Delta^1\\to\\mathcal D$ restricting to $P$, $Q$ over the vertex $0$ and to the constant diagrams at $c$, $d$ over the vertex $1$. Put $H(i,j)=F(P(i),Q(j))$, $U(i)=F(P(i),d)$ and $Z=F(c,d)$. Let $\\sigma=(\\sigma_1,\\sigma_2):\\Delta^2\\to\\Delta^1\\times\\Delta^1$ be the $2$-simplex with vertices $(0,0),(0,1),(1,1)$, and define $\\Theta:K\\times K\\times\\Delta^2\\to\\mathcal E$ by $\\Theta(i,j,s)=F\\bigl(p(i,\\sigma_1(s)),q(j,\\sigma_2(s))\\bigr)$; it is a simplicial map because simplicial products are formed degree by degree, so it is a $2$-simplex of $\\operatorname{Fun}(K\\times K,\\mathcal E)$. Its face opposite the last vertex is $(i,j,t)\\mapsto F(P(i),q(j,t))$, a transformation $H\\to U\\circ\\mathrm{pr}_1$; for fixed $i$ it is the image of $q$ under $F(P(i),-)$, the row cocone $H(i,-)\\to\\Delta_KU(i)$, colimiting by preservation in the second variable. Its face opposite the first vertex is $(i,j,t)\\mapsto F(p(i,t),d)$, the pullback along $\\mathrm{pr}_1$ of the image $U\\to\\Delta_KZ$ of $p$ under $F(-,d)$, colimiting by preservation in the first variable. Its remaining face is the cocone $\\gamma:H\\to\\Delta_{K\\times K}Z$, $\\gamma(i,j,t)=F(p(i,t),q(j,t))$, whose leg at $(i,j)$ is exactly $F(p_i,q_j)$. Thus $\\Theta$ exhibits $\\gamma$ as the composite of the row cocones with the outer cocone, without any choice of horn filler; all higher coherences come from applying the simplicial map $F$ to the coherent cocones $p$ and $q$. All shapes used are small. This constructs the candidate product-indexed cocone $\\gamma$ without assuming that $\\mathcal E$ has all $K\\times K$-colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.8.6, construction of the two-variable cocone from separate preservation."
+   }
+  },
+  {
+   "text": "Here is the successive-colimit argument, including its coherence. Apply the dual part of [lem-coef-parametric-universal-arrows] to $T=\\Delta_K:\\mathcal E\\to\\operatorname{Fun}(K,\\mathcal E)$ and to the full subcategory consisting of all $K$-diagrams. Every diagram has a universal arrow to a constant diagram because $\\mathcal E$ admits $K$-colimits; the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] verifies the required mapping-space equivalences. We obtain a coherent $L:\\operatorname{Fun}(K,\\mathcal E)\\to\\mathcal E$, with its universal cocone, and the dual coherent-diagram mapping-space formula. The currying identity $\\operatorname{Fun}(K\\times K,\\mathcal E)=\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))$ follows degreewise by the exponential law for simplicial sets; write $\\widetilde H$ for the curried $H$. The row cocones in step 2 are one transformation $\\widetilde H\\to\\Delta_K\\circ U$. The cited formula, with outer shape $K$, gives a coherent transformation $L\\widetilde H\\to U$ compatible with the row cocones. Its component $a_i:L(H(i,-))\\to U(i)$ compares two colimits of the same row. The universal property of the row cocone with vertex $U(i)$ gives a reverse $b_i:U(i)\\to L(H(i,-))$. Both $b_i a_i$ and the identity induce the universal cocone on $L(H(i,-))$, so the mapping-space equivalence supplied by the cocone criterion identifies them by a homotopy; the same argument with the row cocone at $U(i)$ identifies $a_i b_i$ with its identity. Thus every $a_i$ is an equivalence. Pointwise detection of equivalences in [lem-cbc-enhanced-functor-cone-calculus] therefore makes it an equivalence. For every $z\\in\\mathcal E$ we now have equivalences of entire spaces\n$$\\operatorname{Map}_{\\mathcal E}(Z,z)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(U,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(L\\widetilde H,\\Delta_Kz)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\operatorname{Fun}(K,\\mathcal E))}(\\widetilde H,\\Delta_K(\\Delta_Kz))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K\\times K,\\mathcal E)}(H,\\Delta_{K\\times K}z).$$\nThe first map is induced by the outer cocone, the second by the comparison of row colimits, the third by the universal row cocone, and the last is currying. Their composite is consequently precomposition with the precise composite cocone of step 2. The dual cocone criterion proves that this cocone with vertex $Z$ is colimiting. In particular, this proof constructs the needed product-indexed colimit from $K$-colimits alone; it invokes no general cocompleteness assumption.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.8.6 and the absolute case of Lemma 5.5.2.3, with the latter successive-colimit argument written using parametric universal arrows."
+   }
+  },
+  {
+   "text": "Apply the diagonal-finality assertion of [lem-coef-sifted-nerve-index-calculus] to the product-indexed colimit cocone just proved. Its restriction is a colimit cocone on $i\\mapsto F(P(i),Q(i))$ with vertex $F(c,d)$, and its leg is $F(p_i,q_i)$, by the leg calculation in step 2. This is exactly the canonical cocone specified in the item. To interpret this as preservation on the product category, observe that a cocone in $\\mathcal C\\times\\mathcal D$ is a pair of cocones and its mapping-space test is the product of the two tests, since simplicial products and right-pinched mapping spaces are computed coordinatewise. The two tests are equivalences because $p$ and $q$ are colimiting; their product has the product of their inverses as inverse. The dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore makes $(p,q)$ a colimit cocone with vertex $(c,d)$. The image under $F$ is the cocone just proved colimiting.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.8.6, restriction of the product-indexed cocone along the final diagonal."
+   }
+  },
+  {
+   "text": "The final clause of [lem-coef-sifted-nerve-index-calculus] states that $N(\\Delta^{\\mathrm{op}})$ is sifted with precisely the space-valued definition used here. This proves the remaining assertion. In particular its use in steps 1-4 concerns homotopy-coherent simplicial diagrams, with all their higher compatibility data, and makes no identification with ordinary set-valued siftedness.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.8.4; space-valued formulation via Lemma 5.5.8.11 and Remark 5.5.8.12."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-sifted-nerve-index-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent reconstruction of Proposition 5.5.8.6, expanding the successive-colimit argument of Lemma 5.5.2.3 with existing parametric universal arrows; the existing sifted-index node supplies the criterion, weak contractibility, and Lemma 5.5.8.4. HTT read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -116,10 +180,66 @@
    "results": "{\"t\": \"2026-10-16T20:00:04Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal of a homotopy sifted infinity category is cofinal and separately continuous bifunctors commute with its colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.toFinal\", \"CategoryTheory.IsSifted.instIsConnected\", \"CategoryTheory.IsSifted.mk\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Functor.final_diag_of_isFiltered\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.IsSifted.of_final_functor_from_sifted\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\"], \"digest\": \"6f83aa6a9cdd987d\"}",
    "date": "2026-10-17",
    "verdict": "No match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90 and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:45-86. IsSifted and IsColimit.tensor concern ordinary categorical finality and ordinary colimits; the returned product-colimit results are Type-valued, not space-valued homotopy colimits. HTT Warning 5.5.8.2 distinguishes ordinary siftedness from the required homotopy siftedness. Loogle returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSifted|PreservesColimit₂|Quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:34:18Z\", \"tool\": \"grep\", \"query\": \"IsSifted|PreservesColimit₂|Quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\"], \"digest\": \"01246e70b0776338\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90, Limits/Preserves/Bifunctor.lean:72-110 and Monoidal/Limits/Colimits.lean:70-86. These concern ordinary categories, Type-valued colimits and ordinary finality, not coherent colimits of spaces or sifted quasicategories. No hit states the item or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSifted\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T20:34:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSifted\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90, Limits/Preserves/Bifunctor.lean:72-110 and Monoidal/Limits/Colimits.lean:70-86. These concern ordinary categories, Type-valued colimits and ordinary finality, not coherent colimits of spaces or sifted quasicategories. No hit states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy sifted colimits in infinity categories commute with separately colimit preserving bifunctors and geometric realization is sifted",
+   "results": "{\"t\": \"2026-10-16T20:34:35Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy sifted colimits in infinity categories commute with separately colimit preserving bifunctors and geometric realization is sifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesColimit₂.mk\", \"CategoryTheory.Limits.PreservesColimit₂\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.Limits.PreservesColimit₂.of_preservesColimits_in_each_variable\", \"CategoryTheory.Limits.PreservesColimit₂.isoColimitUncurryWhiskeringLeft₂\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesBinaryProducts\", \"CategoryTheory.Limits.instHasColimitProdObjFunctorUncurryWhiskeringLeft₂OfPreservesColimit₂\", \"CategoryTheory.IsSifted.isSifted_of_equiv\"], \"digest\": \"d8530ad6dfa324fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90, Limits/Preserves/Bifunctor.lean:72-110 and Monoidal/Limits/Colimits.lean:70-86. These concern ordinary categories, Type-valued colimits and ordinary finality, not coherent colimits of spaces or sifted quasicategories. No hit states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sifted infinity category K, a bifunctor preserving K colimits separately preserves diagonal K colimits, and the nerve of the opposite simplex category is sifted",
+   "results": "{\"t\": \"2026-10-16T20:34:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a sifted infinity category K, a bifunctor preserving K colimits separately preserves diagonal K colimits, and the nerve of the opposite simplex category is sifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.IsSifted\", \"CategoryTheory.IsSifted.colim_preservesBinaryProducts_of_isSifted\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.Limits.instHasColimitProdObjFunctorUncurryWhiskeringLeft₂OfPreservesColimit₂\", \"CategoryTheory.IsSifted.colim_preservesTerminal_of_isSifted\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\"], \"digest\": \"a603e127cfdda580\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90, Limits/Preserves/Bifunctor.lean:72-110 and Monoidal/Limits/Colimits.lean:70-86. These concern ordinary categories, Type-valued colimits and ordinary finality, not coherent colimits of spaces or sifted quasicategories. No hit states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinality of the diagonal of a homotopy sifted quasicategory and iterated colimits of a separately cocontinuous bifunctor",
+   "results": "{\"t\": \"2026-10-16T20:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinality of the diagonal of a homotopy sifted quasicategory and iterated colimits of a separately cocontinuous bifunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.toFinal\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.Functor.final_diag_of_isFiltered\", \"CategoryTheory.IsSifted\", \"CategoryTheory.instIsCofilteredCostructuredArrowProdDiagOfIsCofilteredOrEmpty\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.Limits.IsIPC\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\"], \"digest\": \"d7b933b45c04743e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:48-90, Limits/Preserves/Bifunctor.lean:72-110 and Monoidal/Limits/Colimits.lean:70-86. These concern ordinary categories, Type-valued colimits and ordinary finality, not coherent colimits of spaces or sifted quasicategories. No hit states the item or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit₂.of_preservesColimits_in_each_variable|Quasicategory.*colimit|colimit.*Quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:52:56Z\", \"tool\": \"grep\", \"query\": \"PreservesColimit₂.of_preservesColimits_in_each_variable|Quasicategory.*colimit|colimit.*Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: LeanFinder returned ordinary CategoryTheory bifunctor declarations, homotopy-category product preservation and strict simplicial-set colimits; read Preserves/Bifunctor.lean:72-79,214-238. These use ordinary categories and hom-set colimit cocones, not quasicategorical colimits. Loogle and grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesColimitsOfShape\", \"IsSifted\"",
+   "results": "{\"t\": \"2026-10-16T20:52:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesColimitsOfShape\\\", \\\"IsSifted\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: LeanFinder returned ordinary CategoryTheory bifunctor declarations, homotopy-category product preservation and strict simplicial-set colimits; read Preserves/Bifunctor.lean:72-79,214-238. These use ordinary categories and hom-set colimit cocones, not quasicategorical colimits. Loogle and grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between quasicategories that preserves colimits in each variable preserves simultaneous colimits indexed by a homotopy sifted category",
+   "results": "{\"t\": \"2026-10-16T20:52:59Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between quasicategories that preserves colimits in each variable preserves simultaneous colimits indexed by a homotopy sifted category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesColimit₂.of_preservesColimits_in_each_variable\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.Limits.PreservesColimit₂.nonempty_isColimit_mapCocone₂\", \"CategoryTheory.Limits.instHasColimitProdObjFunctorUncurryWhiskeringLeft₂OfPreservesColimit₂\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Limits.preservesColimitsOfShape_of_evaluation\", \"SSet.hasColimits\"], \"digest\": \"d8cb06381cbec886\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: LeanFinder returned ordinary CategoryTheory bifunctor declarations, homotopy-category product preservation and strict simplicial-set colimits; read Preserves/Bifunctor.lean:72-79,214-238. These use ordinary categories and hom-set colimit cocones, not quasicategorical colimits. Loogle and grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-colorwise-sifted-colimits",
@@ -127,5 +247,29 @@
   "group": "NQ"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-sifted-colimit-calculus",
+  "worker": "stage1",
+  "summary": "No attachment exists. Reused the existing sifted-nerve-index calculus instead of adding overlapping nodes; proved the arbitrary-K bifunctor assertion explicitly by coherent row colimits, the parametric universal-arrow mapping formula and restriction along the final diagonal. The statement and its K-colimit-only hypotheses are unchanged. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the sifted tensor input to the graph/operadic adjunction supporting the finite-level mapping-complex adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015, before taking R lim; preserves the recorded ancestry through operadic-colorwise-sifted-colimits.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-diagram equivalence detection and universal mapping-space criterion for colimit cocones, needed to apply parametric universal arrows and to identify the actual successive-colimit cocone; no coefficient-unit statement replaces these foundations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-367d737b2",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-367d737b2 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 5 steps, the source and the searches. I also read the full statements of all 5 cited nodes, the citer lem-coef-operadic-colorwise-sifted-colimits, the unit sk-prop-sf-biduality-general and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. The statement is unchanged from the side DAG; only split-owned fields changed. It has exactly the hypotheses of HTT Prop. 5.5.8.6, with 5.5.8.7 for weak contractibility, 5.5.8.4 for N(Delta^op) and 5.5.8.11-12 for the space-valued definition. HTT is not archived, so I checked it from my knowledge of the text; the agent proof origin is correct. Small cases: empty K is excluded by the empty-product clause; K a point is trivial; a two-point discrete K is correctly not sifted, and the bifunctor claim does fail there for tensor products. Step 1 cites the arbitrary-K first paragraph of lem-coef-sifted-nerve-index-calculus (diagonal finality and weak contractibility); its cocomplete-only nerve clause is not used. Step 3: the dual parametric-universal-arrows formula with T = Delta_K, a row-colimit comparison that is an equivalence at each point and so overall, then currying. The chain of mapping-space equivalences is correct and uses only K-colimits. Step 4 restricts along the final diagonal; the product-category cocone test is correct. Step 5 is a direct citation. There is no cycle: the 274-node closure of the cited nodes does not contain the item. There are no new nodes and no duplicate: the nerve-index node gives the bifunctor clause only for nerves and cocomplete categories, while the citer needs arbitrary sifted K with only K-colimits; the overlapping clauses are cited, not restated. No blueprint node mentions siftedness, so same_as is []. The Mathlib IsSifted and PreservesColimit2 results are for ordinary categories, so there is no match. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus; the same tool use was already accepted for two nodes of this unit. One repair, step 2: it was marked elementary but formed an uncited horn-filler composite in Fun(KxK,E), with legs only 'up to homotopy'. I replaced it with the explicit cocone gamma(i,j,t)=F(p(i,t),q(j,t)) and the explicit 2-simplex Theta(i,j,s)=F(p(i,s1),q(j,s2)), for the simplex (0,0),(0,1),(1,1) of Delta^1xDelta^1. Theta exhibits gamma as the row cocone followed by the outer cocone, with legs exactly F(p_i,q_j). The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-sifted-colimit-calculus.json; its uses and elementary flag are unchanged. The checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

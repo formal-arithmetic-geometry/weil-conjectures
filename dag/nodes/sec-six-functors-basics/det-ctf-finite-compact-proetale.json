@@ -3,43 +3,192 @@
  "blueprint": {
   "is": "det-ctf-finite-compact-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Transfer of compactness to the pro-étale localizing category",
- "statement": "Let $A$ be a finite $\\ell$-primary ring. Every $C\\in\\Dctf(X,A)$ is compact in $\\Loc(\\Dctf(X,A))$.",
+ "statement": "Fix the standing finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite-type $k$-scheme $X$ [def-weil-finite-type-morphism], and a finite commutative ring $A$ with $\\ell^rA=0$ for some $r\\ge0$. Give $A$ the discrete topology. Use the unbounded derived category $D(X_{\\mathrm{proét}},A)$ of module objects over the pulled-back condensed coefficient ring $A_X$ [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, def-weil-abstract-derived-category]. Let $\\Dctf(X,A)$ be its full subcategory of bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and let $\\mathcal L=\\Loc(\\Dctf(X,A))$ be the full replete triangulated, small-coproduct-closed hull with ambient coproducts [sk-def-localizing-closure]. Then every $C\\in\\Dctf(X,A)$ is compact in $\\mathcal L$: for every small family $(K_s)_{s\\in S}$ of objects of $\\mathcal L$, the canonical map\n$$\\bigoplus_{s\\in S}\\operatorname{Hom}_{\\mathcal L}(C,K_s)\\longrightarrow\\operatorname{Hom}_{\\mathcal L}\\!\\left(C,\\bigoplus_{s\\in S}K_s\\right)$$\nis bijective [def-pc-compact-object], with smallness relative to [def-weil-size-convention].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.md",
   "place": "node det-ctf-finite-compact-proetale, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-pc-compact-object",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category"
+ ],
  "proof": [
   {
-   "text": "By [sk-prop-pe-unbounded-classical], $\\nu_X^*\\colon\\D(X_{\\mathrm{ét}},A)\\to\\D(X_{\\mathrm{proét}},A)$ is exact, fully\nfaithful and preserves arbitrary direct sums; by [sk-cor-pe-finite-tor-comparison] it restricts to an\nequivalence $\\Dctf(X_{\\mathrm{ét}},A)\\simeq\\Dctf(X,A)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Identify finite coefficients before using the ordinary comparison theorems. Apply [lem-weil-pbc-finite-discrete-condensed-ring-constant] with $B=A$, and then [lem-weil-pbc-finite-discrete-scheme-ring-constant] with $T=X$. They identify the pulled-back condensed ring $A_X$ with the constant $A$-ring sheaf on $X_{\\mathrm{proét}}$. Write $\\theta:A_{\\mathrm{const}}\\xrightarrow{\\sim}A_X$ for this ring isomorphism. An $A_X$-action $\\gamma:A_X\\otimes M\\to M$ becomes the constant-ring action $\\gamma\\circ(\\theta\\otimes\\mathrm{id}_M)$; an action $\\delta$ over the constant ring becomes $\\delta\\circ(\\theta^{-1}\\otimes\\mathrm{id}_M)$. The two resulting functors are inverse and leave underlying abelian sheaves and maps unchanged; therefore they preserve exact sequences and coproducts. Applied degreewise, they identify the unbounded derived categories and their ambient coproducts. The same transport identifies tensor products by their bilinear universal property, hence derived tensor products, and identifies finite constant local models. Thus constructibility and finite Tor amplitude in the item agree with the ordinary constant-$A$ conventions in [det-ctf-finite-comparison-localizing]. On the étale side use the ordinary category of [def-weil-pbc-derived-categories].",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "det-ctf-finite-comparison-localizing",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+    "place": "Opening paragraph: coefficient conventions for the two comparison functors"
+   }
   },
   {
-   "text": "The essential image $\\mathcal I$ of $\\nu_X^*$ is a triangulated subcategory closed under sums (by exactness,\nfull faithfulness and sum preservation), containing $\\Dctf(X,A)$; hence $\\Loc(\\Dctf(X,A))\\subset\\mathcal I$\n([sk-def-localizing-closure]). Thus every $K_s\\in\\Loc(\\Dctf(X,A))$ is $\\nu_X^*K_s^{\\mathrm{ét}}$, and\n$C=\\nu_X^*C^{\\mathrm{ét}}$ with $C^{\\mathrm{ét}}\\in\\Dctf(X_{\\mathrm{ét}},A)$. Then\n\n$$\n\\Hom\\Bigl(C,\\bigoplus K_s\\Bigr)=\\Hom\\Bigl(\\nu_X^*C^{\\mathrm{ét}},\\nu_X^*\\bigoplus K^{\\mathrm{ét}}_s\\Bigr)\n=\\Hom\\Bigl(C^{\\mathrm{ét}},\\bigoplus K^{\\mathrm{ét}}_s\\Bigr)=\\bigoplus\\Hom(C^{\\mathrm{ét}},K^{\\mathrm{ét}}_s)=\\bigoplus\\Hom(C,K_s),\n$$\n\nusing sum preservation, full faithfulness and [det-ctf-finite-compact-etale]. Sums in $\\Loc(\\Dctf(X,A))$ are\nthe ambient ones, so $C$ is compact there.",
+   "text": "Check the hypotheses of finite-Tor comparison. By [def-weil-finite-type-morphism], $X$ has a finite affine cover $U_i=\\operatorname{Spec}B_i$ with each $B_i$ a finitely generated $k$-algebra. By [lem-wf-affine-noetherian-components], each $U_i$ has descending chain condition on closed subsets, equivalently ascending chain condition on opens. An increasing sequence of opens of $X$ stabilizes on each of the finitely many $U_i$ and thus on $X$. Every open $V\\subseteq X$ is quasi-compact: finite unions from any open covering of $V$ have a maximal member by this ascending chain condition; that member contains every covering open. In particular $X$ is quasi-compact, and the inverse image under its diagonal of any affine open of $X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is an open of $X$ and hence quasi-compact. This is quasi-separatedness by [def-weil-quasi-separated-morphism]. Also $A$ is Noetherian because each ideal is the finite set of its elements and these elements generate it [def-weil-pbc-noetherian-ring]. These arguments include the empty scheme and zero ring. The standing field is algebraically closed and $\\ell$ is invertible in it.",
    "uses": [
-    "sk-def-localizing-closure",
-    "det-ctf-finite-compact-etale"
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-pbc-noetherian-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+    "place": "Opening paragraph: qcqs and finite Noetherian hypotheses of the finite-Tor comparison"
+   }
+  },
+  {
+   "text": "Write $F=\\nu_X^*$ for the comparison pullback. With the ordinary coefficient categories identified in step 1, [lem-sfb-unbounded-site-comparison] applies: $X$ is finite type over the algebraically closed field $k$, $\\ell$ is invertible, and $A$ is finite commutative and killed by a power of $\\ell$. Thus $F$ is exact, fully faithful and preserves all small coproducts on the unbounded categories. Apply [det-pe-finite-tor-comparison-noetherian] with $\\Lambda=A$, using the qcqs and Noetherian checks in step 2. Its equivalence gives an object $C_0\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{ét}},A)$ and an isomorphism $c:FC_0\\xrightarrow{\\sim}C$. The source category $D^b_c(X_{\\mathrm{ét}},A)$ of [det-pe-finite-tor-comparison-noetherian] uses constructibility in the sense of [def-pe-etale-constructible-module] (a finite constructible partition of each affine open, finitely generated local models), whereas [det-ctf-finite-compact-etale] uses the global convention of [def-weil-pbc-constructible-complexes, def-weil-pbc-etale-constructible-sheaf] (one finite constructible stratification of $X$, finite local models). They agree here. Since $A$ is finite, finitely generated $A$-modules are exactly the finite ones. If a sheaf $\\mathcal F$ is constructible in the first sense, take the finite affine cover $U_1,\\dots,U_n$ of step 2 and the partitions $U_i=\\coprod_aZ_{ia}$, and put $W_i=U_i\\setminus(U_1\\cup\\dots\\cup U_{i-1})$. The sets $W_i\\cap Z_{ia}$ are pairwise disjoint, cover $X$ and are locally closed in $X$. Hence they are constructible, because $X$ is a Noetherian space by step 2 [def-weil-constructible-subset]. Give them the reduced induced structure; the immersion into $X$ then factors through $Z_{ia}$, so the inverse image of $\\mathcal F$ is a pullback of the finite locally constant sheaf $\\mathcal F|_{Z_{ia}}$, which is again finite locally constant after pulling back its étale cover. Conversely, a global stratification meets each affine open $U$ in locally closed, hence constructible, subsets of the Noetherian space $U$, with the same local models. So the two bounded constructible subcategories coincide. The Tor-amplitude condition stated in [det-pe-finite-tor-comparison-noetherian] uses the same derived tensor against every module sheaf in degree zero as [def-kun-tor-amplitude]. Hence $C_0$ lies in the $\\Dctf(X_{\\mathrm{ét}},A)$ of [det-ctf-finite-compact-etale]. With a single finite Tor interval, [det-ctf-finite-compact-etale], for the same standing $k,X,\\ell,A$ and ordinary étale category, makes $C_0$ compact against every object of $D(X_{\\mathrm{ét}},A)$.",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "det-pe-finite-tor-comparison-noetherian",
+    "det-ctf-finite-compact-etale",
+    "def-pe-etale-constructible-module",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-constructible-subset",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+    "place": "First paragraph, and compactness input in the displayed Hom calculation"
+   }
+  },
+  {
+   "text": "For a small family $(K_s)_{s\\in S}$ in $\\mathcal L$, apply the first conclusion of [det-ctf-finite-comparison-localizing], for exactly the standing hypotheses and coefficient conventions checked above. It gives an exact coproduct-preserving equivalence from $\\Loc(\\Dctf(X_{\\mathrm{ét}},A))$ onto $\\mathcal L$. Choose étale objects $M_s$ in the source closure and isomorphisms $a_s:FM_s\\xrightarrow{\\sim}K_s$. Only this equivalence clause is used; no compatibility with operations is needed. In particular the $M_s$ are ordinary unbounded étale objects, so compactness of $C_0$ applies to this entire family. By [sk-def-localizing-closure], $\\bigoplus_sK_s$ is its ambient coproduct and lies in $\\mathcal L$. Coproduct preservation from step 3 identifies it with $F(\\bigoplus_sM_s)$ by the isomorphism $a:F(\\bigoplus_sM_s)\\xrightarrow{\\sim}\\bigoplus_sK_s$ characterized by $a\\circ F(\\iota_s^{\\mathrm{ét}})=\\iota_s\\circ a_s$ for every $s$.",
+   "uses": [
+    "det-ctf-finite-comparison-localizing",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+    "place": "Second paragraph: every localizing object has an étale antecedent, and sums are ambient"
+   }
+  },
+  {
+   "text": "Full faithfulness and the chosen isomorphisms give bijections $u\\mapsto a_sF(u)c^{-1}$ from $\\operatorname{Hom}(C_0,M_s)$ to $\\operatorname{Hom}(C,K_s)$, and $v\\mapsto aF(v)c^{-1}$ from $\\operatorname{Hom}(C_0,\\bigoplus_sM_s)$ to $\\operatorname{Hom}(C,\\bigoplus_sK_s)$. Under these bijections, the étale compactness map is the asserted pro-étale map: for each summand, $aF(\\iota_su)c^{-1}=\\iota_sa_sF(u)c^{-1}$ by the defining component of $a$, and additivity gives this identity for each finite-support sum. The étale compactness map is bijective by [det-ctf-finite-compact-etale], so the pro-étale one is bijective. Fullness of $\\mathcal L$ and its ambient coproducts [sk-def-localizing-closure] make these exactly its Hom groups and compactness map, proving compactness as defined in [def-pc-compact-object]. The empty family gives $0\\to\\operatorname{Hom}(C,0)=0$; $C=0$, $A=0$ or $X=\\varnothing$ also gives zero groups, so no exception is needed.",
+   "uses": [
+    "det-ctf-finite-compact-etale",
+    "sk-def-localizing-closure",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+    "place": "Displayed Hom calculation and last sentence; explicit identification of its canonical map"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure",
-  "det-ctf-finite-compact-etale"
+  "def-kun-tor-amplitude",
+  "def-pc-compact-object",
+  "def-pe-etale-constructible-module",
+  "def-weil-constructible-subset",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-quasi-separated-morphism",
+  "det-ctf-finite-compact-etale",
+  "det-ctf-finite-comparison-localizing",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-wf-affine-noetherian-components",
+  "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-compact/sk-prop-ctf-finite-compact-proetale.proof.md",
+  "place": "Both paragraphs and displayed Hom calculation, using the existing localizing comparison theorem for its essential-image argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor constructible complexes are compact in the localizing subcategory of the pro etale derived category",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.TStructure.t. The returned types concern derived localization and bounds, not this compactness theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"compact\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*constructible|constructible.*compact|IsCompactObject|localizingClosure",
+   "results": "13 hits, in Mathlib/Topology/{Spectral/ConstructibleTopology,Constructible}.lean and Mathlib/RingTheory/Spectrum/Prime/{ConstructibleSet,Topology}.lean. Returned lines concern compact subsets of constructible topologies, not derived constructible complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of finite Tor amplitude are compact in the proetale localizing derived category",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt; HomologicalComplex.instHasFiniteLimits. Read returned types: bounded representatives, small Hom and finite limits, not compactness.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful coproduct preserving functor transfers compactness to its essential image from the etale derived category",
+   "results": "8 hits: compactumToCompHaus.essSurj; CategoryTheory.Functor.contractible_mem_essImageDistTriang; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; CategoryTheory.Functor.essImageDistTriang_mem_of_iso; CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Functor.rotate_essImageDistTriang. Returned types concern essential images of triangles, topological categories or classical condensed sets; none asserts this compactness transfer.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|compactObject|CompactObject|proetale",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "directory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact constructible finite Tor localizing pro-etale",
+   "results": "{\"t\": \"2026-10-16T20:52:23Z\", \"tool\": \"leanfinder\", \"query\": \"compact constructible finite Tor localizing pro-etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.etaleLocus\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"bf3c546fec7c8e1a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|compactObject|compact.*[Cc]oproduct|[Cc]oproduct.*compact",
+   "results": "{\"t\": \"2026-10-16T20:53:45Z\", \"tool\": \"grep\", \"query\": \"IsCompactObject|compactObject|compact.*[Cc]oproduct|[Cc]oproduct.*compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Compactness/Compact.lean\"], \"digest\": \"541444cdd4b0a123\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T20:53:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"essImage\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.EssImageSubcategory\", \"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"], \"digest\": \"74fe8d63260f62f1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -55,5 +204,49 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ctf-finite-compact"
+ "unit": "sk-prop-ctf-finite-compact",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-ctf-finite-compact-proetale",
+  "worker": "stage1",
+  "summary": "Expanded the omitted standing field, scheme and coefficient hypotheses and the meaning of compactness. Replaced missing unit-label citations with existing statement nodes; used the reviewed localizing comparison for the closure argument, checked finite-Tor comparison hypotheses, and identified the canonical compactness map on every coproduct summand. Five steps, zero new nodes and zero new Mathlib leaves. The unrestricted reading for arbitrary schemes is false; the report gives an infinite-disjoint-union counterexample and restores the source context.",
+  "blueprint": "Steps 1–3 realize the opening comparison paragraph; step 4 realizes the essential-image/localizing-closure paragraph using the existing comparison theorem; step 5 realizes the displayed Hom calculation and the ambient-sum conclusion. This is step 2 of unit sk-prop-ctf-finite-compact, with no change to its route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Identifies finite condensed coefficients with constant rings before applying the unit’s ordinary étale comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Transports the finite coefficient identification to the scheme site; no operation theorem or geometric route is substituted."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Statement-level realization of the finite-Tor comparison unit explicitly named in unit step 2 and the item’s opening paragraph."
+   },
+   {
+    "node": "lem-sfb-unbounded-site-comparison",
+    "why": "Statement-level realization of full faithfulness and coproduct preservation in the unbounded comparison unit explicitly named in unit step 2."
+   },
+   {
+    "node": "det-ctf-finite-comparison-localizing",
+    "why": "Existing first clause supplies exactly the localizing essential-image argument in unit step 2; it is proved by the same fully faithful coproduct-preserving comparison route and avoids duplicating that proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sfb-unbounded-site-comparison",
+  "det-ctf-finite-comparison-localizing"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-ca826054b",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-ca826054b (reviewer sub-agent of L); spot-checked: Read the item, all five steps, the full statement of every cited node, the main-20261015 blueprint item/proof/unit/chapter texts and the delivery-errors A-F. Statement: restoring the standing context (k = F̄_q, ell ≠ p, X finite type, A finite commutative ell^r-torsion, discrete) is correct. The infinite-disjoint-union counterexample to the bare reading checks out: Hom(C,C) = prod A, but the direct sum of Hom(C,K_n) is the direct sum of the A. The coefficient category and Loc convention match sk-def-localizing-closure; no target is weakened; no SGA is cited. Step 1: the two finite-discrete ring lemmas give the isomorphism with the constant ring, and det-ctf-finite-comparison-localizing states the convention identification. Step 2: qcqs and Noetherian checks are correct, including the diagonal argument without affine intersections. Step 4: the first clause of det-ctf-finite-comparison-localizing gives the coproduct-preserving equivalence of the closures. Step 5: checked aF(iota_s u)c^{-1} = iota_s a_s F(u)c^{-1}, so the canonical maps correspond; this step is elementary. No cycle: walked the full dependency closures of all cited nodes and none contains the item, det-ctf-finite-compact-generators or the unit; the comparison unit does not cite this unit. Accepted the 5 declared tool uses. No new nodes, no duplicates. Fault repaired (E6/C4): step 3 passed from the D^b_c of det-pe-finite-tor-comparison-noetherian (def-pe-etale-constructible-module: constructible on each affine open, finitely generated models) to the Dctf of det-ctf-finite-compact-etale (def-weil-pbc-etale-constructible-sheaf: one global stratification, finite models) without justification. The fixed step 3 proves the two agree: finitely generated equals finite over finite A, and the local partitions glue over the finite affine cover into locally closed strata W_i ∩ Z_ia, which are constructible in the Noetherian space X. It also identifies the Tor-amplitude condition with def-kun-tor-amplitude, adds 5 definition uses and recomputes proof_deps. Corrected whole file is in fixes/dag/nodes/sec-six-functors-basics/det-ctf-finite-compact-proetale.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

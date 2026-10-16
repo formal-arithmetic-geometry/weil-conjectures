@@ -25,9 +25,100 @@
   "def-cbc-enhanced-cartesian-fibration",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $q$ is an inner fibration of quasicategories, [lem-coef-infinity-cocartesian-mapping-criterion] identifies its horn-cocartesian edges in the sense of [def-coef-infinity-fibrations] with the mapping-square cocartesian edges, so $q$ satisfies the hypotheses of [lem-coef-infinity-pointwise-cocartesian-transport]. Apply that lemma with $K=S$, $\\mathcal E=Q$, $\\mathcal B=S$, and $p=q$. Postcomposition gives a cocartesian fibration $q_S:\\operatorname{Fun}(S,Q)\\to\\operatorname{Fun}(S,S)$, so its degreewise fibre over the identity section $\\operatorname{id}_S$ is an inner-fibration fibre and hence a quasicategory. The full simplicial subset of that fibre on the sections carrying every edge of $S$ to a $q$-cocartesian edge is again a quasicategory: an inner horn in the full subset has an ambient filler, and fullness retains the filler because all its vertices lie in the specified object set. By the section definition in [def-cbc-enhanced-cartesian-fibration], this full subset is exactly $L_q=\\Gamma_{\\mathrm{cocart}}(S,Q)$, including its arbitrary transformations over $S$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §§3.1.3–3.1.4, cocartesian section mapping quasicategory; fibre argument written using the definition of an inner fibration"
+   }
+  },
+  {
+   "text": "The projection $S\\times A\\to S$ is the pullback of $A\\to\\Delta^0$ along $S\\to\\Delta^0$; it is an inner fibration because $A$ is a quasicategory (an inner horn in $S\\times A$ over a filled simplex of $S$ is filled in the $A$-coordinate), with fibre $A$ at every vertex. Its edge $(f,e)$ over $f:s\\to t$ is cocartesian exactly when $e:a\\to a'$ is an equivalence in $A$. Indeed right-pinched mapping spaces of a product are degreewise products, so the mapping square of [lem-coef-infinity-cocartesian-mapping-criterion] for $(f,e)$ and a target $(u,a'')$ is the product of the square for $f$ in $S$ over itself (a homotopy pullback) with the precomposition map $e^*:\\operatorname{Map}_A(a',a'')\\to\\operatorname{Map}_A(a,a'')$ over a point. Taking $u=t$, where $\\operatorname{Map}_S(t,t)$ is nonempty, it is a homotopy pullback for all targets exactly when every $e^*$ is a weak equivalence, i.e. when $e$ is an equivalence. Thus $(f,\\operatorname{id}_a)$ supplies cocartesian lifts and the projection is a cocartesian fibration, in the horn sense by the same criterion. For the classification apply the base-change clause of [lem-coef-cocartesian-straightening] to $c:S\\to\\Delta^0$ and the fibration $A\\to\\Delta^0$: $\\operatorname{St}_S(S\\times A)\\simeq\\operatorname{St}_{\\Delta^0}(A)\\circ c$, and $\\operatorname{St}_{\\Delta^0}(A)$ is the object $A$ of $\\operatorname{Cat}_\\infty$ by the fibre clause. Hence the projection is classified by the constant diagram $\\Delta_S A$, including all higher coherences, not only on objects and edges.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.1.3 and the product case of the cocartesian mapping-square criterion"
+   }
+  },
+  {
+   "text": "For every $n$, the defining simplicial exponential identity gives a bijection between $n$-simplices of $\\operatorname{Fun}(A,L_q)$ and maps $h:S\\times A\\times\\Delta^n\\to Q$ over $S$ whose restriction at each vertex of $A\\times\\Delta^n$ is a cocartesian section. A map $g:S\\times A\\to Q$ over $S$ preserves cocartesian edges exactly when every $g(-,a)$ is a cocartesian section. One direction holds because the edges $(f,\\operatorname{id}_a)$ are cocartesian by Step 2. Conversely, a cocartesian edge $(f,e)$, $f:s\\to t$, has $e$ an equivalence by Step 2, and the $2$-simplex $(s_1f,s_0e)$ of $S\\times A$ has faces $d_2=(f,\\operatorname{id}_a)$, $d_0=(\\operatorname{id}_t,e)$, $d_1=(f,e)$. Its image under $g$ has $d_2$ a $q$-cocartesian edge and $d_0$ an equivalence (simplicial maps preserve the inverse witnesses), and an equivalence is $q$-cocartesian because both rows of its mapping square in [lem-coef-infinity-cocartesian-mapping-criterion] are weak equivalences. By the composition clause of [lem-coef-infinity-cocartesian-composition-initiality] the face $d_1=g(f,e)$ is $q$-cocartesian. Applied to each vertex $i$ of $\\Delta^n$ with $g=h(-,-,i)$, this shows that $h$ is an $n$-simplex of the full subcategory $\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(S\\times A,Q)$ exactly when all of its parameterwise restrictions are cocartesian sections. This identifies the displayed bijections in every degree, and the identification commutes with faces and degeneracies because it only permutes the three product factors. Hence currying is an isomorphism, a fortiori an equivalence, of quasicategories $\\operatorname{Fun}(A,L_q)\\simeq\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(S\\times A,Q)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark 3.1.3.1 and the simplicial exponential/cocartesian mapping construction; parameter currying is the agent-formulated foundation stated by the item"
+   }
+  },
+  {
+   "text": "The map $\\operatorname{ev}:S\\times L_q\\to Q$ is the uncurried identity family: it is the vertex corresponding to $\\operatorname{id}_{L_q}\\in\\operatorname{Fun}(L_q,L_q)_0$ under the degree-$0$ bijection of Step 3 with $A=L_q$, which is a quasicategory by Step 1. Since that bijection lands in $\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(S\\times L_q,Q)$, the evaluation map preserves cocartesian edges; explicitly a cocartesian edge $(f,e)$ is sent to the composite of the section edge $s(f)$, $q$-cocartesian, and the equivalence $e_t$, as in Step 3. For $a:A\\to L_q$, the composite $\\operatorname{ev}\\circ(\\operatorname{id}_S\\times a)$ sends $(x,y)$ to $a(y)(x)$ in every degree, which is exactly the uncurried map of $a$ in Step 3.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 3.3.3.1, evaluation for cocartesian sections; product factorization written explicitly"
+   }
+  },
+  {
+   "text": "Taking cores of the isomorphism of quasicategories in Step 3 gives an equivalence (indeed an isomorphism) of Kan complexes $\\operatorname{Fun}(A,L_q)^\\simeq\\cong\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(S\\times A,Q)^\\simeq$; the core is the simplicial subset of [def-cbc-enhanced-diagrams-cones]. By [lem-coef-cocartesian-straightening], $\\operatorname{coCart}(S)$ is the infinity category with objects the cocartesian fibrations over $S$ and morphisms the functors over $S$ preserving cocartesian arrows, with higher transformations; it is the coherent nerve of the simplicial category whose mapping Kan complexes are the cores $\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(X,Y)^\\simeq$ (each $\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(X,Y)$ is a full subcategory of a fibre of the inner fibration $\\operatorname{Fun}(X,Y)\\to\\operatorname{Fun}(X,S)$, hence a quasicategory, so this simplicial category is locally Kan). The mapping-space comparison of [lem-coef-coherent-nerve-comparison] then identifies $\\operatorname{Map}_{\\operatorname{coCart}(S)}(S\\times A,Q)\\simeq\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(S\\times A,Q)^\\simeq$, naturally in both variables. Composing yields $\\operatorname{Fun}(A,L_q)^\\simeq\\simeq\\operatorname{Map}_{\\operatorname{coCart}(S)}(S\\times A,Q)$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark 3.1.3.1 and Proposition 3.1.4.1, marked mapping quasicategories and cores"
+   }
+  },
+  {
+   "text": "All naturality clauses are the same simplicial identity. A map $A'\\to A$ restricts a family $S\\times A\\times\\Delta^n\\to Q$ by precomposition, a cocartesian map $g:Q\\to Q'$ postcomposes it, and a functor $v:T\\to S$ restricts it along $v\\times\\operatorname{id}_{A\\times\\Delta^n}$. Each operation preserves the relevant cocartesian sections or edges: precomposition by $A'\\to A$ preserves the vertexwise condition of Step 3, $g$ preserves cocartesian edges by hypothesis, and for $v$, an edge of $T\\times_SQ$ whose image in $Q$ is $q$-cocartesian is $v^*q$-cocartesian, since a horn $\\Lambda_0^n$ in the pullback is filled by pairing a filler in $Q$ over $S$ with the given simplex of $T$ (horn definition in [def-coef-infinity-fibrations]); so a cocartesian section restricts to the cocartesian section $(\\operatorname{id}_T,s\\circ v)$ of $v^*q$, and for every simplicial operator $\\theta:[m]\\to[n]$ the two orders of operation satisfy $(g\\circ h)\\circ(\\operatorname{id}\\times\\Delta\\theta)=g\\circ(h\\circ(\\operatorname{id}\\times\\Delta\\theta))$ and the analogous equalities for restriction. Thus currying, evaluation, postcomposition and section restriction commute in every degree, giving the asserted coherence in $A$, under postcomposition, and along every $v:T\\to S$.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 3.1.4.1, naturality of marked mapping objects; simplicial degreewise verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §§3.1.3–3.1.4 and Proposition 3.3.3.1; direct simplicial exponential calculation, with Kerodon 05RX/02TK as corroborating section model"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +182,45 @@
    "results": "{\"t\": \"2026-10-16T19:43:46Z\", \"tool\": \"grep\", \"query\": \"section.*[Qq]uasicategory|[Qq]uasicategory.*section|[Mm]arked.*[Ss]implicial|[Ss]implicial.*[Mm]arked\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: source grep returned zero declarations for this pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian sections of a cocartesian fibration form a quasicategory and satisfy currying with product fibrations",
+   "results": "{\"t\": \"2026-10-16T20:16:20Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian sections of a cocartesian fibration form a quasicategory and satisfy currying with product fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian\"], \"digest\": \"d920656c07660934\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categorical cocartesian morphisms, ordinary sections, or quasicategory horn predicates; none states the parameterized cocartesian-section theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Functor.IsCocartesian, cocartesian sections",
+   "results": "{\"t\": \"2026-10-16T20:16:20Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Functor.IsCocartesian, cocartesian sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `cocartesian`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categorical cocartesian morphisms, ordinary sections, or quasicategory horn predicates; none states the parameterized cocartesian-section theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*section|section.*cocartesian|Fun.*coCart",
+   "results": "{\"t\": \"2026-10-16T20:16:20Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*section|section.*cocartesian|Fun.*coCart\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categorical cocartesian morphisms, ordinary sections, or quasicategory horn predicates; none states the parameterized cocartesian-section theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parameterized family of cocartesian sections is equivalent to a cocartesian map from the product",
+   "results": "{\"t\": \"2026-10-16T20:16:21Z\", \"tool\": \"leansearch\", \"query\": \"A parameterized family of cocartesian sections is equivalent to a cocartesian map from the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.coreHomEquivToOverSections\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Limits.Pi.map\"], \"digest\": \"63c5077e98128f5d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categorical cocartesian morphisms, ordinary sections, or quasicategory horn predicates; none states the parameterized cocartesian-section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of cocartesian sections represents maps over the base from constant product fibrations",
+   "results": "{\"t\": \"2026-10-16T20:16:24Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of cocartesian sections represents maps over the base from constant product fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.functor\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.CostructuredArrow\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\"], \"digest\": \"4047a51ae68c2090\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categorical cocartesian morphisms, ordinary sections, or quasicategory horn predicates; none states the parameterized cocartesian-section theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-cocartesian-sections-limit",
@@ -102,5 +228,51 @@
   "group": "NI"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-cocartesian-section-currying",
+  "worker": "stage1",
+  "summary": "Split the cocartesian-section foundation into six complete steps. Existing cocartesian transport and straightening provide the generic fibre, product and composition facts; the remaining currying, evaluation, core-mapping and naturality claims are checked degreewise from the explicit simplicial definitions. No new nodes were needed.",
+  "blueprint": "Realizes the categorical foundation named in the opening of thm-cbc-finite-level-proetale: cocartesian section quasicategories, parameter currying, evaluation, and restriction/postcomposition coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cocartesian-straightening",
+    "why": "Generic classification of cocartesian fibrations and definition of coCart(S) mapping objects; this unit has no separate straightening theorem."
+   },
+   {
+    "node": "lem-coef-infinity-pointwise-cocartesian-transport",
+    "why": "Generic cocartesian transport in functor quasicategories supplies the fibre and composition facts used by the section argument."
+   },
+   {
+    "node": "lem-coef-infinity-cocartesian-mapping-criterion",
+    "why": "Generic comparison of horn-cocartesian and mapping-square cocartesian edges for an inner fibration; the unit has no such comparison."
+   },
+   {
+    "node": "lem-coef-infinity-cocartesian-composition-initiality",
+    "why": "Generic composition of cocartesian edges in a 2-simplex (two-out-of-three with a cocartesian first edge); used to show families of cocartesian sections preserve all product-cocartesian edges."
+   },
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic coherent-nerve mapping-space comparison identifying Map in coCart(S) with cores of Fun^cocart_{/S}; accepted for the parent lem-cbc-cocartesian-sections-limit for the same purpose."
+   }
+  ],
+  "statement_change": "None; imported statement and hypotheses retained exactly.",
+  "maintainer_review_fix": "2026-10-17 maintainer reader: step 2 classification via the base-change clause; horn/mapping-square bridge and composition citations in steps 1-3; step 4 derived from step 3; step 5 now cites the coherent-nerve comparison; step 6 restriction of cocartesian edges written out. Statement unchanged."
+ },
+ "tool_uses": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-f717d19eb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-f717d19eb (reviewer sub-agent of L); spot-checked: I read the whole item, all five cited statements, the straightening proof (its coCart(S) model), the parent lem-cbc-cocartesian-sections-limit and the empty unit sk-prop-sf-cbc. I found three faults and repaired all of them in fixes/dag/nodes/sec-smooth-purity/lem-cbc-cocartesian-section-currying.json; the statement is unchanged and no nodes were added. (1) Step 2 concluded that S×A→S is classified by the constant diagram Δ_S A only because its fibre transports are identities. That does not fix the higher coherences, so it is a gap. I replaced it with the base-change clause of lem-coef-cocartesian-straightening applied to S→Δ^0 and A→Δ^0, plus the fibre clause. I also wrote out the inner-fibration property and the product mapping-square calculation. (2) Steps 1–3 used the mapping-square notion of a cocartesian edge as if it were the horn notion, without citing lem-coef-infinity-cocartesian-mapping-criterion. Step 3 also argued the wrong direction ('cocartesian over an identity is an equivalence'). I rewrote it: the 2-simplex (s_1 f, s_0 e) shows the image edge is a cocartesian edge composed with an equivalence, and it is cocartesian by the composition clause of lem-coef-infinity-cocartesian-composition-initiality. Currying turns out to be an isomorphism of simplicial sets. (3) Step 5 cited def-cbc-enhanced-diagrams-cones for Map_coCart(S) being a core, which that node does not state (error C4). It now uses coCart(S) as the coherent nerve of the locally Kan category of cores of Fun^cocart_{/S}, together with lem-coef-coherent-nerve-comparison, as the parent already does. Step 4 is now derived from Step 3, and Step 6 writes out why restriction along v preserves cocartesian edges. Small cases checked: A empty, S empty, S a point and S = Δ^1 all agree with the statement. There are no duplicates (I searched for currying, cocartesian sections and exponential), no cycle (checked by a dependency search) and no SGA. Tool uses accepted: straightening and pointwise transport (declared in the delivery), plus mapping-criterion, composition-initiality and coherent-nerve-comparison (added by my fix). HTT and Kerodon are not archived, so the WANTED line stands.; 1 file(s) fixed by the reviewer"
+ }
 }

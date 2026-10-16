@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-infinity-directed-union-local-colimits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the mapping-complex adjunction infrastructure: Passing from the skeleta to their union in HTT Proposition 4.4.2.6, used in Proposition 4.4.2.7; local colimit comparison, with no assumption of all small colimits.",
+   "via": [
+    "lem-coef-infinity-limits-products-pullbacks",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Directed unions assemble coherent colimits without cocompleteness",
+ "statement": "Use the universes, simplicial subsets, nerves, quasicategories, coherent diagrams, mapping spaces and cocones of [def-cbc-enhanced-diagrams-cones]. Let $I$ be a small nonempty partially ordered set in which every finite subset has an upper bound. Let $(K_i)_{i\\in I}$ be an increasing family of simplicial subsets of a small simplicial set $K$, with $K=\\bigcup_iK_i$. Let $p:K\\to\\mathcal E$ be a diagram in a quasicategory, and choose for each $i$ a colimiting cocone $\\lambda_i:p|_{K_i}\\to\\Delta_{K_i}c_i$.\n\nThe chosen local colimits admit a coherent assembly $c:N(I)\\to\\mathcal E$, with vertices $c_i$ and transitions induced by restriction of the chosen cocones, together with equivalences, natural in $t\\in\\mathcal E$,\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(c,\\Delta_{N(I)}t)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_Kt).$$\nThe equivalences identify a cocone on $c$ with the compatible cocone on $p$ obtained by composing its legs with the $\\lambda_i$. In particular, a cocone on $c$ is colimiting if and only if the corresponding cocone on $p$ is colimiting. No colimits in $\\mathcal E$ other than the displayed local ones are assumed. For any quasicategory $\\mathcal E'$, if a coherent functor $H:\\mathcal E\\to\\mathcal E'$ sends every $\\lambda_i$ to a colimiting cocone, the image assembly $Hc$ is an assembly for $Hp$ and the comparison of cocones commutes with $H$, up to coherent equivalence, using those image cocones. The assertion includes empty $K$ and empty $K_i$.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proposition 4.2.3.4, Remark 4.2.3.9 and Corollary 4.2.3.10, printed pp. 249-253: local colimit comparison for a directed covering by simplicial subsets. Read online 2026-10-17; not archived in literature/ (WANTED). No Stacks tag states this quasicategorical result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "skelet.*[Cc]olimit|[Cc]olimit.*skelet|[Ss]equential.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T20:29:45Z\", \"tool\": \"grep\", \"query\": \"skelet.*[Cc]olimit|[Cc]olimit.*skelet|[Ss]equential.*[Cc]olimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\"], \"digest\": \"a69e5e017248b331\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The SSet.Subcomplex colimit declarations and Skeleton.lean:435 compute colimits in the ordinary category of simplicial sets, not coherent colimits inside an arbitrary quasicategory. CategoryTheory.Limits.Skeleton concerns skeletons of ordinary categories. None supplies local colimit assembly or its cocone comparison. Second semantic phrasing also returned only ordinary SSet subcomplex colimits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an infinity category colimits over a directed union of simplicial subsets are colimits of the component colimits",
+   "results": "{\"t\": \"2026-10-16T20:29:45Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category colimits over a directed union of simplicial subsets are colimits of the component colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.ShortComplex.hasColimit_of_hasColimitπ\", \"CategoryTheory.pi.coconeOfCoconeEvalIsColimit\", \"SSet.hasColimits\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.TransfiniteCompositionOfShape.isColimit\"], \"digest\": \"2a28e49d489d1150\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The SSet.Subcomplex colimit declarations and Skeleton.lean:435 compute colimits in the ordinary category of simplicial sets, not coherent colimits inside an arbitrary quasicategory. CategoryTheory.Limits.Skeleton concerns skeletons of ordinary categories. None supplies local colimit assembly or its cocone comparison. Second semantic phrasing also returned only ordinary SSet subcomplex colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"skelet\"",
+   "results": "{\"t\": \"2026-10-16T20:29:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"skelet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimitsOfSize_skeleton\", \"CategoryTheory.Limits.hasColimitsOfShape_skeleton\", \"CategoryTheory.Limits.hasColimitsOfSize_thinSkeleton\", \"CategoryTheory.Limits.hasColimitsOfShape_thinSkeleton\"], \"digest\": \"850e6aae0f628b46\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The SSet.Subcomplex colimit declarations and Skeleton.lean:435 compute colimits in the ordinary category of simplicial sets, not coherent colimits inside an arbitrary quasicategory. CategoryTheory.Limits.Skeleton concerns skeletons of ordinary categories. None supplies local colimit assembly or its cocone comparison. Second semantic phrasing also returned only ordinary SSet subcomplex colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an increasing sequence of simplicial subsets whose union is K, the colimit of a coherent diagram on K is the sequential colimit of the colimits on those subsets",
+   "results": "{\"t\": \"2026-10-16T20:29:47Z\", \"tool\": \"leanfinder\", \"query\": \"For an increasing sequence of simplicial subsets whose union is K, the colimit of a coherent diagram on K is the sequential colimit of the colimits on those subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Truncated.hasColimits\", \"SSet.range_eq_iSup_of_isColimit\"], \"digest\": \"6e64c21ee3a5d990\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The SSet.Subcomplex colimit declarations and Skeleton.lean:435 compute colimits in the ordinary category of simplicial sets, not coherent colimits inside an arbitrary quasicategory. CategoryTheory.Limits.Skeleton concerns skeletons of ordinary categories. None supplies local colimit assembly or its cocone comparison. Second semantic phrasing also returned only ordinary SSet subcomplex colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent diagram indexed by a simplicial set can be integrated in two stages over a directed cover by subcomplexes and their colimit objects",
+   "results": "{\"t\": \"2026-10-16T20:30:07Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent diagram indexed by a simplicial set can be integrated in two stages over a directed cover by subcomplexes and their colimit objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.PairingCore.pairing\", \"SSet.horn.isColimit\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.hasColimits\"], \"digest\": \"182e27b9c9a869ba\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The SSet.Subcomplex colimit declarations and Skeleton.lean:435 compute colimits in the ordinary category of simplicial sets, not coherent colimits inside an arbitrary quasicategory. CategoryTheory.Limits.Skeleton concerns skeletons of ordinary categories. None supplies local colimit assembly or its cocone comparison. Second semantic phrasing also returned only ordinary SSet subcomplex colimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent colimits over a filtered covering of simplicial sets can be computed from the left Kan extensions on the pieces",
+   "results": "{\"t\": \"2026-10-16T20:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent colimits over a filtered covering of simplicial sets can be computed from the left Kan extensions on the pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.instIsRegularEpiCategory\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.Truncated.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\"], \"digest\": \"6b0a204c0468c3b5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. SSet.hasColimits and Subcomplex.MulticoequalizerDiagram.isColimit' concern ordinary colimits of simplicial sets; none states coherent cocone assembly in an arbitrary quasicategory. Second reader used the filtered-cover/left-Kan-extension vocabulary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-limits-products-pullbacks",
+  "date": "2026-10-17",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

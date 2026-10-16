@@ -25,9 +25,100 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\phi_{j,i}:\\operatorname{Hom}_I(Lj,i)\\cong\\operatorname{Hom}_J(j,Ri)$ for the given natural bijections. Set $\\eta_j=\\phi_{j,Lj}(1_{Lj})$ and $\\epsilon_i=\\phi_{Ri,i}^{-1}(1_{Ri})$. Naturality gives $\\phi_{j,i}(f)=R(f)\\eta_j$ and $\\phi_{j,i}^{-1}(g)=\\epsilon_iL(g)$, and also makes $\\eta:1_J\\to RL$ and $\\epsilon:LR\\to1_I$ natural transformations. Substituting the identity elements in these inverse formulas gives $R\\epsilon_i\\,\\eta_{Ri}=1_{Ri}$ and $\\epsilon_{Lj}\\,L\\eta_j=1_{Lj}$. A natural transformation is a functor from the product with $[1]$; taking its nerve gives a simplicial map from the product with $\\Delta^1$, since in degree $n$ a functor $[n]\\to C\\times[1]$ is exactly a pair of functors into the two factors. Thus these units, counits and their triangle identities supply coherent diagrams, with no fullness assumption on $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, ordinary-adjunction preliminaries for the coherent bar foundation of proof paragraph 2"
+   }
+  },
+  {
+   "text": "Put $Q_J=\\operatorname{Fun}(N(J),\\mathcal E)$ and $Q_I=\\operatorname{Fun}(N(I),\\mathcal E)$. By [lem-cbc-enhanced-functor-cone-calculus] these are quasicategories and their mapping spaces are Kan complexes. Denote the two right-pinched mapping spaces in the statement by $A$ and $B$, and the actual restriction map by $r:A\\to B$. By [lem-coef-infinity-pinch-comparison] their natural comparison maps to the arrow spaces $A_U=U_{Q_J}(p,\\Delta_J e)$ and $B_U=U_{Q_I}(pR,\\Delta_I e)$ are homotopy equivalences. Here and below $pR$ means $p\\circ N(R)$, and similarly for other index composites. Restriction is a simplicial functor, so these comparison maps commute strictly with restriction in every degree. It therefore suffices to construct a homotopy inverse to restriction $r_U:A_U\\to B_U$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, applied to the two functor quasicategories; closure is the existing enhanced-functor-cone-calculus statement"
+   }
+  },
+  {
+   "text": "We will use the following direct consequence of [lem-coef-infinity-mapping-composition], on entire parameter spaces. If $T$ is a Kan complex and $T\\times\\Delta^1\\times\\Delta^1\\to Q$ is a family of squares in a quasicategory with four fixed vertices, restrict to the triangles with ordered vertices $(00,10,11)$ and $(00,01,11)$. These give maps from $T$ to the two triangle spaces $V$ of that node. For either map $t:T\\to V$, the formula for composition there gives $[\\ell t]=[\\ell][\\theta]^{-1}[\\theta t]$: its diagonal is homotopic to the composite of its two consecutive edges, as maps from $T$. The two diagonals are the same restriction to $(00,11)$. Hence the two boundary composites of the square are homotopic as maps of spaces, not just at individual vertices. We use the natural pinch equivalences to express this calculation in arrow spaces. The same formula proves compatibility with every simplicial functor: the maps $V$, $U$, $\\theta$ and $\\ell$ all commute with postcomposition degree by degree, and $[\\theta]$ is invertible. Associativity and identity homotopies on whole mapping spaces are supplied by the same cited node.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9 and Propositions 4.6.8.11-12; two restrictions of a parametrized square and the existing composition formula"
+   }
+  },
+  {
+   "text": "The unit of step 1 gives a specified transformation $p\\eta:p\\to pRL$ in $Q_J$. Restriction along $N(L)$ sends $\\beta\\in B_U$ to $\\beta L:pRL\\to\\Delta_J e$. Precompose with $p\\eta$ using the composition maps of [lem-coef-infinity-mapping-composition] (expressed in arrow spaces via step 2). This defines a map of Kan complexes up to simplicial homotopy\n$$s_U:B_U\\longrightarrow A_U,\\qquad \\beta\\longmapsto(\\beta L)\\circ p\\eta.$$\nChoose any representative of this composition homotopy class; it is a map on the whole Kan complex because the composition formula uses a homotopy inverse to $\\theta$, not a separate filler for each vertex. The calculation of step 3 ensures that restricting this representative gives the homotopy class of $(\\beta LR)\\circ p\\eta R$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent construction of the inverse restriction map in the coherent bar foundation of proof paragraph 2"
+   }
+  },
+  {
+   "text": "For the composite $s_Ur_U$, evaluate the universal family of transformations $\\alpha:p\\to\\Delta_J e$ on the unit: there is a simplicial map\n$$N(J)\\times\\Delta^1_u\\times\\Delta^1_v\\times A_U\\longrightarrow\\mathcal E,\\qquad (j,u,v,\\alpha)\\longmapsto\\alpha(\\eta(j,u),v).$$\nThis notation means composition of the evaluation map with the nerve of the functor $J\\times[1]\\to J$ representing $\\eta$; it therefore specifies the map in all degrees. By adjunction for internal functor simplicial sets it is a family of squares in $Q_J$ with corners $p,pRL,\\Delta_J e,\\Delta_J e$. Its boundary edges are $p\\eta,\\alpha RL,\\alpha,1_{\\Delta_J e}$. The square calculation of step 3 and unitality in [lem-coef-infinity-mapping-composition] give $(\\alpha RL)\\circ p\\eta\\simeq\\alpha$ as maps $A_U\\to A_U$. Since $s_Ur_U(\\alpha)$ has exactly the first displayed composite, $s_Ur_U\\simeq1_{A_U}$. The parameter $A_U$ retains every higher coherence simplex.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof of the first inverse homotopy: universal cocone evaluated on the ordinary unit"
+   }
+  },
+  {
+   "text": "For the other composite evaluate the universal $\\beta:pR\\to\\Delta_I e$ on $\\epsilon:LR\\to1_I$. The simplicial map\n$$N(I)\\times\\Delta^1_u\\times\\Delta^1_v\\times B_U\\longrightarrow\\mathcal E,\\qquad(i,u,v,\\beta)\\longmapsto\\beta(\\epsilon(i,u),v)$$\nis a family of squares in $Q_I$ with corners $pRLR,pR,\\Delta_I e,\\Delta_I e$ and boundary edges $pR\\epsilon,\\beta,\\beta LR,1_{\\Delta_I e}$. Step 3 gives $\\beta LR\\simeq\\beta\\circ pR\\epsilon$ as maps from $B_U$. Thus, by associativity in [lem-coef-infinity-mapping-composition],\n$$r_Us_U(\\beta)\\simeq(\\beta LR)\\circ p\\eta R\\simeq\\beta\\circ(pR\\epsilon\\circ p\\eta R)\\simeq\\beta.$$\nFor the last homotopy use the actual triangle identity $R\\epsilon\\circ\\eta R=1_R$ of step 1. Its nerve supplies the triangle with edges $N(\\eta R),N(R\\epsilon),1_{N(R)}$; applying $p$ and the triangle composition formula identifies the bracketed composite with the identity of $pR$, and unitality finishes the calculation. This again is a homotopy on the entire $B_U$. Therefore $r_U$ has a simplicial homotopy inverse. By [lem-coef-simplicial-realization-cylinder], the natural homeomorphism $|T\\times\\Delta^1|\\cong |T|\\times[0,1]$ identifies the realized endpoint inclusions with the ordinary cylinder endpoints. Thus the two simplicial homotopies realize to continuous inverse homotopies. Apply [lem-coef-homotopy-equivalence-weak] to conclude that $|r_U|$ induces a bijection on path components and isomorphisms on every based homotopy group, without requiring the homotopies to fix basepoints. Hence $r_U$ is a weak homotopy equivalence. The strictly commuting pinch-comparison square of step 2 then makes the specified map $r$ a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof of the second inverse homotopy: universal restricted cocone evaluated on the ordinary counit and the right triangle identity"
+   }
+  },
+  {
+   "text": "Restriction is natural in $p$ and $e$: its defining operation is precomposition with $N(R)$, which commutes degree by degree with evaluation, restriction of parameter simplices and constant diagrams. With varying source diagrams it commutes with precomposition by a coherent transformation, and with varying vertices it commutes with postcomposition by the corresponding constant transformation; the composition compatibility follows from the $V,\\theta,\\ell$ formula in step 3. For higher compatibilities, an $n$-simplex of a diagram or transformation family is an evaluation map with factors $N(J)$ and $\\Delta^n$ (and the arrow interval when present). Restriction replaces only the $N(J)$ factor by $N(I)$ via $N(R)$; it commutes strictly with every face and degeneracy of $\\Delta^n$, with the arrow-interval restrictions, and with the constant-diagram map. Applying the triangle-space formula to these evaluation maps gives the asserted composition compatibilities on the entire parameter spaces. Finally let $a:p\\to\\Delta_J c$ be the specified cocone. By the dual criterion of [lem-cbc-enhanced-functor-cone-calculus], it is colimiting exactly when, for every $e$, composition gives an equivalence $\\operatorname{Map}_{\\mathcal E}(c,e)\\to A$. The analogous criterion for $aR$ uses $B$. For $f:c\\to e$, restriction takes $\\Delta_J(f)\\circ a$ to $\\Delta_I(f)\\circ(aR)$ up to the composition homotopy, so the second criterion map is the composite of the first with the equivalence $r:A\\to B$. A map followed by an equivalence is an equivalence if and only if that map is. Hence the two specified cocones are colimiting simultaneously, with the identical vertex $c$. The argument only uses mapping spaces of the given objects and does not assume any further colimits.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 4.1.1.7-8, comparison with the explicit argument using the existing coherent cocone criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent bar foundation. Direct unit/counit proof expanded with existing parametrized composition and pinch-comparison lemmas; HTT 4.1.1.7-8 and 4.1.3.1 independently check the conclusion, rather than serving as uncited black boxes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -105,10 +196,80 @@
    "results": "{\"t\": \"2026-10-16T20:00:54Z\", \"tool\": \"grep\", \"query\": \"cofinal|final_of_adjunction|isColimitWhiskerEquiv\", \"sub\": \"CategoryTheory/Limits/Final.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"54\", \"130\", \"157\", \"294\", \"308\"], \"digest\": \"8f6c364da7f1f9b7\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading. Final.lean:130-157 and 283-295 require an ordinary target Category and ordinary functors; Adjunction/Limits.lean:278-334 gives cocone Hom-set isomorphisms in ordinary target categories. These declarations do not state reindexing of coherent diagrams into arbitrary quasicategories or equivalences of their mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "final_of_adjunction|coconesIso|isColimitWhiskerEquiv",
+   "results": "{\"t\": \"2026-10-16T20:32:50Z\", \"tool\": \"grep\", \"query\": \"final_of_adjunction|coconesIso|isColimitWhiskerEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\"], \"digest\": \"1422f448e60e50c3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.coconesIso, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-16T20:32:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.coconesIso, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary adjunction gives mutually inverse restriction maps between coherent cocone mapping spaces in an infinity category",
+   "results": "{\"t\": \"2026-10-16T20:32:50Z\", \"tool\": \"leansearch\", \"query\": \"An ordinary adjunction gives mutually inverse restriction maps between coherent cocone mapping spaces in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.functorialityAdjunction\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Adjunction.conesIso\", \"CategoryTheory.Adjunction.mk\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.coconesIsoComponentHom\", \"CategoryTheory.Adjunction.coconesIso\", \"CategoryTheory.Adjunction.functorialityRightAdjoint\"], \"digest\": \"32a6d5ffe28f3c67\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along the nerve of a right adjoint induces an equivalence of spaces of homotopy coherent cocones in every quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:32:52Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along the nerve of a right adjoint induces an equivalence of spaces of homotopy coherent cocones in every quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"SSet.OneTruncation₂.nerveHomEquiv\"], \"digest\": \"6d1b6d7882906358\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|adjunction|[Cc]ocone",
+   "results": "{\"t\": \"2026-10-16T20:33:42Z\", \"tool\": \"grep\", \"query\": \"cofinal|adjunction|[Cc]ocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final, CategoryTheory.Functor.IsRightAdjoint",
+   "results": "{\"t\": \"2026-10-16T20:33:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Final, CategoryTheory.Functor.IsRightAdjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_of_isRightAdjoint\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"da95001c5b70328a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor with a left adjoint is cofinal for infinity categorical colimits; unit and counit give a homotopy inverse to cocone restriction",
+   "results": "{\"t\": \"2026-10-16T20:33:43Z\", \"tool\": \"leanfinder\", \"query\": \"A functor with a left adjoint is cofinal for infinity categorical colimits; unit and counit give a homotopy inverse to cocone restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Adjunction.coconesIsoComponentInv\", \"CategoryTheory.Functor.final_of_adjunction\", \"CategoryTheory.Adjunction.coconesIsoComponentHom\", \"CategoryTheory.IsCofiltered.of_left_adjoint\", \"CategoryTheory.Adjunction.coconesIso\", \"CategoryTheory.Adjunction.functorialityRightAdjoint\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\"], \"digest\": \"1ccfa61a2899c153\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CategoryTheory/Limits/Final.lean:130-157, 283-295 and Adjunction/Limits.lean:278-334; these concern ordinary target categories or changing the target along an adjunction, not the full coherent cocone mapping spaces into an arbitrary quasicategory. NerveAdjunction results concern nerve/homotopy-category adjunctions. The quasicategory grep had no hits. Two semantic phrasings were tested."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*cofinal|cofinal.*homotopy|coconesIsoComponentInv",
+   "results": "{\"t\": \"2026-10-16T20:51:12Z\", \"tool\": \"grep\", \"query\": \"homotopy.*cofinal|cofinal.*homotopy|coconesIsoComponentInv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\"], \"digest\": \"c5351c00ad3c5489\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: second reader independently read Mathlib/CategoryTheory/Adjunction/Limits.lean:278-334 and Limits/Final.lean:130-157. coconesIsoComponentInv and final_of_adjunction are ordinary-category constructions, not equivalences of mapping spaces for coherent diagrams into an arbitrary quasicategory. Semantic results concern homotopy categories and model-category localization, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coconesIsoComponentInv\"",
+   "results": "{\"t\": \"2026-10-16T20:51:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"coconesIsoComponentInv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.coconesIsoComponentInv\"], \"digest\": \"39f7dec2c061f481\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: second reader independently read Mathlib/CategoryTheory/Adjunction/Limits.lean:278-334 and Limits/Final.lean:130-157. coconesIsoComponentInv and final_of_adjunction are ordinary-category constructions, not equivalences of mapping spaces for coherent diagrams into an arbitrary quasicategory. Semantic results concern homotopy categories and model-category localization, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cofinal functors and weak equivalence of natural transformation simplicial sets with constant target",
+   "results": "{\"t\": \"2026-10-16T20:51:15Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cofinal functors and weak equivalence of natural transformation simplicial sets with constant target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.terminalIso\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"04c74ac25c1d7a8a\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: second reader independently read Mathlib/CategoryTheory/Adjunction/Limits.lean:278-334 and Limits/Final.lean:130-157. coconesIsoComponentInv and final_of_adjunction are ordinary-category constructions, not equivalences of mapping spaces for coherent diagrams into an arbitrary quasicategory. Semantic results concern homotopy categories and model-category localization, not this assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-split-augmentation-colimit",
@@ -116,5 +277,29 @@
   "group": "Q122"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-right-adjoint-reindexing",
+  "worker": "stage1",
+  "summary": "Resolved the previous missing-node blockage after the input appeared. Preserved the entire statement; constructed the inverse to actual cocone-space restriction using the ordinary unit and counit, and proved both inverse homotopies by universal square families on full Kan spaces. Reused three existing general foundations and created no nodes. Fresh logged Mathlib searches distinguish ordinary finality from this coherent assertion. Second reading corrected the colimit-criterion composition order, expanded the degreewise naturality check, and cited existing realization foundations for the weak-equivalence conclusion.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 middle derived mapping-complex adjunction; the generic bar foundation reached through lem-coef-infinity-split-augmentation-colimit, specifically its Step 4 right-adjoint restriction and Step 6 postcomposition version.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure of coherent functor categories and the mapping-space criterion for the given cocone; no same-unit statement supplies that criterion, and this is the same foundation used by the parent split-augmentation proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-df4bf730b",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-df4bf730b (reviewer sub-agent of L); spot-checked: I read in full the item, the five cited node statements (pinch-comparison, mapping-composition, enhanced-functor-cone-calculus, realization-cylinder, homotopy-equivalence-weak), def-cbc, the parent split-augmentation node (its steps 4 and 6 apply the item with R=j^op, L=r^op), the unit record and paragraph 2 of the main-20261015 ancestor proof. The statement is unchanged and in the right-adjoint direction: (Lj,eta_j) is initial in j/R. Checked on R:I->pt, which picks the initial object; on R:pt->J, which picks the terminal object; on the identity adjunction; on chain->point, where R is not full; and on empty/empty. With L and R swapped the claim would be false. HTT and Kerodon are not in literature/; the report lists them as WANTED and the proof is marked by=agent. Step 1: the unit/counit formulas and both triangle identities check. Step 2: restriction along N(R) is a simplicial functor, and the pinch comparison is natural, so the square commutes strictly. Step 3: the two triangles of a square family give V-maps, and the [l][theta]^-1 formula identifies diagonal with composite as maps from the whole parameter space; compatibility with functors follows in a few lines from the composition node's formula. Steps 5 and 6: I checked the corners and edges of the two evaluation squares (alpha on eta, beta on epsilon) and the triangle R eps . eta R = 1, so both composites are homotopic to the identity on all of A_U and B_U. The realization-cylinder and homotopy-equivalence-weak nodes give the weak equivalence, and 2-of-3 on the strict pinch square gives it for r itself. Step 7: the dual cocone criterion of lem-cbc together with r.c_a ~ c_{aR} gives preservation and detection with the same vertex. Duplicates: the unsplit lem-coef-infinity-cofinality-space-test would give only one direction, and neither the mapping-space equivalence nor the reflection, so the item is not a duplicate. There are no new nodes; proof_deps is exact; there is no cycle and no SGA source. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (generic functor-category closure and cocone criterion; the parent uses it the same way). No fixes were needed."
+ }
 }

@@ -29,9 +29,118 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First take opposites, using [def-cbc-enhanced-diagrams-cones]. Reverse every ordinal map by $\\alpha^{\\mathrm{rev}}(i)=n-\\alpha(m-i)$ for $\\alpha:[m]\\to[n]$. This involution exchanges $\\Lambda_i^n$ with $\\Lambda_{n-i}^n$, preserves the nondegenerate simplices, and turns the defining comma cone category into the opposite cocone category. For the mapping-space convention, apply [lem-coef-infinity-pinch-comparison]: right-pinched mapping spaces are naturally equivalent to arrow mapping spaces. Ordinal reversal identifies the arrow mapping space from $x$ to $y$ in the opposite with the simplicial opposite of the arrow mapping space from $y$ to $x$; reversing barycentric coordinates identifies their realizations. Thus contractibility of the former is exactly contractibility of the latter. Terminal objects become initial objects, products become coproducts, and pullbacks become pushouts. Put $\\mathcal E=\\mathcal C^{\\mathrm{op}}$, $\\mathcal E'=\\mathcal D^{\\mathrm{op}}$, and $H=F^{\\mathrm{op}}$. It suffices to prove that $H$, assumed to preserve pushouts and coproducts on fewer than $\\kappa$ summands including zero, preserves every $\\kappa$-small colimiting cocone. Both categories admit these colimits. Necessity in the original assertion follows at once: a cospan has three vertices and two nondegenerate edges, and a discrete set has exactly its vertices as nondegenerate simplices, so both kinds of shape are $\\kappa$-small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.7 and opposite-category duality (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "For a family $p_s:K_s\\to\\mathcal E$ indexed by a set $S$ with $|S|<\\kappa$, suppose each restriction has a colimit $x_s$ and all the shapes and their disjoint union are $\\kappa$-small. The internal functor simplicial set on $\\coprod_s K_s$ is the product of those on $K_s$: in degree $r$, a map $(\\coprod_s K_s)\\times\\Delta^r\\to\\mathcal E$ is precisely one map on each component. The right-pinched mapping-space definition similarly makes the space of cocones to $t$ the product of the component cocone spaces. By the cocone criterion in [lem-cbc-enhanced-functor-cone-calculus], the coproduct of the $x_s$, with the composed component cocones, is the colimit of $\\coprod_s p_s$: its mapping space to $t$ and the cocone space are both $\\prod_s\\operatorname{Map}_{\\mathcal E}(x_s,t)$. This argument includes $S=\\varnothing$. If $H$ preserves the chosen component colimits, preservation of the coproduct shows that it preserves this assembled colimit, with the same legs.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, disjoint unions of simplex diagrams, and the cocone universal property (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "Every diagram $p:\\Delta^n\\to\\mathcal E$ has its specified colimit at $p(n)$ by [lem-coef-infinity-final-index-colimit]. Its cocone is induced by the ordinal map $[n+1]\\to[n]$ which fixes $0,\\ldots,n$ and repeats $n$. In the coherent-transformation convention of [def-cbc-enhanced-diagrams-cones], precompose this extended simplex with the nerve of the monotone map $[n]\\times[1]\\to[n+1]$ taking $(i,0)$ to $i$ and $(i,1)$ to $n+1$. The resulting map $\\Delta^n\\times\\Delta^1\\to\\mathcal E$ restricts to $p$ at $0$ and to the constant diagram at $p(n)$ at $1$. Postcomposing by $H$ gives exactly this same standard cocone for $Hp$, so $H$ preserves it, for every $n\\geq0$. The contractible initial-object clause of [lem-cbc-enhanced-functor-cone-calculus], applied to the cocone category, then shows that $H$ preserves every colimiting cocone on this diagram, since any such cocone is equivalent to the specified one.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 4.4.2.4 and Proposition 4.4.2.6, simplex diagrams (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "We prove by induction on $n\\geq0$ that $H$ preserves colimits for every $\\kappa$-small shape of dimension at most $n$. Dimension means the largest degree of a nondegenerate simplex; the empty shape is allowed separately and its colimit is the preserved empty coproduct. A dimension-zero shape is a discrete set of fewer than $\\kappa$ vertices, so the base case is exactly preservation of coproducts. For the inductive step let $K$ have dimension at most $n+1$ and let $S$ be its set of nondegenerate $(n+1)$-simplices. Apply [lem-coef-infinity-monomorphism-boundary-cells] to $\\varnothing\\hookrightarrow K$. Its stage $n+1$ yields the actual simplicial pushout\n$$K=K^{(n)}\\amalg_{S\\times\\partial\\Delta^{n+1}}(S\\times\\Delta^{n+1}),$$\nwhere $K^{(n)}$ is the simplicial subset generated by simplices of dimension at most $n$, and $S\\times-$ denotes the disjoint union of copies indexed by the discrete set $S$. The boundary inclusion is degreewise injective, even if its attaching map identifies faces in $K^{(n)}$. Both $K^{(n)}$ and $S\\times\\partial\\Delta^{n+1}$ have dimension at most $n$. They are $\\kappa$-small: the first uses a subset of the nondegenerate simplices of $K$, and the second has at most $|S|(2^{n+2}-2)$ nondegenerate simplices. For infinite $\\kappa$, multiplying a cardinal less than $\\kappa$ by this fixed finite number stays less than $\\kappa$. The simplex union $S\\times\\Delta^{n+1}$ has $|S|(2^{n+2}-1)$ nondegenerate simplices, also less than $\\kappa$. Thus every colimit invoked here exists under the assumed existence of all $\\kappa$-small colimits in $\\mathcal E$ and $\\mathcal E'$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, finite-dimensional skeletal induction; simplicial cell decomposition (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "For a diagram $p:K\\to\\mathcal E$ on the pushout of step 4, let $X,Y,Z$ be the colimits on $K^{(n)},S\\times\\partial\\Delta^{n+1},S\\times\\Delta^{n+1}$ with their cocones. Induction gives preservation of $X,Y$; steps 2 and 3 give preservation of $Z$. The induced coherent span $X\\leftarrow Y\\to Z$ has a pushout $P$, since its shape is finite. By [lem-coef-infinity-colimit-gluing], the induced cocone on $p$ with vertex $P$ is colimiting. Write the chosen local cocones as $\\lambda_B,\\lambda_A,\\lambda_D$, respectively. The induced arrow $u:Y\\to X$ is equipped with a coherent identification $u\\lambda_A\\simeq\\lambda_B|_A$, and $v:Y\\to Z$ with $v\\lambda_A\\simeq\\lambda_D|_A$. Apply $H$ to these identifications. Because $H\\lambda_A$ is colimiting, the cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] identifies $Hu$ and $Hv$, with these image identifications, as the induced arrows for the three image cocones. We therefore use the image span $HX\\leftarrow HY\\to HZ$ and the image of the chosen pushout cocone, including its compatibility homotopy. Since $H$ preserves this pushout, the same gluing statement applied in $\\mathcal E'$ says that its image cocone with vertex $HP$ is colimiting. By the contractibility of initial objects in [lem-cbc-enhanced-functor-cone-calculus], every colimiting cocone on $p$ is equivalent to the constructed one, so is preserved. This closes the induction. In particular, when $\\kappa=\\aleph_0$, every $\\kappa$-small simplicial set has bounded dimension and the proof is already complete, without countable coproducts.",
+   "uses": [
+    "lem-coef-infinity-colimit-gluing",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Corollary 4.4.2.5 and Proposition 4.4.2.6, gluing induction and its preservation version (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "Now suppose $\\kappa>\\aleph_0$. The nerve $N(\\mathbb N)$ has countably many nondegenerate simplices: such a simplex is a finite strictly increasing list of natural numbers. Its consecutive-edge subset $L$ from [lem-coef-infinity-sequential-spine] is countable and one-dimensional. Thus both shapes are $\\kappa$-small, and step 5 gives preservation of colimits indexed by $L$. For any sequential coherent diagram $x:N(\\mathbb N)\\to\\mathcal E$, the same node says that a specified cocone on $x$ is colimiting if and only if its restriction to $L$ is. Restrict a colimiting cocone, apply $H$, and use this criterion in $\\mathcal E'$ to conclude that $H$ preserves the original sequential colimit. The restriction commutes with postcomposition by $H$, so this conclusion concerns the actual image cocone.",
+   "uses": [
+    "lem-coef-infinity-sequential-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6, replacing the sequential indexing nerve by its consecutive-edge subset (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "Let $p:K\\to\\mathcal E$ be any $\\kappa$-small diagram and write $K=\\bigcup_{n\\geq0}K^{(n)}$. Every simplex belongs to a finite skeleton, since it is a degeneracy of a nondegenerate simplex of finite dimension. Use the skeletal sequence of [lem-coef-infinity-monomorphism-boundary-cells]. Choose colimiting cocones on the restrictions, with apices $x_n$. Each skeleton is $\\kappa$-small and finite-dimensional, so step 5 says that $H$ preserves all these local cocones. Apply [lem-coef-infinity-directed-union-local-colimits] to this increasing cover, indexed by the nonempty directed small poset $\\mathbb N$. It assembles the $x_n$ into a coherent sequence $x:N(\\mathbb N)\\to\\mathcal E$. Its cocone comparison identifies colimiting cocones on $p$ with colimiting cocones on $x$. For a specified colimiting cocone on $p$, let $\\mu$ be its corresponding sequential colimiting cocone with the same apex. Step 6 says $H\\mu$ is colimiting. The functor-compatibility clause of the same assembly node applies because all local cocones were preserved; it identifies the image sequence $Hx$ as an assembly of the restrictions of $Hp$ and takes $H\\mu$ to the image of the original cocone. Its colimit criterion in $\\mathcal E'$ therefore proves that this image cocone is colimiting. No category admitting all small colimits has been assumed; only the skeletal restrictions and the countable sequence are used.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-directed-union-local-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.6 using Remark 4.2.3.9 and Corollary 4.2.3.10; preservation as in Proposition 4.4.2.7 (online, not archived; agent expansion)."
+   }
+  },
+  {
+   "text": "The preceding steps prove preservation of every $\\kappa$-small colimiting cocone by $H$. Reverse opposites as in step 1. Every specified limiting cone in $\\mathcal C$ is thereby sent to a limiting cone in $\\mathcal D$. Finally [lem-cbc-enhanced-functor-cone-calculus] makes the full subcategory of limiting cones a contractible Kan complex. Hence the equivalence between the image cone and any chosen limit cone of the image diagram is the one respecting the specified cone legs, unique with all its coherences. This is exactly the preservation and canonical-comparison assertion in the item.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.4.2.7, opposite-category conclusion and specified cone comparisons (online, not archived; agent expansion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-colimit-gluing",
+  "lem-coef-infinity-sequential-spine",
+  "lem-coef-infinity-directed-union-local-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2 mapping-complex adjunction infrastructure; agent expansion of HTT Propositions 4.4.2.6-4.4.2.7 and Corollary 4.4.2.5, read online. HTT not archived (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +183,45 @@
    "results": "{\"t\": \"2026-10-16T19:37:10Z\", \"tool\": \"grep\", \"query\": \"preservesLimits_of_preservesEqualizers_and_products|preservesFiniteLimits_of_preservesTerminal_and_pullbacks\", \"sub\": \"CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"208\", \"279\", \"290\"], \"digest\": \"c0840e39347e8da3\"}",
    "date": "2026-10-17",
    "verdict": "No match for quasicategories: these verified declaration locations concern ordinary categories; types were read and rejected as explained in the preceding search records."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits_of_preservesEqualizers_and_products|preservesFiniteLimits_of_preservesTerminal_and_pullbacks",
+   "results": "{\"t\": \"2026-10-16T20:29:06Z\", \"tool\": \"grep\", \"query\": \"preservesLimits_of_preservesEqualizers_and_products|preservesFiniteLimits_of_preservesTerminal_and_pullbacks\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/MorphismProperty.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\"], \"digest\": \"109b1a531c01eae9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for coherent limits. The inspected declarations preservesLimits_of_preservesEqualizers_and_products (LimitsOfProductsAndEqualizers.lean:208) and preservesFiniteLimits_of_preservesTerminal_and_pullbacks (:279) concern ordinary categories and strict cones. hoFunctor product instances do not assert preservation of coherent limits inside arbitrary quasicategories. Second semantic phrasing returned the same ordinary-category results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent functors preserving small products and homotopy pullbacks preserve all small limits",
+   "results": "{\"t\": \"2026-10-16T20:29:06Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent functors preserving small products and homotopy pullbacks preserve all small limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesLimitsOfSize.mk\", \"CategoryTheory.Limits.PreservesFiniteLimits.mk\", \"CategoryTheory.preservesLimits_of_createsLimits_and_hasLimits\", \"CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits\", \"CategoryTheory.Limits.preservesLimits_of_preservesEqualizers_and_products\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\"], \"digest\": \"c29d116a58d51bc5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for coherent limits. The inspected declarations preservesLimits_of_preservesEqualizers_and_products (LimitsOfProductsAndEqualizers.lean:208) and preservesFiniteLimits_of_preservesTerminal_and_pullbacks (:279) concern ordinary categories and strict cones. hoFunctor product instances do not assert preservation of coherent limits inside arbitrary quasicategories. Second semantic phrasing returned the same ordinary-category results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteLimits_of_preservesTerminal_and_pullbacks\"",
+   "results": "{\"t\": \"2026-10-16T20:29:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesFiniteLimits_of_preservesTerminal_and_pullbacks\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.preservesFiniteLimits_of_preservesTerminal_and_pullbacks\"], \"digest\": \"8d53b496c64f31b9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for coherent limits. The inspected declarations preservesLimits_of_preservesEqualizers_and_products (LimitsOfProductsAndEqualizers.lean:208) and preservesFiniteLimits_of_preservesTerminal_and_pullbacks (:279) concern ordinary categories and strict cones. hoFunctor product instances do not assert preservation of coherent limits inside arbitrary quasicategories. Second semantic phrasing returned the same ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent functor between quasicategories preserves kappa small limits if it preserves pullbacks and products with fewer than kappa factors",
+   "results": "{\"t\": \"2026-10-16T20:29:09Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent functor between quasicategories preserves kappa small limits if it preserves pullbacks and products with fewer than kappa factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.Limits.PreservesLimitsOfSize\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.hoFunctor.preservesTerminal\", \"CategoryTheory.Limits.preservesLimits_of_preservesEqualizers_and_products\", \"SSet.hoFunctor.preservesTerminal'\", \"CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits\"], \"digest\": \"f7e9c5692e37dfe9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for coherent limits. The inspected declarations preservesLimits_of_preservesEqualizers_and_products (LimitsOfProductsAndEqualizers.lean:208) and preservesFiniteLimits_of_preservesTerminal_and_pullbacks (:279) concern ordinary categories and strict cones. hoFunctor product instances do not assert preservation of coherent limits inside arbitrary quasicategories. Second semantic phrasing returned the same ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preservation of homotopy limits of simplicial diagrams is generated by homotopy fiber products and small products, including finite shapes",
+   "results": "{\"t\": \"2026-10-16T20:30:10Z\", \"tool\": \"leanfinder\", \"query\": \"Preservation of homotopy limits of simplicial diagrams is generated by homotopy fiber products and small products, including finite shapes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.hoFunctor.preservesTerminal\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits\"], \"digest\": \"e1acafd1ca360f7d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for coherent limits. The inspected declarations preservesLimits_of_preservesEqualizers_and_products (LimitsOfProductsAndEqualizers.lean:208) and preservesFiniteLimits_of_preservesTerminal_and_pullbacks (:279) concern ordinary categories and strict cones. hoFunctor product instances do not assert preservation of coherent limits inside arbitrary quasicategories. Second semantic phrasing returned the same ordinary-category results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-spaces-kappa-limit-filtered-colimit",
@@ -85,5 +229,29 @@
   "group": "Q83"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-limits-products-pullbacks",
+  "worker": "stage1",
+  "summary": "Kept the statement and its cardinal bound. Expanded HTT 4.4.2.7 by opposite duality, disjoint sums, finite-dimensional skeletal gluing, and (only for uncountable kappa) the sequential spine and directed-union comparison. Added two statement-only foundational inputs; existing directed-cover assembly assumes all small colimits and cannot be applied under the bounded existence hypotheses here. All searches actually run; no project declaration matches. Second reading corrected the simplex count, expanded the prism cocone and image-span identifications, and cited the pinch comparison for opposite duality.",
+  "blueprint": "Realizes the infrastructure for the second proof paragraph of prop-coef-integral-exceptional-adjoint (the displayed coherent mapping-complex adjunction), reached through the filtered-colimit/limit interchange node. The main-20261015 proof retains this paragraph. HTT 4.4.2.6-7 supplies the detailed generation argument below the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion for cocones and uniqueness of limiting/colimiting cones; no statement in this unit supplies the transformation-cone criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-5c29e1568",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-5c29e1568 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, the parent step that uses the item, the main-20261015 proof of prop-coef-integral-exceptional-adjoint (paragraph 2) and the unit record. Sources: HTT 4.4.2.2-4.4.2.7 and 4.2.3.4/4.2.3.9/4.2.3.10. HTT is not archived (WANTED), so I checked the steps against my knowledge of those proofs. The item statement is identical to the live unsplit node; it is the dual of HTT 4.4.2.7, with 4.4.2.5 for kappa=aleph_0, and the existence hypothesis on D is extra but harmless. Steps 1-8 checked. Step 1: duality needs pinch-comparison because right-pinched mapping spaces are not op-symmetric; U_{X^op}(y,x)=U_X(x,y)^op. Step 2: degreewise product of Fun and of mapping spaces; elementary accepted. Step 3: final-index colimit with the prism cocone. Step 4: the boundary-cells leaf applied to the empty set gives the skeletal pushout, the boundary leg is monic, and the counts 2^{n+2}-2 and 2^{n+2}-1 stay below kappa. Step 5: every hypothesis of colimit-gluing holds in E and E', and kappa=aleph_0 ends there. Step 6: N(N) and L are countable and L is 1-dimensional. Step 7: the skeleta are kappa-small, increasing and indexed by the directed set N. Step 8: contractibility of terminal cones gives the canonical comparison. No cycle. New node directed-union-local-colimits is true by HTT 4.2.3.4 and Remark 4.2.3.9 (the pointwise left Kan extension needs only the local colimits); tested on a singleton I, a constant family and empty K. It strictly generalizes the unsplit lem-coef-directed-cover-colimit-assembly, which assumes all small colimits and so cannot be used here; that is not a duplicate, and the old node may later be derived from it. New node sequential-spine is true because L into N(N) is inner anodyne (union of spine inclusions) and Fun(-,E) of it is a trivial fibration; tested on nerves of ordinary categories and noninvertible transitions. It is not given in two lines by lem-cbc-spine-inner-anodyne, the pushout-product leaf or anodyne-cocones. Neither new node restates a clause of the item. lem-coef-infinity-small-colimit-generation is the unbounded U-small sibling, not a duplicate. Searches of all three kinds are recorded and B1-B7 are met. Tool use accepted: lem-cbc-enhanced-functor-cone-calculus, used as a black-box cocone criterion and for uniqueness of initial/terminal objects. No SGA. Not a target node, so no base-change or coefficient question arises. No fixes."
+ }
 }

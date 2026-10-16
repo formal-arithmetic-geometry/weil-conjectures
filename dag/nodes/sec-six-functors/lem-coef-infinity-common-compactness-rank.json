@@ -28,9 +28,90 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack accessibility: choose an infinite regular $\\lambda\\in\\mathcal U$ such that $\\mathcal C$ is $\\lambda$-accessible, with an essentially small full family $G$ of $\\lambda$-compact generators. For each $j\\in J$, choose a small $\\lambda$-filtered quasicategory $I_j$, a coherent diagram $p_j:I_j\\to\\mathcal C$ taking values in $G$, and a colimiting cocone with apex $X_j$. These choices are precisely the generation clause in the definition; they assert no colimits of arbitrary shapes in $\\mathcal C$.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.2(3), the accessibility convention in the cited definition; small-family application of the presentations used in the proof of Proposition 5.4.2.9."
+   }
+  },
+  {
+   "text": "For each $j$ let $S_j$ be the set of nondegenerate simplices of $I_j$. It is $\\mathcal U$-small because $I_j$ is small. Apply the small-family regular-bound lemma to the family indexed by $J\\amalg\\{*\\}$ with fibers $S_j$ and the underlying set of the cardinal $\\lambda$ at $*$. Obtain an infinite regular $\\theta\\in\\mathcal U$ strictly larger than the cardinality of their disjoint union. In particular $\\lambda<\\theta$ and $|S_j|<\\theta$ for every $j$, including when $J$ is empty.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Small-family size bound for the presentations in Proposition 5.4.2.9 and Corollary 5.3.4.15; explicit application of the cited set-theoretic lemma."
+   }
+  },
+  {
+   "text": "Set $a=2^\\theta$ and $\\kappa=a^+$, the successor cardinal. These belong to $\\mathcal U$ by closure of a universe under power sets and small cardinal successors. By [lem-coef-infinite-cardinal-successor-regular] applied to the infinite cardinal $a$, the cardinal $\\kappa$ is infinite regular (a union of fewer than $a^+$ sets of size less than $a^+$ has size at most $a\\cdot a=a<a^+$). By [lem-coef-infinite-cardinal-square-power], $\\theta<2^\\theta$ and $(2^\\theta)^\\theta=2^\\theta$. For $\\mu<\\kappa$ and $\\nu<\\lambda<\\theta$ we have $\\mu\\leq 2^\\theta$ by the definition of successor cardinal and $\\nu\\leq\\theta$, so $\\mu^\\nu\\leq(2^\\theta)^\\theta=2^\\theta<\\kappa$; for $\\mu=0$ the power is $0$ or $1$, still less than $\\kappa$. Thus $\\lambda<\\theta<\\kappa$ and the precise sharpness inequality holds; also every $I_j$ is $\\kappa$-small since $|S_j|<\\theta<\\kappa$. This supplies a specific cardinal, rather than assuming that any larger regular cardinal works.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinite-cardinal-successor-regular",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.2.6.3 and the subsequent successor-power example, printed p. 819; elementary cardinal arithmetic, with regularity and size inequalities written out."
+   }
+  },
+  {
+   "text": "Apply the sharp accessibility-enlargement lemma to the $\\lambda$-accessible category $\\mathcal C$ from step 1 and the infinite regular cardinals $\\lambda<\\kappa$ from step 3. Its hypothesis $\\mu^\\nu<\\kappa$ for $\\mu<\\kappa$, $\\nu<\\lambda$ is exactly the inequality established there. It follows that $\\mathcal C$ is $\\kappa$-accessible, in particular locally small and admitting all small $\\kappa$-filtered colimits.",
+   "uses": [
+    "lem-coef-infinity-sharp-accessibility-enlargement",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, printed p. 426."
+   }
+  },
+  {
+   "text": "Every object $g$ of $G$ is $\\kappa$-compact. Let $F:I\\to\\mathcal C$ be any small $\\kappa$-filtered coherent diagram, and let $\\eta:F\\to\\Delta_I L$ be any colimiting cocone. The indexing quasicategory $I$ is $\\lambda$-filtered: every $\\lambda$-small simplicial test diagram is $\\kappa$-small, so its cocone exists by $\\kappa$-filteredness. All such diagrams have colimits by $\\lambda$-accessibility. By $\\lambda$-compactness, the covariant corepresented coherent functor $\\operatorname{Map}_{\\mathcal C}(g,-)$ sends this very cocone $\\eta$ to a colimiting cocone in the specified infinity category of spaces, with components $\\operatorname{Map}_{\\mathcal C}(g,F(i))\\to\\operatorname{Map}_{\\mathcal C}(g,L)$. Since $F$ and $\\eta$ were arbitrary, this is exactly preservation of every small $\\kappa$-filtered colimiting cocone, hence the updated definition of $\\kappa$-compactness. No assertion about changing the generating family is needed here.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.3.4.5; monotonicity of compactness by restriction of the class of filtered diagrams."
+   }
+  },
+  {
+   "text": "Fix $j\\in J$. The diagram $p_j:I_j\\to\\mathcal C$ is $\\kappa$-small by step 3; each of its vertices is $\\kappa$-compact by step 5. The category $\\mathcal C$ is locally small and admits all small $\\kappa$-filtered colimits by step 4, and the colimit of this particular diagram exists with apex $X_j$ by step 1. The compact-small-colimits lemma consequently makes $X_j$ $\\kappa$-compact. This holds for every $j$, simultaneously for the single $\\kappa$ of step 3, and step 4 gives the required accessibility at that same cardinal.",
+   "uses": [
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.15, printed p. 401, applied to the pre-existing filtered presentations; no cocompleteness hypothesis is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-infinity-sharp-accessibility-enlargement",
+  "lem-coef-small-family-regular-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit small-family assembly of the online Proposition 5.4.2.9 and Corollary 5.3.4.15; cardinal construction from the observation after Definition A.2.6.3. HTT is not archived in literature/: see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +175,52 @@
    "results": "{\"t\": \"2026-10-16T19:58:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAccessibleCategory.exists_cardinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory.exists_cardinal\"], \"digest\": \"92a7ede8614d0705\"}",
    "date": "2026-10-16",
    "verdict": "no match: SSet.Finite.instIsFinitelyPresentable is about ordinary Hom sets in SSet (AlgebraicTopology/SimplicialSet/Presentable.lean:51), and IsAccessibleCategory.exists_cardinal (CategoryTheory/Presentable/LocallyPresentable.lean:87-101) assumes an ordinary Category instance. Neither gives a common mapping-space compactness rank in a quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An accessible quasicategory and a small family of objects admit a common regular cardinal for accessibility and mapping space compactness",
+   "results": "{\"t\": \"2026-10-16T20:26:24Z\", \"tool\": \"leanfinder\", \"query\": \"An accessible quasicategory and a small family of objects admit a common regular cardinal for accessibility and mapping space compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.MorphismProperty.HasSmallObjectArgument.exists_cardinal\", \"CategoryTheory.IsLocallyPresentable.exists_cardinal\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.isCardinalFiltered_iff\", \"CategoryTheory.HasCardinalFilteredGenerators\"], \"digest\": \"286d1b75ff2ab655\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits IsAccessibleCategory.exists_cardinal and instIsPresentableOfIsAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:87-103), and isCardinalPresentable_of_le (Presentable/Basic.lean:182-185), concern ordinary Category instances and Type-valued coyoneda. They do not give accessibility or mapping-space compactness in a quasicategory. The quasicategory grep returned no hits. Loogle also returned Cardinal.SharplyLT.isCardinalAccessibleCategory, an ordinary-category assertion in its online index; the pinned local SharplyLT/Basic.lean ends at line 268 and does not yet contain that declaration. Neither is a one-line specialization to the present infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*quasicategory|accessible.*quasicategory|presentable.*QCat|compact.*QCat",
+   "results": "{\"t\": \"2026-10-16T20:27:22Z\", \"tool\": \"grep\", \"query\": \"compact.*quasicategory|accessible.*quasicategory|presentable.*QCat|compact.*QCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits IsAccessibleCategory.exists_cardinal and instIsPresentableOfIsAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:87-103), and isCardinalPresentable_of_le (Presentable/Basic.lean:182-185), concern ordinary Category instances and Type-valued coyoneda. They do not give accessibility or mapping-space compactness in a quasicategory. The quasicategory grep returned no hits. Loogle also returned Cardinal.SharplyLT.isCardinalAccessibleCategory, an ordinary-category assertion in its online index; the pinned local SharplyLT/Basic.lean ends at line 268 and does not yet contain that declaration. Neither is a one-line specialization to the present infinity-categorical statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAccessibleCategory\", \"IsPresentable\"",
+   "results": "{\"t\": \"2026-10-16T20:27:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAccessibleCategory\\\", \\\"IsPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.instIsPresentableOfIsAccessibleCategory\"], \"digest\": \"e2e03e8d45ff05a1\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits IsAccessibleCategory.exists_cardinal and instIsPresentableOfIsAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:87-103), and isCardinalPresentable_of_le (Presentable/Basic.lean:182-185), concern ordinary Category instances and Type-valued coyoneda. They do not give accessibility or mapping-space compactness in a quasicategory. The quasicategory grep returned no hits. Loogle also returned Cardinal.SharplyLT.isCardinalAccessibleCategory, an ordinary-category assertion in its online index; the pinned local SharplyLT/Basic.lean ends at line 268 and does not yet contain that declaration. Neither is a one-line specialization to the present infinity-categorical statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common regular compactness and accessibility rank for a small set of objects in an accessible infinity category",
+   "results": "{\"t\": \"2026-10-16T20:27:22Z\", \"tool\": \"leansearch\", \"query\": \"Common regular compactness and accessibility rank for a small set of objects in an accessible infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_coyoneda_obj\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.MorphismProperty.smallObjectκ\"], \"digest\": \"6bf411c031575f26\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits IsAccessibleCategory.exists_cardinal and instIsPresentableOfIsAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:87-103), and isCardinalPresentable_of_le (Presentable/Basic.lean:182-185), concern ordinary Category instances and Type-valued coyoneda. They do not give accessibility or mapping-space compactness in a quasicategory. The quasicategory grep returned no hits. Loogle also returned Cardinal.SharplyLT.isCardinalAccessibleCategory, an ordinary-category assertion in its online index; the pinned local SharplyLT/Basic.lean ends at line 268 and does not yet contain that declaration. Neither is a one-line specialization to the present infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every prescribed set of vertices of an accessible quasicategory becomes compact at one sufficiently large regular rank, at which the category is accessible",
+   "results": "{\"t\": \"2026-10-16T20:28:31Z\", \"tool\": \"leanfinder\", \"query\": \"Every prescribed set of vertices of an accessible quasicategory becomes compact at one sufficiently large regular rank, at which the category is accessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\"], \"digest\": \"c39ec3e8b840ae24\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the hits IsAccessibleCategory.exists_cardinal and instIsPresentableOfIsAccessibleCategory (Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:87-103), and isCardinalPresentable_of_le (Presentable/Basic.lean:182-185), concern ordinary Category instances and Type-valued coyoneda. They do not give accessibility or mapping-space compactness in a quasicategory. The quasicategory grep returned no hits. Loogle also returned Cardinal.SharplyLT.isCardinalAccessibleCategory, an ordinary-category assertion in its online index; the pinned local SharplyLT/Basic.lean ends at line 268 and does not yet contain that declaration. Neither is a one-line specialization to the present infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a set of objects in a category with higher mapping spaces, there is a single regular cardinal for which all their represented space valued functors preserve filtered colimits",
+   "results": "{\"t\": \"2026-10-16T20:38:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a set of objects in a category with higher mapping spaces, there is a single regular cardinal for which all their represented space valued functors preserve filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\"], \"digest\": \"a385ba275a7ced4a\"}",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: no match for quasicategories. The returned declarations assume an ordinary Category instance and use set-valued Hom. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:36-51 and 84-101. Loogle returns the ordinary Cardinal.SharplyLT.isCardinalAccessibleCategory; the pinned SharplyLT/Basic.lean ends at line 267 without that declaration. Neither an ordinary accessibility assertion nor compactness of a Type-valued coyoneda is a one-line specialization to coherent mapping-space compactness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-reflector-accessibility",
@@ -105,5 +228,20 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-common-compactness-rank",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies. Split the common-rank argument into chosen compact-generator presentations, a uniform bound on their nondegenerate simplices, an explicit successor-power sharp cardinal, accessibility enlargement, direct compactness monotonicity, and compact-small-colimit closure. Reused the existing size-bound Mathlib leaf and compact-colimit lemma. Added one statement-only node for HTT Proposition 5.4.2.9; no Lean attachment or new Mathlib leaf.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: this split realizes the uniform cardinal choice in the foundational reflector-accessibility argument through the inherited ancestry. It does not replace a geometric step of the biduality unit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-3eb07d8ba",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-3eb07d8ba (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node, the cited nodes, the parent's use of the item, the unit and chapter records, and the main-20261015 ancestor proof. HTT is not archived in literature/, so the check is against HTT Def. A.2.6.3, Prop. 5.4.2.9, Prop. 5.4.2.2, Def. 5.3.4.5 and Cor. 5.3.4.15 as I know them; the item is marked by:agent with a WANTED line. The item statement is unchanged and true, and it is exactly what the parent lem-coef-infinity-reflector-accessibility uses for the endpoints of S_0. New node lem-coef-infinity-sharp-accessibility-enlargement is HTT 5.4.2.9 with the sharpness inequality written out and λ<κ assumed explicitly. It is true; small cases: λ=ℵ0, κ=ℵ1; the empty quasicategory; N(Set). It is statement-only, self-contained and correctly sourced. It is not a duplicate: presentable-cardinal-enlargement assumes presentability and its proof needs all small colimits; sharp-filtered-poset-subsets is poset combinatorics only; compact-approximation chooses its ranks existentially. It is strictly smaller than the item. All six steps check against the statements they cite: step 1 unpacks the definition; step 2 applies the regular-bound leaf to J plus one extra point carrying λ; step 4 has every enlargement hypothesis supplied; step 5 holds because κ-filtered implies λ-filtered; step 6 supplies every hypothesis of compact-small-colimits from steps 1, 3, 4 and 5. No cycle (closures of all cited nodes computed) and no off-unit statement, so no tool_uses. FIX (C1/C5): step 3 used successor-cardinal regularity, θ·θ=θ and (2^θ)^θ=2^θ while marked elementary. These are ZFC theorems with existing same-unit Mathlib leaves, lem-coef-infinite-cardinal-successor-regular and lem-coef-infinite-cardinal-square-power, which the sibling presentable-enlargement node cites for this same construction. Step 3 now cites both and is marked elementary:false, proof_deps is updated, and the mathematics is unchanged. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-infinity-common-compactness-rank.json.; 1 file(s) fixed by the reviewer"
+ }
 }
