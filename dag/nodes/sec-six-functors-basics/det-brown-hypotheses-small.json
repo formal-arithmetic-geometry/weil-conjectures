@@ -3,41 +3,321 @@
  "blueprint": {
   "is": "det-brown-hypotheses-small",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\Dctf(X,\\Lambda)$ is thick and essentially small",
- "statement": "Let $\\Lambda$ be admissible. $\\Dctf(X,\\Lambda)$ is a thick triangulated subcategory of $\\D(X_{\\mathrm{proét}},\\Lambda)$,\nand it is essentially small.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning quasi-compact and locally Noetherian, and use the fixed-universe small-site convention [def-weil-size-convention]. Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. Let $\\Lambda$ be an admissible commutative condensed coefficient ring: a finite discrete commutative ring $A$ killed by a power of $\\ell$, or $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Qlb$, with the coefficient objects of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed]. Let $\\Lambda_X=p_X^*\\Lambda$ and write $D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$ for the ordinary unbounded derived category of its module objects. Write $\\Dctf(X,\\Lambda)$ for the full subcategory of bounded complexes with constructible cohomology and finite Tor amplitude [det-def-sfb-constructible-tor-amplitude]. Then $\\Dctf(X,\\Lambda)$ is a thick triangulated subcategory of $D(X_{\\mathrm{proét}},\\Lambda)$ [pur9-def-thick], and it is essentially small, meaning that its objects have a set of representatives up to isomorphism in that fixed universe.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
   "place": "node det-brown-hypotheses-small, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-constructible-tor-amplitude",
+  "pur9-def-thick",
+  "def-weil-l-adic-coefficient-extension"
+ ],
  "proof": [
   {
-   "text": "*Thick.* Bounded constructible complexes are closed under shifts, cones (long exact cohomology sequence\nand closure of constructible sheaves under kernels, cokernels and extensions, on a common refinement of\nstratifications) and direct summands (cohomology sheaves of a summand are summands, hence images of\nidempotents of constructible sheaves). Finite Tor amplitude is preserved by shifts, cones (long exact Tor\nsequence, with the union of the intervals) and summands.",
-   "uses": [],
-   "elementary": null
+   "text": "Work in the fixed universe and small-site skeleton convention. Put $\\mathcal M=\\Mod_{\\Lambda_X}$ and $\\mathcal T=D(\\mathcal M)$. The sheaf-tensor structure theorem supplies abelian sheafification and its strong symmetric monoidal structure on this small site, so the hypotheses of the internal/sectionwise equivalence hold. That equivalence identifies $\\mathcal M$ with sheaves of modules over the corresponding ring sheaf, preserving underlying abelian sheaves and restrictions. The small ringed-site theorem makes this category Grothendieck abelian. For two module sheaves, their morphisms are a subset of the product, over the small site, of the sets of sectionwise module homomorphisms, hence form a small set. The Grothendieck category therefore has K-injective resolutions, and the locally-small-derived-category theorem gives small ambient Hom sets, in the same universe as the site and coefficient modules. In particular all Hom sets used in the counting argument below are small; this does not assume that the collection of all objects of $\\mathcal M$ is small.",
+   "uses": [
+    "def-weil-size-convention",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-pc-derived-category-locally-small"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: ambient Hom sets; Stacks 09PA, remark-existence-derived"
+   }
   },
   {
-   "text": "*Essentially small.* The admissible constructible hearts are essentially small: a constructible sheaf is\ndescribed by a finite stratification of the Noetherian scheme $X$, local models given by finite\npresentations of $\\Lambda$-modules, sheaves on a fixed small site, and gluing morphisms, which form a set\n([sk-def-sfb-constructible]). A bounded complex with constructible cohomology in $[a,b]$ is obtained from its\ncohomology sheaves by the finitely many truncation triangles; at each step the extension is classified by\nan element of an ambient Hom set $\\Hom(H^n(K)[-n],\\tau_{<n}K[1])$, which is a set. By induction on $b-a$,\nthe isomorphism classes of objects of $\\Dbc(X,\\Lambda)$ form a set, and $\\Dctf(X,\\Lambda)$ is a full subcategory of\nit. Truncations here are those of $\\D(X_{\\mathrm{proét}},\\Lambda)$.",
+   "text": "First treat a finite discrete admissible ring $A$. The finite-discrete condensed/constant-ring isomorphism and its scheme pullback identify the pulled-back coefficient ring with the sheafified constant ring. The internal-module equivalence in abelian groups supplies the scalar encoding $G$; use the common encoding $E_T$ on each scheme $T$. The restriction comparison identifies $j^*(E_X^{-1}M)$ with the encoded restriction of $M$ for every stratum immersion $j$. Thus an internal constructible module gives an intrinsically constructible ordinary $A$-module sheaf. Conversely, a local constant finite $A$-module $P$ is finitely presented (a surjection from a finite free module has finite, hence finitely generated, kernel), and its internal image is the scalar local model $A_T\\otimes_A P$: write $P$ as a cokernel of a matrix $A^m\\to A^n$; the encoding sends the constant regular module to the regular internal module and preserves finite sums and cokernels, so the encoded presentation is the same scalar matrix on $A_T^m\\to A_T^n$. Applying this on the same finite stratification proves the converse. Consequently $E_X$ identifies the two constructible hearts. As an equivalence of abelian categories it preserves kernels and cokernels by their universal properties; applying it termwise therefore gives a derived equivalence preserving cohomology and cone triangles. This coefficient identification is used only for finite discrete $A$.",
    "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "sk-def-sfb-constructible",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Thick and Essentially small paragraphs: finite discrete local models and coefficient identification"
+   }
+  },
+  {
+   "text": "For finite $A$, the equivalence between intrinsically constructible pro-étale and étale sheaves reduces smallness of the heart to the étale case. Choose a small skeleton of the étale site. A finite ring is Noetherian because every ideal is a finite set and its elements generate it. The locally-Noetherian quasi-separatedness theorem applies to $X$; together with its assumed quasi-compactness this makes $X$ qcqs. Therefore the affine-free presentation theorem applies: every constructible étale $A$-module is a cokernel of a map between two finite sums of free sheaves $A[h_U]$, with $U$ affine étale. Finite lists of objects of the chosen site form a set, and for each pair of lists the maps between the corresponding free sheaves form a set. Choose one cokernel for each such map. Their set of isomorphism classes contains every constructible étale sheaf, so the finite-coefficient constructible heart is essentially small. This counts presentations, not all arbitrary sheaves on the site.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "new-constructible-affine-free-presentation-general",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: finite presentations and sheaves on a fixed small site; Stacks 095N and 09AK"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$ or $\\Qlb$, the coefficient-heart closure theorem gives kernels, cokernels and extensions in the ambient module category, and the coefficient-heart smallness theorem supplies a set of representatives. For $\\Lambda=\\mathcal O_E$, apply the integral scalar-constant heart-closure lemma: its coefficient object is the same $p_X^*\\underline{\\mathcal O_E}$, and its local models are exactly the finitely presented scalar-module models in the definition used here. It gives ambient kernels, cokernels and extensions under the present Noetherian hypothesis, without imposing a ground field or finite-type hypothesis on $X$. Integral-heart smallness is proved in steps 5–7. The cases $\\mathbf Q_\\ell$ and $\\mathbf Z_\\ell$ are respectively $E=\\mathbf Q_\\ell$ and its valuation ring. Zero is constructible by its rank-zero local model.",
+   "uses": [
+    "det-lem-coefficient-heart-closure",
+    "det-lem-coefficient-heart-small",
+    "lem-sfb-integral-constant-model-heart-closure",
     "sk-def-sfb-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Thick and Essentially small paragraphs: rational hearts and integral scalar-constant heart closure; Bhatt–Scholze Definition 6.8.10, Proposition 6.8.11(1)"
+   }
+  },
+  {
+   "text": "Fix integral coefficients and one stratum $T$. Its pro-étale site has a small skeleton in the fixed universe. For the weakly étale objects of a covering, the localization theorem identifies their pro-étale sites with the corresponding slice sites; cartesian coefficients identify the restrictions of the coefficient sheaves. Thus the local model identifications can be read as ordinary restrictions of module sheaves on those slices. Finitely presented scalar $\\mathcal O_E$-modules have a set of representatives: take cokernels of all finite matrices over the set $\\mathcal O_E$. The finite constant local model definition says that any local-model sheaf on $T$ is given on a covering family by the corresponding sheaves $R_U\\otimes_{\\mathcal O_E}P$. Cover families can be chosen from a set by removing repeated arrows in the small site, and assignments of these scalar presentations form a set. Between two fixed model sheaves on an overlap, morphisms form a set: they are natural linear families in the product of sectionwise function sets over the small slice site. Thus overlap isomorphisms satisfying the cocycle condition form a set. These data determine a realization up to isomorphism: local identifications of two realizations agree on overlaps, so the equalizer sheaf axiom glues a unique morphism on sections; glue the inverses too. The glued maps are natural and linear because these properties hold locally and the sheaf axiom detects equality. Retain only data having a realization and choose one realization for each. This gives a set of local-model sheaves on every fixed stratum, without asserting effectivity for arbitrary descent data.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-constructible",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: integral local presentations, covers and overlap data"
+   }
+  },
+  {
+   "text": "For a finite stratification $(a_s:T_s\\to X)_s$ and a tuple of local-model sheaves $F_s$ from step 5, form the finite product $P=\\prod_s a_{s*}F_s$. The module pushforward/pullback adjunction and cartesian coefficient statement give $a_s^*\\dashv a_{s*}$, with $a_s^*$ exact and its underlying abelian-sheaf functor equal to $a_s^{-1}$ up to the stated canonical natural isomorphism. For a constructible module $F$ with chosen $\\varphi_s:a_s^*F\\simeq F_s$, define $u:F\\to P$ by $u_s=a_{s*}(\\varphi_s)\\circ\\eta_{s,F}$. Let $N=\\ker u$. Exactness identifies $a_s^*N$ with $\\ker(a_s^*u)$. The component $a_s^*u_s$ has left inverse $\\varepsilon_{s,a_s^*F}\\circ a_s^*a_{s*}(\\varphi_s^{-1})$: its composite with $a_s^*u_s$ is the identity by the adjunction triangle identity. Thus this component is monic and $a_s^*N=0$. On underlying abelian sheaves this says $a_s^{-1}U(N)=0$ for every $s$. Apply the Noetherian finite-stratum zero-detection theorem with identity covers on the strata to get $U(N)=0$, hence $N=0$. Therefore every such $F$ embeds in $P$. Only untwisted $\\mathcal O_E$ coefficients are used, so the cartesian theorem requires no invertibility hypothesis on $X$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: global sheaves determined by stratum data, made explicit by an adjunction-unit embedding; Stacks 09AH and 09AB via the cited detection theorem"
+   }
+  },
+  {
+   "text": "The finite stratifications of the fixed bounded scheme $X$ form a set: choose finite lists of locally closed subsets and bounded scheme structures and immersion maps with those images. For each stratification, step 5 supplies a set of tuples $(F_s)_s$, hence a set of sheaves $P$ in step 6. For fixed $P$, its subobjects form a set directly. Kernels of module-sheaf maps are computed sectionwise, so a monomorphism is sectionwise injective and may be identified with its image subsheaf. Such an image specifies a subset of $P(V)$ for every object $V$ of the small site, subject to restriction, module and sheaf axioms. All these choices lie in the set $\\prod_V\\mathcal P(P(V))$. Taking their union over the set of $P$ gives a set of representatives for all integral constructible sheaves by step 6. This proves integral-heart essential smallness under the original Noetherian hypothesis. For empty $X$, the empty stratification gives the zero module sheaf and the argument includes it.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-constructible-stratification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: integral global gluing counted as subobjects of a set of fixed sheaves"
+   }
+  },
+  {
+   "text": "For finite $A$, apply the inverse derived equivalence of step 2 to a triangle of internal modules. It remains distinguished and its cohomology is the ordinary encoding of the internal cohomology. The bounded-constructible pro-étale theorem puts the third vertex in the ordinary bounded-constructible subcategory whenever the other two are there. Applying the derived equivalence back, and using its identification of constructible hearts from step 2, proves the corresponding closure for internal modules; the zero object and shifts are preserved as well. Thus $\\Dbc(X,A)$ is triangulated. For the other coefficients, apply the weak-Serre cohomology theorem to the zero-containing heart in step 4: closure under kernels, cokernels and extensions is precisely its hypothesis. This gives that $\\Dbc(X,\\Lambda)$ is triangulated. Concretely, shifts reindex cohomology, and for a triangle $K\\to L\\to M\\to K[1]$ the long exact cohomology sequence gives a short exact sequence with middle term $H^n(L)$, left term $\\operatorname{coker}(H^{n-1}(M)\\to H^n(K))$ and right term $\\ker(H^n(M)\\to H^{n+1}(K))$. Thus constructibility and a finite cohomological range are preserved. In the finite case we will also need kernel closure in the heart: for $F,G$ in that heart, the cone of $F[0]\\to G[0]$ is bounded constructible, and its cohomology in degrees $-1,0$ is respectively the kernel and cokernel of $F\\to G$. This follows from the same long exact sequence.",
+   "uses": [
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sp-derived-cohomology-shift",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Thick paragraph: bounded constructibility under shifts and triangles"
+   }
+  },
+  {
+   "text": "Let $L$ be an ambient retract of $K\\in\\Dbc$: choose $i:L\\to K$ and $r:K\\to L$ with $ri=1_L$. Functoriality gives $H^n(r)H^n(i)=1$, so $H^n(L)$ is zero whenever $H^n(K)$ is zero. On $H^n(K)$ put $e=H^n(i)H^n(r)$. The split monomorphism $H^n(i)$ identifies $H^n(L)$ with $\\ker(1-e)$: $(1-e)H^n(i)=0$, and any $x$ with $(1-e)x=0$ satisfies $x=H^n(i)H^n(r)x$. The kernel closure of the appropriate heart from steps 4 and 8 makes this sheaf constructible. Hence $\\Dbc$ is closed under all ambient retracts. Together with step 8 and the definition of thick, it is a thick subcategory.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "pur9-def-thick"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Thick paragraph: direct summands of constructible cohomology"
+   }
+  },
+  {
+   "text": "The well-definedness assertions of the Tor-amplitude node give closure of finite Tor amplitude under shifts, triangles and retracts for these same internal module categories. The interval bookkeeping is as follows. A shift $K[n]$ changes $[a,b]$ to $[a-n,b-n]$. If the first and third terms of a triangle have finite amplitude, enlarge their intervals to a common interval $[a,b]$; the middle term then has amplitude in $[a,b]$. In particular, if $K\\to L\\to C\\to K[1]$ is a cone triangle with $K$ of amplitude $[a_K,b_K]$ and $L$ of amplitude $[a_L,b_L]$, rotate and use the bounds for $L$ and $K[1]$: $C$ has amplitude in $[\\min(a_L,a_K-1),\\max(b_L,b_K-1)]$. A retract has the same amplitude bound as the object of which it is a retract. Therefore $\\Dctf=\\Dbc\\cap\\{\\text{finite Tor amplitude}\\}$ is an intersection of thick subcategories, and is thick: each closure operation preserves both defining predicates. In particular this argument does not assert that standard truncation preserves finite Tor amplitude.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
+    "pur9-def-thick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Thick paragraph: finite Tor amplitude; corrected cone interval"
+   }
+  },
+  {
+   "text": "Choose a set $S$ of representatives for the constructible heart, using steps 3, 4 and 7. For a complex $K$ with constructible cohomology supported in $[a,b]$, put $T_q=\\tau_{\\leq q}K$. The explicit truncation formula shows that $H^r(T_q)=H^r(K)$ for $r\\leq q$ and zero for $r>q$: below $q$ the differential is unchanged and at $q$ the quotient is $\\ker(d^q)/\\operatorname{im}(d^{q-1})$. Thus $T_{a-1}\\simeq0$ and $T_b\\simeq K$ by quasi-isomorphisms, and the truncation-step triangle is $T_{q-1}\\to T_q\\to H^q(K)[-q]\\xrightarrow{\\delta_q}T_{q-1}[1]$. These are truncations in the ambient $D(\\mathcal M)$; no Tor condition is imposed on them.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: ambient truncation triangles"
+   }
+  },
+  {
+   "text": "Fix integers $a\\leq b$ and construct a set of representatives for bounded constructible objects with cohomology in $[a,q]$, by induction on $q=a-1,\\ldots,b$. Start at $q=a-1$ with the single zero object. Given a set $R_{q-1}$ covering all isomorphism classes at the previous stage, consider every pair $B\\in R_{q-1}$, $C\\in S$ and every morphism $f:C[-q-1]\\to B$. These morphisms range over a set by step 1. Choose one cone for each $f$ and retain those cones with constructible cohomology in $[a,q]$; this is still a set. Every $K$ in this interval occurs up to isomorphism: step 11 and inverse rotation express it as a cone of $-\\delta_q[-1]:H^q(K)[-q-1]\\to T_{q-1}$. Choose isomorphisms $\\beta:T_{q-1}\\xrightarrow{\\sim}B$ and $\\gamma:H^q(K)\\xrightarrow{\\sim}C$. The counted arrow is explicitly $f=\\beta\\circ(-\\delta_q[-1])\\circ\\gamma[-q-1]^{-1}$. Replacing the first two vertices by these isomorphic representatives gives a distinguished triangle starting with $f$ and having third vertex isomorphic to $K$. Cones of a fixed arrow are isomorphic: TR3 extends the identities on the first two vertices to a triangle morphism, and the two-isomorphisms theorem makes its third component invertible. Thus the chosen cone covers $K$. This proves the induction, including $q=a$, when the previous term is zero; it does not require a functorial cone.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: induction on the cohomological interval; Stacks 014B and 014A"
+   }
+  },
+  {
+   "text": "Take the union of the representative sets in step 12 over the set of pairs $(a,b)\\in\\mathbf Z^2$ with $a\\leq b$. It covers every bounded constructible object, so $\\Dbc$ is essentially small. Finite Tor amplitude is invariant under isomorphism. Retain exactly those representatives with finite Tor amplitude; any $K\\in\\Dctf$ is isomorphic to a retained representative. The full subcategory $\\Dctf$ is therefore essentially small. If $X$ is empty or the coefficient ring is zero, all these categories have only the zero object up to isomorphism and the same construction applies.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
+    "place": "Essentially small paragraph: all bounded ranges and the full finite-Tor subcategory"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-constructible"
+  "def-weil-size-convention",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-derived-category-locally-small",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "sk-def-sfb-constructible",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "new-constructible-affine-free-presentation-general",
+  "det-lem-coefficient-heart-closure",
+  "det-lem-coefficient-heart-small",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "def-constructible-stratification",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-derived-cohomology-shift",
+  "det-def-sfb-constructible-tor-amplitude",
+  "pur9-def-thick",
+  "lem-weil-pbc-truncation-triangle",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.md",
-  "place": "## Proof"
+  "place": "Both blueprint proof paragraphs; integral closure uses Bhatt–Scholze Definition 6.8.10 and Proposition 6.8.11(1); integral smallness expanded by local descent data, adjunction-unit embedding and sectionwise subobjects; ambient Postnikov induction unchanged"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes with finite Tor amplitude on a pro-etale site form an essentially small thick triangulated subcategory",
+   "date": "2026-10-16",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, DerivedCategory.instIsTriangulated, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "verdict": "no match: generic derived-category, site and size infrastructure does not state this constructible finite-Tor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(small|thick)|essentiallySmall.*(derived|constructible)",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "no match: generic derived-category, site and size infrastructure does not state this constructible finite-Tor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of bounded constructible sheaves with finite tor amplitude is thick and essentially small",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.hasLimitsEssentiallySmallSite, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Noetherian.mk, instCategoryCondensed, SheafOfModules.Finite.hasFiniteLimits, CategoryTheory.Sheaf.instHasFiniteColimits, LightCondensed, SheafOfModules.hasLimitsOfSize",
+   "verdict": "no match: generic derived-category, site and size infrastructure does not state this constructible finite-Tor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.EssentiallySmall",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "no match: generic derived-category, site and size infrastructure does not state this constructible finite-Tor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essential smallness of a derived category with bounded constructible cohomology and closure under retracts",
+   "date": "2026-10-16",
+   "results": "8 hits: DerivedCategory.instEssSurjCochainComplexIntQ, HasDerivedCategory.standard, DerivedCategory.IsLE, DerivedCategory.IsGE, HasDerivedCategory, CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt, DerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "verdict": "no match: generic derived-category, site and size infrastructure does not state this constructible finite-Tor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated subcategory of objects with bounded cohomology in an essentially small abelian heart is essentially small",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor",
+   "verdict": "no match: these general size and derived-category declarations do not state the constructible finite-Tor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall.*(Bounded|bounded|Derived)|essentiallySmall.*(Bounded|bounded|Derived)",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "no match: these general size and derived-category declarations do not state the constructible finite-Tor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\" \"DerivedCategory\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: Function expected at\n  \"EssentiallySmall\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"DerivedCategory\"",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall",
+   "date": "2026-10-16",
+   "results": "12 hits: CategoryTheory.EssentiallySmall, CategoryTheory.essentiallySmallSelf, CategoryTheory.SmallModel, CategoryTheory.Discrete.essentiallySmallOfSmall, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.small_skeleton_of_essentiallySmall, CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.smallCategorySmallModel",
+   "verdict": "no match: these general size and derived-category declarations do not state the constructible finite-Tor theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -50,5 +330,114 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-brown-hypotheses"
+ "unit": "sk-lem-brown-hypotheses",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-brown-hypotheses-small",
+  "worker": "stage1",
+  "summary": "Repaired the landing refusal against the current DAG. The changed integral-heart lemma now assumes separated finite type over a positive-characteristic field; those hypotheses are not present here, so its citation was removed rather than applied outside its domain. One smaller statement-only lemma records Bhatt–Scholze integral scalar-constant constructible heart closure on any Noetherian scheme. Steps 5–7 prove integral heart smallness using explicit local data, a stratum-adjunction embedding, and a sectionwise subobject count. The retained finite/rational proofs, thick intersection and ambient Postnikov induction give thirteen steps. No hypothesis or conclusion of the item changed in this repair. No complete-category identification or scalar-nonconstant presentation comparison is assumed.",
+  "blueprint": "Thick paragraph: steps 2, 4, 8–10. Essentially small paragraph: steps 1, 3–7, 11–13. The integral heart argument expands the source finite presentations/local sheaves/gluing sentence. Ambient truncations occur in step 11.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Small ringed-site module categories are Grothendieck; needed for ambient Hom sets, without changing the constructible/Postnikov route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic categorical tool for the blueprint closure and Postnikov route; no unit step is replaced."
+   },
+   {
+    "node": "lem-pc-derived-category-locally-small",
+    "why": "Converts K-injective resolutions into small ambient Hom sets for counting Postnikov attachments."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Identifies only finite discrete condensed coefficients with constant ring sheaves for the finite-heart argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Pulls the finite-discrete constant-ring identification to X."
+   },
+   {
+    "node": "lem-weil-pbc-internal-module-ab-equivalence",
+    "why": "Supplies the scalar internal-module encoding used in the common finite coefficient equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "why": "The finite coefficient encoding must commute with restriction to strata."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "why": "Transports internal finite local models to ordinary finite locally constant sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Identifies finite constructible pro-etale sheaves with etale ones for counting presentations."
+   },
+   {
+    "node": "new-constructible-affine-free-presentation-general",
+    "why": "The existing module presentation theorem makes finite-heart smallness a set of matrices between finite sums of a small family."
+   },
+   {
+    "node": "det-lem-coefficient-heart-closure",
+    "why": "Existing rational-heart closure under kernels, cokernels and extensions, exactly the blueprint input."
+   },
+   {
+    "node": "det-lem-coefficient-heart-small",
+    "why": "Existing rational-heart set of isomorphism classes, exactly the blueprint input."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Generic finite-ring bounded-constructible closure theorem, used only for finite coefficients."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "General homological criterion converting the stated heart closure properties into triangulated bounded-constructible closure."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic ambient Postnikov step triangle; no claim that finite-Tor objects are stable under truncation."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exact inverse image and its underlying sheaf identification for the stratum-unit embedding; untwisted coefficients only."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "The unit gluing-data count needs joint detection of zero by restriction to the finite strata, to prove the explicit embedding is monic."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies pro-etale-cover restrictions with small slice-site sheaves when counting local-model descent data; the unit needs exactly these cover/gluing data."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-derived-category-locally-small",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "new-constructible-affine-free-presentation-general",
+  "det-lem-coefficient-heart-closure",
+  "det-lem-coefficient-heart-small",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-truncation-triangle",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-91e06d635",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-91e06d635 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps, the new node and every cited statement in full. The repair is correct. The integral-heart node det-lem-int-integral-heart-triangulated is no longer cited: it now assumes X separated of finite type over a field of characteristic p≠ℓ, which a Noetherian X need not satisfy (Spec Z). The item's statement is unchanged from the earlier reviewed split: X Noetherian, the six admissible Λ exactly as in sk-def-localizing-closure, ambient D(Mod_{Λ_X}). It is no weaker than the blueprint, whose proof itself says 'the Noetherian scheme X'. The shifted cone interval [min(a_L,a_K-1),max(b_L,b_K-1)] is correct; the zero map A[0]→A[0] shows the blueprint's unshifted union is wrong. Source check: the new node lem-sfb-integral-constant-model-heart-closure matches Bhatt–Scholze Def 6.8.10 and Prop 6.8.11(1) (printed pp. 60–61; scalar-constant finitely presented O_E models, topologically Noetherian X) hypothesis by hypothesis. It holds on the small cases I tried (empty X, P=0, a geometric point, multiplication by ϖ, torsion extensions). It is not a duplicate: the int-heart nodes need finite type over a field, and lem-weil-pbc-integral-constructible-serre/-kernels/condensed-constructible-serre concern the larger class with non-constant matrix entries. It does not restate the item: it is heart-level closure, the input the blueprint's Thick paragraph names. Steps checked: in step 6 the left inverse ε∘a*a_*(φ⁻¹) composed with a*(u_s) is the identity by the triangle identity, and stratum detection with identity covers then gives ker u=0. Step 3 applies the presentation theorem in the right direction (étale-constructible implies def-constructible-constructible). In step 12, inverse rotation plus TR3 and the two-of-three isomorphism lemma covers every K. Steps 5, 7, 9 and 13 are elementary relative to their citations. Dependencies: no cycle; no missing or merged ids; proof_deps equals the union of uses. Route: the only off-route statement is lem-sbc-cohomology-in-weak-serre-subcategory (unit sk-rem-rest), a generic tool, declared and accepted. No SGA source. No fixes made."
+ }
 }

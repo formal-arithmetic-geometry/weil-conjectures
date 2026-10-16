@@ -29,9 +29,154 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep $\\mathcal U$ fixed and let $\\mathcal K$ be its collection of small simplicial shapes. Choose a larger universe $\\mathcal V$ in which $C$, $R$ and $\\mathcal K$ are small, and form $A=\\mathcal P_{\\mathcal V}(C)$ with Yoneda functor $y$. This presheaf category is presentable by [lem-coef-infinity-presheaf-presentability] (with $\\mathcal V$ in place of its smaller universe) and admits all $\\mathcal V$-small colimits. For each specified cocone form $s_\\alpha:\\operatorname{colim}yF_\\alpha\\to yx_\\alpha$. The collection $S=\\{s_\\alpha\\}$ is $\\mathcal V$-small. By [lem-coef-presentable-infinity-adjoints] its local objects form a presentable full subcategory $Q\\subset A$ with a reflector $L:A\\to Q$; colimits in $Q$ are $L$ of colimits in $A$. Use a replete model throughout.",
+   "uses": [
+    "lem-coef-infinity-presheaf-presentability",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, proof, first paragraph, p. 413; Proposition 5.5.4.15, p. 482"
+   }
+  },
+  {
+   "text": "Define $P\\subset Q$ to be the intersection of all replete full subcategories containing every $Ly(c)$ and closed under $\\mathcal K$-indexed colimits computed in $Q$. This is an actual full-subcategory construction. It has all $\\mathcal U$-small colimits, computed in $Q$, because every subcategory in the intersection contains the colimit of any such diagram in the intersection. Put $j_R=Ly:C\\to P$. By [lem-coef-infinity-small-localization-saturation], $Ls_\\alpha$ is an equivalence. Applying $L$ to the colimiting cocone defining the source of $s_\\alpha$ and then composing with $Ls_\\alpha$ shows that $j_Rr_\\alpha$ is colimiting. All its objects lie in $P$, so fullness gives the same universal mapping spaces in $P$. This also handles $K_\\alpha=\\varnothing$. Let $E=L^{-1}P\\subset A$. It contains $y(C)$ and is closed under $\\mathcal U$-small colimits. The adjunction restricts to $L_E:E\\rightleftarrows P:i_E$, with $L_Ei_E\\simeq1$.",
+   "uses": [
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and Remark 5.3.6.3, construction, pp. 412-414"
+   }
+  },
+  {
+   "text": "For the target $Z$, choose yet another universe $\\mathcal W$ with $\\mathcal V\\in\\mathcal W$ containing its simplices and mapping spaces, so that every $\\mathcal V$-small diagram is $\\mathcal W$-small. The opposite Yoneda embedding $e:Z\\to\\widehat Z=\\operatorname{Fun}(Z,\\mathcal S_{\\mathcal W})^{\\mathrm{op}}$ is fully faithful, preserves all existing $\\mathcal V$-small colimits and reflects them: apply the Yoneda and mapping-space limit criteria of [lem-coef-infinity-yoneda-presheaf-limits] to $Z^{\\mathrm{op}}$. The target $\\widehat Z$ admits all $\\mathcal V$-small colimits, as these are pointwise limits of $\\mathcal W$-spaces before taking the opposite. Replace the image of $e$ by its replete full essential image, using [lem-coef-infinity-full-essential-image]. It is closed under $\\mathcal U$-small colimits in $\\widehat Z$, since $Z$ has those colimits and $e$ preserves them. No $\\mathcal V$-small cocompleteness of $Z$ is assumed.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.3.5.7, p. 405, and target enlargement in Proposition 5.3.6.2, p. 413"
+   }
+  },
+  {
+   "text": "Given $h:C\\to Z$ sending $R$ to colimits, use [lem-coef-infinity-presheaf-free-cocompletion] in universe $\\mathcal V$ to extend $eh$ to a $\\mathcal V$-colimit-preserving $H:A\\to\\widehat Z$. For each $s_\\alpha$ its image is exactly the comparison $\\operatorname{colim}ehF_\\alpha\\to ehx_\\alpha$, hence an equivalence by the hypothesis on $h$ and step 3. The class of arrows inverted by $H$ contains $S$, all equivalences, and is closed under two-out-of-three, retracts, pushouts and $\\mathcal V$-small arrow colimits: $H$ preserves the latter colimits, and pointwise equivalences are preserved by the colimit functor. By [lem-coef-infinity-small-localization-saturation] it therefore contains every localization unit $\\eta_a:a\\to iLa$. Consequently $H\\eta$ is a natural equivalence.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, proof, p. 414; Proposition 5.5.4.15(4), p. 482"
+   }
+  },
+  {
+   "text": "Set $\\widetilde H=Hi:Q\\to\\widehat Z$, so $H\\simeq\\widetilde HL$ via $H\\eta$. It preserves $\\mathcal V$-small colimits. Indeed a diagram $q$ in $Q$ has colimit $L\\operatorname{colim}iq$; applying $\\widetilde H$ gives $H(iL\\operatorname{colim}iq)\\simeq H(\\operatorname{colim}iq)\\simeq\\operatorname{colim}Hiq$. This is the comparison on the specified cocone, by naturality of $H\\eta$. Since $\\widetilde HL y\\simeq eh$, the inverse image under $\\widetilde H|_P$ of the replete image $eZ$ contains $j_R(C)$ and is closed under $\\mathcal U$-small colimits by step 3. The defining minimality of $P$ makes it all of $P$. Thus $\\widetilde H|_P$ factors through $e$, giving a $\\mathcal U$-colimit-preserving $\\bar h:P\\to Z$ and $\\bar h j_R\\simeq h$. This proves essential surjectivity.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, proof, image-closure argument, pp. 413-414"
+   }
+  },
+  {
+   "text": "We check full faithfulness, including transformation spaces. For any $\\mathcal U$-colimit-preserving $f:P\\to Z$, put $G=efL_E:E\\to\\widehat Z$ and extend $efj_R$ to $H_f:A\\to\\widehat Z$ by [lem-coef-infinity-presheaf-free-cocompletion]. By [lem-coef-infinity-intermediate-presheaf-kan] the identity on $efj_R$ extends to $\\alpha:H_f|_E\\to G$, naturally in $f$. Step 4 applies to $H_f$ since $fj_R$ sends $R$ to colimits. Thus $H_f|_E$, $G$, and $\\alpha$ descend across $L_E$ to $\\beta:\\widetilde H_f|_P\\to ef$. Here descent is explicit: for any functor $B:E\\to\\widehat Z$ inverting every $\\eta_a$, the functor $Bi_E$ has $Bi_EL_E\\simeq B$ through $B\\eta$; on transformations this same natural equivalence gives the inverse to precomposition with $L_E$. The restriction $\\beta j_R$ is an equivalence. Its equivalence locus is closed under $\\mathcal U$-small colimits, because both functors preserve them, and contains $j_R(C)$. Minimality of $P$ and the pointwise equivalence criterion give that $\\beta$ and $\\alpha$ are equivalences.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-intermediate-presheaf-kan",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, proof, comparison transformation and its equivalence locus, p. 414"
+   }
+  },
+  {
+   "text": "For $f,g:P\\to Z$ preserving $\\mathcal U$-small colimits, the preceding descent identifies $\\operatorname{Map}(ef,eg)$ with $\\operatorname{Map}(efL_E,egL_E)$. Replace the first functor by $H_f|_E$ using step 6 and apply [lem-coef-infinity-intermediate-presheaf-kan]; the result is $\\operatorname{Map}(efj_R,egj_R)$. The inclusion of $Z$ into $\\widehat Z$ is fully faithful, including on coherent diagram mapping spaces, because it is the equivalence to a full essential image from step 3. Hence this is precisely $\\operatorname{Map}(fj_R,gj_R)$ in $\\operatorname{Fun}(C,Z)$. All maps here are restriction, identified using the identity on generators, so this proves the full faithfulness of the claimed restriction functor. Together with step 5 and [lem-coef-infinity-full-essential-image] it is the required equivalence of full infinity categories.",
+   "uses": [
+    "lem-coef-infinity-intermediate-presheaf-kan",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2(2), pp. 413-414"
+   }
+  },
+  {
+   "text": "For later iteration record that pointwise $\\mathcal U$-small colimits of colimit-preserving functors $P\\to Z$ again preserve $\\mathcal U$-small colimits. The pointwise rule is [lem-coef-infinity-yoneda-presheaf-limits], applied in an ambient universe containing the indexing simplicial set $P$; only the colimits actually under consideration are needed. The interchange comparison $\\operatorname{colim}_a\\operatorname{colim}_bT(a,b)\\simeq\\operatorname{colim}_b\\operatorname{colim}_aT(a,b)$ follows directly by mapping into $z$: both sides classify the same families of maps $T(a,b)\\to z$ coherent in both indices, or equivalently the same iterated limit of mapping spaces with the two orders interchanged. This argument retains all simplices of those spaces. Thus the full category $\\operatorname{Fun}_{\\mathrm{colim}}(P,Z)$ admits $\\mathcal U$-small colimits computed pointwise. The identical interchange argument shows that $\\operatorname{Fun}_R(C,Z)$ is closed under pointwise small colimits.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.11, proof by functor categories, pp. 416-417; pointwise colimit calculation"
+   }
+  },
+  {
+   "text": "Prove the finite-variable statement by induction on the number $n$ of variables. At $n=0$ the product is the terminal category, its functors to $Z$ are just $Z$, and the restriction is the identity. At $n=1$ use steps 1-7. Suppose it is known for $n-1$. The unary equivalence for $(C_n,R_n)$ identifies $D^{\\prime\\prime}=\\operatorname{Fun}_{\\mathrm{colim}}(P_n,Z)$ with $D^\\prime=\\operatorname{Fun}_{R_n}(C_n,Z)$, both cocomplete by step 8, and preserves their pointwise small colimits. A coherent functor of $n$ variables is the same as a functor of the first $n-1$ variables into the coherent functor category in the last variable: degreewise this is the exponential identity $Z^{A\\times B}=(Z^B)^A$. Preservation of a colimit in one of the first variables is pointwise in the last variable, by [lem-coef-infinity-yoneda-presheaf-limits]. Apply the inductive equivalence with target $D^{\\prime\\prime}$ and then the displayed equivalence $D^{\\prime\\prime}\\simeq D^\\prime$. This gives exactly the two full categories in the $n$-variable assertion. All mapping spaces and higher transformations are retained because each operation is a functor-category restriction or an equivalence.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.11, proof, pp. 416-417"
+   }
+  },
+  {
+   "text": "The restriction functors commute with postcomposition by any small-colimit-preserving functor of targets, and with restriction along any of the individual $j_{R_i}$: both composites are precomposition with the same product functor. These equalities of coherent functors provide the required compatibility, rather than independent choices of extensions. Full faithfulness in steps 7 and 9 identifies mapping spaces of transformations. Taking the cores gives the equivalence spaces, and applying the same mapping-space equivalence to parameter simplices gives all their compatibility homotopies. Inverses to the equivalences inherit these compatibilities with contractible ambiguity. Naturality in $Z$ is understood on cocomplete targets and colimit-preserving functors, since general target functors need not preserve the displayed full subcategories. No larger colimits have been added to the meaning of $\\operatorname{Fun}_{\\mathrm{colim}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.11, natural restriction maps; Remark 5.3.6.3"
+   }
+  },
+  {
+   "text": "Finally suppose $C$ and $R$ are $\\mathcal U$-small. Repeat step 1 in $\\mathcal U$ itself. By [lem-coef-infinity-presheaf-presentability] $A=\\mathcal P_{\\mathcal U}(C)$ is presentable, and [lem-coef-presentable-infinity-adjoints] says that its $S$-local subcategory $Q$ is presentable with reflector $L$. Every object of $A$ is a $\\mathcal U$-small colimit of representables by [lem-coef-space-yoneda-density]. Applying $L$, every object of $Q$ is therefore a $\\mathcal U$-small colimit of $Ly(C)$, since $Li\\simeq1_Q$. Thus the closure $P$ of step 2 is all of $Q$. The construction is exactly the full subcategory and $j_R=Ly$ in the final paragraph of the statement, proving its presentability relative to the original universe. Empty $C$ gives the terminal category of presheaves and its initial generator-free cocompletion; a relation forcing an initial object is handled by the same map $s_\\alpha$ with initial source.",
+   "uses": [
+    "lem-coef-infinity-presheaf-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-space-yoneda-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.5.3.7 and Proposition 5.5.4.15, pp. 468 and 482; small-data case of the construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-presheaf-presentability",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-infinity-small-localization-saturation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-intermediate-presheaf-kan",
+  "lem-coef-space-yoneda-density"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded argument following the online proof of Proposition 5.3.6.2, Proposition 5.3.6.11, and the small localization construction. HTT is not archived in literature/: WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -110,10 +255,46 @@
    "results": "{\"t\": \"2026-10-16T19:43:43Z\", \"tool\": \"grep\", \"query\": \"free.*[Cc]ompletion|colimit.*[Rr]elation|[Rr]elation.*colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Types/Colimits.lean\", \"Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean\", \"Mathlib/CategoryTheory/Limits/Types/ColimitType.lean\", \"Mathlib/CategoryTheory/Limits/Types/Filtered.lean\"], \"digest\": \"a4e96d8c6fc6f8df\"}",
    "date": "2026-10-16",
    "verdict": "Second reader: no match. Read the ordinary Category/Type-valued presentability, quotient-colimit and pointwise monoidal hypotheses; they do not specialize to the coherent infinity-category universal property of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cocompletion|prescribed.*cocone|free.*cocompletion",
+   "results": "{\"t\": \"2026-10-16T20:17:58Z\", \"tool\": \"grep\", \"query\": \"relative.*cocompletion|prescribed.*cocone|free.*cocompletion\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"45cb4427fd683402\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned Mathlib/CategoryTheory/Limits/Presheaf.lean:17-40,60-78,153-235,325-370 and AlgebraicTopology/Quasicategory/Basic.lean:35-90. The presheaf/Ind/Kan results are for ordinary Category objects and Type-valued functors; the SSet results give horn fillers or ordinary colimits of simplicial sets. No coherent relative cocompletion with the asserted multivariable mapping-space equivalence was found under either semantic phrasing.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative free colimit completion of an infinity category subject to specified cocones",
+   "results": "{\"t\": \"2026-10-16T20:17:58Z\", \"tool\": \"leansearch\", \"query\": \"Relative free colimit completion of an infinity category subject to specified cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.TypeMax.colimitCoconeIsColimit\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"RingCat.Colimits.colimitCocone\", \"MonCat.Colimits.colimitCocone\", \"CategoryTheory.Limits.CompleteLattice.colimitCocone\", \"CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension\", \"CategoryTheory.Limits.colimit.cocone\"], \"digest\": \"d41c9535db462195\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned Mathlib/CategoryTheory/Limits/Presheaf.lean:17-40,60-78,153-235,325-370 and AlgebraicTopology/Quasicategory/Basic.lean:35-90. The presheaf/Ind/Kan results are for ordinary Category objects and Type-valued functors; the SSet results give horn fillers or ordinary colimits of simplicial sets. No coherent relative cocompletion with the asserted multivariable mapping-space equivalence was found under either semantic phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Presheaf\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:17:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Presheaf\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone'\", \"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\"], \"digest\": \"07ac75cac7db3ec5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned Mathlib/CategoryTheory/Limits/Presheaf.lean:17-40,60-78,153-235,325-370 and AlgebraicTopology/Quasicategory/Basic.lean:35-90. The presheaf/Ind/Kan results are for ordinary Category objects and Type-valued functors; the SSet results give horn fillers or ordinary colimits of simplicial sets. No coherent relative cocompletion with the asserted multivariable mapping-space equivalence was found under either semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free cocompletion of a quasicategory imposing specified colimit cocones with a multivariable universal property",
+   "results": "{\"t\": \"2026-10-16T20:18:07Z\", \"tool\": \"leanfinder\", \"query\": \"Free cocompletion of a quasicategory imposing specified colimit cocones with a multivariable universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.cosk\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.hasColimits\", \"SSet.QCat\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"43e7fe5926f11007\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned Mathlib/CategoryTheory/Limits/Presheaf.lean:17-40,60-78,153-235,325-370 and AlgebraicTopology/Quasicategory/Basic.lean:35-90. The presheaf/Ind/Kan results are for ordinary Category objects and Type-valued functors; the SSet results give horn fillers or ordinary colimits of simplicial sets. No coherent relative cocompletion with the asserted multivariable mapping-space equivalence was found under either semantic phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal category generated under small colimits with imposed cocone relations in infinity categories",
+   "results": "{\"t\": \"2026-10-16T20:18:37Z\", \"tool\": \"leanfinder\", \"query\": \"Universal category generated under small colimits with imposed cocone relations in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind\", \"CategoryTheory.instCategoryInd\", \"SSet.QCat\", \"CategoryTheory.Limits.ColimitPresentation.instCategoryTotal\", \"SSet.largeCategory\", \"CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit\", \"CategoryTheory.Cat.instHasColimits\", \"CategoryTheory.Limits.diagramOfCoconesInhabited\"], \"digest\": \"7687ea047e3dd404\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned Mathlib/CategoryTheory/Limits/Presheaf.lean:17-40,60-78,153-235,325-370 and AlgebraicTopology/Quasicategory/Basic.lean:35-90. The presheaf/Ind/Kan results are for ordinary Category objects and Type-valued functors; the SSet results give horn fillers or ordinary colimits of simplicial sets. No coherent relative cocompletion with the asserted multivariable mapping-space equivalence was found under either semantic phrasing."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-monoidal-tensor",
@@ -121,5 +302,29 @@
   "group": "Q43"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-colimit-completion",
+  "worker": "stage1",
+  "summary": "Kept the statement; constructed the larger-universe presheaf localization and only its closure under original-universe colimits. Added two proper supporting facts (general quasicategory presheaf presentability and the Kan mapping property on intermediate full presheaf subcategories), reusing the existing free presheaf and localization/saturation nodes. Supplied essential surjectivity, the comparison and equivalence-locus argument proving full faithfulness, finite-variable induction with pointwise colimit interchange, coherence, and the explicit small-data presentable model. Searched project Lean and the entire DAG/blueprint; no exact attachment or Mathlib specialization found.",
+  "blueprint": "Supports paragraph 2 of prop-coef-integral-exceptional-adjoint (finite-coefficient mapping-complex adjunction before derived inverse limit), through the inherited tensor-cocontinuity chain. Steps 1-7 realize the presheaf-localization/closure construction needed for that foundation, steps 8-10 the finite-variable coherent extension, and step 11 the small-data presentability claim. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent mapping-space, full-subcategory or pointwise-(co)limit tool for the presheaf localization argument; the coefficient unit has no separate theorem supplying this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-f6697fdb5",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-f6697fdb5 (reviewer sub-agent of L); spot-checked: I read the full mathematics against HTT (April 2017 PDF): Prop 5.3.6.2 with its proof on pp. 413-415, Prop 5.3.6.11 with its induction on pp. 416-417, Lemmas 5.1.5.3 and 5.1.5.5 (pp. 325-327), Prop 4.3.2.17 (pp. 284-285) and Remark 5.5.3.7 (p. 468). The item's statement is unchanged and agrees with HTT: K is all small simplicial sets, empty bases are allowed, and j_R is not claimed fully faithful. The small-data case is the S-local subcategory of presheaves. All 11 steps check against the statements of the nodes they cite. Steps 4-6 are HTT's construction: the units are inverted through the saturation node, minimality of the closure P is used, and descent across L_E plus the equivalence locus of beta reproduce HTT p. 414. Step 7 identifies the mapping spaces through the new Kan node with G=egL_E. Steps 8-9 are pointwise colimits plus the 5.3.6.11 induction. Step 11 gets P=Q from density. One gap, repaired: step 3 never required V in W, which is needed for V-small colimits to exist in Z-hat. The corrected item is in fixes/; only the text of step 3 changed. Both new nodes are true and are statement-only. lem-coef-infinity-presheaf-presentability is HTT Rem 5.5.3.7 and generalizes lem-coef-space-presheaf-presentability, which covers only ordinary D. lem-coef-infinity-intermediate-presheaf-kan follows from 5.1.5.5(1) and 4.3.2.17, because E is full and contains the representables, so the slices are the same. I tested it on D=pt with E={empty, pt} and E={pt, pt+pt}. Neither node duplicates kan-mapping-restriction, presheaf-free-cocompletion or relative-kan-existence, and neither restates a clause of the item. Small cases of the item pass: an empty-base relation gives Delta^0 and initial objects; forcing 0->1 invertible in Delta^1 gives S, with Fun_colim(S,Z)=Z=Fun_eq(Delta^1,Z). There is no cycle: the item's 319 transitive dependencies exclude it and its three citers. The parent lem-coef-cocomplete-monoidal-tensor uses the item exactly as stated. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus as the generic pointwise-equivalence criterion. No SGA is used, and proof_origin is agent with WANTED lines because HTT is not archived.; 1 file(s) fixed by the reviewer"
+ }
 }
