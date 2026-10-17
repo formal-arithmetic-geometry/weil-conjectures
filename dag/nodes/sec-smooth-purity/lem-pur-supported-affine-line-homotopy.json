@@ -2,7 +2,7 @@
  "id": "lem-pur-supported-affine-line-homotopy",
  "kind": "statement",
  "title": "Affine-line invariance of finite supported cohomology",
- "statement": "Fix the finite datum of [def-pur-conventions], with $A=A_{E,n}$ for arbitrary $n\\geq1$. Let $X$ be an arbitrary $k$-scheme (no finiteness or separatedness hypothesis), let $C\\hookrightarrow X$ be a closed subscheme [def-weil-closed-immersion], put $p:\\mathbf A^1_X\\to X$, and put $C_1=\\mathbf A^1_X\\times_X C$. With supported cohomology as in [def-pur-support-cohomology], for all integers $q,r$ the canonical projection pullback is an isomorphism\n$$p^*:H^q_C(X,A(r))\\xrightarrow{\\sim}H^q_{C_1}(\\mathbf A^1_X,A(r)).$$\nThis holds on the small etale site and on the small pro-etale site for the etale-origin finite twist, compatibly with their canonical comparison. For each section $s:X\\to\\mathbf A^1_X$ of $p$, the pullback $s^*$ with inverse-image support $C$ is the inverse of this specific map $p^*$. In particular the zero and unit sections induce the same map on these supported cohomology groups. There is no assumption that $X$ or $C$ is smooth, regular, connected, or strictly local.",
+ "statement": "Fix the finite datum of [def-pur-conventions], with $A=A_{E,n}$ for arbitrary $n\\geq1$. Let $X$ be an arbitrary $k$-scheme (no finiteness or separatedness hypothesis), let $C\\hookrightarrow X$ be a closed subscheme [def-weil-closed-immersion], put $p:\\mathbf A^1_X\\to X$ as in [def-sbc-affine-space], and put $C_1=\\mathbf A^1_X\\times_X C$. With supported cohomology as in [def-pur-support-cohomology], for all integers $q,r$ the canonical projection pullback is an isomorphism\n$$p^*:H^q_C(X,A(r))\\xrightarrow{\\sim}H^q_{C_1}(\\mathbf A^1_X,A(r)).$$\nThis holds on the small etale site and on the small pro-etale site for the etale-origin finite twist, compatibly with their canonical comparison. For each section $s:X\\to\\mathbf A^1_X$ of $p$, the pullback $s^*$ with inverse-image support $C$ is the inverse of this specific map $p^*$. In particular the zero and unit sections induce the same map on these supported cohomology groups. There is no assumption that $X$ or $C$ is smooth, regular, connected, or strictly local.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
   "place": "Shear paragraph: agent-formulated homotopy lemma replacing the claimed consequence of supported Kunneth. Underlying route is the affine-line acyclicity of sk-prop-a1-kummer, localization (Stacks Tag 09XP), and etale/pro-etale comparison; it does not invoke regular-immersion purity or frame independence. The item applies it to arbitrary etale neighborhoods of an arbitrary smooth $V\\to B$ of $k$-schemes, so no finite-type hypothesis is imposed; the unit's acyclicity of the affine line with its base-change compatibility (stalks at geometric points) and localization for $X$ and $X\\setminus C$ give the general case."
@@ -10,11 +10,54 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-pur-support-cohomology",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All cohomology groups in this proof have the fixed coefficient twist $A(r)$; its restrictions are understood. Put $U=X\\setminus C$ and $U_1=\\mathbf A^1_X\\setminus C_1=\\mathbf A^1_U$. The ordinary affine-line isomorphism of [lem-pur-affine-line-ordinary-invariance] applies to $X$ and $U$ with the restricted twist. Use [thm-pur-with-support-exactness] for $(X,C)$ and $(\\mathbf A^1_X,C_1)$. Pullback and compatibility with restriction and boundaries in [lem-pur-supported-cup-functoriality] give a commutative diagram of these localization sequences. In its five-term segment $H^{q-1}(X)\\to H^{q-1}(U)\\to H^q_C(X)\\to H^q(X)\\to H^q(U)$, all vertical arrows except the middle one are isomorphisms by the ordinary lemma. This works on each small site. The comparison clause of [lem-pur-supported-cup-functoriality] identifies the support pullbacks and connecting maps on the two sites, and the ordinary lemma identifies the ambient and complement pullbacks.",
+   "uses": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "thm-pur-with-support-exactness",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Shear paragraph: affine-line acyclicity, localization, and comparison of pullbacks along the zero and unit sections."
+   }
+  },
+  {
+   "text": "Here is the exact-sequence comparison for the diagram in Step 1, writing its two rows as $L\\to M\\xrightarrow{\\delta}S\\xrightarrow{j}T\\xrightarrow{k}V$ and primed letters, with vertical maps $f_L,f_M,f_S,f_T,f_V$. For injectivity, if $f_S(x)=0$, injectivity of $f_T$ gives $j(x)=0$, so $x=\\delta(y)$. Since $\\delta'(f_M(y))=0$, write $f_M(y)$ as the image of $l'\\in L'$. Lift $l'$ using surjectivity of $f_L$; injectivity of $f_M$ then shows $y$ comes from $L$, hence $x=0$. For surjectivity, take $x'\\in S'$. Lift $j'(x')$ to $t\\in T$ via $f_T$. Its image in $V$ is zero by injectivity of $f_V$, so $t=j(x)$ for some $x\\in S$. Now $x'-f_S(x)$ lies in $\\ker j'=\\operatorname{im}\\delta'$. Lift its preimage in $M'$ using surjectivity of $f_M$ and add its boundary to $x$. This produces a preimage of $x'$. Thus the canonical $p^*=f_S$ is bijective in every degree on both sites, with the comparison compatibility already established in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Shear paragraph: affine-line acyclicity, localization, and comparison of pullbacks along the zero and unit sections."
+   }
+  },
+  {
+   "text": "For any section $s:X\\to\\mathbf A^1_X$ of $p$, the composite $p\\circ s$ is the identity of $X$.  By the identity and composition clauses of [lem-pur-supported-cup-functoriality], the supported pullbacks satisfy $s^*\\circ p^*=\\operatorname{id}$ (with inverse-image support $s^{-1}(C_1)=(p\\circ s)^{-1}(C)=C$).  Since $p^*$ is an isomorphism by Step 2, this $s^*$ is its inverse.  Applying this to the zero and unit sections gives the same inverse map for both sections, as asserted.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "Shear paragraph: affine-line acyclicity, localization, and comparison of pullbacks along the zero and unit sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-line-ordinary-invariance",
+  "thm-pur-with-support-exactness",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Shear paragraph: construct ordinary affine-line acyclicity, apply localization to X and X\\setminus C, then use endpoint-section compositions; the constant-sheaf claim is replaced by projection invariance with support."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-frame-independence",
@@ -70,5 +113,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-supported-affine-line-homotopy",
+  "worker": "stage1",
+  "summary": "Split the supported homotopy statement into the ordinary affine-line acyclicity input for arbitrary bases and a localization/five-lemma argument with endpoint sections. The ordinary input is intentionally statement-only and is not a Mathlib leaf. The arbitrary-base and pro-etale comparison clauses repair the false constant-sheaf assertion in the imported parent proof.",
+  "blueprint": "Implements the shear paragraph of lem-pur-frame-independence: affine-line acyclicity on X and its complement, localization with support, and equality of the zero and unit section pullbacks."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-449cb0030",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-449cb0030 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-pur-affine-line-ordinary-invariance, the full statements of every cited node, the parent lem-pur-frame-independence (steps 5-6, its only citer), the main-20261015 shear paragraph, the sk-prop-a1-kummer unit (statement and steps) in both the master and main-20261015 copies, and Stacks Tag 09XP (etale-cohomology.tex, section-cohomology-support, line 13966). The item is true for an arbitrary k-scheme X and closed C. The parent needs that generality, because its etale neighbourhood U has no finiteness hypothesis. Step 1: thm-pur-with-support-exactness gives the localization sequence for any scheme on both sites, functorial in the pair; p is a morphism of pairs because p^{-1}(U)=A^1_U. lem-pur-supported-cup-functoriality gives pullback for any morphism, compatible with open restriction, connecting maps and the site comparison. The child applies to X and to U. Step 2 is a correct written-out five-lemma chase, which I redid. Step 3: s^{-1}(C_1)=C scheme-theoretically and s^*p^*=id, so s^*=(p^*)^{-1}. The child is true for arbitrary X. The unit's own reduction step (stalk at the strict henselization, qcqs p, smooth base change along A^1_k -> Spec k) never uses finite type. The pro-etale case follows by evaluating on w-contractible objects, which are again arbitrary k-schemes. It is not a duplicate: lem-pur-a1-direct-image and prop-pur-gm-relative-kummer(1) assume a separated finite-type base, and a whole-DAG scan plus the blueprint search found nothing else. It does not restate a clause of the item, since it is the support-free input. It satisfies B1-B9: statement only, three kinds of search, correct created and blueprint fields, no SGA. All proof dependencies are in unit sk-prop-a1-kummer, so no tool_uses are needed. Only finite coefficients A_{E,n} are used, and no target is touched. Minor, not a fault: the etale-site twist A(r) is a DAG-wide convention already used by lem-pur-supported-cup-functoriality. No changes."
  }
 }

@@ -26,20 +26,180 @@
   "def-weil-derived-pullback-tensor-hom",
   "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with strict varying-coefficient systems on the fixed small pro-etale skeletons. Write \\(\\mathcal R_T\\dashv\\mathcal L_T\\) for the derived reduction/total-limit adjunction of [lem-coef-derived-system-evaluation-calculus], with unit \\(\\eta\\) and counit \\(\\epsilon\\). Write \\(U_f\\) for the exact levelwise finite-coefficient inverse image on systems: exactness is [prop-weil-pbc-proetale-constant-exact], and its simultaneous derived-system model is [lem-coef-semilinear-derived-sections]. For a single flat-term K-flat representative \\(P\\to K\\), the reductions \\(P_n\\) are K-flat with flat terms by [lem-pur-kflat-change-of-rings]. Their quotient comparisons \\(P_m\\otimes^L_{(A_{E,m})_T}(A_{E,n})_T\\cong P_n\\) are computed by ordinary tensor and satisfy the cocycle, since both iterated quotient tensors send \\((x\\otimes a)\\otimes b\\) to \\(x\\otimes ab\\). Pullback preserves these normalization comparisons by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied at coefficient ring \\(A_{E,m}\\) with the quotient \\(A_{E,n}\\). Consequently \\(\\mathcal R_TK\\), \\(U_f\\mathcal R_TK\\), and their iterated finite pullbacks are normalized systems. The construction and comparison in [def-pur-integral-derived-operations, lem-pur-integral-operations-well-defined] identify the actual integral functor \\(F_f=Lf^*\\) naturally with \\(\\mathcal L_XU_f\\mathcal R_Y\\), including its defining tower projections. This identification uses the displayed reduction-tower formula, without identifying the completed integral coefficient sheaf with a discrete constant sheaf. To compare total-limit models, use exact countable products of completed-coefficient sheaves [lem-weil-proetale-countable-products-exact]. The natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes this total limit by the same product mapping fiber as the displayed integral construction. On a strict tower resolution the comparison is induced by its level maps on both product complexes; exactness of products makes these product maps quasi-isomorphisms and hence also makes the mapping-fiber map a quasi-isomorphism. Thus the identification is natural on system maps, not merely an objectwise choice of a cone.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); coherent system models as in the cited existing coefficient lemmas"
+   }
+  },
+  {
+   "text": "For each \\(f:X\\to Y\\), use the counit at \\(N=U_f\\mathcal R_YK\\) to define the natural derived-system map \\(\\beta_{f,K}:\\mathcal R_XF_fK\\to U_f\\mathcal R_YK\\). Its evaluation at \\(n\\) is the scalar-extension adjoint of the actual total-limit projection by [lem-coef-derived-system-evaluation-calculus]. Since \\(N\\) is normalized, [lem-coef-normalized-dvr-effectivity] makes every evaluation invertible; the evaluation criterion in [lem-coef-derived-system-evaluation-calculus] therefore makes \\(\\beta_{f,K}\\) an isomorphism of derived systems. These are precisely the canonical reduction maps \\(\\rho_{f,K,n}\\): both are the adjoints of the projections in the defining integral operation, whose canonical reductions are specified by [lem-pur-integral-operations-preserve-constructible]. The same preservation theorem puts \\(F_kK,F_{kh}K,F_hF_kK\\), and all the third-morphism values below, in the required full constructible subcategories. The adjunction triangle identity gives \\(\\mathcal L_X(\\epsilon_N)\\eta_{\\mathcal L_XN}=1\\). As \\(\\epsilon_N\\) is invertible, \\(\\eta_{\\mathcal L_XN}\\) is its inverse after applying \\(\\mathcal L_X\\). Thus the unit is invertible on every integral pullback value appearing here. On such objects \\(A,B\\), adjunction gives \\(\\operatorname{Hom}(\\mathcal R A,\\mathcal R B)\\cong\\operatorname{Hom}(A,\\mathcal L\\mathcal R B)\\cong\\operatorname{Hom}(A,B)\\); the last map composes with \\(\\eta_B^{-1}\\). This proves the full faithfulness needed below from the cited adjunction and counit identities.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.5 and Lemma 3.5.7(1)-(5), with the regular principal ideal (uniformizer); the adjunction identities give the displayed Hom calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-derived-pullback-composition] at every finite coefficient ring, on the single K-flat reduction system of Step 1. It gives a natural system isomorphism \\(a_{h,k}:U_{kh}\\xrightarrow{\\sim}U_hU_k\\), whose component at \\(\\mathcal R_VK\\) will also be denoted \\(a_{h,k}\\). The finite maps commute with quotient transitions: the termwise composition map is inverse-image reassociation with tensor reassociation, and applying a coefficient quotient before or after it sends each pulled-back tensor to the same tensor. These are simultaneous system maps by [lem-coef-semilinear-derived-sections], not a choice of lifts of unrelated level maps. Put \\(B_{h,k}(K)=U_h(\\beta_{k,K})\\circ\\beta_{h,F_kK}\\), an isomorphism from \\(\\mathcal R_ZF_hF_kK\\) to \\(U_hU_k\\mathcal R_VK\\), and set \\(\\delta_{h,k}(K)=B_{h,k}(K)^{-1}a_{h,k}\\beta_{kh,K}\\). Define \\(c^{\\mathcal O_E}_{h,k}(K)=\\eta_{F_hF_kK}^{-1}\\mathcal L_Z(\\delta_{h,k}(K))\\eta_{F_{kh}K}\\). Full faithfulness from Step 2 identifies its reduction system with \\(\\delta_{h,k}(K)\\). The three factors in this formula are invertible, so \\(c^{\\mathcal O_E}_{h,k}(K)\\) is invertible. All factors are natural in \\(K\\); the total limit is a functor by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], hence this is a natural isomorphism of the actual integral pullback functors.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), with total-limit functoriality Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "By the definition of \\(\\delta_{h,k}\\) in Step 3, \\(B_{h,k}(K)\\mathcal R_Z(c^{\\mathcal O_E}_{h,k}(K))=a_{h,k}\\beta_{kh,K}\\) as an equality of derived-system maps. Evaluate this equality at any \\(n\\geq1\\). The evaluation of \\(\\beta_{kh,K}\\) is \\(\\rho_{kh,K,n}\\), and the evaluation of \\(B_{h,k}(K)\\) is \\(L(h_n)^*(\\rho_{k,K,n})\\circ\\rho_{h,F_kK,n}\\) by Step 2 and [lem-coef-derived-system-evaluation-calculus]. The evaluation of \\(a_{h,k}\\) is exactly the canonical finite comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. This is the stated reduction formula, with the canonical reduction identifications of [lem-pur-integral-operations-preserve-constructible]. This calculation uses every positive uniformizer exponent, with no unramifiedness assumption or change to an ell-power subsequence.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7: counit evaluations; Stacks Tag 0D6D fixes the finite comparison"
+   }
+  },
+  {
+   "text": "For \\(j:Y\\to Z\\), identify the reduction system of \\(F_jF_hF_kK\\) with \\(U_jU_hU_k\\mathcal R_VK\\) by \\(B_{j,h,k}=U_jU_h(\\beta_{k,K})\\circ U_j(\\beta_{h,F_kK})\\circ\\beta_{j,F_hF_kK}\\). Put \\(S=\\mathcal R_VK\\), write \\(c_{h,k}\\) for the integral comparison constructed in Step 3, and denote the two integral composites in the statement by \\(C_L\\) and \\(C_R\\). All compositions below are read right to left. Applying \\(\\mathcal R_Y\\), Step 4 and naturality of \\(\\beta_j\\) give\n\\[\n\\begin{aligned}\nB_{j,h,k}\\mathcal R_Y(C_L)\n &=U_j\\bigl(B_{h,k}\\mathcal R_Z(c_{h,k})\\bigr)\\,\n   \\beta_{j,F_{kh}K}\\mathcal R_Y(c_{j,kh})\\\\\n &=U_j(a_{h,k}(S))\\,U_j(\\beta_{kh,K})\\,\n   \\beta_{j,F_{kh}K}\\mathcal R_Y(c_{j,kh})\\\\\n &=U_j(a_{h,k}(S))\\,a_{j,kh}(S)\\,\\beta_{khj,K}.\n\\end{aligned}\n\\]\nFor the other composite Step 4 first gives\n\\[\nB_{j,h,k}\\mathcal R_Y(C_R)\n =U_jU_h(\\beta_{k,K})\\,a_{j,h}(\\mathcal R_WF_kK)\\,\n   \\beta_{hj,F_kK}\\mathcal R_Y(c_{hj,k}).\n\\]\nNaturality of the finite system comparison \\(a_{j,h}\\), applied to \\(\\beta_{k,K}:\\mathcal R_WF_kK\\to U_kS\\), says explicitly\n\\[\nU_jU_h(\\beta_{k,K})\\,a_{j,h}(\\mathcal R_WF_kK)\n =a_{j,h}(U_kS)\\,U_{hj}(\\beta_{k,K}).\n\\]\nSubstitution and Step 4 for \\((hj,k)\\) therefore give\n\\[\nB_{j,h,k}\\mathcal R_Y(C_R)\n =a_{j,h}(U_kS)\\,a_{hj,k}(S)\\,\\beta_{khj,K}.\n\\]\nThe two finite-system comparison composites are equal before localization: on the common flat-term K-flat representative they are the same reassociation from \\((khj)^*P_n\\) to \\(j^*h^*k^*P_n\\). Under the common inverse-image identification, both forward maps send \\(m\\otimes r\\) to \\(((m\\otimes1)\\otimes1)\\otimes r\\); both inverses send \\(((m\\otimes s)\\otimes t)\\otimes r\\) to \\(m\\otimes j^{-1}h^{-1}(s)\\,j^{-1}(t)\\,r\\), with the canonical coefficient identifications understood. These formulas commute with every quotient transition because quotient maps preserve products and units. This proves an equality of strict system maps, hence an equality in the derived system category using the simultaneous composition models of [lem-coef-semilinear-derived-sections] and the termwise formula in [lem-weil-pbc-proetale-derived-pullback-composition]. Cancelling the invertible \\(B_{j,h,k}\\) and using the full faithfulness deduced from [lem-coef-derived-system-evaluation-calculus] in Step 2 gives the displayed integral associativity identity. Equality is lifted from this coherent system equation, rather than inferred from equality of independent finite reductions.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D proof: canonical termwise pullback composition; associativity by the explicitly written tensor reassociation and derived-adjunction identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit assembly of the existing coherent system adjunction and normalized-DVR effectivity (Lemma 3.5.7), the finite pullback composition (Stacks 0D6D), and the integral reduction-tower formula (Stacks 099N(5)). The coherence argument is written out in Steps 2-5."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'derivedCompletion\\|DerivedComplete\\|proetale\\|ProEtale' ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib; read AlgebraicGeometry/Sites/ElladicCohomology.lean declarations",
-   "results": "AlgebraicGeometry/Sites/Proetale.lean, AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.ellAdicSheaf, Scheme.EllAdicCohomology, isZero_ellAdicSheaf_of_isEmpty); no derived completion, no derived pullback of pro-etale module complexes, no composition comparison",
+   "tool": "leanfinder",
+   "query": "canonical composition isomorphism for integral derived pullbacks on completed pro-etale coefficient categories",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; Scheme.Modules.pseudofunctor_mapComp_hom_τl; Scheme.Modules.pseudofunctor_associativity; all are underived scheme-module pullbacks",
    "date": "2026-10-17",
-   "verdict": "no match (grep only; LeanSearch and LeanFinder are not reachable from the review service, the queue worker re-searches)"
+   "verdict": "no match: underived only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, pullbackComp, totalLeftDerived",
+   "results": "loogle: unknown identifier 'pullbackComp'",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: query contains an unknown identifier; no absence conclusion drawn"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|totalLeftDerived|derived.*pullback [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,194,195; underived pullback composition only",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived integral theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of integral derived pullbacks is compatible with finite coefficient reductions",
+   "results": "MvPolynomial.comap_comp; SheafOfModules.pullbackComp; unrelated algebraic or underived pullback declarations",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic derived inverse image composition comparison modulo uniformizer powers and associativity",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.map_comp; AdicCompletion.transitionMap_comp_eval; ordinary module adic-completion maps, no sheaf-derived pullback theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.pullbackComp, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.pullbackComp'",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: query contains an unknown identifier; no absence conclusion drawn"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|associativity [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177,180,194,195; underived pullback composition only",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived integral theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural composition comparison for completed integral pullback functors",
+   "results": "CategoryTheory.Over.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; PresheafOfModules.pullback_comp_id; generic or underived pullback declarations",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of inverse image of sheaves of modules is a pseudofunctor with coherent composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor and seven associated component lemmas. The declarations concern underived scheme modules, not completed pro-etale derived coefficients.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCompletion|pullback_assoc|leftDerivedFunctorCompIso",
+   "results": "10 hits: underived SheafOfModules.pullback_assoc at Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, its presheaf analogue, scheme-module use, and categorical pullback associativity. Read PullbackContinuous.lean:150-205; no completed derived-coefficient theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedFunctorCompIso\"",
+   "results": "0 hits, no query error.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -61,5 +221,79 @@
  },
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
- "import_flags": []
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-integral-pullback-composition",
+  "worker": "stage1",
+  "summary": "Retained the earlier statement, blueprint ancestry, sources, and all eight logged Mathlib searches; repaired the missing coherent identification of the iterated integral pullback. The proof now constructs reduction-system counits from the existing reduction/total-limit adjunction, proves them invertible by normalized-DVR effectivity, lifts the finite composition through explicit unit isomorphisms, computes every uniformizer reduction, and proves associativity as a coherent system equation. No new nodes or coefficient-category identifications were introduced. Second reading made the finite-comparison naturality square and both associativity calculations explicit, and independently searched Mathlib with three further logged queries.",
+  "blueprint": "The current blueprint has no separate integral-composition node; the split supplies the integral pullback-composition identifications used by def-weil-local-frobenius-trace when iterating Weil pullbacks. The five steps realize the finite-level comparison, completed inverse-limit lift, reduction compatibility, and associativity clauses of this maintainer-added interface.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The coherent reduction/total-limit adjunction, its projection-normalized counit, and detection of system isomorphisms supply the lift of finite comparison maps. No node of this unit provides a derived coefficient-system adjunction."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Finite constant-coefficient inverse image is exact, so it acts on strict coefficient systems and their derived categories. This is a generic finite-level tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous derived system models retain pullback composition and its equations, so the proof does not infer system-map equality from mere levelwise equality."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flat finite reductions compute normalized derived quotient comparisons. This is generic ringed-site change of scalars."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Derived finite pullback preserves the normalized quotient-tensor comparisons; this is generic ringed-topos tensor calculus."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Identifies the actual integral functor naturally with the reduction-tower total-limit construction, including independence of representatives."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "The projection-adjoint counit is invertible on normalized DVR systems, at all positive uniformizer exponents and without scheme finiteness hypotheses."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Supplies precisely the constructible typing and the canonical finite-reduction maps of integral pullback under the hypotheses in the statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The canonical finite-level termwise composition is the starting comparison to lift; the unit has no separate finite ringed-topos composition lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Total derived inverse limit acts on maps and equations of coherent systems via restriction to strict completed-coefficient towers."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products on the pro-etale site identify the actual Roos complex construction naturally with total derived inverse limit on strict systems."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-e12146430",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-e12146430 (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no changes; review.md has the details. Statement: it is the completed-coefficient form of Stacks 099N(5) plus 0D6D. The coefficients are the completed sheaf (hat O_E), not the constant (O_E)_T, and Lf^* is the R lim of Res_n f^*(P_n) on a flat-term K-flat P, as in def-pur-integral-derived-operations; BS 3.5.7 backs this. I checked that the transport through rho and the direction of the finite c_{h,k} type-check, that the associativity identity is the standard cocycle, and that ell != p is inherited from the stmt_deps. Nothing is weakened. Small cases (K=0, K=hat O, identity maps, n=1, ramified E) behave correctly. Step 1: the integral functor F_f agrees naturally with L_X U_f R_Y; it uses the evaluation calculus, exact finite pullback, normalization from kflat-change-of-rings and tensor-pullback, exact products with the natural Roos triangle, and well-definedness (2); no identification with a constant sheaf is made. Step 2: the counit beta is invertible by normalized-dvr-effectivity (any scheme, unbounded) and the evaluation criterion. The triangle identity makes the unit invertible on every F-value, and the Hom bijection is correct: the adjunct of R(g) is eta_B g, which is BS 3.5.7(2). Step 3: I checked the types of B, delta and c = eta^{-1}L(delta)eta, and that R(c)=delta via adjuncts. Step 4: level n gives exactly rho_{kh}, h^*(rho_k) after rho_h, and the finite c_{h,k}. Step 5: I recomputed both chains using naturality of beta_j, Step 4 for (h,k), (j,kh), (j,h) and (hj,k), and the naturality square of a_{j,h}. The two finite composites are equal as strict maps on the K-flat representative, and cancelling B with the Step-2 bijection gives C_L=C_R. Sources read: proetale.tex 099N(2),(5) with its proof; sites-cohomology 0D6D with its proof; tags 0G7E, 07A4 and 0941 exist under the cited labels; BS pp. 24-25, Def. 3.5.2-3.5.3 and Lemmas 3.5.5-3.5.7. Duplicate search of the whole DAG: the hits are finite-level (pbc derived-pullback-composition, sfb finite upper-star-comp), the projection formula (prop-sf-pf-coherence) and finite Weil iterates (trf iterated weil); none states this integral comparison. No new nodes, proof_deps equals the union of the uses, and the delivery sets no top-level tool_uses. Unit sk-lem-finite; chapter untouched. Accepted tool_uses (all 11 declared): evaluation-calculus, constant-exact, semilinear-derived-sections, kflat-change-of-rings, ringed-topoi-derived-tensor-pullback, integral-operations-well-defined, normalized-dvr-effectivity, integral-operations-preserve-constructible, proetale-derived-pullback-composition, strict-tower-homotopy-limit, countable-products-exact. No SGA source is used."
+ }
 }
