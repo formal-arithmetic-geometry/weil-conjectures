@@ -12,7 +12,7 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import WeilConjectures.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
-import WeilConjectures.RingTheory.SmoothOverFieldRegularLocal
+import WeilConjectures.RingTheory.RegularLocalRing.Smooth
 import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 import WeilConjectures.Mathlib.Topology.KrullDimension
 
@@ -127,7 +127,8 @@ theorem isLocalCompleteIntersection_of_smooth (k : Type u) (S : Type v) [Field k
   have : IsLocalization q.primeCompl (L ⧸ J) := by
     rw [← hM]
     exact inferInstance
-  have : IsRegularLocalRing (Localization.AtPrime q) := smooth_over_field_regular_local k A q
+  have : IsRegularLocalRing (Localization.AtPrime q) :=
+    Smooth.isRegularLocalRing_localization k A q
   have : IsRegularLocalRing (L ⧸ J) := .of_ringEquiv
     (IsLocalization.algEquiv q.primeCompl (L ⧸ J) (Localization.AtPrime q)).symm.toRingEquiv
   obtain ⟨xs, c, hc, hxs, hgen⟩ :=

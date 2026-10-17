@@ -31,48 +31,26 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- A chosen bounded-above flat replacement of one good truncation extends to the next.
+/-- A bounded-above flat complex augmented to one good truncation extends to a
+bounded-above flat replacement of the next good truncation, termwise epic, compatible with
+the given augmentation after including both truncations into `G`.
 This is a single extension step, with the previous complex and augmentation prescribed;
-it does not assert the existence of an infinite tower. The flat-cover hypothesis
-is an explicit ingredient of the induction, supplied by the bounded replacement
-theorem applied to complexes concentrated in degree zero.
+it does not assert the existence of an infinite tower.
 
 Source: Stacks Project, Derived Categories, Lemma 06XX, induction step, specialized
 as in Cohomology on Sites, Lemma 077J
 (blueprint: lem-pc-flat-truncation-successor).
 
-Proof: Compose q with the inclusion from the n-th to the (n+1)-st good truncation
+Proof: Compose q with the inclusion j from the n-th to the (n+1)-st good truncation
 and form its mapping cone C. Both its source and target are bounded above, so C is
 bounded above. Resolve C by a bounded-above flat complex Q using the bounded flat
-replacement theorem. The composite Q -> C -> E[1] defines a triangle with first
-term E and middle term E'. Realize this triangle by a degreewise split extension
-0 -> E -> E' -> Q -> 0. Thus E' is bounded above and its terms are finite sums of
-flat objects. The morphism of triangles gives an augmentation f to the next
-truncation; the identity on E and the quasi-isomorphism Q -> C show, by the long
-exact cohomology sequences, that f is a quasi-isomorphism. The augmentation square
-initially commutes up to homotopy. Extend that homotopy from E to E' along the
-chosen degreewise retractions and subtract its differential from f. The resulting
-chain map has the same cohomology maps and makes the square strictly commute.
-The old termwise epimorphism implies that f is epic except possibly in degrees n
-and n+1. Apply hcover to G^n to obtain a flat epimorphic cover P -> G^n. Add the
-contractible complex P --id--> P in degrees n,n+1 to E', and augment it by the
-cover in degree n and its composite with d_G in degree n+1 (which lands in cycles).
-The added summand covers G^n and the boundaries in degree n+1. Since H^(n+1)(f)
-is epic, f together with this boundary cover is epic onto the cycles in degree
-n+1, the top term of the next truncation. All other components remain epic.
-The contractible summand preserves quasi-isomorphy and boundedness, and finite sums
-preserve flatness. Include E through the original summand. The strictly commuting
-square, composed with the truncation inclusion into G, gives the claimed equality.
-This argument also applies for n=0, for zero G or E, and for bounds on E larger
-than n; only boundedness of the cone is used. -/
+replacement theorem. The relative flat extension along Q -> C gives a bounded-above
+flat complex F, a map t : E -> F and a quasi-isomorphism g : F -> G^{<= n+1} with
+t >> g = q >> j. Adding flat identity disks makes g termwise epic without changing F
+up to quasi-isomorphism. Composing with the inclusion into G gives the equality. -/
 theorem exists_flat_truncation_successor
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}
-    (hcover : ∀ M : SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
-      ∃ (P : SheafOfModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (p : P ⟶ M),
-        SheafOfModules.IsFlat P ∧ Epi p)
     (G : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
     (n : ℕ)
@@ -80,8 +58,7 @@ theorem exists_flat_truncation_successor
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
     (q : E ⟶ G.truncLE (n : ℤ))
     (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))
-    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i))
-    (hquasi : QuasiIso q) (hepi : ∀ i : ℤ, Epi (q.f i)) :
+    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i)) :
     ∃ (E' : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
       (t : E ⟶ E') (q' : E' ⟶ G.truncLE ((n + 1 : ℕ) : ℤ)),
@@ -89,9 +66,6 @@ theorem exists_flat_truncation_successor
       (∀ i : ℤ, SheafOfModules.IsFlat (E'.X i)) ∧ QuasiIso q' ∧
       (∀ i : ℤ, Epi (q'.f i)) ∧
       t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ) := by
-  -- The relative cone construction and all-degree disks do not need these assumptions.
-  have _hq := hquasi
-  have _he := hepi
   let m : ℤ := ((n + 1 : ℕ) : ℤ)
   have hstrict : (G.truncLE (n : ℤ)).IsStrictlyLE m := by
     rw [isStrictlyLE_iff]
@@ -124,7 +98,7 @@ theorem exists_flat_truncation_successor
     exists_relative_boundedAbove_flat_extension E (G.truncLE m) (q ≫ j)
       ⟨b, hbE⟩ hflat (Q.obj X) (ε.app X) ⟨N, hboundQ⟩ hflatQ hquasiQ
   obtain ⟨F', s, g', hb', hf', hs, he', hsg⟩ :=
-    exists_boundedAbove_flat_epicification hcover F (G.truncLE m) g hb hH hf
+    exists_boundedAbove_flat_epicification F (G.truncLE m) g hb hH hf
   have : QuasiIso s := hs
   have : QuasiIso (s ≫ g') := by rw [hsg]; exact hg
   have hg' : QuasiIso g' := quasiIso_of_comp_left s g'

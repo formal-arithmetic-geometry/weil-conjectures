@@ -244,7 +244,6 @@ private theorem finite_morphism_equalities_lift
   exact congrArg (E.hom.app (V r) ≫ ·)
     (congrArg (fun f ↦ (Over.pullback (D.map (g r))).map f) (hfs r))
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Given object models at a single stage, the generating arrows and finitely many
@@ -288,8 +287,8 @@ theorem finite_diagram_lift_of_models
       QuasiCompact (V a).hom ∧ QuasiSeparated (V a).hom)
     (α : ∀ a, (Over.pullback (c.π.app i)).obj (V a) ≅ F.obj a)
     (hR : ∀ r, F.map (p r) = F.map (q r)) :
-    ∃ (j : Iᵒᵖ) (h : j ⟶ i) (G : Paths A ⥤ Over (D.obj j))
-      (β : G ⋙ Over.pullback (c.π.app j) ≅ F),
+    ∃ (j : Iᵒᵖ) (h : j ⟶ i) (G : Paths A ⥤ Over (D.obj j)),
+      Nonempty (G ⋙ Over.pullback (c.π.app j) ≅ F) ∧
       (∀ a, G.obj a = (Over.pullback (D.map h)).obj (V a)) ∧
       (∀ r, G.map (p r) = G.map (q r)) := by
   classical
@@ -345,8 +344,8 @@ theorem finite_diagram_lift_of_models
       Functor.isoWhiskerLeft H
         (eqToIso (congrArg (fun f : c.pt ⟶ D.obj j ↦ Over.pullback f) (c.w l))) ≪≫ γ
   refine ⟨k, l ≫ h, G,
-    Functor.isoWhiskerRight (K.isoCopyObj _ (fun a ↦ (T a).symm)).symm
-      (Over.pullback (c.π.app k)) ≪≫ η, fun a ↦ rfl, ?_⟩
+    ⟨Functor.isoWhiskerRight (K.isoCopyObj _ (fun a ↦ (T a).symm)).symm
+      (Over.pullback (c.π.app k)) ≪≫ η⟩, fun a ↦ rfl, ?_⟩
   intro r
   change (T (s r)).hom ≫ K.map (p r) ≫ (T (t r)).inv =
     (T (s r)).hom ≫ K.map (q r) ≫ (T (t r)).inv

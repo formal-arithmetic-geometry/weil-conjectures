@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Homology.FlatCoverFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.HomologicalComplexBiprod
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
@@ -78,7 +79,7 @@ addition (https://stacks.math.columbia.edu/tag/06XX), applied in every degree.
 (blueprint: lem-pc-flat-augmentation-epicification).
 
 Proof: Choose a bound N for H. In each degree i <= N choose a flat epic cover
-p_i : P_i -> H^i using hcover; put P_i = 0 for i > N. Construct the direct
+p_i : P_i -> H^i using a flat cover; put P_i = 0 for i > N. Construct the direct
 sum D of identity disks on P_i in degrees i,i+1. Explicitly D^j is the finite
 sum P_j plus P_(j-1), its differential sends the first summand identically to
 the second summand in degree j+1 and kills the second. This complex has a
@@ -93,11 +94,6 @@ bounded above; D vanishes above N+1. Thus F is bounded above. No assumption on
 the cohomology or the components of f is used. Zero H allows D = 0; arbitrary
 bounds and negative N are covered by the same construction. -/
 theorem exists_boundedAbove_flat_epicification
-    (hcover : ∀ M : SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
-      ∃ (P : SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (p : P ⟶ M),
-        SheafOfModules.IsFlat P ∧ Epi p)
     (E H : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H)
     (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))
@@ -110,7 +106,10 @@ theorem exists_boundedAbove_flat_epicification
       (∀ i : ℤ, Epi (g.f i)) ∧ s ≫ g = f := by
   classical
   obtain ⟨N, hN⟩ := hH
-  choose Q p hQ hp using hcover
+  obtain ⟨T, π, hT⟩ := SheafOfModules.exists_functorial_flat_cover J R
+  choose Q p hQ hp using fun M ↦ (⟨T.obj M, π.app M, hT M⟩ :
+    ∃ (P : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+      (p : P ⟶ M), SheafOfModules.IsFlat P ∧ Epi p)
   let P : ℤ → SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) :=
     fun i ↦ if i ≤ N then Q (H.X i) else HasZeroObject.zero.choose

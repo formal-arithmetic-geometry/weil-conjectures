@@ -59,7 +59,7 @@ theorem sectionRing_quotient_charts_overlap
     (hV : (V : Set X) = nonvanishingLocus (L.tensorPow e) (t.val e))
     (g : U.toScheme ⟶ Proj (sectionRingGrade L))
     (h : V.toScheme ⟶ Proj (sectionRingGrade L))
-    (hg : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)
+    (hg : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)
           (n : ℕ) (ξ : sectionRingGrade L (n • e)),
           (show Γ(X, U.ι ''ᵁ (g ⁻¹ᵁ
               Proj.basicOpen (sectionRingGrade L) t.val)) from
@@ -73,7 +73,7 @@ theorem sectionRing_quotient_charts_overlap
           (L.tensorPow (n • e)).presheaf.map (homOfLE
             (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤
               ⊤)).op (ξ.val (n • e)))
-    (hh : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)
+    (hh : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)
           (n : ℕ) (ξ : sectionRingGrade L (n • e)),
           (show Γ(X, V.ι ''ᵁ (h ⁻¹ᵁ
               Proj.basicOpen (sectionRingGrade L) t.val)) from
@@ -91,6 +91,6 @@ theorem sectionRing_quotient_charts_overlap
       X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h := by
   have hbase := sectionRing_overlap_base_map X L d e s t hd he U V hU hV g h hg hh
   apply Scheme.Hom.ext hbase
-  exact sectionRing_overlap_sheaf_map X L d e s t hd he U V hU hV g h hg hh hbase
+  exact sectionRing_overlap_sheaf_map X L d s hd U V hU g h hg hh hbase
 
 end AlgebraicGeometry.Scheme.Modules

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
-public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrpAux
 
@@ -25,6 +25,9 @@ universe u w
 open CategoryTheory
 
 namespace Rep
+
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 /-- Source: Stacks Project, Tag 04JQ, proof of
 `lemma-equivalence-abelian-sheaves-point`.

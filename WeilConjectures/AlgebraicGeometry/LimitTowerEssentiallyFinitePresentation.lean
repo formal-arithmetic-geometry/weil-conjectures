@@ -32,7 +32,7 @@ universe u v p q
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
-namespace WeilConjectures
+namespace RingHom
 
 /-- Limit presentation of a tower `R → S → S'` of local rings, `S` and `S'` essentially of
 finite presentation over `R`, with a finitely presented `S'`-module `M`. The colimits are
@@ -195,4 +195,4 @@ theorem limit_tower_essentially_finite_presentation
   obtain ⟨H₀, ⟨e⟩⟩ := h23 i
   exact Module.Finite.of_surjective e.toLinearMap e.surjective
 
-end WeilConjectures
+end RingHom

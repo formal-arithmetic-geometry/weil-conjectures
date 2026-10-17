@@ -210,8 +210,6 @@ private theorem fieldGerm_injective
     exact ((isSheaf_iff_isSheaf_of_type _ _).mp F.property) _ hcov
   exact (Presieve.isSeparatedFor_singleton.mp hsheaf.isSeparatedFor) hf
 
--- Preserve the statement's existing names for nondependent proof binders.
-set_option linter.unusedVariables false in
 /-- (blueprint: lem-exc-field-sections-stalk-invariants) Stacks Project, Tags 04JM and 03QW.
 The action on the geometric stalk is characterized by changing lifts through automorphisms
 of the algebraic closure. At every finite separable intermediate field, the canonical germ
@@ -259,13 +257,13 @@ theorem fieldSections_stalkInvariants
         (lift L).left = Spec.map
           (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype))) ∧
       (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))),
-        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-            τ.toRingHom.comp (algebraMap Ks Ω))
-          (X : (Spec (.of K)).Etale)
-          (x x' : (pointSmallEtale s).fiber.obj X)
-          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
-          (z : F.obj.obj (op X)),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+          (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω) →
+          ∀ (X : (Spec (.of K)).Etale)
+          (x x' : (pointSmallEtale s).fiber.obj X),
+          x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
+          ∀ (z : F.obj.obj (op X)),
           (action F).smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) =
             (pointSmallEtale s).toPresheafFiber X x' F.obj z) ∧
         (∀ (L : IntermediateField K Ks) [FiniteDimensional K L]
@@ -277,9 +275,9 @@ theorem fieldSections_stalkInvariants
         (∀ (L L' : IntermediateField K Ks) [FiniteDimensional K L]
           [FiniteDimensional K L'] [Algebra.IsSeparable K L]
           [Algebra.IsSeparable K L']
-          (j : L →ₐ[K] L') (g : Gal(Ks/K))
-          (hg : g.toAlgHom.comp L.val = L'.val.comp j)
-          (z : F.obj.obj (op (etaleSpec K L))),
+          (j : L →ₐ[K] L') (g : Gal(Ks/K)),
+          g.toAlgHom.comp L.val = L'.val.comp j →
+          ∀ (z : F.obj.obj (op (etaleSpec K L))),
           (pointSmallEtale s).toPresheafFiber (etaleSpec K L') (lift L') F.obj
               (F.obj.map (etaleSpecMap j).op z) =
             (action F).smul g
@@ -287,11 +285,11 @@ theorem fieldSections_stalkInvariants
         (∀ (L L' : IntermediateField K Ks) [FiniteDimensional K L]
           [FiniteDimensional K L'] [Algebra.IsSeparable K L]
           [Algebra.IsSeparable K L']
-          (j : L →ₐ[K] L') (g g' : Gal(Ks/K))
-          (hg : g.toAlgHom.comp L.val = L'.val.comp j)
-          (hg' : g'.toAlgHom.comp L.val = L'.val.comp j)
-          (m : (pointSmallEtale s).sheafFiber.obj F)
-          (hm : ∀ h ∈ L.fixingSubgroup, (action F).smul h m = m),
+          (j : L →ₐ[K] L') (g g' : Gal(Ks/K)),
+          g.toAlgHom.comp L.val = L'.val.comp j →
+          g'.toAlgHom.comp L.val = L'.val.comp j →
+          ∀ (m : (pointSmallEtale s).sheafFiber.obj F),
+          (∀ h ∈ L.fixingSubgroup, (action F).smul h m = m) →
           (∀ h ∈ L'.fixingSubgroup,
             (action F).smul h ((action F).smul g m) = (action F).smul g m) ∧
           (action F).smul g m = (action F).smul g' m)) ∧

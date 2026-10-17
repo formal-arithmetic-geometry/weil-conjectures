@@ -27,7 +27,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- A root-split cover has only degree-one charts near a point off the divisor.
 
 Source: Stacks Project, Tag 0EYG, first proof paragraph; Tags 02LA, 02VN and 04HN.
@@ -56,8 +55,6 @@ Stacks 0EYG's off-divisor branch; its given splitting permits the shorter route.
 theorem root_split_cover_away_divisor_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)
-    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),
-      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
     (d : ℕ) (y : Spec R) (hy : g ∉ y.asIdeal) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)
     let N := Spec (CommRingCat.of A)
@@ -70,13 +67,13 @@ theorem root_split_cover_away_divisor_charts
       Etale (Spec.map (CommRingCat.ofHom φ)) ∧
       (Spec.map (CommRingCat.ofHom φ)) z = y ∧
       IsUnit (φ g) ∧
-        let N := Spec (CommRingCat.of (∀ k : Fin d,
+        let N := Spec (CommRingCat.of (Fin d →
           AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))))
         let q := Spec.map (CommRingCat.ofHom
-          (algebraMap S (∀ k : Fin d,
+          (algebraMap S (Fin d →
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g)))))
         let V : N.Opens := PrimeSpectrum.basicOpen
-          (algebraMap S (∀ k : Fin d,
+          (algebraMap S (Fin d →
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))
         ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,
           γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by

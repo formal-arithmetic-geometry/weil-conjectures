@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartGeneratorCoherence
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartGeneratorCoherence
 
 /-!
 # Coherence of affine chart section transitions

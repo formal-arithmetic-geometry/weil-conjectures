@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.Localization.Ideal
 
 import Mathlib.RingTheory.Unramified.LocalRing
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkMaximalIdeal
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueSeparable
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResidueSeparable
 
 /-! # Tame unramifiedness after the group-order root extension
 

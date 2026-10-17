@@ -48,7 +48,7 @@ Proof:
 5. Step 4 gives existence and step 2 gives uniqueness on the original covering.
 For the empty covering of the empty basis member, a refinement has empty index type,
 and the selected gluing condition forces the set of sections to have exactly one element.
-No subsidiary nodes are used: all five steps of the DAG proof are elementary. -/
+No subsidiary nodes are used: all five steps of the blueprint proof are elementary. -/
 theorem gluing_of_cofinal_coverings
     {X : Type u} [TopologicalSpace X] (B : Set (Opens X))
     (hB : IsBasis B)

@@ -39,7 +39,7 @@ multiplicative-system hypotheses in Stacks Situation 05S8.
 Source: Stacks Project, Lemma 05RT, Definitions 04VB--04VD and 05R2, and Situation 05S8
 (blueprint: lem-pur-quasi-isos-saturated-triangulated).
 
-Proof outline for stage 3:
+Proof outline:
 1. Homotopic maps induce equal cohomology maps, so the quasi-isomorphism class is well defined.
    Apply `lem-pc-quasi-isomorphisms-multiplicative-system` for both fraction calculi and the
    localization description of the derived category.

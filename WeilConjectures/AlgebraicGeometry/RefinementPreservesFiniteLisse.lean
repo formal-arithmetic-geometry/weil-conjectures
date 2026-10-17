@@ -12,6 +12,7 @@ public import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite local constancy under refinement
 
@@ -255,10 +256,10 @@ theorem refinement_preserves_finite_lisse
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (T S : Stratification X) (hTS : T.Refines S)
     (hS : ∀ k : Fin S.n,
-      IsFiniteLocallyConstantEtaleSheafOfSets
+      IsFiniteLocallyConstantSheafOfTypes
         ((etaleSetPullback (S.immersion k)).obj F)) :
     ∀ i : Fin T.n,
-      IsFiniteLocallyConstantEtaleSheafOfSets
+      IsFiniteLocallyConstantSheafOfTypes
         ((etaleSetPullback (T.immersion i)).obj F) := by
   intro i
   obtain ⟨k, hk⟩ := hTS i
@@ -281,11 +282,11 @@ theorem refinement_preserves_finite_lisse
       ((c X (T.domain i) (Limits.pullback a b) a (Limits.pullback.fst a b)).app F).symm
   refine ⟨etaleSetLocallyConstant_descend (Limits.pullback.fst a b)
     ((etaleSetPullback a).obj F) (locallyConstant_of_iso e hq), ?_⟩
-  intro Ω _ _ s
+  refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
   obtain ⟨t, ht⟩ := exists_comp_eq_of_surjective (Limits.pullback.fst a b) s
   obtain ⟨cq, hcq, _⟩ := etaleSetInverseImageStalkGerm (S.domain k) (Limits.pullback a b)
     (Limits.pullback.snd a b) ((etaleSetPullback b).obj F) Ω t
-  have hfinite := (hS k).2 Ω (t ≫ Limits.pullback.snd a b)
+  have hfinite := (hS k).finite_sheafFiber Ω (t ≫ Limits.pullback.snd a b)
   have hqfinite : Finite ((pointSmallEtale t).sheafFiber.obj
       ((etaleSetPullback (Limits.pullback.snd a b)).obj ((etaleSetPullback b).obj F))) :=
     Finite.of_injective cq hcq.1
