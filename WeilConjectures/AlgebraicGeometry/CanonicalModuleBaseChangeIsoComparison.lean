@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
-import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonC0
+import WeilConjectures.AlgebraicGeometry.DerivedModulePullbackComparison
 import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonCompat
 
 /-! # Canonical module base change under changes of coordinates
@@ -33,7 +33,7 @@ Tag 08IB, affine coordinate change in the first proof paragraph.
 (blueprint: lem-pc-canonical-module-base-change-iso-comparison).
 
 Proof:
-1. Apply canonicalModuleBaseChange_iso_comparison_c0 to obtain a comparison
+1. Apply exists_isDerivedModulePullbackComparison to obtain a comparison
 at the first projection of the chosen coordinate pullback. This uses the
 existing derived-pullback counit, evaluated at the module in degree zero;
 no transport of the original comparison is required for existence.
@@ -84,7 +84,8 @@ theorem exists_canonicalModuleBaseChange_iso_comparison
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
       := by
-  obtain ⟨c0, hc0⟩ := canonicalModuleBaseChange_iso_comparison_c0 f g g' f' sq G c hc eS eT
+  obtain ⟨c0, hc0⟩ := exists_isDerivedModulePullbackComparison
+    (pullback.fst (f ≫ eS.hom) (eT.inv ≫ g ≫ eS.hom)) G
   obtain ⟨a, b, hab⟩ := canonicalModuleBaseChange_iso_comparison_ab f g g' f' sq G c hc eS eT c0 hc0
   exact ⟨c0, hc0, a, b, hab⟩
 
