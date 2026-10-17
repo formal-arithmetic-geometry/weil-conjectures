@@ -12,9 +12,118 @@
   "def-weil-abstract-derived-category",
   "lem-coef-quillen-section-rectification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the unbounded model and cochain conventions of [lem-coef-projective-cochain-monoidal-model] and [def-weil-abstract-derived-category]. Write $H_R(A,B)^n=\\prod_{q\\in\\mathbf Z}\\operatorname{Hom}_R(A^q,B^{q+n})$ and $\\delta f=d_Bf-(-1)^nf d_A$. Regard these as abelian groups. Expanding gives $\\delta^2f=0$ and $\\delta(gf)=(\\delta g)f+(-1)^{|g|}g\\delta f$. Composition is therefore a chain map over $\\mathbf Z$; its associativity and unit identities hold componentwise. The identity is a degree-zero cycle, and degree-zero cycles are precisely the cochain maps. This constructs the enrichment. These identities involve two adjacent components only; the product is over all integers.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H (section-hom-complexes), Tag 0A8I (lemma-composition); explicit differential expansion"
+   }
+  },
+  {
+   "text": "For $T\\in\\operatorname{Ch}(\\operatorname{Ab})$ put $(T\\otimes_{\\mathbf Z}A)^k=\\bigoplus_{p+q=k}T^p\\otimes_{\\mathbf Z}A^q$, with $d(t\\otimes a)=dt\\otimes a+(-1)^pt\\otimes da$ and $r(t\\otimes a)=t\\otimes ra$. Put $(B^T)^k=\\prod_p\\operatorname{Hom}_{\\mathbf Z}(T^p,B^{p+k})$, with $d b=d_Bb-(-1)^kb d_T$ and $(rb)(t)=r b(t)$. The two cross terms cancel in $d^2$ for the tensor; the Hom calculation is Step 1 over $\\mathbf Z$. Both differentials are $R$-linear. Direct sums and products of these module groups exist in every degree. The tensor associator sends $(t\\otimes u)\\otimes a$ to $t\\otimes(u\\otimes a)$ and its unit is $\\mathbf Z[0]$; the differential on either association has the three terms with signs $1,(-1)^{|t|},(-1)^{|t|+|u|}$. The unit and associativity diagrams are thus the identities on pure tensors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWN (section-symmetric-monoidal), Tag 0A8H (section-hom-complexes); mixed-coefficient construction written out"
+   }
+  },
+  {
+   "text": "The first adjunction sends a homogeneous degree-$n$ map $f:T\\otimes_{\\mathbf Z}A\\to B$ to $g(t)(a)=f(t\\otimes a)$. For $|t|=p$, its differential evaluated on $t,a$ is\n$$d_B f(t,a)-(-1)^{n+p}f(t,da)-(-1)^n f(dt,a),$$\nwhich is also the curry of $\\delta f$. The map is bijective in each degree by the defining bilinear universal property of each tensor summand: a map from a direct sum is a family, and a map into a product is a family. The second adjunction sends the same $f$ to $h(a)(t)=(-1)^{pq}f(t,a)$ for $|a|=q$. Indeed $(\\delta h)(a)(t)$ equals\n$$(-1)^{pq}d_Bf(t,a)-(-1)^{pq+n}f(dt,a)-(-1)^{pq+n+p}f(t,da),$$\nwhich is $(-1)^{pq}(\\delta f)(t,a)$. Its inverse has the same sign. All maps are $R$-linear in $a$, and natural under degree-zero cochain maps in all variables. Evaluating these formulas on homogeneous elements verifies the enriched evaluation and curry identities; composing a curry and its inverse gives the identity with the two signs cancelling. Thus these are complex adjunctions, and their degree-zero cycles give the tensor and cotensor adjunctions for the enrichment of Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5Y (lemma-compose), Tag 0GWN (section-symmetric-monoidal); mixed-coefficient currying and both differential identities"
+   }
+  },
+  {
+   "text": "Let $i:A\\to B$ and $p:X\\to Y$ be as in the statement, and denote the target pullback complex by $E$. The map $c:H_R(B,X)\\to E$ is $w\\mapsto(wi,pw)$. Pre- and postcomposition by cochain maps commute with $\\delta$, so $c$ is a cochain map. Put $P=\\operatorname{coker}i$ and $K=\\ker p$, with their induced cochain differentials. A homogeneous map $w$ lies in $\\ker c$ exactly when it vanishes on $A$ and has image in $K$. The quotient universal property gives a unique homogeneous $P\\to K$, in both directions. Since the quotient and inclusion commute with differentials, this identifies the kernel with $H_R(P,K)$ as a complex. The identification uses no splitting and is natural in $i,p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H (section-hom-complexes); kernel identification by the module quotient and kernel universal properties"
+   }
+  },
+  {
+   "text": "By [lem-coef-projective-cochain-monoidal-model], $i$ splits in each degree, $P$ is dg-projective with projective terms, and $p$ is surjective in each degree. Choose graded maps $r:B\\to A$ and $s:P\\to B$, and let $q:B\\to P$ be the quotient, so $ri=1$, $qs=1$, $ir+sq=1$, $rs=0$. A degree-$n$ element of $E$ is a pair $(u,v)$ with $pu=vi$. For every $q_0\\in\\mathbf Z$, lift $v s:P^{q_0}\\to Y^{q_0+n}$ along $p:X^{q_0+n}\\to Y^{q_0+n}$, using the lifting characterization in [def-weil-pbc-projective-module]. These choices give a graded degree-$n$ map $\\ell:P\\to X$. Set $w=ur+\\ell q$. Then $wi=u$ and $pw=vi r+v s q=v$. Hence $c$ is degreewise surjective, with no chain-map condition imposed on this homogeneous lift. We now have a degreewise short exact sequence $0\\to H_R(P,K)\\to H_R(B,X)\\xrightarrow c E\\to0$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H (section-hom-complexes); degreewise lifting from projective cokernel terms; projectivity as Stacks Tag 05CF in the cited definition"
+   }
+  },
+  {
+   "text": "If $p$ is a quasi-isomorphism, apply [lem-weil-pbc-complex-ses-homology-long-exact] to $0\\to K\\to X\\xrightarrow pY\\to0$. Exactness and the isomorphisms $H^n(p)$ force $H^n(K)=0$ for every integer $n$. The dg-projective property of $P$ in [lem-coef-projective-cochain-monoidal-model] then gives that $H_R(P,K)$ is acyclic. This uses the acyclicity of the entire product-total Hom, not exactness of a truncated or bounded totalization.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain); apply the dg-projective condition in the cited model statement"
+   }
+  },
+  {
+   "text": "If $i$ is a quasi-isomorphism, apply [lem-weil-pbc-complex-ses-homology-long-exact] to $0\\to A\\xrightarrow iB\\to P\\to0$. The isomorphisms $H^n(i)$ and exactness give $H^n(P)=0$ for all $n$. Since $P$ is dg-projective by [lem-coef-projective-cochain-monoidal-model], $H_R(P,P)$ is acyclic. Its degree-zero cycle $1_P$ is therefore $\\delta h$ for a degree-$(-1)$ map $h:P\\to P$, so $d_Ph+hd_P=1_P$. For homogeneous $f\\in H_R(P,K)^n$ define $S(f)=(-1)^nfh$. The Leibniz identity of Step 1 gives $\\delta S(f)+S(\\delta f)=f$. Thus $H_R(P,K)$ is contractible and in particular acyclic for arbitrary $K$. This is a direct consequence of the stated dg-projective condition; it does not require $K$ to be acyclic.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain); explicit contraction obtained from the dg-projective condition and the Hom differential"
+   }
+  },
+  {
+   "text": "In either case Steps 6 or 7 give an acyclic kernel for the degreewise short exact sequence of Step 5. Apply [lem-weil-pbc-complex-ses-homology-long-exact] in the abelian category of abelian groups to this sequence: the groups on either side of $H^n(c)$ in the long exact sequence are zero, so $H^n(c)$ is an isomorphism for every $n$. Hence $c$ is a quasi-isomorphism in either trivial case.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain); exactness with zero kernel cohomology"
+   }
+  },
+  {
+   "text": "The combinatorial model structure is already supplied by [lem-coef-projective-cochain-monoidal-model]. Apply that same statement with $R=\\mathbf Z$ to identify fibrations and trivial fibrations in abelian-group complexes as degreewise surjections and degreewise surjective quasi-isomorphisms. Steps 1–3 provide its enrichment, tensors and cotensors, while Steps 4–8 verify exactly the Hom comparison axiom in the opening definition of [lem-coef-quillen-section-rectification]. We use only that definition, not the section-rectification conclusion. All lifting in Step 5 is from projective $R$-modules, and no step asserts that such modules are projective over $\\mathbf Z$. Thus arbitrary unbounded complexes and rings such as $\\mathbf Z/m\\mathbf Z$ are included.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-quillen-section-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0A8H, 0A5Y; assemble the explicit constructions and comparison with the model structure and specified dg-model definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-coef-quillen-section-rectification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit mixed-coefficient enrichment and dg-model verification. Hom and Koszul conventions read in Tags 0A8H, 0A5Y, 0A8I and 0GWN; exact-sequence input is homology.tex Tag 0117. The projective model structure is used only through its existing DAG statement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +159,45 @@
    "results": "0 hits; ",
    "date": "2026-10-17",
    "verdict": "no match: retrieved general model axioms, K-projective or shift results do not assert the unbounded module projective model dg compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "dg.?model|projective.*model|model.*projective|enriched.*complex",
+   "results": "{\"t\": \"2026-10-17T08:18:21Z\", \"tool\": \"grep\", \"query\": \"dg.?model|projective.*model|model.*projective|enriched.*complex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: KProjective.lean:37–51 defines K-projectivity and a null-homotopy, not the mixed-coefficient enrichment or projective-model Hom comparison. ModelCategory/Injective.lean:54 concerns bounded-below injective fibrations; the remaining hits are general quasi-isomorphism properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a cofibration of module complexes and a surjection of complexes the pullback Hom comparison is surjective and is a quasi-isomorphism if either map is trivial",
+   "results": "{\"t\": \"2026-10-17T08:18:22Z\", \"tool\": \"leansearch\", \"query\": \"For a cofibration of module complexes and a surjection of complexes the pullback Hom comparison is surjective and is a quasi-isomorphism if either map is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIso_of_retractArrow\", \"HomotopicalAlgebra.instCofibrationICofibrationsTrivialFibrations\", \"CategoryTheory.ShortComplex.quasiIso_of_retract\", \"CategoryTheory.ShortComplex.quasiIso_of_isIso\", \"quasiIso_of_isIso\", \"quasiIsoAt_of_retract\"], \"digest\": \"a65d2b8dfcd8db65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: KProjective.lean:37–51 defines K-projectivity and a null-homotopy, not the mixed-coefficient enrichment or projective-model Hom comparison. ModelCategory/Injective.lean:54 concerns bounded-below injective fibrations; the remaining hits are general quasi-isomorphism properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"IsKProjective\"",
+   "results": "{\"t\": \"2026-10-17T08:18:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_shift_iff\", \"CochainComplex.isKProjective_of_op\"], \"digest\": \"2ef6dc08d7e9f78b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: KProjective.lean:37–51 defines K-projectivity and a null-homotopy, not the mixed-coefficient enrichment or projective-model Hom comparison. ModelCategory/Injective.lean:54 concerns bounded-below injective fibrations; the remaining hits are general quasi-isomorphism properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded cochain complexes of modules with the projective model structure are a differential graded model category over abelian group complexes",
+   "results": "{\"t\": \"2026-10-17T08:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded cochain complexes of modules with the projective model structure are a differential graded model category over abelian group complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"d41b70d0dbbb9928\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: KProjective.lean:37–51 defines K-projectivity and a null-homotopy, not the mixed-coefficient enrichment or projective-model Hom comparison. ModelCategory/Injective.lean:54 concerns bounded-below injective fibrations; the remaining hits are general quasi-isomorphism properties."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKProjective|CategoryWithFibrations|model structure",
+   "results": "{\"t\": \"2026-10-17T08:26:18Z\", \"tool\": \"grep\", \"query\": \"IsKProjective|CategoryWithFibrations|model structure\", \"sub\": \"Algebra/Homology/ModelCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\"], \"digest\": \"47c81a76031f4847\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: KProjective.lean:37–51 defines K-projectivity and a null-homotopy, not the mixed-coefficient enrichment or projective-model Hom comparison. ModelCategory/Injective.lean:54 concerns bounded-below injective fibrations; the remaining hits are general quasi-isomorphism properties."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-cosimplicial-complex-holim",
@@ -76,5 +220,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-projective-cochain-dg-compatibility",
+  "worker": "stage1",
+  "summary": "Kept the statement. Gave explicit unbounded mixed-coefficient enrichment, signed complex currying, degreewise projective lift of the Hom comparison and its natural kernel, and separate trivial-map cases using the existing long exact cohomology sequence. No new nodes.",
+  "blueprint": "Supplies the dg compatibility input extracted from cosimplicial-complex-holim step 1, underneath the arbitrary-site hyperdescent foundation of thm-cbc-finite-level-proetale; preserves the recorded main-20261015 ancestry and via-chain.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-projective-cochain-monoidal-model",
+    "why": "Generic structural theorem on module complexes: supplies the combinatorial projective model and dg-projective cokernels; this geometric compact-support unit has no replacement for this algebraic input."
+   },
+   {
+    "node": "lem-coef-quillen-section-rectification",
+    "why": "Only its opening definition specifies the dg-model Hom comparison axiom named in the item; no section rectification conclusion or alternative unit route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-quillen-section-rectification"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-b39c6d8ad",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-b39c6d8ad (reviewer sub-agent of L); spot-checked: I read the item in full: its statement is unchanged, it has 9 steps and the delivery creates no new nodes. I also read the statements of all 5 cited nodes, the citer lem-cbc-cosimplicial-complex-holim (step 1), the sk-prop-sf-cbc unit record, Stacks 0A8H/0A5Y/0A8I and Mathlib KProjective.lean 35-51. I recomputed every sign. The Hom differential d_B f-(-1)^n f d_A matches 0A8H, and both delta^2=0 and the Leibniz rule hold. Both curry maps commute with the differentials; for the (-1)^{pq} curry the dt term gets (-1)^{n+pq} and the da term (-1)^{n+p(q+1)}. The kernel of c is Hom(coker i, ker p) by the universal properties. The degreewise lift w=ur+lq satisfies wi=u and pw=v(ir+sq)=v, using the model node's split injection, projective terms of the cokernel and termwise surjective p. If p is a quasi-isomorphism, the long exact sequence (Tag 0117) gives K acyclic, and the dg-projective clause then gives Hom(P,K) acyclic. If i is a quasi-isomorphism, P is acyclic, so 1_P=dh+hd, and S(f)=(-1)^n fh is a contraction of Hom(P,K). The axiom matches the opening definition of lem-coef-quillen-section-rectification, with the model at R=Z. The coefficient category Ch(Mod_R) matches the parent's Lambda. The statement holds on the edge cases R=0, i=id, p=id and R=Z/m. A search of the DAG found no duplicate: the flat model, the dg-module classification and the enriched-diagram nodes do not state this assertion. A dependency search shows no cycle, and proof_deps equals the union of the steps' uses. Accepted tool_uses: lem-coef-projective-cochain-monoidal-model and lem-coef-quillen-section-rectification, the latter for its definition only. Both are generic algebraic black boxes and replace no step of the unit. No fixes were made; review.md is written."
  }
 }

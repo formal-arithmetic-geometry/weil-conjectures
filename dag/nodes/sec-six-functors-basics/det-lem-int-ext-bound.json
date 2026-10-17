@@ -106,25 +106,32 @@
    }
   },
   {
-   "text": "First check that finite-coefficient direct images compute the integral direct images used in step 4. Write $F_T=-\\otimes^L_{B_T}A_{n,T}$ and $U_T=\\operatorname{Res}_n$. By [lem-weil-derived-scalar-extension-restriction-adjunction], $F_T\\dashv U_T$, with $U_T$ exact. For $j:V\\hookrightarrow X$, the derived geometric adjunction is [sk-def-sfb-module-derived-pushpull], and the tensor pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $F_Vj_B^*\\simeq j_A^*F_X$. Explicitly, on K-flat representatives both composites send $W$ to $A_{n,V}\\otimes^L_{j^{-1}B_X}j^{-1}W$: the coefficient maps of [sk-prop-sfb-cartesian-coefficients] identify $j^{-1}B_X=B_V$ and $j^{-1}A_{n,X}=A_{n,V}$, and tensor associativity cancels the intermediate $j^{-1}B_X$-extension. This identifies the two pullbacks with the same quotient maps. Thus, naturally in $W\\in D(B_X)$ and $Q\\in D(A_{n,V})$,\n$$\\operatorname{Hom}_{B_X}(W,Rj_{B,*}U_VQ)\n=\\operatorname{Hom}_{B_V}(j_B^*W,U_VQ)\n=\\operatorname{Hom}_{A_{n,V}}(F_Vj_B^*W,Q)\n=\\operatorname{Hom}_{A_{n,X}}(F_XW,Rj_{A,*}Q)\n=\\operatorname{Hom}_{B_X}(W,U_XRj_{A,*}Q).$$\nThese adjunction bijections identify $Rj_{B,*}U_VQ$ with $U_XRj_{A,*}Q$, including the unit maps (both transpose the identity of the restricted object). Exact geometric inverse images also commute with the coefficient-forgetting $U_T$ on the underlying sheaves. This permits the fibre and restriction calculations below at finite coefficients, then restriction of scalars back to $B$.\n\nWe bound $Rj_*j^*N_n$ with the finite coefficient ring $A_n=\\mathcal O_E/\\pi_E^n$. By [sk-thm-pe-direct-image-comparison], restriction of a classical complex is classical, and $Rj_*$ on bounded-below classical complexes is obtained from étale direct image. On a classical $A_n$-module sheaf $F$, the definition of $c$ in [sk-def-cd] says the underlying abelian $R^t j_*F$ vanishes for $t>c$. The module-to-abelian direct-image comparison [det-pbc-conventions-module-cohomology](3) and the étale/pro-étale comparison identify this with the same assertion for module-valued derived direct image. Filter the bounded complex $j^*N_n$ by its two cohomology sheaves in degrees $-1,0$, using [lem-weil-pbc-truncation-triangle]. Applying $Rj_*$ preserves the triangles and shifts by [lem-pc-right-derived-functor-triangulated]. The long exact cohomology sequences of [lem-sf-derived-homology-long-exact] show that the contributions have upper bounds $c-1,c$, respectively, hence $Rj_*j^*N_n$ has upper bound $c$. It is bounded below and classical by the same direct-image comparison. Its lower bound is $-1$: the module-sheaf categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the small sites in a common larger universe. The direct image $j_*$ is additive and left exact because it is a right adjoint, and [lem-weil-pbc-derived-functor-negative-vanishing] says its bounded-below right derived functor preserves every lower cohomological bound.",
+   "text": "Write $V=X\\setminus Z$ and $U_T=\\operatorname{Res}_n:D(A_{n,T})\\to D(B_T)$ for $T=X,V$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $u=j$, $R_T=B_T$, $S_T=A_{n,T}$ and $a_T$ the reduction projection. The required coefficient isomorphisms are [sk-prop-sfb-cartesian-coefficients](1). Their compatibility with reduction follows from naturality of pullback from the point: both composites are the pullback of $\\mathcal O_E\\to\\mathcal O_E/\\pi_E^n$. Consequently the cited lemma gives the canonical isomorphism $U_XRj_{A,*}\\simeq Rj_{B,*}U_V$, compatible with the inverse-image/direct-image adjunctions, hence with their units. The exact inverse images also commute with $U_T$ by its inverse-image comparison. Thus all finite-coefficient support fibres and their unit maps below compute the same integral-coefficient objects after restriction. No flatness of $B_T\\to A_{n,T}$ is assumed.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "sk-def-cd",
-    "det-pbc-conventions-module-cohomology",
-    "lem-weil-pbc-truncation-triangle",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
     "sk-prop-sfb-cartesian-coefficients"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6 (lemma-morphism-comparison); derived.tex Tag 08J5 (remark-truncation-distinguished-triangle)"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition, applied to the two coefficient-square factorizations; Tag 07A6, label lemma-adjoint, for unit compatibility"
+   }
+  },
+  {
+   "text": "Bound $Rj_{A,*}j_A^*N_n$ on the finite-coefficient site. For a classical $A_n$-module sheaf $F$, [sk-def-cd] gives the upper bound $c$ on the underlying abelian higher direct images. The module/abelian comparison [det-pbc-conventions-module-cohomology](3) and the qcqs comparison [sk-thm-pe-direct-image-comparison] give $H^t(Rj_{A,*}F)=0$ for $t>c$. Its negative cohomology vanishes by [lem-weil-pbc-derived-functor-negative-vanishing]: module-sheaf categories on the small sites are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and direct image is additive left exact. The functor $Rj_{A,*}$ is triangulated by [lem-pc-right-derived-functor-triangulated]. Apply [lem-pur-bounded-heart-amplitude] with the class of classical $A_n$-module sheaves, heart bounds $[0,c]$, and input bounds $[-1,0]$ from step 3. Classical sheaves contain zero and are closed under isomorphism; exact pullback makes $j^*N_n$ classical. The result is the interval $[-1,c]$. The complex $j^*N_n$ comes from a bounded-below étale complex by step 2, and $j$ is qcqs, so [sk-thm-pe-direct-image-comparison] also makes its direct image classical. Step 6 identifies its coefficient restriction with the integral direct image. This proves all bounds and classicality used in the support-fibre calculation.",
+   "uses": [
+    "sk-def-cd",
+    "det-pbc-conventions-module-cohomology",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+    "place": "paragraph 3, first bullet: torsion support bound; Stacks Tag 09A6, proetale.tex label lemma-morphism-comparison, and Tag 08J5, derived.tex label remark-truncation-distinguished-triangle"
    }
   },
   {
@@ -192,7 +199,7 @@
    }
   },
   {
-   "text": "For $C\\in\\Cons(X,\\mathcal O_E)$ use only clause (1) of [det-lem-int-ext-formula]: there is a finite filtration by distinguished triangles with pieces $a_{\\alpha,!}L_\\alpha$ in degree zero. Let $d_C$ be the maximum of the finitely many integers $\\operatorname{cd}_\\ell(j_\\alpha)+\\operatorname{cd}_\\ell(S_\\alpha)+3$, taking $d_0=0$ for the empty filtration. For fixed $N$ and $r>d_C$, every piece has zero maps to $N[r]$ by step 10. At each filtration triangle $C'\\to C''\\to a_{\\alpha,!}L_\\alpha\\to C'[1]$, [lem-weil-pbc-hom-out-of-triangle-exact](i) gives exactness of $\\operatorname{Hom}(a_{\\alpha,!}L_\\alpha,N[r])\\to\\operatorname{Hom}(C'',N[r])\\to\\operatorname{Hom}(C',N[r])$. Its outside groups are zero, so the middle group is zero. Induction from the zero object proves the assertion for $C$. The bound is independent of $N$.",
+   "text": "For $C\\in\\Cons(X,\\mathcal O_E)$ use only clause (1) of [det-lem-int-ext-formula]: there is a finite filtration by distinguished triangles with pieces $a_{\\alpha,!}L_\\alpha$ in degree zero. Let $d_C$ be the maximum of the finitely many integers $\\operatorname{cd}_\\ell(j_\\alpha)+\\operatorname{cd}_\\ell(S_\\alpha)+3$, taking $d_0=0$ for the empty filtration. For fixed $N$ and $r>d_C$, every piece has zero maps to $N[r]$ by step 11. At each filtration triangle $C'\\to C''\\to a_{\\alpha,!}L_\\alpha\\to C'[1]$, [lem-weil-pbc-hom-out-of-triangle-exact](i) gives exactness of $\\operatorname{Hom}(a_{\\alpha,!}L_\\alpha,N[r])\\to\\operatorname{Hom}(C'',N[r])\\to\\operatorname{Hom}(C',N[r])$. Its outside groups are zero, so the middle group is zero. Induction from the zero object proves the assertion for $C$. The bound is independent of $N$.",
    "uses": [
     "det-lem-int-ext-formula",
     "lem-weil-pbc-hom-out-of-triangle-exact"
@@ -224,20 +231,21 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-dvr-saturation-line-smith-normal-form",
-  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "det-pbc-conventions-module-cohomology",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "sk-def-sfb-module-derived-pushpull",
+  "sk-thm-pe-direct-image-comparison",
   "lem-weil-pbc-derived-functor-negative-vanishing",
   "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-truncation-triangle",
   "lem-weil-pbc-site-derived-tensor-descent",
   "det-pe-classical-derived-equivalence",
   "det-pe-finite-tor-comparison-noetherian",
   "sk-prop-sf-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "det-pe-products-derived",
   "def-weil-derived-limit",
   "lem-weil-pbc-hom-into-triangle-exact",
@@ -319,10 +327,52 @@
    "results": "SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.LocalGeneratorsData.IsFiniteType, instAbelianLightCondMod, CategoryTheory.HasInjectiveDimensionLE, SheafOfModules.IsFinitePresentation, CompHausLike.LocallyConstantModule.functor, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
    "date": "2026-10-16",
    "verdict": "no match: finite-presentation predicates and a dimension abbreviation do not assert a constructible Ext bound; read Injective/Dimension.lean lines 40--52"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Ext|Ext.*constructible|adic.*Ext|Ext.*adic",
+   "results": "Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/WithVal.lean; Mathlib/NumberTheory/Padics/WithVal.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible integral pro-etale Ext bound; broad adic pattern returned unrelated extension names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective dimension of constructible integral l-adic sheaves on a finite type scheme",
+   "results": "CategoryTheory.projectiveDimension; CategoryTheory.HasProjectiveDimensionLE; CategoryTheory.projectiveDimension_ne_top_iff; CategoryTheory.HasProjectiveDimensionLT; CategoryTheory.projective_iff_hasProjectiveDimensionLT_one; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.casesOn",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results; generic dimension predicates assume a bound, while no constructible integral pro-etale Ext bound is supplied"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLT, CategoryTheory.Abelian.Ext",
+   "results": "CategoryTheory.hasProjectiveDimensionLT_of_enoughInjectives; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CategoryTheory.HasProjectiveDimensionLT.subsingleton; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.Abelian.Ext.eq_zero_of_hasProjectiveDimensionLT; CategoryTheory.hasProjectiveDimensionLT_iff; ModuleCat.hasProjectiveDimensionLT_of_forall_finite",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results; generic dimension predicates assume a bound, while no constructible integral pro-etale Ext bound is supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of Ext from a constructible integral l-adic sheaf to every constructible sheaf in sufficiently high degrees",
+   "results": "CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.HasInjectiveDimensionLT.subsingleton'; CategoryTheory.Sheaf.H; CategoryTheory.HasInjectiveDimensionLT.subsingleton; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results; generic dimension predicates assume a bound, while no constructible integral pro-etale Ext bound is supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|proetale",
+   "results": "none; source subdirectory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible or proetale source hit in CategoryTheory/Sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective dimension of constructible sheaves over the ring of integers of an l-adic field on the pro etale site",
+   "results": "CategoryTheory.HasProjectiveDimensionLT; CategoryTheory.HasProjectiveDimensionLE; CategoryTheory.projectiveDimension_ne_top_iff; CategoryTheory.instHasProjectiveDimensionLTSucc; CategoryTheory.instHasProjectiveDimensionLTHAddNat_1; CategoryTheory.projectiveDimension_lt_iff; CategoryTheory.projectiveDimension; CategoryTheory.instHasProjectiveDimensionLTHAddNat",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results; generic dimension predicates assume a bound, while no constructible integral pro-etale Ext bound is supplied"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -346,7 +396,7 @@
   "date": "2026-10-17",
   "item": "det-lem-int-ext-bound",
   "worker": "stage1",
-  "summary": "Expanded the reduction, classicality, support, dual Tor-amplitude, hypercohomology, Roos, and finite-filtration arguments using existing DAG statements. Corrected the ordinary-dual error in the unit formula by deriving the needed formula with RHom; uses only clause (1) of det-lem-int-ext-formula. Made explicit the inherited global finite-field setting and corrected the reconstruction citation to Tag 099M. No new nodes or Lean changes. Resumed review added explicit citations for the Grothendieck hypothesis of the lower-bound theorem and the derived unit hypothesis of classical descent. Second reading expanded the elementary coefficient-pullback compatibility on K-flat representatives and recorded a fresh independent semantic search; the eleven-step argument and bound are unchanged. Current-origin retry refreshed the reductions-criterion and filtration citation quotes after their intervening landing; the existing formula node now has the corrected derived dual, and the explanatory text records this.",
+  "summary": "Twelve-step proof of both the numerical stratum bound and its finite-filtration consequent, retaining the completed coefficient categories and possibly torsion stratum modules. Uses existing statements for derived completeness, finite-coefficient comparison, local finite-free resolutions, support fibres, Tor amplitude, sections, and the Roos triangle. The repaired coefficient comparison and bounded-input amplitude arguments now explicitly cite lem-weil-pbc-ring-sheaf-change-adjunction and lem-pur-bounded-heart-amplitude. The original ordinary-dual blueprint error is documented by its torsion-point counterexample; the current formula node already uses the correct derived dual. Verified all 57 citation pairs against current statements and all tool hypotheses. No new nodes, Lean edits or compiler invocations.",
   "blueprint": "Realizes unit sk-lem-int-ext proof paragraphs 3--4 and both clauses of det-lem-int-ext-bound. The erroneous ordinary cHom in unit paragraph 1 is replaced by the derived dual already stated in det-lem-int-integral-heart-dualizable; the reduction tower, support bound, Tor bound, sections bound, and one-degree Milnor loss are unchanged.",
   "tool_uses": [
    {
@@ -456,6 +506,14 @@
    {
     "node": "lem-weil-pbc-ring-sheaves-grothendieck",
     "why": "Generic theorem for modules over any ring sheaf on a small site verifies the Grothendieck hypotheses of lower-bound preservation; already Lean-closed."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic arbitrary-ring-sheaf derived restriction/direct-image and adjunction comparison replaces the first hidden argument of old step 6; unlike discrete finite-ring comparisons it applies to completed B_T."
+   },
+   {
+    "node": "lem-pur-bounded-heart-amplitude",
+    "why": "Generic finite truncation theorem converts the classical sheaf [0,c] bound into the [-1,c] complex bound, replacing the second hidden argument of old step 6."
    }
   ]
  },
@@ -486,15 +544,17 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-dvr-saturation-line-smith-normal-form",
   "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-ring-sheaves-grothendieck"
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-bounded-heart-amplitude"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N4-021b7dcd1",
-  "group": "N4",
+  "reviewer": "NT-cc-Q153-becf9d93a",
+  "group": "Q153",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-021b7dcd1 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item. The delivery is one commit with the item and its report; it adds no new nodes, proof_deps is exactly the union of the step uses, and no SGA source is cited. Statement: both clauses and the bound cd(j)+cd(S)+3 are kept, and torsion L is still allowed. The one change is that the setting is now k = F̄_q. This is justified: the only citer, sk-lem-int-ext, has sk-def-sf-setting in its stmt_deps, and over an arbitrary field of characteristic p the integer d_C can fail when cd_l(k) is infinite. The report names the change. All 11 steps check out against the cited statements. (1) cd_l(k)=0 and Tag 0F10 give finite c and s. (2) sk-lem-integral-models(2), the reductions criterion and the constructible comparison make every N_n classical with N = R lim N_n (Stacks 099M, Bhatt-Scholze Def. 6.5.1 and Lemmas 6.5.3-6.5.4). (3) N_n is the cone of pi^n on N, with cohomology in [-1,0] killed by pi^n. (4) The formula uses the derived dual RHom(L,B_S), dualizable with Tor amplitude [0,1]; the closed-support adjunction applies because O_E is an admissible coefficient. I confirmed the worker's counterexample to the old ordinary dual (Ext^1(O_E/pi,O_E)=O_E/pi), and the result agrees with the corrected clause (2) of det-lem-int-ext-formula. (5) A local finite-free model, built with the DVR and Smith normal form, makes D_n constructible and classical with Tor amplitude [0,1]. (6) The adjunction chain gives Rj_{B*}Res = Res Rj_{A*}, and Rj_*j^*N_n lies in [-1,c]. (7) M_n lies in [-1,c+1] and is classical. (8) T_n lies in [-1,c+2] and is classical. (9) RGamma(S,T_n) has upper bound c+s+2. (10) Hom into the Roos triangle (Stacks 08TC) gives c+s+3, the unit's one-degree loss, without needing Tag 09AA. (11) The finite filtration with Hom-out-of-triangle exactness gives d_C, with d_0=0. Small cases checked: S empty, Z=X, and a point with L=O_E or L=O_E/pi. The det-uniform-constructible-ext-* nodes and sk-lem-uniform-constructible-ext are not duplicates. I accept all declared tool_uses as generic tools. No fixes made. Minor, not faults: source.external still lists the blueprint's 099Q and 08TB, and step 4 re-derives the sibling formula instead of citing it."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-becf9d93a (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and its report, no new nodes, proof_deps equal to the union of the 12 steps' uses (39 ids, none missing or merged), no SGA. Statement: both clauses and the bound cd(j)+cd(S)+3 are kept, torsion L is allowed, and the completed coefficient B=O_{E,X} is kept separate from the finite A_n throughout. The explicit k=F̄_q setting is the one the only citer, sk-lem-int-ext, already uses through sk-def-sf-setting, so nothing is weakened. Source error confirmed: the blueprint's ordinary dual cHom(L,O) fails for L=O_E/π on a point, where Hom=0 but Ext^1=O_E/π. The split uses the derived dual instead, which matches the corrected det-lem-int-ext-formula(2). Sources read: Bhatt–Scholze Def 6.5.1 and Lemmas 6.5.3–6.5.4, Stacks 099M, 093M and 08JJ, and the 08TC/08TB derived limit; I checked all cited tags against tags/tags. The blueprint's 099Q is mislabeled, and the steps correctly use 099M. Steps: (1) cd finite by 0F10. (2) Derived completeness, reductions and étale origin. (3) N_n=[N→N] in [-1,0], killed by ℓ^n. (4) Formula through i_*⊣RΓ_Z (O_E is admissible) and u_!⊣u^*. (5) D_n has a finite constant local model from the DVR and Smith normal form, so it is constructible and classical. (6) Res commutes with Rj_* via ring-sheaf-change-adjunction; the coefficient square commutes. (7) Rj_*j^*N_n lies in [-1,c] by the heart-amplitude lemma. (8) The fibre lies in [-1,c+1] and is classical. (9) T_n lies in [-1,c+2] and is classical, using Tor reflection. (10) Sections bound c+s+2, through the chain of module/abelian and pro-étale/étale comparisons, with the B-to-A_n change of rings by the scalar-extension adjunction. (11) Hom into the Roos triangle, clause (iii), loses one degree: c+s+3. (12) The filtration induction gives d_C, with d_0=0. Edge cases: S=∅, Z=X, L=O_E or O_E/π on a point, torsion N, C=0. Duplicate search: the sk-lem-uniform-constructible-ext and det-uniform-constructible-ext-* nodes have different statements. I accept all 27 declared tool_uses as generic tools. No fixes. Minor, not faults: source.external still lists 099Q, and step 4 re-derives the sibling formula instead of citing it."
  },
  "lean_audit": {
   "master": {
