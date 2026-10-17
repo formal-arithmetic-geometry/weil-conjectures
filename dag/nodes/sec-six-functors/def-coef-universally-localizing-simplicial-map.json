@@ -44,7 +44,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-embedded-simplex-resolution",
@@ -76,5 +76,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-coef-universally-localizing-simplicial-map",
+  "worker": "stage1",
+  "summary": "Checked the universal-localization definition against Kerodon Definition 6.3.5.1 (02M0) and its equivalent functor-category formulation in Proposition 6.3.1.13(2) (01MS). The statement introduces all simplicial sets, pullbacks, quasicategories, functor simplicial sets and full subcategories it uses; its only dependency is the existing enhanced-diagrams/cones definitions. No additional proof node is required for a definition, and no exact project declaration or Mathlib declaration attaches.",
+  "blueprint": "Realizes the auxiliary universal-localization notion used in the finite embedded simplex resolution route: the Kerodon 02M0 definition and 01MS functor-category characterization in the ancestor proof place recorded in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-a4e56f284",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-a4e56f284 (reviewer sub-agent of L); spot-checked: I read the definition in full and checked it against Kerodon online. Def 6.3.5.1 (02M0) says that for every map of simplicial sets S'->S, the projection S'x_S X->S' is a localization at some collection of edges W. Prop 6.3.1.13(2) (01MS) characterises localization as: for every infinity-category E, precomposition factors through Fun(C[W^-1],E) and is an equivalence. The node matches clause by clause. f, A, B and T are arbitrary, with no quasicategory hypothesis. The base change is the degreewise pullback along every small g. W_g may depend on g and does not depend on E. The full functor equivalence is kept, not weakened to the core or to pi_0. The only stmt_dep, def-cbc-enhanced-diagrams-cones, defines every notion used: quasicategories, equivalence edges, Fun(K,C), full subcategories, functor equivalence and degreewise pullbacks. Proof and proof_deps are empty, as they should be for a definition. Edge cases agree with Kerodon and with the three citers (contractible-factor 02M8, pushout 02MA, and finite-embedded-simplex-resolution steps 3 and 7, which use stability under base change and g=1_X): g=id, T=empty (Fun(empty,E)=Delta^0), and f=id with W=empty. Grepping the DAG and blueprint found no duplicate definition, so same_as [] holds. The four recorded Mathlib searches found no match. This is not a target node, so the base-change morphism and coefficient-category checks do not apply. There are no new nodes, no tool_uses and no changes. The online Kerodon source with the archive marked WANTED is accepted, following the neighbouring nodes. Details are in review.md."
  }
 }
