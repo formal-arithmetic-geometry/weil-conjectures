@@ -37,7 +37,7 @@ that no prime can be inserted before, between, or after its entries. The depth h
 is the depth of `S` as a module over itself, with respect to its maximal ideal, using
 `RingTheory.Sequence.IsRegular` as in `def-weil-pbc-regular-sequence`.
 
-Proof, following the eight steps of the DAG node:
+Proof, following the eight steps of the blueprint node:
 1. Induct on `d`, for all Noetherian local rings with dimension `d` and depth at least
    `d`. The definition `def-weil-pbc-krull-dimension-ring` gives `n ≤ d`. Maximality
    implies that the first prime is minimal, the last is the maximal ideal, and there

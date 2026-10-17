@@ -46,7 +46,6 @@ private theorem openRestrictionNumeratorIso_inv_tmul (X : Scheme.{u}) (L F : X.M
   rfl
 
 
-set_option linter.unusedVariables false in
 /-- Open restriction identifies tensor-power numerator groups, their transition maps,
 and the equations expressing multiplication by a tensor power of a section.
 No affineness, invertibility, quasi-coherence, or nonvanishing hypothesis is needed.
@@ -85,7 +84,7 @@ theorem exists_tensorPowSection_open_restriction (X : Scheme.{u}) (L F : X.Modul
       (∀ (n b : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)),
         N (n + b) ((mulTensorPowSection (homOfGlobalSection L s) F n b).app U t) =
           (mulTensorPowSection (homOfGlobalSection LU sU) FU n b).app ⊤ (N n t)) ∧
-      ∀ (V : U.toScheme.Opens) (W : X.Opens) (hW : U.ι ''ᵁ V = W) (hWU : W ≤ U),
+      ∀ (V : U.toScheme.Opens) (W : X.Opens), U.ι ''ᵁ V = W → ∀ (hWU : W ≤ U),
         ∃ T : Γ(FU, V) ≃+ Γ(F, W),
           ∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)) (z : Γ(FU, V)),
             tmulSection z (tensorPowSectionOne (homOfGlobalSection LU sU) n V) =

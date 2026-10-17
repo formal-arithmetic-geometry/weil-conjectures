@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Ample
-import WeilConjectures.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve
+import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
 import WeilConjectures.AlgebraicGeometry.FindGloballyGenerated
 
@@ -36,7 +36,7 @@ Source: Stacks Project, Varieties, Lemma 09ND.
 
 Proof:
 1. Choose a finite cover by nonempty affine opens; each complement is finite
-   by `lem-sc-affine-complement-finite-on-integral-curve`.
+   by `IsOpen.finite_compl_of_topologicalKrullDim_le_one`.
 2. Apply `lem-sc-find-globally-generated` to each affine open and its finite
    complement, obtaining a globally generated invertible module and a section
    with affine principal open equal to that open. The complement points have
@@ -56,7 +56,8 @@ theorem exists_isAmple_of_integral_dim_one
   obtain ⟨U, hU, hxU, _⟩ :=
     exists_isAffineOpen_mem_and_subset (X := Y) (x := x) (U := ⊤) (by simp)
   have hne : (U : Set Y).Nonempty := ⟨x, hxU⟩
-  have hfin := hU.finite_compl_of_integral_dim_one hY hne
+  have : IsNoetherian Y := IsNoetherian.mk
+  have hfin := U.isOpen.finite_compl_of_topologicalKrullDim_le_one hY.le hne
   obtain ⟨L, hL, hgen, s, hs⟩ :=
     exists_globallyGenerated_invertible_nonvanishing_eq Y hY U hU hne hfin
   exact ⟨L, hL, hgen, s, U, hs.symm, hxU, hU⟩

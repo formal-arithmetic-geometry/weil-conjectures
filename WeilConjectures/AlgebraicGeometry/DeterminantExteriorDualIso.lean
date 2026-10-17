@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
@@ -48,10 +48,10 @@ points to check and its module category is trivial. No nontriviality assumption
 on the section rings is needed. -/
 theorem exteriorSheaf_dual_iso (X : Scheme.{u}) (M : X.Modules) (d : ℕ)
     (hfree : M.IsFiniteLocallyFreeOfRank d) :
-    Nonempty ((Scheme.Modules.exteriorSheaf
+    Nonempty ((Scheme.Modules.exteriorPower
       (SheafOfModules.homObj (R := X.sheaf) M
         (SheafOfModules.unit X.ringCatSheaf)) d) ≅
-      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M d)) := by
+      Scheme.Modules.dual (Scheme.Modules.exteriorPower M d)) := by
   obtain ⟨f, hf⟩ := exterior_dual_pairing_exists X M d
   obtain ⟨I, U, hU, e⟩ :=
     (SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}

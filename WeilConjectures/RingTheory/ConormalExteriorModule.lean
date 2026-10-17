@@ -13,11 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 @[expose] public section
 set_option autoImplicit false
 universe u
-namespace AlgebraicGeometry
-
 /-- The exterior conormal, regarded as a module over the ambient ring.
 Source: Stacks Project, Tag 062I.
-(blueprint: new-r4-self-tor-conormal-comparison). 
+(blueprint: new-r4-self-tor-conormal-comparison).
 (blueprint: new-r4-conormal-exterior-module)
 -/
 noncomputable abbrev conormalExteriorModule (A : Type u) [CommRing A]
@@ -25,5 +23,3 @@ noncomputable abbrev conormalExteriorModule (A : Type u) [CommRing A]
   (ModuleCat.restrictScalars (Ideal.Quotient.mk I)).obj
     (ModuleCat.of (A ⧸ I) (⋀[A ⧸ I]^n I.Cotangent))
 
-
-end AlgebraicGeometry

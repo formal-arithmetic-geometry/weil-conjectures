@@ -7,6 +7,13 @@ Authors: Bin Wu
 module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
+
+/-! # Canonical evaluation of twist fractions
+
+The canonical evaluation map from a further localization of `A_f` to the localization at a
+homogeneous prime, obtained from the universal property of module localization (Stacks
+Project, Section 27.8). -/
+
 @[expose] public section
 universe v
 open CategoryTheory Opposite LocalizedModule

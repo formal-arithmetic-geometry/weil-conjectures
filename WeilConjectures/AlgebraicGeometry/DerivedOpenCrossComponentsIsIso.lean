@@ -28,8 +28,6 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
--- Keep the original, unused rW let-binding in the statement unchanged.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
@@ -72,7 +70,6 @@ theorem derived_open_cross_components_isIso
       (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory;
     let sV := (schemeOpenOverlapRestriction X
       (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory;
-    let rW := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory;
     let eU := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : U ⊓ V ⟶ U);
     let eV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : U ⊓ V ⟶ V);
     let AU := (schemeDerivedDirectImage U.ι).obj A;

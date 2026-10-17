@@ -67,24 +67,63 @@ private noncomputable def constantChartPullbackIso {X : Scheme.{u}}
       (X.smallEtaleTopology.over U) U.left.smallEtaleTopology
       (Type (u + 1)) Over.mkIdTerminal).app M
 
+/-- A geometric stalk through a constant chart is in bijection with its constant value. -/
+private theorem nonempty_equiv_stalk_constantChart {X : Scheme.{u}}
+    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale)
+    (M : Type (u + 1))
+    (e : G.over U ≅ (constantSheaf (X.smallEtaleTopology.over U)
+      (Type (u + 1))).obj M)
+    (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ U.left) :
+    Nonempty ((((pointSmallEtale (t ≫ U.hom)).sheafFiber).obj G) ≃ M) := by
+  obtain ⟨c, hc, -⟩ := etaleSetInverseImageStalkGerm X U.left U.hom G Ω t
+  let d := (pointSmallEtale t).sheafFiber.mapIso (constantChartPullbackIso G U M e) ≪≫
+    (pointSmallEtale t).sheafFiberConstantSheafIso M
+  exact ⟨(Equiv.ofBijective c hc).symm.trans d.toEquiv⟩
+
 /-- A geometric stalk through a constant chart has the cardinality of its constant value. -/
 private theorem card_stalk_constantChart {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale)
     (M : Type (u + 1))
     (e : G.over U ≅ (constantSheaf (X.smallEtaleTopology.over U)
       (Type (u + 1))).obj M)
-    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ U.left) :
-    Nat.card (((pointSmallEtale (t ≫ U.hom)).sheafFiber).obj G) = Nat.card M := by
-  obtain ⟨c, hc, -⟩ := etaleSetInverseImageStalkGerm X U.left U.hom G Ω t
-  let d := (pointSmallEtale t).sheafFiber.mapIso (constantChartPullbackIso G U M e) ≪≫
-    (pointSmallEtale t).sheafFiberConstantSheafIso M
-  exact (Nat.card_congr (Equiv.ofBijective c hc)).symm.trans (Nat.card_congr d.toEquiv)
+    (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ U.left) :
+    Nat.card (((pointSmallEtale (t ≫ U.hom)).sheafFiber).obj G) = Nat.card M :=
+  Nat.card_congr (nonempty_equiv_stalk_constantChart G U M e Ω t).some
+
+/-- A locally constant sheaf of sets whose stalks at algebraically closed geometric points
+are finite is finite locally constant: its stalks at separably closed geometric points
+are then finite as well. Each such stalk is the constant value of a trivializing chart,
+which is also the stalk at an algebraic closure of the residue field of a point of the
+chart. -/
+theorem isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber_of_isAlgClosed
+    {X : Scheme.{u}} {G : Sheaf X.smallEtaleTopology (Type (u + 1))}
+    (hG : IsLocallyConstantEtaleSheafOfSets G)
+    (hfin : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X),
+      Finite (((pointSmallEtale t).sheafFiber (A := Type (u + 1))).obj G)) :
+    IsFiniteLocallyConstantSheafOfTypes G := by
+  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber hG fun Ω _ _ t ↦ ?_
+  have : JointlySurjective etalePrecoverage :=
+    inferInstanceAs (JointlySurjective (precoverage @AlgebraicGeometry.Etale))
+  obtain ⟨𝒰, h𝒰⟩ := hG
+  obtain ⟨i, y, hy⟩ := 𝒰.exists_eq (t default)
+  have : AlgebraicGeometry.Etale (𝒰.f i) := 𝒰.map_prop i
+  obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f i) t y hy
+  let U := 𝒰.etalePrecoverageToEtale i
+  have := h𝒰 i
+  obtain ⟨M, ⟨e⟩⟩ := (G.over U).mem_essImage_of_isConstant
+  let s₀ := U.left.algClosurePoint y
+  have : Finite M := Finite.of_equiv _
+    (nonempty_equiv_stalk_constantChart G U M e.symm _ s₀).some
+  have hfinite : Finite (((pointSmallEtale (l ≫ U.hom)).sheafFiber).obj G) :=
+    Finite.of_equiv _ (nonempty_equiv_stalk_constantChart G U M e.symm Ω l).some.symm
+  change Finite (((pointSmallEtale (l ≫ 𝒰.f i)).sheafFiber).obj G) at hfinite
+  simpa only [hl] using hfinite
 
 /-- Compactness bounds cardinalities of stalks of a locally constant set sheaf. -/
 private theorem exists_card_bound_of_locallyConstant (X : Scheme.{u}) [CompactSpace X]
     (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (hG : IsLocallyConstantEtaleSheafOfSets G) :
-    ∃ N : ℕ, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X),
+    ∃ N : ℕ, ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ X),
       Nat.card (((pointSmallEtale t).sheafFiber).obj G) ≤ N := by
   classical
   have : JointlySurjective etalePrecoverage :=
@@ -167,7 +206,7 @@ theorem exists_stalk_cardinality_bound_of_constructible
       (S.immersion i).isEmbedding.isInducing.noetherianSpace
     infer_instance
   have hbounds (i : Fin S.n) : ∃ N : ℕ,
-      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S.domain i),
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ S.domain i),
         Nat.card (((pointSmallEtale t).sheafFiber).obj
           ((etaleSetPullback (S.immersion i)).obj G)) ≤ N := by
     have := hcompact i
@@ -181,7 +220,7 @@ theorem exists_stalk_cardinality_bound_of_constructible
     (by simpa using hi)
   obtain ⟨c, hc, -⟩ := etaleSetInverseImageStalkGerm X (S.domain i)
     (S.immersion i) G _ t
-  have hfin := (hS i).2 _ t
+  have hfin := (hS i).finite_sheafFiber _ t
   have hfinG : Finite (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) :=
     @Finite.of_equiv _ _ hfin (Equiv.ofBijective c hc)
   have hcardG : Nat.card (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) ≤

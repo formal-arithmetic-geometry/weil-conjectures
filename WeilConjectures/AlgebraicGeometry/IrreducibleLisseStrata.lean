@@ -54,7 +54,7 @@ theorem exists_irreducible_lisse_stratification
       ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) :
     ∃ S : Stratification X, ∀ i : Fin S.n,
       IrreducibleSpace (S.domain i) ∧
-        IsFiniteLocallyConstantEtaleSheafOfSets
+        IsFiniteLocallyConstantSheafOfTypes
           ((etaleSetPullback (S.immersion i)).obj
             ((sheafCompose X.smallEtaleTopology
               (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) := by

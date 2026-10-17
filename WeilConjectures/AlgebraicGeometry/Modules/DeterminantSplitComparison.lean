@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -55,7 +55,7 @@ identify the restrictions of the original exterior sheaves with the exterior
 sheaves formed on the chart, compatibly with their units. The monoidal comparison
 identifies the sheafification of the tensor presheaf with the tensor of these
 sheafifications. Sheafification preserves the comparison isomorphism, and its unit carries
-pure tensors of wedges to `tmulSection` of `exteriorSheafSection`s. For each point
+pure tensors of wedges to `tmulSection` of `wedge`s. For each point
 of `U`, select a common trivializing chart containing it and intersect
 with `U`. The sheafified comparison on this chart gives `d` on all its subopens;
 its naturality is the compatibility with restrictions just established. This is
@@ -76,19 +76,19 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
     (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :
     ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧
       ∃ (d : ∀ (W : X.Opens), W ≤ V →
-        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
-          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),
+        (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)
+          ≃ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W)),
       (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
         (b : Fin r₃ → S.X₃.val.obj (op W)),
-        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-          (exteriorSheafSection S.X₃ r₃ W b)) =
-        exteriorSheafSection S.X₂ r₂ W
+        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := W)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))
             (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧
       (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,
-        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
+        (exteriorPower S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
           d Z (hZW.trans hW)
-            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+            ((exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.map
               (homOfLE hZW).op y)) := by
   classical
   obtain ⟨d₀, ⟨hd₀, hn⟩, _⟩ :=

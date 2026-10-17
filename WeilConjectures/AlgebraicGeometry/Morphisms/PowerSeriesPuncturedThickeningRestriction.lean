@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSection
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedRestrictionIso
 
 /-!
 # Restriction to a punctured power-series thickening

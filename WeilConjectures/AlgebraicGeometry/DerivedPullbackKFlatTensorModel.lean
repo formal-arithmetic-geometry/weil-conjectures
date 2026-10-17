@@ -84,7 +84,6 @@ noncomputable local instance kFlatTensorModelDerivedTensor (S : Scheme.{uModel})
   inferInstance
 
 -- The quotient tensorator is the identity; record its data without unfolding
--- CoreMonoidal.toMonoidal each time, retaining the original coherence proofs.
 noncomputable local instance kFlatTensorModelQuotientLax (S : Scheme.{uModel}) :
     Functor.LaxMonoidal
       (HomotopyCategory.quotient

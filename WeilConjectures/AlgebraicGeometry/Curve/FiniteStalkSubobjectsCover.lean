@@ -9,7 +9,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
+import WeilConjectures.AlgebraicGeometry.EtaleSheafDiscreteContinuousRep
 import WeilConjectures.AlgebraicGeometry.Curve.FiniteStalkSubobjectElement
 
 /-!
@@ -84,7 +84,7 @@ theorem torsion_finite_stalk_subobjects_iSup_eq_top
   have : Mono (Φ.map S.arrow) := Φ.map_mono _
   have : Epi (Φ.map S.arrow) := (AddCommGrpCat.epi_iff_surjective _).mpr hsurj
   have : IsIso (Φ.map S.arrow) := isIso_of_mono_of_epi _
-  obtain ⟨E, Eset, i, j, h⟩ := abelianSheaves_equiv_discreteGModules.{u, 0}
+  let i := etaleSheafEquivDiscreteContinuousRepForgetIso
     K (SeparableClosure K) (AlgebraicClosure K)
   have : (Action.forget (ModuleCat.{u + 1} ℤ)
       (Gal(SeparableClosure K/K))).ReflectsIsomorphisms :=

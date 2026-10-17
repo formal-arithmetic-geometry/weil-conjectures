@@ -26,7 +26,7 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 
-namespace DerivedCategory
+namespace CochainComplex
 
 /-- A tower with a descending stabilization cutoff and improving localized cohomology
 assembles to a bounded above finite free complex. No pseudo-coherence hypothesis is
@@ -164,4 +164,4 @@ theorem exists_model_of_stabilized_finite_free_tower (A : Type u) [CommRing A]
     exact hiso k j i (by omega)
   exact quasiIsoAt_of_comp_left (L.map (colimit.ι D k)) (L.map γ) i
 
-end DerivedCategory
+end CochainComplex

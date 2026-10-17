@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -23,29 +23,29 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
+open Scheme.Modules (wedge)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_map {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
     {U V : X.Opens} (f : V ⟶ U) (a : Fin n → M.val.obj (op U)) :
-    (Scheme.Modules.exteriorSheaf M n).val.map f.op
-        (Scheme.Modules.exteriorSheafSection M n U a) =
-      Scheme.Modules.exteriorSheafSection M n V (fun j ↦ M.val.map f.op (a j)) := by
+    (Scheme.Modules.exteriorPower M n).val.map f.op
+        (wedge (M := M) (r := n) (U := U) a) =
+      wedge (M := M) (r := n) (U := V) (fun j ↦ M.val.map f.op (a j)) := by
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (Scheme.Modules.exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   have hn := PresheafOfModules.naturality_apply η f.op
     (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
-  have hr := (Classical.choose_spec
-    (Scheme.Modules.exteriorSheafRestriction_existsUnique M n f.op)).1 a
+  have hr := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f.op) a
   exact hn.symm.trans (congrArg (η.app (op V)) hr)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exterior_section_smul {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) (r : Fin n → X.presheaf.obj (op U))
     (a : Fin n → M.val.obj (op U)) :
-    Scheme.Modules.exteriorSheafSection M n U (fun j ↦ r j • a j) =
-      (∏ j, r j) • Scheme.Modules.exteriorSheafSection M n U a := by
+    wedge (M := M) (r := n) (U := U) (fun j ↦ r j • a j) =
+      (∏ j, r j) • wedge (M := M) (r := n) (U := U) a := by
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
-    (𝟙 X.ringCatSheaf.obj)).unit.app (Scheme.Modules.exteriorSheafPresheaf M n)
+    (𝟙 X.ringCatSheaf.obj)).unit.app (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   change η.app (op U) (exteriorPower.ιMulti (X.presheaf.obj (op U)) n
     (fun j ↦ r j • a j)) = _
   rw [AlternatingMap.map_smul_univ, (η.app (op U)).hom.map_smul]
@@ -79,20 +79,20 @@ theorem conormal_wedge_mem_span_locally
     (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))
     (x : Z) (hx : x ∈ W) :
     let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-    let E := Scheme.Modules.exteriorSheaf N n
+    let E := Scheme.Modules.exteriorPower N n
     let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
       i.ker.toModules
     ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧
-      E.val.map (homOfLE hW').op (Scheme.Modules.exteriorSheafSection N n W a) ∈
+      E.val.map (homOfLE hW').op (wedge (M := N) (r := n) (U := W) a) ∈
         Submodule.span (Z.presheaf.obj (op W'))
           (Set.range (fun b : Fin n → i.ker.toModules.val.obj (op V.1) ↦
-            Scheme.Modules.exteriorSheafSection N n W'
+            wedge (M := N) (r := n) (U := W')
               (fun j ↦ N.val.map (homOfLE (hW'.trans hW)).op
                 (η.val.app (op V.1) (b j))))) := by
   classical
   dsimp only
   let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
-  let E := Scheme.Modules.exteriorSheaf N n
+  let E := Scheme.Modules.exteriorPower N n
   let η := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
     i.ker.toModules
   have hqc := (Scheme.Modules.affine_conormal_sections.{u, u} i).1

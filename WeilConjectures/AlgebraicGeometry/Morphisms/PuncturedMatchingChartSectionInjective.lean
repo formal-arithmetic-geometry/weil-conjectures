@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 import WeilConjectures.RingTheory.FormalGlueingH0Localization
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionLeftInverse
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionInverse
 
 /-! # Vanishing of a localized matching numerator
 

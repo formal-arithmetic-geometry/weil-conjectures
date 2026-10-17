@@ -42,7 +42,6 @@ private theorem exists_unit_of_span_top
   change F 1 ∈ IsLocalRing.maximalIdeal R at h1
   exact h1 (by simp)
 
-set_option linter.unusedVariables false in
 /-- A twist section has compatible ordinary fractions on a finite principal cover of
 Spec(A_(f)), with evaluations agreeing with the original section.
 Source: Stacks Project, Section 27.8, preceding Definition 27.8.3 (Tag 01M6),
@@ -74,7 +73,7 @@ theorem twist_finiteLocalization_data
     let B := HomogeneousLocalization.Away 𝒜 f
     let M := LocalizedModule.Away f A
     letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))
-    ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤),
+    ∃ (n : ℕ) (g : Fin n → B) (_ : Ideal.span (Set.range g) = ⊤),
       let ρ := fun (a h : B) (ha : a ∣ h) ↦
         IsLocalizedModule.lift (Submonoid.powers a)
           (LocalizedModule.mkLinearMap (Submonoid.powers a) M)

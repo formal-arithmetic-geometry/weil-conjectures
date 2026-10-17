@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.DepthLeSupportDimension
-import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimensionOneEtaleNeighbourhood
+import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimOneEtaleNeighbourhood
 
 /-!
 # Flat quasi-finite purity across a depth-two source boundary

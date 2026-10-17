@@ -56,7 +56,7 @@ The target scalars are transported along the inverse residue-field isomorphism `
 Likewise `d` identifies the two dual-number spectra, so `d ≫ θ.val ≫ f` is precisely
 postcomposition with `f` after the residue fields have been identified.
 
-Proof for stage 3:
+Proof:
 1. Residue-field point naturality (lem-weil-pbc-residue-field-point-naturality) gives
    `Spec.map (f.residueFieldMap x) ≫ Y.fromSpecResidueField (f x) =
    X.fromSpecResidueField x ≫ f`. Hence the composite has the required closed point.

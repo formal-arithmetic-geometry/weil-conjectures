@@ -11,6 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology
 
+/-! # Quasi-coherence of internal Hom out of a pseudo-coherent complex
+
+The quasi-coherence clause of the pseudo-coherent internal-Hom lemma, obtained from the
+affine-local finite free calculation and local gluing (Stacks Project, Tag 0A6H,
+clause (1)). -/
+
 @[expose] public section
 
 universe u w

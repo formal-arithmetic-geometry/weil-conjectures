@@ -56,7 +56,6 @@ private theorem fraction_equation_restrict
   simpa [presheaf_map_map_apply] using h
 
 -- The unchanged interface contains symmetric nonvanishing assumptions; the proof only needs U.
-set_option linter.unusedVariables false in
 /-- After identifying the underlying maps, their pullbacks agree on every target open.
 The equality includes the restriction transport induced by that identification.
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK, uniqueness arguments.
@@ -85,13 +84,11 @@ Empty inverse images have unique sections. Nilpotents are retained: cancellation
 uses a free generator, not reducedness or cancellation in the section ring. -/
 theorem sectionRing_overlap_sheaf_map
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
-    (d e : ℕ) (s : sectionRingGrade L d) (t : sectionRingGrade L e)
-    (hd : 0 < d) (he : 0 < e) (U V : X.Opens)
+    (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U V : X.Opens)
     (hU : (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d))
-    (hV : (V : Set X) = nonvanishingLocus (L.tensorPow e) (t.val e))
     (g : U.toScheme ⟶ Proj (sectionRingGrade L))
     (h : V.toScheme ⟶ Proj (sectionRingGrade L))
-    (hg : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)
+    (hg : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)
           (n : ℕ) (ξ : sectionRingGrade L (n • e)),
           (show Γ(X, U.ι ''ᵁ (g ⁻¹ᵁ
               Proj.basicOpen (sectionRingGrade L) t.val)) from
@@ -105,7 +102,7 @@ theorem sectionRing_overlap_sheaf_map
           (L.tensorPow (n • e)).presheaf.map (homOfLE
             (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤
               ⊤)).op (ξ.val (n • e)))
-    (hh : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e)
+    (hh : ∀ (e : ℕ), 0 < e → ∀ (t : sectionRingGrade L e)
           (n : ℕ) (ξ : sectionRingGrade L (n • e)),
           (show Γ(X, V.ι ''ᵁ (h ⁻¹ᵁ
               Proj.basicOpen (sectionRingGrade L) t.val)) from

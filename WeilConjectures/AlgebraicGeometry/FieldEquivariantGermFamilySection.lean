@@ -61,7 +61,6 @@ private theorem section_germ_ext_of_lifts (S : Scheme.{u}) (Ω : Type u)
     exact this.trans hy
   exact Sheaf.isSeparated F U R hR _ _ (fun Y f hf ↦ hf)
 
-set_option linter.unusedVariables false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
@@ -92,19 +91,19 @@ theorem field_equivariant_germ_family_section
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
-      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-          τ.toRingHom.comp (algebraMap Ks Ω))
-        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
-        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
-        (z : F.obj.obj (op Y)),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+        (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω) →
+        ∀ (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y),
+        y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left →
+        ∀ (z : F.obj.obj (op Y)),
         ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
       ∀ (X : (Spec (.of K)).Etale) (f : p.fiber.obj X → p.sheafFiber.obj F),
-        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-            τ.toRingHom.comp (algebraMap Ks Ω))
-          (x x' : p.fiber.obj X)
-          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+          (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω) →
+          ∀ (x x' : p.fiber.obj X),
+          x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
           f x' = ρ g (f x)) →
         ∃ z : F.obj.obj (op X), ∀ x : p.fiber.obj X,
           p.toPresheafFiber X x F.obj z = f x := by

@@ -35,7 +35,7 @@ A finite type ring map over a Noetherian ring is smooth on an open neighbourhood
 exactly when every compatible diagram at `q` lifts along every Artinian small extension.
 The small-extension conditions are spelled out using module length, not square-zero alone.
 
-Proof (the twelve steps of the DAG node):
+Proof (the twelve steps of the blueprint node):
 1. Principal opens form a basis of Spec A (def-weil-affine-spectrum). The localization
    map identifies Spec A_g with D(g) (lem-weil-pbc-principal-localization-open-immersion,
    def-weil-open-immersion). Smoothness is unchanged by that isomorphism and by restriction

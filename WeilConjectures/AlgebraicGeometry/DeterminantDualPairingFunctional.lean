@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import WeilConjectures.AlgebraicGeometry.ExteriorSheafDualExt
@@ -23,6 +23,7 @@ universe u
 
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+open Scheme.Modules (wedge)
 
 set_option maxHeartbeats 300000 in
 -- Explicit scalar restrictions on the over-open site require additional elaboration.
@@ -46,13 +47,13 @@ on spanning pure wedges before extension. This construction works for n = 0,
 empty opens and zero rings. -/
 theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
-    ∃! q : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U),
+    ∃! q : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U),
       ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)),
-        q.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+        q.app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =
           (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
             (φ j).app (op (Over.mk g)) (a i))).det := by
   classical
-  let P := Scheme.Modules.exteriorSheafPresheaf M n
+  let P := (_root_.PresheafOfModules.exteriorPower (R := X.presheaf) M.val n)
   let N := (SheafOfModules.unit X.ringCatSheaf).val
   let F := PresheafOfModules.restrictOver X.sheaf.obj U
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
@@ -79,12 +80,7 @@ theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : �
             (exteriorPower.ιMulti (X.presheaf.obj (op W.unop.left)) n a)) =
           N.map g.unop.left.op
             (ψ W (exteriorPower.ιMulti (X.presheaf.obj (op W.unop.left)) n a))
-        have hr := (Classical.choose_spec
-          (Scheme.Modules.exteriorSheafRestriction_existsUnique M n g.unop.left.op)).1 a
-        rw [show P.map g.unop.left.op
-            (exteriorPower.ιMulti (X.presheaf.obj (op W.unop.left)) n a) =
-          exteriorPower.ιMulti (X.presheaf.obj (op Z.unop.left)) n
-            (fun i ↦ M.val.map g.unop.left.op (a i)) from hr]
+        erw [_root_.PresheafOfModules.exteriorPower_map_ιMulti]
         have hz := hψ Z (fun i ↦ M.val.map g.unop.left.op (a i))
         have hw := hψ W a
         refine hz.trans ?_
@@ -121,17 +117,17 @@ theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : �
     ((SheafOfModules.toSheaf X.ringCatSheaf).obj
       (SheafOfModules.unit X.ringCatSheaf)).over U |>.property
   let eqv := PresheafOfModules.homEquivOfIsLocallyBijective (F.map η) hN
-  let q : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U) :=
+  let q : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U) :=
     eqv.symm p
   have hq : F.map η ≫ q = p := eqv.apply_symm_apply p
   have hformula (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)) :
-      q.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+      q.app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =
         (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from
           (φ j).app (op (Over.mk g)) (a i))).det := by
     have h := CategoryTheory.congr_fun (congrArg
       (fun t ↦ t.app (op (Over.mk g))) hq)
       (exteriorPower.ιMulti (X.presheaf.obj (op V)) n a)
-    change q.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
+    change q.app (op (Over.mk g)) (wedge (M := M) (r := n) (U := V) a) =
       ψ (op (Over.mk g)) (exteriorPower.ιMulti (X.presheaf.obj (op V)) n a) at h
     refine h.trans ?_
     exact exteriorPower.alternatingMapToDual_apply_ιMulti

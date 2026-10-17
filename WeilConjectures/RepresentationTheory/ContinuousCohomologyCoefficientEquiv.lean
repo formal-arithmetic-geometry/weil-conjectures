@@ -108,7 +108,8 @@ private noncomputable def shortComplexEquiv {R : Type*} [CommRing R] [Topologica
     (S : ShortComplex (TopModuleCat.{s} R)) (T : ShortComplex (TopModuleCat.{t} R))
     (e₁ : S.X₁ ≃ₗ[R] T.X₁) (e₂ : S.X₂ ≃ₗ[R] T.X₂) (e₃ : S.X₃ ≃ₗ[R] T.X₃)
     (hf : ∀ x, e₂ (S.f.hom x) = T.f.hom (e₁ x))
-    (hg : ∀ x, e₃ (S.g.hom x) = T.g.hom (e₂ x)) : S.homology ≃ T.homology := by
+    (hg : ∀ x, e₃ (S.g.hom x) = T.g.hom (e₂ x)) :
+    S.homology ≃ₗ[R] T.homology := by
   let k : S.g.hom.ker ≃ₗ[R] T.g.hom.ker :=
     { toFun := fun x ↦ ⟨e₂ x, by
         change T.g.hom (e₂ x.val) = 0
@@ -143,11 +144,11 @@ private noncomputable def shortComplexEquiv {R : Type*} [CommRing R] [Topologica
       change e₂ (DS.f'.hom (e₁.symm z)).val = (DT.f'.hom z).val
       rw [hDS, hDT, hf, e₁.apply_symm_apply]
   let q := Submodule.Quotient.equiv DS.f'.hom.range DT.f'.hom.range k hmap
-  exact (((forget (TopModuleCat R)).mapIso DS.homologyIso).toEquiv).trans
-    (q.toEquiv.trans (((forget (TopModuleCat R)).mapIso DT.homologyIso).toEquiv).symm)
+  exact ((forget₂ _ (ModuleCat R)).mapIso DS.homologyIso).toLinearEquiv ≪≫ₗ q ≪≫ₗ
+    ((forget₂ _ (ModuleCat R)).mapIso DT.homologyIso).toLinearEquiv.symm
 
-/-- Equivariant linear equivalences of discrete coefficients induce equivalences of
-continuous cohomology, including between different coefficient universes.
+/-- Equivariant linear equivalences of discrete coefficients induce additive equivalences
+of continuous cohomology, including between different coefficient universes.
 
 Source: Stacks Project, Etale Cohomology, Section 0DVG, cochain construction.
 (blueprint: lem-sc-continuous-cohomology-coefficient-equiv).
@@ -165,13 +166,14 @@ cocycles by coboundaries they give inverse equivalences. Underlying TopModuleCat
 is precisely this algebraic quotient, as its kernels and cokernels are module kernels
 and quotients endowed with subspace and quotient topologies. This construction is
 performed on types and their subquotients and therefore allows different universes. -/
-theorem nonempty_equiv_continuousCohomology_coefficients
+@[no_expose]
+noncomputable def continuousCohomologyAddEquivOfCoefficients
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (M : TopRep.{max u s} ℤ G) (N : TopRep.{max u t} ℤ G)
     [DiscreteTopology M.V] [DiscreteTopology N.V]
     (e : M.V ≃ₗ[ℤ] N.V)
     (he : ∀ (g : G) (x : M.V), e (M.ρ g x) = N.ρ g (e x)) (q : ℕ) :
-    Nonempty (continuousCohomology q M ≃ continuousCohomology q N) := by
+    continuousCohomology q M ≃+ continuousCohomology q N := by
   let : Module ℤ M.V := M.hV2
   let : Module ℤ N.V := N.hV2
   let a : M.ρ.Equiv N.ρ := ContRepresentation.Equiv.mk (ρ := M.ρ) (σ := N.ρ)
@@ -187,10 +189,10 @@ theorem nonempty_equiv_continuousCohomology_coefficients
       continuous_toFun := continuous_of_discreteTopology
       continuous_invFun := continuous_of_discreteTopology }
     (fun g ↦ by ext x; exact he g x)
-  exact ⟨shortComplexEquiv
+  exact (shortComplexEquiv
     ((TopRep.homogeneousCochains M).sc q) ((TopRep.homogeneousCochains N).sc q)
     (cochainsEquiv a ((ComplexShape.up ℕ).prev q)) (cochainsEquiv a q)
     (cochainsEquiv a ((ComplexShape.up ℕ).next q))
-    (cochainsEquiv_d a _ _) (cochainsEquiv_d a _ _)⟩
+    (cochainsEquiv_d a _ _) (cochainsEquiv_d a _ _)).toAddEquiv
 
 end Rep

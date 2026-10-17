@@ -75,9 +75,7 @@ theorem graded_kernel_internal_finite {k : Type u} [Field k]
     (ℳ : ℤ → AddSubgroup M) (hM : DirectSum.IsInternal ℳ)
     (hsmulF : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : F),
       s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℱ j → s • x ∈ ℱ ((n : ℤ) + j))
-    (hsmulM : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : M),
-      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → s • x ∈ ℳ ((n : ℤ) + j))
-    (q : F →ₗ[MvPolynomial (Fin 2) k] M) (hq : Function.Surjective q)
+    (q : F →ₗ[MvPolynomial (Fin 2) k] M)
     (hgraded : ∀ (j : ℤ) (x : F), x ∈ ℱ j → q x ∈ ℳ j) :
     DirectSum.IsInternal (fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom) ∧
     Module.Finite (MvPolynomial (Fin 2) k) q.ker ∧
@@ -87,9 +85,8 @@ theorem graded_kernel_internal_finite {k : Type u} [Field k]
       Submodule.span (MvPolynomial (Fin 2) k) s = ⊤ := by
   classical
   let : DirectSum.Decomposition ℱ := hF.chooseDecomposition
-  obtain ⟨hhom, t, ht, _, htspan⟩ := graded_kernel_finite ℱ hF ℳ hM hsmulF hsmulM
-    (finite_homogeneous_spanning ℱ hF hsmulF)
-    (finite_homogeneous_spanning ℳ hM hsmulM) q hq hgraded
+  obtain ⟨hhom, t, ht, _, htspan⟩ := graded_kernel_finite ℱ hF ℳ hM hsmulF
+    (finite_homogeneous_spanning ℱ hF hsmulF) q hgraded
   let 𝒦 : ℤ → AddSubgroup q.ker :=
     fun j ↦ (ℱ j).comap q.ker.subtype.toAddMonoidHom
   let inc : ∀ j : ℤ, 𝒦 j →+ ℱ j := fun j ↦

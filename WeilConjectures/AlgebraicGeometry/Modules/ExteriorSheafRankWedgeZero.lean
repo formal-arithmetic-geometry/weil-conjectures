@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import all WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
@@ -106,14 +106,14 @@ theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}
     (U : X.Opens) (a : Fin r → A.val.obj (op U))
     (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))
     (hc : c j = f.val.app (op U) d) :
-    exteriorSheafSection B n U
+    wedge (M := B) (r := n) (U := U)
       (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0 := by
   classical
   subst n
   obtain ⟨q, hq, hqr⟩ :=
     SheafOfModules.IsFiniteLocallyFreeOfRank.exists_localGeneratorsData (M := A) (r := r)
   let := hq
-  apply ((exteriorSheaf B (r + s)).isSheaf_presheaf_comp_forget _
+  apply ((exteriorPower B (r + s)).isSheaf_presheaf_comp_forget _
     (q.coversTop U)).isSeparatedFor.ext
   rintro V k ⟨i, ⟨l⟩⟩
   let e : A.over (q.X i) ≅ SheafOfModules.free (ULift.{v} (Fin r)) :=
@@ -122,9 +122,9 @@ theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}
   let E := SheafOfModules.sectionsLinearEquivOfIsoFree e (op (Over.mk l))
   let b : Module.Basis (Fin r) (X.presheaf.obj (op V)) (A.val.obj (op V)) :=
     ((Pi.basisFun _ (ULift.{v} (Fin r))).map E.symm).reindex Equiv.ulift
-  change (exteriorSheaf B (r + s)).val.map k.op
-    (exteriorSheafSection B (r + s) U _) =
-      (exteriorSheaf B (r + s)).val.map k.op 0
+  change (exteriorPower B (r + s)).val.map k.op
+    (wedge (M := B) (r := (r + s)) (U := U) _) =
+      (exteriorPower B (r + s)).val.map k.op 0
   rw [map_zero, exterior_section_map]
   have hnat (x : A.val.obj (op U)) :
       B.val.map k.op (f.val.app (op U) x) =
@@ -141,11 +141,12 @@ theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}
       exact hnat (a i)
     · simp
   rw [hx]
-  unfold exteriorSheafSection
+  unfold wedge
   have hw := alternating_append_image_zero r s b (f.val.app (op V)).hom
-    (exteriorPower.ιMulti (X.presheaf.obj (op V)) (r + s))
+    (_root_.exteriorPower.ιMulti (X.presheaf.obj (op V)) (r + s))
     (fun i ↦ A.val.map k.op (a i)) (fun i ↦ B.val.map k.op (c i)) j
     (A.val.map k.op d) (by rw [hc, hnat])
-  rw [hw, map_zero]
+  erw [hw]
+  exact map_zero _
 
 end AlgebraicGeometry.Scheme.Modules

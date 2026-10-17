@@ -8,8 +8,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import WeilConjectures.RingTheory.FormalGlueingData
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartOverlapLocalizations
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizations
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartOverlaps
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletions
 
 /-!
 # Affine chart transitions before the square and cocycle checks

@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 @[expose] public section
 
@@ -74,15 +75,16 @@ private noncomputable def abelianSetPullbackIso {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 private theorem finiteLocalSets_of_iso {Y : Scheme.{u}}
     {G H : Sheaf Y.smallEtaleTopology (Type (u + 1))} (e : G ≅ H)
-    (hG : IsFiniteLocallyConstantEtaleSheafOfSets G) :
-    IsFiniteLocallyConstantEtaleSheafOfSets H := by
+    (hG : IsFiniteLocallyConstantSheafOfTypes G) :
+    IsFiniteLocallyConstantSheafOfTypes H := by
   obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hG
   refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
   · have := h𝒰 i
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso e)
-  · intro Ω _ _ s
-    have := hf Ω s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hf.isFinitelyGenerated_sheafFiber Ω s)
     exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
 
 private noncomputable def abelianConstantStalkIso {Y : Scheme.{u}}

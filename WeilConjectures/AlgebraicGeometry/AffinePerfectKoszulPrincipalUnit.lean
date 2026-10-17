@@ -61,7 +61,7 @@ theorem affine_perfect_koszul_principal_unit
         (⨆ i : Fin r, (Spec (.of A)).basicOpen
           ((Scheme.ΓSpecIso (.of A)).inv (f i)))).mapDerivedCategory).map
             (affineKoszulAugmentation A r (fun i ↦ f i ^ e))) := by
-  exact ⟨affine_perfect_koszul_principal_unit_perfect A r f e he,
+  exact ⟨affine_perfect_koszul_principal_unit_perfect A r f e,
     affine_perfect_koszul_principal_unit_iso A r f e he⟩
 
 end AlgebraicGeometry

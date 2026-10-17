@@ -27,8 +27,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- An injective module-valued sheaf has an injective constant-ring module representative,
-whose right-derived abelian evaluation computes the same cohomology.
+/-- An injective module-valued sheaf `J` has an injective constant-ring module representative `I`,
+with the same underlying abelian sheaf, whose right-derived abelian evaluation computes the same
+cohomology.
 Source: Stacks Project, Tag 03FD, proof, second paragraph.
 (blueprint: new-module-valued-injective-cohomology-comparison)
 
@@ -53,7 +54,11 @@ theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)
     ∃ I : SheafOfModules.{u + 1}
       ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj
         (RingCat.of (ULift.{u + 1, u} (ULift.{u} (ZMod r))))),
-      Injective I ∧ ∀ q : ℕ, Nonempty
+      Injective I ∧
+      Nonempty ((SheafOfModules.toSheaf _).obj I ≅
+        (sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})).obj J) ∧
+      ∀ q : ℕ, Nonempty
         (Sheaf.H
           ((sheafCompose X.smallEtaleTopology
             (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
@@ -63,7 +68,7 @@ theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)
               (Opposite.op (Scheme.Etale.mk (𝟙 X)))).rightDerived q).obj
             ((SheafOfModules.toSheaf _).obj I))) := by
   obtain ⟨E, ⟨e⟩⟩ := constantRing_moduleSheaf_equivalence X r
-  refine ⟨E.functor.obj J, (E.map_injective_iff J).2 inferInstance, ?_⟩
+  refine ⟨E.functor.obj J, (E.map_injective_iff J).2 inferInstance, ⟨(e.app J).symm⟩, ?_⟩
   let F := (SheafOfModules.toSheaf _).obj (E.functor.obj J)
   let Γ := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
     (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj

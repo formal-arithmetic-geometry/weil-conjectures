@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteOrderApproximation
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteOrderApprox
 import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDetection
 
 /-!

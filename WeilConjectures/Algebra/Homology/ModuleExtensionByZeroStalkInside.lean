@@ -37,7 +37,7 @@ automorphism. It remains an isomorphism, and sends a germ to the germ of the cho
 unit comparison formula. This proves the displayed germ identity on every V. Source: Stacks
 Project, Sheaves Lemma 00A7 (2)-(3), Lemma 00A5, and Lemma 007Z.
 (blueprint: lem-sc-module-extension-by-zero-stalk-maps-inside) -/
-theorem ModuleExtensionByZeroStalkInside (X : RingedSpace.{u}) :
+theorem moduleExtensionByZero_stalk_inside (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (x : X) (hx : x ∈ W),
       ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙
           RingedSpace.moduleStalkFunctor (X.restrict (Opens.isOpenEmbedding W)) ⟨x, hx⟩ ⋙

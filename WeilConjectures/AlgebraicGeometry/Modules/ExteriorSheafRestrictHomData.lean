@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullback
 
 /-! Auxiliary homotopy data for exterior sheaf restriction.
@@ -31,16 +31,16 @@ the inverse is obtained from the opposite sectionwise identification. The two co
 checked on pure wedges, which generate exterior powers, and hence descend through sheafification.
 -/
 theorem exteriorSheaf_restrict_hom_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
-    (U : X.Opens) : ∃ (e : (exteriorSheaf M n).restrict U.ι ⟶ exteriorSheaf (M.restrict U.ι) n),
-      ∃ f : exteriorSheaf (M.restrict U.ι) n ⟶ (exteriorSheaf M n).restrict U.ι,
+    (U : X.Opens) : ∃ (e : (exteriorPower M n).restrict U.ι ⟶ exteriorPower (M.restrict U.ι) n),
+      ∃ f : exteriorPower (M.restrict U.ι) n ⟶ (exteriorPower M n).restrict U.ι,
         e ≫ f = 𝟙 _ ∧ f ≫ e = 𝟙 _ := by
   obtain ⟨p⟩ := exteriorPresheaf_open_pullback M n U
-  let a := (restrictFunctorIsoPullback U.ι).app (exteriorSheaf M n)
+  let a := (restrictFunctorIsoPullback U.ι).app (exteriorPower M n)
   let b := (SheafOfModules.sheafificationCompPullback.{v}
-    U.ι.toRingCatSheafHom).app (exteriorSheafPresheaf M n)
+    U.ι.toRingCatSheafHom).app (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   let c := (PresheafOfModules.sheafification.{v}
     (𝟙 U.toScheme.ringCatSheaf.obj)).mapIso p
-  let e : (exteriorSheaf M n).restrict U.ι ≅ exteriorSheaf (M.restrict U.ι) n :=
+  let e : (exteriorPower M n).restrict U.ι ≅ exteriorPower (M.restrict U.ι) n :=
     a ≪≫ b ≪≫ c
   exact ⟨e.hom, e.inv, e.hom_inv_id, e.inv_hom_id⟩
 

@@ -71,7 +71,6 @@ private theorem morphismProperty_pullback_restrict
 
 -- The unchanged statement includes normality and generic-density hypotheses;
 -- the flat source-open proof below does not need them.
-set_option linter.unusedVariables false in
 /-- On the finite local normalization, every flat source open is etale.
 No section, group action, or generic rational point is assumed.
 
@@ -96,14 +95,13 @@ The flat local depth formula then gives depth(O(V,x)) >= depth(A) >= 2.
 The map V to L is locally of finite type and locally quasi-finite, being
 an open immersion followed by a finite map. Apply flat quasi-finite
 purity (Tag 0BJH, as in 0EY6(3)) to W and this boundary depth bound.
-Normality and generic density are not needed for this flat-source argument;
-the statement retains both hypotheses. Empty V is included. -/
+Normality and generic density are not needed for this flat-source argument.
+Empty V is included. -/
 theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (s : S) (hs : s ∉ U)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)

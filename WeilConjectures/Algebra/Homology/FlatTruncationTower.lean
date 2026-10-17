@@ -88,22 +88,13 @@ theorem exists_flat_truncation_tower
     ⟨G.truncLE 0, fun i hi ↦ (G.truncLE 0).isZero_of_isStrictlyLE 0 i hi⟩
   let s₀ : Stage 0 := ⟨⟨Q.obj F, ε.app F⟩,
     ⟨⟨0, (hQ F).2.1⟩, (hQ F).1, (hQ F).2.2.2, (hQ F).2.2.1⟩⟩
-  -- A replacement of a single-degree complex supplies the cover needed in the step.
-  have hcover (M : A) : ∃ (P : A) (p : P ⟶ M), SheafOfModules.IsFlat P ∧ Epi p := by
-    let K : P.FullSubcategory :=
-      ⟨(singleFunctor A 0).obj M,
-        fun i hi ↦ ((singleFunctor A 0).obj M).isZero_of_isStrictlyLE 0 i hi⟩
-    let e := HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ) M
-    have hp : Epi ((ε.app K).f 0) := (hQ K).2.2.1 0
-    exact ⟨(Q.obj K).X 0, (ε.app K).f 0 ≫ e.hom, (hQ K).1 0, inferInstance⟩
   -- Keep the augmentation and its properties in the dependent recursion state.
   have hnext (n : ℕ) (s : Stage n) :
       ∃ s' : Stage (n + 1), ∃ t : s.val.1 ⟶ s'.val.1,
         t ≫ s'.val.2 ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) =
           s.val.2 ≫ G.ιTruncLE (n : ℤ) := by
     obtain ⟨E', t, q', hb, hf, hq, he, hc⟩ :=
-      exists_flat_truncation_successor hcover G n s.val.1 s.val.2
-        s.property.1 s.property.2.1 s.property.2.2.1 s.property.2.2.2
+      exists_flat_truncation_successor G n s.val.1 s.val.2 s.property.1 s.property.2.1
     exact ⟨⟨⟨E', q'⟩, hb, hf, hq, he⟩, t, hc⟩
   let stages : ∀ n : ℕ, Stage n :=
     fun n ↦ Nat.rec s₀ (fun n s ↦ (hnext n s).choose) n

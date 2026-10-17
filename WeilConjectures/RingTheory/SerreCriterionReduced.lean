@@ -113,7 +113,7 @@ private theorem reduced_localization_height_zero (R : Type u) [CommRing R]
 Source: Stacks Project, Algebra, Lemma 10.157.3 (Tag 031R)
 (blueprint: lem-weil-pbc-serre-criterion-reduced).
 
-Proof, following the five steps of the DAG node:
+Proof, following the five steps of the blueprint node:
 
 1. If `R` is reduced, its minimal-prime localizations are fields
    (`lem-weil-pbc-minimal-prime-reduced-localization-field`). Fields are regular local of

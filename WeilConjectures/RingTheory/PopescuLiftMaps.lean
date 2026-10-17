@@ -25,7 +25,7 @@ namespace Algebra
 /-- Construct the compatible maps for the prepared polynomial quotient.
 
 Source: Stacks Project, Tag 07CP, the paragraph after the definition of p_{kl};
-the original DAG steps 6 and 7.
+the original blueprint steps 6 and 7.
 (blueprint: lem-weil-pbc-popescu-lift-maps).
 
 Proof: Lift the finitely many images j(ε(X_i)) to λ_i in Λ. Since ε kills the

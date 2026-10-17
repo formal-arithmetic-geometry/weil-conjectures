@@ -66,7 +66,7 @@ infinitesimals, all products of infinitesimals being zero. The map induced by
 `TrivSqZeroExt.map (LinearMap.proj i)` keeps the `i`th infinitesimal coefficient and kills the
 others. The common point is induced by `TrivSqZeroExt.fstHom K K K`.
 
-Proof for stage 3:
+Proof:
 1. Identify this algebra with the tuples of dual numbers having the same constant coefficient:
    send `(a, b)` to the tuple `(a, b i)`. Coordinatewise multiplication agrees with the
    square-zero multiplication. Both this algebra and the dual numbers are local: their

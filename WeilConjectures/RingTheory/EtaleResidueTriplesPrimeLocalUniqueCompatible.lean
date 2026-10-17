@@ -5,15 +5,29 @@ Authors: Bin Wu
 -/
 
 module
+
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+
+/-!
+# Compatible affine models of étale residue triples over a prime localization
+
+Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
+-/
+
 @[expose] public section
+
 universe u
+
 open CategoryTheory CategoryTheory.Limits
+
 namespace AlgebraicGeometry.Scheme
+
 /-- Existence of a compatible descended affine model.
 Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
 (blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux-compatible)
+(blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-aux-model)
+
 Take the identity triple over R and the composite R → Rₚ → t.B. The structure
 equality is immediate, and compatibility follows from t.compatible, hψ and hK.
 -/
@@ -21,7 +35,8 @@ theorem etaleResidueTriples_primeLocalization_component_extension_compatible
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)
     (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))
-    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶ CommRingCat.of K)
+    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶
+      CommRingCat.of K)
     [Algebra (Localization.AtPrime p.asIdeal) K]
     (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫
       (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =
@@ -43,4 +58,5 @@ theorem etaleResidueTriples_primeLocalization_component_extension_compatible
       (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
         (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ
     rw [Category.assoc, t.compatible, hψ, hK]
+
 end AlgebraicGeometry.Scheme

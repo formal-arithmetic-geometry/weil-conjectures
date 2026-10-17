@@ -32,7 +32,7 @@ namespace AlgebraicGeometry
 /-- The dual-number tangent vectors at a point of a scheme over a field form a vector space.
 Source: Stacks Project, Tag 0B2B (blueprint: lem-sc-tangent-space-vector-space).
 
-Proof for stage 3:
+Proof:
 1. Apply lem-sc-dual-number-scheme-pushout with `K = X.residueField x` and two copies.
    The coordinate projections identify the square-zero algebra with the fiber product of
    two dual-number rings over `K`. The local-ring description of maps into arbitrary schemes
