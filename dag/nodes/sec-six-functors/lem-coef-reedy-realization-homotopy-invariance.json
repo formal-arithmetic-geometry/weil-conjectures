@@ -14,9 +14,74 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-extra-degeneracy-prism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coequalizer formula defines a functor from simplicial objects to $\\mathcal M$: a map of simplicial objects induces maps on every coproduct summand, and naturality makes them respect both coend relations. The identity map and a composite map act summandwise as identities and composites, so $|1_C|=1_{|C|}$ and $|g\\circ f|=|g|\\circ|f|$. This is an elementary coend calculation using the chosen tensors.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "coend realization (3.2), printed p. 9; functoriality of the coend quotient is written out here"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-reedy-realization-prism] with $X_\\bullet=Y_\\bullet=A_\\bullet$ to the given combinatorial homotopy connecting $gf$ and $1_A$. It gives a cylinder $P_A=|A_\\bullet|\\otimes\\Delta^1$ and a map $P_A\\to |A_\\bullet|$ whose restrictions to the two vertex maps are $|g||f|$ and $1_{|A_\\bullet|}$. If the input homotopy has the opposite orientation these restrictions occur in the opposite order; retain that order, since the endpoint argument below treats the two vertices symmetrically.",
+   "uses": [
+    "lem-coef-reedy-realization-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent-written combinatorial prism transfer; compare Dugger formula (3.2), Theorem 3.5 skeletal pushout (printed pp.10-11), and Section 19.1. The source does not state this exact transfer."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-reedy-realization-prism] with $X_\\bullet=Y_\\bullet=B_\\bullet$ to the other homotopy. It gives a cylinder $P_B=|B_\\bullet|\\otimes\\Delta^1$ and a map $P_B\\to |B_\\bullet|$ with endpoint restrictions $|f||g|$ and $1_{|B_\\bullet|}$, in one of the two orders. Both applications have Reedy-cofibrant source and target, because the item assumes this for $A_\\bullet$ and $B_\\bullet$.",
+   "uses": [
+    "lem-coef-reedy-realization-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Agent-written combinatorial prism transfer; compare Dugger formula (3.2), Theorem 3.5 skeletal pushout (printed pp.10-11), and Section 19.1. The source does not state this exact transfer."
+   }
+  },
+  {
+   "text": "Here is the endpoint calculation, using two-out-of-three from [lem-coef-simplicial-model-nerve-localization]. In either cylinder $p:P\\to Z$, each vertex inclusion $i_j$ is a weak equivalence since $p i_j=1_Z$ and $p$ is a weak equivalence. For the map $H:P\\to Z$ supplied in Steps 2 or 3, one composite $H i_j$ is $1_Z$, so two-out-of-three makes $H$ a weak equivalence; then the other composite $H i_{1-j}$ is a weak equivalence as a composite of weak equivalences. Therefore $|g||f|$ and $|f||g|$ are weak equivalences. Identities are weak equivalences because they belong to both lifting classes, hence to their intersections with $W$, in the two weak factorization systems. This uses no fibrancy assumption.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+    "place": "Cylinder.LeftHomotopy.weakEquivalence_iff, lines 140-145; elementary two-out-of-three proof written explicitly here rather than made into a node."
+   }
+  },
+  {
+   "text": "Use the ordinary localization $\\gamma:\\mathcal M\\to\\mathcal H$ at weak equivalences, in an enlarged universe, and [lem-coef-model-localization-detects-weak-equivalences]. Write $F=\\gamma(|f|)$ and $G=\\gamma(|g|)$. Step 4 implies that $GF$ and $FG$ are isomorphisms. The map $L=(GF)^{-1}G$ is a left inverse of $F$ and $R=G(FG)^{-1}$ is a right inverse. Thus $L=L(FR)=(LF)R=R$, and $F$ is an isomorphism. The cited detection statement now implies that $|f|$ is a weak equivalence. Its model-category hypothesis is exactly that of the item, its required universes may be enlarged, and it assumes neither endpoint cofibrant nor fibrant.",
+   "uses": [
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 1.2.10(iv), printed p.13, via the existing localization-detection node; the two inverse formulas are written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-reedy-realization-prism",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Agent-written coend/prism/homotopy-inverse argument, informed by Dugger formula (3.2), the skeletal pushout in Theorem 3.5 (printed pp.10-11), and Section 19.1; localization detection is supplied by its existing node and Hovey Theorem 1.2.10(iv)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +110,59 @@
    "results": "{\"t\": \"2026-10-17T02:27:14Z\", \"tool\": \"grep\", \"query\": \"Reedy|geometricRealization|geometric.realization|coend\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"e78903adfe7e0a41\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/Reedy/Basic.lean:14-23 (model structure construction is a TODO), SimplicialSet/TopAdj.lean and SingularSet.lean (simplicial-set realization only), and ModelCategory/CofibrantObjectHomotopy.lean (abstract model homotopy only). None states model-category tensor realization of combinatorial homotopies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "realization of Reedy cofibrant simplicial objects preserves combinatorial simplicial homotopy equivalences in a simplicial model category",
+   "results": "8 hits: abstract cofibrant-object homotopy declarations; no realization theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Homotopy, Reedy, realization",
+   "results": "0 hits; unknown identifier Reedy.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|realization|coend in Mathlib/AlgebraicTopology",
+   "results": "17 hits in Reedy/Basic.lean, TopAdj.lean, SingularSet.lean; none is the model-category theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy cofibrant simplicial realization homotopy equivalence",
+   "results": "8 hits: SSet.toTop and abstract homotopy-category declarations; no theorem for model-category tensor realization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor realization of a Reedy cofibrant simplicial object is cofibrant and sends combinatorial prism homotopies to cylinder homotopies",
+   "results": "8 hits: abstract cylinder/cofibrant declarations; no Reedy tensor realization theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Homotopy, Cofibrant, coend",
+   "results": "0 hits; no combined declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Homotopy|coend|Reedy in Mathlib/AlgebraicTopology",
+   "results": "25 hits in model-category homotopy and simplicial homotopy files; none combines coend realization with Reedy cofibrancy.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-realization-extra-degeneracy",
@@ -60,7 +174,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph beginning For K, middle finite-level derived mapping-complex adjunction: explicit simplicial bar replacement underlying the representable-simplex presentation used in its model-category foundation.",
+   "place": "Proof paragraph 2: the finite-level derived mapping-complex adjunction uses the Reedy tensor-realization homotopy-invariance input; the five steps below realize the coend, prism, endpoint, and weak-equivalence parts.",
    "via": [
     "lem-coef-simplicial-realization-extra-degeneracy",
     "lem-coef-simplicial-bar-projective-resolution",
@@ -78,5 +192,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-realization-homotopy-invariance",
+  "worker": "stage1",
+  "summary": "Retained the earlier coend and prism route, made its one new prism statement self-contained, and checked all endpoint hypotheses. Folded the elementary cylinder endpoint comparison into Step 4 and reused the existing model-localization detection theorem instead of adding a two-out-of-six node. The source does not state the exact prism theorem; its statement is an agent-written supporting lemma and the item remains agent-written. Item statement unchanged.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph beginning For K, finite derived mapping-complex adjunction before the total inverse limit: this split supplies tensor-realization homotopy invariance in its existing chain of model-category foundations. Historical chapter/unit and ancestry are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-d74382b2b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d74382b2b (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-reedy-realization-prism, every cited statement (simplicial-model-nerve-localization, simplicial-tensor-cotensor, reedy-model-structure, weil-pbc-simplicial-set, simplicial-extra-degeneracy-prism, model-localization-detects-weak-equivalences and its model-category definition in model-infinity-derived-adjunction), the citer simplicial-realization-extra-degeneracy, the unit record and the main-20261015 ancestor proof (paragraph 'For K'). The item statement is unchanged and true; its inline coend formula agrees with def-coef-simplicial-model-realization. Step 1 (coend functoriality) and Step 4 (identities lie in C∩W; two-out-of-three on p i_j=1 and H i_j=1) are genuinely elementary. Steps 2 and 3 apply the prism node with X=Y=A and X=Y=B, both Reedy-cofibrant, and Step 1 turns |gf| into |g||f|. Step 5: L=(GF)^-1G and R=G(FG)^-1 are equal; the detection node is an exact iff with no endpoint hypotheses and the same model axioms; no dependency path leads back to the item. Prism node: true, with a statement only and self-contained. Skeletal pushout products plus SM7 make |X| cofibrant; SM7 with the boundary of Delta^1 and with {0} gives the good cylinder with p in W. The endpoint orientation checks out against the DAG convention: d_{n+1}H_n=u is the all-0 face (i_0), d_0H_0=v is the all-1 face (i_1). Small cases checked: n=0, n=1, the initial object, a constant cofibrant object, and the excluded constant non-cofibrant object. The unused Reedy hypothesis on Y is harmless. Not a relabelled clause (D1/D2): the node handles a single homotopy with no inverse or weak-equivalence conclusion. Not a duplicate of realization-cylinder, resolution-interval-tensor, extra-degeneracy-contraction, cbc-simplicial-homotopy-equivalence-weak, boundary-collapse-test or fixed-cylinder-detection. Verified Mathlib LeftHomotopy.lean:140-145 and the Reedy/Basic.lean:22-24 TODO; recorded searches are real log entries. No SGA used, no target, coefficient category or base-change morphism touched, all citations within the unit, so no tool_uses needed. Dugger is not archived and is recorded as WANTED, with proof_origin agent. No fixes."
  }
 }

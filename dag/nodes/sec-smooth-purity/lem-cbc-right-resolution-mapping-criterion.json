@@ -14,9 +14,92 @@
   "lem-coef-lifting-class-closure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the universe bound from [def-weil-size-convention] and regard $\\Delta^{\\mathrm{op}}$ as the Reedy category for simplicial objects. Apply the relative Reedy extension/factorization statement of [lem-coef-reedy-model-structure] to the map $\\operatorname{const}Z\\to 1$ (the constant terminal diagram), fixing degree zero to be $\\operatorname{const}Z_0=Z\\xrightarrow{\\mathrm{id}}Z_0$ followed by the fibrant map $Z\\to1$. At degree $n>0$, after all smaller degrees have been fixed, factor the induced map $Z\\amalg_{L_n\\operatorname{const}Z}L_nZ_\\bullet\\to M_nZ_\\bullet$ in the ground category $\\mathcal M$ as a trivial cofibration followed by a fibration, and use the middle object as $Z_n$. The relative Reedy formulas then make the assembled arrows a Reedy trivial cofibration and a Reedy fibration, respectively. The resulting object $Z_\\bullet$ is Reedy fibrant, the coaugmentation $\\operatorname{const}Z\\to Z_\\bullet$ is objectwise a weak equivalence, and its degree-zero component is the identity.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Definition 16.1.2(2), printed p. 318, and Proposition 16.6.8(2) with Theorem 16.6.9 and its degree-zero-preserving construction, pp. 338-339. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  },
+  {
+   "text": "Because $Z_\\bullet\\to1$ is Reedy fibrant, the Reedy matching formula of [lem-coef-reedy-model-structure] identifies its degree-$n$ matching map with the original fibration\n$p_n:Z_n\\to M_nZ_\\bullet$; for $n=0$ the matching category is empty, so $M_0Z_\\bullet=1$ and $p_0$ is the fibrant map $Z\\to1$. This proves the matching-map clause for every $n\\ge0$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Definitions 15.3.2-15.3.3, printed pp. 288-289: apply the relative matching formula to the terminal diagram. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  },
+  {
+   "text": "Now fix any resolution satisfying the statement, and let $T$ be cofibrant in $\\mathcal M$. In the opposite model category $\\mathcal M^{\\mathrm{op}}$, the opposite of $Z_\\bullet$ is a Reedy cofibrant cosimplicial frame on the cofibrant object $Z^{\\mathrm{op}}$: the coaugmentation reverses to the frame augmentation and degree zero remains the identity. Apply the cosimplicial-frame mapping theorem [lem-coef-cosimplicial-frame-mapping] in $\\mathcal M^{\\mathrm{op}}$ with fibrant target $T^{\\mathrm{op}}$. Its mapping simplicial set has $n$-simplices\n$\\operatorname{Hom}_{\\mathcal M^{\\mathrm{op}}}(Z_n^{\\mathrm{op}},T^{\\mathrm{op}})=\\operatorname{Hom}_{\\mathcal M}(T,Z_n)$, hence is exactly $R(T,Z_\\bullet)$. The theorem therefore makes $R(T,Z_\\bullet)$ Kan and identifies it, naturally in $T$, with $\\operatorname{Map}^h(T,Z)$. Here the Reedy latching object in $\\mathcal M^{\\mathrm{op}}$ is $(M_nZ_\\bullet)^{\\mathrm{op}}$, since its colimit is the opposite of the original matching limit; its latching map is $p_n^{\\mathrm{op}}$, a cofibration by [lem-coef-reedy-model-structure]. For the mapping-space identification, the universal property of localization in [lem-coef-cosimplicial-frame-mapping] identifies $(\\mathcal M^{\\mathrm{op}})_\\infty$ with $(\\mathcal M_\\infty)^{\\mathrm{op}}$: taking opposites converts functors inverting $W^{\\mathrm{op}}$ into functors inverting $W$. Reversing the two arguments therefore identifies $\\operatorname{Map}_{(\\mathcal M^{\\mathrm{op}})_\\infty}(Z^{\\mathrm{op}},T^{\\mathrm{op}})$ with $\\operatorname{Map}_{\\mathcal M_\\infty}(T,Z)$. Postcomposition by a morphism of the targets $T^{\\mathrm{op}}$ corresponds degreewise to precomposition by the original morphism of sources $T$; hence this identification respects the induced restriction map.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Definition 17.2.1, printed p. 350, and Corollary 16.5.3(2), pp. 331-332; the cited cosimplicial-frame theorem supplies the identification with coherent localization, applied to the opposite model category. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  },
+  {
+   "text": "If $u:U\\to V$ is a cofibration with cofibrant source, then $V$ is cofibrant by composition with the initial cofibration, using the composition closure of left lifting classes in [lem-coef-lifting-class-closure]. In $\\mathcal M^{\\mathrm{op}}$, $u^{\\mathrm{op}}:V^{\\mathrm{op}}\\to U^{\\mathrm{op}}$ is consequently a fibration between fibrant objects. The fibration clause of [lem-coef-cosimplicial-frame-mapping], applied to the frame $Z_\\bullet^{\\mathrm{op}}$, says that postcomposition with $u^{\\mathrm{op}}$ is a Kan fibration. Under the identification in the preceding step this is precisely $R(V,Z_\\bullet)\\to R(U,Z_\\bullet)$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Theorem 16.5.2(2) and Corollary 16.5.4(3), printed pp. 331-332; equivalently the fibration clause of the cited frame theorem in the opposite model category. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  },
+  {
+   "text": "The natural identification of Step 3 carries $R(V,Z_\\bullet)\\to R(U,Z_\\bullet)$ to $\\operatorname{Map}^h(V,Z)\\to\\operatorname{Map}^h(U,Z)$. By Step 4 this map is a Kan fibration. In the Kan–Quillen model structure of [lem-coef-kan-quillen-right-proper], a Kan fibration is a trivial Kan fibration exactly when it is a weak homotopy equivalence. Thus condition (ii) is equivalent to condition (i).",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Definition 17.2.1, printed p. 350, Theorem 17.8.4(4)-(5) and Proposition 17.8.5(1), pp. 369-370, specialized to the terminal map; the cited frame and Kan-Quillen statements give the direct argument. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  },
+  {
+   "text": "Fix $n\\ge0$. A map $\\partial\\Delta^n\\to R(V,Z_\\bullet)$ specifies a map $V\\to Z_k$ for every proper injective face $[k]\\hookrightarrow[n]$, compatible with further face restrictions. Every simplex of the boundary factors uniquely as a degeneracy of such an injective face, so these compatible maps determine and are determined by the whole boundary map. By the universal property of the matching limit this is exactly a map $V\\to M_nZ_\\bullet$; a map $\\Delta^n\\to R(U,Z_\\bullet)$ is the same as a map $U\\to Z_n$. Under these identifications, a commutative square with the boundary inclusion $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and the map $R(V,Z_\\bullet)\\to R(U,Z_\\bullet)$ is exactly a commutative square with left side $u$ and right side $p_n$. A diagonal in one square is exactly a diagonal in the other. For $n=0$, the boundary is empty and the same statement uses $M_0Z_\\bullet=1$. Therefore $u$ has the left lifting property against every $p_n$ if and only if $R(V,Z_\\bullet)\\to R(U,Z_\\bullet)$ has the right lifting property against every boundary inclusion. By [lem-coef-kan-quillen-right-proper], the latter is equivalent to being a trivial Kan fibration, proving (ii)$\\Longleftrightarrow$(iii). The meaning of the left lifting property is the square-and-diagonal condition of [lem-coef-lifting-class-closure].",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn, Lemmas 16.3.6(2)-16.3.7(2) and Proposition 16.3.8(2), printed pp. 324-325, and Proposition 17.8.8(4)-(5), pp. 371-372; face and degeneracy compatibility give the displayed square correspondence. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+  "place": "Dualize Hirschhorn’s simplicial-frame construction to the opposite model category, then identify boundary lifting problems with Reedy matching-map lifting problems. Read online 2026-10-17; WANTED: archive in literature/. No Stacks tag states this model-category result."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +149,24 @@
    "results": "{\"t\": \"2026-10-17T02:56:03Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial frame of a fibrant object defines a right homotopy function complex whose boundary extension problem is equivalent to a lifting problem against the relative matching morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.RightHomotopyRel\", \"HomotopicalAlgebra.PathObject.RightHomotopy\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h\", \"HomotopicalAlgebra.PathObject.RightHomotopy.rightHomotopyRel\", \"HomotopicalAlgebra.RightHomotopyClass.mk_eq_mk_iff\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\"], \"digest\": \"180b798784da7bc4\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; the hits concern cofibrant replacements, ordinary homotopy classes or path-object extension, and do not state the cosimplicial boundary-corner or right-resolution matching criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial frames in an arbitrary model category compute derived mapping spaces from cofibrant sources and test weak equivalences by boundary lifting",
+   "results": "{\"t\": \"2026-10-17T03:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial frames in an arbitrary model category compute derived mapping spaces from cofibrant sources and test weak equivalences by boundary lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\"], \"digest\": \"de3a15893d3b7524\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent NV second reading found only ordinary homotopy-category, replacement, or Kan-model-structure results, not a simplicial frame or the all-matching-maps criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "matchingObject|matchingMap|SimplicialFrame|homotopyFunctionComplex",
+   "results": "{\"t\": \"2026-10-17T03:58:04Z\", \"tool\": \"grep\", \"query\": \"matchingObject|matchingMap|SimplicialFrame|homotopyFunctionComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent NV second reading found only ordinary homotopy-category, replacement, or Kan-model-structure results, not a simplicial frame or the all-matching-maps criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "created": {
@@ -96,5 +193,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-right-resolution-mapping-criterion",
+  "worker": "stage1",
+  "summary": "Audited the imported right-resolution mapping criterion against the model-category/Reedy conventions and the Hirschhorn source. Kept the exact statement and dependencies, expanded the proof into the relative Reedy construction, matching-map identification, opposite-category right-frame mapping calculation, Kan-fibration comparison, and the boundary/matching lifting bijection. No new child node or Mathlib leaf is needed; the existing searches show no Mathlib theorem states this result.",
+  "blueprint": "The six steps realize the auxiliary right simplicial-resolution matching-fibration criterion invoked in the opening compactification/localization route of thm-cbc-finite-level-proetale: relative Reedy construction, homotopy-function-complex representation, and the boundary lifting test used by the framed localizing-cofibration argument.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Steps 3-5 take only its generic statement, applied in the opposite model category: a Reedy cofibrant frame on a cofibrant object gives a Kan complex representing the localized mapping space, naturally, and a fibration between fibrant targets gives a Kan fibration. The compact-support unit has no node for homotopy function complexes."
+   },
+   {
+    "node": "lem-coef-reedy-model-structure",
+    "why": "Steps 1-3 and 6 take the generic Reedy model structure on simplicial objects (relative degreewise factorization fixing degree zero, matching-map formula for Reedy fibrations, opposite category); no node of the compact-support unit states it."
+   },
+   {
+    "node": "lem-coef-kan-quillen-right-proper",
+    "why": "Steps 5-6 take only the Kan-Quillen model structure's boundary characterization of trivial fibrations (fibration plus weak equivalence iff right lifting against every boundary inclusion); a generic simplicial-set tool with no node in the compact-support unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-b135e8753",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b135e8753 (reviewer sub-agent of L); spot-checked: I read the item, all five dependency statements, unit sk-prop-sf-cbc and the citer lem-cbc-framed-localizing-cofibrations in full. I checked the cited places in Hirschhorn (a text copy in /tmp): Def 16.1.2(2), Prop 16.6.8(2), Lemma 16.3.7(2), Prop 16.3.8(2), Cor 16.5.3(2), Thm 16.5.2(2), Def 17.2.1, Prop 17.8.5(1) and Prop 17.8.8(4) with Y=*. The statement agrees with them hypothesis by hypothesis and is not weakened. Steps 1-6 are correct: the relative Reedy factorization fixing degree 0 as id_Z then Z->1, so M_0=1; the dualization to M^op, where latching (M_n)^op has latching map p_n^op, Z^op is cofibrant, T^op is fibrant, and Hom_{M^op}(Z_n^op,T^op)=Hom(T,Z_n); V is cofibrant by composition in C; u^op gives the Kan fibration; Kan-Quillen gives (i)<=>(ii); the boundary/matching bijection, including n=0, gives (ii)<=>(iii). Edge cases agree: Z=*, the discrete structure on Set with Z of two points or empty, u an identity. The delivery has no new nodes, and the grep of dag/nodes for resolution/frame/matching/orthogonal finds no duplicate. No SGA is cited and no base-change map or coefficient category is involved. Fix: split_report.tool_uses was empty although three non-closed statements of unit sk-prop-sf-biduality-general are cited off-route. I accept them as generic tools and declared them in fixes/dag/nodes/sec-smooth-purity/lem-cbc-right-resolution-mapping-criterion.json; nothing else changed. They are lem-coef-cosimplicial-frame-mapping, lem-coef-reedy-model-structure and lem-coef-kan-quillen-right-proper. The Hirschhorn WANTED archive request remains open.; 1 file(s) fixed by the reviewer"
  }
 }
