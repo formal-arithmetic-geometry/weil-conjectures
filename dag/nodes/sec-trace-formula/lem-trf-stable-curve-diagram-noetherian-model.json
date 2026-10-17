@@ -21,7 +21,9 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -305,5 +307,23 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-cc2fbcdc7 (reviewer sub-agent of L); spot-checked: Read the complete item, all proof dependencies, unit/chapter route, cited sources, packet, report, and delivery-error rules. Verified all nine proof steps, hypotheses, edge cases, exact base-change/coefficient context, route-pivot compliance, and absence of forbidden SGA or batch-5 dependencies. No new nodes or repairs are needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05fdc4740",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement, dependencies, source clauses, edge cases, docstrings, report sections, route compliance, and scompile evidence verified."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StableCurveDiagramNoetherianModel",
+  "declaration": "AlgebraicGeometry.exists_normal_affine_finite_type_model_of_stable_curve_diagram",
+  "file": "lean/Sheaf/TraceFormula/StableCurveDiagramNoetherianModel.lean",
+  "statement": "theorem exists_normal_affine_finite_type_model_of_stable_curve_diagram (S : Scheme.{u}) [IsIntegral S] [IsAffine S] (hnormal : ∀ x : S, IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x)) (C : MultipointedCurve S) (hCη : Smooth (C.x.fiberToSpecResidueField (genericPoint S))) (hDη : Etale (C.d.fiberToSpecResidueField (genericPoint S))) (J : Type u) [Finite J] (Cj : J → MultipointedCurve S) (f : ∀ j : J, (Cj j).Hom C) (hf : ∀ j : J, (f j).IsEtaModification (S.fromSpecResidueField (genericPoint S))) (hsemi : ∀ j : J, (Cj j).IsSemistable) (Jst : Set J) (hstable : ∀ j : J, j ∈ Jst → (f j).IsStable (S.fromSpecResidueField (genericPoint S))) : ∃ (S₀ : Scheme.{u}) (η₀ : S₀), IsIntegral S₀ ∧ IsAffine S₀ ∧ (∀ x : S₀, IsDomain (S₀.presheaf.stalk x) ∧ IsIntegrallyClosed (S₀.presheaf.stalk x)) ∧ IsGenericPoint η₀ (Set.univ : Set S₀) ∧ ∃ (t₀ : S₀ ⟶ Spec (.of (ULift.{u} ℤ))), LocallyOfFiniteType t₀ ∧ QuasiCompact t₀ ∧ ∃ (s : S ⟶ S₀), IsDominant s ∧ s (genericPoint S) = η₀ ∧ ∃ (C₀ : MultipointedCurve S₀), Smooth (C₀.x.fiberToSpecResidueField η₀) ∧ Etale (C₀.d.fiberToSpecResidueField η₀) ∧ ∃ (Cj₀ : J → MultipointedCurve S₀), ∃ (f₀ : ∀ j : J, (Cj₀ j).Hom C₀), (∀ j : J, (f₀ j).IsEtaModification (S₀.fromSpecResidueField η₀)) ∧ (∀ j : J, (Cj₀ j).IsSemistable) ∧ (∀ j : J, j ∈ Jst → (f₀ j).IsStable (S₀.fromSpecResidueField η₀)) ∧ ∃ (eC : C.X ≅ pullback C₀.x s) (eD : C.D ≅ pullback C₀.d s), eC.hom ≫ pullback.snd C₀.x s = C.x ∧ eD.hom ≫ pullback.snd C₀.d s = C.d ∧ eD.hom ≫ pullback.fst C₀.d s ≫ C₀.i = C.i ≫ eC.hom ≫ pullback.fst C₀.x s ∧ (∀ j : J, ∃ (eCj : (Cj j).X ≅ pullback (Cj₀ j).x s) (eDj : (Cj j).D ≅ pullback (Cj₀ j).d s), eCj.hom ≫ pullback.snd (Cj₀ j).x s = (Cj j).x ∧ eDj.hom ≫ pullback.snd (Cj₀ j).d s = (Cj j).d ∧ eDj.hom ≫ pullback.fst (Cj₀ j).d s ≫ (Cj₀ j).i = (Cj j).i ≫ eCj.hom ≫ pullback.fst (Cj₀ j).x s ∧ eCj.hom ≫ (f₀ j).curveBaseChange s = (f j).curve ≫ eC.hom ∧ eDj.hom ≫ (f₀ j).markingBaseChange s = (f j).marking ≫ eD.hom) ∧ ∃ U₀ : S₀.Opens, Dense (U₀ : Set S₀) ∧ (∀ j : J, IsIso (pullback.snd (f₀ j).curve (C₀.x ⁻¹ᵁ U₀).ι) ∧ IsIso (pullback.snd (f₀ j).marking (C₀.d ⁻¹ᵁ U₀).ι)) ∧ IsReduced C₀.X ∧ IsReduced C₀.D ∧ (∀ j : J, IsReduced (Cj₀ j).X ∧ IsReduced (Cj₀ j).D)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

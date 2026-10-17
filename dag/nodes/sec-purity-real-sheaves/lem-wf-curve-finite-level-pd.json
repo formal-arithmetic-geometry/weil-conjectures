@@ -14,7 +14,9 @@
  },
  "stmt_deps": [
   "def-coefficient-twists-detailed",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-wf-finite-coefficient-cup",
+  "def-wf-degree-normalized-curve-trace"
  ],
  "proof": [
   {
@@ -185,5 +187,28 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-c04a596a0 (reviewer sub-agent of L); spot-checked: I read the item, the new splitting node, the master and main-20261015 blueprint statement and proof (main-20261017 is identical), unit sk-p-real-rankone, the chapter and every cited statement. The steps are mathematically correct and follow the blueprint's five paragraphs. Three faults are repaired in the fixes/ copies. (1) C1/E6: the étale and pro-étale categories were identified silently. Step 1 now cites lem-cbc-abelian-etale-proetale-cohomology-comparison with the Kummer node's A_n(1)=ν^*μ clause. (2) C1/E1: Step 3 did not check the fixed setting of def-pod-conventions (k_0=F_q is the global datum; C_0 is smooth, separated, geometrically connected, d=1, E=Q_ℓ). Step 4 did not cite prop-pod-degree-of-the-pairing for the cup–evaluation–Tr^sm identification. Both are now done, and the H^{-1} computation is written out. Step 5 notes that perfectness does not depend on the trace normalization (Tr^sm is an isomorphism on H^2; any other trace differs by a unit), which covers the citer's tr_{C,n}. 'Naturality' was dropped because thm-pod-equivariance-of-the-twisted-pairing does not state it. (3) C8: thm-pod-point-perfectness (unit sk-thm-sf-package) is off-route. It is now declared in split_report.tool_uses, and I accept it because the blueprint proof cites it. The new node lem-wf-bounded-free-complex-projective-cohomology-splitting is true: descending induction splits B^i and Z^i. The hypothesis is needed: over Z/4, Z/4 --2--> Z/4 has non-projective cohomology Z/2 and does not split. It is statement-only, not a restatement of the item, and rg over dag/nodes found no duplicate (only field-only or different nodes). I replaced its vague last sentence with the exact decomposition of complexes and dropped the unused stmt_dep def-pc-perfect-ring-complex. There is no cycle, no SGA citation, and the statement is unchanged. Maintainer note: the proof covers k_0=F_q only; the citer lem-wf-curve-h1-dual-tate-module speaks of arbitrary k_0.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b1517d28d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Canonical cup-trace pairing matches the source; dependencies and universes check; no dropped-route or pro-etale issue; scompile sandbox and library compiles succeeded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteLevelPoincareDuality",
+  "declaration": "AlgebraicGeometry.curve_finite_level_poincare_duality",
+  "declarations": [
+   "AlgebraicGeometry.curveFiniteLevelCupTrace",
+   "AlgebraicGeometry.curve_finite_level_poincare_duality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteLevelPoincareDuality.lean",
+  "statement": "theorem curve_finite_level_poincare_duality (k₀ K : Type u) [Field k₀] [Field K] [Algebra k₀ K] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))] [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProjective (C₀ ↘ Spec (.of k₀))] [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (ell c : ℕ) [Fact ell.Prime] [CharP k₀ c] (hell : ell ≠ c) (n : ℕ) (hn : 1 ≤ n) : ∃ b : Sheaf.H ((C₀.baseChangeField k₀ K).constantZMod (ell ^ n)) 1 →+ Sheaf.H ((C₀.baseChangeField k₀ K).rootsOfUnitySheaf (ell ^ n)) 1 →+ ZMod (ell ^ n), (∀ x y, b x y = curveFiniteLevelCupTrace k₀ K C₀ ell c hell n hn x y) ∧ Function.Bijective b ∧ Function.Bijective b.flip",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical cup-trace is the published finiteCoefficientCup followed by degreeNormalizedCurveTrace, specialized to the actual algebraic-closure base change. Sheaf.H is the recorded Ext model of ordinary etale cohomology. Its finite Tate coefficient is read as the existing etale roots-of-unity sheaf. Biadditivity and bijectivity of both additive adjoints are exactly Z/(ell^n)-bilinearity and perfectness: additive maps between modules over Z/N are automatically Z/N-linear. No arbitrary pairing, trace, root trivialization, or geometric-curve hypothesis is supplied."
  }
 }
