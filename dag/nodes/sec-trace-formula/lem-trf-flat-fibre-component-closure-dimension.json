@@ -15,48 +15,81 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "equidimensional|relativeDimension|pure.*dimension",
-   "results": "11 hits; Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; ; digest=78791c5b354ed85f. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
-   "date": "2026-10-17",
-   "verdict": "no match"
+   "text": "Let $\\mathcal F=\\mathcal O_X$. Because $f$ is flat, $\\mathcal F$ is flat over $S$ at every point. The generic point of an irreducible component $B$ of the locally Noetherian fibre $X_t$ is an associated point of the fibre structure sheaf, hence belongs to the relative assassin $\\operatorname{Ass}_{X/S}(\\mathcal O_X)$ by the fibrewise definition of the relative assassin.",
+   "uses": [
+    "lem-trf-fibre-component-relative-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AT (definition-relative-assassin) and Tag 05AH (lemma-minimal-support-in-ass), applied to the structure sheaf of the fibre X_t"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "A flat scheme morphism locally of finite type has constant dimension on the fibres of the closure of a fibre component generic point",
-   "results": "8 hits; AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; ; digest=1af15336d1d136a9. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
-   "date": "2026-10-17",
+   "text": "Apply the flat-associated-equidimensional lemma to $f$, $\\mathcal F=\\mathcal O_X$, and the relative associated point $y$. Its closure $Y$ is the reduced integral closed subscheme with underlying space $Z=\\overline{\\{y\\}}$, and $T$ is the closure of $\\{f(y)\\}$. The flatness hypothesis at generic points of fibres of $Y\\to T$ holds because $f$ is flat everywhere. The lemma gives an integer $d$ such that $Y\\to T$ has relative dimension $d$, and every generic point of every irreducible component of a fibre $Y_s$ has local dimension $d$.",
+   "uses": [
+    "lem-trf-flat-associated-equidimensional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSJ (lemma-flat-associated-equidimensional), parts (1)--(2)"
+   }
+  },
+  {
+   "text": "The fibre $Y_t$ has underlying topological space $B$: it is the closure of the generic point $y$ inside the fibre $X_t$, and $B$ is the irreducible component whose generic point is $y$. Thus $d=\\dim B$. For any $s\\in S$, the subspace $Y_s$ has the same underlying space as $Z_s$, and its irreducible components are exactly the $D$ in the statement. The relative-dimension conclusion therefore gives $\\dim D=d=\\dim B$ for every irreducible component $D$ of $Z_s$. No reducedness or flatness of $Y$ is used; only the flatness of $\\mathcal O_X$ over $S$ enters the cited lemma.",
+   "uses": [
+    "lem-trf-flat-associated-equidimensional",
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSJ (lemma-flat-associated-equidimensional), part (2), and Tag 0GSK (remark-flat-equidimensional), second list"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fibre-component-relative-associated",
+  "lem-trf-flat-associated-equidimensional",
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0GSJ and 0GSK, with the relative-assassin definition in Divisors Tag 05AT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dimension of fibre components in the closure of a generic point for a flat locally finite type morphism",
+   "results": "AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; Algebra.IsStandardSmooth.relativeDimension; AlgebraicGeometry.IsSmoothOfRelativeDimension; Algebra.IsStandardSmoothOfRelativeDimension.out; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.stalkMap; Algebra.HasGoingDown.of_flat",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFiniteType",
-   "results": "1 hits; AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact; ; digest=879fe59f8aca4a57. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
-   "date": "2026-10-17",
+   "query": "AlgebraicGeometry.Flat.generalizingMap, topologicalKrullDim",
+   "results": "0 hits",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "For a flat locally finite type morphism of schemes the reduced closure of a generic point of a fibre component has equidimensional fibres of constant dimension",
-   "results": "8 hits; AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Flat, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Flat.of_stalkMap; ; digest=7e02e83266642224. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The closure of a generic point of a fibre of a flat morphism locally of finite type is of constant pure relative dimension",
-   "results": "8 hits; AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.HasGoingDown.of_flat, AlgebraicGeometry.Flat, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.finite_appTop_of_universallyClosed; ; digest=dd5062f182c6bf5e. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
-   "date": "2026-10-17",
+   "tool": "grep",
+   "query": "equidimensional|relativeDimension|topologicalKrullDim Mathlib/AlgebraicGeometry Mathlib/Topology",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-dense-generic-fibre-pure-dimension",
@@ -82,5 +115,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-fibre-component-closure-dimension",
+  "worker": "stage1",
+  "summary": "Split the fibre-component dimension statement into the relative equidimensionality input of Tag 0GSJ and the fibrewise associated-point input. The three proof steps establish relative association, apply 0GSJ to the structure sheaf using global flatness, and identify the closure fibre with the chosen component. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the component-closure input to the flat-family dimension argument in the ancestor proof route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-1f0601e2f",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-1f0601e2f (reviewer sub-agent of L); spot-checked: The mathematics is correct and the item statement is unchanged against the base (I checked it is byte-identical). lem-trf-flat-associated-equidimensional matches Stacks 0GSJ (more-morphisms lemma-flat-associated-equidimensional) hypothesis by hypothesis, read together with 0GSI and relative dimension as defined in 02NJ. lem-trf-fibre-component-relative-associated is true by Divisors 05AH (generic points of components are associated, on a locally Noetherian scheme) together with 01T6. Step 1 is exactly the statement of the second node. In step 2, flatness of f gives the 0GSJ flatness hypothesis for F=O_X. In step 3, Y_t has underlying set equal to the closure of y in X_t, which is B, so dim B = d; Y_s has the same underlying space as Z_s; and Z_s is empty for s outside T. This step is elementary. Small cases tested: xy=t (generic and special t), A^1xA^1->A^1, and the finite flat k[t,x]/(x^2-t). Neither new node is a duplicate of an existing node, a blueprint node, or a restated clause of the item. No off-unit statements are used and no tool_uses are needed. I fixed four faults in fixes/: (1) B4: step 2 of the item contained two literal TAB characters, because `Y\\to T` had been decoded as a JSON tab; (2) B5: the relative-assassin tag 02OZ (actually the regular meromorphic section lemma) is corrected to 05AT, with 05AH added, in the item's step 1 source, its proof_origin and the source of the new node; (3) B3: lem-trf-flat-associated-equidimensional used associated points of a module's fibre, flatness at a point, integral subscheme, fibre and dimension with no definitions, so its statement is made self-contained with citations (mathematics unchanged, stmt_deps expanded), and lem-trf-fibre-component-relative-associated now cites def-sc-associated-points; (4) B9: from.via of both new nodes is completed to the item plus the item's via chain. Separate note, outside this delivery: the existing node def-sc-associated-points also cites 02OZ where the correct tag is 02OJ.; 3 file(s) fixed by the reviewer"
  }
 }
