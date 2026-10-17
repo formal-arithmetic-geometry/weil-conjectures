@@ -21,15 +21,16 @@
  },
  "proof": [
   {
-   "text": "The core theorem identifies the residue field of R with l, the separable closure of k=kappa(y) inside Omega. Compose this comparison with reduction to obtain rho:R -> l. The equations for s and the structural map imply that rho respects K: apply full faithfulness of Spec to the composites into Omega, then use injectivity of l -> Omega. R is henselian by the proved upstream strict-henselization instance.",
+   "text": "Apply the core theorem to identify the residue field of R with E = separableClosure k Omega, where k = kappa(y). Equip Omega with the composite K-algebra structure. The canonical residue-algebra instance and strictHenselizationResidue give strict henselianity of the chosen ring R. Put rho0 = e composed with reduction. Apply full faithfulness of Spec to hK, the core geometric-point equation, hOmega and hKappa; injectivity of E into Omega then shows rho0 is K-linear. The resulting rho is surjective and its kernel is the maximal ideal.",
    "uses": [
     "lem-sc-smooth-strict-local-field-model-core",
-    "def-weil-pbc-relative-separable-closure"
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-functoriality"
    ],
    "elementary": false
   },
   {
-   "text": "The stalk map of the finite-type morphism is essentially of finite type; its residue map is also essentially of finite type. Compose it with the base-point residue-field identification to obtain an essentially finite-type extension k/K for the given K-algebra structure. Since K is perfect, the separating-basis theorem supplies a finite family t that is algebraically independent over K and for which k/K(t) is separable algebraic.",
+   "text": "Full faithfulness of Spec and hKappa identify the prescribed K-algebra map into k with f.residueFieldAlgebraMap y. The base-point residue algebra is essentially finite type. Compose its map with the residueFieldIso inverse and the residue map of LocallyOfFiniteType.stalkMap f y, obtaining Algebra.EssFiniteType K k. Apply Mathlib exists_isTranscendenceBasis_and_isSeparable_of_perfectField to obtain a finite separating family t.",
    "uses": [
     "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
     "lem-weil-pbc-algclosed-fg-field-separating-basis"
@@ -37,7 +38,7 @@
    "elementary": false
   },
   {
-   "text": "Map t into l. Its algebraic independence is preserved by the injective field map k -> l. Separability is transitive, so l is separable algebraic over K(t); transport along the canonical equivalence between K(t) in k and its image in l. Apply the coefficient-section theorem to rho and the image family, obtaining j:l -> R with rho j=id.",
+   "text": "Map t into E along k -> E. Algebraic independence is preserved by the injective K-algebra homomorphism. Let L0 = K(t) in k and L = K(image t) in E. Separability transitivity gives E/L0 separable. IntermediateField.equivMap, adjoin_map and equivOfEq identify L0 with L, compatibly with their maps into E; IsSeparable.of_equiv_equiv transports the separability to E/L. Apply exists_section_of_separating_family to rho and the mapped family, obtaining j:E -> R with rho composed with j equal to the identity.",
    "uses": [
     "new-lem-sc-henselian-separably-generated-residue-section",
     "def-weil-pbc-separable-algebraic-extension"
@@ -45,7 +46,7 @@
    "elementary": false
   },
   {
-   "text": "Take F=l. It is separably closed by the separable-closure instance. Reduction composed with j is the inverse of the core residue equivalence and hence bijective. The tower formula and algebraicity of l/k give trdeg_K l=trdeg_K k=a.",
+   "text": "Take F = E with its existing field and K-algebra structures. IsSepClosure.sep_closed supplies separable closedness. Injectivity of e and the section equation show reduction composed with j = e.symm, hence it is bijective. The transcendence-degree tower formula for K -> k -> E, together with algebraicity of E/k and ha, gives trdeg_K E = a.",
    "uses": [
     "def-pc-separably-closed",
     "lem-sbc-transcendence-degree-tower"
@@ -56,6 +57,7 @@
  "proof_deps": [
   "lem-sc-smooth-strict-local-field-model-core",
   "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
   "lem-weil-pbc-algclosed-fg-field-separating-basis",
   "new-lem-sc-henselian-separably-generated-residue-section",
@@ -65,8 +67,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees; expanded using the existing Mathlib and henselian-colimit APIs"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.proof.md",
+  "place": "Local calculation in dimension d, coefficient-field paragraph; implemented by A3 on 2026-10-17 using the core residue comparison, strictHenselizationResidue, the proved henselian section theorem and Mathlib field APIs."
  },
  "mathlib_searches": [
   {
@@ -131,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261016T030335-L-1617824",
-  "kind": "interface",
+  "landing": "20261017T003412-L-3311904",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

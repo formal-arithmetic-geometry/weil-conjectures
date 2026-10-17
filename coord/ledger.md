@@ -15703,3 +15703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:34 L: returned deliver/K2/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (reviewer RETURN: (the landing tools, head 5cef417fc) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:34 L: returned deliver/M2/Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero (reviewer RETURN: (the landing tools, head 3ed40872b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:34 L: returned deliver/R2/Sheaf.Paper.GeometricFieldProfiniteDenseSubsite (reviewer RETURN: (the landing tools, head a34bf3ac3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 00:34 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeffData (stage 3; reviewer PASS; first push; landing 20261017T003412-L-3311904 (proof); batch 20261017T003410; modules 1; new nodes 0)
