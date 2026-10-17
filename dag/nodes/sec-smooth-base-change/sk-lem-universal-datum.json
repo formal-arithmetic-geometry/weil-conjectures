@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-universal-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Universal curve-test datum for a failure",
@@ -14,53 +14,210 @@
  },
  "stmt_deps": [
   "sk-def-bc",
-  "sk-def-smooth"
+  "sk-def-smooth",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-sc-function-field",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "*Step 1 (a failure over a field).* By [sk-lem-failure-field] there are\nan affine $S_1$ with a morphism $S_1\\to S$, the base change\n$f_1:X_1\\to S_1$ of $f$, a field $K_0$ with $g_0:\\Spec K_0\\to S_1$, and a\nsheaf $\\mathcal F_0$ of $\\Lambda$-modules on $(\\Spec K_0)_{\\Et}$ for which\nthe degree-$q$ base-change map of $f_1$ along $g_0$ is not an isomorphism.",
+   "text": "Apply [sk-lem-failure-field] with the given $\\Lambda$ and $q$. Its lower-degree universal hypothesis is exactly the hypothesis here. Obtain an affine $S_1$, a base change $f_1:X_1\\to S_1$, a field $K_0$, $g_0:\\operatorname{Spec}K_0\\to S_1$, and a $\\Lambda$-module sheaf $F_0$ for which the degree-$q$ arrow is not an isomorphism. Both $S_1$ and $\\operatorname{Spec}K_0$ are qcqs by [lem-weil-pbc-affine-scheme-qcqs]; [lem-weil-pbc-qcqs-morphism-permanence](1) makes $g_0$ qcqs. By universality [sk-def-bc], $\\mathrm{BC}(f_1,\\Lambda,q-1)$ holds. No assertion about all $\\mathbf Z/n\\mathbf Z$-module sheaves is inferred from the hypothesis about $\\Lambda$.",
    "uses": [
-    "sk-lem-failure-field"
+    "sk-lem-failure-field",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sk-def-bc"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   },
   {
-   "text": "*Step 2 (algebraically closed field).* Let $K$ be an algebraic closure of\n$K_0$; $\\pi:\\Spec K\\to\\Spec K_0$ is integral and surjective. Since\n$\\mathrm{BC}(f_1,\\Lambda,q-1)$ holds (part of the universal hypothesis), the\nbase-change map in degree $q$ is injective, and the integral surjective\nbase-change lemma of this subsection shows that the failure persists\nfor the square of $f_1$ along $g_0\\circ\\pi$ and the sheaf\n$\\pi^{-1}\\mathcal F_0$: surjectivity on a geometric point makes the same\ncokernel element survive.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose an algebraic closure $K$ of $K_0$ using [def-weil-algebraic-closure], and let $\\rho:\\operatorname{Spec}K\\to\\operatorname{Spec}K_0$. Each element of the algebraic extension satisfies a monic equation after division by its nonzero leading coefficient, so $\\rho$ is integral by [def-weil-finite-integral-morphism]. Both spectra consist of one point, so $\\rho$ is surjective. Pull back the square and set $F=\\rho^{-1}F_0$. Apply [lem-sbc-module-bc-integral-surjective] to $p=f_1$, $g=g_0$, and $\\pi=\\rho$. An isomorphism for $g_0\\circ\\rho,F$ would force one for $g_0,F_0$, contradicting Step 1. Thus the failure persists over the algebraically closed field $K$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-finite-integral-morphism",
+    "lem-sbc-module-bc-integral-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   },
   {
-   "text": "*Step 3 (normal base).* Let $A_1=\\Gamma(S_1,\\mathcal O_{S_1})$ and let $B$ be\nthe integral closure of the image of $A_1$ in $K$; put $S'=\\Spec B$. Then\n$S'$ is affine, integral and normal, its fraction field $L$ is the\nalgebraic closure in $K$ of the fraction field of the image of $A_1$, hence\nalgebraically closed, $S'\\to S_1$ is integral, and $\\Spec K\\to S_1$\nfactors as the geometric generic point $g:\\Spec K\\to S'$ followed by\n$S'\\to S_1$. Higher direct images along integral morphisms vanish, so the\nintegral base-change lemma of this subsection identifies the base-change map\nof $f_1$ along $\\Spec K\\to S_1$ with that of the base change\n$f':X'=X\\times_SS'\\to S'$ along $g$; hence the latter, for\n$\\mathcal F=\\pi^{-1}\\mathcal F_0$, is not an isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-sbc-normalization-algclosed-field] to $g_0\\circ\\rho:\\operatorname{Spec}K\\to S_1$. This supplies an integral $\\pi:S'\\to S_1$, an affine integral normal $S'$ with algebraically closed function field $L$, and an embedding $L\\hookrightarrow K$ inducing $g:\\operatorname{Spec}K\\to S'$ with $\\pi\\circ g=g_0\\circ\\rho$. Put $X'=X_1\\times_{S_1}S'$ and $Y=X'\\times_{S'}\\operatorname{Spec}K$, with $f',h,e$ the projections. The squares paste to a base change of the original $f$. The affine-scheme and qcqs-permanence nodes show that $g$ is qcqs. To prove failure survives, suppose its new $\\Lambda$-linear arrow were an isomorphism. By [lem-weil-pbc-exchange-forget-coefficients](1)-(3), forgetting scalars and taking degree-$q$ cohomology identifies it with the abelian base-change arrow; the forgetful functor is exact, so these are identifications of the arrows, not just their endpoints. The new abelian arrow would be an isomorphism. Apply [lem-sbc-integral-pushforward-base-change-arrow] with $\\pi$ and $g'=g$: it makes the pasted abelian arrow an isomorphism. The same coefficient comparisons identify this with the underlying arrow from Step 2. A bijective $\\Lambda$-linear map has a $\\Lambda$-linear inverse sectionwise, so forgetting scalars reflects isomorphisms. The Step-2 arrow would therefore be an isomorphism, a contradiction. Only the implication from the new arrow to the pasted arrow is used; no conservativity of integral pushforward is needed.",
+   "uses": [
+    "lem-sbc-normalization-algclosed-field",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-sbc-integral-pushforward-base-change-arrow",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   },
   {
-   "text": "*Step 4 (the target is nonzero).* $\\mathrm{BC}(f',\\Lambda,q-1)$ holds by the\nuniversal hypothesis, so by [sk-prop-injectivity] (1) the base-change map\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is injective. It is not\nan isomorphism, so its target $R^qh_*e^{-1}\\mathcal F$ is nonzero.",
-   "uses": [],
-   "elementary": null
+   "text": "Every further base change of $f'$ is a base change of $f$ (paste its Cartesian square with those already constructed). Thus [sk-def-bc] gives $\\mathrm{BC}(f',\\Lambda,q-1)$. Apply [lem-sbc-module-bc-injectivity] to the qcqs $g$ and $F$. The degree-$q$ map is a monomorphism but not an isomorphism, hence $R^qh_*e^{-1}F\\ne0$: a monomorphism with zero target has zero source and would be an isomorphism between zero objects. The map $h$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](3), since it is a base change of $g$. It is not being identified with a base change of $f$.",
+   "uses": [
+    "sk-def-bc",
+    "lem-sbc-module-bc-injectivity",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   },
   {
-   "text": "*Step 5 (constant coefficients $\\Lambda/d\\Lambda$).* As $K$ is algebraically\nclosed, $\\mathcal F$ is the constant sheaf with value the $\\Lambda$-module\n$M=\\mathcal F(\\Spec K)$, so $e^{-1}\\mathcal F$ is the constant sheaf $M$\non $Y$. The higher direct images of a sheaf of $\\Lambda$-modules are those of\nits underlying abelian sheaf, and $R^qh_*$ commutes with direct sums because\n$h$ is quasi-compact and quasi-separated (it is affine, as a base change of\nthe affine $f$). Since $n\\Lambda=0$, $M$ is an abelian group of exponent\ndividing $n$, hence a direct sum of cyclic groups $\\Z/\\ell^k$ with $\\ell$\nprime and $\\ell^k\\mid n$; so $R^qh_*(\\Z/\\ell^k)\\neq0$ for one of them, and\nthe exact sequences $0\\to\\Z/\\ell^{j-1}\\to\\Z/\\ell^j\\to\\Z/\\ell\\to0$ give\n$R^qh_*(\\Z/\\ell)\\neq0$ for that prime $\\ell\\mid n$. The element of order\n$\\ell$ of $M$ in that summand shows that $\\ell$ is not a unit of $\\Lambda$,\nso $\\Lambda/\\ell\\Lambda$ is a nonzero $\\mathbf F_\\ell$-vector space; as an\nabelian sheaf the constant sheaf $\\Lambda/\\ell\\Lambda$ is a nonzero direct\nsum of copies of $\\Z/\\ell$, and therefore\n$R^qh_*(\\Lambda/\\ell\\Lambda)\\neq0$. Put $d=\\ell$; it divides $n$, so it is\ninvertible on $S$ and on $S'$.",
-   "uses": [],
-   "elementary": null
+   "text": "The composite $\\operatorname{Spec}K\\to S$ pulls the unit $n$ to a unit of the nonzero field $K$, so $n\\ne0$. If the integer $n$ is negative, put $N=|n|$; then $N>0$, $N\\Lambda=0$, and $N$ is invertible on $S$. (If $n$ is already natural this is just $N=n$.) The target in Step 4 is exactly $H^q(Rh_*Le^*(F[0]))$ of [sbc-def-base-change-map]: inverse image is exact for the constant coefficient ring. Apply [lem-sbc-prime-cyclic-detection] to $\\Lambda,K,e,h,N,q,F$. Its hypotheses are now all established: $K$ is algebraically closed, $h$ is qcqs, $N\\ne0$, and $N=0$ in $\\Lambda$. It supplies a prime $r\\mid N$ which is not a unit in $\\Lambda$, and nonzero $R^qh_*\\underline{P_r/(r)}$, where $P_r=\\operatorname{ULift}(\\mathbf F_r)$. This uses the existing arbitrary-coefficient devissage, and does not decompose a $\\Lambda$-module into $\\Lambda/d\\Lambda$-summands.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "lem-sbc-prime-cyclic-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   },
   {
-   "text": "*Step 6 (the datum).* $S'\\to S$ is the composite $S'\\to S_1\\to S$, and\n$f'$ is the base change of $f$ along it; affineness, smoothness and relative\ndimension one are stable under base change, so $f'$ is affine and smooth of\nrelative dimension one. This is the datum of the statement.",
-   "uses": [],
-   "elementary": null
+   "text": "If $R^qh_*\\underline{\\Lambda/(r)}$ were zero, [lem-sbc-prime-quotient-detection], applied with the prime $r$ not a unit in $\\Lambda$, would make $R^qh_*\\underline{P_r/(r)}$ zero, contradicting Step 5. Thus $R^qh_*\\underline{\\Lambda/(r)}\\ne0$. Set $d=r$. Since $r\\mid |n|$, also $d\\mid n$ in $\\mathbf Z$. Pulling the unit $n$ back to $S'$ and writing $n=dt$ gives an inverse $t n^{-1}$ for $d$ in $\\Gamma(S',\\mathcal O_{S'})$. Hence $d$ is invertible on $S'$.",
+   "uses": [
+    "lem-sbc-prime-quotient-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
+  },
+  {
+   "text": "Take $S'\\to S$ to be the composite of the two base changes. Step 3 supplies its affineness, integrality, normality, the algebraically closed function field $L$, and the geometric generic point defined by $L\\hookrightarrow K$. By [lem-weil-pbc-affine-morphism-permanence](1), $f'$ is affine; by [lem-sbc-smooth-relative-dimension-permanence](1), it is smooth of relative dimension one. Since $S'$ is affine, the same affine-permanence node also gives $X'$ affine if this is included in the datum. The Cartesian square and the nonzero higher direct image with the required $d$ are those of Steps 3 and 6. All the clauses of the original statement follow.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F08, lemma-base-change-does-not-hold, proof; arbitrary-Lambda version of the current blueprint sk-lem-universal-datum"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "lem-sbc-integral-pushforward-base-change-arrow",
+  "lem-sbc-module-bc-injectivity",
+  "lem-sbc-module-bc-integral-surjective",
+  "lem-sbc-normalization-algclosed-field",
+  "lem-sbc-prime-cyclic-detection",
+  "lem-sbc-prime-quotient-detection",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sbc-def-base-change-map",
+  "sk-def-bc",
   "sk-lem-failure-field"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-lem-universal-datum/_section.md",
-  "place": "## Proof"
+  "place": "Statement sk-lem-universal-datum; expanded route of Stacks Tag 0F08, with arbitrary-Lambda injectivity and integral test replacement from the read-only Lean source and existing coefficient comparison/devissage nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal curve test datum for failure of etale cohomology base change over an affine normal scheme with algebraically closed function field",
+   "results": "{\"t\": \"2026-10-16T23:39:23Z\", \"tool\": \"leanfinder\", \"query\": \"Universal curve test datum for failure of etale cohomology base change over an affine normal scheme with algebraically closed function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"23859b3e2799ef00\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ring or scheme base change, tensor products, or generic sheaf categories; none states this etale cohomological comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "CurveTestDatum|exists_curveTestDatum|baseChangeHomologyMap",
+   "results": "{\"t\": \"2026-10-17T00:37:11Z\", \"tool\": \"grep\", \"query\": \"CurveTestDatum|exists_curveTestDatum|baseChangeHomologyMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: geometric stability, cotangent modules, ordinary sheaf monomorphisms, and the abstract four lemma do not state this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal curve test datum for failure of etale cohomology base change",
+   "results": "{\"t\": \"2026-10-16T23:40:03Z\", \"tool\": \"leansearch\", \"query\": \"Universal curve test datum for failure of etale cohomology base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.etaleLocus_eq_univ_iff\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"5c56bc3a07ffcc19\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ring or scheme base change, tensor products, or generic sheaf categories; none states this etale cohomological comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"baseChange\"",
+   "results": "{\"t\": \"2026-10-17T00:37:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"c1d9159f372cd715\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: geometric stability, cotangent modules, ordinary sheaf monomorphisms, and the abstract four lemma do not state this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Failure of etale cohomology base change is detected by nonzero higher direct image of constant cyclic coefficients over a normal integral base",
+   "results": "{\"t\": \"2026-10-16T23:40:04Z\", \"tool\": \"leanfinder\", \"query\": \"Failure of etale cohomology base change is detected by nonzero higher direct image of constant cyclic coefficients over a normal integral base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"1eb0ef08a6302237\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ring or scheme base change, tensor products, or generic sheaf categories; none states this etale cohomological comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal curve test datum from failure of etale cohomology base change with affine smooth relative curve",
+   "results": "{\"t\": \"2026-10-17T00:07:28Z\", \"tool\": \"leanfinder\", \"query\": \"Universal curve test datum from failure of etale cohomology base change with affine smooth relative curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"66a255f6380edb05\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no curve-test datum declaration in Mathlib; the semantic hits describe geometric smoothness and etaleness only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.exists_curveTestDatum",
+   "results": "{\"t\": \"2026-10-17T00:07:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale.exists_curveTestDatum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Etale.exists_curveTestDatum'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no curve-test datum declaration in Mathlib; the semantic hits describe geometric smoothness and etaleness only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_curveTestDatum|CurveTestDatum",
+   "results": "{\"t\": \"2026-10-17T00:07:29Z\", \"tool\": \"grep\", \"query\": \"exists_curveTestDatum|CurveTestDatum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no curve-test datum declaration in Mathlib; the semantic hits describe geometric smoothness and etaleness only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Failure of etale cohomology base change is detected by a nonzero higher direct image of constant cyclic coefficients at a geometric generic point",
+   "results": "{\"t\": \"2026-10-17T00:37:11Z\", \"tool\": \"leansearch\", \"query\": \"Failure of etale cohomology base change is detected by a nonzero higher direct image of constant cyclic coefficients at a geometric generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"4323639bdc5a34a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: geometric stability, cotangent modules, ordinary sheaf monomorphisms, and the abstract four lemma do not state this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal curve test datum detecting failure of etale smooth base change over a normal affine base with algebraically closed function field",
+   "results": "{\"t\": \"2026-10-17T00:37:13Z\", \"tool\": \"leanfinder\", \"query\": \"Universal curve test datum detecting failure of etale smooth base change over a normal affine base with algebraically closed function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"ea489ab57cff20af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: geometric stability, cotangent modules, ordinary sheaf monomorphisms, and the abstract four lemma do not state this etale higher-direct-image comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -173,5 +330,39 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-universal-datum",
+  "worker": "stage1",
+  "summary": "Kept the statement, replaced all unfinished imported steps by a coefficient-correct seven-step argument, reused the normalization and two prime-coefficient tools, and reused the existing arbitrary-Lambda critical-map injectivity node and added only the integral-surjective test replacement. Corrected the imported assertion that h is a base change of f. All statements used are quoted in citations.json.",
+  "blueprint": "Realizes current sk-lem-universal-datum: field failure, algebraic closure, normalization, injectivity/nonzero target, prime coefficients, and inherited curve geometry. The inherited unit record is the older Z/n version; its existing sbc realization is retained alongside the current general-Lambda item.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-failure-field",
+    "why": "This is the field-failure theorem explicitly required by the unit proof; the inherited unit uses list omits it. Its statement has precisely the same arbitrary-Lambda lower-degree hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic exact forgetting-coefficients comparison of the canonical exchange arrow; needed to use the existing abelian integral pushforward tool without changing the coefficient scope of the lower-degree hypothesis."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic geometric base-change permanence used solely to inherit the geometry of the original affine smooth curve; the universal-datum unit has no separate permanence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-failure-field",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-904069252",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-904069252 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited node statement, Stacks 0F02, 0F03, 0F04, 0F08 and the pre-lemma (etale-cohomology.tex 16848-17339, tags checked), the main-20261015 blueprint statement and proof, and the Lean source IntegralBaseChange.lean 125-169. The item statement is verbatim the current blueprint (general Lambda, signed n, d invertible on S'), and nothing is weakened. Step 1: sk-lem-failure-field gives the field failure; g0 is qcqs by affine-scheme-qcqs and qcqs-permanence (1). Step 2: an algebraic closure is integral and surjective, and the contrapositive of the new node with fixed-base BC(f1,Lambda,q-1) runs in the right direction. Step 3: normalization gives affine, integral, normal S' with an algebraically closed function field and the geometric generic point. The coefficient comparison (forget-coefficients (1)-(3), with its square relabelled to our pushed-forward g and h) and the implication of integral-pushforward-base-change-arrow, from the normalized arrow to the pasted one, are correct; the lower-degree hypothesis is never enlarged to abelian sheaves. Step 4: arbitrary-Lambda injectivity (1) gives a monomorphism, so the target is nonzero; h is the base change of g, hence qcqs. Steps 5-6: N=|n| is nonzero because n is a unit in the field K; prime-cyclic-detection gives a nonunit prime r; prime-quotient detection by contraposition gives R^q h_*(Lambda/r) nonzero; d=r has inverse t/n on S'. Step 7: affine and smooth relative-dimension permanence. New node lem-sbc-module-bc-integral-surjective: it matches Stacks 0F04 and the Lean declaration (hprev fixed-base, g qcqs, pi integral and surjective); the 0F04 proof needs only 0F03(2) on the same square, so the statement is true. It is statement-only, self-contained and has its definition dependencies; searches were recorded; its Lean rests on a sorry, so it is recorded as a candidate, not attached. It generalizes, and does not duplicate, the Z/n node sbc-lem-bc-integral-surjective, which this item cannot use; it is not a clause of the item. Small cases q=1, Lambda=0, pi=id and empty T hold. Tool uses accepted: failure-field, forget-coefficients, smooth permanence; the injectivity node is Lean-closed. Unit file: only the realized fields changed. No SGA citations, no changes."
  }
 }
