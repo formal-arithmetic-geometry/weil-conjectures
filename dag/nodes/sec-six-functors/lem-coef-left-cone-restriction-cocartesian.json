@@ -12,9 +12,96 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(K,E)$, $S=\\operatorname{Fun}(\\Delta^0\\star K,E)$, and let $p=(\\operatorname{ev}_v,r_E):S\\to E\\times D$. Restriction along $K\\subseteq\\Delta^0\\star K$ and along $\\{v\\}\\amalg K\\subseteq\\Delta^0\\star K$ is an isofibration by exponential restriction. Thus $S,D$ are quasicategories and $r_E,p$ are inner fibrations. Set $L=E\\times_{\\Delta_K,D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)$. The joint projection $p_L:L\\to E\\times D$ is the pullback of the endpoint isofibration $\\operatorname{Fun}(\\Delta^1,D)\\to D\\times D$, so $L$ is also a quasicategory. The join-cone comparison gives an equivalence $c:S\\to L$ over $E\\times D$, including an equivalence after fixing both the apex and the boundary. No fibration property of $\\Delta_K:E\\to D$ is asserted or required.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VW",
+    "place": "Agent expansion of the oriented-cone comparison in the proof of Corollary 5.3.7.4 (06MA); isofibration of restriction is Proposition 4.4.5.1 (01F1)."
+   }
+  },
+  {
+   "text": "We first prove sufficiency of the apex test. Write a cone $X$ as $(a,F,\\lambda)$ and a cone $Y$ as $(a',G,\\mu)$. For $Z=(z,H,\\nu)$, the join-cone mapping formula, transported along the mapping-space equivalences induced by the functor equivalence $c$ [lem-cbc-enhanced-functor-cone-calculus], identifies $\\operatorname{Map}_S(X,Z)$ with\n$$\\operatorname{Map}_D(F,H)\\mathop{\\times}^{h}_{\\operatorname{Map}_D(\\Delta_K a,H)}\\operatorname{Map}_E(a,z).$$\nAn edge $u:X\\to Y$ has boundary $b:F\\to G$, apex $e:a\\to a'$, and a coherent square $\\mu\\Delta_K(e)\\simeq b\\lambda$. Hence the pullback of $\\operatorname{Map}_S(X,Z)$ along $b^*:\\operatorname{Map}_D(G,H)\\to\\operatorname{Map}_D(F,H)$ is\n$$\\operatorname{Map}_D(G,H)\\mathop{\\times}^{h}_{\\operatorname{Map}_D(\\Delta_K a,H)}\\operatorname{Map}_E(a,z).$$\nIf $e$ is an equivalence, precomposition by $e$ and by $\\Delta_K(e)$ is a weak equivalence on these mapping spaces: composing with their inverses gives homotopy inverses by associativity and the unit equations. Homotopy-pullback invariance, applied with the identity on $\\operatorname{Map}_D(G,H)$ and these two equivalences, identifies the last display with $\\operatorname{Map}_S(Y,Z)$. The comparison is the one induced by precomposition with $u$, because its path coordinate is the specified coherent square. Homotopy-pullback pasting justifies the displayed iterated pullback. Thus the mapping square for $u$ over $b$ is a homotopy pullback for every $Z$. The cocartesian mapping criterion implies that $u$ is $r_E$-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VW",
+    "place": "Agent-written mapping-space verification of the forward implication in Corollary 5.3.7.5(1)."
+   }
+  },
+  {
+   "text": "We construct a lift with identity apex. Given $X\\in S$ with $cX=(a,F,\\lambda)$ and an edge $b:F\\to G$ of $D$, fill the inner $2$-horn $(\\lambda,b)$ in $D$. Its composite $\\lambda':\\Delta_K a\\to G$, together with the degenerate triangle on $1_{\\Delta_K a}$, gives a square in $D$, hence an edge $cX\\to t'=(a,G,\\lambda')$ of $L$ with joint image $(1_a,b)$. The comparison on the fiber over $(a,G)$ is an equivalence. Choose $Y$ in that fiber and an equivalence $t'\\to cY$ inside the same fiber. Composing gives an edge $\\gamma:cX\\to cY$ in $L$ whose joint image is homotopic, with endpoints fixed, to $(1_a,b)$. Since $c$ is a functor equivalence, it induces equivalences of mapping spaces [lem-cbc-enhanced-functor-cone-calculus]. In particular choose an edge $u_0:X\\to Y$ whose image has the component class of $\\gamma$. Its joint image is therefore in the component of $(1_a,b)$ in $\\operatorname{Map}_{E\\times D}((a,F),(a,G))$. By the inner-mapping-fiber theorem, $p$ induces a Kan fibration on these mapping spaces. Lift a path from $p(u_0)$ to the vertex $(1_a,b)$, one edge at a time, to obtain an edge $u:X\\to Y$ with $p(u)=(1_a,b)$ exactly. Vertices of the right-pinched mapping spaces are actual edges, so $u_v=1_a$ and $r_E(u)=b$. Step 2 makes $u$ cocartesian. Since $r_E$ is inner, these lifts prove that it is a cocartesian fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VW",
+    "place": "Agent-written strict lifting argument; expands the existence of identity-apex lifts rather than applying the lax-comma theorem to a non-isofibration."
+   }
+  },
+  {
+   "text": "For necessity, let $w:X\\to Y$ be $r_E$-cocartesian over $b:F\\to G$, and choose the identity-apex cocartesian lift $u:X\\to Y'$ from Step 3. Both are initial in the quasicategory $L(X,b)$ of lifts. Their comparison gives an equivalence $s:Y'\\to Y$ in the fiber over $G$ and a triangle $su\\simeq w$. Evaluation at $v$ is a simplicial functor, so it carries the inverse and inverse triangles of $s$ to inverse data in $E$. Thus $s_v$ is an equivalence, and $w_v\\simeq s_v1_a$ is an equivalence by the mapping-composition criterion for invertibility. Together with Step 2 this proves the asserted iff.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VW",
+    "place": "Agent expansion of the converse apex test of Corollary 5.3.7.5(1), using uniqueness of cocartesian lifts."
+   }
+  },
+  {
+   "text": "Form $P_h=B\\times_D S$. Inner lifting is preserved by this degreewise pullback: a prescribed simplex in $B$ gives its simplex in $D$, where the inner-fibration filler for $r_E$ supplies the $S$ coordinate. Since $B$ is a quasicategory, first fill its projected inner horn and then lift that simplex; this proves that $P_h$ is a quasicategory. If $u$ is $r_E$-cocartesian, its paired edge over an edge of $B$ is $\\pi$-cocartesian: project each defining outer-horn problem to $S$, fill it using $u$, and pair the filler with the prescribed $B$ simplex. Step 3 therefore supplies cocartesian lifts for $\\pi$. To check reflection, let $w=(\\alpha,\\eta)$ be $\\pi$-cocartesian, and choose the lift $(\\alpha,u)$ with identity apex. Initiality of these two lifts gives an equivalence between their targets in the fiber over the target of $\\alpha$, with a comparison triangle. Projection to $S$ preserves that equivalence and triangle. Evaluating at the apex shows that $\\eta_v$ is an equivalence, since $u_v$ is the identity. Conversely, if $\\eta_v$ is an equivalence, Step 2 makes $\\eta$ cocartesian and the outer-horn argument above makes $w$ cocartesian. For $K=\\varnothing$, $S=E$, $D=\\Delta^0$, and the statement is the equivalence-edge criterion for $E\\to\\Delta^0$; it is not an identity restriction. For empty $B$ the pullback is empty and all lifting conditions are vacuous. No step uses a limit or colimit in $E$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01UF",
+    "place": "Remark 5.1.4.6 (01UF), with preservation proved by horns and reflection by uniqueness of lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02VW",
+  "place": "Statement checked against Corollary 5.3.7.5(1) and Remark 5.1.4.6 (01UF). Independent mapping-space proof using the existing join-cone comparison, exponential restriction, and strict mapping-space path lifting; no hypothesis on the constant-diagram functor."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,10 +165,87 @@
    "results": "[loogle] OK 6 hit(s): SSet.coconeN, SSet.isColimitCoconeN, SSet.coconeN', SSet.isColimitCoconeN', SSet.coconeN'_pt, SSet.coconeN'_ι_app",
    "date": "2026-10-17",
    "verdict": "no match: inspected ordinary category cone/presheaf declarations and simplicial-set colimit cocones, which do not state quasicategorical cocartesian restriction or its apex criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategorical lax comma construction, cocartesian edges are exactly those whose source-category component is an equivalence",
+   "results": "{\"t\": \"2026-10-17T05:17:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategorical lax comma construction, cocartesian edges are exactly those whose source-category component is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\"], \"digest\": \"7ac0cfa4172f1f8d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cone or cocartesian declarations, not this quasicategorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.Comma, CategoryTheory.Functor.IsIso",
+   "results": "{\"t\": \"2026-10-17T05:17:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian, CategoryTheory.Comma, CategoryTheory.Functor.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "laxComma|lax_comma|comma.*cocartesian|cocartesian.*comma [Algebra]",
+   "results": "{\"t\": \"2026-10-17T05:17:44Z\", \"tool\": \"grep\", \"query\": \"laxComma|lax_comma|comma.*cocartesian|cocartesian.*comma\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits do not state quasicategorical cone or lax-comma cocartesian restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian edges in a quasicategorical lax comma category are detected by equivalence of the source component",
+   "results": "{\"t\": \"2026-10-17T05:17:45Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian edges in a quasicategorical lax comma category are detected by equivalence of the source component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.ext\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"160896f6b31ccb6f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cone or cocartesian declarations, not this quasicategorical result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from left cone diagrams to boundary diagrams is a cocartesian fibration with apex equivalence criterion",
+   "results": "{\"t\": \"2026-10-17T05:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from left cone diagrams to boundary diagrams is a cocartesian fibration with apex equivalence criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone_pt\", \"CategoryTheory.Functor.IsCocartesian.map\"], \"digest\": \"6732b27288846916\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cone or cocartesian declarations, not this quasicategorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsIso",
+   "results": "{\"t\": \"2026-10-17T05:17:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "CocartesianFibration|IsCocartesian [Algebra/CategoryTheory/FiberedCategory]",
+   "results": "{\"t\": \"2026-10-17T05:17:47Z\", \"tool\": \"grep\", \"query\": \"CocartesianFibration|IsCocartesian\", \"sub\": \"Algebra/CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits do not state quasicategorical cone or lax-comma cocartesian restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cone restriction from Fun(Delta0 star K,E) to Fun(K,E) cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T05:22:58Z\", \"tool\": \"leanfinder\", \"query\": \"Cone restriction from Fun(Delta0 star K,E) to Fun(K,E) cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"CategoryTheory.Limits.Cone.toStructuredArrowCone\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone_π_app\", \"CategoryTheory.Limits.Cone.fromCostructuredArrow\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone_pt\", \"LightProfinite.Extend.cone\"], \"digest\": \"f089ccebde9412e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cone or cocartesian declarations, not this quasicategorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T05:22:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"60646e309b2723ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|CocartesianFibration [Algebra/CategoryTheory]",
+   "results": "{\"t\": \"2026-10-17T05:22:59Z\", \"tool\": \"grep\", \"query\": \"cocartesian|CocartesianFibration\", \"sub\": \"Algebra/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib hits do not state quasicategorical cone or lax-comma cocartesian restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cone restriction is cocartesian and cocartesian edges are detected by apex equivalences",
+   "results": "{\"t\": \"2026-10-17T05:23:00Z\", \"tool\": \"leansearch\", \"query\": \"Cone restriction is cocartesian and cocartesian edges are detected by apex equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.colimit.isoColimitCocone\", \"CategoryTheory.Limits.isLimitChangeEmptyCone\", \"CategoryTheory.Over.ConstructProducts.conesEquivFunctor_obj_pt\", \"CategoryTheory.Limits.PullbackCone.ofCone_pt\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.equiv.congr_simp\", \"CategoryTheory.Limits.Cocones.ext\"], \"digest\": \"514426bd4dc38713\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cone or cocartesian declarations, not this quasicategorical result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-limit-join-slice-recognition",
@@ -93,7 +257,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the derived inverse limit; auxiliary construction of the marked operadic models used by lem-coef-marked-operadic-model-structures. Higher Algebra, Definition B.1.1, Proposition B.1.6, Proposition B.1.9 specialized to a second pattern trivial on a point, and Proposition B.1.14, printed pp.1470-1482. For triviality of restriction along a P-anodyne map, use the proof of B.1.14 together with B.1.9, as in Example B.2.2. The point-pattern identification is Example B.0.21 and the definition of cocartesian edges over a point. Auxiliary lemma used by the explicit lifting-recognition proof of lem-coef-pattern-anodyne-lifting-products. In the relative-limit recognition argument, the restriction of left-cone diagrams to their boundaries is cocartesian; this promotes the fixed-boundary mapping-space test to arbitrary boundary transformations.",
+   "place": "The ancestor statement prop-coef-integral-exceptional-adjoint: \"The comparison identifies the canonical units and counits\" and its asserted constructible adjunction. The inherited finite-adjunction-diagram-realization / marked-operadic-model-structures chain uses relative-limit recognition; this item supplies the cocartesian cone-restriction and apex test in that auxiliary argument. The main-20261015 ancestor file contains a statement, not a cone-restriction proof sentence.",
    "via": [
     "lem-coef-relative-limit-join-slice-recognition",
     "lem-coef-pattern-anodyne-lifting-products",
@@ -110,5 +274,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-cone-restriction-cocartesian",
+  "worker": "stage1",
+  "summary": "Five-step proof using existing DAG statements only: inner restriction and join comparison, mapping-space sufficiency, strict identity-apex lifts, necessity by initiality, and explicit base-change preservation/reflection. Removed the new apex-criterion node and the invalid isofibration claim for the constant-diagram map.",
+  "blueprint": "Auxiliary cone-restriction infrastructure along the inherited ancestry to the constructible adjunction and canonical units/counits of prop-coef-integral-exceptional-adjoint; the main-20261015 source has no proof text. Steps 1-4 prove restriction and apex detection, and step 5 proves arbitrary base change. The unit/chapter and ancestry are retained.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic coherent functor, quasicategory, and equivalence-edge infrastructure used to identify the join comparison and its transformations; this unit has no replacement for that framework node."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 2-3 take its clause 'Every functor equivalence induces equivalences on all mapping spaces' (and Kan mapping spaces) for the join-cone comparison c; no node of sk-prop-sf-biduality-general states it, and the parent lem-coef-relative-limit-join-slice-recognition already records the same tool use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-e98412dd9",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-e98412dd9 (reviewer sub-agent of L); spot-checked: I read the item in full (5 steps, no new nodes; the second reader removed the worker's lax-comma apex criterion and the DAG does not contain it) and the statement of every cited node. Statement: left-cone restriction Fun(Δ^0⋆K,E)→Fun(K,E) is a cocartesian fibration, an edge is cocartesian iff its apex component is an equivalence, and this survives base change along any B→Fun(K,E). It is correct with the right variance. Small cases checked: K=∅ gives E→Δ^0 with equivalences as the cocartesian edges; K=Δ^0 gives target evaluation; E, B empty are vacuous; E=Δ^0 is trivial; disconnected K is covered. Parent step 2 (lem-coef-relative-limit-join-slice-recognition) uses exactly these clauses, so nothing is weakened. Step 1: isofibration-exponentiation applied to E→Δ^0, L as a pullback of the endpoint isofibration, and join-cone base change with R=Δ^0 for a fixed (a,G). Step 2: the join-cone mapping formula, precomposition by an equivalence, homotopy-pullback invariance, pasting and the cocartesian mapping criterion; the gap between homotopy classes and strict commutation is standard. Step 3: the square from the horn filler plus a degenerate triangle, essential surjectivity on the fiber, the Kan fibration from inner-mapping-fiber, and exact path lifting to (1_a,b). Step 4: composition-initiality, then evaluation at the apex. Step 5: horn lifting through the pullback, then reflection via initiality for π. Fix (C1): steps 2 and 3 used 'a functor equivalence induces equivalences on mapping spaces' without a citation; I cited lem-cbc-enhanced-functor-cone-calculus, which states it verbatim, in both steps and in proof_deps (no cycle) and declared it in split_report.tool_uses, matching the parent's existing tool use. The Kerodon 02VW/01UF and HTT sources are not archived, so the proof is correctly agent-written and listed as WANTED; I did not open them. No SGA source is used. Accepted tool_uses: def-cbc-enhanced-diagrams-cones and lem-cbc-enhanced-functor-cone-calculus.; 1 file(s) fixed by the reviewer"
  }
 }
