@@ -9,9 +9,7 @@ public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import all Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
-import all Sheaf.CategoryTheory.DerivedCoupleKernelIdentities
 import Sheaf.CategoryTheory.FilteredCohomologyImage
-import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # A stationary quotient comparison characterized on actual cycles
 
