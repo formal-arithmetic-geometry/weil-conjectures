@@ -220,5 +220,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-d4fa7b911 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements against Stacks 01GC–01GE, 018I, 018B and matching/coskeleton sources. All seven steps check out; the relative Čech first transition is repaired correctly. Small cases and duplicate searches found no fault. Accepted five declared generic tool uses. Detailed checks recorded in review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteHypercoverFreeResolution",
+  "declaration": "CategoryTheory.siteHypercover_free_resolution",
+  "file": "lean/Sheaf/CategoryTheory/SiteHypercoverFreeResolution.lean",
+  "statement": "theorem siteHypercover_free_resolution {C : Type u} [Category.{v} C] [HasFiniteLimits C] (J : Precoverage C) (hsite : J.IsSiteForCoverings) (W : C) (U : SimplicialObject C) (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W) (hcover : ∀ (n : ℕ) (T : C) (w : T ⟶ W) (p : ∀ (Δ : SimplexCategory), Δ.len < n → (Δ ⟶ SimplexCategory.mk n) → (T ⟶ U.obj (op Δ))), (∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n), p Δ h θ ≫ e.app (op Δ) = w) → (∀ (Δ Δ' : SimplexCategory) (h : Δ.len < n) (h' : Δ'.len < n) (α : Δ' ⟶ Δ) (θ : Δ ⟶ SimplexCategory.mk n), p Δ h θ ≫ U.map α.op = p Δ' h' (α ≫ θ)) → ∃ S : Sieve T, S ∈ J.toGrothendieck T ∧ ∀ (V : C) (f : V ⟶ T), S f → ∃ t : V ⟶ U _⦋n⦌, t ≫ e.app (op (SimplexCategory.mk n)) = f ≫ w ∧ ∀ (Δ : SimplexCategory) (h : Δ.len < n) (θ : Δ ⟶ SimplexCategory.mk n), t ≫ U.map θ.op = f ≫ p Δ h θ) : QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app ((SimplicialObject.Augmented.whiskeringObj C _ (uliftYoneda.{max u v} ⋙ (Functor.whiskeringRight Cᵒᵖ (Type (max u v)) AddCommGrpCat.{max u v}).obj AddCommGrpCat.free ⋙ presheafToSheaf J.toGrothendieck AddCommGrpCat.{max u v})).obj { left := U, right := W, hom := e }))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c6878cbdf",
+  "group": "N3",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/, repairing the H1/H11 placeholder second reading. Statement, sources, dependencies, universes, edge cases, and pivot checks pass. Unchanged Lean compiled cleanly through scompile.py."
  }
 }

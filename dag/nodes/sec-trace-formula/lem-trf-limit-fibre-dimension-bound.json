@@ -269,5 +269,28 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-1bb9e2b1c (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, parent, every cited node statement, and cited literature, including Stacks Tag 05M5. The statement and hypotheses match the source; the seven steps correctly globalize the existing affine bound, with valid base-change, chart, persistence, and edge-case arguments. No circularity, duplicate/restated node, hidden long-step lemma, route-pivot machinery, SGA violation, or target weakening found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitFibreDimensionBound",
+  "declaration": "AlgebraicGeometry.limit_fibre_dimension_bound",
+  "declarations": [
+   "AlgebraicGeometry.limitFibreComparison",
+   "AlgebraicGeometry.limitFibreMap",
+   "AlgebraicGeometry.limit_fibre_dimension_bound"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitFibreDimensionBound.lean",
+  "statement": "theorem limit_fibre_dimension_bound {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (S X : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : I, CompactSpace (S.obj (op i))] [∀ i : I, QuasiSeparatedSpace (S.obj (op i))] (τ : X ⟶ S) (hSaff : ∀ {i j : I} (hij : i ≤ j), IsAffineHom (S.map (homOfLE hij).op)) (hfinite : ∀ i : I, LocallyOfFiniteType (τ.app (op i)) ∧ QuasiCompact (τ.app (op i))) (hclosed : ∀ {i j : I} (hij : i ≤ j), IsClosedImmersion (limitFibreComparison τ hij)) (cS : Cone S) (hcS : IsLimit cS) (cX : Cone X) (hcX : IsLimit cX) (d : ℕ) (hdim : ∀ s : cS.pt, topologicalKrullDim ((limitFibreMap τ cS hcS cX).fiber s) ≤ (d : WithBot ℕ∞)) : ∃ i : I, ∀ s : S.obj (op i), topologicalKrullDim ((τ.app (op i)).fiber s) ≤ (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3e79c9eb7",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Wrote review.md. Source, dependencies, canonical constructions, verbatim signature, edge cases, universes, and route-pivot checks passed. Reproduced per-file compilation successfully with no diagnostics; no changes required."
  }
 }
