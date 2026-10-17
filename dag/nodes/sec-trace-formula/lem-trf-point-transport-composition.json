@@ -261,5 +261,38 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-5a3aa40ce (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, blueprint route, Deligne and Stacks sources. Verified finite coefficient/base-change hypotheses, pullback comparison direction, seven proof steps, edge cases, searches, and no duplicate or forbidden SGA use. Full review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c5c9105cb",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, and report sections checked; per-file compile passed with sandbox and server confirmation."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PointTransportComposition",
+  "declaration": "WeilConjectures.point_transport_composition",
+  "declarations": [
+   "WeilConjectures.pointFrobeniusAut",
+   "WeilConjectures.pointPowerRestriction",
+   "WeilConjectures.pointPowerFiniteSigma_existsUnique",
+   "WeilConjectures.pointPowerFiniteSigma",
+   "WeilConjectures.pointPowerTransportFiniteComplex",
+   "WeilConjectures.pointPowerTransportFinite",
+   "WeilConjectures.pointPowerFinitePullback",
+   "WeilConjectures.pointPowerTransportFiniteConstructible",
+   "WeilConjectures.pointPowerPullbackModel",
+   "WeilConjectures.pointPowerPullbackStep",
+   "WeilConjectures.pointPowerComposition",
+   "WeilConjectures.point_transport_composition"
+  ],
+  "file": "lean/Sheaf/TraceFormula/PointTransportComposition.lean",
+  "statement": "theorem point_transport_composition (n : ℕ) : (∀ (m : ℕ), 1 ≤ m → ∀ N : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))).FullSubcategory, pointPowerTransportFiniteConstructible D l hl E (m + 1) n N = pointPowerTransportFiniteConstructible D l hl E m n N ≫ pointPowerTransportFiniteConstructible D l hl E 1 n ((pointPowerFinitePullback D l hl E m n).obj N) ≫ (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map (pointPowerComposition D l hl E n m N)) ∧ (∀ (r : ℕ), 1 ≤ r → ∀ (N N' : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))).FullSubcategory) (f : N ⟶ N'), pointPowerTransportFiniteConstructible D l hl E r n N ≫ (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map ((pointPowerFinitePullback D l hl E r n).map f) = (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map f ≫ pointPowerTransportFiniteConstructible D l hl E r n N')",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations spell out the explicitly requested powers and insertion recipe. The composition is the inverse of integralFiniteCanonicalPullbackComposition, conjugated by the published unit-normalized pullback-presentation identifications and the power equalities. Coefficient exponent n+1 parametrizes exactly all positive levels."
  }
 }
