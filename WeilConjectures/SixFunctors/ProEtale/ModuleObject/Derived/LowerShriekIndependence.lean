@@ -45,22 +45,22 @@ X --i₁-> Z₁
 is cartesian, that is `h⁻¹(X) = X` (`Compactification.OverRefinement`).
 
 1. The exchange morphism `R(𝟙 X)_* ⋙ i₁_! ⟶ i_! ⋙ Rh_*` of this square
-   (`boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`) is an isomorphism for `h`
+   (`boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`) is an isomorphism for `h`
    proper, by interchanging proper direct image and extension by zero
-   (`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`).
+   (`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'`).
 2. Then `Rf_!^{c₁} = i₁_! ⋙ Rp₁_* ≅ R(𝟙 X)_* ⋙ i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rh_* ⋙ Rp₁_* ≅ i_! ⋙ Rp_*`,
    through `R(𝟙 X)_* ≅ 𝟭` and the composition isomorphism `Rh_* ⋙ Rp₁_* ≅ R(h ≫ p₁)_*`
-   (`boundedConstructibleLowerShriekRefinementIso`).
+   (`boundedConstructibleLowerShriekRefinementIso'`).
 
 Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
 (`Compactification.exists_overRefinement`), and `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}`.
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso`: `Rf_!^{c₁} ≅ Rf_!^c`
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso'`: `Rf_!^{c₁} ≅ Rf_!^c`
   along a refinement, for any `Λ` for which the exchange morphism is an isomorphism.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso` and
-  `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`: the
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'` and
+  `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the
   isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `E`- and `ℚ̄_ℓ`-sheaves.
 
 -/
@@ -99,14 +99,14 @@ of `R(𝟙 X)_* ≅ 𝟭` (`boundedConstructibleLowerStarId`), the exchange isom
 composition isomorphism `boundedConstructibleLowerStarComp`. For compactifications `c` and `c₁`
 of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and `p₁ = c₁.overG`, it is an
 isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
-noncomputable def boundedConstructibleLowerShriekRefinementIso (sq : IsPullback (𝟙 X) i i₁ h)
+noncomputable def boundedConstructibleLowerShriekRefinementIso' (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq)] :
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)] :
     boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁ ⋙ boundedConstructibleLowerStar Λ ℓ p₁ ≅
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i ⋙ boundedConstructibleLowerStar Λ ℓ p :=
   Functor.isoWhiskerRight ((Functor.leftUnitor _).symm ≪≫
       Functor.isoWhiskerRight (boundedConstructibleLowerStarId Λ ℓ X).symm _ ≪≫
-      asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq)) _ ≪≫
+      asIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)) _ ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp Λ ℓ h p₁ ≪≫ eqToIso (by rw [wp]))
 
@@ -127,9 +127,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` between `i₁_! ⋙ Rp₁_*` and `i₂_! ⋙ Rp₂_*` on `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧`:
 for a common refinement `c` of `c₁` and `c₂` (`Compactification.exists_overRefinement`), the
 composite `Rf_!^{c₁} ≅ Rf_!^c ≅ Rf_!^{c₂}` of the isomorphisms
-`boundedConstructibleLowerShriekRefinementIso` along the refinements. -/
+`boundedConstructibleLowerShriekRefinementIso'` along the refinements. -/
 @[no_expose]
-noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
+noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'
     (c₁ c₂ : Compactification f.left) :
     boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₁ ≅
       boundedConstructibleLowerShriekOfCompactification (Profinite.continuousMapRingObj E) ℓ c₂ :=
@@ -138,17 +138,17 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso
   let r₂ := hc.choose_spec.2.some
   have := r₁.isProper
   have := r₂.isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E r₁.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ E r₁.isPullback
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ E r₂.isPullback
+  boundedConstructibleLowerShriekRefinementIso' _ ℓ r₁.isPullback r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso' _ ℓ r₂.isPullback r₂.hom_overG).symm
 
 /-- The *independence of the lower shriek from the compactification* for bounded constructible
 `ℚ̄_ℓ`-sheaves: for two compactifications `c₁` and `c₂` of `f`, the isomorphism
 `Rf_!^{c₁} ≅ Rf_!^{c₂}` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`, through a common refinement as in
-`boundedConstructibleLowerShriekOfCompactificationIso`. -/
+`boundedConstructibleLowerShriekOfCompactificationIso'`. -/
 @[no_expose]
-noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl
+noncomputable def boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl
     (c₁ c₂ : Compactification f.left) :
     boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₁ ≅
       boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ c₂ :=
@@ -157,11 +157,11 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationIso_padicAlgC
   let r₂ := hc.choose_spec.2.some
   have := r₁.isProper
   have := r₂.isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     r₁.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso _ ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso _ ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIso' _ ℓ r₁.isPullback r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIso' _ ℓ r₂.isPullback r₂.hom_overG).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
