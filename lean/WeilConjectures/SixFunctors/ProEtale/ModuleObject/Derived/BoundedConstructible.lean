@@ -109,6 +109,14 @@ coefficient rings of Deligne's finiteness theorems, `[IsFinitenessCoefficient �
 (`WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient`), as in the
 blueprint (`sk-def-sfb-dc-restricted-functors`).
 
+Likewise, that `Dᵇc(X)⟦Λ⟧` is stable under `- ⊗ᴸ -` and `RHom(-, -)` is false for a general `Λ`
+(for `Λ = ℤ/4` on a geometric point of characteristic `3`, `Tor_i` and `Ext^i` of `ℤ/2` over `ℤ/4`
+are `ℤ/2` in every degree `i ≥ 0`). The instances `isMonoidal_boundedConstructible` and
+`isMonoidalClosed_boundedConstructible`, and the tensor product, the internal hom and the monoidal
+structure of `Lf^*` built from them, are stated only for the `ℓ`-adic rings `E̲`, `𝒪̲_E` and
+`ℚ̲̄_ℓ`, `[IsEllAdicFinitenessCoefficient ℓ Λ]`, with `ℓ` different from the characteristic of `k`,
+as in the blueprint (`lem-sfb-dc-tensor-preserves`, `lem-sfb-dc-hom-preserves`).
+
 -/
 
 @[expose] public section
@@ -413,24 +421,22 @@ section TensorHom
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
-/- STATEMENT-DISPUTED: for constant discrete Λ = Z/4 on a geometric point of characteristic
-3, Ext^i_(Z/4)(Z/2, Z/2) = Z/2 for all i ≥ 0, so the derived internal Hom of these two
-finitely presented degree-zero modules is unbounded. The signature and original hole
-are retained. -/
-/- STATEMENT-DISPUTED: for constant discrete Λ = Z/4 on a geometric point of characteristic
-3, the constant module Z/2 is finitely presented, but Tor_i^(Z/4)(Z/2, Z/2) = Z/2 for all
-i ≥ 0. Its derived self-tensor is unbounded. No coefficient regularity or finite Tor
-dimension is assumed. The signature and original hole are retained. -/
-/-- The bounded constructible complexes of module objects over `Λ` form a monoidal
-subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the unit `Λ_X`
-and are stable under `- ⊗ᴸ -`. -/
-instance isMonoidal_boundedConstructible :
+/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
+form a monoidal subcategory of `D(Mod_{Λ_X})` for the derived tensor product: they contain the
+unit `Λ_X` and are stable under `- ⊗ᴸ -`. For a general `Λ` this is false: for `Λ = ℤ/4` on a
+geometric point of characteristic `3`, `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`, so the
+derived self-tensor of `ℤ/2` is unbounded. -/
+instance isMonoidal_boundedConstructible
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
   sorry
 
-/-- The bounded constructible complexes of module objects over `Λ` are stable under the derived
-hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. -/
-instance isMonoidalClosed_boundedConstructible :
+/-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
+are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. For a general
+`Λ` this is false: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
+`Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
+instance isMonoidalClosed_boundedConstructible
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
   sorry
 
@@ -438,7 +444,8 @@ instance isMonoidalClosed_boundedConstructible :
 constructible complexes: the tensor product of the monoidal structure on the full subcategory
 `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`), the restriction of `-⊗ᴸ-(X)⟦Λ⟧` in
 both variables. -/
-noncomputable def boundedConstructibleTensor :
+noncomputable def boundedConstructibleTensor
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   curriedTensor _
 
@@ -446,7 +453,8 @@ noncomputable def boundedConstructibleTensor :
 complexes: the internal hom of the monoidal closed structure on the full subcategory
 `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction of `RHom(X)⟦Λ⟧`
 in both variables. -/
-noncomputable def boundedConstructibleHom :
+noncomputable def boundedConstructibleHom
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (Dᵇc(X.left)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧ :=
   MonoidalClosed.internalHom
 
@@ -454,7 +462,8 @@ variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
 inclusions. -/
-noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleTensorObjCompatibility
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleTensor Λ X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Λ⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
@@ -462,7 +471,8 @@ noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X.left)�
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleHomObjCompatibility
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleHom Λ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Λ⟧).obj (op K.obj) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
@@ -471,14 +481,16 @@ noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X.left)⟦�
 
 /-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
 the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦Λ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
+noncomputable def boundedConstructibleTensorHomAdjunction₂
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     boundedConstructibleTensor Λ X ⊣₂ boundedConstructibleHom Λ X :=
   MonoidalClosed.internalHomAdjunction₂
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
 complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed structure on
 `Dᵇc(X)⟦Λ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X.left)⟦Λ⟧) :
+noncomputable def boundedConstructibleTensorHomAdjunction
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] (K : Dᵇc(X.left)⟦Λ⟧) :
     (boundedConstructibleTensor Λ X).obj K ⊣ (boundedConstructibleHom Λ X).obj (op K) :=
   (boundedConstructibleTensorHomAdjunction₂ Λ).adj K
 
@@ -486,7 +498,7 @@ end TensorHom
 
 section MonoidalUpperStar
 
-variable {X Y : Over (Spec (.of k))}
+variable [IsEllAdicFinitenessCoefficient ℓ Λ] {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
