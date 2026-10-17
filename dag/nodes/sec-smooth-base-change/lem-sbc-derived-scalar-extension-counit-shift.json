@@ -1,0 +1,61 @@
+{
+ "id": "lem-sbc-derived-scalar-extension-counit-shift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Current blueprint proof Step 1, tensoring the truncation triangle: the derived scalar-extension functor carries distinguished triangles to distinguished triangles with the shift induced from complexes (used through the item's shift and connecting-square clauses).",
+   "via": [
+    "lem-weil-pbc-scalar-extension-unit-triangles"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Counit-compatible shift structure of derived change of rings on a site",
+ "statement": "Let $\\mathcal C$ be a site small relative to the universe of its module sheaves [def-weil-pbc-sites-and-cohomology] and $\\varphi:R\\to S$ a morphism of sheaves of commutative rings on $\\mathcal C$. Write $K(R)$ for the homotopy category of complexes of $R$-module sheaves [def-weil-sheaf-of-modules-category], $Q_R:K(R)\\to D(R)$ and $Q_S:K(S)\\to D(S)$ for the localizations at quasi-isomorphisms, and $s_P:Q_R(P[1])\\xrightarrow{\\sim}(Q_RP)[1]$, $s'_M:Q_S(M[1])\\xrightarrow{\\sim}(Q_SM)[1]$ for their shift isomorphisms [def-weil-abstract-derived-category], with $(P[1])^r=P^{r+1}$ and $d_{P[1]}=-d_P$. Let $E:K(R)\\to K(S)$ be termwise change of rings $P\\mapsto P\\otimes_RS$ [def-pur-sheaf-tensor-product], and let $\\theta_P:E(P[1])\\to E(P)[1]$ be the identity in every degree (both complexes have $P^{r+1}\\otimes_RS$ in degree $r$ and differential $-d_P\\otimes1$). Let $F=-\\otimes^{\\mathbf L}_RS:D(R)\\to D(S)$ be the derived change of rings [lem-pur-derived-change-of-rings], with its derived counit $\\varepsilon:F\\circ Q_R\\to Q_S\\circ E$, the natural transformation of the left derived functor of $Q_S\\circ E$ [lem-pur-left-derived-from-kflat-class]. Then there is a unique family of isomorphisms $\\sigma_X:F(X[1])\\xrightarrow{\\sim}F(X)[1]$, natural in $X\\in D(R)$, such that for every complex $P$ of $R$-modules\n$$\\varepsilon_P[1]\\circ\\sigma_{Q_RP}\\circ F(s_P)=s'_{E(P)}\\circ Q_S(\\theta_P)\\circ\\varepsilon_{P[1]}:\\ F(Q_R(P[1]))\\to(Q_SE(P))[1],$$\nand with this family $(F,\\sigma)$ is a triangulated functor [def-weil-triangulated-category]: for every distinguished triangle $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1]$ of $D(R)$ the triangle $F(X)\\xrightarrow{F(u)}F(Y)\\xrightarrow{F(v)}F(Z)\\xrightarrow{\\sigma_X\\circ F(w)}F(X)[1]$ is distinguished in $D(S)$. No flatness of $S$ over $R$ and no boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05SU (lemma-derived-shift: canonical isomorphism LF(X)[n] -> LF(X[n]) between values, induced on the ind-objects of resolutions) and Tag 05SE (proposition-derived-functor (2),(7): LF is an exact functor of triangulated categories with these shift isomorphisms), applied as in sites-cohomology.tex Tag 06YY (lemma-derived-base-change) to F = termwise change of rings on K(R) with the K-flat resolving class."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn \"CommShift\" /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/*.lean /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/DerivabilityStructure/*.lean; grep -rln \"leftDerived.*commShift\\|commShift.*leftDerived\\|LeftDerived.*CommShift\" /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "none (no CommShift statement in Functor/Derived or DerivabilityStructure; no file pairs leftDerived with commShift). grep -rln totalLeftDerived finds only Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, which has no shift structure.",
+   "date": "2026-10-17",
+   "verdict": "no match (single grep search by the maintainer reader; LeanSearch and Loogle/LeanFinder are not reachable on the review server, so the lead must add those two kinds before the node leaves the queue)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-scalar-extension-unit-triangles",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
