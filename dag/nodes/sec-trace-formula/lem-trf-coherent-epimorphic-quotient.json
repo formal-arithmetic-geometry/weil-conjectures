@@ -196,5 +196,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a11ae3e99 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the statement of every cited node, the parent's step 11 (it uses the item's exact hypotheses), unit sk-i-curve-zero, Stacks sites.tex 0GMP/0GMQ (proofs 'Omitted' there, written out in step 2), 00W2, 00WK, 00WN and definition-quasi-compact-topos, and ILO XI Lemme 2.5 pp. 178-179 (context only; no SGA used). The item statement is unchanged and true; checked on Set/finite sets, p=id, empty P and terminal A. Steps 1-5 and 7 are correct: joint epimorphy means local lifting and is stable under pullback (sheafification adjunction plus 00WK), image and finite-coproduct quasi-compactness with right cancellation, finite generator covers with lifts, and the reduction to K_a x_A L_b. Step 6 was correct but cited a new node for coherence of P x P. That node is unneeded and is also a special case of the existing node lem-trf-coherent-object-approximation ('finite limits of coherent objects are coherent'), which C5 forbids duplicating. FIX: step 6 now identifies K_a x_A L_b with (K_a x_{P,r1} R) x_{r2,P} L_b using sectionwise limits, and gets quasi-compactness by applying the quasi-separatedness of P twice. Its uses are now def-trf-coherent-topos and the limits-sectionwise node; proof_deps is recomputed and split_report.summary updated. The new node is dropped and nothing else cites it. Accepted tool_use: lem-weil-pbc-site-sheafification-sections-local (generic 00WK, Lean-closed). No cycle; no target involved or weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentEpimorphicQuotient",
+  "declaration": "CategoryTheory.coherent_of_epi_of_quasiCompact_kernelPair",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentEpimorphicQuotient.lean",
+  "statement": "theorem coherent_of_epi_of_quasiCompact_kernelPair {E : Type u} [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] (hE : IsCoherentTopos.{w} E) {P A : E} (p : P ⟶ A) [Epi p] (hP : IsCoherentObject.{w} P) (hR : IsQuasiCompactObject.{w} (pullback p p)) : IsCoherentObject.{w} A",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94fc86089",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Node unchanged apart from its lean record; lean.statement matches the file word for word. Each clause matches the node: IsCoherentTopos.{w} E with only the HasCoproducts.{w}/HasFiniteLimits instances the definitions need, [Epi p], IsCoherentObject P, IsQuasiCompactObject (pullback p p), conclusion IsCoherentObject A. No extra assumptions, all universes bound, autoImplicit false. The 7-step proof in the docstring is sound (step 6 applies quasi-separatedness of P twice to an iterated fibre product); edge cases checked: Sets, p = id, empty P / initial A, empty families. No definitions, only sorry, source and blueprint docstrings present, imports are the statement dependency (public) plus the four proof-dependency modules (plain, Mathlib matches and SiteSheafificationSectionsLocal), lines at most 100 characters, no duplicate found. nt_compile.py --json rc 0 in 3.3 s with no diagnostics (live lakefile sets warn.sorry=false; an injected error was reported, so the tool shows diagnostics). Report has a Worker report and a Second reading by Q37 section. Cosmetic only: the report says four searches, the node records five."
  }
 }

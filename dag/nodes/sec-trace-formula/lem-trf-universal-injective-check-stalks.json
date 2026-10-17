@@ -140,5 +140,27 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-9f17fa5e2 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 05CL (algebra.tex line 20106, the statement and the whole proof). The item is (1)<=>(4) with the source's hypotheses unchanged. I tested it on A=0, on multiplication by 2 on Z, and on Z->Q. Step 2 (localize the kernel at maximal ideals, then apply bijective_of_localized_maximal to K->0) and Step 3 (an R_p-module L with L_p=L) are correct, and every cited node is a definition or a Mathlib leaf, so there is no route problem and no tool_uses are needed. Three faults, all repaired. (1) The new node lem-trf-localization-exact-for-modules duplicates the existing Mathlib leaf lem-weil-pbc-localization-module-exact: same statement, same match LocalizedModule.map_exact at Exact.lean line 37, which I read. The report's not-duplicates list missed it (C5). I dropped the new node and Steps 2 and 3 now cite the existing leaf; Step 2 also states that exactness is needed at both positions. (2) Step 1's identification of M_q tensor_R N with M_q tensor_{R_p} N_p was garbled fraction formulas with no node behind them (C1/E5). It now cites lem-weil-pbc-localization-tensor-product, applied to the identity of M_q and to N->N_p. The resulting map is bijective because R minus p already acts bijectively on M_q. The step also writes out compatibility with u from the explicit formula of lem-weil-pbc-localization-tensor-over-base, and derives L_p=L from def-weil-pbc-module-localization. (3) The item's blueprint.from had via [] and a Stacks tag as its place. Via is now [lem-trf-free-subtraction-flatness, followed by the parent's via], with the parent's 05CL globalization place; split_report is updated to match. Left unchanged: the creator's plain-text TeX in the statement and the spurious flat-ring-map stmt_dep. No SGA is cited and no target is touched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversalInjectiveCheckStalks",
+  "declaration": "LinearMap.universally_injective_iff_localizedAtContractedPrime",
+  "declarations": [
+   "LinearMap.localizedAtContractedPrime",
+   "LinearMap.universally_injective_iff_localizedAtContractedPrime"
+  ],
+  "file": "lean/Sheaf/RingTheory/UniversalInjectiveCheckStalks.lean",
+  "statement": "theorem universally_injective_iff_localizedAtContractedPrime [Module R M] [Module R N] [IsScalarTower R A M] [IsScalarTower R A N] (f : M →ₗ[A] N) : (∀ (L : Type (max u v w x y)) [AddCommGroup L] [Module R L], Function.Injective ((f.restrictScalars R).lTensor L)) ↔ ∀ (q : PrimeSpectrum A) (L : Type (max u v w x y)) [AddCommGroup L] [Module (Localization.AtPrime (q.asIdeal.comap (algebraMap R A))) L], Function.Injective (@LinearMap.lTensor _ _ L _ _ _ _ _ _ (Module.compHom _ (Localization.localRingHom (q.asIdeal.comap (algebraMap R A)) q.asIdeal (algebraMap R A) rfl)) (Module.compHom _ (Localization.localRingHom (q.asIdeal.comap (algebraMap R A)) q.asIdeal (algebraMap R A) rfl)) (f.localizedAtContractedPrime (R := R) q))",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2c223adb",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Read node, Stacks 05CL (algebra.tex, statement and proof), the three existing Mathlib stmt_deps, the module and the report. Lean matches node (1)<=>(4) clause by clause: Algebra R A with no flatness; f : M ->[A] N with R-structure by IsScalarTower restriction; universal injectivity via lTensor over test modules in Type (max u v w x y), never below R's universe; q : PrimeSpectrum A with literal p = comap; u_q = LocalizedModule.map (rfl-checked) restricted along localRingHom R_p -> A_q (action rfl-checked); pp.explicit confirms compHom instances fill the M_q/N_q slots of lTensor and L keeps its own instance. Edge cases A=0, identity, x2 on Z, non-flat Z->Z/2 are covered. No existing module-level universally-injective notion in Mathlib or Sheaf. Helper is real data with standard axioms only and is in lean.declarations; docstrings carry source, blueprint and proof steps; only sorry; lean.statement verbatim; only the lean field of the node changed. nt_compile --json: clean, 2.4 s, no warnings. Minor: unused flat-ring-map stmt_dep retained by earlier review, harmless. Second reading section is the stock post-2026-10-17 sentence."
  }
 }

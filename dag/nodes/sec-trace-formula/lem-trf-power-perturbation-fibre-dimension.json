@@ -419,5 +419,29 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8057350b5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0GTF (more-morphisms.tex lemma-sum-is-ok, lines 8595-8800) and 02JS (morphisms.tex lemma-dimension-fibre-at-a-point-additive, lines 5396-5420), plus the full statement of every one of the 26 cited nodes. The item statement matches 0GTF exactly and is not weakened. All 15 steps are correct, and I re-derived each one. Step 6 replaces the source's normalization with the finitely many minimal primes of S and a chain-covering argument, which is valid. Step 12's leading term is right for every value tau in the fibre, not just tau=0: exponents i+nk<ns when k<s, and the unique top term is (-1)^s c_ts x^{t+ns}. Steps 10 and 13 apply the flat equality only where flatness holds, and use the new nonflat inequality where it does not. Step 11 fills the source's gap in recombining the open and closed pieces. The induction on dim R/fR is set up correctly and is not circular; the base case is covered because a nonzero f is a unit when dim R=0. There is no cycle and no missing or merged citation. The new node lem-trf-composite-fibre-dimension-inequality is exactly the first assertion of 02JS. It is self-contained, statement-only and searched with all three kinds of search. It is not a duplicate: the nearest node, lem-sbc-flat-composite-fibre-dimension-at-point, is the flat equality, and the new node is not elementary. I tested it on small cases, including a point in A^1, where the inequality is strict without flatness. I accept the 10 declared tool_uses. FIX: step 4's source.place cited Morphisms Tag 02JU (lemma-dimension-formula); I corrected it to 02FY (lemma-dimension-fibre-after-base-change). Nothing else changed. A minor point, not a fault: 00R1 gives a directed set while the 05M5 node asks for a partially ordered set; Stacks' construction indexes by a poset.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerPerturbationFibreDimension",
+  "declaration": "power_perturbation_fibre_dimension",
+  "declarations": [
+   "powerPerturbationMap",
+   "power_perturbation_fibre_dimension"
+  ],
+  "file": "lean/Sheaf/RingTheory/PowerPerturbationFibreDimension.lean",
+  "statement": "theorem power_perturbation_fibre_dimension {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : RingHom.FiniteType φ) (a b : S) (d : ℕ) (h : ∀ y : Spec (.of (MvPolynomial (Fin 1) R)), topologicalKrullDim ((powerPerturbationMap φ a).fiber y) ≤ (d : WithBot ℕ∞)) : ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∀ y : Spec (.of (MvPolynomial (Fin 1) R)), topologicalKrullDim ((powerPerturbationMap φ (a ^ n + b)).fiber y) ≤ (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper powerPerturbationMap is recorded in declarations; it is the canonical Spec map induced by polynomial evaluation at c.",
+  "fixed_by": "NT-stage2-cc-bbbca714b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbbca714b",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0GTF clause by clause: RingHom.FiniteType phi, a b : S, d : N, f_c = Spec.map of MvPolynomial.eval2Hom phi (fun _ : Fin 1 => c) (checked X 0 -> c, C r -> phi r), Scheme.Hom.fiber with topologicalKrullDim <= d in WithBot N-infinity (empty fibres = bottom), exists n0, for all n >= n0, all fibres. No extra hypotheses; the single universe is forced by Spec S -> Spec R[t] and loses no case for finite type. Helper has real data; proof is sorry only (print axioms: sorryAx); source and blueprint docstrings present; imports Mathlib only; lines <= 100; lean.statement verbatim; report has Worker report and Second reading by NZ. Dependency record def-weil-pbc-finite-type-algebra moved from Algebra.FiniteType to RingHom.FiniteType (same notion, lean.note present; accepted, though listing both would be better for existing Algebra.FiniteType citers). Finding H8: the proof docstring summarised the 15-step node proof; fixes/PowerPerturbationFibreDimension.lean replaces only that docstring with steps 1-15. nt_compile: delivered file clean in 2.1 s, fixed file clean in 2.2 s."
  }
 }

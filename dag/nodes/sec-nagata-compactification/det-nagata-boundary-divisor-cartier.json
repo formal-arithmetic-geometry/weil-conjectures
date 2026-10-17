@@ -201,5 +201,23 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-de6dd0270 (reviewer sub-agent of L); spot-checked: Read the item, the unit sk-lem-nagata-boundary-divisor, the main-20261015 blueprint proof, its sibling lemmas, the statements and blueprint_updates of every cited node, the reviewed key node sk-lem-nagata-boundary-divisor and Stacks 07ZU (divisors.tex:2447-2464). The statement is the blueprint's word for word and holds in every small case tested: the blown-up plane, U=T, U empty on k[eps] (where T' is empty), and a disconnected T. Three repairable faults, fixed in fixes/dag/nodes/sec-nagata-compactification/det-nagata-boundary-divisor-cartier.json. (1) C1/C5, step 1: I|_U=O_U was used without citing lemma-nagata-ideal-unit-off-support, and the quasi-compactness of U->T that def-nagata-admissible-blowup requires was not stated. (2) B3/C1, steps 2 and 4: the supports and the identity (I O_T')O_T''=I O_T'' were not tied to def-nagata-extended-ideal, which was also missing from stmt_deps (now added). (3) E5/C5, steps 3 and 4: the density argument 'these injections glue' checked injectivity only on chart rings and ignored the quasi-compactness that the density definition requires. Density is now taken from lem-pc-cartier-divisor-nowhere-dense (Stacks 07ZU), applied to E and to its total transform. Each step now carries its source paragraph, proof_deps is the union of the uses, and there is no cycle. Accepted tool_use: lem-pc-cartier-divisor-nowhere-dense, a reviewed generic lemma of unit sk-thm-picard-rr, accepted on the same grounds for the unit's key node on 2026-10-17. The other off-unit nodes cited are Lean-closed. No new nodes; no SGA. Side remark: the report says the Conrad density lemmas need U dense; that matches their old DAG statements but not the blueprint_update. It does not matter, since the route no longer uses them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier",
+  "declaration": "AlgebraicGeometry.exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl_with_density",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataBoundaryDivisorCartier.lean",
+  "statement": "theorem exists_admissibleBlowup_cartierBoundary_of_coe_support_eq_compl_with_density {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] (U : T.Opens) (hU : IsCompact (U : Set T)) (I : T.IdealSheafData) (hI : I.ofFiniteType) (hI_support : (I.support : Set T) = (U : Set T)ᶜ) : ∃ (B : IsAdmissible T U), B.I = I ∧ IsSchemeTheoreticallyDominant (B.I.blowupMap ⁻¹ᵁ U).ι ∧ (I.comap B.I.blowupMap).IsInvertible ∧ (I.comap B.I.blowupMap).support = ((B.I.blowupMap ⁻¹ᵁ U : B.I.blowup.Opens) : Set B.I.blowup)ᶜ ∧ ∀ (C : IsAdmissible B.I.blowup (B.I.blowupMap ⁻¹ᵁ U)), ((I.comap B.I.blowupMap).comap C.I.blowupMap).IsInvertible ∧ ((I.comap B.I.blowupMap).comap C.I.blowupMap).support = (((C.I.blowupMap ≫ B.I.blowupMap) ⁻¹ᵁ U : C.I.blowup.Opens) : Set C.I.blowup)ᶜ ∧ IsSchemeTheoreticallyDominant ((C.I.blowupMap ≫ B.I.blowupMap) ⁻¹ᵁ U).ι",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false,
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a10d83b",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of det-nagata-boundary-divisor-cartier matches the Lean (qcqs T, qc U, finite-type I with supp I = U^c; exists B : IsAdmissible T U with B.I = I; density of b^-1 U via IsSchemeTheoreticallyDominant; (I.comap b).IsInvertible; support = complement of b^-1 U; for all C : IsAdmissible over b^-1 U, invertibility, support and density for c≫b). Notions go through the recorded dependency declarations (IsAdmissible, Mathlib IdealSheafData.comap, IsInvertible, Mathlib IsSchemeTheoreticallyDominant). No extra hypotheses; single universe u. The nearest existing theorems (AdmissibleBlowup.lean:646, NagataBoundaryDivisor.lean) lack density/persistence, so existing:false is right. Node unchanged apart from the new lean record; lean.statement equals the file signature verbatim. Docstrings carry the source place, blueprint tag and four proof steps; proof is sorry only; both report sections present. Edge cases U=T, U empty, empty T, non-reduced T covered; persistence checked true independently. nt_compile.py --json on the snapshot file: rc 0, no errors, 2.8 s; a copy with a deliberate error was rejected, #check gives the intended signature, axioms include sorryAx. Minor: the report names Principalization/IdealSheaf.Basic, which the file does not import (harmless)."
  }
 }

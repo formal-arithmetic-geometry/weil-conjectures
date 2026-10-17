@@ -162,5 +162,23 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-acd4983a8 (reviewer sub-agent of L); spot-checked: Read Stacks Morphisms 02JZ lemma-flat-permanence (morphisms.tex l.4881, statement and proof), 01U3 definition-flat, Algebra 0584 lemma-flatness-descends-more-general (algebra.tex l.8930), and Mathlib FaithfullyFlat/Basic.lean l.575-603. The item matches 02JZ hypothesis by hypothesis; the family clause is the same pointwise argument as 02JZ's 'In particular' clause. The new helper is exactly Algebra 0584(2) and is true: one direction is associativity of the tensor product plus B-flatness of C, the other is that faithful flatness reflects injectivity. Mathlib has only the same-base form (Flat.of_flat_tensorProduct / iff_flat_tensorProduct), so the helper is not a leaf. It is not a duplicate: lem-weil-pbc-flatness-descends-faithfully-flat (00HJ) states a different, same-base result. It is strictly smaller than the item, not a restated clause. Step 1 hypotheses checked: the stalk map is local and flat, so it is faithfully flat (Mathlib-leaf node), and lem-weil-pbc-module-stalk-pullback is Lean-closed. Step 2 uses the helper verbatim. Fixes, three small faults: (1) Step 3 cited only stalks=>affine (lem-pc-relative-flat-of-stalks). It now also cites lem-pc-relative-flat-module-stalk for affine=>stalks in both directions and lem-weil-pbc-module-pullback-quasi-coherent (Lean-closed) for quasi-coherence of h_i^*G (C1/C4). (2) The item statement now defines 'flat over S at a point' inline per 01U3(2), with def-weil-pbc-flat-ring-map added to stmt_deps; the meaning is unchanged (B3). (3) The helper's source is corrected to Algebra Tag 0584(2) (B5). Accepted tool uses: lem-pc-relative-flat-of-stalks and lem-pc-relative-flat-module-stalk, both generic flatness criteria from sk-thm-picard-semicon. Acyclicity checked. No target, no SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatnessSourceCover",
+  "declaration": "AlgebraicGeometry.relative_flatness_source_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatnessSourceCover.lean",
+  "statement": "theorem relative_flatness_source_cover {Y S : Scheme.{u}} (f : Y ⟶ S) (G : Y.Modules) [G.IsQuasicoherent] : (∀ (X : Scheme.{u}) (h : X ⟶ Y) (x : X), (h.stalkMap x).hom.Flat → (Module.Flat (S.presheaf.stalk (f (h x))) ((ModuleCat.restrictScalars (f.stalkMap (h x)).hom).obj ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (h x)).obj G)) ↔ Module.Flat (S.presheaf.stalk ((h ≫ f) x)) ((ModuleCat.restrictScalars ((h ≫ f).stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj ((Scheme.Modules.tensorPullback h).obj G))))) ∧ (∀ (I : Type v) (X : I → Scheme.{u}) (h : ∀ i : I, X i ⟶ Y), (∀ i : I, Flat (h i)) → (∀ y : Y, ∃ (i : I) (x : X i), h i x = y) → (G.IsFlatOver f ↔ ∀ i : I, ((Scheme.Modules.tensorPullback (h i)).obj G).IsFlatOver (h i ≫ f)))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a38a0c5f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Statement of AlgebraicGeometry.relative_flatness_source_cover matches Stacks 02JZ and the node clause by clause: pointwise iff under RingHom.Flat of h.stalkMap x only, with restrictScalars along the f and (h≫f) stalk maps on moduleStalkFunctor stalks of G and of tensorPullback h G; family form with arbitrary I : Type v, all members Flat, joint surjectivity, IsFlatOver iff. No extra hypotheses; G qc as in the node. Edge cases (empty family forces Y empty, empty members, zero module) covered; universes bound. No definitions, proof is only sorry, docstrings carry source and blueprint tag and the 3 proof steps; lean.statement verbatim; node otherwise identical to the side clone; no duplicate found by rg over side and live trees. nt_compile --json clean (3.4 s and 4.5 s, rc 0). Cosmetic: lean.date 2026-10-17."
  }
 }

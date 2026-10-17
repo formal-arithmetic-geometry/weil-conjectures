@@ -11,7 +11,8 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-matrix",
   "def-weil-pbc-matrix-determinant",
-  "def-weil-pbc-regular-system-of-parameters"
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-trf-minor-ideal"
  ],
  "proof": [
   {
@@ -165,5 +166,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-26d8dd1a4 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0C4B (curves.tex, lemma-fitting-ideal-well-defined, l.4065) and every cited node statement: Cauchy-Binet (Lean-closed, a tool), fitting-ideal-minor-inclusions clause (3) (J_r(AC) is contained in J_r(A), right multiplication), and the definition nodes. Item: the statement is as in the source plus I contained in n, which the delivery did not change and the parent uses. The mathematics is correct. Step 2: J(g) = C J(f) mod I, then Cauchy-Binet, including the empty sum for s<r. Step 3: J_x = J_y Q with Q = (dy_k/dx_i)_{k,i} invertible, then clause (3) in both directions. New node lem-trf-formal-jacobian-coordinate-chain-rule: true (checked with the derivation-continuity argument; small cases n=0, y=x+x^2, y=x+x^p in char p), strictly smaller than the item, not a restatement, and no DAG or blueprint duplicate (rg chain rule/partial derivative/0C4B; full-coordinates-field and first-order-coordinates differ). Mathlib has only the one-variable PowerSeries.derivative_subst, so no match. Three repairable faults, fixed in fixes/dag/nodes/sec-trace-formula/: (1) step 1 wrongly said both sides vanish by convention when only one generating list is shorter than r; that case is now sent to Cauchy-Binet's empty sum (E3/E5). (2) Step 3 said 'transpose convention determined by the indexing' instead of fixing the orientation. Steps 1-3 now fix rows = generators from the source's display and give J_y = J_x Q^{-1} explicitly (E5). (3) The new node's blueprint.from.via lacked the item in front (B9). Also: the new node's statement now gives the chain rule, Q(0) invertible, and Q^{-1} = P as explicit formulas, with the same content. Its earlier '0 hits' grep record was wrong, so I appended a corrected grep record. Statements are not weakened, there are no tool_uses to accept, and the route stays in unit sk-i-curve-zero.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalJacobianMinorInvariance",
+  "declaration": "MvPowerSeries.formalJacobian_minorIdeal_invariance",
+  "file": "lean/Sheaf/RingTheory/FormalJacobianMinorInvariance.lean",
+  "statement": "theorem formalJacobian_minorIdeal_invariance (F : Type u) [Field F] (n s r : ℕ) (I : Ideal (MvPowerSeries (Fin n) F)) (hI : I ≤ Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) (f : Fin s → MvPowerSeries (Fin n) F) (hf : Ideal.span (Set.range f) = I) : (∀ (l : ℕ) (g : Fin l → MvPowerSeries (Fin n) F), Ideal.span (Set.range g) = I → Matrix.minorIdeal s n r (fun j i ↦ Ideal.Quotient.mk I (pderiv F i (f j))) = Matrix.minorIdeal l n r (fun j i ↦ Ideal.Quotient.mk I (pderiv F i (g j)))) ∧ (∀ (y : Fin n → MvPowerSeries (Fin n) F) (e : MvPowerSeries (Fin n) F ≃ₐ[F] MvPowerSeries (Fin n) F), IsLocalRing.IsRegularSystemOfParameters (List.ofFn y) → (∀ i : Fin n, e (X i) = y i) → Matrix.minorIdeal s n r (fun j i ↦ Ideal.Quotient.mk I (pderiv F i (f j))) = Matrix.minorIdeal s n r (fun j i ↦ Ideal.Quotient.mk I (e (pderiv F i (e.symm (f j))))))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bea3b350",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read node, Stacks 0C4B (curves.tex l.4064-4092), all stmt_deps records and declarations (MvPowerSeries, Matrix, Matrix.det, IsRegularSystemOfParameters, Matrix.minorIdeal) and Mathlib MvPowerSeries.pderiv. Every clause matches: field F in universe u; T=MvPowerSeries (Fin n) F; hI I<=span X is the node's own hypothesis; the generating list via span(range f)=I; quotient Jacobian with rows=generators; minorIdeal gives D_0=top and oversized=bot. Generator clause covers all l and g. Coordinate clause: e : T ≃ₐ[F] T with e(X i)=y i is unique, since F-algebra maps of F[[x]] are local and so continuous; it exists for every regular system of parameters by exists_algEquiv_full_parameters_field; e∘pderiv∘e.symm is d/dy_i, reduced mod the same I. Edge cases n=0, s or l=0, r=0, r>n and char p are correct. No stronger assumptions, no definitions, sorry only, docstrings carry source, blueprint id and proof steps, lean.statement verbatim, the delivery diff is limited to stmt_deps+lean. nt_compile --json clean (item 2-3 s, MinorIdealInclusions 2.3 s); an error probe is reported. The Second-reading placeholder is the accepted post-2026-10-17 convention, with landed precedent. No findings."
  }
 }

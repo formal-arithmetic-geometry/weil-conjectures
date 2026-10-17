@@ -193,12 +193,6 @@
  "lean": {
   "module": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
   "declaration": "CategoryTheory.ringed_sheaf_slice_adjunction",
-  "statement": "theorem ringed_sheaf_slice_adjunction {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) : Nonempty (RingedSheafSliceAdjunctionData R A)",
-  "branch": "newtargets-dag",
-  "by": "Q23",
-  "date": "2026-10-18",
-  "existing": false,
-  "file": "lean/Sheaf/CategoryTheory/RingedSheafSliceAdjunction.lean",
   "declarations": [
    "CategoryTheory.elementProjection",
    "CategoryTheory.elementTopology",
@@ -219,15 +213,20 @@
    "CategoryTheory.RingedSheafSliceAdjunctionData",
    "CategoryTheory.ringed_sheaf_slice_adjunction"
   ],
-  "note": "Canonical element-site topology (induced, stated equal to the restricted topology of underlying covers) and projection pullbacks are definitions. The fibre equivalence's inverse is naturally isomorphic to the canonical fibre presheaf functor. The localization has slice-to-base direction and canonical inverse image. Extension by zero is isomorphic to PresheafOfModules.sheafification (𝟙 R.obj) [def-weil-presheaf-modules-sheafification] of the canonical direct-sum presheaf elementDirectSumPresheaf (summand s to summand A(v)(s)). Its presheaf laws are the named sorry theorems elementDirectSumMap_id/_comp. Relocalization uses the induced element map and canonical restriction.",
-  "fixed_by": "NT-stage2-cc-5d0837e11"
+  "file": "lean/Sheaf/CategoryTheory/RingedSheafSliceAdjunction.lean",
+  "statement": "theorem ringed_sheaf_slice_adjunction {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) : Nonempty (RingedSheafSliceAdjunctionData R A)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the published RingedSheafSliceAdjunctionData had localization.modules ⊣ pullback. The direct image j_A* is right adjoint to restriction j_A^*, so that field had the opposite direction and asserted a false adjunction for an infinite sheaf over the point. This module retains the existing element-site construction, fibre equivalence, canonical rings, module restriction and extension-by-zero data, and changes only that field to pullback ⊣ localization.modules, with its proof explanation. It now states the dependency node as written: j_A! ⊣ j_A^* ⊣ j_A*. No natural-language node field is changed."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5d0837e11",
-  "group": "Q23",
-  "result": "fix",
-  "note": "Read node, 4 stmt deps (RingedToposMorphism direction checked), Stacks 0791/04IE/04J4/03DJ, prior RETURN. Faults: j_{A!}L clause hollow (directSumPresheaf restriction maps unconstrained, moduleSheafification a free field tied by a bare non-natural hom-set Equiv, recorded PresheafOfModules.sheafification unused: prior RETURN item 5); fibre equivalence constrained only by a Type equality on objects; missing source/blueprint docstrings on elementMap/elementModulePullbackOver. Fix (fixes/RingedSheafSliceAdjunction.lean, lean-record.json, report.md): canonical elementDirectSumPresheaf (summand s -> A(v)s via L; laws as named sorry theorems), extensionByZero_sheafification iso to PresheafOfModules.sheafification (𝟙 R.obj), fibre_iso to the canonical elementFibrePresheafFunctor, elementTopology_eq (induced = restricted topology of underlying covers), docstrings incl. six proof steps, Grp.FilteredColimits import for the WEqualsLocallyBijective instance. Theorem signature/lean.statement unchanged; no name clashes; nt_compile clean (no errors/warnings, 16.8 s); edge cases (A initial/terminal, empty A(U), B=A) consistent."
+  "reviewer": "NT-stage2-cc-df44a1f7d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match: RingedToposMorphism direction (S=R'), [e.inverse.IsEquivalence][IsIso e.ringMap] only; module equivalence pinned to e via pushforward≅e.modules, underlying, structural; mapDerivedCategory derived equivalence with unit/counit; K-injectives both ways; slices pinned by sliceTopos/sliceSets/sliceStructural; restrictions, RHom, localization fields; localTests iff via landed IsLocallyDerivedRingedIdealComplete for all unbounded N and every mono ideal with I=F(I'). §1(B) repairs correct and unused elsewhere: localization_modules j_*⊣j^* (false) -> j^*⊣j_*; exists_localizedSheavesOverRepresentable generalized from Precoverage+HasPullbacks to GrothendieckTopology. stmt_deps additions correct. No hollow defs, only sorry, docstrings ok, single universe u per convention. nt_compile --json on 3 files rc=0, no errors (2.7/5.4/26.1 s). Remarks only: Nonempty-packaged isos, siteObject pinned via restrictions, Q23 lean note on slice node replaced."
  }
 }

@@ -12,7 +12,8 @@
   "def-weil-size-convention",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-sites-and-cohomology",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-trf-big-small-etale-retraction-data"
  ],
  "proof": [
   {
@@ -186,5 +187,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-91c8bb1ac (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes; review.md has the details. Sources read in full: Stacks 0DDI (whose proof uses pi_* = i^{-1} exact and the identity composite), Topologies 021F and 021G, and Sites 00XR, 00XT and 00XU with their proofs; all tags were checked against tags/tags. The item statement is verbatim the live one and no metadata changed. New node lem-trf-bigger-site-retraction: its hypotheses (a)-(e) are those of 00XU, with u(e_C) iso to e_D, which is harmless. Its conclusions (f_* = g^{-1} = R, f^{-1} = (u_p)^#, the adjunctions L, R, g_*, the unit and counit isomorphisms of 00XT, f o g iso to the identity, f^{-1} fully faithful) say nothing beyond 00XR/00XT/00XU, so the node is true. It is statement-only and unsplit, with correct blueprint from/via and same_as []. It is the general site theorem, not a restatement of a clause of the item. It is not a duplicate: lem-weil-pbc-continuous-cocontinuous-topos-adjunction gives only the 00XR adjunction, with no full-faithfulness hypothesis and no unit or counit isomorphism. Mathlib has no match: CoverLifting and Pullback give no unit isomorphism without cover-density. Item step 1 checks 00XU (a)-(e) for T_Et inside (Sch/T)_Et as 021G does: etale composition gives cocontinuity, def-weil-pbc-etale-site gives fibre products, and full faithfulness and the final object T/T hold. Step 2 gives pi_* = restriction on abelian sheaves through def-weil-pbc-sites-and-cohomology(3). Step 3: R is a left adjoint that preserves finite products; lifting it to group objects (adjunction-lifts (1),(2)) gives cokernels, sectionwise kernels give kernels, so R is exact. Step 4 takes the set-level unit isomorphism from the new node and the abelian unit = underlying set unit from def(3). Edge cases checked: T empty, the zero sheaf, u = id, and a non-full u, where 00XT fails. Accepted tool uses: etale-composition-cancellation, sheaf-algebraic-structures-objects, adjunction-lifts-group-ring-objects, left-adjoint-preserves-colimits and sheafification-exact(1). No SGA source is used and no target is weakened."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.BigSmallEtaleExactRetraction",
+  "declaration": "AlgebraicGeometry.bigSmallEtaleExactRetraction",
+  "statement": "theorem bigSmallEtaleExactRetraction (T : Scheme.{u}) : Nonempty (BigSmallEtaleRetractionData T)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/BigSmallEtaleExactRetraction.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd1e2a0b",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Delivered pair compiles cleanly (nt_compile --json), but BigSmallEtaleRetractionData took an arbitrary GeometricMorphism on abelian sheaves, tied to the inclusion only by an object equality of sections, so Nonempty(...) asserted only that some morphism exists, not the canonical pi_T (H3; forbidden Nonempty choice). FIX: fixes/BigSmallEtaleRetractionData.lean makes direct_restrict a natural iso direct ⋙ sheafToPresheaf ≅ sheafToPresheaf ⋙ whiskeringLeft (Scheme.Etale.forget T).op, which pins pi_T up to canonical iso, and adds the set-level topos morphism with the same identification (Type (u+1), same universe, no extra hypotheses); fixes/def-trf-big-small-etale-retraction-data.json corrects the new node's ill-typed unit F→pi^{-1}pi_*F to F→pi_*pi^{-1}F and states the inclusion. Item module, item statement and lean.statement unchanged and verbatim. Fixed pair compiles rc=0 with no warnings. Checked clauses, edge cases (empty T, T/T, zero sheaf, universes), docstrings and blueprint tags, no hollow defs, only the item sorry, searches, deps, and the report sections."
  }
 }

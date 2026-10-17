@@ -247,21 +247,25 @@
   }
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-fc7a38579",
-  "group": "NS",
+  "reviewer": "NT-stage2-cc-df44a1f7d",
+  "group": "NF",
   "result": "pass",
-  "note": "Wrote review.md. Checked the immutable statement, dependencies, sources, constructions, edge cases, docstrings, and verbatim signature. Server-only compilation passed cleanly in 1.4 seconds. No delivery errors found; branch and clones unchanged."
+  "note": "Clause-by-clause match: RingedToposMorphism direction (S=R'), [e.inverse.IsEquivalence][IsIso e.ringMap] only; module equivalence pinned to e via pushforward≅e.modules, underlying, structural; mapDerivedCategory derived equivalence with unit/counit; K-injectives both ways; slices pinned by sliceTopos/sliceSets/sliceStructural; restrictions, RHom, localization fields; localTests iff via landed IsLocallyDerivedRingedIdealComplete for all unbounded N and every mono ideal with I=F(I'). §1(B) repairs correct and unused elsewhere: localization_modules j_*⊣j^* (false) -> j^*⊣j_*; exists_localizedSheavesOverRepresentable generalized from Precoverage+HasPullbacks to GrothendieckTopology. stmt_deps additions correct. No hollow defs, only sorry, docstrings ok, single universe u per convention. nt_compile --json on 3 files rc=0, no errors (2.7/5.4/26.1 s). Remarks only: Nonempty-packaged isos, siteObject pinned via restrictions, Q23 lean note on slice node replaced."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable",
   "declaration": "CategoryTheory.exists_localizedSheavesOverRepresentable",
+  "declarations": [
+   "CategoryTheory.exists_localizedSheavesOverRepresentable"
+  ],
   "file": "lean/Sheaf/CategoryTheory/Sites/LocalizedSheavesOverRepresentable.lean",
-  "statement": "theorem exists_localizedSheavesOverRepresentable {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasWeakSheafify J.toGrothendieck (Type u)] (U : C) : ∃ (P : Sheaf (J.toGrothendieck.over U) (Type u) ⥤ Over (yoneda.obj U)) (e : ∀ (H : Sheaf (J.toGrothendieck.over U) (Type u)) (X : C), (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))), (∀ (H : Sheaf (J.toGrothendieck.over U) (Type u)) (X : C) (z : (P.obj H).left.obj (op X)), (P.obj H).hom.app (op X) z = (e H X z).1) ∧ (∀ (H : Sheaf (J.toGrothendieck.over U) (Type u)) (X Y : C) (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) = ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧ (∀ (H H' : Sheaf (J.toGrothendieck.over U) (Type u)) (f : H ⟶ H') (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) = ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧ ∃ E : Sheaf (J.toGrothendieck.over U) (Type u) ≌ Over ((presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U)), Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J.toGrothendieck (Type u))) ∧ ∃ r : ∀ (F : Over ((presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U))) (X : Over U), (E.inverse.obj F).obj.obj (op X) ≃ {s : F.left.obj.obj (op X.left) | F.hom.hom.app (op X.left) s = (toSheafify J.toGrothendieck (yoneda.obj U)).app (op X.left) X.hom}, (∀ (F : Over ((presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U))) (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)), (r F X ((E.inverse.obj F).obj.map b.op s)).val = F.left.obj.map b.left.op (r F Y s).val) ∧ (∀ (F G : Over ((presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U))) (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)), (r G X ((E.inverse.map f).hom.app (op X) s)).val = f.left.hom.app (op X.left) (r F X s).val)",
+  "statement": "theorem exists_localizedSheavesOverRepresentable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) : ∃ (P : Sheaf (J.over U) (Type u) ⥤ Over (yoneda.obj U)) (e : ∀ (H : Sheaf (J.over U) (Type u)) (X : C), (P.obj H).left.obj (op X) ≃ Σ a : X ⟶ U, H.obj.obj (op (Over.mk a))), (∀ (H : Sheaf (J.over U) (Type u)) (X : C) (z : (P.obj H).left.obj (op X)), (P.obj H).hom.app (op X) z = (e H X z).1) ∧ (∀ (H : Sheaf (J.over U) (Type u)) (X Y : C) (b : Y ⟶ X) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H Y ((P.obj H).left.map b.op ((e H X).symm ⟨a, s⟩)) = ⟨b ≫ a, H.obj.map (Over.homMk b rfl).op s⟩) ∧ (∀ (H H' : Sheaf (J.over U) (Type u)) (f : H ⟶ H') (X : C) (a : X ⟶ U) (s : H.obj.obj (op (Over.mk a))), e H' X ((P.map f).left.app (op X) ((e H X).symm ⟨a, s⟩)) = ⟨a, f.hom.app (op (Over.mk a)) s⟩) ∧ ∃ E : Sheaf (J.over U) (Type u) ≌ Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U)), Nonempty (E.functor ≅ P ⋙ Over.post (presheafToSheaf J (Type u))) ∧ ∃ r : ∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X : Over U), (E.inverse.obj F).obj.obj (op X) ≃ {s : F.left.obj.obj (op X.left) | F.hom.hom.app (op X.left) s = (toSheafify J (yoneda.obj U)).app (op X.left) X.hom}, (∀ (F : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (X Y : Over U) (b : X ⟶ Y) (s : (E.inverse.obj F).obj.obj (op Y)), (r F X ((E.inverse.obj F).obj.map b.op s)).val = F.left.obj.map b.left.op (r F Y s).val) ∧ (∀ (F G : Over ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) (f : F ⟶ G) (X : Over U) (s : (E.inverse.obj F).obj.obj (op X)), (r G X ((E.inverse.map f).hom.app (op X) s)).val = f.left.hom.app (op X.left) (r F X s).val)",
   "branch": "newtargets-dag",
-  "by": "NS",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the recorded theorem required a Precoverage with HasPullbacks, stability and isomorphism axioms. This does not provide the node for an arbitrary Grothendieck topology on a small category without categorical pullbacks, as this consumer requires. The module now takes J : GrothendieckTopology C directly, retaining every disjoint-union, sheafification, fibre, restriction and morphism formula. Sheafification is supplied canonically for the small site; covering refinements use pullback sieves. The natural-language node is unchanged and no existing external declaration uses this theorem."
  }
 }

@@ -17,7 +17,9 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-ringed-section-localization",
   "def-weil-pbc-ringed-ideal-generators",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-local-coefficient-localization"
  ],
  "proof": [
   {
@@ -302,5 +304,42 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d19e6bacd (reviewer sub-agent of L); spot-checked: Read in full: the item (9 steps), the new node lem-weil-pbc-ringed-sheaf-slice-adjunction, every cited node's statement, the parent's step 1, and the sources: Stacks 0791 lemma-localize-topos-site, 04IE (1)-(4), 04J4, 03CR, 099J opening reduction, 0997, 08JB/08FI. Statement: the added commutative-ring convention and the quantifier N in D(R') are correct; the parent and every internal-Hom node already assume commutative rings, so nothing is weakened. Tested on: a=0, a=1/unit ideal, zero ring, N=0, the identity equivalence, a non-subcanonical site. Steps: 1-3 (exact module equivalence, unbounded derived equivalence through mapDerivedCategoryFactors, K-injectivity by the Hom_K calculation) are correct. 4: the slice equivalence plus the element-site presentation gives a ringed equivalence of small sites. 5: the Yoneda chain uses only the closed bijection and the tensor-pullback statements. 6: (C/A)/(U,s) is isomorphic to C/U (the section is forced), and j_A^* is right adjoint to the exact j_A!, so K-injectives restrict and RHom commutes with arbitrary-sheaf restriction. 7: the colimit argument for localization is fine. 8: arbitrary-sheaf tests are equivalent to site-object tests, by evaluating at id_U. 9: full faithfulness and essential surjectivity of e^{-1}. No cycle. New node: it matches 0791 and 04IE(4) on the element site; exactness of j_A! is true (the left Kan extension is the displayed direct sum, then the 03DJ argument); tested with A terminal, initial, representable, and A(U) with two points. Statement only, B1-B9 met, three kinds of search recorded, blueprint ancestry correct. No duplicate: rg over the DAG for the tags/labels and for 'pairs (U,s)'/'element site'/'slice topos'; the nearest nodes (localized-sheaves-over-representable, ringed-slice-extension-preserves-exact, site-restriction-module-adjunction-exact) cover object slices only. Tool uses accepted: closed-symmetric-monoidal (off-route, generic); exact-functor-derived-factorization (Mathlib leaf) and right-adjoint-preserves-kinjective (sk-def-exchange, which the unit cites) are harmless declarations. FIX in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-presentation-transport.json: step 8 source cited 'Definition 0998' for definition-derived-complete, which is Tag 0999 (0998 is lemma-ideal-of-elements-complete-wrt); step 4 TeX B\\prime changed to B'. Nothing dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedPresentationTransport",
+  "declaration": "CategoryTheory.ringed_presentation_transport",
+  "declarations": [
+   "CategoryTheory.PresentationModules",
+   "CategoryTheory.PresentationDerived",
+   "CategoryTheory.presentationQ",
+   "CategoryTheory.presentationRHom",
+   "CategoryTheory.presentationForget",
+   "CategoryTheory.presentationScalar",
+   "CategoryTheory.presentationComplexMap",
+   "CategoryTheory.presentationDerivedMap",
+   "CategoryTheory.RingedPresentationFunctor",
+   "CategoryTheory.RingedPresentationEquivalence",
+   "CategoryTheory.RingedPresentationFunctor.derived",
+   "CategoryTheory.presentationElementRing",
+   "CategoryTheory.presentationComplete",
+   "CategoryTheory.RingedPresentationRestrictions",
+   "CategoryTheory.RingedPresentationAt",
+   "CategoryTheory.RingedPresentationTransport",
+   "CategoryTheory.ringed_presentation_transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedPresentationTransport.lean",
+  "statement": "theorem ringed_presentation_transport {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}} (e : RingedToposMorphism (localCoefficientRings R) (localCoefficientRings S)) [e.inverse.IsEquivalence] [IsIso e.ringMap] : Nonempty (RingedPresentationTransport e)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df44a1f7d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match: RingedToposMorphism direction (S=R'), [e.inverse.IsEquivalence][IsIso e.ringMap] only; module equivalence pinned to e via pushforward≅e.modules, underlying, structural; mapDerivedCategory derived equivalence with unit/counit; K-injectives both ways; slices pinned by sliceTopos/sliceSets/sliceStructural; restrictions, RHom, localization fields; localTests iff via landed IsLocallyDerivedRingedIdealComplete for all unbounded N and every mono ideal with I=F(I'). §1(B) repairs correct and unused elsewhere: localization_modules j_*⊣j^* (false) -> j^*⊣j_*; exists_localizedSheavesOverRepresentable generalized from Precoverage+HasPullbacks to GrothendieckTopology. stmt_deps additions correct. No hollow defs, only sorry, docstrings ok, single universe u per convention. nt_compile --json on 3 files rc=0, no errors (2.7/5.4/26.1 s). Remarks only: Nonempty-packaged isos, siteObject pinned via restrictions, Q23 lean note on slice node replaced."
  }
 }

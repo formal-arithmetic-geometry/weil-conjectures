@@ -1,0 +1,120 @@
+{
+ "id": "def-trf-big-small-etale-retraction-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization uses the exact small/big étale retraction of Stacks 0DDI; this node records its geometric-morphism, restriction, exactness, and unit data.",
+   "via": [
+    "lem-trf-big-small-etale-exact-retraction",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Data for the exact retraction from big to small etale sheaves",
+ "statement": "For a scheme $T$ [def-pc-scheme] and the fixed universe convention [def-weil-size-convention], let $u:T_{\\mathrm{Et}}\\hookrightarrow(\\mathrm{Sch}/T)_{\\mathrm{Et}}$ be the inclusion of the small etale site [def-weil-pbc-etale-site] into the big etale site $(\\mathrm{Sch}/T)_{\\mathrm{Et}}$ [def-weil-pbc-sites-and-cohomology]. An exact big-small etale retraction datum consists of: a geometric morphism [def-trf-geometric-morphism] $\\pi_T:\\mathrm{Sh}((\\mathrm{Sch}/T)_{\\mathrm{Et}})\\to\\mathrm{Sh}(T_{\\mathrm{Et}})$ of sheaves of sets together with a natural isomorphism between its direct image and restriction along $u$, $(\\pi_{T,*}G)(U/T)=G(U/T)$; a geometric morphism from abelian sheaves on $(\\mathrm{Sch}/T)_{\\mathrm{Et}}$ to abelian sheaves on $T_{\\mathrm{Et}}$ together with a natural isomorphism between its direct image and restriction along $u$, $(\\pi_{T,*}G)(U/T)=G(U/T)$, natural in $G$ and in $U/T$; such that this abelian direct image preserves finite limits and finite colimits, and the abelian adjunction unit $F\\to\\pi_{T,*}\\pi_T^{-1}F$ is an isomorphism for every abelian sheaf $F$ on $T_{\\mathrm{Et}}$. Since both direct images are identified with restriction along $u$, the inverse images are the canonical left adjoints $u_s$ (unique up to unique isomorphism), so the datum is the one induced by the inclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex and literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 00XR, 00XT, 00XU and Etale Cohomology Tag 0DDI (the small/big etale retraction data)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-geometric-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "data consisting of a geometric morphism from big etale abelian sheaves to small etale abelian sheaves whose direct image restricts sections, is exact, and whose adjunction unit is an isomorphism",
+   "results": "Top hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Scheme.smallEtaleTopology, Scheme.etaleTopology; no exact retraction datum.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricMorphism, PreservesFiniteLimits, PreservesFiniteColimits, AddCommGrpCat",
+   "results": "0 hits; GeometricMorphism is not in Mathlib and no combined exact restriction datum was found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTopology|smallEtaleTopology|GeometricMorphism",
+   "results": "Mathlib defines Scheme.etaleTopology and Scheme.smallEtaleTopology; project defines CategoryTheory.GeometricMorphism, but no big-small exact retraction data.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction from the big etale site to the small etale site is exact and the unit is an isomorphism",
+   "results": "Generic sheaf adjunction and site topology declarations only; no exact big-small etale retraction data.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "BigSmallEtaleRetractionData|big-small.*etale.*retraction",
+   "results": "no hits in WeilConjectures/ or lean/Sheaf.",
+   "sub": "WeilConjectures and lean/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-big-small-etale-exact-retraction",
+  "date": "2026-10-17",
+  "group": "Q43"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.BigSmallEtaleRetractionData",
+  "declaration": "AlgebraicGeometry.BigSmallEtaleRetractionData",
+  "statement": "structure BigSmallEtaleRetractionData (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/BigSmallEtaleRetractionData.lean"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd1e2a0b",
+  "group": "Q43",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bd1e2a0b",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Delivered pair compiles cleanly (nt_compile --json), but BigSmallEtaleRetractionData took an arbitrary GeometricMorphism on abelian sheaves, tied to the inclusion only by an object equality of sections, so Nonempty(...) asserted only that some morphism exists, not the canonical pi_T (H3; forbidden Nonempty choice). FIX: fixes/BigSmallEtaleRetractionData.lean makes direct_restrict a natural iso direct ⋙ sheafToPresheaf ≅ sheafToPresheaf ⋙ whiskeringLeft (Scheme.Etale.forget T).op, which pins pi_T up to canonical iso, and adds the set-level topos morphism with the same identification (Type (u+1), same universe, no extra hypotheses); fixes/def-trf-big-small-etale-retraction-data.json corrects the new node's ill-typed unit F→pi^{-1}pi_*F to F→pi_*pi^{-1}F and states the inclusion. Item module, item statement and lean.statement unchanged and verbatim. Fixed pair compiles rc=0 with no warnings. Checked clauses, edge cases (empty T, T/T, zero sheaf, universes), docstrings and blueprint tags, no hollow defs, only the item sorry, searches, deps, and the report sections."
+ }
+}

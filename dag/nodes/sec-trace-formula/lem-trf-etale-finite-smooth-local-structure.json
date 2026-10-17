@@ -332,5 +332,24 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-62e9524e5 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and complete; two citations were missing, now added. Sources read: Stacks 052E, 057J (with 055W), 057K, 057L, algebra 0520, varieties 04KV and 056T, and Properties 033M via 057J's and 057K's proofs. The item statement is unchanged and matches 057K clauses (1)-(6) plus 057L clause (7). Geometrically integral includes nonempty fibres; step 9 makes h surjective, so this holds. Not a target node, so the coefficient-category check does not apply. No SGA is cited. All 11 steps were checked against the cited node statements. Step 3 applies the elementary etale lemma over A^n, as 052E does. Steps 7 and 8 compute the unique points over (y0,s1) and (w0,y1) from tensor products of residue fields that are fields, which writes out 057K's omitted details. Steps 9 and 10 give surjectivity and nonempty open fibres. New nodes are all true, statement-only and not duplicates. (1) refined-quasi-finite: 0520 in scheme form; the image prime (p,x_{r+1},...,x_n) has residue field kappa(p)(x_1..x_r) and r<=n; tested at n=0, the generic point of A^n and a closed point of A^1. The 00QE and lem-sbc chart nodes have no prescribed image prime. (2) smooth-component: 04KV, 056T and 033M; checked at r=0, disconnected C and Spec C over R. (3) fibre-neighbourhood: 057J with 056W; not a restatement of the item. The two declared tool uses (sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence) are accepted. Fixes in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-finite-smooth-local-structure.json: step 1 now cites lem-weil-pbc-open-fibre-product for (Z^a)_s being open in Z_s, and step 9 cites lem-weil-pbc-etale-composition-cancellation for 'open immersion is etale' in the relative-dimension claim. proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleFiniteSmoothLocalStructure",
+  "declaration": "AlgebraicGeometry.exists_affine_etale_finite_smooth_local_structure",
+  "file": "lean/Sheaf/TraceFormula/EtaleFiniteSmoothLocalStructure.lean",
+  "statement": "theorem exists_affine_etale_finite_smooth_local_structure {Z S : Scheme.{u}} (p : Z ⟶ S) [LocallyOfFiniteType p] (z : Z) : ∃ (n : ℕ), topologicalKrullDimAt (p.asFiber z) = (n : WithBot ℕ∞) ∧ ∃ (W Y S₁ : Scheme.{u}) (w : W) (y : Y) (s₁ : S₁) (b : W ⟶ Z) (a : S₁ ⟶ S) (π : W ⟶ Y) (h : Y ⟶ S₁), IsAffine W ∧ IsAffine Y ∧ IsAffine S₁ ∧ b w = z ∧ π w = y ∧ h y = s₁ ∧ b ≫ p = π ≫ h ≫ a ∧ Etale b ∧ Etale a ∧ IsIso (b.residueFieldMap w) ∧ IsIso (a.residueFieldMap s₁) ∧ IsFinite π ∧ π ⁻¹' ({y} : Set Y) = ({w} : Set W) ∧ SmoothOfRelativeDimension n h ∧ GeometricallyIntegral h ∧ @Algebra.IsPurelyTranscendentalExtension (S₁.residueField (h y)) (Y.residueField y) _ _ ((h.residueFieldMap y).hom.toAlgebra)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-ab28567be"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab28567be",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and Stacks 057K (1)-(6) and 057L (7). The fibre dimension is fixed as a natural number at p.asFiber z; residue-field isos are the maps induced by b and a; finite pi with singleton fibre; SmoothOfRelativeDimension n; Mathlib GeometricallyIntegral, which includes nonempty fibres; the landed purely-transcendental predicate with the algebra induced by h (finite generating set since kappa(y) is finitely generated). No extra hypotheses, no universe restriction; edge cases n=0, r=0, any characteristic and non-reduced schemes covered. Recorded dependency declarations are the ones used; no duplicate definition. The node diff adds only the lean record, whose statement is verbatim in the file. Docstrings carry source, blueprint id and all 11 proof steps; proof is sorry; no hollow definition. Delivered and fixed files compile cleanly with nt_compile.py --json; a deliberately broken copy did print its error. Only finding: H9, unused imports Mathlib.RingTheory.MvPolynomial.Basic and Mathlib.RingTheory.Localization.FractionRing. fixes/EtaleFiniteSmoothLocalStructure.lean is the complete module with these removed and the statement unchanged."
  }
 }

@@ -79,12 +79,20 @@
  "unit": "sk-thm-p1",
  "lean": {
   "module": "Mathlib.RingTheory.FiniteType",
-  "declaration": "Algebra.FiniteType",
-  "statement": "class Algebra.FiniteType (R A) [CommSemiring R] [Semiring A] [Algebra R A] : Prop where out : (⊤ : Subalgebra R A).FG",
+  "declaration": "RingHom.FiniteType",
+  "statement": "def RingHom.FiniteType (f : A →+* B) : Prop := @Algebra.FiniteType A B _ _ f.toAlgebra",
   "branch": "mathlib",
-  "by": "L",
-  "date": "2026-10-11",
+  "by": "NZ",
+  "date": "2026-10-18",
   "existing": true,
-  "note": "Finitely generated as an algebra; for a bare ring map RingHom.FiniteType. Lead note 2026-10-11 11:42 UTC: recorded by bookkeeping agent B-1137 of L; name and signature read in the pinned Mathlib (0df444a360) of the slopmaster2 checkout."
+  "note": "The recorded Algebra.FiniteType only states finite generation for an explicit Algebra instance, while this node quantifies a bare ring homomorphism. Mathlib.RingTheory.FiniteType provides the exact generic notion RingHom.FiniteType used by the node and theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbbca714b",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0GTF clause by clause: RingHom.FiniteType phi, a b : S, d : N, f_c = Spec.map of MvPolynomial.eval2Hom phi (fun _ : Fin 1 => c) (checked X 0 -> c, C r -> phi r), Scheme.Hom.fiber with topologicalKrullDim <= d in WithBot N-infinity (empty fibres = bottom), exists n0, for all n >= n0, all fibres. No extra hypotheses; the single universe is forced by Spec S -> Spec R[t] and loses no case for finite type. Helper has real data; proof is sorry only (print axioms: sorryAx); source and blueprint docstrings present; imports Mathlib only; lines <= 100; lean.statement verbatim; report has Worker report and Second reading by NZ. Dependency record def-weil-pbc-finite-type-algebra moved from Algebra.FiniteType to RingHom.FiniteType (same notion, lean.note present; accepted, though listing both would be better for existing Algebra.FiniteType citers). Finding H8: the proof docstring summarised the 15-step node proof; fixes/PowerPerturbationFibreDimension.lean replaces only that docstring with steps 1-15. nt_compile: delivered file clean in 2.1 s, fixed file clean in 2.2 s."
  }
 }
