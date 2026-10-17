@@ -306,10 +306,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d272a3e09",
-  "group": "Q51",
+  "reviewer": "NT-stage2-cc-f0f641b64",
+  "group": "NE",
   "result": "pass",
-  "note": "Read the item node, all statement dependencies, Stacks 09Z9(1)/0F4Y/0F76/04FT/03Q1, both delivered modules, the report and the landed SectionHasProperSupport, IsClosedSubsetProperOver, GeometricFiber and upperStarCompSheafFiberIso. Every hypothesis and conclusion clause matches: separated qc étale h, alg-closed geometric point, finite I, canonical coproduct iso over Omega, every section has proper support over q, IsIso of the canonical restriction/germ map from H0_c, generator formula on the uniquely determined zext pulled back along (r, q≫w). The A : Type (u+1) universe is forced by the landed dependency; [Etale lift] is automatic. The new compactlySupportedSections node is the span of properly supported sections, which equals the source's submodule; no duplicate exists. Helper maps are canonical, not hollow or arbitrary. Both lean.statement fields match the files verbatim. nt_compile.py compiled both files cleanly (exit code 0, no errors or warnings; tool confirmed to report errors). Only cosmetic points: one duplicate import, redundant noncomputable markers."
+  "note": "Re-delivery of the already-landed, unchanged statement (only report, lean.by/date and one docstring line change; node statement md5 unchanged since be72fd17dc). Read again myself: separated/qc/étale h, alg-closed geometric point, Finite GeometricFiber, canonical Sigma.desc coproduct iso over Ω, every section has proper support, IsIso(compactlySupportedSections.ι ≫ canonical restriction/germ map) onto ∐ = ⊕ of stalks, generator clause with zext unique (zero germs off clopen graph, restriction z) and Sigma.ι formula at w≫lift. A:Type(u+1) is the recorded project convention forced by deps; [Etale lift] automatic; helpers canonical, not hollow; lean.statement verbatim; sorry only; edge cases ok. nt_compile on snapshot: both modules clean, exit 0 (error-reporting confirmed by control). Cosmetic only: process-noise docstring line."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleGeometricFibreCompactSections",
@@ -317,8 +317,8 @@
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricFibreCompactSections.lean",
   "statement": "theorem etaleGeometricFibreCompactSections (A : Type (u + 1)) [CommRing A] {V T : Scheme.{u}} (h : V ⟶ T) [IsSeparated h] [QuasiCompact h] [Etale h] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) : let C := Limits.pullback h t let r := Limits.pullback.fst h t let I := Scheme.Hom.GeometricFiber h t Finite I ∧ IsIso (Sigma.desc (fun v : I ↦ Limits.pullback.lift v.1 (𝟙 (Spec (.of Ω))) (by simpa using v.2)) : (∐ fun _ : I ↦ Spec (.of Ω)) ⟶ Limits.pullback h t) ∧ IsIso (compactlySupportedSections.ι A (Limits.pullback.snd h t) ((Etale.upperStar (ModuleCat.{u + 1} A) r).obj F) ≫ etaleGeometricFibreRestrictionMap A h Ω t F) ∧ (∀ (s : (Etale.sectionsFunctor (ModuleCat.{u + 1} A) C).obj ((Etale.upperStar (ModuleCat.{u + 1} A) r).obj F)), Etale.SectionHasProperSupport A ((Etale.upperStar (ModuleCat.{u + 1} A) r).obj F) (Scheme.Etale.mk (𝟙 C)) (Limits.pullback.snd h t) s) ∧ (∀ (W : T.Etale) (w : Spec (.of Ω) ⟶ W.left) (lift : W.left ⟶ V) [Etale lift] (hw : w ≫ W.hom = t) (hlift : lift ≫ h = W.hom) (z : F.obj.obj (op (Scheme.Etale.mk lift))), let P := Limits.pullback h W.hom let p := Limits.pullback.fst h W.hom let γ := Limits.pullback.lift lift (𝟙 W.left) (by simp [hlift]) ∃ zext : F.obj.obj (op (Scheme.Etale.mk p)), (∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (x : Spec (.of Ω') ⟶ P), x default ∉ Set.range γ.base → ((Scheme.pointSmallEtale (x ≫ p)).toPresheafFiber (Scheme.Etale.mk p) (CategoryTheory.Over.homMk x) F.obj).hom zext = 0) ∧ F.obj.map (MorphismProperty.Over.homMk (A := Scheme.Etale.mk lift) (B := Scheme.Etale.mk p) γ (by simp [p, γ])).op zext = z ∧ (etaleGeometricFibreRestrictionMap A h Ω t F).hom ((etaleSectionPullbackToGlobal A r p (Limits.pullback.lift r (Limits.pullback.snd h t ≫ w) (by simpa only [r, Category.assoc, hw] using (Limits.pullback.condition (f := h) (g := t)))) (by simp [p]) F).hom zext) = (Sigma.ι (fun v : Scheme.Hom.GeometricFiber h t ↦ (Scheme.pointSmallEtale v.1).sheafFiber.obj F) ⟨w ≫ lift, by simp [hw, hlift]⟩) (((Scheme.pointSmallEtale (w ≫ lift)).toPresheafFiber (Scheme.Etale.mk lift) (CategoryTheory.Over.homMk w) F.obj).hom z))",
   "branch": "newtargets-dag",
-  "by": "Q51",
-  "date": "2026-10-17",
+  "by": "NE",
+  "date": "2026-10-18",
   "existing": false
  }
 }

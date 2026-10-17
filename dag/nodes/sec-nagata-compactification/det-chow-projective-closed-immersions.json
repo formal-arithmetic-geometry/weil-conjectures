@@ -215,5 +215,23 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-76ffc9661 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited node statement. The delivery has no new nodes, the statement is unchanged and true, and n=∅, π=id and nonreduced X̃ were tested. Steps 1-5 check out: the proper composite (01W3); q_S proper and separated by lemma-nagata-projective-space-base-change-proper, which needs no Noetherian base; i_S proper because it maps a proper S-scheme to a separated one, then closed as a proper immersion (01W6(2), 01IQ); the graph closed by lem-weil-pbc-fibre-product-change-of-base-closed-immersion with T=X, maps π and id_X, h=f (01KR, schemes.tex:4238); the base-change square for i_S×id_X; and the identification X×_S P(n;S)=P(n;X) keeping the projection to X. These follow unit sk-thm-chow-projective steps 1-2 and blueprint det-chow-projective-closed-immersions.proof.md Parts 1-2. Every cited lemma is a Mathlib leaf or closed in Lean. I accept the declared tool_use of lem-weil-pbc-closed-immersion-products (composition clause only). The overlapping nodes lemma-weil-pbc-chow-embedding-over-x and lem-weil-pbc-projective-embedding (merged) cover clause 2 only, so neither duplicates the item. Two fixes, in fixes/dag/nodes/sec-nagata-compactification/det-chow-projective-closed-immersions.json: (1) step 6 did not reindex the finite coordinate set n to the {0..r} of def-pc-projective-morphism, nor treat n=∅ (where P(∅;S)=∅ and X̃=∅). I added both arguments, added def-nagata-projective-space-base-change and def-weil-closed-immersion to the step's uses and to proof_deps, and the step stays elementary. (2) split_report.blueprint wrongly said the blueprint node has no proof; I corrected it to cite the .proof.md parts that the steps follow.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4bbcc4d82",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Lean theorem chow_projective_closed_immersions matches the node and blueprint clause by clause: qcqs S, proper f, proper surjective pi, finite N : Type u, IsImmersion i, i ≫ ↘S = pi ≫ f; conclusions IsProper (pi≫f), IsClosedImmersion i, IsProjective (pi≫f), IsClosedImmersion (liftBaseChange pi i h.symm), its composite with ℙ(N;X)↘X = pi, IsProjective pi. liftBaseChange was checked as the canonical isPullback_map lift with components (i, pi), not an arbitrary map. No extra hypotheses; edge cases N=∅, ℙ⁰, pi=id and empty S are fine; one universe, all variables bound. Only change to the node is the lean field, and its statement is verbatim the file's signature. Docstrings carry the source place, blueprint id and all 6 proof steps; sorry only; no definitions. Report has Worker report and Second reading by Q105. nt_compile --json: exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions",
+  "declaration": "AlgebraicGeometry.chow_projective_closed_immersions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowProjectiveClosedImmersions.lean",
+  "statement": "theorem chow_projective_closed_immersions {S X X' : Scheme.{u}} (N : Type u) [Finite N] (f : X ⟶ S) (π : X' ⟶ X) (i : X' ⟶ ProjectiveSpace N S) [CompactSpace S] [QuasiSeparatedSpace S] [IsProper f] [IsProper π] [Surjective π] [IsImmersion i] (h : i ≫ ProjectiveSpace N S ↘ S = π ≫ f) : IsProper (π ≫ f) ∧ IsClosedImmersion i ∧ IsProjective (π ≫ f) ∧ IsClosedImmersion (ProjectiveSpace.liftBaseChange π i h.symm) ∧ ProjectiveSpace.liftBaseChange π i h.symm ≫ ProjectiveSpace N X ↘ X = π ∧ IsProjective π",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -192,5 +192,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-f2c45e1c2 (reviewer sub-agent of L); spot-checked: I read the item in full, the statement of every cited node, unit sk-i-curve-zero and the parent lem-trf-excellent-scheme-affine-cover. The statement is unchanged and matches Stacks properties.tex Tag 0HA5 (3)=>(2): arbitrary scheme, any index set, any affine open V, nothing added or dropped. The six steps expand the source's proof ('combine 01OW and 0HA4'). Step 1 (elementary): the G-ring definition includes Noetherian, so the cover witnesses pqf-def-locnoeth. Step 2: the Mathlib leaf pqf-lem-affine-open-locnoeth makes B Noetherian. Step 3: spec-points plus clause (c) of the stalk-localization lemma, applied to V and to some U_i containing x, give B_q = O_{X,x} = (A_i)_p; the prime matches by uniqueness, and no affineness of V cap U_i is assumed. Step 4: a ring isomorphism of local rings sends the maximal ideal onto the maximal ideal, so adic-completion-ring-equiv applies with J = e(I) and gives E with E o iota_R = iota_S o e. Step 5: G-ring regularity of (A_i)_p -> its completion, plus regular-ring-map-ring-equiv (f=iota_R, g=iota_S, a=e, b=E, with b o f = g o a checked), gives regularity of iota_S. Step 6 is assembly from the definition. proof_deps equals the union of the uses. I accept the two declared tool_uses: lem-weil-pbc-adic-completion-ring-equiv and lem-weil-pbc-regular-ring-map-ring-equiv are generic algebra lemmas from unit sk-thm-p1, which is off this unit's route. Duplicate search: grep for 0HA4/0HA5 and their labels finds only the item and its parent; lem-weil-pbc-g-ring-ring-equiv and lem-weil-pbc-g-ring-maximal-ideal-criterion (07PT) state different things. The item is a real lemma, not a restated clause of its parent, which also needs J-2 and universal catenarity. Edge cases checked: V empty, I empty, V equal to a chart, non-quasi-compact X, Spec Z with D(n). No SGA source is used, and this is not a target node. One fix: split_report.blueprint still said 'The two new nodes realize...' from the withdrawn draft, but the delivery creates no nodes. I replaced it with the actual step-to-blueprint mapping; the corrected whole file is fixes/dag/nodes/sec-trace-formula/lem-trf-g-ring-affine-cover.json and that sentence is its only change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-601f629f5",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Only the node's lean field changed. The Lean statement matches the node and Stacks properties.tex 0HA5 (3)=>(2) clause by clause: any Scheme.{u}, ι : Type v with no finiteness or nonempty assumption, U : ι → affineOpens, ⨆ = ⊤, IsGRing on each chart, any affine V, conclusion IsGRing Γ(X,V). IsGRing is the recorded def-weil-pbc-g-ring declaration and universes are consistent. No duplicate in Mathlib, the side tree or slopmaster2. Docstrings give the source, the blueprint name and the six proof steps; lean.statement is verbatim. nt_compile exit 0 with no messages (warn.sorry=false); a probe with a planted error confirmed the file is elaborated."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GRingAffineCover",
+  "declaration": "AlgebraicGeometry.isGRing_of_affine_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/GRingAffineCover.lean",
+  "statement": "theorem isGRing_of_affine_open_cover {X : Scheme.{u}} {ι : Type v} (U : ι → X.affineOpens) (hU : ⨆ i, (U i : X.Opens) = ⊤) (h : ∀ i, IsGRing Γ(X, U i)) (V : X.affineOpens) : IsGRing Γ(X, V)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

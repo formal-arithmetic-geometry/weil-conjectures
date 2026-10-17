@@ -213,5 +213,40 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-3954d3be2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no fault, so no fixes and no drop_nodes. Sources checked: ILO XI 1.1-1.11 and 2.4-2.5 (PDF pp. 177-185), and Stacks 021D, 04HR, 01KU, 01KV and 01TS (all tags correct). New node lem-trf-qcqs-etale-finitary-site: true, statement-only, self-contained and searched. E(T) (separated étale finite-presentation maps to a qcqs T) contains T. It is closed under fibre products, because A->C is étale, separated by 01KV, and of finite presentation by qc/qs cancellation. Every étale U->T is covered by affines, which lie in E(T), so finite refinements exist and the 04HR comparison gives Sh(T_Et)=Sh(E(T)). Its clauses are stable under any base change between qcqs schemes. Tested on: the empty T, non-separated qcqs T (the identity is in E(T)), and non-affine T, where an affine-only site would lack the terminal object. rg over the DAG and the main-20261015 blueprint found no duplicate: the affine-étale-site, single-cover refinement, generic dense-subsite and finitary-coherent nodes all state less. The node is about one scheme, so it does not restate the item. Item: statement unchanged and not weakened. Step 1 shows the restricted direct image is precomposition, gets the left adjoint from left-exact-site-inverse-image-tensor, and gets e^{-1}h_A^#=h^#_{A x T'} from adjunction, Yoneda and sheafification. Step 2 takes limits componentwise. In step 3 I recomputed the pullback of a type (c) map, and it is again type (c), so Cov is XI 2.5's finite-composite pretopology. Step 4 checks every hypothesis of oriented-product-universal for both the E-sites and the full sites, then uses site independence. Step 5 computes r^{-1}H^C_Z=H^full_Z, so r_* is restriction. Step 6 checks fa=bf' and gd=bg' give the structural arrows. Step 7 uses the XI 1.6/1.9 formula with A=a p1', B=d p2' and 2-arrow b(tau'), plus the composition-unit isomorphisms; the direction of the left map is correct. The fit with the parent was checked (Y=S, g=id). Route: the off-unit units sk-def-exchange, sk-thm-properbasechange and sk-thm-iff are all in the transitive route of sk-i-curve-zero. The two declared tool_uses are therefore unnecessary but harmless, and I accept them. This is not a target node, and the coefficients are sheaves of sets as in ILO."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d00ce27d",
+  "group": "N0",
+  "result": "pass",
+  "note": "I read the item node, the 7 statement deps, the source place (ILO XI 1.1/1.6/1.9 and Lemma 2.5), the module and the reused declarations (largeTriples/largeGenerators/largeTopology/largeAssociated, OrientedEtaleTriples/orientedEtaleTopology/orientedEtaleAssociated, GeometricMorphism, Hom.Etale). Hypotheses are exact: qcqs X,S,Y,f,g and the primes, squares ha/hd, nothing on a,b,d. The finite property (separated, lfp, qc, qs on the U/V/W structure maps) is right, and the site is Mathlib Skeleton with u+1/u universes and no forced equality. HasFiniteLimits, the terminal triple up to iso, finite (a)/(b) and singleton (c) generators via largeGenerators, and the finite-refinement clause are correct. e is pinned to restriction and the associated representables are identified with no subcanonicity. Base change is a real Comma.map of pullbacks with the pullbackComp comparison; finiteOrientedTripleBaseChange_mem is a documented, listed postponed helper and true for arbitrary a,b,d. u is characterised by u_* = precomposition with B (unique), and the canonical generator map is built from the unit with IsIso asserted, plus natural isos on the full and finite sites. Edge cases are covered (empty schemes/families, non-affine and non-separated, identity maps). The node changes only lean; the statement is verbatim and the 14 declarations match. No hollow defs, sorry only in the 2 theorem bodies, docstrings and the 7-step proof present, no name collisions. nt_compile --json on the target path: exit 0, no diagnostics, ~4 s; a deliberately broken copy gave the expected error. Second-reading section is the accepted post-10-17 note. Only nit: binder u shadows the universe name."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcqsOrientedTriplePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.qcqsOrientedTriplePresentation",
+  "file": "lean/Sheaf/Paper/QcqsOrientedTriplePresentation.lean",
+  "statement": "theorem qcqsOrientedTriplePresentation (X S Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ S) (g : Y ⟶ S) [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g] [QuasiSeparated g] : ∃ e : Sheaf (orientedEtaleTopology f g) (Type (u + 1)) ≌ Sheaf (finiteOrientedTripleTopology f g) (Type (u + 1)), IsFiniteOrientedTriplePresentation f g e ∧ ∀ (X' S' Y' : Scheme.{u}) [CompactSpace X'] [QuasiSeparatedSpace X'] [CompactSpace S'] [QuasiSeparatedSpace S'] [CompactSpace Y'] [QuasiSeparatedSpace Y'] (f' : X' ⟶ S') (g' : Y' ⟶ S') [QuasiCompact f'] [QuasiSeparated f'] [QuasiCompact g'] [QuasiSeparated g'] (a : X' ⟶ X) (b : S' ⟶ S) (d : Y' ⟶ Y) (ha : a ≫ f = f' ≫ b) (hd : d ≫ g = g' ≫ b), ∃ (e' : Sheaf (orientedEtaleTopology f' g') (Type (u + 1)) ≌ Sheaf (finiteOrientedTripleTopology f' g') (Type (u + 1))) (u : GeometricMorphism (Sheaf (orientedEtaleTopology f' g') (Type (u + 1))) (Sheaf (orientedEtaleTopology f g) (Type (u + 1)))), IsFiniteOrientedTriplePresentation f' g' e' ∧ ∃ θ : u.direct ⋙ sheafToPresheaf (orientedEtaleTopology f g) (Type (u + 1)) ≅ sheafToPresheaf (orientedEtaleTopology f' g') (Type (u + 1)) ⋙ (whiskeringLeft _ _ (Type (u + 1))).obj (orientedTripleBaseChange f g f' g' a b d ha hd).op, (∀ Z : FiniteOrientedTripleSite f g, IsIso (orientedGeneratorBaseChangeMap (orientedTripleBaseChange f g f' g' a b d ha hd) u θ ((finiteOrientedTripleInclusion f g).obj Z))) ∧ Nonempty (finiteOrientedTripleInclusion f g ⋙ orientedEtaleAssociated f g ⋙ u.inverse ≅ finiteOrientedTripleBaseChange f g f' g' a b d ha hd ⋙ finiteOrientedTripleInclusion f' g' ⋙ orientedEtaleAssociated f' g') ∧ Nonempty (finiteOrientedTripleAssociated f g ⋙ e.inverse ⋙ u.inverse ⋙ e'.functor ≅ finiteOrientedTripleBaseChange f g f' g' a b d ha hd ⋙ finiteOrientedTripleAssociated f' g')",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleProperty",
+   "AlgebraicGeometry.Scheme.FiniteOrientedTriples",
+   "AlgebraicGeometry.Scheme.FiniteOrientedTripleSite",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleInclusion",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleGenerators",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleTopology",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleAssociated",
+   "AlgebraicGeometry.Scheme.orientedSquareBaseChangeIso",
+   "AlgebraicGeometry.Scheme.orientedTripleBaseChange",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleBaseChange_mem",
+   "AlgebraicGeometry.Scheme.finiteOrientedTripleBaseChange",
+   "AlgebraicGeometry.Scheme.orientedGeneratorBaseChangeMap",
+   "AlgebraicGeometry.Scheme.IsFiniteOrientedTriplePresentation",
+   "AlgebraicGeometry.Scheme.qcqsOrientedTriplePresentation"
+  ],
+  "note": "The module reuses OrientedEtaleTriples, orientedEtaleTopology and orientedEtaleAssociated. Its helpers give the restricted skeleton, finite three-type topology, actual componentwise base change, and the canonical generator map defined by the identity section and the two adjunctions. finiteOrientedTripleBaseChange_mem postpones only the proof of membership in the full subcategory, never the scheme data."
  }
 }

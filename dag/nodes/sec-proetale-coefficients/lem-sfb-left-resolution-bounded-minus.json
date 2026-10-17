@@ -203,17 +203,18 @@
   "file": "lean/Sheaf/Algebra/Homology/LeftResolutionBoundedMinus.lean",
   "statement": "theorem exists_functorial_boundedAbove_left_resolution {A : Type u₁} [Category.{v₁} A] [Abelian A] {C : Type u₂} [Category.{v₂} C] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] (ι : C ⥤ A) [ι.Full] [ι.Faithful] [ι.Additive] (Q : A ⥤ C) [Q.PreservesZeroMorphisms] (π : Q ⋙ ι ⟶ 𝟭 A) (hπ : ∀ (X : A), Epi (π.app X)) : ∃ (S : CochainComplex.Minus A ⥤ CochainComplex A ℤ) (a : S ⟶ CochainComplex.Minus.ι A), (∀ (L : CochainComplex.Minus A), QuasiIso (a.app L)) ∧ (∀ (L : CochainComplex.Minus A) (i : ℤ), ∃ (X : C), Nonempty ((S.obj L).X i ≅ ι.obj X)) ∧ (∀ (L : CochainComplex.Minus A) (b : ℤ), L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b)",
   "branch": "newtargets-dag",
-  "by": "N8",
-  "date": "2026-10-17",
+  "by": "Q45",
+  "date": "2026-10-18",
   "existing": false,
-  "fixed_by": "NT-stage2-cc-703d10d2b"
+  "fixed_by": "NT-stage2-cc-703d10d2b",
+  "note": "Reuses the exact reviewed declaration and module already present on newtargets-dag; the signature is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-703d10d2b",
-  "group": "N8",
-  "result": "fix",
-  "note": "Statement correct: every hypothesis and conclusion clause matches the node and the FromJoel CochainComplexMinus.lean:32-36/90/208 assumptions. CochainComplex.Minus = ∃n IsStrictlyLE n; the essential-image clause ∃X, Nonempty(S(L)^i ≅ ιX); the upper-bound clause quantifies every b; S is a functor on the full subcategory. No extra assumptions, four independent universes, no duplicate, and the parent exists_functorial_boundedAbove_class_resolution uses the same clauses. Node unchanged except the lean record, whose statement is verbatim in the file. Delivered file compiles clean (nt_compile 3.6 s). FIX: fixes/LeftResolutionBoundedMinus.lean (1) H8: the theorem docstring now carries the node's 8 proof steps with the nodes they use; (2) adds a plain import of WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns, the module of the only stated proof dep. Signature unchanged; the fixed file compiles clean (2.5 s)."
+  "reviewer": "NT-stage2-cc-c14966112",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Statement correct: hypotheses (Abelian A; Preadditive C with HasZeroObject and HasFiniteCoproducts; ι Full/Faithful/Additive; Q PreservesZeroMorphisms; π with epimorphic components) match the node and FromJoel CochainComplexMinus.lean:32-36/90/208. Conclusions match: S on CochainComplex.Minus A (full subcategory, all maps, no bound witness), a : S ⟶ Minus.ι A, pointwise QuasiIso, ∃X, Nonempty(S(L)^i ≅ ιX), every upper bound b preserved. Four independent universes, no extra assumptions, lean.statement verbatim, no duplicate; provable via minusResolutionFunctor/NatTrans. Gates: no definitions, sorry only, source/blueprint docstrings and 8-step proof docstring, report has both sections. nt_compile (--json, snapshot text): clean in 1.6 s; a control error was detected. Note: re-delivery of N8's module already landed in 416b4a1356; only the Authors line and lean.by/date/note change. stmt_deps lists def-weil-abstract-derived-category without citing it in the text (accepted at the earlier review)."
  }
 }

@@ -327,5 +327,29 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-5d5bb8f52 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, every cited statement, the parent step that uses the item, and Stacks 0GJ5, 0GJ2, 03QO, 04FN, 04HX, 04FM, 03O3, 00Y6, 01KC, 01S1, 01W1, 09GT, 03PO and 03Q1, with their labels checked in tags/tags. Orgogozo 9.1.5 is not local (filed as WANTED), so the proof is correctly marked by:agent. The statement is unchanged and not weakened. The convention is right: c is a direct-image arrow t̄=>s̄ whose mate is F_s̄ -> F_t̄, as in the parent's triples. The mathematics holds. Step 1 recovers a from c using representable stalks and the inverse limit, and the germ formula checks out. In steps 2-4, q is surjective and closed, P = κ(y) ⊗_{κ(s0)} Ω_s is nonempty, and Ω_s is kept. Step 5 applies the 0GJ5 node with its exact hypotheses. Step 6 proves uniqueness by naturality against γ:1->G, using the bijective global germ for set sheaves. Small cases tested: a Galois automorphism over a field with p=id (preserved), T empty (vacuous), and a strictly henselian base. FIX made three repairs: (B3) the statement and steps 1 and 5 now cite lem-fix-geometric-stalk-topos-point for 'associated point = stalk functor'; (C5) step 4 now cites the same-unit leaf lem-trf-closed-map-specializing instead of re-deriving it; (C1/C2) step 7 was marked elementary but needs the inverse-image stalk identification (Stacks 03Q1). It is rewritten with the section (π_U,id), π_U s_B=ū_s and π_U a=ū_t written out, cites lem-weil-pbc-sets-etale-inverse-image-stalk-germ, and is now non-elementary. proof_deps is recomputed and the graph stays acyclic. Accepted tool_uses: the six declared pbc/galois tools plus the two new ones. Note: the item has no lean_audit field; it was created without one by the parent split, not by this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84b7bf193",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Read the node, all 9 stmt deps, the module, report and the declarations used. H3: the last clause quantified the comparison isos is/it existentially, so any stalk-functor automorphism (e.g. a Galois twist with p=id, t=s) absorbs the prescribed arrow and the node's 'p c' is exactly c under the canonical isomorphisms' is lost. Fixed by canonical helpers geometricPointMorphismSheafFiber (Mathlib Point.Hom.sheafFiber of precomposition with rs/rt, Stacks 04FN, bijective by geometricPointMorphism_stalk_bijection) and etaleSetPullbackSheafFiberIso (03Q1, same composite as etaleSetInverseImageStalkGerm), with the clause c ≫ rt^* = rs^* ≫ iso⁻¹ ≫ whiskerLeft p⁻¹ c' ≫ iso and endpoint equations as binders hs/ht. H4: removed etaleSetInverseImage, a literal duplicate of Scheme.etaleSetPullback. Other clauses, mate convention, universes (u, Type (u+1)) and edge cases (T empty vacuous, identity extensions) are fine; no hollow defs, only sorry, docstrings present, report sections present. nt_compile: delivered rc0, fixed rc0 with no messages; error-injection control confirms errors are reported; check_lean_text clean, statement verbatim. Fixes: module, lean-record.json, report.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ProperGeometricSpecializationLift",
+  "declaration": "AlgebraicGeometry.exists_proper_geometric_specialization_lift",
+  "file": "lean/Sheaf/TraceFormula/ProperGeometricSpecializationLift.lean",
+  "statement": "theorem exists_proper_geometric_specialization_lift {S T : Scheme.{u}} (p : T ⟶ S) [IsProper p] [Surjective p] {Ωs Ωt : Type u} [Field Ωs] [IsAlgClosed Ωs] [Field Ωt] [IsAlgClosed Ωt] (s : Spec (.of Ωs) ⟶ S) (t : Spec (.of Ωt) ⟶ S) (c : (Scheme.pointSmallEtale s).sheafFiber (A := Type (u + 1)) ⟶ (Scheme.pointSmallEtale t).sheafFiber (A := Type (u + 1))) : ∃ (Ωs' Ωt' : Type u) (_ : Field Ωs') (_ : IsAlgClosed Ωs') (_ : Field Ωt') (_ : IsAlgClosed Ωt') (rs : Spec (.of Ωs') ⟶ Spec (.of Ωs)) (rt : Spec (.of Ωt') ⟶ Spec (.of Ωt)) (s' : Spec (.of Ωs') ⟶ T) (t' : Spec (.of Ωt') ⟶ T) (c' : (Scheme.pointSmallEtale s').sheafFiber (A := Type (u + 1)) ⟶ (Scheme.pointSmallEtale t').sheafFiber (A := Type (u + 1))) (hs : rs ≫ s = s' ≫ p) (ht : rt ≫ t = t' ≫ p), c ≫ geometricPointMorphismSheafFiber (t' ≫ p) t rt ht = geometricPointMorphismSheafFiber (s' ≫ p) s rs hs ≫ (etaleSetPullbackSheafFiberIso p s').inv ≫ Functor.whiskerLeft (Scheme.etaleSetPullback p) c' ≫ (etaleSetPullbackSheafFiberIso p t').hom",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.geometricPointMorphismSheafFiber",
+   "AlgebraicGeometry.etaleSetPullbackSheafFiberIso"
+  ],
+  "note": "Reviewer FIX: the comparison isomorphisms are the canonical ones (stalk map of the morphisms of geometric points rs, rt, Stacks 04FN, bijective by lem-weil-pbc-geometric-point-morphism-stalk-bijection; inverse-image stalk identification, Stacks 03Q1), not existentially quantified; the duplicate etaleSetInverseImage is replaced by Scheme.etaleSetPullback.",
+  "fixed_by": "NT-stage2-cc-84b7bf193"
  }
 }

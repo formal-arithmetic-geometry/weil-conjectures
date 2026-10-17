@@ -226,5 +226,23 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-be7a25832 (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex, Tag 037K (lemma-geometrically-irreducible) and Tag 00I7 (lemma-separably-closed-irreducible), in full. The item is exactly 037K's equivalence of (1) and (2), unchanged. Small cases all behave correctly: R=0, Q(i)/Q, a purely inseparable extension, k[e]/e^2 and Qbar/Q. Step 2 gets the reassociation from the tensor product and the algebra-tensor universal property, and injectivity from the faithful-flatness node (it holds for any algebra D) plus the I=0 clause of the ideal-contraction node. Step 3 handles nonemptiness through the nilradical criterion. Step 4 runs the finite-subextension argument with an explicit check that (x_E y_E)^n=0 descends by injectivity. Step 5 applies 00I7 directly over k_s to A and the field M from lem-weil-common-extension-fields; this is valid because 00I7 holds over any separably closed field, so the (3)=>(4) passage is not needed. Step 6 pulls the prime nilradical back along an injective map. proof_deps equals the union of the uses, every cited id exists and is unmerged, and there is no cycle. The new node lem-zl-sepclosed-algebras-tensor-irreducible matches 00I7 hypothesis by hypothesis (arbitrary algebras, separably closed base). It holds on an imperfect separably closed k, where the tensor product is irreducible but not reduced, and C⊗_R C shows the separably-closed hypothesis is needed. It is statement-only, its blueprint ancestry is correct, and its searches are recorded; pinned Mathlib has no match. It is not a duplicate of lem-weil-pbc-field-tensor-irreducible (fields only), lem-weil-pbc-sepclosed-tensor-reduction, lem-weil-pbc-algclosed-finite-type-tensor-domain, lem-sc-irreducible-product-over-field (needs geometric irreducibility) or lem-zl-geometric-irreducibility-subalgebra-colimit. I accept the tool use of lem-weil-common-extension-fields, a generic common-overfield lemma that matches 037K's last paragraph. No SGA source is cited, no fixes were written, and no target is weakened."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f5c92a58",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement matches Stacks 037K (1)<=>(2) and the node clause by clause: arbitrary commutative R, field extensions via Algebra, finite separable via FiniteDimensional plus Algebra.IsSeparable, Spec plus IrreducibleSpace (nonempty included), recorded declarations throughout. Test fields in Type (max u v w): not below u or v, w free, equivalence true per universe. Edge cases R=0, k, k×k, k[e]/e^2, separable quadratic and inseparable L behave correctly. Node unchanged except lean; statement verbatim. No duplicate in Mathlib/slopmaster2/side. No new definitions, only sorry, source and blueprint docstrings, six-step proof docstring, autoImplicit off, 3-file commit. nt_compile --json on the snapshot module: rc=0, clean, 2.1 s; an injected error was reported, confirming the check. Worker report real; second-reading section is the standard post-10-17 direct-delivery notice."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest",
+  "declaration": "Algebra.irreducibleSpace_tensorProduct_iff_finite_separable",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricIrreducibilityFiniteSeparableTest.lean",
+  "statement": "theorem irreducibleSpace_tensorProduct_iff_finite_separable (k : Type u) (R : Type v) [Field k] [CommRing R] [Algebra k R] : (∀ (L : Type (max u v w)) [Field L] [Algebra k L], IrreducibleSpace (AlgebraicGeometry.Spec (CommRingCat.of (R ⊗[k] L)))) ↔ (∀ (E : Type (max u v w)) [Field E] [Algebra k E] [FiniteDimensional k E] [Algebra.IsSeparable k E], IrreducibleSpace (AlgebraicGeometry.Spec (CommRingCat.of (R ⊗[k] E))))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

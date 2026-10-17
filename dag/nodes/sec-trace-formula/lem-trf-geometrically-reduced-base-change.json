@@ -194,5 +194,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-6f62f5a87 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks Tag 034N (algebra.tex 10129-10151), the definition of geometrically reduced (10046) and the limit-argument lemma 00I3 (10109-10127). The statement is unchanged and matches the source hypothesis by hypothesis; the item's A tensor L is the source's K tensor S after a swap. The delivery adds no new nodes. Step 1 gets injectivity of i tensor 1_A from the 'in particular' clause of flat-tensor-exact together with flatness of k-vector spaces. Step 2: a finitely generated k-subalgebra B of R is reduced and Noetherian (wf-affine-noetherian-components); the reviewed node reduced-noetherian-total-ring-fractions gives Q(B) as a finite product of fields; B -> Q(B) is injective by the kernel criterion in module-localization; B=0 is handled separately. Step 3 is the finite-product tensor isomorphism, checked both ways, with the insertion maps used only as linear maps. Step 4 applies the hypothesis to each K_i, then swap, coordinatewise reducedness and descent along the injection. Step 5 is the finite-support reduction. proof_deps equals the union of the step uses. I tested A=0, R=0, R=k and R=k[x,y]/(xy), and the counterexample k=F_p(t), A=k(t^{1/p}) is excluded by the hypothesis. The parent separable-scalar-restriction applies the item with exactly these hypotheses. No duplicate: the related nodes need perfectness or separable generation, or state 00I3. It is not a Mathlib leaf: Mathlib's IsGeometricallyReduced is defined via the algebraic closure, with a TODO for the comparison. slopmaster2's isReduced_tensorProduct_of_forall_residueField implies the item but does not state it exactly; I note it as a later shortcut, not a fault. I accept the declared tool use of lem-weil-pbc-reduced-noetherian-total-ring-fractions (sk-thm-p1, reviewed): it is the 02LX/00FR/00EU input of the source proof and replaces no step of sk-i-curve-zero. No cycle, no SGA, no coefficient category or target involved. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f40c1339",
+  "group": "N9",
+  "result": "pass",
+  "note": "Delivery 2f40c1339ea5 is one commit (node lean field, report, module); lean.statement is verbatim. Every clause matches the node and Stacks 034N/definition-geometrically-reduced (algebra.tex 10046, 10129-10151): Field k; CommRing+Algebra A, R; IsReduced R; IsReduced (R ⊗[k] A); Mathlib IsReduced and TensorProduct; no extra hypotheses. The test-field universe max u v w is equivalent to all extensions (finitely generated subextension, flatness of A, cardinality bound), neither stronger nor vacuous; universes independent; same convention as the side isSeparableExtension_of_forall_isReduced_tensorProduct. No duplicate: Mathlib IsGeometricallyReduced uses the algebraic closure only (TODO), other lemmas have other hypotheses, name unused. Edge cases A=0, R=0, non-domain R, non-finite-type R, imperfect k covered. Docstrings carry source and blueprint id and all 5 proof steps; proof only sorry; no definitions. Second-reading section is the standard post-2026-10-17 line, accepted as policy. nt_compile.py --json on the snapshot file: 1.7 s, rc 0, no errors or warnings (the tool's error/warning output checked with a test file). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyReducedBaseChange",
+  "declaration": "isReduced_tensorProduct_of_forall_fieldExtension",
+  "file": "lean/Sheaf/RingTheory/GeometricallyReducedBaseChange.lean",
+  "statement": "theorem isReduced_tensorProduct_of_forall_fieldExtension (k : Type u) (A : Type v) (R : Type w) [Field k] [CommRing A] [CommRing R] [Algebra k A] [Algebra k R] (hgeom : ∀ (L : Type (max u v w)) [Field L] [Algebra k L], IsReduced (A ⊗[k] L)) [IsReduced R] : IsReduced (R ⊗[k] A)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

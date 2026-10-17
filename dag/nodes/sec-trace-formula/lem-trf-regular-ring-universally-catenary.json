@@ -153,5 +153,23 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-52cb0199d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited definition, unit sk-i-curve-zero, the citer lem-trf-integers-excellent, and Stacks algebra.tex 00NI/00NL (lines 25463/25489), 00NM (line 25607) and 00NQ (line 25732), with labels checked in tags/tags. The item statement is exactly Noetherian + every R_p regular local => universally catenary, unfolded as in def-exc-excellent-ring; nothing is weakened. Edge cases checked: zero ring (vacuous), fields and Z, and infinite-dimensional regular rings (no bound on dim is assumed or needed). Mathlib has no Cohen-Macaulay or catenarity results (grep, and RegularLocalRing/Defs and Polynomial have only the definitions and basic lemmas). The blueprint main-20261015 and master have no same_as candidate. New node lem-trf-cm-ring-universally-catenary (kept) states Stacks 00NM exactly, with Stacks' definition of a CM ring (depth = dim at every R_p), and passes B1-B7. It is strictly more general than the item, not a relabelling, and no DAG node states 00NM (lem-weil-pbc-cm-local-maximal-chain-length is only an ingredient of its proof). FIX (C5): lem-trf-regular-local-cm is a true statement, but it is a two-line consequence of the reviewed nodes lem-weil-pbc-regular-local-generators-regular-sequence (00NQ: the d generators form a regular sequence, so depth >= d) and lem-weil-pbc-depth-le-support-dimension (00LK applied to M = R_p: depth <= d). I dropped it and rewrote Step 1 to write out those two lines with citations, including the d = 0 case. I removed the dropped node from Step 2's uses and recomputed proof_deps. The two sk-thm-p1 nodes are declared and accepted in split_report.tool_uses as generic commutative-algebra black boxes. No other node cites the dropped node. No SGA source is used, and the base-change and coefficient checks do not apply (this is not a target node). Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-regular-ring-universally-catenary.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52af5e980",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Theorem IsRegularRing.isUniversallyCatenary (R : Type u) [CommRing R] [IsRegularRing R] : IsUniversallyCatenary R := sorry matches the node. Mathlib IsRegularRing gives exactly Noetherian plus regular local at every prime, with no stronger assumption and no dimension bound. Q21's IsUniversallyCatenary, IsCatenaryRing and chain predicates, read in full, unfold to the node's explicit clauses and Stacks 00NL; Stacks 00NM and 00NQ checked in algebra.tex. Same-universe quantification comes from the landed dependency and loses nothing. Edge cases checked: zero ring, fields, d=0, equal endpoints, infinite dimension. No duplicate declaration in Mathlib or side lean/Sheaf. Node differs from the published node only in lean, and lean.statement is verbatim in the file. Docstrings carry source and blueprint tags and both proof steps; no definitions, only sorry. Report has real Worker report and Second reading by Q24 sections. nt_compile.py --json exited 0 in 2.3 s with no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularRingUniversallyCatenary",
+  "declaration": "IsRegularRing.isUniversallyCatenary",
+  "file": "lean/Sheaf/RingTheory/RegularRingUniversallyCatenary.lean",
+  "statement": "theorem IsRegularRing.isUniversallyCatenary (R : Type u) [CommRing R] [IsRegularRing R] : IsUniversallyCatenary R",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

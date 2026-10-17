@@ -284,5 +284,49 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-21cb3010a (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement. I checked Stacks 03FD (sites-cohomology.tex l.1862, no commutativity used) and 015E (derived.tex l.5717); tags 05TA and 0736 are present. Step 1: forgetful(1) gives V exact; v exact and vG_W=G_{0,W}V are elementary. Step 2: the ringed-site 03FD comparison node (I checked its proof, nothing commutative) plus the one-term injective resolution give H^q(W,VJ)=0, so VJ is acyclic and nowhere claimed injective. Step 3: the dplus representative, Grothendieck at Z_C and leray-acyclicity(3) applied to id_VL give the iso unit; bounded-below injectives are K-injective, so the conventions agree. Step 4: the cube lemma's fac property identifies R(a) with a_W; with P=Q=id, U=U'=V, a..d=id and e,e0 the restrictions, it yields naturality in W. Step 5: the cube with f^*_Λ, f^{-1} and d from lem-pe-constant-left-module-inverse-image; the unit agreement is the underived hypothesis and no claim that P preserves injectives is used. Step 6 is elementary. Small cases: zero ring; point site with F_p (forgotten injective is not injective in Ab but is evaluation-acyclic); M_2(F_p); negative degrees. The étale/commutative nodes etale-module-cohomology-forget, derived-module-underlying-comparison and sbc-injective-module-forget-evaluation-acyclic are special cases, not duplicates. There are no new nodes. I accept the six declared generic tool_uses. Minor, no change: the sheafification-existence hypothesis in step 1 is justified in words with no node cited, as in the reviewed comparison node. The unit binding mismatch for sk-prop-sf-comparison was already there and is left for maintenance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9bed266c",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_deps, the ConstantLeftModuleInverseImageLift structure, the upstream PlusBaseChange/PlusComp/ExactFunctor APIs and the full module. lean.statement is verbatim in the file and only the node's lean field changed. All five conjuncts match the node: comparison := rightDerivedFunctorPlusBaseChange of the identity is IsIso for every W; bounded-below injective complexes give termwise R^{q+1}G0 vanishing after V plus both units invertible, with no injectivity of VL claimed; the restriction square has the right direction; the global-pullback square uses an element-normalized, hence unique, GlobalPullback built by pullbackSection through d.pointIso, and is true by moduleSetIso_compatibility and the cube lemma; H^n is identified for all n in Z. No extra hypotheses (any Ring, EnoughInjectives only on the two sheaf categories, one free w, common u as the node says). No hollow definitions; the only sorry theorems are the main theorem and the abelianInverseExact helper (true, proof docstring, listed in declarations). Edge cases checked: empty site, zero ring, noncommutative ring, negative degrees, F_p point site. Report has both required sections. nt_compile.py --json on the snapshot file: clean, 10.3 s, and the tool was confirmed to report errors. Minor, no change: abelianInverseExact could later move to the dependency module."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget",
+  "declaration": "CategoryTheory.leftModuleDerivedEvaluationForget",
+  "file": "lean/Sheaf/CategoryTheory/LeftModuleDerivedEvaluationForget.lean",
+  "statement": "theorem leftModuleDerivedEvaluationForget {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] [HasDerivedCategory.{w} (Modules J Λ)] [HasDerivedCategory.{w} (Sheaf J AddCommGrpCat.{u})] [HasDerivedCategory.{w} (ModuleCat.{u} Λ)] [HasDerivedCategory.{w} AddCommGrpCat.{u}] [EnoughInjectives (Modules J Λ)] [EnoughInjectives (Sheaf J AddCommGrpCat.{u})] : (∀ W : C, IsIso (comparison J Λ W)) ∧ (∀ (W : C) (A : CochainComplex.Plus (Modules J Λ)), (∀ i : ℤ, Injective (A.obj.X i)) → (∀ (i : ℤ) (q : ℕ), IsZero (((G₀ J W).rightDerived (q + 1)).obj ((V J Λ).obj (A.obj.X i)))) ∧ IsIso ((G J Λ W).rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient (Modules J Λ)).obj A)) ∧ IsIso ((G₀ J W).rightDerivedFunctorPlusUnit.app ((V J Λ).mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient (Modules J Λ)).obj A)))) ∧ (∀ (W W' : C) (f : W' ⟶ W) (X : DerivedCategory.Plus (Modules J Λ)), (v Λ).mapDerivedCategoryPlus.map ((Functor.rightDerivedFunctorPlusNatTrans (restriction J Λ f)).app X) ≫ (comparison J Λ W').app X = (comparison J Λ W).app X ≫ (Functor.rightDerivedFunctorPlusNatTrans (restriction₀ J f)).app ((V J Λ).mapDerivedCategoryPlus.obj X)) ∧ (∀ {D : Type u} [SmallCategory D] (K : GrothendieckTopology D) [HasWeakSheafify K RingCat.{u}] [HasDerivedCategory.{w} (Modules K Λ)] [HasDerivedCategory.{w} (Sheaf K AddCommGrpCat.{u})] [EnoughInjectives (Modules K Λ)] [EnoughInjectives (Sheaf K AddCommGrpCat.{u})] (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (R : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ R) (hL : PreservesFiniteLimits L) (d : ConstantLeftModuleInverseImageLift J K Λ L R adj hL) (T : C) (hT : IsTerminal T) (S : D) (hS : IsTerminal S), ∃ b : GlobalPullback d hT hS, ∀ X : DerivedCategory.Plus (Modules J Λ), (v Λ).mapDerivedCategoryPlus.map ((globalModulePullback b).app X) ≫ (comparison K Λ S).app (d.moduleFunctor.mapDerivedCategoryPlus.obj X) ≫ (G₀ K S).rightDerivedFunctorPlus.map ((derivedUnderlying d).hom.app X) = (comparison J Λ T).app X ≫ (globalAbelianPullback b).app ((V J Λ).mapDerivedCategoryPlus.obj X)) ∧ (∀ (W : C) (X : DerivedCategory.Plus (Modules J Λ)) (n : ℤ), IsIso (((v Λ).mapDerivedCategoryPlusHomologyFunctorIso n).hom.app ((G J Λ W).rightDerivedFunctorPlus.obj X) ≫ (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u} n).map ((comparison J Λ W).app X)))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.LeftModuleDerivedEvaluation.constantPresheafModules",
+   "CategoryTheory.LeftModuleDerivedEvaluation.G",
+   "CategoryTheory.LeftModuleDerivedEvaluation.G₀",
+   "CategoryTheory.LeftModuleDerivedEvaluation.v",
+   "CategoryTheory.LeftModuleDerivedEvaluation.evaluationIdentity",
+   "CategoryTheory.LeftModuleDerivedEvaluation.restriction",
+   "CategoryTheory.LeftModuleDerivedEvaluation.restriction₀",
+   "CategoryTheory.LeftModuleDerivedEvaluation.gAdditive",
+   "CategoryTheory.LeftModuleDerivedEvaluation.g₀Additive",
+   "CategoryTheory.LeftModuleDerivedEvaluation.vPreservesFiniteColimits",
+   "CategoryTheory.LeftModuleDerivedEvaluation.comparison",
+   "CategoryTheory.LeftModuleDerivedEvaluation.pullbackSection",
+   "CategoryTheory.LeftModuleDerivedEvaluation.abelianInverseExact",
+   "CategoryTheory.LeftModuleDerivedEvaluation.moduleInverseAdditive",
+   "CategoryTheory.LeftModuleDerivedEvaluation.moduleInverseLimits",
+   "CategoryTheory.LeftModuleDerivedEvaluation.moduleInverseColimits",
+   "CategoryTheory.LeftModuleDerivedEvaluation.abelianInverseAdditive",
+   "CategoryTheory.LeftModuleDerivedEvaluation.abelianInverseLimits",
+   "CategoryTheory.LeftModuleDerivedEvaluation.abelianInverseColimits",
+   "CategoryTheory.LeftModuleDerivedEvaluation.GlobalPullback",
+   "CategoryTheory.LeftModuleDerivedEvaluation.derivedUnderlying",
+   "CategoryTheory.LeftModuleDerivedEvaluation.globalModulePullback",
+   "CategoryTheory.LeftModuleDerivedEvaluation.globalAbelianPullback",
+   "CategoryTheory.leftModuleDerivedEvaluationForget"
+  ]
  }
 }

@@ -21,7 +21,8 @@
   "def-weil-pbc-scheme-reduction",
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "def-sc-generic-point"
+  "def-sc-generic-point",
+  "def-trf-orgogozo-induction-data"
  ],
  "proof": [
   {
@@ -498,5 +499,24 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-cfcae5797 (reviewer sub-agent of L); spot-checked: I read in full the item (16 steps), the full statements of all 33 cited nodes, unit sk-i-curve-zero, the chapter, and the parent lem-trf-excellent-base-marked-semistable-curve, whose step 1 is the only citer. The delivery has no new nodes, and the statement is unchanged and is not a target. Source check: ILO, Travaux de Gabber, Exposé IX §1.3, printed p.132 (radicial extension η′, normalize Y in η′, normalize X in the fraction field of (X_η′)_red, reduced inverse image of Z, then Stein factorization). The proof follows that sequence. De Jong 1997 is correctly marked WANTED, with proof_origin agent. Every hypothesis of every cited node holds where it is used. In detail: dominance gives (A∖0)^{-1}R a domain, so the generic fibre is integral. Normalization-geonormal-insep and normalization-exists apply to (X_{k1})_red, which is irreducible because the purely inseparable base change is a homeomorphism; geonormal-dim-one-smooth then needs only dim ≤ 1. The boundary is nowhere dense, so dim 0, finite, Noetherian, with finitely many components; pur-finite-inseparable then applies. Q(H)=H gives a product of fields, the separability argument via K̄ is correct, and the finite-étale criterion applies. Normalization-inseparable-base-change has its geometric-normality hypothesis from Step 2. Nagata (p=(0), so N-2) makes the normalization B_1 of B in K finite. p^{-1}(ξ)=Spec(κ(C)⊗_kK) is a single point, so its closure W is a component; W is excellent and finite over C. On the normalization C_1, T^{-1} of the integral closure equals the integral closure of T^{-1}R (0307), which identifies (C_1)_{η1} with N and avoids the false general base change of normalization. Every hypothesis of the Stein node holds. The fibre of q_0 over η_1 is Spec L, so the boundary is finite étale over L because minimal polynomials over L divide those over K. b=b_1q_0 is finite, proper and surjective. Edge cases checked: Z empty, B a field, characteristic 0, an imperfect inseparable boundary point (which needs the second extension), vertical components, nontrivial separable constants. Every dependency lies on the transitive route of sk-i-curve-zero, and I accept the nine declared tool_uses. Not a duplicate of lem-trf-generic-smooth-boundary-preparation, lem-trf-projective-inseparable-spread-normalization or lem-trf-alteration-relative-curve-preparation: those assume a field or trait base with projective Y. There are no SGA citations and no fixes. Full checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b828b0e5",
+  "group": "NO",
+  "result": "pass",
+  "note": "Every node clause matches the Lean (proper dominant f, integral excellent Noetherian C and B, generic fibre topologicalKrullDim = 1, Z : Closeds with Z ≠ ⊤; output alterations a and b, proper dominant f₀, a ≫ f = f₀ ≫ b, smooth geometrically integral generic curve of dimension 1, Z₀ = vanishingIdeal of the preimage, nowhere dense, generic fibre IsFinite and Etale over κ(η₀)). Orgogozo.IsAlteration's component clause is automatic on integral schemes. No stronger assumptions; one universe; statement verbatim; one sorry; docstrings carry the source place, blueprint and the 16 proof steps. Only stmt_deps gained the landed def-trf-orgogozo-induction-data (no cycle). nt_compile --json: rc=0, no errors; a broken copy gave a real error, so the check is genuine."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentBaseGenericCurvePreparation",
+  "declaration": "AlgebraicGeometry.exists_excellentBaseGenericCurvePreparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentBaseGenericCurvePreparation.lean",
+  "statement": "theorem exists_excellentBaseGenericCurvePreparation {C B : Scheme.{u}} [IsIntegral C] [IsIntegral B] [IsLocallyNoetherian C] [CompactSpace C] [IsLocallyNoetherian B] [CompactSpace B] (hC : IsExcellentScheme C) (hB : IsExcellentScheme B) (f : C ⟶ B) [IsProper f] [IsDominant f] (hdim : topologicalKrullDim (f.fiber (genericPoint B)) = 1) (Z : Closeds C) (hZ : Z ≠ ⊤) : ∃ (C₀ B₀ : Scheme.{u}) (a : C₀ ⟶ C) (b : B₀ ⟶ B) (f₀ : C₀ ⟶ B₀), IsIntegral C₀ ∧ IsExcellentScheme C₀ ∧ IsLocallyNoetherian C₀ ∧ CompactSpace C₀ ∧ IsIntegral B₀ ∧ IsExcellentScheme B₀ ∧ IsLocallyNoetherian B₀ ∧ CompactSpace B₀ ∧ IsAlteration a ∧ IsAlteration b ∧ IsProper f₀ ∧ IsDominant f₀ ∧ a ≫ f = f₀ ≫ b ∧ ∃ η₀ : B₀, IsGenericPoint η₀ Set.univ ∧ Smooth (f₀.fiberToSpecResidueField η₀) ∧ GeometricallyIntegral (f₀.fiberToSpecResidueField η₀) ∧ topologicalKrullDim (f₀.fiber η₀) = 1 ∧ IsNowhereDense (a ⁻¹' (Z : Set C)) ∧ IsFinite (((Scheme.IdealSheafData.vanishingIdeal (Z.preimage a.continuous)).subschemeι ≫ f₀).fiberToSpecResidueField η₀) ∧ Etale (((Scheme.IdealSheafData.vanishingIdeal (Z.preimage a.continuous)).subschemeι ≫ f₀).fiberToSpecResidueField η₀)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed Orgogozo IsAlteration and IsExcellentScheme interfaces. On integral source and target schemes the component clause of IsAlteration follows from surjectivity. The reduced inverse image of the closed subset is Mathlib vanishingIdeal of its continuous preimage, followed by subschemeι."
  }
 }

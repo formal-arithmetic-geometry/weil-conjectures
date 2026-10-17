@@ -173,5 +173,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-9f5f8d819 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks algebra.tex 10080-10285 (030U, 034N, 0C2X, 0C2Y and the definition of geometrically reduced) in full. Item 0C2Y: the statement matches Stacks with nothing added or dropped. Step 1: the empty transcendence basis makes k_1/k separably generated, so the 030U node (K=k_1, S=E) applies, then 034N over k_1 with R=E⊗k_1, then tensor-cancel with k→k_1; hypotheses checked. Step 2: the identity E⊗_{k_1}A≅(E⊗_kA)⊗_{k_1⊗k_1}k_1 cited the tensor-cancel node, which does not state it (C4). The localization-of-reduced argument said 'a power of s kills a power of x', which is imprecise. Both repaired in fixes: explicit balanced maps α,β with inverse check, ux^n=0 ⇒ (ux)^n=0 ⇒ ux=0, and tensor-cancel removed from step 2's uses. New node 034N: correct, tested on R=k, R=0, A=k, a finite product of fields and an inseparable non-example. Repaired B3: def-weil-field added to stmt_deps and reduced defined inline. Mathlib's IsGeometricallyReduced uses the algebraic closure (with a TODO on the equivalence), so the node is not a leaf. New node 0C2X: correct, tested on k_1=k, C/R and the inseparable counterexample; the 'usual kernel criterion' wording is spelled out. No duplicates: lem-weil-pbc-finite-separable-multiplication-etale covers finite extensions and étaleness only, lem-pur-finite-field-derived-tensor-summand covers finite fields only, there is no blueprint same_as, and neither new node restates a clause of the item. Accepted tool use: lem-weil-pbc-separably-generated-tensor-reduced (030U input). No SGA cited; not a target node.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54e1376bb",
+  "group": "NY",
+  "result": "pass",
+  "note": "Node unchanged except the lean record; lean.statement matches the file verbatim. Every clause matches the node and Stacks 0C2Y/030S. Test fields in universe max u v w t, which is not too small. Edge cases k1=k, A=0, A=k1 and the inseparable counterexample checked. No definitions, body is sorry only, docstrings name source and blueprint and carry both repaired proof steps, lines under 100, non-public imports are exactly the proof-dependency modules. No duplicate in Mathlib or the project: IsGeometricallyReduced uses the algebraic closure and its TODO leaves the all-extensions form unproved. nt_compile --json on the snapshot file: rc=0, no diagnostics, 1.8 s; a broken copy confirmed the tool reports errors. The NY second reading is by the author and says so, but it matches each clause."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricReducednessSeparableScalarRestriction",
+  "declaration": "Algebra.forall_isReduced_tensorProduct_iff_of_isSeparable",
+  "file": "lean/Sheaf/RingTheory/GeometricReducednessSeparableScalarRestriction.lean",
+  "statement": "theorem forall_isReduced_tensorProduct_iff_of_isSeparable (k : Type u) (k₁ : Type v) (A : Type w) [Field k] [Field k₁] [CommRing A] [Algebra k k₁] [Algebra k₁ A] [Algebra k A] [IsScalarTower k k₁ A] [Algebra.IsSeparable k k₁] : (∀ (E : Type (max u v w t)) [Field E] [Algebra k E], IsReduced (E ⊗[k] A)) ↔ (∀ (E : Type (max u v w t)) [Field E] [Algebra k₁ E], IsReduced (E ⊗[k₁] A))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

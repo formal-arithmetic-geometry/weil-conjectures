@@ -245,16 +245,16 @@
   "file": "lean/Sheaf/AlgebraicGeometry/FittingIdealGenerateLocally.lean",
   "statement": "theorem fitting_ideal_generate_locally (S : Scheme.{u}) (F : S.Modules) [F.IsFiniteType] [F.IsQuasicoherent] (r : ℕ) : (∀ (U : S.affineOpens) (n : ℕ) (π : (Fin n → Γ(S, U.1)) →ₗ[Γ(S, U.1)] Γ(F, U.1)), Function.Surjective π → (fittingIdealSheaf F r).ideal U = π.presentationFittingIdeal r) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S), (∀ t : T, ∃ U : T.Opens, t ∈ U ∧ ∃ s : ULift.{u} (Fin r) → (((tensorPullback g).obj F).over U).sections, Epi ((((tensorPullback g).obj F).over U).freeHomEquiv.symm s)) ↔ ∃ h : T ⟶ Scheme.Opens.toScheme (X := S) (fittingIdealSheaf F r).support.compl, h ≫ Scheme.Opens.ι (X := S) (fittingIdealSheaf F r).support.compl = g) ∧ (∀ x : S, (x ∉ (fittingIdealSheaf F r).support ↔ Function.Surjective ((RingedSpace.moduleStalkFunctor S.toRingedSpace x).map (fittingIdealSheaf F r).toModulesι).hom) ∧ (x ∉ (fittingIdealSheaf F r).support ↔ ∃ U : S.Opens, x ∈ U ∧ ∃ s : ULift.{u} (Fin r) → (F.over U).sections, Epi ((F.over U).freeHomEquiv.symm s)) ∧ (x ∉ (fittingIdealSheaf F r).support ↔ ∃ s : Fin r → (RingedSpace.moduleStalkFunctor S.toRingedSpace x).obj F, Submodule.span (S.presheaf.stalk x) (Set.range s) = ⊤))",
   "branch": "newtargets-dag",
-  "by": "Q108",
-  "date": "2026-10-17",
+  "by": "Q106",
+  "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7d19ac20c",
-  "group": "Q108",
-  "result": "pass",
-  "note": "Read the node, all 7 stmt_deps, Stacks 0C3F, both delivered modules, the report, and the declarations used (toModules/toModulesι, moduleStalkFunctor, ofIdeals, over, tensorPullback, GeneratingSections). Clauses match: finite type + quasi-coherent only; clause (1) for every g : T ⟶ S with the recorded tensorPullback and the Epi generating predicate on restrictions, iff a factorization through support.compl; clause (2) gives all three equivalences (ideal stalk surjective, neighbourhood generation, stalk span = ⊤ over the local ring). The affine conjunct pins fittingIdealSheaf (sup over presentations + ofIdeals, real data) to every presentation ideal and is true by 07Z8/07ZA(3) and quasi-coherence. New node def-trf-fitting-ideal-sheaf is legitimate and not a duplicate. Edge cases r=0, F=0, n≤r, empty S/T, non-f.p. and non-flat are covered. One universe u, nothing unbound; lean.statement verbatim for both nodes; source/blueprint docstrings and step-by-step proof plan present; only sorry. nt_compile of both files: no diagnostics (4.1 s, 15.3 s); an error probe confirmed that errors are reported. The second reading is a dispatcher-mandated self-check, which is substantive and was accepted in earlier reviews. No findings."
+  "reviewer": "NT-stage2-cc-efe528654",
+  "group": "Q106",
+  "result": "fix",
+  "note": "Delivery re-delivers an already-landed item (Q108, reviewed by NT-stage2-cc-7d19ac20c, batch 416b4a1356): the module is byte-identical to the landed one except 'Authors: SHEAF group Q106' (was Q108), and the node only changes lean.by and lean.date; the worker report does not say it is a copy. FIX: fixes/FittingIdealGenerateLocally.lean restores the Q108 attribution and is identical to the landed module. Independent check: hypotheses are only finite type + quasi-coherent; the affine conjunct pins fittingIdealSheaf (ofIdeals of the supremum over presentations, real data) to each presentation ideal, true by 07Z8/07ZA(3); clause (1) holds for every g with tensorPullback and the Epi generating predicate iff a factorization through support.compl; clause (2) gives all three equivalences (toModulesι stalk surjective, neighbourhood generation, stalk span = top over the local ring). Edge cases r=0, n<=r, F=0, empty S/T, non-f.p., non-flat; one universe u; lean.statement verbatim; source/blueprint docstrings and proof plan present; only sorry. nt_compile: clean, 5.4 s; an error probe was reported. No mathematical findings."
  }
 }

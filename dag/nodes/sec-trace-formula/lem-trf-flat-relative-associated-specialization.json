@@ -19,7 +19,10 @@
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension",
   "def-pc-module-pullback",
-  "def-kun-dimension"
+  "def-kun-dimension",
+  "def-trf-relative-assassin",
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof": [
   {
@@ -363,5 +366,28 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-ca684bf25 (reviewer sub-agent of L); spot-checked: Read Stacks 0GSI (all three proof paragraphs), 0GSH, 0GSG (more-morphisms.tex), 05DC (divisors.tex) and 00QK (algebra.tex), and checked the tags against tags/tags. The item statement is unchanged and faithful to 0GSI: f locally of finite type, F quasi-coherent of finite type, flatness only at x. The extra equality dim_x Y_s = dim C comes from the source's second paragraph. All ten steps check against the statements they cite. Step 4 gets flatness from the pointwise stalk extension and association of y' from 05DC, using going-down to show y' lies over y. Step 6 replaces prime avoidance correctly: it uses the radical equality, the existing nonzerodivisor lemma, and a lift of a power of h. Step 7 applies 0GSG with u=g, then localizes to reach the generic-fibre stalk at y' and the contradiction. Step 8 shows x' is a component generic point of all of Y_s x s'. Step 9 applies 00QK on an affine chart where A injects into D and the special fibre is nonempty. Step 10 uses local fibre-dimension base change twice and closes the chain of equalities. uses equals proof_deps and there is no cycle. The four new nodes are faithful to their sources, statement-only, with correct ancestry, same_as=[] and all three search kinds recorded. Checked on small cases (D=A, A[u], A[u,v]/(uv-pi), A[1/pi] excluded; identity and inseparable field extensions; A a field). rg over dag/nodes found no duplicates (the Bourbaki flat-base-change node, fibre-component-relative-associated and the Nagata valuation nodes all differ), and no new node restates a clause of the item. No SGA is cited. Accepted the 13 declared generic tool_uses. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-082400ea0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0GSI clause by clause: LocallyOfFiniteType f; F IsQuasicoherent+IsFiniteType; Y = vanishingIdeal(closure{y}).subscheme (real reduced induced structure); Y_s = fiber of subschemeι≫f; C irreducible component with generic point x; flatness pointwise only (Module.Flat of stalk over S-stalk via stalkMap), not global IsFlatOver; conclusions: ambient image in relativeAssassin, topologicalKrullDimAt x = dim C, dim C = dim fiber over f y. New def-trf-relative-assassin (02OJ/05AT) uses element-annihilator associatedPrimes on moduleStalkFunctor stalk of tensorPullback to own fibre via asFiber; real data, not duplicated (only structure-sheaf associatedPoints exists; no relativeAssassin in side clone 3f3f25b66d). Item statement unchanged; lean.statement verbatim in file; added stmt_deps used; docstrings carry source/blueprint and the 10-step proof; single sorry; no universe restriction. nt_compile.py --json: both modules clean; scratch check gave the expected signature, axioms propext/sorryAx/Classical.choice/Quot.sound, and a deliberate error was reported. Second-reading section records post-2026-10-17 policy. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatRelativeAssociatedSpecialization",
+  "declaration": "AlgebraicGeometry.flat_relative_associated_specialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatRelativeAssociatedSpecialization.lean",
+  "statement": "theorem flat_relative_associated_specialization {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (y : X) (hy : y ∈ Scheme.Modules.relativeAssassin f F) (s : S) (C : Set ((f.associatedPointClosureToBase y).fiber s)) (hC : C ∈ irreducibleComponents ((f.associatedPointClosureToBase y).fiber s)) (x : (f.associatedPointClosureToBase y).fiber s) (hx : IsGenericPoint x C) (hflat : Module.Flat (S.presheaf.stalk (f (f.associatedPointClosureFiberToAmbient y s x))) ((ModuleCat.restrictScalars (f.stalkMap (f.associatedPointClosureFiberToAmbient y s x)).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace (f.associatedPointClosureFiberToAmbient y s x)).obj F))) : f.associatedPointClosureFiberToAmbient y s x ∈ Scheme.Modules.relativeAssassin f F ∧ topologicalKrullDimAt x = topologicalKrullDim C ∧ topologicalKrullDim C = topologicalKrullDim ((f.associatedPointClosureToBase y).fiber (f y))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.associatedPointClosureToBase",
+   "AlgebraicGeometry.Scheme.Hom.associatedPointClosureFiberToAmbient",
+   "AlgebraicGeometry.flat_relative_associated_specialization"
+  ]
  }
 }

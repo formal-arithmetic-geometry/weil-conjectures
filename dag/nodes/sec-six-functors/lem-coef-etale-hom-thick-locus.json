@@ -285,5 +285,42 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-c37fb119c (reviewer sub-agent of L); spot-checked: I read the item, all 18 cited statements, parent thm-coef-finite-hom (step 3 uses this item), the unit and chapter, the blueprint thm-coef-finite-hom proof (master and main-20261015 match), and Stacks 0A90/0A8M (proof, sign rules) and 08JC. The statement is true, not weakened, and has no flatness or boundedness hypothesis. Test cases: zero objects, A=B, nonflat Z->Z/2 on a point. Step 2's unsigned currying matches Stacks 0A8M, and I checked by hand that it is a chain map. Step 4 signs, recomputed: f->(-1)^a f is a chain iso Hom(P[1],I)->Hom(P,I)[-1]; tau with sign (-1)^a is a chain map; e_{K[1]}=e_K tau(s x 1) holds because the total sign is (-1)^{2a}=1. Step 5's two transposes reduce to Step 1's model identity for mu, sigma and tau. Step 6 checks the connecting square with the common reversal sign. Steps 7-9 (shifts, 2-of-3 via 014A, explicit retract inverse) are correct. Step 1 takes the explicit model formula for mu from the Stacks 07A4 construction, which I accept as the meaning of 'canonical'. No new nodes. No duplicate: lem-sf-generating-class-determination assumes the shift compatibility this item proves, and the rational/restriction scalar-Hom nodes concern other functors. Accepted tool_uses: lem-pc-kflat-resolution, lem-sbc-derived-scalar-extension-counit-shift, lem-sc-derived-hom-tensor-total, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent. The three lem-pur/prop-pur declarations are on the route already (sk-def-sf-operations), so they are redundant but harmless. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ce2b6e27",
+  "group": "NC",
+  "result": "fix",
+  "note": "EtaleHomShiftNormalization's factor n.negOnePow pins s_n = eps(n)(-1)^{nj}. The CommShift addition rule needs eps(a+b) = (-1)^{ab} eps(a) eps(b), which fails at a=b=1 and against the zero rule at (1,-1). So no sA exists and the main theorem was false for nonempty X. The cone test on Z -3-> Z shows eps(1) = -1 is right. Fixed by ((n*(n+1))/2).negOnePow, which is Mathlib's Cochain.leftShift sign at -n and gives the node's (-1)^a at n=-1. Docstrings, record note and report updated; the statement is unchanged. Also checked: canonical mu from exists-unique, transpose fixes v, both shift composites match Mathlib's comp/op formulas, all 5 thick-locus conditions, no flatness, internal-Hom dependency record restored, docstrings complete, only the two node-owned theorems use sorry. nt_compile: delivered file 22.1 s clean, fixed file 17.4 s clean."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleHomThickLocus",
+  "declaration": "AlgebraicGeometry.Etale.etaleHomComparison_thickLocus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleHomLeft",
+   "AlgebraicGeometry.Etale.EtaleHomRight",
+   "AlgebraicGeometry.Etale.EtaleHomTensorComparison",
+   "AlgebraicGeometry.Etale.EtaleHomTensorModelNormalization",
+   "AlgebraicGeometry.Etale.IsEtaleHomTensorCanonical",
+   "AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique",
+   "AlgebraicGeometry.Etale.etaleHomTensorComparison",
+   "AlgebraicGeometry.Etale.IsEtaleHomTranspose",
+   "AlgebraicGeometry.Etale.IsEtaleHomNaturalInM",
+   "AlgebraicGeometry.Etale.etaleHomTensorShiftCancellation",
+   "AlgebraicGeometry.Etale.EtaleHomShiftNormalization",
+   "AlgebraicGeometry.Etale.etaleHomScalarCommShift",
+   "AlgebraicGeometry.Etale.IsEtaleHomReversedExact",
+   "AlgebraicGeometry.Etale.IsEtaleHomThickIsoLocus",
+   "AlgebraicGeometry.Etale.etaleHomComparison_thickLocus"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EtaleHomThickLocus.lean",
+  "statement": "theorem etaleHomComparison_thickLocus (X : Scheme.{u}) (φ : A →+* B) : ∃ (v : ∀ M : DerivedCategoryModule A X, EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M), (∀ M : DerivedCategoryModule A X, IsEtaleHomTranspose X φ M (v M) ∧ IsEtaleHomReversedExact X φ M (v M) ∧ IsEtaleHomThickIsoLocus X φ M (v M)) ∧ IsEtaleHomNaturalInM X φ v",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 7371b3deb8b2: the comparison uses the uniquely chosen etaleHomTensorComparison, natural in both variables and fixed by the flat-term K-flat counit equation for the ordinary adjunction-mate tensorator. The scalar shift is the canonical mate of exact restriction. The Hom shifts are normalized by evaluation and the signed derived tensor cancellation, with the explicit factor ((n * (n + 1)) / 2).negOnePow for both coefficient Hom functors (reviewer fix: the delivered multiplicative n.negOnePow is right at n = 1, as the opposite triangulated cone convention requires, but violates the CommShift addition axiom because the tensor cancellations satisfy c(a+b) = (-1)^(a*b) c(a) c(b); the quadratic factor is Mathlib's Cochain.leftShift sign by -n and satisfies both). The chosen chiPhi and chiPsi are constrained to the stated composites of these shifts; with those same structures both functors are IsTriangulated and v has NatTrans.CommShift. The general internal-Hom dependency record is restored unchanged, and the item imports the published Etale.derivedHom directly. All helper declarations belong to this node construction, are listed, and have source/blueprint docstrings.",
+  "fixed_by": "NT-stage2-cc-6ce2b6e27"
  }
 }

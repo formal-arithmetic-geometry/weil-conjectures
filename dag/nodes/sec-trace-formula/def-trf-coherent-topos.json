@@ -85,5 +85,31 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d2b0d91f1 (reviewer sub-agent of L); spot-checked: I read the item in full, with all four statement dependencies (def-weil-pbc-topos, def-weil-pbc-sites-and-cohomology, def-weil-size-convention, def-trf-geometric-morphism), unit sk-i-curve-zero and the item's four citers. The source is Orgogozo's author PDF; I fetched it read-only and extracted the text. §8.1 (printed pp. 17-18) uses 'topos cohérent', 'objet cohérent (quasi-compact et quasi-séparé)' and the coherent-conservative test without defining them, pointing to SGA4 VI; Lemma 9.1.5 (p. 21) applies that test. Each clause of the item matches the standard notion: quasi-compact (finite epimorphic subfamily), quasi-separated (as SGA4 VI 1.13), coherent object, coherent topos (equivalent to SGA4 VI 2.3 via the comparison lemma), coherent morphism (u^-1 preserves coherent objects, VI 3.3) and conservative. The item does not cite SGA, so the route lock holds. Small cases checked: in Sets the coherent objects are the finite sets and Sets is coherent; Sh(infinite discrete space) is correctly not coherent because the terminal object is not quasi-compact; the empty family behaves correctly. I checked that the definition supports lem-trf-coherent-conservative-reflection: quasi-compactness is reflected through generators plus exactness and conservativity, and quasi-separatedness through fibre products. No duplicate definition exists in the DAG or the main-20261015 blueprint, so same_as [] is correct; mathlib_match null is correct. The delivery changes only status and split_report: no new nodes, no steps, no tool_uses. The inherited created.item/unit mismatch is maintainer-owned and flagged in the report; it is not an A4 fault. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e48c7924f",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Read the item, its four statement dependencies (Lean: IsGrothendieckTopos.{w}, GeometricMorphism) and the delivered CoherentTopos.lean; the node changed only in its lean record. All six declarations match the node: QC with w-indexed families and a Finset subfamily; QS for every IsPullback; coherent = QC and QS; coherent topos = IsGrothendieckTopos.{w} with a small coherent generating family, epis from coproducts, and IsClosedUnderLimitsOfShape for every FinCategory J (empty J gives the terminal object); coherent morphism preserves coherent objects; conservative reflects isomorphisms. No stronger assumptions, universes bound, docstrings present, no sorry, lean.statement verbatim, no duplicate in Mathlib or the project. The delivered file compiles clean (1.4 s). FIX: IsConservativeGeometricMorphism restated Mathlib's Functor.ReflectsIsomorphisms by hand (H4); its body is now u.inverse.ReflectsIsomorphisms. Two unused imports removed (H9). The fixed file compiles clean (1.1 s, rc 0); the report has an appended fix note."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentTopos",
+  "declaration": "CategoryTheory.IsCoherentTopos",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentTopos.lean",
+  "statement": "def IsCoherentTopos (E : Type u) [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.IsQuasiCompactObject",
+   "CategoryTheory.IsQuasiSeparatedObject",
+   "CategoryTheory.IsCoherentObject",
+   "CategoryTheory.IsCoherentTopos",
+   "CategoryTheory.IsCoherentGeometricMorphism",
+   "CategoryTheory.IsConservativeGeometricMorphism"
+  ]
  }
 }

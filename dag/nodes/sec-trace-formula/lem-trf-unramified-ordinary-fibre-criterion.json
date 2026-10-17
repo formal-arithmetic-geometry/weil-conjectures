@@ -145,5 +145,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-7fd34e674 (reviewer sub-agent of L); spot-checked: Read in full: the item; the statements of all 13 cited nodes, plus the proof and review of lem-trf-unramified-field-fibre-decomposition; Stacks morphisms.tex 7827-7925, i.e. 02G8 (tag line 3219), 02GE and the unramified-at-point lemma. The statement matches 02G8(2) exactly: lft plus ordinary fibres that are disjoint unions of Spec of finite separable extensions imply unramified. Small cases checked: open immersion; Z[i]/Z (ramified at 2, hypothesis fails); Z[i,1/2]; Spec Q->Spec Z (lft needed); k[x]/x^2 and an inseparable extension (excluded); empty fibres. Step 1: the field-fibre decomposition ('if' direction) gives Z_s unramified, and base-change-open (2) restricts it to the open U_s. FIXED: U was an arbitrary affine with R->A claimed f.g., but the lft definition only gives some cover (01T2 is not stated in any node). U is now taken from that cover, and U_s=Spec(A⊗_R κ(p)) is written out. Step 2 holds: affine criterion, then Ω base change with R'=κ(p), so Ω⊗κ(q)=0; Ω is finite since A is f.g.; Nakayama with N=0 on Ω_q, then local-global vanishing, then the affine criterion again (the 00UW / 02G9 (3)<=>(5) argument). Step 3 holds: the affine-cover clause stated in def-weil-unramified-morphism (02GE/02G4) glues. The delivery has no new nodes, so there is no restatement. Duplicate search over 02G8/02G7/02GE/02G6/00UW and 'unramified' nodes found nothing stating relative 02G8(2). No cycle. Accepted tool_use: lem-weil-pbc-unramified-base-change-open, a generic black box closed in slopmaster2. No SGA. Minor: the report mentions a citations.json that was not delivered.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83640931b",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement matches Stacks 02G8(2) (morphisms.tex 7828-7839) clause by clause: Scheme.{u} morphism with [LocallyOfFiniteType h]; for every s, fibre h.fiber s isomorphic over Spec κ(s) (e.hom ≫ Sigma.desc Spec.homEquiv.symm algebraMap = fiberToSpecResidueField; homEquiv.symm = Spec.map checked by rfl) to an arbitrary, possibly empty, coproduct of Spec L_i with each L_i a field, finite and separable over κ(s); conclusion is the recorded inline unramified form LocallyOfFiniteType h ∧ IsOpenImmersion (pullback.diagonal h). No extra assumptions; Type u for I and L_i loses no generality since the fibre is in Scheme.{u}. Node diff vs main: only the lean record was added; statement verbatim equals the file signature; split_report reverted per the prior RETURN. Docstrings carry source, blueprint and the 3 proof steps; proof is sorry only (print axioms shows sorryAx). Compiled the snapshot through nt_compile.py --json: exit 0, 2.7 s, no errors. No duplicate in Mathlib (only the converse 02G8(1)) or the project (02G7 and geometric-fibre only). Report has both required sections. No findings, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedOrdinaryFibreCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedOrdinaryFibreCriterion.lean",
+  "declaration": "AlgebraicGeometry.unramified_of_ordinary_fibre_coproduct_finite_separable",
+  "statement": "theorem unramified_of_ordinary_fibre_coproduct_finite_separable {Z B : Scheme.{u}} (h : Z ⟶ B) [LocallyOfFiniteType h] : (∀ s : B, ∃ (I : Type u) (L : I → Type u) (hfield : ∀ i, Field (L i)) (halg : ∀ i, Algebra (B.residueField s) (L i)), (∀ i, @Module.Finite (B.residueField s) (L i) inferInstance (hfield i).toCommRing.toRing.toAddCommGroup.toAddCommMonoid (halg i).toModule) ∧ (∀ i, @Algebra.IsSeparable (B.residueField s) (L i) inferInstance (hfield i).toCommRing.toRing (halg i)) ∧ ∃ e : h.fiber s ≅ ∐ (fun i : I ↦ Spec (CommRingCat.of (L i))), e.hom ≫ Sigma.desc (fun i : I ↦ (Spec.homEquiv (R := B.residueField s) (S := CommRingCat.of (L i))).symm (CommRingCat.ofHom (@algebraMap (B.residueField s) (L i) inferInstance (hfield i).toCommRing.toSemiring (halg i)))) = h.fiberToSpecResidueField s) → LocallyOfFiniteType h ∧ IsOpenImmersion (pullback.diagonal h)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

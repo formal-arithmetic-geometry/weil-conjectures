@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-relative-assassin",
+ "kind": "definition",
+ "title": "Associated points of a module and the relative assassin",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. Define $\\operatorname{Ass}_X(\\mathcal F)$ as the set of $x\\in X$ for which the maximal ideal of $\\mathcal O_{X,x}$ is an element-annihilator associated prime [def-weil-pbc-annihilator-associated-primes] of the stalk $\\mathcal F_x$ [def-weil-pbc-module-stalk], using the stalk module [def-pc-module-stalk-functor]. If $f:X\\to S$ is a morphism of schemes, put $\\mathcal F_s=(f.\\operatorname{fiber}\\iota_s)^*\\mathcal F$ on the scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre] [def-pc-module-pullback]. Define $\\operatorname{Ass}_{X/S}(\\mathcal F)=\\bigcup_{s\\in S} i_s(\\operatorname{Ass}_{X_s}(\\mathcal F_s))\\subseteq X$, where $i_s:X_s\\to X$ is the fibre projection. Equivalently, $x$ belongs precisely when its canonical point in $X_{f(x)}$ belongs to $\\operatorname{Ass}_{X_{f(x)}}(\\mathcal F_{f(x)})$. For quasi-coherent $\\mathcal F$ [pqf-def-coherent] this is the relative assassin of Stacks Tag 05AT.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02OJ (definition-associated) and 05AT (definition-relative-assassin)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative assassin of a quasi coherent module is the associated points of its fibre pullbacks",
+   "results": "8 hits: associatedPrimes, IsAssociatedPrime, Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg, Algebra.QuasiFinite.finite_fiber, ModuleCat.tildeInModuleCat; digest=0c0a83560f94bb5b. No relative assassin or associated-points-of-a-module definition. Returned types give algebraic associated primes, ordinary fibres, support or zero loci; none combines fibre pullback and stalkwise association.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative assassin of a quasi coherent module is the associated points of its fibre pullbacks",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.supportSet, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.RingedSpace.zeroLocus, Module.support, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; digest=fa9eef0940bdd10d. No relative assassin or associated-points-of-a-module definition. Returned types give algebraic associated primes, ordinary fibres, support or zero loci; none combines fibre pullback and stalkwise association.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeAssassin|relativeAssociated|IsAssociatedPoint",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. No relative assassin or associated-points-of-a-module definition. Returned types give algebraic associated primes, ordinary fibres, support or zero loci; none combines fibre pullback and stalkwise association.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-relative-associated-specialization",
+  "date": "2026-10-17",
+  "group": "Q79"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. The fibrewise relative-assassin notion used by the pointwise specialization lemma.",
+   "via": [
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAssassin",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relativeAssassin",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAssassin.lean",
+  "statement": "def relativeAssassin {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) : Set X",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.associatedPoints",
+   "AlgebraicGeometry.Scheme.Modules.relativeAssassin"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-082400ea0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-082400ea0",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0GSI clause by clause: LocallyOfFiniteType f; F IsQuasicoherent+IsFiniteType; Y = vanishingIdeal(closure{y}).subscheme (real reduced induced structure); Y_s = fiber of subschemeι≫f; C irreducible component with generic point x; flatness pointwise only (Module.Flat of stalk over S-stalk via stalkMap), not global IsFlatOver; conclusions: ambient image in relativeAssassin, topologicalKrullDimAt x = dim C, dim C = dim fiber over f y. New def-trf-relative-assassin (02OJ/05AT) uses element-annihilator associatedPrimes on moduleStalkFunctor stalk of tensorPullback to own fibre via asFiber; real data, not duplicated (only structure-sheaf associatedPoints exists; no relativeAssassin in side clone 3f3f25b66d). Item statement unchanged; lean.statement verbatim in file; added stmt_deps used; docstrings carry source/blueprint and the 10-step proof; single sorry; no universe restriction. nt_compile.py --json: both modules clean; scratch check gave the expected signature, axioms propext/sorryAx/Classical.choice/Quot.sound, and a deliberate error was reported. Second-reading section records post-2026-10-17 policy. No findings."
+ }
+}
