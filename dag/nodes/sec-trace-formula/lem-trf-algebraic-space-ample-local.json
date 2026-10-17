@@ -1,0 +1,79 @@
+{
+ "id": "lem-trf-algebraic-space-ample-local",
+ "kind": "statement",
+ "title": "Ampleness on algebraic spaces is etale local on the base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:F\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $M$ be a line module on $F$. On a scheme $Z$, a line module on its small etale site is identified with an ordinary invertible $\\mathcal O_Z$-module [def-sc-invertible-module] via the equivalence between quasi-coherent modules on the Zariski and small etale sites of $Z$; ampleness of a line module on a scheme means ampleness of this invertible module. Suppose $\\{g_i:Y_i\\to Y\\}_{i\\in I}$ is a jointly surjective family of etale maps with each $Y_i$ a scheme. Assume $F_i=F\\times_YY_i$ is a scheme for every $i$, and let $M_i$ be the pullback of $M$ along the etale map $F_i\\to F$. Assume that for every affine open $W\\subseteq Y_i$ the restriction of $M_i$ to $F_i\\times_{Y_i}W$ is ample [def-weil-pbc-ample-invertible-module]. Then $f$ is representable: for every scheme $T$ and every map $h_T\\to Y$, the fibre product $F\\times_YT$ is a scheme. Moreover, for every scheme $T$ with an etale map $h_T\\to Y$ and every affine open $W\\subseteq T$, the pullback of $M$ along the etale map $F\\times_YW\\to F$ is ample. In particular, if $Y$ is a scheme, then $F$ is a scheme, and the restriction of $M$ to $f^{-1}(W)$ is ample for every affine open $W\\subseteq Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample); Divisors on Spaces, spaces-divisors.tex Tag 0D36 (lemma-relatively-ample-local), with relative ampleness as in Tag 0D31 (definition-relatively-ample). The scheme hypothesis means ampleness on inverse images of affine opens, as in Morphisms, morphisms.tex Tag 01VH (definition-relatively-ample)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative ampleness of a given invertible sheaf on an algebraic space descends along etale coverings of the base and implies representability",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample invertible modules on algebraic spaces are local on the target for the etale topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is local at the target if, for any morphism $f$ with property $P$ and any covering sieve $S$ on the target of $f$ (in some Grothendieck topology), there exists a mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(Q : AffineTargetMorphismProperty) [Q.IsLocal] : HasAffineProperty (targetAffineLocally Q) Q\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then any morphism that satisfies $ Q $ locally on affine opens of the target scheme must satisfy $ Q $ globally.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \": IsZariskiLocalAtTarget @UniversallyOpen\", \"doc\": \"The property of being universally open for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ becomes universally open after restricting to an open cover \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.instIsLocalOfOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) [IsZariskiLocalAtTarget P] : (of P).IsLocal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the property obtained by restricting $P$ to morphisms with affine target is local on the target scheme. Specifically, given a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ample\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Order.Example.find\", \"module\": \"Init.Internal.Order.Basic\", \"type\": \" (P : ℕ → Bool) : ℕ → Option ℕ\", \"doc\": \"\"}\n  {\"name\": \"Lean.Order.Example.findF\", \"module\": \"Init.Internal.Order.Basic\", \"type\": \" (P : ℕ → Bool) (rec : ℕ → Option ℕ) (x : ℕ) : Option ℕ\", \"doc\": \"\"}\n  {\"name\": \"Lean.Order.Example.find_eq\", \"module\": \"Init.Internal.Order.Basic\", \"type\": \" {P : ℕ → Bool} : Lean.Order.Example.find P = Lean.Order.Example.findF P (Lean.Order.Example.find P)\", \"doc\": \"\"}\n  {\"name\": \"Lean.Order.Example.find_spec\", \"module\": \"Init.Internal.Order.Basic\", \"type\": \" {P : ℕ → Bool} (n m : ℕ) : Lean.Order.Example.find P n = some m → n ≤ m ∧ P m = true\", \"doc\": \"\"}\n  {\"name\": \"Lean.Elab.Tactic.BVDecide.SolverMode.counterexample\", \"module\": \"Std.Tactic.BVDecide.Syntax\", \"type\": \" : Lean.Elab.Tactic.BVDecide.SolverMode\", \"doc\": \"Set SAT solver options to improve counterexample search.\"}\n  {\"name\": \"Lean.Parser.Command.example\", \"module\": \"Lean.Parser.Command\", \"type\": \" : Lean.Parser.Parser\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.CounterExample\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" : Type\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.Example\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" : Type\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.Example.underscore\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" : Lean.Meta.Match.Example\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.counterExampleToMessageData\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" (cex : Lean.Meta.Match.CounterExample) : Lean.MessageData\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.Example.toMessageData\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" : Lean.Meta.Match.Example → Lean.MessageData\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Match.Example.val\", \"module\": \"Lean.Meta.Match.Basic\", \"type\": \" : Lean.Expr → Lean.Meta.Match.Example\", \"doc\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|relatively.ample|ample.*descent|descent.*ample",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-scheme-etale-descent",
+  "date": "2026-10-18",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: the descended ample module forces the algebraic-space quotient to be a scheme (Stacks 0D3C).",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

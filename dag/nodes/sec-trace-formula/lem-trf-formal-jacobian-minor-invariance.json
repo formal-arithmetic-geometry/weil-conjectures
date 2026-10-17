@@ -13,9 +13,50 @@
   "def-weil-pbc-matrix-determinant",
   "def-weil-pbc-regular-system-of-parameters"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Orientation and conventions. As in the source's matrix equation, the Jacobian $J_x(f)=(\\partial f_j/\\partial x_i)$ of a list $f_1,\\ldots,f_s$ has row index $j$ (the generators) and column index $i$ (the variables): it is an $s\\times n$ matrix over $T/I$, and $D_r^x(f)$ denotes its ideal of $r\\times r$ minors with the stated conventions. If $r=0$, every ideal compared in steps 2 and 3 is $T/I$ by convention. If $r>n$, every Jacobian compared there has $n$ columns, so every ideal compared is $0$ by convention. If only one of two generating lists is shorter than $r$ (say $s<r\\le\\min(l,n)$ in step 2), then $D_r^x(f)=0$ by convention, while the vanishing of the $r\\times r$ minors of the other Jacobian is not a convention: it is the empty-sum case of the Cauchy--Binet formula in step 2. These cases include empty lists and empty matrices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B, fixed-size minor convention"
+   }
+  },
+  {
+   "text": "Let $g_1,\\ldots,g_l$ be another finite generating list of $I$. Since each $g_a$ lies in $I=(f_1,\\ldots,f_s)$, write $g_a=\\sum_{b=1}^sc_{ab}f_b$ with $c_{ab}\\in T$. Termwise differentiation is additive and satisfies the product rule $\\partial(cf)/\\partial x_i=(\\partial c/\\partial x_i)f+c\\,\\partial f/\\partial x_i$ (comparison of coefficients of the Cauchy product), so $\\partial g_a/\\partial x_i=\\sum_bc_{ab}\\,\\partial f_b/\\partial x_i+\\sum_b(\\partial c_{ab}/\\partial x_i)f_b$, and the last sum lies in $I$. Hence over $T/I$ the $l\\times n$ matrix $J_x(g)$ is the product $\\bar C\\,J_x(f)$ of the $l\\times s$ matrix $\\bar C=(\\bar c_{ab})$ and the $s\\times n$ matrix $J_x(f)$. Fix $1\\le r\\le\\min(l,n)$, rows $a_1<\\cdots<a_r$ and columns $i_1<\\cdots<i_r$. The corresponding $r\\times r$ submatrix of $J_x(g)$ is the product of the $r\\times s$ matrix formed by the rows $a_1,\\ldots,a_r$ of $\\bar C$ and the $s\\times r$ matrix formed by the columns $i_1,\\ldots,i_r$ of $J_x(f)$. The Cauchy--Binet formula over $T/I$ [lem-weil-pbc-cauchy-binet], with its $m=r$ and $n=s$, writes the determinant of this product as $\\sum_{S}\\det(\\bar C_{\\{a\\},S})\\det(J_x(f)_{S,\\{i\\}})$ over the $r$-element subsets $S\\subseteq\\{1,\\ldots,s\\}$: a $T/I$-linear combination of $r\\times r$ minors of $J_x(f)$, and $0$ when $s<r$ (empty sum). Hence $D_r^x(g)\\subseteq D_r^x(f)$ for every $r$ (step 1 for $r=0$ and $r>\\min(l,n)$). Exchanging the roles of the two lists gives the reverse inclusion, so the ideals are equal.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B, proof paragraph beginning with the second generating set"
+   }
+  },
+  {
+   "text": "Let $y_1,\\ldots,y_n$ be another regular system of parameters of $T$, with the $F$-algebra coordinates $T=F[[y_1,\\ldots,y_n]]$ of the statement, and let $Q=(\\partial y_k/\\partial x_i)_{k,i}$ be the $n\\times n$ matrix over $T$ with row index $k$ and column index $i$. By [lem-trf-formal-jacobian-coordinate-chain-rule], for every $h\\in T$ one has $\\partial h/\\partial x_i=\\sum_k(\\partial h/\\partial y_k)(\\partial y_k/\\partial x_i)$, i.e. the row $(\\partial h/\\partial x_i)_i$ is the row $(\\partial h/\\partial y_k)_k$ times $Q$, and $Q$ is invertible over $T$. Applying this to $h=f_1,\\ldots,f_s$ and stacking the rows gives $J_x(f)=J_y(f)\\,Q$ as $s\\times n$ matrices over $T$, hence over $T/I$ after reducing entries. Reduction modulo $I$ is a ring map, so it preserves matrix products and $\\bar Q$ is invertible over $T/I$ with inverse $\\overline{Q^{-1}}$; thus $J_y(f)=J_x(f)\\,\\overline{Q^{-1}}$. Clause (3) of [lem-trf-fitting-ideal-minor-inclusions] over $R=T/I$ with $p=s$, applied to $A=J_y(f)$ and $C=\\bar Q$, gives $D_r^x(f)\\subseteq D_r^y(f)$; applied to $A=J_x(f)$ and $C=\\overline{Q^{-1}}$, it gives $D_r^y(f)\\subseteq D_r^x(f)$. That clause includes $r=0$ and the oversized cases, so the two ideals agree for every $r\\ge0$. Together with step 2, the ideal depends neither on the generating list nor on the regular system of parameters.",
+   "uses": [
+    "lem-trf-formal-jacobian-coordinate-chain-rule",
+    "lem-trf-fitting-ideal-minor-inclusions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B, proof paragraph beginning with the second regular system of parameters"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cauchy-binet",
+  "lem-trf-formal-jacobian-coordinate-chain-rule",
+  "lem-trf-fitting-ideal-minor-inclusions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), direct proof; the source gives the generator calculation and invokes Cauchy--Binet, then invokes the formal chain rule for coordinates."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +92,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.PreSubmersivePresentation R S ι σ) {T : Type u_1} [inst_3 : CommRing T] [inst_4 : Algebra R T]\\n  (e : S ≃ₐ[R] T) [inst_5 : Finite σ], (P.ofAlgEquiv e).jacobian = e P.\", \"doc\": \"For a pre-submersive presentation $ P $ of an $ R $-algebra $ S $, and an algebra isomorphism $ e : S \\\\simeq_R T $, the Jacobian determinant of the transformed presentation $ P.\\\\text{ofAlgEquiv}(e) $ \"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.PreSubmersivePresentation R S ι σ) {T : Type u_1} [inst_3 : CommRing T] [inst_4 : Algebra R T]\\n  (e : S ≃ₐ[R] T) [inst_5 : Fintype σ] [inst_6 : DecidableEq σ], (P.ofA\", \"doc\": \"For a pre-submersive presentation $ P $ of an $ R $-algebra $ S $, if $ T $ is another $ R $-algebra equipped with an algebra isomorphism $ e : S \\\\simeq_R T $, then the Jacobi matrix of the transforme\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian_reindex\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.PreSubmersivePresentation R S ι σ) {ι' : Type u_1} {σ' : Type u_2} (e : ι' ≃ ι) (f : σ' ≃ σ)\\n  [inst_3 : Finite σ] [inst_4 : Finite σ'], (P.reindex e f).jacobian = P.\", \"doc\": \"Given a pre-submersive presentation $ P $ of an $ R $-algebra $ S $ with generator type $ \\\\iota $ and relation type $ \\\\sigma $, and equivalences $ e : \\\\iota' \\\\simeq \\\\iota $ and $ f : \\\\sigma' \\\\simeq \\\\s\"}\n  {\"name\": \"Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (R₀ : Type u_5)\\n  [inst_4 : CommRing R₀] [inst_5 : Algebra R₀ R] [inst_6 : Algebra R₀ S] [inst_7 : IsScala\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the image of the inverse Jacobian polynomial $ \\\\operatorname{det}^{-1} $ under the canonical algebra homomo\"}\n  {\"name\": \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  (R\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the inverse of the Jacobian unit $ \\\\operatorname{det}^{-1} $ is expressed as a multivariate polynomial over\"}\n  {\"name\": \"Algebra.SubmersivePresentation.map_jacobianRelationsOfHasCoeffs\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (R₀ : Type u_5)\\n  [inst_4 : CommRing R₀] [inst_5 : Algebra R₀ R] [inst_6 : Algebra R₀ S] [inst_7 : IsScala\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, and given a scalar tower $ R_0 \\\\to R \\\\to S $, the Jacobian relation polynomial $ P.\\\\text{jacobianRe\"}\n  {\"name\": \"Algebra.SubmersivePresentation.ofAlgEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    {ι : Type w} →\\n      {σ : Type t} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                Algebra.SubmersivePresentation R S ι σ →\\n                  {T : Type u_1} →\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, and an $ R $-algebra isomorphism $ e: S \\\\simeq_R T $, this constructs the induced submersive pres\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobiMatrix_reindex\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.PreSubmersivePresentation R S ι σ) {ι' : Type u_1} {σ' : Type u_2} (e : ι' ≃ ι) (f : σ' ≃ σ)\\n  [inst_3 : Fintype σ'] [inst_4 : DecidableEq σ'] [inst_5 : Fintype σ] [i\", \"doc\": \"Given a pre-submersive presentation $P$ of an $R$-algebra $S$ with generator indices $\\\\iota$ and relation indices $\\\\sigma$, and equivalences $e : \\\\iota' \\\\simeq \\\\iota$ and $f : \\\\sigma' \\\\simeq \\\\sigma$, \"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern polynomial presentations, reindexing, or the definition of formal partial derivatives; they do not give minor-ideal invariance for arbitrary formal coordinate and ideal-generator changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian minor ideal invariance under changing generators of a finitely generated ideal and formal power series coordinates",
+   "results": "Hits: Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs; Algebra.SubmersivePresentation.invJacobianOfHasCoeffs; Algebra.SubmersivePresentation.map_jacobianRelationsOfHasCoeffs; Algebra.PreSubmersivePresentation.jacobian_reindex; Algebra.SubmersivePresentation.jacobianRelations; Algebra.PreSubmersivePresentation.jacobiMatrix_naive; Algebra.SubmersivePresentation.jacobianOfHasCoeffs; Algebra.SubmersivePresentation.aeval_jacobianOfHasCoeffs. These concern polynomial presentations/reindexing, not formal minor-ideal invariance.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries pderiv chain rule Jacobian",
+   "results": "0 hits; unknown identifier pderiv.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv|chain.rule|jacobi [Mathlib/RingTheory/MvPowerSeries]",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobian determinantal ideals in a formal power series quotient are unchanged by generators and coordinates",
+   "results": "Hits: Algebra.PreSubmersivePresentation.jacobian_reindex; Algebra.PreSubmersivePresentation.jacobian.congr_simp; Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv; Algebra.SubmersivePresentation.jacobianOfHasCoeffs.congr_simp; Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv; Algebra.SubmersivePresentation.jacobian_isUnit. No theorem for the stated formal minor ideals.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-formal-jacobian-quadratic-criterion",
@@ -81,5 +150,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-formal-jacobian-minor-invariance",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 0C4B into the generator-change argument via Cauchy--Binet and the coordinate-change argument via the formal chain rule and existing minor-ideal inclusion lemma. Edge conventions for r=0 and oversized minors are explicit. Added the smaller coordinate-chain-rule statement node.",
+  "blueprint": "Realizes the ancestor blueprint sentence 'Generator and coordinate invariance needed in the Jacobian-minor elimination of the pointwise nodal ingredient (Curves 0C4C)' through the three proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-26d8dd1a4",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-26d8dd1a4 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0C4B (curves.tex, lemma-fitting-ideal-well-defined, l.4065) and every cited node statement: Cauchy-Binet (Lean-closed, a tool), fitting-ideal-minor-inclusions clause (3) (J_r(AC) is contained in J_r(A), right multiplication), and the definition nodes. Item: the statement is as in the source plus I contained in n, which the delivery did not change and the parent uses. The mathematics is correct. Step 2: J(g) = C J(f) mod I, then Cauchy-Binet, including the empty sum for s<r. Step 3: J_x = J_y Q with Q = (dy_k/dx_i)_{k,i} invertible, then clause (3) in both directions. New node lem-trf-formal-jacobian-coordinate-chain-rule: true (checked with the derivation-continuity argument; small cases n=0, y=x+x^2, y=x+x^p in char p), strictly smaller than the item, not a restatement, and no DAG or blueprint duplicate (rg chain rule/partial derivative/0C4B; full-coordinates-field and first-order-coordinates differ). Mathlib has only the one-variable PowerSeries.derivative_subst, so no match. Three repairable faults, fixed in fixes/dag/nodes/sec-trace-formula/: (1) step 1 wrongly said both sides vanish by convention when only one generating list is shorter than r; that case is now sent to Cauchy-Binet's empty sum (E3/E5). (2) Step 3 said 'transpose convention determined by the indexing' instead of fixing the orientation. Steps 1-3 now fix rows = generators from the source's display and give J_y = J_x Q^{-1} explicitly (E5). (3) The new node's blueprint.from.via lacked the item in front (B9). Also: the new node's statement now gives the chain rule, Q(0) invertible, and Q^{-1} = P as explicit formulas, with the same content. Its earlier '0 hits' grep record was wrong, so I appended a corrected grep record. Statements are not weakened, there are no tool_uses to accept, and the route stays in unit sk-i-curve-zero.; 2 file(s) fixed by the reviewer"
  }
 }

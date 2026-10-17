@@ -11,9 +11,83 @@
   "def-weil-etale-morphism",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $\\sqrt J$ is the intersection of the prime ideals containing $J$. Every such prime contains the image $a_B$ of $a$, since $V(J)\\subset V(aB)$. Thus $a_B\\in\\sqrt J$, and the definition of the radical in that same statement gives an integer $m\\ge1$ with $a_B^m\\in J$. Fix this exponent before any localization.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0813 (lemma-push-ideal), proof: the zero-locus condition signifies that a power of a belongs to J; 00E0(7) supplies the radical criterion"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset B$. The standard-etale localization [lem-weil-pbc-etale-locally-standard] supplies $g\\notin\\mathfrak q$, a monic $f\\in A[T]$, and an $A$-algebra isomorphism $\\theta:B_g\\xrightarrow{\\sim}C_h$, where $C=A[T]/(f)$ and $h\\in C$. Its displayed algebra $A[T][Y]/(f,Yh-1)$ identifies with $C_h$: send $T$ to its class and $Y$ to $h^{-1}$, with inverse induced by the quotient map, in which $Yh=1$. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}B_g\\to\\operatorname{Spec}B$ is an open immersion; [lem-weil-pbc-etale-composition-cancellation](1)-(2) makes its composite to $\\operatorname{Spec}A$ etale. Consequently $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ is etale under $\\theta$. Put $d=\\deg f$. The monic-quotient theorem [lem-weil-pbc-monic-quotient-free] gives the free $A$-basis $1,t,\\ldots,t^{d-1}$ of $C$.",
+   "uses": [
+    "lem-weil-pbc-etale-locally-standard",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0813, proof opening: principal localization and standard-etale presentation, using 00UE and the monic-quotient basis"
+   }
+  },
+  {
+   "text": "Let $j_1,\\ldots,j_r$ generate $J$. For each $i$, write $\\theta(j_i/1)=c_i/h^{e_i}$ with $c_i\\in C$ and $e_i\\ge0$, using the fraction description [def-weil-ring-localization-away]. Since $h^{e_i}$ is a unit in $C_h$, these fractions and the images of the $c_i$ generate the same ideal, namely $\\theta(JB_g)$. Write $a_C$ for the image of $a$ in $C$ and set $K=(c_1,\\ldots,c_r,a_C^m)\\subset C$. Step 1 and $A$-linearity of $\\theta$ give $a_C^m/1\\in\\theta(JB_g)$. Hence $K$ is finitely generated and $KC_h=\\theta(JB_g)$. Moreover $a_C^m(C/K)=0$, since $a_C^m\\in K$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0813, proof: choose numerator generators h_i in C and adjoin h_(n+1)=a^m; denominator calculation written explicitly"
+   }
+  },
+  {
+   "text": "Use the basis of Step 2 to fix the surjection $\\pi:A^{\\oplus d}\\cong C\\twoheadrightarrow C/K$, and put $I=I_0(\\pi)$. The hypotheses of [lem-trf-etale-fitting-trick] hold: $C$ is finite free, $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ is etale, and $K$ is a finitely generated ideal of $C$. That statement gives a finitely generated ideal $I\\subset A$ and a finitely generated ideal $L\\subset C_h$ such that $IC_h=(KC_h)L$. Set $J'=\\theta^{-1}(L)\\subset B_g$. Its generators are the inverse images of generators of $L$, and Step 3 converts the equality to $IB_g=(JB_g)J'$.",
+   "uses": [
+    "lem-trf-etale-fitting-trick"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0813, proof: apply 0812 (lemma-trick-fitting-ideal) to C/(h_1,...,h_n,a^m)"
+   }
+  },
+  {
+   "text": "Finally, relative to the basis of Step 2, each vector $a^m e_i\\in A^{\\oplus d}$ belongs to $\\ker\\pi$ by Step 3. The $d$ rows $a^m e_i$ form the diagonal matrix $a^m1_d$. Its determinant is $a^{md}$: in the Leibniz formula [def-weil-pbc-matrix-determinant] only the identity permutation can contribute a nonzero product, giving $d$ diagonal factors. The kernel-minor definition [lem-trf-fitting-ideal-independence-base-change] therefore puts $a^{md}$ in $I$. If $d=0$, that definition instead gives $I=A$ and $V(I)=\\varnothing$. If $d>0$, then $md\\ge1$, so a prime containing $I$ contains $a^{md}$ and hence $a$ by primality. Thus $V(I)\\subset V(a)$ in both cases, completing all the required conclusions for the chosen $\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0813, final sentence: a^(dm) lies in I; diagonal kernel-minor argument and rank-zero convention written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-ring-localization-away",
+  "lem-trf-etale-fitting-trick",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0813 (lemma-push-ideal), proof paragraphs 1-2, with Tag 0812 expanded as the auxiliary statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +123,38 @@
    "results": "[grep] OK 15 hit(s); Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/Field.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Locus.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Basic.lean. Read the returned statements: none states this node or a one-line specialization. Full output: research/ideal-4.txt.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebra B over A and an ideal J supported on a nonzerodivisor a there is near each prime an ideal I of A containing a power of a such that the extension of I factors as J times an ideal",
+   "results": "{\"t\": \"2026-10-17T19:22:24Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale algebra B over A and an ideal J supported on a nonzerodivisor a there is near each prime an ideal I of A containing a power of a such that the extension of I factors as J times an ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.etaleLocus\"], \"digest\": \"3fc6dd485b541578\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned etale-locus/local-structure and residue-field splitting theorems, finite-generation descent, or related definitions, but no local ideal-divisibility theorem. Fitting-factorization searches are also recorded on the auxiliary node."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Etale, Ideal",
+   "results": "{\"t\": \"2026-10-17T19:22:24Z\", \"tool\": \"loogle\", \"query\": \"RingHom.Etale, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned etale-locus/local-structure and residue-field splitting theorems, finite-generation descent, or related definitions, but no local ideal-divisibility theorem. Fitting-factorization searches are also recorded on the auxiliary node."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*ideal|ideal.*etale",
+   "results": "{\"t\": \"2026-10-17T19:22:24Z\", \"tool\": \"grep\", \"query\": \"etale.*ideal|ideal.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"c52cce2bd173bd39\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned etale-locus/local-structure and residue-field splitting theorems, finite-generation descent, or related definitions, but no local ideal-divisibility theorem. Fitting-factorization searches are also recorded on the auxiliary node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated ideal in an etale algebra locally divides an ideal extended from the base ring",
+   "results": "{\"t\": \"2026-10-17T19:22:25Z\", \"tool\": \"leansearch\", \"query\": \"A finitely generated ideal in an etale algebra locally divides an ideal extended from the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.FG\", \"Algebra.Etale.finitePresentation\", \"FractionalIdeal.coeIdeal_fg\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FiniteType.of_span_eq_top_target\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Ideal.fg_of_localizationSpan\", \"Algebra.IsEtaleAt\"], \"digest\": \"6cc7c482a86cb937\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned etale-locus/local-structure and residue-field splitting theorems, finite-generation descent, or related definitions, but no local ideal-divisibility theorem. Fitting-factorization searches are also recorded on the auxiliary node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-flattening-descent",
@@ -64,7 +166,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Stacks 0814 proof paragraph 2, invoking lemma-push-ideal (0813) to make each local centre divide a base ideal.",
+   "place": "Stacks 0813 proof: the first paragraph localizes the etale algebra to a standard-etale chart, and the second paragraph applies Lemma 0812 to the finite-type centre after adjoining a power of the boundary element.",
    "via": [
     "lem-trf-etale-flattening-descent",
     "lem-trf-flattening-module-by-admissible-blowup",
@@ -80,5 +182,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-ideal-local-factor",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and split Stacks 0813 into five steps: radical membership gives a power of the boundary element; a principal standard-etale chart is a localization of a finite free monic quotient; numerator generators plus that power define a finitely generated ideal upstairs; the new statement-only 0812 auxiliary node gives its Fitting factorization; an explicit diagonal kernel minor yields the support condition. Reused the existing monic-quotient, radical, localization, etale and Fitting-definition nodes. Rank-zero, unit/zero ideals and non-Noetherian cases checked.",
+  "blueprint": "Realizes the ancestor proof place for the etale-local factor used in the affine paragraph of Tag 0814: standard-etale localization followed by the Tag 0812 Fitting trick and the annihilating-power argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-5e342c554",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-5e342c554 (reviewer sub-agent of L); spot-checked: Read Stacks flat.tex 0812/0813 (lines 8848-8901) with their proofs, all cited node statements, the item, the new node and the unit record. The item matches 0813 hypothesis by hypothesis and is unchanged. Step 1 (a^m in J) follows from the radical node. Step 2: the standard-etale node gives g not in q, monic f and B_g ≅ (A[t]/(f))_h; the Yh=1 identification is written out; etaleness comes from the open-immersion and composition nodes; the basis comes from the monic-quotient node. Step 3 clears denominators explicitly, giving KC_h = θ(JB_g) with K f.g. and containing a^m. Step 4: all hypotheses of the new node are checked, and J' = θ^{-1}(L). Step 5: the rows a^m e_i lie in ker π, det = a^{md}, so V(I) ⊂ V(a), with d=0 handled. The new node lem-trf-etale-fitting-trick is 0812 specialized to finite free C. It is statement-only and self-contained, with Fit_0 taken from the existing kernel-minor node, and strictly smaller than the item (no boundary element, no support clause), so not a restatement. Small cases found no counterexample: C=A, C=A×A, K=0, K=C, h nilpotent, d=0. rg over the DAG for 0812/0813/Fitting and a search of blueprint main-20261015 found no duplicate. The cited lem-weil-pbc nodes are mathlib leaves and the Fitting node is in the same unit sk-i-curve-zero, so there are no tool_uses. The item is not a target, so the base-change morphism and coefficient category checks do not apply. No SGA. No fixes."
  }
 }

@@ -12,55 +12,99 @@
   "def-weil-pbc-etale-site",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "locallyNoetherian|isLocallyNoetherian",
-   "results": "{\"t\": \"2026-10-17T18:56:39Z\", \"tool\": \"grep\", \"query\": \"locallyNoetherian|isLocallyNoetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\"], \"digest\": \"aadd25eb05e2ac7d\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "text": "Let W be an arbitrary affine open subscheme of T. Base-changing the given jointly surjective etale family to W gives a jointly surjective etale family {W\\times_TT_a\\to W}_{a\\in A} by [lem-weil-pbc-etale-covering-base-change]. By [lem-weil-pbc-open-preimage-fibre-product], each W\\times_TT_a is the open subscheme t_a^{-1}(W) of T_a, with the restriction of t_a:T_a\\to T as its map to W. The affine-base refinement [lem-weil-pbc-etale-covering-affine-refinement], applied to this family over the affine scheme W, supplies finitely many affine opens U_j\\subseteq t_{a(j)}^{-1}(W) whose induced etale maps U_j\\to W are jointly surjective; as t_{a(j)}^{-1}(W) is open in T_{a(j)}, each U_j is an affine open subscheme of T_{a(j)}. Each U_j is an affine open of the locally Noetherian scheme T_{a(j)}, so [pqf-lem-affine-open-locnoeth] says that its ring of sections A_j is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034C, proof lines 4767-4781, after restricting to an affine open of the base; affine refinement is Topologies Tag 0218."
+   }
   },
+  {
+   "text": "Write R for the ring of sections of W and let A=\\prod_jA_j. The maps U_j\\to W are etale, hence flat by [def-weil-etale-morphism], and the affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes each R\\to A_j flat. Therefore R\\to A is flat by [lem-weil-pbc-finite-product-flat-modules]. Joint surjectivity means that every prime of R has a prime above it in some A_j; composing that prime with the projection A\\to A_j gives a prime of A above it, so Spec(A)\\to Spec(R) is surjective. [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] then makes R\\to A faithfully flat. A finite product of Noetherian rings is Noetherian by the componentwise ideal argument, so [lem-weil-pbc-faithfully-flat-descent-noetherian] gives that R is Noetherian.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034C, affine descent direction (lines 4772-4779), using Algebra Tag 033E; etale-to-fppf flatness from Topologies Tag 021N."
+   }
+  },
+  {
+   "text": "The affine opens W of T form an affine open covering. Since Steps 1–2 prove that every such W has a Noetherian ring of sections, choosing any affine open cover and applying the definition of locally Noetherian schemes [pqf-def-locnoeth] gives that T is locally Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034C, first observation in the proof that local Noetherianity is Zariski-local (lines 4769-4771), together with Properties Definition Tag 01OV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-faithfully-flat-descent-noetherian",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 034C (lemma-Noetherian-local-fppf), proof lines 4767-4781, specialized to etale coverings using Topologies Tag 021N and affine refinement Tag 0218."
+ },
+ "mathlib_searches": [
   {
    "tool": "leansearch",
    "query": "Local Noetherianity of schemes descends along surjective etale coverings",
-   "results": "{\"t\": \"2026-10-17T18:56:40Z\", \"tool\": \"leansearch\", \"query\": \"Local Noetherianity of schemes descends along surjective etale coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.rec\", \"AlgebraicGeometry.IsLocallyNoetherian.mk\", \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.IsLocallyNoetherian.recOn\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\"], \"digest\": \"2eb74007153fdd0a\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian; IsNoetherian.toIsLocallyNoetherian; IsLocallyNoetherian.rec; IsLocallyNoetherian.mk; isLocallyNoetherian_of_affine_cover; isLocallyNoetherian_iff_of_affine_openCover. These are Zariski/open-cover locality results and do not state etale-cover descent.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"IsLocallyNoetherian\", \"of\"",
-   "results": "{\"t\": \"2026-10-17T18:56:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyNoetherian\\\", \\\"of\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsLocallyNoetherianPullbackSchemeOfLocallyOfFiniteType_1\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\"], \"digest\": \"8316b1f3d277649e\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Being a locally Noetherian scheme is local for the fppf topology",
-   "results": "{\"t\": \"2026-10-17T18:56:41Z\", \"tool\": \"leanfinder\", \"query\": \"Being a locally Noetherian scheme is local for the fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\"], \"digest\": \"755dcacde62e1dee\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
+   "query": "IsLocallyNoetherian, Etale, Surjective",
+   "results": "0 hits; unknown identifier IsLocallyNoetherian.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "A scheme with a jointly surjective etale covering by locally Noetherian schemes is locally Noetherian",
-   "results": "{\"t\": \"2026-10-17T18:56:41Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with a jointly surjective etale covering by locally Noetherian schemes is locally Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\"], \"digest\": \"c16116bd77e2644e\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
+   "results": "IsLocallyNoetherian, IsNoetherian, IsNoetherian.toIsLocallyNoetherian, LocallyOfFiniteType.isLocallyNoetherian, isLocallyNoetherian_iff_openCover, isLocallyNoetherian_of_affine_cover. None states descent from an etale covering family.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Noetherian.*descent|descent.*Noetherian|LocallyNoetherian.*Flat|Flat.*LocallyNoetherian",
-   "results": "{\"t\": \"2026-10-17T18:57:51Z\", \"tool\": \"grep\", \"query\": \"Noetherian.*descent|descent.*Noetherian|LocallyNoetherian.*Flat|Flat.*LocallyNoetherian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"9a427be8c1b31033\"}; The returned types give Zariski open-cover locality or ascent from the target along locally finite type morphisms, or geometric reducedness; none gives descent of local Noetherianity from an etale covering. Read Mathlib/AlgebraicGeometry/Noetherian.lean:57,103-178,228-245 to check the direction and open-cover hypotheses.",
+   "query": "IsLocallyNoetherian|Noetherian.*Etale|Etale.*Noetherian [Mathlib/AlgebraicGeometry]",
+   "results": "Noetherian.lean hits for IsLocallyNoetherian and its affine/open-cover theorems; no etale-cover descent theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-polarized-fine-log-etale-descent",
@@ -87,5 +131,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-local-noetherian-descent",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Descent Tag 034C. The proof is split into affine refinement, explicit finite-product faithfully-flat ring descent using the existing Mathlib leaf for Noetherian descent, and the final affine-open cover argument. No new node was needed: the affine descent calculation is written directly in the item steps.",
+  "blueprint": "The three steps realize the supporting descent input to the ILO VIII 3.3.8 final sentence recorded in the blueprint ancestry of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-faithfully-flat-descent-noetherian",
+    "why": "Generic ring-theoretic faithfully-flat Noetherian descent used in the affine reduction; the trace-formula unit has no replacement for this algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-faithfully-flat-descent-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-dfe9bdff8",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-dfe9bdff8 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the parent in full. Source: Stacks descent.tex Tag 034C (lemma-Noetherian-local-fppf, lines 4761-4781), descent direction via Algebra 033E; affine refinement is Topologies lemma-etale-affine (0218, topologies.tex 766-778). The statement is a correct etale specialization of 034C and is not weakened, and the parent lem-trf-polarized-fine-log-etale-descent uses it exactly as stated. Step 1: the base-change leaf applies, and the refinement leaf applies because W is affine. Step 2: etale implies flat by the definition; the affine flatness criterion gives R->A_j flat and the finite-product leaf gives R->A flat. The primes pulled back along the projections give surjectivity on Spec, so 00HQ gives faithfully flat; the product of Noetherian rings is Noetherian (elementary, via idempotents), and 033E gives R Noetherian. Step 3 is the definition of locally Noetherian and is elementary. Edge cases T empty (m=0, R=0) and the identity cover both work. No new nodes; rg for 034C and fppf/faithfully-flat locally-Noetherian descent finds only the item and its parent, so there is no duplicate. No cycle, no SGA. The tool_uses entry for the Mathlib leaf lem-weil-pbc-faithfully-flat-descent-noetherian is accepted. FIX (C1): step 1 called the refined U_j affine opens of T_{a(j)}, but the refinement leaf gives affine opens of W x_T T_a; identifying that product with the open t_a^{-1}(W) needs the existing leaf lem-weil-pbc-open-preimage-fibre-product. I added it to the step 1 text, uses and proof_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-local-noetherian-descent.json; no other change.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-local-generic-basis-universal-injective",
  "kind": "statement",
  "title": "Local generic-basis subtraction criterion",
- "statement": "Let (R,m) be a local ring and R\\to S a flat finitely presented homomorphism of commutative rings with geometrically integral fibres. Let q\\in Spec(S) lie over m, let N be a finite S-module, and let \\alpha :S^{\\oplus r}\\to N be S-linear. Write \\xi =mS, which is prime because the fibre S\\otimes_R\\kappa(m) is a domain. Assume N_q is flat over R and \\alpha\\otimes_S\\kappa(\\xi):\\kappa(\\xi)^{\\oplus r}\\to N\\otimes _S\\kappa (\\xi ) is an isomorphism. Then \\alpha  is universally injective as an R-module map and (coker \\alpha )_q is flat over R. Local rings, spectra, modules, flatness, finite presentation, residue fields, localizations and geometric integrality are [def-weil-pbc-flat-ring-map], [def-sbc-locally-finite-presentation], [def-weil-finitely-generated-module], [def-weil-residue-field], [def-weil-affine-spectrum], [def-weil-pbc-module-localization], [def-pc-geometrically-irreducible].",
+ "statement": "Let (R,m) be a local ring and R\\to S a flat finitely presented homomorphism of commutative rings with geometrically integral fibres. Let q\\in Spec(S) lie over m, let N be a finite S-module, and let \\alpha :S^{\\oplus r}\\to N be S-linear. Write \\xi =mS, which is prime because the fibre S\\otimes_R\\kappa(m) is a domain. Assume N_q is flat over R and \\alpha\\otimes_S\\kappa(\\xi):\\kappa(\\xi)^{\\oplus r}\\to N\\otimes _S\\kappa (\\xi ) is an isomorphism. Then \\alpha  is universally injective as an R-module map (L\\otimes_R\\alpha is injective for every R-module L) and (coker \\alpha )_q is flat over R. Local rings, spectra, modules, flatness, finite presentation, residue fields, localizations and geometric integrality are [def-weil-pbc-flat-ring-map], [def-sbc-locally-finite-presentation], [def-weil-finitely-generated-module], [def-weil-residue-field], [def-weil-affine-spectrum], [def-weil-pbc-module-localization], [def-pc-geometrically-irreducible].",
  "source": {
   "document": "literature/stacks-project/flat.tex",
   "place": "Tag 05I3, lemma-induction-step, implication (1)⇒(2)."
@@ -16,9 +16,53 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because the fibre S/mS is geometrically integral, its underlying ring is a nonzero domain, so ξ=mS is prime. The auxiliary projectivity statement [lem-trf-local-fibres-integral-projective], applied to R→S, makes S projective as an R-module; hence S^{\\oplus r} is projective over R. The hypothesis gives that N_q is flat over R.",
+   "uses": [
+    "lem-trf-local-fibres-integral-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3, proof of lemma-induction-step, paragraph beginning “Because S/mS is a domain”; Tag 05FT."
+   }
+  },
+  {
+   "text": "Consider the induced map (S/mS)^{\\oplus r}→N_q/mN_q. If an element of the source maps to zero, then after localizing at the generic prime ξ its image is zero; the assumed isomorphism α⊗_Sκ(ξ) therefore makes the element zero in κ(ξ)^{\\oplus r}. Since S/mS is a domain, it injects into its fraction field κ(ξ), so the original element was zero. Thus the reduction map is injective. Applying [lem-trf-local-universal-injective-residue] to S^{\\oplus r}→N_q over the local ring R gives that this map is universally injective over R.",
+   "uses": [
+    "lem-trf-local-universal-injective-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3, proof of lemma-induction-step, paragraph beginning “Because S/mS is a domain”; Tag 05FQ."
+   }
+  },
+  {
+   "text": "The map S^{\\oplus r}→N_q is the composite of α with the localization map N→N_q. For every R-module L, injectivity of L⊗_R(S^{\\oplus r})→L⊗_R N_q implies injectivity of L⊗_Rα, because the latter is the first factor of that composite; hence α is universally injective. Localizing at q preserves universal injectivity by [lem-trf-local-universal-injective-localization]. Therefore 0→S_q^{\\oplus r}→N_q→(coker α)_q→0 is universally exact. Its middle term is R-flat, so [lem-trf-local-ui-flat-cokernel] gives that (coker α)_q is R-flat.",
+   "uses": [
+    "lem-trf-local-universal-injective-localization",
+    "lem-trf-local-ui-flat-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3, proof of lemma-induction-step, implication (1)⇒(2); Algebra Tags 05CJ, 05CM and 058P."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-local-fibres-integral-projective",
+  "lem-trf-local-universal-injective-residue",
+  "lem-trf-local-universal-injective-localization",
+  "lem-trf-local-ui-flat-cokernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I3, lemma-induction-step, implication (1)⇒(2), using Algebra Tags 05CM, 05CJ and 058P."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-free-subtraction-flatness",
@@ -62,7 +106,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 05I3, lemma-induction-step, implication (1)⇒(2).",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; here the local implication (1)⇒(2) of Stacks 05I3 (flat.tex, lemma-induction-step).",
    "via": [
     "lem-trf-free-subtraction-flatness",
     "lem-trf-flattening-module-by-admissible-blowup",
@@ -78,5 +122,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-generic-basis-universal-injective",
+  "worker": "stage1",
+  "summary": "Split the forward implication of Stacks Tag 05I3 into the projectivity of the flat geometrically integral algebra, the local residue-field universal-injectivity criterion, localization of universal injectivity, and the flat-cokernel criterion. The generic-fibre isomorphism is used to prove injectivity after reduction modulo the maximal ideal, then the localized map is composed with α and the cokernel sequence is handled universally. The item statement and hypotheses are unchanged. No off-unit tool uses are needed.",
+  "blueprint": "Realizes the Tag 05I3 local generic-basis argument in the proof route of lem-trf-local-term-locality, specifically the paragraph beginning “Because S/mS is a domain with fraction field κ(p)” and its conclusion that α is universally injective with flat localized cokernel."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-dc71c8196",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-dc71c8196 (reviewer sub-agent of L); spot-checked: I read Stacks 05I3 in full: the statement and the whole proof (flat.tex lemma-induction-step). I also read 05FT, 05FQ with its proof, and algebra 05CM, 05CJ and 058P. The item is exactly 05I3 (1)⇒(2) and is not weakened. The parent's two uses fit its hypotheses. Step 1 uses 05FT, whose hypotheses (finitely presented, flat, all fibres geometrically integral) match. Step 2 applies 05FQ to S^r→N_q, where the source uses N_p. This is valid: since ξ⊂q and N_ξ/mN_ξ=N⊗κ(ξ), the reduction (S/mS)^r→N_q/mN_q followed by the map to N⊗κ(ξ) equals the injective map through κ(ξ)^r. Step 3 writes out 05CJ inline, which is one line, then uses 05CM(1) at S∖q and 058P on the localized sequence, which is exact and universally exact. The four new nodes are 05FT, 05FQ, 05CM(1) and the M_3 half of 058P. Each is strictly smaller than the item; none restates a clause of it. Small cases all behave correctly: k[x] over k; R[x]/(x) over k[t]_(t) with r=0; S/(t), where the hypothesis rightly fails; and multiplication by t, where 05FQ's hypothesis rightly fails. rg over the DAG found no duplicates; lem-trf-universal-injective-check-stalks states something different (R_p-local). A grep of Mathlib found no match. Everything stays in unit sk-i-curve-zero, there are no tool_uses, and no SGA is cited. Repaired in fixes/: (1) definition citations: missing finite presentation, residue field, spectrum and geometric integrality added to fibres-integral-projective; unused projective/finitely-generated citations removed from the new nodes; localization citation and an inline definition of universal injectivity added to the localization node and the item. (2) An ill-typed, unused 'R_T-module' clause removed from lem-trf-local-universal-injective-localization. (3) blueprint.from.place of the item and the new nodes changed from Stacks tags to the place in lem-trf-local-term-locality's proof, plus the exact 05I3 sentence each node serves. No node was dropped.; 5 file(s) fixed by the reviewer"
  }
 }

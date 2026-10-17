@@ -1,0 +1,86 @@
+{
+ "id": "lem-trf-formal-jacobian-coordinate-chain-rule",
+ "kind": "statement",
+ "title": "Formal chain rule and invertible linear Jacobian for power-series parameters",
+ "statement": "Let $F$ be a field, $n\\ge0$, $T=F[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series], and let $y_1,\\ldots,y_n$ be a regular system of parameters [def-weil-pbc-regular-system-of-parameters] of $T$ such that the $F$-algebra homomorphism $F[[Y_1,\\ldots,Y_n]]\\to T$, $Y_k\\mapsto y_k$, is an isomorphism; through it, $T=F[[y_1,\\ldots,y_n]]$ and $\\partial/\\partial y_k$ denotes the termwise formal partial derivative in these coordinates, as $\\partial/\\partial x_i$ does in the original ones. Let $Q=(\\partial y_k/\\partial x_i)_{k,i}$ and $P=(\\partial x_i/\\partial y_k)_{i,k}$, $n\\times n$ matrices over $T$ [def-weil-matrix]. Then: (1) for every $h\\in T$ and every $i$, $\\partial h/\\partial x_i=\\sum_{k=1}^n(\\partial h/\\partial y_k)(\\partial y_k/\\partial x_i)$, i.e. the row $(\\partial h/\\partial x_i)_i$ equals the row $(\\partial h/\\partial y_k)_k$ multiplied by $Q$; symmetrically $\\partial h/\\partial y_k=\\sum_i(\\partial h/\\partial x_i)(\\partial x_i/\\partial y_k)$; (2) the matrix $Q(0)$ of constant terms of the entries of $Q$ (the linear coefficients of the $y_k$) is invertible over $F$; (3) $Q$ is invertible over $T$, with inverse $P$. The case $n=0$ (empty matrices) is included.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: the matrix (partial y_j/partial x_i) is invertible and the chain rule applies"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series coordinate change has invertible linear Jacobian and derivatives satisfy the chain rule",
+   "results": "Hits concern analytic formal power series and manifold coordinate changes; no MvPowerSeries chain-rule theorem for this algebraic statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries pderiv comp chain rule",
+   "results": "0 hits; unknown identifier pderiv.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv|chain.rule|MvPowerSeries.*deriv [Mathlib/RingTheory/MvPowerSeries]",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series chain rule and invertible Jacobian for a change of regular parameters",
+   "results": "Hits: HasFPowerSeriesAt.comp; HasFPowerSeriesAt.compContinuousLinearMap; PowerSeries.derivativeFun_mul; PowerSeries.subst_comp_subst_apply; no algebraic multivariate power-series theorem matching the statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'pderiv|subst|chain' Mathlib/RingTheory/MvPowerSeries/Derivative.lean Mathlib/RingTheory/PowerSeries/Derivative.lean Mathlib/RingTheory/MvPowerSeries/Substitution.lean (mathlib of ~/weil-conjectures-sheaf/lean)",
+   "results": "MvPowerSeries.pderiv (Derivative.lean: coeff_pderiv l.129, pderiv_X l.150, pderiv_pow l.161, pderiv_inv l.185) with no substitution or chain-rule lemma; PowerSeries.derivative_subst (PowerSeries/Derivative.lean l.140) is the one-variable chain rule only; no pderiv lemma in MvPowerSeries/Substitution.lean.",
+   "date": "2026-10-18",
+   "verdict": "no match: only the one-variable chain rule exists; the multivariate chain rule and the invertibility of Q are absent. (Corrects the earlier grep record, which reported 0 hits although MvPowerSeries/Derivative.lean defines pderiv.)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-jacobian-minor-invariance",
+  "date": "2026-10-18",
+  "group": "Q53"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generator and coordinate invariance needed in the Jacobian-minor elimination of the pointwise nodal ingredient (Curves 0C4C), specifically the formal chain-rule calculation for a second regular system of parameters.",
+   "via": [
+    "lem-trf-formal-jacobian-minor-invariance",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

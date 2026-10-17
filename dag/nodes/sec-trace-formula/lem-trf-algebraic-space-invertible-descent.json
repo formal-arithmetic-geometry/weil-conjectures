@@ -1,0 +1,78 @@
+{
+ "id": "lem-trf-algebraic-space-invertible-descent",
+ "kind": "statement",
+ "title": "Etale descent of line modules on an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ an algebraic space over $S$ [def-trf-algebraic-space], and $\\{q_i:V_i\\to F\\}_{i\\in I}$ a jointly surjective family of etale maps with each $V_i$ a scheme. Put $R_{ij}=V_i\\times_FV_j$, a scheme by representability of the diagonal, with projections $p_i,p_j$. For every $i$ let $M_i$ be an ordinary invertible $\\mathcal O_{V_i}$-module [def-sc-invertible-module], and suppose given isomorphisms $\\alpha_{ij}:p_j^*M_j\\xrightarrow{\\sim}p_i^*M_i$ which restrict to the identity on each diagonal and satisfy $\\alpha_{ik}=\\alpha_{ij}\\circ\\alpha_{jk}$ after pullback to $V_i\\times_FV_j\\times_FV_k$. Then there is a line module $M$ on $F$ with identifications $q_i^*M\\simeq M_i$ inducing the specified $\\alpha_{ij}$. Here restrictions to a scheme are interpreted as ordinary invertible modules via the equivalence between quasi-coherent modules on its Zariski and small etale sites. Moreover, for any two line modules $M,N$ on $F$, restriction is a bijection from $\\operatorname{Hom}_{\\mathcal O_F}(M,N)$ to the families of module maps $q_i^*M\\to q_i^*N$ agreeing on every $R_{ij}$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), restricted to etale covers; rank-one case of Tag 060X (lemma-finite-locally-free-descends). The scheme-site comparison is Descent, descent.tex Tag 05VG (lemma-equivalence-quasi-coherent-properties), including finite local freeness of fixed rank."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Invertible modules on an algebraic space are equivalent to line bundles on an etale atlas with compatible cocycle isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.unitsToPicEquiv\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} →\\n  {A : Type u_4} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [inst_2 : Algebra R A] →\\n          [inst_3 : FaithfulSMul R A] → (I : (Submodule R A)ˣ) → ((Submodule.unitsToPic R A) I).AsModule ≃ₗ[R] ↥↑I\", \"doc\": \"For an invertible submodule $ I $ of an $ R $-module $ A $, this defines an $ R $-linear equivalence between the module corresponding to $ I $'s isomorphism class in the Picard group $ \\\\mathrm{Pic}(R)\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type u_5) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → [Module.Invertible R M] → CommRing.Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"Submodule.unitsToPic_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (I : (Submodule R A)ˣ), (Submodule.unitsToPic R A) I = CommRing.Pic.mk R ↥↑I\", \"doc\": \"For any commutative semiring $ R $, an $ R $-algebra $ A $ with faithful scalar multiplication, and an invertible submodule $ I $ of $ A $, the homomorphism `unitsToPic` sends $ I $ to its isomorphism\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"CommRing.Pic.mk_eq_mk_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R M = CommRing.Pic.mk R N ↔ Nonempty (M ≃ₗ[R] \", \"doc\": \"For a commutative semiring $ R $, the equality $ [M] = [N] $ in the Picard group $ \\\\mathrm{Pic}(R) $ holds if and only if there exists an $ R $-linear isomorphism between the invertible $ R $-semimodu\"}\n  {\"name\": \"Submodule.unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  (A : Type u_4) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] → [inst_2 : Algebra R A] → [FaithfulSMul R A] → (Submodule R A)ˣ →* CommRing.Pic R\", \"doc\": \"The function defines a monoid homomorphism from the group of invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $. It maps each invertible submodule $ I $ to its isom\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} → [inst : CommSemiring R] → CommRing.Pic R → Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (M : Type u_5) [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M] [Module.Free R M], CommRing.Pic.mk R M = 1\", \"doc\": \"If $ M $ is a free $ R $-module, then the corresponding element in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element, i.e., $ \\\\mathrm{Pic.mk}(R, M) = 1 $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent and full faithfulness for invertible sheaves along etale covers of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"[F.IsPrestack J] (hf : Sieve.ofArrows _ f ∈ J S) : (F.toDescentData f).FullyFaithful\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ satisfying the prestack condition, an object $S \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": (Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"CategoryTheory.fullyFaithfulSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \": (sheafToPresheaf J A).FullyFaithful\", \"doc\": \"The inclusion functor from the category of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{A}$ to the category of presheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$ is f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": (forgetToPresheafedSpace (C := C)).FullyFaithful\", \"doc\": \"The forgetful functor from sheafed spaces to presheafed spaces over a category $\\\\mathcal{C}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\text{Hom}(X,Y)$ in the category of she\"}\n  {\"name\": \"CategoryTheory.instFaithfulSheafFunctorOppositeSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \": (sheafToPresheaf J A).Faithful\", \"doc\": \"The inclusion functor from the category of sheaves on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{A}$ (with respect to a Grothendieck topology $J$) to the category of presheaves is fa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"descent\", \"Module\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*descent|descent.*invertible|quasi.coherent.*descent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-scheme-etale-descent",
+  "date": "2026-10-18",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: descend the polarization to the quotient (Stacks 04W8).",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -2,7 +2,7 @@
  "id": "lem-trf-strict-transform-flat-etale-base-change",
  "kind": "statement",
  "title": "Strict transform commutes with flat étale base change under generic-point control",
- "statement": "Let $b:X^+=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ be the blowup of a finite-type quasi-coherent ideal [def-nagata-global-blowup], let $Z\\hookrightarrow X$ be a closed subscheme [def-weil-closed-immersion], and let $v:W\\to X$ be flat [def-weil-flat-morphism] (in particular, $v$ may be étale [def-weil-etale-morphism]). Assume that every irreducible component of $Z\\times_XW$ has generic point mapping to the generic point of an irreducible component of $Z$ (equivalently, no component of the pullback lies over a proper closed subset of its corresponding component). Write $Z^{\\mathrm{st}}\\hookrightarrow X^+$ for the strict transform [def-nagata-strict-transform]. Then the canonical flat-base-change identification $X^+\\times_XW\\simeq\\operatorname{Bl}_{\\mathcal I\\mathcal O_W}(W)$ identifies $Z^{\\mathrm{st}}\\times_XW$ with the strict transform of $Z\\times_XW$ in $X^+\\times_XW$; this equality is scheme-theoretic closure of the common inverse image of $Z\\setminus V(\\mathcal I)$.",
+ "statement": "Let $b:X^+=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ be the blowup of a finite-type quasi-coherent ideal [def-nagata-global-blowup], let $Z\\hookrightarrow X$ be a closed subscheme [def-weil-closed-immersion], and let $v:W\\to X$ be flat [def-weil-flat-morphism] (in particular, $v$ may be étale [def-weil-etale-morphism]). Assume that every irreducible component of $Z\\times_XW$ has generic point mapping to the generic point of an irreducible component of $Z$ (equivalently, no component of the pullback lies over a proper closed subset of its corresponding component). Write $Z^{\\mathrm{st}}\\hookrightarrow X^+$ for the strict transform [def-nagata-strict-transform]. Then the canonical flat-base-change identification $X^+\\times_XW\\simeq\\operatorname{Bl}_{\\mathcal I\\mathcal O_W}(W)$ [def-nagata-blowup-flat-base-change-map], with $\\mathcal I\\mathcal O_W$ the extended ideal [def-nagata-extended-ideal], identifies $Z^{\\mathrm{st}}\\times_XW$ with the strict transform of $Z\\times_XW$ in $X^+\\times_XW$; this equality is scheme-theoretic closure of the common inverse image of $Z\\setminus V(\\mathcal I)$.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image (flat base change of the quasi-compact scheme-theoretic image defining the strict-transform closure)"
@@ -12,11 +12,92 @@
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
   "def-nagata-strict-transform",
-  "def-weil-flat-morphism"
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-extended-ideal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus V(\\mathcal I)$, $W^+=X^+\\times_XW$, $Z_W=Z\\times_XW$, and $U_W=U\\times_XW$. By [def-nagata-blowup-flat-base-change-map] and [thm-nagata-blowup-flat-base-change], the comparison $\\operatorname{Bl}_{\\mathcal I\\mathcal O_W}(W)\\to W\\times_XX^+$ is an isomorphism over $W$; compose with the exchange of the two factors to identify its target with $W^+$. The complement of the extended ideal is $U_W$: locally if $\\mathcal I=(a_1,\\ldots,a_r)$, both are $\\bigcup_iD(a_i)$ after applying the ring map. By [thm-nagata-global-blowup-complement], $X^+|_U\\cong U$ and the corresponding base-changed restriction is $W^+|_{U_W}\\cong U_W$. These are the restrictions of the same structure map, so the identification carries the preserved open to the preserved open.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor, assertion (1)"
+   }
+  },
+  {
+   "text": "Let $T=Z\\times_XX^+$ and let $j:\\Omega=T\\times_XU\\hookrightarrow T$ be its preserved open immersion. Under step 1, $\\Omega\\cong Z\\times_XU$. Let $S\\hookrightarrow T$ be its scheme-theoretic closure; by [def-nagata-strict-transform], $S=Z^{\\mathrm{st}}$. The immersion $j$ is quasi-compact: on an affine neighborhood on which the pulled-back ideal has generators $a_1,\\ldots,a_r$, its source is the finite union $\\bigcup_iD(a_i)$ of quasi-compact principal opens. This is a local check on the target, so no global quasi-compactness of $X$ or $Z$ is assumed. On $\\Omega$ the ideal defining $S$ is zero, since a function there restricting to zero on $\\Omega$ is zero. Thus $S\\cap\\Omega=\\Omega$ scheme-theoretically, and the factor $h:\\Omega\\to S$ is an open immersion. The same finite-principal-open argument on $S$ makes $h$ quasi-compact; it is quasi-separated because its diagonal is an isomorphism.",
+   "uses": [
+    "def-nagata-strict-transform"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D, definition-strict-transform; the supported-section ideal is the kernel of restriction to the preserved open"
+   }
+  },
+  {
+   "text": "For $i:S\\hookrightarrow T$, the kernel construction in [lemma-nagata-scheme-image-ideal-qc] gives $i_*\\mathcal O_S=\\mathcal O_T/J$, where $J=\\ker(\\mathcal O_T\\to j_*\\mathcal O_\\Omega)$, since $j$ is quasi-compact. The induced map $i_*\\mathcal O_S\\to j_*\\mathcal O_\\Omega=i_*h_*\\mathcal O_\\Omega$ is injective: it is the map from a sheaf modulo the kernel of a sheaf homomorphism. Hence $\\mathcal O_S\\to h_*\\mathcal O_\\Omega$ is injective as well, by evaluating on opens of $S$, each an intersection with an open of $T$. The image kernel of $h$ is zero, so its scheme-theoretic image is all of $S$. This quotient-kernel argument retains nonreduced structure.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, factorization and kernel description"
+   }
+  },
+  {
+   "text": "Set $S_W=S\\times_XW$ and $T_W=T\\times_XW$. The map $S_W\\to S$ is the base change of the flat morphism $v:W\\to X$, so it is flat by [lem-weil-pbc-flat-morphism-base-change]. Apply [lemma-nagata-dense-flat-pullback] to $h:\\Omega\\to S$ and $S_W\\to S$: $h$ is quasi-compact and quasi-separated by step 2 and has scheme-theoretic image $S$ by step 3. It follows that $\\Omega\\times_SS_W=\\Omega\\times_XW$ has scheme-theoretic image $S_W$ in $S_W$. The same finite-principal-open check of step 2 on $S_W$ makes this open immersion quasi-compact. In particular, since this open immersion is quasi-compact, [lemma-nagata-scheme-image-ideal-qc] identifies its image ideal with the kernel of restriction from $\\mathcal O_{S_W}$ to this open, which is therefore zero.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lemma-nagata-dense-flat-pullback",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9, lemma-base-change-flat, and 081I, lemma-flat-base-change-scheme-theoretic-image"
+   }
+  },
+  {
+   "text": "Write $\\Omega_W=\\Omega\\times_XW$. Associativity of fibre products and step 1 give $T_W=Z_W\\times_WW^+$ and $\\Omega_W=T_W\\times_WU_W$. The closed subscheme $S_W\\subset T_W$ contains this open. Its defining ideal is exactly the kernel of $\\mathcal O_{T_W}\\to (\\Omega_W\\hookrightarrow T_W)_*\\mathcal O_{\\Omega_W}$: the map factors through $\\mathcal O_{S_W}$, and step 4 says that the second map has zero kernel. Thus $S_W$ is the scheme-theoretic closure of $\\Omega_W$ in $T_W$, which is the strict transform of $Z_W$ by [def-nagata-strict-transform]. Finally $T_W\\to W^+$ is a closed immersion: on affine opens it is the quotient by the extended ideal defining $Z\\subset X$, using [def-weil-closed-immersion]. Passing from closed subschemes of $T_W$ to closed subschemes of $W^+$ takes their quotient ideals to inverse-image ideals, and therefore preserves the equality just proved. This is the required equality inside $W^+=X^+\\times_XW$, with its prescribed inclusions. The proof applies to the assumed generic-point situation; no use of that extra hypothesis is necessary. An étale $v$ is flat by [def-weil-etale-morphism], so that case is included.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-weil-closed-immersion",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image, kernel argument; strict-transform definition Tag 080D in divisors.tex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "def-nagata-strict-transform",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lemma-nagata-dense-flat-pullback",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image, applied to the quasi-compact preserved open defining strict transform; ambient blowup identification from divisors.tex Tag 0805"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +154,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.Scheme.image_zeroLocus.  Read the returned types; none states the component identification or scheme-theoretic strict-transform flat base-change equality. The image-support lemmas concern underlying closed supports, not the required equality of closed subschemes.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform of a closed subscheme along a blowup commutes with flat base change",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap_subschemeι_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc, AlgebraicGeometry.Flat. Read the returned types: flatness stability, quasi-compactness of image factors and ideal-sheaf functoriality do not themselves state strict-transform flat base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|schemeTheoreticImage",
+   "results": "0 hits: . Read the returned types: flatness stability, quasi-compactness of image factors and ideal-sheaf functoriality do not themselves state strict-transform flat base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic closure of an open subscheme commutes with flat base change",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme. Read the returned types: flatness stability, quasi-compactness of image factors and ideal-sheaf functoriality do not themselves state strict-transform flat base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: . Read the returned types: flatness stability, quasi-compactness of image factors and ideal-sheaf functoriality do not themselves state strict-transform flat base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback preserves the scheme theoretic image of a quasi compact morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.instQuasiCompactSndScheme, AlgebraicGeometry.instQuasiCompactFstScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.isStableUnderBaseChange. Read the returned types: flatness stability, quasi-compactness of image factors and ideal-sheaf functoriality do not themselves state strict-transform flat base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-permissible-boundary-preservation",
@@ -101,5 +217,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-strict-transform-flat-etale-base-change",
+  "worker": "stage1",
+  "summary": "Proved scheme-theoretic strict-transform equality using existing blowup flat-base-change and dense-flat-pullback nodes. Wrote the finite-generation quasi-compactness check and the kernel calculation explicitly; no new nodes and no change of statement. The generic-point hypothesis is retained but unused. No exact completed project declaration was found.",
+  "blueprint": "The coordinate-chart strict-transform argument in the recorded ancestor lem-trf-local-term-locality, through lem-trf-permissible-boundary-preservation step 3: identify the strict transforms of boundary components after an etale neighborhood. Steps 1 and 5 construct that identification, with steps 2--4 proving scheme-theoretic closure compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-d66876512",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d66876512 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited node's statement and blueprint_update, unit sk-i-curve-zero and the parent's step 3 (its only citer). Sources read: Stacks 081I (morphisms.tex:4965, including the affine-kernel proof), 01R8, 01U9, 0805, 080D, 02OS, and 080F (which assumes X flat over S, so it is correctly not cited). The statement is true: it is 081I applied to the quasi-compact open immersion Omega -> Z x_X X+ along the flat map T_W -> T. The base-change map is bc_v of def-nagata-blowup-flat-base-change-map composed with the factor swap; it is an isomorphism by thm-nagata-blowup-flat-base-change. The strict transform is read per the main-20261015 update of def-nagata-strict-transform. No coefficient category is involved. The generic-point hypothesis is retained and unused (it holds automatically for flat v), so the target is not weakened. Small cases checked: empty Z or W; I = O_X; I = 0; Z inside V(I); a nonreduced double line; and a non-flat closed point W, where the conclusion fails, so the flat hypothesis is needed. Steps 2, 3 and 5 are genuinely elementary: the quasi-compactness check by finite principal opens, the quotient-kernel injectivity, and the inverse-image ideals. All dependencies outside the unit are definitions, Mathlib leaves or Lean-closed statements, so no tool_uses entry is needed. Duplicate search: the closest existing node is lem-trf-module-strict-transform-flat-pullback (the module version, unsplit). It is not the same statement, and the delivery creates no new nodes. Three repairs in fixes/: (1) step 1's source cited Tag 01OF, which is the section; the lemma is 02OS, with the label case corrected. (2) stmt_deps gains def-nagata-blowup-flat-base-change-map and def-nagata-extended-ideal, with bracket citations added to the statement; the meaning is unchanged. (3) Step 4 now cites lemma-nagata-scheme-image-ideal-qc for 'image ideal = restriction kernel' in the quasi-compact case.; 1 file(s) fixed by the reviewer"
  }
 }

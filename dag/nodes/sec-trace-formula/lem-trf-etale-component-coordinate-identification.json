@@ -13,11 +13,159 @@
   "def-weil-irreducible-components",
   "def-weil-regular-scheme",
   "def-weil-etale-morphism",
-  "def-weil-pbc-regular-system-of-parameters"
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Discard from $V$ the inverse images of the finitely many $D_a$ missing $x$; these are closed and miss $w$. Put $A=\\mathcal O_{X,x}$ and let $I\\subset A$ be the ideal of $D$ and $\\mathfrak p_a\\subset A$ the ideal of $D_a$ for $x\\in D_a$. The $\\mathfrak p_a$ are exactly the distinct minimal primes over $I$: in an affine neighbourhood, irreducible closed subsets are $V(\\mathfrak p)$, and maximality among irreducible subsets of $V(I)$ is minimality of the prime over $I$; localization retains precisely the components containing $x$. Since each $D_a$ is reduced, its defining ideal is this prime, rather than a thickening. The closed-immersion affine description identifies $\\mathcal O_{D_a,x}=A/\\mathfrak p_a$ and the local pullback at $w$ with $\\operatorname{Spec}(R/\\mathfrak p_aR)$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 4.2.2(i): distinct reduced irreducible boundary components; elementary affine/local translation"
+   }
+  },
+  {
+   "text": "For each retained $a$, the morphism $E_a=D_a\\times_X W\\to D_a$ is étale by [lem-weil-pbc-etale-scheme-base-change], hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Choose a regular affine neighbourhood of $x$ in $D_a$, and an affine neighbourhood of the point $(x,w)$ in its inverse image. By the affine-local meaning of smoothness in [def-sbc-smooth-morphisms], the induced ring map $C\\to B$ is smooth, with $C$ Noetherian regular. By [lem-weil-pbc-regular-ring-smooth-ascent], $B$ is regular. The definition of regularity therefore makes its local ring $R/\\mathfrak p_aR$ regular local. By [lem-sc-regular-local-domain] this is a nonzero domain, so $\\mathfrak q_a=\\mathfrak p_aR$ is a proper prime ideal of $R$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-sbc-smooth-morphisms",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07NF, lemma-regular-goes-up; Morphisms Tags 02GO, lemma-base-change-etale, and 02GK, lemma-etale-smooth-unramified; regular local domains: Tag 00NP, lemma-regular-domain"
+   }
+  },
+  {
+   "text": "The map $A/\\mathfrak p_a\\to R/\\mathfrak q_a$ is flat: it is the stalk map of the étale morphism $E_a\\to D_a$ from Step 2, using [def-weil-etale-morphism] and [def-weil-flat-morphism]. Both rings are domains, the source because it is a local ring of the regular scheme $D_a$, by [lem-sc-regular-local-domain]. Let $\\mathfrak k$ be the contraction of the zero prime of $R/\\mathfrak q_a$. Apply [lem-sc-flat-going-down] to the primes $(0)\\subseteq\\mathfrak k$ and the upstairs prime $(0)$. The supplied prime below $(0)$ can only be $(0)$, so $\\mathfrak k=(0)$. Thus $\\mathfrak q_a\\cap A=\\mathfrak p_a$. In particular, distinct $a$ give distinct $\\mathfrak q_a$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-sc-regular-local-domain",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS, lemma-flat-going-down, applied to the zero prime; Tag 00NP, lemma-regular-domain"
+   }
+  },
+  {
+   "text": "Put $T=t_1\\cdots t_r$. By [lem-trf-regular-local-ufd-boundary-factorization], each $t_i$ is prime, so $P_i=(t_i)$ is a proper prime ideal. By [lem-weil-pbc-regular-local-cotangent-dimension], $\\mathfrak m_R/\\mathfrak m_R^2$ has dimension $d$. The $d$ parameters generate $\\mathfrak m_R$, so their images span this $d$-dimensional vector space and form a basis. Consequently $P_i\\subseteq P_j$ forces $i=j$: an equation $t_i=ct_j$ gives proportional cotangent classes, impossible for two different basis vectors. Every prime containing $T$ contains some $t_i$. Therefore the $P_i$, $1\\le i\\le r$, are exactly the minimal primes over $(T)$, and are pairwise incomparable. For $r=0$, $T=1$ and there is no such prime.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0, lemma-regular-local-UFD, proof opening: parameters are prime; Algebra Tag 00KU, definition-regular-local and preceding cotangent-space discussion"
+   }
+  },
+  {
+   "text": "The underlying set of $D$ is the union of the $D_a$. Taking inverse images in $\\operatorname{Spec}R$ gives $V(T)=\\bigcup_aV(\\mathfrak q_a)$, and each $\\mathfrak q_a$ contains $T$. For every $i$, the point $P_i$ therefore belongs to some $V(\\mathfrak q_a)$, so $\\mathfrak q_a\\subseteq P_i$. Since $\\mathfrak q_a$ is prime and contains $T$, it contains some $P_j$. The incomparability from Step 4 forces $j=i$, and hence $\\mathfrak q_a=P_i$. This uses the inverse image of a finite union of closed sets; it does not presume that pulling back a reduced union is reduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 4.2.2(i) and Lemma 4.2.9: elementary comparison of the boundary components in a parameter-product chart"
+   }
+  },
+  {
+   "text": "Conversely fix $a$. Primality and $T\\in\\mathfrak q_a$ give $P_i\\subseteq\\mathfrak q_a$ for some $i$. Step 5 gives $b$ with $P_i=\\mathfrak q_b$. Contracting to $A$ using Step 3 gives $\\mathfrak p_b\\subseteq\\mathfrak p_a$. Since these are distinct minimal primes over $I$, they must be equal and $b=a$. Thus $\\mathfrak q_a=P_i$. Distinct $a$ give distinct primes by Step 3, and distinct $i$ give distinct primes by Step 4; Step 5 supplies all $i$. This is the desired bijection at the local ring. If $r=0$, every retained $a$ would give a proper prime containing $1$, a contradiction, so both indexing sets are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 4.2.2(i): elementary minimal-prime argument identifying individual components"
+   }
+  },
+  {
+   "text": "Shrink $V$ to an affine neighbourhood $\\operatorname{Spec}B$ of $w$, with prime $\\mathfrak n$ corresponding to $w$. Since $W\\to X$ is étale, it is locally of finite presentation and thus locally of finite type; [pqf-lem-locnoeth-lft] makes $W$ locally Noetherian. Thus $B$ is Noetherian. For a retained $a$, let $K_a\\subset B$ define $D_a\\times_X V$; Step 6 says $(K_a)_{\\mathfrak n}=(t_{i(a)})_{\\mathfrak n}$. Choose finite generators $k_1,\\ldots,k_s$ of $K_a$. For every $j$, localization membership supplies $u_j\\notin\\mathfrak n$ with $u_jk_j\\in(t_{i(a)})$; the reverse membership supplies $u_0\\notin\\mathfrak n$ with $u_0t_{i(a)}\\in K_a$. On $D(u_0\\cdots u_s)$ the ideals coincide. Intersect these finitely many principal neighbourhoods for all $a$. This proves equality of the closed subschemes, and preserves the empty pullbacks removed in Step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-def-locnoeth",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian, and elementary finite-generator localization argument; closed immersions: Tag 01QO, lemma-closed-immersion; the local spreading principle is also illustrated by Coherent Tag 01Y3"
+   }
+  },
+  {
+   "text": "Scheme-theoretic intersection is a fibre product of the closed immersions. By the fibre-product universal property, pulling it back along $V\\to X$ gives the intersection of their pullbacks. On an affine chart the intersection of closed subschemes with ideals $K_a$ has ideal $\\sum_aK_a$: both describe maps on which every $K_a$ vanishes. Step 7 therefore gives the ideal $(t_{i(a)}:a\\text{ selected})$. If one selected component misses $x$, its pulled-back ideal is the unit ideal, so the intersection is empty. For an empty selection the intersection is $V$ itself, as required.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 4.2.2(i): scheme-theoretic intersections; elementary quotient-ring universal property"
+   }
+  },
+  {
+   "text": "Finally let $z$ be the generic point of an irreducible component of $D_a\\times_X W$. The projection to $D_a$ is étale by [lem-weil-pbc-etale-scheme-base-change], hence flat by [def-weil-etale-morphism]. Choose an affine open $\\operatorname{Spec}C$ of $D_a$ around its image and an affine open $\\operatorname{Spec}B$ around $z$ mapping into it. The ring $C$ is a domain because $D_a$ is reduced and irreducible, hence integral by [def-pc-integral-scheme]. The map $C\\to B$ is flat by [lem-weil-pbc-flat-morphism-affine-criterion]. The point $z$ corresponds to a minimal prime $Q$ of $B$: a larger irreducible closed subset would contradict that its closure is a component. Put $P=Q\\cap C$. Going down [lem-sc-flat-going-down] lifts $(0)\\subseteq P$ to a prime $Q_0\\subseteq Q$ contracting to zero. Minimality forces $Q_0=Q$, hence $P=(0)$. Thus the image of $z$ is the generic point of this nonempty affine open, and hence the generic point of the irreducible scheme $D_a$. This argument applies on all of $W$, independently of the shrinking used for the coordinate identification.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-flat-going-down",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS, lemma-flat-going-down, minimal-prime specialization; Morphisms Tag 02GO, lemma-base-change-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-sbc-smooth-morphisms",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-sc-regular-local-domain",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-going-down",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "def-weil-pbc-regular-system-of-parameters",
+  "pqf-lem-locnoeth-lft",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-flat-morphism-affine-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Remark 4.2.2(i), printed p.118, and Lemma 4.2.9, printed p.121; NE expands the local component identification and generic-point argument using the cited Stacks results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +229,45 @@
    "results": "8 hits: StandardEtalePair.hasMap_X, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.hasMap, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, Algebra.etaleLocus, StandardEtalePair.cond, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq.  Read the returned types; none states the component identification or scheme-theoretic strict-transform flat base-change equality. The image-support lemmas concern underlying closed supports, not the required equality of closed subschemes.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism, regular irreducible components of a reduced divisor correspond bijectively near a point to the coordinate hyperplanes of a regular parameter product equation",
+   "results": "; 8 hits: StandardEtalePresentation.lift_bijective, StandardEtalePair.hasMap_X, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation, StandardEtalePair, StandardEtalePresentation.P, StandardEtalePresentation.hasMap, Algebra.IsEtaleAt. Read the returned declarations: none identifies the individual regular boundary components with the parameter hyperplanes or supplies all clauses of the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"irreducibleComponents\"",
+   "results": "; 0 hits: . Read the returned declarations: none identifies the individual regular boundary components with the parameter hyperplanes or supplies all clauses of the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsRegularLocalRing",
+   "results": "; 25 hits: Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Properties.lean. Read the returned declarations: none identifies the individual regular boundary components with the parameter hyperplanes or supplies all clauses of the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale pullback of a reduced divisor with regular components and a regular parameter product equation identifies the components with distinct coordinate hyperplanes",
+   "results": "; 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale, Algebra.etaleLocus, AlgebraicGeometry.Scheme.Etale, CategoryTheory.regularOfIsPullbackFstOfRegular, Algebra.Etale.formallyEtale. Read the returned declarations: none identifies the individual regular boundary components with the parameter hyperplanes or supplies all clauses of the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Components of a simple normal crossing divisor remain distinct regular single branches in etale local coordinates",
+   "results": "; 8 hits: StandardEtalePair, StandardEtalePresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsEtaleAt, Algebra.etaleLocus, StandardEtalePresentation.P, Algebra.IsStandardEtale, Algebra.mem_etaleLocus_iff. Read the returned declarations: none identifies the individual regular boundary components with the parameter hyperplanes or supplies all clauses of the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-permissible-boundary-preservation",
@@ -109,5 +292,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-component-coordinate-identification",
+  "worker": "stage1",
+  "summary": "NE supplies the nine-step argument for individual component identification, scheme-theoretic spreading and intersections, and generic-point dominance. All facts are existing nodes; no new nodes. The statement is unchanged. Actual Mathlib searches are appended and all cited statements were read.",
+  "blueprint": "Supports the historical ancestor lem-trf-local-term-locality through trace specialization, alterations and permissible-boundary preservation: precisely the component identification needed after the coordinate computation of Gabber VIII Lemma 4.2.9 and the strictness criterion of Remark 4.2.2(i). This is below sk-i-curve-zero; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Only the generic implication étale implies smooth is used; the unit has no affine regularity-ascent interface."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Regularity along a smooth affine ring map is a generic commutative-algebra tool for the étale pullback of each component; it does not replace the coordinate-chart route."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "The regular local ring of each pulled-back component is a domain; this generic algebra fact is not a statement of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-sc-regular-local-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-15b513624",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-15b513624 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, and the statement of every one of the 21 cited nodes (all exist, none merged). I also read Gabber Exp. VIII Rem. 4.2.2(i), printed p.118, and the chart proof of Lemma 4.2.9, printed p.121; the item spells out the component/coordinate identification that the chart proof takes for granted, so proof_origin=agent is correct. The statement is unchanged and not weakened. Step checks: S1 components through x are the minimal primes over I in O_{X,x}, and reducedness makes each ideal prime (elementary is fair). S2 étale base change (02GO) is smooth, the affine smooth map C->B has C Noetherian regular, 07NF gives B regular, and 00NP makes R/p_aR a domain, so q_a is prime. S3 the flat stalk map plus going down (00HS) applied to (0) gives q_a∩A=p_a. S4 the t_i are prime by the ufd node; if t_i=c t_j, either c in m puts t_i in m^2 or c a unit makes the cotangent classes proportional, both contradicting the basis (cotangent-dimension node), so the P_i are pairwise incomparable minimal primes over T. S5 and S6 give the bijection, using minimality of the distinct p_a; r=0 is handled. S7 W is locally Noetherian by 01T6, finitely generated ideals, and finitely many denominators give equality of closed subschemes on a principal open. S8 intersection ideals are sums and are compatible with pullback, with the empty and missing-component cases checked. S9 C is a domain (integral scheme), C->B is flat by 01U5 with no quasi-compactness needed, z is a minimal prime, and going down gives contraction 0, valid on all of W. Small cases: A^2 with V(xy), r=0, d=0, the nodal-curve case showing the regularity hypothesis is needed, and a disconnected cover. There are no new nodes. The duplicate search found no node stating this; the nearest are lem-fin-etale-normal-components and lem-exc-weakly-etale-local-component-dimension, which state different things. I accept all three declared tool_uses: etale-smooth-zero-dimensional-fibres, regular-ring-smooth-ascent and regular-local-domain. The other off-unit citations are Mathlib leaves. There are no SGA citations. No fixes."
  }
 }
