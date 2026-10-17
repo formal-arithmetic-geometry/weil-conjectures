@@ -3,24 +3,165 @@
  "blueprint": {
   "is": "pur713-def-kflat-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "K-flat complexes of module objects",
- "statement": "Let $\\mathcal R$ be a commutative ring object of $\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$. A complex $P$ in $\\mathsf{Mod}_{\\mathcal R}(X_{\\Proet})$ is K-flat if for every acyclic complex $N$ in $\\mathsf{Mod}_{\\mathcal R}(X_{\\Proet})$ the total tensor complex $P\\otimes_{\\mathcal R}N$, formed with the relative tensor product of Definition [pur713-def-relative-tensor] and with direct sums, is acyclic. A K-flat resolution of a complex $M$ is a quasi-isomorphism $P\\to M$ with $P$ K-flat. The governing reference, §§4.1 and 5, supplies functorial K-flat resolutions in $\\mathsf{Mod}_{\\mathcal R}(X_{\\Proet})$.",
+ "statement": "Let $X$ be a scheme, with the small pro-étale site and universe convention of [def-weil-pbc-proetale-site], and let $\\mathcal R$ be a commutative ring object [pur713-def-ring-object] of $\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$. Write $\\mathcal B=\\mathsf{Mod}_{\\mathcal R}(X_{\\Proet})$ for the category of module objects [pur713-def-modules]. Complexes are unbounded $\\mathbf Z$-indexed cochain complexes, with cohomology and quasi-isomorphisms as in [def-weil-abstract-derived-category]; acyclic means that every cohomology object is zero. The direct-sum total tensor, formed using the relative tensor product of [pur713-def-relative-tensor], is\n$$\n(P\\otimes_{\\mathcal R}N)^n=\\bigoplus_{p+q=n}P^p\\otimes_{\\mathcal R}N^q,\n\\qquad\n d|_{(p,q)}=d_P^p\\otimes1+(-1)^p1\\otimes d_N^q.\n$$\nThe two displayed components land in the $(p+1,q)$ and $(p,q+1)$ summands, respectively. A complex $P$ is K-flat if $P\\otimes_{\\mathcal R}N$ is acyclic for every acyclic complex $N$ of $\\mathcal B$. A K-flat resolution of $M$ is a quasi-isomorphism $P\\to M$ with $P$ K-flat. Functorial K-flat resolutions exist: there is a functor $Q:\\mathrm{CoCh}(\\mathcal B)\\to\\mathrm{CoCh}(\\mathcal B)$ and a natural transformation $q:Q\\Rightarrow\\mathrm{id}$ such that each $Q(M)$ is K-flat and each $q_M$ is a quasi-isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-kflat-module.md",
   "place": "node pur713-def-kflat-module, order 2484"
  },
  "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "pur713-def-ring-object",
+  "pur713-def-modules",
+  "def-weil-abstract-derived-category",
   "pur713-def-relative-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Start with $\\mathsf{Ab}$, viewed as $\\mathbf Z$-modules: [lem-weil-pbc-ring-modules-grothendieck-abelian] gives its Grothendieck abelian structure, and [sk-def-sfb-sheaf-tensor] specifies its closed symmetric tensor $\\otimes_{\\mathbf Z}$. It has a functorial flat cover: for an abelian group $A$, take the free abelian group $F(A)=\\bigoplus_{a\\in A}\\mathbf Z[a]$ [def-weil-pbc-free-module], and send $[a]$ to $a$. For $f:A\\to B$ send $[a]$ to $[f(a)]$; identities, composition, and naturality of the augmentation hold on these generators. The augmentation is surjective since $a$ is the image of $[a]$. Each $F(A)$ is flat by [lem-weil-pbc-projective-module-flat], whose last sentence includes free modules. Thus this is a functor with flat values and a natural epimorphism to the identity.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "The categories of the table; explicit free cover supplying its coefficient-category hypothesis"
+   }
+  },
+  {
+   "text": "Use the small skeleton in [def-weil-pbc-proetale-site], in the larger universe specified there, so its indexing category is essentially small relative to the abelian-group values. Apply [lem-weil-pbc-sheaf-tensor-closed] with $\\mathcal A=\\mathsf{Ab}$: $\\mathcal C=\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$ is Grothendieck abelian and closed symmetric monoidal, its tensor is additive in each variable, and each tensor functor preserves all small colimits. The tensor is the sheafified $\\otimes_{\\mathbf Z}$, not a pointwise tensor asserted to be already a sheaf. Apply [lem-sfb-sheaf-functorial-flat-resolution] to the free cover of step 1. All its coefficient hypotheses were checked there, so $\\mathcal C$ has a functorial flat cover.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-sheaf-functorial-flat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
+    "place": "The categories of the table, first three sentences"
+   }
+  },
+  {
+   "text": "The commutativity of $\\mathcal R$ and step 2 allow [lem-sfb-modobj-grothendieck] and [def-sfb-modobj-internal-hom] to apply. Thus $\\mathcal B$ is Grothendieck abelian, and $M\\otimes_{\\mathcal R}-$ has the stated internal-Hom right adjoint. Symmetry is supplied by [def-sfb-modobj-symmetric-tensor]. These use the same balanced coequalizer as [pur713-def-relative-tensor]: both arrows are the two module actions, and that node states that the action induced through $N$ agrees with the action induced through $M$. The identity on the unbalanced tensor therefore induces inverse maps between the two coequalizers, by their universal properties. In particular no replacement of the relative tensor is being assumed. By [lem-weil-pbc-left-adjoint-preserves-colimits], each fixed-factor relative tensor preserves all small colimits (use symmetry for the other side). It is additive: it preserves zero and binary coproducts; in an abelian category these are biproducts, with projections determined by identities and zero maps. It consequently preserves the diagonal and codiagonal and hence the formula $f+g=\\nabla(f\\oplus g)\\Delta$.",
+   "uses": [
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-internal-hom",
+    "def-sfb-modobj-symmetric-tensor",
+    "pur713-def-relative-tensor",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.proof.md",
+    "place": "Closed module tensor; Grothendieck structure from lem-sfb-modobj-grothendieck.proof.md; elementary comparison of the two specified coequalizers"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-modobj-flat-resolutions] to $\\mathcal C$ and $\\mathcal R$. Step 2 supplies all its ambient hypotheses, including the functorial flat cover. It supplies a functorial flat cover in $\\mathcal B$, explicitly $M\\mapsto\\mathcal R\\otimes F_{\\mathcal C}(M)$ with augmentation $\\gamma_M\\circ(1\\otimes\\pi_M)$. Here $M$ inside $F_{\\mathcal C}$ denotes its underlying abelian sheaf. The cited statement asserts both flatness for the relative tensor and that the augmentation is a natural epimorphism; neither property is inferred merely from the definition of flatness.",
+   "uses": [
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "Free modules on the functorial flat cover, and the natural epimorphism"
+   }
+  },
+  {
+   "text": "The direct sums in the displayed total tensor exist because $\\mathcal B$ is Grothendieck abelian [lem-sfb-modobj-grothendieck], and so has small colimits. The differentials and maps are defined on each summand by the displayed formula, using the additive tensor from step 3. On a $(p,q)$ summand, the square of the differential has pure terms $d_P^{p+1}d_P^p\\otimes1$ and $1\\otimes d_N^{q+1}d_N^q$, both zero by [def-weil-abstract-derived-category]; the mixed terms have coefficients $(-1)^p$ and $(-1)^{p+1}$ and cancel. Tensoring cochain maps degreewise commutes with this differential, and identities and composition hold on each summand. This gives exactly the direct-sum total tensor used in [def-sfb-preserves-kflat-quasi-iso].",
+   "uses": [
+    "lem-sfb-modobj-grothendieck",
+    "def-weil-abstract-derived-category",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-preserves-kflat-quasi-iso.md",
+    "place": "Direct-sum total tensor convention, with explicit differential-square verification"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-kflat-derivability] to $\\mathcal B$. Step 3 supplies its Grothendieck abelian and additive monoidal structure and preservation of all small colimits by either tensor functor; step 4 supplies its functorial flat cover. The cited statement gives a functor $Q$ on the category of unbounded cochain complexes and a natural quasi-isomorphism $q:Q\\Rightarrow\\mathrm{id}$ with two-sided K-flat values in the sense of [def-sfb-preserves-kflat-quasi-iso]. To check precisely the one-sided acyclic-test definition in this item, take acyclic $N$. Then $N\\to0$ is a quasi-isomorphism, since in each degree its cohomology map is $0\\to0$ [def-weil-abstract-derived-category]. Tensoring it with $Q(M)$ is a quasi-isomorphism. Its target is zero: relative tensor preserves the initial object by step 3, and all summands of the total tensor with the zero complex are zero. Hence $H^n(Q(M)\\otimes_{\\mathcal R}N)=0$ for every $n$. Thus each $q_M$ is a K-flat resolution in exactly the asserted sense. The functor and naturality are on complexes, as required, with no claim of a functorial choice on the homotopy category.",
+   "uses": [
+    "lem-sfb-kflat-derivability",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "First three sentences, with hypotheses supplied in steps 1–4 and the acyclic-test consequence expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-symmetric-tensor",
+  "pur713-def-relative-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-kflat-derivability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-kflat-module.md",
+  "place": "Definition paragraph; its final functorial existence assertion expanded with the existing sheaf/module-object and abstract K-flat machinery of sec-proetale-coefficients. The direct-sum convention agrees with Stacks Tag 06YN (sites-cohomology-definition-K-flat)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K-flat|HasFunctorialFlatResolution",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define K-flat module-object complexes or supply their functorial unbounded resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-flat complex of sheaves of modules has acyclic tensor product with every acyclic complex and every complex admits a functorial K-flat resolution",
+   "results": "8 hits: CochainComplex.IsKProjective.leftOrthogonal, HomologicalComplex.Acyclic, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, CochainComplex.isKInjective_iff_rightOrthogonal, Module.Flat.iff_rTensor_preserves_shortComplex_exact, HomologicalComplex.acyclic_iff, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define K-flat module-object complexes or supply their functorial unbounded resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\"",
+   "results": "1 hits: Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define K-flat module-object complexes or supply their functorial unbounded resolutions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes of sheaves of modules over a sheaf of commutative rings admit functorial K-flat resolutions",
+   "results": "8 hits: SheafOfModules.Presentation.map, SheafOfModules.isFinitePresentation, SheafOfModules.instAbelian, SheafOfModules.QuasicoherentData, SheafOfModules.isQuasicoherent, SheafOfModules.IsFinitePresentation, CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define K-flat module-object complexes or supply their functorial unbounded resolutions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded cochain complexes admit a functorial tensor acyclic replacement over a sheaf of rings",
+   "results": "8 hits: CochainComplex.cm5b.I, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.cm5b.I_X, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.IsKProjective, CochainComplex.IsKInjective, CochainComplex.cm5b, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not define K-flat module-object complexes or supply their functorial unbounded resolutions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -44,5 +185,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-kflat-module",
+  "worker": "stage1",
+  "summary": "Made the existing definition self-contained by naming the site, module-object, complex and cohomology conventions and the signed direct-sum tensor. Preserved the acyclic-test definition and functorial existence claim. Proved the latter using only existing nodes, checking all ambient and size hypotheses. No new nodes, no Mathlib match for the whole item, and no exact project attachment.",
+  "blueprint": "Realizes the full paragraph of pur713-def-kflat-module (order 2484): the first two sentences are the definitions and step 5 checks the total tensor; steps 1–4 and 6 justify the final functorial K-flat resolution assertion. The parent coefficient-tower unit has no proof steps and this is not its key node. Whole-blueprint searches found related generic K-flat definitions but no other node asserting this complete module-object definition and functorial existence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic A-valued sheaves on an essentially small site: Grothendieck abelian, symmetric monoidal closed under the sheafified tensor product tool used to establish the ambient hypotheses or functorial resolutions; the coefficient-tower unit states no such general result."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Generic Functorial flat resolutions pass to sheaves on an essentially small site tool used to establish the ambient hypotheses or functorial resolutions; the coefficient-tower unit states no such general result."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic Module objects form a Grothendieck abelian category tool used to establish the ambient hypotheses or functorial resolutions; the coefficient-tower unit states no such general result."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Generic Functorial flat resolutions of module objects tool used to establish the ambient hypotheses or functorial resolutions; the coefficient-tower unit states no such general result."
+   },
+   {
+    "node": "lem-sfb-kflat-derivability",
+    "why": "Generic K-flat resolutions and the homotopy derivability structure tool used to establish the ambient hypotheses or functorial resolutions; the coefficient-tower unit states no such general result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-kflat-derivability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-a6c9f9140",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-a6c9f9140 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit with two files: the item and the report. There are no new nodes and nothing needed fixing. Statement: it keeps the main-20261015 order-2484 definition exactly (one-sided acyclic test with P on the left, resolution direction P→M, any commutative ring object, unbounded complexes). It adds only the conventions that were implicit: the site and universes from def-weil-pbc-proetale-site, the cochain conventions from def-weil-abstract-derived-category, and the signed direct-sum differential, which matches def-sfb-preserves-kflat-quasi-iso and Stacks 06YN. The existence claim is now stated precisely as a functor Q on CoCh(B) with a natural quasi-isomorphism Q⇒id. Nothing is weakened, and module objects are not silently identified with sheaves of O-modules. Steps: (1) Ab is Grothendieck abelian with a functorial free flat cover; additivity of ⊗_Z is used but not written, which is elementary. (2) The pro-étale site is essentially small via the V-small skeleton; lem-weil-pbc-sheaf-tensor-closed applies, and lem-sfb-sheaf-functorial-flat-resolution's hypotheses all hold. (3) lem-sfb-modobj-grothendieck and the internal-Hom node apply. def-sfb-modobj-relative-tensor coequalizes the same pair of arrows as pur713-def-relative-tensor, and the R-actions agree by that node's own clause, so the two relative tensors are the same. Colimit preservation and additivity of the module tensor are argued correctly. (4) lem-sfb-modobj-flat-resolutions states exactly what the step uses. (5) I checked d²=0 and the signs myself; the step is correctly marked elementary. (6) lem-sfb-kflat-derivability's hypotheses are met; its two-sided K-flat values give the acyclic-test K-flat property because Q(M)⊗N→Q(M)⊗0=0 is a quasi-isomorphism. Route: the unit has no steps and this is not its key node. I accept all five declared tool uses as generic categorical black boxes. The other off-unit statements cited are Mathlib leaves. Integrity: no cycle (closure of 308 nodes), every cited id exists and none is merged, and no SGA source is used. Duplicates: def-pc-kflat-complex, def-weil-derived-tensor and def-pc-module-kflat-complex are over other coefficient categories, and lem-pd-module-ringed-topos-derived-comparison treats this item and def-pc-kflat-complex as separate notions, so same_as=[] is fine. Edge cases checked: X empty, R=0, the zero complexes, unbounded complexes, characteristic 2."
  }
 }

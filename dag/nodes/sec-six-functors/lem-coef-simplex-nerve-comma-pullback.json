@@ -13,9 +13,76 @@
   "lem-coef-infinity-isofibration-pullback-limit",
   "lem-coef-infinity-cofinal-comma-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of the ordinary categories $C$, $B$ and $C_{\\sigma/}$, the nerve is a small quasicategory. Here is the direct nerve calculation: an inner $2$-horn consists of consecutive arrows $f,g$ and is filled uniquely by the triangle with long edge $gf$. For an inner $3$-horn its three triangular equations give the missing triangular equation by associativity (the missing face is inner); thus the string of consecutive arrows fills it uniquely. In dimensions at least $4$ every edge and every triangle belongs to the horn; the triangles say that every longer arrow is the composite of the consecutive arrows. The string of these arrows therefore gives the unique filler and restricts to each specified face. Smallness follows because the objects of $C$ form the disjoint union of the sets $X_n$ over natural numbers $n$, its arrows are subsets of finite-ordinal map sets, and the two other categories have subsets of these object and arrow data. In any ordinary nerve, an equivalence edge is precisely an isomorphism: its two inverse triangles say $gf=1$ and $fg=1$, and conversely those equations supply the triangles.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.1.2.2 and Example 1.1.2.6; ordinary-nerve calculation and size check."
+   }
+  },
+  {
+   "text": "An $n$-simplex of $N(C_{\\sigma/})$ is a chain $(c_0,a_0)\\xrightarrow{h_1}\\cdots\\xrightarrow{h_n}(c_n,a_n)$ satisfying $h_j a_{j-1}=a_j$. In the join definition of the coherent undercategory this is precisely the string $\\sigma\\xrightarrow{a_0}c_0\\xrightarrow{h_1}\\cdots\\xrightarrow{h_n}c_n$: restriction to the last $n+1$ vertices is the projection to $N(C)$. The inverse retains that last string and takes the composites from $\\sigma$ as the $a_j$. For an ordinal map $\\theta:[m]\\to[n]$, both constructions give the string on $c_{\\theta(0)},\\ldots,c_{\\theta(m)}$ with arrow from $\\sigma$ equal to $a_{\\theta(0)}$; hence they commute with all operators. The fixed-source-arrow model gives exactly the same data: its $n$-simplices are functors $[n]\\times[1]\\to C$ constant at $\\sigma$ on the first row, so the vertical arrows are $a_j$ and its commuting squares are $h_j a_{j-1}=a_j$. All remaining arrows are their composites. This verifies the canonical isomorphism over $N(C)$ for either convention for the coherent arrows in the cited comma criterion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.9.2, Remark 1.2.9.5 and the dual of Remark 1.2.9.6, printed pp. 42-43; explicit ordinary-nerve specialization."
+   }
+  },
+  {
+   "text": "Let $q:N(C_{\\sigma/})\\to N(C)$ be the projection. It is an inner fibration: an inner horn in its source has a unique filler by Step 1; its image is a filler of the projected horn in $N(C)$ and hence equals the prescribed bottom simplex by uniqueness there. Given an equivalence $e:c\\to d$ in $N(C)$ and an object $(c,a)$ over $c$, Step 1 identifies $e$ with an ordinary isomorphism. Its lift is $e:(c,a)\\to(d,ea)$, with inverse $e^{-1}$, since $e^{-1}(ea)=a$. This inverse gives both inverse triangles in the undercategory nerve and the lifted edge projects exactly to $e$. Thus $q$ satisfies both parts of the isofibration definition in the cited node. Its source and target are quasicategories by Step 1; no general claim that the nerve of an arbitrary functor lifts isomorphisms is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 1.2.9.5-1.2.9.6 and Variant 4.2.3.15(5); explicit relative inner-horn and isomorphism lifts."
+   }
+  },
+  {
+   "text": "In degree $n$, the strict pullback $N(B)\\times_{N(C)}N(C_{\\sigma/})$ consists of a chain $b_0\\to\\cdots\\to b_n$ in $B$ and arrows $a_j:\\sigma\\to b_j$ satisfying the undercategory triangle equations. Fullness of $B\\subseteq C$ means that the arrows between these targets are exactly the arrows allowed in the full subcategory $(\\sigma\\downarrow B)$ of $C_{\\sigma/}$. Thus sending the pair of chains to the chain of pairs $(b_j,a_j)$ is a degreewise bijection to $N(\\sigma\\downarrow B)$. Its inverse takes the target chain and the same $a_j$. Restriction along an ordinal map composes the same arrows on both sides and retains the same composites from $\\sigma$, so these bijections define the asserted canonical simplicial isomorphism, commuting with both projections.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15, step (5), printed p. 256; direct nerve pullback calculation."
+   }
+  },
+  {
+   "text": "Apply the cited isofibration pullback-limit theorem with base $N(C)$, total space $N(C_{\\sigma/})$, map $q$ from Step 3, test category $N(B)$, and functor $N(i)$. Step 1 supplies small quasicategories and Step 3 supplies the required isofibration. The theorem says that the degreewise pullback is a pullback in $\\mathrm{Cat}_\\infty$; its comparison uses the constant path between the equal composites. Under the projection-preserving isomorphisms of Steps 2 and 4, this is exactly the square and its canonical comparison in the item. This proves the homotopy pullback assertion with its specified maps. The case $B=\\varnothing$ gives the empty pullback and empty comma nerve; $B=C$ gives the undercategory itself. The identity $\\sigma\\to\\sigma$ exists, so the undercategory itself is always nonempty when $\\sigma$ is given. No quasicategory assumption on $X$ was used: only the ordinary category $\\mathsf S(X)$ was formed.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15(5), using the generic Cat-infinity pullback theorem; agent expansion of the implicit comma comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 1.1.2.2, Example 1.1.2.6, Remarks 1.2.9.5-1.2.9.6, and Variant 4.2.3.15(5); elementary ordinary-nerve calculations and the existing isofibration pullback theorem. Online source, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +118,87 @@
    "results": "{\"t\": \"2026-10-17T08:57:59Z\", \"tool\": \"leanfinder\", \"query\": \"The undercategory forgetful functor is an isofibration and taking its nerve identifies ordinary comma categories with homotopy pullbacks of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"60454ee06a3d2f75\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary nerve and nerve-adjunction declarations do not state the undercategory projection isofibration or the Cat-infinity pullback comparison. The grep for isofibrations and comma nerves returned zero hits. Read the nerve formulas in Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nerve of an ordinary undercategory is the coherent undercategory and its projection is an isofibration",
+   "results": "{\"t\": \"2026-10-17T11:23:26Z\", \"tool\": \"leanfinder\", \"query\": \"nerve of an ordinary undercategory is the coherent undercategory and its projection is an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"SSet.stdSimplex.isoNerve\"], \"digest\": \"89c9a542c951b7ad\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Under, CategoryTheory.nerve, isofibration",
+   "results": "{\"t\": \"2026-10-17T11:23:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Under, CategoryTheory.nerve, isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'isofibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected for unknown identifier isofibration; the second valid Loogle query is recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "undercategory.*nerve|nerve.*undercategory|isofibration",
+   "results": "{\"t\": \"2026-10-17T11:23:27Z\", \"tool\": \"grep\", \"query\": \"undercategory.*nerve|nerve.*undercategory|isofibration\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid search subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary nerve of the undercategory C sigma slash C identifies with the coherent undercategory and computes pullbacks",
+   "results": "{\"t\": \"2026-10-17T11:23:28Z\", \"tool\": \"leansearch\", \"query\": \"ordinary nerve of the undercategory C sigma slash C identifies with the coherent undercategory and computes pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augmentedCechNerve.congr_simp\", \"CategoryTheory.Arrow.cechNerve_obj\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.Under.instHasLimits\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.Under.hasLimit_of_hasLimit_comp_forget\", \"CategoryTheory.Under.instHasLimitsOfShape\"], \"digest\": \"52f2043bd25bec25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary category undercategory nerve pullback along a full subcategory",
+   "results": "{\"t\": \"2026-10-17T11:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"ordinary category undercategory nerve pullback along a full subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve.functorOfNerveMap\"], \"digest\": \"b0dacb76a745d869\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Under, CategoryTheory.Comma, CategoryTheory.nerve",
+   "results": "{\"t\": \"2026-10-17T11:23:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Under, CategoryTheory.Comma, CategoryTheory.nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Under|Comma|nerve",
+   "results": "{\"t\": \"2026-10-17T11:23:33Z\", \"tool\": \"grep\", \"query\": \"Under|Comma|nerve\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid search subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "nerve of comma category strict pullback coherent comma quasicategory",
+   "results": "{\"t\": \"2026-10-17T11:23:33Z\", \"tool\": \"leansearch\", \"query\": \"nerve of comma category strict pullback coherent comma quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"358a38ce1cf68365\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "undercategory.*nerve|nerve.*undercategory|isofibration|Under",
+   "results": "{\"t\": \"2026-10-17T11:34:23Z\", \"tool\": \"grep\", \"query\": \"undercategory.*nerve|nerve.*undercategory|isofibration|Under\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\"], \"digest\": \"f3b1d5f4b67ae26f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are license/underlying comments and basic simplicial-set declarations, not the comma theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Under|Comma",
+   "results": "{\"t\": \"2026-10-17T11:35:00Z\", \"tool\": \"grep\", \"query\": \"Under|Comma\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean\"], \"digest\": \"feaa3b77bf22a4e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits are license/underlying comments and basic simplicial-set declarations, not the comma theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|undercategory|nerve.*comma|comma.*nerve",
+   "results": "{\"t\": \"2026-10-17T11:37:16Z\", \"tool\": \"grep\", \"query\": \"isofibration|undercategory|nerve.*comma|comma.*nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: corrected valid Mathlib subdirectory; no ordinary undercategory nerve/isofibration or Cat-infinity comma pullback theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -85,5 +229,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplex-nerve-comma-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement and split it into five steps: the ordinary-nerve horn and inverse-triangle calculations; explicit join/fixed-source-arrow undercategory identification; relative horn and isomorphism lifting for the projection; the strict comma-nerve pullback; and the existing Cat-infinity pullback theorem. No new node is needed: each local identification and lift is a direct calculation from the defined data, and the only general homotopy-limit theorem is already a cited node.",
+  "blueprint": "Realizes the hidden argument named in the ancestor prop-coef-integral-exceptional-adjoint proof: the ordinary simplex comma nerve is the coherent comma, its projection is an isofibration, and the full-subcategory pullback is strict and homotopy-correct.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "The item uses its ordinary nerve, coherent undercategory, quasicategory, and Cat-infinity conventions as generic infrastructure; this unit has no replacement definition for those notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-5e33b87cf",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-5e33b87cf (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the full statements of all four cited nodes, the unit sk-prop-sf-biduality-general, the chapter record and the parent's citing step. The statement is unchanged; I checked it on small cases and found it true. Step 1: the nerve is a quasicategory with unique inner fillers. I checked the inner 3-horn relation f03=f23·f02 and that every triangle lies in the horn for n>=4. Equivalence edges in a nerve are isomorphisms, and the size check holds. Step 2: N(C_{σ/}) ≅ N(C)_{σ/} over N(C). I checked this in both the join model and the fixed-source-arrow model, using N([n]x[1])=Δ^n x Δ^1, and simplicial operators keep a_{θ(0)}. Step 3: the projection q is an inner fibration because fillers are unique, and an isomorphism e lifts to e:(c,a)->(d,ea) with inverse e^{-1}. This matches the isofibration definition in lem-coef-infinity-isofibration-exponentiation. Step 4: the strict pullback equals N(σ↓B). Fullness of B is really needed here. Step 5: the hypotheses of lem-coef-infinity-isofibration-pullback-limit hold (small quasicategories, p=q an isofibration, g arbitrary, emptiness allowed). Edge cases checked: X empty, B empty, B=C, X a point, X=∂Δ^2 (not a quasicategory). proof_deps equals the union of the step uses, all cited nodes exist and none is merged, there is no cycle (closure of 664 nodes), no SGA is cited and there are no new nodes. No duplicate exists: I checked the ordinary-nerve, slice-nerve, coherent-nerve, coslice and represented-family slice nodes. All cited statements are in the item's unit. The declared tool_use of def-cbc-enhanced-diagrams-cones is accepted but not needed, since it is a definition. HTT is not archived, so WANTED and proof_origin=agent are correct. The item is not a target, so there is no base-change morphism or coefficient category to check. One note: the statement's closing clause about the comparison to N(B)x^h N(C)_{σ/} uses a quasicategory homotopy pullback that the criterion node does not model. I read it as the Cat_inf pullback, which is how the parent uses it. No fixes."
  }
 }

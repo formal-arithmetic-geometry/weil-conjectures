@@ -13,48 +13,111 @@
   "def-weil-pbc-intrinsic-completion",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R(K)=K_\\bullet$ for the reduction-tower functor. In the adic-datum definition its underived functor on complexes is $F(P)_n=P\\otimes_{A_T}(P_n)_T$, with the quotient transitions. The definition states that $F$ preserves shifts and cone complexes and that K-flat resolutions exist and carry quasi-isomorphisms between resolving objects to tower quasi-isomorphisms. Apply the resolving-class theorem to this exact functor from the homotopy category, with K-flat complexes as the resolving class. Its conclusion says that the left derived functor $R:D(\\operatorname{Mod}(A_T))\\to D(\\operatorname{Tow}_A(T))$ is exact. Thus the given ambient distinguished triangle is sent to a distinguished triangle of strict towers, with its connecting arrow followed by the shift comparison of $R$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SE (proposition-derived-functor); reduction functor as specified in def-weil-pbc-adic-coefficient-datum"
+   }
+  },
+  {
+   "text": "Use the coefficient map $c_u:u^{-1}A_T\\to A_{T'}$ in the completed-pullback definition. The underived tower pullback $H$ applies $u^{-1}(-)\\otimes_{u^{-1}A_T}A_{T'}$ levelwise. It is additive, so on complexes it respects the shift signs and the cone differential matrix: $H(\\operatorname{Cone}(a))^q=H(Q^q)\\oplus H(P^{q+1})$ for $a:P\\to Q$, and its differential has entries $H(d_Q),H(a),-H(d_P)$. It therefore induces an exact functor from the tower homotopy category to the target tower derived category. Apply the strict-diagram K-flat replacement lemma with the small category $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, the two small pro-etale sites, their completed ring sheaves and $c_u$. It supplies replacements for every tower complex and quasi-isomorphism invariance of $H$ on that resolving class. These are exactly the two hypotheses of the resolving-class theorem. Consequently its total left derived functor $V=Lu^*_{\\operatorname{Tow}}$ is exact. This is the tower functor used in the completed-pullback definition. In particular it takes the triangle of Step 1 to a distinguished triangle in $D(\\operatorname{Tow}_A(T'))$. No exactness of underived completed-ring pullback is assumed.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN (lemma-find-existence-computes), dual part, and 05SE (proposition-derived-functor), applied to the strict-diagram resolving class"
+   }
+  },
+  {
+   "text": "The derived inverse-limit proposition gives an exact functor $L=\\operatorname{Rlim}:D(\\operatorname{Tow}_A(T'))\\to D(\\operatorname{Mod}(A_{T'}))$. Apply it to the distinguished triangle of Step 2. By the completed-pullback definition, its three vertices are precisely $P_u(M),P_u(N),P_u(Q)$, since $P_u=LVR$ on derived-complete inputs. Its last arrow is $LVR$ applied to the original connecting morphism, followed successively by the images of the shift comparisons for $R$, $V$, and $L$. Thus it has the required connecting arrow for the composite shift comparison. This argument uses the strict-tower derived functor of inverse limit, not a choice of unrelated homotopy-limit cones.",
+   "uses": [
+    "prop-weil-pbc-rlim-functoriality",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); the unbounded strict-tower triangulated refinement is prop-weil-pbc-rlim-functoriality"
+   }
+  },
+  {
+   "text": "First, the complete-object domain is stable under shifts: the tensor, product and mapping-fiber formulas in the intrinsic-completion definition commute with shifting complexes (with the usual differential signs), and identify the completion unit for $K[r]$ with $\\eta_K[r]$. Thus an invertible $\\eta_K$ remains invertible after any shift. For an exact functor, its natural comparison with $[1]$ extends to all integer shifts by iteration, using the inverse comparison for $[-1]$ and the identity for $[0]$. For positive shifts the two sides of the addition identity are the same ordered string of comparisons; for negative shifts they are strings of inverses; in mixed signs the inverse adjacent factors cancel. This gives the unit and addition identities, with the usual shift associativity identifications. Let $\\sigma_R^r,\\sigma_V^r,\\sigma_L^r$ be these comparisons for the three exact functors. Define the comparison for their composite by the explicit composite $LVR(K[r])\\xrightarrow{LV(\\sigma_R^r)}LV(RK[r])\\xrightarrow{L(\\sigma_V^r)}L(VRK[r])\\xrightarrow{\\sigma_L^r}LVRK[r]$. Naturality follows by composing the three naturality squares. For $r=0$ every factor is an identity. For $r+s$, substitute each factor's addition identity into this formula; naturality moves the inner comparisons past the outer ones, producing first the displayed comparison for $r$ and then its shifted comparison for $s$. This is the required composition identity. Restricting this natural comparison to the full complete-object domain gives the claimed shifts for $P_u$; Step 3 proves distinguishedness for the same comparison at $r=1$. No scheme finiteness or constructibility assumption was used.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (definition-exact-functor-triangulated-categories); elementary shift and composition checks from the explicit constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-triangulated-category",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "prop-weil-pbc-rlim-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-extension.md",
+  "place": "Proof, sole paragraph: completed pullback is required to preserve shifts and ambient distinguished triangles; expanded using the strict-tower definition and derived-limit formalism."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "completedPull|completed.pullback|pullback.*[Tt]riangulated",
-   "results": "0 hits",
+   "results": "0 hits: none",
    "date": "2026-10-17",
-   "verdict": "no match: generic algebra, sheaf or derived-category interfaces do not state this completed-coefficient assertion"
+   "verdict": "no match: generic derived functors and sheaf pullback declarations do not assert exactness of the specified completed-ring strict-tower composite"
   },
   {
    "tool": "leansearch",
    "query": "Completed inverse image on derived complete sheaf modules preserves shifts and distinguished triangles",
-   "results": "CategoryTheory.Functor.essImageDistTriang; CategoryTheory.MorphismProperty.IsCompatibleWithShift.condition; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse; CategoryTheory.Equivalence.IsTriangulated.mk''; CategoryTheory.Equivalence.commShiftInverse; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse; CategoryTheory.Functor.mapTriangleCommShiftIso_inv_app_hom₁",
+   "results": "8 hits: CategoryTheory.Functor.essImageDistTriang; CategoryTheory.MorphismProperty.IsCompatibleWithShift.condition; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse; CategoryTheory.Equivalence.IsTriangulated.mk''; CategoryTheory.Equivalence.commShiftInverse; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse; CategoryTheory.Functor.mapTriangleCommShiftIso_inv_app_hom₁",
    "date": "2026-10-17",
-   "verdict": "no match: generic algebra, sheaf or derived-category interfaces do not state this completed-coefficient assertion"
+   "verdict": "no match: generic derived functors and sheaf pullback declarations do not assert exactness of the specified completed-ring strict-tower composite"
   },
   {
    "tool": "loogle",
    "query": "\"IsTriangulated\", \"Functor\"",
-   "results": "CategoryTheory.Functor.IsTriangulated.instId; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.IsTriangulated.instAdditive; CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair; CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms; CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor; CategoryTheory.Functor.isTriangulated_of_iso; CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "results": "12 hits: CategoryTheory.Functor.IsTriangulated.instId; CategoryTheory.Functor.IsTriangulated; CategoryTheory.Functor.IsTriangulated.instAdditive; CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair; CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms; CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor; CategoryTheory.Functor.isTriangulated_of_iso; CategoryTheory.Functor.isTriangulated_iff_of_iso",
    "date": "2026-10-17",
-   "verdict": "no match: generic algebra, sheaf or derived-category interfaces do not state this completed-coefficient assertion"
+   "verdict": "no match: generic derived functors and sheaf pullback declarations do not assert exactness of the specified completed-ring strict-tower composite"
   },
   {
    "tool": "leanfinder",
    "query": "Completed pullback on derived complete pro etale module sheaves is an exact triangulated functor constructed by reduction tower derived pullback and derived inverse limit",
-   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; SheafOfModules.pullbackComp; SheafOfModules.pullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackIso; SheafOfModules.instIsLeftAdjointPullback; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+   "results": "8 hits: SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.pullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
    "date": "2026-10-17",
-   "verdict": "no match: generic algebra, sheaf or derived-category interfaces do not state this completed-coefficient assertion"
+   "verdict": "no match: generic derived functors and sheaf pullback declarations do not assert exactness of the specified completed-ring strict-tower composite"
   },
   {
    "tool": "leanfinder",
    "query": "Derived completion of inverse image is a triangulated exact functor on adically complete sheaf complexes",
-   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
    "date": "2026-10-17",
-   "verdict": "no match: generic algebra, sheaf or derived-category interfaces do not state this completed-coefficient assertion"
+   "verdict": "no match: generic derived functors and sheaf pullback declarations do not assert exactness of the specified completed-ring strict-tower composite"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-cbc-finite-extension",
@@ -71,5 +134,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-completed-pullback-triangles",
+  "worker": "stage1",
+  "summary": "Retained the strict-tower route and the unchanged statement. Derived reduction and completed-ring tower pullback are exact by the resolving-class theorem; strict-tower Rlim is triangulated. Wrote the composite shift comparison and its coherence explicitly. Removed the unnecessary finite-level exactness, reduction, and O_E-specific linearity citations. No new nodes.",
+  "blueprint": "The ancestor thm-cbc-finite-extension proof, sole paragraph, clause requiring completed pullback to preserve shifts and ambient distinguished triangles for the exact compact-support composites.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adic-coefficient-datum",
+    "why": "Defines the completed coefficient sheaves and strict reduction functor required by this item; the compact-support unit has no replacement construction."
+   },
+   {
+    "node": "def-weil-pbc-completed-pullback",
+    "why": "Defines exactly the strict-tower composite whose exactness the item proves."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolving-class existence and exactness theorem, applied to reduction and to tower pullback; not a substitute for any compact-support base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Strict-diagram resolving objects and quasi-isomorphism invariance for ringed-topos pullback; the compact-support unit supplies no such resolution theorem."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic unbounded strict-tower derived inverse limit is triangulated; used only as the last stage of the specified construction."
+   },
+   {
+    "node": "def-weil-pbc-intrinsic-completion",
+    "why": "The explicit completion unit defines the domain and verifies its shift stability by shifting the defining complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-ad2ad70aa",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ad2ad70aa (reviewer sub-agent of L); spot-checked: I read the item in full and every cited statement: adic datum, completed pullback, intrinsic completion, def-weil-triangulated-category, lem-pur-left-derived-from-kflat-class, lem-weil-pbc-diagram-kflat-replacements, prop-weil-pbc-rlim-functoriality, plus the main-20261015 blueprint_updates. I also read the Stacks sources 06XN, 05SE, 014V, 0941 and 099N(2),(5) at the cited places. The statement is unchanged and not weakened. It uses the completed coefficient sheaves A_W on both sides with the structure map c_u, and does not identify them with constant coefficients. Step 1: the adic-datum definition supplies both resolving-class hypotheses (K-flat resolutions exist; quasi-isomorphisms between K-flat complexes go to tower quasi-isomorphisms), so the derived reduction R is exact. Step 2: the diagram lemma's two clauses apply with small J=N_{>=1}^op, small pro-etale sites, commutative A_T and A_{T'}, and the ring map c_u. Its objectwise quasi-isomorphisms are quasi-isomorphisms of towers because tower cohomology is levelwise. Additivity gives exactness on the homotopy category, so V=Lu*_Tow is exact, and V is literally the functor of the definition. Step 3: prop-weil-pbc-rlim-functoriality gives Rlim triangulated with no boundedness hypothesis, and P_u=Rlim.V.R by definition. Step 4: the domain is stable under shifts and the composite shift comparison is written out explicitly; this is honestly elementary. proof_deps equals the union of the step uses, and there is no cycle. Small cases (I=A, I=0, split triangles, A=Z_l with I=(l)) are consistent. I accept the tool_uses for the three off-unit generic tools lem-pur-left-derived-from-kflat-class, lem-weil-pbc-diagram-kflat-replacements and prop-weil-pbc-rlim-functoriality; the three definitions listed there are notions and need none. The delivery creates no new nodes. rg over dag/nodes found no duplicate: lem-sbc-completed-operations-linear-natural-exchange is O_E-only and asserts linearity and adjunction, not triangle preservation. The parent thm-cbc-finite-extension uses exactly this conclusion. No SGA source is used. No changes."
  }
 }

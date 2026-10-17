@@ -11,48 +11,96 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-full-essential-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i_0:\\mathcal Y_0\\hookrightarrow\\mathcal Y$ for the full-subcategory inclusion, so $J=i_0J_0$. The vertices of $JF$ and $JG$ lie in $\\mathcal Y_0$. Since a full subcategory contains exactly the simplices whose vertices are specified objects, the entire edge $\\alpha:JF\\simeq JG$ factors through $\\operatorname{Fun}(\\mathcal C,\\mathcal Y_0)$; its inverse and both triangle simplices factor there as well. Thus we may regard $\\alpha$ as a coherent natural equivalence $J_0F\\simeq J_0G$ in the smaller functor category.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2 (derived mapping-complex adjunction), via step 9 of lem-coef-infinity-presentable-presheaf-presentation (the Yoneda-image equivalence $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$): the Yoneda-image equivalence is regarded in the replete full essential image."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-full-essential-image], $J_0$ has a coherent quasi-inverse $K:\\mathcal Y_0\\to\\mathcal X$ and coherent natural equivalences $\\kappa:KJ_0\\simeq1_{\\mathcal X}$ and $\\eta:J_0K\\simeq1_{\\mathcal Y_0}$. Postcomposition by $J_0$ and by $K$ therefore have inverse coherent transformations after whiskering with $\\kappa$ and $\\eta$. Apply postcomposition by $K$ to $\\alpha$ and conjugate it by $\\kappa$ to obtain the coherent transformation $$\\beta=\\kappa_G\\circ(K\\alpha)\\circ\\kappa_F^{-1}:F\\longrightarrow G.$$ All maps here are maps in the whole parameter functor category, so the construction retains the higher coherence in $\\mathcal C$. Composition and inverses are taken in the functor quasicategory, using [lem-coef-infinity-mapping-composition].",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2 (derived mapping-complex adjunction), via step 9 of lem-coef-infinity-presentable-presheaf-presentation (the Yoneda-image equivalence $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$): apply the quasi-inverse on the replete essential image and conjugate by the inverse equivalence."
+   }
+  },
+  {
+   "text": "The transformation $K\\alpha$ and the components of $\\kappa$ are equivalences, so the componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus] and composition of invertible classes in [lem-coef-infinity-mapping-composition] show that $\\beta$ is an equivalence. Verify its prescribed image in the homotopy categories of the whole functor quasicategories, whose morphism classes and composition are supplied by the latter node. Square brackets below denote these classes. Naturality of $\\kappa:KJ_0\\simeq1_{\\mathcal X}$ along $\\beta$ gives $[\\kappa_G][KJ_0\\beta]=[\\beta][\\kappa_F]=[\\kappa_G][K\\alpha]$. Cancel the invertible $[\\kappa_G]$ to get $[KJ_0\\beta]=[K\\alpha]$, and apply $J_0$. Naturality of $\\eta:J_0K\\simeq1_{\\mathcal Y_0}$ along $J_0\\beta$ and along $\\alpha$ now gives $$[J_0\\beta][\\eta_{J_0F}]=[\\eta_{J_0G}][J_0KJ_0\\beta]=[\\eta_{J_0G}][J_0K\\alpha]=[\\alpha][\\eta_{J_0F}].$$ Cancel $[\\eta_{J_0F}]$. The equality $[J_0\\beta]=[\\alpha]$ means these edges lie in the same component of the mapping space of $\\operatorname{Fun}(\\mathcal C,\\mathcal Y_0)$, hence are homotopic there. The naturality squares used above are obtained by restricting the coherent natural transformations to the relevant parameter edge and taking their two triangular faces; their class equations follow from the $2$-simplex relation of the composition node. Postcomposing with $i_0$ gives $J\\beta\\simeq\\alpha$ as required. This uses only the two given inverse equivalences, without imposing triangle identities between their chosen witnesses.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2 (derived mapping-complex adjunction), via step 9 of lem-coef-infinity-presentable-presheaf-presentation (the Yoneda-image equivalence $j_{\\mathcal P}r\\simeq j_{\\mathcal P}i$): identify the lifted equivalence with the prescribed Yoneda-image equivalence by naturality and cancellation in the parameter functor homotopy categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, via step 9 of lem-coef-infinity-presentable-presheaf-presentation; agent expansion using the full-essential-image quasi-inverse, coherent whiskering and explicit naturality-and-cancellation equations in the parameter functor homotopy categories."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A natural equivalence between functors after a fully faithful functor lifts through a quasi-inverse on the essential image",
-   "results": "{\"t\": \"2026-10-17T08:39:23Z\", \"tool\": \"leanfinder\", \"query\": \"A natural equivalence between functors after a fully faithful functor lifts through a quasi-inverse on the essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"CategoryTheory.Functor.Full.toEssImage\", \"CategoryTheory.Functor.essImage.liftFunctor_map\"], \"digest\": \"ccda537bcaff276e\"}",
+   "results": "{\"t\": \"2026-10-17T10:18:22Z\", \"tool\": \"leanfinder\", \"query\": \"A natural equivalence between functors after a fully faithful functor lifts through a quasi-inverse on the essential image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage.liftFunctorCompIso\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app\", \"CategoryTheory.Functor.essImage.liftFunctor_map\", \"CategoryTheory.Functor.essImage.liftFunctor\", \"CategoryTheory.Functor.essImage.liftFunctor_obj\"], \"digest\": \"ad2f459e4fedd3aa\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+   "verdict": "no match: the returned declarations are ordinary-category results (or primitive quasicategory horn filling); none states coherent natural-equivalence lifting for arbitrary quasicategories and functor categories."
   },
   {
    "tool": "loogle",
    "query": "\"FullyFaithful.whiskeringRight\"",
-   "results": "{\"t\": \"2026-10-17T08:39:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"FullyFaithful.whiskeringRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.whiskeringRight\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight_preimage_app\"], \"digest\": \"019fdaf855f49b03\"}",
+   "results": "{\"t\": \"2026-10-17T10:18:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"FullyFaithful.whiskeringRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.whiskeringRight\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight_preimage_app\"], \"digest\": \"019fdaf855f49b03\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+   "verdict": "no match: the returned declarations are ordinary-category results (or primitive quasicategory horn filling); none states coherent natural-equivalence lifting for arbitrary quasicategories and functor categories."
   },
   {
    "tool": "grep",
    "query": "FullyFaithful.whiskeringRight|preimageIso|fullyFaithful",
-   "results": "{\"t\": \"2026-10-17T08:29:24Z\", \"tool\": \"grep\", \"query\": \"FullyFaithful.whiskeringRight|preimageIso|fullyFaithful\", \"sub\": \"CategoryTheory/Whiskering.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"10\", \"116\", \"118\", \"172\"], \"digest\": \"b4d96acd75d3e384\"}",
+   "results": "{\"t\": \"2026-10-17T10:18:23Z\", \"tool\": \"grep\", \"query\": \"FullyFaithful.whiskeringRight|preimageIso|fullyFaithful\", \"sub\": \"CategoryTheory/Whiskering.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"10\", \"116\", \"118\", \"172\"], \"digest\": \"b4d96acd75d3e384\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+   "verdict": "no match: the returned declarations are ordinary-category results (or primitive quasicategory horn filling); none states coherent natural-equivalence lifting for arbitrary quasicategories and functor categories."
   },
   {
    "tool": "leansearch",
    "query": "A fully faithful functor of infinity categories lifts a coherent natural equivalence between two postcomposed diagrams",
-   "results": "{\"t\": \"2026-10-17T08:27:10Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful functor of infinity categories lifts a coherent natural equivalence between two postcomposed diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.ofIso\", \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"CategoryTheory.CostructuredArrow.isEquivalence_post\", \"CategoryTheory.Functor.FullyFaithful.homEquiv\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso\", \"CategoryTheory.Functor.preimageIso\", \"CategoryTheory.Functor.FullyFaithful.homNatIso\", \"CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight\"], \"digest\": \"05bc1efe95a1a2a9\"}",
+   "results": "{\"t\": \"2026-10-17T10:18:24Z\", \"tool\": \"leansearch\", \"query\": \"A fully faithful functor of infinity categories lifts a coherent natural equivalence between two postcomposed diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.ofIso\", \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"CategoryTheory.CostructuredArrow.isEquivalence_post\", \"CategoryTheory.Functor.FullyFaithful.homEquiv\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso\", \"CategoryTheory.Functor.preimageIso\", \"CategoryTheory.Functor.FullyFaithful.homNatIso\", \"CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight\"], \"digest\": \"05bc1efe95a1a2a9\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+   "verdict": "no match: the returned declarations are ordinary-category results (or primitive quasicategory horn filling); none states coherent natural-equivalence lifting for arbitrary quasicategories and functor categories."
   },
   {
    "tool": "leanfinder",
    "query": "Postcomposition by a fully faithful functor of quasicategories reflects and lifts coherent natural equivalences of functors",
-   "results": "{\"t\": \"2026-10-17T08:29:26Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a fully faithful functor of quasicategories reflects and lifts coherent natural equivalences of functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.isEquivalence_post\", \"CategoryTheory.StructuredArrow.isEquivalence_post\", \"CategoryTheory.Functor.fullyFaithfulCancelRight\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.CostructuredArrow.isEquivalenceMap₂\", \"SSet.Truncated.HomotopyCategory.lift_unique'\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight\"], \"digest\": \"1c2aae3d1c42baff\"}",
+   "results": "{\"t\": \"2026-10-17T10:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a fully faithful functor of quasicategories reflects and lifts coherent natural equivalences of functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.isEquivalence_post\", \"CategoryTheory.StructuredArrow.isEquivalence_post\", \"CategoryTheory.Functor.fullyFaithfulCancelRight\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.CostructuredArrow.isEquivalenceMap₂\", \"SSet.Truncated.HomotopyCategory.lift_unique'\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight\"], \"digest\": \"1c2aae3d1c42baff\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+   "verdict": "no match: the returned declarations are ordinary-category results (or primitive quasicategory horn filling); none states coherent natural-equivalence lifting for arbitrary quasicategories and functor categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-presentable-presheaf-presentation",
@@ -78,5 +126,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-yoneda-functor-equivalence-lift",
+  "worker": "stage1",
+  "summary": "Split the functor-level lifting statement into three steps: factor the given equivalence through the full replete essential image, apply the coherent quasi-inverse supplied by the full-essential-image node, and verify equivalence plus the prescribed image by whiskering and the componentwise criterion. The statement and hypotheses are unchanged; no new nodes were needed. On resumption, replaced an unsupported appeal to triangle identities by explicit naturality-and-cancellation equations using the existing mapping-composition node; no extra hypothesis on the quasi-inverse data is needed.",
+  "blueprint": "Proof paragraph 2, step 6 of prop-coef-integral-exceptional-adjoint: the equivalence of Yoneda images is converted into a coherent equivalence of the original functors by the quasi-inverse on the replete essential image.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor-category facts (full subcategories, componentwise equivalence and whiskering) are used to retain higher natural-transformation coherence; the biduality unit has no replacement node for this foundational calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-9159d43e5",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-9159d43e5 (reviewer sub-agent of L); spot-checked: I read the item, its 3 steps and the full statements of all 4 cited nodes (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-full-essential-image, lem-coef-infinity-mapping-composition), plus the unit and chapter records, the blueprint proof of prop-coef-integral-exceptional-adjoint and the citer's step 9 (presentable-presheaf-presentation). The statement is true (a fully faithful postcomposition lifts equivalences) and unchanged. Small cases checked: empty C, J=id, a one-object inclusion into a contractible groupoid, J not essentially surjective. Step 1: every simplex of alpha and of its inverse witnesses has vertices JF(c) or JG(c) in Y_0, so they factor through the full subcategory Fun(C,Y_0). Step 2: beta=kappa_G·Kalpha·kappa_F^{-1} in the homotopy category of Fun(C,X); the whiskered kappa_F is an equivalence. Step 3: the kappa- and eta-naturality squares come from (c,s,t)->kappa(beta(c,s),t) and the 2-simplex relation; the orientations and both cancellations check, giving [J_0 beta]=[alpha]; no triangle identity is assumed. There are no new nodes and no cycle; proof_deps equals the union of the uses. The Bergner-model node simplicial-fully-faithful-homotopy-image is not a duplicate. Accepted tool_use: cone-calculus (generic; full subcategories of Fun are quasicategories). No SGA; no target, base-change morphism or coefficient category involved. FIX: the step source places and proof_origin.place said 'paragraph 2, step 6', but the blueprint paragraph has no numbered steps and the parent uses this item at its step 9. I corrected them to 'via step 9 of lem-coef-infinity-presentable-presheaf-presentation'. blueprint.from.place, which also says step 6, is not split-owned and is left for the maintainer.; 1 file(s) fixed by the reviewer"
  }
 }
