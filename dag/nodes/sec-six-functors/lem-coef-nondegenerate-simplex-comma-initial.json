@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-nondegenerate-simplex-face-poset"
  ],
  "proof": [
   {
@@ -179,5 +180,34 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-326e97951 (reviewer sub-agent of L); spot-checked: I read all three steps of the item and the statements of every cited node: face-poset (unsplit, same unit), nerve-natural-homotopy-equivalence (split and reviewed), the decomposition Mathlib leaf, def-cbc and def-coef-zigzag. The item statement is true. My proof: write α=i∘p (surjection then injection); τΔ(i) is injective and so nondegenerate; uniqueness of the decomposition gives p=s_σ; t is unique because s_σ is epi. I tested it on Δ^0 and on Δ^1 (a degenerate 2-simplex and a nondegenerate edge). The one-vertex circle shows the injectivity hypothesis is needed. Step 1: the decomposition leaf gives the object, and smallness is a direct count. Step 2: the face-poset factorization clause gives exactly the comma morphisms; the composition direction matches; it uses the cited statement, not its proof. Step 3: η:QP⇒id is natural by uniqueness of arrows from c; the nerve lemma's weak-equivalence convention matches def-cbc; N(1)=Δ^0, so weak contractibility follows. There are no new nodes, no cycle (face-poset does not cite the item), no off-unit citation and no tool use. My rg search of the DAG found no duplicate. HTT is not in literature/; the proof is marked agent-written and the archive copy is filed as WANTED. HTT Variant 4.2.3.16 (from memory, not checked against a local copy) states this left-adjoint setting. No SGA. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-442ed0035",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source, Lean module, report sections, edge cases, docstrings, and searches. Reproduced scompile.py successfully for sandbox and library compilation; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NondegenerateSimplexCommaInitial",
+  "declaration": "SSet.initial_nondegenerate_simplex_comma",
+  "declarations": [
+   "SSet.simplexObject",
+   "SSet.nondegenerateObjectProperty",
+   "SSet.nondegenerateCategory",
+   "SSet.simplexCommaCategory",
+   "SSet.SimplexDecomposition",
+   "SSet.decompositionObject",
+   "SSet.decompositionArrow",
+   "SSet.decompositionCommaObject",
+   "SSet.initial_nondegenerate_simplex_comma"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NondegenerateSimplexCommaInitial.lean",
+  "statement": "theorem initial_nondegenerate_simplex_comma (X : SSet.{u}) [X.Nonsingular] (s : X.S) : ∃ d : SimplexDecomposition X s, (∀ d' : SimplexDecomposition X s, d' = d) ∧ (∀ q : simplexCommaCategory X s, Nonempty (decompositionCommaObject d ⟶ q) ∧ ∀ (f g : decompositionCommaObject d ⟶ q), f = g) ∧ SSet.Enhanced.IsContractible (nerve (simplexCommaCategory X s))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
