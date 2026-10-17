@@ -299,7 +299,10 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "def-weil-pbc-ringed-section-localization"
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-local-coefficient-localization",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
  ],
  "blueprint": {
   "from": {
@@ -405,5 +408,38 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-7bdf28deb (reviewer sub-agent of L); spot-checked: I read the whole item (11 steps, no new nodes), the statement of every cited node, and Stacks 099J lemma-pushforward-derived-complete. 099J's local display Hom(O_{U,g},Rf_*K|_U)=Hom(O'_{V,g'},K|_V) uses derived pullback of the localized ring and sites-cohomology-lemma-adjoint, and this item supplies exactly those two facts. I also checked the tags 04J0, 06YY and 0FND. The statement is unchanged: f_V comes from a continuous u with U=u(V), the ring map is arbitrary (not assumed flat or an isomorphism), complexes are unbounded and the coefficients are module sheaves. Small cases checked: a=0 or nilpotent (both sides 0), a=1, the non-flat map Z->Z/2, and h=identity. Steps 1-5 and 8-11 check out. Step 8: I checked the unit and counit equations and the direction of lambda. Step 9: the fraction colimit holds even when a is a zero divisor. Step 10: F(.a)=.a'. Step 11: flatness from sectionwise flatness plus exact sheafification and the tensor/sheafification comparison. Two repairs are in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-derived-slice-localization.json. (1) Step 2 applied the K-flat-pullback lemma, which needs a morphism of topoi, while citing only the definition of restriction. It now cites lem-weil-pbc-slice-site-localization (same unit), where j_V is that morphism, and the tensor unit of lem-pc-sheaf-modules-tensor-closed. (2) Steps 6 and 7 used the fraction formula of lem-pc-pre-derived-adjoint-functors-general without checking that lemma's essential-constancy hypotheses. Step 6 now writes them out. Ind side: the unique homotopy classes g_{s'}:I'->I from kinjective-hom-derived together with the comparison theta from kinjective-total-derived. Pro side: the cone u_t'=eps_P' Lf^*(Qt')^{-1}, made invertible at flat K-flat stages through cofilteredness and a resolution. Step 7 notes that the same argument holds on the slice. proof_deps were recomputed and three ids added: the slice-site node and def-pc-essentially-constant-ind/pro-diagram. No cycle, no duplicate: projection-restriction is the pro-etale special case and etale-localization-exchange covers etale D^+ only. All declared tool_uses are accepted as generic black boxes, and no SGA source is used. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedDerivedSliceLocalization",
+  "declaration": "SheafOfModules.ringedDerivedSliceLocalization",
+  "declarations": [
+   "SheafOfModules.ringedSliceRestriction",
+   "SheafOfModules.ringedSliceRestrictionFactors",
+   "SheafOfModules.ringedSliceModulePushforward",
+   "SheafOfModules.ringedSliceModulePullback",
+   "SheafOfModules.ringedSliceModuleAdjunction",
+   "SheafOfModules.ringedSlicePushforwardAdditive",
+   "SheafOfModules.ringedSlicePullbackAdditive",
+   "SheafOfModules.RingedSliceDerivedImage",
+   "SheafOfModules.ringedSlicePushforwardComplexIso",
+   "SheafOfModules.ringedSliceLocalizationGenerator",
+   "SheafOfModules.RingedSliceAdjunctionSquare",
+   "SheafOfModules.ringedDerivedSliceLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/RingedDerivedSliceLocalization.lean",
+  "statement": "theorem ringedDerivedSliceLocalization [PreservesFiniteLimits (u.sheafPullback (Type u) K J)] (V : D) [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose K (forget₂ CommRingCat RingCat)).obj R).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).over (u.obj V)))] : ∃ hc : (Over.post (X := V) u).IsContinuous (K.over V) (J.over (u.obj V)), ∃ (e : RingedSliceDerivedImage.{u, w} u a) (l : RingedSliceDerivedImage.{u, w} (Over.post (X := V) u) (localizedRingedSiteMap u a V)), ∃ d : RingedSliceAdjunctionSquare e.adjunction l.adjunction (ringedSliceRestriction.{u, w} R V) (ringedSliceRestriction.{u, w} S (u.obj V)), (∀ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)) ℤ), (ringedSliceRestriction.{u, w} R V).map (X := DerivedCategory.Q.{w}.obj (((ringedSliceModulePushforward u a).mapHomologicalComplex (.up ℤ)).obj I)) (Y := e.right.obj (DerivedCategory.Q.{w}.obj I)) (e.eta.app I) ≫ d.beta.hom.app (DerivedCategory.Q.{w}.obj I) ≫ l.right.map (X := (ringedSliceRestriction.{u, w} S (u.obj V)).obj (DerivedCategory.Q.{w}.obj I)) (Y := DerivedCategory.Q.{w}.obj ((CategoryTheory.ringedSliceComplexRestriction.{u, u, u} J S (u.obj V)).obj I)) ((ringedSliceRestrictionFactors.{u, w} S (u.obj V)).hom.app I) = (ringedSliceRestrictionFactors.{u, w} R V).hom.app (((ringedSliceModulePushforward u a).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.{w}.map (ringedSlicePushforwardComplexIso u a V I).hom ≫ l.eta.app ((CategoryTheory.ringedSliceComplexRestriction.{u, u, u} J S (u.obj V)).obj I)) ∧ ∀ t : R.obj.obj (op V), ∃ loc : l.left.obj ((CochainComplex.singleFunctor _ 0 ⋙ DerivedCategory.Q.{w}).obj (ringedSectionLocalization (R.over V) (ringedSliceSection R V t))) ≅ (CochainComplex.singleFunctor _ 0 ⋙ DerivedCategory.Q.{w}).obj (ringedSectionLocalization (S.over (u.obj V)) (ringedSliceSection S (u.obj V) (a.hom.app (op V) t))), l.left.map (X := (CochainComplex.singleFunctor _ 0 ⋙ DerivedCategory.Q.{w}).obj (unit ((sheafCompose (K.over V) (forget₂ CommRingCat RingCat)).obj (R.over V)))) (Y := (CochainComplex.singleFunctor _ 0 ⋙ DerivedCategory.Q.{w}).obj (ringedSectionLocalization (R.over V) (ringedSliceSection R V t))) ((CochainComplex.singleFunctor _ 0 ⋙ DerivedCategory.Q.{w}).map (ringedSectionLocalizationUnit (R.over V) (ringedSliceSection R V t))) ≫ loc.hom = l.epsilon.app ((CochainComplex.singleFunctor _ 0).obj (unit ((sheafCompose (K.over V) (forget₂ CommRingCat RingCat)).obj (R.over V)))) ≫ DerivedCategory.Q.{w}.map (ringedSliceLocalizationGenerator (Over.post (X := V) u) (localizedRingedSiteMap u a V) (ringedSliceSection S (u.obj V) (a.hom.app (op V) t)))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Outputs the global and local universal derived adjunctions rather than assuming them. The canonical direct-image comparison is normalized against the ordinary identity on every complex; the pullback comparison is its adjunction mate, with explicit unit and counit squares. The localization isomorphism uses the recorded sheafified section localization and is normalized on its unit generator. The small-site specialization of the recorded general derived restriction is reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-111da75dd",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, route-pivot compliance, and per-file compilation checked; no findings."
  }
 }
