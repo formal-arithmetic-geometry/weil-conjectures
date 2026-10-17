@@ -21,9 +21,143 @@
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-pur-site-restriction-module-adjunction-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the tensor--Hom adjunction on the specified models. Choose K-flat representatives $P$ of $K$ and $T$ of $N$, with flat terms, by [lem-pc-kflat-resolution], and a K-injective representative $I$ of $M$ as in [def-pur-derived-internal-hom]. Put $C=\\mathcal Hom^\\bullet(P,I)$; it represents $H(K,M)$ and is K-injective by [lem-pur-hom-kflat-into-kinjective]. Then\n$$\\operatorname{Hom}_{D}(N,QC)\\cong\\operatorname{Hom}_{K}(T,C)\\cong H^0\\Gamma\\mathcal Hom^\\bullet(T,C)\\cong H^0\\Gamma\\mathcal Hom^\\bullet(\\operatorname{Tot}(T\\otimes P),I)\\cong\\operatorname{Hom}_{D}(N\\otimes^{\\mathbf L}K,M).$$\nThe first and last bijections use [lem-weil-pbc-kinjective-hom-derived], the Hom-to-homotopy bijections use [lem-pur-hom-complex-global-homotopy], currying is [lem-sc-derived-hom-tensor-total], and the tensor identification is [lem-weil-pbc-site-derived-tensor-descent]. All bijections are natural on these representatives. The localization equivalence in the tensor-descent node extends them to derived morphisms, and [lem-pur-rhom-well-defined] identifies different representatives. Thus the adjunction is for the actual $H$, without presupposing any right adjoint. Its uncurrying on homogeneous components is $t\\otimes p\\mapsto f(t)(p)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-hom-complex-global-homotopy",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), proof; Tag 0A90 (lemma-compose); Section 08J7"
+   }
+  },
+  {
+   "text": "Use the total tensor convention [def-pc-tensor-complex-sheaves]. The exchange $t\\otimes p\\mapsto(-1)^{|t||p|}p\\otimes t$ is a chain isomorphism: the differential terms agree since $(a+1)b=ab+b$ and $a+a(b+1)\\equiv ab$ modulo $2$; exchanging twice gives the identity. The rebracketing map $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$ preserves each differential term, whose signs are $1,(-1)^{|x|},(-1)^{|x|+|y|}$. The unit maps are multiplication by sections of $\\mathcal O[0]$. These maps preserve K-flat models: if $V$ is acyclic then $V\\otimes(P\\otimes T)=(V\\otimes P)\\otimes T$ is acyclic by [def-pc-kflat-complex]; tensoring two flat terms is exact by composing their two tensor functors [def-pc-flat-sheaf-modules], and countable sums of flat terms are flat by [lem-pc-kflat-closure]. Hence the maps descend by [lem-weil-pbc-site-derived-tensor-descent]. For a K-flat complex without flat terms, resolve it with flat terms; tensoring a quasi-isomorphism with a K-flat complex is a quasi-isomorphism because its cone is the tensor of an acyclic cone. Consequently the model comparisons also apply to the K-flat $F,D$ in the statement.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sections 06YL (K-flat complexes) and 08J7; elementary total differential calculation"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_{K,M}:H(K,M)\\otimes^{\\mathbf L}K\\to M$ be the image of $1_{H(K,M)}$ under the adjunction of step 1. For $K,L,M$ define $c_{K,L,M}$ by transposing the composite\n$$(H(L,M)\\otimes^{\\mathbf L}H(K,L))\\otimes^{\\mathbf L}K\\to H(L,M)\\otimes^{\\mathbf L}L\\to M,$$\nwhere the first arrow is $1\\otimes\\epsilon_{K,L}$ after rebracketing, and the second is $\\epsilon_{L,M}$. Thus $c:H(L,M)\\otimes^{\\mathbf L}H(K,L)\\to H(K,M)$. On Hom-complex representatives it is $(f,g)\\mapsto f\\circ g$: uncurrying either construction sends $(f,g,x)$ to $f(g(x))$. The identity $d(fg)=(df)g+(-1)^{|f|}f(dg)$ from [def-pur-hom-complex] verifies that this is the total chain-composition map used by Stacks 0A98. Its derived independence follows from step 1. It is natural in $K,M$ and dinatural in the middle object $L$: for $u:L\\to L'$, $f(ug)=(fu)g$ expresses the two maps from $H(L',M)\\otimes^{\\mathbf L}H(K,L)$ to $H(K,M)$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sc-derived-hom-tensor-total",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A91 (lemma-composition) and 0A98 (lemma-internal-hom-composition), construction and functoriality"
+   }
+  },
+  {
+   "text": "The unit-Hom isomorphism [lem-sc-hom-complex-unit-iso] applied to the K-injective target identifies $H(\\mathcal O,B)$ with $B$. Set $e_{A,B}=c_{A,\\mathcal O,B}$ under this identification. Its transpose under step 1 is\n$$B\\otimes^{\\mathbf L}A^\\vee\\otimes^{\\mathbf L}A\\xrightarrow{1\\otimes\\epsilon_{A,\\mathcal O}}B\\otimes^{\\mathbf L}\\mathcal O\\cong B.$$\nFor $u:A'\\to A$ and $v:B\\to B'$, naturality of this composite gives $H(u,v)e_{A,B}=e_{A',B'}(v\\otimes H(u,1_{\\mathcal O}))$. Define $b_A$ by transposing $A\\otimes^{\\mathbf L}A^\\vee\\xrightarrow{\\tau}A^\\vee\\otimes^{\\mathbf L}A\\xrightarrow{\\epsilon_{A,\\mathcal O}}\\mathcal O$, using step 1 with $K=A^\\vee$. Both sides of $H(H(u,1),1)b_{A'}=b_Au$ transpose to evaluation on $(u(x'),\\phi)$, proving covariance. These constructions use the dual of $A$, not evaluation of $A^\\vee$ against its own dual.",
+   "uses": [
+    "lem-sc-hom-complex-unit-iso",
+    "def-pur-derived-internal-hom",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JD (lemma-dual); Tag 0A97 (lemma-internal-hom-evaluate) at the coefficient unit"
+   }
+  },
+  {
+   "text": "For the first normalization choose a K-flat resolution $r:P\\to E$. The assumed map $D\\to\\mathcal Hom^\\bullet(E,I(\\mathcal O))$ identifies $D$ with $A^\\vee$; precomposition with $r$ is a quasi-isomorphism by [lem-pur-rhom-well-defined]. By the componentwise adjunction in step 1, the pairing $D\\otimes P\\to\\mathcal O[0]$, $(\\phi,x)\\mapsto\\phi(r(x))$, followed by $\\mathcal O[0]\\to I(\\mathcal O)$, is $\\epsilon_{A,\\mathcal O}$ on these models. The quasi-isomorphism $\\mathcal Hom^\\bullet(E,F)\\to\\mathcal Hom^\\bullet(E,I(F))$, followed by precomposition with $r$, identifies the stated target with $H(A,B)$. The transpose in step 4 sends $(y,\\phi,x)$ to $y\\phi(r(x))$, followed by $F\\to I(F)$. Currying gives precisely precomposition with $r$ of $x\\mapsto y\\phi(x)$, followed by $F\\to I(F)$; hence that chain map represents $e_{A,B}$. The tensor comparisons apply by step 2. For $|y|=p,|\\phi|=q$, [def-pur-hom-complex] gives $d_D\\phi=-(-1)^q\\phi d_E$; thus the tensor differential gives $d_Fy\\,\\phi+(-1)^{p+q+1}y\\phi d_E$, equal to the Hom differential of $x\\mapsto y\\phi(x)$. No sign is inserted in the map itself.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JD; Tag 0A98; Hom differential in Section 0A8X"
+   }
+  },
+  {
+   "text": "For the second normalization put $D=\\mathcal Hom^\\bullet(E,\\mathcal O[0])$ and choose K-flat resolutions $P\\to E$ and $T\\to D$ by [lem-pc-kflat-resolution]. The first assumed quasi-isomorphism identifies $D$ with $A^\\vee$. On $T\\otimes P$, evaluation is $(t,x)\\mapsto t(x)$, where the resolution maps into $D,E$ are understood, followed by $\\mathcal O\\to I(\\mathcal O)$; this follows by uncurrying in step 1. After the exchange in step 2, the transpose is $x\\mapsto(\\phi\\mapsto(-1)^{|x||\\phi|}\\phi(x))$. Postcomposing this ordinary chain map by $\\mathcal O\\to I(\\mathcal O)$ and precomposing the Hom variable by $T\\to D$ gives exactly that transpose on $P,T$. The second assumed quasi-isomorphism and [lem-pur-rhom-well-defined] identify its target with $H(A^\\vee,\\mathcal O)$, so the ordinary map represents $b_A$. For $|x|=a,|\\phi|=-a-1$, the outer Hom differential evaluated at $\\phi$ is $-(-1)^a b(x)(d_D\\phi)$. Here $d_D\\phi=(-1)^a\\phi d_E$ and $b(x)$ on degree $-a$ has sign $(-1)^a$. The product sign is therefore $(-1)^{a+1}$, equal to $b(d_Ex)(\\phi)$ since $(a+1)(-a-1)\\equiv a+1$ modulo $2$. Other degree components vanish.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A97, coefficient-unit specialization; Section 0A8X, signed bidual chain map"
+   }
+  },
+  {
+   "text": "For $U\\in\\mathcal C$, use the localized coefficients of [def-pur-localized-ringed-site]. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], sends K-injectives to K-injectives by [lem-pur-kinjective-restrict-localized], and compares derived tensor and Hom by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The tensor-pullback node applies with $u=j_U$: localization is a morphism of topoi $j_U^{-1}\\dashv j_{U*}$ with $j_U^{-1}$ exact (Stacks Section 00XZ), and $j_U^{-1}\\mathcal O=\\mathcal O_U$, so $u^*$ is restriction and restricted K-flat flat-term complexes stay K-flat with flat terms. Compute steps 1--4 with K-flat, flat-term representatives and K-injective targets: their restrictions are such representatives on the slice, and the Hom and tensor comparisons are the sectionwise identifications on them. On each object $V\\to U$ the uncurrying map still sends $(f,x)$ to $f(x)$, composition sends $(f,g,x)$ to $f(g(x))$, and exchange multiplies by the same $(-1)^{|x||\\phi|}$. Thus these comparisons preserve the adjunct identity that defines $\\epsilon$, the composite defining $c$, and the transpose defining $b$. Adjunction is a bijection, so the compared maps are exactly $e$ and $b$ on the slice. This argument uses arbitrary resolution models, not the extra hypotheses of the optional ordinary normalizations.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); Tag 07A4 (lemma-pullback-tensor-product); Sites Section 00XZ (sites-section-localize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "lem-pc-kflat-closure",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-complex-global-homotopy",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sc-hom-complex-unit-iso",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JD, 0A97, 0A98 and 08JB; chain-level signs expanded from Sections 0A8X and 06YL"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -104,7 +238,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-perfect-duality",
@@ -123,5 +257,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-ringed-site-duality-maps",
+  "worker": "stage1",
+  "group": "Q41",
+  "summary": "Kept the imported statement unchanged (arbitrary unbounded objects of D(O) on a small commutative ringed site; no perfectness or invertibility). Step 1 builds the tensor-Hom adjunction for the actual H from K-flat flat-term and K-injective models; step 2 records the Koszul exchange, associator and K-flat model comparisons; step 3 defines internal composition as the transpose of two evaluations (Stacks 0A91/0A98); step 4 specializes to e_{A,B} (Stacks 08JD) and defines b_A with naturality; steps 5-6 verify the two ordinary-representative normalizations and their signs; step 7 proves slice compatibility (Stacks 08JB). The proposed helper node was dropped; no new node.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, proof second paragraph final sentence: construct the coefficient-dual comparison and bidual map before the separate perfectness/invertibility proof. Steps 1--4 derive the canonical maps from tensor--Hom currying; steps 5--6 verify their ordinary representative formulas; step 7 proves slice compatibility.",
+  "by": "Q41"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-d3bd77b8c",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d3bd77b8c (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is only the item: the second reader dropped the helper composition node, so there is no new node. The statement is unchanged and matches Stacks 08JD (a special case of 0A98) and, for b_A, the coefficient-unit case of 0A97. It covers arbitrary unbounded objects of D(O) on a small commutative ringed site, adds no perfectness, and claims no isomorphism. Step 1 builds the tensor-Hom adjunction for the actual H from K-flat flat-term and K-injective models; I checked every hypothesis there, and the uncurrying t⊗p->f(t)(p) is sign-free and agrees with the Hom and Tot differentials. Steps 2-4: I verified the exchange signs, the transpose giving composition (f,g)->f∘g as in Stacks more-algebra lemma-composition, the dinaturality in L, and the domains in the naturality equations for e and b. Steps 5-6: I recomputed both sign checks, yφd_E with sign (-1)^{p+q+1}, and (-1)^{a+1}φ(dx) for the bidual. The K-flat and quasi-isomorphism hypotheses are used exactly where needed. Step 7 uses exact restriction, restricted K-injectives and 08JB. Small cases checked: A=O[0], O[n], 0, and complexes in degree 0. Every cited unit is in the transitive uses of sk-thm-sf-ctf-stability, so no tool_uses are needed and none are accepted. No SGA source is cited. My duplicate search over 08JD/0A97/0A98/bidual found only scheme, perfect-complex or definition-level nodes, none the same as the item. The blueprint place (internal-Hom proof, second paragraph, last sentence) checks out. Fixes in the corrected item file: (1) step 7 now states why the tensor-pullback node applies: localization j_U is a morphism of topoi with j_U^{-1}O=O_U (Stacks Section 00XZ), so restricted K-flat flat-term complexes stay K-flat with flat terms; (2) the split_report gets the missing item, worker, group and summary fields. No statement, uses or proof_deps changed.; 1 file(s) fixed by the reviewer"
  }
 }
