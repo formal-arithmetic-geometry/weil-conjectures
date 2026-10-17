@@ -349,5 +349,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f6dbd897",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read node, 3 statement deps, report and module. hJoyal is verbatim the weak-equivalence clause of SSet.exists_joyal_model_structure; D.rigidification is the recorded CoherentNerveComparisonStatement field. Clause 1: IsLimit of the localized fan of the actual projections in W.Localization. Clause 2: the existentially chosen limit BinaryFan in SCat with the lift of the rigidified projections is equivalent to the node's clause, since product cones are uniquely isomorphic and DwyerKanEquivalence is invariant under isomorphism. Clause 3: (ihom K).obj Q is a quasicategory and localizedEvaluation (pairing f×1_K, then braiding and ihom.ev) is bijective for all X, which is the full exponential property in the localization. Edge cases (empty K/X/Q, K=Δ0, empty object sets, non-fibrant factors, u=0/v=0) are covered; no universe restriction. Helpers have real data; the only proof is sorry; docstrings carry source, blueprint and 11 steps; lean.statement verbatim; node copy differs only in lean; report has Worker report and Second reading by Q30. No duplicate or name collision in side or Mathlib. nt_compile.py --json on the snapshot module: rc 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalHomotopyExponentials",
+  "declaration": "SSet.joyal_homotopy_exponentials",
+  "declarations": [
+   "SSet.localizedProductFan",
+   "SSet.localizedEvaluation",
+   "SSet.joyal_homotopy_exponentials"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalHomotopyExponentials.lean",
+  "statement": "theorem joyal_homotopy_exponentials (D : CoherentNerveComparisonStatement.{u}) (M : HomotopicalAlgebra.ModelCategory SSet.{u}) (hJoyal : ∀ {A B : SSet.{u}} (f : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences f ↔ ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map f)).app C)).toFunctor).IsEquivalence) : (∀ K L : SSet.{u}, Nonempty (IsLimit (localizedProductFan M.categoryWithWeakEquivalences.weakEquivalences K L))) ∧ (∀ K L : SSet.{u}, ∃ (c : BinaryFan (D.rigidification.obj K) (D.rigidification.obj L)) (h : IsLimit c), DwyerKanEquivalence (A := underlying (D.rigidification.obj (K ⊗ L))) (B := underlying c.pt) (h.lift (BinaryFan.mk (D.rigidification.map (fst K L)) (D.rigidification.map (snd K L))))) ∧ (∀ K Q : SSet.{u}, Q.Quasicategory → ((ihom K).obj Q).Quasicategory ∧ ∀ (X : SSet.{u}) (h : IsLimit (localizedProductFan M.categoryWithWeakEquivalences.weakEquivalences ((ihom K).obj Q) K)), Function.Bijective (localizedEvaluation M.categoryWithWeakEquivalences.weakEquivalences X K Q h))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

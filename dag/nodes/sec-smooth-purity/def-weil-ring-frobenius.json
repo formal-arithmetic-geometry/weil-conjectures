@@ -71,5 +71,27 @@
   "by": "L",
   "result": "pass",
   "note": "Mathlib leaf created by the split of def-weil-absolute-frobenius-scheme; the match was verified by the lead against the Mathlib source at that item's review"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-135b45193",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Read the node, its 6 stmt_deps, Stacks 03SM and the paragraph after it (varieties.tex l.7014-7029), the published iterateFrobeniusOfPrime and Scheme.iterateFrobenius (both real data) and the delivered module. All clauses (i)-(iv) match with no extra hypotheses; zero ring, empty open, empty scheme and n=0 are covered; universes u and v are independent. The def-weil-ring-frobenius §1(B) lean-only repair is justified (ExpChar excludes the zero ring) and has its lean.note; only the lean fields of the item and that dependency changed. Fault, H3 (missing clause): the second reader removed the conjunct identifying Scheme.iterateFrobenius n with the n-th composite of the n=1 morphism, so the scheme clauses no longer cover the node's iterates (step 9; def-weil-absolute-frobenius-scheme defines Fr^q as that composite), while the ring side kept its ^[n] clause. Fixed in fixes/AbsoluteFrobeniusWellDefined.lean by restoring HPow.hPow (α := End X) (X.iterateFrobenius hp (hX.2 ⊤) 1) n = X.iterateFrobenius hp (hX.2 ⊤) n (true; n=0 gives the identity) plus one docstring sentence in step 9; fixes/<item>.report.md adds a Maintainer review fix section. nt_compile.py: delivered and fixed files rc 0 with no messages; the error probe surfaces errors; #print axioms shows sorryAx; no lake build."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.CharP.Lemmas",
+  "declaration": "iterateFrobeniusOfPrime",
+  "declarations": [
+   "iterateFrobeniusOfPrime",
+   "iterateFrobeniusOfPrime_apply"
+  ],
+  "statement": "def iterateFrobeniusOfPrime (R : Type*) [CommRing R] {p : ℕ} (hp : p.Prime) (hR : (p : R) = 0)\n    (n : ℕ) : R →+* R",
+  "branch": "slopmaster2",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Interface repair under §1(B): the old mathlib_match frobenius/iterateFrobenius requires ExpChar R p and excludes the zero ring, although the node explicitly permits it. The published iterateFrobeniusOfPrime takes just primality and (p : R) = 0 and has real sectionwise data x ↦ x^(p^n). Its n=1 specialization is the ordinary Frobenius, and its n parameter realizes all iterates. Ring-hom naturality is the usual map_pow identity. No duplicate definition is introduced."
  }
 }

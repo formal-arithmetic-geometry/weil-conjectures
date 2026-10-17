@@ -199,22 +199,22 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-72fa1faad (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source locations. Four-step Brown argument is valid for finite coefficients and a fixed compactification; no unbounded comparison theorem or target weakening is accepted. Corrected two B7 search records: failed Loogle query and erroneous zero-hit grep. Whole corrected JSON and detailed review.md are written; no new nodes.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint",
+  "module": "Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint",
   "declaration": "AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification",
-  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekLeftAdjoint.lean",
-  "statement": "theorem isLeftAdjoint_rightDerivedLowerShriekOfCompactification (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} {f : X ⟶ S} (c : Compactification f) [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian c.Z] [CompactSpace c.Z] [IsLocallyNoetherian S] [CompactSpace S] : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).IsLeftAdjoint",
+  "statement": "theorem isLeftAdjoint_rightDerivedLowerShriekOfCompactification\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X S : Scheme.{u}} {f : X ⟶ S} (c : Compactification f)\n    [IsLocallyNoetherian X] [CompactSpace X]\n    [IsLocallyNoetherian c.Z] [CompactSpace c.Z]\n    [IsLocallyNoetherian S] [CompactSpace S] :\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).IsLeftAdjoint",
   "branch": "newtargets-dag",
-  "by": "NE",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "§1(B): the recorded migrated upstream module collides with this still-published Sheaf module, which SmoothExceptionalBaseChange imports publicly. scompile reports environment already contains the adjoint declaration from Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint when both are imported. Rebind to that already-published exact theorem: finite coefficients, a fixed compactification, and Noetherian source, compactification and target, on the ordinary unbounded etale categories. Its signature is precisely the original recorded Noetherian statement. No declaration or notion is copied."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a5e567aeb",
-  "group": "NE",
+  "reviewer": "NT-stage2-cc-093440f95",
+  "group": "Q93",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, all statement dependencies, exact declarations, sources, hypotheses, universes, edge cases, docstrings, report sections, and verbatim signature. Reproduced clean per-file compilation through scompile.py. No corrections needed; branch unchanged."
+  "note": "Read node, all 16 stmt deps, module, report and the delivery diff (6 files; item statement unchanged, no drift on side HEAD). Clause-by-clause match: Fact ell.Prime/hn, Coeff=ULift ZMod(ell^n), IsNoetherian V,S, stalkwise unit hS/hV, SmoothOfRelativeDimension d + IsSeparated + QuasiCompact g, IsClosedImmersion s with hs, hregular (IsWeaklyRegular Fin d generators of s.ker.ideal U near s(S), as in Stacks 063J), HasCompactification for g, normalConeProj and deformationSpaceProj. Rees cone identified with Spec Sym E via IsIso symmetricComparison plus purityNormalCone_comparison/purityNormalProjection_eq. geometry gives Noetherian/smooth/separated D, both fibre squares and section equalities, rank-d conormal. lines_and_fibres gives shifted lines locally iso to constant A and IsIso of atOne/atZero, built from dualizingComplexBaseChangeMap (the same mate as prop-asd-smooth-base-change). existsUnique_normalized: Normalized means i1^*kappa then compositor equals atOne. specialization is compositor^-1, i0^*kappa.inv, atZero; isIso_specialization. baseChange_geometry gives the Cartesian Rees and normal squares and instances. baseChange_compatibility gives IsIso b_C, b_F, b_N and both equations, types checked. Edge cases d=0, empty, nonflat/identity base change, universes u/u+1 ok. 10 defs with real data; 7 sorrys, all theorems; docstrings with source and blueprint tag; lean.statement verbatim for item and both dep records. Dep repairs (adjoint rebound to the Sheaf module, existing:true; proof-only ProjectiveLineFullAdjunction import dropped) are lean-only and accepted; maintainer to restore the import and re-migrate the record later. nt_compile --json on both files rc=0, no errors or warnings (3.6 s, 19.1 s)."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
