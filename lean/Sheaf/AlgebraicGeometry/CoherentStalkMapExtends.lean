@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import all WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-!
@@ -33,7 +33,31 @@ namespace AlgebraicGeometry
 This is the forward construction in Stacks Project, Tag 01XZ. -/
 private theorem isFinitePresentation_of_coherent (X : Scheme.{u}) (F : X.Modules)
     (h : RingedSpace.IsCoherent X.toRingedSpace F) : F.IsFinitePresentation := by
-  sorry
+  classical
+  have (V : X.Opens) : HasWeakSheafify
+      ((Opens.grothendieckTopology X).over V) AddCommGrpCat.{u} := inferInstance
+  have (V : X.Opens) : ((Opens.grothendieckTopology X).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : SheafOfModules.IsFiniteType.{u} (R := X.ringCatSheaf) F := h.1
+  obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData.{u} F
+  have hfp (i : q.I) : (F.over (q.X i)).IsFinitePresentation := by
+    have := hq.isFiniteType i
+    let _ := Fintype.ofFinite (q.generators i).I
+    let n := Fintype.card (q.generators i).I
+    let e := (SheafOfModules.freeFunctor (R := X.ringCatSheaf.over (q.X i))).mapIso
+      ((Equiv.ulift.trans (Fintype.equivFin (q.generators i).I).symm).toIso)
+    let f := e.hom ≫ (q.generators i).π
+    have : Epi f := inferInstanceAs (Epi (e.hom ≫ (q.generators i).π))
+    let G := SheafOfModules.GeneratingSections.ofEpiFree f
+    have : G.IsFiniteType := ⟨inferInstanceAs (Finite (ULift.{u} (Fin n)))⟩
+    have : (Limits.kernel G.π).IsFiniteType := by
+      simpa only [G, SheafOfModules.GeneratingSections.ofEpiFree_π]
+        using h.2 (q.X i) n f
+    exact Scheme.Modules.isFinitePresentation_of_generators_kernel.{u} (F.over (q.X i)) G
+  have : F.IsFinitePresentation := by
+    exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _
+      F q.I q.X q.coversTop hfp
+  exact this
 
 /-- A homomorphism between stalks of coherent modules is induced by a morphism on
 some open neighbourhood.
