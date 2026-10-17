@@ -16,9 +16,77 @@
   "def-weil-finite-type-morphism",
   "def-weil-unramified-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $0=i_0$, and let $p_i:S_i\\to S_0$ ($i\\ge0$) and $p:S\\to S_0$ be the transition morphisms and the limit projection. Cover $S_0$ by affine opens and their preimages in $V_0$ by affine opens; since $V_0$ is quasi-compact, finitely many of these give a finite affine open covering $V_0=\\bigcup_{j=1}^mY_{j,0}$ in which each $Y_{j,0}$ maps into an affine open $W_{j,0}\\subset S_0$. Since $U_0$ is quasi-compact and $V_0$ is quasi-separated, $g_0$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] (1), so each $g_0^{-1}(Y_{j,0})$ is quasi-compact [def-weil-finite-type-morphism] and has a finite affine open covering $g_0^{-1}(Y_{j,0})=\\bigcup_{k=1}^{n_j}X_{jk,0}$. Write $W_{j,0}=\\operatorname{Spec}R^{(j)}_0$, $Y_{j,0}=\\operatorname{Spec}B_{j,0}$ and $X_{jk,0}=\\operatorname{Spec}C_{jk,0}$ [def-weil-affine-spectrum]; then $B_{j,0}$ is an $R^{(j)}_0$-algebra through $Y_{j,0}\\to W_{j,0}$, and $g_0$ restricts to $\\operatorname{Spec}$ of an $R^{(j)}_0$-algebra map $\\varphi_{jk,0}:B_{j,0}\\to C_{jk,0}$. Because $g_0$ is locally of finite type, $C_{jk,0}$ is a finitely generated $B_{j,0}$-algebra by [lem-weil-pbc-lft-affine-pairs].",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W, proof: first paragraph (finite affine coverings $Y_{j,0}$, $X_{k,0}$ of $Y_0$ and $f_0^{-1}Y_{j,0}$, $Y_{j,0}$ mapping into affine $S_{j,0}$)"
+   }
+  },
+  {
+   "text": "For $i\\ge0$ put $W_{j,i}=p_i^{-1}(W_{j,0})\\subset S_i$ and $W_j=p^{-1}(W_{j,0})\\subset S$. Each $p_i$ is affine [pqf-def-affine-morphism], so $W_{j,i}=\\operatorname{Spec}R^{(j)}_i$ is affine; by [lem-weil-pbc-limit-affine-transition] (its clause on $f_0^{-1}(U_0)$, then its affine clause for the system $(W_{j,i})_{i\\ge0}$, whose transition morphisms are affine) $W_j=\\operatorname{Spec}R^{(j)}$ with $R^{(j)}=\\varinjlim_{i\\ge0}R^{(j)}_i$. For $T=S_i$ or $T=S$, with $T_j\\subset T$ the preimage of $W_{j,0}$, the preimage of $X_{jk,0}$ in $U_0\\times_{S_0}T$ is the open subscheme $X_{jk,0}\\times_{S_0}T$, and it equals $X_{jk,0}\\times_{W_{j,0}}T_j$, since every morphism to it lands over $T_j$ (universal property [def-pc-fibre-product]); likewise for $Y_{j,0}$ in $V_0\\times_{S_0}T$. By [lem-weil-pbc-fibre-product-affine-spectra], $X_{jk,i}:=X_{jk,0}\\times_{S_0}S_i=\\operatorname{Spec}(R^{(j)}_i\\otimes_{R^{(j)}_0}C_{jk,0})$ and $Y_{j,i}:=Y_{j,0}\\times_{S_0}S_i=\\operatorname{Spec}(R^{(j)}_i\\otimes_{R^{(j)}_0}B_{j,0})$, and, comparing projections, the restriction $X_{jk,i}\\to Y_{j,i}$ of $g_i$ is $\\operatorname{Spec}(\\mathrm{id}\\otimes\\varphi_{jk,0})$; the same holds over $S$ with $R^{(j)}$ in place of $R^{(j)}_i$, giving $X_{jk}\\to Y_j$. As preimages of the coverings of step 1, the $X_{jk,i}$ cover $U_i$, the $Y_{j,i}$ cover $V_i$, and $g_i(X_{jk,i})\\subset Y_{j,i}$; the same over $S$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W, proof: first paragraph, reduction to the base changes $X_{k,i}\\to Y_{j,i}\\to S_{j,i}$ of the affine charts, and second paragraph, the affine case $R=\\colim R_i$"
+   }
+  },
+  {
+   "text": "Fix $(j,k)$. Since $g$ is unramified, its restriction $X_{jk}\\to Y_j$ is unramified by [lem-weil-pbc-unramified-base-change-open] (2), so $R^{(j)}\\otimes_{R^{(j)}_0}B_{j,0}\\to R^{(j)}\\otimes_{R^{(j)}_0}C_{jk,0}$ is an unramified ring map by [lem-weil-pbc-unramified-ring-map-iff-unramified-affine]. Apply [lem-trf-colimit-unramified-algebra] to the directed set $\\{i\\in I:i\\ge0\\}$, the rings $A_i=R^{(j)}_i$ with colimit $R^{(j)}$, and $\\varphi_{jk,0}:B_{j,0}\\to C_{jk,0}$, which is of finite type by step 1: there is $i_{jk}\\ge0$ with $R^{(j)}_{i_{jk}}\\otimes B_{j,0}\\to R^{(j)}_{i_{jk}}\\otimes C_{jk,0}$ unramified, so $X_{jk,i_{jk}}\\to Y_{j,i_{jk}}$ is unramified by [lem-weil-pbc-unramified-ring-map-iff-unramified-affine]. There are finitely many pairs, so directedness of $I$ gives $i\\ge0$ with $i\\ge i_{jk}$ for all of them ($i=0$ if there are none). For $i'=i_{jk}\\le i$, writing $R_\\bullet=R^{(j)}_\\bullet$, $B_0=B_{j,0}$, $C_0=C_{jk,0}$, associativity of tensor products gives $(R_{i'}\\otimes_{R_0}C_0)\\otimes_{R_{i'}\\otimes_{R_0}B_0}(R_i\\otimes_{R_0}B_0)\\cong C_0\\otimes_{B_0}(R_i\\otimes_{R_0}B_0)\\cong R_i\\otimes_{R_0}C_0$ compatibly with the maps from $R_i\\otimes_{R_0}B_0$, so by [lem-weil-pbc-fibre-product-affine-spectra] $X_{jk,i}\\to Y_{j,i}$ is the base change of $X_{jk,i'}\\to Y_{j,i'}$ along $Y_{j,i}\\to Y_{j,i'}$, hence unramified by [lem-weil-pbc-unramified-base-change-open] (1); by [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] its ring map is of finite type with vanishing Kähler differentials. Thus $U_i$ is covered by the affine opens $X_{jk,i}$, each mapped by $g_i$ into the affine open $Y_{j,i}$ by a finite type ring map with $\\Omega=0$; by the affine-cover characterization of unramified morphisms recorded in [def-weil-unramified-morphism] (Stacks 02GE with Definition 02G4), $g_i$ is unramified.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+    "lem-trf-colimit-unramified-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C4W, proof: second paragraph, the algebra statement deduced from Algebra Tag 0C4F (algebra-lemma-colimit-unramified), and the locality of unramifiedness from the first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-unramified-morphism",
+  "lem-trf-colimit-unramified-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0C4W proof, with the affine algebra input Tag 0C4F"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +125,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-family-noetherian-approximation",
@@ -69,7 +137,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation used below lem-trf-nodal-etale-chart. Stacks 0CBY first proof first paragraph reduces to a finite-type integer model; its use of 0C5F requires descent of unramifiedness of the first-Fitting singular locus, the last paragraph of the 0C5F proof.",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the unramified descent input used by the downstream nodal-family approximation argument.",
    "via": [
     "lem-trf-nodal-family-noetherian-approximation",
     "lem-trf-nodal-family-etale-local-model",
@@ -84,5 +152,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-unramified-limit-descent",
+  "worker": "stage1",
+  "summary": "Statement checked unchanged against Limits Tag 0C4W. The proof follows its finite affine-cover reduction and affine algebra argument, with the sole new statement-only node lem-trf-colimit-unramified-algebra recording Algebra Tag 0C4F. Existing nodes supply affine limits, the affine unramified criterion, and base-change/restriction stability. Finite many chart indices are combined by directedness. Review fix (N5 maintainer reader, 2026-10-18): proof rewritten in the statement's notation ($i_0$, $U_0$, $V_0$, $g_0$) with all chart rings named; added citations for quasi-compactness of $g_0$ (lem-weil-pbc-qcqs-morphism-permanence), finite type of every affine chart ring (lem-weil-pbc-lft-affine-pairs), the affine fibre products (lem-weil-pbc-fibre-product-affine-spectra) and the restriction clause of lem-weil-pbc-unramified-base-change-open; the stage change $i_{jk}\\to i$ is written as a base change.",
+  "blueprint": "The three steps realize the affine-cover reduction and affine algebra descent used as the unramified input in the downstream nodal-family approximation route under lem-trf-local-term-locality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-1684b7cbb",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-1684b7cbb (reviewer sub-agent of L); spot-checked: Read Limits 0C4W (lemma-descend-unramified, l.1794, Situation l.1739) and Algebra 0C4F (lemma-colimit-unramified, l.47571). The item statement matches 0C4W. The only difference is that every S_i is assumed qcqs; the proof does not use this, the parent's Noetherian stages satisfy it, and the node is not a target. The new node lem-trf-colimit-unramified-algebra matches 0C4F exactly. It is pure algebra, statement-only and not a restated clause of the item. No duplicate turned up in grep/regex sweeps for 0C4F/0C4W/unramified+colimit. Small cases hold: Z[1/n]->Q with Z[i], a constant system, B_0[x], an empty source and the identity. Repairable faults fixed by rewriting the item's proof (statement unchanged): (1) the proof used Stacks notation (Y_0, f_0, S_0) that did not match the statement (U_0, V_0, g_0, S_{i_0}), and B_0, C_0, R_0 were never defined; (2) three citations were missing: lem-weil-pbc-qcqs-morphism-permanence(1) for quasi-compactness of g_0^{-1}(Y_{j,0}), lem-weil-pbc-lft-affine-pairs for finite type of arbitrarily chosen affine charts (the definition gives only some cover), and lem-weil-pbc-fibre-product-affine-spectra for X_{jk,i}=Spec(R_i⊗C_0); also, unramifiedness of the restriction now cites the restriction clause (2) of lem-weil-pbc-unramified-base-change-open instead of 'by hypothesis'; (3) the change from stage i_{jk} to i is now written as an explicit tensor identity and base change. The new node's blueprint.from place/via was corrected to the chapter convention. Route: sk-i-curve-zero reaches sk-thm-p1, the added nodes are Mathlib leaves, no tool_uses are needed, and there is no cycle or SGA citation. Corrected files are in fixes/dag/nodes/sec-trace-formula/; details are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }

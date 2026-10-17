@@ -12,11 +12,179 @@
   "def-weil-size-convention",
   "def-trf-ph-scheme-site",
   "def-weil-proper-morphism",
-  "def-weil-pbc-topos"
+  "def-weil-pbc-topos",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Call a family $\\{W_k\\to A\\}$ standard if it is the family of restrictions of a proper surjection $W\\to A$, with $A$ affine and $\\{W_k\\}$ a finite affine open cover of $W$. We first record the elementary open-cover refinement used below. For any quasi-compact scheme $Y$ and any open cover $\\{O_i\\}$, apply the affine-open-cover node to each open subscheme $O_i$. Their images give an affine open cover of $Y$ subordinate to the $O_i$. Quasi-compactness selects finitely many members, retaining their chosen factorizations into the $O_i$. An affine scheme is quasi-compact by the affine-qcqs node. Consequently every Zariski cover of an affine $A$ has a finite affine open refinement, which is standard using $\\mathrm{id}_A$. The identity is proper directly from the definition: its diagonal and all base changes are identities and its affine ring maps are identities.",
+   "uses": [
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBD, definition-standard-ph-covering; 0DBF, lemma-refine-by-standard-ph (1); 01IT, schemes-lemma-basis-affine-opens."
+   }
+  },
+  {
+   "text": "A standard family over an affine $A$ remains standard after any affine base change $B\\to A$. Indeed $W\\times_A B\\to B$ is proper and surjective by the two base-change nodes. The inverse images of the opens $W_k$ cover $W\\times_A B$. They identify with $W_k\\times_A B$: a morphism into the product factors through that inverse-image open exactly when its $W$-component factors through $W_k$, which is the same pullback universal property. The sheaves are the corresponding restrictions, by the definition of open subscheme. Each $W_k\\times_A B$ is affine by the affine-spectra fibre-product node (write the three affine schemes as spectra using the affine-spectrum definition). There are the same finitely many indices.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0DBE, lemma-base-change-standard-ph."
+   }
+  },
+  {
+   "text": "Define $J_*(T)$ to consist of sieves $R$ such that for every morphism $a:A\\to T$ with $A$ affine, the pullback sieve $a^*R$ contains a standard family. This is an auxiliary construction, not an assumption identifying the generated topology with the source definition. The maximal sieve is in $J_*$, using $\\mathrm{id}_A$ and the one-member open cover of $A$. If $R\\in J_*(T)$ and $f:T'\\to T$, then for every affine test $a:A\\to T'$ the equality $a^*(f^*R)=(f\\circ a)^*R$ proves $f^*R\\in J_*(T')$. Both assertions use only the definitions of sieve pullback and the identity standard family.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBG, definition-ph-covering; 0DBI, lemma-ph: expanded sieve construction; sites.tex Tag 00Z4, definition-topology."
+   }
+  },
+  {
+   "text": "For transitivity, let $Q\\in J_*(T)$ and suppose $f^*R\\in J_*(\\operatorname{dom}f)$ for every $f\\in Q$. Fix any affine test $a:A\\to T$. Choose a standard family $u_k:A_k\\to A$ in $a^*Q$. Thus $a\\circ u_k\\in Q$, and the hypothesis, tested at $\\mathrm{id}_{A_k}$, gives a standard family $v_{kl}:B_{kl}\\to A_k$ in $(a\\circ u_k)^*R$. Apply the composite-refinement node to these two finite levels. It gives a standard family $c_b:C_b\\to A$ factoring through some $u_k\\circ v_{kl}$. Since $a\\circ u_k\\circ v_{kl}\\in R$ and $R$ is a sieve, $a\\circ c_b\\in R$. This proves $R\\in J_*(T)$ and completes all three Grothendieck topology axioms.",
+   "uses": [
+    "lem-trf-standard-ph-composite-refinement",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBF, lemma-refine-by-standard-ph (2), and 0DBI, lemma-ph: transitivity expanded for sieves."
+   }
+  },
+  {
+   "text": "Every generator of $J_{ph}$ belongs to $J_*$. For a Zariski covering, pullback along an affine test $A\\to T$ is the open covering by inverse images of its members. Step 1 gives a standard refinement contained in the pulled-back generated sieve. For a proper surjection $V\\to T$, pull back to $V_A\\to A$; the cited base-change nodes give properness and surjectivity. By the definitions of proper and finite type, $V_A$ is quasi-compact: the preimage of the affine open $A$ under a finite-type morphism is quasi-compact. Step 1 applied to the one-member cover of $V_A$ supplies a finite affine open cover. Its composites with $V_A\\to A$ form the required standard family and factor through $V\\to T$. Hence the leastness in the definition of the generated ph topology gives $J_{ph}\\subseteq J_*$.",
+   "uses": [
+    "def-trf-ph-scheme-site",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBH, lemma-zariski-ph; lemma-surjective-proper-ph; 0DBQ, lemma-characterize-sheaf (generated topology)."
+   }
+  },
+  {
+   "text": "Conversely a standard family is covering for $J_{ph}$. Let $C$ be its generated sieve on the affine target $A$, with presentation $p:W\\to A$ and open cover $W_k$. The sieve $p^*C$ contains the sieve of this Zariski cover, so it covers $W$. For any arrow $f=p\\circ h$ in the sieve generated by $p$, one has $f^*C=h^*p^*C$, which covers by pullback stability. Since the singleton $p$ is a ph generator, transitivity gives $C\\in J_{ph}(A)$. We use upward closure here and below: if $D\\subseteq E$ and $D$ covers, then for $f\\in D$ the sieve $f^*E$ is maximal, so the transitivity axiom gives that $E$ covers. This proves upward closure directly from the cited topology axioms.",
+   "uses": [
+    "def-trf-ph-scheme-site",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBD, definition-standard-ph-covering, and 0DBQ, lemma-characterize-sheaf: standard families are composites of the two generators."
+   }
+  },
+  {
+   "text": "Let $R\\in J_*(T)$ and choose an affine open covering $\\{a_j:A_j\\to T\\}$ from the affine-open-cover node. Each $a_j^*R$ contains a standard family, hence is ph covering by Step 6 and upward closure. Every arrow of the Zariski covering sieve factors through an $a_j$, so its pullback of $R$ covers by pullback stability. Transitivity gives $R\\in J_{ph}(T)$. Thus $J_*=J_{ph}$. For affine $T$, testing at $\\mathrm{id}_T$ gives the desired standard family in $R$; conversely such a family makes $R$ covering by Step 6. These families also determine the induced topology on affine objects: their domains are affine, their affine pullbacks are standard by Step 2, and composites have standard refinements by Step 4. This asserts a sieve basis, not that composites themselves must be standard. On any $T$, a covering sieve restricts to covering sieves on an affine open cover by pullback stability, and the preceding transitivity argument proves the converse.",
+   "uses": [
+    "lem-pc-fppf-affine-open-cover",
+    "def-weil-pbc-topos",
+    "def-trf-ph-scheme-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBG, definition-ph-covering; 0DBF, lemma-refine-by-standard-ph; 0DBQ, lemma-characterize-sheaf: equality with the generated topology and locality."
+   }
+  },
+  {
+   "text": "Let $\\{E_i\\to T\\}$ be a jointly surjective family of etale morphisms. For every affine open $A\\subseteq T$, the etale-covering-base-change node says precisely that $\\{E_i\\times_T A\\to A\\}$ is still a jointly surjective family of etale morphisms. By the etale definition these arrows are flat and locally of finite presentation, so this is an fppf covering by the fppf-site definition. Since $A$ is quasi-compact and quasi-separated by the affine-qcqs node, finite fppf domination gives a finite surjection $W\\to A$ and an open cover $O_\\alpha$ of $W$, with each $O_\\alpha\\to A$ factoring through some $E_i\\times_T A$. The finite-proper node makes $W\\to A$ proper. Its source is quasi-compact by the proper and finite-type definitions, since the target is affine. Refine the $O_\\alpha$ by a finite affine open cover using Step 1. Its composites form a standard family in the pulled-back covering sieve. Step 7 and affine locality therefore show that the original etale family is ph covering.",
+   "uses": [
+    "lem-trf-fppf-finite-surjective-refinement",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0DBT, lemma-fppf-ph, using Tag 0CP0, lemma-dominate-fppf-finite; topologies.tex Tag 021N, lemma-zariski-etale-smooth-syntomic-fppf."
+   }
+  },
+  {
+   "text": "Every Zariski covering family is a jointly surjective family of open immersions by the ph-site definition. Each open immersion is etale by the open-immersion-etale node. Hence it is an etale covering, including the affine open coverings used here.",
+   "uses": [
+    "def-trf-ph-scheme-site",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021N, lemma-zariski-etale-smooth-syntomic-fppf, together with morphisms.tex Tag 02GP, lemma-open-immersion-etale."
+   }
+  },
+  {
+   "text": "All the constructions are within the stipulated universe convention. Schemes, their points, opens and hom sets are sets in the chosen larger universe; the affine covers can be indexed by the sets of chosen opens and charts. Finite subfamilies, fibre products, the finite refinement choices in Step 4 and the small families in the finite-fppf-domination node stay within that bound. The affine open covering of a non-quasi-compact $T$ is only small, not asserted finite. For the empty affine scheme take $W=\\varnothing$, $p=\\mathrm{id}$ and its empty open cover; this standard family is contained in every sieve. The empty Zariski cover makes every sieve on the empty scheme ph covering, exactly as the criterion requires. No empty standard family occurs over a nonempty target, since $W\\to T$ is surjective.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-trf-ph-scheme-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 0DBD, definition-standard-ph-covering; 0DBG, definition-ph-covering; 0DBJ, definition-big-ph-site (size convention)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-trf-ph-scheme-site",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-topos",
+  "def-weil-proper-morphism",
+  "def-weil-size-convention",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-trf-fppf-finite-surjective-refinement",
+  "lem-trf-standard-ph-composite-refinement",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Section ph: Tags 0DBD, 0DBE, 0DBF, 0DBG, 0DBI, 0DBQ; explicit sieve-topology argument written by NU, following the standard-family route. The etale comparison follows more-morphisms.tex Tags 0CP0 and 0DBT."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +220,45 @@
    "results": "{\"t\": \"2026-10-17T19:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski covers followed by proper surjections and affine open covers form a covering basis for the ph Grothendieck topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.affineBasisCover_is_basis\", \"AlgebraicGeometry.Scheme.grothendieckTopology_cover\", \"AlgebraicGeometry.Scheme.AffineCover.cover\", \"AlgebraicGeometry.Scheme.Cover.mem_grothendieckTopology\"], \"digest\": \"4110b650aa5634cf\"}",
    "date": "2026-10-17",
    "verdict": "no match: Zariski and jointly-surjective topologies and generic morphism-property cover APIs do not identify the ph topology or its standard affine basis."
+  },
+  {
+   "tool": "grep",
+   "query": "standardPh|standard_ph|phTopology|phCover",
+   "results": "{\"t\": \"2026-10-17T19:28:40Z\", \"tool\": \"grep\", \"query\": \"standardPh|standard_ph|phTopology|phCover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ph topology and its standard affine sieve basis are absent; generic Zariski or precoverage-to-topology constructions do not prove this geometric basis theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Grothendieck topology generated by Zariski covers and proper surjections has a basis of standard affine ph covering sieves",
+   "results": "{\"t\": \"2026-10-17T19:28:40Z\", \"tool\": \"leansearch\", \"query\": \"The Grothendieck topology generated by Zariski covers and proper surjections has a basis of standard affine ph covering sieves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zariskiTopology\", \"CategoryTheory.Precoverage.toGrothendieck\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.grothendieckTopology\", \"CategoryTheory.Pretopology.toGrothendieck\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"Opens.grothendieckTopology\", \"CategoryTheory.GrothendieckTopology.Cover\"], \"digest\": \"84f621fdf16bc551\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ph topology and its standard affine sieve basis are absent; generic Zariski or precoverage-to-topology constructions do not prove this geometric basis theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"phTopology\"",
+   "results": "{\"t\": \"2026-10-17T19:28:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"phTopology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ph topology and its standard affine sieve basis are absent; generic Zariski or precoverage-to-topology constructions do not prove this geometric basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open covers of proper surjections onto affine schemes have standard ph refinements after composition",
+   "results": "{\"t\": \"2026-10-17T19:28:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open covers of proper surjections onto affine schemes have standard ph refinements after composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.AffineCover.map_prop\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\"], \"digest\": \"eb773ec1706f9a4e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ph topology and its standard affine sieve basis are absent; generic Zariski or precoverage-to-topology constructions do not prove this geometric basis theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given jointly surjective flat locally finitely presented morphisms over a qcqs scheme, find a finite surjective finitely presented morphism with open local lifts to the covering family",
+   "results": "{\"t\": \"2026-10-17T19:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Given jointly surjective flat locally finitely presented morphisms over a qcqs scheme, find a finite surjective finitely presented morphism with open local lifts to the covering family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"334f4b5b09f12e9d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ph topology and its standard affine sieve basis are absent; generic Zariski or precoverage-to-topology constructions do not prove this geometric basis theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-comparison-hypotheses",
@@ -82,5 +285,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ph-affine-standard-sieve-basis",
+  "worker": "stage1",
+  "summary": "Expanded the generated-topology/basis assertion into an explicit sieve topology with arbitrary affine tests, checked each topology axiom and both inclusions, proved affine locality, and used finite fppf domination for etale covers. Reused affine qcqs, affine covers, proper/surjective base change, affine fibre products, finite-proper and open-immersion-etale nodes. Two genuinely smaller statement-only children isolate standard-composite refinement and finite fppf domination. Statement unchanged; two missing notion dependencies added. All searches are logged; no Lean or compiler work.",
+  "blueprint": "Supplies the affine standard-sieve basis needed by the 0F0I refinement and ph-gluing steps of lem-trf-ph-etale-comparison-hypotheses, on the ph-descent branch of the normal-cone specialization paragraph of lem-trf-local-term-locality. Steps 1-7 prove the covering criterion/locality; 8-9 the etale comparisons; 10 size/empty cases.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-c4527c3c8",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-c4527c3c8 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and the statement of every cited node against Stacks: topologies.tex section ph (0DBD, 0DBE, the full statement and proof of 0DBF, 0DBG, 0DBH, 0DBI, 0DBJ), 021N, more-morphisms 0CP0 with its proof and 0DBT, and limits lemma-chow-finite-type, which needs only a qcqs base. All step-source tags were checked in tags/tags and are correct. The 10 steps are correct. Steps 3-7 build an auxiliary topology J_* tested on affines, check its three axioms (transitivity through the 0DBF(2) child, applied to affine levels as it requires), show J_ph is contained in J_* by checking the generators, and show the reverse by standard family plus upward closure plus transitivity. They also derive the affine criterion, the basis and locality. Step 8 goes from etale to fppf to the 0CP0 child; 0CP0 is applied only on affine A, which is qcqs, and finite implies proper gives a standard family, then Step 7 finishes. Steps 9-10 cover Zariski-is-etale and the empty and size cases. Edge cases tested: T empty, m=0, identity covers. Both new nodes match 0DBF(2) and 0CP0 hypothesis by hypothesis. They are strictly smaller real lemmas, not clauses of the item, and statement-only. Grep for the tags, labels, standard ph and dominate finds no duplicate. Every off-unit citation is a mathlib leaf, so no tool_uses are needed. The parent lem-trf-ph-etale-comparison-hypotheses uses only what the item states. Not a target, so no base-change or coefficient issue, and no SGA citation. Fix: lem-trf-fppf-finite-surjective-refinement now cites def-weil-surjective-morphism for 'surjective', in the statement and stmt_deps (B3).; 1 file(s) fixed by the reviewer"
  }
 }
