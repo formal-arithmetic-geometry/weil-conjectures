@@ -33,6 +33,7 @@ negative degrees is the left t-exactness of the direct images.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.affineLine_multiplicativeGroup_homology_tateObject`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_affineLine`
 - `AlgebraicGeometry.Etale.isIso_homology_zero_map_unit_multiplicativeGroup`
 - `AlgebraicGeometry.Etale.isIso_shiftMap_kummerClassAffineLineDirectImage`
@@ -62,6 +63,42 @@ attribute [local instance] HasInvertibleExponent.opens
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
+The proposition `sk-prop-a1-kummer`, clauses (a)–(c), for the concrete Tate twist
+`Λ(1) = μₙ ⊗ Λ`, with the generator `κ(t)` of clause (b) made explicit. Write
+`p : 𝔸¹_B ⟶ B` for the projection, `j : 𝔾_{m,B} ⟶ 𝔸¹_B` for the open complement of the zero
+section and `π = p ∘ j`, so that `Rπ_* Λ(1) = Rp_* Rj_* j^* Λ(1)`:
+* (a) `R^m p_* Λ(1) = 0` for `m > 0` (the affine line is acyclic, and `Λ(1)` is pulled back
+  from `B`);
+* (b) restriction along `j` identifies `R⁰p_* Λ(1)` with `R⁰π_* Λ(1)`, and the Kummer class
+  `κ(t) : Λ_B ⟶ (Rπ_* Λ(1))[1]` (`AlgebraicGeometry.Etale.kummerClassAffineLineDirectImage`)
+  induces an isomorphism `Λ_B ≅ R¹π_* Λ(1)`;
+* (c) `R^m π_* Λ(1) = 0` for `m ≥ 2`.
+
+The forms of this proposition in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`
+assume a normalized twist datum, which for the concrete twist is the statement `sk-prop-a1`
+proved from this one, and do not name the generator. -/
+theorem affineLine_multiplicativeGroup_homology_tateObject :
+    (∀ n : ℤ, 0 < n → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+      ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj
+        (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))) ∧
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
+      ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          ((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)).unit.app
+            (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))) ∧
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).shiftMap
+      (kummerClassAffineLineDirectImage Λ B) 0 1 (by norm_num)) ∧
+    (∀ n : ℤ, 2 ≤ n → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+      ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj
+        ((R(((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)_*[
+            ModuleCat.{u + 1} Λ])).obj
+          ((L(((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)^*[
+            ModuleCat.{u + 1} Λ])).obj (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))))) :=
+  sorry
+
+include aB in
+/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+
 *(a), twisted.* For the projection `p : 𝔸¹_B ⟶ B`, `R^m p_* Λ(1) = 0` for `m > 0`: the affine
 line is acyclic, and `Λ(1)` is pulled back from `B`, so by the projection formula the twisted
 statement follows from `Rp_* Λ ≅ Λ_B`. -/
@@ -69,7 +106,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_pos (n : 
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj
         (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1))) :=
-  sorry
+  (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).1 n hn
 
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
@@ -83,7 +120,7 @@ theorem isIso_homology_zero_map_unit_multiplicativeGroup :
         ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
           ((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)).unit.app
             (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)))) :=
-  sorry
+  (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).2.1
 
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
@@ -95,7 +132,7 @@ include aB in
 theorem isIso_shiftMap_kummerClassAffineLineDirectImage :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).shiftMap
       (kummerClassAffineLineDirectImage Λ B) 0 1 (by norm_num)) :=
-  sorry
+  (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).2.2.1
 
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
@@ -110,7 +147,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_
             ModuleCat.{u + 1} Λ])).obj
           ((L(((𝔸(ULift.{u} (Fin 1); B).basicOpen (AffineSpace.coord B (ULift.up 0))).ι)^*[
             ModuleCat.{u + 1} Λ])).obj (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1))))) :=
-  sorry
+  (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).2.2.2 n hn
 
 omit [Finite Λ] in
 /-- The Tate twist `Λ_X(m)` is concentrated in degree zero, so it lies in `D^{≥ 0}`. -/
