@@ -134,7 +134,26 @@ private lemma encodedFinitePresentation [Finite R]
       ∃ f : (constantSheaf J (ModuleCat.{w} R)).obj P ⟶
         (constantSheaf J (ModuleCat.{w} R)).obj Q,
         Nonempty ((sheafEncoding J R G hG).obj M ≅ cokernel f) := by
-  sorry
+  have : HasFiniteColimits (Sheaf J (ModuleCat.{w} R)) := inferInstance
+  have : HasCokernels (Sheaf J (ModuleCat.{w} R)) := inferInstance
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := hM
+  let H := sheafEncoding J R G hG
+  let P : ModuleCat.{w} R := ⨁ fun _ : Fin m ↦ G.obj (Mod.regular (AddCommGrpCat.of R))
+  let Q : ModuleCat.{w} R := ⨁ fun _ : Fin n ↦ G.obj (Mod.regular (AddCommGrpCat.of R))
+  let em := encFiniteFreeIso J R G hG m
+  let en := encFiniteFreeIso J R G hG n
+  have : H.IsEquivalence := sheafEncodingIsEquivalence J R G hG
+  have : H.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full H
+  have : HasBinaryProducts (Mod (Sheaf J Ab.{w})
+      ((presheafToSheaf J Ab.{w}).obj (A (C := Cᵒᵖ) R))) := HasFiniteLimits.out _
+  have : H.Additive := Functor.additive_of_preserves_binary_products H
+  let f : (constantSheaf J (ModuleCat.{w} R)).obj P ⟶
+      (constantSheaf J (ModuleCat.{w} R)).obj Q := em.inv ≫ H.map g ≫ en.hom
+  let : HasCokernel f := HasCokernels.has_colimit f
+  let : HasCokernel (H.map g) := HasCokernels.has_colimit (H.map g)
+  refine ⟨P, Q, finiteSumRegular R G hG m, finiteSumRegular R G hG n, f, ⟨?_⟩⟩
+  exact H.mapIso eg ≪≫ PreservesCokernel.iso H g ≪≫
+    cokernel.mapIso (H.map g) f em en (by dsimp only [f]; simp)
 
 end CategoryTheory.ConstantInternalModuleSheafEncoding
 
@@ -221,7 +240,63 @@ private lemma encoded_fp [Finite B] (T : Scheme.{u})
           (ModuleCat.{u + 1} (ULift.{u + 1} B))).obj Q,
         Nonempty ((finiteDiscreteCoefficientEquivalence B eR G hG T).inverse.obj M ≅
           cokernel f) := by
-  sorry
+  have : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
+    ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
+  let φ := (finiteDiscreteSchemeRingIso B T eR).hom
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := hM
+  have hN := finitePresentation_map_of_presentation
+    (Mod.comap φ) (finiteFree_comap φ) g eg
+  obtain ⟨P, Q, hP, hQ, f, ⟨ef⟩⟩ :=
+    CategoryTheory.ConstantInternalModuleSheafEncoding.encodedFinitePresentation
+      (ProEt.topology T) (ULift.{u + 1} B) G hG ((Mod.comap φ).obj M) hN
+  refine ⟨P, Q, hP, hQ, f, ⟨?_⟩⟩
+  unfold finiteDiscreteCoefficientEquivalence
+  exact ef
+
+/-- Inverse image with coefficients identified by restriction of scalars.
+Keep the composite irreducible so iterated restrictions use the proved API below. -/
+@[irreducible] private noncomputable def normalizedPullback (T U : Scheme.{u})
+    (j : U ⟶ T) : FiniteDiscreteInternalModules B T ⥤ FiniteDiscreteInternalModules B U :=
+  ((ProEtale.upperStar Ab.{u + 1} j).mapMod
+    (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)) ⋙
+      Mod.comap (inv (condensedPullbackHom (Profinite.continuousMapRingObj.{u} B) j))
+
+private lemma normalizedPullback_locallyFP (T U : Scheme.{u}) (j : U ⟶ T)
+    (M : FiniteDiscreteInternalModules B T)
+    (hM : IsLocallyFinitelyPresented
+      ((ProEtale.upperStar Ab.{u + 1} j).obj
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T))
+      (((ProEtale.upperStar Ab.{u + 1} j).mapMod
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)).obj M)) :
+    IsLocallyFinitelyPresented (condensedRingObj (Profinite.continuousMapRingObj.{u} B) U)
+      ((normalizedPullback B T U j).obj M) := by
+  unfold normalizedPullback
+  exact localFinitePresentation_comap
+    (inv (condensedPullbackHom (Profinite.continuousMapRingObj.{u} B) j)) hM
+
+private lemma normalizedPullback_fp (T U : Scheme.{u}) (j : U ⟶ T)
+    (M : FiniteDiscreteInternalModules B T)
+    (hM : Mod.IsFinitelyPresented
+      ((ProEtale.upperStar Ab.{u + 1} j).obj
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T))
+      (((ProEtale.upperStar Ab.{u + 1} j).mapMod
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)).obj M)) :
+    Mod.IsFinitelyPresented (condensedRingObj (Profinite.continuousMapRingObj.{u} B) U)
+      ((normalizedPullback B T U j).obj M) := by
+  unfold normalizedPullback
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := hM
+  exact finitePresentation_map_of_presentation
+    (Mod.comap (inv (condensedPullbackHom (Profinite.continuousMapRingObj.{u} B) j)))
+    (finiteFree_comap (inv (condensedPullbackHom (Profinite.continuousMapRingObj.{u} B) j))) g eg
+
+private lemma normalizedPullback_encoding (T U : Scheme.{u}) (j : U ⟶ T)
+    (M : FiniteDiscreteInternalModules B T) :
+    Nonempty (((j)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)]).obj
+      ((finiteDiscreteCoefficientEquivalence B eR G hG T).inverse.obj M) ≅
+        (finiteDiscreteCoefficientEquivalence B eR G hG U).inverse.obj
+          ((normalizedPullback B T U j).obj M)) := by
+  unfold normalizedPullback
+  exact finiteDiscreteCoefficient_restrictionEncoding B eR G hG T U j M
 
 /-- Transport an internal finite local presentation to an ordinary presentation
 by finite constant module sheaves, before refining the matrix to be constant.
@@ -257,6 +332,15 @@ theorem finiteDiscreteCoefficient_encoded_presentation [DiscreteTopology B] [Fin
             (((j)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)]).obj
               ((finiteDiscreteCoefficientEquivalence B eR G hG T).inverse.obj M)) ≅
             cokernel f) := by
-  sorry
+  let Mj := (normalizedPullback B T U j).obj M
+  obtain ⟨C, hC⟩ := normalizedPullback_locallyFP B T U j M hM
+  refine ⟨C, fun i ↦ ?_⟩
+  let Mi := (normalizedPullback B U (C.X i) (C.f i)).obj Mj
+  have hi := normalizedPullback_fp B U (C.X i) (C.f i) Mj (hC i)
+  obtain ⟨P, Q, hP, hQ, f, ⟨ef⟩⟩ := encoded_fp B eR G hG (C.X i) Mi hi
+  obtain ⟨ej⟩ := normalizedPullback_encoding B eR G hG T U j M
+  obtain ⟨ei⟩ := normalizedPullback_encoding B eR G hG U (C.X i) (C.f i) Mj
+  exact ⟨P, Q, hP, hQ, f,
+    ⟨((C.f i)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)]).mapIso ej ≪≫ ei ≪≫ ef⟩⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
