@@ -19,9 +19,82 @@
   "def-weil-closed-immersion",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-nodal-etale-chart] at each geometric point. Its hypotheses are exactly flatness, local finite presentation, the stated nodal geometric fibres, smoothness over $Y\\setminus T$, and the etale Cartier marking in the smooth locus; projectivity is not required. We obtain a base fs chart $P$, a smooth unmarked chart, a marked chart $z=0$ etale over $\\mathbf A^1_Y$, or a nodal chart etale over $uv=h=\\varepsilon\\alpha(a)$, disjoint from $D$. It suffices to verify the divisorial log-regular conditions on these etale neighbourhoods, since [def-trf-log-regular-pair] imposes its chart and strict-local conditions at geometric points.",
+   "uses": [
+    "lem-trf-nodal-etale-chart",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9, pp. 70--71, smooth-locus reduction and equation (1.a); Stacks 0CBY, curves.tex, lemma-etale-local-structure-nodal-family."
+   }
+  },
+  {
+   "text": "On a smooth unmarked chart take the associated log structure of the pulled-back base chart $P$. The comparison morphism for $P\\to P$ is the given smooth morphism and the group map is the identity. On a marked chart take the associated log structure of $P\\oplus\\mathbf N\\to\\mathcal O_X$, $(p,n)\\mapsto\\alpha(p)z^n$. This monoid is fs: finite generation and cancellation are componentwise, and saturation follows componentwise in $P^{\\rm gp}\\oplus\\mathbf Z$. The group map is injective with cokernel $\\mathbf Z$; the comparison is the etale coordinate map to $\\mathbf A^1_Y$ supplied by [lem-trf-nodal-etale-chart]. The associated structures and their morphisms to the base are those of [def-trf-fs-log-blowup]. Their triviality locus is exactly $X\\setminus B$: a base nonunit stays a nonunit under a local ring map, and the additional generator is a unit precisely off $z=0$. Apply [lem-trf-log-smooth-log-regular] to these fs charts. It proves log regularity and canonically identifies the constructed structure with the divisorial structure of this complement.",
+   "uses": [
+    "lem-trf-nodal-etale-chart",
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-smooth-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9, smooth-locus case; VI 1.8 and 1.4, pp. 69--71."
+   }
+  },
+  {
+   "text": "On a nodal chart write $h=\\varepsilon\\alpha(a)$ as in step 1 and put $R=\\mathbf Z\\oplus P$, charted on the base by $(n,p)\\mapsto\\varepsilon^n\\alpha(p)$. Adding the group generator mapping to a unit changes no associated base log structure, by the chart pushout in [def-trf-fs-log-blowup]. By [lem-trf-nodal-divisorial-chart], $Q=\\mathbf N^2\\amalg_{\\mathbf N}R$ is fs, $R^{\\rm gp}\\to Q^{\\rm gp}$ is injective with cokernel $\\mathbf Z$, and its monoid-algebra base change is exactly $uv=\\varepsilon\\alpha(a)$. Define the log structure on the etale nodal neighbourhood by this $Q$-chart: the two generators map to $u,v$, while $R$ maps through the base. In particular both branch generators occur, even though $D$ is absent. The comparison to the monoid-algebra base change is exactly the etale nodal map from [lem-trf-nodal-etale-chart].",
+   "uses": [
+    "lem-trf-nodal-etale-chart",
+    "def-trf-fs-log-blowup",
+    "lem-trf-nodal-divisorial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9 proof, p. 71, the two squares after equation (1.a)."
+   }
+  },
+  {
+   "text": "For the chart constructed in step 3, apply [lem-trf-log-smooth-log-regular]: the base is log regular, both log structures are fs, the group kernel is zero, its cokernel is the torsion-free group $\\mathbf Z$, and the comparison is etale. Thus the constructed source is log regular. Its triviality locus is exactly the inverse image of $Y\\setminus T$: over that open all base monomials and $h$ are units, and $uv=h$ forces both $u$ and $v$ to be units. Conversely, over $T$ some base chart element maps to a nonunit in the base strict local ring and therefore in the source strict local ring, so the associated log structure is nontrivial by [def-trf-fs-log-blowup]. Since $D$ is absent here, this locus is precisely $X\\setminus B$. The same preservation lemma now identifies the $Q$-log structure canonically with the divisorial structure of this complement, and gives its dense open complement.",
+   "uses": [
+    "lem-trf-log-smooth-log-regular",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9, last sentence of proof, p. 71; VI 1.8 and VI 1.4."
+   }
+  },
+  {
+   "text": "The local divisorial structures in steps 2 and 4 are restrictions of the single sheaf $\\mathcal O_X\\cap j_*\\mathcal O_{X\\setminus B}^{\\times}$: on an etale test scheme each consists of regular functions invertible on the same open complement. Hence their fs charts and their log-regular strict-local conditions give those of [def-trf-log-regular-pair] at every geometric point of $X$. The complement is dense globally: a nonempty open of $X$ has nonempty inverse image in some chart, and that inverse image meets the dense triviality locus supplied by [lem-trf-log-smooth-log-regular]; its image lies in the original open outside $B$. As $B$ is closed, it is nowhere dense. The pair $(X,B)$ is therefore log regular as claimed.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "lem-trf-log-smooth-log-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and Proposition 1.9: identify the divisorial structure and conclude etale locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-trf-log-regular-pair",
+  "lem-trf-log-smooth-log-regular",
+  "lem-trf-nodal-divisorial-chart",
+  "lem-trf-nodal-etale-chart"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.4, 1.8, Proposition 1.9 and its proof, printed pp. 69--71; etale local model cross-checked with Stacks 0CBY."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +123,17 @@
    "results": "{\"t\": \"2026-10-17T15:54:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"logSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A marked nodal curve smooth away from the boundary over a logarithmically regular pair is logarithmically regular with its vertical and marked boundary.",
+   "results": "{\"t\": \"2026-10-17T17:54:36Z\", \"tool\": \"leansearch\", \"query\": \"A marked nodal curve smooth away from the boundary over a logarithmically regular pair is logarithmically regular with its vertical and marked boundary.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"4d2f5a5ea1e3bb74\"}; Ordinary smoothness and manifold structures do not establish divisorial logarithmic regularity of a marked nodal family.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-pair-projective-resolution",
@@ -76,5 +156,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-log-regularity",
+  "worker": "stage1",
+  "summary": "Repairs all returned faults: full branch-generating Q-chart; an injective groupification chart criterion with divisorial recovery only after log regularity; no projective-family lemma; complete logged searches. Redundant dimension and density tool citations removed, using the source VI 1.4 density conclusion. Three statement-only children separate scheme normal forms, the fs monoid/algebra calculation, and the general logarithmic preservation/recovery theorem. The item statement is unchanged from current main.",
+  "blueprint": "Retains the current ancestry via lem-trf-nodal-pair-projective-resolution to lem-trf-local-term-locality. This is the historical nearby-duality nodal alteration input: ILO VI Proposition 1.9 smooth-locus case, equation (1.a), the two monoid/monoid-ring squares, and the VI 1.8/1.4 conclusion. The current main-20261015 ancestor instead follows contracting correspondences; no chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-14fc8a8be",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-14fc8a8be (reviewer sub-agent of L); spot-checked: I read all of it: the item, the 3 new nodes, the cited definitions (def-trf-log-regular-pair, def-trf-fs-log-blowup, def-trf-nodal-geometric-fibres), ILO VI 1.1-1.9 (printed pp. 68-71) including the full proof of Prop. 1.9, and Stacks 0CBY (curves.tex:5077). The item statement is unchanged from main, so nothing is weakened. Step checks: (1) every hypothesis of the etale-chart child is in the item, and projectivity is not used. (2) P and P+N are fs, the group maps are injective with cokernel Z, the comparison maps are f and the etale map (f,z) to A^1_Y, and the triviality locus is X minus B, by the local-homomorphism argument. (3) R=Z+P is still a chart; Q to O_U is a monoid map because uv=h=eps*alpha(a); the comparison is the etale uv=h map. This is ILO's cartesian square, with both branch generators, which correctly reads ILO's 'image inverse' as the divisorial structure. (4) All hypotheses of the preservation node hold, and the triviality locus was checked in both directions. (5) Gluing and density follow because etale maps are open; the elementary mark is accepted. New nodes: etale-chart is true (0CBY; h is invertible off T after shrinking V; dz generates the relative differentials along D, so z is etale). The nodal monoid lemma I proved by hand: Q embeds in Zu+Ze+P^gp as {q in P, q-max(0,-m)a in P}, so it is fs; the cokernel is Z; the monoid ring of the pushout is A[u,v]/(uv-eps*alpha(a)); the cases a=0 and uv=t^n also check. log-smooth-log-regular is Kato 1988 Thm 3.5 plus ILO VI 1.8 and VI 1.4. None is a duplicate (greps for 0CBY, log smooth, nodal, chart, snc and log-regular nodes), none restates a clause of the item, and there is no SGA, no off-unit statement citation and no tool_uses. Searches and blueprint fields are complete. FIX: lem-trf-log-smooth-log-regular now requires the charts P and Q to be fine saturated monoids, because Kato's criterion needs fine charts. Every chart the item uses is fs, so the item's proof is unchanged. The corrected file is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -18,9 +18,106 @@
   "def-weil-residue-field",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and an irreducible component $C$ of $X_s$. By sobriety choose its generic point $x$, regarded also as a point of $X$ using the fibre homeomorphism. Choose affine neighbourhoods $V=\\operatorname{Spec}A$ of $s$ and $U=\\operatorname{Spec}R\\subset f^{-1}(V)$ of $x$. The affine flatness criterion makes $A\\to R$ flat. Since $S$ is integral, $A$ is a domain and $\\eta\\in V$ corresponds to $(0)$. If $\\mathfrak q$ represents $x$ and $\\mathfrak p$ represents $s$, going down applied to $(0)\\subseteq\\mathfrak p$ and $\\mathfrak q$ gives $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $(0)$. Thus there is a point $y\\in X_\\eta$ specializing to $x$ in $X$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-pc-scheme-fibre",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down), applied on affine charts; More on Morphisms Tag 0GSK, second list"
+   }
+  },
+  {
+   "text": "Choose an irreducible component $B$ of $X_\\eta$ containing $y$, using the component-cover theorem, and let $z$ be its generic point by sobriety. In the fibre $z$ specializes to $y$; its continuous inclusion into $X$ shows that $z$ specializes to $x$ in $X$. Put $Z=\\overline{\\{z\\}}$ in $X$ and $Z_s=Z\\cap f^{-1}(s)$. This is closed in $X_s$ and contains $x$, hence contains $C=\\overline{\\{x\\}}$ in $X_s$. Any irreducible subset of $Z_s$ properly containing $C$ would also be an irreducible subset of $X_s$ properly containing $C$. Maximality of $C$ therefore makes $C$ an irreducible component of $Z_s$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSK (remark-flat-equidimensional), second list: reduction to the closure of a generic-fibre component"
+   }
+  },
+  {
+   "text": "Apply the fibre-component-closure dimension lemma to the original flat, locally finite type map $f$, to $t=\\eta$, to the generic point $z$ of $B$, and to the component $C$ of $Z_s$ found in step 2. It gives $\\dim C=\\dim B=d$, where the final equality is the hypothesis on the generic fibre. Since $s$ and $C$ were arbitrary, every nonempty ordinary fibre is pure of dimension $d$. This application does not assume that the reduced closure $Z$ is itself flat.",
+   "uses": [
+    "lem-trf-flat-fibre-component-closure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0GSJ (lemma-flat-associated-equidimensional) and 0GSK (remark-flat-equidimensional), second list"
+   }
+  },
+  {
+   "text": "By locally-finite-type base change, $X_s\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type. Apply the pure-open local-dimension lemma to $Y=X_s$, its whole open subset $O=X_s$, and $n=d$. Step 3 supplies every component dimension, so the local topological dimension $\\dim_x X_s$ equals $d$ at every $x\\in X_s$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), parts (3), (5); Morphisms Tag 01T4"
+   }
+  },
+  {
+   "text": "Let $\\Omega/\\kappa(s)$ be any algebraically closed extension and put $S'=\\operatorname{Spec}\\Omega$, mapped to $S$ through $s$. Apply the fibre-dimension-after-base-change theorem to $f$ and this map. Its fibre identification identifies the fibre over the unique point of $S'$ with $G=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\Omega$. For every $x'\\in G$ with image $x\\in X_s$, the theorem gives $\\dim_{x'}G=\\dim_x X_s=d$ by step 4. Thus the local dimension is constantly $d$ on $G$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1); this is the pointwise input to Tag 02NK"
+   }
+  },
+  {
+   "text": "The structure morphism $G\\to\\operatorname{Spec}\\Omega$ is locally of finite type by base change. A field is Noetherian because its only ideals are $0$ and the unit ideal; hence its spectrum is locally Noetherian by definition. The locally-finite-type over locally-Noetherian theorem therefore makes $G$ locally Noetherian. Apply the constant-local-dimension component theorem with $Y=G$, $O=G$, $n=d$ and step 5: every irreducible component of $G$ has dimension $d$. This proves the geometric-fibre assertion. If $X$ or one of the fibres is empty, it has no irreducible components and the assertions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian) and Tag 02NK (lemma-base-change-relative-dimension-d); Topology Tags 0055, 0052 for the component criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "def-pc-scheme-fibre",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sc-flat-going-down",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "lem-trf-flat-fibre-component-closure-dimension",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSK, second list with F=O_X, expanded using the component-closure conclusion of 0GSJ and flat going down (00HS); geometric fibres via 02FY(1), the input to 02NK."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +146,52 @@
    "results": "8 hits; top: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; types read: no result supplies flattening or preservation of pure fibre dimension for a merely flat morphism; digest=c17938e7786615f1",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|relativeDimension|pure.*dimension",
+   "results": "11 hits; Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; ; digest=78791c5b354ed85f. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat scheme morphism locally of finite type has constant dimension on the fibres of the closure of a fibre component generic point",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; ; digest=1af15336d1d136a9. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "1 hits; AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact; ; digest=879fe59f8aca4a57. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finite type morphism of schemes the reduced closure of a generic point of a fibre component has equidimensional fibres of constant dimension",
+   "results": "8 hits; AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Flat, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Flat.of_stalkMap; ; digest=7e02e83266642224. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finite type family over an integral scheme with pure dimensional generic fibre has pure dimensional geometric fibres of the same dimension",
+   "results": "8 hits; AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; ; digest=f7349efb5b8dd79a. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of a generic point of a fibre of a flat morphism locally of finite type is of constant pure relative dimension",
+   "results": "8 hits; AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.HasGoingDown.of_flat, AlgebraicGeometry.Flat, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.finite_appTop_of_universallyClosed; ; digest=dd5062f182c6bf5e. Read results: flatness, going down, Jacobson fibres and smooth relative dimension do not state dimension preservation for component closures.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flatification-horizontal-curve-pair",
@@ -77,5 +216,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded the 0GSK remark into affine going down, generic-fibre component selection, the component-closure dimension input of 0GSJ, and the pointwise field-base-change argument. Added one statement-only geometric input concerning component closures, which need not be flat themselves. Searched the whole DAG, blueprint, project Lean and Mathlib; no exact attachment or Mathlib match was found. Every proof citation was checked against its statement. The generic-fibre density assumption is retained although flat going down already supplies the needed generalizations.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Supplies generic points of fibre components without any Noetherian hypothesis on the base."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Converts the given stalkwise flatness to the affine ring flatness required by going down."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Chooses a generic-fibre component through the lifted point; no finiteness of the set of components is assumed."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts the already proved pure component dimensions of the ordinary fibre to local topological dimension; the local-term unit has no dimension-theory replacement."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Transfers local topological fibre dimension under the arbitrary residue-field extension defining a geometric fibre."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Supplies local Noetherianity of a locally finite type scheme over a field, needed by the component criterion."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Converts constant finite local topological dimension on the geometric fibre into the required component dimensions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sc-irreducible-components-cover",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-9c27728de",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-9c27728de (reviewer sub-agent of L); spot-checked: The item and the new node are true, and the proof is complete. I made no fixes. Sources read: more-morphisms.tex 0GSI, 0H3X, 0GSJ and 0GSK (second list, F=O_X), plus Morphisms 02NJ and Topology definition-equidimensional. The item statement is the 0GSK remark specialized to an integral base, unchanged. New node lem-trf-flat-fibre-component-closure-dimension is true: a fibre-component generic point y is a minimal prime of a locally Noetherian fibre, so it lies in Ass_{X/S}(O_X). 0GSJ(2) then makes Y->T of relative dimension d, and Y_t equals B as a set, so d = dim B, which is finite. It needs no Noetherian base, no integral base and no purity. Tests: k[t][x,y]/(x(y-t)); the non-pure k[t][x,y,z]/(xy,xz); empty Z_s; and the blowup of A^2, which shows flatness is needed. The node is strictly smaller than the item, not a restated clause, and statement-only, and its form checks B1-B9 pass. It does not duplicate lem-trf-flat-family-generic-dimension-bound (0H3X gives only an upper bound) or the lem-sbc finite-presentation/Cohen-Macaulay nodes. Steps: (1) going down on affine charts gives eta=(0) in V, a flat ring map and a lift; correct. (2) Choosing the component and passing maximality of C to Z_s is genuinely elementary. (3) The new node is applied with t=eta, y=z, D=C. (4)-(6) cite lft base change, the pure-open local-dimension node, fibre dimension after base change (def-kun-dimension, the same notion on underlying spaces), local Noetherianity, and the constant-local-dimension component criterion; every hypothesis is checked. proof_deps equals the union of uses. There is no SGA citation, and the declared tool_uses are accepted as generic black boxes."
  }
 }

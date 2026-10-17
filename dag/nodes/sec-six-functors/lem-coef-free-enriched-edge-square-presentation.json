@@ -15,9 +15,141 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-complete-segal-quasicategory-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with homotopy fibers of spaces of enriched maps, so a fixed endpoint includes its specified identification. For each ordinal let $I_n$ be its uncompleted free enrichment: its objects are $0,\\ldots,n$, with unit Hom objects for $i\\le j$ and initial Hom objects otherwise. The free-path formula constructs it from the line of $n$ unit-labelled generators. Its completion is the free enrichment $[n]_{\\mathcal V}$. Tensor-currying, free enrichment and completion locality give\n$$R(B_v)_n\\simeq\\operatorname{Map}_{\\operatorname{Algd}(\\mathcal V)}(I_n\\otimes F_v,\\mathcal E).$$\nHere tensor products on the right are uncompleted; the completion lemma allows either factor and their tensor to be completed when mapping into the complete target. These are adjunction equivalences, natural under ordinal restriction and endpoint evaluation. For $n=0$, the free-edge adjunction identifies the objects with $(x,y,a:v\\to\\mathcal E(x,y))$.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-algebroid-completion",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark 4.3.4; Proposition A.4.9; completion and the internal-Hom adjunction of Haugseng Remark 9.5. Agent argument on the cited adjunctions."
+   }
+  },
+  {
+   "text": "Construct the square boundary on $S=\\{p,r,s,q\\}$ as a free fixed-object algebroid $P$. Its graph has only $p\\to r$ labelled $\\mathbf1$, $s\\to q$ labelled $\\mathbf1$, $p\\to s$ labelled $v$, and $r\\to q$ labelled $v$. The two paths $p\\to r\\to q$ and $p\\to s\\to q$ are distinct summands, so the free-path formula gives $P(p,q)\\simeq v\\amalg v$. There are no paths of length three; all remaining nonidentity Hom objects are the four displayed labels or initial objects. Let $Q$ be the graph supported only at $(p,q)$ with value $v\\amalg v$, let $R$ be supported there with value $v$, and use the two path inclusions for $Q\\to V_SP$ and the fold for $Q\\to R$. Put $H=P\\amalg_{G_SQ}G_SR$. These constructions involve sources alone, with no target or transformation-space formula.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.9; explicit free-path summands for the four-edge boundary, calculated by the agent."
+   }
+  },
+  {
+   "text": "Partition $S$ into levels $\\{p\\},\\{r,s\\},\\{q\\}$. The boundary $P$ satisfies the extreme-Hom pushout lemma: diagonal units are equivalences, distinct noninitial Hom objects strictly increase level, and $Q,R$ are supported on the extreme pair. That lemma gives $H(p,q)\\simeq(v\\amalg v)\\amalg_{v\\amalg v}v\\simeq v$, leaves every other Hom object unchanged, and sends both length-two compositions to the two inclusions followed by the fold. Compare with $I_1\\otimes F_v$, with vertices $p=(0,0),r=(1,0),s=(0,1),q=(1,1)$. The external tensor formula gives exactly these Hom objects: the side labels are $\\mathbf1,\\mathbf1,v,v$, the diagonal is $v$, and both composites are the unit constraints on $v$. The tensor coherence supplies the cocone from the boundary and the folded diagonal, hence a map $H\\to I_1\\otimes F_v$. It is an equivalence on every Hom object by the preceding computation and fixes $S$, so conservativity of fixed-object graph evaluation makes it an equivalence of algebroids.",
+   "uses": [
+    "lem-coef-directed-algebroid-extreme-hom-pushout",
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-algebroid-external-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.9 and Corollary 4.3.13; source tensor-grid calculation from the new extreme-Hom pushout statement, not a quoted square theorem."
+   }
+  },
+  {
+   "text": "Fix the images of $p,r,s,q$ to $x,x',y,y'$ and fix the two $v$-edges to $a,b$. By the definition of a morphism of total algebroids, enriched maps with these fixed objects are maps in the fixed-$S$ algebra category into the pullback of $\\mathcal E$ along $S\\to\\operatorname{Ob}\\mathcal E$. Contravariant representables take the pushout defining $H$ to a homotopy pullback. The free-graph adjunction then identifies the unfixed boundary data with\n$$M=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,\\mathcal E(x,x'))\\times\\operatorname{Map}_{\\mathcal V}(\\mathbf1,\\mathcal E(y,y')),$$\nits restriction to $G_SQ$ with the pair $(b\\circ f,g\\circ a)\\in Z^2$, and maps from $G_SR$ with $Z=\\operatorname{Map}_{\\mathcal V}(v,\\mathcal E(x,y'))$. Restriction along the fold is the diagonal $Z\\to Z^2$. Thus the space of maps from $H$ with the two marked edges fixed is $M\\times^h_{Z^2}Z$. In particular the two maps $d_0,d_1$ are the explicit compositions of the free-path formula; no end formula for enriched transformations has been used.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.3 and Proposition A.4.9; agent application of the representable colimit criterion to the calculated source pushout."
+   }
+  },
+  {
+   "text": "The diagonal $Z\\to Z^2$ has the path-space model $\\operatorname{Fun}(\\Delta^1,Z)\\to Z^2$. Explicitly the preceding homotopy pullback records $(f,g,c)$ and paths $d_0(f,g)\\to c\\leftarrow d_1(f,g)$; concatenate the first path with the inverse of the second. Conversely take $c=d_1(f,g)$, the prescribed path and its constant endpoint path. Contraction of the redundant endpoint path gives inverse equivalences, including all parameter simplices. By Step 1 at $n=1$ and the source equivalence of Step 3 this is the fiber of $R(B_v)_1$ at the fixed objects $a,b$. The complete-Segal mapping-fiber theorem identifies that fiber with $\\operatorname{Map}_{B_v}(a,b)$. The construction leaves $f,g$ unchanged and hence gives exactly the asserted equivalence over $M$. The path-space convention is the one in the arrow-morphism-square lemma; its arrow-category theorem is not applied to an enriched functor category.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Agent path-pullback calculation after the source pushout; compare the path-space convention in the arrow-morphism-square statement."
+   }
+  },
+  {
+   "text": "To identify composition, consider consecutive squares with labels $a_0,a_1,a_2$, endpoint arrows $(f_{01},g_{01})$, $(f_{12},g_{12})$, and paths $\\gamma_{ij}:a_jf_{ij}\\simeq g_{ij}a_i$. In the tensor grid $I_2\\otimes F_v$, restriction from vertices $0,1,2$ to $0,2$ composes the unit-labelled vertical arrows. On the two boundary paths its image in $\\mathcal E$ is\n$$a_2f_{12}f_{01}\\xRightarrow{\\gamma_{12}f_{01}}g_{12}a_1f_{01}\\xRightarrow{g_{12}\\gamma_{01}}g_{12}g_{01}a_0,$$\nwith the associativity simplices of enriched composition inserted. This follows by following each of the two adjacent boundary cells in the grid, whose source and target composites were calculated in Steps 2–4. Thus the inner face pastes paths and composes endpoints. Repetition of a row inserts its unit arrows and the constant path; deleting an extreme row restricts. These are the actual ordinal maps of Step 1, so the operadic composition and unit coherences of the tensor and of $\\mathcal E$ supply their coherences, without selecting a filler separately for each square.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary 4.3.13 and the algebroid operations; explicit two-cell path-pasting computation by the agent."
+   }
+  },
+  {
+   "text": "For every $n\\ge2$, apply the Segal equivalence\n$$R(B_v)_n\\simeq R(B_v)_1\\times^h_{R(B_v)_0}\\cdots\\times^h_{R(B_v)_0}R(B_v)_1.$$\nReplace the object and one-simplex spaces by the source calculations above. This presents $R(B_v)_n$ by coherent strings of the calculated squares: the homotopy products retain identifications of adjacent vertices and all higher simplices. A chain has a contractible space of coherent extensions across its ordinal, since the displayed restriction is an equivalence of spaces. Hence there is no additional independent choice of higher compatibility to suppress. The faces and degeneracies are those of Step 6; their higher compatibilities are retained from the simplicial space $R(B_v)$ and its natural Segal maps. Rezk completeness is inherited from this nerve, rather than asserted for a discretized collection of squares.",
+   "uses": [
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Agent application of the complete-Segal comparison: Segal restriction, completeness, and mapping fibers."
+   }
+  },
+  {
+   "text": "Postcomposition by an enriched functor $\\mathcal E\\to\\mathcal E'$ sends every boundary label and each composition path to its image; the maps out of $Q$ and the fold are unchanged. A coefficient map $v'\\to v$ maps each horizontal generator, both summands in $Q$, and the folded generator in $R$ by that map. It therefore precomposes both $d_i$ and their path by $v'\\to v$, and the induced source maps commute with the boundary-to-grid cocones. The extreme-Hom identifications are natural on these diagrams. Fixing fewer endpoints or varying their identifications just changes the homotopy fibers of the same universal mapping-space square. The representable colimit criterion is natural in both source diagrams and targets; consequently these operations agree before and after Step 5, including their homotopies. Ordinal restriction commutes with the tensor maps of Step 1; the Segal comparison is itself natural. This proves the claimed target, coefficient, endpoint and simplicial compatibilities.",
+   "uses": [
+    "lem-coef-directed-algebroid-extreme-hom-pushout",
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Agent naturality argument on the explicit source diagrams and the natural adjunction and colimit comparisons."
+   }
+  },
+  {
+   "text": "For an additional small space $K$, interpret a $K$-family by mapping $K$ into each of the spaces in Steps 4–5. The functor $\\operatorname{Map}_{\\mathrm{Spc}}(K,-)$ preserves these homotopy limits by the representable limit criterion. The boundary labels, the two composites and the path concatenation therefore vary together over $K$, with all higher family simplices. The coherent cotensor/currying identity identifies this description with the parameterized enriched-functor interpretation. For $K=\\varnothing$ every such family space is contractible; for $K=*$ the original formula is recovered. If $v$ is initial, $Z$ is contractible and the formula is $M$, as expected for two independent endpoints. For $v=\\mathbf1$ the labels are underlying arrows and the formula reduces to the ordinary arrow-square formula. Empty or noncontractible path spaces remain such throughout; no nonemptiness, rigidity or dualizability hypothesis was used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Agent parameter and small-case verification using representable limit preservation and coherent cotensors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-categorical-algebra-free-monad",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-algebroid-completion",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-directed-algebroid-extreme-hom-pushout",
+  "lem-coef-algebroid-external-product",
+  "def-coef-complete-algebroid",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-arrow-morphism-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Free-graph and algebra-colimit machinery of Remark 4.3.4, Proposition A.4.9 and Corollaries A.5.4/A.5.7; tensor/internal Hom from arXiv:2311.13362v1 Remark 9.5. The square source-pushout calculation, its mapping fibers, and simplicial/parameter comparison are written by the agent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +192,38 @@
    "results": "{\"t\": \"2026-10-17T16:09:03Z\", \"tool\": \"leanfinder\", \"query\": \"The underlying infinity category of functors from a free enriched single edge has objects coefficient labelled arrows and morphisms homotopy commutative squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.CatEnrichedOrdinary.instQuiverHom\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerve\"], \"digest\": \"424e98cd10c756f4\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary enriched categories, strict naturality squares, or simplicial nerves; they do not present functors from a free edge in an arbitrary complete enriched infinity-category. Read Mathlib/CategoryTheory/Enriched/Basic.lean:395-445 and FunctorCategory.lean:47-100; ordinary ends and transformation types do not retain these homotopy path spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces between functors from the free enriched edge are endpoint arrows together with a coherent path between the two composites",
+   "results": "CategoryTheory.EnrichedNatTrans; CategoryTheory.Enriched.FunctorCategory.homEquiv; ordinary enriched transformations only",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary enriched declarations do not state the complete infinity-categorical free-edge square presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedNatTrans, CategoryTheory.EnrichedFunctor, FunctorCategory",
+   "results": "0 hits; unknown identifier FunctorCategory",
+   "date": "2026-10-18",
+   "verdict": "no match: query returned no usable declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "EnrichedNatTrans|FunctorCategory|homEquiv [Mathlib/CategoryTheory/Enriched]",
+   "results": "Mathlib/CategoryTheory/Enriched/Basic.lean:406-418; Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:37-89; ordinary enriched constructions",
+   "date": "2026-10-18",
+   "verdict": "no match: these files do not state the infinity-categorical free-edge result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free enriched category on two objects and one edge has functor mapping spaces described by endpoint arrows and homotopies",
+   "results": "CategoryTheory.Cat.free; CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom_map; ordinary free categories/enriched homs",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary category/enrichment results only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-collage-crossing-transformations",
@@ -95,5 +255,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-free-enriched-edge-square-presentation",
+  "worker": "stage1",
+  "summary": "Repair of D1/D2 and G2: retired the rejected currying helper from this delivery and replaced it with a target-independent extreme-Hom pushout lemma for three-level directed algebroids. The parent now constructs the free square boundary, computes its source pushout and its tensor-grid equivalence, maps that pushout into E to derive the path formula, explicitly computes pasting, and uses the existing Segal theorem for coherent strings. The statement is unchanged.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, mapping-complex adjunction: free-edge square test below the collage comparison, before currying and without an enriched-end formula."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-a3456b9d9",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a3456b9d9 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no repairs. New node lem-coef-directed-algebroid-extreme-hom-pushout: I proved it myself. Write the pushout as the bar construction A ⊔ (G_S Q)^{⊔n} ⊔ G_S R and compute the realization graphwise, since the free-monad node says V_S preserves sifted colimits. Because A is directed with unit diagonals and Q, R live on S0×S2, every word A(x,s)⊗Q(s,t)⊗A(t,y) with x≠s or y≠t vanishes (X⊗0≃0), and no two Q/R letters can be adjacent. So B = A ⊔_Q R on S0×S2 and A elsewhere, also for stable V. I tested S empty, S1 empty, Q=R=0, h an equivalence, V = spaces, and v initial. It is statement-only, cites its notions, records three search kinds, and has correct blueprint from/via fields. It does not restate the item (no E, v, path or nerve clause), so D1/D2 are repaired. It is not a duplicate: lem-coef-extreme-bimodule-attachment is the closest analogue but covers simplicial (space-enriched) categories only and cannot give arbitrary V; the report did not list it, and I note it in review.md. The other simplicial-category pushout nodes, the cell filtration and the free monad were also checked and excluded. Item steps 1–9 check against the cited statements: Step 1 uses free enrichment, currying and completion locality, with I_n = G_S(line). Step 2 gives P(p,q) = v⊔v. Step 3 uses the new lemma with levels {p},{r,s},{q}; I matched H Hom by Hom against I_1⊗F_v from the external product (both reverse Homs are 0, the diagonal is v), then conservativity gives the equivalence. Step 4 uses the representable colimit criterion with orientations f, g, a, b checked, so d0 = b∘f and d1 = g∘a. Step 5 uses the path model and the complete-Segal mapping fiber. Step 6 pastes two-cells with the correct endpoints. Steps 7–9 cover Segal strings, contravariant naturality in v, and parameters, with v=0, v=1 and K=∅ checked. proof_deps equals the union of uses, every citation exists, nothing is marked elementary, and there is no SGA. Everything is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. The statement is unchanged and not weakened. Gepner–Haugseng and Haugseng are not in literature/; they are correctly listed as WANTED with proof_origin = agent."
  }
 }
