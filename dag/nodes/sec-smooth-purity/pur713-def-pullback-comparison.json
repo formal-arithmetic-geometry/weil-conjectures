@@ -119,5 +119,28 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-59fdb4070 (reviewer sub-agent of L); spot-checked: I read the item in full, the blueprint definition (main-20261015, order 2353), the unit sk-prop-sp-purity-bc and its proof, the consumer pur713-def-star-exchange, the six cited statements, the layer-A unbounded finite-coefficient category in sk-def-sfb-derived-categories, and Stacks 0D6D (sites-cohomology.tex:3657-3680). The blueprint's references pur713-def-pull-composition, pur713-lem-pull-composition and pur713-def-derived-pull exist in no blueprint snapshot. The worker correctly replaced them with def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition, with mu = c^{-1} in the blueprint's direction. The arrows, the source/target D(Y_proet,A) -> D(X'_proet,A), the unbounded small pro-etale category with constant A_T, and the absence of extra hypotheses all match the source. There are no new nodes and no duplicates (def-exchange-projection has extra hypotheses; the module variant is a different category). There is no SGA citation, and no tool_uses are needed for a definition's stmt_deps. I checked n=1, n>1, the zero complex, empty X', identity squares and equal factorizations. One repairable fault (E5, mild): the statement left implicit that the composition lemma's composite coefficient identification equals c_{kh}, and said 'identified by transport along gf'=fg''. The corrected statement-only JSON is in fixes/dag/nodes/sec-smooth-purity/pur713-def-pullback-comparison.json. It shows the agreement by constant sections (from rho in prop-weil-pbc-proetale-constant-ring-map) and says that both mu land in the single functor Lu_A^*, u=gf'=fg'. All other fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingPullbackComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingCompositeCoefficients_eq",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPullbackComposition",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingPullbackComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantRingPullbackComparison.lean",
+  "statement": "def proEtaleConstantRingPullbackComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) : proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) g ⋙ proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) f' ≅ proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) f ⋙ proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) g'",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e4587615",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read the node, all 6 dependency records and their side-clone declarations, the module and the report. Every hypothesis and clause matches. mu_{k,h} = (proEtaleCanonicalPullbackComposition).symm followed by eqToIso along the named theorem that the composite coefficient identification equals c_{kh}; proEtaleRingCompositeCoefficients is c_h∘h⁻¹(c_k)∘(kh)⁻¹≅h⁻¹k⁻¹, as the node says. The square map is comp f' g, then eqToIso along w.symm, then (comp g' f).symm, of type DP g⋙DP f' ≅ DP f⋙DP g', the correct direction. The definitions are not hollow: the only sorry is in the named Prop theorem, whose docstring carries the proof. Recorded dependency declarations are used. Universes are as the dependencies require, nothing is left unbound, and the site is the real pro-etale site. Only the node's lean field changed, and its statement is verbatim in the file. The report has the Worker report and Second reading by Q103 sections. No duplicate found (the -module sibling node is a different notion). nt_compile.py --json exited 0 with no diagnostics. Nit: the letI Finite A instance is unused but harmless."
  }
 }

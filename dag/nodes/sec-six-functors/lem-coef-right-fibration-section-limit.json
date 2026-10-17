@@ -10,7 +10,11 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -393,5 +397,51 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-23485e8a1 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 23 cited statements, the parent coyoneda step 9 and twisted-arrow step 2. I checked the sources at the cited places: HTT Cor. 3.3.3.3, 3.3.3.4 and Rem. 3.3.3.5 (p. 216; 3.3.3.4 is only a homotopy-category statement, and 3.3.3.5 concerns 3.3.3.3), and Riehl–Verity arXiv 1808.09834 Def. 4.1.8, Def. 5.2.8, Lemma 5.2.9 and Thm 6.1.4 with Cor. 6.1.16. The new recognition node states 6.1.4 faithfully: any Kan-enriched target, homotopy mapping condition only, no strict limit needed. The item statement is unchanged. Steps 1–13 check, including T(K)=W cofibrant via T(∅) initial, weak contractibility of W via Map^R(k,v)=pt and θ, the identity U(h)s=c(j*h) and 2-of-3, enriched currying in Step 9, and Step 12 transfer. No cycles: the closures of all deps avoid the item and its parent, and lem-coef-space-transport-classification is correctly avoided because its closure is cyclic. No duplicates: right-fibration-cone-section-criterion is 3.3.3.3 via straightening, and cbc-cocartesian-sections-limit has an ordinary base and is Cat_inf-valued. Small cases checked: K empty, a point, Delta^1, N(G); Y empty, a point, Delta^1. Three repairs: (1) E5: Step 14 (concrete slice) never constructed a comparison with a defined represented functor. I rewrote it, fully cited: the tautological epsilon: E*Delta^0 -> C gives psi: T(E) -> C[C](v(-),c), a weak equivalence via lem-coef-right-straightening-fiber-comparison, |E_k|_Q, and theta of pinched-rigidification; extend along T(E) -> F, get equivalence edges via lem-cbc-kan-mapping-homotopy-invariance, and identify the target with h_c for C^op composed with v^op. I added the cbc tool uses lem-cbc-realization-singular-unit-weak and lem-cbc-kan-mapping-homotopy-invariance (accepted); lem-cbc-enhanced-functor-cone-calculus is also accepted. (2) B3: the new node called a join cone a 'limit cone' with no definition. Its meaning is now fixed via lem-coef-infinity-join-cone-calculus, added to stmt_deps. (3) The item source place wording for HTT 3.3.3.4/3.3.3.5 is corrected. proof_deps is regenerated and equals the union of step uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationSectionLimit",
+  "declaration": "SSet.Enhanced.RightFibrationLimit.right_fibration_section_limit",
+  "declarations": [
+   "SSet.Enhanced.RightFibrationLimit.vertexMap",
+   "SSet.Enhanced.RightFibrationLimit.value",
+   "SSet.Enhanced.RightFibrationLimit.sourceIndex",
+   "SSet.Enhanced.RightFibrationLimit.targetIndex",
+   "SSet.Enhanced.RightFibrationLimit.PointFormula",
+   "SSet.Enhanced.RightFibrationLimit.triangles",
+   "SSet.Enhanced.RightFibrationLimit.diagram",
+   "SSet.Enhanced.RightFibrationLimit.points",
+   "SSet.Enhanced.RightFibrationLimit.Normalized",
+   "SSet.Enhanced.RightFibrationLimit.choices",
+   "SSet.Enhanced.RightFibrationLimit.evaluate",
+   "SSet.Enhanced.RightFibrationLimit.oppositeEvaluation",
+   "SSet.Enhanced.RightFibrationLimit.cylinder",
+   "SSet.Enhanced.RightFibrationLimit.IsEvaluationCone",
+   "SSet.Enhanced.RightFibrationLimit.equation",
+   "SSet.Enhanced.RightFibrationLimit.comparisons",
+   "SSet.Enhanced.RightFibrationLimit.comparisonCylinder",
+   "SSet.Enhanced.RightFibrationLimit.IsSpaceEdge",
+   "SSet.Enhanced.RightFibrationLimit.Triangle",
+   "SSet.Enhanced.RightFibrationLimit.EvaluationSquare",
+   "SSet.Enhanced.RightFibrationLimit.sectionMap",
+   "SSet.Enhanced.RightFibrationLimit.IsSectionRestriction",
+   "SSet.Enhanced.RightFibrationLimit.Naturalities",
+   "SSet.Enhanced.RightFibrationLimit.ConcreteSlices",
+   "SSet.Enhanced.RightFibrationLimit.right_fibration_section_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationSectionLimit.lean",
+  "statement": "theorem right_fibration_section_limit : ∃ star : CategoryTheory.Spaces.infinityCategory.{u} _⦋0⦌, value star = 𝟙_ SSet.{u} ∧ (∀ {E K : SSet.{u}} [Quasicategory K] (q : E ⟶ K), rightFibration q → KanComplex (fiber ((ihom K).map q) (diagramVertex (𝟙 K))) ∧ (∀ k : K _⦋0⦌, KanComplex (fiber q k)) ∧ KanComplex (choices q star) ∧ IsContractible (choices q star) ∧ ∀ d : choices q star _⦋0⦌, ∃ t : (coneCategory (diagram d.val.val)) _⦋0⦌, IsEvaluationCone d.val.val t ∧ IsLimiting (diagram d.val.val) t ∧ ConeLimitCriterion t) ∧ Naturalities star ∧ ConcreteSlices star",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The fibre-transport and evaluation interfaces are specified with real simplicial pullbacks and normalized point formulas in every degree. Uses only the universal point-family construction and no equivalence between categories of all diagrams and all fibrations. The four added landed statement dependencies own the coherent Hom pairing, twisted point family, direct concrete slice, and canonical cone mapping criterion. All helper declarations belong to this theorem; the only postponed theorem is the full node statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f93a823d",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read node, source place (HTT 3.3.3.4/3.3.3.5 opposite form, Cisinski 4.2), all 25 declarations and the exact dependency interfaces (coneCategory with apex at 0, IsLimiting, ConeLimitCriterion, rightFibration/fiber, twistedSourceFiber/twistedOrdinalMap, rightVertexSlice, yonedaPairing). Every clause matches with no added hypotheses or universe equalities: literal fibre values plus PointFormula (checked by hand on 1-simplices), contractible Kan choices (true via left-fibration/isofibration argument), Kan section object and fibres, evaluation cone pinned on whole cylinder, IsLimiting plus all-test-space criterion, three naturality clauses (contractible comparisons, fixed-base square with canonical sectionMap, base restriction with uniquely fixed restriction and equivalence edge), concrete slices. Edge cases (empty K/E/fibres/test space, point, Delta^1) covered. Node differs from base only in lean and 4 landed, used stmt_deps; no cycles. lean.statement verbatim; all listed declarations exist; check_record/check_lean_text clean; only sorry is the theorem proof; docstrings carry source, blueprint and all 14 steps. nt_compile exit 0, 2.5 s, no diagnostics. Cosmetic only: report redaction artifacts and a LaTeX subscript split across lines 654-655 of the docstring."
  }
 }
