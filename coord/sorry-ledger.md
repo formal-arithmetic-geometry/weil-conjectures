@@ -205,10 +205,10 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | A3 |
 | Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | XRccf6c7bd0b0fb2f2 |
 | Sheaf.Paper.IntegralResidueTensorPullCounitModel | 13 | 1 | B4 |
-| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 14 | 1 | XRdbb7091a3d1839f4 |
-| Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison | 15 | 1 | XR35ddb455bbc41f35 |
+| WeilConjectures.SixFunctors.Etale.Derived.UpperShriek | 14 | 1 | — |
+| Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison | 15 | 1 | — |
 | Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized | 15 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | XR3a255efb8dcd202c |
+| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | — |
 
 Modules pruned since the imports baseline:
 
