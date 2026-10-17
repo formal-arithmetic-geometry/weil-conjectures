@@ -43,7 +43,7 @@ theorem isKInjective_schemeOpenRestriction (X : Scheme.{u}) (U : X.Opens)
   have : F.Additive := Functor.additive_of_preserves_binary_products F
   change CochainComplex.IsKInjective
     ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-      (((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapHomologicalComplex
+      (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj I))
   infer_instance
 

@@ -87,7 +87,7 @@ theorem exists_finiteFree_refinement_of_isStrictlyPerfect
         exact Fin.elim0 i.down
       exact ⟨0, ⟨hz.iso hZ⟩⟩
   · obtain ⟨e⟩ := hEP
-    let G := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+    let G := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
     have : PreservesFiniteLimits (G ⋙ R) := comp_preservesFiniteLimits _ _
     have : PreservesFiniteColimits (G ⋙ R) := comp_preservesFiniteColimits _ _
     exact ⟨(Functor.mapDerivedCategoryNatIso

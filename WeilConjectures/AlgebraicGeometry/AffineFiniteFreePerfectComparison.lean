@@ -61,10 +61,10 @@ theorem affine_finite_free_perfect_comparison {Y : Scheme.{u}}
   have : QuasiIso φ := by dsimp [φ]; infer_instance
   let ψ := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map φ
   have : QuasiIso ψ := by dsimp [ψ]; infer_instance
-  let eM : (SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) U).obj M ≅ F.obj N :=
+  let eM : (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U).obj M ≅ F.obj N :=
     (Scheme.Modules.overEquiv U).unitIso.app _ ≪≫
       F.mapIso ((Scheme.Modules.overFunctorEquiv U).app M)
-  let G := SheafOfModules.overFunctor (moduleRings Y.toRingedSpace) U
+  let G := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U
   let e₁ := (G.mapDerivedCategorySingleFunctor 0).app M
   let e₂ := DerivedCategory.Q.mapIso
     ((CochainComplex.singleFunctor _ 0).mapIso eM)
