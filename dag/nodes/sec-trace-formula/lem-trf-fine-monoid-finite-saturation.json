@@ -133,5 +133,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-e23a88cf1 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-gordan-rational-cone-finite, every cited node (def-trf-fs-log-blowup, the Mathlib leaf lem-trf-fg-torsionfree-group-free), the parent lem-trf-coherent-log-ideal-chart-construction and unit sk-i-curve-zero in full, and checked them against ILO Exposé VIII 3.1.17 (p.101: saturation as roots in P^gp, compatibility with localization) and the proof of 3.2.9 (p.104: S[F^sat]→S[F] finite). The item statement matches the source and is not weakened. Steps 2–4 are correct and elementary: (P−S)^sat=P^sat−S via n(x+s)=p+(n−1)s and nx=na−ns, and the z^f span R[P^sat] over R[P]. Step 1 is correct in substance. The Gordan node is true (Carathéodory plus a finite half-open parallelepiped), is strictly smaller than the item, and duplicates no DAG or blueprint node (rg for gordan/toric/sat/cone; blueprint main-20261015 and master grep). Edge cases checked: P=0, N, 2N, <2,3> with F={0,1}, N^2, <(1,0),(1,1)> in Z+Z/2 with torsion translates, and S=P. Route: a Mathlib leaf plus a same-unit node, no tool_uses, no SGA, not a target node. I repaired three faults in fixes/dag/nodes/sec-trace-formula/: (1) step 1 used that the torsion subgroup T is finite without arguing it; it now argues it (a basis section gives G=T+L~, so T is finitely generated torsion, hence finite) and writes out the lift F={f+t} and the closure of P^sat under addition. (2) B3: the Gordan node cited the theorem lem-trf-fg-torsionfree-group-free as the meaning of 'free abelian group of finite rank' and had an unused stmt_dep def-trf-fs-log-blowup; the definition is now inline and stmt_deps=[]. (3) B7: both grep records claimed 0 hits, but Mathlib has GroupTheory/Finiteness.lean:626 (fg_eqLocusM, an equalizer form of Gordan that does not specialize in one line), Algebra/Group/Submonoid/Saturation.lean (MulSaturated, a different notion) and GroupTheory/Subgroup/Saturated.lean:31 (PowSaturated, a definition only). I replaced the records with the queries I actually ran; the verdicts stay no match.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0d773b47a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Exact signature matches the node; required sections and docstrings are present; no hollow definitions or dropped machinery; scompile.py sandbox and library compilations succeeded."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.FineMonoidFiniteSaturation",
+  "declaration": "fine_monoid_finite_saturation",
+  "file": "lean/Sheaf/GroupTheory/FineMonoidFiniteSaturation.lean",
+  "statement": "theorem fine_monoid_finite_saturation (P : Type u) [AddCommMonoid P] [AddMonoid.FG P] (hP : Function.Injective (GrothendieckAddGroup.of (M := P))) : ∃ Q : AddSubmonoid (GrothendieckAddGroup P), (∀ g : GrothendieckAddGroup P, g ∈ Q ↔ ∃ n : ℕ, 0 < n ∧ n • g ∈ Set.range (GrothendieckAddGroup.of (M := P))) ∧ AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative Q) ∧ (∃ e : GrothendieckAddGroup Q ≃+ GrothendieckAddGroup P, ∀ q : Q, e (GrothendieckAddGroup.of q) = q.1) ∧ (∃ F : Finset (GrothendieckAddGroup P), (∀ f ∈ F, f ∈ Q) ∧ (Q : Set (GrothendieckAddGroup P)) = ⋃ f ∈ (F : Set (GrothendieckAddGroup P)), {x | ∃ p : P, x = f + GrothendieckAddGroup.of p}) ∧ (∀ S : AddSubmonoid P, {x : GrothendieckAddGroup P | ∃ n : ℕ, 0 < n ∧ ∃ p : P, ∃ s : S, n • x = GrothendieckAddGroup.of p - GrothendieckAddGroup.of s.1} = {x : GrothendieckAddGroup P | ∃ q : Q, ∃ s : S, x = q.1 - GrothendieckAddGroup.of s.1}) ∧ (∃ i : P →+ Q, (∀ p : P, (i p).1 = GrothendieckAddGroup.of p) ∧ ∀ (R : Type v) [CommRing R], (AddMonoidAlgebra.mapDomainRingHom R i).Finite)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
