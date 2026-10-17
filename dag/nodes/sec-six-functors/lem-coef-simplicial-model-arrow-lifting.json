@@ -15,7 +15,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-coherent-localization-interface",
+  "lem-coef-composable-bimodule-operad-segal"
  ],
  "proof": [
   {
@@ -159,5 +161,24 @@
   "group": "Q136",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-ece686372 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement: kan-quillen-right-proper, cosimplicial-frame-mapping, accessible-pullback-filtered-colimit (statement plus all 12 steps), infinity-arrow-morphism-square, infinity-pointwise-equivalences, def-coef-infinity-category-of-spaces, def-cbc-enhanced-diagrams-cones and infinity-pinch-comparison. I also read the parent's step 6. There are no new nodes. Everything cited is in unit sk-prop-sf-biduality-general, there is no SGA, and the statement is unchanged. The DAG search found no duplicate. Steps 1–2 are correct. Every simplicial set is cofibrant because the map from the empty set is degreewise injective, and the Kan complexes are the fibrant objects. The frame lemma's fibrant-representative clause and its actual-map component clause apply because the statement stipulates that j is the coherent localization; universes may be enlarged. C4 fault in step 3: it used the mapping-space equivalence of accessible-pullback-filtered-colimit to conclude that the chosen vertex projects to the components of f and F. That node states only 'a natural equivalence'; it never says the equivalence commutes with the projections, unlike arrow-morphism-square, which states this explicitly. Repair, in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-model-arrow-lifting.json: step 3 now uses the strict Eq(S) pullback model clause of the same node. An edge there is (g,G,sigma), and its projections are exactly g and G. sigma is built by inner-horn filling: tau1=(j(f),beta;c1) and tau2=(alpha,p(F);c2). Map(jK,pB) is Kan by infinity-pinch-comparison, which gives a 2-simplex omega from c2 to c1. The faces d0=tau1, d2=omega, d3=s0(j(f)) form an inner horn Lambda^3_1, and its filler glues with tau2 along c2. I checked the face conventions and the pullback condition. So r(F~)=F exactly. Step 4 is now elementary: the degenerate edge is an equivalence. arrow-morphism-square and pointwise-equivalences are dropped from uses and proof_deps; they are existing nodes, so there is no drop_nodes. I checked the edge cases: empty K, empty pB (which forces pA empty), p constant, universes, and that no Cartesian or isofibration hypothesis on p is used. No tool_uses accepted. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7cf32cfa4",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Clause, dependency, universe, edge-case, docstring, source, and compiler checks completed; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialModelArrowLifting",
+  "declaration": "SSet.Enhanced.simplicial_model_arrow_lifting",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialModelArrowLifting.lean",
+  "statement": "theorem simplicial_model_arrow_lifting (j : largeNerve.{u + 1, u, v} SSet.{u} ⟶ SSet.uliftFunctor.{v}.obj Spaces.infinityCategory.{u}) (hj : IsLocalization (fun _ _ f ↦ IsWeakHomotopyEquivalence f) j) (E : SSet.{max (u + 1) v}) [Quasicategory E] (p : E ⟶ SSet.uliftFunctor.{v}.obj Spaces.infinityCategory.{u}) : (∀ (A B : E _⦋0⦌) (F : (mappingSpace E A B) _⦋0⦌), ∃ (K L : SSet.{u}) (_ : KanComplex K) (_ : KanComplex L) (f : K ⟶ L) (G : (mappingSpace E A B) _⦋0⦌) (e : (chainTwoGluing j p) _⦋1⦌), (chainTwoGluingLeft j p).app _ e = ULift.up (ComposableArrows.mk₁ f) ∧ (chainTwoGluingRight j p).app _ e = G.1 ∧ SSet.π₀.mk G = SSet.π₀.mk F) ∧ (∀ F : E _⦋1⦌, ∃ e : (chainTwoGluing j p) _⦋1⦌, EquivalentObjects ((ihom Δ[1]).obj E) (diagramVertex (SSet.yonedaEquiv.symm e ≫ chainTwoGluingRight j p)) (diagramVertex (SSet.yonedaEquiv.symm F)))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed general equivalence-arrow pullback chainTwoGluing and its actual projections, without redeclaring that construction. Small models remain in u; E and the degreewise lifted category of spaces live in max (u+1) v. The first clause uses equality of mapping-space components; the second spells out essential surjectivity in the full coherent arrow category."
  }
 }

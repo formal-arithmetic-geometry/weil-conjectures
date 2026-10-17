@@ -210,5 +210,28 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-94eebd2a3 (reviewer sub-agent of L); spot-checked: Read the whole item (statement, 5 steps, deps, blueprint, split_report, searches), the current statement of all 13 cited nodes plus the finite/locally-constant/inverse-image definitions they use, the parent lem-fin-normal-open-lisse-image (main-20261015 blueprint paragraph 2 'common finite lisse partition' and DAG steps 5-9, which cite this item exactly as stated), and Stacks 03RU, 03RW, 03S2 ('j^{-1} is just the restriction') and morphisms 02GP. The statement is unchanged and true. Small cases checked: r=0, r=1 (constant sheaf, stratum Y retrocompact), empty Y_a, M_a=0, Lambda=0, and Y neither qcqs nor Noetherian (clopen sets are still retrocompact; 095E is correctly not used). Step 1: the sheaf axiom holds componentwise; elementary. Step 2: Y_a->Y is a monomorphism, W x_Y Y_b is empty for b != a and M_b(empty)=0. Open immersion => etale (02GP leaf). The restriction lemma (1) and the module/abelian comparison apply. Lambda-linearity follows from naturality of the unit and of rho, and local constancy of sections of Lambda_{Y_a}. Step 3: the retrocompactness argument and Y_a = Y_a ∩ (Y∖∅) are correct. Step 4: lem-weil-pbc-finite-locally-constant-module-values (1)=>(2), whose hypotheses (any scheme, finite commutative Lambda) hold, is properly cited, not called elementary. Step 5: both constructibility definitions are assembled correctly from the same partition. No new nodes. No duplicate: rg over dag/nodes for clopen/constant+constructible finds lem-kun-constant-constructible and the etale-free-sheaf lemma, both qcqs with a single constant value, and the abelian clopen-product lemma, which says nothing about constructibility. Coefficient category: Lambda_Y-modules throughout. Not a target node. No SGA cited. I accept the declared tool_use lem-weil-pbc-etale-inverse-image-restriction, a generic restriction interpretation that replaces no route step. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-571eab267",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Independent audit found exact statement/dependency/docstring alignment, canonical helper data, required report sections, edge cases and universes covered; scompile.py passed locally and with server confirmation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalClopenConstructibleModule",
+  "declaration": "AlgebraicGeometry.Scheme.finite_normal_clopen_constructible_module",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteNormalClopenConstantModuleSheaf",
+   "AlgebraicGeometry.Scheme.finite_normal_clopen_constructible_module"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalClopenConstructibleModule.lean",
+  "statement": "theorem finite_normal_clopen_constructible_module {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) (r : ℕ) (C : Fin r → Scheme.{u}) (ι : ∀ a : Fin r, C a ⟶ Y) (hc : IsColimit (Cofan.mk Y ι)) (M : Fin r → ModuleCat.{u + 1} Λ) (hM : ∀ a : Fin r, Finite (M a)) (hopen : ∀ a : Fin r, IsOpenImmersion (ι a)) (hclosed : ∀ a : Fin r, IsClosedImmersion (ι a)) : IsConstructibleEtaleModuleSheaf (finiteNormalClopenConstantModuleSheaf C ι M) ∧ IsConstructibleSheaf (finiteNormalClopenConstantModuleSheaf C ι M) ∧ ∀ a : Fin r, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (ι a)).obj (finiteNormalClopenConstantModuleSheaf C ι M) ≅ (constantSheaf (C a).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M a))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper is the canonical finite product of `Etale.lowerStar` component pushforwards of the specified constant module sheaves; the theorem states both constructibility predicates and the specified component restriction isomorphisms."
  }
 }

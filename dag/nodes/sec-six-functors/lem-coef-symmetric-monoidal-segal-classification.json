@@ -148,7 +148,12 @@
  "title": "Symmetric monoidal infinity categories as Segal diagrams",
  "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid], enlarging universes as necessary. Let $\\mathsf{Fin}_*$ be the category of finite pointed sets, write $\\langle n\\rangle=\\{*,1,\\ldots,n\\}$, and let $\\rho_i:\\langle n\\rangle\\to\\langle1\\rangle$ send $i$ to $1$ and every other element to $*$. An inert map has exactly one preimage for each non-basepoint of its target. A Segal diagram is a functor $F:N(\\mathsf{Fin}_*)\\to\\mathsf{Cat}_\\infty$ for which $(F(\\rho_i))_i:F(\\langle n\\rangle)\\to F(\\langle1\\rangle)^n$ is an equivalence for every $n\\geq0$, including $F(\\langle0\\rangle)\\simeq *$. Here $N$ denotes the simplicial nerve. A symmetric monoidal infinity category is encoded by a cocartesian fibration $p:\\mathcal A^{\\otimes}\\to N(\\mathsf{Fin}_*)$ whose fiber over $\\langle n\\rangle$ is identified with $\\mathcal A^n$, $\\mathcal A=p^{-1}(\\langle1\\rangle)$, by pushforward along the $\\rho_i$. Straightening, which assigns to a cocartesian fibration its fibers and pushforward functors, identifies symmetric monoidal infinity categories with Segal diagrams: the inverse, unstraightening, produces a cocartesian fibration over $N(\\mathsf{Fin}_*)$ with those fibers. The underlying category is $F(\\langle1\\rangle)$; the active maps $\\langle n\\rangle\\to\\langle1\\rangle$ sending all non-basepoints to $1$ give its $n$-ary tensor operations, including the unit when $n=0$. Natural transformations between Segal diagrams correspond to strong symmetric monoidal functors, meaning functors over $N(\\mathsf{Fin}_*)$ preserving cocartesian arrows, and this correspondence identifies their spaces of equivalences and higher homotopies.\n\nFor symmetric monoidal $\\mathcal A^{\\otimes},\\mathcal B^{\\otimes}$, let $\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\mathcal B)$ be the full infinity subcategory of functors between their total categories over $N(\\mathsf{Fin}_*)$ spanned by these strong functors; its morphisms are monoidal natural transformations, not necessarily invertible. For every small infinity category $K$, the functor category $\\operatorname{Fun}(K,\\mathcal B)$ has the pointwise symmetric monoidal structure, classified by $\\langle n\\rangle\\mapsto\\operatorname{Fun}(K,F_{\\mathcal B}(\\langle n\\rangle))$, and currying gives a natural equivalence\n$$\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\operatorname{Fun}(K,\\mathcal B))\\simeq\\operatorname{Fun}(K,\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\mathcal B)).$$\nFor an ordinary symmetric monoidal category $A$, its operadic nerve $N(A^{\\otimes})$ is such a symmetric monoidal infinity category, with underlying category $N(A)$. Here objects of $A^{\\otimes}$ are finite tuples, and a morphism over $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ consists of maps $\\bigotimes_{\\alpha(i)=j}X_i\\to Y_j$ for $1\\leq j\\leq m$.",
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-coef-relative-symmetric-operadic-algebras",
+  "lem-coef-space-transport-classification"
  ],
  "source": {
   "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
@@ -225,5 +230,61 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-68010d47c",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Statement, dependencies, edge cases, docstrings, definitions, report sections, and compiler evidence all checked; no substantive or mechanical defect found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SymmetricMonoidalSegalClassification",
+  "declaration": "SSet.Enhanced.SymmetricSegal.symmetric_monoidal_segal_classification",
+  "declarations": [
+   "SSet.Enhanced.SymmetricSegal.value",
+   "SSet.Enhanced.SymmetricSegal.IsSegal",
+   "SSet.Enhanced.SymmetricSegal.diagrams",
+   "SSet.Enhanced.SymmetricSegal.IsTransport",
+   "SSet.Enhanced.SymmetricSegal.IsSymmetricMonoidal",
+   "SSet.Enhanced.SymmetricSegal.strongFunctors",
+   "SSet.Enhanced.SymmetricSegal.OverObject",
+   "SSet.Enhanced.SymmetricSegal.overEnrichment",
+   "SSet.Enhanced.SymmetricSegal.monoidalSubcomplex",
+   "SSet.Enhanced.SymmetricSegal.monoidalCategories",
+   "SSet.Enhanced.SymmetricSegal.pointwiseTotal",
+   "SSet.Enhanced.SymmetricSegal.pointwiseProjection",
+   "SSet.Enhanced.SymmetricSegal.totalObject",
+   "SSet.Enhanced.SymmetricSegal.diagram",
+   "SSet.Enhanced.SymmetricSegal.pointwiseHom",
+   "SSet.Enhanced.SymmetricSegal.PointwiseAction",
+   "SSet.Enhanced.SymmetricSegal.IsPointwiseCurrying",
+   "SSet.Enhanced.SymmetricSegal.TensorWord",
+   "SSet.Enhanced.SymmetricSegal.TensorWord.eval",
+   "SSet.Enhanced.SymmetricSegal.Regrouping",
+   "SSet.Enhanced.SymmetricSegal.Regrouping.eval",
+   "SSet.Enhanced.SymmetricSegal.tensorObjects",
+   "SSet.Enhanced.SymmetricSegal.tensorMaps",
+   "SSet.Enhanced.SymmetricSegal.wordList",
+   "SSet.Enhanced.SymmetricSegal.block",
+   "SSet.Enhanced.SymmetricSegal.blockWord",
+   "SSet.Enhanced.SymmetricSegal.Tuple",
+   "SSet.Enhanced.SymmetricSegal.BlockMaps",
+   "SSet.Enhanced.SymmetricSegal.singletonTuple",
+   "SSet.Enhanced.SymmetricSegal.OrdinaryPresentation",
+   "SSet.Enhanced.SymmetricSegal.OrdinaryPresentation.projection",
+   "SSet.Enhanced.SymmetricSegal.tensorArrow",
+   "SSet.Enhanced.SymmetricSegal.IsTensor",
+   "SSet.Enhanced.SymmetricSegal.ClassificationStatement",
+   "SSet.Enhanced.SymmetricSegal.symmetric_monoidal_segal_classification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SymmetricMonoidalSegalClassification.lean",
+  "statement": "theorem symmetric_monoidal_segal_classification : Nonempty ClassificationStatement.{u, v}",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "One postponed theorem packages the Segal classification, fiber/transport normalization, strong-functor mapping spaces, pointwise structure on the actual constant-base pullback, normalized currying, and ordinary operadic nerves. Helpers are real constructions or specifications belonging to this node; no data is chosen from the theorem. Reuses the recorded finite-pointed-set skeleton and relative diagrams. Ordinary category object and morphism universes are independent. Added statement dependencies are already landed, with no dependency path back to this item."
  }
 }
