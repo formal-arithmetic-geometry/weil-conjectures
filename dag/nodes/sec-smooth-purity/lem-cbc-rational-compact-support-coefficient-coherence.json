@@ -34,7 +34,8 @@
   "def-weil-pbc-completed-pullback",
   "prop-weil-pbc-scalar-extension",
   "def-cbc-completed-exchange-map",
-  "lem-weil-pbc-ringed-slice-extension-tensor"
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-cbc-normalized-coefficient-families"
  ],
  "proof": [
   {
@@ -728,5 +729,27 @@
   "from_unit": "sk-prop-sf-cbc",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalCompactSupportCoefficientCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.rationalCompactSupportCoefficientCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalCompactSupportCoefficientCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/RationalCompactSupportCoefficientCoherence.lean",
+  "statement": "theorem rationalCompactSupportCoefficientCoherence [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (H : CbcCompactSupportCoefficientFamily l Ω c) (H' : CbcCompactSupportCoefficientFamily l Ω c') (P : CbcCompletedPullCoefficientFamily l Ω g) (P' : CbcCompletedPullCoefficientFamily l Ω g'), ∃ η : StageSystem.Morphism.Hom (H.family.base.comp P.family.base) (P'.family.base.comp H'.family.base), ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E) (r : ℕ) (a : Fin r → PbcIntegralRing l (pbcFiniteField.{u} l Ω E)) (ha : Ideal.span (Set.range a) = (pbcStageDatum.{u} l Ω E).ideal) (hc : cbcCompleteProperty (pbcStageDatum.{u} l Ω E) X r a ha K.obj), ∃ (hs : PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E) ((cbcCompactSupportSource g c (pbcStageDatum.{u} l Ω E)).obj K.obj)) (ht : PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E) ((cbcCompactSupportTarget g' c' (pbcStageDatum.{u} l Ω E)).obj K.obj)), HEq ((η.τ E).app ((pbcStageLocalization l Ω X E).obj K)) ((pbcStageLocalization l Ω Y' E).map (ObjectProperty.homMk (X := ⟨_, hs⟩) (Y := ⟨_, ht⟩) (completedCompactSupportExchange (pbcStageDatum.{u} l Ω E) c c' gbar properSquare openSquare r a ha ⟨K.obj, hc⟩)))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The separate H and P families are fixed by integral localization. Inverse H beta is the actual open-unit/proper-counit mate composite; inverse P beta is the completion-unit normalized balancing map. Their literal StageSystem.Morphism.comp values give the stated composite comparisons, and Morphism.Hom.comm gives the coefficient square for the localization of exactly completedCompactSupportExchange. No exchange invertibility or descent is asserted; no downstream Qbar module is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c590c9f3",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause-by-clause check of the item: hypotheses (noetherian, finite-dimensional, l invertible, f separated finite type, g arbitrary, no smoothness/base field/universe restriction) and the Cartesian compactification squares match the node. H and P are pinned by integral localization; inverse b^h is the actual mate composite (direction checked) followed by pbcScalarDirectImageIso.inv; the unit HEq is well typed since pbcScalarExtension is literally 1 at E=F; shift is pinned to the ambient commShiftIso; Morphism.coh gives the successive law after cancelling a_Y; Morphism.comp gives b^U = P(b^f) d^g and b^V = H'(d^g') b^f'; eta is pinned to the localization of completedCompactSupportExchange for every tuple; Hom.comm is the stated intertwining, with no invertibility. P comparison uses the datum completedPull with the ordinaryToCompleted characterization, the same as pbcScalarCompletedPullIso, not a duplicate. Statement field byte-identical, lean.statement verbatim, no hollow defs, one sorry, docstrings and both report sections present, no Qbar import. Compile: four nt_compile runs at load 163-230 all timed out at 60 s on NormalizedCoefficientFamilies.lean (probes: imports 9.7 s, each structure alone 49-58 s, no errors), so the pass relies on the delivery's evidence (57.9 s / 11.5 s clean, dry run OK at 383e78b2cf). The definitions file is close to the 60 s limit."
  }
 }

@@ -254,5 +254,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicCocompleteExtensions",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_cocomplete_extensions",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.zeroFiberMap",
+   "SSet.Enhanced.Nonsymmetric.postcomposeUnderlying",
+   "SSet.Enhanced.Nonsymmetric.postcomposeUnderlying_over",
+   "SSet.Enhanced.Nonsymmetric.postcomposeOver",
+   "SSet.Enhanced.Nonsymmetric.postcomposeUnderlying_mark",
+   "SSet.Enhanced.Nonsymmetric.postcomposeApp",
+   "SSet.Enhanced.Nonsymmetric.postcomposeUnderlying_naturality",
+   "SSet.Enhanced.Nonsymmetric.postcomposeAlgebras",
+   "SSet.Enhanced.Nonsymmetric.IsCoherentLeftAdjoint",
+   "SSet.Enhanced.Nonsymmetric.mateComponent",
+   "SSet.Enhanced.Nonsymmetric.IsCoefficientMate",
+   "SSet.Enhanced.Nonsymmetric.operadic_cocomplete_extensions",
+   "SSet.Enhanced.Nonsymmetric.functorVertexAt",
+   "SSet.Enhanced.Nonsymmetric.mateEdge",
+   "SSet.Enhanced.Nonsymmetric.mateComponentEdge"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicCocompleteExtensions.lean",
+  "statement": "theorem operadic_cocomplete_extensions {M N EV EW : SSet.{max (u + 1) v}} [Quasicategory M] [Quasicategory N] [Quasicategory EV] [Quasicategory EW] (q : M ⟶ monoidalSimplexBase.{max (u + 1) v}) (r : N ⟶ monoidalSimplexBase.{max (u + 1) v}) (pV : EV ⟶ monoidalSimplexBase.{max (u + 1) v}) (pW : EW ⟶ monoidalSimplexBase.{max (u + 1) v}) (uOp : M ⟶ N) (hq : IsGeneralizedOperad q) (hr : IsGeneralizedOperad r) (hMq : SSet.Presentability.IsSmall.{u, max (u + 1) v} M) (hNr : SSet.Presentability.IsSmall.{u, max (u + 1) v} N) (hu : IsLaxMonoidalInfinityFunctor q r uOp) (huZero : IsFunctorEquivalence (zeroFiberMap uOp hu)) (hV : IsMonoidalInfinityCategory pV) (hW : IsMonoidalInfinityCategory pW) (hVc : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying pV)) (hWc : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} (monoidalUnderlying pW)) (hVtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying pV)) ⟶ monoidalUnderlying pV), IsMonoidalTensorOperation pV 2 tensor → ∀ (x : (monoidalUnderlying pV) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (Algebroid.tensorWith tensor x i) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)) (hWtensor : ∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying pW)) ⟶ monoidalUnderlying pW), IsMonoidalTensorOperation pW 2 tensor → ∀ (x : (monoidalUnderlying pW) _⦋0⦌) (i : Fin 2), SSet.Presentability.PreservesColimitsIn (Algebroid.tensorWith tensor x i) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)) (F : EV ⟶ EW) (hF : IsStrongMonoidalInfinityFunctor pV pW F) (hFc : SSet.Presentability.PreservesColimitsIn (Algebroid.underlyingChange F hF) (fun K _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} K)) : ∃ (L_V : algebras q pV ⟶ algebras r pV) (η_V : algebras q pV ⟶ (ihom Δ[1]).obj (algebras q pV)), IsCoherentLeftAdjoint (restriction pV uOp hu) L_V η_V ∧ ∃ (L_W : algebras q pW ⟶ algebras r pW) (η_W : algebras q pW ⟶ (ihom Δ[1]).obj (algebras q pW)), IsCoherentLeftAdjoint (restriction pW uOp hu) L_W η_W ∧ ∃ mate : (arrowMappingSpace ((ihom (algebras q pV)).obj (algebras r pW)) (diagramVertex ((postcomposeAlgebras F hF) ≫ L_W)) (diagramVertex (L_V ≫ (postcomposeAlgebras F hF)))) _⦋0⦌, IsEquivalenceEdge ((ihom (algebras q pV)).obj (algebras r pW)) (mateEdge F hF L_V L_W mate) ∧ (∀ B : (algebras q pV) _⦋0⦌, IsEquivalenceEdge (algebras r pW) (mateComponentEdge F hF L_V L_W mate B)) ∧ IsCoefficientMate (pV := pV) (pW := pW) uOp hu F hF L_V η_V L_W η_W mate",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module states the small generalized-operad hypotheses, canonical zero-fiber equivalence, cocomplete separately tensor-cocontinuous coefficients, the canonical underlying coefficient map preserving small colimits, coherent unit adjunctions, and the fixed-endpoint coefficient-change mate with component and long-edge adjunct conditions.",
+  "fixed_by": "NT-stage2-cc-e5427cee3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5427cee3",
+  "group": "Q16",
+  "result": "fix",
+  "note": "IsCoherentLeftAdjoint had the unit endpoints swapped relative to UniversalArrowAt R false (eval0 = L≫R, eval1 = 𝟙). Together they force R(L d) = d strictly on every vertex (proved in a scratch Lean file), so the theorem claimed u^*u_!B = B, which is false (e.g. free monoid on a point). Fix: eval0 = 𝟙 D, eval1 = L≫R, consistent with UniversalArrowAt and IsCoefficientMate. Also added missing source/blueprint docstrings to functorVertexAt, mateEdge, mateComponentEdge, and de-duplicated lean.declarations (18 to 15); statement verbatim and unchanged. All other clauses check against the node: small generalized operads with Kan zero fibres, inert-preserving u, canonical zeroFiberMap equivalence, cocomplete separately tensor-cocontinuous V and W, strong monoidal F with underlyingChange preserving small colimits, mate direction u_!^W F_* to F_* u_!^V, equivalence and component clauses, adjunct to F_*η via F_*u^* = u^*F_* on the nose, no presentability, universes bound. Remarks: duplicate zeroFiberMap also in GeneralizedActiveExtensionCriterion (same canonical map, left); mate characterised pointwise (acceptable). nt_compile --json: delivered module 16.2 s and fixed module 12.0 s, both with no diagnostics."
  }
 }

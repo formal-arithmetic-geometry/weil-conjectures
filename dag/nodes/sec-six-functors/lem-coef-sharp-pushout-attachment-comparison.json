@@ -246,5 +246,23 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-ed11585f9 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route and source passages. Corrected step 2’s ill-typed qgif to qjf=qgi in the whole JSON under fixes/. Both monomorphism cases and the sharpness test are valid; dependency traversal found no cycles or missing nodes. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SharpPushoutAttachmentComparison",
+  "declaration": "SSet.sharp_pushout_attachment_comparison",
+  "file": "lean/Sheaf/AlgebraicTopology/SharpPushoutAttachmentComparison.lean",
+  "statement": "theorem sharp_pushout_attachment_comparison {X Y X' A B : SSet.{u}} (i : X ⟶ Y) (f : X ⟶ X') (p : X' ⟶ A) (h : A ⟶ B) (q : pushout i f ⟶ B) (hq : pushout.inr i f ≫ q = p ≫ h) (hp : IsSharp p) (hpf : IsSharp (f ≫ p)) (hqg : IsSharp (pushout.inl i f ≫ q)) (hf : Enhanced.IsWeakHomotopyEquivalence f) (hmono : Mono i ∨ Mono f) : IsSharp q",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75db007e6",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: SSet.{u}, i,f, chosen pushout with inl=g, inr=j, hq: inr≫q = p≫h (qj=hp), IsSharp p / f≫p / inl≫q, realization w.e. f, Mono i ∨ Mono f ⊢ IsSharp q; nothing extra assumed or dropped; one universe; empty/identity/both-mono cases covered; only lean field changed, statement verbatim; no duplicate; sorry only; both report sections real. F1 (H9, brief-stage2 imports rule): proof-dep modules Sheaf.AlgebraicTopology.SSetPullbackPreservesColimits and Mathlib.CategoryTheory.MorphismProperty.LiftingProperty were not imported; added. F2 (H8): docstring did not follow node steps 1-6 and its headline misstated the mono disjunction; rewritten one-for-one. Signature identical. nt_compile --json: delivered rc0, fix rc0 clean, broken control rc1. Residual: Rezk numbering unverifiable offline."
  }
 }

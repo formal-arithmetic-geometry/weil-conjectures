@@ -148,18 +148,17 @@
   "file": "lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean",
   "statement": "theorem sfRationalLocalGlobalPowerTorsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t}) (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : DerivedCategory (integralTowerModules l E X)) (n : ℕ) (U : Fin n → AlgebraicGeometry.Scheme.ProEt X) (hU : (AlgebraicGeometry.Scheme.ProEt.topology X).CoversTop U) [Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E X))] [∀ j : Fin n, Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j))))] (hzero : ∀ j : Fin n, IsZero ((ScalarLocalization.localization (Padic.coefficientExtensionIntegers l E) (DerivedCategory (SheafOfModules.{max u (t + 1)} ((completedIntegralCoefficientSheafUnrestricted l E X).over (U j)))) (Padic.coefficientExtensionUniformizer l E)).obj ((SheafOfModules.overFunctor.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X) (U j)).mapDerivedCategory.obj C))) : ∃ N : ℕ, ∀ d : ℤ, (DerivedCategory.homologyFunctor (integralTowerModules l E X) d).map ((Padic.coefficientExtensionUniformizer l E) ^ N • 𝟙 C) = 0",
   "branch": "newtargets-dag",
-  "by": "Q30",
-  "date": "2026-10-17",
+  "by": "Q151",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Second-reader fix: the scheme universe t and the coefficient universe u are independent (module size max u (t + 1)); the delivered single-universe slice instances had silently forced t = u. The node's standing hypothesis that l is invertible on X is rendered by _hl. The O_E-linear structures are instance arguments; since l is a unit times a power of the uniformizer and every linear structure restricts to the integer action, hypothesis and conclusion say the same for every choice, in particular for the canonical constant-section actions.",
-  "fixed_by": "NT-stage2-cc-20cd46925"
+  "note": "Independent-universe statement and invertibility hypothesis as required by the node; local slice localization is expressed by overFunctor.mapDerivedCategory and scalar localization by CategoryTheory.ScalarLocalization."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-20cd46925",
-  "group": "Q30",
-  "result": "fix",
-  "note": "Statement matches node (Fin n CoversTop cover incl. n=0, termwise overFunctor.mapDerivedCategory restriction, IsZero in ScalarLocalization at ϖ, ∃N ∀d homologyFunctor.map (ϖ^N•𝟙 C)=0); no hollow defs, sorry only, ProEt site, no duplicate. Fixes (complete module in fixes/, compiled clean via nt_compile.py, 9.7 s before _hl and 29.9 s after; original also clean, 5.1 s): (1) silent universe restriction: single-universe helper instances forced X : Scheme.{u} with E : Type u; generalized to Scheme.{t}, modules max u (t+1), with site/slice sheafification instances (essentiallySmallSelf; Mathlib hasSheafify_of_essentiallySmall removed as in IntegralDerivedOperationsOnSlices); identical when t=u; (2) missing node hypothesis 'ℓ invertible on X' added as _hl; (3) docstring wrongly claimed canonical integralCoefficientLinear is used although Linear binders shadow it; kept binders after checking the statement is equivalent for every linear structure (l = unit·ϖ^e, ℤ-action canonical) and corrected the docstring; added source/blueprint docstrings to helper instances. lean-record.json adds only a note; statement refit from file."
+  "reviewer": "NT-stage2-cc-ad2bf2dfd",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Re-delivery of the already landed Q30 statement (reviewer-FIXed on 2026-10-17): the Lean differs only by one docstring provenance line, and the node record only in the lean field's by/date/note/fixed_by (statement unchanged, verbatim equal to the file). Every clause re-checked against the node: Fact l.Prime, finite E/Q_l, _hl ℓ invertible on every stalk, C in DerivedCategory(integralTowerModules) = SheafOfModules.{max u (t+1)} over the completed limit sheaf on Scheme.ProEt, a Fin n CoversTop cover (n=0 allowed), restriction by overFunctor.mapDerivedCategory, IsZero in ScalarLocalization at ϖ (⇔ ∃N ϖ^N•𝟙=0), conclusion ∃N ∀d:ℤ homologyFunctor.map(ϖ^N•𝟙C)=0. The Linear instance arguments do not change the meaning (ℓ = unit·ϖ^e, so both sides are equivalent to ℓ-power statements). Universes t and u independent; no hollow definitions; only the theorem is sorry; source/blueprint docstrings present; Mathlib ProEt site; dependency declarations match their nodes; no duplicate. nt_compile --json of the snapshot text: rc=0, 4.2 s, no errors or warnings. Minor, non-blocking: the provenance docstring line and the shorter lean note."
  }
 }

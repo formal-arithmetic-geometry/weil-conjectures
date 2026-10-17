@@ -299,5 +299,36 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a14d02029 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item's statement, all 8 steps and every cited statement. Checked the sources at Stacks 07A4 (sites-cohomology l.3683), 0B56 (l.13650), 0GL1 (l.4578) and 0E8I (sites-modules l.4051), plus the main-20261015 parent proof; it has no 'Expanded Step 6', and proof_origin=agent is correct. The statement is unchanged and true. All three clauses are well typed and match the maps of def-exchange-projection (pro-etale, ringed-topoi mu) and of def-kun-projection-formula-map / def-amb-etale-compact-support (etale, Noetherian holds). Small cases checked: U empty, identity maps, unit factors, shifts. I recomputed the transposes in Steps 2, 3, 6 and 7 and the compactification expansion in Step 8; all are correct and use no invertibility and no compactification independence. Step 4 uses exactly the statement of lem-sf-open-tensor-normalization (gamma^{-1} is the adjunct of u⊗1, and for constant A it is the map of lem-cbc-extension-zero-projection-formula). Step 5 matches the 0E8I construction. One fault, fixed (C3/C4): the etale projection map of def-kun-projection-formula-map and the node lem-kun-derived-pullback-composition-monoidal use the comparison of lem-kun-inverse-image-monoidal, but Step 1 normalized the comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback without citing or identifying the def-kun one. I added that citation (the node is Lean-closed, so no tool use is needed) and the identification (both are the 07A4 comparison), and updated proof_deps. Duplicate search: lem-sfb-ringed-projection-tensor-composition states clause 1 alone for general ringed topoi. It is a generalization of one clause, not of the package or the etale normalization, so it is noted, not a fault. No new nodes and no cycle. The unit route is fine, and I accept all seven declared generic tool uses. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProjectionActionLaws",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteProjectionAction_proper",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projectionAction_coefficientFinite",
+   "AlgebraicGeometry.ProEtale.projectionActionAssociator",
+   "AlgebraicGeometry.ProEtale.finiteProjectionAction_proper",
+   "AlgebraicGeometry.ProEtale.finiteProjectionAction_open",
+   "AlgebraicGeometry.ProEtale.finiteProjectionAction_compactification",
+   "AlgebraicGeometry.ProEtale.finiteProjectionAction_open_counit",
+   "AlgebraicGeometry.Etale.finiteProjectionAction_proper",
+   "AlgebraicGeometry.Etale.finiteProjectionAction_open",
+   "AlgebraicGeometry.Etale.finiteProjectionAction_compactification",
+   "AlgebraicGeometry.Etale.finiteProjectionAction_open_counit"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProjectionActionLaws.lean",
+  "statement": "theorem finiteProjectionAction_proper (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of P.field.k))] [Y.Over (Spec (CommRingCat.of P.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of P.field.k))] [IsProper f] (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (N₁ N₂ : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) : (projectionActionAssociator (ModuleCat.{u + 1} P.Coefficient) Y (R((f)_*[(ModuleCat.{u + 1} P.Coefficient)]).obj M) N₁ N₂).hom ≫ (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) f).app M).app (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).obj N₁).obj N₂)) ≫ R((f)_*[(ModuleCat.{u + 1} P.Coefficient)]).map (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj M).map (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) f N₁ N₂).hom ≫ (projectionActionAssociator (ModuleCat.{u + 1} P.Coefficient) X M (L((f)^*[(ModuleCat.{u + 1} P.Coefficient)]).obj N₁) (L((f)^*[(ModuleCat.{u + 1} P.Coefficient)]).obj N₂)).inv) = ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).map (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) f).app M).app N₁)).app N₂ ≫ (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} P.Coefficient) f).app (((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj M).obj (L((f)^*[(ModuleCat.{u + 1} P.Coefficient)]).obj N₁))).app N₂)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Eight identities of the actual upstream proper, open, open-counit and fixed-compactification projection maps, on both sites, for the positive-level coefficient ring of PurityFiniteSetting. All k-scheme hypotheses are explicit binders. The helper associator is the canonical derived reassociation exposed generically before coefficient specialization; the coefficient-finiteness instance transports the existing positive-quotient theorem through ULift. No statement change or invertibility assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4067fd95b",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Checked all 8 theorems clause by clause against the node. Proper/open/compactification actions: endpoints verified with the explicit α and μ=leftDerivedUpperStarTensorIso.hom, the same comparison used inside rightDerivedLowerStarProjectionMap (rightAdjointProjectionMap). δ is the .inv of derivedOpenImmersionLowerShriekProjectionIso, in the node's direction. Open counit uses mapDerivedCategoryUpperStarDerivedTensorIso.hom = μ^{-1} and the exact D(j_!)⊣D(j^*) counit. PF^c is the actual projectionMapOfCompactification with arbitrary c, the same maps finiteExchangeProjection returns. Etale side uses the def-weil-pbc categories and the upstream etale maps, derivedTensorAssociator and rightDerivedLowerShriekOfCompactification. Hypotheses are exactly separated finite-type k-schemes plus IsProper/IsOpenImmersion/separated finite-type f, with no invertibility; n≥1 via level_pos; universes bound. Helpers: projectionActionAssociator = α_ (counterpart of etale derivedTensorAssociator); the Finite instance is a real term but redundant with existing instances (minor). Docstrings have source and blueprint tags, all proofs are sorry, the statement is verbatim, the node's statement is unchanged, and the report sections are present. nt_compile --json: clean in 25.6 s; axioms probe shows only standard axioms plus sorryAx."
  }
 }

@@ -161,9 +161,10 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportedExteriorProduct.lean",
   "statement": "def supportedExteriorProductOverField (A : Type (u + 1)) [CommRing A] [Finite A] (k : Type u) [Field k] {X Y Z W : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] [LocallyOfFiniteType g] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) : (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶ (supportedSectionsDerived A (Etale.supportedProductImmersion f g i j)).obj (externalProduct (ModuleCat.{u + 1} A) f g K L)",
   "branch": "newtargets-dag",
-  "by": "N4",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B) import-interface repair: the recorded module imports both copies of upperStarIsoLowerStarInv through generic Iso/GlobalSections and the finite-coefficient implementation now reexported by LowerShriek.Defs. Remove the redundant generic Iso import and use the canonical finite-coefficient GlobalSections module. All declarations and mathematical statements remain verbatim, including normalized quotient maps and both support adjunctions."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -174,11 +175,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-5c1afdfc7",
-  "group": "N4",
+  "reviewer": "NT-stage2-cc-26e09cd60",
+  "group": "Q106",
   "result": "pass",
-  "note": "Wrote review.md. Checked all three modules, dependencies, canonical maps, witnesses, universes, edge cases, docstrings and verbatim signatures. scompile.py passed all files. Original blueprint Markdown was unavailable; this source-verification limitation is documented. No repairs or branch changes."
+  "note": "Read the item node (7 steps, Q57's corrected adjunction-preserving uniqueness), the source place (blueprint lem-pur-kunneth-supported.proof.md para 4), all 18 stmt_dep lean records, and the reused declarations in SupportedExteriorProduct / ProEtaleSupportedExteriorProduct. Clause by clause: finite A in Type (u+1) ModuleCat (dependency convention, no restriction); smallEtaleTopology / ProEt.topology; unbounded DerivedCategory; separated finite-type X,Y over an algebraically closed k via LocallyOfFiniteType+QuasiCompact+IsSeparated; the recorded supportedProductImmersion; Q = actual cokernel of the j_! adjunct of the constant-pullback iso; E = Q[0] tensor-derived constant V with the recorded derivedTensor; conjuncts give the generator normalization, the sigma -> sigma(1 tensor v) ordinary bijection, compatibility iff b = comparison (identity on supportedSectionsDerived), the representative formula on every complex, and counit equality; i, j and h in both topologies; IsLocallyNoetherian derived from f, g and the product structure map. Edge cases A=0, C empty, C=T, T empty, non-flat, unbounded: ok. No hollow defs; sorry only in theorems; source and blueprint docstrings; statement verbatim; declarations complete. The 2-import dependency repair (duplicate upperStarIsoLowerStarInv) is a valid lean-only interface repair. Compile: the dependency compiled clean twice (54.2 s, 45.9 s); the item hit the hard 60 s cap in both attempts that reached it, under load 156-218 (CPU-starved, no errors output), so I relied on the delivery's clean 53.2 s / 45.1 s evidence."
  }
 }

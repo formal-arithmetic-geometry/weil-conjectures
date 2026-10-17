@@ -174,5 +174,23 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-f71b674e0 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full: def-trf-oriented-nearby-cycles, def-kun-projection-formula-map, finite-type, geometric point, strict henselization, derived categories and fibre product. I also read unit sk-i-curve-zero and chapter sec-trace-formula. Zheng's appendix is not in literature/ (WANTED) and the review service blocks network access, so I could not open Def. A.1, Rem. A.2 or Thm. A.3 myself. Instead I checked the Gabber finiteness background in the local ILO volume (XVIII-A Thm 1.1 and Cor 1.4, XVIII-B 4.1.1, XI §4 with Prop 4.4) and re-derived every step and new statement. Item: the statement is unchanged and the comparison and coefficient category are exactly those of def-trf-oriented-nearby-cycles. Steps 1-5 check out. X=T_(x) is the strict localization of X_1×_S X_2. The square (g_1,d,a) is essentially Cartesian, so goodness gives e, and the stability clause gives localized invariance for (a,d^*C). Rg_{2*}C is in D^- by the finite-cd truncation argument. Both projection-formula applications meet all hypotheses. I recomputed the step-5 adjunct and get a^*ε_{g1,A}⊗d^*ε_{g2,C}, matching the restricted β⊗β followed by μ. No step uses the Künneth isomorphism, so the split is not circular. New nodes: strict-local-description is correct, and it rightly restricts to local squares; with non-local base maps the criterion would be false. For the projection node I re-derived a proof sketch (constant, closed, j_!, then finite via Zariski's Main Theorem, then D^- by resolution and truncation), so it is true. universal-star is a cited Gabber input whose bound passes small-case checks. Caveat: universal-star does not require m to be invertible, and I could not check that case against the source; every use here has m invertible on B. None of the three restates the item. My duplicate search over dag/nodes found no duplicates; trait-nearby-base-change, specialization-external-product, sf-projection-finite-constant and the lem-kun projection formulas (which assume proper or a field base) all differ. The route stays in the unit (def-kun-projection-formula-map is only a definition), no SGA is cited, and no tool_uses are needed. FIX: in the item, proof_origin.by changes from document to agent, because the source PDF is WANTED (brief-stage1 §4; 329 of the 331 WANTED proof origins in the DAG are marked agent). The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-good-oriented-nearby-kunneth.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GoodOrientedNearbyKunneth",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.isIso_kunneth_of_isPsiGood",
+  "file": "lean/Sheaf/Paper/GoodOrientedNearbyKunneth.lean",
+  "statement": "theorem isIso_kunneth_of_isPsiGood {T₁ T₂ B : Scheme.{u}} (f₁ : T₁ ⟶ B) (f₂ : T₂ ⟶ B) [LocallyOfFiniteType f₁] [QuasiCompact f₁] [LocallyOfFiniteType f₂] [QuasiCompact f₂] (Λ : Type v) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ B] (L₁ : EtaleDerived T₁ Λ) (L₂ : EtaleDerived T₂ Λ) (hL₁ : IsBounded (etaleDatum T₁) (Coeff Λ) L₁) (hL₂ : IsBounded (etaleDatum T₂) (Coeff Λ) L₂) (hgood₁ : IsPsiGood f₁ Λ L₁) (hgood₂ : IsPsiGood f₂ Λ L₂) : IsIso (kunneth f₁ f₂ Λ L₁ L₂)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c444786fd",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read the item node, def-trf-oriented-nearby-cycles (node and module), def-weil-finite-type-morphism, HasInvertibleExponent and the delivered module and report. Every clause matches: finite type is LocallyOfFiniteType+QuasiCompact per leg; Λ is a finite CommRing with HasInvertibleExponent Λ B (exactly m≥1, mΛ=0, m a unit on B); both inputs IsBounded (=D^b by isBounded_iff); both IsPsiGood over all base changes; conclusion is IsIso of the canonical kunneth (β⊗β then μ). No extra hypotheses; independent universes u,v confirmed by #check with pp.universes; edge cases Λ=0/m=1, B=∅, empty T_i covered. lean.statement verbatim; only the lean field was added to the node; no new definitions; sorry only; source and blueprint docstrings present; étale, not pro-étale; worker and second-reading sections present; no duplicate found. nt_compile --json: item rc 0, 4.4-6.5 s, no errors or warnings (warn.sorry=false); probe shows sorryAx only. Zheng PDF unavailable (WANTED, no network). Cosmetic only: terse second reading; docstring calls proof dependencies statement dependencies."
  }
 }

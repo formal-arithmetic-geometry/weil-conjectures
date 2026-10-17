@@ -221,39 +221,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-c420ae45b (reviewer sub-agent of L); spot-checked: The definition and all ten dependencies pass the mathematical, route, edge-case, duplicate, and Mathlib checks. Repair source metadata: Bhatt–Scholze 6.8.14(2) gives an equivalence (under the topologically noetherian hypothesis), not literal equality; 6.8.11(3) has the same hypothesis. Corrected JSON is in fixes/dag/nodes/sec-smooth-purity/def-weil-constructible-standard-tstructure.json; review.md documents all checks.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.ConstructibleStandardTStructure",
-  "declaration": "WeilConjectures.integralConstructibleStandardPair",
+  "module": "Sheaf.Paper.SfConstructibleHeart",
+  "declaration": "WeilConjectures.sfIntegralStandardClass",
   "declarations": [
-   "WeilConjectures.integralConstructibleLEZero",
-   "WeilConjectures.integralConstructibleGEZero",
-   "WeilConjectures.rationalConstructibleLEZero",
-   "WeilConjectures.rationalConstructibleGEZero",
-   "WeilConjectures.integralConstructibleStandardPair",
-   "WeilConjectures.rationalConstructibleStandardPair",
-   "WeilConjectures.integralConstructibleLE",
-   "WeilConjectures.integralConstructibleGE",
-   "WeilConjectures.rationalConstructibleLE",
-   "WeilConjectures.rationalConstructibleGE",
-   "WeilConjectures.algebraicallyClosedConstructibleLEZero",
-   "WeilConjectures.algebraicallyClosedConstructibleGEZero",
-   "WeilConjectures.algebraicallyClosedConstructibleStandardPair",
-   "WeilConjectures.algebraicallyClosedConstructibleLE",
-   "WeilConjectures.algebraicallyClosedConstructibleGE"
+   "WeilConjectures.sfIntegralStandardClass",
+   "WeilConjectures.sfRationalStandardClass",
+   "WeilConjectures.sfCommonStageStandardClass"
   ],
-  "file": "lean/Sheaf/Paper/ConstructibleStandardTStructure.lean",
-  "statement": "def integralConstructibleStandardPair",
+  "statement": "def sfIntegralStandardClass (nonpositive : Bool) (n : ℤ) :\n    ObjectProperty (sfIntegralConstructibleCategory l E Y)",
   "branch": "newtargets-dag",
-  "by": "NV",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "The existing node has no recorded declaration. Supplies all three standard pairs and all shifted classes, on the canonical completed integral, raw rational and common-stage categories; adapted from the NO source."
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "§1(B): the earlier ConstructibleStandardTStructure declarations use the legacy bounded integral and rational categories, whereas the recorded integral, rational, common-stage and derived-pullback interfaces now use the intrinsic sf categories. Rebind to the already published SfConstructibleHeart standard-class definitions only: Bool true/false gives the two classes, n=0 gives their pair and arbitrary n gives their shifted classes. No downstream heart theorem or chosen t-structure is used by the consumer; it asserts existence of t-structures with precisely these classes. No declaration or definition is duplicated."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ba761251f",
-  "group": "NV",
+  "reviewer": "NT-stage2-cc-dd0812c69",
+  "group": "Q32",
   "result": "pass",
-  "note": "Wrote review.md. Audited both immutable modules, all statement dependencies, source clauses, universes, edge cases, docstrings and verbatim signatures. Both files compile cleanly through scompile.py with the local side overlay. No defects or fixes required; repositories and branch head unchanged."
+  "note": "Compiled the snapshot module with nt_compile.py --json: clean twice (22.7 s, 13.0 s), no messages; a #check/#print axioms probe also compiled (only standard axioms plus sorryAx). Statement matches the node and the master source word for word; only the lean fields changed. Every clause is rendered: the FiniteFieldDatum, l prime with l != p, an independent universe for Omega, all finite intermediate fields, Y of finite type exactly (locally of finite type plus quasi-compact), t-structures on the raw rational stages and the common-stage category with aisles equal to the sf standard classes, bounded, compatible with stageTransition and with each stage inclusion, literal H^i = (truncLE i then truncGE i)[i], and the actual recorded rational and common-stage pullbacks for every h : Y iso Y. The units existential is a true conclusion (Invertible is a subsingleton). The uniqueness and scalar-H^i extras are implied by the node. The section 1(B) rebind of def-weil-constructible-standard-tstructure to the SfConstructibleHeart classes matches node items 1-3; the old module is on legacy categories. Docstrings, sorry-only proof, line widths, bound universes and imports-vs-deps all checked. Notes only: the same declarations are also recorded on def-weil-constructible-heart; that node cites this item, so its rule-7 import must be left out to avoid a cycle; one redundant legacy import remains."
  }
 }

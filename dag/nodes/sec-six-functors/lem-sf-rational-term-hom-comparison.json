@@ -24,7 +24,9 @@
   "def-pur-derived-internal-hom",
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
-  "lem-weil-linear-abelian-derived-category"
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-pbc-scalar-localization-derived-hom",
+  "lem-sc-hom-complex-projections"
  ],
  "proof": [
   {
@@ -212,5 +214,37 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-0e712b8fe (reviewer sub-agent of L); spot-checked: I read the whole item and checked it against every source, and the mathematics holds. Sources checked: Stacks 08JI (sites-cohomology.tex lines 11959-12015), the current blueprint prop-sf-dualizable and its proof, unit sk-prop-sf-dualizable-biduality, every cited node, and both citers (prop-sf-dualizable steps 5/6/8 and lem-pod-coefficient-dual-perfect step 6). The delivery has no new nodes and no SGA citation, and I found no duplicate in the DAG. Small cases tested: m=0 forces F to be killed by a power of t, so both sides are zero after localization; Z/2 over Z with t=2 is not an isomorphism integrally but is after inverting 2; F=R gives c=j. Step 1 is correct: the comparison for R^m is the direct sum of m copies of j. Step 3's variance is correct. Fixes are in fixes/dag/nodes/sec-six-functors/lem-sf-rational-term-hom-comparison.json. (1) C1, missing citations: the statement and step 2 use the A-linear structure of D(R) and that every map F[0]->G[0] in D(R) comes from a module map; neither was cited. I added lem-weil-linear-abelian-derived-category (also to stmt_deps) and lem-weil-pbc-derived-single-fully-faithful. Both are Mathlib leaves, so no cycle and no off-route proof. (2) E3: step 3 wrote the inverse as d=T(p)c_E^{-1}B(i), which does not type-check in the composition order used everywhere else. Corrected to d=B(i)c_E^{-1}T(p), with both cancellations written out; the report repeats the same slip. (3) Statement: the proof only shows that B(F) is a retract (maps with composite 1) in the raw localization, which may not be idempotent complete. The statement now says direct summand in the same sense as the hypothesis, which is exactly what both citers use, so nothing they need is weakened. Accepted tool_use: lem-weil-pbc-ringed-site-bounded-free-rhom-model, the generic ringed-site Hom model of Stacks 08JI, which no node of this unit gives.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RationalTermHomComparison",
+  "declaration": "CategoryTheory.RationalTermHom.rational_term_hom_comparison",
+  "declarations": [
+   "CategoryTheory.RationalTermHom.single",
+   "CategoryTheory.RationalTermHom.coefficients",
+   "CategoryTheory.RationalTermHom.ordinary",
+   "CategoryTheory.RationalTermHom.resolved",
+   "CategoryTheory.RationalTermHom.ordinaryMap",
+   "CategoryTheory.RationalTermHom.resolvedMap",
+   "CategoryTheory.RationalTermHom.zeroProjection",
+   "CategoryTheory.RationalTermHom.IsNormalized",
+   "CategoryTheory.RationalTermHom.comparison",
+   "CategoryTheory.RationalTermHom.localizedObject",
+   "CategoryTheory.RationalTermHom.localizedMap",
+   "CategoryTheory.RationalTermHom.rational_term_hom_comparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RationalTermHomComparison.lean",
+  "statement": "theorem rational_term_hom_comparison (A : Type v) [CommRing A] (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) (I : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) [I.IsKInjective] (j : single R (coefficients R) ⟶ I) [QuasiIso j] : (fun [_linear : Linear A (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] ↦ ∃ e : ∀ F : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), ordinary R F ≅ resolved R (single R (coefficients R)) F, IsNormalized R e ∧ (∀ (F G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (f : F ⟶ G), ordinaryMap R f ≫ comparison R e j F = comparison R e j G ≫ resolvedMap R I f) ∧ (∀ (F : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (m : ℕ) (i : localizedObject R A t (single R F) ⟶ localizedObject R A t (single R (SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))))) (p : localizedObject R A t (single R (SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)))) ⟶ localizedObject R A t (single R F)), i ≫ p = 𝟙 _ → IsIso (localizedMap R A t (comparison R e j F)) ∧ ∃ i' : localizedObject R A t (ordinary R F) ⟶ localizedObject R A t (single R (SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)))), ∃ p' : localizedObject R A t (single R (SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)))) ⟶ localizedObject R A t (ordinary R F), i' ≫ p' = 𝟙 _) ∧ ∃ b : ∀ F G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), (localizedObject R A t (single R F) ⟶ localizedObject R A t (single R G)) →ₗ[ Localization.Away t] (localizedObject R A t (ordinary R G) ⟶ localizedObject R A t (ordinary R F)), ∃ z : ∀ F G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), (localizedObject R A t (single R F) ⟶ localizedObject R A t (single R G)) →ₗ[ Localization.Away t] (localizedObject R A t (resolved R I G) ⟶ localizedObject R A t (resolved R I F)), (∀ (F G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (f : F ⟶ G), b F G (localizedMap R A t ((CochainComplex.singleFunctor _ 0).map f)) = localizedMap R A t (ordinaryMap R f) ∧ z F G (localizedMap R A t ((CochainComplex.singleFunctor _ 0).map f)) = localizedMap R A t (resolvedMap R I f)) ∧ (∀ (F G : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (f : localizedObject R A t (single R F) ⟶ localizedObject R A t (single R G)), b F G f ≫ localizedMap R A t (comparison R e j F) = localizedMap R A t (comparison R e j G) ≫ z F G f)) (_linear := scalarLocalizationCoefficientLinear A R a)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-565d2b667",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps and the used declarations (ScalarLocalization, homComplex_projections_exists, scalarLocalizationCoefficientLinear, homObj/homObjMap, homComplex), Stacks 08JI, the report and the module. Every hypothesis and conclusion matches the node with correct order and variance: A-algebra via a, K-injective j with QuasiIso, B/T/c as postcomposition with j, retract i≫p=1 onto free(ULift(Fin m)), IsIso of Q_t(c_F), summand i'≫p'=1, integral naturality, unique A[1/t]-linear extensions b,z. The existential normalized e is uniquely determined (all non-(0,0) factors vanish), and no canonical duplicate exists (only Nonempty isos). Edge cases m=0, t=0/zero ring, unit t, F=R, empty site checked; universes u (shared site/modules)/v/w, nothing unbound. No hollow defs, only sorry is the main theorem, docstrings present, lean.statement verbatim, node diff only lean+stmt_deps (both added deps already landed), report sections present (Second reading is the standard policy note). Compile: nt_compile.py timed out twice at 60 s at load ~200 (33 s CPU, starved); an identical /tmp copy with a longer limit compiled clean, rc 0, no warnings, in 55-58 s wall / 38 s CPU. Risk noted near the 60 s limit, no fault of substance."
  }
 }

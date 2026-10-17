@@ -8,7 +8,10 @@
   "place": "Kerodon Proposition 7.3.6.1 (0309), with pointwise left Kan extensions defined in Variant 7.3.1.5 (02YC). The comma indexing simplicial set and its cocone are written out here rather than left as a notion defined only by tag. These are Kerodon tags, not Stacks tags; read online, not archived in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition"
  ],
  "proof": [
   {
@@ -197,5 +200,28 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-e2e623221 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the 3 new nodes in full, plus the statements of all 6 cited nodes. Kerodon is not archived locally, so I read these tags online: 0309 (the statement and the whole proof route), 030M, 02YZ and 02YL. The item statement matches Kerodon Prop 7.3.6.1: K is an arbitrary simplicial set, beta is specific, the pointwise condition is on K/c, and no extra colimits are assumed. The steps follow Kerodon's proof. Step 1 replaces K by an inner-horn completion: the lifting property of lem-coef-small-inner-horn-completion lifts delta, F0 and beta with fixed endpoints, and the inner-anodyne invariance node (Kerodon 02YL(2)) keeps the colimit hypothesis. Step 2 shows restriction on transformation spaces is a trivial fibration via the monomorphism (A x Delta1) u (B x dDelta1) in B x Delta1. Steps 3-4 use the relative-join node (Kerodon 02YZ plus 024J/02FK, including the exact identity that Gr composed with h is constant) and then the full-subcategory theorem twice (Kerodon 030M, either/or hypothesis). In Step 5 I recomputed all four sides of the square, its vertices and both triangles: the edge pairs are (qa, beta-bar) and (id, b), with the same diagonal d. Step 6 gives [b] = [theta_U][a] through the composition formula and its unit law; Step 7 gives naturality in G. The new nodes are statement-only, self-contained and searched, with correct blueprint fields. I tested them on edge cases: A=C, A empty, K empty, delta = identity, and the horn inside Delta2. The cycle check (BFS) is clean, all citations stay in the item's unit, and no SGA source is used. lem-coef-infinity-kan-mapping-restriction is a weaker near-duplicate of the new full-subcategory node, but its dependencies reach this item, so it cannot be cited here and the new node is justified. I suggest the maintainer later re-derive that node from the new one. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointwiseLanMappingProperty",
+  "declaration": "SSet.Enhanced.pointwise_lan_mapping_property",
+  "declarations": [
+   "SSet.Enhanced.pointwiseLanSliceEdge",
+   "SSet.Enhanced.pointwise_lan_mapping_property"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PointwiseLanMappingProperty.lean",
+  "statement": "theorem pointwise_lan_mapping_property (C D K : SSet.{u}) [Quasicategory C] [Quasicategory D] (δ : K ⟶ C) (F₀ : K ⟶ D) (F : C ⟶ D) (β : (mappingSpace ((ihom K).obj D) (diagramVertex F₀) (((MonoidalClosed.pre δ).app D).app _ (diagramVertex F))) _⦋0⦌) (hpointwise : ∀ c : C _⦋0⦌, ∃ t : (coconeCategory (pullback.fst δ (rightVertexSliceProjection C c) ≫ F₀)) _⦋0⦌, t.1.1 = F.app _ c ∧ (∃ τ : ((ihom (pullback δ (rightVertexSliceProjection C c))).obj D) _⦋2⦌, ((ihom _).obj D).δ 2 τ = ((MonoidalClosed.pre (pullback.fst δ (rightVertexSliceProjection C c))).app D).app _ β.1 ∧ ((ihom _).obj D).δ 0 τ = pointwiseLanSliceEdge δ F c ∧ diagramVertex (SSet.yonedaEquiv.symm (((ihom _).obj D).δ 1 τ)) = t.1.2) ∧ IsColimiting _ t) : (∀ G : C ⟶ D, IsWeakHomotopyEquivalence (lift (mappingSpaceMap ((MonoidalClosed.pre δ).app D) (diagramVertex F) (diagramVertex G)) (SSet.const (X := mappingSpace ((ihom C).obj D) (diagramVertex F) (diagramVertex G)) β) ≫ (Classical.choose (Classical.choose_spec (@mapping_composition ((ihom K).obj D) (@enhanced_functor_cone_calculus K D _).1)).2) (diagramVertex F₀) (((MonoidalClosed.pre δ).app D).app _ (diagramVertex F)) (((MonoidalClosed.pre δ).app D).app _ (diagramVertex G)))) ∧ ∃ (T : comma ((ihom C).obj D) ((ihom C).obj D) (𝟙 _) (diagramVertex F) false ⟶ comma ((ihom C).obj D) ((ihom K).obj D) ((MonoidalClosed.pre δ).app D) (diagramVertex F₀) false) (w : comma ((ihom C).obj D) ((ihom C).obj D) (𝟙 _) (diagramVertex F) false ⟶ (ihom Δ[2]).obj ((ihom K).obj D)), T ≫ (commaSubcomplex ((ihom C).obj D) ((ihom K).obj D) ((MonoidalClosed.pre δ).app D) (diagramVertex F₀) false).ι ≫ fst _ _ = (commaSubcomplex ((ihom C).obj D) ((ihom C).obj D) (𝟙 _) (diagramVertex F) false).ι ≫ fst _ _ ∧ w ≫ (MonoidalClosed.pre (stdSimplex.δ 2)).app ((ihom K).obj D) = SSet.const (diagramVertex (SSet.yonedaEquiv.symm β.1)) ∧ w ≫ (MonoidalClosed.pre (stdSimplex.δ 0)).app ((ihom K).obj D) = (commaSubcomplex ((ihom C).obj D) ((ihom C).obj D) (𝟙 _) (diagramVertex F) false).ι ≫ snd _ _ ≫ (ihom Δ[1]).map ((MonoidalClosed.pre δ).app D) ∧ w ≫ (MonoidalClosed.pre (stdSimplex.δ 1)).app ((ihom K).obj D) = T ≫ (commaSubcomplex ((ihom C).obj D) ((ihom K).obj D) ((MonoidalClosed.pre δ).app D) (diagramVertex F₀) false).ι ≫ snd _ _ ∧ IsFunctorEquivalence T",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded right vertex slice, enhanced cone definitions, and canonical triangle-characterized mapping composition. The local hypothesis fixes the apex and both short edges of the composition triangle. The comparison is restriction followed by composition with the specified unit; the represented-undercategory triangle family records coherent naturality in every target parameter. Added statement dependencies are already landed interfaces. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f436cd72b",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node, all 4 stmt deps' Lean (EnhancedDiagramsCones, SliceArrowEquivalence+ArrowTargetRightFibration, InfinityMappingComposition, EnhancedFunctorConeCalculus), module, report. Every clause matches Kerodon 0309/02YC: arbitrary K, ordered right-vertex slice + pullback K/c, cocone apex F c with leg fixed as triangle (beta restricted, canonical prism-determined slice arrows), IsColimiting; conclusion = weak equivalence of restriction-then-canonical-composition with beta (correct argument order), naturality as strict-over-base map T of comma left fibrations with triangle family and IsFunctorEquivalence. Helper pointwiseLanSliceEdge is real data, uniquely fixed; endpoints consistent so hypothesis non-vacuous. Single universe forced by dep API, no extra hypotheses. Edge cases K/C/D empty, delta=id ok. lean.statement verbatim; three added stmt_deps landed, BFS shows no cycle. Docstrings with source/blueprint and 7 proof steps; only sorry. nt_compile --json reproduced: rc=0, 3.1 s, no errors/warnings. Second-reading section is the accepted 2026-10-17 stub. No defects."
  }
 }

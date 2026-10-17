@@ -206,5 +206,40 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-10a2cd309 (reviewer sub-agent of L); spot-checked: Read the item and all four cited statements in full: def-coef-complete-algebroid, lem-coef-algebroid-categorical-homotopy, lem-coef-algebroid-equivalence-nerve and lem-cbc-enhanced-functor-cone-calculus. Also read the citer lem-coef-algebroid-completion, which uses the item at p=1 for the left vertical map. GH arXiv:1312.3178v4 is not in literature/, so I fetched it read-only and checked it at the cited places. Cor 4.3.17 and Def 4.3.18 give the tensor and cotensor with Map(D,C^X)=Map(D⊗X,C). Cor 5.5.6, Lemma 5.5.7 and Prop 5.3.6 match. The last paragraph of the proof of Thm 5.6.2 is ι1 C^{E^n}≃Map(E^1⊗E^n,C)≃ιn C^{E^1}, with the left vertical map induced by C→C^{E^1} and inverted by Prop 5.3.6. The item is this with p in place of 1. Hypotheses match: V presentably monoidal, C arbitrary, no completeness, no symmetry. The statement is unchanged and not weakened. Step 1: swap (i,j)↦(j,i) on unit mapping objects; it permutes no V-factors and is natural in finite-set maps. It is described at the level of operadic strings, which goes slightly past the cited description by objects and mapping objects; I accept it as elementary for constant unit diagrams. Step 2: double natural adjunction, correct. Step 3: vertexwise equivalence plus cocone transfer, correct. Step 4: s_p◇1 corresponds to 1◇s_p, which is postcomposition by C^{s_p}, giving I_q(a_p). I checked on objects that both composites send (i,j) to j, and the directions are right. Step 5: [p]→[0] is a nonempty finite-set map, so this is a categorical equivalence, then fully faithful and essentially surjective, so I(a_p) is an equivalence. Edge cases checked: p=0 or q=0, p=q, degeneracies, empty C, non-symmetric V. No new nodes. No cycle and no missing or merged ids among 1099 transitive deps. proof_deps equals the union of the uses. The cotensor search over dag/nodes found no duplicate, and the item restates no parent clause. The route is in-unit except one tool use, lem-cbc-enhanced-functor-cone-calculus (a generic functor/cocone criterion), which I accept. No SGA. The proof is marked agent-written with GH listed as WANTED, which is appropriate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidCotensorNerveExchange",
+  "declaration": "SSet.Enhanced.Algebroid.cotensor_nerve_exchange",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.cotensorFiniteObject",
+   "SSet.Enhanced.Algebroid.cotensorLiftBinary",
+   "SSet.Enhanced.Algebroid.cotensorNerveFamily",
+   "SSet.Enhanced.Algebroid.cotensorNerveSmallBifunctor",
+   "SSet.Enhanced.Algebroid.cotensorNerveBifunctor",
+   "SSet.Enhanced.Algebroid.cotensorNerveSwap",
+   "SSet.Enhanced.Algebroid.cotensorNerveColumn",
+   "SSet.Enhanced.Algebroid.cotensorNerveCollapse",
+   "SSet.Enhanced.Algebroid.cotensorNerveCollapseIndex",
+   "SSet.Enhanced.Algebroid.cotensorNerveApex",
+   "SSet.Enhanced.Algebroid.cotensorNerveRealizedArrow",
+   "SSet.Enhanced.Algebroid.IsCotensorNerveCollapse",
+   "SSet.Enhanced.Algebroid.CotensorNerveExchangeData",
+   "SSet.Enhanced.Algebroid.cotensor_nerve_exchange"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidCotensorNerveExchange.lean",
+  "statement": "theorem cotensor_nerve_exchange {EV ES : SSet.{max (u + 1) v}} [Quasicategory EV] [Quasicategory ES] (p : EV ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : ES ⟶ monoidalSimplexBase.{max (u + 1) v}) (hV : IsPresentablyMonoidal.{u, v} p) (hS : IsMonoidalInfinityCategory q) (spaces : CartesianSpaceCoefficients.{u, v} q) (unitV : UnitSection p) (unitS : UnitSection q) (data : SpatialCotensorData.{u, v} p q unitV unitS spaces) : Nonempty (CotensorNerveExchangeData unitV unitS spaces data)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head b020bc0ed8ef: coherent Hom-bifunctor exchange, canonical cotensor and unit diagrams, realization cocones with exact column restriction and a natural comparison of whole augmented diagrams, canonical finite collapse and its unit-normalized composition triangle, and the realization-arrow correspondence with I(a_m). All helpers have real data; only the item theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6d1980c0",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Repair of returned head b020bc0ed8ef addresses all four return points. Exchange is AreNaturallyEquivalent between a coherent (m,n,C) functor built from data.cotensor, nerveSource/unitCosimplicial and nerveBifunctor/mapping.hom.bifunctor, and its parameter swap; no free maps. Realization base is fixed to that functor by equality, with colimit per (m,C); realization_comparison is an equivalence of whole augmented diagrams onto nerveRealization at C^{E^m}, so the apex identification is induced by the exchange. Collapse is spatialCotensorEdge on finiteS.edge m 0 const; a_m = collapse∘b with b inverse to the cotensor_unit component (three 2-simplex triangles checked); I(a_m) correspondence and weak-equivalence clauses present. Binders identical to categorical_homotopy; independent u,v; no completeness or symmetry; edge cases p=0, q=0, p=q, empty C fine. lean.statement verbatim; only the item theorem uses sorry; docstrings with source and blueprint; the node JSON changes only the lean field. nt_compile --json rc 0, module 11.5 s, no errors. Note: the separate arrow-correspondence fields are weak alone, but the coherent content is in realization_comparison; not blocking."
  }
 }

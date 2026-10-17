@@ -210,5 +210,33 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-33dd9eb00 (reviewer sub-agent of L); spot-checked: I read in full the item statement, all six steps, every cited node's statement (lem-coef-quillen-section-rectification, lem-coef-projective-cochain-monoidal-model, lem-coef-sheaf-flat-model, def-pc-sheaf-restrict-scalars and the def- nodes, none merged), the blueprint adic-stage paragraph of def-weil-exceptional-inverse-image.md, which does not state the lemma (the proof is honestly marked by: agent), and Stacks Tag 014E in derived.tex. The cone and shift conventions match 014E and def-weil-abstract-derived-category once the two summands are swapped. Step 1: the transitions commute with the cone differential and d_C^2=0. Step 2: the compatibility axiom for 0->Q and a trivial fibration p gives the trivial fibration v=p∘-. The cited node does not write out the enrichment on sections; the step spells out the canonical one (compatible families), and I accept that as an unpacking of the cited statement. Step 3: with t(q)=b(q,0), dt+td=pa, and lifting against S^0->D^{-1} gives h with ph=t and dh+hd=a. Step 4: l(x,y)=h(x)+a(y) is a chain map with li=a and pl=b, so i is a cofibration by the lifting characterization. Step 5: the cokernel universal property holds for π:CQ->Q[1]. Step 6: H(x,y)=(y,0) gives dH+Hd=1 and commutes with the transitions. Every sign checks. Edge cases: Q=0, a one-level Q=B_1[0], and zero differentials. The delivery has no new nodes. I found no duplicate: the sibling lem-pur-system-section-suspension states a different claim, and the parent cites this item exactly. I accept both declared tool_uses: they are generic model-category black boxes from sk-prop-sf-biduality-general, and the unit sk-def-sf-operations cites no units. No SGA, no target involved, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PuritySystemSectionCone",
+  "declaration": "CategoryTheory.PuritySectionCone.coneCalculation",
+  "declarations": [
+   "CategoryTheory.PuritySectionCone.restriction",
+   "CategoryTheory.PuritySectionCone.restriction_additive",
+   "CategoryTheory.PuritySectionCone.adjointArrow",
+   "CategoryTheory.PuritySectionCone.CoefficientDiagram",
+   "CategoryTheory.PuritySectionCone.transition",
+   "CategoryTheory.PuritySectionCone.ConeCalculation",
+   "CategoryTheory.PuritySectionCone.coneCalculation"
+  ],
+  "file": "lean/Sheaf/Paper/PuritySystemSectionCone.lean",
+  "statement": "theorem coneCalculation {C : Type u} [Category.{v} C] {J : Precoverage C} (_hJ : J.IsSiteForCoverings) {I : Type (max u v w)} [SmallCategory I] (_index : I ≌ ℕᵒᵈ) (B : I ⥤ Sheaf J.toGrothendieck CommRingCat.{max u v w}) [models : ∀ i : I, ModelCategory (CoefficientFlatModel.Complex (B.obj i))] (flat : ∀ i : I, CoefficientFlatModel.FlatModelData (B.obj i)) (_flat_models : ∀ i : I, models i = (flat i).model) [∀ i : I, EnrichedOrdinaryCategory QuillenSections.Complex.{max u v w} (CoefficientFlatModel.Complex (B.obj i))] [∀ i : I, QuillenSections.DgModel (CoefficientFlatModel.Complex (B.obj i))] (A : CoefficientDiagram B) [ModelCategory (QuillenSections.Section A.diagram)] [EnrichedOrdinaryCategory QuillenSections.Complex.{max u v w} (QuillenSections.Section A.diagram)] [QuillenSections.DgModel (QuillenSections.Section A.diagram)] (π : ∀ (X Y : QuillenSections.Section A.diagram) (i : I), (X ⟶[QuillenSections.Complex.{max u v w}] Y) ⟶ X.obj i ⟶[QuillenSections.Complex.{max u v w}] Y.obj i) (_end : QuillenSections.IsSectionEnd A.diagram π) (_weak : ∀ (X Y : QuillenSections.Section A.diagram) (f : X ⟶ Y), WeakEquivalence f ↔ ∀ i : I, QuasiIso (f.val i)) (_fib : ∀ (X Y : QuillenSections.Section A.diagram) (f : X ⟶ Y), Fibration f ↔ ∀ i : I, Fibration (f.val i)) (Q : QuillenSections.Section A.diagram) (_cofibrant : IsCofibrant Q) : Nonempty (ConeCalculation A Q)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded strict Quillen section category. Tensor extension and its ordinary associators/unitors are specified by their normalized adjunction to actual scalar restriction. Cone and shift witnesses are fixed by component isomorphisms, both cone-transition projections, and the normalized inclusion/projection. No new category or arbitrary coefficient map is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0660c050b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Every node clause is rendered, none stronger or weaker: Precoverage site with IsSiteForCoverings; I ≌ ℕᵒᵈ inverse sequence in CommRingCat.{max u v w} (the flat model's universe); flat model bound via _flat_models; Diagram whose right adjoint is Mathlib's restrictScalars, with composition/unit normalizations forcing the canonical tensor associators and units; section ModelCategory/DgModel/enrichment/π/IsSectionEnd exactly as the dependency's Rectification fields, pinned by _weak (QuasiIso, equivalent via weakEquivalenceFormula) and _fib. ConeCalculation pins the cone to Mathlib's mappingCone (−dx, x+dy) with diagonal transitions (both projections fixed), the inclusion to inr, the projection to −mor₃ = (x,y)↦x (checked in Mathlib: mor₃ = (−fst).rightShift), the shift differential to −d, the cokernel universal property in Sect, a compatible Homotopy 𝟙≃0, and the componentwise quasi-iso and weak equivalence to the zero section. Signature binds only u v w with no leaked variables; lean.statement verbatim; all 7 declarations real and documented; 6-step proof docstring; one sorry; report sections present. Compile: the whole file timed out at 60 s four times (load 165–240 on 80 cores); a verbatim 3-file split compiles with no errors or warnings (26–55 s per part), so the content type-checks. Risk: the single file needs about 90–130 s at this load against the 60 s landing/global limit; if refused, the repair is mechanical (split the module or reduce elaboration). No fixes written."
  }
 }

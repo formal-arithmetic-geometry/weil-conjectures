@@ -23,7 +23,8 @@
   "thm-sf-ambient-adjoint-class",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-cbc-proetale-extension-zero-comparison",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison"
  ],
  "proof": [
   {
@@ -263,5 +264,36 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-b66854603 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited node statements, chapter/unit route, blueprint and Stacks Tag 0B65 sources. Step 2 incorrectly attributed the ordinary étale adjunction F_e ⊣ f^× to thm-sf-ambient-adjoint-class, whose statement does not provide it. Corrected DAG JSON is under fixes/dag/nodes/sec-smooth-purity/lem-pur-bounded-site-adjunction-transpose.json, adding thm-amb-etale-exceptional-adjoint to uses/proof_deps and correcting the attribution. Review written to review.md; no nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedSiteAdjunctionTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.boundedSiteAdjunctionTranspose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.boundedSiteCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.boundedSiteTranspose",
+   "AlgebraicGeometry.ProEtale.boundedSiteRho",
+   "AlgebraicGeometry.ProEtale.boundedSiteRightAdjoint_plus",
+   "AlgebraicGeometry.ProEtale.boundedSiteTranspose_bijective",
+   "AlgebraicGeometry.ProEtale.boundedSiteHomEquiv",
+   "AlgebraicGeometry.ProEtale.boundedSiteRightAdjointPlus",
+   "AlgebraicGeometry.ProEtale.boundedSiteCounit",
+   "AlgebraicGeometry.ProEtale.boundedSiteAdjunctionTranspose",
+   "AlgebraicGeometry.ProEtale.boundedSiteAdjunctionTranspose_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/BoundedSiteAdjunctionTranspose.lean",
+  "statement": "theorem boundedSiteAdjunctionTranspose (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) (H : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) ⥤ DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c ⊣ H) (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hHK : _root_.DerivedCategory.TStructure.t.plus (H.obj K.obj)) : IsIso (boundedSiteRho P.Coefficient H K.obj) ∧ ((compactSupportSiteComparison P.Coefficient c).inv.app ⟨H.obj K.obj, hHK⟩ ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map (boundedSiteRho P.Coefficient H K.obj) ≫ boundedSiteCounit P aX aY f hf c d hd H adj ((siteComparisonDerivedPullbackPlus Y P.Coefficient).obj K) = D(ν^*(Y)[ModuleCat.{u + 1} P.Coefficient]).map (adj.counit.app K.obj)) ∧ (∀ (a_e : (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj J.obj ⟶ K.obj) (a_p : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj (D(ν^*(X)[ModuleCat.{u + 1} P.Coefficient]).obj J.obj) ⟶ D(ν^*(Y)[ModuleCat.{u + 1} P.Coefficient]).obj K.obj), (compactSupportSiteComparison P.Coefficient c).inv.app J ≫ a_p = D(ν^*(Y)[ModuleCat.{u + 1} P.Coefficient]).map a_e → boundedSiteHomEquiv P aX aY f hf c d hd H adj J ((siteComparisonDerivedPullbackPlus Y P.Coefficient).obj K) a_p = D(ν^*(X)[ModuleCat.{u + 1} P.Coefficient]).map ((adj.homEquiv J.obj K.obj) a_e) ≫ boundedSiteRho P.Coefficient H K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The component B is compactSupportSiteComparison.inv, built from the named proper counit mate and exact open comparison. boundedSiteTranspose is the specified forward Hom chain. Its bijectivity theorem determines boundedSiteHomEquiv, whose inverse at identity defines boundedSiteCounit. The four postponed statements all belong to this node: intermediate lower boundedness, Hom-chain bijectivity, the displayed counit/transpose identities, and naturality. No arbitrary comparison or ambient pro-etale exceptional adjunction is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db9681cae",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion part of lem-pur-bounded-site-adjunction-transpose against BoundedSiteAdjunctionTranspose.lean; lean.statement is verbatim. B = compactSupportSiteComparison.inv, read from its construction: Rp_*(e_j) after fixedComparisonDirectImageMatePlus, node's direction, canonical. boundedSiteTranspose is exactly Phi (Mathlib homEquiv = unit then U_Y.map); boundedSiteHomEquiv = Equiv.ofBijective of that fixed function via a named postponed theorem, not hollow; counit = inverse at identity; rho = C_X H of the comparison unit; counit equation and transpose identity in the node's order; naturality in J, L and K. Right adjoint quantified over every adjunction (covers canonical, no stronger assumption). Added stmt_dep lem-sf-class-compact-support-comparison is a landed node, allowed, no cycle; no dependency nodes edited. Postponed auxiliaries (lower bound of H U_Y L via cd <= 2d, bijectivity via full faithfulness on D^+) are true. Edge cases (empty schemes, d=0, n=1) and universes (Scheme.{u}, ModuleCat.{u+1}) ok; docstrings carry source, blueprint and the 6-step proof; all theorems sorry; only real proof is a one-line Finite instance (glue, as in landed modules). Both report sections present (second reading = standard 2026-10-17 notice). nt_compile.py --json: exit 0, no errors or warnings (9.3 s and 22.1 s); no lake build."
  }
 }

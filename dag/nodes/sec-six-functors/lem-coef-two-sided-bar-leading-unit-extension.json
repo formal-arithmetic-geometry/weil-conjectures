@@ -8,7 +8,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category",
   "lem-coef-composable-bimodule-operad-segal",
-  "lem-coef-infinity-pointwise-cocartesian-transport"
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "def-coef-coherent-bar-word-data"
  ],
  "proof": [
   {
@@ -227,5 +228,39 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-af8967596 (reviewer sub-agent of L); spot-checked: The background search for Higher Algebra has now finished: there is no copy anywhere on this machine, so the HA places cited by the item could not be read. The item correctly records agent origin and a WANTED line for it. Otherwise the verdict is unchanged. I read the item, its 4 cited nodes, the parent lem-coef-two-sided-coherent-bar-construction, the sibling regular-word-identification node, the unit and the blueprint proof place in full. The delivery has no new nodes and no duplicates. Small cases check: at k=0, h=(0,0,1) gives eta tensor id; for general k, h keeps both endpoints. Fault 1 (C1/E1): the proof used the action-valued target E^otimes over N(BM^otimes) without citing it, so the cocartesian-lift and Segal hypotheses were unchecked. Repaired by citing lem-coef-cocartesian-straightening (same unit, no cycle). Fault 2 (E5): step 4 hid the evaluation behind 'consequently'. Repaired with a cocartesian/fibrewise factorization and the composition clause of the transport lemma. Step texts are now in TeX. Statement unchanged; there are no tool_uses. Corrected whole file: fixes/dag/nodes/sec-six-functors/lem-coef-two-sided-bar-leading-unit-extension.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RegularBarLeadingUnit",
+  "declaration": "SSet.Enhanced.CoherentBar.regular_bar_leading_unit",
+  "declarations": [
+   "SSet.Enhanced.CoherentBar.regularWord",
+   "SSet.Enhanced.CoherentBar.RegularWordIndex",
+   "SSet.Enhanced.CoherentBar.RegularWordHom",
+   "SSet.Enhanced.CoherentBar.regularWordIndexCategory",
+   "SSet.Enhanced.CoherentBar.regularWordInclusion",
+   "SSet.Enhanced.CoherentBar.regularWordContraction",
+   "SSet.Enhanced.CoherentBar.regularLeadingUnit",
+   "SSet.Enhanced.CoherentBar.regularContractionFamily",
+   "SSet.Enhanced.CoherentBar.regularContractionPrismFunctor",
+   "SSet.Enhanced.CoherentBar.regularContractionPrism",
+   "SSet.Enhanced.CoherentBar.regularPair",
+   "SSet.Enhanced.CoherentBar.IsRegularLeadingUnit",
+   "SSet.Enhanced.CoherentBar.regular_bar_leading_unit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RegularBarLeadingUnit.lean",
+  "statement": "theorem regular_bar_leading_unit {E : SSet.{u + 1}} [Quasicategory E] (p : E ⟶ index.{u} (Word 1)ᵒᵖ) (hp : IsLeftAction p) (A : barIndex.{u} ⟶ E) (hA : IsAssociativeAlgebra p A) (Q : (moduleCategory p A) _⦋0⦌) : IsAlgebraFamily p cellularBase ((λ_ (index.{u} CellularWordᵒᵖ)).hom ≫ regularPair p A Q) ∧ ∃ (X : index.{u} RegularWordIndex ⟶ fiber p (vertex (op mixedLetter))) (H : index.{u} RegularWordIndex ⊗ Δ[1] ⟶ E), lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ H = indexMap regularWordInclusion ≫ vertexDiagram ((moduleInclusion p A).app _ Q) ∧ lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ H = X ≫ fiberInclusion p (op mixedLetter) ∧ H ≫ p = regularContractionPrism ∧ (∀ w : RegularWordIndex, IsCocartesianEdge p (lift (SSet.const (vertex w)) (𝟙 Δ[1]) ≫ H)) ∧ ∀ k : ℕ, IsRegularLeadingUnit p A Q k (edge (regularLeadingUnit k) ≫ X)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the equivalent ordered-path/Step presentation already published in CoherentBarWords. Its regularPair is the actual colour-collapse pullback of Q, hence the regular algebra on the left and Q on the right. The retained-word diagram and unit map are normalized by complete contraction prisms and cocartesian squares, not arbitrary arrows. The extra statement dependency is that existing published definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1443778ad",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Node changes only lean and stmt_deps (adds landed def-coef-coherent-bar-word-data; allowed by brief-stage2 §5; acyclic). Lean matches every node clause: IsLeftAction/IsAssociativeAlgebra/moduleCategory are the landed action/algebra/module notions; regularPair = cellularBase collapse pullback of Q (A∘BM01→Ass1 on the left, Q on the right), asserted inert-preserving; W = all (Word 1)ᵒᵖ operators between a1^k q words with f(0)=0, f(last)=last, composed as in Chain2; X/H = pointwise cocartesian transport along the full contraction prism, landing in the mixedLetter fibre M; regularLeadingUnit = h(0)=h(1)=0, h(j)=j-1; IsRegularLeadingUnit fixes X(φ) as the transport of the unit-insertion edge; no linearity, no colimits, single universe u+1. Edge cases k=0, k=1, empty q block excluded, empty M checked. Observation: final clause and A^k⊗U_AQ value follow from the transport characterization, which is the framework's and the landed parent's convention (canonical, not arbitrary). Gates: no hollow defs, one sorry, source/blueprint docstrings and 4-step proof docstring, statement verbatim, 13 declarations listed, max line 88. nt_compile.py --json on the snapshot file: EXIT 0, 9.7 s, no errors or warnings."
  }
 }

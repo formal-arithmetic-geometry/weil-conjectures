@@ -141,7 +141,7 @@
   "file": "lean/Sheaf/CategoryTheory/CompositeTensorTranspose.lean",
   "statement": "theorem composite_tensor_transpose {C : Type uX} [Category.{vX} C] [MonoidalCategory C] {D : Type uY} [Category.{vY} D] [MonoidalCategory D] {E : Type uZ} [Category.{vZ} E] [MonoidalCategory E] (S₁ : D ⥤ C) (S₂ : E ⥤ D) (P₁ : C ⥤ D) (P₂ : D ⥤ E) (G₁ : D ⥤ C) (G₂ : E ⥤ D) [S₁.Monoidal] [S₂.Monoidal] (adj₁ : P₁ ⊣ G₁) (adj₂ : P₂ ⊣ G₂) (pf : S₁.ProjectionFormula P₁) (pg : S₂.ProjectionFormula P₂) (K : E) : ((adj₁.comp adj₂).homEquiv (compositeTensorSource S₁ S₂ G₁ G₂ K) K).symm (compositeTensorFirst S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K) = compositeTensorInverseTranspose S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K ∧ ((adj₁.comp adj₂).homEquiv (compositeTensorSource S₁ S₂ G₁ G₂ K) K).symm (compositeTensorSecond S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K) = compositeTensorInverseTranspose S₁ S₂ P₁ P₂ G₁ G₂ adj₁ adj₂ pf pg K",
   "branch": "newtargets-dag",
-  "by": "Q83",
+  "by": "Q144",
   "date": "2026-10-17",
   "existing": false,
   "declarations": [
@@ -151,15 +151,27 @@
    "SecSmoothPurity.compositeTensorFirst",
    "SecSmoothPurity.compositeTensorSecond",
    "SecSmoothPurity.compositeTensorInverseTranspose",
-   "SecSmoothPurity.composite_tensor_transpose"
-  ]
+   "SecSmoothPurity.composite_tensor_transpose",
+   "SecSmoothPurity.CompositeTensorLocalData",
+   "SecSmoothPurity.CompositeTensorLocalData.counitFOne",
+   "SecSmoothPurity.CompositeTensorLocalData.counitFV",
+   "SecSmoothPurity.CompositeTensorLocalData.counitGOne",
+   "SecSmoothPurity.CompositeTensorLocalData.tauG",
+   "SecSmoothPurity.CompositeTensorLocalData.q",
+   "SecSmoothPurity.CompositeTensorLocalData.first",
+   "SecSmoothPurity.CompositeTensorLocalData.second",
+   "SecSmoothPurity.CompositeTensorLocalData.inverseTranspose",
+   "SecSmoothPurity.CompositeTensorLocalData.Coherence",
+   "SecSmoothPurity.CompositeTensorLocalData.composite_tensor_transpose_restricted"
+  ],
+  "note": "Retains the already landed global statement and all six canonical helpers unchanged. Adds CompositeTensorLocalData, its Coherence, canonical local maps, and composite_tensor_transpose_restricted to state the final restricted-domain clause formally, without an ambient adjunction or tensor closure of the left functor domains. Both theorem signatures are carried by this node; the primary signature remains the global calculation."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1c88d439d",
-  "group": "Q83",
+  "reviewer": "NT-stage2-cc-fd31cb309",
+  "group": "Q144",
   "result": "pass",
-  "note": "No change after the background file search finished. The source sentence was already confirmed at main-20261015 thm-pur-cohomological-smoothness.proof.md l.25-27. Every clause matches the node, both equalities hold by hand, helpers have real data, only the theorem is sorry, lean.statement is verbatim, and the per-file compile is clean."
+  "note": "Global part (Q83, landed) unchanged; I rechecked it clause by clause against the node and deps. tensorCounitTranspose = theta followed by G.map rho is exactly tau^h; composite projection iso and composite counit are as in the node. The new restricted-domain clause (CompositeTensorLocalData on Mathlib full subcategories, Coherence = four literal ProjectionFormula instances: natural_left at tau_g, natural_right at q, assoc at (S_gK,V,W), pg.natural_right at eps_f,V) is a faithful, weaker-hypothesis rendering, and I verified both conjuncts by hand from exactly those equations (unit axiom not needed). Universes independent; no hollow defs; sorry only in the two theorems; docstrings present; lean.statement verbatim; all 18 declarations exist; report sections present. nt_compile --json of the snapshot module: clean, 4.8 s and 8.2 s (warn.sorry=false); an injected error was reported (exit code 0 even then). Remarks needing no change: the global docstring mentions unit coherence that is not used; lean.note says both signatures are carried although lean.statement has only the global one."
  }
 }

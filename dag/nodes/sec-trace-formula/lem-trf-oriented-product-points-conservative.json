@@ -226,5 +226,33 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-d4771fd18 (reviewer sub-agent of L); spot-checked: The proof is correct, but one statement change was wrong and I removed it (E.7 misapplied, a weakening in the sense of H3/7b). The delivery added 'Assume T is nonempty' and filed STATEMENT-DISPUTED, claiming the étale topos of the empty scheme can be nontrivial. That is false: the empty family covers the only object of the empty scheme's étale site, so that topos is degenerate. The oriented product V_f is then degenerate too: every triple (∅→V←W) has the empty type-(a) cover, and p1^{-1} preserves both the initial and the final object. So D(V_f,Λ)=0 and the empty family is conservative. The original statement holds for T empty, and the added hypothesis broke the citer lem-trf-oriented-nearby-strict-local-description, which does not assume X nonempty. The fixed item file removes the hypothesis, adds a sentence on the degenerate case to step 1, updates split_report.summary, and corrects source.place: it now cites XI 1.8, 1.10(b), the proof of 2.5, Stacks 00YQ and 04HU instead of the base-change proof 2.7. Source checks: ILO XI 1.8 says every point is a triple (x,y,u) with u:gy→fx, which matches c:y⇒f(x) when g=id. XI 1.10(b) states that m from the localized oriented product to the oriented product of the localized topoi is an equivalence, which gives the affine-slice node. The proof of XI 2.5 builds the finite pretopology of types (a),(b),(c) under coherence hypotheses; these hold for affine U,V,W, since affine étale objects are qcqs and closed under fibre products, and maps between affine schemes are qcqs. Stacks 00YQ (finite limits plus finite refinements give enough points) matches the finitary node exactly. Stacks 04HU(2) (every point of a small étale topos comes from a geometric point) matches the point-realization node. Steps: step 1 uses uniqueness in the universal property; step 2 builds the affine refinement from types (a), (c), then (a)/(b); step 3 uses slice points composed with j_Z and Γ(j_Z^{-1}F)=F(Z); step 4 glues, using injectivity on non-affine overlaps; step 5 checks linearity; step 6 uses Mathlib homologyFunctorIso; step 7 uses DerivedCategory.isIso_iff on unbounded complexes. All are correct. The three new nodes are statement-only and self-contained, with four recorded searches each. None duplicates an existing node: I grepped for 00YQ, 04HU, enough points, slice/localization and point realization, and compared lem-trf-site-point-fibre and lem-trf-oriented-affine-neighbourhood-limit. None restates the item. The tool_use of the affine-étale cover Mathlib leaf is accepted. No SGA source is used and no target is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedProductPointsConservative",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.orientedProduct_points_conservative",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.punctualSite",
+   "AlgebraicGeometry.OrientedNearbyCycles.punctualEquivalence",
+   "AlgebraicGeometry.OrientedNearbyCycles.etaleSheafEquivalence",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricEtalePoint",
+   "AlgebraicGeometry.OrientedNearbyCycles.triplePoint",
+   "AlgebraicGeometry.OrientedNearbyCycles.tripleModules",
+   "AlgebraicGeometry.OrientedNearbyCycles.orientedProduct_points_conservative"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedProductPointsConservative.lean",
+  "statement": "theorem orientedProduct_points_conservative {T B : Scheme.{u}} (f : T ⟶ B) (Λ : Type v) [CommRing Λ] : (∀ {F G : (vanishingDatum.{u, v} f).modules (Coeff.{u, v} Λ)} (a : F ⟶ G), IsIso a ↔ ∀ (Ω Ξ : Type u) [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ] (x : Spec (.of Ω) ⟶ T) (y : Spec (.of Ξ) ⟶ B) (c : ((geometricEtalePoint.{u, v} y).comp (identity _)).direct ⟶ ((geometricEtalePoint.{u, v} x).comp (etaleMorphism f)).direct), IsIso (((tripleModules f x y c).modulePull (Coeff.{u, v} Λ)).map a)) ∧ (∀ {K L : VanishingDerived f Λ} (a : K ⟶ L), IsIso a ↔ ∀ (Ω Ξ : Type u) [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ] (x : Spec (.of Ω) ⟶ T) (y : Spec (.of Ξ) ⟶ B) (c : ((geometricEtalePoint.{u, v} y).comp (identity _)).direct ⟶ ((geometricEtalePoint.{u, v} x).comp (etaleMorphism f)).direct), IsIso (((tripleModules f x y c).pull (Coeff.{u, v} Λ)).map a))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical geometric stalk points transported to the existing AsSmall etale presentation and the one-object presentation of sets; triple points are the existing universal lifts with orientation y ⇒ f(x). Both module-sheaf and unbounded-derived isomorphism criteria use the recorded exact constant-module inverse image."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47a30a96f",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps, OrientedNearbyCycles (Lift/lift/moduleMorphism/Coeff/VanishingDerived), AdicSites Morphism.modulePull/pull, Mathlib pointSmallEtale. Every clause matches: any f and Λ, independent alg-closed geometric points, arbitrary c of exactly lift's orientation type y_* ⟶ (f x)_*, triple point = the dependency's universal lift, z^* = the existing constant-module inverse image and its derived functor on the unbounded derived category, both directions for sheaves and D. No added hypotheses; universes u,v independent; T=∅, B=∅, Λ=0 covered. The 6 helpers have real data (Mathlib stalk/skyscraper point transported to the AsSmall site and the punctual site); no duplicate notion; docstrings carry sources, blueprint tag and the 7 proof steps; only the theorem is sorry. lean.statement verbatim; node unchanged except lean. nt_compile --json rc 0 in 4.5 s, no errors or warnings, and a deliberately broken copy confirmed real elaboration. Non-blocking: the node's top-level source.place still cites XI 2.7; the step and proof_origin sources are correct."
  }
 }

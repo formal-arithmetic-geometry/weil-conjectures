@@ -12,7 +12,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation",
-  "lem-coef-joyal-functor-equivalence-test"
+  "lem-coef-joyal-functor-equivalence-test",
+  "def-coef-homotopy-segal-space"
  ],
  "proof": [
   {
@@ -266,5 +267,39 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-d4aa5281c (reviewer sub-agent of L); spot-checked: The seven-step mathematics, hypotheses, cited node statements, route, edge cases, and duplicate checks pass. Repair the node metadata: `created.item` and `created.group` incorrectly identify Q113; corrected JSON is in `fixes/dag/nodes/sec-six-functors/lem-coef-operadic-collage-relative-overbase-equivalence.json`. The packet also claims absent citations.json/report.md artifacts.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicCollageRelativeOverbaseEquivalence",
+  "declaration": "SSet.Enhanced.operadic_collage_relative_overbase_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/OperadicCollageRelativeOverbaseEquivalence.lean",
+  "statement": "theorem operadic_collage_relative_overbase_equivalence {J : Type u} [Category.{u} J] (hJ : ∀ {X Y : J} (f : X ⟶ Y), IsIso f → ∃ h : X = Y, f = eqToHom h) {P M V : SSet.{u}} [Quasicategory M] (i : P ⟶ M) (p : V ⟶ nerve J) (s : M ⟶ nerve J) (hi : ∀ (C : SSet.{u}), C.Quasicategory → IsFunctorEquivalence ((MonoidalClosed.pre i).app C)) (hp : IsIsofibration p) : Quasicategory (relativeFunctorCategory p s) ∧ Quasicategory (relativeFunctorCategory p (i ≫ s)) ∧ IsFunctorEquivalence (relativeFunctorCategoryRestriction i p s) ∧ (∀ F G : (relativeFunctorCategory p s) _⦋0⦌, IsWeakHomotopyEquivalence (relativeMappingComparison p s F G)) ∧ (∀ F G : (relativeFunctorCategory p (i ≫ s)) _⦋0⦌, IsWeakHomotopyEquivalence (relativeMappingComparison p (i ≫ s) F G)) ∧ RelativeMappingComparisonNatural p s p (i ≫ s) (relativeFunctorCategoryRestriction i p s) ((MonoidalClosed.pre i).app V) (baseRestrictionMap i s) ∧ (∀ (V' : SSet.{u}) (p' : V' ⟶ nerve J) (q : V ⟶ V') (hq : q ≫ p' = p), IsIsofibration p' → RelativeMappingComparisonNatural p s p' s (relativePostcomposition p p' q hq s) ((ihom M).map q) (𝟙 _) ∧ RelativeMappingComparisonNatural p (i ≫ s) p' (i ≫ s) (relativePostcomposition p p' q hq (i ≫ s)) ((ihom P).map q) (𝟙 _) ∧ relativeFunctorCategoryRestriction i p s ≫ relativePostcomposition p p' q hq (i ≫ s) = relativePostcomposition p p' q hq s ≫ relativeFunctorCategoryRestriction i p' s)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.relativeFunctorCategory",
+   "SSet.Enhanced.relativeFunctorCategoryRestriction",
+   "SSet.Enhanced.relativePostcomposition",
+   "SSet.Enhanced.baseRestrictionMap",
+   "SSet.Enhanced.mappingIdentity",
+   "SSet.Enhanced.relativeUnderlyingVertex",
+   "SSet.Enhanced.relativeMappingInclusion",
+   "SSet.Enhanced.relativeBaseMap",
+   "SSet.Enhanced.relativeMappingComparison",
+   "SSet.Enhanced.relativeAmbientMappingMap",
+   "SSet.Enhanced.RelativeMappingComparisonNatural",
+   "SSet.Enhanced.operadic_collage_relative_overbase_equivalence"
+  ],
+  "note": "Repair of H3/H8: canonical constant-path comparison into the ambient mapping-space homotopy fiber; restriction and postcomposition naturality as equalities of simplicial maps. Reuses HomotopySegal.constantPathValue and HomotopySegal.fiberMap from the landed def-coef-homotopy-segal-space node; its id is added to stmt_deps. All helpers have real data; the only sorry is the theorem proof. Repair of L return c12e54fc2abb: renamed the simplicial restriction map to relativeFunctorCategoryRestriction. The existing relativeRestriction in CompactRelativeCoconeFactorization is a Prop-valued join-boundary equality, not a functor-category map; the two declarations express different notions, so reuse is ill-typed. Maintainer review fix (one definition per notion, H4): relativeFunctorCategory is now the landed strict fiber SSet.Enhanced.fiber ((ihom T).map p) (diagramVertex s) of def-coef-infinity-fibrations (module Sheaf.CategoryTheory.InfinityFibrations, point-first pullback, canonically the displayed Fun(T,V) x_{Fun(T,S)} {s_T}) instead of a second pullback with swapped factors; projections pullback.fst became pullback.snd. Theorem signature unchanged.",
+  "fixed_by": "NT-stage2-cc-cffdd6dd8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cffdd6dd8",
+  "group": "NE",
+  "result": "fix",
+  "note": "Node vs Lean clause by clause: J/hJ (only identity isos), P arbitrary, M quasicategory, i categorical equivalence via Joyal test clause (ii) (equivalent by TFAE, not stronger), s with s_P = i ≫ s, p IsIsofibration; conclusions: both relative categories quasicategories, specified restriction IsFunctorEquivalence, canonical constant-path comparison into the ambient path homotopy fiber at the identity, a weak equivalence for T=M,P, naturality in restriction and postcomposition (q ≫ p' = p, p' isofibration) as simplicial-map equalities; existentials only over Prop proofs. Edge cases (non-quasicategory P, empty fibers, id maps) and the single universe u are fine. lean.statement verbatim; 12 declarations present, no collisions; node differs only in lean plus the landed def-coef-homotopy-segal-space; one sorry; docstrings with source, blueprint and 7 steps; report sections present. nt_compile --json: delivered and fixed files rc 0, no errors or warnings. FINDING H4 (fixed): relativeFunctorCategory duplicated the landed SSet.Enhanced.fiber (def-coef-infinity-fibrations) with swapped pullback factors; the fix defines it as fiber ((ihom T).map p) (diagramVertex s), imports InfinityFibrations, uses pullback.fst→snd and explicit pullback.map arguments; signature unchanged. Fixes: OperadicCollageRelativeOverbaseEquivalence.lean, <item>.lean-record.json (note only), <item>.report.md. The maintainer may add def-coef-infinity-fibrations to stmt_deps (a stage-2 fix cannot). Minor: mappingIdentity duplicates helpers in unrelated lemma modules; the second reading was the worker's self-check."
  }
 }

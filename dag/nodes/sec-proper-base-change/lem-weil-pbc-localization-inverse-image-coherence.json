@@ -12,7 +12,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-ringed-section-localization",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -306,5 +307,45 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-0fc9411d4 (reviewer sub-agent of L); spot-checked: Read the full item, all eleven steps, cited statements and source passages, and checked target coefficients and the specified base-change map. Exactness, localization units, composition coherence, and unbounded descent are justified. No new nodes, duplicates, or delivery-specific faults found. Accepted the declared sheafification–tensor tool use. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationInverseImageCoherence",
+  "declaration": "CategoryTheory.existsUnique_localizationInverseImage",
+  "file": "lean/Sheaf/CategoryTheory/LocalizationInverseImageCoherence.lean",
+  "statement": "theorem existsUnique_localizationInverseImage {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{u} C] [EssentiallySmall.{u} D] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] {K : GrothendieckTopology D} [HasSheafify K AddCommGrpCat.{u}] [K.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify K CommRingCat.{u}] [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (V : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (_adj : L ⊣ V) [PreservesFiniteLimits L] (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u}) (a : SheafOfModules.AlgebraicInverseImage L R S) (t : (R.obj ⋙ forget CommRingCat.{u}).sections) (s : (S.obj ⋙ forget CommRingCat.{u}).sections) (_hs : IsInverseImageSection a t s) : ∃! β : scalarLocalization R t ⋙ a.modules ≅ a.modules ⋙ scalarLocalization S s, Functor.whiskerRight (scalarLocalizationUnit R t) a.modules ≫ β.hom = Functor.whiskerLeft a.modules (scalarLocalizationUnit S s)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.inverseLocalizationModules",
+   "CategoryTheory.scalarLocalization",
+   "CategoryTheory.existsUnique_scalarLocalizationUnit",
+   "CategoryTheory.scalarLocalizationUnit",
+   "CategoryTheory.localizationModuleSets",
+   "CategoryTheory.IsInverseImageSection",
+   "CategoryTheory.localization_inverseImage_exact",
+   "CategoryTheory.existsUnique_localizationInverseImage",
+   "CategoryTheory.existsUnique_localizationInverseImageRing",
+   "CategoryTheory.localizationInverseImage_fraction",
+   "CategoryTheory.localizationInverseImage_comp",
+   "CategoryTheory.localizationInverseImage_id",
+   "CategoryTheory.localizationComparisonDerived",
+   "CategoryTheory.localizationComparisonDerived_comp",
+   "CategoryTheory.localizationComparisonDerived_id",
+   "CategoryTheory.localizationInverseImage_coefficient",
+   "CategoryTheory.localizationUnitDerived",
+   "CategoryTheory.localizationComparisonDerived_unit",
+   "CategoryTheory.localization_restrictScalars_fullyFaithful"
+  ],
+  "note": "The clauses are recorded together in lean.declarations: actual tensor localization and its uniquely specified unit, exactness, the unique unit-normalized module and ring comparisons, generalized fraction normalization, natural-transformation composition/identity and coefficient-identification equations, and the canonical unbounded termwise derived comparison with derived unit/composition/identity equations. Source and target localized module structures are recovered faithfully by localization_restrictScalars_fullyFaithful. Added the already landed algebraic-inverse-image definition node used to present the canonical operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c58616d77",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Every node clause matches the Lean: ring iso with unique unit normalization, natural module iso beta with unique unit normalization, fraction formula on generalized elements, exactness, composition and identity for any kappa (checked by hand), coefficient identification, unbounded derived comparison with unit, composition and identity. IsInverseImageSection is equivalent to t'=f^-1 t (terminal test sheaf). No extra assumptions, independent site universes, no hollow data, all theorems sorry with source, blueprint and proof docstrings, statement field verbatim. Both delivered files compile without errors (nt_compile, 18.8 s and 35.8 s). Finding H4: CategoryTheory.ringedSliceSectionOfUniverses in the §1(B) dependency module RingedSectionLocalizationOfUniverses duplicates the existing CategoryTheory.ringedSliceSection (same signature and body) and is unused. fixes/RingedSectionLocalizationOfUniverses.lean removes it; merge refit drops it from the dependency's lean.declarations. Fixed file plus item module recompiled without errors (6.2 s, 19.9 s). Remark: derived composition and identity are stated for strict composites; transport along kappa uses standard functoriality of mapDerivedCategoryNatIso, as the report says."
  }
 }

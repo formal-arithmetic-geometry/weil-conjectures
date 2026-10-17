@@ -18,7 +18,9 @@
   "def-weil-etale-morphism",
   "def-weil-closed-immersion",
   "def-weil-pbc-scheme-reduction",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-strict-normal-crossings-divisor",
+  "def-trf-nodal-geometric-fibres"
  ],
  "proof": [
   {
@@ -191,5 +193,23 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-2af2ddddb (reviewer sub-agent of L); spot-checked: I read the whole delivery against ILO Gabber VI 1.1-1.9 (including the proof of Prop 1.9), VIII 3.4.1-3.4.10, VIII 4.1-4.1.8 with Rem 4.2.2, X Lemma 2.2 (pp.149-150), and Stacks 0B8X, 0BIA and 0CBY. The item statement is unchanged and not weakened. It is not a target, so no base-change morphism or coefficient category is involved. Its six steps check out. (1) Projective implies proper and of finite type, the composite is of finite type, and X and Y are Noetherian; each cited statement says this. (2) The SNC chart lemma's hypotheses are exactly the item's hypotheses on (Y,T). (3) The nodal lemma's hypotheses were checked one by one. It matches VI 1.9 and adds only hypotheses (connected, nonempty, finitely presented, Noetherian). (4) Kato-Niziol desingularization by saturated log blow-ups (VIII 3.4.6(i), 3.4.9, VI 1.7) needs no characteristic-zero input. (5) Strictification is VIII 4.1.6-4.1.8; regular becomes smooth by 0B8X because F is perfect. Its normal-crossings input has the same definition as the output of (4). (6) Proper composition holds. Birationality uses the nonempty dense open U=X\\B. The boundary equality uses only that reduction is the identity on underlying sets. Tests: empty T and D; T empty forcing f smooth; uv=t, uv=t^n and uv=t1t2. For the chart lemma: in the UFD strict local ring, the boundary-unit monoid is units times monomials, so the characteristic monoid is N^r. All five new nodes are true, statement-only and unsplit, with correct created/blueprint fields and four recorded searches. None restates a clause of the item. rg over the DAG (log regular, normal crossings, nodal, snc, desingularization) found no duplicate. Accepted tool uses: lem-kun-projective-implies-proper, and lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf, so declaring it was harmless). FIX (B3, two missing definition citations): lem-trf-log-regular-desingularization now cites def-weil-closed-immersion and def-weil-etale-morphism, and lem-trf-normal-crossings-strictification now cites def-weil-etale-morphism, inline and in stmt_deps. The corrected files are under fixes/dag/nodes/sec-trace-formula/. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPairProjectiveResolution",
+  "declaration": "AlgebraicGeometry.exists_nodal_pair_projective_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPairProjectiveResolution.lean",
+  "statement": "theorem exists_nodal_pair_projective_resolution (F : Type u) [Field F] [IsAlgClosed F] (Y : Scheme.{u}) [Y.Over (Spec (.of F))] [IsIntegral Y] [Smooth (Y ↘ Spec (.of F))] [LocallyOfFiniteType (Y ↘ Spec (.of F))] [QuasiCompact (Y ↘ Spec (.of F))] (T : Y.IdealSheafData) (hT : T.IsStrictNormalCrossingsDivisor (Y ↘ Spec (.of F))) (X : Scheme.{u}) [IsIntegral X] (f : X ⟶ Y) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (η : Y) (hη : IsGenericPoint η Set.univ) [Smooth (f.fiberToSpecResidueField η)] [GeometricallyIntegral (f.fiberToSpecResidueField η)] (hfib : HasNodalGeometricFibres f) (hsmooth : ∀ x : X, f x ∉ T.support → x ∈ f.smoothLocus) (D : X.IdealSheafData) (hD : D.IsInvertible) [IsFinite (D.subschemeι ≫ f)] [Etale (D.subschemeι ≫ f)] (hmark : ∀ d : D.subscheme, D.subschemeι d ∈ f.smoothLocus) : ∃ (X' : Scheme.{u}) (r : X' ⟶ X), IsProper r ∧ IsIntegral X' ∧ Smooth (r ≫ f ≫ Y ↘ Spec (.of F)) ∧ (∃ (U : X.Opens) (V : X'.Opens) (e : V.toScheme ≅ U.toScheme), Dense (U : Set X) ∧ Dense (V : Set X') ∧ e.hom ≫ U.ι = V.ι ≫ r) ∧ ((D ⊓ T.comap f).comap r).radical.IsStrictNormalCrossingsDivisor (r ≫ f ≫ Y ↘ Spec (.of F))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4521c8bd1",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Item theorem matches the node clause by clause: IsHProjective; Flat; finite presentation as LFP+QC+QS; generic fibre Smooth and GeometricallyIntegral via fiberToSpecResidueField at the generic point; hsmooth via smoothLocus; D IsInvertible, finite etale over Y, in the smooth locus; proper r, integral X' smooth over F; dense-open iso commuting with r; boundary ((D ⊓ T.comap f).comap r).radical, checked against Mathlib ideal_inf/support_comap/support_radical. Statement text unchanged; only lean and two added stmt_deps. New defs (SNC divisor as sums of component ideals with pointwise codim |J|; nodal geometric fibres via pullback, ConnectedSpace, topologicalKrullDim=1, AdicCompletion ≃+* Ω[[u,v]]/(uv)) are real, match their nodes verbatim, and agree with ILO X p.149; no duplicates in DAG, Mathlib, side or live Lean. Edge cases checked: empty T, empty D, both empty, cusp, non-reduced fibre, isolated point. Docstrings carry source places, blueprint id and the six proof steps; lean.statement verbatim; no extra universe restriction or assumption. nt_compile of all 3 files clean (no errors or warnings). Second reading was done by the worker itself, as the report says."
  }
 }

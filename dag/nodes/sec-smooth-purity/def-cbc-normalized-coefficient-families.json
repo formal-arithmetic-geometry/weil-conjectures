@@ -1,0 +1,124 @@
+{
+ "id": "def-cbc-normalized-coefficient-families",
+ "kind": "definition",
+ "title": "Normalized raw rational compact-support and completed-pullback coefficient families",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-algebraic-closure], and use its finite coefficient stages [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be noetherian finite-dimensional schemes on which $\\ell$ is invertible. At stage $E$ use the completed bounded constructible integral category [def-weil-pbc-bounded-constructible-complete], its raw rationalization and localization $Q_{W,E}$ [def-weil-pbc-rational-category], and the scalar functors, associators and shift maps [prop-weil-pbc-scalar-extension]. A coherent exact family means the stage functors and exact natural scalar isomorphisms, with their unit, associator and shift equations, as in [prop-weil-pbc-descent-functors].\nFor a compactification $c=(j,p)$ [def-cbc-compact-support-square], define $\\delta^c_{L/E,K}:H_{c,L}C_{L/E,X}K\\to C_{L/E,Y}H_{c,E}K$, where $H_{c,E}=Rp_{*,E}j_{!,E}$ is the ambient operation [def-weil-pbc-projection-compactification]. It is $Rp_{*,L}$ of the inverse open adjunction mate of ordinary scalar/pullback balancing, followed by the inverse proper direct-image scalar comparison [prop-weil-pbc-scalar-extension]. The open mate is the derived coefficient-change form of [lem-weil-pbc-ringed-slice-extension-tensor].\nA normalized compact-support coefficient family for $c$ consists of: preservation of the integral category by this composite; a coherent exact family $H$; the equations $H_E\\circ Q_{X,E}=Q_{Y,E}\\circ H^{int}_{c,E}$ on objects and arrows; shift comparisons equal on integral objects to the localization of the actual ambient shift comparisons [prop-weil-pbc-rational-transport]; inverse scalar components equal, after the specified integral/scalar identifications, to $Q_{Y,L}(\\delta^c_{L/E,K})$ for every integral $K$; and identity scalar isomorphisms at repeated fields.\nFor a map $u:Y\\to X$, a normalized completed-pullback coefficient family consists of: integral preservation of the actual completed pullback $P_{u,E}$ [def-weil-pbc-completed-pullback]; a coherent exact family $P$ with $P_E\\circ Q_{X,E}=Q_{Y,E}\\circ P^{int}_{u,E}$ on objects and arrows; ambient natural comparisons $\\delta^u_{L/E}:P_{u,L}C_{L/E,X}\\to C_{L/E,Y}P_{u,E}$ characterized by precomposition with the actual ordinary-to-completed unit, giving ordinary scalar/pullback balancing followed by scalar extension of that unit; inverse scalar components equal to their localized components on every integral object; and identity scalar isomorphisms at repeated fields. These are definitions of data, with no assertion that either family exists.",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+  "place": "Opening scalar-extension paragraph: normalized compact-support and completed-pullback coefficient comparisons, before the exchange coefficient equation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "normalized coherent exact families of compactly supported direct images and completed pullback on rational coefficient stages",
+   "results": "8 hits: CategoryTheory.Precoherent.pullback, Precoherent.mk, coherentCoverage; CompHausLike.precoherent; and scheme normalization declarations. No normalized coefficient-family data.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "coherent exact scalar coefficient families normalized by integral localization and completion units",
+   "results": "8 hits: BDeRham, IsLocalization integerNormalization_coeff/integerNormalization_spec/coeffIntegerNormalization/integerMultiple, IsLocalizedModule.integerMultiple/commonDenom, exact_of_isLocalized_span. No compact-support or completed-pullback family.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep Mathlib",
+   "query": "CbcCompactSupportCoefficientFamily|CbcCompletedPullCoefficientFamily|CoherentExactMorphism in CategoryTheory",
+   "results": "msearch grep: OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "rg source and lean/Sheaf",
+   "query": "CbcCompactSupportCoefficientFamily|CbcCompletedPullCoefficientFamily|normalized.*coefficient.*famil",
+   "results": "No source or lean/Sheaf hit. The generic StageSystem.CoherentExactMorphism already exists in PbcDescentFunctors and is used, not redefined. PbcScalarExtension provides the ambient scalar maps. QbarCompactSupportBaseChange provides reusable beta specifications, not these fully normalized family data.",
+   "date": "2026-10-17",
+   "verdict": "Use the generic family and scalar APIs; define only these specialized normalization packages."
+  },
+  {
+   "tool": "DAG and blueprint search",
+   "query": "CbcCompactSupportCoefficientFamily|CbcCompletedPullCoefficientFamily|normalized.*coefficient.*famil; blueprint_refs.py search coefficient family",
+   "results": "No exact name hit; broad regexp matched unrelated twist, purity, Kummer and trace families. Blueprint search: 0 blueprint nodes match coefficient family.",
+   "date": "2026-10-17",
+   "verdict": "No existing definition node for this data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-rational-compact-support-coefficient-coherence",
+  "date": "2026-10-17",
+  "group": "Q71"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Opening scalar-extension paragraph: normalized compact-support and completed-pullback coefficient comparisons, before the exchange coefficient equation.",
+   "via": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedCoefficientFamilies",
+  "declaration": "AlgebraicGeometry.Scheme.CbcCompactSupportCoefficientFamily",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcScalarCompactSupportInverse",
+   "AlgebraicGeometry.Scheme.CbcCompactSupportCoefficientFamily",
+   "AlgebraicGeometry.Scheme.CbcCompletedPullCoefficientFamily"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedCoefficientFamilies.lean",
+  "statement": "structure CbcCompactSupportCoefficientFamily {f : X ⟶ Y} (c : Compactification f)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Specialized normalized data built on the existing CoherentExactMorphism. No integral/rational category, scalar operation or completion is redefined. Split from the existence theorem to compile each file within the 60-second limit; contains no sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c590c9f3",
+  "group": "Q71",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c590c9f3",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause-by-clause check of the item: hypotheses (noetherian, finite-dimensional, l invertible, f separated finite type, g arbitrary, no smoothness/base field/universe restriction) and the Cartesian compactification squares match the node. H and P are pinned by integral localization; inverse b^h is the actual mate composite (direction checked) followed by pbcScalarDirectImageIso.inv; the unit HEq is well typed since pbcScalarExtension is literally 1 at E=F; shift is pinned to the ambient commShiftIso; Morphism.coh gives the successive law after cancelling a_Y; Morphism.comp gives b^U = P(b^f) d^g and b^V = H'(d^g') b^f'; eta is pinned to the localization of completedCompactSupportExchange for every tuple; Hom.comm is the stated intertwining, with no invertibility. P comparison uses the datum completedPull with the ordinaryToCompleted characterization, the same as pbcScalarCompletedPullIso, not a duplicate. Statement field byte-identical, lean.statement verbatim, no hollow defs, one sorry, docstrings and both report sections present, no Qbar import. Compile: four nt_compile runs at load 163-230 all timed out at 60 s on NormalizedCoefficientFamilies.lean (probes: imports 9.7 s, each structure alone 49-58 s, no errors), so the pass relies on the delivery's evidence (57.9 s / 11.5 s clean, dry run OK at 383e78b2cf). The definitions file is close to the 60 s limit."
+ }
+}

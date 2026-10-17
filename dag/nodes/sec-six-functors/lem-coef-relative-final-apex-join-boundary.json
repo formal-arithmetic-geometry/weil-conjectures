@@ -157,5 +157,23 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-6fdcf9d62 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites; no fixes were needed. Delivery: one commit with the item and its report, no new nodes. Statement: an inner fibration of quasicategories, r>0, a p-final last apex in the right-pinched Map sense and both equalities exact. These match the final-vertex clause of lem-coef-infinity-relative-initial-boundary (reviewed, Kerodon 02WS) and the parent's step 6 use (X*∂Δ^r over g with a q-final nullary apex); the item is not a restatement of a parent clause. Step 1: the injective inclusion and the relative cell filtration come from the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells (SSet.relativeCellComplexOfMono, Skeleton.lean:428-446). Step 2 (elementary): a nondegenerate simplex outside A is σ*Δ^r with d>=-1, so n>=r>0 and its last vertex is r, the apex a(r). Step 3: the boundary criterion applies cell by cell and gives both equalities. Step 4: the union over the ℕ-indexed filtration. Edge cases checked: K=∅ with r=1 (π0-surjectivity), K=Δ^0 with r=1 (A=Λ^2_0, two new cells), p=id, and D=Δ^0. Duplicate search with rg over dag/nodes: relative-limit-join-boundary, operadic-active-cone-boundary, simplex-join-attachment and cbc-terminal-boundary-extension all state different things. The route stays in sk-prop-sf-biduality-general and no tool_uses are needed. HA 3.1.2.3 and Kerodon are not in literature/, so I could not check them at the cited place; the proof is marked agent-written with WANTED recorded. No SGA source. Not a target node. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeFinalApexJoinBoundary",
+  "declaration": "SSet.Enhanced.relative_final_apex_join_boundary",
+  "file": "lean/Sheaf/CategoryTheory/RelativeFinalApexJoinBoundary.lean",
+  "statement": "theorem relative_final_apex_join_boundary {K C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (p : C ⟶ D) [InnerFibration p] : ∀ (n : ℕ) (a : orderedJoinFunctor.obj (K, (∂Δ[n + 1] : SSet.{u})) ⟶ C) (b : orderedJoinFunctor.obj (K, (Δ[n + 1] : SSet.{u})) ⟶ D), orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (𝟙 K) (SSet.boundary (n + 1)).ι) ≫ b = a ≫ p → IsRelativeFinal p ((SSet.yonedaEquiv.symm (stdSimplex.obj₀Equiv.symm (Fin.last n)) ≫ boundary.ι (0 : Fin (n + 2)) ≫ orderedJoinInr K (∂Δ[n + 1] : SSet.{u}) ≫ a).app _ (stdSimplex.obj₀Equiv.symm 0)) → ∃ h : orderedJoinFunctor.obj (K, (Δ[n + 1] : SSet.{u})) ⟶ C, orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (𝟙 K) (SSet.boundary (n + 1)).ι) ≫ h = a ∧ h ≫ p = b",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b50ef6f57",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: inner fibration p of quasicategories; any K including the empty one; r=n+1 so exactly the positive dimensions; exact equation pa = b on K⋆∂Δ^r; IsRelativeFinal is the dependency's right-pinched Map(z,x) predicate; the apex a(r) is read through boundary.ι 0 at Fin.last n, correct also for r=1 and the same reading as the dependency's final clause; existential h with both exact equations. No extra hypotheses, one universe u, all variables bound, lean.statement verbatim. The commit only adds the node's lean field. Report has Worker report and Second reading by NN. Docstrings cite the source and blueprint and carry the four proof steps; proof is sorry only; no hollow definitions. No duplicates: relative_limit_join_boundary and the operadic join-boundary theorem state different things. nt_compile --json: rc 0, no diagnostics, 3.2 s; a control run with a deliberate error confirmed errors are shown. Not blocking: the second reading was done by the same group, and the report has one garbled phrase."
  }
 }

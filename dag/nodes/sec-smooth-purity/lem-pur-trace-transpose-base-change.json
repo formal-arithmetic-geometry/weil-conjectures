@@ -185,5 +185,31 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-c8cc032ee (reviewer sub-agent of L); spot-checked: Reviewed the item, all four proof steps, every cited node statement, the unit/chapter route, current and master blueprint sources, exchange/adjunction definitions, and Stacks Tags 0037–0038. The counit-defined base-change morphism, finite constant coefficient category, exchange naturality, composition order, and Hom-bijection uniqueness all check. Identity, zero, empty-source, and noninvertible-B cases reduce correctly. No new nodes, duplicates, circularity, weakened hypotheses, or SGA citations; review.md records the detailed checks and tool uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceTransposeBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.purityTraceTranspose_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.purityTracePullbackComparison",
+   "AlgebraicGeometry.ProEtale.purityTraceTranspose",
+   "AlgebraicGeometry.ProEtale.purityTracePullbackOrigin",
+   "AlgebraicGeometry.ProEtale.purityTraceDualizingBaseChange",
+   "AlgebraicGeometry.ProEtale.purityTraceTranspose_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/TraceTransposeBaseChange.lean",
+  "statement": "theorem purityTraceTranspose_baseChange (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [X'.Over (Spec (.of P.field.k))] [Y'.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] [IsSeparated (X' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))] [QuasiCompact (Y' ↘ Spec (.of P.field.k))] [IsSeparated (Y' ↘ Spec (.of P.field.k))] (f : X ⟶ Y) (f' : X' ⟶ Y') (a : X' ⟶ X) (b : Y' ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [f'.IsOver (Spec (.of P.field.k))] [a.IsOver (Spec (.of P.field.k))] [b.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback a f' f b) : letI := (P.comparedCompactification f (Y ↘ Spec (.of P.field.k))).hasCompactification letI := ((HasCompactification.compactification f).ofIsPullback sq).hasCompactification letI : QuasiCompact f' := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance ∀ (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (_hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} P.Coefficient) X L) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (e : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj K ≅ L) (t : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) f).obj K ⟶ 𝟙_ _) (t' : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) f').obj ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) a).leftDerivedFunctor.obj K) ⟶ 𝟙_ _), (Etale.rightDerivedLowerShriekBaseChangeMap P.Coefficient sq).app K ≫ t' = (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.map t ≫ (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} P.Coefficient) b).hom → purityTraceTranspose P f' ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) a).leftDerivedFunctor.obj K) ((sfFixedDerivedPullback P.Ring a).obj L) (purityTracePullbackOrigin P a K L e) t' = (sfFixedDerivedPullback P.Ring a).map (purityTraceTranspose P f K L e t) ≫ purityTraceDualizingBaseChange P sq",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical comparison coordinates recorded by def-pur-co-smoothness. Retains every original pro-etale L and every isomorphism from every etale representative; traces use the bijective canonical coordinate Hom maps. The conclusion is on a^*L, not merely on a chosen representative. B is the specified counit mate, with the canonical pullback and coefficient-unit comparisons. No smoothness, Tate identification, finite Tor condition, invertibility of B, or ambient pro-etale adjunction is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1496c786",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: setting, four schemes, morphism properties, unrestricted b, Cartesian sq, the recorded comparedDualizing objects with the dependency's own compactification bindings, the étale exchange (invertible for every input), B as the actual mate of the inverse exchange plus the unit comparison with no IsIso B assumed, traces in the dependency's étale coordinates, hypothesis and conclusion P' = B ∘ La^*P in the right order. Both sides reduce by naturality of the pullback comparison to the node's four-step étale calculation, so the statement is true, neither weaker nor stronger. Edge cases covered (identity square, zero trace, L=0, empty schemes, n=1, non-invertible B, arbitrary representatives); universes consistent. Gates: the four helper defs have real data, the only sorry is the theorem, docstrings carry source place, blueprint id and the four proof steps, the node changed only in lean, lean.statement matches the file exactly, longest line 98, no pro-etale substitute, no global build or live write. nt_compile.py on the snapshot: exit 0, no diagnostics, twice (11.2 s and 10.6 s). Notes, not blocking: the two proof imports for thm-cbc-finite-level-proetale and thm-sf-ambient-adjoint-class are omitted because of a documented duplicate-declaration collision between library trees; the second-reading section is brief but names each clause checked and its one change."
  }
 }

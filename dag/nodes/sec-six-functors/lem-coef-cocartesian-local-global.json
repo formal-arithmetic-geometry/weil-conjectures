@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-categorical-pattern-fibrancy"
+  "def-coef-categorical-pattern-fibrancy",
+  "def-coef-symmetric-operadic-approximation"
  ],
  "proof": [
   {
@@ -222,5 +223,24 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4930b362e (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, six steps, no new nodes. Also read the full statements of all six cited nodes, the parent lem-coef-pattern-fibered-edge-detection and unit sk-prop-sf-biduality-general. Sources were not archived in literature/, so I fetched the PDFs and read them at the cited places. HTT Remark 2.4.2.13 is the one-lift local-implies-global comparison (cartesian form; the item is its opposite with a prescribed source), using Prop 2.4.1.5/2.4.1.7, Cor 2.4.1.6 and Rem 2.4.1.9. HA Lemma B.2.4 step (a), pp.1483-1484, identifies the markings with locally coCartesian edges, matching the item's final clause. No SGA is used. Step 1 is elementary: the pullback is degreewise, r is inner, E_a and E_c are quasicategories, and global implies local. Step 2: the outer-horn lemma makes equivalences cocartesian, and a fibre equivalence stays an equivalence in E. Step 3: composition-initiality applies to r (hypotheses from Step 1); the two initial lifts give the triangle (v,h,u) over s_1a with h an equivalence in E_d. Step 4: the composition clause with v as first edge gives u cocartesian. Step 5: 1_x is cocartesian; comparing 1_x with u gives a triangle inside E_c, and mapping-composition gives [u]=[h], so u is an equivalence in E_c. Step 6 uses only pattern conditions (i)-(ii) and the fact that S contains the degenerate edges. Small cases checked: E=F x C, base Delta^0, degenerate edge with distinct vertices, empty fibres. No duplicate found by rg across the DAG. proof_deps equals the union of step uses and there is no cycle. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift, a generic simplicial lemma that the same-unit initiality node already uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianLocalGlobal",
+  "declaration": "SSet.Enhanced.cocartesian_local_global",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianLocalGlobal.lean",
+  "statement": "theorem cocartesian_local_global : (∀ {E C : SSet.{u}} [Quasicategory E] [Quasicategory C] (p : E ⟶ C) (_h_inner : InnerFibration p) (u : E _⦋1⦌), (∃ v : E _⦋1⦌, E.δ 1 v = E.δ 1 u ∧ p.app _ v = p.app _ u ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm v)) → (IsLocallyOperadicCocartesian p (SSet.yonedaEquiv.symm u) ↔ IsCocartesianEdge p (SSet.yonedaEquiv.symm u))) ∧ (∀ {E C : SSet.{u}} [Quasicategory E] [Quasicategory C] (p : E ⟶ C) (_h_inner : InnerFibration p) (c : C _⦋0⦌) (u : (fiber p c) _⦋1⦌), (IsLocallyOperadicCocartesian p (SSet.yonedaEquiv.symm u ≫ pullback.snd (SSet.const (X := Δ[0]) c) p) ↔ IsEquivalenceEdge (fiber p c) u) ∧ (IsCocartesianEdge p (SSet.yonedaEquiv.symm u ≫ pullback.snd (SSet.const (X := Δ[0]) c) p) ↔ IsEquivalenceEdge (fiber p c) u)) ∧ (∀ (P : CategoricalPattern.{u}) (X : CategoricalPattern.Object P), IsCategoricalPatternFibered P X → (∀ e : X.underlying.underlying _⦋1⦌, e ∈ X.underlying.marking ↔ IsLocallyOperadicCocartesian X.map (SSet.yonedaEquiv.symm e) ∧ X.map.app _ e ∈ P.marked) ∧ (∀ (c : P.carrier _⦋0⦌) (e : (fiber X.map c) _⦋1⦌), (pullback.snd (SSet.const (X := Δ[0]) c) X.map).app _ e ∈ X.underlying.marking ↔ IsEquivalenceEdge (fiber X.map c) e))",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the unrestricted IsLocallyOperadicCocartesian helper from the landed def-coef-symmetric-operadic-approximation node; stmt_deps gains that owning node. All three clauses, including strict-fibre equivalences and both pattern conclusions, are in one theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-169a9e2d0",
+  "group": "Q155",
+  "result": "pass",
+  "note": "All three parts of SSet.Enhanced.cocartesian_local_global match the node and the dependency definitions: local iff global given one lift with the same source and base edge; over an identity edge both iff equivalence in the strict fibre; for a fully scaled pattern-fibered object, marking = locally cocartesian edges over marked base edges, and over identities = fibre equivalences. The reused IsLocallyOperadicCocartesian helper is exactly the node's local notion with no operadic hypothesis. The added stmt_dep def-coef-symmetric-operadic-approximation is a landed node and creates no cycle (script check). Node record changed only in lean and that stmt_dep; the recorded statement matches the file verbatim. One universe, every variable bound, no definitions, a single sorry, source and blueprint docstrings with the six proof steps, and the report has both required sections. nt_compile.py --json against the side overlay: exit code 0, no errors or warnings. No findings."
  }
 }

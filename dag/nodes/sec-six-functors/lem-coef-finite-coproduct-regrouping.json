@@ -10,7 +10,9 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-parametric-universal-arrows"
  ],
  "proof": [
   {
@@ -242,5 +244,34 @@
   "group": "Q146",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-c68997d92 (reviewer sub-agent of L); spot-checked: I read the whole item: all six steps and the full statement of every cited node. I also read lem-coef-infinity-pinch-comparison, def-coef-infinity-category-of-spaces, all ten steps of the parent envelope (step 8 is the only user) and the unit. The statement is the standard regrouping/cancellation of coproducts in an infinity-category, the colimit dual of Kerodon 7.6.1.23, and it is true. Kerodon is not archived and I did not fetch it, so I checked the statement mathematically. I tested S empty (both sides say z is initial), a single block, some and all blocks empty, and ordinary nerves. Step 1 is correct: Fun(I,E) is the product of copies of E and Map is the product of coordinate Maps, degreewise. Step 3 is a valid specialization of homotopy-pullback invariance with W=W'=* and c=id, where P=UxV, followed by finite induction; the elementary mark is acceptable. Step 4 takes associativity at the vertex (v_s,u_sr), the 2-simplex class equation and class-dependence of precomposition from mapping-composition, and gives a homotopy of whole-space maps. Step 5's Hom-bifunctor edges, universe choice and products of functors through N_hc(Kan) are sound. Step 6's 2-out-of-3 and homotopy invariance are correct. No other colimits are used and there are no new nodes. My rg search over dag/nodes found no duplicate; lem-coef-infinity-limits-products-pullbacks and the labelled-coproduct node state different things. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus: it is a generic cocone criterion that no node of this unit gives, and other nodes of the unit cite it the same way. No SGA source is used and the statement is unchanged. FIX: Step 1 silently identified the cone-calculus map g -> Delta_I(g) o lambda with coordinatewise precomposition. I added one sentence deriving this from the characterization in lem-coef-infinity-mapping-composition: V, theta, ell and the right-pinch maps j are all defined by restriction or precomposition, so for a product quasicategory they are products. I added that node to Step 1's uses; it was already in proof_deps. The corrected whole file is fixes/dag/nodes/sec-six-functors/lem-coef-finite-coproduct-regrouping.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoproductRegrouping",
+  "declaration": "SSet.Enhanced.finite_coproduct_regrouping",
+  "declarations": [
+   "SSet.Enhanced.regroupingDiagram",
+   "SSet.Enhanced.regroupingCylinder",
+   "SSet.Enhanced.regroupingCocone",
+   "SSet.Enhanced.regroupingRestriction",
+   "SSet.Enhanced.regroupingBlockRestriction",
+   "SSet.Enhanced.regroupingProductMap",
+   "SSet.Enhanced.RegroupingBlockNaturality",
+   "SSet.Enhanced.finite_coproduct_regrouping"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoproductRegrouping.lean",
+  "statement": "theorem finite_coproduct_regrouping (E : SSet.{u}) [Quasicategory E] (S : Type u) [Finite S] (R : S → Type u) [∀ s, Finite (R s)] (x : ∀ s, R s → E _⦋0⦌) (y : S → E _⦋0⦌) (z : E _⦋0⦌) (u : ∀ s r, (mappingSpace E (x s r) (y s)) _⦋0⦌) (hu : ∀ s, IsColimiting (regroupingDiagram (x s)) (regroupingCocone (u s))) (v : ∀ s, (mappingSpace E (y s) z) _⦋0⦌) (w : ∀ p : Sigma R, (mappingSpace E (x p.1 p.2) z) _⦋0⦌) (triangles : ∀ s, R s → E _⦋2⦌) (htriangles : ∀ s r, E.δ 2 (triangles s r) = (u s r).1 ∧ E.δ 0 (triangles s r) = (v s).1 ∧ E.δ 1 (triangles s r) = (w ⟨s, r⟩).1) : (IsColimiting (regroupingDiagram y) (regroupingCocone v) ↔ IsColimiting (regroupingDiagram (fun p : Sigma R ↦ x p.1 p.2)) (regroupingCocone w)) ∧ (∀ t : E _⦋0⦌, Nonempty (SSet.Homotopy (regroupingRestriction v t ≫ regroupingBlockRestriction u t) (regroupingRestriction w t ≫ regroupingProductMap x t)) ∧ IsWeakHomotopyEquivalence (regroupingBlockRestriction u t)) ∧ ∀ s, RegroupingBlockNaturality (u s)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Arbitrary quasicategory and finite discrete families, including empty ones. The supplied legs give actual coherent cocones; the theorem states cancellation, the whole right-pinched mapping-space triangle, and coherent block naturality using fixed-leg spans in every simplicial parameter. No new nodes or postponed helper theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dda7d512",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the node, all three stmt_deps' Lean (EnhancedDiagramsCones, ParametricUniversalArrows in full, canonicalHomComposition and MappingCompositionStatement) and the only citer, the envelope. Every clause matches with no stronger hypothesis: actual cocones built from the given legs (endpoints checked against coconeCategory, outgoing=false), hu on the block cocones, triangle faces δ2=u δ0=v δ1=w, the IsColimiting iff over Sigma R, Nonempty SSet.Homotopy of whole-space maps through the canonical sigma-to-iterated reindexing, IsWeakHomotopyEquivalence of β for every t, and naturality via the UniversalArrowAt parametric form used by the landed envelope. Empty S, empty or all-empty blocks, singleton families and empty E checked; one universe, nothing unbound. No hollow definitions; the only sorry is the main theorem; docstrings carry the source place and blueprint id; the main docstring follows all six steps. Node diff is only lean and stmt_deps (both added deps landed, no cycle); lean.statement verbatim; all 8 declarations listed. nt_compile --json at the real module path: rc=0 in 8.6 s, no diagnostics; error-printing confirmed with a control copy. Observations only: the envelope's discrete shape differs (nerve of discrete category vs constant simplicial set), needing a stage-3 adapter; the third naturality conjunct does not depend on the legs, as in the landed precedent."
  }
 }

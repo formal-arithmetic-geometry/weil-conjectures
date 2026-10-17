@@ -29,7 +29,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening",
-  "lem-coef-infinity-functor-pushout"
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-ind-presheaf-fibration-accessibility"
  ],
  "proof": [
   {
@@ -185,5 +186,37 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e856adabf (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, every cited node's statement, the only citer (lem-coef-localization-kan-cartesian-fibration, steps 3 and 6) and the unit record. HTT §3.3.4 and Gepner–Haugseng are not archived in literature/, so I checked against HTT 3.3.4.1–3.3.4.3 from memory. The proof is HTT's argument, Map(colim chi, C) = Map(chi, Delta C) = Map_/S(X^nat, (S x C)^nat) = Map^sharp(X^nat, C^nat), written with DAG nodes; proof_origin agent is correct. The statement is unchanged and true. Steps 2–5 check out: marked maps (p,h) into B x T are an identity of sharp complexes; straightening sends B x T to the constant diagram by base change; the cbc cocone criterion and contractible initial objects give k_p and ell_p with the colimit legs; marked-product tests prove the whole functor-category equivalence, and I checked the edge factorization through (a,x)->(a,y)->(a',y) and the Yoneda two-sided inverse; functorial replacement and base-change naturality give c_u ell_{p_u} = ell_p r. Small cases checked: B empty, B a point, B = Delta^1 (gives F(0), so the variance is right), constant F. One C4/C1 fault, fixed in fixes/: steps 1 and 2 used that the Cartesian edges of T -> Delta^0 are exactly the equivalences (Joyal), and that Map^sharp(-, T^nat) is the core of Map^flat, without citing a node. I added lem-coef-marked-anodyne-lifting-calculus (core statement; C^nat has the RLP against marked-anodyne maps) together with the relative RLP criterion over Delta^0, and regenerated uses and proof_deps. There are no new nodes and no cycles; I checked the closure of every proof_dep, including the added one. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) as a black box for the generic cone and pointwise-equivalence calculus. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianColimitLocalization",
+  "declaration": "SSet.Enhanced.cartesian_colimit_localization",
+  "declarations": [
+   "SSet.Enhanced.CatInfinityComparison",
+   "SSet.Enhanced.CartesianClassified",
+   "SSet.Enhanced.cartesianClassificationFiber",
+   "SSet.Enhanced.CatInfinityColimit",
+   "SSet.Enhanced.catInfinityColimitApex",
+   "SSet.Enhanced.cartesianFunctorSubcomplex",
+   "SSet.Enhanced.cartesianFunctorCategory",
+   "SSet.Enhanced.CartesianLocalization",
+   "SSet.Enhanced.CatInfinityColimitComparison",
+   "SSet.Enhanced.CartesianColimitLocalizationStatement",
+   "SSet.Enhanced.cartesian_colimit_localization"
+  ],
+  "existing": false,
+  "by": "Q33",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/CategoryTheory/CartesianColimitLocalization.lean",
+  "statement": "theorem cartesian_colimit_localization : Nonempty CartesianColimitLocalizationStatement.{u, v}",
+  "branch": "newtargets-dag",
+  "note": "Repair e37fc30e46db: fiber restrictions are naturally equivalent to the specified classification identification followed by the actual cocone leg; pullback maps satisfy the identical localization predicate; the comparison is induced by a morphism from the initial cocone into the entire restricted cocone; base change is a natural equivalence. The added landed dependency owns the coherent section classification. Its data interface is exposed by the companion dependency repair. Targets range over arbitrary enlarged universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84841495e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery fixes all six e37fc30e46db return findings: ell is pinned by the actual cocone leg (leg_eq) and a natural equivalence with the classification fiber map (fiber_legs); the pullback's ell satisfies the same conditions; c_u is the apex edge of a coconeCategory morphism from the initial cocone to the fully determined restricted cocone; base change is AreNaturallyEquivalent, not an equation; stmt_deps adds lem-coef-ind-presheaf-fibration-accessibility (closure of 910 nodes checked, acyclic); every helper has source/blueprint docstrings; targets T range over SSet.{max u v}. The dependency module change is a pure §1(B) addition of IndCartesianClassificationData, the data form of the published existential (diff verified, published lines unchanged). No hollow definitions, no extra hypotheses, only the item theorem is sorry, lean.statement verbatim. Edge cases checked: empty base, a point, Δ¹ variance, identity u, empty fibers. nt_compile clean for both files (12.2 s and 9.5 s, no errors or warnings)."
  }
 }

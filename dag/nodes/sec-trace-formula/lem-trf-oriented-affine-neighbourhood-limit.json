@@ -281,5 +281,45 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-a5312d3f2 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all ten steps, cited statements, sources, route, and edge cases. Corrected step 10’s mismatched source document in the whole JSON under fixes/dag/nodes/. Statements and targets unchanged; no new nodes, circularity, or mathematical gaps found. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedAffineNeighbourhoodLimit",
+  "declaration": "AlgebraicGeometry.Scheme.orientedAffineNeighbourhoodLimit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.OrientedEtaleTriples",
+   "AlgebraicGeometry.Scheme.orientedEtaleTopology",
+   "AlgebraicGeometry.Scheme.orientedEtaleAssociated",
+   "AlgebraicGeometry.Scheme.orientedStrictLeg",
+   "AlgebraicGeometry.Scheme.orientedStrictMapCone",
+   "AlgebraicGeometry.Scheme.orientedStrictMap",
+   "AlgebraicGeometry.Scheme.orientedStrictPointCone",
+   "AlgebraicGeometry.Scheme.orientedStrictPoint",
+   "AlgebraicGeometry.Scheme.orientedTripleLeft",
+   "AlgebraicGeometry.Scheme.orientedTripleRight",
+   "AlgebraicGeometry.Scheme.orientedMiddleLift",
+   "AlgebraicGeometry.Scheme.OrientedCompatibleLifts",
+   "AlgebraicGeometry.Scheme.orientedEtaleSections",
+   "AlgebraicGeometry.Scheme.OrientedPointCorrespondence",
+   "AlgebraicGeometry.Scheme.orientedFibreProductDiagram",
+   "AlgebraicGeometry.Scheme.orientedAffineProperty",
+   "AlgebraicGeometry.Scheme.orientedAffineDiagram",
+   "AlgebraicGeometry.Scheme.orientedMilnorTube",
+   "AlgebraicGeometry.Scheme.orientedAffineNeighbourhoodLimit"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedAffineNeighbourhoodLimit.lean",
+  "statement": "theorem orientedAffineNeighbourhoodLimit {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) {Ωx Ωy : Type u} [Field Ωx] [IsAlgClosed Ωx] [Field Ωy] [IsAlgClosed Ωy] (x : Spec (.of Ωx) ⟶ X) (y : Spec (.of Ωy) ⟶ Y) (c : strictLocalization (y ≫ g) ⟶ strictLocalization (x ≫ f)) (hc : c ≫ strictLocalizationToBase (x ≫ f) = strictLocalizationToBase (y ≫ g)) (z : GeometricMorphism (Type (u + 1)) (Sheaf (orientedEtaleTopology f g) (Type (u + 1)))) (e : OrientedPointCorrespondence x y c z) : (orientedAffineProperty z).ι.Initial ∧ IsCofiltered (orientedAffineProperty z).FullSubcategory ∧ EssentiallySmall.{u + 1} (orientedAffineProperty z).FullSubcategory ∧ (∀ n : (orientedAffineProperty z).FullSubcategory, IsAffine ((orientedAffineDiagram z).obj n)) ∧ (∀ {n n' : (orientedAffineProperty z).FullSubcategory} (h : n ⟶ n'), IsAffineHom ((orientedAffineDiagram z).map h)) ∧ ∃ (q : orientedAffineDiagram z ⟶ (Functor.const (orientedAffineProperty z).FullSubcategory).obj (pullback f g)), (∀ n, Etale (q.app n)) ∧ (∀ n, q.app n ≫ pullback.fst f g = pullback.fst (orientedTripleLeft n.obj.1) (orientedTripleRight n.obj.1) ≫ n.obj.1.left.1.hom) ∧ (∀ n, q.app n ≫ pullback.snd f g = pullback.snd (orientedTripleLeft n.obj.1) (orientedTripleRight n.obj.1) ≫ n.obj.1.left.2.hom) ∧ ∃ (l : Cone (orientedAffineDiagram z)) (i : l.pt ≅ orientedMilnorTube f g x y c), Nonempty (IsLimit l) ∧ (∀ n, l.π.app n ≫ pullback.fst (orientedTripleLeft n.obj.1) (orientedTripleRight n.obj.1) = i.hom ≫ pullback.fst (orientedStrictMap f x) (orientedStrictMap g y ≫ c) ≫ orientedStrictLeg x ⟨n.obj.1.left.1, (e.equiv n.obj.1 n.obj.2).down.val.1⟩) ∧ (∀ n, l.π.app n ≫ pullback.snd (orientedTripleLeft n.obj.1) (orientedTripleRight n.obj.1) = i.hom ≫ pullback.snd (orientedStrictMap f x) (orientedStrictMap g y ≫ c) ≫ orientedStrictLeg y ⟨n.obj.1.left.2, (e.equiv n.obj.1 n.obj.2).down.val.2⟩) ∧ (∀ n, l.π.app n ≫ q.app n ≫ pullback.fst f g = i.hom ≫ pullback.fst (orientedStrictMap f x) (orientedStrictMap g y ≫ c) ≫ strictLocalizationToBase x) ∧ (∀ n, l.π.app n ≫ q.app n ≫ pullback.snd f g = i.hom ≫ pullback.snd (orientedStrictMap f x) (orientedStrictMap g y ≫ c) ≫ strictLocalizationToBase y)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-df7a8e3f0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df7a8e3f0",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Item statement checked clause by clause against node and Illusie §1.3 / ILO XI 1.6, 1.8 and is correct: no extra hypotheses, specialization direction correct, independent site universes, canonical strict-local maps, no nonemptiness asserted; it is unchanged. Defect: the §1(B) record of lem-trf-oriented-product-universal pointed to universalWithLargeSites := @universal, the small-site theorem under a new name, so the repair stated nothing for the large étale sites. Fix: fixes/OrientedProductLargeSites.lean states the genuine universe-general universal theorem (sorry, ten-step plan; equals universal when v = w; checked to apply to the étale sites with sheaves in Type (u+1)) plus largeAssociated, first/second and their arrows, middle, LargeHasLiftFormula; fixes/OrientedAffineNeighbourhoodLimit.lean only makes orientedEtaleAssociated reuse largeAssociated; fixes/<item>.report.md updated. All files compile clean with nt_compile.py; check_lean_text and check_report pass. Lead: amend the outdated last sentence of the dependency record's note (still calls universalWithLargeSites a transparent abbreviation), which fix files cannot edit."
  }
 }

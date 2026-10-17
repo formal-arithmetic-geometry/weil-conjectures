@@ -182,5 +182,27 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-2bdf2ad6a (reviewer sub-agent of L); spot-checked: I read the item, the full statements of the three cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-marked-point-cartesian-model, lem-coef-infinity-mapping-composition) and how the parent lem-coef-marked-cone-generator-calculations uses the item in step 11. The statement is unchanged and true. I tested it on a nerve example (A=Δ^1, X=Δ^1×Δ^1, Z=N(J×[1])), a degenerate g, a degenerate e and empty A or U. Step 1: H=μ∘(g∘min, e∘pr2) is simplicial, with endpoints a_0^*e at r=0 and g^*e at r=1. Step 2 uses only the marking clauses of the marked-model statement (degenerate edges are marked, products are marked coordinatewise, A^♯), so v=μ(g,const_{y1}) is in E_X. Step 3: with j=((0,0,1),(0,1,1)), the edges 01, 12 and 02 are a_0^*e, v and g^*e. I checked these. The triangle relation [v][u]=[w] and the invertible-class criterion both appear verbatim in the statement of the mapping-composition node, which is in the same unit, so no tool use is needed. The cancellation in hZ is correct in both directions. Step 4 is elementary. proof_deps equals the union of uses. The delivery has no new nodes. A search of the DAG for duplicates found none (the nearest is the edge-triangle-presentation node, which is a different statement). The four kinds of Mathlib search are recorded. HTT 3.2.1.11 is not archived, so I could not read it at the cited place. The proof is marked agent-written and self-contained, and I verified it line by line. This is not a target node, so the base-change check does not apply. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedActionEdgeComparison",
+  "declaration": "SSet.Marked.marked_action_edge_comparison",
+  "declarations": [
+   "SSet.Marked.intervalDiagonal",
+   "SSet.Marked.marked_action_edge_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedActionEdgeComparison.lean",
+  "statement": "theorem marked_action_edge_comparison (A : SSet.{u}) (Y X : Marked.{u}) (μ : product (sharp A) Y ⟶ X) (Z : SSet.{u}) [Quasicategory Z] (h : X.underlying ⟶ Z) (hh : ∀ e : X.underlying _⦋1⦌, e ∈ X.marking → Enhanced.IsEquivalenceEdge Z (h.app _ e)) : (∀ (e : (Δ[1] : SSet.{u}) ⟶ Y.underlying) (g : (Δ[1] : SSet.{u}) ⟶ A), (Enhanced.IsEquivalenceEdge Z (h.app _ (SSet.yonedaEquiv (intervalDiagonal ≫ (g ⊗ₘ e) ≫ μ.val)))) ↔ (Enhanced.IsEquivalenceEdge Z (h.app _ (SSet.yonedaEquiv (intervalDiagonal ≫ ((SSet.const (X := (Δ[1] : SSet.{u})) (g.app _ (stdSimplex.obj₀Equiv.symm 0)) ⊗ₘ e)) ≫ μ.val))))) ∧ (∀ (e : (Δ[1] : SSet.{u}) ⟶ Y.underlying), (∀ a : A _⦋0⦌, Enhanced.IsEquivalenceEdge Z (h.app _ (SSet.yonedaEquiv (intervalDiagonal ≫ ((SSet.const (X := (Δ[1] : SSet.{u})) a ⊗ₘ e)) ≫ μ.val)))) → ∀ (g : (Δ[1] : SSet.{u}) ⟶ A), Enhanced.IsEquivalenceEdge Z (h.app _ (SSet.yonedaEquiv (intervalDiagonal ≫ (g ⊗ₘ e) ≫ μ.val))))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3d3c3038",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: A:SSet.{u}; Y X:Marked; μ : product (sharp A) Y ⟶ X; Z with [Quasicategory]; h with hh on X.marking; iff between g^*e = diag≫(g⊗e)≫μ and const_{g(0)}^*e; vertexwise-to-edgewise clause with e fixed. Checked against Marked/sharp/product (MarkedPointCartesianModel.lean:38-79) and IsEquivalenceEdge (EnhancedDiagramsCones.lean:43). No extra assumptions, single universe u, no unbound variables. intervalDiagonal is a real diagonal helper with source and blueprint docstrings. lean.statement verbatim in the file. Proof is sorry. Edge cases: empty A, degenerate g, unmarked e, empty U. nt_compile.py on the snapshot: 3.0 s, rc 0, no errors or warnings. Cosmetic only: the report does not record its compile output."
  }
 }

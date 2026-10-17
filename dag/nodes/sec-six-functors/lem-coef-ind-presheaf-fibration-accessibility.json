@@ -300,7 +300,7 @@
   "file": "lean/Sheaf/CategoryTheory/IndPresheafFibrationAccessibility.lean",
   "statement": "theorem ind_presheaf_fibration_accessibility (A : SSet.{u}) [Quasicategory A] (κ : Cardinal.{u}) (hκ : κ.IsRegular) (F₀ : SSet.uliftFunctor.{u + 1, u}.obj A ⟶ compactRex κ) : ∃ hP : Quasicategory (CategoryTheory.Spaces.infinityPresheaves A), ∃ H : (indExtensionBase A).op ⟶ CatInfinity.{u + 1}, Nonempty (IndDiagramData F₀ H) ∧ ∃ (G : (indExtensionPresheaves A).op ⟶ CatInfinity.{u + 1}) (ε : ((ihom (indExtensionBase A).op).obj CatInfinity.{u + 1}) _⦋1⦌), IndLimitExtension H G ε ∧ IndExtensionUnique H G ε ∧ IndElementsFormula H G ε ∧ ∀ (E : SSet.{u + 1}) (hE : Quasicategory E) (q : E ⟶ CategoryTheory.Spaces.infinityPresheaves A), @cartesianFibration _ _ q hE hP → IndCartesianClassification q G → @IsAccessibleIndFibration E _ hE q",
   "branch": "newtargets-dag",
-  "by": "Q128",
+  "by": "Q33",
   "date": "2026-10-17",
   "existing": false,
   "declarations": [
@@ -319,18 +319,19 @@
    "SSet.Enhanced.indCartesianSections",
    "SSet.Enhanced.indSectionInclusion",
    "SSet.Enhanced.IndCartesianClassification",
+   "SSet.Enhanced.IndCartesianClassificationData",
    "SSet.Enhanced.IsAccessibleIndFibration",
    "SSet.Enhanced.ind_presheaf_fibration_accessibility"
   ],
-  "note": "Uses the published Ind, Cat^{rex}, coherent-adjunction, presheaf/Yoneda, cone and fibration notions. The input cardinal is any infinite regular cardinal, including aleph_0. H and its prescribed Ind models are concluded, not assumed. The extension retains its actual restriction equivalence; uniqueness retains its triangle; the slice formula fixes the canonical prism and pasting; classification retains the entire Cartesian section diagram over the simplex category. Small means u throughout; the containing universes u+1 and u+2 implement the stated size convention. Replaces the earlier saved packet, whose True-valued predicates and arbitrary presheaf base did not state the node. Second reading reuses published cylinder/edge decoding, standard interval reversal, and Cartesian sections of the pulled-back fibration; no duplicate definitions of these notions remain.",
+  "note": "Section 1(B): the published classification predicate hides its section diagram and coherent comparison in Prop, so it cannot supply the specified fiber identification in a data-bearing classification hypothesis. Retain every published declaration verbatim and add IndCartesianClassificationData, exactly the witnesses of the same existential, including the actual comparison edge, its endpoints and equivalence. The original IndCartesianClassification and the accessibility theorem are unchanged.",
   "fixed_by": "NT-stage2-cc-9317cf689"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9317cf689",
-  "group": "Q128",
-  "result": "fix",
-  "note": "I read the node, all 11 stmt_deps, the module, the report and every declaration used (CompactIndRight/Model, compactRex, IsAccessible, PreservesKappaFiltered, PreservesLimitsOfShape/IsImageCone, the slice, cartesianSections, strictCoherentDiagram, last-vertex). Every clause matches the node: regular κ including aleph0; H concluded with Ind models and coherent adjunctions, right-adjoint variance checked; extension preserving u-small limits with a pinned ε; uniqueness triangle; canonical slice limit formula with face equations checked; Cartesian-section classifier with variance and universes checked; IsAccessible plus regular μ filtered preservation. No universe restriction; edge cases covered. Only lean and stmt_deps changed; the added stmt_deps are landed nodes and there is no cycle. One H4 fault: IndOppositeCocone duplicated the published Spaces.presheafOppositeCoconeMap. Fixed in fixes/IndPresheafFibrationAccessibility.lean (signature and record unchanged), with a report note in fixes/lem-coef-ind-presheaf-fibration-accessibility.report.md. Both the original and the fixed module compile clean with nt_compile (2.5 s and 2.4 s); an injected-error control confirms errors are reported."
+  "reviewer": "NT-stage2-cc-84841495e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery fixes all six e37fc30e46db return findings: ell is pinned by the actual cocone leg (leg_eq) and a natural equivalence with the classification fiber map (fiber_legs); the pullback's ell satisfies the same conditions; c_u is the apex edge of a coconeCategory morphism from the initial cocone to the fully determined restricted cocone; base change is AreNaturallyEquivalent, not an equation; stmt_deps adds lem-coef-ind-presheaf-fibration-accessibility (closure of 910 nodes checked, acyclic); every helper has source/blueprint docstrings; targets T range over SSet.{max u v}. The dependency module change is a pure §1(B) addition of IndCartesianClassificationData, the data form of the published existential (diff verified, published lines unchanged). No hollow definitions, no extra hypotheses, only the item theorem is sorry, lean.statement verbatim. Edge cases checked: empty base, a point, Δ¹ variance, identity u, empty fibers. nt_compile clean for both files (12.2 s and 9.5 s, no errors or warnings)."
  }
 }

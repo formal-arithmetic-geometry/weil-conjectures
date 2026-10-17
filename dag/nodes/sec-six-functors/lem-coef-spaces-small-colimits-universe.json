@@ -27,7 +27,10 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-kan-weak-equivalence-space-edge",
+  "lem-coef-space-transport-classification"
  ],
  "proof": [
   {
@@ -379,5 +382,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacesSmallColimitsUniverse",
+  "declaration": "CategoryTheory.Spaces.spaces_small_colimits_universe",
+  "declarations": [
+   "CategoryTheory.Spaces.transportUniverseInclusion",
+   "CategoryTheory.Spaces.TransportUniverseRepresentative",
+   "CategoryTheory.Spaces.transportUniverseConjugate",
+   "CategoryTheory.Spaces.transportUniverseDiagramMapping",
+   "CategoryTheory.Spaces.IsTransportUniverseMappingIdentification",
+   "CategoryTheory.Spaces.TransportUniverseMappingCompatibility",
+   "CategoryTheory.Spaces.spaces_small_colimits_universe"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpacesSmallColimitsUniverse.lean",
+  "statement": "theorem spaces_small_colimits_universe : (∀ (K : SSet.{u}) (p : SSet.uliftFunctor.{u + 1, u}.obj K ⟶ infinityCategory.{u}), ∃ t : (SSet.Enhanced.coconeCategory p) _⦋0⦌, SSet.Enhanced.IsColimiting p t) ∧ SSet.Enhanced.IsFullyFaithful (spaceUniverseInclusion.{u, v}) ∧ (∀ (K : SSet.{u}) (p : SSet.uliftFunctor.{max u v + 1, u}.obj K ⟶ transportSpaces.{u, max u v + 1}) (t : (SSet.Enhanced.coconeCategory p) _⦋0⦌), SSet.Enhanced.IsColimiting p t → SSet.Enhanced.IsColimiting (p ≫ transportUniverseInclusion.{u, v}) (mappedCocone transportUniverseInclusion.{u, v} p t)) ∧ (∀ A : SSet.{u}, ∃ (T : TransportClassifier.{u, max u v + 1} (SSet.uliftFunctor.{max u v + 1, u}.obj A) false) (T' : TransportClassifier.{max u v, 0} (SSet.uliftFunctor.{max u v + 1, u}.obj A) false), TransportClassificationClauses T ∧ TransportClassificationClauses T' ∧ (∀ (E : SSet.{u}) (q : E ⟶ A) (F : transportDomain (SSet.uliftFunctor.{max u v + 1, u}.obj A) false ⟶ transportSpaces.{u, max u v + 1}), rightFibration q → TransportOverEquivalence (SSet.uliftFunctor.{max u v + 1, u}.map q) (T.representative F).projection → TransportOverEquivalence (SSet.uliftFunctor.{max u v + 1, u}.map q) (T'.representative (F ≫ transportUniverseInclusion.{u, v})).projection) ∧ TransportUniverseMappingCompatibility.{u, v} (SSet.uliftFunctor.{max u v + 1, u}.obj A) T T')",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of immutable head 1bc317c0cdec: clause 3 applies IsColimiting to mappedCocone, retaining apex and whole coherent edge; clause 4 supplies compatible classifiers with the same lifted small right fibration representing F and F postcomposed with the canonical universe inclusion. TransportUniverseMappingCompatibility requires an explicit homotopy-commuting square for the classifier-induced mapping identifications, conjugating by specified inverse over-maps. Both space categories use a common auxiliary universe; the coefficient universes remain u and max u v. All six DAG proof steps are carried in the theorem docstring. Added statement dependencies are already recorded on newtargets-dag."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22e1d994e",
+  "group": "NO",
+  "result": "pass",
+  "note": "Per-file compile clean (nt_compile --json, exit code 0, 8.8 s, no errors or warnings). All faults returned at head 1bc317c0cdec are repaired. Clause 1: every U-small K, empty diagram included. Clause 2: IsFullyFaithful of the published spaceUniverseInclusion. Clause 3: IsColimiting of mappedCocone, so the whole image cocone including legs, not only the apex. Clause 4: the same lifted small right fibration q classifies F and F≫ι under classifiers T and T' that satisfy TransportClassificationClauses; the mapping-space compatibility is an explicit homotopy square whose identifications must be the classifier-induced comparisons, conjugating in the correct direction. Universes u / max u v with one shared auxiliary universe; no forced equality or extra hypothesis. Node differs from main only in lean and stmt_deps; the 3 added stmt_deps are landed nodes with Lean modules (brief-stage2 l.140) and create no cycle. lean.statement matches the file verbatim. No hollow definitions; only sorry; source/blueprint docstrings throughout; all six proof steps in the theorem docstring; report has a real worker report and second reading. Cosmetic only: a TeX line break inside the displays of docstring steps 4 and 5."
  }
 }

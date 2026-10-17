@@ -197,5 +197,34 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-cfa562a09 (reviewer sub-agent of L); spot-checked: I read the item and all eight cited nodes in full, plus the unit sk-prop-sf-biduality-general and the paragraph-2 ancestor proof in main-20261015. No new nodes and no fixes. The statement is self-contained with single-backslash TeX. It agrees with its two citers, lem-coef-labelled-spine-prism-horn-calculus and lem-coef-segal-space-inner-anodyne-locality step 5. An rg search of dag/nodes for inner-anodyne and discrete-space terms found no duplicate; lem-coef-simple-inner-anodyne-base-change only uses the class A_Delta. Small cases tested: a single horn; a horn collapsed to a point, where the pushout along an injection stays discrete; the empty family and zero-length composites; a countable chain. The report's two-point-to-point pushout counterexample correctly shows that d does not preserve arbitrary pushouts. Step 1: lem-coef-kan-quillen-right-proper gives monomorphism cofibrations and Kan fibrant objects, lem-coef-simplicial-presheaf-projective-model gives combinatorial and simplicial, and lem-coef-simplicial-model-nerve-localization gives Map(D(S),T)=prod_S T. Step 2: B_n=A_n+C because A->B is injective, and the projection T^{A_n}xT^C->T^{A_n} is a Kan fibration. So the homotopy-pullback clause on a cospan of Kan complexes, the colimit mapping-space criterion and the objectwise clause of lem-coef-infinity-yoneda-presheaf-limits give the pushout in P(Delta). Step 3: lambda is filtered; lem-coef-model-colimit-localization-comparison applies with no cofibrancy assumption on D, and lem-coef-filtered-colimit-weak-equivalences has no injectivity hypothesis. Step 4: the well-ordered chain Y_beta is correct. Step 5: d preserves retracts. proof_deps equals the union of the uses lists. Every cited statement is in the item's unit apart from definitions, so no tool_uses. No cycle. Haugseng arXiv:2311.13362 is not archived; it is WANTED and proof_origin is agent, which is correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.DiscreteInnerCellTransfer",
+  "declaration": "SSet.Segal.discrete_inner_cell_transfer",
+  "declarations": [
+   "SSet.Segal.IsSpaceWeakEquivalence",
+   "SSet.Segal.IsStableUnderSpaceWeakEquivalences",
+   "SSet.Segal.IsStableUnderHomotopyCobaseChange",
+   "SSet.Segal.IsStableUnderHomotopyTransfiniteComposition",
+   "SSet.Segal.WeaklySaturatedSpace",
+   "SSet.Segal.InnerHornCellClass",
+   "SSet.Segal.discrete_inner_cell_transfer"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/DiscreteInnerCellTransfer.lean",
+  "statement": "theorem discrete_inner_cell_transfer {K L : SSet.{u}} (f : K ⟶ L) (hf : innerAnodyneExtensions f) : InnerHornCellClass f",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Homotopical rendering of P(Delta) of def-coef-segal-presheaf-localization in the Reedy model of simplicial spaces (SSet.Segal.Space; levelwise Enhanced.IsWeakHomotopyEquivalence of def-cbc-enhanced-diagrams-cones as SSet.SegalSpace.IsReedyWeakEquivalence; Reedy cofibrations = monomorphisms): weak-equivalence invariance, strict pushouts along Reedy cofibrations as homotopy pushouts, Reedy-cofibrant transfinite representatives, and retract closure. No strict 1-category colimit claim is made. Reviewer fix: removed the tautological conjunct coefficientLocalCategory = coefficientLocalCategory from WeaklySaturatedSpace and the unused alias HomotopyConeCategory, with the two imports only they referenced.",
+  "fixed_by": "NT-stage2-cc-ab47fbf1a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab47fbf1a",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Mathematics correct: innerAnodyneExtensions equals the node's cell/retract hypothesis (Mathlib eq_retracts_transfiniteCompositions); generators are exactly the inner horns a>=2, 0<b<a; discreteSpace gives (dK)_k = constant simplicial set on K_k; the Reedy/levelwise closure conditions (weak-equivalence invariance, pushouts along cofibrations, chains of cofibrations, retracts) generate exactly Haugseng's infinity-class A_Delta (left proper model with all objects cofibrant; diagrams rectify). Edge cases (empty family, zero-length composite, identities, universe u, no unbound variables) ok. Fixed: removed the tautological conjunct coefficientLocalCategory = coefficientLocalCategory in WeaklySaturatedSpace (brief-stage2 line 91), the unused alias HomotopyConeCategory and the two imports only they used; added Source and blueprint lines to every declaration docstring and single-backslash TeX. Signature and lean.statement unchanged; record override drops HomotopyConeCategory and updates the note. nt_compile --json: delivered file and fixed file both rc=0 with no errors or warnings; a broken control copy gave rc=1."
  }
 }

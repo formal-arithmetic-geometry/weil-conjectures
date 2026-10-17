@@ -12,7 +12,9 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
   "def-weil-pbc-simplicial-set",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "def-coef-simplicial-hammock-pair",
+  "lem-coef-enriched-coend-homotopy-invariance"
  ],
  "proof": [
   {
@@ -223,5 +225,53 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-08f7c9f94 (reviewer sub-agent of L); spot-checked: I read the whole item and all six steps; no new nodes were created. Statement checked on small cases: one object with trivial mapping set (Q=X), a discrete group G (free G-simplicial set), A empty, empty values, non-Kan mapping sets. It is true as stated and nothing is weakened. Step 1: P_n=coprod_a F_aK_n(a) with the calculus node's free adjoint, correct. Step 2: I checked independently that the latching colimit of the coefficients injects onto the identity-slot locus D_n(a). The s_sigma are injective, presentations are linked by the tau with sigma_T=tau sigma, and D_n is a simplicial subset but not a summand, which is why the ordinary lem-coef-simplicial-bar-latching-decomposition cannot be cited. Step 3: degeneracies keep the final vertex and final factor, and F_a commutes with colimits, correct. Step 4: monomorphisms are Kan cofibrations (kan-quillen node), trivial fibrations are objectwise (calculus node), and the lift is transposed and assembled; the Reedy criterion on Delta^op with X empty gives Reedy cofibrancy, correct. Step 5: the cofibrancy clause of lem-coef-reedy-realization-prism, whose coequalizer agrees with the coend, correct. Step 6: the coend-to-diagonal map is well defined, its inverse is [w,1], and it commutes with internal and A-actions, correct. No cycle: no cited closure contains the item. All cited statements are in unit sk-prop-sf-biduality-general and no tool_uses are needed. lem-coef-free-bar-cell-filtration and lem-coef-simplicial-bar-projective-resolution are the ordinary-category special cases, so there is no duplicate. Dugger and HTT are not in literature/; they are marked WANTED with proof_origin agent, so the proof was checked as a self-contained agent proof. FIX: steps 1 and 5 apply the calculus node with sSet as base without citing that sSet is combinatorial simplicial. I added lem-coef-simplicial-presheaf-projective-model (same unit, does not reach the item) to step 1 and step 5 text and uses and to proof_deps, in fixes/dag/nodes/sec-six-functors/lem-coef-enriched-bar-projective-replacement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedBarProjectiveReplacement",
+  "declaration": "CategoryTheory.EnrichedFreeBar.enriched_bar_projective_replacement",
+  "declarations": [
+   "CategoryTheory.EnrichedFreeBar.Word",
+   "CategoryTheory.EnrichedFreeBar.operator",
+   "CategoryTheory.EnrichedFreeBar.operator_laws",
+   "CategoryTheory.EnrichedFreeBar.bisimplicial",
+   "CategoryTheory.EnrichedFreeBar.object",
+   "CategoryTheory.EnrichedFreeBar.postcompose",
+   "CategoryTheory.EnrichedFreeBar.postcompose_naturality",
+   "CategoryTheory.EnrichedFreeBar.action_naturality",
+   "CategoryTheory.EnrichedFreeBar.action",
+   "CategoryTheory.EnrichedFreeBar.action_laws",
+   "CategoryTheory.EnrichedFreeBar.moduleAt",
+   "CategoryTheory.EnrichedFreeBar.level",
+   "CategoryTheory.EnrichedFreeBar.outerComponent",
+   "CategoryTheory.EnrichedFreeBar.outer_naturality",
+   "CategoryTheory.EnrichedFreeBar.outerTransformation",
+   "CategoryTheory.EnrichedFreeBar.stageObject",
+   "CategoryTheory.EnrichedFreeBar.stageMap",
+   "CategoryTheory.EnrichedFreeBar.stage_laws",
+   "CategoryTheory.EnrichedFreeBar.stage",
+   "CategoryTheory.EnrichedFreeBar.diagonal",
+   "CategoryTheory.EnrichedFreeBar.coendDiagram",
+   "CategoryTheory.EnrichedFreeBar.coendLegFunction",
+   "CategoryTheory.EnrichedFreeBar.coendLeg_naturality",
+   "CategoryTheory.EnrichedFreeBar.coendLeg",
+   "CategoryTheory.EnrichedFreeBar.coendLeg_condition",
+   "CategoryTheory.EnrichedFreeBar.coendComparison",
+   "CategoryTheory.EnrichedFreeBar.enriched_bar_projective_replacement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedBarProjectiveReplacement.lean",
+  "statement": "theorem enriched_bar_projective_replacement : (∀ (A : SCat.{u}) (X : EnrichedFunctor SSet.{u} (underlying A) SSet) (b : A), IsIso (coendComparison X b)) ∧ (∃ m : HomotopicalAlgebra.ModelCategory SSet.{u}, m.categoryWithFibrations = (inferInstance : HomotopicalAlgebra.CategoryWithFibrations SSet.{u}) ∧ m.categoryWithCofibrations = (inferInstance : HomotopicalAlgebra.CategoryWithCofibrations SSet.{u}) ∧ m.categoryWithWeakEquivalences = SSet.KanQuillen.weakEquivalenceStructure ∧ ∀ (A : SCat.{u}) (X : EnrichedFunctor SSet.{u} (underlying A) SSet), EnrichedProjectivelyCofibrant m (diagonal X))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit word construction, operators, final-factor action and canonical coend comparison. All helper laws are the construction/interchange and coend clauses of this node; all postponed proofs have source/proof docstrings. Adds the landed owners of degree-category transport and the projective-cofibrancy predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbf7dcdb0",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Clause-by-clause check of the node against EnrichedBarProjectiveReplacement.lean: word sets, face/degeneracy maps (traced by hand: d0 = X-action, interior/last faces compose, degeneracies insert identities incl. at a_n), action on the last factor, diagonal (P_rX(b))_r, canonical coend map [z,a] -> P(a)z via coend.desc with IsIso at each b, and EnrichedProjectivelyCofibrant m (diagonal X) for all A, X under the pinned Kan-Quillen model (probe confirms Mathlib's scoped Quillen instances and KanQuillen.weakEquivalenceStructure). No extra hypotheses, single universe u; empty X, empty A, n=0 and non-Kan mapping spaces covered. All definitions carry real data; only sorry proofs; docstrings give source place, blueprint id and all six proof steps. lean.statement verbatim; all 27 declarations present. Added stmt_deps (hammock-pair, enriched-coend-homotopy-invariance) are landed and acyclic. No duplicate notion (only a downstream two-sided bar). nt_compile against the local side overlay: module clean in 7.7 s, no warnings. Second-reading section is the standard post-2026-10-17 note, present in 248 landed reports. Minor, no action: coend iso stated at each object b; stage not used in the main statement."
  }
 }

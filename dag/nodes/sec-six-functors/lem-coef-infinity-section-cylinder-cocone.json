@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-infinity-source-gluing",
+  "lem-coef-infinity-ordinary-pointwise-kan-extension"
  ],
  "proof": [
   {
@@ -306,5 +309,41 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-d09200c51 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, sources, and unit/chapter route. All eight steps check, including the strict-cylinder/homotopy-fiber comparison, endpoint direction, parameters, naturality, and empty shapes. No new nodes, duplicates, cycles, target changes, or repairs. Both declared generic tool uses accepted; findings written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SectionCylinderCocone",
+  "declaration": "SSet.Enhanced.SectionCylinder.section_cylinder_cocone",
+  "declarations": [
+   "SSet.Enhanced.SectionCylinder.fiberPoint",
+   "SSet.Enhanced.SectionCylinder.finalLifts",
+   "SSet.Enhanced.SectionCylinder.initial",
+   "SSet.Enhanced.SectionCylinder.arrows",
+   "SSet.Enhanced.SectionCylinder.Comparisons",
+   "SSet.Enhanced.SectionCylinder.PointComparison",
+   "SSet.Enhanced.SectionCylinder.NaturalComparisons",
+   "SSet.Enhanced.SectionCylinder.SectionClassification",
+   "SSet.Enhanced.SectionCylinder.oppositeCylinder",
+   "SSet.Enhanced.SectionCylinder.coconeCylinder",
+   "SSet.Enhanced.SectionCylinder.SectionClassifierComparison",
+   "SSet.Enhanced.SectionCylinder.ClassifierEndpointFormula",
+   "SSet.Enhanced.SectionCylinder.ClassifierEndpointCompatibility",
+   "SSet.Enhanced.SectionCylinder.Calculation",
+   "SSet.Enhanced.SectionCylinder.section_cylinder_cocone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SectionCylinderCocone.lean",
+  "statement": "theorem section_cylinder_cocone {I A : SSet.{u}} [Quasicategory I] [Quasicategory A] (q : I ⟶ A) (hq : rightFibration q) : SectionClassification q ∧ ClassifierEndpointFormula transportSpaces.{u, 0} ∧ ∃ j : ∀ (D : SSet.{u}) (d z : D _⦋0⦌), mappingSpace D d z ⟶ arrowMappingSpace D d z, (∀ (D : SSet.{u}) (d z : D _⦋0⦌), RFIsPinch d z (j D d z)) ∧ ∃ C : ∀ (K : SSet.{u}) (d : ((ihom K).obj I) _⦋0⦌) (x : I _⦋0⦌) (lam : mappingSpace ((ihom K).obj A) (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x)) _⦋0⦌), Comparisons ((ihom K).map q) d ((constantDiagrams K I).app _ x) (j _ d ((constantDiagrams K I).app _ x)) (j _ (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x))) lam, (∀ (K : SSet.{u}) (d : ((ihom K).obj I) _⦋0⦌) (x : I _⦋0⦌) (lam : mappingSpace ((ihom K).obj A) (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x)) _⦋0⦌), Calculation ((ihom K).map q) d ((constantDiagrams K I).app _ x) (j _ d ((constantDiagrams K I).app _ x)) (j _ (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x))) lam (C K d x lam) ∧ ∀ H : finalLifts ((ihom K).map q) d ((constantDiagrams K I).app _ x) (j _ (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x))) lam _⦋0⦌, ClassifierEndpointCompatibility q K d x (j _ (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x))) lam H) ∧ ∀ (K K' : SSet.{u}) (a : K' ⟶ K) (d : ((ihom K).obj I) _⦋0⦌) (x : I _⦋0⦌) (lam : mappingSpace ((ihom K).obj A) (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x)) _⦋0⦌), ∃ lam' : mappingSpace ((ihom K').obj A) (((ihom K').map q).app _ (((MonoidalClosed.pre a).app I).app _ d)) (((ihom K').map q).app _ ((constantDiagrams K' I).app _ x)) _⦋0⦌, HEq lam' ((mappingSpaceMap ((MonoidalClosed.pre a).app A) (((ihom K).map q).app _ d) (((ihom K).map q).app _ ((constantDiagrams K I).app _ x))).app _ lam) ∧ NaturalComparisons (C K d x lam) (C K' (((MonoidalClosed.pre a).app I).app _ d) x lam') ((MonoidalClosed.pre a).app I) ((MonoidalClosed.pre a).app A)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of H3/H11 returned at 972689dd7c2e: the classifier Y now classifies the pullback of q along the prescribed coconeCylinder lam; the classifier-induced normalized maps e,c take sigma to the actual H cylinder section up to the specified section path eta. The triangle has that same sigma on its two endpoint edges and Y along the reversed interval on its middle edge, so its long edge identifies initial(H) with (X lambda) composed with Delta x. Removed the proof-reflexivity conjunct and the unrelated existential point. Reuses OrdinaryKan.liftCylinder for the canonical universe comparison, with its already-landed owner added to stmt_deps. No natural-language statement correction, new node, or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e73433f4",
+  "group": "N3",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 972689dd7c2e (H3 vacuous endpoint clause, H11). ClassifierEndpointCompatibility now binds: Y via E.classifies to the classifier of pullback.snd q (coconeCylinder lam); star to Delta[0] (unit_value); sigma via path eta to the actual cylinder section of H (s = uncurried arrows.app H), with E.e tied to T.map through the nerve comparison (homotopy) and E.c fixed simplexwise by f,g; tau faces delta2 = sigma at the final end (Delta x), delta0 = Y on the reversed interval (X lambda), delta1 = sigma at the initial end (initial(H)); orientation hand-checked. The rfl tautology is removed and the constant-data probe no longer applies. Remaining clauses and edge cases (empty or non-quasicategory K, empty or disconnected fibers, free universe u) unchanged and correct. Node statement unchanged (only lean and stmt_deps differ from base); lean.statement verbatim; 15 declarations listed, no hollow data, only the item theorem is sorry, docstrings carry source and blueprint id. The 3 added stmt_deps are landed owners and a BFS from each does not reach this item. Second reading checks the new clause against step 4. nt_compile --json against the local side overlay: clean, rc=0, 14.3 s and 13.9 s, no diagnostics. Remark only: K-level vs cylinder-level comparison compatibility is left to the dependency's pullback compatibility, as the node's 'up to coherent identifications' allows."
  }
 }

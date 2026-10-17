@@ -307,5 +307,24 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-ee28266a2 (reviewer sub-agent of L); spot-checked: Full review recorded in review.md. Checked all seven steps, the new modification theorem against Lu–Zheng 4.26(2)/4.27(1), every cited statement, coefficient and comparison conventions, route, duplicates, cycles, and edge cases. Accepted all eight generic tool uses. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraitNearbyBaseChange",
+  "file": "lean/Sheaf/Paper/TraitNearbyBaseChange.lean",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.trait_nearby_base_change",
+  "statement": "theorem trait_nearby_base_change (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (m : ℕ) (hm : 1 ≤ m) (Λ : Type v) [CommRing Λ] [Finite Λ] (hmΛ : ∀ x : Λ, m • x = 0) (hm_unit : IsUnit (m : R)) (T : Scheme.{u}) (f : T ⟶ Spec (.of R)) [LocallyOfFiniteType f] [QuasiCompact f] (L : EtaleDerived T Λ) (hL : IsBounded (etaleDatum T) (Coeff Λ) L) : IsPsiGood f Λ L",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem states the trait case exactly using Mathlib IsDiscreteValuationRing, explicit finite-type morphism classes, finite commutative coefficients, m-torsion, and IsUnit (m : R) for invertibility on Spec R."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef08d9fd7",
+  "group": "Q116",
+  "result": "fix",
+  "note": "Lean matches node clause by clause: IsDiscreteValuationRing R (local PID, not a field); Spec (.of R); finite CommRing Λ in its own universe v; m≥1 with m•x=0 and IsUnit (m:R), where hm follows from hm_unit; LocallyOfFiniteType+QuasiCompact as recorded by def-weil-finite-type-morphism; L : EtaleDerived T Λ with the dependency's IsBounded; conclusion IsPsiGood f Λ L (∀ B' g, IsIso baseChange) from def-trf-oriented-nearby-cycles. No extra assumptions, no hollow definitions, proof is only sorry, docstrings give source place, blueprint tag and all 7 proof steps; lean.statement verbatim; no duplicate in lean/Sheaf or Mathlib. Source Lu-Zheng Ex. 4.26(2)(a) (arXiv v7 p.37) covers any valuation ring and D^+, so the node (DVR, D^b) is a valid special case. nt_compile.py --json on the snapshot: rc 0, no errors or warnings. Only finding (mechanical, H1/H11): '## Second reading by Q116' was a placeholder; fixes/lem-trf-trait-nearby-base-change.report.md replaces it with a real clause-by-clause reading attributed to the maintainer's reviewer, Worker report unchanged."
  }
 }
