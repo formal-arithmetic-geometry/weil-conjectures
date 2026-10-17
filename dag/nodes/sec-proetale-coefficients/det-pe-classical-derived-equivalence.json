@@ -234,5 +234,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalDerivedEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.classicalDerivedEquivalence"
+  ],
+  "statement": "theorem classicalDerivedEquivalence (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (hunit : ∀ L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.unit.app L)) : (∀ L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), ClassicalPlus X Λ ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj L)) ∧ (∀ K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)), ClassicalPlus X Λ K → IsIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).derivedPlus.counit.app K)) ∧ (∃ e : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ≌ (ClassicalPlus X Λ).FullSubcategory, Nonempty (e.functor ⋙ (ClassicalPlus X Λ).ι ≅ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus) ∧ Nonempty (e.inverse ≅ (ClassicalPlus X Λ).ι ⋙ (comparisonLowerStar (ModuleCat.{u + 1} Λ) X).rightDerivedFunctorPlus))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalDerivedEquivalence.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d214bae35",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read the item node, the source (sk-cor-pe-classical-derived-equivalence.md, _section.md, sk-def-pe-classical-definition/_section.md), the six stmt_deps records, both delivered modules and the upstream comparisonAdjunction / derivedPlus / HasDerivedCategory declarations. The hunit hypothesis, clause 1 (classical image, plus the typed D+ codomain of rightDerivedFunctorPlus), clause 2 (counit iso on ClassicalPlus) and the equivalence with both functors identified all match the node. No extra assumptions; universes match the recorded boundedBelowComparison (Λ : Type (u+1)). The §1(B) module ClassicalDerivedDefinitions has real predicates (IsIso of continuityMap on every AffinePresentation, all integer degrees) that follow the source's module clause. Statements match the files exactly, node copies differ only in lean, only one sorry, docstrings and both report sections present. nt_compile --json on both files: exit 0, no warnings. Non-blocking: IsClassicalModuleFor runs parallel to the IsClassical-of-underlying-set encoding in det-pe-classical-sheaves-modules, so stage 3 needs a bridging lemma; the replaced sk-def record no longer lists IsClassical, but the module re-exports it."
  }
 }

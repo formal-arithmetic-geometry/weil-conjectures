@@ -193,5 +193,23 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-75b2babae (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and the full statements of all five cited nodes. HTT is not in literature/ and network access is blocked, so I could not open the PDF. I checked the statement against HTT Prop. 3.3.1.7 from memory; it is that proposition plus its cocartesian dual, not weakened. I checked each proof step against the cited node statements. Step 1: the Joyal factorization makes T a quasicategory. Step 2: every hypothesis of base-equivalence-invariance (2) is supplied by marked-relative-cartesian-model, including the tensor U×K♯ from the enrichment; the base-change clause gives the natural marking on Z. Step 3: the vertex fibers give a weak equivalence between fibrant objects, hence v and a path vu~id. Step 4: q is a Joyal fibration over T, and qa=jgi, w=(g,k), wi=uf, pr=g, ri=vuf all hold strictly. Step 5: restriction of sharp mapping complexes along i is a Kan fibration over an arbitrary S; lifting at r gives hi=f and ph=g. Step 6: the opposite argument is correct and elementary enough. Small cases checked: point base, empty A (forces B empty), empty S or X, identity fibration. No new nodes, no duplicate in the DAG, no cycle, all citations in the same unit, no tool_uses, no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CocartesianJoyalFibration",
+  "declaration": "SSet.cocartesian_joyal_fibration",
+  "file": "lean/Sheaf/AlgebraicTopology/CocartesianJoyalFibration.lean",
+  "statement": "theorem cocartesian_joyal_fibration {X S : SSet.{u}} (p : X ⟶ S) (_hp : Marked.Over.relativeFibration false p ∨ Enhanced.cocartesianFibrationOver p) (A B : SSet.{u}) (i : A ⟶ B) (_hi : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) (_he : ∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app C)).toFunctor).IsEquivalence) (f : A ⟶ X) (g : B ⟶ S) (_comm : f ≫ p = i ≫ g) : ∃ h : B ⟶ X, i ≫ h = f ∧ h ≫ p = g",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d32aa6f0",
+  "group": "NQ",
+  "result": "pass",
+  "note": "I read the node, the three statement dependencies and their Lean declarations, the report and the module. The cartesian alternative is relativeFibration false (final horns, prescribed target). The cocartesian alternative is cocartesianFibrationOver (initial horns, prescribed source). Neither assumes a quasicategory, so the base is arbitrary. The injectivity hypothesis covers all degrees. The categorical-equivalence hypothesis is verbatim the test of exists_joyal_model_structure, at universe max u v with no universe equality. The conclusion is the strict lift i≫h=f ∧ h≫p=g, which is exactly the Joyal fibration property. Nothing is assumed about X, S, A or B. Edge cases checked: empty S, B, X or A; identity p; point base. Gates: no definitions, proof only sorry, source and blueprint in the docstrings with all six proof steps, lean.statement verbatim, node differs only in lean, both report sections present. nt_compile.py --json against the side overlay exits 0 with no errors or warnings (item 1.5 s). No findings."
  }
 }

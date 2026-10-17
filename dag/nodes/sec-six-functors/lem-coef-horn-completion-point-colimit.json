@@ -199,5 +199,35 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3e288553b (reviewer sub-agent of L); spot-checked: I read the item, all six steps, both cited statements (def-cbc-enhanced-diagrams-cones, lem-coef-kan-quillen-model-right-proper-core), the citer lem-coef-trivial-fibration-fraction-model (its steps 1, 4 and 5 use the item), blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint, the unit record and Mathlib AnodyneExtensions/Basic.lean. In Mathlib, anodyne extensions are defined by lifting and the comparison with weak equivalences is still a TODO, so the item is not a Mathlib leaf. The delivery has no new nodes and the statement is unchanged. Step 1: the degreewise pushout quotient and its functoriality, with (m,i,α) sent to (m,i,f_nα), are correct. Step 2: injectivity and smallness hold, since a pushout along an injection, and a sequential colimit of injections, are injective in sets. Step 3: the finitely many face generators land in one stage K_n, which is a simplicial subset, so the summand of K_{n+1} gives the filler. This covers every m≥1, outer horns and m=1 included, which is the Kan condition of the def node. Step 4: the coproduct of horn inclusions is a well-ordered composite of single-cell pushouts, so the map is in the stated anodyne closure. Step 5: the core statement explicitly identifies trivial cofibrations with retracts of transfinite composites of pushouts of coproducts of horn inclusions, using realization weak equivalences, and the map is such a composite. Step 6: the empty case holds because every positive-dimensional horn has a vertex. A traversal of all dependencies from the core node (61 nodes) does not reach the item, so there is no cycle. The core is in the same unit, so tool_uses is not needed. Duplicate search over DAG statements (fibrant or Kan replacement, Ex^∞, small object, horn attachment) found only lem-coef-kan-quillen-right-proper, the generic leaf lem-coef-small-object-cell-factorization and lem-coef-ex-comparison-weak-equivalence; none states this construction. Small cases checked: the empty set, Δ^0 (vertices are added through 1-horns, and the statement claims nothing about the vertex set), disconnected inputs, m=1. Cisinski's CatLR is not archived; it is listed as WANTED and the proof is marked agent-written. No SGA source is used. The item is not a target, so the base-change check does not apply. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.HornCompletion",
+  "declaration": "SSet.horn_completion_point_colimit",
+  "declarations": [
+   "SSet.HornCompletion.generators",
+   "SSet.HornCompletion.terminalArrow",
+   "SSet.HornCompletion.step",
+   "SSet.HornCompletion.stepInclusion",
+   "SSet.HornCompletion.stage",
+   "SSet.HornCompletion.tower",
+   "SSet.HornCompletion.functor",
+   "SSet.HornCompletion.inclusion",
+   "SSet.horn_completion_point_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/HornCompletion.lean",
+  "statement": "theorem horn_completion_point_colimit : (∀ K : SSet.{u}, Mono (HornCompletion.inclusion.app K) ∧ anodyneExtensions (HornCompletion.inclusion.app K) ∧ Enhanced.IsWeakHomotopyEquivalence (HornCompletion.inclusion.app K) ∧ KanComplex (HornCompletion.functor.obj K)) ∧ IsIso (HornCompletion.inclusion.app (⊥_ SSet.{u}))",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Helpers give the explicit countable simultaneous positive-horn attachment construction of this node using Mathlib SmallObject.functor, not an arbitrary fibrant replacement. No independent notion, new node or dependency repair is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8863e2c73",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones and its EnhancedDiagramsCones.IsWeakHomotopyEquivalence, Mathlib SmallObject/Construction (FunctorObjIndex over terminal = horn maps; pushout of coproduct along evaluation), AnodyneExtensions/Basic (anodyneExtensions = retracts of transfinite comps of pushouts of coproducts of positive horns = node's closure), KanComplex. All clauses match: arbitrary K : SSet.{u}, positive horns incl. outer via Σ n, Fin (n+2), K0=K, iterated step, colimit over ℕ pointwise, natural colimit.ι 0, Mono, anodyne, realization weak equivalence, Kan target, IsIso at ⊥_ for the empty case. Single universe, no extra hypotheses, helpers have real data, only theorem is sorry, docstrings carry source/blueprint and six proof steps, lean.statement verbatim, node diff only in lean, report has both sections. nt_compile.py (--json) per-file compile clean, exit code 0, no warnings. No fixes."
  }
 }
