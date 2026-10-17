@@ -4608,6 +4608,8 @@ public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.BorelMoore
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.TraceFormula.CorrespondencePair
+public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
@@ -4615,6 +4617,7 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.OpenCover
+public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.ProperPushforward
 public import WeilConjectures.TraceFormula.ProperPushforwardKernel
