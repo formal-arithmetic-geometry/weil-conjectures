@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactSupportCandidate
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekConstructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 /-!

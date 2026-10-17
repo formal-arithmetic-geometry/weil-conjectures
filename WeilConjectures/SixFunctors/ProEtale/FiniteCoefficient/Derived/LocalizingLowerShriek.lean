@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactSupportTriangulated
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekOfCompactificationFiniteTor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarCoproducts
 
 /-!
