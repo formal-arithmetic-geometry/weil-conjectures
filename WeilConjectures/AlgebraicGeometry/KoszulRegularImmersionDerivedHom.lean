@@ -87,7 +87,7 @@ theorem koszulRegularImmersion_derivedInternalHom
   let N := SheafOfModules.homObj (R := Z.sheaf)
     ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
     (SheafOfModules.unit Z.ringCatSheaf)
-  let E (n : ℕ) := Scheme.Modules.exteriorSheaf
+  let E (n : ℕ) := Scheme.Modules.exteriorPower
     ((Scheme.Modules.restrictFunctor (Scheme.Modules.exteriorRankOpen r n).ι).obj N) n
   apply closedImmersion_rankStrata_scalar_formality i r E
     (Scheme.Modules.locallyRankedExteriorTerm N r) (fun _ => rfl)
