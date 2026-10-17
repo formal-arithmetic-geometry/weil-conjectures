@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatConnectedFibres
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 
@@ -224,8 +225,9 @@ Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = 
 étale, so `(p^* G)(W) = Γ(W, q^* (G|_V))`; and for a flat quasi-compact `q` with geometrically
 connected fibres the global sections of an inverse image agree with the global sections
 downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
-hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`sk-prop-deg0`. -/
+hence descends along the fpqc covering `q`, see
+`AlgebraicGeometry.Etale.isIso_unit_app_comp_map_of_geometricallyConnected`. This is Step 2 of
+the blueprint proof of `sk-prop-deg0`. -/
 @[stacks 0A3H]
 theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
@@ -233,7 +235,7 @@ theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (Module
     [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
     [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
     IsIso (Etale.upperStarSectionsMap _ p G φ) :=
-  sorry
+  Etale.isIso_unit_app_comp_map_of_geometricallyConnected Λ p G φ
 
 /-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
 
