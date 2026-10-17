@@ -11,7 +11,8 @@
   "def-sp-injective-resolutions",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-trf-finite-filtered-localization"
  ],
  "kind": "statement",
  "proof": [
@@ -346,5 +347,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-7ba734236 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all 12 steps, the three new nodes, every cited node statement, the unit and chapter records, and the sources: Stacks derived.tex 05TP/05TR/05TS/05TT/05TU/05TV/05TW/05TX/05TY/015Q and homology.tex 05QH. The item statement matches 05TW, 05TY and 015Q hypothesis by hypothesis and is not weakened. The [a,b] interval clause is not printed in Stacks; it follows from the 05TS direct-sum embedding, and Step 12 proves it. Recomputed: the horseshoe sign convention (d_M^2=0 and the augmentation chain identity tπ−tπ=0 in Step 4); the double-complex augmentation chase (Step 5); the (−1)^{ir} flip identification (Step 6); the forward contraction induction (Step 7); both cone-component equations a=dh+hd−bs and bs=dh+hd ⇔ (b,h) is a chain map C(s)→I (Step 8); and the localization universal-property inverse ρ(v)=H̄(v)(1_I) (Step 9). The new nodes are all true, smaller than the item and not duplicates. lem-trf-finite-filtered-graded-exactness is 05QH(2)-(5). lem-trf-enough-strict-filtered-injectives is 05TR+05TS; I checked that the embedding is strict and stays in the same interval. lem-trf-filtered-cone-localization states the Verdier localization at graded-acyclic cones. Duplicate searches by tag and vocabulary over the whole DAG found nothing; the nearest candidates (lem-sp-degreewise-filtered-acyclic, lem-kun-filtered-quasi-isomorphism-fractions, def-trf-bounded-filtered-derived-category) are different statements. Accepted tool_use: lem-sc-first-quadrant-column-augmentation, a generic first-quadrant augmentation comparison applied after gr^p, already used as a tool elsewhere. Minor note: one recorded Mathlib grep says 0 hits but finds 2 irrelevant hits; the 'no match' verdict is unchanged. No SGA source, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel",
+  "declaration": "CategoryTheory.filteredLocalization_injectiveModel",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredLocalizationInjectiveModel.lean",
+  "statement": "theorem filteredLocalization_injectiveModel (B : Option (ℤ × ℤ)) : (∀ K : CochainComplex.Plus (FiniteFilteredObjects C B false), ∃ (I : CochainComplex.Plus (FiniteFilteredObjects C B true)) (f : K ⟶ (filteredInjectiveInclusion C B).mapCochainComplexPlus.obj I), finiteFilteredQuasiIso C B ((HomotopyCategory.Plus.quotient (FiniteFilteredObjects C B false)).map f)) ∧ (∀ K I : FiniteFilteredHomotopyPlus C B false, (∀ n p : ℤ, Injective ((I.obj.as.X n).obj.filtration.gradedPiece p)) → Function.Bijective ((finiteFilteredQh C B).map : (K ⟶ I) → ((finiteFilteredQh C B).obj K ⟶ (finiteFilteredQh C B).obj I))) ∧ (filteredInjectiveComparison C B).IsEquivalence ∧ (filteredInjectiveComparison C B).IsTriangulated ∧ (∀ (I : FiniteFilteredHomotopyPlus C B true) (n : ℤ) (p : Option ℤ), Injective ((filteredEvaluation C B true p).obj (I.obj.as.X n))) ∧ (∀ p : Option ℤ, Nonempty (filteredInjectiveComparison C B ⋙ finiteFilteredDerivedEvaluation C B p ≅ (filteredEvaluation C B true p).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-434337fe4",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Checked every clause of the node against the six parts of filteredLocalization_injectiveModel and against Stacks derived.tex 05TW/05TY/015Q: real filtered quasi-isomorphism to a bounded-below graded-injective complex; localization Hom bijection for every bounded-below K; comparison K+(I^f)->DF+ is IsEquivalence and IsTriangulated (Mathlib's standard localization triangulation, confirmed by #synth); forgetting and every gr^p give ordinary injectives; comparison squares with DerivedCategory.Plus.Qh; B = none or some (a,b) covers all fixed intervals. No extra hypotheses; universes u, v, w independent. New def node def-trf-finite-filtered-localization has real data; its six postponed validity theorems are true, stated in the node, and carry source/proof docstrings. Edge cases checked: zero object, b<a, a=b, filtration bounds varying with cochain degree. No name clashes and no duplicate Preadditive instance. The lean-only §1(B) record repair of def-sp-filtration (Sheaf.CategoryTheory.Filtration / DecreasingFiltration) passes stage2_delivery.check_existing; it is contested with NA's PBC record but matches about 110 of roughly 125 consumers. Item node changes only by the added stmt_dep; both lean.statement fields appear verbatim in their files. nt_compile of both files: clean, no warnings; axioms are standard plus sorryAx. Report has real '## Worker report' and '## Second reading by Q03' sections.; reverted the delivery's change of existing node(s) def-sp-filtration (--revert-nodes; kept as on newtargets-dag)"
  }
 }
