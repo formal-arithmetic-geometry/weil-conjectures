@@ -35,7 +35,8 @@ are derived complete.
 
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`: on `Spec k`,
   the integral stage consists of the bounded constructible complexes.
-- `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` (`def-weil-finite-coefficient-point`,
+- `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` and, for `Λ = 𝒪_E`,
+  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence` (`def-weil-finite-coefficient-point`,
   integral stage): `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
 - `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`: the objects of `Dᵇ_fg(Λ)` are
   derived complete, i.e. receive no nonzero map from an object on which `ϖ` acts invertibly.
@@ -51,11 +52,12 @@ constant sheaves `Λ/Iⁿ⁺¹`, of Tor amplitude in `[-1, 0]` by the triangles 
 
 Conversely, let `K` be derived complete with reductions `Kₙ` of Tor amplitude in `[a, b]` with
 constructible cohomology. Morphisms out of `Λ` placed in degree `j` compute the global sections of
-the cohomology sheaves (`AlgebraicGeometry.Etale.homSingleEquiv`), which for the `Kₙ` are finite
-and vanish outside `[a, b]`. The Milnor sequence of the homotopy limit `K = R lim Kₙ` then shows
-that `M = Hom(Λ[-j], K)` is the inverse limit of the finite groups `Hom(Λ[-j], Kₙ)`: it vanishes
-outside `[a, b]`, it is `ϖ`-adically separated, and `M/ϖM` embeds into `Hom(Λ[-j], K₁)`, so `M`
-is finitely generated (`Module.finite_of_isHausdorff_of_ker_le`).
+the cohomology sheaves (`AlgebraicGeometry.Etale.homSingleLinearEquiv`), which for the `Kₙ` are
+finite and vanish outside `[a, b]`. The Milnor sequence of the homotopy limit `K = R lim Kₙ`
+then shows that `M = Hom(Λ[-j], K)` is the inverse limit of the finite groups
+`Hom(Λ[-j], Kₙ)`: it vanishes outside `[a, b]`, it is `ϖ`-adically separated, and `M/ϖM`
+embeds into `Hom(Λ[-j], K₁)`, so `M` is finitely generated
+(`Module.finite_of_isHausdorff_of_ker_le`).
 -/
 
 @[expose] public section
@@ -510,7 +512,8 @@ lemma derivedComplete_unitSingle :
     (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).isEquivalence_functor
   have : (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).Additive :=
     additive_constantSheaf Λ _
-  let G := (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory
+  let G :=
+    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory
   have hG := hQ.map G
   let eG (M : ModuleCat.{u + 1} Λ) : G.obj (DerivedCategory.Q.obj
       ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj M)) ≅
@@ -547,7 +550,7 @@ lemma nonempty_iso_reductionModIdeal_unitSingle (n : ℕ) :
       rfl))
   exact ⟨Triangle.π₃.mapIso e⟩
 
-omit [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
+omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
 include hϖ hI in
 /-- The constant sheaf `Λ/Iⁿ` on `Spec k`, placed in degree `0`, is bounded constructible of
 Tor amplitude in `[-1, 0]`: it is the cone of `ϖⁿ : Λ ⟶ Λ`, and `Λ` is flat. -/
@@ -574,6 +577,7 @@ lemma boundedConstructible_torAmplitudeIn_single_quot (n : ℕ) :
     hU (DerivedCategory.torAmplitudeIn.shift hU 1)
   exact h.mono (by simp) (by simp)
 
+omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 include hϖ hI in
 /-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, lies in the integral stage. -/
 lemma boundedConstructibleIntegral_unitSingle :
@@ -602,10 +606,12 @@ lemma boundedConstructibleIntegral_single_of_shortExact {S : ShortComplex (Modul
   have hS' := hS.map_of_exact (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).functor
   have hT := hS'.singleTriangle_distinguished
   refine ⟨fun h₁ h₂ ↦ ?_, fun h₁ h₃ ↦ ?_⟩
-  · exact (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
+  · exact
+      (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
       _ (rot_of_distTriang _ hT) h₂
       ((DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).le_shift 1 _ h₁)
-  · exact (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
+  · exact
+      (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).ext_of_isTriangulatedClosed₂
       _ hT h₁ h₃
 
 variable (k) in

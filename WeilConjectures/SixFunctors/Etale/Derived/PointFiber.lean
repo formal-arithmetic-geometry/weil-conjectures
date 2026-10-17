@@ -29,7 +29,9 @@ restricts to an equivalence between `Dᵇc(Spec k, Λ)` and the full subcategory
   `Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)` at the geometric point `s = Spec k`, the restriction
   of `D(Γ)`.
 - `AlgebraicGeometry.Etale.pointFiberEquivalence` (`def-weil-finite-coefficient-point`, finite
-  coefficient stage): `Fib_s` is an equivalence.
+  coefficient stage): `Fib_s` is an equivalence. The integral stage `𝒪_E` is
+  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
+  (`WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral`).
 
 -/
 

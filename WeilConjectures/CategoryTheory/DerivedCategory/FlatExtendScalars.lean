@@ -52,11 +52,13 @@ lemma mapDerivedCategory_map_smul_id {r : R} {s : S}
       e.inv_hom_id]
   have h₂ : (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (r • 𝟙 K) = s • 𝟙 _ := by
     ext n
-    simp [h]
+    simp only [Functor.mapHomologicalComplex_map_f, HomologicalComplex.smul_f_apply,
+      HomologicalComplex.id_f]
+    exact h (K.X n)
   have key : F.mapDerivedCategory.map (DerivedCategory.Q.map (r • 𝟙 K)) = s • 𝟙 _ := by
     rw [← cancel_mono (F.mapDerivedCategoryFactors.hom.app K),
-      mapDerivedCategoryFactors_hom_naturality, h₂, Functor.map_smul, Functor.map_id,
-      Linear.smul_comp, Linear.comp_smul, Category.id_comp, Category.comp_id]
+      mapDerivedCategoryFactors_hom_naturality, h₂, Functor.map_smul, Functor.map_id]
+    simp
   rw [h₁, Functor.map_comp, Functor.map_comp, key, Linear.smul_comp, Category.id_comp,
     Linear.comp_smul, ← Functor.map_comp, e.inv_hom_id, Functor.map_id]
 
@@ -71,8 +73,8 @@ open ChangeOfRings
 instance : (extendScalars.{u + 1, u + 1, u + 1} f).Additive where
   map_add := by
     intros
-    apply ModuleCat.hom_ext
-    exact LinearMap.baseChange_add _ _
+    ext m
+    simp [TensorProduct.tmul_add]
 
 instance : PreservesFiniteColimits (extendScalars.{u + 1, u + 1, u + 1} f) :=
   have := (extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f).leftAdjoint_preservesColimits
@@ -84,8 +86,8 @@ lemma extendScalars_map_smul_id (r : R) (M : ModuleCat.{u + 1} R) :
       f r • 𝟙 ((extendScalars.{u + 1, u + 1, u + 1} f).obj M) := by
   ext m
   change (1 : S) ⊗ₜ[R, f] (r • m) = f r • ((1 : S) ⊗ₜ[R, f] m)
-  rw [ExtendScalars.smul_tmul, ← TensorProduct.smul_tmul]
-  rfl
+  rw [ExtendScalars.smul_tmul]
+  exact (TensorProduct.smul_tmul (R := R) (M := (restrictScalars f).obj (of S S)) r (1 : S) m).symm
 
 variable (hf : f.Flat)
 
@@ -136,7 +138,7 @@ lemma boundedFiniteCohomology_derivedExtendScalars_obj
   have := hX.2 n
   have : Module.Finite S ((extendScalars.{u + 1, u + 1, u + 1} f).obj
       ((DerivedCategory.homologyFunctor _ n).obj X)) := by
-    letI := f.toAlgebra
+    let := f.toAlgebra
     exact inferInstanceAs (Module.Finite S (TensorProduct R S _))
   exact Module.Finite.equiv (derivedExtendScalarsHomologyIso f hf n X).toLinearEquiv
 

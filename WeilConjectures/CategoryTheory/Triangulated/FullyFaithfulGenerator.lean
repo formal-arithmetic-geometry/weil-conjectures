@@ -95,6 +95,36 @@ lemma HomBijectiveShifts.shift_right {X Y : C} (h : F.HomBijectiveShifts X Y) (c
     F.HomBijectiveShifts X (Y⟦c⟧) := fun a b ↦
   (h a (c + b)).of_iso (Iso.refl _) ((shiftFunctorAdd C c b).app Y)
 
+section Shift
+
+variable [HasShift D ℤ] [F.CommShift ℤ]
+
+lemma HomBijective.shift {X Y : C} (h : F.HomBijective X Y) (c : ℤ) :
+    F.HomBijective (X⟦c⟧) (Y⟦c⟧) := by
+  have e : (fun f : X ⟶ Y ↦ F.map (f⟦c⟧')) = (fun g : F.obj X ⟶ F.obj Y ↦
+      (F.commShiftIso c).hom.app X ≫ g⟦c⟧' ≫ (F.commShiftIso c).inv.app Y) ∘ F.map := by
+    ext f
+    simp
+  have h₁ : Function.Bijective (fun g : F.obj X ⟶ F.obj Y ↦
+      (F.commShiftIso c).hom.app X ≫ g⟦c⟧' ≫ (F.commShiftIso c).inv.app Y) :=
+    (Iso.homCongr ((F.commShiftIso c).app X).symm ((F.commShiftIso c).app Y).symm).bijective.comp
+      ((Functor.FullyFaithful.ofFullyFaithful (shiftFunctor D c)).map_bijective _ _)
+  have h₂ : Function.Bijective ((F.map : (X⟦c⟧ ⟶ Y⟦c⟧) → _) ∘ (shiftFunctor C c).map) := by
+    change Function.Bijective (fun f : X ⟶ Y ↦ F.map (f⟦c⟧'))
+    rw [e]
+    exact h₁.comp h
+  exact (Function.Bijective.of_comp_iff _
+    ((Functor.FullyFaithful.ofFullyFaithful (shiftFunctor C c)).map_bijective _ _)).1 h₂
+
+/-- If `F` is bijective on the morphisms `X ⟶ Y⟦n⟧` for all `n`, it is bijective on the
+morphisms `X⟦a⟧ ⟶ Y⟦b⟧` for all `a`, `b`. -/
+lemma homBijectiveShifts_of_forall {X Y : C} (h : ∀ n : ℤ, F.HomBijective X (Y⟦n⟧)) :
+    F.HomBijectiveShifts X Y := fun a b ↦
+  ((h (b - a)).shift a).of_iso (Iso.refl _)
+    ((shiftFunctorAdd' C (b - a) a b (by lia)).app Y).symm
+
+end Shift
+
 variable [HasZeroObject C]
   [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
   [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive]
