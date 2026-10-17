@@ -216,13 +216,13 @@ theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)
     (A B : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hA : Scheme.IsStrictlyPerfect X U A) (hB : Scheme.IsStrictlyPerfect X U B)
-    (eA : Nonempty ((SheafOfModules.overFunctor
+    (eA : Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅
         DerivedCategory.Q.obj A))
-    (eB : Nonempty ((SheafOfModules.overFunctor
+    (eB : Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj N) ≅
         DerivedCategory.Q.obj B)) :
-    Nonempty ((SheafOfModules.overFunctor
+    Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj
         (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
           (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _
@@ -231,7 +231,7 @@ theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)
         (@curriedTensor (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) _
           (SheafOfModules.monoidalCategory (X.sheaf.over U))))) := by
   classical
-  let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
   let P' := (R.mapHomologicalComplex (.up ℤ)).obj P
   let N' := (R.mapHomologicalComplex (.up ℤ)).obj N
   obtain ⟨_hP', hN', ⟨e⟩⟩ := localizedOpen_kFlat_tensor_restriction X U P N hP hN
