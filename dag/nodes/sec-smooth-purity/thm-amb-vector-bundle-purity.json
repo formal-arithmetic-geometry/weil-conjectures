@@ -25,7 +25,10 @@
   "def-amb-etale-compact-support",
   "thm-amb-etale-exceptional-adjoint",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-amb-proper-coproducts-projection"
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-finite-tate-site-descent",
+  "lem-sf-class-compact-support-comparison",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -381,5 +384,35 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-d927d27f0 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, all six new statements, every cited statement, both blueprint snapshots (statement unchanged; route follows proof paragraphs 1–2 and unit Steps 5–7) and the Stacks places 09A6, 09AF, 0F7B, 0F7L (checked in the .tex) and 03PK, 099R, 01OA, 0F7J, 0E48 (labels checked). The target is not weakened and there is no cycle. I redid the step-8 mate calculation by hand: the Du_!-adjunct of c_π∘κ is u^*c_π∘C^{-1}, which equals c_{π_U,u^*K} by the projection/open-restriction equation and u^*t_π=t_{π_U}∘C. So C^{-1} is the right normalization. I type-checked the tensor-composition and open-restriction equations and tested them on identity maps, empty opens and rank 0. Finite Tate descent holds because ℓ^rA=0 makes Z_ℓ(1)⊗A=μ_{ℓ^r}⊗_{Z/ℓ^r}A pro-étale locally, ramified case included. It overlaps the item's descent clause but strictly generalizes it to any T with ℓ invertible, so it is not a relabelling. The projective completion is correct: Sym(O⊕ℰ)_(t)=Sym ℰ, proper, and the identity at d=0. Not duplicates: lem-pur-vector-integration-site-comparison works only over finite-type k-schemes, and lem-pur-projective-bundle-tautological-geometry gives no D_+(t)=E compactification. Batch-5 flags (all four): lem-amb-unbounded-compact-support-comparisons and lem-asd-etale-compact-support-normalization are general compact-support infrastructure (Rf_!, α, C, the Ru_! normalization). Neither assumption gives them: the PD scope explicitly excludes base-change, composition and compactification compatibilities, and the trace-formula assumption gives no compact-support functoriality. The closure path reaches lem-pod-lisse-module-sheaves-as-module-objects, a generic lisse-sheaf lemma in the PD chapter, only through proper base change. Retained step 7 already cited both nodes, so no new closure edge is added. FIX (B3): lem-amb-compact-support-site-comparison-open used C^et/C^pro with no definition cited. I now define them through def-kun-unbounded-exchange, def-weil-pbc-etale-shriek-base-change-map and def-weil-pbc-adjunction-mate; the corrected file is in fixes/. No content changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e975a2a9",
+  "group": "NX",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report in fixes/. Repaired H11: placeholder second reading and unfinished compiler evidence. Statement, dependencies, canonical maps, universes, edge cases and route compliance checked. Immutable Lean module compiled successfully in both scompile views without diagnostics; no Lean/node changes or branch mutations."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.VectorBundlePurity",
+  "declaration": "AlgebraicGeometry.Etale.vectorBundlePurity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.vectorBundlePurityCompactification",
+   "AlgebraicGeometry.Etale.vectorBundlePurityLower",
+   "AlgebraicGeometry.Etale.vectorBundlePurityAdjunction",
+   "AlgebraicGeometry.Etale.vectorBundlePurityTwistedPullback",
+   "AlgebraicGeometry.Etale.vectorBundlePurityProjectionMap",
+   "AlgebraicGeometry.Etale.VectorBundlePurityAtModulus",
+   "AlgebraicGeometry.Etale.vectorBundlePurityFiniteCoefficient",
+   "AlgebraicGeometry.Etale.vectorBundlePurityInvertiblePower",
+   "AlgebraicGeometry.Etale.vectorBundlePurity"
+  ],
+  "file": "lean/Sheaf/Targets/VectorBundlePurity.lean",
+  "statement": "theorem vectorBundlePurity (ell : ℕ) [Fact ell.Prime] (F : Type u) [Field F] [Algebra (Padic ell) F] [FiniteDimensional (Padic ell) F] (n : ℕ) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (ell : Γ(S, ⊤))) (d : ℕ) (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d] : (∃ b : ∀ (T : Scheme.{u}) (_f : T ⟶ S) (r : ℕ) (hA : ((ell ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0) (k : ℕ), (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient ell F n)) T).obj (Scheme.finiteEtaleTateTwist T (ell ^ (r + 1)) _ hA k) ≅ Scheme.finiteTateProSheaf ell F n T k, (∀ (T : Scheme.{u}) (f : T ⟶ S) (r : ℕ) (hA : ((ell ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0) (k : ℕ), Scheme.IsFiniteTateSiteComparison ell F n T r hA k (b T f r hA k)) ∧ (∀ (T : Scheme.{u}) (f : T ⟶ S) (r r' : ℕ) (_h : r ≤ r') (hA : ((ell ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0) (hA' : ((ell ^ (r' + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0) (k : ℕ), ∃! t : Scheme.finiteEtaleTateTwist T (ell ^ (r' + 1)) _ hA' k ≅ Scheme.finiteEtaleTateTwist T (ell ^ (r + 1)) _ hA k, Scheme.IsFiniteTateEtaleTransition ell F n T r r' hA hA' k t ∧ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient ell F n)) T).mapIso t ≪≫ b T f r hA k = b T f r' hA' k) ∧ (∀ (T : Scheme.{u}) (f : T ⟶ S) (r : ℕ) (hA : ((ell ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0) (k : ℕ) (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient ell F n))) (a : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient ell F n)) T).obj G ≅ Scheme.finiteTateProSheaf ell F n T k), ∃! h : Scheme.finiteEtaleTateTwist T (ell ^ (r + 1)) _ hA k ≅ G, (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient ell F n)) T).mapIso h ≪≫ a = b T f r hA k)) ∧ ∃ hA : ((ell ^ (n + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0, VectorBundlePurityAtModulus (ell ^ (n + 1)) (Nat.pow_pos (Fact.out : ell.Prime).pos) (Scheme.finiteTateCoefficient ell F n) hA S (vectorBundlePurityInvertiblePower ell S hS n) d M",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem includes normalized finite Tate descent on every S-scheme, independence of the annihilating positive ell-power, and uniqueness. The positive quotient level is n+1. The annihilator ell^(n+1)=0 is asserted as a conclusion, never imposed as a hypothesis. VectorBundlePurityAtModulus expands to the actual trace normalization, bounded coefficient and its uniquely specified proper/open pro-etale realization, and the actual integration adjunct for every unbounded K. The projection inverse is characterized by its inverse being the canonical compactified tensor projection map with the signed symmetries. No compactification, twist transport, trace, boundedness or Tor condition is an extra hypothesis."
  }
 }
