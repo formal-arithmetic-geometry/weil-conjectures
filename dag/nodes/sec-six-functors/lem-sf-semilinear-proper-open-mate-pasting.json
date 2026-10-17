@@ -18,9 +18,93 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-weil-pbc-etale-origin-witness"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the varying-ring proper/open construction [lem-sp-varying-ring-proper-open-pasting] to the inverse sequence $C_1\\leftarrow C_2\\leftarrow\\cdots$ on each fixed small pro-etale skeleton. Its componentwise clopen lift gives $s=(k,r):U\\to V_W$, the projection $\\pi_s$ and the normalized map $\\alpha_Q$; the component maps commute with all semilinear transitions. The simultaneous section models of [lem-coef-semilinear-derived-sections] then give exact termwise inverse images, derived direct images, open extensions, their units and counits, and the displayed derived mate $\\Gamma_Q$. The open-unit normalization is the one supplied by [lem-sf-open-tensor-normalization], so this is the stated intrinsic construction rather than a map chosen after evaluation.",
+   "uses": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, open-immersion case; the strict-system realization is the coefficient-system extension recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "Restrict $p$ to $W$ and then to $V_W=V\\times_ZW$ [def-pc-fibre-product]. By the clopen construction of [lem-sp-varying-ring-proper-open-pasting], $s=(k,r)$ is open and closed, $bs=k$, $qs=r$ and $V_W=s(U)\\amalg C$ with $C$ open. On sections over this decomposition, $J_sP_sF=F|_{s(U)}\\times0$, so $J_s=S_s$ and $\\pi_s$ is the unit $\\eta_s:F\\to S_sP_sF$ of $P_s\\dashv S_s$; these are termwise identities of exact functors, hence identities on the simultaneous section models of [lem-coef-semilinear-derived-sections]. Since $\\beta=\\beta_{i,p}:P_pJ_i\\cong J_bP_q$ is an isomorphism of left adjoints of $P_iS_p$ and $S_qP_b$ (composite adjunctions), its conjugate is an isomorphism $c:P_iS_p\\cong S_qP_b$, characterized by its unit equation [lem-weil-pbc-conjugate-iso-unit-equation], applied in opposite categories. Then $\\lambda_Q$ is the composite of $c J_k$, $S_qP_bJ_bJ_s\\cong S_qJ_s$ (open unit), $J_s=S_s$ and the compositor $S_qS_s\\cong S_r$. To compute $\\lambda_Q\\circ P_i\\Gamma_Q$, transport $P_i\\Gamma_Q$ along $c$: by the change-of-adjunction and pasting clauses 1 and 3 of [lem-weil-pbc-mate-pasting], it becomes the $(P_r\\dashv S_r,\\ P_q\\dashv S_q)$-mate of the square $P_b\\alpha_Q\\circ P_b\\beta^{-1}$, which under the open unit is $\\pi_sP_q:P_q\\to J_sP_sP_q=J_sP_r$. With $\\pi_s=\\eta_s$ and $J_s=S_s$ this mate is $(S_qS_s\\varepsilon_r)\\circ(S_q\\eta_sP_sP_qS_r)\\circ(\\eta_qS_r)$, i.e. $(S_qS_s\\varepsilon_r)\\circ(\\eta^{(sq)}S_r)$ for the unit of the composite adjunction $P_sP_q\\dashv S_qS_s$. By the triangle identities this is the inverse of the compositor $S_qS_s\\cong S_r$. Hence $\\lambda_Q\\circ P_i\\Gamma_Q=1$ under the open unit $P_iJ_i=1$ of [lem-sf-open-tensor-normalization], and since the $J_i\\dashv P_i$ adjunct of $\\Gamma_Q$ is $P_i\\Gamma_Q$ composed with that unit, it is $\\lambda_Q^{-1}$; the adjunction bijection makes $\\Gamma_Q$ the unique such map. No equality is inferred from evaluation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B open case and Tags 03S3, 03S5 for restriction to a clopen section; adjunction unit/counit mate calculation."
+   }
+  },
+  {
+   "text": "For vertical and horizontal pasting, use the two pasting identities in [lem-sp-varying-ring-proper-open-pasting]. Its intrinsic clopen construction says that the $a$-map for the outer rectangle is the pasted $a$-map, with the canonical inverse-image and open-extension compositors. Applying the mate correspondence to these equalities gives exactly $\\Gamma_{Q_2Q_1}=(S_{p_2}\\Gamma_{Q_1})\\circ(\\Gamma_{Q_2}S_{r_1})$ vertically and $\\Gamma_{Q_2Q_1}=(\\Gamma_{Q_2}J_k)\\circ(J_j\\Gamma_{Q_1})$ horizontally, with parenthesization handled by the canonical compositors. The identity cases are the identity clauses of the same construction.",
+   "uses": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C and 0F7D, lemma-shriek-proper-and-open-compose and lemma-shriek-proper-and-open-compose-horizontal; mate pasting remarks 0E46 and 0E47."
+   }
+  },
+  {
+   "text": "For a base change (h:Z_1\\to Z), use the induced fibre-product square and write (a,c,d) for its projections. The open comparison (\beta) is normalized by the open unit, so its pullback square commutes with the corresponding (\beta_{i,h}) and (\beta_{k,a}); this is the termwise section-model assertion of [lem-sf-open-tensor-normalization]. The clopen lift pulls back to (s_1=(k_1,r_1)), and the projection (pi_s) pulls back to (pi_{s_1}): on the decomposition into (s(U)) and its complement both maps are ((x,y)\\mapsto(x,0)). Consequently the underived alpha square is the pasted square obtained from (alpha_Q), (\beta), and the two pullback maps. Apply the mate correspondence to this equality, inserting the pullback-square mates (E_p:P_hS_p\\to S_{p_1}P_a) and (E_r:P_cS_r\\to S_{r_1}P_d). Naturality moves the beta factors to the two ends; the adjacent unit-counit pairs cancel by the triangle identities. The remaining equality is\n$$(S_{p_1}\\beta_{k,a})\\circ(E_pJ_k)\\circ(P_h\\Gamma_Q)=(\\Gamma_{Q_1}P_d)\\circ(J_{i_1}E_r)\\circ(\\beta_{i,h}S_r).$$\nAll operations and mate transposes are simultaneous system maps by [lem-coef-semilinear-derived-sections], so this is an equality before evaluation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; strict-tower base-change equation."
+   }
+  },
+  {
+   "text": "Let $B\\to C_n$ be compatible with the inverse system and let $\\rho$ be termwise restriction of scalars from semilinear systems to constant-$B$ towers; it is exact, so $\\rho P_v=P^{\\mathcal T}_v\\rho$, $\\rho J_a=J_a\\rho$ termwise, and $\\rho\\alpha_Q=\\alpha^{\\mathcal T}_Q\\rho$ because $\\beta$ and $\\pi_s$ are the same maps of underlying sheaves. Define $d_v:\\rho S_v\\to S^{\\mathcal T}_v\\rho$ at the system level as the mate of $P^{\\mathcal T}_v\\rho=\\rho P_v$, namely $(S^{\\mathcal T}_v\\rho\\varepsilon_v)\\circ(\\eta^{\\mathcal T}_v\\rho S_v)$. Evaluation intertwines the system units and counits with the level ones [lem-coef-semilinear-derived-sections], so $\\operatorname{ev}_nd_v$ is the mate of the level comparison $b$ of [lem-weil-pbc-ring-sheaf-change-adjunction]; by its adjunct clause (take $t=\\varepsilon$, $t^\\sharp=1$) this mate is its isomorphism $d$. Quasi-isomorphisms of towers are detected levelwise, so $d_v$ is an isomorphism. Now paste squares as in clause 1 of [lem-weil-pbc-mate-pasting]: $\\alpha_Q$ followed by the $p$-square of $\\rho$, and the $r$-square of $\\rho$ followed by $\\alpha^{\\mathcal T}_Q$, are equal squares $P^{\\mathcal T}_pJ_i\\rho\\to\\rho J_kP_r$ since $\\rho\\alpha_Q=\\alpha^{\\mathcal T}_Q\\rho$. Their mates are therefore equal: $(d_pJ_k)\\circ\\rho\\Gamma_Q=(\\gamma^{\\mathcal T}_Q\\rho)\\circ(J_id_r)$, with $\\gamma^{\\mathcal T}_Q$ the normalized mate of [lem-cbc-strict-tower-proper-open-calculus]. This is an equality of system maps, not a consequence of faithfulness. For the evaluation: by [lem-sp-varying-ring-proper-open-pasting], whose $\\gamma_Q$ is literally $\\Gamma_Q$, $\\operatorname{ev}_n\\Gamma_Q$ is the constant-$C_n$ clopen-projection mate of [lem-cbc-strict-tower-proper-open-calculus]; for finite $C_n$ and an input whose $n$-th level is $\\nu^*L_n$ with $L_n\\in D^+(U_{\\mathrm{et}},C_n)$, the evaluation clause of that node (with $B=\\Lambda_n=C_n$) identifies it with the specified finite proper/open comparison.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sp-varying-ring-proper-open-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B and the coefficient-system extension; scalar-restriction naturality is the termwise construction on the ringed diagram sites."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits; intrinsic proper/open mate and pasting argument (parent step 2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,7 +150,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-compactification-system-realization",
@@ -85,5 +169,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-semilinear-proper-open-mate-pasting",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the unsupported transfer of the constant-ring base-change identity with an explicit varying-system mate calculation: beta is base-change compatible by the open normalization, the clopen projection pulls back componentwise, and mate pasting with the pullback-square mates yields the displayed equation before evaluation. Added the conjugate-unit citation for the lambda/adjunct characterization and used the ring-sheaf change adjunction plus simultaneous section models for the constant-tower specialization. Removed the worker-authored split_report.tool_uses field.",
+  "blueprint": "Realizes fix-prop-coherence.proof.md, parent step 2: the intrinsic proper/open mate construction, its adjunction normalization, and identity/composition/base-change coherence before coefficient evaluation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-93f7e45fe",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-93f7e45fe (reviewer sub-agent of L); spot-checked: Read the item in full, every cited node's statement, the unit sk-thm-sf-compatibility route, Stacks more-etale 0F7B (l.2460) and 0F7F (l.2830), and the main-20261015 fix-prop-coherence proof. The statement holds: s=(k,r) is clopen (bs=k is open; r=qs is proper with q separated), lambda_Q is well formed, and both sides of the base-change equation have the same type. The equation matches the 0F7F square term for term. Edge cases checked: identity verticals or horizontals give id, the cartesian square gives id over W, and the refinement section gives id over W. No new nodes. The item overlaps lem-sp-varying-ring-proper-open-pasting and lem-sf-ambient-proper-open-pasting but is strictly stronger (adds lambda_Q, base change and scalar restriction), and step 3 correctly cites the varying-ring node. Every cited unit is on the route, the two Mathlib leaves are tools, and there is no SGA citation and no tool_uses. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors/lem-sf-semilinear-proper-open-mate-pasting.json. (1) Step 2 asserted lambda_Q o P_i Gamma_Q = 1 with no mate calculus; I wrote it out: transport along the conjugate of beta, then mate-pasting clauses 1 and 3 with pi_s = eta_s and J_s = S_s, then the triangle identities. Added lem-weil-pbc-mate-pasting and lem-sf-open-tensor-normalization to its uses. (2) Step 5 built a system identity out of levelwise ring-change statements (E5: evaluation is not faithful); I replaced this with a system-level argument. d_v is defined as the mate of rho P = P^T rho; its evaluation is the iso d by the ring-change adjunct clause; it is an iso because detection is levelwise; mate-pasting clause 1 then gives (d_p J_k) o rho Gamma_Q = (gamma^T_Q rho) o (J_i d_r); the finite clause comes from the varying-ring evaluation clause plus the cbc finite clause. Added lem-weil-pbc-mate-pasting and lem-sp-varying-ring-proper-open-pasting to its uses. proof_deps is unchanged and still equals the union of the step uses. The statement is unchanged and not weakened.; 1 file(s) fixed by the reviewer"
  }
 }
