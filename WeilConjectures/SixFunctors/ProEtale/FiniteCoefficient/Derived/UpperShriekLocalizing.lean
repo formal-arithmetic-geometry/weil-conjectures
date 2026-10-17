@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.RightAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactSupportTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 
 /-!
@@ -94,12 +95,18 @@ theorem DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteT
 
 /-- Blueprint `det-sf-comp-coherence-single`: Compact support along one compactification on the
 localizing category, for a finite coefficient ring `Λ` whose exponent is invertible on a
-quasi-compact quasi-separated scheme `Y`. For a compactification
+quasi-compact quasi-separated scheme `Y` of finite type over a field `k`. For a compactification
 `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, the functor `Rp_* ∘ j_! = Rf_!(c)` (triangulated) maps
 `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and its
-restriction to `Loc(Dctf(X, Λ))` preserves direct sums. -/
+restriction to `Loc(Dctf(X, Λ))` preserves direct sums.
+
+The finiteness hypothesis `aY` is needed: over an arbitrary quasi-compact quasi-separated `Y`
+the direct image along a proper morphism need not preserve constructibility (for a closed point
+`z` of `Spec ∏ₙ 𝔽_{pₙ}` which is not open, the closed immersion of `z` is proper, and the
+extension by zero of `Λ` from `z` has non-constructible support). -/
 theorem DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
     {X Y : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ Y]
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     {f : X ⟶ Y} (c : Compactification f) :
     (∀ K, DerivedCategory.localizingConstructibleFiniteTor Λ X K →
       DerivedCategory.localizingConstructibleFiniteTor Λ Y
@@ -110,7 +117,9 @@ theorem DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
     ∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J)
       ((DerivedCategory.localizingConstructibleFiniteTor Λ X).ι ⋙
         rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c) :=
-  sorry
+  ⟨localizingClosure_rightDerivedLowerShriekOfCompactification_obj Λ aY c,
+    fun _ hK ↦ constructibleFiniteTor_rightDerivedLowerShriekOfCompactification Λ aY c hK,
+    preservesColimitsOfShape_localizingClosure_rightDerivedLowerShriekOfCompactification Λ aY c⟩
 
 /-- `AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor_lowerShriek`
 for a separated finite-type `k`-scheme `Y`, which is quasi-compact and quasi-separated. -/
@@ -128,7 +137,7 @@ theorem DerivedCategory.localizingConstructibleFiniteTor_lowerShriek_of_finiteTy
         rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c) :=
   have := QuasiCompact.compactSpace_of_compactSpace aY
   have := quasiSeparatedSpace_of_quasiSeparated aY
-  DerivedCategory.localizingConstructibleFiniteTor_lowerShriek Λ c
+  DerivedCategory.localizingConstructibleFiniteTor_lowerShriek Λ aY c
 
 section LowerShriek
 
