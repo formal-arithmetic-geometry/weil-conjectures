@@ -27,7 +27,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-complete-algebroid",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-coef-coherent-adjunction-data",
+  "lem-coef-infinity-adjunction-mapping-equivalence",
+  "lem-coef-spaces-homotopy-fiber-detection"
  ],
  "proof": [
   {
@@ -315,5 +318,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-03e12afde",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Reviewed source, node, dependencies, Lean declarations, edge cases, report sections, and reproduced scompile successfully; no findings."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CocartesianRelativeRightAdjoint",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianRelativeRightAdjoint.lean",
+  "declaration": "SSet.Enhanced.cocartesian_relative_right_adjoint",
+  "declarations": [
+   "SSet.Enhanced.relativeFiberMap",
+   "SSet.Enhanced.baseChangeMap",
+   "SSet.Enhanced.relativeBaseMapLeft",
+   "SSet.Enhanced.relativeBaseMapRight",
+   "SSet.Enhanced.AdjunctionTriangles",
+   "SSet.Enhanced.RelativeCoherentAdjunction",
+   "SSet.Enhanced.AdjunctionRestriction",
+   "SSet.Enhanced.RelativeMappingEquivalence",
+   "SSet.Enhanced.trianglePrismVertex",
+   "SSet.Enhanced.FiberAdjunctionDataCompatibility",
+   "SSet.Enhanced.cocartesian_relative_right_adjoint"
+  ],
+  "statement": "theorem cocartesian_relative_right_adjoint (S E D : SSet.{u}) [Quasicategory S] [Quasicategory E] [Quasicategory D] (p : E ⟶ S) (q : D ⟶ S) (hp : cocartesianFibrationOver p) (hq : cocartesianFibrationOver q) (F : E ⟶ D) (hF : F ≫ q = p) (hFc : preservesCocartesianEdges p q F hF) (fiberRight : ∀ s : S _⦋0⦌, fiber q s ⟶ fiber p s) (fiberAdj : ∀ s : S _⦋0⦌, HomotopicalAlgebra.ModelInfinity.CoherentAdjunction (relativeFiberMap F hF s) (fiberRight s)) : ∃ (R : D ⟶ E) (hR : R ≫ p = q) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F R) (vertical : RelativeCoherentAdjunction F hF R hR adj), (∀ s : S _⦋0⦌, ∃ (adjₛ : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction (relativeFiberMap F hF s) (relativeFiberMap R hR s)) (triₛ : AdjunctionTriangles (relativeFiberMap F hF s) (relativeFiberMap R hR s) adjₛ), Nonempty (AdjunctionRestriction adj adjₛ vertical.toAdjunctionTriangles triₛ (pullback.snd _ _) (pullback.snd _ _)) ∧ Nonempty (FiberAdjunctionDataCompatibility (relativeFiberMap F hF s) (relativeFiberMap R hR s) (fiberRight s) adjₛ (fiberAdj s) triₛ)) ∧ (∀ (x : E _⦋0⦌) (y : D _⦋0⦌), Nonempty (RelativeMappingEquivalence F hF R hR adj x y)) ∧ (∀ (S' : SSet.{u}) [Quasicategory S'] (a : S' ⟶ S), ∃ (hE' : Quasicategory (pullback a p)) (hD' : Quasicategory (pullback a q)) (adj' : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction (baseChangeMap a F hF) (baseChangeMap a R hR)) (vertical' : RelativeCoherentAdjunction (p := pullback.fst a p) (q := pullback.fst a q) (baseChangeMap a F hF) (by simp [baseChangeMap]) (baseChangeMap a R hR) (by simp [baseChangeMap]) adj'), Nonempty (AdjunctionRestriction adj adj' vertical.toAdjunctionTriangles vertical'.toAdjunctionTriangles (pullback.snd _ _) (pullback.snd _ _)) ∧ (∀ (x' : (pullback a p) _⦋0⦌) (y' : (pullback a q) _⦋0⦌), @Nonempty (@RelativeMappingEquivalence S' (pullback a p) (pullback a q) inferInstance hE' hD' (pullback.fst a p) (pullback.fst a q) (baseChangeMap a F hF) (by simp [baseChangeMap]) (baseChangeMap a R hR) (by simp [baseChangeMap]) adj' x' y')))",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-17",
+  "note": "Repair of da549f15b1de: actual vertical triangle fillers, specified fiber adjunction inputs, restriction of unit/counit/triangles, named right-adjoint comparison with compatibility triangles and prisms, equivalences in the slice of base mapping spaces and on every homotopy fiber, canonical pullback of both functors and the same adjunction data. The three added statement dependencies are already recorded on newtargets-dag and supply the shared coherent adjunction, chosen composition representative, and induced homotopy-fiber-map predicate. No copied foundational definition."
  }
 }

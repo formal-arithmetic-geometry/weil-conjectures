@@ -11,7 +11,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-coherent-nerve-infrastructure",
   "def-coef-infinity-category-of-spaces",
-  "lem-coef-infinity-slice-arrow-equivalence"
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-space-transport-classification",
+  "lem-coef-hammock-infinity-localization"
  ],
  "proof": [
   {
@@ -363,5 +365,52 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-427269b57 (reviewer sub-agent of L); spot-checked: Read the item, its 14 steps and the full statements of all 23 cited nodes. The Kerodon source (05Q0/01ZT/01ZN) is not in literature/ and the worker recorded WANTED with proof_origin.by=agent, so I checked the reconstruction myself. Step 1: the pushout-product of the empty map into A with a horn is A×horn, so postcomposition by a Kan fibration is a Kan fibration. Step 2: the appended last vertex is a valid enriched functor because a_j∘g = a_i∘pr. Step 4: the identity e_T L(p*) = p_T plus two-out-of-three twice makes θ_T a weak equivalence. Step 5: t is the pullback of D_{/c}→D_{/B}; this is a right fibration by the reversed relative-coslice lemma with 𝒟=Δ^0. Step 6: the reversed inclusion is the pushout-join for the right horn Λ^1_1={1}→Δ^1, so it is inner anodyne. Step 7: replacing the new last vertex by the previous one commutes with union of subsets, and checking both restrictions gives rλ=θ_AC and tλ=θ_AB f. Step 8: the fiber Q_a equals the slice mapping space, and λ restricted to H equals Map(J)θ_H. Step 9: the strict-pullback invariance lemma applies with f and t Kan fibrations, which gives full faithfulness. Step 12: the path-space replacement gives an edge of the slice whose source is an equivalence, and equivalence reflection for the right fibration (reversed) makes it an equivalence, which gives essential surjectivity. I tested the cases B, A and C empty, and B a point. There are no new nodes and no cycle (the dependency closure does not reach the item). lem-coef-strict-intrinsic-right-fibration-slices is not a duplicate: it works in Cat rather than spaces and only maps onto an essential image. Blueprint from/via are consistent with the parent. I accept the four declared tool_uses of sk-prop-sf-cbc nodes (relative-coslice left fibration, right fibration over a Kan complex, equivalence reflection, mapping spaces under equivalences) as generic tools. No base-change or coefficient target is involved, no SGA is cited, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2cb330a90",
+  "group": "N0",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source alignment, all statement clauses, dependency interfaces, universes, edge cases, canonical comparisons, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library contexts. No fixes needed; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanFibrationSliceNerveEquivalence",
+  "declaration": "SSet.Enhanced.kan_fibration_slice_nerve_equivalence",
+  "declarations": [
+   "SSet.Enhanced.KanFibration",
+   "SSet.Enhanced.kanFibrationHom",
+   "SSet.Enhanced.kanFibration_id_over",
+   "SSet.Enhanced.kanFibration_comp_over",
+   "SSet.Enhanced.kanFibrationIdApp",
+   "SSet.Enhanced.kanFibration_id_naturality",
+   "SSet.Enhanced.kanFibrationId",
+   "SSet.Enhanced.kanFibrationCompApp",
+   "SSet.Enhanced.kanFibration_comp_naturality",
+   "SSet.Enhanced.kanFibrationComp",
+   "SSet.Enhanced.kanFibration_enrichment_laws",
+   "SSet.Enhanced.kanFibrationEnrichment",
+   "SSet.Enhanced.kanFibrationNerve",
+   "SSet.Enhanced.kanFibration_total_kan",
+   "SSet.Enhanced.kanFibrationProjection_map_comp",
+   "SSet.Enhanced.kanFibrationProjection_map_id",
+   "SSet.Enhanced.kanFibrationProjection",
+   "SSet.Enhanced.IsEssentiallySurjective",
+   "SSet.Enhanced.kanFibrationObject",
+   "SSet.Enhanced.KanSliceComparisonFormula",
+   "SSet.Enhanced.KanSliceMappingFormula",
+   "SSet.Enhanced.kanFibrationTotalNerveMap",
+   "SSet.Enhanced.kanFibrationTotalVertex",
+   "SSet.Enhanced.KanSliceMappingFiberData",
+   "SSet.Enhanced.StrictFiberHomotopyFiberComparison",
+   "SSet.Enhanced.kan_fibration_slice_nerve_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanFibrationSliceNerveEquivalence.lean",
+  "statement": "theorem kan_fibration_slice_nerve_equivalence (b : CategoryTheory.Spaces.infinityCategory.{u} _⦋0⦌) : (∀ E F : KanFibration (smallSpaceValue b), (kanFibrationHom E F).KanComplex) ∧ ∃ J : SSet.uliftFunctor.{v}.obj (kanFibrationNerve (smallSpaceValue b)) ⟶ rightVertexSlice (SSet.uliftFunctor.{v}.obj CategoryTheory.Spaces.infinityCategory.{u}) (ULift.up b), KanSliceComparisonFormula b J ∧ IsFullyFaithful J ∧ IsEssentiallySurjective J ∧ (J ≫ rightVertexSliceProjection (SSet.uliftFunctor.{v}.obj CategoryTheory.Spaces.infinityCategory.{u}) (ULift.up b)) = SSet.uliftFunctor.{v}.map (kanFibrationTotalNerveMap b) ∧ AreNaturallyEquivalent (J ≫ rightVertexSliceProjection (SSet.uliftFunctor.{v}.obj CategoryTheory.Spaces.infinityCategory.{u}) (ULift.up b)) (SSet.uliftFunctor.{v}.map (kanFibrationTotalNerveMap b)) ∧ StrictFiberHomotopyFiberComparison b J",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of d71ae3e80cb6: Mathlib positive-horn fibrations; prescribed all-degree slice comparison; normalized enriched/right-pinched mapping comparisons, genuine postcomposition fiber over a, induced-map and projection homotopies; named postponed enrichment obligations. The existing smallSpaceValue is reused. All helpers are recorded in declarations."
  }
 }

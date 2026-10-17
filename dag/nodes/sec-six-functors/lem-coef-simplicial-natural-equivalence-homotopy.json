@@ -210,5 +210,24 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-f9e5d6d1b (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, route, and HTT/Hovey source passages. All six steps check out, including the comparison under the original cylinder and arbitrary-source/target hypotheses. Small cases, duplicate candidates, and dependency cycles checked; no repairs needed. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9c375e50b",
+  "group": "Q47",
+  "result": "fix",
+  "note": "Substantive statement and Lean module pass; reproduced scompile.py successfully. H11: report’s Second reading by Q47 was only a placeholder. Complete replacement supplied in fixes/; review.md records the audit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialNaturalEquivalenceHomotopy",
+  "declaration": "CategoryTheory.SimplicialInversion.simplicial_natural_equivalence_homotopy",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialNaturalEquivalenceHomotopy.lean",
+  "statement": "theorem simplicial_natural_equivalence_homotopy (A B : SCat.{u}) (F G : A ⟶ B) (η : ∀ a : underlying A, @Quiver.Hom (underlying B) inferInstance (F.obj a) (G.obj a)) (_hη : ∀ a a' : underlying A, F.map a a' ≫ eHomWhiskerLeft SSet (C := underlying B) (F.obj a) (η a') = G.map a a' ≫ eHomWhiskerRight SSet (C := underlying B) (η a) (G.obj a')) (_hiso : ∀ a : underlying A, IsPiZeroIso (A := underlying B) (η a)) : bergnerHomotopyFunctor.map F = bergnerHomotopyFunctor.map G",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Enriched naturality is equality of whole mapping simplicial maps, using Mathlib whiskering in the canonical underlying category. IsPiZeroIso tests component invertibility only. No cofibrancy, local Kan, nonemptiness or strict-inverse assumptions."
  }
 }

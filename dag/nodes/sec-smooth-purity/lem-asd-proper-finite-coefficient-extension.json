@@ -17,7 +17,8 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-kun-projection-formula-map",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-amb-proper-coproducts-projection"
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-scalar-mate-projection"
  ],
  "proof": [
   {
@@ -290,5 +291,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-2f23d29e4 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all six steps; every cited statement (plus lem-kun-inverse-image-monoidal and the ringed-topoi derived-pullback node); Stacks 0GL6 (remark-Rf-lower-shriek-change-of-rings) and lemma-projection-formula-Rf-lower-shriek, which give the result for torsion rings, unbounded complexes and qcqs schemes, with proper f so Rf_!=Rf_*; Stacks 0D6E and 0B56; and the main-20261015 thm-amb-p1-decomposition proof, whose last sentence is exactly this route. No SGA is used. The statement is true and is not weakened. I tested phi=id, L=0, the empty scheme, A=0, f=id and the nonflat Z/4->Z/2. It duplicates nothing: lem-coef-finite-direct-image needs bounded finite-Tor inputs and separated f over k, lem-sbc-canonical-restrict-scalars-functor-comparisons is D+ only, and lem-fix-direct-image-scalar-exchange is pro-etale. There are no new nodes. Steps 3, 4 and 6 are correct as written: the composition-node normalization, the K-injective counits with the separate resolution J, and the transpose algebra. Three faults, all repaired in fixes/: (1) C1/E5, step 5. It used compatibility of the inverse-image tensor comparison with the symmetry (c' F(sigma) = sigma c), called this naturality, and cited no node for it. The fact is needed even for invertibility. The step now cites the existing same-unit node lem-amb-tensor-projection-adjunct with K=A_Y, E=L, a=1: its pi_f is literally the ordered map of lem-amb-proper-coproducts-projection, and its transpose is (1 tensor eps) composed with c. (2) C4, step 2. c_C was taken from the ringed-topos node, but the PF of def-kun-projection-formula-map is built from the comparison of lem-kun-inverse-image-monoidal. The step now names that comparison and cites the node; it is added to tool_uses. (3) Step 1 claimed 'by definition' a derived tensor whose K-flat factor is the second one, while def-kun-derived-tensor resolves the first. I added the two-line cone argument. proof_deps is recomputed; lem-kun-tensor-sym is removed from proof_deps and tool_uses. The other declared tool_uses are accepted as generic homological tools. Cycle check is clean, every cited id exists, and all steps are under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc790f01f",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, source/docstrings, edge cases, and report sections checked; scompile.py server compilation passed."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension",
+  "declaration": "AlgebraicGeometry.Etale.properFiniteCoefficientExtension",
+  "statement": "theorem properFiniteCoefficientExtension {R A : Type (u + 1)} [CommRing R] [CommRing A] [Finite R] [Finite A] (φ : R →+* A) {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [IsNoetherian X] [IsNoetherian Y] : (∀ L : DerivedCategoryModule R X, IsIso ((scalarMate φ f).app L)) ∧ (∀ L : DerivedCategoryModule R X, ((derivedTensorSymmetry (ModuleCat.{u + 1} R) Y).hom.app (scalarCoefficient φ Y)).app (R((f)_*[ModuleCat.{u + 1} R]).obj L) ≫ (scalarTensorIso φ Y).inv.app (R((f)_*[ModuleCat.{u + 1} R]).obj L) ≫ (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).map ((scalarMate φ f).app L) ≫ (scalarRestrictionDirectImageMap φ f).app ((scalarExtension φ X).obj L) ≫ R((f)_*[ModuleCat.{u + 1} R]).map ((scalarTensorIso φ X).hom.app L ≫ ((derivedTensorSymmetry (ModuleCat.{u + 1} R) X).hom.app L).app (scalarCoefficient φ X)) = ((derivedTensorSymmetry (ModuleCat.{u + 1} R) Y).hom.app (scalarCoefficient φ Y)).app (R((f)_*[ModuleCat.{u + 1} R]).obj L) ≫ ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} R) f).app L).app (scalarCoefficient φ Y) ≫ R((f)_*[ModuleCat.{u + 1} R]).map (((derivedTensor (ModuleCat.{u + 1} R) X).obj L).map ((scalarCoefficientPullbackIso φ f).hom) ≫ ((derivedTensorSymmetry (ModuleCat.{u + 1} R) X).hom.app L).app (scalarCoefficient φ X))) ∧ (∀ L : DerivedCategoryModule R X, (scalarMate φ f).app L = (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).homEquiv ((scalarExtension φ Y).obj (R((f)_*[ModuleCat.{u + 1} R]).obj L)) ((scalarExtension φ X).obj L) ((scalarPullbackIso φ f).hom.app (R((f)_*[ModuleCat.{u + 1} R]).obj L) ≫ (scalarExtension φ X).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f).counit.app L)))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/SecSmoothPurity/ProperFiniteCoefficientExtension.lean"
  }
 }

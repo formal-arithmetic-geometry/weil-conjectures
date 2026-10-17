@@ -14,7 +14,8 @@
   "lem-coef-presentable-infinity-adjoints",
   "lem-coef-ind-kappa-extension",
   "def-cbc-enhanced-cartesian-fibration",
-  "lem-coef-small-right-adjoint-diagram-compact-model"
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -264,19 +265,19 @@
  "lean": {
   "module": "Sheaf.CategoryTheory.IndRightAdjointCoherent",
   "declaration": "SSet.Presentability.ind_right_adjoint_coherent",
-  "statement": "theorem ind_right_adjoint_coherent (κ : Cardinal.{u}) (hκ : κ.IsRegular) : Nonempty (CompactIndRight.{u, v} κ)",
+  "statement": "theorem ind_right_adjoint_coherent (κ : Cardinal.{u}) (hκ : κ.IsRegular) :\n    Nonempty (CompactIndRight.{u, v} κ)",
   "branch": "newtargets-dag",
-  "by": "NI",
+  "by": "Q13",
   "date": "2026-10-17",
-  "existing": false,
-  "file": "lean/Sheaf/CategoryTheory/IndRightAdjointCoherent.lean"
+  "existing": true,
+  "note": "Exact published declaration, confirmed with scompile.py --source. CompactIndRight.right_preserves applies to the actual coherent right-adjoint edges, while models and extensions retain the Ind and Yoneda normalizations; diagram is an entire simplicial map."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-05fc5aba4",
-  "group": "NI",
+  "reviewer": "NT-stage2-Codex-f0bc60b82",
+  "group": "Q13",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, universes, edge cases, and pilot gates. Both immutable Lean files compiled cleanly through scompile.py, with the consumer using the repaired dependency. No fixes required."
+  "note": "Existing declaration and CompactIndRight fields match the node and GHN Definition 10.4; dependency repair is valid. scompile.py passed the repaired dependency and combined item overlay with no errors. Review: review.md. Source: https://arxiv.org/html/1501.02161v3#S10.Def10.4; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
