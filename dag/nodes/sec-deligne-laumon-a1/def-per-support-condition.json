@@ -79,15 +79,26 @@
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Perverse.Basic",
-  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.SupportCondition",
-  "branch": "slopmaster2",
-  "line": 73,
+  "module": "Sheaf.Paper.PbcSupportCondition",
+  "declaration": "AlgebraicGeometry.Scheme.PbcSupportCondition",
   "declarations": [
-   "AlgebraicGeometry.Etale.DerivedCategory.SupportCondition",
-   "AlgebraicGeometry.Etale.DerivedCategory.CosupportCondition"
+   "AlgebraicGeometry.Scheme.pbcQbarCohomologySupport",
+   "AlgebraicGeometry.Scheme.PbcSupportCondition"
   ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  "file": "lean/Sheaf/Paper/PbcSupportCondition.lean",
+  "statement": "def PbcSupportCondition (M : pbcQbarCategory l Ω X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the recorded SupportCondition is for DerivedCategory (Sheaf X.smallEtaleTopology A); its own upstream docstring explicitly limits non-torsion etale interpretations. It cannot take the adic Qbar finite-stage pair object required by this node and the consumer. This module publicly retains the recorded finite-coefficient support and cosupport definitions and supplies the support half consumed here on the actual pbcQbarCategory. Its support is the closure of nonzero adic geometric cohomology fibres and its inequalities are literally the recorded inequalities, including the empty-support convention. No new Verdier dual is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-793ebb6fb",
+  "group": "Q151",
+  "result": "fix",
+  "note": "Mathematics and Lean correct. Read the node, its source (main-20261015 lem-per-smooth-pullback-t-exact proof, 2nd paragraph), the 4 stmt deps and the 4 delivered modules against the upstream decls (coefficientTwistLine/integralSheafTwist, purCoefficientIso, pbcConditionalRational, pointCompletedDerivedSections, algClosurePoint, qbarStageFieldEquiv). Hypotheses are exactly pbcQbarCategory's parameters plus separated finite type over k, nothing stronger. Twist = exact derived tensor with the signed root line (m=0 unit, m<0 dual). Membership is in the codomain via pbcTateAmbient_mem. The cohomology comparison is canonical (mapDerivedCategoryHomologyFunctorIso + transportNat). Fibre clause natural; line finrank 1. Support = closure of the nonzero adic fibre locus; PbcSupportCondition encodes dim(empty) = -inf exactly. Edge cases m=0, m<0, zero object, empty scheme, torsion and universes pass. Node files change only in lean; statements verbatim; all decls present. nt_compile of all 4 files: exit 0, no errors or warnings. Finding: H11, the Second reading section was the author's self-audit; fixed by fixes/lem-per-tate-twist-support-condition.report.md (full report, section replaced by an independent reading). Observation: the def-per-support-condition record covers only the Qbar support half (CosuppCon needs an absent Verdier dual; unused here; old etale decls stay imported)."
  }
 }

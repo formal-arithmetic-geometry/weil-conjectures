@@ -90,28 +90,48 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e95f18870",
-  "group": "Q118",
+  "reviewer": "NT-stage2-cc-793ebb6fb",
+  "group": "Q151",
   "result": "fix",
-  "note": "The delivery's `## Second reading by Q118` section is explicitly the worker's self-reading, so it does not satisfy the required independent second reading (H11). Replace that section with the independent reading recorded in the review; mathematical statements and Lean modules otherwise passed."
+  "note": "Mathematics and Lean correct. Read the node, its source (main-20261015 lem-per-smooth-pullback-t-exact proof, 2nd paragraph), the 4 stmt deps and the 4 delivered modules against the upstream decls (coefficientTwistLine/integralSheafTwist, purCoefficientIso, pbcConditionalRational, pointCompletedDerivedSections, algClosurePoint, qbarStageFieldEquiv). Hypotheses are exactly pbcQbarCategory's parameters plus separated finite type over k, nothing stronger. Twist = exact derived tensor with the signed root line (m=0 unit, m<0 dual). Membership is in the codomain via pbcTateAmbient_mem. The cohomology comparison is canonical (mapDerivedCategoryHomologyFunctorIso + transportNat). Fibre clause natural; line finrank 1. Support = closure of the nonzero adic fibre locus; PbcSupportCondition encodes dim(empty) = -inf exactly. Edge cases m=0, m<0, zero object, empty scheme, torsion and universes pass. Node files change only in lean; statements verbatim; all decls present. nt_compile of all 4 files: exit 0, no errors or warnings. Finding: H11, the Second reading section was the author's self-audit; fixed by fixes/lem-per-tate-twist-support-condition.report.md (full report, section replaced by an independent reading). Observation: the def-per-support-condition record covers only the Qbar support half (CosuppCon needs an absent Verdier dual; unused here; old etale decls stay imported)."
  },
  "lean": {
-  "module": "Sheaf.Paper.FixedFinitePositiveCoefficientTwist",
-  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalTwist",
+  "module": "Sheaf.Paper.PbcCoefficientTwists",
+  "declaration": "AlgebraicGeometry.Scheme.pbcTateTwist",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.diagonalCoefficientFinite",
-   "WeilConjectures.PurityFiniteSetting.diagonalExponent",
-   "WeilConjectures.PurityFiniteSetting.diagonalExponent_annihilates",
-   "WeilConjectures.PurityFiniteSetting.diagonalExponent_isUnit",
-   "WeilConjectures.PurityFiniteSetting.diagonalTwistEtale",
-   "WeilConjectures.PurityFiniteSetting.diagonalTwist"
+   "AlgebraicGeometry.Scheme.pbcFibreTensorMap",
+   "AlgebraicGeometry.Scheme.pbcFibreTensor_laws",
+   "AlgebraicGeometry.Scheme.pbcFibreTensorRight",
+   "AlgebraicGeometry.Scheme.pbcTwistResidueUnit",
+   "AlgebraicGeometry.Scheme.pbcTwistResidueInvertible",
+   "AlgebraicGeometry.Scheme.pbcTateLineSheaf",
+   "AlgebraicGeometry.Scheme.pbcTateSheafTensor",
+   "AlgebraicGeometry.Scheme.pbcTateSheafTensor_additive",
+   "AlgebraicGeometry.Scheme.pbcTateSheafTensor_limits",
+   "AlgebraicGeometry.Scheme.pbcTateSheafTensor_colimits",
+   "AlgebraicGeometry.Scheme.pbcTateAmbient",
+   "AlgebraicGeometry.Scheme.pbcTateAmbient_additive",
+   "AlgebraicGeometry.Scheme.pbcTateAmbient_linear",
+   "AlgebraicGeometry.Scheme.pbcTateAmbient_linearInstance",
+   "AlgebraicGeometry.Scheme.pbcTateAmbient_mem",
+   "AlgebraicGeometry.Scheme.pbcTateRational",
+   "AlgebraicGeometry.Scheme.pbcTateTwist",
+   "AlgebraicGeometry.Scheme.pbcTateLineFibre",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyLeft",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyRight",
+   "AlgebraicGeometry.Scheme.pbcTateCohomology_linear",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyLeft_additive",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyLeft_linear",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyRight_additive",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyRight_linear",
+   "AlgebraicGeometry.Scheme.pbcTateCohomologyMap"
   ],
-  "file": "lean/Sheaf/Paper/FixedFinitePositiveCoefficientTwist.lean",
-  "statement": "def diagonalTwist (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ)",
+  "file": "lean/Sheaf/Paper/PbcCoefficientTwists.lean",
+  "statement": "def pbcTateTwist (M : pbcQbarCategory l Ω X) (m : ℤ) : pbcQbarCategory l Ω X",
   "branch": "newtargets-dag",
-  "by": "Q118",
+  "by": "Q151",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B): preserve and publicly reexport IntrinsicCoefficientTwists, including all finite, signed, integral, rational and Qbar constructions. Its recorded primary interface is on the intrinsic Qbar category, while its reexported finiteComplexTwist is encoded in variable-ring SheafOfModules; neither is an object in the fixed-ring ModuleCat derived category of sfFiniteExceptionalAt. The conventions twistEtale also requires e divides n, which is absent from this consumer. This module exposes the existing positive finite root-line construction in the required fixed-ring coordinates, using l^n as an annihilator for every positive quotient level, and exact nu-star for its pro-etale realization. Each line is the existing finiteEtaleTateLine and each ordered shifted tensor is the existing affineLinearBaseCoefficient; no root, basis or orientation is chosen and no alternative Tate line is defined."
+  "note": "Section 1(B): publicly retain FixedFinitePositiveCoefficientTwist and its reexported IntrinsicCoefficientTwists, including all previous finite, signed, integral, rational and Qbar interfaces. The recorded primary positive finite interface and the intrinsic Qbar category cannot be applied to an object of pbcQbarCategory. This module transports the very same coefficientTwistLine and integralSheafTwist through the finite-projection-normalized coefficient ring isomorphism, rationalizes by the actual pbcStageUniformizer and forms the pair at its original finite field. It also gives the actual natural rational cohomology comparison; no arbitrary line, map or coefficient category replaces the recorded constructions."
  }
 }
