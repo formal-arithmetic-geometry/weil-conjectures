@@ -262,5 +262,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-6fff0cb8b (reviewer sub-agent of L); spot-checked: I read the item, its main-20261015 statement and proof, the unit and chapter records, Stacks 0EYS (etale-cohomology.tex l.16664, lemma-fppf-reduced-fibres-base-change-f-star), 0EZX (l.16610) and 0EY5 (more-morphisms.tex l.13258), and the full statements of every cited node. The statement matches the blueprint_update and Stacks: the square has the same orientation; f is flat, locally of finite presentation, with geometrically reduced fibres; there is no condition on g; F is any sheaf in Ab(T_et). I substituted the present square into def-weil-pbc-underived-exchange (its f,g,f',g' are the present g,f,h,e) and it gives exactly f^{-1}g_*F -> h_*e^{-1}F. Step 2 is correct: I recomputed it (composite-unit identity, naturality of eta_e, triangle identity), and the result R_g(eta_e) is the transpose that defines the map in sbc-lem-degree-zero-flat-base-change, whose hypotheses match one for one. Step 3 is genuinely elementary. There are no new nodes and no duplicates (sbc is the stronger set-valued result and is cited, not restated), and no cycle. Small cases checked: f=id, g=id, F=0, X empty, disconnected separable fibres. Repair, C4/C1 in step 1: it used without citation that the abelian composition isomorphisms are characterized by units, and that theta_square = c_{g,e}^{-1} c_{f,h}. I added citations of lem-weil-pbc-inverse-image-composition clause (2) and lem-weil-pbc-square-iso-pasting, wrote out the uniqueness argument comparing the two, updated proof_deps, and added both nodes to split_report.tool_uses. I accept all five tool uses: sbc is the 0EYS input the blueprint itself prescribes, and the others are generic coherence lemmas. No SGA source is used. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-kun-0eys.json; review.md has the full checks.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb1492d24",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read node, 9 stmt deps, Stacks 0EYS (etale-cohomology.tex l.16664-16676), module, report (Worker report + Second reading by NH present). Clauses exact: ChosenCartesianSquare h e f g; [Flat f]; [LocallyOfFinitePresentation f]; ∀ s, GeometricallyReduced (f.fiberToSpecResidueField s); F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u+1}; IsIso ((baseChangeMap _ sq.toCommSq.flip).app F), which by Square.lean is f^{-1}g_*F → h_*e^{-1}F with h-transpose θ then e^{-1}ε_g, as the node specifies. No condition on g, no torsion, no extra universe equality. Edge cases (empty schemes/fibres, zero and non-torsion F, identity f or g) admitted. Upstream ModuleCat theorem not identical; set-valued side theorem cited in the proof, not restated; no name collision. Node differs from the side clone only in lean; lean.statement verbatim. Single sorry theorem with source/blueprint docstrings and the 3 proof steps. nt_compile --json on snapshot file: rc 0, 1.8 s, no errors or warnings printed. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianDegreeZeroFlatBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_abelianBaseChangeMap_of_flat",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianDegreeZeroFlatBaseChange.lean",
+  "statement": "theorem isIso_abelianBaseChangeMap_of_flat {X Y S T : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (sq : ChosenCartesianSquare h e f g) [Flat f] [LocallyOfFinitePresentation f] (hf : ∀ s : S, GeometricallyReduced (f.fiberToSpecResidueField s)) (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) : IsIso ((baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq.flip).app F)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

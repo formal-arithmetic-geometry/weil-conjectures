@@ -308,5 +308,23 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-3be5c67a7 (reviewer sub-agent of L); spot-checked: I read all of it in full. The item statement is the same as the main-20261015 blueprint and Stacks 0F6V (more-morphisms.tex:19190) and is not weakened. Every cited node is a Mathlib leaf, and I read each statement: weakly-etale (WeaklyEtale.lean:44-46), universal-homeomorphism, radicial with the 01S4 equivalence (2)<=>(4), surjective, affine-permanence (3), the closed-immersion clause (b), separated in def-weil-proper-morphism, fibre product, and fpqc-descend-isomorphism (FlatDescent.lean:92-94, Stacks 02L4). Steps 1-7 are correct. Steps 1, 4 and 6 really are elementary (01L3 written out). Step 5 applies descent with h=phi=delta, and its hypotheses come from steps 2-3. Step 7 is exactly the proof of 06NC (descent.tex:6382). This replaces 0F6V's citation of characterize-flat-closed-immersions and the blueprint's nil-ideal calculation; that is valid below the unit level, and both blueprint paragraphs are realized. The new leaf lem-trf-closed-embedding-affine is Stacks 04DE (morphisms.tex:11338), and Mathlib's isAffineHom_of_isInducing (Affine.lean:243-248, @[stacks 04DE]) specializes to it in one line. It passes B1-B7, is not a restatement of a clause of the item, and has no duplicate: an rg search for 04DE, the declaration, and homeomorphism-affine or closed-subset wording finds only these files, and def-weil-closed-immersion requires surjectivity on sheaves. No existing node states 06NC either. Edge cases checked: empty schemes, Spec k -> Spec k[eps] (not flat), a purely inseparable field extension (diagonal not flat), and a non-surjective open immersion. There are no off-route statements, no tool_uses, no SGA, and no target or coefficient issues. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa13aa762",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0F6V (more-morphisms.tex:19190) clause by clause: {V W : Scheme.{u}} (f : V ⟶ W), [WeaklyEtale f] = Mathlib class (flat + flat diagonal, WeaklyEtale.lean:44-46), (topologically IsHomeomorph).universally f = recorded universal-homeomorphism interface, conclusion IsIso f; no extra hypotheses or universe restriction; lean.statement verbatim. Edge cases (empty schemes, identities, Spec k→Spec k[ε]/ε², purely inseparable extensions, open immersions) handled. No duplicate found in side lean, side clone or Mathlib. No definitions; single theorem with sorry; source and blueprint docstrings plus seven-step proof docstring present; report has Worker report and Second reading by Q67. nt_compile.py --json on the snapshot file: exit 0, 1.6 s, no compiler messages. No findings."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.WeaklyEtaleUniversalHomeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/WeaklyEtaleUniversalHomeomorphism.lean",
+  "declaration": "AlgebraicGeometry.isIso_of_weaklyEtale_of_universalHomeomorphism",
+  "statement": "theorem isIso_of_weaklyEtale_of_universalHomeomorphism {V W : Scheme.{u}} (f : V ⟶ W) [WeaklyEtale f] (hf : (topologically IsHomeomorph).universally f) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17"
  }
 }

@@ -28,7 +28,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-segal-dk-diagonal-equivalence"
+  "lem-coef-segal-dk-diagonal-equivalence",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "def-coef-infinity-fibrations"
  ],
  "proof": [
   {
@@ -273,5 +275,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45b14676a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Every clause of the node (column/core iff, bisimplicial structure natural in Q, canonical C(Q)_0 iso with naturality, IsHomotopySegalSpace, endpoints Kan fibration via J.rlp, strict fiber iso to comma Δ[0] Q (const x) y true constrained by the interval projection hence unique, constant-path fiberComparison weak equivalence, diagonal evaluation natural in Q with no weak-equivalence claim) matches the recorded dependency declarations, which I read. No extra hypotheses; one universe u. Edge cases checked: empty Q, point, N([1]), p=0 and p=1, degree 0. Commit changes only the report, the item node (lean record plus two landed helper-owning stmt_deps, no cycle) and the module. lean.statement is verbatim. No hollow definitions. Only two sorry theorems, both with proof docstrings. Source and blueprint docstrings present. No duplicate notion found. nt_compile --json of the snapshot module: exit 0, 4.7 s, no diagnostics. Report has Worker report and Second reading by Q82 sections."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuasicategoryClassificationRealization",
+  "declaration": "SSet.Classification.quasicategory_classification_realization",
+  "declarations": [
+   "SSet.Classification.diagram",
+   "SSet.Classification.map",
+   "SSet.Classification.functor",
+   "SSet.Classification.endpoints",
+   "SSet.Classification.evaluationApp",
+   "SSet.Classification.evaluationApp_naturality",
+   "SSet.Classification.evaluation",
+   "SSet.Classification.vertex",
+   "SSet.Classification.fiberComparison",
+   "SSet.Classification.quasicategory_classification_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/QuasicategoryClassificationRealization.lean",
+  "statement": "theorem quasicategory_classification_realization (Q : SSet.{u}) [Quasicategory Q] : (∀ (p : SimplexCategory) (n : SimplexCategoryᵒᵖ) (h : ((ihom (stdSimplex.{u}.obj p)).obj Q).obj n), h ∈ (Enhanced.core ((ihom (stdSimplex.{u}.obj p)).obj Q)).obj n ↔ ∀ (i : Fin (p.len + 1)) (a : ⦋1⦌ ⟶ n.unop), Enhanced.IsEquivalenceEdge Q (Q.map a.op ((Enhanced.evaluation (stdSimplex.{u}.obj p) Q (stdSimplex.objEquiv.symm (SimplexCategory.const ⦋0⦌ p i))).app n h))) ∧ IsIso (Enhanced.coreMap (Enhanced.evaluation Δ[0] Q (stdSimplex.obj₀Equiv.symm 0))) ∧ (∀ (R : SSet.{u}) (f : Q ⟶ R), (map f).app (op ⦋0⦌) ≫ Enhanced.coreMap (Enhanced.evaluation Δ[0] R (stdSimplex.obj₀Equiv.symm 0)) = Enhanced.coreMap (Enhanced.evaluation Δ[0] Q (stdSimplex.obj₀Equiv.symm 0)) ≫ Enhanced.coreMap f) ∧ HomotopySegal.IsHomotopySegalSpace (diagram Q) ∧ modelCategoryQuillen.J.rlp (endpoints Q) ∧ (∀ x y : Q _⦋0⦌, ∃ i : Enhanced.fiber (endpoints Q) (vertex Q x, vertex Q y) ≅ Enhanced.comma Δ[0] Q (SSet.const x) y true, i.hom ≫ (Enhanced.commaSubcomplex Δ[0] Q (SSet.const x) y true).ι ≫ snd Δ[0] ((ihom Δ[1]).obj Q) = pullback.snd (SSet.const (X := Δ[0]) (vertex Q x, vertex Q y)) (endpoints Q) ≫ (Enhanced.core ((ihom Δ[1]).obj Q)).ι) ∧ (∀ x y : Q _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (fiberComparison Q (vertex Q x) (vertex Q y))) ∧ (∀ (R : SSet.{u}) (f : Q ⟶ R), Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map (map f)) ≫ evaluation R = evaluation Q ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The classification columns reuse the recorded cores of internal functor simplicial sets, and the theorem identifies their actual simplices with the vertical-equivalence condition. The strict endpoint fiber now reuses SSet.Enhanced.fiber from def-coef-infinity-fibrations, with its canonical pullback.snd projection fixing the unpinched-fiber isomorphism. The comparison inserts the actual constant path. Reuses Enhanced.coreMap from lem-coef-infinity-isofibration-pullback-limit. Both existing helper-owning nodes are cited in stmt_deps. No definition is chosen from an existence theorem."
  }
 }
