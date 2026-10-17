@@ -107,7 +107,7 @@ theorem residueFieldTrdeg_eq_trdeg_quotient {A : Type u} [CommRing A] [Algebra K
       (IsFractionRing.injective (A ⧸ p.asIdeal) p.asIdeal.ResidueField)
   have : FaithfulSMul K (A ⧸ p.asIdeal) :=
     (faithfulSMul_iff_algebraMap_injective _ _).2 (algebraMap K (A ⧸ p.asIdeal)).injective
-  have h := trdeg_add_eq K (A ⧸ p.asIdeal) p.asIdeal.ResidueField
+  have h := trdeg_add_eq K (A ⧸ p.asIdeal) (A := p.asIdeal.ResidueField)
   rw [trdeg_eq_zero (R := A ⧸ p.asIdeal), add_zero] at h
   exact h.symm
 
@@ -147,12 +147,16 @@ of the open neighbourhoods of `x` (Stacks `02FX`). -/
 theorem topologicalKrullDimAt_eq_ringKrullDim_stalk_add [LocallyOfFiniteType b] (x : X) :
     ∃ t : ℕ, residueFieldTrdeg b x = t ∧
       topologicalKrullDimAt x = ringKrullDim (X.presheaf.stalk x) + t := by
-  obtain ⟨A₀, _, _, j₀, _, ⟨p₀, rfl⟩, -, hj₀⟩ := exists_affineChart_over b (U := ⊤) (x := x) trivial
+  obtain ⟨A₀, _, _, j₀, _, hx₀, -, hj₀⟩ :=
+    exists_affineChart_over b (U := ⊤) (x := x) trivial
+  obtain ⟨p₀, rfl⟩ : ∃ p : PrimeSpectrum A₀, j₀ p = x := hx₀
   have := finiteType_of_affineChart j₀ hj₀
   have : IsNoetherianRing A₀ := Algebra.FiniteType.isNoetherianRing K A₀
   obtain ⟨t, ht, htr⟩ := exists_coheight_eq_and_residueFieldTrdeg_eq j₀ hj₀ p₀
   refine ⟨t, htr, ?_⟩
-  rw [ringKrullDim_stalk_eq_height j₀ p₀, ← ht]
+  rw [ringKrullDim_stalk_eq_height j₀ p₀,
+    show ((t : ℕ) : WithBot ℕ∞) = ((coheight p₀ : ℕ∞) : WithBot ℕ∞) by rw [ht]; rfl,
+    ← WithBot.coe_add]
   apply le_antisymm
   · -- a neighbourhood `Spec A₀[1/g]` all of whose components pass through `x`
     obtain ⟨g, hg, hmin⟩ := exists_notMem_forall_minimalPrimes_le p₀.asIdeal
@@ -164,7 +168,8 @@ theorem topologicalKrullDimAt_eq_ringKrullDim_stalk_add [LocallyOfFiniteType b] 
       obtain ⟨q, hq⟩ := (PrimeSpectrum.localization_away_comap_range (Localization.Away g) g).ge
         (show p₀ ∈ (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum A₀)) from hg)
       exact ⟨q, by simp [j, ← hq]; rfl⟩
-    refine (iInf₂_le _ hx).trans ?_
+    refine (iInf₂_le (f := fun (U : TopologicalSpace.Opens X) (_ : j₀ p₀ ∈ U) ↦
+      topologicalKrullDim U) j.opensRange hx).trans ?_
     calc topologicalKrullDim (j.opensRange : Set X)
         = topologicalKrullDim (Spec (.of (Localization.Away g))) := by
           rw [j.isOpenEmbedding.isEmbedding.topologicalKrullDim_eq_range]
@@ -173,7 +178,8 @@ theorem topologicalKrullDimAt_eq_ringKrullDim_stalk_add [LocallyOfFiniteType b] 
           PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _
       _ ≤ _ := ringKrullDim_localization_away_le_of_finiteType (K := K) p₀ hmin
   · refine le_iInf₂ fun U hU ↦ ?_
-    obtain ⟨A, _, _, j, _, ⟨p, hp⟩, hjU, hj⟩ := exists_affineChart_over b hU
+    obtain ⟨A, _, _, j, _, hxj, hjU, hj⟩ := exists_affineChart_over b hU
+    obtain ⟨p, hp⟩ : ∃ p : PrimeSpectrum A, j p = j₀ p₀ := hxj
     obtain ⟨t', ht', htr'⟩ := exists_coheight_eq_and_residueFieldTrdeg_eq j hj p
     have htt : t' = t := by
       rw [hp, htr] at htr'

@@ -144,13 +144,15 @@ noncomputable def functor : 𝒳 ⥤ 𝒵 :=
     (homEquiv adjI adjJ h₀ hdet) (fun A A' M f g ↦ by
       apply adjI.fullyFaithfulROfIsIsoCounit.map_injective
       simp only [homEquiv, Equiv.coe_fn_mk, Functor.FullyFaithful.map_preimage, Functor.map_comp]
-      rw [← Category.assoc, ← Category.assoc]
-      congr 1
-      ext
-      simp)
+      have : kernel.lift (adjJ.unit.app M) (iLow.map f ≫ g)
+          (comp_unit_app_eq_zero adjI adjJ h₀ _) =
+          iLow.map f ≫ kernel.lift _ g (comp_unit_app_eq_zero adjI adjJ h₀ g) := by
+        ext; simp
+      simp [this])
 
 /-- The value of `Γ_Z` on `M` is `i^* ker(M ⟶ j_* j^* M)`. -/
-lemma functor_obj (M : 𝒳) : (functor adjI adjJ h₀ hdet).obj M = iUp.obj (kernel (adjJ.unit.app M)) :=
+lemma functor_obj (M : 𝒳) :
+    (functor adjI adjJ h₀ hdet).obj M = iUp.obj (kernel (adjJ.unit.app M)) :=
   rfl
 
 /-- **`i_* ⊣ Γ_Z`** (blueprint `det-lem-formal-closed-support-adjunction` (1)). -/
@@ -159,7 +161,8 @@ noncomputable def adjunction : iLow ⊣ functor adjI adjJ h₀ hdet :=
 
 /-- `Γ_Z` is left exact, being a right adjoint. -/
 lemma preservesFiniteLimits_functor : PreservesFiniteLimits (functor adjI adjJ h₀ hdet) :=
-  (adjunction adjI adjJ h₀ hdet).rightAdjoint_preservesLimits.preservesFiniteLimits
+  have := (adjunction adjI adjJ h₀ hdet).isRightAdjoint
+  inferInstance
 
 /-- **`ker(M ⟶ j_* j^* M) ≅ i_* Γ_Z(M)`** (blueprint `det-lem-formal-closed-support-adjunction`
 (1)). -/

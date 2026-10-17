@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassProduct
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 

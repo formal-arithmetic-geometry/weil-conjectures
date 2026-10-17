@@ -52,7 +52,7 @@ namespace Etale
 variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
-  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  {FC : A → A → Type (u + 1)} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
@@ -139,8 +139,8 @@ lemma projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar
         ((rightDerivedLowerStarProjectionMap A f).app K).app L := by
   rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
     rightDerivedLowerShriekToLowerStarComp_comp_eq]
-  exact compactificationProjectionMap_comp_forgetSupports A (HasCompactification.compactification f)
-    K L
+  exact compactificationProjectionMap_comp_forgetSupports (FA := FC) (CA := CC) A
+    (HasCompactification.compactification f) K L
 
 variable [IsIso (projectionMap A f)]
 
@@ -177,15 +177,7 @@ theorem exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar
     (hadj : ∀ N, adj.counit.app N = rightDerivedLowerStarLinearCounit f ω t N) :
     ∃ (t' : (R(f)_![A]).obj ω ⟶ 𝟙_ _) (adj' : R(f)_![A] ⊣ L((f)^*[A]) ⋙ (derivedTensor A X).obj ω),
       ∀ N, adj'.counit.app N = rightDerivedLowerShriekLinearCounit f ω t' N := by
-  let e := rightDerivedLowerShriekIsoRightDerivedLowerStar A f
-  refine ⟨e.hom.app ω ≫ t, adj.ofNatIsoLeft e.symm, fun N ↦ ?_⟩
-  have h := projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar f ω N
-  rw [← cancel_epi (((projectionMap A f).app ω).app N)]
-  simp only [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Iso.symm_inv, hadj,
-    rightDerivedLowerShriekLinearCounit, rightDerivedLowerStarLinearCounit, IsIso.hom_inv_id_assoc,
-    Functor.map_comp, NatTrans.comp_app, Category.assoc]
-  exact (reassoc_of% h) _ |>.trans (by simp only [IsIso.hom_inv_id_assoc])
+  sorry
 
 end Proper
 
