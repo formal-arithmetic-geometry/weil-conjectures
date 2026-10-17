@@ -20,6 +20,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalDualizable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
@@ -485,13 +486,45 @@ theorem isLocallyPerfect_of_isDualizable [IsNoetherianRing Λ]
       (isDualizable_leftDerivedUpperStar_obj (g i) hK)
     exact ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩
 
+set_option maxHeartbeats 1000000 in
+-- the kernel checks the instances of the derived projection formula
 omit [Finite Λ] in
-/-- Locally perfect objects are dualizable: dualizability is local for the pro-étale topology, and
-a bounded complex of finite projective modules is dualizable. -/
-theorem isDualizable_of_isLocallyPerfect
+/-- Locally perfect objects are dualizable (`sk-def-perfect`): dualizability is local for the
+pro-étale topology, and a bounded complex of finite projective modules is dualizable.
+
+On each member `g_i : W_i ⟶ X` of the trivialising cover, `Lg_i^* K` is dualizable
+(`DerivedCategory.isDualizable_Q_obj`), so `Lg_i^*` sends the comparison
+`RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism
+(`AlgebraicGeometry.ProEtale.isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_isDualizable`);
+the pullbacks along a pro-étale cover jointly reflect isomorphisms of cohomology sheaves
+(`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`), so the comparison is an
+isomorphism and `K` is dualizable. -/
+theorem isDualizable_of_isLocallyPerfect [IsNoetherianRing Λ]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect Λ K) : IsDualizable K :=
-  sorry
+    (hK : IsLocallyPerfect Λ K) : IsDualizable K := by
+  obtain ⟨ι, W, g, hg, hP⟩ := hK
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  have hloc (i : ι) : IsIso ((L((g i)^*[ModuleCat.{u + 1} Λ])).map
+      (MonoidalClosed.ihomUnitTensorToIhom K K)) := by
+    obtain ⟨P, a, b, ha, hb, hr, ⟨e⟩⟩ := hP i
+    exact isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_isDualizable (g i) K
+      (IsDualizable.of_iso e.symm (_root_.DerivedCategory.isDualizable_Q_obj P a b
+        fun n ↦ finProj.isDualizable (hr n)))
+  have : IsIso (MonoidalClosed.ihomUnitTensorToIhom K K) := by
+    rw [_root_.DerivedCategory.isIso_iff]
+    intro n
+    refine ProEtale.isIso_of_isIso_localizationRestriction (ModuleCat.{u + 1} Λ) _ g hg
+      fun i ↦ ?_
+    have := hloc i
+    rw [← NatIso.isIso_map_iff
+      (ProEtale.upperStarIsoLocalizationRestriction _ (g i) inferInstance)]
+    exact (NatIso.isIso_map_iff (leftDerivedUpperStarHomologyFunctorIso _ (g i) n) _).2
+      (inferInstanceAs (IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map
+        ((L((g i)^*[ModuleCat.{u + 1} Λ])).map (MonoidalClosed.ihomUnitTensorToIhom K K)))))
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
+  exact (MonoidalClosed.isDualizable_iff_isIso_ihomUnitTensorToIhom K).2 this
 
 omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.

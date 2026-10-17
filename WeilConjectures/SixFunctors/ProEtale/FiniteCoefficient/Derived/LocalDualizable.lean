@@ -329,7 +329,7 @@ theorem isIso_projectionMap_derivedLocalizationLowerShriek {U : Scheme.{u}} (f :
 `RHom(K, 𝟙) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism. By
 `CategoryTheory.Functor.Monoidal.isIso_map_ihomUnitTensorToIhom`, this follows from the derived
 projection formula `isIso_projectionMap_derivedLocalizationLowerShriek`. -/
-theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale_general
+theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_isDualizable
     {U : Scheme.{u}} (f : U ⟶ X) [WeaklyEtale f] [ProEtale.UpperStarPreservesFlat A]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (hK : IsDualizable ((L((f)^*[A])).obj K)) :
