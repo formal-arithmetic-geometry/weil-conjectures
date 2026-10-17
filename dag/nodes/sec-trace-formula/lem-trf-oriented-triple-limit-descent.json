@@ -375,5 +375,37 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-be88524aa (reviewer sub-agent of L); spot-checked: Full mathematical review completed; review.md written with source checks, all 12 proof steps, hypotheses, edge cases, searches, route checks, and tool uses. No faults found."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-538775b99",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependencies, sources, universes, edge cases, canonical comparisons, and route-pivot exclusions. The statement matches verbatim; per-file compilation passed without diagnostics. No fixes needed. This review made no repository changes; a shared context clone advanced externally."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedTripleLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.orientedTripleLimitDescent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.orientedTripleUnderlying",
+   "AlgebraicGeometry.Scheme.orientedTripleBaseChangeLeg",
+   "AlgebraicGeometry.Scheme.orientedTripleSystemTransition",
+   "AlgebraicGeometry.Scheme.orientedTripleSystemProjection",
+   "AlgebraicGeometry.Scheme.finiteTripleSystemTransition",
+   "AlgebraicGeometry.Scheme.finiteTripleSystemProjection",
+   "AlgebraicGeometry.Scheme.HasOrientedTripleGeometricComparison",
+   "AlgebraicGeometry.Scheme.finiteTripleCompositePrecoverage",
+   "AlgebraicGeometry.Scheme.HasFiniteTripleLimitDescent",
+   "AlgebraicGeometry.Scheme.OrientedTripleLimitPresentation",
+   "AlgebraicGeometry.Scheme.orientedTripleLimitDescent"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedTripleLimitDescent.lean",
+  "statement": "theorem orientedTripleLimitDescent (I : Type u) [SmallCategory I] [IsCofiltered I] (X S Y : I ⥤ Scheme.{u}) [HasLimit X] [HasLimit S] [HasLimit Y] (f : X ⟶ S) (g : Y ⟶ S) [∀ i : I, CompactSpace (X.obj i)] [∀ i : I, QuasiSeparatedSpace (X.obj i)] [∀ i : I, CompactSpace (S.obj i)] [∀ i : I, QuasiSeparatedSpace (S.obj i)] [∀ i : I, CompactSpace (Y.obj i)] [∀ i : I, QuasiSeparatedSpace (Y.obj i)] [∀ (i j : I) (a : i ⟶ j), IsAffineHom (X.map a)] [∀ (i j : I) (a : i ⟶ j), IsAffineHom (S.map a)] [∀ (i j : I) (a : i ⟶ j), IsAffineHom (Y.map a)] : (CompactSpace (limit X : Scheme.{u}) ∧ QuasiSeparatedSpace (limit X : Scheme.{u})) ∧ (CompactSpace (limit S : Scheme.{u}) ∧ QuasiSeparatedSpace (limit S : Scheme.{u})) ∧ (CompactSpace (limit Y : Scheme.{u}) ∧ QuasiSeparatedSpace (limit Y : Scheme.{u})) ∧ (QuasiCompact (limMap f) ∧ QuasiSeparated (limMap f)) ∧ (QuasiCompact (limMap g) ∧ QuasiSeparated (limMap g)) ∧ HasFiniteTripleLimitDescent X S Y f g ∧ Nonempty (OrientedTripleLimitPresentation X S Y f g)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The same-node helpers express the exact finite-composition precoverage, finite tables and relations, and a strict colimit presentation with canonical projection normalization and sectionwise geometric comparisons. All scheme base changes reuse the recorded triple-site construction. The only postponed theorem is orientedTripleLimitDescent."
  }
 }

@@ -101,17 +101,27 @@
  },
  "lead_note": "2026-10-10 L: reviewer of the strict-henselization definition notes the same silent large-index colimit here (the category of pointed etale neighbourhoods is only essentially small); treat smallness at its split as for def-weil-pbc-strict-henselization-limit (index over the small subcategory of lem-weil-pbc-affine-etale-essentially-small-cover).",
  "lean": {
-  "module": "Mathlib.CategoryTheory.Sites.Point.Basic",
-  "declaration": "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+  "module": "Sheaf.AlgebraicGeometry.PointedEtaleStalk",
+  "declaration": "AlgebraicGeometry.pointedEtaleStalk",
   "declarations": [
-   "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
-   "AlgebraicGeometry.Scheme.pointSmallEtale"
+   "AlgebraicGeometry.pointedEtaleStalkDiagram",
+   "AlgebraicGeometry.pointedEtaleCommMonStalkHasColimit",
+   "AlgebraicGeometry.pointedEtaleGerm"
   ],
-  "statement": "noncomputable def sheafFiber : Sheaf J A ⥤ A",
-  "branch": "mathlib",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedEtaleStalk.lean",
+  "statement": "def pointedEtaleStalk {X : Scheme.{u}} {A : Type w} [Category.{v} A] (F : Sheaf X.smallEtaleTopology A) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X) [HasColimit (pointedEtaleStalkDiagram F t)] : A",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): Point.sheafFiber assumes HasColimitsOfSize for its coefficient category, so it cannot be applied to CommMonCat using Mathlib's available filtered-colimit construction. This interface states exactly the node's pointed-etale-neighbourhood colimit, with the same diagram as Point.sheafFiber, assuming only that particular colimit. Sets and all previous coefficient categories remain specializations; no site or coefficient universe is equated. The item supplies CommMonCat's required colimit from its explicit filtered colimit on a small final model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
   "by": "L",
-  "date": "2026-10-11",
-  "existing": true,
-  "note": "The stalk F_t̄ of a sheaf F on T_Et at a geometric point t̄ : Spec Ω → T is ((pointSmallEtale t̄).sheafFiber).obj F: pointSmallEtale (Mathlib.AlgebraicGeometry.Sites.EtalePoint:64) is the point of smallEtaleTopology T whose fibre at U is the set of lifts Spec Ω → U over t̄, and Point.sheafFiber (Point/Basic.lean:277) is the colimit of F over the opposite category of elements of that fibre, i.e. over pointed etale neighbourhoods. This is the form used by the landed siblings (lean/Sheaf/AlgebraicGeometry/EtaleSupport.lean, EtaleSheaves.lean, GeometricStalkColimits.lean, AbelianSheavesGModules.lean). The node's notion. Names checked with #check in an L sandbox; recorded by a T-batch3 bookkeeping agent of L."
+  "reviewer": "NT-stage2-Codex-ddfe1f459",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source declarations, both Lean modules, docstrings, edge cases, route-pivot constraints, and compile/preflight evidence; no substantive or mechanical defects found."
  }
 }

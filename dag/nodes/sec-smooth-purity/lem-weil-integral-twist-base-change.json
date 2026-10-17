@@ -291,5 +291,30 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-d6d3a411e (reviewer sub-agent of L); spot-checked: I read the whole delivery against its sources: the item, all 8 steps, every cited statement, the unit record, the master and main-20261015 prop-weil-twist-preserves (identical proofs) and the det-prop-sfb-cartesian-coefficients-twists blueprint text. The statement is unchanged and not weakened. It uses the completed rings R_H, not the discrete (O_H)_S, and O_H(1)=T⊗_Ẑ R_H follows from clause 3 of lem-pur-twist-sheaf-locally-free. Steps 1-7 are correct: balanced tensor maps, the ringed-topos tensor comparison with u=id, the dual map β, the local inverse on a trivialising cover, coherence checked on generators, and the tower. I tested m=0 and m=±1, E=F, a ramified extension and S=∅. Step 8 had a gap (C3/C4, E6). It cited det-prop-sfb-cartesian-coefficients-twists, but that node's integral line is the one from sk-def-sp-tate-twist (lim μ⊗O_E/ℓ^n over p^*O_E), not this item's Zℓ(1)⊗(O_E)_S. Its statement also does not give the compatibility with E⊂F that the c_1 naturality square needs; that appears only in its proof. FIX: I added the statement-only node lem-pur-integral-twist-line-inverse-image (unsplit, unit sk-prop-sf-existence, created.item set to this item, blueprint.from prop-weil-twist-preserves via this item, same_as []). It states the ring isomorphism α, the isomorphism τ for h^{-1}Zℓ(1), the semilinear line isomorphism ρ, and their compatibility with ι_EF and j_EF. It is true via qlbar-integral-limit clause 3, lem-sfb-alpha-iso, lem-pur-inverse-image-compatible-free-tower and det-def-sp-tate-twist-locally-free. Its Mathlib record has three grep searches with no match; LeanSearch is recorded as unavailable. I rewrote step 8 (1775 characters) to cite it together with the module-pullback-tensor lemma, def-weil-proetale-inverse-image, the finite-free dual pullback lemma and the tensor-closed node. The two det-prop citations were removed from proof_deps and tool_uses, and the unsupported 'identity and composition' sentence was deleted. I accept the remaining tool uses as definitions or generic tools. Pre-existing fault for the maintainer: the DAG has two constructions of the integral Tate line and no node relating them.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-de535e8f9",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Completed integral twist base-change delivery checked clause by clause; source, dependencies, canonicality, edge cases, docstrings, and successful scompile verified."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTwistBaseChange",
+  "declaration": "WeilConjectures.integral_twist_base_change",
+  "declarations": [
+   "WeilConjectures.integralTwistAbSheaf",
+   "WeilConjectures.IntegralTwistSchemeArrows",
+   "WeilConjectures.IsCanonicalIntegralTwistSchemeArrows",
+   "WeilConjectures.IntegralTwistSchemeArrows.AreIsomorphisms",
+   "WeilConjectures.integral_twist_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTwistBaseChange.lean",
+  "statement": "theorem integral_twist_base_change [∀ x : S, Invertible (l : S.residueField x)] : IsCanonicalTwistScalarMaps l E S F ι (twistScalarMaps l E S F ι) ∧ (∀ (m : ℤ) (U : S.ProEtᵒᵖ) (b : (completedIntegralCommRingSheafUnrestricted l F S).obj.obj U) (x : (integralTwistLine l E S m).val.obj U), (twistLineScalarIso l E S F ι m).hom.val.app U (integralOrdinaryTensorSection l E F ι S _ U b x) = b • (@id ((integralTwistLine l F S m).val.obj U) ((twistScalarMaps l E S F ι m).val.app U x))) ∧ (∀ (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G] (κ : F →ₐ[ℚ_[l]] G) (m : ℤ) (U : S.ProEtᵒᵖ) (x : (integralTwistLine l E S m).val.obj U), (twistScalarMaps l E S G (κ.comp ι) m).val.app U x = (twistScalarMaps l F S G κ m).val.app U ((twistScalarMaps l E S F ι m).val.app U x)) ∧ ∀ (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] (h : X ⟶ S), ∃ (aE : IntegralTwistSchemeArrows l E S X h) (aF : IntegralTwistSchemeArrows l F S X h), IsCanonicalIntegralTwistSchemeArrows l E S X h aE ∧ IsCanonicalIntegralTwistSchemeArrows l F S X h aF ∧ aE.AreIsomorphisms l E S X h ∧ aF.AreIsomorphisms l F S X h ∧ (∀ a : IntegralTwistSchemeArrows l E S X h, IsCanonicalIntegralTwistSchemeArrows l E S X h a → a = aE) ∧ (∀ a : IntegralTwistSchemeArrows l F S X h, IsCanonicalIntegralTwistSchemeArrows l F S X h a → a = aF) ∧ (integralCompletedScalarMap l E F ι S ≫ aF.coeff = aE.coeff ≫ (proEtaleSheafDirectImage h CommRingCat.{u + 1}).map (integralCompletedScalarMap l E F ι X)) ∧ ∀ (m : ℤ) (U : S.ProEtᵒᵖ) (x : (integralTwistLine l E S m).val.obj U), (aF.line m).hom.app U ((twistScalarMaps l E S F ι m).val.app U x) = (twistScalarMaps l E X F ι m).val.app ((proEtaleBaseChange h).op.obj U) ((aE.line m).hom.app U x)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

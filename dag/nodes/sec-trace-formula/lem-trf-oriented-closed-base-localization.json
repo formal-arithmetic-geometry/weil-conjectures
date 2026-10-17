@@ -13,7 +13,12 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-closed-immersion",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-topos",
+  "def-trf-geometric-morphism",
+  "lem-trf-topos-complement-factorization",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-etale-closed-complement-sets"
  ],
  "proof": [
   {
@@ -167,5 +172,30 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c78a26225 (reviewer sub-agent of L); spot-checked: Step 2 omitted the essential descent of module addition and constant scalar action along the underlying fully faithful direct image. The corrected whole-node JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-oriented-closed-base-localization.json; review.md records source, hypothesis, edge-case, route, cycle, and search checks.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-db6409f65",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Mathematics and Lean statement are correct; scompile.py passed both probes without diagnostics. Repaired H11’s placeholder second reading with a complete replacement report in fixes/lem-trf-oriented-closed-base-localization.report.md. Full checks and findings are in review.md. Branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization",
+  "declaration": "CategoryTheory.oriented_closed_base_localization",
+  "declarations": [
+   "CategoryTheory.ClosedBaseLocalization.ComplementData",
+   "CategoryTheory.ClosedBaseLocalization.ModuleAssertion",
+   "CategoryTheory.ClosedBaseLocalization.representedOpenComplement",
+   "CategoryTheory.oriented_closed_base_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedClosedBaseLocalization.lean",
+  "statement": "theorem oriented_closed_base_localization : (∀ (E : Type u) [Category.{v} E], IsGrothendieckTopos.{w} E → ∀ U : E, IsSubterminal U → ∃ products : HasBinaryProducts E, Nonempty (@ClosedBaseLocalization.ComplementData.{w, u, v, uH, vH, uG, vG} E _ products U)) ∧ (∀ (C D O : Type w) [SmallCategory C] [SmallCategory D] [SmallCategory O] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology O) (U : Sheaf J (Type w)), IsSubterminal U → ∀ (i : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) (j : GeometricMorphism (Sheaf L (Type w)) (Sheaf J (Type w))), ClosedBaseLocalization.ModuleAssertion J K L U i j) ∧ (∀ (F S : AlgebraicGeometry.Scheme.{t}) (k : F ⟶ S) [AlgebraicGeometry.IsClosedImmersion k], IsSubterminal (ClosedBaseLocalization.representedOpenComplement k) ∧ ∃ e : Sheaf F.smallEtaleTopology (Type (t + 1)) ≌ (closedComplementObjects (ClosedBaseLocalization.representedOpenComplement k)).FullSubcategory, Nonempty (e.functor ⋙ (closedComplementObjects (ClosedBaseLocalization.representedOpenComplement k)).ι ≅ AlgebraicGeometry.etaleSetDirectImage k))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing closedComplementObjects and GeometricMorphism, normalized ConstantLeftModuleInverseImageLift, and actual etaleSetDirectImage. ComplementData packages the construction, factorization on all 2-morphisms and inverse-image universal property; ModuleAssertion packages the exactness, full faithfulness, counit, supported essential image and actual unit on any small-site presentations; the final conjunct identifies the scheme-induced etale direct image with the inclusion. No definition is chosen from an undetermined existence statement."
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-presentation-module-descent-flat-local",
  "kind": "statement",
  "title": "Finite presentation of modules descends faithfully flatly",
- "statement": "Let $R\\to T$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and let $M$ be an $R$-module. If $T\\otimes_R M$ is a finitely presented $T$-module [def-weil-pbc-module-tensor-product; def-weil-pbc-module-finite-type-presentation], then $M$ is a finitely presented $R$-module.",
+ "statement": "Let $R\\to T$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and let $M$ be an $R$-module. If $T\\otimes_R M$ is a finitely presented $T$-module [def-weil-pbc-module-tensor-product; def-sc-finitely-presented-module], then $M$ is a finitely presented $R$-module.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 03C4, lemma-descend-properties-modules, part (2)."
@@ -10,7 +10,7 @@
  "stmt_deps": [
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-module-tensor-product",
-  "def-weil-pbc-module-finite-type-presentation"
+  "def-sc-finitely-presented-module"
  ],
  "proof": [],
  "proof_deps": [],
@@ -67,11 +67,14 @@
   "is": null
  },
  "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Finiteness.Descent",
+  "declaration": "Module.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat",
+  "statement": "lemma Module.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat\n    [Module.FaithfullyFlat A B] [Module.FinitePresentation B (B ⊗[A] M)] :\n    Module.FinitePresentation A M",
   "branch": "slopmaster2",
-  "declarations": [
-   "Module.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 20:50 UTC for group Q54, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: Its hypotheses match faithful flatness and finite presentation after tensoring, and its conclusion gives finite presentatio"
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact published slopmaster2 declaration in WeilConjectures.Mathlib.RingTheory.Finiteness.Descent; its faithfully flat algebra and finite-presentation tensor-product hypotheses and finite-presentation conclusion match the node."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -91,5 +94,36 @@
    "missing": [],
    "open": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NH stage 2",
+  "old_statement": "Let $R\\to T$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and let $M$ be an $R$-module. If $T\\otimes_R M$ is a finitely presented $T$-module [def-weil-pbc-module-tensor-product; def-weil-pbc-module-finite-type-presentation], then $M$ is a finitely presented $R$-module.",
+  "what": "The citation def-weil-pbc-module-finite-type-presentation denotes sheaf finite type/presentation on a ringed space, while this item and Tag 03C4 concern ordinary modules over commutative rings. Replace that citation by the existing ordinary-module definition node def-sc-finitely-presented-module; the mathematical statement, Lean theorem, hypotheses, and conclusion are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 03C4, lemma-descend-properties-modules, part (2), together with Definition 0518 (Tag 0517) for ordinary finitely presented modules"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-flat-finite-type-flat-point-local",
+    "holds": true,
+    "note": "Its Step 3 applies this item to an ordinary stalk module and a faithfully flat local-ring map, exactly the corrected ordinary-module notion; the citer remains valid and is not edited."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-faithfully-flat-ring-map",
+   "def-weil-pbc-module-tensor-product",
+   "def-weil-pbc-module-finite-type-presentation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-282896055",
+  "group": "NH",
+  "result": "pass",
+  "note": "Exact source, dependencies, universes, edge cases, correction audit, report headings, and compiler evidence checked; no substantive findings.",
+  "statement_corrected": true
  }
 }

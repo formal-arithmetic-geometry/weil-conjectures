@@ -172,5 +172,25 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-58ef23d29 (reviewer sub-agent of L); spot-checked: Read the packet, report, unit/chapter route, item, all four proof steps, every cited node, and Stacks sources Tags 03KG, 03KM, 03E3, 02X2, 04T9, 041F, 01QR, 022C, 0218, 0217, and 02L6. The removed finite-type/properness clause is fully absent. Remaining hypotheses, base changes, diagonal tests, etale/fpqc descent, affine refinement, finite atlas construction, empty-family cases, and tool uses check out. No duplicate/new node, route-pivot, SGA, or coefficient-category issue found. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ef4638cc6",
+  "group": "N4",
+  "result": "fix",
+  "note": "Found unintended I : Type u restriction; complete universe-polymorphic replacement is in fixes/lean/Sheaf/TraceFormula/SpaceQCSeparatedEtaleLocal.lean and compiles successfully."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompact_separated_etaleLocal",
+  "statement": "theorem quasiCompact_separated_etaleLocal (X Y : AlgebraicSpace S) (f : X ⟶ Y) (I : Type v) (Yᵢ : I → Over S) (a : ∀ i, yoneda.obj (Yᵢ i) ⟶ Y.obj.obj) (ha : IsJointlySurjectiveEtaleFamily Y I Yᵢ a) : (IsQuasiCompactPresheafMap f.hom.hom ∧ IsSeparatedPresheafMap f.hom.hom) ↔ ∀ i, IsQuasiCompactPresheafMap (CategoryTheory.Limits.pullback.snd f.hom.hom (a i)) ∧ IsSeparatedPresheafMap (CategoryTheory.Limits.pullback.snd f.hom.hom (a i))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/SpaceQCSeparatedEtaleLocal.lean",
+  "note": "The module states the quasi-compactness and separatedness predicates on presheaf morphisms and the étale-local equivalence. Quasi-compactness is expressed by quasi-compact scheme atlases of affine scheme tests; separatedness is representability of the diagonal by closed immersions.",
+  "fixed_by": "NT-stage2-Codex-ef4638cc6"
  }
 }
