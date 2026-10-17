@@ -326,4 +326,126 @@ def Scheme.galoisRepFunctorTensorNatIso :
 
 end GaloisRepFunctor
 
+section Unit
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+variable (Y Λ) in
+/-- The canonical map from the constant presheaf `Λ` to the constant sheaf `Λ_Y`. -/
+def Scheme.unitToSheafUnit :
+    𝟙_ (Y.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ) ⟶
+      (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj :=
+  toSheafify _ _ ≫ (Functor.Monoidal.εIso (presheafToSheaf Y.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))).inv.hom
+
+instance : IsIso ((Scheme.pointSmallEtale s).presheafFiber.map (Scheme.unitToSheafUnit Y Λ)) := by
+  rw [Scheme.unitToSheafUnit, Functor.map_comp]
+  have : IsIso (Functor.Monoidal.εIso (presheafToSheaf Y.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))).inv.hom :=
+    inferInstanceAs (IsIso ((sheafToPresheaf _ _).mapIso (Functor.Monoidal.εIso
+      (presheafToSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).inv)
+  infer_instance
+
+variable (Λ) in
+/-- The stalk at `s` of the constant sheaf `Λ_Y` is `Λ`. It sends `c ∈ Λ` to the germ of the
+constant section `c` (`AlgebraicGeometry.Scheme.sheafFiberUnitIso'_inv_apply`). -/
+def Scheme.sheafFiberUnitIso' :
+    (Scheme.pointSmallEtale s).sheafFiber.obj (𝟙_ (Sheaf Y.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))) ≅ 𝟙_ (ModuleCat.{u + 1} Λ) :=
+  (asIso ((Scheme.pointSmallEtale s).presheafFiber.map (Scheme.unitToSheafUnit Y Λ))).symm ≪≫
+    (Functor.Monoidal.εIso (Scheme.pointSmallEtale s).presheafFiber).symm
+
+lemma Scheme.sheafFiberUnitIso'_inv_apply (V : Y.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V)
+    (c : Λ) :
+    (Scheme.sheafFiberUnitIso' Λ s).inv.hom c =
+      (Scheme.pointSmallEtale s).toPresheafFiber V v
+        (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj
+        ((Scheme.unitToSheafUnit Y Λ).app (.op V) c) := by
+  change (Scheme.pointSmallEtale s).presheafFiber.map (Scheme.unitToSheafUnit Y Λ)
+    ((Functor.LaxMonoidal.ε ((Scheme.pointSmallEtale s).presheafFiber
+      (A := ModuleCat.{u + 1} Λ))).hom c) = _
+  rw [GrothendieckTopology.Point.toPresheafFiber_ε _ V v]
+  exact (Scheme.pointSmallEtale s).toPresheafFiber_naturality_apply _ V v _
+
+/-- The constant section `c` of `Λ_Y`, as a morphism from the terminal sheaf of sets to the
+sheaf of sets underlying `Λ_Y`. -/
+def Scheme.unitSection (c : Λ) :
+    ⊤_ (Sheaf Y.smallEtaleTopology (Type (u + 1))) ⟶
+      (sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
+        (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  ObjectProperty.homMk
+    { app U := TypeCat.ofHom fun _ ↦ (Scheme.unitToSheafUnit Y Λ).app U c
+      naturality U V i := by
+        ext z
+        change (Scheme.unitToSheafUnit Y Λ).app V c =
+          (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj.map i
+            ((Scheme.unitToSheafUnit Y Λ).app U c)
+        rw [← NatTrans.naturality_apply (Scheme.unitToSheafUnit Y Λ) i]
+        rfl }
+
+variable [Finite Λ] (G : Type u) [Group G] [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
+
+/-- **The Galois action on the stalk of the constant sheaf `Λ_Y` is trivial**: every element of
+the stalk is the germ of a constant section, which comes from the terminal sheaf of sets, whose
+stalk is a point. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_unit
+    (hU : IsFiniteLocallyConstantSheaf (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
+    (g : G) (w : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+      (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))) :
+    hU.galoisAct s G g w = w := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : AB5OfSize.{u, u} (Type (u + 1)) := AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  obtain ⟨V, v, σ, rfl⟩ := (Scheme.pointSmallEtale s).toPresheafFiber_jointly_surjective w
+  set c : Λ := (Scheme.sheafFiberUnitIso' Λ s).hom.hom
+    ((Scheme.pointSmallEtale s).toPresheafFiber V v
+      (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj σ)
+  have hw : (Scheme.pointSmallEtale s).toPresheafFiber V v
+      (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj σ =
+      (Scheme.pointSmallEtale s).toPresheafFiber V v
+        (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj
+        ((Scheme.unitToSheafUnit Y Λ).app (.op V) c) := by
+    rw [← Scheme.sheafFiberUnitIso'_inv_apply]
+    exact (ConcreteCategory.congr_hom (Scheme.sheafFiberUnitIso' Λ s).hom_inv_id _).symm
+  erw [hw]
+  obtain ⟨⟨𝒰, -⟩, -⟩ := hU.toFLC.property
+  let S0 : Y.FiniteLocallyConstant :=
+    ⟨⊤_ _, ⟨𝒰, fun i ↦ Scheme.isConstant_over_terminal _⟩, Scheme.isFiniteSheaf_terminal⟩
+  let e := PreservesTerminal.iso ((sheafToPresheaf Y.smallEtaleTopology (Type (u + 1))) ⋙
+    (CategoryTheory.evaluation _ _).obj (.op V)) ≪≫ Types.terminalIso
+  let pt := (Scheme.pointSmallEtale s).toPresheafFiber V v S0.obj.obj (e.inv PUnit.unit)
+  have hpt : (Scheme.pointSmallEtale s).sheafFiber.map (Scheme.unitSection c) pt =
+      hU.stalkEquiv s ((Scheme.pointSmallEtale s).toPresheafFiber V v
+        (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj
+        ((Scheme.unitToSheafUnit Y Λ).app (.op V) c)) := by
+    rw [hU.stalkEquiv_toPresheafFiber]
+    exact (Scheme.pointSmallEtale s).toPresheafFiber_naturality_apply _ V v _
+  have : Subsingleton ((Scheme.pointSmallEtale s).sheafFiber.obj S0.obj) :=
+    Functor.subsingleton_obj_terminal
+      (H := (Scheme.pointSmallEtale s).sheafFiber (A := Type (u + 1)))
+  have hn := Scheme.FiniteLocallyConstant.galoisSMul_naturality s G g (S := S0)
+    (S' := hU.toFLC) (ObjectProperty.homMk (Scheme.unitSection c)) pt
+  rw [Subsingleton.elim (Scheme.FiniteLocallyConstant.galoisSMul s G g S0 pt) pt] at hn
+  rw [galoisAct, ← hpt]
+  erw [← hn]
+  erw [hpt, Equiv.symm_apply_apply]
+
+/-- **The geometric stalk of the constant sheaf is the trivial representation**: the
+representation of `G` on the stalk at `s` of `Λ_Y` is `Λ` with the trivial action. The
+underlying linear map is `AlgebraicGeometry.Scheme.sheafFiberUnitIso'`. -/
+def Scheme.galoisRepFunctorUnitIso :
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj (𝟙_ _) ≅ 𝟙_ (Rep.{u + 1} Λ G) :=
+  Rep.mkIso (.mk (Scheme.sheafFiberUnitIso' Λ s).toLinearEquiv fun g ↦ LinearMap.ext fun w ↦ by
+    rw [LinearMap.comp_apply, LinearMap.comp_apply, Representation.trivial_apply]
+    exact congrArg _ (Scheme.IsFiniteLocallyConstantSheaf.galoisAct_unit s G _ g w))
+
+lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
+    (w : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+      (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))) :
+    (Scheme.galoisRepFunctorUnitIso s G).hom.hom w = (Scheme.sheafFiberUnitIso' Λ s).hom.hom w :=
+  rfl
+
+end Unit
+
 end AlgebraicGeometry
