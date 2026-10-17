@@ -263,5 +263,29 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-7270e5bd0 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full. Stacks 0BN5, 0BND, 0BTV and 0BTX support the construction and descent hypotheses. Verified Frobenius signs, model independence, all-morphism naturality, conjugation, edge cases, duplicates and batch-5 restrictions. No long steps or repairs required. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-83ab98760",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical helpers, docstrings, edge cases, route-pivot compliance, and compiler evidence all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleWeilTransport",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.finiteEtaleWeilTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteEtale.covariantTransport",
+   "AlgebraicGeometry.Scheme.FiniteEtale.fiberAutBaseChange",
+   "AlgebraicGeometry.Scheme.FiniteEtale.finiteEtaleWeilTransport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiniteEtaleWeilTransport.lean",
+  "statement": "theorem finiteEtaleWeilTransport (D : WeilConjectures.FiniteFieldDatum.{u}) (U₀ : Over (Spec (CommRingCat.of D.k₀))) [GeometricallyConnected U₀.hom] [IsSeparated U₀.hom] [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left) (w : weilGroup U₀.hom (s ≫ Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) (Aut (fiber (s ≫ Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))))) : (∃ τ : covariantTransport ((D.geometricFrobenius U₀) ^ w.val.2.toAdd) ⋙ fiber s ≅ fiber s, ∀ g : Aut (fiber s), ∃! h : Aut (fiber s), fiberAutBaseChange (Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s h = w.val.1 * fiberAutBaseChange (Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s g * w.val.1⁻¹ ∧ ∀ (P : (D.geometricFiber U₀).left.FiniteEtale) (x : (fiber s).obj ((covariantTransport ((D.geometricFrobenius U₀) ^ w.val.2.toAdd)).obj P)), τ.hom.app P (g.hom.app _ x) = h.hom.app P (τ.hom.app P x)) ∧ Nonempty (covariantTransport ((D.geometricFrobenius U₀) ^ (-w.val.2.toAdd)) ≅ pullback ((D.geometricFrobenius U₀) ^ w.val.2.toAdd).hom) ∧ (∃ lam : pullback ((D.geometricFrobenius U₀) ^ w.val.2.toAdd).hom ⋙ fiber s ≅ fiber s, ∀ g : Aut (fiber s), ∃! h : Aut (fiber s), fiberAutBaseChange (Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s h = w.val.1⁻¹ * fiberAutBaseChange (Limits.pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s g * w.val.1 ∧ ∀ (P : (D.geometricFiber U₀).left.FiniteEtale) (x : (fiber s).obj ((pullback ((D.geometricFrobenius U₀) ^ w.val.2.toAdd).hom).obj P)), lam.hom.app P (g.hom.app _ x) = h.hom.app P (lam.hom.app P x))",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "States both finite-cover transport formulations for the actual Aut(fiber) groups. The two helper definitions construct postcomposition transport and the canonical base-change map on natural automorphisms from existing functors; neither uses postponed data. Conjugates are expressed by their unique geometric preimages under this canonical map. The integer w.val.2.toAdd is definitionally weilGroupDeg applied to w."
  }
 }

@@ -16,7 +16,8 @@
   "def-pc-derived-category",
   "def-pur-pseudo-coherent-complex",
   "def-pc-derived-pullback",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-trf-coherent-relative-dualizing-pair"
  ],
  "proof": [
   {
@@ -263,5 +264,27 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-9d6a312b7 (reviewer sub-agent of L); spot-checked: Read all three nodes and checked Stacks 0E2T–0E2W, 0E2C–0E2E, 0BZW, shriek base change, affine RHom, and BBD descent. Projection conventions, hypotheses, normalization, and edge cases check out. No duplicate or restated split found; no repairs needed. Detailed findings and frozen-history limitations are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f9ec9f252",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Source and node match; both Lean modules compile cleanly via scompile.py with server confirmation; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualizingPairRigidity",
+  "declaration": "AlgebraicGeometry.relativeDualizingPair_rigidity",
+  "declarations": [
+   "AlgebraicGeometry.relativeDualizingPair_rigidity",
+   "AlgebraicGeometry.relativeDualizingPair_rigidity_on_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualizingPairRigidity.lean",
+  "statement": "theorem relativeDualizingPair_rigidity [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [IsLocallyNoetherian S] (K : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K) (hK : IsCoherentRelativeDualizingPair f K ξ) : IsIso (relativeDualizingScalarMap X K) ∧ ∀ (L : schemeDerivedCategory X) (η : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj L), IsCoherentRelativeDualizingPair f L η → ∃! α : K ≅ L, ξ ≫ (derivedPullback (pullback.fst f f)).map α.hom = η",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

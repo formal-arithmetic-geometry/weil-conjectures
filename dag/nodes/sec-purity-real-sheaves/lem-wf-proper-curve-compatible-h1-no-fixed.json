@@ -14,7 +14,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-etale-cohomology",
-  "def-weil-frobenius-detailed"
+  "def-weil-frobenius-detailed",
+  "lem-wf-curve-h1-dual-tate-module"
  ],
  "proof": [
   {
@@ -168,5 +169,24 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-b58442735 (reviewer sub-agent of L); spot-checked: Read the item, the master/main-20261015 blueprint text (identical; main-20261017 only adds a lean name), the unit sk-p-real-rankone and every cited statement. Statement: matches the blueprint and is not weakened. It makes explicit that ell is prime (blueprint convention, needed by def-tate-module-abelian-group), the ordinary inverse limit, and Phi_Q = g_C^* with g_C = id x Spec(gamma_Q) from def-weil-frobenius-detailed (the blueprint_update keeps the same g_Y). The coefficients are constant finite ones on the small étale site, with no pro-étale identification. Replacing def-tw-frobenius-action (rational-only) in stmt_deps is correct. Step 1: lem-wf-curve-h1-dual-tate-module's hypotheses hold. Its Galois action on H^1 is pullback along id x Spec(sigma) (stated in lem-wf-curve-kummer-jacobian-tate-module) and the dual action is contragredient (its proof step 6), so a Phi_Q-fixed x gives f(sigma_Q t)=f(t) whichever way the action is normalized. Dropping thm-pod-equivariance is justified because the comparison already gives integral equivariance. Step 2: lem-wf-finite-field-tate-no-fixed states that sigma_Q-1 is an automorphism of V_ell J. With V = T[1/ell] (last clause of def-wf-abelian-tate-module) and the fraction-equality criterion (c=0), this gives ell^d((sigma-1)u - ell^b t)=0, hence ell^{b+d}f(t)=0; checked. Step 3: Z_ell has no ell-power torsion by the residue argument (level n+a); correctly marked elementary. Route: the cited lemmas are in the item's unit or in sk-d-real-jacobian, which the unit cites; no tool_uses are needed. The item is not reachable from its own deps (no cycle). A DAG-wide scan of no-fixed statements found no duplicate. There are no new nodes. Searches cover all three kinds. slopmaster2 EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper (Frobenius.lean:297-352) states something different and rests on exists_picTorsionPairing, which is sorry, so it is correctly not attached. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-885ba1945",
+  "group": "NH",
+  "result": "pass",
+  "note": "Independent audit found no substantive or mechanical defects; sandbox and library compilation passed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ProperCurveCompatibleH1NoFixed",
+  "declaration": "AlgebraicGeometry.properCurve_compatibleH1_fixed_eq_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ProperCurveCompatibleH1NoFixed.lean",
+  "statement": "theorem properCurve_compatibleH1_fixed_eq_zero (D : WeilConjectures.FiniteFieldDatum.{u}) (C₀ : Over (Spec (.of D.k₀))) [SmoothOfRelativeDimension 1 C₀.hom] [IsProjective C₀.hom] [GeometricallyConnected C₀.hom] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ¬ ℓ ∣ D.q) (x : ↥(limit (curveH1CoefficientSystem (D.geometricFiber C₀).left ℓ))) (hfix : ∀ n : ℕ, Sheaf.H.map (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (D.geometricFrobenius C₀).hom).app (AddCommGrpCat.of (ULift.{u + 1} (ZMod (ℓ ^ n))))).hom) 1 (Etale.cohomologyMap (D.geometricFrobenius C₀).hom ((D.geometricFiber C₀).left.constantZMod (ℓ ^ n)) 1 (limit.π (curveH1CoefficientSystem (D.geometricFiber C₀).left ℓ) (.op n) x)) = limit.π (curveH1CoefficientSystem (D.geometricFiber C₀).left ℓ) (.op n) x) : x = 0",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed curveH1CoefficientSystem of lem-wf-curve-h1-dual-tate-module for the ordinary inverse limit. As in that comparison and the recorded etale-cohomology dependency, Sheaf.H is the Ext model of finite-level etale cohomology. Fixedness is stated coordinatewise using the canonical cohomologyMap and upperStarConstantSheafIso for the recorded geometric Galois Frobenius."
  }
 }

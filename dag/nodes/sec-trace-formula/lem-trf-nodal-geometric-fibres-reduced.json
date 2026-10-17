@@ -198,5 +198,28 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-ffc0bf481 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Repaired base-change and completion-injectivity citations, clarified tensor injectivity, and corrected source locations. Statement unchanged; no new nodes. Corrected closure is acyclic. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2db4379c5",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Recorded review.md. Checked immutable files, all statement dependencies, source clauses, canonical scalar map, universes, edge cases, docstrings, exact signature, and route-pivot exclusions. Fresh scompile.py sandbox and library passes exited 0 without diagnostics. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.NodalGeometricFibresReduced",
+  "declaration": "AlgebraicGeometry.nodal_geometric_fibres_reduced",
+  "declarations": [
+   "AlgebraicGeometry.nodal_geometric_fibres_reduced",
+   "AlgebraicGeometry.Scheme.Hom.nodalCompletedLocalScalar"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/NodalGeometricFibresReduced.lean",
+  "statement": "theorem nodal_geometric_fibres_reduced {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of k)), IsEmpty ↥(pullback (C := Scheme.{u}) f g) ∨ ((∀ Z ∈ irreducibleComponents ↥(pullback (C := Scheme.{u}) f g), topologicalKrullDim Z = 1) ∧ ∀ x : ↥(pullback (C := Scheme.{u}) f g), x ∈ closedPoints ↥(pullback (C := Scheme.{u}) f g) → x ∈ (pullback.snd f g).smoothLocus ∨ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f g).presheaf.stalk x)) ((pullback (C := Scheme.{u}) f g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}), ∀ a : Ω, e ((pullback.snd f g).nodalCompletedLocalScalar x a) = Ideal.Quotient.mk _ (MvPowerSeries.C a))) : GeometricallyReduced f",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary nodalCompletedLocalScalar is the explicit canonical ground-field map into the maximal-ideal completion. The scalar equation on the ring equivalence renders precisely the requested Omega-algebra isomorphism. Morphisms Spec Omega to Spec k encode all field extensions by affine-spectrum duality."
  }
 }
