@@ -32,6 +32,12 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {n : ℕ} [CharP Λ n] {X Y : Scheme.{u}} (g : X ⟶ Y)
 
+/-- The unit of `Adjunction.ofNatIsoRight`. -/
+private lemma ofNatIsoRight_unit_app' {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D}
+    {G H : D ⥤ C} (adj : F ⊣ G) (e : G ≅ H) (x : C) :
+    (adj.ofNatIsoRight e).unit.app x = adj.unit.app x ≫ e.hom.app _ := by
+  rw [← Adjunction.homEquiv_id, Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.homEquiv_id]
+
 /-- The identification `g^*(Λ ⊗ F) ≅ Λ ⊗ g^* F` through the units of the adjunctions. -/
 private lemma unit_app_upperStarExtendScalarsIso'
     (x : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -42,21 +48,29 @@ private lemma unit_app_upperStarExtendScalarsIso'
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app x ≫
       (g)_*[AddCommGrpCat.{u + 1}].map
         ((extendScalarsAdjunction Λ X).unit.app ((g)^*[AddCommGrpCat.{u + 1}].obj x)) := by
-  have hunit {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G H : D ⥤ C}
-      (adj : F ⊣ G) (e : G ≅ H) (x : C) :
-      (adj.ofNatIsoRight e).unit.app x = adj.unit.app x ≫ e.hom.app _ := by
-    rw [← Adjunction.homEquiv_id, Adjunction.homEquiv_ofNatIsoRight_apply,
-      Adjunction.homEquiv_id]
   have := Adjunction.homEquiv_leftAdjointUniq_hom_app
     ((extendScalarsAdjunction Λ Y).comp (upperStarLowerStarAdjunction _ g))
     (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).comp
       (extendScalarsAdjunction Λ X)).ofNatIsoRight
       (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl))) x
-  rw [Adjunction.homEquiv_unit, hunit] at this
+  rw [Adjunction.homEquiv_unit, ofNatIsoRight_unit_app'] at this
   simpa [upperStarExtendScalarsIso, Adjunction.comp_unit_app] using this
 
-/-- The base change map `g^*(μₙ ⊗_{ℤ/n} Λ) ⟶ μₙ ⊗_{ℤ/n} Λ` induced by `g^* μₙ ⟶ μₙ`: the transpose of
-`μₙ ⟶ g_* μₙ ⟶ g_*(μₙ ⊗_{ℤ/n} Λ)`. -/
+private lemma unit_app_upperStarExtendScalarsIso''
+    (x : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (extendScalarsAdjunction Λ Y).unit.app x ≫
+      (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+        ((upperStarLowerStarAdjunction _ g).unit.app ((extendScalars Λ Y).obj x)) ≫
+      (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+          ((g)_*[ModuleCat.{u + 1} Λ].map ((upperStarExtendScalarsIso Λ g).hom.app x)) =
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app x ≫
+      (g)_*[AddCommGrpCat.{u + 1}].map
+        ((extendScalarsAdjunction Λ X).unit.app ((g)^*[AddCommGrpCat.{u + 1}].obj x)) := by
+  rw [← Functor.map_comp]
+  exact unit_app_upperStarExtendScalarsIso' Λ g x
+
+/-- The base change map `g^*(μₙ ⊗_{ℤ/n} Λ) ⟶ μₙ ⊗_{ℤ/n} Λ` induced by `g^* μₙ ⟶ μₙ`: the
+transpose of `μₙ ⟶ g_* μₙ ⟶ g_*(μₙ ⊗_{ℤ/n} Λ)`. -/
 noncomputable def upperStarExtendScalarsAlongRootsOfUnity :
     (g)^*[ModuleCat.{u + 1} Λ].obj ((extendScalarsAlong Λ (ZMod.castHom (dvd_refl n) Λ) Y).obj
         (Y.rootsOfUnityModuleSheaf n)) ⟶
@@ -107,8 +121,46 @@ theorem upperStar_map_extendScalarsIsoExtendScalarsAlong_hom :
   apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).injective
   apply ((extendScalarsAdjunction Λ Y).homEquiv _ _).injective
   -- the left-hand side
-  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left,
-    upperStarExtendScalarsAlongRootsOfUnity, Equiv.apply_symm_apply]
-  sorry
+  rw [Adjunction.homEquiv_naturality_left]
+  -- the left-hand side is the transpose `μₙ ⟶ g_* μₙ ⟶ g_*(μₙ ⊗_{ℤ/n} Λ)`
+  rw [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc,
+    unit_comp_extendScalarsIsoExtendScalarsAlong_hom, rootsOfUnityModuleSheafHomEquiv_unit_comp,
+    upperStarExtendScalarsAlongRootsOfUnity, Equiv.apply_symm_apply, Equiv.apply_symm_apply,
+    Equiv.apply_symm_apply]
+  -- the right-hand side
+  rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_right,
+    Adjunction.homEquiv_unit (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g),
+    Adjunction.homEquiv_unit (extendScalarsAdjunction Λ Y)]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (unit_app_upperStarExtendScalarsIso'' Λ g (Y.rootsOfUnitySheaf n))]
+  have hRg {A B : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (h : A ⟶ B) :
+      (sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+        ((g)_*[ModuleCat.{u + 1} Λ].map h) =
+      (g)_*[AddCommGrpCat.{u + 1}].map
+        ((sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map h) := rfl
+  simp only [hRg, ← Functor.map_comp]
+  have hnat := (extendScalarsAdjunction Λ X).unit.naturality
+    (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g)
+  simp only [Functor.id_map, Functor.comp_map] at hnat
+  rw [Functor.map_comp (sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})), ← reassoc_of% hnat,
+    unit_comp_extendScalarsIsoExtendScalarsAlong_hom,
+    Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+
+omit [CharP Λ n] in
+/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
+
+Compatibility with base change, for the Tate sheaf `Λ(1) = μₙ ⊗ Λ`, `n` the characteristic of `Λ`:
+the identification `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the base change maps
+`g^* Λ_Y(1) ⟶ Λ_X(1)` (`AlgebraicGeometry.Etale.upperStarTateSheafToTateSheaf`). -/
+theorem upperStar_map_tateSheafIso_hom :
+    haveI : CharP Λ (ringChar Λ) := ringChar.charP Λ
+    (g)^*[ModuleCat.{u + 1} Λ].map (extendScalarsIsoExtendScalarsAlong Λ Y (ringChar Λ)).hom ≫
+        upperStarExtendScalarsAlongRootsOfUnity Λ g =
+      upperStarTateSheafToTateSheaf Λ g ≫
+        (extendScalarsIsoExtendScalarsAlong Λ X (ringChar Λ)).hom :=
+  haveI : CharP Λ (ringChar Λ) := ringChar.charP Λ
+  upperStar_map_extendScalarsIsoExtendScalarsAlong_hom Λ g
 
 end AlgebraicGeometry.Etale

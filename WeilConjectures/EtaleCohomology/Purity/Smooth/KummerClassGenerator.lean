@@ -278,4 +278,89 @@ theorem bijective_smul_kummerClassOf :
 
 end Kummer
 
+section Node
+
+variable {k : Type u} [Field k] [IsAlgClosed k] [NeZero (ringChar Λ)]
+
+omit [Finite Λ] in
+/-- Over an algebraically closed field, the Tate twist `Λ(1) = μₙ ⊗ Λ` is isomorphic to `Λ`: a
+primitive `n`-th root of unity identifies `μₙ` with `ℤ/n`. -/
+lemma nonempty_tateTwistObject_one_iso_constantComplex {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ (Spec (.of k))] :
+    Nonempty (tateTwistObject Λ X 1 ≅ constantComplex Λ X) := by
+  have hN : ((ringChar Λ : ℕ) : k) ≠ 0 := by
+    have h := (isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ) (Spec (.of k))).map
+      (Scheme.ΓSpecIso (.of k)).hom.hom
+    rw [map_natCast] at h
+    exact h.ne_zero
+  let ζ := (AffineSpace.nonempty_constantZModIsoRootsOfUnitySheaf f hN).some
+  exact ⟨tateTwistObjectOneIso X Λ ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso
+    ((extendScalars Λ X).mapIso ζ.symm ≪≫
+      extendScalarsConstantZModIso X ringChar.Nat.cast_ringChar) ≪≫
+    (constantComplexIsoSingleFunctorConstantSheaf Λ X).symm⟩
+
+variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
+  (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1))
+    (Spec (.of k))).base)ᶜ) [HasInvertibleExponent Λ G]
+  [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))]
+
+include hj in
+/-- Blueprint `thm-pur-kummer-affine-line`: Kummer computations on the line and the punctured line.
+
+Let `k` be an algebraically closed field and `Λ` a finite coefficient ring whose exponent is
+invertible in `k`, with Tate twist `Λ(1) = μₙ ⊗ Λ` (`n` the characteristic of `Λ`). Let
+`G = 𝔾_{m,k}` be the complement of the zero section of `𝔸¹_k`, with coordinate `t`. Then
+
+1. `Hᵠ(𝔸¹_k, Λ(1)) = 0` for `q ≠ 0` and `H⁰(𝔸¹_k, Λ(1)) ≅ Λ`;
+2. `H⁰(𝔾_{m,k}, Λ(1)) ≅ Λ` and `Hᵠ(𝔾_{m,k}, Λ(1)) = 0` for `q ∉ {0, 1}`;
+3. `H¹(𝔾_{m,k}, Λ(1)) = Hom(Λ, Λ(1)[1])` is free of rank one over `Λ` on the Kummer class
+   `κ(t)` of the coordinate.
+
+In particular all these cohomology groups are finite. The blueprint takes `Λ = A` free over
+`ℤ/ℓ^N`; here `Λ` is any finite commutative ring with invertible exponent, so the statements
+hold after any change of finite coefficients. -/
+theorem kummer_affineLine_multiplicativeGroup :
+    (∀ q : ℤ, q ≠ 0 → IsZero ((cohomology (ModuleCat.{u + 1} Λ)
+        𝔸(ULift.{u} (Fin 1); Spec (.of k)) q).obj
+          (tateTwistObject Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 1))) ∧
+      Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 0).obj
+        (tateTwistObject Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 1) ≅ ModuleCat.of Λ Λ) ∧
+      Nonempty ((cohomology (ModuleCat.{u + 1} Λ) G 0).obj (tateTwistObject Λ G 1) ≅
+        ModuleCat.of Λ Λ) ∧
+      (∀ q : ℤ, q ≠ 0 → q ≠ 1 →
+        IsZero ((cohomology (ModuleCat.{u + 1} Λ) G q).obj (tateTwistObject Λ G 1))) ∧
+      Function.Bijective (fun c : Λ ↦ c • kummerClassOf G Λ (AffineSpace.unitLineCoord j hj)) := by
+  have := (connectedSpace_of_range_eq_compl_zeroSection j hj).toNonempty
+  have : HasInvertibleExponent Λ (Spec (.of k)) := HasInvertibleExponent.of_hom_of_nonempty
+    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) (Λ := Λ)
+  obtain ⟨eA⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
+    (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  obtain ⟨eG⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
+    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  obtain ⟨hA0⟩ := nonempty_iso_cohomology_zero_affineLine Λ (k := k)
+  obtain ⟨hG0⟩ := nonempty_iso_cohomology_zero_multiplicativeGroup Λ j hj
+  exact ⟨fun q hq ↦ (isZero_cohomology_affineLine Λ q hq).of_iso ((cohomology _ _ q).mapIso eA),
+    ⟨(cohomology _ _ 0).mapIso eA ≪≫ hA0⟩, ⟨(cohomology _ _ 0).mapIso eG ≪≫ hG0⟩,
+    fun q hq0 hq1 ↦ (isZero_cohomology_multiplicativeGroup Λ j hj q hq0 hq1).of_iso
+      ((cohomology _ _ q).mapIso eG), bijective_smul_kummerClassOf Λ j hj⟩
+
+include hj in
+/-- Untwisted form of `H¹(𝔾_{m,k}, Λ) ≅ Λ`: `Hom(Λ, Λ[1])` is free of rank one over `Λ`. -/
+theorem exists_bijective_smul_constantComplex_shift_one :
+    ∃ y₀ : constantComplex Λ G ⟶ (constantComplex Λ G)⟦(1 : ℤ)⟧,
+      Function.Bijective (fun c : Λ ↦ c • y₀) := by
+  have := (connectedSpace_of_range_eq_compl_zeroSection j hj).toNonempty
+  have : HasInvertibleExponent Λ (Spec (.of k)) := HasInvertibleExponent.of_hom_of_nonempty
+    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) (Λ := Λ)
+  obtain ⟨eG⟩ := nonempty_tateTwistObject_one_iso_constantComplex Λ
+    (j ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  refine ⟨kummerClassOf G Λ (AffineSpace.unitLineCoord j hj) ≫ eG.hom⟦(1 : ℤ)⟧', ?_⟩
+  have h := ((Iso.refl _).homCongr ((shiftFunctor _ (1 : ℤ)).mapIso eG)).bijective.comp
+    (bijective_smul_kummerClassOf Λ j hj)
+  convert h using 1
+  funext c
+  simp [Linear.smul_comp]
+
+end Node
+
 end AlgebraicGeometry.Etale

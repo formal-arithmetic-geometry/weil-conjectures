@@ -259,7 +259,9 @@ finite-level twist `A(1)_T` (`AlgebraicGeometry.Etale.tateTwistSheaf`, the Tate 
 
 (`AlgebraicGeometry.Etale.tateTwistSheafOneIsoExtendScalarsAlong`), the tensor product being over
 `ℤ/ℓ^N`, with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules. Its compatibility with the derived
-tensor product is `AlgebraicGeometry.Etale.tateTwistObjIsoExtendScalarsAlong`. -/
+tensor product is `AlgebraicGeometry.Etale.tateTwistObjIsoExtendScalarsAlong`, and its compatibility
+with base change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
+(`WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange`). -/
 theorem ringChar_eq_and_nonempty_tateTwistSheaf_iso :
     ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)}) = ℓ ^ N ∧
       ∀ (T : Scheme.{u}) [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T],
