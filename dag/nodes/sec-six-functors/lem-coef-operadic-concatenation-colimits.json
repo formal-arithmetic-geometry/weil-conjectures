@@ -4,7 +4,7 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "title": "Finite concatenation of operadic colimit cocones",
- "statement": "Use monoidal infinity categories of [def-coef-monoidal-infinity-category], small simplicial sets and coherent functors of [def-cbc-enhanced-diagrams-cones], and the active cocones, concatenation $\\oplus$ and operadic colimit condition of [def-coef-operadic-correspondence]. Let $r\\geq0$ and let $c_i:K_i^{\\triangleright}\\to\\mathcal V^\\otimes_{\\mathrm{act}}$, $1\\leq i\\leq r$, be operadically colimiting cocones in an arbitrary monoidal infinity category. Put $K=\\prod_iK_i$. The cocone\n$$K^{\\triangleright}\\longrightarrow\\prod_iK_i^{\\triangleright}\\xrightarrow{\\prod_i c_i}(\\mathcal V^\\otimes_{\\mathrm{act}})^r\\xrightarrow{\\oplus}\\mathcal V^\\otimes_{\\mathrm{act}}$$\nis operadically colimiting. Its apex is the concatenation of the apices of the $c_i$. For $r=0$, $K$ is the one-point simplicial set and this is the constant identity cocone on the empty tuple. This assertion includes empty $K_i$ and does not assume the existence of any additional colimits or global preservation of colimits by tensoring.",
+ "statement": "Use monoidal infinity categories of [def-coef-monoidal-infinity-category], small simplicial sets and coherent functors of [def-cbc-enhanced-diagrams-cones], and active cocones, concatenation $\\oplus$ and weak operadic colimits of [def-coef-operadic-correspondence]. For this nonsymmetric assertion use the following explicit stability hypothesis, stronger than the separate one-sided tests in that definition: an active cocone $c:K^{\\triangleright}\\to\\mathcal V^\\otimes_{\\mathrm{act}}$, with apex a tuple of any length, is stable in all contexts if $L\\oplus c\\oplus R$ is weakly operadically colimiting for every pair of finite tuples $L,R$, either of which may be empty. Explicitly, for every color $w\\in\\mathcal V$, precomposition with this contextual cocone must induce an equivalence from active arrows $L\\oplus c(\\infty)\\oplus R\\to w$ to coherent active cocones $L\\oplus c|_K\\oplus R\\to w$.\n\nLet $r\\geq0$ and let $c_i:K_i^{\\triangleright}\\to\\mathcal V^\\otimes_{\\mathrm{act}}$, $1\\leq i\\leq r$, be active cocones stable in all contexts in an arbitrary monoidal infinity category. Put $K=\\prod_iK_i$. Then the cocone\n$$K^{\\triangleright}\\longrightarrow\\prod_iK_i^{\\triangleright}\\xrightarrow{\\prod_i c_i}(\\mathcal V^\\otimes_{\\mathrm{act}})^r\\xrightarrow{\\oplus}\\mathcal V^\\otimes_{\\mathrm{act}}$$\nis stable in all contexts, and hence is operadically colimiting according to the one-sided tests of [def-coef-operadic-correspondence]. Its apex is the ordered concatenation of the apices of the $c_i$. For $r=0$, $K=\\Delta^0$ and this is the constant identity cocone on the empty tuple. Empty $K_i$ are allowed. No existence of other colimits and no global preservation of colimits by tensoring is assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Proposition 3.1.1.8, printed pp. 321–322; GH Proposition A.2.4. Nonsymmetric formulation following Gepner–Haugseng, arXiv:1312.3178v4 Appendix A. Read online; archive WANTED. No Stacks tag states this infinity-categorical fact."
@@ -14,9 +14,91 @@
   "def-coef-operadic-correspondence",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\mathcal V^\\otimes_{\\mathrm{act}}$ and $v_i=c_i(\\infty)$. The map $K^{\\triangleright}\\to\\prod_iK_i^{\\triangleright}$ is the product of the join-cone extensions of the projections $K\\to K_i$: each projection sends the new final vertex to the final vertex. Composing with the given cocones and concatenation gives exactly the displayed cocone, whose vertex is $v_1\\oplus\\cdots\\oplus v_r$. Concatenation and the supplied monoidal coherences also give the diagrams with fixed contexts $L,R$. Thus no choice of a colimit object is being used. The hypothesis in this item supplies weak operadic universality for every such pair of contexts, not merely for the two separate one-sided cases.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-operadic-correspondence",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, displayed product-cone construction; GH A.2.4, with the explicit contextual correction in the item statement."
+   }
+  },
+  {
+   "text": "We first identify active cocone spaces with ordinary cocone spaces after total tensoring. For a tuple $u$ over $[n]$, take a $p$-cocartesian edge $e_u:u\\to t_u$ above the unique active map $[n]\\to[1]$. Such a lift exists by the monoidal-category definition, also for $n=0$. Its target is the total tensor of $u$. By the cocartesian mapping-square criterion, the fiber of precomposition over this unique active base arrow gives\n$$\\operatorname{Map}_{\\mathcal V}(t_u,w)\\simeq\\operatorname{Map}_{A}(u,w)\\qquad(w\\in\\mathcal V).$$\nIndeed the left base fiber is over $\\mathrm{id}_{[1]}$, and the right base fiber is over $[n]\\to[1]$; each is a fiber over one point of a discrete base mapping space. The color inclusion $j:\\mathcal V\\hookrightarrow A$ is fully faithful, since the only active endomorphism of $[1]$ is its identity. Apply the opposite assertion of parametric universal arrows to $j$ and these universal edges. It assembles them into a coherent left adjoint $\\tau:A\\to\\mathcal V$, with unit $u\\to j\\tau u$, and gives, for every small simplicial set $B$ and diagram $a:B\\to A$, the natural equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal V)}(\\tau a,\\Delta_Bw)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(B,A)}(a,\\Delta_Bj w).$$\nThe equivalence commutes with restriction of $B$ and with the maps induced by cocone legs. The dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] identifies ordinary colimits with precisely these fixed-target precomposition equivalences. Consequently an active join cocone is weakly operadically colimiting exactly when its image under $\\tau$ is an ordinary colimit cocone in $\\mathcal V$. The join-slice comparison identifies join cocones with these coherent transformation spaces, including the empty indexing shape. All functor categories can be formed in a containing universe.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-coef-operadic-correspondence",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, mapping-space reduction; GH Proposition A.2.6. Expanded through the existing universal-arrow and cocartesian mapping-square statements."
+   }
+  },
+  {
+   "text": "Here is the parameter restriction calculation used below. Let $B,D$ be small simplicial sets and $H:B\\times D^{\\triangleright}\\to\\mathcal V$ a coherent diagram, with $H_b:D^{\\triangleright}\\to\\mathcal V$ colimiting for every vertex $b\\in B$. Put $F=H|_{B\\times D}$ and $G=H|_{B\\times\\{\\infty\\}}$. Transpose $H$ to $D^{\\triangleright}\\to\\operatorname{Fun}(B,\\mathcal V)$. The objectwise colimit criterion says this specified cocone is colimiting: all its required objectwise colimits are precisely the given $H_b$, so no other colimits in $\\mathcal V$ are needed. Apply the dual fixed-target cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] in this functor quasicategory. Its universal property at the constant diagram $\\Delta_BT$, followed by transposing coherent transformations, is\n$$\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal V)}(G,\\Delta_BT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(B\\times D,\\mathcal V)}(F,\\Delta_{B\\times D}T).$$\nFor precision, the exponential identification $\\operatorname{Fun}(D,\\operatorname{Fun}(B,\\mathcal V))\\cong\\operatorname{Fun}(B\\times D,\\mathcal V)$ sends a degree-$m$ simplex to the same map $B\\times D\\times\\Delta^m\\to\\mathcal V$, after permuting the factors. Applied to the right-pinched mapping spaces, a degree-$n$ simplex on either side is a map $B\\times D\\times\\Delta^{n+1}\\to\\mathcal V$ whose entire initial face $B\\times D\\times\\Delta^{\\{0,\\ldots,n\\}}$ is the constant family at $F$ and whose last-vertex restriction is $\\Delta_{B\\times D}T$. The simplicial operators on both sides extend $[m]\\to[n]$ by the new last vertex. Thus this identification respects the specified source, target and every higher simplex. The displayed comparison sends a cocone $G\\to T$ to its composite with the $D$-direction legs of $H$. This calculation includes $B=\\varnothing$ and $D=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, binary proof and its Lemma 3.1.1.9: in the monoidal case, the needed parameter restriction follows from the existing pointwise colimit criterion and the defining exponential formula."
+   }
+  },
+  {
+   "text": "Prove the binary case. Fix arbitrary tuples $L,R$, let $c_1:B^{\\triangleright}\\to A$ and $c_2:D^{\\triangleright}\\to A$ have vertices $v_1,v_2$, and set\n$$H(b,t)=\\tau\\bigl(L\\oplus c_1(b)\\oplus c_2(t)\\oplus R\\bigr).$$\nFor every vertex $b$ of $B$, this is the image under $\\tau$ of $c_2$ with left context $L\\oplus c_1(b)$ and right context $R$. The hypothesis on $c_2$ and Step 2 show $H_b$ is colimiting. Step 3 therefore gives the restriction equivalence from cocones on $G(b)=\\tau(L\\oplus c_1(b)\\oplus v_2\\oplus R)$ to cocones on $F(b,d)=\\tau(L\\oplus c_1(b)\\oplus c_2(d)\\oplus R)$. The $c_1$ hypothesis, now with left context $L$ and right context $v_2\\oplus R$, gives another equivalence\n$$\\operatorname{Map}_{\\mathcal V}\\bigl(\\tau(L\\oplus v_1\\oplus v_2\\oplus R),T\\bigr)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal V)}(G,\\Delta_BT).$$\nCompose the two equivalences for every color $T$. Their composite is precomposition with the displayed binary product cocone. In the order of the two restriction maps its leg is $(b,d)\\to(b,\\infty)\\to(\\infty,\\infty)$: first the $c_2$ leg, then the $c_1$ leg. To compare this with the simultaneous leg, restrict the product of the two join cocones to the square $\\Delta^1\\times\\Delta^1$ determined by these legs. The triangle with vertices $(0,0),(0,1),(1,1)$ gives a $2$-simplex identifying their composite with the diagonal $(0,0)\\to(1,1)$, which is precisely the product-cocone leg in Step 1. Apply the concatenation functor, the fixed contexts and $\\tau$ to this same triangle. Doing this after every simplicial restriction of the two diagrams gives the compatibility for coherent families of legs, since all these restrictions are restrictions of the single functor on $B^{\\triangleright}\\times D^{\\triangleright}$. Naturality in Step 2 and the mapping-space identification in Step 3 therefore identify the composite restriction map with the map of the specified product cocone up to this coherent homotopy. By Step 2 this proves weak operadic universality of $L\\oplus c\\oplus R$. Since both contexts were arbitrary, the binary output is stable in all contexts.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, binary proof: first eliminate the second variable, then the first. Both contexts are retained throughout to repair the nonsymmetric gap in GH A.2.4."
+   }
+  },
+  {
+   "text": "Induct on the number of inputs with the claim that the specified product cocone is stable in all contexts and has the ordered tuple of input vertices as apex. For one input the claim is its hypothesis. Given the claim for $s\\geq1$ inputs, concatenate that output with $c_{s+1}$ using Step 4. The product identification $(\\prod_{i\\leq s}K_i)\\times K_{s+1}=\\prod_{i\\leq s+1}K_i$ and the coherent associativity of concatenation identify its cocone and all its legs with those in Step 1; this proves the induction step. For zero inputs, the empty product is $\\Delta^0$ and the cocone is constant with identity leg on the empty tuple. In every context it is still the identity cocone on $L\\oplus R$; restriction of cocones is the identity on its active mapping space, so it is weakly operadically colimiting. This proves the induction base at zero directly. If a $K_i$ is empty, Step 3 still applies: a cocone on the empty diagram with fixed vertex is the one-point space, and no step chooses a vertex of that $K_i$. Thus the same binary argument and induction handle all empty factors. Finally choose $L$ or $R$ empty to recover both one-sided tests in the referenced definition, which proves the asserted operadic colimit conclusion.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, first paragraph (empty and singleton families, finite induction), with empty factors and the cone legs made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Expanded monoidal proof following the variable-elimination argument of Proposition 3.1.1.8, with an explicit simultaneous-context correction to GH A.2.1/A.2.4. Sources read online; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +148,59 @@
    "results": "{\"t\": \"2026-10-17T00:48:59Z\", \"tool\": \"grep\", \"query\": \"operad|Operad|cocartesian.*horn|active.*slice|Segal.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Tactic/CategoryTheory/Slice.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"22cc050e391fe366\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading; semantic hits are ordinary category constructions, strict Segal data, Cartesian products of simplicial sets or ordinary horn fillers. The broad source grep finds only comments and an operads reference; no declaration supplies this quasicategorical operadic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic.*colimit|concatenat.*colimit|operadic.*coproduct",
+   "results": "{\"t\": \"2026-10-17T02:40:05Z\", \"tool\": \"grep\", \"query\": \"operadic.*colimit|concatenat.*colimit|operadic.*coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-58; IsColimit.tensor₂ and isColimitOfPreserves₂ concern ordinary categories, not active coherent diagrams in a monoidal quasicategory. Broad operadic-colimit grep has no hits; two semantic phrasings were checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of cocones preserved by every left and right tensor context give product indexed colimits",
+   "results": "{\"t\": \"2026-10-17T02:40:05Z\", \"tool\": \"leansearch\", \"query\": \"Tensor products of cocones preserved by every left and right tensor context give product indexed colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.HasGoodTensor₁₂Tensor\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CommRingCat.pushoutCoconeIsColimit\", \"CategoryTheory.Limits.Cofan.IsColimit.prod\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.Limits.PreservesColimit₂.isoObjCoconePointsOfIsColimit\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.Limits.instHasColimitProd\"], \"digest\": \"50e4e531cd1126f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-58; IsColimit.tensor₂ and isColimitOfPreserves₂ concern ordinary categories, not active coherent diagrams in a monoidal quasicategory. Broad operadic-colimit grep has no hits; two semantic phrasings were checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-17T02:40:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_left\", \"CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_right\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.MonoidalCategory.Limits.preservesColimit_curriedTensor\", \"CategoryTheory.Limits.IsColimit.tensor₂\", \"CategoryTheory.Limits.IsColimit.tensor\"], \"digest\": \"1aeeb8875216e8b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-58; IsColimit.tensor₂ and isColimitOfPreserves₂ concern ordinary categories, not active coherent diagrams in a monoidal quasicategory. Broad operadic-colimit grep has no hits; two semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operadic colimit diagrams concatenate by iterated universal properties in a monoidal quasicategory",
+   "results": "{\"t\": \"2026-10-17T02:40:06Z\", \"tool\": \"leanfinder\", \"query\": \"Operadic colimit diagrams concatenate by iterated universal properties in a monoidal quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.ι₀_comp_assoc\", \"SSet.ι₁_comp_assoc\", \"CategoryTheory.Limits.ColimitPresentation.Total.Hom.comp\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.assoc\", \"CategoryTheory.Limits.Cofan.isColimitTrans\"], \"digest\": \"64baec2726254cd5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-58; IsColimit.tensor₂ and isColimitOfPreserves₂ concern ordinary categories, not active coherent diagrams in a monoidal quasicategory. Broad operadic-colimit grep has no hits; two semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit cocone in a nonsymmetric monoidal infinity category stable under tensoring on both sides is closed under finite concatenation",
+   "results": "{\"t\": \"2026-10-17T02:40:06Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit cocone in a nonsymmetric monoidal infinity category stable under tensoring on both sides is closed under finite concatenation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"CategoryTheory.ObjectProperty.TensorLE\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"CategoryTheory.ObjectProperty.TensorLE.prop_tensor\", \"CategoryTheory.ObjectProperty.IsMonoidal.toTensorLE\", \"CategoryTheory.ObjectProperty.prop_tensor\", \"CategoryTheory.MorphismProperty.tensorHom_mem\", \"CategoryTheory.MorphismProperty.IsMonoidal.mk'\"], \"digest\": \"2551a925188249cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-58; IsColimit.tensor₂ and isColimitOfPreserves₂ concern ordinary categories, not active coherent diagrams in a monoidal quasicategory. Broad operadic-colimit grep has no hits; two semantic phrasings were checked."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.tensor|isColimitOfPreserves₂|preservesColimit_curriedTensor",
+   "results": "{\"t\": \"2026-10-17T02:54:39Z\", \"tool\": \"grep\", \"query\": \"IsColimit.tensor|isColimitOfPreserves₂|preservesColimit_curriedTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\"], \"digest\": \"3ffdf71213e95a0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits are ordinary monoidal category declarations, not active diagrams in a monoidal quasicategory. Read Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-54 and Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean:42-44; IsColimit.tensor₂ assumes ordinary Category and PreservesColimit₂."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsColimit external product cocone tensor product separately preserves colimit",
+   "results": "{\"t\": \"2026-10-17T02:54:39Z\", \"tool\": \"leanfinder\", \"query\": \"IsColimit external product cocone tensor product separately preserves colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.prodCompExternalProduct\"], \"digest\": \"348067df9e9f9efb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: actual hits are ordinary monoidal category declarations, not active diagrams in a monoidal quasicategory. Read Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:35-54 and Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean:42-44; IsColimit.tensor₂ assumes ordinary Category and PreservesColimit₂."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -95,5 +226,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-concatenation-colimits",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: separate left and right contextual tests do not imply stability under simultaneous contexts in a nonsymmetric monoidal category. Supplied a checked 158-object strict monoidal poset counterexample in report.md. Corrected the statement to explicit all-context stability, retaining arbitrary monoidal categories, variable-arity active diagrams, empty factors and zero inputs. Proved the corrected concatenation statement by total-tensor reflection, objectwise parameter colimits, binary variable elimination and finite induction. All foundations reuse existing nodes; no new nodes or Mathlib leaves.",
+  "blueprint": "Inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 (derived coefficient mapping-complex adjunction before R lim), through the fixed-object rectification and operadic Kan-extension ancestry. Steps 1–5 supply the contextual concatenation input corresponding to HA Proposition 3.1.1.8 / GH A.2.4; the nonsymmetric error is corrected locally without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cocone mapping-space criterion, including arbitrary simplicial shapes and the dual colimit assertion; used to interpret active universality and pointwise colimits as the exact fixed-target precomposition equivalences. The inherited unit has no alternative statement of this foundational criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-d0736ceb6",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d0736ceb6 (reviewer sub-agent of L); spot-checked: I read the item, the full statements of all 8 cited nodes and all 9 steps of the only citer (kan-filling), and checked the unit route. The delivery adds no new nodes. Statement correction (E7): the original one-sided assertion is false. My own exhaustive script (/tmp/rv-occ/ce.py) confirms the 158-object strict monoidal poset counterexample: all monoid and order axioms hold, the cocone (a,b)->c passes every one-sided test, and its concatenation with the identity cocone at r fails the left test at l, because lar and lbr have the incomparable upper bounds lcr and Z. The repair strengthens only the hypothesis, to all-context stability, and keeps arbitrary V, r=0, empty K_i, and no colimit or tensor-preservation assumption; the conclusion still gives the one-sided result. Steps: Step 1 is elementary. Step 2 builds the total-tensor reflection: the cocartesian lift and the mapping-square criterion give Map_V(t_u,w)≃Map_act(u,w); the opposite clause of parametric-universal-arrows gives τ⊣j with the diagram-level formula; the join-slice comparison and the dual cone criterion then show weakly operadic ⇔ τ(cocone) is a colimit. Step 3 is the objectwise colimit criterion in Fun(B,V) (yoneda-presheaf-limits) with exactly the given H_b. Step 4 uses the contexts (L⊕c1(b),R) for c2 and (L,v2⊕R) for c1, and its leg-coherence triangle in B^▷×D^▷ is correct. Step 5 is a properly stated induction, with r=0 and empty factors handled. No duplicate exists in the DAG and there is no cycle. All three Mathlib search kinds are recorded, and the blueprint fields are complete. Tool use lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc, generic cone criterion) is accepted. I could not open GH A.2 (the HTML is truncated), so its attribution of the error is unverified; the dispute concerns the DAG definition and stands on its own. To forward: kan-filling Step 3 no longer follows for one-sided input cones. Recommend changing def-coef-operadic-correspondence to require simultaneous L⊕T⊕R contexts (matching HA's symmetric notion) and re-reading that step. No fixes written."
  }
 }

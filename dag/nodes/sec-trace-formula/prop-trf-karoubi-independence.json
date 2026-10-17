@@ -3,45 +3,371 @@
  "blueprint": {
   "is": "prop-trf-karoubi-independence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Representative independence of the summand trace",
- "statement": "Fix the global finite-field datum\nand the joint conventions of [def-trf-karoubi-trace]. Let\n$(E,K)$ and $(F,L)$ represent the same object of\n$D^b_c(X,\\Qlb)$ with $K\\in D^b_c(X,E)$, $L\\in D^b_c(X,F)$. After\npassage to a common finite overfield $M$ of $E$ and $F$, the two\ntransported objects become isomorphic, and the\nsummand traces of compatible\nendomorphisms agree; the same holds for the competing Frobenius\nendomorphisms and their iterates, and the comparisons are transitive.\nConsequently the trace formula of [thm-trf-trace-formula-e] is\nindependent of the finite field of definition and of the\nrepresentative.",
+ "statement": "Fix the global finite-field datum of [def-weil-finite-field-fiber], the joint conventions of [def-trf-karoubi-trace], a prime $\\ell\\ne p$ and the fixed algebraic closure $\\Qlb$ of $\\Ql$. Let $X_0$ be separated of finite type over $k_0$ and put $X=X_0\\times_{k_0}k$. Fix one compactification of $X_0\\to\\operatorname{Spec}k_0$ over $k_0$ for the compact-support functor and the chosen Frobenius exchange of [def-weil-frobenius-square-exchange], and use its base change at every coefficient stage. Use the common-stage coefficient category [def-weil-algebraically-closed-coefficients]. Let $(E,K)$ and $(F,L)$, with $E,F\\subset\\Qlb$ finite over $\\Ql$, represent an object $A\\in D^b_c(X,\\Qlb)$ through specified isomorphisms $\\alpha:(E,K)\\xrightarrow{\\sim}A$ and $\\beta:(F,L)\\xrightarrow{\\sim}A$. Put $h=\\beta^{-1}\\alpha$.\n\nThere is a finite intermediate extension $M\\supset E,F$ and an isomorphism $w:K\\otimes_E M\\xrightarrow{\\sim}L\\otimes_F M$ representing $h$. Any finite family of endomorphisms, idempotents and compatibility equations involving $h$ can be represented simultaneously after enlarging $M$. Compatible endomorphisms mean ones satisfying $hv_K=v_Lh$ in the common-stage category; for summands the isomorphism and this equation are on the corresponding summands. For the transported perfect coefficient complexes and summands of [def-trf-karoubi-trace], their traces agree after applying $E\\hookrightarrow M$ and $F\\hookrightarrow M$, hence in $\\Qlb$. The comparison is independent of further enlargement, of the morphism representatives, and of the choice of a splitting of a summand.\n\nFor the Frobenius assertion, require that the representatives are of the same Weil datum: they carry Weil structures $\\varphi_K:Lg_\\gamma^*K\\xrightarrow{\\sim}K$ and $\\varphi_L:Lg_\\gamma^*L\\xrightarrow{\\sim}L$ of [def-weil-weil-sheaf-complex]. After transporting these maps and $h$ to the common stage $M$ (using the scalar-extension and pullback comparisons), require the well-typed intertwining equation $w\\varphi_{K,M}=\\varphi_{L,M}Lg_{\\gamma,M}^*(w)$. Here the global operator is $F_{c,K}=R\\Gamma_c(X,\\varphi_K)\\tau_{c,K}$ of [def-weil-global-geometric-frobenius], where $\\tau_c$ is the transport of [def-weil-frobenius-cohomology-transport]. For $y\\in X_0(\\mathbf F_{q^m})$ with its specified geometric point $\\bar y:s=\\operatorname{Spec}k\\to X$, the local operator is $F_{y,m,K}=(\\varphi_K^{[m]})_{\\bar y}\\tau_{y,m,K}$. The iterated Weil map is $\\varphi_K^{[m]}=\\varphi_KG(\\varphi_K)\\cdots G^{m-1}(\\varphi_K)$ for $G=Lg_\\gamma^*$. The stalk transport $\\tau_{y,m,K}$ is the $m$-fold point transport of [def-weil-frobenius-point-transport] on $\\bar y^*K$, followed by the pullback identification from $g_\\gamma^m\\bar y=\\bar y g_s^m$; pullbacks and stalk evaluation use [def-weil-derived-pullback-tensor-hom, def-weil-finite-coefficient-point]. Thus its target is $(G^mK)_{\\bar y}$. These are geometric Frobenius transports, with $g_s=\\operatorname{Spec}(\\gamma)$ as in [def-weil-frobenius-detailed]. Then the global operators and their powers, and the local operators for every $m\\geq1$, have the same traces on corresponding invariant summands in $\\Qlb$. For a third representative with representing map $\\delta$, the comparison $\\delta^{-1}\\alpha$ is the composite $(\\delta^{-1}\\beta)(\\beta^{-1}\\alpha)$, so these comparisons are transitive relative to the specified representing maps.\n\nConsequently, whenever the lattice and finite-level hypotheses of [thm-trf-trace-formula-e] hold for a finite representative, its trace identity, transported to $\\Qlb$, depends only on this represented Weil datum and not on its finite coefficient field, representative or summand splitting. This is independence of the transported trace values; it does not assert that arbitrary Weil structures on the same underlying coefficient object are compatible.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.md",
   "place": "node prop-trf-karoubi-independence, order 2398"
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
   "def-trf-karoubi-trace",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
   "thm-trf-trace-formula-e",
-  "def-trf-categorical-trace",
-  "def-weil-finite-field-fiber"
+  "def-weil-global-geometric-frobenius",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-square-exchange"
  ],
  "proof": [
   {
-   "text": "The equality of the two representatives in the common-stage category\n[def-weil-pbc-qbar-category] gives, after scalar extension to a\ncommon field, an isomorphism of the transported perfect complexes under\nwhich compatible idempotents and endomorphisms are transported; by the\nconjugacy invariance and scalar-extension law of the categorical trace\n[prop-trf-trace-formal-laws], the summand traces\n[def-trf-karoubi-trace] agree and depend only\non the isomorphism class of the summand. Naturality in the\nendomorphism and transitivity of the comparison follow from these two\nlaws of [prop-trf-trace-formal-laws], applied to the transporting\nisomorphism; the Frobenius endomorphisms are transported by this\nisomorphism, by the definition of the objects and morphisms of the\ncommon-stage category of [def-weil-pbc-qbar-category].",
+   "text": "Use the framework category of [def-weil-algebraically-closed-coefficients], with its rational stages and scalar extension of [def-weil-rationalization-karoubi]; this is not an identification with the distinct PBC coefficient categories. Represent $h$ and $h^{-1}$ over finite fields. The displayed Hom-colimit definition says that each equality of morphism classes is witnessed at a further finite field. Choose fields witnessing $h^{-1}h=1$, $hh^{-1}=1$ and the finitely many specified compatibility equations; a compositum of this finite list contains them all. Transport the representatives there, using the natural composition comparisons of [lem-weil-scalar-extension-composition]. The definition of composition in the common-stage category now gives $zu=1$ and $uz=1$ over that stage, hence $w=u$ is an isomorphism with inverse $z$. Include every specified endomorphism, idempotent and compatibility equation in the finite list. Equality witnesses persist on enlargement by functoriality. This is the finite-diagram argument directly from the framework Hom definition; it invokes no theorem for a different integral category.",
    "uses": [
-    "def-weil-pbc-qbar-category",
-    "prop-trf-trace-formal-laws",
-    "def-trf-karoubi-trace"
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "sentence 1: common-stage representative and its inverse, with all finite compatibility equations"
+   }
+  },
+  {
+   "text": "Work first with perfect complexes over a finite coefficient field, as in [def-trf-karoubi-trace]. In the current field-supertrace clause of [prop-trf-trace-formal-laws], the notation for a field means bounded finite-dimensional cohomology; the coefficient field E in that clause is arbitrary, so it applies at each finite common overfield M as well. All complexes traced in this step are perfect over that field. The argument below uses this field clause and direct matrix computations. The following explicit linear splitting will be used. In a representative complex $P$, choose complements $Z^i=B^i\\oplus H^i$ and $P^i=Z^i\\oplus T^i$, where $Z^i=\\ker d^i$ and $B^i=\\operatorname{im}d^{i-1}$. Then $d^i:T^i\\to B^{i+1}$ is an isomorphism, so $P$ is the direct sum of the zero-differential complex $(H^i)_i$ and the two-term complexes $T^i\\xrightarrow{\\sim}B^{i+1}$. The latter are contractible, with contraction $(d^i|_{T^i})^{-1}$. Projection and inclusion therefore identify $P$ with its graded cohomology in the derived category; the two composites are the identity and the identity minus $dh+hd$, where $h$ is the displayed contraction on the two-term summands and zero on the cohomology summand. Under these homotopy identifications a chain map is its induced degreewise cohomology map: every term meeting a contractible summand is homotopic to zero. A quasi-isomorphism therefore becomes a degreewise isomorphism of zero-differential complexes, whose degreewise inverse is a chain map. Thus quasi-isomorphisms are homotopy equivalences, so localizing at them adds no morphisms to the homotopy category. On zero-differential complexes homotopies identify only equal chain maps, giving the asserted description of derived endomorphisms. Consequently an idempotent $e$ splits degreewise as its image plus kernel; these spaces are finite-dimensional and supported in finitely many degrees, hence define perfect summands. If $e$ is an idempotent commuting with $v$ on $P$, use a splitting $P\\simeq S\\oplus C$ with $e=\\operatorname{diag}(1,0)$. Then $ve=\\operatorname{diag}(v_S,0)$. On every cohomology group this is the indicated block diagonal map, whose matrix trace is $\\operatorname{Tr}(H^i(v_S))+0$. The supertrace law of [prop-trf-trace-formal-laws] therefore gives $\\operatorname{tr}(ve\\mid P)=\\operatorname{tr}(v_S\\mid S)$, the summand trace of [def-trf-karoubi-trace]. An isomorphism $w:S\\xrightarrow{\\sim}S'$ with $v_{S'}w=wv_S$ identifies the cohomological traces: choose a basis on $H^i(S)$ and its image under $H^i(w)$ as basis on $H^i(S')$. The two matrices then have identical entries, so their diagonal sums and field supertraces agree. Two splittings of $e$ yield such an isomorphism: for retractions $i:S\\to P$, $r:P\\to S$, $i':S'\\to P$, $r':P\\to S'$ with $ir=i'r'=e$, it is $r'i$ with inverse $ri'$. Indeed $(ri')(r'i)=rei=ri=1$, and $(r'i)(ri')=r'ei'=r'i'=1$. Put $v_S=rvi$ and $v_{S'}=r'vi'$. Then $(r'i)v_S=r'irvi=r'evi=r'vi$ and $v_{S'}(r'i)=r'vi'r'i=r'vei=r'vi$, using $ve=ev$, $ei=i$ and $r'e=r'$. Thus the restrictions intertwine. Thus the argument also compares summands presented in different ambient perfect complexes; no isomorphism of the ambient complements is required.",
+   "uses": [
+    "def-trf-karoubi-trace",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "sentence 1: conjugacy invariance on the actual summands, including independence of splitting"
+   }
+  },
+  {
+   "text": "For $E\\subset M$, use the field-supertrace clause of [prop-trf-trace-formal-laws]. The natural comparison of [lem-weil-cohomology-commutes-scalar-extension] identifies $H^i(P\\otimes_E M)$ with $H^i(P)\\otimes_E M$ and intertwines the cohomology endomorphisms; it also preserves the bounded finite-dimensional range. The cited comparison is natural on complexes and takes quasi-isomorphisms to quasi-isomorphisms. Therefore it is natural on a derived morphism represented by a roof: apply naturality to both arrows and invert the quasi-isomorphism arrow. This justifies its use for the derived endomorphism $ve$. In an $E$-basis the matrix of $H^i(ve)$ after extension has the same entries mapped into $M$; its trace is the image of the sum of the diagonal entries. Summing with the same signs proves $\\iota_{M/E}(\\operatorname{tr}_E(ve\\mid P))=\\operatorname{tr}_M(v_Me_M\\mid P_M)$. This explicitly proves the required field-extension trace law, without treating the finite-ring variable $A=A_{E,n}$ in the other clauses as a field. Step 2 equates the compatible summand traces at the common stage. If representatives or fields differ, the eventual-equality rule of [def-weil-algebraically-closed-coefficients] compares their finite list of maps and equations at a further compositum $N$, exactly as in Step 1. The calculations agree there, hence in $\\Qlb$; injectivity of a field inclusion also equates calculations already in the same smaller field.",
+   "uses": [
+    "prop-trf-trace-formal-laws",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-cohomology-commutes-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "sentences 1-2: scalar-extension law and independence of the chosen common stage"
+   }
+  },
+  {
+   "text": "Apply the framework compact-support and stalk functors to $w$. For $a_X:X\\to s=\\operatorname{Spec}k$ use [def-weil-integral-rational-qbar-compact-support]. The common-stage scalar-extension comparisons for compact supports in [lem-fix-operation-reduction], followed by [lem-weil-point-sections-scalar-extension], give $R\\Gamma_c(X,K)\\otimes_E M\\cong R\\Gamma_c(X,K\\otimes_E M)$. For a stalk at $\\bar y:s\\to X$, use the pullback comparison of [lem-pur-integral-operations-scalar-extension], rationalized on integral representatives, and then the sections comparison, giving $K_{\\bar y}\\otimes_E M\\cong(K\\otimes_E M)_{\\bar y}$. Apply the $F$ versions and the functor on $w$ to compare both realizations; their inverses use $w^{-1}$. These comparisons are natural and compatible with successive extensions by their cited statements. Here $\\ell\\ne p$, $X$ and $s$ are finite-type over $k$, and $a_X$ is separated of finite type, so [lem-sf-integral-compact-support-constructible] gives the bounded constructible integral output needed before rationalization. Pullback to $\\bar y$ preserves bounded constructibility by [lem-pur-integral-operations-preserve-constructible], rationalized as in [def-weil-derived-pullback-tensor-hom]. The point functor of [def-weil-finite-coefficient-point] takes these outputs into bounded finite-dimensional complexes. The explicit contraction of Step 2 makes this bounded finite-dimensional complex perfect. Steps 2-3 apply to these realizations and their summands.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "sentence 1: the transported perfect coefficient complexes for compact support and stalks"
+   }
+  },
+  {
+   "text": "For Frobenius include the one-step equation $h\\varphi_K=\\varphi_L Lg_\\gamma^*(h)$ in the finite diagram of Step 1. This is the Weil-morphism condition of [def-weil-weil-sheaf-complex], and is an additional condition, not a consequence of an isomorphism of underlying objects. The pullback comparisons in [lem-pur-integral-operations-scalar-extension], rationalized on integral representatives, let us read it at $M$ as $w\\varphi_{K,M}=\\varphi_{L,M}G(w)$ with $G=Lg_{\\gamma,M}^*$. If $w\\varphi_K^{[m]}=\\varphi_L^{[m]}G^m(w)$, multiply the pullback of this identity by the one-step identity to obtain\n$$w\\varphi_KG(\\varphi_K^{[m]})=\\varphi_LG(w\\varphi_K^{[m]})=\\varphi_LG(\\varphi_L^{[m]})G^{m+1}(w).$$\nTogether with the base case $m=1$, this proves the intertwining identity for every $m\\ge1$, with the canonical pullback composition identifications understood. Here $\\varphi^{[m]}$ is defined by the displayed product of $m$ pullbacks of the Weil map; it is defined for every object of the rationalized category, without a finite-Tor hypothesis on its reductions. The induction uses only functoriality and the stated one-step relation. One common stage works for all iterates; no assertion about descending an infinite diagram is needed.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "last sentence: Frobenius compatibility and all its iterates; explicit induction"
+   }
+  },
+  {
+   "text": "At the common stage put $C=R\\Gamma_c(X,-)$ and $G=Lg_\\gamma^*$. Naturality of $t_K=\\tau_{c,K}:C(K)\\to C(GK)$ in [def-weil-frobenius-cohomology-transport] says $C(Gw)t_K=t_LC(w)$. The definition [def-weil-global-geometric-frobenius] and the one-step Weil-morphism equation therefore give\n$$C(w)F_{c,K}=C(\\varphi_L)C(Gw)t_K=F_{c,L}C(w).$$\nInduction on powers, multiplying this equation once more on each side, gives $C(w)F_{c,K}^m=F_{c,L}^mC(w)$ for every $m\\geq1$.\n\nFor a specified $y\\in X_0(\\mathbf F_{q^m})$, put $J_y=\\operatorname{Fib}_s\\circ L\\bar y^*$, with [def-weil-finite-coefficient-point]. The affine formula in [def-weil-frobenius-detailed] gives $g_\\gamma^m\\bar y=\\bar y g_s^m$: if $a\\in A_0$ has value $c\\in\\mathbf F_{q^m}$, then $a\\otimes b$ has value $c\\gamma^m(b)$ under the left composite and $\\gamma^m(cb)$ under the right, and these coincide because $\\gamma^m(c)=c$. Thus the point transport iterated $m$ times on $L\\bar y^*K$, followed by pullback composition, defines $t_{y,m,K}:J_yK\\to J_yG^mK$. Its naturality is the composition of the naturality equations in [lem-weil-frobenius-point-transport-natural] and the natural pullback-composition maps of [lem-weil-pbc-proetale-derived-pullback-composition]. At integral level use the natural composition isomorphisms and their associativity from [lem-pod-integral-pullback-composition]. Its hypotheses hold for the maps among $X$ and $s$ here because $\\ell$ is invertible on both schemes. Its statement identifies their reductions with the finite-level composition maps, under the reduction identifications in [lem-pur-integral-operations-preserve-constructible]; use the integral operations of [def-weil-derived-pullback-tensor-hom]. Rationalization extends these maps linearly. This invokes the specified integral maps themselves, not a uniqueness assertion based only on reductions. Hence\n$$J_y(G^mw)t_{y,m,K}=t_{y,m,L}J_y(w),\\qquad\nJ_y(w)F_{y,m,K}=J_y(\\varphi_L^{[m]})J_y(G^mw)t_{y,m,K}=F_{y,m,L}J_y(w).$$\nThe second equation uses Step 5 and $F_{y,m,K}=J_y(\\varphi_K^{[m]})t_{y,m,K}$.\n\nThese are the geometric stalk transports used in the trace formula. To check the scheme-Frobenius normalization at finite level, [prop-trf-frobenius-factorization] gives $\\Phi^m=g_\\gamma^m\\operatorname{Fr}_X^{(q^m)}$, and [lem-trf-absolute-frobenius-site] trivializes the absolute-Frobenius pullback canonically. Apply [lem-pur-frobenius-trivialization-pullback] with $u=\\bar y:s\\to X$, $b=am$ and the finite ring $A_{E,n}$. It identifies the pullback of the specified absolute-$q^m$ trivialization on $X$ with that on $s$, under the canonical composition maps. Both schemes have characteristic $p$, as required. Pulling this factorization to $\\bar y$, where $\\Phi^m\\bar y=\\bar y$ because the two affine maps send $a\\otimes b$ to $c^{q^m}b=cb$, and $\\operatorname{Fr}_X^{(q^m)}\\bar y=\\bar y\\operatorname{Fr}_s^{(q^m)}$ because both send $a\\otimes b$ to $(cb)^{q^m}$, gives exactly the point-transport composite just described: on the final-object sections it is restriction along $g_s^m$ followed by the inverse-image coprojection and $x\\mapsto x\\otimes1$ of [def-weil-frobenius-point-transport]. Thus the normalized stalk transport is $(\\kappa^{(m)}_K)_{\\bar y}\\rho_{y,m}$, with $\\kappa^{(m)}$ of [prop-trf-scheme-galois-comparison] and $\\rho_{y,m}$ induced by $\\Phi^m\\bar y=\\bar y$. For every quotient transition $A_{E,n+1}\\to A_{E,n}$ the specified $\\kappa^{(m)}$ commutes with coefficient change by [lem-trf-scheme-galois-coefficient-change]; its domain is all constant-coefficient complexes, so no finite-Tor hypothesis is needed for this use. Thus this comparison is made as an equality on the simultaneous strict finite reduction diagrams, then passed through the functorial realization and rationalization. It does not assume that the reductions have finite Tor amplitude.\n\nFinally the comparisons in Step 4 intertwine these operators with those before extending coefficients. For the global transport use the chosen compact-support Frobenius exchange recipe in [def-weil-frobenius-square-exchange]: it is built from pullback composition and the units and counits preserved by the common-stage comparisons of [lem-fix-operation-reduction]. Point transport commutes with coefficient extension by [lem-weil-frobenius-point-transport-natural]. For the local transport the same theorem applies to each of its $m$ point-transport factors. The pullback comparisons of [lem-pur-integral-operations-scalar-extension] commute with the composition identifications just used: on finite module pullbacks both paths take $(x\\otimes a)\\otimes b$ to $x\\otimes ab$, and these maps commute with the strict reduction transitions, so the integral realization and rationalization preserve the equality. Applying the natural scalar comparisons to the Weil maps gives the remaining factor. Thus Steps 2-3 equate the global and local summand traces. Restriction to corresponding invariant summands is legitimate because both displayed conjugacy equations restrict to them.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-finite-coefficient-point",
+    "def-weil-frobenius-detailed",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-preserve-constructible",
+    "prop-trf-frobenius-factorization",
+    "lem-trf-absolute-frobenius-site",
+    "prop-trf-scheme-galois-comparison",
+    "def-weil-frobenius-square-exchange",
+    "lem-fix-operation-reduction",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-trf-scheme-galois-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "last sentence: explicit global and local intertwining, and coefficient compatibility"
+   }
+  },
+  {
+   "text": "For specified representing maps $\\alpha,\\beta,\\delta$, cancellation gives $(\\delta^{-1}\\beta)(\\beta^{-1}\\alpha)=\\delta^{-1}\\alpha$. The eventual-equality rule of [def-weil-algebraically-closed-coefficients], with the finite compositum construction of Step 1, realizes this equality at one finite stage. Applying the functors in Step 4 preserves composition. The scalar-composition isomorphisms of [lem-weil-scalar-extension-composition], the compatibility with successive extensions in [lem-pur-integral-operations-scalar-extension], the common-stage operation comparisons of [lem-fix-operation-reduction], and the explicit composition equation of [lem-weil-point-sections-scalar-extension] identify the successive realization comparisons with the direct one. Step 3 removes the extra field. This proves transitivity relative to the specified representing maps and equality of traces.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-fix-operation-reduction",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "sentence 2: transitivity of comparisons"
+   }
+  },
+  {
+   "text": "When the hypotheses of [thm-trf-trace-formula-e] hold for a representative, apply that theorem there, using the fixed compactification above. Its finite-level hypotheses explicitly invoke [thm-trf-coefficient-morphism-trace-formula], whose domain includes $K_n\\in D^b_{ctf}(X,A_n)$. Thus [prop-trf-rational-frobenius-integral-model] applies at this stage. It identifies the one-step global operator with [def-weil-global-geometric-frobenius], and its stalk normalization agrees with Step 6. For the global iterates, [def-trf-frobenius-operators] specifies $g_{\\gamma,c}^{m,*}$ as the composite of $m$ copies of $t=\\tau_c$ on successive pullbacks, followed by the pullback-composition identification. Writing $t_K^{[m]}=t_{G^{m-1}K}\\cdots t_K$, naturality gives $t_KC(\\varphi_K^{[m]})=C(G\\varphi_K^{[m]})t_{G^mK}$. Hence, from $F_c^m=C(\\varphi_K^{[m]})t_K^{[m]}$, one gets $F_c^{m+1}=C(\\varphi_KG\\varphi_K^{[m]})t_{G^mK}t_K^{[m]}=C(\\varphi_K^{[m+1]})t_K^{[m+1]}$, starting with $m=1$. These are exactly the global operators in the cited rational-model theorem. Its use here is restricted to the representative satisfying the finite-level hypotheses; Steps 1-7 required no finite-Tor assumption. The bounded finite-dimensional cohomology statement of the trace-formula theorem and the supertrace clause of [prop-trf-trace-formal-laws] identify each side with its categorical global trace and the sum of categorical stalk traces. Map the equality to $\\Qlb$. Steps 3-6 identify each trace with the one computed from any compatible finite representative of the same Weil datum, including its summand presentation. The rational points indexed on the right depend only on $X_0$ and $m$, so the indexing set is the same and every summand agrees. Step 7 supplies coherence among three representatives. This proves precisely independence of the transported identity. The finite-level etale-origin and exceptional-adjoint admissibility hypotheses in the cited theorem are retained; no assertion that they follow merely from an underlying-object isomorphism is used.",
+   "uses": [
+    "thm-trf-trace-formula-e",
+    "prop-trf-trace-formal-laws",
+    "thm-trf-coefficient-morphism-trace-formula",
+    "prop-trf-rational-frobenius-integral-model",
+    "def-trf-frobenius-operators",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "final conclusion: independence of the E-stage formula, retaining its hypotheses"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-qbar-category",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "def-trf-karoubi-trace",
   "prop-trf-trace-formal-laws",
-  "def-trf-karoubi-trace"
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-fix-operation-reduction",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-frobenius-detailed",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-trf-frobenius-factorization",
+  "lem-trf-absolute-frobenius-site",
+  "prop-trf-scheme-galois-comparison",
+  "def-weil-frobenius-square-exchange",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-scheme-galois-coefficient-change",
+  "thm-trf-trace-formula-e",
+  "thm-trf-coefficient-morphism-trace-formula",
+  "prop-trf-rational-frobenius-integral-model",
+  "def-trf-frobenius-operators"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Complete proof paragraph, expanded into common-stage, summand, and Frobenius calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "karoubi.*trace|trace.*karoubi|representative.*trace|trace.*representative",
+   "results": "No hits in Mathlib/CategoryTheory. Searched subdirectory/path: CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Summand categorical traces of compatible endomorphisms are independent of the finite extension of Q_l representing a constructible complex",
+   "results": "Returned LinearMap.traceAux_eq, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, Matrix.trace_sum, FiniteField.algebraMap_trace_eq_sum_pow, trace_eq_trace_adjoin, trace_eq_sum_embeddings, LinearMap.trace_map, IntermediateField.LinearDisjoint.trace_algebraMap. Ordinary module, algebra and matrix trace lemmas do not include the common-stage constructible/Weil coefficient category.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.trace",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalCategory.trace'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate endomorphisms of perfect complexes have equal traces after extension of coefficient fields",
+   "results": "Returned LinearMap.trace_map, Algebra.trace_eq_of_equiv_equiv, LinearMap.trace_conj', LinearMap.trace_conj, LinearMap.trace_eq_contract', Algebra.trace_eq_of_ringEquiv, LinearMap.trace_baseChange, LinearMap.trace_eq_contract. These are algebra/module trace invariance or homological-complex infrastructure; none states finite coefficient-stage representative independence for constructible Weil complexes.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace invariance for isomorphic finite field representatives of constructible l-adic complexes in a common-stage category",
+   "results": "Returned Algebra.trace_eq_of_equiv_equiv, Algebra.trace_eq_of_ringEquiv, Algebra.trace_eq_of_algEquiv, LinearMap.trace_map, LinearMap.traceAux_eq, HomologicalComplex.truncGE'XIso, LinearMap.trace_comp_cycle', Algebra.trace_comp_trace. These are algebra/module trace invariance or homological-complex infrastructure; none states finite coefficient-stage representative independence for constructible Weil complexes.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_conj|trace_baseChange|trace_map",
+   "results": "Returned ordinary module trace lemmas in Mathlib/LinearAlgebra/Trace.lean: trace_conj line 126, trace_conj' line 292, trace_map line 307. Read lines 275-320 and trace_baseChange at 378-385; no constructible common-stage result. Searched subdirectory/path: LinearAlgebra/Trace.lean.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_conj",
+   "results": "Returned LinearMap.trace_conj; ordinary module conjugacy only.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma trace_baseChange|theorem trace_conj",
+   "results": "Mathlib/LinearAlgebra/Trace.lean:126 LinearMap.trace_conj, :292 LinearMap.trace_conj', :378 LinearMap.trace_baseChange; further matrix conjugation and conjugate-transpose hits. Read the module conjugacy and base-change proofs. These supply ordinary module trace laws, not the common-stage constructible Weil representative-independence proposition. Directory: LinearAlgebra.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Summand traces of compatible endomorphisms of constructible l-adic complexes are independent of their finite coefficient field representatives",
+   "results": "LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero; LinearMap.trace_eq_zero_of_mapsTo_ne; LieModule.trace_comp_toEnd_genWeightSpace_eq; trace_eq_sum_embeddings; LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; LieModule.trace_toEnd_genWeightSpace; LinearMap.trace_map; LinearMap.trace_comp_cycle'",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; ordinary module trace or category structure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_conj",
+   "results": "LinearMap.trace_conj, ordinary module trace conjugacy.",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; ordinary module trace or category structure only"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_conj|trace_baseChange|trace_map",
+   "results": "LinearAlgebra/Trace.lean:126 trace_conj, :292 trace_conj', :307 trace_map, :311 proof using trace_conj', :313 Matrix.trace_map. Searched subdirectory LinearAlgebra/Trace.lean.",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; ordinary module trace or category structure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representative independence of categorical trace for perfect summands in the finite coefficient stage category of constructible l-adic complexes",
+   "results": "LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; LinearMap.trace_eq_sum_trace_restrict'; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; LinearMap.trace_eq_sum_trace_restrict; CategoryTheory.Pretriangulated.instHasFiniteCoproducts; CategoryTheory.Pretriangulated.instHasFiniteBiproducts; Algebra.trace_prod; CategoryTheory.Triangulated.TStructure.",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; ordinary module trace or category structure only"
+  },
+  {
+   "tool": "grep",
+   "query": "karoubi.*trace|trace.*karoubi|representative.*trace|trace.*representative",
+   "results": "0 hits: ; searched subdirectory/path CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_conj, LinearMap.trace_baseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphic finite coefficient field representatives of a constructible Weil complex have equal Frobenius summand traces",
+   "results": "8 hits: FiniteField.ringEquivOfCardEq; FDRep.char_iso; Field.finInsepDegree_eq_of_equiv; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp; LinearMap.trace_map; NumberField.discr_eq_discr_of_ringEquiv; FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.frobeniusAlgEquiv",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representative independence of summand traces for constructible l-adic complexes under finite coefficient field extension",
+   "results": "8 hits: LinearMap.trace_eq_zero_of_mapsTo_ne; Profinite.NobelingProof.CC_exact; LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; Profinite.NobelingProof.GoodProducts.linearIndependent_iff_sum; Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval; Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial; Profinite.NobelingProof.GoodProducts.linearIndependent_iff_union_smaller; Profinite.NobelingProof.GoodProducts.linearIndependent_iff_smaller",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of an idempotent summand of a perfect complex is invariant under conjugacy and base change of fields",
+   "results": "8 hits: LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero; LinearMap.IsProj.trace; LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent; LinearMap.trace_map; Algebra.trace_comp_trace_of_basis; Algebra.trace_comp_trace; LinearMap.trace_baseChange; Algebra.trace_trace_of_basis",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_conj|trace_baseChange|theorem IsProj.trace",
+   "results": "5 hits: 126; 292; 311; 327; 330; searched subdirectory/path LinearAlgebra/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match; hits are module/algebra trace or unrelated infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism in a filtered colimit of linear derived categories is represented by an isomorphism at some common finite field extension; traces of corresponding retract endomorphisms coincide",
+   "verdict": "no exact match: module colimits, ordinary linear traces or no categorical trace hit; not the constructible Weil-complex proposition",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms; CategoryTheory.finrank_hom_simple_simple_eq_one_iff; localCohomology.isoSelfLERadical; ModuleCat.FilteredColimits.M.mk_surjective; ModuleCat.FilteredColimits.M.mk_eq; CategoryTheory.finrank_hom_simple_simple; CategoryTheory.Limits.Concrete.colimit_rep_eq_zero",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*retract|retract.*trace|karoubi.*trace|trace.*karoubi",
+   "verdict": "no exact match: module colimits, ordinary linear traces or no categorical trace hit; not the constructible Weil-complex proposition",
+   "results": "0 hits: ; searched subdirectory CategoryTheory",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_baseChange",
+   "verdict": "no exact match: module colimits, ordinary linear traces or no categorical trace hit; not the constructible Weil-complex proposition",
+   "results": "1 hits: LinearMap.trace_baseChange",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram in a filtered colimit of categories descends to a common stage, including inverse morphisms and commuting idempotents",
+   "results": "8 hits: CategoryTheory.IsFiltered.sup_exists; CategoryTheory.IsFiltered.sup; CategoryTheory.IsFiltered.toSup; CategoryTheory.IsFiltered.sup_objs_exists; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'; CategoryTheory.IsFilteredOrEmpty.cocone_maps",
+   "date": "2026-10-17",
+   "verdict": "No exact whole-item match: filtered-colimit infrastructure or ordinary module trace only; no constructible Weil-stage trace comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(karoubi|retract|idempotent)|((karoubi|retract|idempotent).*trace)",
+   "results": "0 hits: ; scope CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "No exact whole-item match: filtered-colimit infrastructure or ordinary module trace only; no constructible Weil-stage trace comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_map",
+   "results": "1 hits: LinearMap.trace_map",
+   "date": "2026-10-17",
+   "verdict": "No exact whole-item match: filtered-colimit infrastructure or ordinary module trace only; no constructible Weil-stage trace comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +401,114 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport"
+ "unit": "sk-thm-trace-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-karoubi-independence",
+  "worker": "stage1",
+  "summary": "Expanded the source into eight complete steps using existing nodes only. Corrected the Frobenius claim to compare a fixed Weil datum and made the comparison cocycle relative to specified representing maps. The proof uses the framework Hom-colimit, not an unproved identification with PBC categories. It constructs global and local operators directly from cohomology/point transports on the full constructible domain, and checks the scheme-Frobenius normalization on finite reduction diagrams; no finite-Tor lattice hypothesis is taken from the rational-model theorem. Uses the existing field-cohomology scalar comparison, explicit vector-space contractions, preservation lemmas, and coefficient/exchange naturality. Retains the full hypotheses in the final E-stage trace-formula consequence. No new nodes or exact Lean/Mathlib attachment. Second reading fixes the common compactification, spells out the homotopy-localization and rational fixed-point calculations, and explicitly identifies the conditional trace-formula operators using the rational-model theorem only on its finite-Tor domain. Return repair: revalidated every proof citation against the current DAG, made the field-supertrace domain explicit in Step 2, and refreshed the three trace-law quotations to the complete current field clause; no triangle-additivity assertion is used. Independent second reading: made both splitting inverse products, the restriction intertwining, and derived-roof naturality explicit; cited the existing integral pullback composition, Frobenius trivialization pullback naturality, and scheme/Galois coefficient-change statements for Step 6.",
+  "blueprint": "Current main-20261015 proof sentence 1 is realized by steps 1-4; its sentence 2 by steps 3 and 7; its last Frobenius sentence by steps 5-6 with the missing compatibility hypothesis made explicit; the statement's trace-formula consequence is step 8. This is unit sk-thm-trace-transport Step 4 (field stages), without altering its route.",
+  "tool_uses": [
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Uses its field supertrace formula for perfect coefficient complexes."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Its statement gives framework common-stage operation comparisons preserving the units and counits defining exchange."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Uses framework pullback comparisons and their identity and composition compatibility, rationalized on integral representatives."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Uses the framework scalar-extension composition comparison in finite-stage transport."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Converts framework point fibres to coefficient complexes compatibly with successive field extensions."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Supplies naturality and coefficient compatibility of the actual point transport."
+   },
+   {
+    "node": "lem-weil-cohomology-commutes-scalar-extension",
+    "why": "Its natural field-cohomology comparison computes the cohomological matrices after coefficient extension; the unit has no separate module-complex comparison."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Supplies the bounded integral compact-support output before taking the point fibre; it is a general operation-domain tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Supplies constructibility and the finite-reduction formula for framework pullback, needed for stalks and their strict-tower transport construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Used only at finite constant-coefficient levels for canonical inverse-image composition; integral maps are explicitly constructed from these strict reduction diagrams."
+   },
+   {
+    "node": "lem-trf-absolute-frobenius-site",
+    "why": "Its canonical trivialization identifies the finite-level scheme-Frobenius stalk normalization with geometric point transport; no new trace-formula route is used."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "Identifies the finite-level scheme and Galois Frobenius pullbacks in the stalk-normalization check."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Identifies the source normalization of kappa at finite level only, rather than invoking a rational integral-model theorem outside its domain."
+   },
+   {
+    "node": "thm-trf-coefficient-morphism-trace-formula",
+    "why": "Used only to read the finite-Tor domain explicitly included in the finite-level hypotheses retained from thm-trf-trace-formula-e."
+   },
+   {
+    "node": "prop-trf-rational-frobenius-integral-model",
+    "why": "Used only in Step 8 when the retained finite-level hypotheses hold, to identify the exact trace-formula operators; not used on arbitrary framework objects."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Supplies the natural associative integral pullback-composition maps with their finite-reduction identification; the finite constant-coefficient lemma alone does not state this integral result."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Supplies compatibility of the specified absolute-Frobenius trivialization with the arbitrary geometric-point pullback used to check the local normalization, beyond open restriction."
+   },
+   {
+    "node": "lem-trf-scheme-galois-coefficient-change",
+    "why": "Supplies coefficient-change compatibility of the specified scheme/Galois comparison on all finite constant-coefficient complexes, needed for the strict reduction diagram normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-trf-trace-formal-laws",
+  "lem-fix-operation-reduction",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-absolute-frobenius-site",
+  "prop-trf-frobenius-factorization",
+  "prop-trf-scheme-galois-comparison",
+  "thm-trf-coefficient-morphism-trace-formula",
+  "prop-trf-rational-frobenius-integral-model",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-scheme-galois-coefficient-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-65c790bef",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-65c790bef (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no edits. It changes only the existing item and adds no new nodes. The proof dependencies equal the union of the step uses, there is no cycle and no SGA citation. Statement: the source text is the same in main-20261015 and master. The STATEMENT-DISPUTED correction is right and does not weaken the item. A Weil structure on Spec F_q with maps 1 and 2 on the same underlying object gives traces 1 and 2^m, so the Frobenius claim needs the same Weil datum. That is the morphism condition of def-weil-weil-sheaf-complex and matches the unit's 'Weil datum'. The cocycle must be taken relative to specified maps alpha, beta, delta, because arbitrary comparisons 1,1,2 fail it. The trace-formula consequence keeps every hypothesis of the current thm-trf-trace-formula-e. The coefficient category is the framework common-stage category, as in main-20261015 def-trf-karoubi-trace, and is not identified with the PBC category. Step checks: 1 (finite witnesses at a compositum, from the Hom-colimit definition) is elementary. 2: the vector-space splitting, the inverse products (ri')(r'i)=1 and (r'i)(ri')=1, and the intertwining hold; clause 4 of prop-trf-trace-formal-laws applies at every finite M. 3: the field cohomology comparison is natural on roofs. 4: the domains are right (ell not p, a_X separated of finite type over k) and constructibility comes from lem-sf-integral-compact-support-constructible and lem-pur-integral-operations-preserve-constructible. 5: I checked the induction for the iterated Weil map. 6: global conjugacy follows from naturality of tau_c. I recomputed the affine identities g^m ybar = ybar g_s^m, Phi^m ybar = ybar and Fr ybar = ybar Fr_s, and Phi^m = g_gamma^m Fr. The normalization against def-trf-frobenius-operators cites lem-pur-frobenius-trivialization-pullback, lem-trf-scheme-galois-coefficient-change and lem-pod-integral-pullback-composition, and coefficient compatibility cites lem-fix-operation-reduction and point-transport naturality (2). 7: cancellation. 8: the rational-model theorem is used only on its D^b_ctf domain, which comes from thm-trf-coefficient-morphism-trace-formula; the induction F_c^{m+1}=C(phi^[m+1])t^[m+1] matches g_{gamma,c}^{m,*}. Tool uses: all accepted. The only one off the unit's route is lem-pod-integral-pullback-composition (sk-lem-finite), a generic tool that replaces no unit step. Small cases checked: rank one on Spec F_q, the empty scheme, e=0 and e=1, E=F=M, and field towers. Minor, not changed: source.document still names the master snapshot, which has the identical text; proof_origin and the step sources name main-20261015."
+ }
 }

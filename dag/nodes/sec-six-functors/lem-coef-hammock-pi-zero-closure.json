@@ -11,9 +11,144 @@
   "lem-coef-coherent-nerve-comparison",
   "def-coef-simplicial-hammock-pair"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H_T=\\operatorname{diag}H(A,T)$ for $T=U,V$, and let $e_T:A\\to H_T$ send an arrow to its one-column hammock with identical rows. The construction and its compatibility with composition and both simplicial operators are those of [def-coef-simplicial-hammock-pair]. The functor $g:H_U\\to H_V$ in the statement satisfies $ge_U=e_V$: on each grid it keeps all arrows and performs the same deletion of identity columns and composition of adjacent like-directed columns. No new identification of arrows in $A$ is made. We will verify a localization property for each $e_T$, then apply the hypothesis to $e_U$.",
+   "uses": [
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1 and Remark 2.5, pp.18-20; canonical comparison on grids"
+   }
+  },
+  {
+   "text": "For any of the pairs $(A,T)$, let $F_\\bullet$ be the ordinary free-category resolution in [lem-coef-dk-cofibrant-localization-comparison]. Put $P_n=F^{n+1}(A_n)$ and $R_{T,n}=F^{n+1}(T_n)$; the operators use both the free-resolution direction and the original direction of $A$. These define $P=\\operatorname{diag}_{p,q}F^{q+1}(A_p)$ and $R_T=\\operatorname{diag}_{p,q}F^{q+1}(T_p)$. Apply the augmentation assertion of that node for each ordinary category $A_p,T_p$, and then [lem-coef-bisimplicial-diagonal-equivalence] to the mapping bisimplicial sets. This gives local weak equivalences $P\\to A$ and $R_T\\to T$, in a commutative square with the inclusions. To check cofibrancy rather than assume it of $A$, note that in degree $n$, $P_n$ is free on the nonidentity arrows of $F^n(A_n)$, and $R_{T,n}$ is the free factor on those lying in $F^n(T_n)$. Diagonal degeneracies take generators to generators. They preserve the complementary generators too: if a degenerate generator lay in the marked free factor, applying a face retraction, which preserves the marked factor, would put the original generator in it. Thus $I_O\\to R_T$ and $R_T\\to P$ are free maps in the precise sense of [lem-coef-fixed-object-simplicial-free-calculus], where $I_O$ has identities only. Here is the lifting check needed for the converse direction, which that node's statement does not assert. Against a local trivial fibration, construct the lifting functor by increasing dimension on nondegenerate free generators. Degeneracies preserve word length and are injective, so a degenerate generator has a generator as its nondegenerate ancestor; the usual unique nondegenerate decomposition of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] therefore applies to these generators inside the mapping simplicial sets. For each new generator from $x$ to $y$ in dimension $n$, its faces already have specified images satisfying the face identities. They give the top map of a boundary lifting square $\\partial\\Delta^n\\to E(x,y)$ over $\\Delta^n\\to B(x,y)$. The trivial-fibration characterization in [lem-coef-kan-quillen-right-proper] gives a filler, including for $n=0$. Extend to degeneracies and to words by composition. Unique word decompositions make this extension a simplicial functor and preserve the previously defined part. This constructs the desired lift. By the fixed-object model structure in [lem-coef-fixed-object-simplicial-free-calculus], this lifting property makes both maps cofibrations in $\\mathrm{sCat}_O$. Since $I_O$ is its initial object, $R_T$ and $P$ are cofibrant there. The same node identifies these cofibrations and cofibrant objects with their Bergner counterparts in [lem-coef-coherent-nerve-comparison]. Thus $R_T,P$ are Bergner-cofibrant and $R_T\\to P$ is a Bergner cofibration; none of $A,T$ was assumed fibrant or cofibrant.",
+   "uses": [
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 2.5-2.6, 6.1 and 7.4-7.6, pp.270,275,277-278; diagonal free resolution and its marked free factor"
+   }
+  },
+  {
+   "text": "Set $L_T=P[R_T^{-1}]$, degreewise ordinary inversion. For each $p$, the natural span in [lem-coef-dk-cofibrant-localization-comparison], applied to $(A_p,T_p)$, is a local weak equivalence on both sides. Take the diagonal in $p$ and the existing resolution/hammock degree; [lem-coef-bisimplicial-diagonal-equivalence] gives a natural span of local weak equivalences\n$$H_T\\ \\longleftarrow\\ Z_T:=\\operatorname{diag}_{p,q,r}H(F^{q+1}A_p,F^{q+1}T_p)_r\\ \\longrightarrow\\ L_T.$$\nIndeed its degree-$n$ middle set is $H(F^{n+1}A_n,F^{n+1}T_n)_n$; its right end is $F^{n+1}A_n[(F^{n+1}T_n)^{-1}]$. The compatibility with maps from the free resolution in the cited statement gives a commuting span under $P$: its maps from $P$ are the constant-row one-arrow hammock, and its maps to the ends are respectively augmentation followed by $e_T$ and ordinary inversion $P\\to L_T$. Naturality for pairs makes these spans commute with $U\\subseteq V$, including enriched composition. Thus they compare the particular canonical functor $g$, not an unspecified choice of equivalences between mapping spaces.",
+   "uses": [
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 2.2 and Remark 2.5, pp.19-20; diagonal of the natural comparison spans"
+   }
+  },
+  {
+   "text": "Use the functor $\\mathbf RN_{\\mathrm{hc}}$ in [lem-coef-coherent-nerve-comparison]; write $\\mathcal A=\\mathbf RN_{\\mathrm{hc}}A$, $\\mathcal P=\\mathbf RN_{\\mathrm{hc}}P$, $\\mathcal R_T=\\mathbf RN_{\\mathrm{hc}}R_T$, and $\\mathcal L_T=\\mathbf RN_{\\mathrm{hc}}L_T$. Step 2 supplies every cofibrancy hypothesis of [lem-coef-cofibrant-simplicial-inversion]. Its homotopy pushout, carried to $\\mathrm{Cat}_\\infty$ by the coherent-nerve comparison, exhibits\n$$\\mathcal L_T\\simeq\\mathcal P\\amalg_{\\mathcal R_T}\\mathbf RN_{\\mathrm{hc}}G(R_T),\\qquad G(R_T)=R_T[R_T^{-1}].$$\nThe same inversion node states that $\\mathcal R_T\\to\\mathbf RN_{\\mathrm{hc}}G(R_T)$ is a weak homotopy equivalence and its target is Kan. Hence [lem-cbc-simplicial-groupoid-localization] applies to exactly this map, without requiring $\\mathcal R_T$ to be Kan: functors out of its target identify with the full functor subcategory out of $\\mathcal R_T$ inverting every edge. This is an assertion about entire functor infinity categories and their transformations.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 9.1-9.7 and 10.1, pp.279-281; derived pushout interpretation of cofibrant inversion, using the cited existing universal groupoid-completion tool"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-functor-pushout] to the pushout of step 4. For every quasicategory $\\mathcal E$, restriction from $\\mathcal L_T$ is the pullback of $\\operatorname{Fun}(\\mathcal P,\\mathcal E)$ and the full subcategory of $\\operatorname{Fun}(\\mathcal R_T,\\mathcal E)$ inverting all edges. Therefore it is precisely the full subcategory of $\\operatorname{Fun}(\\mathcal P,\\mathcal E)$ on functors inverting the vertices of $R_T$: these represent every mapping component after locally Kan replacement, since that replacement is a local weak equivalence. Any added vertex is joined in its Kan mapping set to an original vertex. The corresponding coherent triangles with an identity edge identify their images up to homotopy, so either both image edges are invertible or neither is. Thus no extra edge-inversion condition arises from replacement. More explicitly, for a fully faithful $j:D\\to B$ and $f:C\\to B$, an object of $C\\times_B^hD$ is $(c,d,\\alpha:f(c)\\simeq j(d))$. Between two such objects its mapping space is the homotopy pullback of the mapping spaces in $C,D$ over that in $B$, with the endpoints identified by $\\alpha$. Full faithfulness of $j$ makes the $D$-to-$B$ map an equivalence, so projection to $C$ induces a mapping-space equivalence. Its essential image is exactly those $c$ for which $f(c)$ lies in the essential image of $j$. On cores, the space of pairs $(d,\\alpha)$ over any such $c$ is the homotopy fiber of a fully faithful map of spaces, hence contractible. In the present case this image is closed under equivalences: a coherent natural equivalence is pointwise an equivalence by [lem-cbc-enhanced-functor-cone-calculus], and its naturality triangles conjugate the image of each edge by those component equivalences. Thus the projection identifies the pullback with the stated full subcategory, retaining all transformations. In degree zero $R_T=F(T_0)$, so the condition is equivalently inversion of the one-letter generators coming from $T_0$; all other words are composites of these. Let $a:\\mathcal P\\to\\mathcal A$ be the augmentation equivalence from step 2. Precomposition with $a$ is an equivalence of full functor categories: precomposition with a quasi-inverse supplies an inverse, and the two natural equivalences are obtained by whiskering its unit and counit. It restricts to the indicated subcategories. Indeed each generator of $R_{T,0}=F(T_0)$ maps to its named arrow of $T_0$, and every arrow of $T_0$ has this one-letter lift (with identities treated as identities); the remaining arrows of $R_{T,0}$ are composites. The augmentation square therefore identifies this full subcategory with the functors from $\\mathcal A$ inverting the vertices of $T$. Here [lem-coef-coherent-nerve-comparison] identifies mapping vertices and their coherent compositions, not merely object sets. By step 3, if $\\mathcal C_T=\\mathbf RN_{\\mathrm{hc}}H_T$ and $q_T=\\mathbf RN_{\\mathrm{hc}}e_T$, then\n$$q_T^*:\\operatorname{Fun}(\\mathcal C_T,\\mathcal E)\\simeq\\operatorname{Fun}_T(\\mathcal A,\\mathcal E).$$\nThe right side is full. The comparison is restriction along the specified $q_T$, since the span in step 3 commutes under $P$. This proves the required enhanced localization property from existing pushout and inversion statements; no closure lemma is used as a black box.",
+   "uses": [
+    "lem-coef-infinity-functor-pushout",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 6.1 and 10.1, pp.275,281; agent-written universal-property expansion of the derived inversion pushout"
+   }
+  },
+  {
+   "text": "Compute the components of $H_U$ explicitly. For a bisimplicial set $D$, the equivalence relation on $D_{0,0}$ defining $\\pi_0\\operatorname{diag}D$ is generated by the relations from $D_{1,0}$ and $D_{0,1}$. Each such edge is a diagonal edge by degeneracy in the other direction. Conversely, the endpoints of a diagonal edge in $D_{1,1}$ can be connected using one edge from each direction, by the commuting face identities. Apply this observation to $D_{p,q}=H(A_p,U_p)(x,y)_q$. By [lem-coef-hammock-components-localization], taking components in $q$ gives the ordinary localization $A_p[U_p^{-1}]$, by multiplying any row. The remaining relation in $p$ identifies the two faces of every arrow of $A_1$ and of $U_1$. To see that the resulting category is exactly $Q$, its generators are arrows of $A_0$ and formal inverses of arrows of $U_0$; its relations are ordinary composition/inverse relations and $d_0a=d_1a$ for arrows $a$ of $A_1$. For a marked $u\\in U_1$, the relation between inverse faces follows from the relation between $d_0u,d_1u$ and uniqueness of inverse, so gives no extra relation. These are precisely the presentation of $(\\pi_0 A)[(\\operatorname{im}U_0)^{-1}]$. One can check the presentation both ways by sending every generator to its named arrow; both composites fix the generators. Thus\n$$\\pi_0 H_U\\cong Q,$$\ncompatibly with identities, composition and $e_U$, since all component identifications of the cited node have these compatibilities.",
+   "uses": [
+    "lem-coef-hammock-components-localization",
+    "def-coef-simplicial-hammock-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 6.1, p.275, component formula; detailed diagonal-component argument using Dwyer--Kan II Proposition 3.1, p.20"
+   }
+  },
+  {
+   "text": "Let $v$ be any vertex of $V(x,y)$. By the hypothesis and step 6, the component of $e_U(v)$ is invertible in $\\pi_0H_U$. Locally Kan replacement induces bijections on components of mapping sets by [lem-coef-coherent-nerve-comparison], so in $RH_U$ there is an inverse vertex $w$ and paths from $we_U(v)$ and $e_U(v)w$ to the appropriate identities. Because the mapping sets are Kan, finite edge paths can be composed or reversed using two-dimensional horns; thus choose individual directed edges witnessing these two paths. In the explicit definition of the coherent nerve in the same node, a $2$-simplex is three mapping vertices and an edge from the direct arrow to the composite: its only nontrivial mapping object is the nerve of $\\{\\{0,2\\},\\{0,1,2\\}\\}$, namely $\\Delta^1$. Choose the orientations of the two paths from the identities to the composites. The two chosen edges therefore supply the two inverse-triangle $2$-simplices. By the equivalence definition of [def-cbc-enhanced-diagrams-cones], $q_U(v)$ is an equivalence. This applies to every vertex of $V$ and proves $q_U\\in\\operatorname{Fun}_V(\\mathcal A,\\mathcal C_U)$, without invoking an unstated general homotopy-category detection theorem or a saturation hypothesis on any input degree.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Closure Lemma 6.4 and Proposition 10.5, pp.276,282-283; invertibility criterion in the component category"
+   }
+  },
+  {
+   "text": "Put $\\gamma=\\mathbf RN_{\\mathrm{hc}}g:\\mathcal C_U\\to\\mathcal C_V$. Step 1 gives $\\gamma q_U=q_V$. Apply the localization property of step 5 for $T=V$, $\\mathcal E=\\mathcal C_U$ to $q_U$ from step 7. There is a functor $h:\\mathcal C_V\\to\\mathcal C_U$ and an equivalence $h q_V\\simeq q_U$. It follows that $(h\\gamma)q_U\\simeq q_U$. The full faithfulness in step 5 for $T=U$ lifts this equivalence to $h\\gamma\\simeq\\mathrm{id}_{\\mathcal C_U}$. Likewise $(\\gamma h)q_V\\simeq\\gamma q_U=q_V$, and full faithfulness for $T=V$ lifts it to $\\gamma h\\simeq\\mathrm{id}_{\\mathcal C_V}$. Here lifting an equivalence includes lifting its inverse and its two inverse-triangle witnesses: restriction is an equivalence of the full functor categories by step 5, so choose its quasi-inverse and apply it to those data, then conjugate by its unit. The composite equations obtained this way are coherent homotopies to the identities, not strict equalities of transformations. The functor-category and equivalence conventions are those of [lem-cbc-enhanced-functor-cone-calculus]. Hence $\\gamma$ is an equivalence with inverse $h$. This explicitly proves uniqueness at the level needed here instead of appealing to a classification of closure classes or merely an isomorphism of component categories.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Corollary 6.5, p.276; agent-written two-test-target inverse construction from the full localization properties already proved"
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], the equivalence $\\gamma$ induces equivalences on all mapping spaces. The natural mapping-space comparisons of [lem-coef-coherent-nerve-comparison] identify its map at $x,y$ with $(Rg)(x,y)$, up to the specified natural equivalences. Thus $(Rg)(x,y)$ is a weak homotopy equivalence. In the commutative square from $g(x,y)$ to $(Rg)(x,y)$, the vertical maps $H_T(x,y)\\to RH_T(x,y)$ are weak homotopy equivalences by that same node. Two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that $g(x,y)$ is a weak homotopy equivalence. The objects $x,y$ were arbitrary. This gives the conclusion for the canonical grid-preserving functor, with no Kan condition on the original mapping sets and no model structure or saturation imposed on the input pair.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Remark 2.5, p.20, and Dwyer--Kan I Closure Lemma 6.4; mapping-space conclusion via the cited coherent-nerve equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-simplicial-hammock-pair",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-cofibrant-simplicial-inversion",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-dk-cofibrant-localization-comparison",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-hammock-components-localization",
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Closure Lemma 6.4, Corollary 6.5 and Sections 9-10; explicit derived-pushout/universal-property proof using existing DAG tools, with the diagonal span of Dwyer--Kan II Remark 2.5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -147,10 +282,73 @@
    "results": "{\"t\": \"2026-10-17T02:09:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.id\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedFullyFaithfulOfIsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_isInduced\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedEquivalenceOppositeOpOp\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.comp\"], \"digest\": \"b39e6c94afa2ec91\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned localizer and model-category declarations concern equivalences of ordinary localized categories, not weak equivalences of full simplicial mapping spaces. Read Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean:12-130, Localization/Predicate.lean:12-105, and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-85."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ammock|Dwyer|[Ss]implicial.*[Ll]ocalization",
+   "results": "{\"t\": \"2026-10-17T02:37:31Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|Dwyer|[Ss]implicial.*[Ll]ocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned ordinary category localizations, localizer morphisms, homotopy categories, and simplicial thickening infrastructure; none states weak equivalence on diagonal hammock mapping spaces. Source read: Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-50, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The closure lemma for enriched simplicial localization says that inverting morphisms already isomorphisms in the localized homotopy category preserves mapping spaces",
+   "results": "{\"t\": \"2026-10-17T02:37:31Z\", \"tool\": \"leansearch\", \"query\": \"The closure lemma for enriched simplicial localization says that inverting morphisms already isomorphisms in the localized homotopy category preserves mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsInvertedBy.isoClosure_iff\", \"CategoryTheory.Localization.LeftBousfield.W_isoClosure\", \"CategoryTheory.Localization.isoOfHom_hom_inv_id_assoc\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.inverts\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\"], \"digest\": \"2e5541d6d054c975\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned ordinary category localizations, localizer morphisms, homotopy categories, and simplicial thickening infrastructure; none states weak equivalence on diagonal hammock mapping spaces. Source read: Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-50, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization",
+   "results": "{\"t\": \"2026-10-17T02:37:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLocalizationIdIsomorphisms\", \"CategoryTheory.Functor.IsLocalization\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Localization.essSurj\", \"CategoryTheory.Localization.inverts\", \"CategoryTheory.Functor.IsLocalization.inverts\", \"CategoryTheory.Localization.equivalenceFromModel\", \"CategoryTheory.Localization.isGroupoid\"], \"digest\": \"1acc54b5f75b9749\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned ordinary category localizations, localizer morphisms, homotopy categories, and simplicial thickening infrastructure; none states weak equivalence on diagonal hammock mapping spaces. Source read: Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-50, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a simplicial category is a homotopy pushout adjoining inverses to a subcategory and depends only on its saturated class in pi zero",
+   "results": "{\"t\": \"2026-10-17T02:37:32Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a simplicial category is a homotopy pushout adjoining inverses to a subcategory and depends only on its saturated class in pi zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"CategoryTheory.Functor.q_isLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"SSet.Truncated.HomotopyCategory.multiplicativeClosure_morphismPropertyHomMk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"807274863777fc65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned ordinary category localizations, localizer morphisms, homotopy categories, and simplicial thickening infrastructure; none states weak equivalence on diagonal hammock mapping spaces. Source read: Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-50, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enlarging a wide simplicial marking by arrows invertible in the localized category of components preserves diagonal hammock mapping spaces",
+   "results": "{\"t\": \"2026-10-17T02:37:34Z\", \"tool\": \"leanfinder\", \"query\": \"Enlarging a wide simplicial marking by arrows invertible in the localized category of components preserves diagonal hammock mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.smallHomMap'_mk\", \"CategoryTheory.Localization.Construction.ψ₂\", \"CategoryTheory.Localization.Construction.ψ₁\", \"CategoryTheory.LocalizerMorphism.homMap_map\", \"CategoryTheory.LocalizerMorphism.homMap\", \"CategoryTheory.LocalizerMorphism.arrow\", \"CategoryTheory.LocalizerMorphism.homMap_apply\", \"CategoryTheory.SimplicialThickening.functor_map\"], \"digest\": \"e311852cd5b89644\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned ordinary category localizations, localizer morphisms, homotopy categories, and simplicial thickening infrastructure; none states weak equivalence on diagonal hammock mapping spaces. Source read: Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-50, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79."
+  },
+  {
+   "tool": "grep",
+   "query": "([Hh]ammock|[Ss]implicial[Cc]ategory).*(localiz|[Ss]aturat)|localiz.*[Hh]ammock",
+   "results": "{\"t\": \"2026-10-17T02:55:43Z\", \"tool\": \"grep\", \"query\": \"([Hh]ammock|[Ss]implicial[Cc]ategory).*(localiz|[Ss]aturat)|localiz.*[Hh]ammock\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep found no enriched hammock localization result; semantic hits concern ordinary model homotopy categories and additive quotient localizations; the exact isoClosure_iff hit concerns ordinary categories and closure under isomorphisms. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-115, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-90, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79; no declaration states enriched mapping-space invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of an infinity category at a class of morphisms is unchanged when one further inverts morphisms already equivalences in its homotopy category",
+   "results": "{\"t\": \"2026-10-17T02:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of an infinity category at a class of morphisms is unchanged when one further inverts morphisms already equivalences in its homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"ComplexShape.quotient_isLocalization\"], \"digest\": \"316ebe0ee6c12f3a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep found no enriched hammock localization result; semantic hits concern ordinary model homotopy categories and additive quotient localizations; the exact isoClosure_iff hit concerns ordinary categories and closure under isomorphisms. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-115, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-90, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79; no declaration states enriched mapping-space invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoClosure\" \"IsInvertedBy\"",
+   "results": "{\"t\": \"2026-10-17T02:56:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"isoClosure\\\" \\\"IsInvertedBy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"isoClosure\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"IsInvertedBy\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query error: Loogle rejected the two quoted strings as an invalid application; rerun with the full declaration name. This is not a no-match result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsInvertedBy.isoClosure_iff",
+   "results": "{\"t\": \"2026-10-17T02:56:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty.IsInvertedBy.isoClosure_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsInvertedBy.isoClosure_iff\"], \"digest\": \"8df76b2879c173c2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep found no enriched hammock localization result; semantic hits concern ordinary model homotopy categories and additive quotient localizations; the exact isoClosure_iff hit concerns ordinary categories and closure under isomorphisms. Read Mathlib/CategoryTheory/Localization/Predicate.lean:12-110, AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:12-115, CategoryTheory/MorphismProperty/IsInvertedBy.lean:12-90, and AlgebraicTopology/SimplicialCategory/Basic.lean:12-79; no declaration states enriched mapping-space invariance. Exact hit read at CategoryTheory/MorphismProperty/IsInvertedBy.lean:143-151: closure under arrow isomorphisms for ordinary categories, not saturation in a simplicial localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-enriched-hammock-comparison",
@@ -180,5 +378,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hammock-pi-zero-closure",
+  "worker": "stage1",
+  "summary": "Unchanged statement; no new nodes. Proved the closure comparison using the diagonal free-resolution span, cofibrant inversion pushout and full groupoid-localization property; computed the actual component presentation and constructed an inverse to the specified functor. Existing searches preserved and fresh searches recorded. No attachment found. Self-review added explicit boundary lifting for the free maps and explicit coherent-nerve inverse triangles, avoiding two overbroad citations. Second reading made the fixed-object/Bergner cofibrancy passage explicit, expanded the full-subcategory pullback and augmentation arguments, and replaced strict inverse equations by coherent lifted witnesses.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, old snapshot proof paragraph 2, derived coefficient adjunction: technical mapping-space bridge in its recorded join-translation/enriched-hammock ancestry. The main-20261015 ancestor restates the same integral adjoint but omits the detailed proof; no chapter/unit route is changed. Steps 1-5 establish the enriched localization interface, steps 6-7 identify its pi-zero closure, and steps 8-9 prove the canonical mapping-space equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic full infinity-categorical groupoid-completion universal property in step 4-5; the local unit has the cofibrant inversion pushout but no substitute for this universal property."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic detection of functor equivalences and induced mapping-space equivalences in steps 8-9, used inside the enriched-localization bridge; does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-3153dadef",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3153dadef (reviewer sub-agent of L); spot-checked: I read the full item (9 steps, statement unchanged, no new nodes) and all 13 cited statements. proof_deps equals the union of the step uses. By script, no cited node reaches the item, so there is no cycle; the only citer is lem-coef-kan-enriched-hammock-comparison, which uses the item with U = identity marking. The statement is the correct enriched Dwyer–Kan closure lemma: its hypothesis is about invertibility in Q = pi0A[(im U_0)^-1], not degreewise closure, and no Kan, cofibrancy or saturation hypothesis is added. Small cases I tested: empty object set, U=V, an ordinary category localized at its isomorphisms, the monoid N (hypothesis fails, as it must), the group Z/2, and a non-Kan A with U = identities. All nine steps check. Step 2: diagonal free resolution; degeneracies keep generators and complementary generators; the boundary-lifting proof that free maps are cofibrations covers n=0, then the fixed-object and Bergner cofibrations agree. Step 3: the dk span applied for each p, naturality in p and the rowwise diagonal lemma; the commutation under P reads correctly. Step 4: every hypothesis of cofibrant-simplicial-inversion holds, and the groupoid-localization node needs no Kan source. Step 5: the pullback against the fully faithful leg, and a^* matching R_{T,0}=F(T_0) to the vertices of T. Step 6: the pi0-of-diagonal argument, checked in both directions; the presentation equals Q. Step 7: inverse triangles with the correct orientation in the coherent 2-simplex. Steps 8–9: inverse functor via full faithfulness of q_U^* and q_V^*, then mapping spaces and two-out-of-three. No duplicate: lem-coef-hammock-infinity-localization covers ordinary categories only, and hammock-pair-homotopy-invariance is a change of pair, not of marking. I accept the two declared tool uses, lem-cbc-simplicial-groupoid-localization and lem-cbc-enhanced-functor-cone-calculus. Mathlib search records are genuine, and the Loogle parse error is recorded as a query error. Caveat: the Dwyer–Kan PDFs are not archived and network access is blocked here, so I checked the source places against the standard content of DK I sections 2, 6, 7, 9–10 and DK II 2.1–2.5 and 3.1, not the printed pages; the proof is correctly marked agent-written. No fixes."
  }
 }
