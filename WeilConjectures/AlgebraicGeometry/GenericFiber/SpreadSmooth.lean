@@ -141,9 +141,9 @@ theorem exists_isImmersion_smooth_of_isFractionRing {B L : Type u} [CommRing B] 
     rw [← Spec.map_comp_assoc]
     exact congrArg (Spec.map · ≫ σ) (hRA s.unop)
   have : IsConnected I := IsCofiltered.isConnected I
-  let D := baseChangeOverDiagram D₀ q hq f
-  let c := baseChangeOverCone D₀ c₀ q hq q₀ hq₀ f
-  have hc : IsLimit c := isLimitBaseChangeOverCone D₀ c₀ q hq q₀ hq₀ f hc₀
+  let D := baseChangeOverFamilyDiagram D₀ q hq f
+  let c := baseChangeOverFamilyCone D₀ c₀ q hq q₀ hq₀ f
+  have hc : IsLimit c := isLimitBaseChangeOverFamilyCone D₀ c₀ q hq q₀ hq₀ f hc₀
   have : ∀ {s s' : I} (u : s ⟶ s'), IsAffineHom (D₀.map u) := fun u ↦
     isAffineHom_of_isAffine (X := Spec _) (Y := Spec _) _
   have (s : I) : IsAffine (D₀.obj s) := inferInstanceAs (IsAffine (Spec _))
@@ -254,7 +254,7 @@ theorem exists_isImmersion_smooth_of_isFractionRing {B L : Type u} [CommRing B] 
   have hsm : Smooth (v ≫ sndt) := by
     have H' : IsPullback (pullback.fst (zj ≫ Wj.ι) (D.map g)) (v ≫ sndt) p' (D₀.map g) := by
       have := (IsPullback.of_hasPullback (zj ≫ Wj.ι) (D.map g)).paste_vert
-        (isPullback_baseChangeOverDiagram_map D₀ q hq f g)
+        (isPullback_baseChangeOverFamilyDiagram_map D₀ q hq f g)
       simp only [Category.assoc] at this
       exact this
     rw [← H'.isoPullback_hom_snd]

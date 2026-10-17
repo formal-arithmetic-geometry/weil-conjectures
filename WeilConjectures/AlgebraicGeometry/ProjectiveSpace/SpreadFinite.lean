@@ -101,9 +101,9 @@ theorem exists_isFinite_spread {A : Type u} [CommRing A] [IsDomain A] [IsNoether
     rw [← Spec.map_comp]
     exact congrArg Spec.map (hRA s.unop)
   have : IsConnected I := IsCofiltered.isConnected I
-  let D := baseChangeOverDiagram D₀ q hq f
-  let c := baseChangeOverCone D₀ c₀ q hq q₀ hq₀ f
-  have hc : IsLimit c := isLimitBaseChangeOverCone D₀ c₀ q hq q₀ hq₀ f hc₀
+  let D := baseChangeOverFamilyDiagram D₀ q hq f
+  let c := baseChangeOverFamilyCone D₀ c₀ q hq q₀ hq₀ f
+  have hc : IsLimit c := isLimitBaseChangeOverFamilyCone D₀ c₀ q hq q₀ hq₀ f hc₀
   have : ∀ {s s' : I} (u : s ⟶ s'), IsAffineHom (D₀.map u) := fun u ↦
     isAffineHom_of_isAffine (X := Spec _) (Y := Spec _) _
   have (s : I) : IsAffine (D₀.obj s) := inferInstanceAs (IsAffine (Spec _))
