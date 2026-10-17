@@ -15,7 +15,8 @@
   "def-trf-coherent-topos",
   "def-constructible-stratification",
   "def-weil-constructible-subset",
-  "lem-trf-oriented-product-universal"
+  "lem-trf-oriented-product-universal",
+  "def-trf-oriented-constructible-sheaf"
  ],
  "proof": [
   {
@@ -188,5 +189,29 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-b7ea7d0fa (reviewer sub-agent of L); spot-checked: I read the whole item (statement unchanged, not a target), both new nodes, every cited statement, ILO Exposé XI 1.1–1.8 and 2.5 with its proof, and Stacks sites-modules 093P–093U and etale-cohomology 03RU/03RX. Orgogozo §8.1 is not available locally and is marked WANTED; I did not rely on it. The criterion is true: V_f is coherent by XI 2.5. Forward: a finite generator cover F→A, the kernel pair covered by finitely many triples Z'_k, 03S0 on every component, base change of the triples to the strata, FLC, then image and quotient. Converse: the stratified-product helper and lem-trf-coherent-conservative-reflection. Edge cases: X or S empty, A empty, infinite constant A. Helper lem-trf-finite-locally-constant-coherent is true: its operation clauses follow from 093U(1) and 093S, and I checked the coherence clause by hand. I tested it on a point, the empty topos, Set×Set, the Sierpiński topos and the excluded non-FLC relation. Helper lem-trf-stratified-product-coherent-conservative is true by XI 2.5, the base-change clause and points (XI 1.8). Neither helper duplicates an existing node (rg over dag/nodes) or restates a clause of the item. Two faults, fixed in fixes/. (1) B5/B3: the FLC helper cited 03RU/03RX 'in sites-modules.tex'; those tags are scheme-étale. I changed the source to Stacks sites-modules 093Q/093R/093S/093U(1) and cited def-weil-pbc-constant-sheaf. (2) E3/E5 in item step 2: it said the kernel-pair cover triples are stratified 'because they are fibre products', which is wrong; they need 03S0 too. Its base-change display used an untyped g_{αβ}. I rewrote steps 2 and 3 with the same uses and statement: the kernel-pair cover Z'_k, the formula H_{Z_αβ} = p1^{-1}H_{U_α} ×_{(g_β p2)^{-1}H_V} p2^{-1}H_{W_β}, the FLC transfer through p1^{-1} and p2^{-1}, and a finite-subcover and componentwise-coherence remark in step 3. Accepted tool_uses, for the maintainer to record: lem-galois-flc-representable (sk-prop-h2) and lem-weil-pbc-etale-stratified-finite (03S0, sk-thm-p1). No SGA source, no cycle, no dropped nodes.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a5f02e9cc",
+  "group": "NO",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical restriction, source criterion, edge cases, docstrings, route-pivot compliance, report sections, and compiler evidence all checked; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoherentSetCriterion",
+  "file": "lean/Sheaf/Paper/CoherentSetCriterion.lean",
+  "declaration": "AlgebraicGeometry.coherent_iff_finite_constructible_strata",
+  "declarations": [
+   "AlgebraicGeometry.coherentSetCriterion_hasCoproducts",
+   "AlgebraicGeometry.orientedStratumSetRestriction",
+   "AlgebraicGeometry.coherent_iff_finite_constructible_strata"
+  ],
+  "statement": "theorem coherent_iff_finite_constructible_strata {X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [CompactSpace S] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (A : VanishingTopos.{u, v} f) : IsCoherentObject.{max (u + 1) v} A ↔ ∃ (SX : Scheme.FiniteLocallyClosedStratification X) (SS : Scheme.FiniteLocallyClosedStratification S), (∀ i : Fin SX.n, Topology.IsConstructible (SX.stratum i)) ∧ (∀ j : Fin SS.n, Topology.IsConstructible (SS.stratum j)) ∧ ∀ (i : Fin SX.n) (j : Fin SS.n) (U : ProductSite.{u, v} (SX.immersion i ≫ f) (SS.immersion j ≫ 𝟙 S)), ∃ R : Sieve U, R ∈ productTopology (SX.immersion i ≫ f) (SS.immersion j ≫ 𝟙 S) U ∧ ∀ (V : ProductSite.{u, v} (SX.immersion i ≫ f) (SS.immersion j ≫ 𝟙 S)) (r : V ⟶ U), R r → ∃ (M : Type (max (u + 1) v)), Finite M ∧ Nonempty (((orientedStratumSetRestriction f (SX.immersion i) (SS.immersion j)).obj A).over V ≅ ((constantSheaf (productTopology (SX.immersion i ≫ f) (SS.immersion j ≫ 𝟙 S)) (Type (max (u + 1) v))).obj M).over V)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The input is the recorded VanishingTopos. The canonical set inverse image uses the published vanishingNormalization followed by the published stratumBaseChange and sheafified left Kan extension. The finite locally constant clause is written out using covering sieves and slice sheaf isomorphisms; no new local-constancy predicate is introduced. The added statement dependency owns both canonical site functors."
  }
 }
