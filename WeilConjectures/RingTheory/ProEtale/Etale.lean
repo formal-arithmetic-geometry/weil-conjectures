@@ -59,13 +59,15 @@ instance {J : Type*} [Category J] {C : Type*} [Category C] [Preadditive C]
     [HasLimitsOfShape WalkingParallelPair C] [HasColimitsOfShape WalkingParallelPair C] (j : J) :
     ((evaluation J C).obj j).PreservesHomology where
 
-instance CategoryTheory.MonoidalCategory.Limits.preservesLimitsOfShape_tensorRight_of_braided
+local instance
+    CategoryTheory.MonoidalCategory.Limits.preservesLimitsOfShape_tensorRight_of_braided
     {J : Type*} [Category J] {C : Type*} [Category C]
     [MonoidalCategory C] [BraidedCategory C] (c : C)
     [PreservesLimitsOfShape J (tensorLeft c)] :
     PreservesLimitsOfShape J (MonoidalCategory.tensorRight c) where
 
-instance CategoryTheory.MonoidalCategory.Limits.preservesColimitsOfShape_tensorRight_of_braided
+local instance
+    CategoryTheory.MonoidalCategory.Limits.preservesColimitsOfShape_tensorRight_of_braided
     {J : Type*} [Category J] {C : Type*} [Category C]
     [MonoidalCategory C] [BraidedCategory C] (c : C)
     [PreservesColimitsOfShape J (tensorLeft c)] :
