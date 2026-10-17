@@ -240,5 +240,29 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-a329fe60d (reviewer sub-agent of L); spot-checked: I read every step of the item and the statements of all six cited nodes. I checked them against Mathlib Adjunction/Basic.lean:351-365,436-456 (mkOfHomEquiv) and BrownLemma.lean:48-53,97-102, against the blueprint prop-coef-integral-exceptional-adjoint.proof.md paragraph 2 ('derived coefficient adjunction'), and against the only citer, lem-coef-simplicial-projective-model-calculus Step 15. I recomputed the types and naturality of Phi=B(qr_Y o a) o qc_X^{-1}: source naturality via c_X Qf=f c_X', target naturality via Rg r_Y=r_Y' g, formal inverses by cancellation. I also recomputed the Step 6 comparison, the Step 7 unit q(U(r_{LQX}) eta_{QX}) o qc_X^{-1} and the counit (qr_Y)^{-1} o q(eps_{RY} L(c_{URY})) with source LQURY, and the Step 2 Ken Brown argument; all are correct. Small cases checked: the identity Quillen pair, bifibrant objects, and one side preserving all weak equivalences. All cited statements are on the unit or are Mathlib leaves, so no tool_uses are needed. There is no cycle (none of the 193 nodes reachable from the item's dependencies is the item). There are no new nodes. lem-coef-model-infinity-derived-adjunction is the infinity-categorical version, but it is not a one-line specialization of the item: it lacks the pi0 Map composite and the comparison with the finite-string localization. One repair: the statement asserts 'L preserves (trivial) cofibrations, equivalently U preserves (trivial) fibrations', and Steps 1-2 use the U-form without proof (gap of type E5/C2). I added the elementary lifting-transposition argument to Step 1 in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-derived-hom-adjunction.json; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialDerivedHomAdjunction",
+  "declaration": "CategoryTheory.simplicial_derived_hom_adjunction",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialDerivedHomAdjunction.lean",
+  "statement": "theorem simplicial_derived_hom_adjunction {M : Type u} {N : Type u'} [Category.{v} M] [Category.{v} N] [ModelCategory M] [ModelCategory N] [SimplicialCategory M] [SimplicialCategory N] [HasLimits M] [HasColimits M] [HasLimits N] [HasColimits N] [HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [HasFunctorialFactorization (cofibrations N) (trivialFibrations N)] [HasFunctorialFactorization (trivialCofibrations N) (fibrations N)] (_SM : SimplicialModelCategoryData M) (_SN : SimplicialModelCategoryData N) (eL : EnrichedFunctor SSet.{v} M N) (eU : EnrichedFunctor SSet.{v} N M) (a : simplicialOrdinaryFunctor eL ⊣ simplicialOrdinaryFunctor eU) (E : ∀ (X : M) (Y : N), sHom (eL.obj X) Y ≅ sHom X (eU.obj Y)) (_enriched_left : ∀ (X' X : M) (Y : N), (eL.map X' X ⊗ₘ 𝟙 (sHom (eL.obj X) Y)) ≫ eComp SSet (eL.obj X') (eL.obj X) Y ≫ (E X' Y).hom = (𝟙 (sHom X' X) ⊗ₘ (E X Y).hom) ≫ eComp SSet X' X (eU.obj Y)) (_enriched_right : ∀ (X : M) (Y Y' : N), eComp SSet (eL.obj X) Y Y' ≫ (E X Y').hom = ((E X Y).hom ⊗ₘ eU.map Y Y') ≫ eComp SSet X (eU.obj Y) (eU.obj Y')) (_vertex : ∀ (X : M) (Y : N) (f : eL.obj X ⟶ Y), (E X Y).hom.app _ ((homEquiv' (eL.obj X) Y) f) = (homEquiv' X (eU.obj Y)) (a.homEquiv X Y f)) (_cof : ∀ {X Y : M} (f : X ⟶ Y), Cofibration f → Cofibration ((simplicialOrdinaryFunctor eL).map f)) (_triv : ∀ {X Y : M} (f : X ⟶ Y), trivialCofibrations M f → trivialCofibrations N ((simplicialOrdinaryFunctor eL).map f)) (Q : M ⥤ M) (R : N ⥤ N) (c : Q ⟶ 𝟭 M) (r : 𝟭 N ⟶ R) (_hQ : ∀ X : M, IsCofibrant (Q.obj X)) (_hR : ∀ Y : N, IsFibrant (R.obj Y)) (hc : ∀ X : M, weakEquivalences M (c.app X)) (hr : ∀ Y : N, weakEquivalences N (r.app Y)) (CM : SimplicialMappingLocalization M) (CN : SimplicialMappingLocalization N) : Nonempty (SimplicialDerivedHomAdjunction (simplicialOrdinaryFunctor eL) (simplicialOrdinaryFunctor eU) a E Q R c r hc hr CM CN)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.simplicialOrdinaryFunctor",
+   "CategoryTheory.SimplicialDerivedHomAdjunction",
+   "CategoryTheory.simplicial_derived_hom_adjunction"
+  ],
+  "fixed_by": "NT-stage2-Codex-f43bc9e1c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f43bc9e1c",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Mathematics verified; immutable Lean module compiles cleanly. Complete fixes register both helpers and replace the generic second-reading section with detailed checks. Findings and compiler evidence are in review.md; branch head and project clones were unchanged."
  }
 }

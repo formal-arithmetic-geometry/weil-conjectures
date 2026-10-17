@@ -231,5 +231,35 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-98018104d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of its three cited nodes: dgcat-finite-limit-sketch-signature, finite-limit-sketch-models (only the definition of a model is used) and def-weil-size-convention. The delivery has no new nodes, so there is nothing to drop. The steps use only clauses the signature states explicitly: the sorts O, A_n, B, the parallel and composable pairs, z/neg/scalars/add/1/c_{q,p}/d, endpoint preservation, the module, associativity, unit and bilinearity equations, d^2=z p, and Leibniz with (-1)^q for b in A_q, which matches (-1)^{|b|}. Tuple arrows have prescribed projections. The fiber construction (steps 2-3), model morphisms to strict dg functors with auxiliary components forced by uniqueness of limits (step 4), the labeled-coproduct model with relations checked on generators (steps 5-6), and the two natural isomorphisms giving an equivalence (steps 7-8) are all correct, and their elementary flags are justified. Small cases tested: the empty dg category, a one-object dg algebra, R=0, characteristic 2, the degree bookkeeping p+q+1, and a non-injective object map. There is no cycle and no restated parent clause: the parent free-cell-calculus cites the item as its own step 1, not as a clause of its statement. An rg sweep for sketch, essentially-algebraic and dg-model nodes found no duplicate. A Mathlib grep for sketch/DGCat found no match, which agrees with the recorded searches. Non-blocking: the inherited node-level source.place still names Tabuada Lemma 1.10, which by the worker's own account does not state this result. The steps cite Def 1.1 and the proof is marked agent; the document is not local, so I made no edit. This auxiliary lemma involves no target, coefficient category or base-change morphism, and uses no SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCategorySketchModelIdentification",
+  "declaration": "CategoryTheory.DgSketchSignature.exists_model_identification",
+  "declarations": [
+   "CategoryTheory.DgSketchSignature.Values",
+   "CategoryTheory.DgSketchSignature.Arrows",
+   "CategoryTheory.DgSketchSignature.evalTerm",
+   "CategoryTheory.DgSketchSignature.arrowLeg",
+   "CategoryTheory.DgSketchSignature.objectLeg",
+   "CategoryTheory.DgSketchSignature.Fiber",
+   "CategoryTheory.DgSketchSignature.Coordinates",
+   "CategoryTheory.DgSketchSignature.Identification",
+   "CategoryTheory.DgSketchSignature.exists_model_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgCategorySketchModelIdentification.lean",
+  "statement": "theorem exists_model_identification (R : Type u) [CommRing R] (A : Type u) [SmallCategory A] (P : Presentation R A) (S : FiniteLimitSketch A) (e : S.index ≃ ConeIndex) (hS : ∀ i : S.index, RealizesCone P S i (coneRecipe R (e i))) : Nonempty (Identification P S)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Identification records literal dependent fiber and labelled-union types, all context projection and operation comparisons, both functors on objects and homogeneous arrows, and canonical unit/counit formulas. Presentation projections use explicitly typed objectLeg/arrowLeg maps. Fiber, arrow, and tuple correspondences are ordinary typed equivalences rather than heterogeneous definitional carrier equalities, so multi-object dg categories remain allowed. Reuses the existing Dg.Cat, strict category, hom, unit and mul definitions from DgCategoryFreeCellCalculus; no free-cell theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b2ef4b4dc",
+  "group": "NE",
+  "result": "pass",
+  "note": "Immutable delivery is substantively correct; all required declarations, dependencies, source conventions, edge cases, and compiler evidence checked. No fixes required."
  }
 }
