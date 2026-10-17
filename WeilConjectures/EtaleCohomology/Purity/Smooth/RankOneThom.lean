@@ -65,4 +65,38 @@ lemma isIso_of_comp_eq_id_of_iso_unit {N T : C} (e : N ≅ 𝟙_ C) (φ : T ≅ 
 
 end CategoryTheory.MonoidalCategory
 
+namespace AlgebraicGeometry.VectorBundle
+
+open Scheme Etale
+
+variable {V S : Scheme.{u}} {d : ℕ} {π : V ⟶ S} (E : VectorBundle d π)
+
+section Trace
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasInvertibleExponent Λ S]
+  [HasCompactification π] [QuasiCompact π]
+
+/-- The counit of the composite adjunction `Rπ_! Rz_! ⊣ Rz^! Rπ^!` is an isomorphism, the left
+adjoint being `R(z ≫ π)_! = R(𝟙)_! ≅ 𝟭`. -/
+theorem isIso_comp_counit :
+    IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) E.zero).comp
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) π)).counit := by
+  have := E.isClosedImmersion_zero
+  have : HasCompactification (E.zero ≫ π) := .of_eq E.zero_comp.symm
+  obtain ⟨c⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ E.zero π
+  obtain ⟨heq⟩ := nonempty_iso_rightDerivedLowerShriek_of_eq Λ E.zero_comp
+  obtain ⟨eid⟩ := nonempty_leftDerivedUpperStar_id_iso Λ S (𝟙 S) rfl
+  let eL : R(E.zero)_![ModuleCat.{u + 1} Λ] ⋙ R(π)_![ModuleCat.{u + 1} Λ] ≅ 𝟭 _ :=
+    c.symm ≪≫ heq ≪≫
+      rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) (𝟙 S) ≪≫
+      rightDerivedLowerStarIsoLeftDerivedUpperStarInv (ModuleCat.{u + 1} Λ) (Iso.refl S) ≪≫ eid
+  let adj := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) E.zero).comp
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) π)
+  let rU := adj.rightAdjointUniq (Adjunction.id.ofNatIsoLeft eL.symm)
+  exact adj.isIso_counit_of_iso (Functor.isoWhiskerRight rU _ ≪≫ Functor.leftUnitor _ ≪≫ eL)
+
+end Trace
+
+end AlgebraicGeometry.VectorBundle
+
 end
