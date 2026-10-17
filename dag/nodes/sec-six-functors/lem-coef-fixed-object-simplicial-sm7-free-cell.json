@@ -12,9 +12,81 @@
   "lem-coef-fixed-object-free-arrow-adjunction",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In simplicial degree n, the category (X\\otimes F^O_{u,v}(Y))_n is the coproduct over x\\in X_n of a copy of the free category on the graph with one u\\to v generator for each y\\in Y_n. The coproduct of these copies is the free category on the disjoint union of those generators, namely the graph indexed by X_n\\times Y_n. Faces and degeneracies send the generator labelled (x,y) to the one labelled (\\alpha^*x,\\alpha^*y), so these degreewise identifications assemble into a natural simplicial-category isomorphism X\\otimes F^O_{u,v}(Y)\\cong F^O_{u,v}(X\\times Y). The construction also covers u=v, where arbitrary finite words in the loop generators are retained.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Dwyer--Kan, Section 7.1; degreewise free-generator calculation underlying the simplicial model axiom, pp.276--277. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply the natural isomorphism of Step 1 to the four terms in the displayed pushout. Since the free-arrow functor is left adjoint to evaluation, its defining Hom bijection identifies the pushout of free arrows with the free arrow on the simplicial-set pushout: maps from either side into a fixed T are exactly compatible maps from the two input simplicial sets into T(u,v). Thus the pushout in sCat_O is naturally F^O_{u,v}((Q\\times K)\\amalg_{P\\times K}(P\\times L)), and the induced map is identified with F^O_{u,v}(i\\mathbin\\square j). Naturality in X,Y follows from the same universal-property calculation.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Dwyer--Kan, Section 7.1 and Proposition 7.2, pp.276--277; free-cell tensor and pushout comparison. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "The simplicial-set helper [lem-coef-kan-quillen-cartesian-pushout-product] gives that r=i\\mathbin\\square j is a monomorphism, and that r is a weak homotopy equivalence when i is a horn or j is a weak homotopy equivalence. The horn case also agrees with the horn pushout-product lifting property in [lem-coef-sset-anodyne-pushout-product]. These conclusions include m=0 for boundary inclusions and require no injectivity beyond the given monomorphism j.",
+   "uses": [
+    "lem-coef-kan-quillen-cartesian-pushout-product",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Hovey, Model Categories",
+    "place": "The cartesian Kan--Quillen pushout-product argument for boundary and horn generators; source copy WANTED."
+   }
+  },
+  {
+   "text": "By Step 3, r=i\\mathbin\\square j:D\\to Q\\times L, with D=(Q\\times K)\\amalg_{P\\times K}(P\\times L), is a monomorphism, i.e. a cofibration of the Kan model structure of [lem-coef-kan-quillen-right-proper]; hence r has the left lifting property against every trivial Kan fibration (a Kan fibration that is a weak homotopy equivalence). Let p:T\\to T' be a trivial fibration of the fixed-object model structure of [lem-coef-fixed-object-simplicial-free-calculus], i.e. a local Kan fibration that is a local weak equivalence; then p(u,v):T(u,v)\\to T'(u,v) is a trivial Kan fibration. By the Hom bijection of [lem-coef-fixed-object-free-arrow-adjunction], natural in K (so compatible with precomposition by F^O_{u,v}(r) and r) and in T (so compatible with p and p(u,v)), commutative squares with F^O_{u,v}(r) on the left and p on the right correspond bijectively to commutative squares with r on the left and p(u,v) on the right, and diagonal fillers correspond to diagonal fillers. So F^O_{u,v}(r) has the left lifting property against every trivial fibration of \\mathrm{sCat}_O. In a model structure the cofibrations are exactly the maps with the left lifting property against the trivial fibrations, so F^O_{u,v}(r) is a cofibration of \\mathrm{sCat}_O, and by Step 2 so is the isomorphic map F^O_{u,v}(i)\\mathbin\\square j. This holds for every boundary or horn i, every m, and u=v.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2 (fixed-object mapping calculation); the transfer of lifting properties along the free-arrow adjunction is written here by the reviewer (Dwyer--Kan Section 7 not archived)."
+   }
+  },
+  {
+   "text": "Suppose i is a horn inclusion or j is a weak homotopy equivalence. By [lem-coef-kan-quillen-cartesian-pushout-product] (Step 3), r is then a monomorphism and a weak homotopy equivalence, i.e. a trivial cofibration of the Kan model structure of [lem-coef-kan-quillen-right-proper], so r has the left lifting property against every Kan fibration. A fibration p:T\\to T' of the fixed-object model structure of [lem-coef-fixed-object-simplicial-free-calculus] is a local Kan fibration, so p(u,v) is a Kan fibration. The same correspondence of squares and fillers as in Step 4, from the natural Hom bijection of [lem-coef-fixed-object-free-arrow-adjunction], shows that F^O_{u,v}(r) has the left lifting property against every fibration of \\mathrm{sCat}_O. In a model structure the trivial cofibrations are exactly the maps with the left lifting property against all fibrations, so F^O_{u,v}(r), and by Step 2 the isomorphic map F^O_{u,v}(i)\\mathbin\\square j, is a trivial cofibration (a cofibration and a local weak equivalence) in exactly these cases; in all cases it is a cofibration by Step 4.",
+   "uses": [
+    "lem-coef-kan-quillen-cartesian-pushout-product",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2 (fixed-object mapping calculation); the transfer of lifting properties along the free-arrow adjunction is written here by the reviewer (Dwyer--Kan Section 7 not archived)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-kan-quillen-cartesian-pushout-product",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, fixed-object simplicial mapping calculation; the free-cell/tensor argument is supplied here from Dwyer--Kan Sections 1.4, 2.7 and 7.1--7.6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-simplicial-mapping-calculus",
@@ -79,5 +151,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-fixed-object-simplicial-sm7-free-cell",
+  "worker": "stage1",
+  "summary": "Audited the fixed-object free-cell statement against the free-arrow adjunction and the Kan--Quillen pushout-product input. Added one genuinely smaller statement-only helper: the simplicial-set cartesian pushout-product lemma. The proof gives the tensor/free-arrow isomorphism, identifies the pushout with the free arrow on the simplicial pushout product, and proves the cofibration and the trivial-cofibration cases by transferring lifting properties along the free-arrow adjunction (maintainer reader's repair: the free-extension argument cited a clause the free-calculus node does not state, and the free-arrow weak-equivalence helper became unnecessary and was dropped).",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex comparison; the steps realize the free-cell/tensor pushout-product calculation before the corner-map argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-15b4ae6f8",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-15b4ae6f8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent's six steps and the ancestor's proof paragraph 2. The item's statement is unchanged and true. Checked cases: X empty; u≠v; u=v (free monoid); m=0; j:∅→Δ^0 giving the generator. F is a left adjoint, so it preserves the pushout, and evaluation at (u,v) preserves local (trivial) fibrations, so F is left Quillen. Steps 1–3 are correct. Faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-fixed-object-simplicial-sm7-free-cell.json: (C4) step 4 said the free-calculus node 'declares free extensions to be cofibrations', but that node only says every cofibration is a retract of a free map. Step 4 also said faces carry the new generators to new generators, which is false: for ∂Δ^1→Δ^1 the new edge has old faces. Steps 4 and 5 are rewritten: r is a Kan cofibration, or a trivial cofibration in the horn or weak-j cases (kan-quillen-right-proper plus the new pushout-product helper). Through the natural Hom bijection of the free-arrow adjunction, F(r) then has the left lifting property against trivial fibrations, or against all fibrations, of sCat_O. The free-arrow weak-equivalence helper is then unused; it is true but nothing else cites it, so it is dropped. stmt_deps no longer lists the two helpers, which the statement does not use, and proof_deps is recomputed. The new node lem-coef-kan-quillen-cartesian-pushout-product is kept. It is true (Kan–Quillen is cartesian) and strictly smaller than the item. It does not duplicate sset-anodyne-pushout-product (which lacks the j-weak case and the link between anodyne maps and weak equivalences), the Joyal pushout-product node, or the general SM7 nodes. Its form, searches and blueprint.from/via are correct. Everything stays in sk-prop-sf-biduality-general, with no tool_uses, no cycle and no SGA. Dwyer–Kan and Hovey are not archived: WANTED is recorded and proof_origin is agent.; 1 file(s) fixed by the reviewer"
  }
 }
