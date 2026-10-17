@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfFiniteAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
 public import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 public import WeilConjectures.CategoryTheory.Triangulated.CompactFamily
@@ -53,6 +54,22 @@ section Preadditive
 
 variable {C : Type*} [Category* C] [Preadditive C]
 
+/-- In a finite coproduct, the identity is the sum of the composites of the projections (through
+the biproduct) with the inclusions. -/
+lemma _root_.CategoryTheory.Limits.sum_isoCoproduct_inv_π_ι {S : Type*} [Fintype S] (B : S → C)
+    [HasBiproduct B] :
+    ∑ x, (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫ Sigma.ι B x = 𝟙 (∐ B) := by
+  classical
+  refine Sigma.hom_ext _ _ fun j ↦ ?_
+  have hj (x : S) : Sigma.ι B j ≫ (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫
+      Sigma.ι B x = if x = j then Sigma.ι B j else 0 := by
+    split_ifs with h
+    · subst h
+      simp
+    · simp [biproduct.ι_π_ne_assoc _ (Ne.symm h)]
+  rw [comp_sum, comp_id, Finset.sum_congr rfl fun x _ ↦ hj x]
+  simp
+
 /-- Compactness for a family is invariant under isomorphisms of the family. -/
 lemma of_iso {s : C} {J : Type*} {A T : J → C} [HasCoproduct A] [HasCoproduct T]
     (e : ∀ j, A j ≅ T j) (hT : CompactFor s T) : CompactFor s A :=
@@ -68,7 +85,8 @@ variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C
 triangles and `s` is compact for the families of first and third terms, it is compact for the
 family of middle terms. -/
 lemma of_distTriang {s : C} {J : Type*} [HasColimitsOfShape (Discrete J) C]
-    (T : J → Triangle C) (hT : ∀ j, T j ∈ distTriang C) (h₁ : CompactFor s fun j ↦ (T j).obj₁)
+    (T : J → Triangle C) (hT : ∀ j, T j ∈ distTriang C)
+    (h₁ : CompactFor s fun j ↦ (T j).obj₁)
     (h₃ : CompactFor s fun j ↦ (T j).obj₃) : CompactFor s fun j ↦ (T j).obj₂ := by
   classical
   have hS := coproductTriangle_distinguished T hT
@@ -84,7 +102,8 @@ lemma of_distTriang {s : C} {J : Type*} [HasColimitsOfShape (Discrete J) C]
       (fun j ↦ g j ≫ (T j).mor₃) ?_ hj
     have h0 : (coproductTriangle T).mor₂ ≫ (coproductTriangle T).mor₃ = 0 :=
       comp_distTriang_mor_zero₂₃ _ hS
-    calc _ = ∑ j ∈ S₃, g j ≫ Sigma.ι (fun j ↦ (T j).obj₃) j ≫ (coproductTriangle T).mor₃ := by
+    calc _ = ∑ j ∈ S₃, g j ≫ Sigma.ι (fun j ↦ (T j).obj₃) j ≫
+          (coproductTriangle T).mor₃ := by
           refine Finset.sum_congr rfl fun j _ ↦ ?_
           have := (coproductTriangle.ι T j).comm₃
           simp only [coproductTriangle.ι_hom₃, coproductTriangle.ι_hom₁] at this
@@ -95,7 +114,8 @@ lemma of_distTriang {s : C} {J : Type*} [HasColimitsOfShape (Discrete J) C]
       _ = 0 := by rw [assoc, h0, comp_zero]
   choose b hb using hb
   let b' (j : J) : s ⟶ (T j).obj₂ := if hj : j ∈ S₃ then b j hj else 0
-  obtain ⟨a, ha⟩ := Triangle.coyoneda_exact₂ _ hS (f - ∑ j ∈ S₃, b' j ≫ Sigma.ι (fun j ↦ (T j).obj₂) j) (by
+  obtain ⟨a, ha⟩ := Triangle.coyoneda_exact₂ _ hS
+      (f - ∑ j ∈ S₃, b' j ≫ Sigma.ι (fun j ↦ (T j).obj₂) j) (by
     rw [sub_comp, hg, sum_comp, sub_eq_zero]
     refine Finset.sum_congr rfl fun j hj ↦ ?_
     simp [b', dif_pos hj, hb j hj, coproductTriangle])
@@ -127,15 +147,7 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [HasExactColimitsOfShape (Discrete J) C] {P : ObjectProperty C} [P.ContainsZero]
   [P.IsClosedUnderIsomorphisms]
 
-variable (P) in
-/-- Objects of `D(C)` with cohomology in a class `P` closed under coproducts are closed under
-coproducts: cohomology commutes with coproducts. -/
-lemma homologyProperty_sigma [P.IsClosedUnderColimitsOfShape (Discrete J)]
-    (K : J → DerivedCategory C) (hK : ∀ j, homologyProperty P (K j)) :
-    homologyProperty P (∐ K) := fun n ↦
-  P.prop_of_isColimit (isColimitOfPreserves (homologyFunctor C n) (coproductIsCoproduct K))
-    fun j ↦ hK j.as n
-
+omit [HasExactColimitsOfShape (Discrete J) C] [P.ContainsZero] in
 /-- If `Hom(s, -)` commutes with direct sums of objects `B[-a]` with `B` in `P`, then it
 commutes with direct sums of objects with cohomology in `P` concentrated in degree `a`. -/
 lemma compactFor_of_isGE_of_isLE_self {s : DerivedCategory C}
@@ -148,6 +160,7 @@ lemma compactFor_of_isGE_of_isLE_self {s : DerivedCategory C}
   exact P.prop_of_iso ((homologyFunctor C a).mapIso (e j).some ≪≫
     (singleFunctorCompHomologyFunctorIso C a).app (M j)) (hK j a)
 
+omit [HasExactColimitsOfShape (Discrete J) C] in
 /-- Blueprint `det-constructible-compactness-bounded`: if `Hom(s, -)` commutes with direct sums
 of shifted objects of `P`, it commutes with direct sums of families of objects with cohomology in
 `P` concentrated in a common interval `[a, a + d]`, by induction on `d`, using the truncation
@@ -185,7 +198,7 @@ lemma compactFor_of_isGE_of_isLE {s : DerivedCategory C}
     exact CompactFor.of_distTriang T (fun j ↦ t.triangleLTGE_distinguished b (K j)) h₁ h₃
 
 omit [Abelian.HasKInjectiveResolutions C] [HasColimitsOfShape (Discrete J) C]
-  [HasExactColimitsOfShape (Discrete J) C] in
+  [HasExactColimitsOfShape (Discrete J) C] [P.ContainsZero] in
 /-- If `Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`, then `Hom(s, L) = 0` for every `L` with
 cohomology in `P` concentrated in a degree `a ≤ N`. -/
 lemma eq_zero_of_isGE_of_isLE_self {s : DerivedCategory C} (N : ℤ)
@@ -363,24 +376,6 @@ lemma eq_zero_of_ind {s : DerivedCategory C} (hcont : HomFactorsThroughFilteredC
   rw [hvan _ (hpres i) n hn g, zero_comp]
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
-omit [Abelian.HasKInjectiveResolutions C] [HasColimitsOfShape (Discrete J) C]
-  [HasExactColimitsOfShape (Discrete J) C] in
-/-- In a finite coproduct, the identity is the sum of the composites of the projections (through
-the biproduct) with the inclusions. -/
-lemma sum_isoCoproduct_inv_π_ι {S : Type*} [Fintype S] (B : S → C) :
-    ∑ x, (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫ Sigma.ι B x = 𝟙 (∐ B) := by
-  classical
-  refine Sigma.hom_ext _ _ fun j ↦ ?_
-  have hj (x : S) : Sigma.ι B j ≫ (biproduct.isoCoproduct B).inv ≫ biproduct.π B x ≫
-      Sigma.ι B x = if x = j then Sigma.ι B j else 0 := by
-    split_ifs with h
-    · subst h
-      simp
-    · simp [biproduct.ι_π_ne_assoc _ (Ne.symm h)]
-  rw [comp_sum, comp_id, Finset.sum_congr rfl fun x _ ↦ hj x]
-  simp
-
-attribute [local instance] Abelian.hasFiniteBiproducts in
 omit [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [HasColimitsOfShape (Discrete J) C]
   [HasExactColimitsOfShape (Discrete J) C] in
 /-- Blueprint `det-ind-heart-ii-sums`: if morphisms out of `s` factor through filtered colimits,
@@ -401,7 +396,8 @@ lemma compactFor_singleFunctor_of_homFactorsThroughFilteredColimits {s : Derived
     biproduct.π B' x)
   have hψ : (CoproductsFromFiniteFiltered.finiteSubcoproductsCocone B).ι.app S =
       ∑ x, (biproduct.isoCoproduct B').inv ≫ biproduct.π B' x ≫ Sigma.ι B x.1.as := by
-    refine (id_comp _).symm.trans ((congrArg (· ≫ _) (sum_isoCoproduct_inv_π_ι B').symm).trans ?_)
+    refine (id_comp _).symm.trans
+      ((congrArg (· ≫ _) (sum_isoCoproduct_inv_π_ι B').symm).trans ?_)
     rw [sum_comp]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     simp [B']
@@ -409,12 +405,14 @@ lemma compactFor_singleFunctor_of_homFactorsThroughFilteredColimits {s : Derived
     rw [hg, hψ, G.map_sum, comp_sum]
     refine Finset.sum_congr rfl fun x _ ↦ ?_
     simp [h]
-  refine ⟨S.image Discrete.as, fun j ↦ if hj : (⟨j⟩ : Discrete J) ∈ S then h ⟨⟨j⟩, hj⟩ else 0, ?_⟩
+  refine ⟨S.image Discrete.as,
+    fun j ↦ if hj : (⟨j⟩ : Discrete J) ∈ S then h ⟨⟨j⟩, hj⟩ else 0, ?_⟩
   rw [← cancel_mono φ, hf, Finset.sum_image fun x _ y _ hxy ↦ Discrete.ext hxy, sum_comp,
     ← Finset.sum_coe_sort S]
   refine Finset.sum_congr rfl fun x _ ↦ ?_
   have hx : (⟨(x : Discrete J).as⟩ : Discrete J) ∈ S := x.2
-  simp only [dif_pos hx, assoc, φ, ι_comp_sigmaComparison]
+  simp only [dif_pos hx, assoc, φ]
+  exact congrArg (h x ≫ ·) (ι_comp_sigmaComparison G B _).symm
 
 end Continuity
 

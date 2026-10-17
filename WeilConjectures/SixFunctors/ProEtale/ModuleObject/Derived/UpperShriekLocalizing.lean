@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGener
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
@@ -82,12 +83,17 @@ the closed point, which is not a constructible subset of `Y`.
 
 - `essentiallySmall_isConstructibleModuleObject` (blueprint `det-brown-hypotheses-small`): the
   constructible sheaves on a noetherian scheme are essentially small.
-- `isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj`,
+- The inputs of `isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj`,
   `isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj` (blueprint
   `sk-thm-constructible-compactness`) and
   `isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj` (blueprint
-  `sk-prop-int-compactness`): constructible sheaves are compact in `Loc(Dᵇc(X)⟦Λ⟧)`; by
-  dévissage, so are all bounded constructible complexes
+  `sk-prop-int-compactness`), that constructible sheaves are compact in `Loc(Dᵇc(X)⟦Λ⟧)`: the
+  closure properties of the ind-constructible sheaves (`sk-prop-ind-heart`), the continuity of
+  `Ext` out of a constructible sheaf (`sk-lem-constructible-ext-continuity`) and the uniform
+  `Ext` bound (`sk-lem-uniform-constructible-ext`), see
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic`. The
+  compactness follows by the finite-window argument and left completeness. By dévissage, all
+  bounded constructible complexes are compact
   (`isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible`).
 - The inputs of `properLowerStarHypotheses_continuousMapRingObj`,
   `properLowerStarHypotheses_padicAlgClRingObj` and
@@ -415,7 +421,7 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_continuousMapRingObj (
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X))
     (hM : IsConstructibleModuleObject _ M) : BrownRepresentability.IsCompactObj
       (singleLocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X M hM) :=
-  sorry
+  isCompactObj_singleFunctor_continuousMapRingObj ℓ E aX hk M hM _
 
 /-- Blueprint `sk-thm-constructible-compactness`: for the coefficient ring `E` of a finite
 extension `E` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, the bounded constructible
@@ -495,7 +501,7 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_padicIntegersRingObj (
       (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X))
     (hM : IsConstructibleModuleObject _ M) : BrownRepresentability.IsCompactObj
       (singleLocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X M hM) :=
-  sorry
+  isCompactObj_singleFunctor_padicIntegersRingObj ℓ E aX hk M hM _
 
 /-- Blueprint `sk-prop-int-compactness`: for the coefficient ring `𝒪_E` of the ring of integers
 of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a separated finite-type `k`-scheme `X`, the bounded
@@ -577,7 +583,7 @@ theorem isCompactObj_singleLocalizingBoundedConstructible_padicAlgClRingObj {X :
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X))
     (hM : IsConstructibleModuleObject _ M) : BrownRepresentability.IsCompactObj
       (singleLocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X M hM) :=
-  sorry
+  isCompactObj_singleFunctor_padicAlgClRingObj ℓ aX hk M hM _
 
 /-- Blueprint `sk-thm-constructible-compactness`: for the coefficient ring `ℚ̄_ℓ` and a separated
 finite-type `k`-scheme `X`, the bounded constructible complexes are compact objects of

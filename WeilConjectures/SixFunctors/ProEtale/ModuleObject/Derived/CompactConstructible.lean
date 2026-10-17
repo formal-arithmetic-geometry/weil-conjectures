@@ -50,7 +50,8 @@ namespace CategoryTheory
 compact in `Loc(B)` as soon as morphisms out of it commute with the direct sums, computed in the
 ambient category, of families of objects of `Loc(B)`. -/
 lemma ObjectProperty.isCompactObj_of_compactFor {D : Type*} [Category.{u'} D] [Preadditive D]
-    [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [Pretriangulated D]
     [IsTriangulated D] [HasCoproducts.{u'} D] (B : ObjectProperty D)
     (C : B.localizingClosure.FullSubcategory)
     (h : ∀ (J : Type u') (Y : J → B.localizingClosure.FullSubcategory),
@@ -89,7 +90,8 @@ instance hasColimitsOfShape_discrete_derivedCategory_mod (J : Type (u + 1)) :
   DerivedCategory.hasColimitsOfShape_discrete J
 /-- Blueprint `sk-prop-ind-heart`: the ind-constructible sheaves of `R`-modules, the filtered
 colimits of constructible sheaves. -/
-abbrev IsIndConstructibleModuleObject : ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) A) R) :=
+abbrev IsIndConstructibleModuleObject :
+    ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) A) R) :=
   ObjectProperty.ind.{u + 1} (IsConstructibleModuleObject R)
 
 /-- Blueprint `sk-prop-ind-heart` (2) (and `det-prop-int-compactness-compact` (1) for `𝒪_E`):
@@ -106,7 +108,8 @@ constructible sheaf `C`, `Ext^q(C, B) = Hom(C, B[q]) = 0` for `q` large and all 
 `B`, and `Ext^q(C, -)` commutes with direct sums of ind-constructible sheaves. -/
 structure HasIndConstructibleExtBound : Prop where
   exists_eq_zero (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R)
-    (hM : IsConstructibleModuleObject R M) : ∃ N : ℤ, ∀ B, IsIndConstructibleModuleObject R B →
+    (hM : IsConstructibleModuleObject R M) :
+    ∃ N : ℤ, ∀ B, IsIndConstructibleModuleObject R B →
       ∀ n ≤ N, ∀ f : (DerivedCategory.singleFunctor _ 0).obj M ⟶
         (DerivedCategory.singleFunctor _ n).obj B, f = 0
   compactFor (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R)
@@ -115,6 +118,38 @@ structure HasIndConstructibleExtBound : Prop where
     (hB : ∀ j, IsIndConstructibleModuleObject R (B j)) :
     CompactFor ((DerivedCategory.singleFunctor _ 0).obj M)
       fun j ↦ (DerivedCategory.singleFunctor _ n).obj (B j)
+
+/-- Blueprint `sk-lem-uniform-constructible-ext`: for a constructible sheaf `C` there is `d` with
+`Ext^q(C, B) = Hom(C, B[q]) = 0` for `q > d` and all constructible `B`. -/
+def HasUniformConstructibleExtBound : Prop :=
+  ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
+    ∃ N : ℤ, ∀ B, IsConstructibleModuleObject R B → ∀ n ≤ N,
+      ∀ f : (DerivedCategory.singleFunctor _ 0).obj M ⟶
+        (DerivedCategory.singleFunctor _ n).obj B,
+        f = 0
+
+/-- Blueprint `sk-lem-constructible-ext-continuity` (1) (surjectivity, for filtered diagrams of
+sheaves in degree `0`): for a constructible sheaf `C`, every morphism `C ⟶ B[n]` to a filtered
+colimit `B = colim Bᵢ` of sheaves of `R`-modules factors through some `Bᵢ[n]`. -/
+def HasConstructibleExtContinuity : Prop :=
+  ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
+    DerivedCategory.HomFactorsThroughFilteredColimits.{u + 1}
+      ((DerivedCategory.singleFunctor _ 0).obj M)
+
+variable {R} in
+/-- Blueprint `sk-cor-ind-heart-ii` from `sk-lem-constructible-ext-continuity` and
+`sk-lem-uniform-constructible-ext`: an ind-constructible sheaf is a filtered colimit of
+constructible ones, and a direct sum is the filtered colimit of its finite subsums
+(`det-ind-heart-ii-vanishing`, `det-ind-heart-ii-sums`). -/
+lemma HasIndConstructibleExtBound.of_continuity (h₁ : HasConstructibleExtContinuity R)
+    (h₂ : HasUniformConstructibleExtBound R) : HasIndConstructibleExtBound R where
+  exists_eq_zero M hM := by
+    obtain ⟨N, hN⟩ := h₂ M hM
+    exact ⟨N, DerivedCategory.eq_zero_of_ind _ (h₁ M hM) N hN⟩
+  compactFor M hM n J B _ :=
+    have : HasColimitsOfSize.{u + 1, u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) A) R) :=
+      IsGrothendieckAbelian.hasColimits _
+    DerivedCategory.compactFor_singleFunctor_of_homFactorsThroughFilteredColimits (h₁ M hM) n B
 
 /-- The zero module object is ind-constructible. -/
 instance : (IsIndConstructibleModuleObject R).ContainsZero where
@@ -145,7 +180,8 @@ lemma localizingClosure_boundedConstructible_le [IsCommMonObj R] (hR : IsIndCons
 variable {R} in
 /-- Blueprints `sk-thm-constructible-compactness` and `det-prop-int-compactness-compact` (3),
 given the inputs on the ind-constructible heart: a constructible sheaf `M` placed in degree `0`
-is compact in `Loc(Dᵇc(X, R))`. Morphisms out of `M` into objects of `Loc(Dᵇc(X, R)) ⊆ Dic(X, R)`
+is compact in `Loc(Dᵇc(X, R))`. Morphisms out of `M` into objects of
+`Loc(Dᵇc(X, R)) ⊆ Dic(X, R)`
 only see a finite window of degrees (`sk-lem-finite-window`, using left completeness), on which
 they commute with direct sums by induction on the amplitude. -/
 theorem isCompactObj_singleFunctor_of_isIndConstructibleHeart [IsCommMonObj R]

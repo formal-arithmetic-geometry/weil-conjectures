@@ -82,24 +82,48 @@ lemma mono_pi_lift_unit_upperStarLowerStarAdjunction {X : Scheme.{u}} {κ : Type
     IsZero.of_mono_eq_zero _ hι
   exact (((Mod.forget _).map_isZero hz).of_iso (upperStarObjXIso Λ (g k) _).symm).eq_of_src _ _
 
+/-! ### Presentation data -/
+
+/-- The underlying object `g^* M` of the pullback of a module object. (A wrapper, so that
+pullbacks along different but equal morphisms are compared argumentwise.) -/
+noncomputable def pullObj {W X : Scheme.{u}} (g : W ⟶ X)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W) :=
+  (g)^*⟦Λ⟧.obj M
+
+/-- The underlying object `g_* N` of the pushforward of a module object. (A wrapper, so that
+pushforwards along different but equal morphisms are compared argumentwise.) -/
+noncomputable def pushObj {W X : Scheme.{u}} (g : W ⟶ X)
+    (N : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
+  (g)_*⟦Λ⟧.obj N
+
+/-- The unit `M ⟶ g_* g^* M` of the adjunction `g^* ⊣ g_*`. -/
+noncomputable def unitHom {W X : Scheme.{u}} (g : W ⟶ X)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    M ⟶ pushObj Λ g (pullObj Λ g M) :=
+  (upperStarLowerStarAdjunction Λ g).unit.app M
+
+/-- The units `M ⟶ g_* g^* M` along finitely many quasi-compact morphisms jointly covering `X`
+are jointly monomorphic. -/
+lemma mono_pi_lift_unitHom {X : Scheme.{u}} {κ : Type} [Finite κ]
+    {W : κ → Scheme.{u}} (g : ∀ k, W k ⟶ X) [∀ k, QuasiCompact (g k)]
+    (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    Mono (Pi.lift fun k ↦ unitHom Λ (g k) M) :=
+  mono_pi_lift_unit_upperStarLowerStarAdjunction Λ g hg M
+
 /-- The isomorphism `(h ≫ f ≫ i)^* M ≅ h^* N` induced by an isomorphism `f^* i^* M ≅ N`. -/
-noncomputable def upperStarCompCompIso {W U V X : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ V)
+noncomputable def pullObjCompCompIso {W U V X : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ V)
     (i : V ⟶ X) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     {N : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)}
     (e : (f)^*⟦Λ⟧.obj ((i)^*⟦Λ⟧.obj M) ≅ N) :
-    (h ≫ f ≫ i)^*⟦Λ⟧.obj M ≅ (h)^*⟦Λ⟧.obj N :=
+    pullObj Λ (h ≫ f ≫ i) M ≅ pullObj Λ h N :=
   (upperStarComp Λ h (f ≫ i)).app M ≪≫ (h)^*⟦Λ⟧.mapIso ((upperStarComp Λ f i).app M ≪≫ e)
 
-lemma test_fp {X : Scheme.{u}}
-    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-    (h : Mod.IsFinitelyPresented (condensedRingObj Λ X) N) :
-    ∃ (n m : ℕ) (φ : Mod.finiteFree (condensedRingObj Λ X) m ⟶
-      Mod.finiteFree (condensedRingObj Λ X) n), Nonempty (N ≅ cokernel φ) := h
-
-/-- The data of a finitely presented module object `coker(φ)` over `Λ_U` on a scheme `U`, a
-morphism `f : U ⟶ X` and a morphism `h : W ⟶ U`: they index the pushforwards
-`(h ≫ f)_* h^* coker(φ)` into finite products of which every constructible module object over
-`Λ_X` embeds. -/
+/-- The data of a finitely presented module object `coker(φ)` over `Λ_U` on a scheme `U` and
+morphisms `h : W ⟶ U`, `g : W ⟶ X`: they index the module objects `g_* h^* coker(φ)`, finite
+products of which every constructible module object over `Λ_X` embeds into. -/
 structure PresentationDatum (X : Scheme.{u}) where
   /-- The scheme carrying the presentation. -/
   U : Scheme.{u}
@@ -108,7 +132,7 @@ structure PresentationDatum (X : Scheme.{u}) where
   /-- The restriction morphism. -/
   h : W ⟶ U
   /-- The morphism to `X`. -/
-  f : U ⟶ X
+  g : W ⟶ X
   /-- The rank of the source of the presentation. -/
   m : ℕ
   /-- The rank of the target of the presentation. -/
@@ -117,29 +141,10 @@ structure PresentationDatum (X : Scheme.{u}) where
   φ : Mod.finiteFree (condensedRingObj Λ U) m ⟶ Mod.finiteFree (condensedRingObj Λ U) n
 
 variable {Λ} in
-/-- The module object `(h ≫ f)_* h^* coker(φ)` over `Λ_X` attached to a presentation datum. -/
-noncomputable abbrev PresentationDatum.obj {X : Scheme.{u}} (d : PresentationDatum Λ X) :
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
-  (d.h ≫ d.f)_*⟦Λ⟧.obj ((d.h)^*⟦Λ⟧.obj (cokernel d.φ))
-
-example {X U W : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ X) (m n : ℕ)
-    (φ : Mod.finiteFree (condensedRingObj Λ U) m ⟶ Mod.finiteFree (condensedRingObj Λ U) n) :
-    let d : PresentationDatum Λ X := ⟨U, W, h, f, m, n, φ⟩
-    condensedRingObj Λ d.W = condensedRingObj Λ W := rfl
-
-example {X U W : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ X) (m n : ℕ)
-    (φ : Mod.finiteFree (condensedRingObj Λ U) m ⟶ Mod.finiteFree (condensedRingObj Λ U) n) :
-    let d : PresentationDatum Λ X := ⟨U, W, h, f, m, n, φ⟩
-    upperStar Λ d.h = upperStar Λ h := rfl
-
-example {X U W : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ X) (m n : ℕ)
-    (φ : Mod.finiteFree (condensedRingObj Λ U) m ⟶ Mod.finiteFree (condensedRingObj Λ U) n) :
-    upperStar Λ (PresentationDatum.mk (Λ := Λ) U W h f m n φ).h = upperStar Λ h := rfl
-
-example {X U W : Scheme.{u}} (h : W ⟶ U) (f : U ⟶ X) (m n : ℕ)
-    (φ : Mod.finiteFree (condensedRingObj Λ U) m ⟶ Mod.finiteFree (condensedRingObj Λ U) n) :
-    ProEtale.upperStar Ab.{u + 1} (PresentationDatum.mk (Λ := Λ) U W h f m n φ).h =
-      ProEtale.upperStar Ab.{u + 1} h := rfl
+/-- The module object `g_* h^* coker(φ)` over `Λ_X` attached to a presentation datum. -/
+noncomputable def PresentationDatum.obj {X : Scheme.{u}} :
+    PresentationDatum Λ X → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  | ⟨_, _, h, g, _, _, φ⟩ => pushObj Λ g (pullObj Λ h (cokernel φ))
 
 /-- A finite family of presentation data. -/
 structure PresentationFamily (X : Scheme.{u}) where
@@ -152,15 +157,33 @@ structure PresentationFamily (X : Scheme.{u}) where
 attribute [instance] PresentationFamily.finite
 
 variable {Λ} in
-/-- The finite product `∏ₖ (hₖ ≫ fₖ)_* hₖ^* coker(φₖ)` attached to a finite family of
-presentation data. -/
+/-- The finite product `∏ₖ (gₖ)_* hₖ^* coker(φₖ)` attached to a finite family of presentation
+data. -/
 noncomputable def PresentationFamily.obj {X : Scheme.{u}} (F : PresentationFamily Λ X) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
   ∏ᶜ fun k ↦ (F.datum k).obj
 
+/-- A module object `M` over `Λ_X` with isomorphisms `gₖ^* M ≅ hₖ^* coker(φₖ)`, for finitely
+many quasi-compact `gₖ` jointly covering `X`, embeds into `∏ₖ (gₖ)_* hₖ^* coker(φₖ)`. -/
+lemma exists_mono_presentationFamily_obj {X : Scheme.{u}} {κ : Type} [Finite κ]
+    {U W : κ → Scheme.{u}} (h : ∀ k, W k ⟶ U k) (g : ∀ k, W k ⟶ X) {m n : κ → ℕ}
+    (φ : ∀ k, Mod.finiteFree (condensedRingObj Λ (U k)) (m k) ⟶
+      Mod.finiteFree (condensedRingObj Λ (U k)) (n k))
+    [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (ε : ∀ k, pullObj Λ (g k) M ≅ pullObj Λ (h k) (cokernel (φ k))) :
+    ∃ (F : PresentationFamily Λ X) (ψ : M ⟶ F.obj), Mono ψ := by
+  have := mono_pi_lift_unitHom Λ g hg M
+  let ι : (∏ᶜ fun k ↦ pushObj Λ (g k) (pullObj Λ (g k) M)) ≅
+      ∏ᶜ fun k ↦ pushObj Λ (g k) (pullObj Λ (h k) (cokernel (φ k))) :=
+    Pi.mapIso fun k ↦ (g k)_*⟦Λ⟧.mapIso (ε k)
+  exact ⟨⟨κ, fun k ↦ ⟨U k, W k, h k, g k, m k, n k, φ k⟩⟩,
+    Pi.lift (fun k ↦ unitHom Λ (g k) M) ≫ ι.hom,
+    @mono_comp _ _ _ _ _ _ this _ (IsIso.mono_of_iso _)⟩
+
 /-- Every constructible module object `M` over `Λ_X`, on a scheme `X` with noetherian
-underlying space, embeds into a finite product `∏ₖ (hₖ ≫ fₖ)_* hₖ^* coker(φₖ)` of
-pushforwards of pullbacks of finitely presented module objects. -/
+underlying space, embeds into a finite product `∏ₖ (gₖ)_* hₖ^* coker(φₖ)` of pushforwards of
+pullbacks of finitely presented module objects. -/
 theorem exists_mono_of_isConstructibleModuleObject {X : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
@@ -177,26 +200,22 @@ theorem exists_mono_of_isConstructibleModuleObject {X : Scheme.{u}}
     QuasiCompactCover.exists_isAffineOpen_of_isCompact (𝒰 a).toPreZeroHypercover (hcpt a)
   choose p q φ e using fun (a : Fin S.n) (i : (𝒰 a).I₀) ↦ isFinitelyPresented_upperStar_of_mapMod
     Λ ((𝒰 a).f i) _ (h𝒰 a i)
-  let d (x : Σ a, Fin (m a)) : PresentationDatum Λ X :=
-    ⟨(𝒰 x.1).X (l x.1 x.2), V x.1 x.2, (V x.1 x.2).ι, (𝒰 x.1).f (l x.1 x.2) ≫ S.immersion x.1,
-      q x.1 (l x.1 x.2), p x.1 (l x.1 x.2), φ x.1 (l x.1 x.2)⟩
-  let g (x : Σ a, Fin (m a)) : (d x).W ⟶ X := (d x).h ≫ (d x).f
-  have : ∀ x, QuasiCompact (g x) := fun x ↦ by
-    have : IsAffine (d x).W := hV x.1 x.2
+  have : ∀ x : Σ a, Fin (m a), QuasiCompact
+      ((V x.1 x.2).ι ≫ (𝒰 x.1).f (l x.1 x.2) ≫ S.immersion x.1) := fun x ↦ by
+    have : IsAffine (V x.1 x.2) := hV x.1 x.2
     infer_instance
-  have hg (x : X) : ∃ k, x ∈ Set.range (g k) := by
-    obtain ⟨a, ha⟩ := Set.mem_iUnion.1 (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
-    rw [← S.range_immersion a] at ha
-    obtain ⟨y, rfl⟩ := ha
-    have hy : y ∈ ⋃ i, (𝒰 a).f (l a i) '' (V a i) := by
-      rw [hVcov a]
-      trivial
-    obtain ⟨i, z, hz, rfl⟩ := by simpa using hy
-    exact ⟨⟨a, i⟩, ⟨z, hz⟩, by simp [g, d]⟩
-  let ε (x : Σ a, Fin (m a)) : (g x)^*⟦Λ⟧.obj M ≅ ((d x).h)^*⟦Λ⟧.obj (cokernel (d x).φ) :=
-    upperStarCompCompIso Λ (V x.1 x.2).ι ((𝒰 x.1).f (l x.1 x.2)) (S.immersion x.1) M
-      (e x.1 (l x.1 x.2)).some
-  exact sorry
+  refine exists_mono_presentationFamily_obj Λ (fun x : Σ a, Fin (m a) ↦ (V x.1 x.2).ι)
+    (fun x ↦ (V x.1 x.2).ι ≫ (𝒰 x.1).f (l x.1 x.2) ≫ S.immersion x.1)
+    (fun x ↦ φ x.1 (l x.1 x.2)) (fun x ↦ ?_) M fun x ↦ pullObjCompCompIso Λ (V x.1 x.2).ι
+      ((𝒰 x.1).f (l x.1 x.2)) (S.immersion x.1) M (e x.1 (l x.1 x.2)).some
+  obtain ⟨a, ha⟩ := Set.mem_iUnion.1 (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
+  rw [← S.range_immersion a] at ha
+  obtain ⟨y, rfl⟩ := ha
+  have hy : y ∈ ⋃ i, (𝒰 a).f (l a i) '' (V a i) := by
+    rw [hVcov a]
+    trivial
+  obtain ⟨i, z, hz, rfl⟩ := by simpa using hy
+  exact ⟨⟨a, i⟩, ⟨z, hz⟩, by simp⟩
 
 /-- Blueprint `det-brown-hypotheses-small` (constructible hearts): on a scheme with noetherian
 underlying space, the constructible module objects over `Λ_X` are essentially small. They embed
