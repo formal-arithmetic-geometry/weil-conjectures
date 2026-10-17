@@ -260,5 +260,29 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-683be72d9 (reviewer sub-agent of L); spot-checked: I read all 8 steps in full, every cited node's statement, the parent lem-coef-counit-cone-boundary-extension, the unit sk-prop-sf-biduality-general and blueprint main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2. The delivery creates no new nodes and leaves the statement unchanged; it is not weakened and matches what the parent consumes. Riehl–Verity §4.3 exists only online, so I checked it from my own knowledge of the source, not a local copy; the item's hypotheses match that setting with no extra coherence assumption. Step checks: (1) I verified by hand that currying the edge-quotient 2-simplices through strict associativity gives L_z, U_z, η_z, ε_z and both triangle 2-simplices, exactly as the adjunction-mapping node needs. (2) The pulled-back right fibration plus inner-horn filling in C_z makes E'_z a quasicategory, and q_a(ε_a)=L_z(Ua). (3) Map_{E'} is strictly P×_M S; inner-mapping-fiber makes S→M a Kan fibration, and path-comparison gives the homotopy pullback. (4) The slice-arrow node's S_y is the right slice; δ_a is an equivalence over D_z; the cone calculus makes j:S→R an equivalence, and t_*j=q_* holds strictly. (5) The comma node with F=id, B=Δ^0, G=a gives T_a, base N, legs ε_a∘- and 1_a∘α, and the unit path; homotopy-commuting invariance then gives R≃H over M. (6) Strict and homotopy-commuting invariance apply; I checked the pasting orientation (A=K, C=H, D={α}, A'=P, C'=M, D'=N), which gives the fiber of f=uℓ. (7) The adjunction-mapping node with F=L_z, G=U_z, x=b, d=a has inverse class ε_a∘L_z(-)=f, so f is an equivalence. (8) The contractible-fiber node then gives contractibility, which is terminality by definition. Small cases: nerves of categories give the comma category and universal arrow; the identity adjunction gives id_a terminal in the slice; (b,α)=(Ua,ε_a) and empty C_z are fine. There is no cycle (transitive check), no missing ids, proof_deps equals the union of uses, and no SGA source. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus (generic clauses only: Kan mapping spaces, and equivalences induce mapping-space equivalences). All three points of the previous return are repaired. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopyAdjunctionCoherentWitnesses",
+  "declaration": "SSet.Enhanced.homotopy_adjunction_coherent_witnesses",
+  "declarations": [
+   "SSet.Enhanced.IsHomotopyTriangle",
+   "SSet.Enhanced.counitSlicePullback",
+   "SSet.Enhanced.homotopy_adjunction_coherent_witnesses"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HomotopyAdjunctionCoherentWitnesses.lean",
+  "statement": "theorem homotopy_adjunction_coherent_witnesses {K : Type u} [Category.{v} K] [SimplicialCategory K] (hK : ∀ c d : K, Quasicategory (sHom c d)) {c d : K} (L : c ⟶ d) (U : d ⟶ c) (η : sHom c c _⦋1⦌) (ε : sHom d d _⦋1⦌) (hη₀ : (sHom c c).δ 1 η = homEquiv' c c (𝟙 c)) (hη₁ : (sHom c c).δ 0 η = homEquiv' c c (L ≫ U)) (hε₀ : (sHom d d).δ 1 ε = homEquiv' d d (U ≫ L)) (hε₁ : (sHom d d).δ 0 ε = homEquiv' d d (𝟙 d)) (hL : IsHomotopyTriangle (sHom c d) (homEquiv' c d L) ((sHomComp c c d).app _ (η, (sHom c d).σ 0 (homEquiv' c d L))) ((sHomComp c d d).app _ ((sHom c d).σ 0 (homEquiv' c d L), ε))) (hU : IsHomotopyTriangle (sHom d c) (homEquiv' d c U) ((sHomComp d c c).app _ ((sHom d c).σ 0 (homEquiv' d c U), η)) ((sHomComp d d c).app _ (ε, (sHom d c).σ 0 (homEquiv' d c U)))) (z : K) (a : sHom z d _⦋0⦌) : Quasicategory (counitSlicePullback L z a).toSSet ∧ ∃! e : (counitSlicePullback L z a).toSSet _⦋0⦌, e.val.1 = (eHomWhiskerLeft SSet z U).app _ a ∧ e.val.2.extension.app (op ⦋1⦌) (joinPointTopSimplex 0) = (sHomComp z d d).app _ ((sHom z d).σ 0 a, ε) ∧ IsTerminal (counitSlicePullback L z a).toSSet e",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Mathlib SimplicialCategory supplies strict simplicial composition and its homEquiv identifies ordinary morphisms with all vertices. The helper triangle predicate uses equality in Mathlib homotopy categories. The pullback is constructed degreewise; the conclusion characterizes its unique counit vertex by both coordinates, without any arbitrary chosen map or filler."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f872aebeb",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, dependency declarations, universes, edge cases, docstrings, and verbatim signature. Single-file compilation reproduced cleanly. Only a nonblocking source page-range imprecision was found; no fixes required."
  }
 }

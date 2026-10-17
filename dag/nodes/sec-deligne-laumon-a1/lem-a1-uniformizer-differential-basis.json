@@ -259,5 +259,23 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-67641879e (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, and the sources: Stacks curves.tex 0C1E lines 2411-2430, algebra.tex 00TT (final regularity assertion) and 00TU (statement and proof), plus the main-20261015 lem-a1-finite-map-curve proof (third paragraph). The statement is a faithful curve special case of 0C1E and is unchanged; its only citer supplies finite separability of the residue field itself. Step 1 is correct: dim A=1 through the chain x, generic point; dim_x X=1 through the open-neighbourhood chain and closures. Step 2 applies the restriction lemma, the 01V6/02H6 node and stalk-localization (c), then 00TT, then lem-sc-regular-dim1-dvr; that node is closed by IsRegularLocalRing.isDiscreteValuationRing, so it gives the same DVR notion as the item. Step 3 applies the 02G1 node over Spec k (R=k, the fibre is X, d=1) and 00RT(2) at the complement of the prime. Steps 4 and 6 are genuinely elementary (cancellation; unit coefficient with an explicit inverse). One fault, repaired: step 5 applied the 00TU node, which requires kappa to be separable in the separably-generated sense of def-weil-pbc-separable-field-extension (2), but the item assumes separable algebraic and the step never connected the two. I added the argument (every subextension is algebraic, the empty family is a transcendence basis, the subextension is separable algebraic) and added the three definitions to uses and proof_deps. Small cases: uT in k[T]_(T); a nonrational separable point (P); the inseparable point (T^p-a) over F_p(a), where d(T^p-a)=0, shows the separability hypothesis is needed and is not covered by the statement. No new nodes; no duplicate in the DAG or the blueprint (lem-weil-pbc-regular-local-separable-residue-smooth is the converse). Every cited node's unit lies in the transitive route of sk-thm-dl-a1-upper, so the six declared tool_uses are not route departures; accepted as harmless. No SGA used. No target, base-change morphism or coefficient category involved.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.UniformizerDifferentialBasis",
+  "declaration": "AlgebraicGeometry.uniformizer_differential_basis",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/UniformizerDifferentialBasis.lean",
+  "statement": "theorem uniformizer_differential_basis (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsIntegralCurve f] [Smooth f] (x : X) (hx : IsClosed ({x} : Set X)) (hfinite : (f.residueFieldAlgebraMap x).Finite) (hsep : @Algebra.IsSeparable k (X.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra) : IsDiscreteValuationRing (X.presheaf.stalk x) ∧ ∀ t : X.presheaf.stalk x, IsLocalRing.maximalIdeal (X.presheaf.stalk x) = Ideal.span {t} → Function.Bijective (fun a : X.presheaf.stalk x ↦ a • @KaehlerDifferential.D k (X.presheaf.stalk x) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra) t)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a8bb3fa3",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, and report sections audited; scompile.py side-overlay compile passed with no errors or warnings."
  }
 }
