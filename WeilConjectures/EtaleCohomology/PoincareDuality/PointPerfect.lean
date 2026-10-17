@@ -49,7 +49,9 @@ At the integral stage `𝒪_E`, for a derived complete `K` whose reductions `K �
 bounded constructible of Tor amplitude in one common interval:
 
 - `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`,
-  `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals.
+  `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals. The
+  integral `RΓ_c(X, K)` is, as in the blueprint, `RΓ(Spec k, -)` of the derived completion
+  `R lim_n Ra_!(K ⊗ᴸ Λ/Iⁿ)` of the étale `Ra_! K`, which itself need not be derived complete.
 
 At the rational stage `E`, the cohomology of these complexes and of their duals tensored up to
 `E`:
@@ -72,8 +74,12 @@ finite Tor amplitude (`sk-prop-sf-trace-perfectness`), hence perfect over the No
 compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`. Then `RΓ(X, K) ≅ RΓ(X̄, Rj_* K)` (Leray) and
 `RΓ(X̄, -) ≅ RΓ_c(X̄, -)` since `ā` is proper, and `Rj_* K` is again bounded constructible of
 finite Tor amplitude (`sk-thm-sf-direct-image-tor-amplitude`), so the compactly supported case
-applies to `Rj_* K` on `X̄`. The integral stage is reduced to its compactly supported case in
-the same way.
+applies to `Rj_* K` on `X̄`. At the integral stage, a derived complete complex whose reduction
+modulo `ϖ` is perfect is perfect (`DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃`,
+for `Λ` a complete principal ideal domain); the reduction of the completed `Ra_! K` is
+`Ra_!(K ⊗ᴸ Λ/I)`, perfect by the finite stage for torsion complexes
+(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero`). For
+`RΓ(X, K)` the object `Rā_! Rj_* K ≅ Rā_* Rj_* K` is already derived complete.
 
 The rational stage `E = 𝒪_E[1/ℓ]` is the rationalization of the integral stage
 (`DerivedCategoryDerivedCompleteRational`), whose objects come from integral ones. There is no
