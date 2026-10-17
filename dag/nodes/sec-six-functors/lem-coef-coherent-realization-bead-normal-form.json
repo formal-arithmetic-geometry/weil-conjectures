@@ -264,5 +264,42 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-0aee58b85 (reviewer sub-agent of L); spot-checked: Read the mathematics in full: the item, all 9 steps, the new node, and the full statements of pinched-cube-latching, simplicial-interval-lifting, infinity-monomorphism-boundary-cells and def-weil-pbc-category-colimit. The JHU URL returned 403, so I checked Riehl–Verity §5.1 in arXiv:1808.09834v3, printed pp.26–30. The item matches the source: weak-flag generators are the atomic arrows of Def 5.1.1 (degenerates of atomic arrows are atomic), strict flags are the nondegenerate atomic arrows of Prop 5.1.12 (n>r), and the subcomplex clause is Def 5.1.4(i) with Lemma 5.1.9. The statement correction is right: an empty word at a vertex outside K is a counterexample to the old clause, and requiring endpoints in i(K_0) is a correction, not a weakening. The only citer, join-boundary-cubical-extension, uses the clause in Steps 1, 4 and 5, and its endpoints always lie in K there. Steps checked: Step 2 (cuts at U_0, junctions unique); Step 3 (skeletal induction from boundary-cells, labels agree via d_i); Step 4 (boundary generators correspond exactly to proper supports, complement equals the bead shapes of Def 5.1.11 and Example 5.1.10(i)); Steps 5–6 (free pushout and sequential union, fine for non-injective attaching maps); Step 7 (degeneracy keeps word length, so strict flags are nondegenerate); Step 8 (operators via the cocone, then normal form); Step 9 (monos keep nondegeneracy, free words are injective, empty-word case handled). The new node lem-coef-simplicial-category-degreewise-colimits is true: sCat is a full subcategory of Fun(Δ^op,Cat), functor-category colimits are pointwise, and Ob is a left adjoint so the object set stays constant. It holds for the empty diagram and for object-identifying pushouts. It is statement-only with all three kinds of search recorded, not a duplicate (rg over the DAG; fixed-object free calculus is narrower and citing it would make a cycle), and not a clause of the item. No SGA is used, all cited nodes are in the same unit, no tool_uses, no cycle. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b15173f3",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Compared all 7 conjuncts of SSet.CoherentBeads.coherent_realization_bead_normal_form with the node clauses: vertex bijection, bead endpoints, unique bead words for the actual rigidification (wordValue via eId/eComp), strict-flag nondegeneracy, operators via restrictFlag/flagValue, degreewise-injective hypothesis giving injectivity on objects and mapping sets, and the endpoint-sensitive image criterion (stage-1 empty-word correction honoured). Checked against PinchedCubeLatching (coherentSimplex/rigidification/coherentSimplexUnit) and Mathlib SimplicialThickening.Path and nonDegenerate. Edge cases (empty K, m=0 excluded, r=0, loops, empty words) and universes (single u) are fine. lean.statement matches the file verbatim and all 16 declarations exist; the node statement is unchanged; the cycle-causing Straightening import was removed with no duplicate definitions; no hollow definitions, only the theorem uses sorry; docstrings and report sections are present. nt_compile --json with the side overlay: exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CoherentRealizationBeadNormalForm",
+  "declaration": "SSet.CoherentBeads.coherent_realization_bead_normal_form",
+  "declarations": [
+   "SSet.CoherentBeads.ordinalVertex",
+   "SSet.CoherentBeads.simplexVertex",
+   "SSet.CoherentBeads.Flag",
+   "SSet.CoherentBeads.Bead",
+   "SSet.CoherentBeads.Bead.source",
+   "SSet.CoherentBeads.Bead.target",
+   "SSet.CoherentBeads.flagValue",
+   "SSet.CoherentBeads.Bead.value",
+   "SSet.CoherentBeads.Graph",
+   "SSet.CoherentBeads.beadQuiver",
+   "SSet.CoherentBeads.edgeValue",
+   "SSet.CoherentBeads.wordValue",
+   "SSet.CoherentBeads.WordLabelsIn",
+   "SSet.CoherentBeads.InImage",
+   "SSet.CoherentBeads.restrictFlag",
+   "SSet.CoherentBeads.coherent_realization_bead_normal_form"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CoherentRealizationBeadNormalForm.lean",
+  "statement": "theorem coherent_realization_bead_normal_form : (∀ K : SSet.{u}, Function.Bijective (fun s : K _⦋0⦌ ↦ (PinchedCube.coherentSimplexUnit.app ⦋0⦌ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm s)).obj (ordinalVertex 0 0))) ∧ (∀ (K : SSet.{u}) (m : ℕ) (s : K _⦋m⦌) (j : Fin (m + 1)), (PinchedCube.coherentSimplexUnit.app _ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm s)).obj (ordinalVertex m j) = (PinchedCube.coherentSimplexUnit.app ⦋0⦌ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm (simplexVertex s j))).obj (ordinalVertex 0 0)) ∧ (∀ (K : SSet.{u}) (r : ℕ) (x y : Graph K r), Function.Bijective (wordValue (x := x) (y := y))) ∧ (∀ (K : SSet.{u}) (r : ℕ) (b : Bead K r), b.value ∈ (hom (PinchedCube.rigidification.obj K) b.source b.target).nonDegenerate r ↔ Function.Injective (fun j : Fin (r + 1) ↦ (b.flag.obj j).I)) ∧ (∀ (K : SSet.{u}) (m r q : ℕ) (s : K _⦋m⦌) (t : Flag.{u} m r) (θ : ⦋q⦌ ⟶ ⦋r⦌), (hom (PinchedCube.rigidification.obj K) ((PinchedCube.coherentSimplexUnit.app _ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm s)).obj (ordinalVertex m 0)) ((PinchedCube.coherentSimplexUnit.app _ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm s)).obj (ordinalVertex m (Fin.last m)))).map θ.op (flagValue s t) = flagValue s (restrictFlag θ t)) ∧ (∀ (m r q : ℕ) (θ : ⦋q⦌ ⟶ ⦋r⦌) (t : Flag.{u} m r) (j : Fin (q + 1)), (restrictFlag θ t).obj j = t.obj (θ.toOrderHom j)) ∧ (∀ (K L : SSet.{u}) (i : K ⟶ L), (∀ d : SimplexCategoryᵒᵖ, Function.Injective (i.app d)) → Function.Injective (PinchedCube.rigidification.map i).obj ∧ (∀ (a b : PinchedCube.rigidification.obj K) (d : SimplexCategoryᵒᵖ), Function.Injective (((PinchedCube.rigidification.map i).map a b).app d)) ∧ (∀ (r : ℕ) (x y : Graph L r) (p : Quiver.Path x y), InImage i (wordValue p) ↔ x ∈ Set.range (fun a : K _⦋0⦌ ↦ (PinchedCube.coherentSimplexUnit.app ⦋0⦌ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm (i.app _ a))).obj (ordinalVertex 0 0)) ∧ y ∈ Set.range (fun a : K _⦋0⦌ ↦ (PinchedCube.coherentSimplexUnit.app ⦋0⦌ ≫ PinchedCube.rigidification.map (SSet.yonedaEquiv.symm (i.app _ a))).obj (ordinalVertex 0 0)) ∧ WordLabelsIn i p))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Beads and words evaluate through the actual coherent-simplex unit followed by rigidification.map, written directly using the recorded PinchedCube dependency. No downstream straightening import or dependency is used. Includes canonical vertex bijection, bead endpoints, unique words, strict-flag nondegeneracy, all ordinal operators, degreewise injectivity and endpoint-sensitive image detection."
  }
 }
