@@ -2734,6 +2734,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
@@ -4062,7 +4063,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduct
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.HomShift

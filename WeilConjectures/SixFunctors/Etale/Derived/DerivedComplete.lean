@@ -75,7 +75,7 @@ lemma derivedComplete_of_iso [IsDomain R] {I : Ideal R} (hI : I.IsPrincipal)
   rw [Ideal.submodule_span_eq] at hϖ
   by_cases h0 : ϖ = 0
   · rw [hϖ, h0, Ideal.span_singleton_eq_bot.mpr rfl]
-    exact derivedComplete_bot J _
+    exact derivedComplete_bot _
   · have hϖ0 := mem_nonZeroDivisors_of_ne_zero h0
     rw [derivedComplete_iff_rightOrthogonal hϖ0 hϖ] at hK ⊢
     intro Z φ hZ
