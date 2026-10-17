@@ -14,9 +14,100 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$, put $s=f(x)$, and write $\\xi$ for the point of $X_s$ over $x$. Affine opens $V=\\operatorname{Spec}R\\subset S$ and $U=\\operatorname{Spec}A\\subset X$ with $s\\in V$, $x\\in U$ and $f(U)\\subset V$ exist: apply [lem-weil-pbc-affine-opens-basis] first to $s\\in S$, then to $x\\in f^{-1}(V)$. Use the canonical chart maps of [lem-weil-pbc-affine-open-spec-points]. For any such pair let $\\varphi:R\\to A$ be the induced ring map and let $\\mathfrak q\\subset A$ and $\\mathfrak p\\subset R$ represent $x$ and $s$. The description of spectrum morphisms [def-weil-affine-spectrum] gives $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Since $f$ is locally of finite type, [lem-weil-pbc-lft-affine-pairs] says that $\\varphi$ is of finite type for every such pair.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0: affine-local reduction; Tag 01T2, lemma-locally-finite-type-characterize; Schemes Tag 01IT, lemma-basis-affine-opens."
+   }
+  },
+  {
+   "text": "For any affine pair in step 1, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{S,s}$ with $R_{\\mathfrak p}$; taking quotients by the maximal ideals identifies $\\kappa(s)$ with $\\kappa(\\mathfrak p)$ by [def-weil-residue-field]. Put $F=A\\otimes_R\\kappa(\\mathfrak p)$. The fibre of $U\\to V$ at $s$ is $\\operatorname{Spec}F$ by [def-pc-scheme-fibre] and [lem-weil-pbc-fibre-product-affine-spectra], with first projection induced by $a\\mapsto a\\otimes1$. Its point over $\\mathfrak q$ is the prime $\\overline{\\mathfrak q}$ of [lem-weil-pbc-fibre-ring-primes-bijection]. The homeomorphism clause of [def-pc-scheme-fibre], applied both to $U\\to V$ and to $X\\to S$, identifies $|\\operatorname{Spec}F|$ with the open subspace $O=\\{z\\in X_s:p(z)\\in U\\}$ of $X_s$, carrying $\\overline{\\mathfrak q}$ to $\\xi$. Indeed both spaces identify with $U\\cap f^{-1}(s)$ with its subspace topology; this is open in $f^{-1}(s)$ because $U$ is open in $X$. Under this homeomorphism the open neighbourhoods of the specified points correspond bijectively, and corresponding neighbourhoods have equal Krull dimension by [lem-weil-pbc-homeomorphism-krull-dimension]. Taking their minima as in [def-kun-topological-dimension-at-point], then using [lem-weil-pbc-dimension-at-point-open-subspace] for $O\\subset X_s$, gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F=\\dim_\\xi X_s$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 and 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; Tag 01HV, lemma-spec-sheaves; Topology Tag 0055, definition-Krull (4), neighbourhood-minimum comparison."
+   }
+  },
+  {
+   "text": "Suppose $f$ is locally quasi-finite. By [pqf-def-quasifinite] it is quasi-finite at our chosen $x$, so there are affine opens $U,V$ as in step 1 for which $\\varphi:R\\to A$ is of finite type and quasi-finite at $\\mathfrak q$. Use these witnessing opens in step 2. The ring-level notion of quasi-finiteness at a prime in [pqf-def-quasifinite] is that of [def-weil-pbc-ring-map-quasi-finite-at-prime]: $\\overline{\\mathfrak q}$ is isolated in $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. Apply the forward implication of [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] to this finite type ring map and this prime: it gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}F=0$. The equality in step 2 therefore gives $\\dim_\\xi X_s=0$. Since $x$ was arbitrary, the required fibre dimension vanishes at every point of $X$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, forward implication; affine form of its second proof."
+   }
+  },
+  {
+   "text": "Conversely, suppose $\\dim_\\xi X_{f(x)}=0$ for every $x\\in X$. Fix $x$ and choose affine opens as in step 1. The map $\\varphi:R\\to A$ is of finite type by step 1, and step 2 gives $\\dim_{\\overline{\\mathfrak q}}\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))=0$. The reverse implication of [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] now says that $\\varphi$ is quasi-finite at $\\mathfrak q$ in the sense of [def-weil-pbc-ring-map-quasi-finite-at-prime], which is the ring-level condition of [pqf-def-quasifinite]. These particular $U,V$ and $\\varphi$ witness that $f$ is quasi-finite at $x$ in [pqf-def-quasifinite]. This holds for every $x$, so $f$ is locally quasi-finite by the same definition.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, reverse implication and final assertion; Definition 01TD, definition-quasi-finite."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 prove the two implications. The phrase relative dimension zero in the statement means exactly the displayed equality at every point. If $X$ is empty, both universal conditions are vacuous, so the equivalence also holds in that case.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, final assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0: affine-chart reconstruction of the second proof, reusing the reviewed affine ring version lem-weil-pbc-ring-quasifinite-zero-fibre-dimension (whose proof follows 0H7C/0AAX)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +136,52 @@
    "results": "8 hits: AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
    "date": "2026-10-18",
    "verdict": "no match: LocallyQuasiFinite API and instances only, no fibre-dimension characterization"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyQuasiFinite_iff|dimension.*[Ff]iber|[Ff]iber.*dimension",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type scheme morphism has zero dimensional fibres if and only if it is locally quasi-finite",
+   "results": "8 hits: AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsProper.toLocallyOfFiniteType",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "12 hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes locally of finite type is locally quasi-finite if and only if every fibre has dimension zero at every point",
+   "results": "8 hits: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem locallyQuasiFinite|lemma locallyQuasiFinite|quasiFiniteAt_iff|topologicalKrullDimAt",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism of finite type every point is isolated in its fibre if and only if the local topological Krull dimension of that fibre at the point is zero",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-18",
+   "verdict": "no match: related quasi-finiteness, discrete fibre, and Artinian APIs only; no local topological dimension equivalence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-flat-finite-dense-open",
@@ -73,5 +206,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "worker": "stage1",
+  "summary": "Q61 checked Tag 0397 and the exact neighbourhood-minimum meaning of dimension at a point, searched the project and Mathlib, and reduced both directions through affine fibre charts to the existing reviewed ring-level equivalence. All auxiliary facts are existing DAG nodes; no new node or statement change is needed. The dimension comparison is written through the two fibre homeomorphisms and corresponding neighbourhoods.",
+  "blueprint": "Supports the inherited ancestor lem-trf-local-term-locality, via the chain recorded in blueprint.from, specifically the Tag 0397 dimension-zero input to the Tag 0B48 application in lem-trf-proper-flat-finite-dense-open. This is a generic scheme-theoretic tool below that unit, without changing its contracting-correspondence route. Whole-blueprint searches for quasi-finite, isolated, and dimension zero found no node with the same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "The existing reviewed affine ring equivalence is used as a generic algebraic tool on each affine fibre chart; this unit has no ring-level version, and this does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-202436475",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-202436475 (reviewer sub-agent of L); spot-checked: Read the item, the report and all 16 cited statements, plus the full proof of the ring lemma lem-weil-pbc-ring-quasifinite-zero-fibre-dimension. Checked the sources: Stacks 0397 (morphisms.tex 5641-5676, both proofs), 02NJ (5564-5575), Properties 0H7C (1372-1389) and Topology 0055 with the remark after it. The statement matches 0397's global equivalence, keeps the locally-finite-type hypothesis and uses dimension at a point as the minimum over open neighbourhoods. Nothing is weakened. The only citer, lem-trf-proper-flat-finite-dense-open, uses both directions, and the statement serves both. Step 1 is correct: it uses the affine basis 01IT and the locally-finite-type pair characterization 01T2. Step 2 is correct: it compares the fibre topologically through the two homeomorphisms in def-pc-scheme-fibre, uses that homeomorphisms preserve Krull dimension, and passes to the open subspace with a closed node. Steps 3 and 4 correctly use the pair that witnesses pqf-def-quasifinite and both directions of the ring lemma. The proof dependencies are exactly the union of the steps' uses, and the dependency closure has no cycle (88 nodes). There are no new nodes. No other node in the DAG states this equivalence; I searched for 0397, 0H7C, isolated-dim-0 and relative dimension zero. Edge cases checked: the affine line over k, its generic point, k[e]/e^2, k(t) over k (shows the finite-type hypothesis is needed), immersions over non-Noetherian bases, and empty X. No base-change morphism or coefficient category is involved, and no SGA source is cited. Accepted tool use: the ring lemma, a generic commutative-algebra lemma reviewed on 2026-10-14 that replaces no step of the unit. Fix (C1/C4): steps 3 and 4 used the ring-level clause of pqf-def-quasifinite, quasi-finite at a prime, without citing its definition def-weil-pbc-ring-map-quasi-finite-at-prime, which is the notion the ring lemma's conclusion is stated in. I added it to both steps' uses with one identifying sentence each, and updated proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
