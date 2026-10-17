@@ -270,6 +270,45 @@ theorem exists_linearEquiv_cohomology_adicConstant_of_iso (i : ℤ) :
   simp only [E, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, IsoAlgebra.forget_map]
   rw [← reassoc_of% nat, tr, Category.assoc]
 
+omit [Finite k₀'] [Fact (ringChar k₀' ≠ l)] [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀'))]
+  [QuasiSeparated (X' ↘ Spec (CommRingCat.of k₀'))]
+  [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀'))] in
+/-- Blueprint `sk-def-weil` (Frobenius-operator convention, `def-weil-frobenius-detailed`): for a
+finite extension `k₀'/k₀` of degree `r`, the cohomology `Hⁱ((X ×_{k₀} k₀') ⊗ k̄', ℚ̄_ℓ)` of the
+base change is `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)`, the geometric Frobenius of `k₀'` corresponding to the `r`-th
+power of that of `k₀`. -/
+theorem exists_linearEquiv_cohomology_adicConstant_baseChangeField [Finite k₀']
+    [Algebra k₀ k₀'] [Fact (ringChar k₀' ≠ l)]
+    [QuasiCompact (X.baseChangeField k₀ k₀' ↘ Spec (CommRingCat.of k₀'))]
+    [QuasiSeparated (X.baseChangeField k₀ k₀' ↘ Spec (CommRingCat.of k₀'))] (i : ℤ) :
+    ∃ e : ((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).carrier ≃ₗ[PadicAlgCl l]
+        ((adicConstant k₀ l X).cohomology i).carrier,
+      ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =
+        (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) := by
+  let := Fintype.ofFinite k₀
+  let := Fintype.ofFinite k₀'
+  have hr : Nat.card k₀' = Nat.card k₀ ^ Module.finrank k₀ k₀' := by
+    rw [Nat.card_eq_fintype_card, Nat.card_eq_fintype_card,
+      Module.card_eq_pow_finrank (K := k₀) (V := k₀')]
+  have hg : IsPullback (pullback.fst _ _) (X.baseChangeField k₀ k₀' ↘ Spec (CommRingCat.of k₀'))
+      (X ↘ Spec (CommRingCat.of k₀)) (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))) :=
+    IsPullback.of_hasPullback _ _
+  have hgB : IsPullback (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀')))
+      (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀'))
+      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀'))) :=
+    have : IsIso (Spec (CommRingCat.of k₀') ↘ Spec (CommRingCat.of k₀')) :=
+      inferInstanceAs (IsIso (𝟙 _))
+    have : IsIso (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) :=
+      inferInstanceAs (IsIso (𝟙 _))
+    IsPullback.of_vert_isIso ⟨rfl⟩
+  exact exists_linearEquiv_cohomology_adicConstant_of_iso
+    (Scheme.Hom.geometricFiberBaseChangeIso hg) (Scheme.Hom.geometricFiberBaseChangeIso hgB) _
+    (Scheme.Hom.geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius hg _ hr)
+    (Scheme.Hom.geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius hgB _ hr)
+    (Scheme.Hom.geometricFiberBaseChangeIso_hom_comp_geometricFiberMap hg hgB _ _
+      pullback.condition.symm) i
+
 end WeilSheaf
 
 end AlgebraicGeometry

@@ -4529,6 +4529,13 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
+public import WeilConjectures.WeilSheaf.BaseChangeField.Coherence
+public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
+public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
+public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
+public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
+public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
+public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
