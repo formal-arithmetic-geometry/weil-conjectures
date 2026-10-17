@@ -41,10 +41,11 @@ morphism is `ϖ⁻ᴺ u` for an integral morphism `u`.
   rationalization (`CategoryTheory.Rationalization.tensorHomEquiv`,
   `CategoryTheory.Rationalization.exists_eq_inv_pow_smul_map`), using that `𝒪_E` is a discrete
   valuation ring (`PadicAlgCl.isDiscreteValuationRing_integers`).
-* Idempotent completeness is blueprint `lem-weil-rationalization-idempotent-complete`, which
-  belongs to another part of the blueprint and is only stated here
+* Idempotent completeness is blueprint `lem-weil-rationalization-idempotent-complete`
   (`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`).
-  The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
+  Following the blueprint it is deduced from the finite-stage Karoubian theorem
+  `thm-weil-pbc-finite-stage-karoubian`, which belongs to another part of the blueprint and is
+  only stated here. The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
   with the Karoubi envelope is stated as an equivalence of categories.
 
 ## Main results
@@ -110,11 +111,32 @@ namespace Etale.DerivedCategory
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `lem-weil-rationalization-idempotent-complete`: the rationalization
-`Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete. -/
-theorem isIdempotentComplete_boundedConstructibleRational :
-    IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory := by
+/-- Blueprint `thm-weil-pbc-finite-stage-karoubian` (subsection `sk-thm-sbc-karoubian`):
+Finite-stage rational categories are Karoubian.
+
+For `E/ℚ_ℓ` finite, the rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` of
+`def-weil-pbc-rational-category` is idempotent complete, and the canonical functor
+`Dᵇc(X, E) ⥤ Kar(Dᵇc(X, E))` into its Karoubi envelope is an equivalence. The blueprint proves
+this from the bounded rational t-structure (`prop-weil-localized-tstructure`) and the Karoubian
+theorem for bounded t-structures (`thm-weil-karoubian-bounded-t`); it belongs to another part of
+the blueprint and is only stated here. -/
+theorem isIdempotentComplete_and_isEquivalence_toKaroubi_boundedConstructibleRational :
+    IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory ∧
+      (Idempotents.toKaroubi
+        (boundedConstructibleRational l E X).FullSubcategory).IsEquivalence := by
   sorry
+
+/-- Blueprint `lem-weil-rationalization-idempotent-complete`: Idempotent completeness of the
+rationalized category.
+
+The rationalization `Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete. This is the
+finite-stage Karoubian theorem `thm-weil-pbc-finite-stage-karoubian`
+(`isIdempotentComplete_and_isEquivalence_toKaroubi_boundedConstructibleRational`);
+the equivalence with the Karoubi envelope is
+`AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational`. -/
+theorem isIdempotentComplete_boundedConstructibleRational :
+    IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory :=
+  (isIdempotentComplete_and_isEquivalence_toKaroubi_boundedConstructibleRational l E X).1
 
 /-- Blueprint `sk-prop-trace-adic` (iii), morphisms: the morphisms of `Dᵇc(X, E)` between the
 rationalizations of two objects `L`, `L'` of `Dᵇc(X, 𝒪_E)` are `Hom(L, L') ⊗_{𝒪_E} E`, through

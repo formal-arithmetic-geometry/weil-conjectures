@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
@@ -204,8 +205,16 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
     Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
       (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) :=
-  sorry
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) := by
+  subst hI
+  let adj := derivedExtendScalarsAdjunction (Ideal.span {ϖ} ^ n) X
+  obtain ⟨eK, -⟩ := exists_iso_leftDerived_of_isDerivedBaseChange hη
+  obtain ⟨eL⟩ := nonempty_iso_reductionModIdeal_of_isDerivedBaseChange hη'
+  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
+  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso eL.symm ≪≫
+    (derivedHomCompIsoOfAdjunction adj K).app Ln ≪≫
+    (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
+      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.op).app Ln)⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.
