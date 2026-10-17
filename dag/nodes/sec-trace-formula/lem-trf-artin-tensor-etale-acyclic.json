@@ -11,11 +11,93 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-torsion-etale-sheaf",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-affine-etale-cover-component-criterion], the split-cover assumption makes every component ring of each $B_j$ strictly henselian, hence henselian local by [def-weil-pbc-henselian-terminology]. Also every maximal residue field $B_j/\\mathfrak n$ is separably closed: the point $\\mathfrak n$ belongs to a component $Z=\\operatorname{Spec}(B_j/I_Z)$, so $I_Z\\subseteq\\mathfrak n$. The quotient $\\mathfrak n/I_Z$ is maximal in this local component ring and is therefore its unique maximal ideal. Its residue field $(B_j/I_Z)/(\\mathfrak n/I_Z)=B_j/\\mathfrak n$ is separably closed by strict henselianity. This uses no decomposition of $B_j$ as a product of its component rings.",
+   "uses": [
+    "lem-trf-affine-etale-cover-component-criterion",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Proposition 7.9 (etale case); component convention in §6, printed pp. 12 and 15"
+   }
+  },
+  {
+   "text": "Put $B=B_1\\otimes_R B_2$. The hypotheses for [lem-trf-artin-henselian-tensor-residue-dichotomy] hold: the factors are ind-etale over the same ring $R$ as in [def-weil-pbc-ind-etale-algebra], and Step 1 supplies henselian local component rings. Thus every component ring of $B$ is henselian local. For each maximal $\\mathfrak m\\subset B$, the same node gives either a separably closed field $B/\\mathfrak m$, or a separable algebraic extension $B_j/\\mathfrak n\\to B/\\mathfrak m$ with $\\mathfrak n$ maximal in one factor.",
+   "uses": [
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Theorem 6.4, printed p. 13, applied as in the first sentence of the proof of Theorem 7.10"
+   }
+  },
+  {
+   "text": "In the second case, $k=B_j/\\mathfrak n$ is separably closed by Step 1. Every element $a$ of the separable algebraic extension $L=B/\\mathfrak m$ has irreducible separable minimal polynomial over $k$; such a polynomial is linear over a separably closed field, so $a\\in k$ and $k\\to L$ is an isomorphism. Thus all maximal residue fields of $B$ are separably closed in both cases. If $D=B/I_Z$ is any component ring, its unique maximal ideal pulls back to a maximal ideal $\\mathfrak m$ of $B$, and $D/\\mathfrak m_D=B/\\mathfrak m$. Step 2 and [def-weil-pbc-henselian-terminology] now make $D$ strictly henselian. Apply [lem-trf-affine-etale-cover-component-criterion] to $B$: every etale covering family of $T=\\operatorname{Spec}B$ has a section after disjoint union.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-trf-affine-etale-cover-component-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+    "place": "Proof of Theorem 7.10, residue-field cases (1) and (2), and Proposition 7.9, printed p. 15"
+   }
+  },
+  {
+   "text": "Let $\\varphi:G\\to H$ be any epimorphism of abelian sheaves on $T_{\\mathrm{Et}}$, and let $h\\in H(T)$. By [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], there is an etale covering family $\\{U_a\\to T\\}$ with lifts $g_a\\in G(U_a)$ of $h|_{U_a}$. Choose its section $s:T\\to\\coprod_a U_a$ from Step 3 and set $T_a=s^{-1}(U_a)$. These are pairwise disjoint open-and-closed subsets covering $T$, with maps $s_a:T_a\\to U_a$ over $T$. The sections $s_a^*g_a$ glue to $g\\in G(T)$ by the sheaf equalizer condition [def-weil-pbc-abelian-etale-sheaves]; on empty intersections all restrictions agree. Naturality gives $\\varphi(g)|_{T_a}=h|_{T_a}$, hence $\\varphi(g)=h$ by the same sheaf condition. Evaluation at the terminal object is $\\Gamma(T,-)$ [def-weil-pbc-global-sections-functor], so it preserves epimorphisms. It preserves kernels because these are computed sectionwise [def-pur-abelian-sheaf-kernel], and it is additive since morphisms and restrictions are group homomorphisms. It is therefore exact on abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-global-sections-functor",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CN (lemma-abelian-abelian), (5), and 03CO (lemma-limits-colimits-abelian-sheaves), (2); split-cover argument generalizing etale-cohomology.tex Tag 03QO"
+   }
+  },
+  {
+   "text": "For the given torsion abelian sheaf $F$, choose the resolution $F\\to I^\\bullet$ used in [def-weil-pbc-etale-cohomology]. It is a quasi-isomorphism by [def-weil-pbc-kinjective-resolutions], so $\\mathcal H^q(I^\\bullet)=0$ for $q>0$, since $F$ starts in degree zero. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact additive functor $\\Gamma(T,-)$ from Step 4. For $q>0$ this gives $H^q(T_{\\mathrm{Et}},F)=\\mathcal H^q(\\Gamma(T,I^\\bullet))\\cong\\Gamma(T,\\mathcal H^q(I^\\bullet))=0$. Torsion was not needed in Steps 4 and 5; in particular the stated torsion case holds. If $B=0$, $T$ is empty and the empty covering forces every abelian sheaf to have zero sections there, so the same conclusion includes this case.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), proof and (5); homology.tex Tag 010N; etale-cohomology.tex Tag 03QO, final proof sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-trf-affine-etale-cover-component-criterion",
+  "lem-trf-artin-henselian-tensor-residue-dichotomy",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
+  "place": "Online reading of Hübner–Schmidt, Theorem 6.4, Definition 7.8, Proposition 7.9 and Theorem 7.10, printed pp. 12–15; local copy WANTED. Explicit split-cover lifting and derived calculation use local Stacks Tags 03CN, 03CO, 010N, 015F and 03QO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +126,38 @@
    "results": "Algebra.Etale.baseChange; Algebra.FormallyEtale.instTensorProduct; Algebra.Etale.comp; no ind-etale acyclicity or etale-cohomology theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of ind-etale etale acyclic algebras has vanishing positive etale cohomology for all abelian sheaves",
+   "results": "8 hits: Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange, Algebra.Etale.comp, Algebra.Etale.finitePresentation, Algebra.Etale.formallyEtale, Algebra.Etale.recOn, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.subsingleton_h1Cotangent. Etale.baseChange and FormallyEtale tensor-product instances are finite-presentation/formal-etale algebra facts, not the Artin cohomological assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of etale acyclic ind-etale algebras is acyclic for derived global sections",
+   "results": "8 hits: Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.instForallOfFinite, Algebra.Etale.baseChange, Algebra.FormallyEtale.pi_iff, Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallyEtale.comp. Etale.baseChange and FormallyEtale tensor-product instances are finite-presentation/formal-etale algebra facts, not the Artin cohomological assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.H\", \"TensorProduct\"",
+   "results": "0 hits: none. Etale.baseChange and FormallyEtale tensor-product instances are finite-presentation/formal-etale algebra facts, not the Artin cohomological assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?etale.*acyclic|tensor.*strictly.?henselian|etale.*acyclic",
+   "results": "0 hits: none. Etale.baseChange and FormallyEtale tensor-product instances are finite-presentation/formal-etale algebra facts, not the Artin cohomological assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-projective-strict-local-intersection-acyclic",
@@ -71,5 +181,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-artin-tensor-etale-acyclic",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the online Hübner–Schmidt proof into the factor component/residue check, Artin henselian tensor dichotomy, separably closed residue argument, explicit lift-and-glue proof of exact global sections, and the K-injective cohomology calculation. Created two strictly smaller statement-only inputs after DAG, blueprint, Lean and logged Mathlib searches; reused the existing epi, kernel and exact-functor cohomology nodes. No Lean written or compiled.",
+  "blueprint": "Realizes the Artin joins input in the normal-cone specialization argument of lem-trf-local-term-locality, along its existing Gabber strict-local cohomology-bound ancestry: strict-local intersections are etale acyclic. Steps 1–3 give the tensor-algebra input; Steps 4–5 give its cohomological consequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-fa914fd9f",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-fa914fd9f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all 12 cited node statements, the parent's Steps 2-3 and unit sk-i-curve-zero. Hübner-Schmidt is not in literature/, so I fetched the PDF and read §6 (p.12), Thm 6.3/6.4 (p.13) and Def 7.8, Prop 7.9, Thm 7.10 with proof (pp.14-15). The item matches the side-DAG base in statement, source, blueprint and unit; only the proof fields, stmt_deps and searches were added, so nothing was weakened. Its statement is the n=2 étale case of Thm 7.10, with the parenthetical given by Prop 7.9. New node lem-trf-artin-henselian-tensor-residue-dichotomy is Thm 6.4 with n=2, hypothesis by hypothesis. Writing n=m∩B_j is forced. Checked on k^sep⊗k^sep, V^sh⊗_V K^sep, and B=0. New node lem-trf-affine-etale-cover-component-criterion is Prop 7.9. The component ring C/I_Z is H-S's colim A/eA. I re-proved both directions for an arbitrary ring: the section on each strictly henselian component spreads to a clopen neighbourhood, compactness of π_0 gives a finite disjoint refinement, and a component with two closed points gives a Zariski cover with no section. I also checked a ring that is not w-local, so the node correctly drops BS's w-local hypothesis. Neither new node duplicates an existing one (grep for quasi-acyclic, w-strictly local, section/split cover; det-pe-* nodes assume w-local) or restates a clause of the item. Steps: (1) uses the criterion and I_Z⊆n; (2) all hypotheses of the dichotomy node are in force; (3) separable algebraic over a separably closed field is trivial, so components are strictly henselian and covers split; (4) the epi lemma plus the section give a disjoint clopen gluing, kernels are sectionwise, so Γ is exact; (5) the K-injective model with the exact-functor Mathlib leaf gives H^q=0, including T empty. proof_deps equals the union of uses and the graph is acyclic. The only off-unit statements cited are Mathlib leaves, so no tool_uses are needed. No SGA is cited. proof_origin is agent with a WANTED line, which is correct since the paper is not local. No fixes."
  }
 }

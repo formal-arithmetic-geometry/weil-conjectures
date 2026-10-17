@@ -11,9 +11,51 @@
   "def-weil-preadditive-category",
   "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a total degree n and let $I_n=\\{(p,q):p+q=n\\}$. If $B^{p,q}$ with $(p,q)\\in I_n$ is not a zero object, the support hypotheses give $p\\le b$ and $q\\le 0$, hence $n=p+q\\le p\\le b$. So the set $J_n=\\{(p,n-p):n\\le p\\le b\\}$ is finite (empty when $n>b$) and every term of $I_n\\setminus J_n$ is a zero object. Since $C$ has finite coproducts, the finite family $(B^{p,q})_{J_n}$ has a coproduct $S$ with injections $\\iota_{p,q}$. Put $\\iota_{p,q}=0:B^{p,q}\\to S$ for $(p,q)\\in I_n\\setminus J_n$. This is a coproduct of the whole diagonal family: given maps $f_{p,q}:B^{p,q}\\to T$ for $(p,q)\\in I_n$, the unique $g:S\\to T$ with $g\\iota_{p,q}=f_{p,q}$ on $J_n$ also satisfies it off $J_n$, because a map out of a zero object is unique, so $f_{p,q}=0=g\\circ 0$; uniqueness of $g$ is already forced by $J_n$. Hence the diagonal coproduct defining $\\operatorname{Tot}(B)^n$ exists. Additivity gives $F(0)=0$, so $FB$ is a bicomplex, and $F$ sends a zero object $Z$ to a zero object ($\\mathrm{id}_{FZ}=F(\\mathrm{id}_Z)=F(0)=0$); thus $FB^{p,q}$ is a zero object off $J_n$. By [lem-sfb-left-resolution-additive-finite-coproducts], $(FS,F\\iota_{p,q})_{J_n}$ is a coproduct of $(FB^{p,q})_{J_n}$; the same zero-extension argument in $D$ shows that $(FS,F\\iota_{p,q})_{I_n}$, whose maps off $J_n$ are $F(0)=0$, is a coproduct of the whole diagonal family of $FB$. So the diagonal coproducts of $\\operatorname{Tot}(FB)$ exist and $F$ carries the coproduct cocone of each diagonal of $B$ to a coproduct cocone, i.e. preserves it.",
+   "uses": [
+    "lem-sfb-left-resolution-additive-finite-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+    "place": "cofanOfIsZero, isColimitCofanOfIsZero, preservesColimitOfIsZero (lines 174–245), CoreHasTotal.preserves (lines 465–487), coreHasTotalOfIsStrictlyLE and its hasTotal/preservesTotal applications (lines 877–911)"
+   }
+  },
+  {
+   "text": "With the totals and preservation hypotheses established in Step 1, apply [lem-sfb-left-resolution-map-total-iso] to obtain the componentwise canonical mapTotalIso isomorphism Tot(F B) ≅ F(Tot(B)). The comparison is a chain isomorphism because F maps the two bicomplex differentials and their signed sum, and the source construction checks this on each coproduct injection.",
+   "uses": [
+    "lem-sfb-left-resolution-additive-finite-coproducts",
+    "lem-sfb-left-resolution-map-total-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
+    "place": "mapTotalXIso and mapTotalIso, lines 27–130"
+   }
+  },
+  {
+   "text": "For a bicomplex map φ:B→B′ between any two bicomplexes satisfying the stated support bounds (with no requirement that their chosen upper bounds agree), the naturality equation in [lem-sfb-left-resolution-map-total-iso] identifies Tot(Fφ) followed by the comparison for B′ with the comparison for B followed by F(Tot φ). Therefore the family of mapTotalIso comparisons is natural even when the first-index bounds differ.",
+   "uses": [
+    "lem-sfb-left-resolution-map-total-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
+    "place": "mapTotalIso_hom_naturality and mapTotalIso_inv_naturality, lines 132–145"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-left-resolution-additive-finite-coproducts",
+  "lem-sfb-left-resolution-map-total-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "coreHasTotalOfIsStrictlyLE and preservesTotal_of_isStrictlyLE, lines 877–911, together with TotalComplexMap.lean lines 27–145"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -101,7 +143,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-left-resolution-bounded-minus",
@@ -122,5 +164,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-left-resolution-additive-total-transport",
+  "worker": "stage1",
+  "group": "N0",
+  "summary": "Split the bounded-minus transport statement into three proof steps. The first checks finite diagonal support and invokes the Mathlib finite-coproduct preservation theorem for additive functors; the second invokes the project mapTotalIso construction; the third uses its naturality equation, which is independent of chosen upper bounds. Added two strictly smaller dependencies: the Mathlib finite-coproduct leaf and the project-specific generic total-comparison statement.",
+  "blueprint": "The item is an imported concrete transport lemma attached to the parent proof sentence beginning “So the K-flat complexes form a left derivability structure...”; the steps realize the totalization and functoriality infrastructure used there."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-99c3c0f33",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-99c3c0f33 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. Sources checked: slopmaster2 FromJoel TotalComplexMap.lean 27-145 (no sorry; it imports only Mathlib and HomologicalBicomplex, which also has no sorry); BicomplexColumns.lean 174-245 (cofanOfIsZero/preservesColimitOfIsZero), 416-489 (CoreHasTotal) and 874-911 (coreHasTotalOfIsStrictlyLE, hasTotal/preservesTotal_of_isStrictlyLE); Mathlib AdditiveFunctor.lean:213; the blueprint main-20261015 lem-sfb-derived-monoidal proof. The item's hypotheses match the source with y0=0 and x0=b. The sign (-1)^p matches Mathlib's up-Z total shape, and the comparison direction and the bound-free naturality match the Lean. The arithmetic n<=p<=b is correct, including the empty case n>b. I tested the zero bicomplex, a bicomplex in one bidegree, degree n>b, and a map between bicomplexes with different bounds. The map-total-iso node is a generalization of the item's main clause without bounds, not a restatement; Step 1 proves the existence and preservation the item adds. No duplicates, no cycle, no tool_uses, no SGA. Three fixes: (1) E5 in Step 1: the diagonal index set is infinite, and the step now writes out the zero-extension argument the source uses (existence of the coproduct, F sends zero objects to zero, preservation). (2) B9 on both new nodes: via was [item] and is now the item plus the item's own via; from.place quoted sentences that are not in the blueprint proof and now names the real sentence 'So the K-flat complexes form a left derivability structure'. (3) B10 on map-total-iso: it is exactly the sorry-free slopmaster2 mapTotalXIso/mapTotalIso and the two naturality lemmas, so lean_audit.slopmaster2 is now closed with those declarations and lines; its statement now defines the comparison and the naturality equations explicitly. Item statement unchanged. Corrected files are in fixes/dag/nodes/sec-proetale-coefficients/.; 3 file(s) fixed by the reviewer"
  }
 }
