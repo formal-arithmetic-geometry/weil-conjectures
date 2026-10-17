@@ -76,7 +76,7 @@ theorem higherDirectImage_affine_cohomology_presentation
   intro N Q a b hab
   let : EnoughInjectives X.Modules := Scheme.Modules.enoughInjectives (X := X)
   let I := injectiveResolution
-    (show SheafOfModules (moduleRings X.toRingedSpace) from N)
+    (show SheafOfModules.{u} (moduleRings X.toRingedSpace) from N)
   let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj I.cocomplex
   let T := Scheme.Modules.sectionCohomologyTheta K p ≫

@@ -25,7 +25,7 @@ private lemma cancelComparison {D : Type*} [Category D]
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
 
 variable [∀ Y : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules (moduleRings Y.toRingedSpace))]
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The ordinary comparison can be evaluated on cohomology before the derived unit.
 Source: Stacks Project, perfect.tex, Tag 0AVW, affine morphism equivalence proof;
@@ -60,12 +60,12 @@ theorem affinePushforwardComparison_factorization
           (affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫
         ((DerivedCategory.homologyFunctorFactors
-          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).app
+          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).app
           (((affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex
               (.up ℤ)).obj C)).inv ≫
         (DerivedCategory.homologyFunctor
-          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).map
+          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
           ((RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
@@ -89,13 +89,13 @@ theorem affinePushforwardComparison_factorization
   let σ' : F ≅ G := σ
   let a := (σ'.hom.mapHomologicalComplex (.up ℤ)).app C
   have hn := (DerivedCategory.homologyFunctorFactors
-    (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).inv.naturality a
+    (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).inv.naturality a
   dsimp only [Functor.comp_map] at hn
   dsimp only [affinePushforwardCohomologyMapOfComparison]
   erw [← reassoc_of% hn]
   have hh := ShortComplex.homologyMap_mapNatTrans (C.sc i) σ'.hom
   change (HomologicalComplex.homologyFunctor
-      (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) (.up ℤ) i).map a =
+      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) (.up ℤ) i).map a =
     ((C.sc i).mapHomologyIso F).hom ≫ σ'.hom.app (C.homology i) ≫
       ((C.sc i).mapHomologyIso G).inv at hh
   dsimp only [F, G, σ'] at hh
