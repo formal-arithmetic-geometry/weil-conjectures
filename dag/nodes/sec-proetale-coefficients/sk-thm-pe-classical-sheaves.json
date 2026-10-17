@@ -171,5 +171,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27c6c6c86",
+  "group": "Q79",
+  "result": "fix",
+  "note": "Statement is correct clause by clause against the node, the blueprint main-20261015 and Stacks 099T. Arbitrary X; ν^* = sheafPullback(toProEt X), the left adjoint of the recorded proEtaleSiteComparison; Nonempty FullyFaithful; essImage ↔ IsClassical; ∀ Λ:Type(u+1) [CommRing Λ] with no extra hypotheses; ∃ F with F⋙ι = comparisonUpperStar, IsEquivalence, finite limits and colimits. Fixed-ring ModuleCat encoding is the project convention. Edge cases (empty X, Λ=0, Λ=ℤ, trivial presentations) admitted. Docstrings, sorry-only proof, conventions and both report sections OK. H4 fault: the module classicality predicate was an inline copy of the recorded IsClassicalModuleFor (sk-def-pe-classical-definition, present at base). Fixed in fixes/ProEtaleClassicalSheaves.lean (use IsClassicalModuleFor X Λ, import ClassicalDerivedDefinitions), fixes/sk-thm-pe-classical-sheaves.lean-record.json (verbatim statement) and fixes/sk-thm-pe-classical-sheaves.report.md. nt_compile --json: delivered file rc 0, fixed file rc 0 clean; a negative control returned rc 1."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves",
+  "declaration": "AlgebraicGeometry.proEtaleClassicalSheaves",
+  "statement": "theorem proEtaleClassicalSheaves (X : Scheme.{u}) : Nonempty (Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)).FullyFaithful ∧ (∀ (G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))), (Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)).essImage G ↔ ProEtale.IsClassical G) ∧ ∀ (Λ : Type (u + 1)) [CommRing Λ], ∃ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ ObjectProperty.FullSubcategory (ProEtale.IsClassicalModuleFor X Λ)), F ⋙ ObjectProperty.ι _ = ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X ∧ F.IsEquivalence ∧ PreservesFiniteLimits F ∧ PreservesFiniteColimits F",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalSheaves.lean",
+  "fixed_by": "NT-stage2-cc-27c6c6c86"
  }
 }
