@@ -12,9 +12,55 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-inner-anodyne-pushout-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p$ be a fibration of the Joyal model structure of [lem-coef-joyal-model-structure]. That node makes every inner horn inclusion $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $0<i<n$, a trivial cofibration, and fibrations have the right lifting property against trivial cofibrations; hence $p$ has the right lifting property against every inner horn, i.e. $p$ is an inner fibration in the sense of [lem-coef-inner-anodyne-pushout-product]. Since $i$ is inner anodyne, it has the left lifting property against every inner fibration of [lem-coef-inner-anodyne-pushout-product], in particular against every Joyal fibration. By the weak factorization system (trivial cofibrations, fibrations) of [lem-coef-joyal-model-structure], the maps with the left lifting property against all fibrations are exactly the trivial cofibrations, so $i$ is a trivial cofibration, in particular a Joyal weak equivalence; by the same node these weak equivalences are exactly the categorical equivalences. Thus $i:L\\to K$ is a categorical equivalence.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), first paragraph: the inner anodyne inclusion is a categorical equivalence (lifting-class argument in the Joyal model structure)"
+   }
+  },
+  {
+   "text": "The slice construction with $K=\\Delta^0$ and $p=c$ gives a quasicategory $C_{/c}$ and a right fibration $q:C_{/c}\\to C$ by [lem-coef-infinity-slice-right-fibration]. Apply the right-fibration pullback theorem [lem-coef-right-fibration-categorical-base-change] to the categorical equivalence $i:L\\to K$ over $C$ and this $q$. It gives that $L\\times_C C_{/c}\\to K\\times_C C_{/c}$ is a categorical equivalence. The theorem is stated for arbitrary simplicial sets $L$ and $K$ and does not assume that either pullback is a quasicategory, exactly matching the present hypotheses.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-right-fibration-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), first paragraph, using Corollary 5.6.7.6 (dual right-fibration pullback form)"
+   }
+  },
+  {
+   "text": "By the degreewise pullback convention, the map in Step 2 is exactly the induced inclusion $i_c:L_{/c}\\hookrightarrow K_{/c}$ defined in the statement. The argument used only that $C$ is a quasicategory, that $c$ is a vertex, and that $i$ is inner anodyne; no quasicategory condition on $L$, $K$, or either pullback was introduced.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), identification of the two comma simplicial sets"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-right-fibration-categorical-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02YL",
+  "place": "Proposition 7.3.1.14 (02YL), proof first paragraph, using Corollary 5.6.7.6; the online source is not archived locally"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-inner-anodyne-pointwise-lan-invariance",
@@ -74,5 +120,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-inner-anodyne-slice-categorical-equivalence",
+  "worker": "stage1",
+  "summary": "Repaired the two returned gaps. Step 1 derives that the inner anodyne inclusion $i$ is a categorical equivalence by the lifting-class argument from [lem-coef-joyal-model-structure]: Joyal fibrations are inner fibrations because inner horns are trivial cofibrations, so $i$ lifts against all fibrations and is a trivial cofibration. Step 2 identifies the slice projection $C_{/c}\\to C$ as a right fibration by [lem-coef-infinity-slice-right-fibration] and applies the new statement-only node [lem-coef-right-fibration-categorical-base-change]; the existing cocartesian, cartesian-marked and opposite base-change nodes cannot be cited because each already depends on this item through lem-coef-inner-anodyne-pointwise-lan-invariance. Step 3 and the target statement are unchanged. (Maintainer reader fix 2026-10-18: the separate inner-anodyne-to-Joyal-equivalence node was a three-line consequence of the Joyal model structure node and is folded into step 1.)",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the pointwise indexing-shape replacement and slice comparison used in the coherent mapping-complex adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-642247ba7",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-642247ba7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-coef-joyal-model-structure, lem-coef-inner-anodyne-pushout-product, lem-coef-infinity-slice-right-fibration), the parent pointwise-lan node and blueprint prop-coef-integral-exceptional-adjoint paragraph 2. Kerodon 02YL/029H and HTT are not in literature/, so I checked against HTT 2.4.2.4 and 3.3.1.4 and the item is correctly marked agent-written. The item statement is unchanged and matches the parent's use. Step 2 applies the slice right-fibration node with K=Δ^0, p=c and then the new base-change node with A=L, B=K, u=i, b=δ; every hypothesis holds. Step 3 is elementary. lem-coef-right-fibration-categorical-base-change is true (a right fibration is a cartesian fibration; HTT 3.3.1.4 dual) and its edge cases check out (u=id, empty A, C=Δ^0, C=Δ^2 with q=id). The dual and cartesian candidates all already reach this item through lem-coef-inner-anodyne-pointwise-lan-invariance, so citing them would make a cycle (C6): cocartesian-categorical-base-change, simplicial-opposite-homotopy-calculus, cartesian-base-equivalence-invariance, contravariant-slice-model, strict-intrinsic-right-fibration-slices and cocartesian-joyal-fibration. I checked this by a graph path search, so the new node is justified, and my own grep confirms Mathlib has no such theorem. Fix (C1 exception): lem-coef-inner-anodyne-joyal-equivalence follows in three lines from the stated clauses of lem-coef-joyal-model-structure (inner horns are trivial cofibrations, so Joyal fibrations are inner fibrations, so i lifts against all fibrations, so i is a trivial cofibration and a categorical equivalence by the WFS). I folded it into step 1 as an elementary step citing lem-coef-joyal-model-structure and lem-coef-inner-anodyne-pushout-product, recomputed proof_deps and dropped the node. I also corrected the stale split_report.summary, which said step 2 used the cartesian marked theorem. No SGA, no tool_uses, no unit-record change.; 1 file(s) fixed by the reviewer"
  }
 }
