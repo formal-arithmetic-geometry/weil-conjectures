@@ -15719,3 +15719,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent (stage 3; reviewer PASS; after a return; landing 20261017T003418-L-3314180 (proof); batch 20261017T003410; modules 1; new nodes 0)
 - 00:34 L: merged deliver/F1/Sheaf.Paper.StrictHenselizationPointEvaluationImage (stage 3; reviewer PASS; first push; landing 20261017T003419-L-3314323 (proof); batch 20261017T003410; modules 1; new nodes 0)
 - 00:34 L: merged deliver/F2/Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel (stage 3; reviewer PASS; after a return; landing 20261017T003419-L-3314440 (proof); batch 20261017T003410; modules 1; new nodes 1)
+- 00:34 L: merged deliver/F2/Sheaf.Paper.FiniteEtaleLocallyFreeModels (stage 3; reviewer PASS; after a return; landing 20261017T003420-L-3314575 (proof); batch 20261017T003410; modules 1; new nodes 0)
