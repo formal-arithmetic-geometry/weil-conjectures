@@ -12,9 +12,114 @@
   "def-weil-abstract-derived-category",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Kernels and cokernels in $\\mathcal A$ are computed at every object of $E$, with the structure maps induced by naturality. Hence cohomology and quasi-isomorphisms are objectwise. All the products in the stated Hom complex exist as products of abelian groups in the size convention [def-weil-size-convention]; these are global natural transformations, not objectwise Hom groups. We use the shift convention $(J[n])^k=J^{k+n}$, $d_{J[n]}=(-1)^nd_J$ of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "Directly from the displayed Hom differential, $\\underline{\\operatorname{Hom}}(B,J[n])=\\underline{\\operatorname{Hom}}(B,J)[n]$ after reindexing. Thus $J[n]$ is K-injective for every integer $n$. A degree-$n$ cocycle $h$ in $\\underline{\\operatorname{Hom}}(A,J)$ satisfies $d_Jh=(-1)^nhd_A$, exactly the chain-map equation for $A\\to J[n]$. If $h=d(k)$, then the degree-minus-one map $(-1)^nk:A\\to J[n]$ has $d_{J[n]}((-1)^nk)+((-1)^nk)d_A=h$; conversely every null homotopy has this form. Therefore $H^n\\underline{\\operatorname{Hom}}(A,J)=\\operatorname{Hom}_{K(\\mathcal A)}(A,J[n])$, naturally for chain maps.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "For a source quasi-isomorphism $s:A'\\to A$, apply [lem-weil-pbc-kinjective-hom-derived] to the K-injective target $J[n]$. Under the two bijections in its statement, the map on the groups of step 2 is precomposition by the invertible derived morphism $Qs$. It is bijective for every $n$. The comparison squares commute because localization preserves composition. Thus $s^*:\\underline{\\operatorname{Hom}}(A,J)\\to\\underline{\\operatorname{Hom}}(A',J)$ is a quasi-isomorphism, by the definition in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "If $t:J\\to J'$ is a quasi-isomorphism of K-injective complexes, [lem-weil-pbc-kinjective-hom-derived] makes it a chain homotopy equivalence. Choose a chain homotopy inverse $u$. Postcomposition by $t,u$ gives inverse maps up to chain homotopy on $\\underline{\\operatorname{Hom}}(A,-)$: a degree-minus-one homotopy $v$ with $dv+vd=ut-1$ induces $h\\mapsto vh$, and the Hom differential gives $d(vh)+v(dh)=(ut-1)h$. The same calculation applies to $tu-1$. These maps therefore induce inverse maps on every cohomology group, so postcomposition by $t$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "Define a small dg category $\\mathcal B$ with objects those of $E$, with $\\mathcal B(U,V)=\\Lambda[\\operatorname{Hom}_E(V,U)]$ in degree zero, zero differential, and composition induced by composition in $E$ and multiplication in $\\Lambda$. Right dg $\\mathcal B$-modules are precisely complexes in $\\mathcal A$: the action of the basis arrow corresponding to $U\\to V$ is the structure map $M(U)\\to M(V)$, and the scalar endomorphisms give the $\\Lambda$-module structure. Conversely extend these actions linearly. The two constructions are inverse. Degree-$r$ module maps are exactly families of natural $\\Lambda$-linear maps $A^k\\to J^{k+r}$; thus the Hom complexes, their differentials and compositions agree exactly. Apply [lem-coef-dg-module-projective-resolution] to obtain, for any $A$, a quasi-isomorphism $p:PA\\to A$ with $PA$ homotopically projective. Its statement says that the canonical comparison $c_{PA,J}:\\underline{\\operatorname{Hom}}(PA,J)\\to\\mathbf R\\operatorname{Hom}(qPA,qJ)$ is an equivalence, compatible with localization. The identification is with the enhanced localization in this item by the universal property [lem-coef-enhanced-localization-universal].",
+   "uses": [
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "Let $c_{A,J}$ be the canonical map on mapping objects induced by the enriched localization functor $q$. Functoriality of $q$ gives the square with horizontal arrows $c_{A,J}$ and $c_{PA,J}$ and vertical arrows $p^*$ on ordinary Hom and precomposition by $qp$ on derived Hom. The left vertical arrow is an equivalence by step 3, the right vertical arrow is an equivalence because $qp$ is invertible, and the lower horizontal arrow is an equivalence by step 5. Thus $c_{A,J}$ is an equivalence in $\\mathbf D(\\mathbf Z)$. This proves the entire mapping-object comparison, using an actual map of mapping objects; it does not reconstruct a map merely from isomorphisms on cohomology groups.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "The maps $c$ are the mapping maps of the single enriched functor $q$. They therefore form an enriched natural transformation in both variables. For composable graded maps $h,g$, their composition compatibility is exactly $q(g\\circ h)=q(g)\\circ q(h)$, with the composition coherence belonging to that enriched functor. Restrict the middle and final objects to K-injectives so that all three mapping comparisons concerned are equivalences by step 6. Shifts are also compatible: target shifts use the reindexing of step 2; for source shifts the chain isomorphism $\\underline{\\operatorname{Hom}}(A[k],J)^r\\to\\underline{\\operatorname{Hom}}(A,J)[-k]^r$ sends $h$ to the family $(-1)^{kr}h^{q-k}$ in component $q$. The $d_J$ terms on both sides have sign $(-1)^{kr+k}$ and the $hd_A$ terms sign $-(-1)^{kr+r}$. A shifted homotopically projective replacement is homotopically projective, since its Hom into an acyclic complex is a shift of an acyclic Hom complex by this formula. Thus step 5 computes the shifted comparison with this same reindexing and sign, proving the shift square for the canonical map.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-module-projective-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be the full dg subcategory of K-injective complexes, equipped with its quasi-isomorphisms. Steps 3 and 4 show that the Hom bifunctor on $\\operatorname{Ch}(\\mathcal A)^{\\mathrm{op}}\\times\\mathcal I$, interpreted in $\\mathbf D(\\mathbf Z)$, inverts the specified maps in each variable. The derived mapping bifunctor does so by definition, and $c$ is their enriched natural transformation. Apply the multivariable clause of [lem-coef-enhanced-localization-universal] to extend these bifunctors and $c$ along the two localizations. Its componentwise equivalence criterion and step 6 make the extended $c$ an equivalence. Apply also its substitution and coherent-diagram clauses to the composition, identity and shift diagrams of step 7. Their already specified homotopies extend, including all higher homotopies, rather than being chosen anew after localization. Every argument used all integer degrees and arbitrary products; no bound or termwise injectivity assumption was used.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I, lemma-K-injective; agent-written all-degree and enhanced argument, using the existing dg-module projective presentation and enriched localization statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +155,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.I\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [CategoryTheory.EnoughInjectives C] → CochainComplex C ℤ → CochainComplex C ℤ\", \"doc\": \"A cochain complex in an abelian category $\\\\mathcal{C}$ with enough injectives, where each object $X^n$ is the injective replacement of $K.X^n$ and all differential morphisms between objects are zero m\"}\n  {\"name\": \"CochainComplex.cm5b.I_X\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ),\\n  (CochainComplex.cm5b.I K).X n = CategoryTheory.Injective.under (K.X n)\", \"doc\": \"For any cochain complex $ K $ in an abelian category $ \\\\mathcal{C} $ with enough injectives, and for every integer $ n $, the object $ X^n $ in the cochain complex $ I $ constructed via the CM5b facto\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Functor (CochainComplex C ℤ) (DerivedCategory C)\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ {ι : Type u_3} {c : ComplexShape ι} {C : Type u_4} {inst : CategoryTheory.Category.{v_2, u_4} C}\\n  {inst_1 : CategoryTheory.Preadditive C} {inst_2 : CategoryTheory.CategoryWithHomology C}\\n  [self : c.QFactorsThroughHomotopy C] {K L : HomologicalComplex C c} {f g : K ⟶ L} (h : Homotopy f g),\\n  Cate\", \"doc\": \"In a preadditive category with homology, if two chain maps between homological complexes are homotopic, then their images under the localization functor at quasi-isomorphisms coincide in the localized\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Qh\", \"doc\": \"The canonical functor $ Q^h $ from the homotopy category of integer-indexed chain complexes to the derived category preserves the $ R $-linear structure. This means: (1) For any two chain complexes $ \"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      {c : ComplexShape ι} →\\n        [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasL\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}",
    "date": "2026-10-17",
    "verdict": "no match: DerivedCategory/KInjective.lean:41-88 gives Hom/shifted-Hom bijections, not the enhanced mapping object and coherent composition comparison. The full new statement is not a one-line specialization of those ordinary theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]Injective|HomComplex|mapping complex",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\", \"subdirectory\": \"Mathlib/Algebra/Homology/DerivedCategory\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-injective Hom and shifted-Hom results do not state the entire enriched mapping object and coherence comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-injective target makes the full dg Hom complex compute the derived mapping complex",
+   "results": "{\"hits\": 8, \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.IsKInjective.mk\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKInjective.Qh_map_bijective\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-injective Hom and shifted-Hom results do not state the entire enriched mapping object and coherence comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass, IsKInjective",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'IsKInjective'\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: loogle: unknown identifier 'IsKInjective'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, HomComplex, DerivedCategory",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'HomComplex'\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: loogle: unknown identifier 'HomComplex'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective complex target ordinary Hom complex computes derived mapping object all shifts",
+   "results": "{\"hits\": 8, \"top\": [\"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.IsKInjective\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.instInjectiveXIntI\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-injective Hom and shifted-Hom results do not state the entire enriched mapping object and coherence comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom from any complex into a K-injective complex is computed by chain Hom in every degree",
+   "results": "{\"hits\": 8, \"top\": [\"CochainComplex.IsKInjective.Qh_map_bijective\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.InjectiveResolution.extMk\"], \"note\": \"\", \"subdirectory\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-injective Hom and shifted-Hom results do not state the entire enriched mapping object and coherence comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_toSmallShiftedHom_of_isKInjective|Qh_map_bijective|quasiIso_iff",
+   "results": "{\"hits\": 19, \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\"], \"note\": \"\", \"subdirectory\": \"Algebra/Homology/DerivedCategory\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-injective Hom and shifted-Hom results do not state the entire enriched mapping object and coherence comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-dense-hypersheaf-comparison",
@@ -74,5 +228,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kinjective-derived-mapping-complex",
+  "worker": "stage1",
+  "summary": "Proved the full enhanced comparison using all-shift K-injective Hom bijections, explicit source and target quasi-isomorphism invariance, the existing dg-module projective presentation, and canonical enriched-localization coherence. No new nodes and no change to the statement.",
+  "blueprint": "Realizes the inherited dense-comparison foundation, former step 6, in the opening compactification transport of thm-cbc-finite-level-proetale: full derived mapping complexes and their coherent compositions.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-module-projective-resolution",
+    "why": "Generic dg-module projective presentation supplies an independent full mapping-complex model, specialized to the linearization of E opposite; the compact-support unit supplies no such foundation."
+   },
+   {
+    "node": "lem-coef-enhanced-localization-universal",
+    "why": "Generic enriched localization and multivariable coherence universal property, explicitly used by the statement; the unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-1a4cb4d0a",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-1a4cb4d0a (reviewer sub-agent of L); spot-checked: I read all eight steps of the item in full against Stacks derived.tex definition-K-injective (line 9620) and lemma-K-injective 070I (lines 9632-9671), and read the statements of def-weil-abstract-derived-category, def-weil-size-convention, lem-weil-pbc-kinjective-hom-derived (Mathlib leaf Qh_map_bijective/quasiIso_iff), lem-coef-dg-module-projective-resolution and lem-coef-enhanced-localization-universal. I recomputed the signs. Step 2: Hom(B,J[n]) = Hom(B,J)[n] with differential (-1)^n d, which shows the item's K-injectivity agrees with the leaf's convention; the boundary formula with (-1)^n k is correct. Step 4: d(vh)+v(dh) = (ut-1)h. Step 7: the source-shift isomorphism (-1)^{kr} matches on both differential terms. Step 5: the linearization B(U,V) = Λ[Hom_E(V,U)] gives right modules equal to Fun(E,Mod_Λ), with Λ acting by central scalars, so Hom complexes and quasi-isomorphisms match exactly. Step 6: two-out-of-three on the actual enriched square, using step 3 for p*. Step 8: the multivariable, componentwise-equivalence and diagram clauses of the universal node. Small cases checked: E empty, Λ=0, J acyclic, E a point, one-degree complexes. The statement is retained unweakened (unbounded, global Hom) and matches the parent's use in step 6. No new nodes. A DAG search for nearby K-injective/mapping-complex nodes and a blueprint grep (master and main-20261015) found no duplicate; same_as [] is correct. There is no cycle and no SGA source. I accept the tool_uses of the two generic sk-prop-sf-biduality-general foundations. No changes made."
  }
 }

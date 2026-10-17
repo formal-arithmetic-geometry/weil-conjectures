@@ -67,17 +67,16 @@
    }
   },
   {
-   "text": "Fix a quasicategory $\\mathcal E$ in a sufficiently large universe. Precomposition gives $c_n^*:\\operatorname{Fun}(Q(\\Delta^n),\\mathcal E)\\to\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ with candidate inverse $s_n^*$ and $s_n^*c_n^*=1$. By evaluation and currying, $H$ gives a coherent transformation from the identity to $c_n^*s_n^*$ on $\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$. More explicitly, at a simplex $f:P(\\Delta^n)\\times\\Delta^r\\to\\mathcal E$ it evaluates $(x,u,z)$ as $f(H(x,u),z)$, so it is compatible with every operator in $z$. For every object $f$ its component is a transformation of diagrams whose component at every vertex $x$ is the degenerate edge at $f(x)$. Here the needed pointwise-equivalence implication follows from the following smaller existing inputs. By [lem-cbc-internal-hom-quasicategory], $\\operatorname{Fun}(K,Z)$ is a quasicategory for every small shape $K$ and quasicategory $Z$. If an edge $e$ in it has equivalence components at every vertex of $K$, any horn $\\Lambda_0^r\\to\\operatorname{Fun}(K,Z)$, $r\\geq2$, whose first edge is $e$, is adjoint to $K\\times\\Lambda_0^r\\to Z$ with every distinguished vertical edge an equivalence. Apply [lem-cbc-invertible-prism-extension] with its $A=\\varnothing$, $B=K$, $Q=Z$ to fill it. Thus $e$ has the outer-horn extension property for every $r$, and the converse clause of [lem-cbc-equivalence-outer-horn-filling] makes $e$ an equivalence in $\\operatorname{Fun}(K,Z)$. Apply this argument first with $K=P(\\Delta^n)$ and $Z=\\mathcal E$ to each component of the displayed transformation, then with $K=\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ and $Z=\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ to the transformation itself. Enlarge the universe for these latter small shapes if necessary. It is therefore a coherent natural equivalence. Hence $c_n^*$ is a functor equivalence. This supplies the simplex hypothesis for the cellular criterion used in the next step, with a functor equivalence rather than only an equivalence after applying $h$.",
+   "text": "Fix a quasicategory $\\mathcal E$ in a universe containing all functor simplicial sets below. By [lem-cbc-internal-hom-quasicategory], $D=\\operatorname{Fun}(Q(\\Delta^n),\\mathcal E)$ and $T=\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ are quasicategories. The homotopy $H$ of step 3 has endpoints $1$ and $s_nc_n$ and every vertex track is degenerate. Apply [lem-coef-infinity-homotopy-precomp-equivalence] with $X=Y=P(\\Delta^n)$, $a=1$ and $b=s_nc_n$. It gives a coherent natural equivalence $1_T\\simeq c_n^*s_n^*$, for the actual precomposition maps. The other composite is $s_n^*c_n^*=1_D$, since $c_ns_n=1$ by step 3. Thus $s_n^*$ is a quasi-inverse to $c_n^*$ with the required coherent witnesses, exactly the functor-equivalence definition in [def-cbc-enhanced-diagrams-cones]. This supplies the simplex hypothesis for step 5 without assuming merely an equivalence after applying $h$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-internal-hom-quasicategory",
-    "lem-cbc-invertible-prism-extension",
-    "lem-cbc-equivalence-outer-horn-filling"
+    "lem-coef-infinity-homotopy-precomp-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/01HZ",
-    "place": "Proposition 4.6.2.12, simplex case; homotopy checked by componentwise equivalences; explicit argument supplied here, source not archived under literature/."
+    "place": "Proposition 4.6.2.12, simplex case; returned step 4 now invokes the separately stated vertex-fixed homotopy/precomposition lemma, whose equivalence input is existing Kerodon 01DK. Explicit argument supplied here, source not archived under literature/."
    }
   },
   {
@@ -155,14 +154,13 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set",
-  "lem-cbc-equivalence-outer-horn-filling",
-  "lem-cbc-internal-hom-quasicategory",
-  "lem-cbc-invertible-prism-extension",
-  "lem-coef-infinity-cellular-natural-equivalence",
-  "lem-coef-infinity-isofibration-base-change",
-  "lem-coef-infinity-isofibration-exponentiation",
   "lem-coef-infinity-pushout-join-saturation",
-  "lem-coef-joyal-model-structure"
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-infinity-homotopy-precomp-equivalence",
+  "lem-coef-infinity-cellular-natural-equivalence",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-base-change"
  ],
  "proof_origin": {
   "by": "agent",
@@ -277,7 +275,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-target-right-fibration",
@@ -290,30 +288,21 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-blunt-join-comparison",
   "worker": "stage1",
-  "summary": "Kept the statement exactly. Proved monicity by degreewise normal forms; proved the singleton blunt-to-sharp comparison on simplices with an explicit section and vertexwise-identity homotopy and applied the existing cellular criterion; compared strict functor pullbacks using the existing isofibration lemmas; derived the ordinary cone equivalence from the horn calculation and weak saturation; applied Joyal two-out-of-three and lifting for strict extension. No new nodes and no descendant anodyne-cocones citation. The initial check exposed a cycle through the broad enhanced functor/cone node; replaced it with the existing internal-Hom, invertible-prism and outer-horn foundations and wrote out their pointwise-equivalence implication.",
+  "summary": "Repair of the 2026-10-17 human return: preserved the statement, Lean record, proof route and steps 1-3 and 5-10 verbatim. Replaced only the 2022-character step 4 by a short application of one new statement-only lemma on vertex-fixed homotopies and coherent precomposition equivalences. The hidden pointwise criterion is already stated by lem-coef-infinity-pointwise-equivalences; no duplicate was created. Recorded actual Mathlib searches and regenerated verbatim citations.",
   "blueprint": "Historical master prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K in D^b_c(X,R), and current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: inherited coherent-diagram foundation along the existing from.via chain. This supplies the blunt-cone extension input to the fixed-target arrow right-fibration lemma; no unit or chapter step is replaced. The current blueprint has no duplicate blunt-join statement.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-invertible-prism-extension",
-    "why": "Step 4 takes its statement with A empty, B=K, Q=Z to fill every outer horn Lambda_0^r of Fun(K,Z) whose first edge has equivalence components; generic quasicategory tool of sk-prop-sf-cbc, no node of sk-prop-sf-biduality-general's route states it, and the broad unit-local cone package depends on this item."
-   },
-   {
-    "node": "lem-cbc-equivalence-outer-horn-filling",
-    "why": "Step 4 takes only its converse clause (an edge with the Lambda_0^r extension property for every r>=2 is an equivalence) to make pointwise-equivalence transformations equivalences; generic Joyal-theorem tool of sk-prop-sf-cbc, not replacing any step of the unit's route."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-invertible-prism-extension",
   "lem-cbc-equivalence-outer-horn-filling"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N1-0c62136e6",
-  "group": "N1",
+  "reviewer": "NT-cc-Q69-6a5cdbc82",
+  "group": "Q69",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-0c62136e6 (reviewer sub-agent of L); spot-checked: I read the whole item: statement and all ten steps. Statement: it agrees with Kerodon Cor 4.6.2.14 (01J0), checked online. That corollary assumes A↪B right anodyne and concludes θ: B⊔_A(A⋄Δ⁰)↪B⋄Δ⁰ is a categorical equivalence; the item matches that and is not strengthened to inner anodyne. The strict-extension clause is 01FS, obtained by Joyal lifting. Small cases checked by hand: A=∅ (P(∅)=Q(∅)=Δ⁰, c_∅ the identity) and i=Λ¹₁, where the domain of θ is Λ²₁ inside P(Δ¹)≃Δ². Steps: (1) the normal form P(K)_r={v}⊔K_r×T_r gives monicity. (2) The cut map to the join formula is correct. (3) I checked the section s_n, c_n s_n=1, monotonicity and descent of the homotopy H (all cases), the endpoints u=0 and u=1, and the degenerate vertex edges, including n=0. (4) The cited prism-extension lemma (01DP) applies with A=∅, B=K, its hypothesis exactly the componentwise one; the converse clause of the outer-horn lemma (019F) then makes such an edge an equivalence. This is done for the components and then for the transformation itself, with a universe enlargement, giving a functor equivalence. (5) Every hypothesis of the cellular criterion holds: injections and connected colimits are preserved, and the empty and simplex cases are done. (6) The pushout-join with ∅→Δ⁰ is Λ^{m+1}_j, which is inner since 0<j≤m; saturation for fixed k then covers every right anodyne map. (7) Inner anodyne maps are trivial cofibrations by the lifting characterization. (8) Fun(−,E) turns the pushout into a strict pullback. p and q are isofibrations by the 'in particular' clause of isofibration-exponentiation, v=c_A^* is an equivalence by step 5, and qv=p; isofibration-base-change has no fibration hypothesis on v or h. (9) The square commutes, and two-out-of-three gives θ_i. (10) Lifting against the fibration C→Δ⁰ gives fθ_i=f₀ strictly. No new nodes. No cycle: the cited nodes have empty proof_deps, except definitions. No duplicate: I checked right-anodyne, cone-mono, anodyne-cocones (a descendant), join-cone-calculus (a left fat cone) and functor-pushout (a homotopy pullback). No SGA source is used. Route: lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling are unsplit statements of sk-prop-sf-cbc, which is outside the transitive route of sk-prop-sf-biduality-general. Both are generic black-box quasicategory tools used in step 4, and I accept them as tool_uses. FIX: the second reader had removed split_report.tool_uses, so the merge would not record these two. The corrected item at fixes/dag/nodes/sec-six-functors/lem-coef-infinity-blunt-join-comparison.json restores them; split_report is the only field that differs.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-6a5cdbc82 (reviewer sub-agent of L); spot-checked: I read the item, all ten steps, the new node and every cited statement. The delivery repairs the human's single return point: the long step 4 hid a lemma. Step 4 now applies the new statement-only node lem-coef-infinity-homotopy-precomp-equivalence with X=Y=P(Δ^n), a=1, b=s_n c_n and the homotopy H from step 3, whose vertex tracks are degenerate (checked: bottom vertices are fixed and top tracks lie in the collapsed layer). That gives 1≃c_n^* s_n^*; the other composite s_n^* c_n^*=1 holds strictly, so c_n^* is a functor equivalence by the def-cbc definition. The new node is true: the component fH at each vertex is degenerate, so lem-coef-infinity-pointwise-equivalences (Kerodon 01DK) applied with target E and then with target T=Fun(X,E) makes Phi_H an equivalence edge. Small cases checked: point shapes, a=b, X empty, E empty. The degeneracy hypothesis is needed: X=Δ^0, Y=Δ^1 with a nondegenerate H gives ev0⇒ev1, which is not invertible. The new node is not a duplicate: a DAG-wide search and the named candidates (pointwise-equivalences, relative-homotopy-invariance, section-restriction, blunt-sharp-join) all state something else. It does not restate a clause of the item (D1). There is no cycle: the item is not reachable from any of its proof deps or from the new node. B1–B9 hold: statement only, self-contained TeX, seven real searches, correct from/via/place, same_as empty, and the chapter/unit match. Steps 1–3 and 5–10 are unchanged; I re-checked them against the cited statements (join formula, Λ^{m+1}_j being inner, Joyal weak factorization systems and 2-of-3, isofibration base change, strict lift). All statement inputs are in the item's unit apart from the Mathlib leaf and the definition, so split_report.tool_uses=[] is correct and no tool_uses are accepted. Maintainer note: the node-level tool_uses still lists lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling from the old step 4; they are no longer cited and should be cleared at merge. Kerodon sources are not archived (WANTED, proof_origin agent). No SGA. This is not a target node. No fixes were written."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

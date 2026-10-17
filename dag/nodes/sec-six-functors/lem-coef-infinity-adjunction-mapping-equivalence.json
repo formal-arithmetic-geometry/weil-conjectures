@@ -90,13 +90,12 @@
    }
   },
   {
-   "text": "The two homotopies of steps 3 and 4 exhibit $\\Psi_{x,d}$ as a simplicial homotopy inverse to $\\Phi_{x,d}$ (choose representatives of the canonical composition classes). Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that each $\\Phi_{x,d}$ is a weak homotopy equivalence, hence an equivalence of spaces. This also covers empty mapping spaces: the actual maps in both directions and both inverse homotopies still exist; no vertex of a mapping space was chosen. For the application to the space quasicategory, the inverse witnesses can also be read directly in its coherent-nerve model [def-coef-infinity-category-of-spaces]. For Kan complexes $A,B$, put $f=\\Phi_{x,d}:A\\to B$ and $g=\\Psi_{x,d}:B\\to A$. The maps $gf\\simeq1_A$ and $fg\\simeq1_B$ give the two inverse triangles in $N_{\\mathrm{hc}}(\\mathbf{Kan})$: in the subset-poset nerve, $\\mathfrak C[\\Delta^2](0,2)$ is $\\Delta^1$, with its first endpoint the long edge and its second endpoint the composite of the consecutive edges. Send this interval to the homotopy between $1_A$ and $gf$, take edges $01=f$, $12=g$, $02=1_A$, and take the other mapping posets to their corresponding constant maps. This is an enriched functor $\\mathfrak C[\\Delta^2]\\to\\mathbf{Kan}$, hence the first required $2$-simplex; interchange $A,B,f,g$ for the second. The necessary orientation of each homotopy is available because [lem-cbc-kan-mapping-homotopy-invariance], applied with $u=1_A$ or $1_B$, says that $\\operatorname{Fun}(A,A)$ and $\\operatorname{Fun}(B,B)$ are Kan: reverse an edge $r\\to s$ by filling the $2$-horn with edges $01:r\\to s$ and $02=1_r$. Thus both inverse triangles are actual simplices, as required by the equivalence-edge definition. Step 1 has already constructed $\\Phi$ as an edge of $\\operatorname{Fun}(B,\\mathcal S)$. Since $\\mathcal S$ is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], [lem-coef-infinity-pointwise-equivalences] applies with target $\\mathcal S$: this coherent transformation is an equivalence, since every component is one. Its inverse component homotopy classes are those of $\\Psi$ by the two inverse equations. This proves the stated equivalence of bifunctors with its simplicial coherence, rather than only objectwise equivalences.",
+   "text": "The homotopies in steps 3 and 4 make $\\Psi_{x,d}$ a simplicial homotopy inverse of $\\Phi_{x,d}$. By [lem-cbc-simplicial-homotopy-equivalence-weak], each component $\\Phi_{x,d}$ is a weak homotopy equivalence, including empty mapping spaces. Apply [lem-coef-kan-coherent-nerve-inverse-equivalence] to the two maps of Kan complexes: it supplies actual inverse-triangle $2$-simplices in $\\mathcal S_{\\mathcal U}=N_{\\mathrm{hc}}(\\mathbf{Kan}_{\\mathcal U})$, so each component is an equivalence edge. Step 1 already constructed $\\Phi$ as an edge of $\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})$. The target is a quasicategory by [lem-coef-kan-coherent-nerve-quasicategory], so [lem-coef-infinity-pointwise-equivalences] upgrades this coherent transformation to an equivalence. Its inverse component homotopy classes are represented by $u\\mapsto\\epsilon_d\\circ F(u)$ by steps 1 and 4, proving the stated coherent bifunctor equivalence.",
    "uses": [
     "lem-cbc-simplicial-homotopy-equivalence-weak",
-    "lem-coef-infinity-pointwise-equivalences",
-    "def-coef-infinity-category-of-spaces",
-    "lem-cbc-kan-mapping-homotopy-invariance",
-    "lem-coef-kan-coherent-nerve-quasicategory"
+    "lem-coef-kan-coherent-nerve-inverse-equivalence",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-infinity-pointwise-equivalences"
    ],
    "elementary": false,
    "source": {
@@ -115,7 +114,7 @@
   "lem-cbc-simplicial-composition-spine",
   "lem-cbc-simplicial-homotopy-equivalence-weak",
   "lem-coef-infinity-pointwise-equivalences",
-  "lem-cbc-kan-mapping-homotopy-invariance"
+  "lem-coef-kan-coherent-nerve-inverse-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -195,7 +194,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-bicartesian-interval-adjunction",
@@ -208,7 +207,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-adjunction-mapping-equivalence",
   "worker": "stage1",
-  "summary": "Statement unchanged. Constructed both coherent adjunct transformations using generic Hom-functor functoriality; expanded naturality as a mixed-endpoint prism on whole mapping spaces; computed both inverse homotopies using the separately supplied triangles; upgraded the natural transformation to an equivalence by the existing pointwise criterion. One new statement-only generic Hom-functor lemma, no Mathlib leaves. Avoided circular use of space-transport-classification and enriched-Hom comparison.",
+  "summary": "Dedicated repair of the final step: extracted the coherent-nerve inverse-edge argument into the statement-only node lem-coef-kan-coherent-nerve-inverse-equivalence, shortened step 5 to cite it, removed the now-unused mapping-homotopy-orientation tool citation, and retained the original adjunction route and statement.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent derived coefficient adjunction, beneath the suspension-square construction and local universal-arrow criterion; passing from a coherent unit/counit adjunction to the explicitly stated adjunct equivalences.",
   "tool_uses": [
    {
@@ -222,10 +221,6 @@
    {
     "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
     "why": "Generic conversion of explicit simplicial inverse homotopies to realization-defined weak equivalences; no coefficient-unit statement gives this simplicial version."
-   },
-   {
-    "node": "lem-cbc-kan-mapping-homotopy-invariance",
-    "why": "Only its Kan internal mapping-object assertion is used, at identity u, to orient the two explicit inverse homotopies in the coherent nerve of Kan complexes. This generic simplicial fact is independent of the coefficient route."
    }
   ]
  },
@@ -238,10 +233,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NY-8ab8303c5",
-  "group": "NY",
+  "reviewer": "NT-cc-Q123-02b666d7a",
+  "group": "Q123",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-8ab8303c5 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-infinity-hom-bifunctor-functoriality, the statements of all 9 cited nodes, the unit record, and the blueprint proof of prop-coef-integral-exceptional-adjoint paragraph 2. Read Kerodon 02F1, 046J and 00LJ online. The item statement agrees with 02F1/02EK and is unchanged. The new node states the 046J Hom-functor comparison with correct variance. It is not a clause of the item (D1) and was tested on T=id, empty, ordinary nerves and T to a point. Its overlap with lem-coef-space-transport-classification (existence of H_E) is unavoidable: that node, enriched-hom-twisted-arrow-comparison and coherent-nerve-comparison all have dependency paths back to the item (I checked by closure). Step 1: the variance of both adjunct transformations and their components v->G(v)eta_x and u->eps_d F(u) are correct. Step 2: the mixed-endpoint right-pinched space of E x Delta^1 is Map_E(a,b) x pt, and functoriality of composition gives a naturality homotopy of whole spaces. Steps 3 and 4: each composite is correctly ordered, and each step uses the correct one of the two independent triangles. Step 5: the equivalence 2-simplex in N_hc(Kan) via C[Delta^2](0,2)=Delta^1 and the homotopy reversal through the Kan property of Fun(A,A) are correct. The four declared generic tool_uses (from sk-prop-sf-cbc) are accepted. Fault C1/C4: steps 1 and 5 apply functor-cone-calculus and pointwise-equivalences with target S=N_hc(Kan), which needs S to be a quasicategory (Cordier-Porter). No cited node states this, and the only DAG node that does (coherent-nerve-comparison) is cyclic. Repaired: added the statement-only unsplit node lem-coef-kan-coherent-nerve-quasicategory (Kerodon 00LJ, Thm 2.4.5.1; its stmt_deps are definitions only; acyclic; Mathlib grep shows SimplicialNerve.lean:193 with no quasicategory theorem, so no match). It is cited in steps 1 and 5 and proof_deps is updated. Nothing else changed.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-02b666d7a (reviewer sub-agent of L); spot-checked: Repair delivery after the human's return that step 5 (2248 chars) hid lemmas. Only step 5, proof_deps, status and split_report differ from the side DAG; steps 1-4, the statement and the lean record are byte-identical, so the statement is not weakened. Steps 1-4 re-read: variance of Phi/Psi correct, the forced interval coordinate in step 2 is right, and each of steps 3 and 4 uses the correct one of the two independent triangles, in the right order. New step 5 (930 chars) checked use by use: simplicial-homotopy-equivalence-weak (either orientation, no Kan or nonempty hypothesis); the new lemma applied with W=U to the U-small Kan values; kan-coherent-nerve-quasicategory as the target hypothesis; pointwise-equivalences (01DK) applied to the actual edge Phi of Fun(B,S_U) built in step 1. proof_deps equals the union of the uses. The three declared sk-prop-sf-cbc tool uses are accepted. The node-level tool_uses still lists kan-mapping-homotopy-invariance, which is now stale and maintainer-owned. New node lem-coef-kan-coherent-nerve-inverse-equivalence: true, not a clause of the item (no adjunction data), no cycle. Two whole-DAG scans found no duplicate; the closest hits, cofibrant-simplicial-inversion and right-fibration-fibers, state something else. Checked the subset-poset convention: C[Delta^2](0,2) runs from the long edge to the composite, so the triangle needs a homotopy 1_A->gf; outer-horn reversal in the Kan complex Fun(A,A) makes either orientation valid. Kerodon 00M5 (Prop 2.4.6.10) read online: it uses the opposite orientation (composite to long edge), which the node handles. Cases tested: empty, identity, discrete, disconnected; nonempty A with empty B cannot meet the hypotheses. FIX (B2/B3): the statement credited simplicial homotopies and the coherent nerve to def-cbc-enhanced-diagrams-cones, which defines neither, and its conclusion ('supply the two inverse-triangle 2-simplices') was vague. Rewrote the statement only: each notion is attributed to the node that defines it, simplicial homotopy is defined inline with either orientation, and the conclusion is explicit 2-simplices sigma, tau with edges (f,g,1_A) and (g,f,1_B), so f is an equivalence edge with inverse g. Same hypotheses and generality; all other fields unchanged; the item still reads correctly.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinityAdjunctionMappingEquivalence",

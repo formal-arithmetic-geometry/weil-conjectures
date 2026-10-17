@@ -43,54 +43,89 @@
    }
   },
   {
-   "text": "First make the scalar identifications in this proof sheaf-level identifications. By [sk-prop-sfb-qlbar-colimit-x], $F_T=\\mathcal O_{F,T}[1/\\ell]$ and $\\Qlb_T=\\varinjlim_{G\\supset F}G_T$, where $G/F$ runs over finite extensions inside $\\Qlb$ (this is cofinal, using composita). The balanced-tensor construction [sk-def-sfb-change-of-scalars] gives $F_T\\otimes_{\\mathcal O_{F,T}}N=\\varinjlim(N\\xrightarrow\\ell N\\xrightarrow\\ell\\cdots)$: a balanced map from either side is exactly a compatible sequence of maps from these copies of $N$. Thus this scalar functor is exact, since filtered colimits are exact in the module category by [prop-pur-kinjective-resolutions-exist]. For the second scalar change, a balanced map from $\\Qlb_T\\otimes_{F_T}P$ to a sheaf $H$ restricts to balanced maps from every $G_T\\otimes_{F_T}P$ to $H$, compatible with field inclusion. Conversely such compatible maps define a balanced map from the filtered union $\\Qlb_T$ and $P$ to $H$, hence a unique map from their tensor product. This proves $\\Qlb_T\\otimes_{F_T}P\\simeq\\varinjlim_G(G_T\\otimes_{F_T}P)$. Each $G_T$ is finite free over $F_T$ by [sk-prop-sfb-cartesian-coefficients] (2), so each tensor is a finite direct sum and is exact; filtered exactness again proves exactness for $F_T\\to\\Qlb_T$. Finite field scalar change is exact for the same finite-free reason. By [def-sfb-left-derived-exact], these derived scalar functors agree with their termwise ordinary scalar functors. Consequently the compatibility isomorphisms of [det-prop-scalar-six-pullback] can be used for the corresponding ordinary scalar changes on sheaves whenever extension by zero is exact; this last hypothesis is checked in Step 4.\n\nTake a finite stratification of $X$ adapted to $M$: the constructible/lisse characterization of [sk-lem-coefficient-heart] supplies it. On every initial stratum $S$ put $L=M|_S$; the scheme-theoretic verification in Step 3 shows that $S$ is a standing scheme, as required for lisse descent. If $\\Lambda=E$ set $F=E$ and $L_F=L$. If $\\Lambda=\\Qlb$, part (1) of [sk-thm-sfb-qlbar-two-colimit] supplies a finite subextension $F_0/\\mathbf Q_\\ell$ inside $\\Qlb$ and a lisse $F_{0,S}$-module $L_{F_0}$ with $(L_{F_0})_{\\Qlb}\\simeq L$. Replace $F_0$ by its compositum $F=EF_0$: the products of finite bases span a finite-dimensional subalgebra containing $E$ and $F_0$, which is a field because multiplication by a nonzero element is an injective endomorphism of this finite-dimensional algebra and hence surjective. Set $L_F=F_S\\otimes_{F_{0,S}}L_{F_0}$. Local trivializations show it is lisse of the same finite rank. Part (3) of [det-prop-scalar-six-pullback] gives $(L_F)_{\\Qlb}\\simeq L$, using the ordinary/derived identification just proved. Thus the field on every stratum is among those quantified in the hypothesis.",
+   "text": "The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: $\\operatorname{Spec}k$ is Noetherian since a field has only the ideals $0,k$. A locally closed subscheme $S$ is closed in an open $V\\subset X$ by [def-weil-closed-immersion]. The open $V$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Choose finitely many distinguished affine opens of finite-type affine charts of $X$ covering $V$; their rings are finitely generated $k$-algebras (a localization at $f$ adjoins one generator $f^{-1}$). The corresponding charts of $S$ have quotient rings, again finitely generated. Thus $S$ is finite type over $k$. It is separated: its diagonal is the inverse image of the closed diagonal of $X$ under $S\\times_kS\\to X\\times_kX$. On charts this equality follows by imposing equality of the two coordinate maps and then their quotient relations; an immersion has no two different lifts of the same point or scheme map. The closed-diagonal criterion is [def-weil-proper-morphism]. Hence $S$ is a standing scheme, and is Noetherian by the same finite-type theorem. The same argument applies to a closed subscheme such as the closure of $S$. All these schemes are qcqs by [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
+    "place": "Strata and Lattices: verify the ambient hypotheses on every stratum."
+   }
+  },
+  {
+   "text": "For every finite coefficient field $F$ and scheme $T$, [sk-prop-sfb-qlbar-colimit-x] identifies $F_T$ with $\\mathcal O_{F,T}[1/\\ell]$. By the balanced tensor universal property [sk-def-sfb-change-of-scalars],\n$$F_T\\otimes_{\\mathcal O_{F,T}}N\\cong\\varinjlim(N\\xrightarrow{\\ell}N\\xrightarrow{\\ell}\\cdots).$$\nIndeed a map out of the tensor is a compatible family of $\\mathcal O_{F,T}$-linear maps from $N$, with the $r$th copy representing $\\ell^{-r}\\otimes N$; this also gives its inverse. Filtered colimits are exact by [prop-pur-kinjective-resolutions-exist], so this localization is exact. Finite field scalar change is exact by [lem-sfb-subfield-flat], and extension to $\\Qlb$ is exact by [lem-sfb-qlbar-flat]: those statements supply finite-limit preservation, while the extension-of-scalars left adjunction of [sk-def-sfb-change-of-scalars] supplies finite colimits. By [def-sfb-left-derived-exact], all these left derived functors agree with their ordinary termwise functors. We may therefore use [det-prop-scalar-six-pullback] on degree-zero modules once the relevant extension by zero has also been checked exact.",
    "uses": [
     "sk-prop-sfb-qlbar-colimit-x",
     "sk-def-sfb-change-of-scalars",
     "prop-pur-kinjective-resolutions-exist",
-    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat",
     "def-sfb-left-derived-exact",
-    "det-prop-scalar-six-pullback",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
+    "place": "Lattices: exact ordinary scalar change and its agreement with derived scalar change."
+   }
+  },
+  {
+   "text": "Choose a finite stratification adapted to $M$ using the constructible/lisse characterization in [sk-lem-coefficient-heart], and write $L=M|_S$ on an initial stratum. Step 2 verifies that $S$ is a standing scheme. For $\\Lambda=E$, put $F=E$ and $L_F=L$. For $\\Lambda=\\Qlb$, [sk-thm-sfb-qlbar-two-colimit] (1) gives a finite subextension $F_0/\\mathbf Q_\\ell$ and a lisse $L_{F_0}$ with $(L_{F_0})_{\\Qlb}\\cong L$. Replace $F_0$ by the compositum $F=EF_0$ inside $\\Qlb$. This is finite: products of finite bases span a finite-dimensional subalgebra containing both fields; multiplication by any nonzero element is injective, hence surjective, so this algebra is itself a field. Put $L_F=F_S\\otimes_{F_{0,S}}L_{F_0}$. Local free trivializations remain local free trivializations of the same rank after scalar change. Transitivity [det-prop-scalar-six-pullback] (3), interpreted ordinarily by Step 3, identifies $(L_F)_{\\Qlb}$ with $L$. Thus every field to which we will apply the premise is a finite extension of the fixed $E$.",
+   "uses": [
     "sk-lem-coefficient-heart",
-    "sk-thm-sfb-qlbar-two-colimit"
+    "sk-thm-sfb-qlbar-two-colimit",
+    "det-prop-scalar-six-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
-    "place": "*Strata.* and *Lattices.*; spell out the flat scalar identifications using the existing coefficient colimit statements."
+    "place": "Strata: descend the lisse restrictions and enlarge their coefficient field to contain E."
    }
   },
   {
-   "text": "The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over $\\operatorname{Spec}k$ (a field has only the ideals $0,k$, so this base is Noetherian). Each locally closed stratum is again a standing scheme. By the immersion definition [def-weil-closed-immersion], it is closed in an open subscheme of $X$. This open is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so finitely many distinguished opens in finite-type affine charts cover it; the stratum has quotient coordinate rings of these finitely generated localized $k$-algebras. Hence it is finite type over $k$. Its diagonal is the restriction of the diagonal of $X$ to the product of the stratum with itself; on affine charts its ideal is generated by the images of the same diagonal equations, so it is closed and the stratum is separated. The closure of every stratum in $X$ is likewise Noetherian (on affine charts its ring is a quotient of a Noetherian ring); all these schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [sk-lem-stratified-lattice] to each $L_F$ from Step 2. This gives finite locally closed partitions of the initial strata with lisse $\\mathcal O_F$-lattices. Their union is a finite locally closed stratification of $X$. Here the scheme structures also compose: write an initial stratum as closed in $V\\subset X$ open, and a lattice stratum as closed in $U\\subset S$ open. Choose $W\\subset V$ open with $U=S\\cap W$; then $U$ is closed in $W$ and the lattice stratum is closed in $W$, by composing the quotient ring maps defining the two closed immersions. Thus it is locally closed in $X$, not merely a subscheme with the appropriate set-theoretic image. Apply [det-lem-coefficient-heart-common-stratification] (1) to refine and order this partition as $T_1,\\dots,T_m$, with $V_j=\\bigcup_{i\\le j}T_i$ open in $X$. Restrict each previously chosen lattice to the refined stratum; restricting a local trivialization preserves its finite free rank and the equality $L_0[1/\\ell]=L_F$. By [sk-prop-sfb-cartesian-coefficients] (1), module restriction along these immersions is canonically naturally isomorphic to the exact lift of inverse image: the underlying sheaf is the inverse image and its module action is transported along the inverse of the coefficient-ring isomorphism. In the rational case $M|_{T_i}$ is this localized lattice. In the $\\Qlb$ case part (1) of [det-prop-scalar-six-pullback] identifies restriction of $(L_F)_{\\Qlb}$ with the scalar extension of $L_F|_{T_i}$. Thus this final stratification is adapted to $M$ and each restriction has the required lattice model.",
+   "text": "Apply [sk-lem-stratified-lattice] on each initial stratum to the lisse $L_F$ of Step 4. It gives finitely many locally closed pieces with lisse $\\mathcal O_F$-lattices $L_0$ and $L_0[1/\\ell]\\cong L_F$ there. Their union is a finite locally closed stratification of $X$. This assertion respects scheme structures: write $S$ closed in $V\\subset X$ open, and a lattice piece closed in $U\\subset S$ open; choose $W\\subset V$ open with $U=S\\cap W$. Then $U$ is closed in $W$, and the lattice piece is closed in $W$ because the two quotient maps of rings compose to a quotient map. This uses the immersion description in [def-weil-closed-immersion]. Apply [det-lem-coefficient-heart-common-stratification] (1) to order a refinement as $T_1,\\ldots,T_m$ with $V_j=\\bigcup_{i\\le j}T_i$ open in $X$. Restrict each chosen lattice to its refined piece. Pullback coefficients and restriction are the exact inverse-image lift by [sk-prop-sfb-cartesian-coefficients] (1), so a restricted local free basis stays a basis. Restriction of $L_0[1/\\ell]\\cong L_F$ remains that equality, by [det-prop-scalar-six-pullback] (1) and Step 3. The same clause identifies restriction of $(L_F)_{\\Qlb}$ with scalar extension of its restriction. Hence $M|_{T_i}$ is the localized lattice in the $E$ case, and its $\\Qlb$ scalar extension in the other case.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "sk-lem-stratified-lattice",
+    "def-weil-closed-immersion",
     "det-lem-coefficient-heart-common-stratification",
-    "det-prop-scalar-six-pullback",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-closed-immersion"
+    "det-prop-scalar-six-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
-    "place": "*Lattices.*; refine lattice strata and order them globally on X."
+    "place": "Lattices: refine lattice strata globally and restrict their models."
    }
   },
   {
-   "text": "Apply [det-lem-coefficient-heart-filtration] to $M$ on $X$ and the final adapted ordered stratification of Step 3. It gives a finite filtration with quotients $b_{i!}(M|_{T_i})$, where $b_i\\colon T_i\\hookrightarrow X$. Choose the lattice $L_{0,i}$ and its coefficient field $F$ supplied above. In the $E$ case $F=E$, and part (2) of [det-prop-scalar-six-pullback] identifies the quotient with $(b_{i!}L_{0,i})[1/\\ell]$. In the $\\Qlb$ case the same part (2), first for $\\mathcal O_F\\to F$ and then for $F\\to\\Qlb$, identifies it with $((b_{i!}L_{0,i})[1/\\ell])_{\\Qlb}$. The current scalar comparison requires commutative condensed rings and the standing separated finite-type scheme setting in its clause (2): all three coefficient rings are commutative, and both $X$ and $T_i$ are standing schemes by Step 3. Its $a_!$ is exact termwise extension by zero and its tensors are ordinary derived tensors without completion, exactly the scalar functors used here. These are sheaf-level identities by Step 2 and the following verification of exactness of $b_{i!}$. In $b_i=i\\circ u$, the closure $\\overline{T_i}$ and $X$ are qcqs by Step 3, and $u$ is quasi-compact: every open subset of a Noetherian scheme is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply [det-sf-open-closed-sequence-ring-sheaf] to $u$ and its closed complement on $\\overline{T_i}$ to obtain exactness of $u_!$, and to $i$ and its open complement on $X$ to obtain exactness of $i_*$. All coefficient rings in this application are the restricted rings, identified with the prescribed pulled-back rings by [sk-prop-sfb-cartesian-coefficients] (1). This works for $\\mathcal O_F$, $F$, and $\\Qlb$, so the exact composite $b_{i!}=i_*u_!$ acts termwise on complexes and the scalar compatibility of [det-prop-scalar-six-pullback] restricts to sheaves. The hypothesis applies to every $b_i$, $F$, and $L_{0,i}$, so every quotient satisfies the bound. Step 1 gives $R^qp_*M=0$ for $q>c$. No exactness of scalar extension of an entire filtration is needed: the filtration is formed directly for $M$ in its target coefficient category.",
+   "text": "For each final stratum $b_i:T_i\\hookrightarrow X$, write $b_i=i\\circ u$, with $u:T_i\\hookrightarrow\\overline{T_i}$ open and $i:\\overline{T_i}\\hookrightarrow X$ closed. Step 2 makes $X$ and $\\overline{T_i}$ qcqs. Every open in these Noetherian schemes is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; thus $u$ and the open complement of $i$ are quasi-compact. Apply [det-sf-open-closed-sequence-ring-sheaf] to $u$ and its closed complement on $\\overline{T_i}$, and to $i$ and its open complement on $X$. Its clauses (1) and (2) make $u_!$ and $i_*$ exact. By [sk-prop-sfb-cartesian-coefficients] (1), the restricted rings are precisely the prescribed pulled-back coefficient rings. This applies to $\\mathcal O_F,F,\\Qlb$, so $b_{i!}=i_*u_!$ is exact in every required coefficient category. Consequently clause (2) of [det-prop-scalar-six-pullback] gives sheaf-level scalar comparisons, by Step 3. Its commutative-ring hypothesis holds for all these rings, and its standing-scheme hypothesis holds for $X,T_i$ by Step 2.",
    "uses": [
-    "det-lem-coefficient-heart-filtration",
-    "det-prop-scalar-six-pullback",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "det-sf-open-closed-sequence-ring-sheaf",
-    "sk-prop-sfb-cartesian-coefficients"
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-prop-scalar-six-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
-    "place": "*Lattices.*; scalarized stratum pieces and finite-extension conclusion."
+    "place": "Lattices: exact locally closed extension and the hypotheses of scalar compatibility."
+   }
+  },
+  {
+   "text": "Apply [det-lem-coefficient-heart-filtration] directly to $M$ and the ordered adapted stratification of Step 5. Since $X$ is Noetherian and $\\Lambda=E$ or $\\Qlb$, it gives a finite filtration with quotients $b_{i!}(M|_{T_i})$. Choose the lattice $L_{0,i}$ over its field $F$ from Step 5. In the $E$ case $F=E$, and [det-prop-scalar-six-pullback] (2) identifies the quotient with $(b_{i!}L_{0,i})[1/\\ell]$. In the $\\Qlb$ case use that clause first along $\\mathcal O_F\\to F$ and then along $F\\to\\Qlb$ to identify it with $((b_{i!}L_{0,i})[1/\\ell])_{\\Qlb}$. Steps 3 and 6 justify these comparisons on sheaves. The premise applies to each immersion, finite field extension $F/E$, and lisse finite free lattice, so every quotient satisfies the bound. The finite-filtration induction of Step 1 now proves $R^qp_*M=0$ for all $q>c$.",
+   "uses": [
+    "det-lem-coefficient-heart-filtration",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-reduction.proof.md",
+    "place": "Lattices and Extensions: identify the actual filtration quotients and conclude."
    }
   }
  ],
@@ -99,21 +134,24 @@
   "lem-sp-grothendieck-enough-injectives",
   "def-sfb-module-lower-star",
   "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "sk-prop-sfb-qlbar-colimit-x",
   "sk-def-sfb-change-of-scalars",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat",
   "def-sfb-left-derived-exact",
   "det-prop-scalar-six-pullback",
   "sk-lem-coefficient-heart",
   "sk-thm-sfb-qlbar-two-colimit",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "sk-lem-stratified-lattice",
   "det-lem-coefficient-heart-common-stratification",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "def-weil-closed-immersion",
-  "det-lem-coefficient-heart-filtration",
-  "det-sf-open-closed-sequence-ring-sheaf"
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-lem-coefficient-heart-filtration"
  ],
  "proof_origin": {
   "by": "agent",
@@ -211,10 +249,52 @@
    "results": "{\"t\": \"2026-10-16T15:46:27Z\", \"tool\": \"leansearch\", \"query\": \"A cohomological vanishing bound stable under extensions holds for constructible sheaves once it holds on all stratum extensions of integral lattices after localization and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"CategoryTheory.Sheaf.H\", \"IntermediateField.coe_extendScalars\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"Bornology.IsVonNBounded.extend_scalars\", \"CochainComplex.isStrictlyGE_iff\", \"ChevalleyThm.chevalley_polynomialC\", \"SheafOfModules.IsQuasicoherent.casesOn\"], \"digest\": \"8b8ad9f25dfa24fb\"}",
    "date": "2026-10-16",
    "verdict": "no match: hits concern module localization, sheaf cohomology definitions, projective dimension, bounded complexes, and quasicoherent sheaves; no declaration states the conditional reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image vanishing for all constructible sheaves follows from vanishing for extension by zero of lisse finite free integral lattices and scalar extensions",
+   "results": "{\"t\": \"2026-10-17T07:59:58Z\", \"tool\": \"leansearch\", \"query\": \"Higher direct image vanishing for all constructible sheaves follows from vanishing for extension by zero of lisse finite free integral lattices and scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"isZero_Ext_succ_of_projective\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"LightCondensed.lanLightCondSet\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_bot\", \"SheafOfModules.pullbackObjFreeIso\", \"ZLattice.comap\"], \"digest\": \"2f4c27e9f3a9c042\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; none states the constructible pro-étale lattice reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image vanishing for all constructible sheaves follows from vanishing for extension by zero of lisse finite free integral lattices and scalar extensions",
+   "results": "{\"t\": \"2026-10-17T08:00:09Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image vanishing for all constructible sheaves follows from vanishing for extension by zero of lisse finite free integral lattices and scalar extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid\", \"CompHausLike.LocallyConstantModule.functor\", \"instAbelianLightCondMod\", \"instAbelianCondensedMod\", \"LightCondMod.isDiscrete_tfae\", \"CondensedMod.ofSheafCompHaus\"], \"digest\": \"872d85719300a529\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; none states the constructible pro-étale lattice reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher derived direct images is stable under finite filtrations, and constructible l-adic sheaves reduce after stratification to local systems with integral lattices",
+   "results": "{\"t\": \"2026-10-17T08:21:47Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of higher derived direct images is stable under finite filtrations, and constructible l-adic sheaves reduce after stratification to local systems with integral lattices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafStonean\"], \"digest\": \"987a233d4ca303a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; none states the constructible pro-étale lattice reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reduction of proper heart bound from torsion lattices to constructible complexes",
+   "results": "{\"t\": \"2026-10-17T08:34:51Z\", \"tool\": \"leanfinder\", \"query\": \"reduction of proper heart bound from torsion lattices to constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"3abb8bad795ab0aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; none states the constructible pro-étale lattice reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor derived pushforward constructible heart cohomology bound",
+   "results": "{\"t\": \"2026-10-17T08:34:51Z\", \"tool\": \"loogle\", \"query\": \"Functor derived pushforward constructible heart cohomology bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `derived`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "heart.*bound|constructible.*lattice",
+   "results": "{\"t\": \"2026-10-17T08:34:52Z\", \"tool\": \"grep\", \"query\": \"heart.*bound|constructible.*lattice\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits; none states the constructible pro-étale lattice reduction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -234,8 +314,8 @@
   "date": "2026-10-17",
   "item": "det-proper-heart-bound-reduction",
   "worker": "stage1",
-  "summary": "Repaired the prior attempt: explicit ambient standing setting and coefficient field in both cases; cite the general long exact sequence with its hypotheses; descend lisse restrictions and enlarge to a field containing E; refine lattice strata globally on X and apply the existing filtration there; use scalar/extension-by-zero compatibility on each quotient. No new nodes. Return repair: rebased the retained worker fields onto the current DAG record; re-read both changed cited statements, sk-thm-sfb-qlbar-two-colimit and sk-prop-sfb-cartesian-coefficients. Lisse descent still gives exactly Step 2; Step 3 now states the canonical lift of inverse image with its transported module action. Revalidated all 25 step citations and refreshed the four stale witnesses. No new nodes or statement change in this repair.",
-  "blueprint": "Steps 1, 2, and 3–4 realize respectively the Extensions, Strata, and Lattices paragraphs of the current blueprint proof, without replacing the lattice route.",
+  "summary": "Retained the previous statement and lattice route; checked every cited current statement. Separated the long scalar, geometric, and filtration arguments into seven steps and reused existing subfield and algebraic-closure flatness lemmas instead of hiding those comparisons inline. Generated current verbatim witnesses for every citation. No new nodes and no statement change.",
+  "blueprint": "Step 1 realizes Extensions; Steps 2 and 4 realize Strata and its ambient hypotheses; Steps 3 and 5–7 realize Lattices, including exact scalar change, global refinement, extension-by-zero comparison, and the final filtration induction.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -284,6 +364,14 @@
    {
     "node": "det-sf-open-closed-sequence-ring-sheaf",
     "why": "The generic ring-sheaf theorem proves exactness of open extension and closed direct image also for integral coefficients; the rational coefficient-heart statement alone does not supply that case."
+   },
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Finite-field scalar extension exactness is a generic coefficient tool needed for the scalar comparison, without replacing the lattice route."
+   },
+   {
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Algebraic-closure scalar extension exactness is the existing generic flatness input explicitly required by the blueprint Lattices paragraph."
    }
   ]
  },
@@ -299,15 +387,17 @@
   "sk-prop-sfb-qlbar-colimit-x",
   "sk-prop-sfb-cartesian-coefficients",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "det-sf-open-closed-sequence-ring-sheaf"
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q04-71356f770",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q151-a620b24eb",
+  "group": "Q151",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-71356f770 (reviewer sub-agent of L); spot-checked: I read the whole item and its source (main-20261015 sk-lem-proper-heart-bound-reduction .md/.proof.md), all six steps of the unit sk-lem-proper-heart-bound, and the full current statements of all 19 proof dependencies and the statement dependencies. I also checked Stacks 015B (derived.tex:7048) and 01T6 (morphisms.tex:2765). Statement: fixing E inside Qlb and quantifying over F/E strengthens the source's unbound-E reading, because the result holds for every E, E=Q_ell included. The standing separated finite-type over k (char p, p≠ell) context is the chapter convention required by the lattice and coefficient-heart lemmas. Saying the vanishing 'also holds' for [1/ell] and the Qlb extension is equivalent to the source's 'passes to'. Nothing is weakened. Step 1: the site is V-small, so the module category is Grothendieck with enough injectives; p_* is additive and left exact; 015B gives the exact segment; the filtration induction is correct. Step 2: localization and the Qlb extension are exact (ell-colimit, filtered union of finite free G_X, exact filtered colimits). LF≅D(F) identifies derived with ordinary scalar change. Descent uses only two-colimit assertion (1). The compositum EF_0 is a field, and transitivity (3) gives (L_F)_Qlb≅L. Step 3: the strata are standing schemes. Composition of locally closed immersions is written out. The lattice lemma's 'lisse' matches the hypothesis. The ordered refinement on Noetherian X is legitimate, and restrictions keep the lattice and scalar identifications. Step 4: the filtration gives the quotients b_!(M|T). Scalar-six (2) holds under its revised hypotheses (commutative rings, standing schemes, a_! from coherence lemma = i_*u_!). The ring-sheaf open-closed theorem makes u_! and i_* exact for O_F as well (qcqs and quasi-compactness checked). The quotients satisfy the premise. Small cases checked: point with identity and c=0 or c=-1, empty X, zero-rank strata. No new nodes. No duplicate: the heart-bound siblings state different results. No cycle. Dependencies exist and none is merged, and proof_deps equals the union of step uses. I accept all 12 declared generic tool_uses; none replaces the lattice route. No SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-a620b24eb (reviewer sub-agent of L); spot-checked: I read all of the mathematics and changed nothing. The delivery re-splits the already reviewed item into 7 steps: statement and stmt_deps are unchanged, there are no new nodes, and the unit record is untouched. Statement: compared with the main-20261015 .md, it covers every F/E in Qlb including F=E, its 'also holds' is equivalent to the source's 'passes to', and it adds the standing setting explicitly. It is not weakened. It is a lemma, not a target, so there is no base-change morphism to check; the coefficients are module objects over the pulled-back O_F, F and Qlb throughout. Checks by step: S1, the Grothendieck module category from prop-pur-kinjective plus enough injectives make the long exact sequence of lem-weil-pbc-derived-functor-long-exact apply, and R^q=0 for q<0 covers negative c. S2, X is Noetherian, strata are finite type (localization and quotient charts) and separated (S->X is a monomorphism, so the diagonal is a base change of the closed one), and qcqs. S3, F_T=O_F[1/l] from qlbar-colimit-x, tensor = l-colimit (checked through the universal property), lem-sfb-subfield-flat and lem-sfb-qlbar-flat plus the left adjoint give exactness, and LF=D(F) holds because sk-def-sfb-coefficient-change defines the tensor as L(Ext). S4, only clause (1) of the two-colimit theorem is used, and the compositum EF_0 is a field. S5, the stratified lattice is lisse = locally free of finite rank, as the premise needs; the immersion composition is written out, and the ordered refinement comes from common-stratification (1). S6, u_! and i_* are exact for an arbitrary ring sheaf on qcqs schemes, and coherence gives a_!=i_*u_!. S7, the filtration quotients a_k!(M|S_k), transported by scalar-six (2) once or twice, are exactly the sheaves the premise covers. Small cases: X empty, rank 0, a point with c=0 and c=-1, different fields on different strata. Graph: proof_deps equals the union of step uses, every id exists and none is merged, and a DFS finds no cycle. rg over the DAG finds no duplicate; the only related node, det-proper-heart-bound-rational, consumes this item. No SGA. I accept the two new tool_uses, lem-sfb-subfield-flat and lem-sfb-qlbar-flat: the blueprint's Lattices paragraph invokes this flatness itself and sk-thm-sfb-qlbar-two-colimit cites the same two nodes."
  },
  "lean_audit": {
   "master": {

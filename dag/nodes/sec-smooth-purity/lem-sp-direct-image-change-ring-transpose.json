@@ -16,9 +16,74 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_R=p_R^*$ and $R_R=Rp_{*,R}$ for $R=A,B$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $u=p$, $R_T=A_T$ and $S_T=B_T$. Its coefficient-square hypothesis holds: the identifications $c_A,c_B$ of [prop-weil-pbc-proetale-constant-ring-map] preserve constant sections, so both composites $p^{-1}A_Y\\to B_{\\bar X}$ send each locally constant $a$ to its image in $B$. They therefore agree as sheaf maps. Denote the supplied inverse-image comparison by $b:r_{\\bar X}L_B\\simeq L_Ar_Y$ and retain the specified direct-image comparison $d:r_YR_B\\simeq R_Ar_{\\bar X}$. In particular the cited adjunct identity applies on the ordinary unbounded categories in the statement.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
+   }
+  },
+  {
+   "text": "Write $\\theta_K:L_BT_YK\\simeq T_{\\bar X}L_AK$ for the coefficient/pullback identification in the definition of $\\gamma$. Under $r_TT_TK=K\\otimes_A^{\\mathbf L}B_T$ its underlying comparison is\n$$r_{\\bar X}(\\theta_K)\\circ b_{T_YK}^{-1}=\\tau_K,$$\nwhere $\\tau_K:L_A(K\\otimes_A^{\\mathbf L}B_Y)\\simeq L_AK\\otimes_A^{\\mathbf L}B_{\\bar X}$ is the tensor-pullback comparison. Here is the normalization check. Identified-coefficient module pullback is inverse image with transported action [def-weil-pbc-proetale-operations]; $b$ forgets the $B$-action in that same inverse image. For an $A_Y$-module complex $P$, the ordinary coefficient/pullback comparison is the balanced map $p^{-1}(P\\otimes_A B_Y)\\to p^{-1}P\\otimes_A B_{\\bar X}$ sending an inverse-image pure tensor of $x$ and $s$ to $p^{-1}x\\otimes c_B(p^{-1}s)$. Forgetting the action gives exactly the ordinary tensor comparison; the tensor/sheafification definition [def-pur-sheaf-tensor-product] makes equality on these local generators equality of sheaf maps. Apply this in every degree to a flat K-flat representative $P$ of $K$. Scalar extension is computed this way by [det-sp-scalar-extension-functor]; pullback preserves such representatives by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For the underlying tensor comparison one may also resolve $B_Y$; its augmentation to $B_Y$ gives the same map by the displayed pure-tensor equation and naturality. Localization and inversion of these quasi-isomorphisms preserve the equation, with independence of representatives by [lem-weil-pbc-site-derived-tensor-descent]. Thus the identity holds for every unbounded $K$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
+   }
+  },
+  {
+   "text": "Set $K=R_AN$ and $t_N=T_{\\bar X}(\\varepsilon^A_N)\\circ\\theta_{R_AN}:L_BT_YR_AN\\to T_{\\bar X}N$. By definition its $B$-adjunct is $\\gamma_N$. The precise adjunct clause of [lem-weil-pbc-ring-sheaf-change-adjunction], applied with $M=T_YR_AN$ and target $T_{\\bar X}N$, says that the $A$-adjunct of $r_{\\bar X}(t_N)\\circ b_{T_YR_AN}^{-1}$ is $d_{T_{\\bar X}N}\\circ r_Y(\\gamma_N)$. Expanding $t_N$ and using Step 2 gives\n$$r_{\\bar X}(t_N)\\circ b_{T_YR_AN}^{-1}=(\\varepsilon^A_N\\otimes_A^{\\mathbf L}1_{B_{\\bar X}})\\circ\\tau_{R_AN},$$\nsince extension sends a morphism $v$ to $v\\otimes^{\\mathbf L}1_B$ [det-sp-scalar-extension-functor]. The adjunction bijection is injective, so the displayed restricted map equals the projection map defined by this transpose. This proves the asserted identity without a projection-formula invertibility claim.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
+   }
+  },
+  {
+   "text": "For a morphism $v:N\\to N'$, counit naturality gives $v\\circ\\varepsilon^A_N=\\varepsilon^A_{N'}\\circ L_AR_A(v)$ [def-weil-pbc-proetale-operations]. Tensor it with $1_{B_{\\bar X}}$ and use the naturality of $\\tau$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. If $h_N=(\\varepsilon^A_N\\otimes^{\\mathbf L}1_B)\\circ\\tau_{R_AN}$, the resulting equation is\n$$(v\\otimes^{\\mathbf L}1_B)\\circ h_N=h_{N'}\\circ L_A(R_A(v)\\otimes^{\\mathbf L}1_B).$$\nTranspose this equation through $L_A\\dashv R_A$; the Hom bijection is natural in both variables by [def-weil-pbc-proetale-operations]. It says exactly that the projection maps, and hence the maps identified in Step 3, are natural in $N$. All comparisons above were on the unbounded categories; no step used flatness of $B$ over $A$ or boundedness of $N$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-sheaf-tensor-product",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Step 1 (counit-tensor definition), expanded using Stacks Tags 0D6D, 0D6E, 07A6 and 07A4"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -75,10 +140,59 @@
    "results": "25 generic CategoryTheory hits (FiberedCategory, Localization, Endofunctor); none states the target",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper derived direct image coefficient change projection transpose",
+   "results": "{\"t\": \"2026-10-17T08:21:59Z\", \"tool\": \"leanfinder\", \"query\": \"proper derived direct image coefficient change projection transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.proj_comp_transitionMap\", \"LightProfinite.proj_comp_transitionMapLE\", \"Profinite.NobelingProof.πs'\", \"Profinite.NobelingProof.πs\", \"Profinite.NobelingProof.πJ\", \"Profinite.IndexFunctor.map_comp_π_app\", \"LightProfinite.proj_comp_transitionMap'\", \"LightProfinite.proj_comp_transitionMapLE'\"], \"digest\": \"761bcffdcd628662\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary modules or generic adjunctions, not the coefficient-change projection identity on pro-etale unbounded derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-17T08:22:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary modules or generic adjunctions, not the coefficient-change projection identity on pro-etale unbounded derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*pushforward",
+   "results": "{\"t\": \"2026-10-17T08:22:01Z\", \"tool\": \"grep\", \"query\": \"projection.*pushforward\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with derived pushforward and identifies the scalar extension mate with the counit tensor identity",
+   "results": "{\"t\": \"2026-10-17T08:22:46Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars commutes with derived pushforward and identifies the scalar extension mate with the counit tensor identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"ModuleCat.homEquiv_extendScalarsId\"], \"digest\": \"9231deacc39e35a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary modules or generic adjunctions, not the coefficient-change projection identity on pro-etale unbounded derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficients projection map is the adjunction transpose of the counit tensored with identity",
+   "results": "{\"t\": \"2026-10-17T08:22:47Z\", \"tool\": \"leansearch\", \"query\": \"Derived change of coefficients projection map is the adjunction transpose of the counit tensored with identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.LiftLeftAdjoint.otherMap\"], \"digest\": \"d831df9be99a2c57\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary modules or generic adjunctions, not the coefficient-change projection identity on pro-etale unbounded derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|derived_counit|restrictScalars",
+   "results": "{\"t\": \"2026-10-17T08:25:16Z\", \"tool\": \"grep\", \"query\": \"rightAdjointProjectionMap|derived_counit|restrictScalars\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived|pullback.*tensor|tensor.*pullback",
+   "results": "{\"t\": \"2026-10-17T08:25:16Z\", \"tool\": \"grep\", \"query\": \"derived|pullback.*tensor|tensor.*pullback\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-direct-image",
@@ -95,5 +209,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-direct-image-change-ring-transpose",
+  "worker": "stage1",
+  "summary": "Expanded the coefficient-square hypothesis, checked the underlying canonical tensor/pullback normalization, applied the existing unbounded coefficient-adjunction transpose identity, and wrote out naturality. Statement unchanged; no new nodes. Fresh searches were logged with msearch.py; inherited searches retained.",
+  "blueprint": "Realizes det-sp-reduction-direct-image proof Step 1, the counit tensored with the identity normalization; Step 4 gives the naturality used in the ancestor Step 4. Does not alter the compactification or finite-window unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic identification p^{-1}R_Y≃R_X of constant pro-etale coefficient rings preserving constant sections, needed for the coefficient-square hypothesis of the change-adjunction; the unit has no coefficient-sheaf construction (same declaration as the parent det-sp-reduction-direct-image)."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic unbounded coefficient-change adjunction compatibility supplies the restriction-of-transposes identity; the unit has no such foundational adjunction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived pullback/tensor comparison and preservation of flat K-flat representatives normalize the map; the unit has no foundational tensor-pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization of flat K-flat representatives makes the elementary ordinary comparison independent of representatives; it replaces no geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a69bbc259",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a69bbc259 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full. The cited statements are: change-adjunction, constant-ring-map, operations, proetale-modules, scalar-extension, tensor-pullback, tensor-descent, sheaf-tensor and the dc-setting. I also read the parent det-sp-reduction-direct-image (its Steps 1, 6 and 7 define γ and consume this item at N=j_!M) and blueprint main-20261015 sk-lem-sp-reduction-direct-image.proof.md Steps 1 and 4. I checked Stacks 07A4 and 03EL at their labels, and the tags 0D6D, 0D6E and 07A6. The statement is a correct mate identity with no change of coefficient category; everything stays in ordinary uncompleted pro-étale D(A) and D(B). It is tested on B=A, N=0, empty X̄ and non-flat Z/ℓ²→F_ℓ with unbounded N. Step 1: the coefficient square holds because c_A and c_B preserve constants and sections of A_T are locally constant. Step 2: the directions of b^{-1} and θ check out, the balanced pure-tensor map is computed on flat K-flat representatives, and pullback is exact with identified coefficients. Step 3: this is the change-adjunction's final adjunct clause with M=T_Y R_A N and t=T(ε)∘θ, which gives transpose (ε⊗1)∘τ. Step 4: I verified the naturality identity. There are no new nodes and no duplicates; candidates checked: the etale-mate-isomorphism, projection-finite-constant, derived-scalar-extension-restriction-adjunction and projection-formula-comap nodes. The split is not circular. FIX (C8): Step 1 uses prop-weil-pbc-proetale-constant-ring-map, whose unit sk-thm-properbasechange is outside sk-lem-sp-reduction's route, without declaring it. I added a split_report.tool_uses entry for it in fixes/dag/nodes/sec-smooth-purity/lem-sp-direct-image-change-ring-transpose.json and changed nothing else. Accepted tool_uses: lem-weil-pbc-ring-sheaf-change-adjunction, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent and prop-weil-pbc-proetale-constant-ring-map.; 1 file(s) fixed by the reviewer"
  }
 }
