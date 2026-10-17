@@ -13,6 +13,8 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.WeilSheaf.FourierInversion
 public import WeilConjectures.WeilSheaf.StalkFunctor
+import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import WeilConjectures.WeilSheaf.TateTwist
 
 /-!
 # The curve perverse t-structure and Fourier exactness
