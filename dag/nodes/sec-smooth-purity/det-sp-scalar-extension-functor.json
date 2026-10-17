@@ -65,24 +65,18 @@
    }
   },
   {
-   "text": "To prove the remaining constructibility assertion, choose a common finite stratification $T=\\coprod S_\\nu$ for the finitely many nonzero $\\mathcal H^q(K)$ in [def-weil-proetale-constructible-sheaf]: take all intersections of one stratum from each partition and discard empty intersections when $T$ is nonempty. If there are no nonzero cohomology sheaves, use the single stratum $T$; if $T$ is empty, retain the single empty stratum, on which all assertions are vacuous. The intersections are represented by fibre products of the stratum immersions, so carry subscheme structures and remain locally closed and constructible. The local constant presentations have finite module values: on any nonempty trivializing member, [lem-weil-proetale-constant-sheaf-stalk] identifies the value module with its geometric stalk, which is finite by constructibility. Here preservation of constant modules is checked separately from exactness. For a stratum inclusion $i:S\\to T$, the base-change site functor of [def-weil-proetale-inverse-image] preserves finite limits and covers; [lem-weil-pbc-left-exact-site-inverse-image-tensor] therefore says its set inverse image preserves terminal objects and all colimits. By [def-weil-pbc-constant-sheaf] and the universal property of [def-weil-pbc-sheafification], the constant set sheaf of $M$ is the coproduct of $M$ copies of the terminal sheaf: maps from either object to a sheaf $F$ are families of global sections indexed by $M$. Its inverse image is consequently the same coproduct on $S$, hence the constant set sheaf of $M$. Under the product comparisons, inverse image sends the maps on constant sets induced by $(m,n)\\mapsto m+n$, $m\\mapsto-m$, $0$, and $(a,m)\\mapsto am$ to those induced by exactly the same functions on $S$. Their composites and identities are preserved by functoriality. Thus the constant-set comparison respects addition and the $A_S$-action and is a constant-module isomorphism. Pulling back the trivializing covers now shows that the finite locally constant models remain so on each refined stratum. The canonical coefficient identification of [prop-weil-pbc-proetale-constant-ring-map] identifies the finite coefficient sheaves there with the constant rings used here; [prop-weil-pbc-proetale-constant-exact] then makes $i^*$ exact, hence $\\mathcal H^q(i^*K)=i^*\\mathcal H^q(K)$. By [lem-weil-pbc-ringed-topos-kflat-pullback], $i^*P$ is K-flat with flat terms. The underived natural tensor isomorphism [lem-weil-pbc-ringed-topoi-module-pullback-tensor], applied termwise to $P^q,B_T$, gives $i^*(P\\otimes_{A_T}B_T)\\simeq i^*P\\otimes_{A_S}B_S$. Consequently the underlying $A_S$-complex of $i^*K_B$ is $i^*K\\otimes^{\\mathbf L}_{A_S}B_S$. Apply [lem-weil-pbc-locally-constant-tensor] on $S_{\\mathrm{proét}}$ to these two factors. Its Noetherian hypothesis holds since the finite ring $A$ has only finitely many ideals; both factors are bounded above, $i^*K$ has finite locally constant cohomology by construction, and $B$ is a finite $A$-module. Every cohomology sheaf of $i^*K_B$ is therefore locally constant of finite type as an $A_S$-module. Its local constant module values are finite sets because $A$ is finite.",
+   "text": "Refine the finitely many input stratifications to one finite stratification by [lem-weil-pbc-constructible-stratification-intersection], retaining one empty stratum for empty $T$ and the single stratum $T$ when all cohomology vanishes. On a nonempty trivializing member, [lem-weil-proetale-constant-sheaf-stalk] identifies its constant module value with a geometric stalk, finite by input constructibility. Pulling back the trivializing covers and the constant-module comparison below preserve these finite models under refinement. On each stratum $i:S\\to T$, [lem-sp-stratum-scalar-extension] gives the constant-module comparison, exact identification of restricted cohomology, K-flat pullback and the termwise tensor comparison. Thus the underlying $A_S$-complex of $i^*K_B$ is $i^*K\\otimes^{\\mathbf L}_{A_S}B_S$. Apply [lem-weil-pbc-locally-constant-tensor] on $S_{\\mathrm{proét}}$. Its hypotheses hold: finite $A$ is Noetherian, both factors are bounded above, the cohomology of $i^*K$ is finite locally constant by the stratum construction, and $B$ is finite as an $A$-module. Therefore every cohomology sheaf of $i^*K_B$ is locally constant of finite type as an $A_S$-module; its local values are finite because $A$ is finite. Step 5 supplies the $B_S$-module structure and hence constructibility over $B$.",
    "uses": [
-    "def-weil-proetale-constructible-sheaf",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sp-stratum-scalar-extension",
     "lem-weil-pbc-locally-constant-tensor",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-proetale-constant-sheaf-stalk"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H (lemma-locally-constant-tensor-product); Tag 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); blueprint proof paragraph (2); sites.tex Tag 00X6 (proposition-get-morphism) for preservation of finite limits and colimits; constant module preservation proved explicitly from the cited definitions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "proof paragraph (2), finite stratification and local-constant tensor argument"
    }
   },
   {
@@ -114,16 +108,16 @@
    }
   },
   {
-   "text": "Now suppose $\\ell$ is invertible on $T$. For the auxiliary coefficient-field parameters in [det-def-sp-tate-twist-locally-free], take $E=\\mathbf Q_\\ell$ and an algebraic closure; only its finite-$A$ clauses are used. By that node, a common root system trivializes the finite Tate modules for every finite coefficient ring here, and changing the killing exponent gives canonical isomorphisms. At the common exponent $m$, the definition in the statement and ordinary tensor [def-pur-sheaf-tensor-product] give the canonical isomorphism\n$$ (\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}A_T)\\otimes_{A_T}B_T\\longrightarrow\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}B_T,\\quad (z\\otimes a)\\otimes b\\longmapsto z\\otimes f(a)b, $$\nwith inverse $z\\otimes b\\mapsto(z\\otimes1)\\otimes b$. For $r>0$, let $U=\\mu_{\\ell^m,T}\\otimes_{(\\mathbf Z/\\ell^m)_T}A_T$ and let $\\beta:U\\otimes_{A_T}B_T\\to B_T(1)$ be this isomorphism. The comparison $U^{\\otimes r}\\otimes_{A_T}B_T\\to (U\\otimes_{A_T}B_T)^{\\otimes_{B_T}r}$ sends $(u_1\\otimes\\cdots\\otimes u_r)\\otimes b$ to $(u_1\\otimes1)\\otimes\\cdots\\otimes(u_{r-1}\\otimes1)\\otimes(u_r\\otimes b)$. Its inverse sends $(u_1\\otimes b_1)\\otimes\\cdots\\otimes(u_r\\otimes b_r)$ to $(u_1\\otimes\\cdots\\otimes u_r)\\otimes\\prod_j b_j$; balancing makes these inverse sheaf maps. Composing with $\\beta^{\\otimes r}$ proves the positive-twist assertion. At $r=0$, the maps $A_T\\otimes_{A_T}B_T\\to B_T$, $a\\otimes b\\mapsto f(a)b$, and $b\\mapsto1\\otimes b$ give the comparison. For a positive power $M$, use the sheaf dual of [def-pur-sheaf-hom]. The canonical evaluation map $M^\\vee\\otimes_A B\\to(M\\otimes_A B)^\\vee$ sends $\\phi\\otimes b$ to $(m\\otimes b'\\mapsto f(\\phi(m))bb')$. Where $M$ has generator $e$, this sends $e^\\vee\\otimes1$ to the dual of $e\\otimes1$, so is an isomorphism. It gives the assertion for negative twists too. Step 6 applies to these invertible modules, so all these ordinary coefficient changes are also the derived coefficient changes. The common-exponent maps commute with these formulas, proving independence of the exponent.",
+   "text": "Assume $\\ell$ is invertible on $T$ and take $E=\\mathbf Q_\\ell$ and an algebraic closure in [det-def-sp-tate-twist-locally-free]; only its finite-coefficient clauses are used. That node supplies compatible root systems, exponent-independent identifications and invertibility of the finite Tate line. At a common exponent $m$, [def-pur-sheaf-tensor-product] gives the canonical map\n$$ (\\mu_{\\ell^m,T}\\otimes A_T)\\otimes_{A_T}B_T\\to\\mu_{\\ell^m,T}\\otimes B_T,\\quad(z\\otimes a)\\otimes b\\mapsto z\\otimes f(a)b,$$\nwith the displayed inverse $z\\otimes b\\mapsto(z\\otimes1)\\otimes b$. Apply [lem-sp-invertible-tensor-scalar-extension] to this rank-one line and $A_T\\to B_T$ for the positive tensor powers, the unit, and the duals defining negative powers. Its coherence with the exponent maps proves independence of $m$. Since these lines are invertible, step 6 identifies the ordinary comparisons with the derived coefficient changes.",
    "uses": [
     "det-def-sp-tate-twist-locally-free",
     "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
+    "lem-sp-invertible-tensor-scalar-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
-    "place": "Clauses (1)--(3), finite coefficients; scalar-extension blueprint proof paragraph (3)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "proof paragraph (3), finite Tate line and tensor-power/dual scalar extension"
    }
   },
   {
@@ -161,23 +155,18 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-derived-tensor",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-proetale-constructible-sheaf",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-sp-stratum-scalar-extension",
   "lem-weil-pbc-locally-constant-tensor",
+  "def-weil-proetale-constructible-sheaf",
   "lem-weil-proetale-constant-sheaf-stalk",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
-  "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-pbc-constant-sheaf",
   "lem-weil-pbc-site-sheafification-sections-local",
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-independent-bounded-flat-kflat",
   "det-def-sp-tate-twist-locally-free",
-  "def-pur-sheaf-hom",
+  "lem-sp-invertible-tensor-scalar-extension",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
@@ -230,7 +219,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -245,11 +234,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sp-scalar-extension",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-sp-scalar-extension-functor",
   "worker": "stage1",
-  "summary": "Replaced the retained attempt by a nine-step zero-new-node split. Applied existing ringed-site K-flat change of rings directly, proved Tor bounds by testing restricted module sheaves, and proved constructibility on the original finite stratification using the existing generic local-constant tensor theorem. Removed the unsupported global flat-constructible-model child and the abstract-coefficient monoidal substitutions. Made the arbitrary-finite-ring intrinsic subcategory explicit and corrected the missing invertibility condition for the Tate example and the ill-typed identity normalization. A continuation makes preservation of constant module sheaves explicit via coproducts and cites the canonical comparison between the finite coefficient-sheaf conventions. Retained the current shared chapter and unit binding. Following the returned-delivery scope correction, the delivery contains only the item node and report; unit realization metadata is left unchanged.",
-  "blueprint": "Current main-20261015 proof (1): step 1; proof (2): steps 2--5; proof (3): steps 6--7; proof (4): steps 8--9. The statement of unit sk-def-sp-scalar-extension is realized by this item (clauses 1, 2 and 4). The unit has no proof steps. The unit record is not delivered or edited; the chapter, unit statement, uses, realization fields and route remain unchanged.",
+  "summary": "Re-split the returned long constructibility and Tate arguments by adding two statement-only child nodes. The stratum node isolates constant-module pullback, exact restricted cohomology and K-flat tensor comparison; the invertible-module node isolates tensor-power and dual base change. Steps 4 and 7 now cite these nodes and are below the 2000-character review threshold; the item statement and all other route steps are unchanged. Resumed source review restored the finite-stalk justification on refined strata and corrected literal tab characters in three TeX arrows.",
+  "blueprint": "Current main-20261015 proof (1): step 1; proof (2): steps 2--5, with the stratum pullback comparison child serving paragraph (2); proof (3): steps 6--7, with the invertible tensor/dual child serving paragraph (3); proof (4): steps 8--9.",
   "tool_uses": [
    {
     "node": "lem-pur-derived-change-of-rings",
@@ -334,12 +323,12 @@
   "det-def-sp-tate-twist-locally-free"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q18-75ff8c601",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q73-b170518f5",
+  "group": "Q73",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-75ff8c601 (reviewer sub-agent of L); spot-checked: I read all nine steps in full, with every cited statement (25 nodes) and Stacks 06YS, 06YQ, 0G7E, 06YY and 094H at their labels. The delivery has no new nodes and contains only the item and its report. proof_deps equals the union of the step uses, and the 2,180-node dependency closure has no cycle (only the inherited missing def-weil-pbc-etale-morphism). Two statement corrections were made and both are justified: (a) the Tate example needs ell invertible, since on Spec F_ell mu_ell=0 so A_T(1)=0, and the cited Tate node already assumes ell invertible; the other clauses keep arbitrary T and arbitrary finite ell-primary rings; (b) 'identity when B=C' becomes 'unitor when g=id', since Frobenius on F_4 breaks the original wording. All six citers use the clauses in ways consistent with these corrections. Step by step: steps 1-3 use the K-flat change of rings and the restricted-module Tor test; no flatness of B/A is needed (checked with Z/ell^2 -> F_ell, K=A[0]). In step 4 the common stratification, preservation of constant modules, exact i^*, K-flat and tensor pullback, and the 094H hypotheses all hold (A finite hence Noetherian, both factors in D^-). Step 5's finite action-table argument via 00WK is correct, including members covered by the empty sieve. Step 6 proves the line clause via 06YQ, and step 7 gives explicit twist comparisons for r=0, r>0 and r<0. Steps 8-9 give a natural alpha descended by the localization equivalence, the unitor, and the pentagon via h(g(b))h(c). The route departure from lem-sf-flat-model and sk-lem-sf-flat-model is justified: those need A=A_{E,n} with ell invertible, or a Noetherian or finite-type base; counterexamples are F_ell[x,y]/(x,y)^2 and Spec F_ell[t_1,t_2,...]. The unit binding and reaches stay maintainer work. Fix: step 7 uses det-def-sp-tate-twist-locally-free (unit sk-prop-an, not on the route) without declaring it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-smooth-purity/det-sp-scalar-extension-functor.json, and I accept the 13 declared tool uses. No other change.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-b170518f5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all 25 cited statements, the main-20261015 blueprint statement and proof paragraphs (1)-(4), and Stacks 094H, 06YQ, 0G7E and 00WK at their labels. The item statement is unchanged; I re-checked its two earlier corrections (ell invertible for the Tate example, since mu_ell=0 on Spec F_ell; g=id_B for the unitor, since Frobenius on F_4 breaks the original wording). Step 4 now uses the refined stratification, the finite stalks from the constant-sheaf stalk lemma, and the new stratum child, then applies 094H on each stratum with Lambda=A, K=i^*K and L=B_S. Its hypotheses hold: A is finite hence Noetherian, i^*K is bounded hence in D^-, and B_S is constant of finite type as an A_S-module. Step 7 uses the Tate node's finite clauses with ell invertible, the explicit root map and its inverse, and the new invertible child for powers, the unit and duals (checked for r=0,1,-1); naturality under the Kummer maps gives independence of m. Steps 1-3, 5, 6, 8 and 9 are unchanged and correct. Both new nodes are statement-only, self-contained, true and not duplicates (the only constant-pullback nodes in the DAG are for the etale site). lem-sp-stratum-scalar-extension was tested with S empty, M=0 and B=0; its last hypothesis is superfluous, which makes it stronger, not false. lem-sp-invertible-tensor-scalar-extension was tested with S=0, M=R, r=0,1,2 and the dual; it is generic and does not restate clause 3. proof_deps equals the union of step uses, every step is under 2000 characters, and the route departure from lem-sf-flat-model stays justified (A=F_ell[x,y]/(x,y)^2; T=Spec F_ell[t_1,t_2,...]). I accept the nine tool uses the current steps cite. Five older tool_uses entries for stratum-pullback tools are no longer cited by any item step; they are harmless and left unedited. Neither new node has a lean_audit key, as with about 500 other worker-created nodes. No fixes written."
  },
  "lean_audit": {
   "master": {
