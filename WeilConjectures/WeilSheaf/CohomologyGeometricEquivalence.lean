@@ -93,7 +93,8 @@ noncomputable def cohomologyCarrierIso (i : ℤ) :
           (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l (X ↘ Spec (.of k))
             (comp_over (X ↘ Spec (.of k)) (Spec (.of k))))
           (ProEtale.adicLowerStarCompGlobalSectionsIso l
-            (Scheme.Hom.geometricFiberMap (X ↘ Spec (.of k)) (comp_over (X ↘ Spec (.of k)) (Spec (.of k)))))).app _ ≪≫
+            (Scheme.Hom.geometricFiberMap (X ↘ Spec (.of k))
+              (comp_over (X ↘ Spec (.of k)) (Spec (.of k)))))).app _ ≪≫
         (ProEtale.adicGlobalSections l (X ↘ Spec (.of k)).geometricFiber).rightDerivedFunctor.mapIso
           (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app _))
 
@@ -106,6 +107,8 @@ lemma cohomology_adicConstant_frobenius (i : ℤ) :
           ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X))) :=
   rfl
 
+omit [Fact (ringChar k ≠ l)] [QuasiCompact (X ↘ Spec (.of k))]
+  [QuasiSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] in
 /-- **The Frobenius of constant-sheaf cohomology is the transport along the geometric Frobenius.**
 Under `Hⁱ(X ⊗ k̄, ℚ̄_ℓ) ≅ Hⁱ RΓ(X̄, ℚ̄_ℓ)`, the Frobenius is induced by the transport of
 `RΓ(X̄, ℚ̄_ℓ)` along the inverse of the geometric Frobenius of `X̄`. -/
@@ -156,7 +159,7 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
       (ProEtaleWeilSheaf.adicConstant k l X))
   erw [reassoc_of% hn]
   refine congrArg (_ ≫ ·) ?_
-  simp only [Functor.comp_map, ← Functor.map_comp]
+  simp only [← Functor.map_comp]
   refine congrArg _ ?_
   rw [Category.assoc, h₂, ← h₁]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
@@ -165,8 +168,8 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
 /-- The linear equivalence induced by an isomorphism of geometric fibers: the transport of
 `RΓ(Ȳ, ℚ̄_ℓ) ≅ RΓ(X̄, ℚ̄_ℓ)` along `e`, through the identifications
 `AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso` of the carriers of the cohomology of the
-constant Weil sheaves.
-(blueprint: ingredient of the base-change clause of `thm-weil-poincare-duality`) -/
+constant Weil sheaves. This is an ingredient of the base-change clause of
+`thm-weil-poincare-duality`. -/
 noncomputable def cohomologyLinearEquivOfGeometricFiberIso
     (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]

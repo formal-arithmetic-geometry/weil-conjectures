@@ -167,4 +167,14 @@ lemma derivedGlobalSectionsUnitIso_trans {X Y Z : Scheme.{u}} (e : X ≅ Y) (e' 
   rw [key]
   simp only [Functor.map_comp, Functor.comp_map, Category.assoc]
 
+/-- The transport of derived global sections along the identity is the identity. -/
+@[simp]
+lemma derivedGlobalSectionsUnitIso_refl (Z : Scheme.{u}) :
+    derivedGlobalSectionsUnitIso l (Iso.refl Z) = Iso.refl _ := by
+  have h := congrArg Iso.hom (derivedGlobalSectionsUnitIso_trans l (Iso.refl Z) (Iso.refl Z))
+  rw [Iso.refl_trans, Iso.trans_hom] at h
+  ext
+  rw [← cancel_epi (derivedGlobalSectionsUnitIso l (Iso.refl Z)).hom, ← h, Iso.refl_hom,
+    Category.comp_id]
+
 end AlgebraicGeometry.ProEtale
