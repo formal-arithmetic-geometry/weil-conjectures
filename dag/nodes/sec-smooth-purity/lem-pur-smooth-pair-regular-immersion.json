@@ -83,28 +83,61 @@
    }
   },
   {
-   "text": "Lift regularity from the fibre by induction on the length of a prefix. The inductive assertion is that, on an affine open $U=\\operatorname{Spec}A'$ of $x$ in our current ambient scheme, multiplication by $f_j$ on $A'/(f_1,\\ldots,f_{j-1})$ is injective for $j\\le e$, and $Z_e=\\operatorname{Spec}(A'/(f_1,\\ldots,f_e))$ is flat and locally of finite presentation over $W$. For $e=0$ finite presentation follows from step 1 and the localization presentation in step 4, using [def-sbc-locally-finite-presentation]. Flatness holds in the stalkwise sense of [def-weil-flat-morphism]: at a prime $\\mathfrak r\\subset A'$ over $\\mathfrak t\\subset R$, tensoring an injection of $R_{\\mathfrak t}$-modules with $A'_{\\mathfrak r}$ is the localization of its tensor with the flat $R$-algebra $A'$, so remains injective by [lem-weil-pbc-localization-module-exact]. Suppose $e<b$. In $Z_e$ take the principal closed subscheme $Z_{e+1}=V(f_{e+1})$. Its fibre over $s$ is an effective Cartier divisor near $y$, since the fibre multiplication by $\\bar f_{e+1}$ is injective by step 5. Apply [lem-pc-recd-fibre-cartier-local] to $Z_e\\to W$, $Z_{e+1}\\subset Z_e$ and $y$: the ambient morphism is flat and locally of finite presentation by induction, the closed subscheme is principal, and the stated fibre hypothesis holds. On an open neighbourhood of $y$ in $Z_e$, it makes $Z_{e+1}$ a relative effective Cartier divisor. By [def-pc-relative-effective-cartier], $Z_{e+1}$ is flat over $W$, and its ideal has local nonzerodivisor generators as in [def-nagata-effective-cartier-ideal]. Choose an ambient principal neighbourhood of $x$ whose intersection with $Z_e$ lies inside that open; this is possible because a closed immersion has the subspace topology and principal opens form a basis in an affine scheme. On this smaller neighbourhood $f_{e+1}$ itself is a nonzerodivisor on $Z_e$: in a stalk write $(f_{e+1})=(v)$ with $v$ a nonzerodivisor, so $f_{e+1}=uv$, $v=w f_{e+1}$; cancellation of $v$ gives $wu=1$, making $u$ a unit. Injectivity on stalks implies injectivity on sections, since a section whose germs all vanish is zero. All earlier injections survive the restriction: if a fraction is killed, multiplying by a power of its denominator reduces to the earlier injection. Finally $Z_{e+1}\\to W$ is locally of finite presentation, because its affine presentation is that of $A'$ with the $e+1$ equations $f_j$ adjoined, and every further principal restriction adjoins just a relation $tu-1$. This completes the induction without a Noetherian assumption on the base or ambient ring.",
+   "text": "Induct on $e=0,\\ldots,b$, retaining a principal neighbourhood of $\\mathfrak q$. For the current localized algebra write $B_j=A/(f_1,\\ldots,f_j)$. Require the first $e$ successive multiplications to be injective, every $B_j$ for $0\\le j\\le e$ to be flat and finitely presented over $R$, and all successive fibre multiplications to be injective. The case $e=0$ follows from steps 1--5. Under any further ambient principal localization, [lem-weil-pbc-localization-quotient-commute] identifies every prefix quotient with its localization; [lem-weil-pbc-localization-tensor-over-base], with $M=B_j$ and $N=k$, identifies its new fibre with its localized old fibre. Thus [lem-weil-pbc-localization-module-exact] preserves both the earlier and the fibre multiplication injections. Every $f_j$ belongs to the retained prime, so the prime $\\mathfrak q_e$ of $B_e$ exists and contracts to $\\mathfrak p$.",
    "uses": [
-    "lem-pc-recd-fibre-cartier-local",
-    "def-pc-relative-effective-cartier",
-    "def-nagata-effective-cartier-ideal",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-localization-tensor-over-base",
     "lem-weil-pbc-localization-module-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: iterative application of Tag 062Y, lemma-fibre-Cartier, part (3); Tag 062T, definition-relative-effective-Cartier-divisor"
+    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
    }
   },
   {
-   "text": "At $e=b$ let the resulting affine open be $U=\\operatorname{Spec}A'$. The ideal identity $I A'=(f_1,\\ldots,f_b)$ still holds, so the affine closed-immersion description [def-weil-closed-immersion] identifies $Y\\times_XU$ with $\\operatorname{Spec}(A'/(f_1,\\ldots,f_b))$ as a closed subscheme of $U$. Step 6 gives every successive multiplication injection. Its final quotient has the point $y$ and therefore is nonzero, giving precisely the regular-sequence condition of [def-weil-pbc-regular-sequence]. For $b=0$ step 4 already says that the ideal vanishes on a neighbourhood of $x$; the induction has no steps, and the empty sequence is regular because this neighbourhood contains $y$. Renaming $A'$ as $A$ proves every assertion.",
+   "text": "Suppose $e<b$. The quotient base-change isomorphism [lem-weil-pbc-tensor-quotient-base-change], applied to $A\\to A\\otimes_R k$ and $(f_1,\\ldots,f_e)$, identifies the fibre of $B_e$ with $(A\\otimes_R k)/(\\bar f_1,\\ldots,\\bar f_e)$, using the balancing identification $(A\\otimes_R k)\\otimes_A B_e\\cong B_e\\otimes_R k$. Its maps send $[(a\\bmod(f_1,\\ldots,f_e))\\otimes t]$ to $[a\\otimes t]$ and back. The next fibre element is a nonzerodivisor on this entire ring by induction. Apply [lem-pc-algebra-fibre-cartier-local] with base $R$, algebra $B_e$, field $k=\\kappa(\\mathfrak p)$, principal ideal $(f_{e+1})$ and prime $\\mathfrak q_e$. Flatness and finite presentation hold by induction, the contraction is $\\ker(R\\to k)=\\mathfrak p$, and at every fibre prime the criterion holds with $g_P=1$. It gives $g\\in B_e\\setminus\\mathfrak q_e$ such that $(f_{e+1})(B_e)_g=(v)$ for a nonzerodivisor $v$, and $(B_e)_g/(f_{e+1})$ is $R$-flat.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-pc-algebra-fibre-cartier-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
+   }
+  },
+  {
+   "text": "The specified $f_{e+1}$ is itself a nonzerodivisor in $(B_e)_g$: write $v=t f_{e+1}$, so $f_{e+1}z=0$ implies $vz=0$ and $z=0$. Lift $g$ to $\\tilde g\\in A\\setminus\\mathfrak q$ and replace $A$ by $A_{\\tilde g}$. By [lem-weil-pbc-localization-quotient-commute] its $e$-th prefix quotient is $(B_e)_g$, and its next prefix quotient is $(B_e)_g/(f_{e+1})$. The latter is flat by step 7. For each earlier prefix, apply [lem-pc-affine-flat-module-localization-preserves-flatness] with the algebra $R\\to B_j$, the module $M=B_j$, and the powers of the image of $\\tilde g$: the localized prefix remains flat over $R$. Step 6 already gives preservation of all earlier multiplication injections and all fibre injections. Thus the injectivity and flatness parts of the inductive claim hold at $e+1$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-pc-affine-flat-module-localization-preserves-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
+   }
+  },
+  {
+   "text": "Finite presentation also persists. By [lem-weil-pbc-localization-away-polynomial-quotient], a principal localization of a ring $D$ is $D[u]/(\\tilde g u-1)$. Starting with a finite polynomial presentation of the current $A$, add the finitely many relations $f_1,\\ldots,f_j$ and then the single variable $u$ and relation $\\tilde g u-1$. This is a finite presentation over $R$ of every new prefix, by [def-weil-pbc-finitely-presented-algebra]. Finally, if the current ambient open is $A_0[1/h]$, write $\\tilde g=c/h^n$; the new open is $A_0[1/(hc)]$. Since $h$ and $\\tilde g$ avoid the retained prime, $hc\\notin\\mathfrak q_0$. All restrictions therefore retain the chosen point in an ambient affine open. This completes the induction.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 063W, lemma-fibre-quasi-regular, first proof paragraph: successive application of Tag 062Y, lemma-fibre-Cartier, part (3), using its algebraic criterion."
+   }
+  },
+  {
+   "text": "At $e=b$ let the resulting affine open be $U=\\operatorname{Spec}A'$. The ideal identity $I A'=(f_1,\\ldots,f_b)$ still holds, so the affine closed-immersion description [def-weil-closed-immersion] identifies $Y\\times_XU$ with $\\operatorname{Spec}(A'/(f_1,\\ldots,f_b))$ as a closed subscheme of $U$. The induction gives every successive multiplication injection. Its final quotient has the point $y$ and therefore is nonzero, giving precisely the regular-sequence condition of [def-weil-pbc-regular-sequence]. For $b=0$ step 4 already says that the ideal vanishes on a neighbourhood of $x$; the induction has no steps, and the empty sequence is regular because this neighbourhood contains $y$. Renaming $A'$ as $A$ proves every assertion.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-pbc-regular-sequence"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
     "place": "Tag 0FUE, lemma-etale-local-structure, first proof paragraph; divisors.tex Tag 063J, definition-regular-immersion, affine regular-equation interpretation"
@@ -112,27 +145,29 @@
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-regular-sequence",
   "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-algebra-fibre-cartier-local",
   "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
   "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
-  "lem-weil-pbc-smooth-fibre-regular-local",
-  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
   "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
   "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-localization-tensor-over-base",
   "lem-weil-pbc-nakayama-local-generators",
-  "lem-wf-affine-noetherian-components",
-  "lem-exc-regular-sequence-principal-neighbourhood",
-  "lem-pc-recd-fibre-cartier-local",
-  "def-pc-relative-effective-cartier",
-  "def-nagata-effective-cartier-ideal",
-  "def-weil-flat-morphism",
-  "def-sbc-locally-finite-presentation",
-  "def-weil-pbc-regular-sequence"
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-wf-affine-noetherian-components"
  ],
  "proof_origin": {
   "by": "document",
@@ -254,7 +289,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-smooth-pair-local-coordinates",
@@ -278,8 +313,8 @@
   "date": "2026-10-17",
   "item": "lem-pur-smooth-pair-regular-immersion",
   "worker": "stage1",
-  "summary": "Proved local regular equations over an arbitrary base using existing nodes only: affine smooth algebras, finite generation of the quotient ideal, regular-local fibre parameters, flat-quotient base change plus Nakayama, Noetherian spreading on the fibre alone, and a prefix induction applying the principal fibre-Cartier criterion. Preserved the statement, b=0, nonzero final quotient and all maintainer metadata. No new nodes or Mathlib leaves.",
-  "blueprint": "Supplies the regular-equation prerequisite of lem-pur-smooth-pair-local-coordinates step 1, which serves the local Cartier/frame argument in lem-pur-divisor-class. The current blueprint first sentence presupposes the frame; this split provides its geometric input and does not invoke purity, the coordinate parent, or any SGA source.",
+  "summary": "Repair of the human return on old step 6 (2571 characters). Preserved the statement, Lean record, steps 1--5, and final conclusion. Replaced step 6 by five short steps with the same successive Tag 062Y route: an induction invariant; the algebraic fibre-Cartier criterion; the prescribed-generator cancellation and ambient localization; and finite-presentation and retained-point checks. The substantial fibre, quotient-localization, tensor-localization and base-flat-localization facts now cite existing statement nodes rather than being proved inline. No new nodes are needed because all these facts already have nodes; elementary cancellation, finite presentations and fraction manipulations stay explicit.",
+  "blueprint": "Supplies the regular-equation prerequisite of lem-pur-smooth-pair-local-coordinates step 1, which serves the local Cartier/frame argument in lem-pur-divisor-class. The current blueprint first sentence presupposes the frame; this split provides its geometric input and does not invoke purity, the coordinate parent, or any SGA source. The repaired induction uses the algebraic form of the same Tag 062Y criterion and existing nodes for its fibre and localization identifications; it retains the Tag 063W successive-divisor route.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
@@ -298,8 +333,12 @@
     "why": "Generic parameter regularity (00NQ), applied only to the Noetherian local ring on the fibre."
    },
    {
-    "node": "lem-pc-recd-fibre-cartier-local",
-    "why": "Generic one-equation fibre-Cartier lifting (062Y(3)), iterated with a stated induction as in 063W; this unit has no fibre-Cartier lifting input."
+    "node": "lem-pc-algebra-fibre-cartier-local",
+    "why": "Algebraic form of the same generic Tag 062Y fibre-Cartier criterion already used by this split. It supplies regular principality and quotient flatness for one equation; this unit has no algebraic fibre-Cartier criterion."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic algebra-module localization lemma: with R to B_j and M=B_j it preserves flatness over the original base during the ambient shrinks. The purity unit contains no localization-flatness statement."
    }
   ]
  },
@@ -308,15 +347,17 @@
   "lem-weil-pbc-smooth-fibre-regular-local",
   "lem-weil-pbc-regular-local-quotient-kernel-parameters",
   "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-pc-recd-fibre-cartier-local"
+  "lem-pc-recd-fibre-cartier-local",
+  "lem-pc-algebra-fibre-cartier-local",
+  "lem-pc-affine-flat-module-localization-preserves-flatness"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q65-d97044da0",
-  "group": "Q65",
+  "reviewer": "NT-cc-ND-945ca0b46",
+  "group": "ND",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d97044da0 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing: no fixes, no nodes dropped. It is the item only, with no new nodes, and its statement and stmt_deps are unchanged. The statement is the closed-immersion, affine-local form of Stacks divisors.tex Tag 067U (lemma-immersion-smooth-into-smooth-regular-immersion, l.5720), with regular immersion as in 063J; the hypotheses match (arbitrary base, both smooth, b=0 allowed). I read 062Y (lemma-fibre-Cartier), statement and proof: part (3) needs a flat, locally finitely presented ambient, a locally principal Z and a Cartier fibre, which is exactly what step 6 checks at every stage of the induction. Steps 1-7 each use exactly what the cited statements say. Step 1: 01V6, the smooth-ring-map definition and 00TA, and smoothness restricts to opens. Step 2: 00F4(4) and 00R2 with n=0, so I is finitely generated with no Noetherian hypothesis. Step 3: fibre regularity for R->A and R->C, then 00NR and 00NQ, with prefixes and the cases d=0 and b=0 handled. Step 4: L=A_q/pA_q is correct; 00HL uses flat C, then localization and Nakayama with r=0 give equality of ideals after inverting finitely many denominators. Step 5: 061L is applied on the Noetherian fibre only, and gamma=a/r lifts to an ambient principal open. Step 6: the induction is stated with its claim, base and step. The cancellation argument does make f_{e+1} itself a nonzerodivisor, and the ambient principal open, flatness and finite presentation are all carried through. Step 7: correctly marked elementary, including b=0. Small cases checked: Y empty, Y=X, an open-and-closed component, and the zero section of A^1 over a non-Noetherian or nonreduced base. No cycle: a script check shows the item is not in its own dependency closure, and its only citer is the parent coordinate lemma. No duplicate: rg for 067U/067T/063W and 'regular immersion' finds only diagonal results, results over a field going the other way, and a kernel criterion. No SGA source is cited. blueprint.from (lem-pur-divisor-class, via the parent) is correct and same_as=[] holds. I accept all five declared tool_uses as generic black boxes: 01V6, 00T4/00TT, 00NR, 00NQ and 062Y(3). One issue outside this delivery: lem-pc-recd-fibre-cartier-local cites the curve-only def-sc-effective-cartier-divisor for a general fibre. That should get a maintenance note; it does not affect the correctness of this item."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-945ca0b46 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps and the statements of all 23 cited nodes in full. I read Stacks divisors.tex 067U (l.5720), 063W (l.5492, the successive 062Y argument) and 062Y (l.4191), and checked them against the unit sk-prop-a1-kummer and the main-20261015 proof of lem-pur-divisor-class. There are no new nodes, and the statement, stmt_deps and lean record are unchanged. The statement is the affine-local form of 067U with all hypotheses kept; I tested it on S=Spec k, a nonreduced base with the zero section of A^1, Y=X, a clopen component and Y empty. Steps 1-5: the cited lemmas 01V6/02H6, 00TA, 00F4(4), 00R2 with n=0, 00TT, 00NR, 00NQ, 00HL, 00CS, 00DV and 061L are applied with their hypotheses met, and no Noetherian hypothesis is used off the fibre. Repaired step 6 now states an explicit induction (claim, base, step). Step 7: lem-pc-algebra-fibre-cartier-local's hypotheses all hold (flat and finitely presented B_e, contraction of q_e equal to p, g_P=1 because f_{e+1} is a nonzerodivisor on the whole fibre ring, identified via 00DF). Steps 8-9: the nonzerodivisor cancellation, 00CT, the localization-flatness node with R->B_j and M=B_j, the away-presentation and the D(hc) retained-point check are all correct. Step 10 matches 00LF, including b=0. Every bracketed id appears in its step's uses, and the union of uses equals proof_deps. There is no SGA citation and no duplicate: the only other 067U/063W hits are the parent, lem-pur-divisor-class and the special-case diagonal results. I accept all six declared tool_uses. Merge note: the maintainer-owned node field tool_uses still lists the stale lem-pc-recd-fibre-cartier-local; set it to the six split_report.tool_uses ids. The reviewed field belongs to the earlier version. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
