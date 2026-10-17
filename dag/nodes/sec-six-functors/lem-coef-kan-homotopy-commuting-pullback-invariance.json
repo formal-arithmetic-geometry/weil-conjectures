@@ -8,7 +8,8 @@
   "place": "Agent-formulated homotopy-commuting extension of Kerodon Proposition 3.4.0.9 (032B), using the path model of Construction 3.4.0.3 (010B), the fiber criterion of Proposition 3.3.7.1 (00ZN), and coherent composition of Subsection 4.6.8 (01PF). Proposition 032B itself assumes strict commutation; the specified endpoint homotopies and simultaneous coherent choices are the additional assertion of this node. Read online 2026-10-17; not archived in literature/. These are Kerodon identifiers, not Stacks tags."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-source-gluing"
  ],
  "proof": [
   {
@@ -251,5 +252,30 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-2a18e9c02 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 7 steps and the tool_uses. I checked it against the actual statements of every cited node. lem-coef-kan-homotopy-pullback-invariance is the strict span lemma; step 1 uses it with (1_U,c,1_V), step 5 with (a,1_{W'},b); both triples commute strictly and all six objects are Kan. lem-coef-sset-anodyne-pushout-product is the Mathlib leaf: step 2 shows the endpoint fibration e is a Kan fibration through the pushout-product of dI->I with a horn; the steps 4, 6 and 7 lifts use pushout-products with Lambda^1_0 and with Lambda^2_1 and Lambda^2_0, and the horn indices and orientations are correct. lem-cbc-realization-weak-equivalence lets step 3 show j_i is a weak equivalence through the min/max cylinder contractions with no Kan condition on X x I, and lets step 5 cancel testing bijections: (J_1 tau)^* = tau^* J_1^*. lem-coef-kan-pullback-fibration-invariance gives J_i in step 3 from cospans E->X x I<-X and E->X x I<-X x I; the left legs are the Kan fibration p, and the pullbacks are Q_i and E. The two-triangle square gives tau(eta) = H_u^{-1}*eta*H_v with the correct direction u'a(x)->v'b(y). Step 7's relative pushout-products prove that the map does not depend on the choices up to homotopy and that parameters are kept. The statement is true and unchanged; only the TeX escapes were normalized. There is no coefficient category or base-change morphism here. Edge cases (empty U/V, W' a point, constant homotopies, discrete complexes) hold. The cited nodes' transitive closure does not contain the item, so there is no cycle. The citer lem-coef-infinity-terminal-pullback-criterion step 3 uses exactly this statement. No duplicates: I read cube-invariance (a more general unsplit node), homotopy-pullback-pasting, kan-pullback-path-comparison, mapping-path-square-rectification, spaces-homotopy-fiber-detection and pc-homotopy-square-cone-rectification. There are no new nodes. I accept both declared tool_uses: lem-cbc-realization-weak-equivalence (same as on the sibling strict lemma) and the definition node. The Kerodon sources are not archived; the proof is marked agent-written, a WANTED line is filed, and I verified the mathematics directly. No SGA is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b4ebd59c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Wrote review.md. Verified statement clauses, dependencies, triangle orientations, relative coherence, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in both passes. No fixes needed; branch untouched."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanHomotopyCommutingPullbackInvariance",
+  "declaration": "SSet.Enhanced.kan_homotopy_commuting_pullback_invariance",
+  "declarations": [
+   "SSet.Enhanced.PathModelComparisonFamily",
+   "SSet.Enhanced.CoherentPathModelComparison",
+   "SSet.Enhanced.HasRelativePathModelComparisons",
+   "SSet.Enhanced.kan_homotopy_commuting_pullback_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanHomotopyCommutingPullbackInvariance.lean",
+  "statement": "theorem kan_homotopy_commuting_pullback_invariance {U V W U' V' W' : SSet.{u}} [KanComplex U] [KanComplex V] [KanComplex W] [KanComplex U'] [KanComplex V'] [KanComplex W'] (u : U ⟶ W) (v : V ⟶ W) (u' : U' ⟶ W') (v' : V' ⟶ W') (a : U ⟶ U') (b : V ⟶ V') (c : W ⟶ W') (H_u : SSet.Homotopy (u ≫ c) (a ≫ u')) (H_v : SSet.Homotopy (v ≫ c) (b ≫ v')) (ha : IsWeakHomotopyEquivalence a) (hb : IsWeakHomotopyEquivalence b) (hc : IsWeakHomotopyEquivalence c) : (∃ d : CoherentPathModelComparison a b c H_u H_v, IsWeakHomotopyEquivalence d.map ∧ ∀ d' : CoherentPathModelComparison a b c H_u H_v, Nonempty (SSet.Homotopy d.map d'.map)) ∧ HasRelativePathModelComparisons u' v'",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head b7a132a3f5a9: fix both output factors by equations with the existing sourceAttachmentPullbackFst/Snd; retain the actual two triangle maps and assert their relative extension along every monomorphism, allowing input paths and output factors to vary, so prescribed higher homotopies extend too. Removed pathModelPath and use categorical pullback projections directly. The theorem docstring follows all seven node proof steps. Only the main theorem is postponed."
  }
 }
