@@ -12,9 +12,84 @@
   "lem-coef-simplicial-presheaf-projective-model",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=A^{\\mathrm{op}}$. The Kan-model clause of [lem-coef-simplicial-presheaf-projective-model] supplies a combinatorial simplicial model category of simplicial sets. Apply [lem-coef-simplicial-projective-model-calculus] with this target and the small simplicial category $I$: it gives the stated projective structure, objectwise tensors, and the enriched-end mapping object. Its free-diagram formula at $a$ and $\\Delta^0$ gives $I(a,-)\\times\\Delta^0=Y_a$. Fix the cofibrant-fibrant $P$ in the statement and write $E_{a,P}=\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P)$. We compute this end directly. All object sets, simplices and ends lie in the containing universe specified by the cited nodes.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remarks A.3.3.4-A.3.3.5: enriched projective model and free diagrams."
+   }
+  },
+  {
+   "text": "Write $\\mu^P_{y,x}:A(y,x)\\times P(x)\\to P(y)$ for the enriched presheaf action. By the mapping-end description, an $n$-simplex $\\alpha\\in E_{a,P,n}$ is a family of simplicial maps $\\alpha_x:A(x,a)\\times\\Delta^n\\to P(x)$ satisfying\n$$\\alpha_{y,m}(f\\circ g,t)=\\mu^P_{y,x,m}(g,\\alpha_{x,m}(f,t))$$\nfor every $m$, $g\\in A(y,x)_m$, $f\\in A(x,a)_m$ and $t:[m]\\to[n]$. This is the defining enriched naturality equation, written on all mapping simplices. Let $1_a^m$ be the constant $m$-simplex at the identity and set $\\varepsilon_n(\\alpha)=\\alpha_{a,n}(1_a^n,\\mathrm{id}_{[n]})$. For $\\rho:[k]\\to[n]$, simpliciality of $\\alpha_a$ gives\n$$\\rho^*\\varepsilon_n(\\alpha)=\\alpha_{a,k}(1_a^k,\\rho)=\\varepsilon_k(\\rho^*\\alpha).$$\nThus evaluation is a simplicial map.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 opening paragraph: agent expansion of evaluation in the usual enriched Yoneda argument, with all simplicial parameters."
+   }
+  },
+  {
+   "text": "For $p\\in P(a)_n$ define the $x$-component of $\\eta_n(p)$ on $m$-simplices by\n$$\\eta_n(p)_{x,m}(f,t)=\\mu^P_{x,a,m}(f,t^*p).$$\nThe action map is simplicial, so these component formulas commute with each operator $\\sigma:[\\ell]\\to[m]$: both sides become $\\mu^P_{x,a,\\ell}(\\sigma^*f,(t\\sigma)^*p)$. Associativity of the action gives\n$$\\mu^P_{y,a}(f\\circ g,t^*p)=\\mu^P_{y,x}(g,\\mu^P_{x,a}(f,t^*p)),$$\nwhich is exactly the end equation from step 2. Hence the family is an $n$-simplex of $E_{a,P}$. Replacing $p$ by $\\rho^*p$ replaces $t^*p$ by $(\\rho t)^*p$, which also describes restriction of that end simplex. Therefore $\\eta:P(a)\\to E_{a,P}$ is simplicial.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 opening paragraph: agent expansion of the inverse using the presheaf action."
+   }
+  },
+  {
+   "text": "The identity action gives $\\varepsilon_n\\eta_n(p)=\\mu^P_{a,a,n}(1_a^n,p)=p$. Conversely, the end equation of step 2 with $f=1_a^m$ and $g=h\\in A(x,a)_m$ gives\n$$\\alpha_{x,m}(h,t)=\\mu^P_{x,a,m}(h,\\alpha_{a,m}(1_a^m,t)).$$\nSimpliciality gives $\\alpha_{a,m}(1_a^m,t)=t^*\\varepsilon_n(\\alpha)$, so the right side is $\\eta_n(\\varepsilon_n(\\alpha))_{x,m}(h,t)$. This holds for every $x,m,h,t$, and the end is a subobject of the product of its component function simplicial sets; thus $\\eta_n\\varepsilon_n(\\alpha)=\\alpha$. Together with the operator checks, this proves the claimed simplicial isomorphism.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 opening paragraph: agent expansion of the two inverse identities."
+   }
+  },
+  {
+   "text": "Check enriched naturality in the presheaf variable on arbitrary $r$-simplices. Let $\\theta\\in\\underline{\\operatorname{Map}}_{\\mathsf M}(P,Q)_r$ and $\\alpha\\in E_{a,P,r}$, so $\\theta_x:P(x)\\times\\Delta^r\\to Q(x)$. Using the diagonal on the common parameter, their enriched composite has components\n$$(\\theta\\star\\alpha)_{x,m}(h,t)=\\theta_{x,m}(\\alpha_{x,m}(h,t),t).$$\nEvaluation therefore gives\n$$\\varepsilon_r(\\theta\\star\\alpha)=\\theta_{a,r}(\\varepsilon_r(\\alpha),\\mathrm{id}_{[r]}).$$\nThis is equality on every degree of the two simplicial maps $\\underline{\\operatorname{Map}}(P,Q)\\times E_{a,P}\\to Q(a)$, hence enriched naturality in $P$. Applying the inverse identities of step 4 to this equality gives naturality of $\\eta$ as well. The identity transformation acts by $p\\mapsto p$. For another parameterized transformation $\\phi:Q\\to R$, evaluation of $(\\phi\\star\\theta)\\star\\alpha$ is $\\phi_a(\\theta_a(\\varepsilon\\alpha,t),t)$, equal to evaluation of $\\phi\\star(\\theta\\star\\alpha)$ by the displayed formula. This verifies units and composition in this variable on the full mapping complexes.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 opening paragraph: agent expansion of enriched naturality, units and composition in the presheaf variable."
+   }
+  },
+  {
+   "text": "For enriched naturality in $a$, take any $r$-simplex $u\\in A(a',a)_r$ and $\\alpha\\in E_{a,P,r}$. The parameterized map $Y(u):Y_{a'}\\times\\Delta^r\\to Y_a$ has components $(h,t)\\mapsto t^*u\\circ h$. The diagonal-parameter composite $\\beta=\\alpha\\star Y(u)$ thus has $\\beta_{x,m}(h,t)=\\alpha_{x,m}(t^*u\\circ h,t)$. Evaluation and the end equation from step 2 give\n$$\\varepsilon_{a',P,r}(\\beta)=\\alpha_{a',r}(u,\\mathrm{id}_{[r]})=\\mu^P_{a',a,r}(u,\\varepsilon_{a,P,r}(\\alpha)).$$\nThis proves equality of the simplicial maps $A(a',a)\\times E_{a,P}\\to P(a')$ in every degree, including their operators. The inverse identities of step 4 give the corresponding equality for $\\eta$. For $v\\in A(a'',a')_r$ and $p\\in P(a)_r$, the presheaf law reads\n$$\\mu^P_{a'',a,r}(u\\circ v,p)=\\mu^P_{a'',a',r}(v,\\mu^P_{a',a,r}(u,p));\\qquad \\mu^P_{a,a,r}(1_a^r,p)=p.$$\nThese are exactly the composition and unit equalities after evaluation; the maps $Y(u)$ obey them by associative unital composition in $A$. Finally the end equation for $\\theta:P\\to Q$ gives $\\theta_{a',r}(\\mu^P(u,p),\\mathrm{id})=\\mu^Q(u,\\theta_{a,r}(p,\\mathrm{id}))$, so the two variable actions commute. Hence the isomorphisms and their inverses are enriched natural on $A^{\\mathrm{op}}\\times\\mathsf M$ with every stated compatibility.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 opening paragraph: agent expansion of enriched naturality, units and composition in the representing variable, and commutation of the two actions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 5.1.3 opening paragraph, printed p.319 (PDF p.336), invokes the usual enriched Yoneda proof without these parameter formulas. These six steps supply that direct calculation; Appendix A.3.3, Proposition A.3.3.2 and Remarks A.3.3.4-A.3.3.5 supply the projective-model context. Read online; WANTED: archived HTT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +132,98 @@
    "results": "{\"t\": \"2026-10-17T09:41:59Z\", \"tool\": \"grep\", \"query\": \"functorEnrichedHomCoyonedaObjEquiv|enrichedNatTransYonedaTypeIsoYonedaNatTrans|SimplicialNerve\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"98b6baf02aa9da6f\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned definitions; Enriched/Basic.lean:539 is restricted to Type-enriched functors, Sites/Monoidal.lean:51 concerns ordinary diagrams on an ordinary category, and SimplicialNerve supplies the nerve construction without the stated enriched interval or presheaf comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedNatTransYoneda|functorEnrichedHomCoyonedaObjEquiv|yonedaEquiv",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"grep\", \"query\": \"enrichedNatTransYoneda|functorEnrichedHomCoyonedaObjEquiv|yonedaEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"Mathlib/CategoryTheory/RepresentedBy.lean\"], \"digest\": \"dbbca10616f97237\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched Yoneda lemma for simplicial presheaves evaluation at the identity is an isomorphism of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"leansearch\", \"query\": \"Enriched Yoneda lemma for simplicial presheaves evaluation at the identity is an isomorphism of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RepresentableBy.toIso\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.yonedaLemma\", \"SSet.yonedaEquiv\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₂_id\", \"CategoryTheory.typeEquiv_unitIso_inv_app\", \"CategoryTheory.OverPresheafAux.unitAuxAuxAux\"], \"digest\": \"519639fe5389369d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, CategoryTheory.Enriched.Functor",
+   "results": "{\"t\": \"2026-10-17T10:33:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedCategory, CategoryTheory.Enriched.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Enriched.Functor'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: loogle: unknown identifier 'CategoryTheory.Enriched.Functor'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial enriched category A, the simplicial mapping object from the representable A(-,a) to a simplicial presheaf P is naturally isomorphic to P(a)",
+   "results": "{\"t\": \"2026-10-17T10:33:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial enriched category A, the simplicial mapping object from the representable A(-,a) to a simplicial presheaf P is naturally isomorphic to P(a)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\", \"SSet.yonedaEquiv\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"SSet.stdSimplex.isoOfRepresentableBy\"], \"digest\": \"97f27e631d9c9b4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|representab|end_",
+   "sub": "CategoryTheory/Enriched",
+   "results": "{\"t\": \"2026-10-17T10:34:11Z\", \"tool\": \"grep\", \"query\": \"yoneda|representab|end_\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean\", \"Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean\", \"Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"5e3e861111b24b5d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedFunctor, \"yoneda\"",
+   "results": "{\"t\": \"2026-10-17T10:34:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedFunctor, \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.enrichedNatTransYoneda\", \"CategoryTheory.enrichedNatTransYoneda_obj\", \"CategoryTheory.enrichedNatTransYoneda_map\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\"], \"digest\": \"b9f305bd67e1cde6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The enriched end of internal mapping simplicial sets from A(-,a) into P is isomorphic to P(a), with inverse given by the contravariant action of P",
+   "results": "{\"t\": \"2026-10-17T10:34:16Z\", \"tool\": \"leanfinder\", \"query\": \"The enriched end of internal mapping simplicial sets from A(-,a) into P is isomorphic to P(a), with inverse given by the contravariant action of P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.unitHomEquiv\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv\", \"CategoryTheory.Enriched.FunctorCategory.enrichedId_π\"], \"digest\": \"af109038e33b9890\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedNatTransYoneda|functorEnrichedHomCoyonedaObjEquiv|yonedaEquiv",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T10:53:17Z\", \"tool\": \"grep\", \"query\": \"enrichedNatTransYoneda|functorEnrichedHomCoyonedaObjEquiv|yonedaEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"a76c9e5be312afaf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "simplicial enriched Yoneda lemma evaluation isomorphism for a representable simplicial presheaf",
+   "results": "{\"t\": \"2026-10-17T10:53:17Z\", \"tool\": \"leansearch\", \"query\": \"simplicial enriched Yoneda lemma evaluation isomorphism for a representable simplicial presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.reprW\", \"CategoryTheory.Functor.RepresentableBy.toIso\", \"CategoryTheory.Functor.IsRepresentedBy.representableBy_homEquiv_apply\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.Functor.representableByEquiv\", \"CategoryTheory.Functor.RepresentableBy.homEquiv_eq\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.curriedYonedaLemma\"], \"digest\": \"065646cb5f81ab83\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedFunctor, CategoryTheory.enrichedNatTransYoneda, CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv",
+   "results": "{\"t\": \"2026-10-17T10:53:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedFunctor, CategoryTheory.enrichedNatTransYoneda, CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: this query returned no declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small locally Kan simplicial category, enriched natural transformations from the representable A(-,a) to a simplicial presheaf P are simplicially isomorphic to P(a), naturally in a and P",
+   "results": "{\"t\": \"2026-10-17T10:53:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a small locally Kan simplicial category, enriched natural transformations from the representable A(-,a) to a simplicial presheaf P are simplicially isomorphic to P(a), naturally in a and P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"SSet.yonedaEquiv\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"SSet.stdSimplex.yonedaEquiv_map\"], \"digest\": \"94b2406d730523ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Enriched/Basic.lean:488-553 (enrichedNatTransYoneda is a representing presheaf; its comparison theorem is Type-enriched), Enriched/FunctorCategory.lean:42-105 (ordinary indexing category), Sites/Monoidal.lean:51-92 (ordinary presheaf internal hom), and SimplicialCategory/Basic.lean:45-70 (enriched hom/vertices). SSet.yonedaEquiv is ordinary simplex Yoneda. None states the enriched representable evaluation isomorphism for an arbitrary simplicial indexing category."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|sHomFunctor",
+   "sub": "AlgebraicTopology/SimplicialCategory",
+   "results": "{\"t\": \"2026-10-17T11:34:51Z\", \"tool\": \"grep\", \"query\": \"homEquiv|sHomFunctor\", \"sub\": \"AlgebraicTopology/SimplicialCategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\"], \"digest\": \"e6078f6c2487ee1c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Basic.lean:45-70 and SimplicialObject.lean:29-41. homEquiv' only identifies ordinary arrows with degree-zero enriched arrows; sHomFunctor is the hom bifunctor. Neither evaluates enriched transformations from a representable."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-evaluation",
@@ -86,5 +249,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-yoneda-evaluation",
+  "worker": "stage1",
+  "summary": "Retained the earlier six-step split and expanded the full simplicial formulas: compute the enriched end, evaluate at the identity, construct the action inverse and verify the inverse identities, then check enriched naturality in both variables using arbitrary parameter simplices and the diagonal. Included explicit composition, unit and mixed-variable equalities, fixed literal newline escapes, corrected the source URL, and retained plus incorporated all logged Mathlib searches. Statement and dependencies unchanged; no new nodes.",
+  "blueprint": "Realizes the supporting strict enriched evaluation calculation in the inherited ancestry of prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph beginning For K in D^b_c(X,R), before the displayed R Hom/R lim adjunction chain. That paragraph calls for derived coefficient adjunction; this node supplies only the strict model evaluation component exposed by the ancestor splits, without changing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-c1e3c9d20",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-c1e3c9d20 (reviewer sub-agent of L); spot-checked: I read the item, the report, the three cited statements (Kan-model clause of lem-coef-simplicial-presheaf-projective-model, enriched-end mapping object and free diagram I(i,-)⊗X of lem-coef-simplicial-projective-model-calculus, notation of def-cbc-enhanced-diagrams-cones), unit sk-prop-sf-biduality-general and the main-20261015 prop-coef-integral-exceptional-adjoint proof. The statement is the strict simplicial enriched Yoneda isomorphism, unchanged and true; its extra hypotheses (locally Kan, cofibrant-fibrant) are harmless. I unpacked the end as an equalizer myself and got the step-2 equation α_y(f∘g,t)=μ(g,α_x(f,t)) with the correct variance; with I=A^op the free diagram at a is Y_a. Steps 3–6 check out: the inverse μ(f,t^*p), both inverse identities via the end equation at 1_a, diagonal composition in P, Y(u)(h,t)=t^*u∘h for naturality in a, and the mixed commutation. Elementary marks are justified. All citations are in the same unit, so no tool use is needed. Edge cases checked: terminal A, a one-object simplicial monoid, P(a)=∅, empty A. Duplicate search with rg over dag/nodes (lem-pc-yoneda, the infinity Yoneda nodes, lem-coef-space-yoneda-density) found no strict duplicate, and the one citer uses exactly this statement. There are no new nodes. HTT is not archived and I did not re-read it: proof_origin is agent with a WANTED line, and I verified the calculation directly. Remark, not a split fault: the item's creator-owned source.document has the malformed host people.math.ias.harvard.edu, for maintainer correction. No fixes made."
  }
 }
