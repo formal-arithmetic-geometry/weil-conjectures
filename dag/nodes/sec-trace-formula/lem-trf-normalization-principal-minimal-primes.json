@@ -12,9 +12,87 @@
   "def-pc-field-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite $K$-basis $\\alpha_1,\\ldots,\\alpha_m$ of $F$. For each $i$, linear dependence of $1,\\alpha_i,\\ldots,\\alpha_i^{m}$ over $K$ gives a monic relation $\\alpha_i^{n_i}+\\sum_{j<n_i}c_{ij}\\alpha_i^j=0$ with $n_i\\ge1$ and $c_{ij}\\in K$. Choose $0\\ne d_i\\in R$ divisible by the finitely many denominators of the $c_{ij}$. Then $\\beta_i=d_i\\alpha_i$ satisfies the monic relation $\\beta_i^{n_i}+\\sum_{j<n_i}(d_i^{n_i-j}c_{ij})\\beta_i^j=0$ over $R$, since $n_i-j\\ge1$ and $d_ic_{ij}\\in R$. Thus each $\\beta_i$ is integral over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proof of Proposition 4.8.2, printed p. 84 (finite field-extension reduction via a finite integral subring); explicit denominator scaling of monic relations."
+   }
+  },
+  {
+   "text": "Put $S=R[\\beta_1,\\ldots,\\beta_m]\\subseteq F$. It is a domain because it is a subring of the field $F$. By [lem-weil-pbc-finite-of-integral-generators] it is a finite $R$-module, and [lem-weil-pbc-finite-algebra-is-integral] makes $S$ integral over $R$. Its displayed finite algebra generating set and [lem-weil-pbc-finite-type-algebra-noetherian] make $S$ Noetherian. Its fraction field is $F$: the fraction field of $S$ contains $K$ and each $\\alpha_i=\\beta_i/d_i$, hence contains every $K$-linear combination of the basis elements; the opposite inclusion holds since $S\\subseteq F$.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JJ, lemma-characterize-finite-in-terms-of-integral, (3) implies (1); Tag 00GK, lemma-finite-is-integral; Tag 00FN, lemma-Noetherian-permanence."
+   }
+  },
+  {
+   "text": "The integral closure of $S$ in $F$ equals $D$. If $x\\in D$, its monic equation over $R$ is also over $S$, so it lies in that closure. Conversely, if $x\\in F$ is integral over $S$, [lem-weil-pbc-finite-of-integral-generators] applied to $S[x]$ and [lem-weil-pbc-finite-algebra-is-integral] show that $S[x]$ is integral over $S$. As $S$ is integral over $R$ by Step 2, [lem-weil-pbc-integral-transitive] gives integrality of $S[x]$ over $R$, so $x\\in D$. This proves both inclusions without assuming either normalization finite.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JJ, lemma-characterize-finite-in-terms-of-integral; Tag 00GK, lemma-finite-is-integral; Tag 00GN, lemma-integral-transitive (the integral-closure identification is written out)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-normalization-integral-closure-krull] to the Noetherian domain $S$ and its own fraction field $F$ verified in Step 2. Its integral closure in that field is $D$ by Step 3, so $D$ is a Krull domain. The theorem is used only in its own-fraction-field form.",
+   "uses": [
+    "lem-trf-normalization-integral-closure-krull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 (Mori–Nagata), printed pp. 90–91, domain case."
+   }
+  },
+  {
+   "text": "For $0\\ne b\\in D$, [lem-trf-krull-principal-primary-decomposition] gives the finite list $P_1,\\ldots,P_t$ of height-one primes containing $b$, and the ideals $J_i=D\\cap bD_{P_i}$, with $bD=\\bigcap_iJ_i$ and $\\sqrt{J_i}=P_i$. All hypotheses hold by Step 4; no ring-Noetherianity of $D$ has been asserted.",
+   "uses": [
+    "lem-trf-krull-principal-primary-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.10.3, printed p. 89."
+   }
+  },
+  {
+   "text": "For $x\\in\\sqrt{bD}$, a positive power of $x$ belongs to every $J_i$, hence $x\\in\\sqrt{J_i}=P_i$. Conversely, if $x\\in\\bigcap_iP_i$, choose $n_i\\ge1$ with $x^{n_i}\\in J_i$. For the nonempty finite list put $n=\\max_i n_i$; ideal closure under multiplication gives $x^n\\in J_i$ for every $i$, hence $x^n\\in\\bigcap_iJ_i=bD$. This proves $\\sqrt{bD}=\\bigcap_iP_i$. If the list is empty, Step 5 says $bD=D$, so its radical is $D$, also the empty intersection. Taking $Q_i=P_i$ proves every clause, including a unit $b$ in any domain and the field case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.10.3, printed p. 89; the finite radical/intersection calculation is explicit and elementary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-integral-transitive",
+  "lem-trf-normalization-integral-closure-krull",
+  "lem-trf-krull-principal-primary-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Finite integral-model reduction and the finite-radical calculation written explicitly by Q17, following the author-hosted book: Proposition 4.8.2 proof, printed p. 84, Definition 4.10.1/Proposition 4.10.3, p. 89, and Theorem 4.10.5, pp. 90–91. Local PDF WANTED; textbook results are the two statement-only children."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +128,52 @@
    "results": "{\"t\": \"2026-10-17T20:49:05Z\", \"tool\": \"leanfinder\", \"query\": \"Nonzero principal ideals in the normalization of a Noetherian domain have finitely many minimal prime divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.finite_factors\", \"Ideal.finite_mulSupport_coe\", \"Ideal.finite_mulSupport\", \"PrimeSpectrum.finite_setOf_isMin\", \"instWfDvdMonoidIdeal\", \"Ideal.finite_mulSupport_inv\", \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"IsDedekindDomain.HeightOneSpectrum.Support.finite\"], \"digest\": \"1bbfbe06dca34267\"}",
    "date": "2026-10-18",
    "verdict": "no match: grep in RingTheory/IntegralClosure has no hits. Ideal.finite_minimalPrimes_of_isNoetherianRing at Ideal/MinimalPrime/Noetherian.lean:26 assumes D itself Noetherian, while Ideal.finite_factors assumes IsDedekindDomain. Neither applies to an arbitrary normalization here. DedekindDomain/IntegralClosure.lean:152–175 additionally assumes an integrally closed base and separability. No Mori–Nagata normalization theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite intersection of prime ideals equals radical of principal ideal in integral closure of Noetherian domain finite field extension",
+   "results": "{\"t\": \"2026-10-17T21:16:53Z\", \"tool\": \"leanfinder\", \"query\": \"finite intersection of prime ideals equals radical of principal ideal in integral closure of Noetherian domain finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"primesOverFinset\", \"primesOver_finite\", \"instFintypeElemIdealPrimesOver\", \"Ideal.card_primesOverFinset_le_finrank\", \"Ideal.map_algebraMap_eq_finset_prod_pow\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\", \"mem_primesOverFinset_iff\", \"Ideal.Factors.liesOver\"], \"digest\": \"93f101caeebe05fc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.radical, Ideal.finite_minimalPrimes_of_isNoetherianRing, KrullDomain",
+   "results": "{\"t\": \"2026-10-17T21:16:53Z\", \"tool\": \"loogle\", \"query\": \"Ideal.radical, Ideal.finite_minimalPrimes_of_isNoetherianRing, KrullDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'KrullDomain'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "Mori.Nagata|KrullDomain|radical.*principal",
+   "results": "{\"t\": \"2026-10-17T21:16:53Z\", \"tool\": \"grep\", \"query\": \"Mori.Nagata|KrullDomain|radical.*principal\", \"sub\": \"RingTheory/IntegralClosure\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mori Nagata integral closure Noetherian domain finite field extension is Krull domain finite prime divisors",
+   "results": "{\"t\": \"2026-10-17T21:17:02Z\", \"tool\": \"leanfinder\", \"query\": \"Mori Nagata integral closure Noetherian domain finite field extension is Krull domain finite prime divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isNoetherianRing\", \"isDedekindDomain_iff\", \"integralClosure.isDedekindDomain\", \"primesOver_finite\", \"isDedekindRing_iff\", \"instFintypeElemIdealPrimesOver\", \"IsIntegralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain_fractionRing\"], \"digest\": \"78b0194746ce49cb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure.isNoetherianRing, IsIntegralClosure.isNoetherian, Ideal.radical",
+   "results": "{\"t\": \"2026-10-17T21:17:03Z\", \"tool\": \"loogle\", \"query\": \"integralClosure.isNoetherianRing, IsIntegralClosure.isNoetherian, Ideal.radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|Krull|minimalPrimes",
+   "results": "{\"t\": \"2026-10-17T21:17:03Z\", \"tool\": \"grep\", \"query\": \"integralClosure|Krull|minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/LinearDisjoint.lean\"], \"digest\": \"f5198d0404b70ebe\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all candidates require Noetherianity of the normalization, a Dedekind domain, or an already normal base plus separability. Read DedekindDomain/IntegralClosure.lean:145–175 and Ideal/MinimalPrime/Noetherian.lean:24–27; those hypotheses are absent here. Unknown-identifier Loogle attempts are inconclusive, not evidence of absence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-extension-noetherian-spectrum",
@@ -80,5 +200,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalization-principal-minimal-primes",
+  "worker": "stage1",
+  "summary": "Wrote six proof steps: scale a finite field basis to integral elements; construct a finite integral Noetherian model S with fraction field F using existing Mathlib leaves; identify its normalization with D by transitivity; apply the own-fraction-field Mori–Nagata theorem; obtain the Krull principal-primary decomposition; and prove the radical equality by taking a maximum of the finitely many exponents. Created only the two non-elementary structural theorem nodes, neither a restatement of the item. Statement unchanged. No new Mathlib leaves.",
+  "blueprint": "Keeps the existing Orgogozo/Heinzer normalization ancestry from lem-trf-local-term-locality. Steps 1–4 supply the Krull normalization input for the principal-radical assertion used by lem-trf-integral-extension-noetherian-spectrum; Steps 5–6 implement the principal decomposition and radical calculation at that same algebraic proof place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-004230c87",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-004230c87 (reviewer sub-agent of L); spot-checked: The item source metadata incorrectly cites Proposition 4.8.5 for the finite-extension reduction; the report identifies the correct source as the proof of Proposition 4.8.2, printed p. 84. Corrected whole DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-normalization-principal-minimal-primes.json. Mathematical checks passed; packet/report also disagree about a citations.json attachment.; 1 file(s) fixed by the reviewer"
  }
 }
