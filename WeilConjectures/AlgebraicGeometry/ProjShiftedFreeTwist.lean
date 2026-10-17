@@ -11,11 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
-import WeilConjectures.AlgebraicGeometry.ProjectiveLineTwistExists
 import WeilConjectures.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
 import WeilConjectures.AlgebraicGeometry.ProjTwistGluedComparison
 import WeilConjectures.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 
 /-!
 # Shifted free graded modules and the glued twists on the projective line
@@ -129,7 +129,8 @@ theorem proj_shifted_free_is_twist (k : Type v) [Field k] (d : ℤ) :
   let C : ProjectiveLine.ProjChartIsomorphism k :=
     { iso := asIso p
       chart_eq := fun i ↦ awayι_linearProjection _ _ _ hcov i }
-  obtain ⟨L, T, _, _⟩ := ProjectiveLine.exists_twistData_unique_iso k d
+  let L := ProjectiveSpace.twist (ULift.{v} (Fin 2)) (Spec (.of k)) d
+  let T := ProjectiveLine.twistData (Spec (.of k)) d
   refine ⟨C, ⟨L, ⟨T⟩, ?_⟩, ?_⟩
   · exact nonempty_twist_iso_tensorPullback_of_twistData k d C L T
   · intro r a
