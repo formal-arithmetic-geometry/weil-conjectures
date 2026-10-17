@@ -3671,6 +3671,8 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.Basic
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.LiftQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
