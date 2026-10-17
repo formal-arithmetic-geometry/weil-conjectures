@@ -12,9 +12,124 @@
   "def-coef-infinity-fibrations",
   "lem-coef-relative-operadic-terminal-active-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(O^\\otimes)$. Use the relative-algebra definition of [lem-coef-relative-operadic-terminal-active-mapping] only, not that node's terminal-active theorem. Write $\\Gamma_I(q)$ for its full category of inert-preserving sections. Choose representatives $X_{\\mathbf c}$ for the inverse images of $(x_{c_1},\\ldots,x_{c_n})$ under the assumed equivalence $E_{\\mathbf c}\\simeq\\prod_iE_{c_i}$, with the identification included. These choices have contractible spaces of choices: apply a quasi-inverse of the equivalence, and its unit and counit identify each homotopy fiber with a point. For an operator $f:\\mathbf c\\to\\mathbf d$ let $\\theta_j:(c_i)_{f(i)=j}\\to d_j$ be its output operations, and let $M_f(X,Y)$ be the homotopy fiber over this particular operator of $\\operatorname{Map}_{E^\\otimes}(X,Y)\\to\\operatorname{Map}_B(\\mathbf c,\\mathbf d)$. The base mapping space is discrete. The mapping-space Segal axiom, explicitly included in [lem-coef-relative-operadic-terminal-active-mapping], gives an output product, both in $E^\\otimes$ and in $B$. Taking fibers over the tuple $(\\theta_j)_j$ gives the relative output product. For its $j$th factor, first project the source inertly onto the subtuple indexed by $f^{-1}(j)$ and then use the active operator $\\theta_j$. Precomposition by the inert cocartesian lift, followed by the active cocartesian lift, identifies that factor, by [lem-coef-infinity-cocartesian-mapping-criterion], with the mapping space in the target color fiber. Hence there is a natural equivalence\n$$M_f(X_{\\mathbf c},X_{\\mathbf d})\\simeq\\prod_{j=1}^{|\\mathbf d|}\\operatorname{Map}_{E_{d_j}}\\bigl(T_{\\theta_j}((x_{c_i})_{f(i)=j}),x_{d_j}\\bigr).$$\nUse the inert projections that induce the stated fiber identifications. They are inert for the total operad and lie over the canonical inert operators of $B$. They are also $q$-cocartesian: write $p_B:B\\to N(\\mathrm{Fin}_*)$ and $p_E=p_Bq$. The mapping square for a $p_E$-cocartesian projection is the outer rectangle formed from its $q$-mapping square and the mapping square of its $p_B$-cocartesian image. The outer rectangle and the latter square are homotopy pullbacks, hence so is the former, by substituting the two path-fiber-product formulas. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to $q$. In this calculation we use both the fiber and the mapping-space Segal axioms, not merely the displayed fiber equivalence in the item. If the target tuple is empty the product is a point; a zero-input factor is the nullary transport, not a missing factor.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7; Definition 2.1.1.10(1)-(3), especially its mapping-space condition; Remark 2.1.1.14. The relative mapping-space calculation is written out here."
+   }
+  },
+  {
+   "text": "For a section $s$, its inert projections identify $s(\\mathbf c)$ with $X_{\\mathbf c}$, where $x_c=s(c)$. For an active one-output operator $\\theta$, choose a $q$-cocartesian lift $u_\\theta:X_{\\mathbf c}\\to T_\\theta(X_{\\mathbf c})$. The section edge $s(\\theta)$ corresponds to a vertical arrow $a_\\theta:T_\\theta(X_{\\mathbf c})\\to x_d$ under the mapping-fiber equivalence in [lem-coef-infinity-pointwise-cocartesian-transport] with parameter $\\Delta^0$: it is characterized by a triangle $a_\\theta u_\\theta\\simeq s(\\theta)$ over $\\theta$. Thus one factors the active edge through its active transport; one does not compose it with an inert transport to obtain $a_\\theta$. That theorem applies because $q$ is an inner fibration with cocartesian lifts, and [lem-coef-infinity-cocartesian-mapping-criterion] identifies its horn and mapping-square notions. Identity operators use the degenerate lift, and substitution uses the composition clause of [lem-coef-infinity-cocartesian-composition-initiality]. Inert operators give the corresponding cocartesian projection edges; permutations are the inert bijective case. Apply the pointwise transport theorem with each simplex or coherence-parameter shape to factor the triangles and their higher simplices together. This gives the specified coherent operation data, not just its images in homotopy categories.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.3.1, together with cocartesian factorization (HTT 2.4.4.2-3, duals, carried by the cited pointwise-transport node)."
+   }
+  },
+  {
+   "text": "Here is the combinatorial meaning of the supplied all-higher tree data used in the converse. A simplex of $B$ is a chain $\\mathbf c^0\\xrightarrow{f_1}\\cdots\\xrightarrow{f_m}\\mathbf c^m$. At level $a$ place a vertex labeled by $\\theta_{a,j}$ at each output $j$ of $f_a$, and attach its input wires to the preceding level. This is a leveled forest, not in general a single rooted tree. A wire sent to the basepoint stops at that level. Keep the forests of every subinterval of levels as well: an operation performed before its output is discarded must still appear on the earlier face. For each interval $[a,b]$ and each nonempty output wire at level $b$, its ancestors give one rooted operation tree, and the mapping-space Segal decomposition of step 1 gives the product of its output-tree data. The missing output product is terminal. An internal face composes two adjacent $f_a$ and substitutes at the corresponding adjacent vertices; the initial and final faces remove the first and last levels; a degeneracy inserts unary identities on the wires. Reordering wires is the given permutation action. These descriptions also apply to nullary vertices. For a precise model retaining all higher compatibilities, use [lem-coef-coherent-nerve-comparison]: $\\mathfrak C[\\Delta^m](a,b)=N(P_{a,b})$, where $P_{a,b}$ is the poset of subsets of $\\{a,\\ldots,b\\}$ containing the endpoints. A subset specifies the cuts at which the interval is evaluated in stages, refinement specifies the comparison, and a chain of refinements specifies its higher comparison simplex. Composition is union of subsets, hence grafting of the subinterval forests. The tree contractions, their chains, grafting and unary-identity data required in the statement are exactly these comparisons after taking the output products. In particular this dictionary includes comparisons involving a discarded branch on a proper face, although that branch contributes nothing to the final composite.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7 and Example 2.1.1.21; explicit agent-written leveled-forest and cut-poset expansion. Coherent-realization formula from the cited coherent-nerve node."
+   }
+  },
+  {
+   "text": "Now assemble the supplied data. On objects take $X_{\\mathbf c}$. For each $f$, step 1 identifies its supplied tuple of output arrows with a point of $M_f(X_{\\mathbf c},X_{\\mathbf d})$, with the identification retained. Assemble the higher comparisons simultaneously as follows, rather than choosing unrelated inverses of the individual mapping-space equivalences. In the coherent-realization model of step 3, index the comparisons by chains $\\sigma$ of operators, intervals $[a,b]$ in $\\sigma$, subsets in $P_{a,b}$ and chains of refinements of these subsets; retain all face and degeneracy restrictions of $\\sigma$ and all union-composition maps. Compatible maps from these cut nerves into the indicated relative mapping spaces are precisely coherent diagrams over $B$, by the adjunction $\\mathfrak C\\dashv N_{\\mathrm{hc}}$ in [lem-coef-coherent-nerve-comparison]. This can be calculated in a locally Kan simplicial presentation: that node identifies such presentations with quasicategories, including mapping spaces and composition, and its Quillen equivalence identifies their derived diagram spaces over the fixed discrete simplicial category $O^\\otimes$. These derived spaces compute the actual section spaces here. Indeed $q$ is an isofibration: a cocartesian lift $u:x\\to y$ of a base equivalence induces equivalences $\\operatorname{Map}(y,z)\\to\\operatorname{Map}(x,z)$ for all $z$ by [lem-coef-infinity-cocartesian-mapping-criterion]. On components, at $z=x$ obtain $v$ with $[v][u]=1_x$; at $z=y$ injectivity gives $[u][v]=1_y$. By [lem-coef-infinity-mapping-composition] this makes $u$ an equivalence. Postcomposition on functor categories is consequently an isofibration by [lem-coef-infinity-isofibration-exponentiation]. Its strict fiber over the identity diagram computes the categorical fiber by [lem-coef-infinity-isofibration-pullback-limit]. Restrict to the full inert-preserving subcategory; this condition is invariant under equivalences of diagrams because the cocartesian mapping squares are invariant under endpoint equivalences. The same statements hold with prescribed comparison parameters. Taking a derived space of compatible maps, rather than an underived equalizer, retains the specified homotopies. Replace each relative mapping space in this description by the product of its output factors from step 1. The comparison is coherent: restriction of outputs is composition with the inert projections, and the comparison on a union of cuts is precisely substitution of the same operations; the coherent composition compatibility of cocartesian transport is [lem-coef-infinity-pointwise-cocartesian-transport]. Thus this is an objectwise equivalence of the diagrams of spaces of comparisons. Its induced map on their homotopy limits is an equivalence. Here these small limits exist by [lem-coef-infinity-yoneda-presheaf-limits]; invariance follows by applying the pointwise quasi-inverse, unit and counit from [lem-cbc-enhanced-functor-cone-calculus] and then their limiting cones. By the dictionary of step 3, the output-side compatible system is exactly the given tree and forest data. Its homotopy fiber on the total-arrow side is therefore contractible and nonempty. Choose a point in that fiber. It supplies the arrows and every composition simplex of a coherent section with the prescribed data. The identity/permutation and inert clauses ensure that its inert edges are $q$-cocartesian. All homotopy limits in this argument are limits of spaces of comparison data; no limit in any fiber $E_c$ is used.",
+   "uses": [
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Definition 2.1.3.1; agent-written coherent assembly using the cited cut-poset nerve model and space-limit calculus."
+   }
+  },
+  {
+   "text": "Extraction followed by assembly is inverse with its identifications. On each color the comparison is the chosen identification of $X_{(c)}$ with $x_c$; on every operator its output factors are the supplied structure arrows by the defining homotopy fiber of step 4. On an arbitrary tuple the comparison is the inverse of the inert product equivalence, so it is an equivalence, including the empty tuple. There is no independent choice on a transport lift: [lem-coef-infinity-cocartesian-composition-initiality] makes any such lift initial in $L(X,f)$, and [lem-cbc-enhanced-functor-cone-calculus] says that the nonempty full category of initial objects is a contractible Kan complex. The higher comparisons of the inverse constructions are those in the homotopy fiber of the limit equivalence of step 4, so they agree on faces, degeneracies and grafting. This is why initiality of separate lifts alone would not have sufficed. Conversely, assembling and then extracting returns the supplied operation data with its specified tree comparisons. A homotopy fiber of an equivalence of spaces is contractible: a quasi-inverse identifies the fiber over $d$ with the space of a point equipped with a path to $d$, which contracts to the constant path. Thus the space of reconstructions together with an identification with the supplied data is contractible.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.3.1; contractibility follows from the relative comparison constructed in steps 1-4 and the cited initial-object calculus."
+   }
+  },
+  {
+   "text": "To include transformations and higher simplices, perform the construction with a parameter $K$ and base functors constant in the $K$ direction. By [lem-coef-infinity-pointwise-cocartesian-transport], $q_K:\\operatorname{Fun}(K,E^\\otimes)\\to\\operatorname{Fun}(K,B)$ is a cocartesian fibration, with cocartesian edges detected at vertices, and its fiber at the constant tuple $\\mathbf c$ is $\\operatorname{Fun}(K,E_{\\mathbf c})$. The definition of the functor simplicial set in [def-cbc-enhanced-diagrams-cones] gives $\\operatorname{Fun}(K,\\prod_iE_{c_i})=\\prod_i\\operatorname{Fun}(K,E_{c_i})$ degreewise. Postcomposition by a quasi-inverse of the tuple equivalence gives the corresponding equivalence for $\\operatorname{Fun}(K,E_{\\mathbf c})$. Step 2's factorization now applies to coherent transformations of $K$-diagrams. In steps 3-4 replace every comparison shape by its product with $K$; faces, degeneracies and union of cuts act on the forest coordinate, while restriction in $K$ acts on the parameter coordinate, so the two commute. The space-limit argument retains all these mixed simplices. In particular $K=\\Delta^1$ gives precisely the color maps and operation-naturality simplices of a transformation, and $K=\\Delta^n$ gives every higher simplex and its restrictions. The two inverse comparisons in step 5 therefore give coherent natural equivalences of functors on the entire categories of data and sections. They are equivalences by the componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus]. This proves an equivalence of infinity-categories, rather than only an equivalence of their object spaces. No condition on $K$ beyond smallness in the chosen sufficiently large universe is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4 (parameter categories and pointwise operations), with the explicit exponential and cocartesian-transport argument above."
+   }
+  },
+  {
+   "text": "Finally a simplicial map $K'\\to K$ restricts each color diagram, each operation arrow and each comparison simplex by precomposition; the forest formulas do exactly the same precomposition. A suboperad restricts the list of colors and operation labels and hence the chains and cut diagrams. Projection to selected colors is evaluation at those one-term tuples. In all three cases the object, operator, face and cut formulas in steps 1-6 agree after restriction; their identification spaces are the same restricted homotopy fibers. This gives the claimed coherent naturality. The only products of objects used are the Segal identifications assumed in the statement, and the remaining limits are spaces of coherence choices, so there is no limit, colimit or presentability hypothesis on the fibers.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-relative-operadic-terminal-active-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7, Definition 2.1.3.1 and Remark 2.1.3.4; explicit restriction of the constructed formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-relative-operadic-terminal-active-mapping"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit; supporting coherent operadic foundation. Detailed forest/cut-poset assembly is agent-written from the existing Segal, coherent-nerve and cocartesian-transport statements, with Higher Algebra places checked online in the 2017 edition."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -134,10 +249,31 @@
    "results": "{\"t\": \"2026-10-17T00:48:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor.sections\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sectionsFunctor\", \"CategoryTheory.Functor.sections\", \"CategoryTheory.Functor.sectionsFunctor_obj\", \"CategoryTheory.Functor.sections_ext_iff\", \"CategoryTheory.Functor.sections_property\", \"CategoryTheory.Functor.sectionsFunctor_map\", \"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.Functor.sectionsEquivHom_apply_app\"], \"digest\": \"3c9d7b53c392a573\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected CategoryTheory/Types/Basic.lean:217-252 and Yoneda.lean:1260-1288 (sections of ordinary Type-valued functors), CategoryTheory/Monad/Algebra.lean:43-67 (ordinary monad algebras), Limits/Shapes/Multiequalizer.lean:1224-1258 (symmetric ordinary multispans), and AlgebraicTopology/DoldKan/Decomposition.lean:77-115 (components of simplicial-object morphisms). None reconstructs coherent colored-operadic sections; grep hits are bibliography text."
+  },
+  {
+   "tool": "grep",
+   "query": "Operadic|Multicategory|operad|CoherentNerve",
+   "results": "{\"t\": \"2026-10-17T02:15:16Z\", \"tool\": \"grep\", \"query\": \"Operadic|Multicategory|operad|CoherentNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\"], \"digest\": \"982cc56bbcd25910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-64,275-325. StrictSegal and nerve declarations require bijective spine maps of ordinary-category nerves; they do not give homotopy-coherent operadic mapping spaces, cocartesian transport or reconstruction of sections. Grep hits are bibliography references only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.IsStrictSegal",
+   "results": "{\"t\": \"2026-10-17T02:15:17Z\", \"tool\": \"loogle\", \"query\": \"SSet.IsStrictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.IsStrictSegal.mk\", \"SSet.IsStrictSegal.segal\", \"SSet.StrictSegal.instIsStrictSegalObjTruncatedHAddNatOfNatTruncationOfIsStrictSegal\", \"SSet.StrictSegal.quasicategory'\"], \"digest\": \"6d2c8122a78c640d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-64,275-325. StrictSegal and nerve declarations require bijective spine maps of ordinary-category nerves; they do not give homotopy-coherent operadic mapping spaces, cocartesian transport or reconstruction of sections. Grep hits are bibliography references only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent diagrams on a category of finite pointed sets with Segal product decompositions",
+   "results": "{\"t\": \"2026-10-17T02:15:18Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent diagrams on a category of finite pointed sets with Segal product decompositions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\"], \"digest\": \"848d24115e3beeaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-64,275-325. StrictSegal and nerve declarations require bijective spine maps of ordinary-category nerves; they do not give homotopy-coherent operadic mapping spaces, cocartesian transport or reconstruction of sections. Grep hits are bibliography references only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-operad-encoding",
@@ -162,5 +298,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-colored-operation-section-reconstruction",
+  "worker": "stage1",
+  "summary": "Second reading repaired the reconstruction: relative output mapping-space products, active transport factorization, leveled forests with discarded intermediate branches, explicit cut-poset higher coherence assembly, inverse comparison spaces, arbitrary parameter transformations and restriction naturality. Seven steps, no new nodes and no Mathlib leaves; statement unchanged.",
+  "blueprint": "The steps realize the parent blueprint proof paragraph 2 clause describing the coherent operadic foundation before the inverse-limit calculation, specifically the reconstruction of sections from individual ordered operations and all substitution coherences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-2e1ddcfd9",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-2e1ddcfd9 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-coef-module-operad-encoding and its steps 3, 4, 6 and 7 that use the item, the unit sk-prop-sf-biduality-general, and all 12 cited statements in full. The delivery has no new nodes and leaves the statement unchanged. proof_deps equals the union of the step uses. Mathlib searches cover all three kinds and find no match, which is right. proof_origin is agent with the blueprint file. Higher Algebra is not in literature/, so I checked HA 2.1.1.7, 2.1.1.10, 2.1.1.21, 2.1.3.1 and 2.1.3.4 from my knowledge; the report keeps HA as WANTED. Step checks: (1) the Segal output product over the discrete Map_B is correct: inert-then-active factorization, the mapping criterion, and the pasting cancellation that makes inert projections q-cocartesian. (2) Factoring s(theta) through the active cocartesian lift uses the K=Delta^0 hofib formula of pointwise-transport, as cited. (3) The cut-poset dictionary for C[Delta^m] is right; leveled forests correctly keep discarded branches. (4) q is an isofibration (mapping criterion plus a valid pi0 Yoneda argument plus mapping-composition); exponentiation makes postcomposition an isofibration; the strict fiber computes the categorical fiber by pullback-limit; the limits taken are of comparison spaces only. Transport coherence is cited from pointwise-transport, which is adequate. (5) Initiality and contractible initial objects, (6) arbitrary K with the componentwise equivalence criterion, (7) elementary restriction naturality: all fine. Small cases I tested: pointed objects (one color with a nullary operation), the commutative operad, the empty color set, and the parent's LM_0 case. I found no false step and no added hypothesis. No duplicate among the inert/trivial-operad, nonsymmetric Segal-product, recognition, envelope and straightening nodes. A traversal of the dependencies finds no cycle. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) for generic quasicategory calculus; it is already recorded on many reviewed nodes of this unit. No SGA is cited. No fixes; review.md written."
  }
 }
