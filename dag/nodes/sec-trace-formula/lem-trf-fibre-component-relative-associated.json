@@ -36,15 +36,142 @@
    "results": "Mathlib/Geometry/Manifold/GroupLieAlgebra.lean; Mathlib/Geometry/Manifold/GroupLieAlgebra.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean; Mathlib/Topology/Sober.lean; Mathlib/Topology/Sober.lean; Mathlib/Topology/Sober.lean; Mathlib/Topology/Sober.lean",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|genericPoint.*minimal|isMinimalPrime",
+   "results": "0 hits:  (searched Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-18",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic points of irreducible components are associated points on a locally Noetherian scheme",
+   "results": "8 hits: genericPoints, genericPoints.isGenericPoint, genericPoints.component, genericPoints.ofComponent, IsGenericPoint, genericPoints.component_ofComponent, IsGenericPoint.isIrreducible, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian",
+   "date": "2026-10-18",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.associatedPrimes",
+   "results": "0 hits: ; loogle: unknown identifier 'Module.associatedPrimes'",
+   "date": "2026-10-18",
+   "verdict": "no match for the full scheme/fibre statement; algebraic inputs are existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic point of an irreducible component of a scheme theoretic fibre of a locally finite type morphism is an associated point",
+   "results": "8 hits: AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, genericPoints.isGenericPoint_ofComponent, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, genericPoints.ofComponent, AlgebraicGeometry.Scheme.range_fromSpecStalk, genericPoints.component_ofComponent",
+   "date": "2026-10-18",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes_annihilator_subset_associatedPrimes|mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule",
+   "results": "4 hits: Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean (searched Mathlib/RingTheory)",
+   "date": "2026-10-18",
+   "verdict": "no match for the full scheme/fibre statement; algebraic inputs are existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\"",
+   "results": "12 hits: associatedPrimes, Submodule.associatedPrimes, associatedPrimes.nonempty, associatedPrimes.eq_empty_of_subsingleton, AssociatedPrimes.mem_iff, instIsPrimeValIdealMemSetAssociatedPrimes, Submodule.instIsPrimeValIdealMemSetAssociatedPrimes, associatedPrimes.prod",
+   "date": "2026-10-18",
+   "verdict": "no match for the full scheme/fibre statement; algebraic inputs are existing DAG leaves"
   }
  ],
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=X_t$ and $K=\\kappa(t)$. By the fibre definition, $T\\to\\operatorname{Spec}K$ is the base change of $f$ along $\\operatorname{Spec}K\\to S$. The locally-finite-type base-change lemma therefore makes this morphism locally of finite type. A field has only the ideals $(0)$ and $(1)$, both finitely generated, so $K$ is Noetherian and its one-point spectrum is locally Noetherian. Applying the locally-Noetherian finite-type lemma gives that $T$ is locally Noetherian. Neither this argument nor the remaining steps require any Noetherian hypothesis on $S$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4 (lemma-base-change-finite-type) and Tag 01T6 (lemma-finite-type-noetherian); Properties Tag 01OV (definition-noetherian)"
+   }
+  },
+  {
+   "text": "Let $B$ be the component of $T$ with generic point $y$. Choose from the locally Noetherian affine cover an affine neighbourhood $U=\\operatorname{Spec}A$ of $y$ with $A$ Noetherian, and let $\\mathfrak p\\subset A$ be its prime corresponding to $y$ under the affine-open point identification. We check directly that $\\mathfrak p$ is minimal. In the Zariski topology $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$: a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, so every such closed set contains $V(\\mathfrak p)$. Also $B\\cap U=\\overline{\\{y\\}}^{\\,U}=V(\\mathfrak p)$; the equality of closures follows because $U$ is an open neighbourhood of $y$. If a prime $\\mathfrak q\\subsetneq\\mathfrak p$ existed, its point $z\\in U$ would specialize to $y$, since $\\mathfrak p\\in V(\\mathfrak q)$. Thus the closure of $z$ in $T$ contains $B$. That closure is irreducible (a singleton is irreducible, and its closure remains irreducible directly by the closed-set definition), so maximality of the component $B$ makes it equal to $B$. But $z\\notin B\\cap U=V(\\mathfrak p)$ because $\\mathfrak p\\nsubseteq\\mathfrak q$, a contradiction. This proves minimality without assuming $T$ irreducible or reduced.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-affine-spectrum",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), elementary closure/minimal-prime argument written out; Properties Tag 01OV for the affine neighbourhood"
+   }
+  },
+  {
+   "text": "Apply the Noetherian minimal-prime associated-prime lemma to $A$ and $\\mathfrak p$. Step 1 and the choice in Step 2 give precisely its Noetherian hypothesis; Step 2 gives its minimal-prime hypothesis. It supplies $a\\in A$ with $\\operatorname{Ann}_A(a)=\\mathfrak p$. Thus $\\mathfrak p$ is an associated prime of $A$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-minimal-prime-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05BV (lemma-ass-minimal-prime-support), specialized to M=A"
+   }
+  },
+  {
+   "text": "The associated-prime localization lemma, applied to this Noetherian ring $A$ and its associated prime $\\mathfrak p$, says that the maximal ideal $\\mathfrak pA_{\\mathfrak p}$ is associated to $A_{\\mathfrak p}$. By the affine-open stalk-localization theorem, the germ map identifies $\\mathcal O_{T,y}$ with $A_{\\mathfrak p}$. Under this ring isomorphism maximal ideals correspond, and an annihilator equality corresponds because $rb=0$ is preserved and reflected by a ring isomorphism. Consequently the maximal ideal of $\\mathcal O_{T,y}$ is the annihilator of an element of that ring. By the definition of associated points, $y\\in\\operatorname{Ass}_T(\\mathcal O_T)$.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-localization-depth-zero",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-sc-associated-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OJ (definition-associated) and Tag 02OK (lemma-associated-affine-open), with Algebra Tag 05BZ (lemma-localize-ass) and Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "In the union defining $\\operatorname{Ass}_{X/S}(\\mathcal O_X)$ in the statement, take the index $s=t$. The preceding step places $y$ in its summand $\\operatorname{Ass}_{X_t}(\\mathcal O_{X_t})$. Regard this point as a point of $X$ by the fibre projection, whose underlying map identifies $X_t$ with $f^{-1}(t)$. Thus $y\\in\\operatorname{Ass}_{X/S}(\\mathcal O_X)$, as required.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AT (definition-relative-assassin), with the relative assassin defined explicitly in the item statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-noetherian-minimal-prime-associated",
+  "lem-weil-pbc-associated-prime-localization-depth-zero",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sc-associated-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Affine expansion of Tag 05AH (lemma-minimal-support-in-ass), using 02OK and Algebra Tags 00ES, 05BV, 05BZ; fibrewise conclusion is Definition 05AT"
+ },
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-fibre-component-closure-dimension",
@@ -54,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "the component-closure input to the flat-family dimension argument",
+   "place": "Proof (1)--(2), specialization-to-the-normal-cone route: in the nearby-cycle comparison branch, the flat-family component-closure dimension argument uses that component generic points belong to the relative assassin (the component-closure input recorded in the inherited ancestry).",
    "via": [
     "lem-trf-flat-fibre-component-closure-dimension",
     "lem-trf-flat-dense-generic-fibre-pure-dimension",
@@ -69,5 +196,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fibre-component-relative-associated",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses, proved local Noetherianity of the fibre, wrote out the elementary generic-point/minimal-prime argument, and reused the existing minimal-prime, associated-prime localization, and affine stalk-localization Mathlib leaves. The final relative-assassin assertion is union membership. No new nodes; no Lean attachment.",
+  "blueprint": "Realizes the component-closure input in the inherited nearby-cycle/specialization branch of lem-trf-local-term-locality, proof (1)--(2); no change to the contracting-correspondence unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-e58c320ff",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e58c320ff (reviewer sub-agent of L); spot-checked: PASS: I read the item and all its proof steps in full; it creates no new nodes. Statement: its inline relative assassin matches Divisors 05AT (definition-relative-assassin) with F = O_X, and its notion of associated point matches 02OJ (definition-associated). The fibrewise claim is 05AH (lemma-minimal-support-in-ass) applied to the fibre X_t, which needs X_t to be locally Noetherian. Flat and locally-finite-type hypotheses are kept; nothing is weakened or added. Step 1: the fibre is a base change, so it is locally of finite type by lem-weil-pbc-lft-base-change (01T4). A field is Noetherian, so Spec K is locally Noetherian, and pqf-lem-locnoeth-lft (01T6) makes X_t locally Noetherian. No hypothesis on S is needed. Step 2 (marked elementary): I checked the closure and maximality argument that p is a minimal prime of a Noetherian affine A; it does not assume a reduced or irreducible fibre. Step 3: lem-weil-pbc-noetherian-minimal-prime-associated (05BV with M = A); both hypotheses are supplied by steps 1 and 2. Step 4: lem-weil-pbc-associated-prime-localization-depth-zero (05BZ), then clause (c) of lem-weil-pbc-affine-open-stalk-localization; the annihilator is moved along a ring isomorphism. Step 5: membership in the union. proof_deps equals the union of the step uses. Small cases tested: empty fibre, Spec K, K[e]/(e^2), K[u,v]/(uv), K[x,y]/(x^2,xy). Duplicate search with rg (05AH, 05AT, relative assassin, generic point with associated) found no scheme-level duplicate; the module version lem-weil-pbc-minimal-support-prime-associated is correctly replaced by its M = R leaf. Every cited statement is a Mathlib leaf or a definition, so there is no route departure, no tool_uses and no SGA citation. LeanFinder, LeanSearch, Loogle and grep searches are recorded. No fixes. For maintenance only: the existing node def-sc-associated-points has source tag 02OZ, which should be 02OJ (02OZ is lemma-regular-meromorphic-section-exists). Its statement is correct."
  }
 }
