@@ -252,5 +252,31 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-dddbe49e5 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the report in full, plus the full statements of the 5 cited nodes (def-cbc-enhanced-diagrams-cones, join-slice-cocone-comparison, directed-cover-mixed-subset-cells, infinity-equivalence-prism-extension, infinity-fixed-boundary-functor-kan), the unit record and the citer directed-cover-colimit-assembly. Steps 1-2: V is simplicial because K_{i_0} is contained in K_{i_theta(0)}. A mixed simplex lies in H by the mixed-subset clause, since sigma is in K_{i_0}, which is contained in K_{i_r}. On constant chains b is literally the comparison's K_i x Delta^1 -> K_i * Delta^0. Step 3: P's strict apex fiber is literally V_f(K_i x Delta^1, E). The pieces glue on A, and the intersections W_i x {0,1} agree. Step 4: the prism extension applies with E -> Delta^0 and epsilon=0, since A contains all vertices and the vertex edges are degenerate, so restriction to W_i gives exactly eta_i and e_i. Step 5: the fixed-boundary fiber is Kan. I recomputed the Lambda^2_0 and Lambda^3_0 inverse witnesses; face 123 has edges (f,1_y,e). Step 6: the three-block map has faces a_0, nu-pullback and lambda-pullback. Steps 7-8: the boundary homotopy agrees at the three vertex cylinders (pu, cv, const C), and the prism extension preserves it, so d_2t=a, d_0t=(v x id)^*nu and d_1t=(u x id)^*lambda. Edge cases tested: I empty, K empty, empty K_i, a single index, repeated or incomparable indices, a non-covering family, and E empty. proof_deps equals the union of uses, and there is no cycle. All non-definition dependencies are in sk-prop-sf-biduality-general, so there are no tool_uses. An rg search over dag/nodes for incidence, fixed-apex and relative-equivalence nodes found no duplicate; decomposition-local-colimit-cocones and directed-union-local-colimits state different things. There are no new nodes and no D1 restatement. HTT and Kerodon are not archived, so WANTED and proof_origin=agent are correct. The item is not a target, involves no coefficient category or base-change morphism, and uses no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MixedJoinIncidenceCocones",
+  "declaration": "SSet.Enhanced.mixed_join_incidence_cocones",
+  "declarations": [
+   "SSet.Enhanced.incidenceEndpointFiber",
+   "SSet.Enhanced.IsMixedJoinIncidenceCylinder",
+   "SSet.Enhanced.MixedJoinLocalReplacement",
+   "SSet.Enhanced.MixedJoinIncidenceTriangles",
+   "SSet.Enhanced.mixed_join_incidence_cocones"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MixedJoinIncidenceCocones.lean",
+  "statement": "theorem mixed_join_incidence_cocones (K : SSet.{u}) (I : Type u) [PartialOrder I] (U : I → K.Subcomplex) (hmono : Monotone U) (E : SSet.{u}) [Quasicategory E] (q : (localUnionCollage U).toSSet ⟶ E) (κ : ∀ L X : SSet.{u}, bluntJoin L X ⟶ orderedJoinFunctor.obj (L, X)) (hκ : ∀ (L X : SSet.{u}) (n : SimplexCategory) (l : L.obj (op n)) (ε : (Δ[1] : SSet.{u}).obj (op n)) (x : X.obj (op n)), (bluntJoinCylinderIncl L X ≫ κ L X).app (op n) ((l, ε), x) = bluntSharpCylinderSimplex L X n l ε x) (cmp : ∀ {L : SSet.{u}} (p : L ⟶ E), joinCocone p ⟶ coconeCategory p) (hcmp : ∀ (L : SSet.{u}) (p : L ⟶ E), IsJoinCoconeComparison κ p (cmp p)) : (∀ (n : SimplexCategory) (z : (K ⊗ nerve I).obj (op n)), z ∈ (directedCoverIncidence U).obj (op n) ↔ z.1 ∈ (U (z.2.obj 0)).obj (op n)) ∧ ∃ (b : (directedCoverIncidence U).toSSet ⊗ Δ[1] ⟶ (localUnionCollage U).toSSet) (a₀ : (directedCoverIncidence U).toSSet ⊗ Δ[1] ⟶ E), IsMixedJoinIncidenceCylinder U b ∧ a₀ = b ≫ q ∧ SSet.ι₀ ≫ a₀ = directedCoverToShape U ≫ localUnionShape U ≫ q ∧ SSet.ι₁ ≫ a₀ = directedCoverToIndex U ≫ localUnionIndex U ≫ q ∧ (∀ i : I, ∃ s : (joinCocone ((U i).ι ≫ localUnionShape U ≫ q)) _⦋0⦌, s.extension = localUnionCone U i ≫ q ∧ (directedCoverFiber U i ▷ Δ[1]) ≫ a₀ = coconeHomotopy ((U i).ι ≫ localUnionShape U ≫ q) ((cmp ((U i).ι ≫ localUnionShape U ≫ q)).app _ s)) ∧ MixedJoinLocalReplacement U q a₀ ∧ MixedJoinIncidenceTriangles U q cmp a₀",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the already landed incidence definitions in DirectedCoverColimitAssembly. Only those real definitions are used, not its downstream assembly theorem, so no cyclic DAG edge to that theorem is added. The comparison parameters are constrained by the dependency’s cylinder formula and IsJoinCoconeComparison. The canonical two-block map, all prescribed local equivalence edges, the strict endpoint fiber, and the triangle for every relative replacement are explicit. All helper definitions are actual constructions or predicates; only the main theorem has sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f49723679",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement verbatim. All node clauses match the Lean with no extra hypotheses: incidence V via existing directedCoverIncidence (first-vertex equivalence stated under hmono), H = localUnionCollage, two-block cylinder via bluntSharpCylinderSimplex, endpoints, local fiber = coconeHomotopy of cmp of q|K_i^▷, strict apex and two-endpoint fibers, local-edge restriction with associator order checked against IsJoinCoconeComparison, triangle faces δ2/δ0/δ1 = a / ν-pullback / λ-pullback. κ/cmp binders satisfiable via join_slice_cocone_comparison and they determine cmp, including apex for empty shapes. Triangle quantified over every a relatively equivalent to a0, which is the same claim as the node's. Edge cases (empty I, K, K_i, E; n=0) covered. Single universe u matches the dependency interfaces and is polymorphic. No duplicate definitions, no hollow defs, one sorry, docstrings carry source, blueprint and all 8 steps, no line over 100 chars. nt_compile --json exit 0, no diagnostics (item 11.7 s). Notes: reverse import from DirectedCoverColimitAssembly omitted to avoid a cycle (allowed by stage-2 §3 rule 7 and listed in the report); stage-3 assembly proof will need the incidence defs moved lower and a ULift adapter."
  }
 }

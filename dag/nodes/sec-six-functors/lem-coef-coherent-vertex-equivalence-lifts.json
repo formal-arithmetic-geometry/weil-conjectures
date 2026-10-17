@@ -2,7 +2,7 @@
  "id": "lem-coef-coherent-vertex-equivalence-lifts",
  "kind": "statement",
  "title": "Normalized lifting of prescribed vertex equivalences",
- "statement": "Use simplicial sets, quasicategories, Kan complexes, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], in universes containing all displayed constructions. Let $J$ be a small simplicial set, $J_0^{\\mathrm{disc}}=\\coprod_{j\\in J_0}\\Delta^0$, and $D$ a quasicategory. Use equivalence edges and cores as defined in [def-cbc-enhanced-diagrams-cones]. Write $r:\\operatorname{Fun}(J,D)^\\simeq\\to\\operatorname{Fun}(J_0^{\\mathrm{disc}},D)^\\simeq$ for restriction. For any diagram $d:J\\to D$ and any fixed edge $e:\\Delta^1\\to\\operatorname{Fun}(J_0^{\\mathrm{disc}},D)^\\simeq$ with $e(0)=r(d)$, define $\\mathcal L(d,e)_n$ to be the maps $h:\\Delta^n\\times\\Delta^1\\to\\operatorname{Fun}(J,D)^\\simeq$ with $h|_{\\Delta^n\\times\\{0\\}}$ the constant map at $d$ and $rh=e\\,\\operatorname{pr}_2$. Then $\\mathcal L(d,e)$ is a nonempty contractible Kan complex. A vertex supplies a diagram $d'$ with exactly the prescribed terminal vertex values and an equivalence $d\\to d'$ restricting to $e$. Restriction of all simplicial parameters gives the higher comparisons in this same contractible space. The terminal diagram is allowed to vary; only the initial diagram and the entire vertex-equivalence path are fixed.",
+ "statement": "Use simplicial sets, quasicategories, Kan complexes, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], in universes containing all displayed constructions. Let $J$ be a small simplicial set, $J_0^{\\\\mathrm{disc}}=\\\\coprod_{j\\\\in J_0}\\\\Delta^0$, and $D$ a quasicategory. Use equivalence edges and cores as defined in [def-cbc-enhanced-diagrams-cones]. Write $r:\\\\operatorname{Fun}(J,D)^\\\\simeq\\\\to\\\\operatorname{Fun}(J_0^{\\\\mathrm{disc}},D)^\\\\simeq$ for restriction. For any core diagram $d\\\\in\\\\operatorname{Fun}(J,D)^\\\\simeq_0$ and any fixed edge $e:\\\\Delta^1\\\\to\\\\operatorname{Fun}(J_0^{\\\\mathrm{disc}},D)^\\\\simeq$ with $e(0)=r(d)$, define $\\\\mathcal L(d,e)_n$ to be the maps $h:\\\\Delta^n\\\\times\\\\Delta^1\\\\to\\\\operatorname{Fun}(J,D)^\\\\simeq$ with $h|_{\\\\Delta^n\\\\times\\\\{0\\\\}}$ the constant map at $d$ and $rh=e\\\\,\\\\operatorname{pr}_2$. Then $\\\\mathcal L(d,e)$ is a nonempty contractible Kan complex. A vertex supplies a diagram $d'$ with exactly the prescribed terminal vertex values and an equivalence $d\\\\to d'$ restricting to $e$. Restriction of all simplicial parameters gives the higher comparisons in this same contractible space. The terminal diagram is allowed to vary; only the initial diagram and the entire vertex-equivalence path are fixed.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Returned Steps 3–4, literal-value normalization and its compatible choices; HTT Sections 2.1.2 and 2.4.6 (exponentiation and equivalence lifting) Argument extracted from the returned proof; HTT supplies the background constructions, not a verbatim assertion of this formulated lemma. No Stacks tag states this infinity-categorical comparison."
@@ -208,5 +208,49 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-bd5303db7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 5 steps and every cited node statement, and checked them against the main-20261015 ancestor proof file. The item's statement is byte-identical to the unsplit side-DAG node, and no new nodes are created. Statement checked: L(d,e) is exactly the fibre over (d,e) of Fun(Δ^1,E)→E×_B Fun(Δ^1,B), which is a trivial fibration once r is a Kan fibration. Small cases hold: J empty, J=Δ^0 and J discrete each give a point. Leaving the terminal diagram free is correct. Step 1: the map from A to J is degreewise injective. The 'In particular' clause of infinity-isofibration-exponentiation applies, and core-kan-fibration's definition of isofibration matches it, so r on cores is a Kan fibration. Step 2 is an elementary Yoneda/degreewise correspondence. Step 3: Λ^1_0={0} under the node's horn convention, the gluing over ∂Δ^n×{0} is compatible, and r applied to the glued map equals e·pr because e(0)=r(d). The pushout-product Mathlib leaf (∂Δ^n mono, Λ^1_0 anodyne) gives the filler, and n=0 gives nonemptiness. Step 4: lifting against all boundaries including n=0 makes L→Δ^0 a trivial fibration by the kan-quillen node, hence a Kan complex that is weakly contractible. That weak-equivalence notion agrees with def-cbc's 'contractible'. Step 5: a core edge is an equivalence, rh=e gives the exact terminal vertex values, and simplicial operators preserve both conditions. Route: every cited statement node is in sk-prop-sf-biduality-general; def-cbc is a definition and the pushout-product node is a Mathlib leaf, so no tool_uses are needed. No SGA is cited. Duplicate search found no node stating the item. Candidates read: finite-core-fiber-contraction, initial-evaluation-trivial-fibration, coherent-fixed-vertex-cofibrations, left-fibration-relative-cylinder-lifting (a generic tool that could stand in for Step 3, not a duplicate). Delivery-errors A–F are satisfied. Kerodon and HTT are recorded as WANTED, and proof_origin is agent. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentVertexEquivalenceLifts",
+  "declaration": "SSet.Enhanced.coherent_vertex_equivalence_lifts",
+  "declarations": [
+   "SSet.Enhanced.vertexDiscrete",
+   "SSet.Enhanced.vertexInclusion",
+   "SSet.Enhanced.coherentVertexLiftSpace",
+   "SSet.Enhanced.coherent_vertex_equivalence_lifts"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentVertexEquivalenceLifts.lean",
+  "statement": "theorem coherent_vertex_equivalence_lifts {J D : SSet.{u}} [Quasicategory D] (d : (core ((ihom J).obj D)).toSSet _⦋0⦌) (e : Δ[1] ⟶ (core ((ihom (vertexDiscrete J)).obj D)).toSSet) (he : e.app _ (stdSimplex.obj₀Equiv.symm 0) = (coreMap ((MonoidalClosed.pre (vertexInclusion J)).app D)).app _ d) : (Nonempty ((coherentVertexLiftSpace d e he) _⦋0⦌)) ∧ KanComplex (coherentVertexLiftSpace d e he) ∧ IsContractible (coherentVertexLiftSpace d e he)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper declarations realize J₀ᵈⁱˢᶜ, its canonical inclusion, and the strict simplicial pullback encoding the maps h with fixed initial value and restricted path. The theorem states nonemptiness, Kan fibrancy, and contractibility. d is bound as a vertex of the core of Fun(J,D); every vertex of a simplicial set lies in SSet.Enhanced.core (degenerate edges are equivalences), so this ranges over all diagrams J→D. The restriction r is the existing SSet.Enhanced.coreMap (Sheaf.CategoryTheory.IsofibrationPullbackLimit), reused rather than redefined. The statement_change is a clarification equivalent to the original; see its `what`.",
+  "fixed_by": "NT-stage2-cc-8fdb6ade3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fdb6ade3",
+  "group": "N6",
+  "result": "fix",
+  "note": "The Lean module is correct: vertexDiscrete/vertexInclusion have real data, the restriction uses the existing coreMap, coherentVertexLiftSpace is a strict pullback that encodes h|Δⁿ×{0}=d and rh=e·pr₂, and the conclusion is Nonempty ∧ KanComplex ∧ IsContractible. No extra hypotheses, a single universe u, lean.statement verbatim, docstrings with source and blueprint, the only sorry is the theorem proof. Edge cases (J empty, J=Δ⁰, J discrete, n=0, D empty) all hold. nt_compile --json: rc 0, no errors or warnings. H7 defect: statement_change.what says the original 'any diagram d:J→D' was false, which is wrong. Every vertex lies in def-cbc's core because its only edge is degenerate; a reviewer Lean check proving x ∈ (core C).obj (op ⦋0⦌) compiled. So the correction is an equivalent clarification and the citer lem-coef-right-fibration-section-limit holds. Fixes replace statement-change.json (correct what and citer note, old_statement verbatim), lean-record.json (lean.note) and report.md (Statement corrected section); the Lean module is unchanged. Observation: coreMap comes from lem-coef-infinity-isofibration-pullback-limit, which is not in stmt_deps; reuse is correct under H4, H2 bars adding the dependency, and there is no cycle.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "N6 stage 2",
+  "old_statement": "Use simplicial sets, quasicategories, Kan complexes, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], in universes containing all displayed constructions. Let $J$ be a small simplicial set, $J_0^{\\mathrm{disc}}=\\coprod_{j\\in J_0}\\Delta^0$, and $D$ a quasicategory. Use equivalence edges and cores as defined in [def-cbc-enhanced-diagrams-cones]. Write $r:\\operatorname{Fun}(J,D)^\\simeq\\to\\operatorname{Fun}(J_0^{\\mathrm{disc}},D)^\\simeq$ for restriction. For any diagram $d:J\\to D$ and any fixed edge $e:\\Delta^1\\to\\operatorname{Fun}(J_0^{\\mathrm{disc}},D)^\\simeq$ with $e(0)=r(d)$, define $\\mathcal L(d,e)_n$ to be the maps $h:\\Delta^n\\times\\Delta^1\\to\\operatorname{Fun}(J,D)^\\simeq$ with $h|_{\\Delta^n\\times\\{0\\}}$ the constant map at $d$ and $rh=e\\,\\operatorname{pr}_2$. Then $\\mathcal L(d,e)$ is a nonempty contractible Kan complex. A vertex supplies a diagram $d'$ with exactly the prescribed terminal vertex values and an equivalence $d\\to d'$ restricting to $e$. Restriction of all simplicial parameters gives the higher comparisons in this same contractible space. The terminal diagram is allowed to vary; only the initial diagram and the entire vertex-equivalence path are fixed.",
+  "source": {
+   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+   "place": "Returned Steps 3–4, literal-value normalization and its compatible choices; HTT Sections 2.1.2 and 2.4.6 (exponentiation and equivalence lifting) Argument extracted from the returned proof; HTT supplies the background constructions, not a verbatim assertion of this formulated lemma. No Stacks tag states this infinity-categorical comparison."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-right-fibration-section-limit",
+    "holds": true,
+    "note": "Equivalent statement: every diagram J→D is a core vertex, so each use (normalizing the terminal values of the coherent equivalence α and the normalized vertex choices) applies unchanged."
+   }
+  ],
+  "what": "Clarification, not a change of content. The original quantifies over a diagram $d:J\\to D$, i.e. a vertex of $\\operatorname{Fun}(J,D)$, while the lift space consists of paths in the core $\\operatorname{Fun}(J,D)^\\simeq$. By the core definition of [def-cbc-enhanced-diagrams-cones] (simplices all of whose edges are equivalences) every vertex lies in the core: its only edge is the degenerate one, an equivalence witnessed by degenerate 2-simplices. So the core vertices are exactly the diagrams $J\\to D$ and the corrected wording is equivalent to the original. It makes explicit that $d$ is taken as a core vertex, as in the Lean binder and the source proof. (The delivered record claimed the original was false for a diagram with a non-equivalence edge; that is wrong, since the edges of $d$ as a diagram are not edges of the core, and is withdrawn by the reviewer.)"
  }
 }

@@ -159,17 +159,17 @@
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleShriekOpenExchangeAdjoint.lean",
   "statement": "theorem openExchange_adjunct (A : Type (u + 1)) [CommRing A] [Finite A] {X U S : Scheme.{u}} {f : X ⟶ S} (u : U ⟶ S) [IsOpenImmersion u] [IsNoetherian X] [IsNoetherian U] [IsNoetherian S] [IsNoetherian (pullback f u)] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (F : DerivedCategoryModule A X) : ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u).homEquiv ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f u)).obj ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F)) ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj F) ((openExchangeIso A u).inv.app ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (pullback.fst f u)).counit.app F)) = (canonicalCompactSupportExchange A u).inv.app F) ∧ ((openExchangeIso A u).inv.app ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f u)).mapDerivedCategory.obj F) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (pullback.fst f u)).counit.app F)) = (openImmersionLowerShriek (ModuleCat.{u + 1} A) u).mapDerivedCategory.map ((canonicalCompactSupportExchange A u).inv.app F) ≫ (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u).counit.app ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj F)",
   "branch": "newtargets-dag",
-  "by": "NR",
-  "date": "2026-10-17",
+  "by": "Q87",
+  "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-8d64e30b2"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8d64e30b2",
-  "group": "NR",
-  "result": "fix",
-  "note": "Statement correct clause by clause against the node and Stacks 0F7J/0F7L: hypotheses (finite ring, all schemes Noetherian, f separated/finite type/compactifiable, u open immersion), v/f_U/pullback.condition, delta = alpha_{u,f_U}^-1 o alpha_{f,v} normalized via (w,id), C = recorded unboundedEtaleCompactSupportBaseChange, kappa, both conjuncts in node order, F unbounded; directions match Stacks; open-immersion derived adjunction is the correct Du_! adjunction. Edge cases, universes, verbatim statement field, report sections and maintainer gates pass; only sorry is the theorem's, and canonicalCompactSupportExchange's IsIso comes from a named upstream theorem. Fixes: (H4) removed openCompactSupportIso, a pure alias of upstream rightDerivedLowerShriekIsoOfIsOpenImmersion, now used directly; redundant letI dropped. (H8) theorem docstring now carries node proof steps 1-3 in full. fixes/EtaleShriekOpenExchangeAdjoint.lean (statement unchanged) and fixes/lem-amb-shriek-open-exchange-adjoint.report.md (appended fix note). nt_compile: delivered and fixed files rc 0 with no messages; probe confirmed signature and instance synthesis."
+  "reviewer": "NT-stage2-cc-0be6bea37",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-record of the already landed, already fixed module: snapshot differs from the side clone only by one comment line and lean.by/date. Clause by clause: A : Type (u+1) finite comm ring; all schemes Noetherian (U and X_U instances implied); f separated/LOFT/QC/HasCompactification; u IsOpenImmersion; v/f_U = pullback.fst/snd with pullback.condition; delta = (iso_v^-1 ▷ Rf_!) ≫ CompIso(v,f) ≫ Congr ≫ CompIso(f_U,u)^-1 ≫ (Rf_U! ◁ iso_u) with the (w,id) normalization rightDerivedLowerShriekIsoOfIsOpenImmersion; C = asIso of the recorded unboundedEtaleCompactSupportBaseChange on IsPullback.of_hasPullback with the recorded IsIso; kappa order, homEquiv direction and both conjuncts match the node; F unbounded. Edge cases (empty or identity open, zero) and universes ok; no hollow definitions, docstrings with source and blueprint, proof steps in the docstring, only sorry is the theorem's, statement field verbatim, report sections present. nt_compile --json on the snapshot: rc 0, no messages, 28.5 s; probe confirmed the signature and error reporting."
  }
 }

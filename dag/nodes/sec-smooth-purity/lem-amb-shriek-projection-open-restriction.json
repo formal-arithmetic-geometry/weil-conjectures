@@ -162,5 +162,29 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-c85ff44a6 (reviewer sub-agent of L); spot-checked: The mathematical split is correct. I repaired stmt_deps to include lem-weil-pbc-ringed-topoi-derived-tensor-pullback, explicitly used by the displayed monoidal pullback identifications. Sources, hypotheses, exchange direction, coefficient category, compactification normalization, inverse cancellation, route, duplicate candidates, and edge cases were checked in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactSupportProjectionOpenRestriction",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportProjection_open_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportProjection_open_restriction",
+   "AlgebraicGeometry.Etale.compactSupportProjection_open_restriction_inverse"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportProjectionOpenRestriction.lean",
+  "statement": "theorem compactSupportProjection_open_restriction (A : Type (u + 1)) [CommRing A] [Finite A] {X S U : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [IsNoetherian U] (f : X ⟶ S) (u : U ⟶ S) [IsOpenImmersion u] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] [HasCompactification (pullback.snd f u)] [QuasiCompact (pullback.snd f u)] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (M : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))) : L((u)^*[ModuleCat.{u + 1} A]).map (((projectionMap (ModuleCat.{u + 1} A) f).app K).app M) ≫ (rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f u)).app (((-⊗ᴸ-(X)[ModuleCat.{u + 1} A]).obj K).obj (L((f)^*[ModuleCat.{u + 1} A]).obj M)) ≫ (R(pullback.snd f u)_![ModuleCat.{u + 1} A]).map (((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) (pullback.fst f u)).app K).app (L((f)^*[ModuleCat.{u + 1} A]).obj M)) ≫ (R(pullback.snd f u)_![ModuleCat.{u + 1} A]).map (((-⊗ᴸ-(pullback f u)[ModuleCat.{u + 1} A]).obj (L((pullback.fst f u)^*[ModuleCat.{u + 1} A]).obj K)).map (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback f u).toCommSq M)) = ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) u).app ((R(f)_![ModuleCat.{u + 1} A]).obj K)).app M ≫ ((-⊗ᴸ-(U)[ModuleCat.{u + 1} A]).map ((rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f u)).app K)).app (L((u)^*[ModuleCat.{u + 1} A]).obj M) ≫ ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f u)).app (L((pullback.fst f u)^*[ModuleCat.{u + 1} A]).obj K)).app (L((u)^*[ModuleCat.{u + 1} A]).obj M)",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem specializes the published projectionMap_rightDerivedLowerShriekBaseChangeMap coherence to the open immersion base-change square. Its four composites are the canonical exact pullback tensor comparison, the normalized compact-support exchange, the square pullback identification, and the compactified projection maps; braidings identify this displayed convention with K ⊗ Rf_! M → Rf_!(f^* K ⊗ M). The second declaration is the node's inverse clause: when the projection maps of f and of pullback.snd f u are isomorphisms, the exchange followed by the transports and the inverse projection map of f_U equals Lu^* of the inverse projection map of f followed by the tensor comparison and Ex_! ⊗ 1 (maintainer fix; the delivered version stated an unrelated eqToHom identity).",
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-f2dadc62c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2dadc62c",
+  "group": "Q102",
+  "result": "fix",
+  "note": "Main statement checked clause by clause against the node, Stacks 0F7L/0E48 and the dependency declarations: the hypotheses add nothing, the exchange is the canonical recorded C (exact unboundedEtaleCompactSupportBaseChange transported along the derived-to-exact pullback iso), the projection map is built from the recorded proper and open-tensor maps, the tensor order follows 0E48 (braiding documented), and it is a direct instance of the proved upstream projectionMap_rightDerivedLowerShriekBaseChangeMap. Fixed: (1) H3, the inverse clause was an unrelated eqToHom identity; it now states P_{f_U}^-1 o C = (1 (x) C) o u^*P_f^-1 under IsIso of both projection maps, with no exchange invertibility assumed; (2) H8, added the module docstring, source places and proof steps. fixes/ holds the complete module, a lean-record.json updating only lean.note, and the report. Delivered and fixed modules compile with rc 0 through nt_compile.py and no warning but sorry; closing the main theorem with the upstream lemma hit the 60 s limit, a stage-3 note."
  }
 }

@@ -207,5 +207,24 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-889ca8da9 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the new leaf, every cited statement, the sole citer lem-kun-derived-canonical-filtration (all 5 steps), the unit, Stacks 05RV/05RW and 0118 with tags checked against the tag map, and Mathlib Fractions.lean:1-140. STATEMENT-DISPUTED is correct. The old strict common refinement fails for Z[0] mapped by the identity into the cone of id_Z: this map is null-homotopic, and a strict refinement would force H^0(t)=0. The new clause asks for homotopy-commutative refinements by quasi-isomorphisms from a bounded P, which is the true statement (equality in K(R)). The citer still works: every chain homotopy preserves the tau_{<=m} filtration, I checked this degree by degree, and the v_i lie in W. The new node lem-kun-derived-bounded-roof-factorization exactly matches DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE at Fractions.lean:115, hypothesis by hypothesis, and has no duplicate in the DAG (script sweep over right_fac/left_fac/exists_rightFraction matches). Steps 1-7 are all correct. Step 2: invertible Q(s) gives a quasi-isomorphism through H^n∘Q≅H^n. Step 3: the right-fraction criterion in K(R) gives homotopies. Step 4: two-out-of-three on cohomology; for i=2 it needs s_2t_2 homotopic to s_1t_1, which the text leaves implicit but is elementary. Steps 5-7: tau_{<=b} then tau_{>=a}; the factorization through the cokernel at degree a uses M_i^{a-1}=0, and the homotopy descends because K^{a-1}=L^{a-1}=0, checked by precomposing with the surjection q^a. Off-unit citations are only Mathlib leaves, so tool_uses=[]. No SGA source is used. No fixes. Maintainer note: the item's top-level source.place still names 05S6, which is the filtered lemma and is not used; replace it with 05RW/05RV/05RT."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedDerivedRoofs",
+  "declaration": "DerivedCategory.boundedDerivedRoofs",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedDerivedRoofs.lean",
+  "statement": "theorem boundedDerivedRoofs (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] : (Nonempty ((HomotopyCategory.quotient (ModuleCat.{v} R) (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) ≅ DerivedCategory.Q)) ∧ (∀ (C : DerivedCategory.Bounded (ModuleCat.{v} R)), ∃ (a b : ℤ) (K : CochainComplex (ModuleCat.{v} R) ℤ), a ≤ b ∧ K.IsStrictlyGE a ∧ K.IsStrictlyLE b ∧ Nonempty (C.1 ≅ DerivedCategory.Q.obj K)) ∧ (∀ (C C' : DerivedCategory (ModuleCat.{v} R)) (a b : ℤ) (K L : CochainComplex (ModuleCat.{v} R) ℤ), K.IsStrictlyGE a → K.IsStrictlyLE b → L.IsStrictlyGE a → L.IsStrictlyLE b → a ≤ b → ∀ (eC : C ≅ DerivedCategory.Q.obj K) (eC' : C' ≅ DerivedCategory.Q.obj L) (u : C ⟶ C'), ∃ (M : CochainComplex (ModuleCat.{v} R) ℤ) (_ : M.IsStrictlyGE a) (_ : M.IsStrictlyLE b) (s : M ⟶ K) (_ : QuasiIso s) (g : M ⟶ L), u = eC.hom ≫ inv (DerivedCategory.Q.map s) ≫ DerivedCategory.Q.map g ≫ eC'.inv) ∧ (∀ (K L M₁ M₂ : CochainComplex (ModuleCat.{v} R) ℤ) (s₁ : M₁ ⟶ K) (g₁ : M₁ ⟶ L) (s₂ : M₂ ⟶ K) (g₂ : M₂ ⟶ L) [hs₁ : QuasiIso s₁] [hs₂ : QuasiIso s₂], (∃ (a b : ℤ), a ≤ b ∧ K.IsStrictlyGE a ∧ K.IsStrictlyLE b ∧ L.IsStrictlyGE a ∧ L.IsStrictlyLE b ∧ M₁.IsStrictlyGE a ∧ M₁.IsStrictlyLE b ∧ M₂.IsStrictlyGE a ∧ M₂.IsStrictlyLE b) → inv (DerivedCategory.Q.map s₁) ≫ DerivedCategory.Q.map g₁ = inv (DerivedCategory.Q.map s₂) ≫ DerivedCategory.Q.map g₂ → ∃ (P : CochainComplex (ModuleCat.{v} R) ℤ) (v₁ : P ⟶ M₁) (v₂ : P ⟶ M₂), (∃ (c d : ℤ), c ≤ d ∧ P.IsStrictlyGE c ∧ P.IsStrictlyLE d) ∧ QuasiIso v₁ ∧ QuasiIso v₂ ∧ Nonempty (Homotopy (v₁ ≫ s₁) (v₂ ≫ s₂)) ∧ Nonempty (Homotopy (v₁ ≫ g₁) (v₂ ≫ g₂)))",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-51f7ab3a6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51f7ab3a6",
+  "group": "Q112",
+  "result": "fix",
+  "note": "Statement correct: conjuncts 1-4 match the node (quotientCompQhIso; exists_iso_Q_obj_of_isGE_of_isLE; right_fac_of_isStrictlyLE_of_isStrictlyGE with M in the common [a,b], as in the node's Step 2; homotopy-commutative bounded refinement, Steps 3-7 rechecked and true). No extra hypotheses or universe restriction. Node diff touches lean only; statement verbatim; report sections present; citer lem-kun-derived-canonical-filtration fits. Finding H8: the theorem docstring lacked the node's proof step by step. fixes/BoundedDerivedRoofs.lean is the complete replacement with an identical statement and Steps 1-7 with their uses and source places. Delivered and fixed files compile clean via nt_compile.py --json (4.4 s / 4.0 s). Maintainer note: node source.place still names 05S6."
  }
 }

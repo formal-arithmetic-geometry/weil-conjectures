@@ -169,5 +169,23 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-83fafe5a2 (reviewer sub-agent of L); spot-checked: Read the item, the parent det-prop-scalar-six-ctf (statement and the step citing this item), the unit sk-prop-scalar-six, the source main-20261015 det-prop-scalar-six-ctf.proof.md step (2) 'Local models', and every cited statement (sk-def-pe-site, sk-lem-pe-weakly-etale-stability, sk-def-pe-morphisms, def-pc-fibre-product, def-pc-scheme, def-weil-quasi-separated-morphism, lem-weil-pbc-quasi-separated-affine-cover-criterion(1), lem-weil-pbc-qcqs-finite-affine-open-cover, lem-weil-pbc-fibre-product-affine-spectra). The statement is true and unchanged; Noetherian already gives quasi-separated, so that hypothesis is redundant but harmless. No new nodes. Edge cases checked: empty S, the trivial cover, repeated indices, W inside U_alpha, empty pieces. Route: sk-lem-pe-weakly-etale-stability is in the unit's transitive route, so no tool use is needed. Duplicate search over dag/nodes found nothing. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-affine-proetale-refinement.json. E4 (wrong object): step 4 put V x_{U_alpha} A inside W_i x_S W, but the covering condition for the new family {V_alpha_j -> S} needs opens of V_alpha_j x_S W; rewritten to V x_S A_alpha_k as an open of V x_S W, and step 5 made explicit. Step 2 never justified that U_alpha -> S is weakly etale; it now does so as the restriction of id_S to an open (local-on-source clause), with sk-def-pe-morphisms added to uses and proof_deps. Review in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineProetaleRefinement.lean",
+  "declaration": "AlgebraicGeometry.finite_affine_proetale_refinement",
+  "statement": "theorem finite_affine_proetale_refinement (S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S] [QuasiSeparatedSpace S] (𝒰 : S.Cover Scheme.proetalePrecoverage) (t : ℕ) (U : Fin t → S.Opens) (hU_affine : ∀ α, IsAffineOpen (U α)) (hU_cover : ⋃ α, (U α : Set S) = Set.univ) : ∃ (n : Fin t → ℕ) (i : ∀ α, Fin (n α) → 𝒰.I₀) (V : ∀ α j, (pullback (𝒰.f (i α j)) (U α).ι).Opens), (∀ α j, IsAffineOpen (V α j)) ∧ (∀ α, ⋃ j, Set.range (((V α j).ι ≫ pullback.snd (𝒰.f (i α j)) (U α).ι).base) = (Set.univ : Set (U α).toScheme)) ∧ (∀ α j, WeaklyEtale ((V α j).ι ≫ pullback.fst (𝒰.f (i α j)) (U α).ι ≫ 𝒰.f (i α j))) ∧ (∀ (W : S.Opens), IsAffineOpen W → IsCompactOpenCovered (fun p : Σ α : Fin t, Fin (n α) ↦ (pullback.snd (((V p.1 p.2).ι ≫ pullback.fst (𝒰.f (i p.1 p.2)) (U p.1).ι ≫ 𝒰.f (i p.1 p.2))) W.ι ≫ W.ι).base) (W : Set S))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-758507dbe",
+  "group": "Q47",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and recorded deps. CompactSpace/IsLocallyNoetherian/QuasiSeparatedSpace hypotheses, S.Cover Scheme.proetalePrecoverage (the recorded sk-def-pe-site match, cover index universe free), Fin t affine cover, affine V α j in W_i ×_S U_α covering U α, WeaklyEtale composites, and IsCompactOpenCovered over every affine W (= QuasiCompactCover of the family): correct, no extra hypotheses. Edge cases fine (t=0, empty S, n α=0). lean.statement verbatim; per-file compile clean. Fix (fixes/FiniteAffineProetaleRefinement.lean, signature unchanged, compiles clean): H8, the statement docstring now carries the node's proof steps 1-5 with source place/blueprint tag; H9 minor, redundant ProAffineEtale import and unused universe v removed. Remark H11: the group's second reading is brief, but the mathematics is unaffected."
  }
 }

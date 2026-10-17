@@ -178,5 +178,23 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-8f7a5eeab (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; 3 steps) and both cited statements, def-cbc-enhanced-diagrams-cones (horn convention, Fun(K,C)_n=Hom(K×Δ^n,C), degreewise pullbacks) and the Mathlib leaf lem-cbc-internal-hom-fibration-corner-map. Checked the leaf against Mathlib PushoutProduct.lean:70-93 (SSet.fibration_pullbackObjObjπ). Also read the parent lem-cbc-kan-fibration-fiber-criterion: its step 5 applies this item with L=Δ^n, C=∂Δ^n, and step 4 supplies the fiber hypothesis. Read the unit sk-prop-sf-cbc and the blueprint main-20261015 thm-cbc-finite-level-proetale proof opening. Step 1: for the corner map on ∅→C, Fun(∅,−) is a single point, so the map is q_C. d=c(i×id) has 1-vertex i=qa. Λ¹₁={1} by the def node. The lift A gives qA₀=const_b, hence u:C→K. Correct. Step 2 is the hypothesis plus pullback projections (qṽ=const_b, ṽi=A₀) and is correctly marked elementary. Step 3: the corner map for i lands in T=Fun(C,E)×_{Fun(C,L)}Fun(L,L). (A,c) lies in T because qA=c(i×id). Its 0-vertex (A₀,const_b) equals r(ṽ). The lift over Λ¹₀={0} gives H with qH=c and H(i×id)=A, so s=H(−,1) has qs=id and si=a. Correct. All four hypotheses are used; no Kan property of L or E and no fixed basepoint is assumed. Small cases: C=∅ (gives a nonempty fiber and a global section), L=Δ⁰, i=id, nonconstant c(b,−). No new nodes. An rg search over dag/nodes found no duplicate. The only citations are a same-unit Mathlib leaf and a definition, so the route is fine and no tool_uses are needed. No SGA citation. A–F all pass. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanContractedBaseSectionExtension",
+  "declaration": "SSet.Enhanced.section_extension_of_contraction",
+  "file": "lean/Sheaf/AlgebraicTopology/KanContractedBaseSectionExtension.lean",
+  "statement": "theorem section_extension_of_contraction {C L E : SSet.{u}} (b : L _⦋0⦌) (c : L ⊗ Δ[1] ⟶ L) (hc₀ : SSet.ι₀ ≫ c = SSet.const b) (hc₁ : SSet.ι₁ ≫ c = 𝟙 L) (i : C ⟶ L) [Mono i] (q : E ⟶ L) [Fibration q] (hK : ∀ f : C ⟶ pullback (SSet.const (X := Δ[0]) b) q, ∃ g : L ⟶ pullback (SSet.const (X := Δ[0]) b) q, i ≫ g = f) (a : C ⟶ E) (ha : a ≫ q = i) : ∃ s : L ⟶ E, s ≫ q = 𝟙 L ∧ i ≫ s = a",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f8f0f226",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and Mathlib: SSet.ι₀/ι₁ endpoint equations, SSet.const b, Mono i = degreewise injective, scoped Quillen Fibration = J.rlp (all horns, m≥1, all j), strict fiber = pullback (const (X:=Δ[0]) b) q, hK quantifiers, conclusion s≫q=𝟙 ∧ i≫s=a. No stronger assumptions, single bound universe u. Edge cases C=∅, E=∅, i=id, L=Δ[0], contraction moving b all fine. lean.statement matches file verbatim; only the lean field changed versus the side clone; no duplicate declaration; no hollow definitions or local proof beyond sorry; docstrings carry source place, blueprint tag and 3-step proof; report has both required sections. nt_compile.py --json on Sheaf/AlgebraicTopology/KanContractedBaseSectionExtension.lean: exit 0, clean (6.3 s / 11.5 s). No findings."
  }
 }

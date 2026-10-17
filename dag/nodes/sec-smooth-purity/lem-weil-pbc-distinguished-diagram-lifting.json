@@ -222,5 +222,40 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-113947b8d (reviewer sub-agent of L); spot-checked: I read all six steps, the statement of every cited node (including the blueprint_update of prop-weil-pbc-scalar-extension) and the source thm-weil-pbc-verdier-axioms.proof.md (main-20261015). Its TR2-TR4 'represent over one common finite field' sentences are what this item makes precise, and from.place points at them correctly. The statement holds and is not weakened. The coefficient categories are the raw scalar localizations D^b_c(T,O_E)[1/ϖ] with the triangulation of lem-weil-linear-scalar-localization-triangulated, the same structure common-stage-cones uses. Small cases tested: a native cone row at its own stage (σσ^{-1}p_u=p_u), empty data, a zero object, a row together with its rotation (consistent via (id,id,σ_X)), and a shifted object specified alongside X. Step 4: I checked the identity σ_{M/E}a_{K[1]}T(σ_{N/E}^{-1})=a_K[1]σ_{M/N,U}; it follows from σ commuting with the associators (a is exact). It needs σ to be the exact-structure comparison, which the current blueprint statement of scalar-extension asserts ('Exactness supplies σ') and the item statement fixes. Step 5: I checked the σ_X multiplication for the third square and the inverse identities at M; finite-stage TR1 then makes each row distinguished, with no circular use of the P_T axioms. Step 6: ρ_X[1]=j_M(σ_X)ρ_{X[1]} holds, using σ_{M/M}=id from the unit equations. Steps 3 and 6 use eventual equality and transport from the calculus statement, not its proof. No cycle (DFS of the deps reaches neither the item nor the ancestor). No duplicate: cone-independence and filtered-colimit-category-finite-lift state different things. No new nodes, no SGA. Accepted tool_uses: prop-weil-pbc-common-stage-calculus and prop-weil-pbc-scalar-extension, generic black boxes for the pair category, used the same way by the ancestor. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcDistinguishedDiagramLifting",
+  "declaration": "AlgebraicGeometry.Scheme.pbcDistinguishedDiagramLifting",
+  "declarations": [
+   "CategoryTheory.PbcFiniteDiagram.Vertex",
+   "CategoryTheory.PbcFiniteDiagram.Vertex.shift",
+   "CategoryTheory.PbcFiniteDiagram.iterShift",
+   "CategoryTheory.PbcFiniteDiagram.Expr",
+   "CategoryTheory.PbcFiniteDiagram.Expr.eval",
+   "CategoryTheory.PbcFiniteDiagram.Equation",
+   "CategoryTheory.PbcFiniteDiagram.Row",
+   "CategoryTheory.PbcFiniteDiagram.Row.triangle",
+   "AlgebraicGeometry.Scheme.pbcDiagramVertex",
+   "AlgebraicGeometry.Scheme.pbcDiagramVertexShift",
+   "AlgebraicGeometry.Scheme.pbcDiagramStageVertex",
+   "AlgebraicGeometry.Scheme.pbcDiagramStageShift",
+   "AlgebraicGeometry.Scheme.pbcDiagramIteratedSigma",
+   "AlgebraicGeometry.Scheme.pbcDiagramVertexIso",
+   "AlgebraicGeometry.Scheme.pbcDistinguishedDiagramLifting"
+  ],
+  "file": "lean/Sheaf/Paper/PbcDistinguishedDiagramLifting.lean",
+  "statement": "theorem pbcDistinguishedDiagramLifting {A : Type a} {B : Type b} {J : Type e} {R : Type r} [Finite A] [Finite B] [Finite J] [Finite R] (X : A → PbcFiniteStagePairCategory l Ω T hDim.out hInv.out) (s t : B → Vertex A) (f : ∀ k : B, pbcDiagramVertex l Ω T X (s k) ⟶ pbcDiagramVertex l Ω T X (t k)) (eqs : J → Equation s t) (rows : R → Row s t) (heqs : ∀ j : J, (eqs j).lhs.eval (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f = (eqs j).rhs.eval (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f) (hrows : ∀ k : R, pbcCommonStageDistinguished l Ω T ((rows k).triangle (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f)) (M0 : Padic.FiniteCoefficientFields l Ω) : ∃ (M : Padic.FiniteCoefficientFields l Ω) (_ : M0 ≤ M) (h : ∀ j : A, (X j).stage ≤ M) (u : ∀ k : B, pbcDiagramStageVertex l Ω T X M h (s k) ⟶ pbcDiagramStageVertex l Ω T X M h (t k)), (∀ (x y : Vertex A) (p : Expr s t x y), PairCategory.mkHom (X := pbcDiagramVertex l Ω T X x) (Y := pbcDiagramVertex l Ω T X y) M (h x.index) (h y.index) (p.eval (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u) = p.eval (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f) ∧ (∀ j : J, (eqs j).lhs.eval (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u = (eqs j).rhs.eval (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u) ∧ (∀ k : R, (rows k).triangle (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u ∈ distTriang (pbcStageCategory l Ω T M)) ∧ (∀ (x y : Vertex A) (p : Expr s t x y), (pbcDiagramVertexIso l Ω T X M h x).hom ≫ ((pbcScalarSystem l Ω T hDim.out hInv.out).ι M).map (p.eval (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u) = p.eval (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f ≫ (pbcDiagramVertexIso l Ω T X M h y).hom) ∧ (∀ k : R, ∃ q : (rows k).triangle (pbcDiagramVertex l Ω T X) (pbcDiagramVertexShift l Ω T X) f ≅ ((pbcScalarSystem l Ω T hDim.out hInv.out).ι M).mapTriangle.obj ((rows k).triangle (pbcDiagramStageVertex l Ω T X M h) (pbcDiagramStageShift l Ω T X M h) u), q.hom.hom₁ = (pbcDiagramVertexIso l Ω T X M h (rows k).first).hom ∧ q.hom.hom₂ = (pbcDiagramVertexIso l Ω T X M h (rows k).second).hom ∧ q.hom.hom₃ = (pbcDiagramVertexIso l Ω T X M h (rows k).third).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f752fa6a2",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Item statement matches node lem-weil-pbc-distinguished-diagram-lifting clause by clause: l, Ω : Type c, T noetherian, finite-dim, l invertible; finite vertices, arrows with shift occurrences, Expr equations with shift = σ_X ≫ u[1] ≫ σ_Y⁻¹, rows distinguished via pbcCommonStageDistinguished; ∃ M ≥ M0 and all E_X, raw reps on shared T_{M/E}K, equations at M, rows in distTriang with σ-corrected last arrow, recovery via mkHom/isoToStage and a row iso with exact components. Probe compiled inside the item file: distTriang uses pbcRationalHasShift/qbarStagePretriangulated (rfl verified), not the PbcScalarExtension adapters. No hollow defs, docstrings ok, only sorry, statement verbatim, no duplicate found. Edge cases (empty families, M=M0, empty scheme, shifted row vertices, independent universes) covered. Dependency repair: three Prop-valued adapters in PbcScalarExtension postponed to sorry with identical binders and types, data untouched, dep record now verbatim — accepted as §1(B); harmless though not strictly needed here, since the original has a cached OK override. Compiles: item clean in 17.9 s against the cached dependency; delivered PbcScalarExtension timed out at 60 s on three attempts at load ~170 (the original also timed out fresh), so its compile rests on the delivery's recorded clean compile and dry run. Minor: pbcDiagramIteratedSigma unused, universe w unused."
  }
 }

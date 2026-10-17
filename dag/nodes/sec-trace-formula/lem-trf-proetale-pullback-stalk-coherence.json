@@ -192,5 +192,46 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-e069cbd8e (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Repaired missing citations for stalk comparison/sheafification and stalk exactness, and removed the incorrect parent-equivalence reference. Checked Stacks 05V1, 0F4F, 00Y8, 0993 and 0D6D, coefficients, coherence and edge cases. Statement unchanged; corrected dependency closure is acyclic. Review and corrected JSON written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.proEtalePullbackStalkCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleFiniteCoefficientStalkComplexFunctor",
+   "AlgebraicGeometry.Scheme.proEtalePullbackFiniteCoefficientStalkComplexFunctor",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientModuleGerm",
+   "AlgebraicGeometry.Scheme.ProEtalePullbackStalkGermNormalized",
+   "AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison",
+   "AlgebraicGeometry.Scheme.proEtaleStalkNeighbourhoodReparam",
+   "AlgebraicGeometry.Scheme.proEtaleStalkReparam_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleStalkReparam",
+   "AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientStalk_exact",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientStalk_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientStalk_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteCoefficientDerivedStalk",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedPullbackStalkComparison",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedStalkReparam",
+   "AlgebraicGeometry.Scheme.proEtaleStalkDerivedIdentityPullback",
+   "AlgebraicGeometry.Scheme.ProEtalePullbackStalkCoherent",
+   "AlgebraicGeometry.Scheme.proEtalePullbackStalkCoherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtalePullbackStalkCoherence.lean",
+  "statement": "theorem proEtalePullbackStalkCoherence : ∀ (A : Type u) [CommRing A] [Finite A], ProEtalePullbackStalkCoherent A",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of immutable returned head 353ac7ec5cd1: canonical comparison uniquely specified by both Lean germ formulas; actual neighbourhood reindexing and its uniquely specified natural isomorphism; unit-normalized identity pullback; ordinary derived stalk and comparisons via exact termwise localization; composition uses the recorded canonical chi, and identity and reparametrization are equations in the ordinary derived category on bounded complexes. All helper declarations belong to this node and have source/proof docstrings. No node statement or dependency changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3d999092",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read the node, all 8 dependency records and the exact side declarations (base change = Over.pullback so pullback.fst is pr_V; neighbourhoods = StructuredArrow; derived pullback = mapDerivedCategory). Each clause matches: Finite A; unrestricted h, f, t; the recorded ProEt and universes; both germ normalizations; composition in D via proEtaleConstantRingPullbackComposition.inv (the canonical chi transported, correct direction); unit-normalized identity at module and D level; field reparametrization by StructuredArrow.map with the commuting square at module and D level; bounded H. c, r and e come from true, fully determining ∃! theorems (allowed by AGENTS §5). 5 sorry, all in theorems; docstrings and blueprint tags present; only the lean field changed; statement verbatim; no duplicate. nt_compile --json: clean in 17.7 s; a control with a false example confirmed elaboration. Observation only: the chi helper is owned by pur713-def-pullback-comparison, which is not in stmt_deps; same usage as the landed lem-trf-derived-pullback-coherence."
  }
 }

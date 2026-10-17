@@ -256,5 +256,30 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q129-32ebf9837 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route and cited literature. All five proof steps hold for ordinary constant finite coefficients and unbounded complexes. Repaired one C1 omission by citing the existing open-immersion base-change lemma. Corrected JSON and detailed checks are in fixes/ and review.md. No statement changes, new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedOpenRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleOpenRestrictionComparison",
+   "AlgebraicGeometry.Scheme.proEtaleOpenRestrictionLambdaInverse",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedOpenRestriction"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleDerivedOpenRestriction.lean",
+  "statement": "theorem proEtaleDerivedOpenRestriction {V T W : Scheme.{u}} (p : V ⟶ T) (i : W ⟶ T) [IsOpenImmersion i] (A : Type u) [CommRing A] [Finite A] : IsIso (proEtaleOpenRestrictionComparison p i A) ∧ (∀ L, IsIso ((proEtaleOpenRestrictionComparison p i A).app L)) ∧ IsIso (proEtaleOpenRestrictionLambdaInverse p i A)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair H3/H4: reuse sfProperOpenDerivedRestriction as the sectionwise K-injective normalized rho. All operations now use the intrinsic finite-coefficient interface. The final clause asserts IsIso of the explicitly defined inverse lambda, Rr_* of the canonical derived open unit followed by rho inverse at k_!M; no arbitrary isomorphism remains.",
+  "fixed_by": "NT-stage2-cc-052a2b418"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-052a2b418",
+  "group": "Q106",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: finite comm ring A : Type u, arbitrary p, arbitrary open immersion i, U=pullback p i with k=fst, r=snd; rho is (sfProperOpenDerivedRestriction ...).hom, Q100's right-derived sectionwise fibre-product iso, i.e. the node's K-injective normalization; lambda is specified via its explicit inverse whiskerRight(exceptionalOpenAdjunction k).unit Rr_* >> whiskerLeft k_! rho.inv with matching functors, IsIso asserted; no extra hypotheses; edge cases (identity/empty open, A=0, unbounded) covered; no hollow defs, only the theorem sorry; statement verbatim; lines <=100. nt_compile: delivered module 8.0 s clean; probe shows conjuncts 1-2 follow by infer_instance (accepted: node clauses, iso-construction form allowed by the previous return), conjunct 3 not automatic. FIX: F1 (H8) statement docstring lacked the node's step-by-step proof with node ids and omitted the naturality step, replaced by the five steps with their nodes; F2 (rule 7) added explicit public imports of 7 stmt-dep modules reached only transitively; module docstring records the omitted reverse import. Fixed module compiles clean (18.2 s); signature and lean record unchanged. Notes for the maintainer: N2 the item imports citer prop-exc-base-change-proper's module (cycle omission listed; recommend moving sfProperOpenPullbackRestriction and sfProperOpenDerivedRestriction into a lower module); N3 exceptionalOpenAdjunction and sfIntrinsicDerivedOpen come from prop-exc-open-adjoint and lem-trf-open-square-exchange, which are not in stmt_deps (acyclic, not fixable in a stage-2 fix)."
  }
 }

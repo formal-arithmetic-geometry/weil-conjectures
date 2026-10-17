@@ -6,7 +6,8 @@
   "place": "Kerodon Proposition 6.3.5.3 proof, cospan-limit comparison and the mapping-space criterion; archived source WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-pullback-limit"
  ],
  "proof": [
   {
@@ -163,5 +164,24 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-cb19993ed (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015). Kerodon 6.3.5.3 is not in the local literature, so I checked the mathematics directly. The statement is true and has not been weakened. I tested it on F=id, on A=∅ (the Q=B test forces B=∅), on Δ^0→Δ^0⊔Δ^0 (the hypothesis fails at Q=Δ^0, as it should) and on one-object groupoids. Step 1 is correct: the homotopy fiber of Φ_B over id_B is contractible, so it is nonempty and gives G with an edge FG→id in the core, which is an equivalence edge. Step 4 is correct and elementary: it is the definition of functor equivalence in def-cbc. No duplicate exists: marked-flat-categorical-equivalence-test is the precomposition test for simplicial sets, and equivalence-of-cospan-limits, full-essential-image, yoneda-functor-equivalence-lift and coherent-vertex-equivalence-lifts are different statements. I repaired three faults in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-test-equivalence-by-functor-cores.json. (1) C4, step 2: the step said 'postcomposition' and cited lem-coef-infinity-mapping-composition, which does not give the step; the operation is precomposition α∘(F×id), and the componentwise criterion of lem-cbc-enhanced-functor-cone-calculus gives it. I removed that citation from uses and proof_deps. (2) C1/E5, step 3: 'transport through a homotopy inverse' hid the passage from π_0 of realizations to an actual edge. I rewrote the step with a citation of lem-coef-kan-realization-serre (same unit; simplicial components biject with π_0|K|; no cycle, checked by DFS), followed by Kan horn composition to get one equivalence edge η:GF→id_A. (3) C8: the off-unit statement lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, not Lean-closed) was used without a declaration, so I added split_report.tool_uses for it. I accept that tool use: it is a generic black box about cores and the componentwise equivalence criterion. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityTestEquivalenceByFunctorCores",
+  "declaration": "SSet.Enhanced.infinity_test_equivalence_by_functor_cores",
+  "file": "lean/Sheaf/CategoryTheory/InfinityTestEquivalenceByFunctorCores.lean",
+  "statement": "theorem infinity_test_equivalence_by_functor_cores {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (F : A ⟶ B) (hF : ∀ (Q : SSet.{u}) [Quasicategory Q], IsWeakHomotopyEquivalence (coreMap ((ihom Q).map F))) : IsFunctorEquivalence F",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the canonical core restriction coreMap from the landed isofibration pullback module for postcomposition on Fun(Q, -)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51b4a9195",
+  "group": "NP",
+  "result": "pass",
+  "note": "Clause-by-clause match: {A B : SSet.{u}} with two Quasicategory instances, F : A ⟶ B, hypothesis ∀ Q : SSet.{u} [Quasicategory Q], IsWeakHomotopyEquivalence (coreMap ((ihom Q).map F)) (canonical postcomposition restricted to cores, landed coreMap with real data), conclusion IsFunctorEquivalence F (quasi-inverse + equivalence edges both ways = the 'in particular' clause). No extra hypotheses or universe restriction. Edge cases F=id, A empty/B nonempty, both empty, empty Q, Δ0→Δ0⊔Δ0 are correct. Node changes only lean + landed same-unit stmt_dep lem-coef-infinity-isofibration-pullback-limit (DFS: no cycle); lean.statement verbatim; no duplicate (searched IsFunctorEquivalence/coreMap uses: only converse or precomposition tests). Only sorry, source/blueprint docstrings, 4-step proof plan. nt_compile.py --json on the snapshot content: rc 0, 9.4 s, no messages, reproduced twice. Only a cosmetic report.md text artifact ('Proposition the project server')."
  }
 }

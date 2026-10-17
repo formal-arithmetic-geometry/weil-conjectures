@@ -94,12 +94,19 @@
   "is": null
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.unit_map_derivedOpenImmersionLowerShriekBaseChangeIso",
   "declarations": [
    "AlgebraicGeometry.Etale.unit_map_derivedOpenImmersionLowerShriekBaseChangeIso",
-   "AlgebraicGeometry.Etale.derivedOpenImmersionSquareMap_app"
+   "AlgebraicGeometry.Etale.derivedOpenImmersionSquareMap_app",
+   "AlgebraicGeometry.Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso_mate"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 16:06 UTC for group N4, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The first gives the unit/base-change mate equation, and the second identifies the der"
+  "statement": "lemma unit_map_derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' j g'')\n    (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :\n    (derivedOpenImmersionLowerShriekUpperStarAdjunction A j').unit.app (L((g')^*[A]).obj K) ≫\n        D((j')^*[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app K) =\n      L((g')^*[A]).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app K) ≫\n        (derivedOpenImmersionSquareMap A hsq.toCommSq).app (D((j)_!open[A]).obj K)",
+  "branch": "slopmaster2",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing upstream interface, specialized to A = ModuleCat.{u + 1} C. The primary theorem is the unit/base-change mate equation; derivedOpenImmersionSquareMap_app identifies its square map with the inverse derived pullback square comparison. The third declaration is the termwise-descent version, with all inverse images mapDerivedCategory. leftDerivedUpperStarIsoMapDerivedCategory canonically identifies L(h*) with the termwise exact inverse image, as explicitly prescribed by the node source. Any Cartesian square is accepted; use pullback j a with its projections and IsPullback.of_hasPullback j a for the displayed chosen square. No new module or statement correction."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -129,5 +136,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f7318f88",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Existing-only binding to the source module OpenImmersionLowerShriekProjectionBaseChange; lean.statement is verbatim the source signature (checked by script) and only the lean field changed. Every clause matches: C via ModuleCat.{u+1} C; any Cartesian square, including IsPullback.of_hasPullback j a; units are mapDerivedCategoryAdjunction of the sheaf adjunctions; c = derivedOpenImmersionSquareMap = inverse of derivedSquareUpperStarIso, which unfolds to gamma_{a,j'} after gamma_{j,u}^{-1} via leftDerivedUpperStarComp (lem-kun); B is the termwise-descended inverse conjugate of baseChangeMap, the same construction as etaleLowerShriekBaseChangeMap, on the node's open-immersion j_!. L/D mixing is covered by the source-prescribed canonical iso and by the recorded all-D theorem. No extra hypotheses; edge cases covered. A scratch nt_compile check applying all three declarations at ModuleCat C to the node's square compiled clean in 4.1 s, axioms standard (sorry-free). Minor: the second reading is an author self-check (accepted, this review is the independent one); lean_audit omits the third declaration (checked sorry-free)."
  }
 }

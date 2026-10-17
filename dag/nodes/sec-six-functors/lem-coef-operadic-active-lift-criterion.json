@@ -20,7 +20,7 @@
  },
  "kind": "statement",
  "title": "Active-arrow lifting fibers detect weak approximation",
- "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid] and the ordinary and generalized nonsymmetric infinity operads of [lem-coef-operadic-algebra-presentability]. Let $f:M\\to O$ be an inert-preserving map of small generalized nonsymmetric infinity operads with $O$ ordinary. For $C\\in M$ and an active edge $\\alpha:X\\to f(C)$, define the lifting infinity category\n$$\\mathcal L_f(C,\\alpha)=M_{/C}\\times_{O_{/f(C)}}\\{\\alpha\\},$$\nwhere the pullback is a homotopy pullback of infinity categories. Thus an object is an arrow $a:D\\to C$ and an equivalence from $f(a)$ to $\\alpha$ in $O_{/f(C)}$; morphisms and higher simplices retain these equivalences and their coherences. Then $f$ is a weak approximation in the sense of [def-coef-operadic-weak-approximation] if and only if $\\mathcal L_f(C,\\alpha)$ is weakly contractible for every $C\\in M$ and every active $\\alpha:X\\to f(C)$. No space assumption on positive-arity fibers and no categorical-fibration assumption on $f$ is imposed; the zero-fiber convention of the cited generalized-operad definition remains in force.",
+ "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid] and the ordinary and generalized nonsymmetric infinity operads of [lem-coef-operadic-algebra-presentability]. Let $f:M\\to O$ be an inert-preserving map of small generalized nonsymmetric infinity operads with $O$ ordinary. For $C\\in M$ and an active edge $\\alpha:X\\to f(C)$, let\n$$\\mathcal L_f(C,\\alpha)=M_{/C}\\times_{O_{/f(C)}}\\{\\alpha\\}$$\nbe the homotopy-pullback lifting infinity category, retaining the comparison equivalence and all its coherences. In the ordered-join model, this is represented by the full subcomplex of the coherent factorization model on vertices whose first edge is an equivalence in $O$. Then $f$ is a weak approximation in the sense of [def-coef-operadic-weak-approximation] if and only if this equivalence-edge lifting model is weakly contractible for every $C\\in M$ and every active $\\alpha:X\\to f(C)$. No space assumption on positive-arity fibers and no categorical-fibration assumption on $f$ is imposed; the zero-fiber convention of the cited generalized-operad definition remains in force.",
  "source": {
   "document": "https://arxiv.org/html/1312.3178",
   "place": "Erratum Proposition E.0.2 (the corrected active-slice criterion, not the uncorrected Corollary A.6.9) Read online; not archived in literature/. No Stacks tag states this infinity-operadic result."
@@ -225,5 +225,46 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-30dd88727 (reviewer sub-agent of L); spot-checked: Read in full: the item (all 7 steps), both new nodes and every cited statement. Source: Gepner–Haugseng arXiv 1312.3178v4, read from the PDF text: Def. A.6.1, Prop. A.6.3 and Erratum Prop. E.0.2. The item matches E.0.2 hypothesis by hypothesis (O ordinary, M generalized, f an arbitrary inert-preserving map, every C and active α, lifting category M/C×_{O/f(C)}{α}); nothing is weakened. def-coef-operadic-weak-approximation matches A.6.1. Steps 1–2: for active α the inert γ lies over the identity interval, so it is an equivalence and F≃L; the minimal interval [a,b] gives A_0≃F(α_0)≃L(α_0), and α_0 is active. Step 3 applies the reflection node with matching hypotheses. Step 4 is the prism homotopy argument, covering k=0 and n=0. Step 5 applies the replacement node. Step 6 is equivalence-invariance of the homotopy pullbacks, using f=ge strictly. Step 7 gives both directions of the existential clause. proof_deps equals the union of the step uses; no step leaves the route. Reflection node is true: the base of a comparison edge into A_0 is forced to be the inert interval a−t+i, and cocartesianness of q makes both β and h factor through it, so the representability Map(R A,B)≃Map(A,iB) holds. Tested on active α (R=id), r=0, n=0 and empty F. Replacement node is true: take the Joyal factorization over O; inner fibrations over N(Δ^op) are categorical fibrations, so e is an equivalence over Δ^op, and the inert lifts, Segal and incidence axioms, Kan zero fiber and inert-preservation transfer along e. Tested on f=id and empty M. Neither node restates the item. Duplicate search found nothing (symmetric active-slice calculus, approximation-restriction, symmetric mapping cylinder, cocartesian-Joyal fibration, pointwise-adjoint criterion and minimal retract all differ); no blueprint same_as. FIX (B3): the reflection node asserted a coherent left adjoint without citing a definition, so I added [def-coef-coherent-adjunction-data] to its statement and stmt_deps; this creates no cycle. No nodes dropped, no tool_uses accepted; the item's old maintainer tool_use lem-cbc-enhanced-functor-cone-calculus is no longer cited by any step. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicActiveLiftCriterion",
+  "declaration": "SSet.Enhanced.Nonsymmetric.active_lift_criterion",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.sliceVertexEdge",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.equivalenceFactorizations",
+   "SSet.Enhanced.Nonsymmetric.active_lift_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicActiveLiftCriterion.lean",
+  "statement": "theorem active_lift_criterion {M O : SSet.{max u v}} (q : M ⟶ monoidalSimplexBase.{max u v}) (p : O ⟶ monoidalSimplexBase.{max u v}) (f : M ⟶ O) (hM : Presentability.IsSmall.{u} M) (hO : Presentability.IsSmall.{u} O) (hq : IsGeneralizedOperad.{max u v} q) (hp : IsOperad.{max u v} p) (hf : IsLaxMonoidalInfinityFunctor.{max u v} q p f) : IsWeakApproximation.{max u v} (M := M) (O := O) q p f ↔ ∀ (C : M _⦋0⦌) (a : (WeakApproximation.slice.{max u v} O (f.app _ C)) _⦋0⦌), IsActiveEdge.{max u v} p ((SSet.yonedaEquiv.{max u v}).symm (WeakApproximation.sliceVertexEdge.{max u v} a)) → IsContractible.{max u v} (WeakApproximation.equivalenceFactorizations.{max u v} f C a)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43da6dca6",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every hypothesis, quantifier and the conclusion of active_lift_criterion matches the corrected node and GH Erratum E.0.2. equivalenceFactorizations (factorizations whose first edge is an equivalence, all higher simplices kept) correctly models the homotopy pullback M_/C x_{O_/f(C)} {alpha}; this removes the old fault where the unrestricted model was always contractible. The statement_change is source-faithful; the one citer lem-coef-operadic-localization-operation-criterion still holds and its Lean is unaffected. Checked edge cases: empty M, zero arity, identity f, empty model. No duplicate notion found. Helpers are real with source/blueprint docstrings, proof is sorry only, lean.statement equals the file signature, report has Worker report and Second reading by Q44. nt_compile.py compiles the module cleanly in 8.9 s, and a deliberately broken copy confirmed the wrapper reports errors. No fixes needed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q44 stage 2",
+  "old_statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid] and the ordinary and generalized nonsymmetric infinity operads of [lem-coef-operadic-algebra-presentability]. Let $f:M\\to O$ be an inert-preserving map of small generalized nonsymmetric infinity operads with $O$ ordinary. For $C\\in M$ and an active edge $\\alpha:X\\to f(C)$, define the lifting infinity category\n$$\\mathcal L_f(C,\\alpha)=M_{/C}\\times_{O_{/f(C)}}\\{\\alpha\\},$$\nwhere the pullback is a homotopy pullback of infinity categories. Thus an object is an arrow $a:D\\to C$ and an equivalence from $f(a)$ to $\\alpha$ in $O_{/f(C)}$; morphisms and higher simplices retain these equivalences and their coherences. Then $f$ is a weak approximation in the sense of [def-coef-operadic-weak-approximation] if and only if $\\mathcal L_f(C,\\alpha)$ is weakly contractible for every $C\\in M$ and every active $\\alpha:X\\to f(C)$. No space assumption on positive-arity fibers and no categorical-fibration assumption on $f$ is imposed; the zero-fiber convention of the cited generalized-operad definition remains in force.",
+  "what": "The recorded conclusion used the unrestricted coherent factorization model. It always contains the identity first edge at the terminal vertex, so it is contractible independently of f and cannot represent the homotopy pullback over an active arrow. The source lifting category retains an equivalence in the slice; the corrected statement uses the full subcomplex whose first edge is an equivalence, which is the ordered-join model of that homotopy pullback.",
+  "source": {
+   "document": "https://arxiv.org/html/1312.3178",
+   "place": "Erratum Proposition E.0.2, corrected active-slice criterion; Definition A.6.1 factorization model"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-operadic-localization-operation-criterion",
+    "holds": true,
+    "note": "Its proof unpacks the lifting category as the homotopy fiber; the corrected equivalence-edge subcomplex is exactly the model it uses, so its application remains valid."
+   }
+  ]
  }
 }

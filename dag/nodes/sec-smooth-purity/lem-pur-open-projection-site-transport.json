@@ -200,5 +200,32 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-b17a91f06 (reviewer sub-agent of L); spot-checked: The mathematics and all five proof steps were read and checked against the cited DAG statements and Stacks sources. One delivery metadata fault is repaired: `created.item` incorrectly named `lem-pur-vector-integration-site-comparison`. Step 1 also lacked a cited justification for boundedness of the derived tensor targets; the repair cites the existing etale and pro-etale projection isomorphisms and explains the boundedness transfer. Corrected JSON: `fixes/dag/nodes/sec-smooth-purity/lem-pur-open-projection-site-transport.json`. Full findings are in `review.md`; no new nodes, duplicates, cycles, SGA citations, or coefficient/base-change mismatches found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenProjectionSiteTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.openProjectionSiteTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenProjectionSiteTransport.lean",
+  "statement": "theorem openProjectionSiteTransport (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : ℕ) (hL : SheafOfModules.IsFiniteLocallyFreeOfRank.{u + 1, u, u + 1} (R := finiteCoefficientEtaleRingSheaf U Λ) ((finiteCoefficientEtaleRealization U Λ).obj L) t) (m : ℤ) (G : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : OpenProjectionTransport Λ j (((DerivedCategory.singleFunctor (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj L)⟦m⟧) (DerivedCategory.Plus.ι.obj G)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openProjectionExtensionComparison",
+   "AlgebraicGeometry.ProEtale.openProjectionRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.openProjectionSourceComparison",
+   "AlgebraicGeometry.ProEtale.openProjectionTargetComparison",
+   "AlgebraicGeometry.ProEtale.OpenProjectionTransport",
+   "AlgebraicGeometry.ProEtale.openProjectionSiteTransport"
+  ],
+  "note": "Repair of return at 8a983e8f8fda: real fixed-rank local freeness on the canonical etale coefficient realization; explicit adjoint-normalized derived extension, monoidal tensor and inverse-image comparisons; the forward maps are the inverse components of the recorded canonical etale and pro-etale projection isomorphisms, with explicit inverse identities. Source boundedness is stated after extension by zero. Helpers belong to this node and are listed in declarations. No mathematical statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-392aa8673",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Repairs of return 8a983e8f8fda verified: hL is now SheafOfModules.IsFiniteLocallyFreeOfRank of the canonical finiteCoefficientEtaleRealization (exactly 'locally ≅ A_U^t', t=0 allowed, universes forced except cover index = site object universe); the existential SiteTransportSquare is replaced by explicit canonical helpers (derived adjoint-normalized e_j via openImmersionLowerShriekComparisonUpperStarIso, leftDerivedTensorComparison-based ν^* tensor iso, comparisonUpperStarCompUpperStarIso restriction comparison) whose source/target squares match lem-sf-open-comparison-tensor-normalization; the bounded-below clauses include j_!. κ^σ = upstream projectionMap (adjunct of η⊗1, then inverse tensor comparison). γ^σ = inv of the recorded canonical projection isos (definitionally κ⁻¹; justified by the node's Steps 2-3 and the recorded notes, not hollow since the boundedness and κ square carry the content). All clauses, edge cases (t=0, m, empty U, id j, G=0, zero ring, ℤ/4) and universes checked; one sorry, docstrings ok, statement verbatim, node changed only in lean. nt_compile.py on the snapshot file: clean, 13.7 s / 18.1 s, exit 0."
  }
 }

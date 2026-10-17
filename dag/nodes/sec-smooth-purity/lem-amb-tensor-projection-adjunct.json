@@ -210,5 +210,23 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-74cf6535e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All four steps correctly establish the mate identity; Stacks 07A4, 03EL and 06YU support the tensor comparison and sign calculation. No extra hypotheses, circularity, duplicate nodes or coefficient-category identification found. Accepted all four declared generic tool uses. Detailed checks and inherited unit-binding mismatch recorded in review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TensorProjectionAdjunct",
+  "declaration": "AlgebraicGeometry.Etale.tensorProjectionAdjunct",
+  "file": "lean/Sheaf/SixFunctors/TensorProjectionAdjunct.lean",
+  "statement": "theorem tensorProjectionAdjunct (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) (K M : DerivedCategoryModule Λ Y) (E : DerivedCategoryModule Λ X) (a : M ⟶ (R((f)_*[ModuleCat.{u + 1} Λ])).obj E) : ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj K).obj M) (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj E)).symm (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj K).map a ≫ ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) Y).hom.app K).app ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E) ≫ ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app K ≫ (R((f)_*[ModuleCat.{u + 1} Λ])).map (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app E).app ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K))) = ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} Λ) f).app K).app M ≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map a ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app E)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e181af844",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Delivery adds only the item's lean record plus the module and report. Every clause matches the node: both symmetries sigma (derivedTensorSymmetry hom) are oriented correctly; PF_f(E,K) = rightDerivedLowerStarProjectionMap.app E .app K : Rf_*E⊗K→Rf_*(E⊗f⁻¹K); c_{K,M} = leftDerivedUpperStarTensorComparison, which goes f⁻¹(K⊗M)→f⁻¹K⊗f⁻¹M, is the inverse of the displayed canonical comparison and is the same comparison inside PF; a♭ = L f^* a ≫ counit; homEquiv.symm has the right source and target. Λ : Type (u+1) is the recorded DerivedCategoryModule convention. No extra hypotheses: the FlatModuleCat instance is existing. No duplicate found in side, slopmaster2 or Mathlib. No definitions, so none hollow; proof is sorry only; docstrings give the source place and blueprint id; the statement field equals the signature verbatim; both report sections present. nt_compile --json against the side overlay: rc=0, 8.7 s, clean. No findings."
  }
 }

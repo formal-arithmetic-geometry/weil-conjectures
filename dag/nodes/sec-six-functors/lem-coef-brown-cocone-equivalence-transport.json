@@ -8,7 +8,8 @@
   "place": "Agent lemma isolating the cocone comparison in the dual proof of Proposition 7.5.6, printed p. 373; sections 3.5 and 6.2 for coherent equivalence and colimit conventions. No Stacks tag states this quasicategorical transport result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [
   {
@@ -217,5 +218,23 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ef0f4d1fc (reviewer sub-agent of L); spot-checked: I read the item, the new node, the full statements of every cited node (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-isofibration-exponentiation, lem-coef-infinity-mapping-composition, lem-coef-infinity-pinch-comparison), the parent's use of the item, the unit and the blueprint paragraph 2. The statement is true and unchanged. I tested it on K empty (initiality invariance), K a point, ordinary nerves, a functor G that preserves no colimits, and identity edges. Step 1 (isofibration lifting with prescribed source, Fun(boundary of Delta^1, D)=DxD, Delta_K preserves inverse triangles) is correct. Three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-coef-brown-cocone-equivalence-transport.json. (1) E5/C1: step 3 wrote Delta_K(u)Delta_K(a)sigma = Delta_K(ua)sigma, which needs a functor to preserve canonical composition classes as a homotopy of whole maps. No cited node stated this; only the invalidated Hom-bifunctor node did. Step 3(a) now proves it from the characterization of c in lem-coef-infinity-mapping-composition and the naturality of j in lem-coef-infinity-pinch-comparison, and 3(c) writes out the 5-homotopy chain using the two 2-simplices of H. (2) C1: the new node lem-coef-infinity-equivalence-composition is a 2-4 line consequence of the associativity, unit and component-dependence clauses of mapping-composition, and its last clause is vague. I folded it into steps 2-3 and dropped it; it had no other citer. (3) Step 4 now states the passage from homotopy classes to weak equivalences (lem-cbc-simplicial-homotopy-equivalence-weak, homotopy invariance via the min-contraction, two-out-of-three). Accepted tool uses: lem-cbc-enhanced-functor-cone-calculus (declared by the worker) and lem-cbc-simplicial-homotopy-equivalence-weak (added by me), both generic sk-prop-sf-cbc tools. Not a duplicate: lem-coef-colimit-cocone-transport-equivalence is the diagram-only special case, and the item strictly generalizes it. The dependency closure has 144 nodes with no cycle; there is no SGA and no target or base-change content. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownCoconeEquivalenceTransport",
+  "declaration": "SSet.Enhanced.brown_cocone_equivalence_transport",
+  "file": "lean/Sheaf/CategoryTheory/BrownCoconeEquivalenceTransport.lean",
+  "statement": "theorem brown_cocone_equivalence_transport (K C : SSet.{u}) [Quasicategory C] (d d' : K ⟶ C) (σ : (coconeCategory d) _⦋0⦌) (p' : C _⦋0⦌) (e : ((ihom K).obj C) _⦋1⦌) (he₁ : ((ihom K).obj C).δ 1 e = diagramVertex d) (he₀ : ((ihom K).obj C).δ 0 e = diagramVertex d') (he : IsEquivalenceEdge ((ihom K).obj C) e) (a : C _⦋1⦌) (ha₁ : C.δ 1 a = σ.1.1) (ha₀ : C.δ 0 a = p') (ha : IsEquivalenceEdge C a) : (∃ (σ' : (coconeCategory d') _⦋0⦌) (H : ((ihom Δ[1]).obj ((ihom K).obj C)) _⦋1⦌), σ'.1.1 = p' ∧ ((ihom Δ[1]).obj ((ihom K).obj C)).δ 1 H = σ.1.2 ∧ ((ihom Δ[1]).obj ((ihom K).obj C)).δ 0 H = σ'.1.2 ∧ IsEquivalenceEdge ((ihom Δ[1]).obj ((ihom K).obj C)) H ∧ (evaluation Δ[1] ((ihom K).obj C) (stdSimplex.obj₀Equiv.symm 0)).app _ H = e ∧ (evaluation Δ[1] ((ihom K).obj C) (stdSimplex.obj₀Equiv.symm 1)).app _ H = (constantDiagrams K C).app _ a) ∧ (∀ (σ' : (coconeCategory d') _⦋0⦌) (H : ((ihom Δ[1]).obj ((ihom K).obj C)) _⦋1⦌), σ'.1.1 = p' → ((ihom Δ[1]).obj ((ihom K).obj C)).δ 1 H = σ.1.2 → ((ihom Δ[1]).obj ((ihom K).obj C)).δ 0 H = σ'.1.2 → IsEquivalenceEdge ((ihom Δ[1]).obj ((ihom K).obj C)) H → (evaluation Δ[1] ((ihom K).obj C) (stdSimplex.obj₀Equiv.symm 0)).app _ H = e → (evaluation Δ[1] ((ihom K).obj C) (stdSimplex.obj₀Equiv.symm 1)).app _ H = (constantDiagrams K C).app _ a → (IsColimiting d σ ↔ IsColimiting d' σ') ∧ (∀ (E : SSet.{u}) [Quasicategory E] (G : C ⟶ E), IsColimiting (d ≫ G) (CategoryTheory.Spaces.mappedCocone G d σ) ↔ IsColimiting (d' ≫ G) (CategoryTheory.Spaces.mappedCocone G d' σ')))",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa724459a",
+  "group": "N2",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node and the dependency definitions: the cocone comma conditions for coconeCategory, the δ1/δ0 source/target of e, a and H, exact evaluation endpoint equalities for e and Δ_K a, the explicit apex equation σ'.1.1 = p' (needed for empty K), existence plus a universal clause over every square, and the image iff through the existing mappedCocone with no preservation assumption on G. No extra hypotheses; the single universe u is what the node asks for. The existence clause holds via the endpoint isofibration lift. The added stmt_dep def-coef-infinity-category-of-spaces is landed, lists mappedCocone, and its 25-node closure has no cycle. Not a duplicate of the fixed-apex colimit_cocone_transport_equivalence. Only the theorem's proof is sorry; docstrings carry the source place, the blueprint tag and all five proof steps; lean.statement is verbatim. Delivery touches only the node lean/stmt_deps fields and the new module. nt_compile.py --json on the snapshot compiled cleanly: exit 0, no diagnostics, 4.4 s. No findings."
  }
 }

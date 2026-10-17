@@ -5,7 +5,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-inverse-system",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction"
  ],
  "proof": [
   {
@@ -291,5 +293,33 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-ebb334584 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All seven explicit chain and tensor calculations check out, including cone signs, initial indices, strict composition, and augmentations. Independently checked 4,767 arithmetic identities. No new nodes, missing citations, cycles, or repairs found. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactSupportRoosCofinality",
+  "declaration": "CategoryTheory.compactSupportRoosCofinality",
+  "file": "lean/Sheaf/CategoryTheory/CompactSupportRoosCofinality.lean",
+  "statement": "theorem compactSupportRoosCofinality {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{max uC vC r}] [J.HasSheafCompose (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})] [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (A : CommRingCat.{max uC vC r}) [HasExactLimitsOfShape (Discrete ℕ) (compactRoosModules J A)] : ∃ ρ : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ compactRoosModules J A) ℤ) (e : ℕ) (_he : 1 ≤ e), (strictRoosComplex X ⟶ strictRoosComplex ((complexRestriction (compactRoosModules J A) e).obj X)), (∀ X e he, QuasiIso (ρ X e he) ∧ ∀ p : ℤ, (ρ X e he).f (p + 1) ≫ (strictRoosCoordinates ((complexRestriction (compactRoosModules J A) e).obj X) p).hom = (strictRoosCoordinates X p).hom ≫ biprod.map ((block e X.asFunctor).f p) ((selection e X.asFunctor).f (p + 1))) ∧ (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ compactRoosModules J A) ℤ) (f : X ⟶ Y) (e : ℕ) (he : 1 ≤ e), ∃ (μ : strictRoosComplex X ⟶ strictRoosComplex Y) (μe : strictRoosComplex ((complexRestriction (compactRoosModules J A) e).obj X) ⟶ strictRoosComplex ((complexRestriction (compactRoosModules J A) e).obj Y)), (∀ p : ℤ, μ.f (p + 1) ≫ (strictRoosCoordinates Y p).hom = (strictRoosCoordinates X p).hom ≫ biprod.map ((strictRoosProductMap f).f p) ((strictRoosProductMap f).f (p + 1))) ∧ (∀ p : ℤ, μe.f (p + 1) ≫ (strictRoosCoordinates ((complexRestriction (compactRoosModules J A) e).obj Y) p).hom = (strictRoosCoordinates ((complexRestriction (compactRoosModules J A) e).obj X) p).hom ≫ biprod.map ((strictRoosProductMap ((complexRestriction (compactRoosModules J A) e).map f)).f p) ((strictRoosProductMap ((complexRestriction (compactRoosModules J A) e).map f)).f (p + 1))) ∧ μ ≫ ρ Y e he = ρ X e he ≫ μe) ∧ (∀ X, HEq (ρ X 1 (by decide)) (𝟙 (strictRoosComplex X))) ∧ (∀ X e he f hf, HEq (ρ X e he ≫ ρ ((complexRestriction (compactRoosModules J A) e).obj X) f hf) (ρ X (e * f) (one_le_mul he hf))) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ compactRoosModules J A) ℤ) (e : ℕ) (he : 1 ≤ e) (P : CochainComplex (compactRoosModules J A) ℤ) (γ : ∀ n : ℕ, P ⟶ X.asFunctor.obj (op n)), (∀ n : ℕ, γ (n + 1) ≫ X.asFunctor.map (homOfLE (Nat.le_succ n)).op = γ n) → ∃ b : P ⟶ strictRoosComplex X, (∀ p : ℤ, b.f (p + 1) ≫ (strictRoosCoordinates X p).hom = biprod.lift 0 ((Pi.lift (f := fun n : ℕ ↦ X.asFunctor.obj (op n)) γ).f (p + 1))) ∧ ∃ b' : P ⟶ strictRoosComplex ((complexRestriction (compactRoosModules J A) e).obj X), (∀ p : ℤ, b'.f (p + 1) ≫ (strictRoosCoordinates ((complexRestriction (compactRoosModules J A) e).obj X) p).hom = biprod.lift 0 ((Pi.lift (fun n : ℕ ↦ γ (e * (n + 1) - 1))).f (p + 1))) ∧ b ≫ ρ X e he = b')",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.compactRoosRing",
+   "CategoryTheory.compactRoosModules",
+   "CategoryTheory.compactRoosComplexMap",
+   "CategoryTheory.compactRoosTowerMap",
+   "CategoryTheory.compactRoosProductComparison",
+   "CategoryTheory.compactSupportRoosCofinality",
+   "CategoryTheory.compactSupportRoosFiniteFree"
+  ],
+  "note": "Repair of return L at 9897d8614c8b: corrected target/source coordinates to block/selection, added strict naturality and identity/composition in compactSupportRoosCofinality, and stated the finite-free B-linear canonical scalar-extension isomorphism with naturality, cofinal and augmentation compatibility in compactSupportRoosFiniteFree. The auxiliary abbreviations only specialize constantSheaf, mapHomologicalComplex, whiskeringRight and Mathlib piComparison; no new tensor or Roos construction is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44470e94c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NJ), module, all 7 stmt deps, the recorded strictRoos*/block/selection/index/complexRestriction declarations, changeOfRingsOfUniverses (def-pur-sheaf-tensor-product) and Stacks 0941. All clauses match: canonical single family rho, QuasiIso, block on target/selection on source coordinates (cone convention checked against Mathlib mappingCone), naturality, HEq identity/composition (types propositionally equal via index f ⋙ index e = index (ef) for f>=1), augmentation with gamma(e(n+1)-1); finite-free theorem fixes F to the recorded sheafified change of rings, theta by biprodComparison/piComparison, B-linear, natural, compatible with r_e and augmentations. Independent universes; exact-countable-products hypothesis only. Edge cases e=1, initial levels, zero rings, all degrees ok. lean.statement verbatim; only lean and stmt_deps changed; added deps are landed nodes, no cycle (167/160-node closures). No hollow defs, proofs sorry, docstrings and conventions ok. nt_compile.py --json: clean in 35.6 s, sanity check with a broken proof gave errors. No findings."
  }
 }

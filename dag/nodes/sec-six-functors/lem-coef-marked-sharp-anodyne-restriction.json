@@ -228,5 +228,24 @@
   "group": "Q124",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q124-a6b25e00e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, route, and relevant sources. Verified all seven steps, empty cases, degree-zero lifting, pushout-product hypotheses, and absence of dependency cycles or duplicate helpers. Accepted the declared core-Kan tool use. No repairs needed; concrete checks are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedSharpAnodyneRestriction",
+  "declaration": "SSet.Marked.marked_sharp_anodyne_restriction",
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedSharpAnodyneRestriction.lean",
+  "statement": "theorem marked_sharp_anodyne_restriction : (∃ (e : ∀ (K C : SSet.{u}) (_ : Quasicategory C), mapSharp (sharp K) (natural C) ≅ (ihom K).obj (Enhanced.core C).toSSet), (∀ (K C : SSet.{u}) (hC : Quasicategory C) (n m : SimplexCategoryᵒᵖ) (f : (mapSharp (sharp K) (natural C)).obj n) (x : K.obj m) (a : n ⟶ m), (((e K C hC).hom.app n f).app m a x).val = f.val.app m (x, SSet.stdSimplex.objEquiv.symm a.unop)) ∧ (∀ (K C : SSet.{u}) (hC : Quasicategory C), ∀ (K' : SSet.{u}) (r : K' ⟶ K), mapSharpPre (sharpMap r) (natural C) ≫ (e K' C hC).hom = (e K C hC).hom ≫ (MonoidalClosed.pre r).app (Enhanced.core C).toSSet) ∧ (∀ (K C D : SSet.{u}) (hC : Quasicategory C) (hD : Quasicategory D) (f : C ⟶ D), (e K C hC).hom ≫ (ihom K).map (Enhanced.coreMap f) = mapSharpPost (sharp K) (naturalMap f) ≫ (e K D hD).hom)) ∧ (∀ (K L C : SSet.{u}) (hC : Quasicategory C) (j : K ⟶ L), (∀ n : SimplexCategoryᵒᵖ, Function.Injective (j.app n)) → Enhanced.IsWeakHomotopyEquivalence j → SSet.modelCategoryQuillen.I.rlp (mapSharpPre (sharpMap j) (natural C)))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-89a6b5502"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89a6b5502",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Checked every node clause against the Lean: the mapping identity Map♯(K♯,C♮) ≅ (ihom K).obj (core C).toSSet (corrected target), the underlying-map formula in every degree including 0, restriction naturality via MonoidalClosed.pre, postcomposition naturality via the canonical coreMap/naturalMap, and for j degreewise injective plus IsWeakHomotopyEquivalence the conclusion I.rlp of mapSharpPre (sharpMap j) (natural C), which includes n=0. No extra hypotheses, no nonemptiness assumption, single universe u; empty K/L/C cases are covered. All marked declarations come from the existing marked-point-model modules; no duplicate statement found in the side tree. The node changes only by its lean record, whose statement is verbatim the file's signature; the 3 dependency nodes are identical to the base. No definitions, sorry-only proof, docstrings and report sections present, lines at most 93 chars. Finding (H9 / brief-stage2 §3): the non-public imports of the stated proof dependencies were missing: Sheaf.CategoryTheory.EnhancedFunctorConeCalculus and Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PushoutProduct. fixes/MarkedSharpAnodyneRestriction.lean adds them with no other change. The delivered file (4.2 s) and the fixed file (6.7 s) both compile cleanly with nt_compile.py --json, rc 0."
  }
 }

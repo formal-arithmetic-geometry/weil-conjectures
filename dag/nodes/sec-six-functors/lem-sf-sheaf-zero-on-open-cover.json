@@ -124,5 +124,23 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-34a3922a5 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited definition, both citers (thm-sf-hom-ctf Steps 5 and 10), the blueprint proof of thm-sf-hom-ctf (master; main-20261015 is identical) and the Lean source FreeLifting.lean:615-627 for eq_zero_of_upperStar_map_eq_zero. The new node's statement is true, and in fact holds without the etale hypothesis. Faults found: (B9) the steps, proof_origin and the blueprint.from.place of both nodes cite a nonexistent blueprint 'Proof, Step 5: A sheaf vanishing on a cover is zero'; the blueprint proof has no numbered steps, and the item's correct base from.place was overwritten. (C1/E5) Step 1 silently identifies the etale pullback phi_i^{-1}F with the slice restriction F|_{V_i}, a real lemma cited by no node. (B3/B10) the new node's 'pullback a_i^*f' has no definition node and no lean_audit attachment record; the citations.json named in the report is missing. The new node is also unnecessary: it follows from lem-weil-pbc-etale-cover-detects-iso applied to the kernel inclusion. Repair in fixes/: the item proof is rewritten in three elementary steps from the definitions. Step 1: site axiom (iii) of def-weil-pbc-sites-and-cohomology on the site def-weil-pbc-etale-site pulls the covering back to {U x_X V_i -> U}, each member lies in the slice over V_i, so F vanishes on it. Step 2: separatedness (def-weil-pbc-abelian-etale-sheaves, def-weil-sheaf-of-modules-category) makes F(U) -> prod 0 injective, so F(U)=0. Step 3: F is the zero object. proof_deps are four definitions, so there is no cycle. The base blueprint.from.place is restored, step sources cite the first and last sentences of the master proof, and split_report is rewritten. Edge cases checked: empty family/empty X, identity cover, F=0, open-immersion covers, arbitrary coefficient ring including A_{E,n}. The new node is dropped. The item's base source.place 'Step 5' is left as base data and flagged. No tool_uses; no target is touched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafZeroOnCover",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSheaf_isZero_of_isZero_over_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafZeroOnCover.lean",
+  "statement": "theorem etaleSheaf_isZero_of_isZero_over_cover (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (I : Type v) (V : I → Scheme.{u}) (φ : ∀ i : I, V i ⟶ X) [∀ i : I, AlgebraicGeometry.Etale (φ i)] (hcover : ∀ x : X, ∃ (i : I) (y : V i), φ i y = x) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hzero : ∀ i : I, IsZero (F.over (Scheme.Etale.mk (φ i)))) : IsZero F",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ca037680",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Shape ok (one commit; module, lean-only node record verbatim with the file, report with both required sections). Each clause matches the node: arbitrary I : Type v (empty/infinite allowed), étale φ i, hcover = Mathlib ofArrows_mem_smallEtaleTopology_iff joint surjectivity, F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) per the recorded def-weil-pbc-etale-sheaves encoding, literal slice restriction Sheaf.over (Etale.mk (φ i)), IsZero local and global; no added hypotheses. Edge cases (I empty/X empty, identity cover, zero ring) covered; universes bound. No definitions, sorry-only proof; docstrings cite the verified blueprint place and carry the 3 proof steps; proof-dep imports match the recorded modules. nt_compile.py --json clean (5.7 s, no errors or warnings). No findings requiring repair."
  }
 }

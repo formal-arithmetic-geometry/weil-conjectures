@@ -349,5 +349,39 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-2a71e23ca (reviewer sub-agent of L); spot-checked: Read the item, cited statements and source passages in full. All seven steps check: bounded-below restriction, composition mate, counit equation and explicit site transport. No circularity, duplicate node, coefficient-category substitution or target weakening found. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryDualizingComposition",
+  "declaration": "AlgebraicGeometry.Etale.boundary_dualizing_composition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.boundaryUpperShriekPlus",
+   "AlgebraicGeometry.Etale.boundaryAdjunctionPlus",
+   "AlgebraicGeometry.Etale.boundaryCompositionIso",
+   "AlgebraicGeometry.Etale.boundaryOriginIso",
+   "AlgebraicGeometry.Etale.boundaryProCompositionIsoApp",
+   "AlgebraicGeometry.Etale.boundaryCoefficientPlus",
+   "AlgebraicGeometry.Etale.boundaryDualizingEtaleIso",
+   "AlgebraicGeometry.Etale.boundaryDualizingComparisonIso",
+   "AlgebraicGeometry.Etale.boundaryDualizingProIso",
+   "AlgebraicGeometry.Etale.BoundaryCompositionCompatibility",
+   "AlgebraicGeometry.Etale.BoundaryCompositionOverFiniteField",
+   "AlgebraicGeometry.Etale.boundaryClosedDualizingIsos",
+   "AlgebraicGeometry.Etale.boundary_dualizing_composition"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryDualizingComposition.lean",
+  "statement": "theorem boundary_dualizing_composition (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : BoundaryCompositionOverFiniteField D l E n hn",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module constructs the actual restricted right adjoints and adjunctions, the mate of the specified D+ compact-support composition, its etale and pro-etale dualizing specializations, and the exact comparison-unit transport. The sole postponed theorem states the pasted-counit and naturality equations with all global finite-field/finite-type hypotheses. boundaryClosedDualizingIsos gives both canonical closed-immersion identifications at every positive coefficient level, with its pro-etale component in sfFiniteExceptionalFixed coordinates. All data are explicit; no ambient pro-etale adjunction, arbitrary comparison or additional boundedness premise is assumed. The report documents two unusable legacy proof-import closures."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f14b19f60",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Read node, all 9 stmt deps, report, module and the exact declarations used. Hypotheses match the node (FiniteFieldDatum, l≠p, any n≥1, separated finite-type k-maps), nothing stronger. boundaryCompositionIso = conjugateIsoEquiv of the restricted adjunctions and the specified rightDerivedLowerShriekPlusCompIso, orientation (gf)^x≅g^x⋙f^x. The pasted-counit conjunct matches conjugateEquiv_counit and Adjunction.comp counit. kappa_e = theta_A^-1 with a_Z = i≫a_T. ProEtale.rightDerivedUpperShriek = Rν_*⋙f^x⋙ν^* exactly; rho/lambda use the real derived comparison unit, inverted only on D+, and the coefficient-unit iso; the pro-etale composite is definitionally sfFiniteExceptionalFixed. Statement verbatim, 13 declarations present, only the lean field changed, one sorry, no hollow defs, docstrings and blueprint tags present, imports are statement plus recorded proof-dep modules, no duplicate or name collision, edge cases covered. Server compile hit its 60 s limit 3 times at load 150-220; the same compile from a /tmp copy with a 400 s limit was clean (91.8 s wall, ~36 s CPU), matching the worker's 49.2 s. No findings."
  }
 }

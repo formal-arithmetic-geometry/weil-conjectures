@@ -229,5 +229,42 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7e827cec1 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. HTT A.3.5 could not be read: it is not in literature/, the network is blocked, and a filesystem search found no local copy (the delivery records WANTED and proof_origin=agent). So I checked the mathematics independently. The new comparison follows from left properness of the Bergner model structure. The existing node lem-coef-scat-bergner-left-proper-pushouts cannot be cited: BFS shows it reaches the item through coherent-nerve-comparison and the chain below it, so the separate statement-only node is justified. That node is true, is not a restatement of the item (it covers only the attachment of the copies of K), and duplicate search found nothing. Small cases checked: V empty, a labelled identity, repeated labels, the collapse extension. Fixes: (1) E3/C4, step 3: the claim that the new node also identifies the strict pushout with J_V with its derived pushout is false in general (strict groupoidification of a face poset of S^2 against its Dwyer-Kan localization). I rewrote step 3 through the derived span map (1,1,r_V) and the definition of L_VD; that strict pushout was never needed. (2) C1, step 5: the inference from an isomorphism in h sCat to a Dwyer-Kan equivalence was uncited; it now cites the same-unit node lem-coef-model-localization-detects-weak-equivalences, acyclic, also added to proof_deps. (3) B3: the new node now has lem-coef-simplicial-derived-pushout-mapping in stmt_deps for the notion of derived pushout, and its comparison now runs from the derived to the ordinary pushout. (4) B7: the failed Loogle query is now recorded as an invalid query, not no match. Step 1's coproduct-of-cofibrations line is written out. No tool_uses; no SGA; not a target, and no base-change morphism or coefficient category is involved. A future split of the new node must avoid the left-properness and model-cofibrant-colimit-comparison nodes, both of which reach this item.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialArrowAttachmentLocalization",
+  "declaration": "CategoryTheory.SimplicialArrowAttachmentLocalization.simplicial_arrow_attachment_localization",
+  "declarations": [
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.arrowFamily",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.replacementFamily",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.replacementFamilyMap",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.labelledArrowMap",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.labelledMark",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.labelledPair",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.mapsLabelsToIdentities",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.collapseAt",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.attachmentPushout",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.attachmentUnit",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.relabelFamily",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.AttachmentCompatibility",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.StrictAttachmentFunctor",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.IsCollapseExtension",
+   "CategoryTheory.SimplicialArrowAttachmentLocalization.simplicial_arrow_attachment_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialArrowAttachmentLocalization.lean",
+  "statement": "theorem simplicial_arrow_attachment_localization : ∃ (M : BergnerModelData.{u}), M.model.categoryWithWeakEquivalences.weakEquivalences = SSet.Bergner.dwyerKanEquivalences ∧ M.model.categoryWithCofibrations.cofibrations = SSet.Bergner.I.rlp.llp ∧ (∀ R : SSet.Bergner.IntervalRepresentatives.{u}, M.model.categoryWithFibrations.fibrations = (SSet.Bergner.J R).rlp) ∧ (∃ (K : SCat.{u}) (i : walkingArrow.{u} ⟶ K) (r : K ⟶ walkingGroupoid.{u}), i ≫ r = adjoinInverse.{u} ∧ M.model.categoryWithCofibrations.cofibrations i ∧ SSet.Bergner.dwyerKanEquivalences r) ∧ ∀ (K : SCat.{u}) (i : walkingArrow.{u} ⟶ K) (r : K ⟶ walkingGroupoid.{u}), i ≫ r = adjoinInverse.{u} → M.model.categoryWithCofibrations.cofibrations i → SSet.Bergner.dwyerKanEquivalences r → CofibrantSimplicialInversion.IsBergnerCofibrant M K ∧ (∀ (D : SCat.{u}) (V : Type u) (a : arrowFamily V ⟶ D), ∃ (L : SCat.{u}) (q : D ⟶ L), MappingProperty (labelledPair D V a) (bergnerHomotopyFunctor.map q) ∧ ∃ (eq : bergnerHomotopyFunctor.obj (attachmentPushout D V K i a) ≅ bergnerHomotopyFunctor.obj L), bergnerHomotopyFunctor.map (attachmentUnit D V K i a) ≫ eq.hom = bergnerHomotopyFunctor.map q) ∧ ∃ Φ : StrictAttachmentFunctor K i, (∀ (D D' : SCat.{u}) (V : Type u) (a : arrowFamily V ⟶ D) (a' : arrowFamily V ⟶ D') (F : D ⟶ D') (h : AttachmentCompatibility a a' F (fun x => x)), SSet.Bergner.dwyerKanEquivalences F → SSet.Bergner.dwyerKanEquivalences (Φ.map D D' V V a a' F (fun x => x) h)) ∧ (∀ (D : SCat.{u}) (V : Type u) (a : arrowFamily V ⟶ D) (T : SCat.{u}) (g : D ⟶ T), mapsLabelsToIdentities D T V a g → ∃ gbar : attachmentPushout D V K i a ⟶ T, IsCollapseExtension D V K i r a T g gbar) ∧ (∀ (D D' : SCat.{u}) (V V' : Type u) (a : arrowFamily V ⟶ D) (a' : arrowFamily V' ⟶ D') (F : D ⟶ D') (s : V → V') (h : AttachmentCompatibility a a' F s) (T : SCat.{u}) (g' : D' ⟶ T) (gbar' : attachmentPushout D' V' K i a' ⟶ T), IsCollapseExtension D' V' K i r a' T g' gbar' → IsCollapseExtension D V K i r a T (F ≫ g') (Φ.map D D' V V' a a' F s h ≫ gbar')) ∧ (∀ (D : SCat.{u}) (V : Type u) (a : arrowFamily V ⟶ D) (T T' : SCat.{u}) (g : D ⟶ T) (H : T ⟶ T') (gbar : attachmentPushout D V K i a ⟶ T), IsCollapseExtension D V K i r a T g gbar → IsCollapseExtension D V K i r a T' (g ≫ H) (gbar ≫ H))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module records the fixed Bergner model structure, existence of a cofibrant interval factorization and, for every such factorization, cofibrancy of K, the strict coproduct and pushout attachment, its marked-pair localization comparison under D, the strict functor on pairs (identity/composition laws), Dwyer--Kan invariance of the induced map for common labels, and the specified identity-collapse extension through r and the constant functor collapseAt, natural for maps of pairs and postcomposition.",
+  "fixed_by": "NT-stage2-cc-e0f584464"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0f584464",
+  "group": "NV",
+  "result": "fix",
+  "note": "Read node, stmt dep (inversion-universal-property node and Lean: MappingProperty/Uniqueness/InducedMaps), the module, the report (Worker report + Second reading by NV present) and the citer grothendieck-hocolimit. Three weakenings vs the node (H3): (1) the identity-collapse extension was only `∃ gbar, unit ≫ gbar = g`, with no K-copy specification via r and 𝕁→{g(source v)} and no naturality; the citer uses the specified collapse; (2) DK invariance was stated for an arbitrary FΓ under D, not the induced Γ(F,1); (3) all clauses were for one existential factorization K instead of every fixed one. Fixes/ has a complete replacement module: new collapseAt (real constant enriched functor, laws proved), new IsCollapseExtension, theorem restated as existence of a factorization plus, for every factorization, cofibrancy, localization under D, ∃ Φ : StrictAttachmentFunctor with DK invariance of Φ.map F id, existence of the specified extension and naturality for maps of pairs and postcomposition; spurious nesting and shadowed binders removed; proof docstring gives the six node steps. lean-record (declarations += collapseAt, IsCollapseExtension) and report with an appended fix section. Edge cases V=∅, repeated labels, labelled identities, empty D; single universe u. nt_compile.py: delivered 6.4 s clean, fixed file 7.7 s clean."
  }
 }

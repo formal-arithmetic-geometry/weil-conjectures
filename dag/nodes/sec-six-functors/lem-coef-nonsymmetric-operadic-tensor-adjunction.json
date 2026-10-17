@@ -29,7 +29,13 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-nonsymmetric-operads-presentability",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-marked-operadic-model-structures"
+  "lem-coef-marked-operadic-model-structures",
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inert-operad-color-reconstruction",
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-coef-finite-reedy-localization",
+  "lem-coef-cosimplicial-frame-mapping"
  ],
  "proof": [
   {
@@ -315,5 +321,41 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-b2e7be78d (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and the three new nodes in full, together with the full statements of every node they cite (finite-pattern-universe-comparison, simplicial-model-coherent-diagrams, categorical-pattern-model-calculus, categorical-pattern-fibrancy, simplicial-model-nerve-localization, coherent-nerve-comparison, marked-point-cartesian-model, size-convention). Also read the unit and the blueprint ancestor. The human's return of old step 5 is repaired: its three hidden arguments are now statement-only nodes, and new steps 5-7 apply them. The hypotheses check out: the pattern is U-small, all 2-simplices are scaled, the leaves are finite discrete, I is locally Kan, and every pattern object is cofibrant. The QF replacement in U' comes from the new projective node, and the colimit and cocone identifications go through cocone naturality, not apex identification. Each new statement is true. Projective cells F_i(a) to F_i(b) come from the common generators J, U-small colimits are preserved by inclusion, and trivial fibrations are RLP(J) in both universes. The enriched colimit is a degreewise coequalizer of coproducts, and product with (Delta^n)^sharp preserves colimits. Rectification is induced strictly by G composed with u, so it commutes with inclusion. Small cases tested: empty I, one-object I, discrete I, a nondiscrete mapping space, and K = Delta^0. None of the new nodes restates an item clause; an rg search over the whole DAG found no duplicates; there is no cycle; proof_deps equals the union of uses; all cited statements are in the unit, so no tool_uses are needed. The statement is unchanged. Gepner-Haugseng, HTT and HA are not in literature/ and this reviewer has no network, so the cited places were judged from knowledge of HTT A.3.3.2, 4.2.4.1 and 4.2.4.4 and HA 1.3.4.20; the universe content is honestly marked as agent-written, and steps 1-4 were source-checked by the 2026-10-16 review. FIX (B3/C4): lem-coef-projective-diagram-universe-cofibrancy allowed an arbitrary U-small simplicial category I but took the projective model structures and cell generators from simplicial-model-coherent-diagrams, which states them only for fibrant (locally Kan) I. The corrected file in fixes/dag/nodes/sec-six-functors/ restricts I to fibrant (Kan mapping sets), which is exactly the case the item uses; no other field was changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NonsymmetricOperadicTensorAdjunction",
+  "declaration": "SSet.Enhanced.OperadicTensor.nonsymmetric_operadic_tensor_adjunction",
+  "declarations": [
+   "SSet.Enhanced.OperadicTensor.categories",
+   "SSet.Enhanced.OperadicTensor.categoryObject",
+   "SSet.Enhanced.OperadicTensor.operadObject",
+   "SSet.Enhanced.OperadicTensor.input",
+   "SSet.Enhanced.OperadicTensor.IsOperadicWeakEquivalence",
+   "SSet.Enhanced.OperadicTensor.PreservesSmallColimits",
+   "SSet.Enhanced.OperadicTensor.firstVariable",
+   "SSet.Enhanced.OperadicTensor.secondVariable",
+   "SSet.Enhanced.OperadicTensor.MappingAdjunction",
+   "SSet.Enhanced.OperadicTensor.raiseNerveMap",
+   "SSet.Enhanced.OperadicTensor.splitLift",
+   "SSet.Enhanced.OperadicTensor.Presentation",
+   "SSet.Enhanced.OperadicTensor.enlargedBase",
+   "SSet.Enhanced.OperadicTensor.Enlargement",
+   "SSet.Enhanced.OperadicTensor.nonsymmetric_operadic_tensor_adjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NonsymmetricOperadicTensorAdjunction.lean",
+  "statement": "theorem nonsymmetric_operadic_tensor_adjunction : ∃ (K : SSet.Marked.CartesianModelStatement.{u}) (P : Presentation K) (L : SSet.Marked.CartesianModelStatement.{max u v}) (Q : Presentation L), Nonempty (Enlargement P Q)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The tensor and algebra coherent bifunctors are normalized on full ordinary diagram categories by localization. The former is represented by functorial marked-product fibrant replacements; the latter by the existing full inert-preserving functor category and actual pre/postcomposition. A natural equivalence of pulled-back twisted-arrow left fibrations states the three-variable mapping-space adjunction. Separate colimit preservation, replacement independence, canonical universe inclusions and their tensor comparison are included. Added statement dependencies are all existing landed interfaces used in these signatures. No natural-language statement or proof changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3889ef560",
+  "group": "Q23",
+  "result": "pass",
+  "note": "I read the node, report, module and every statement-dependency declaration (operad Object/category and its shared Classical.choice enrichment, CartesianModelStatement, the marked product/natural/productLeft, Over.mapSharpPre, the localization and frame nerve maps, twistedProjection, algebras/diagrams/overFunctors, IsSmall/PreservesColimitsIn, QCats/qcatEquivalences). Each node clause matches the Lean. The marking is the conjunction (equivalence, inert); the weak-equivalence test is Map-sharp restriction against fibrant operads; the tensor is pinned by fibrant replacement plus localization; Alg is the full inert-preserving subcomplex with pre/postcomposition; MappingAdjunction is an equivalence of pulled-back twisted-arrow fibrations over (Cat x Op)^op x Op with correct fibers; colimits are preserved in each variable separately; the universe inclusion is the genuine ULift and preserves u-small colimits; the containing universe max u v is covered with tensor comparison; replacement independence holds. The existential witnesses are fully normalized, not hollow. Edge cases (empty index, empty C, arity 0, empty Alg, v=0) are covered. The statement field is verbatim; the only proof is the theorem's sorry; every declaration has source and blueprint docstrings. The node diff is only lean plus 6 added stmt_deps, all landed and used in the signature, with no cycle. nt_compile.py on the snapshot file against the local side overlay exited 0 (12.7 s) with no errors or warnings. The Second reading section is the standard 2026-10-17 note. No findings."
  }
 }

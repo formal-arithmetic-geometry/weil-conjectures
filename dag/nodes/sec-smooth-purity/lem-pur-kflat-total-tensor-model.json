@@ -199,5 +199,35 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-878a00539 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the statement of every cited node. Sources checked: Stacks 07A2 (sites-cohomology l.3060-3078), the proof of 07A4 and 0G6Q (sites-modules l.4593). The delivery has no new nodes. The mathematics is correct. Step 1 applies the K-flat test in the same tensor order as def-pc-kflat-complex. Step 3: the index set {p+q=i} is countable, so the countable-direct-sum clause of lem-pc-kflat-closure applies. I recomputed the step 4 differential signs: 1, (-1)^a and (-1)^(a+p) agree on both sides. Step 5 cites only the comparison clause of the descent node, and a small site satisfies that node's smallness hypothesis. Small cases pass: zero complexes, R[0], and complexes unbounded in both directions. No duplicate exists: lem-pc-kflat-tensor-product is for ringed spaces only, and the associativity nodes are for modules over a ring, not sheaves. No cycle, no SGA, statement unchanged. I made 2 repairs in fixes/.../lem-pur-kflat-total-tensor-model.json. (1) C1: steps 2 and 4 used the associativity of the sheaf tensor product, and step 4 also used that tensor commutes with infinite direct sums, but neither step cited a node for this. Both steps now cite lem-pc-sheaf-modules-tensor-closed (symmetric monoidal and closed, so tensor is a left adjoint), with the argument written out. (2) B5: the source of steps 2 and 3 said sites-cohomology.tex for 0G6Q; it is now sites-modules.tex. I updated proof_deps. Accepted tool_uses: lem-pc-kflat-closure, lem-weil-pbc-site-derived-tensor-descent, and the added lem-pc-sheaf-modules-tensor-closed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatTotalTensorModel",
+  "declaration": "SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model",
+  "declarations": [
+   "SheafOfModules.KFlatTotalTensorModel.smallSiteHasSheafify",
+   "SheafOfModules.KFlatTotalTensorModel.smallSiteWEqualsLocallyBijective",
+   "SheafOfModules.KFlatTotalTensorModel.Modules",
+   "SheafOfModules.KFlatTotalTensorModel.monoidal",
+   "SheafOfModules.KFlatTotalTensorModel.tensor",
+   "SheafOfModules.KFlatTotalTensorModel.tensor_preservesZeroMorphisms",
+   "SheafOfModules.KFlatTotalTensorModel.tensor_obj_preservesZeroMorphisms",
+   "SheafOfModules.KFlatTotalTensorModel.hasTotal",
+   "SheafOfModules.KFlatTotalTensorModel.total",
+   "SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTotalTensorModel.lean",
+  "statement": "theorem kFlat_total_tensor_model [HasDerivedCategory.{w} (Modules R)] (P Q : CochainComplex (Modules R) ℤ) (_hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) (_hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q) (_hPflat : ∀ p : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X p)) (_hQflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (Q.X q)) : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) ((total R).obj (P, Q)) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (((total R).obj (P, Q)).X i)) ∧ (∃ α : ∀ H : CochainComplex (Modules R) ℤ, (total R).obj (H, (total R).obj (P, Q)) ≅ (total R).obj ((total R).obj (H, P), Q), (∀ (H : CochainComplex (Modules R) ℤ) (a p q b c i : ℤ) (hpq : p + q = c) (ha : a + c = i) (hap : a + p = b) (hb : b + q = i), ((tensor R).obj (H.X a)).map (CochainComplex.ιMapBifunctor P Q (tensor R) p q c hpq) ≫ CochainComplex.ιMapBifunctor H ((total R).obj (P, Q)) (tensor R) a c i ha ≫ (α H).hom.f i = (@MonoidalCategory.associator (Modules R) _ (monoidal R).toMonoidalCategoryStruct (H.X a) (P.X p) (Q.X q)).inv ≫ ((tensor R).map (CochainComplex.ιMapBifunctor H P (tensor R) a p b hap)).app (Q.X q) ≫ CochainComplex.ιMapBifunctor ((total R).obj (H, P)) Q (tensor R) b q i hb) ∧ ∀ (H H' : CochainComplex (Modules R) ℤ) (f : H ⟶ H'), (total R).map (CategoryTheory.Prod.mkHom f (𝟙 ((total R).obj (P, Q)))) ≫ (α H').hom = (α H).hom ≫ (total R).map (CategoryTheory.Prod.mkHom ((total R).map (CategoryTheory.Prod.mkHom f (𝟙 P))) (𝟙 Q))) ∧ Nonempty (DerivedCategory.Q.obj ((total R).obj (P, Q)) ≅ (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eff4e6b95",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, all 4 stmt_deps, Stacks 07A2/0G6Q, both modules and report. Every hypothesis and conclusion matches the Lean: K-flat and flat-term P,Q; T K-flat with flat terms; summandwise inverse-associator chain iso natural in H; localized T is the derived tensor. Universes u,v,r are independent with EssentiallySmall.{r}. Differential signs recomputed: 1, (-1)^a, (-1)^(a+p) on both sides. A probe proved by rfl that the item's tensor/total equal the K-flat definition's mapBifunctor, the recorded tensor complex and the descent theorem's map2HomologicalComplex; a deliberately false control failed. The §1(B) descent repair only frees the coefficient universe (the old max u v record was itself sorry) and keeps every clause; the chosen derived tensor follows the landed wfSiteDerivedTensor pattern and is unique up to isomorphism. No duplicate found. Only the lean field changed in both node files; statements verbatim. nt_compile of both files rc=0, about 21-25 s each. No fixes."
  }
 }

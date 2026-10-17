@@ -178,5 +178,32 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-06a1e72a8 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 6 steps. I also read def-weil-matrix, which supplies only the entry-family notion the item uses, and the consumer lem-sfb-continuous-integral-pivot-splitting, whose step 1 applies the item with the same order L0L1, R0 and residual block. I recomputed every step by hand. Step 1: N^2=0 and P^2=0, so the inverses are I-N and I-P. Step 2: L^{-1}=(I-N)D, with entries a and K_i1. Step 3: column elimination makes row 1 vanish because ab=1. Step 4: row elimination uses ba=1; L0 then scales row 1 by b to give a corner of 1, and the order is correct by associativity. Step 5: continuity uses only the topological-ring operations and the separate hypothesis that the pivot inverse is continuous. Step 6: empty blocks and empty T. Every step is honestly elementary. I ran my own test on 16200 random cases over Z/1, Z/4, Z/6, Z/8, Z/9 and Z/12 with shapes up to 3x3; all identities and both two-sided inverses hold. The delivery has no new nodes, so no duplicate, restated-clause or drop question arises. A grep of dag/nodes for pivot/Schur candidates (the pc minor-block, abelian-varieties residue pivot, pbc homotopy-cancellation and pbc continuous-field elimination nodes) found nothing that states or generalizes the item. The proof cites no statement node, so it stays on its route, has no tool_uses and cites no SGA. I checked HRS arXiv:2305.18131 Theorem 6.12(2), pp. 18-19: it proves continuous division and principality of ideals, not this identity. proof_origin (by agent) already says so, but the maintainer-owned source.place phrase claiming HRS uses it as a standard calculation overstates the source. I left that field unchanged because it is not split-owned, and suggest the maintainer adopt the worker's wording. The item is not a target, so the base-change and coefficient-category check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.Matrix.ContinuousUnitPivot",
+  "declaration": "Matrix.continuous_unitPivot_schur_formula",
+  "declarations": [
+   "Matrix.unitPivotScaling",
+   "Matrix.unitPivotLeftElimination",
+   "Matrix.unitPivotLeft",
+   "Matrix.unitPivotRightElimination",
+   "Matrix.unitPivotSchurComplement",
+   "Matrix.continuous_unitPivot_schur_formula"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/Matrix/ContinuousUnitPivot.lean",
+  "statement": "theorem continuous_unitPivot_schur_formula {A : Type u} [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] {T : Type v} [TopologicalSpace T] {n m : ℕ} (K : T → Matrix (Fin (n + 1)) (Fin (m + 1)) A) (hK : ∀ i j, Continuous (fun t => K t i j)) (hunit : ∀ t, IsUnit (K t 0 0)) (hinv : Continuous (fun t => Ring.inverse (K t 0 0))) : (∀ t, IsUnit (unitPivotLeft (K t))) ∧ (∀ t, IsUnit (unitPivotRightElimination (K t))) ∧ (∀ i j, Continuous (fun t => unitPivotLeft (K t) i j)) ∧ (∀ i j, Continuous (fun t => unitPivotRightElimination (K t) i j)) ∧ (∀ i j, Continuous (fun t => Ring.inverse (unitPivotLeft (K t)) i j)) ∧ (∀ i j, Continuous (fun t => Ring.inverse (unitPivotRightElimination (K t)) i j)) ∧ (∀ i j, Continuous (fun t => unitPivotSchurComplement (K t) i j)) ∧ (∀ t, unitPivotLeft (K t) * K t * unitPivotRightElimination (K t) = of (Fin.cases (Fin.cases 1 (fun _ => 0)) (fun i => Fin.cases 0 (unitPivotSchurComplement (K t) i))))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Positive dimensions are n + 1 and m + 1. The five helper definitions are the prescribed factors and residual block of this node. IsUnit expresses membership in the general linear group, and Ring.inverse agrees with the inverse of each unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e23c9faf4",
+  "group": "Q78",
+  "result": "pass",
+  "note": "The Lean statement matches every hypothesis and conclusion of the node: arbitrary commutative topological ring, independent universes u and v, sizes n+1 and m+1, entrywise-continuous K, unit pivot with continuous Ring.inverse, L0, L1 and R0 as prescribed, L=L0*L1, H on the successor indices. The eight conjuncts give IsUnit, entry continuity of the matrices and their inverses, continuity of H, and L*K*R0 = diag(1,H) with the Fin.cases layout checked. The node changed only in lean; lean.statement is verbatim in the file. The five helpers have real data and docstrings, and the only sorry is the theorem proof. Docstrings carry the source, blueprint tag and 6 proof steps; lines are at most 100 characters and the single import is used. No name collision or duplicate in Mathlib or the side tree. nt_compile --json was clean (rc 0, 16 s and 10 s), and a control copy with an error gave rc 1. Edge cases n=0, m=0, empty T and the zero ring are covered. Non-blocking note: the maintainer-owned source.place overstates HRS."
  }
 }

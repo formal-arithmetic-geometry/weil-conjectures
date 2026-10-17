@@ -218,5 +218,48 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-06caf78bd (reviewer sub-agent of L); spot-checked: I read the whole item. No new nodes. All 7 steps check out with signs recomputed. Step 1: the Hom reindexing gives the same formula d_N v+(-1)^r v d_Q, so Q[1] is dg-projective. Step 2: C(Q) is the def node's cone of 1_Q; d^2=0, dh+hd=1 with h(b,a)=(0,b), the Hom-level contraction H(u)=(-1)^r u h works, and coker i=Q[1]. Step 3: all objects are cofibrant and both legs are cofibrations, which the pointed-model pushout clause needs. Step 4: the pushout quotient and its differential are right. Step 5: s(a)=(0,-a,a) is a chain map, ps=1, 1-sp=dH+Hd with H(b,a1,a2)=(0,b,0), and P=C(Q)+Q[1]. Steps 6-7: cofibrant replacement and [-1] are fine, and the item's stability conclusion matches the 'Stable means' definition the parent's cited node lem-coef-quillen-section-rectification uses. Cited statements read: lem-coef-projective-cochain-monoidal-model (cofibrations = termwise split injections with dg-projective cokernel), lem-coef-pointed-model-stability, and the shift/cone conventions in def-weil-abstract-derived-category. Edge cases Q=0, the zero ring and R[0] hold. No duplicate found; lem-pur-system-section-suspension is about sheaf flat model systems, a different object. proof_deps equals the union of step uses; four kinds of search are recorded; no SGA. Accepted tool_uses: both lem-coef nodes, as generic foundations that unit sk-prop-sf-cbc does not provide. Choudhury-Gallauer is WANTED and proof_origin is agent. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveCochainSuspension",
+  "declaration": "HomotopicalAlgebra.projective_cochain_suspension",
+  "declarations": [
+   "HomotopicalAlgebra.projectiveSuspensionCone",
+   "HomotopicalAlgebra.projectiveSuspensionConeInclusion",
+   "HomotopicalAlgebra.projectiveSuspensionPushout",
+   "HomotopicalAlgebra.projectiveSuspensionTriple",
+   "HomotopicalAlgebra.projectiveSuspensionDifferential",
+   "HomotopicalAlgebra.projectiveSuspensionDifferential_sq",
+   "HomotopicalAlgebra.projectiveSuspensionExplicit",
+   "HomotopicalAlgebra.projectiveSuspensionLegComponent",
+   "HomotopicalAlgebra.projectiveSuspensionLeg_comm",
+   "HomotopicalAlgebra.projectiveSuspensionLeg",
+   "HomotopicalAlgebra.projectiveSuspensionLeg_agree",
+   "HomotopicalAlgebra.projectiveSuspensionCoordinates",
+   "HomotopicalAlgebra.projectiveSuspensionProjection_comm",
+   "HomotopicalAlgebra.projectiveSuspensionProjection",
+   "HomotopicalAlgebra.projectiveSuspensionPushoutProjection",
+   "HomotopicalAlgebra.projectiveSuspensionConeMap",
+   "HomotopicalAlgebra.projectiveSuspensionConeMap_inclusion",
+   "HomotopicalAlgebra.projectiveSuspensionPushoutMap",
+   "HomotopicalAlgebra.projectiveSuspensionSpanToZero",
+   "HomotopicalAlgebra.ProjectiveCochainCoherentSuspension",
+   "HomotopicalAlgebra.ProjectiveCochainSuspensionStatement",
+   "HomotopicalAlgebra.projective_cochain_suspension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveCochainSuspension.lean",
+  "statement": "theorem projective_cochain_suspension (R : Type u) [CommRing R] : Nonempty (ProjectiveCochainSuspensionStatement.{u, t} R)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The identity cone and inclusion use Mathlib mappingCone. The pushout coordinate map is the canonical pushout.desc of the two explicit legs, not an arbitrary isomorphism. The projection has concrete data and named chain-map justification. The coherent conclusion concerns localization of the same module-complex category at quasi-isomorphisms, includes its zero and finite limits/colimits, its canonical span equivalence and pushout computation, a natural isomorphism identifying ordinary suspension with descended cochain shift on all complexes, suspension equivalence, and unconditional square stability. All helper theorems belong to the owning cone calculation and have complete proof docstrings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65a43d9ab",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Every node clause matches the Lean in ProjectiveCochainSuspension.lean: identity cone and inclusion via Mathlib mappingCone/inr; explicit triple differential recomputed; pushout coordinates are pushout.desc of the two concrete legs (b,a,0)/(b,0,a); the projection to a2 is a quasi-iso and natural via pushout.map/mappingCone.map; cone cofibrant, inclusion a cofibration and cone contractible via the dependency's ProjectiveCochainCofibration; the cone span is an equivalence edge to 0<-Q->0 and the ordinary pushout is a colimit edge; suspension is fixed by HasSuspensionLoop on q(0) and its natural iso with [1] holds on all complexes; zero object, finite (co)limits, suspension equivalence and pushout<->pullback stated unconditionally. Universes copy pointed_model_category_stability (largeNerve.{u+1,u,t}) with no forced equality. No hollow definitions; docstrings present; 6 sorry proofs only; lean.statement verbatim; declaration list equals the file; node changed only in its lean field. nt_compile --json: 9.9 s, no errors or warnings. Second reading is an author self-check under the direct-delivery convention used by 41 landed reports; not a blocker."
  }
 }

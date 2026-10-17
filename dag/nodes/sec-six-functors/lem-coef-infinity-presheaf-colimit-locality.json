@@ -9,7 +9,11 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-infinity-reflection-assembly"
  ],
  "proof": [
   {
@@ -203,5 +207,29 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-ba8927076 (reviewer sub-agent of L); spot-checked: Reviewed full item, route, cited nodes, blueprint proof, HTT source locations, searches, hypotheses, coherences, variance, and edge cases. No mathematical or structural fault found; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafColimitLocality",
+  "declaration": "SSet.Enhanced.PresheafColimitLocality.presheaf_colimit_locality",
+  "declarations": [
+   "SSet.Enhanced.PresheafColimitLocality.relationPrecomposition",
+   "SSet.Enhanced.PresheafColimitLocality.ComparisonSquare",
+   "SSet.Enhanced.PresheafColimitLocality.presheaf_colimit_locality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafColimitLocality.lean",
+  "statement": "theorem presheaf_colimit_locality (D : SSet.{u}) [SSet.Quasicategory D] (K : SSet.{u}) (hK : SSet.Presentability.IsSmall.{u, u} K) (p : K ⟶ D) (a : D _⦋0⦌) (lam : (coconeCategory p) _⦋0⦌) (ha : lam.1.1 = a) : (∃ ι : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda D)) _⦋0⦌, IsColimiting _ ι) ∧ (∀ (ι : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda D)) _⦋0⦌), IsColimiting _ ι → ∃ yl : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda D)) _⦋0⦌, yl.1.1 = (infinityYoneda D).app _ (ULift.up a) ∧ (∀ (n : SimplexCategoryᵒᵖ) (k : K.obj n) (t : (Δ[1] : SSet.{u}).obj n), (presheafTransformationMap yl.1.2).app n (ULift.up k, SSet.stdSimplex.objEquiv.symm (SSet.stdSimplex.objEquiv t)) = (infinityYoneda D).app n (ULift.up ((presheafTransformationMap lam.1.2).app n (k, t)))) ∧ (∃ e : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda D)) _⦋1⦌, (coconeCategory _).δ 1 e = ι ∧ (coconeCategory _).δ 0 e = yl) ∧ (∀ (e : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda D)) _⦋1⦌), (coconeCategory _).δ 1 e = ι → (coconeCategory _).δ 0 e = yl → ∀ (hs : (infinityPresheaves D).δ 1 ((calculusApex _ false).app _ e) = ι.1.1) (ht : (infinityPresheaves D).δ 0 ((calculusApex _ false).app _ e) = (infinityYoneda D).app _ (ULift.up a)) (X : (infinityPresheaves D) _⦋0⦌), Nonempty (ComparisonSquare (lam := lam) ι e hs ht X) ∧ (IsPresheafLimitComparison X p lam ↔ IsWeakHomotopyEquivalence (relationPrecomposition ι e hs ht X)))) ∧ (∀ c : D _⦋0⦌, IsColimiting p lam → IsPresheafLimitComparison ((infinityYoneda D).app _ (ULift.up c)) p lam)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 821a3ab06117: ties the cocone apex to a; constructs the Yoneda image degreewise and uses an edge of cocones, whose apex projection is definitionally RelativeCompletion.comparison; retains a homotopy compatibility square between the two weak equivalences and the actual comparison to a limit. All helper declarations are listed, and no global instance is installed. Added statement dependencies only for their existing comparison and cone helper interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dc13b48c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Item node changes only in lean and stmt_deps; the 4 added stmt_deps are landed nodes (brief-stage2 l.140); dependency node files are identical to the shared clone. Statement checked against the node and HTT 5.3.6.2(3): ha fixes the apex to a; the Yoneda image cocone yl is fixed degreewise; s is the apex of an edge of cocones from the colimit to yl, tested for every such edge (homotopy-invariant); relationPrecomposition = canonicalPrecompositionMap Map(y a,X) to Map(B,X); ComparisonSquare fixes the whole X(lam) cone, a cone edge to a limiting cone, the comparison through IsSpaceEdge, and a homotopy-commutative square with two weak equivalences; the biconditional uses the landed IsPresheafLimitComparison; the representable clause is there; K empty is admitted; universes are consistent; the previous counterexample is excluded. Gates: no hollow definitions, sorry only in the theorem, no instance, all five proof steps in the docstring, imports correct, lines at most 88 chars, lean.statement verbatim. nt_compile --json against the side overlay: rc=0, 22.8 s, no diagnostics. Remarks only: R1, the square's equivalences are existential (coherent naturality is not stated separately), consistent with the existential Yoneda-evaluation dependency; R2, the statement uses the Prop .1 of the free-cocompletion theorem, which is a proof dependency."
  }
 }

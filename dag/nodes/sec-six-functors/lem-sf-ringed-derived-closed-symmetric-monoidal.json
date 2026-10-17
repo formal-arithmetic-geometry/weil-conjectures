@@ -24,7 +24,8 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
   "def-pur-derived-internal-hom",
-  "def-sfb-monoidal-category"
+  "def-sfb-monoidal-category",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -397,5 +398,38 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-526dbf98c (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, every cited DAG statement, the citing transport node, unit/blueprint route, and recorded Stacks sources. Verified hypotheses, signed symmetry and hexagon, K-flat descent, closed Hom adjunction, evaluation counit, edge cases, route lock, and duplicate/search checks. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal",
+  "declaration": "CategoryTheory.ringedDerived_closed_symmetric_monoidal",
+  "declarations": [
+   "CategoryTheory.RingedTensorModules",
+   "CategoryTheory.ringedTensorUnitComplex",
+   "CategoryTheory.ringedTensorUnitSection",
+   "CategoryTheory.RingedDerivedTensorComparison",
+   "CategoryTheory.RingedDerivedTensorBothModel",
+   "CategoryTheory.RingedDerivedTensorNaturality",
+   "CategoryTheory.RingedDerivedTensorSymmetryModel",
+   "CategoryTheory.RingedDerivedTensorAssociatorModel",
+   "CategoryTheory.RingedDerivedTensorLeftUnitorModel",
+   "CategoryTheory.RingedDerivedTensorRightUnitorModel",
+   "CategoryTheory.RingedDerivedTensorCoherence",
+   "CategoryTheory.ringedDerived_closed_symmetric_monoidal"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedDerivedClosedSymmetricMonoidal.lean",
+  "statement": "theorem ringedDerived_closed_symmetric_monoidal : ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R), ∃ T : CoefficientTensorModels.{u, c, v, w} J R S, ∃ β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _ S.monoidal, Nonempty (RingedDerivedTensorCoherence.{c, v, u, w} J R S T β)",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned-head performance repair: factor the identical tensor comparison type and six coherence formulas into named definitions in this same module. The structure fields assert those definitions; their formulas, its data, all representatives and the theorem signature are unchanged. This prevents copying the large formulas through generated structure declarations during module export."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14ef9cb1e",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: one-K-flat tensor comparison (tensorIso, agreeing with T.iso, natural for all chain maps), unit = coefficient ring in degree 0 (unitIso), sign-free associator, coefficient-multiplication unitors, (-1)^{pq} symmetry, SymmetricCategory hexagon in Mathlib order, closed adjunction with the recorded derivedInternalHomOfUniverses natural in K,L,M, counit = evaluation with uncurry_model. No extra assumptions; site and coefficient universes independent. Edge cases admitted: empty site, zero ring, char 2, degree 0, K-flat factors without flat terms, pro-etale sizes. Upstream DerivedCategory monoidal instance needs HasFunctorialFlatResolution and graded-tensor instances, so not usable; landed def-coef-ringed-tensor-hom-model reused, no duplicates. Item node changes only lean plus stmt_deps gaining that landed node (permitted, no cycle); statement verbatim; all 12 declarations listed. Source/blueprint docstrings everywhere; 11-step proof in the theorem docstring; single sorry; no hollow data. Report has both required sections. nt_compile --json: exit 0, no messages, 22.1 s / 12.1 s (<60 s), so the earlier export timeout is resolved."
  }
 }
