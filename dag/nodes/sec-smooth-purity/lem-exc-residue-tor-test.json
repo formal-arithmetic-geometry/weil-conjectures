@@ -59,16 +59,16 @@
    }
   },
   {
-   "text": "Let $N$ be any $\\kappa_T$-module sheaf. Regard $C^q$ and $N$ as presheaves of modules over the constant presheaf $U\\mapsto\\kappa$. For each $U$, tensoring $\\kappa$-vector spaces with $N(U)$ is exact: a short exact sequence splits after lifting a basis of its quotient, and its tensor is again a split sequence. The tensor functor is additive, so these split sequences identify kernels and images after tensoring. Apply this to $0\\to Z^i\\to C^i(U)\\to B^{i+1}\\to0$ and $0\\to B^i\\to Z^i\\to H^i(C(U))\\to0$, with $Z^i$ and $B^i$ the cycles and boundaries of $C(U)$. It follows that the canonical map $[z]\\otimes y\\mapsto[z\\otimes y]$ is an isomorphism\n$$H^i(C(U))\\otimes_\\kappa N(U)\\simeq H^i(C(U)\\otimes_\\kappa N(U)).$$\nThis map is natural in restrictions even though the splittings used to prove bijectivity need not be. By [lem-pc-sites-module-sheafification-tensor], sheafifying the sectionwise tensor over the constant presheaf $\\kappa$ gives $C\\otimes_{\\kappa_T}N$. By [lem-weil-pbc-site-module-presheaf-sheafification-exact], sheafification commutes with cohomology. Sheafify the displayed isomorphism and apply the tensor comparison again, obtaining\n$$\\mathcal H^i(C\\otimes_{\\kappa_T}N)\\simeq\\mathcal H^i(C)\\otimes_{\\kappa_T}N.$$\nIn particular this vanishes outside $[a,b]$. The balanced maps $(x\\otimes t)\\otimes y\\mapsto x\\otimes ty$ and $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$ are balanced over the indicated rings and commute with restrictions and differentials. Sections of a sheaf tensor product are locally sums of pure tensors, so these formulas define local maps on generators; balancing makes them independent of representatives, and sheafification glues them. Their composites fix each pure tensor, hence every local section; the sheaf tensor construction [def-pur-sheaf-tensor-product] therefore gives an isomorphism of complexes\n$$(P\\otimes_{A_T}\\kappa_T)\\otimes_{\\kappa_T}N\\simeq P\\otimes_{A_T}N.$$\nThus $\\mathcal H^i(P\\otimes_{A_T}N)=0$ outside $[a,b]$. The calculation uses the field $\\kappa$, not the generally non-field ring $\\kappa_T(U)$.",
+   "text": "Let $N$ be any $\\kappa_T$-module sheaf. By step 1, $\\kappa$ is a field and $\\kappa_T$ is its constant sheaf of rings on $T_{\\Et}$; apply [lem-exc-constant-field-sheaf-tensor-cohomology] to the complex $C$ of $\\kappa_T$-modules from step 3 and to $N$. It gives\n$$\\mathcal H^i(C\\otimes_{\\kappa_T}N)\\simeq\\mathcal H^i(C)\\otimes_{\\kappa_T}N,$$\nwhich vanishes for $i\\notin[a,b]$ by step 3. Next compare with $P\\otimes_{A_T}N$, where $N$ is an $A_T$-module through $A_T\\to\\kappa_T$. The formulas $(x\\otimes t)\\otimes y\\mapsto x\\otimes ty$ and $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$ are balanced over the indicated rings and commute with restrictions and differentials. By [lem-pc-sites-module-sheafification-tensor] and the definition [def-pur-sheaf-tensor-product], each sheaf tensor product is the sheafification of the sectionwise tensor, so local sections are locally sums of pure tensors; the formulas define maps on these generators, balancing makes them independent of representatives, and sheafification glues them. Both composites fix every pure tensor, hence every local section. This gives an isomorphism of complexes\n$$(P\\otimes_{A_T}\\kappa_T)\\otimes_{\\kappa_T}N\\simeq P\\otimes_{A_T}N.$$\nThus $\\mathcal H^i(P\\otimes_{A_T}N)=0$ for $i\\notin[a,b]$.",
    "uses": [
+    "lem-exc-constant-field-sheaf-tensor-cohomology",
     "lem-pc-sites-module-sheafification-tensor",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03EI, lemma-sheafification-exact; the sectionwise vector-space calculation is written here"
+    "place": "Tag 0GMW, lemma-sheafification-tensor, and Section 03EK (tensor product) for the change-of-rings comparison; the field calculation is the new node lem-exc-constant-field-sheaf-tensor-cohomology"
    }
   },
   {
@@ -103,6 +103,7 @@
   "def-kun-tor-amplitude",
   "lem-pc-kflat-resolution",
   "def-kun-derived-tensor",
+  "lem-exc-constant-field-sheaf-tensor-cohomology",
   "lem-pc-sites-module-sheafification-tensor",
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
@@ -284,7 +285,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -315,10 +316,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-trace-perfectness",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-exc-residue-tor-test",
   "worker": "stage1",
-  "summary": "Made the implicit coefficient datum, scheme, positive level and integer endpoints explicit; retained bounded constructibility and the ordinary etale category. STATEMENT-DISPUTED: the imported proof uses pro-etale-only tensor/Tor definitions for an etale object; replaced them by existing etale definitions without changing the intended assertion. Completed the earlier sandbox filtration proof, explicitly recording the field-section calculation, tensor symmetry and finite descending induction. No new nodes or Mathlib leaves; all cited statements were read and verbatim excerpts recorded in citations.json. Re-ran the prescribed Mathlib searches with two phrasings and recorded invalid queries and the unavailable LeanSearch service honestly.",
+  "summary": "Audited the imported residue-field Tor criterion against the current main-20261015 blueprint and Stacks-based filtration proof. The statement keeps the explicit finite extension, level n, ordinary small-etale site, bounded constructibility, and exact interval. The six-step proof uses the nilpotent scalar filtration, K-flat resolution, sectionwise field tensor calculation, sheafification exactness, and long exact sequence; no new nodes are needed. Existing proof, dependencies, blueprint metadata, and prior review fields are retained; citations.json records verbatim statements for all cited nodes. Mathlib searches were run for this item and found no direct match. Review repair (Q64 cc reviewer, 2026-10-17): the sectionwise field-tensor calculation formerly proved inside step 4 is a separate site-general lemma and is now the statement-only node lem-exc-constant-field-sheaf-tensor-cohomology, which step 4 cites.",
   "blueprint": "Realizes the forward implication of the first paragraph and the uniform sheafwise converse of the second paragraph of lem-exc-residue-tor-test, Proof. Below the unchanged unit sk-prop-sf-trace-perfectness (which has no proof steps), the minimal-resolution and stalk calculation is replaced by the written scalar filtration and sectionwise field calculation.",
   "tool_uses": [
    {
@@ -356,12 +357,12 @@
   "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N3-8feba4f5c",
-  "group": "N3",
+  "reviewer": "NT-cc-Q64-252d9c8fd",
+  "group": "Q64",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-8feba4f5c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source locations, and unit/chapter route. All six proof steps check out, including tensor/sheafification compatibility and uniform filtration bounds. Small cases and dependency-cycle checks passed. No new nodes, repairs, target weakening, or unsupported coefficient-category comparison. Written review.md with accepted tool uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-252d9c8fd (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements and the main-20261015 blueprint statement and proof (sec-six-functors-basics/sk-prop-a1-kummer, order 2169; the text is the same in master and main-20261017). Coefficient category: the statement uses the ordinary small-étale D(T_Et,A) with the def-kun derived tensor and Tor amplitude, which matches the blueprint. The statement is not weakened. Steps 1-3, 5 and 6 are correct: A_T/ϖA_T≅κ_T by exact sheafification (00WJ); the K-flat resolution is Stacks 06YS; the ϖ-adic filtration F_n=0 is finite with quotients killed by ϖ; flatness of each P^q gives degreewise short exact sequences, and the long exact sequence (0117) gives the descending induction. Boundedness, constructibility and finite generation of M are never used. Small cases on a geometric point over Z/4 agree with the criterion: A[0], Z/2[0] (infinite Tor dimension), and [A→2 A]; n=1, a>b and empty T are also covered. There is no cycle and no SGA source. The six tool_uses are accepted as generic coefficient and homological tools. Long step 4 (2060 chars) hides a lemma: over a constant field sheaf, H^i(C⊗N)≅H^i(C)⊗N on any site. This claim has its own hypotheses, its proof is repeated word for word in lem-sf-proetale-residue-tor-test, and the blueprint lem-weil-field-tor-amplitude uses it without proof. I searched the DAG with regex and rg and found no existing node for it. FIX: I added the statement-only node lem-exc-constant-field-sheaf-tensor-cohomology (created.item=lem-exc-residue-tor-test, blueprint from=lem-exc-residue-tor-test Proof paragraph 2, same_as=[], three Mathlib greps that actually ran, no match). Step 4 now cites it and keeps only the short change-of-rings identification (P⊗κ_T)⊗N≅P⊗N, which is one argument; the new step 4 is 1253 chars. proof_deps is updated. Minor, no action: the report mentions a citations.json that is not in the commit, and the item's source path is the master snapshot path.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest",

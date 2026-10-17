@@ -1,0 +1,78 @@
+{
+ "id": "lem-exc-constant-field-sheaf-tensor-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-residue-tor-test",
+   "place": "Proof, second paragraph: 'For an arbitrary module sheaf M, stalks commute with the derived tensor product ... The stalk of K⊗^L_A M is consequently zero outside [a,b]' -- the uniform sheafwise converse, realized in the item's step 4 for module sheaves killed by the uniformizer",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensoring over a constant field sheaf commutes with cohomology",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], small relative to the universe of its module sheaves, let $\\kappa$ be a field [def-weil-field], and let $\\kappa_{\\mathcal C}$ be the constant sheaf of rings with value $\\kappa$ [def-weil-pbc-constant-sheaf]. Let $C^\\bullet$ be a cochain complex of sheaves of $\\kappa_{\\mathcal C}$-modules [def-pc-cochain-complex-modules] and $N$ a sheaf of $\\kappa_{\\mathcal C}$-modules [def-weil-sheaf-of-modules-category]. Write $C^\\bullet\\otimes_{\\kappa_{\\mathcal C}}N$ for the complex with terms $C^q\\otimes_{\\kappa_{\\mathcal C}}N$ and differentials $d^q\\otimes1$, the tensor product being that of sheaves of modules [def-pur-sheaf-tensor-product], and for a complex $D^\\bullet$ of $\\kappa_{\\mathcal C}$-modules write $\\mathcal H^i(D^\\bullet)=\\operatorname{Ker}(d^i)/\\operatorname{Im}(d^{i-1})$, computed in the abelian category of sheaves of $\\kappa_{\\mathcal C}$-modules. Then for every integer $i$ there is an isomorphism of sheaves of $\\kappa_{\\mathcal C}$-modules\n$$\\mathcal H^i(C^\\bullet)\\otimes_{\\kappa_{\\mathcal C}}N\\xrightarrow{\\ \\sim\\ }\\mathcal H^i(C^\\bullet\\otimes_{\\kappa_{\\mathcal C}}N),$$\nnatural in $C^\\bullet$ and $N$, which on local sections sends $[z]\\otimes y$ to $[z\\otimes y]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-residue-tor-test.proof.md",
+  "place": "Proof, second paragraph (the converse for an arbitrary module sheaf), for which the item's step 4 needs this for module sheaves killed by the uniformizer; ingredients: Stacks sites-modules.tex Tag 0GMW (lemma-sheafification-tensor) applied to the constant presheaf of rings with value kappa, and sites.tex Tag 00WJ (lemma-sheafification-exact)",
+  "external": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "first sentence: 'Over a field F every F-module is flat ... hence H^r(K⊗^L_F M) ≅ H^r(K)⊗_F M' (pro-etale analogue, used there without proof)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-field",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n -i 'flat\\|tensorObj\\|MonoidalCategory' Mathlib/Algebra/Category/ModuleCat/Sheaf/ Mathlib/Algebra/Category/ModuleCat/Presheaf*",
+   "results": "Only Presheaf/Monoidal.lean (PresheafOfModules.tensorObj, the sectionwise presheaf tensor) and Presheaf/PushforwardZeroMonoidal.lean; no tensor product or flatness of sheaves of modules and no homology statement",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln homologyFunctor Mathlib | xargs grep -ln 'tensorLeft\\|tensorRight\\|MonoidalCategory'",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn SheafOfModules Mathlib -l | xargs grep -ln -i 'flat\\|tensor\\|Monoidal'",
+   "results": "Algebra/Category/ModuleCat/Sheaf.lean (imports only), RingTheory/Flat/FaithfullyFlat/Basic.lean, group homology files, GabrielPopescu.lean; none concerns tensor products of sheaves of modules over a constant field sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-exc-residue-tor-test",
+  "date": "2026-10-17"
+ },
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
