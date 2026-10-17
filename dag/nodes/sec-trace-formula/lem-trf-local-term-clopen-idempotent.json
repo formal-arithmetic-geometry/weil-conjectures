@@ -1,0 +1,73 @@
+{
+ "id": "lem-trf-local-term-clopen-idempotent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-d-local-term",
+   "place": "statement: 'The clopen piece $B$ cuts out an idempotent $e_B$ ... Define the local term of $\\alpha$ along $B$ by integration: $\\LT_B(\\alpha):=\\int_E\\alpha\\circ e_B$, which is $\\int_B\\alpha|_B$.'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The clopen idempotent and the cut integral",
+ "statement": "Use the base $s=\\operatorname{Spec}k$, finite coefficient ring $A$ and geometric schemes of [sk-d-setup], the ordinary pro-etale derived categories $D(-,A)$ and the operations of [sk-d-six]. Let $E$ be a scheme proper over $s$ [def-weil-proper-morphism], let $j_B:B\\hookrightarrow E$ be an open immersion [def-weil-open-immersion] whose image is closed in $E$, and let $j_V:V\\hookrightarrow E$ be the open immersion of the complementary open subscheme on $E\\setminus j_B(B)$. Let\n\n$$\ne_B:A_E\\xrightarrow{\\eta_{j_B}}Rj_{B*}j_B^*A_E\\xrightarrow{\\ \\sim\\ }j_{B!}j_B^*A_E\\xrightarrow{\\varepsilon_{j_B}}A_E\n$$\n\nbe the composite of the unit of the ordinary adjunction $j_B^*\\dashv Rj_{B*}$ of [def-weil-pbc-proetale-operations], the inverse of the canonical proper comparison $j_{B!}=Rj_{B!}\\simeq Rj_{B*}$ for the open immersion $j_B$, which is also a closed immersion [def-weil-closed-immersion] and hence proper ([prop-functor-package], clause (3)), and the counit of the extension-by-zero adjunction $j_{B!}\\dashv j_B^*$ of [prop-weil-open-closed-recollement-adjunctions], i.e. the termwise sheaf counit of [def-weil-open-closed-recollement], with $j_{B!}$ the extension by zero of [def-weil-extension-by-zero]. Then:\n\n1. $e_B\\circ e_B=e_B$ in $\\operatorname{End}_{D(E,A)}(A_E)$.\n2. Under the constant-coefficient identifications $j_B^*A_E\\simeq A_B$ and $j_V^*A_E\\simeq A_V$, one has $j_B^*e_B=\\operatorname{id}_{A_B}$ and $j_V^*e_B=0$.\n3. $B$ and $V$ are proper over $s$ [lem-weil-pbc-closed-immersion-proper], and for every morphism $\\alpha:A_E\\to\\omega_{E,A}$ in $D(E,A)$, where $\\omega_{E,A}$ is the dualizing complex of [def-trf-dualizing-complex],\n$$\n\\int_E(\\alpha\\circ e_B)=\\int_B\\alpha|_B\\in A,\n$$\nwhere $\\int_E,\\int_B$ are the integrations of [def-trf-integration] and $\\alpha|_B:A_B\\to\\omega_{B,A}$ is the restricted section of [def-trf-local-term] (constant pullback, $j_B^*\\alpha$, open purity and dualizing composition). In particular the integral is $0$ when $B=\\emptyset$ and is $\\int_E\\alpha$ when $B=E$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/_section.md",
+  "place": "node sk-d-local-term, order 2679: 'cuts out an idempotent' and 'which is $\\int_B\\alpha|_B$'; the argument is that of sk-p-local.proof.md (matrix of ordinary units and exceptional counits) specialized to the two-piece partition $E=B\\sqcup V$"
+ },
+ "stmt_deps": [
+  "sk-d-setup",
+  "sk-d-six",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-operations",
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "def-weil-open-closed-recollement",
+  "def-weil-extension-by-zero",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-trf-dualizing-complex",
+  "def-trf-integration",
+  "def-trf-local-term"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'dualizing|borel.?moore|localTerm|extensionByZero|lowerShriek' over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "10 files: AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Algebra/Homology/HomotopyFiber.lean, CategoryTheory/Adjunction/PartialAdjoint.lean, CategoryTheory/Category/Cat/Op.lean, Analysis/InnerProductSpace/Dual.lean, CategoryTheory/Functor/Derived/{PointwiseRightDerived,PointwiseLeftDerived,LeftDerived}.lean, Data/Set/Defs.lean, Tactic/Translate/ToDual.lean; every hit is the word 'dualizing' for opposite-category or order duality in a comment",
+   "date": "2026-10-17",
+   "verdict": "no match: no dualizing complex, extension by zero or Borel-Moore integral in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l -i 'clopen' over Mathlib/CategoryTheory and Mathlib/AlgebraicGeometry",
+   "results": "3 files: AlgebraicGeometry/ZariskisMainTheorem.lean, AlgebraicGeometry/Morphisms/QuasiFinite.lean, AlgebraicGeometry/Morphisms/OpenImmersion.lean (e.g. line 41, PrimeSpectrum.isClopen_iff_zeroLocus): clopen subsets of spectra, no derived-category projector",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "sk-d-local-term",
+  "date": "2026-10-17",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-local-term",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

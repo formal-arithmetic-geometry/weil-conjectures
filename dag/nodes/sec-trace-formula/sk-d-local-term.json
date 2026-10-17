@@ -3,29 +3,96 @@
  "blueprint": {
   "is": "sk-d-local-term",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Local terms",
- "statement": "Let $E$ be proper over $s$, let $\\alpha:A_E\\to\\omega_E$ be a Borel–Moore\nsection, and let $j_B:B\\hookrightarrow E$ be an open immersion with closed\nimage. The clopen piece $B$ cuts out an idempotent\n\n$$\ne_B:A_E\\longrightarrow Rj_{B*}j_B^*A_E\\simeq j_{B!}j_B^*A_E\\longrightarrow A_E,\n$$\n\nthe unit of $j_B^*\\dashv Rj_{B*}$ followed by the counit of $j_{B!}\\dashv j_B^*$.\nDefine the local term of $\\alpha$ along $B$ by integration:\n\n$$\n\\LT_B(\\alpha):=\\int_E\\alpha\\circ e_B\\in A,\n$$\n\nwhich is $\\int_B\\alpha|_B$. For an opposite pair $(C,c,u),(D,d,v)$ with\n$E=E(C,D)$ proper over $s$, put $\\LT_B(u,v):=\\LT_B(\\langle u,v\\rangle_{\\mathrm{LV}})$.\nFor an endocorrespondence with $\\Fix(c)$ proper over $s$ and $B\\subseteq\\Fix(c)$\nclopen, use its trace class to set $\\LT_B(u):=\\LT_B(\\Tr_c(u))$; it\nequals $\\LT_B(u,1_K)$ because $\\Tr_c(u)=\\langle u,1_K\\rangle_{\\mathrm{LV}}$\n([lem-trf-trace-class-diagonal-pairing]).\nAt a Frobenius fixed point,\n$\\LT_{\\bar x}$ means the local term on its reduced clopen point component.",
+ "statement": "Use the base $s=\\operatorname{Spec}k$, finite coefficient ring $A$ and geometric schemes of [sk-d-setup], and the operations of [sk-d-six] on the ordinary pro-etale derived categories. Proper morphisms and open and closed immersions have the meanings of [def-weil-proper-morphism], [def-weil-open-immersion] and [def-weil-closed-immersion]. Use the canonical ordinary adjunction $j^*\\dashv Rj_*$ of [def-weil-pbc-proetale-operations] and the extension-by-zero adjunction $j_!\\dashv j^*$ of [prop-weil-open-closed-recollement-adjunctions], whose counit is the termwise sheaf counit specified in [def-weil-open-closed-recollement]. Here $j_!$ is extension by zero of [def-weil-extension-by-zero], exact by [lem-weil-extension-by-zero-exact]. Dualizing complexes and integrations are those of [def-trf-dualizing-complex], [def-trf-integration] and [sk-d-integral]; all exceptional adjunctions used for them are the constructible ones specified by [def-trf-admissibility], not unrestricted ambient exceptional adjoints.\n\nLet $E$ be proper over $s$, let $\\alpha:A_E\\to\\omega_E$ be a Borel–Moore section, and let $j_B:B\\hookrightarrow E$ be an open immersion with closed image. Thus $B$ is also a closed subscheme of $E$ and is proper over $s$ by [lem-weil-pbc-closed-immersion-proper]. The clopen piece $B$ cuts out the endomorphism\n\n$$\ne_B:A_E\\xrightarrow{\\eta_{j_B}}Rj_{B*}j_B^*A_E\\xrightarrow{\\ \\sim\\ }j_{B!}j_B^*A_E\\xrightarrow{\\varepsilon_{j_B}}A_E,\n$$\n\nthe unit of $j_B^*\\dashv Rj_{B*}$ followed by the counit of $j_{B!}\\dashv j_B^*$. The middle arrow is the canonical proper comparison for the clopen immersion, as in [prop-functor-package], clause (3), with $Rj_{B!}=j_{B!}$ for the open immersion. This is the clopen idempotent: $e_B^2=e_B$ by [lem-trf-local-term-clopen-idempotent], clause (1).\n\nDefine the local term of $\\alpha$ along $B$ by\n\n$$\n\\operatorname{LT}_B(\\alpha):=\\int_E(\\alpha\\circ e_B)\\in A.\n$$\n\nWriting $\\alpha|_B$ for the restricted section of [def-trf-local-term], namely\n\n$$\nA_B\\simeq j_B^*A_E\\xrightarrow{j_B^*\\alpha}j_B^*\\omega_E\\simeq\\omega_B,\n$$\n\nwhere the last identification is open purity and dualizing composition as in that definition, this is equivalently\n\n$$\n\\operatorname{LT}_B(\\alpha)=\\int_B\\alpha|_B.\n$$\n\nThe equality is [lem-trf-local-term-clopen-idempotent], clause (3). Thus it agrees with the local-term definition of [def-trf-local-term] when the ambient support is proper.\n\nFor an opposite pair $(C,c,u),(D,d,v)$ of [sk-d-corr], with pairing of [sk-d-pairing] and $E=E(C,D)$ proper over $s$, put\n$$\n\\operatorname{LT}_B(u,v):=\\operatorname{LT}_B(\\langle u,v\\rangle_{\\mathrm{LV}}).\n$$\nThis is the proper-ambient case of [def-trf-local-term-pair]. For an endocorrespondence with $\\operatorname{Fix}(c)$ proper over $s$ and $B\\subseteq\\operatorname{Fix}(c)$ clopen, use its trace class of [sk-d-trace-class] to set\n$$\n\\operatorname{LT}_B(u):=\\operatorname{LT}_B(\\operatorname{Tr}_c(u));\n$$\nit equals $\\operatorname{LT}_B(u,1_K)$ because $\\operatorname{Tr}_c(u)=\\langle u,1_K\\rangle_{\\mathrm{LV}}$ by [lem-trf-trace-class-diagonal-pairing]. At a Frobenius fixed point, $\\operatorname{LT}_{\\bar x}$ means the local term on its reduced clopen point component, as in [def-trf-local-term].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/_section.md",
   "place": "node sk-d-local-term, order 2679"
  },
  "stmt_deps": [
-  "lem-trf-trace-class-diagonal-pairing",
-  "sk-d-corr",
-  "sk-d-integral",
-  "sk-d-pairing",
+  "sk-d-setup",
   "sk-d-six",
-  "sk-d-trace-class"
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "def-weil-open-closed-recollement",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-exact",
+  "def-trf-dualizing-complex",
+  "def-trf-integration",
+  "sk-d-integral",
+  "def-trf-admissibility",
+  "lem-weil-pbc-closed-immersion-proper",
+  "prop-functor-package",
+  "def-trf-local-term",
+  "lem-trf-local-term-clopen-idempotent",
+  "sk-d-corr",
+  "sk-d-pairing",
+  "def-trf-local-term-pair",
+  "sk-d-trace-class",
+  "lem-trf-trace-class-diagonal-pairing"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localTerm|local_term|Borel.Moore|Lefschetz.Verdier|clopenIdempotent",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: none",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local term of a cohomological correspondence is the integral of its trace class on a proper clopen fixed component",
+   "results": "8 hits: term_→Co_, LocallyConstant.charFn, Algebra.intTraceAux, CondensedSet.LocallyConstant.iso, LocallyConstant.coe_charFn, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', CochainComplex.HomComplex.CohomologyClass, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned parser, locally constant characteristic functions, integral-closure trace, stalk and Hom-complex declarations do not construct a cohomological local term."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localTerm\"",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "No match: zero declaration-name substring hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define local terms of Borel Moore sections by integrating a dualizing complex section after projection to an open and closed subscheme",
+   "results": "8 hits: ModuleCat.Tilde.sectionsSubmodule, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.I, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, ModuleCat.Tilde.isLocallyFraction, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned structure-sheaf local sections and quasi-separatedness declarations do not construct a dualizing-complex integral."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier local term is integration of a trace class cut down by a clopen projector in the derived category",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned derived-category truncation, fractions and projective-object declarations do not construct a geometric trace or local term."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported trace of a dualizing sheaf morphism restricted to an open closed component of a scheme",
+   "results": "8 hits (logged result list capped by msearch): AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.morphismRestrict_appTop",
+   "date": "2026-10-17",
+   "verdict": "No match: returned structure-sheaf restriction and quasi-separatedness declarations concern ordinary regular functions, not dualizing sections or trace integrals."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Verdier|local.?term|clopen.?idempotent",
+   "results": "25 hits (logged result list capped by msearch): Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean",
+   "date": "2026-10-17",
+   "verdict": "No match among returned hits: these are order-duality prose and references to Verdier and triangulated categories, not geometric local terms. The grep output is capped; absence is assessed together with the semantic and earlier focused searches."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -75,5 +142,21 @@
     "AlgebraicGeometry.ProEtale.GeometricOperations.localTerm"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-local-term",
+  "worker": "stage1",
+  "summary": "Audited the current main-20261015 idempotent recipe against the older unit restriction recipe, the project Lean and every cited statement. Kept all original mathematical clauses, made coefficient/operation/adjunction domains explicit, and parenthesized integration of the cut section. Named existing notions for each construction and existing statements for its properness and restriction comparison; no new nodes. The idempotent calculation is elementary adjunction algebra, detailed in report.md. The item is a definition, so proof and proof_deps are empty. The existing Lean localTerm gives only the cut-integral definition, not every comparison in the item, and is not attached. Maintainer reader (2026-10-17): the two claims stated inside the definition, idempotence of e_B and the comparison of the cut integral with the restricted integral on B, are now carried by the new statement-only node lem-trf-local-term-clopen-idempotent (claims inside definitions become statement nodes); the direct citations of lem-trf-integration-component-sum and lem-trf-integration-linear move to that lemma's intended proof.",
+  "blueprint": "Realizes the entire main-20261015 sk-d-local-term definition: canonical clopen projector, integration on proper ambient support, agreement with the restricted integral, opposite pairing, diagonal trace and reduced-point notation. The recorded master unit is more general (proper B, ambient E arbitrary); its statement is already realized by def-trf-local-term-pair, recorded together with this proper-ambient recipe in realized.statement. There are no unit proof steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-1e16f64df",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-1e16f64df (reviewer sub-agent of L); spot-checked: I read the item in full, compared it with main-20261015 sk-d-local-term (order 2679) and read all 24 cited statements. The statement matches the source clause by clause. Coefficients are the ordinary pro-etale D(E,A) with A finite and exceptional functors on D^b_ctf. The unit and counit orientations are correct, as are properness of the clopen piece (lem-weil-pbc-closed-immersion-proper), the proper comparison (prop-functor-package clause 3), the two adjunctions, and the diagonal-pairing identity. The unit realization by def-trf-local-term-pair plus the item covers the more general master text. I recomputed the worker's idempotent argument (sr=1, so (rs)^2=rs) and the component-sum-plus-linearity comparison; both are correct. Edge cases checked: E empty, B empty, B=E, two points with alpha=(a,b), nonreduced B, n=1. One fault, repaired: the definition asserted e_B^2=e_B and int_E(alpha∘e_B)=int_B alpha|_B with no node stating them. It only cited two lemmas in stmt_deps and gave a proof sketch inside the definition. The convention that claims inside definitions become statement nodes was broken, and the downstream sk-p-local proof relies on this comparison 'by [sk-d-local-term]'. Fix: added the statement-only node lem-trf-local-term-clopen-idempotent (unsplit; created.item=sk-d-local-term; from=sk-d-local-term with via []; same_as []). It defines e_B itself and states idempotence, j_B^*e_B=id with j_V^*e_B=0, and the integral equality. Its only Mathlib searches are two real local rg greps, so a LeanSearch and a LeanFinder search still need adding on the Codex machine. The corrected item cites the new node and drops lem-trf-integration-component-sum and lem-trf-integration-linear from its stmt_deps. No cycle (read-only traversal). No SGA cited, no tool_uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
