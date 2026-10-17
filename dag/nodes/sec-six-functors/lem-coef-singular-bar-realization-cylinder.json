@@ -13,9 +13,67 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-bousfield-kan-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put C=U(c). Take two copies P_a,P_b of C\\times\\Delta^1, labeling vertex 0 by c and vertex 1 by a or b. Form the degreewise quotient of U(a)\\amalg P_a\\amalg P_b\\amalg U(b) that identifies both copies of C\\times\\{0\\} by the identity and identifies C\\times\\{1\\} in P_a or P_b with its image under U(c\\to a) or U(c\\to b). A monotone map \\theta:[r]\\to[1] with \\theta(0)=0 gives precisely a chain starting at c; if \\theta is constantly 1 the quotient gives the corresponding endpoint simplex. Thus in each degree this quotient is bijective to B_W. Its operators agree with those of [lem-coef-bousfield-kan-comparison-calculus]: deleting the last initial c applies U(c\\to a) or U(c\\to b), and all other faces and degeneracies simply restrict or repeat the chain labels and apply the same operator to its simplex. Hence this is an isomorphism of simplicial sets. By the colimit clause of [lem-coef-realization-finite-limits], realization gives the same quotient of |U(a)|, |P_a|, |P_b| and |U(b)|, with topological quotient topology. By [lem-coef-simplicial-realization-cylinder], |P_a| and |P_b| are |C|\\times[0,1]; in both, coordinate t=0 is the common |C| and t=1 attaches to the respective endpoint. Reparameterize the a copy by (1-t)/2 and the b copy by (1+t)/2. These yield the two halves of the double cylinder in the statement.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: strict walking-span bar realization and its explicit double-cylinder quotient."
+   }
+  },
+  {
+   "text": "For a simplex indexed by i_0\\to\\cdots\\to i_r and barycentric coordinates s, let w be the sum of the coordinates at c. On the c\\to a copy, the coordinate supplied by the homeomorphism in Step 1 is (1-t)/2=w/2, where t is the sum of the coordinates labelled a; on the c\\to b copy it is (1+t)/2=1-w/2. The all-c chain is sent to the midpoint 1/2. At the endpoint where the chain becomes all a (respectively all b), the Bousfield--Kan face relation applies U(c\\to a) (respectively U(c\\to b)), so the endpoint is identified with u_a([\\sigma,s]) (respectively u_b([\\sigma,s])). Thus the three formulas in the statement agree with every face and degeneracy relation and descend to the indicated quotient.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: explicit coordinate formula for the bar-to-cylinder map."
+   }
+  },
+  {
+   "text": "Using Step 1, map the two product cylinders by (y,t)\\mapsto(y,(1-t)/2) and (y,t)\\mapsto(y,(1+t)/2), and the endpoint pieces by their identities. These continuous maps respect all relations, so induce a continuous map on the quotient. Conversely, on |U(c)|\\times[0,1/2] use the a copy with parameter 1-2z, and on |U(c)|\\times[1/2,1] use the b copy with parameter 2z-1, followed by the quotient map into |B_W|. The two maps agree at z=1/2, since both give the common t=0 copy. The two halves are a finite closed cover of the product cylinder, so the pasting lemma gives continuity on the entire cylinder. Together with the identity maps on |U(a)| and |U(b)|, this descends continuously through the defining quotient of D. These maps are inverse on all four pieces by the displayed affine identities, and hence on their quotients. No injectivity of either endpoint map is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: explicit double-cylinder quotient."
+   }
+  },
+  {
+   "text": "A strict map of diagrams sends each chain to the same chain and applies the corresponding simplicial map to \\sigma. It commutes with the barycentric sum w, with the endpoint maps, and with the quotient identifications, while on the target it is |\\phi_a|\\amalg(|\\phi_c|\\times1)\\amalg|\\phi_b|. Hence the homeomorphisms are natural. If one of U(a), U(b), or U(c) is empty, the corresponding realization pieces and all chains carrying an element there are empty; the same quotient argument, including the empty middle product, still gives the asserted homeomorphism.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: naturality and empty-object cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent middle derived adjunction; explicit chain decomposition and quotient-topology proof of the walking-span bar realization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-singular-span-bar-cylinder-gluing",
@@ -81,5 +139,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-singular-bar-realization-cylinder",
+  "worker": "stage1",
+  "summary": "Completed the proof by classifying walking-span chains, identifying the two mixed chain families with copies of U(c)×Δ¹, checking the barycentric coordinate formula against all Bousfield--Kan face and degeneracy relations, and proving continuity, inverse continuity, naturality, and empty-object cases from the quotient topologies. No new nodes were needed; the existing realization-cylinder lemma supplies the only auxiliary identification.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: strict walking-span bar realization, explicit double-cylinder quotient, and naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-7cc52d852",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-7cc52d852 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source locations, and route. Corrected Step 1’s interval attachment orientation and made the quotient presentation and inverse continuity explicit, citing existing lemmas. Statement unchanged; small cases, dependency cycles, duplicates, and long-step checks passed. Whole corrected JSON is under fixes/; concrete checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

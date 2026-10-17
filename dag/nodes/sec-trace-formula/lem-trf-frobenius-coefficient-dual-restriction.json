@@ -15,9 +15,150 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $k=k_E$, $\\pi=\\varpi_E$, and $U_T=\\operatorname{Res}_\\rho$ on the small etale site of any scheme $T$. By [def-pc-sheaf-restrict-scalars] its underlying abelian sheaf is unchanged; kernels and cokernels are unchanged by [lem-weil-pbc-module-sheaves-colimits-forgetful], so $U_T$ is exact. For an $A_T$-module sheaf $J$, put $C_TJ=\\ker(\\pi:J\\to J)$. This is a $k_T$-module: a local lift $a$ of a residue scalar acts by $a$, independently of the lift because $\\pi C_TJ=0$. Evaluation at $1$ gives $\\mathcal Hom_{A_T}(k_T,J)\\cong U_TC_TJ$: its inverse sends a section $x$ annihilated by $\\pi$ to $(\\bar a\\mapsto ax)$. These formulas are defined on every slice site and commute with restriction [def-pur-sheaf-hom]. Every $A_T$-linear map $U_TL\\to J$ has image in $C_TJ$ since $\\pi L=0$, and is then $k_T$-linear. Factoring through this kernel and composing with its inclusion are inverse natural operations. Thus $U_T\\dashv C_T$, with the precomposition $k_T$-action specified in the item.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 04TT (section-internal-hom); elementary quotient/kernel adjunction calculation"
+   }
+  },
+  {
+   "text": "For $N\\in D(T_{\\mathrm{et}},A)$ choose a K-injective representative $I$ using [prop-pur-kinjective-resolutions-exist]. Since $U_T$ is exact, the adjunction just constructed and [lem-weil-pbc-right-adjoint-preserves-kinjective] show that $C_TI$ is K-injective over $k_T$. Define $H_TN=Q_k(C_TI)$, with maps computed on the homotopy category of K-injectives. This is independent of the chosen resolution: [lem-weil-pbc-kinjective-hom-derived] identifies that category with the derived category and says that a quasi-isomorphism between K-injectives is a homotopy equivalence; any additive $C_T$ preserves the homotopy equation. The evaluation identification of Step 1 gives\n$$U_TH_TN=Q_A\\mathcal Hom^\\bullet_{A_T}(k_T[0],I)=R\\mathcal Hom_{A_T}(k_T,N).$$\nHere [def-pur-derived-internal-hom] supplies the K-injective computation. The complex $C_TI$, with its residue action, is also the asserted $k_T$-valued model of this derived Hom. No resolution of $k_T$ as a perfect $A_T$-module is used.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective); sites-cohomology.tex, Section 08J7 (derived internal Hom)"
+   }
+  },
+  {
+   "text": "The same kernel-factorization formula, applied degreewise, is a bijection between chain maps $U_TL^\\bullet\\to I$ and chain maps $L^\\bullet\\to C_TI$, and between their chain homotopies. Indeed all differentials are linear, so factoring a map through the kernel commutes with the two sides of $df=fd$ and of $f-g=dh+hd$. Apply [lem-weil-pbc-kinjective-hom-derived] to the K-injective targets $I$ over $A_T$ and $C_TI$ over $k_T$. For every unbounded $L\\in D(T_{\\mathrm{et}},k)$ this gives natural bijections\n$$\\operatorname{Hom}_{D(k_T)}(L,H_TN)\\cong\\operatorname{Hom}_{K(k_T)}(L^\\bullet,C_TI)\\cong\\operatorname{Hom}_{K(A_T)}(U_TL^\\bullet,I)\\cong\\operatorname{Hom}_{D(A_T)}(U_TL,N).$$\nThus $U_T\\dashv H_T$ on the ordinary unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective): computation of derived Hom into a K-injective; degreewise adjunction expanded explicitly"
+   }
+  },
+  {
+   "text": "For any representative $L^\\bullet$ of $L\\in D(T_{\\mathrm{et}},k)$, kernel factorization on every slice gives an isomorphism of sheaves\n$$\\mathcal Hom_{A_T}(U_TL^i,I^j)\\cong U_T\\mathcal Hom_{k_T}(L^i,C_TI^j).$$\nThe forward map factors through $\\ker\\pi$; the inverse composes with its inclusion. Products of these inverse maps in total degree $r$ identify the Hom-complex terms $\\prod_i\\mathcal Hom(U_TL^i,I^{i+r})$. For a homogeneous map $f$ of degree $r$, both differentials are $d_If-(-1)^rf d_L$ [def-pur-hom-complex]; each summand factors through $C_TI$, so these degreewise identifications commute with the differential, including its sign. Because $I$ and $C_TI$ are K-injective, [def-pur-derived-internal-hom] now gives\n$$R\\mathcal Hom_{A_T}(U_TL,N)\\cong U_TR\\mathcal Hom_{k_T}(L,H_TN).$$\nThe inverse maps commute with precomposition in $L$ and postcomposition in $I$. Passing through the K-injective resolution identifications makes the isomorphism natural in both derived variables. This is an isomorphism of $A_T$-complexes, with the action on the right restricted through $\\rho$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sections 0A8X (Hom complex) and 08J7 (derived internal Hom); explicit kernel-factorization calculation"
+   }
+  },
+  {
+   "text": "Put $s=\\operatorname{Spec}F$ and $a=a_Z$. A field has only the ideals $0$ and $F$, so $s$ is Noetherian, quasi-compact and quasi-separated. Choose a compactification $Z\\xrightarrow{j}\\overline Z\\xrightarrow{r}s$ by [thm-nagata-compactification]. Both $Z$ and $\\overline Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $a$ is finite type and $r$ is proper, hence finite type. Use this same compactification for both coefficient rings, so the functors in [def-amb-etale-compact-support] are $Ra_{!,A}=Rr_{*,A}j_{!,A}$ and $Ra_{!,k}=Rr_{*,k}j_{!,k}$. At the presheaf level [def-weil-pbc-extension-by-zero], $j_{p!}U_Z=U_{\\overline Z}j_{p!}$: on an object factoring through $Z$ both sides have the same sections with restricted action, and otherwise both are zero. Sheafification has the same underlying abelian sheaf for both coefficient actions [def-weil-presheaf-modules-sheafification]; the unique extended action is its restriction along $\\rho$. Hence $j_{!,A}U_Z\\cong U_{\\overline Z}j_{!,k}$, on sheaves and termwise on complexes.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (extension by zero), 03CY (sheafification of module presheaves); compactification and Noetherian hypotheses as in the cited nodes"
+   }
+  },
+  {
+   "text": "For $T=\\overline Z,s$, the identity geometric morphism with ring map $A_T\\to k_T$ is a morphism of ringed topoi $(T_{\\mathrm{et}},k_T)\\to(T_{\\mathrm{et}},A_T)$ whose module direct image is $U_T$. Its derived direct image is still termwise $U_T$ because it is exact (Step 1). The two factorizations\n$$(\\overline Z_{\\mathrm{et}},k)\\to(\\overline Z_{\\mathrm{et}},A)\\to(s_{\\mathrm{et}},A),\\qquad (\\overline Z_{\\mathrm{et}},k)\\to(s_{\\mathrm{et}},k)\\to(s_{\\mathrm{et}},A)$$\nare the same ringed-topos morphism: direct image is ordinary $r_*$ with $A$ acting through $\\rho$. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to each factorization, using the small-site universe of the ordinary derived categories. It gives $Rr_{*,A}U_{\\overline Z}\\cong U_sRr_{*,k}$ on all unbounded complexes. Compose this with Step 5 and the definition [def-amb-etale-compact-support] to obtain\n$$Ra_{!,A}U_Z\\cong U_sRa_{!,k}.$$\nAll these comparisons are natural: they are respectively the derived composition comparisons and the identity on the extension-by-zero presheaves.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), applied to the two coefficient/geometric factorizations"
+   }
+  },
+  {
+   "text": "Compute $H_s(A_s)$. By [lem-kun-0ezp], every object of $s_{\\mathrm{et}}$ is a disjoint union of copies of $s$. The sheaf axiom identifies the values of a module sheaf on such a union with the product of its sections on the copies. Thus evaluation at $s$ and the constant-module sheaf functor are inverse exact equivalences between $A_s$-module sheaves and $A$-modules; the same argument applies to $k$. By [lem-weil-coefficient-frobenius], $A=\\mathcal O_E/(\\pi^n)$ is injective over itself. Consequently $A_s[0]$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so $H_s(A_s)$ is $C_s(A_s)[0]$, corresponding to $\\operatorname{Ann}_A(\\pi)$. By the DVR property in [lem-weil-l-adic-extension-integers-dvr],\n$$\\operatorname{Ann}_{\\mathcal O_E/(\\pi^n)}(\\pi)=(\\pi^{n-1})/(\\pi^n).$$\nIndeed $\\pi x\\in(\\pi^n)$ if and only if $x\\in(\\pi^{n-1})$ by cancellation in the domain $\\mathcal O_E$. Multiplication by $\\pi^{n-1}$ gives a $k$-linear isomorphism $k\\to\\operatorname{Ann}_A(\\pi)$: it is onto by that equality, and its kernel is $(\\pi)$ by the same cancellation. Therefore $H_s(A_s)\\cong k_s$ in $D(s_{\\mathrm{et}},k)$. This also covers $n=1$, where the map is the identity.",
+   "uses": [
+    "lem-kun-0ezp",
+    "lem-weil-coefficient-frobenius",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-coefficient-frobenius.md",
+    "place": "Finite coefficient self-injectivity; agent socle calculation using the DVR property; etale-cohomology.tex Tag 0EZP for the point site"
+   }
+  },
+  {
+   "text": "The ambient compact-support right adjoints in [thm-amb-etale-exceptional-adjoint] apply: $A,k$ are finite, and Step 5 supplied compactifications between Noetherian schemes. For any $Q\\in D(Z_{\\mathrm{et}},k)$, Step 3, these two adjunctions, Step 6, and Step 7 give the following natural bijections (each Hom is in the displayed ordinary coefficient category):\n$$\\begin{aligned}\n\\operatorname{Hom}_{D(k_Z)}(Q,H_Z\\omega_{Z,A})\n&\\cong\\operatorname{Hom}_{D(A_Z)}(U_ZQ,a_{Z,A}^{\\times}A_s)\\\\\n&\\cong\\operatorname{Hom}_{D(A_s)}(Ra_{!,A}U_ZQ,A_s)\\\\\n&\\cong\\operatorname{Hom}_{D(A_s)}(U_sRa_{!,k}Q,A_s)\\\\\n&\\cong\\operatorname{Hom}_{D(k_s)}(Ra_{!,k}Q,H_sA_s)\\\\\n&\\cong\\operatorname{Hom}_{D(k_s)}(Ra_{!,k}Q,k_s)\\\\\n&\\cong\\operatorname{Hom}_{D(k_Z)}(Q,\\omega_{Z,k}).\n\\end{aligned}$$\nApply [lem-galois-yoneda-fully-faithful] in $D(k_Z)$ to this natural isomorphism of representable presheaves and to its inverse. The resulting two representing arrows are inverse because their composites induce the identity presheaf transformations. Thus $H_Z\\omega_{Z,A}\\cong\\omega_{Z,k}$ in $D(k_Z)$. By Step 2 this is exactly the first claimed isomorphism, with its precomposition $k$-action.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P (lemma-yoneda); agent application to the explicitly displayed ordinary compact-support/coefficient adjunction chain"
+   }
+  },
+  {
+   "text": "Apply Step 4 with $T=Z$, $L=M$ and $N=\\omega_{Z,A}$. Compose with the image under $U_ZR\\mathcal Hom_{k_Z}(M,-)$ of the isomorphism of Step 8. This yields\n$$R\\mathcal Hom_A(U_ZM,\\omega_{Z,A})\\cong U_ZR\\mathcal Hom_k(M,H_Z\\omega_{Z,A})\\cong U_ZR\\mathcal Hom_k(M,\\omega_{Z,k}),$$\nas an isomorphism in $D(Z_{\\mathrm{et}},A)$. Functoriality of the derived internal Hom [def-pur-derived-internal-hom] and the naturality in Step 4 show that this is natural contravariantly in $M$. All computations used K-injective targets and arbitrary source complexes. Therefore there is no boundedness, constructibility or finite-Tor hypothesis on $M$.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 08J7 (derived internal Hom); composition of Steps 4 and 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pur-sheaf-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-0ezp",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+  "place": "Coefficient-devissage subargument of the geometric-duality input below the contracting-correspondence specialization route; explicit coefficient/coinduction argument, not a theorem attributed to the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +194,52 @@
    "results": "{\"t\": \"2026-10-17T16:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite quotient of a discrete valuation ring, coefficient restriction from the residue field commutes with Verdier duality because derived coinduction of the dualizing complex is the residue coefficient dualizing complex.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"IsLocalRing.ResidueField.finite_of_module_finite\", \"Rep.coindResAdjunction\", \"Rep.coindResAdjunction_counit_app\", \"Rep.coindResAdjunction_homEquiv_apply\", \"Rep.coindResAdjunction_homEquiv_symm_apply\", \"Rep.resIndAdjunction_homEquiv_apply\", \"Rep.indCoindIso_hom_hom_hom\"], \"digest\": \"aca0ab7ddc09da1a\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|[Vv]erdier|dualizing",
+   "results": "{\"t\": \"2026-10-17T16:33:52Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|[Vv]erdier|dualizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"7b6022f6126be34c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a residue field into an exceptional dualizing object is the residue coefficient dualizing object",
+   "results": "{\"t\": \"2026-10-17T16:33:52Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom from a residue field into an exceptional dualizing object is the residue coefficient dualizing object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquiv\", \"FGModuleCat.FGModuleCatDual\", \"IsLocalRing.isLocalHom_residue\", \"IsLocalRing.residue\", \"AlgebraicGeometry.Scheme.descResidueField\", \"FGModuleCat.FGModuleCatDual_coe\", \"IsBaseChange.dual\", \"Module.dual_projective\"], \"digest\": \"7409bfb96bdc31b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T16:33:52Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of residue field coefficients commutes with Verdier duality through derived coinduction of the dualizing complex",
+   "results": "{\"t\": \"2026-10-17T16:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of residue field coefficients commutes with Verdier duality through derived coinduction of the dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"Rep.coindResAdjunction_counit_app\", \"Rep.coindResAdjunction_homEquiv_apply\", \"Rep.resIndAdjunction_homEquiv_apply\", \"Rep.coindResAdjunction_homEquiv_symm_apply\", \"Rep.resCoindHomEquiv_symm_apply_hom\", \"Rep.resIndAdjunction_counit_app\", \"Rep.resCoindAdjunction_counit_app_hom_hom\"], \"digest\": \"cbe012edf4a992a0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|coextendScalars",
+   "results": "{\"t\": \"2026-10-17T16:34:07Z\", \"tool\": \"grep\", \"query\": \"restrictCoextendScalarsAdj|coextendScalars\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8a042622d6b5ae6d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coextension of scalars along a quotient ring is right adjoint to exact restriction and is computed by internal Hom in unbounded module sheaf derived categories",
+   "results": "{\"t\": \"2026-10-17T16:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"Coextension of scalars along a quotient ring is right adjoint to exact restriction and is computed by internal Hom in unbounded module sheaf derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\"], \"digest\": \"6c0c25527e6be0ee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module coextension adjunction and representation coinduction do not state the etale exceptional-dualizing comparison; read ModuleCat/ChangeOfRings.lean:585-679 and project Etale/Derived/CoextendScalars.lean:55-95."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-duality-uniform-range",
@@ -78,5 +261,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-frobenius-coefficient-dual-restriction",
+  "worker": "stage1",
+  "summary": "Proved the residue-coefficient comparison by explicit annihilator/coextension complexes, unbounded K-injective adjunction, ordinary etale ringed-topos composition, the self-injective coefficient socle calculation and a seven-term Hom-adjunction chain. Reused existing generic nodes throughout; no new nodes and no change to the statement. Kept etale and pro-etale coefficient categories distinct.",
+  "blueprint": "Realizes the coefficient-devissage input of lem-trf-geometric-duality-uniform-range below lem-trf-local-term-locality proof (1)--(2), via the existing nearby-cycle Verdier-duality/specialization chain. The ancestor blueprint has no separate coefficient-coinduction theorem; the nine steps supply this agent subargument explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used with its stated hypotheses in the coefficient-coinduction calculation; no node of the trace-formula unit supplies this categorical, ringed-site or coefficient-algebra fact."
+   },
+   {
+    "node": "lem-kun-0ezp",
+    "why": "Generic Cohomology of a separably closed field vanishes in positive degrees used with its stated hypotheses in the coefficient-coinduction calculation; no node of the trace-formula unit supplies this categorical, ringed-site or coefficient-algebra fact."
+   },
+   {
+    "node": "lem-weil-coefficient-frobenius",
+    "why": "Generic Coefficient biduality at finite and integral stages used with its stated hypotheses in the coefficient-coinduction calculation; no node of the trace-formula unit supplies this categorical, ringed-site or coefficient-algebra fact."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used with its stated hypotheses in the coefficient-coinduction calculation; no node of the trace-formula unit supplies this categorical, ringed-site or coefficient-algebra fact."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used with its stated hypotheses in the coefficient-coinduction calculation; no node of the trace-formula unit supplies this categorical, ringed-site or coefficient-algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-0ezp",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q65-4702eca4e",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q65-4702eca4e (reviewer sub-agent of L); spot-checked: Mathematics and all nine proof steps check out, including ordinary étale coefficient categories, base-change morphism, K-injective constructions, socle calculation, edge cases, and source citations. Repaired metadata in fixes/dag/nodes/sec-trace-formula/lem-trf-frobenius-coefficient-dual-restriction.json: created.item and created.group incorrectly named the parent Q77 delivery instead of Q65.; 1 file(s) fixed by the reviewer"
  }
 }
