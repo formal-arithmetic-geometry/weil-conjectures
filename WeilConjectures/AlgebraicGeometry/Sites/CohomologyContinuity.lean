@@ -64,7 +64,8 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
 
 /-- The coefficient categories `A` for which étale cohomology with values in `A` is continuous
 at cofiltered limits of quasi-compact quasi-separated schemes with affine transition maps, in the
-vanishing form of `AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`.
+vanishing form of
+`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`.
 Instances: abelian groups and modules over a ring. -/
 class HasCohomologyContinuity : Prop where
   isZero_rightDerived_of_isLimit : ∀ {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)

@@ -109,6 +109,10 @@ section Unit
 
 open MonoidalCategory Functor.OplaxMonoidal
 
+-- Instance search for `GrothendieckTopology.W.IsMonoidal` through enough points of the site times
+-- out; prefer the direct instance.
+attribute [local instance high] GrothendieckTopology.W.monoidal
+
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
 /-- The comparison pullback `ν^*` sends the constant sheaf `Λ_X`, the monoidal unit of étale

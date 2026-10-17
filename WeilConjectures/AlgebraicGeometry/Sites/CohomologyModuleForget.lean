@@ -16,8 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 # Étale cohomology of sheaves of modules and of their underlying abelian sheaves
 
 For a ring `Λ`, a quasi-compact quasi-separated scheme `X` and an étale sheaf `M` of
-`Λ`-modules on `X`, the cohomology `Hᵠ(X, M)` computed with sheaves of `Λ`-modules vanishes if and only if the cohomology of the
-underlying abelian sheaf of `M` vanishes
+`Λ`-modules on `X`, the cohomology `Hᵠ(X, M)` computed with sheaves of `Λ`-modules vanishes
+if and only if the cohomology of the underlying abelian sheaf of `M` vanishes
 (`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_iff_forget₂`): the underlying
 abelian sheaves of an injective resolution of `M` form an acyclic resolution of the underlying
 abelian sheaf (`AlgebraicGeometry.Etale.subsingleton_H_forget₂_succ_of_injective`),
@@ -105,7 +105,8 @@ lemma isZero_rightDerived_sectionsFunctor_iff_forget₂ {X : Scheme.{u}} [Compac
     dsimp only [ι']
     infer_instance
   rw [(J.isoRightDerivedObj _ q).isZero_iff,
-    ((sectionsFunctor AddCommGrpCat.{u + 1} X).rightDerivedObjIsoOfResolution ι' hacyc q).isZero_iff,
+    ((sectionsFunctor AddCommGrpCat.{u + 1} X).rightDerivedObjIsoOfResolution
+      ι' hacyc q).isZero_iff,
     HomologicalComplex.homologyFunctor_obj,
     ← HomologicalComplex.exactAt_iff_isZero_homology,
     ← HomologicalComplex.exactAt_iff_isZero_homology]
