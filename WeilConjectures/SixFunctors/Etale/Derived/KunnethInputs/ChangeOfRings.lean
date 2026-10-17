@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
@@ -71,4 +73,55 @@ noncomputable def tensorRestrictScalarsIso (M : ModuleCat.{u} R) (P : ModuleCat.
     (ConcreteCategory.isIso_iff_bijective _).2 (bijective_tensorRestrictScalarsHom f M P)
   asIso (tensorRestrictScalarsHom f M P)
 
+/-- The isomorphism `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` as a natural isomorphism of functors of the
+`S`-module `P`. -/
+noncomputable def restrictScalarsCompTensorLeftIso (M : ModuleCat.{u} R) :
+    restrictScalars f ⋙ tensorLeft M ≅ tensorLeft ((extendScalars f).obj M) ⋙ restrictScalars f :=
+  NatIso.ofComponents (tensorRestrictScalarsIso f M) fun {P P'} g ↦ by
+    dsimp [tensorRestrictScalarsIso, tensorRestrictScalarsHom]
+    rw [whisker_exchange_assoc, Functor.LaxMonoidal.μ_natural_right, Category.assoc]
+
 end ModuleCat
+
+namespace DerivedCategory
+
+variable {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
+  [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} S)]
+
+/-- Blueprint `lem-kun-change-of-rings-tensor`: change of rings for the derived tensor
+product. Let `f : R →+* S` be a homomorphism of commutative rings, `M` a flat `R`-module and `N`
+a complex of `S`-modules, viewed as a complex of `R`-modules by restriction of scalars. Then
+`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in `D(R)`: both derived tensor products are computed
+termwise, `M` and `S ⊗_R M` being flat, and `M ⊗_R N^i ≅ (S ⊗_R M) ⊗_S N^i`
+(`ModuleCat.tensorRestrictScalarsIso`).
+
+The blueprint states the case `R = ℤ/n`, `S = ℤ/ℓ` (`ℓ` a prime dividing `n`) and `N` a complex
+of `R`-modules annihilated by `ℓ`, i.e. a complex of `𝔽_ℓ`-vector spaces; there
+`S ⊗_R M ≅ M/ℓM`. -/
+noncomputable def changeOfRingsTensorIso (M : ModuleCat.{u} R) [Module.Flat R M]
+    (N : CochainComplex (ModuleCat.{u} S) ℤ) :
+    (singleFunctor _ 0).obj M ⊗ (ModuleCat.restrictScalars f).mapDerivedCategory.obj (Q.obj N) ≅
+      (ModuleCat.restrictScalars f).mapDerivedCategory.obj
+        ((singleFunctor _ 0).obj ((ModuleCat.extendScalars f).obj M) ⊗ Q.obj N) := by
+  letI := f.toAlgebra
+  have hM : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj M) :=
+    (CochainComplex.kFlat_single_obj_iff_flat _ 0).2 ((ModuleCat.flat_iff_flat M).2 inferInstance)
+  have : Module.Flat S ((ModuleCat.extendScalars f).obj M) :=
+    inferInstanceAs (Module.Flat S (S ⊗[R] M))
+  have hM' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj ((ModuleCat.extendScalars f).obj M)) :=
+    (CochainComplex.kFlat_single_obj_iff_flat _ 0).2 ((ModuleCat.flat_iff_flat _).2 inferInstance)
+  let res := ModuleCat.restrictScalars.{u} f
+  exact whiskerLeftIso _ (res.mapDerivedCategoryFactors.app N) ≪≫
+    QObjTensorQObjIsoOfKFlatLeft _ _ hM ≪≫
+    Q.mapIso ((CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor _) M).app _ ≪≫
+      (Functor.mapHomologicalComplexCompIso (ModuleCat.restrictScalarsCompTensorLeftIso f M) _).app
+        N ≪≫
+      ((Functor.mapHomologicalComplexCompIso (Iso.refl (tensorLeft _ ⋙ res)) _).app N).symm ≪≫
+      res.mapHomologicalComplex _ |>.mapIso
+        ((CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor _) _).app N).symm) ≪≫
+    (res.mapDerivedCategoryFactors.app _).symm ≪≫
+    res.mapDerivedCategory.mapIso (QObjTensorQObjIsoOfKFlatLeft _ _ hM').symm
+
+end DerivedCategory

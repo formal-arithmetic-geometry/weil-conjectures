@@ -35,7 +35,7 @@ noncomputable def isColimitOfFiltered (t : Cocone K)
     (hinj : ∀ (j : J) (x : K.obj j), t.ι.app j x = 0 → ∃ (k : J) (f : j ⟶ k), K.map f x = 0) :
     IsColimit t :=
   have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_shrink _
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
   have : ReflectsColimit K (forget (ModuleCat.{u + 1} Λ)) :=
     reflectsColimit_of_reflectsIsomorphisms _ _
   isColimitOfReflects (forget (ModuleCat.{u + 1} Λ))

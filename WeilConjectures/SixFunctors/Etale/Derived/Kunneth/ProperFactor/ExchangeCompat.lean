@@ -211,7 +211,7 @@ theorem isIso_rightDerivedLowerStar_map_derivedBaseChangeMap_of_isIso_kunnethMap
   have e := kunnethMap_derivedBaseChangeMap A aX aY aU q r c hq hr j hj p h sq r' hr' c' hc' hp
     hr'c F (𝟙_ _)
   have h₁ := IsIso.of_isIso_fac_left e.symm
-  rw [isIso_comp_right_iff, isIso_comp_right_iff, Functor.map_comp] at h₁
+  rw [isIso_comp_right_iff, Functor.map_comp] at h₁
   have : IsIso (((rightDerivedLowerStarProjectionMap A h).app (L((p)^*[A]).obj F)).app
       (L((r)^*[A]).obj (𝟙_ _))) :=
     (NatTrans.isIso_app_iff_of_iso ((rightDerivedLowerStarProjectionMap A h).app _)

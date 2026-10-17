@@ -26,7 +26,8 @@ statement of `lem-kun-0f1h` holds for all data with `dim X + dim Y < N`.
   `U' ×_{X'} (X' ×_L Y) ⟶ X' ×_L Y` are isomorphisms. The open `U'` descends to an open
   `Uᵢ ⊆ Xᵢ` (blueprint `lem-kun-descent-limit-open`).
 
-Both follow from the limit theorem `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall`
+Both follow from the limit theorem
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall`
 (blueprint `lem-kun-0ezt`) applied to the systems of fibre products, which are limits by the
 commutation of fibre products with limits (blueprint `lem-kun-fibre-product-limits`).
 -/
@@ -241,7 +242,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
   · rw [constPullbackCone_π_app_fst j pD cX e h hpX sq.w i]
     exact Category.comp_id _
   · exact (constPullbackCone_π_app_snd j pD cX e h hpX sq.w i).symm
-  · have : QuasiCompact (qD.app i) := inferInstance
+  · have : QuasiSeparatedSpace (((Functor.const I).obj (Spec (.of L))).obj i) :=
+      inferInstanceAs (QuasiSeparatedSpace (Spec (.of L)))
+    have : QuasiCompact (qD.app i) := quasiCompact_of_compactSpace _
     exact IH aX (qD.app i) j (pD.app i) ((pullback.snd a' qD).app i) (hX i) (eD.app i)
       (hD.app i) (hsq i) n hn hΛ (hdim i) q G
 
@@ -311,7 +314,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     (by rw [pullback.condition, Category.assoc])
   have hX (k : Over i₀) := isPullback_pullback_evaluation ((Functor.const (Over i₀)).map aY) qD' k
   have hT (k : Over i₀) := isPullback_pullback_evaluation ((Functor.const (Over i₀)).map U₀.ι) w' k
-  have heD₁ (k : Over i₀) : eD.app k ≫ (pullback.fst ((Functor.const (Over i₀)).map U₀.ι) w').app k =
+  have heD₁ (k : Over i₀) :
+      eD.app k ≫ (pullback.fst ((Functor.const (Over i₀)).map U₀.ι) w').app k =
       (pullback.fst ((Functor.const (Over i₀)).map U₀.ι) (pD ≫ w')).app k := by
     rw [← NatTrans.comp_app, pullback.lift_fst]
   have heD₂ (k : Over i₀) : eD.app k ≫ gD.app k = hD.app k ≫ pD.app k := by
@@ -382,7 +386,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     have : QuasiSeparatedSpace (((Functor.const (Over i₀)).obj (Spec (.of L))).obj k) :=
       inferInstanceAs (QuasiSeparatedSpace (Spec (.of L)))
     have : QuasiCompact (qD'.app k) := quasiCompact_of_compactSpace _
-    exact IH (qD'.app k) aY (gD.app k) (pD.app k) ((pullback.fst ((Functor.const (Over i₀)).map aY) qD').app k) (hX k).flip
+    exact IH (qD'.app k) aY (gD.app k) (pD.app k)
+      ((pullback.fst ((Functor.const (Over i₀)).map aY) qD').app k) (hX k).flip
       (eD.app k) (hD.app k) (hsq k) n hn hΛ (hdim k.left) q G
 
 end AlgebraicGeometry

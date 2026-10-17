@@ -93,7 +93,7 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
     tensorBaseChangeMap_eq, Equiv.symm_apply_apply, Adjunction.homEquiv_counit,
     ← tensorBaseChangeCounitApp_eq A h e f' g w]
   dsimp only [derivedTensor_obj_map]
-  rw [Category.assoc, ← whisker_exchange_assoc, leftUnitor_naturality,
+  rw [← whisker_exchange_assoc, leftUnitor_naturality,
     ← leftDerivedUpperStarTensorComparison_leftUnitor_hom_assoc]
   rfl
 

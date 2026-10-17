@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.VaryingBase
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.Transport
 
 /-!
 # Base change along limits of Cartesian squares
@@ -88,8 +90,50 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (H : ∀ i, IsIso (Etale.baseChangeHomologyMap Λ (hsq i) q
       (((w.app i)^*[ModuleCat.{u + 1} Λ]).obj G))) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq₀ q (((w₀)^*[ModuleCat.{u + 1} Λ]).obj G)) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq₀ q (((w₀)^*[ModuleCat.{u + 1} Λ]).obj G)) := by
+  have : ∀ i, QuasiCompact (h.app i) := fun i ↦
+    MorphismProperty.of_isPullback (hsq i).flip inferInstance
+  have : ∀ i, QuasiSeparated (h.app i) := fun i ↦
+    MorphismProperty.of_isPullback (hsq i).flip inferInstance
+  have : QuasiCompact h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
+  have : QuasiSeparated h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
+  let K := (DerivedCategory.Plus.singleFunctor (Sheaf W.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0).obj G
+  have hw' : ∀ i, cY.π.app i ≫ (e ≫ w).app i = e₀ ≫ w₀ := fun i ↦ by
+    rw [NatTrans.comp_app, ← Category.assoc, ← he₀, Category.assoc, hw₀]
+  let 𝒳 := Etale.varyingBaseSystem h hh₀ (e ≫ w) (e₀ ≫ w₀) hw'
+  let 𝒜 := (Etale.varyingBaseSystem g hg₀ w w₀ hw₀).comapB p₀
+  have h𝒳 := Etale.isStalkColimit_varyingBaseSystem Λ h hh₀ (e ≫ w) (e₀ ≫ w₀) hw' hX hY G q
+  have h𝒜 := Etale.LimitStageSystem.isStalkColimit_comapB p₀ _
+    (Etale.isStalkColimit_varyingBaseSystem Λ g hg₀ w w₀ hw₀ hS hT G q)
+  let β (i : I) : Etale.LimitStage.Hom (𝒳.obj i) (𝒜.obj i) :=
+    ⟨e.app i, p.app i, (hsq i).w, (hp₀ i).symm, rfl⟩
+  let β₀ : Etale.LimitStage.Hom ⟨cY.pt, cX.pt, h₀, 𝟙 _, e₀ ≫ w₀⟩ 𝒜.pt :=
+    ⟨e₀, p₀, sq₀.w, by simp [𝒜], rfl⟩
+  have hβ (i : I) : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+      ((Etale.LimitStage.transition Λ (β i)).app K)) :=
+    Etale.LimitStage.isIso_homology_transition_of_isIso Λ (β i) q K
+      ((Etale.isIso_baseChangeHomologyMap_iff_upperStar Λ (hsq i) q (w.app i) G).1 (H i))
+  have hβ₀ : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+      ((Etale.LimitStage.transition Λ β₀).app K)) := by
+    refine Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ ?_
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ModuleCat.IsElementwiseColimit.bijective_of_bijective
+      (fun i ↦ (Etale.stalkHomology Λ q x).map ((Etale.LimitStage.transition Λ (β i)).app K))
+      ((Etale.stalkHomology Λ q x).map ((Etale.LimitStage.transition Λ β₀).app K))
+      (fun i ↦ ?_) (fun f ↦ ?_) (fun f ↦ ?_) (fun i ↦ ?_) (h𝒜 x) (h𝒳 x)
+    · have hc : (𝒳.π i).comp (β i) = β₀.comp (𝒜.π i) :=
+        Etale.LimitStage.Hom.ext (he₀ i).symm (hp₀ i).symm
+      rw [← Functor.map_comp, ← Functor.map_comp, ← NatTrans.comp_app, ← NatTrans.comp_app,
+        Etale.LimitStage.transition_comp, Etale.LimitStage.transition_comp, hc]
+    · have hc : (β _).comp (𝒜.map f) = (𝒳.map f).comp (β _) :=
+        Etale.LimitStage.Hom.ext (e.naturality f).symm (p.naturality f).symm
+      rw [← Functor.map_comp, ← Functor.map_comp, ← NatTrans.comp_app, ← NatTrans.comp_app,
+        Etale.LimitStage.transition_comp, Etale.LimitStage.transition_comp, hc]
+    · rw [← Functor.map_comp, ← NatTrans.comp_app, Etale.LimitStage.transition_comp, 𝒜.w]
+    · exact (ConcreteCategory.isIso_iff_bijective _).1 inferInstance
+  rw [Etale.isIso_baseChangeHomologyMap_iff_upperStar Λ sq₀ q w₀ G]
+  exact Etale.LimitStage.isIso_homology_baseChange_of_isIso Λ β₀ q K hβ₀
 
 /-- Blueprint `lem-kun-0ezt`: Higher direct images along limits of cartesian squares, for all
 coefficient sheaves.

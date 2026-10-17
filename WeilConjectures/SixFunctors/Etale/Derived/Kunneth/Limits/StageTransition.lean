@@ -193,10 +193,9 @@ lemma transition_id (α : LimitStage B W) : transition Λ (Hom.id α) = 𝟙 _ :
   rw [transition_app, h3]
   simp only [Category.assoc, ← Functor.map_comp, h2, CategoryTheory.Functor.map_id,
     Category.comp_id, NatTrans.id_app]
-  have e := Category.comp_id ((upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) α.S).hom.app
-    (R+((α.g)_*[ModuleCat.{u + 1} Λ]).obj (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K)))
-  rw [e]
-  exact h1
+  refine Eq.trans ?_ h1
+  congr 2
+  exact Category.comp_id _
 
 end LimitStage
 
