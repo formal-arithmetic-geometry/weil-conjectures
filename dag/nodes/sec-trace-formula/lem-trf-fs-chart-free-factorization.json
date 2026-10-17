@@ -259,5 +259,23 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-d3defdcaa (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps in full, the statements of every cited node (def-trf-fs-log-blowup, lem-trf-fg-torsionfree-group-free, lem-weil-pbc-cauchy-binet, def-weil-pbc-matrix-determinant, lem-weil-pbc-matrix-adjugate-identity) and the parent's citing step (lem-trf-log-smooth-log-regular step 0). Sources: ILO VI Prop 1.9 (pp.70-71) gives only the specific nodal chart with Coker g^gp ≅ Z, and the general basis-lifting claim is correctly marked as an agent refinement. Saturation in VIII 3.1.17 matches the def node's fs clause. Stacks tags 0F0K and 07DQ match their labels. Proof: Step 2's saturation of S = π(Q) via n(x+g(b)) = q+g(a)+(n-1)g(b) is correct. Steps 3-4 use Cauchy-Binet with B (r×m) times C (m×r) = I_r to give a nonsingular tuple in S, then take the least |det|. Steps 5-6 use the adjugate inverse and floor rounding to get x = Aa with a in [0,1)^r. Saturation gives x in S, and det E = a_j by the Leibniz formula, which contradicts minimality. Steps 7-9 (basis lift, Φ an isomorphism, h injective and h^gp = Φ) are all checked. Small cases tested: g = id; P = 0 into N^2; N into N^2 with 1 ↦ (1,1); torsion units N×Z/2. Saturation is necessary (⟨2,3⟩ ⊂ Z) and so is torsion-freeness (N →×2 N). No new nodes. The DAG statement search found no duplicate or generalization (fs-face-sharpening differs). Accepted tool use: lem-weil-pbc-cauchy-binet, a generic matrix identity. No SGA source is cited. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3993a297a",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Statement, dependency, source, docstrings, edge cases, route-pivot constraints, and compiler evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FsChartFreeFactorization",
+  "declaration": "AlgebraicGeometry.exists_fs_chart_free_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FsChartFreeFactorization.lean",
+  "statement": "theorem exists_fs_chart_free_factorization {P : Type u} {Q : Type v} [AddCommMonoid P] [AddCommMonoid Q] (hP : IsFineSaturatedMonoid (Multiplicative P)) (hQ : IsFineSaturatedMonoid (Multiplicative Q)) (g : P →+ Q) (hg : Function.Injective (Algebra.GrothendieckAddGroup.lift ((Algebra.GrothendieckAddGroup.of (M := Q)).comp g))) (htorsion : ∀ (n : ℕ) (ℓ : Algebra.GrothendieckAddGroup Q ⧸ (Algebra.GrothendieckAddGroup.lift ((Algebra.GrothendieckAddGroup.of (M := Q)).comp g)).range), 0 < n → n • ℓ = 0 → ℓ = 0) : ∃ (r : ℕ) (q : Fin r → Q) (h : P × (Fin r → ℕ) →+ Q) (φ : Algebra.GrothendieckAddGroup P × (Fin r → ℤ) ≃+ Algebra.GrothendieckAddGroup Q), (∀ (ℓ : Algebra.GrothendieckAddGroup Q ⧸ (Algebra.GrothendieckAddGroup.lift ((Algebra.GrothendieckAddGroup.of (M := Q)).comp g)).range), ∃! m : Fin r → ℤ, ℓ = ∑ i, m i • QuotientAddGroup.mk (Algebra.GrothendieckAddGroup.of (q i))) ∧ (∀ (p : P) (n : Fin r → ℕ), h (p, n) = g p + ∑ i, n i • q i) ∧ Function.Injective h ∧ (∀ (x : Algebra.GrothendieckAddGroup P) (m : Fin r → ℤ), φ (x, m) = Algebra.GrothendieckAddGroup.lift ((Algebra.GrothendieckAddGroup.of (M := Q)).comp g) x + ∑ i, m i • Algebra.GrothendieckAddGroup.of (q i))",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
