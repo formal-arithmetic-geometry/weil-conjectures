@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves
@@ -144,9 +145,9 @@ private theorem finiteSetLocal_congr {Y : Scheme.{v}}
     exact Sheaf.isConstant_congr _
       ((Y.smallEtaleTopology.overPullback (Type (v + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · intro Ω _ _ s
+  · refine Scheme.isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
     have : Finite ((pointSmallEtale s).sheafFiber.obj G) :=
-      hG.2 Ω s
+      hG.finite_sheafFiber Ω s
     exact Finite.of_equiv _
       (((pointSmallEtale s).sheafFiber (A := Type (v + 1))).mapIso e).toEquiv
 
