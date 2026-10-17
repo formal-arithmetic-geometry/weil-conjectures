@@ -2141,6 +2141,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsio
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExtendScalarsLocalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.FieldDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.FieldExtensionHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensionAmplitude
@@ -2273,6 +2274,7 @@ public import WeilConjectures.CategoryTheory.FilteredColimitPullbackHomExt
 public import WeilConjectures.CategoryTheory.FilteredColimitPullbackLift
 public import WeilConjectures.CategoryTheory.FilteredModuleSheafColimitLocalRepresentatives
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
+public import WeilConjectures.CategoryTheory.FilteredTwoColimitTransport
 public import WeilConjectures.CategoryTheory.Filtration
 public import WeilConjectures.CategoryTheory.FiniteCycleDerivedComparison
 public import WeilConjectures.CategoryTheory.FiniteCycleKernelPresentation
@@ -4185,6 +4187,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiber
+public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberAlgClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberRational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
