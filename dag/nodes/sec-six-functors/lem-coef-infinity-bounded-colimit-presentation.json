@@ -27,7 +27,9 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category",
-  "lem-coef-infinity-relative-colimit-completion"
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "def-coef-coherent-nerve-infrastructure"
  ],
  "proof": [
   {
@@ -280,5 +282,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5e2dec133",
+  "group": "NO",
+  "result": "fix",
+  "note": "Reviewed the immutable statement, all five dependencies, exact Lean interfaces, HTT sources, universes, edge cases, and pilot gates. Compilation reproduced cleanly; lean.statement matches verbatim. Mathematics accepted. review.md records all checks; fixes/ contains a complete merge-compatible report replacement restoring four corrupted source references."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityBoundedColimitPresentation",
+  "declaration": "SSet.Enhanced.RelativeCompletion.infinity_bounded_colimit_presentation",
+  "declarations": [
+   "SSet.Enhanced.RelativeCompletion.RepresentsBoundedColimits",
+   "SSet.Enhanced.RelativeCompletion.boundedRelationFunctors",
+   "SSet.Enhanced.RelativeCompletion.BoundedRestriction",
+   "SSet.Enhanced.RelativeCompletion.infinity_bounded_colimit_presentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityBoundedColimitPresentation.lean",
+  "statement": "theorem infinity_bounded_colimit_presentation (C : SSet.{max (u + 1) v}) [Quasicategory C] (hC : IsPresentable.{u, v} C) : ∃ (κ : Cardinal.{u}), κ.IsRegular ∧ ∃ (A : SSet.{max (u + 1) v}) (_hA : Quasicategory A) (i : A ⟶ C), IsSmall.{u, max (u + 1) v} A ∧ HasKappaSmallColimits A κ ∧ IsFullyFaithful i ∧ PreservesKappaSmall κ i ∧ (∀ c : C _⦋0⦌, IsKappaCompact C κ c ↔ ∃ (a : A _⦋0⦌) (e : C _⦋1⦌), C.δ 1 e = c ∧ C.δ 0 e = i.app _ a ∧ IsEquivalenceEdge C e) ∧ (∀ c : C _⦋0⦌, ∃ (I : SSet.{max (u + 1) v}) (hI : Quasicategory I), IsSmall.{u, max (u + 1) v} I ∧ @IsKappaFiltered κ I hI ∧ ∃ (p : I ⟶ A) (t : (coconeCategory (p ≫ i)) _⦋0⦌), IsColimiting (p ≫ i) t ∧ ∃ e : C _⦋1⦌, C.δ 1 e = c ∧ C.δ 0 e = t.1.1 ∧ IsEquivalenceEdge C e) ∧ (∀ (R : Set (Relation.{u, max (u + 1) v} A)), Small.{u} R → RepresentsBoundedColimits κ R → (∀ (P : SSet.{max (u + 1) v}) [Quasicategory P] (j : A ⟶ P), Unary R j → ∃ E : P ⟶ C, IsFunctorEquivalence E ∧ Coyoneda.PreservesSmallColimits.{u} E ∧ AreNaturallyEquivalent (j ≫ E) i) ∧ Nonempty (BoundedRestriction R i) ∧ (∀ (Z : SSet.{max (u + 1) v}) [Quasicategory Z] (f : A ⟶ Z), Respects R f ↔ PreservesKappaSmall κ f))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "States compact generators, filtered generation, representative bounded colimit relations, equivalence over A for every model of relative completion, and actual restriction equivalences natural in all cocomplete targets. Reuses the landed bounded-colimit predicates and categorical-equivalence interface through two added landed statement dependencies. Helpers only describe the representative relations and natural restriction occurring in this node. No statement correction."
  }
 }
