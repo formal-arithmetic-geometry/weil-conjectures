@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-support-pair-composition",
+ "kind": "statement",
+ "title": "Composition coherence for adjoint restriction-kernel diagrams",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be small sites with abelian sheaf categories [def-weil-pbc-sites-and-cohomology]. Let $u:\\mathcal C\\to\\mathcal D$ and $v:\\mathcal D\\to\\mathcal E$ be functors whose precomposition preserves abelian sheaves. Write $R(G)(W)=G(uW)$ and $R_v(H)(W)=H(vW)$ for these precomposition functors. Suppose $L\\dashv R$ and $M\\dashv R_v$ are additive adjunctions with exact left adjoints. Let $m:V\\to T$, $m':V'\\to T'$, and $m'':V''\\to T''$ be monomorphisms in the three sites. Let $t:T'\\to uT$, $s:V'\\to uV$, $t':T''\\to vT'$, and $s':V''\\to vV'$ satisfy $u(m)s=tm'$ and $v(m')s'=t'm''$. For cochain complexes $I,J,P$ on $\\mathcal C,\\mathcal D,\\mathcal E$ respectively, let $h:LI\\to J$ and $k:MJ\\to P$ be chain maps. Define the restriction-kernel diagram $D_m(I)=[\\ker(I(T)\\to I(V))\\to I(T)\\to I(V)]$ and its adjoint diagram maps as in [lem-pur-support-pair-chain-coherence](1). Then the diagram map for $k\\circ M(h)$ and the composite data $(v\\circ u,v(t)\\circ t',v(s)\\circ s')$ equals the composite of the diagram maps for $h$ and $k$, under the unit-compatible identification of the composite adjunction with $(M\\circ L)\\dashv(R\\circ R_v)$. The same identity holds on cohomology for derived coefficient morphisms represented on bounded-below injective complexes, independently of representative choices as in [lem-pur-support-pair-chain-coherence](2).",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4, pp. 65-67, pair functoriality; agent-formulated composition-coherence refinement of returned Step 7. Site-adjunction composition: Stacks sites.tex Tag 03CB, lemma-composition-morphisms-sites."
+ },
+ "stmt_deps": [
+  "lem-pur-support-pair-chain-coherence",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjoint chain map on sheaf complexes induces map on kernels of restriction with homotopy invariance",
+   "results": "HomologicalComplex.restrictionCyclesIso_hom_iCycles; SheafOfModules.PullbackConstruction.adjunction; sheaf composition declarations; MayerVietorisSquare.shortComplex maps. None states the adjoint restriction-kernel composition lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel.map, CategoryTheory.InjectiveResolution.descHomotopy",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*restriction|adjoint.*chain map",
+   "results": "CategoryTheory: 0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of adjoint chain maps induces the composite map on restriction kernels and cohomology",
+   "results": "HomologicalComplex.restrictionMap_comp; HomologicalComplex.homologyMap_comp; groupCohomology cochainsMap_comp/map_comp; cyclesMap_comp; opcyclesMap_comp. These are generic chain-composition identities and do not state site adjunction or restriction-kernel coherence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*composition|restriction.*composition",
+   "results": "Mathlib/CategoryTheory/Action/Basic.lean:371 (restriction along composition); Mathlib/CategoryTheory/Shift/Adjunction.lean:265 (adjunction shift compatibility); neither states this lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of adjoint morphisms of sheaf cochain complexes agrees on global sections open sections and kernels of restriction with composing the induced diagram maps",
+   "results": "{\"t\": \"2026-10-17T13:25:28Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of adjoint morphisms of sheaf cochain complexes agrees on global sections open sections and kernels of restriction with composing the induced diagram maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"CategoryTheory.Sheaf.ΓRes_naturality\"], \"digest\": \"c317ba698c677b35\"}; Read GlobalSections.lean:95-170: the hits concern global-section adjunction naturality, not a composite site adjunction acting on both evaluations and their restriction kernel. sheafComposeNatTrans_fac concerns coefficient-functor sheafification comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-with-support-exactness",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-with-support-exactness",
+   "place": "Proof Step 3, final sentence: 'the functoriality in the pair and in F is the functoriality of all the maps'; extracted composition clause from returned Step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

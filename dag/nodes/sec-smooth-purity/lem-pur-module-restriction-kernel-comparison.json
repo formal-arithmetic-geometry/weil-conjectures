@@ -1,0 +1,88 @@
+{
+ "id": "lem-pur-module-restriction-kernel-comparison",
+ "kind": "statement",
+ "title": "Forgetting constant module coefficients compares derived restriction kernels",
+ "statement": "Let $\\mathcal C$ be a small site in a common universe containing objects, arrows, covering index sets and coefficients [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $A$ be a commutative unital ring, $A_{\\mathcal C}$ its constant ring sheaf [def-weil-pbc-constant-sheaf], and $V:\\operatorname{Mod}(A_{\\mathcal C})\\to\\operatorname{Ab}(\\mathcal C)$ and $v:A\\text{-}\\operatorname{Mod}\\to\\operatorname{Ab}$ the scalar-forgetting functors [def-weil-sheaf-of-modules-category]. For a monomorphism $m:W\\to T$ in $\\mathcal C$, set\n$$S_m^A(M)=\\ker(M(T)\\to M(W)),\\qquad S_m^{\\mathrm{ab}}(G)=\\ker(G(T)\\to G(W)),$$\nwith restriction as the arrow and the induced maps on kernels as the functorial action. Both functors are additive and left exact [def-sp-left-exact-additive]. Use bounded-below derived functors and integer cochain complexes [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories].\n\nThe category $\\operatorname{Mod}(A_{\\mathcal C})$ is abelian and has enough injectives [def-sp-enough-injectives]. If $I$ is an injective module sheaf [def-sp-injective-resolutions], its restriction $I(T)\\to I(W)$ is surjective and $VI$ is $S_m^{\\mathrm{ab}}$-acyclic, meaning $R^qS_m^{\\mathrm{ab}}(VI)=0$ for every $q>0$. There is a canonical natural isomorphism\n$$c_m(K):vRS_m^A(K)\\xrightarrow{\\sim}RS_m^{\\mathrm{ab}}(VK)$$\nfor $K\\in D^+(\\operatorname{Mod}(A_{\\mathcal C}))$, normalized by the identity $vS_m^A=S_m^{\\mathrm{ab}}V$ in degree zero.\n\nMore precisely, choose any bounded-below complex $L$ of injective module sheaves representing $K$, any bounded-below complex $J$ of injective abelian sheaves representing $VK$, and any quasi-isomorphism $q:VL\\to J$ inducing these identifications. The maps\n$$\\ker(vL(T)\\to vL(W))\\xrightarrow{\\ker(q)}\\ker(J(T)\\to J(W)),\\quad q_T:vL(T)\\to J(T),\\quad q_W:vL(W)\\to J(W)$$\nform a morphism between the degreewise short exact restriction-kernel sequences. All three maps are quasi-isomorphisms. On derived objects the first is $c_m(K)$ and the last two are precisely the canonical ordinary evaluation comparisons of [lem-pe-left-module-derived-evaluation-forget]. These identifications are independent of $L,J,q$ and natural in $K$. No injectivity of $VL^r$ in abelian sheaves and no flatness of $A$ over $\\mathbf Z$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective. Agent-formulated supported refinement of the existing ordinary derived evaluation comparison lem-pe-left-module-derived-evaluation-forget; the source tag supplies module-injective restriction surjectivity, not the whole comparison. Enough injectives: injectives.tex Tag 01DU, theorem-sheaves-modules-injectives."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-pe-left-module-derived-evaluation-forget"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For constant ring sheaves on a site, forgetting scalars commutes with bounded below derived sections supported on the kernel of restriction along a monomorphism, compatibly with boundaries and inverse image pair maps",
+   "results": "{\"t\": \"2026-10-17T15:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"For constant ring sheaves on a site, forgetting scalars commutes with bounded below derived sections supported on the kernel of restriction along a monomorphism, compatibly with boundaries and inverse image pair maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_of_forget\", \"CategoryTheory.Sheaf.isConstant_iff_forget\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"CondensedMod.LocallyConstant.functor\", \"instAbelianCondensedMod\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.instAbelian\"], \"digest\": \"332d88fb9c198095\"}; Read Sheaf.lean:90-145 and Sheaf/Abelian.lean:34-42; toSheaf, its faithfulness and abelian structure do not state support acyclicity or a derived comparison of restriction kernels. Generic K-injective and preadditive Yoneda results do not compare these two coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"kernel\"",
+   "results": "{\"t\": \"2026-10-17T15:07:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"kernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Sheaf.lean:90-145 and Sheaf/Abelian.lean:34-42; toSheaf, its faithfulness and abelian structure do not state support acyclicity or a derived comparison of restriction kernels. Generic K-injective and preadditive Yoneda results do not compare these two coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(forget|comparison)|forget.*support|restriction.*[Kk]ernel",
+   "results": "{\"t\": \"2026-10-17T15:07:27Z\", \"tool\": \"grep\", \"query\": \"support.*(forget|comparison)|forget.*support|restriction.*[Kk]ernel\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Sheaf.lean:90-145 and Sheaf/Abelian.lean:34-42; toSheaf, its faithfulness and abelian structure do not state support acyclicity or a derived comparison of restriction kernels. Generic K-injective and preadditive Yoneda results do not compare these two coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections with support commute with forgetting the constant coefficient module structure on sheaves on a site",
+   "results": "{\"t\": \"2026-10-17T15:07:41Z\", \"tool\": \"leansearch\", \"query\": \"Derived sections with support commute with forgetting the constant coefficient module structure on sheaves on a site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.toSheaf\", \"SheafOfModules.forget_obj\", \"SheafOfModules.forget\", \"SheafOfModules.toSheaf_obj_val\", \"SheafOfModules.instFaithfulPresheafOfModulesValRingCatForget\", \"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"SheafOfModules.forgetToSheafModuleCat_map_val\", \"SheafOfModules.instAdditivePresheafOfModulesValRingCatForget\"], \"digest\": \"b31a33e68beba917\"}; Read Sheaf.lean:90-145 and Sheaf/Abelian.lean:34-42; toSheaf, its faithfulness and abelian structure do not state support acyclicity or a derived comparison of restriction kernels. Generic K-injective and preadditive Yoneda results do not compare these two coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf of modules is acyclic as an abelian sheaf for the functor taking the kernel of evaluation at an object to evaluation at a monic subobject; scalar forgetting comparison is computed by a quasi isomorphism of kernel complexes",
+   "results": "{\"t\": \"2026-10-17T15:08:20Z\", \"tool\": \"leanfinder\", \"query\": \"An injective sheaf of modules is acyclic as an abelian sheaf for the functor taking the kernel of evaluation at an object to evaluation at a monic subobject; scalar forgetting comparison is computed by a quasi isomorphism of kernel complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective\", \"SheafOfModules.instAbelian\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"7714f49666accba6\"}; Read Sheaf.lean:90-145 and Sheaf/Abelian.lean:34-42; toSheaf, its faithfulness and abelian structure do not state support acyclicity or a derived comparison of restriction kernels. Generic K-injective and preadditive Yoneda results do not compare these two coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(cohomology|sections)|restriction.*kernel|kernel.*restriction|rightDerived.*forget",
+   "results": "{\"t\": \"2026-10-17T15:10:23Z\", \"tool\": \"grep\", \"query\": \"support.*(cohomology|sections)|restriction.*kernel|kernel.*restriction|rightDerived.*forget\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No supported derived scalar-forgetting comparison in the algebra or module-sheaf sources.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-with-support-exactness",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-with-support-exactness",
+   "place": "Proof Step 4: finite-torsion pro-etale coefficients; missing comparison from the abelian-sheaf restriction kernel to the required coefficient-module supported derived functor.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -10,12 +10,68 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof": [
+  {
+   "text": "Put $u=rf:X\\to X$, and let $\\eta:u\\simeq1_X$ be the given equivalence edge. The identity $1_X$ is a simplicial quasi-inverse to $u$: both $1_Xu$ and $u1_X$ equal $u$, so the same edge $\\eta$ provides both required coherent natural equivalences with $1_X$. This is precisely the functor-equivalence data of [def-cbc-enhanced-diagrams-cones]; it requires no triangle identity relating the two comparisons. Apply clause (2) of [lem-coef-joyal-quasicategory-characterizations] with both categories equal to $X$. It makes $u=rf$ a Joyal weak equivalence, equivalently a categorical equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent realization foundations: agent expansion of the cancellation subargument, first establishing that the composite is a categorical equivalence."
+   }
+  },
+  {
+   "text": "In the Joyal model structure of [lem-coef-joyal-model-structure], categorical equivalences are the weak equivalences and obey two-out-of-three. Apply this to the composable simplicial maps $X\\xrightarrow{f}Y\\xrightarrow{r}X$. The first map is a categorical equivalence by hypothesis and their composite $rf$ is one by step 1; therefore $r$ is a categorical equivalence.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent realization foundations: two-out-of-three cancellation for the map constructed in the simplex-relative inverse argument."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-coef-joyal-quasicategory-characterizations] to $r:Y\\to X$. Both $Y$ and $X$ are quasicategories in the chosen universe. It supplies a simplicial functor $s:X\\to Y$ with coherent natural equivalences $sr\\simeq1_Y$ and $rs\\simeq1_X$. Thus $r$ is a functor equivalence in the stipulated sense. The assertion of [lem-cbc-enhanced-functor-cone-calculus] that every functor equivalence induces equivalences on all mapping spaces gives, for every $y,y'\\in Y$, a weak homotopy equivalence $\\operatorname{Map}_Y(y,y')\\to\\operatorname{Map}_X(r(y),r(y'))$. This is exactly full faithfulness under [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent realization foundations: consequences of the cancelled equivalence for mapping spaces and coherent quasi-inverses."
+   }
+  },
+  {
+   "text": "For each vertex $x\\in X$, take $s(x)\\in Y$. Evaluation at $x$ sends the coherent natural equivalence $rs\\simeq1_X$ of step 3 to an equivalence edge $r(s(x))\\simeq x$ in $X$: evaluation is restriction along $\\{x\\}\\hookrightarrow X$, and it sends the inverse edge and its two inverse triangles to an inverse edge and two inverse triangles. These are exactly the equivalence witnesses of [def-cbc-enhanced-diagrams-cones]. Hence every vertex of $X$ is equivalent to an object in the image of $r$, which is essential surjectivity.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, basic facts (1) and (3), printed p.14: evaluation of an equivalence edge and its inverse triangles; the essential-image inference is elementary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-joyal-model-structure",
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent diagram realization; agent-written four-step expansion of the cancellation used in the simplex-relative inverse proof. Online HTT Proposition 3.1.3.5, proof opening, and Theorem 2.2.5.1 checked; HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +114,59 @@
    "results": "Mathlib/CategoryTheory/MorphismProperty/Composition.lean:378 and ordinary equivalence occurrences; no quasicategory theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?equivalence|Joyal|isEquivalence_of_comp",
+   "results": "{\"t\": \"2026-10-17T15:04:47Z\", \"tool\": \"grep\", \"query\": \"categorical.?equivalence|Joyal|isEquivalence_of_comp\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"aa0e8774aa7a566a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancellation of equivalences of infinity categories: if f and r f are equivalences then r is an equivalence",
+   "results": "{\"t\": \"2026-10-17T15:04:48Z\", \"tool\": \"leansearch\", \"query\": \"Cancellation of equivalences of infinity categories: if f and r f are equivalences then r is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.cancel_iso_inv_right_assoc\", \"Equiv.trans_cancel_right\", \"CategoryTheory.Equivalence.cancel_unit_right_assoc\", \"CategoryTheory.NatIso.cancel_natIso_inv_right_assoc\", \"CategoryTheory.Equivalence.cancel_counitInv_right\", \"CategoryTheory.Equivalence.cancel_counit_right\", \"CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app\", \"CategoryTheory.Equivalence.cancel_counitInv_right_assoc'\"], \"digest\": \"7c146ecd5e95f8db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-17T15:04:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: valid quoted quasicategory/equivalence query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical equivalence f of quasicategories and a coherent natural equivalence r composed with f to the identity imply r is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T15:04:51Z\", \"tool\": \"leanfinder\", \"query\": \"A categorical equivalence f of quasicategories and a coherent natural equivalence r composed with f to the identity imply r is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isEquivalence_of_iso\", \"CategoryTheory.Functor.isEquivalence_of_comp_left\", \"CategoryTheory.Functor.isEquivalence_of_comp_right\", \"CategoryTheory.Functor.IsEquivalence.mk'\", \"CategoryTheory.Equivalence.changeInverse\", \"CategoryTheory.Functor.isEquivalence_iff_of_iso\", \"CategoryTheory.Equivalence.changeFunctor\", \"CategoryTheory.Equivalence.isEquivalence_functor\"], \"digest\": \"7f1870bbeccd9fdc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence_of_comp|categorical.?equivalence|coherent.?inverse",
+   "results": "{\"t\": \"2026-10-17T15:05:29Z\", \"tool\": \"grep\", \"query\": \"isEquivalence_of_comp|categorical.?equivalence|coherent.?inverse\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Preadditive/Mat.lean\", \"Mathlib/CategoryTheory/Skeletal.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\", \"Mathlib/CategoryTheory/Subobject/Types.lean\", \"Mathlib/CategoryTheory/Category/Preorder.lean\", \"Mathlib/CategoryTheory/Category/Preorder.lean\"], \"digest\": \"6cb8f0d0fc19b2e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, \"comp\"",
+   "results": "{\"t\": \"2026-10-17T15:05:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsEquivalence, \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isEquivalence_of_comp_left\", \"CategoryTheory.Functor.isEquivalence_of_comp_right\", \"CategoryTheory.Functor.isLeftAdjoint_comp_iff_left\", \"CategoryTheory.Functor.isLeftAdjoint_comp_iff_right\", \"CategoryTheory.Functor.isRightAdjoint_comp_iff_left\", \"CategoryTheory.Functor.isRightAdjoint_comp_iff_right\", \"CategoryTheory.Limits.compNatIso\", \"CategoryTheory.Adjunction.hasColimit_comp_equivalence\"], \"digest\": \"b80807997ceae280\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial map between infinity categories that is a left inverse up to coherent natural equivalence to a categorical equivalence admits a quasi-inverse and is fully faithful and essentially surjective",
+   "results": "{\"t\": \"2026-10-17T15:05:31Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map between infinity categories that is a left inverse up to coherent natural equivalence to a categorical equivalence admits a quasi-inverse and is fully faithful and essentially surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.fullyFaithfulInverse\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Equivalence.fullyFaithfulFunctor\", \"CategoryTheory.Equivalence.full_inverse\", \"CategoryTheory.Functor.IsEquivalence.mk'\", \"CategoryTheory.Functor.inv\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\"], \"digest\": \"28dc8336da66d429\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern equivalences of ordinary categories or abstract model-category lifting, not the stipulated quasicategories and coherent natural equivalences. Read CategoryTheory/Equivalence.lean:679-700; ordinary functor cancellation is not a one-line specialization to simplicial quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-simplex-inverse-extension",
@@ -89,5 +194,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-cancellation",
+  "worker": "stage1",
+  "summary": "Proved cancellation with four steps and no new nodes: the given comparison makes rf a functor equivalence with identity quasi-inverse; the existing Joyal dictionary makes rf weak, and the model two-out-of-three gives r weak. The same dictionary supplies a coherent quasi-inverse, existing functor calculus gives full faithfulness, and evaluation of inverse triangles gives essential surjectivity. Retained the statement and inherited searches, appended actual logged Mathlib searches, and removed the functor-calculus theorem from statement dependencies because it is used only in the proof.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived Hom / derived limit coherent realization: supporting cancellation subargument of lem-coef-cartesian-simplex-inverse-extension, step 10. All four steps remain inside that auxiliary foundations route; no chapter or unit change.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its general theorem that every functor equivalence induces equivalences on mapping spaces is used to obtain full faithfulness. It is a generic quasicategory tool; the item unit supplies no mapping-space consequence of equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-9bcad331e",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-9bcad331e (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources it cites. Shape: one commit with the item node and the report, no new nodes, and the statement is byte-identical to the unsplit base (compared with the side DAG copy). The one stmt_deps change drops lem-cbc-enhanced-functor-cone-calculus, which the statement does not use; it stays in proof_deps, and proof_deps equals the union of the steps' uses. Step 1 is correct: with u=rf, the identity is a simplicial quasi-inverse. The composites 1_X u and u 1_X are both literally u, so the given edge u≃1_X supplies both coherent equivalences that def-cbc requires (no triangle identity). Clause (2) of lem-coef-joyal-quasicategory-characterizations, applied with both categories equal to X, then makes rf a Joyal weak equivalence, which that clause identifies with a categorical equivalence. Step 2 is correct: lem-coef-joyal-model-structure literally states that the weak equivalences are the categorical equivalences and satisfy two-out-of-three; applied to X→Y→X with f and rf weak, r is weak. Step 3 is correct: clause (2) applied to r gives s with sr≃1_Y and rs≃1_X. The cone-calculus sentence 'Every functor equivalence induces equivalences on all mapping spaces' is exactly def-cbc's full faithfulness, since spaces are taken up to weak homotopy equivalence. Step 4 is genuinely elementary: evaluation at x is the simplicial restriction along {x}×Δ^n, which carries an equivalence edge and its two inverse 2-simplices to an equivalence edge r(s(x))≃x. I checked this against Scholze, Lecture II, printed pp.14-15, basic facts (1) and (3). Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, used only for its mapping-space clause. Its unit sk-prop-sf-cbc is not reachable from sk-prop-sf-biduality-general, no node of that unit gives this fact, and 263 nodes of the unit already record it as a tool. Small cases: X empty forces Y empty, so the statement is vacuously true; on nerves it reduces to ordinary cancellation; and the hypothesis on f is needed (a point into a discrete two-point set with the collapse map has rf=id but r is not fully faithful). Duplicate candidates read: lem-coef-infinity-full-essential-image, lem-coef-infinity-yoneda-functor-equivalence-lift, lem-coef-joyal-small-test-universe-invariance and lem-coef-algebroid-equivalence-nerve; none states this cancellation. Cycle check: the dependency closures of the four cited nodes (3, 68, 75 and 142 nodes) contain neither the item nor its parent lem-coef-cartesian-simplex-inverse-extension. The parent's step 10 uses the statement exactly as written. Minor point, not a fault of this delivery: the imported phrase 'essentially surjective' has no definition node, but step 4 states the meaning. HTT is not archived, so I relied on the archived DAG statements instead. No SGA source is used. No fixes were written."
  }
 }

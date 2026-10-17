@@ -21,48 +21,162 @@
   "cor-cbc-derived-extension-zero-base-change",
   "lem-cbc-proetale-extension-zero-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The sheaf comparison of [lem-cbc-proetale-extension-zero-comparison] is natural in the etale sheaf and compatible with composition of open immersions. Since extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], its componentwise comparison gives the stated natural isomorphism c_j on bounded-below derived objects; the same applies to j′. The inverse-image comparison rho_u is the canonical comparison of [lem-weil-pbc-comparison-pullback], so its orientation is the inverse of the comparison displayed there and is compatible with the cartesian square.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; Tag 099R, comparison inverse image"
+   }
+  },
+  {
+   "text": "Reduction to sheaves and the two inverse-unit formulas. For $K\\in D^+(U_{\\mathrm{et}},\\Lambda)$ every arrow in the displayed equation is the image in $D(X'_{\\mathrm{proet}},\\Lambda)$ of a degreewise map of complexes: $c_j,c_{j'}$ by definition (step 1), $\\rho_g,\\rho_h$ because the comparison of [lem-weil-pbc-comparison-pullback] is a natural isomorphism of exact functors applied termwise, $e^{\\mathrm{et}}_j$ because [cor-cbc-derived-extension-zero-base-change] states that it is its canonical sheaf-level map applied degreewise to the complex, and $e^{\\mathrm{proet}}_j$ because [lem-cbc-proetale-extension-zero-base-change] is stated for complexes; all functors $N$, $u^{-1}$, $j_!$ are exact and act degreewise ([lem-weil-pbc-extension-by-zero-exact], [lem-cbc-proetale-extension-zero]). Hence it suffices to prove the equality for a single etale $\\Lambda$-module sheaf $F$ on $U$ in each degree, using the underived adjunctions $j_!\\dashv j^{-1}$, $j'_!\\dashv j'^{-1}$. For such $F$: (i) by [lem-cbc-derived-extension-zero-base-change-underived-compatibility], $(e^{\\mathrm{et}}_{j,F})^{-1}$ is the $j'_!\\dashv j'^{-1}$ transpose of $s_g\\circ h^{-1}(\\eta^{\\mathrm{et}}_{j,F}):h^{-1}F\\to j'^{-1}g^{-1}j_!F$, where $s_g:h^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}g^{-1}$ is the cartesian inverse-image identification; (ii) by [lem-cbc-finite-open-exchange-scalars] with $B=C=\\Lambda$, $a=\\mathrm{id}$, for every pro-etale module sheaf $M$ on $U$ the map $(e^{\\mathrm{proet}}_{j,M})^{-1}$ is the transpose of $\\sigma_{j_!M}\\circ h^{-1}(\\eta^{\\mathrm{proet}}_{j,M})$, with $\\sigma:h^{-1}j^{-1}\\cong j'^{-1}g^{-1}$ the site-composition comparison named in that statement.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "lem-cbc-finite-open-exchange-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change (restriction of $j'_!f'^{-1}$ and $f^{-1}j_!$ to $U'$ identified by the units)"
+   }
+  },
+  {
+   "text": "Unit formula for the site comparison of extensions. Write $a_u=\\rho_u^{-1}:N_Tu^{-1}_{\\mathrm{et}}\\to u^{-1}_{\\mathrm{proet}}N_V$, the canonical comparison of [lem-weil-pbc-comparison-pullback]. The unit-normalization theorem [lem-sf-open-comparison-unit-normalization], whose $c$ is the comparison of [lem-cbc-proetale-extension-zero-comparison] and whose $a$ is this canonical $a_j$, gives $j^{-1}(c_{j,F})\\circ a_{j,j_!F}\\circ N_U(\\eta^{\\mathrm{et}}_{j,F})=\\eta^{\\mathrm{proet}}_{j,N_UF}$. Applying $j^{-1}(c_{j,F}^{-1})$, the transpose of $c_{j,F}^{-1}$, namely $j^{-1}(c_{j,F}^{-1})\\circ\\eta^{\\mathrm{proet}}_{j,N_UF}$, equals $a_{j,j_!F}\\circ N_U(\\eta^{\\mathrm{et}}_{j,F})=\\rho_{j,j_!F}^{-1}\\circ N_U(\\eta^{\\mathrm{et}}_{j,F})$. This proves the normalization of $c_j^{-1}$ asserted in the statement, and likewise for $c_{j'}$.",
+   "uses": [
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; unit normalization"
+   }
+  },
+  {
+   "text": "Transposes of the two inverses. Both sides of the displayed equation are isomorphisms, so it suffices to show that their inverses $\\Phi$ (left) and $\\Psi$ (right), maps $j'_!N_{U'}h^{-1}F\\to g^{-1}N_Xj_!F$, have equal transposes $P:=N_{U'}h^{-1}F\\to j'^{-1}g^{-1}N_Xj_!F$ under $j'_!\\dashv j'^{-1}$; transposition is a bijection, with $(f\\circ j'_!\\varphi)^\\sharp=f^\\sharp\\circ\\varphi$ and $(\\psi\\circ f)^\\sharp=j'^{-1}(\\psi)\\circ f^\\sharp$. Left: $\\Phi=g^{-1}(c_{j,F}^{-1})\\circ(e^{\\mathrm{proet}}_{j,N_UF})^{-1}\\circ j'_!(a_{h,F})$. By step 2(ii), naturality of $\\sigma$ and step 3, $\\Phi^\\sharp=\\sigma\\circ h^{-1}\\big(j^{-1}(c_{j,F}^{-1})\\circ\\eta^{\\mathrm{proet}}_{j,N_UF}\\big)\\circ a_{h,F}=\\sigma\\circ h^{-1}(a_{j,j_!F})\\circ h^{-1}N_U(\\eta^{\\mathrm{et}}_{j,F})\\circ a_{h,F}$, and naturality of $a_h$ rewrites this as $\\big[\\sigma\\circ h^{-1}(a_j)\\circ a_h\\big]_{j_!F}\\circ N_{U'}h^{-1}(\\eta^{\\mathrm{et}}_{j,F})$. Right: $\\Psi=a_{g,j_!F}\\circ N_{X'}((e^{\\mathrm{et}}_{j,F})^{-1})\\circ c_{j',h^{-1}F}^{-1}$. By step 3 for $j'$, naturality of $a_{j'}$ and step 2(i), $\\Psi^\\sharp=j'^{-1}(a_g)\\circ a_{j'}\\circ N_{U'}\\big(j'^{-1}((e^{\\mathrm{et}})^{-1})\\circ\\eta^{\\mathrm{et}}_{j'}\\big)=\\big[j'^{-1}(a_g)\\circ a_{j'}\\circ N_{U'}(s_g)\\big]_{j_!F}\\circ N_{U'}h^{-1}(\\eta^{\\mathrm{et}}_{j,F})$.",
+   "uses": [
+    "lem-cbc-finite-open-exchange-scalars",
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "lem-sf-open-comparison-unit-normalization",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; transposition under $j'_!\\dashv j'^{-1}$"
+   }
+  },
+  {
+   "text": "Coherence and conclusion. The two bracketed transformations $N_{U'}h^{-1}j^{-1}\\to j'^{-1}g^{-1}N_X$ are the comparisons for the composite $U'\\to X$ along the factorizations $j\\circ h$ and $g\\circ j'$, transported by the cartesian identifications $s_g$ (etale) and $\\sigma$ (pro-etale) of [def-weil-pbc-cartesian-square]. The comparison of [lem-weil-pbc-comparison-pullback] is compatible with composites and with that cartesian identification, so $\\sigma\\circ h^{-1}(a_j)\\circ a_h=j'^{-1}(a_g)\\circ a_{j'}\\circ N_{U'}(s_g)$. Hence $\\Phi^\\sharp=\\Psi^\\sharp$, so $\\Phi=\\Psi$, and inverting gives the displayed equality degreewise, hence in $D(X'_{\\mathrm{proet}},\\Lambda)$ by step 2. Every arrow used is natural in $F$, so the equality is natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, comparison of inverse images, compatibility with composition"
+   }
+  },
+  {
+   "text": "The construction also covers the identity square, an empty open, the zero complex, and the zero coefficient ring: each comparison is then the corresponding identity or zero map, and the mate calculation is unchanged. No hypothesis on g beyond the given commutative open-immersion square is used.",
+   "uses": [
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, identity and naturality clauses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-cartesian-square",
+  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6 (lemma-shriek-base-change), proof by comparison of right adjoints; normalized etale/pro-etale elaboration using Tag 09AF"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Etale proetale comparison commutes with extension by zero base change normalized by the open adjunction unit",
    "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondensed.ihomPoints_symm_comp, Algebra.Etale.comp, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Condensed.lanPresheafNatIso_hom_app",
    "date": "2026-10-17",
-   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+   "verdict": "no match: the hits are unrelated condensed, algebraic, or underived sheaf constructions."
   },
   {
    "tool": "leanfinder",
    "query": "Site comparison for open extension by zero preserves its adjunction units and base change",
-   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.restrictHomEquivHom, Topology.IsOpenEmbedding.compatiblePreserving, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction",
+   "results": "8 hits: compatiblePreserving_opens_map, Topology.IsOpenEmbedding.compatiblePreserving, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, TopCat.Presheaf.generateEquivalenceOpensLe_unitIso, TopCat.Presheaf.generateEquivalenceOpensLe_counitIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
    "date": "2026-10-17",
-   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+   "verdict": "no match: generic topological sheaf adjunction results do not state the etale/pro-etale comparison."
   },
   {
    "tool": "leansearch",
    "query": "The etale to proetale pullback comparison for extension by zero intertwines the open base change unit mate",
-   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "results": "8 hits: TopCat.Presheaf.pullback_obj_obj_ext_iff, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, TopCat.Presheaf.pullback_obj_obj_ext, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, CategoryTheory.PreZeroHypercover.pullback₁, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.PreZeroHypercover.pullback₂, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match: hits concern topological presheaf pullbacks or scheme-module restriction, not this site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv, openImmersionLowerShriekBaseChangeMap",
+   "results": "loogle: unknown identifier 'mateEquiv'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate composition does not identify the etale/pro-etale maps."
   },
   {
    "tool": "loogle",
    "query": "\"mateEquiv\", \"hcomp\"",
-   "results": "2 hits: CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.mateEquiv_hcomp",
    "date": "2026-10-17",
-   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+   "verdict": "no match: generic mate composition does not identify the etale/pro-etale maps."
   },
   {
    "tool": "grep",
    "query": "[Pp]ro[Ee]tale.*[Cc]omparison|[Ee]tale.*[Bb]ase[Cc]hange",
-   "results": "14 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/RingHom/Etale.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/Finite.lean",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:74-75; Mathlib/RingTheory/Smooth/IntegralClosure.lean:324,332,344; Mathlib/RingTheory/RingHom/Etale.lean:62; Mathlib/RingTheory/Etale/Kaehler.lean:50; Mathlib/RingTheory/Etale/StandardEtale.lean:360,452; Mathlib/RingTheory/Etale/Finite.lean:103,109,134,136,153",
    "date": "2026-10-17",
-   "verdict": "no match: general mate composition is already cited through lem-weil-pbc-mate-pasting; the remaining hits are underived sheaf/module or algebraic constructions and do not state this normalized derived exchange equality."
+   "verdict": "no match: only etale algebra/base-change declarations, no sheaf site comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-compact-support-coefficient-change",
@@ -74,10 +188,74 @@
  "blueprint": {
   "from": {
    "node": "lem-fix-compact-support-coefficient-change",
-   "place": "Final proof paragraph: compatibility identities survive etale/pro-etale transport, open unit normalization (returned step 8, last two paragraphs).",
+   "place": "Final compatibility paragraph: the compact-support site comparison transports the construction to the specified pro-etale realizations and preserves the open-factor comparison and its counit/unit normalization.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fix-site-open-exchange",
+  "worker": "stage1",
+  "summary": "Repaired against main-20261015. The proof reduces to sheaves degreewise and compares the j'_!-transposes of the inverses of the two sides, using the inverse-unit formulas of the etale (underived compatibility node) and pro-etale (finite open-exchange node) open base-change maps, the unit normalization of the site comparison of extensions, and the composite/cartesian coherence of the inverse-image comparison. No right-adjoint comparison t is needed; the former helper node is dropped (maintainer review fix).",
+  "blueprint": "Realizes the final compatibility paragraph of main-20261015 lem-fix-compact-support-coefficient-change: compact-support/site comparison transports the finite construction to pro-etale realizations and preserves the specified open-factor normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic site-comparison/open-extension isomorphism used to transport the specified c_j; the trace-perfectness unit has no site-comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness of etale extension by zero used for degreewise derived transport."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic pro-etale open adjunction and exact degreewise extension used to form the pro-etale composite adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic inverse-image site-comparison coherence used to identify rho and its composite compatibility."
+   },
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Generic etale open base-change isomorphism used as the etale factor in the comparison."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Generic pro-etale open base-change isomorphism on complexes, the pro-etale factor of the item."
+   },
+   {
+    "node": "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "why": "Generic underived mate normalization identifies the etale canonical map with its adjunction mate."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic unit-normalized etale/pro-etale open comparison used to identify c_j and its inverse."
+   },
+   {
+    "node": "lem-cbc-finite-open-exchange-scalars",
+    "why": "Its statement (case B=C=Lambda, a=id) gives the inverse-unit adjunct formula for the canonical pro-etale open base-change map; no node of the trace-perfectness unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-comparison-pullback",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-cbc-finite-open-exchange-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-a818dc25c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-a818dc25c (reviewer sub-agent of L); spot-checked: I read all of the item, the new node, every cited statement, the parent (DAG step 12 and the main-20261015 proof, whose last paragraph is the item's from.place), Stacks 03S6 (lemma-shriek-base-change) and Stacks 09AF/099R. The item's statement is true and unchanged. Its type and ρ orientation are correct, its c_j^{-1} normalization agrees with lem-sf-open-comparison-unit-normalization, and the cases g=id, empty U and Λ=0 hold. Fault C4/D1: delivered steps 2, 4 and 5 say lem-cbc-finite-open-exchange-scalars makes the pro-etale map the mate of t^{-1}. Its statement never mentions t; it gives only the inverse-unit adjunct formula. That formula, with the etale formula of lem-cbc-derived-extension-zero-base-change-underived-compatibility, proves the item by itself, so the new node is unneeded. The new node is true (V×_X X'=V×_U U') but unused, so I dropped it. Fix in fixes/dag/nodes/sec-smooth-purity/lem-fix-site-open-exchange.json: step 2 reduces to sheaves degreewise and states the two inverse-unit formulas; step 3 derives (c_j^{-1})^#=a_j∘N(η) from the unit equation; step 4 computes the j'_!-transposes of the two inverses, Φ^#=[σ∘h^{-1}a_j∘a_h]∘Nh^{-1}η and Ψ^#=[j'^{-1}a_g∘a_{j'}∘N s_g]∘Nh^{-1}η; step 5 shows the brackets are equal by the composite/cartesian compatibility of lem-weil-pbc-comparison-pullback (def-weil-pbc-cartesian-square), so Φ=Ψ. I also removed 'returned proof step 8' from source.place and pruned split_report.tool_uses to the nine generic open/site-comparison tools still cited, all accepted. proof_deps equals the union of uses; no cycle; no SGA source. For the maintainer: lem-trf-open-base-change-site-transport (Q06, same day) is the Noetherian/qcqs special case of the item; consider merging it into the item.; 1 file(s) fixed by the reviewer"
  }
 }
