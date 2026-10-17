@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces",
-  "def-coef-infinity-presheaf-yoneda"
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-pointwise-yoneda-evaluation"
  ],
  "proof": [
   {
@@ -204,5 +206,59 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-e51d054c3 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all 11 cited node statements in full, plus the hom-bifunctor proof, the unit and the parent's step 5. The statement (E separately cocontinuous with E∘y ≃ y_D∘t implies E(F) = Lan_{t^op}(⊠F)) is true. It holds on every edge case I tested: r=0, r=1 with t=id, D=*, empty A_i, and empty-valued inputs. Step 1 gets separate cocontinuity of ⊠ and t^* from objectwise colimits (yoneda-presheaf-limits) and the cartesian-closed adjunction (space-presheaf-cocompletion). Step 2 identifies ⊠y(a) with y_C(a) via T_* for the projections; hom-bifunctor's proof builds H_E from the Yoneda pairing of def-coef-infinity-presheaf-yoneda, so this matches y_C. Step 3 uses the finite-list clause of relative-colimit-completion with all R_i empty; the model clause gives P(A_i), and full faithfulness lifts the specified transformation with a contractible fiber. Step 4 builds the comparison α = η^* ∘ (t^*)_* coherently before any density choice. Step 5 is the Yoneda case, using t(1)=1. Step 6 is a correctly set up induction over the density cocone, with contravariant Hom sending colimits to limits. Step 7 concludes, and handles r=0 as the empty list, not as an empty colimit. The union of step uses equals proof_deps, there are no cycles and all steps are under 2000 characters. The only off-unit statement is lem-cbc-enhanced-functor-cone-calculus, which I accept as a declared generic tool_use. There are no new nodes. Duplicate candidates (presheaf-external-product-kan, operadic-day-convolution, kan-mapping-restriction, product-colimit-fubini, density, free-cocompletion) state different things. HA/HTT are not archived, so the proof is correctly marked agent with WANTED lines. No SGA is used. All earlier return points (1–4) and the r=0 error are repaired. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MultilinearPresheafKanRecognition",
+  "declaration": "SSet.Enhanced.MultilinearKan.multilinear_presheaf_kan_recognition",
+  "declarations": [
+   "SSet.Enhanced.MultilinearKan.product",
+   "SSet.Enhanced.MultilinearKan.projection",
+   "SSet.Enhanced.MultilinearKan.tuple",
+   "SSet.Enhanced.MultilinearKan.product_kan",
+   "SSet.Enhanced.MultilinearKan.kanProduct",
+   "SSet.Enhanced.MultilinearKan.productSimplexMap",
+   "SSet.Enhanced.MultilinearKan.productSimplexMap_laws",
+   "SSet.Enhanced.MultilinearKan.productSimplex",
+   "SSet.Enhanced.MultilinearKan.productSimplex_naturality",
+   "SSet.Enhanced.MultilinearKan.spaceProduct",
+   "SSet.Enhanced.MultilinearKan.base",
+   "SSet.Enhanced.MultilinearKan.yonedaTuple",
+   "SSet.Enhanced.MultilinearKan.coordinateEvaluation",
+   "SSet.Enhanced.MultilinearKan.externalProduct",
+   "SSet.Enhanced.MultilinearKan.restriction",
+   "SSet.Enhanced.MultilinearKan.insertCoordinate",
+   "SSet.Enhanced.MultilinearKan.SeparatelyCocontinuous",
+   "SSet.Enhanced.MultilinearKan.transformations",
+   "SSet.Enhanced.MultilinearKan.restrictionMap",
+   "SSet.Enhanced.MultilinearKan.homSource",
+   "SSet.Enhanced.MultilinearKan.homTarget",
+   "SSet.Enhanced.MultilinearKan.homComponent",
+   "SSet.Enhanced.MultilinearKan.mixedMap",
+   "SSet.Enhanced.MultilinearKan.BridgeFormula",
+   "SSet.Enhanced.MultilinearKan.cylinderSimplex",
+   "SSet.Enhanced.MultilinearKan.HasHomFormula",
+   "SSet.Enhanced.MultilinearKan.HasProductHomFormula",
+   "SSet.Enhanced.MultilinearKan.HasRepresentableAction",
+   "SSet.Enhanced.MultilinearKan.normalizedRestrictionMap",
+   "SSet.Enhanced.MultilinearKan.unitComponent",
+   "SSet.Enhanced.MultilinearKan.comparison",
+   "SSet.Enhanced.MultilinearKan.IsCoherentKanUnit",
+   "SSet.Enhanced.MultilinearKan.multilinear_presheaf_kan_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MultilinearPresheafKanRecognition.lean",
+  "statement": "theorem multilinear_presheaf_kan_recognition {r : ℕ} (A : Fin r → SSet.{u}) [∀ i, Quasicategory (A i)] (D : SSet.{u}) [Quasicategory D] (t : product A ⟶ D) (E : product (fun i ↦ infinityPresheaves (A i)) ⟶ infinityPresheaves D) (hE : SeparatelyCocontinuous A E) (e : transformations (yonedaTuple A ≫ E) (SSet.uliftFunctor.map t ≫ infinityYoneda D) _⦋0⦌) (he : IsEquivalenceEdge ((ihom (base (product A))).obj (infinityPresheaves D)) e.val) : ∃ (hC : Quasicategory (infinityPresheaves (product A))) (hD : Quasicategory (infinityPresheaves D)) (hF : Quasicategory ((ihom (base (product A))).obj (infinityPresheaves (product A)))) (HC : @HomBifunctorData.{u, 0} (infinityPresheaves (product A)) hC) (HD : @HomBifunctorData.{u, 0} (infinityPresheaves D) hD), ∃ b : transformations (yonedaTuple A ≫ externalProduct A) (SSet.uliftFunctor.map t ≫ infinityYoneda D ≫ restriction t) _⦋0⦌, HasRepresentableAction A t b ∧ IsContractible (homotopyFiber (@normalizedRestrictionMap r A D t E hF e) b) ∧ ∃ z : (homotopyFiber (@normalizedRestrictionMap r A D t E hF e) b) _⦋0⦌, @IsCoherentKanUnit _ _ _ hC hD HC HD (externalProduct A) E (restriction t) z.val.1",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit external product on the standard Mathlib type-product cones and coherent-nerve simplices. The canonical representable restriction is specified on every enriched simplex by the actual rigidification maps of t and the projections, using a triangle through the product-Hom comparison. Its normalized restriction homotopy fiber is contractible. The actual unit-composition comparison is a weak equivalence and is represented by an equivalence edge over the whole two-variable parameter category. All definition data is explicit; three named postponed proofs concern its Kan/enriched/simplicial well-definedness. No node statement changes. Adds the landed coherent-Hom and pointwise-Yoneda nodes only for their existing composition and evaluation interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-046c6940e",
+  "group": "N6",
+  "result": "pass",
+  "note": "Clause-by-clause audit passed; dependencies, definitions, docstrings, edge cases, report sections, and universe handling checked. scompile.py reproduced clean sandbox and library compilation with no errors or warnings."
  }
 }
