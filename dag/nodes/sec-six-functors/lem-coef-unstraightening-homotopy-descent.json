@@ -13,9 +13,132 @@
   "lem-coef-cone-presheaf-adjunction",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a projectively fibrant $F$ and a right-horn lifting problem over $\\sigma:\\Delta^n\\to S$, adjunction converts the problem into extending a map $L_S(\\Lambda_i^n)\\to F$ across $L_S(\\Delta^n)$. The cone-adjunction statement makes this inclusion a projective cofibration, and the right-horn comparison [lem-coef-unstraightening-simplex-pointwise] makes it an objectwise weak equivalence. Since $F\\to *$ is a projective fibration, its defining lifting property supplies the extension. Thus $U_S(F)\\to S$ is a right fibration. The same comparison identifies its fiber at $s$ with $\\operatorname{Sing}_Q F(s)$, naturally weakly equivalent to $F(s)$. Consequently an objectwise weak equivalence between fibrant diagrams induces a vertex-fiber weak equivalence of right fibrations; [lem-coef-unstraightening-homotopy-descent-gluing] makes this an over-base simplicial homotopy equivalence. These arguments require neither cofibrancy of $F$ nor a slice model structure.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-unstraightening-simplex-pointwise",
+    "def-coef-infinity-fibrations",
+    "lem-coef-unstraightening-homotopy-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 (preservation only), Remark 2.2.2.11 and Lemma 2.2.3.6; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "Here is the enrichment construction, without assuming an enriched adjunction. For an enriched diagram $H$ on $D$, adjoin one last object $v$ to $D^{\\mathrm{op}}$, with mixed mapping objects $H(d)$, outgoing mapping objects empty and endomorphism object at $v$ equal to $\\Delta^0$; mixed composition is the action of $H$. By the cone pushout universal property, an $m$-simplex of $U_SH$ above $\\sigma$ is precisely a simplicial functor from $\\mathfrak C[\\Delta^m\\star\\Delta^0]$ to this category, prescribed on the initial face and on the last object. For $H=F\\times K$, this functor consists of the cone functor for $F$ and a cone functor constant on the initial face with mixed target $K$. The latter factors through the collapsed cone $J^m$ and is exactly a map $Q^m\\to K$. Pairing and projection are inverse, giving $U_S(F\\times K)\\cong U_SF\\times\\operatorname{Sing}_QK$. All simplex operators restrict cone functors, so these identifications commute with them, with diagram maps, and with iterated products. Precomposition with $Q^m\\to\\Delta^m$ gives $K\\to\\operatorname{Sing}_QK$, preserving products and the terminal object degreewise. Applying $U$ to an enriched map $F\\times K\\to G$ and precomposing therefore gives $U_SF\\times K\\to U_SG$. Naturality in $K$ defines the required map of mapping simplicial sets. Units are preserved because the terminal factor has its unique cone functor; composition is preserved because both composites send a pair of parameter maps to their pair, followed by the diagonal. This is exactly the enrichment specified in the item.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.12; explicit cone-functor construction; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "Put $\\mathcal D(S)=\\mathcal P_S^f[W_S^{-1}]$ and $\\mathcal R(S)=\\operatorname{RFib}(S)[V_S^{-1}]$, using the enriched simplicial localizations of [lem-coef-simplicial-localization-comparison-calculus]; $V_S$ consists of vertex-fiber weak equivalences. The right-fibration mapping lemma makes $\\operatorname{RFib}(S)$ locally Kan and makes every member of $V_S$ an equivalence in its path-component category. Thus the canonical functor $\\operatorname{RFib}(S)\\to\\mathcal R(S)$ is a Dwyer--Kan equivalence. The same localization-calculus statement makes $\\mathcal P_S^{cf}\\to\\mathcal D(S)$ a Dwyer--Kan equivalence. The enriched functor of Step 2 preserves the specified arrows by Step 1 and therefore induces an enriched comparison $\\phi_S:\\mathcal D(S)\\to\\mathcal R(S)$, with its commutative square from $\\mathcal P_S^{cf}\\to\\operatorname{RFib}(S)$. The natural base-change isomorphism of [lem-coef-unstraightening-simplex-pointwise] makes these comparisons commute with restriction, and they commute strictly in the following presentation, which the restriction cones of Steps 4--6 use. Regard a simplicial set over a base $T$ as the presheaf $\\tau\\mapsto\\{\\text{simplices over }\\tau\\}$ on the simplices of $T$, so that pullback along $u:T\\to S$ is precomposition with $\\tau\\mapsto u\\tau$; this is strictly functorial in $u$, as is restriction of enriched diagrams along $\\mathfrak C[u]^{\\mathrm{op}}$. By the cone-functor description of Step 2, an $m$-simplex of $U_T(G)$ over $\\tau$ is the same as its mixed components, maps $\\mathfrak C[\\Delta^m\\star\\Delta^0](i,v)\\to G(\\tau(i))$ for the vertices $i$ of $\\Delta^m$, compatible with composition through $\\mathfrak C[\\tau]$ and the action of $G$. For $G=F\\circ\\mathfrak C[u]^{\\mathrm{op}}$ these are literally the data of an $m$-simplex of $U_S(F)$ over $u\\tau$, because $\\mathfrak C[u\\tau]=\\mathfrak C[u]\\mathfrak C[\\tau]$; simplex operators and the Step 2 enrichment are given by the same formulas. Hence in this presentation the base-change isomorphism is an identity, and restriction of diagrams, of right fibrations with their mapping complexes, and of the comparisons forms strict cones of simplicial categories; restriction preserves fibrant diagrams, objectwise weak equivalences, right fibrations and vertex-fiber weak equivalences. Pullback preserves the right-fibration lifting condition directly: a right-horn problem in the pullback is the corresponding horn problem in the original map after composing the base map with the pullback map; fibrancy and objectwise weak equivalences are their definitions, and vertex fibers pull back along vertices. Let $\\mathscr V$ be the class of bases for which $\\phi_S$ is a Dwyer--Kan equivalence. The standard-simplex theorem [lem-coef-unstraightening-simplex-dk-equivalence] and the two vertical Dwyer--Kan equivalences put every $\\Delta^n$ in $\\mathscr V$. This uses enriched localizations throughout, with no coherent-nerve equivalence.",
+   "uses": [
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-unstraightening-simplex-pointwise",
+    "lem-coef-unstraightening-simplex-dk-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, initial localization diagram, and Lemma 2.2.3.10; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "The class $\\mathscr V$ is invariant under isomorphisms and closed under arbitrary small coproducts, including the empty coproduct. Indeed [lem-coef-projective-diagram-simplicial-descent] makes $\\mathcal D(\\coprod S_j)$ the homotopy product of the $\\mathcal D(S_j)$. A simplicial set over a disjoint union is uniquely its disjoint union of pullbacks, degreewise, and a right-horn lifting problem lies in one summand. Maps and their simplicial parameter families decompose into families on the summands. Thus $\\operatorname{RFib}(\\coprod S_j)=\\prod_j\\operatorname{RFib}(S_j)$ with its actual mapping spaces; over the empty base there is one object with terminal mapping set. These right-fibration categories are fibrant simplicial categories: their mapping complexes are Kan by Step 3 and the model convention in [lem-coef-simplicial-localization-comparison-calculus] identifies this with fibrancy. A discrete diagram of fibrant objects is fibrant in the diagram model, so its ordinary product computes its derived limit. Hence this actual product is also a homotopy product. The canonical Dwyer--Kan equivalences $\\operatorname{RFib}(T)\\to\\mathcal R(T)$ from Step 3 identify its cone with a homotopy-product cone for the $\\mathcal R(S_j)$. Base-change naturality identifies $\\phi_{\\coprod S_j}$ with the comparison of the two homotopy-product cones. If every $\\phi_{S_j}$ is an equivalence then this comparison is an equivalence: replace the discrete diagrams by fibrant diagrams, compute their derived products by ordinary products, and use that products of weak equivalences of Kan mapping complexes and equivalences of path-component categories are equivalences. This uses products of Kan complexes, not unrestricted products of nonfibrant simplicial sets.",
+   "uses": [
+    "lem-coef-projective-diagram-simplicial-descent",
+    "def-coef-infinity-fibrations",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-unstraightening-simplex-pointwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, conditions (i) and (ii); read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "Suppose $P=B\\amalg_A C$, with $A\\hookrightarrow B$ a monomorphism and $A,B,C\\in\\mathscr V$. The enriched diagram-descent theorem [lem-coef-projective-diagram-simplicial-descent] identifies $\\mathcal D(P)$ with the homotopy limit of the three diagram categories. Replacing these by $\\mathcal R(A),\\mathcal R(B),\\mathcal R(C)$ via $\\phi$ shows that the composite\n$$\\mathcal D(P)\\xrightarrow{\\phi_P}\\mathcal R(P)\\xrightarrow{\\alpha}\\mathcal R(B)\\times^h_{\\mathcal R(A)}\\mathcal R(C)$$\nis an equivalence. Apply the comparison criterion of [lem-coef-simplicial-localization-comparison-calculus] with $\\beta=\\phi_P$. It remains to check the mapping-space square for every pair $E,E'$ of right fibrations over $P$. Its square of actual mapping complexes is a strict pullback. Write $i:A\\hookrightarrow B$ and $f:A\\to C$. In each simplicial degree $r$, the pushout set is $(B_r\\setminus i(A_r))\\amalg C_r$. Pull back this presentation along $E_r\\to P_r$: an element over the first summand has a unique representative in $(E|_B)_r$; an element over $c\\in C_r$ has its representative in $(E|_C)_r$, and every representative $(e,i(a))$ in $(E|_B)_r$ with $f(a)=c$ is identified with that representative by $(e,a)\\in(E|_A)_r$. These are exactly the generating relations, so $E|_B\\amalg_{E|_A}E|_C\\to E$ is a degreewise bijection and hence a simplicial isomorphism. Taking a product with $\\Delta^m$ preserves this degreewise presentation. Maps into $E'$ over $P$ are therefore precisely compatible pairs of maps over $B$ and $C$ into the respective pullbacks of $E'$, giving the asserted strict pullback of mapping complexes. The restriction from $B$ to $A$ is a Kan fibration by [lem-coef-unstraightening-homotopy-descent-gluing], since $E|_A\\hookrightarrow E|_B$ is a monomorphism. All four mapping complexes are Kan. By [lem-coef-kan-pullback-path-comparison] the strict pullback of mapping complexes computes their homotopy pullback of spaces. The canonical Dwyer--Kan equivalences from right-fibration categories to their enriched localizations identify their actual mapping complexes with those in the required square. Every object of a localization is represented up to equivalence by an object of the original category, so this checks all pairs. Thus $\\alpha$ is an equivalence; since $\\alpha\\phi_P$ is an equivalence, $\\phi_P$ is one too. This proves pushout closure, including essential surjectivity, without asserting that right-fibration objects glue strictly.",
+   "uses": [
+    "lem-coef-projective-diagram-simplicial-descent",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, pushout comparison diagram and mapping-square argument on printed pp.84-85; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "For an increasing sequence $S_0\\subseteq S_1\\subseteq\\cdots$ in $\\mathscr V$ with union $S$, the diagram-descent theorem gives $\\mathcal D(S)\\simeq\\operatorname{holim}_n\\mathcal D(S_n)$. The comparison criterion of [lem-coef-simplicial-localization-comparison-calculus], applied to $\\alpha:\\mathcal R(S)\\to\\lim_n\\mathcal R(S_n)$ and $\\beta=\\phi_S$, reduces the assertion $S\\in\\mathscr V$ to mapping spaces. For fixed $E,E'$ over $S$, the mapping complex over $S$ is the strict inverse limit of the mapping complexes over $S_n$: a compatible family of maps on the increasing union $E=\\bigcup_n E|_{S_n}$ gives a unique map, also with every parameter $\\Delta^m$. The transition maps are Kan fibrations by [lem-coef-unstraightening-homotopy-descent-gluing]. The strict inverse limit therefore computes the homotopy limit of spaces, by the Kan-tower assertion of [lem-coef-simplicial-localization-comparison-calculus]. The canonical Dwyer--Kan equivalences from right-fibration categories to their enriched localizations identify the actual complexes with those used by the criterion. All localization objects are represented up to equivalence by right fibrations. Hence $\\alpha$, and then $\\phi_S$, are equivalences.",
+   "uses": [
+    "lem-coef-projective-diagram-simplicial-descent",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-unstraightening-homotopy-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, condition (v), with the omitted increasing-union argument supplied; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "We now prove every small base is in $\\mathscr V$, explicitly carrying out the generation argument. The empty base is in $\\mathscr V$ by Step 4. Induct on $n$ to prove that every simplicial set of dimension at most $n$ lies in $\\mathscr V$. For such a set $T$, its $(n-1)$-skeleton and every copy of $\\partial\\Delta^n$ have dimension at most $n-1$; for $n=0$ they are empty. The boundary-cell decomposition [lem-coef-infinity-monomorphism-boundary-cells], applied to $\\varnothing\\hookrightarrow T$, presents $T$ as the pushout of its $(n-1)$-skeleton and the coproduct of its nondegenerate $n$-simplices along the coproduct of their boundaries. The induction hypothesis, coproduct closure and the simplex case put the three corners in $\\mathscr V$. The boundary inclusion is a monomorphism, so Step 5 puts $T$ in $\\mathscr V$. Finally an arbitrary $S$ is the increasing union of its finite-dimensional skeleta, each already in $\\mathscr V$; Step 6 puts $S$ in $\\mathscr V$. All the indexing sets and the countable sequence are small in the enlarged universe.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.2.3.5, proof by skeleta, used in Proposition 2.2.3.11; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  },
+  {
+   "text": "Thus $\\phi_S$ is a Dwyer--Kan equivalence for the given arbitrary small $S$. In the commutative square of Step 3, both vertical functors are Dwyer--Kan equivalences by [lem-coef-simplicial-localization-comparison-calculus]. Two-out-of-three for weak homotopy equivalences on mapping sets, and for equivalences of path-component categories, therefore shows that the actual enriched $U_S:\\mathcal P_S^{cf}\\to\\operatorname{RFib}(S)$ is a Dwyer--Kan equivalence. In particular its maps $\\underline{\\operatorname{Nat}}(F,G)\\to\\operatorname{Fun}_{/S}(U_SF,U_SG)$ are weak homotopy equivalences. Choose a bifibrant $F$ and an isomorphism from any given $E$ to $U_SF$ in the path-component category. That isomorphism and its inverse are represented by vertices $e,r$ of the corresponding mapping complexes. The composites lie in the identity components. The mapping complexes are Kan by [lem-coef-unstraightening-homotopy-descent-gluing]; filling horns reverses edges and concatenates successive edges, so each finite path can be represented by one edge with the desired endpoints. These two edges are maps from $E\\times\\Delta^1$ and $U_SF\\times\\Delta^1$ over $S$, with endpoints $(re,1_E)$ and $(er,1_{U_SF})$. With right-fibration valuedness from Step 1 these are every asserted clause, for the specified enrichment and without a slice model structure. The Dwyer--Kan definition in [lem-coef-simplicial-projective-model-calculus] applies directly.",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11, conclusion and its explicit homotopy-inverse interpretation; read online, archival HTT WANTED. No Stacks tag for this result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-projective-diagram-simplicial-descent",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-unstraightening-homotopy-descent-gluing",
+  "lem-coef-unstraightening-simplex-dk-equivalence",
+  "lem-coef-unstraightening-simplex-pointwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction; independent foundation following HTT Proposition 2.2.3.11 read online, archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +174,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.mk\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"(X : C) [IsCofibrant X] [IsFibrant X] : BifibrantObject C\", \"doc\": \"Given an object $X$ in a category $\\\\mathcal{C}$ that is both cofibrant (the unique morphism from the initial object to $X$ is a cofibration) and fibrant (the unique morphism from $X$ to the terminal o\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": bifibrantObjects C ≤ fibrantObjects C\", \"doc\": \"The property of being a bifibrant object in a category $\\\\mathcal{C}$ implies the property of being a fibrant object in $\\\\mathcal{C}$, i.e., $\\\\text{bifibrantObjects}(\\\\mathcal{C}) \\\\subseteq \\\\text{fibran\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": cofibrations SSet.{u} = monomorphisms _\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: read the ordinary nerve adjunction NerveAdjunction.lean:388-415, the all-horn fibration classes CategoryWithFibrations.lean:35-100, the generic bifibrant inclusions Bifibrant.lean:120-125, and InnerFibration.lean:31-80. These give neither unstraightening nor enriched equivalences of right-fibration categories. The RFib grep also matches piCongrFiberwise and innerFibrations; these are unrelated substrings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwyer Kan equivalence between projectively bifibrant simplicial presheaves on C[S]^op and right fibrations over arbitrary simplicial set",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.bifibrantObjects_le_fibrantObject; SSet.Truncated.HomotopyCategory.functorEquiv; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.instCategoryWithFibrations; HomotopicalAlgebra.BifibrantObject.ι; CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor; HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι; SSet.modelCategoryQuillen.fibration_iff. None states unstraightening or right-fibration presentation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Dwyer--Kan, right fibration, simplicial presheaf",
+   "results": "[loogle] OK 0 hit(s); malformed name query rejected with unknown identifier Dwyer.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "unstraightening|right.?fibration|Dwyer.?Kan",
+   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicTopology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projectively bifibrant simplicial presheaves present right fibrations via unstraightening",
+   "results": "[leansearch] OK 8 hit(s): HomotopicalAlgebra.BifibrantObject.mk; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.fibrations_eq; HomotopicalAlgebra.bifibrantObjects_le_fibrantObject; horn-lifting and bifibrant-object declarations. None states this presentation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-contravariant-slice-model",
@@ -83,5 +234,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unstraightening-homotopy-descent",
+  "worker": "stage1",
+  "summary": "Repaired the earlier draft and its unlogged new-node searches. Eight-step argument constructs the given enrichment, defines the localized comparison, verifies coproduct, pushout and increasing-union closure using actual Kan mapping spaces, carries out skeletal induction, and extracts the specified homotopies. Five statement-only preparatory inputs, all searched with two phrasings. The generic appendix localization and descent statements avoid the existing downstream coherent-nerve cycle. Item statement and statement dependencies unchanged. Second reader made pullback preservation and degreewise pushout relations explicit, distinguished the tower homotopy limit, and added five independent broader Mathlib searches.",
+  "blueprint": "Current main-20261015 ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, the derived coefficient-adjunction / inverse-limit comparison. These are independent coherent-diagram foundations below the inherited realization chain; the unit route is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-25bd890d8",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-25bd890d8 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 5 new nodes, every cited statement, and HTT (reading copy) at Prop 2.2.1.1, Thm 2.2.1.2, 2.2.2.7-2.2.2.12, Lemmas 2.2.3.1/2.2.3.4-2.2.3.10, Prop 2.2.3.11 pp.83-85, Rem A.3.2.14, Cor A.3.2.28, Lemma A.3.6.17 and Cor A.3.6.18. The item statement is faithful to 2.2.3.11 and unchanged. The steps follow HTT's localization square and the induction of Lemma 2.2.3.5. The coproduct, pushout-along-mono and increasing-union cases are written out, including the degreewise pullback-of-pushout and the Kan-leg strict pullback via lem-coef-kan-pullback-path-comparison. The induction base and the extraction of homotopy-equivalence edges are also checked. All five children are true and none restates a clause of the item. Pointwise: the right horn cones to the inner horn Lambda^{n+1}_i, which is a Bergner trivial cofibration after pushout; the Sing_Q fiber was computed. The simplex child is HTT 2.2.3.10 on bifibrant diagrams. Gluing: HTT 2.2.3.4 for an arbitrary mono via the pushout-product, plus 2.2.3.6. The localization child is A.3.2.14 (*'), A.3.6.17, A.3.2.28 and the Kan tower. Descent: A.3.6.18; C[-] of a mono is a cofibration and Bergner is left proper. I verified that the existing alternatives (external-products, enriched-diagram-homotopy-descent, simplicial-model-nerve-localization, dk-cofibrant/fibrant-subcategory localization, unmarked-straightening-quillen) all reach the item. The final dependency closure is acyclic and every citation is in the same unit; no tool_uses are needed. Repair to item Step 3 (text only): it claimed only 'coherent' commutation with restriction, but A.3.2.28 and the descent child need strict cones. I added a presentation, built from Step 2's cone description, in which simplicial sets over a base are presheaves on its simplices and the base-change isomorphism is an identity. Note: the existing unsplit lem-coef-simplicial-right-fibration-presentation contains this item's statement; it should cite this item when it is split.; 1 file(s) fixed by the reviewer"
  }
 }
