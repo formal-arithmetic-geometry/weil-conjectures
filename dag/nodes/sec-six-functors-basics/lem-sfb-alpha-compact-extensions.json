@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-alpha-compact-extensions",
+ "kind": "statement",
+ "title": "Extension closure of Krause alpha-compact objects",
+ "statement": "Let $C$ be a locally $v$-small triangulated category [def-weil-triangulated-category] with $v$-small coproducts, and let $\\alpha$ be a regular cardinal in universe $v$. If $X\\to Y\\to Z\\to X[1]$ is a distinguished triangle and $X,Z$ are alpha-compact in the support-and-factorization sense [def-sfb-alpha-compact-object], then $Y$ is alpha-compact.",
+ "stmt_deps": [
+  "def-sfb-alpha-compact-object",
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5, page 124, preservation of G4 under triangles, with the omitted cone argument expanded.",
+  "external": [
+   {
+    "document": "https://ftp.gwdg.de/pub/misc/EMIS/journals/DMJDMV/vol-06/07.pdf",
+    "place": "On Neeman’s Well Generated Triangulated Categories, Documenta Mathematica 6 (2001), pages 124–125."
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "Let S be the canonical maximal class of alpha-compact objects. Its finite extension hull H is the union over n of S.extensionProductIter n. S is replete, contains zero and is shift closed by the alpha-compact API. Associativity of extensionProduct, obtained from the octahedral axiom, makes H extension closed. Thus H is triangulated. Induction on n and the alpha-small extension API show that every H-object is alpha-small.",
+   "uses": [
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove by induction on the extension length that every map from an H-object to a coproduct factors through a coproduct of H-objects. For a cone U to V to X, factor the restriction from V through V_i in H. Complete V_i to Y_i to fiber triangles F_i to V_i to Y_i. The composite from U into the coproduct of V_i is killed in the coproduct of Y_i. Applying the opposite-product distinguished-triangle theorem gives a lift into the coproduct of F_i. Factor this lift through U_i in H. Form the cones W_i of U_i to V_i, which belong to H. Complete the induced square U to V to a morphism into a cone triangle of the coproduct map. Exactness maps this cone into the coproduct of W_i. The resulting map from X agrees with the given map on V. Their difference therefore factors through U[1]; its inductive factorization is combined componentwise with W_i by a binary biproduct. This gives G4 for H.",
+   "uses": [
+    "def-sfb-alpha-compact-object",
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since every H-object is alpha-small and H satisfies G4, H is contained in S by the existential definition of alpha-compactness. Every extension of S-objects lies in H, so it lies in S.",
+   "uses": [
+    "def-sfb-alpha-compact-object"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-compact-object-api",
+  "def-weil-triangulated-category",
+  "def-sfb-alpha-compact-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5, page 124, preservation of G4 under triangles, with the omitted cone argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krause alpha compact objects defined by coproduct factorization are closed under extensions in a triangulated category",
+   "results": "8 results. CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.recOn, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.casesOn, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.rec, CategoryTheory.ObjectProperty.IsClosedUnderExtensions, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁, CategoryTheory.Triangulated.Subcategory, CategoryTheory.Triangulated.Subcategory.ext₁'",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krause alpha compact objects defined by coproduct factorization are closed under extensions in a triangulated category",
+   "results": "8 results. CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.Triangulated.Subcategory.ext₁, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlphaCompact|IsCoproductFactorizationClass",
+   "results": "0 results. No matching declaration.",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlphaCompactClassSmallClosed",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown representability for the adic localizing hull: Lemma 5, page 124, preservation of G4 under triangles, with the omitted cone argument expanded.",
+   "via": [
+    "new-sfb-alpha-compact-class-small-closed",
+    "new-sfb-derived-perfect-small-class-core-alpha",
+    "new-sfb-derived-perfect-small-class-core",
+    "lem-sfb-derived-perfect-small-class",
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlphaCompactExtensions",
+  "file": "lean/Sheaf/CategoryTheory/AlphaCompactExtensions.lean",
+  "declaration": "CategoryTheory.IsAlphaCompact.extension",
+  "statement": "theorem IsAlphaCompact.extension [IsTriangulated C] (α : Cardinal.{v}) [Fact α.IsRegular] (T : Triangle C) (hT : T ∈ distTriang C) (h₁ : IsAlphaCompact T.obj₁ α) (h₃ : IsAlphaCompact T.obj₃ α) : IsAlphaCompact T.obj₂ α",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ }
+}

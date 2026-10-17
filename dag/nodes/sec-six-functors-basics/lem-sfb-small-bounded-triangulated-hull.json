@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-small-bounded-triangulated-hull",
+ "kind": "statement",
+ "title": "Essentially small triangulated hull closed under bounded coproducts",
+ "statement": "Let $C$ be a locally $v$-small pretriangulated category [def-weil-triangulated-category] with $v$-small coproducts, and let $\\alpha$ be a regular cardinal in universe $v$. Let $G,S$ be properties of objects with $G\\subseteq S$, where $G$ has a $v$-small set of representatives up to isomorphism, $S$ is closed under isomorphism, contains zero, is closed under integer shifts and middle vertices of distinguished triangles, and is closed under coproducts with fewer than $\\alpha$ summands. Then there exists an object property $H$ with all these closure properties, having a $v$-small set of representatives up to isomorphism, such that $G\\subseteq H\\subseteq S$.",
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5(1), page 124, the explicit construction of the small alpha-localizing hull, before taking retract closure.",
+  "external": [
+   {
+    "document": "https://ftp.gwdg.de/pub/misc/EMIS/journals/DMJDMV/vol-06/07.pdf",
+    "place": "On Neeman’s Well Generated Triangulated Categories, Documenta Mathematica 6 (2001), pages 124–125."
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "For a property P, adjoin its integer shifts, the middle vertices of triangles with both outer vertices in P, and coproducts indexed by types of cardinality less than alpha. Take isomorphism closure. The size API shows that this operation preserves essential v-smallness.",
+   "uses": [
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define stage i, for i in the small well-order alpha.ord.ToType, by applying this operation to G, zero, and the union of all stages j<i. Well-founded induction shows each stage is essentially v-small and is contained in S. The union H is essentially v-small because its indexing type is v-small.",
+   "uses": [
+    "lem-sfb-alpha-compact-object-api",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regularity identifies the cofinality of alpha.ord with alpha. For any family of fewer than alpha stages, the supremum of the successors of their ordinal ranks is still below alpha. Choose the corresponding stage, strictly above every input stage. Every bounded coproduct therefore enters one stage. The same argument for one and two inputs proves shift and extension closure; every stage construction is replete and contains zero. Hence H is replete, triangulated, bounded-coproduct closed, contains G and lies in S.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-compact-object-api",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Krause (2001), Lemma 5(1), page 124, the explicit construction of the small alpha-localizing hull, before taking retract closure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An essentially small family in a triangulated category is contained in an essentially small triangulated subcategory closed under coproducts of fewer than a regular cardinal alpha summands",
+   "results": "8 results. CategoryTheory.ObjectProperty.EssentiallySmall, CategoryTheory.ObjectProperty.EssentiallySmall.mk, CategoryTheory.EssentiallySmall, CategoryTheory.ObjectProperty.instEssentiallySmallOfSmall, CategoryTheory.EssentiallySmall.mk, CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall_1, CategoryTheory.essentiallySmallSelf, CategoryTheory.SmallObject.hasCoproducts",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially small family in a triangulated category is contained in an essentially small triangulated subcategory closed under coproducts of fewer than a regular cardinal alpha summands",
+   "results": "8 results. CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.essentiallyLarge_top, CategoryTheory.ObjectProperty.EssentiallySmall.exists_small_le', CategoryTheory.ObjectProperty.EssentiallySmall.exists_small_le, CategoryTheory.ObjectProperty.instEssentiallySmallColimitsCardinalClosureOfLocallySmall, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.Triangulated.Subcategory.ext₁, CategoryTheory.Triangulated.Subcategory.ext₁'",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  },
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall.*(triangulated|bounded)|small.*triangulated.*hull",
+   "results": "0 results. No matching declaration.",
+   "date": "2026-10-18",
+   "verdict": "No matching Krause closure or hull theorem; use the existing support and size API and prove the claim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlphaCompactClassSmallClosed",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown representability for the adic localizing hull: Lemma 5(1), page 124, the explicit construction of the small alpha-localizing hull, before taking retract closure.",
+   "via": [
+    "new-sfb-alpha-compact-class-small-closed",
+    "new-sfb-derived-perfect-small-class-core-alpha",
+    "new-sfb-derived-perfect-small-class-core",
+    "lem-sfb-derived-perfect-small-class",
+    "lem-sfb-set-generated-derived-solution-set",
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SmallBoundedTriangulatedHull",
+  "file": "lean/Sheaf/CategoryTheory/SmallBoundedTriangulatedHull.lean",
+  "declaration": "CategoryTheory.exists_small_bounded_triangulated_hull",
+  "statement": "theorem exists_small_bounded_triangulated_hull (G S : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} G] [S.IsClosedUnderIsomorphisms] [S.IsTriangulated] (α : Cardinal.{v}) [Fact α.IsRegular] (hGS : G ≤ S) (hsum : ∀ (I : Type v) (Y : I → C), HasCardinalLT I α → (∀ i, S (Y i)) → S (∐ Y)) : ∃ H : ObjectProperty C, ObjectProperty.EssentiallySmall.{v} H ∧ H.IsClosedUnderIsomorphisms ∧ H.IsTriangulated ∧ G ≤ H ∧ H ≤ S ∧ (∀ (I : Type v) (Y : I → C), HasCardinalLT I α → (∀ i, H (Y i)) → H (∐ Y))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ }
+}

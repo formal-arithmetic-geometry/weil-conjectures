@@ -13,39 +13,42 @@
  },
  "proof": [
   {
-   "text": "G4 gives perfectness, and generation with shifts gives detection of zero. Pick a small skeleton of the generators and form its alpha-localizing hull.",
-   "uses": [
-    "lem-sfb-alpha-compact-object-api"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Small representative sets for cones, retracts, shifts and bounded coproducts remain v-small. Iterate along a sufficiently long small regular ordinal to obtain a small skeleton of the hull. Regular support unions give alpha-smallness.",
-   "uses": [
-    "lem-sfb-alpha-compact-object-api",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The weak-kernel triangle argument propagates G4 through the hull. The objects receiving only maps from the maximal alpha-compact class which factor through the hull form a localizing class containing the generators. Generation and the identity map exhibit every alpha-compact object as a retract of a hull object. Thus the canonical class is this essentially small triangulated hull.",
+   "text": "The canonical maximal alpha-compact class S is replete, contains zero, and is shift closed by the API. The extension lemma makes it triangulated, and its bounded-coproduct closure is already proved. Since G is alpha-small and satisfies G4, the existential definition gives G contained in S.",
    "uses": [
     "def-sfb-alpha-compact-object",
     "lem-sfb-alpha-compact-object-api",
+    "lem-sfb-alpha-compact-extensions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the small bounded triangulated hull theorem to G inside S. This gives an essentially v-small replete triangulated class H between G and S, closed under coproducts of fewer than alpha objects.",
+   "uses": [
+    "lem-sfb-small-bounded-triangulated-hull"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the localizing factor-through argument and the assumed generation property to obtain S contained in the retract closure of H. Mathlib proves that retract closure of an essentially v-small class in a locally v-small category is essentially v-small. Essential smallness passes to subclasses. The already proved extension closure gives the second conjunct.",
+   "uses": [
+    "lem-sfb-alpha-compact-factor-through",
     "def-weil-triangulated-category"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sfb-alpha-compact-object",
   "lem-sfb-alpha-compact-object-api",
-  "def-weil-triangulated-category",
-  "def-sfb-alpha-compact-object"
+  "lem-sfb-alpha-compact-extensions",
+  "lem-sfb-small-bounded-triangulated-hull",
+  "lem-sfb-alpha-compact-factor-through",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-  "place": "Krause (2001), Lemma 5 pages 124--125 and the maximal-class construction; Localization theory 6.2--6.3."
+  "place": "Krause (2001), Lemma 5, pages 124–125; finite extension closure proves maximal-class extension closure, the transfinite small hull and localizing factor-through argument give the size bound via retracts."
  },
  "mathlib_searches": [
   {
