@@ -132,18 +132,18 @@
   "module": "Sheaf.FieldTheory.GeometricIrreducibilityAddTranscendental",
   "declaration": "AlgebraicGeometry.geometricallyIrreducible_adjoin_transcendental",
   "file": "lean/Sheaf/FieldTheory/GeometricIrreducibilityAddTranscendental.lean",
-  "statement": "theorem geometricallyIrreducible_adjoin_transcendental {M L K : Type u} [Field M] [Field L] [Field K] [Algebra M L] [Algebra L K] [Algebra M K] [IsScalarTower M L K] (hLM : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap M L)))) (x : K) (hx : Transcendental L x) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (IntermediateField.adjoin M ({x} : Set K)) (IntermediateField.adjoin (IntermediateField.adjoin M ({x} : Set K)) (Set.range (algebraMap L K))))))",
+  "statement": "theorem geometricallyIrreducible_adjoin_transcendental {M : Type u} {L : Type u} {K : Type v} [Field M] [Field L] [Field K] [Algebra M L] [Algebra L K] [Algebra M K] [IsScalarTower M L K] (hLM : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap M L)))) (x : K) (hx : Transcendental L x) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (IntermediateField.inclusion (E := IntermediateField.adjoin M ({x} : Set K)) (F := (IntermediateField.adjoin L ({x} : Set K)).restrictScalars M) (IntermediateField.adjoin_le_iff.mpr (fun y hy => by simp only [Set.mem_singleton_iff] at hy subst y change x ∈ IntermediateField.adjoin L ({x} : Set K) apply IntermediateField.subset_adjoin simp))).toRingHom))",
   "branch": "newtargets-dag",
-  "by": "Q67",
+  "by": "Q142",
   "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-50380392d",
-  "group": "Q67",
+  "reviewer": "NT-stage2-cc-af664a472",
+  "group": "Q142",
   "result": "pass",
-  "note": "Delivery = new module Sheaf/FieldTheory/GeometricIrreducibilityAddTranscendental.lean, new report (Worker report + Second reading by Q67), node changed only in lean. Checked against Stacks algebra.tex Tag 0G32 l.11377-11389: tower M⊆L⊆K as Field/Algebra/IsScalarTower, hLM = GeometricallyIrreducible (Spec.map (algebraMap M L)) matching the def-pc-geometrically-irreducible record and sibling modules, hx = Transcendental L x, conclusion = GeometricallyIrreducible of the canonical algebraMap M⟮x⟯ → adjoin M⟮x⟯ (range L) = L(x); no extra or missing clauses. Edge cases M=L, any characteristic, inseparable L/M covered; one universe u is the project convention, not a restriction of substance. No duplicate in Mathlib or the side lean; proof dep 0G31 has no Lean record and needs no import. lean.statement verbatim in file; docstrings carry Tag 0G32, blueprint id and the proof step; sorry only (#print axioms shows sorryAx). nt_compile.py --json on the snapshot file: rc 0, 2.3 s, no errors or warnings; probe #check confirms signature, no unbound variables."
+  "note": "Statement matches node and Stacks 0G32 clause by clause: field tower via Algebra/IsScalarTower, hLM = GeometricallyIrreducible(Spec L -> Spec M) per the def-pc-geometrically-irreducible record, hx = Transcendental L x, conclusion = GeometricallyIrreducible of Spec of the canonical inclusion adjoin M {x} -> (adjoin L {x}).restrictScalars M, i.e. L(x)/M(x). No extra assumptions; M,L share universe u (forced by Spec.map; project convention), K in its own universe v. The only in-statement tactic block proves the Prop needed to type the inclusion; the lemma proof is sorry. Edge cases M=L and any characteristic covered. No definitions, docstrings carry Tag 0G32, blueprint id and proof step, lean.statement verbatim, report has Worker report and Second reading by Q142. nt_compile.py: clean, 1.5 s; #check signature and #print axioms (sorryAx) confirmed. Landing note: the item already landed from Q67 (reviewed PASS) with an equivalent statement under the same declaration name and no Lean citers; landing this replaces it with an equivalent, slightly more general version, and a refusal as already landed is equally acceptable."
  }
 }

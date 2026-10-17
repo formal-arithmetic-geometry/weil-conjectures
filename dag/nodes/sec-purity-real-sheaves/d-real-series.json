@@ -118,5 +118,27 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-766d897b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited definition, blueprint sources, and unit/chapter route. The sole dependency states the identical definition; no new nodes, cycles, target changes, or forbidden SGA uses. Checked radius and formal-product edge cases. Recorded declarations cover only radius and nonnegative coefficients, as the report acknowledges. Full review written to review.md."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius",
+  "declaration": "PowerSeries.radius",
+  "declarations": [
+   "PowerSeries.radius",
+   "PowerSeries.HasNonnegCoeffs"
+  ],
+  "statement": "noncomputable def radius {𝕜 : Type*} [NontriviallyNormedField 𝕜] (f : 𝕜⟦X⟧) : ℝ≥0∞",
+  "branch": "slopmaster2",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Reuse the exact declarations already recorded on the identical dependency sk-d-real-series. Specialize radius to ℂ; HasNonnegCoeffs already has complex coefficients. The scalar formal-multilinear radius equals the stated supremum by summable_norm_coeff_mul_pow and le_radius_of_summable. The last sentence is the existing coefficientwise-operation convention: PowerSeries multiplication, exponential via (PowerSeries.exp ℂ).subst with zero constant coefficient, and infinite products restricted to degreewise locally finite families. No second definition or new module is needed. See the report for clause-by-clause matching and the endpoint caveat in the upstream docstring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2285e867",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the node's lean record was added (JSON diff against the side clone). The statement is identical to sk-d-real-series, which already uses PowerSeries.radius and PowerSeries.HasNonnegCoeffs. lean.statement matches side ConvergenceRadius.lean line 70 verbatim, and the docstrings name d-real-series. Both definitions are real, not hollow. A probe compiled clean with lcompile (exit 0, no warnings; nt_compile refuses files outside the side tree). It proves radius equals the blueprint supremum including the infinite case, and checks HasNonnegCoeffs on 0, -1 and i. Edge cases r=0, polynomials and boundary are fine; there are no universe restrictions. The report has the Worker report and Second reading by Q125 sections. One upstream docstring overstates an endpoint equivalence; this is non-blocking and the report flags it."
  }
 }
