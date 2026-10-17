@@ -1,0 +1,91 @@
+{
+ "id": "lem-sp-compact-projection-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "proof of (2): 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change), this equals the projection formula for f' followed by id⊗ε_{f'} at v^*K'; this node states that compatibility for finite-ring and tower coefficients.",
+   "via": []
+  },
+  "same_as": [
+   "prop-sf-pf-coherence"
+  ]
+ },
+ "kind": "statement",
+ "title": "Compact-support projection map commutes with base change (finite rings and coefficient towers)",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X,Y,Y'$ be separated finite-type $k$-schemes, let $f:X\\to Y$ be a separated finite-type $k$-morphism and let $v:Y'\\to Y$ be any $k$-morphism [def-weil-scheme-morphism-properties]. Put $X'=X\\times_YY'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change]. Choose a compactification $f=p\\circ j$ with $j:X\\hookrightarrow\\overline X$ an open immersion and $p:\\overline X\\to Y$ proper [def-weil-compactifications-refinements], and let $\\overline X'=\\overline X\\times_YY'$, with projections $p':\\overline X'\\to Y'$ and $\\bar u:\\overline X'\\to\\overline X$, and $j':X'\\hookrightarrow\\overline X'$ the base change of $j$, so that $f'=p'\\circ j'$. No flatness, smoothness or properness of $v$ is assumed.\n\nUse one of the following two coefficient settings.\n\n(i) A finite commutative ring $A$ with $\\ell^rA=0$ for some $r\\geq1$, and the ordinary, uncompleted, unbounded derived categories $D(T_{\\mathrm{pro\\acute et}},A)$ of module sheaves over the constant ring $A_T$ on the small pro-étale sites [def-weil-pbc-proetale-modules], with the derived tensor product $\\otimes^{\\mathbf L}_A$ [def-weil-derived-tensor], the derived inverse images $u^*$ (exact, termwise), derived direct images and their adjunctions $u^*\\dashv Ru_*$ [def-weil-pbc-proetale-operations], and termwise extension by zero $j_!$ [def-weil-extension-by-zero].\n\n(ii) A finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and the ordinary unbounded derived categories $D(\\operatorname{Tow}(T,\\mathcal O_E))$ of varying-coefficient towers [sk-def-sp-coefficient-towers], that is, of modules over the ring system $(\\mathcal O_E/\\ell^n)_{n\\geq1}$ in the topos of inverse systems of sheaves on $T_{\\mathrm{pro\\acute et}}$ [det-sp-coefficient-towers-abelian]. Here inverse image is exact levelwise inverse image, direct images are the total right derived functors of levelwise direct image with their derived adjunctions, extension by zero is levelwise, and $\\otimes^{\\mathbf L}$ is the derived tensor product over the ring system; no completed tensor product is used.\n\nIn either setting put $F_f=Rp_*j_!$ and $F_{f'}=Rp'_*j'_!$, and use the canonical pullback/tensor comparison $v^*(V\\otimes^{\\mathbf L}W)\\cong v^*V\\otimes^{\\mathbf L}v^*W$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the pullback-composition isomorphisms. For $M$ on $X$ let\n$$\\beta_M:v^*F_fM\\longrightarrow F_{f'}u^*M$$\nbe the compact-support exchange: the proper exchange $v^*Rp_*\\to Rp'_*\\bar u^*$ (the mate of $p'^*v^*\\cong\\bar u^*p^*$) at $j_!M$, followed by $Rp'_*$ of the extension-by-zero base-change isomorphism $\\bar u^*j_!M\\cong j'_!u^*M$. For $M$ on $X$ and $K$ on $Y$ let\n$$\\operatorname{PF}_f(M,K):F_fM\\otimes^{\\mathbf L}K\\longrightarrow F_f(M\\otimes^{\\mathbf L}f^*K)$$\nbe the projection map: the proper projection map of $p$ at $(j_!M,K)$ (the adjoint transpose under $p^*\\dashv Rp_*$ of the counit $p^*Rp_*j_!M\\to j_!M$ tensored with $1_{p^*K}$, after the pullback/tensor comparison), followed by $Rp_*$ of the extension-by-zero tensor isomorphism $j_!M\\otimes^{\\mathbf L}p^*K\\cong j_!(M\\otimes^{\\mathbf L}j^*p^*K)$ and $j^*p^*\\cong f^*$. In setting (i) these are the compactification composites of [def-exchange-projection] formed with the coefficient ring $A$; in setting (ii) they are the same composites formed in the inverse-system topos.\n\nThen for all $M$ on $X$ and $K$ on $Y$ in these ambient derived categories one has, naturally in $M$ and $K$,\n$$\\beta_{M\\otimes^{\\mathbf L}f^*K}\\circ v^*\\operatorname{PF}_f(M,K)=\\operatorname{PF}_{f'}(u^*M,v^*K)\\circ(\\beta_M\\otimes1_{v^*K})$$\nas maps $v^*F_fM\\otimes^{\\mathbf L}v^*K\\to F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$; here the source of the left side $v^*(F_fM\\otimes^{\\mathbf L}K)$ is identified with $v^*F_fM\\otimes^{\\mathbf L}v^*K$ by the pullback/tensor comparison, and its target $F_{f'}u^*(M\\otimes^{\\mathbf L}f^*K)$ with $F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$ by that comparison and $u^*f^*\\cong f'^*v^*$. Consequently, whenever $\\beta_M$, $\\beta_{M\\otimes^{\\mathbf L}f^*K}$, $\\operatorname{PF}_f(M,K)$ and $\\operatorname{PF}_{f'}(u^*M,v^*K)$ are isomorphisms,\n$$(\\beta_M\\otimes1_{v^*K})\\circ v^*\\operatorname{PF}_f(M,K)^{-1}\\circ\\beta_{M\\otimes^{\\mathbf L}f^*K}^{-1}=\\operatorname{PF}_{f'}(u^*M,v^*K)^{-1}.$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "proof of (2), 'compatibility of the projection formula with base change'; proper part: Stacks Tag 0E48, sites-cohomology.tex remark-compatible-with-diagram (verification omitted there); open part: extension by zero, Stacks Tag 0GL1 (sites-cohomology.tex lemma-j-shriek-and-tensor)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-base-change",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-exchange-projection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'projection.?formula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean:20,98 (verschiebung_mul_frobenius, Witt vector identity) and Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:146 (a comment). None concerns sheaves, derived categories or base change.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'projectionFormula|projFormula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'extensionByZero|extendByZero' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "no hits (Mathlib has no extension by zero of sheaves of modules)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "not run: LeanSearch and Loogle are not reachable from the review machine",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-17",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Current main-20261015 proof, paragraph beginning For K in D^b_c(X,R): reduction of integral compact supports and derived coefficient adjunction immediately before the displayed Rlim adjunction chain; literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. This is the general coherent representability prerequisite along the recorded via chain.",
+   "place": "Current main-20261015 proof, paragraph beginning For K in D^b_c(X,R): coherent enriched presheaf/model presentation and evaluation comparison immediately before the displayed Rlim adjunction chain.",
    "via": [
     "lem-coef-infinity-continuous-presheaf-representability",
     "lem-coef-presentable-infinity-adjoints",
@@ -92,43 +92,38 @@
    }
   },
   {
-   "text": "For coherence, use a strict enriched presentation supplied by existing general model-comparison theorems, rather than make the join slices strictly functorial. By [lem-coef-coherent-nerve-comparison], take a small locally Kan simplicial category $A=R\\mathfrak C[D]$ and the derived-unit equivalence $q:D\\simeq N_{\\mathrm{hc}}A$. The Quillen equivalence in that statement gives this derived unit since every simplicial set is Joyal-cofibrant and $D$ is fibrant. It also supplies the counit comparison $\\mathfrak C[N_{\\mathrm{hc}}(A^{\\mathrm{op}})]\\to A^{\\mathrm{op}}$ as a Dwyer--Kan equivalence by [lem-coef-enriched-diagram-rectification]. Opposites and products of these coherent nerves agree with nerves of opposites and products: reversing the ordered vertices in the defining thickenings gives the former identification and an enriched functor into a product is a pair for the latter.\nThe Kan model category of simplicial sets is combinatorial and simplicial by the first clause of [lem-coef-simplicial-presheaf-projective-model]. Apply [lem-coef-simplicial-projective-model-calculus] to its enriched $A^{\\mathrm{op}}$-diagrams. Write $\\mathsf M$ for this projective model category and $B=\\mathsf M^{cf}$ for its full simplicial subcategory of cofibrant-fibrant diagrams. It has Kan mapping complexes by [lem-coef-simplicial-model-nerve-localization]. Enriched rectification, with $K=N_{\\mathrm{hc}}(A^{\\mathrm{op}})$ and the preceding counit as $u$, supplies an equivalence\n$$\\Theta:N_{\\mathrm{hc}}B\\simeq\\operatorname{Fun}(N_{\\mathrm{hc}}(A^{\\mathrm{op}}),\\mathcal S)\\simeq\\mathcal P(D).$$\nThe last equivalence is restriction along $q^{\\mathrm{op}}$; a quasi-inverse and its two natural equivalences are obtained by precomposition with a quasi-inverse of $q$. The comparison $\\Theta$ is the enriched-evaluation comparison of the cited theorem, so it identifies evaluation on objects, transformations, and coherent compositions, not just isomorphism classes of diagrams. These are the hypotheses and the exact compatibility needed below. All objects of $A$ and every individual diagram value stay $\\mathcal U$-small; $B$, its nerve, and the equivalence $\\Theta$ are formed in $\\mathcal U'$.",
+   "text": "Apply [lem-coef-enriched-presheaf-rectification] to \\(D\\).  It supplies a small locally Kan\nsimplicial category \\(A\\), an equivalence \\(q:N_{\\mathrm{hc}}A\\simeq D\\), the projective\nsimplicial presheaf model \\(\\mathsf M\\), its bifibrant subcategory \\(B\\), and an equivalence\n\\(\\Theta:N_{\\mathrm{hc}}B\\simeq\\mathcal P(D)\\).  The statement of that lemma includes the\n\\(\\mathcal U'\\)-small ambient construction, the \\(\\mathcal U\\)-small values, and compatibility\nwith mapping complexes, evaluation, composition and identities, together with the coherent\ncomparisons of the representable diagram and of the two bifunctors on \\(A^{\\mathrm{op}}\\times B\\).  Thus\nall data needed for the strict enriched model below satisfy the stated universe hypotheses.",
    "uses": [
-    "lem-coef-coherent-nerve-comparison",
-    "lem-coef-enriched-diagram-rectification",
-    "lem-coef-simplicial-presheaf-projective-model",
-    "lem-coef-simplicial-projective-model-calculus",
-    "lem-coef-simplicial-model-nerve-localization"
+    "lem-coef-enriched-presheaf-rectification"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4, with Appendix A.3.3; the supporting statement is the explicit enriched rectification application."
    }
   },
   {
-   "text": "For $a\\in A$, let $Y_a(x)=A(x,a)$, with action by composition. These are cofibrant-fibrant objects of $\\mathsf M$. Fibrancy is objectwise because $A$ is locally Kan. For cofibrancy use the free enriched diagram left adjoint to evaluation at $a$ in [lem-coef-simplicial-projective-model-calculus], with $I=A^{\\mathrm{op}}$ and $X=\\Delta^0$: it is exactly $Y_a$. Evaluation preserves fibrations and trivial fibrations because those are objectwise; by adjunction the free diagram functor preserves cofibrations. Since $\\varnothing\\to\\Delta^0$ is a cofibration, $\\varnothing\\to Y_a$ is one. Composition in $A$ therefore defines a genuine simplicial functor $Y:A\\to B$.\nDefine two simplicial functors $\\widetilde L,\\widetilde R:A^{\\mathrm{op}}\\times B\\to\\operatorname{Kan}_{\\mathcal U}$ by\n$$\\widetilde L(a,P)=\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P),\\qquad\\widetilde R(a,P)=P(a).$$\nThe former acts on mapping complexes by precomposition with $Y$ and postcomposition in $\\mathsf M$. The latter acts on a pair $u\\in A(a,b)$, $\\beta\\in\\underline{\\operatorname{Map}}_{\\mathsf M}(P,Q)$ by the map $P(b)\\to Q(a)$ given by $Q(u)\\beta_b=\\beta_aP(u)$, with all simplicial parameters taken by the diagonal. The enriched naturality equation for $\\beta$ is exactly that equality, so both constructions preserve composition and units as simplicial maps.\nDefine $\\widetilde\\varepsilon_{a,P}:\\widetilde L(a,P)\\to P(a)$ on an $n$-simplex $\\alpha:Y_a\\times\\Delta^n\\to P$ by restriction of $\\alpha_a:A(a,a)\\times\\Delta^n\\to P(a)$ to $(1_a,\\operatorname{id}_{\\Delta^n})$, where $1_a$ denotes the constant simplex at the enriched identity. This is a simplicial map: precomposing by any $\\Delta^m\\to\\Delta^n$ commutes with that restriction.\nHere is the full enriched naturality check. For simplicial parameters $u:a\\to b$, $\\alpha:Y_b\\to P$ and $\\beta:P\\to Q$, enriched naturality of $\\alpha$ and $\\beta$ gives, as equalities of maps on the product of their parameter simplicial sets,\n$$\\widetilde\\varepsilon_{a,Q}(\\beta\\alpha Y(u))=\\beta_a\\alpha_a(u)=\\beta_aP(u)\\alpha_b(1_b)=Q(u)\\beta_b\\widetilde\\varepsilon_{b,P}(\\alpha).$$\nThe first equality uses $Y(u)_a(1_a)=u$, an actual unit equality in $A$. This proves naturality on entire mapping complexes; diagonal restriction gives the equality on equal-degree simplices and arbitrary faces and degeneracies give all mixed parameter degrees. Associativity and unit equalities in $A$ and in enriched diagram composition make the same equality compatible with iterated composition. Thus $\\widetilde\\varepsilon$ is an enriched natural transformation, not merely a family of maps with chosen edge homotopies. The enriched mapping-end description and objectwise tensor in the cited projective-model statement justify the descriptions of $\\alpha$ and $\\beta$ used here.\nFor completeness the strict enriched inverse is also explicit. Given an $n$-simplex $p:\\Delta^n\\to P(a)$, define $\\sigma(p)_x:A(x,a)\\times\\Delta^n\\to P(x)$ by the enriched action $(f,t)\\mapsto P(f)(p(t))$. Associativity of the action gives its enriched naturality in $x$, and restriction of the parameter gives its faces and degeneracies. The unit equality gives $\\widetilde\\varepsilon\\sigma=1$. Conversely enriched naturality of $\\alpha$ at $f:x\\to a$, evaluated at $1_a$, gives $\\alpha_x(f,t)=P(f)(\\alpha_a(1_a,t))$, so $\\sigma\\widetilde\\varepsilon=1$ as a simplicial equality. This verifies the evaluation construction on the full parameter spaces directly; it uses only the mapping-end description and the associative unital enriched actions already present in the cited projective model statement.",
+   "text": "In the model supplied by [lem-coef-enriched-presheaf-rectification], apply\n[lem-coef-enriched-yoneda-evaluation].  For \\(Y_a=A(-,a)\\), it gives the strict enriched\ntransformation\n\\[\n\\widetilde\\varepsilon_{a,P}:\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P)\\to P(a),\n\\qquad \\alpha\\mapsto\\alpha_a(1_a),\n\\]\ntogether with its action-defined inverse.  Its statement verifies the full simplicial\nnaturality in \\(a\\) and \\(P\\), including composition and units, so this is one enriched\nnatural transformation on \\(A^{\\mathrm{op}}\\times B\\), not merely a family of edge maps.",
    "uses": [
-    "lem-coef-simplicial-projective-model-calculus",
-    "lem-coef-simplicial-model-nerve-localization"
+    "lem-coef-enriched-presheaf-rectification",
+    "lem-coef-enriched-yoneda-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+    "place": "Theorem 2.2.5.1 and Appendix A.3.3; strict enriched Yoneda calculation supplied by the supporting lemma."
    }
   },
   {
-   "text": "Take coherent nerves of the transformation just constructed. Explicitly let $C=A^{\\mathrm{op}}\\times B$ and regard $[1]$ as simplicially enriched with discrete mapping sets. An enriched natural transformation $\\tau:T_0\\to T_1$ gives a simplicial functor $C\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}$: send $(c,i)$ to $T_i(c)$; on the same-endpoint mapping complexes use $T_i$; on the cross complex $C(c,c\\prime)\\times\\{0\\to1\\}$ send a parameter $v$ to $T_1(v)\\tau_c=\\tau_{c\\prime}T_0(v)$. The opposite cross complex is empty. Enriched naturality is precisely the displayed equality, and associativity of $T_0,T_1$ checks composition with arrows at either endpoint. Units are preserved because those of $T_0,T_1$ are. These are equalities on whole mapping simplicial sets, so this construction supplies the interval functor without any further chosen cells. Composing each functor $\\mathfrak C[\\Delta^n]\\to(A^{\\mathrm{op}}\\times B)\\times[1]$ with this simplicial functor gives the desired $n$-simplex in $N_{\\mathrm{hc}}\\operatorname{Kan}_{\\mathcal U}$. The coherent-nerve definition in [lem-coef-coherent-nerve-comparison] therefore supplies an actual coherent transformation on $N_{\\mathrm{hc}}(A^{\\mathrm{op}})\\times N_{\\mathrm{hc}}B$, retaining all simplicial cells.\nWe identify its two endpoints and its specified map, not just their object values. The enriched mapping-space comparison of [lem-coef-simplicial-model-nerve-localization] is natural in the localized variables and respects enriched compositions. Restricting its first variable along the actual simplicial functor $Y$ identifies $N_{\\mathrm{hc}}\\widetilde L$ with the mapping bifunctor restricted along $Y$. The enriched-evaluation comparison of [lem-coef-enriched-diagram-rectification] identifies $N_{\\mathrm{hc}}\\widetilde R$ with evaluation. Under the same comparison $Y_a=A(-,a)$ presents the coherent representable: the natural mapping-space comparisons of [lem-coef-coherent-nerve-comparison] send $A(x,a)$ to $\\operatorname{Map}_{N_{\\mathrm{hc}}A}(x,a)$, carry the enriched identity to the identity edge, and preserve composition and its coherent homotopies. Thus the entire diagram $\\Theta Y$ is the Yoneda diagram along $q$, with this identity compatibility. No choice of right-pinched composition, and no strict functor $d\\mapsto D_{/d}$, is used in this comparison.\nWhisker the resulting coherent transformation with quasi-inverses to the equivalences in step 6 and with their unit and counit equivalences. The two endpoint identifications just specified give\n$$\\varepsilon:L\\longrightarrow R,\\qquad L(d,F)=\\operatorname{Map}_{\\mathcal P(D)}(j(d),F),\\quad R(d,F)=F(d)$$\non $D^{\\mathrm{op}}\\times\\mathcal P(D)$. Its component is evaluation of a transformation at the identity: in the strict model this is literally the restriction defining $\\widetilde\\varepsilon$; the cited evaluation and identity comparisons identify it with $\\eta\\mapsto\\eta_d(\\operatorname{id}_d)$ after passage to coherent diagrams. This also identifies it with the component proved equivalent in step 5, whose vertex-restriction and identity comparison were checked there. All naturality and higher cells come from the one enriched natural transformation and its nerve, followed by these functors and equivalences; they are not inferred from edgewise formulas. The construction only uses the general model-comparison lemmas, not the universal property of free cocompletion (which currently depends on this item).",
+   "text": "Apply [lem-coef-enriched-nerve-transformation] to the two enriched functors and the\ntransformation of step 7.  Its interval construction gives a simplicial functor\n\\(A^{\\mathrm{op}}\\times B\\times[1]\\to\\operatorname{Kan}_{\\mathcal U}\\), hence a coherent\ntransformation after taking \\(N_{\\mathrm{hc}}\\).  By its restriction and whiskering clauses and the coherent bifunctor and representable comparisons of [lem-coef-enriched-presheaf-rectification], the endpoints identify through \\(\\Theta\\) and \\(q\\) with the mapping and evaluation\nfunctors in the item, and the component is still evaluation at \\(1_a\\).  Therefore every\nhigher simplex and the identity comparison are retained when the transformation is\ntransported to \\(D^{\\mathrm{op}}\\times\\mathcal P(D)\\).",
    "uses": [
-    "lem-coef-coherent-nerve-comparison",
-    "lem-coef-simplicial-model-nerve-localization",
-    "lem-coef-enriched-diagram-rectification"
+    "lem-coef-enriched-nerve-transformation",
+    "lem-coef-enriched-presheaf-rectification"
    ],
    "elementary": false,
    "source": {
-    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4 (printed pp.89 and 258), with the projective simplicial diagram model of Appendix A.3.3. The coherence argument here is the explicit enriched evaluation construction, not the free-cocompletion universal property."
+    "document": "https://people.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 4.2.4.4; coherent-nerve interval construction in the supporting statement."
    }
   },
   {
@@ -144,20 +139,18 @@
   }
  ],
  "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-enriched-nerve-transformation",
+  "lem-coef-enriched-presheaf-rectification",
+  "lem-coef-enriched-yoneda-evaluation",
+  "lem-coef-infinity-right-fibration-exponentiation",
   "lem-coef-infinity-slice-right-fibration",
   "lem-coef-space-transport-classification",
-  "def-cbc-enhanced-diagrams-cones",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-  "def-coef-infinity-right-anodyne",
-  "lem-coef-infinity-right-fibration-exponentiation",
-  "def-weil-pbc-trivial-kan-fibration",
-  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-  "lem-coef-coherent-nerve-comparison",
-  "lem-coef-enriched-diagram-rectification",
-  "lem-coef-simplicial-presheaf-projective-model",
-  "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-model-nerve-localization",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -559,7 +552,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-continuous-presheaf-representability",
@@ -584,8 +577,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-yoneda-evaluation",
   "worker": "stage1",
-  "summary": "Repair of the returned split: retained the accepted pointwise horn-filtration proof, added the classification pullback clause in step 5, replaced the unsupported coherence assertion by a strict enriched evaluation construction and existing general rectification/model-localization comparisons in steps 6-8, and made the U-prime smallness universe explicit in step 9. No new nodes, leaves, weakened statement, Lean work, or delivery push. Fresh repair audit: wrote the strict enriched inverse and its two simplicial equality checks in step 7, and rebased every nonsplit field to the current shared node. Existing prerequisite circularity is reported explicitly rather than concealed by dropping citations. Current repair makes the interval enriched functor explicit on both same-endpoint and cross mapping complexes; its composition check uses the full enriched naturality equality.",
-  "blueprint": "Realizes the coherent representability prerequisite for prop-coef-integral-exceptional-adjoint through the recorded continuous-presheaf-representability ancestry. Current main-20261015, sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R), immediately before its displayed Rlim mapping-complex chain. No chapter or unit route is changed.",
+  "summary": "Repair of the returned split: retained the accepted pointwise horn-filtration proof, preserved the pullback classification clause and explicit U-prime smallness check, and replaced the three returned long steps by three statement-only supporting nodes. The new nodes separately state the enriched presheaf/model presentation, strict enriched Yoneda evaluation with its explicit inverse, and passage from an enriched natural transformation through the coherent-nerve interval. The item statement and Lean record are unchanged.",
+  "blueprint": "Realizes the coherent representability prerequisite for prop-coef-integral-exceptional-adjoint: the main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph beginning 'For K in D^b_c(X,R)' immediately before the displayed Rlim adjunction chain, together with the recorded continuous-presheaf-representability ancestry.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
@@ -604,10 +597,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q09-b54b49885",
-  "group": "Q09",
+  "reviewer": "NT-cc-NI-ead345d01",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b54b49885 (reviewer sub-agent of L); spot-checked: I read all nine steps against the full statements of the 14 cited nodes, plus Stacks 017R and 08NS in simplicial.tex and the main-20261015 ancestor paragraph 'For K in D^b_c(X,R)'. HTT and Kerodon are not archived locally, so I checked those from memory only (the proof is marked agent-written). Steps 2-3: I recomputed the extra degeneracy h=s_{n+1} identities and the right-horn (Lambda^{n+1}_{n+1}) pairing filtration; nondegeneracy and face presence hold. Step 4: the pullback of the exponentiation trivial fibration along z->(r_d,z) is valid. Step 5: classification pullback and identity clauses are used correctly. Step 6: the derived unit of the C -| N_hc Quillen equivalence, the counit DK-equivalence for locally Kan A^op, and the projective structure on sSet^{A^op} are all used within their hypotheses; N_hc(A^op)=N_hc(A)^op by vertex reversal. Step 7: the strict enriched Yoneda lemma is correct; Y_a = I(a,-) tensor Delta^0 is bifibrant; the naturality chain and inverse are checked, with variance P(b)->Q(a). Step 8: the interval simplicial functor is correct; the endpoint identifications rest on the nerve-localization and coherent-nerve clauses, which state composition-compatibility with coherent homotopies, as in HTT 5.1.3. Step 9: the cone-calculus criterion is used at U'. Edge cases checked: empty D, a point, an empty value, a single arrow, and an S^1 value. The statement and stmt_deps are unchanged, and proof_deps equals the union of uses. A transitive-closure check on the snapshot shows no dependency reaches the item, so the reported cycle is gone. I accepted both tool_uses (trivial-Kan homotopy equivalence; pointwise functor-equivalence criterion). No fixes and no new nodes. Maintainer note: lem-coef-space-yoneda-density (split, reviewed 2026-10-16) states this item verbatim as its first clause and does not reach it, contrary to the report's stale claim. The two existing nodes should be merged, and the better direction is for that node to cite this more explicit coherence proof."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-ead345d01 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, the three new nodes in full, every cited statement, the unit sk-prop-sf-biduality-general and the main-20261015 ancestor paragraph 'For K in D^b_c(X,R)' (present). HTT and Kerodon are not archived, so I checked them from my knowledge of the text; the proof is marked agent-written, which is consistent. The item statement is unchanged and correct (HTT 5.1.5.2/5.1.3.1, contravariant orientation). Steps 1-5: I recomputed the extra-degeneracy identities and the right-horn pairing (degree 0 included); exponentiation, pullback and the trivial-Kan step are within their hypotheses. Steps 7-9: Y_a is bifibrant, C=A^op x B is U'-small, N_hc preserves products and N_hc[1]=Delta^1, and the pointwise criterion is applied at U'. The new nodes are true, statement-only and not duplicates. The strict enriched Yoneda node was tested on empty A, A=* and one arrow. The interval construction is valid by enriched naturality. Rectification is HTT 4.2.4.4 with the 5.1.3 strict-Yoneda model; it compares models and does not restate the item; the existing coherent-diagrams and diagram-rectification nodes lack its representable and bifunctor clauses. Three repairable faults, fixed: (1) B9: blueprint.from.via of all three new nodes omitted the item, and each from.place was the same generic text; I prepended the item and gave each node the item step it serves. (2) B3/E4 in the rectification node: 'Theta(Y_a) is j(q(a))' was an equality where only an equivalence holds; it now reads 'equivalent to, carrying 1_a to id'. The uncited 'coherent mapping bifunctor' now cites H_P of lem-coef-space-transport-classification, added to stmt_deps with no cycle; the source place now adds HTT 5.1.3. (3) C4: step 6 claimed 'opposites and products' clauses the cited statement lacks; I corrected it to the actual clauses. I also removed a proof hint from the nerve-transformation statement (B1). Accepted tool_uses: lem-weil-pbc-trivial-kan-homotopy-equivalence and lem-cbc-enhanced-functor-cone-calculus. Maintainer note (pre-existing, not this delivery): lem-coef-space-yoneda-density states this item as its first clause and should be merged.; 4 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
