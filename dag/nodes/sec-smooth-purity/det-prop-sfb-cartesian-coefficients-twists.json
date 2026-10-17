@@ -90,20 +90,18 @@
    }
   },
   {
-   "text": "Integral twist: construct the comparison before proving it invertible. Put $L_{E,S}=\\mathcal O_{E,S}(1)=\\varprojlim_n(Q_n)_S(1)$ as in [sk-def-sp-tate-twist]. Applying $f^{-1}$ to its projections and then Step 3 gives a compatible cone to $(Q_n)_X(1)$, hence a unique map $c^f_E:f^{-1}L_{E,Y}\\to L_{E,X}$ by [def-pur-sheaf-inverse-limit]. Its $n$-th projection sends $u\\otimes a$ to $c^f_{\\ell^n}(u)\\otimes\\alpha_f(a)$. Coordinatewise multiplication and Step 4 show it is semilinear over $\\alpha_f$. To prove it an isomorphism, use the pro-etale covering $j:\\widetilde Y\\to Y$ and compatible generators $\\zeta_n$ supplied by [det-def-sp-tate-twist-locally-free] (1). The pullback $\\widetilde X=X\\times_Y\\widetilde Y\\to X$ is again a cover, because the base-change functor in [def-weil-proetale-inverse-image] preserves coverings. By Step 2 the pulled roots $\\zeta'_n$ generate all the root sheaves on $\\widetilde X$ and satisfy $(\\zeta'_{n+1})^\\ell=\\zeta'_n$. Restriction to these site objects is restriction to their localized sites by [lem-weil-proetale-weakly-etale-localization]; limits restrict sectionwise by [def-pur-sheaf-inverse-limit]. Thus the compatible maps $a_n\\mapsto\\zeta_n\\otimes a_n$ identify $L_{E,Y}|_{\\widetilde Y}$ with $R_{E,Y}|_{\\widetilde Y}$ by Step 4, and the maps $a_n\\mapsto\\zeta'_n\\otimes a_n$ do the same over $\\widetilde X$. Inverse image of the first trivialization is a trivialization of $(f^{-1}L_{E,Y})|_{\\widetilde X}$: the localization comparison [lem-weil-pbc-slice-site-localization], with the object $\\widetilde Y$ and its base change $\\widetilde X$, identifies restriction of $f^{-1}$ with inverse image on the localized sites. The weakly-etale localization identifications turn the latter sites into $\\widetilde Y_{\\mathrm{proet}}$ and $\\widetilde X_{\\mathrm{proet}}$. Under these trivializations $c^f_E$ is exactly the coefficient comparison $\\alpha_f$ at each coordinate. It is therefore invertible on this cover. The local inverses agree on overlaps, being inverses of one fixed map, and glue by the sheaf axiom. This proves the integral comparison globally, including $\\mathbf Z_\\ell(1)$, without assuming preservation of arbitrary inverse limits. Uniqueness of the map to the limit makes it independent of the chosen generators; the same coordinate formula proves naturality in $E$ and compatibility with its coefficient action.",
+   "text": "Integral twist. Put $Q_n=\\mathcal O_E/\\ell^n$, $M_n=(Q_n)_Y(1)$ and $L_{E,Y}=\\varprojlim_n M_n$ [sk-def-sp-tate-twist]. Apply [lem-pur-inverse-image-compatible-free-tower] to $u_f$ of [def-weil-proetale-inverse-image] and $R_n=(Q_n)_Y$. Step 4 gives its coefficient comparison $\\kappa$ and identifies it with $\\alpha_f$. Clause (1) of [det-def-sp-tate-twist-locally-free] supplies one cover $\\widetilde Y\\to Y$ and compatible $\\zeta_n$. On its localized site, identified with $\\widetilde Y_{\\mathrm{proet}}$ by [lem-weil-proetale-weakly-etale-localization], the bases $b_n(a)=\\zeta_n\\otimes a$ identify $R_n$ with $M_n$ by the finite tensor construction of Step 3. Their transition identity is $t_n(\\zeta_{n+1}\\otimes a)=\\zeta_n\\otimes\\bar a$. These are exactly the common-cover and compatible-basis hypotheses of the tower lemma. Its canonical comparison followed by the inverse limit of the compatible finite comparisons of Step 3 gives\n$$c_E^f:f^{-1}L_{E,Y}\\xrightarrow{\\sim}L_{E,X}.$$\nIt is semilinear over $\\alpha_f$ and is characterized by all its projections, so it is independent of the generators and natural in coefficient homomorphisms. Each projection is the Step 3 map $u\\otimes a\\mapsto c^f_{\\ell^n}(u)\\otimes\\alpha_f(a)$. Taking $E=\\mathbf Q_\\ell$ includes $\\mathbf Z_\\ell(1)$.",
    "uses": [
     "sk-def-sp-tate-twist",
-    "def-pur-sheaf-inverse-limit",
-    "det-def-sp-tate-twist-locally-free",
+    "lem-pur-inverse-image-compatible-free-tower",
     "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-slice-site-localization",
-    "def-pc-fibre-product"
+    "det-def-sp-tate-twist-locally-free",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "Integral twist paragraph; simultaneous primitive-root cover from det-def-sp-tate-twist-locally-free, used to check the canonical limit comparison"
+    "place": "Integral twist paragraph; apply the compatible-local-basis tower comparison after Steps 3 and 4."
    }
   },
   {
@@ -121,22 +119,18 @@
    }
   },
   {
-   "text": "All signed powers. The case $d=0$ is $\\alpha_f$ itself [lem-sfb-alpha-iso]. For $d>0$, apply the relative tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] repeatedly to the $d$ copies of the comparison for $(1)$; the tensor powers are those of [sk-def-sp-tate-twist]. For $d<0$ put $L=\\Lambda_Y(-d)$. Its local rank-one freeness in the ambient module-sheaf category can be checked directly on the compatible-generator cover of [det-def-sp-tate-twist-locally-free] (1). On that cover the finite twists have bases $\\zeta_r\\otimes1$ by the tensor construction in Step 3. These bases are compatible with reduction, so Steps 4–5 identify the integral twist with the integral coefficient sheaf, with $\\mathbf Z_\\ell$ included by $E=\\mathbf Q_\\ell$. Restriction is geometric inverse image on the localized sites and preserves colimits by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Hence the localization and finite-subextension colimit of these compatible trivializations, as in Step 6, identify the rational and algebraic-closure twists with their respective pulled-back coefficient sheaves on the same cover. Taking the $(-d)$-fold tensor power of each trivialization gives a basis for $L$. This uses the ambient constructions of [sk-def-sp-tate-twist], without identifying them with common-stage coefficient categories. Pull back the evaluation pairing of the sheaf Hom [def-pur-sheaf-hom] and use the tensor comparison and $\\alpha_f$ to get the canonical map\n$$f^*\\mathcal Hom_{\\Lambda_Y}(L,\\Lambda_Y)\\longrightarrow\\mathcal Hom_{\\Lambda_X}(f^*L,\\Lambda_X).$$\nOn a covering where $e$ is a basis for $L$, its pullback sends the dual basis functional $e\\mapsto1$ to the functional $f^*e\\mapsto1$. In these bases the map is the identity of $\\Lambda_X$, hence an isomorphism; the local inverses glue by the sheaf axiom. For each trivializing object $V\\to Y$, its base change $X\\times_YV\\to X$ belongs to a covering by [def-weil-proetale-inverse-image]. The isomorphism $j_{X\\times_YV}^{-1}f^{-1}\\cong(f_V)^{-1}j_V^{-1}$ of [lem-weil-pbc-slice-site-localization] identifies the restriction of the pulled-back basis with the basis on the localized site. The equivalence of these localized sites with the small pro-etale sites of the covering schemes is [lem-weil-proetale-weakly-etale-localization]. This gives the claimed comparisons for negative twists. All are defined from coefficient maps, tensor and evaluation, so they retain the module structures and the Kummer compatibility already proved.",
+   "text": "All signed powers. For $d=0$ the comparison is $\\alpha_f$ [lem-sfb-alpha-iso]. For $d>0$ the relative tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor], applied repeatedly to the comparison for $(1)$, gives the comparison for $d$ by [sk-def-sp-tate-twist]. For $d<0$ put $L=\\Lambda_Y(-d)$. The current ambient twist statement [sk-def-sp-tate-twist] explicitly states that $\\Lambda_Y(1)$ is locally free of rank one on the compatible-generator cover for each admissible coefficient ring. On that cover a tensor power of its basis is a basis of $L$, so $L$ satisfies the finite locally free hypothesis of [lem-pur-ringed-site-finite-free-dual-pullback]. Apply that lemma to $R=\\Lambda_Y$, $S=\\Lambda_X$, $c=\\alpha_f$ and this $L$. It identifies pullback of the negative twist $\\mathcal Hom_R(L,R)$ with $\\mathcal Hom_S(f^*L,S)$, which is $\\Lambda_X(d)$ by the already proved positive comparison. As $\\alpha_f$ is invertible, module pullback [def-sfb-module-upper-star] identifies with inverse image with transported coefficients. The dual comparison is defined by pullback of evaluation and sends the pulled-back dual basis to the dual of the pulled-back basis, as stated in the lemma. Thus the coefficient and Kummer compatibilities from the positive powers persist for the negative powers.",
    "uses": [
     "lem-sfb-alpha-iso",
     "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
     "sk-def-sp-tate-twist",
-    "det-def-sp-tate-twist-locally-free",
-    "def-pur-sheaf-hom",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-slice-site-localization",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "def-sfb-module-upper-star"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "Powers and duals paragraph: ambient local freeness from the compatible-generator cover and Steps 3–6, followed by the local dual-basis calculation"
+    "place": "Powers and duals paragraph: finite locally free dual pullback, with ambient local freeness from the current twist definition."
    }
   },
   {
@@ -160,8 +154,6 @@
   "def-pc-fibre-product",
   "def-pur-roots-of-unity-inverse-image",
   "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-inverse-limit",
   "def-sfb-module-upper-star",
   "def-weil-affine-spectrum",
   "def-weil-pbc-ind-etale-algebra",
@@ -172,6 +164,8 @@
   "det-prop-sfb-qlbar-colimit-x-pullback",
   "lem-galois-yoneda-hom-bijection",
   "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-inverse-image-compatible-free-tower",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
   "lem-sbc-root-split-away-cover-etale",
   "lem-sfb-alpha-iso",
   "lem-weil-l-adic-extension-integers-dvr",
@@ -182,7 +176,6 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-slice-site-localization",
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-proetale-weakly-etale-localization",
   "prop-weil-pbc-proetale-constant-ring-map",
@@ -261,7 +254,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -281,11 +274,11 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-prop-sfb-cartesian-coefficients-twists",
   "worker": "stage1",
-  "summary": "Replaced the earlier sandbox proof, which used a false arbitrary inverse-image theorem for the sheaf of units. No new nodes remain. Proved the representable inverse-image formula from the actual Yoneda evaluation and co-Yoneda statements; used it on the explicit etale root scheme. Proved finite twists by relative tensor pullback, and constructed and locally checked the integral comparison using compatible root generators and the coefficient-limit comparison, rather than misapplying that comparison to a twisted system. Wrote out the cofinal change of uniformizer powers, signed duals, coefficient compatibilities, and the unbounded derived tensor consequence. The item statement is unchanged. Searches were rerun for the whole item with two semantic phrasings, Loogle and Mathlib grep; no exact project declaration or Mathlib theorem was found. Maintainer-reader repair: Step 7 now obtains local freeness in the ambient condensed-module categories directly from the compatible generators and the finite/limit/localization/colimit constructions of Steps 3–6; it does not apply clause (3) of the local-freeness node across its older coefficient-category definitions.",
-  "blueprint": "Steps 1-2 realize Roots of unity; Step 3 realizes Finite A; Steps 4-5 realize The integral twist; Step 6 realizes Rational and algebraic closure; Steps 7-8 realize Powers and duals. These are refinements below the node level, preserving the parent affine-space-purity unit route.",
+  "summary": "Q103 repair of the explicit 2026-10-17 return: preserved the statement and Steps 1-4, 6 and 8. Extracted the hidden local inverse-limit comparison in Step 5 and finite locally free dual pullback in Step 7 as two general statement-only support nodes, searched in Mathlib. Step 5 now checks the tower lemma hypotheses; Step 7 uses the current ambient local-freeness assertion of sk-def-sp-tate-twist and cites the general dual comparison. No proof step exceeds 2000 characters. Original proof history, source references and prior report are retained in the sandbox.",
+  "blueprint": "Steps 1-2: Roots of unity; Step 3: Finite A; Steps 4-5: Integral twist (compatible-basis tower lemma); Step 6: Rational and algebraic closure; Steps 7-8: Powers and duals (finite locally free dual pullback). Original unit route unchanged.",
   "tool_uses": [
    {
     "node": "lem-pc-sites-module-sheafification-tensor",
@@ -316,12 +309,8 @@
     "why": "Steps 3 and 7 need tensor pullback over the coefficient ring, rather than only tensor over the integers. This is a generic ringed-topos tool and does not introduce a proper-base-change argument."
    },
    {
-    "node": "lem-weil-pbc-slice-site-localization",
-    "why": "Steps 5 and 7 use its explicit inverse-image/restriction square to check the integral comparison and dual comparison on pullbacks of trivializing objects. The unit has no general morphism-of-localized-sites theorem."
-   },
-   {
     "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Steps 5 and 7 identify the localized small pro-etale site at a covering object with the small pro-etale site of that object, and identify finite constant coefficient sheaves there. This generic site equivalence is not a geometric purity step."
+    "why": "Step 5 identifies the localized small pro-etale site at the compatible-generator cover with the small pro-etale site of that object, and identifies finite constant coefficient sheaves there. This generic site equivalence is not a geometric purity step."
    },
    {
     "node": "prop-weil-pbc-proetale-constant-ring-map",
@@ -342,12 +331,12 @@
   "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q25-cd044c027",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q103-bbbd61d4e",
+  "group": "Q103",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-cd044c027 (reviewer sub-agent of L); spot-checked: Read all eight steps, cited statements, sources, and route. Repaired Step 7’s coefficient-category mismatch by deriving ambient local freeness directly from Steps 3–6 and compatible generators. Statement unchanged; no new nodes or dependency cycle. Whole corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-bbbd61d4e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the main-20261015 blueprint statement and its five proof paragraphs, and Stacks 03CF, 0GMX and 0FNY at their labels. The item's statement is unchanged and not weakened, and it keeps the condensed coefficients Λ_Y = p_Y^*Λ. Steps 1-4, 6 and 8 are correct. Step 5 (repaired) meets every hypothesis of the new tower lemma: u_f preserves finite limits and coverings; κ is invertible by Step 4; one cover Ỹ with compatible generators ζ_n comes from clause (1) of det-def-sp-tate-twist-locally-free; the bases b_n(a)=ζ_n⊗a satisfy t_n(ζ_{n+1}⊗a)=ζ_n⊗ā. Step 7 (repaired): the current sk-def-sp-tate-twist explicitly says each Λ_X(1) is locally free of rank one on that cover, so Λ_Y(|d|) is finite locally free. The new dual lemma, applied with c=α_f, then gives the negative twists, since Λ(-m) is defined as Hom(Λ(m),Λ). lem-pur-inverse-image-compatible-free-tower is true: by 03CF, restricted inverse image is the localized inverse image; limits are sectionwise; the u(V_i) cover 1_D; being an isomorphism is local. I tested it on constant towers, zero rings, an empty cover and a line bundle with no global basis. lem-pur-ringed-site-finite-free-dual-pullback is true: locally both sides are S^r and the map is the identity matrix in dual bases, with no flatness needed. I tested rank 0, varying ranks, the zero ring and ℤ→ℤ/2. Neither new node restates an item clause or duplicates an existing node: the isomorphism-only, étale/constant-coefficient and scheme 𝒪-module dual nodes, the slice-localization node and the 03CF nodes all state other things. The blueprint search found nothing, and both nodes record three kinds of Mathlib search. There is no cycle and no SGA source. Fix: I removed the stale split_report.tool_uses entry for lem-weil-pbc-slice-site-localization, which no step cites any more, and narrowed one 'why' to Step 5. The other nine tool uses are accepted. Note for the maintainer: the local-freeness claim sits inside the definition node sk-def-sp-tate-twist. That is a pre-existing DAG fault, not part of this delivery.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",

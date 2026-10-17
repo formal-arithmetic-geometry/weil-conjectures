@@ -49,50 +49,79 @@
    }
   },
   {
-   "text": "First treat the common layer $Q=P\\otimes_{\\widehat R_Y}(k_L)_Y$. Put $P_1=P\\otimes_{\\widehat R_Y}(k_E)_Y$, representing $K_1$. By [lem-pur-kflat-change-of-rings], $P_1$ is K-flat over $(k_E)_Y$, so $P_1\\otimes_{(k_E)_Y}(k_L)_Y$ computes $K_1\\otimes^L_{k_E} k_L$. The coefficient map $\\widehat R_Y\\to(k_L)_Y$ factors through $(k_E)_Y$ by the residue map of step 1. The balanced maps $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$ are inverse chain maps identifying this complex with $Q$. The chosen $k_E$-basis identifies $(k_L)_Y$ with $(k_E)_Y^{\\oplus d}$, so tensoring with it is a finite direct sum of the identity functor. It is exact, and $\\mathcal H^i(Q)=\\mathcal H^i(K_1)\\otimes_{k_E}k_L$; this also follows by computing cycles and boundaries in the finite direct sum. For the finitely many degrees $r\\le i\\le s$, take a common finite refinement of their constructible stratifications: its members are intersections of the locally closed constructible members, so remain locally closed constructible and partition $Y$. Pullback to such a stratum is exact and commutes with constants and tensor, by [def-weil-proetale-inverse-image] and [lem-weil-pbc-left-exact-site-inverse-image-tensor]. On a cover trivializing $\\mathcal H^i(K_1)$ to the constant sheaf of a finite $k_E$-module $V$, the displayed cohomology of $Q$ is the constant sheaf of $V\\otimes_{k_E}k_L$, with its actual $k_L$-action. For clarity, inverse image takes each constant coefficient ring to the same constant ring: the constant set sheaf is the copower of the terminal sheaf indexed by the ring, and the cited inverse-image theorem preserves both terminal objects and colimits; addition and multiplication are transported because it preserves finite products. Thus module pullback here is the exact inverse image, not tensor along an unknown ring comparison. The constant tensor identification is induced by $v\\otimes c\\mapsto v\\otimes c$ in the sheafified tensor presentation. Exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] justifies the constant tensor and cohomology calculation. This module is finite, as a quotient of the finite set $V\\otimes_{k_E}k_E^{\\oplus d}\\cong V^{\\oplus d}$. Therefore $Q$ has constructible $k_L$-cohomology and support in $[r,s]$. For each $m$, regard $Q$ as a $(B_m)_Y$-complex via $B_m\\to k_L$; the same constant models show constructibility as $B_m$-modules, with the same support.",
+   "text": "Put $P_1=P\\otimes_{\\widehat R_Y}(k_E)_Y$. It represents $K_1$ by the definition of derived reduction [def-weil-integral-derived-reduction], $P$ being a K-flat resolution of $K$, and it is K-flat by [lem-pur-kflat-change-of-rings]. The coefficient map to $(k_L)_Y$ factors through $(k_E)_Y$. The balanced chain maps $(p\\otimes a)\\otimes b\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$ identify $P_1\\otimes_{(k_E)_Y}(k_L)_Y$ with $Q=P\\otimes_{\\widehat R_Y}(k_L)_Y$. Apply [lem-sf-finite-field-sheaf-scalar-extension] to the unital map of finite fields $k_E\\to k_L$ from step 1 and the complex $P_1$. Its cohomology formula proves that $Q$ has constructible $k_L$-cohomology, zero outside $[r,s]$.",
    "uses": [
+    "def-weil-integral-derived-reduction",
     "lem-pur-kflat-change-of-rings",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+    "lem-sf-finite-field-sheaf-scalar-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E; elementary finite free residue-field extension, with exact inverse image and exact constant sheafification"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093V, lemma-tensor-product-locally-constant; residue-field extension lemma, applied after balanced tensor associativity"
    }
   },
   {
-   "text": "Fix $m$. Filter the $B_m$-module $B_m$ by the ideals $J_j=\\varpi_L^j S/\\varpi_L^m S$ for $0\\le j\\le m$. Thus $J_0=B_m$, $J_m=0$, and multiplication by $\\varpi_L^j$ induces a $B_m$-linear isomorphism $k_L\\cong J_j/J_{j+1}$ for $j<m$. It is surjective by the definition of $J_j$; its kernel is $(\\varpi_L)$ since $S$ is a domain and $\\varpi_L^m S\\subseteq\\varpi_L^{j+1}S$, so cancellation of $\\varpi_L^j$ reduces the kernel assertion to membership in $\\varpi_L S$ [lem-weil-l-adic-extension-integers-dvr]. In particular each $J_j/J_{j+1}$ is a finite set. Descending induction using the fibers of $J_j\\to J_j/J_{j+1}$ (each a coset of $J_{j+1}$) shows that $J_j$ is finite, starting with $J_m=0$. Thus $B_m=J_0$ is indeed a finite commutative ring, as required for the constructible-subcategory theorem below. Exact constant sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact] gives short exact coefficient sheaf sequences $0\\to(J_{j+1})_Y\\to(J_j)_Y\\to(k_L)_Y\\to0$. They are sequences of $\\widehat R_Y$-modules as well, through the compatible coefficient maps. Because each $P^q$ is flat, tensoring produces degreewise short exact sequences of $B_m$-complexes\n$$0\\to P\\otimes_{\\widehat R_Y}(J_{j+1})_Y\\to P\\otimes_{\\widehat R_Y}(J_j)_Y\\to Q\\to0.$$\nThey yield distinguished triangles by [lem-weil-pbc-complex-ses-triangle]. Descending induction from $j=m$ now proves that every middle complex has constructible cohomology and support in $[r,s]$: the base is the zero complex; the induction step uses the constructible layer $Q$ from step 3 and extension closure [lem-weil-proetale-dbc-triangulated] for the finite ring $B_m$. For a degree $i$ outside $[r,s]$, the two outer cohomology objects vanish, so the middle one vanishes by [lem-sf-derived-homology-long-exact]. At $j=0$ this complex is $M_m$. The interval never changes during the induction and is independent of $m$; no flatness of $B_m$ over $A_{E,m}$, no finite Tor hypothesis and no Noetherian hypothesis on $Y$ were used.",
+   "text": "Fix $m\\ge1$ and put $B_m=S/(\\varpi_L^m)$. Filter $B_m$ by $J_j=\\varpi_L^jS/\\varpi_L^mS$ for $0\\le j\\le m$. Thus $J_0=B_m$ and $J_m=0$. Multiplication by $\\varpi_L^j$ gives $k_L\\cong J_j/J_{j+1}$ for $j<m$: surjectivity follows from the definition of $J_j$, and cancellation in the DVR domain $S$ shows that its kernel before passing to $k_L$ is $(\\varpi_L)$ [lem-weil-l-adic-extension-integers-dvr]. Starting at $J_m=0$, each fiber of $J_j\\to k_L$ is a coset of the finite group $J_{j+1}$; descending induction proves each $J_j$, hence $B_m$, finite. Viewed through $B_m\\to k_L$, $Q$ still has constructible cohomology as a $B_m$-complex: its local constant models are the same finite modules with the action restricted through that map, and its underlying cohomology sheaves and bounds do not change [def-weil-proetale-constructible-sheaf].",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-proetale-dbc-triangulated",
-    "lem-sf-derived-homology-long-exact"
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "last paragraph; elementary DVR ideal filtration and restriction of finite constant module models"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-filtered-coefficient-tensor-bounds] with $B=B_m$, $\\mathcal R=\\widehat R_Y$, the coefficient map $\\rho_m$ of [def-weil-integral-scalar-extension], $V=B_m$, and $V_j=J_j$ from step 4. Its flat-term hypothesis holds for the fixed resolution $P$. Every layer $W_j$ is $k_L$ as a $B_m$-module, so its tensor complex is $Q$, whose constructibility and support in $[r,s]$ were established in steps 3 and 4. The theorem gives constructible cohomology of $P\\otimes_{\\widehat R_Y}(B_m)_Y=M_m$ with the same interval $[r,s]$. The integers $r,s$ were chosen once in step 1 and do not depend on $m$ or the filtration length. No flatness of $B_m$ over $A_{E,m}$ or finite Tor hypothesis is used.",
+   "uses": [
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "def-weil-integral-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09B5 (lemma-constructible-serre) and Tag 09AL (lemma-compare-constructible-derived); agent-written finite filtration argument with explicit base and induction, and the DVR coefficient theorem"
+    "place": "Tag 09B5, lemma-constructible-serre; finite coefficient-filtration tensor bounds applied to the DVR ideal filtration"
    }
   },
   {
-   "text": "Let $N=K\\otimes_R S$ be the object defined by [def-weil-integral-scalar-extension]. It is the fixed cone $\\operatorname{Cone}(1-s)[-1]$ of the strict tower $\\operatorname{Res}^L_mM_m$, and is a derived limit of that tower by [lem-weil-integral-scalar-extension-well-defined]. Step 2 verified precisely the normalized-tower hypothesis of [lem-coef-normalized-dvr-effectivity], with the DVR $S$ and quotient rings $B_m=A_{L,m}$. Apply that theorem to obtain compatible isomorphisms $N\\otimes^L_S B_m\\cong M_m$ and derived completeness of $N$. This is the same derived limit as the normalized-tower theorem: the strict tower theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes total derived inverse limit by its Roos triangle. Countable products of completed-coefficient module sheaves are exact by [lem-weil-proetale-countable-products-exact], so [lem-weil-derived-limit-products-core] identifies the derived products in that triangle with the termwise products used here. To make the comparison explicit, take the strict tower resolution $X_\\bullet\\to I_\\bullet$ used by the strict-tower theorem, where $X_m=\\operatorname{Res}^L_mM_m$. Its maps are termwise quasi-isomorphisms and commute with the transitions. Exact countable products imply that $\\prod_mX_m\\to\\prod_mI_m$ is a quasi-isomorphism: cohomology of these products is the product of the cohomologies by [lem-weil-derived-limit-products-core]. The commuting square with $1-s$ therefore induces a quasi-isomorphism of the shifted mapping-cone complexes. On each evaluation it commutes with projection to the corresponding tower member, since the square came from a strict tower map. The Roos model of the strict-tower theorem is consequently identified with the fixed cone defining $N$, with its evaluations. This supplies the comparison needed for the canonical counit isomorphisms of the effectivity theorem, without asserting uniqueness of arbitrary cone maps. The finite-level statement of step 4 therefore supplies constructibility and the single interval $[r,s]$ for all derived reductions of $N$. These are exactly the conditions of [def-weil-derived-complete-integral-detailed] for $L$, so $N\\in D^b_c(Y,S)$. Finally the ambient functor is $R$-linear by clause 3 of [lem-weil-integral-scalar-extension-well-defined]. Restricting its objects and morphisms to the full subcategories just proved preserved leaves the equality $T(af)=aT(f)$ intact, and gives the asserted $R$-linear functor.",
+   "text": "Let $X_m=\\operatorname{Res}^L_m M_m$, a strict tower of $\\widehat{\\mathcal O}_{L,Y}$-complexes. By [def-weil-integral-scalar-extension], $N=K\\otimes_R S$ is precisely $\\operatorname{Roos}(X)$. Countable products in the category of these completed-coefficient module sheaves are exact by [lem-weil-proetale-countable-products-exact]. Apply [lem-sf-strict-roos-derived-limit-comparison] to this ringed site and strict tower. It identifies the fixed cone $N$ with the total derived inverse limit of the coherent tower, compatibly with every evaluation $N\\to X_m$. Thus the finite-level counit comparisons for this derived limit are comparisons for the actual object and evaluations defining integral scalar extension; no uniqueness of arbitrary cone maps is asserted.",
    "uses": [
     "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "def-weil-derived-complete-integral-detailed"
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products; strict Roos comparison with total derived inverse limit and evaluations"
+   }
+  },
+  {
+   "text": "Step 2 established the normalized-tower hypothesis of [def-coef-normalized-dvr-tower] for $S=\\mathcal O_L$ and its quotients $B_m$. Apply [lem-coef-normalized-dvr-effectivity] to this tower, using the evaluation-compatible derived limit identification in step 6. It gives $N\\otimes^L_S B_m\\cong M_m$ for every $m$ and derived completeness of $N$. Step 5 supplies constructibility of all these reductions and a single cohomological interval $[r,s]$. For the finite coefficient ring $B_m=A_{L,m}$, constructibility of [def-weil-proetale-constructible-sheaf] is word for word the finite-torsion constructibility of [def-weil-finite-torsion-constructibility] (finite partition into locally closed constructible strata, locally constant restrictions with finite stalks), and cohomology in $[r,s]$ gives finitely many nonzero cohomology sheaves, so $N\\otimes^L_SB_m\\cong M_m\\in D^b_c(Y,A_{L,m})$. By [def-weil-derived-complete-integral-detailed], these are precisely the defining conditions for $N\\in D^b_c(Y,S)$.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-finite-torsion-constructibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.5.2 and Proposition 3.5.1; blueprint scalar extension on integral representatives. Effectivity is cited from the existing normalized-DVR-tower node, not inferred merely from being a limit."
+    "place": "Definition 3.5.2 and the normalized DVR effectivity assertion of lem-coef-normalized-dvr-effectivity; no effectivity is inferred from merely being a triangulated homotopy limit"
+   }
+  },
+  {
+   "text": "The ambient integral scalar-extension functor is $R$-linear by clause 3 of [lem-weil-integral-scalar-extension-well-defined]. Step 7 shows that it sends every object of the integral bounded constructible full subcategory into the corresponding full subcategory for $S$. Restrict its object and morphism maps to these full subcategories. The equality $T(af)=aT(f)$ on ambient morphisms is the same equality on their full-subcategory Hom groups. This is the asserted $R$-linear functor.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "last paragraph; restriction of the already linear ambient functor to preserved full subcategories"
    }
   }
  ],
@@ -103,23 +132,20 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-kflat-change-of-rings",
   "def-coef-normalized-dvr-tower",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-proetale-dbc-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-integral-derived-reduction",
+  "lem-sf-finite-field-sheaf-scalar-extension",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-sf-filtered-coefficient-tensor-bounds",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-products-core"
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-coef-normalized-dvr-effectivity",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-integral-scalar-extension-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
-  "place": "last paragraph; explicit residue-field filtration proof, using Stacks 0G7E, 09B5 and the existing normalized DVR effectivity theorem"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+  "place": "last paragraph; retained residue-layer/finite-filtration/normalized-tower route, extracting three hidden arguments as independent statement-only lemmas"
  },
  "mathlib_searches": [
   {
@@ -170,10 +196,45 @@
    "results": "0 hits in Mathlib/CategoryTheory",
    "date": "2026-10-14",
    "verdict": "no match: no constructible sheaf or normalized DVR tower declaration in the category theory source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived scalar extension preserves bounded constructible complexes on the pro-etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived categories, ordinary integral/etale algebras and condensed modules do not state integral constructible pro-etale scalar extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] : Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"The assumption that a localized category for\\n`(HomologicalComplex.quasiIso C (ComplexShape.up ℤ))` has been chosen, and that the morphisms\\nin this chosen category are in `Type w`.\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] : HasDerivedCategory C\", \"doc\": \"The derived category obtained using the constructed localized category of cochain complexes\\nwith respect to quasi-isomorphisms. This should be used only while proving statements\\nwhich do not involve t\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : Type (max u v)\", \"doc\": \"The derived category of an abelian category.\"}\n  {\"name\": \"instCategoryDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u_2) [CategoryTheory.Category.{u_3, u_2} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Category.{u_1, max u_2 u_3} (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instHasZeroObject\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Limits.HasZeroObject (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instPreadditive\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Preadditive (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instHasShiftInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.HasShift (DerivedCategory C) ℤ\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"The single functor `C ⥤ DerivedCategory C` which sends `X : C` to the\\nsingle cochain complex with `X` sitting in degree `n : ℤ`.\"}\n  {\"name\": \"DerivedCategory.singleFunctors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.SingleFunctors C (DerivedCategory C) ℤ\", \"doc\": \"The single functors `C ⥤ DerivedCategory C` for all `n : ℤ` along with\\ntheir compatibilities with shifts.\"}\n  {\"name\": \"DerivedCategory.instAdditiveSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Additive\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instPretriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.Pretriangulated (DerivedCategory C)\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instIsTriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] : CategoryTheory.IsTriangulated (DerivedCategory C)\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived categories, ordinary integral/etale algebras and condensed modules do not state integral constructible pro-etale scalar extension"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*scalar|scalar.*constructible|normalized.*tower",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"27\", \"text\": \"- `normalizedTrace_intermediateField`: for a tower `K / E / F` of algebraic extensions,\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"29\", \"text\": \"- `normalizedTrace_trans`: for a tower `K / E / F` of algebraic extensions, the normalized trace\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"166\", \"text\": \"  normalizedTrace_map F K (IsScalarTower.toAlgHom F E K) a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived categories, ordinary integral/etale algebras and condensed modules do not state integral constructible pro-etale scalar extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral scalar extension preserves constructible derived complete sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicIndependent.extendScalars_of_isIntegral\", \"module\": \"Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure\", \"type\": \"[Algebra.IsIntegral R S] : AlgebraicIndependent S x\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ integral over $ R $. If a set $ x $ of elements in an $ S $-algebra is algebraically independent over $ R $, then it remains algebraically independe\"}\n  {\"name\": \"IsAlgebraic.restrictScalars_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Algebraic.Integral\", \"type\": \"[int : Algebra.IsIntegral R S] {a : A} (h : IsAlgebraic S a) : IsAlgebraic R a\", \"doc\": \"If $ R $ is an integral extension of $ S $ and an element $ a $ in $ A $ is algebraic over $ S $, then $ a $ is also algebraic over $ R $. This follows because the integral condition ensures that any \"}\n  {\"name\": \"Algebra.IsAlgebraic.extendScalars\", \"module\": \"Mathlib.RingTheory.Algebraic.Basic\", \"type\": \"(hinj : Function.Injective (algebraMap R S)) [Algebra.IsAlgebraic R A] : Algebra.IsAlgebraic S A\", \"doc\": \"If the canonical algebra homomorphism from $ R $ to $ S $ is injective and $ A $ is algebraic over $ R $, then $ A $ is also algebraic over $ S $. This follows from the fact that injectivity of the sc\"}\n  {\"name\": \"IsIntegral.smul\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"{R} [CommSemiring R] [Algebra R B] [Algebra S B] [Algebra R S] [IsScalarTower R S B] {x : B} (r : R)\\n  (hx : IsIntegral S x) : IsIntegral S (r • x)\", \"doc\": \"Let $ R $ be a commutative semiring, $ S $ and $ B $ be $ R $-algebras, and $ B $ be an $ S $-algebra with a scalar tower structure over $ R $. If $ x \\\\in B $ is integral over $ S $, then for any $ r \"}\n  {\"name\": \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"(Rₛ) [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ M'] [Module Rₛ N'] [IsScalarTower R Rₛ M'] [IsScalarTower R Rₛ N']\\n  [IsLocalization S Rₛ] [Module.FinitePresentation R M] :\\n  IsLocalizedModule S (IsLocalizedModule.mapExtendScalars S f g Rₛ)\", \"doc\": \"If $ R_\\\\!_\\\\!s $ is the localization of a commutative ring $ R $ at a submonoid $ S $, and $ M $ is a finitely presented $ R $-module, then the scalar extension map from $ M $ to an $ R_\\\\!_\\\\!s $-module\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"Algebra.IsIntegral.tensorProduct\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"[CommRing B] [Algebra R A] [Algebra R B] [int : Algebra.IsIntegral R B] : Algebra.IsIntegral A (A ⊗[R] B)\", \"doc\": \"Let $R, A, B$ be commutative rings such that $A$ and $B$ are $R$-algebras. If $B$ is an integral extension of $R$, then the tensor product $A \\\\otimes_R B$ is an integral extension of $A$.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) (x : v.adicCompletionIntegers K) : (↑(r • x) : v.adicCompletion K) = r • (x : v.adicCompletion K)\", \"doc\": \"Let $R$ be a Dedekind domain, $K$ its field of fractions, and $v$ a height-one prime ideal of $R$. Let $\\\\hat{K}_v$ be the adic completion of $K$ with respect to the valuation associated with $v$, and \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived categories, ordinary integral/etale algebras and condensed modules do not state integral constructible pro-etale scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change coefficients between complete discrete valuation rings in constructible pro-etale cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"Algebra.instIsStandardEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.IsStandardEtale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ is a standard étale algebra over $ R $. This means it is isomorphic to a localiz\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived categories, ordinary integral/etale algebras and condensed modules do not state integral constructible pro-etale scalar extension"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -195,43 +256,19 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-integral-scalar-extension-constructible",
   "worker": "stage1",
-  "summary": "No attachment in the project source. Statement kept. Proved the finite-level uniform constructibility assertion by the finite filtration of S/(varpi_L^m) with residue-field layers, computed by a single K-flat resolution; explicitly checked the quotient normalization and applied the existing normalized DVR tower effectivity. No new nodes, no finite Tor, no noetherian scheme assumption, and no category identification with a differently defined complete coefficient category. Ambient linearity is reused. Mathlib searches actually run and recorded.",
-  "blueprint": "Realizes the last paragraph of def-weil-rationalization-karoubi: preservation of integral representatives before rationalization, with the completion and every finite reduction checked. The unit has no proof steps to replace.",
+  "summary": "Q98 repair of the 2026-10-17 long-step return: statement, Lean record and steps 1-2 retained verbatim. Extracted finite-field sheaf scalar extension, filtered-coefficient tensor bounds and evaluation-compatible strict Roos comparison as three searched statement-only nodes. Replaced former steps 3-5 by six short steps; no finite Tor or noetherian scheme hypothesis added.",
+  "blueprint": "The last paragraph of def-weil-rationalization-karoubi (also unchanged in main-20261015) defines scalar extension on integral representatives before rationalization. The retained route proves its integral preservation prerequisite. New nodes serve respectively residue-field layers, finite coefficient devissage, and the strict completed-tensor cone comparison.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-complex-ses-triangle",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-sf-derived-homology-long-exact",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
+    "why": "Coefficient DVR structure, finite residue fields and cancellation in the finite ideal filtration."
    },
    {
     "node": "lem-coef-normalized-dvr-effectivity",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
-   },
-   {
-    "node": "lem-weil-derived-limit-products-core",
-    "why": "Generic coefficient, exact inverse-image/sheafification, complex-triangle or normalized-tower effectivity tool used in the indicated proof step; sk-def-sf-operations has no statement supplying this input and its ambient-typing route is unchanged."
+    "why": "Normalized tower effectivity and derived completeness after the finite-level and coherent transition checks."
    }
   ]
  },
@@ -246,12 +283,12 @@
   "lem-weil-derived-limit-products-core"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NS-e9742def5",
-  "group": "NS",
+  "reviewer": "NT-cc-Q98-8a9c6aee3",
+  "group": "Q98",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-e9742def5 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All five steps check out: normalized quotient transitions, finite residue-layer constructibility, uniform cohomological bounds, effectivity and linearity. No new nodes, duplicate split or dependency path back to the item. Master target morphisms and coefficient categories were checked without assuming a condensed-category comparison. Detailed checks and accepted tool uses are recorded in review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-8a9c6aee3 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the statement of every cited node, the effectivity node's proof, Stacks 09B5, 093V and 07KC, and the main-20261015 last paragraph of def-weil-rationalization-karoubi. The item's statement is unchanged and nothing is weakened. All 8 steps check out. Step 2 meets every clause of def-coef-normalized-dvr-tower with E:=L, using the strict K-flat tower. In steps 4-5, B_m is finite with layers k_L, and the layer complexes are Q because rho_1 factors through rho_m. Step 6 matches the definition: N is exactly Roos(X). In step 7, effectivity applies because its proof uses the strict-model Roos limit with its projections, and step 6 gives the evaluation-compatible identification. The three new nodes are true and are not duplicates. The finite-field node holds because k' is finite free over k, so T is exact and constant models become V tensor k'. The filtration node holds by termwise short exact sequences of complexes from flat terms, 09B5 (B finite, hence Noetherian; arbitrary scheme) and descending induction. The Roos node holds because exact products make Roos(u) a quasi-isomorphism, lem-weil-derived-limit-roos-complex gives eta, and pr_n composed with eta and Roos(u) gives the stated evaluation compatibility. Small cases tested: Y empty, L=E, m=1, t=0, r=s, identity and zero transitions. No new node restates a clause of the item, and there is no cycle or missing or merged citation. I accept the declared tool_uses lem-weil-l-adic-extension-integers-dvr and lem-coef-normalized-dvr-effectivity. FIX makes two citation repairs in the item only. Step 3 now cites def-weil-integral-derived-reduction for P_1 representing K_1. Step 7 now cites def-weil-proetale-constructible-sheaf and def-weil-finite-torsion-constructibility, with a sentence saying the two notions agree for A_{L,m}, which the integral definition requires. Both are definitions of the same unit, so the route is unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_invalidation": {
   "date": "2026-10-16",

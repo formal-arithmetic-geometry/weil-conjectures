@@ -21,13 +21,15 @@
  ],
  "proof": [
   {
-   "text": "Fix $n=|M|\\ge1$ and the morphism $f$. All sheaves and higher direct images in this argument are abelian sheaves on the small etale sites. The source category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $f_*$ is additive and left exact by [lem-weil-pbc-direct-image-left-exact]. Consequently [lem-weil-pbc-horseshoe-delta-functor] (2) applies: the $R^qf_*$ are additive functors and give a long exact sequence for every short exact sequence. We prove, by strong induction on $|N|$, that every $R^qf_*\\underline N$, $q\\ge0$, is constructible for each finite abelian group $N$ whose order divides $n$. For $N=0$, its constant sheaf is zero and every derived image is zero: an additive functor sends the zero identity to zero, so its value on the zero object is a zero object. The zero sheaf is finite constant, hence constructible by [def-weil-pbc-constructible-abelian-sheaf].",
+   "text": "Fix $n=|M|\\ge1$ and the morphism $f$. All sheaves and higher direct images in this argument are abelian sheaves on the small etale sites. The source category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $f_*$ is additive and left exact by [lem-weil-pbc-direct-image-left-exact]. By [def-weil-pbc-direct-image], $R^qf_*F=\\mathcal H^q(Rf_*F)$ with $Rf_*F\\cong Q(f_*I)$ for every K-injective resolution $F\\to I$; an injective resolution $I$ of $F$ concentrated in degrees $\\ge0$ is K-injective by [lem-weil-pbc-dplus-injective-representative] (2), so $R^qf_*F\\cong H^q(f_*I)$, the right derived functor of $f_*$ computed by injective resolutions. Constructibility is invariant under isomorphism, so we may work with the latter. Consequently [lem-weil-pbc-horseshoe-delta-functor] (2) applies: the $R^qf_*$ are additive functors and give a long exact sequence for every short exact sequence. We prove, by strong induction on $|N|$, that every $R^qf_*\\underline N$, $q\\ge0$, is constructible for each finite abelian group $N$ whose order divides $n$. For $N=0$, its constant sheaf is zero and every derived image is zero: an additive functor sends the zero identity to zero, so its value on the zero object is a zero object. The zero sheaf is finite constant, hence constructible by [def-weil-pbc-constructible-abelian-sheaf].",
    "uses": [
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-direct-image-left-exact",
     "lem-weil-pbc-horseshoe-delta-functor",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-constructible-abelian-sheaf"
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-dplus-injective-representative"
    ],
    "elementary": false,
    "source": {
@@ -57,37 +59,55 @@
    }
   },
   {
-   "text": "Apply [thm-fin-projective-curve-constant] to $f$ and $\\ell$. Its projectivity, finite-type-over-a-field and geometric-fibre-dimension hypotheses are unchanged, and step 2 supplies the required invertibility. It gives constructibility of all $R^qf_*\\underline H$, since the chosen additive isomorphism $H\\cong\\mathbf F_\\ell$ induces an isomorphism of constant abelian sheaves. The inductive hypothesis applies to $Q$ by step 2 and gives constructibility of all $R^qf_*\\underline Q$. The induction is simultaneous in every degree, so it supplies the terms in degrees $q$ and $q+1$, and in degree $q-1$ when $q>0$, needed below; the degree $-1$ boundary is treated separately in step 6.",
+   "text": "Apply [thm-fin-projective-curve-constant] to $f$ and $\\ell$. Its projectivity, finite-type-over-a-field and geometric-fibre-dimension hypotheses are unchanged, and step 2 supplies the required invertibility. That node is stated for the constant sheaf of $\\mathbf F_\\ell$-modules, its higher direct images in $\\Mod(\\,\\cdot_{\\Et},\\mathbf F_\\ell)$, and constructibility as sheaves of $\\mathbf F_\\ell$-modules [def-weil-pbc-constructible-complexes]; it gives a constructible $\\mathbf F_\\ell$-module sheaf $G_q=R^qf_*\\underline{\\mathbf F_\\ell}$. We transport this to the abelian setting of step 1. (a) The underlying abelian sheaf of the constant $\\mathbf F_\\ell$-module sheaf is the constant abelian sheaf $\\underline{\\mathbf F_\\ell}$: both are the sheafification of the same constant presheaf, and by [def-weil-presheaf-modules-sheafification] the sheafification of a presheaf of modules has the abelian sheafification as underlying abelian sheaf [def-weil-pbc-constant-sheaf]. (b) By [lem-sbc-higher-direct-image-forget-comparison], the underlying abelian sheaf of $G_q$ is isomorphic to the abelian $R^qf_*\\underline{\\mathbf F_\\ell}$ of [def-weil-pbc-direct-image]. (c) Forgetting scalars preserves constructibility: take the stratification $(\\iota_k)$ witnessing [def-weil-pbc-etale-constructible-sheaf] for $G_q$; by [prop-weil-pbc-inverse-image-modules-exact] (2) the module inverse images along $\\iota_k$ and then along the members $U_i\\to Z_k$ of the trivializing covers have the abelian inverse images as underlying abelian sheaves, the module isomorphisms to $\\underline{M_i}$ forget to abelian isomorphisms, and by (a) for the finite module $M_i$ the underlying abelian sheaf of $\\underline{M_i}$ is the constant abelian sheaf on the finite group $M_i$. So the same strata and covers witness [def-weil-pbc-constructible-abelian-sheaf], and all abelian $R^qf_*\\underline{\\mathbf F_\\ell}$ are constructible.",
    "uses": [
     "thm-fin-projective-curve-constant",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-constructible-abelian-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.md",
-    "place": "Proof, prime-factor induction"
+    "place": "Proof, prime-factor induction ('starting from [thm-fin-projective-curve-constant]'); coefficient comparison as in Stacks 03RW (2),(3)"
    }
   },
   {
-   "text": "Set $\\Lambda=\\mathbf Z/n$. Each of $H,N,Q$ is killed by $n$: for any element $z$ of a finite group $P$ of order dividing $n$, its cyclic subgroup has size equal to its least positive period $e$, and counting its cosets gives $e\\mid|P|\\mid n$, hence $nz=0$. This equality passes to constant sheaves by sheafification. Additivity from [lem-weil-pbc-horseshoe-delta-functor] (2) gives $n\\,\\mathrm{id}_{R^qf_*\\underline P}=R^qf_*(n\\,\\mathrm{id}_{\\underline P})=0$. By [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] (2),(3), all these sheaves have unique $\\Lambda_S$-module structures and every abelian map between them is $\\Lambda_S$-linear. A constructible abelian sheaf killed by $n$ is constructible with this module structure: on each stratum of [def-weil-pbc-constructible-abelian-sheaf], additivity of inverse image in [prop-weil-pbc-inverse-image-exact] preserves the equation $n\\,\\mathrm{id}=0$. A local constant finite group model is therefore killed by $n$: discard empty members of the trivializing cover and evaluate at a geometric point, using the canonical group identification of [lem-weil-pbc-constant-sheaf-geometric-stalk]; give that group its integer-multiplication action modulo $n$. Its constant module sheaf is obtained by sheafifying this action on the constant presheaf; thus its underlying abelian sheaf is the chosen constant abelian model by [def-weil-pbc-constant-sheaf]. The local isomorphisms are linear by clause (3) of the same killed-by-$n$ node. They are exactly the finite constant module models required by [def-weil-pbc-etale-constructible-sheaf]. Conversely, forgetting scalars in such local module models gives the abelian constructibility condition. Thus the sheaves obtained in step 4 are constructible $\\Lambda_S$-module sheaves, without changing their underlying abelian higher direct images. The module inverse image to a stratum has this same underlying abelian inverse image by [prop-weil-pbc-inverse-image-modules-exact] (2). Thus the local-model comparison also applies to the module restrictions appearing in the definition.",
+   "text": "Since the chosen additive isomorphism $H\\cong\\mathbf F_\\ell$ induces an isomorphism of constant abelian sheaves, hence of their abelian higher direct images, all $R^qf_*\\underline H$ are constructible. The inductive hypothesis applies to $Q$ by step 2 and gives constructibility of all $R^qf_*\\underline Q$. The induction is simultaneous in every degree, so it supplies the terms in degrees $q$ and $q+1$, and in degree $q-1$ when $q>0$, needed below; the degree $-1$ boundary is treated separately in step 7.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.proof.md",
+    "place": "Proof, 'Proceed by induction along this filtration'"
+   }
+  },
+  {
+   "text": "Set $\\Lambda=\\mathbf Z/n$. Each of $H,N,Q$ is killed by $n$: for any element $z$ of a finite group $P$ of order dividing $n$, its cyclic subgroup has size equal to its least positive period $e$, and counting its cosets gives $e\\mid|P|\\mid n$, hence $nz=0$. Hence $n\\,\\mathrm{id}=0$ on the constant presheaf with value $P$, and on its sheafification $\\underline P$ [def-weil-pbc-constant-sheaf], sheafification being exact and so additive by [lem-weil-pbc-sheafification-exact] (2). Additivity from [lem-weil-pbc-horseshoe-delta-functor] (2) gives $n\\,\\mathrm{id}_{R^qf_*\\underline P}=R^qf_*(n\\,\\mathrm{id}_{\\underline P})=0$. By [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] (2),(3), all these sheaves have unique $\\Lambda_S$-module structures and every abelian map between them is $\\Lambda_S$-linear. By [lem-weil-pbc-constructible-abelian-zn-module-constructible], the constructible abelian sheaves $R^qf_*\\underline H$ and $R^qf_*\\underline Q$ of step 5 (all $q$) are, on $S$ and with this structure, constructible sheaves of $\\Lambda$-modules in the sense of [def-weil-pbc-etale-constructible-sheaf], with the same underlying abelian sheaf.",
    "uses": [
     "lem-weil-pbc-horseshoe-delta-functor",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
-    "def-weil-pbc-constructible-abelian-sheaf",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-constant-sheaf"
+    "lem-weil-pbc-constructible-abelian-zn-module-constructible",
+    "def-weil-pbc-etale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RW (definition-constructible), parts (2),(3); elementary comparison of local models using the cited killed-by-n lemma"
+    "place": "Definition 03RW (definition-constructible), parts (2),(3); the comparison is the cited node lem-weil-pbc-constructible-abelian-zn-module-constructible"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to step 3, with the hypotheses checked in step 1. For a fixed $q\\ge0$, write $A=R^qf_*\\underline H$, $B=R^qf_*\\underline N$, $C=R^qf_*\\underline Q$ and $D=R^{q+1}f_*\\underline H$. For $q>0$ put $T=R^{q-1}f_*\\underline Q$; for $q=0$ put $T=0$, using the initial $0\\to f_*\\underline H\\to f_*\\underline N$ of the long exact sequence. Its exact segment $T\\xrightarrow u A\\xrightarrow v B\\xrightarrow w C\\xrightarrow z D$ gives $0\\to\\operatorname{coker}u\\to B\\to\\ker z\\to0$: $\\ker v=\\operatorname{im}u$ makes the map from $A/\\operatorname{im}u$ injective with image $\\operatorname{im}v=\\ker w$, and $\\operatorname{im}w=\\ker z$ makes the map to $\\ker z$ surjective. These are also the module kernel and cokernel and a module short exact sequence: by [def-weil-sheaf-of-modules-category], kernels are sectionwise and cokernels are sheafified sectionwise quotients with inherited scalar action, so their underlying abelian objects are precisely those just computed. All arrows are linear by step 5.",
+   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to step 3, with the hypotheses checked in step 1. For a fixed $q\\ge0$, write $A=R^qf_*\\underline H$, $B=R^qf_*\\underline N$, $C=R^qf_*\\underline Q$ and $D=R^{q+1}f_*\\underline H$. For $q>0$ put $T=R^{q-1}f_*\\underline Q$; for $q=0$ put $T=0$, using the initial $0\\to f_*\\underline H\\to f_*\\underline N$ of the long exact sequence. Its exact segment $T\\xrightarrow u A\\xrightarrow v B\\xrightarrow w C\\xrightarrow z D$ gives $0\\to\\operatorname{coker}u\\to B\\to\\ker z\\to0$: $\\ker v=\\operatorname{im}u$ makes the map from $A/\\operatorname{im}u$ injective with image $\\operatorname{im}v=\\ker w$, and $\\operatorname{im}w=\\ker z$ makes the map to $\\ker z$ surjective. These are also the module kernel and cokernel and a module short exact sequence: by [def-weil-sheaf-of-modules-category], kernels are sectionwise and cokernels are sheafified sectionwise quotients with inherited scalar action, so their underlying abelian objects are precisely those just computed. All arrows are linear by step 6.",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact",
     "def-weil-sheaf-of-modules-category"
@@ -99,11 +119,13 @@
    }
   },
   {
-   "text": "The ring $\\Lambda=\\mathbf Z/n$ is finite and commutative, including $n=1$. In step 6, $T,A,C,D$ are constructible $\\Lambda_S$-module sheaves by steps 4 and 5 (and $T=0$ when $q=0$). Apply [thm-constructible-serre] (1) to $u:T\\to A$ and $z:C\\to D$: their cokernel and kernel are constructible. Clause (2) applied to the short exact sequence of step 6 then makes $B$ constructible as a $\\Lambda_S$-module sheaf. Forgetting the scalar action in its finite constant local models gives constructibility as an abelian sheaf by [def-weil-pbc-etale-constructible-sheaf] and [def-weil-pbc-constructible-abelian-sheaf]. This finishes the induction for every $q\\ge0$. Taking $N=M$ proves the item. If negative degrees are included in the notation, they vanish: use an injective resolution concentrated in nonnegative degrees in the definition [def-weil-pbc-direct-image], whose image under $f_*$ is still concentrated in those degrees.",
+   "text": "The ring $\\Lambda=\\mathbf Z/n$ is finite and commutative, including $n=1$. In step 7, $T,A,C,D$ are constructible $\\Lambda_S$-module sheaves by steps 4, 5 and 6 (and $T=0$ when $q=0$). Apply [thm-constructible-serre] (1) to $u:T\\to A$ and $z:C\\to D$: their cokernel and kernel are constructible. Clause (2) applied to the short exact sequence of step 7 then makes $B$ constructible as a $\\Lambda_S$-module sheaf. Forgetting scalars gives constructibility of the underlying abelian sheaf $B$ by the argument (c) of step 4: [prop-weil-pbc-inverse-image-modules-exact] (2) for the inverse images, and [def-weil-presheaf-modules-sheafification] for the underlying abelian sheaves of the finite constant module models, in [def-weil-pbc-etale-constructible-sheaf] and [def-weil-pbc-constructible-abelian-sheaf]. This finishes the induction for every $q\\ge0$. Taking $N=M$ proves the item. If negative degrees are included in the notation, they vanish: use an injective resolution concentrated in nonnegative degrees in the definition [def-weil-pbc-direct-image], whose image under $f_*$ is still concentrated in those degrees.",
    "uses": [
     "thm-constructible-serre",
     "def-weil-pbc-etale-constructible-sheaf",
     "def-weil-pbc-constructible-abelian-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-presheaf-modules-sheafification",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false,
@@ -119,21 +141,24 @@
   "lem-weil-pbc-horseshoe-delta-functor",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-constructible-abelian-sheaf",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-sheafification-exact",
   "thm-fin-projective-curve-constant",
-  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-etale-constructible-sheaf",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "lem-weil-pbc-constructible-abelian-zn-module-constructible",
   "lem-weil-pbc-derived-functor-long-exact",
   "def-weil-sheaf-of-modules-category",
-  "thm-constructible-serre",
-  "def-weil-pbc-direct-image"
+  "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/cor-fin-projective-curve-finite-group.proof.md",
   "place": "Proof: prime-factor filtration and long exact sequence; coefficient-ring typing made explicit from Stacks 03RW and 03RZ"
  },
  "mathlib_searches": [
@@ -181,7 +206,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -219,11 +244,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "cor-fin-projective-curve-finite-group",
   "worker": "stage1",
-  "summary": "Kept the mathematical statement and prime-factor induction route. Expanded the induction and q=0 boundary case; cited exact sheafification, enough injectives, left exact direct image, derived additivity and the long exact sequence. Resolved the finite-module/abelian-sheaf mismatch with the existing killed-by-n node and an explicit local-model argument over Z/|M|. Corrected statement dependencies to include the constant abelian sheaf and abelian constructibility notions. No new nodes or attachment found.",
-  "blueprint": "Steps 1-4 realize the first paragraph (finite prime-factor filtration, exact constant sheaves, induction from thm-fin-projective-curve-constant); steps 5-6 make the displayed cokernel/kernel sequence well typed; step 7 realizes the final kernel/cokernel/extension paragraph.",
+  "summary": "Audited and completed the existing seven-step prime-factor induction split against the current 2026-10-15 blueprint and the cited DAG statements. No new nodes are needed: all non-elementary ingredients already exist as DAG nodes; the finite-group filtration and exact-segment calculations are elementary consequences written explicitly. Updated the source and proof provenance to the current blueprint and retained the explicit coefficient-ring comparison needed to apply the constructible-sheaf Serre theorem. Maintainer review (Q59 cc reader, 2026-10-17): step 4 (now split into steps 4-5) makes the F_ell-module/abelian comparison for thm-fin-projective-curve-constant explicit (lem-sbc-higher-direct-image-forget-comparison, module sheafification, module inverse image); step 6 (old step 5) cites the existing lem-weil-pbc-constructible-abelian-zn-module-constructible instead of reproving it inline; step 1 identifies the derived-category R^qf_* with the classical derived functor.",
+  "blueprint": "Steps 1-2 realize the finite filtration and induction setup; step 3 realizes exactness of constant sheaves ('as may be checked on every stalk'); steps 4-5 realize the induction start from thm-fin-projective-curve-constant, step 4 making its F_ell-module/abelian coefficient comparison explicit; step 6 supplies the coefficient-ring typing (Z/n-module structure) and step 7 the long-exact-sequence short exact sequence with the displayed cokernel and kernel; step 8 applies the kernel, cokernel and extension clauses of thm-constructible-serre, with the negative-degree term zero, as in the current blueprint proof.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-module-sheaves-enough-injectives",
@@ -254,16 +279,20 @@
     "why": "Kernel, cokernel and extension closure in finite-coefficient etale module sheaves, explicitly converted from the abelian setting."
    },
    {
-    "node": "prop-weil-pbc-inverse-image-exact",
-    "why": "Additivity of abelian inverse image carries n-annihilation to each stratum in the coefficient comparison."
-   },
-   {
-    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "why": "Identifies a finite constant local model with its geometric stalk, proving that its group is killed by n."
-   },
-   {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
     "why": "The finite constant-ring module inverse image has the same underlying abelian inverse image, so the two constructibility definitions use the same restrictions."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Underlying abelian sheaf of the F_ell-module higher direct image of thm-fin-projective-curve-constant is the abelian higher direct image; no node of this unit gives the coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-abelian-zn-module-constructible",
+    "why": "A constructible abelian sheaf killed by n is a constructible Z/n-module sheaf, needed to apply thm-constructible-serre; generic coefficient comparison, no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "A bounded below complex of injectives is K-injective, identifying the derived-category R^qf_* with the classical derived functor."
    }
   ]
  },
@@ -277,15 +306,18 @@
   "thm-constructible-serre",
   "prop-weil-pbc-inverse-image-exact",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-constructible-abelian-zn-module-constructible",
+  "lem-weil-pbc-dplus-injective-representative"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NZ-1bf1048e9",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q59-cbbc5a581",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-1bf1048e9 (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed; review.md records hypothesis checks, all seven proof steps, edge cases, coefficient-category/base-change distinctions, dependency reuse, graph checks, and accepted generic tool uses. No new nodes or repair files are needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-cbbc5a581 (reviewer sub-agent of L); spot-checked: Read the item, its blueprint statement and proof (identical in the master and main-20261015 snapshots), every cited statement, and Stacks 093J, 03RW, 03RZ and 015B. The statement is unchanged and matches the source; there are no new nodes and no cycles. Three faults fixed, with the corrected item in fixes/dag/nodes/sec-smooth-purity/. (1) C4/E6: old step 4 used thm-fin-projective-curve-constant, which is stated for F_ell-module sheaves with the module R^qf_* (its Lean is in ModuleCat ZMod ell), as if it were the abelian R^qf_* used by this item. New step 4 makes the comparison explicit: lem-sbc-higher-direct-image-forget-comparison, def-weil-presheaf-modules-sheafification for the constant sheaf, and prop-weil-pbc-inverse-image-modules-exact (2) for forgetting scalars from module constructibility to abelian constructibility. The rest of old step 4 is now step 5. (2) C5, the long step 5 (2070 characters): it re-proved inline the existing node lem-weil-pbc-constructible-abelian-zn-module-constructible; the step now cites that node and is 1146 characters. Step 8 (old 7) cites the same two facts for forgetting scalars. (3) Step 1 now identifies the derived-category R^qf_* with the classical derived functor through def-weil-pbc-direct-image and lem-weil-pbc-dplus-injective-representative (2). Checked: the filtration on Z/4 and Z/ell, invertibility of ell, the cases n=1, q=0 and negative degrees, and that every step is now under 2000 characters. split_report.tool_uses updated: three tools added, two that are no longer cited removed. The top-level tool_uses field, owned by the maintainer, should be refreshed at the merge. review_split.py PASS on a /tmp copy.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup",

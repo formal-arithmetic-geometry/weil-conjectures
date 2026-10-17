@@ -88,28 +88,40 @@
    }
   },
   {
-   "text": "For any $g:T\\to S$, pull back the local models from Step 3. Both $\\mathcal O_S$ and $E$ are locally free, so ordinary tensor pullback computes their derived pullback: tensoring a free module is a finite direct sum of the identity functor and has no higher Tor. The canonical derived base-change isomorphism of Step 2 consequently induces the canonical isomorphisms $f_{T,*}\\mathcal O_{X_T}\\cong\\mathcal O_T$ and $R^1f_{T,*}\\mathcal O_{X_T}\\cong g^*E$, and the higher Zariski direct images vanish. In particular take an affine etale $v:V\\to S$. The Leray spectral sequence for $f_V:X_V\\to V$, together with affine vanishing for the quasi-coherent modules $\\mathcal O_V$ and $v^*E$, gives the canonical edge isomorphism $H^1(X_V,\\mathcal O_{X_V})\\cong\\Gamma(V,v^*E)$. All maps here are the canonical base-change and edge maps, so their compositions with the usual cohomology pullback for $W\\to V$ are the section pullbacks for $E$; the base-change map is obtained from the adjunction unit and its composition law. In degree zero the same construction is exactly structural pullback $\\Gamma(V,\\mathcal O_V)\\to\\Gamma(X_V,\\mathcal O_{X_V})$, and is bijective. Explicitly, write $j_V:X_V\\to X$ and $j_W:X_W\\to X_V$ for a tower over $W\\xrightarrow{h}V\\xrightarrow{v}S$. The transpose defining the direct-image comparison for the composite is $Rf_*\\eta_{j_Vj_W}$. Under the composition isomorphisms the composite adjunction unit is $\\eta_{j_V}$ followed by $Rj_{V,*}(\\eta_{j_W})$ after pullback. Thus transposing the two successive base-change maps gives the same map as transposing the composite; taking $H^1$ and sections gives the displayed restriction compatibility. For structure modules, the additional derived-to-ordinary comparison is transposed from the ordinary unit, whose section formula is successive structural pullback, so the same unit identity applies. The affine Leray edge identification is evaluation of this derived direct-image identification; its functoriality is consequently this equality, rather than a choice of fibrewise isomorphisms. The choice-independence and composition clauses of [lem-weil-pbc-module-cohomology-fmap-functorial] identify these section maps with the cohomology maps of [def-weil-pbc-module-cohomology-fmap]. Indeed, in its resolution notation the map is H^1(Gamma(beta)) followed by the inverse of H^1(Gamma(lambda)); this is precisely the global-sections image of the same derived adjunction-unit arrow, as in Remark 01FB. Thus the equality of unit arrows just proved is an equality for the specified cohomology pullbacks, independently of the resolutions used.",
+   "text": "For any $g:T\\to S$, pull back the local models from Step 3. Both $\\mathcal O_S$ and $E$ are locally free, so ordinary tensor pullback computes their derived pullback: tensoring a free module is a finite direct sum of the identity functor and has no higher Tor. The canonical derived base-change isomorphism of Step 2 consequently induces the canonical isomorphisms $f_{T,*}\\mathcal O_{X_T}\\cong\\mathcal O_T$ and $R^1f_{T,*}\\mathcal O_{X_T}\\cong g^*E$, and the higher Zariski direct images vanish; the second map is canonical because it is $H^1$ of the base-change map composed with $Lg^*$ of the truncation $K\\to H^1(K)[-1]=E[-1]$, which is an isomorphism on the local models. In particular take an affine etale $v:V\\to S$. The Leray spectral sequence for $f_V:X_V\\to V$, together with affine vanishing for the quasi-coherent modules $\\mathcal O_V$ and $v^*E$, gives the canonical edge isomorphism $H^1(X_V,\\mathcal O_{X_V})\\cong\\Gamma(V,v^*E)$; in degree zero the same construction is structural pullback $\\Gamma(V,\\mathcal O_V)\\to\\Gamma(X_V,\\mathcal O_{X_V})$, which is bijective.",
    "uses": [
     "lem-pc-rf-perfect-base-change",
     "pqf-lem-leray",
     "pqf-lem-affine-vanishing",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0GKA, final sentence (base-change compatibility); perfect.tex Tag 0B91; cohomology.tex Tags 01F2 and 01XB"
+   }
+  },
+  {
+   "text": "Let $h:W\\to V$ be an arrow of affine etale base objects, $v:V\\to S$, and consider the identifications of Step 4. Write $j_V:X_V\\to X$, $j_W:X_W\\to X_V$, $f_W:X_W\\to W$. By the horizontal pasting lemma for derived base-change maps [lem-pc-derived-base-change-horizontal-pasting], applied to the squares $(f,f_V,v,j_V)$ and $(f_V,f_W,h,j_W)$, the base-change map of the outer rectangle (for $v\\circ h$) equals $Lh^*$ of the map for $v$ followed by the map for $h$, up to the composition isomorphisms of derived pullbacks. The derived-to-ordinary comparisons of [def-pc-derived-module-base-change-map] for $\\mathcal O_X$ are transposes of the ordinary tensor-pullback units; these units compose by the identity/composition law of module pullback [lem-pc-module-pullback-identity-composition], so the comparison for $j_Vj_W$ is the comparison for $j_W$ after $Lj_W^*$ of that for $j_V$. Taking $H^1$ and sections over $W$ gives the restriction compatibility: the composite $\\Gamma(V,v^*E)\\to\\Gamma(W,(vh)^*E)$ is the section pullback $\\rho_{W,V}$ of $E_{\\mathrm{et}}$, and on the cohomology side the map is the pullback along $j_W$. For the latter identification, the cohomology pullback of [def-weil-pbc-module-cohomology-fmap] is, in its resolution notation, $H^1(\\Gamma(\\beta))$ followed by the inverse of $H^1(\\Gamma(\\lambda))$, which is the global-sections image of the derived adjunction unit $\\mathcal O_{X_V}\\to Rj_{W,*}Lj_W^*\\mathcal O_{X_V}$ (Remark 01FB); the choice-independence and composition clauses of [lem-weil-pbc-module-cohomology-fmap-functorial] make this independent of the resolutions, so the equality of base-change maps just obtained is an equality for the specified cohomology pullbacks.",
+   "uses": [
     "def-pc-derived-module-base-change-map",
     "def-weil-pbc-module-cohomology-fmap",
     "def-pc-derived-base-change-map",
     "lem-pc-ringed-spaces-derived-adjoint",
     "lem-pc-derived-direct-image-composition",
+    "lem-pc-derived-base-change-horizontal-pasting",
     "lem-pc-module-pullback-adjunction",
     "lem-pc-module-pullback-identity-composition",
     "lem-weil-pbc-module-cohomology-fmap-functorial"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0GKA, base-change compatibility; Tag 0B91; Tags 01F2 and 01XB; Section 01F7, Lemma 01F8 (lemma-functoriality) and Remark 01FB (remark-explain-arrow), for the normalized resolution cohomology maps"
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 0ATM (remark-compose-base-change-horizontal) for composing base-change maps; Section 01F7, Lemma 01F8 (lemma-functoriality) and Remark 01FB (remark-explain-arrow) for the normalized resolution cohomology maps; curves.tex Tag 0GKA base-change compatibility"
    }
   },
   {
-   "text": "Let $A$ be the associated additive structure sheaf in the fixed coefficient universe of the abelian direct-image functor, and $\\mathcal P(V)=H^1(X_V{}_{\\mathrm{et}},A|_{X_V})$. The higher-direct-image presheaf theorem identifies $R^1f_*A$ with $\\mathcal P^\\#$. For affine etale $V$, $X_V$ is quasi-compact separated: $f_V$ is proper by proper permanence and $V$ is affine. Its restricted coefficient sheaf is the same associated structure sheaf, with the same sectionwise lift, since both assign the (possibly lifted) ring of functions to every etale object. Apply the pullback-natural comparison to $X_V,\\mathcal O_{X_V}$, then Step 4, then the sectionwise lift if used. This gives bijections $b_V:\\mathcal P(V)\\to L\\Gamma(V,v^*E)$. For every arrow between affine etale base objects, the new comparison's pullback square and the canonical coherent edge/base-change maps from Step 4 give $b_W\\operatorname{res}_{W,V}=\\rho_{W,V}b_V$. For a base function $a$, apply the comparison's coefficient naturality to multiplication by $f_V^*a$; the coherent edge and base-change maps are linear: they are induced by morphisms of complexes of modules over $\\Gamma(V,\\mathcal O_V)$, so on cycles they send $a z$ to $a$ times the image of $z$, and this equality passes to the quotient by boundaries. Thus $b_V(a x)=a b_V(x)$, with transported scalar action if lifted. No cohomology in one universe is identified with another without this explicit comparison.",
+   "text": "Let $A$ be the associated additive structure sheaf in the fixed coefficient universe of the abelian direct-image functor, and $\\mathcal P(V)=H^1(X_V{}_{\\mathrm{et}},A|_{X_V})$. The higher-direct-image presheaf theorem identifies $R^1f_*A$ with $\\mathcal P^\\#$. For affine etale $V$, $X_V$ is quasi-compact separated: $f_V$ is proper by proper permanence and $V$ is affine. Its restricted coefficient sheaf is the same associated structure sheaf, with the same sectionwise lift, since both assign the (possibly lifted) ring of functions to every etale object. Apply the pullback-natural comparison to $X_V,\\mathcal O_{X_V}$, then Step 4, then the sectionwise lift if used. This gives bijections $b_V:\\mathcal P(V)\\to L\\Gamma(V,v^*E)$. For every arrow between affine etale base objects, the new comparison's pullback square and the canonical coherent edge/base-change maps from Steps 4 and 5 give $b_W\\operatorname{res}_{W,V}=\\rho_{W,V}b_V$. For a base function $a$, apply the comparison's coefficient naturality to multiplication by $f_V^*a$; the coherent edge and base-change maps are linear: they are induced by morphisms of complexes of modules over $\\Gamma(V,\\mathcal O_V)$, so on cycles they send $a z$ to $a$ times the image of $z$, and this equality passes to the quotient by boundaries. Thus $b_V(a x)=a b_V(x)$, with transported scalar action if lifted. No cohomology in one universe is identified with another without this explicit comparison.",
    "uses": [
     "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
     "sbc-lem-higher-direct-image-presheaf",
@@ -123,7 +135,7 @@
    }
   },
   {
-   "text": "Extend the compatible $b_V$ to a presheaf morphism $b:\\mathcal P\\to E_{\\mathrm{et}}$ as follows. For an arbitrary etale object $U$, restrict a cohomology class to an affine open cover of $U$, apply $b_V$ on each member, and glue in $E_{\\mathrm{et}}$. The target is a sheaf by quasi-coherent descent. Compatibility is checked after covering every overlap by affine opens, so the glued section is independent of the cover and is compatible with every etale arrow; for an arrow, cover its source by affine opens lying over affine opens of its target. The affine-opens-basis lemma provides all these covers, which are etale coverings by the definition of the small site. The same argument proves linearity of $b$. On every affine object $b$ is bijective by Step 5. Hence $b$ is locally injective and locally surjective: restrict any equality or desired target section to an affine open cover and use those bijections. The locally-bijective sheafification criterion now gives $\\mathcal P^\\#\\cong E_{\\mathrm{et}}$ as abelian sheaves. The map and its inverse are module-linear (apply the bijection to $a x$ to check the inverse), so it is an isomorphism of $\\mathcal O_{S,\\mathrm{et}}$-modules. For degree zero, take the natural structural map $\\mathcal O_{S,\\mathrm{et}}\\to f_*\\mathcal O_{X,\\mathrm{et}}$. Both sides are sheaves, and its components on affine etale objects are bijective by Step 4 and the degree-zero comparison in Step 5. To prove injectivity on any object, restrict two sections with equal images to an affine open cover and use those bijections, then the sheaf uniqueness axiom. To prove surjectivity, lift a target section on that cover using the bijections; on overlaps the lifts agree after an affine refinement by injectivity, hence agree as sheaf sections and glue to a preimage. Thus this natural map is an isomorphism. This proves both conclusions, including an empty base and rank-zero local models.",
+   "text": "Extend the compatible $b_V$ to a presheaf morphism $b:\\mathcal P\\to E_{\\mathrm{et}}$ as follows. For an arbitrary etale object $U$, restrict a cohomology class to an affine open cover of $U$, apply $b_V$ on each member, and glue in $E_{\\mathrm{et}}$. The target is a sheaf by quasi-coherent descent. Compatibility is checked after covering every overlap by affine opens, so the glued section is independent of the cover and is compatible with every etale arrow; for an arrow, cover its source by affine opens lying over affine opens of its target. The affine-opens-basis lemma provides all these covers, which are etale coverings by the definition of the small site. The same argument proves linearity of $b$. On every affine object $b$ is bijective by Step 6. Hence $b$ is locally injective and locally surjective: restrict any equality or desired target section to an affine open cover and use those bijections. The locally-bijective sheafification criterion now gives $\\mathcal P^\\#\\cong E_{\\mathrm{et}}$ as abelian sheaves. The map and its inverse are module-linear (apply the bijection to $a x$ to check the inverse), so it is an isomorphism of $\\mathcal O_{S,\\mathrm{et}}$-modules. For degree zero, take the natural structural map $\\mathcal O_{S,\\mathrm{et}}\\to f_*\\mathcal O_{X,\\mathrm{et}}$. Both sides are sheaves, and its components on affine etale objects are bijective by Step 4 and the degree-zero comparison in Step 6. To prove injectivity on any object, restrict two sections with equal images to an affine open cover and use those bijections, then the sheaf uniqueness axiom. To prove surjectivity, lift a target section on that cover using the bijections; on overlaps the lifts agree after an affine refinement by injectivity, hence agree as sheaf sections and glue to a preimage. Thus this natural map is an isomorphism. This proves both conclusions, including an empty base and rank-zero local models.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "def-weil-pbc-etale-site",
@@ -148,6 +160,7 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-proper-morphism",
   "def-weil-sheaf-of-modules-category",
+  "lem-pc-derived-base-change-horizontal-pasting",
   "lem-pc-derived-direct-image-composition",
   "lem-pc-h0-geom-connected",
   "lem-pc-module-pullback-adjunction",
@@ -242,7 +255,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "by": "worker",
@@ -336,6 +349,10 @@
    {
     "node": "sbc-lem-smooth-geometrically-reduced",
     "why": "Generic Smooth morphisms have geometrically reduced fibres input for the 0GKA/03P2 argument; no statement of this unit supplies it. It supports the inherited 0GKV structure-cohomology route."
+   },
+   {
+    "node": "lem-pc-derived-base-change-horizontal-pasting",
+    "why": "Generic composition of derived base-change maps for horizontally pasted squares (Stacks Remark 0ATM), used in Step 5 for the tower W→V→S; no statement of this unit supplies it, and the former Step 4 had reproved it inline."
    }
   ]
  },
@@ -359,15 +376,16 @@
   "pqf-lem-leray",
   "pqf-lem-locnoeth-lft",
   "sbc-lem-higher-direct-image-presheaf",
-  "sbc-lem-smooth-geometrically-reduced"
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-derived-base-change-horizontal-pasting"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NN-24495e93e",
-  "group": "NN",
+  "reviewer": "NT-cc-NW-b14bd3875",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-24495e93e (reviewer sub-agent of L); spot-checked: Read the mathematics in full; checked 0GKA, 0B91, 0E62, 0BCD, 03P2/03DW, all six steps, coefficient categories, base-change maps, duplicates and edge cases. Completed new-node metadata and added the existing cohomology-map functoriality citation to Step 4. Corrected JSON files and concrete checks are in fixes/ and review.md; statements unchanged.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b14bd3875 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all six inherited steps, every cited node's statement, and the sources (Stacks 0GKA in curves.tex lines 5018-5056, 0E62, 0B91, 02UZ, 0BCD, 03P2, 03Q8, 01FB, 0ATM). The delivery only changes the status from unsplit to split and adds the report; it creates no new nodes. The mathematics is correct. Step 1 checks out: proper and separated give finite presentation, and lem-pc-h0-geom-connected gets its hypotheses. Steps 2-3 check out: lem-pc-rf-perfect-base-change applies to O_X, flat over S; the 0E62 criterion gives the local splitting O plus P; X_s is Noetherian of dimension 1, so 02UZ kills H^i for i at least 2, and 0BCD gives P locally equal to O^{d}[-1]. Small cases checked: rank 0, a field base with an elliptic curve, a non-reduced base, an empty base. Steps 5-6 check out: X_V is quasi-compact and separated, the common ULift is used for all three sheaves, linearity follows from the coefficient naturality, and the assembly uses locally-bijective sheafification. The added hypothesis that S is Noetherian is extra relative to 0GKA, but nothing in the statement is weakened. Long step 4 (2604 characters) was not one routine argument. It re-derived Stacks Remark 0ATM inline (composing base-change maps of pasted squares, whose proof Stacks omits), and the DAG already has this as lem-pc-derived-base-change-horizontal-pasting (split, reviewed pass). That is a C5/D fault: a standard lemma hidden in a step. FIX: I split it into Step 4 (base change for every T and the affine edge isomorphism, 1082 characters) and Step 5 (compatibility with arrows W to V, 1709 characters, citing the pasting node). Step references in the later steps are renumbered, proof_deps is recomputed, and the pasting node is declared in split_report.tool_uses. The cycle check passes. The statement and the lean record are unchanged. The corrected file is fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-smooth-curve-etale-structure-direct-images.json and the full checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

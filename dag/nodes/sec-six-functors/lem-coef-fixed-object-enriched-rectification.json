@@ -44,49 +44,73 @@
    }
   },
   {
-   "text": "Construct the comparison before proving it an equivalence. A locally cofibrant dg category, meaning that all its mapping complexes are cofibrant, is sent to an algebra by applying the monoidal localization of [lem-coef-projective-chains-monoidal-model] to those complexes, the chain-map compositions and units. Tensor of cofibrant complexes computes the derived tensor, so these are operations in $\\mathcal D$, with all coherence inherited from the monoidal functor. On strings the functor is $(s_0,\\ldots,s_n)\\mapsto(A(s_0,s_1),\\ldots,A(s_{n-1},s_n))$; inert maps select the indicated adjacent entries. For an active map combining two entries, use the chain map $A(s,t)\\otimes A(t,u)\\to A(s,u)$ given on homogeneous $a,b$ by $a\\otimes b\\mapsto(-1)^{|a||b|}ba$. This is the Koszul symmetry followed by the given reverse-order dg composition. For $n$ entries use their signed reversal followed by iterated dg composition; units are the length-zero operations. The reversal sign is $(-1)^{\\sum_{i<j}|a_i||a_j|}$; composing block reversals adds the within-block and between-block pair sums, giving exactly this same total exponent. Thus all active compositions agree, and unitality holds since a unit has degree zero. These are the forward-order operator-algebra operations, while strict dg products retain their usual reverse order. Thus it has exactly the operator-algebra meaning of [def-coef-complete-algebroid]. Mappingwise quasi-isomorphisms go to equivalences because evaluation $V_S$ is conservative by [lem-coef-categorical-algebra-free-monad]. The cofibrant objects are locally cofibrant by [lem-coef-fixed-object-dg-free-model]. The inclusion of cofibrant objects into all dg categories is an equivalence on localizations: its inverse is $Q_S$, and the maps $Q_SA\\to A$ give both composites their natural equivalences to the identities. Naturality of the replacement and two-out-of-three make $Q_S$ preserve weak equivalences. The universal property of homotopy-coherent localization in [lem-coef-combinatorial-localization-presentability] descends these functors and transformations. Consequently the construction gives $\\eta_S:\\mathcal C_S\\to\\mathcal A_S$ with a coherent equivalence $V_S\\eta_S\\simeq U_\\infty$.",
+   "text": "For a locally cofibrant dg category $A$, apply monoidal localization to its cofibrant mapping complexes. On strings send $(s_0,\\ldots,s_n)$ to $(L A(s_0,s_1),\\ldots,L A(s_{n-1},s_n))$; inert maps select adjacent entries. The operator convention is forward order, whereas strict dg composition is reverse order. Define the binary active operation by $a\\otimes b\\mapsto(-1)^{|a||b|}ba$, and the operation on $n$ entries by signed reversal followed by iterated strict composition. Its sign is $(-1)^{\\sum_{i<j}|a_i||a_j|}$. For a partition into consecutive blocks, first reversing within blocks contributes the within-block pairs, and then reversing the blocks contributes the between-block pairs, because the degree of a block product is the sum of its degrees. The total exponent is exactly the displayed sum. Thus substitution of active operations agrees with the single iterated operation. The length-zero operation is the unit, whose degree is zero, so inserting units changes no sign. These formulas define the functor to the category of operators and its inert-preserving algebra structure in [def-coef-complete-algebroid]. The monoidal localization in [lem-coef-projective-chains-monoidal-model] retains these coherences, and tensors of these cofibrant complexes compute derived tensors. The construction is functorial for dg functors. A mappingwise quasi-isomorphism maps to an algebra equivalence by conservativity in [lem-coef-categorical-algebra-free-monad].",
    "uses": [
     "lem-coef-projective-chains-monoidal-model",
     "def-coef-complete-algebroid",
-    "lem-coef-categorical-algebra-free-monad",
-    "lem-coef-fixed-object-dg-free-model",
-    "lem-coef-combinatorial-localization-presentability"
+    "lem-coef-categorical-algebra-free-monad"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3881v4",
-    "place": "Definitions 2.8-2.9 and 5.1; construction of the commutative triangle preceding Proposition 5.2."
+    "place": "Definitions 2.8–2.9 and 5.1; explicit Koszul convention for the comparison."
    }
   },
   {
-   "text": "Let $P\\in\\mathcal D^{S^2}$ and choose an objectwise cofibrant graph representing it, using [lem-coef-fixed-object-dg-free-model]. Form the canonical adjunct $\\alpha_P:G_S(P)\\to\\eta_S F_\\infty(P)$ of the free-unit graph map $P\\to U_\\infty F_\\infty(P)$. The graph formulas in [lem-coef-fixed-object-dg-free-model] and [lem-coef-categorical-algebra-free-monad] are indexed by the same paths $s=x_0,\\ldots,x_n=t$. The algebra formula tensors edges in forward path order; the strict dg formula tensors them in reverse order. By the algebra theorem's explicit adjunct formula and Step 2, $V_S\\alpha_P$ sends a homogeneous tensor $a_1\\otimes\\cdots\\otimes a_n$ on the forward summand to $(-1)^{\\sum_{i<j}|a_i||a_j|}a_n\\otimes\\cdots\\otimes a_1$ in the corresponding strict free summand: each edge is inserted as a length-one word and forward composition is signed reversal followed by strict concatenation. This is the canonical Koszul symmetry isomorphism, whose inverse is the same reversal. In particular it is an equivalence on that summand. At $n=0$ it is the tensor-unit identification; at $n=1$ it is the generating edge. For every $n$ the monoidal-localization identification turns the tensor of these cofibrant complexes into their derived tensor, and coproducts into the displayed coproduct in $\\mathcal D$. Thus the canonical map, not merely an abstract isomorphism of its endpoints, is a coproduct of equivalences and is an equivalence on every $(s,t)$. The argument is natural in $P$ because the adjunct and tensor-word formulas are natural. Apply [lem-coef-infinity-monadic-comparison] to $H=\\eta_S$, $U=U_\\infty$, $V=V_S$, $F=F_\\infty$, $G=G_S$; Step 1 checks every colimit, conservativity and adjoint hypothesis. It proves that $\\eta_S$ is an equivalence of infinity-categories.",
+   "text": "Let $\\mathbf C_S^{\\rm lc}$ be the full relative subcategory on locally cofibrant dg categories, with mappingwise quasi-isomorphisms. Its coherent localization exists by [lem-coef-simplicial-localization-existence]. The replacement $Q_S$ of [lem-coef-fixed-object-dg-free-model] takes all dg categories to cofibrant, hence locally cofibrant, ones. Naturality of $q:Q_S\\to1$ and two-out-of-three imply that $Q_S$ preserves mappingwise quasi-isomorphisms. If $j$ is the inclusion of $\\mathbf C_S^{\\rm lc}$, then $q$ gives relative transformations $jQ_S\\to1$ and $Q_Sj\\to1$ whose components are weak equivalences. The map $\\mathbf C_S^{\\rm lc}\\to L(\\mathbf C_S^{\\rm lc})$ exhibits a localization in the sense of [def-coef-universally-localizing-simplicial-map], and $\\mathbf C_S\\to\\mathcal C_S$ is the homotopy coherent localization of the combinatorial model category of [lem-coef-combinatorial-localization-presentability]; in both cases precomposition is a functor equivalence from functors on the localization onto the full subcategory of functors inverting the weak equivalences. So $j$ and $Q_S$ descend, and the two transformations, viewed as edges of $\\operatorname{Fun}(N(\\mathbf C_S),\\mathcal C_S)$ and $\\operatorname{Fun}(N(\\mathbf C_S^{\\rm lc}),L(\\mathbf C_S^{\\rm lc}))$ between functors inverting weak equivalences, descend to edges between the descended composites. Their components at objects of $\\mathbf C_S$, resp. $\\mathbf C_S^{\\rm lc}$, are images of quasi-isomorphisms, hence equivalences, so by [lem-coef-infinity-pointwise-equivalences] they are equivalence edges of the functor categories on $N(\\mathbf C_S)$ and $N(\\mathbf C_S^{\\rm lc})$; the inverse functor equivalence then makes the descended transformations equivalences. Thus $j$ becomes an equivalence with inverse $Q_S$. Descend Step 2 along this equivalence to obtain $\\eta_S:\\mathcal C_S\\to\\mathcal A_S$. On mapping objects its graph is $L(Q_S A(s,t))$, and $L(q_A(s,t))$ gives the coherent equivalence $V_S\\eta_S\\simeq U_\\infty$.",
    "uses": [
-    "lem-coef-fixed-object-dg-free-model",
-    "lem-coef-categorical-algebra-free-monad",
-    "lem-coef-projective-chains-monoidal-model",
-    "lem-coef-infinity-monadic-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://arxiv.org/html/1312.3881v4",
-    "place": "Proof of Proposition 5.2(f) and the final comparison; HA (2017) Corollary 4.7.3.16 and Remark 4.7.3.17."
-   }
-  },
-  {
-   "text": "For $f:S\\to T$, restriction is $f^*A(s,t)=A(f(s),f(t))$, and the same substitution on strings defines restriction of categorical algebras. On locally cofibrant categories the construction of Step 2 commutes with this substitution: the entries, compositions, units and their structure maps are literally the same localized ones. To compare replacements, for $A$ on $T$ use the span\n$$Q_Sf^*Q_TA\\longrightarrow f^*Q_TA,\\qquad Q_Sf^*Q_TA\\longrightarrow Q_Sf^*A,$$\nwhose first arrow is the replacement map and whose second is $Q_S(f^*q_A)$. Both are mappingwise quasi-isomorphisms; the second is so by two-out-of-three and naturality of $q$, and restriction preserves this class by its component formula. Every object in this span is locally cofibrant, including $f^*Q_TA$. The spans are natural, and their maps to $f^*A$ agree by naturality of $q$. For a composable string of set maps, insert the replacements at all intermediate restrictions; the resulting grid of natural replacement maps commutes, since they are functors and natural transformations. Applying the localization universal property, including transformations and their diagrams, in [lem-coef-combinatorial-localization-presentability] makes those maps coherent equivalences. This provides the restriction comparisons with their composition and identity compatibility. The replacement existence and local cofibrancy used here are exactly [lem-coef-fixed-object-dg-free-model]. More explicitly, the full subcategories of locally cofibrant dg categories, with their mappingwise weak equivalences, form a strict restriction diagram over sets: $(gf)^*=f^*g^*$ on entries and compositions. Their inclusions into all dg categories are a natural map of diagrams and become equivalences at each set: $Q_S$ is an inverse, with $q_A$ for arbitrary $A$ and $q_B$ for locally cofibrant $B$ giving the two natural equivalences. The localized comparison on the locally cofibrant diagram is strictly compatible with restriction before localization. Inverting the inclusion equivalence of diagrams therefore defines its coherent extension to the full diagram. For three restrictions the two composites use the same entry substitution and the same naturality squares of $q$; the universal property is fully faithful on these diagrams of transformations, so the resulting composition homotopies and their higher compatibilities are those of this one diagram, rather than independently chosen pairwise comparisons.",
-   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "def-coef-universally-localizing-simplicial-map",
     "lem-coef-fixed-object-dg-free-model",
     "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.1; cofibrant replacement and universal localization, with Kerodon 05ZP and 01DK."
+   }
+  },
+  {
+   "text": "For $P\\in\\mathcal D^{S^2}$ choose an objectwise cofibrant representative graph. Let $\\alpha_P:G_S(P)\\to\\eta_S F_\\infty(P)$ be the adjunct of $P\\to U_\\infty F_\\infty(P)\\simeq V_S\\eta_S F_\\infty(P)$. Both free graph formulas, in [lem-coef-fixed-object-dg-free-model] and [lem-coef-categorical-algebra-free-monad], have a summand for each path $s=x_0,\\ldots,x_n=t$. The algebra formula has forward tensor order and the strict formula reverse order. The algebra theorem specifies the actual adjunct on a path: insert its edges as length-one generators and then compose. Step 2 therefore makes $V_S\\alpha_P$ on this summand the map\n$$a_1\\otimes\\cdots\\otimes a_n\\longmapsto(-1)^{\\sum_{i<j}|a_i||a_j|}a_n\\otimes\\cdots\\otimes a_1.$$\nThis is Koszul reversal; reversing twice gives sign $(-1)^{2\\sum_{i<j}|a_i||a_j|}=1$. It is consequently a chain isomorphism on the path summand. For length zero it is the unit identification, and for length one the generating edge. By [lem-coef-projective-chains-monoidal-model] these tensors of cofibrant complexes compute the derived tensors. The two stated free formulas also identify their coproducts with those in $\\mathcal D$. Thus the actual adjunct is a coproduct of equivalences at every pair $(s,t)$, and is an equivalence there. The units and adjuncts in the cited formulas are coherent and natural in $P$, so this is the canonical natural free comparison required below.",
+   "uses": [
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-categorical-algebra-free-monad",
     "lem-coef-projective-chains-monoidal-model"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3881v4",
-    "place": "Definition 5.1, naturality in X, and passage after Proposition 5.2 to Definition 5.3; explicit replacement comparisons."
+    "place": "Proposition 5.2(f): explicit verification of the canonical free comparison."
    }
   },
   {
-   "text": "For $q_A:Q_SA\\to A$, the mapping complex $Q_SA(s,t)$ is cofibrant and $q_A(s,t)$ is a quasi-isomorphism by [lem-coef-fixed-object-dg-free-model]. Step 2 assigns $L(Q_SA(s,t))$ as its mapping object. Localizing $q_A(s,t)$ identifies it with $L(A(s,t))$ by [lem-coef-projective-chains-monoidal-model]. For a strict dg functor $F:A\\to B$, the square $q_B\\,Q_SF=Fq_A$ commutes. Hence the map on mapping objects is the localized original chain map under these identifications. All these are transformations of actual functors and remain coherent under localization, as its universal property states in [lem-coef-combinatorial-localization-presentability]. Together with Step 4 this proves the stated functoriality for enriched functors and restriction maps.",
+   "text": "Apply [lem-coef-infinity-monadic-comparison] with $H=\\eta_S$, $U=U_\\infty$, $V=V_S$, $F=F_\\infty$, $G=G_S$. Step 1 gives both left adjoints, conservativity of both graph functors, existence of all geometric realizations, and their preservation. Step 3 supplies the coherent equivalence $V_SH\\simeq U_\\infty$. Step 4 proves precisely that $V_S(\\alpha_P)$, for the adjunct of the specified unit, is an equivalence for every $P$. These are every hypothesis of the comparison criterion; hence $\\eta_S$ is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-monadic-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Final application in Proposition 5.2; Higher Algebra (2017), Corollary 4.7.3.16 and Remark 4.7.3.17."
+   }
+  },
+  {
+   "text": "Restriction along $f:S\\to T$ is the substitution $f^*A(s,t)=A(f(s),f(t))$. It preserves mappingwise quasi-isomorphisms and locally cofibrant objects. Thus the full relative categories $\\mathbf C_S^{\\rm lc}$ form a strict restriction diagram: $(gf)^*=f^*g^*$ on entries, units and compositions. Step 2 commutes with this diagram, including the Koszul reversals, since each operation is the same substituted chain map. Use the functorial localization of [lem-coef-simplicial-localization-existence] to localize the restriction diagrams. The functor-category universal property of these localizations, [def-coef-universally-localizing-simplicial-map] for the locally cofibrant relative categories and [lem-coef-combinatorial-localization-presentability] for the combinatorial model categories $\\mathbf C_S$, descends the comparison and its diagrams of transformations, retaining all coherences. The inclusions $j_S$ form a natural map to the diagram of all dg categories and are equivalences after localization by Step 3. In the functor infinity category of these set-indexed diagrams, [lem-coef-infinity-pointwise-equivalences] makes this natural map an equivalence. Invert it there and compose with the localized Step 2 comparison. This gives a single coherent comparison on all dg categories; its evaluation at $S$ is the $Q_S$ comparison of Step 3. Identity and composition compatibility, including higher compatibility for longer strings of functions, belong to this one transformation and its inverse in the functor category. No assumption that $f^*$ preserves cofibrant dg categories is needed: local cofibrancy is preserved by its entry formula.",
+   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 5.1, naturality in the object set; passage to Definition 5.3. Kerodon 05ZP and 01DK for the diagram argument."
+   }
+  },
+  {
+   "text": "For $q_A:Q_SA\\to A$, the mapping complex $Q_SA(s,t)$ is cofibrant and $q_A(s,t)$ is a quasi-isomorphism by [lem-coef-fixed-object-dg-free-model]. Step 3 assigns $L(Q_SA(s,t))$ as its mapping object. Localizing $q_A(s,t)$ identifies it with $L(A(s,t))$ by [lem-coef-projective-chains-monoidal-model]. For a strict dg functor $F:A\\to B$, the square $q_B\\,Q_SF=Fq_A$ commutes. Hence the map on mapping objects is the localized original chain map under these identifications. All these are transformations of actual functors and remain coherent under localization, as its universal property states in [lem-coef-combinatorial-localization-presentability]. Together with Step 6 this proves the stated functoriality for enriched functors and restriction maps.",
    "uses": [
     "lem-coef-fixed-object-dg-free-model",
     "lem-coef-projective-chains-monoidal-model",
@@ -99,27 +123,31 @@
    }
   },
   {
-   "text": "By [def-coef-complete-algebroid], underlying arrows from $s$ to $t$ have mapping space $\\operatorname{Map}_{\\mathcal D}(\\mathbf Z[0],L(A(s,t)))$. By [lem-coef-projective-chains-monoidal-model], its components are chain maps $\\mathbf Z[0]\\to A(s,t)$ modulo chain homotopy, since $\\mathbf Z[0]$ is cofibrant and every complex is fibrant. Such a map is determined by the degree-zero cycle $c=f(1)$; a degree-minus-one homotopy sends $1$ to some $b\\in A(s,t)^{-1}$ and identifies $c,c'$ exactly when $c-c'=d(b)$. The quotient is $H^0A(s,t)$ by [def-weil-abstract-derived-category]. For a closed arrow in a noncofibrant $A$, lift its $H^0$ class to $Q_SA(s,t)$ using the quasi-isomorphism of Step 5, choose a cycle representative there, and use the just computed quotient; changing the representative by a boundary changes no component. Its image under $q_A$ has the original $H^0$ class, so it is precisely the prescribed underlying arrow. Units and composition are those of the dg category: after lifting two classes to $Q_SA$, its composition and the dg functor $q_A$ send their product to the original product. If $u'=u+db$ and $v'=v+de$ are degree-zero cycles with $b,e$ in degree $-1$, then $v'u'-vu=d(v'b+eu)$ by the chain-map Leibniz rule. Thus composition descends to those classes. Every dg functor preserves the cycles, boundaries and these products, giving the required naturality.",
+   "text": "By [lem-coef-algebroid-object-space-fibration], underlying arrows from $s$ to $t$ have mapping space $\\operatorname{Map}_{\\mathcal D}(\\mathbf Z[0],L(A(s,t)))$. By [lem-coef-projective-chains-monoidal-model], its components are chain maps $\\mathbf Z[0]\\to A(s,t)$ modulo chain homotopy, since $\\mathbf Z[0]$ is cofibrant and every complex is fibrant. Such a map is determined by the degree-zero cycle $c=f(1)$; a degree-minus-one homotopy sends $1$ to some $b\\in A(s,t)^{-1}$ and identifies $c,c'$ exactly when $c-c'=d(b)$. The quotient is $H^0A(s,t)$ by [def-weil-abstract-derived-category]. For a closed arrow in a noncofibrant $A$, lift its $H^0$ class to $Q_SA(s,t)$ using the quasi-isomorphism of Step 7, choose a cycle representative there, and use the just computed quotient; changing the representative by a boundary changes no component. Its image under $q_A$ has the original $H^0$ class, so it is precisely the prescribed underlying arrow. Units and composition are those of the dg category: after lifting two classes to $Q_SA$, its composition and the dg functor $q_A$ send their product to the original product. If $u'=u+db$ and $v'=v+de$ are degree-zero cycles with $b,e$ in degree $-1$, then $v'u'-vu=d(v'b+eu)$ by the chain-map Leibniz rule. Thus composition descends to those classes. Every dg functor preserves the cycles, boundaries and these products, giving the required naturality.",
    "uses": [
-    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-object-space-fibration",
     "lem-coef-projective-chains-monoidal-model",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "https://arxiv.org/html/1312.3881v4",
-    "place": "Definition 5.6 and Example 5.11; explicit chain-map, chain-homotopy and product calculations."
+    "place": "Definition 5.6 and Example 5.11; explicit chain-map, chain-homotopy and product calculations. The underlying mapping-space formula is supplied by lem-coef-algebroid-object-space-fibration, not by the definition of algebroids."
    }
   }
  ],
  "proof_deps": [
   "def-coef-complete-algebroid",
+  "def-coef-universally-localizing-simplicial-map",
   "def-weil-abstract-derived-category",
+  "lem-coef-algebroid-object-space-fibration",
   "lem-coef-categorical-algebra-free-monad",
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-fixed-object-dg-free-model",
   "lem-coef-infinity-monadic-comparison",
-  "lem-coef-projective-chains-monoidal-model"
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-simplicial-localization-existence"
  ],
  "proof_origin": {
   "by": "agent",
@@ -234,7 +262,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-enrichment-rectification",
   "by": "worker",
@@ -243,19 +271,19 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-fixed-object-enriched-rectification",
   "worker": "stage1",
-  "summary": "Statement preserved; added the existing precise categorical-algebra definition to stmt_deps. Proved the comparison by the source’s two free-graph adjunctions and monadic criterion, checking the actual comparison path by path, then writing replacement coherence and the degree-zero arrow calculation explicitly. Three new structural statement-only dependencies, none equivalent to the item and none found in Mathlib. Second reading corrects forward/reverse tensor order using explicit Koszul reversal, matches the strict sifted-colimit scope to Lemma 3.20, and makes the restriction-diagram extension explicit.",
+  "summary": "Preserved the previously reviewed statement, searches and free-adjunction proof. Reused existing DAG nodes for localization of the locally cofibrant relative subcategory, detection of coherent diagram equivalences at vertices, and the underlying algebroid mapping-space formula. Separated operator construction, localization descent, canonical free comparison and the final criterion into explicit steps; replaced the redundant replacement-grid discussion with a single equivalence of restriction diagrams. No new nodes and no change to the coefficient categories or blueprint route.",
   "blueprint": "The coherent finite-stage adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 .proof.md, via the existing historical ancestry: fixed-object derived dg enrichment before coefficient-diagram assembly."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q43-b66edc179",
-  "group": "Q43",
+  "reviewer": "NT-cc-Q35-246c270b7",
+  "group": "Q35",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-b66edc179 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited DAG statements, blueprint route, unit/chapter records, delivery-errors A–F, and cited Haugseng, Gepner–Haugseng, and Higher Algebra sources. Statements and hypotheses match the fixed-object rectification theorem; six proof steps correctly handle localization, Koszul reversal, free-path comparison, restriction coherence, functorial mapping objects, and H^0 arrows. Small cases, empty/singleton S, zero graphs, repeated paths, odd signs, nonflat complexes, duplicates, cycles, searches, and coefficient-category/base-change distinctions were checked. No SGA source is used. Review written to review.md; no repair required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-246c270b7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all 8 steps, every cited statement, unit sk-prop-sf-biduality-general and Haugseng arXiv:1312.3881v4 online (Corollary 3.15, Definition 5.1, Proposition 5.2 with checks (a)-(f), Theorems 5.4/5.8, Example 5.11). The statement matches the source. Tested on S empty (both sides terminal) and S a singleton (E_1 rectification). I checked the Koszul reversal signs (associativity exponent and degree-0 unit), the signed-reversal involution on path summands, the hypotheses of the monadic comparison, and the H^0 homotopy and composition calculation d(v'b+eu)=v'db+(de)u. No new nodes, no duplicates (rectif / fixed-set grep; lem-coef-enriched-fixed-set-model and the two parents differ), no cycle, all citations in the unit, no SGA. Fault fixed (C4): Steps 3 and 6 applied the universal property that lem-coef-combinatorial-localization-presentability states only for combinatorial model categories to the locally cofibrant relative category C_S^lc, which is not one. The corrected item now cites def-coef-universally-localizing-simplicial-map there. In Step 3 it applies the pointwise criterion in Fun(N(C),L) and transfers the result back through the functor equivalence, which handles vertices outside the image. proof_deps is updated. No tool_uses.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-directed-ring-sheaf-module-colimit",
+ "kind": "statement",
+ "title": "Directed colimits of ring sheaves compute the underlying module colimit on a site",
+ "statement": "Let $(\\mathcal C,J)$ be a site essentially small in a coefficient universe $w$, and let $R$ be a sheaf of unital commutative rings on it. Let $I$ be a small nonempty directed poset in $w$ and let $(A_i,a_{ij})_{i\\leq j}$ be a diagram of sheaves of unital commutative rings, with compatible unital ring-sheaf maps $s_i:R\\to A_i$, so $a_{ij}s_i=s_j$. Suppose a cocone of unital ring-sheaf maps $q_i:A_i\\to A$ is a colimit in the category of sheaves of unital commutative rings [def-weil-pbc-category-colimit], and a unital map $s:R\\to A$ satisfies $q_i s_i=s$ for every $i$. Give $A_i$ and $A$ their $R$-module sheaf structures by $r\\cdot x=s_i(r)x$ and $r\\cdot x=s(r)x$ [def-weil-sheaf-of-modules-category]. Then the underlying $R$-module sheaf $A$, with these same maps $q_i$, is a colimit of the underlying $R$-module sheaves $A_i$ in $\\operatorname{Mod}(R)$. Explicitly, for every $R$-module sheaf $M$ and compatible $R$-linear maps $f_i:A_i\\to M$, there is a unique $R$-linear map $f:A\\to M$ with $f q_i=f_i$ for every $i$. All ring sheaves, module sheaves, and the object and morphism sets of $I$ lie in $w$; the site universes may differ from $w$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent assembly from Tag 03DB (lemma-limits-colimits: module colimits) and Tag 03EP (lemma-tensor-commute-colimits, item (2)); the comparison for ring sheaves is not stated there as a single lemma. The multiplication-on-the-module-colimit argument is supplied in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(forget|Forget).*(preservesFilteredColimits|preserves.*[Cc]olimit)|(filtered|directed).*[Cc]olimit",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from sheaves of commutative algebras to sheaves of modules preserves filtered colimits",
+   "results": "8 hits: ModuleCat.FilteredColimits.forget_preservesFilteredColimits, AlgCat.forget₂Module_preservesLimitsOfSize, PresheafOfModules.toPresheaf_preservesColimit, PresheafOfModules.instPreservesLimitsOfSizeFunctorOppositeAbToPresheaf, ModuleCat.FilteredColimits.forget_reflectsFilteredColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, \"preservesFilteredColimits\"",
+   "results": "3 hits: CommRingCat.FilteredColimits.forget_preservesFilteredColimits, CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits, CommRingCat.preservesFilteredColimits_coyoneda",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of commutative algebra sheaves on a site is also the colimit of the underlying module sheaves",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, SheafOfModules.Presentation.isColimit, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.hasColimit",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from commutative ring objects in abelian sheaves on a site to modules over a fixed sheaf of rings preserves directed colimits",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, ModuleCat.FilteredColimits.forget_preservesFilteredColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.toPresheaf_preservesColimit",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*Colimit|[Ff]iltered",
+   "results": "0 hits: ; the requested subdirectory does not exist, so this zero-hit run is not evidence of absence",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid subdirectory; not used to establish absence",
+   "subdirectory": "CategoryTheory/Monoidal/Mon_"
+  },
+  {
+   "tool": "grep",
+   "query": "algebra|commutative.*ring|filtered.*colimit",
+   "results": "22 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mon_, \"colimit\"",
+   "results": "0 hits: ; loogle: unknown identifier 'Mon_'",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected for unknown identifier Mon_; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFilteredColimits|PreservesFilteredColimits",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site",
+   "subdirectory": "CategoryTheory/Monoidal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-flat",
+  "date": "2026-10-17",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-finite-extension-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-qlbar-flat",
+   "place": "Proof, first sentence: the filtered coefficient-ring colimit, compatibly with the E_X-module structures; the ring-to-module colimit comparison expanded in the previous split step 3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

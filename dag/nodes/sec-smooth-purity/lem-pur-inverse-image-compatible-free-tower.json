@@ -1,0 +1,84 @@
+{
+ "id": "lem-pur-inverse-image-compatible-free-tower",
+ "kind": "statement",
+ "title": "Inverse image of an inverse tower with compatible local bases",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a universe larger than their objects and morphisms [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite limits. Let $u:\\mathcal C\\to\\mathcal D$ preserve finite limits and coverings, and write $f^{-1}:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ for its geometric inverse image [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Let $(R_n,\\rho_n)_{n\\ge1}$ be an inverse tower of sheaves of commutative rings on $\\mathcal C$. For each $n$ let $M_n$ be an $R_n$-module sheaf [def-weil-sheaf-of-modules-category], with additive transition $t_n:M_{n+1}\\to M_n$ satisfying $t_n(a m)=\\rho_n(a)t_n(m)$. Put $R=\\varprojlim_n R_n$ and $M=\\varprojlim_n M_n$, with sectionwise ring and module operations [def-pur-sheaf-inverse-limit]. Suppose the canonical projection-induced ring map\n$$\\kappa:f^{-1}R\\longrightarrow\\varprojlim_n f^{-1}R_n$$\nis an isomorphism. Suppose there is a covering $\\{V_i\\to1_{\\mathcal C}\\}$ and, for every $i,n$, an $R_n|_{V_i}$-linear isomorphism $b_{i,n}:R_n|_{V_i}\\xrightarrow{\\sim}M_n|_{V_i}$, such that $t_n b_{i,n+1}=b_{i,n}\\rho_n$ after restriction [def-pur-localized-ringed-site]. Then the canonical projection-induced comparison\n$$\\theta:f^{-1}M\\longrightarrow\\varprojlim_n f^{-1}M_n$$\nis an isomorphism, linear over $\\kappa$ when the right hand side has its coordinatewise $\\varprojlim_n f^{-1}R_n$-action. The maps $b_{i,n}$ induce $R|_{V_i}\\cong M|_{V_i}$, and on $\\mathcal D/u(V_i)$ these identifications identify $\\theta$ with the restriction of $\\kappa$. The comparison is natural for homomorphisms of ring towers and compatible semilinear morphisms of module towers; it does not depend on the chosen covering or bases.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph: the local-basis argument underlying the twisted inverse-limit comparison, abstracted to module towers; localization comparison in Stacks sites.tex, Tag 03CF (lemma-localize-morphism)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image commutes with inverse limits of locally compatibly trivialized rank one module towers when it commutes with the coefficient ring tower",
+   "results": "8 hits; ModuleCat.Tilde.toOpen_res, Trivialization.symmₗ, Trivialization.linearMapAt_symmₗ, Trivialization.symmₗ_linearMapAt, Pretrivialization.continuousLinearMap_symm_apply', ModuleCat.restrictScalarsComp'App_inv_naturality, Pretrivialization.continuousLinearMap_symm_apply, Pretrivialization.linearMapAt_symmₗ. Hits concern vector-bundle trivializations or restriction coherence, not a sheaf tower comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit comparison for sheaves of rank one modules with compatible bases on one covering and base change of coefficient ring limits",
+   "results": "8 hits; PresheafOfModules.isSheaf_of_isLimit, PresheafOfModules.limitPresheafOfModules, PresheafOfModules.limitPresheafOfModules_obj, PresheafOfModules.limitCone, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, SheafOfModules.createsLimit, SheafOfModules.hasLimit, PresheafOfModules.limitPresheafOfModules_map. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean lines 35-110: these construct sectionwise limits and evaluation preservation, not preservation by geometric inverse image.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with the inverse limit of a tower of module sheaves with compatible local bases and cartesian coefficient inverse limit",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, SheafOfModules.pullback, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc. Only pullback definitions, composition and finite-limit preservation; none handles this countable tower.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimit\"",
+   "results": "12 hits; CategoryTheory.Limits.id_preservesLimitsOfSize, CategoryTheory.Limits.PreservesLimits, CategoryTheory.Limits.PreservesLimitsOfSize, CategoryTheory.Limits.PreservesLimitsOfShape, CategoryTheory.Limits.preservesLimitsOfSize_subsingleton, CategoryTheory.Limits.PreservesLimit, CategoryTheory.Limits.preservesLimitsOfShape_subsingleton, CategoryTheory.Limits.preservesLimitsOfSize_shrink. Generic preservation predicates and identity-functor instances do not prove the stated local criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*(trivial|free).*limit|limit.*locally.*(trivial|free)",
+   "results": "0 hits; . No matches in Mathlib/CategoryTheory/Sites.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*(dual|lim)|dual.*pullback",
+   "results": "1 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. The one overPullback declaration is a slice-category construction, not the tower theorem; searched Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-17",
+  "group": "Q103"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Integral twist paragraph: proving the limit comparison on the compatible-generator cover, rather than assuming preservation of all inverse limits.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

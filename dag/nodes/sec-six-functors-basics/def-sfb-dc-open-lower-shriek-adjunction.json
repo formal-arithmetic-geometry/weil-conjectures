@@ -18,18 +18,50 @@
   "def-sfb-dc-upper-star",
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof": [
   {
-   "text": "Work throughout with module objects over the same pulled-back commutative condensed ring $\\Lambda$. The extension-by-zero clause of [sk-def-sfb-module-lower-shriek] specifies $j_!=j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}$, with underlying abelian sheaf $j^{\\Ab}_!M$, and asserts that this functor is exact and left adjoint to the module pullback $j^*$. These are the underived functors used below, for every commutative condensed $\\Lambda$; no assertion about a compactification lower shriek is needed. To establish exactness of $j^*$ with the same generality, use its definition [def-sfb-module-upper-star]: $j^*=\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})$. The abelian-sheaf pullback $j^*_{\\Ab}$ is additive and exact by [lem-sfb-finite-upper-star-exact], applied with coefficient category $\\mathcal A=\\Ab$, not with a category depending on $\\Lambda$. By [sk-def-sfb-sheaf-tensor], the abelian-sheaf tensor is closed symmetric monoidal and preserves colimits in each variable. Preservation of the zero object and binary coproducts gives additivity of tensoring in each variable. Thus tensoring by each of $\\Lambda_X$, $j^*\\Lambda_X$, and $\\Lambda_U$ is right exact, as required in [det-prop-sfb-module-pullback-exact-lifted]. The transport construction [def-sfb-modobj-transport] gives the equality $U_{j^*\\Lambda_X}\\circ\\operatorname{mapMod}(j^*_{\\Ab})=j^*_{\\Ab}\\circ U_{\\Lambda_X}$ of underlying-sheaf functors. Applying that lifted-exactness lemma with $F=j^*_{\\Ab}$ and $G=\\operatorname{mapMod}(j^*_{\\Ab})$ proves that the transport factor is additive and exact. For the second factor, [lem-sfb-alpha-iso] states that $\\alpha_j:j^*\\Lambda_X\\to\\Lambda_U$ is an isomorphism for every condensed ring; [sk-def-sfb-coefficient-morphisms] explicitly identifies it as an isomorphism of ring objects. Parts 4 and 5 of [sk-def-sfb-change-of-scalars] therefore give $\\operatorname{Ext}_{\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j^{-1}}$ and exactness of this restriction functor. Their hypotheses hold in $\\Sh(U_{\\mathrm{proét}},\\Ab)$: it is abelian with equalizers and coequalizers, its tensor is closed symmetric monoidal and colimit-preserving, and $j^*\\Lambda_X$ is commutative because the ring isomorphism $\\alpha_j$ identifies it with the commutative ring object $\\Lambda_U$. Hence extension of scalars is exact as well. Composing these two exact factors proves exactness of the specified module pullback $j^*$, without an admissibility hypothesis on $\\Lambda$.",
+   "text": "Work with module objects over the same pulled-back commutative condensed ring $\\Lambda$. The extension-by-zero clause of [sk-def-sfb-module-lower-shriek] gives the exact functor $j_!=j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}$ and the adjunction $j_!\\dashv j^*$. Here the module pullback is the composite $j^*=\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})$ specified in [def-sfb-module-upper-star]. The following three steps verify exactness of these two factors for arbitrary $\\Lambda$.",
    "uses": [
     "sk-def-sfb-module-lower-shriek",
-    "def-sfb-module-upper-star",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Setting; the underived adjunction needed in the first sentence of the item proof"
+   }
+  },
+  {
+   "text": "For $T=U,X$, apply [lem-sfb-proetale-sheaves-grothendieck] with coefficient category $\\Ab$ to obtain that $\\Sh(T_{\\mathrm{proét}},\\Ab)$ is abelian and has all small colimits. In particular it has equalizers and coequalizers. By [sk-def-sfb-sheaf-tensor] its tensor is closed symmetric monoidal and each fixed-factor tensor functor preserves colimits and is right exact. It is also additive: preservation of zero and binary coproducts preserves the biproduct diagram, and the expression $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$ for addition then shows preservation of sums. Consequently tensoring by $\\Lambda_X$, $j^*\\Lambda_X$, or $\\Lambda_U$ satisfies all the additive and right-exact tensor hypotheses used below.",
+   "uses": [
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Setting: abelian sheaves, additive and right-exact tensor"
+   }
+  },
+  {
+   "text": "The abelian-sheaf inverse image $F=j^*_{\\Ab}$ is additive and exact by [lem-sfb-finite-upper-star-exact], with coefficient category $\\mathcal A=\\Ab$. The functor $G=\\operatorname{mapMod}(j^*_{\\Ab})$ of [def-sfb-modobj-transport] satisfies $U_{j^*\\Lambda_X}\\circ G=F\\circ U_{\\Lambda_X}$. Apply [det-prop-sfb-module-pullback-exact-lifted] with $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(U_{\\mathrm{proét}},\\Ab)$, $\\mathcal R=\\Lambda_X$, and $\\mathcal S=j^*\\Lambda_X$. Step 2 supplies the abelian and tensor hypotheses. The cited lemma therefore gives additivity and exactness of the transport factor $G$; no separate proof of preservation of kernels or cokernels is being used here.",
+   "uses": [
     "lem-sfb-finite-upper-star-exact",
-    "sk-def-sfb-sheaf-tensor",
     "def-sfb-modobj-transport",
-    "det-prop-sfb-module-pullback-exact-lifted",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Transport: exactness is precisely the existing lifted-exactness lemma"
+   }
+  },
+  {
+   "text": "By [lem-sfb-alpha-iso], $\\alpha_j:j^*\\Lambda_X\\to\\Lambda_U$ is invertible for every condensed ring; [sk-def-sfb-coefficient-morphisms] identifies it as an isomorphism of ring objects. Thus its source is commutative, since its target $\\Lambda_U$ is. In $\\Sh(U_{\\mathrm{proét}},\\Ab)$, step 2 supplies the braided closed abelian structure, equalizers, coequalizers, and colimit-preserving additive tensor. Parts 4 and 5 of [sk-def-sfb-change-of-scalars], applied to $\\alpha_j$ and its inverse, now give $\\operatorname{Ext}_{\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j^{-1}}$ and exactness of the latter restriction. Hence the extension factor is exact: conjugating an exact image sequence by this natural isomorphism leaves its kernels and cokernels unchanged up to isomorphism. This uses the cited scalar-change theorem, not an assertion that arbitrary scalar extension is exact.",
+   "uses": [
     "lem-sfb-alpha-iso",
     "sk-def-sfb-coefficient-morphisms",
     "sk-def-sfb-change-of-scalars"
@@ -37,13 +69,25 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
-    "place": "Setting, Transport, Extension of scalars, Conclusion; supplies the exactness input to the first sentence of the item proof"
+    "place": "Extension of scalars: existing scalar-change clauses 4 and 5"
    }
   },
   {
-   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], the two exact functors send quasi-isomorphisms of complexes to quasi-isomorphisms and give termwise functors $D(j_!)$ and $D(j^*)$ on the unbounded derived categories. The exact-functor clause of [sk-def-sfb-derived-categories] identifies the total left derived functor $L(j_!)$ with $D(j_!)$, the total right derived functor $R(j^*)$ with $D(j^*)$, and $Lj^*=L(j^*)$ with $D(j^*)$. All these total derived functors are everywhere defined. To check the meaning of this last assertion in [lem-pc-derived-adjoint-functors], the system for a quasi-isomorphism $s:K\\to I$ has comparison $D(j^*)(s)^{-1}:D(j^*)I\\to D(j^*)K$; for $t:P\\to M$, the other system has comparison $D(j_!)(t)^{-1}:D(j_!)M\\to D(j_!)P$. These maps are natural, are identities at $s=1_K$ or $t=1_M$, and are all isomorphisms. In [def-pc-essentially-constant-ind-diagram] take the distinguished index to be $1_K$, its section to be the identity, and the common index for $s:K\\to I$ to be $s$ itself. The arrows of indices are $1_K\\to s$, represented by $s$, and $1_s$; the required factorization is $1_{D(j^*)I}=D(j^*)(s)\\circ D(j^*)(s)^{-1}$. In [def-pc-essentially-constant-pro-diagram] take the distinguished index to be $1_M$, its retraction to be the identity, and the common index for $t:P\\to M$ to be $t$ itself. The arrows of indices are $t\\to1_M$, represented by $t$, and $1_t$; the required factorization is $1_{D(j_!)P}=D(j_!)(t)^{-1}\\circ D(j_!)(t)$. Thus these are also the everywhere-defined derived functors in the general derived-adjunction theorem.",
+   "text": "The composite defining $j^*$ in [def-sfb-module-upper-star] is additive. By steps 3 and 4 both its factors preserve finite limits and finite colimits, so their composite does too. Therefore this specified $j^*$ is exact, for the same arbitrary commutative condensed ring as in step 1.",
+   "uses": [
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Conclusion: compose the two exact factors"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], the two exact functors of steps 1 and 5 send quasi-isomorphisms of complexes to quasi-isomorphisms and give termwise functors $D(j_!)$ and $D(j^*)$ on the unbounded derived categories. The ambient derived pullback $Lj^*$ of [sk-def-sfb-module-derived-pushpull] is by definition the total left derived functor, in the left-derived clause of [sk-def-sfb-derived-categories], of this same composite $j^*$; since $j^*$ is exact, the exact-functor clause of [sk-def-sfb-derived-categories] identifies $Lj^*$ with $D(j^*)$. The derived functors $R(j^*)$ and $L(j_!)$ of [lem-pc-derived-adjoint-functors] are defined there by essential constancy; we check directly, without any resolution, that they are everywhere defined with values $D(j^*)K$ and $D(j_!)M$. The system for a quasi-isomorphism $s:K\\to I$ has comparison $D(j^*)(s)^{-1}:D(j^*)I\\to D(j^*)K$; for $t:P\\to M$, the other system has comparison $D(j_!)(t)^{-1}:D(j_!)M\\to D(j_!)P$. These maps are natural, are identities at $s=1_K$ or $t=1_M$, and are all isomorphisms. In [def-pc-essentially-constant-ind-diagram] take the distinguished index to be $1_K$, its section to be the identity, and the common index for $s:K\\to I$ to be $s$ itself. The arrows of indices are $1_K\\to s$, represented by $s$, and $1_s$; the required factorization is $1_{D(j^*)I}=D(j^*)(s)\\circ D(j^*)(s)^{-1}$. In [def-pc-essentially-constant-pro-diagram] take the distinguished index to be $1_M$, its retraction to be the identity, and the common index for $t:P\\to M$ to be $t$ itself. The arrows of indices are $t\\to1_M$, represented by $t$, and $1_t$; the required factorization is $1_{D(j_!)P}=D(j_!)(t)^{-1}\\circ D(j_!)(t)$. Since the comparison at the distinguished index is the identity, the induced map on a morphism $f$ of complexes is $D(j^*)(f)$, resp. $D(j_!)(f)$, and a quasi-isomorphism goes to the inverse of its image. Thus in the sense of [lem-pc-derived-adjoint-functors], $R(j^*)=D(j^*)$ and $L(j_!)=D(j_!)$ are everywhere defined.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-module-derived-pushpull",
     "sk-def-sfb-derived-categories",
     "lem-pc-derived-adjoint-functors",
     "def-pc-essentially-constant-ind-diagram",
@@ -56,10 +100,9 @@
    }
   },
   {
-   "text": "Apply [lem-pc-derived-adjoint-functors] (Stacks Tag 09T5) to $G=j_!$ and $F=j^*$, using the underived adjunction of step 1 and the everywhere-defined derived functors of step 2. This gives $L(j_!)\\dashv R(j^*)$. Substitute the canonical exact-functor identifications of step 2 to obtain the ambient adjunction $D(j_!)\\dashv D(j^*)$. These identifications are those in the exact-functor clause of [sk-def-sfb-derived-categories]; hence this is the adjunction induced from the specified underived adjunction, rather than a new choice of an unrelated right adjoint.",
+   "text": "Apply [lem-pc-derived-adjoint-functors] (Stacks Tag 09T5) to $G=j_!$ and $F=j^*$, using the underived adjunction of step 1 and the everywhere-defined derived functors of step 6. This gives $L(j_!)\\dashv R(j^*)$, and by step 6 these functors are $D(j_!)$ and $D(j^*)$ themselves. Hence the ambient adjunction $D(j_!)\\dashv D(j^*)$ is the one induced by the specified underived adjunction $j_!\\dashv j^*$, rather than a new choice of an unrelated right adjoint.",
    "uses": [
-    "lem-pc-derived-adjoint-functors",
-    "sk-def-sfb-derived-categories"
+    "lem-pc-derived-adjoint-functors"
    ],
    "elementary": false,
    "source": {
@@ -68,8 +111,9 @@
    }
   },
   {
-   "text": "Let $\\theta:D(j^*)\\xrightarrow{\\sim}Lj^*$ be the inverse of the canonical exact-pullback identification from [sk-def-sfb-derived-categories]. If $\\Phi_{K,L}:\\operatorname{Hom}(D(j_!)K,L)\\xrightarrow{\\sim}\\operatorname{Hom}(K,D(j^*)L)$ denotes step 3's ambient Hom-bijection, define $\\widetilde\\Phi_{K,L}(a)=\\theta_L\\circ\\Phi_{K,L}(a)$. Its inverse sends $b:K\\to Lj^*L$ to $\\Phi_{K,L}^{-1}(\\theta_L^{-1}\\circ b)$. The two inverse identities follow by cancellation of $\\theta_L$ and $\\theta_L^{-1}$, and naturality is explicit: for $u:K\\to K_1$, $v:L\\to L_1$ and $a:D(j_!)K_1\\to L$, one has $\\widetilde\\Phi_{K,L_1}(v\\circ a\\circ D(j_!)(u))=\\theta_{L_1}\\circ D(j^*)(v)\\circ\\Phi_{K_1,L}(a)\\circ u=Lj^*(v)\\circ\\widetilde\\Phi_{K_1,L}(a)\\circ u$. This explicitly constructs $D(j_!)\\dashv Lj^*$.",
+   "text": "Let $\\theta:D(j^*)\\xrightarrow{\\sim}Lj^*$ be the inverse of the identification of step 6 of the ambient derived pullback $Lj^*$ of [sk-def-sfb-module-derived-pushpull] with $D(j^*)$, given by the exact-functor clause of [sk-def-sfb-derived-categories]. If $\\Phi_{K,L}:\\operatorname{Hom}(D(j_!)K,L)\\xrightarrow{\\sim}\\operatorname{Hom}(K,D(j^*)L)$ denotes step 7's ambient Hom-bijection, define $\\widetilde\\Phi_{K,L}(a)=\\theta_L\\circ\\Phi_{K,L}(a)$. Its inverse sends $b:K\\to Lj^*L$ to $\\Phi_{K,L}^{-1}(\\theta_L^{-1}\\circ b)$. The two inverse identities follow by cancellation of $\\theta_L$ and $\\theta_L^{-1}$, and naturality is explicit: for $u:K\\to K_1$, $v:L\\to L_1$ and $a:D(j_!)K_1\\to L$, one has $\\widetilde\\Phi_{K,L_1}(v\\circ a\\circ D(j_!)(u))=\\theta_{L_1}\\circ D(j^*)(v)\\circ\\Phi_{K_1,L}(a)\\circ u=Lj^*(v)\\circ\\widetilde\\Phi_{K_1,L}(a)\\circ u$. This explicitly constructs $D(j_!)\\dashv Lj^*$.",
    "uses": [
+    "sk-def-sfb-module-derived-pushpull",
     "sk-def-sfb-derived-categories"
    ],
    "elementary": true,
@@ -79,7 +123,7 @@
    }
   },
   {
-   "text": "Write $\\iota_U$ and $\\iota_X$ for the inclusions of the bounded constructible categories. By [sk-def-sfb-bounded-constructible] these are full subcategories, with the same Hom-sets as the ambient derived categories. The definitions [def-sfb-dc-open-lower-shriek] and [def-sfb-dc-upper-star] give the restricted functors and their comparison with the ambient functors after inclusion for the general coefficient ring $\\Lambda$. In particular, the current extension-by-zero definition equips each object $D(j_!)(\\iota_U K)$ with its bounded-constructibility property and gives the inclusion comparison with identity components. We use its inverse as the comparison $c$ below, so the direction agrees with the Hom formulas. For $K\\in D_{\\mathrm{cons}}(U,\\Lambda)$ and $L\\in D_{\\mathrm{cons}}(X,\\Lambda)$, define the required Hom-bijection by the composite\n$$\\operatorname{Hom}_{D_{\\mathrm{cons}}(X,\\Lambda)}(j_!K,L)\n=\\operatorname{Hom}_{D(\\Mod_{\\Lambda_X})}(D(j_!)\\iota_UK,\\iota_XL)\n\\xrightarrow{\\ \\widetilde\\Phi\\ }\n\\operatorname{Hom}_{D(\\Mod_{\\Lambda_U})}(\\iota_UK,Lj^*\\iota_XL)\n=\\operatorname{Hom}_{D_{\\mathrm{cons}}(U,\\Lambda)}(K,Lj^*L).$$\nHere the equalities use the inclusion comparisons, or equivalently the corresponding canonical Hom-bijections if restrictions commute up to isomorphism. More explicitly, put $F=D(j_!)$, $G=Lj^*$, $f=j_!$ and $g=Lj^*$ for the last two restricted functors. Write the natural inclusion comparisons as $c_K:F\\iota_UK\\xrightarrow{\\sim}\\iota_X(fK)$ and $d_L:G\\iota_XL\\xrightarrow{\\sim}\\iota_U(gL)$. The displayed map sends $a:fK\\to L$ to the unique $b:K\\to gL$ with $\\iota_U(b)=d_L\\circ\\widetilde\\Phi(\\iota_X(a)\\circ c_K)$. Its inverse sends $b$ to the unique $a$ with $\\iota_X(a)=\\widetilde\\Phi^{-1}(d_L^{-1}\\circ\\iota_U(b))\\circ c_K^{-1}$. Full faithfulness gives these unique morphisms, and cancellation of $c,c^{-1},d,d^{-1}$ and the two ambient inverse identities proves the two restricted inverse identities. For $u:K'\\to K$ and $v:L\\to L'$, write $\\Psi$ for this restricted map. Naturality of $c$, step 4, and naturality of $d$ give, in order,\n$$\\iota_U\\Psi(v\\circ a\\circ f(u))=d_{L'}\\circ G(\\iota_Xv)\\circ\\widetilde\\Phi(\\iota_Xa\\circ c_K)\\circ\\iota_Uu=\\iota_U(g(v))\\circ d_L\\circ\\widetilde\\Phi(\\iota_Xa\\circ c_K)\\circ\\iota_Uu=\\iota_U(g(v)\\circ\\Psi(a)\\circ u).$$\nFaithfulness of $\\iota_U$ proves naturality in both variables. This defines the adjunction in the statement. For the ambient unit $\\eta$ and counit $\\varepsilon$ of step 4, the restricted unit and counit are characterized by $\\iota_U(\\eta^{\\mathrm{cons}}_K)=d_{fK}\\circ G(c_K)\\circ\\eta_{\\iota_UK}$ and $\\iota_X(\\varepsilon^{\\mathrm{cons}}_L)=\\varepsilon_{\\iota_XL}\\circ F(d_L^{-1})\\circ c_{gL}^{-1}$. Thus these are precisely the ambient unit and counit restricted using the inclusion comparisons. For the left triangle, naturality of $c$ gives $\\iota_X(f(\\eta^{\\mathrm{cons}}_K))=c_{gfK}\\circ F(\\iota_U\\eta^{\\mathrm{cons}}_K)\\circ c_K^{-1}$. Substitute the unit and counit formulas and cancel $c_{gfK}^{-1}c_{gfK}$ and $d_{fK}^{-1}d_{fK}$; naturality of $\\varepsilon$ then gives\n$$\\iota_X(\\varepsilon^{\\mathrm{cons}}_{fK}\\circ f(\\eta^{\\mathrm{cons}}_K))=\\varepsilon_{\\iota_XfK}\\circ FG(c_K)\\circ F(\\eta_{\\iota_UK})\\circ c_K^{-1}=c_K\\circ\\varepsilon_{F\\iota_UK}\\circ F(\\eta_{\\iota_UK})\\circ c_K^{-1}=1.$$\nFor the right triangle, naturality of $d$ gives $\\iota_U(g(\\varepsilon^{\\mathrm{cons}}_L))=d_L\\circ G(\\iota_X\\varepsilon^{\\mathrm{cons}}_L)\\circ d_{fgL}^{-1}$. Substitution cancels $d_{fgL}^{-1}d_{fgL}$ and $G(c_{gL}^{-1}c_{gL})$, and naturality of $\\eta$ gives\n$$\\iota_U(g(\\varepsilon^{\\mathrm{cons}}_L)\\circ\\eta^{\\mathrm{cons}}_{gL})=d_L\\circ G(\\varepsilon_{\\iota_XL})\\circ GF(d_L^{-1})\\circ\\eta_{\\iota_UgL}=d_L\\circ G(\\varepsilon_{\\iota_XL})\\circ\\eta_{G\\iota_XL}\\circ d_L^{-1}=1.$$\nThe last equality in each calculation is the corresponding ambient triangle identity. Faithfulness of the inclusions proves both restricted triangle identities.",
+   "text": "Write $\\iota_U$ and $\\iota_X$ for the inclusions of the bounded constructible categories. By [sk-def-sfb-bounded-constructible] these are full subcategories, with the same Hom-sets as the ambient derived categories. The definitions [def-sfb-dc-open-lower-shriek] and [def-sfb-dc-upper-star] give the restricted functors and their comparison with the ambient functors after inclusion for the general coefficient ring $\\Lambda$. In particular, the current extension-by-zero definition equips each object $D(j_!)(\\iota_U K)$ with its bounded-constructibility property and gives the inclusion comparison with identity components. We use its inverse as the comparison $c$ below, so the direction agrees with the Hom formulas. For $K\\in D_{\\mathrm{cons}}(U,\\Lambda)$ and $L\\in D_{\\mathrm{cons}}(X,\\Lambda)$, define the required Hom-bijection by the composite\n$$\\operatorname{Hom}_{D_{\\mathrm{cons}}(X,\\Lambda)}(j_!K,L)\n=\\operatorname{Hom}_{D(\\Mod_{\\Lambda_X})}(D(j_!)\\iota_UK,\\iota_XL)\n\\xrightarrow{\\ \\widetilde\\Phi\\ }\n\\operatorname{Hom}_{D(\\Mod_{\\Lambda_U})}(\\iota_UK,Lj^*\\iota_XL)\n=\\operatorname{Hom}_{D_{\\mathrm{cons}}(U,\\Lambda)}(K,Lj^*L).$$\nHere the equalities use the inclusion comparisons, or equivalently the corresponding canonical Hom-bijections if restrictions commute up to isomorphism. More explicitly, put $F=D(j_!)$, $G=Lj^*$, $f=j_!$ and $g=Lj^*$ for the last two restricted functors. Write the natural inclusion comparisons as $c_K:F\\iota_UK\\xrightarrow{\\sim}\\iota_X(fK)$ and $d_L:G\\iota_XL\\xrightarrow{\\sim}\\iota_U(gL)$. The displayed map sends $a:fK\\to L$ to the unique $b:K\\to gL$ with $\\iota_U(b)=d_L\\circ\\widetilde\\Phi(\\iota_X(a)\\circ c_K)$. Its inverse sends $b$ to the unique $a$ with $\\iota_X(a)=\\widetilde\\Phi^{-1}(d_L^{-1}\\circ\\iota_U(b))\\circ c_K^{-1}$. Full faithfulness gives these unique morphisms, and cancellation of $c,c^{-1},d,d^{-1}$ and the two ambient inverse identities proves the two restricted inverse identities. For $u:K'\\to K$ and $v:L\\to L'$, write $\\Psi$ for this restricted map. Naturality of $c$, step 8, and naturality of $d$ give, in order,\n$$\\iota_U\\Psi(v\\circ a\\circ f(u))=d_{L'}\\circ G(\\iota_Xv)\\circ\\widetilde\\Phi(\\iota_Xa\\circ c_K)\\circ\\iota_Uu=\\iota_U(g(v))\\circ d_L\\circ\\widetilde\\Phi(\\iota_Xa\\circ c_K)\\circ\\iota_Uu=\\iota_U(g(v)\\circ\\Psi(a)\\circ u).$$\nFaithfulness of $\\iota_U$ proves naturality in both variables. This defines the adjunction in the statement. For the ambient unit $\\eta$ and counit $\\varepsilon$ of step 8, the restricted unit and counit are characterized by $\\iota_U(\\eta^{\\mathrm{cons}}_K)=d_{fK}\\circ G(c_K)\\circ\\eta_{\\iota_UK}$ and $\\iota_X(\\varepsilon^{\\mathrm{cons}}_L)=\\varepsilon_{\\iota_XL}\\circ F(d_L^{-1})\\circ c_{gL}^{-1}$. Thus these are precisely the ambient unit and counit restricted using the inclusion comparisons. For the left triangle, naturality of $c$ gives $\\iota_X(f(\\eta^{\\mathrm{cons}}_K))=c_{gfK}\\circ F(\\iota_U\\eta^{\\mathrm{cons}}_K)\\circ c_K^{-1}$. Substitute the unit and counit formulas and cancel $c_{gfK}^{-1}c_{gfK}$ and $d_{fK}^{-1}d_{fK}$; naturality of $\\varepsilon$ then gives\n$$\\iota_X(\\varepsilon^{\\mathrm{cons}}_{fK}\\circ f(\\eta^{\\mathrm{cons}}_K))=\\varepsilon_{\\iota_XfK}\\circ FG(c_K)\\circ F(\\eta_{\\iota_UK})\\circ c_K^{-1}=c_K\\circ\\varepsilon_{F\\iota_UK}\\circ F(\\eta_{\\iota_UK})\\circ c_K^{-1}=1.$$\nFor the right triangle, naturality of $d$ gives $\\iota_U(g(\\varepsilon^{\\mathrm{cons}}_L))=d_L\\circ G(\\iota_X\\varepsilon^{\\mathrm{cons}}_L)\\circ d_{fgL}^{-1}$. Substitution cancels $d_{fgL}^{-1}d_{fgL}$ and $G(c_{gL}^{-1}c_{gL})$, and naturality of $\\eta$ gives\n$$\\iota_U(g(\\varepsilon^{\\mathrm{cons}}_L)\\circ\\eta^{\\mathrm{cons}}_{gL})=d_L\\circ G(\\varepsilon_{\\iota_XL})\\circ GF(d_L^{-1})\\circ\\eta_{\\iota_UgL}=d_L\\circ G(\\varepsilon_{\\iota_XL})\\circ\\eta_{G\\iota_XL}\\circ d_L^{-1}=1.$$\nThe last equality in each calculation is the corresponding ambient triangle identity. Faithfulness of the inclusions proves both restricted triangle identities.",
    "uses": [
     "sk-def-sfb-bounded-constructible",
     "def-sfb-dc-open-lower-shriek",
@@ -95,14 +139,16 @@
  "proof_deps": [
   "sk-def-sfb-module-lower-shriek",
   "def-sfb-module-upper-star",
-  "lem-sfb-finite-upper-star-exact",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-finite-upper-star-exact",
   "def-sfb-modobj-transport",
   "det-prop-sfb-module-pullback-exact-lifted",
   "lem-sfb-alpha-iso",
   "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-change-of-scalars",
   "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-derived-categories",
   "lem-pc-derived-adjoint-functors",
   "def-pc-essentially-constant-ind-diagram",
@@ -249,10 +295,45 @@
    "results": "CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit",
    "date": "2026-10-16",
    "verdict": "Generic derivation of an ambient adjunction, requiring absolute derived functors and localization data; does not state the condensed-module bounded-constructible restriction. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|boundedConstructible.*Adjunction|CondensedRing",
+   "results": "Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete condensed-module restricted adjunction: only generic adjunction constructions or different condensed adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete condensed-module restricted adjunction: only generic adjunction constructions or different condensed adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero left adjoint to derived pullback on bounded constructible derived categories of modules over a condensed ring",
+   "results": "LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, Condensed.profiniteSolidification, LightCondSet.LocallyConstant.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete condensed-module restricted adjunction: only generic adjunction constructions or different condensed adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero left adjoint to pullback on bounded constructible derived categories",
+   "results": "CategoryTheory.IsPullback.zero_left, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CategoryTheory.Functor.preservesZeroMorphisms_of_isLeftAdjoint, CategoryTheory.Subobject.existsPullbackAdj, AddMonCat.adjoinZeroAdj, CategoryTheory.MonoOver.existsPullbackAdj, CategoryTheory.pullbackShiftFunctorZero_hom_app, CategoryTheory.Limits.hasPullback_over_zero",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete condensed-module restricted adjunction: only generic adjunction constructions or different condensed adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction restricts along fully faithful inclusions to full subcategories when both adjoint functors preserve the subcategories",
+   "results": "CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete condensed-module restricted adjunction: only generic adjunction constructions or different condensed adjunctions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -272,8 +353,8 @@
   "date": "2026-10-17",
   "item": "def-sfb-dc-open-lower-shriek-adjunction",
   "worker": "stage1",
-  "summary": "Expanded the ambient exact derived adjunction, transport along D(j*) ≅ Lj*, and restriction of natural Hom-bijections. Repaired the returned coefficient-scope error: exactness of module pullback is proved by exact abelian-sheaf transport and scalar extension along alpha_j, using only statements valid for an arbitrary commutative condensed ring. Removed the admissible-coefficient proposition from proof dependencies. No new nodes; statement unchanged. Repair of the stale-citation return: revalidated current extension-by-zero object/morphism construction and identity inclusion comparison, specified its inverse as c in step 5, and refreshed its verbatim quote and the current coefficient-ring-morphism quote. Current return repaired against a fresh delivery base: reread the changed module-lower-shriek statement, made its explicit extension-by-zero functor and coefficient scope the input of step 1, and narrowed its quotation to exactly that clause. The changed finite-pullback cross-reference and compactification wording do not change that input; all other cited statements were revalidated. Retry repair 2026-10-17: compared the retained reviewed-base snapshot with the current DAG, reread all 17 proof-dependency statements, verified all 20 verbatim citations and the unchanged item statement, and refreshed the exact extension-by-zero excerpt. The current reference/compactification wording is not used as an extra theorem.",
-  "blueprint": "Realizes all sentences of def-sfb-dc-open-lower-shriek-adjunction.proof.md: steps 1–3 supply the first sentence, step 4 supplies transport, and step 5 supplies preservation/inclusion comparisons and restriction. The ambient calculation uses the same exact-functor route as prop-sfb-module-derived-open-adjunction.proof.md; it is not a new coefficient-layer identification.",
+  "summary": "Repair of the Q107 dedicated re-split handoff: replaced the 2499-character exactness step by five short steps citing the existing exactness-lifting, sheaf-tensor, sheaf-Grothendieck, and scalar-change statements. Added the previously implicit abelian-sheaf input explicitly. Existing nodes already state every hidden non-elementary input, so no duplicates were created. Retained the later derived-adjunction, transport and restriction arguments with updated step numbers. Statement and Lean metadata unchanged.",
+  "blueprint": "All sentences of def-sfb-dc-open-lower-shriek-adjunction.proof.md: steps 1–7 supply its exact ambient adjunction; step 8 transports D(j*) to Lj*; step 9 restricts the Hom bijections. Steps 2–5 follow Setting, Transport, Extension of scalars and Conclusion of det-prop-sfb-module-pullback-exact-main.proof.md, using existing nodes for its subsidiary results.",
   "tool_uses": [
    {
     "node": "lem-pc-derived-adjoint-functors",
@@ -290,6 +371,10 @@
    {
     "node": "lem-sfb-finite-upper-star-exact",
     "why": "Exact inverse image with coefficient category Ab; used before transport to module objects, so its hypotheses do not restrict the condensed coefficient ring."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Generic abelian-sheaf category theorem used with A = Ab to supply the abelian, equalizer and coequalizer hypotheses of lifted exactness and scalar change. It does not replace a restricted-functor unit step."
    }
   ]
  },
@@ -297,15 +382,16 @@
   "lem-pc-derived-adjoint-functors",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-sfb-finite-upper-star-exact"
+  "lem-sfb-finite-upper-star-exact",
+  "lem-sfb-proetale-sheaves-grothendieck"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q53-a520b86a9",
-  "group": "Q53",
+  "reviewer": "NT-cc-Q107-673bcdbc3",
+  "group": "Q107",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-a520b86a9 (reviewer sub-agent of L); spot-checked: Wrote review.md with checks of all five steps, seventeen cited statements, blueprint routes, Stacks 015F/05PU/09T5, edge cases, and archived target coefficients and morphisms. Arbitrary condensed coefficients are preserved; transport and restriction formulas check out. No new nodes or fixes. All four declared tool uses accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-673bcdbc3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unchanged statement (arbitrary commutative condensed Lambda, module objects over Lambda_T in Sh(T_proet,Ab)), all 9 steps, every cited statement, the blueprint item and its proof, the sk-prop-sfb-module-derived-factorization and det-prop-sfb-module-pullback-exact-main sources, and Stacks derived.tex Tags 015F (line 5884) and 09T5 (line 9596). Steps 1-5 check out: I matched the hypotheses of the lifted-exactness lemma (F=j*_Ab exact; the forgetful-functor equation from the transport definition) and of change-of-scalars clauses 4 and 5 applied to alpha_j and its inverse (commutativity carried across the ring isomorphism). Step 6's essential-constancy check is correct and writes out the details 015F omits. I recomputed the step 8 and step 9 restriction, unit/counit and triangle formulas; they are correct. There are no new nodes. The duplicate search for D(j_!) -| D(j*) found only the finite-coefficient and ringed-space versions, which are different categories. Fault fixed (B3/C4): step 6 took L(j_!)=D(j_!) and R(j*)=D(j*) from the exact-functor clause of sk-def-sfb-derived-categories without checking that clause's existence hypotheses, and it never cited the definition of the ambient Lj* that the statement transports to. The corrected item in fixes/ identifies Lj* through sk-def-sfb-module-derived-pushpull plus the exact-functor clause, and states that L(j_!) and R(j*) are meant in the essential-constancy sense of lem-pc, where step 6 shows directly that they are D(j_!) and D(j*). Step 7 now cites only lem-pc, step 8 cites the definition of Lj*, sk-def-sfb-module-derived-pushpull is added to stmt_deps and the uses of steps 6 and 8, and proof_deps is recomputed; the BFS cycle check found no cycle. All five declared tool uses are accepted, including the new lem-sfb-proetale-sheaves-grothendieck. No SGA source is used. Edge cases checked: U empty, j the identity, Lambda=0, Lambda=Z[t].; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

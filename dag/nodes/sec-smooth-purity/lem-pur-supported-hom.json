@@ -68,18 +68,19 @@
    }
   },
   {
-   "text": "The cokernel universal property from step 3 gives $\\operatorname{Hom}(P,M)=\\ker(\\operatorname{Hom}(A_X,M)\\to\\operatorname{Hom}(j_!A_U,M))$. For any module sheaf $N$ over a constant coefficient ring, evaluation on $1$ identifies $\\operatorname{Hom}(A_T,N)$ with $N(T)$: the inverse sends $s\\in N(T)$ to the map $a\\mapsto a\\,s|_V$ on each site object $V$. These are inverse module maps and commute with restrictions by [def-weil-sheaf-of-modules-category]. Compute the other Hom group explicitly. By [def-weil-presheaf-modules-sheafification], a map $\\beta:j_!A_U\\to M$ is uniquely a module-presheaf map from the extension presheaf of [def-weil-extension-by-zero-presheaf] to $M$. The site and coefficient identifications of [lem-weil-proetale-weakly-etale-localization] give $\\beta\\mapsto\\beta_U(1)\\in M(U)$, where $1$ is taken in the unique $U\\to U$ summand before sheafification. Conversely, for $s\\in M(U)$, on an object $V$ mapping to $U$ send $a\\in A_U(V)=A_X(V)$ to $a\\,s|_V$; on an object not mapping to $U$ use the zero map from the zero presheaf value. These maps commute with restrictions: when $V$ maps to $U$, semilinearity gives $(a\\,s|_V)|_{V'}=a|_{V'}\\,s|_{V'}$; otherwise the source value is zero, including when $V'$ maps to $U$. Sheafification gives the required map $\\beta$. Evaluation returns $s$, and conversely naturality along $V\\to U$ gives $\\beta_V(1)=\\beta_U(1)|_V$, so linearity recovers $\\beta_V(a)=a\\,\\beta_U(1)|_V$ on every summand. Thus these constructions are inverse additive identifications $\\operatorname{Hom}(j_!A_U,M)\\cong M(U)$. Under them precomposition with the explicitly constructed $\\epsilon$ is restriction $M(X)\\to M(U)$, since its $U$-summand sends $1$ to $1$. Hence the displayed kernel is $\\ker(M(X)\\to M(U))=\\Gamma_Z(X,M)$ by [def-pur-support-cohomology]. We obtain an additive natural isomorphism $v(M):=\\operatorname{Hom}(P,M)\\cong\\Gamma_Z(X,M)$. Naturality holds because a module map $M\\to N$ applies its section map to the same supported section on both sides.",
+   "text": "The cokernel universal property from step 3 gives $\\operatorname{Hom}(P,M)=\\ker(\\operatorname{Hom}(A_X,M)\\xrightarrow{-\\circ\\epsilon}\\operatorname{Hom}(j_!A_U,M))$. Maps of module sheaves are the module-presheaf maps of the underlying presheaves [def-weil-sheaf-of-modules-category], and by the universal property of [def-weil-presheaf-modules-sheafification] maps $j_!A_U\\to M$ are the module-presheaf maps from the extension presheaf $P_{A_U}$ of [def-weil-extension-by-zero-presheaf]. Put $\\mathcal O=A_X$. Clauses (2) and (4) of [lem-weil-proetale-weakly-etale-localization] give $A_U(V\\to U)=A_X(V)$ and at most one map $V\\to U$, so $P_{A_U}$ is the free presheaf $\\mathcal O[h_U]$, with $1$ in the summand of $\\varphi$ as $e_\\varphi$ and the same restrictions; and $A_X=\\mathcal O[h_X]$, since every object has exactly one map to the final object $X$. Hence [lem-weil-pbc-free-yoneda-presheaf-module] gives bijections $\\operatorname{Hom}(A_X,M)\\cong M(X)$, $\\varphi\\mapsto\\varphi_X(1)$, and $\\operatorname{Hom}(j_!A_U,M)\\cong M(U)$, $\\beta\\mapsto\\beta_U(1)$ ($1$ in the $\\mathrm{id}_U$ summand before sheafification), natural in $M$ and additive since addition of maps is sectionwise. Under them precomposition with $\\epsilon$ is restriction: $(\\varphi\\epsilon)_U(1)=\\varphi_U(\\epsilon_U(1))=\\varphi_U(1)=\\varphi_X(1)|_U$, since the $U$-summand of $\\epsilon$ sends $1$ to $1$ (step 3) and $\\varphi$ commutes with restriction. So the kernel is $\\ker(M(X)\\to M(U))=\\Gamma_Z(X,M)$ by [def-pur-support-cohomology], and we obtain an additive isomorphism $v(M):=\\operatorname{Hom}(P,M)\\cong\\Gamma_Z(X,M)$, natural in $M$ by the naturality clause of [lem-weil-pbc-free-yoneda-presheaf-module] restricted to the kernels.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-presheaf-modules-sheafification",
     "def-weil-extension-by-zero-presheaf",
     "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-free-yoneda-presheaf-module",
     "def-pur-support-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-supported-hom.md",
-    "place": "Proof: global sections are Hom from the coefficient unit; restriction and naturality written out"
+    "place": "Proof: global sections are Hom from the coefficient unit; Hom from the free presheaf (Stacks 03EJ) and restriction written out"
    }
   },
   {
@@ -128,7 +129,8 @@
   "lem-pur-kinjective-degreewise-existence",
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-sc-p1-rhom-hom-derived-roof",
-  "lem-weil-pbc-closed-immersion-base-change"
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-free-yoneda-presheaf-module"
  ],
  "proof_origin": {
   "by": "agent",
@@ -215,7 +217,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -312,12 +314,12 @@
   "lem-sc-p1-rhom-hom-derived-roof"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NC-96145d9d0",
-  "group": "NC",
+  "reviewer": "NT-cc-NA-a97a412e6",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-96145d9d0 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources, and unit/chapter route. All six steps are valid without quasi-compact-complement assumptions. Repaired one C1 missing citation in step 2 to the existing closed-immersion base-change Mathlib leaf. Whole corrected JSON is under fixes/dag/nodes; concrete checks and accepted tool_uses are recorded in review.md. No target or statement changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a97a412e6 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the blueprint item at master order 1940 (identical text in main-20261015/main-20261017 at order 2284), the unit and chapter, and every one of the 27 cited statements in full. The delivery only changes status unsplit->split; its content equals the side-DAG node. The statement agrees with the blueprint. It fixes the finite coefficient A_{E,n}, takes an arbitrary scheme and closed immersion, works in Mod(A_X) on X_proet and D(X_proet,A), uses the underived i_* in degree 0 with the cochain shift, and adds no hypothesis. The departure from the blueprint route is justified: def-pur-flasque-support gives G_Z M = s_*s^!M only when j is quasi-compact, and the report records this under Source error. Step 1: degree-0 comparison plus the finite constant-ring results give A_T(T)=LC(|T|,A). Step 2: local constant lifts and a finite affine refinement on each affine make rho:A_X->i_*A_Z epic, without assuming j quasi-compact. Step 3: rho eps=0 since W_Z is empty over U; a kernel section has clopen nonzero locus inside W x_X U and glues with 0, so P=coker eps. Step 5: small skeleton gives a Grothendieck category with enough injectives, and the gamma/delta composites are identities by uniqueness in clause (1). Step 6: the generic derived-Hom result applies to an arbitrary object P. Edge cases checked: Z empty, Z=X, X empty, F=0, negative a. Long step 4 (2012 chars) re-proved the Hom-from-free-presheaf identification inline; the existing Mathlib leaf lem-weil-pbc-free-yoneda-presheaf-module (Stacks 03EJ, PresheafOfModules.freeYonedaEquiv) states it (C5/C1). FIX: step 4 now identifies P_{A_U}=O[h_U] and A_X=O[h_X], cites that leaf, and is 1718 chars; the leaf is added to proof_deps. The whole corrected node is in fixes/dag/nodes/sec-smooth-purity/. No new nodes, no duplicates, no SGA. I accept the 11 declared tool_uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SupportedCohomologyHom",
