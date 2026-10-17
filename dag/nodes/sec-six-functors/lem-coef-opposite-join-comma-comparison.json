@@ -272,5 +272,30 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-d020dcee4 (reviewer sub-agent of L); spot-checked: I read the item statement, all 9 steps, the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-slice-right-fibration, lem-coef-join-slice-cocone-comparison, lem-coef-infinity-join-cone-calculus) and the citing recognition lemma's Steps 7-9. The statement is true and not weakened. Checks: (ab)^v = a^v b^v and double reversal is the identity, so the opposite construction is simplicial and involutive; horn reversal sends Lambda_i^n to Lambda_{n-i}^n, so C^op is a quasicategory; block reversal b_m is simplicial, including empty blocks; the endpoint swap by rho_1 makes S land in P_a; the operator identity rho_m Delta(alpha) = Delta(alpha^v)^op rho_r gives operator compatibility of R and S. I re-derived the Step 8 identity in general ((u^v)^{-1}(0) = {0..n-t}, restriction j -> t+j). On representables Y = Delta^p it gives the closed form: 0 if u(i)=0, y(i)+1 if u(i)=1, which is exactly the left collapse T_Y -> Delta^0*Y. The Y empty case (V = C, P_a = C^op), the empty-C case and the pure-block cases hold. Step 2 is the only theorem use, and its hypotheses (small L, quasicategory E) are met. Every other step is a fair elementary coordinate identity, and each cited statement says what the step takes from it (C3/C4). The route stays inside unit sk-prop-sf-biduality-general; the def-cbc node is a definition. There are no SGA citations, no new nodes and no tool_uses. Duplicate candidates are lem-coef-infinity-cocone-opposite-join-functor (only the single-vertex join and Fun-op ingredients) and lem-coef-infinity-relative-cone-equivalence clause 4 (only the vertex slice); neither states this item. The Riehl-Verity source is not in literature/; it is recorded as WANTED with proof_origin agent. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-416d289c2",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Full second reading and scompile.py verification found no substantive or mechanical errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OppositeJoinCommaComparison",
+  "declaration": "SSet.Enhanced.opposite_join_comma_comparison",
+  "declarations": [
+   "SSet.Enhanced.IsOrderedBlockReversal",
+   "SSet.Enhanced.IsOppositeJoinFormula",
+   "SSet.Enhanced.IsOppositeCommaFormula",
+   "SSet.Enhanced.IsJoinComparisonFamily",
+   "SSet.Enhanced.opposite_join_comma_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OppositeJoinCommaComparison.lean",
+  "statement": "theorem opposite_join_comma_comparison (Y C : SSet.{u}) [Quasicategory C] (d : Y ⟶ C) : Quasicategory (SSet.opFunctor.obj C) ∧ ∃ R : (joinSlice d).op ≅ joinCocone (SSet.opFunctor.map d), ∃ S : (coneCategory d).op ≅ coconeCategory (SSet.opFunctor.map d), R.hom ≫ joinCoconeProjection (SSet.opFunctor.map d) = SSet.opFunctor.map (joinSliceProjection d) ∧ S.hom ≫ calculusApex (SSet.opFunctor.map d) false = SSet.opFunctor.map (calculusApex d true) ∧ IsOppositeJoinFormula d R ∧ IsOppositeCommaFormula d S ∧ ∀ (κ : ∀ L X : SSet.{u}, bluntJoin L X ⟶ orderedJoinFunctor.obj (L, X)) (r : ∀ {L E : SSet.{u}} (a : L ⟶ E), joinCocone a ⟶ coconeCategory a), IsJoinComparisonFamily κ r → ∀ (s : (joinSlice d).obj (op ⦋0⦌)), ∃ (κY : Y ⊗ Δ[1] ⟶ orderedJoinFunctor.obj (Δ[0], Y)) (t : fatLeftJoinCone Y ⟶ orderedJoinFunctor.obj (Δ[0], Y)), IsJoinConeCylinder Y κY ∧ pushout.inl (stdSimplex.isTerminalObj₀.from Y) (coneCylinderEnd Y 0) ≫ t = orderedJoinInl Δ[0] Y ∧ pushout.inr (stdSimplex.isTerminalObj₀.from Y) (coneCylinderEnd Y 0) ≫ t = κY ∧ (SSet.opObjEquiv ((S.inv.app (op ⦋0⦌)) ((r (SSet.opFunctor.map d)).app (op ⦋0⦌) ((R.hom.app (op ⦋0⦌)) s)))).val = (s.base, diagramVertex (MonoidalClosed.curry (pushout.inr (stdSimplex.isTerminalObj₀.from Y) (coneCylinderEnd Y 0) ≫ t ≫ s.extension)))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

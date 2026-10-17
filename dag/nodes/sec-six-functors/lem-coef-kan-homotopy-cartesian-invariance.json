@@ -149,5 +149,24 @@
   "group": "Q148",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-e7f68274a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its three steps, and the full statements of the three nodes it cites. The commit touches only the item and the report. It adds no new nodes and claims no tool_uses. It does not use SGA, and the item's statement is unchanged. Step 1: the Kan-Quillen model structure in lem-coef-kan-quillen-model-right-proper-core is functorial, which gives the replacement R. Each RS is Kan, each r_S is a trivial cofibration, and naturality r_{S'}e=R(e)r_S plus two-out-of-three makes every R(e) a weak equivalence. One small wording point, left as it is: the step says lem-coef-kan-fibrant-path-recognition 'supplies' R, but that node only quantifies over any such R; existence comes from the model-structure node, which the step also cites. Step 2: every hypothesis of lem-coef-kan-homotopy-pullback-invariance holds. The six objects RX, RY, RZ and their primed copies are Kan, the three maps Rα are weak equivalences, and cu=u'a and cv=v'b follow from functoriality and the edge commutations. Step 3: I checked h∘c=c'∘Rα_Q coordinate by coordinate. The recognition node is applied to both squares with the same R, and two-out-of-three gives both directions. I tested an empty corner, a non-Kan base, identity comparison maps and a terminal base. Duplicate search: rg for 'homotopy.cartesian' over the DAG returned 33 files; the closest are kan-nerve-pullback-recognition (Kan corners only, in N_hc(Kan)), the fibration criterion and the pasting lemma, and none states this. The item does not restate a clause of its parent lem-coef-sharp-pullback-calculus. All cited nodes are in unit sk-prop-sf-biduality-general, and their transitive closure (73 nodes) does not contain the item, so there is no cycle. Rezk Section 2.3 is not archived; the report records it as WANTED and the proof is marked agent-written. The Mathlib searches cover all three kinds. This is not a target node. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-812e1d317",
+  "group": "NW",
+  "result": "fix",
+  "note": "Mechanical H11 report repair supplied; statement, dependencies, edge cases, docstrings, and scompile evidence checked."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanHomotopyCartesianInvariance",
+  "declaration": "SSet.Enhanced.kan_homotopy_cartesian_invariance",
+  "file": "lean/Sheaf/AlgebraicTopology/KanHomotopyCartesianInvariance.lean",
+  "statement": "theorem kan_homotopy_cartesian_invariance {Q X Y Z Q' X' Y' Z' : SSet.{u}} (a : Q ⟶ X) (b : Q ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z) (a' : Q' ⟶ X') (b' : Q' ⟶ Y') (f' : X' ⟶ Z') (g' : Y' ⟶ Z') (h : a ≫ f = b ≫ g) (h' : a' ≫ f' = b' ≫ g') (eQ : Q ⟶ Q') (eX : X ⟶ X') (eY : Y ⟶ Y') (eZ : Z ⟶ Z') (ha : a ≫ eX = eQ ≫ a') (hb : b ≫ eY = eQ ≫ b') (hf : f ≫ eZ = eX ≫ f') (hg : g ≫ eZ = eY ≫ g') (heQ : IsWeakHomotopyEquivalence eQ) (heX : IsWeakHomotopyEquivalence eX) (heY : IsWeakHomotopyEquivalence eY) (heZ : IsWeakHomotopyEquivalence eZ) : (∃ (Xf Yf : SSet.{u}) (i : X ⟶ Xf) (j : Y ⟶ Yf) (ff : Xf ⟶ Z) (gf : Yf ⟶ Z), i ≫ ff = f ∧ j ≫ gf = g ∧ IsWeakHomotopyEquivalence i ∧ IsWeakHomotopyEquivalence j ∧ Fibration ff ∧ Fibration gf ∧ ∃ c : Q ⟶ pullback ff gf, c ≫ pullback.fst ff gf = a ≫ i ∧ c ≫ pullback.snd ff gf = b ≫ j ∧ IsWeakHomotopyEquivalence c) ↔ (∃ (Xf Yf : SSet.{u}) (i : X' ⟶ Xf) (j : Y' ⟶ Yf) (ff : Xf ⟶ Z') (gf : Yf ⟶ Z'), i ≫ ff = f' ∧ j ≫ gf = g' ∧ IsWeakHomotopyEquivalence i ∧ IsWeakHomotopyEquivalence j ∧ Fibration ff ∧ Fibration gf ∧ ∃ c : Q' ⟶ pullback ff gf, c ≫ pullback.fst ff gf = a' ≫ i ∧ c ≫ pullback.snd ff gf = b' ≫ j ∧ IsWeakHomotopyEquivalence c)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both sides expand exactly the two-leg condition in kan_fibrant_path_recognition. No new predicate: the equivalent named IsHomotopyCartesian belongs to downstream SharpPullbackCalculus, whose import would close a proof-dependency cycle."
  }
 }

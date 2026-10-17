@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "lem-coef-pinched-cube-latching",
-  "lem-coef-simplicial-interval-lifting"
+  "lem-coef-simplicial-interval-lifting",
+  "def-coef-face-cocone-evaluation"
  ],
  "proof": [
   {
@@ -178,5 +179,27 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-64d7248fa (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 5 steps, the sources, the blueprint field and the searches. I also read the full statements of its two in-unit dependencies: lem-coef-pinched-cube-latching (the C[Δ^m] subset model, with union composition and image functoriality) and lem-coef-simplicial-interval-lifting (associative unital simplicial composition). I read the parent boundary-cube proof in full; its Step 4 is where this item is used. I compared the item with its sibling face-cocone-evaluation-simplicial, which proves a different statement (compatibility with α^*), so it is not a duplicate. Step 1 checks types: R⊆S_0⊆S_t puts the cut points into every entry, and the endpoint objects are identified through the singletons in F. Step 2 is correct: for consecutive u<v of R', v≤a_b, so the support is a nonempty subset of T_b and the closure of F under nonempty subsets puts it in F. Step 3 is correct: (S_t∩[a,c])∪(S_t∩[c,b])=S_t∩[a,b] entrywise because c∈S_0; then the functor axiom of f_T, the strict compatibility hypotheses and associativity in D give the equality. Step 4 is a properly set-up induction on |R'\\R|, and Step 5 compares any two admissible splittings through S_0. Every step marked elementary is genuinely elementary. The conclusion correctly depends on an admissible splitting existing; none is claimed. I checked small cases myself: |V| up to 5, q≤2, the full family and the proper nonempty family. There were 1372 refinements and no failures of admissibility or of the union identity. An rg search of the DAG found no duplicate, and the delivery has no new nodes. HTT is not in literature/; it is recorded as WANTED and proof_origin is agent, which is right. The facts used are carried by the cited node statements. No SGA source is used and no target is involved. No tool_uses are needed and there are no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fa47690e5",
+  "group": "NN",
+  "result": "pass",
+  "note": "The theorem matches the node verbatim, reuses landed definitions without duplicates, has correct dependencies and edge-case coverage, and compiles via scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FaceCoconeSplittingRefinement",
+  "declaration": "SSet.FaceCocone.splitting_refinement",
+  "declarations": [
+   "SSet.FaceCocone.splitting_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FaceCoconeSplittingRefinement.lean",
+  "statement": "theorem splitting_refinement {V : Type u} [LinearOrder V] [Finite V] [Nonempty V] (D : SCat.{u}) (f : Data V D) (i j : V) (hij : i < j) (q : ℕ) (S : Flag i j q) : (∀ (R R' : Splitting S) (hR : f.IsAdmissible R), Set.range R.joint ⊆ Set.range R'.joint → f.IsAdmissible R' ∧ ∀ hR' : f.IsAdmissible R', f.evaluation R' hR' = f.evaluation R hR) ∧ (∀ (R R' : Splitting S) (hR : f.IsAdmissible R) (hR' : f.IsAdmissible R'), f.evaluation R' hR' = f.evaluation R hR) ∧ (∀ (R : Splitting S) (hR : f.IsAdmissible R), ∃ C : Splitting S, C.IsCanonical ∧ ∃ hC : f.IsAdmissible C, f.evaluation C hC = f.evaluation R hR)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Imports and reuses the landed def-coef-face-cocone-evaluation module, removing all duplicate constructions from returned head 4d759f78ddcf. Data bundles precisely the face-family and strict-compatibility hypotheses; Flag bundles precisely the nested endpoint-containing interval subsets. Splitting, IsAdmissible, evaluation and IsCanonical are the existing declarations. Only the requested theorem is declared here; the informal statement is unchanged."
  }
 }
