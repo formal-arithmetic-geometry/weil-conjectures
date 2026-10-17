@@ -17,9 +17,98 @@
   "def-weil-closed-immersion",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=V\\setminus Z$ and give $V$ the divisorial log structure $M$ of [def-trf-log-regular-pair]. By that definition, $U$ is dense, $M$ is fs, its triviality locus is $U$, and the log-regular dimension condition is exactly that of [def-trf-fs-log-blowup]. The finite-type scheme $V$ has a finite affine cover by finite-type $F$-algebras. A field is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-algebra-noetherian] shows that these rings are Noetherian. Thus $V$ is quasi-compact and locally Noetherian, as required below.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1--1.4, printed p. 69; Expose VIII, 3.4.1, printed p. 110."
+   }
+  },
+  {
+   "text": "For every geometric point, $P=\\overline M_{\\bar v}$ is sharp and saturated. If $ng=0$ in $P^{\\rm gp}$, saturation puts both $g$ and $-g$ in $P$; then $g$ is a unit and hence zero because $P$ is sharp. Thus $P^{\\rm gp}$ is torsion free. Apply [lem-trf-monoidal-resolution-tower] to $(V,M)$ to obtain a finite tower $(X_n,M_n)\\to\\cdots\\to(X_0,M_0)=(V,M)$ whose last characteristic monoids are free. Write $b_i:X_{i+1}\\to X_i$ for its underlying maps and $\\mathcal I_i$ for its coherent log ideals. This step resolves monoids only; regularity of the underlying schemes will follow after establishing log regularity throughout the tower.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-monoidal-resolution-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.3.14--3.3.15 and 3.4.8, printed pp. 109--111."
+   }
+  },
+  {
+   "text": "We use the following elementary observation in the induction. If $X$ is integral and $J$ a nonzero finite-type ideal, its blowup $B$ is integral: on an affine domain $A$, the nonempty charts in [prop-nagata-affine-blowup-chart-cover] are $\\operatorname{Spec}A[J/a]$ with $a\\ne0$. By [def-nagata-blowup-chart-ring] each is a domain inside $\\operatorname{Frac}A$. They contain the same generic point, and all their pairwise intersections contain that point, so their union is irreducible and reduced. Across affine opens of integral $X$ these generic points agree. The normalization $B^\\nu$ is integral for the same reason: [def-sc-normalization] takes integral closures of these domains inside the same function field, so the resulting affine domains glue with that generic point. This writes out the assertion of Stacks Tag 02ND (divisors.tex, lemma-blow-up-integral-scheme); no separate node is needed for the observation.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "def-sc-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.4.6(i), printed p. 111; elementary chart argument, also Stacks 02ND, divisors.tex, lemma-blow-up-integral-scheme."
+   }
+  },
+  {
+   "text": "Induct on $i$ with claim: $X_i$ is integral and of finite type over $F$, $(X_i,M_i)$ is log regular, and its triviality locus $U_i$ is the inverse image of $U$ and maps isomorphically to $U$. Step 1 is the base. For the next stage apply [lem-trf-log-blowup-normalization] to $X_i$ and $\\mathcal I_i$. Its hypotheses hold: finite type over the field implies locally Noetherian as in Step 1; the induction supplies integrality and log regularity. It identifies $X_{i+1}$ with $B_i^\\nu$ for $B_i=\\operatorname{Bl}_{J_i}X_i$, gives log regularity, and gives $U_{i+1}=b_i^{-1}U_i\\cong U_i$. The ideal $J_i$ is nonzero, finite type and quasi-coherent, so Step 3 makes $B_i$ and $X_{i+1}$ integral. By [lemma-nagata-blowup-proper] the map $B_i\\to X_i$ is proper, hence finite type by [def-weil-proper-morphism]. By [lem-sfb-finite-type-composition-base-change], $B_i$ is finite type over $F$. Therefore [lem-sc-normalization-exists] applies to $B_i$ and makes $X_{i+1}\\to B_i$ finite. It is proper by [lem-weil-pbc-finite-proper]. Composition [lem-weil-pbc-proper-composition] makes $b_i$ proper. Properness again gives finite type, and finite-type composition makes $X_{i+1}$ finite type over $F$. This proves the inductive claim and properness of every $b_i$.",
+   "uses": [
+    "lem-trf-log-blowup-normalization",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.4.6(i) and 3.4.8--3.4.9, printed pp. 111--112; normalized blowup tower, with ordinary properness and finite normalization inputs made explicit."
+   }
+  },
+  {
+   "text": "Take $V_1=X_n$ and let $p=b_0\\circ\\cdots\\circ b_{n-1}:V_1\\to V$; if $n=0$, take $p=\\operatorname{id}_V$. By Step 4, $V_1$ is integral finite type over $F$ and $p$ is an $F$-morphism, isomorphic over $U$. It is proper by repeated use of [lem-weil-pbc-proper-composition]; for $n=0$ this follows directly from the definition of properness since the identity and all its base changes are identities. The log scheme $(X_n,M_n)$ is log regular by Step 4, and its characteristic monoids are free by Step 2. Thus [lem-trf-free-characteristic-regular-boundary] makes $V_1$ regular and its reduced nontriviality locus an effective Cartier normal crossings divisor. Since its triviality locus is exactly $p^{-1}U$, that divisor is precisely $(p^{-1}Z)_{\\rm red}$. The same criterion makes $p^{-1}U$ dense. These are every assertion of the item, including the empty-divisor case; no assertion about smooth global components is used.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-trf-free-characteristic-regular-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.4.4 and 3.4.8, printed pp. 110--111, and 4.1.1, printed p. 117; Expose VI, 1.4 and 1.7, printed pp. 69--70."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-regular-pair",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-monoidal-resolution-tower",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-nagata-blowup-chart-ring",
+  "def-sc-normalization",
+  "lem-trf-log-blowup-normalization",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-free-characteristic-regular-boundary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.3.14--3.3.15 and 3.4.4--3.4.9, printed pp. 109--112; Expose VI, 1.4 and 1.7, printed pp. 69--70. Ordinary integrality, finite normalization and properness spelled out."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +137,45 @@
    "results": "{\"t\": \"2026-10-17T15:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"An integral log regular finite type scheme admits a proper birational regular modification whose reduced inverse boundary is a normal crossings divisor.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"e0004b018d49e9de\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log regular pair over a field admits a proper regular modification with normal crossings boundary.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\nRead the returned types: these concern ordinary smooth morphisms, normalization, localization, regular sequences, manifold charts or convex cones; none defines fs logarithmic schemes or states the logarithmic assertion searched for.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve logarithmically regular varieties by monoidal blowups.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submonoid.log_mul\", \"module\": \"Mathlib.Algebra.Group.Submonoid.Membership\", \"type\": \"[DecidableEq M] {n : M} (h : Function.Injective fun m : ℕ => n ^ m) (x y : powers (n : M)) :\\n  log (x * y) = log x + log y\", \"doc\": \"In a monoid $M$ with decidable equality, for an element $n$ where the map $k \\\\mapsto n^k$ is injective, the logarithm of the product of any two elements $x$ and $y$ in the submonoid generated by $n$ i\"}\n  {\"name\": \"Height.logHeight\", \"module\": \"Mathlib.NumberTheory.Height.Basic\", \"type\": \"(x : ι → K) : ℝ\", \"doc\": \"The function maps a tuple $ x $ to the natural logarithm of its multiplicative height, defined as $ \\\\log(\\\\text{mulHeight}(x)) $, where $ \\\\text{mulHeight}(x) $ is the product of absolute values of the \"}\n  {\"name\": \"Finsupp.logHeight_eq_log_mulHeight\", \"module\": \"Mathlib.NumberTheory.Height.Basic\", \"type\": \"(x : α →₀ K) : logHeight x = log (mulHeight x)\", \"doc\": \"For any function $ x $ from $ \\\\alpha $ to $ K $ that is zero except at finitely many points, the logarithmic height of $ x $ is equal to the natural logarithm of the multiplicative height of $ x $.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"isRegular_toMul\", \"module\": \"Mathlib.Algebra.Group.TypeTags.Basic\", \"type\": \"{a : Additive α} : IsRegular a.toMul ↔ IsAddRegular a\", \"doc\": \"For an element $ a $ in the additive type tag $ \\\\text{Additive} \\\\, \\\\alpha $, the element $ a $ is regular in the multiplicative structure on $ \\\\alpha $ (via the canonical coercion $ \\\\text{toMul} $) if\"}\n  {\"name\": \"WithZero.log_exp\", \"module\": \"Mathlib.Algebra.GroupWithZero.WithZero\", \"type\": \"(a : M) : log (exp a) = a\", \"doc\": \"For any element $ a $ in a multiplicative monoid $ M $, the composition of the logarithm and exponential functions (as defined for the WithZero type) satisfies $ \\\\log(\\\\exp(a)) = a $.\"}\n  {\"name\": \"CFC.log_monotoneOn\", \"module\": \"Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.ExpLog.Order\", \"type\": \": MonotoneOn log {a : A | IsStrictlyPositive a}\", \"doc\": \"The logarithm function is monotonic on the set of strictly positive elements $\\\\{a \\\\in A \\\\mid a \\\\text{ is strictly positive}\\\\}$, meaning that for any $a, b$ in this set with $a \\\\leq b$, it holds that $\"}\n  {\"name\": \"Submonoid.LocalizationMap.map_isRegular\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"(f : LocalizationMap S N) {m : M} (hm : IsRegular m) : IsRegular (f m)\", \"doc\": \"If $ m $ is a regular element in the commutative monoid $ M $, then its image $ f(m) $ under the localization map $ f : M \\to N $ is a regular element in the commutative monoid $ N $.\"}\nRead the returned types: these concern ordinary smooth morphisms, normalization, localization, regular sequences, manifold charts or convex cones; none defines fs logarithmic schemes or states the logarithmic assertion searched for.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned types: these concern ordinary smooth morphisms, normalization, localization, regular sequences, manifold charts or convex cones; none defines fs logarithmic schemes or states the logarithmic assertion searched for.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logRegular|log_regular|desingular|toroidal",
+   "results": "[grep] OK 0 hit(s)\nRead the returned types: these concern ordinary smooth morphisms, normalization, localization, regular sequences, manifold charts or convex cones; none defines fs logarithmic schemes or states the logarithmic assertion searched for.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A toroidal variety can be desingularized without modifying its torus by subdividing monoidal charts.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\nRead the returned types: these concern ordinary smooth morphisms, normalization, localization, regular sequences, manifold charts or convex cones; none defines fs logarithmic schemes or states the logarithmic assertion searched for.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-pair-projective-resolution",
@@ -74,5 +198,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-regular-desingularization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed the saturated monoidal-resolution route of ILO: resolve characteristic monoids, identify each log blowup with a normalized scheme blowup, prove proper finite-type integral geometry inductively, then apply the free-characteristic criterion. Added one definition and three statement-only logarithmic inputs; reused existing ordinary blowup, normalization and properness nodes. Checked every citation and the empty-boundary and zero-length-tower cases.",
+  "blueprint": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic commutative algebra or scheme blowup/normalization/finite-type/properness fact used as stated to verify geometry of the monoidal tower; no node of this unit gives it and it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-blowup-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "prop-nagata-affine-blowup-chart-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-187e4e9e0",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-187e4e9e0 (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full, the statement of every cited node, and the ILO volume at each cited place: VI 1.1-1.8 pp.69-70; VIII 3.3.7-3.3.15 pp.107-110; VIII 3.4.1-3.4.9 pp.110-112; VIII 4.1.1 p.117. The route matches ILO: saturated monoidal desingularization (3.3.15), then the normalized blowup tower (3.4.6(i), 3.4.8), then regularity and a normal crossings boundary (VI 1.7, VIII 3.4.4/4.1.1). The item rightly claims normal crossings only; strictification is the existing lem-trf-normal-crossings-strictification. Step checks: Step 1 matches the dimension condition of def-trf-log-regular-pair, and finite type over F gives quasi-compact and locally Noetherian. Step 2: M-bar is sharp and saturated, hence torsion-free; I checked the face-quotient argument for saturation myself. Step 3: integrality of the blowup and its normalization is genuinely elementary (Stacks 02ND); a nonzero quasi-coherent ideal on an integral scheme is nonzero on every nonempty affine. Step 4: the induction is stated before use, and I checked every hypothesis of the cited lemmas (comparison, blowup-proper, finite-type composition, normalization-exists, finite-proper, proper composition). Step 5 covers n=0, and the triviality locus p^-1 U gives (p^-1 Z)_red. New nodes: def-trf-fs-log-blowup matches VI 1.1-1.2 and VIII 3.3.7-3.3.9. The tower node is VIII 3.3.15 with no regularity or boundary content, so it does not restate the item. The comparison node is VIII 3.4.6(i), VI 1.8 and 3.3.11; its triviality-locus clause I verified myself (identity over U; a local homomorphism keeps a nonunit a nonunit). The free-characteristic node is VI 1.4 and 1.7. No duplicates turned up in rg over dag/nodes. Statements tested on Z empty, A^2 with xy=0, the cone xy=z^2, and a self-intersecting normal crossings boundary. Tool uses accepted: lemma-nagata-blowup-proper, prop-nagata-affine-blowup-chart-cover, lem-sc-normalization-exists; the other declared entries are Mathlib leaves. No SGA is cited; this is not a target node, so no base-change morphism or coefficient category is involved. Minor, no change made: the report lists a citations.json that the delivery does not contain, and the comparison node presupposes that Bl_J X is integral, which item Step 3 proves. No fix files."
  }
 }
