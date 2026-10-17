@@ -20,9 +20,181 @@
   "sk-d-trace",
   "def-weil-endomorphism-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=U_s$. On $s=\\operatorname{Spec}k$, the profinite-site identification of [lem-weil-pbc-geometric-field-proetale-evaluation] identifies $p_s^*$ with the identity and terminal evaluation with evaluation at the singleton. By the section formula of [sk-def-sfb-qlbar-condensed], $U(s)=\\Omega$: every singleton-valued function lies in a finite subextension. The inclusion of [def-sfb-subfield-to-qlbar-coefficient-map] therefore gives scalar multiplication maps $m_a:U\\to U$ for $a\\in E$, with $m_{a+b}=m_a+m_b$, $m_{ab}=m_a m_b$ and $m_1=1$. These equalities remain true on $U[0]$ in the derived category. If $m_a$ is zero there, its $H^0$ is zero, so its terminal evaluation sends $1$ to $0$. But that value is the image of $a$ in $\\Omega$, whence $a=0$. Thus $\\epsilon_E(a)=Q(m_a)$ is an injective unital ring homomorphism. This uses evaluation only to test these scalar maps, and makes no conservativity claim for all condensed objects.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "sk-def-sfb-qlbar-condensed",
+    "def-sfb-subfield-to-qlbar-coefficient-map",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "For finite-dimensional $E$-spaces with chosen bases, send $E^r$ to $U^r$ and a matrix $A=(a_{ij})$ to $(m_{a_{ij}})$. Matrix multiplication and addition are preserved by the ring laws of step 1. If basis changes in source and target are $B$ and $D$, the new matrix is $D^{-1}AB$ and the comparisons are the matrices $B,D$ interpreted over $U$; their naturality is the identity $D(D^{-1}AB)=AB$. For three bases these comparisons compose because matrix multiplication does, so they are canonical change-of-basis isomorphisms. Apply this additive construction degreewise to bounded complexes. It preserves $d^2=0$, chain maps and the chain homotopy equation $f-g=dh+hd$, entry by entry.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "The cohomological domain in [def-weil-point-fd-complexes] really is covered by bounded finite-dimensional complexes. Given any complex $M$ representing an object of that domain, put $B^i=\\operatorname{im}d^{i-1}$ and $Z^i=\\ker d^i$. Every $E$-space is projective by [lem-weil-pbc-vector-space-projective]. The lifting property in [def-weil-pbc-projective-module] splits $Z^i\\twoheadrightarrow H^i(M)$ and $M^i\\twoheadrightarrow B^{i+1}$. Thus $M^i=B^i\\oplus H_i\\oplus L^i$, with $d:L^i\\xrightarrow{\\sim}B^{i+1}$. Inclusion of the zero-differential complex $(H_i)$ into $M$ induces the identity on cohomology and is a quasi-isomorphism. Its source is bounded finite-dimensional by hypothesis. By [lem-pc-ring-derived-map-representative], morphisms between bounded finite-dimensional complexes in $D(E)$ are exactly chain maps modulo chain homotopy: their terms are projective and the complexes are bounded above. Hence this homotopy category embeds fully faithfully with essential image precisely $D^b_{\\mathrm{fd}}(E)$.",
+   "uses": [
+    "def-weil-point-fd-complexes",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex; explicit field splitting to identify the essential image"
+   }
+  },
+  {
+   "text": "If $q$ is a quasi-isomorphism between bounded finite-dimensional complexes, it is invertible in $D(E)$. Fullness in step 3 represents its inverse by a chain map $r$, and faithfulness says that $rq$ and $qr$ are chain homotopic to the identities. Step 2 sends these two homotopy equations to homotopy equations over $U$. Their images become identities in the derived category [def-weil-abstract-derived-category], so the image of $q$ is invertible. The degreewise matrix construction therefore gives a functor on the homotopy category, hence, through the fully faithful essentially surjective identification in step 3, a functor on the specified full subcategory $D^b_{\\mathrm{fd}}(E)$. Choosing another representative gives the isomorphism obtained by applying the functor to the unique corresponding derived isomorphism; compositions agree by the same full faithfulness. In particular this descent is a functor and respects all the basis comparisons of step 2.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "For a bounded finite-dimensional complex $C$, apply [lem-wf-bounded-free-complex-projective-cohomology-splitting] over $E$; its projective-cohomology hypothesis follows from [lem-weil-pbc-vector-space-projective]. Its explicit complex decomposition into $H^i(C)[-i]$ and identity two-term complexes remains such a decomposition after step 2. The latter summands are contractible after realization, so $H^i(\\rho C)$ is the finite free module realizing $H^i(C)$. Equivalently, put this module in degree zero to obtain $H^i(\\rho C)[0]\\cong\\rho(H^i(C)[0])$. This comparison is natural: a linear splitting of kernels and images identifies each cohomology quotient with its chosen complement, and for a chain map the induced map on that quotient is exactly its block from the source cohomology complement to the target one; changing complements changes these descriptions by the quotient identifications. A finite free $U^r$ is finitely presented, using the presentation $U^0\\to U^r\\xrightarrow{1}U^r$, and hence locally finitely presented on the identity cover. The one-stratum stratification of $s$ then proves constructibility. Thus $\\rho C$ belongs to $\\mathcal D_s$ and the construction of step 4 lands in that full subcategory.",
+   "uses": [
+    "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+    "lem-weil-pbc-vector-space-projective",
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented",
+    "def-sfb-constructible-module",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "The cohomology module just identified evaluates to $\\Omega^r$, where $r=\\dim_E H^i(C)$, by [lem-weil-pbc-geometric-field-proetale-evaluation]. More intrinsically its identification with $H^i(C)\\otimes_E\\Omega$ sends $x\\otimes b$ to the vector with coordinates $b x_j$ in any basis of $H^i(C)$. This respects the relation $(a x)\\otimes b=x\\otimes ab$; the inverse sends $(b_j)$ to $\\sum_j e_j\\otimes b_j$. The two formulas are inverse, commute with linear maps, and change by the same change-of-basis matrix. This proves the stated geometric evaluation without identifying the entire condensed module category with vector spaces.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "For $C,D$, each realized term is finite free and therefore flat by [lem-weil-pbc-condensed-finite-free-tensor-exact], applied to the identity cover. Use the exact symmetric monoidal equivalence [lem-pe-internal-section-tensor-comparison] to pass to ordinary sheaf modules; [lem-pc-bounded-above-flat-kflat-site] makes their bounded complexes K-flat, and the same equivalence reflects K-flatness. Thus the relative derived tensor in [sk-def-sfb-derived-tensor-hom] is computed here by the ordinary total tensor. The map $U^r\\otimes_U U^t\\xrightarrow{\\sim}U^{rt}$ sends the pair of basis labels $(a,b)$ to that same label; its inverse is the sum of their tensor inclusions. These maps commute with the differentials $d\\otimes1+(-1)^i1\\otimes d$, since their entries are the same scalar matrices. They identify $\\rho(C\\otimes_E D)$ with $\\rho C\\otimes_U^{\\mathrm L}\\rho D$, and $\\rho(E[0])$ with $U[0]$. Associativity and unit coherence fix every tuple of basis labels; both symmetry maps exchange $(a,b)$ with $(b,a)$ with the same sign $(-1)^{ij}$. Hence these comparisons give a strong symmetric monoidal structure, inherited in the full subcategory with tensor [def-sfb-dc-tensor].",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "sk-def-sfb-derived-tensor-hom",
+    "def-sfb-dc-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; finite-biproduct tensor calculation transported by the existing internal/section equivalence"
+   }
+  },
+  {
+   "text": "The functor commutes with shifts: degree $i$ of $C[1]$ and of $(\\rho C)[1]$ is the realization of $C^{i+1}$, and both differentials are the negative of its realized differential. It also preserves the cone of a chain map $f$: it takes the differential matrix $\\begin{pmatrix}d_D&f\\\\0&-d_C\\end{pmatrix}$ on $D^i\\oplus C^{i+1}$ to that identical matrix over $U$, and preserves the inclusion and projection maps of the cone triangle. By the definition of distinguished triangles in [def-weil-abstract-derived-category], every distinguished triangle is isomorphic to a cone triangle; step 3 represents its morphism by a chain map between bounded finite-dimensional complexes. Its cone is still bounded finite-dimensional, and step 5 puts its realization in $\\mathcal D_s$. Consequently $\\rho$ is exact with the indicated shift comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "For a bounded finite-dimensional representative $C$, [lem-trf-chain-supertrace], applied to the ordinary ring $E$, gives its dual $C^\\vee=\\operatorname{Hom}_E^\\bullet(C,E[0])$, with $(C^\\vee)^j=\\operatorname{Hom}_E(C^{-j},E)$ and $d^\\vee\\phi=(-1)^{j+1}\\phi d$. It represents $R\\operatorname{Hom}_E(C,E)$ as asserted there for perfect complexes. Its evaluation has entries $\\phi(x)$ and its coevaluation is $1\\mapsto\\sum_{i,a}e_{i,a}\\otimes e_{i,a}^\\vee$; that cited statement supplies the chain-map and both triangle identities. Apply the functor and tensor/unit comparisons of step 7 to these maps and equalities. Functoriality preserves the equalities, and coherence identifies their composites with the two triangle composites for $\\rho C$ and $\\rho(C^\\vee)$. Their matrices are precisely the same signed finite-free dual matrices acting internally over $U$. The dual lies in $\\mathcal D_s$ by step 5. This establishes the asserted right dual, including the specified evaluation and coevaluation, without applying an ordinary-ring theorem directly to internal module objects.",
+   "uses": [
+    "lem-trf-chain-supertrace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "Represent $f:C\\to C$ by a chain map on a bounded finite-dimensional representative, using [lem-pc-ring-derived-map-representative]. Write its trace composite as in [sk-d-trace]. Substituting the evaluation and coevaluation of step 9 and the symmetry of step 7, the composite is $\\sum_{i,a}(-1)^{i(-i)}m_{(f^i)_{aa}}=\\epsilon_E(\\sum_i(-1)^i\\operatorname{Tr}_E(f^i))$: coevaluation selects $(e_{i,a},e_{i,a}^\\vee)$, the chain endomorphism supplies its $a$th diagonal entry after evaluation, and $(-1)^{-i^2}=(-1)^i$. The matrix trace is [def-weil-endomorphism-trace]. Over the ordinary field $E$, [lem-trf-chain-supertrace] identifies the sum with the ordinary categorical trace, and clause (4) of [prop-trf-trace-formal-laws] identifies that scalar with $\\sum_i(-1)^i\\operatorname{Tr}_E(H^i(f)\\mid H^i(C))$. Only these ordinary-field assertions are used from those two nodes. The internal trace formula follows, as an equality of actual endomorphisms of $U$, from the displayed matrix calculation and step 1.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "sk-d-trace",
+    "def-weil-endomorphism-trace",
+    "lem-trf-chain-supertrace",
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  },
+  {
+   "text": "Finally write $R=\\rho C$ and $D=\\rho(C^\\vee)$. For $w:P\\xrightarrow{\\sim}R$, give $P$ the dual $D$ with $\\eta_P=(w^{-1}\\otimes1_D)\\eta_R$ and $e_P=e_R(1_D\\otimes w)$. The two triangle identities follow from [lem-trf-exact-pairing-iso-transport], taking its $U=R$, $V=P$, $E=D$ and its isomorphisms $w^{-1}$ and $1_D$. Naturality of symmetry and $w v=\\rho(f) w$ give, directly in the composite of [sk-d-trace],\n$$e_P\\,c_{P,D}(v\\otimes1_D)\\eta_P=e_R\\,c_{R,D}((wvw^{-1})\\otimes1_D)\\eta_R=e_R\\,c_{R,D}(\\rho(f)\\otimes1_D)\\eta_R.$$\nThus $\\operatorname{tr}(v)=\\operatorname{tr}(\\rho(f))$, so step 10 proves the desired formula. Set $C=E[0]$ and $f=1$ to obtain the stated dual of $U$ and $\\operatorname{tr}(1_U)=\\epsilon_E(1)$.",
+   "uses": [
+    "lem-trf-exact-pairing-iso-transport",
+    "sk-d-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite determinant factors: explicit coefficient-point comparison argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "def-weil-abstract-derived-category",
+  "def-sfb-finitely-presented-module",
+  "def-weil-point-fd-complexes",
+  "lem-weil-pbc-vector-space-projective",
+  "def-weil-pbc-projective-module",
+  "lem-pc-ring-derived-map-representative",
+  "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+  "def-sfb-locally-finitely-presented",
+  "def-sfb-constructible-module",
+  "sk-def-sfb-bounded-constructible",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-dc-tensor",
+  "lem-trf-chain-supertrace",
+  "sk-d-trace",
+  "def-weil-endomorphism-trace",
+  "prop-trf-trace-formal-laws",
+  "lem-trf-exact-pairing-iso-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "First sentence, finite determinant factors: agent-written matrix realization argument using existing DAG tools; ordinary trace calculation checked against Stacks Tags 03TG/03TI and the current trace blueprint"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +230,52 @@
    "results": "8 hits; ; top: ['Condensed.profiniteSolid', 'LightCondensed.instSymmetricCategoryLightCondMod', 'LightCondensed.instMonoidalCategoryLightCondMod', 'Condensed.profiniteFree', 'CondensedMod.IsSolid', 'LightCondensed.instMonoidalClosedLightCondMod', 'LightCondensed.instMonoidalLightCondSetLightCondModFree', 'LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology']. No theorem for the stated condensed coefficient comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Condensed.*(trace|dual)|trace.*Condensed|HasRightDual.*Complex",
+   "results": "0 hits; ; top: []. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal finite dimensional complex realization into condensed modules preserves duals and traces",
+   "results": "8 hits; ; top: ['CategoryTheory.hasRightDualOfEquivalence', 'CategoryTheory.rightDual_leftDual', 'CategoryTheory.leftDual_rightDual', 'Submodule.traceDual', 'CategoryTheory.hasLeftDualOfEquivalence', 'ModuleCat.MonoidalCategory.symmetricCategory', 'LinearMap.trace_eq_contract', 'LinearMap.trace_eq_contract_apply']. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.trace",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.MonoidalCategory.trace'; top: []. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive matrix functors on bounded complexes preserve evaluation coevaluation and alternating trace",
+   "results": "8 hits; ; top: ['CategoryTheory.Functor.mapMatComp', 'CategoryTheory.Mat_.lift_additive', 'CategoryTheory.Mat_.lift', 'CategoryTheory.Functor.mapMat_', 'CategoryTheory.Mat_.liftUnique', 'CategoryTheory.Mat_.ext', 'CategoryTheory.Mat_.Embedding.instAdditiveEmbedding', \"CategoryTheory.Mat_.additiveObjIsoBiproduct_naturality'\"]. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free complexes realized as internal modules over a condensed field have signed duals and categorical supertrace on cohomology",
+   "results": "8 hits; ; top: ['continuousCohomology', 'FGModuleCat.exactPairing', 'ContinuousCohomology.MultiInd.complex', 'FGModuleCat.rightRigidCategory', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.FiniteCyclicGroup.moduleCatCochainComplex', 'Rep.standardResolution.extIso']. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual",
+   "results": "12 hits; ; top: ['CategoryTheory.HasRightDual', 'CategoryTheory.HasRightDual.rightDual', 'CategoryTheory.RightRigidCategory.mk', 'CategoryTheory.RightRigidCategory.rightDual', 'CategoryTheory.hasRightDualUnit', 'CategoryTheory.HasRightDual.mk', 'CategoryTheory.hasLeftDualRightDual', 'CategoryTheory.hasRightDualLeftDual']. Read the returned types: rigid-category infrastructure, linear-map traces and additive matrix functors do not state the derived condensed-coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-rationality",
@@ -78,5 +292,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-condensed-point-supertrace",
+  "worker": "stage1",
+  "summary": "Constructed the coefficient-point realization explicitly by finite scalar matrices, justified its entire cohomologically defined domain and homotopy descent, constructibility, exactness and strong symmetric monoidal comparisons, transported ordinary signed duality, and computed the internal trace before applying the ordinary-field supertrace. Verified faithful scalar action using profinite-site terminal evaluation. Reused existing tools; no new nodes and no change to the statement.",
+  "blueprint": "sk-thm-rationality.proof.md, first sentence (finite determinant factors): the coefficient-point categorical/ordinary trace comparison obligation singled out by the parent split. This is not asserted to be a verbatim blueprint theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "why": "The generic algebraically closed field/profinite-site equivalence and terminal module evaluation identify the coefficient fiber; no zeta-unit node supplies this site tool."
+   },
+   {
+    "node": "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+    "why": "Its explicit contractible-plus-cohomology decomposition computes the realized cohomology; generic finite-complex algebra."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "why": "Exact tensor for finite free internal modules supplies flatness of the actual realized terms."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact symmetric monoidal equivalence transports the existing sheaf K-flat criterion to internal modules, preventing a coefficient-category conflation."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "K-flatness of bounded flat sheaf complexes justifies the actual derived tensor computation."
+   },
+   {
+    "node": "lem-trf-chain-supertrace",
+    "why": "Ordinary finite-free signed duality equations over E and the chain-level ordinary trace, subsequently interpreted by our constructed monoidal functor."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Only its ordinary-field supertrace clause (4) is used, after computing the internal trace by matrices."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-wf-bounded-free-complex-projective-cohomology-splitting",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-trf-chain-supertrace",
+  "prop-trf-trace-formal-laws"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a12ce4670",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a12ce4670 (reviewer sub-agent of L); spot-checked: Read the whole item: the statement and all 11 steps. Read every cited node's statement, the parent's uses of the item (sk-thm-rationality steps 4-6), the two sibling citers and both batch-5 assumption leaves. Batch-5 check: the scope of nt-assume-trace-formula explicitly excludes identifying categorical traces with alternating sums of cohomology traces, and it takes the right duals as hypotheses. This item supplies exactly those two things. The three flagged citations are general algebra. lem-trf-chain-supertrace is the signed dual and supertrace over a commutative ring, used only over E. prop-trf-trace-formal-laws is used only for clause (4), the supertrace over a field. lem-trf-exact-pairing-iso-transport is a Mathlib-status monoidal fact. I computed that these citations add 0 nodes to the existing batch-5 closure (nt-target-zeta-rational and nt-target-weil-conjectures, item excluded). Their closures reach no trace-formula or Poincare theorem node. So they lie outside both assumptions and are accepted. Coefficient category checked against the definitions: U_s = p_s^* of Profinite.padicAlgClRingObj (sk-def-sfb-qlbar-condensed), D_cons of sk-def-sfb-bounded-constructible, def-sfb-dc-tensor (which names Qlb), and the subfield coefficient map. E is the E of def-trf-coefficient-conventions, so clause (4) applies. Step checks: (1) scalar injectivity via H^0 and singleton evaluation, U(s)=Omega, no conservativity used; (3) Stacks 064B-type full faithfulness plus field splitting gives the essential image D^b_fd; (5) chain-level splitting, contractible summands, and U^r=coker(0) is finitely presented, so constructible; (7) Stacks 06YQ verified in sites-cohomology.tex (the report's tag correction is right), with flatness carried across by the internal/section comparison; (10) I recomputed the sign (-1)^{i(-i)}=(-1)^i; (11) the transport data (U,V,E)=(R,P,D) with (w^{-1},1_D) and the naturality calculation re-derived. Small cases tested: 0, E[0], E[-1], the contractible two-term complex, char k=2. Interpretation note: the trace is for the right dual transported along w; this is consistent with sk-d-trace and with how the parent supplies HasRightDual. No new nodes, no SGA, proof_deps equals the union of step uses, statement unchanged. All 7 declared tool_uses accepted. No fixes."
  }
 }
