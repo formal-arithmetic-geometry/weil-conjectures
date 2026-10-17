@@ -101,6 +101,8 @@ noncomputable def openImmersionLowerShriekBaseChangeHom :
     (Functor.rightUnitor _).hom
 
 include hi in
+/-- The base change map `j'_! g_U^* ⟶ g^* j_!` is an isomorphism, since `g^* j_! N` is supported
+on `U'`. -/
 theorem isIso_openImmersionLowerShriekBaseChangeHom :
     IsIso (openImmersionLowerShriekBaseChangeHom B i j g i' j' gU hij hij' hj) := by
   have (N : _) :
@@ -130,6 +132,8 @@ noncomputable def openImmersionLowerShriekBaseChangeIso :
   have := isIso_openImmersionLowerShriekBaseChangeHom B i j g i' j' gZ gU hij hij' hi hj
   asIso (openImmersionLowerShriekBaseChangeHom B i j g i' j' gU hij hij' hj)
 
+/-- The forward map of `openImmersionLowerShriekBaseChangeIso` is
+`openImmersionLowerShriekBaseChangeHom`. -/
 @[simp]
 lemma openImmersionLowerShriekBaseChangeIso_hom :
     (openImmersionLowerShriekBaseChangeIso B i j g i' j' gZ gU hij hij' hi hj).hom =
@@ -160,6 +164,8 @@ noncomputable def lowerStarBaseChangeHom :
 
 omit [QuasiCompact j] in
 include j hij hij' hj in
+/-- The base change map `g^* i_* ⟶ i'_* g_Z^*` is an isomorphism, since `g^* i_* G` is supported
+on `Z'`. -/
 theorem isIso_lowerStarBaseChangeHom :
     IsIso (lowerStarBaseChangeHom B i g i' gZ hi) := by
   have (G : Mod (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))
@@ -190,6 +196,7 @@ noncomputable def lowerStarBaseChangeIso :
   asIso (lowerStarBaseChangeHom B i g i' gZ hi)
 
 omit [QuasiCompact j] in
+/-- The forward map of `lowerStarBaseChangeIso` is `lowerStarBaseChangeHom`. -/
 @[simp]
 lemma lowerStarBaseChangeIso_hom :
     (lowerStarBaseChangeIso B i j g i' j' gZ gU hij hij' hi hj).hom =

@@ -80,7 +80,7 @@ lemma closedLiftBasisIso_hom_comp_map {C C' : Type u} [CommRing C] [Algebra (A �
     congr 1
     ext x
     exact DFunLike.congr_fun
-      (Algebra.ClosedLift.toAlgHom_comp_map (φ.restrictScalars A)) x
+      (Algebra.ClosedLift.toAlgHom_map (φ.restrictScalars A)) x
   · simp only [Category.assoc, MorphismProperty.Over.pullback_map_left, pullback.lift_snd]
     have h₁ := closedLiftBasisIso_hom_comp I C'
     have h₂ := closedLiftBasisIso_hom_comp I C

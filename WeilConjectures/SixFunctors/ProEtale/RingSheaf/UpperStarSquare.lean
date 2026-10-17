@@ -96,10 +96,12 @@ noncomputable def upperStarSquareHom :
   (upperStarComp (ModuleCat.{u + 1} R) h₂ f₂).inv ≫
     (upperStarCongr (ModuleCat.{u + 1} R) w.symm).hom
 
+/-- The comparison `upperStarSquareHom` is a monoidal natural transformation. -/
 instance : NatTrans.IsMonoidal (upperStarSquareHom f₁ f₂ h₁ h₂ w (R := R)) := by
   unfold upperStarSquareHom
   infer_instance
 
+/-- The comparison `upperStarSquareHom` is an isomorphism. -/
 instance : IsIso (upperStarSquareHom f₁ f₂ h₁ h₂ w (R := R)) := by
   unfold upperStarSquareHom
   infer_instance
@@ -113,15 +115,19 @@ noncomputable def squareCoeffHom :
   Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) h₁ f₁).inv B ≫
     inv (Functor.compAlgHom _ _ (upperStarSquareHom f₁ f₂ h₁ h₂ w) B)
 
+/-- The comparison of coefficient rings `squareCoeffHom` is an isomorphism. -/
 instance : IsIso (squareCoeffHom B f₁ f₂ h₁ h₂ w) := by
   unfold squareCoeffHom
   infer_instance
 
+/-- The comparison of coefficient rings `squareCoeffHom` is a morphism of algebra objects. -/
 instance : IsMonHom (squareCoeffHom B f₁ f₂ h₁ h₂ w) := by
   unfold squareCoeffHom
   infer_instance
 
 omit [MonObj B] in
+/-- `squareCoeffHom` followed by the comparison `h₂^* f₂^* B ⟶ (h₁ ≫ f₁)^* B` is the composition
+isomorphism `h₁^* f₁^* B ⟶ (h₁ ≫ f₁)^* B`. -/
 lemma squareCoeffHom_comp :
     squareCoeffHom B f₁ f₂ h₁ h₂ w ≫ Functor.compAlgHom _ _ (upperStarSquareHom f₁ f₂ h₁ h₂ w) B =
       Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) h₁ f₁).inv B := by

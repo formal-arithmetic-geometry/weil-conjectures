@@ -48,6 +48,7 @@ noncomputable def closedLiftTensorEquiv :
     I).symm.toRingEquiv.trans
     (RingEquiv.ofBijective _ (Algebra.ClosedLift.bijective_reduction A S I))
 
+/-- `closedLiftTensorEquiv` sends `1 ⊗ r` to the image of `r` in `C̄`. -/
 lemma closedLiftTensorEquiv_one_tmul (r : A ⧸ I) :
     closedLiftTensorEquiv I S (1 ⊗ₜ r) = algebraMap (A ⧸ I) S r := by
   obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
@@ -68,6 +69,8 @@ noncomputable def closedLiftSpecPullbackIso :
       TensorProduct A (Algebra.ClosedLift A S) (A ⧸ I) →+* S))) ≪≫
     (pullbackSpecIso A (Algebra.ClosedLift A S) (A ⧸ I)).symm
 
+/-- The first projection of `closedLiftSpecPullbackIso` is induced by the reduction map
+`H_A(C̄) ⟶ C̄`. -/
 lemma closedLiftSpecPullbackIso_hom_fst :
     (closedLiftSpecPullbackIso I S).hom ≫ pullback.fst _ _ =
       Spec.map (CommRingCat.ofHom (Algebra.ClosedLift.toAlgHom A S :
@@ -83,6 +86,8 @@ lemma closedLiftSpecPullbackIso_hom_fst :
   erw [Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, one_smul]
   rfl
 
+/-- The second projection of `closedLiftSpecPullbackIso` is the structure morphism
+`Spec C̄ ⟶ Spec (A ⧸ I)`. -/
 lemma closedLiftSpecPullbackIso_hom_snd :
     (closedLiftSpecPullbackIso I S).hom ≫ pullback.snd _ _ =
       Spec.map (CommRingCat.ofHom (algebraMap (A ⧸ I) S)) := by
@@ -114,6 +119,8 @@ def IsClosedLiftBasis (V : (Spec (.of (A ⧸ I))).ProEt) : Prop :=
   ∃ (S : Type u) (_ : CommRing S) (_ : Algebra (A ⧸ I) S), Algebra.IndEtale (A ⧸ I) S ∧
     IsWContractibleRing S ∧ V = closedLiftBasisObj I S
 
+/-- Under `closedLiftBasisIso`, the structure morphism of `v(V) ×_X Z` is the structure
+morphism `Spec C̄ ⟶ Spec (A ⧸ I)`. -/
 lemma closedLiftBasisIso_hom_comp (S : Type u) [CommRing S] [Algebra (A ⧸ I) S]
     [Algebra.IndEtale (A ⧸ I) S] :
     (closedLiftBasisIso I S).hom ≫ (closedLiftBasisObj I S).hom =

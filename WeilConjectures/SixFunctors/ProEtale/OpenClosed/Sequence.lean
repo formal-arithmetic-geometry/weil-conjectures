@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The open–closed sequence of pro-étale sheaves of modules
@@ -227,50 +228,6 @@ lemma isZero_upperStar_upperStar_openImmersionLowerShriek
   exact ((upperStarComp _ i' g).app _).symm ≪≫
     eqToIso (by rw [hi]) ≪≫ (upperStarComp _ gZ i).app _
 
-/-- Two short exact sequences with isomorphic middle terms are isomorphic if the first map of
-each composes to zero with the second map of the other. -/
-noncomputable def _root_.CategoryTheory.ShortComplex.isoOfShortExactOfIso {C : Type*}
-    [Category* C] [Abelian C] {S S' : ShortComplex C} (hS : S.ShortExact) (hS' : S'.ShortExact)
-    (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0) (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
-    S ≅ S' :=
-  have := hS.mono_f
-  have := hS.epi_g
-  have := hS'.mono_f
-  have := hS'.epi_g
-  { hom :=
-      { τ₁ := hS'.exact.lift (S.f ≫ e.hom) (by rw [Category.assoc, h₁])
-        τ₂ := e.hom
-        τ₃ := hS.exact.desc (e.hom ≫ S'.g) (by rw [← Category.assoc] at h₁ ⊢; exact h₁)
-        comm₁₂ := hS'.exact.lift_f _ _
-        comm₂₃ := (hS.exact.g_desc _ _).symm }
-    inv :=
-      { τ₁ := hS.exact.lift (S'.f ≫ e.inv) (by rw [Category.assoc, h₂])
-        τ₂ := e.inv
-        τ₃ := hS'.exact.desc (e.inv ≫ S.g) (by rw [← Category.assoc] at h₂ ⊢; exact h₂)
-        comm₁₂ := hS.exact.lift_f _ _
-        comm₂₃ := (hS'.exact.g_desc _ _).symm }
-    hom_inv_id := by
-      ext
-      · rw [← cancel_mono S.f]
-        simp [ShortComplex.Exact.lift_f]
-      · simp
-      · rw [← cancel_epi S.g]
-        simp [reassoc_of% (hS.exact.g_desc _ _), ShortComplex.Exact.g_desc]
-    inv_hom_id := by
-      ext
-      · rw [← cancel_mono S'.f]
-        simp [ShortComplex.Exact.lift_f]
-      · simp
-      · rw [← cancel_epi S'.g]
-        simp [reassoc_of% (hS'.exact.g_desc _ _), ShortComplex.Exact.g_desc] }
-
-@[simp]
-lemma _root_.CategoryTheory.ShortComplex.isoOfShortExactOfIso_hom_τ₂ {C : Type*}
-    [Category* C] [Abelian C] {S S' : ShortComplex C} (hS : S.ShortExact) (hS' : S'.ShortExact)
-    (e : S.X₂ ≅ S'.X₂) (h₁ : S.f ≫ e.hom ≫ S'.g = 0) (h₂ : S'.f ≫ e.inv ≫ S.g = 0) :
-    (ShortComplex.isoOfShortExactOfIso hS hS' e h₁ h₂).hom.τ₂ = e.hom :=
-  rfl
-
 omit [IsClosedImmersion i] [QuasiCompact j] [IsClosedImmersion i'] [QuasiCompact j'] in
 /-- The pullback along `g` of the counit `j_! j^* M ⟶ M`, followed by the unit
 `g^* M ⟶ i'_* i'^* g^* M`, vanishes. -/
@@ -323,7 +280,7 @@ noncomputable def openClosedShortComplexBaseChangeIso
     (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
     (openClosedShortComplex R i j hij M).map (g)^*[ModuleCat.{u + 1} R] ≅
       openClosedShortComplex R i' j' hij' ((g)^*[ModuleCat.{u + 1} R].obj M) :=
-  ShortComplex.isoOfShortExactOfIso
+  ShortComplex.ShortExact.isoOfCompEqZero
     ((shortExact_openClosedShortComplex i j hij M).map_of_exact _)
     (shortExact_openClosedShortComplex i' j' hij' _)
     (Iso.refl ((g)^*[ModuleCat.{u + 1} R].obj M))

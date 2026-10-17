@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
-public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
+public import WeilConjectures.RingTheory.ProEtale.ClosedLiftRetraction
+public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 
 /-!
@@ -34,134 +36,6 @@ universe u
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
-
-/-- A surjective weakly étale morphism from an affine scheme to `Spec R` has a section, if every
-faithfully flat ind-étale `R`-algebra has a retraction. -/
-lemma exists_comp_eq_id_of_forall_exists_retraction {R : CommRingCat.{u}}
-    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
-      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
-    {Y : Scheme.{u}} [IsAffine Y] (p : Y ⟶ Spec R) [WeaklyEtale p] [Surjective p] :
-    ∃ s : Spec R ⟶ Y, s ≫ p = 𝟙 _ := by
-  obtain ⟨φ, hφ⟩ : ∃ φ : R ⟶ Γ(Y, ⊤), Spec.map φ = Y.isoSpec.inv ≫ p :=
-    ⟨Spec.preimage _, Spec.map_preimage _⟩
-  have : WeaklyEtale (Spec.map φ) := by
-    rw [hφ]
-    infer_instance
-  have : Surjective (Spec.map φ) := by
-    rw [hφ]
-    infer_instance
-  have hff : φ.hom.FaithfullyFlat := (flat_and_surjective_SpecMap_iff φ).1 ⟨inferInstance, ‹_›⟩
-  obtain ⟨T, _, g, hg, hgff, hgφ⟩ := ((WeaklyEtale.Spec_iff φ).1 ‹_›).exists_indEtale_comp
-  algebraize [g.comp φ.hom]
-  have : Algebra.IndEtale R T := by
-    rwa [← RingHom.IndEtale.algebraMap_iff]
-  have : Module.FaithfullyFlat R T := by
-    rw [← RingHom.faithfullyFlat_algebraMap_iff]
-    exact RingHom.FaithfullyFlat.stableUnderComposition _ _ hff hgff
-  obtain ⟨r, hr⟩ := hR T
-  refine ⟨Spec.map (CommRingCat.ofHom (r.comp g)) ≫ Y.isoSpec.inv, ?_⟩
-  rw [Category.assoc, ← hφ, ← Spec.map_comp, ← Spec.map_id]
-  congr 1
-  ext x
-  exact RingHom.congr_fun hr x
-
-namespace Scheme.ProEt
-
-variable {T : Scheme.{u}}
-
-/-- Let `W ≅ Spec R` be an object of the small pro-étale site, where every faithfully flat
-ind-étale `R`-algebra has a retraction. Every covering sieve of `W` contains the inclusions of a
-cover of `W` by pairwise disjoint open subschemes. -/
-lemma exists_disjoint_opens_of_forall_exists_retraction {W : T.ProEt} {R : CommRingCat.{u}}
-    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
-      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
-    (e : W.left ≅ Spec R) {S : Sieve W} (hS : S ∈ topology T W) :
-    ∃ (κ : Type u) (O : κ → W.left.Opens), (∀ i j, i ≠ j → Disjoint (O i) (O j)) ∧
-      (∀ x, ∃ i, x ∈ O i) ∧ ∀ i, S (ofOpenImmersionHom W (O i).ι) := by
-  obtain ⟨P, hP, hPS⟩ := mem_topology_iff.1 hS
-  obtain ⟨𝒰, _, h𝒰⟩ := (mem_propQCPrecoverage_iff_exists_quasiCompactCover
-    (P := @WeaklyEtale)).1 (mem_precoverage_iff.1 hP)
-  have : IsAffine W.left := .of_isIso e.hom
-  obtain ⟨𝒱, g, _, _⟩ := Cover.QuasiCompact.exists_hom.{u + 1, u} 𝒰
-  have hmem (i : 𝒰.I₀) : P.map (ProEt.forget T ⋙ CategoryTheory.Over.forget T) (𝒰.f i) := by
-    rw [h𝒰]
-    exact ⟨i⟩
-  choose Z hZ a ha hZa using fun i ↦ Presieve.map_iff.1 (hmem i)
-  let ε : ULift.{u} (Fin (Nat.card 𝒱.I₀)) ≃ 𝒱.I₀ := Equiv.ulift.trans (Finite.equivFin _).symm
-  let v (k : ULift.{u} (Fin (Nat.card 𝒱.I₀))) := 𝒱.f (ε k)
-  have : WeaklyEtale (Sigma.desc v) := IsZariskiLocalAtSource.sigmaDesc fun k ↦ 𝒱.map_prop _
-  have : Surjective (Sigma.desc v) := by
-    refine Surjective.sigmaDesc_of_union_range_eq_univ (Set.eq_univ_of_forall fun x ↦ ?_)
-    obtain ⟨k, hk⟩ := ε.surjective (𝒱.idx x)
-    refine Set.mem_iUnion.2 ⟨k, ?_⟩
-    simp only [v]
-    rw [hk]
-    exact 𝒱.covers x
-  obtain ⟨s', hs'⟩ := exists_comp_eq_id_of_forall_exists_retraction hR (Sigma.desc v ≫ e.hom)
-  let s := e.hom ≫ s'
-  have hs : s ≫ Sigma.desc v = 𝟙 _ := by
-    rw [← cancel_mono e.hom, Category.assoc, Category.assoc, hs']
-    simp
-  let V (k : ULift.{u} (Fin (Nat.card 𝒱.I₀))) : Scheme.{u} := Spec (𝒱.X (ε k))
-  let O (k : ULift.{u} (Fin (Nat.card 𝒱.I₀))) : W.left.Opens := s ⁻¹ᵁ (Sigma.ι V k).opensRange
-  have hO (k) : Set.range ((O k).ι ≫ s).base ⊆ Set.range (Sigma.ι V k).base := by
-    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Opens.range_ι]
-    rintro _ ⟨x, hx, rfl⟩
-    exact hx
-  refine ⟨_, O, fun k l hkl ↦ ?_, fun x ↦ ?_, fun k ↦ ?_⟩
-  · rw [disjoint_iff, eq_bot_iff]
-    rintro x ⟨hk, hl⟩
-    exact (disjoint_opensRange_sigmaι V k l hkl).le_bot ⟨hk, hl⟩
-  · obtain ⟨k, y, hy⟩ := (sigmaOpenCover V).exists_eq (s x)
-    exact ⟨k, ⟨y, hy⟩⟩
-  · -- the inclusion of `O k` factors through `v k`, hence lies in `S`
-    let c := IsOpenImmersion.lift (Sigma.ι V k) ((O k).ι ≫ s) (hO k)
-    have hc : c ≫ v k = (O k).ι := by
-      have : c ≫ Sigma.ι V k = (O k).ι ≫ s := IsOpenImmersion.lift_fac _ _ _
-      rw [← Sigma.ι_desc v k, ← Category.assoc, this, Category.assoc, hs, Category.comp_id]
-    have ha' (i : 𝒰.I₀) : (a i).left = eqToHom (hZ i) ≫ 𝒰.f i := hZa i
-    let d : (ofOpenImmersion W (O k).ι).left ⟶ (Z (g.s₀ (ε k))).left :=
-      c ≫ g.h₀ (ε k) ≫ eqToHom (hZ _).symm
-    have hd : d ≫ (a (g.s₀ (ε k))).left = (ofOpenImmersionHom W (O k).ι).left := by
-      rw [ha', Category.assoc, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
-        Category.id_comp, g.w₀]
-      exact hc
-    have hb : ofOpenImmersionHom W (O k).ι = MorphismProperty.Over.homMk d (by
-        rw [← MorphismProperty.Over.w (a (g.s₀ (ε k))), ← Category.assoc, hd]
-        exact MorphismProperty.Over.w (ofOpenImmersionHom W (O k).ι)) ≫ a (g.s₀ (ε k)) :=
-      MorphismProperty.Over.Hom.ext hd.symm
-    rw [hb]
-    exact S.downward_closed (hPS _ _ (ha _)) _
-
-/-- **Stacks 0990**, variant: an object of the small pro-étale site whose underlying scheme is
-`Spec R`, where every faithfully flat ind-étale `R`-algebra has a retraction, is weakly
-contractible. -/
-theorem isWeaklyContractible_of_forall_exists_retraction {W : T.ProEt} {R : CommRingCat.{u}}
-    (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
-      [Module.FaithfullyFlat R T], ∃ f : T →+* R, f.comp (algebraMap R T) = RingHom.id R)
-    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W := by
-  refine GrothendieckTopology.isWeaklyContractible_of_forall_mem.{w, u} fun S hS ↦ ?_
-  obtain ⟨κ, O, hdisj, hcov, hO⟩ := exists_disjoint_opens_of_forall_exists_retraction hR e hS
-  refine ⟨κ, fun k ↦ ofOpenImmersion W (O k).ι, fun k ↦ ofOpenImmersionHom W (O k).ι,
-    mem_topology_of_openImmersion _ (fun k ↦ (O k).ι) (fun x ↦ ?_)
-      (fun k ↦ Sieve.ofArrows_mk _ _ k), hO, fun k ↦ ?_, ?_⟩
-  · obtain ⟨k, hk⟩ := hcov x
-    exact ⟨k, by rw [Opens.range_ι]; exact hk⟩
-  · refine (ProEt.forget T ⋙ CategoryTheory.Over.forget T).mono_of_mono_map ?_
-    exact inferInstanceAs (Mono (O k).ι)
-  · intro k l hkl Y a b hab
-    have : IsEmpty Y.left := by
-      refine ⟨fun z ↦ ?_⟩
-      have hab' : a.left ≫ (O k).ι = b.left ≫ (O l).ι := congrArg (fun g ↦ g.left) hab
-      have hk : (a.left ≫ (O k).ι).base z ∈ O k :=
-        (Opens.range_ι (O k)).subset ⟨a.left z, rfl⟩
-      have hl : (a.left ≫ (O k).ι).base z ∈ O l := by
-        rw [hab']
-        exact (Opens.range_ι (O l)).subset ⟨b.left z, rfl⟩
-      exact (disjoint_iff.1 (hdisj k l hkl)).le ⟨hk, hl⟩
-    exact bot_mem_topology Y
-
-end Scheme.ProEt
 
 open Scheme
 

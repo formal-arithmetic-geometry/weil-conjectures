@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal

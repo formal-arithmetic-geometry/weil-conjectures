@@ -51,7 +51,7 @@ noncomputable def openClosedShortComplexBaseChangeIso
     (openClosedShortComplex B i j hij M).map (upperStar B g) ≅
       openClosedShortComplex ((g)^*[ModuleCat.{u + 1} R].obj B) i' j' hij'
         ((upperStar B g).obj M) :=
-  ShortComplex.isoOfShortExactOfIso
+  ShortComplex.ShortExact.isoOfCompEqZero
     ((shortExact_openClosedShortComplex B i j hij M).map_of_exact _)
     (shortExact_openClosedShortComplex _ i' j' hij' _)
     (Iso.refl _)
