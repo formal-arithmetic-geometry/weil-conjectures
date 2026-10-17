@@ -80,17 +80,18 @@
    }
   },
   {
-   "text": "Here is a counterexample for the final converse remark, which the source proof does not justify. Fix a prime $\\ell$, let $\\Lambda=\\underline{\\mathbf Q_\\ell}$, and let $S=\\mathbf N\\cup\\{\\infty\\}$ with the one-point compactification topology (neighbourhoods of $\\infty$ contain a tail). This is profinite: it is the inverse limit of the finite partitions consisting of the first $n$ singletons and the remaining tail. These partitions are cofinal among finite clopen quotients, because every clopen neighbourhood of $\\infty$ contains a tail and only finitely many isolated points lie outside it. Choose an algebraic closure $\\Omega$ of $\\mathbf Q$ using [lem-pc-algebraic-closure-exists-unique], put $B=\\operatorname{Spec}\\Omega$ and $X=B[S]$. By [def-sfb-profinite-test-objects], $X$ is the inverse limit of the finite coproducts indexed by these partitions. The finite-coproduct spectrum and affine-limit statements identify $X=\\operatorname{Spec}LC(S,\\Omega)$, where $\\Omega$ is discrete: the filtered union of the rings $\\Omega^{S_n}$ is exactly the ring of locally constant functions, since every such function is constant on some tail. Its underlying space is $S$. Indeed the orthogonal idempotents of a finite partition sum to $1$, so a prime contains all but exactly one of them. The selected parts are compatible under refinement; they either eventually select a singleton $s\\in\\mathbf N$ or select the tail at every stage, giving $s=\\infty$. If $f\\in LC(S,\\Omega)$, choose a partition on whose parts $f$ is constant. Its selected-part idempotent $e$ is not in the prime, and $e(f-f(s))=0$, so $f-f(s)$ lies in the prime. Thus the prime contains the kernel of evaluation at $s$, which is maximal because evaluation has quotient field $\\Omega$; equality follows. Finally $D(f)$ corresponds to the clopen set $\\{s:f(s)\\ne0\\}$, and every clopen set $C$ corresponds to $D(e_C)$. These bases show that the bijection is a homeomorphism. Define $t(n)=\\ell^{n+1}$ and $t(\\infty)=0$. This function is continuous: every finite point is isolated, and for any $\\varepsilon>0$ choose $N$ with $\\ell^{-(N+1)}<\\varepsilon$; then $|t(n)|_\\ell<\\varepsilon$ for $n\\ge N$, so the tail neighbourhood of $\\infty$ maps into the $\\varepsilon$-ball about $0$. It defines a section of $\\Lambda_X$: [det-pe-condensed-point-coefficients] gives the section of $\\Lambda_B$ on $B[S]$, and [sk-def-sfb-coefficient-morphisms] identifies its restriction with $\\Lambda_X$. Multiplication by this section is a $\\Lambda_X$-linear endomorphism. Set $M=\\operatorname{coker}(t:\\Lambda_X\\to\\Lambda_X)$. The identity cover and this one-by-one presentation show that $M$ is locally finitely presented.",
+   "text": "For the converse remark fix a prime $\\ell$, let $\\Lambda=\\underline{\\mathbf Q_\\ell}$, and let $S=\\mathbf N\\cup\\{\\infty\\}$ with the one-point compactification topology. It is profinite: use the finite partitions into the first $n$ singletons and one remaining tail. Every clopen neighbourhood of $\\infty$ contains a tail, so these partitions are cofinal among finite clopen quotients. Choose an algebraic closure $\\Omega$ of $\\mathbf Q$, put $B=\\operatorname{Spec}\\Omega$ and $X=B[S]$. The profinite-test-object, finite-affine-coproduct and affine-limit statements identify $X=\\operatorname{Spec}LC(S,\\Omega)$, where $\\Omega$ is discrete: the filtered union of $\\Omega^{S_n}$ is exactly the functions constant on some tail. Apply [lem-weil-pbc-locally-constant-prime-spectrum] with $R=\\Omega$. Since a field has just the zero prime, this identifies $|X|$ with $S$, the point $s$ being $\\ker(\\operatorname{ev}_s)$. Define $t(n)=\\ell^{n+1}$ and $t(\\infty)=0$. This is continuous: finite points are isolated and for every $\\varepsilon>0$ a sufficiently long tail has $|t(n)|_\\ell<\\varepsilon$. By [det-pe-condensed-point-coefficients] it determines $\\widetilde t\\in\\Lambda_B(B[S])$. The ring isomorphism $\\theta_X$ of [lem-sfb-coefficient-sections-localization] gives the global section $t=\\theta_X(\\widetilde t)\\in\\Gamma(X,\\Lambda_X)$. Set $M=\\operatorname{coker}(t:\\Lambda_X\\to\\Lambda_X)$, where the arrow is multiplication by $t$. The identity cover and this one-by-one presentation show that $M$ is locally finitely presented.",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "def-sfb-profinite-test-objects",
     "lem-weil-pbc-finite-affine-coproduct-spectrum",
     "lem-weil-pbc-spec-small-colimit-limit",
     "det-pe-condensed-point-coefficients",
-    "sk-def-sfb-coefficient-morphisms",
     "def-sfb-finitely-presented-module",
     "def-sfb-locally-finitely-presented",
-    "lem-pc-algebraic-closure-exists-unique"
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-sfb-coefficient-sections-localization"
    ],
    "elementary": false,
    "source": {
@@ -99,11 +100,13 @@
    }
   },
   {
-   "text": "For a geometric point $q:\\operatorname{Spec}K\\to X$ over $s\\in S$, pullback sends the preceding presentation to the cokernel of multiplication by $t(s)$ on $\\Lambda_{\\operatorname{Spec}K}$. Indeed module pullback is a left adjoint by [sk-def-sfb-module-pushforward-pullback], so the cokernel universal property is preserved (maps out of the pullback are maps into the right adjoint, with the same zero relation). The strong monoidal underlying inverse image and the coefficient isomorphism identify the pullback of $\\Lambda_X$ with $\\Lambda_{\\operatorname{Spec}K}$. Factor $q$ through the evaluation point $q_s:B=\\operatorname{Spec}\\Omega\\to B[S]$ and $h:\\operatorname{Spec}K\\to B$. To see the factorization, the ring map $LC(S,\\Omega)\\to K$ defining $q$ has kernel the prime corresponding to $s$, namely the kernel of evaluation at $s$ by Step 5. It therefore factors through the quotient $LC(S,\\Omega)/\\ker(\\operatorname{ev}_s)=\\Omega$, and the resulting field map $\\Omega\\to K$ defines $h$. Naturality in the profinite set in [det-pe-condensed-point-coefficients], applied to $\\{s\\}\\to S$, makes $q_s^*t$ the scalar $t(s)$. For the remaining pullback, write any scalar $a$ as the map $a:\\mathbf Z\\to\\Lambda$ from Step 1. Write $c_h:h^*p_B^*\\cong p_{\\operatorname{Spec}K}^*$ for the natural isomorphism whose component at $\\Lambda$ is the coefficient map $\\alpha_h$. Its naturality gives $c_h(\\Lambda)\\circ h^*p_B^*(a)=p_{\\operatorname{Spec}K}^*(a)\\circ c_h(\\mathbf Z)$. After the unit identifications this states exactly that $h^*$ sends the scalar section $a$ to the same scalar section $a$. The pullback composition isomorphism therefore gives $q^*t=t(s)$. For $s=n\\in\\mathbf N$, multiplication by $t(s)=\\ell^{n+1}$ is invertible, with inverse multiplication by the scalar $\\ell^{-(n+1)}$; hence its cokernel $q^*M$ is zero. For $s=\\infty$, multiplication by $t(s)=0$ is the zero map, whose cokernel is the target regular module, so $q^*M\\cong\\Lambda_{\\operatorname{Spec}K}$. The latter is nonzero since its sections at the point equal $\\mathbf Q_\\ell$.",
+   "text": "Let $q:\\operatorname{Spec}K\\to X$ be a geometric point over $s\\in S$. By [lem-weil-pbc-locally-constant-prime-spectrum], its ring map $LC(S,\\Omega)\\to K$ has kernel $\\ker(\\operatorname{ev}_s)$, and hence factors through the quotient $\\Omega$. Thus $q=q_s\\circ h$, where $q_s:B\\to B[S]$ is evaluation at $s$ and $h:\\operatorname{Spec}K\\to B$ comes from this field embedding. The map $q_s$ is the map of test objects induced by $*\\to S$, so naturality in [det-pe-condensed-point-coefficients] (an isomorphism of rings, $\\Lambda$ being a condensed ring) sends $\\widetilde t$ to the element $c_s\\in\\Lambda_B(B[*])$ corresponding to $t(s)\\in\\mathbf Q_\\ell$. Hence $c_\\infty=0$, and $c_n$ is a unit, with inverse corresponding to $\\ell^{-(n+1)}$. Since $\\theta_B$ of [lem-sfb-coefficient-sections-localization] is a ring isomorphism, $r_s=\\theta_B(c_s)\\in\\Gamma(B,\\Lambda_B)$ is $0$, respectively a unit, and by its module-pullback clause $q_s^*$ sends multiplication by $t$ to $m_{r_s}$ on $\\Lambda_B$. Module pullback is a left adjoint [sk-def-sfb-module-pushforward-pullback], so it preserves cokernels, zero objects and isomorphisms, and $q^*\\cong h^*q_s^*$ by its composition isomorphism. If $s=n$, $m_{r_n}$ is invertible with inverse $m_{r_n^{-1}}$, so $q_s^*M=0$ and $q^*M=0$. If $s=\\infty$, $m_0=0$, so $q_s^*M\\cong\\Lambda_B$ and $q^*M\\cong h^*\\Lambda_B=\\Lambda_{\\operatorname{Spec}K}\\otimes_{h^*\\Lambda_B}h^*\\Lambda_B\\cong\\Lambda_{\\operatorname{Spec}K}$: extension of scalars sends the regular module to the regular module, since by [def-sfb-modobj-extend-restrict-adjunction] both corepresent global sections. This is nonzero: $K$ is algebraically closed, and point-coefficient evaluation at $*$ gives sections $\\mathbf Q_\\ell$.",
    "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-sfb-coefficient-sections-localization",
     "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-coefficient-morphisms",
-    "det-pe-condensed-point-coefficients"
+    "det-pe-condensed-point-coefficients",
+    "def-sfb-modobj-extend-restrict-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -112,7 +115,7 @@
    }
   },
   {
-   "text": "Suppose this $M$ had finite constant local models on a cover $\\{U_i\\to X\\}$. A finite presentation of $P_i$ gives finitely many spanning vectors over the field $\\mathbf Q_\\ell$. Choose a maximal linearly independent subset of these finitely many vectors. Every omitted vector belongs to its span: a dependence with that subset must have a nonzero coefficient on the omitted vector, which can be divided out. This subset is therefore a basis, giving $P_i\\cong\\mathbf Q_\\ell^{d_i}$ for some finite $d_i\\ge0$. Step 2 makes its model $\\Lambda_{U_i}^{d_i}$. Pullback to any geometric point of $U_i$ gives $\\Lambda_{\\operatorname{Spec}K}^{d_i}$: the pullback formula and coefficient isomorphism preserve the regular module, and its left-adjoint property preserves finite direct sums. For every point $u$ of $U_i$, [lem-pc-algebraic-closure-exists-unique] gives an algebraic closure $K$ of $\\kappa(u)$, and [def-weil-geometric-point] identifies the field inclusion $\\kappa(u)\\to K$ with a geometric point $\\operatorname{Spec}K\\to U_i$ over $u$. Taking sections at $\\operatorname{Spec}K$ of the pulled-back model gives $\\mathbf Q_\\ell^{d_i}$, which is zero exactly when $d_i=0$. Step 6 then shows that every nonempty $U_i$ with $d_i=0$ has image in $\\mathbf N$, while every nonempty $U_i$ with $d_i>0$ has image in $\\{\\infty\\}$. Since $X$ is affine, the covering definition supplies finitely many affine opens $V_j\\subset U_{i_j}$ whose images cover $X$. Each $|V_j|$ is quasi-compact by the existing Mathlib leaf [lem-weil-pbc-affine-scheme-qcqs], applied to the affine scheme $V_j$. Its continuous image in $S$ is compact and closed: for a point outside a compact subset of a Hausdorff space, separate it from each point of that subset and take a finite subcover to obtain a neighbourhood disjoint from the subset. The finite union of the images with $d_{i_j}=0$ must equal $\\mathbf N$. That would make $\\mathbf N$ closed in $S$, contrary to $\\infty$ being its limit point. Thus $M$ has no finite constant local model. This proves the claimed failure of the converse for a commutative condensed coefficient ring.",
+   "text": "Suppose this $M$ had finite constant local models on a cover $\\{U_i\\to X\\}$. A finite presentation of $P_i$ gives finitely many spanning vectors over the field $\\mathbf Q_\\ell$. Choose a maximal linearly independent subset of these finitely many vectors. Every omitted vector belongs to its span: a dependence with that subset must have a nonzero coefficient on the omitted vector, which can be divided out. This subset is therefore a basis, giving $P_i\\cong\\mathbf Q_\\ell^{d_i}$ for some finite $d_i\\ge0$. Step 2 makes its model $\\Lambda_{U_i}^{d_i}$. Pullback to any geometric point of $U_i$ gives $\\Lambda_{\\operatorname{Spec}K}^{d_i}$: the pullback formula and coefficient isomorphism preserve the regular module (as at $s=\\infty$ in Step 6), and its left-adjoint property preserves finite direct sums. For every point $u$ of $U_i$, [lem-pc-algebraic-closure-exists-unique] gives an algebraic closure $K$ of $\\kappa(u)$, and [def-weil-geometric-point] identifies the field inclusion $\\kappa(u)\\to K$ with a geometric point $\\operatorname{Spec}K\\to U_i$ over $u$. Taking sections at $\\operatorname{Spec}K$ of the pulled-back model gives $\\mathbf Q_\\ell^{d_i}$, which is zero exactly when $d_i=0$. Step 6 then shows that every nonempty $U_i$ with $d_i=0$ has image in $\\mathbf N$, while every nonempty $U_i$ with $d_i>0$ has image in $\\{\\infty\\}$. Since $X$ is affine, the covering definition supplies finitely many affine opens $V_j\\subset U_{i_j}$ whose images cover $X$. Each $|V_j|$ is quasi-compact by the existing Mathlib leaf [lem-weil-pbc-affine-scheme-qcqs], applied to the affine scheme $V_j$. Its continuous image in $S$ is compact and closed: for a point outside a compact subset of a Hausdorff space, separate it from each point of that subset and take a finite subcover to obtain a neighbourhood disjoint from the subset. The finite union of the images with $d_{i_j}=0$ must equal $\\mathbf N$. That would make $\\mathbf N$ closed in $S$, contrary to $\\infty$ being its limit point. Thus $M$ has no finite constant local model. This proves the claimed failure of the converse for a commutative condensed coefficient ring.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "sk-def-sfb-module-pushforward-pullback",
@@ -120,7 +123,8 @@
     "det-pe-condensed-point-coefficients",
     "lem-weil-pbc-affine-scheme-qcqs",
     "lem-pc-algebraic-closure-exists-unique",
-    "def-weil-geometric-point"
+    "def-weil-geometric-point",
+    "def-sfb-modobj-extend-restrict-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -142,8 +146,10 @@
   "def-weil-sheaf-of-modules-category",
   "det-pe-condensed-point-coefficients",
   "lem-pc-algebraic-closure-exists-unique",
+  "lem-sfb-coefficient-sections-localization",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
   "lem-weil-pbc-spec-small-colimit-limit",
   "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-condensed-ring",
@@ -283,10 +289,66 @@
    "results": "5 hits: SheafOfModules.Presentation.map, Presentation.map_generators_I, Presentation.quasicoherentData_presentation, Presentation.map_π_eq, Presentation.map_relations_I. Read Quasicoherent.lean:145-200. The map construction requires a colimit-preserving module functor and a regular-module identification; it does not supply the scalar-extension functor or the converse counterexample.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf finite constant local model equivalent to cokernel of finite matrix with entries in scalar ring",
+   "results": "CategoryTheory.constantSheaf; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CategoryTheory.Sheaf.IsConstant and related constant-sheaf essential-image lemmas. These provide constant-sheaf ingredients only, not the scalar-matrix local-model equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, SheafOfModules.Presentation, Module.FinitePresentation",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finitely presented module tensored with a sheaf of rings is presented by the same finite matrix over scalar sections",
+   "results": "instFinitePresentationTensorProduct; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation.map_relations_I; SheafOfModules.Presentation.map. These concern ordinary module base change or arbitrary sheaf-ring presentations, not fixed scalar entries or the converse counterexample.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(cokernel|[Pp]resentation)|([Cc]okernel|[Pp]resentation).*constantSheaf",
+   "results": "0 hits in pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite scalar matrix cokernel presentation of a module after extension to a ring sheaf",
+   "results": "Module.Presentation.ofExact; Module.Presentation.cokernel; Module.Presentation.RestrictScalarsData; ModuleCat.cokernelIsColimit; SheafOfModules.isFinitePresentation. No declaration states the constant-scalar local-model equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Presentation.map_relations_I, instFinitePresentationTensorProduct",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant scalar matrix presentation for a module over a sheaf of rings",
+   "results": "SheafOfModules.Presentation; SheafOfModules.ιFree; SheafOfModules.Presentation.generators; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.Presentation.mapGenerators. These are general sheaf-module presentation constructions and do not state the fixed-scalar local-model result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*constant.*local.*model|scalar.*matrix.*cokernel (Mathlib/CategoryTheory)",
+   "results": "0 hits in the CategoryTheory subdirectory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -309,7 +371,7 @@
   "date": "2026-10-17",
   "item": "det-def-sfb-constructible-local-model",
   "worker": "stage1",
-  "summary": "Repaired two C4 mistakes in the earlier sandbox: condensed pullback is not the constant-sheaf functor, and abelian-sheaf tensor exactness is not relative extension-of-scalars exactness. Derived the required Hom formula from constant sheafification and the existing relative extension adjunction, then proved the matrix cokernel calculation by its universal property. Added an explicit Q_l counterexample for the final converse remark. No new nodes, statement unchanged. Second reading expanded the spectrum homeomorphism and scalar-pullback naturality, supplied the elementary finite-basis argument, and reduced the covering contradiction to zero versus positive rank. Cited the existing affine-scheme quasi-compactness Mathlib leaf in the covering contradiction. Retry review on 2026-10-17 rechecked the sources, all cited statements and 32 verbatim quotation pairs, ran five fresh logged Mathlib searches including two semantic phrasings, and obtained a successful no-push preflight. Retained the seven-step proof and unchanged statement. Independent second reading made continuity of the convergent scalar sequence and the two fibre cokernels explicit, strengthened citation excerpts to include coefficient naturality, and ran three fresh logged Mathlib searches.",
+  "summary": "Q118 repair: replaced the inline spectrum proof with the existing closed node lem-weil-pbc-locally-constant-prime-spectrum; extracted coefficient-section localization into a new statement-only node (the scalar-section node was dropped on maintainer review: Step 6 now concludes from the ring isomorphisms by the unit/zero argument), with the retained command-generated searches read and recorded. Steps 5-6 now cite exactly these facts. Steps 1-4 and the covering contradiction in Step 7 are retained. The item statement and inherited maintainer metadata are unchanged.",
   "blueprint": "Steps 1-3 realize the first two proof paragraphs and clause 1 of sk-def-sfb-constructible; Step 4 realizes the third paragraph. Steps 5-7 prove the final converse remark left without an argument in the source.",
   "tool_uses": [
    {
@@ -322,12 +384,12 @@
   "det-pe-condensed-point-coefficients"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N6-196af92fb",
-  "group": "N6",
+  "reviewer": "NT-cc-Q118-c22bbcedb",
+  "group": "Q118",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-196af92fb (reviewer sub-agent of L); spot-checked: Read in full: the item, the blueprint main-20261015 statement and three-paragraph proof, unit sk-def-sfb-constructible and its transitive route, all 21 cited node statements, and Stacks sites.tex 00WH (l.2053) and 0H7J (l.2099). Statement: matches the blueprint word for word, nothing weakened. Steps 1-3: the constant-sheaf/sheafification Hom formula, combined with the extension/restriction adjunction (hypotheses checked: coequalizers in the abelian category of abelian sheaves, tensor preserves colimits, R_U commutative), proves coker(A) maps to the scalar-matrix cokernel by its universal property. No flatness is needed, which repairs the blueprint's unsupported claim that passing to constant sheaves is exact. Edge cases checked: m=0, n=0, A=0, A=id, zero ring. Step 4: local finite presentation via the coefficient isomorphism alpha. Steps 5-7: Q_l counterexample on X=Spec LC(N∪{∞},Ω) with t(n)=l^{n+1}, t(∞)=0. I re-checked the spectrum homeomorphism, continuity, the fibres (0 over N, Q_l at ∞) and the compactness contradiction from the fpqc-style covering condition. All correct. Minor remark, not a gap: identifying the pullback of a section with restriction in the slice site is used without its own node, inside a supplementary counterexample. Route: all off-route statements are Mathlib leaves except det-pe-condensed-point-coefficients; I accept that declared tool use (black-box evaluation of Λ on Ω[S], counterexample only). No cycle, no new nodes, no duplicate (searched 'constant local model' over dag/nodes), no SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-c22bbcedb (reviewer sub-agent of L); spot-checked: I read everything in full: the item, both new nodes, all cited statements, the blueprint main-20261015 statement and proof, and unit sk-def-sfb-constructible. I also read Stacks sites 00Y0 (l.5189, restriction formula at l.5209), 03EH (l.5455) and proetale 098T (l.2551). The item statement matches the blueprint word for word. Steps 1-5 and Step 7 are correct; their hypotheses and the edge cases m=0, n=0, A=0, A=id, the zero ring and empty objects all check out. Step 7 (2106 characters) is one covering argument whose only inline facts are a basis extraction and the fact that a compact set in a Hausdorff space is closed. I left it as one step. One fault (C4/E5): Step 6 took the section theta_B(t(s)) as the scalar section a_B = p_B^*(a) and applied lem-sfb-condensed-scalar-pullback to it along h. No cited statement identifies the point-coefficient isomorphism at S=* with p_B^*(a), because that isomorphism is natural only in S. I rewrote Step 6 so it no longer needs that identification. The point-coefficient isomorphism and theta_B are ring isomorphisms, so r_inf = 0 and r_n is a unit. The localization lemma gives q_s^*(m_t) = m_{r_s}. Pullback is a left adjoint, which with the composition isomorphism gives q^*M = 0 over N. Over infinity q^*M is h^*Lambda_B = Lambda_K, by the extend-restrict adjunction, and Lambda_K is nonzero. The new Step 6 is 1733 characters. After this repair the scalar lemma is no longer needed: Step 7 now cites def-sfb-modobj-extend-restrict-adjunction for the regular-module identification instead. I regenerated proof_deps, and nothing in the DAG cites the dropped node. lem-sfb-coefficient-sections-localization is true, statement-only, not a duplicate (searched 098T, localization and slice terms over dag/nodes), properly sourced and searched, so I kept it. I accept the declared tool use det-pe-condensed-point-coefficients, which serves only the counterexample. The spectrum node is Lean-closed. No cycle and no SGA source.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

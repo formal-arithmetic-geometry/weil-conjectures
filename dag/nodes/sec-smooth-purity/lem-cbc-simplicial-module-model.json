@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Current main-20261015 proof opening 'Choose a compactification c=(j,p)': arbitrary-site descent foundation for the affine-local compactification repair; bounded-below hypersheaf model steps 4-5: small hypercover test maps generate all cohomology-sheaf equivalences; the structural generation theorem is below the local-object characterization. Supporting primitive: Localized free Dold--Kan adjunction for module presheaves. In this supporting primitive: the ordinary simplicial-module model input to Proposition 3.15, before passing to presheaves.",
+   "place": "Current main-20261015 proof, opening 'Choose a compactification c=(j,p)' and the transport by 'lem-weil-pbc-transport-identifies-exchange': supporting hypercover/Dold--Kan primitive lem-cbc-dold-kan-hypercover-quillen, ordinary simplicial-module model input before Proposition 3.15.",
    "via": [
     "lem-cbc-dold-kan-hypercover-quillen",
     "lem-cbc-hypercover-localization-generation",
@@ -54,12 +54,34 @@
    }
   },
   {
-   "text": "The normalized complex in the statement is the Dold–Kan normalization. By the adjunction of Step 1, $Uf$ has the right lifting property against $\\Lambda_k^n\\hookrightarrow\\Delta^n$ exactly when $f$ has it against the free map $\\Lambda[\\Lambda_k^n]\\to\\Lambda[\\Delta^n]$. By [lem-cbc-normalized-simplex-chain-diagonal], $N\\Lambda[\\Delta^n]$ is naturally the complex $P(n)$ with basis the strictly increasing strings in $[n]$ (the nondegenerate simplices), and $N$ of the face inclusions are the inclusions of the spans of the strings avoiding one vertex. Since $N$ is an equivalence of abelian categories, it preserves sums of subobjects and cokernels, so $N\\Lambda[\\Lambda_k^n]$ is the span of all strings other than $[0,\\ldots,n]$ and $[0,\\ldots,\\widehat k,\\ldots,n]$, and the normalized quotient is the two-term disk complex $D^n$: it is zero outside degrees $n$ and $n-1$, with free generators given by the missing nondegenerate $n$-simplex and the omitted $(n-1)$-face, and the differential sends the top generator to the omitted-face generator up to sign. Every other nondegenerate simplex of $\\Delta^n$ lies in the horn; this calculation is the same for every $k$, including $k>0$. Since $N$ is an equivalence, a map $f:A\\to B$ has the right lifting property against the horn inclusion exactly when $Nf$ has the right lifting property against $N\\Lambda[\\Lambda_k^n]\\to N\\Lambda[\\Delta^n]$. In a lifting square against this disk inclusion, surjectivity of $(Nf)_n$ lets us choose $a\\in(NA)_n$ mapping to the image in $(NB)_n$ of the top generator $e_n$; with $e_{n-1}$ the omitted-face generator, the chain relation $\\partial e_n=\\pm e_{n-1}+\\kappa$, with $\\kappa$ in the horn part, then defines the lift on the omitted $(n-1)$-face as $\\pm(\\partial a-g(\\kappa))$, where $g$ is the given map on the horn part, so no surjectivity in degree $n-1$ is needed. Conversely, a square with zero horn data and an arbitrary element of $(NB)_n$ forces such a preimage, so the lifting property is equivalent to surjectivity of $(Nf)_n$. Thus the transferred fibrations are precisely the maps surjective in every strictly positive normalized degree, with no degree-zero requirement because horns have $n>0$. The Moore comparison [lem-cbc-simplicial-module-moore-homotopy] identifies the homotopy groups of the underlying simplicial modules with normalized homology (and components with $A_0/d_0N(A)_1$), while translations by module elements identify all basepoints. Consequently the transferred weak equivalences are exactly the maps inducing quasi-isomorphisms of nonnegative normalized complexes.",
+   "text": "By the free--forgetful adjunction of Step 1, $Uf$ lifts against a horn precisely when $f$ lifts against its degreewise free-module image. The Dold--Kan equivalence [lem-cbc-dold-kan-normalization-equivalence] then identifies these lifting squares and their fillers with those for $Nf$ against $i:N\\Lambda[\\Lambda_k^n]\\to N\\Lambda[\\Delta^n]$. Here $n\\geq1$ and $0\\leq k\\leq n$, including both outer horns.",
    "uses": [
     "lem-cbc-dold-kan-normalization-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, §3.3, sequence (1) and transferred simplicial-module/projective connective-chain model paragraph before Proposition 3.15, printed pp. 11–12; normalized Moore horn calculation."
+   }
+  },
+  {
+   "text": "By [lem-cbc-normalized-horn-disk], $i$ is isomorphic, with its domain fixed, to the summand inclusion $K\\to K\\oplus D^n$, where $K=N\\Lambda[\\Lambda_k^n]$. By [lem-cbc-disk-lifting-surjective], $Nf$ lifts against this inclusion exactly when $(Nf)_n$ is surjective. Taking all horn dimensions gives precisely positive-degree normalized surjectivity; no horn has degree zero, so degree-zero surjectivity is not required.",
+   "uses": [
+    "lem-cbc-normalized-horn-disk",
+    "lem-cbc-disk-lifting-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1511.02828",
+    "place": "Choudhury–Gallauer, §3.3, sequence (1) and transferred simplicial-module/projective connective-chain model paragraph before Proposition 3.15, printed pp. 11–12; normalized Moore horn calculation."
+   }
+  },
+  {
+   "text": "The Moore comparison [lem-cbc-simplicial-module-moore-homotopy] identifies homotopy groups based at zero with normalized homology, and identifies components with $A_0/d_0N(A)_1$. Translation by a vertex $a$ is the simplicial automorphism $x\\mapsto x+s(a)$, where $s(a)$ is its totally degenerate simplex; it takes zero to $a$ and commutes with a simplicial linear map after translating its target by $f(a)$. Thus the comparison applies at every vertex basepoint and, by change of basepoint along a path inside a realization component, at every basepoint. The definition of weak equivalence in [lem-coef-kan-quillen-right-proper] now says exactly that all normalized homology maps, including degree zero, are isomorphisms. Hence transferred weak equivalences are precisely normalized quasi-isomorphisms.",
+   "uses": [
     "lem-cbc-simplicial-module-moore-homotopy",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-cbc-normalized-simplex-chain-diagonal"
+    "lem-coef-kan-quillen-right-proper"
    ],
    "elementary": false,
    "source": {
@@ -80,7 +102,7 @@
    }
   },
   {
-   "text": "Every simplicial set is cofibrant in the Kan model because the initial inclusion is a monomorphism. The left-Quillen preservation clause of [lem-coef-model-infinity-derived-adjunction] (Ken Brown's lemma) therefore sends a weak homotopy equivalence $f$ of simplicial sets to a weak equivalence $\\Lambda[f]$ of simplicial modules. Applying the normalized weak-equivalence criterion established in Step 3, using [lem-cbc-dold-kan-normalization-equivalence] and [lem-cbc-simplicial-module-moore-homotopy], gives that $N\\Lambda[f]$ is a quasi-isomorphism of nonnegative chain complexes, as claimed.",
+   "text": "Every simplicial set is cofibrant in the Kan model because the initial inclusion is a monomorphism. The left-Quillen preservation clause of [lem-coef-model-infinity-derived-adjunction] (Ken Brown's lemma) therefore sends a weak homotopy equivalence $f$ of simplicial sets to a weak equivalence $\\Lambda[f]$ of simplicial modules. Applying the normalized weak-equivalence criterion established in Step 5, using [lem-cbc-dold-kan-normalization-equivalence] and [lem-cbc-simplicial-module-moore-homotopy], gives that $N\\Lambda[f]$ is a quasi-isomorphism of nonnegative chain complexes, as claimed.",
    "uses": [
     "lem-coef-kan-quillen-right-proper",
     "lem-coef-model-infinity-derived-adjunction",
@@ -97,8 +119,9 @@
  "proof_deps": [
   "def-weil-pbc-simplicial-object",
   "lem-cbc-dg-presheaf-model-localizations",
+  "lem-cbc-disk-lifting-surjective",
   "lem-cbc-dold-kan-normalization-equivalence",
-  "lem-cbc-normalized-simplex-chain-diagonal",
+  "lem-cbc-normalized-horn-disk",
   "lem-cbc-simplicial-module-moore-homotopy",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-model-infinity-derived-adjunction",
@@ -147,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-dold-kan-hypercover-quillen",
@@ -160,8 +183,8 @@
   "date": "2026-10-17",
   "item": "lem-cbc-simplicial-module-model",
   "worker": "stage1",
-  "summary": "Repaired the returned five-step split: Step 2 identifies simplicial Λ-modules with one-sorted simplicial algebra models and invokes the existing sorted-theory theorem for acyclicity; Step 3 replaces the false k-dependent kernel claim and unsupported direct-summand citation with the all-horn Moore correction; Step 5 cites the derived-adjunction node for Ken Brown preservation. No new nodes were needed.",
-  "blueprint": "Realizes the supporting primitive \"Localized free Dold–Kan adjunction for module presheaves\", specifically its ordinary simplicial-module model input to Proposition 3.15, before passage to presheaves.",
+  "summary": "Repair of the human-requested re-split of the original 2590-character step 3: retain steps 1, 2, 4 and 5, and replace step 3 by short normalization, horn/disk-lifting and Moore-comparison steps. Two smaller statement-only nodes isolate the chain-level horn splitting and the disk-lifting criterion; complete constructions and searches are recorded in report.md. Item statement and Lean record are unchanged.",
+  "blueprint": "Current main-20261015 proof, opening 'Choose a compactification c=(j,p)' and the transport by 'lem-weil-pbc-transport-identifies-exchange': supporting hypercover/Dold--Kan primitive lem-cbc-dold-kan-hypercover-quillen, ordinary simplicial-module model input before Proposition 3.15. The two new nodes isolate the hidden arguments of the original third proof step, without changing the route.",
   "tool_uses": [
    {
     "node": "lem-coef-sorted-simplicial-algebra-model",
@@ -169,11 +192,11 @@
    },
    {
     "node": "lem-coef-model-infinity-derived-adjunction",
-    "why": "Step 5 uses its stated preservation of weak equivalences between cofibrant objects for a left Quillen functor."
+    "why": "Step 7 uses its stated preservation of weak equivalences between cofibrant objects for a left Quillen functor."
    },
    {
     "node": "lem-coef-kan-quillen-right-proper",
-    "why": "Steps 2-5 use its Kan model conventions (horn-lifting definition of Kan fibrations, weak homotopy equivalences, monomorphisms as cofibrations); no node of sk-prop-sf-cbc states the Kan-Quillen model, and lem-cbc-simplicial-hypercover-fibration-test already records the same tool use."
+    "why": "Steps 2-7 use its Kan model conventions; no node of sk-prop-sf-cbc states the Kan-Quillen model."
    }
   ]
  },
@@ -185,9 +208,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q26-f314bec7a",
-  "group": "Q26",
+  "reviewer": "NT-cc-Q10-b9b19dd1f",
+  "group": "Q10",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-f314bec7a (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited node statement and the parent's use (step 4 of lem-cbc-dold-kan-hypercover-quillen). The statement is true and not weakened: arbitrary commutative Λ, kernel normalization, fibrations surjective only in positive normalized degrees, and NΛ[f] a quasi-isomorphism for weak homotopy equivalences. Choudhury–Gallauer §3.3 is not archived, so I checked against the standard theory (Goerss–Jardine III.2). No duplicate exists in the DAG and no blueprint node states it. Step 1 is elementary. Step 2 correctly specializes the sorted-theory transfer to the one-sorted Λ-module theory. Steps 4 and 5 (Quillen definition, Ken Brown with every simplicial set cofibrant) are correct. In step 3 I checked the disk calculation for every horn, including outer horns and n=1: the cokernel is D^n, the lift is ±(∂a−g(κ)), and the converse square works. I fixed three things in fixes/dag/nodes/sec-smooth-purity/lem-cbc-simplicial-module-model.json. (1) C1/C4: step 3 used 'degenerate terms vanish under normalization' and the basis of NΛ[Δ^n] with no node; I cited the in-unit lem-cbc-normalized-simplex-chain-diagonal (N(F(n))≅P(n), no cycle), added it to proof_deps and wrote out the adjunction and chain-relation lift. (2) B3: the statement cited lem-cbc-dold-kan-homology for the normalization; I replaced it in the statement and stmt_deps with lem-cbc-dold-kan-normalization-equivalence, which has the item's exact kernel convention. (3) C8: I declared the off-unit tool lem-coef-kan-quillen-right-proper in split_report.tool_uses; lem-cbc-simplicial-hypercover-fibration-test already records the same tool use. I accept the tool_uses lem-coef-sorted-simplicial-algebra-model, lem-coef-model-infinity-derived-adjunction and lem-coef-kan-quillen-right-proper. There are no new nodes and nothing is dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-b9b19dd1f (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement, and made no fixes. The item statement is unchanged. The proof's old long step 3 is now steps 3-5 (7 steps in all, longest 802 characters), and proof_deps equals the union of the step uses. The parent's step 4 in lem-cbc-dold-kan-hypercover-quillen still uses only the positive-degree fibration criterion and the final N Λ[f] clause. Stacks sources checked: Tag 08NU (simplicial.tex lines 5674-5685) says the horn contains every nondegenerate simplex except σ and σ_k, which matches the horn node. Tag 017V uses the opposite kernel convention, so it is correctly listed as background only. Tag 0FKI (degenerate subcomplex) justifies identifying N Λ[S] with the free module on nondegenerate simplices, i.e. the q_n of lem-cbc-normalized-simplex-chain-diagonal. Horn node: ∂t = (-1)^k u + (element of K) with a unit coefficient, so B = K ⊕ span(t, ∂t) ≅ K ⊕ D^n. I tested n=1 with k=0 and k=1, n=2 with k=1 (the raw face is not a complement; ∂t is), characteristic 2, and Λ=0. Disk node: the lift sends e_n to a preimage x and e_{n-1} to ∂x. The converse square v(e_n)=y, v(e_{n-1})=∂y is a chain map for every y, not only cycles. I checked n=1 and K=0. Item steps 2-7 match their cited statements: the one-sorted transfer; RLP through the adjunction and the Dold-Kan equivalence; the Moore comparison with translation x↦x+s(a) to cover all basepoints; Quillen as defined in the dg-presheaf node; Ken Brown with every simplicial set cofibrant. A DAG grep found no duplicate (the horn and disk hits are about anodyne maps, marked mapping simplices, Serre disks, or Γ t(E)). Neither new node restates a clause of the item, and there is no cycle. The three retained tool_uses (sorted-simplicial-algebra-model, model-infinity-derived-adjunction, kan-quillen-right-proper) are accepted again. No SGA source is used, and this is not a target node."
  }
 }
