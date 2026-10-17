@@ -51,8 +51,9 @@ Proof:
 4. Transport the canonical tensor pushout along this isomorphism. Its restrictions
    are precisely f_k and the transition of the factor Q to B_s. Naturality gives
    the asserted equality after passage to Y. The P-structure on A_k is the one
-   factored through the stage in step 1, so it maps to the given P-structure of X. All constructions work for zero
-   rings and empty presentations, without flatness or injective transitions.
+   factored through the stage in step 1, so it maps to the given P-structure of X.
+   All constructions work for zero rings and empty presentations, without flatness
+   or injective transitions.
 -/
 theorem exists_tensor_model_algebra_stage
     {I : Type v} [Preorder I] [IsDirectedOrder I]
