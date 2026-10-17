@@ -4,11 +4,133 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
   "place": "(3), final sentence: agreement because comparison morphisms are compatible with units and counits"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r=a_{\\mathrm{et},*}$, $s=a_{\\mathrm{proet},*}$, $R_T=\\nu_{T,*}$, and let $\\eta_T,\\epsilon_T$ be the comparison adjunction units and counits. Restriction gives $R_Ps=rR_Z$: on an etale object $V\\to P$ both sides evaluate a pro-etale sheaf at $Z\\times_PV$. This is an identity on sections, restrictions and scalar actions, by [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-direct-image], [def-weil-pbc-proetale-operations]. For an etale module sheaf $H$ the underived restriction mate $b_H:A_PrH\\to sA_ZH$ is the adjunct of $r(\\eta_{Z,H}):rH\\to rR_ZA_ZH=R_PsA_ZH$. Expanding the adjunction formula of [def-weil-pbc-adjunction-mate] gives\n$$b_H=\\epsilon_{P,sA_ZH}\\circ A_P(r\\eta_{Z,H}),\\qquad R_P(b_H)\\circ\\eta_{P,rH}=r(\\eta_{Z,H}).$$\nIndeed the second equality follows by naturality of $\\eta_P$ at $r\\eta_{Z,H}$ followed by $R_P(\\epsilon_{P,N})\\circ\\eta_{P,R_PN}=1$ at $N=sA_ZH$. Thus it holds for the specified mate, with no choice of an isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), final sentence; expansion of the underived restriction mate"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-comparison-sections] with affine base $P$ and the constant one-object presentation $P=P$. The comparison unit at $P$ identifies $\\Gamma(P_{\\mathrm{et}},B)$ with $\\Gamma(P_{\\mathrm{proet}},A_PB)$ for every etale module sheaf $B$. Evaluate the second equation of step 1 at the terminal object $P$ and take $B=rH$. Under this unit identification, $\\Gamma(P,b_H)$ is exactly\n$$\\Gamma(Z_{\\mathrm{et}},H)\\xrightarrow{\\eta_{Z,H}(Z)}\\Gamma(Z_{\\mathrm{proet}},A_ZH).$$\nHere $R_P$ and $R_Z$ are restriction, so their values at $P$ and $Z$ are the same sections, respectively. The map $\\eta_{Z,H}(Z)$ is the inverse-image section map by the inverse-image adjunction. All maps commute with morphisms $H\\to H'$, since they are components of natural transformations. Applying this calculation to each $I^n$ gives an equality of cochain maps, because naturality also applies to every differential $I^n\\to I^{n+1}$.",
+   "uses": [
+    "lem-weil-pbc-comparison-sections",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(2) and (3), point-section identification and sectionwise mate calculation"
+   }
+  },
+  {
+   "text": "Let $Q$ denote the appropriate localization functor, and $\\alpha^r_L:Q(rL)\\to Rr(QL)$ and $\\alpha^s_M:Q(sM)\\to Rs(QM)$ the right-derived units. The fixed construction [def-weil-pbc-fixed-derived-comparisons] is obtained by extending $Q(b_L)$ followed by $\\alpha^s_{A_ZL}$. The universal-property factorization in clause (1) of [lem-weil-pbc-right-derived-plus-injective] therefore gives, suppressing the natural exact-functor localization isomorphisms,\n$$\\beta_{a,QL}\\circ A_P(\\alpha^r_L)=\\alpha^s_{A_ZL}\\circ Q(b_L).$$\nAt $L=I$, clause (2) makes $\\alpha^r_I$ invertible, since $I$ is bounded below and termwise injective. This determines the actual $\\beta_{a,F}$ in the source model $QA_PrI$. This is precisely the defining factorization of rightDerivedFunctorPlusBaseChange, rather than an identification based on invertibility of its endpoints.",
+   "uses": [
+    "def-weil-pbc-fixed-derived-comparisons",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+    "place": "fixed derived comparison construction; universal-property unit factorization"
+   }
+  },
+  {
+   "text": "Naturality of the right-derived unit $\\alpha^s$ at $j:A_ZI\\to J$ gives\n$$Rs(Qj)\\circ\\alpha^s_{A_ZI}=\\alpha^s_J\\circ Q(sj).$$\nThe morphism $Qj$ is invertible by the assumed quasi-isomorphism; $\\alpha^s_J$ is invertible by clause (2) of [lem-weil-pbc-right-derived-plus-injective]. Consequently, using $\\alpha^s_J$ and $Rs(Qj)$ for the canonical identification of $Rs(A_ZF)$ with $Q(sJ)$, the equality of step 3 represents $\\beta_{a,F}$ by the cochain map\n$$A_PrI\\xrightarrow{b_I}sA_ZI\\xrightarrow{sj}sJ.$$\nNo acyclicity or injectivity of $A_ZI$ is assumed. The models are the bounded-below resolution models of [def-weil-pbc-direct-image], [def-weil-pbc-proetale-operations]; their passage to the unbounded categories is part of the fixed comparison definition.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-fixed-derived-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(3), direct-image resolution models and compatibility with the derived units"
+   }
+  },
+  {
+   "text": "The field $\\Omega$ is w-contractible in [sk-def-pe-wlocal]: its spectrum and its component space are singletons, so the closed-point condition and extremal disconnectedness hold. Its only maximal localization is $\\Omega$, which is strictly henselian: the residue field is algebraically closed, hence separably closed, and the henselian condition for $(\\Omega,0)$ says that idempotents of $B/0=B$ lift uniquely to $B$, an identity, by [def-weil-pbc-henselian-terminology]. Thus [det-pe-wc-sections-exact], with $X=U=P$ and the constant coefficient ring sheaf, gives exactness of $\\Gamma(P_{\\mathrm{proet}},-)$. Etale point sections are exact for every $\\Lambda$ by clause 1 of [lem-weil-pbc-geometric-point-pullback-stalk]. These exact functors may be applied termwise in the derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. Apply pro-etale point sections to step 4. Direct-image evaluation at $P$ is evaluation at $Z$ on each site. Step 2 now makes the resulting cochain map exactly $\\Gamma(Z_{\\mathrm{et}},I)\\to\\Gamma(Z_{\\mathrm{proet}},A_ZI)\\to\\Gamma(Z_{\\mathrm{proet}},J)$, with second map $\\Gamma(j)$. By [lem-weil-pbc-right-derived-plus-injective] applied to the two module-section functors, $I$ and $J$ compute the respective derived global sections.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "def-weil-pbc-henselian-terminology",
+    "det-pe-wc-sections-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+    "place": "(1), (2), and (3): exact point sections and the two section complexes"
+   }
+  },
+  {
+   "text": "It remains to check the specified cohomology comparison. The exact adjunction $A_Z\\dashv R_Z$ has right adjoint preserving injectives by [lem-sp-right-adjoint-preserves-injectives]. Hence $R_ZJ$ is a bounded-below injective complex, so it computes $RR_Z(A_ZF)$. The cochain map\n$$k=R_Z(j)\\circ\\eta_{Z,I}:I\\longrightarrow R_ZJ$$\nis adjoint to $j:A_ZI\\to J$. The explicit derived-adjunction bijection of [lem-pc-pre-derived-adjoint-functors-general], applied with the exact left functor $G=A_Z$ and right functor $F=R_Z$, therefore identifies $Qk$ with the derived unit at $F$: in its formula take the left resolution to be the identity, the right resolution to be $j$, and the representing adjunct to be $j$. After the target identification $QJ\\simeq A_ZF$, this adjunct is the identity, which characterizes the unit. Its hypotheses hold at $K=A_ZI$, $M=I$: by [lem-weil-pbc-dplus-injective-representative] (2) $J$ is K-injective, so by [lem-weil-pbc-kinjective-hom-derived] every quasi-isomorphism $s:A_ZI\\to I_s$ has a map $g_s:I_s\\to J$, unique up to homotopy, with $Q(g_s)=Q(j)Q(s)^{-1}$ (so $g_j\\simeq1$); thus $s\\mapsto Q(R_ZI_s)$ is essentially constant with value $Q(R_ZJ)$, $j_0=j$, $p_s=Q(R_Zg_s)$, and $p_j$ is the identity. As $A_Z$ is exact, $t\\mapsto Q(A_ZP)$ is essentially constant with value $Q(A_ZI)$ and $u_{\\mathrm{id}}=1$. By [lem-weil-pbc-right-derived-plus-injective] (2) this value is $RR_Z(A_ZF)$. Applying etale derived sections to $Qk$ is represented by $\\Gamma(Z_{\\mathrm{et}},k)$ since $I$ and $R_ZJ$ are injective complexes. Restriction gives $\\Gamma(Z_{\\mathrm{et}},R_ZJ)=\\Gamma(Z_{\\mathrm{proet}},J)$ termwise. Consequently this is precisely the cochain map in step 5. This computes both the derived unit and the final-object composition comparison on the same injective complex; the resulting morphism is the canonical cohomology comparison of [sk-prop-sf-comparison].",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/sk-prop-sf-comparison.proof.md",
+    "place": "Tags 0FND/0DVC, lemma-pre-derived-adjoint-functors-general/lemma-pre-derived-adjoint-functors; blueprint global-sections paragraph, Stacks 099W (lemma-compare-cohomology)"
+   }
+  },
+  {
+   "text": "The left side is natural in $F$, since the fixed derived comparison is a natural transformation and point sections are functorial; the inverse-image section map is also natural. For explicit resolution independence, let $I',j':A_ZI'\\to J'$ be another choice for the same $F$. These bounded-below complexes of injectives are K-injective by clause (2) of [lem-weil-pbc-dplus-injective-representative]; the module categories have enough injectives, as [lem-sc-bounded-below-injective-resolution] applied to a single sheaf in degree 0 embeds it in an injective. By [lem-weil-pbc-kinjective-hom-derived], the canonical source identification is represented by a homotopy equivalence $u:I\\to I'$, and the target identification by a homotopy equivalence $v:J\\to J'$. Choose their homotopy classes to represent the identities on $F$ and $A_ZF$. Then $vj$ and $j'A_Zu$ have the same image in the derived category. The same Hom-bijection, now for maps from $A_ZI$ into $J'$, says that these cochain maps are homotopic. Naturality of the inverse-image section map, followed by this homotopy, gives the commutative resolution-comparison square after localization. Additive section functors preserve the homotopy equations termwise. Thus the displayed map is independent of both resolutions under their canonical derived identifications. The same argument for a morphism $F\\to F'$ proves the asserted naturality on any resolution representatives.",
+   "uses": [
+    "def-weil-pbc-fixed-derived-comparisons",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, Hom-bijection and homotopy equivalences; naturality of the fixed comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-sections",
+  "def-weil-pbc-fixed-derived-comparisons",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wc-sections-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-bounded-below-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-cor-pbc-torsion-stalk/sk-cor-pbc-torsion-stalk-proetale-point.proof.md",
+  "place": "(3), final sentence, expanded by the restriction-mate and derived-unit calculations; Stacks 0DVC/070I/099W"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-pbc-torsion-stalk-proetale-point",
@@ -57,6 +179,69 @@
    "results": "; hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
    "date": "2026-10-17",
    "verdict": "no match: the general mate identities are infrastructure; the statement also identifies the specified derived comparisons and their geometric section models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale to proetale direct image comparison on injective resolutions gives canonical global sections pullback map",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.instFullEtaleOverForget, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical proetale comparison on global sections computed by injective resolutions",
+   "results": "Actual hits: CategoryTheory.InjectiveResolution.iso, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Sheaf.Γ, CategoryTheory.InjectiveResolution.homotopyEquiv, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "Actual hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusBaseChange|comparisonUpperStar",
+   "results": "Actual hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of additive functors with exact horizontal functors induces a derived comparison compatible with localization units",
+   "results": "Actual hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_fac|rightDerivedFunctorPlusBaseChange|rightDerivedDesc",
+   "results": "Actual hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived_fac\"",
+   "results": "Actual hits: CategoryTheory.Functor.rightDerived_fac, CategoryTheory.Functor.rightDerived_fac_app, CategoryTheory.Functor.rightDerived_fac_assoc, CategoryTheory.Functor.rightDerived_fac_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change natural transformation commutes with the natural maps from complexes to their right derived images",
+   "results": "Actual hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ShortComplex.mapRightHomologyIso_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived comparison induced by a natural transformation of additive functors with exact horizontal functors satisfies its factorization identity with right derived units",
+   "results": "Actual hits: CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the full site-specific resolution identity; general derived functor/unit infrastructure only"
   }
  ],
  "kind": "statement",
@@ -88,5 +273,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pbc-torsion-stalk-proetale-resolution-map",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary discrete commutative coefficient ring and the exact named map. Seven steps expand the restriction mate, derive it through the universal-property unit factorization, evaluate exact point sections, identify the cohomology comparison through the derived adjunction, and prove resolution independence via the K-injective Hom bijection. Reused existing nodes throughout; no new node and no statement change.",
+  "blueprint": "Realizes det-pbc-torsion-stalk-proetale-point proof (3), final sentence, with its point identifications (1)-(2). Steps 1-2 compute the underived comparison; 3-4 compute its fixed derived map; 5 applies point sections; 6 identifies the derived comparison unit; 7 verifies naturality and resolution independence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-sections",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic definition-independent input for point sections, injective-resolution comparison or derived-adjunction normalization, used with its full stated hypotheses; it supplies no replacement for the unit’s proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-sections",
+  "det-pe-wc-sections-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "sk-prop-sf-comparison",
+  "lem-sc-bounded-below-injective-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-7953d7c6f",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-7953d7c6f (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 7 steps, every cited statement, the unit sk-cor-pbc-torsion-stalk and the main-20261015 det-pbc-torsion-stalk-proetale-point proof (3), last sentence. I checked the base-change map against the Lean source. β is rightDerivedFunctorPlusBaseChange of lowerStarComparisonUpperStarBaseChange, which is the mateEquiv.symm of the restriction iso (LowerStar.lean:78, SmoothBaseChangeComparisons.lean:40-64). Its defining factorization is PlusBaseChange.lean:84. The coefficients are ModuleCat Λ sheaves, i.e. modules over the constant ring sheaf, and Λ is arbitrary, not weakened. The statement is unchanged and true. Small cases tested: Z empty, a=id (the mate is 1 by the triangle identity), Λ=0, F=0, infinite Λ, shifts. Steps 1-5 check out: the mate formula and R_P(b)η_P=r(η_Z) redone by hand; comparison-sections at X=U=P gives the unit leg; the fac equation plus clause (2) of right-derived-plus-injective; naturality at j; Spec Ω is w-contractible ((Ω,0) henselian, π0 a point); exactness of point sections. Repairs (C4/E1): step 6 never checked the essential-constancy hypotheses of lem-pc-pre-derived-adjoint-functors-general. I added them, citing lem-weil-pbc-dplus-injective-representative (2) and lem-weil-pbc-kinjective-hom-derived: p_s=Q(R_Z g_s), j_0=j, and the pro-side is constant because A_Z is exact. Step 7 cited lem-sc-bounded-below-injective-resolution for K-injectivity of arbitrary bounded-below injective complexes, which that node does not state; I replaced it with dplus-injective-representative (2), whose enough-injectives hypothesis comes from the resolution of G[0]. proof_deps recomputed; every step is at most 1888 characters. No new nodes, no cycle, no duplicate (comparison-global-cohomology is finite-Λ and only about the unit; sk-thm-pe-direct-image-comparison and the right-acyclic iso criterion only state invertibility). Accepted tool_uses: det-pe-wc-sections-exact and sk-prop-sf-comparison (off-route, also accepted on the parent). The other declared entries are on route. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
