@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ScalarExtension
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
 /-!
 # The completed exchange map of a square of schemes on the pro-étale site
