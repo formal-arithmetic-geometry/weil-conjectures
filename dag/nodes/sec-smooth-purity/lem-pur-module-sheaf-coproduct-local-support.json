@@ -14,9 +14,127 @@
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-sheaves-limits-sectionwise] to the discrete diagram on $I$. Its sectionwise limit is the sheaf $P$, with $P(V)=\\prod_i H_i(V)$ and coordinatewise restrictions and module operations. The diagram is small because $I$ belongs to the fixed sheaf universe.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; Tag 03CO, lemma-limits-colimits-abelian-sheaves (2)"
+   }
+  },
+  {
+   "text": "Check the subpresheaf and submodule assertions directly. If $h\\in S(V)$ is witnessed by $\\{V_a\\to V\\}$ and $B_a$, then along $W\\to V$ its restriction is witnessed by the pulled-back covering $\\{W\\times_VV_a\\to W\\}$ with the same finite sets. The zero tuple is witnessed by the identity covering with empty support. Negation and multiplication by $r\\in\\mathcal O(V)$ preserve each witness. For $h,k\\in S(V)$ with witnesses $(V_a,B_a)$ and $(W_b,C_b)$, base change followed by composition gives the covering $\\{V_a\\times_VW_b\\to V\\}_{a,b}$, on which $h+k$ vanishes outside $B_a\\cup C_b$. Thus each $S(V)$ is a submodule of $P(V)$, and its restrictions are the inherited semilinear maps. Functoriality and the module identities hold because they hold coordinatewise in $P$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW, definition-sheaf-modules; agent calculation using Sites Tag 00VH, definition-site (base change and composition of coverings)"
+   }
+  },
+  {
+   "text": "For a covering $\\{V_a\\to V\\}$ and a matching family $h^a\\in S(V_a)$, its image in $P$ has a unique glued section $h\\in P(V)$. For each $a$, choose a witnessing covering $\\{W_{ab}\\to V_a\\}_b$ and finite supports $B_{ab}$ for $h^a$. The composite family $\\{W_{ab}\\to V\\}_{a,b}$ is a covering, and $h$ restricts there to tuples vanishing outside $B_{ab}$. Hence $h\\in S(V)$. Uniqueness holds since two tuples in $S(V)\\subseteq P(V)$ with equal restrictions are equal in the sheaf $P$. This proves the sheaf condition; together with step 2 it makes $S$ a sheaf of modules. This also treats empty covering families, since $P$ has unique gluing for the empty matching family.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW, definition-sheaf-modules; agent verification of the equalizer condition of Sites Tags 00VM and 00VR"
+   }
+  },
+  {
+   "text": "For $i\\in I$ and $x\\in H_i(V)$, let $\\iota_{i,V}(x)$ be the tuple with $i$-coordinate $x$ and all other coordinates zero. The identity covering and the finite set $\\{i\\}$ witness its membership in $S(V)$. Coordinatewise these maps commute with restrictions and are $\\mathcal O(V)$-linear, so they define morphisms $\\iota_i:H_i\\to S$ whose composites with $S\\hookrightarrow P$ are the coordinate insertions.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW, definition-sheaf-modules; agent construction of the coordinate morphisms"
+   }
+  },
+  {
+   "text": "Fix morphisms $f_i:H_i\\to T$, and a section $h\\in S(V)$ with witness $(V_a,B_a)$. Put $t_a=\\sum_{i\\in B_a}f_{i,V_a}(h_i|_{V_a})\\in T(V_a)$. On $W=V_a\\times_VV_b$, each sum can be enlarged to $B_a\\cup B_b$: terms outside its original support are zero, and $f_i(0)=0$. Naturality of $f_i$ then identifies both restricted sums with $\\sum_{i\\in B_a\\cup B_b} f_{i,W}(h_i|_W)$. Thus $(t_a)_a$ is a matching family in $T$ and glues uniquely to a section $f_V(h)\\in T(V)$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, coproduct construction; explicit agent finite-sum formula and sheaf gluing, using Tag 03CW"
+   }
+  },
+  {
+   "text": "The section just defined is independent of the witness. For a second witness $(W_b,C_b)$, use the common refinement $V_a\\times_VW_b$. On each of these objects the two prescribed sums coincide after enlargement to $B_a\\cup C_b$, exactly as in step 5. Their glued sections therefore agree by separatedness of $T$ on this covering. If a witnessing covering is empty, the same assertion holds since $T(V)$ then has only one section.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW, definition-sheaf-modules; agent common-refinement and separatedness verification"
+   }
+  },
+  {
+   "text": "For $q:W\\to V$, pull a witness for $h$ back to $W$. The restricted local sum equals the sum constructed for $h|_W$, because $f_i$ commutes with restrictions. Uniqueness of gluing gives $f_W(h|_W)=f_V(h)|_W$. To check additivity, take the common refinement of witnesses for $h$ and $k$ and the union of their finite supports. On each member, the formula of step 5 gives $f(h+k)=\\sum_i f_i(h_i+k_i)=\\sum_i f_i(h_i)+\\sum_i f_i(k_i)$. Separatedness gives additivity on $V$. On a witness for $h$, the same calculation with $r\\in\\mathcal O(V)$ gives $f(rh)=r f(h)$, since each $f_i$ is linear over the ring of sections on that member. Empty covers are handled by unique gluing. Therefore $f:S\\to T$ is a morphism of sheaves of modules.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW, definition-sheaf-modules; agent verification of naturality and sectionwise linearity of the finite-sum construction"
+   }
+  },
+  {
+   "text": "For a section $x\\in H_i(V)$ use the identity covering and support $\\{i\\}$ in step 5. Its sum is $f_{i,V}(x)$, so $f\\iota_i=f_i$. Conversely, if $g:S\\to T$ is a morphism with $g\\iota_i=f_i$, then on a witnessing member $V_a$ one has the coordinatewise equality $h|_{V_a}=\\sum_{i\\in B_a}\\iota_i(h_i|_{V_a})$ in $S(V_a)$. Linearity forces $g_V(h)|_{V_a}=t_a$. Uniqueness of gluing forces $g_V(h)=f_V(h)$ for all $V,h$, hence $g=f$. Thus composition with the $\\iota_i$ is the displayed bijection. This is the colimit universal property for the discrete diagram on $I$, so $S$ is its coproduct. For $I=\\varnothing$, $P$ and $S$ are the zero sheaf and the empty sum formula gives the unique morphism to $T$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, coproduct universal property; explicit agent proof from finite sums and unique gluing"
+   }
+  },
+  {
+   "text": "Write $Q=\\bigoplus_i H_i$ for any chosen coproduct, with maps $\\kappa_i$. The universal properties give $u:Q\\to S$ and $v:S\\to Q$ with $u\\kappa_i=\\iota_i$ and $v\\iota_i=\\kappa_i$. Since $uv$ and $vu$ agree with the identity on every coproduct insertion, uniqueness makes them identities. If $m:S\\hookrightarrow P$ is the inclusion, the canonical map $c:Q\\to P$ satisfies $c\\kappa_i=m\\iota_i$; hence $c=mu$. The inclusion $m$ is monic: equality after $m$ means equality of all tuples, object by object, and hence equality of the original natural transformations. Since $u$ is invertible, $c$ is monic. Its sectionwise range on every $V$ is $m(S(V))=S(V)$, already a sheaf by step 3. Thus its image subsheaf is exactly $S$ (equivalently, $c$ and $m$ represent the same subobject of $P$).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; agent universal-property identification and direct cancellation for the image in the product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB, lemma-limits-colimits: explicit locally finite-coordinate realization of the sheafified sectionwise coproduct, proved by covers, finite sums and unique gluing"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +184,52 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: free coproducts of copies of the unit and presheaf finite-support sums do not state the locally finite-coordinate subsheaf description for arbitrary module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|finite.*support|Finsupp|directSum",
+   "results": "[grep] OK 9 hit(s); top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern free sheaves, presheaf generators, algebraic direct sums, or local injectivity of sheafification, not the asserted local-coordinate description for an arbitrary family of module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A direct sum of sheaves of modules is the subsheaf of the product with locally finite coordinate support",
+   "results": "[leansearch] OK 8 hit(s); top results: SheafOfModules.free, SheafOfModules.ιFree, DirectSum, DirectSum.sum_support_of, DirectSum.linearEquivFunOnFintype, DirectSum.coeFnLinearMap, DirectSum.coeFnAddMonoidHom, DirectSum.coeLinearMap_eq_dfinsuppSum",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern free sheaves, presheaf generators, algebraic direct sums, or local injectivity of sheafification, not the asserted local-coordinate description for an arbitrary family of module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.coproduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.coproduct'; top results: ",
+   "date": "2026-10-17",
+   "verdict": "no match: rejected identifier, not evidence of absence; superseded by the valid string query and semantic searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coproduct of arbitrary sheaves of modules consists of tuples in their product that have finitely many nonzero coordinates locally on a covering",
+   "results": "[leanfinder] OK 8 hit(s); top results: SheafOfModules.isColimitFreeCofan, SheafOfModules.free, SheafOfModules.freeCofan, SheafOfModules.IsFiniteType, CategoryTheory.Sheaf.instHasFiniteCoproducts, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern free sheaves, presheaf generators, algebraic direct sums, or local injectivity of sheafification, not the asserted local-coordinate description for an arbitrary family of module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"coproduct\"",
+   "results": "[loogle] OK 12 hit(s); top results: PresheafOfModules.freeYonedaCoproduct, PresheafOfModules.instEpiFromFreeYonedaCoproduct, PresheafOfModules.fromFreeYonedaCoproduct, PresheafOfModules.ιFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc, PresheafOfModules.freeYonedaCoproductMk, PresheafOfModules.ι_fromFreeYonedaCoproduct_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern free sheaves, presheaf generators, algebraic direct sums, or local injectivity of sheafification, not the asserted local-coordinate description for an arbitrary family of module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any family of module sheaves the direct sum injects into the product, and its sections are locally in a finite sum of the summands",
+   "results": "[leanfinder] OK 8 hit(s); top results: SheafOfModules.freeCofan_inj, DirectSum.lmap_injective, SheafOfModules.free, SheafOfModules.isColimitFreeCofan, PresheafOfModules.instIsLocallyInjectiveToSheafify, PresheafOfModules.Sheafify.instNonemptySMulCandidate, SheafOfModules.ιFree, SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern free sheaves, presheaf generators, algebraic direct sums, or local injectivity of sheafification, not the asserted local-coordinate description for an arbitrary family of module sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-flasque-support",
@@ -86,5 +246,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-module-sheaf-coproduct-local-support",
+  "worker": "stage1",
+  "summary": "Kept the statement and its original dependencies. Proved the local-support construction directly, with base-change and composite coverings, module closure, sheaf gluing, finite local sums, independence of witnesses, naturality, linearity, the universal property and the monomorphism/image calculation. Reused the existing Mathlib leaf for sectionwise limits; created no nodes. Checked the empty index and empty-cover cases, and ran fresh logged Mathlib searches.",
+  "blueprint": "Realizes the explicit coproduct construction used in step 5 of the current split of def-pur-flasque-support to test its unrestricted comparison sentence “thus s_*s^!M=G_ZM”; this auxiliary generic lemma proves the locally finite-coordinate model without changing that ancestor or the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-5dfa4c582",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5dfa4c582 (reviewer sub-agent of L); spot-checked: I read the whole item and all 9 steps, the statements of all six cited nodes, Stacks sites-modules.tex lemma-limits-colimits (Tag 03DB) and the parent def-pur-flasque-support step 5, which cites this item. 03DB gives only that colimits exist, as the sheafified sectionwise colimit. The explicit description by tuples that have finite support locally is the agent's own construction, and proof_origin=agent says so. The statement is unchanged, is not a target and is not weakened. Step 1 gets P from the Mathlib leaf lem-weil-pbc-module-sheaves-limits-sectionwise: the diagram is discrete and I is small. Steps 2-8 compute directly from the site axioms of 00VH (identity cover, composite covers, base change by fibre products) and from semilinear module sheaves. The overlaps V_a x_V V_b with B_a union B_b, the independence of the witness, naturality and O-linearity all check, the last through the semilinear restriction in T. Uniqueness comes from h|V_a = sum over B_a of iota_i(h_i). Step 9 identifies the canonical map c as m composed with u, so it is a monomorphism with image S. Small cases: I empty, I finite, a discrete space with skyscraper sheaves (S = P = the product there, as expected), and empty coverings; all are consistent. No new nodes and no unit edits. rg found no duplicate: the existing colimits-forgetful lemma is the abstract existence result, and det-pe-sections-limits-colimits is about something else. No SGA, no cycle, and every cited node states what its step uses. No fixes, no tool_uses."
  }
 }
