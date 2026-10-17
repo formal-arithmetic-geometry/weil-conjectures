@@ -28,7 +28,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-simplicial-composition-spine"
  ],
  "proof": [
   {
@@ -277,5 +279,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93f021a73",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read the node, its 5 stmt_deps declarations, the module and the report. Shape is fine: 3 files; only lean and stmt_deps changed, the two added stmt_deps are landed nodes whose declarations are used; statement verbatim; lines <=100. Clause check: quasicategories in one universe u; InnerFibration p; edge orientation delta1=source, delta0=target; IsCocartesianEdge is Lambda^n_0 for n>=2 with edge 01=s; forall z; IsHomotopyPullbackSquare is the path-pullback weak-equivalence test. u and g are fixed through mono inclusions (multiarrowInclusion is a pullback of a map from Delta[0], (const u,id) is mono) and always exist, so the existentials add no freedom. The triangle-roof square is the canonical strict p-compatible model (base change of the trivial Kan spineRestriction); spinePrecomposition needs a chosen section, so it is no duplicate (H4). Edge cases fine, including N([1]). Docstrings carry the source place, blueprint tag and 7 proof steps; only sorry; no hollow defs. nt_compile.py on the side overlay: rc=0, no errors or warnings; a negative control error confirms elaboration. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCocartesianMappingCriterion",
+  "declaration": "SSet.Enhanced.infinity_cocartesian_mapping_criterion",
+  "declarations": [
+   "SSet.Enhanced.cocartesianPrecompositionSource",
+   "SSet.Enhanced.cocartesianPrecompositionInclusion",
+   "SSet.Enhanced.cocartesianPrecomposition",
+   "SSet.Enhanced.infinity_cocartesian_mapping_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCocartesianMappingCriterion.lean",
+  "statement": "theorem infinity_cocartesian_mapping_criterion (E B : SSet.{u}) [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (_hp : InnerFibration p) (x y : E _⦋0⦌) (s : Δ[1] ⟶ E) (_hsx : E.δ 1 (SSet.yonedaEquiv s) = x) (_hsy : E.δ 0 (SSet.yonedaEquiv s) = y) : IsCocartesianEdge p s ↔ ∀ z : E _⦋0⦌, ∃ (u : (arrowMappingSpace E x y) _⦋0⦌) (g : cocartesianPrecompositionSource E x y z u ⟶ cocartesianPrecompositionSource B (p.app _ x) (p.app _ y) (p.app _ z) ((arrowSpaceMap p x y).app _ u)), (arrowMappingSpaceInclusion E x y).app _ u = diagramVertex s ∧ g ≫ cocartesianPrecompositionInclusion B (p.app _ x) (p.app _ y) (p.app _ z) ((arrowSpaceMap p x y).app _ u) = cocartesianPrecompositionInclusion E x y z u ≫ (ihom Δ[2]).map p ∧ IsHomotopyPullbackSquare (cocartesianPrecomposition E x y z u) g (arrowSpaceMap p x z) (cocartesianPrecomposition B (p.app _ x) (p.app _ y) (p.app _ z) ((arrowSpaceMap p x y).app _ u))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Presents the canonical coherent mapping square by its fixed-first-edge triangle roofs, constructed by base change of the recorded spineRestriction. The point and left vertical map are fixed by monomorphic ambient inclusions; the right vertical map is the existing arrowSpaceMap. Natural right-pinch equivalences identify these with the stipulated right-pinched mapping spaces. No independent composition representative or commutation homotopy is chosen. Adds two already landed statement interfaces; no new node or statement correction."
  }
 }

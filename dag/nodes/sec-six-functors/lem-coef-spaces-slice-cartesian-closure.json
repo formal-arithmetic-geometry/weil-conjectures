@@ -27,7 +27,10 @@
   "place": "Kerodon Proposition 7.7.3.17 (Tag 05UY), with the definition of cartesian closedness in Subsection 7.7.3. The proof constructs the small relative simplicial exponential of Kan fibrations over B, proves it fibrant by right properness, and passes to the coherent slice. Read online; archival copy WANTED. Kerodon tags are not Stacks tags; no Stacks tag states coherent cartesian closure of space slices."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "def-coef-coherent-adjunction-data"
  ],
  "proof": [
   {
@@ -280,5 +283,28 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-53b2633c1 (reviewer sub-agent of L); spot-checked: I read every step of the mathematics in full. The delivery is one commit with the report and the item only. It adds no new nodes (the second reader removed the first reader's comparison node) and leaves the item statement unchanged. The proof_deps are the union of the step uses, and there is no cycle. The statement and route agree with Kerodon 05UY (Prop 7.7.3.17), 05Q0 (Ex 5.5.1.23, which uses the dual of 01ZT plus Cor 3.1.3.2 and Prop 3.1.8.1) and 05UP (Rem 7.7.3.9), which I read online because Kerodon is not archived. Step 1: the pushout-product of empty->Z with a horn inclusion is Z x horn -> Z x simplex, so the cited anodyne Mathlib leaf applies; the strict-slice mapping complexes are fibers of a Kan fibration, so KFib(B) is locally Kan. Step 2: I checked the composition cases of the enriched functor to [1] for indices 001 and 011. Cone calculus with shape a point gives exactly the fixed-target arrow model as the cone category and the homotopy-fiber formula, and the coherent-nerve comparison gives the strict fiber. The claim that J induces this identification (the content of 01ZT) rests on the stated naturality of both comparisons; I accept it. Essential surjectivity uses the Kan factorization, and the inverse over B is built via e_* on homotopy fibers. Step 3: I checked the explicit construction of M, its evaluation and the currying bijection. Step 4: the pulled-back horn inclusion is a weak equivalence by right properness and a mono, so it lifts against g; this is exactly 05UY. Steps 5 and 6: the product and exponential conditions of 05UP hold as isomorphisms of simplicial sets, checked degreewise, including enriched bifunctoriality via the diagonal of the simplex. Step 7 is an elementary transport. Edge cases B, X or Y empty, B a point and S^1 monodromy all agree. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), a generic cone mapping-space formula used as a black box in step 2. There is no SGA citation and no target or unit/chapter change. My duplicate search over cartesian closure, relative exponential and 05UY hits found only the absolute-case and Cat-infinity nodes and the fixed-target relative-exponential nodes, none of which duplicates the item. Mathlib has no infinity category of spaces, so no leaf was missed. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8da2f9871",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read the node, the 4 statement dependencies, and the live CoherentAdjunction, rightVertexSlice, comma/IsTerminal/mappingSpace and Spaces.infinityCategory declarations against Kerodon 05UY/05Q0/05UP. The coherent product P is right adjoint to the diagonal; for each X a coherent right adjoint R to (-,X)≫P has evaluation counit and a terminal-comma universal property, giving full mapping-space equivalences. This is the node's stated equivalent formulation. No extra hypotheses; universes u,v generic; empty spaces and fibers allowed; edge cases checked. Helper is a real abbrev; proof is only sorry; docstrings complete; lean.statement verbatim; stmt_deps match imports; no duplicate notion. nt_compile --json on the snapshot module: rc=0, clean, no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpacesSliceCartesianClosure",
+  "declaration": "SSet.Enhanced.spaces_slice_cartesian_closure",
+  "declarations": [
+   "SSet.Enhanced.smallSpaceSlice",
+   "SSet.Enhanced.spaces_slice_cartesian_closure"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpacesSliceCartesianClosure.lean",
+  "statement": "theorem spaces_slice_cartesian_closure (B : (SSet.uliftFunctor.{v}.obj CategoryTheory.Spaces.infinityCategory.{u}) _⦋0⦌) : ∃ P : smallSpaceSlice B ⊗ smallSpaceSlice B ⟶ smallSpaceSlice B, Nonempty (CoherentAdjunction (lift (𝟙 (smallSpaceSlice B)) (𝟙 _)) P) ∧ ∀ X : (smallSpaceSlice B) _⦋0⦌, ∃ R : smallSpaceSlice B ⟶ smallSpaceSlice B, Nonempty (CoherentAdjunction (lift (𝟙 (smallSpaceSlice B)) (SSet.const X) ≫ P) R)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The coherent right-join slice of the published coherent nerve of small Kan complexes, lifted to an arbitrary ambient universe. Uses the node's equivalent coherent-right-adjoint formulation: a product functor right adjoint to the diagonal, and for each X a right adjoint to product with X. The existing CoherentAdjunction includes actual coherent evaluation counits and universal comma objects, not merely adjunction on homotopy categories. Added only already-landed statement dependencies for these definitions."
  }
 }

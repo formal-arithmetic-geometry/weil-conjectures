@@ -25,7 +25,8 @@
   "place": "Agent-formulated parametric version of the universal-arrow/representable-profunctor criterion: Proposition 8.3.4.1 and Remark 8.3.4.7, with the local adjoint criterion of Subsection 6.2.6 and its dual. The coherent-diagram clause is required explicitly; the cited local criterion by itself is not an attribution of that entire clause. WANTED: archived proof of this partial parametric form. No matching Stacks tag."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -233,5 +234,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac7b8458a",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node vs repo (only lean + landed stmt_dep lem-coef-infinity-pinch-comparison added, permitted by STMT_DEPS MAY GAIN LANDED NODES), Kerodon 03NQ place, EnhancedDiagramsCones and RightPinchComparison declarations, the module and the report (real Worker report and Second reading by Q01). Clause check: single universe u, polymorphic; arbitrary full subcomplex P; UniversalArrowAt is the canonical triangle span whose source leg is automatically a trivial fibration, so the hypothesis is not strengthened; comma outgoing=right gives TR->iota (completion-audit fix correct); the choice space is the core of universal slice data with R and epsilon kept, Kan and contractible (universal objects are terminal); the parametric clause covers every K, B, A with the same epsilon; restriction/evaluation compatibility; right:Bool covers the left adjoint. Edge cases (empty D0/K/C, TR outside D0, groupoid) fine. Gates: no hollow defs, single sorry, docstrings with source and blueprint, no long lines, autoImplicit false, statement verbatim. nt_compile.py per-file compile exit 0, no diagnostics (warn.sorry=false), 1.7 s. Non-blocking observations: the restriction clause is formal; conceptual overlap with localAdjointComparison in a different choice-free model; placeholder Kerodon numbers in the report."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ParametricUniversalArrows",
+  "declaration": "SSet.Enhanced.parametric_universal_arrows",
+  "declarations": [
+   "SSet.Enhanced.universalCompositionTriangles",
+   "SSet.Enhanced.universalCompositionSource",
+   "SSet.Enhanced.UniversalArrowAt",
+   "SSet.Enhanced.partialUniversalArrowData",
+   "SSet.Enhanced.partialUniversalArrowSubcomplex",
+   "SSet.Enhanced.partialUniversalArrowChoiceSpace",
+   "SSet.Enhanced.ParametricUniversalArrow",
+   "SSet.Enhanced.universalCompositionLong",
+   "SSet.Enhanced.UniversalCompositionNaturality",
+   "SSet.Enhanced.UniversalArrowRestrictionCompatibility",
+   "SSet.Enhanced.parametric_universal_arrows"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ParametricUniversalArrows.lean",
+  "statement": "theorem parametric_universal_arrows (C D : SSet.{u}) [Quasicategory C] [Quasicategory D] (T : C ⟶ D) (P : D _⦋0⦌ → Prop) (right : Bool) (h : ∀ d : (fullSubcomplex D P).toSSet _⦋0⦌, ∃ (r : C _⦋0⦌) (e : ((ihom Δ[1]).obj D) _⦋0⦌), UniversalArrowAt T right r d.1 e) : (∃ a : (partialUniversalArrowSubcomplex T (fullSubcomplex D P).ι right).toSSet _⦋0⦌, ParametricUniversalArrow T (fullSubcomplex D P).ι right a.1) ∧ KanComplex (partialUniversalArrowChoiceSpace T (fullSubcomplex D P).ι right) ∧ IsContractible (partialUniversalArrowChoiceSpace T (fullSubcomplex D P).ι right) ∧ UniversalArrowRestrictionCompatibility T right",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both adjoint directions are quantified by right : Bool. The canonical triangle composition spans state the mapping-space equivalences in the existing arrow model, naturally equivalent to the recorded right-pinched model. Helpers define only this node’s universal arrows, complete choice space, and parametric comparison; no independent notion or theorem is introduced."
  }
 }

@@ -227,5 +227,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43f8132ba",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Checked item node (only lean changed, no statement_change), stmt dep lem-coef-simplicial-model-nerve-localization (same ordinary conventions: ModelCategory, HasLimits/HasColimits, both HasFunctorialFactorization; no simplicial binders), proof-dep interface small_right_lifting_accessibility (conclusion shape identical), HTT Cor. A.2.6.8/Def. A.2.6.2. Every clause matches: IsLocallyPresentable.{v}, small I J with I.rlp = trivialFibrations, J.rlp = fibrations, repleteness, ∃ regular κ, ambient κ-filtered colimit closure, small generating family at the same κ. Edge cases (empty I/J, κ=ℵ0, nonempty filtered index, trivial structures) fine; universes u/v independent and bound. Single sorry theorem, no defs, docstrings cite source + blueprint id + five proof steps, lean.statement verbatim. Report has real Worker report and Second reading by Q60 sections. nt_compile.py --json on snapshot file: clean, exit 0. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModelWeakEquivalencesAccessible",
+  "declaration": "CategoryTheory.model_weak_equivalences_accessible",
+  "file": "lean/Sheaf/CategoryTheory/ModelWeakEquivalencesAccessible.lean",
+  "statement": "theorem model_weak_equivalences_accessible {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimitsOfSize.{v, v} M] [HasColimitsOfSize.{v, v} M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [IsLocallyPresentable.{v} M] (I J : MorphismProperty M) [MorphismProperty.IsSmall.{v} I] [MorphismProperty.IsSmall.{v} J] (_hI : I.rlp = trivialFibrations M) (_hJ : J.rlp = fibrations M) : ObjectProperty.IsClosedUnderIsomorphisms (fun f : Arrow M ↦ weakEquivalences M f.hom) ∧ ∃ (κ : Cardinal.{v}) (_ : Fact κ.IsRegular), (∀ (K : Type v) (_ : SmallCategory K) (_ : IsCardinalFiltered K κ) (D : K ⥤ Arrow M), (∀ k, weakEquivalences M (D.obj k).hom) → ∀ (c : Cocone D), Nonempty (IsColimit c) → weakEquivalences M c.pt.hom) ∧ ∃ (S : Type v) (G : S → Arrow M), (∀ s, weakEquivalences M (G s).hom) ∧ ∀ (f : Arrow M), weakEquivalences M f.hom → ∃ (K : Type v) (_ : SmallCategory K) (_ : IsCardinalFiltered K κ) (D : K ⥤ Arrow M) (c : Cocone D), (∀ k, ∃ s, Nonempty (D.obj k ≅ G s)) ∧ Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ f)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The generating hypotheses are stated directly as small morphism properties with I.rlp = trivialFibrations M and J.rlp = fibrations M. The conclusion uses the explicit ambient-colimit and small-generation interface of the recorded accessibility proof dependencies. No simplicial enrichment, presentability of the conclusion generators, or fixed accessibility rank is assumed."
  }
 }

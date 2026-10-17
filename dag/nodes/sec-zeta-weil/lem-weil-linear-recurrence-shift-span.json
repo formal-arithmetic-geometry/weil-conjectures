@@ -190,5 +190,23 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-63925ea63 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, the dependencies and split_report. The statement matches the source sentence ('(3) also directly implies (2) ... All rows therefore lie in the span of R_0..R_{m+d-1}') in main-20261015 prop-weil-rationality-criterion.proof.md lines 27-30 and in the master .md line 50. It also matches what parent step 4 of prop-weil-rationality-criterion uses (containment and dim<=m+d). It is not weakened; the only change is the added stmt_dep def-weil-submodule-span. Step 1 applies the recurrence at n=j+s>=m and compares coordinatewise; this is correct against the def-weil-eventual-linear-recurrence and def-weil-sequence-subspace statements. Step 2 sets up the strong induction explicitly: the base k<m+d is a generator, and for k>=m+d it takes j=k-d>=m with indices k-d+i in [k-d,k-1]. Step 3 gets V=W from the smallest-subspace definition, which gives finite spanning. Step 4 uses two Mathlib leaves: lem-weil-span-independent-subfamily (exists_linearIndependent', LinearIndependent/Lemmas.lean:799) and lem-weil-dimension-span-independent-family (finrank_span_eq_card, Dimension/Constructions.lean:461). These give dim V=|S|<=m+d, and their hypotheses hold. Small cases tested: the zero sequence; m=1,d=1,a0=-1 with c=(5,1,1,...) (dim 2); m=0,d=1,a0=0; and a sharp example. There are no new nodes. The rg duplicate search found only related nodes (rational-series-finite-shift-span, shift-span-linear-recurrence, linear-recurrence-denominator, rational-series-linear-recurrence), none of which is a duplicate. The off-unit citations are Mathlib leaves, so no tool_uses are needed. No SGA source is used, and the node has no base-change content. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f6da9f84",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, module, report (both required sections present), source main-20261015 prop-weil-rationality-criterion.proof.md l.27-30. Lean: {K:Type u}[Field K], m d:ℕ, 1≤d, a:Fin d→K, c:ℕ→K, IsSolution ⟨d,-a⟩ (c(·+m)) = c_{N+d}=-∑a_i c_{N+i} for N≥m (recorded mathlib_match.how, sign correct); conclusions: ∀j R_j∈span(R_0..R_{m+d-1}), FiniteDimensional V, finrank V≤m+d — exact. Edge cases m=0,d=1,c=0,a_0=0, m=1,d=1 example with dim=m+d, any char: covered. Single theorem, sorry only, no defs, docstrings with source and blueprint id and 4-step proof plan, node differs only in lean, lean.statement verbatim, no name collision, upstream finiteDimensional_shiftSpan_of_forall_add_eq_zero is weaker so not existing. nt_compile.py --json per-file compile clean (1.0 s, exit 0). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.ZetaLinearAlgebra.LinearRecurrenceShiftSpan",
+  "declaration": "LinearRecurrence.shift_span_bound",
+  "file": "lean/Sheaf/ZetaLinearAlgebra/LinearRecurrenceShiftSpan.lean",
+  "statement": "theorem shift_span_bound {K : Type u} [Field K] (m d : ℕ) (hd : 1 ≤ d) (a : Fin d → K) (c : ℕ → K) (hrec : (⟨d, fun i ↦ -a i⟩ : LinearRecurrence K).IsSolution (fun n ↦ c (n + m))) : (∀ j : ℕ, (fun s : ℕ ↦ c (j + s)) ∈ Submodule.span K (Set.range (fun i : Fin (m + d) ↦ fun s : ℕ ↦ c (i.val + s)))) ∧ FiniteDimensional K (Submodule.span K (Set.range (fun j : ℕ ↦ fun s : ℕ ↦ c (j + s)))) ∧ Module.finrank K (Submodule.span K (Set.range (fun j : ℕ ↦ fun s : ℕ ↦ c (j + s)))) ≤ m + d",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -297,5 +297,23 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-ab9ee5c57 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged (same as main-20261015). Read every cited node's statement and Stacks 0F1I (etale-cohomology.tex l.20596-20703), 0EZT (l.16409), 0F1H (l.20402) and 0EZP (l.14368). Steps 1-2: B is a domain with Frac B=L; J is filtered with L=colim; colim_J B_i=B is proved by an explicit cocone argument; the four limits are built by the test-scheme property, not assumed, so dropping lem-kun-fibre-product-limits is justified; transitions are affine by base change. Step 3: finite type, principal open immersion and qcqs, which are the 0F1H and 0EZT hypotheses. Step 4: Z/d is a Z/n-module, so orders are invertible; the constant system is compatible with colimit Z/d. Step 5: 0F1H gives the def-kun-unbounded-exchange iso; sk-def-exchange restricts it to D+ with Lambda=Z, and lem-kun-bc-map-on-cohomology turns it into the usual R^q base-change map, so the coefficient category is unchanged. Step 6: every 0EZT hypothesis holds, including cartesian squares by pasting. Step 7: algebraically closed implies separably closed; the field clause of 0EZP (source Spec L) and exact inverse image give 0. Edge cases d=1, X empty, S'=Spec L and non-noetherian B all hold. Dropping K algebraically closed (Stacks has it at this point of the proof) is harmless and does not weaken the item. No cycle; the only citer is lem-kun-0f1i. Unit uses=[]; the off-unit statements are Mathlib leaves plus the Lean-closed prop-weil-pbc-inverse-image-exact. I accept both declared tool_uses. No SGA. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6263f32c",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Every clause matches the node: field K (no alg. closedness), n in invertibleTorsionOrders, X finite type (LocallyOfFiniteType+QuasiCompact), S' IsAffine/IsIntegral/IsNormalScheme, IsAlgClosed S'.functionField, canonical S'.fromSpecStalk (genericPoint S'), chosen pullbacks and pullback.fst, all q>0 and d | n.val, constantSheaf of ULift (ZMod d) in AddCommGrpCat.{u+1}, R^q h_* via homologyFunctor of lowerStar.rightDerivedFunctorPlus of singleFunctor 0, IsZero. Same form as the unit's lem-kun-0ezp. Stacks 0F1I l.20597-20703 read: its K alg-closed and reduced-X assumptions are legitimately absent from the node, and the Lean adds none. Edge cases (empty X/S', d=1, n,d,q=0, characteristic, universes) are correct. lean.statement is verbatim, no definitions, sorry only, docstrings carry the source place, blueprint id and 7 steps. nt_compile --json local overlay: clean, 2.6 s. Observation: the legacy non-module header is forced by the non-module dependency ColimOfLocalizations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGenericFibreVanishing",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_constant_genericFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGenericFibreVanishing.lean",
+  "statement": "theorem isZero_higherDirectImage_constant_genericFibre {K : Type u} [Field K] (n : invertibleTorsionOrders K) (X S' : Scheme.{u}) [X.Over (Spec (.of K))] [S'.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [IsAffine S'] [IsIntegral S'] (_hnormal : IsNormalScheme S') [IsAlgClosed S'.functionField] (q : ℤ) (_hq : 0 < q) (d : ℕ) (_hd : d ∣ n.val) : IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf (pullback (X ↘ Spec (.of K)) (S' ↘ Spec (.of K))).smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((lowerStar AddCommGrpCat.{u + 1} (pullback.fst (pullback.snd (X ↘ Spec (.of K)) (S' ↘ Spec (.of K))) (S'.fromSpecStalk (genericPoint S')))).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((constantSheaf (pullback (pullback.snd (X ↘ Spec (.of K)) (S' ↘ Spec (.of K))) (S'.fromSpecStalk (genericPoint S'))).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod d)))))))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
